@@ -1,0 +1,33 @@
+.global
+{
+    position:           absolute;
+}
+
+.change
+{
+    z-index:            1;
+    position :          absolute;
+    margin-left :       50%;
+    margin-top:         0%;
+    width:              50%;
+    overflow:           auto;
+    background-color:   grey;
+}
+
+.zone_texte
+{
+    z-index:            5;
+    position :          absolute;
+    margin-left :       0%;
+    width:              25%;
+    overflow:           auto;
+}
+
+.explain
+{
+    z-index:            1;
+    position :          absolute;
+    margin-left :       30%;
+    margin-top:         5%;
+    width:              15%;
+}

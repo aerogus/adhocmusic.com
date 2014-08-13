@@ -1,0 +1,33 @@
+AddDefaultCharset utf-8
+AddCharset utf-8 .html .xhtml .xml .rss .json .css .js
+AddOutputFilterByType DEFLATE text/html text/xml application/xhtml+xml application/rss+xml text/plain application/javascript text/css
+DirectoryIndex index.php
+Options +FollowSymlinks
+Options -Indexes
+Options -MultiViews
+
+AddType application/javascript         js
+AddType video/mp4                      mp4
+AddType application/vnd.ms-fontobject  eot
+AddType application/x-font-ttf         ttf
+AddType image/x-icon                   ico
+
+# specifique
+RewriteEngine On 
+RewriteBase /
+RewriteRule ^(.*/)?\.svn/ - [F,L]
+
+RewriteCond %{HTTP_HOST} !^www.adhocmusic.com$ [NC]
+RewriteCond %{HTTP_HOST} !^www.adhocmusic.local$ [NC]
+RewriteCond %{HTTP_HOST} !^adhocmusic.local$ [NC]
+RewriteRule ^(.*)$ http://www.adhocmusic.com/$1 [R=301,L]
+
+# route unique
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+ErrorDocument 400 "400"
+ErrorDocument 403 "403"
+ErrorDocument 404 "404"
+ErrorDocument 500 "500"

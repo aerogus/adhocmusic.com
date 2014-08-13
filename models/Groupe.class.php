@@ -1,0 +1,2068 @@
+<?php
+
+/**
+ * @package adhoc
+ */
+
+/**
+ * Classe Groupe
+ *
+ * @package adhoc
+ * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ */
+class Groupe extends ObjectModel
+{
+    /**
+     * états des groupes
+     */
+    const ETAT_ACTIF   = 1;
+    const ETAT_NONEWS  = 2;
+    const ETAT_INACTIF = 3;
+
+    /**
+     * Tableau des états groupe
+     *
+     * @var array
+     */
+    protected static $_etats = array(
+        self::ETAT_ACTIF   => "Actif",
+        self::ETAT_NONEWS  => "Pas de nouvelles",
+        self::ETAT_INACTIF => "Inactif / Séparé",
+    );
+
+    /**
+     * @var object
+     */
+    protected static $_instance = null;
+
+    /**
+     * @var int
+     */
+    protected static $_pk = 'id_groupe';
+
+    /**
+     * @var string
+     */
+    protected static $_table = 'adhoc_groupe';
+
+    /**
+     * @var int
+     */
+    protected $_id_groupe = 0;
+
+    /**
+     * @var string
+     */
+    protected $_alias = '';
+
+    /**
+     * @var string
+     */
+    protected $_name = '';
+
+    /**
+     * @var string
+     */
+    protected $_style = '';
+
+    /**
+     * @var string
+     */
+    protected $_influences = '';
+
+    /**
+     * @var string
+     */
+    protected $_lineup = '';
+
+    /**
+     * @var string
+     */
+    protected $_mini_text = '';
+
+    /**
+     * @var string
+     */
+    protected $_text = '';
+
+    /**
+     * @var string
+     */
+    protected $_site = '';
+
+    /**
+     * @var string
+     */
+    protected $_myspace = '';
+
+    /**
+     * @var string (int 64 en vérité)
+     */
+    protected $_facebook_page_id = '';
+
+    /**
+     * @var string
+     */
+    protected $_twitter_id = '';
+
+    /**
+     * @var str
+     */
+    protected $_id_departement = '';
+
+    /**
+     * @var bool
+     */
+    protected $_online = false;
+
+    /**
+     * @var int
+     */
+    protected $_visite = 0;
+
+    /**
+     * @var string
+     */
+    protected $_created_on = '';
+
+    /**
+     * @var string
+     */
+    protected $_modified_on = '';
+
+    /**
+     * @var string
+     */
+    protected $_datdeb = '';
+
+    /**
+     * @var string
+     */
+    protected $_datfin = '';
+
+    /**
+     * @var string
+     */
+    protected $_comment = '';
+
+    /**
+     * @var int
+     */
+    protected $_etat = 0;
+
+    /**
+     * @var array
+     */
+    protected $_template = array();
+
+    /**
+     * @var array
+     */
+    protected static $_all_fields = array(
+        'alias'            => 'str',
+        'name'             => 'str',
+        'style'            => 'str',
+        'influences'       => 'str',
+        'lineup'           => 'str',
+        'mini_text'        => 'str',
+        'text'             => 'str',
+        'site'             => 'str',
+        'myspace'          => 'str',
+        'facebook_page_id' => 'str',
+        'twitter_id'       => 'str',
+        'id_departement'   => 'str',
+        'online'           => 'bool',
+        'visite'           => 'num',
+        'created_on'       => 'str',
+        'modified_on'      => 'str',
+        'datdeb'           => 'str',
+        'datfin'           => 'str',
+        'comment'          => 'str',
+        'etat'             => 'num',
+        'template'         => 'phpser',
+    );
+
+    /**
+     * @var array
+     */
+    protected $_modified_fields = array();
+
+    /**
+     * @var array
+     */
+    protected $_styles = array();
+
+    /**
+     * @var array
+     */
+    protected $_members = null;
+
+    /**
+     * @var array
+     */
+    protected $_audios = array();
+
+    /**
+     * @var array
+     */
+    protected $_photos = array();
+
+    /**
+     * @var array
+     */
+    protected $_videos = array();
+
+    /* début getters */
+
+    /**
+    * @return string
+    */
+    protected static function _getWwwPath()
+    {
+        return STATIC_URL . '/media/groupe';
+    }
+
+    /**
+     * @return string
+     */
+    protected static function _getLocalPath()
+    {
+        return ADHOC_ROOT_PATH . '/media/groupe';
+    }
+
+    /**
+     * retourne l'alias
+     *
+     * @return string
+     */
+    public function getAlias()
+    {
+        return (string) $this->_alias;
+    }
+
+    /**
+     * retourne le nom du groupe
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return (string) $this->_name;
+    }
+
+    /**
+     * retourne le style du groupe
+     *
+     * @return string
+     */
+    public function getStyle()
+    {
+        return (string) $this->_style;
+    }
+
+    /**
+     * retourne les influences du groupe
+     *
+     * @return string
+     */
+    public function getInfluences()
+    {
+        return (string) $this->_influences;
+    }
+
+    /**
+     * retourne le lineup du groupe
+     *
+     * @return string
+     */
+    public function getLineup()
+    {
+        return (string) $this->_lineup;
+    }
+
+    /**
+     * retourne le mini texte de présentation
+     *
+     * @return string
+     */
+    public function getMiniText()
+    {
+        return (string) $this->_mini_text;
+    }
+
+    /**
+     * retourne le texte de présentation
+     *
+     * @return string
+     */
+    public function getText()
+    {
+        return (string) $this->_text;
+    }
+
+    /**
+     * @var string
+     */
+    public function getMySpaceId()
+    {
+        if(strpos($this->_myspace, 'http://') !== false) {
+            $this->_myspace = str_replace('http://', '', $this->_myspace);
+        }
+        if(strpos($this->_myspace, 'www.myspace.com/') !== false) {
+            $this->_myspace = str_replace('www.myspace.com/', '', $this->_myspace);
+        }
+        if($this->_myspace) {
+            return $this->_myspace;
+        }
+        return false;
+    }
+
+    /**
+     * @var string
+     */
+    public function getMySpaceUrl()
+    {
+        if(strpos($this->_myspace, 'http://') !== false) {
+            $this->_myspace = str_replace('http://', '', $this->_myspace);
+         }
+         if(strpos($this->_myspace, 'www.myspace.com/') !== false) {
+            $this->_myspace = str_replace('www.myspace.com/', '', $this->_myspace);
+         }
+         if($this->_myspace) {
+             return 'http://www.myspace.com/' . $this->_myspace;
+         }
+         return false;
+    }
+
+    /**
+     * retourne le MySpace
+     *
+     * @return string
+     * @deprecated
+     */
+    public function getMySpace()
+    {
+        return $this->getMySpaceUrl();
+    }
+
+    /**
+     * retourne l'identificant de la page fan Facebook
+     *
+     * @return int (64bits) => str
+     */
+    public function getFacebookPageId()
+    {
+        return (string) $this->_facebook_page_id;
+    }
+
+    /**
+     * retourne l'url de la page "fans" Facebook
+     *
+     * @return string
+     */
+    public function getFacebookPageUrl()
+    {
+        if($this->_facebook_page_id) {
+            return 'http://www.facebook.com/pages/' . $this->_alias . '/' . $this->_facebook_page_id;
+        }
+        return false;
+    }
+
+    /**
+     * retourne l'identifiant twitter
+     *
+     * @return string
+     */
+    public function getTwitterId()
+    {
+        return (string) $this->_twitter_id;
+    }
+
+    /**
+     * retourne l'url du fil twitter
+     *
+     * @return string
+     */
+    public function getTwitterUrl()
+    {
+        return (string) 'http://www.twitter.com/' . $this->_twitter_id;
+    }
+
+    /**
+     * retourne l'url du site officiel
+     *
+     * @return string
+     * @todo check le http:// initial
+     */
+    public function getSite()
+    {
+        if(strpos($this->_site, 'myspace') !== false) {
+            return false;
+        }
+        if(strpos($this->_site, '.') === false) {
+            return false;
+        }
+        if(strpos($this->_site, 'http://') !== 0) {
+            return 'http://'.$this->_site;
+        }
+        return $this->_site;
+    }
+
+    /**
+     * retourne le département
+     *
+     * @return string
+     */
+    public function getIdDepartement()
+    {
+        return (string) $this->_id_departement;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getOnline()
+    {
+        return (bool) $this->_online;
+    }
+
+    /**
+     * retourne le nombre de visites
+     *
+     * @return int
+     */
+    public function getVisite()
+    {
+        return (int) $this->_visite;
+    }
+
+    /**
+     * retourne la date d'inscription
+     *
+     * @return string
+     */
+    public function getCreatedOn()
+    {
+        if(Date::isDateTimeOk($this->_created_on)) {
+            return (string) $this->_created_on;
+        }
+        return false;
+    }
+
+    /**
+     * retourne la date d'inscription sous forme de timestamp
+     *
+     * @return int
+     */
+    public function getCreatedOnTs()
+    {
+        if(Date::isDateTimeOk($this->_created_on)) {
+            return (int) strtotime($this->_created_on);
+         }
+         return false;
+     }
+
+    /**
+     * retourne la date de modification de la fiche
+     *
+     * @return string
+     */
+    public function getModifiedOn()
+    {
+        if(Date::isDateTimeOk($this->_modified_on)) {
+            return (string) $this->_modified_on;
+        }
+        return false;
+    }
+
+    /**
+     * retourne la date de modification de la fiche sous forme de timestamp
+     *
+     * @return int
+     */
+    public function getModifiedOnTs()
+    {
+        if(Date::isDateTimeOk($this->_modified_on)) {
+            return (int) strtotime($this->_modified_on);
+        }
+        return false;
+    }
+
+    /**
+     * retourne la date de début d'activité
+     *
+     * @return string
+     */
+    public function getDatdeb()
+    {
+        if(Date::isDateOk($this->_datdeb)) {
+            return (string) $this->_datdeb;
+        }
+        return false;
+    }
+
+    /**
+     * retourne la date de fin d'activité
+     *
+     * @return string
+     */
+    public function getDatfin()
+    {
+        if(Date::isDateOk($this->_datfin)) {
+            return (string) $this->_datfin;
+        }
+        return false;
+    }
+
+    /**
+     * retourne le "mot AD'HOC"
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return (string) $this->_comment;
+    }
+
+    /**
+     * retourne l'état du groupe
+     *
+     * @return int
+     */
+    public function getEtat()
+    {
+        return (int) $this->_etat;
+    }
+
+    /**
+     * retourne le template (couleurs custom en css)
+     *
+     * @return string
+     */
+    public function getTemplate()
+    {
+        if($this->_template) {
+            if(!array_key_exists('content_text_color', $this->_template)) {
+                $this->_template['content_text_color'] = $this->_template['content_color'];
+            }
+            if(!array_key_exists('content_link_color', $this->_template)) {
+                $this->_template['content_link_color'] = 'ffffff';
+            }
+        }
+        return $this->_template;
+    }
+
+    /**
+     * retourne le nom du groupe à partir de son id
+     *
+     * @param string $id_groupe
+     * @return string ou false
+     */
+    public static function getNameById($id_groupe)
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `name` "
+             . "FROM `" . self::$_table . "` "
+             . "WHERE `" . self::$_pk . "` = " . (int) $id_groupe;
+
+        return $db->queryWithFetchFirstField($sql);
+    }
+
+    /**
+     * retourne l'url de la photo principale
+     *
+     * @return string
+     */
+    public function getPhoto()
+    {
+        if(file_exists(self::_getLocalPath() . '/p' . $this->getId() . '.jpg')) {
+            return self::_getWwwPath() . '/p' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        }
+        return false;
+    }
+
+    /**
+     * retourne l'url de la mini photo
+     * (64x64)
+     *
+     * @return string
+     */
+    public function getMiniPhoto()
+    {
+        if(file_exists(self::_getLocalPath() . '/m' . $this->getId() . '.jpg')) {
+            return self::_getWwwPath() . '/m' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        } else {
+            return STATIC_URL . '/img/note_adhoc_64.png';
+        }
+    }
+
+    /**
+     * retourne l'url du logo
+     *
+     * @return string
+     */
+    public function getLogo()
+    {
+        if(file_exists(self::_getLocalPath() . '/l' . $this->getId() . '.png')) {
+            return self::_getWwwPath() . '/l' . $this->getId() . '.png?ts=' . $this->getModifiedOnTs();
+        } else if(file_exists(self::_getLocalPath() . '/l' . $this->getId() . '.gif')) {
+            return self::_getWwwPath() . '/l' . $this->getId() . '.gif?ts=' . $this->getModifiedOnTs();
+        } else if(file_exists(self::_getLocalPath() . '/l' . $this->getId() . '.jpg')) {
+            return self::_getWwwPath() . '/l' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return DYN_URL . '/' . $this->_alias;
+    }
+
+    /**
+     * retourne l'url d'une fiche groupe à partir de son alias ou son id
+     *
+     * @param string $alias ou int $id_groupe
+     * @return string
+     */
+    public static function getUrlFiche($ref, $type = 2)
+    {
+        if(is_numeric($ref)) {
+            $alias = Groupe::getAliasById($ref);
+        } else {
+            $alias = $ref;
+        }
+
+        return DYN_URL . '/' . $alias;
+    }
+
+    /**
+     *
+     */
+    public function getFacebookShareUrl()
+    {
+        return 'http://www.facebook.com/sharer.php?u=' . urlencode($this->getUrl());
+    }
+
+    /**
+     * retourne l'image de l'avatar d'un groupe
+     * @param int id_groupe
+     * @return string
+     */
+    public static function getAvatarById($id_groupe)
+    {
+        $avatar = 'http://static.adhocmusic.com/img/note_adhoc_64.png';
+        if(file_exists(self::_getLocalPath() . '/m' . $id_groupe . '.jpg')) {
+            $avatar = self::_getWwwPath() . '/m' . $id_groupe . '.jpg';
+        }
+        return $avatar;
+    }
+
+    /**
+     * retourne l'alias d'un groupe à partir de son id
+     *
+     * @param int $id_groupe
+     * @return string
+     */
+    public static function getAliasById($id_groupe)
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `alias` "
+             . "FROM `" . self::$_table . "` "
+             . "WHERE `" . self::$_pk . "` = " . (int) $id_groupe;
+
+        if($alias = $db->queryWithFetchFirstField($sql)) {
+            return $alias;
+        }
+        return false;
+    }
+
+    /* fin getters */
+
+    /* début setters */
+
+    /**
+     * @param string
+     */
+    public function setAlias($val)
+    {
+        if ($this->_alias != $val)
+        {
+            $this->_alias = (string) $val;
+            $this->_modified_fields['alias'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setName($val)
+    {
+        if ($this->_name != $val)
+        {
+            $this->_name = (string) $val;
+            $this->_modified_fields['name'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setStyle($val)
+    {
+        if ($this->_style != $val)
+        {
+            $this->_style = (string) $val;
+            $this->_modified_fields['style'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setInfluences($val)
+    {
+        if ($this->_influences != $val)
+        {
+            $this->_influences = (string) $val;
+            $this->_modified_fields['influences'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setLineup($val)
+    {
+        if ($this->_lineup != $val)
+        {
+            $this->_lineup = (string) $val;
+            $this->_modified_fields['lineup'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setMiniText($val)
+    {
+        if ($this->_mini_text != $val)
+        {
+            $this->_mini_text = (string) $val;
+            $this->_modified_fields['mini_text'] = true;
+        }
+    }
+    /**
+     * @param string
+     */
+    public function setText($val)
+    {
+        if ($this->_text != $val)
+        {
+            $this->_text = (string) $val;
+            $this->_modified_fields['text'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setSite($val)
+    {
+        if ($this->_site != $val)
+        {
+            $this->_site = (string) $val;
+            $this->_modified_fields['site'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setMyspaceId($val)
+    {
+        $val = trim($val);
+        $val = str_replace('http://', '', $val);
+        $val = str_replace('www.myspace.com/', '', $val);
+
+        if ($this->_myspace != $val)
+        {
+            $this->_myspace = (string) $val;
+            $this->_modified_fields['myspace'] = true;
+        }
+    }
+
+    /**
+     * @param string (int 64bits en fait)
+     */
+    public function setFacebookPageId($val)
+    {
+        if ($this->_facebook_page_id != $val)
+        {
+            $this->_facebook_page_id = (string) $val;
+            $this->_modified_fields['facebook_page_id'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setTwitterId($val)
+    {
+        if ($this->_twitter_id != $val)
+        {
+            $this->_twitter_id = (string) $val;
+            $this->_modified_fields['twitter_id'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setIdDepartement($val)
+    {
+        if ($this->_id_departement != $val)
+        {
+            $this->_id_departement = (string) $val;
+            $this->_modified_fields['id_departement'] = true;
+        }
+    }
+
+    /**
+     * @param bool
+     */
+    public function setOnline($val)
+    {
+        if ($this->_online != $val)
+        {
+            $this->_online = (bool) $val;
+            $this->_modified_fields['online'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setVisite($val)
+    {
+        if ($this->_visite != $val)
+        {
+            $this->_visite = (string) $val;
+            $this->_modified_fields['visite'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setCreatedOn($val)
+    {
+        if ($this->_created_on != $val)
+        {
+            $this->_created_on = (string) $val;
+            $this->_modified_fields['created_on'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setCreatedNow()
+    {
+        $now = date('Y-m-d H:i:s');
+        if ($this->_created_on != $now)
+        {
+            $this->_created_on = $now;
+            $this->_modified_fields['created_on'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setModifiedOn($val)
+    {
+        if ($this->_modified_on != $val)
+        {
+            $this->_modified_on = (string) $val;
+            $this->_modified_fields['modified_on'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setModifiedNow()
+    {
+        $now = date('Y-m-d H:i:s');
+        if ($this->_modified_on != $now)
+        {
+            $this->_modified_on = $now;
+            $this->_modified_fields['modified_on'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setDatdeb($val)
+    {
+        if ($this->_datdeb != $val)
+        {
+            $this->_datdeb = (string) $val;
+            $this->_modified_fields['datdeb'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setDatfin($val)
+    {
+        if ($this->_datfin != $val)
+        {
+            $this->_datfin = (string) $val;
+            $this->_modified_fields['datfin'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    public function setComment($val)
+    {
+        if ($this->_comment != $val)
+        {
+            $this->_comment = (string) $val;
+            $this->_modified_fields['comment'] = true;
+        }
+    }
+
+    /**
+     * @param int
+     */
+    public function setEtat($val)
+    {
+        if ($this->_etat != $val)
+        {
+            $this->_etat = (int) $val;
+            $this->_modified_fields['etat'] = true;
+        }
+    }
+
+    /**
+     * @param array
+     */
+    public function setTemplate($val)
+    {
+        if ($this->_template != $val)
+        {
+            $this->_template = (array) $val;
+            $this->_modified_fields['template'] = true;
+        }
+    }
+
+    /* fin setters */
+
+    /**
+     * retourne le nombre de groupes actifs
+     *
+     * @return int
+     */
+    public static function getGroupesCount($etat = null, $force = false)
+    {
+        if(isset($_SESSION['global_counters']['nb_groupes']) && $force === false) {
+            return $_SESSION['global_counters']['nb_groupes'];
+        }
+
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT COUNT(*) "
+             . "FROM `" . self::$_table . "` ";
+        if(!is_null($etat)) {
+            $sql .= "WHERE `etat` = " . (int) $etat;
+        }
+
+        $nb_groupes = $db->queryWithFetchFirstField($sql);
+
+        $_SESSION['global_counters']['nb_groupes'] = $nb_groupes;
+
+        return $_SESSION['global_counters']['nb_groupes'];
+    }
+
+    /**
+     * @return int
+     */
+    public static function getMyGroupesCount()
+    {
+        if(empty($_SESSION['membre'])) {
+            throw new AdHocUserException('non identifié');
+        }
+
+        if(isset($_SESSION['my_counters']['nb_groupes'])) {
+            return $_SESSION['my_counters']['nb_groupes'];
+        }
+
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT COUNT(*) "
+             . "FROM `" . self::$_db_table_appartient_a . "` "
+             . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
+
+        $nb_groupes = $db->queryWithFetchFirstField($sql);
+
+        $_SESSION['my_counters']['nb_groupes'] = $nb_groupes;
+
+        return $_SESSION['my_counters']['nb_groupes'];
+    }
+
+    /**
+     * Efface un groupe de la base + la photo, mini photo, logo
+     * + ses liaisons avec membres
+     * + ses liaisons avec styles
+     * + ses liaisons avec events
+     * + ses liaisons avec photos,videos,audios
+     * @return bool
+     */
+    public function delete()
+    {
+        $this->unlinkMembers();
+        $this->unlinkStyles();
+        $this->unlinkEvents();
+        $this->unlinkPhotos();
+        $this->unlinkVideos();
+        $this->unlinkAudios();
+
+        parent::delete();
+
+        $p = self::_getLocalPath() . '/p' . $this->getId() . '.jpg';
+        if(file_exists($p)) {
+            unlink($p);
+        }
+
+        $m = self::_getLocalPath() . '/m' . $this->getId() . '.jpg';
+        if(file_exists($m)) {
+            unlink($m);
+        }
+
+        $l = self::_getLocalPath() . '/l' . $this->getId() . '.jpg';
+        if(file_exists($l)) {
+            unlink($l);
+        }
+
+        return true;
+    }
+
+    /**
+     *
+     */
+    protected function _loadFromDb()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `name`, `mini_text`, `text`, `style`, `lineup`, `etat`, "
+             . "`site`, `influences`, `created_on`, `modified_on`, `alias`, "
+             . "`myspace`, `facebook_page_id`, `twitter_id`, `template`, `comment` "
+             . "FROM `" . self::$_table . "` "
+             . "WHERE `" . self::$_pk . "` = " . (int) $this->getId();
+
+        if(($res = $db->queryWithFetchFirstRow($sql)))
+        {
+            $this->_dbToObject($res);
+            //$this->_styles   = self::getStylesById($this->getId());
+            //$this->_template = unserialize($res['template']);
+            //$this->_members  = self::getMembersById($this->getId());
+            return true;
+        }
+
+        throw new AdHocUserException('id_groupe introuvable', EXCEPTION_USER_UNKNOW_ID);
+    }
+
+    /**
+     * lie un membre à un groupe
+     *
+     * @param id_contact
+     * @param id_type_musicien
+     * @return bool
+     */
+    public function linkMember($id_contact, $id_type_musicien = 0, $datdeb = '0000-00-00', $datfin = '0000-00-00')
+    {
+        // le groupe existe-t-il bien ?
+
+        // @todo check datdeb et datfin
+
+        // l'id_contact est il valide ?
+        if(($mbr = Membre::getInstance($id_contact)) == false) {
+            throw new AdHocUserException('id_contact introuvable', EXCEPTION_USER_UNKNOW_ID);
+        }
+
+        // la relation est elle deja présente ?
+
+        // tout est ok, on insère dans appartient_a
+        $db = DataBase::getInstance();
+
+        $sql = "INSERT INTO `" . self::$_db_table_appartient_a . "` "
+             . "(`id_groupe`, `id_contact`, "
+             . "`id_type_musicien`, `datdeb`, `datfin`, "
+             . "`adm`) "
+             . "VALUES(" . (int) $this->getId() . ", " . (int) $id_contact . ", "
+             . (int) $id_type_musicien . ", '" . $db->escape($datdeb) . "', '" . $db->escape($datfin) . "', "
+             . "TRUE)";
+
+        $db->query($sql);
+
+        return $db->affectedRows();
+    }
+
+    public function updateMember($id_contact, $id_type_musicien = 0)
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "UPDATE `" . self::$_db_table_appartient_a . "` "
+             . "SET `id_type_musicien` = " . (int) $id_type_musicien . " "
+             . "WHERE `id_groupe` = " . (int) $this->getId() . " "
+             . "AND `id_contact` = " . (int) $id_contact;
+
+        $db->query($sql);
+
+        return $db->affectedRows();
+    }
+
+    /**
+     * délie un membre d'un groupe
+     *
+     * @param int $id_contact
+     * @return int
+     */
+    public function unlinkMember($id_contact)
+    {
+        // le groupe existe-t-il bien ?
+
+        // l'id_contact est il valide ?
+
+        // la relation est elle bien présente ?
+
+        // tout est ok, on delete dans groupe_membre
+
+        $db = DataBase::getInstance();
+
+        $sql = "DELETE FROM `" . self::$_db_table_appartient_a . "` "
+             . "WHERE `id_groupe` = " . (int) $this->getId() . " "
+             . "AND `id_contact` = " . (int) $id_contact;
+
+        $db->query($sql);
+
+        return $db->affectedRows();
+    }
+
+    /**
+     * purge les membres d'un groupe
+     * (= efface les relations des membres avec ce groupe)
+     *
+     * @return bool
+     */
+    public function unlinkMembers()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "DELETE FROM `" . self::$_db_table_appartient_a . "` "
+             . "WHERE `id_groupe` = " . (int) $this->getId();
+
+        $db->query($sql);
+
+        return $db->affectedRows();
+    }
+
+    /**
+     * un membre appartient-il au groupe courant ?
+     *
+     * @param int $id_contact
+     * @return bool
+     */
+    public function isMember($id_contact)
+    {
+        if(is_null($this->_members)) {
+            $this->_members = self::getMembersById($this->getId());
+        }
+
+        foreach($this->_members as $member)
+        {
+            if($member['id'] == $id_contact) {
+                return (int) $member['id_type_musicien'];
+            }
+        }
+        return false;
+    }
+
+    /**
+     * retourne un tableau des membres liés à ce groupe
+     *
+     * @return array
+     */
+    public function getMembers()
+    {
+        if(is_null($this->_members)) {
+            $this->_members = self::getMembersById($this->getId());
+        }
+
+        return $this->_members;
+    }
+
+    /**
+     * retourne un tableau des membres liés à ce groupe
+     *
+     * @param int id_groupe
+     * @return array
+     */
+    public static function getMembersById($id_groupe)
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `m`.`id_contact` AS `id`, `c`.`email`, `m`.`last_name`, `m`.`first_name`, `m`.`pseudo`, "
+             . "`m`.`facebook_profile_id`, `c`.`email`, `m`.`created_on`, "
+             . "`m`.`modified_on`, `m`.`visited_on`, `m`.`text`, `m`.`site`, "
+             . "`a`.`id_groupe`, `a`.`id_type_musicien`, `a`.`datdeb`, `a`.`datfin` "
+             . "FROM `" . self::$_db_table_membre . "` `m`, `" . self::$_db_table_contact . "` `c`, `" . self::$_db_table_appartient_a . "` `a` "
+             . "WHERE `m`.`id_contact` = `a`.`id_contact` "
+             . "AND `m`.`id_contact` = `c`.`id_contact` "
+             . "AND `a`.`id_groupe` = " . (int) $id_groupe;
+
+        $res = $db->queryWithFetch($sql);
+        $cpt = 0;
+        foreach($res as $_res) {
+            $res[$cpt]['nom_type_musicien'] = Membre::getTypeMusicienName($_res['id_type_musicien']);
+            $cpt++;
+        }
+        return $res;
+    }
+
+    /**
+     * le groupe est-il lié à des membres adhoc ?
+     *
+     * @return bool
+     */
+    public function hasMembers()
+    {
+        return (bool) $this->getMembers();
+    }
+
+    /**
+     * retourne la feuille de style custom du groupe
+     *
+     * @param int $id_groupe
+     * @param array $params issu du champ template
+     * @return string
+     */
+    public function getCss()
+    {
+        if(!is_array($this->_template) || !count($this->_template)) {
+            return '';
+        }
+
+        /**
+         * Astuce arrière plan étirable
+         * @see http://www.alsacreations.com/astuce/lire/50-comment-faire-un-arrire-plan-tirable.html
+         */
+
+        $css .= 'body{';
+        if(file_exists(ADHOC_ROOT_PATH . "/media/groupe/b" . $id_groupe . ".jpg")) {
+            $css .= 'background-image: url(' . STATIC_URL . '/media/groupe/b' . $id_groupe . '.jpg); background-repeat: repeat;';
+        }
+        if($params['body_background_color']) {
+            $css .= 'background-color: #'.$params['body_background_color'].';';
+        }
+        $css .= '}';
+        $css .= '.boxtitle{';
+        if($params['title_background_color']) {
+            $css .= 'background-color: #'.$params['title_background_color'].';';
+            define('ADHOC_CUSTOM_TITLE_BGCOLOR', $params['title_background_color']);
+        }
+        if($params['title_color']) {
+            $css .= 'color: #'.$params['title_color'].';';
+        }
+        $css .= '}';
+        $css .= '.boxcontent{';
+        if($params['content_background_color']) {
+            $css .= 'background-color: #'.$params['content_background_color'].';';
+        }
+        if($params['content_text_color']) {
+            $css .= 'color: #'.$params['content_text_color'].';';
+        } elseif($params['content_color']) { // ancien nom
+            $css .= 'color: #'.$params['content_color'].';';
+        }
+        /*
+        $css .= '-moz-opacity:0.9;';
+        $css .= 'opacity: 0.9;';
+        $css .= 'filter: alpha(opacity=90);';
+        */
+        $css .= '}';
+        $css .= '.boxcontent p{';
+        if($params['content_text_color']) {
+            $css .= 'color: #'.$params['content_text_color'].';';
+        } elseif($params['content_color']) { // ancien nom
+            $css .= 'color: #'.$params['content_color'].';';
+        }
+        $css .= '}';
+
+        $css .= '.boxcontent a, .contentbox a:link, .contentbox a:hover, .contentbox a:visited, .contentbox a:active{';
+        if($params['content_link_color']) {
+            $css .= 'color: #'.$params['content_link_color'].';';
+        }
+        $css .= '}';
+
+        return $css;
+    }
+
+    /**
+     * retourne un tableau de groupes en fonction de critères donnés
+     *
+     * @param array
+     * @return array
+     */
+    public static function getGroupes($params = array())
+    {
+        $debut = 0;
+        if(isset($params['debut'])) {
+            $debut = (int) $params['debut'];
+        }
+
+        $limit = null;
+        if(isset($params['limit'])) {
+            $limit = (int) $params['limit'];
+        }
+
+        $sens = 'ASC';
+        if(isset($params['sens']) && $params['sens'] == 'DESC') {
+            $sens = 'DESC';
+        }
+
+        $sort = 'id_groupe';
+        if(isset($params['sort'])
+           && ($params['sort'] == 'name' || $params['sort'] == 'random' ||
+               $params['sort'] == 'created_on' || $params['sort'] == 'modified_on')) {
+            $sort = $params['sort'];
+        }
+
+        $tab_style   = array();
+        $tab_id      = array();
+        $tab_contact = array();
+
+        if(array_key_exists('style', $params))   { $tab_style   = explode(",", $params['style']);  }
+        if(array_key_exists('id', $params))      { $tab_id      = explode(",", $params['id']); }
+        if(array_key_exists('contact', $params)) { $tab_contact = explode(",", $params['contact']); }
+
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `g`.`id_groupe` AS `id`, `g`.`name`, `g`.`mini_text`, `g`.`text`, `g`.`style`, `g`.`lineup`, "
+             . "`g`.`etat`, `g`.`site`, `g`.`influences`, `g`.`created_on`, `g`.`modified_on`, "
+             . "`g`.`alias`, `g`.`myspace`, `g`.`template`, `g`.`comment` "
+             . "FROM `" . self::$_table . "` `g` "
+             . "WHERE 1 ";
+
+        if(count($tab_id) && ($tab_id[0] != 0)) {
+            $sql .= "AND `g`.`id_groupe` IN (" . implode(',', $tab_id) . ") ";
+        }
+
+        $sql .= "ORDER BY ";
+        if($sort == "random") {
+            $sql .= "RAND(" . time() . ") ";
+        } else {
+            $sql .= "`g`.`" . $sort . "` " . $sens . " ";
+        }
+
+        if(!is_null($limit)) {
+            $sql .= "LIMIT " . $debut . ", " . $limit;
+        }
+
+        $res = $db->queryWithFetch($sql);
+
+        if($limit == 1) {
+            $res = array_pop($res);
+        }
+
+        return $res;
+    }
+
+    /**
+     * retourne le listing de ses propres groupes
+     * dont on est administrateur
+     *
+     * @return array
+     */
+    public static function getMyGroupes()
+    {
+        if(empty($_SESSION['membre'])) {
+            throw new AdHocUserException('non identifié');
+        }
+
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `g`.`id_groupe` AS `id`, `g`.`alias`, "
+             . "`g`.`created_on`, UNIX_TIMESTAMP(`g`.`created_on`) AS `created_on_ts`, "
+             . "`g`.`modified_on`, UNIX_TIMESTAMP(`g`.`modified_on`) AS `modified_on_ts`, "
+             . "`g`.`name`, `a`.`adm`, `a`.`id_type_musicien` "
+             . "FROM `" . self::$_db_table_groupe . "` `g`, `" . self::$_db_table_appartient_a . "` `a` "
+             . "WHERE `g`.`id_groupe` = `a`.`id_groupe` "
+             . "AND `a`.`adm` "
+             . "AND `a`.`id_contact` = " . (int) $_SESSION['membre']->getId();
+
+        $res = $db->queryWithFetch($sql);
+
+        if($res) {
+            $tab = array();
+            foreach($res as $grp) {
+                $tab[$grp['id']] = $grp;
+                $mini_photo = STATIC_URL . '/img/note_adhoc_64.png';
+                if(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.jpg')) {
+                    $mini_photo = self::_getWwwPath() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
+                }
+                $tab[$grp['id']]['mini_photo'] = $mini_photo;
+                $tab[$grp['id']]['nom_type_musicien'] = Membre::getTypeMusicienName($grp['id_type_musicien']);
+            }
+            return $tab;
+        }
+        return false;
+    }
+
+    /**
+     * retourne un groupe à découvrir :
+     * - qui a mis à jour sa fiche il y a moins de 6 mois
+     * - qui a au moins un son lié
+     * todo: factoriser ça dans Groupe::getGroupes
+     *
+     * @return array
+     */
+    public static function getGroupeADecouvrir()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `g`.`id_groupe` AS `id`, `g`.`name`, "
+             . "`a`.`id_audio` AS `audio_id`, `a`.`name` AS `audio_title`, "
+             . "`g`.`mini_text`, `g`.`style`, `g`.`alias`, `g`.`modified_on`, "
+             . "UNIX_TIMESTAMP(`g`.`modified_on`) AS `modified_on_ts`, "
+             . "CONCAT('http://www.adhocmusic.com/', `g`.`alias`) AS `url`, "
+             . "CONCAT('http://www.adhocmusic.com/audios/show/', `a`.`id_audio`) AS `audio_url` "
+             . "FROM `" . self::$_db_table_groupe . "` `g`, `" . self::$_db_table_audio . "` `a` "
+             . "WHERE `g`.`id_groupe` = `a`.`id_groupe` "
+             . "AND `g`.`online` AND `a`.`online` "
+             . "AND `g`.`modified_on` >= SUBDATE(CURDATE(), INTERVAL 6 MONTH) "
+             . "ORDER BY RAND() "
+             . "LIMIT 0, 2";
+
+        $grps = $db->queryWithFetch($sql);
+        foreach($grps as $idx => $grp) {
+            $grps[$idx]['class'] = 'grpactif';
+            $grps[$idx]['mini_photo'] = STATIC_URL . '/img/note_adhoc_64.png';
+            if(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.jpg')) {
+                $grps[$idx]['mini_photo'] = self::_getWwwPath() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
+            }
+        }
+
+        return $grps;
+    }
+
+    /**
+     * retourne le listing de tous les groupes affichables
+     *
+     * tri par ordre alphabétique
+     *
+     * @return array
+     */
+    public static function getGroupesByName()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `id_groupe` AS `id`, `name`, UPPER(SUBSTRING(`name`, 1, 1)) AS `lettre`, "
+             . "`mini_text`, `style`, `alias`, `modified_on`, UNIX_TIMESTAMP(`modified_on`) AS `modified_on_ts`, `etat`, "
+             . "CONCAT('http://www.adhocmusic.com/', `alias`) AS `url` "
+             . "FROM `" . self::$_table . "` "
+             . "WHERE `online` "
+             . "ORDER BY `etat` ASC, `name` ASC";
+
+        $res  = $db->queryWithFetch($sql);
+
+        $tab = array();
+        $cpt = 0;
+        foreach($res as $grp) {
+            $tab[$grp['lettre']][$cpt] = $grp;
+            $tab[$grp['lettre']][$cpt]['mini_photo'] = STATIC_URL . '/img/note_adhoc_64.png';
+            $tab[$grp['lettre']][$cpt]['class'] = 'grpinactif';
+            if(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.png')) {
+                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::_getWwwPath() . '/m' . $grp['id'] . '.png?ts=' . $grp['modified_on_ts'];
+            } elseif(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.jpg')) {
+                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::_getWwwPath() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
+            } elseif(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.gif')) {
+                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::_getWwwPath() . '/m' . $grp['id'] . '.gif?ts=' . $grp['modified_on_ts'];
+            }
+
+            if($grp['etat'] == self::ETAT_ACTIF) {
+                $tab[$grp['lettre']][$cpt]['class'] = 'grpactif';
+            }
+            $cpt++;
+        }
+        return $tab;
+    }
+
+    /**
+     * retourne le listing de tous les groupes affichables
+     *
+     * tri par ordre de mise à jour de la fiche
+     *
+     * @return array
+     */
+    public static function getGroupesByModifiedOn()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `id_groupe` AS `id`, `name`, "
+             . "`mini_text`, `style`, `alias`, `modified_on`, UNIX_TIMESTAMP(`modified_on`) AS `modified_on_ts`, `etat`, "
+             . "CONCAT('http://www.adhocmusic.com/', `alias`) AS `url` "
+             . "FROM `" . self::$_table . "` "
+             . "WHERE `online` "
+             . "ORDER BY `modified_on` DESC";
+
+        $res  = $db->queryWithFetch($sql);
+
+        $tab = array();
+        $cpt = 0;
+
+        foreach($res as $grp) {
+            $date = strftime("%B %Y" , strtotime($grp['modified_on']));
+            $tab[$date][$cpt] = $grp;
+            $tab[$date][$cpt]['mini_photo'] = STATIC_URL . '/img/note_adhoc_64.png';
+            $tab[$date][$cpt]['class'] = 'grpinactif';
+            if(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.png')) {
+                $tab[$date][$cpt]['mini_photo'] = self::_getWwwPath() . '/m' . $grp['id'] . '.png?ts=' . $grp['modified_on_ts'];
+            } elseif(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.jpg')) {
+                $tab[$date][$cpt]['mini_photo'] = self::_getWwwPath() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
+            } elseif(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.gif')) {
+                $tab[$date][$cpt]['mini_photo'] = self::_getWwwPath() . '/m' . $grp['id'] . '.gif?ts=' . $grp['modified_on_ts'];
+            }
+            if($grp['etat'] == self::ETAT_ACTIF) {
+                $tab[$date][$cpt]['class'] = 'grpactif';
+            }
+            $cpt++;
+        }
+        return $tab;
+    }
+
+    /**
+     * retourne le listing de tous les groupes affichables
+     *
+     * tri par style primaire
+     *
+     * @param bool
+     * @return array
+     */
+    public static function getGroupesByStyle()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `g`.`id_groupe` AS `id`, `g`.`name`, `g`.`mini_text`, `g`.`style`, "
+             . "`s`.`id_style`, `g`.`alias`, `g`.`modified_on`, UNIX_TIMESTAMP(`g`.`modified_on`) AS `modified_on_ts`, `g`.`etat`, "
+             . "CONCAT('http://www.adhocmusic.com/', `g`.`alias`) AS `url` "
+             . "FROM `" . self::$_db_table_groupe . "` `g`, `" . self::$_db_table_groupe_style . "` `s` "
+             . "WHERE `g`.`id_groupe` = `s`.`id_groupe` "
+             . "AND `s`.`ordre` = 1 "
+             . "AND `g`.`online` "
+             . "ORDER BY `s`.`id_style` ASC, `g`.`etat` ASC, `g`.`name` ASC";
+
+        $res  = $db->queryWithFetch($sql);
+
+        $tab = array();
+        $cpt = 0;
+        foreach($res as $grp) {
+            $tab[Style::getName($grp['id_style'])][$cpt] = $grp;
+            $tab[Style::getName($grp['id_style'])][$cpt]['mini_photo'] = '/img/note_adhoc_64.png';
+            $tab[Style::getName($grp['id_style'])][$cpt]['class'] = 'grpinactif';
+            if(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.png')) {
+                $tab[Style::getName($grp['id_style'])][$cpt]['mini_photo'] = self::_getWwwPath() . '/m' . $grp['id'] . '.png?ts=' . $grp['modified_on_ts'];
+            } elseif(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.jpg')) {
+                $tab[Style::getName($grp['id_style'])][$cpt]['mini_photo'] = self::_getWwwPath() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
+            } elseif(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.gif')) {
+                $tab[Style::getName($grp['id_style'])][$cpt]['mini_photo'] = self::_getWwwPath() . '/m' . $grp['id'] . '.gif?ts=' . $grp['modified_on_ts'];
+            }
+            if($grp['etat'] == self::ETAT_ACTIF) {
+                $tab[Style::getName($grp['id_style'])][$cpt]['class'] = 'grpactif';
+            }
+            $cpt++;
+        }
+        return $tab;
+    }
+
+    /**
+     * retourne l'id d'un groupe à partir de son alias
+     *
+     * @param string $alias
+     * @return int
+     */
+    public static function getIdByAlias($alias)
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `" . self::$_pk . "` "
+             . "FROM `" . self::$_table . "` "
+             . "WHERE `alias` = '" . $db->escape($alias) . "'";
+
+        return (int) $db->queryWithFetchFirstField($sql);
+    }
+
+    /**
+     * retourne l'id d'un groupe à partir d'id de sa page facebook
+     *
+     * @param int $fbpid
+     * @return int
+     */
+    public static function getIdByFacebookPageId($fbpid)
+    {
+        $db = DataBase::getInstance();
+
+        // /!\ 64 bits
+        if(!is_numeric($fbpid)) {
+            return false;
+        }
+
+        $sql = "SELECT `id_groupe` "
+             . "FROM `" . self::$_table . "` "
+             . "WHERE `facebook_page_id` = " . $fbpid;
+
+        if($id_groupe = $db->queryWithFetchFirstField($sql)) {
+            return (int) $id_groupe;
+        }
+        return false;
+    }
+
+    /**
+     * ajoute un style au groupe
+     *
+     * @param int $id_style
+     */
+    public function linkStyle($id_style, $ordre = 1)
+    {
+        // le groupe existe-t-il bien ?
+
+        // le style existe-il bien ?
+        if(!Style::isStyleOk($id_style)) {
+            throw new AdHocUserException('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
+        }
+
+        // le groupe n'a-t-il pas déjà ce style ?
+
+        // c'est ok on ajoute le style
+        $db = DataBase::getInstance();
+
+        $sql = "INSERT INTO `" . self::$_db_table_groupe_style . "` "
+             . "(`id_groupe`, `id_style`, `ordre`) "
+             . "VALUES(" . (int) $this->getId() . ", " . (int) $id_style . ", " . (int) $ordre . ")";
+
+        $db->query($sql);
+
+        return $db->affectedRows();
+    }
+
+    /**
+     * retire un style du groupe
+     *
+     * @param int $id_style
+     * @return bool
+     */
+    public function unlinkStyle($id_style)
+    {
+        // les paramètres sont-ils corrects ?
+
+        // le groupe existe-t-il bien ?
+
+        // le style existe-il bien ?
+        if(!Style::isStyleOk($id_style)) {
+            throw new AdHocUserException('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
+        }
+
+        $db = DataBase::getInstance();
+
+        $sql = "DELETE FROM `" . self::$_db_table_groupe_style  ."` "
+             . "WHERE `id_groupe` = " . (int) $this->getId() . " "
+             . "AND `id_style` = " . (int) $id_style;
+
+        $db->query($sql);
+
+        return $db->affectedRows();
+    }
+
+    /**
+     * purge tous les styles d'un groupe
+     *
+     * @return bool
+     */
+    public function unlinkStyles()
+    {
+        // les paramètres sont-ils corrects ?
+
+        // le groupe existe-t-il bien ?
+
+        $db = DataBase::getInstance();
+
+        $sql = "DELETE FROM `" . self::$_db_table_groupe_style . "` "
+             . "WHERE `id_groupe` = " . (int) $this->getId();
+
+        $db->query($sql);
+
+        return $db->affectedRows();
+    }
+
+    /**
+     * retourne les styles du groupe
+     *
+     * @return array
+     */
+    public function getStyles()
+    {
+        return $this->_styles;
+    }
+
+    /**
+     * retourne les styles du groupe
+     *
+     * @param int $id_groupe
+     * @return array
+     */
+    public static function getStylesById($id_groupe)
+    {
+        // le groupe existe-t-il ?
+
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `id_style` AS `id` "
+             . "FROM `" . self::$_db_table_groupe_style . "` "
+             . "WHERE `id_groupe` = " . (int) $id_groupe . " "
+             . "ORDER BY `ordre` ASC";
+
+        return $db->queryWithFetch($sql);
+    }
+
+    /**
+     * le groupe est-il lié à des photos ?
+     *
+     * @return bool
+     */
+    public function hasPhotos()
+    {
+        return (bool) $this->getPhotos();
+    }
+
+    /**
+     * retourne les photos associées à ce groupe
+     *
+     * @return array ou false
+     */
+    public function getPhotos()
+    {
+        return $this->_photos;
+    }
+
+    /**
+     * délie les photos d'un groupe
+     *
+     * @return int
+     */
+    public function unlinkPhotos()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "UPDATE `" . self::$_db_table_photo . "` "
+             . "SET `id_groupe` = 0 "
+             . "WHERE `id_groupe` = " . (int) $this->getId();
+
+        $db->query($sql);
+
+        return $db->affectedRows();
+    }
+
+    /**
+     * le groupe est-il lié à des audios ?
+     *
+     * @return bool
+     */
+    public function hasAudios()
+    {
+        return (bool) $this->getAudios();
+    }
+
+    /**
+     * retourne les audios associés à ce groupe
+     *
+     * @return array
+     */
+    public function getAudios()
+    {
+        return $this->_audios;
+    }
+
+    /**
+     * délie les audios d'un groupe
+     *
+     * @return int
+     */
+    public function unlinkAudios()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "UPDATE `" . self::$_db_table_audio . "` "
+             . "SET `id_groupe` = 0 "
+             . "WHERE `id_groupe` = " . (int) $this->getId();
+
+        $db->query($sql);
+
+        return $db->affectedRows();
+    }
+
+    /**
+     * le groupe est-il lié à des vidéos ?
+     *
+     * @return bool
+     */
+    public function hasVideos()
+    {
+        return (bool) $this->getVideos();
+    }
+
+    /**
+     * retourne les vidéos associées à ce groupe
+     *
+     * @return array
+     */
+    public function getVideos()
+    {
+        return $this->_videos;
+    }
+
+    /**
+     * délie les vidéos d'un groupe
+     *
+     * @return int
+     */
+    public function unlinkVideos()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "UPDATE `" . self::$_db_table_video . "` "
+             . "SET `id_groupe` = 0 "
+             . "WHERE `id_groupe` = " . (int) $this->getId();
+
+        $db->query($sql);
+
+        return $db->affectedRows();
+    }
+
+    /**
+     * le groupe est-il lié à des événements ?
+     *
+     * @return bool
+     */
+    public function hasEvents()
+    {
+        return (bool) $this->getEvents();
+    }
+
+    /**
+     * retourne les événements futurs rattachés au groupe
+     *
+     * @param string "prev"/"next/"all"
+     * @return array
+     */
+    public function getEvents($limit = 10, $type = 'all')
+    {
+        // le groupe existe-t-il bien ?
+
+        //@todo Event::getEvents(array('groupe' => $id_groupe, 'type' => 'all|prev|next'))
+        // on extrait les événements associés au groupe
+
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `e`.`id_event`, `e`.`name` AS `nom_event`, `e`.`date`, "
+             . "`l`.`id_lieu`, `l`.`name` AS `nom_lieu` "
+             . "FROM `" . self::$_db_table_event . "` `e`, `" . self::$_db_table_participe_a . "` `p`, "
+             . "`" . self::$_db_table_groupe . "` `g`, `" . self::$_db_table_lieu . "` `l` "
+             . "WHERE `p`.`id_groupe` = `g`.`id_groupe` "
+             . "AND `p`.`id_event` = `e`.`id_event` "
+             . "AND `e`.`id_lieu` = `l`.`id_lieu` "
+             . "AND `g`.`id_groupe` = " . (int) $this->_id_groupe." ";
+        switch($type) {
+            case 'all':
+                break;
+            case 'prev':
+                $sql .= "AND `e`.`date` < NOW() ";
+                break;
+            case 'next':
+                $sql .= "AND `e`.`date` > NOW() ";
+                break;
+        }
+        $sql .= "ORDER BY `e`.`date` ASC "
+              . "LIMIT 0," . (int) $limit;
+
+        return $db->queryWithFetch($sql);
+    }
+
+    /**
+     * délie les événements d'un groupe
+     *
+     * @return int
+     */
+    public function unlinkEvents()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "DELETE FROM `" . self::$_db_table_participe_a . "` "
+             . "WHERE `id_groupe` = " . (int) $this->getId();
+
+        $db->query($sql);
+
+        return $db->affectedRows();
+    }
+
+    /**
+     * @param string
+     * @return bool
+     */
+    public static function nameAvailable($name)
+    {
+        return true;
+    }
+
+    /**
+     * retourne l'"alias" d'un nom de groupe à partir de son nom réel
+     * (= filtre les caratères non url-compliant)
+     *
+     * @param string $name
+     * @return string
+     */
+    public static function genAlias($name)
+    {
+        $alias = trim($name);
+        $alias = strtolower($alias);
+        $alias = Tools::removeAccents($alias);
+        $alias = str_replace('.', '', $alias);
+        $alias = str_replace(' ', '', $alias);
+        $alias = str_replace("'", '', $alias);
+        $alias = str_replace('"', '', $alias);
+        $alias = str_replace('&', 'et', $alias);
+        $alias = str_replace('(', '', $alias);
+        $alias = str_replace(')', '', $alias);
+        $alias = str_replace('!', '', $alias);
+        return $alias;
+    }
+
+    /**
+     * ajoute une visite à la fiche
+     * @todo getInstance / setVisite = getVisite + 1 / save
+     * @param int $id_groupe
+     * @return bool
+     */
+    public function addVisite()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "UPDATE `" . self::$_table . "` "
+             . "SET `visite` = `visite` + 1 "
+             . "WHERE `id_groupe` = " . (int) $this->getId();
+
+        $res = $db->query($sql);
+
+        return $db->affectedRows($res);
+    }
+
+    /**
+     * récupère les groupes ayant au moins un audio
+     * @return array
+     */
+    public static function getGroupesWithAudio()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
+             . "FROM `" . self::$_db_table_groupe . "` `g`, `" . self::$_db_table_audio . "` `a` "
+             . "WHERE `g`.`id_groupe` = `a`.`id_groupe` "
+             . "AND `g`.`online` AND `a`.`online` "
+             . "ORDER BY `g`.`name` ASC";
+
+        return $db->queryWithFetch($sql);
+    }
+
+    /**
+     * récupère les groupes ayant au moins une vidéo
+     * @return array
+     */
+    public static function getGroupesWithVideo()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
+             . "FROM `" . self::$_db_table_groupe . "` `g`, `" . self::$_db_table_video . "` `v` "
+             . "WHERE `g`.`id_groupe` = `v`.`id_groupe` "
+             . "AND `g`.`online` AND `v`.`online` "
+             . "ORDER BY `g`.`name` ASC";
+
+        return $db->queryWithFetch($sql);
+    }
+
+    /**
+     * récupère les groupes ayant au moins une photo
+     * @return array
+     */
+    public static function getGroupesWithPhoto()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
+             . "FROM `" . self::$_db_table_groupe . "` `g`, `" . self::$_db_table_photo . "` `p` "
+             . "WHERE `g`.`id_groupe` = `p`.`id_groupe` "
+             . "AND `g`.`online` AND `p`.`online` "
+             . "ORDER BY `g`.`name` ASC";
+
+        return $db->queryWithFetch($sql);
+    }
+
+    /**
+     * récupère les groupes ayant au moins un média (photo,audio,vidéo)
+     * @return array
+     */
+    public static function getGroupesWithMedia()
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "(SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
+             . "FROM `adhoc_groupe` `g`, `adhoc_video` `v` "
+             . "WHERE `g`.`id_groupe` = `v`.`id_groupe` "
+             . "AND `g`.`online` AND `v`.`online`)"
+             . " UNION "
+             . "(SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
+             . "FROM `adhoc_groupe` `g`, `adhoc_audio` `a` "
+             . "WHERE `g`.`id_groupe` = `a`.`id_groupe` "
+             . "AND `g`.`online` AND `a`.`online`)"
+             . " UNION "
+             . "(SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
+             . "FROM `adhoc_groupe` `g`, `adhoc_photo` `p` "
+             . "WHERE `g`.`id_groupe` = `p`.`id_groupe` "
+             . "AND `g`.`online` AND `p`.`online`)"
+             . " ORDER BY `name` ASC";
+
+        return $db->queryWithFetch($sql);
+    }
+
+    /**
+     * @param string $alias
+     * @return bool
+     */
+    public static function checkAliasAvailability($alias)
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT `alias` "
+             . "FROM `" . self::$_table . "` "
+             . "WHERE `alias` = '" . $db->escape($alias) . "'";
+
+        return $db->queryWithFetchFirstField($sql);
+    }
+}

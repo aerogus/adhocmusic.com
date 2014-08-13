@@ -1,0 +1,37 @@
+# commun
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html
+AddCharset UTF-8 .xhtml
+AddCharset UTF-8 .xml
+AddCharset UTF-8 .json
+AddCharset UTF-8 .css
+AddCharset UTF-8 .js
+RewriteRule ^(.*/)?\.svn/ - [F,L]
+AddOutputFilterByType DEFLATE text/html text/xml application/xhtml+xml text/plain application/javascript text/css
+#DirectoryIndex index.php
+Options +FollowSymlinks
+Options -MultiViews
+Options -Indexes
+
+ErrorDocument 400 "400"
+ErrorDocument 403 "403"
+ErrorDocument 404 "404"
+ErrorDocument 500 "500"
+
+#Header unset ETag
+#FileETag None
+
+#ExpiresActive On
+#ExpiresByType image/gif  "access plus 1 month"
+#ExpiresByType image/png  "access plus 1 month"
+#ExpiresByType image/jpg  "access plus 1 month"
+#ExpiresByType image/jpeg "access plus 1 month"
+#ExpiresByType text/css   "access plus 1 month"
+#ExpiresByType application/javascript "access plus 1 month"
+#ExpiresByType image/x-icon "access plus 1 month"
+
+AddType image/x-icon ico
+AddType video/mp4 mp4
+
+ServerSignature Off
+

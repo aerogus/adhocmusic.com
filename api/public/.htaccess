@@ -1,0 +1,31 @@
+# commun
+SetEnv PHP_VER 5_TEST
+SetEnv REGISTER_GLOBALS 0
+SetEnv MAGIC_QUOTES 0
+SetEnv ZEND_OPTIMIZER 1
+SetEnv SESSION_USE_TRANS_SID 0
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html
+AddCharset UTF-8 .xhtml
+AddCharset UTF-8 .xml
+AddCharset UTF-8 .json
+AddCharset UTF-8 .css
+AddCharset UTF-8 .js
+RewriteRule ^(.*/)?\.svn/ - [F,L]
+AddOutputFilterByType DEFLATE text/html text/xml application/xhtml+xml text/plain application/javascript text/css
+DirectoryIndex index.php
+Options +FollowSymlinks
+Options -MultiViews
+Options -Indexes
+
+# specifique
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+ErrorDocument 400 "400"
+ErrorDocument 403 "403"
+ErrorDocument 404 "404"
+ErrorDocument 500 "500"
