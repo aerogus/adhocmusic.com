@@ -319,7 +319,7 @@ class Controller
                             continue;
                         }
                         $selgrps[$cpt]['id'] = $id_groupe;
-                        if(file_exists(ADHOC_ROOT_PATH . '/media/groupe/m' . $id_groupe . '.jpg')) {
+                        if(file_exists(ADHOC_ROOT_PATH . '/static/media/groupe/m' . $id_groupe . '.jpg')) {
                             $pic = 'http://static.adhocmusic.com/media/groupe/m' . $id_groupe . '.jpg';
                         } else {
                             $pic = 'http://static.adhocmusic.com/img/note_adhoc_64.png';
@@ -391,19 +391,19 @@ class Controller
         $img[3] = FB_APP_DEFAUT_AVATAR_GROUPE;
         $img[4] = FB_APP_DEFAUT_AVATAR_GROUPE;
         $img[5] = FB_APP_DEFAUT_AVATAR_GROUPE;
-        if(file_exists(ADHOC_ROOT_PATH . '/media/groupe/m' . $params['id_groupe_1'] . '.jpg')) {
+        if(file_exists(ADHOC_ROOT_PATH . '/static/media/groupe/m' . $params['id_groupe_1'] . '.jpg')) {
             $img[1] = 'http://static.adhocmusic.com/media/groupe/m' . $params['id_groupe_1'] . '.jpg';
         }
-        if(file_exists(ADHOC_ROOT_PATH . '/media/groupe/m' . $params['id_groupe_2'] . '.jpg')) {
+        if(file_exists(ADHOC_ROOT_PATH . '/static/media/groupe/m' . $params['id_groupe_2'] . '.jpg')) {
             $img[2] = 'http://static.adhocmusic.com/media/groupe/m' . $params['id_groupe_2'] . '.jpg';
         }
-        if(file_exists(ADHOC_ROOT_PATH . '/media/groupe/m' . $params['id_groupe_3'] . '.jpg')) {
+        if(file_exists(ADHOC_ROOT_PATH . '/static/media/groupe/m' . $params['id_groupe_3'] . '.jpg')) {
             $img[3] = 'http://static.adhocmusic.com/media/groupe/m' . $params['id_groupe_3'] . '.jpg';
         }
-        if(file_exists(ADHOC_ROOT_PATH . '/media/groupe/m' . $params['id_groupe_4'] . '.jpg')) {
+        if(file_exists(ADHOC_ROOT_PATH . '/static/media/groupe/m' . $params['id_groupe_4'] . '.jpg')) {
             $img[4] = 'http://static.adhocmusic.com/media/groupe/m' . $params['id_groupe_4'] . '.jpg';
         }
-        if(file_exists(ADHOC_ROOT_PATH . '/media/groupe/m' . $params['id_groupe_5'] . '.jpg')) {
+        if(file_exists(ADHOC_ROOT_PATH . '/static/media/groupe/m' . $params['id_groupe_5'] . '.jpg')) {
             $img[5] = 'http://static.adhocmusic.com/media/groupe/m' . $params['id_groupe_5'] . '.jpg';
         }
 

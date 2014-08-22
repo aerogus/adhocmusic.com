@@ -1,6 +1,6 @@
 <?php
 
-define('DYNIMG_CACHE_PATH', ADHOC_ROOT_PATH . '/cache/img');
+define('DYNIMG_CACHE_PATH', ADHOC_ROOT_PATH . '/static/img/cache');
 define('DYNIMG_CACHE_ENABLED', true);
 
 class Controller

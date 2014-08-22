@@ -80,7 +80,6 @@
 1|assoce|concerts|GET|/assoce/concerts
 1|assoce|equipe|GET|/assoce/equipe
 1|assoce|statuts|GET|/assoce/statuts
-1|assoce|recrutement|GET|/assoce/recrutement
 1|assoce|index|GET|/associe
 1|articles|index|GET|/articles/
 1|articles|more|GET|/articles/more/:rub
@@ -170,11 +169,6 @@
 1|events|delete|GET|/events/delete/:id
 1|events|delete|POST|/events/delete
 1|events|get_events_by_lieu|GET|/events/get-events-by-lieu
-1|forums|index|GET|/forums/
-1|forums|forum|GET|/forums/forum/:id_forum
-1|forums|thread|GET|/forums/thread/:id_thread
-1|forums|write|GET|/forums/write
-1|forums|write|POST|/forums/write
 1|fb_adhocbandpage|app_install|POST|/fb/adhocbandpage/app/install
 1|fb_adhocbandpage|app_uninstall|POST|/fb/adhocbandpage/app/uninstall
 1|fb_adhocbandpage|app_settings_change|POST|/fb/adhocbandpage/app/settings-change
@@ -286,12 +280,6 @@
 1|lieux|delete|POST|/lieux/delete
 1|lieux|geocode|GET|/lieux/geocode
 1|lieux|fetch|GET|/lieux/fetch
-1|live|live|GET|/chat
-1|live|live|GET|/live
-1|live|chat_get_last_messages|GET|/live/chat-get-last-messages
-1|live|chat_get_online|GET|/live/chat-get-online
-1|live|chat_send_message|POST|/live/chat-send-message
-1|live|popage|GET|/live/popage
 1|media|index|GET|/media/
 1|media|search_results|GET|/media/search-results
 1|membres|tableau_de_bord|GET|/membres/tableau-de-bord

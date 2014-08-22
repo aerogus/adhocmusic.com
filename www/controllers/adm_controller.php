@@ -696,7 +696,7 @@ class Controller
                     $i->setType(IMAGETYPE_JPEG);
                     $i->setMaxWidth(ADM_FEATURED_IMG_WIDTH);
                     $i->setMaxHeight(ADM_FEATURED_IMG_HEIGHT);
-                    $i->setDestFile(ADHOC_ROOT_PATH . '/media/featured/' . (int) $f->getId() . '.jpg');
+                    $i->setDestFile(ADHOC_ROOT_PATH . '/static/media/featured/' . (int) $f->getId() . '.jpg');
                     $i->write();
                 }
 
@@ -780,7 +780,7 @@ class Controller
                     $i->setType(IMAGETYPE_JPEG);
                     $i->setMaxWidth(ADM_FEATURED_IMG_WIDTH);
                     $i->setMaxHeight(ADM_FEATURED_IMG_HEIGHT);
-                    $i->setDestFile(ADHOC_ROOT_PATH . '/media/featured/' . $f->getId() . '.jpg');
+                    $i->setDestFile(ADHOC_ROOT_PATH . '/static/media/featured/' . $f->getId() . '.jpg');
                     $i->write();
                     Featured::invalidateImageInCache($f->getId(), 120, 120);
                 }
@@ -855,7 +855,7 @@ class Controller
         {
             if($f->delete()) {
                 Tools::redirect('/adm/featured/?delete=1');
-                unlink(ADHOC_ROOT_PATH . '/media/featured/' . $f->getId() . '.jpg');
+                unlink(ADHOC_ROOT_PATH . '/static/media/featured/' . $f->getId() . '.jpg');
             }
         }
 

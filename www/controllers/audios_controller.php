@@ -178,7 +178,9 @@ class Controller
                 $audio->setCreatedNow();
                 if($audio->save()) {
                     if($content = Route::params('file')) {
-                        file_put_contents(ADHOC_ROOT_PATH . '/media/audio/' . $audio->getId() . '.mp3', $content);
+                        file_put_contents(ADHOC_ROOT_PATH . '/static/media/audio/' . $audio->getId() . '.mp3', $content);
+                    } else {
+                        mail('gus@adhocmusic.com', 'bug audio create', 'bug audio create');
                     }
                     Log::action(Log::ACTION_AUDIO_CREATE, $audio->getId());
                     Tools::redirect('/media/?create=1');
@@ -308,7 +310,7 @@ class Controller
 
                 if($audio->save()) {
                     if($content = Route::params('file')) {
-                        file_put_contents(ADHOC_ROOT_PATH . '/media/audio/' . $audio->getId() . '.mp3', $content);
+                        file_put_contents(ADHOC_ROOT_PATH . '/static/media/audio/' . $audio->getId() . '.mp3', $content);
                     }
                     Log::action(Log::ACTION_AUDIO_EDIT, $audio->getId());
                     Tools::redirect('/media/?edit=1');

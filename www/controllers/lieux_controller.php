@@ -266,7 +266,7 @@ class Controller
                     $objImg->setType(IMAGETYPE_JPEG);
                     $objImg->setMaxWidth(400);
                     $objImg->setMaxHeight(400);
-                    $objImg->setDestFile(ADHOC_ROOT_PATH . '/media/lieu/' . $lieu->getId() . '.jpg');
+                    $objImg->setDestFile(ADHOC_ROOT_PATH . '/static/media/lieu/' . $lieu->getId() . '.jpg');
                     $objImg->write();
                     $objImg = "";
                 }
@@ -386,7 +386,7 @@ class Controller
                         $objImg->setType(IMAGETYPE_JPEG);
                         $objImg->setMaxWidth(400);
                         $objImg->setMaxHeight(400);
-                        $objImg->setDestFile(ADHOC_ROOT_PATH . '/media/lieu/' . $lieu->getId() . '.jpg');
+                        $objImg->setDestFile(ADHOC_ROOT_PATH . '/static/media/lieu/' . $lieu->getId() . '.jpg');
                         $objImg->write();
                         $objImg = "";
                     }

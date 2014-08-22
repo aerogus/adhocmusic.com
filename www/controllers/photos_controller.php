@@ -217,7 +217,7 @@ class Controller
                     $objImg->setType(IMAGETYPE_JPEG);
                     $objImg->setMaxWidth(1024);
                     $objImg->setMaxHeight(768);
-                    $objImg->setDestFile(ADHOC_ROOT_PATH . '/media/photo/' . $photo->getId() . '.jpg');
+                    $objImg->setDestFile(ADHOC_ROOT_PATH . '/static/media/photo/' . $photo->getId() . '.jpg');
                     $objImg->write();
                 }
 
@@ -373,7 +373,7 @@ class Controller
                         $objImg->setType(IMAGETYPE_JPEG);
                         $objImg->setMaxWidth(1024);
                         $objImg->setMaxHeight(768);
-                        $objImg->setDestFile(ADHOC_ROOT_PATH . '/media/photo/' . $photo->getId() . '.jpg');
+                        $objImg->setDestFile(ADHOC_ROOT_PATH . '/static/media/photo/' . $photo->getId() . '.jpg');
                         $objImg->write();
 
                         unlink($filename);
@@ -496,7 +496,7 @@ class Controller
                     $objImg->setType(IMAGETYPE_JPEG);
                     $objImg->setMaxWidth(1024);
                     $objImg->setMaxHeight(768);
-                    $objImg->setDestFile(ADHOC_ROOT_PATH . '/media/photo/' . $photo->getId() . '.jpg');
+                    $objImg->setDestFile(ADHOC_ROOT_PATH . '/static/media/photo/' . $photo->getId() . '.jpg');
                     $objImg->write();
 
                     Photo::invalidatePhotoInCache($photo->getId(),  80,  80, '000000', false,  true);

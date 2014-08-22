@@ -297,7 +297,7 @@ class Controller
                         $img->setType(IMAGETYPE_JPEG);
                         $img->setMaxWidth(112);
                         $img->setMaxHeight(174);
-                        $img->setDestFile(ADHOC_ROOT_PATH . '/media/membre/ca/' . $_SESSION['membre']->getId() . '.jpg');
+                        $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/membre/ca/' . $_SESSION['membre']->getId() . '.jpg');
                         $img->write();
                         $img = null;
                     }
@@ -309,7 +309,7 @@ class Controller
                     $img->setType(IMAGETYPE_JPEG);
                     $img->setMaxWidth(112);
                     $img->setMaxHeight(250);
-                    $img->setDestFile(ADHOC_ROOT_PATH . '/media/membre/' . $_SESSION['membre']->getId() . '.jpg');
+                    $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/membre/' . $_SESSION['membre']->getId() . '.jpg');
                     $img->write();
                     $img = null;
                 }
