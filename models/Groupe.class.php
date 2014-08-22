@@ -227,7 +227,7 @@ class Groupe extends ObjectModel
      */
     protected static function _getLocalPath()
     {
-        return ADHOC_ROOT_PATH . '/media/groupe';
+        return ADHOC_ROOT_PATH . '/static/media/groupe';
     }
 
     /**
@@ -363,7 +363,7 @@ class Groupe extends ObjectModel
     public function getFacebookPageUrl()
     {
         if($this->_facebook_page_id) {
-            return 'http://www.facebook.com/pages/' . $this->_alias . '/' . $this->_facebook_page_id;
+            return 'https://www.facebook.com/pages/' . $this->_alias . '/' . $this->_facebook_page_id;
         }
         return false;
     }
@@ -385,7 +385,7 @@ class Groupe extends ObjectModel
      */
     public function getTwitterUrl()
     {
-        return (string) 'http://www.twitter.com/' . $this->_twitter_id;
+        return (string) 'https://www.twitter.com/' . $this->_twitter_id;
     }
 
     /**

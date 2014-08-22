@@ -11,7 +11,7 @@ AddCharset UTF-8 .xml
 AddCharset UTF-8 .json
 AddCharset UTF-8 .css
 AddCharset UTF-8 .js
-RewriteRule ^(.*/)?\.svn/ - [F,L]
+RewriteRule ^(.*/)?\.git/ - [F,L]
 AddOutputFilterByType DEFLATE text/html text/xml application/xhtml+xml text/plain application/javascript text/css
 DirectoryIndex index.php
 Options +FollowSymlinks

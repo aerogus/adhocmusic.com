@@ -268,7 +268,7 @@ class Video extends Media
      */
     protected static function _getLocalPath()
     {
-        return ADHOC_ROOT_PATH . '/media/video';
+        return ADHOC_ROOT_PATH . '/static/media/video';
     }
 
     /**
@@ -1064,7 +1064,7 @@ class Video extends Media
         $cache = Image::getLocalCachePath($uid);
 
         if(!file_exists($cache)) {
-            $source = ADHOC_ROOT_PATH . '/media/video/' . $id . '.jpg';
+            $source = ADHOC_ROOT_PATH . '/static/media/video/' . $id . '.jpg';
             if(file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);

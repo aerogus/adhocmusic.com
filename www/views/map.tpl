@@ -25,8 +25,7 @@
       <li><a href="/assoce/presentation">Présentation</a></li>
       <li><a href="/assoce/concerts">Concerts</a></li>
       <li><a href="/assoce/equipe">Equipe</a></li>
-      <li><a href="/assoce/statuts">Statuts</a></li>
-      <li class="last"><a href="/assoce/recrutement">Recrutement</a></li>
+      <li class="last"><a href="/assoce/statuts">Statuts</a></li>
     </ul>
   </li>
   <li><a href="/groupes/">Groupes</a>
@@ -60,8 +59,6 @@
     </ul>
   </li>
   <li><a href="/forums/forum/a">Forum</a>
-  </li>
-  <li><a href="/live">Chat</a>
   </li>
   <li class="last"><a href="/contact">Contact</a>
   </li>

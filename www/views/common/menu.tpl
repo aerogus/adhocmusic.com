@@ -15,7 +15,6 @@
       <li><a href="/assoce/concerts">Concerts</a></li>
       <li><a href="/assoce/equipe">Equipe</a></li>
       <li><a href="/assoce/statuts">Statuts</a></li>
-      <li><a href="/assoce/recrutement">Recrutement</a></li>
     </ul>
   </li>
   <li {if isset($menuselected) && $menuselected == 'groupes'} class="menuselected"{/if}>
@@ -55,18 +54,6 @@
       <li><a href="/articles/locale">Revue de presse</a></li>
     </ul>
   </li>
-  <li {if isset($menuselected) && $menuselected == 'forums'} class="menuselected"{/if}>
-    <a href="/forums/forum/a" accesskey="7" title="Les forums de discussions thématiques">Forum</a>
-    <ul class="sub-menu">
-    </ul>
-  </li>
-{*
-  <li {if isset($menuselected) && $menuselected == 'chat'} class="menuselected"{/if}>
-    <a href="/live" accesskey="8" title="ON AIR" style="color: #ff0000;">ON AIR</a>
-    <ul class="sub-menu">
-    </ul>
-  </li>
-*}
   <li class="{if isset($menuselected) && $menuselected == 'contact'}menuselected {/if}last">
     <a href="/contact" accesskey="9" title="Contact">Contact</a>
     <ul class="sub-menu">

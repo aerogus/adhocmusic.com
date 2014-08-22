@@ -2,9 +2,9 @@
 
 </div>{* #main *}
 
-<ul id="footer">
+<ul id="footer" class="clearfix">
   <li>
-    <ul class="footermenu" id="footermenuwho">
+    <ul>
       <li><strong>QUI-SOMMES-NOUS?</strong></li>
       <li><a href="/assoce/presentation">L'Association</a></li>
       <li><a href="/assoce/concerts">Nos Concerts</a></li>
@@ -12,7 +12,7 @@
     </ul>
   </li>
   <li>
-    <ul class="footermenu" id="footermenuchiffres">
+    <ul>
       <li><strong>EN CHIFFRES</strong></li>
       <li><a href="/groupes/">{$global_counters.nb_groupes} groupes</a></li>
       <li><a href="/events/">{$global_counters.nb_events} concerts</a></li>
@@ -20,7 +20,7 @@
     </ul>
   </li>
   <li>
-    <ul class="footermenu" id="footermenucontact">
+    <ul>
       <li><strong>CONTACT</strong></li>
       <li><a href="/partners">Partenaires</a></li>
       <li><a href="/visuels">Visuels</a></li>
@@ -28,15 +28,11 @@
     </ul>
   </li>
   <li>
-    <ul class="footermenu" id="footermenusocial">
+    <ul>
       <li><strong>SUIVEZ NOUS</strong></li>
-      <li><form id="form-newsletter" name="form-newsletter" style="margin-top: 3px;" action="/newsletters/subscriptions" method="post">
-        <input type="email" name="email" style="background-color: #ffffff; font-size: 0.9em; width: 100px;" id="email" placeholder="Votre email" />
-        <input type="hidden" name="action" value="sub" />
-        <input id="form-newsletter-submit" name="form-newsletter-submit" type="submit" value="ok" />
-      </form></li>
-      <li style="padding-top: 5px">
-        <a href="https://twitter.com/adhocmusic" title="Suivre @adhocmusic"><img src="{#STATIC_URL#}/img/twitter-adhocmusic.gif" alt="" /></a>
+      <li>
+        <a style="display: inline-block; margin: 5px 5px 5px 0;" href="https://facebook.com/adhocmusic" title="AD'HOC Music sur Facebook"><img src="{#STATIC_URL#}/img/emails/facebook.png" width="32" height="32" alt="Facebook"></a>
+        <a style="display: inline-block; margin: 5px 5px 5px 5px;" href="https://twitter.com/adhocmusic" title="@adhocmusic sur Twitter"><img src="{#STATIC_URL#}/img/emails/twitter.png" width="32" height="32" alt="Twitter"></a>
       </li>
     </ul>
   </li>

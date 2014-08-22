@@ -4,7 +4,7 @@
 
 {include file="common/boxstart.tpl" boxtitle="Adresse"}
 <strong>Association AD'HOC</strong><br />
-<address>20, rue des Rossays<br />
+<address>8, rue de l'église<br />
 91360 Epinay sur Orge<br />
 FRANCE</address>
 {include file="common/boxend.tpl"}

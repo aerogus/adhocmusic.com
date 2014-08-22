@@ -21,8 +21,8 @@
   <h3>L'Association</h3>
   <p>
   Le site <strong>adhocmusic.com</strong> est édité par <strong>AD'HOC</strong>,
-  Association loi 1901, dont les statuts sont consultables sur <a href="http://www.adhocmusic.com/assoce/statuts">http://www.adhocmusic.com/assoce/statuts</a>.
-  Le directeur de la publication est Julie Madeira en sa qualité de présidente.
+  Association loi 1901, dont les statuts sont consultables sur <a href="/assoce/statuts">cette page</a>.
+  Le directeur de la publication est Lara Etcheverry en sa qualité de présidente.
   </p>
 </div>
 
@@ -41,7 +41,7 @@
   <p>
   Le site <strong>adhocmusic.com</strong> est déclaré à la C.N.I.L. sous le n° 838403.<br />
   Loi informatique et libertés du 6 janvier 1978.<br />
-  Pour toute rectification et accès aux données personnelles, utilisez notre <a href="http://www.adhocmusic.com/contact">formulaire de contact</a>.
+  Pour toute rectification et accès aux données personnelles, utilisez notre <a href="/contact">formulaire de contact</a>.
   </p>
 </div>
 
@@ -49,7 +49,7 @@
   <h3>Droit à l'image</h3>
   <p>
   Le site héberge des photos de manifestations publiques musicales,
-  avec capacité de marquage nominatif. <a href="http://www.adhocmusic.com/contact">Contactez nous</a> pour toute demande de mise hors ligne.
+  avec capacité de marquage nominatif. <a href="/contact">Contactez nous</a> pour toute demande de mise hors ligne.
   </p>
 </div>
 
@@ -60,8 +60,6 @@
   et propose un système de streaming. Le téléchargement des oeuvres n'est pas autorisé.
   </p>
 </div>
-
-<p><em>Mentions en cours d'écriture - Août 2011</em></p>
 
 {include file="common/boxend.tpl"}
 

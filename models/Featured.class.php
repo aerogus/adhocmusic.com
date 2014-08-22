@@ -484,7 +484,7 @@ class Featured extends ObjectModel
         $cache = Image::getLocalCachePath($uid);
 
         if(!file_exists($cache)) {
-            $source = ADHOC_ROOT_PATH . '/media/featured/' . $id . '.jpg';
+            $source = ADHOC_ROOT_PATH . '/static/media/featured/' . $id . '.jpg';
             if(file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);
