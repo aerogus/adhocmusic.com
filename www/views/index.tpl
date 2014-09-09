@@ -48,12 +48,6 @@ $(function() {
 {include file="common/boxend.tpl"}
 
 {include file="common/boxstart.tpl" boxtitle="Activité récente" width="320px; float: left; margin-left: 20px"}
-{*
-<div tyle="float: left;" class="fb-like-box" data-href="http://www.facebook.com/adhocmusic" data-width="245" data-height="340" data-show-faces="true" data-border-color="#ffffff" data-stream="false" data-header="false"></div>
-*}
-{*
-<div style="float: right;" class="fb-activity" data-site="www.adhocmusic.com" data-width="225" data-height="335" data-header="false" data-linktarget="_parent" data-border-color="#ffffff" data-recommendations="true"></div>
-*}
 <fb:activity app_id="50959607741" site="http://www.adhocmusic.com" action="Comma separated list of action of action types" width="300" height="230" header="false"></fb:activity>
 {include file="common/boxend.tpl"}
 

@@ -43,17 +43,6 @@
       <li><a href="/lieux/create">Inscrire un lieu</a></li>
     </ul>
   </li>
-  <li {if isset($menuselected) && $menuselected == 'articles'} class="menuselected"{/if}>
-    <a href="/articles/" accesskey="6" title="Des chroniques de disques, des cours de pédagogie musicale et bien d'autres">Articles</a>
-    <ul class="sub-menu">
-      <li style="padding-left: 0px;"><a href="/articles/chroniques">Chroniques d'Albums</a></li>
-      <li><a href="/articles/pedagogie">Pédagogie Musicale</a></li>
-      <li><a href="/articles/live">Live Reports</a></li>
-      <li><a href="/articles/dossiers">Dossiers</a></li>
-      <li><a href="/articles/interviews">Interviews</a></li>
-      <li><a href="/articles/locale">Revue de presse</a></li>
-    </ul>
-  </li>
   <li class="{if isset($menuselected) && $menuselected == 'contact'}menuselected {/if}last">
     <a href="/contact" accesskey="9" title="Contact">Contact</a>
     <ul class="sub-menu">

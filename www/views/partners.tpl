@@ -85,21 +85,15 @@
 <div class="parts">
 <ul>
   <li>
-    <a href="http://www.jamaleuleu.com">
-      <img src="{#STATIC_URL#}/img/partners/jamaleuleu.png" alt="" />
-      <strong>Jam à LeuLeu</strong><br/>Organisation de boeufs jazz à Leuville sur Orge
-    </a>
-  </li>
-  <li>
     <a href="http://www.ziiq.net">
       <img src="{#STATIC_URL#}/img/partners/ziiq.png" alt="" />
       <strong>CaptainZiiq</strong><br/>l'Antre du .:!CaptainZiiq!:. :: www.ziiq.net ... le meilleur c'est la Musique !
     </a>
   </li>
   <li>
-    <a href="http://www.stopzic.com">
-      <img src="{#STATIC_URL#}/img/partners/stopzic.png" alt="" />
-      <strong>StopZic</strong><br/>Le site des Compo'tes
+    <a href="http://www.reggae-promo.com">
+      <img src="{#STATIC_URL#}/img/partners/reggaepromo.png" alt="Reggae Promo" width="50" height="50" />
+      <strong>Reggae Promo</strong><br/>Promo de groupes Reggae. Actu, Concerts, Festivals, Jeux-Concours. Les nouveaux groupes de Reggae de la scène Française
     </a>
   </li>
   <li>

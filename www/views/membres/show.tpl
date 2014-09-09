@@ -68,10 +68,10 @@
   </tr>
   {/if}
 
-  {if $membre->getFacebookUid()}
+  {if $membre->getFacebookProfileId()}
   <tr>
     <td>Facebook :</td>
-    <td><a href="http://www.facebook.com/profile.php?id={$membre->getFacebookUid()}"><img src="{#STATIC_URL#}/img/facebook.gif" alt="" /></a></td>
+    <td><a href="http://www.facebook.com/profile.php?id={$membre->getFacebookProfileId()}"><img src="{#STATIC_URL#}/img/facebook.gif" alt="" /></a></td>
   </tr>
   {/if}
 

@@ -1,4 +1,3 @@
-<div class="clearfix" style="clear: both;"></div>
 
 </div>{* #main *}
 
@@ -47,7 +46,7 @@
 {/if}
 
 {* habillage custom cliquable *}
-{if !empty($habillage)}
+{if false && !empty($habillage)}
 <script>
 document.body.style.margin = "auto";
 document.body.style.cursor = "pointer";

@@ -48,18 +48,6 @@
       <li class="last"><a href="/lieux/create">Inscrire Un Lieu</a></li>
     </ul>
   </li>
-  <li><a href="/articles/">Articles</a>
-    <ul>
-      <li><a href="/articles/chroniques">Chroniques D'Albums</a></li>
-      <li><a href="/articles/pedagogie">Pédagogie Musicale</a></li>
-      <li><a href="/articles/live">Live Reports</a></li>
-      <li><a href="/articles/dossiers">Dossiers</a></li>
-      <li><a href="/articles/interviews">Interviews</a></li>
-      <li class="last"><a href="/articles/locale">Revue De Presse</a></li>
-    </ul>
-  </li>
-  <li><a href="/forums/forum/a">Forum</a>
-  </li>
   <li class="last"><a href="/contact">Contact</a>
   </li>
 </ul>

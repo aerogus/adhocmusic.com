@@ -152,6 +152,8 @@ class Controller
         // fetch page fb
         // todo: bug return false desfois ...
         if($groupe->getFacebookPageId()) {
+/*
+            try {
             $fb_page_info = $_SESSION['fb']->api('/' . $groupe->getFacebookPageId());
             if(!empty($fb_page_info) && array_key_exists('likes', $fb_page_info)) {
                 $smarty->assign('fb_page_info', $fb_page_info);
@@ -162,6 +164,10 @@ class Controller
                 $fb_page_feed['data'] = array_slice($fb_page_feed['data'], 0, 4);
                 $smarty->assign('fb_page_feed', $fb_page_feed['data']);
             }
+            } catch(Exception $e) {
+                // bug à la récupération du flux
+            }
+*/
         }
 
         // alerting

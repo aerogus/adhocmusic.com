@@ -1,8 +1,9 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
 <meta charset="utf-8">
 <title>{$title|escape}</title>
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=1;">
 <meta property="fb:app_id" content="{$fb_app_id|escape}">
 {* début open graph *}
 {if !empty($og_type)}
@@ -103,12 +104,6 @@ _gaq.push(['_trackPageview']);
 
 <body id="adhocmusic_com">
 
-{if !empty($show_mobile_link)}
-<div style="padding: 20px; background: #000; font-size: 36px;"><a style="color: #ffffff;" href="http://m.adhocmusic.com">Cliquez ici pour accéder à la version mobile</a></div>
-{/if}
-
-<noscript><div style="padding: 10px; background: #000; color: #fff;">Ce site nécessite JavaScript pour fonctionner correctement. Merci d'activer JavaScript dans votre navigateur</div></noscript>
-
 <div id="fb-root"></div>
 <div id="fb-access-token"></div>
 
@@ -192,7 +187,7 @@ $(function() {
 <div id="header" class="clearfix">
   <a id="logo" href="/" title="Cliquez pour revenir à l'accueil"><span>AD'HOC</span></a>
   <div id="megabanner">
-    <a href="http://www.adhocmusic.com/events/show/6465"><img src="http://static.adhocmusic.com/img/megabanner/empty.png" alt="" width="728" height="90"/></a>
+    <a href="http://www.adhocmusic.com/events/show/6621"><img src="http://static.adhocmusic.com/img/megabanner/empty.png" alt="" width="728" height="90"/></a>
   </div>
 </div>
 
