@@ -50,11 +50,17 @@ table {
  * general
  **************/
 body {
-    background: #a0a0a0;
+    background: #ececec;
     font-family: Arial;
     font-size: 12px;
     line-height: 1.2em;
     color: #333;
+}
+.nojs {
+    text-align: center;
+    padding: 10px;
+    background: #000;
+    color: #fff;
 }
 .clearfix {
     clear: both;
@@ -69,15 +75,13 @@ body {
     visibility: hidden;
 }
 #conteneur {
-    position: relative;
     width: 1000px;
-    margin: 20px auto;
+    margin: 0 auto;
 }
 #header {
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
-#main 
-{
+#main {
     margin-top: 20px;
     position: relative;
 }
@@ -158,7 +162,6 @@ strong {
  **************/
 #footer {
     background: #333;
-    margin: 0;
 }
 #footer > li strong {
     display: block;
@@ -268,9 +271,6 @@ strong {
 }
 .mbrlogout {
     background-image: url({#STATIC_URL#}/img/icones/logout.png);
-}
-.mbrarticles {
-    background-image: url({#STATIC_URL#}/img/icones/article.png);
 }
 #form-login #login-pseudo {
     padding-left: 10px;
@@ -421,13 +421,9 @@ h6 {
 /**************
  * liens
  **************/
-a, a:link, a:visited, a:active {
+a, a:link, a:visited, a:active, a:hover {
     color: #000;
     text-decoration: none;
-}
-a:hover {
-    color: #000;
-    text-decoration: underline;
 }
 a.extlink {
     padding-left: 16px;
@@ -982,7 +978,6 @@ ul.sub-menu > li > a {
     font: bold 1.1em Arial;
     color: #fff;
     padding: 5px;
-    text-shadow: 1px 1px 1px #000;
     height: 20px;
     display: block;
 }
@@ -1841,3 +1836,25 @@ div.likeboxwrap iframe {
     border: 1px solid #000;
     text-align: right;
 }
+@media screen and (max-width: 1000px) {
+    #conteneur {
+        width: 100%;
+    }
+    #megabanner {
+        display: none;
+    }
+    #menu_haut > li > a {
+        font-size: 12px;
+    }
+    #left-center {
+        width: 100%;
+    }
+    #right {
+        width: 100%;
+    }
+    #footer > li {
+        float: none;
+        display: inline;
+    }
+}
+

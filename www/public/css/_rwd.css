@@ -1,0 +1,22 @@
+@media screen and (max-width: 1000px) {
+    #conteneur {
+        width: 100%;
+    }
+    #megabanner {
+        display: none;
+    }
+    #menu_haut > li > a {
+        font-size: 12px;
+    }
+    #left-center {
+        width: 100%;
+    }
+    #right {
+        width: 100%;
+    }
+    #footer > li {
+        float: none;
+        display: inline;
+    }
+}
+

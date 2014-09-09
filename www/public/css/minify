@@ -23,6 +23,7 @@ $csss = array(
     'pagination',
     'facebook',
     'debug',
+    'rwd', // Responsive Web Design
 );
 
 $out  = 'adhoc.css';
@@ -35,7 +36,7 @@ $cntm = '';
 
 foreach($csss as $css)
 {
-    $in   = $css . '.css';
+    $in   = '_' . $css . '.css';
     echo "Ajout " . $in . " ";
 
     $file  = file_get_contents(dirname(__FILE__) . '/' . $in);
