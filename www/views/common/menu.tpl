@@ -34,6 +34,9 @@
   <li {if isset($menuselected) && $menuselected == 'media'} class="menuselected"{/if}>
     <a href="/media/">Média</a>
     <ul class="sub-menu">
+      <li style="padding-left: 240px;"><a href="/audios/create">Ajouter un son</a></li>
+      <li><a href="/photos/create">Ajouter une photo</a></li>
+      <li><a href="/videos/create">Ajouter une vidéo</a></li>
     </ul>
   </li>
   <li {if isset($menuselected) && $menuselected == 'lieux'} class="menuselected"{/if}>

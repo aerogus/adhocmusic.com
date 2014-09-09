@@ -572,10 +572,7 @@ fieldset ol li {
     width: 185px;
     margin: 5px;
     padding: 10px;
-    background: #ececec;
-    box-shadow: 3px 3px 5px #999999;
-    -moz-box-shadow: 3px 3px 5px #999999;
-    -webkit-box-shadow: 3px 3px 5px #999999;
+    background: #fff;
 }
 .registerblock h3 {
     color: #fff;

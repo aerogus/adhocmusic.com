@@ -320,7 +320,6 @@
 1|photos|delete|GET|/photos/delete/:id
 1|photos|delete|POST|/photos/delete
 1|photos|from_iphone|POST|/photos/from-iphone
-1|rss|news|GET|/rss/news
 1|search|search|GET|/search/
 1|search|search|POST|/search
 1|search|index|GET|/search/:query
