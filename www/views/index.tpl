@@ -48,7 +48,7 @@ $(function() {
 {include file="common/boxend.tpl"}
 
 {include file="common/boxstart.tpl" boxtitle="Activité récente" width="320px; float: left; margin-left: 20px"}
-<fb:activity app_id="50959607741" site="http://www.adhocmusic.com" action="Comma separated list of action of action types" width="300" height="230" header="false"></fb:activity>
+<div class="fb-activity" data-app-id="50959607741" data-site="adhocmusic.com" data-action="likes, recommends" data-width="300" data-height="230" data-colorscheme="light" data-header="false"></div>
 {include file="common/boxend.tpl"}
 
 </div>

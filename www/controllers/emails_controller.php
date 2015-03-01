@@ -13,7 +13,7 @@ class Controller
             return 'newsletter introuvable';
         }
 
-        // je sais ...
+        // oui je sais ...
         // @see EmailSmarty::modifier_link
         global $newsletter_id_newsletter;
                $newsletter_id_newsletter = $newsletter->getId();

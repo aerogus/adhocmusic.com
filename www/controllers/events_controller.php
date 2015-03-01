@@ -60,7 +60,6 @@ class Controller
 
         $smarty->assign('title', "Agenda Concerts");
         $smarty->assign('description', "Agenda Concert");
-        $smarty->assign('keywords', "agenda, concerts, date, evenement, essonne, scene");
 
         // sous forme de tableau et d'objet ...
         $smarty->assign('_events', $_events);
@@ -118,7 +117,6 @@ class Controller
 
         $smarty->assign('title', "♫ ". $event->getName());
         $smarty->assign('description', "Date : " . Date::mysql_datetime($event->getDate(), 'd/m/Y') . " | Lieu : " . $lieu->getName() . " " . $lieu->getAddress() . " " . $lieu->getCp() . " " . $lieu->getCity());
-        $smarty->assign('keywords', "agenda, concerts, date, evenement, essonne, scene");
 
         // alerting
         if(Tools::isAuth()) {

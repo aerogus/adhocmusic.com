@@ -17,7 +17,6 @@ class Controller
 
         $smarty->assign('title', "♫ Résultat de la recherche : " . stripslashes($q));
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
 
         $smarty->assign('menuselected', 'search');
 

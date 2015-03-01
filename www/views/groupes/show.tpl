@@ -93,12 +93,17 @@
 
 {if $videos|@count > 0}
 {include file="common/boxstart.tpl" boxtitle="Vidéos"}
+<div class="clearfix">
 {foreach from=$videos item=video}
 <div class="thumb-80">
   <a href="{$video.url}" title="{$video.name|escape}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}" />{$video.name|truncate:15:"...":true:true|escape}</a>
   <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}"></a>
 </div>
 {/foreach}
+</div>
+{if !empty($is_loggued)}
+<a href="/videos/create?id_groupe={$groupe->getId()}">Ajouter une vidéo</a>
+{/if}
 {include file="common/boxend.tpl"}
 {/if}
 
@@ -136,12 +141,17 @@
 
 {if $photos|@count > 0}
 {include file="common/boxstart.tpl" boxtitle="Photos"}
+  <div class="clearfix">
   {foreach from=$photos item=photo}
   <div class="thumb-80">
     <a href="{$photo.url}" title="{$photo.name|escape}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}" />{$photo.name|truncate:15:"...":true:true|escape}</a>
     <a class="overlay-80 overlay-photo-80" href="{$photo.url}" title="{$photo.name|escape}"></a>
   </div>
   {/foreach}
+  </div>
+  {if !empty($is_loggued)}
+  <a href="/photos/create?id_groupe={$groupe->getId()}">Ajouter une photo</a>
+  {/if}
 {include file="common/boxend.tpl"}
 {/if}
 
@@ -155,16 +165,20 @@
 {include file="common/boxend.tpl"}
 {/if}
 
-{if $p_events|@count > 0}
 {include file="common/boxstart.tpl" boxtitle="Concerts passés"}
+{if $p_events|@count > 0}
 <ul>
   {foreach from=$p_events item=event}
   <li><a href="/events/show/{$event.id|escape}">{$event.date|date_format:'%d/%m/%Y %H:%M'} - {$event.lieu_name|escape}</a></li>
   {/foreach}
 </ul>
-{include file="common/boxend.tpl"}
+{else}
+<p>Aucun concert passé</p>
 {/if}
-
+{if !empty($is_loggued)}
+  <a href="/events/create?id_groupe={$groupe->getId()}">Saisir une date passée</a>
+{/if}
+{include file="common/boxend.tpl"}
 
 {if $groupe->getFacebookPageId()}
 {include file="common/boxstart.tpl" boxtitle="{$groupe->getName()} sur Facebook"}

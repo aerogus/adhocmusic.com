@@ -78,7 +78,6 @@ class Controller
             $smarty->assign('from', $from);
             $smarty->assign('title', "♫ " . $video->getName());
             $smarty->assign('description', $video->getName());
-            $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
             $smarty->assign('og_image', STATIC_URL . '/media/video/' . $video->getId() . '.jpg');
             $smarty->assign('og_type', 'video.movie');
 

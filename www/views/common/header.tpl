@@ -9,7 +9,7 @@
 {if !empty($og_type)}
 <meta property="og:type" content="{$og_type|escape}">
 {else}
-<meta property="og:type" content="article" />
+<meta property="og:type" content="article">
 {/if}
 {if $og_type != 'video.movie' && $og_type != 'website'}
 <meta property="fb:page_id" content="161908907197840">
@@ -38,7 +38,6 @@
 
 {if !empty($og_image)}
 <meta property="og:image" content="{$og_image}">
-<link rel="image_src" href="{$og_image}">
 {/if}
 
 {* fin open graph *}
@@ -48,16 +47,12 @@
 <link rel="apple-touch-icon" href="{#STATIC_URL#}/apple-touch-icon.png">
 <meta name="robots" content="index,follow">
 <meta name="description" content="{if empty($description)}Portail de référence sur les musiques actuelles en Essonne, Agenda culturel géolocalisé, Vidéos de concerts, promotion d'artistes ...{else}{$description|escape}{/if}">
-<meta name="keywords" lang="fr" content="adhoc,music,live,essonne,epinay,sur,orge,musique,zik,concert,rock,reggae,fusion,metal,musique,actuelle,smac,milieu,associatif,association,cours,de,pédagogie,musicale,petites,annonces,communauté,artistique,échange,interviews,chroniques,multimédia,mp3,real,streaming">
 <link rel="stylesheet" href="/css/adhoc.min.css">
 {if !empty($css_jquery_ui)}
 <link rel="stylesheet" href="{#STATIC_URL#}/css/adhoc/jquery-ui-1.8.2.custom.css">
 {/if}
-{if #DEBUG_MODE_BY_IP#}
-<script src="/js/adhoc.js"></script>
-{else}
-<script src="{#STATIC_URL#}/js/adhoc.min.js"></script>
-{/if}
+<script src="/js/jquery-2.1.3.min.js"></script>
+<script src="/js/adhoc.min.js"></script>
 {if !empty($js_jquery_tools)}
 <script src="{#STATIC_URL#}/js/jquery.tools.min.js"></script>
 {/if}
@@ -102,15 +97,19 @@ _gaq.push(['_trackPageview']);
 </script>
 </head>
 
-<body id="adhocmusic_com">
+<body>
 
 <div id="fb-root"></div>
-<div id="fb-access-token"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=50959607741&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <script>
 $(function() {
-  window.fbAsyncInit = function() {
-    FB.init({ appId: '{$fb_app_id|escape}', status: true, cookie: true, oauth: true, xfbml: true });
 
     FB.getLoginStatus(function(response) {
       if (response.authResponse) {
@@ -146,13 +145,6 @@ $(function() {
     });
   });
 
-  (function(d) {
-    var js, id = 'facebook-jssdk'; if (d.getElementById(id)) { return; }
-    js = d.createElement('script'); js.id = id; js.async = true;
-    js.src = "//connect.facebook.net/fr_FR/all.js";
-    d.getElementsByTagName('head')[0].appendChild(js);
-  } (document));
-
   window.___gcfg = { lang: 'fr' };
 
   (function() {
@@ -187,7 +179,7 @@ $(function() {
 <div id="header" class="clearfix">
   <a id="logo" href="/" title="Cliquez pour revenir à l'accueil"><span>AD'HOC</span></a>
   <div id="megabanner">
-    <a href="http://www.adhocmusic.com/events/show/6621"><img src="http://static.adhocmusic.com/img/megabanner/empty.png" alt="" width="728" height="90"/></a>
+    <a href="http://www.adhocmusic.com/events/show/6621"><img src="http://static.adhocmusic.com/img/megabanner/empty.png" alt="" width="728" height="90"></a>
   </div>
 </div>
 

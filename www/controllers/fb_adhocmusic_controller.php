@@ -701,7 +701,6 @@ class Controller
         $smarty->assign('menuselected', 'concours');
         $smarty->assign('title', $concours->getTitle());
         $smarty->assign('description', "Jeux Concours - CDs et Places de Concerts à Gagner !");
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
         $smarty->assign('concours', $concours);
         $smarty->assign('member', $member);
         return $smarty->fetch('fb/adhocmusic/tab/concours/show.tpl');
@@ -721,7 +720,6 @@ class Controller
         $smarty->assign('menuselected', 'concours');
         $smarty->assign('title', $concours->getTitle());
         $smarty->assign('description', "Jeux Concours - CDs et Places de Concerts à Gagner !");
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
         $smarty->assign('concours', $concours);
         $smarty->assign('show_form', true);
 

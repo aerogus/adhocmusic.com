@@ -14,7 +14,6 @@ class Controller
 
         $smarty->assign('title', "♫ AD'HOC Music : Le Mag");
         $smarty->assign('description', "Articles sur la pédagogie musicale, chroniques de concerts, d'albums, technique du son ...");
-        $smarty->assign('keywords', "musique, technique, home studio, autoproduction, musicien, protools");
 
         $smarty->assign('menuselected', 'articles');
 
@@ -110,7 +109,6 @@ class Controller
 
         $smarty->assign('title', "♫ AD'HOC Music : Le Mag");
         $smarty->assign('description', "Articles sur la pédagogie musicale, chroniques de concerts, d'albums, technique du son ...");
-        $smarty->assign('keywords', "musique, technique, home studio, autoproduction, musicien, protools");
 
         $smarty->assign('menuselected', 'articles');
 
@@ -160,7 +158,6 @@ class Controller
 
         $smarty->assign('title', $article->getTitle());
         $smarty->assign('description', $article->getIntro());
-        $smarty->assign('keywords', "musique, technique, home studio, autoproduction, musicien, protools");
         $smarty->assign('og_type', 'article');
         if($article->getImage()) {
             $smarty->assign('og_image', $article->getImage());

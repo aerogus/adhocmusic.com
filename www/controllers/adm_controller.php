@@ -7,7 +7,7 @@ define('ADM_NB_MEMBERS_PER_PAGE', 25);
 
 define('ADM_NB_GROUPES_PER_PAGE', 1000);
 
-define('ADM_NEWSLETTER_CURRENT_ID', 43);
+define('ADM_NEWSLETTER_CURRENT_ID', 62);
 define('ADM_NEWSLETTER_NB_EMAILS_PER_LOT', 400);
 define('ADM_NEWSLETTER_GROUPE_CURRENT_ID', 37);
 
@@ -24,7 +24,6 @@ class Controller
 
         $smarty->assign('title', "AD'HOC : Administration du site");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé");
@@ -394,10 +393,12 @@ class Controller
         );
 
         $newsletter = Newsletter::init();
+        $newsletter->save();
+
         $newsletter->setTitle($data['title']);
         $newsletter->setContent($data['content']);
         $newsletter->save();
-
+ 
         Tools::redirect('/adm/newsletter/?create=1');
     }
 
@@ -883,7 +884,6 @@ class Controller
 
         $smarty->assign('title', "AD'HOC : Administration du site");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
 
         $modules = array(
             '1' => "Inscriptions membres par mois",
@@ -966,7 +966,6 @@ class Controller
 
         $smarty->assign('title', "AD'HOC : Administration du site");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
 
         // liste des groupes ayant le plus joué à Epinay
         $sql = "SELECT `g`.`id_groupe`, `g`.`name` AS `nom_groupe`, "
@@ -1032,7 +1031,6 @@ class Controller
 
         $smarty->assign('title', "AD'HOC : Administration du site");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
 
         // listes des membres ayant le plus joué à Epinay
         $sql = "SELECT `m`.`id_contact`, `m`.`last_name`, `m`.`first_name`, "
@@ -1102,7 +1100,7 @@ class Controller
         }
         $smarty->assign('full', $full);
 
-        $lastsend = '2014-05-11 19:00:00';
+        $lastsend = '2014-09-24 12:00:00';
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");

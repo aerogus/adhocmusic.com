@@ -15,7 +15,7 @@ AddType image/x-icon                   ico
 # specifique
 RewriteEngine On 
 RewriteBase /
-RewriteRule ^(.*/)?\.svn/ - [F,L]
+RewriteRule ^(.*/)?\.git/ - [F,L]
 
 RewriteCond %{HTTP_HOST} !^www.adhocmusic.com$ [NC]
 RewriteCond %{HTTP_HOST} !^www.adhocmusic.local$ [NC]

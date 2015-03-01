@@ -20,7 +20,7 @@
   <li class="mbrphotos"><a href="/photos/my">Mes Photos</a></li>
   <li class="mbraudios"><a href="/audios/my">Mes Musiques</a></li>
   <li class="mbrvideos"><a href="/videos/my">Mes Vidéos</a></li>
-  {if true || $me->isRedacteur()}
+  {if false || $me->isRedacteur()}
   <li class="mbrarticles"><a href="/articles/my">Mes Articles</a></li>
   {/if}
   {if $me->isInterne()}

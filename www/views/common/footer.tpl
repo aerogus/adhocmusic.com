@@ -39,44 +39,7 @@
 
 </div>{* ? *}
 
-<a id="up" href="#" title="haut de la page"><img src="{#STATIC_URL#}/img/icones/up.png" alt="" /></a>
-
-{if !empty($prehome)}
-{include file="prehome.tpl"}
-{/if}
-
-{* habillage custom cliquable *}
-{if false && !empty($habillage)}
-<script>
-document.body.style.margin = "auto";
-document.body.style.cursor = "pointer";
-//document.body.style.background = "url(http://static.adhocmusic.com/img/backgrounds/adhoc-2014-05.jpg) no-repeat top center";
-document.body.style.backgroundColor = "#ececec";
-document.body.style.backgroundAttachment = "scroll"; // scroll ou fixed
-
-habillageClick = function(e) {
-  var t;
-  if (!e) {
-    var e = window.event;
-  }
-  if (e.target) {
-    t = e.target;
-  } else if (e.srcElement) {
-    t = e.srcElement;
-  }
-  if (t.nodeType == 3) {
-    t = t.parentNode;
-  }
-  if (t.tagName == 'BODY' || t.tagName == 'HTML') {
-    window.location.href = 'http://www.adhocmusic.com/events/show/6465'; {* même fenêtre *}
-    //window.open('http://www.adhocmusic.com/events/show/6465'); {* nouvelle fenêtre *}
-  }  else {
-    return;
-  }
-}
-document.onclick = habillageClick;
-</script>
-{/if}
+<a id="up" href="#" title="haut de la page"><img src="{#STATIC_URL#}/img/icones/up.png" alt=""></a>
 
 </body>
 

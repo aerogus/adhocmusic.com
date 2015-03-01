@@ -17,7 +17,6 @@ class Controller
 
         $smarty->assign('title', "♫ Les groupes de la communauté musicale AD'HOC");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
 
         $smarty->assign('menuselected', 'groupes');
 
@@ -54,7 +53,6 @@ class Controller
 
         $smarty->assign('title', "AD'HOC Music : Les Musiques actuelles en Essonne");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
 
         $trail = Trail::getInstance();
         $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
@@ -89,7 +87,6 @@ class Controller
 
         $smarty->assign('title', "♫ ".$groupe->getName()." (".$groupe->getStyle().")");
         $smarty->assign('description', Tools::tronc($groupe->getMiniText(), 175));
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay,".$groupe->getName().",".$groupe->getStyle());
         $smarty->assign('og_type', 'band');
 
         $smarty->assign('menuselected', 'groupes');

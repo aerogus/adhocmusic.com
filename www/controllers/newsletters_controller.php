@@ -30,6 +30,13 @@ class Controller
             return $smarty->fetch('newsletters/show.tpl');
         }
 
+        // oui je sais ...
+        // @see EmailSmarty::modifier_link
+        global $newsletter_id_newsletter;
+               $newsletter_id_newsletter = $newsletter->getId();
+        global $newsletter_id_contact;
+               $newsletter_id_contact = 0;
+
         $smarty->assign('title', $newsletter->getTitle());
         $smarty->assign('description', substr(strip_tags($newsletter->getBodyHtml()), 0, 500));
         $smarty->assign('og_image', 'http://cache.adhocmusic.com/img/c/9/3/c938aee4553db039b3b6a8ca203f01a3.jpg'); // 5 nov.

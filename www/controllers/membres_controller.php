@@ -26,7 +26,6 @@ class Controller
 
         $smarty->assign('title', "♫ Profil de " . $membre->getPseudo());
         $smarty->assign('description', "♫ Profil de " . $membre->getPseudo());
-        $smarty->assign('keywords', "♫ Profil de " . $membre->getPseudo());
 
         $smarty->assign('groupes', $membre->getGroupes());
 
@@ -53,7 +52,6 @@ class Controller
 
         $smarty->assign('title', "Inscription à l'association AD'HOC");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
 
         $smarty->assign('menuselected', 'membres');
 

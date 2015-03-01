@@ -63,7 +63,6 @@ class Controller
             
             $smarty->assign('photo', $photo);
             $smarty->assign('from', $from);
-            $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
             $smarty->assign('og_image', $photo->getThumb130Url());
             $smarty->assign('has_credits', (bool) $photo->getCredits());
 

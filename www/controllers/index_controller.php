@@ -8,11 +8,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        //$smarty->assign('prehome', true);
-
         $smarty->assign('title', "♫ AD'HOC : les Musiques Actuelles en Essonne");
         $smarty->assign('description', "Portail de référence sur les musiques actuelles en Essonne, Agenda culturel géolocalisé, Vidéos de concerts, promotion d'artistes ...");
-        $smarty->assign('keywords', "adhoc,music,live,essonne,epinay,sur,orge,musique,zik,concert,rock,reggae,fusion,metal,musique,actuelle,smac,milieu,associatif,association,cours,de,pédagogie,musicale,petites,annonces,communauté,artistique,échange,interviews,chroniques,multimédia,mp3,real,streaming");
         $smarty->assign('og_type', 'website');
         $smarty->assign('og_image', STATIC_URL . '/img/screenshot-homepage.jpg');
 
@@ -24,15 +21,7 @@ class Controller
             'lieu'   => 1,
             'limit'  => 6,
         )));
-/*
-        $comments = Comment::getComments(array(
-            'sort' => 'id',
-            'sens' => 'DESC',
-            'debut' => 0,
-            'limit' => 3,
-        ));
-        $smarty->assign('comments', $comments);
-*/
+
         $smarty->assign('featured', Featured::getFeaturedHomepage());
 
         $events = Event::getEvents(array(
@@ -108,7 +97,6 @@ class Controller
 
         $smarty->assign('title', "♫ Les Partenaires de l'association AD'HOC / Devenir Partenaire");
         $smarty->assign('description', "Les Partenaires de l'Association AD'HOC");
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
 
         $smarty->assign('menuselected', 'home');
 
@@ -124,7 +112,6 @@ class Controller
 
         $smarty->assign('title', "♫ Les Visuels de l'association AD'HOC");
         $smarty->assign('description', "Les visuels d'AD'HOC");
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay");
 
         $smarty->assign('menuselected', 'home');
 
@@ -145,7 +132,6 @@ class Controller
 
         $smarty->assign('title', "Contacter l'Association AD'HOC");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ..");
-        $smarty->assign('keywords', "musique, essonne, epinay sur orge, epinay,journal officiel, association, cnil, déclaratioi");
 
         $smarty->assign('faq', FAQ::getFAQs());
 
@@ -336,7 +322,7 @@ class Controller
 
     public static function r()
     {
-        $url = (string) Route::params('url');
+        $url = urldecode((string) Route::params('url'));
         list($url, $from) = explode('||', $url);
         $from = Tools::base64_url_decode($from);
         $url = Tools::base64_url_decode($url);
@@ -344,17 +330,5 @@ class Controller
         Newsletter::addHit($id_newsletter, $id_contact, $url);
         // todo: track le hit
         Tools::redirect($url);
-    }
-
-    public static function paypal()
-    {
-        $db = DataBase::getInstance();
-
-        $smarty = new AdHocSmarty();
-
-        $trail = Trail::getInstance();
-        $trail->addStep("Test PAYPAL");
-
-        return $smarty->fetch('paypal.tpl');
     }
 }

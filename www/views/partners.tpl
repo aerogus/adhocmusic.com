@@ -26,6 +26,12 @@
 <div class="parts">
 <ul>
   <li>
+    <a href="http://www.ouifm.fr">
+      <img src="{#STATIC_URL#}/img/partners/ouifm.png" alt="" />
+      <strong>OÜI FM</strong><br/>La Radio Rock Pop Soul
+    </a>
+  </li>
+  <li>
     <a href="http://www.localzique.com">
       <img src="{#STATIC_URL#}/img/partners/localzique.png" alt="" />
       <strong>Local'Zique</strong><br/>Association Musicale de Saulx les Chartreux
