@@ -5,13 +5,6 @@
 1|adm|index|GET|/adm/
 1|adm|billing|GET|/adm/billing
 1|adm|domains|GET|/adm/domains
-1|adm|exposants_index|GET|/adm/exposants/
-1|adm|exposants_create|GET|/adm/exposants/create
-1|adm|exposants_create|POST|/adm/exposants/create
-1|adm|exposants_edit|GET|/adm/exposants/edit/:id
-1|adm|exposants_edit|POST|/adm/exposants/edit
-1|adm|exposants_delete|GET|/adm/exposants/delete/:id
-1|adm|exposants_delete|POST|/adm/exposants/delete
 1|adm|news_index|GET|/adm/news/
 1|adm|news_create|GET|/adm/news/create
 1|adm|news_create|POST|/adm/news/create
@@ -149,8 +142,6 @@
 1|emails|log_action|GET|/emails/log-action
 1|emails|newsletter|GET|/emails/newsletter/:id
 1|emails|newsletter|GET|/newsletters/show/:id
-1|exposants|index|GET|/exposants/
-1|exposants|show|GET|/exposants/show/:id
 1|events|index|GET|/events/
 1|events|index|GET|/agenda/
 1|events|fetch|GET|/events/fetch

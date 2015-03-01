@@ -14,7 +14,6 @@
   <li><a href="/">Accueil</a>
     <ul>
       <li><a href="/map">Plan du Site</a></li>
-      <li><a href="/mobile">Site Mobile</a></li>
       <li><a href="/mentions-legales">Mentions Légales</a></li>
       <li><a href="/partners">Partenaires</a></li>
       <li class="last"><a href="/visuels">Visuels</a></li>
