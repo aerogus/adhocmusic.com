@@ -260,7 +260,6 @@
 1|index|mentions_legales|GET|/mentions-legales
 1|index|cms|GET|/cms/:id
 1|index|r|GET|/r/:url
-1|index|paypal|GET|/paypal
 1|js|adhoc|GET|/js/adhoc
 1|lieux|index|GET|/lieux/
 1|lieux|show|GET|/lieux/show/:id
@@ -298,11 +297,6 @@
 1|newsletters|index|GET|/newsletters/
 1|newsletters|subscriptions|GET|/newsletters/subscriptions
 1|newsletters|subscriptions|POST|/newsletters/subscriptions
-1|ovh|mailingListList|GET|/adm/ovh/mailingListList
-1|ovh|mailingListInfo|GET|/adm/ovh/mailingListInfo
-1|ovh|mailingListSubscriberList|GET|/adm/ovh/mailingListSubscriberList
-1|ovh|mailingListSubscriberAdd|GET|/adm/ovh/mailingListSubscriberAdd
-1|ovh|mailingListSubscriberDel|GET|/adm/ovh/mailingListSubscriberDel
 1|photos|show|GET|/photos/show/:id
 1|photos|my|GET|/photos/my
 1|photos|create|GET|/photos/create

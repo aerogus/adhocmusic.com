@@ -21,11 +21,12 @@ class EmailSmarty extends Smarty
      */
     public static function modifier_link($url)
     {
-        // oui je sais ...
+        // oui je sais pour les global ...
         // @see Controller::email::newsletter
         global $newsletter_id_newsletter;
         global $newsletter_id_contact;
         $orig = $newsletter_id_newsletter . '|' . $newsletter_id_contact;
+        //return $url; // en attendant que ça remarche
         return 'http://www.adhocmusic.com/r/' . Tools::base64_url_encode($url) . '||' . Tools::base64_url_encode($orig);
     }
 

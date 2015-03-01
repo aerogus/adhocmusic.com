@@ -4,7 +4,7 @@
 // envoi d'une newsletter
 
 // n° de newsletter à traiter
-define('ID_NEWSLETTER', 59);
+define('ID_NEWSLETTER', 62);
 
 require_once dirname(__FILE__) . '/common-cli.inc.php';
 
@@ -21,10 +21,10 @@ $subs = array(
     // array('id_contact' => 3, 'email' => 'newsletter@adhocmusic.com', 'pseudo' => 'test', 'lastnl' => ''),
 );
 
-/*
+
 // base de prod
-$subs = Newsletter::getSubscribers();
-*/
+//$subs = Newsletter::getSubscribers();
+
 
 echo "Trouvé : " . count($subs) . " emails\n";
 
@@ -42,7 +42,7 @@ foreach($subs as $sub)
 
     Email::send(
         $sub['email'],
-        "Le Fet'Estival revient Samedi 28 Juin à Villemoisson-sur-Orge",
+        "Plateau métal à Igny Samedi 10 janvier",
         'newsletter-' . $newsletter->getId(),
         array(
             'id'            => $newsletter->getId(),

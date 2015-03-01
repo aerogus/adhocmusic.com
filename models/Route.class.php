@@ -297,6 +297,7 @@ class Route
         self::$action_params = array_merge(self::$action_params, $_POST);
 
         if(ROUTE_MANAGE_FILES === true) {
+           //var_dump($_FILES);
             foreach ($_FILES as $param_name => $file) {
                 if($file['tmp_name']) {
                     self::$action_params[$param_name] = file_get_contents($file['tmp_name']);
