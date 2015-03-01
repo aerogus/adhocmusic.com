@@ -128,11 +128,6 @@
 1|comments|delete|GET|/comments/delete/:id
 1|comments|delete|POST|/comments/delete
 1|comments|ajax_delete|POST|/comments/ajax-delete
-1|concours|index|GET|/concours/
-1|concours|show|GET|/concours/show/:id
-1|concours|play|GET|/concours/play/:id
-1|concours|play|POST|/concours/play
-1|concours|results|GET|/concours/results/:id
 1|dynimg|logo_adhoc|GET|/dynimg/logo_adhoc/:hash
 1|dynimg|mailing_banner|GET|/dynimg/mailing-banner/:hash
 1|dynimg|photo|GET|/dynimg/photo/:id/:width/:height/:bgcolor/:border/:zoom
