@@ -28,9 +28,9 @@ if(ENV === 'PROD') {
     //define('SERVER_ROOT_PATH',      '/Users/gus/Documents/workspace/adhoc/trunk');
     define('SERVER_ROOT_PATH',      'c:/Users/gseznec/workspace/adhoc/trunk');
     define('ADHOC_ROOT_PATH',       SERVER_ROOT_PATH);
-    define('DYN_URL',               'http://www.adhocmusic.local');
-    define('STATIC_URL',            'http://static.adhocmusic.local');
-    define('CACHE_URL',             'http://cache.adhocmusic.local');
+    define('DYN_URL',               'http://www.adhocmusic.localhost');
+    define('STATIC_URL',            'http://static.adhocmusic.localhost');
+    define('CACHE_URL',             'http://cache.adhocmusic.localhost');
 }
 
 define('COMMON_LIB_PATH',           ADHOC_ROOT_PATH . '/lib');

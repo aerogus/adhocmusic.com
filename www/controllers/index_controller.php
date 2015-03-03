@@ -269,13 +269,6 @@ class Controller
             'limit'  => false,
         )));
 
-        $smarty->assign('articles', Article::getArticles(array(
-            'sort'   => 'id',
-            'sens'   => 'ASC',
-            'online' => true,
-            'limit'  => false,
-        )));
-
         return $smarty->fetch('sitemap.tpl');
     }
 

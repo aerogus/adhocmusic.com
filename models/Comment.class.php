@@ -8,7 +8,7 @@
  * Classe Comment
  *
  * Permet de générer un commentaire générique sur n'importe quelle entités
- * Video, Audio, Photo, Article, Lieu, Event, Groupe, Membre
+ * Video, Audio, Photo, Lieu, Event, Groupe, Membre
  *
  * @package adhoc
  * @author Guillaume Seznec <guillaume.seznec@gmail.com>
@@ -114,7 +114,6 @@ class Comment extends ObjectModel
         'l' => 'lieux',
         'p' => 'photos',
         'v' => 'videos',
-        'a' => 'articles',
         's' => 'audios',
         'e' => 'events',
         'g' => 'groupes',
@@ -527,16 +526,6 @@ class Comment extends ObjectModel
 
         switch($this->getType())
         {
-            case 'a': // article
-                // -> créateur article
-                $article = Article::getInstance($this->getIdContent());
-                $subject .= " sur l'article " . $article->getTitle();
-                $title = $article->getTitle();
-                $url = $article->getUrl();
-                $membre = Membre::getInstance($article->getIdContact());
-                $emails[] = $membre->getEmail();
-                break;
-
             case 's': // audio
                 // -> uploadeur de l'audio
                 $audio = Audio::getInstance($this->getIdContent());

@@ -1407,7 +1407,7 @@ p {
 }
 div.event {
     background: #ececec;
-    border: 1px solid #666;
+    border: 1px solid #cecece;
     margin-bottom: 20px;
 }
 div.event div.event_header {
@@ -1437,7 +1437,7 @@ div.event span.event_title a {
 div.event div.event_content {
     padding: 0px;
     margin-left: 200px;
-    border-left: 1px solid #999999;
+    border-left: 1px solid #cecece;
     margin-bottom: 0px;
 }
 div.event div.event_body {
@@ -1544,40 +1544,6 @@ span.event_media_audio {
     color: #fff;
 }
 /**************
- * blog
- **************/
-.blogarticle {
-    background-color: #333;
-    width: 60%;
-    margin: 10px auto;
-    padding: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border: 1px solid #666;
-}
-.blogarticle .blogtitre {
-    background-color: #bb0000;
-    background-image: -moz-linear-gradient(top, #ff0000, #660000);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ff0000), color-stop(1, #660000));
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ff0000', EndColorStr='#660000')";
-    padding: 3px 3px 3px 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-}
-.blogarticle .blogcontent {
-    margin: 15px;
-}
-.blogcommentaire {
-    background-color: #666;
-    width: 50%;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    position: relative;
-    left: 50%;
-    margin-left: -25%;
-    padding: 10px;
-}
-/**************
  * newsletter
  **************/
 #newsletter {
@@ -1614,68 +1580,6 @@ span.event_media_audio {
 #newsletter table tr td table tr td {
     padding: 15px;
     text-align: center;
-}
-/* article show */
-
-.art {
-    font-family: Arial;
-    font-size: 1.15em;
-    color: #333;
-    line-height: 1.2em;
-}
-.arthead {
-    background-color: #bb0000;
-    background-image: -moz-linear-gradient(top, #ff0000, #660000);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ff0000), color-stop(1, #660000));
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ff0000', EndColorStr='#660000')";
-    padding: 10px;
-}
-.arthead h1, .arthead p {
-    padding: 5px;
-    text-shadow: 1px 1px 1px #333;
-    color: #fff;
-}
-.arthead p, .arthead p a {
-    color: #ccc;
-    font-style: italic;
-    paddingg: 5px;
-    border-bottom: 0px solid #666;
-}
-.artbody {
-    //
-}
-.artbody p {
-    margin: 15px;
-    text-align: justify;
-}
-.artfoot {
-    //
-}
-
-/* article listing */
-
-.art-item {
-    min-height: 100px;
-    margin: 5px;
-    padding: 5px;
-}
-.art-item h3 {
-    font-size: 1.4em;
-    color: #000;
-    text-transform: uppercase;
-}
-.art-item a {
-    text-decoration: none;
-    color: #333333;
-}
-.art-item span {
-    color: #666666;
-    display: block;
-    margin-bottom: 3px;
-}
-.art-item p {
-    text-align: justify;
-    line-height: 1.2em;
 }
 /* index */
 .admlinks li a {
@@ -1818,20 +1722,6 @@ div.likeboxwrap iframe {
 .fb-share-link:hover {
     border-color: #9dacce;
     text-decoration: none;
-}
-.benchmark {
-    margin: 10px;
-}
-.benchmark th {
-    background: #666;
-    color: #fff;
-    padding: 3px;
-}
-.benchmark td {
-    padding: 3px;
-    background: #fff;
-    border: 1px solid #000;
-    text-align: right;
 }
 @media screen and (max-width: 1000px) {
     #conteneur {

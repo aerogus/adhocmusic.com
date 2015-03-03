@@ -99,7 +99,6 @@ class AdHocSmarty extends Smarty
                     //'nb_videos'          => (int) Video::getMyVideosCount(),
                     //'nb_events'          => (int) Event::getMyEventsCount(),
                     //'nb_lieux'           => (int) Lieu::getMyLieuxCount(),
-                    //'nb_articles'        => (int) Article::getMyArticlesCount(),
                 ));
                 
             } else {

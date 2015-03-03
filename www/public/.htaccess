@@ -18,8 +18,8 @@ RewriteBase /
 RewriteRule ^(.*/)?\.git/ - [F,L]
 
 RewriteCond %{HTTP_HOST} !^www.adhocmusic.com$ [NC]
-RewriteCond %{HTTP_HOST} !^www.adhocmusic.local$ [NC]
-RewriteCond %{HTTP_HOST} !^adhocmusic.local$ [NC]
+RewriteCond %{HTTP_HOST} !^www.adhocmusic.localhost$ [NC]
+RewriteCond %{HTTP_HOST} !^adhocmusic.localhost$ [NC]
 RewriteRule ^(.*)$ http://www.adhocmusic.com/$1 [R=301,L]
 
 # route unique

@@ -547,39 +547,6 @@ class Stats extends ObjectModel
     }
 
     /**
-     * récupère la liste des articles les plus lus
-     *
-     * @return array
-     */
-    public static function getTopVisitesArticles()
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_article`, `title`, `visite` AS `nb` "
-             . "FROM `".self::$_db_table_article."` "
-             . "ORDER BY `visite` DESC";
-
-        $res  = $db->queryWithFetch($sql);
-        list($total, $max) = self::getTotalAndMax($res, 'nb');
-
-        $cpt = 0;
-        foreach($res as $_res) {
-            $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
-            $cpt++;
-        }
-
-        $out  = array(
-            'data'  => $res,
-            'cols'  => array('Article', 'Nb', 'Graphe'),
-            'keys'  => array('title', 'nb', 'bargraph'),
-            'total' => $total,
-            'max'   => $max,
-        );
-
-        return $out;
-    }
-
-    /**
      * récupère les derniers membres loggués sur le site
      *
      * @param int $limit

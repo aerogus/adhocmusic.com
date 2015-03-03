@@ -8,6 +8,7 @@
 // fichiers à traiter
 $csss = array(
     'reset',        // Reset CSS v2.0 - Meyer
+//    'border-box', // Border Box model
     'main',
     'menu',
     'breadcrumb',
@@ -16,13 +17,10 @@ $csss = array(
     'assoce',
     'agenda',
     'concours',
-    'blog',
     'newsletter',
-    'articles',
     'admin',
     'pagination',
     'facebook',
-    'debug',
     'rwd', // Responsive Web Design
 );
 
