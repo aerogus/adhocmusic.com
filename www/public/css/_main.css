@@ -27,7 +27,7 @@ body {
     visibility: hidden;
 }
 #conteneur {
-    width: 1000px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 #header {
@@ -40,7 +40,7 @@ body {
 #logo {
     float: left;
     width: 102px;
-    height: 90px;
+    height: 92px;
     background: url({#STATIC_URL#}/img/logo_adhoc.png);
 }
 #logo span {
@@ -112,19 +112,21 @@ strong {
 /**************
  * footer
  **************/
-#footer {
+.footer {
     background: #333;
 }
-#footer > li strong {
+.footer > li strong {
     display: block;
     margin-bottom: 5px;
     color: #fff;
+    width: 8em;
 }
-#footer > li {
+.footer > li {
+    display: inline-block;
     margin: 10px 75px;
-    float: left;
+    vertical-align: top;
 }
-#footer > li a {
+.footer > li a {
     color: #999;
 }
 #chemin {

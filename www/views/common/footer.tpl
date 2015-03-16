@@ -1,7 +1,7 @@
 
 </div>{* #main *}
 
-<ul id="footer" class="clearfix">
+<ul class="footer clearfix">
   <li>
     <ul>
       <li><strong>QUI-SOMMES-NOUS?</strong></li>

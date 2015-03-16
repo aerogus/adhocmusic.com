@@ -534,15 +534,6 @@ class Controller
 
         $smarty->assign('inbox', $db->queryWithFetch($sql));
 
-        $smarty->assign('articles', Article::getArticles(array(
-            'debut'   => 0,
-            'limit'   => 5,
-            'contact' => $_SESSION['membre']->getId(),
-            'sort'    => 'created_on',
-            'sens'    => 'DESC',
-        )));
-        $smarty->assign('nb_articles', Article::getMyArticlesCount());
-
         $smarty->assign('alerting_groupes', Alerting::getGroupesAlertingByIdContact($_SESSION['membre']->getId()));
         $smarty->assign('alerting_lieux', Alerting::getLieuxAlertingByIdContact($_SESSION['membre']->getId()));
         $smarty->assign('alerting_events', Alerting::getEventsAlertingByIdContact($_SESSION['membre']->getId()));

@@ -173,40 +173,6 @@
 </div>
 
 <div style="float: left;">
-{include file="common/boxstart.tpl" boxtitle="Mes Articles" width="400px"}
-{if $nb_articles == 0}
-<p>Aucun article</p>
-{else}
-<p>Vous avez écrit {$nb_articles} articles</p>
-<table>
-  <thead>
-    <tr>
-      <th>Titre</th>
-      <th>Création</th>
-      <th>Modification</th>
-      <th>Rubrique</th>
-      <th>En Ligne</th>
-    </tr>
-  </thead>
-  <tbody>
-    {foreach from=$articles key=cpt item=article}
-    <tr class="{if $cpt is odd}odd{else}even{/if}">
-      <td><a href="/articles/edit/{$article.id}" title="{$article.title|escape}">{$article.title|escape}</a></td>
-      <td>{$article.created_on|date_format:"%d/%m/%Y"}</td>
-      <td>{$article.modified_on|date_format:"%d/%m/%Y"}</td>
-      <td>{$article.rubrique|escape}</td>
-      <td><span id="toggle-art-{$article.id}">{$article.online|display_on_off_icon}<span></td>
-    </tr>
-    {/foreach}
-  </tbody>
-</table>
-{/if}
-<p><a href="/articles/my">Tous mes articles</a></p>
-<p><a href="/articles/create">Ecrire un article</a></p>
-{include file="common/boxend.tpl"}
-</div>
-
-<div style="float: left;">
 {include file="common/boxstart.tpl" boxtitle="Mes Abonnements" width="250px"}
 
 <h5>Groupes</h5>

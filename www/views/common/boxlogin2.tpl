@@ -27,9 +27,6 @@
   {if $my_counters.nb_videos > 0}
   <li class="mbrvideos"><a href="/videos/my">Mes Vidéos</a> ({$my_counters.nb_videos})</li>
   {/if}
-  {if $me->isRedacteur()}
-  <li class="mbrarticles"><a href="/articles/my">Mes Articles</a> ({$my_counters.nb_articles})</li>
-  {/if}
   {if $me->isInterne()}
   <li class="mbradmin"><a href="/adm/">Zone Privée</a></li>
   {/if}

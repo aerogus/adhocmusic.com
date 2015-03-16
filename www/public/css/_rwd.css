@@ -14,9 +14,5 @@
     #right {
         width: 100%;
     }
-    #footer > li {
-        float: none;
-        display: inline;
-    }
 }
 

@@ -773,7 +773,6 @@ class Controller
             'B' => "Nombre de lieux par département",
             'C' => "Nombre de lieux par région",
             'D' => "Top Visites Groupes",
-            'E' => "Top Visites Articles",
             'F' => "Membres les plus taggés",
             'G' => "Membres les plus taggeurs",
             'H' => "Domaines Emails",
@@ -806,7 +805,6 @@ class Controller
             case 'B': $module = Stats::getNbLieuxByDepartement(); break;
             case 'C': $module = Stats::getNbLieuxByRegion(); break;
             case 'D': $module = Stats::getTopVisitesGroupes(); break;
-            case 'E': $module = Stats::getTopVisitesArticles(); break;
             case 'F': $module = Stats::getTopTagges(200); break;
             case 'G': $module = Stats::getTopTaggeurs(200); break;
             case 'H': $module = Stats::getEmailsForDomaine($domaine); break;
