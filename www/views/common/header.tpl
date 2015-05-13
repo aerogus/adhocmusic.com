@@ -51,7 +51,7 @@
 {if !empty($css_jquery_ui)}
 <link rel="stylesheet" href="{#STATIC_URL#}/css/adhoc/jquery-ui-1.8.2.custom.css">
 {/if}
-<script src="/js/jquery-2.1.3.min.js"></script>
+<script src="/js/jquery-2.1.4.min.js"></script>
 <script src="/js/adhoc.min.js"></script>
 {if !empty($js_jquery_tools)}
 <script src="{#STATIC_URL#}/js/jquery.tools.min.js"></script>

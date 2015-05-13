@@ -47,15 +47,7 @@ $(function() {
 
 {include file="common/boxend.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Activité récente" width="320px; float: left; margin-left: 20px"}
-<div class="fb-activity" data-app-id="50959607741" data-site="adhocmusic.com" data-action="likes, recommends" data-width="300" data-height="230" data-colorscheme="light" data-header="false"></div>
-{include file="common/boxend.tpl"}
-
-</div>
-
-<div id="right">
-
-{include file="common/boxstart.tpl" boxtitle="Agenda" width="300px; margin-bottom: 20px;"}
+{include file="common/boxstart.tpl" boxtitle="Agenda" width="360px; float: left; margin-left: 20px"}
 
 <ul>
 {foreach from=$evts key=month item=mevts}
@@ -71,17 +63,16 @@ $(function() {
 
 {include file="common/boxend.tpl"}
 
-{if !empty($comments)}
-{include file="common/boxstart.tpl" boxtitle="Derniers commentaires" width="300px"}
-<ul>
-{foreach from=$comments item=comment}
-<li style="margin-bottom: 5px">
-  <strong>{$comment.pseudo}</strong> le {$comment.created_on|date_format:'%d/%m/%Y'}<br />
-  <a href="/{$comment.type_full}/show/{$comment.id_content}">{$comment.text|truncate:'50'}</a></li>
-{/foreach}
-</ul>
+</div>
+
+<div id="right">
+
+{include file="common/boxstart.tpl" boxtitle="" width="300px; margin-bottom: 20px;"}
+
+    <a class="twitter-timeline" href="https://twitter.com/adhocmusic" data-widget-id="427074486978871297">Tweets de @adhocmusic</a>
+            <script>!function(d,s,id) { var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)) { js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
 {include file="common/boxend.tpl"}
-{/if}
 
 </div>
 

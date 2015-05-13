@@ -697,11 +697,11 @@ class Video extends Media
                      . '  "screencolor": "000000",' .  "\n"
                      . '  "controlbar": "over",' .  "\n"
                      . '  "autostart": "' . $strautoplay . '",' . "\n"
-                     . '  "width": "' . $width . '",' .  "\n"
-                     . '  "height": "' . $height . '"' .  "\n"
+                     . '  "width": 680,' . "\n"
+                     . '  "height": 382' .  "\n"
                      . '});' .  "\n"
                      . '</script>' .  "\n";
-
+// aspect ratio 16:9 et en dur ...
             case self::HOST_VIMEO:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '0';
                 if($iframe) {

@@ -74,17 +74,15 @@ $(function() {
 <a class="button" href="/adm/forums/forum/{$id_forum|escape}">Retour forum</a>
 
 {foreach from=$messages item=message key=cpt}
-<div class="message {if $cpt is odd}message-odd{else}message-even{/if}">
+<div class="clearfix message">
   <div class="message-meta">
-    Par <a href="/membres/show/{$message.created_by}">{$message.created_by|pseudo_by_id}</a><br />
-    {$message.created_on|date_format:'%a %d %b %Y à %H:%M'}<br />
-    <img src="{#STATIC_URL#}/media/membre/ca/{$message.created_by}.jpg" alt="" />
+    <img src="{#STATIC_URL#}/media/membre/ca/{$message.created_by}.jpg" alt="">
+    <a href="/membres/show/{$message.created_by}">{$message.created_by|pseudo_by_id}</a><br>
+    {$message.created_on|date_format:'%a %d %b %Y<br>%H:%M'}
   </div>
-  <div class="message-body" style="border-top-left-radius: 0;">
-<div style="width: 67px; height: 47px; background: url(http://static.adhocmusic.com/img/bulle-left.png) no-repeat; position: absolute; left:179px; top:15px;"></div>
-    {$message.parsed_text}
+  <div class="message-body">
+    {$message.parsed_text|@nl2br}
   </div>
-  <br style="clear: both" />
 </div>
 {/foreach}
 

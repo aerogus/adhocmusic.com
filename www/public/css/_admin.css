@@ -30,29 +30,35 @@
     padding: 5px;
 }
 .message {
-    position: relative;
-    margin: 0;
-}
-.message-odd {
-    bbackground-color: #cecece;
-}
-.message-even {
-    bbackground-color: #ececec;
+    margin-bottom: 20px;
+    background: #f0f0f0; 
+    border: 1px solid #9f9f9f;
 }
 .message-meta {
-    width: 150px;
     float: left;
     padding: 10px;
+    line-height: 1.6em;
+    text-align: center;
+}
+@media screen and (max-width: 1000px) {
+    .message-meta {
+        margin: 10px;
+    }
+}
+.message-meta img {
+    display: block;
+    margin: 0 auto;
 }
 .message-body {
-    width: 649px;
-    min-height: 145px;
-    float: right;
-    padding: 15px;
-    border: 1px solid #000000;
-    margin: 15px;
-    border-radius: 20px;
-    background-color: #ffffff;
+    padding: 10px;
+    margin: 10px 10px 10px 135px;
+    background-color: #fff;
+    font-size: 1.25em;
+    line-height: 1.25em;
+}
+@media screen and (max-width: 1000px) {
+    .message-body {
+        margin: 10px;
 }
 .message-body p {
     margin-bottom: 5px;
