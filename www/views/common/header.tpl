@@ -80,9 +80,6 @@
 {if !empty($js_jquery_tinymce)}
 <script src="{#STATIC_URL#}/tinymce/jquery.tinymce.js"></script>
 {/if}
-{if !empty($js_jquery_rightClick)}
-<script src="{#STATIC_URL#}/js/jquery.rightClick.js"></script>
-{/if}
 <script>
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-1420343-1']);

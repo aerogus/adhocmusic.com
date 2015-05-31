@@ -2,7 +2,7 @@
 
 class Controller
 {
-    public static function my()
+    static function my()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -17,7 +17,7 @@ class Controller
         return $smarty->fetch('alerting/my.tpl');
     }
 
-    public static function sub()
+    static function sub()
     {
         if(Tools::isAuth() === false) {
             return 'not auth';
@@ -51,7 +51,7 @@ class Controller
         return 'res: ' . $r;
     }
 
-    public static function unsub()
+    static function unsub()
     {
         if(Tools::isAuth() === false) {
             return 'not auth';

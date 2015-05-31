@@ -4,7 +4,7 @@ define('NB_VIDEOS_PER_PAGE', 48);
 
 class Controller
 {
-    public static function my()
+    static function my()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -45,7 +45,7 @@ class Controller
         return $smarty->fetch('videos/my.tpl');
     }
 
-    public static function beta()
+    static function beta()
     {
         return self::show('videos/beta.tpl');
     }
@@ -53,7 +53,7 @@ class Controller
     /**
      * Visualisation d'une vidéo
      */
-    public static function show($tpl = 'videos/show.tpl')
+    static function show($tpl = 'videos/show.tpl')
     {
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
@@ -166,7 +166,7 @@ class Controller
         return $smarty->fetch($tpl);
     }
 
-    public static function embed()
+    static function embed()
     {
         $id = (int) Route::params('id');
 
@@ -189,7 +189,7 @@ class Controller
         return $smarty->fetch('videos/embed.tpl');
     }
 
-    public static function create()
+    static function create()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -315,7 +315,7 @@ class Controller
         return true;
     }
 
-    public static function edit()
+    static function edit()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -415,7 +415,7 @@ class Controller
         return true;
     }
 
-    public static function delete()
+    static function delete()
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -459,7 +459,7 @@ class Controller
         return $smarty->fetch('videos/delete.tpl');
     }
 
-    public static function get_meta()
+    static function get_meta()
     {
         $code = (string) Route::params('code');
 

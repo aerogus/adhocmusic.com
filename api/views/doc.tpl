@@ -88,7 +88,7 @@ var_dump($photos);
 {capture name='html' assign='html'}
 <html>
   <head>
-    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>          
+    <script src="http://static.adhocmusic.com/js/jquery-2.1.4.min.js"></script>          
   </head>
   <body>
     <script>                                         

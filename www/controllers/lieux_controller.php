@@ -2,7 +2,7 @@
 
 class Controller
 {
-    public static function index()
+    static function index()
     {
         $smarty = new AdHocSmarty();
 
@@ -42,7 +42,7 @@ class Controller
         return $smarty->fetch('lieux/index.tpl');
     }
 
-    public static function my()
+    static function my()
     {
         $page = (int) Route::params('page');
 
@@ -64,7 +64,7 @@ class Controller
 
     }
 
-    public static function show()
+    static function show()
     {
         $id = (int) Route::params('id');
 
@@ -198,12 +198,12 @@ class Controller
     /**
      * @see http://www.panotools.org/mailarchive/msg/11501
      */
-    public static function pano_PTDefault()
+    static function pano_PTDefault()
     {
         return '';
     }
 
-    public static function create()
+    static function create()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -311,7 +311,7 @@ class Controller
         return true;
     }
 
-    public static function edit()
+    static function edit()
     {
         $id = (int) Route::params('id');
 
@@ -421,7 +421,7 @@ class Controller
         return true;
     }
 
-    public static function delete()
+    static function delete()
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -454,13 +454,13 @@ class Controller
         return $smarty->fetch('lieux/delete.tpl');
     }
 
-    public static function geocode()
+    static function geocode()
     {
         $q  = (string) Route::params('q');
         return GoogleMaps::getGeocode($q);
     }
 
-    public static function fetch()
+    static function fetch()
     {
         $mode  = (string) Route::params('mode'); // radius|boundary|admin
         $lat   = (float) Route::params('lat');

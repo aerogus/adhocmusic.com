@@ -2,7 +2,7 @@
 
 <head>
   <link rel="stylesheet" href="/css/fb.css" />
-  <script src="http://static.adhocmusic.com/js/jquery-1.7.min.js"></script>
+  <script src="http://static.adhocmusic.com/js/jquery-2.1.4.min.js"></script>
   <title>AD'HOC Music</title>
   <meta property="og:type" content="other">
   <meta property="og:title" content="AD'HOC Music">

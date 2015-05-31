@@ -1,4 +1,4 @@
-{include file="common/header.tpl" title=$title js_jquery_rightClick=true}
+{include file="common/header.tpl" title=$title}
 
 {if !empty($unknown_photo)}
 

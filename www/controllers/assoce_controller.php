@@ -2,12 +2,12 @@
 
 class Controller
 {
-    public static function index()
+    static function index()
     {
         return self::presentation();
     }
 
-    public static function presentation()
+    static function presentation()
     {
         $smarty = new AdHocSmarty();
 
@@ -34,7 +34,7 @@ class Controller
         return $smarty->fetch('assoce/presentation.tpl');
     }
 
-    public static function concerts()
+    static function concerts()
     {
         $smarty = new AdHocSmarty();
 
@@ -63,7 +63,7 @@ class Controller
         return $smarty->fetch('assoce/concerts.tpl');
     }
     
-    public static function equipe()
+    static function equipe()
     {
         $smarty = new AdHocSmarty();
 
@@ -93,7 +93,7 @@ class Controller
         return $smarty->fetch('assoce/equipe.tpl');
     }
 
-    public static function statuts()
+    static function statuts()
     {
         $smarty = new AdHocSmarty();
 
@@ -120,7 +120,7 @@ class Controller
         return $smarty->fetch('assoce/statuts.tpl');
     }
 
-    public static function recrutement()
+    static function recrutement()
     {
         $smarty = new AdHocSmarty();
 

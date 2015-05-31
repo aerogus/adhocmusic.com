@@ -16,7 +16,7 @@ define('ADM_FEATURED_IMG_HEIGHT', 240);
 
 class Controller
 {
-    public static function index()
+    static function index()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -33,7 +33,7 @@ class Controller
         return $smarty->fetch('adm/index.tpl');
     }
 
-    public static function billing()
+    static function billing()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -91,7 +91,7 @@ class Controller
         return $smarty->fetch('adm/domains.tpl');
     }
 
-    public static function news_index()
+    static function news_index()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -111,7 +111,7 @@ class Controller
         return $smarty->fetch('adm/news/index.tpl');
     }
 
-    public static function news_create()
+    static function news_create()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
