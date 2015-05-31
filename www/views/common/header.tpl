@@ -104,12 +104,20 @@ _gaq.push(['_trackPageview']);
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=50959607741&version=v2.2";
+  js.src = "//connect.facebook.net/fr_FR/sdk.js";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <script>
 $(function() {
+
+  window.fbAsyncInit = function() {
+
+  FB.init({
+    appId : '50959607741',
+    xfbml : false,
+    version : 'v2.3'
+  });
 
   FB.getLoginStatus(function(response) {
     if (response.authResponse) {
@@ -126,23 +134,7 @@ $(function() {
     });
   });
 
-  $('.og_listen_to_song').click(function() {
-    FB.api('/me/adhocmusic:listen_to?song={$url|escape}', 'post', function(response) {
-      alert('bim !');
-    });
-  });
-  $('.og_watch_video').click(function() {
-    FB.api('/me/adhocmusic:watch?video={$url|escape}', 'post', function(response) {
-    });
-  });
-  $('.og_watch_photo').click(function() {
-    FB.api('/me/adhocmusic:watch?photo={$url|escape}', 'post', function(response) {
-    });
-  });
-  $('.og_read_article').click(function() {
-    FB.api('/me/adhocmusic:read?article={$url|escape}', 'post', function(response) {
-    });
-  });
+  };
 
   window.___gcfg = { lang: 'fr' };
 
@@ -178,7 +170,7 @@ $(function() {
 <div id="header" class="clearfix">
   <a id="logo" href="/" title="Cliquez pour revenir à l'accueil"><span>AD'HOC</span></a>
   <div id="megabanner">
-    <a href="http://www.adhocmusic.com/events/show/6621"><img src="http://static.adhocmusic.com/img/megabanner/empty.png" alt="" width="728" height="90"></a>
+    <a href="https://www.facebook.com/events/1602231176679395/"><img src="http://static.adhocmusic.com/img/megabanner/adhoc-juin-2015.png" alt="" width="728" height="90"></a>
   </div>
 </div>
 

@@ -116,19 +116,19 @@ class AdHocSmarty extends Smarty
 
         // pub 728x90 haut
         $this->assign('megabanners', array(
-
+/*
             array(
                 'url' => '/',
                 'img' => 'adhoc-bandeau.jpg',
                 'alt' => 'ADHOC Music',
             ),
-/*
+*/
             array(
-                'url' => '/events/show/6463',
-                'img' => 'adhoc-sept-2013.jpg',
+                'url' => '/events/show/6623',
+                'img' => 'adhoc-mai-2015.png',
                 'alt' => 'Concert AD HOC',
             ),
-*/
+
         ));
 
         return $this;

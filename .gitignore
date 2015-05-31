@@ -4,3 +4,4 @@ log
 static/img/cache
 static/media
 www/public/transit
+node_modules

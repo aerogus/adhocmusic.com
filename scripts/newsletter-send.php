@@ -4,15 +4,13 @@
 // envoi d'une newsletter
 
 // n° de newsletter à traiter
-define('ID_NEWSLETTER', 62);
+define('ID_NEWSLETTER', 69);
 
 require_once dirname(__FILE__) . '/common-cli.inc.php';
 
 $newsletter = Newsletter::getInstance(ID_NEWSLETTER);
 
 // base de test
-
-
 $subs = array(
     array('id_contact' => 1, 'email' => 'guillaume.seznec@gmail.com', 'pseudo' => 'gus', 'lastnl' => ''),
 //    array('id_contact' => 1, 'email' => 'gilles.taddei@gmail.com', 'pseudo' => 'gillex', 'lastnl' => ''),
@@ -21,10 +19,8 @@ $subs = array(
     // array('id_contact' => 3, 'email' => 'newsletter@adhocmusic.com', 'pseudo' => 'test', 'lastnl' => ''),
 );
 
-
 // base de prod
 //$subs = Newsletter::getSubscribers();
-
 
 echo "Trouvé : " . count($subs) . " emails\n";
 
@@ -42,7 +38,7 @@ foreach($subs as $sub)
 
     Email::send(
         $sub['email'],
-        "Plateau métal à Igny Samedi 10 janvier",
+        "Concert/Expo à Epinay-sur-Orge Samedi 16 mai",
         'newsletter-' . $newsletter->getId(),
         array(
             'id'            => $newsletter->getId(),

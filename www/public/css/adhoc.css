@@ -50,7 +50,7 @@ table {
  * general
  **************/
 body {
-    background: #ececec;
+    background: #ececec url(/img/bg-juin2015.jpg) repeat;
     font-family: Arial;
     font-size: 12px;
     line-height: 1.2em;
