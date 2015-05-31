@@ -93,7 +93,7 @@ class Style
      *
      * @return array
      */
-    public static function getHashTable()
+    static function getHashTable()
     {
         asort(self::$_liste);
         return self::$_liste;
@@ -105,7 +105,7 @@ class Style
      * @param int
      * @return string
      */
-    public static function getName($cle)
+    static function getName($cle)
     {
         return self::$_liste[$cle];
     }
@@ -113,7 +113,7 @@ class Style
     /**
      *
      */
-    public static function isStyleOk($id_style)
+    static function isStyleOk($id_style)
     {
         if(array_key_exists($id_style, self::$_liste)) {
             return true;

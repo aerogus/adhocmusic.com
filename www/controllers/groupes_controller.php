@@ -6,7 +6,7 @@ define('GROUPS_SORT_BY_DATE', 'm');
 
 class Controller
 {
-    public static function index()
+    static function index()
     {
         $smarty = new AdHocSmarty();
 
@@ -45,7 +45,7 @@ class Controller
         return $smarty->fetch('groupes/index.tpl');
     }
 
-    public static function my()
+    static function my()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -64,7 +64,7 @@ class Controller
         return $smarty->fetch('groupes/my.tpl');
     }
 
-    public static function show()
+    static function show()
     {
         $id = (int) Route::params('id');
 
@@ -181,7 +181,7 @@ class Controller
         return $smarty->fetch('groupes/show.tpl');
     }
 
-    public static function create()
+    static function create()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -497,7 +497,7 @@ class Controller
         return true;
     }
 
-    public static function delete()
+    static function delete()
     {
         $id = (int) Route::params('id');
 
@@ -536,7 +536,7 @@ class Controller
         return $smarty->fetch('groupes/delete.tpl');
     }
 
-    public static function playlist()
+    static function playlist()
     {
         $id = (int) Route::params('id');
 

@@ -15,7 +15,7 @@ class Tools
     /**
      * @see http://w3.org/International/questions/qa-forms-utf-8.html
      */
-    public static function isUTF8($string)
+    static function isUTF8($string)
     {
         return preg_match('%^(?:
                 [\x09\x0A\x0D\x20-\x7E]
@@ -36,7 +36,7 @@ class Tools
      * @param string codage de sortie ISO|UTF8
      * @return string
      */
-    public static function charSet($str, $mode = 'UTF8')
+    static function charSet($str, $mode = 'UTF8')
     {
         switch($mode)
         {
@@ -62,7 +62,7 @@ class Tools
      * @param string
      * @return string
      */
-    public static function removeAccents($str)
+    static function removeAccents($str)
     {
         $str = self::charSet($str, 'ISO');
         $str = strtr(
@@ -80,7 +80,7 @@ class Tools
      * Retourne FALSE si l'url n'est pas conforme. (HTTP(S) uniquement!)
      * @return bool
      */
-    public static function isUrlValid($url)
+    static function isUrlValid($url)
     {
         if (preg_match('`^(http(s?)://){1}((\w+\.)+)\w{2,}(:\d+)?(/'.
             '[\w\-\'"~#:.?!+=&%@/(\)\xA0-\xFF]'. /* <-- lache tes caractères !!!!! */
@@ -94,7 +94,7 @@ class Tools
     /**
      *
      */
-    public static function stripBBCode($string)
+    static function stripBBCode($string)
     {
         return preg_replace('!\\[((\\w+(=[^\\]]+)?)|(/\\w+))\\]!', '', $string);
     }
@@ -102,7 +102,7 @@ class Tools
     /**
      *
      */
-    public static function replaceWordEntities($string)
+    static function replaceWordEntities($string)
     {
         return str_replace(array("\r",'&#8216;','&#8217;','&#8230;'), array('',"'","'",'...'), $string);
     }
@@ -110,7 +110,7 @@ class Tools
     /**
      *
      */
-    public static function getContentType($extension)
+    static function getContentType($extension)
     {
         $mt['jpg']  = 'image/jpeg';
         $mt['jpeg'] = 'image/jpeg';
@@ -128,7 +128,7 @@ class Tools
      * @param string $rgbval
      * @return string
      */
-    public static function rgb2hex($rgbval)
+    static function rgb2hex($rgbval)
     {
         if (preg_match_all('/rgb\((\d+),\s*(\d+),\s*(\d+)\)/', $rgbval, $matches)){
             list($red, $green, $blue) = array($matches[1][0], $matches[2][0], $matches[3][0]);
@@ -147,7 +147,7 @@ class Tools
      * @param int $length
      * @return string
      */
-    public static function tronc($chaine, $maxlength)
+    static function tronc($chaine, $maxlength)
     {
         $chaine = trim($chaine);
         if((mb_strlen($chaine) > $maxlength) && ($maxlength > 4)) {
@@ -162,7 +162,7 @@ class Tools
      * @param string $texte
      * @return string
      */
-    public static function filtreTexte($texte)
+    static function filtreTexte($texte)
     {
         $texte = self::replaceWordEntities($texte);
         $texte = preg_replace('/&#\d+;/', '', html_entity_decode(strip_tags($texte, '<br>'))); // vire les tags html, sauf br
@@ -176,7 +176,7 @@ class Tools
     /**
      * retourne la révision SVN courante
      */
-    public static function getHeadRevision()
+    static function getHeadRevision()
     {
         if (!file_exists($file = $_SERVER['DOCUMENT_ROOT'].'/.svn/entries')) {
             return date('Ymd');
@@ -188,7 +188,7 @@ class Tools
     /**
      * @return string
      */
-    public static function getCSRFToken()
+    static function getCSRFToken()
     {
         $_SESSION['CSRFToken'] = substr(md5(time()), 0, 16);
         return $_SESSION['CSRFToken'];
@@ -198,7 +198,7 @@ class Tools
      * @param string
      * @return bool
      */
-    public static function checkCSRFToken($CSRFToken)
+    static function checkCSRFToken($CSRFToken)
     {
         if (isset($_SESSION['CSRFToken']) && mb_strlen($_SESSION['CSRFToken']) && $_SESSION['CSRFToken'] === $CSRFToken)
         {
@@ -213,7 +213,7 @@ class Tools
      * @param string $formName
      * @return bool
      */
-    public static function isSubmit($formName, $method = 'POST')
+    static function isSubmit($formName, $method = 'POST')
     {
         if($method == 'POST') {
             return (bool) !empty($_POST[$formName . '-submit']);
@@ -228,7 +228,7 @@ class Tools
      * @param string
      * @return string
      */
-    public static function base64_url_encode($input)
+    static function base64_url_encode($input)
     {
         return strtr(base64_encode($input), '+/=', '-_,');
     }
@@ -237,7 +237,7 @@ class Tools
      * @param string
      * @return string
      */
-    public static function base64_url_decode($input)
+    static function base64_url_decode($input)
     {
         return base64_decode(strtr($input, '-_,', '+/='));
     }
@@ -247,7 +247,7 @@ class Tools
      *
      * @param string url
      */
-    public static function redirect($url, $status = '301')
+    static function redirect($url, $status = '301')
     {
         if((strpos($url, 'http://') === false) && (strpos($url, 'https://') === false)) {
             $url = DYN_URL . $url;
@@ -273,7 +273,7 @@ class Tools
      *
      * @return bool
      */
-    public static function isAuth()
+    static function isAuth()
     {
         if(empty($_SESSION['membre'])) {
             return false;
@@ -292,7 +292,7 @@ class Tools
      * @param int $type
      * @return void
      */
-    public static function auth($type)
+    static function auth($type)
     {
         // non identifié
         if(empty($_SESSION['membre'])) {
@@ -320,7 +320,7 @@ class Tools
      * @param int $id_groupe
      * @return void
      */
-    public static function authGroupe($id_groupe)
+    static function authGroupe($id_groupe)
     {
         // non identifié
         if(empty($_SESSION['membre'])) {
@@ -351,7 +351,7 @@ class Tools
     /**
      * initialisation d'une session PHP5 native
      */
-    public static function sessionInit()
+    static function sessionInit()
     {
         session_name('ADHOCMUSIC');
         session_start();
@@ -408,7 +408,7 @@ class Tools
      * @param string $str
      * @return string
      */
-    public static function htmlToText($str)
+    static function htmlToText($str)
     {
         $str = strip_tags($str);
         $str = wordwrap($str, 80, "\n");
@@ -416,7 +416,7 @@ class Tools
         return $str;
     }
 
-    public static function array_sort($array, $on, $order=SORT_ASC)
+    static function array_sort($array, $on, $order=SORT_ASC)
     {
         $new_array = array();
         $sortable_array = array();
@@ -459,7 +459,7 @@ class Tools
      * @return string
      * @see http://www.commentcamarche.net/contents/courrier-electronique/mime.php3
      */
-    public static function getTypeMimeByExtension($ext)
+    static function getTypeMimeByExtension($ext)
     {
         $mimes = array(
             'jpg'  => 'image/jpeg',
@@ -482,7 +482,7 @@ class Tools
      * @param string
      * @return string
      */
-    public static function getIconByExtension($ext)
+    static function getIconByExtension($ext)
     {
         $icons_url = STATIC_URL . '/img/icones/';
         $default_icon = 'file.png';

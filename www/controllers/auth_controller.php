@@ -2,7 +2,7 @@
 
 class Controller
 {
-    public static function login()
+    static function login()
     {
         if(Tools::isSubmit('form-login'))
         {
@@ -65,7 +65,7 @@ class Controller
         }
     }
 
-    public static function logout()
+    static function logout()
     {
         $redirect = 'http://www.adhocmusic.com/?logout';
 
@@ -91,7 +91,7 @@ class Controller
         Tools::redirect($redirect);
     }
 
-    public static function change_password()
+    static function change_password()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -135,7 +135,7 @@ class Controller
         return $smarty->fetch('auth/change-password.tpl');
     }
 
-    public static function lost_password()
+    static function lost_password()
     {
         $smarty = new AdHocSmarty();
 
@@ -187,7 +187,7 @@ class Controller
         return $smarty->fetch('auth/lost-password.tpl');
     }
 
-    public static function check_email()
+    static function check_email()
     {
         $out = array();
            $email = (string) Route::params('email');
@@ -203,7 +203,7 @@ class Controller
         return $out;
     }
 
-    public static function check_pseudo()
+    static function check_pseudo()
     {
         $out = array();
            $pseudo = (string) Route::params('pseudo');

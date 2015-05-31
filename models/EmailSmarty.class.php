@@ -4,7 +4,7 @@ require_once COMMON_LIB_SMARTY_PATH . '/Smarty.class.php';
 
 class EmailSmarty extends Smarty
 {
-    public function __construct()
+    function __construct()
     {
         parent::__construct();
 
@@ -19,7 +19,7 @@ class EmailSmarty extends Smarty
     /**
      *
      */
-    public static function modifier_link($url)
+    static function modifier_link($url)
     {
         // oui je sais pour les global ...
         // @see Controller::email::newsletter
@@ -34,7 +34,7 @@ class EmailSmarty extends Smarty
      * récupère l'url d'une image cachée (la cache si nécessaire)
      * @param array ['type'] ['id'] ['width'] ['height'] ['bgcolor'] ['border'] ['zoom']
      */
-    public static function function_image($params)
+    static function function_image($params)
     {
         $type    = (string) $params['type'];
         $id      = (int) $params['id'];

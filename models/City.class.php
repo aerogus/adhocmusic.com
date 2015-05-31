@@ -33,7 +33,7 @@ class City extends Liste
      * @param int $id_city
      * @return bool
      */
-    public function isCityOk($id_city)
+    function isCityOk($id_city)
     {
         $o = static::getInstance();
         return $o->_isCityOk($id_city);
@@ -42,7 +42,7 @@ class City extends Liste
     /**
      *
      */
-    public static function getName($id_city)
+    static function getName($id_city)
     {
         $o = static::getInstance();
         return $o->_getName($id_city);
@@ -51,7 +51,7 @@ class City extends Liste
     /**
      *
      */
-    public static function getIdDepartement($id_city)
+    static function getIdDepartement($id_city)
     {
         $o = static::getInstance();
         return $o->_getIdDepartement($id_city);
@@ -60,7 +60,7 @@ class City extends Liste
     /**
      *
      */
-    public static function getCp($id_city)
+    static function getCp($id_city)
     {
         $o = static::getInstance();
         return $o->_getCp($id_city);

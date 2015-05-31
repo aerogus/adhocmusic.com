@@ -5,7 +5,7 @@
 
 class Controller
 {
-    public static function index()
+    static function index()
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -23,7 +23,7 @@ class Controller
         return $smarty->fetch('comments/index.tpl');
     }
 
-    public static function show()
+    static function show()
     {
         $id = (int) Route::params('id');
         $comment = Comment::getInstance($id);
@@ -33,13 +33,13 @@ class Controller
         return $smarty->fetch('comments/show.tpl');
     }
 
-    public static function fetch()
+    static function fetch()
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('comments/fetch.tpl');
     }
 
-    public static function create()
+    static function create()
     {
         $data = array(
             'type'       => (string) Route::params('type'),
@@ -77,7 +77,7 @@ class Controller
         return 'KO';
     }
 
-    public static function ajax_delete()
+    static function ajax_delete()
     {
         $id = (int) Route::params('id');
         Tools::auth(Membre::TYPE_ADMIN);
@@ -89,7 +89,7 @@ class Controller
         return 'KO';
     }
 
-    public static function delete()
+    static function delete()
     {
         $id = (int) Route::params('id');
 

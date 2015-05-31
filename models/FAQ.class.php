@@ -59,7 +59,7 @@ class FAQ extends ObjectModel
     /**
      * @return int
      */
-    public function getIdCategory()
+    function getIdCategory()
     {
         return (int) $this->_id_category;
     }
@@ -67,7 +67,7 @@ class FAQ extends ObjectModel
     /**
      * @return string
      */
-    public function getQuestion()
+    function getQuestion()
     {
         return (string) $this->_question;
     }
@@ -75,7 +75,7 @@ class FAQ extends ObjectModel
     /**
      * @return string
      */
-    public function getAnswer()
+    function getAnswer()
     {
         return (string) $this->_answer;
     }
@@ -87,7 +87,7 @@ class FAQ extends ObjectModel
     /**
      * @param int
      */
-    public function setIdCategory($val)
+    function setIdCategory($val)
     {
         $val = (int) $val;
         if ($this->_id_category != (int) $val)
@@ -100,7 +100,7 @@ class FAQ extends ObjectModel
     /**
      * @param string
      */
-    public function setQuestion($val)
+    function setQuestion($val)
     {
         $val = trim((string) $val);
         if ($this->_question != (string) $val)
@@ -113,7 +113,7 @@ class FAQ extends ObjectModel
     /**
      * @param string
      */
-    public function setAnswer($val)
+    function setAnswer($val)
     {
         $val = trim((string) $val);
         if ($this->_answer != (string) $val)
@@ -128,7 +128,7 @@ class FAQ extends ObjectModel
     /**
      *
      */
-    public static function getCategories()
+    static function getCategories()
     {
         return array(
             1 => 'Le site',
@@ -139,7 +139,7 @@ class FAQ extends ObjectModel
     /**
      * @return string
      */
-    public function getCategory()
+    function getCategory()
     {
         $categories = self::getCategories();
         return $categories[$this->_id_category];
@@ -148,7 +148,7 @@ class FAQ extends ObjectModel
     /**
      * @return string
      */
-    public static function getCategoryById($id_category)
+    static function getCategoryById($id_category)
     {
         $categories = self::getCategories();
         return $categories[$id_category];
@@ -157,7 +157,7 @@ class FAQ extends ObjectModel
     /**
      * @return array
      */
-    public static function getFAQs()
+    static function getFAQs()
     {
         $db = DataBase::getInstance();
 

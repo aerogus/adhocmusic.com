@@ -2,12 +2,12 @@
 
 class Controller
 {
-    public static function search()
+    static function search()
     {
         return self::index();
     }
 
-    public static function index()
+    static function index()
     {
         $smarty = new AdHocSmarty();
 
@@ -29,7 +29,7 @@ class Controller
         return $smarty->fetch('search/index.tpl');
     }
 
-    public static function autocomplete()
+    static function autocomplete()
     {
         $type = (string) Route::params('type');
         $query = (string) Route::params('query');

@@ -2,7 +2,7 @@
 
 class Controller
 {
-    public static function index()
+    static function index()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -37,7 +37,7 @@ class Controller
         return $smarty->fetch('messagerie/index.tpl');
     }
 
-    public static function read()
+    static function read()
     {
         $id = (int) Route::params('id');
 
@@ -75,7 +75,7 @@ class Controller
         return $smarty->fetch('messagerie/read.tpl');
     }
 
-    public static function write()
+    static function write()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -127,7 +127,7 @@ class Controller
         return $smarty->fetch('messagerie/write.tpl');
     }
 
-    public static function delete()
+    static function delete()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 

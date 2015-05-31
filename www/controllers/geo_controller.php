@@ -8,7 +8,7 @@ class Controller
      *
      * @param string $_GET['c']
      */
-    public static function getregion()
+    static function getregion()
     {
         $tab = array();
 
@@ -35,7 +35,7 @@ class Controller
      *
      * @param string $_GET['r']
      */
-    public static function getdepartement()
+    static function getdepartement()
     {
         $tab = array();
 
@@ -62,7 +62,7 @@ class Controller
      *
      * @param string $_GET['d']
      */
-    public static function getcity()
+    static function getcity()
     {
         $tab = array();
 
@@ -89,7 +89,7 @@ class Controller
      *
      * @param string $_GET['v']
      */
-    public static function getlieu()
+    static function getlieu()
     {
         $tab = array();
 

@@ -19,7 +19,7 @@ class AdHocClientApi
     /**
      * @return array
      */
-    public static function getPhotos()
+    static function getPhotos()
     {
         return self::query(
             array(
@@ -34,7 +34,7 @@ class AdHocClientApi
     /**
      * @return array
      */
-    public static function getVideos()
+    static function getVideos()
     {
         return self::query(
             array(
@@ -48,7 +48,7 @@ class AdHocClientApi
     /**
      * @return array
      */
-    public static function getAudios()
+    static function getAudios()
     {
         return self::query(
             array(
@@ -62,7 +62,7 @@ class AdHocClientApi
     /**
      * @return array
      */
-    public static function getEvents()
+    static function getEvents()
     {
         return self::query(
             array(
@@ -80,7 +80,7 @@ class AdHocClientApi
      * @param array $data
      * @return string au format json
      */
-    public static function query($data)
+    static function query($data)
     {
         $params = '';
         foreach($data as $field => $value) {

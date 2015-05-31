@@ -17,7 +17,7 @@ class ForumPrive extends Forum
      * @param int $page
      * @return array
      */
-    public static function getThreads($id_forum, $page = 0)
+    static function getThreads($id_forum, $page = 0)
     {
         $db = DataBase::getInstance();
 
@@ -46,7 +46,7 @@ class ForumPrive extends Forum
      * @param int $id_thread
      * @param int $page
      */
-    public static function getMessages($id_thread, $page = 0)
+    static function getMessages($id_thread, $page = 0)
     {
         $db = DataBase::getInstance();
 
@@ -82,7 +82,7 @@ class ForumPrive extends Forum
     /**
      * retire tous les abonnements aux forums privés pour un membre interne
      */
-    public static function delAllSubscriptions($id_contact)
+    static function delAllSubscriptions($id_contact)
     {
         $db = DataBase::getInstance();
 
@@ -98,7 +98,7 @@ class ForumPrive extends Forum
     /**
      * retire un abonnement forum à un membre interne
      */
-    public static function delSubscriberToForum($id_contact, $id_forum)
+    static function delSubscriberToForum($id_contact, $id_forum)
     {
         $db = DataBase::getInstance();
 
@@ -114,7 +114,7 @@ class ForumPrive extends Forum
     /**
      * ajoute un abonnement forum à un membre interne
      */
-    public static function addSubscriberToForum($id_contact, $id_forum)
+    static function addSubscriberToForum($id_contact, $id_forum)
     {
         $db = DataBase::getInstance();
 
@@ -130,7 +130,7 @@ class ForumPrive extends Forum
     /**
      * retourne la liste des forums auxquels est abonné l'id_contact
      */
-    public static function getSubscribedForums($id_contact)
+    static function getSubscribedForums($id_contact)
     {
         $db = DataBase::getInstance();
 
@@ -156,7 +156,7 @@ class ForumPrive extends Forum
      * @param array ids_forums
      * @see addSubscriberToForum / delSubscriberToForum
      */
-    public static function setSubscribedForums($id_contact, $ids_forum)
+    static function setSubscribedForums($id_contact, $ids_forum)
     {
         $db = DataBase::getInstance();
 
@@ -183,7 +183,7 @@ class ForumPrive extends Forum
      * @param string $id_forum
      * @return array
      */
-    public static function getSubscribers($id_forum)
+    static function getSubscribers($id_forum)
     {
         $db = DataBase::getInstance();
 

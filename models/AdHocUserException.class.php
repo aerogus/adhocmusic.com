@@ -15,7 +15,7 @@ class AdHocUserException extends AdHocException
     /**
      *
      */
-    public function __construct($message, $code = EXCEPTION_USER_DEFAULT)
+    function __construct($message, $code = EXCEPTION_USER_DEFAULT)
     {
         parent::__construct($message, $code);
     }

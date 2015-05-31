@@ -31,46 +31,42 @@ class AudioWaveForm
     protected $_destination_color   = '#000000';
     protected $_destination_bgcolor = '#FFFFFF';
 
-    public function __construct()
-    {
-    }
-
-    public function setSourceFile($val)
+    function setSourceFile($val)
     {
         $this->_source_file = $val;
     }
 
-    public function setSourceFormat($val)
+    function setSourceFormat($val)
     {
         $this->_source_format = $val;
     }
 
-    public function setDestinationFile($val)
+    function setDestinationFile($val)
     {
         $this->_destination_file = $val;
     }
 
-    public function setDestinationFormat($val)
+    function setDestinationFormat($val)
     {
         $this->_destination_format = $val;
     }
 
-    public function setDestinationWidth($val)
+    function setDestinationWidth($val)
     {
         $this->_destination_width = (int) $val;
     }
 
-    public function setDestinationHeight($val)
+    function setDestinationHeight($val)
     {
         $this->_destination_height = (int) $val;
     }
 
-    public function setDestinationColor($val)
+    function setDestinationColor($val)
     {
         $this->_destination_color = $val;
     }
 
-    public function setDestinationBgcolor($val)
+    function setDestinationBgcolor($val)
     {
         $this->_destination_bgcolor = $val;
     }
@@ -78,7 +74,7 @@ class AudioWaveForm
     /**
      * GENERAL FUNCTIONS
      */
-    public function findValues($byte1, $byte2)
+    function findValues($byte1, $byte2)
     {
       $byte1 = hexdec(bin2hex($byte1));                        
       $byte2 = hexdec(bin2hex($byte2));                        
@@ -89,7 +85,7 @@ class AudioWaveForm
      * Great function slightly modified as posted by Minux at
      * http://forums.clantemplates.com/showthread.php?t=133805
      */
-    public function html2rgb($input)
+    function html2rgb($input)
     {
       $input=($input[0]=="#")?substr($input, 1,6):substr($input, 0,6);
       return array(
@@ -102,7 +98,7 @@ class AudioWaveForm
     /**
      * process the file
      */
-    public function run()
+    function run()
     {    
       // temporary file name
       $tmpname = '/tmp/' . substr(md5(time()), 0, 10);

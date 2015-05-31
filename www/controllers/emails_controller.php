@@ -2,7 +2,7 @@
 
 class Controller
 {
-    public static function newsletter()
+    static function newsletter()
     {   
         $id = (int) Route::params('id');
 
@@ -31,7 +31,7 @@ class Controller
         return $smarty->fetch('newsletter-' . $newsletter->getId() . '.tpl');
     }
 
-    public static function form_contact_cc()
+    static function form_contact_cc()
     {
         $smarty = new EmailSmarty();
         $smarty->assign('name', 'Mon nom');
@@ -42,61 +42,61 @@ class Controller
         return $smarty->fetch('form-contact-cc.tpl');
     }
 
-    public static function form_contact_to()
+    static function form_contact_to()
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('form-contact-to.tpl');
     }
 
-    public static function forum_prive_new_message()
+    static function forum_prive_new_message()
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('forum-prive-new-message.tpl');
     }
 
-    public static function member_create()
+    static function member_create()
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('member-create.tpl');
     }
 
-    public static function message_received()
+    static function message_received()
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('message-received.tpl');
     }
 
-    public static function one_year_unactive_member()
+    static function one_year_unactive_member()
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('one-year-unactive-member.tpl');
     }
 
-    public static function password_changed()
+    static function password_changed()
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('password-changed.tpl');
     }
 
-    public static function password_lost()
+    static function password_lost()
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('password-lost.tpl');
     }
 
-    public static function you_have_a_group()
+    static function you_have_a_group()
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('you-have-a-group.tpl');
     }
 
-    public static function you_have_a_lieu()
+    static function you_have_a_lieu()
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('you-have-a-lieu.tpl');
     }
 
-    public static function new_commentaire()
+    static function new_commentaire()
     {
         $smarty = new EmailSmarty();
         $smarty->assign('subject', "Un nouveau commentaire a été posté sur la vidéo machin");
@@ -108,7 +108,7 @@ class Controller
         return $smarty->fetch('new-commentaire.tpl');
     }
 
-    public static function log_action()
+    static function log_action()
     {
         $smarty = new EmailSmarty();
         $smarty->assign('subject', "gus a ajouté un nouveau lieu");

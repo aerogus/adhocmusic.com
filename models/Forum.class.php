@@ -100,13 +100,6 @@ abstract class Forum
         $texte = preg_replace('/(\[CITE\])(.*?)(\[\/CITE\])/', "<div class=\"citation\">\\2</div>", $texte);
         $texte = preg_replace('/(\[cite\])(.*?)(\[\/cite\])/', "<div class=\"citation\">\\2</div>", $texte);
 
-        if($wiki) {
-            //require_once COMMON_LIB_PATH . '/wikirenderer/WikiRenderer.lib.php';
-            //require_once COMMON_LIB_PATH . '/wikirenderer/rules/trac_to_xhtml.php';
-            //$wkr = new WikiRenderer('trac_to_xhtml');
-            //$texte = $wkr->render($texte);
-        }
-
         return $texte;
     }
 

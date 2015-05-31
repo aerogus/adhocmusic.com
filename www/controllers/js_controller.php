@@ -2,7 +2,7 @@
 
 class Controller
 {
-    public static function adhoc()
+    static function adhoc()
     {
         $smarty = new AdHocSmarty();
         return self::_minify_js($smarty->fetch('js/index.tpl'));

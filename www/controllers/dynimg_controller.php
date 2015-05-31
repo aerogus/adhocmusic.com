@@ -5,17 +5,17 @@ define('DYNIMG_CACHE_ENABLED', true);
 
 class Controller
 {
-    public static function mailing_banner()
+    static function mailing_banner()
     {
         return self::trackable_image(ADHOC_ROOT_PATH . '/static/img/bandeau-mailing.jpg');
     }
 
-    public static function logo_adhoc()
+    static function logo_adhoc()
     {
         return self::trackable_image(ADHOC_ROOT_PATH . '/static/img/logo_adhoc.jpg');
     }
 
-    public static function trackable_image($image)
+    static function trackable_image($image)
     {
         $hash = (string) Route::params('hash');
         list($id_newsletter, $id_contact) = explode('-', $hash);
@@ -52,7 +52,7 @@ class Controller
         die();
     }
 
-    public static function photo()
+    static function photo()
     {
         $id = (int) Route::params('id');
         $width = (int) Route::params('width');
@@ -93,7 +93,7 @@ class Controller
         }
     }
 
-    public static function video()
+    static function video()
     {
         $id = (int) Route::params('id');
         $width = (int) Route::params('width');
@@ -134,7 +134,7 @@ class Controller
         }
     }
 
-    public static function event()
+    static function event()
     {
         $id = (int) Route::params('id');
         $width = (int) Route::params('width');
@@ -188,7 +188,7 @@ class Controller
      * ex : /dynimg/pixel/ffffff30
      *                    r g b a
      */
-    public static function pixel()
+    static function pixel()
     {
         $tmp = '/tmp/adhocmusic-img-' . md5(time() . rand());
 
@@ -212,7 +212,7 @@ class Controller
         return $bin;
     }
 
-    public static function featured()
+    static function featured()
     {
         $id = (int) Route::params('id');
         $width = (int) Route::params('width');
@@ -253,7 +253,7 @@ class Controller
         }
     }
 
-    public static function tool()
+    static function tool()
     {
         $smarty = new AdHocSmarty();
 

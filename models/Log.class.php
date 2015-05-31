@@ -121,7 +121,7 @@ class Log
      * @param string $file
      * @param string $log
      */
-    public static function write($file, $log, $save = false)
+    static function write($file, $log, $save = false)
     {
         return self::_write($file, $log, $save);
     }
@@ -129,7 +129,7 @@ class Log
     /**
      *
      */
-    public static function action($action, $extra = '')
+    static function action($action, $extra = '')
     {
         $db = DataBase::getInstance();
 
@@ -212,7 +212,7 @@ class Log
      * @param int filtrer un type d'événement
      * @return array
      */
-    public static function getLogsAction($action = 0)
+    static function getLogsAction($action = 0)
     {
         $db = DataBase::getInstance();
 
@@ -235,7 +235,7 @@ class Log
         return $logs;
     }
 
-    public static function getLog()
+    static function getLog()
     {
         return (string) self::$_log;
     }
@@ -243,7 +243,7 @@ class Log
     /**
      * @return array
      */
-    public static function getActions()
+    static function getActions()
     {
         return self::$_actions;
     }

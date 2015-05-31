@@ -17,9 +17,6 @@ class AdHocSmarty extends Smarty
     {
         parent::__construct();
 
-        $clock = Clock::getInstance();
-        $clock->setMark('smarty begin');
-
         // paths
         $this->setTemplateDir(SMARTY_TEMPLATE_PATH);
         $this->setCompileDir(SMARTY_TEMPLATE_C_PATH);
@@ -52,11 +49,7 @@ class AdHocSmarty extends Smarty
         $this->registerPlugin('block', 't', array('AdHocSmarty', 'block_t'));
 
         // assignations générales
-        if(IS_MOBILE) {
-            $this->assign('title', "AD'HOC");
-        } else {
-            $this->assign('title', "♫ AD'HOC : Les Musiques Actuelles");
-        }
+        $this->assign('title', "♫ AD'HOC : Les Musiques Actuelles");
         $this->assign('svnrev', '6666'/*Tools::getHeadRevision()*/);
         $this->assign('sessid', session_id());
         $this->assign('menuselected', null);
@@ -675,9 +668,6 @@ class AdHocSmarty extends Smarty
         }
 
         $o = parent::fetch($template, $cache_id, $compile_id, $parent, $display, $merge_tpl_vars, $no_output_filter);
-
-        $clock = Clock::getInstance();
-        $clock->setMark('smarty end');
 
         return $o;
     }

@@ -15,7 +15,7 @@ if(ENV === 'PROD') {
     define('_DB_USER_',             'adhocmusic');
     define('_DB_PASSWORD_',         'kK2972Wd');
     define('_DB_DATABASE_',         'adhocmusic');
-    define('SERVER_ROOT_PATH',      '/home/www');
+    define('SERVER_ROOT_PATH',      '/var/www');
     define('ADHOC_ROOT_PATH',       SERVER_ROOT_PATH . '/adhocmusic.com');
     define('DYN_URL',               'http://www.adhocmusic.com');
     define('STATIC_URL',            'http://static.adhocmusic.com');
@@ -25,12 +25,11 @@ if(ENV === 'PROD') {
     define('_DB_USER_',             'root');
     define('_DB_PASSWORD_',         '');
     define('_DB_DATABASE_',         'adhoc');
-    //define('SERVER_ROOT_PATH',      '/Users/gus/Documents/workspace/adhoc/trunk');
-    define('SERVER_ROOT_PATH',      'c:/Users/gseznec/workspace/adhoc/trunk');
+    define('SERVER_ROOT_PATH',      '/Users/gus/workspace/adhoc');
     define('ADHOC_ROOT_PATH',       SERVER_ROOT_PATH);
     define('DYN_URL',               'http://www.adhocmusic.localhost');
     define('STATIC_URL',            'http://static.adhocmusic.localhost');
-    define('CACHE_URL',             'http://cache.adhocmusic.localhost');
+    define('CACHE_URL',             'http://static.adhocmusic.localhost');
 }
 
 define('COMMON_LIB_PATH',           ADHOC_ROOT_PATH . '/lib');
@@ -74,21 +73,6 @@ require_once 'autoload.inc.php';
 require_once 'errors.inc.php';
 
 Tools::sessionInit();
-
-define('IS_MOBILE', false);
-
-if(!isset($_SESSION['mobdetectoff'])) {
-    $_SESSION['mobdetectoff'] = false;
-}
-if(isset($_GET['mobdetectoff'])) {
-    $_SESSION['mobdetectoff'] = (bool) $_GET['mobdetectoff'];
-}
-if(!empty($_SERVER['HTTP_USER_AGENT']) &&
-  (strstr($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'], 'Android'))
-   && $_SESSION['mobdetectoff'] == false) {
-//    Tools::redirect('http://m.adhocmusic.com' . $_SERVER['REQUEST_URI']);
-    define('SHOW_MOBILE_LINK', true);
-}
 
 // chargement de l'api FB longue, limiter aux pages nécessaires
 //if($_SERVER['REQUEST_URI'] == '/') {

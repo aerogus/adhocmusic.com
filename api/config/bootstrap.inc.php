@@ -27,7 +27,5 @@ define('_DB_DATABASE_',            'adhocmusic');
 define('SMARTY_TEMPLATE_PATH',      ADHOC_ROOT_PATH . '/api/views');
 define('SMARTY_TEMPLATE_C_PATH',    ADHOC_ROOT_PATH . '/cache/smarty');
 
-define('IS_MOBILE', false);
-
 require_once 'autoload.inc.php';
 require_once 'errors.inc.php';

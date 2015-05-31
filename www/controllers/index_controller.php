@@ -2,7 +2,7 @@
 
 class Controller
 {
-    public static function index()
+    static function index()
     {
         $page = (int) Route::params('page');
 
@@ -51,47 +51,13 @@ class Controller
         return $smarty->fetch('index.tpl');
     }
 
-    public static function shop()
+    static function shop()
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('shop.tpl');
     }
 
-    public static function news()
-    {
-        $id = (int) Route::params('id');
-
-        $smarty = new AdHocSmarty();
-
-        try {
-            $news = News::getInstance($id);
-        } catch(AdHocUserException $e) {
-            Route::set_http_code('404');
-            $smarty->assign('unknown_news', true);
-            return $smarty->fetch('news.tpl');
-        }
-
-        $smarty->assign('menuselected', 'home');
-
-        $trail = Trail::getInstance();
-        $trail->addStep("News", "/");
-        $trail->addStep($news->getTitle(), "/news/" . $news->getId());
-
-        $smarty->assign('title', "♫ AD'HOC News : " . $news->getTitle());
-        $smarty->assign('description', substr(str_replace("\r", "", str_replace("\n", " ", trim(strip_tags($news->getText())))), 0, 175) . " ...");
-
-        $smarty->assign('news', $news);
-        $smarty->assign('newslist', News::getNewsList(array(
-            'online' => true,
-            'sort'   => 'created_on',
-            'sens'   => 'DESC',
-            'debut'  => 0,
-            'limit'  => 10,
-        )));
-        return $smarty->fetch('news.tpl');
-    }
-
-    public static function partners()
+    static function partners()
     {
         $smarty = new AdHocSmarty();
 
@@ -106,7 +72,7 @@ class Controller
         return $smarty->fetch('partners.tpl');
     }
 
-    public static function visuels()
+    static function visuels()
     {
         $smarty = new AdHocSmarty();
 
@@ -121,7 +87,7 @@ class Controller
         return $smarty->fetch('visuels.tpl');
     }
 
-    public static function contact()
+    static function contact()
     {
         $smarty = new AdHocSmarty();
 
@@ -244,7 +210,7 @@ class Controller
         return true;
     }
 
-    public static function sitemap()
+    static function sitemap()
     {
         $smarty = new AdHocSmarty();
 
@@ -272,7 +238,7 @@ class Controller
         return $smarty->fetch('sitemap.tpl');
     }
 
-    public static function map()
+    static function map()
     {
         $smarty = new AdHocSmarty();
 
@@ -287,7 +253,7 @@ class Controller
         return $smarty->fetch('map.tpl');
     }
 
-    public static function mentions_legales()
+    static function mentions_legales()
     {
         $smarty = new AdHocSmarty();
 
@@ -299,7 +265,13 @@ class Controller
         return $smarty->fetch('mentions-legales.tpl');
     }
 
-    public static function cms()
+    static function hosting()
+    {
+        $smarty = new AdHocSmarty();
+        return $smarty->fetch('hosting.tpl');
+    }
+
+    static function cms()
     {
         $id = (int) Route::params('id');
         $cms = CMS::getInstance($id);
@@ -313,7 +285,7 @@ class Controller
         return $smarty->fetch('common/header.tpl') . $cms->getContent() . $smarty->fetch('common/footer.tpl');
     }    
 
-    public static function r()
+    static function r()
     {
         $url = urldecode((string) Route::params('url'));
         list($url, $from) = explode('||', $url);

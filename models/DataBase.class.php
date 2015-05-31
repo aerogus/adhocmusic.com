@@ -361,13 +361,8 @@ class DataBase
     {
         $conn = $this->connect($conn_name);
 
-        $clock = Clock::getInstance();
-        $clock->setMark('deb-sql');
         $rc = @mysql_query($sql, $conn);
         $this->_nbreq++;
-        $clock->setMark('fin-sql');
-        //$temps = $clock->elapsed('deb-sql', 'fin-sql');
-        //$this->_nbtps += $temps;
 
         /* début debug log */
 
@@ -387,7 +382,6 @@ class DataBase
             }
         }
         $backtrace .= '\O/';
-        //$this->_debug_log[] = array('sql' => $sql, 'time' => $temps, 'backtrace' => $backtrace);
 
         /* fin debug log */
 

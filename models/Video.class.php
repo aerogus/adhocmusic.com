@@ -274,7 +274,7 @@ class Video extends Media
     /**
      * @return int
      */
-    public function getIdHost()
+    function getIdHost()
     {
         return (int) $this->_id_host;
     }
@@ -284,7 +284,7 @@ class Video extends Media
      *
      * @return string
      */
-    public function getHostName()
+    function getHostName()
     {
         return (string) self::$_tab_hosts[$this->_id_host];
     }
@@ -292,7 +292,7 @@ class Video extends Media
     /**
      * @return string
      */
-    public function getReference()
+    function getReference()
     {
         return (string) $this->_reference;
     }
@@ -300,7 +300,7 @@ class Video extends Media
     /**
      * @return int
      */
-    public function getWidth()
+    function getWidth()
     {
         if($this->_width) {
             return (int) $this->_width;
@@ -311,7 +311,7 @@ class Video extends Media
     /**
      * @return int
      */
-    public function getHeight()
+    function getHeight()
     {
         if($this->_height) {
             return (int) $this->_height;
@@ -322,7 +322,7 @@ class Video extends Media
     /**
      * @return string
      */
-    public function getUrl($type = null)
+    function getUrl($type = null)
     {
         return self::getUrlById($this->getId(), $type);
     }
@@ -671,16 +671,8 @@ class Video extends Media
 
             case self::HOST_ADHOC:
                 $autoplay ? $strautoplay = 'true' : $strautoplay = 'false';
-                if(IS_MOBILE) {
-                    $width  = '320';
-                    $height = '180';
-                    return '<video id="mediaspace" poster="' . STATIC_URL . '/media/video/' . $this->getId() . '.jpg" width="320" height="180" controls>' . "\n"
-                         . '<source src="' . STATIC_URL . '/media/video/' . $this->getId() . '.mp4" type="video/mp4">' . "\n"
-                         . '</video>' . "\n";
-                } else {
-                    $width  = $this->getWidth();
-                    $height = $this->getHeight();
-                }
+                $width  = $this->getWidth();
+                $height = $this->getHeight();
                 return ''
                      . '<script src="' . STATIC_URL . '/jwplayer/jwplayer.js"></script>' . "\n"
                      . '<div style="margin: 0; padding: 0" id="mediaspace"></div>'
