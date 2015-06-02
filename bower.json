@@ -1,0 +1,19 @@
+{
+  "name": "adhoc",
+  "version": "0.0.1",
+  "authors": [
+    "Guillaume Seznec <guillaume.seznec@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.*"
+  }
+}

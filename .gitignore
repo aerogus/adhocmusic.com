@@ -4,4 +4,15 @@ log
 static/img/cache
 static/media
 www/public/transit
+
+# export brunch
+public
+
+# dépendances npm
 node_modules
+
+# dépendances bower
+bower_components
+
+# dépendances composer
+vendor

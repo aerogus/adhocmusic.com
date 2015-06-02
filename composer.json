@@ -1,0 +1,20 @@
+{
+    "name": "adhoc",
+    "description": "adhocmusic.com",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=5.4.0",
+        "smarty/smarty": "~3.1",
+        "facebook/php-sdk-v4": "4.0.*",
+        "abraham/twitteroauth": "0.5.2"
+    },
+    "authors": [
+        {
+            "name": "Guillaume Seznec",
+            "email": "guillaume.seznec@gmail.com",
+            "homepage": "http://www.aerogus.net",
+            "role": "Developer"
+        }
+    ]
+}
