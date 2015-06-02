@@ -2,7 +2,7 @@
 
 class Controller
 {
-    public static function get_videos()
+    static function get_videos()
     {
         $groupe  = (int) Route::params('groupe');
         $event   = (int) Route::params('event');
@@ -25,7 +25,7 @@ class Controller
         return $videos;
     }
 
-    public static function get_audios()
+    static function get_audios()
     {
         $groupe  = (int) Route::params('groupe');
         $event   = (int) Route::params('event');
@@ -48,7 +48,7 @@ class Controller
         return $audios;
     }
 
-    public static function get_photos()
+    static function get_photos()
     {
         $groupe  = (int) Route::params('groupe');
         $event   = (int) Route::params('event');
@@ -71,7 +71,7 @@ class Controller
         return $photos;
     }
 
-    public static function get_events()
+    static function get_events()
     {
         $groupe = (int) Route::params('groupe');
         $lieu   = (int) Route::params('lieu');
@@ -94,7 +94,7 @@ class Controller
         return $events;
     }
 
-    public static function doc()
+    static function doc()
     {
         $smarty = new AdHocSmarty();
 
@@ -103,7 +103,7 @@ class Controller
         return $smarty->fetch('doc.tpl');
     }
 
-    public static function console()
+    static function console()
     {
         $action  = (string) Route::params('action');
         $format  = (string) Route::params('format');
