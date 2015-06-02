@@ -118,7 +118,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    public function getName()
+    function getName()
     {
         return (string) $this->_name;
     }
@@ -126,7 +126,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    public function getEmail()
+    function getEmail()
     {
         return (string) $this->_email;
     }
@@ -134,7 +134,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    public function getPhone()
+    function getPhone()
     {
         return (string) $this->_phone;
     }
@@ -142,7 +142,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    public function getSite()
+    function getSite()
     {
         return (string) $this->_site;
     }
@@ -150,7 +150,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    public function getType()
+    function getType()
     {
         return (string) $this->_type;
     }
@@ -158,7 +158,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    public function getCity()
+    function getCity()
     {
         return (string) $this->_city;
     }
@@ -166,7 +166,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    public function getDescription()
+    function getDescription()
     {
         return (string) $this->_description;
     }
@@ -174,7 +174,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    public function getState()
+    function getState()
     {
         return (string) $this->_state;
     }
@@ -182,7 +182,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    public function getCreatedOn()
+    function getCreatedOn()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
@@ -193,7 +193,7 @@ class Exposant extends ObjectModel
     /**
      * @return int
      */
-    public function getCreatedOnTs()
+    function getCreatedOnTs()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
@@ -204,7 +204,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    public function getModifiedOn()
+    function getModifiedOn()
     {
         if(Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
@@ -215,7 +215,7 @@ class Exposant extends ObjectModel
     /**
      * @return int
      */
-    public function getModifiedOnTs()
+    function getModifiedOnTs()
     {
         if(Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
@@ -230,7 +230,7 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    public function setName($val)
+    function setName($val)
     {
         if ($this->_name != $val)
         {
@@ -242,7 +242,7 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    public function setEmail($val)
+    function setEmail($val)
     {
         if ($this->_email != $val)
         {
@@ -254,7 +254,7 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    public function setPhone($val)
+    function setPhone($val)
     {
         if ($this->_phone != $val)
         {
@@ -266,7 +266,7 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    public function setSite($val)
+    function setSite($val)
     {
         if ($this->_site != $val)
         {
@@ -278,7 +278,7 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    public function setType($val)
+    function setType($val)
     {
         if ($this->_type != $val)
         {
@@ -290,7 +290,7 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    public function setCity($val)
+    function setCity($val)
     {
         if ($this->_city != $val)
         {
@@ -302,7 +302,7 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    public function setState($val)
+    function setState($val)
     {
         if ($this->_state != $val)
         {
@@ -314,7 +314,7 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    public function setCreatedOn($val)
+    function setCreatedOn($val)
     {
         if ($this->_created_on != $val)
         {
@@ -326,7 +326,7 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    public function setCreatedNow()
+    function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_created_on != $now)
@@ -339,7 +339,7 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    public function setModifiedOn($val)
+    function setModifiedOn($val)
     {
         if ($this->_modified_on != $val)
         {
@@ -351,7 +351,7 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    public function setModifiedNow()
+    function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_modified_on != $now)
@@ -368,7 +368,7 @@ class Exposant extends ObjectModel
      *
      * @return int
      */
-    public static function getExposantsCount()
+    static function getExposantsCount()
     {
         $db = DataBase::getInstance();
 
@@ -381,7 +381,7 @@ class Exposant extends ObjectModel
     /**
      * @return array
      */
-    public static function getExposants()
+    static function getExposants()
     {
         $db = DataBase::getInstance();
 
@@ -419,7 +419,7 @@ class Exposant extends ObjectModel
     /**
      * Suppression d'un exposant
      */
-    public function delete()
+    function delete()
     {
         parent::delete();
     }    

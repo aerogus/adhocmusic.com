@@ -64,7 +64,7 @@ class Media extends ObjectModel
     /**
      * @return int
      */
-    public function getIdContact()
+    function getIdContact()
     {
         return (int) $this->_id_contact;
     }
@@ -72,7 +72,7 @@ class Media extends ObjectModel
     /**
      * @return int
      */
-    public function getIdGroupe()
+    function getIdGroupe()
     {
         return (int) $this->_id_groupe;
     }
@@ -80,7 +80,7 @@ class Media extends ObjectModel
     /**
      * @return int
      */
-    public function getIdLieu()
+    function getIdLieu()
     {
         return (int) $this->_id_lieu;
     }
@@ -88,7 +88,7 @@ class Media extends ObjectModel
     /**
      * @return int
      */
-    public function getIdEvent()
+    function getIdEvent()
     {
         return (int) $this->_id_event;
     }
@@ -96,7 +96,7 @@ class Media extends ObjectModel
     /**
      * @return int
      */
-    public function getIdStructure()
+    function getIdStructure()
     {
         return (int) $this->_id_structure;
     }
@@ -104,7 +104,7 @@ class Media extends ObjectModel
     /**
      * @return string
      */
-    public function getName()
+    function getName()
     {
         return (string) $this->_name;
     }
@@ -112,7 +112,7 @@ class Media extends ObjectModel
     /**
      * @return string
      */
-    public function getCreatedOn()
+    function getCreatedOn()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
@@ -123,7 +123,7 @@ class Media extends ObjectModel
     /**
      * @return int
      */
-    public function getCreatedOnTs()
+    function getCreatedOnTs()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
@@ -134,7 +134,7 @@ class Media extends ObjectModel
     /**
      * @return string
      */
-    public function getModifiedOn()
+    function getModifiedOn()
     {
         if(Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
@@ -145,7 +145,7 @@ class Media extends ObjectModel
     /**
      * @return int
      */
-    public function getModifiedOnTs()
+    function getModifiedOnTs()
     {
         if(Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
@@ -156,7 +156,7 @@ class Media extends ObjectModel
     /**
      * @return bool
      */
-    public function getOnline()
+    function getOnline()
     {
         return (bool) $this->_online;
     }
@@ -168,7 +168,7 @@ class Media extends ObjectModel
     /**
      * @param int
      */
-    public function setIdContact($val)
+    function setIdContact($val)
     {
         if ($this->_id_contact != $val)
         {
@@ -180,7 +180,7 @@ class Media extends ObjectModel
     /**
      * @param int
      */
-    public function setIdGroupe($val)
+    function setIdGroupe($val)
     {
         if ($this->_id_groupe != $val)
         {
@@ -192,7 +192,7 @@ class Media extends ObjectModel
     /**
      * @param int
      */
-    public function setIdLieu($val)
+    function setIdLieu($val)
     {
         if ($this->_id_lieu != $val)
         {
@@ -204,7 +204,7 @@ class Media extends ObjectModel
     /**
      * @param int
      */
-    public function setIdEvent($val)
+    function setIdEvent($val)
     {
         if ($this->_id_event != $val)
         {
@@ -216,7 +216,7 @@ class Media extends ObjectModel
     /**
      * @param int
      */
-    public function setIdStructure($val)
+    function setIdStructure($val)
     {
         if ($this->_id_structure != $val)
         {
@@ -228,7 +228,7 @@ class Media extends ObjectModel
     /**
      * @param string
      */
-    public function setName($val)
+    function setName($val)
     {
         if ($this->_name != $val)
         {
@@ -240,7 +240,7 @@ class Media extends ObjectModel
     /**
      * @param string
      */
-    public function setCreatedOn($val)
+    function setCreatedOn($val)
     {
         if ($this->_created_on != $val)
         {
@@ -252,7 +252,7 @@ class Media extends ObjectModel
     /**
      *
      */
-    public function setCreatedNow()
+    function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_created_on != $now)
@@ -265,7 +265,7 @@ class Media extends ObjectModel
     /**
      * @param string
      */
-    public function setModifiedOn($val)
+    function setModifiedOn($val)
     {
         if ($this->_modified_on != $val)
         {
@@ -277,7 +277,7 @@ class Media extends ObjectModel
     /**
      *
      */
-    public function setModifiedNow()
+    function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_modified_on != $now)
@@ -290,7 +290,7 @@ class Media extends ObjectModel
     /**
      * @param bool
      */
-    public function setOnline($val)
+    function setOnline($val)
     {
         if ($this->_online != $val)
         {
@@ -316,7 +316,7 @@ class Media extends ObjectModel
      *              ['split']     => false
      * @return array
      */
-    public static function getMedia($params = array())
+    static function getMedia($params = array())
     {
         $tab_type = array();
         if(array_key_exists('type', $params)) {

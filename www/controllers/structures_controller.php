@@ -2,7 +2,7 @@
 
 class Controller
 {
-    public static function index()
+    static function index()
     {
         $trail = Trail::getInstance();
         $trail->addStep('Structures');
@@ -12,7 +12,7 @@ class Controller
         return $smarty->fetch('structures/index.tpl');
     }
 
-    public static function show()
+    static function show()
     {
         $id = (int) Route::params('id');
 
@@ -42,7 +42,7 @@ class Controller
         return $smarty->fetch('structures/show.tpl');
     }
 
-    public static function create()
+    static function create()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -98,7 +98,7 @@ class Controller
         return true;
     }
 
-    public static function edit()
+    static function edit()
     {
         $id = (int) Route::params('id');
 
@@ -149,7 +149,7 @@ class Controller
         return true;
     }
 
-    public static function delete()
+    static function delete()
     {
         $id = (int) Route::params('id');
 

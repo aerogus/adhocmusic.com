@@ -2,7 +2,7 @@
 
 class Twitter
 {
-    public static function getLastNews($twitter_id, $force_import = false)
+    static function getLastNews($twitter_id, $force_import = false)
     {
         $db = DataBase::getInstance();
 
@@ -22,7 +22,7 @@ class Twitter
         return $news;
     }
 
-    public static function getLastGroupsNews()
+    static function getLastGroupsNews()
     {
       $db = DataBase::getInstance();
 
@@ -45,7 +45,7 @@ class Twitter
       return $news;
     }
 
-    public static function makeTextCliquable($str, $mode = 2)
+    static function makeTextCliquable($str, $mode = 2)
     {
         $regexp_url = "/(http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
 

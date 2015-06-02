@@ -2,7 +2,7 @@
 
 class Controller
 {
-    public static function index()
+    static function index()
     {
         $smarty = new AdHocSmarty();
 
@@ -16,7 +16,7 @@ class Controller
         return $smarty->fetch('newsletters/index.tpl');
     }
 
-    public static function show()
+    static function show()
     {
         $id = (int) Route::params('id');
 
@@ -49,7 +49,7 @@ class Controller
         return $smarty->fetch('newsletters/show.tpl');
     }
 
-    public static function subscriptions()
+    static function subscriptions()
     {
         $email = (string) Route::params('email');
         $action = (string) Route::params('action');

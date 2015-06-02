@@ -6,7 +6,7 @@ define('PHOTOS_EXTRACT_DIR', PHOTOS_IMPORT_DIR . '/tmp');
 
 class Controller
 {
-    public static function my()
+    static function my()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -40,7 +40,7 @@ class Controller
         return $smarty->fetch('photos/my.tpl');
     }
 
-    public static function show()
+    static function show()
     {
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
@@ -180,7 +180,7 @@ class Controller
         return $smarty->fetch('photos/show.tpl');
     }
 
-    public static function create()
+    static function create()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -298,7 +298,7 @@ class Controller
         return true;
     }
 
-    public static function import()
+    static function import()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -446,7 +446,7 @@ class Controller
         return $smarty->fetch('photos/import.tpl');
     }
 
-    public static function edit()
+    static function edit()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -536,7 +536,7 @@ class Controller
         return $smarty->fetch('photos/edit.tpl');
     }
 
-    public static function ajax_update()
+    static function ajax_update()
     {
         if(!Tools::isAuth()) {
             return 'KO';
@@ -587,7 +587,7 @@ class Controller
         return true;
     }
 
-    public static function delete()
+    static function delete()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 

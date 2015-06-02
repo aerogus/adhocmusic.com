@@ -174,7 +174,7 @@ class Controller
     /**
      * @see http://www.fsoft.it/panorama/PTViewer/PT_Reference.htm
      */
-    public static function pano()
+    static function pano()
     {
         $id = (int) Route::params('id');
 

@@ -51,7 +51,7 @@ class AdHocException extends Exception
     /**
      *
      */
-    public function setCode($value)
+    function setCode($value)
     {
         $this->code = $value;
     }
@@ -59,7 +59,7 @@ class AdHocException extends Exception
     /**
      *
      */
-    public function setMessage($value)
+    function setMessage($value)
     {
         $this->message = $value;
     }
@@ -67,7 +67,7 @@ class AdHocException extends Exception
     /**
      *
      */
-    public function getErrNo()
+    function getErrNo()
     {
         return $this->errno;
     }
@@ -75,7 +75,7 @@ class AdHocException extends Exception
     /**
      *
      */
-    public function setErrNo($value)
+    function setErrNo($value)
     {
         $this->errno = (int) $value;
     }
@@ -83,7 +83,7 @@ class AdHocException extends Exception
     /**
      *
      */
-    public function getErrStr()
+    function getErrStr()
     {
         return $this->errstr;
     }
@@ -91,7 +91,7 @@ class AdHocException extends Exception
     /**
      *
      */
-    public function setErrStr($value)
+    function setErrStr($value)
     {
         $this->errstr = (string) $value;
     }
@@ -99,7 +99,7 @@ class AdHocException extends Exception
     /**
      *
      */
-    public function __construct($message, $code = EXCEPTION_DEFAULT, Exception $previous = null)
+    function __construct($message, $code = EXCEPTION_DEFAULT, Exception $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }
@@ -107,7 +107,7 @@ class AdHocException extends Exception
     /**
      *
      */
-    public function __toString()
+    function __toString()
     {
         $str = 'Erreur [' . $this->getErrNo() . '] : ' . $this->getMessage();
         if ($this->getErrStr()) {
@@ -120,7 +120,7 @@ class AdHocException extends Exception
     /**
      *
      */
-    public function addSomethingForDebug($o)
+    function addSomethingForDebug($o)
     {
         if (is_null($this->stuff)) {
             $this->stuff = array();

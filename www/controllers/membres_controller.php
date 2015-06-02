@@ -2,7 +2,7 @@
 
 class Controller
 {
-    public static function show()
+    static function show()
     {
         $id = (int) Route::params('id');
 
@@ -42,7 +42,7 @@ class Controller
         return $smarty->fetch('membres/show.tpl');
     }
 
-    public static function create()
+    static function create()
     {
         if(Tools::isAuth()) {
             Tools::redirect('/');
@@ -215,7 +215,7 @@ class Controller
         return true;
     }
 
-    public static function edit()
+    static function edit()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -373,7 +373,7 @@ class Controller
         return true;
     }
 
-    public static function delete()
+    static function delete()
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -402,7 +402,7 @@ class Controller
         return $smarty->fetch('membres/delete.tpl');
     }
 
-    public static function autocomplete_pseudo()
+    static function autocomplete_pseudo()
     {
         $q = trim((string) Route::params('q'));
 
@@ -423,7 +423,7 @@ class Controller
         return $res;
     }
 
-    public static function fb_link()
+    static function fb_link()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -458,7 +458,7 @@ class Controller
         return $smarty->fetch('membres/fb-link.tpl');
     }
 
-    public static function fb_unlink()
+    static function fb_unlink()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -484,7 +484,7 @@ class Controller
         return $smarty->fetch('membres/fb-unlink.tpl');
     }
 
-    public static function tableau_de_bord()
+    static function tableau_de_bord()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 

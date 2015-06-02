@@ -44,7 +44,7 @@ class Pagination
     /**
      *
      */
-    public function __construct($nb_items, $nb_items_per_page, $selected_page)
+    function __construct($nb_items, $nb_items_per_page, $selected_page)
     {
         $this->_nb_items = (int) $nb_items;
         $this->_nb_items_per_page = (int) $nb_items_per_page;
@@ -55,7 +55,7 @@ class Pagination
     /**
      * @return int
      */
-    public function getNbItems()
+    function getNbItems()
     {
         return (int) $this->_nb_items;
     }
@@ -63,7 +63,7 @@ class Pagination
     /**
      * @param int $nb
      */
-    public function setNbItems($nb)
+    function setNbItems($nb)
     {
         $this->_nb_items = (int) $nb;
     }
@@ -71,7 +71,7 @@ class Pagination
     /**
      * @return int
      */
-    public function getNbItemsPerPage()
+    function getNbItemsPerPage()
     {
         return (int) $this->_nb_items_per_page;
     }
@@ -79,7 +79,7 @@ class Pagination
     /**
      * @param int $nb
      */
-    public function setNbItemsPerPage($nb)
+    function setNbItemsPerPage($nb)
     {
         $this->_nb_items_per_page = (int) $nb;
     }
@@ -87,7 +87,7 @@ class Pagination
     /**
      * @return int
      */
-    public function getSelectedPage()
+    function getSelectedPage()
     {
         return (int) $this->_selected_page;
     }
@@ -95,7 +95,7 @@ class Pagination
     /**
      * @return int
      */
-    public function getSelectedPageNum()
+    function getSelectedPageNum()
     {
         return (int) ($this->getSelectedPage() + 1);
     }
@@ -103,7 +103,7 @@ class Pagination
     /**
      * @param int
      */
-    public function setSelectedPage($nb)
+    function setSelectedPage($nb)
     {
         if(($nb >= $this->getFirstPage()) && ($nb <= $this->getLastPage())) {
             $this->_selected_page = (int) $nb;
@@ -113,7 +113,7 @@ class Pagination
     /**
      * @return int
      */
-    public function getNbLinks()
+    function getNbLinks()
     {
         return (int) $this->_nb_links;
     }
@@ -121,7 +121,7 @@ class Pagination
     /**
      * @param int $nb
      */
-    public function setNbLinks($nb)
+    function setNbLinks($nb)
     {
         $this->_nb_links = (int) $nb;
     }
@@ -129,7 +129,7 @@ class Pagination
     /**
      * @return int
      */
-    public function getCurrentPage()
+    function getCurrentPage()
     {
         return (int) $this->_current_page;
     }
@@ -137,7 +137,7 @@ class Pagination
     /**
      * @return int
      */
-    public function getCurrentPageNum()
+    function getCurrentPageNum()
     {
         return (int) ($this->getCurrentPage() + 1);
     }
@@ -145,7 +145,7 @@ class Pagination
     /**
      * @param int
      */
-    public function setCurrentPage($nb)
+    function setCurrentPage($nb)
     {
         if(($nb >= $this->getFirstPage()) && ($nb <= $this->getLastPage())) {
             $this->_current_page = (int) $nb;
@@ -155,7 +155,7 @@ class Pagination
     /**
      * @return int
      */
-    public function getNbPages()
+    function getNbPages()
     {
         return $this->_nb_pages;
     }
@@ -163,7 +163,7 @@ class Pagination
     /**
      * @return int ou bool
      */
-    public function getNextPage()
+    function getNextPage()
     {
         return (int) ($this->getCurrentPage() + 1);
     }
@@ -171,7 +171,7 @@ class Pagination
     /**
      * @return int ou false
      */
-    public function getPrevPage()
+    function getPrevPage()
     {
         return (int) ($this->getCurrentPage() - 1);
     }
@@ -179,7 +179,7 @@ class Pagination
     /**
      * @return int
      */
-    public function getFirstPage()
+    function getFirstPage()
     {
         return 0;
     }
@@ -187,7 +187,7 @@ class Pagination
     /**
      * @return int
      */
-    public function getFirstPageNum()
+    function getFirstPageNum()
     {
         return (int) ($this->getFirstPage() + 1);
     }
@@ -195,7 +195,7 @@ class Pagination
     /**
      * @return int
      */
-    public function getLastPage()
+    function getLastPage()
     {
         if($this->hasPagination()) {
             return floor(($this->getNbItems() - 1) / $this->getNbItemsPerPage());
@@ -206,7 +206,7 @@ class Pagination
     /**
      * @return int
      */
-    public function getLastPageNum()
+    function getLastPageNum()
     {
         return (int) ($this->getLastPage() + 1);
     }
@@ -214,7 +214,7 @@ class Pagination
     /**
      * @return bool
      */
-    public function hasNextPage()
+    function hasNextPage()
     {
         return ($this->hasPagination() && ($this->getCurrentPage() < $this->getLastPage()));
     }
@@ -222,7 +222,7 @@ class Pagination
     /**
      * @return bool
      */
-    public function hasPrevPage()
+    function hasPrevPage()
     {
         return ($this->hasPagination() && ($this->getCurrentPage() > $this->getFirstPage()));
     }
@@ -230,7 +230,7 @@ class Pagination
     /**
      * @return bool
      */
-    public function hasPagination()
+    function hasPagination()
     {
         return (bool) ($this->getNbItems() > $this->getNbItemsPerPage());
     }
@@ -238,7 +238,7 @@ class Pagination
     /**
      * @return bool
      */
-    public function hasItems()
+    function hasItems()
     {
         return (bool) ($this->getNbItems() > 0);
     }
@@ -248,7 +248,7 @@ class Pagination
      *
      * @return string
      */
-    public function getClass()
+    function getClass()
     {
         if($this->getSelectedPage() == $this->getCurrentPage()) {
             return 'selectedpage';

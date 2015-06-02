@@ -29,7 +29,7 @@ abstract class Liste
     /**
      *
      */
-    public function __construct()
+    function __construct()
     {
         $this->_loadFromDb();
         static::$_instance = $this;
@@ -38,7 +38,7 @@ abstract class Liste
     /**
      *
      */
-    public static function getInstance()
+    static function getInstance()
     {
         //if (is_null(static::$_instance)) {
             return new static();
@@ -49,7 +49,7 @@ abstract class Liste
     /**
      *
      */
-    public static function deleteInstance()
+    static function deleteInstance()
     {
         if (isset(static::$_instance)) {
             static::$_instance = null;
@@ -63,7 +63,7 @@ abstract class Liste
      *
      * @return array
      */
-    public static function getHashTable()
+    static function getHashTable()
     {
         $o = static::getInstance();
         return $o->_getHashTable();

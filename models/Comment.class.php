@@ -124,7 +124,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    public function getType()
+    function getType()
     {
         return (string) $this->_type;
     }
@@ -132,7 +132,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    public function getFullType()
+    function getFullType()
     {
         return self::$_types[$this->_type];
     }
@@ -140,7 +140,7 @@ class Comment extends ObjectModel
     /**
      * @return int
      */
-    public function getIdContent()
+    function getIdContent()
     {
         return (int) $this->_id_content;
     }
@@ -148,7 +148,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    public function getCreatedOn()
+    function getCreatedOn()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
@@ -159,7 +159,7 @@ class Comment extends ObjectModel
     /**
      * @return int
      */
-    public function getCreatedOnTs()
+    function getCreatedOnTs()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
@@ -170,7 +170,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    public function getModifiedOn()
+    function getModifiedOn()
     {
         if(Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
@@ -181,7 +181,7 @@ class Comment extends ObjectModel
     /**
      * @return int
      */
-    public function getModifiedOnTs()
+    function getModifiedOnTs()
     {
         if(Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
@@ -192,7 +192,7 @@ class Comment extends ObjectModel
     /**
      * @return bool
      */
-    public function getOnline()
+    function getOnline()
     {
         return (bool) $this->_online;
     }
@@ -200,7 +200,7 @@ class Comment extends ObjectModel
     /**
      * @return int
      */
-    public function getIdContact()
+    function getIdContact()
     {
         return (int) $this->_id_contact;
     }
@@ -208,7 +208,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    public function getText()
+    function getText()
     {
         return (string) $this->_text;
     }
@@ -216,7 +216,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    public function getPseudoMbr()
+    function getPseudoMbr()
     {
         return (string) $this->_pseudo_mbr;
     }
@@ -224,7 +224,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    public function getPseudo()
+    function getPseudo()
     {
         $this->getPseudoMbr() ? $pseudo = $this->getPseudoMbr() : $pseudo = $this->_pseudo;
         return (string) $pseudo;
@@ -233,7 +233,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    public function getEmailMbr()
+    function getEmailMbr()
     {
         return (string) $this->_email_mbr;
     }
@@ -241,7 +241,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    public function getEmail()
+    function getEmail()
     {
         $this->getEmailMbr() ? $email = $this->getEmailMbr() : $email = $this->_email;
         return (string) $email;
@@ -250,7 +250,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    public function getUrl()
+    function getUrl()
     {
         return self::getUrlById($this->getId());
     }
@@ -258,7 +258,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    public static function getUrlById($id)
+    static function getUrlById($id)
     {
         return DYN_URL . '/comments/show/' . $id;
     }
@@ -270,7 +270,7 @@ class Comment extends ObjectModel
     /**
      * @param string
      */
-    public function setType($val)
+    function setType($val)
     {
         $val = trim((string) $val);
         if ($this->_type != $val)
@@ -283,7 +283,7 @@ class Comment extends ObjectModel
     /**
      * @param int
      */
-    public function setIdContent($val)
+    function setIdContent($val)
     {
         $val = (int) $val;
         if ($this->_id_content != $val)
@@ -296,7 +296,7 @@ class Comment extends ObjectModel
     /**
      * @param string
      */
-    public function setCreatedOn($val)
+    function setCreatedOn($val)
     {
         if ($this->_created_on != $val)
         {
@@ -308,7 +308,7 @@ class Comment extends ObjectModel
     /**
      * @param string
      */
-    public function setCreatedNow()
+    function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_created_on != $now)
@@ -321,7 +321,7 @@ class Comment extends ObjectModel
     /**
      * @param string
      */
-    public function setModifiedOn($val)
+    function setModifiedOn($val)
     {
         if ($this->_modified_on != $val)
         {
@@ -333,7 +333,7 @@ class Comment extends ObjectModel
     /**
      * @param string
      */
-    public function setModifiedNow()
+    function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_modified_on != $now)
@@ -346,7 +346,7 @@ class Comment extends ObjectModel
     /**
      * @param bool
      */
-    public function setOnline($val)
+    function setOnline($val)
     {
         $val = (bool) $val;
         if ($this->_online != $val)
@@ -359,7 +359,7 @@ class Comment extends ObjectModel
     /**
      * @param int
      */
-    public function setIdContact($val)
+    function setIdContact($val)
     {
         $val = (int) $val;
         if ($this->_id_contact != $val)
@@ -372,7 +372,7 @@ class Comment extends ObjectModel
     /**
      * @param string
      */
-    public function setPseudo($val)
+    function setPseudo($val)
     {
         $val = trim((string) $val);
         if ($this->_pseudo != $val)
@@ -385,7 +385,7 @@ class Comment extends ObjectModel
     /**
      * @param string
      */
-    public function setEmail($val)
+    function setEmail($val)
     {
         $val = trim((string) $val);
         if ($this->_email != $val)
@@ -398,7 +398,7 @@ class Comment extends ObjectModel
     /**
      * @param string
      */
-    public function setText($val)
+    function setText($val)
     {
         $val = trim((string) $val);
         if ($this->_text != $val)
@@ -436,7 +436,7 @@ class Comment extends ObjectModel
         throw new AdHocUserException('id_comment introuvable', EXCEPTION_USER_UNKNOW_ID);
     }
 
-    public static function getComments($params = array())
+    static function getComments($params = array())
     {
         $debut = 0;
         if(isset($params['debut'])) {
@@ -517,7 +517,7 @@ class Comment extends ObjectModel
     /**
      * envoie les notifications par mail aux personnes liées au contenu commenté
      */
-    public function sendNotifs()
+    function sendNotifs()
     {
         $emails  = array();
         $subject = "Un nouveau commentaire a été posté ";

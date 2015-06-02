@@ -331,7 +331,7 @@ class Video extends Media
      * @param int
      * @return string
      */
-    public static function getUrlById($id, $type = null)
+    static function getUrlById($id, $type = null)
     {
         if($type == 'www') {
             return 'http://www.adhocmusic.com/videos/show/' . $id;
@@ -342,7 +342,7 @@ class Video extends Media
     /**
      * @return string
      */
-    public function getDirectUrl()
+    function getDirectUrl()
     {
         return self::getFlashUrl($this->getIdHost(), $this->getReference());
     }
@@ -354,7 +354,7 @@ class Video extends Media
     /**
      * @param int
      */
-    public function setIdHost($val)
+    function setIdHost($val)
     {
         if ($this->_id_host != $val)
         {
@@ -366,7 +366,7 @@ class Video extends Media
     /**
      * @param string
      */
-    public function setReference($val)
+    function setReference($val)
     {
         if ($this->_reference != $val)
         {
@@ -378,7 +378,7 @@ class Video extends Media
     /**
      * @param int
      */
-    public function setWidth($val)
+    function setWidth($val)
     {
         if ($this->_width != $val)
         {
@@ -390,7 +390,7 @@ class Video extends Media
     /**
      * @param bool
      */
-    public function setHeight($val)
+    function setHeight($val)
     {
         if ($this->_height != $val)
         {
@@ -406,7 +406,7 @@ class Video extends Media
      *
      * @return array
      */
-    public static function getHosts()
+    static function getHosts()
     {
         return self::$_tab_hosts;
     }
@@ -416,7 +416,7 @@ class Video extends Media
      *
      * @return array
      */
-    public static function getVideoHosts()
+    static function getVideoHosts()
     {
         $tab = array();
         foreach(self::$_tab_hosts as $host_id => $host_name) {
@@ -432,7 +432,7 @@ class Video extends Media
      * @param int $host_id
      * @return string
      */
-    public static function getHostNameByHostId($host_id)
+    static function getHostNameByHostId($host_id)
     {
         return self::$_tab_hosts[$host_id];
     }
@@ -451,7 +451,7 @@ class Video extends Media
      *              ['limit']     => 10
      * @return array
      */
-    public static function getVideos($params = array())
+    static function getVideos($params = array())
     {
         $debut = 0;
         if(isset($params['debut'])) {
@@ -566,7 +566,7 @@ class Video extends Media
      * @param string $reference
      * @return bool
      */
-    public function delete()
+    function delete()
     {
         if(parent::delete())
         {
@@ -585,7 +585,7 @@ class Video extends Media
      * @param bool $autoplay
      * @return string
      */
-    public function getPlayer($autoplay = false, $iframe = true)
+    function getPlayer($autoplay = false, $iframe = true)
     {
         switch($this->_id_host)
         {
@@ -716,7 +716,7 @@ class Video extends Media
      * @param string $reference
      * @return string
      */
-    public static function getFlashUrl($id_host, $reference)
+    static function getFlashUrl($id_host, $reference)
     {
         switch($id_host)
         {
@@ -763,7 +763,7 @@ class Video extends Media
      * @param string $code
      * @return array ou false
      */
-    public static function parseStringForVideoUrl($str)
+    static function parseStringForVideoUrl($str)
     {
         $str = trim($str);
 
@@ -919,7 +919,7 @@ class Video extends Media
      * @param bool $multi (retourne plusieurs vignettes si dispo)
      * @return string ou array de string
      */
-    public static function getRemoteThumbnail($id_host, $reference, $multi = false)
+    static function getRemoteThumbnail($id_host, $reference, $multi = false)
     {
         switch($id_host)
         {
@@ -971,7 +971,7 @@ class Video extends Media
      * @param string $reference
      * @return string
      */
-    public static function getRemoteTitle($id_host, $reference)
+    static function getRemoteTitle($id_host, $reference)
     {
         switch($id_host)
         {
@@ -998,7 +998,7 @@ class Video extends Media
      * @param int $id_video
      * @return bool
      */
-    public function deleteThumbnail()
+    function deleteThumbnail()
     {
         if(file_exists(self::_getLocalPath() . '/' . $this->getId() . '.jpg')) {
             unlink(self::_getLocalPath() . '/' . $this->getId() . '.jpg');
@@ -1014,7 +1014,7 @@ class Video extends Media
      * @param string $remote_url
      * @return bool
      */
-    public function storeThumbnail($remote_url)
+    function storeThumbnail($remote_url)
     {
         $tmp = self::_getLocalPath() . '/' . $this->_id_video . '.jpg.tmp';
         $jpg = self::_getLocalPath() . '/' . $this->_id_video . '.jpg';
@@ -1032,7 +1032,7 @@ class Video extends Media
         return true;
     }
 
-    public static function invalidateVideoThumbInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 1)
+    static function invalidateVideoThumbInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 1)
     {
         $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
@@ -1050,7 +1050,7 @@ class Video extends Media
      * gestion de la mise en cache
      * @return string
      */
-    public static function getVideoThumbUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 1)
+    static function getVideoThumbUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 1)
     {
         $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
@@ -1085,7 +1085,7 @@ class Video extends Media
      *
      * @return int
      */
-    public static function getMyVideosCount()
+    static function getMyVideosCount()
     {
         if(empty($_SESSION['membre'])) {
             throw new AdHocUserException('non identifié');
@@ -1113,7 +1113,7 @@ class Video extends Media
      *
      * @return int
      */
-    public static function getVideosCount()
+    static function getVideosCount()
     {
         if(isset($_SESSION['global_counters']['nb_videos'])) {
             return $_SESSION['global_counters']['nb_videos'];

@@ -100,7 +100,7 @@ class Featured extends ObjectModel
     /**
      * @return array
      */
-    public static function getSlots()
+    static function getSlots()
     {
         return array(
             1 => 'Live AD\'HOC',
@@ -114,7 +114,7 @@ class Featured extends ObjectModel
      * @param int
      * @return string
      */
-    public static function getSlotNameBySlotId($id_slot)
+    static function getSlotNameBySlotId($id_slot)
     {
         $slots = self::getSlots();
         if(array_key_exists($id_slot, $slots)) {
@@ -129,7 +129,7 @@ class Featured extends ObjectModel
      * @param string $mode
      * @return string
      */
-    public function getDatDeb($mode = false)
+    function getDatDeb($mode = false)
     {
         if(!Date::isDateTimeOk($this->_datdeb)) {
             return false;
@@ -154,7 +154,7 @@ class Featured extends ObjectModel
      * @param string $mode
      * @return string
      */
-    public function getDatFin($mode = false)
+    function getDatFin($mode = false)
     {
         if(!Date::isDateTimeOk($this->_datfin)) {
             return false;
@@ -178,7 +178,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    public function getTitle()
+    function getTitle()
     {
         return (string) $this->_title;
     }
@@ -186,7 +186,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    public function getDescription()
+    function getDescription()
     {
         return (string) $this->_description;
     }
@@ -194,7 +194,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    public function getLink()
+    function getLink()
     {
         return (string) $this->_link;
     }
@@ -202,7 +202,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    public function getImage()
+    function getImage()
     {
         return self::getImageById((int) $this->getId());
     }
@@ -211,7 +211,7 @@ class Featured extends ObjectModel
      * @param int
      * @return string
      */
-    public static function getImageById($id)
+    static function getImageById($id)
     {
         return STATIC_URL . '/media/featured/' . (int) $id . '.jpg';
     }
@@ -219,7 +219,7 @@ class Featured extends ObjectModel
     /**
      * @return int
      */
-    public function getSlot()
+    function getSlot()
     {
         return (int) $this->_slot;
     }
@@ -227,7 +227,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    public function getSlotName()
+    function getSlotName()
     {
         return (string) self::getSlotNameBySlotId((int) $this->getSlot());
     }
@@ -235,7 +235,7 @@ class Featured extends ObjectModel
     /**
      * @return bool
      */
-    public function getOnline()
+    function getOnline()
     {
         return (bool) $this->_online;
     }
@@ -247,7 +247,7 @@ class Featured extends ObjectModel
     /**
      * @param string YYYY-MM-DD HH:II:SS
      */
-    public function setDatDeb($val)
+    function setDatDeb($val)
     {
         if(!Date::isDateTimeOk($val)) {
             throw new AdHocUserException('datdeb invalide', EXCEPTION_USER_BAD_PARAM);
@@ -263,7 +263,7 @@ class Featured extends ObjectModel
     /**
      * @param string YYYY-MM-DD HH:II:SS
      */
-    public function setDatFin($val)
+    function setDatFin($val)
     {
         if(!Date::isDateTimeOk($val)) {
             throw new AdHocUserException('datfin invalide', EXCEPTION_USER_BAD_PARAM);
@@ -279,7 +279,7 @@ class Featured extends ObjectModel
     /**
      * @param string
      */
-    public function setTitle($val)
+    function setTitle($val)
     {
         $val = trim((string) $val);
         if ($this->_title != $val)
@@ -292,7 +292,7 @@ class Featured extends ObjectModel
     /**
      * @param string
      */
-    public function setDescription($val)
+    function setDescription($val)
     {
         $val = trim((string) $val);
         if ($this->_description != $val)
@@ -305,7 +305,7 @@ class Featured extends ObjectModel
     /**
      * @param string
      */
-    public function setLink($val)
+    function setLink($val)
     {
         $val = trim((string) $val);
         if ($this->_link != $val)
@@ -318,7 +318,7 @@ class Featured extends ObjectModel
     /**
      * @param int
      */
-    public function setSlot($val)
+    function setSlot($val)
     {
         $val = (int) $val;
         if ($this->_slot != $val)
@@ -331,7 +331,7 @@ class Featured extends ObjectModel
     /**
      * @param bool
      */
-    public function setOnline($val)
+    function setOnline($val)
     {
         $val = (bool) $val;
         if ($this->_online != $val)
@@ -346,7 +346,7 @@ class Featured extends ObjectModel
     /**
      * @return array
      */
-    public static function getFeaturedHomepage()
+    static function getFeaturedHomepage()
     {
         $db = DataBase::getInstance();
 
@@ -387,7 +387,7 @@ class Featured extends ObjectModel
      *
      * @return array
      */
-    public static function getFeaturedAdmin()
+    static function getFeaturedAdmin()
     {
         $db = DataBase::getInstance();
 
@@ -446,7 +446,7 @@ class Featured extends ObjectModel
      *
      * @return true
      */
-    public function delete()
+    function delete()
     {
         if(parent::delete())
         {
@@ -459,7 +459,7 @@ class Featured extends ObjectModel
         return false;
     }
 
-    public static function invalidateImageInCache($id, $width = 120, $height = 120, $bgcolor = '000000', $border = 0, $zoom = 1)
+    static function invalidateImageInCache($id, $width = 120, $height = 120, $bgcolor = '000000', $border = 0, $zoom = 1)
     {
         $uid = 'featured/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
@@ -478,7 +478,7 @@ class Featured extends ObjectModel
      *
      * @return string
      */
-    public static function getImageUrl($id, $width = 120, $height = 120, $bgcolor = '000000', $border = 0, $zoom = 1)
+    static function getImageUrl($id, $width = 120, $height = 120, $bgcolor = '000000', $border = 0, $zoom = 1)
     {
         $uid = 'featured/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);

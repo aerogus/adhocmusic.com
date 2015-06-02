@@ -159,7 +159,7 @@ class Departement
      *
      * @return array[cleReg] = libelle
      */
-    public static function getHashTable($cleReg = null)
+    static function getHashTable($cleReg = null)
     {
         $out = array();
         foreach(self::$_liste as $cle => $info)
@@ -181,7 +181,7 @@ class Departement
      * @param int $cleDep
      * @return string
      */
-    public static function getName($cleDep)
+    static function getName($cleDep)
     {
         $cleDep = str_pad($cleDep, 2, '0', STR_PAD_LEFT);
         if(self::isCleOk($cleDep)) {
@@ -196,7 +196,7 @@ class Departement
      * @param int $cleDep
      * @return int
      */
-    public static function getRegion($cleDep)
+    static function getRegion($cleDep)
     {
         $cleDep = str_pad($cleDep, 2, '0', STR_PAD_LEFT);
         if(self::isCleOk($cleDep)) {
@@ -211,7 +211,7 @@ class Departement
      * @param string
      * @return bool
      */
-    public static function isCleOk($cle)
+    static function isCleOk($cle)
     {
         $cle = str_pad($cle, 2, '0', STR_PAD_LEFT);
         if(array_key_exists($cle, self::getHashTable())) {

@@ -30,7 +30,7 @@ class Stats extends ObjectModel
      * @todo par mois et année
      * @return array
      */
-    public static function getNbInscriptionMembreByMonth()
+    static function getNbInscriptionMembreByMonth()
     {
         $db = DataBase::getInstance();
 
@@ -65,7 +65,7 @@ class Stats extends ObjectModel
      * @todo par mois et année
      * @return array
      */
-    public static function getNbInscriptionGroupeByMonth()
+    static function getNbInscriptionGroupeByMonth()
     {
         $db = DataBase::getInstance();
 
@@ -97,7 +97,7 @@ class Stats extends ObjectModel
     /**
      * @return array
      */
-    public static function getTopMembresInSpinoly()
+    static function getTopMembresInSpinoly()
     {
         $db = DataBase::getInstance();
 
@@ -120,7 +120,7 @@ class Stats extends ObjectModel
     /**
      * @return array
      */
-    public static function getTopGroupesInSpinoly()
+    static function getTopGroupesInSpinoly()
     {
         $db = DataBase::getInstance();
 
@@ -142,7 +142,7 @@ class Stats extends ObjectModel
      *
      * @return array
      */
-    public static function getTopEventsSenders()
+    static function getTopEventsSenders()
     {
         $db = DataBase::getInstance();
 
@@ -179,7 +179,7 @@ class Stats extends ObjectModel
      *
      * @return array
      */
-    public static function getTopLieuxSenders()
+    static function getTopLieuxSenders()
     {
         $db = DataBase::getInstance();
 
@@ -215,7 +215,7 @@ class Stats extends ObjectModel
      *
      * @return array
      */
-    public static function getTopLieux()
+    static function getTopLieux()
     {
         $db = DataBase::getInstance();
 
@@ -251,7 +251,7 @@ class Stats extends ObjectModel
      *
      * @return array
      */
-    public static function getNbLieuxByDepartement()
+    static function getNbLieuxByDepartement()
     {
         $db = DataBase::getInstance();
 
@@ -290,7 +290,7 @@ class Stats extends ObjectModel
      *
      * @return array
      */
-    public static function getNbLieuxByRegion()
+    static function getNbLieuxByRegion()
     {
         $db = DataBase::getInstance();
 
@@ -339,7 +339,7 @@ class Stats extends ObjectModel
      *
      * @return array
      */
-    public static function getNbEventsByMonth()
+    static function getNbEventsByMonth()
     {
         $db = DataBase::getInstance();
 
@@ -374,7 +374,7 @@ class Stats extends ObjectModel
      *
      * @return array
      */
-    public static function getTopMessagesForumsSenders()
+    static function getTopMessagesForumsSenders()
     {
         $db = DataBase::getInstance();
 
@@ -410,7 +410,7 @@ class Stats extends ObjectModel
      *
      * @return array
      */
-    public static function getTopAudiosSenders()
+    static function getTopAudiosSenders()
     {
         $db = DataBase::getInstance();
 
@@ -446,7 +446,7 @@ class Stats extends ObjectModel
      *
      * @return array
      */
-    public static function getTopVideosSenders()
+    static function getTopVideosSenders()
     {
         $db = DataBase::getInstance();
 
@@ -482,7 +482,7 @@ class Stats extends ObjectModel
      *
      * @return array
      */
-    public static function getTopPhotosSenders()
+    static function getTopPhotosSenders()
     {
         $db = DataBase::getInstance();
 
@@ -518,7 +518,7 @@ class Stats extends ObjectModel
      *
      * @return array
      */
-    public static function getTopVisitesGroupes()
+    static function getTopVisitesGroupes()
     {
         $db = DataBase::getInstance();
 
@@ -552,7 +552,7 @@ class Stats extends ObjectModel
      * @param int $limit
      * @return array
      */
-    public static function getLastConnexions($limit = 10)
+    static function getLastConnexions($limit = 10)
     {
         $db = DataBase::getInstance();
 
@@ -580,7 +580,7 @@ class Stats extends ObjectModel
      * @param int $limit
      * @return array
      */
-    public static function getTopTagges($limit = 10)
+    static function getTopTagges($limit = 10)
     {
         $db = DataBase::getInstance();
 
@@ -618,7 +618,7 @@ class Stats extends ObjectModel
      * @param int $limit
      * @return array
      */
-    public static function getTopTaggeurs($limit = 10)
+    static function getTopTaggeurs($limit = 10)
     {
         $db = DataBase::getInstance();
 
@@ -655,7 +655,7 @@ class Stats extends ObjectModel
      * @param int $limit
      * @return array
      */
-    public static function getTopPhotosLieux()
+    static function getTopPhotosLieux()
     {
         $db = DataBase::getInstance();
 
@@ -691,7 +691,7 @@ class Stats extends ObjectModel
      * @param string $domaine
      * @return array
      */
-    public static function getEmailsForDomaine($domaine)
+    static function getEmailsForDomaine($domaine)
     {
         $db = DataBase::getInstance();
 
@@ -717,7 +717,7 @@ class Stats extends ObjectModel
      *
      * @return array
      */
-    public static function getEmailsDomaines()
+    static function getEmailsDomaines()
     {
         $db = DataBase::getInstance();
 
@@ -751,7 +751,7 @@ class Stats extends ObjectModel
      *
      * @return array
      */
-    public static function getRepartitionVideos()
+    static function getRepartitionVideos()
     {
         $db = DataBase::getInstance();
 
@@ -788,7 +788,7 @@ class Stats extends ObjectModel
      * @param int valeur maximum
      * @return string
      */
-    public static function getBarGraph($value, $max)
+    static function getBarGraph($value, $max)
     {
         if(($value > 0) && ($max > 0)) {
             $width = ceil(($value / $max) * self::BARGRAPH_MAX_WIDTH);
@@ -804,7 +804,7 @@ class Stats extends ObjectModel
      * @param strin $champ
      * @return array('total', 'max')
      */
-    public static function getTotalAndMax($tab, $champ)
+    static function getTotalAndMax($tab, $champ)
     {
         $total = 0;
         $max = 0;

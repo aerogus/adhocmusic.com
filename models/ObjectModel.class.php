@@ -133,7 +133,7 @@ abstract class ObjectModel
     /**
      *
      */
-    public function __construct($id = null)
+    function __construct($id = null)
     {
         if(!is_null($id)) {
             $this->_object_id = md5(get_called_class() . '|' . $id);
@@ -147,7 +147,7 @@ abstract class ObjectModel
     /**
      *
      */
-    public static function init()
+    static function init()
     {
         return new static();
     }
@@ -155,7 +155,7 @@ abstract class ObjectModel
     /**
      *
      */
-    public static function getInstance($id)
+    static function getInstance($id)
     {
         if (is_null(static::$_instance)) {
             // pas du tout d'instance: on en crée une, le constructeur ira s'enregistrer
@@ -177,7 +177,7 @@ abstract class ObjectModel
     /**
      *
      */
-    public static function deleteInstance()
+    static function deleteInstance()
     {
         if (isset(static::$_instance)) {
             static::$_instance = null;
@@ -189,7 +189,7 @@ abstract class ObjectModel
     /**
      *
      */
-    public function getObjectId()
+    function getObjectId()
     {
         return $this->_object_id;
     }
@@ -197,7 +197,7 @@ abstract class ObjectModel
     /**
      * @return int ou string
      */
-    public function getId()
+    function getId()
     {
         $pk = '_' . static::$_pk;
         return $this->$pk;
@@ -206,7 +206,7 @@ abstract class ObjectModel
     /**
      * @var mixed
      */
-    public function setId($val)
+    function setId($val)
     {
         $pk = '_' . static::$_pk;
         $this->$pk = $val;
@@ -215,7 +215,7 @@ abstract class ObjectModel
     /**
      *
      */
-    public function save()
+    function save()
     {
         $db = DataBase::getInstance();
  
@@ -314,7 +314,7 @@ abstract class ObjectModel
      *
      * @return bool
      */
-    public function delete()
+    function delete()
     {
         $db = DataBase::getInstance();
 

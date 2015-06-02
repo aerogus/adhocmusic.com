@@ -112,7 +112,7 @@ class MembreAdhoc extends Membre
     /**
      * @return string
      */
-    public function getFunction()
+    function getFunction()
     {
         return (string) $this->_function;
     }
@@ -120,7 +120,7 @@ class MembreAdhoc extends Membre
     /**
      * @return string
      */
-    public function getBirthDate()
+    function getBirthDate()
     {
         return (string) $this->_birth_date;
     }
@@ -128,7 +128,7 @@ class MembreAdhoc extends Membre
     /**
      * @return bool
      */
-    public function getActive()
+    function getActive()
     {
         return (bool) $this->_active;
     }
@@ -136,7 +136,7 @@ class MembreAdhoc extends Membre
     /**
      * @return int
      */
-    public function getRank()
+    function getRank()
     {
         return (int) $this->_rank;
     }
@@ -144,7 +144,7 @@ class MembreAdhoc extends Membre
     /**
      * @return string
      */
-    public function getOfficialPseudo()
+    function getOfficialPseudo()
     {
         return (string) $this->_official_pseudo;
     }
@@ -152,7 +152,7 @@ class MembreAdhoc extends Membre
     /**
      * @return string
      */
-    public function getDescription()
+    function getDescription()
     {
         return (string) $this->_description;
     }
@@ -164,7 +164,7 @@ class MembreAdhoc extends Membre
     /**
      * @param string
      */
-    public function setFunction($val)
+    function setFunction($val)
     {
         if ($this->_function != $val)
         {
@@ -176,7 +176,7 @@ class MembreAdhoc extends Membre
     /**
      * @param string
      */
-    public function setBirthDate($val)
+    function setBirthDate($val)
     {
         if ($this->_birth_date != $val)
         {
@@ -188,7 +188,7 @@ class MembreAdhoc extends Membre
     /**
      * @param bool
      */
-    public function setActive($val)
+    function setActive($val)
     {
         if ($this->_active != $val)
         {
@@ -200,7 +200,7 @@ class MembreAdhoc extends Membre
     /**
      * @param int
      */
-    public function setRank($val)
+    function setRank($val)
     {
         if ($this->_rank != $val)
         {
@@ -212,7 +212,7 @@ class MembreAdhoc extends Membre
     /**
      * @param string
      */
-    public function setOfficialPseudo($val)
+    function setOfficialPseudo($val)
     {
         if ($this->_official_pseudo != $val)
         {
@@ -224,7 +224,7 @@ class MembreAdhoc extends Membre
     /**
      * @param string
      */
-    public function setDescription($val)
+    function setDescription($val)
     {
         if ($this->_description != $val)
         {
@@ -240,7 +240,7 @@ class MembreAdhoc extends Membre
      *
      * @return array
      */
-    public static function getStaff($active = true)
+    static function getStaff($active = true)
     {
         $db = DataBase::getInstance();
 
@@ -304,7 +304,7 @@ class MembreAdhoc extends Membre
     /**
      * sauve en DB tables contact, membre et membre_adhoc
      */
-    public function save()
+    function save()
     {
         $db = DataBase::getInstance();
 

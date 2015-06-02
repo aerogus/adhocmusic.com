@@ -110,7 +110,7 @@ class Photo extends Media
     /**
      * @return string
      */
-    public function getPseudo()
+    function getPseudo()
     {
         return (string) $this->_pseudo;
     }
@@ -119,7 +119,7 @@ class Photo extends Media
     /**
      * @return int
      */
-    public function getHeight()
+    function getHeight()
     {
         return (int) $this->_height;
     }
@@ -127,7 +127,7 @@ class Photo extends Media
     /**
      * @return int
      */
-    public function getWidth()
+    function getWidth()
     {
         return (int) $this->_width;
     }
@@ -137,7 +137,7 @@ class Photo extends Media
     /**
      * @return string
      */
-    public function getCredits()
+    function getCredits()
     {
         return (string) $this->_credits;
     }
@@ -145,7 +145,7 @@ class Photo extends Media
     /**
      * @return string
      */
-    public function getUrl($type = null)
+    function getUrl($type = null)
     {
         return self::getUrlById($this->getId(), $type);
     }
@@ -154,7 +154,7 @@ class Photo extends Media
      * @param int $id
      * @return string
      */
-    public static function getUrlById($id, $type = null)
+    static function getUrlById($id, $type = null)
     {
         if($type == 'www') {
             return 'http://www.adhocmusic.com/photos/show/' . (int) $id;
@@ -165,7 +165,7 @@ class Photo extends Media
     /**
      * @return array
      */
-    public function getTag()
+    function getTag()
     {
         return $this->_tag;
     }
@@ -178,7 +178,7 @@ class Photo extends Media
     /**
      * @param string
      */
-    public function setCredits($val)
+    function setCredits($val)
     {
         if ($this->_credits != $val)
         {
@@ -190,7 +190,7 @@ class Photo extends Media
     /**
      * @param array d'id_contact
      */
-    public function setTag($val)
+    function setTag($val)
     {
         if ($this->_tag != $val)
         {
@@ -206,7 +206,7 @@ class Photo extends Media
      *
      * @return true
      */
-    public function delete()
+    function delete()
     {
         if(parent::delete())
         {
@@ -228,7 +228,7 @@ class Photo extends Media
      *
      * @return int
      */
-    public static function getMyPhotosCount()
+    static function getMyPhotosCount()
     {
         if(empty($_SESSION['membre'])) {
             throw new AdHocUserException('non identifié');
@@ -256,7 +256,7 @@ class Photo extends Media
      *
      * @return int
      */
-    public static function getPhotosCount()
+    static function getPhotosCount()
     {
         if(isset($_SESSION['global_counters']['nb_photos'])) {
             return $_SESSION['global_counters']['nb_photos'];
@@ -290,7 +290,7 @@ class Photo extends Media
      *              ['fetchtags'] => false
      * @return array
      */
-    public static function getPhotos($params = array())
+    static function getPhotos($params = array())
     {
         $debut = 0;
         if(isset($params['debut'])) {
@@ -416,7 +416,7 @@ class Photo extends Media
      * @param int $id_photo
      * @return array
      */
-    public static function whoIsOn($id_photo)
+    static function whoIsOn($id_photo)
     {
         $db = DataBase::getInstance();
 
@@ -458,27 +458,27 @@ class Photo extends Media
         throw new AdHocUserException('Photo introuvable', EXCEPTION_USER_UNKNOW_ID);
     }
 
-    public function getThumb80Url()
+    function getThumb80Url()
     {
         return self::getPhotoUrl($this->getId(), 80, 80, '000000', false, true);
     }
 
-    public function getThumb130Url()
+    function getThumb130Url()
     {
         return self::getPhotoUrl($this->getId(), 130, 130, '000000', false, false);
     }
 
-    public function getThumb400Url()
+    function getThumb400Url()
     {
         return self::getPhotoUrl($this->getId(), 400, 300, '000000', false, false);
     }
 
-    public function getThumb680Url()
+    function getThumb680Url()
     {
         return self::getPhotoUrl($this->getId(), 680, 600, '000000', false, false);
     }
 
-    public static function invalidatePhotoInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
+    static function invalidatePhotoInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
     {
         $uid = 'photo/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
@@ -497,7 +497,7 @@ class Photo extends Media
      *
      * @return string
      */
-    public static function getPhotoUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
+    static function getPhotoUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
     {
         $uid = 'photo/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);

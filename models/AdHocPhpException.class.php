@@ -15,7 +15,7 @@ class AdHocPhpException extends AdHocException
     /**
      *
      */
-    public function __construct($errno, $errstr, $errfile, $errline, $errcontext = false)
+    function __construct($errno, $errstr, $errfile, $errline, $errcontext = false)
     {
         $this->errno  = $errno;
         $this->errstr = $errstr;

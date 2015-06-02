@@ -338,7 +338,7 @@ class Controller
         return true;
     }
 
-    public static function edit()
+    static function edit()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 

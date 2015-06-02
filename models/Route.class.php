@@ -43,7 +43,7 @@ class Route
     /**
      * @param string
      */
-    public static function set_http_code($code)
+    static function set_http_code($code)
     {
         self::$http_code = $code;
     }
@@ -51,7 +51,7 @@ class Route
     /**
      * @param array
      */
-    public static function map_connect($params)
+    static function map_connect($params)
     {
         $extra_params = $params;
         foreach (array('path', 'controller', 'action', 'method') as $key) {
@@ -74,7 +74,7 @@ class Route
      * @param string
      * @return mixed
      */
-    public static function params($key)
+    static function params($key)
     {
         if (!isset(self::$action_params[$key])) {
             return null;
@@ -86,7 +86,7 @@ class Route
     /**
      * @param array $params
      */
-    public static function find_route($params)
+    static function find_route($params)
     {
         $response_format = DEFAULT_CONTROLLERS_FORMAT;
         $method = $params['method'];
@@ -129,7 +129,7 @@ class Route
     /**
      * @param string
      */
-    public static function load($file)
+    static function load($file)
     {
         if(file_exists($file) && is_readable($file))
         {
@@ -152,7 +152,7 @@ class Route
     /**
      *
      */
-    public static function run()
+    static function run()
     {
         $method = $_SERVER['REQUEST_METHOD'];
         $path = '';

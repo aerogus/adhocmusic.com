@@ -102,7 +102,7 @@ class CMS extends ObjectModel
     /**
      * @return string
      */
-    public function getAlias()
+    function getAlias()
     {
         return (string) $this->_alias;
     }
@@ -110,7 +110,7 @@ class CMS extends ObjectModel
     /**
      * @return string
      */
-    public function getTitle()
+    function getTitle()
     {
         return (string) $this->_title;
     }
@@ -118,7 +118,7 @@ class CMS extends ObjectModel
     /**
      * @return string
      */
-    public function getCreatedOn()
+    function getCreatedOn()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
@@ -129,7 +129,7 @@ class CMS extends ObjectModel
     /**
      * @return int
      */
-    public function getCreatedOnTs()
+    function getCreatedOnTs()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
@@ -140,7 +140,7 @@ class CMS extends ObjectModel
     /**
      * @return string
      */
-    public function getModifiedOn()
+    function getModifiedOn()
     {
         if(Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
@@ -151,7 +151,7 @@ class CMS extends ObjectModel
     /**
      * @return int
      */
-    public function getModifiedOnTs()
+    function getModifiedOnTs()
     {
         if(Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
@@ -162,7 +162,7 @@ class CMS extends ObjectModel
     /**
      * @return string
      */
-    public function getMenuselected()
+    function getMenuselected()
     {
         return (string) $this->_menuselected;
     }
@@ -170,7 +170,7 @@ class CMS extends ObjectModel
     /**
      * @return array
      */
-    public function getBreadcrumb()
+    function getBreadcrumb()
     {
         return $this->_breadcrumb;
     }
@@ -178,7 +178,7 @@ class CMS extends ObjectModel
     /**
      * @return string
      */
-    public function getContent()
+    function getContent()
     {
         return (string) $this->_content;
     }
@@ -186,7 +186,7 @@ class CMS extends ObjectModel
     /**
      * @return bool
      */
-    public function getOnline()
+    function getOnline()
     {
         return (bool) $this->_online;
     }
@@ -194,7 +194,7 @@ class CMS extends ObjectModel
     /**
      * @return int
      */
-    public function getAuth()
+    function getAuth()
     {
         return (int) $this->_auth;
     }
@@ -206,7 +206,7 @@ class CMS extends ObjectModel
     /**
      * @param string
      */
-    public function setAlias($val)
+    function setAlias($val)
     {
         $val = trim((string) $val);
         if ($this->_alias != $val)
@@ -219,7 +219,7 @@ class CMS extends ObjectModel
     /**
      * @param string
      */
-    public function setTitle($val)
+    function setTitle($val)
     {
         $val = trim((string) $val);
         if ($this->_title != $val)
@@ -232,7 +232,7 @@ class CMS extends ObjectModel
     /**
      * @param string
      */
-    public function setCreatedOn($val)
+    function setCreatedOn($val)
     {
         if ($this->_created_on != $val)
         {
@@ -244,7 +244,7 @@ class CMS extends ObjectModel
     /**
      * @param string
      */
-    public function setCreatedNow()
+    function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_created_on != $now)
@@ -257,7 +257,7 @@ class CMS extends ObjectModel
     /**
      * @param string
      */
-    public function setModifiedOn($val)
+    function setModifiedOn($val)
     {
         if ($this->_modified_on != $val)
         {
@@ -269,7 +269,7 @@ class CMS extends ObjectModel
     /**
      * @param string
      */
-    public function setModifiedNow()
+    function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_modified_on != $now)
@@ -282,7 +282,7 @@ class CMS extends ObjectModel
     /**
      * @param string
      */
-    public function setMenuselected($val)
+    function setMenuselected($val)
     {
         $val = trim((string) $val);
         if ($this->_menuselected != $val)
@@ -295,7 +295,7 @@ class CMS extends ObjectModel
     /**
      * @param array
      */
-    public function setBreadcrumb($val)
+    function setBreadcrumb($val)
     {
         $val = (array) $val;
         if ($this->_breadcrumb != $val)
@@ -308,7 +308,7 @@ class CMS extends ObjectModel
     /**
      * @param string
      */
-    public function setContent($val)
+    function setContent($val)
     {
         $val = trim((string) $val);
         if ($this->_content != $val)
@@ -321,7 +321,7 @@ class CMS extends ObjectModel
     /**
      * @param bool
      */
-    public function setOnline($val)
+    function setOnline($val)
     {
         $val = (bool) $val;
         if ($this->_online != $val)
@@ -334,7 +334,7 @@ class CMS extends ObjectModel
     /**
      * @param int
      */
-    public function setAuth($val)
+    function setAuth($val)
     {
         $val = (int) $val;
         if ($this->_auth != $val)
@@ -350,7 +350,7 @@ class CMS extends ObjectModel
      * @var string
      * @return int ou false
      */
-    public static function getIdByAlias($alias)
+    static function getIdByAlias($alias)
     {
         $db = DataBase::getInstance();
 
@@ -383,7 +383,7 @@ class CMS extends ObjectModel
     /**
      *
      */
-    public static function getCMSs()
+    static function getCMSs()
     {
         $db = DataBase::getInstance();
 

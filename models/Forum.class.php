@@ -55,7 +55,7 @@ abstract class Forum
      * @param string
      * @return string
      */
-    public static function parseMessage($texte, $wiki = false)
+    static function parseMessage($texte, $wiki = false)
     {
         // 1 - gestion des frimousses
         foreach(self::$smileys as $smiley) {
@@ -108,7 +108,7 @@ abstract class Forum
      *
      * @return array
      */
-    public static function getForum($id_forum)
+    static function getForum($id_forum)
     {
         $db = DataBase::getInstance();
 
@@ -127,7 +127,7 @@ abstract class Forum
      *
      * @return array
      */
-    public static function getForums()
+    static function getForums()
     {
         $db = DataBase::getInstance();
 
@@ -147,7 +147,7 @@ abstract class Forum
      * @param int $id_thread
      * @return string $id_forum
      */
-    public static function getIdForumByIdThread($id_thread)
+    static function getIdForumByIdThread($id_thread)
     {
         $db = DataBase::getInstance();
 
@@ -168,7 +168,7 @@ abstract class Forum
      *              str ['subject'] (opt.)
      * @return int $id_message
      */
-    public static function addMessage($params)
+    static function addMessage($params)
     {
         $new_thread = true;
         if(array_key_exists('id_thread', $params)) {
@@ -230,7 +230,7 @@ abstract class Forum
      * @return bool
      *
      */
-    public static function editMessage($params)
+    static function editMessage($params)
     {
         static::_updateMessage(array(
             'id_message' => $params['id_message'],
@@ -259,7 +259,7 @@ abstract class Forum
      * @param array
      * @return bool
      */
-    public static function delMessage($params)
+    static function delMessage($params)
     {
         static::_deleteMessage(array(
             'id_message' => $params['id_message'],
@@ -287,7 +287,7 @@ abstract class Forum
      * @param int $id_thread
      * @return bool
      */
-    public static function addView($id_thread)
+    static function addView($id_thread)
     {
         $db = DataBase::getInstance();
 
@@ -303,7 +303,7 @@ abstract class Forum
      *
      * @return array ou int
      */
-    public static function getThreadsCount($id_forum = null)
+    static function getThreadsCount($id_forum = null)
     {
         $db = DataBase::getInstance();
 
@@ -330,7 +330,7 @@ abstract class Forum
      *
      * @return array ou int
      */
-    public static function getMessagesCount($id_forum = null)
+    static function getMessagesCount($id_forum = null)
     {
         $db = DataBase::getInstance();
 

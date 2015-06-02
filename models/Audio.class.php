@@ -90,7 +90,7 @@ class Audio extends Media
     /**
      * @return string
      */
-    public function getMime()
+    function getMime()
     {
         return (string) $this->_mime;
     }
@@ -98,7 +98,7 @@ class Audio extends Media
     /**
      * @return string
      */
-    public function getUrl()
+    function getUrl()
     {
         return self::getUrlById($this->getId());
     }
@@ -107,7 +107,7 @@ class Audio extends Media
      * @param int
      * @return string
      */
-    public static function getUrlById($id)
+    static function getUrlById($id)
     {
         return DYN_URL . '/audios/show/' . $id;
     }
@@ -115,7 +115,7 @@ class Audio extends Media
     /**
      * @return string
      */
-    public function getDirectUrl()
+    function getDirectUrl()
     {
         return 'http://static.adhocmusic.com/media/audio/' . $this->getId() . '.mp3';
     }
@@ -123,7 +123,7 @@ class Audio extends Media
     /**
      * @return string
      */
-    public function getWaveForm()
+    function getWaveForm()
     {
         return 'http://static.adhocmusic.com/media/audiowaveform/' . $this->getId() . '.png';
     }
@@ -135,7 +135,7 @@ class Audio extends Media
     /**
      * @param string
      */
-    public function setMime($val)
+    function setMime($val)
     {
         if ($this->_mime != $val)
         {
@@ -160,7 +160,7 @@ class Audio extends Media
      *              ['limit']     => 10
      * @return array
      */
-    public static function getAudios($params = array())
+    static function getAudios($params = array())
     {
         $debut = 0;
         if(isset($params['debut'])) {
@@ -275,7 +275,7 @@ class Audio extends Media
      *
      * @return bool
      */
-    public function delete()
+    function delete()
     {
         if(parent::delete())
         {
@@ -317,7 +317,7 @@ class Audio extends Media
      * @param int $limit
      * @return array
      */
-    public static function getLastAudios($limit = 5)
+    static function getLastAudios($limit = 5)
     {
         return self::getAudios(array(
             'limit' => $limit,
@@ -336,7 +336,7 @@ class Audio extends Media
      * @deprecated
      * @see Smarty::function_audio_player()
      */
-    public static function getPlayer($id_audio, $type = 'dewplayer-mini')
+    static function getPlayer($id_audio, $type = 'dewplayer-mini')
     {
         $bgcolor = '666666';
 
@@ -406,7 +406,7 @@ class Audio extends Media
     /**
      * retourne le nombre total d'audios d'un visiteur loggué
      */
-    public static function getMyAudiosCount()
+    static function getMyAudiosCount()
     {
         if(empty($_SESSION['membre'])) {
             throw new AdHocUserException('non identifié');
@@ -434,7 +434,7 @@ class Audio extends Media
      *
      * @return int
      */
-    public static function getAudiosCount()
+    static function getAudiosCount()
     {
         if(isset($_SESSION['global_counters']['nb_audios'])) {
             return $_SESSION['global_counters']['nb_audios'];

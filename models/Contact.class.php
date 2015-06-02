@@ -85,7 +85,7 @@ class Contact extends ObjectModel
     /**
      * @return string
      */
-    public function getEmail()
+    function getEmail()
     {
         return (string) $this->_email;
     }
@@ -93,7 +93,7 @@ class Contact extends ObjectModel
     /**
      * Extraction de l'email
      */
-    public static function getEmailById($id_contact)
+    static function getEmailById($id_contact)
     {
         $db = DataBase::getInstance();
 
@@ -107,7 +107,7 @@ class Contact extends ObjectModel
     /**
      * @return string
      */
-    public function getLastnl()
+    function getLastnl()
     {
         return (string) $this->_lastnl;
     }
@@ -119,7 +119,7 @@ class Contact extends ObjectModel
      * @param string $email
      * @return int
      */
-    public static function getIdByEmail($email)
+    static function getIdByEmail($email)
     {
         if(!Email::validate($email)) {
             throw new AdHocUserException('email syntaxiquement incorrect', EXCEPTION_USER_BAD_PARAM);
@@ -141,7 +141,7 @@ class Contact extends ObjectModel
      * @return bool
      * @deprecated doublon avec getIdByEmail
      */
-     public static function isEmailFound($email)
+     static function isEmailFound($email)
      {
          $db   = DataBase::getInstance();
  
@@ -161,7 +161,7 @@ class Contact extends ObjectModel
     /**
      * @param string
      */
-    public function setEmail($val)
+    function setEmail($val)
     {
         if ($this->_email != $val)
         {
@@ -173,7 +173,7 @@ class Contact extends ObjectModel
     /**
      * @param string
      */
-    public function setLastnl($val)
+    function setLastnl($val)
     {
         if ($this->_lastnl != $val)
         {
@@ -185,7 +185,7 @@ class Contact extends ObjectModel
     /**
      *
      */
-    public function setLastnlNow()
+    function setLastnlNow()
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_lastnl != $now)
@@ -203,7 +203,7 @@ class Contact extends ObjectModel
      *
      * @return int
      */
-    public function delete()
+    function delete()
     {
         $db = DataBase::getInstance();
 
@@ -218,7 +218,7 @@ class Contact extends ObjectModel
     /**
      * sauve en DB table contact
      */
-    public function save()
+    function save()
     {
         $db = DataBase::getInstance();
 

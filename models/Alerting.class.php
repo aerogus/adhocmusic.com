@@ -94,7 +94,7 @@ class Alerting extends ObjectModel
     /**
      * @return int
      */
-    public function getIdContact()
+    function getIdContact()
     {
         return (int) $this->_id_contact;
     }
@@ -102,7 +102,7 @@ class Alerting extends ObjectModel
     /**
      * @return string
      */
-    public function getCreatedOn()
+    function getCreatedOn()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
@@ -113,7 +113,7 @@ class Alerting extends ObjectModel
     /**
      * @return int
      */
-    public function getCreatedOnTs()
+    function getCreatedOnTs()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
@@ -124,7 +124,7 @@ class Alerting extends ObjectModel
     /**
      * @return bool
      */
-    public function getActive()
+    function getActive()
     {
         return (int) $this->_active;
     }
@@ -132,7 +132,7 @@ class Alerting extends ObjectModel
     /**
      * @return string
      */
-    public function getType()
+    function getType()
     {
         return (string) $this->_type;
     }
@@ -140,7 +140,7 @@ class Alerting extends ObjectModel
     /**
      * @return int
      */
-    public function getIdContent()
+    function getIdContent()
     {
         return (int) $this->_id_content;
     }
@@ -152,7 +152,7 @@ class Alerting extends ObjectModel
     /**
      * @param int
      */
-    public function setIdContact($val)
+    function setIdContact($val)
     {
         if($this->_id_contact != (int) $val)
         {
@@ -164,7 +164,7 @@ class Alerting extends ObjectModel
     /**
      * @param string
      */
-    public function setCreatedOn($val)
+    function setCreatedOn($val)
     {
         if($this->_created_on != $val)
         {
@@ -176,7 +176,7 @@ class Alerting extends ObjectModel
     /**
      * @param bool
      */
-    public function setActive($val)
+    function setActive($val)
     {
         if($this->_active != (bool) $val)
         {
@@ -188,7 +188,7 @@ class Alerting extends ObjectModel
     /**
      * @param string
      */
-    public function setType($val)
+    function setType($val)
     {
         if($this->_type != (string) $val)
         {
@@ -200,7 +200,7 @@ class Alerting extends ObjectModel
     /**
      * @param int
      */
-    public function setIdContent($val)
+    function setIdContent($val)
     {
         if($this->_id_content != (int) $val)
         {
@@ -214,7 +214,7 @@ class Alerting extends ObjectModel
     /**
      * Défini la date de modification
      */
-    public function setCreatedNow()
+    function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
 
@@ -224,7 +224,7 @@ class Alerting extends ObjectModel
         }
     }
 
-    public static function addSubscriber($id_contact, $type, $id_content)
+    static function addSubscriber($id_contact, $type, $id_content)
     {
         if(self::getIdByIds($id_contact, $type, $id_content)) {
             return false;
@@ -244,7 +244,7 @@ class Alerting extends ObjectModel
         return false;
     }
 
-    public static function delSubscriber($id_contact, $type, $id_content)
+    static function delSubscriber($id_contact, $type, $id_content)
     {
         if(!self::getIdByIds($id_contact, $type, $id_content)) {
             return false;
@@ -260,7 +260,7 @@ class Alerting extends ObjectModel
         return false;
     }
 
-    public static function getIdByIds($id_contact, $type, $id_content)
+    static function getIdByIds($id_contact, $type, $id_content)
     {
          $db = DataBase::getInstance();
 
@@ -273,7 +273,7 @@ class Alerting extends ObjectModel
         return (int) $db->queryWithFetchFirstField($sql);
     }
 
-    public static function getLieuxAlertingByIdContact($id_contact)
+    static function getLieuxAlertingByIdContact($id_contact)
     {
         $db = DataBase::getInstance();
 
@@ -286,7 +286,7 @@ class Alerting extends ObjectModel
         return $db->queryWithFetch($sql);
     }
 
-    public static function getIdsContactByLieu($id_lieu)
+    static function getIdsContactByLieu($id_lieu)
     {
         $db = DataBase::getInstance();
 
@@ -299,7 +299,7 @@ class Alerting extends ObjectModel
         return $db->queryWithFetch($sql);
     }
 
-    public static function getGroupesAlertingByIdContact($id_contact)
+    static function getGroupesAlertingByIdContact($id_contact)
     {
         $db = DataBase::getInstance();
 
@@ -312,7 +312,7 @@ class Alerting extends ObjectModel
         return $db->queryWithFetch($sql);
     }
 
-    public static function getIdsContactByGroupe($id_groupe)
+    static function getIdsContactByGroupe($id_groupe)
     {
         $db = DataBase::getInstance();
 
@@ -325,7 +325,7 @@ class Alerting extends ObjectModel
         return $db->queryWithFetch($sql);
     }
 
-    public static function getEventsAlertingByIdContact($id_contact)
+    static function getEventsAlertingByIdContact($id_contact)
     {
         $db = DataBase::getInstance();
 
@@ -338,7 +338,7 @@ class Alerting extends ObjectModel
         return $db->queryWithFetch($sql);
     }
 
-    public static function getIdsContactByEvent($id_event)
+    static function getIdsContactByEvent($id_event)
     {
         $db = DataBase::getInstance();
 

@@ -135,7 +135,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    public function getName()
+    function getName()
     {
         return (string) $this->_name;
     }
@@ -143,7 +143,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    public function getAddress()
+    function getAddress()
     {
         return (string) $this->_address;
     }
@@ -151,7 +151,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    public function getCp()
+    function getCp()
     {
         return (string) $this->_cp;
     }
@@ -159,7 +159,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    public function getCity()
+    function getCity()
     {
         return (string) $this->_city;
     }
@@ -167,7 +167,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    public function getTel()
+    function getTel()
     {
         return (string) $this->_tel;
     }
@@ -175,7 +175,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    public function getFax()
+    function getFax()
     {
         return (string) $this->_fax;
     }
@@ -183,7 +183,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    public function getIdDepartement()
+    function getIdDepartement()
     {
         return (string) $this->_id_departement;
     }
@@ -191,7 +191,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    public function getText()
+    function getText()
     {
         return (string) $this->_text;
     }
@@ -199,7 +199,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    public function getSite()
+    function getSite()
     {
         return (string) $this->_site;
     }
@@ -207,7 +207,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    public function getEmail()
+    function getEmail()
     {
         return (string) $this->_email;
     }
@@ -215,7 +215,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    public function getIdCountry()
+    function getIdCountry()
     {
         return (string) $this->_id_country;
     }
@@ -223,7 +223,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    public function getPicto()
+    function getPicto()
     {
         return self::getPictoById((int) $this->getId());
     }
@@ -232,7 +232,7 @@ class Structure extends ObjectModel
      * @var int
      * @return string
      */
-    public static function getPictoById($id)
+    static function getPictoById($id)
     {
         return STATIC_URL . '/media/structure/' . (int) $id . '.png';
     }
@@ -244,7 +244,7 @@ class Structure extends ObjectModel
     /**
      * @param string
      */
-    public function setName($val)
+    function setName($val)
     {
         if ($this->_name != $val)
         {
@@ -256,7 +256,7 @@ class Structure extends ObjectModel
     /**
      * @param string
      */
-    public function setAddress($val)
+    function setAddress($val)
     {
         if ($this->_address != $val)
         {
@@ -268,7 +268,7 @@ class Structure extends ObjectModel
     /**
      * @param string
      */
-    public function setCp($val)
+    function setCp($val)
     {
         if ($this->_cp != $val)
         {
@@ -280,7 +280,7 @@ class Structure extends ObjectModel
     /**
      * @param string
      */
-    public function setCity($val)
+    function setCity($val)
     {
         if ($this->_city != $val)
         {
@@ -292,7 +292,7 @@ class Structure extends ObjectModel
     /**
      * @param string
      */
-    public function setTel($val)
+    function setTel($val)
     {
         if ($this->_tel != $val)
         {
@@ -304,7 +304,7 @@ class Structure extends ObjectModel
     /**
      * @param string
      */
-    public function setFax($val)
+    function setFax($val)
     {
         if ($this->_fax != $val)
         {
@@ -316,7 +316,7 @@ class Structure extends ObjectModel
     /**
      * @param string
      */
-    public function setIdDepartement($val)
+    function setIdDepartement($val)
     {
         if ($this->_id_departement != $val)
         {
@@ -328,7 +328,7 @@ class Structure extends ObjectModel
     /**
      * @param string
      */
-    public function setText($val)
+    function setText($val)
     {
         if ($this->_text != $val)
         {
@@ -340,7 +340,7 @@ class Structure extends ObjectModel
     /**
      * @param string
      */
-    public function setSite($val)
+    function setSite($val)
     {
         if ($this->_site != $val)
         {
@@ -352,7 +352,7 @@ class Structure extends ObjectModel
     /**
      * @param string
      */
-    public function setEmail($val)
+    function setEmail($val)
     {
         if ($this->_email != $val)
         {
@@ -364,7 +364,7 @@ class Structure extends ObjectModel
     /**
      * @param string
      */
-    public function setIdCountry($val)
+    function setIdCountry($val)
     {
         if ($this->_id_country != $val)
         {
@@ -380,7 +380,7 @@ class Structure extends ObjectModel
      *
      * @return bool
      */
-    public function delete()
+    function delete()
     {
         // check de la table evenement
         if($this->hasEvents()) {
@@ -422,7 +422,7 @@ class Structure extends ObjectModel
      *
      * @return array
      */
-    public static function getStructures()
+    static function getStructures()
     {
         $db = DataBase::getInstance();
 
@@ -447,7 +447,7 @@ class Structure extends ObjectModel
      *
      * @return array
      */
-    public function _loadFromDb()
+    function _loadFromDb()
     {
         $db = DataBase::getInstance();
 
@@ -470,7 +470,7 @@ class Structure extends ObjectModel
     /**
      * @return bool
      */
-    public function hasPhotos()
+    function hasPhotos()
     {
         return (bool) $this->getPhotos();
     }
@@ -480,7 +480,7 @@ class Structure extends ObjectModel
      *
      * @return array
      */
-    public function getPhotos()
+    function getPhotos()
     {
         return Photo::getPhotos(array(
             'structure' => $this->_id_structure,
@@ -490,7 +490,7 @@ class Structure extends ObjectModel
     /**
      * @return bool
      */
-    public function hasVideos()
+    function hasVideos()
     {
         return (bool) $this->getVideos();
     }
@@ -500,7 +500,7 @@ class Structure extends ObjectModel
      *
      * @return array
      */
-    public function getVideos()
+    function getVideos()
     {
         return Video::getVideos(array(
             'structure' => $this->_id_structure,
@@ -510,7 +510,7 @@ class Structure extends ObjectModel
     /**
      * @return bool
      */
-    public function hasAudios()
+    function hasAudios()
     {
         return (bool) $this->getAudios();
     }
@@ -520,7 +520,7 @@ class Structure extends ObjectModel
      *
      * @return array
      */
-    public function getAudios()
+    function getAudios()
     {
         return Audio::getAudios(array(
             'structure' => $this->_id_structure,
@@ -530,7 +530,7 @@ class Structure extends ObjectModel
     /**
      * @return bool
      */
-    public function hasEvenements()
+    function hasEvenements()
     {
         return (bool) $this->getEvenements();
     }
@@ -540,7 +540,7 @@ class Structure extends ObjectModel
      *
      * @return array
      */
-    public function getEvenements()
+    function getEvenements()
     {
         return Event::getEvents(array(
             'structure' => $this->_id_structure,

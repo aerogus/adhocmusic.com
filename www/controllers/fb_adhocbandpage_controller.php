@@ -4,47 +4,47 @@ class Controller
 {
     // app
 
-    public static function app_install()
+    static function app_install()
     {
        mail('guillaume.seznec@gmail.com', 'adhocbandpage installed', 'adhocbandpage installed');
         return 'install OK';
     }
 
-    public static function app_uninstall()
+    static function app_uninstall()
     {
         mail('guillaume.seznec@gmail.com', 'adhocbandpage uninstalled', 'adhocbandpage uninstalled');
         return 'uninstall OK';
     }
 
-    public static function app_settings_change()
+    static function app_settings_change()
     {
         return 'settings change OK';
     }
 
-    public static function app_welcome()
+    static function app_welcome()
     {
         return 'welcome OK';
     }
 
-    public static function app_help()
+    static function app_help()
     {
         return 'help OK';
     }
 
     // canvas
 
-    public static function canvas_home()
+    static function canvas_home()
     {
         return self::canvas_index();
     }
 
-    public static function canvas_index()
+    static function canvas_index()
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('fb/adhocbandpage/canvas/index.tpl');
     }
 
-    public static function canvas_about()
+    static function canvas_about()
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('fb/adhocbandpage/canvas/about.tpl');
@@ -53,7 +53,7 @@ class Controller
     /**
      * page politique de confidentialité
      */
-    public static function canvas_privacy()
+    static function canvas_privacy()
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('fb/adhocbandpage/canvas/privacy.tpl');
@@ -62,19 +62,19 @@ class Controller
     /**
      * page conditions d'utilisation
      */
-    public static function canvas_tos()
+    static function canvas_tos()
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('fb/adhocbandpage/canvas/tos.tpl');
     }
 
-    public static function canvas_contact()
+    static function canvas_contact()
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('fb/adhocbandpage/canvas/contact.tpl');
     }
 
-    public static function canvas_contact_submit()
+    static function canvas_contact_submit()
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('fb/adhocbandpage/canvas/contact.tpl');
@@ -82,7 +82,7 @@ class Controller
 
     // tab
 
-    public static function tab_home()
+    static function tab_home()
     {
         if($req = $_SESSION['fb']->getSignedRequest()) {
             if(!array_key_exists('page', $req)) {
@@ -99,19 +99,19 @@ class Controller
         return $smarty->fetch('fb/adhocbandpage/tab/home.tpl');
     }
 
-    public static function tab_success()
+    static function tab_success()
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('fb/adhocbandpage/tab/success.tpl');
     }
 
-    public static function tab_unknown_groupe()
+    static function tab_unknown_groupe()
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('fb/adhocbandpage/tab/unknown-groupe.tpl');
     }
 
-    public static function tab_groupe($id_groupe)
+    static function tab_groupe($id_groupe)
     {
         $smarty = new AdHocSmarty();
 

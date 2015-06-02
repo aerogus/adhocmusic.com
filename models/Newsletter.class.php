@@ -68,7 +68,7 @@ class Newsletter extends ObjectModel
     /**
      * @return string
      */
-    public function getContent()
+    function getContent()
     {
         return self::getContentFromTemplate($this->getId(), false);
     }
@@ -76,7 +76,7 @@ class Newsletter extends ObjectModel
     /**
      * @return string
      */
-    public function getRawContent()
+    function getRawContent()
     {
         return self::getContentFromTemplate($this->getId(), true);
     }
@@ -84,7 +84,7 @@ class Newsletter extends ObjectModel
     /**
      * @return string
      */
-    public static function getDefaultRawContent()
+    static function getDefaultRawContent()
     {
         return self::getContentFromTemplate('layout', true);
     }
@@ -92,7 +92,7 @@ class Newsletter extends ObjectModel
     /**
      * @return string
      */
-    public static function getDefaultTitle()
+    static function getDefaultTitle()
     {
         return 'Titre de la newsletter';
     }
@@ -102,7 +102,7 @@ class Newsletter extends ObjectModel
      *
      * @return string
      */
-    public static function getContentFromTemplate($id, $raw = false)
+    static function getContentFromTemplate($id, $raw = false)
     {
         if($raw) {
             // brut
@@ -119,7 +119,7 @@ class Newsletter extends ObjectModel
      *
      * @param string
      */
-    public function setContent($val)
+    function setContent($val)
     {
         file_put_contents(NEWSLETTER_TEMPLATE_PATH . '/newsletter-' . $this->getId() . '.tpl', $val);
         return true;
@@ -130,7 +130,7 @@ class Newsletter extends ObjectModel
      *
      * @return string
      */
-    public function getUrl()
+    function getUrl()
     {
         return 'http://www.adhocmusic.com/emails/newsletter/' . $this->getId();
     }
@@ -139,7 +139,7 @@ class Newsletter extends ObjectModel
      * retourne le title de la lettre (= sujet du mail)
      * @return string
      */
-    public function getTitle()
+    function getTitle()
     {
         return (string) $this->_title;
     }
@@ -149,7 +149,7 @@ class Newsletter extends ObjectModel
      *
      * @param string
      */
-    public function setTitle($val)
+    function setTitle($val)
     {
         if ($this->_title != $val)
         {
@@ -163,7 +163,7 @@ class Newsletter extends ObjectModel
      *
      * @return int
      */
-    public function getId()
+    function getId()
     {
         return (int) $this->_id_newsletter;
     }
@@ -178,7 +178,7 @@ class Newsletter extends ObjectModel
      *              ['limit']   => 10
      * @return array
      */
-    public static function getNewsletters($params = array())
+    static function getNewsletters($params = array())
     {
         $debut = 0;
         if(isset($params['debut'])) {
@@ -244,7 +244,7 @@ class Newsletter extends ObjectModel
      *             ['useragent']
      * @return bool
      */
-    public static function addStats($params)
+    static function addStats($params)
     {
         $db = DataBase::getInstance();
 
@@ -262,7 +262,7 @@ class Newsletter extends ObjectModel
      * @param int $limit
      * @return array
      */
-    public static function getSubscribers($debut = 0, $limit = 10000)
+    static function getSubscribers($debut = 0, $limit = 10000)
     {
         $db = DataBase::getInstance();
 
@@ -281,7 +281,7 @@ class Newsletter extends ObjectModel
      *
      * @return int
      */
-    public static function getSubscribersCount()
+    static function getSubscribersCount()
     {
         $db = DataBase::getInstance();
 
@@ -299,7 +299,7 @@ class Newsletter extends ObjectModel
      * @param string $email
      * @return int
      */
-    public static function addEmail($email)
+    static function addEmail($email)
     {
         if($id_contact = Contact::getIdByEmail($email)) {
             // contact ? oui
@@ -335,7 +335,7 @@ class Newsletter extends ObjectModel
      * @param string $email
      * @return int
      */
-    public static function removeEmail($email)
+    static function removeEmail($email)
     {
         if($id_contact = Contact::getIdByEmail($email)) {
             // contact ? oui
@@ -386,7 +386,7 @@ class Newsletter extends ObjectModel
     /**
      * stats vite fait ...
      */
-    public static function addHit($id_newsletter, $id_contact, $url)
+    static function addHit($id_newsletter, $id_contact, $url)
     {
         file_put_contents(ADHOC_ROOT_PATH . '/log/newsletters-hits.txt', date('Y-m-d H:i:s') . "\tnl" . $id_newsletter . "\tid" . $id_contact . "\turl" . $url ."\n", FILE_APPEND | LOCK_EX);
 

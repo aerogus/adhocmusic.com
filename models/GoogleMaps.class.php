@@ -33,7 +33,7 @@ class GoogleMaps
     /**
      * retourne le javascript de chargement initial
      */
-    public static function getInitJs()
+    static function getInitJs()
     {
         return 'http://maps.google.com/maps?file=api&amp;v='.self::VERSION.'&amp;sensor='.self::SENSOR.'&amp;key='.self::API_KEY;
     }
@@ -52,7 +52,7 @@ class GoogleMaps
      * @return string
      * @see http://code.google.com/intl/fr/apis/maps/documentation/staticmaps/
      */
-    public static function getStaticMap($params)
+    static function getStaticMap($params)
     {
         if(!array_key_exists('loc', $params))
             return '';
@@ -88,7 +88,7 @@ class GoogleMaps
      * @param string $addr
      * @return array ou false
      */
-    public static function getGeocode($addr)
+    static function getGeocode($addr)
     {
         if(empty($addr)) {
             return array('status' => 'EMPTY_REQUEST');

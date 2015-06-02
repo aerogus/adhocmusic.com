@@ -235,7 +235,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getAlias()
+    function getAlias()
     {
         return (string) $this->_alias;
     }
@@ -245,7 +245,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getName()
+    function getName()
     {
         return (string) $this->_name;
     }
@@ -255,7 +255,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getStyle()
+    function getStyle()
     {
         return (string) $this->_style;
     }
@@ -265,7 +265,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getInfluences()
+    function getInfluences()
     {
         return (string) $this->_influences;
     }
@@ -275,7 +275,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getLineup()
+    function getLineup()
     {
         return (string) $this->_lineup;
     }
@@ -285,7 +285,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getMiniText()
+    function getMiniText()
     {
         return (string) $this->_mini_text;
     }
@@ -295,7 +295,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getText()
+    function getText()
     {
         return (string) $this->_text;
     }
@@ -303,7 +303,7 @@ class Groupe extends ObjectModel
     /**
      * @var string
      */
-    public function getMySpaceId()
+    function getMySpaceId()
     {
         if(strpos($this->_myspace, 'http://') !== false) {
             $this->_myspace = str_replace('http://', '', $this->_myspace);
@@ -320,7 +320,7 @@ class Groupe extends ObjectModel
     /**
      * @var string
      */
-    public function getMySpaceUrl()
+    function getMySpaceUrl()
     {
         if(strpos($this->_myspace, 'http://') !== false) {
             $this->_myspace = str_replace('http://', '', $this->_myspace);
@@ -340,7 +340,7 @@ class Groupe extends ObjectModel
      * @return string
      * @deprecated
      */
-    public function getMySpace()
+    function getMySpace()
     {
         return $this->getMySpaceUrl();
     }
@@ -350,7 +350,7 @@ class Groupe extends ObjectModel
      *
      * @return int (64bits) => str
      */
-    public function getFacebookPageId()
+    function getFacebookPageId()
     {
         return (string) $this->_facebook_page_id;
     }
@@ -360,7 +360,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getFacebookPageUrl()
+    function getFacebookPageUrl()
     {
         if($this->_facebook_page_id) {
             return 'https://www.facebook.com/pages/' . $this->_alias . '/' . $this->_facebook_page_id;
@@ -373,7 +373,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getTwitterId()
+    function getTwitterId()
     {
         return (string) $this->_twitter_id;
     }
@@ -383,7 +383,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getTwitterUrl()
+    function getTwitterUrl()
     {
         return (string) 'https://www.twitter.com/' . $this->_twitter_id;
     }
@@ -394,7 +394,7 @@ class Groupe extends ObjectModel
      * @return string
      * @todo check le http:// initial
      */
-    public function getSite()
+    function getSite()
     {
         if(strpos($this->_site, 'myspace') !== false) {
             return false;
@@ -413,7 +413,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getIdDepartement()
+    function getIdDepartement()
     {
         return (string) $this->_id_departement;
     }
@@ -421,7 +421,7 @@ class Groupe extends ObjectModel
     /**
      * @return bool
      */
-    public function getOnline()
+    function getOnline()
     {
         return (bool) $this->_online;
     }
@@ -431,7 +431,7 @@ class Groupe extends ObjectModel
      *
      * @return int
      */
-    public function getVisite()
+    function getVisite()
     {
         return (int) $this->_visite;
     }
@@ -441,7 +441,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getCreatedOn()
+    function getCreatedOn()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
@@ -454,7 +454,7 @@ class Groupe extends ObjectModel
      *
      * @return int
      */
-    public function getCreatedOnTs()
+    function getCreatedOnTs()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
@@ -467,7 +467,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getModifiedOn()
+    function getModifiedOn()
     {
         if(Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
@@ -480,7 +480,7 @@ class Groupe extends ObjectModel
      *
      * @return int
      */
-    public function getModifiedOnTs()
+    function getModifiedOnTs()
     {
         if(Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
@@ -493,7 +493,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getDatdeb()
+    function getDatdeb()
     {
         if(Date::isDateOk($this->_datdeb)) {
             return (string) $this->_datdeb;
@@ -506,7 +506,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getDatfin()
+    function getDatfin()
     {
         if(Date::isDateOk($this->_datfin)) {
             return (string) $this->_datfin;
@@ -519,7 +519,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getComment()
+    function getComment()
     {
         return (string) $this->_comment;
     }
@@ -529,7 +529,7 @@ class Groupe extends ObjectModel
      *
      * @return int
      */
-    public function getEtat()
+    function getEtat()
     {
         return (int) $this->_etat;
     }
@@ -539,7 +539,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getTemplate()
+    function getTemplate()
     {
         if($this->_template) {
             if(!array_key_exists('content_text_color', $this->_template)) {
@@ -558,7 +558,7 @@ class Groupe extends ObjectModel
      * @param string $id_groupe
      * @return string ou false
      */
-    public static function getNameById($id_groupe)
+    static function getNameById($id_groupe)
     {
         $db = DataBase::getInstance();
 
@@ -574,7 +574,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getPhoto()
+    function getPhoto()
     {
         if(file_exists(self::_getLocalPath() . '/p' . $this->getId() . '.jpg')) {
             return self::_getWwwPath() . '/p' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
@@ -588,7 +588,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getMiniPhoto()
+    function getMiniPhoto()
     {
         if(file_exists(self::_getLocalPath() . '/m' . $this->getId() . '.jpg')) {
             return self::_getWwwPath() . '/m' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
@@ -602,7 +602,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    public function getLogo()
+    function getLogo()
     {
         if(file_exists(self::_getLocalPath() . '/l' . $this->getId() . '.png')) {
             return self::_getWwwPath() . '/l' . $this->getId() . '.png?ts=' . $this->getModifiedOnTs();
@@ -616,7 +616,7 @@ class Groupe extends ObjectModel
     /**
      * @return string
      */
-    public function getUrl()
+    function getUrl()
     {
         return DYN_URL . '/' . $this->_alias;
     }
@@ -627,7 +627,7 @@ class Groupe extends ObjectModel
      * @param string $alias ou int $id_groupe
      * @return string
      */
-    public static function getUrlFiche($ref, $type = 2)
+    static function getUrlFiche($ref, $type = 2)
     {
         if(is_numeric($ref)) {
             $alias = Groupe::getAliasById($ref);
@@ -641,7 +641,7 @@ class Groupe extends ObjectModel
     /**
      *
      */
-    public function getFacebookShareUrl()
+    function getFacebookShareUrl()
     {
         return 'http://www.facebook.com/sharer.php?u=' . urlencode($this->getUrl());
     }
@@ -651,7 +651,7 @@ class Groupe extends ObjectModel
      * @param int id_groupe
      * @return string
      */
-    public static function getAvatarById($id_groupe)
+    static function getAvatarById($id_groupe)
     {
         $avatar = 'http://static.adhocmusic.com/img/note_adhoc_64.png';
         if(file_exists(self::_getLocalPath() . '/m' . $id_groupe . '.jpg')) {
@@ -666,7 +666,7 @@ class Groupe extends ObjectModel
      * @param int $id_groupe
      * @return string
      */
-    public static function getAliasById($id_groupe)
+    static function getAliasById($id_groupe)
     {
         $db = DataBase::getInstance();
 
@@ -687,7 +687,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setAlias($val)
+    function setAlias($val)
     {
         if ($this->_alias != $val)
         {
@@ -699,7 +699,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setName($val)
+    function setName($val)
     {
         if ($this->_name != $val)
         {
@@ -711,7 +711,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setStyle($val)
+    function setStyle($val)
     {
         if ($this->_style != $val)
         {
@@ -723,7 +723,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setInfluences($val)
+    function setInfluences($val)
     {
         if ($this->_influences != $val)
         {
@@ -735,7 +735,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setLineup($val)
+    function setLineup($val)
     {
         if ($this->_lineup != $val)
         {
@@ -747,7 +747,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setMiniText($val)
+    function setMiniText($val)
     {
         if ($this->_mini_text != $val)
         {
@@ -758,7 +758,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setText($val)
+    function setText($val)
     {
         if ($this->_text != $val)
         {
@@ -770,7 +770,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setSite($val)
+    function setSite($val)
     {
         if ($this->_site != $val)
         {
@@ -782,7 +782,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setMyspaceId($val)
+    function setMyspaceId($val)
     {
         $val = trim($val);
         $val = str_replace('http://', '', $val);
@@ -798,7 +798,7 @@ class Groupe extends ObjectModel
     /**
      * @param string (int 64bits en fait)
      */
-    public function setFacebookPageId($val)
+    function setFacebookPageId($val)
     {
         if ($this->_facebook_page_id != $val)
         {
@@ -810,7 +810,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setTwitterId($val)
+    function setTwitterId($val)
     {
         if ($this->_twitter_id != $val)
         {
@@ -822,7 +822,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setIdDepartement($val)
+    function setIdDepartement($val)
     {
         if ($this->_id_departement != $val)
         {
@@ -834,7 +834,7 @@ class Groupe extends ObjectModel
     /**
      * @param bool
      */
-    public function setOnline($val)
+    function setOnline($val)
     {
         if ($this->_online != $val)
         {
@@ -846,7 +846,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setVisite($val)
+    function setVisite($val)
     {
         if ($this->_visite != $val)
         {
@@ -858,7 +858,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setCreatedOn($val)
+    function setCreatedOn($val)
     {
         if ($this->_created_on != $val)
         {
@@ -870,7 +870,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setCreatedNow()
+    function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_created_on != $now)
@@ -883,7 +883,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setModifiedOn($val)
+    function setModifiedOn($val)
     {
         if ($this->_modified_on != $val)
         {
@@ -895,7 +895,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setModifiedNow()
+    function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_modified_on != $now)
@@ -908,7 +908,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setDatdeb($val)
+    function setDatdeb($val)
     {
         if ($this->_datdeb != $val)
         {
@@ -920,7 +920,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setDatfin($val)
+    function setDatfin($val)
     {
         if ($this->_datfin != $val)
         {
@@ -932,7 +932,7 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    public function setComment($val)
+    function setComment($val)
     {
         if ($this->_comment != $val)
         {
@@ -944,7 +944,7 @@ class Groupe extends ObjectModel
     /**
      * @param int
      */
-    public function setEtat($val)
+    function setEtat($val)
     {
         if ($this->_etat != $val)
         {
@@ -956,7 +956,7 @@ class Groupe extends ObjectModel
     /**
      * @param array
      */
-    public function setTemplate($val)
+    function setTemplate($val)
     {
         if ($this->_template != $val)
         {
@@ -972,7 +972,7 @@ class Groupe extends ObjectModel
      *
      * @return int
      */
-    public static function getGroupesCount($etat = null, $force = false)
+    static function getGroupesCount($etat = null, $force = false)
     {
         if(isset($_SESSION['global_counters']['nb_groupes']) && $force === false) {
             return $_SESSION['global_counters']['nb_groupes'];
@@ -996,7 +996,7 @@ class Groupe extends ObjectModel
     /**
      * @return int
      */
-    public static function getMyGroupesCount()
+    static function getMyGroupesCount()
     {
         if(empty($_SESSION['membre'])) {
             throw new AdHocUserException('non identifié');
@@ -1027,7 +1027,7 @@ class Groupe extends ObjectModel
      * + ses liaisons avec photos,videos,audios
      * @return bool
      */
-    public function delete()
+    function delete()
     {
         $this->unlinkMembers();
         $this->unlinkStyles();
@@ -1088,7 +1088,7 @@ class Groupe extends ObjectModel
      * @param id_type_musicien
      * @return bool
      */
-    public function linkMember($id_contact, $id_type_musicien = 0, $datdeb = '0000-00-00', $datfin = '0000-00-00')
+    function linkMember($id_contact, $id_type_musicien = 0, $datdeb = '0000-00-00', $datfin = '0000-00-00')
     {
         // le groupe existe-t-il bien ?
 
@@ -1117,7 +1117,7 @@ class Groupe extends ObjectModel
         return $db->affectedRows();
     }
 
-    public function updateMember($id_contact, $id_type_musicien = 0)
+    function updateMember($id_contact, $id_type_musicien = 0)
     {
         $db = DataBase::getInstance();
 
@@ -1137,7 +1137,7 @@ class Groupe extends ObjectModel
      * @param int $id_contact
      * @return int
      */
-    public function unlinkMember($id_contact)
+    function unlinkMember($id_contact)
     {
         // le groupe existe-t-il bien ?
 
@@ -1164,7 +1164,7 @@ class Groupe extends ObjectModel
      *
      * @return bool
      */
-    public function unlinkMembers()
+    function unlinkMembers()
     {
         $db = DataBase::getInstance();
 
@@ -1182,7 +1182,7 @@ class Groupe extends ObjectModel
      * @param int $id_contact
      * @return bool
      */
-    public function isMember($id_contact)
+    function isMember($id_contact)
     {
         if(is_null($this->_members)) {
             $this->_members = self::getMembersById($this->getId());
@@ -1202,7 +1202,7 @@ class Groupe extends ObjectModel
      *
      * @return array
      */
-    public function getMembers()
+    function getMembers()
     {
         if(is_null($this->_members)) {
             $this->_members = self::getMembersById($this->getId());
@@ -1217,7 +1217,7 @@ class Groupe extends ObjectModel
      * @param int id_groupe
      * @return array
      */
-    public static function getMembersById($id_groupe)
+    static function getMembersById($id_groupe)
     {
         $db = DataBase::getInstance();
 
@@ -1244,7 +1244,7 @@ class Groupe extends ObjectModel
      *
      * @return bool
      */
-    public function hasMembers()
+    function hasMembers()
     {
         return (bool) $this->getMembers();
     }
@@ -1256,7 +1256,7 @@ class Groupe extends ObjectModel
      * @param array $params issu du champ template
      * @return string
      */
-    public function getCss()
+    function getCss()
     {
         if(!is_array($this->_template) || !count($this->_template)) {
             return '';
@@ -1322,7 +1322,7 @@ class Groupe extends ObjectModel
      * @param array
      * @return array
      */
-    public static function getGroupes($params = array())
+    static function getGroupes($params = array())
     {
         $debut = 0;
         if(isset($params['debut'])) {
@@ -1392,7 +1392,7 @@ class Groupe extends ObjectModel
      *
      * @return array
      */
-    public static function getMyGroupes()
+    static function getMyGroupes()
     {
         if(empty($_SESSION['membre'])) {
             throw new AdHocUserException('non identifié');
@@ -1435,7 +1435,7 @@ class Groupe extends ObjectModel
      *
      * @return array
      */
-    public static function getGroupeADecouvrir()
+    static function getGroupeADecouvrir()
     {
         $db = DataBase::getInstance();
 
@@ -1471,7 +1471,7 @@ class Groupe extends ObjectModel
      *
      * @return array
      */
-    public static function getGroupesByName()
+    static function getGroupesByName()
     {
         $db = DataBase::getInstance();
 
@@ -1513,7 +1513,7 @@ class Groupe extends ObjectModel
      *
      * @return array
      */
-    public static function getGroupesByModifiedOn()
+    static function getGroupesByModifiedOn()
     {
         $db = DataBase::getInstance();
 
@@ -1557,7 +1557,7 @@ class Groupe extends ObjectModel
      * @param bool
      * @return array
      */
-    public static function getGroupesByStyle()
+    static function getGroupesByStyle()
     {
         $db = DataBase::getInstance();
 
@@ -1599,7 +1599,7 @@ class Groupe extends ObjectModel
      * @param string $alias
      * @return int
      */
-    public static function getIdByAlias($alias)
+    static function getIdByAlias($alias)
     {
         $db = DataBase::getInstance();
 
@@ -1616,7 +1616,7 @@ class Groupe extends ObjectModel
      * @param int $fbpid
      * @return int
      */
-    public static function getIdByFacebookPageId($fbpid)
+    static function getIdByFacebookPageId($fbpid)
     {
         $db = DataBase::getInstance();
 
@@ -1640,7 +1640,7 @@ class Groupe extends ObjectModel
      *
      * @param int $id_style
      */
-    public function linkStyle($id_style, $ordre = 1)
+    function linkStyle($id_style, $ordre = 1)
     {
         // le groupe existe-t-il bien ?
 
@@ -1669,7 +1669,7 @@ class Groupe extends ObjectModel
      * @param int $id_style
      * @return bool
      */
-    public function unlinkStyle($id_style)
+    function unlinkStyle($id_style)
     {
         // les paramètres sont-ils corrects ?
 
@@ -1696,7 +1696,7 @@ class Groupe extends ObjectModel
      *
      * @return bool
      */
-    public function unlinkStyles()
+    function unlinkStyles()
     {
         // les paramètres sont-ils corrects ?
 
@@ -1717,7 +1717,7 @@ class Groupe extends ObjectModel
      *
      * @return array
      */
-    public function getStyles()
+    function getStyles()
     {
         return $this->_styles;
     }
@@ -1728,7 +1728,7 @@ class Groupe extends ObjectModel
      * @param int $id_groupe
      * @return array
      */
-    public static function getStylesById($id_groupe)
+    static function getStylesById($id_groupe)
     {
         // le groupe existe-t-il ?
 
@@ -1747,7 +1747,7 @@ class Groupe extends ObjectModel
      *
      * @return bool
      */
-    public function hasPhotos()
+    function hasPhotos()
     {
         return (bool) $this->getPhotos();
     }
@@ -1757,7 +1757,7 @@ class Groupe extends ObjectModel
      *
      * @return array ou false
      */
-    public function getPhotos()
+    function getPhotos()
     {
         return $this->_photos;
     }
@@ -1767,7 +1767,7 @@ class Groupe extends ObjectModel
      *
      * @return int
      */
-    public function unlinkPhotos()
+    function unlinkPhotos()
     {
         $db = DataBase::getInstance();
 
@@ -1785,7 +1785,7 @@ class Groupe extends ObjectModel
      *
      * @return bool
      */
-    public function hasAudios()
+    function hasAudios()
     {
         return (bool) $this->getAudios();
     }
@@ -1795,7 +1795,7 @@ class Groupe extends ObjectModel
      *
      * @return array
      */
-    public function getAudios()
+    function getAudios()
     {
         return $this->_audios;
     }
@@ -1805,7 +1805,7 @@ class Groupe extends ObjectModel
      *
      * @return int
      */
-    public function unlinkAudios()
+    function unlinkAudios()
     {
         $db = DataBase::getInstance();
 
@@ -1823,7 +1823,7 @@ class Groupe extends ObjectModel
      *
      * @return bool
      */
-    public function hasVideos()
+    function hasVideos()
     {
         return (bool) $this->getVideos();
     }
@@ -1833,7 +1833,7 @@ class Groupe extends ObjectModel
      *
      * @return array
      */
-    public function getVideos()
+    function getVideos()
     {
         return $this->_videos;
     }
@@ -1843,7 +1843,7 @@ class Groupe extends ObjectModel
      *
      * @return int
      */
-    public function unlinkVideos()
+    function unlinkVideos()
     {
         $db = DataBase::getInstance();
 
@@ -1861,7 +1861,7 @@ class Groupe extends ObjectModel
      *
      * @return bool
      */
-    public function hasEvents()
+    function hasEvents()
     {
         return (bool) $this->getEvents();
     }
@@ -1872,7 +1872,7 @@ class Groupe extends ObjectModel
      * @param string "prev"/"next/"all"
      * @return array
      */
-    public function getEvents($limit = 10, $type = 'all')
+    function getEvents($limit = 10, $type = 'all')
     {
         // le groupe existe-t-il bien ?
 
@@ -1910,7 +1910,7 @@ class Groupe extends ObjectModel
      *
      * @return int
      */
-    public function unlinkEvents()
+    function unlinkEvents()
     {
         $db = DataBase::getInstance();
 
@@ -1926,7 +1926,7 @@ class Groupe extends ObjectModel
      * @param string
      * @return bool
      */
-    public static function nameAvailable($name)
+    static function nameAvailable($name)
     {
         return true;
     }
@@ -1938,7 +1938,7 @@ class Groupe extends ObjectModel
      * @param string $name
      * @return string
      */
-    public static function genAlias($name)
+    static function genAlias($name)
     {
         $alias = trim($name);
         $alias = strtolower($alias);
@@ -1960,7 +1960,7 @@ class Groupe extends ObjectModel
      * @param int $id_groupe
      * @return bool
      */
-    public function addVisite()
+    function addVisite()
     {
         $db = DataBase::getInstance();
 
@@ -1977,7 +1977,7 @@ class Groupe extends ObjectModel
      * récupère les groupes ayant au moins un audio
      * @return array
      */
-    public static function getGroupesWithAudio()
+    static function getGroupesWithAudio()
     {
         $db = DataBase::getInstance();
 
@@ -1994,7 +1994,7 @@ class Groupe extends ObjectModel
      * récupère les groupes ayant au moins une vidéo
      * @return array
      */
-    public static function getGroupesWithVideo()
+    static function getGroupesWithVideo()
     {
         $db = DataBase::getInstance();
 
@@ -2011,7 +2011,7 @@ class Groupe extends ObjectModel
      * récupère les groupes ayant au moins une photo
      * @return array
      */
-    public static function getGroupesWithPhoto()
+    static function getGroupesWithPhoto()
     {
         $db = DataBase::getInstance();
 
@@ -2028,7 +2028,7 @@ class Groupe extends ObjectModel
      * récupère les groupes ayant au moins un média (photo,audio,vidéo)
      * @return array
      */
-    public static function getGroupesWithMedia()
+    static function getGroupesWithMedia()
     {
         $db = DataBase::getInstance();
 
@@ -2055,7 +2055,7 @@ class Groupe extends ObjectModel
      * @param string $alias
      * @return bool
      */
-    public static function checkAliasAvailability($alias)
+    static function checkAliasAvailability($alias)
     {
         $db = DataBase::getInstance();
 

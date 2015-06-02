@@ -38,7 +38,7 @@ class Date
      * @param string $format
      * @return string
      */
-    public static function mysql_datetime($datetime, $format = "d/m/Y à H:i")
+    static function mysql_datetime($datetime, $format = "d/m/Y à H:i")
     {
         if(preg_match(self::$regexp_datetime, $datetime, $dt) && checkdate($dt[2], $dt[3], $dt[1])) {
             return date($format, mktime($dt[4], $dt[5], $dt[6], $dt[2], $dt[3], $dt[ 1]));
@@ -51,7 +51,7 @@ class Date
      * @param string $datetime
      * @return int
      */
-    public function mysql_to_timestamp($date)
+    function mysql_to_timestamp($date)
     {
         if (!preg_match(self::$regexp_date, $date, $r)){
             return false;
@@ -64,7 +64,7 @@ class Date
      * @param string|int (format mysql ou timestamp)
      * @return string
      */
-    public static function formatDate($time)
+    static function formatDate($time)
     {
         $time = is_numeric($time) ? $time : strtotime($time);
         return date('d/m/Y à H:i', $time);
@@ -76,7 +76,7 @@ class Date
      * @param string $date
      * @return bool
      */
-    public static function isDateOk($date)
+    static function isDateOk($date)
     {
         if(preg_match(self::$regexp_date, $date, $regs)) {
             if(checkdate($regs[2], $regs[3], $regs[1])) {
@@ -92,7 +92,7 @@ class Date
      * @param string $date
      * @return bool
      */
-    public static function isDateTimeOk($datetime)
+    static function isDateTimeOk($datetime)
     {
         if(preg_match(self::$regexp_datetime, $datetime, $regs)) {
             if(checkdate($regs[2], $regs[3], $regs[1])) {

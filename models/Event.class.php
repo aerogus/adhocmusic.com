@@ -174,7 +174,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    public function getCreatedOn()
+    function getCreatedOn()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
@@ -185,7 +185,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    public function getCreatedOnTs()
+    function getCreatedOnTs()
     {
         if(Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
@@ -196,7 +196,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    public function getModifiedOn()
+    function getModifiedOn()
     {
         if(Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
@@ -207,7 +207,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    public function getModifiedOnTs()
+    function getModifiedOnTs()
     {
         if(Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
@@ -218,7 +218,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    public function getName()
+    function getName()
     {
         return (string) $this->_name;
     }
@@ -226,7 +226,7 @@ class Event extends ObjectModel
     /**
      * @return string yyyy-mm-dd hh:ii:ss
      */
-    public function getDate()
+    function getDate()
     {
         return (string) $this->_date;
     }
@@ -234,7 +234,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    public function getDay()
+    function getDay()
     {
         return (int) date('d', strtotime($this->_date));
     }
@@ -242,7 +242,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    public function getMonth()
+    function getMonth()
     {
         return (int) date('m', strtotime($this->_date));
     }
@@ -250,7 +250,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    public function getYear()
+    function getYear()
     {
         return (int) date('Y', strtotime($this->_date));
     }
@@ -258,7 +258,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    public function getHour()
+    function getHour()
     {
         return (int) date('H', strtotime($this->_date));
     }
@@ -266,7 +266,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    public function getMinute()
+    function getMinute()
     {
         return (int) date('i', strtotime($this->_date));
     }
@@ -274,7 +274,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    public function getText()
+    function getText()
     {
         return (string) $this->_text;
     }
@@ -282,7 +282,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    public function getPrice()
+    function getPrice()
     {
         return (string) $this->_price;
     }
@@ -290,7 +290,7 @@ class Event extends ObjectModel
     /**
      * @return bool
      */
-    public function getOnline()
+    function getOnline()
     {
         return (bool) $this->_online;
     }
@@ -298,7 +298,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    public function getIdContact()
+    function getIdContact()
     {
         return (int) $this->_id_contact;
     }
@@ -306,7 +306,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    public function getContactUrl()
+    function getContactUrl()
     {
         return '/membres/show/' . $this->_id_contact;
     }
@@ -314,7 +314,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    public function getContactPseudo()
+    function getContactPseudo()
     {
         return Membre::getPseudoById($this->_id_contact);
     }
@@ -322,7 +322,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    public function getFacebookEventId()
+    function getFacebookEventId()
     {
         return (string) $this->_facebook_event_id;
     }
@@ -330,7 +330,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    public function getFacebookEventUrl()
+    function getFacebookEventUrl()
     {
         return 'http://www.facebook.com/events/' . (string) $this->_facebook_event_id . '/';
     }
@@ -338,7 +338,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    public function getFacebookEventAttending()
+    function getFacebookEventAttending()
     {
         return (int) $this->_facebook_event_attending;
     }
@@ -346,7 +346,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    public function getIdLieu()
+    function getIdLieu()
     {
         return (int) $this->_id_lieu;
     }
@@ -354,7 +354,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    public function getFullFlyerUrl()
+    function getFullFlyerUrl()
     {
         if(file_exists(ADHOC_ROOT_PATH . '/static/media/event/' . $this->_id_event . '.jpg')) {
             return STATIC_URL . '/static/media/event/' . $this->_id_event.'.jpg';
@@ -365,7 +365,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    public function getFlyer100Url()
+    function getFlyer100Url()
     {
         return self::getFlyerUrl($this->getId(), 100, 100);
     }
@@ -373,7 +373,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    public function getFlyer400Url()
+    function getFlyer400Url()
     {
         return self::getFlyerUrl($this->getId(), 400, 400);
     }
@@ -383,7 +383,7 @@ class Event extends ObjectModel
      *
      * @return string
      */
-    public function getUrl($type = null)
+    function getUrl($type = null)
     {
         return self::getUrlById($this->getId(), $type);
     }
@@ -392,7 +392,7 @@ class Event extends ObjectModel
      * @param int $id
      * @return string
      */
-    public static function getUrlById($id, $type = null)
+    static function getUrlById($id, $type = null)
     {
         if($type == 'www') {
             return 'http://www.adhocmusic.com/events/show/' . (int) $id;
@@ -405,7 +405,7 @@ class Event extends ObjectModel
      *
      * @return int
      */
-    public function getNbPhotos()
+    function getNbPhotos()
     {
         return (int) $this->_nb_photos;
     }
@@ -415,7 +415,7 @@ class Event extends ObjectModel
      *
      * @return int
      */
-    public function getNbAudios()
+    function getNbAudios()
     {
         return (int) $this->_nb_audios;
     }
@@ -425,7 +425,7 @@ class Event extends ObjectModel
      *
      * @return int
      */
-    public function getNbVideos()
+    function getNbVideos()
     {
         return (int) $this->_nb_videos;
     }
@@ -437,7 +437,7 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    public function setCreatedOn($val)
+    function setCreatedOn($val)
     {
         if ($this->_created_on != $val)
         {
@@ -449,7 +449,7 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    public function setCreatedNow()
+    function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_created_on != $now)
@@ -462,7 +462,7 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    public function setModifiedOn($val)
+    function setModifiedOn($val)
     {
         if ($this->_modified_on != $val)
         {
@@ -474,7 +474,7 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    public function setModifiedNow()
+    function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_modified_on != $now)
@@ -487,7 +487,7 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    public function setName($val)
+    function setName($val)
     {
         if ($this->_name != $val)
         {
@@ -499,7 +499,7 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    public function setFacebookEventId($val)
+    function setFacebookEventId($val)
     {
         // pour les boulets qui copient/collent toute l'url
         if(preg_match('#^https?://w{0,3}\.facebook.com/events/([0-9]{1,24})/{0,1}$#', $val, $matches)) {
@@ -517,7 +517,7 @@ class Event extends ObjectModel
     /**
      * @param int
      */
-    public function setFacebookEventAttending($val)
+    function setFacebookEventAttending($val)
     {
         if ($this->_facebook_event_attending != $val)
         {
@@ -529,7 +529,7 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    public function setDate($val)
+    function setDate($val)
     {
         if ($this->_date != $val)
         {
@@ -541,7 +541,7 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    public function setText($val)
+    function setText($val)
     {
         if ($this->_text != $val)
         {
@@ -553,7 +553,7 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    public function setPrice($val)
+    function setPrice($val)
     {
         if ($this->_price != $val)
         {
@@ -565,7 +565,7 @@ class Event extends ObjectModel
     /**
      * @param bool
      */
-    public function setOnline($val)
+    function setOnline($val)
     {
         if ($this->_online != $val)
         {
@@ -577,7 +577,7 @@ class Event extends ObjectModel
     /**
      * @param int
      */
-    public function setIdLieu($val)
+    function setIdLieu($val)
     {
         if ($this->_id_lieu != $val)
         {
@@ -589,7 +589,7 @@ class Event extends ObjectModel
     /**
      * @param int
      */
-    public function setIdContact($val)
+    function setIdContact($val)
     {
         if ($this->_id_contact != $val)
         {
@@ -601,7 +601,7 @@ class Event extends ObjectModel
     /**
      * @param int
      */
-    public function setNbPhotos($val)
+    function setNbPhotos($val)
     {
         if ($this->_nb_photos != $val)
         {
@@ -613,7 +613,7 @@ class Event extends ObjectModel
     /**
      * @param int
      */
-    public function setNbAudios($val)
+    function setNbAudios($val)
     {
         if ($this->_nb_audios != $val)
         {
@@ -625,7 +625,7 @@ class Event extends ObjectModel
     /**
      * @param int
      */
-    public function setNbVideos($val)
+    function setNbVideos($val)
     {
         if ($this->_nb_videos != $val)
         {
@@ -641,7 +641,7 @@ class Event extends ObjectModel
      *
      * @return int
      */
-    public static function getEventsCount()
+    static function getEventsCount()
     {
         if(isset($_SESSION['global_counters']['nb_events'])) {
             return $_SESSION['global_counters']['nb_events'];
@@ -679,7 +679,7 @@ class Event extends ObjectModel
      * datdeb et datfin obligatoires, le reste facultatif
      * @return array
      */
-    public static function getEvents($params = array())
+    static function getEvents($params = array())
     {
         if(array_key_exists('datdeb', $params)) {
             if(!empty($params['datdeb'])) {
@@ -921,7 +921,7 @@ class Event extends ObjectModel
     /**
      * Suppression d'un événement
      */
-    public function delete()
+    function delete()
     {
         /* délie les tables référentes */
         $this->unlinkStyles();
@@ -948,7 +948,7 @@ class Event extends ObjectModel
      * @param int $id_style
      * @param int $ordre
      */
-    public function linkStyle($id_style, $ordre = 1)
+    function linkStyle($id_style, $ordre = 1)
     {
         // les paramètres sont-ils corrects ?
         if(!$this->_id_event || !$id_style) {
@@ -996,7 +996,7 @@ class Event extends ObjectModel
      *
      * @param int $id_style
      */
-    public function unlinkStyle($id_style)
+    function unlinkStyle($id_style)
     {
         // les paramètres sont-ils corrects ?
         if(!$this->_id_event || !$id_style) {
@@ -1044,7 +1044,7 @@ class Event extends ObjectModel
      *
      * @return array $tab_style[] = $id_style
      */
-    public function getStyles()
+    function getStyles()
     {
         $db = DataBase::getInstance();
 
@@ -1060,7 +1060,7 @@ class Event extends ObjectModel
      * retourne un style
      * @param int
      */
-    public function getStyle($idx)
+    function getStyle($idx)
     {
         if(array_key_exists($idx, $this->_styles)) {
             return $this->_styles[$idx];
@@ -1071,7 +1071,7 @@ class Event extends ObjectModel
     /**
      * efface tous les styles d'un événement
      */
-    public function unlinkStyles()
+    function unlinkStyles()
     {
         $db = DataBase::getInstance();
 
@@ -1088,7 +1088,7 @@ class Event extends ObjectModel
      *
      * @param int $id_groupe
      */
-    public function linkGroupe($id_groupe)
+    function linkGroupe($id_groupe)
     {
         $db = DataBase::getInstance();
 
@@ -1107,7 +1107,7 @@ class Event extends ObjectModel
      * @param int
      * @return int
      */
-    public function unlinkGroupe($id_groupe)
+    function unlinkGroupe($id_groupe)
     {
         $db = DataBase::getInstance();
 
@@ -1125,7 +1125,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    public function getGroupes()
+    function getGroupes()
     {
         $db = DataBase::getInstance();
 
@@ -1157,7 +1157,7 @@ class Event extends ObjectModel
      * @param int $idx
      * @return array
      */
-    public function getGroupe($idx)
+    function getGroupe($idx)
     {
         if(array_key_exists($idx, $this->_groupes)) {
             return $this->_groupes[$idx];
@@ -1170,7 +1170,7 @@ class Event extends ObjectModel
      * @param int $idx
      * @return int
      */
-    public function getGroupeId($idx)
+    function getGroupeId($idx)
     {
         if(array_key_exists($idx, $this->_groupes)) {
             return $this->_groupes[$idx]['id'];
@@ -1181,7 +1181,7 @@ class Event extends ObjectModel
     /**
      * délie tous les groupes d'un évéenement
      */
-    public function unlinkGroupes()
+    function unlinkGroupes()
     {
         $db = DataBase::getInstance();
 
@@ -1198,7 +1198,7 @@ class Event extends ObjectModel
      *
      * @param int $id_structure
      */
-    public function linkStructure($id_structure)
+    function linkStructure($id_structure)
     {
         // les paramètres sont-ils corrects ?
         if(!$this->_id_event || !$id_structure) {
@@ -1232,7 +1232,7 @@ class Event extends ObjectModel
      *
      * @param int $id_structure
      */
-    public function unlinkStructure($id_structure)
+    function unlinkStructure($id_structure)
     {
         // les paramètres sont-ils corrects ?
         if(!$this->_id_event || !$id_structure) {
@@ -1270,7 +1270,7 @@ class Event extends ObjectModel
      *
      * @return array $tab_struct[] = $id_struct
      */
-    public function getStructures()
+    function getStructures()
     {
 
         // retourne le tableau id => nom
@@ -1290,7 +1290,7 @@ class Event extends ObjectModel
      * @param int $idx
      * @return int
      */
-    public function getStructure($idx)
+    function getStructure($idx)
     {
         if(array_key_exists($idx, $this->_structures)) {
             return $this->_structures[$idx];
@@ -1303,7 +1303,7 @@ class Event extends ObjectModel
      * @param int $idx
      * @return int
      */
-    public function getStructureId($idx)
+    function getStructureId($idx)
     {
         if(array_key_exists($idx, $this->_structures)) {
             return $this->_structures[$idx]['id'];
@@ -1314,7 +1314,7 @@ class Event extends ObjectModel
     /**
      * efface toutes les structures d'un événement
      */
-    public function unlinkStructures()
+    function unlinkStructures()
     {
         $db = DataBase::getInstance();
 
@@ -1334,7 +1334,7 @@ class Event extends ObjectModel
      * @param int $month
      * @return array
      */
-    public static function getEventsForAMonth($year, $month)
+    static function getEventsForAMonth($year, $month)
     {
         $db = DataBase::getInstance();
 
@@ -1360,7 +1360,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    public function getPhotos()
+    function getPhotos()
     {
         return Photo::getPhotos(array(
             'event'  => $this->getId(),
@@ -1373,7 +1373,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    public function getVideos()
+    function getVideos()
     {
         return Video::getVideos(array(
             'event'  => $this->getId(),
@@ -1386,7 +1386,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    public function getAudios()
+    function getAudios()
     {
         return Audio::getAudios(array(
             'event'  => $this->getId(),
@@ -1400,7 +1400,7 @@ class Event extends ObjectModel
      * @param int $id_event
      * @return bool
      */
-    public static function isEventOk($id_event)
+    static function isEventOk($id_event)
     {
         $db = DataBase::getInstance();
 
@@ -1418,7 +1418,7 @@ class Event extends ObjectModel
      *
      * @return int
      */
-    public static function getMyEventsCount()
+    static function getMyEventsCount()
     {
         if(empty($_SESSION['membre'])) {
             throw new AdHocUserException('non identifié');
@@ -1441,7 +1441,7 @@ class Event extends ObjectModel
         return $_SESSION['my_counters']['nb_events'];
     }
 
-    public static function syncNbMedia()
+    static function syncNbMedia()
     {
         $db = DataBase::getInstance();
 
@@ -1474,7 +1474,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    public static function getAdHocEventsBySeason()
+    static function getAdHocEventsBySeason()
     {
         $evts = self::getEvents(array(
             'structure' => 1,
@@ -1501,7 +1501,7 @@ class Event extends ObjectModel
         return $tab;
     }
 
-    public static function invalidateFlyerInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
+    static function invalidateFlyerInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
     {
         $uid = 'event/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
@@ -1520,7 +1520,7 @@ class Event extends ObjectModel
      *
      * @return string
      */
-    public static function getFlyerUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
+    static function getFlyerUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
     {
         $uid = 'event/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
@@ -1552,7 +1552,7 @@ class Event extends ObjectModel
      * récupère les events ayant au moins un audio
      * @return array
      */
-    public static function getEventsWithAudio()
+    static function getEventsWithAudio()
     {
         $db = DataBase::getInstance();
 
@@ -1571,7 +1571,7 @@ class Event extends ObjectModel
      * récupère les events ayant au moins une vidéo
      * @return array
      */
-    public static function getEventsWithVideo()
+    static function getEventsWithVideo()
     {
         $db = DataBase::getInstance();
 
@@ -1590,7 +1590,7 @@ class Event extends ObjectModel
      * récupère les events ayant au moins une photo
      * @return array
      */
-    public static function getEventsWithPhoto()
+    static function getEventsWithPhoto()
     {
         $db = DataBase::getInstance();
 
@@ -1609,7 +1609,7 @@ class Event extends ObjectModel
      * récupère les events ayant au moins un média (photo,audio,vidéo)
      * @return array
      */
-    public static function getEventsWithMedia()
+    static function getEventsWithMedia()
     {
         $db = DataBase::getInstance();
 

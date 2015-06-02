@@ -97,7 +97,7 @@ class Image
      * charge le handle d'un fichier si passé en paramètre
      * sinon crée une nouvelle image aux dimensions données
      */
-    public function __construct($file = null)
+    function __construct($file = null)
     {
         if(!is_null($file)) {
             $this->_file_sou = $file;
@@ -124,7 +124,7 @@ class Image
      * @param int $height > 1
      * @param string $color (ex: #ffffff)
      */
-    public function init($width = 16, $height = 16, $color = false)
+    function init($width = 16, $height = 16, $color = false)
     {
         $this->_handle = imagecreatetruecolor($width, $height);
 
@@ -148,7 +148,7 @@ class Image
      * Charge un fichier dans l'attribut $this->_handle
      * retourn false en cas d'erreur
      */
-    public function read()
+    function read()
     {
         if($this->_file_sou && file_exists($this->_file_sou) && is_readable($this->_file_sou))
         {
@@ -198,7 +198,7 @@ class Image
      * 0 <= x1 < x2 < $this->_width
      * 0 <= y1 < y2 < $this->_height
      */
-    public function setZone($x1, $y1, $x2, $y2)
+    function setZone($x1, $y1, $x2, $y2)
     {
         if( ($x1 >= 0) && ($x2 > $x1) && ($this->_width > $x2) &&
             ($y1 >= 0) && ($y2 > $y1) && ($this->_height > $y2)) {
@@ -216,7 +216,7 @@ class Image
     /**
      * on sélectionne la zone centrale de l'image
      */
-    public function setZoom()
+    function setZoom()
     {
         // ratio de l'image destination
         $ratio = $this->_max_width / $this->_max_height;
@@ -252,7 +252,7 @@ class Image
     /**
      * selection de toute l'image
      */
-    public function selectAll()
+    function selectAll()
     {
         $this->setZone(0, 0, $this->_width - 1, $this->_height - 1);
     }
@@ -262,7 +262,7 @@ class Image
      *
      * @param string $file
      */
-    public function setDestFile($file)
+    function setDestFile($file)
     {
         $this->_file_res = $file;
     }
@@ -272,7 +272,7 @@ class Image
      *
      * 3 paramàtres de 0 à 255 chacun
      */
-    public function setColor($red = 0, $green = 0, $blue = 0)
+    function setColor($red = 0, $green = 0, $blue = 0)
     {
         $this->_color = array(
             'r' => $red,
@@ -285,7 +285,7 @@ class Image
      * fixe la couleur courante
      * parametre en hexa (ex: FB41CE)
      */
-    public function setHexColor($hexCode)
+    function setHexColor($hexCode)
     {
         $red   = hexdec(substr($hexCode, 0, 2));
         $green = hexdec(substr($hexCode, 2, 2));
@@ -300,7 +300,7 @@ class Image
      * - IMAGETYPE_JPEG
      * - IMAGETYPE_PNG
      */
-    public function setType($type)
+    function setType($type)
     {
         $this->_type = (int) $type;
     }
@@ -310,7 +310,7 @@ class Image
      *
      * @param int
      */
-    public function setMaxWidth($maxWidth)
+    function setMaxWidth($maxWidth)
     {
         $this->_max_width = (int) $maxWidth;
     }
@@ -320,7 +320,7 @@ class Image
      *
      * @param int
      */
-    public function setMaxHeight($maxHeight)
+    function setMaxHeight($maxHeight)
     {
         $this->_max_height = (int) $maxHeight;
     }
@@ -329,7 +329,7 @@ class Image
      * redimensionnement de l'image
      * handle -> handle2
      */
-    public function resize()
+    function resize()
     {
         if($this->_max_height && $this->_max_width && $this->_border) {
             $width = $this->_max_width;
@@ -361,7 +361,7 @@ class Image
      * calcul aussi l'offset si bordure
      * charge new_l et new_h
      */
-    public function calculTaille()
+    function calculTaille()
     {
         /**
          * calcul de la nouvelle taille de l'image
@@ -427,7 +427,7 @@ class Image
      *
      * @param bool
      */
-    public function setKeepRatio($bool)
+    function setKeepRatio($bool)
     {
         $this->_keep_ratio = (bool) $bool;
     }
@@ -437,7 +437,7 @@ class Image
      *
      * @param bool
      */
-    public function setBorder($bool)
+    function setBorder($bool)
     {
         $this->_border = (bool) $bool;
     }
@@ -449,7 +449,7 @@ class Image
     /**
      * affiche l'image à l'écran
      */
-    public function display()
+    function display()
     {
         $this->calculTaille();
         $this->resize();
@@ -485,7 +485,7 @@ class Image
     /**
      * ecrit la nouvelle image sur disque
      */
-    public function write()
+    function write()
     {
         $this->calculTaille();
         $this->resize();
@@ -496,7 +496,7 @@ class Image
      * retourne l'image sous forme de chaine binaire
      * @return string
      */
-    public function get()
+    function get()
     {
         $this->calculTaille();
         $this->resize();
@@ -547,7 +547,7 @@ class Image
      * @param string $uid
      * @return string
      */
-    public static function getLocalCachePath($uid)
+    static function getLocalCachePath($uid)
     {
         $hash = md5(trim($uid));
 
@@ -567,7 +567,7 @@ class Image
      * @param string uid
      * @return string
      */
-    public static function getHttpCachePath($uid)
+    static function getHttpCachePath($uid)
     {
         $hash = md5(trim($uid));
 
@@ -587,7 +587,7 @@ class Image
      * @param string $uid
      * @param string $content (bin)
      */
-    public static function writeCache($uid, $content)
+    static function writeCache($uid, $content)
     {
         $hash = md5(trim($uid));
 

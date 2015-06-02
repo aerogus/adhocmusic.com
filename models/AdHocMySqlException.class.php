@@ -25,7 +25,7 @@ class AdHocMySqlException extends AdHocException
     /**
      *
      */
-    public function __construct($link_identifier, $message = '', $code = EXCEPTION_MYSQL_DEFAULT, Exception $previous = null)
+    function __construct($link_identifier, $message = '', $code = EXCEPTION_MYSQL_DEFAULT, Exception $previous = null)
     {
         if (!empty($link_identifier))
         {
@@ -45,7 +45,7 @@ class AdHocMySqlException extends AdHocException
     /**
      *
      */
-    public function setQuery($sql)
+    function setQuery($sql)
     {
         $this->query = $sql;
     }
@@ -53,7 +53,7 @@ class AdHocMySqlException extends AdHocException
     /**
      *
      */
-    public function getQuery($sql)
+    function getQuery($sql)
     {
         $this->query = $sql;
     }

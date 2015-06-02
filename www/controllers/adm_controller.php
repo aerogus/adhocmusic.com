@@ -69,7 +69,7 @@ class Controller
         return $smarty->fetch('adm/billing.tpl');
     }
 
-    public static function domains()
+    static function domains()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -91,7 +91,7 @@ class Controller
         return $smarty->fetch('adm/domains.tpl');
     }
 
-    public static function newsletter_index()
+    static function newsletter_index()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -111,7 +111,7 @@ class Controller
         return $smarty->fetch('adm/newsletter/index.tpl');
     }
 
-    public static function newsletter_create()
+    static function newsletter_create()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -134,7 +134,7 @@ class Controller
         return $smarty->fetch('adm/newsletter/create.tpl');
     }
 
-    public static function newsletter_create_submit()
+    static function newsletter_create_submit()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -153,7 +153,7 @@ class Controller
         Tools::redirect('/adm/newsletter/?create=1');
     }
 
-    public static function newsletter_edit()
+    static function newsletter_edit()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -173,7 +173,7 @@ class Controller
         return $smarty->fetch('adm/newsletter/edit.tpl');
     }
 
-    public static function newsletter_edit_submit()
+    static function newsletter_edit_submit()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -191,7 +191,7 @@ class Controller
         Tools::redirect('/adm/newsletter/edit/'.(int) Route::params('id').'?edit=1');
     }
 
-    public static function groupes_index()
+    static function groupes_index()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -238,7 +238,7 @@ class Controller
         return $smarty->fetch('adm/groupes/index.tpl');
     }
 
-    public static function groupes_show()
+    static function groupes_show()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -256,7 +256,7 @@ class Controller
         return $smarty->fetch('adm/groupes/show.tpl');
     }
 
-    public static function membres_index()
+    static function membres_index()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -339,7 +339,7 @@ class Controller
         return $smarty->fetch('adm/membres/index.tpl');
     }
 
-    public static function membres_show()
+    static function membres_show()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -357,7 +357,7 @@ class Controller
         return $smarty->fetch('adm/membres/show.tpl');
     }
 
-    public static function membres_delete()
+    static function membres_delete()
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -383,7 +383,7 @@ class Controller
         return $smarty->fetch('adm/membres/delete.tpl');
     }
 
-    public static function featured_index()
+    static function featured_index()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -396,7 +396,7 @@ class Controller
         return $smarty->fetch('adm/featured/index.tpl');
     }
 
-    public static function featured_create()
+    static function featured_create()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -476,7 +476,7 @@ class Controller
         return $smarty->fetch('adm/featured/create.tpl');
     }
 
-    public static function featured_edit()
+    static function featured_edit()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -589,7 +589,7 @@ class Controller
         return true;
     }
 
-    public static function featured_delete()
+    static function featured_delete()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -615,7 +615,7 @@ class Controller
         return $smarty->fetch('adm/featured/delete.tpl');
     }
 
-    public static function stats()
+    static function stats()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -698,7 +698,7 @@ class Controller
         return $smarty->fetch('adm/stats.tpl');
     }
 
-    public static function stats_top_groupes()
+    static function stats_top_groupes()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -763,7 +763,7 @@ class Controller
         return $smarty->fetch('adm/stats-top-groupes.tpl');
     }
 
-    public static function stats_top_membres()
+    static function stats_top_membres()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -835,7 +835,7 @@ class Controller
         return $smarty->fetch('adm/stats-top-membres.tpl');
     }
 
-    public static function stats_nl()
+    static function stats_nl()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -902,7 +902,7 @@ class Controller
         return $smarty->fetch('adm/stats-nl.tpl');
     }
 
-    public static function groupe_de_style()
+    static function groupe_de_style()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -951,7 +951,7 @@ class Controller
         return $smarty->fetch('adm/groupe-de-style.tpl');
     }
 
-    public static function groupe_de_style_id()
+    static function groupe_de_style_id()
     {
         if(Tools::isSubmit('form-groupe-de-style')) {
             return self::groupe_de_style_submit();
@@ -1010,7 +1010,7 @@ class Controller
         return $smarty->fetch('adm/groupe-de-style-id.tpl');
     }
 
-    public static function groupe_de_style_submit()
+    static function groupe_de_style_submit()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1042,7 +1042,7 @@ class Controller
         Tools::redirect('/adm/groupe-de-style');
     }
 
-    public static function log_action()
+    static function log_action()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1058,7 +1058,7 @@ class Controller
         return $smarty->fetch('adm/log-action.tpl');
     }
 
-    public static function est_marque_sur()
+    static function est_marque_sur()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1109,7 +1109,7 @@ class Controller
         return $smarty->fetch('adm/est-marque-sur.tpl');
     }
 
-    public static function est_marque_sur_id()
+    static function est_marque_sur_id()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1135,7 +1135,7 @@ class Controller
         return $smarty->fetch('adm/est-marque-sur.tpl');
     }
 
-    public static function est_marque_sur_submit()
+    static function est_marque_sur_submit()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1163,7 +1163,7 @@ class Controller
         Tools::redirect('/adm/est-marque-sur?page=' . $page . '&tag=ok');
     }
 
-    public static function delete_account()
+    static function delete_account()
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -1277,7 +1277,7 @@ class Controller
         return $smarty->fetch('adm/delete-account.tpl');
     }
 
-    public static function delete_account_submit()
+    static function delete_account_submit()
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -1319,7 +1319,7 @@ class Controller
         return $smarty->fetch('adm/delete-account.tpl');
     }
 
-    public static function forums_index()
+    static function forums_index()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1336,7 +1336,7 @@ class Controller
         return $smarty->fetch('adm/forums/index.tpl');
     }
 
-    public static function forums_forum()
+    static function forums_forum()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1365,7 +1365,7 @@ class Controller
         return $smarty->fetch('adm/forums/forum.tpl');
     }
 
-    public static function forums_thread()
+    static function forums_thread()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1405,7 +1405,7 @@ class Controller
         return $smarty->fetch('adm/forums/thread.tpl');
     }
 
-    public static function forums_write()
+    static function forums_write()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1501,7 +1501,7 @@ class Controller
         return $smarty->fetch('adm/forums/write.tpl');
     }
 
-    public static function sql()
+    static function sql()
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -1546,7 +1546,7 @@ class Controller
         return $smarty->fetch('adm/sql.tpl');
     }
 
-    public static function appartient_a()
+    static function appartient_a()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1621,7 +1621,7 @@ class Controller
         return $smarty->fetch('adm/appartient-a.tpl');
     }
 
-    public static function faq_index()
+    static function faq_index()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1641,7 +1641,7 @@ class Controller
         return $smarty->fetch('adm/faq/index.tpl');
     }
 
-    public static function faq_create()
+    static function faq_create()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1676,7 +1676,7 @@ class Controller
         return $smarty->fetch('adm/faq/create.tpl');
     }
 
-    public static function faq_edit()
+    static function faq_edit()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1715,7 +1715,7 @@ class Controller
         return $smarty->fetch('adm/faq/edit.tpl');
     }
 
-    public static function faq_delete()
+    static function faq_delete()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1743,7 +1743,7 @@ class Controller
         return $smarty->fetch('adm/faq/delete.tpl');
     }
 
-    public static function cms_index()
+    static function cms_index()
     {
         Tools::auth(Membre::TYPE_INTERNE);
         $smarty = new AdHocSmarty();
@@ -1763,7 +1763,7 @@ class Controller
         return $smarty->fetch('adm/cms/index.tpl');
     }
 
-    public static function cms_create()
+    static function cms_create()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1807,7 +1807,7 @@ class Controller
         return $smarty->fetch('adm/cms/create.tpl');
     }
 
-    public static function cms_edit()
+    static function cms_edit()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -1856,7 +1856,7 @@ class Controller
         return $smarty->fetch('adm/cms/edit.tpl');
     }
 
-    public static function cms_delete()
+    static function cms_delete()
     {
         Tools::auth(Membre::TYPE_INTERNE);
 

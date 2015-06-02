@@ -26,7 +26,7 @@ class WorldRegion extends Liste
      * @param string $id_region
      * @return bool
      */
-    public function isWorldRegionOk($id_country, $id_region)
+    function isWorldRegionOk($id_country, $id_region)
     {
         $o = static::getInstance();
         return $o->_isWorldRegionOk($id_country, $id_region);
@@ -39,7 +39,7 @@ class WorldRegion extends Liste
      * @param string $id_region
      * @return string
      */
-    public static function getName($id_country, $id_region)
+    static function getName($id_country, $id_region)
     {
         $o = static::getInstance();
         return $o->_getName($id_country, $id_region);

@@ -26,7 +26,7 @@ class WorldCountry extends Liste
      * @param int $cle
      * @return string
      */
-    public static function getName($id_country, $locale = 'fr_FR')
+    static function getName($id_country, $locale = 'fr_FR')
     {
         $o = static::getInstance();
         return $o->_getName($id_country, $locale);
@@ -36,7 +36,7 @@ class WorldCountry extends Liste
      * @param string $id_country
      * @return bool
      */
-    public static function isWorldCountryOk($id_country)
+    static function isWorldCountryOk($id_country)
     {
         $o = static::getInstance();
         return $o->_isWorldCountryOk($id_country);

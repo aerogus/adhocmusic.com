@@ -40,7 +40,7 @@ class Messagerie extends ObjectModel
      * @param int $id_contact
      * @return void
      */
-    public function __construct($id_contact)
+    function __construct($id_contact)
     {
         $this->_id_contact = (int) $id_contact;
         self::$_instance = $this;
@@ -49,7 +49,7 @@ class Messagerie extends ObjectModel
     /**
      *
      */
-    public static function getInstance($id_contact)
+    static function getInstance($id_contact)
     {
         if (is_null(self::$_instance)) {
             return new Messagerie($id_contact);
@@ -60,7 +60,7 @@ class Messagerie extends ObjectModel
     /**
      *
      */
-    public static function deleteInstance()
+    static function deleteInstance()
     {
         if (isset(self::$_instance)) {
             self::$_instance = null;
@@ -76,7 +76,7 @@ class Messagerie extends ObjectModel
      * @param string message
      * @return false ou int
      */
-    public function sendMessage($to, $text)
+    function sendMessage($to, $text)
     {
         $db = DataBase::getInstance();
 
@@ -95,7 +95,7 @@ class Messagerie extends ObjectModel
      * @param int id_pm
      * @return bool
      */
-    public function getMessage($id_pm)
+    function getMessage($id_pm)
     {
         $db = DataBase::getInstance();
 
@@ -111,7 +111,7 @@ class Messagerie extends ObjectModel
      *
      * @todo à implémenter
      */
-    public function getUnreadMessagesCount()
+    function getUnreadMessagesCount()
     {
         $db = DataBase::getInstance();
 
@@ -128,7 +128,7 @@ class Messagerie extends ObjectModel
      *
      * @return int
      */
-    public static function getMyUnreadMessagesCount()
+    static function getMyUnreadMessagesCount()
     {
         $db = DataBase::getInstance();
 
@@ -146,7 +146,7 @@ class Messagerie extends ObjectModel
      *
      * @todo à implémenter
      */
-    public function getSentMessagesCount()
+    function getSentMessagesCount()
     {
         $db = DataBase::getInstance();
 
@@ -163,7 +163,7 @@ class Messagerie extends ObjectModel
      *
      * @todo à implémenter
      */
-    public function getMessagesCount()
+    function getMessagesCount()
     {
         $db = DataBase::getInstance();
 
@@ -180,7 +180,7 @@ class Messagerie extends ObjectModel
      *
      * @return int
      */
-    public static function getMyMessagesCount()
+    static function getMyMessagesCount()
     {
         $db = DataBase::getInstance();
 
@@ -199,7 +199,7 @@ class Messagerie extends ObjectModel
      *               recus (tous les messages reçus d'un gars)
      *               sent  (tous les messages envoyés d'un gars)
      */
-    public function getListing($mode)
+    function getListing($mode)
     {
         $db = DataBase::getInstance();
 
@@ -236,7 +236,7 @@ class Messagerie extends ObjectModel
      *
      * @return bool
      */
-    public function setRead($id_pm)
+    function setRead($id_pm)
     {
         $db = DataBase::getInstance();
 
@@ -255,7 +255,7 @@ class Messagerie extends ObjectModel
      * @param int $id_pm
      * @param string $who ('from'|'to')
      */
-    public function setDeleted($id_pm, $who)
+    function setDeleted($id_pm, $who)
     {
         $db = DataBase::getInstance();
 

@@ -7,7 +7,7 @@ define('NB_AUDIOS_PER_PAGE', 80);
 
 class Controller
 {
-    public static function my()
+    static function my()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -57,7 +57,7 @@ class Controller
         return $smarty->fetch('audios/my.tpl');
     }
 
-    public static function show()
+    static function show()
     {
         $id = (int) Route::params('id');
 
@@ -140,7 +140,7 @@ class Controller
         return $smarty->fetch('audios/show.tpl');
     }
 
-    public static function create()
+    static function create()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -257,7 +257,7 @@ class Controller
         return true;
     }
 
-    public static function edit()
+    static function edit()
     {
         $id = (int) Route::params('id');
         $page = (int) Route::params('page');
@@ -373,7 +373,7 @@ class Controller
         return true;
     }
 
-    public static function delete()
+    static function delete()
     {
         $id = (int) Route::params('id');
 

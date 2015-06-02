@@ -18,7 +18,7 @@ class Trail
     /**
      *
      */
-    public static function getInstance()
+    static function getInstance()
     {
         if (is_null(self::$_instance)) {
             return new Trail();
@@ -29,7 +29,7 @@ class Trail
     /**
      *
      */
-    public static function deleteInstance()
+    static function deleteInstance()
     {
         if (isset(self::$_instance)) {
             self::$_instance = null;
@@ -51,7 +51,7 @@ class Trail
      * @param string $title
      * @param string $link
      */
-    public function addStep($title, $link = '')
+    function addStep($title, $link = '')
     {
         if (mb_strlen($link) == 0) {
             $link = $_SERVER['REQUEST_URI'];
@@ -65,7 +65,7 @@ class Trail
     /**
      *
      */
-    public function init()
+    function init()
     {
         $this->_path = array();
     }
@@ -73,7 +73,7 @@ class Trail
     /**
      * @return array
      */
-    public function getPath()
+    function getPath()
     {
         return $this->_path;
     }
