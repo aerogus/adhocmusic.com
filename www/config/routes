@@ -2,6 +2,7 @@
 1|alerting|my|POST|/alerting/my
 1|alerting|sub|GET|/alerting/sub
 1|alerting|unsub|GET|/alerting/unsub
+
 1|adm|index|GET|/adm/
 1|adm|billing|GET|/adm/billing
 1|adm|domains|GET|/adm/domains
@@ -67,6 +68,16 @@
 1|adm|cms_edit|POST|/adm/cms/edit
 1|adm|cms_delete|GET|/adm/cms/delete/:id
 1|adm|cms_delete|POST|/adm/cms/delete
+
+1|api|lieux|GET|/lieux
+1|api|videos|GET|/videos
+1|api|audios|GET|/audios
+1|api|photos|GET|/photos
+1|api|events|GET|/events
+1|api|doc|GET|/doc
+1|api|console|GET|/console
+1|api|console|POST|/console
+
 1|assoce|index|GET|/assoce
 1|assoce|index|GET|/assoce/
 1|assoce|presentation|GET|/assoce/presentation
@@ -74,6 +85,7 @@
 1|assoce|equipe|GET|/assoce/equipe
 1|assoce|statuts|GET|/assoce/statuts
 1|assoce|index|GET|/associe
+
 1|audios|show|GET|/audios/show/:id
 1|audios|my|GET|/audios/my
 1|audios|create|GET|/audios/create
@@ -82,6 +94,7 @@
 1|audios|edit|POST|/audios/edit
 1|audios|delete|GET|/audios/delete/:id
 1|audios|delete|POST|/audios/delete
+
 1|auth|login|GET|/auth/login
 1|auth|login|POST|/auth/login
 1|auth|fb_login|GET|/auth/fb-login
@@ -94,6 +107,7 @@
 1|auth|lost_password|POST|/auth/lost-password
 1|auth|check_email|GET|/auth/check-email
 1|auth|check_pseudo|GET|/auth/check-pseudo
+
 1|comments|index|GET|/comments/
 1|comments|show|GET|/comments/show/:id
 1|comments|fetch|GET|/comments/fetch/:type/:id_content
@@ -101,6 +115,7 @@
 1|comments|delete|GET|/comments/delete/:id
 1|comments|delete|POST|/comments/delete
 1|comments|ajax_delete|POST|/comments/ajax-delete
+
 1|dynimg|logo_adhoc|GET|/dynimg/logo_adhoc/:hash
 1|dynimg|mailing_banner|GET|/dynimg/mailing-banner/:hash
 1|dynimg|photo|GET|/dynimg/photo/:id/:width/:height/:bgcolor/:border/:zoom
@@ -108,6 +123,7 @@
 1|dynimg|event|GET|/dynimg/event/:id/:width/:height/:bgcolor/:border/:zoom
 1|dynimg|pixel|GET|/dynimg/pixel/:color
 1|dynimg|tool|GET|/dynimg/tool
+
 1|emails|form_contact_cc|GET|/emails/form-contact-cc
 1|emails|form_contact_to|GET|/emails/form-contact-to
 1|emails|forum_prive_new_message|GET|/emails/forum-prive-new-message
@@ -122,6 +138,7 @@
 1|emails|log_action|GET|/emails/log-action
 1|emails|newsletter|GET|/emails/newsletter/:id
 1|emails|newsletter|GET|/newsletters/show/:id
+
 1|events|index|GET|/events/
 1|events|index|GET|/agenda/
 1|events|fetch|GET|/events/fetch
@@ -135,6 +152,7 @@
 1|events|delete|GET|/events/delete/:id
 1|events|delete|POST|/events/delete
 1|events|get_events_by_lieu|GET|/events/get-events-by-lieu
+
 1|fb_adhocbandpage|app_install|POST|/fb/adhocbandpage/app/install
 1|fb_adhocbandpage|app_uninstall|POST|/fb/adhocbandpage/app/uninstall
 1|fb_adhocbandpage|app_settings_change|POST|/fb/adhocbandpage/app/settings-change
@@ -151,10 +169,12 @@
 1|fb_adhocbandpage|tab_home|POST|/fb/adhocbandpage/tab/
 1|fb_adhocbandpage|tab_home|GET|/fb/adhocbandpage/tab/
 1|fb_adhocbandpage|tab_success|GET|/fb/adhocbandpage/tab/success
+
 1|geo|getregion|GET|/geo/getregion
 1|geo|getdepartement|GET|/geo/getdepartement
 1|geo|getcity|GET|/geo/getcity
 1|geo|getlieu|GET|/geo/getlieu
+
 1|groupes|index|GET|/groupes/
 1|groupes|show|GET|/groupes/show/:id
 1|groupes|show_v2|GET|/groupes/show-v2/:id
@@ -166,6 +186,7 @@
 1|groupes|delete|GET|/groupes/delete/:id
 1|groupes|delete|POST|/groupes/delete
 1|groupes|playlist|GET|/groupes/playlist/:id
+
 1|index|index|GET|/
 1|index|index|GET|/index
 1|index|shop|GET|/shop
@@ -180,7 +201,9 @@
 1|index|mentions_legales|GET|/mentions-legales
 1|index|cms|GET|/cms/:id
 1|index|r|GET|/r/:url
+
 1|js|adhoc|GET|/js/adhoc
+
 1|lieux|index|GET|/lieux/
 1|lieux|show|GET|/lieux/show/:id
 1|lieux|pano_PTDefault|GET|/lieux/pano/PTDefault
@@ -194,8 +217,10 @@
 1|lieux|delete|POST|/lieux/delete
 1|lieux|geocode|GET|/lieux/geocode
 1|lieux|fetch|GET|/lieux/fetch
+
 1|media|index|GET|/media/
 1|media|search_results|GET|/media/search-results
+
 1|membres|tableau_de_bord|GET|/membres/tableau-de-bord
 1|membres|show|GET|/membres/show/:id
 1|membres|create|GET|/membres/create
@@ -209,14 +234,17 @@
 1|membres|fb_link|POST|/membres/fb-link
 1|membres|fb_unlink|GET|/membres/fb-unlink
 1|membres|fb_unlink|POST|/membres/fb-unlink
+
 1|messagerie|index|GET|/messagerie/
 1|messagerie|read|GET|/messagerie/read/:id
 1|messagerie|write|GET|/messagerie/write
 1|messagerie|write|POST|/messagerie/write
 1|messagerie|delete|POST|/messagerie/delete
+
 1|newsletters|index|GET|/newsletters/
 1|newsletters|subscriptions|GET|/newsletters/subscriptions
 1|newsletters|subscriptions|POST|/newsletters/subscriptions
+
 1|photos|show|GET|/photos/show/:id
 1|photos|my|GET|/photos/my
 1|photos|create|GET|/photos/create
@@ -229,10 +257,12 @@
 1|photos|delete|GET|/photos/delete/:id
 1|photos|delete|POST|/photos/delete
 1|photos|from_iphone|POST|/photos/from-iphone
+
 1|search|search|GET|/search/
 1|search|search|POST|/search
 1|search|index|GET|/search/:query
 1|search|autocomplete|GET|/search/autocomplete/:type/:query
+
 1|structures|index|GET|/structures/
 1|structures|show|GET|/structures/show/:id
 1|structures|create|GET|/structures/create
@@ -241,6 +271,7 @@
 1|structures|edit|POST|/structures/edit
 1|structures|delete|GET|/structures/delete/:id
 1|structures|delete|POST|/structures/delete
+
 1|videos|show|GET|/videos/show/:id
 1|videos|beta|GET|/videos/beta/:id
 1|videos|embed|GET|/videos/embed/:id
