@@ -62,14 +62,14 @@
 1|adm|cms_delete|GET|/adm/cms/delete/:id
 1|adm|cms_delete|POST|/adm/cms/delete
 
-1|api|lieux|GET|/lieux
-1|api|videos|GET|/videos
-1|api|audios|GET|/audios
-1|api|photos|GET|/photos
-1|api|events|GET|/events
-1|api|doc|GET|/doc
-1|api|console|GET|/console
-1|api|console|POST|/console
+1|api|lieux|GET|/api/lieux
+1|api|videos|GET|/api/videos
+1|api|audios|GET|/api/audios
+1|api|photos|GET|/api/photos
+1|api|events|GET|/api/events
+1|api|doc|GET|/api/doc
+1|api|console|GET|/api/console
+1|api|console|POST|/api/console
 
 1|assoce|index|GET|/assoce
 1|assoce|index|GET|/assoce/
