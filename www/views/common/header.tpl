@@ -24,6 +24,7 @@
 
 {if !empty($og_audio)}
 <meta property="og:audio" content="{$og_audio.url}">
+<meta property="og:audio:secure_url" content="{$og_audio.url}">
 <meta property="og:audio:title" content="{$og_audio.title|escape}">
 <meta property="og:audio:artist" content="{$og_audio.artist|escape}">
 <meta property="og:audio:type" content="{$og_audio.type}">

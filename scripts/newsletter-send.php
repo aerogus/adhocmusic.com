@@ -4,7 +4,7 @@
 // envoi d'une newsletter
 
 // n° de newsletter à traiter
-define('ID_NEWSLETTER', 69);
+define('ID_NEWSLETTER', 70);
 
 require_once dirname(__FILE__) . '/common-cli.inc.php';
 
@@ -38,7 +38,7 @@ foreach($subs as $sub)
 
     Email::send(
         $sub['email'],
-        "Concert/Expo à Epinay-sur-Orge Samedi 16 mai",
+        "Concert/Expo à Epinay-sur-Orge Samedi 6 juin",
         'newsletter-' . $newsletter->getId(),
         array(
             'id'            => $newsletter->getId(),

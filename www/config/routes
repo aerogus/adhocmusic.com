@@ -5,13 +5,6 @@
 1|adm|index|GET|/adm/
 1|adm|billing|GET|/adm/billing
 1|adm|domains|GET|/adm/domains
-1|adm|news_index|GET|/adm/news/
-1|adm|news_create|GET|/adm/news/create
-1|adm|news_create|POST|/adm/news/create
-1|adm|news_edit|GET|/adm/news/edit/:id
-1|adm|news_edit|POST|/adm/news/edit
-1|adm|news_delete|GET|/adm/news/delete/:id
-1|adm|news_delete|POST|/adm/news/delete
 1|adm|newsletter_index|GET|/adm/newsletter/
 1|adm|newsletter_create|GET|/adm/newsletter/create
 1|adm|newsletter_create_submit|POST|/adm/newsletter/create
@@ -169,7 +162,6 @@
 1|index|index|GET|/
 1|index|index|GET|/index
 1|index|shop|GET|/shop
-1|index|news|GET|/news/:id
 1|index|partners|GET|/partners
 1|index|visuels|GET|/visuels
 1|index|hosting|GET|/hosting
