@@ -8,7 +8,7 @@ class Controller
     /**
      *
      */
-    static function get_videos()
+    static function videos()
     {
         $groupe  = (int) Route::params('groupe');
         $event   = (int) Route::params('event');
@@ -34,7 +34,7 @@ class Controller
     /**
      *
      */
-    static function get_audios()
+    static function audios()
     {
         $groupe  = (int) Route::params('groupe');
         $event   = (int) Route::params('event');
@@ -60,7 +60,7 @@ class Controller
     /**
      *
      */
-    static function get_photos()
+    static function photos()
     {
         $groupe  = (int) Route::params('groupe');
         $event   = (int) Route::params('event');
@@ -86,7 +86,7 @@ class Controller
     /**
      *
      */
-    static function get_events()
+    static function events()
     {
         $groupe = (int) Route::params('groupe');
         $lieu   = (int) Route::params('lieu');
@@ -142,10 +142,10 @@ class Controller
         $smarty = new AdHocSmarty();
 
         $smarty->assign('actions', array(
-            'get-events',
-            'get-audios',
-            'get-videos',
-            'get-photos',
+            'events',
+            'audios',
+            'videos',
+            'photos',
         ));
 
         $smarty->assign('formats', array(
