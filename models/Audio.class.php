@@ -117,7 +117,7 @@ class Audio extends Media
      */
     function getDirectUrl()
     {
-        return 'http://static.adhocmusic.com/media/audio/' . $this->getId() . '.mp3';
+        return 'https://www.adhocmusic.com/media/audio/' . $this->getId() . '.mp3';
     }
 
     /**

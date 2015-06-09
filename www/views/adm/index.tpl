@@ -37,8 +37,7 @@ est qu'on peut monter un lecteur réseau (nativement sous MacOSX ou Linux, avec 
 
 {include file="common/boxstart.tpl" boxtitle="Editorial du site"}
 <ul class="admlinks">
-  <li><a href="/adm/featured/">La sélection du mois</a></li>
-  <li><a href="/adm/news/">News de la home</a></li>
+  <li><a href="/adm/featured/">À la une</a></li>
   <li><a href="/adm/newsletter/">Newsletter</a></li>
   <li><a href="/adm/faq/">Foire aux questions</a></li>
   <li><a href="/adm/cms/">Pages statiques</a></li>

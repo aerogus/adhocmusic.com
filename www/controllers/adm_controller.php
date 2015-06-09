@@ -7,7 +7,7 @@ define('ADM_NB_MEMBERS_PER_PAGE', 25);
 
 define('ADM_NB_GROUPES_PER_PAGE', 1000);
 
-define('ADM_NEWSLETTER_CURRENT_ID', 69);
+define('ADM_NEWSLETTER_CURRENT_ID', 70);
 define('ADM_NEWSLETTER_NB_EMAILS_PER_LOT', 400);
 define('ADM_NEWSLETTER_GROUPE_CURRENT_ID', 37);
 
@@ -849,7 +849,7 @@ class Controller
         }
         $smarty->assign('full', $full);
 
-        $lastsend = '2015-05-13 12:00:00';
+        $lastsend = '2015-06-02 12:00:00';
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
