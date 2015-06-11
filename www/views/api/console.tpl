@@ -3,14 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-  <title>Console API REST/JSON api.adhocmusic.com</title>
+  <title>Console API REST AD'HOC</title>
 </head>
 
 <body>
 
 <div id="conteneur">
 
-<h3>Console de debug l'API AD'HOC</h3>
+<h3>Console de debug de l'API REST AD'HOC</h3>
 
 <style>
 #form-console {
@@ -29,7 +29,7 @@
 }
 </style>
 
-<form id="form-console" name="form-console" action="/console" method="post">
+<form id="form-console" name="form-console" action="/api/console" method="post">
   <ul>
     <li>
       <label for="action">action</label>
@@ -49,46 +49,46 @@
     </li>
     <li>
       <label for="groupe">groupe (n°)</label>
-      <input type="text" name="groupe" id="groupe" value="{$groupe}" />
+      <input type="text" name="groupe" id="groupe" value="{$groupe}">
     </li>
     <li>
       <label for="event">event (n°)</label>
-      <input type="text" name="event" id="event" value="{$event}" />
+      <input type="text" name="event" id="event" value="{$event}">
     </li>
     <li>
       <label for="datdeb">datdeb (yyyy-mm-dd)</label>
-      <input type="text" name="datdeb" id="datdeb" value="{$datdeb}" />
+      <input type="text" name="datdeb" id="datdeb" value="{$datdeb}">
     </li>
     <li>
       <label for="datfin">datfin (yyyy-mm-dd)</label>
-      <input type="text" name="datfin" id="datfin" value="{$datfin}" />
+      <input type="text" name="datfin" id="datfin" value="{$datfin}">
     </li>
     <li>
       <label for="lieu">lieu (n°)</label>
-      <input type="text" name="lieu" id="lieu" value="{$lieu}" />
+      <input type="text" name="lieu" id="lieu" value="{$lieu}">
     </li>
     <li>
       <label for="contact">membre (n°)</label>
-      <input type="text" name="contact" id="contact" value="{$contact}" />
+      <input type="text" name="contact" id="contact" value="{$contact}">
     </li>
     <li>
       <label for="sort">sort (id, created_on)</label>
-      <input type="text" name="sort" id="sort" value="{$sort}" />
+      <input type="text" name="sort" id="sort" value="{$sort}">
     </li>
     <li>
       <label for="sens">sens (ASC|DESC)</label>
-      <input type="text" name="sens" id="sens" value="{$sens}" />
+      <input type="text" name="sens" id="sens" value="{$sens}">
     </li>
     <li>
       <label for="debut">debut (num, utile pour pagination)</label>
-      <input type="text" name="debut" id="debut" value="{$debut}" />
+      <input type="text" name="debut" id="debut" value="{$debut}">
     </li>
     <li>
       <label for="limit">limit (0 = no limit)</label>
-      <input type="text" name="limit" id="limit" value="{$limit}" />
+      <input type="text" name="limit" id="limit" value="{$limit}">
     </li>
     <li>
-      <input id="form-console-submit" name="form-console-submit" type="submit" value="GO" />
+      <input id="form-console-submit" name="form-console-submit" type="submit" value="GO">
     </li>
   </ul>
 </form>
@@ -99,7 +99,7 @@
 </pre>
 {/if}
 
-<p>En cas de difficultés, n'hésitez pas à <a href="http://www.adhocmusic.com/contact">prendre contact avec les développeurs</a></p>
+<p>En cas de difficultés, n'hésitez pas à <a href="http://www.adhocmusic.com/contact">prendre contact avec nous</a></p>
 
 </div>
 
