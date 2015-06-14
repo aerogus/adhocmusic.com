@@ -118,7 +118,7 @@ class Controller
 
         $smarty->assign('source_client', highlight_file(ADHOC_LIB_PATH . '/AdHocClientApi.class.php', true));
 
-        return $smarty->fetch('doc.tpl');
+        return $smarty->fetch('api/doc.tpl');
     }
 
     /**
@@ -187,6 +187,6 @@ class Controller
             $smarty->assign('resp', $resp);
         }
 
-        return $smarty->fetch('console.tpl');
+        return $smarty->fetch('api/console.tpl');
     }
 }

@@ -7,6 +7,7 @@
       <li><a href="/partners">Partenaires</a></li>
       <li><a href="/visuels">Visuels</a></li>
       <li><a href="/hosting">Hébergement</a></li>
+      <li><a href="/api">API</a></li>
     </ul>
   </li>
   <li {if isset($menuselected) && $menuselected == 'assoce'} class="menuselected"{/if}>
