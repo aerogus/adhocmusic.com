@@ -2,6 +2,8 @@
 
 {include file="common/boxstart.tpl" boxtitle="Hébergement"}
 
+<p>Créée en 2000, AD'HOC est une association loi 1901 basée à Epinay-sur-Orge (91) ayant pour objet l'organisation de concerts musiques actuelles dans le département de l'Essonne. Présente sur le net dès 2001 avec le site adhocmusic.com, l'association développe depuis 2009 un pôle création, hébergement et maintenance de sites artistiques. Les sites hébergés sur notre serveur créent ainsi le "réseau AD'HOC".</p>
+
 <div class="thumbs">
   <h3><a href="http://www.saisonsenvrac.fr">SAISONS EN VRAC</a></h3>
   <h4><a href="http://www.saisonsenvrac.fr">saisonsenvrac.fr</a></h4>
