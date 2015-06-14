@@ -1,7 +1,10 @@
 AD'HOC
+======
+
 http://www.adhocmusic.com
 
-== Technos utilisées ==
+Technos utilisées
+=================
 
 * Stylus (pré-processeur CSS)
   https://learnboost.github.io/stylus/
@@ -13,7 +16,8 @@ http://www.adhocmusic.com
   https://angularjs.org/
 
 
-=== Outils de build requis : ===
+Outils de build requis :
+========================
 
 * npm (node package manager), fourni avec node.js
 {{{brew install node}}}
@@ -28,8 +32,8 @@ http://www.adhocmusic.com
 * brunch (project builder et task runner)
 {{{ npm install -g brunch }}}
 
-
-=== Installation du projet : ===
+Installation du projet :
+========================
 
 {{{ git clone git:git.ouifm.fm:festival.git }}}
 - clonage local du repository
