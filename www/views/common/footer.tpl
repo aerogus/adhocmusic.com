@@ -29,9 +29,8 @@
   <li>
     <ul>
       <li><strong>SUIVEZ NOUS</strong></li>
-      <li>
-        <a style="display: inline-block; margin: 5px 5px 5px 0;" href="https://facebook.com/adhocmusic" title="AD'HOC Music sur Facebook"><img src="{#STATIC_URL#}/img/emails/facebook.png" width="32" height="32" alt="Facebook"></a>
-        <a style="display: inline-block; margin: 5px 5px 5px 5px;" href="https://twitter.com/adhocmusic" title="@adhocmusic sur Twitter"><img src="{#STATIC_URL#}/img/emails/twitter.png" width="32" height="32" alt="Twitter"></a>
+      <li><a style="display: block; padding: 5px;" href="https://facebook.com/adhocmusic" title="AD'HOC Music sur Facebook"><img src="{#STATIC_URL#}/img/emails/facebook.png" width="16" height="16" alt="Facebook">/adhocmusic</a></li>
+      <li><a style="display: block; padding: 5px;" href="https://twitter.com/adhocmusic" title="@adhocmusic sur Twitter"><img src="{#STATIC_URL#}/img/emails/twitter.png" width="16" height="16" alt="Twitter">@adhocmusic</a>
       </li>
     </ul>
   </li>

@@ -45,7 +45,6 @@
 
 <link rel="author" href="http://www.adhocmusic.com/humans.txt">
 <link rel="shortcut icon" href="http://www.adhocmusic.com/favicon.ico">
-<link rel="apple-touch-icon" href="http://www.adhocmusic.com/apple-touch-icon.png">
 <meta name="robots" content="index,follow">
 <meta name="description" content="{if empty($description)}Portail de référence sur les musiques actuelles en Essonne, Agenda culturel géolocalisé, Vidéos de concerts, promotion d'artistes ...{else}{$description|escape}{/if}">
 <link rel="stylesheet" href="/css/adhoc.min.css">

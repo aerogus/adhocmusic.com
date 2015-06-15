@@ -114,6 +114,7 @@ strong {
  **************/
 .footer {
     background: #333;
+    margin: 0;
 }
 .footer > li strong {
     display: block;
@@ -123,7 +124,7 @@ strong {
 }
 .footer > li {
     display: inline-block;
-    margin: 10px 75px;
+    margin: 1em 6em;
     vertical-align: top;
 }
 .footer > li a {
