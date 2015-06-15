@@ -1442,7 +1442,7 @@ class Controller
             }
 
             if(sizeof($subs)) {
-                require_once COMMON_LIB_PHPMAILER_PATH . '/class.phpmailer.php';
+
                 foreach($subs as $sub) {
 
                     $data = array(

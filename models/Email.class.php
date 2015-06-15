@@ -91,8 +91,6 @@ class Email
     {
         $subject = trim($subject);
 
-        require_once COMMON_LIB_PHPMAILER_PATH . '/class.phpmailer.php';
-
         $tpl = new EmailSmarty();
         foreach($data as $key => $value) {
             $tpl->assign($key, $value);
