@@ -50,7 +50,7 @@ table {
  * general
  **************/
 body {
-    background: #ececec url(/img/bg-juin2015.jpg) repeat;
+    background: #ececec;
     font-family: Arial;
     font-size: 12px;
     line-height: 1.2em;
@@ -866,7 +866,7 @@ ul.partenaire li {
 }
 
 div.tree_top {
-    background: url({#STATIC_URL#}/img/tree/top.gif) no-repeat -1px -3px;
+    background: url({#STATIC_URL#}/img/tree/top.png) no-repeat -1px -3px;
     padding-left: 24px;
     padding-bottom: 10px;
     padding-top: 3px;
@@ -880,8 +880,8 @@ ul.tree, ul.tree ul {
 }
 ul.tree li {
     padding-left: 1.2em;
-    border-left: 1px gray dotted;
-    background: url({#STATIC_URL#}/img/tree/horizontal.gif) no-repeat left 10px;
+    border-left: 1px #c0c0c0 solid;
+    background: url({#STATIC_URL#}/img/tree/horizontal.png) no-repeat left 10px;
     margin-left: 1em;
     font-weight: bold;
     padding-top: 4px;
@@ -893,8 +893,8 @@ ul.tree a {
 ul.tree a.selected {
     font-weight: bold;
 }
-ul.tree li.last {
-    background: url({#STATIC_URL#}/img/tree/last.gif) no-repeat -12px -2px;
+ul.tree li:last-child {
+    background: url({#STATIC_URL#}/img/tree/last.png) no-repeat -12px -2px;
     border: none;
 }
 ul.tree {

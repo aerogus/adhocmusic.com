@@ -168,7 +168,6 @@ $(function() {
 <div id="header" class="clearfix">
   <a id="logo" href="/" title="Cliquez pour revenir à l'accueil"><span>AD'HOC</span></a>
   <div id="megabanner">
-    <a href="https://www.facebook.com/events/1602231176679395/"><img src="http://static.adhocmusic.com/img/megabanner/adhoc-juin-2015.png" alt="" width="728" height="90"></a>
   </div>
 </div>
 
