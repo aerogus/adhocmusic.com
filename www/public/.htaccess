@@ -23,9 +23,10 @@ RewriteCond %{HTTP_HOST} !^adhocmusic.localhost$ [NC]
 RewriteRule ^(.*)$ http://www.adhocmusic.com/$1 [R=301,L]
 
 # route unique
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php/$1 [L]
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.*)$ index.php/$1 [L]
+FallbackResource /index.php
 
 ErrorDocument 400 "400"
 ErrorDocument 403 "403"

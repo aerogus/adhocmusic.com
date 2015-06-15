@@ -34,7 +34,7 @@
     </ul>
   </li>
   <li {if isset($menuselected) && $menuselected == 'media'} class="menuselected"{/if}>
-    <a href="/media/">Média</a>
+    <a href="/medias/">Média</a>
     <ul class="sub-menu">
       <li style="padding-left: 240px;"><a href="/audios/create">Ajouter un son</a></li>
       <li><a href="/photos/create">Ajouter une photo</a></li>

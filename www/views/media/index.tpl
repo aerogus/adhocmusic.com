@@ -54,7 +54,7 @@ $(function() {
         type += 'photo,';
     }
     if(type) {
-    $.get('/media/search-results', { event: $(this).val(), type: type }, function(data) {
+    $.get('/medias/search-results', { event: $(this).val(), type: type }, function(data) {
       $("#search-results").html(data);
     });
     }
