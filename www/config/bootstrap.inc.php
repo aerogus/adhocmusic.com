@@ -78,6 +78,7 @@ Tools::sessionInit();
 //if($_SERVER['REQUEST_URI'] == '/') {
 if($_SERVER['REQUEST_URI'] != '/auth/logout') {
 
+/*
     $_SESSION['fb'] = new Facebook(array(
         'appId'  => FB_APP_ID,
         'secret' => FB_SECRET_KEY,
@@ -107,6 +108,7 @@ if($_SERVER['REQUEST_URI'] != '/auth/logout') {
             // gestion exception
         }
     }
+*/
 
 } // != logout
 

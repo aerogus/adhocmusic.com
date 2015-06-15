@@ -53,14 +53,14 @@ class AdHocSmarty extends Smarty
         $this->assign('menuselected', null);
         $this->assign('uri', $_SERVER['REQUEST_URI']);
         $this->assign('url', DYN_URL . $_SERVER['REQUEST_URI']);
-
+/*
         if(!empty($_SESSION['fb'])) {
             $this->assign('fb_app_id', $_SESSION['fb']->getAppID());
             if(empty($_SESSION['membre'])) {
                 $this->assign('fb_login_url', str_replace('&', '&amp;', $_SESSION['fb']->getLoginUrl(array('redirect_uri' => 'http://www.adhocmusic.com/?auth-from-fb'))));
             }
         }
-
+*/
         if(defined('STATIC_URL')) {
             $this->config_vars['STATIC_URL'] = STATIC_URL;
         }
