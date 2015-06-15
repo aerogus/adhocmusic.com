@@ -12,7 +12,7 @@ table{border-collapse:collapse;border-spacing:0}.round-corner-top-left{-webkit-b
 .round-corner-bottom{-webkit-border-bottom-left-radius:5px;-webkit-border-bottom-right-radius:5px;-moz-border-radius-bottomleft:5px;-moz-border-radius-bottomright:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px}
 .round-corner-right{-webkit-border-top-right-radius:5px;-webkit-border-bottom-right-radius:5px;-moz-border-radius-topright:5px;-moz-border-radius-bottomright:5px;border-top-right-radius:5px;border-bottom-right-radius:5px}
 .round-corner-left{-webkit-border-top-left-radius:5px;-webkit-border-bottom-left-radius:5px;-moz-border-radius-topleft:5px;-moz-border-radius-bottomleft:5px;border-top-left-radius:5px;border-bottom-left-radius:5px}
-.round-corner-all{-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px}body{background:#ececec url(http://static.adhocmusic.com/img/adhoc-bg-white.png) repeat;margin:0;font-family:Arial;font-size:12px;line-height:1.2em;color:#333;font-style:normal;font-weight:normal;text-align:center}
+.round-corner-all{-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px}body{background:#ececec;margin:0;font-family:Arial;font-size:12px;line-height:1.2em;color:#333;font-style:normal;font-weight:normal;text-align:center}
 #conteneur{position:relative;width:960px;text-align:left;margin:0 auto}
 #header{height:111px}
 #main{background:#b6b6b6;padding:10px;margin-top:10px;border:1px solid #333;box-shadow:3px 3px 5px #999;-moz-box-shadow:3px 3px 5px #999;-webkit-box-shadow:3px 3px 5px #999;filter:progid:DXImageTransform.Microsoft.Shadow(color='#999999',Direction=135,Strength=5);zoom:1}
@@ -214,7 +214,7 @@ ul.sub-menu > li > a:hover{background-color:#555555;background-image:-moz-linear
 {display:none;background:url(http://static.adhocmusic.com/img/breadcrumbs/chevron_overlay.png) no-repeat 100% 0;width:13px;height:20px}.box{margin:0 10px 10px 0;padding:0;box-shadow:3px 3px 5px #999999;-moz-box-shadow:3px 3px 5px #999999;-webkit-box-shadow:3px 3px 5px #999999;filter:progid:DXImageTransform.Microsoft.Shadow(color='#999999',Direction=135,Strength=5);zoom:1}
 .box:after{content:"";display:block;clear:both}
 .boxtitle{background-color:#bb0000;background-image:-moz-linear-gradient(top,#ff0000,#660000);background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#ff0000),color-stop(1,#660000));-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorStr='#ff0000',EndColorStr='#660000')";color:#fff;padding:5px 12px 3px 10px;font-weight:bold;letter-spacing:2px}
-.boxheader{background:url(http://static.adhocmusic.com/img/alpha_black_50.png) repeat;border-left:solid 1px #cccccc;border-right:solid 1px #cccccc;border-top:solid 1px #cccccc}
+.boxheader{background:rgba(0,0,0,0.5);border-left:solid 1px #cccccc;border-right:solid 1px #cccccc;border-top:solid 1px #cccccc}
 .boxcontent{background:#ffffff;color:#333333;padding:8px;border-left:solid 1px #cccccc;border-right:solid 1px #cccccc;border-bottom:solid 1px #cccccc;clear:right}.boxcontent table{background-color:#fff}
 .boxcontent th{background-color:#ccc;font-weight:bold;padding:5px;border:1px solid #999}
 .boxcontent tr{padding:5px;border:1px solid #999}
