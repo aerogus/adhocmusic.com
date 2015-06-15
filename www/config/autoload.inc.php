@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * Chargement automatique des paquets gérés par composer
+ */
+require_once ADHOC_ROOT_PATH . '/vendor/autoload.php';
+
+/**
  * Chargement automatique des classes métiers AD'HOC
  * @param string Nom de la classe
  */
@@ -14,7 +19,3 @@ function autoload($class_name)
 }
 spl_autoload_register('autoload');
 
-/**
- * Chargement automatique des modules de composer
- */
-require_once ADHOC_ROOT_PATH . '/vendor/autoload.php';

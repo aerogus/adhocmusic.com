@@ -20,7 +20,6 @@ define('ADHOC_ROOT_PATH',           SERVER_ROOT_PATH . '/adhocmusic.com');
 define('COMMON_LIB_PATH',           ADHOC_ROOT_PATH . '/lib');
 define('COMMON_LIB_PHP_PATH',       COMMON_LIB_PATH . '/php');
 define('COMMON_LIB_PHPMAILER_PATH', COMMON_LIB_PATH . '/phpmailer');
-define('COMMON_LIB_SMARTY_PATH',    COMMON_LIB_PATH . '/smarty');
 define('COMMON_LIB_FACEBOOK_PATH',  COMMON_LIB_PATH . '/facebook');
 define('ADHOC_LIB_PATH',            ADHOC_ROOT_PATH . '/models');
 define('ADHOC_LOG_PATH',            ADHOC_ROOT_PATH . '/log');
@@ -37,7 +36,10 @@ define('FB_APP_ID', '50959607741');
 define('FB_API_KEY', '9bff9746d384c2b4dd0c4fa130bcaecd');
 define('FB_SECRET_KEY', 'c2ea0c274c21507404f21688f71f98c1');
 
-require_once COMMON_LIB_SMARTY_PATH . '/Smarty.class.php';
+/**
+ * Chargement automatique des paquets gérés par composer
+ */
+require_once ADHOC_ROOT_PATH . '/vendor/autoload.php';
 
 /**
  * chargement automatique des classes métiers AD'HOC

@@ -1,7 +1,5 @@
 <?php
 
-require_once COMMON_LIB_SMARTY_PATH . '/Smarty.class.php';
-
 class EmailSmarty extends Smarty
 {
     function __construct()

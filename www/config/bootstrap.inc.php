@@ -78,8 +78,6 @@ Tools::sessionInit();
 //if($_SERVER['REQUEST_URI'] == '/') {
 if($_SERVER['REQUEST_URI'] != '/auth/logout') {
 
-    require_once COMMON_LIB_FACEBOOK_PATH . '/facebook.php';
-
     $_SESSION['fb'] = new Facebook(array(
         'appId'  => FB_APP_ID,
         'secret' => FB_SECRET_KEY,
