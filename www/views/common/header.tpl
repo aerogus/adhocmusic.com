@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>{$title|escape}</title>
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=1;">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;">
 <meta property="fb:app_id" content="{$fb_app_id|escape}">
 {* début open graph *}
 {if !empty($og_type)}
@@ -12,7 +12,7 @@
 <meta property="og:type" content="article">
 {/if}
 {if $og_type != 'video.movie' && $og_type != 'website'}
-<meta property="fb:page_id" content="161908907197840">
+<meta property="fb:page_id" content="{$fb_page_id}">
 <meta property="og:language" content="fr">
 <meta property="og:author" content="adhocmusic">
 {/if}

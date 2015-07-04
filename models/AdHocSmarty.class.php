@@ -53,6 +53,9 @@ class AdHocSmarty extends Smarty
         $this->assign('menuselected', null);
         $this->assign('uri', $_SERVER['REQUEST_URI']);
         $this->assign('url', DYN_URL . $_SERVER['REQUEST_URI']);
+        $this->assign('fb_app_id', FB_ADHOCMUSIC_APP_ID);
+        $this->assign('fb_page_id', FB_ADHOCMUSIC_PAGE_ID);
+
 /*
         if(!empty($_SESSION['fb'])) {
             $this->assign('fb_app_id', $_SESSION['fb']->getAppID());

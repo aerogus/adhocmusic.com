@@ -52,6 +52,10 @@ define('SMARTY_TEMPLATE_PATH',   ADHOC_ROOT_PATH . '/www/views');
 define('SMARTY_TEMPLATE_C_PATH', ADHOC_ROOT_PATH . '/cache/smarty');
 
 define('FB_FAN_PAGE_ID', '161908907197840');
+
+define('FB_ADHOCMUSIC_PAGE_ID', '161908907197840');
+define('FB_ADHOCMUSIC_APP_ID', '50959607741');
+
 if(strpos($_SERVER['REQUEST_URI'], 'adhocbandpage') === false) {
 	// App AD'HOC Music
 	define('FB_APP_ID', '50959607741');

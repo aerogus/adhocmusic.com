@@ -77,6 +77,7 @@
 <br />
 
 {include file="common/boxstart.tpl" boxtitle="Commentaires"}
+{include file="common/disqus.tpl"}
 {include file="comments/box.tpl" type="v" id_content=$video->getId()}
 {include file="common/boxend.tpl"}
 
