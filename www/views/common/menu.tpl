@@ -41,13 +41,6 @@
       <li><a href="/videos/create">Ajouter une vidéo</a></li>
     </ul>
   </li>
-  <li {if isset($menuselected) && $menuselected == 'lieux'} class="menuselected"{/if}>
-    <a href="/lieux/" accesskey="4" title="Les lieux de diffusion partout en France">Lieux</a>
-    <ul class="sub-menu">
-      <li style="padding-left: 270px;"><a href="/lieux/">Proches de chez moi</a></li>
-      <li><a href="/lieux/create">Inscrire un lieu</a></li>
-    </ul>
-  </li>
   <li class="{if isset($menuselected) && $menuselected == 'contact'}menuselected {/if}last">
     <a href="/contact" accesskey="9" title="Contact">Contact</a>
     <ul class="sub-menu">
