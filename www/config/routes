@@ -146,23 +146,6 @@
 1|events|delete|POST|/events/delete
 1|events|get_events_by_lieu|GET|/events/get-events-by-lieu
 
-1|fb_adhocbandpage|app_install|POST|/fb/adhocbandpage/app/install
-1|fb_adhocbandpage|app_uninstall|POST|/fb/adhocbandpage/app/uninstall
-1|fb_adhocbandpage|app_settings_change|POST|/fb/adhocbandpage/app/settings-change
-1|fb_adhocbandpage|app_welcome|POST|/fb/adhocbandpage/app/welcome
-1|fb_adhocbandpage|app_help|POST|/fb/adhocbandpage/app/help
-1|fb_adhocbandpage|canvas_index|POST|/fb/adhocbandpage/canvas/
-1|fb_adhocbandpage|canvas_index|GET|/fb/adhocbandpage/canvas/
-1|fb_adhocbandpage|canvas_index|GET|/fb/adhocbandpage/canvas/index
-1|fb_adhocbandpage|canvas_about|GET|/fb/adhocbandpage/canvas/about
-1|fb_adhocbandpage|canvas_privacy|POST|/fb/adhocbandpage/canvas/privacy
-1|fb_adhocbandpage|canvas_tos|POST|/fb/adhocbandpage/canvas/tos
-1|fb_adhocbandpage|canvas_contact|GET|/fb/adhocbandpage/canvas/contact
-1|fb_adhocbandpage|canvas_contact|POST|/fb/adhocbandpage/canvas/contact
-1|fb_adhocbandpage|tab_home|POST|/fb/adhocbandpage/tab/
-1|fb_adhocbandpage|tab_home|GET|/fb/adhocbandpage/tab/
-1|fb_adhocbandpage|tab_success|GET|/fb/adhocbandpage/tab/success
-
 1|geo|getregion|GET|/geo/getregion
 1|geo|getdepartement|GET|/geo/getdepartement
 1|geo|getcity|GET|/geo/getcity
