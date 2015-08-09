@@ -188,12 +188,10 @@ $(function() {
 <strong>Vos Avantages :</strong>
 <ul>
   <li>Annoncer des concerts dans l'agenda</li>
-  <li>Accès au forum</li>
   <li>Communiquer entre membres par messagerie interne</li>
   <li>S'abonner aux alertes</li>
   <li>Faire partie d'une communauté de musiciens et d'amateurs de musique</li>
   <li>Inscrire et gérer sa fiche groupe</li>
-  <li>Inscrire et gérer une fiche de lieu de diffusion</li>
 </ul>
 
 <hr />
