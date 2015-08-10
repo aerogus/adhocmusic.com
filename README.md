@@ -20,10 +20,10 @@ Outils de build requis :
 ========================
 
 * npm (node package manager), fourni avec node.js
-{{{brew install node}}}
+{{{ brew install node }}}
 
 * bower (gestionnaire de dépendances front-end)
-{{{ npm install -g bower}}}
+{{{ npm install -g bower }}}
 
 * composer (gestionnaire de dépendances back-end php)
 {{{ curl -sS https://getcomposer.org/installer | php }}}

@@ -1,12 +1,23 @@
+# cache smarty
 cache
+
+# FTP AD'HOC
 ftp
+
+# des logs ...
 log
+
+# cache des imagettes resizées
 static/img/cache
+
+# medias utilisateurs (video, mp3, photos ...)
 static/media
+
+# tmp
 www/public/transit
 
 # export brunch
-public
+public-brunch
 
 # dépendances npm
 node_modules
