@@ -14,7 +14,7 @@ static/img/cache
 static/media
 
 # tmp
-www/public/transit
+public/transit
 
 # export brunch
 public-brunch

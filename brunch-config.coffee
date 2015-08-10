@@ -2,7 +2,7 @@ exports.config =
   conventions:
       assets: /^app\/assets\//
   paths:
-    public: 'public'
+    public: 'public-beta'
   modules:
     definition: false
     wrapper: false

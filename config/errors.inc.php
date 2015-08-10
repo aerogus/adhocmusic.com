@@ -6,11 +6,7 @@ define('ONERROR_MAIL_RECIPIENT', 'debug@adhocmusic.com');
 define('ONERROR_MAIL_SUBJECT',   'Bogue dans ' . $_SERVER['HTTP_HOST']);
 
 $debug_ips = array();
-//$debug_ips[] = '82.229.140.10';  // gus home
-$debug_ips[] = '82.235.164.148'; // gus home 2
-$debug_ips[] = '88.164.253.14';  // coox home
-$debug_ips[] = '82.230.212.141'; // lara home
-$debug_ips[] = '81.57.72.226';   // gus boulot
+$debug_ips[] = '82.230.212.18';  // gus home
 $debug_ips[] = '127.0.0.1';
 $debug_ips[] = '::1';
 
