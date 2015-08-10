@@ -12,14 +12,6 @@
   </li>
   <li>
     <ul>
-      <li><strong>EN CHIFFRES</strong></li>
-      <li><a href="/groupes/">{$global_counters.nb_groupes} groupes</a></li>
-      <li><a href="/events/">{$global_counters.nb_events} concerts</a></li>
-      <li><a href="/lieux/">{$global_counters.nb_lieux} lieux</a></li>
-    </ul>
-  </li>
-  <li>
-    <ul>
       <li><strong>CONTACT</strong></li>
       <li><a href="/partners">Partenaires</a></li>
       <li><a href="/visuels">Visuels</a></li>

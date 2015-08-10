@@ -32,27 +32,15 @@
     </a>
   </li>
   <li>
-    <a href="http://www.localzique.com">
-      <img src="{#STATIC_URL#}/img/partners/localzique.png" alt="" />
-      <strong>Local'Zique</strong><br/>Association Musicale de Saulx les Chartreux
-    </a>
-  </li>
-  <li>
     <a href="http://www.ville-epinay-sur-orge.fr">
       <img src="{#STATIC_URL#}/img/partners/epinay-sur-orge.png" alt="" />
       <strong>Epinay sur Orge</strong><br/>Mairie d'Epinay sur Orge
     </a>
   </li>
   <li>
-    <a href="http://www.aglascenes.fr">
-      <img src="{#STATIC_URL#}/img/partners/aglascenes.png" alt="" />
-      <strong>Les Agla'Scènes</strong><br/>Le festival du Sud Parisien
-    </a>
-  </li>
-  <li>
-    <a href="http://www.cartejeune91.fr">
-      <img src="{#STATIC_URL#}/img/partners/cartejeune91.png" alt="" />
-      <strong>Carte Jeune 91</strong><br/>Carte Jeune 91
+    <a href="http://www.ville-igny.fr/node/la-mjc">
+      <img src="{#STATIC_URL#}/img/partners/mjcigny.png" alt="" />
+      <strong>MJC Jean Villar</strong><br/> d'Igny
     </a>
   </li>
   <li>
@@ -79,23 +67,11 @@
       <strong>MJC Savigny sur Orge</strong><br/>MJC François Rabelais
     </a>
   </li>
-  <li>
-    <a href="http://lcs91.free.fr">
-      <img src="{#STATIC_URL#}/img/partners/canardssauvages.png" alt="" />
-      <strong>Les Canards Sauvages</strong><br/>Association Ecolo et Musicale
-    </a>
-  </li>
 </ul>
 </div>
 
 <div class="parts">
 <ul>
-  <li>
-    <a href="http://www.ziiq.net">
-      <img src="{#STATIC_URL#}/img/partners/ziiq.png" alt="" />
-      <strong>CaptainZiiq</strong><br/>l'Antre du .:!CaptainZiiq!:. :: www.ziiq.net ... le meilleur c'est la Musique !
-    </a>
-  </li>
   <li>
     <a href="http://www.reggae-promo.com">
       <img src="{#STATIC_URL#}/img/partners/reggaepromo.png" alt="Reggae Promo" width="50" height="50" />
@@ -108,57 +84,15 @@
       <strong>Zanzibart</strong><br/>Communauté d'artistes - des artistes des lieux des dates
     </a>
   </li>
-  <li>
-    <a href="http://www.brucehernandezluthier.fr">
-      <img src="{#STATIC_URL#}/img/partners/brucehernandezluthier.png" alt="" />
-      <strong>Bruce Hernandez Luthier</strong><br/>Bruce Hernandez Luthier - Longjumeau (91 - Essonne)
-    </a>
-  </li>
-  <li>
-    <a href="http://www.mjcpalaiseau.org">
-      <img src="{#STATIC_URL#}/img/partners/mjcpalaiseau.png" alt="" />
-      <strong>MJC Palaiseau</strong><br/>MJC 3 vallées - Palaiseau
-   </a>
-  </li>
-  <li>
-    <a href="http://www.mjc-chilly.org">
-      <img src="{#STATIC_URL#}/img/partners/mjcchilly.png" alt="" />
-      <strong>MJC Chilly Mazarin</strong><br/>MJC Chilly Mazarin
-    </a>
-  </li>
-  <li>
-    <a href="http://www.mjctati.org">
-      <img src="{#STATIC_URL#}/img/partners/mjctati.png" alt="" />
-      <strong>MJC Orsay</strong><br/>MJC Jacques Tati - Orsay
-    </a>
-  </li>
-  <li>
-    <a href="http://omp.asso.free.fr">
-      <img src="{#STATIC_URL#}/img/partners/omp.png" alt="" />
-      <strong>Opération Maxi Puissance</strong><br/>Collectif de groupes de Palaiseau
-    </a>
-  </li>
 </ul>
 </div>
 
 <div class="parts">
 <ul>
   <li>
-    <a href="http://www.myspace.com/rockessonne">
-      <img src="{#STATIC_URL#}/img/partners/rockessonne.png" alt="" />
-      <strong>Rock Essonne</strong><br/>Collectif de groupes Essonniens
-    </a>
-  </li>
-  <li>
     <a href="http://libellulerock.perso.sfr.fr/news.html">
       <img src="{#STATIC_URL#}/img/partners/cridelalibellule.png" alt="" />
       <strong>Le Cri de la Libellule</strong><br/>Association musicale de Saint-Michel sur Orge
-    </a>
-  </li>
-  <li>
-    <a href="http://www.mjc-relief.com">
-      <img src="{#STATIC_URL#}/img/partners/mjcmorangis.png" alt="" />
-      <strong>MJC Morangis</strong><br/>MJC Relief
     </a>
   </li>
   <li>

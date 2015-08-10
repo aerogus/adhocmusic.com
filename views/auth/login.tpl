@@ -52,17 +52,6 @@
   <a href="/groupes/create" class="registerbutton">Créer sa fiche Artiste/Groupe</a>
 </div>
 
-<div class="registerblock">
-  <h3>Fiche Lieu</h3>
-  <p>Note: <strong>Vous devez posséder un compte AD'HOC</strong></p>
-  <p>Vous êtes propriétaire d'un lieu de diffusion de musique ? Bar, MJC, salle de concerts ? Profiter de l'audience du site AD'HOC pour annoncer votre actualité et déposer vos photos.</p>
-  <p>Vos Avantages :</p>
-  <ul>
-    <li>Création d'une fiche Lieu avec vos coordonnées</li>
-  </ul>
-  <a href="/lieux/create" class="registerbutton">Créer sa fiche Lieu</a>
-</div>
-
 {/if}
 
 </div>
