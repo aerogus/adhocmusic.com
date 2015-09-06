@@ -1,8 +1,5 @@
 <?php
 
-//define('COMMENT_ANTISPAM_QUESTION', 'Combien font 4 + 3 ?');
-//define('COMMENT_ANTISPAM_KEY', '7');
-
 class Controller
 {
     static function index()

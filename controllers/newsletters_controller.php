@@ -65,51 +65,50 @@ class Controller
 
         if(Tools::isSubmit('form-newsletter'))
         {
+            if(!Email::validate($email)) {
 
-        if(!Email::validate($email)) {
+                $smarty->assign('error_email', true);
 
-            $smarty->assign('error_email', true);
+            } else {
 
-        } else {
+                $smarty->assign('email', $email);
 
-            $smarty->assign('email', $email);
+                switch($action)
+                {
+                    case 'sub':
+                        $ret = Newsletter::addEmail($email);
+                        switch($ret)
+                        {
+                            case NEWSLETTER_SUB_OK_CONTACT_CREATED:
+                            case NEWSLETTER_SUB_OK_RESUBSCRIBED_MEMBER:
+                                Log::action(Log::ACTION_NEWSLETTER_SUB, $email);
+                                $smarty->assign('ret', 'SUB-OK');
+                                break;
+                            case NEWSLETTER_SUB_KO_ALREADY_SUBSCRIBED_MEMBER:
+                            case NEWSLETTER_SUB_KO_ALREADY_CONTACT:
+                                $smarty->assign('ret', 'SUB-KO');
+                                break;
+                        }
+                        break;
 
-            switch($action)
-            {
-                case 'sub':
-                    $ret = Newsletter::addEmail($email);
-                    switch($ret)
-                    {
-                        case NEWSLETTER_SUB_OK_CONTACT_CREATED:
-                        case NEWSLETTER_SUB_OK_RESUBSCRIBED_MEMBER:
-                            Log::action(Log::ACTION_NEWSLETTER_SUB, $email);
-                            $smarty->assign('ret', 'SUB-OK');
-                            break;
-                        case NEWSLETTER_SUB_KO_ALREADY_SUBSCRIBED_MEMBER:
-                        case NEWSLETTER_SUB_KO_ALREADY_CONTACT:
-                            $smarty->assign('ret', 'SUB-KO');
-                            break;
-                    }
-                    break;
+                    case 'unsub':
+                        $ret = Newsletter::removeEmail($email);
+                        switch($ret)
+                        {
+                            case NEWSLETTER_UNSUB_OK_UNSUBSCRIBED_MEMBER:
+                            case NEWSLETTER_UNSUB_OK_CONTACT_DELETED:
+                                Log::action(Log::ACTION_NEWSLETTER_UNSUB, $email);
+                                $smarty->assign('ret', 'UNSUB-OK');
+                                break;
+                            case NEWSLETTER_UNSUB_KO_ALREADY_UNSUBSCRIBED_MEMBER:
+                            case NEWSLETTER_UNSUB_KO_UNKNOW_CONTACT:
+                                $smarty->assign('ret', 'UNSUB-KO');
+                                break;
+                        }
+                        break;
+                }
 
-                case 'unsub':
-                    $ret = Newsletter::removeEmail($email);
-                    switch($ret)
-                    {
-                        case NEWSLETTER_UNSUB_OK_UNSUBSCRIBED_MEMBER:
-                        case NEWSLETTER_UNSUB_OK_CONTACT_DELETED:
-                            Log::action(Log::ACTION_NEWSLETTER_UNSUB, $email);
-                            $smarty->assign('ret', 'UNSUB-OK');
-                            break;
-                        case NEWSLETTER_UNSUB_KO_ALREADY_UNSUBSCRIBED_MEMBER:
-                        case NEWSLETTER_UNSUB_KO_UNKNOW_CONTACT:
-                            $smarty->assign('ret', 'UNSUB-KO');
-                            break;
-                    }
-                    break;
             }
-
-        }
 
         } // isSubmit
 

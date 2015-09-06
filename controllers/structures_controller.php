@@ -1,7 +1,13 @@
 <?php
 
+/**
+ *
+ */
 class Controller
 {
+    /**
+     *
+     */
     static function index()
     {
         $trail = Trail::getInstance();
@@ -12,6 +18,9 @@ class Controller
         return $smarty->fetch('structures/index.tpl');
     }
 
+    /**
+     *
+     */
     static function show()
     {
         $id = (int) Route::params('id');
@@ -42,6 +51,9 @@ class Controller
         return $smarty->fetch('structures/show.tpl');
     }
 
+    /**
+     *
+     */
     static function create()
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -98,6 +110,9 @@ class Controller
         return true;
     }
 
+    /**
+     *
+     */
     static function edit()
     {
         $id = (int) Route::params('id');
@@ -135,6 +150,7 @@ class Controller
 
     /**
      * validation du formulaire de modification structure
+     *
      * @param array $data
      * @param array &$errors
      * @return bool
@@ -149,6 +165,9 @@ class Controller
         return true;
     }
 
+    /**
+     *
+     */
     static function delete()
     {
         $id = (int) Route::params('id');
