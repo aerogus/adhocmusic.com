@@ -7,18 +7,17 @@
 {else}
 
 <script>
-$(function() {
-  $('.fb-event-attending').click(function() {
+$(function () {
+  $('.fb-event-attending').click(function () {
     rsvp($(this).parent().attr('id').replace('fb-event-', ''), 'attending');
   });
-  $('.fb-event-maybe').click(function() {
+  $('.fb-event-maybe').click(function () {
     rsvp($(this).parent().attr('id').replace('fb-event-', ''), 'maybe');
   });
-  $('.fb-event-declined').click(function() {
+  $('.fb-event-declined').click(function () {
     rsvp($(this).parent().attr('id').replace('fb-event-', ''), 'declined');
   });
-  function rsvp(id_event, action)
-  {
+  function rsvp(id_event, action) {
     $.ajax( {
       type: 'POST',
       url: 'https://graph.facebook.com/' + id_event + '/' + action,
@@ -50,7 +49,7 @@ $(function() {
 </style>
 
 {if $event->getFullFlyerUrl()}
-<img src="{$event->getFlyer400Url()}" alt="{$event->getName()|escape}" style="float: right; padding: 0 0 10px 10px;" />
+<img src="{$event->getFlyer400Url()}" alt="{$event->getName()|escape}" style="float: right; padding: 0 0 10px 10px;">
 {/if}
 
 <p style="padding: 10px;" align="justify">{$event->getText()|escape|@nl2br}</p>
@@ -67,10 +66,6 @@ $(function() {
 {$lieu->getCp()} - {$lieu->getCity()|escape}</a><br />
 <br style="clear: both;" />
 <p>Entrée : <strong>{$event->getPrice()|escape}</strong></p>
-<br />
-{if !empty($membre)}
-<p>Proposé par : <a href="/membres/show/{$membre->getId()}"><strong>{$membre->getPseudo()|escape}</strong></a></p>
-{/if}
 </div>
 
 {if !empty($alerting_sub_url)}
@@ -150,6 +145,8 @@ $(function() {
 {/if}
 
 {include file="common/boxend.tpl"}
+
+<a href="/events/edit/{$event->getId()}">éditer</a>
 
 </div>
 

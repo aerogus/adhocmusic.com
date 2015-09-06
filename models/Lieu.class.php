@@ -178,8 +178,8 @@ class Lieu extends ObjectModel
         'id_contact'     => 'num',
         'created_on'     => 'str',
         'modified_on'    => 'str',
-        'lat'            => 'str',
-        'lng'            => 'str',
+        'lat'            => 'float',
+        'lng'            => 'float',
         'online'         => 'bool',
     );
 
@@ -440,7 +440,7 @@ class Lieu extends ObjectModel
      */
     function getLat()
     {
-        return $this->_lat;
+        return (float) $this->_lat;
     }
 
     /**
@@ -450,7 +450,7 @@ class Lieu extends ObjectModel
      */
     function getLng()
     {
-        return $this->_lng;
+        return (float) $this->_lng;
     }
 
     /**
@@ -790,8 +790,8 @@ class Lieu extends ObjectModel
      */
     function setLat($val)
     {
-        if ($this->_lat != $val) {
-            $this->_lat = (string) $val;
+        if ($this->_lat !== $val) {
+            $this->_lat = (float) $val;
             $this->_modified_fields['lat'] = true;
         }
     }
@@ -803,8 +803,8 @@ class Lieu extends ObjectModel
      */
     function setLng($val)
     {
-        if ($this->_lng != $val) {
-            $this->_lng = (string) $val;
+        if ($this->_lng !== $val) {
+            $this->_lng = (float) $val;
             $this->_modified_fields['lng'] = true;
         }
     }

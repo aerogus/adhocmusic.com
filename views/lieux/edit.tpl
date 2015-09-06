@@ -10,7 +10,7 @@
 
 <script>
 $(function() {
-  $("#form-lieu-edit").submit(function() {
+  $("#form-lieu-edit").submit(function () {
     var valid = true;
     if($("#name").val() == "") {
       $("#name").prev(".error").fadeIn();
@@ -59,19 +59,11 @@ $(function() {
 
   $.ajaxSetup( { "async": false } );
 
-  $('#id_country').keypress(function() {
-    $('#id_country').trigger('change');
+  $('#id_country, #id_region, #id_departement').keypress(function() {
+    $(this).trigger('change');
   });
 
-  $('#id_region').keypress(function() {
-    $('#id_region').trigger('change');
-  });
-
-  $('#id_departement').keypress(function() {
-    $('#id_departement').trigger('change');
-  });
-
-  $('#id_country').change(function() {
+  $('#id_country').change(function () {
     var id_country = $('#id_country').val();
     var lieu_id_region = '{$lieu->getIdRegion()}';
     $('#id_region').empty();
@@ -92,7 +84,7 @@ $(function() {
     });
   });
 
-  $('#id_region').change(function() {
+  $('#id_region').change(function () {
     var id_country = $('#id_country').val();
     var lieu_id_region = '{$lieu->getIdRegion()}';
     var id_region = $('#id_region').val();
@@ -111,7 +103,7 @@ $(function() {
     }
   });
 
-  $('#id_departement').change(function() {
+  $('#id_departement').change(function () {
     var id_country = $('#id_country').val();
     var id_departement = $('#id_departement').val();
     var lieu_id_city = '{$lieu->getIdCity()}';

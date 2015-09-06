@@ -235,6 +235,9 @@ abstract class ObjectModel
                     case 'num':
                         $sql .= $db->escape($this->$att) . ",";
                         break;
+                    case 'float':
+                        $sql .= number_format((float) $this->$attr, 8, ".", "") . ",";
+                        break;
                     case 'str':
                         $sql .= "'" . $db->escape($this->$att) . "',";
                         break;
@@ -275,6 +278,9 @@ abstract class ObjectModel
                     {
                         case 'num':
                             $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ", ";
+                            break;
+                        case 'float':
+                            $fields_to_save .= " `" . $field . "` = " . number_format((float) $this->$att, 8, ".", "") . ",";
                             break;
                         case 'str':
                             $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "', ";

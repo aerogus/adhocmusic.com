@@ -212,13 +212,14 @@ class Controller
         if(Tools::isSubmit('form-lieu-create'))
         {
             $data = array(
-                'id_departement' => (string) Route::params('id_departement'),
                 'id_country'     => (string) Route::params('id_country'),
+                'id_region'      => (string) Route::params('id_region'),
+                'id_departement' => (string) Route::params('id_departement'),
+                'id_city'        => (int) Route::params('id_city'),
                 'id_type'        => (int) Route::params('id_type'),
                 'name'           => (string) Route::params('name'),
                 'address'        => (string) Route::params('address'),
                 'cp'             => City::getCp((int) Route::params('id_city')),
-                'id_city'        => (int) Route::params('id_city'),
                 'city'           => City::getName((int) Route::params('id_city')),
                 'text'           => (string) Route::params('text'),
                 'tel'            => (string) Route::params('tel'),
@@ -234,12 +235,13 @@ class Controller
             {
                 $lieu = Lieu::init();
                 $lieu->setIdCountry($data['id_country']);
+                $lieu->setIdRegion($data['id_region']);
+                $lieu->setIdDepartement($data['id_departement']);
+                $lieu->setIdCity($data['id_city']);
                 $lieu->setIdType($data['id_type']);
                 $lieu->setName($data['name']);
-                $lieu->setIdDepartement($data['id_departement']);
                 $lieu->setAddress($data['address']);
                 $lieu->setCp($data['cp']);
-                $lieu->setIdCity($data['id_city']);
                 $lieu->setCity($data['city']);
                 $lieu->setText($data['text']);
                 $lieu->setTel($data['tel']);
@@ -251,14 +253,14 @@ class Controller
                 $lieu->save();
     
                 /* récupération des coordonnées si non précisées */
-                if(!$lieu->getLng() || !$lieu->getLat()) {
+//                if(!$lieu->getLng() || !$lieu->getLat()) {
                     $addr = $lieu->getAddress() . ' ' . $lieu->getCp() . ' ' . $lieu->getCity();
                     if($coords = GoogleMaps::getGeocode($addr)) {
                         $lieu->setLat($coords['lat']);
                         $lieu->setLng($coords['lng']);
                         $lieu->save();
                     }
-                }
+//                }
     
                 /* Upload de la photo */
                 if(is_uploaded_file($_FILES['photo']['tmp_name'])) {
@@ -340,14 +342,15 @@ class Controller
         {
             $data = array(
                 'id'             => (int) Route::params('id'),
-                'id_departement' => (string) Route::params('id_departement'),
                 'id_country'     => (string) Route::params('id_country'),
+                'id_region'      => (string) Route::params('id_region'),
+                'id_departement' => (string) Route::params('id_departement'),
+                'id_city'        => (int) Route::params('id_city'),
                 'id_type'        => (int) Route::params('id_type'),
                 'name'           => (string) Route::params('name'),
                 'address'        => (string) Route::params('address'),
                 'cp'             => City::getCp((int) Route::params('id_city')),
                 'city'           => City::getName((int) Route::params('id_city')),
-                'id_city'        => (int) Route::params('id_city'),
                 'text'           => (string) Route::params('text'),
                 'tel'            => (string) Route::params('tel'),
                 'fax'            => (string) Route::params('fax'),
@@ -362,12 +365,13 @@ class Controller
             {
                 $lieu = Lieu::getInstance($data['id']);
                 $lieu->setIdCountry($data['id_country']);
+                $lieu->setIdRegion($data['id_region']);
+                $lieu->setIdDepartement($data['id_departement']);
+                $lieu->setIdCity($data['id_city']);
                 $lieu->setIdType($data['id_type']);
                 $lieu->setName($data['name']);
-                $lieu->setIdDepartement($data['id_departement']);
                 $lieu->setAddress($data['address']);
                 $lieu->setCp($data['cp']);
-                $lieu->setIdCity($data['id_city']);
                 $lieu->setCity($data['city']);
                 $lieu->setText($data['text']);
                 $lieu->setTel($data['tel']);
@@ -380,6 +384,16 @@ class Controller
     
                 if($lieu->save())
                 {
+                    /* récupération des coordonnées si non précisées */
+//                    if(!$lieu->getLng() || !$lieu->getLat()) {
+                        $addr = $lieu->getAddress() . ' ' . $lieu->getCp() . ' ' . $lieu->getCity();
+                        if($coords = GoogleMaps::getGeocode($addr)) {
+                            $lieu->setLat($coords['lat']);
+                            $lieu->setLng($coords['lng']);
+                            $lieu->save();
+                        }
+//                    }
+
                     /* Upload de la photo */
                     if(is_uploaded_file($_FILES['photo']['tmp_name'])) {
                         $objImg = new Image($_FILES['photo']['tmp_name']);

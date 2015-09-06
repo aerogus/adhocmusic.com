@@ -3,46 +3,46 @@
 {include file="common/boxstart.tpl" boxtitle="Ajouter un lieu"}
 
 <script>
-$(function() {
-  $("#form-lieu-create").submit(function() {
+$(function () {
+  $("#form-lieu-create").submit(function () {
     var valid = true;
-    if($("#name").val() == "") {
+    if($("#name").val() === "") {
       $("#name").prev(".error").fadeIn();
       valid = false;
     } else {
       $("#name").prev(".error").fadeOut();
     }
-    if($("#id_type").val() == "0") {
+    if($("#id_type").val() === "0") {
       $("#id_type").prev(".error").fadeIn();
       valid = false;
     } else {
       $("#id_type").prev(".error").fadeOut();
     }
-    if($("#address").val() == "") {
+    if($("#address").val() === "") {
       $("#address").prev(".error").fadeIn();
       valid = false;
     } else {
       $("#address").prev(".error").fadeOut();
     }
-    if($("#text").val() == "") {
+    if($("#text").val() === "") {
       $("#text").prev(".error").fadeIn();
       valid = false;
     } else {
       $("#text").prev(".error").fadeOut();
     }
-    if($("#id_country").val() == 'FR' && $("#id_departement").val() == "0") {
+    if($("#id_country").val() === 'FR' && $("#id_departement").val() === "0") {
       $("#id_departement").prev(".error").fadeIn();
       valid = false;
     } else {
       $("#id_departement").prev(".error").fadeOut();
     }
-    if($("#id_country").val() == 'FR' && $("#id_city").val() == "0") {
+    if($("#id_country").val() === 'FR' && $("#id_city").val() === "0") {
       $("#id_city").prev(".error").fadeIn();
       valid = false;
     } else {
       $("#id_city").prev(".error").fadeOut();
     }
-    if($("#id_country").val() == "0") {
+    if($("#id_country").val() === "0") {
       $("#id_country").prev(".error").fadeIn();
       valid = false;
     } else {
@@ -51,18 +51,13 @@ $(function() {
     return valid;
   });
 
-  $('#id_country').keypress(function() {
-    $('#id_country').trigger('change');
+  $('#id_country, #id_region, #id_departement').keypress(function() {
+    $(this).trigger('change');
   });
 
-  $('#id_region').keypress(function() {
-    $('#id_region').trigger('change');
-  });
-
-  $('#id_departement').keypress(function() {
-    $('#id_departement').trigger('change');
-  });
-
+  /**
+   *
+   */  
   $('#id_country').change(function() {
     var id_country = $('#id_country').val();
     $('#id_region').empty();
@@ -74,7 +69,7 @@ $(function() {
         $('<option value="'+region_id+'">'+region_name+'</option>').appendTo('#id_region');
       });
     });
-    if(id_country != 'FR') {
+    if(id_country !== 'FR') {
         $('#id_departement').hide();
         $('#id_city').hide();
     } else {
@@ -83,14 +78,17 @@ $(function() {
     }
   });
 
-  $('#id_region').change(function() {
+  /**
+   *
+   */
+  $('#id_region').change(function () {
     var id_country = $('#id_country').val();
     var id_region = $('#id_region').val();
     $('#id_departement').empty();
     $('#id_city').empty();
     if(id_country == 'FR') {
       $('<option value="0">---</option>').appendTo('#id_departement');
-      $.getJSON('/geo/getdepartement.json', { r:id_region }, function(data) {
+      $.getJSON('/geo/getdepartement.json', { r:id_region }, function (data) {
         $.each(data, function(departement_id, departement_name) {
           $('<option value="'+departement_id+'">'+departement_id+' - '+departement_name+'</option>').appendTo('#id_departement');
         });
@@ -98,13 +96,16 @@ $(function() {
     }
   });
 
-  $('#id_departement').change(function() {
+  /**
+   *
+   */
+  $('#id_departement').change(function () {
     var id_country = $('#id_country').val();
     var id_departement = $('#id_departement').val();
     $('#id_city').empty();
     if(id_country == 'FR') {
       $('<option value="0">---</option>').appendTo('#id_city');
-      $.getJSON('/geo/getcity.json', { d:id_departement }, function(data) {
+      $.getJSON('/geo/getcity.json', { d:id_departement }, function (data) {
         $.each(data, function(city_id, city_name) {
           $('<option value="'+city_id+'">'+city_name+'</option>').appendTo('#id_city');
         });
@@ -206,9 +207,9 @@ $(function() {
       <label for="site">Site</label>
     </li>
   </ol>
-  <input type="hidden" name="lat" value="0" />
-  <input type="hidden" name="lng" value="0" />
-  <input id="form-lieu-create-submit" name="form-lieu-create-submit" class="button" type="submit" value="Ajouter" />
+  <input type="hidden" name="lat" value="0">
+  <input type="hidden" name="lng" value="0">
+  <input id="form-lieu-create-submit" name="form-lieu-create-submit" class="button" type="submit" value="Ajouter">
 </form>
 
 {include file="common/boxend.tpl"}
