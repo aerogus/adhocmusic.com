@@ -1,11 +1,8 @@
 {
   "dependencies": {
-    "auto-reload-brunch": ">= 1.0 < 1.8",
-    "clean-css-brunch": ">= 1.0 < 1.8",
-    "css-brunch": ">= 1.0 < 1.8",
-    "jaded-brunch": "^1.7.13",
-    "javascript-brunch": ">= 1.0 < 1.8",
+    "brunch": "^1.8.3",
     "stylus-brunch": "^1.8.1",
-    "uglify-js-brunch": ">= 1.0 < 1.8"
+    "css-brunch": ">= 1.0 < 1.8",
+    "clean-css-brunch": ">= 1.0 < 1.8"
   }
 }

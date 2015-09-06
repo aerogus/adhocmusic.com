@@ -1,24 +1,25 @@
-/* Float Clearing
- ---------------------------------------------------------------------*/
+/* Float Clearing */
 
 .module:after
-  clear: both;
-  content: ".";
-  display: block;
-  height: 0;
-  visibility: hidden;
+  clear both
+  content "."
+  display block
+  height 0
+  visibility hidden
 
 /* float clearing for IE6 */
+
 * html .module
   height: 1%;
   overflow: visible;
 
 /* float clearing for IE7 */
+
 * + html .module
   min-height: 1%;
 
-/* Breadcrumb Styles
- ---------------------------------------------------------------------*/
+/* Breadcrumb Styles */
+
 .breadCrumbHolder
   margin: 0;
   background: #555;
@@ -28,7 +29,7 @@
   padding: 0;
   float: left;
   display: block;
-  height: 20px;
+  height: 30px;
   overflow: hidden;
   padding: 5px;
 
