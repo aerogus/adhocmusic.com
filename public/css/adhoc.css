@@ -1,0 +1,1726 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.clearfix {
+  clear: both;
+}
+.clearfix:after {
+  clear: both;
+  content: ".";
+  display: block;
+  font-size: 0;
+  height: 0;
+  line-height: 0;
+  visibility: hidden;
+}
+body {
+  background: #ececec;
+  font-family: Arial;
+  font-size: 12px;
+  line-height: 1.2em;
+  color: #333;
+}
+.nojs {
+  text-align: center;
+  padding: 10px;
+  background: #000;
+  color: #fff;
+}
+#conteneur {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+#header {
+  margin: 20px 0;
+}
+#main {
+  margin-top: 20px;
+  position: relative;
+}
+#logo {
+  float: left;
+  width: 102px;
+  height: 92px;
+  background: url("http://static.adhocmusic.com/img/logo_adhoc.png");
+}
+#logo span {
+  display: none;
+}
+#megabanner {
+  float: right;
+  width: 728px;
+  height: 90px;
+}
+#megabanner img {
+  width: 728px;
+  height: 90px;
+  display: block;
+}
+#featured {
+  width: 172px !important;
+  height: 244px !important;
+}
+#featured ul {
+  margin: 0;
+}
+#recherche input[type=text] {
+  border: none;
+  position: relative;
+  top: 142px;
+  right: 2px;
+  float: right;
+  padding: 0 20px;
+  background: #ececec url("http://static.adhocmusic.com/img/icones/search.png") no-repeat 0 0;
+  font-style: italic;
+  font-size: 14px;
+  color: #333;
+  width: 100px;
+  height: 26px;
+  -webkit-transition-duration: 400ms;
+  -webkit-transition-property: width, background;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-duration: 400ms;
+  -moz-transition-property: width, background;
+  -moz-transition-timing-function: ease;
+  -o-transition-duration: 400ms;
+  -o-transition-property: width, background;
+  -o-transition-timing-function: ease;
+}
+#recherche input[type=text]:focus,
+#recherche input[type=text]:hover {
+  font-style: normal;
+  background-color: #f9f9f9;
+  width: 120px;
+}
+.button {
+  text-align: center;
+  margin: 10px auto;
+  width: 120px;
+  background: #f0f0f0;
+  padding: 10px;
+  color: #000;
+  font-weight: bold;
+  display: block;
+}
+.button:hover {
+  background: #0f0f0f;
+  color: #fff;
+  text-decoration: none;
+}
+strong {
+  font-weight: bold;
+}
+.footer {
+  background: #333;
+  margin: 0;
+}
+.footer > li strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #fff;
+  width: 8em;
+}
+.footer > li {
+  display: inline-block;
+  margin: 1em 6em;
+  vertical-align: top;
+}
+.footer > li a {
+  color: #999;
+}
+#chemin {
+  margin: 0;
+  padding: 10px 0 0 15px;
+  font-size: 90%;
+}
+#chemin .item {
+  color: #fff;
+  font-weight: bold;
+}
+#countdown {
+  position: absolute;
+  padding: 10px 0 0 15px;
+  right: 10px;
+  font-size: 90%;
+}
+#boxlogin-outter {
+  position: absolute;
+  right: 8px;
+  top: 7px;
+  z-index: 99;
+  text-align: right;
+  font-size: 13px;
+  font-weight: bold;
+}
+#boxlogin-outter > span {
+  color: #fff;
+  text-shadow: #000 1px 1px 1px;
+  padding-left: 18px;
+  background: no-repeat url("http://static.adhocmusic.com/img/icones/cadenas.png");
+}
+#boxlogin-outter > span > a {
+  color: #fff;
+  text-shadow: #000 1px 1px 1px;
+  text-decoration: none;
+}
+#boxlogin-inner {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: normal;
+  text-align: left;
+}
+.mbr {
+  list-style-type: none;
+  list-style-image: none;
+  margin-top: 14px;
+  padding: 0;
+}
+.mbr li {
+  padding-bottom: 5px;
+  padding-left: 20px;
+  margin-left: 5px;
+  background-repeat: no-repeat;
+  background-position: 0%;
+}
+.mbr li:hover {
+  background-color: #ececec;
+}
+.mbr li a:hover {
+  text-decoration: none;
+}
+.mbrmessagerie {
+  background-image: url("http://static.adhocmusic.com/img/icones/email.png");
+}
+.mbralerting {
+  background-image: url("http://static.adhocmusic.com/img/icones/star.png");
+}
+.mbrcompte {
+  background-image: url("http://static.adhocmusic.com/img/icones/profil.png");
+}
+.mbrgroupes {
+  background-image: url("http://static.adhocmusic.com/img/icones/groupe.png");
+}
+.mbrphotos {
+  background-image: url("http://static.adhocmusic.com/img/icones/photo.png");
+}
+.mbraudios {
+  background-image: url("http://static.adhocmusic.com/img/icones/audio.png");
+}
+.mbrvideos {
+  background-image: url("http://static.adhocmusic.com/img/icones/video.png");
+}
+.mbrdates {
+  background-image: url("http://static.adhocmusic.com/img/icones/event.png");
+}
+.mbrlieux {
+  background-image: url("http://static.adhocmusic.com/img/icones/lieu.png");
+}
+.mbradmin {
+  background-image: url("http://static.adhocmusic.com/img/icones/cadenas.png");
+}
+.mbrlogout {
+  background-image: url("http://static.adhocmusic.com/img/icones/logout.png");
+}
+#form-login #login-pseudo {
+  padding-left: 10px;
+  margin: 5px;
+}
+#form-login #login-password {
+  padding-left: 10px;
+  margin: 5px;
+}
+#form-login label {
+  display: inline;
+}
+#form-login ul {
+  margin-right: 5px;
+}
+#form-login li {
+  font-size: 1em;
+  text-align: right;
+  padding: 2px 0;
+}
+#form-login input[type=text],
+#form-login input[type=password] {
+  width: 152px;
+}
+#form-login input[type=submit] {
+  width: 30%;
+  float: left;
+  margin: 6px 4px;
+  padding: 3px 2px;
+  font-weight: bold;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  background-color: #040404;
+}
+#left {
+  position: relative;
+  float: left;
+  width: 300px;
+}
+#right {
+  float: right;
+  width: 300px;
+}
+#center {
+  position: relative;
+  float: left;
+  width: 530px;
+}
+#left-center {
+  position: relative;
+  float: left;
+  width: 680px;
+}
+#center-right {
+  position: relative;
+  float: right;
+  width: 680px;
+}
+tr {
+  vertical-align: top;
+}
+tr.odd {
+  background-color: #ddd;
+}
+tr.even {
+  background-color: #eee;
+}
+img {
+  border: 0;
+}
+div.pic {
+  float: left;
+  height: 125px;
+  width: 125px;
+  padding: 0;
+  margin: 5px 12px 20px 12px;
+  background: #222;
+  border: 1px solid;
+  border-color: #444 #999 #999 #444;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 5px;
+}
+div.pt,
+div.pic img {
+  border: 1px solid;
+  border-color: #444 #aaa #aaa #444;
+}
+div.ls img {
+  height: 75px;
+  width: 100px;
+  margin: 25px 2px 2px 12px;
+}
+div.pt img {
+  height: 100px;
+  width: 75px;
+  margin: 12px 0 0 25px;
+}
+ul.tools {
+  padding-left: 0;
+}
+ul.tools li {
+  display: inline;
+  margin: 0;
+  padding: 5px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #000;
+  font-weight: bold;
+  padding: 5px 0;
+}
+h1 {
+  font-size: 1.5em;
+}
+h2 {
+  font-size: 1.4em;
+}
+h3 {
+  font-size: 1.3em;
+}
+h4 {
+  font-size: 1.2em;
+}
+h5 {
+  font-size: 1.1em;
+}
+h6 {
+  font-size: 1em;
+}
+a,
+a:link,
+a:visited,
+a:active,
+a:hover {
+  color: #000;
+  text-decoration: none;
+}
+a.extlink {
+  padding-left: 16px;
+  background: url("http://static.adhocmusic.com/img/icones/extlink.gif") no-repeat;
+}
+blockquote {
+  font-family: Arial;
+  color: #000;
+  background: none repeat;
+}
+pre {
+  color: #000;
+  line-height: 0.6em;
+}
+ul {
+  list-style: none;
+  margin: 5px 0 5px 0;
+}
+#newsletter ul {
+  list-style: square;
+  padding-left: 25px;
+}
+form,
+fieldset {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #666;
+}
+legend {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.4em;
+  padding: 5px;
+  background-color: #666;
+}
+label {
+  margin-top: 10px;
+  display: block;
+  font-size: 90%;
+}
+label.inline {
+  display: inline;
+}
+input,
+textarea {
+  border: #ccc 1px solid;
+  background-color: #efefef;
+  color: #333;
+  font-family: Courier;
+  font-size: 1.3em;
+  line-height: 1.4em;
+}
+input[type=radio],
+input[type=submit],
+input[type=button] {
+  background: url("http://static.adhocmusic.com/img/gradient_noir.png") repeat-x #040404;
+  color: #fff;
+  border: #888 1px solid;
+  padding: 0 5px 0 5px;
+}
+select {
+  border: 1px solid #888;
+  background-color: #ececec;
+  color: #000;
+}
+option {
+  background-color: #ececec;
+  color: #000;
+}
+input:focus,
+textarea:focus {
+  background-color: #fff;
+}
+fieldset ol li {
+  clear: right;
+}
+.required,
+.optional,
+.conditional,
+.share {
+  border: #fff 1px solid;
+  background-color: #000;
+  color: #fff;
+  font-family: Courier;
+}
+.spacer {
+  visibility: hidden;
+  clear: both;
+}
+.match {
+  background: #ff0;
+  color: #000;
+  font-weight: bold;
+}
+.rubrique {
+  color: #ff9;
+  background: none repeat;
+  font-weight: bold;
+}
+.texterub {
+  color: #fff;
+  background: none repeat;
+}
+.blocinfo {
+  position: relative;
+  margin: 10px;
+  padding: 5px;
+  clear: both;
+}
+.blocinfo h3 {
+  margin: 5px auto 15px;
+  text-align: center;
+  background-color: #b00;
+  color: #fff;
+  text-shadow: #000 1px 1px;
+}
+.blocinfo td {
+  text-align: left;
+}
+.registerblock {
+  float: left;
+  width: 185px;
+  margin: 5px;
+  padding: 10px;
+  background: #fff;
+}
+.registerblock h3 {
+  color: #fff;
+  padding: 5px;
+  text-align: center;
+  background-color: #b00;
+  margin-bottom: 15px;
+}
+.registerbutton {
+  display: block;
+  background-color: #300;
+  color: #fff !important;
+  padding: 5px;
+  text-align: center;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  margin-top: 15px;
+  font-weight: bold;
+}
+.registerbutton:hover {
+  background-color: #c00;
+  color: #fff;
+}
+ul.listgrp {
+  margin: 0;
+}
+.boxgrp {
+  float: left;
+  width: 162px;
+  height: 80px;
+  padding: 5px;
+  background-color: #999;
+  text-align: right;
+}
+.boxgrp a {
+  color: #000;
+  text-decoration: none;
+}
+.boxgrp strong {
+  color: #fff;
+}
+.boxgrp:hover,
+.imggrp {
+  float: left;
+  width: 64px;
+  height: 64px;
+  background: url("http://static.adhocmusic.com/img/note_adhoc_64.png");
+}
+.grpactif,
+.grpinactif {
+  opacity: 0.5;
+}
+.adecouvrir {
+  clear: left;
+  border-bottom: 1px #ececec solid;
+  padding: 5px 0 5px 0;
+}
+.adecouvririmg {
+  margin: 5px 0 10px 0;
+}
+.adecouvririmg a {
+  color: #300;
+}
+.adecouvririmg img {
+  border: 1px solid #999;
+}
+.adecouvririmg span {
+  background: #999 url("http://static.adhocmusic.com/img/gradient_gris.png");
+  padding: 0 15px;
+  -moz-border-radius-bottomright: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+}
+ul.partenaire li {
+  border: 0;
+  display: inline;
+  margin: 10px;
+  padding: 5px;
+}
+.admvideos {
+  float: left;
+  width: 282px;
+  height: 235px;
+  overflow: auto;
+  margin: 5px;
+  background: #666;
+  padding: 5px;
+}
+.programme {
+  background-color: #f99;
+}
+.enligne {
+  background-color: #9f9;
+}
+.archive {
+  background-color: #666;
+}
+.info,
+.success,
+.warning,
+.error,
+.validation {
+  border: 1px solid;
+  margin: 10px;
+  padding: 15px 10px 15px 50px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.info ul,
+.success ul,
+.warning ul,
+.error ul,
+.validation ul {
+  padding: 0;
+  margin: 0;
+}
+.info ul li,
+.success ul li,
+.warning ul li,
+.error ul li,
+.validation ul li {
+  background: url("http://static.adhocmusic.com/favicon.png") no-repeat 0 0;
+  padding-left: 25px;
+  margin: 5px;
+}
+.info {
+  color: #00529b;
+  background-color: #bde5f8;
+  background-image: url("http://static.adhocmusic.com/img/icones/info.png");
+}
+.success {
+  color: #4f8a10;
+  background-color: #dff2bf;
+  background-image: url("http://static.adhocmusic.com/img/icones/success.png");
+}
+.warning {
+  color: #9f6000;
+  background-color: #feefb3;
+  background-image: url("http://static.adhocmusic.com/img/icones/warning.png");
+}
+.error {
+  color: #d8000c;
+  background-color: #ffbaba;
+  background-image: url("http://static.adhocmusic.com/img/icones/error.png");
+}
+.validation {
+  color: #d63301;
+  background-color: #ffccba;
+  background-image: url("http://static.adhocmusic.com/img/icones/validation.png");
+}
+.fb-profil {
+  float: left;
+  border: 1px solid #999;
+  padding: 5px;
+  width: 150px;
+  height: 70px;
+  margin: 5px;
+  background-color: #922;
+}
+.fb-profil-with-account {
+  background-color: #292;
+}
+.fb-profil img {
+  float: right;
+}
+.thumb-80 {
+  position: relative;
+  float: left;
+  margin: 3px 3px;
+  width: 80px;
+  height: 80px;
+  border-radius: 1px;
+  border-top: 1px solid #999;
+  border-right: 1px solid #999;
+  border-bottom: 1px solid #999;
+  border-left: 1px solid #999;
+  background-color: #f9f5ef;
+  font-size: 0.9em;
+  padding: 2px 2px 20px 2px;
+}
+css_border_radius radius='1px' {
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+}
+.thumb-80:hover,
+.overlay-80 {
+  visibility: hidden;
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 3px;
+  left: 3px;
+  background-image: url("http://static.adhocmusic.com/img/cache-media.png");
+}
+.overlay-photo-80 {
+  background-position: 0px -80px;
+}
+.overlay-video-80 {
+  background-position: 0px -160px;
+}
+.overlay-audio-80 {
+  background-position: 0px 0px;
+}
+.thumb-100 {
+  position: relative;
+  float: left;
+  width: 100px;
+  height: 100px;
+}
+.thumb-100 h3 {
+  position: absolute;
+  bottom: 0;
+  width: 100px;
+  text-align: center;
+  min-height: 20px;
+  background: rgba(150,0,0,0.85);
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+.thumb-100:hover,
+.photofull img {
+  box-shadow: 3px 3px 5px #999;
+  -moz-box-shadow: 3px 3px 5px #999;
+  -webkit-box-shadow: 3px 3px 5px #999;
+  zoom: 1;
+}
+#search-box-results {
+  margin: 0;
+}
+.search-box-result {
+  margin: 8px 8px 0 0;
+  width: 100px;
+  height: 100px;
+  float: left;
+}
+.search-box-result:nth-child(6n) {
+  margin-right: 0;
+}
+.search-box-result-audio {
+  width: 100%;
+  height: 100%;
+}
+.search-box-result-video {
+  height: 100%;
+  width: 100%;
+}
+.search-box-result-photo {
+  height: 100%;
+  width: 100%;
+}
+#up {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 36px;
+  background-color: #b00;
+  display: none;
+  padding: 0;
+  font-size: 11px;
+  z-index: 1800;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+#up:hover {
+  background-color: #d00;
+}
+#up img {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin: 0 auto;
+}
+div.tree_top {
+  background: url("http://static.adhocmusic.com/img/tree/top.png") no-repeat -1px -3px;
+  padding-left: 24px;
+  padding-bottom: 10px;
+  padding-top: 3px;
+}
+ul.tree {
+  margin-top: -5px;
+  margin-left: -1px;
+}
+ul.tree,
+ul.tree ul {
+  list-style-type: none;
+}
+ul.tree li {
+  padding-left: 1.2em;
+  border-left: 1px #c0c0c0 solid;
+  background: url("http://static.adhocmusic.com/img/tree/horizontal.png") no-repeat left 10px;
+  margin-left: 1em;
+  font-weight: bold;
+  padding-top: 4px;
+  padding-bottom: 1px;
+}
+ul.tree a {
+  padding-left: 0.2em;
+}
+ul.tree a.selected {
+  font-weight: bold;
+}
+ul.tree li:last-child {
+  background: url("http://static.adhocmusic.com/img/tree/last.png") no-repeat -12px -2px;
+  border: none;
+}
+ul.tree {
+  padding-left: 0em;
+}
+ul.tree li.last {
+  padding-bottom: 0;
+}
+ul.tree li ul {
+  padding: 0;
+}
+ul.tree li ul li {
+  padding: 1px 0 1px 15px;
+  font-size: 11px;
+  font-weight: normal;
+}
+ul.tree li ul li.last {
+  padding-bottom: 0;
+}
+ul.tree a {
+  padding-left: 2px;
+}
+div.alerting-sub a,
+div.alerting-auth a,
+div.alerting-unsub a {
+  background: url("http://static.adhocmusic.com/img/icones/star.png") no-repeat left top;
+  margin: 5px;
+  padding: 3px 5px 3px 20px;
+  background-color: #eceef5;
+  border: 1px solid #cad4e7;
+  text-decoration: none;
+}
+div.alerting-sub a:hover,
+div.alerting-auth a:hover,
+div.alerting-unsub a:hover {
+  border: 1px solid #a8b2c5;
+}
+#menu-wrapper {
+  position: relative;
+}
+#menu_haut {
+  background: #000;
+  height: 30px;
+  margin: 0;
+  font: bold 1.1em Arial;
+}
+#menu_haut > li {
+  float: left;
+  list-style: none;
+  display: inline;
+}
+#menu_haut > li:hover,
+#menu_haut > li.menuselected:hover {
+  background-color: #b00;
+}
+#menu_haut > li.menuselected {
+  background-color: #555;
+}
+#menu_haut > li > a {
+  display: block;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px 12px;
+  text-transform: uppercase;
+}
+ul.sub-menu {
+  background-color: #b00;
+  width: 1000px;
+  height: 30px;
+  top: 30px;
+  margin: 0;
+  left: 0;
+  float: left;
+  position: absolute;
+  z-index: 10;
+  display: inline;
+}
+ul.sub-menu > li {
+  display: inline;
+  float: left;
+}
+ul.sub-menu > li > a {
+  font: bold 1.1em Arial;
+  color: #fff;
+  padding: 5px;
+  height: 20px;
+  display: block;
+}
+#social {
+  float: right;
+  margin-top: 1px;
+}
+#social ul {
+  margin: 0;
+}
+#social ul li,
+#follow ul li {
+  float: left;
+  width: 24px;
+  height: 24px;
+  margin: 0 2px;
+  background-repeat: no-repeat;
+  background-image: url("http://static.adhocmusic.com/img/icones/social-sprite.png");
+}
+#follow ul li {
+  margin: 0 3px;
+}
+#social ul li a,
+#follow ul li a {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+#social ul:hover,
+#follow ul:hover {
+  cursor: pointer;
+}
+.item-mobile {
+  background-position: 0px -24px;
+}
+.item-mobile:hover {
+  background-position: 0px 0px;
+}
+.item-search {
+  background-position: -24px -24px;
+}
+.item-search:hover {
+  background-position: -24px 0px;
+}
+.item-facebook {
+  background-position: -48px -24px;
+}
+.item-facebook:hover {
+  background-position: -48px 0px;
+}
+.item-myspace {
+  background-position: -72px -24px;
+}
+.item-myspace:hover {
+  background-position: -72px 0px;
+}
+.item-twitter {
+  background-position: -96px -24px;
+}
+.item-twitter:hover {
+  background-position: -96px 0px;
+}
+.item-dailymotion {
+  background-position: -120px -24px;
+}
+.item-dailymotion:hover {
+  background-position: -120px 0px;
+}
+.item-youtube {
+  background-position: -144px -24px;
+}
+.item-youtube:hover {
+  background-position: -144px 0px;
+}
+.item-rss {
+  background-position: -168px -24px;
+}
+.item-rss:hover {
+  background-position: -168px 0px;
+}
+.module:after {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+* html .module {
+  height: 1%;
+  overflow: visible;
+}
+* + html .module {
+  min-height: 1%;
+}
+.breadCrumbHolder {
+  margin: 0;
+  background: #555;
+}
+.breadCrumb {
+  margin: 0;
+  padding: 0;
+  float: left;
+  display: block;
+  height: 20px;
+  overflow: hidden;
+  padding: 5px;
+}
+.breadCrumb ul {
+  margin: 0;
+  padding: 0;
+  height: 21px;
+  display: block;
+  margin-left: 8px;
+}
+.breadCrumb ul li {
+  display: block;
+  float: left;
+  position: relative;
+  height: 20px;
+  overflow: hidden;
+  line-height: 20px;
+  margin: 0px 5px 0px 0;
+  padding: 0px 15px 0px 0;
+  font-size: 1em;
+  text-shadow: 0.1em 0.1em 0.05em #333;
+  background: url("http://static.adhocmusic.com/img/breadcrumbs/chevron.png") no-repeat 100% 0;
+}
+.breadCrumb ul li div.chevronOverlay {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+.breadCrumb ul li span {
+  display: block;
+  overflow: hidden;
+}
+.breadCrumb ul li a {
+  display: block;
+  position: relative;
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+  float: left;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0.1em 0.1em 0.05em #333;
+  font-weight: bold;
+}
+.breadCrumb ul li.first a:hover {
+  background-position: 0 -16px;
+}
+.breadCrumb ul li.last {
+  background: none;
+  margin-right: 0;
+  padding-right: 0;
+}
+.chevronOverlay {
+  display: none;
+  background: url("http://static.adhocmusic.com/img/breadcrumbs/chevron_overlay.png") no-repeat 100% 0;
+  width: 13px;
+  height: 20px;
+}
+.box {
+  margin-bottom: 20px;
+}
+.box:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.boxtitle {
+  background-color: #b00;
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 2px;
+  padding: 3px 8px;
+  text-transform: uppercase;
+}
+.boxheader,
+.boxcontent {
+  background: #fff;
+  color: #333;
+  padding: 10px;
+  clear: right;
+}
+.boxcontent table {
+  background-color: #fff;
+}
+.boxcontent th {
+  background-color: #c0c0c0;
+  font-weight: bold;
+  padding: 5px;
+}
+.boxcontent tr {
+  padding: 5px;
+}
+.boxcontent tr.odd {
+  background-color: #ececec;
+}
+.boxcontent tr.even {
+  background-color: #fff;
+}
+.boxcontent td {
+  padding: 5px;
+}
+.boxcontent:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+div#feature_list {
+  width: 680px;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+}
+div#feature_list ul {
+  position: absolute;
+  top: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#feature_list h3 {
+  color: #000;
+  margin-bottom: 3px;
+  padding: 0;
+}
+ul#tabs {
+  right: 0;
+  z-index: 2;
+  width: 319px;
+}
+ul#tabs li {
+  font-size: 12px;
+  font-family: Arial;
+}
+ul#tabs li a {
+  color: #222;
+  text-decoration: none;
+  display: block;
+  padding: 10px 10px 10px 33px;
+  height: 40px;
+  outline: none;
+  background: url("http://static.adhocmusic.com/img/featured.png") 0px -180px no-repeat;
+}
+ul#tabs li a:hover {
+  background: url("http://static.adhocmusic.com/img/featured.png") 0px -120px no-repeat;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+}
+ul#tabs li a:hover h3,
+ul#tabs li a.current h3 {
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+}
+ul#tabs li a.current {
+  background: url("http://static.adhocmusic.com/img/featured.png") 0px -60px no-repeat;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+}
+ul#tabs li a.current:hover {
+  background: url("http://static.adhocmusic.com/img/featured.png") 0px -60px no-repeat;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  text-decoration: none;
+}
+ul#output {
+  left: 0;
+  width: 427px;
+  height: 240px;
+  position: relative;
+}
+ul#output li {
+  position: absolute;
+  width: 427px;
+  height: 240px;
+}
+.concerts {
+  margin: 10px;
+}
+.concerts h3 {
+  background-color: #666;
+  color: #fff;
+  text-shadow: #000 1px 1px 1px;
+  padding: 5px;
+}
+.concerts ul {
+  list-style: none;
+}
+.concerts li {
+  display: block;
+  float: left;
+  margin: 5px;
+  padding: 0px;
+}
+.concerts li a {
+  color: #fff;
+}
+#staff li,
+#old-staff li {
+  float: left;
+  display: inline;
+}
+.staff-member {
+  width: 250px;
+  height: 150px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  background-color: #ececec;
+  padding: 15px;
+  margin: 15px;
+}
+.staff-member:hover {
+  background-color: #fefefe;
+}
+.staff-member img {
+  float: left;
+  margin: 0 10px 5px 0;
+}
+.staff-member a {
+  text-decoration: none;
+  color: #333 !important;
+}
+.staff-member a strong {
+  color: #000 !important;
+}
+#statuts {
+  font-size: 14px;
+  font-family: Courier;
+}
+#statuts p {
+  text-align: justify;
+}
+#statuts h3 {
+  font-size: 18px;
+  padding: 3px;
+  margin: 5px 0;
+  background-color: #666;
+}
+h4 {
+  border-bottom: 1px solid #999;
+  color: #666;
+  padding: 5px 0;
+  margin: 25px 0 5px 0;
+}
+p {
+  line-height: 1.2em;
+}
+.postule {
+  float: right;
+  margin: 5px;
+  padding: 6px 8px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#055c20), to(#519c56));
+  background: -webkit-linear-gradient(top, #055c20, #519c56);
+  background: -moz-linear-gradient(top, #055c20, #519c56);
+  background: -ms-linear-gradient(top, #055c20, #519c56);
+  background: -o-linear-gradient(top, #055c20, #519c56);
+  -webkit-border-radius: 24px;
+  -mmoz-border-radius: 24px;
+  border-radius: 24px;
+  text-shadow: rgba(0,0,0,0.4) 0 1px 0;
+  color: #fff !important;
+  font-size: 15px;
+  font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+  text-decoration: none !important;
+}
+.postule:hover {
+  background: #276b52;
+}
+.postule:active {
+  background: #1b5c2c;
+}
+#event-box-info {
+  margin: 10px;
+  background: #ececec;
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #fff;
+}
+#event-box-map {
+  float: left;
+  margin: 0 5px 5px 0;
+}
+.events_of_the_day {
+  margin: 10px;
+}
+.events_of_the_day h3 {
+  background: #333 url("http://static.adhocmusic.com/img/icones/event.png") no-repeat 3px 4px;
+  color: #fff;
+  border-bottom: 0px solid #999;
+  padding: 5px 25px;
+  margin-bottom: 20px;
+}
+div.event {
+  background: #ececec;
+  border: 1px solid #cecece;
+  margin-bottom: 20px;
+}
+div.event div.event_header {
+  float: left;
+  padding: 10px 5px;
+}
+div.event_date {
+  background: url("http://static.adhocmusic.com/img/icones/clock.png") no-repeat;
+  padding-left: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+div.event_lieu {
+  background: url("http://static.adhocmusic.com/img/icones/map.png") no-repeat;
+  padding-left: 20px;
+  margin-bottom: 5px;
+}
+div.event span.event_title {
+  background-color: #666;
+  display: block;
+  padding: 5px;
+}
+div.event span.event_title a {
+  color: #fff;
+  text-shadow: #000 1px 1px 1px;
+}
+div.event div.event_content {
+  padding: 0px;
+  margin-left: 200px;
+  border-left: 1px solid #cecece;
+  margin-bottom: 0px;
+}
+div.event div.event_body {
+  padding: 5px;
+}
+p.event_price {
+  background: url("http://static.adhocmusic.com/img/icones/coins.png") no-repeat;
+  padding-left: 20px;
+}
+p.event_facebook {
+  margin-top: 15px;
+  background: url("http://static.adhocmusic.com/img/facebook.gif") no-repeat;
+  padding-left: 20px;
+}
+div.event div.event_footer {
+  background-color: #acacac;
+  padding: 5px;
+}
+div.event_media {
+  margin-left: 200px;
+}
+span.event_media_video {
+  background: url("http://static.adhocmusic.com/img/icones/video.png") no-repeat;
+  padding-left: 20px;
+}
+span.event_media_photo {
+  background: url("http://static.adhocmusic.com/img/icones/photo.png") no-repeat;
+  padding-left: 20px;
+}
+span.event_media_audio {
+  background: url("http://static.adhocmusic.com/img/icones/audio.png") no-repeat;
+  padding-left: 20px;
+}
+#cal {
+  border-collapse: collapse;
+  width: 300px;
+  float: right;
+}
+#cal tr.top {
+  background-color: #b00;
+}
+#cal tr.top a {
+  color: #fff;
+}
+#cal tr.days {
+  background-color: #000;
+  color: #fff;
+}
+#cal th,
+#cal td {
+  text-align: center;
+  padding: 4px;
+}
+#cal td.blank {
+  background-color: #999;
+}
+#cal td.none {
+  background-color: #ececec;
+}
+#cal td.event {
+  background-color: #ececec;
+}
+#cal td.today {
+  background-color: #fff;
+}
+#cal td.event a {
+  color: #f00;
+}
+#concours p {
+  margin: 10px;
+}
+#concours h4 {
+  background-color: #ececec;
+  border: 1px solid #999;
+  display: inline-block;
+  padding: 5px;
+  margin: 10px;
+}
+#concours ul {
+  list-style-type: disc;
+  padding-left: 25px;
+  margin: 5px;
+}
+#concours a {
+  font-weight: bold;
+}
+.qr {
+  margin: 15px;
+  padding: 15px;
+}
+.qr ol {
+  margin: 10px;
+  list-style-type: lower-alpha;
+  padding-left: 10px;
+}
+.qr p {
+  border: 1px solid #ccc;
+  padding: 5px;
+  background-color: #666;
+  font-weight: bold;
+  color: #fff;
+}
+#newsletter {
+  background: #fff;
+  color: #000;
+  padding: 20px;
+}
+#newsletterbody {
+  padding-left: 200px;
+  width: 550px;
+}
+#newsletterbody table {
+  box-shadow: 5px 5px 50px rgba(0,0,0,0.5);
+  -moz-box-shadow: 5px 5px 50px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 5px 5px 50px rgba(0,0,0,0.5);
+  zoom: 1;
+}
+#newsletter pre {
+  color: #000;
+}
+#newsletter tr th {
+  background-color: #b00;
+  background-image: -moz-linear-gradient(top, #f00, #600);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f00), color-stop(1, #600));
+}
+#newsletter tr td {
+  backgroundd: #efefef;
+}
+#newsletter table tr td table {
+  margin: 0 auto;
+}
+#newsletter table tr td table tr td {
+  padding: 15px;
+  text-align: center;
+}
+.admlinks li a {
+  background: #ccc;
+  width: 85px;
+  height: 45px;
+  float: left;
+  margin: 1px;
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+.admlinks li a:hover {
+  background: #999;
+}
+.thread-avatar {
+  width: 25px;
+  height: 25px;
+  float: left;
+}
+.thread-avatar-full {
+  width: 50px;
+  height: 50px;
+}
+.msg {
+  display: block;
+  width: 350px;
+}
+.subscribers {
+  padding: 5px;
+}
+.message {
+  margin-bottom: 20px;
+  background: #f0f0f0;
+  border: 1px solid #9f9f9f;
+}
+.message-meta {
+  float: left;
+  padding: 10px;
+  line-height: 1.6em;
+  text-align: center;
+}
+@media screen and (max-width: 1000px) {
+  .message-meta {
+    margin: 10px;
+  }
+}
+.message-meta img {
+  display: block;
+  margin: 0 auto;
+}
+.message-body {
+  padding: 10px;
+  margin: 10px 10px 10px 135px;
+  background-color: #fff;
+  font-size: 1.25em;
+  line-height: 1.25em;
+}
+@media screen and (max-width: 1000px) {
+  .message-body {
+    margin: 10px;
+  }
+}
+.message-body p {
+  margin-bottom: 5px;
+}
+.message-body ul {
+  list-style-type: disc;
+  padding-left: 15px;
+}
+.message-body li {
+  margin-bottom: 5px;
+}
+.ftp {
+  width: 100%;
+  margin: 10px auto;
+}
+.ftp tr {
+  border: 0;
+}
+.ftp td {
+  padding: 1px;
+  font-family: Courier;
+  font-size: 1.2em;
+}
+.pagination {
+  clear: both;
+  width: 50%;
+  margin: 20px auto;
+  text-align: center;
+}
+a.unselectedpage,
+a.selectedpage {
+  padding: 9px;
+  text-decoration: none;
+}
+a.unselectedpage {
+  background: #333;
+  color: #fff;
+}
+a.unselectedpage:hover {
+  background: #fff;
+  color: #000;
+}
+a.selectedpage {
+  background: #b00;
+  color: #fff;
+  font-weight: bold;
+}
+a.selectedpage:hover {
+  background: #f00;
+}
+div.likeboxwrap {
+  width: 495px;
+  height: 545px;
+  overflow: hidden;
+}
+div.likeboxwrap iframe {
+  margin: -2px;
+}
+.fb-share-box {
+  padding: 5px;
+  margin: 5px 0px;
+  height: 25px;
+  background-color: #fff;
+}
+.fb-share-link {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 5px 5px 5px 20px;
+  background: #eceef5 url("http://static.adhocmusic.com/img/icones/fb-link.png") 3px 5px no-repeat;
+  color: #3f5d9a !important;
+  border: solid 1px #cad4e7;
+  font-size: 0.9em;
+  position: absolute;
+  height: 12px;
+}
+.fb-share-link:hover {
+  border-color: #9dacce;
+  text-decoration: none;
+}
+@media screen and (max-width: 1000px) {
+  #conteneur {
+    width: 100%;
+  }
+  #megabanner {
+    display: none;
+  }
+  #menu_haut > li > a {
+    font-size: 12px;
+  }
+  #left-center {
+    width: 100%;
+  }
+  #right {
+    width: 100%;
+  }
+}
+
+
+/*# sourceMappingURL=adhoc.css.map*/

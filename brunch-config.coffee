@@ -1,5 +1,12 @@
 exports.config =
 
+  paths:
+    watched: ['app']
+
+  modules:
+    definition: false
+    wrapper: false
+
   files:
     stylesheets:
       joinTo:
