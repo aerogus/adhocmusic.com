@@ -7,7 +7,7 @@
 /**
  * Classe Structure
  *
- * Gestion des Structures
+ * Gestion des Structures / associations
  *
  * @package adhoc
  * @author Guillaume Seznec <guillaume.seznec@gmail.com>
