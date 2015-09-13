@@ -113,7 +113,7 @@ $(function() {
   FB.init({
     appId : '50959607741',
     xfbml : false,
-    version : 'v2.3'
+    version : 'v2.4'
   });
 
   FB.getLoginStatus(function(response) {
@@ -140,24 +140,6 @@ $(function() {
     po.src = 'https://apis.google.com/js/plusone.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
   })();
-
-  $(".thumb-80").hover(function() {
-    $(this).css( {
-      '-webkit-transform': 'scale(1.2)',
-      '-moz-transform': 'scale(1.2)',
-      '-o-transform': 'scale(1.2)',
-      '-ms-transform': 'scale(1.2)',
-      'z-index': 50
-    });
-  } , function() {
-    $(this).css( {
-      '-webkit-transform': 'scale(1.0)',
-      '-moz-transform': 'scale(1.0)',
-      '-o-transform': 'scale(1.0)',
-      '-ms-transform': 'scale(1.0)',
-      'z-index': 1
-    });
-  });
 
 });
 </script>
