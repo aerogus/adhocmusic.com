@@ -1,14 +1,5 @@
 {include file="common/header.tpl"}
 
-<script>
-$(function() {
-  $("#form-structure-delete").submit(function() {
-    var valid = true;
-    return valid;
-  });
-});
-</script>
-
 {include file="common/boxstart.tpl" boxtitle="Effacer une structure"}
 
 <form id="form-structure-delete" name="form-structure-delete" method="post" action="/structures/delete">

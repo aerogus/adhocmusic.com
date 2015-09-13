@@ -1,20 +1,5 @@
 {include file="common/header.tpl"}
 
-<script>
-$(function() {
-  $("#form-structure-create").submit(function() {
-    var valid = true;
-    if($("#name").val() == "") {
-      $("#name").prev(".error").fadeIn();
-      valid = false;
-    } else {
-      $("#name").prev(".error").fadeOut();
-    }
-    return valid;
-  });
-});
-</script>
-
 {include file="common/boxstart.tpl" boxtitle="Proposer une structure"}
 
 <form id="form-structure-create" name="form-structure-create" method="post" action="/structures/create">

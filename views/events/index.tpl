@@ -1,36 +1,5 @@
 {include file="common/header.tpl" js_jquery_ui=true css_jquery_ui=true js_jquery_ui_datepicker=true}
 
-<script>
-$(function() {
-
-  $('.event_title').hover(
-    function() { $(this).children('.edit-event').show(); },
-    function() { $(this).children('.edit-event').hide(); }
-  );
-
-  $('.fb-event-attending').click(function() {
-    rsvp($(this).parent().attr('id').replace('fb-event-', ''), 'attending');
-  });
-
-  $('.fb-event-maybe').click(function() {
-    rsvp($(this).parent().attr('id').replace('fb-event-', ''), 'maybe');
-  });
-
-  $('.fb-event-declined').click(function() {
-    rsvp($(this).parent().attr('id').replace('fb-event-', ''), 'declined');
-  });
-
-  function rsvp(id_event, action)
-  {
-    $.ajax( {
-      type: 'POST',
-      url: 'https://graph.facebook.com/' + id_event + '/' + action,
-      data: { access_token: $('#fb-access-token').val() }
-    });
-  }
-});
-</script>
-
 <style>
 .fb-event-button, .fb-event-button:hover {
     border: 1px solid #29447e;
