@@ -50,6 +50,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('membre-create.js');
+
         $smarty->assign('title', "Inscription à l'association AD'HOC");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
@@ -95,7 +97,7 @@ class Controller
                 $cp = City::getCp((int) Route::params('id_city'));
                 $city = City::getName((int) Route::params('id_city'));
             }
-  
+
             $data = array(
                 'pseudo'         => trim((string) Route::params('pseudo')),
                 'email'          => trim(strtolower((string) Route::params('email'))),
@@ -118,9 +120,9 @@ class Controller
                 'facebook_auto_login' => (bool) Route::params('facebook_auto_login'),
                 'csrf'           => '',
             );
-   
+
             if(self::_validate_form_member_create($data, $errors)) {
- 
+
                 $data['password'] = Membre::generatePassword(8);
 
                 if(empty($errors)) {
@@ -158,7 +160,7 @@ class Controller
                     }
 
                 }
-    
+
             }
 
             if (!empty($errors)) {
@@ -231,10 +233,12 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('membre-edit.js');
+
         if(Tools::isSubmit('form-member-edit'))
         {
             $member = $_SESSION['membre'];
-    
+
             $data = array(
                 'last_name' => trim((string) Route::params('last_name')),
                 'first_name' => trim((string) Route::params('first_name')),
@@ -253,9 +257,9 @@ class Controller
                 'site' => trim((string) Route::params('site')),
                 'mailing' => (bool) Route::params('mailing'),
             );
-    
+
             if(self::_validate_form_member_edit($data, $errors)) {
-    
+
                 $member->setLastName($data['last_name']);
                 $member->setFirstName($data['first_name']);
                 $member->setAddress($data['address']);
@@ -273,9 +277,9 @@ class Controller
                 $member->setSite($data['site']);
                 $member->setMailing($data['mailing']);
                 $member->setModifiedNow();
-        
+
                 $member->save();
-        
+
                 if($member->isInterne()) {
                     $forum = Route::params('forum');
                     ForumPrive::delAllSubscriptions($member->getId());
@@ -287,7 +291,7 @@ class Controller
                         }
                     }
                 }
-        
+
                 /* traitement de la photo officielle envoyée (112*174) */
                 if($member->isInterne()) {
                     if(is_uploaded_file($_FILES['photo']['tmp_name'])) {
@@ -300,7 +304,7 @@ class Controller
                         $img = null;
                     }
                 }
-        
+
                 /* traitement de l'avatar (112*---) */
                 if(is_uploaded_file($_FILES['avatar']['tmp_name'])) {
                     $img = new Image($_FILES['avatar']['tmp_name']);
@@ -311,20 +315,20 @@ class Controller
                     $img->write();
                     $img = null;
                 }
-        
+
                 Log::action(Log::ACTION_MEMBER_EDIT, $member->getId());
-        
+
                 $smarty->assign('updated_ok', true);
-    
+
             } else {
-    
+
                 if (!empty($errors)) {
                     foreach($errors as $k => $v) {
                         $smarty->assign('error_' . $k, $v);
                     }
                 }
-    
-            }           
+
+            }
         }
 
         if($_SESSION['membre']->getFacebookProfileId() > 0) {
@@ -357,10 +361,10 @@ class Controller
             $errors['email'] = true;
         } elseif(!Email::validate($data['email'])) {
             $errors['email'] = true;
-        }   
+        }
         if (empty($data['last_name'])) {
             $errors['last_name'] = true;
-        }   
+        }
         if (empty($data['first_name'])) {
             $errors['first_name'] = true;
         }
@@ -440,7 +444,7 @@ class Controller
             $membre->setFacebookAutoLogin(true);
             $membre->save();
 
-            Tools::redirect('/membres/edit/' . $membre->getId());        
+            Tools::redirect('/membres/edit/' . $membre->getId());
         }
 
         $smarty = new AdHocSmarty();

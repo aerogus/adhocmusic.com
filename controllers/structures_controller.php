@@ -60,6 +60,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('structure-create.js');
+
         if(Tools::isSubmit('form-structure-create'))
         {
             $data = array(
@@ -90,7 +92,7 @@ class Controller
                 // todo
             }
         }
-        
+
         return $smarty->fetch('structures/create.tpl');
     }
 
@@ -121,6 +123,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('structure-edit.js');
+
         if(Tools::isSubmit('form-structure-edit'))
         {
             $data = array(
@@ -140,9 +144,9 @@ class Controller
             {
                 // todo
             }
-            
+
         }
-        
+
         $smarty->assign('structure', Structure::getInstance($id));
 
         return $smarty->fetch('structures/edit.tpl');
@@ -177,6 +181,8 @@ class Controller
         $structure = Structure::getInstance($id);
 
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_script('structure-delete.js');
 
         if(Tools::isSubmit('form-structure-delete'))
         {

@@ -10,6 +10,8 @@ class Controller
 
         $smarty->assign('menuselected', 'agenda');
 
+        $smarty->enqueue_script('events.js');
+
         $trail = Trail::getInstance();
         $trail->addStep("Agenda");
 

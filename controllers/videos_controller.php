@@ -195,6 +195,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('video-create.js');
+
         if(Tools::isSubmit('form-video-create'))
         {
             $data = array(
@@ -323,6 +325,8 @@ class Controller
         $page = (int) Route::params('page');
 
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_script('videos-edit.js');
 
         try {
             $video = Video::getInstance($id);
