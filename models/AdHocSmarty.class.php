@@ -83,7 +83,7 @@ class AdHocSmarty extends Smarty
         if(defined('ADHOC_COUNTERS')) {
             if(!empty($_SESSION['membre'])) {
                 $this->assign('is_auth', true);
-                
+
                 $this->assign('my_counters', array(
                     'nb_unread_messages' => (int) Messagerie::getMyUnreadMessagesCount(),
                     'nb_messages'        => (int) Messagerie::getMyMessagesCount(),
@@ -94,7 +94,7 @@ class AdHocSmarty extends Smarty
                     //'nb_events'          => (int) Event::getMyEventsCount(),
                     //'nb_lieux'           => (int) Lieu::getMyLieuxCount(),
                 ));
-                
+
             } else {
                 $this->assign('is_auth', false);
                 $this->assign('my_counters', false);
@@ -360,7 +360,7 @@ class AdHocSmarty extends Smarty
         if(array_key_exists('month', $params)) {
             $month = (int) $params['month'];
         }
- 
+
         $day = date('d', $now);
         if(array_key_exists('day', $params)) {
             $day = (int) $params['day'];
@@ -376,7 +376,7 @@ class AdHocSmarty extends Smarty
         if($blank_days < 0) {
             $blank_days = 7 - abs($blank_days);
         }
- 
+
         $events = Event::getEventsForAMonth($year, $month);
 
         // blancs de début de mois
@@ -442,7 +442,7 @@ class AdHocSmarty extends Smarty
         $smarty->assign('prev_year', $prev_year);
         $smarty->assign('next_month', $next_month);
         $smarty->assign('next_year', $next_year);
-        return $smarty->fetch('events/calendar.tpl');    
+        return $smarty->fetch('events/calendar.tpl');
     }
 
     /**
@@ -643,6 +643,22 @@ class AdHocSmarty extends Smarty
             return TRUE;
         }
         return $out;
+    }
+
+    /**
+     * Ajoute un javascript externe dans le footer
+     */
+    function enqueue_script($script_name)
+    {
+        $this->append('scripts', $script_name);
+    }
+
+    /**
+     * imprime un javascript en ligne dans le footer
+     */
+    function print_inline_script($script)
+    {
+        $this->append('inline_scripts', $script);
     }
 
     /**

@@ -11,43 +11,43 @@ class Controller
             $facebook_uid = (int) Route::params('facebook_uid');
 
             if($id_contact = Membre::checkPseudoPassword($pseudo, $password)) {
-    
+
                 // Authentification réussie, on ouvre une session
                 $membre = Membre::getInstance($id_contact);
-    
+
                 // update date derniere visite
                 $membre->setVisitedNow();
-    
+
                 if($facebook_uid) {
                     $membre->setFacebookUid($facebook_uid);
                 }
-    
+
                 $membre->save();
-    
+
                 $_SESSION['membre'] = $membre;
-    
+
                 if(!empty($_SESSION['redirect_after_auth'])) {
                     $url = $_SESSION['redirect_after_auth'];
                     unset($_SESSION['redirect_after_auth']);
                 } else {
                     $url = '/membres/tableau-de-bord';
                 }
-    
+
                 Log::action(Log::ACTION_LOGIN);
-    
+
                 Tools::redirect($url);
-    
+
             } else {
-    
+
                 Log::action(Log::ACTION_LOGIN_FAILED);
-    
+
                 $trail = Trail::getInstance();
                 $trail->addStep("Identification");
-    
+
                 $smarty = new AdHocSmarty();
                 $smarty->assign('auth_failed', true);
                 return $smarty->fetch('auth/login.tpl');
-    
+
             }
         }
 
@@ -96,20 +96,22 @@ class Controller
         Tools::auth(Membre::TYPE_STANDARD);
 
         $smarty = new AdHocSmarty();
-              
+
+        $smarty->enqueue_script('change-password.js');
+
         $trail = Trail::getInstance();
         $trail->addStep("Membres", "/membres/tableau-de-bord");
         $trail->addStep("Mon Compte", "/membres/edit/" . $_SESSION['membre']->getId());
         $trail->addStep("Changer le mot de passe");
 
         $membre = Membre::getInstance($_SESSION['membre']->getId());
-                        
+
         if(Tools::isSubmit('form-password-change'))
         {
             $password_old   = trim((string) Route::params('password_old'));
             $password_new_1 = trim((string) Route::params('password_new_1'));
             $password_new_2 = trim((string) Route::params('password_new_2'));
-    
+
             if(($password_old != "") && ($password_new_1 != "") && ($password_new_1 == $password_new_2))
             {
                 if($membre->checkPassword($password_old)) {
@@ -148,7 +150,7 @@ class Controller
             $email = (string) Route::params('email');
             if(Email::validate($email)) {
                 if($id_contact = Membre::getIdByEmail($email)) {
-    
+
                     $membre = Membre::getInstance($id_contact);
                     $new_password = Membre::generatePassword(8);
                     $membre->setPassword($new_password);
@@ -165,7 +167,7 @@ class Controller
                     } else {
                         $smarty->assign('sent_ko', true);
                     }
-    
+
                 } else {
                     if($id_contact = Contact::getIdByEmail($email)) {
                         // pas membre mais contact
@@ -178,8 +180,8 @@ class Controller
             } else {
                 $smarty->assign('err_email_invalid', true);
             }
-    
-            return $smarty->fetch('auth/lost-password.tpl');           
+
+            return $smarty->fetch('auth/lost-password.tpl');
         }
 
         $smarty->assign('form', true);
