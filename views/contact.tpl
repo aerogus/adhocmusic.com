@@ -19,44 +19,6 @@ L'Equipe AD'HOC</div>
 
 <p>Merci de consulter la foire aux questions avant de nous contacter</p>
 
-<script>
-$(function() {
-
-  $("#text").focus(function() {
-    $("#warning").fadeIn();
-  });
-
-  $("#form-contact").submit(function() {
-    var valid = true;
-    if($("#name").val() == "") {
-      $("#error_name").fadeIn();
-      valid = false;
-    } else {
-      $("#error_name").fadeOut();
-    }
-    if($("#email").val() == "" || validateEmail($("#email").val()) == 0) {
-      $("#error_email").fadeIn();
-      valid = false;
-    } else {
-      $("#error_email").fadeOut();
-    }
-    if($("#subject").val() == "") {
-      $("#error_subject").fadeIn();
-      valid = false;
-    } else {
-      $("#error_subject").fadeOut();
-    }
-    if($("#text").val() == "") {
-      $("#error_text").fadeIn();
-      valid = false;
-    } else {
-      $("#error_text").fadeOut();
-    }
-    return valid;
-  });
-});
-</script>
-
 <form id="form-contact" name="form-contact" method="post" action="" enctype="multipart/form-data">
   <ol style="margin: 10px;">
     <li>
@@ -123,12 +85,12 @@ FRANCE</address>
 
 <style>
 div.faq h3 {
-    color: black;
-    margin-bottom: 5px;
-    font-size: 1.1em;
+  color: black;
+  margin-bottom: 5px;
+  font-size: 1.1em;
 }
 div.faq p {
-    margin: 5px 0;
+  margin: 5px 0;
 }
 </style>
 

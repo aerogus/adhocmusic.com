@@ -2,18 +2,6 @@
 
 <div id="left-center">
 
-<script>
-$(function() {
-  $.featureList(
-    $("#tabs li a"),
-    $("#output li"), {
-      start_item: 0,
-      transition_interval: 3000
-    }
-  );
-});
-</script>
-
 <div id="feature_list">
   <ul id="tabs">
     {foreach from=$featured item=f}

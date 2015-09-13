@@ -23,6 +23,7 @@ class Controller
         )));
 
         $smarty->assign('featured', Featured::getFeaturedHomepage());
+        $smarty->enqueue_script('home.js');
 
         $events = Event::getEvents(array(
             'online'      => true,
@@ -93,6 +94,8 @@ class Controller
 
         $smarty->assign('menuselected', 'contact');
 
+        $smarty->enqueue_script('contact.js');
+
         $trail = Trail::getInstance();
         $trail->addStep("Nous Contacter");
 
@@ -148,13 +151,13 @@ class Controller
                 } else {
                     $smarty->assign('sent_ko', true);
                 }
-    
+
                 // 2 - envoi de la copie à l'expéditeur
                 if($data['cc']) {
                      $data['email_reply_to'] = 'site@adhocmusic.com';
                      Email::send($data['email'], "[cc]" . $data['subject'], 'form-contact-cc', $data);
                 }
-    
+
                 if($data['mailing']) {
                     Newsletter::addEmail($data['email']);
                 }
@@ -283,7 +286,7 @@ class Controller
         $smarty = new AdHocSmarty();
 
         return $smarty->fetch('common/header.tpl') . $cms->getContent() . $smarty->fetch('common/footer.tpl');
-    }    
+    }
 
     static function r()
     {
