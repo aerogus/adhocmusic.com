@@ -125,6 +125,9 @@ class AdHocSmarty extends Smarty
 
         ));
 
+        // à décommenter quand tous les scripts jquery seront en footer
+        //$this->enqueue_script('jquery-2.1.4.min.js');
+
         return $this;
     }
 

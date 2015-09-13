@@ -1,0 +1,35 @@
+footer
+  background #292933
+  border-top 1px solid #000
+
+ul.footer
+  max-width 680px
+  margin 0 auto
+
+.footer > li strong
+  display block
+  margin 5px 0
+  color #fff
+
+.footer ul
+  margin 0
+
+.footer > li
+  display inline-block
+  padding 1em
+  vertical-align top
+  width 33%
+
+.footer > li a
+  color #999
+  display inline-block
+  padding 2px 0
+
+vendorize(property, value)
+  -webkit-{property} value
+  {property} value
+
+.footer img
+  vendorize(filter, grayscale(1))
+  margin-right 5px
+

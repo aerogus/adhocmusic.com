@@ -27,8 +27,8 @@
       </li>
     </ol>
     <input id="form-password-change-submit" name="form-password-change-submit" type="submit" class="button" value="Modifier" />
-  </form>
-</fieldset>
+  </fieldset>
+</form>
 {/if}
 
 {include file="common/boxend.tpl"}
