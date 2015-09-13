@@ -236,7 +236,7 @@ abstract class ObjectModel
                         $sql .= $db->escape($this->$att) . ",";
                         break;
                     case 'float':
-                        $sql .= number_format((float) $this->$attr, 8, ".", "") . ",";
+                        $sql .= number_format((float) $this->$att, 8, ".", "") . ",";
                         break;
                     case 'str':
                         $sql .= "'" . $db->escape($this->$att) . "',";
