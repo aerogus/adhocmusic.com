@@ -1,8 +1,9 @@
 {
   "dependencies": {
+    "after-brunch": "0.0.5",
     "brunch": "^1.8.3",
-    "stylus-brunch": "^1.8.1",
+    "clean-css-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
-    "clean-css-brunch": ">= 1.0 < 1.8"
+    "stylus-brunch": "^1.8.1"
   }
 }

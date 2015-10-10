@@ -1,7 +1,7 @@
 AD'HOC
 ======
 
-http://www.adhocmusic.com
+http(s)://www.adhocmusic.com
 
 Technos utilisées
 =================
@@ -35,20 +35,29 @@ Outils de build requis :
 Installation du projet :
 ========================
 
-{{{ git clone git:git.ouifm.fm:festival.git }}}
+{{{ git clone git:git.adhocmusic.com:adhoc.git }}}
 - clonage local du repository
 
 {{{ npm install }}}
-- met à jour les dépendances npm du projet
+{{{ npm update }}}
+- installe/met à jour les dépendances npm définies dans package.json
 
 {{{ bower install }}}
-- met à jour les dépendances js/css définies dans bower.json
+{{{ bower update }}}
+- installe/met à jour les dépendances bower (front) définies dans bower.json
 
 {{{ composer install }}}
 {{{ composer update }}}
-- met à jour les dépendances php définies dans composer.json
+- installe / met à jour les dépendances composer (php) définies dans composer.json
 
 {{{ brunch b }}}
-{{{ brunch b --production }}}
- - copie app/assets dans public
- - concatène/minifie les css et js
+{{{ brunch b -P }}}
+- Brunch compile, concatène, minifie, exporte l'application dans public
+
+{{{ mkdir log && chmod 777 log }}}
+- Créer un répertoire de log et le rendre accessible en écriture au serveur web
+
+{{{ mkdir cache }}}
+{{{ mkdir cache/img && chmod 777 cache/img }}}
+{{{ mkdir cache/smarty && chmod 777 cache/smarty }}}
+- Création des répertoires de cache nécessaires et les rendre acessibles en écriture par le serveur web

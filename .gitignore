@@ -1,5 +1,22 @@
-# cache smarty
+# spam
+.DS_Store
+
+# dépendances npm
+node_modules
+
+# dépendances bower
+# gestionnaire de paquets front-end
+bower_components
+
+# dépendances composer
+# gestionnaire de paquets back-end avec autoloader
+vendor
+
+# cache smarty, images ...
 cache
+
+# medias utilisateurs (video, mp3, photos ...)
+media
 
 # FTP AD'HOC
 ftp
@@ -7,23 +24,5 @@ ftp
 # des logs ...
 log
 
-# cache des imagettes resizées
-static/img/cache
-
-# medias utilisateurs (video, mp3, photos ...)
-static/media
-
-# tmp
-public/transit
-
 # export brunch
-public-brunch
-
-# dépendances npm
-node_modules
-
-# dépendances bower
-bower_components
-
-# dépendances composer
-vendor
+public
