@@ -7,10 +7,10 @@
 <ul class="footer clearfix">
   <li>
     <ul>
-      <li><strong>QUI-SOMMES-NOUS?</strong></li>
+      <li><strong>QUI SOMMES-NOUS?</strong></li>
       <li><a href="/assoce/presentation">L'Association</a></li>
       <li><a href="/assoce/concerts">Nos Concerts</a></li>
-      <li><a href="/assoce/equipe">L'Equipe</a></li>
+      <li><a href="/assoce/equipe">L'Équipe</a></li>
     </ul>
   </li>
   <li>
