@@ -121,10 +121,10 @@ define('MEDIA_FACEBOOK_EMBED_PATTERN',
  */
 
 define('MEDIA_ADHOC_URL_PATTERN',
-       '~^http://static.adhocmusic.com/media/video/([a-zA-Z0-9]{1,32})\.([a-z]{3})~');
+       '~^http://www.adhocmusic.com/media/video/([a-zA-Z0-9]{1,32})\.([a-z]{3})~');
 
 define('MEDIA_ADHOC_DIRECT_VIDEO_URL_PATTERN',
-       '~^http://static.adhocmusic.com/media/video/([a-zA-Z0-9]{1,32})\.([a-z]{3})~');
+       '~^http://www.adhocmusic.com/media/video/([a-zA-Z0-9]{1,32})\.([a-z]{3})~');
 
 define('MEDIA_ADHOC_EMBED_PATTERN',
        '');
@@ -168,7 +168,7 @@ class Video extends Media
      */
     protected static $_table = 'adhoc_video';
 
-    const DEFAULT_THUMBNAIL = 'http://static.adhocmusic.com/img/videothumb.jpg';
+    const DEFAULT_THUMBNAIL = 'http://www.adhocmusic.com/img/videothumb.jpg';
 
     const HOST_YOUTUBE     = 1;
     const HOST_DAILYMOTION = 2;
@@ -268,7 +268,7 @@ class Video extends Media
      */
     protected static function _getLocalPath()
     {
-        return ADHOC_ROOT_PATH . '/static/media/video';
+        return ADHOC_ROOT_PATH . '/media/video';
     }
 
     /**
@@ -739,8 +739,8 @@ class Video extends Media
                 return 'http://b.static.ak.fbcdn.net/swf/mvp.swf?v=' . $reference;
 
             case self::HOST_ADHOC:
-                return 'http://static.adhocmusic.com/jwplayer/player.swf'
-                     . '?file=http://static.adhocmusic.com/media/video/' . $reference
+                return 'http://www.adhocmusic.com/jwplayer/player.swf'
+                     . '?file=http://www.adhocmusic.com/media/video/' . $reference
                      . '&backcolor=990000'
                      . '&frontcolor=FFFFFF'
                      . '&screencolor=000000'
@@ -1056,7 +1056,7 @@ class Video extends Media
         $cache = Image::getLocalCachePath($uid);
 
         if(!file_exists($cache)) {
-            $source = ADHOC_ROOT_PATH . '/static/media/video/' . $id . '.jpg';
+            $source = ADHOC_ROOT_PATH . '/media/video/' . $id . '.jpg';
             if(file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);

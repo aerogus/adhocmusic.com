@@ -104,7 +104,7 @@ class Photo extends Media
      */
     protected static function _getLocalPath()
     {
-        return ADHOC_ROOT_PATH . '/static/media/photo';
+        return ADHOC_ROOT_PATH . '/media/photo';
     }
 
     /**
@@ -503,7 +503,7 @@ class Photo extends Media
         $cache = Image::getLocalCachePath($uid);
 
         if(!file_exists($cache)) {
-            $source = ADHOC_ROOT_PATH . '/static/media/photo/' . $id . '.jpg';
+            $source = ADHOC_ROOT_PATH . '/media/photo/' . $id . '.jpg';
             if(file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);
