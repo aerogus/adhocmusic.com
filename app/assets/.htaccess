@@ -1,0 +1,99 @@
+# .htaccess adhocmusic.com
+
+# Gestion multi environnement
+SetEnvIf Host ^adhocmusic.com$                ADHOC_ENV_PROD
+SetEnvIf Host ^www\.adhocmusic\.com$          ADHOC_ENV_PROD
+SetEnvIf Host ^static\.adhocmusic\.com$       ADHOC_ENV_PROD
+SetEnvIf Host ^adhocmusic\.localhost$         ADHOC_ENV_DEV
+SetEnvIf Host ^www\.adhocmusic\.localhost$    ADHOC_ENV_DEV
+SetEnvIf Host ^static\.adhocmusic\.localhost$ ADHOC_ENV_DEV
+
+RewriteEngine on
+
+# ajout des www si omis sur la prod - https
+RewriteCond %{ENV:ADHOC_ENV_PROD} !^$
+RewriteCond %{HTTP_HOST} !^www.adhocmusic.com$ [NC]
+RewriteCond %{HTTPS} on [OR]
+RewriteCond %{HTTP:X-Forwarded-Proto} https
+RewriteRule ^(.*)$ https://www.adhocmusic.com/$1 [R=301,L]
+
+# ajout des www si omis sur la prod - http
+RewriteCond %{ENV:ADHOC_ENV_PROD} !^$
+RewriteCond %{HTTP_HOST} !^www.adhocmusic.com$ [NC]
+RewriteCond %{HTTPS} !on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ http://www.adhocmusic.com/$1 [R=301,L]
+
+# ajout des www si omis sur le dev - https
+RewriteCond %{ENV:ADHOC_ENV_DEV} !^$
+RewriteCond %{HTTP_HOST} !^www.adhocmusic.localhost$ [NC]
+RewriteCond %{HTTPS} on [OR]
+RewriteCond %{HTTP:X-Forwarded-Proto} https
+RewriteRule ^(.*)$ https://www.adhocmusic.localhost/$1 [R=301,L]
+
+# ajout des www si omis sur le dev - http
+RewriteCond %{ENV:ADHOC_ENV_DEV} !^$
+RewriteCond %{HTTP_HOST} !^www.adhocmusic.localhost$ [NC]
+RewriteCond %{HTTPS} !on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ http://www.adhocmusic.localhost/$1 [R=301,L]
+
+# encodage caractères
+AddDefaultCharset utf-8
+AddCharset utf-8 .html .xhtml .xml .rss .json .jsonp .css .js
+
+# gestion expirations
+<ifModule mod_expires.c>
+# data
+ExpiresByType text/html                     "access plus 0 seconds"
+ExpiresByType application/xml               "access plus 0 seconds"
+ExpiresByType application/json              "access plus 0 seconds"
+
+# images
+ExpiresByType image/gif                     "access plus 30 days"
+ExpiresByType image/png                     "access plus 30 days"
+ExpiresByType image/jpg                     "access plus 30 days"
+ExpiresByType image/jpeg                    "access plus 30 days"
+
+# favicon
+ExpiresByType image/ico                     "access plus 30 days"
+ExpiresByType image/x-icon                  "access plus 30 days"
+
+# css and javascript
+ExpiresByType text/css                      "access plus 30 days"
+ExpiresByType text/javascript               "access plus 30 days"
+ExpiresByType application/x-javascript      "access plus 30 days"
+ExpiresByType application/javascript        "access plus 30 days"
+
+# webfonts
+ExpiresByType application/vnd.bw-fontobject "access plus 30 days"
+ExpiresByType application/x-font-ttf        "access plus 30 days"
+ExpiresByType application/x-woff            "access plus 30 days"
+ExpiresByType application/font-woff         "access plus 30 days"
+</ifModule>
+
+# compression gzip
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/xml text/css text/plain text/javascript application/javascript application/x-javascript application/json
+</IfModule>
+
+DirectoryIndex index.php
+
+Options +FollowSymlinks
+Options -Indexes
+Options -MultiViews
+
+# type mime
+AddType application/javascript         js
+AddType video/mp4                      mp4
+AddType application/vnd.ms-fontobject  eot
+AddType application/x-font-ttf         ttf
+AddType image/x-icon                   ico
+
+# route unique
+FallbackResource /index.php
+
+ErrorDocument 400 "400"
+ErrorDocument 403 "403"
+ErrorDocument 404 "404"
+ErrorDocument 500 "500"
