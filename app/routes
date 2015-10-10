@@ -161,7 +161,6 @@
 1|groupes|playlist|GET|/groupes/playlist/:id
 
 1|index|index|GET|/
-1|index|index|GET|/index
 1|index|shop|GET|/shop
 1|index|partners|GET|/partners
 1|index|visuels|GET|/visuels
@@ -190,8 +189,8 @@
 1|lieux|geocode|GET|/lieux/geocode
 1|lieux|fetch|GET|/lieux/fetch
 
-1|media|index|GET|/medias/
-1|media|search_results|GET|/medias/search-results
+1|media|index|GET|/media/
+1|media|search_results|GET|/media/search-results
 
 1|membres|tableau_de_bord|GET|/membres/tableau-de-bord
 1|membres|show|GET|/membres/show/:id
