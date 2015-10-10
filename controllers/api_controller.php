@@ -1,7 +1,7 @@
 <?php
 
 /**
- *
+ * API AD'HOC
  */
 class Controller
 {
@@ -17,7 +17,7 @@ class Controller
         $sort    = (string) Route::params('sort');
         $debut   = (int) Route::params('debut');
         $limit   = (int) Route::params('limit');
-    
+
         $videos  = Video::getVideos(array(
             'groupe'  => $groupe,
             'event'   => $event,
@@ -41,7 +41,7 @@ class Controller
         $lieu    = (int) Route::params('lieu');
         $contact = (int) Route::params('contact');
         $sort    = (string) Route::params('sort');
-        $debut   = (int) Route::params('debut'); 
+        $debut   = (int) Route::params('debut');
         $limit   = (int) Route::params('limit');
 
         $audios  = Audio::getAudios(array(
@@ -50,7 +50,7 @@ class Controller
             'lieu'    => $lieu,
             'contact' => $contact,
             'sort'    => $sort,
-            'debut'   => $debut, 
+            'debut'   => $debut,
             'limit'   => $limit,
         ));
 
@@ -67,7 +67,7 @@ class Controller
         $lieu    = (int) Route::params('lieu');
         $contact = (int) Route::params('contact');
         $sort    = (string) Route::params('sort');
-        $debut   = (int) Route::params('debut'); 
+        $debut   = (int) Route::params('debut');
         $limit   = (int) Route::params('limit');
 
         $photos  = Photo::getPhotos(array(
@@ -93,7 +93,7 @@ class Controller
         $datdeb = (string) Route::params('datdeb');
         $datfin = (string) Route::params('datfin');
         $sort   = (string) Route::params('sort');
-        $debut  = (int) Route::params('debut'); 
+        $debut  = (int) Route::params('debut');
         $limit  = (int) Route::params('limit');
 
         $events = Event::getEvents(array(
@@ -107,86 +107,5 @@ class Controller
         ));
 
         return $events;
-    }
-
-    /**
-     *
-     */
-    static function doc()
-    {
-        $smarty = new AdHocSmarty();
-
-        $smarty->assign('source_client', highlight_file(ADHOC_LIB_PATH . '/AdHocClientApi.class.php', true));
-
-        return $smarty->fetch('api/doc.tpl');
-    }
-
-    /**
-     *
-     */
-    static function console()
-    {
-        $action  = (string) Route::params('action');
-        $format  = (string) Route::params('format');
-        $groupe  = (int) Route::params('groupe');
-        $event   = (int) Route::params('event');
-        $datdeb  = (string) Route::params('datdeb');
-        $datfin  = (string) Route::params('datfin');
-        $lieu    = (int) Route::params('lieu');
-        $contact = (int) Route::params('contact');
-        $sort    = (string) Route::params('sort');
-        $sens    = (string) Route::params('sens');
-        $debut   = (int) Route::params('debut');
-        $limit   = (int) Route::params('limit');
-
-        $smarty = new AdHocSmarty();
-
-        $smarty->assign('actions', array(
-            'events',
-            'audios',
-            'videos',
-            'photos',
-        ));
-
-        $smarty->assign('formats', array(
-            'json',
-            'phpser',
-            'txt',
-        ));
-
-        $smarty->assign('action', $action);
-        $smarty->assign('format', $format);
-        $smarty->assign('groupe', $groupe);
-        $smarty->assign('event', $event);
-        $smarty->assign('datdeb', $datdeb);
-        $smarty->assign('datfin', $datfin);
-        $smarty->assign('lieu', $lieu);
-        $smarty->assign('contact', $contact);
-        $smarty->assign('sort', $sort);
-        $smarty->assign('sens', $sens);
-        $smarty->assign('debut', $debut);
-        $smarty->assign('limit', $limit);
-
-        if(Tools::isSubmit('form-console')) {
-            $resp = AdHocClientApi::query(
-                array(
-                    'action'  => $action,
-                    'format'  => $format,
-                    'groupe'  => $groupe,
-                    'event'   => $event,
-                    'datdeb'  => $datdeb,
-                    'datfin'  => $datfin,
-                    'lieu'    => $lieu,
-                    'contact' => $contact,
-                    'sort'    => $sort,
-                    'sens'    => $sens,
-                    'debut'   => $debut,
-                    'limit'   => $limit,
-                )
-            );
-            $smarty->assign('resp', $resp);
-        }
-
-        return $smarty->fetch('api/console.tpl');
     }
 }
