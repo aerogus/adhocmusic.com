@@ -15,6 +15,6 @@ exports.config =
   plugins:
     # à n'exécuter qu'une fois
     afterBrunch: [
-      'unlink ./public/media && ln -s ../media ./public/media',
-      'unlink ./public/img/cache && ln -s ../../cache/img ./public/img/cache'
+      #'unlink ./public/media && ln -s ../media ./public/media',
+      #'unlink ./public/img/cache && ln -s ../../cache/img ./public/img/cache'
     ]
