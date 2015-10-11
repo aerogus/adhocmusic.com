@@ -2,7 +2,7 @@
 
 <script>
 
-$(function() {
+$(function () {
 
   var center = new google.maps.LatLng({$my_geocode});
   var map = new google.maps.Map(document.getElementById("map_canvas"), {

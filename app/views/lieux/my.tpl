@@ -1,7 +1,7 @@
 {include file="common/header.tpl" js_jquery_tablesorter=true}
 
 <script>
-$(function() {
+$(function () {
   $("#meslieux").tablesorter();
 });
 </script>

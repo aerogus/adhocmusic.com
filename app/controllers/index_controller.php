@@ -23,6 +23,7 @@ class Controller
         )));
 
         $smarty->assign('featured', Featured::getFeaturedHomepage());
+        $smarty->enqueue_script('jquery.featureList-1.0.0.js');
         $smarty->enqueue_script('home.js');
 
         $events = Event::getEvents(array(

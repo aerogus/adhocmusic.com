@@ -17,7 +17,7 @@
 {include file="common/boxstart.tpl" boxtitle=$lieu->getName()|escape}
 
 <script>
-$(function() {
+$(function () {
   var center = new google.maps.LatLng({$lieu->getGeocode()});
   var map = new google.maps.Map(document.getElementById("map_canvas"), {
     zoom: 15,

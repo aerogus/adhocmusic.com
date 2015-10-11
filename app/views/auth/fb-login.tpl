@@ -3,16 +3,16 @@
 {if empty($is_auth)}
 
 <script>
-$(function() {
-  $("#form-login").submit(function() {
+$(function () {
+  $("#form-login").submit(function () {
     var valid = true;
-    if($("#pseudo").val() == "") {
+    if ($("#pseudo").val() === "") {
       $("#pseudo").prev(".error").fadeIn();
       valid = false;
     } else {
       $("#pseudo").prev(".error").fadeOut();
     }
-    if($("#password").val() == "") {
+    if ($("#password").val() === "") {
       $("#password").prev(".error").fadeIn();
       valid = false;
     } else {
@@ -47,4 +47,3 @@ $(function() {
 {/if}
 
 {include file="common/footer.tpl"}
-

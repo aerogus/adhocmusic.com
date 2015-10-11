@@ -1,28 +1,28 @@
 <script>
-$(function() {
-  $("#form-comment-box-write").submit(function() {
+$(function () {
+  $("#form-comment-box-write").submit(function () {
     var valid = true;
 {if empty($is_auth)}
-    if($("#form-comment-box-pseudo").val() == "") {
+    if ($("#form-comment-box-pseudo").val() == "") {
       $("#error_pseudo").fadeIn();
       valid = false;
     } else {
       $("#error_pseudo").fadeOut();
     }
-    if($("#form-comment-box-email").val() == "") {
+    if ($("#form-comment-box-email").val() == "") {
       $("#error_email").fadeIn();
       valid = false;
     } else {
       $("#error_email").fadeOut();
     }
-    if($("#form-comment-box-antispam").val() != "oui") {
+    if ($("#form-comment-box-antispam").val() != "oui") {
       $("#error_antispam").fadeIn();
       valid = false;
     } else {
       $("#error_antispam").fadeOut();
     }
 {/if}
-    if($("#form-comment-box-text").val() == "") {
+    if ($("#form-comment-box-text").val() == "") {
       $("#error_text").fadeIn();
       valid = false;
     } else {
@@ -146,4 +146,3 @@ $(function() {
   </ol>
 </form>
 </div>
-

@@ -51,8 +51,12 @@
 {if !empty($css_jquery_ui)}
 <link rel="stylesheet" href="{#STATIC_URL#}/css/adhoc/jquery-ui-1.8.2.custom.css">
 {/if}
+
+{* js communs à toutes les pages *}
+{* à terme utiliser enqueue_script et mettre en footer *}
 <script src="/js/jquery-2.1.4.min.js"></script>
-<script src="/js/adhoc.min.js"></script>
+<script src="/js/adhoc.js"></script>
+
 {if !empty($js_jquery_tools)}
 <script src="{#STATIC_URL#}/js/jquery.tools.min.js"></script>
 {/if}
@@ -71,15 +75,13 @@
 {if !empty($js_jquery_tablesorter)}
 <script src="{#STATIC_URL#}/js/jquery.tablesorter.min.js"></script>
 {/if}
-{if !empty($js_jquery_jcrop)}
-<script src="{#STATIC_URL#}/js/jquery.Jcrop.min.js"></script>
-{/if}
 {if !empty($js_gmap)}
 <script src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false&region=FR"></script>
 {/if}
 {if !empty($js_jquery_tinymce)}
 <script src="{#STATIC_URL#}/tinymce/jquery.tinymce.js"></script>
 {/if}
+
 <script>
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-1420343-1']);
@@ -106,30 +108,30 @@ _gaq.push(['_trackPageview']);
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <script>
-$(function() {
+$(function () {
 
   window.fbAsyncInit = function() {
 
-  FB.init({
-    appId : '50959607741',
-    xfbml : false,
-    version : 'v2.5'
-  });
-
-  FB.getLoginStatus(function(response) {
-    if (response.authResponse) {
-      $('#fb-access-token').val(response.authResponse.accessToken);
-    } else {
-      // do something...maybe show a login prompt
-    }
-  });
-
-  $('#ask_permissions').click(function () {
-    FB.login(function(response) {
-    },{
-      perms: 'manage_pages'
+    FB.init({
+      appId : '50959607741',
+      xfbml : false,
+      version : 'v2.5'
     });
-  });
+
+    FB.getLoginStatus(function(response) {
+      if (response.authResponse) {
+        $('#fb-access-token').val(response.authResponse.accessToken);
+      } else {
+        // do something...maybe show a login prompt
+      }
+    });
+
+    $('#ask_permissions').click(function () {
+      FB.login(function(response) {
+      },{
+        perms: 'manage_pages'
+      });
+    });
 
   };
 

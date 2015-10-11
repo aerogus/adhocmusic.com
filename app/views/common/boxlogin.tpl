@@ -29,16 +29,16 @@
 {else}
 
 <script>
-$(function() {
-  $("#form-login").submit(function() {
+$(function () {
+  $("#form-login").submit(function () {
     var valid = true;
-    if($("#login-pseudo").val() == "") {
+    if ($("#login-pseudo").val() === "") {
       $("#login-pseudo").prev(".error").fadeIn();
       valid = false;
     } else {
       $("#login-pseudo").prev(".error").fadeOut();
     }
-    if($("#login-password").val() == "") {
+    if ($("#login-password").val() === "") {
       $("#login-password").prev(".error").fadeIn();
       valid = false;
     } else {

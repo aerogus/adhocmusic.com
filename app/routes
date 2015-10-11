@@ -173,12 +173,8 @@
 1|index|cms|GET|/cms/:id
 1|index|r|GET|/r/:url
 
-1|js|adhoc|GET|/js/adhoc
-
 1|lieux|index|GET|/lieux/
 1|lieux|show|GET|/lieux/show/:id
-1|lieux|pano_PTDefault|GET|/lieux/pano/PTDefault
-1|lieux|pano|GET|/lieux/pano/:id
 1|lieux|my|GET|/lieux/my
 1|lieux|create|GET|/lieux/create
 1|lieux|create|POST|/lieux/create
