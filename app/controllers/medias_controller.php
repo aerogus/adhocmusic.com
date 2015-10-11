@@ -65,7 +65,7 @@ class Controller
         ));
         $smarty->assign('comments', $comments);
 
-        return $smarty->fetch('media/index.tpl');
+        return $smarty->fetch('medias/index.tpl');
     }
 
     static function search_results()
@@ -96,6 +96,6 @@ class Controller
 
         $smarty = new AdHocSmarty();
         $smarty->assign('search_media', $search_media);
-        return $smarty->fetch('media/search-results.tpl');
+        return $smarty->fetch('medias/search-results.tpl');
     }
 }
