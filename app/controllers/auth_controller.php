@@ -69,11 +69,6 @@ class Controller
     {
         $redirect = 'http://www.adhocmusic.com/?logout';
 
-        // delog appli facebook
-        //if(!empty($_SESSION['fb'])) {
-        //    $redirect = $_SESSION['fb']->getLogoutUrl(array('next' => 'http://www.adhocmusic.com/auth/logout'));
-        //}
-
         // si bien identifié, destruction de la session
         if(!empty($_SESSION['membre'])) {
             Log::action(Log::ACTION_LOGOUT);

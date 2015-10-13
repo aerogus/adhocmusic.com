@@ -32,13 +32,13 @@
 $(function () {
   $("#form-login").submit(function () {
     var valid = true;
-    if ($("#login-pseudo").val() === "") {
+    if (!$("#login-pseudo").val().length) {
       $("#login-pseudo").prev(".error").fadeIn();
       valid = false;
     } else {
       $("#login-pseudo").prev(".error").fadeOut();
     }
-    if ($("#login-password").val() === "") {
+    if (!$("#login-password").val().length) {
       $("#login-password").prev(".error").fadeIn();
       valid = false;
     } else {
@@ -58,7 +58,7 @@ $(function () {
   <h5>Avec AD'HOC</h5>
 </div>
 
-<form id="form-login" name="form-login" method="post" action="/auth/login">
+<form id="form-login" name="form-login" method="post" action="https://www.adhocmusic.com/auth/login">
   <div class="error" id="error_login-pseudo"{if empty($error_login_pseudo)} style="display: none"{/if}>Pseudo vide !</div>
   <input size="18" type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo" />
   <div class="error" id="error_login-password"{if empty($error_login_password)} style="display: none"{/if}>Password vide !</div>

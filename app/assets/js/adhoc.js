@@ -85,11 +85,6 @@ $(function () {
     $(this).find("ul").hide();
   });
 
-  // fil d'ariane
-  $("#breadCrumb").jBreadCrumb({
-    beginingElementsToLeaveOpen: 8
-  });
-
   // thumbnail photo et video
   $(".thumb-80").hover(function () {
     $(this).children('.overlay-80').css('visibility', 'visible');
