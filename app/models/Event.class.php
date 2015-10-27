@@ -1526,7 +1526,7 @@ class Event extends ObjectModel
         $cache = Image::getLocalCachePath($uid);
 
         if(!file_exists($cache)) {
-            $source = ADHOC_ROOT_PATH . '/static/media/event/' . $id . '.jpg';
+            $source = ADHOC_ROOT_PATH . '/media/event/' . $id . '.jpg';
             if(file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);
