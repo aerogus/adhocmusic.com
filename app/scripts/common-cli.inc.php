@@ -15,16 +15,16 @@ define('_DB_USER_',             'adhocmusic');
 define('_DB_PASSWORD_',         'kK2972Wd');
 define('_DB_DATABASE_',         'adhocmusic');
 
-define('ADHOC_ROOT_PATH',   dirname(dirname(__FILE__)));
-define('ADHOC_LIB_PATH',    ADHOC_ROOT_PATH . '/models');
+define('ADHOC_ROOT_PATH',   dirname(dirname(dirname(__FILE__))));
+define('ADHOC_LIB_PATH',    ADHOC_ROOT_PATH . '/app/models');
 define('ADHOC_LOG_PATH',    ADHOC_ROOT_PATH . '/log');
 define('DB_ADHOC_DEFAULT',  1);
 
-define('SMARTY_TEMPLATE_PATH',   ADHOC_ROOT_PATH . '/www/views');
+define('SMARTY_TEMPLATE_PATH',   ADHOC_ROOT_PATH . '/app/views');
 define('SMARTY_TEMPLATE_C_PATH', ADHOC_ROOT_PATH . '/cache/smarty');
 
-define('STATIC_URL', 'http://www.adhocmusic.com');
-define('CACHE_URL',  'http://www.adhocmusic.com');
+define('STATIC_URL', 'https://www.adhocmusic.com');
+define('CACHE_URL',  'https://www.adhocmusic.com');
 
 // App AD'HOC Music
 define('FB_APP_ID', '50959607741');

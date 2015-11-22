@@ -1,18 +1,18 @@
 <?php
 
-define('DYNIMG_CACHE_PATH', ADHOC_ROOT_PATH . '/static/img/cache');
+define('DYNIMG_CACHE_PATH', ADHOC_ROOT_PATH . '/public/img/cache');
 define('DYNIMG_CACHE_ENABLED', true);
 
 class Controller
 {
     static function mailing_banner()
     {
-        return self::trackable_image(ADHOC_ROOT_PATH . '/static/img/bandeau-mailing.jpg');
+        return self::trackable_image(ADHOC_ROOT_PATH . '/public/img/bandeau-mailing.jpg');
     }
 
     static function logo_adhoc()
     {
-        return self::trackable_image(ADHOC_ROOT_PATH . '/static/img/logo_adhoc.jpg');
+        return self::trackable_image(ADHOC_ROOT_PATH . '/public/img/logo_adhoc.jpg');
     }
 
     static function trackable_image($image)
@@ -72,7 +72,7 @@ class Controller
             return file_get_contents($cache);
         }
 
-        $source = ADHOC_ROOT_PATH . '/static/media/photo/' . $id . '.jpg';
+        $source = ADHOC_ROOT_PATH . '/media/photo/' . $id . '.jpg';
 
         if(file_exists($source)) {
             $img = new Image($source);
@@ -113,7 +113,7 @@ class Controller
             return file_get_contents($cache);
         }
 
-        $source = ADHOC_ROOT_PATH . '/static/media/video/' . $id . '.jpg';
+        $source = ADHOC_ROOT_PATH . '/media/video/' . $id . '.jpg';
 
         if(file_exists($source)) {
             $img = new Image($source);
@@ -154,7 +154,7 @@ class Controller
             return file_get_contents($cache);
         }
 
-        $source = ADHOC_ROOT_PATH . '/static/media/event/' . $id . '.jpg';
+        $source = ADHOC_ROOT_PATH . '/media/event/' . $id . '.jpg';
 
         if(file_exists($source)) {
             $img = new Image($source);
@@ -232,7 +232,7 @@ class Controller
             return file_get_contents($cache);
         }
 
-        $source = ADHOC_ROOT_PATH . '/static/media/featured/' . $id . '.jpg';
+        $source = ADHOC_ROOT_PATH . '/media/featured/' . $id . '.jpg';
 
         if(file_exists($source)) {
             $img = new Image($source);
@@ -328,3 +328,4 @@ class Controller
         }
     }
 }
+

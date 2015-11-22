@@ -13,7 +13,7 @@ define('NEWSLETTER_UNSUB_KO_ALREADY_UNSUBSCRIBED_MEMBER', 0x22);
 define('NEWSLETTER_UNSUB_OK_CONTACT_DELETED', 0x23);
 define('NEWSLETTER_UNSUB_KO_UNKNOWN_CONTACT', 0x24);
 
-define('NEWSLETTER_TEMPLATE_PATH', ADHOC_ROOT_PATH . '/www/views/emails');
+define('NEWSLETTER_TEMPLATE_PATH', ADHOC_ROOT_PATH . '/app/views/emails');
 
 /**
  * Classe de gestion de la newsletter AD'HOC
@@ -132,7 +132,7 @@ class Newsletter extends ObjectModel
      */
     function getUrl()
     {
-        return 'http://www.adhocmusic.com/emails/newsletter/' . $this->getId();
+        return 'https://www.adhocmusic.com/emails/newsletter/' . $this->getId();
     }
 
     /**
@@ -417,3 +417,4 @@ class Newsletter extends ObjectModel
         }
     }
 }
+

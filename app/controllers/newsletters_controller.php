@@ -39,7 +39,7 @@ class Controller
 
         $smarty->assign('title', $newsletter->getTitle());
         $smarty->assign('description', substr(strip_tags($newsletter->getBodyHtml()), 0, 500));
-        $smarty->assign('og_image', 'http://cache.adhocmusic.com/img/c/9/3/c938aee4553db039b3b6a8ca203f01a3.jpg'); // 5 nov.
+        $smarty->assign('og_image', 'https://www.adhocmusic.com/img/cache/c/9/3/c938aee4553db039b3b6a8ca203f01a3.jpg'); // 5 nov.
         $smarty->assign('newsletter', $newsletter);
 
         $trail = Trail::getInstance();
@@ -121,3 +121,4 @@ class Controller
         return $smarty->fetch('newsletters/subscriptions.tpl');
     }
 }
+
