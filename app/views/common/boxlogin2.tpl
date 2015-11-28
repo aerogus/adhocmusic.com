@@ -13,7 +13,7 @@
 </p>
 
 <ul class="mbr">
-  <li class="mbrmessagerie"><a href="/messagerie/">Ma Messagerie</a> (<strong>{$my_counters.nb_unread_messages}</strong>/{$my_counters.nb_messages})</li>
+  <li><a href="/messagerie/">Ma Messagerie</a> (<strong>{$my_counters.nb_unread_messages}</strong>/{$my_counters.nb_messages})</li>
   <li class="mbrcompte"><a href="/membres/edit/{$me->getId()}">Mon Compte</a></li>
   {if $my_counters.nb_groupes > 0}
   <li class="mbrgroupes"><a href="/groupes/my">Mes Groupes</a> ({$my_counters.nb_groupes})</li>

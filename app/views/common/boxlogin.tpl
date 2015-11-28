@@ -13,17 +13,17 @@
 </p>
 
 <ul class="mbr">
-  <li class="mbrmessagerie"><a href="/messagerie/">Ma Messagerie</a> (<strong>{$my_counters.nb_unread_messages}</strong>/{$my_counters.nb_messages})</li>
-  <li class="mbralerting"><a href="/alerting/my">Mes Alertes</a></li>
-  <li class="mbrcompte"><a href="/membres/edit/{$me->getId()}">Mes infos persos</a></li>
-  <li class="mbrgroupes"><a href="/groupes/my">Mes Groupes</a></li>
-  <li class="mbrphotos"><a href="/photos/my">Mes Photos</a></li>
-  <li class="mbraudios"><a href="/audios/my">Mes Musiques</a></li>
-  <li class="mbrvideos"><a href="/videos/my">Mes Vidéos</a></li>
+  <li><a href="/messagerie/">Ma Messagerie</a> (<strong>{$my_counters.nb_unread_messages}</strong>/{$my_counters.nb_messages})</li>
+  <li><a href="/alerting/my">Mes Alertes</a></li>
+  <li><a href="/membres/edit/{$me->getId()}">Mes infos persos</a></li>
+  <li><a href="/groupes/my">Mes Groupes</a></li>
+  <li><a href="/photos/my">Mes Photos</a></li>
+  <li><a href="/audios/my">Mes Musiques</a></li>
+  <li><a href="/videos/my">Mes Vidéos</a></li>
   {if $me->isInterne()}
-  <li class="mbradmin"><a href="/adm/">Zone Privée</a></li>
+  <li><a href="/adm/">Zone Privée</a></li>
   {/if}
-  <li class="mbrlogout"><a href="/auth/logout">Déconnexion</a></li>
+  <li><a href="/auth/logout">Déconnexion</a></li>
 </ul>
 
 {else}

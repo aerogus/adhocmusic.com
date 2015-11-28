@@ -20,14 +20,13 @@ $(function() {
 {foreach from=$subs item=sub}
 <a href="/membres/show/{$sub.id_contact}" title="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}"><img src="{#STATIC_URL#}/media/membre/ca/{$sub.id_contact}.jpg" class="thread-avatar" alt="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}" /></a>
 {/foreach}
-<br style="clear: both" />
 </div>
 
 <a class="button" href="/adm/forums/write?id_forum={$forum.id_forum|escape}">Nouveau sujet</a>
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-<table style="width: 100%">
+<table>
   <thead>
     <tr>
       <th>Sujet <em>(Réponses)</em></th>

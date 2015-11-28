@@ -2,7 +2,7 @@
 
 {include file="common/boxstart.tpl" boxtitle="Forums privés"}
 
-<table style="width: 100%">
+<table>
   <thead>
     <tr>
       <th>Forum</th>

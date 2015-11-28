@@ -1,4 +1,4 @@
-{include file="common/header.tpl" js_jquery_tinymce=true}
+{include file="common/header.tpl"}
 
 {include file="common/boxstart.tpl" boxtitle="Ecrire un message"}
 
@@ -7,7 +7,7 @@ $(function() {
 
   $('textarea.tinymce').tinymce({
     // Location of TinyMCE script
-    script_url : 'http://static.adhocmusic.com/tinymce/tiny_mce.js',
+    script_url : '//www.adhocmusic.com/tinymce/tiny_mce.js',
 
     // General options
     theme : "advanced",
@@ -65,7 +65,7 @@ $(function() {
       <li>
         <label for="subject">Sujet</label>
         <div class="error" id="error_subject"{if empty($error_subject)} style="display: none"{/if}>Vous devez saisir un sujet</div>
-        <input name="subject" id="subject" type="text" maxlength="80" value="{$subject|escape}" style="width: 360px;" />
+        <input name="subject" id="subject" type="text" maxlength="80" value="{$subject|escape}" style="width: 360px;">
       </li>
       <li>
         <label for="text">Message</label>
@@ -73,13 +73,13 @@ $(function() {
         <textarea class="tinymce" name="text" id="text" rows="10" cols="80" style="width: 100%;">{$text|escape}</textarea>
       </li>
       <li>
-        <input id="form-forum-write-submit" name="form-forum-write-submit" type="submit" value="Envoyer" class="button" style="padding: 5px 0;" />
+        <input id="form-forum-write-submit" name="form-forum-write-submit" type="submit" value="Envoyer" class="button" style="padding: 5px 0;">
       </li>
     </ol>
   </fieldset>
-  <input name="check" id="check" type="hidden" value="{$check|escape}" />
-  <input name="id_forum" id="id_forum" type="hidden" value="{$id_forum|escape}" />
-  <input name="id_thread" id="id_thread" type="hidden" value="{$id_thread|escape}" />
+  <input name="check" id="check" type="hidden" value="{$check|escape}">
+  <input name="id_forum" id="id_forum" type="hidden" value="{$id_forum|escape}">
+  <input name="id_thread" id="id_thread" type="hidden" value="{$id_thread|escape}">
 </form>
 
 {include file="common/boxend.tpl"}
