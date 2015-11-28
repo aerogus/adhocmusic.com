@@ -43,8 +43,9 @@ var adhoc = {
 };
 
 function validateEmail(email) {
-  var reg = '/^[a-z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,3}$/';
-  return (reg.exec(email) !== null);
+  //var re = /^[a-z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,3}$/;
+  var re = /\S+@\S+\.\S+/;
+  return re.test(email);
 }
 
 function toggleDiv(id) {
