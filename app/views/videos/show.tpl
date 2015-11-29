@@ -86,3 +86,4 @@
 {/if} {* test unknown video *}
 
 {include file="common/footer.tpl"}
+
