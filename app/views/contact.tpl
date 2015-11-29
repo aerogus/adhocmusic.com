@@ -20,21 +20,21 @@ L'Equipe AD'HOC</div>
 <p>Merci de consulter la foire aux questions avant de nous contacter</p>
 
 <form id="form-contact" name="form-contact" method="post" action="" enctype="multipart/form-data">
-  <ol style="margin: 10px;">
+  <ol>
     <li>
       <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner votre nom</div>
       <label for="name">Nom</label>
-      <input name="name" id="name" type="text" maxlength="80" value="{$name|escape}" style="width: 360px; padding: 5px;" />
+      <input name="name" id="name" type="text" maxlength="80" value="{$name|escape}" style="width: 360px; padding: 5px;">
     </li>
     <li>
       <div class="error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Votre Email est incorrect</div>
       <label for="email">Email</label>
-      <input name="email" id="email" type="email" maxlength="80" value="{$email|escape}" style="width: 360px; padding: 5px;" />
+      <input name="email" id="email" type="email" maxlength="80" value="{$email|escape}" style="width: 360px; padding: 5px;">
     </li>
     <li>
       <div class="error" id="error_subject"{if empty($error_subject)} style="display: none"{/if}>Vous devez saisir un sujet</div>
       <label for="subject">Sujet</label>
-      <input name="subject" id="subject" type="text" maxlength="80" value="{$subject|escape}" style="width: 360px; padding: 5px;" />
+      <input name="subject" id="subject" type="text" maxlength="80" value="{$subject|escape}" style="width: 360px; padding: 5px;">
     </li>
     <li>
       <div id="warning" class="warning" style="display: none">
@@ -51,21 +51,21 @@ L'Equipe AD'HOC</div>
     </li>
     <li>
       <label for="attachment">Pièce jointe ( &lt; 2 Mo )</label>
-      <input type="file" id="attachment" name="attachment" />
+      <input type="file" id="attachment" name="attachment">
     </li>
     <li>
       <label for="cc">Recevoir une copie par mail</label>
-      <input type="checkbox" id="cc" name="cc" checked="{if !empty($cc)}checked{/if}" />
+      <input type="checkbox" id="cc" name="cc" checked="{if !empty($cc)}checked{/if}">
     </li>
     <li>
       <label for="mailing">J'accepte de recevoir la newsletter mensuelle</label>
-      <input type="checkbox" id="mailing" name="mailing" checked="{if !empty($mailing)}checked{/if}" />
+      <input type="checkbox" id="mailing" name="mailing" checked="{if !empty($mailing)}checked{/if}">
     </li>
     <li>
-      <input id="form-contact-submit" name="form-contact-submit" type="submit" value="Envoyer" class="button" style="padding: 5px 0;" />
+      <input id="form-contact-submit" name="form-contact-submit" type="submit" value="Envoyer" class="button" style="padding: 5px 0;">
     </li>
   </ol>
-  <input name="check" id="check" type="hidden" value="{$check|escape}" />
+  <input name="check" id="check" type="hidden" value="{$check|escape}">
 </form>
 
 {/if}
@@ -82,17 +82,6 @@ L'Equipe AD'HOC</div>
 91360 Epinay sur Orge<br />
 FRANCE</address>
 {include file="common/boxend.tpl"}
-
-<style>
-div.faq h3 {
-  color: black;
-  margin-bottom: 5px;
-  font-size: 1.1em;
-}
-div.faq p {
-  margin: 5px 0;
-}
-</style>
 
 {include file="common/boxstart.tpl" boxtitle="Foire aux questions"}
 

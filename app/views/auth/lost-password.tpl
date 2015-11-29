@@ -19,7 +19,6 @@
 {/if}
 
 <script>
-// <![CDATA[
 $(function() {
   $("#form-lost-password").submit(function() {
     var valid = true;
@@ -40,16 +39,16 @@ $(function() {
     return valid;
   });
 });
-// ]]>
 </script>
 
 {if !empty($form)}
 <form id="form-lost-password" name="form-lost-password" method="post" action="/auth/lost-password">
-  <p>Vous avez égaré votre mot de passe ?<br />Veuillez entrer l'adresse email que vous avez utilisé pour l'inscription, un nouveau mot de passe vous sera envoyé par email.</p>
+  <p>Vous avez égaré votre mot de passe ?<br>
+  Veuillez entrer l'adresse email que vous avez utilisé pour l'inscription, un nouveau mot de passe vous sera envoyé par email.</p>
   <label for="email">Email</label>
   <div class="error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez renseigner votre email ou email invalide</div>
-  <input name="email" id="email" type="text" size="40" maxlength="50" />
-  <input id="form-lost-password-submit" name="form-lost-password-submit" type="submit" value="Ok" />
+  <input name="email" id="email" type="text" size="40" maxlength="50">
+  <input id="form-lost-password-submit" name="form-lost-password-submit" type="submit" value="Ok">
 </form>
 {/if}
 

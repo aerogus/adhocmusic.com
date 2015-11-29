@@ -8,14 +8,14 @@
 
 <style>
 .metatop {
-    color: #fff;
-    margin-top: 5px;
-    padding: 3px 5px;
-    font-weight: bold;
-    background-color: #999999;
+  color: #fff;
+  margin-top: 5px;
+  padding: 3px 5px;
+  font-weight: bold;
+  background-color: #999999;
 }
 .metacontent {
-    padding: 5px 0px 5px 5px;
+  padding: 5px 0px 5px 5px;
 }
 </style>
 
@@ -28,7 +28,7 @@
 {if !empty($groupe)}
 {include file="common/boxstart.tpl" boxtitle="Groupe"}
 <div class="metacontent">
-  <a href="{$groupe->getUrl()}"><img style="float: right;" src="{$groupe->getMiniPhoto()}" alt="" /><strong>{$groupe->getName()|escape}</strong></a>
+  <a href="{$groupe->getUrl()}"><img style="float: right;" src="{$groupe->getMiniPhoto()}" alt=""><strong>{$groupe->getName()|escape}</strong></a>
 </div>
 {include file="common/boxend.tpl"}
 {/if}
@@ -36,7 +36,7 @@
 {if !empty($event)}
 {include file="common/boxstart.tpl" boxtitle="Evénement"}
 <div class="metacontent">
-  <a href="{$event->getUrl()}"><img style="float: right;" src="{$event->getFlyer100Url()}" alt="" /><strong>{$event->getName()|escape}</strong></a><br />{$event->getDate()|date_format:'%d/%m/%Y'}
+  <a href="{$event->getUrl()}"><img style="float: right;" src="{$event->getFlyer100Url()}" alt=""><strong>{$event->getName()|escape}</strong></a><br>{$event->getDate()|date_format:'%d/%m/%Y'}
 </div>
 {include file="common/boxend.tpl"}
 {/if}
@@ -44,9 +44,9 @@
 {if !empty($lieu)}
 {include file="common/boxstart.tpl" boxtitle="Lieu"}
 <div class="metacontent">
-  <a href="{$lieu->getUrl()}"><img style="float: right;" src="{$lieu->getMapUrl('64x64')}" alt="" /><strong>{$lieu->getName()|escape}</strong></a><br />{$lieu->getAddress()}<br />{$lieu->getCp()} {$lieu->getCity()|escape}
+  <a href="{$lieu->getUrl()}"><img style="float: right;" src="{$lieu->getMapUrl('64x64')}" alt=""><strong>{$lieu->getName()|escape}</strong></a><br>{$lieu->getAddress()}<br>{$lieu->getCp()} {$lieu->getCity()|escape}
 </div>
-<br style="clear: both;" />
+<br style="clear: both;">
 {include file="common/boxend.tpl"}
 {/if}
 
@@ -54,13 +54,13 @@
 {include file="common/boxstart.tpl" boxtitle="Du même concert"}
 {foreach from=$videos item=vid}
 <div class="thumb-80">
-  <a href="{$vid.url}"><img src="{$vid.thumb_80_80}" alt="{$vid.name|escape}" /><br />{$vid.name|truncate:15:"...":true:true|escape}</a>
+  <a href="{$vid.url}"><img src="{$vid.thumb_80_80}" alt="{$vid.name|escape}"><br>{$vid.name|truncate:15:"...":true:true|escape}</a>
   <a class="overlay-80 overlay-video-80" href="{$vid.url}" title="{$vid.name|escape}"></a>
 </div>
 {/foreach}
 {foreach from=$photos item=pho}
 <div class="thumb-80">
-  <a href="{$pho.url}"><img src="{$pho.thumb_80_80}" alt="{$pho.name|escape}" /><br />{$pho.name|truncate:15:"...":true:true|escape}</a>
+  <a href="{$pho.url}"><img src="{$pho.thumb_80_80}" alt="{$pho.name|escape}"><br>{$pho.name|truncate:15:"...":true:true|escape}</a>
   <a class="overlay-80 overlay-photo-80" href="{$pho.url}" title="{$pho.name|escape}"></a>
 </div>
 {/foreach}
@@ -73,8 +73,8 @@
 
 <div class="boxtitle">{$video->getName()|escape}</div>
 {$video->getPlayer(true)}
-<br />
-<br />
+<br>
+<br>
 
 {include file="common/boxstart.tpl" boxtitle="Commentaires"}
 {include file="common/disqus.tpl"}

@@ -7,7 +7,7 @@
 {if !empty($groupes)}
 <ul>
 {foreach from=$groupes item=groupe}
-  <li><a title="Se désabonner de ce groupe" href="/alerting/unsub?type=g&id_content={$groupe.id_groupe}"><img src="{#STATIC_URL#}/img/icones/delete.png" alt="" /></a> <a href="/groupes/show/{$groupe.id_groupe}">{$groupe.name}</a></li>
+  <li><a title="Se désabonner de ce groupe" href="/alerting/unsub?type=g&amp;id_content={$groupe.id_groupe}"><img src="/img/icones/delete.png" alt="" /></a> <a href="/groupes/show/{$groupe.id_groupe}">{$groupe.name}</a></li>
 {/foreach}
 </ul>
 {else}
@@ -25,7 +25,7 @@
 {if !empty($events)}
 <ul>
 {foreach from=$events item=event}
-  <li><a title="Retirer de mon agenda" href="/alerting/unsub?type=e&id_content={$event.id_event}"><img src="{#STATIC_URL#}/img/icones/delete.png" alt="" /></a> <a href="/events/show/{$event.id_event}">{$event.name}</a></li>
+  <li><a title="Retirer de mon agenda" href="/alerting/unsub?type=e&amp;id_content={$event.id_event}"><img src="{#STATIC_URL#}/img/icones/delete.png" alt="" /></a> <a href="/events/show/{$event.id_event}">{$event.name}</a></li>
 {/foreach}
 </ul>
 {else}

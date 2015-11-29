@@ -18,7 +18,7 @@ $(function() {
 
 <div class="subscribers round-corners-all">
 {foreach from=$subs item=sub}
-<a href="/membres/show/{$sub.id_contact}" title="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}"><img src="{#STATIC_URL#}/media/membre/ca/{$sub.id_contact}.jpg" class="thread-avatar" alt="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}" /></a>
+<a href="/membres/show/{$sub.id_contact}" title="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}"><img src="/media/membre/ca/{$sub.id_contact}.jpg" class="thread-avatar" alt="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}" /></a>
 {/foreach}
 </div>
 
@@ -37,7 +37,7 @@ $(function() {
   <tbody>
   {foreach from=$threads key=cpt item=thread}
     <tr class="{if $cpt is odd}odd{else}even{/if}">
-      <td><img src="{#STATIC_URL#}/media/membre/ca/{$thread.created_by}.jpg" style="padding-right: 5px" class="thread-avatar" alt="" /><a class="toggle" id="toggle_{$thread.id_thread}" href="/adm/forums/thread/{$thread.id_thread}"><strong>{$thread.subject|escape}</strong></a> <em>({$thread.nb_replies|escape})</em><br />Par <a href="/membres/show/{$thread.created_by}">{$thread.created_by|pseudo_by_id}</a> le {$thread.created_on|date_format:'%d/%m/%Y à %H:%M'}
+      <td><img src="/media/membre/ca/{$thread.created_by}.jpg" style="padding-right: 5px" class="thread-avatar" alt="" /><a class="toggle" id="toggle_{$thread.id_thread}" href="/adm/forums/thread/{$thread.id_thread}"><strong>{$thread.subject|escape}</strong></a> <em>({$thread.nb_replies|escape})</em><br />Par <a href="/membres/show/{$thread.created_by}">{$thread.created_by|pseudo_by_id}</a> le {$thread.created_on|date_format:'%d/%m/%Y à %H:%M'}
       <p style="display: none" class="msg" id="msg_{$thread.id_thread}">{$thread.text|@strip_tags|@nl2br}</p></td>
       <td>Par <a href="/membres/show/{$thread.modified_by}">{$thread.modified_by|pseudo_by_id}</a><br />le {$thread.modified_on|date_format:'%d/%m/%Y à %H:%M'}</td>
       <td>{$thread.nb_views|escape}</td>

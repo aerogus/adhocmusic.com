@@ -2,21 +2,6 @@
 
 {include file="common/boxstart.tpl" boxtitle="Mentions Légales"}
 
-<style>
-.mention {
-    margin: 10px 0;
-}
-.mention h3 {
-    color: black;
-    margin: 5px 0;
-    padding: 5px 0;
-    border-bottom: 1px solid #999;
-}
-.mention p {
-    margin: 5px 0;
-}
-</style>
-
 <div class="mention">
   <h3>L'Association</h3>
   <p>

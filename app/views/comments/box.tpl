@@ -109,7 +109,7 @@ $(function () {
     {if !empty($is_auth)}
     <li style="min-height: 50px;">
       <label for="form-comment-box-pseudo">Pseudo</label>
-      <img src="{$me->getAvatar()|escape}" alt="" style="padding-right: 5px; float: left; width: 50px; height: 50px;" /> <strong>{$me->getPseudo()|escape}</strong><br />({$me->getFirstName()} {$me->getLastName()})
+      <img src="{$me->getAvatar()|escape}" alt="" style="padding-right: 5px; float: left; width: 50px; height: 50px;"> <strong>{$me->getPseudo()|escape}</strong><br />({$me->getFirstName()} {$me->getLastName()})
     </li>
     {else}
     <li>
@@ -118,12 +118,12 @@ $(function () {
     <li>
       <div class="error" id="error_pseudo"{if empty($error_pseudo)} style="display: none"{/if}>Vous devez écrire votre pseudonyme.</div>
       <label for="form-comment-box-pseudo">Pseudo</label>
-      <input type="text" id="form-comment-box-pseudo" name="pseudo" />
+      <input type="text" id="form-comment-box-pseudo" name="pseudo">
     </li>
     <li>
       <div class="error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez écrire votre email (elle ne sera pas publiée).</div>
       <label for="form-comment-box-email">Email</label>
-      <input type="text" id="form-comment-box-email" name="email" />
+      <input type="text" id="form-comment-box-email" name="email">
     </li>
     {/if}
     <li>
@@ -135,13 +135,13 @@ $(function () {
     <li>
       <div class="error" id="error_antispam"{if empty($error_antispam)} style="display: none"{/if}>Mince vous semblez être un robot !</div>
       <label for="form-comment-box-antispam">Ecrivez "<strong>oui</strong>" si vous êtes un vrai humain</label>
-      <input type="text" id="form-comment-box-antispam" name="antispam" />
+      <input type="text" id="form-comment-box-antispam" name="antispam">
     </li>
     {/if}
     <li>
-      <input type="submit" id="form-comment-box-write-submit" name="form-comment-box-write-submit" value="Envoyer" />
-      <input type="hidden" name="type" value="{$type|escape}" />
-      <input type="hidden" name="id_content" value="{$id_content|escape}" />
+      <input type="submit" id="form-comment-box-write-submit" name="form-comment-box-write-submit" value="Envoyer">
+      <input type="hidden" name="type" value="{$type|escape}">
+      <input type="hidden" name="id_content" value="{$id_content|escape}">
     </li>
   </ol>
 </form>

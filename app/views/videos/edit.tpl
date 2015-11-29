@@ -12,16 +12,16 @@
   <ol>
     <li>
       <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
-      <input type="text" id="name" name="name" size="50" value="{$video->getName()|escape}" style="float: right;" />
-      <label for="name"><img src="{#STATIC_URL#}/img/icones/signature.png" alt="" /> Titre</label>
+      <input type="text" id="name" name="name" size="50" value="{$video->getName()|escape}" style="float: right;">
+      <label for="name"><img src="/img/icones/signature.png" alt=""> Titre</label>
     </li>
     <li>
       <span id="host" style="float: right;">{$video->getHostName()|escape}</span>
-      <label for="host"><img src="{#STATIC_URL#}/img/icones/photo.png" alt="" /> Hébergeur</label>
+      <label for="host"><img src="/img/icones/photo.png" alt=""> Hébergeur</label>
     </li>
     <li>
       <span id="reference" style="float: right;">{$video->getReference()|escape}</span>
-      <label for="reference"><img src="{#STATIC_URL#}/img/icones/photo.png" alt="" /> Référence</label>
+      <label for="reference"><img src="/img/icones/photo.png" alt=""> Référence</label>
     </li>
     <li>
       <select id="id_groupe" name="id_groupe" style="float: right;">
@@ -30,7 +30,7 @@
         <option value="{$groupe.id}"{if $video->getIdGroupe() == $groupe.id} selected="selected"{/if}>{$groupe.name|escape}</option>
         {/foreach}
       </select>
-      <label for="groupe"><img src="{#STATIC_URL#}/img/icones/groupe.png" alt="" /> Groupe</label>
+      <label for="groupe"><img src="/img/icones/groupe.png" alt=""> Groupe</label>
     </li>
     <li>
       <select id="id_lieu" name="id_lieu" style="float: right">
@@ -45,21 +45,21 @@
         </optgroup>
         {/foreach}
       </select>
-      <label for="id_lieu"><img src="{#STATIC_URL#}/img/icones/lieu.png" alt="" /> Lieu</label>
+      <label for="id_lieu"><img src="/img/icones/lieu.png" alt=""> Lieu</label>
     </li>
     <li>
       <select id="id_event" name="id_event" style="float: right;">
         <option value="0">Aucun</option>
       </select>
-      <label for="event"><img src="{#STATIC_URL#}/img/icones/event.png" alt="" /> Evénement</label>
+      <label for="event"><img src="/img/icones/event.png" alt=""> Evénement</label>
     </li>
     <li>
-      <input id="online" type="checkbox" name="online"{if $video->getOnline()} checked="checked"{/if} style="float: right;" />
-      <label for="online"><img src="{#STATIC_URL#}/img/icones/eye.png" alt="" /> Afficher</label>
+      <input id="online" type="checkbox" name="online"{if $video->getOnline()} checked="checked"{/if} style="float: right;">
+      <label for="online"><img src="/img/icones/eye.png" alt=""> Afficher</label>
     </li>
   </ol>
-  <input id="form-video-edit-submit" name="form-video-edit-submit" type="submit" class="button" value="Enregistrer" />
-  <input type="hidden" name="id" value="{$video->getId()|escape}" />
+  <input id="form-video-edit-submit" name="form-video-edit-submit" type="submit" class="button" value="Enregistrer">
+  <input type="hidden" name="id" value="{$video->getId()|escape}">
 </form>
 
 <p align="center"><a href="/videos/delete/{$video->getId()|escape}" class="button">Supprimer</a></p>

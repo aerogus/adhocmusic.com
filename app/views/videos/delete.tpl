@@ -15,7 +15,7 @@
         <label for="name">Nom</label>
       </li>
       <li>
-        <span id="thumb" style="float: right;"><img src="{#STATIC_URL#}/media/video/{$video->getId()}.jpg" alt="" /></span>
+        <span id="thumb" style="float: right;"><img src="/media/video/{$video->getId()}.jpg" alt=""></span>
         <label for="thumb">Miniature</label>
       </li>
       <li>
@@ -54,8 +54,8 @@
       </li>
     </ol>
   </fieldset>
-  <input id="form-video-delete-submit" name="form-video-delete-submit" class="button" type="submit" value="Confirmer la suppression" />
-  <input type="hidden" name="id" value="{$video->getId()|escape}" />
+  <input id="form-video-delete-submit" name="form-video-delete-submit" class="button" type="submit" value="Confirmer la suppression">
+  <input type="hidden" name="id" value="{$video->getId()|escape}">
 </form>
 {include file="common/boxend.tpl"}
 
