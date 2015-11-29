@@ -7,7 +7,7 @@
       <div class="error" id="error_code"{if empty($error_code)} style="display: none"{/if}>Vous devez copier/coller un code de vidéo</div>
       <div class="error" id="error_unknown_host"{if empty($error_unknow_host)} style="display: none"{/if}>Code de la vidéo non reconnu ou hébergeur incompatible</div>
       <input type="text" id="code" name="code" size="50" value="" style="float: right;">
-      <label for="code"><img src="/img/icones/photo.png" alt=""> Copiez/collez le code de la vidéo</label>
+      <label for="code">Copiez/collez le code de la vidéo</label>
     </li>
     <li>
       <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
@@ -79,3 +79,4 @@
 {include file="common/boxend.tpl"}
 
 {include file="common/footer.tpl"}
+
