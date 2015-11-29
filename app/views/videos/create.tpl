@@ -1,7 +1,7 @@
 {include file="common/header.tpl"}
 
 {include file="common/boxstart.tpl" boxtitle="Ajouter une vidéo"}
-<form id="form-video-create" name="form-video-create" method="post" action="/videos/create" enctype="multipart/form-data">
+<form class="form" id="form-video-create" name="form-video-create" method="post" action="/videos/create" enctype="multipart/form-data">
   <ol>
     <li>
       <div class="error" id="error_code"{if empty($error_code)} style="display: none"{/if}>Vous devez copier/coller un code de vidéo</div>
@@ -68,7 +68,7 @@
       <span style="float: right;">{$event->getDate()} - {$event->getName()}</span>
     {else}
       <select id="id_event" name="id_event" style="float: right">
-        <option value="0">Aucun</option>
+        <option value="0">Veuillez sélectionner un lieu</option>
       </select>
     {/if}
       <label for="id_event">Evénement</label>

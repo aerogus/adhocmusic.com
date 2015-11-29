@@ -28,13 +28,13 @@ $(function () {
 
   $("#form-video-create").submit(function () {
     var valid = true;
-    if ($("#name").val() === "") {
+    if ($("#name").val().length === 0) {
       $("#name").prev(".error").fadeIn();
       valid = false;
     } else {
       $("#name").prev(".error").fadeOut();
     }
-    if ($("#code").val() === "") {
+    if ($("#code").val().length === 0 && $("#id_host").val() !== '7') {
       $("#code").prev(".error").fadeIn();
       valid = false;
     } else {

@@ -182,9 +182,9 @@ class Video extends Media
     protected static $_tab_hosts = array(
         self::HOST_YOUTUBE     => "YouTube",
         self::HOST_DAILYMOTION => "DailyMotion",
-        self::HOST_MYSPACE     => "MySpace",
-        self::HOST_WAT         => "Wat",
-        self::HOST_GOOGLE      => "Google",
+//        self::HOST_MYSPACE     => "MySpace",
+//        self::HOST_WAT         => "Wat",
+//        self::HOST_GOOGLE      => "Google",
         self::HOST_FACEBOOK    => "Facebook",
         self::HOST_ADHOC       => "AD'HOC",
         self::HOST_VIMEO       => "Vimeo",
@@ -333,8 +333,8 @@ class Video extends Media
      */
     static function getUrlById($id, $type = null)
     {
-        if($type == 'www') {
-            return 'http://www.adhocmusic.com/videos/show/' . $id;
+        if($type === 'www') {
+            return 'https://www.adhocmusic.com/videos/show/' . $id;
         }
         return DYN_URL . '/videos/show/' . $id;
     }
@@ -419,10 +419,10 @@ class Video extends Media
     static function getVideoHosts()
     {
         $tab = array();
-        foreach(self::$_tab_hosts as $host_id => $host_name) {
+        foreach(self::$_tab_hosts as $id => $name) {
             $tab[] = array(
-                'id'   => $host_id,
-                'name' => $host_name,
+                'id' => $id,
+                'name' => $name,
             );
         }
         return $tab;

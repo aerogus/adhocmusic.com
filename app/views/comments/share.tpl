@@ -1,9 +1,13 @@
 <style>
 .share-box li {
-    float: left;
-    width: 65px;
-    height: 70px;
-    margin: 10px;
+  float: left;
+}
+.share-box li a {
+  display: inline-block;
+  margin: 10px;
+  padding: 5px;
+  color: #fff;
+  font-weight: bold;
 }
 </style>
 
@@ -12,8 +16,8 @@
 {/if}
 
 <ul class="share-box">
-  <li><a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="adhocmusic" data-lang="fr">Tweeter</a><script src="http://platform.twitter.com/widgets.js"></script></li>
-  <li><fb:like href="{$url|escape}" send="false" layout="box_count" width="65" show_faces="false" font="arial"></fb:like></li>
-<li><g:plusone size="tall"></g:plusone></li>
+  <li><a href="https://www.facebook.com/sharer/sharer.php?u={$url|escape}" style="background:#3a5795;color:#fff">Facebook</a></li>
+  <li><a href="http://twitter.com/home?status={$url|escape}%20via%20@adhocmusic" style="background:#55acee;color:#fff">Twitter</a></li>
+  <li><a href="https://plus.google.com/share?url={$url|escape}" style="background:#dd5044;color:#fff">Google+</a></li>
 </ul>
 <br style="clear: both;" />

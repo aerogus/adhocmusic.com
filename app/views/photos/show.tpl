@@ -10,14 +10,14 @@
 
 <style>
 .metatop {
-    color: #fff;
-    margin-top: 5px;
-    padding: 3px 5px;
-    font-weight: bold;
-    background-color: #999999;
+  color: #fff;
+  margin-top: 5px;
+  padding: 3px 5px;
+  font-weight: bold;
+  background-color: #999999;
 }
 .metacontent {
-    padding: 5px 0px 5px 5px;
+  padding: 5px 0px 5px 5px;
 }
 </style>
 
@@ -27,14 +27,14 @@
 <div class="metacontent">
   <a href="{$groupe->getUrl()}"><img style="float: right;" src="{$groupe->getMiniPhoto()}" alt="" /><strong>{$groupe->getName()|escape}</strong></a>
 </div>
-<br style="clear: both;" />
+<br style="clear: both;">
 {/if}
 {if !empty($event)}
 <div class="metatop">Evénement</div>
 <div class="metacontent">
   <a href="{$event->getUrl()}"><img style="float: right;" src="{$event->getFlyer100Url()}" alt="" /><strong>{$event->getName()|escape}</strong></a><br />{$event->getDate()|date_format:'%d/%m/%Y'}
 </div>
-<br style="clear: both;" />
+<br style="clear: both;">
 {/if}
 {if !empty($lieu)}
 <div class="metatop">Lieu</div>

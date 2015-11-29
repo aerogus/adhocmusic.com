@@ -235,9 +235,13 @@ class Controller
 
             if(self::_validate_form_video_create($data, $errors)) {
 
-                $info = Video::parseStringForVideoUrl($data['code']);
-                $data['id_host'] = $info['id_host'];
-                $data['reference'] = $info['reference'];
+                if($data['id_host'] !== Video::HOST_ADHOC) {
+                    $info = Video::parseStringForVideoUrl($data['code']);
+                    $data['id_host'] = $info['id_host'];
+                    $data['reference'] = $info['reference'];
+                } else {
+                    $data['reference'] = time();
+                }
 
                 $video = Video::init();
                 $video->setName($data['name']);
@@ -258,13 +262,14 @@ class Controller
 
                 Log::action(Log::ACTION_VIDEO_CREATE, $video->getId());
 
-                Tools::redirect('/media/?create=1');
+                Tools::redirect('/medias/?create=1');
 
             } else {
 
                 foreach($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
+
             }
         }
 
@@ -328,10 +333,12 @@ class Controller
         if(empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
         }
-        if(empty($data['code'])) {
-            $errors['code'] = "Vous devez copier/coller un code de vidéo Youtube ou Dailymotion";
-        } elseif(Video::parseStringForVideoUrl($data['code']) === false) {
-            $errors['unknown_host'] = "Code de la vidéo non reconnu ou hébergeur incompatible";
+        if($data['id_host'] !== Video::HOST_ADHOC) {
+            if(empty($data['code'])) {
+                $errors['code'] = "Vous devez copier/coller un code de vidéo Youtube ou Dailymotion";
+            } elseif(Video::parseStringForVideoUrl($data['code']) === false) {
+                $errors['unknown_host'] = "Code de la vidéo non reconnu ou hébergeur incompatible";
+            }
         }
         if(count($errors)) {
             return false;
@@ -388,7 +395,7 @@ class Controller
 
                 Log::action(Log::ACTION_VIDEO_EDIT, $video->getId());
 
-                Tools::redirect('/media/?edit=1');
+                Tools::redirect('/medias/?edit=1');
 
             } else {
 
@@ -473,7 +480,7 @@ class Controller
         {
             if($video->delete()) {
                 Log::action(Log::ACTION_VIDEO_DELETE, $video->getId());
-                Tools::redirect('/media/?delete=1');
+                Tools::redirect('/medias/?delete=1');
             }
         }
 

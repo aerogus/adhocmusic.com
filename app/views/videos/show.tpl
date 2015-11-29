@@ -53,10 +53,12 @@
 {if !empty($videos) || !empty($photos)}
 {include file="common/boxstart.tpl" boxtitle="Du même concert"}
 {foreach from=$videos item=vid}
+{if $vid.id != $video->getId()}
 <div class="thumb-80">
   <a href="{$vid.url}"><img src="{$vid.thumb_80_80}" alt="{$vid.name|escape}"><br>{$vid.name|truncate:15:"...":true:true|escape}</a>
   <a class="overlay-80 overlay-video-80" href="{$vid.url}" title="{$vid.name|escape}"></a>
 </div>
+{/if}
 {/foreach}
 {foreach from=$photos item=pho}
 <div class="thumb-80">
@@ -77,7 +79,9 @@
 <br>
 
 {include file="common/boxstart.tpl" boxtitle="Commentaires"}
+{*
 {include file="common/disqus.tpl"}
+*}
 {include file="comments/box.tpl" type="v" id_content=$video->getId()}
 {include file="common/boxend.tpl"}
 
