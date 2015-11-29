@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>{$title|escape}</title>
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
 <meta property="fb:app_id" content="{$fb_app_id|escape}">
 {* début open graph *}
 {if !empty($og_type)}
