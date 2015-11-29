@@ -23,8 +23,8 @@ class Controller
         )));
 
         $smarty->assign('featured', Featured::getFeaturedHomepage());
-        $smarty->enqueue_script('jquery.featureList-1.0.0.js');
-        $smarty->enqueue_script('home.js');
+        $smarty->enqueue_script('/js/jquery.featureList-1.0.0.js');
+        $smarty->enqueue_script('/js/home.js');
 
         $events = Event::getEvents(array(
             'online'      => true,
@@ -95,7 +95,7 @@ class Controller
 
         $smarty->assign('menuselected', 'contact');
 
-        $smarty->enqueue_script('contact.js');
+        $smarty->enqueue_script('/js/contact.js');
 
         $trail = Trail::getInstance();
         $trail->addStep("Nous Contacter");

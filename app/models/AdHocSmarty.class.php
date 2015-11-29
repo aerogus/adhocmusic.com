@@ -33,7 +33,6 @@ class AdHocSmarty extends Smarty
         $this->registerPlugin('function', 'image', array('EmailSmarty', 'function_image'));
 
         // modifiers smarty
-        $this->registerPlugin('modifier', 'exemple', array('AdHocSmarty', 'modifier_exemple'));
         $this->registerPlugin('modifier', 'format_size', array('AdHocSmarty', 'modifier_format_size'));
         $this->registerPlugin('modifier', 'pseudo_by_id', array('AdHocSmarty', 'modifier_pseudo_by_id'));
         $this->registerPlugin('modifier', 'avatar_by_id', array('AdHocSmarty', 'modifier_avatar_by_id'));
@@ -98,7 +97,7 @@ class AdHocSmarty extends Smarty
         ));
 
         // à décommenter quand tous les scripts jquery seront en footer
-        //$this->enqueue_script('jquery-2.1.4.min.js');
+        //$this->enqueue_script('/js/jquery-2.1.4.min.js');
 
         return $this;
     }
@@ -435,14 +434,6 @@ class AdHocSmarty extends Smarty
     /* fin fonctions */
 
     /* début modifiers */
-
-    /**
-     *
-     */
-    static function modifier_exemple($str)
-    {
-        return $str;
-    }
 
     /**
      * formatage d'un poids de fichier

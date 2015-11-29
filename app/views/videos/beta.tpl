@@ -82,7 +82,7 @@
 
 {include file="common/boxend.tpl"}
 
-{if $video->getIdHost() == 7}
+{if $video->getIdHost() === 7}
 <script>
 $(function() {
   $('#embed-button').click(function() {

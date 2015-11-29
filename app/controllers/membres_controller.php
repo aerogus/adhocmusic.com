@@ -50,7 +50,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('membre-create.js');
+        $smarty->enqueue_script('/js/membre-create.js');
 
         $smarty->assign('title', "Inscription à l'association AD'HOC");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
@@ -233,7 +233,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('membre-edit.js');
+        $smarty->enqueue_script('/js/membre-edit.js');
 
         if(Tools::isSubmit('form-member-edit'))
         {

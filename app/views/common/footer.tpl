@@ -33,8 +33,8 @@
 
 <a id="up" href="#" title="haut de la page"><img src="{#STATIC_URL#}/img/icones/up.png" alt=""></a>
 
-{foreach from=$scripts item=script}
-<script src="/js/{$script}"></script>
+{foreach from=$scripts item=script_url}
+<script src="{$script_url}"></script>
 {/foreach}
 
 {foreach from=$inline_scripts item=inline_script}

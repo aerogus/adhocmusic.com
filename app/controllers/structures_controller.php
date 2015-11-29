@@ -60,7 +60,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('structure-create.js');
+        $smarty->enqueue_script('/js/structure-create.js');
 
         if(Tools::isSubmit('form-structure-create'))
         {
@@ -123,7 +123,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('structure-edit.js');
+        $smarty->enqueue_script('/js/structure-edit.js');
 
         if(Tools::isSubmit('form-structure-edit'))
         {
@@ -182,7 +182,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('structure-delete.js');
+        $smarty->enqueue_script('/js/structure-delete.js');
 
         if(Tools::isSubmit('form-structure-delete'))
         {

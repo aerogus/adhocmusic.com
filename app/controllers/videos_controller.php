@@ -1,9 +1,17 @@
 <?php
 
+/**
+ * adhocmusic
+ * Gestion des Vidéos
+ */
+
 define('NB_VIDEOS_PER_PAGE', 48);
 
 class Controller
 {
+    /**
+     * Liste de mes vidéos
+     */
     static function my()
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -45,6 +53,9 @@ class Controller
         return $smarty->fetch('videos/my.tpl');
     }
 
+    /**
+     * Nouveau player vidéo
+     */
     static function beta()
     {
         return self::show('videos/beta.tpl');
@@ -59,6 +70,8 @@ class Controller
         $from = (string) Route::params('from');
 
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_script('/js/video-show.js');
 
         $trail = Trail::getInstance();
 
@@ -78,7 +91,7 @@ class Controller
             $smarty->assign('from', $from);
             $smarty->assign('title', "♫ " . $video->getName());
             $smarty->assign('description', $video->getName());
-            $smarty->assign('og_image', STATIC_URL . '/media/video/' . $video->getId() . '.jpg');
+            $smarty->assign('og_image', '/media/video/' . $video->getId() . '.jpg');
             $smarty->assign('og_type', 'video.movie');
 
             $og_video = array(
@@ -110,17 +123,18 @@ class Controller
                 $smarty->assign('membre', $membre);
             }
 
-            if($from == 'groupe' && $video->getIdGroupe()) {
+            // menu et fil d'ariane
+            if($from === 'groupe' && $video->getIdGroupe()) {
                 $smarty->assign('menuselected', 'groupe');
                 $trail->addStep("Groupes", "/groupes/");
                 $trail->addStep($groupe->getName(), $groupe->getUrl());
-            } elseif($from == 'profil' && $video->getIdContact()) {
+            } elseif($from === 'profil' && $video->getIdContact()) {
                 $trail->addStep("Zone Membre", "/membres/");
-            } elseif($from == 'event' && $video->getIdEvent()) {
+            } elseif($from === 'event' && $video->getIdEvent()) {
                 $smarty->assign('menuselected', 'event');
                 $trail->addStep("Agenda", "/events/");
                 $trail->addStep($event->getName(), "/events/show/" . $event->getId());
-            } elseif($from == 'lieu' && $video->getIdLieu()) {
+            } elseif($from === 'lieu' && $video->getIdLieu()) {
                 $smarty->assign('menuselected', 'lieux');
                 $trail->addStep("Lieux", "/lieux/");
                 $trail->addStep($lieu->getName(), "/lieux/show/" . $lieu->getId());
@@ -130,6 +144,7 @@ class Controller
             }
             $trail->addStep($video->getName(), "/videos/show/" . $video->getId());
 
+            // vidéos et photos liées à l'événement/lieu
             if($video->getIdEvent() && $video->getIdLieu()) {
                 $smarty->assign('photos', Photo::getPhotos(array(
                     'event'  => $video->getIdEvent(),
@@ -166,6 +181,9 @@ class Controller
         return $smarty->fetch($tpl);
     }
 
+    /**
+     * Code playr embarqué
+     */
     static function embed()
     {
         $id = (int) Route::params('id');
@@ -189,13 +207,16 @@ class Controller
         return $smarty->fetch('videos/embed.tpl');
     }
 
+    /**
+     * Ajout d'une vidéo
+     */
     static function create()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('video-create.js');
+        $smarty->enqueue_script('/js/video-create.js');
 
         if(Tools::isSubmit('form-video-create'))
         {
@@ -295,7 +316,8 @@ class Controller
     }
 
     /**
-     * validation du formulaire de modification structure
+     * validation du formulaire de modification vidéo
+     *
      * @param array $data
      * @param array &$errors
      * @return bool
@@ -317,6 +339,9 @@ class Controller
         return true;
     }
 
+    /**
+     * Édition d'une vidéo
+     */
     static function edit()
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -326,7 +351,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('videos-edit.js');
+        $smarty->enqueue_script('/js/videos-edit.js');
 
         try {
             $video = Video::getInstance($id);
@@ -403,6 +428,7 @@ class Controller
 
     /**
      * validation du formulaire de modification vidéo
+     *
      * @param array $data
      * @param array &$errors
      * @return bool
@@ -419,6 +445,9 @@ class Controller
         return true;
     }
 
+    /**
+     * Suppression d'une vidéo
+     */
     static function delete()
     {
         Tools::auth(Membre::TYPE_ADMIN);
@@ -463,6 +492,9 @@ class Controller
         return $smarty->fetch('videos/delete.tpl');
     }
 
+    /**
+     * Récupère des infos sur une vidéo
+     */
     static function get_meta()
     {
         $code = (string) Route::params('code');

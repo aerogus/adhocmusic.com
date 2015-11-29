@@ -92,7 +92,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('change-password.js');
+        $smarty->enqueue_script('/js/change-password.js');
 
         $trail = Trail::getInstance();
         $trail->addStep("Membres", "/membres/tableau-de-bord");
