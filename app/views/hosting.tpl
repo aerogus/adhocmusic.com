@@ -11,12 +11,6 @@
   <p class="description">Chansons pour enfants (mais pas que !) au rythme des saisons, par Hugo Barbet</p>
 </div>
 <div class="thumbs">
-  <h3><a href="http://www.hookae.com">HOOKAE</a></h3>
-  <h4><a href="http://www.hookae.com">hookae.com</a></h4>
-  <p align="center"><a href="http://www.hookae.com"><img src="/img/screen_hookae.png" alt="HOOKAE" /></a></p>
-  <p class="description">Boutique en ligne de vêtements issus du commerce équitable</p>
-</div>
-<div class="thumbs">
   <h3><a href="http://www.diemdelam.com">DIEM DELAM</a></h3>
   <h4><a href="http://www.diemdelam.com">diemdelam.com</a></h4>
   <p align="center"><a href="http://www.diemdelam.com"><img src="/img/screen_diemdelam.png" alt="DIEM DELAM" /></a></p>

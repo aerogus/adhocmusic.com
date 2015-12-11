@@ -2,93 +2,72 @@
 
 {include file="common/boxstart.tpl" boxtitle="Partenaires"}
 
-<style>
-.partners {
-    width: 300px;
-    float: left;
-}
-.partners li {
-    margin-bottom: 10px;
-    min-height: 50px;
-}
-.partners img {
-    float: left;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    width: 50px;
-    height: 50px;
-}
-.partners a {
-    text-decoration: none;
-}
-</style>
-
 <div class="partners">
 
 <ul>
   <li>
     <a href="http://www.ouifm.fr">
-      <img src="{#STATIC_URL#}/img/partners/ouifm.png" alt="">
+      <img src="/img/partners/ouifm.png" alt="">
       <strong>OÜI FM</strong><br>La Radio Rock Pop Soul
     </a>
   </li>
   <li>
     <a href="http://www.ville-epinay-sur-orge.fr">
-      <img src="{#STATIC_URL#}/img/partners/epinay-sur-orge.png" alt="">
+      <img src="/img/partners/epinay-sur-orge.png" alt="">
       <strong>Epinay sur Orge</strong><br>Mairie d'Epinay sur Orge
     </a>
   </li>
   <li>
     <a href="http://www.ville-igny.fr/node/la-mjc">
-      <img src="{#STATIC_URL#}/img/partners/mjcigny.png" alt="">
+      <img src="/img/partners/mjcigny.png" alt="">
       <strong>MJC Jean Villar</strong><br> d'Igny
     </a>
   </li>
   <li>
     <a href="http://www.essonne.fr">
-      <img src="{#STATIC_URL#}/img/partners/essonne.png" alt="">
+      <img src="/img/partners/essonne.png" alt="">
       <strong>Essonne</strong><br>Le conseil général de l'Essonne
     </a>
   </li>
   <li>
     <a href="http://www.mairie-villemoisson.fr/index.php/enfance-jeunesse/jeunesse/club-ados-paj">
-      <img src="{#STATIC_URL#}/img/partners/paj.png" alt="">
+      <img src="/img/partners/paj.png" alt="">
       <strong>La PAJ</strong><br>Le Club Ado de Villemoisson sur Orge
     </a>
   </li>
   <li>
     <a href="http://www.lerackam.com">
-      <img src="{#STATIC_URL#}/img/partners/rackam.png" alt="">
+      <img src="/img/partners/rackam.png" alt="">
       <strong>Le Rack'Am</strong><br>Scène de Musiques Actuelles à Brétigny sur Orge
     </a>
   </li>
   <li>
     <a href="http://mjc91600.free.fr">
-      <img src="{#STATIC_URL#}/img/partners/mjcsavigny.png" alt="">
+      <img src="/img/partners/mjcsavigny.png" alt="">
       <strong>MJC Savigny sur Orge</strong><br>MJC François Rabelais
     </a>
   </li>
   <li>
     <a href="http://www.reggae-promo.com">
-      <img src="{#STATIC_URL#}/img/partners/reggaepromo.png" alt="Reggae Promo" width="50" height="50">
+      <img src="/img/partners/reggaepromo.png" alt="Reggae Promo" width="50" height="50">
       <strong>Reggae Promo</strong><br>Promo de groupes Reggae. Actu, Concerts, Festivals, Jeux-Concours. Les nouveaux groupes de Reggae de la scène Française
     </a>
   </li>
   <li>
     <a href="http://www.zanzibart.com">
-      <img src="{#STATIC_URL#}/img/partners/zanzibart.png" alt="">
+      <img src="/img/partners/zanzibart.png" alt="">
       <strong>Zanzibart</strong><br>Communauté d'artistes - des artistes des lieux des dates
     </a>
   </li>
   <li>
     <a href="http://libellulerock.perso.sfr.fr/news.html">
-      <img src="{#STATIC_URL#}/img/partners/cridelalibellule.png" alt="">
+      <img src="/img/partners/cridelalibellule.png" alt="">
       <strong>Le Cri de la Libellule</strong><br>Association musicale de Saint-Michel sur Orge
     </a>
   </li>
   <li>
     <a href="http://www.studioclap.fr">
-      <img src="{#STATIC_URL#}/img/partners/studioclap.png" alt="">
+      <img src="/img/partners/studioclap.png" alt="">
       <strong>Studio CLAP</strong><br>Réalisations de films et reportages
     </a>
   </li>

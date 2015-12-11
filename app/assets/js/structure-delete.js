@@ -1,8 +1,12 @@
-$(function () {
+/*globals jQuery*/
 
-  $("#form-structure-delete").submit(function () {
-    var valid = true;
-    return valid;
-  });
+jQuery(document).ready(function ($) {
+
+    'use strict';
+
+    $("#form-structure-delete").submit(function () {
+        var valid = true;
+        return valid;
+    });
 
 });

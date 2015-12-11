@@ -1,37 +1,41 @@
-$(function () {
+/*global jQuery,validateEmail*/
 
-  $("#text").focus(function () {
-    $("#warning").fadeIn();
-  });
+jQuery(document).ready(function ($) {
 
-  $("#form-contact").submit(function () {
-    var valid = true;
-    if ($("#name").val().length === 0) {
-      $("#error_name").fadeIn();
-      valid = false;
-    } else {
-      $("#error_name").fadeOut();
-    }
-    if ($("#email").val().length === 0 || !validateEmail($("#email").val())) {
-      $("#error_email").fadeIn();
-      valid = false;
-    } else {
-      $("#error_email").fadeOut();
-    }
-    if ($("#subject").val().length === 0) {
-      $("#error_subject").fadeIn();
-      valid = false;
-    } else {
-      $("#error_subject").fadeOut();
-    }
-    if ($("#text").val().length === 0) {
-      $("#error_text").fadeIn();
-      valid = false;
-    } else {
-      $("#error_text").fadeOut();
-    }
-    return valid;
-  });
+    'use strict';
+
+    $("#text").focus(function () {
+        $("#warning").fadeIn();
+    });
+
+    $("#form-contact").submit(function () {
+        var valid = true;
+        if ($("#name").val().length === 0) {
+            $("#error_name").fadeIn();
+            valid = false;
+        } else {
+            $("#error_name").fadeOut();
+        }
+        if ($("#email").val().length === 0 || !validateEmail($("#email").val())) {
+            $("#error_email").fadeIn();
+            valid = false;
+        } else {
+            $("#error_email").fadeOut();
+        }
+        if ($("#subject").val().length === 0) {
+            $("#error_subject").fadeIn();
+            valid = false;
+        } else {
+            $("#error_subject").fadeOut();
+        }
+        if ($("#text").val().length === 0) {
+            $("#error_text").fadeIn();
+            valid = false;
+        } else {
+            $("#error_text").fadeOut();
+        }
+        return valid;
+    });
 
 });
 

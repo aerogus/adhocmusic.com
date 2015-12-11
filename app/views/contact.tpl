@@ -2,7 +2,8 @@
 
 <div id="left-center">
 
-{include file="common/boxstart.tpl" boxtitle="Contacter AD'HOC"}
+<div class="box">
+  <div class="boxtitle">Contacter AD'HOC</div>
 
 {if !empty($sent_ok)}
 <div class="success"><strong>Votre message a bien été envoyé, merci !</strong><br />
@@ -70,29 +71,29 @@ L'Equipe AD'HOC</div>
 
 {/if}
 
-{include file="common/boxend.tpl"}
+</div>{* .box *}
 
 </div>{* #left-center *}
 
 <div id="right">
 
-{include file="common/boxstart.tpl" boxtitle="Adresse postale"}
-<strong>Association AD'HOC</strong><br />
-<address>8, rue de l'église<br />
-91360 Epinay sur Orge<br />
-FRANCE</address>
-{include file="common/boxend.tpl"}
-
-{include file="common/boxstart.tpl" boxtitle="Foire aux questions"}
-
-{foreach from=$faq item=f}
-<div class="faq">
-<h3>{$f.question}</h3>
-<p>{$f.answer}</p>
+<div class="box">
+  <div class="boxtitle">Adresse Postale</div>
+  <strong>Association AD'HOC</strong><br />
+  <address>8, rue de l'église<br />
+  91360 Epinay sur Orge<br />
+  FRANCE</address>
 </div>
-{/foreach}
 
-{include file="common/boxend.tpl"}
+<div class="box">
+  <div class="boxtitle">Questions fréquentes</div>
+  {foreach from=$faq item=f}
+  <div class="faq">
+    <h3>{$f.question}</h3>
+    <p>{$f.answer}</p>
+  </div>
+  {/foreach}
+</div>
 
 </div>{* #right *}
 
