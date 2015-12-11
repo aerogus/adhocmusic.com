@@ -1,4 +1,4 @@
-{include file="common/header.tpl" js_jquery_tinymce=true}
+{include file="common/header.tpl"}
 
 {include file="common/boxstart.tpl" boxtitle={$thread.subject|escape}}
 
