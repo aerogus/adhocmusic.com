@@ -52,10 +52,9 @@
 <link rel="stylesheet" href="{#STATIC_URL#}/css/adhoc/jquery-ui-1.8.2.custom.css">
 {/if}
 
-{* js communs à toutes les pages *}
-{* à terme utiliser enqueue_script et mettre en footer *}
-<script src="/js/jquery-2.1.4.min.js"></script>
-<script src="/js/adhoc.js"></script>
+{foreach from=$header_scripts item=script_url}
+<script src="{$script_url}"></script>
+{/foreach}
 
 {if !empty($js_jquery_tools)}
 <script src="{#STATIC_URL#}/js/jquery.tools.min.js"></script>
@@ -78,9 +77,6 @@
 {if !empty($js_gmap)}
 <script src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false&region=FR"></script>
 {/if}
-{if !empty($js_jquery_tinymce)}
-<script src="{#STATIC_URL#}/tinymce/jquery.tinymce.js"></script>
-{/if}
 
 <script>
 (function(i,s,o,g,r,a,m) { i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
@@ -95,7 +91,6 @@ ga('send', 'pageview');
 
 <body>
 
-<div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
