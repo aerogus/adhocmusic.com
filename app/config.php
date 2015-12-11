@@ -22,6 +22,7 @@ function adhoc_get_env()
     {
         case 'ns1.adhocmusic.com':
         case 'ns2.adhocmusic.com':
+        case 'ns3.adhocmusic.com':
             return 'PROD';
             break;
 
@@ -65,6 +66,7 @@ if(ENV === 'PROD') {
     ini_set('display_startup_errors', 1);
     ini_set('display_errors', 1);
     define('ONERROR_SHOW', true);
+
 }
 
 define('ADHOC_ROOT_PATH',           dirname(dirname(__FILE__)));
