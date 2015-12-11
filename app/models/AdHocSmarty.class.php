@@ -96,8 +96,9 @@ class AdHocSmarty extends Smarty
             ),
         ));
 
-        // à décommenter quand tous les scripts jquery seront en footer
-        //$this->enqueue_script('/js/jquery-2.1.4.min.js');
+        // dans le header, pour l'instant
+        $this->enqueue_script('/js/jquery-2.1.4.min.js', false);
+        $this->enqueue_script('/js/adhoc.js', false);
 
         return $this;
     }
@@ -613,10 +614,17 @@ class AdHocSmarty extends Smarty
 
     /**
      * Ajoute un javascript externe dans le footer
+     *
+     * @param string $script_name url du script
+     * @param bool $in_footer
      */
-    function enqueue_script($script_name)
+    function enqueue_script($script_name, $in_footer = true)
     {
-        $this->append('scripts', $script_name);
+        if ($in_footer) {
+            $this->append('footer_scripts', $script_name);
+        } else {
+            $this->append('header_scripts', $script_name);
+        }
     }
 
     /**
