@@ -3,47 +3,46 @@
 .box
   margin-bottom 20px
 
-.box:after
-  content ""
-  display block
-  clear both
+  &:after
+    content ""
+    display block
+    clear both
 
-.boxtitle
-  background-color #b00
-  color #fff
-  font-size 13px
-  padding 3px 8px
-  text-transform uppercase
+  & > h1, > h2, > h3, > .boxtitle
+    background-color #ed3438
+    color #fff
+    font-size 13px
+    padding 5px
+    text-transform uppercase
 
-.boxcontent
-  background #fff
-  color #333
-  padding 5px
-  clear right
+  & > div
+    background #fff
+    color #333
+    padding 10px
+    clear right
 
-/* box table */
+    & table
+      background-color #fff
 
-.boxcontent table
-  background-color #fff
+    & th
+      background-color #c0c0c0
+      font-weight bold
+      padding 5px
 
-.boxcontent th
-  background-color #c0c0c0
-  font-weight bold
-  padding 5px
+    & tr
+      padding 5px
 
-.boxcontent tr
-  padding 5px
+      &.odd
+        background-color #ececec
 
-.boxcontent tr.odd
-  background-color #ececec
+      &.even
+        background-color #fff
 
-.boxcontent tr.even
-  background-color #fff
+    & td
+      padding 5px
 
-.boxcontent td
-  padding 5px
+    &:after
+      content ""
+      display block
+      clear both
 
-.boxcontent:after
-  content ""
-  display block
-  clear both

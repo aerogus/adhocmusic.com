@@ -1,7 +1,5 @@
 
-</div>{* #main *}
-
-</div>{* #conteneur *}
+</div>{* .site-content *}
 
 <footer>
 <ul class="footer clearfix">
@@ -32,6 +30,8 @@
 </footer>
 
 <a id="up" href="#" title="haut de la page"><img src="{#STATIC_URL#}/img/icones/up.png" alt=""></a>
+
+</div>{* .global *}
 
 {foreach from=$footer_scripts item=script_url}
 <script src="{$script_url}"></script>

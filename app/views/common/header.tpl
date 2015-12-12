@@ -75,7 +75,7 @@
 <script src="{#STATIC_URL#}/js/jquery.tablesorter.min.js"></script>
 {/if}
 {if !empty($js_gmap)}
-<script src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false&region=FR"></script>
+<script src="https://maps.google.com/maps/api/js?libraries=geometry&region=FR"></script>
 {/if}
 
 <script>
@@ -106,7 +106,7 @@ $(function () {
 
     FB.init({
       appId : '50959607741',
-      xfbml : false,
+      xfbml : true,
       version : 'v2.5'
     });
 
@@ -138,7 +138,7 @@ $(function () {
 });
 </script>
 
-<div id="conteneur" class="clearfix">
+<div class="global">
 
 <div id="header" class="clearfix">
   <a id="logo" href="/" title="Cliquez pour revenir à l'accueil"><span>AD'HOC</span></a>
@@ -175,6 +175,7 @@ $(function () {
 </div>
 {/if}
 
-</div>
+</div>{* #menu-wrapper *}
 
-<div id="main">
+<div class="site_content clearfix">
+

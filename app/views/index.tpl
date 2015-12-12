@@ -2,6 +2,9 @@
 
 <div id="left-center">
 
+<div class="box">
+<h3>À la une</h3>
+<div>
 <div id="feature_list">
   <ul id="tabs">
     {foreach from=$featured item=f}
@@ -22,6 +25,8 @@
     </li>
     {/foreach}
   </ul>
+</div>
+</div>
 </div>
 
 {include file="common/boxstart.tpl" boxtitle="Vidéos Live" width="300px; float: left"}

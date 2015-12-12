@@ -7,8 +7,9 @@
 </div>
 {/if}
 
-{include file="common/boxstart.tpl" boxtitle="Plan du Site"}
-
+<div class="box">
+<h3>Plan du site</h3>
+<div>
 <div class="tree_top"><a href="/">adhocmusic.com</a></div>
 <ul class="tree">
   <li>
@@ -57,7 +58,7 @@
     <a href="/contact">Contact</a>
   </li>
 </ul>
-
-{include file="common/boxend.tpl"}
+</div>
+</div>
 
 {include file="common/footer.tpl"}

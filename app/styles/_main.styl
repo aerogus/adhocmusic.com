@@ -2,28 +2,19 @@
  * general
  */
 
-body
-  background #ececec
-  font-family Arial
-  font-size 12px
-  line-height 1.2em
-  color #333
-
 .nojs
   text-align center
   padding 10px
   background #000
   color #fff
 
-#conteneur
-  max-width 1000px
-  margin 0 auto
-
 #header
-  margin 20px 0
+  max-width 1000px
+  margin 20px auto
 
-#main
-  margin-top 20px
+.site_content
+  max-width 1000px
+  margin 20px auto
   position relative
 
 #logo
@@ -32,25 +23,25 @@ body
   height 92px
   background url(/img/logo_adhoc.png)
 
-#logo span
-  display none
+  & span
+    display none
 
 #megabanner
   float right
   width 728px
   height 90px
 
-#megabanner img
-  width 728px
-  height 90px
-  display block
+  & img
+    width 728px
+    height 90px
+    display block
 
 #featured
   width 172px !important
   height 244px !important
 
-#featured ul
-  margin 0
+  & ul
+    margin 0
 
 #recherche input[type=text]
   border none
@@ -100,9 +91,9 @@ body
   padding 10px 0 0 15px
   font-size  90%
 
-#chemin .item
-  color #fff
-  font-weight bold
+  & .item
+    color #fff
+    font-weight bold
 
 #countdown
   position absolute
@@ -158,33 +149,6 @@ body
 
 .mbr li a:hover
   text-decoration none
-
-.mbrmessagerie
-  background-image url(/img/icones/email.png)
-
-.mbralerting
-  background-image url(/img/icones/star.png)
-
-.mbrcompte
-  background-image url(/img/icones/profil.png)
-
-.mbrgroupes
-  background-image url(/img/icones/groupe.png)
-
-.mbrphotos
-  background-image url(/img/icones/photo.png)
-
-.mbraudios
-  background-image url(/img/icones/audio.png)
-
-.mbrvideos
-  background-image url(/img/icones/video.png)
-
-.mbrdates
-  background-image url(/img/icones/event.png)
-
-.mbrlieux
-  background-image url(/img/icones/lieu.png)
 
 .mbradmin
   background-image url(/img/icones/cadenas.png)
@@ -307,33 +271,6 @@ ul.tools li
   display inline
   margin 0
   padding 5px
-
-/**************
- * titres
- **************/
-
-h1, h2, h3, h4, h5, h6
-  color #000
-  font-weight bold
-  padding 5px 0
-
-h1
-  font-size 1.5em
-
-h2
-  font-size 1.4em
-
-h3
-  font-size 1.3em
-
-h4
-  font-size 1.2em
-
-h5
-  font-size 1.1em
-
-h6
-  font-size 1.0em
 
 /**************
  * liens

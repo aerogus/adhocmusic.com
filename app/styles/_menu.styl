@@ -2,53 +2,55 @@
 
 #menu-wrapper
   position relative
+  background #000
 
 #menu_haut
   background #000
+  max-width 1000px
   height 30px
-  margin 0
+  margin 0 auto
   font bold 1.1em Arial
 
-#menu_haut > li
-  float left
-  list-style none
-  display inline
+  & > li
+    float left
+    list-style none
+    display inline
 
-#menu_haut > li:hover, #menu_haut > li.menuselected:hover
-  background-color #b00
+  & > li:hover, > li.menuselected:hover
+    background-color #b00
 
-#menu_haut > li.menuselected
-  background-color #292933
+  & > li.menuselected
+    background-color #292933
 
-#menu_haut > li > a
-  display block
-  color #fff
-  font-size 16px
-  padding 5px 12px
-  text-transform uppercase
+  & > li > a
+    display block
+    color #fff
+    font-size 16px
+    padding 5px 12px
+    text-transform uppercase
 
-ul.sub-menu
-  background-color #b00
-  width 1000px
-  height 30px
-  top 30px
-  margin 0
-  left 0
-  float left
-  position absolute
-  z-index 10
-  display inline
+  & > li > ul
+    background-color #b00
+    width 1000px
+    height 30px
+    top 30px
+    margin 0
+    left 0
+    float left
+    position absolute
+    z-index 10
+    display inline
 
-ul.sub-menu > li
-  display inline
-  float left
+  & > li > ul > li
+    display inline
+    float left
 
-ul.sub-menu > li > a
-  font bold 1.1em Arial
-  color #fff
-  padding 5px
-  height 20px
-  display block
+  & > li > ul > li > a
+    font bold 1.1em Arial
+    color #fff
+    padding 5px
+    height 20px
+    display block
 
 /* social icons */
 

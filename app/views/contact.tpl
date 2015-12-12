@@ -3,12 +3,13 @@
 <div id="left-center">
 
 <div class="box">
-  <div class="boxtitle">Contacter AD'HOC</div>
+  <h3>Contacter AD'HOC</h3>
+  <div>
 
 {if !empty($sent_ok)}
-<div class="success"><strong>Votre message a bien été envoyé, merci !</strong><br />
-Nous tâcherons d'y répondre dans les plus brefs délais<br />
-Musicalement,<br />
+<div class="success"><strong>Votre message a bien été envoyé, merci !</strong><br>
+Nous tâcherons d'y répondre dans les plus brefs délais<br>
+Musicalement,<br>
 L'Equipe AD'HOC</div>
 {/if}
 
@@ -71,6 +72,7 @@ L'Equipe AD'HOC</div>
 
 {/if}
 
+</div>
 </div>{* .box *}
 
 </div>{* #left-center *}
@@ -78,21 +80,25 @@ L'Equipe AD'HOC</div>
 <div id="right">
 
 <div class="box">
-  <div class="boxtitle">Adresse Postale</div>
-  <strong>Association AD'HOC</strong><br />
-  <address>8, rue de l'église<br />
-  91360 Epinay sur Orge<br />
-  FRANCE</address>
+  <h3>Adresse Postale</h3>
+  <div>
+    <strong>Association AD'HOC</strong><br>
+    <address>8, rue de l'église<br>
+    91360 Epinay sur Orge<br>
+    FRANCE</address>
+  </div>
 </div>
 
 <div class="box">
-  <div class="boxtitle">Questions fréquentes</div>
+  <h3>Questions fréquentes</h3>
+  <div>
   {foreach from=$faq item=f}
   <div class="faq">
     <h3>{$f.question}</h3>
     <p>{$f.answer}</p>
   </div>
   {/foreach}
+  </div>
 </div>
 
 </div>{* #right *}
