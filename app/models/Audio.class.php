@@ -308,7 +308,7 @@ class Audio extends Media
             return true;
         }
 
-        throw new AdHocUserException('Audio introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('Audio introuvable', EXCEPTION_USER_UNKNOW_ID);
     }
 
     /**
@@ -409,7 +409,7 @@ class Audio extends Media
     static function getMyAudiosCount()
     {
         if(empty($_SESSION['membre'])) {
-            throw new AdHocUserException('non identifié');
+            throw new Exception('non identifié');
         }
 
         if(isset($_SESSION['my_counters']['nb_audios'])) {

@@ -433,7 +433,7 @@ class Comment extends ObjectModel
             return true;
         }
 
-        throw new AdHocUserException('id_comment introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('id_comment introuvable', EXCEPTION_USER_UNKNOW_ID);
     }
 
     static function getComments($params = array())

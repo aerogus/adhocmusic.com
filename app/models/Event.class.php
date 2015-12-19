@@ -684,7 +684,7 @@ class Event extends ObjectModel
         if(array_key_exists('datdeb', $params)) {
             if(!empty($params['datdeb'])) {
                 if(!(Date::isDateOk($params['datdeb']) || Date::isDateTimeOk($params['datdeb']))) {
-                    throw new AdHocUserException('datdeb incorrecte', EXCEPTION_USER_BAD_PARAM);
+                    throw new Exception('datdeb incorrecte', EXCEPTION_USER_BAD_PARAM);
                 }
             } else {
                 unset($params['datdeb']);
@@ -694,7 +694,7 @@ class Event extends ObjectModel
         if(array_key_exists('datfin', $params)) {
             if(!empty($params['datfin'])) {
                 if(!(Date::isDateOk($params['datfin']) || Date::isDateTimeOk($params['datfin']))) {
-                    throw new AdHocUserException('datfin incorrecte', EXCEPTION_USER_BAD_PARAM);
+                    throw new Exception('datfin incorrecte', EXCEPTION_USER_BAD_PARAM);
                 }
             } else {
                 unset($params['datfin']);
@@ -915,7 +915,7 @@ class Event extends ObjectModel
             return true;
         }
 
-        throw new AdHocUserException('id_event_introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('id_event_introuvable', EXCEPTION_USER_UNKNOW_ID);
     }
 
     /**
@@ -952,28 +952,28 @@ class Event extends ObjectModel
     {
         // les paramètres sont-ils corrects ?
         if(!$this->_id_event || !$id_style) {
-            throw new AdHocUserException('paramètres incorrects', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('paramètres incorrects', EXCEPTION_USER_BAD_PARAM);
         }
 
         if(!is_numeric($ordre)) {
-            throw new AdHocUserException('ordre non numérique', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('ordre non numérique', EXCEPTION_USER_BAD_PARAM);
         }
 
         // événement valide ?
         if(!self::isEventOk($this->_id_event)) {
-            throw new AdHocUserException('id_event introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_event introuvable', EXCEPTION_USER_UNKNOW_ID);
         }
 
         // style valide ?
         if(!Style::isStyleOk($id_style)) {
-            throw new AdHocUserException('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
         }
 
         // le style n'est-t-il pas déjà présent pour cet évenement ?
         $listeStyles = $this->getStyles();
         foreach($listeStyles as $style) {
             if($id_style == $style['id_style']) {
-                throw new AdHocUserException('Style déjà présent pour cet événement', EXCEPTION_USER_DEFAULT);
+                throw new Exception('Style déjà présent pour cet événement', EXCEPTION_USER_DEFAULT);
             }
         }
 
@@ -1000,17 +1000,17 @@ class Event extends ObjectModel
     {
         // les paramètres sont-ils corrects ?
         if(!$this->_id_event || !$id_style) {
-            throw new AdHocUserException('paramètres incorrects', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('paramètres incorrects', EXCEPTION_USER_BAD_PARAM);
         }
 
         // événement valide ?
         if(!self::isEvenementOk($this->_id_event)) {
-            throw new AdHocUserException('id_event introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_event introuvable', EXCEPTION_USER_UNKNOW_ID);
         }
 
         // style valide ?
         if(!Style::isStyleOk($id_style)) {
-            throw new AdHocUserException('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
         }
 
         // style bien trouvé pour cet événement ?
@@ -1022,7 +1022,7 @@ class Event extends ObjectModel
             }
         }
         if($style_not_found) {
-            throw new AdHocUserException('Style introuvable pour cet événement', EXCEPTION_USER_DEFAULT);
+            throw new Exception('Style introuvable pour cet événement', EXCEPTION_USER_DEFAULT);
         }
 
         // tout est ok on supprime la liaison événement/style
@@ -1202,14 +1202,14 @@ class Event extends ObjectModel
     {
         // les paramètres sont-ils corrects ?
         if(!$this->_id_event || !$id_structure) {
-            throw new AdHocUserException('paramètres incorrects', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('paramètres incorrects', EXCEPTION_USER_BAD_PARAM);
         }
 
         // la structure n'est-t-elle pas déjà présente pour l'événement ?
         $listeStructures = $this->getStructures();
         foreach($listeStructures as $struct) {
             if($id_structure == $struct['id']) {
-                throw new AdHocUserException('Structure déjà présente pour cet événement', EXCEPTION_USER_DEFAULT);
+                throw new Exception('Structure déjà présente pour cet événement', EXCEPTION_USER_DEFAULT);
             }
         }
 
@@ -1236,7 +1236,7 @@ class Event extends ObjectModel
     {
         // les paramètres sont-ils corrects ?
         if(!$this->_id_event || !$id_structure) {
-            throw new AdHocUserException('paramètres incorrects', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('paramètres incorrects', EXCEPTION_USER_BAD_PARAM);
         }
 
         // la structure est-elle bien présente pour cet événement ?
@@ -1248,7 +1248,7 @@ class Event extends ObjectModel
             }
         }
         if($struct_not_found) {
-            throw new AdHocUserException('Structure introuvable pour cet événement', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('Structure introuvable pour cet événement', EXCEPTION_USER_UNKNOW_ID);
         }
 
         // tout est ok on supprime la liaison événement/structure
@@ -1421,7 +1421,7 @@ class Event extends ObjectModel
     static function getMyEventsCount()
     {
         if(empty($_SESSION['membre'])) {
-            throw new AdHocUserException('non identifié');
+            throw new Exception('non identifié');
         }
 
         if(isset($_SESSION['my_counters']['nb_events'])) {

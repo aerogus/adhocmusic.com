@@ -380,7 +380,7 @@ class Newsletter extends ObjectModel
             return true;
         }
 
-        throw new AdHocUserException('id_newsletter introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('id_newsletter introuvable', EXCEPTION_USER_UNKNOW_ID);
     }
 
     /**

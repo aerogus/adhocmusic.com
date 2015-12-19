@@ -43,7 +43,7 @@ class Exposant extends ObjectModel
      * @var string
      */
     protected $_email = '';
-    
+
     /**
      * @var string
      */
@@ -53,12 +53,12 @@ class Exposant extends ObjectModel
      * @var string
      */
     protected $_site = '';
-    
+
     /**
      * @var string
      */
     protected $_type = '';
-    
+
     /**
      * @var string
      */
@@ -68,7 +68,7 @@ class Exposant extends ObjectModel
      * @var string
      */
     protected $_description = '';
-    
+
     /**
      * @var string
      */
@@ -224,7 +224,7 @@ class Exposant extends ObjectModel
     }
 
     /* fin getters */
-    
+
     /* début setters */
 
     /**
@@ -391,8 +391,8 @@ class Exposant extends ObjectModel
              . "WHERE 1 ";
 
         $res = $db->queryWithFetch($sql);
-        
-        return $res;   	
+
+        return $res;
     }
 
     /**
@@ -413,7 +413,7 @@ class Exposant extends ObjectModel
             return true;
         }
 
-        throw new AdHocUserException('id_exposant_introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('id_exposant_introuvable', EXCEPTION_USER_UNKNOW_ID);
     }
 
     /**
@@ -422,5 +422,5 @@ class Exposant extends ObjectModel
     function delete()
     {
         parent::delete();
-    }    
+    }
 }

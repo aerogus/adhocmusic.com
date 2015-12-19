@@ -384,22 +384,22 @@ class Structure extends ObjectModel
     {
         // check de la table evenement
         if($this->hasEvents()) {
-            throw new AdHocUserException('delete impossible, la structure est liée à des événements', EXCEPTION_USER_DEFAULT);
+            throw new Exception('delete impossible, la structure est liée à des événements', EXCEPTION_USER_DEFAULT);
         }
 
         // check de la table audio
         if($this->hasAudios()) {
-            throw new AdHocUserException('delete impossible, la structure est liée à des audios', EXCEPTION_USER_DEFAULT);
+            throw new Exception('delete impossible, la structure est liée à des audios', EXCEPTION_USER_DEFAULT);
         }
 
         // check de la table photo
         if($this->hasPhotos()) {
-            throw new AdHocUserException('delete impossible, la structure est liée à des photos', EXCEPTION_USER_DEFAULT);
+            throw new Exception('delete impossible, la structure est liée à des photos', EXCEPTION_USER_DEFAULT);
         }
 
         // check de la table video
         if($this->hasVideos()) {
-            throw new AdHocUserException('delete impossible, la structure est liée à des vidéos', EXCEPTION_USER_DEFAULT);
+            throw new Exception('delete impossible, la structure est liée à des vidéos', EXCEPTION_USER_DEFAULT);
         }
 
         // tout est ok on delete

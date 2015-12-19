@@ -231,7 +231,7 @@ class Photo extends Media
     static function getMyPhotosCount()
     {
         if(empty($_SESSION['membre'])) {
-            throw new AdHocUserException('non identifié');
+            throw new Exception('non identifié');
         }
 
         if(isset($_SESSION['my_counters']['nb_photos'])) {
@@ -455,7 +455,7 @@ class Photo extends Media
             return true;
         }
 
-        throw new AdHocUserException('Photo introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('Photo introuvable', EXCEPTION_USER_UNKNOW_ID);
     }
 
     function getThumb80Url()

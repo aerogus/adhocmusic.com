@@ -910,19 +910,19 @@ class Lieu extends ObjectModel
     function delete()
     {
         if($this->hasEvents()) {
-            throw new AdHocUserException('suppression impossible : lieu avec événements', EXCEPTION_USER_DEFAULT);
+            throw new Exception('suppression impossible : lieu avec événements', EXCEPTION_USER_DEFAULT);
         }
 
         if($this->hasAudios()) {
-            throw new AdHocUserException('suppression impossible : lieu avec audios', EXCEPTION_USER_DEFAULT);
+            throw new Exception('suppression impossible : lieu avec audios', EXCEPTION_USER_DEFAULT);
         }
 
         if($this->hasPhotos()) {
-            throw new AdHocUserException('suppression impossible : lieu avec photos', EXCEPTION_USER_DEFAULT);
+            throw new Exception('suppression impossible : lieu avec photos', EXCEPTION_USER_DEFAULT);
         }
 
         if($this->hasVideos()) {
-            throw new AdHocUserException('suppression impossible : lieu avec videos', EXCEPTION_USER_DEFAULT);
+            throw new Exception('suppression impossible : lieu avec videos', EXCEPTION_USER_DEFAULT);
         }
 
         $db = DataBase::getInstance();
@@ -1045,7 +1045,7 @@ class Lieu extends ObjectModel
              . "WHERE `id_lieu` = " . (int) $this->_id_lieu;
 
         if(($res = $db->queryWithFetchFirstRow($sql)) == false) {
-            throw new AdHocUserException('id_lieu introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_lieu introuvable', EXCEPTION_USER_UNKNOW_ID);
         }
 
         $this->_dbToObject($res);
@@ -1182,7 +1182,7 @@ class Lieu extends ObjectModel
     static function getMyLieuxCount()
     {
         if(empty($_SESSION['membre'])) {
-            throw new AdHocUserException('non identifié');
+            throw new Exception('non identifié');
         }
 
         if(isset($_SESSION['my_counters']['nb_lieux'])) {
@@ -1278,7 +1278,7 @@ EOT;
         $distance = (int) $params['distance'];
         $limit    = (int) $params['limit'];
         $sort     = (string) $params['sort'];
-        
+
         $db = DataBase::getInstance();
 
         $sql = "SELECT `l`.`id_lieu`, `l`.`name`, `l`.`address`, `v`.`cp`, `l`.`cp` AS `old_cp`, `v`.`name` AS `city`, `l`.`city` AS `old_city`, `l`.`lat`, `l`.`lng`, "
@@ -1336,7 +1336,7 @@ EOT;
              . "AND `l`.`lng` < " . number_format($lng_max, 8, '.', '') . " "
              . "ORDER BY RAND() "
              . "LIMIT 0, " . $limit;
-             
+
         return $db->queryWithFetch($sql);
     }
 

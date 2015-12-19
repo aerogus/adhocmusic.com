@@ -250,7 +250,7 @@ class Featured extends ObjectModel
     function setDatDeb($val)
     {
         if(!Date::isDateTimeOk($val)) {
-            throw new AdHocUserException('datdeb invalide', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('datdeb invalide', EXCEPTION_USER_BAD_PARAM);
         }
 
         if ($this->_datdeb != $val)
@@ -266,7 +266,7 @@ class Featured extends ObjectModel
     function setDatFin($val)
     {
         if(!Date::isDateTimeOk($val)) {
-            throw new AdHocUserException('datfin invalide', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('datfin invalide', EXCEPTION_USER_BAD_PARAM);
         }
 
         if ($this->_datfin != $val)
@@ -438,7 +438,7 @@ class Featured extends ObjectModel
             return true;
         }
 
-        throw new AdHocUserException('Featured introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('Featured introuvable', EXCEPTION_USER_UNKNOW_ID);
     }
 
     /**

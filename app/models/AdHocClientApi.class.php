@@ -8,8 +8,9 @@
  */
 class AdHocClientApi
 {
-    const API_URL = 'http://www.adhocmusic.com/api';
-    const API_FORMAT = 'json';
+    const API_URL     = 'https://www.adhocmusic.com/api';
+    const API_VERSION = 'v1';
+    const API_FORMAT  = 'json';
 
     /**
      * Exécute une requête sur l'API REST AD'HOC
@@ -21,17 +22,15 @@ class AdHocClientApi
     {
         $params = '';
         foreach($data as $field => $value) {
-            if($field !== 'action') {
-                $params .= $field . '=' . $value . '&';
-            }
+            $params .= $field . '=' . $value . '&';
         }
 
-        $resp = file_get_contents(self::API_URL . '/' . $data['action'] . '.' . self::API_FORMAT . '?' . substr($params, 0, -1));
+        $resp = file_get_contents(self::API_URL . '/' . self::API_VERSION . '/' . $data['action'] . '.' . self::API_FORMAT . '?' . substr($params, 0, -1));
 
         if(self::API_FORMAT === 'json') {
             return json_decode($resp);
         }
         return $resp;
-    }   
+    }
 }
 

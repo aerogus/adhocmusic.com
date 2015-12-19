@@ -107,7 +107,7 @@ class DataBase
 
         if (!$this->_current_conn[$conn_key])
         {
-            throw new AdHocMySqlException($this->_current_conn[$conn_key], 'Erreur connexion serveur MySQL');
+            throw new Exception($this->_current_conn[$conn_key], 'Erreur connexion serveur MySQL');
         }
 
         $select_db = @mysql_select_db(
@@ -115,7 +115,7 @@ class DataBase
             $this->_current_conn[$conn_key]);
         if (!$select_db)
         {
-            throw new AdHocMySqlException($this->_current_conn[$conn_key], 'Erreur connexion base MySQL');
+            throw new Exception($this->_current_conn[$conn_key], 'Erreur connexion base MySQL');
         }
 
         // on précise l'encodage à utiliser pour la connexion
@@ -387,7 +387,7 @@ class DataBase
 
         if (false === $rc)
         {
-            $error = new AdHocMySqlException($conn);
+            $error = new Exception($conn);
             $error->setQuery($sql);
             if ($closeConnectionOnError) {
                 $this->close($conn_name);

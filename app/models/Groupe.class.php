@@ -999,7 +999,7 @@ class Groupe extends ObjectModel
     static function getMyGroupesCount()
     {
         if(empty($_SESSION['membre'])) {
-            throw new AdHocUserException('non identifié');
+            throw new Exception('non identifié');
         }
 
         if(isset($_SESSION['my_counters']['nb_groupes'])) {
@@ -1078,7 +1078,7 @@ class Groupe extends ObjectModel
             return true;
         }
 
-        throw new AdHocUserException('id_groupe introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('id_groupe introuvable', EXCEPTION_USER_UNKNOW_ID);
     }
 
     /**
@@ -1096,7 +1096,7 @@ class Groupe extends ObjectModel
 
         // l'id_contact est il valide ?
         if(($mbr = Membre::getInstance($id_contact)) == false) {
-            throw new AdHocUserException('id_contact introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_contact introuvable', EXCEPTION_USER_UNKNOW_ID);
         }
 
         // la relation est elle deja présente ?
@@ -1395,7 +1395,7 @@ class Groupe extends ObjectModel
     static function getMyGroupes()
     {
         if(empty($_SESSION['membre'])) {
-            throw new AdHocUserException('non identifié');
+            throw new Exception('non identifié');
         }
 
         $db = DataBase::getInstance();
@@ -1646,7 +1646,7 @@ class Groupe extends ObjectModel
 
         // le style existe-il bien ?
         if(!Style::isStyleOk($id_style)) {
-            throw new AdHocUserException('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
         }
 
         // le groupe n'a-t-il pas déjà ce style ?
@@ -1677,7 +1677,7 @@ class Groupe extends ObjectModel
 
         // le style existe-il bien ?
         if(!Style::isStyleOk($id_style)) {
-            throw new AdHocUserException('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
         }
 
         $db = DataBase::getInstance();

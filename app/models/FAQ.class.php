@@ -191,6 +191,6 @@ class FAQ extends ObjectModel
             return true;
         }
 
-        throw new AdHocUserException('FAQ introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('FAQ introuvable', EXCEPTION_USER_UNKNOW_ID);
     }
 }

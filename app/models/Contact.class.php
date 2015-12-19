@@ -122,7 +122,7 @@ class Contact extends ObjectModel
     static function getIdByEmail($email)
     {
         if(!Email::validate($email)) {
-            throw new AdHocUserException('email syntaxiquement incorrect', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('email syntaxiquement incorrect', EXCEPTION_USER_BAD_PARAM);
         }
 
         $db = DataBase::getInstance();
@@ -144,13 +144,13 @@ class Contact extends ObjectModel
      static function isEmailFound($email)
      {
          $db   = DataBase::getInstance();
- 
+
          $sql  = "SELECT `id_contact` "
                . "FROM `" . self::$_db_table_contact . "` "
                . "WHERE `email` = '" . $db->escape($email) . "'";
- 
+
          $res  = $db->query($sql);
- 
+
          return $db->numRows($res);
     }
 
@@ -337,6 +337,6 @@ class Contact extends ObjectModel
             return true;
         }
 
-        throw new AdHocUserException('Contact introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('Contact introuvable', EXCEPTION_USER_UNKNOW_ID);
     }
 }

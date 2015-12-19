@@ -908,7 +908,7 @@ class Video extends Media
             return true;
         }
 
-        throw new AdHocUserException('Vidéo introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('Vidéo introuvable', EXCEPTION_USER_UNKNOW_ID);
     }
 
     /**
@@ -1088,7 +1088,7 @@ class Video extends Media
     static function getMyVideosCount()
     {
         if(empty($_SESSION['membre'])) {
-            throw new AdHocUserException('non identifié');
+            throw new Exception('non identifié');
         }
 
         if(isset($_SESSION['my_counters']['nb_videos'])) {
