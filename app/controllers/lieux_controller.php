@@ -10,7 +10,7 @@ class Controller
         $lng = $_SESSION['lng'];
 
         $smarty->assign('menuselected', 'lieux');
- 
+
         $trail = Trail::getInstance();
         $trail->addStep("Lieux de diffusion", "/lieux/");
 
@@ -83,7 +83,7 @@ class Controller
 
         try {
             $lieu = Lieu::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_lieu', true);
             return $smarty->fetch('lieux/show.tpl');
@@ -230,7 +230,7 @@ class Controller
                 'lng'            => (float) Route::params('lng'),
                 'id_contact'     => $_SESSION['membre']->getId(),
             );
-    
+
             if(self::_validate_form_lieu_create($data, $errors))
             {
                 $lieu = Lieu::init();
@@ -251,7 +251,7 @@ class Controller
                 $lieu->setIdContact($data['id_contact']);
                 $lieu->setCreatedNow();
                 $lieu->save();
-    
+
                 /* récupération des coordonnées si non précisées */
 //                if(!$lieu->getLng() || !$lieu->getLat()) {
                     $addr = $lieu->getAddress() . ' ' . $lieu->getCp() . ' ' . $lieu->getCity();
@@ -261,7 +261,7 @@ class Controller
                         $lieu->save();
                     }
 //                }
-    
+
                 /* Upload de la photo */
                 if(is_uploaded_file($_FILES['photo']['tmp_name'])) {
                     $objImg = new Image($_FILES['photo']['tmp_name']);
@@ -272,9 +272,9 @@ class Controller
                     $objImg->write();
                     $objImg = "";
                 }
-    
+
                 Log::action(Log::ACTION_LIEU_CREATE, $lieu->getId());
-    
+
                 Tools::redirect('/lieux/show/' . $lieu->getId() . '?create=1');
             }
             else
@@ -332,7 +332,7 @@ class Controller
             $smarty->assign('lieu', $lieu);
             $smarty->assign('types_lieu', Lieu::getTypes());
             $smarty->assign('countries', WorldCountry::getHashTable());
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_lieu', true);
             return $smarty->fetch('lieux/edit.tpl');
@@ -360,7 +360,7 @@ class Controller
                 'lat'            => (string) Route::params('lat'),
                 'lng'            => (string) Route::params('lng'),
             );
-    
+
             if(self::_validate_form_lieu_edit($data, $errors))
             {
                 $lieu = Lieu::getInstance($data['id']);
@@ -381,7 +381,7 @@ class Controller
                 $lieu->setLat($data['lat']);
                 $lieu->setLng($data['lng']);
                 $lieu->setModifiedNow();
-    
+
                 if($lieu->save())
                 {
                     /* récupération des coordonnées si non précisées */
@@ -404,9 +404,9 @@ class Controller
                         $objImg->write();
                         $objImg = "";
                     }
-    
+
                     Log::action(Log::ACTION_LIEU_EDIT, $lieu->getId());
-    
+
                     Tools::redirect('/lieux/show/' . $lieu->getId() . '?edit=1');
                 }
             } else {
@@ -451,7 +451,7 @@ class Controller
         try {
             $lieu = Lieu::getInstance($id);
             $smarty->assign('lieu', $lieu);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_lieu', true);
             return $smarty->fetch('lieux/delete.tpl');

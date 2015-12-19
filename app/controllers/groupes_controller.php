@@ -72,7 +72,7 @@ class Controller
 
         try {
             $groupe = Groupe::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_group', true);
             return $smarty->fetch('groupes/show.tpl');
@@ -348,7 +348,7 @@ class Controller
 
         try {
             $groupe = Groupe::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_groupe', true);
             return $smarty->fetch('groupes/edit.tpl');
@@ -507,7 +507,7 @@ class Controller
 
         try {
             $groupe = Groupe::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_groupe', true);
             return $smarty->fetch('groupes/delete.tpl');

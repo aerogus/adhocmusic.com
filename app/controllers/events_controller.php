@@ -102,7 +102,7 @@ class Controller
 
         try {
             $event = Event::getInstance((int) $id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_event', true);
             return $smarty->fetch('events/show.tpl');
@@ -170,7 +170,7 @@ class Controller
             try {
                 $membre = Membre::getInstance($event->getIdContact());
                 $smarty->assign('membre', $membre);
-            } catch(AdHocUserException $e) {
+            } catch(Exception $e) {
                 mail('gus@adhocmusic.com', "[AD'HOC] Bug : evenement avec membre introuvable", print_r($e, true));
             }
         }
@@ -611,7 +611,7 @@ class Controller
 
         try {
             $event = Event::getInstance((int) Route::params('id'));
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_event', true);
             return $smarty->fetch('events/show.tpl');

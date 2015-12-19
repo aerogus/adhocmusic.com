@@ -15,7 +15,7 @@ class Controller
 
         try {
             $membre = Membre::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_member', true);
             return $smarty->fetch('membres/show.tpl');
@@ -387,7 +387,7 @@ class Controller
 
         try {
             $membre = Membre::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_member', true);
             return $smarty->fetch('membres/delete.tpl');

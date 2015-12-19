@@ -66,7 +66,7 @@ class Controller
 
         try {
             $audio = Audio::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_audio', true);
             return $smarty->fetch('audios/show.tpl');
@@ -229,7 +229,7 @@ class Controller
             $smarty->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
             $smarty->assign('lieu', $lieu);
-        } 
+        }
 
         $smarty->assign('id_lieu', $id_lieu);
 
@@ -273,7 +273,7 @@ class Controller
 
         try {
             $audio = Audio::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_audio', true);
             return $smarty->fetch('audios/edit.tpl');
@@ -388,7 +388,7 @@ class Controller
 
         try {
             $audio = Audio::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_audio', true);
             return $smarty->fetch('audios/delete.tpl');
@@ -408,7 +408,7 @@ class Controller
         if($audio->getIdGroupe()) {
             try {
                 $smarty->assign('groupe', Groupe::getInstance($audio->getIdGroupe()));
-            } catch(AdHocUserException $e) {
+            } catch(Exception $e) {
             }
         }
         if($audio->getIdEvent()) {

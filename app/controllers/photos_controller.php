@@ -50,7 +50,7 @@ class Controller
 
         try {
             $photo = Photo::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_photo', true);
             return $smarty->fetch('photos/show.tpl');
@@ -60,7 +60,7 @@ class Controller
         $meta_description = "Titre : " . $photo->getName();
 
         if($photo->getOnline() || (!$photo->getOnline() && Tools::isAuth() && Tools::auth(Membre::TYPE_INTERNE))) {
-            
+
             $smarty->assign('photo', $photo);
             $smarty->assign('from', $from);
             $smarty->assign('og_image', $photo->getThumb130Url());
@@ -90,7 +90,7 @@ class Controller
                 try {
                     $membre = Membre::getInstance($photo->getIdContact());
                     $smarty->assign('membre', $membre);
-                } catch(AdHocUserException $e) {
+                } catch(Exception $e) {
                     mail('gus@adhocmusic.com', "[AD'HOC] Bug : photo avec membre introuvable", print_r($e, true));
                 }
             }
@@ -461,7 +461,7 @@ class Controller
 
         try {
             $photo = Photo::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_photo', true);
             return $smarty->fetch('photos/edit.tpl');
@@ -602,7 +602,7 @@ class Controller
 
         try {
             $photo = Photo::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_photo', true);
             return $smarty->fetch('photos/delete.tpl');

@@ -77,7 +77,7 @@ class Controller
 
         try {
             $video = Video::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_video', true);
             return $smarty->fetch('videos/show.tpl');
@@ -192,7 +192,7 @@ class Controller
 
         try {
             $video = Video::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_video', true);
             return $smarty->fetch('videos/embed.tpl');
@@ -362,7 +362,7 @@ class Controller
 
         try {
             $video = Video::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_video', true);
             return $smarty->fetch('videos/edit.tpl');
@@ -470,7 +470,7 @@ class Controller
 
         try {
             $video = Video::getInstance($id);
-        } catch(AdHocUserException $e) {
+        } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_video', true);
             return $smarty->fetch('videos/delete.tpl');
