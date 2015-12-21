@@ -7,7 +7,7 @@
 /* THANKS */
 
 /* SITE */
-    Last update: 2012/01/29
+    Last update: 2015/12/19
     Language: French
     Doctype: HTML5
-    IDE: Eclipse, vim
+    IDE: Sublime Text, vim

@@ -1,15 +1,16 @@
-/* menu */
+/* menu du haut */
 
 #menu-wrapper
   position relative
-  background #000
+  background #292933
 
 #menu_haut
   background #000
   max-width 1000px
-  height 30px
+  hheight 30px
   margin 0 auto
-  font bold 1.1em Arial
+  font-family 'TradeGothic', Arial
+  font-size 1.6rem
 
   & > li
     float left
@@ -17,7 +18,7 @@
     display inline
 
   & > li:hover, > li.menuselected:hover
-    background-color #b00
+    background-color color_red
 
   & > li.menuselected
     background-color #292933
@@ -26,18 +27,18 @@
     display block
     color #fff
     font-size 16px
-    padding 5px 12px
+    padding .2rem .6rem
     text-transform uppercase
 
   & > li > ul
-    background-color #b00
+    background-color color_red
     width 1000px
     height 30px
     top 30px
     margin 0
     left 0
     float left
-    position absolute
+    pposition absolute
     z-index 10
     display inline
 
@@ -53,21 +54,6 @@
     display block
 
 /* social icons */
-
-#social
-  float right
-  margin-top 1px
-
-#social ul
-  margin 0
-
-#social ul li, #follow ul li
-  float left
-  width 24px
-  height 24px
-  margin 0 2px
-  background-repeat no-repeat
-  background-image url(/img/icones/social-sprite.png)
 
 #follow ul li
   margin 0 3px

@@ -2,9 +2,7 @@
 
 {include file="common/boxstart.tpl" boxtitle="Partenaires"}
 
-<div class="partners">
-
-<ul>
+<ul class="partners">
   <li>
     <a href="http://www.ouifm.fr">
       <img src="/img/partners/ouifm.png" alt="">
@@ -74,13 +72,9 @@
 </ul>
 
 <h3>Devenir partenaire ?</h3>
-<p>Le <strong>site AD'HOC</strong> est ouvert à différentes propositions de partenariat web, en particulier avec des sites musicaux, webzines et autres agendas culturels.</p>
-<p>Pour les structures et lieux de diffusion voulant faire passer leurs infos (dates etc ...), <a href="/events/"><strong>notre agenda</strong></a> est à votre disposition.</p>
-<p>Pour les groupes, créer une "<a href="/groupes/create"><strong>fiche groupe</strong></a>" sera le meilleur moyen de promotion.</p>
+<p><strong>AD'HOC</strong> est ouvert à différentes propositions de partenariat, en particulier avec des sites musicaux, webzines et autres agendas culturels.</p>
+<p>N'hésitez pas à faire un lien vers notre site. Toutes les bannières et logos sont disponibles sur la page "<a href="/visuels">visuels</a>"</p>
 <p>Pour tout renseignement complémentaire, vous pouvez <a href="/contact"><strong>nous contacter</strong></a>.</p>
-<p>N'hésitez pas à faire un lien vers notre site. Toutes les bannières et logos sont disponibles sont la page "<a href="/visuels">visuels</a>"</p>
-
-</div>
 
 {include file="common/boxend.tpl"}
 

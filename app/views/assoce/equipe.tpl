@@ -10,7 +10,7 @@
 
 {include file="common/boxstart.tpl" boxtitle="L'Equipe actuelle"}
 
-<p>Voici les forces actives de l'association en 2014</p>
+<p>Voici les forces actives de l'association pour la saison 2015/2016</p>
 <ul id="staff">
   {foreach from=$membres item=membre}
   <li class="staff-member">

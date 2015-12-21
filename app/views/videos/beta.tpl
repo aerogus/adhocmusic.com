@@ -53,14 +53,7 @@
 
 <div style="margin: 10px auto; {if $video->getIdHost() != 7} width: 640px; height: 480px;{/if} background-color: #000; box-shadow: 0px 0px 10px #666;">{$video->getPlayer(true)}</div>
 
-<div class="fb-share-box">
-<a class="fb-share-link" href="http://www.facebook.com/sharer/sharer.php?u={$video->getUrl()|escape:'url'}">Partager</a>
-<fb:like style="margin-left: 74px;" href="{$video->getUrl()}" show_faces="false" width="600" font="arial" send="true"></fb:like>
-</div>
-
-{*
-<fb:comments href="{$video->getUrl()}" num_posts="2" width="680"></fb:comments>
-*}
+{include file="comments/share.tpl" title="" url=$video->getUrl()}
 
 {include file="comments/box.tpl" type="v" id_content=$video->getId()}
 

@@ -118,6 +118,8 @@ $(function () {
       }
     });
 
+    $('.nojs').hide();
+
     $('#ask_permissions').click(function () {
       FB.login(function(response) {
       },{

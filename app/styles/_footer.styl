@@ -1,34 +1,41 @@
+/**
+ * Pied de page
+ */
+
 footer
   background #292933
 
-footer::before
-  content ''
-  display: block
-  height 62px
-  background #ececec url(/img/foule.png) repeat-x
+  &::before
+    content ''
+    display: block
+    height 62px
+    background #ececec url(/img/foule.png) repeat-x
 
-ul.footer
+.footer
   max-width 680px
   margin 0 auto
 
-.footer > li strong
-  display block
-  margin 5px 0
-  color #fff
+  & > li
+    display inline-block
+    padding 0 1em 1em 1em
+    vertical-align top
+    width 32%
 
-.footer ul
-  margin 0
+    @media screen and (max-width: 680px)
+      &
+        width 100%
+        display block
 
-.footer > li
-  display inline-block
-  padding 0 1em 1em 1em
-  vertical-align top
-  width 32%
+    & strong
+      display block
+      margin .5rem 0
+      color #fff
+      border-bottom 1px solid
 
-.footer > li a
-  color #999
-  display inline-block
-  padding 2px 0
+    & a
+      color #999
+      display inline-block
+      padding 2px 0
 
 vendorize(property, value)
   -webkit-{property} value
@@ -37,4 +44,3 @@ vendorize(property, value)
 .footer img
   vendorize(filter, grayscale(1))
   margin-right 5px
-

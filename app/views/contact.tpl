@@ -22,7 +22,7 @@ L'Equipe AD'HOC</div>
 <p>Merci de consulter la foire aux questions avant de nous contacter</p>
 
 <form id="form-contact" name="form-contact" method="post" action="" enctype="multipart/form-data">
-  <ol>
+  <ul>
     <li>
       <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner votre nom</div>
       <label for="name">Nom</label>
