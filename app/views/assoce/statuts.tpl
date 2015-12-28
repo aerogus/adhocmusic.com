@@ -8,9 +8,11 @@
 
 <div id="left-center">
 
-{include file="common/boxstart.tpl" boxtitle="Statuts de l'Association AD'HOC"}
-
-<div id="statuts">
+<div class="box">
+  <header>
+    <h1>Statuts de l'Association AD'HOC</h1>
+  </header>
+  <div>
 
 <p>Le 9 juin 2009<br />
 A Epinay-sur-Orge</p>
@@ -120,8 +122,7 @@ Julie MADEIRA</p>
 Guillaume DESSAY</p>
 
 </div>
-
-{include file="common/boxend.tpl"}
+</div>
 
 </div>
 

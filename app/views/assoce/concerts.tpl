@@ -9,7 +9,9 @@
 <div id="left-center">
 
 <div class="box">
-  <h3>Les Concerts</h3>
+  <header>
+    <h3>Les Concerts</h3>
+  </header>
   <div>
 
 {foreach from=$events key=season item=events_of_the_year}

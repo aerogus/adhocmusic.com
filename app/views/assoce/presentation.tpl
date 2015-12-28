@@ -8,7 +8,11 @@
 
 <div id="left-center">
 
-{include file="common/boxstart.tpl" boxtitle="Présentation"}
+<div class="box">
+  <header>
+    <h1>Présentation</h1>
+  </header>
+  <div>
 
 <img src="{#STATIC_URL#}/img/idf.png" width="250" height="211" alt="Carte de l'Ile de France" style="float: right; margin: 5px;" />
 <p><strong>AD'HOC</strong> est une association à but non lucratif, originaire d'Epinay sur Orge (91 - Essonne) oeuvrant pour le développement de la scène musicale actuelle depuis plus de 10 ans (création en 1996).</p>
@@ -33,7 +37,8 @@
 
 <p align="right">Le Bureau de l'Association</p>
 
-{include file="common/boxend.tpl"}
+</div>
+</div>
 
 </div>
 

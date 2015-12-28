@@ -3,7 +3,9 @@
 <div id="left-center">
 
 <div class="box">
-  <h3>Contacter AD'HOC</h3>
+  <header>
+    <h3>Contacter AD'HOC</h3>
+  </header>
   <div>
 
 {if !empty($sent_ok)}
@@ -80,7 +82,9 @@ L'Equipe AD'HOC</div>
 <div id="right">
 
 <div class="box">
-  <h3>Adresse Postale</h3>
+  <header>
+    <h3>Adresse Postale</h3>
+  </header>
   <div>
     <strong>Association AD'HOC</strong><br>
     <address>8, rue de l'église<br>
@@ -90,7 +94,9 @@ L'Equipe AD'HOC</div>
 </div>
 
 <div class="box">
-  <h3>Questions fréquentes</h3>
+  <header>
+    <h3>Questions fréquentes</h3>
+  </header>
   <div>
   {foreach from=$faq item=f}
   <div class="faq">

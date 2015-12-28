@@ -1,7 +1,9 @@
 {include file="common/header.tpl"}
 
 <div class="box">
-  <h1>Mentions Légales</h1>
+  <header>
+    <h1>Mentions Légales</h1>
+  </header>
   <div>
     <h2>L'Association</h3>
     <p>

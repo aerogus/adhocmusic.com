@@ -3,7 +3,9 @@
 <div id="left-center">
 
 <div class="box">
-<h3>À la une</h3>
+<header>
+  <h3>À la une</h3>
+</header>
 <div>
 <div id="feature_list">
   <ul id="tabs">
@@ -29,19 +31,25 @@
 </div>
 </div>
 
-{include file="common/boxstart.tpl" boxtitle="Vidéos Live" width="300px; float: left"}
-
+<div class="box" style="width: 300px; float: left;">
+  <header>
+    <h2>Vidéos Live</h2>
+  </header>
+  <div>
 {foreach from=$videos item=video}
 <div class="thumb-80">
   <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}" />{$video.name|truncate:15:"...":true|escape}</a>
   <a class="overlay-80 overlay-video-80" href="{$video.url}" title="Regarder {$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}"></a>
 </div>
 {/foreach}
+</div>
+</div>
 
-{include file="common/boxend.tpl"}
-
-{include file="common/boxstart.tpl" boxtitle="Agenda" width="360px; float: left; margin-left: 20px"}
-
+<div class="box" style="width: 360px; float: left; margin-left: 20px">
+  <header>
+    <h2>Agenda</h2>
+  </header>
+  <div>
 <ul>
 {foreach from=$evts key=month item=mevts}
   <li><strong>{$month|date_format:"%B %Y"|capitalize}</strong>
@@ -53,8 +61,8 @@
   </li>
 {/foreach}
 </ul>
-
-{include file="common/boxend.tpl"}
+</div>
+</div>
 
 </div>
 

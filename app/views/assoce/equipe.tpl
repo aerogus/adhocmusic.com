@@ -8,7 +8,11 @@
 
 <div id="left-center">
 
-{include file="common/boxstart.tpl" boxtitle="L'Equipe actuelle"}
+<div class="box">
+  <header>
+    <h1>L'Equipe</h1>
+  </header>
+  <div>
 
 <p>Voici les forces actives de l'association pour la saison 2015/2016</p>
 <ul id="staff">
@@ -28,11 +32,16 @@
   {/foreach}
 </ul>
 
-{include file="common/boxend.tpl"}
+</div>
+</div>
 
-{include file="common/boxstart.tpl" boxtitle="Les anciens"}
+<div class="box">
+  <header>
+    <h1>Les anciens</h1>
+  </header>
+  <div>
 
-<p>De 1996 à aujourd'hui, beaucoup de monde a participé à l'aventure AD'HOC de près ou de loin. Qu'ils en soient remerciés</p>
+<p>De 1996 à aujourd'hui, beaucoup de monde a participé à l'aventure AD'HOC de près ou de loin. Qu'ils en soient tous remerciés</p>
 <ul id="old-staff">
   {foreach from=$omembres item=membre}
   <li class="staff-member">
@@ -50,7 +59,8 @@
   {/foreach}
 </ul>
 
-{include file="common/boxend.tpl"}
+</div>
+</div>
 
 </div>
 

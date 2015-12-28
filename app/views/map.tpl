@@ -8,7 +8,9 @@
 {/if}
 
 <div class="box">
-<h3>Plan du site</h3>
+  <header>
+    <h3>Plan du site</h3>
+  </header>
 <div>
 <div class="tree_top"><a href="/">adhocmusic.com</a></div>
 <ul class="tree">
