@@ -13,32 +13,17 @@
     margin 5px
     padding 0
 
-#staff li, #old-staff li
-  float left
-  display inline
+.staff li
+  margin 2rem 0
 
-.staff-member
-  width 250px
-  height 150px
-  -webkit-border-radius 5px
-  -moz-border-radius 5px
-  background-color #ececec
-  padding 15px
-  margin 15px
+  & img
+    display block
+    margin 0 auto 1rem
 
-.staff-member:hover
-  background-color #fefefe
-
-.staff-member img
-  float left
-  margin 0 10px 5px 0
-
-.staff-member a
-  text-decoration none
-  color #333 !important
-
-.staff-member a strong
-  color #000 !important
+  & > a > div
+    display table-cell
+    vertical-align top
+    padding 0 1rem
 
 h4
   border-bottom 1px solid #999
@@ -64,8 +49,8 @@ h4
   font-family 'Lucida Grande', Helvetica, Arial, Sans-Serif
   text-decoration none !important
 
-.postule:hover
-   background #276b52
+  &:hover
+    background #276b52
 
-.postule:active
-   background #1b5c2c
+  &:active
+    background #1b5c2c

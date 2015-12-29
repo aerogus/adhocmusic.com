@@ -2,20 +2,19 @@
 
 #menu-wrapper
   position relative
-  background #292933
+  max-width 1000px
+  margin 0 auto
 
 #menu_haut
-  background #000
   max-width 1000px
-  hheight 30px
   margin 0 auto
   font-family 'TradeGothic', Arial
   font-size 1.6rem
+  border-top 2px solid
+  border-bottom 2px solid
 
   & > li
-    float left
-    list-style none
-    display inline
+    display inline-block
 
   & > li:hover, > li.menuselected:hover
     background-color color_red
@@ -25,8 +24,8 @@
 
   & > li > a
     display block
-    color #fff
-    font-size 16px
+    color #000
+    font-size 1.6rem
     padding .2rem .6rem
     text-transform uppercase
 
