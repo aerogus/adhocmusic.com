@@ -37,7 +37,12 @@ class Controller
     }
 
     static function create()
-    {
+{
+$fp = fopen('/var/www/adhocmusic.com/log/hack-comment.log', 'a');
+fwrite($fp, print_r($_GET, true) . "\n" . print_r($_POST, true) . "\n" . print_r($_SERVER, true));
+fclose($fp);
+die('hi');
+
         $data = array(
             'type'       => (string) Route::params('type'),
             'id_content' => (int) Route::params('id_content'),
@@ -45,7 +50,7 @@ class Controller
             'antispam'   => (string) Route::params('antispam'),
         );
 
-        if(!Tools::isAuth() && $data['antispam'] != 'oui') {
+        if(!Tools::isAuth() && $data['antispam'] !== 'oui') {
             die('spam not allowed here !');
         }
 

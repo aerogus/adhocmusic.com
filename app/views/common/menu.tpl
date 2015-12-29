@@ -26,12 +26,6 @@
       <li><a href="/groupes/create">Inscrire son groupe</a></li>
     </ul>
   </li>
-  <li {if isset($menuselected) && $menuselected === 'agenda'} class="menuselected"{/if}>
-    <a href="/events/" accesskey="3" title="Un agenda concert des groupes de la région">Agenda</a>
-    <ul>
-      <li style="padding-left: 205px;"><a href="/events/create">Annoncer une date</a></li>
-    </ul>
-  </li>
   <li {if isset($menuselected) && $menuselected === 'media'} class="menuselected"{/if}>
     <a href="/medias/">Média</a>
     <ul>
@@ -42,8 +36,5 @@
   </li>
   <li class="{if isset($menuselected) && $menuselected === 'contact'}menuselected {/if}">
     <a href="/contact" accesskey="9" title="Contact">Contact</a>
-    <ul>
-      <li></li>
-    </ul>
   </li>
 </ul>

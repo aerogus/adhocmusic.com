@@ -272,6 +272,52 @@ class Controller
     static function hosting()
     {
         $smarty = new AdHocSmarty();
+
+        $smarty->assign('sites', array(
+            array(
+                'title' => 'saisonsenvrac.fr',
+                'name' => "Saisons en vrac",
+                'url' => 'http://www.saisonsenvrac.fr',
+                'image' => '/img/screen_saisonsenvrac.png',
+                'description' => 'Chansons pour enfants (mais pas que !) au rythme des saisons, par Hugo Barbet',
+            ),
+            array(
+                'title' => 'diemdelam.com',
+                'name' => "Diem Delam",
+                'url' => 'http://www.diemdelam.com',
+                'image' => '/img/screen_diemdelam.png',
+                'description' => 'Artiste Hip-Hop essonnien',
+            ),
+            array(
+                'title' => 'e-core.fr',
+                'name' => "E-Core",
+                'url' => 'http://www.e-core.fr',
+                'image' => '/img/screen_e-core.png',
+                'description' => 'Groupe Electro-Rock essonnien',
+            ),
+            array(
+                'title' => 'brucehernandezluthier.fr',
+                'name' => "Bruce Hernandez",
+                'url' => 'http://www.brucehernandezluthier.fr',
+                'image' => '/img/screen_brucehernandezluthier.png',
+                'description' => 'Luthier longjumellois',
+            ),
+            array(
+                'title' => 'gorygorestudio.com',
+                'name' => "Gorygore",
+                'url' => 'http://www.gorygorestudio.com',
+                'image' => '/img/screen_gorygore.png',
+                'description' => 'Photographe professionnel',
+            ),
+            array(
+                'title' => 'theholidayarmadillo.net',
+                'name' => "The Holiday Armadillo",
+                'url' => 'http://www.theholidayarmadillo.net',
+                'image' => '/img/screen_theholidayarmadillo.png',
+                'description' => 'Groupe Rock Progressif essonnien',
+            ),
+        ));
+
         return $smarty->fetch('hosting.tpl');
     }
 

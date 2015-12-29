@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>{$title|escape}</title>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="fb:app_id" content="{$fb_app_id|escape}">
 {* début open graph *}
 {if !empty($og_type)}
@@ -130,12 +130,6 @@ $(function () {
   };
 
   window.___gcfg = { lang: 'fr' };
-
-  (function() {
-    var po = document.createElement('script'); po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
 
 });
 </script>

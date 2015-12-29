@@ -1,26 +1,3 @@
-<script>
-$(function() {
-  // thumbnail photo et video et audio
-  $(".thumb-80").hover(function() {
-    $(this).css( {
-      '-webkit-transform': 'rotate(0deg) scale(1.2)',
-      '-moz-transform': 'rotate(0deg) scale(1.2)',
-      '-o-transform': 'rotate(0deg) scale(1.2)',
-      '-ms-transform': 'rotate(0deg) scale(1.2)',
-      'z-index': 50
-    });
-  } , function() {
-    $(this).css( {
-      '-webkit-transform': 'rotate(0deg) scale(1.0)',
-      '-moz-transform': 'rotate(0deg) scale(1.0)',
-      '-o-transform': 'rotate(0deg) scale(1.0)',
-      '-ms-transform': 'rotate(0deg) scale(1.0)',
-      'z-index': 1
-    });
-  });
-});
-</script>
-
 {if !$search_media|@sizeof}
 <p class="error">Aucun résultat</p>
 {else}

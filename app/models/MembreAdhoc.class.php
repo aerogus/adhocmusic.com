@@ -263,7 +263,7 @@ class MembreAdhoc extends Membre
         foreach($mbrs as $idx => $mbr)
         {
             $mbrs[$idx]['avatar_interne'] = false;
-            if(file_exists(ADHOC_ROOT_PATH . '/static/media/membre/ca/' . $mbr['id'] . '.jpg')) {
+            if(file_exists(ADHOC_ROOT_PATH . '/media/membre/ca/' . $mbr['id'] . '.jpg')) {
                 $mbrs[$idx]['avatar_interne'] = STATIC_URL . '/media/membre/ca/' . $mbr['id'] . '.jpg?ts=' . $mbr['modified_on_ts'];
             }
             $mbrs[$idx]['url'] = self::getUrlById($mbr['id']);

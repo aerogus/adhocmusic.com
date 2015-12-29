@@ -96,9 +96,8 @@ class AdHocSmarty extends Smarty
             ),
         ));
 
-        // dans le header, pour l'instant
-        $this->enqueue_script('/js/jquery-2.1.4.min.js', false);
-        $this->enqueue_script('/js/adhoc.js', false);
+        $this->enqueue_script('/js/jquery-2.1.4.min.js');
+        $this->enqueue_script('/js/adhoc.js');
 
         return $this;
     }

@@ -10,6 +10,8 @@ class Controller
         $smarty = new AdHocSmarty();
         $smarty->assign('menuselected', 'media');
 
+        $smarty->enqueue_script('/js/medias.js');
+
         $last_media = Media::getMedia(array(
             'type'   => 'video,photo,audio',
             'sort'   => 'created_on',
@@ -83,7 +85,7 @@ class Controller
                 'online' => true,
                 'limit'  => 30,
             ));
-        }    
+        }
 
         if($id_event) {
             $search_media = Media::getMedia(array(

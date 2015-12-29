@@ -1,6 +1,6 @@
 {include file="common/header.tpl"}
 
-<div id="left-center">
+<div class="grid-2-1">
 
 <div class="box">
   <header>
@@ -77,9 +77,7 @@ L'Equipe AD'HOC</div>
 </div>
 </div>{* .box *}
 
-</div>{* #left-center *}
-
-<div id="right">
+<div>
 
 <div class="box">
   <header>
@@ -107,6 +105,6 @@ L'Equipe AD'HOC</div>
   </div>
 </div>
 
-</div>{* #right *}
+</div>
 
 {include file="common/footer.tpl"}
