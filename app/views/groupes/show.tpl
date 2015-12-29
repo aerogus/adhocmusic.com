@@ -6,7 +6,9 @@
 
 {else}
 
-<div style="float: left; width: 490px;">
+<div class="grid-2-small-1-tiny-1">
+
+<div>
 
 {include file="common/boxstart.tpl" boxtitle=$groupe->getName()|escape}
 
@@ -117,7 +119,7 @@
 {/if}
 
 </div>
-<div style="float: right; width: 490px;">
+<div>
 
 {include file="common/boxstart.tpl" boxtitle="Présentation"}
 

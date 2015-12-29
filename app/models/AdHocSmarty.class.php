@@ -85,19 +85,10 @@ class AdHocSmarty extends Smarty
             ));
         }
 
-        $this->assign('habillage', true);
-
-        // pub 728x90 haut
-        $this->assign('megabanners', array(
-            array(
-                'url' => '/events/show/6623',
-                'img' => 'adhoc-mai-2015.png',
-                'alt' => 'Concert AD HOC',
-            ),
-        ));
-
         $this->enqueue_script('/js/jquery-2.1.4.min.js');
         $this->enqueue_script('/js/adhoc.js');
+
+        $this->print_inline_script(file_get_contents(ADHOC_ROOT_PATH . '/app/assets/js/google-analytics.js'));
 
         return $this;
     }
@@ -628,6 +619,8 @@ class AdHocSmarty extends Smarty
 
     /**
      * imprime un javascript en ligne dans le footer
+     *
+     * @param string $script
      */
     function print_inline_script($script)
     {
@@ -650,8 +643,6 @@ class AdHocSmarty extends Smarty
             $this->assign('trail', $trail->getPath());
         }
 
-        $o = parent::fetch($template, $cache_id, $compile_id, $parent, $display, $merge_tpl_vars, $no_output_filter);
-
-        return $o;
+        return parent::fetch($template, $cache_id, $compile_id, $parent, $display, $merge_tpl_vars, $no_output_filter);
     }
 }

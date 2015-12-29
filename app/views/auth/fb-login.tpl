@@ -4,22 +4,22 @@
 
 <script>
 $(function () {
-  $("#form-login").submit(function () {
-    var valid = true;
-    if ($("#pseudo").val() === "") {
-      $("#pseudo").prev(".error").fadeIn();
-      valid = false;
-    } else {
-      $("#pseudo").prev(".error").fadeOut();
-    }
-    if ($("#password").val() === "") {
-      $("#password").prev(".error").fadeIn();
-      valid = false;
-    } else {
-      $("#password").prev(".error").fadeOut();
-    }
-    return valid;
-  });
+    $("#form-login").submit(function () {
+        var valid = true;
+        if ($("#pseudo").val() === "") {
+            $("#pseudo").prev(".error").fadeIn();
+            valid = false;
+        } else {
+            $("#pseudo").prev(".error").fadeOut();
+        }
+        if ($("#password").val() === "") {
+            $("#password").prev(".error").fadeIn();
+            valid = false;
+        } else {
+            $("#password").prev(".error").fadeOut();
+        }
+        return valid;
+    });
 });
 </script>
 

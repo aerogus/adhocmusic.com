@@ -1,9 +1,6 @@
 {include file="common/header.tpl"}
 
 <div class="box">
-  <header>
-    <h3>À la une</h3>
-  </header>
   <div class="pa0" style="padding: 0">
     <div id="feature_list">
       <ul id="tabs">

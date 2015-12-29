@@ -19,10 +19,4 @@
 </url>
 {/foreach}
 
-{foreach from=$articles item=article}
-<url>
-<loc>/articles/show/{$article.id}</loc>
-</url>
-{/foreach}
-
 </urlset>

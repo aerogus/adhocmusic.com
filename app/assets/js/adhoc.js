@@ -71,6 +71,8 @@ jQuery(document).ready(function ($) {
 
     'use strict';
 
+    $('.nojs').hide();
+
     $("#form-newsletter").submit(function () {
         if ($("#email").val() === "" || validateEmail($("#email").val()) === 0) {
             alert("Précisez un email valide");

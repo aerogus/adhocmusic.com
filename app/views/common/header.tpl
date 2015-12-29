@@ -78,68 +78,12 @@
 <script src="https://maps.google.com/maps/api/js?libraries=geometry&region=FR"></script>
 {/if}
 
-<script>
-(function(i,s,o,g,r,a,m) { i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-1420343-1', 'auto');
-ga('send', 'pageview');
-</script>
-
 </head>
 
 <body>
 
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/fr_FR/sdk.js";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<script>
-$(function () {
-
-  window.fbAsyncInit = function() {
-
-    FB.init({
-      appId : '50959607741',
-      xfbml : true,
-      version : 'v2.5'
-    });
-
-    FB.getLoginStatus(function(response) {
-      if (response.authResponse) {
-        $('#fb-access-token').val(response.authResponse.accessToken);
-      } else {
-        // do something...maybe show a login prompt
-      }
-    });
-
-    $('.nojs').hide();
-
-    $('#ask_permissions').click(function () {
-      FB.login(function(response) {
-      },{
-        perms: 'manage_pages'
-      });
-    });
-
-  };
-
-  window.___gcfg = { lang: 'fr' };
-
-});
-</script>
-
-<div class="global">
-
 <div id="header" class="clearfix">
   <a id="logo" href="/" title="Cliquez pour revenir à l'accueil"><span>AD'HOC</span></a>
-  <div id="megabanner">
-  </div>
 </div>
 
 <div id="menu-wrapper">
@@ -174,4 +118,3 @@ $(function () {
 </div>{* #menu-wrapper *}
 
 <div class="site_content clearfix">
-

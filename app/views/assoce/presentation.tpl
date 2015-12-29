@@ -35,7 +35,7 @@
   </div>
 
   <div>
-  {include file="assoce/sidebar.inc.tpl"}
+  {include file="assoce/_sidebar.tpl"}
   </div>
 
 </div>

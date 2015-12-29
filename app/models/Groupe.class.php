@@ -227,7 +227,7 @@ class Groupe extends ObjectModel
      */
     protected static function _getLocalPath()
     {
-        return ADHOC_ROOT_PATH . '/static/media/groupe';
+        return ADHOC_ROOT_PATH . '/media/groupe';
     }
 
     /**
