@@ -1,73 +1,72 @@
-/**
- * module slider de la home
- */
-
-div#feature_list
-  width 680px
-  height 240px
+.swipe
   overflow hidden
   position relative
+  width 100%
+  max-width 1000px
+  height auto
+  max-height 375px
+  margin-top 20px
   margin-bottom 20px
 
-div#feature_list ul
-  position absolute
-  top 0
-  list-style none
-  padding 0
+.swipe-wrap
+  overflow hidden
+  position relative
   margin 0
 
-#feature_list h3
-  color #000
-  margin-bottom 3px
-  padding 0
-  font-size 1.4rem
+  > li
+    float left
+    width 100%
+    position relative
 
-ul#tabs
-  right 0
-  z-index 2
-  width 319px
+  h2
+    position absolute
+    left 0
+    background-color rgba(0,0,0,.75)
+    font-family TradeGothic
+    text-transform uppercase
+    color #fff
+    line-height 2rem
+    padding 1rem
 
-ul#tabs li
-  font-size 12px
-  font-family Arial
+    span
+      font-size .75em
 
-ul#tabs li a
-  color #222
-  text-decoration none
-  display block
-  padding 10px 10px 10px 33px
-  height 60px
-  outline none
-  background url(/img/featured.png) 0 -180px no-repeat
+  img
+    width 100%
+    max-width 1000px
+    height auto
+    max-height 375px
+    display block
 
-ul#tabs li a:hover
-  background url(/img/featured.png) 0 -120px no-repeat
-  color #fff
-  text-shadow 1px 1px 1px #000
-
-ul#tabs li a:hover h3,
-ul#tabs li a.current h3
-  color #fff
-  text-shadow 1px 1px 1px #000
-
-ul#tabs li a.current
-  background url(/img/featured.png) 0 -60px no-repeat
-  color #fff
-  text-shadow 1px 1px 1px #000
-
-ul#tabs li a.current:hover
-  background url(/img/featured.png) 0 -60px no-repeat
-  color #fff
-  text-shadow 1px 1px 1px #000
-  text-decoration none
-
-ul#output
-  left 0
-  width 427px
-  height 240px
-  position relative
-
-ul#output li
+.swipe-pagination-wrapper
   position absolute
-  width 427px
-  height 240px
+  bottom 0
+  overflow hidden
+  width 100%
+  max-width 1000px
+  height 40px
+
+.swipe-pagination
+  position relative
+  float left
+  left 50%
+
+  li
+    position relative
+    right 50%
+    float left
+    width 10px
+    height 10px
+    cursor pointer
+    border-radius 50%
+    background #fff
+    margin 15px 2px
+
+    a
+      text-decoration none
+      width 10px
+      height 10px
+
+  li:hover, li.on, li.on:hover
+    background #000
+    transition-duration 0.1s

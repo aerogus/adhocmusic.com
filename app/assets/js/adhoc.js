@@ -106,4 +106,6 @@ jQuery(document).ready(function ($) {
         $("#boxlogin-inner").hide();
     });
 
+    $('video').mediaelementplayer();
+
 });
