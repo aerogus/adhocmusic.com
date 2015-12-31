@@ -1078,7 +1078,7 @@ class Groupe extends ObjectModel
             return true;
         }
 
-        throw new Exception('id_groupe introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('id_groupe introuvable');
     }
 
     /**
@@ -1096,7 +1096,7 @@ class Groupe extends ObjectModel
 
         // l'id_contact est il valide ?
         if(($mbr = Membre::getInstance($id_contact)) == false) {
-            throw new Exception('id_contact introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_contact introuvable');
         }
 
         // la relation est elle deja présente ?
@@ -1646,7 +1646,7 @@ class Groupe extends ObjectModel
 
         // le style existe-il bien ?
         if(!Style::isStyleOk($id_style)) {
-            throw new Exception('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_style introuvable');
         }
 
         // le groupe n'a-t-il pas déjà ce style ?
@@ -1677,7 +1677,7 @@ class Groupe extends ObjectModel
 
         // le style existe-il bien ?
         if(!Style::isStyleOk($id_style)) {
-            throw new Exception('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_style introuvable');
         }
 
         $db = DataBase::getInstance();

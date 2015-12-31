@@ -377,7 +377,7 @@ class CMS extends ObjectModel
             return true;
         }
 
-        throw new Exception('id_cms introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('id_cms introuvable');
     }
 
     /**

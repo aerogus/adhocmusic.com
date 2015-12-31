@@ -54,23 +54,17 @@ class Controller
     }
 
     /**
-     * Nouveau player vidéo
-     */
-    static function beta()
-    {
-        return self::show('videos/beta.tpl');
-    }
-
-    /**
      * Visualisation d'une vidéo
      */
-    static function show($tpl = 'videos/show.tpl')
+    static function show()
     {
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
+        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
         $smarty->enqueue_script('/js/video-show.js');
 
         $trail = Trail::getInstance();
@@ -178,7 +172,7 @@ class Controller
 
         }
 
-        return $smarty->fetch($tpl);
+        return $smarty->fetch('videos/show.tpl');
     }
 
     /**

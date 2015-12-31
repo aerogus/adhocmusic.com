@@ -11,6 +11,9 @@ class Controller
     {
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
+        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
+
         $smarty->assign('menuselected', 'assoce');
 
         $trail = Trail::getInstance();
@@ -38,6 +41,9 @@ class Controller
     {
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
+        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
+
         $smarty->assign('menuselected', 'assoce');
 
         $trail = Trail::getInstance();
@@ -62,10 +68,13 @@ class Controller
 
         return $smarty->fetch('assoce/concerts.tpl');
     }
-    
+
     static function equipe()
     {
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
+        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
 
         $smarty->assign('menuselected', 'assoce');
 
@@ -97,6 +106,9 @@ class Controller
     {
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
+        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
+
         $smarty->assign('menuselected', 'assoce');
 
         $trail = Trail::getInstance();
@@ -118,35 +130,5 @@ class Controller
         )));
 
         return $smarty->fetch('assoce/statuts.tpl');
-    }
-
-    static function recrutement()
-    {
-        $smarty = new AdHocSmarty();
-
-        $smarty->assign('title', "AD'HOC recrute");
-        $smarty->assign('description', "L'association AD'HOC recrute constamment des nouveaux bénévoles afin de mener à bien ses activités");
-
-        $smarty->assign('menuselected', 'assoce');
-
-        $trail = Trail::getInstance();
-        $trail->addStep("L'Association", "/assoce/");
-        $trail->addStep("Recrutement");
-
-        $smarty->assign('photos', Photo::getPhotos(array(
-            'online' => true,
-            'sort'   => 'random',
-            'lieu'   => 1,
-            'limit'  => 3,
-        )));
-
-        $smarty->assign('videos', Video::getVideos(array(
-            'online' => true,
-            'sort'   => 'random',
-            'lieu'   => 1,
-            'limit'  => 6,
-        )));
-
-        return $smarty->fetch('assoce/recrutement.tpl');
     }
 }

@@ -47,7 +47,11 @@
 <link rel="shortcut icon" href="http://www.adhocmusic.com/favicon.ico">
 <meta name="robots" content="index,follow">
 <meta name="description" content="{if empty($description)}Portail de référence sur les musiques actuelles en Essonne, Agenda culturel géolocalisé, Vidéos de concerts, promotion d'artistes ...{else}{$description|escape}{/if}">
-<link rel="stylesheet" href="/css/adhoc.css?v=20150909">
+
+{foreach from=$styles item=style_url}
+<link rel="stylesheet" href="{$style_url}">
+{/foreach}
+
 {if !empty($css_jquery_ui)}
 <link rel="stylesheet" href="{#STATIC_URL#}/css/adhoc/jquery-ui-1.8.2.custom.css">
 {/if}

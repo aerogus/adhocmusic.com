@@ -122,7 +122,7 @@ class Contact extends ObjectModel
     static function getIdByEmail($email)
     {
         if(!Email::validate($email)) {
-            throw new Exception('email syntaxiquement incorrect', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('email syntaxiquement incorrect');
         }
 
         $db = DataBase::getInstance();
@@ -337,6 +337,6 @@ class Contact extends ObjectModel
             return true;
         }
 
-        throw new Exception('Contact introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('Contact introuvable');
     }
 }

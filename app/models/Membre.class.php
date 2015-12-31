@@ -1369,7 +1369,7 @@ class Membre extends Contact
             return true;
         }
 
-        throw new Exception('Membre introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('Membre introuvable');
     }
 
     /**
@@ -1381,7 +1381,7 @@ class Membre extends Contact
     function belongsTo($id_groupe)
     {
         if(!$this->_id_contact) {
-            throw new Exception('id_contact manquant', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('id_contact manquant');
         }
 
         $db = DataBase::getInstance();
@@ -1709,7 +1709,7 @@ class Membre extends Contact
         }
 
         if(!Email::validate($email)) {
-            throw new Exception('email syntaxiquement incorrect', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('email syntaxiquement incorrect');
         }
 
         $db = DataBase::getInstance();

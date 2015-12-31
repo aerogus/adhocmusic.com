@@ -684,7 +684,7 @@ class Event extends ObjectModel
         if(array_key_exists('datdeb', $params)) {
             if(!empty($params['datdeb'])) {
                 if(!(Date::isDateOk($params['datdeb']) || Date::isDateTimeOk($params['datdeb']))) {
-                    throw new Exception('datdeb incorrecte', EXCEPTION_USER_BAD_PARAM);
+                    throw new Exception('datdeb incorrecte');
                 }
             } else {
                 unset($params['datdeb']);
@@ -694,7 +694,7 @@ class Event extends ObjectModel
         if(array_key_exists('datfin', $params)) {
             if(!empty($params['datfin'])) {
                 if(!(Date::isDateOk($params['datfin']) || Date::isDateTimeOk($params['datfin']))) {
-                    throw new Exception('datfin incorrecte', EXCEPTION_USER_BAD_PARAM);
+                    throw new Exception('datfin incorrecte');
                 }
             } else {
                 unset($params['datfin']);
@@ -915,7 +915,7 @@ class Event extends ObjectModel
             return true;
         }
 
-        throw new Exception('id_event_introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('id_event_introuvable');
     }
 
     /**
@@ -952,28 +952,28 @@ class Event extends ObjectModel
     {
         // les paramètres sont-ils corrects ?
         if(!$this->_id_event || !$id_style) {
-            throw new Exception('paramètres incorrects', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('paramètres incorrects');
         }
 
         if(!is_numeric($ordre)) {
-            throw new Exception('ordre non numérique', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('ordre non numérique');
         }
 
         // événement valide ?
         if(!self::isEventOk($this->_id_event)) {
-            throw new Exception('id_event introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_event introuvable');
         }
 
         // style valide ?
         if(!Style::isStyleOk($id_style)) {
-            throw new Exception('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_style introuvable');
         }
 
         // le style n'est-t-il pas déjà présent pour cet évenement ?
         $listeStyles = $this->getStyles();
         foreach($listeStyles as $style) {
             if($id_style == $style['id_style']) {
-                throw new Exception('Style déjà présent pour cet événement', EXCEPTION_USER_DEFAULT);
+                throw new Exception('Style déjà présent pour cet événement');
             }
         }
 
@@ -1000,17 +1000,17 @@ class Event extends ObjectModel
     {
         // les paramètres sont-ils corrects ?
         if(!$this->_id_event || !$id_style) {
-            throw new Exception('paramètres incorrects', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('paramètres incorrects');
         }
 
         // événement valide ?
         if(!self::isEvenementOk($this->_id_event)) {
-            throw new Exception('id_event introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_event introuvable');
         }
 
         // style valide ?
         if(!Style::isStyleOk($id_style)) {
-            throw new Exception('id_style introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_style introuvable');
         }
 
         // style bien trouvé pour cet événement ?
@@ -1022,7 +1022,7 @@ class Event extends ObjectModel
             }
         }
         if($style_not_found) {
-            throw new Exception('Style introuvable pour cet événement', EXCEPTION_USER_DEFAULT);
+            throw new Exception('Style introuvable pour cet événement');
         }
 
         // tout est ok on supprime la liaison événement/style
@@ -1202,14 +1202,14 @@ class Event extends ObjectModel
     {
         // les paramètres sont-ils corrects ?
         if(!$this->_id_event || !$id_structure) {
-            throw new Exception('paramètres incorrects', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('paramètres incorrects');
         }
 
         // la structure n'est-t-elle pas déjà présente pour l'événement ?
         $listeStructures = $this->getStructures();
         foreach($listeStructures as $struct) {
             if($id_structure == $struct['id']) {
-                throw new Exception('Structure déjà présente pour cet événement', EXCEPTION_USER_DEFAULT);
+                throw new Exception('Structure déjà présente pour cet événement');
             }
         }
 
@@ -1236,7 +1236,7 @@ class Event extends ObjectModel
     {
         // les paramètres sont-ils corrects ?
         if(!$this->_id_event || !$id_structure) {
-            throw new Exception('paramètres incorrects', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('paramètres incorrects');
         }
 
         // la structure est-elle bien présente pour cet événement ?
@@ -1248,7 +1248,7 @@ class Event extends ObjectModel
             }
         }
         if($struct_not_found) {
-            throw new Exception('Structure introuvable pour cet événement', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('Structure introuvable pour cet événement');
         }
 
         // tout est ok on supprime la liaison événement/structure

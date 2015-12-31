@@ -1,5 +1,28 @@
 {include file="common/header.tpl"}
 
+<div id="swipe" class="swipe clearfix">
+  <ul class="swipe-wrap">
+    {foreach from=$featured item=f}
+    <li>
+      <a href="{$f.link}">
+        <h2>{$f.title}<br><span>{$f.description}</span></h2>
+        <img src="{$f.image}" title="{$f.description}" alt="">
+      </a>
+    </li>
+    {/foreach}
+  </ul>
+  <div class="swipe-pagination-wrapper">
+    <ul class="swipe-pagination">
+      {foreach from=$featured item=f}
+      <li class="" data-index="0">
+        <a href="{$f.link}"></a>
+      </li>
+      {/foreach}
+    </ul>
+  </div>
+</div>
+
+{*
 <div class="box">
   <div class="pa0" style="padding: 0">
     <div id="feature_list">
@@ -25,8 +48,9 @@
     </div>
   </div>
 </div>
+*}
 
-<div class="grid-3">
+<div class="grid-3-tiny-2-small-1">
 
   <div class="box">
     <header>

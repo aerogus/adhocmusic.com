@@ -240,7 +240,6 @@
 1|structures|delete|POST|/structures/delete
 
 1|videos|show|GET|/videos/show/:id
-1|videos|beta|GET|/videos/beta/:id
 1|videos|embed|GET|/videos/embed/:id
 1|videos|my|GET|/videos/my
 1|videos|create|GET|/videos/create

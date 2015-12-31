@@ -455,7 +455,7 @@ class Photo extends Media
             return true;
         }
 
-        throw new Exception('Photo introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('Photo introuvable');
     }
 
     function getThumb80Url()

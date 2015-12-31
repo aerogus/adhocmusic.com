@@ -85,6 +85,8 @@ class AdHocSmarty extends Smarty
             ));
         }
 
+        $this->enqueue_style('/css/adhoc.css?v=20150909');
+
         $this->enqueue_script('/js/jquery-2.1.4.min.js');
         $this->enqueue_script('/js/adhoc.js');
 
@@ -600,6 +602,16 @@ class AdHocSmarty extends Smarty
             return TRUE;
         }
         return $out;
+    }
+
+    /**
+     * Ajoute d'une feuille de style
+     *
+     * @param string $style_name url de la feuille de style
+     */
+    function enqueue_style($style_name)
+    {
+        $this->append('styles', $style_name);
     }
 
     /**

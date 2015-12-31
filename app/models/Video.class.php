@@ -674,26 +674,14 @@ class Video extends Media
                 $width  = $this->getWidth();
                 $height = $this->getHeight();
                 return ''
-                     . '<script src="' . STATIC_URL . '/jwplayer/jwplayer.js"></script>' . "\n"
-                     . '<div style="margin: 0; padding: 0" id="mediaspace"></div>'
-                     //. '<video id="mediaspace" poster="' . STATIC_URL . '/media/video/' . $this->getId() . '.jpg" width="640" height="360" controls>' . "\n"
-                     //. '<source src="' . $this->getDirectUrl() . '" type="video/mp4">' . "\n"
-                     //. '</video>' . "\n"
-                     . '<script>' . "\n"
-                     . 'jwplayer("mediaspace").setup({' .  "\n"
-                     . '  "flashplayer": "' . STATIC_URL . '/jwplayer/player.swf",' .  "\n"
-                     . '  "file": "' . STATIC_URL . '/media/video/' . $this->getReference() . '",' .  "\n"
-                     . '  "image": "' . STATIC_URL . '/media/video/' . $this->getId() . '.jpg",' .  "\n"
-                     . '  "backcolor": "cc0000",' .  "\n"
-                     . '  "frontcolor": "ffffff",' .  "\n"
-                     . '  "screencolor": "000000",' .  "\n"
-                     . '  "controlbar": "over",' .  "\n"
-                     . '  "autostart": "' . $strautoplay . '",' . "\n"
-                     . '  "width": 680,' . "\n"
-                     . '  "height": 382' .  "\n"
-                     . '});' .  "\n"
-                     . '</script>' .  "\n";
-// aspect ratio 16:9 et en dur ...
+                     . '<video width="680" height="360" poster="' . STATIC_URL . '/media/video/' . $this->getId() . '.jpg" controls="controls" preload="none">'
+                     . '<source type="video/mp4" src="' . STATIC_URL . '/media/video/' . $this->getReference() . '">'
+                     . '<object width="680" height="360" type="application/x-shockwave-flash" data="/mediaelement/flashmediaelement.swf">'
+                     . '<param name="movie" value="/mediaelement/flashmediaelement.swf">'
+                     . '<param name="flashvars" value="controls=true&file=/media/video/' . $this->getReference() . '">'
+                     . '<img src="' . STATIC_URL . '/media/video/' . $this->getId() . '.jpg" width="680" height="360" title="No video playback capabilities">'
+                     . '</object>'
+                     . '</video>';
             case self::HOST_VIMEO:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '0';
                 if($iframe) {
@@ -908,7 +896,7 @@ class Video extends Media
             return true;
         }
 
-        throw new Exception('Vidéo introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('Vidéo introuvable');
     }
 
     /**

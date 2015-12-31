@@ -910,19 +910,19 @@ class Lieu extends ObjectModel
     function delete()
     {
         if($this->hasEvents()) {
-            throw new Exception('suppression impossible : lieu avec événements', EXCEPTION_USER_DEFAULT);
+            throw new Exception('suppression impossible : lieu avec événements');
         }
 
         if($this->hasAudios()) {
-            throw new Exception('suppression impossible : lieu avec audios', EXCEPTION_USER_DEFAULT);
+            throw new Exception('suppression impossible : lieu avec audios');
         }
 
         if($this->hasPhotos()) {
-            throw new Exception('suppression impossible : lieu avec photos', EXCEPTION_USER_DEFAULT);
+            throw new Exception('suppression impossible : lieu avec photos');
         }
 
         if($this->hasVideos()) {
-            throw new Exception('suppression impossible : lieu avec videos', EXCEPTION_USER_DEFAULT);
+            throw new Exception('suppression impossible : lieu avec videos');
         }
 
         $db = DataBase::getInstance();
@@ -1045,7 +1045,7 @@ class Lieu extends ObjectModel
              . "WHERE `id_lieu` = " . (int) $this->_id_lieu;
 
         if(($res = $db->queryWithFetchFirstRow($sql)) == false) {
-            throw new Exception('id_lieu introuvable', EXCEPTION_USER_UNKNOW_ID);
+            throw new Exception('id_lieu introuvable');
         }
 
         $this->_dbToObject($res);

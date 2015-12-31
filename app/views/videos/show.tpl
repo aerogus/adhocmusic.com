@@ -26,7 +26,9 @@
       <header>
         <h1>{$video->getName()|escape}</h1>
       </header>
+      <div style="padding: 0">
       {$video->getPlayer(true)}
+      </div>
     </div>
 
     <div class="box">
@@ -70,17 +72,11 @@
       <div class="metacontent">
         <a href="{$event->getUrl()}"><img style="float: right;" src="{$event->getFlyer100Url()}" alt=""><strong>{$event->getName()|escape}</strong></a><br>{$event->getDate()|date_format:'%d/%m/%Y'}
       </div>
-    </div>
-    {/if}
-
-    {if !empty($lieu)}
-    <div class="box">
-      <header>
-        <h2>Lieu</h2>
-      </header>
+      {if !empty($lieu)}
       <div class="metacontent">
         <a href="{$lieu->getUrl()}"><img style="float: right;" src="{$lieu->getMapUrl('64x64')}" alt=""><strong>{$lieu->getName()|escape}</strong></a><br>{$lieu->getAddress()}<br>{$lieu->getCp()} {$lieu->getCity()|escape}
       </div>
+      {/if}
     </div>
     {/if}
 

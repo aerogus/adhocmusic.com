@@ -413,7 +413,7 @@ class Exposant extends ObjectModel
             return true;
         }
 
-        throw new Exception('id_exposant_introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('id_exposant_introuvable');
     }
 
     /**

@@ -364,6 +364,6 @@ class Alerting extends ObjectModel
             return true;
         }
 
-        throw new Exception('Alerting introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('Alerting introuvable');
     }
 }

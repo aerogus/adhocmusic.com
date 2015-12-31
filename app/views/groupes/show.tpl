@@ -10,88 +10,83 @@
 
 <div>
 
-{include file="common/boxstart.tpl" boxtitle=$groupe->getName()|escape}
+<div class="box">
+  <header>
+    <h1>{$groupe->getName()}</h1>
+  </header>
+  <div>
+    {if $groupe->getLogo()}
+    <p align="center"><img src="{$groupe->getLogo()}" alt="{$groupe->getName()|escape}"></p>
+    {/if}
+    {if $groupe->getStyle()}
+    <p><strong>Style</strong><br />{$groupe->getStyle()|escape}</p>
+    {/if}
+    {if $groupe->getInfluences()}
+    <p><strong>Influences</strong><br />{$groupe->getInfluences()|escape}</p>
+    {/if}
+    {if $groupe->getLineup()}
+    <p><strong>Membres</strong><br />{$groupe->getLineup()|escape|@nl2br}</p>
+    {/if}
+    <p><strong>Dont membres AD'HOC</strong></p>
+    {if $membres|@count > 0}
+    <ul>
+    {foreach from=$membres item=membre}
+    <li><a href="/membres/show/{$membre.id}">{$membre.pseudo|escape}</a> ({$membre.nom_type_musicien|escape})</li>
+    {/foreach}
+    </ul>
+    {else}
+    <p class="warning">Aucun! Vous faites partie de ce groupe ? <a href="/contact">contactez nous</a></p>
+    {/if}
 
-{if $groupe->getLogo()}
-<p align="center"><img src="{$groupe->getLogo()}" alt="{$groupe->getName()|escape}" /></p>
-{/if}
+    <style>
+    #grplinks {
+        clear: both;
+    }
+    #grplinks li {
+        float: left;
+    }
+    #grplinks li {
+        margin: 10px 3px;
+        padding: 5px;
+        background-color: #ececec;
+        float: left;
+    }
+    #grplinks a {
+        text-decoration: none !important;
+    }
+    #grplinks li:hover {
+        background-color: #f9f9f9;
+    }
+    #grplinks img {
+        padding-right: 5px;
+        width: 16px;
+        height: 16px;
+    }
+    </style>
 
-{if $groupe->getStyle()}
-<p><strong>Style</strong><br />{$groupe->getStyle()|escape}</p>
-{/if}
-
-{if $groupe->getInfluences()}
-<p><strong>Influences</strong><br />{$groupe->getInfluences()|escape}</p>
-{/if}
-
-{if $groupe->getLineup()}
-<p><strong>Membres</strong><br />{$groupe->getLineup()|escape|@nl2br}</p>
-{/if}
-
-<p><strong>Dont membres AD'HOC</strong></p>
-{if $membres|@count > 0}
-<ul>
-{foreach from=$membres item=membre}
-<li><a href="/membres/show/{$membre.id}">{$membre.pseudo|escape}</a> ({$membre.nom_type_musicien|escape})</li>
-{/foreach}
-</ul>
-{else}
-<p class="warning">Aucun! Vous faites partie de ce groupe ? <a href="/contact">contactez nous</a></p>
-{/if}
-
-<style>
-#grplinks {
-    clear: both;
-}
-#grplinks li {
-    float: left;
-}
-#grplinks li {
-    margin: 10px 3px;
-    padding: 5px;
-    background-color: #ececec;
-    float: left;
-}
-#grplinks a {
-    text-decoration: none !important;
-}
-#grplinks li:hover {
-    background-color: #f9f9f9;
-}
-#grplinks img {
-    padding-right: 5px;
-    width: 16px;
-    height: 16px;
-}
-</style>
-
-<p><strong>Liens</strong></p>
-
-<ul id="grplinks">
-{if $groupe->getSite()}
-<li><a class="grplink" href="{$groupe->getSite()}" title="Site"><img src="{#STATIC_URL#}/img/icones/lien.png" alt="">Site</a></li>
-{/if}
-{if $groupe->getMySpace()}
-<li><a class="grplink" href="{$groupe->getMySpace()}" title="MySpace"><img src="{#STATIC_URL#}/img/myspace.png" alt="">MySpace</a></li>
-{/if}
-{if $groupe->getFacebookPageId()}
-<li><a class="grplink" href="{$groupe->getFacebookPageUrl()}" title="Facebook"><img src="{#STATIC_URL#}/img/facebook.gif" alt="">Facebook</a></li>
-{/if}
-{if $groupe->getTwitterId()}
-<li><a class="grplink" href="{$groupe->getTwitterUrl()}" title="Twitter"><img src="{#STATIC_URL#}/img/icones/twitter.png" alt="">Twitter</a></li>
-{/if}
-</ul>
-<br style="clear: both;" />
-
-{if $groupe->getCreatedOn()}
-<p><strong>Fiche créée le</strong><br />{$groupe->getCreatedOn()|date_format:"%d/%m/%Y %H:%M"}</p>
-{/if}
-
-{if $groupe->getModifiedOn()}
-<p><strong>Mise à jour le</strong><br />{$groupe->getModifiedOn()|date_format:"%d/%m/%Y %H:%M"}</p>
-{/if}
-
-{include file="common/boxend.tpl"}
+    <p><strong>Liens</strong></p>
+    <ul id="grplinks">
+    {if $groupe->getSite()}
+    <li><a class="grplink" href="{$groupe->getSite()}" title="Site"><img src="{#STATIC_URL#}/img/icones/lien.png" alt="">Site</a></li>
+    {/if}
+    {if $groupe->getMySpace()}
+    <li><a class="grplink" href="{$groupe->getMySpace()}" title="MySpace"><img src="{#STATIC_URL#}/img/myspace.png" alt="">MySpace</a></li>
+    {/if}
+    {if $groupe->getFacebookPageId()}
+    <li><a class="grplink" href="{$groupe->getFacebookPageUrl()}" title="Facebook"><img src="{#STATIC_URL#}/img/facebook.gif" alt="">Facebook</a></li>
+    {/if}
+    {if $groupe->getTwitterId()}
+    <li><a class="grplink" href="{$groupe->getTwitterUrl()}" title="Twitter"><img src="{#STATIC_URL#}/img/icones/twitter.png" alt="">Twitter</a></li>
+    {/if}
+    </ul>
+    {if $groupe->getCreatedOn()}
+    <p><strong>Fiche créée le</strong><br />{$groupe->getCreatedOn()|date_format:"%d/%m/%Y %H:%M"}</p>
+    {/if}
+    {if $groupe->getModifiedOn()}
+    <p><strong>Mise à jour le</strong><br />{$groupe->getModifiedOn()|date_format:"%d/%m/%Y %H:%M"}</p>
+    {/if}
+  </div>
+</div>
 
 {if $videos|@count > 0}
 {include file="common/boxstart.tpl" boxtitle="Vidéos"}

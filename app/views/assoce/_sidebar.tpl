@@ -2,28 +2,8 @@
   <header>
     <h2>Présentation</h2>
   </header>
-  <div style="width: 320px; height: 225px;">
-  <p id="container0">Please install the Flash Plugin</p>
-  <script>
-  var flashvars = {
-      file: 'http://static.adhocmusic.com/media/video/343.mp4',
-      autostart: 'false',
-      controlbar: 'bottom',
-      backcolor: '990000',
-      frontcolor: 'FFFFFF',
-      screencolor: '000000',
-      autostart: 'false'
-  };
-  var params = {
-      allowfullscreen: 'true',
-      allowscriptaccess: 'always'
-  };
-  var attributes = {
-      id: 'player0',
-      name: 'player0'
-  };
-  swfobject.embedSWF('http://static.adhocmusic.com/jwplayer/player.swf', 'container0', '300','225', '9.0.115', 'false', flashvars, params, attributes);
-  </script>
+  <div style="padding: 0">
+    <video width="320" height="260" src="/media/video/343.mp4"></video>
   </div>
 </div>
 

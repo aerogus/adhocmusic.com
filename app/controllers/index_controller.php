@@ -23,8 +23,8 @@ class Controller
         )));
 
         $smarty->assign('featured', Featured::getFeaturedHomepage());
-        $smarty->enqueue_script('/js/jquery.featureList-1.0.0.js');
-        $smarty->enqueue_script('/js/home.js');
+        $smarty->enqueue_script('/js/swipe.min.js');
+        $smarty->enqueue_script('/js/featured.js');
 
         $events = Event::getEvents(array(
             'online'      => true,

@@ -298,7 +298,7 @@ class MembreAdhoc extends Membre
             return true;
         }
 
-        throw new Exception('Membre Adhoc introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('Membre Adhoc introuvable');
     }
 
     /**

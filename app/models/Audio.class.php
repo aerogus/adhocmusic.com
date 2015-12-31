@@ -308,7 +308,7 @@ class Audio extends Media
             return true;
         }
 
-        throw new Exception('Audio introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('Audio introuvable');
     }
 
     /**

@@ -72,12 +72,12 @@ class Featured extends ObjectModel
     /**
      * @var int
      */
-    protected static $_width = 427;
+    protected static $_width = 1000;
 
     /**
      * @var int
      */
-    protected static $_height = 240;
+    protected static $_height = 375;
 
     /**
      * Liste des attributs de l'objet
@@ -97,32 +97,6 @@ class Featured extends ObjectModel
         'online'      => 'bool',
     );
 
-    /**
-     * @return array
-     */
-    static function getSlots()
-    {
-        return array(
-            1 => 'Live AD\'HOC',
-            2 => 'Evénement',
-            3 => 'Groupe AD\'HOC',
-            4 => 'Article/Reportage',
-        );
-    }
-
-    /**
-     * @param int
-     * @return string
-     */
-    static function getSlotNameBySlotId($id_slot)
-    {
-        $slots = self::getSlots();
-        if(array_key_exists($id_slot, $slots)) {
-            return $slots[$id_slot];
-        }
-        return false;
-    }
-
     /* début getters */
 
     /**
@@ -136,15 +110,15 @@ class Featured extends ObjectModel
         }
 
         preg_match("/^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$/", $this->_datdeb, $regs);
-        if($mode == 'year') {
+        if($mode === 'year') {
             return $regs[1];
-        } elseif($mode == 'month') {
+        } elseif($mode === 'month') {
             return $regs[2];
-        } elseif($mode == 'day') {
+        } elseif($mode === 'day') {
             return $regs[3];
-        } elseif($mode == 'hour') {
+        } elseif($mode === 'hour') {
             return $regs[4];
-        } elseif($mode == 'minute') {
+        } elseif($mode === 'minute') {
             return $regs[5];
         }
         return $this->_datdeb;
@@ -163,13 +137,13 @@ class Featured extends ObjectModel
         preg_match("/^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$/", $this->_datfin, $regs);
         if($mode == 'year') {
             return $regs[1];
-        } elseif($mode == 'month') {
+        } elseif($mode === 'month') {
             return $regs[2];
-        } elseif($mode == 'day') {
+        } elseif($mode === 'day') {
             return $regs[3];
-        } elseif($mode == 'hour') {
+        } elseif($mode === 'hour') {
             return $regs[4];
-        } elseif($mode == 'minute') {
+        } elseif($mode === 'minute') {
             return $regs[5];
         }
         return $this->_datfin;
@@ -217,22 +191,6 @@ class Featured extends ObjectModel
     }
 
     /**
-     * @return int
-     */
-    function getSlot()
-    {
-        return (int) $this->_slot;
-    }
-
-    /**
-     * @return string
-     */
-    function getSlotName()
-    {
-        return (string) self::getSlotNameBySlotId((int) $this->getSlot());
-    }
-
-    /**
      * @return bool
      */
     function getOnline()
@@ -250,7 +208,7 @@ class Featured extends ObjectModel
     function setDatDeb($val)
     {
         if(!Date::isDateTimeOk($val)) {
-            throw new Exception('datdeb invalide', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('datdeb invalide');
         }
 
         if ($this->_datdeb != $val)
@@ -266,7 +224,7 @@ class Featured extends ObjectModel
     function setDatFin($val)
     {
         if(!Date::isDateTimeOk($val)) {
-            throw new Exception('datfin invalide', EXCEPTION_USER_BAD_PARAM);
+            throw new Exception('datfin invalide');
         }
 
         if ($this->_datfin != $val)
@@ -316,19 +274,6 @@ class Featured extends ObjectModel
     }
 
     /**
-     * @param int
-     */
-    function setSlot($val)
-    {
-        $val = (int) $val;
-        if ($this->_slot != $val)
-        {
-            $this->_slot = (int) $val;
-            $this->_modified_fields['slot'] = true;
-        }
-    }
-
-    /**
      * @param bool
      */
     function setOnline($val)
@@ -350,33 +295,18 @@ class Featured extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        // sans tri par slot
         $sql = "SELECT `id_featured`AS `id`, `title`, `description`, `link`
                 FROM `" . self::$_db_table_featured . "`
                 WHERE `datdeb` < NOW()
                 AND `datfin` > NOW()
                 AND `online`
                 ORDER BY RAND()
-                LIMIT 0,4";
-
-        // avec tri par slot
-/*
-        $sql = "SELECT `id_featured` AS `id`, `title`, `description`, `link`, `datdeb`, `datfin`, `slot` "
-             . "FROM ( "
-             . "  SELECT * FROM `" . self::$_db_table_featured . "` "
-             . "  WHERE `datdeb` < NOW() AND `datfin` > NOW() "
-             . "  AND `online` "
-             . "  ORDER BY RAND() "
-             . ") AS `a` "
-             . "GROUP BY `slot` "
-             . "ORDER BY `slot` ASC";
-*/
+                LIMIT 0,8";
 
         $res = $db->queryWithFetch($sql);
 
         foreach($res as $cpt => $_res) {
             $res[$cpt]['image'] = self::getImageById($_res['id']);
-            $res[$cpt]['image_120_120'] = self::getImageUrl($_res['id'], 120, 120, '000000', false, true);
         }
 
         return $res;
@@ -405,7 +335,6 @@ class Featured extends ObjectModel
             foreach($res as $cpt => $_res)
             {
                 $tab[$cpt] = $_res;
-                $tab[$cpt]['slot_name'] = self::getSlotNameBySlotId($_res['slot']);
                 $tab[$cpt]['image'] = self::getImageById($_res['id']);
                 if(($now > $_res['datdeb']) && ($now < $_res['datfin'])) {
                     $tab[$cpt]['class'] = 'enligne';
@@ -429,7 +358,7 @@ class Featured extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `id_featured`, `title`, `description`, `link`, `datdeb`, `datfin`, `slot`, `online` "
+        $sql = "SELECT `id_featured`, `title`, `description`, `link`, `datdeb`, `datfin`, `online` "
              . "FROM `" . self::$_table . "` "
              . "WHERE `id_featured` = " . (int) $this->_id_featured;
 
@@ -438,7 +367,7 @@ class Featured extends ObjectModel
             return true;
         }
 
-        throw new Exception('Featured introuvable', EXCEPTION_USER_UNKNOW_ID);
+        throw new Exception('Featured introuvable');
     }
 
     /**
@@ -450,61 +379,11 @@ class Featured extends ObjectModel
     {
         if(parent::delete())
         {
-            self::invalidateImageInCache($this->getId(), 120, 120);
             if(file_exists(ADHOC_ROOT_PATH . '/media/featured/' . $this->getId() . '.jpg')) {
                 unlink(ADHOC_ROOT_PATH . '/media/featured/' . $this->getId() . '.jpg');
             }
             return true;
         }
         return false;
-    }
-
-    static function invalidateImageInCache($id, $width = 120, $height = 120, $bgcolor = '000000', $border = 0, $zoom = 1)
-    {
-        $uid = 'featured/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
-        $cache = Image::getLocalCachePath($uid);
-
-        if(file_exists($cache)) {
-            unlink($cache);
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * retourne l'url de l'image redimensionée
-     * gestion de la mise en cache
-     *
-     * @return string
-     */
-    static function getImageUrl($id, $width = 120, $height = 120, $bgcolor = '000000', $border = 0, $zoom = 1)
-    {
-        $uid = 'featured/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
-        $cache = Image::getLocalCachePath($uid);
-
-        if(!file_exists($cache)) {
-            $source = ADHOC_ROOT_PATH . '/media/featured/' . $id . '.jpg';
-            if(file_exists($source)) {
-                $img = new Image($source);
-                $img->setType(IMAGETYPE_JPEG);
-                $img->setMaxWidth($width);
-                $img->setMaxHeight($height);
-                $img->setBorder($border);
-                $img->setKeepRatio(true);
-                if($zoom) {
-                    $img->setZoom();
-                }
-                $img->setHexColor($bgcolor);
-                Image::writeCache($uid, $img->get());
-            } else {
-                $img = new Image();
-                $img->init(16, 16, '000000');
-                Image::writeCache($uid, $img->get());
-                Log::write('featured', 'image ' . $id . ' introuvable | uid : ' . $uid);
-            }
-        }
-
-        return Image::getHttpCachePath($uid);
     }
 }

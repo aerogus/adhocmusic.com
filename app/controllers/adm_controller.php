@@ -11,8 +11,8 @@ define('ADM_NEWSLETTER_CURRENT_ID', 72);
 define('ADM_NEWSLETTER_NB_EMAILS_PER_LOT', 400);
 define('ADM_NEWSLETTER_GROUPE_CURRENT_ID', 37);
 
-define('ADM_FEATURED_IMG_WIDTH', 427);
-define('ADM_FEATURED_IMG_HEIGHT', 240);
+define('ADM_FEATURED_IMG_WIDTH', 1000);
+define('ADM_FEATURED_IMG_HEIGHT', 375);
 
 class Controller
 {
@@ -149,7 +149,7 @@ class Controller
         $newsletter->setTitle($data['title']);
         $newsletter->setContent($data['content']);
         $newsletter->save();
- 
+
         Tools::redirect('/adm/newsletter/?create=1');
     }
 
@@ -392,7 +392,13 @@ class Controller
         $trail->addStep("A l'Affiche");
 
         $smarty = new AdHocSmarty();
-        $smarty->assign('featured',  Featured::getFeaturedAdmin());
+
+        $smarty->assign('featured_front', Featured::getFeaturedHomepage());
+        $smarty->assign('featured_admin', Featured::getFeaturedAdmin());
+
+        $smarty->enqueue_script('/js/swipe.min.js');
+        $smarty->enqueue_script('/js/featured.js');
+
         return $smarty->fetch('adm/featured/index.tpl');
     }
 
