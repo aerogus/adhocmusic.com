@@ -25,7 +25,7 @@ class EmailSmarty extends Smarty
         global $newsletter_id_contact;
         $orig = $newsletter_id_newsletter . '|' . $newsletter_id_contact;
         //return $url; // en attendant que ça remarche
-        return 'http://www.adhocmusic.com/r/' . Tools::base64_url_encode($url) . '||' . Tools::base64_url_encode($orig);
+        return 'https://www.adhocmusic.com/r/' . Tools::base64_url_encode($url) . '||' . Tools::base64_url_encode($orig);
     }
 
     /**
@@ -46,9 +46,9 @@ class EmailSmarty extends Smarty
 
         switch($type)
         {
-            case 'photo':  $source = ADHOC_ROOT_PATH . '/static/media/photo/' . $id . '.jpg'; break;
-            case 'event':  $source = ADHOC_ROOT_PATH . '/static/media/event/' . $id . '.jpg'; break;
-            case 'video':  $source = ADHOC_ROOT_PATH . '/static/media/video/' . $id . '.jpg'; break;
+            case 'photo':  $source = ADHOC_ROOT_PATH . '/media/photo/' . $id . '.jpg'; break;
+            case 'event':  $source = ADHOC_ROOT_PATH . '/media/event/' . $id . '.jpg'; break;
+            case 'video':  $source = ADHOC_ROOT_PATH . '/media/video/' . $id . '.jpg'; break;
             default:       $source = ''; break;
         }
 

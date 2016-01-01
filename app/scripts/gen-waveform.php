@@ -12,7 +12,7 @@ define('WAVEFORM_PATH', '/var/www/adhocmusic.com/media/audiowaveform');
 
 $audios = Audio::getAudios(array(
     'online' => true,
-    'limit'  =>  5000,
+    'limit'  => 5000,
 ));
 
 echo "*** BEGIN ***\n";
@@ -25,12 +25,11 @@ foreach($audios as $audio)
     $a->setDestinationFile(WAVEFORM_PATH . '/' . $audio['id'] . '.png');
     $a->setDestinationWidth(500);
     $a->setDestinationHeight(100);
-    $a->setDestinationColor('#00FF00');
-    $a->setDestinationBgcolor('#000000');
+    $a->setDestinationColor('#ed3438');
+    $a->setDestinationBgcolor('#ffffff');
     $a->run();
     unset($a);
     echo "\n";
 }
 
 echo "*** END ***\n";
-

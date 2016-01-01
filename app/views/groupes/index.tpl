@@ -5,7 +5,7 @@
     <header>
       <h2>{$key|escape}</h2>
     </header>
-    <ul class="listgrp">
+    <ul class="groupes">
     {foreach from=$groupes item=groupe}
       {include file="groupes/_groupe.tpl" groupe=$groupe}
     {/foreach}

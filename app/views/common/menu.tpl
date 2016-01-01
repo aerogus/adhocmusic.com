@@ -20,11 +20,6 @@
   </li>
   <li {if isset($menuselected) && $menuselected === 'groupes'} class="menuselected"{/if}>
     <a href="/groupes/" accesskey="2" title="La liste et les fiches groupes du réseau AD'HOC">Groupes</a>
-    <ul>
-      <li><a href="/groupes/?tri=m">Par date de mise à jour</a></li>
-      <li><a href="/groupes/?tri=a">Par ordre alphabétique</a></li>
-      <li><a href="/groupes/create">Inscrire son groupe</a></li>
-    </ul>
   </li>
   <li {if isset($menuselected) && $menuselected === 'media'} class="menuselected"{/if}>
     <a href="/medias/">Média</a>

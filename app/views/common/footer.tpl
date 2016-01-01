@@ -41,8 +41,5 @@
 </script>
 {/foreach}
 
-<div class="nojs">Votre interpréteur JavaScript est désactivé, ce site marche en mode dégradé</div>
-
 </body>
-
 </html>

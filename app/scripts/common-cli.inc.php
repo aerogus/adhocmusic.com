@@ -10,10 +10,10 @@ ini_set("default_charset", "UTF-8");
 
 error_reporting(-1); // taquet
 
-define('_DB_HOST_',             'localhost');
-define('_DB_USER_',             'adhocmusic');
-define('_DB_PASSWORD_',         'kK2972Wd');
-define('_DB_DATABASE_',         'adhocmusic');
+define('_DB_HOST_',      'localhost');
+define('_DB_USER_',      'adhocmusic');
+define('_DB_PASSWORD_',  'kK2972Wd');
+define('_DB_DATABASE_',  'adhocmusic');
 
 define('ADHOC_ROOT_PATH',   dirname(dirname(dirname(__FILE__))));
 define('ADHOC_LIB_PATH',    ADHOC_ROOT_PATH . '/app/models');
