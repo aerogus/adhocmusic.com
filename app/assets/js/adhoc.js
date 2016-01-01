@@ -106,6 +106,21 @@ jQuery(document).ready(function ($) {
         $("#boxlogin-inner").hide();
     });
 
-    $('video').mediaelementplayer();
+    $("#form-login").submit(function () {
+        var valid = true;
+        if (!$("#login-pseudo").val().length) {
+            $("#login-pseudo").prev(".error").fadeIn();
+            valid = false;
+        } else {
+            $("#login-pseudo").prev(".error").fadeOut();
+        }
+        if (!$("#login-password").val().length) {
+            $("#login-password").prev(".error").fadeIn();
+            valid = false;
+        } else {
+            $("#login-password").prev(".error").fadeOut();
+        }
+        return valid;
+    });
 
 });

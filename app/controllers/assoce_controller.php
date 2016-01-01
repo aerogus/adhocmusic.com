@@ -13,6 +13,7 @@ class Controller
 
         $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
+        $smarty->enqueue_script('/js/assoce.js');
 
         $smarty->assign('menuselected', 'assoce');
 
@@ -43,6 +44,7 @@ class Controller
 
         $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
+        $smarty->enqueue_script('/js/assoce.js');
 
         $smarty->assign('menuselected', 'assoce');
 
@@ -75,6 +77,7 @@ class Controller
 
         $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
+        $smarty->enqueue_script('/js/assoce.js');
 
         $smarty->assign('menuselected', 'assoce');
 
@@ -108,6 +111,7 @@ class Controller
 
         $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
+        $smarty->enqueue_script('/js/assoce.js');
 
         $smarty->assign('menuselected', 'assoce');
 

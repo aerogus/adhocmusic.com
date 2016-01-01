@@ -1,19 +1,10 @@
 <?php
 
-define('GROUPS_SORT_BY_NAME', 'a');
-define('GROUPS_SORT_BY_STYLE', 's');
-define('GROUPS_SORT_BY_DATE', 'm');
-
 class Controller
 {
     static function index()
     {
         $smarty = new AdHocSmarty();
-
-        $tri = Route::params('tri');
-        if(!in_array($tri, array(GROUPS_SORT_BY_NAME, GROUPS_SORT_BY_STYLE, GROUPS_SORT_BY_DATE))) {
-            $tri = GROUPS_SORT_BY_DATE;
-        }
 
         $smarty->assign('title', "♫ Les groupes de la communauté musicale AD'HOC");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
@@ -23,24 +14,8 @@ class Controller
         $trail = Trail::getInstance();
         $trail->addStep("Groupes", "/groupes/");
 
-        if($tri == GROUPS_SORT_BY_STYLE) {
-            $trail->addStep("Tri par date de mise à jour", "/groupes/?tri=" . GROUPS_SORT_BY_DATE);
-            $trail->addStep("Tri alphabétique", "/groupes/?tri=" . GROUPS_SORT_BY_NAME);
-            $trail->addStep("Tri par style");
-            $smarty->assign('liste_groupes', Groupe::getGroupesByStyle());
-        } elseif($tri == GROUPS_SORT_BY_DATE) {
-            $trail->addStep("Tri par style", "/groupes/?tri=" . GROUPS_SORT_BY_STYLE);
-            $trail->addStep("Tri alphabétique", "/groupes/?tri=" . GROUPS_SORT_BY_NAME);
-            $trail->addStep("Tri par date de mise à jour");
-            $smarty->assign('liste_groupes', Groupe::getGroupesByModifiedOn());
-        } elseif($tri == GROUPS_SORT_BY_NAME) {
-            $trail->addStep("Tri par date de mise à jour", "/groupes/?tri=" . GROUPS_SORT_BY_DATE);
-            $trail->addStep("Tri par style", "/groupes/?tri=" . GROUPS_SORT_BY_STYLE);
-            $trail->addStep("Tri alphabétique");
-            $smarty->assign('liste_groupes', Groupe::getGroupesByName());
-        }
-
-        //$smarty->assign('twitter_feeds', Twitter::getLastGroupsNews());
+//return sizeof(Groupe::getGroupesByName());
+        $smarty->assign('liste_groupes', Groupe::getGroupesByName());
 
         return $smarty->fetch('groupes/index.tpl');
     }
@@ -145,27 +120,6 @@ class Controller
         )));
 
         $groupe->addVisite();
-
-        // fetch page fb
-        // todo: bug return false desfois ...
-        if($groupe->getFacebookPageId()) {
-/*
-            try {
-            $fb_page_info = $_SESSION['fb']->api('/' . $groupe->getFacebookPageId());
-            if(!empty($fb_page_info) && array_key_exists('likes', $fb_page_info)) {
-                $smarty->assign('fb_page_info', $fb_page_info);
-            }
-
-            $fb_page_feed = $_SESSION['fb']->api('/' . $groupe->getFacebookPageId() . '/feed');
-            if(!is_null($fb_page_feed) && array_key_exists('data', $fb_page_feed) && sizeof($fb_page_feed['data'])) {
-                $fb_page_feed['data'] = array_slice($fb_page_feed['data'], 0, 4);
-                $smarty->assign('fb_page_feed', $fb_page_feed['data']);
-            }
-            } catch(Exception $e) {
-                // bug à la récupération du flux
-            }
-*/
-        }
 
         // alerting
         if(Tools::isAuth()) {
