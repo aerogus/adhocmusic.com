@@ -10,6 +10,7 @@ class Controller
         $trail->addStep("Newsletters");
 
         $smarty->assign('newsletters', Newsletter::getNewsletters(array(
+            'sens' => 'DESC',
             'limit' => 50,
         )));
 
@@ -121,4 +122,3 @@ class Controller
         return $smarty->fetch('newsletters/subscriptions.tpl');
     }
 }
-

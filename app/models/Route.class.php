@@ -137,11 +137,11 @@ class Route
             foreach($routes as $route)
             {
                 $r = explode('|', trim($route));
-                if((string) $r[0] == '1') {
+                if((string) $r[0] === '1') {
                     self::map_connect(array('controller' => (string) $r[1],
-                                             'action'    => (string) $r[2],
-                                             'method'    => (string) $r[3],
-                                             'path'      => (string) $r[4]));
+                                            'action' => (string) $r[2],
+                                            'method' => (string) $r[3],
+                                            'path' => (string) $r[4]));
                 }
             }
             return true;

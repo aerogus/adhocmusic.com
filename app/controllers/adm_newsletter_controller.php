@@ -15,7 +15,8 @@ class Controller
         $trail->addStep("Newsletter");
 
         $smarty->assign('newsletters', Newsletter::getNewsletters(array(
-            'limit' => 100,
+            'sens' => 'DESC',
+            'limit' => 50,
         )));
         $smarty->assign('nb_sub', Newsletter::getSubscribersCount());
 

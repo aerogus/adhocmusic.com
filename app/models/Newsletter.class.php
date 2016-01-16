@@ -191,13 +191,13 @@ class Newsletter extends ObjectModel
         }
 
         $sens = "ASC";
-        if(isset($params['sens']) && $params['sens'] == "DESC") {
+        if(isset($params['sens']) && $params['sens'] === "DESC") {
             $sens = "DESC";
         }
 
         $sort = "id_newsletter";
         if(isset($params['sort'])
-           && ($params['sort'] == "send_date")) {
+           && ($params['sort'] === "send_date")) {
             $sort = $params['sort'];
         }
 
@@ -417,4 +417,3 @@ class Newsletter extends ObjectModel
         }
     }
 }
-

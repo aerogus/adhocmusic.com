@@ -330,7 +330,7 @@ class Controller
                         $img->setKeepRatio(true);
                         $img->setMaxWidth(1024);
                         $img->setMaxHeight(768);
-                        $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/event/' . $event->getId() . '.jpg');
+                        $img->setDestFile(ADHOC_ROOT_PATH . '/media/event/' . $event->getId() . '.jpg');
                         $img->write();
                         $img = '';
                     }
@@ -346,7 +346,7 @@ class Controller
                         $img->setKeepRatio(true);
                         $img->setMaxWidth(1024);
                         $img->setMaxHeight(768);
-                        $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/event/' . $event->getId() . '.jpg');
+                        $img->setDestFile(ADHOC_ROOT_PATH . '/media/event/' . $event->getId() . '.jpg');
                         $img->write();
                         $img = '';
 
@@ -506,7 +506,7 @@ class Controller
                     $img->setKeepRatio(true);
                     $img->setMaxWidth(1024);
                     $img->setMaxHeight(768);
-                    $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/event/' . $event->getId() . '.jpg');
+                    $img->setDestFile(ADHOC_ROOT_PATH . '/media/event/' . $event->getId() . '.jpg');
                     $img->write();
                     $img = "";
 
@@ -525,7 +525,7 @@ class Controller
                     $img->setKeepRatio(true);
                     $img->setMaxWidth(1024);
                     $img->setMaxHeight(768);
-                    $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/event/' . $event->getId() . '.jpg');
+                    $img->setDestFile(ADHOC_ROOT_PATH . '/media/event/' . $event->getId() . '.jpg');
                     $img->write();
                     $img = '';
 

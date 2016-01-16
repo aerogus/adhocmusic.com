@@ -49,7 +49,7 @@ if(ENV === 'PROD') {
     define('CACHE_URL',        'http://www.adhocmusic.com');
 
     ini_set('display_startup_errors', 0);
-    ini_set('display_errors', 0);
+    ini_set('display_errors', 1);
     define('ONERROR_SHOW', true);
 
 } elseif(ENV === 'DEV') {

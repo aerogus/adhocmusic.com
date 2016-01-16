@@ -4,7 +4,7 @@
 // envoi d'une newsletter
 
 // n° de newsletter à traiter
-define('ID_NEWSLETTER', 72);
+define('ID_NEWSLETTER', 73);
 
 require_once dirname(__FILE__) . '/common-cli.inc.php';
 
@@ -38,7 +38,7 @@ foreach($subs as $sub)
 
     Email::send(
         $sub['email'],
-        "Soirée Rock à Epinay-sur-Orge Samedi 7 Novembre",
+        "AD'HOC vous souhaite une bonne année 2016",
         'newsletter-' . $newsletter->getId(),
         array(
             'id'            => $newsletter->getId(),
@@ -46,7 +46,7 @@ foreach($subs as $sub)
             'id_contact'    => $sub['id_contact'],
             'title'         => $newsletter->getTitle(),
             'url'           => $newsletter->getUrl(),
-            'unsub_url'     => 'http://www.adhocmusic.com/newsletters/subscriptions?action=unsub&email=' . $sub['email'],
+            'unsub_url'     => 'https://www.adhocmusic.com/newsletters/subscriptions?action=unsub&email=' . $sub['email'],
             'email'         => $sub['email'],
             'pseudo'        => $sub['pseudo'],
         )

@@ -88,8 +88,7 @@
       <div>
         <strong>Association AD'HOC</strong><br>
         <address>8, rue de l'église<br>
-        91360 Epinay sur Orge<br>
-        FRANCE</address>
+        91360 Epinay sur Orge</address>
       </div>
     </div>
 
