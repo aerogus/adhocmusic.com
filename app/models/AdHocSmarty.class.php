@@ -87,8 +87,8 @@ class AdHocSmarty extends Smarty
 
         $this->enqueue_style('/css/adhoc.css?v=20150909');
 
-        $this->enqueue_script('/js/jquery-2.1.4.min.js');
-        $this->enqueue_script('/js/adhoc.js');
+        $this->enqueue_script('/js/jquery-2.2.0.min.js');
+        $this->enqueue_script('/js/adhoc.20160124.js');
 
         $this->print_inline_script(file_get_contents(ADHOC_ROOT_PATH . '/app/assets/js/google-analytics.js'));
         $this->print_inline_script(file_get_contents(ADHOC_ROOT_PATH . '/app/assets/js/facebook-sdk.js'));
@@ -117,9 +117,9 @@ class AdHocSmarty extends Smarty
 
         $bgcolor = '666666';
 
-        if($params['type'] == 'player_mp3_multi') {
+        if($params['type'] === 'player_mp3_multi') {
             $id_groupe = $params['id'];
-        } elseif($params['type'] == 'webradio') {
+        } elseif($params['type'] === 'webradio') {
             $chemin = $params['id'];
             $type = 'dewplayer';
         } else {

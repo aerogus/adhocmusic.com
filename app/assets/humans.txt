@@ -10,4 +10,4 @@
     Last update: 2015/12/29
     Language: French
     Doctype: HTML5
-    IDE: Sublime Text, vim
+    IDE: Atom
