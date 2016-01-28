@@ -2,8 +2,8 @@
 
 class Controller
 {
-    const 'IMG_WIDTH' = 1000;
-    const 'IMG_HEIGHT' = 375;
+    const IMG_WIDTH = 1000;
+    const IMG_HEIGHT = 375;
 
     static function index()
     {
@@ -42,7 +42,6 @@ class Controller
             'link'        => '',
             'datdeb'      => '',
             'datfin'      => '',
-            'slot'        => 0,
             'online'      => false,
         );
 
@@ -55,7 +54,6 @@ class Controller
                 'image'       => '',
                 'datdeb'      => trim((string) Route::params('datdeb') . ' 00:00:00'),
                 'datfin'      => trim((string) Route::params('datfin') . ' 23:59:59'),
-                'slot'        => (int) Route::params('slot'),
                 'online'      => false,
             );
 
@@ -67,7 +65,6 @@ class Controller
                 $f->setLink($data['link']);
                 $f->setDatDeb($data['datdeb']);
                 $f->setDatFin($data['datfin']);
-                $f->setSlot($data['slot']);
                 $f->setOnline($data['online']);
                 $f->save();
 
@@ -92,7 +89,6 @@ class Controller
         }
 
         $smarty->assign('data', $data);
-        $smarty->assign('slots', Featured::getSlots());
         $smarty->assign('events', Event::getEvents(array(
             'online' => true,
             'datdeb' => date('Y-m-d H:i:s'),
@@ -126,7 +122,6 @@ class Controller
             'image'       => $f->getImage(),
             'datdeb'      => $f->getDatDeb(),
             'datfin'      => $f->getDatFin(),
-            'slot'        => $f->getSlot(),
             'online'      => $f->getOnline(),
         );
 
@@ -140,7 +135,6 @@ class Controller
                 'image'       => '',
                 'datdeb'      => trim((string) Route::params('datdeb') . ' 00:00:00'),
                 'datfin'      => trim((string) Route::params('datfin') . ' 23:59:59'),
-                'slot'        => (int) Route::params('slot'),
                 'online'      => (bool) Route::params('online'),
             );
 
@@ -151,7 +145,6 @@ class Controller
                 $f->setLink($data['link']);
                 $f->setDatDeb($data['datdeb']);
                 $f->setDatFin($data['datfin']);
-                $f->setSlot($data['slot']);
                 $f->setOnline($data['online']);
                 $f->save();
 
@@ -176,7 +169,6 @@ class Controller
         }
 
         $smarty->assign('data', $data);
-        $smarty->assign('slots', Featured::getSlots());
 
         return $smarty->fetch('adm/featured/edit.tpl');
     }
@@ -190,11 +182,6 @@ class Controller
     protected static function _validate_form($data, &$errors)
     {
         $errors = array();
-        if(empty($data['slot'])) {
-            $errors['slot'] = "Vous devez choisir un slot.";
-        } elseif(!is_numeric($data['slot']) || $data['slot'] == 0) {
-            $errors['slot'] = "Vous devez choisir un slot.";
-        }
         if(empty($data['title'])) {
             $errors['title'] = "Vous devez saisir un titre";
         }
