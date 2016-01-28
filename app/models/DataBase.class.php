@@ -69,7 +69,7 @@ class DataBase
     /**
      * type de fetch
      */
-    protected $_fetchMode = MYSQL_ASSOC;
+    protected $_fetchMode = MYSQLI_ASSOC;
 
     /**
      * charser à utiliser pour la connexion
@@ -98,22 +98,21 @@ class DataBase
         array_unshift($params, self::$_connections_params[$conn_name]['db_host']);
 
         $retries = DB_MYSQL_CONNECT_RETRIES;
-        while(empty($this->_current_conn[$conn_key]) && $retries > 0)
-        {
+        while(empty($this->_current_conn[$conn_key]) && $retries > 0) {
             $retries--;
-            $this->_current_conn[$conn_key] = @call_user_func_array('mysql_connect', $params);
+            $this->_current_conn[$conn_key] = @call_user_func_array('mysqli_connect', $params);
         }
 
-        if (!$this->_current_conn[$conn_key])
-        {
+        if (!$this->_current_conn[$conn_key]) {
             throw new Exception($this->_current_conn[$conn_key], 'Erreur connexion serveur MySQL');
         }
 
-        $select_db = @mysql_select_db(
-            self::$_connections_params[$conn_name]['db_database'],
-            $this->_current_conn[$conn_key]);
-        if (!$select_db)
-        {
+        $select_db = @mysqli_select_db(
+            $this->_current_conn[$conn_key],
+            self::$_connections_params[$conn_name]['db_database']
+        );
+
+        if (!$select_db) {
             throw new Exception($this->_current_conn[$conn_key], 'Erreur connexion base MySQL');
         }
 
@@ -133,7 +132,7 @@ class DataBase
 
         if (isset($this->_current_conn[$conn_key]))
         {
-            @mysql_close($this->_current_conn[$conn_key]);
+            @mysqli_close($this->_current_conn[$conn_key]);
             unset($this->_current_conn[$conn_key]);
         }
         return true;
@@ -147,7 +146,7 @@ class DataBase
         $connection_keys = array_keys($this->_current_conn);
         foreach ($connection_keys as $conn_key)
         {
-            @mysql_close($this->_current_conn[$conn_key]);
+            @mysqli_close($this->_current_conn[$conn_key]);
             unset($this->_current_conn[$conn_key]);
         }
         return true;
@@ -157,7 +156,7 @@ class DataBase
      * Génère la clé qui servira à retrouver le lien vers le serveur qu'on veut
      * dans le tableau de connections. Il est nécessaire d'inclure l'utilisateur
      * et le password pour être cohérent avec les infos dont php se sert pour la
-     * re-utilisation d'un lien existant lors d'un mysql_connect.
+     * re-utilisation d'un lien existant lors d'un mysqli_connect.
      */
     protected static function generateConnectionKey($conn_name)
     {
@@ -229,9 +228,9 @@ class DataBase
     /**
      * Modifie le fetchMode uniquement pour la prochaine requête
      */
-    function setFetchMode($fetchMode = MYSQL_BOTH)
+    function setFetchMode($fetchMode = MYSQLI_BOTH)
     {
-        if (in_array($fetchMode, array(MYSQL_BOTH, MYSQL_ASSOC, MYSQL_NUM))) {
+        if (in_array($fetchMode, array(MYSQLI_BOTH, MYSQLI_ASSOC, MYSQLI_NUM))) {
             $this->_fetchMode = $fetchMode;
         }
     }
@@ -270,8 +269,8 @@ class DataBase
         } elseif (true == $rc) {
             /* La requête s'est bien passée, c'était une requête du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-            $res = mysql_fetch_array($rc, $this->_fetchMode);
-            $this->_fetchMode = MYSQL_ASSOC;
+            $res = mysqli_fetch_array($rc, $this->_fetchMode);
+            $this->_fetchMode = MYSQLI_ASSOC;
         }
         return $res;
     }
@@ -291,8 +290,8 @@ class DataBase
         } elseif (true == $rc) {
             /* La requête s'est bien passée, c'était une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-            $res = mysql_fetch_array($rc, MYSQL_NUM); // MYSQL_NUM : ici on ne peut pas respecter $this->_fetchMode
-            $this->_fetchMode = MYSQL_ASSOC;
+            $res = mysqli_fetch_array($rc, MYSQLI_NUM); // MYSQLI_NUM : ici on ne peut pas respecter $this->_fetchMode
+            $this->_fetchMode = MYSQLI_ASSOC;
             if (is_array($res)) {
                 $res = $res[0];
             }
@@ -319,7 +318,7 @@ class DataBase
             /* La requête s'est bien passée, c'était une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = array();
-            while($row = mysql_fetch_array($rc, MYSQL_NUM))
+            while($row = mysqli_fetch_array($rc, MYSQLI_NUM))
             {
                 if(is_array($row)) {
                     array_push($res, $row[0]);
@@ -344,11 +343,11 @@ class DataBase
             /* La requête s'est bien passée, c'était une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
              $res = array();
-             while (($row = mysql_fetch_array($rc, $this->_fetchMode)) !== false)
+             while (($row = mysqli_fetch_array($rc, $this->_fetchMode)) !== NULL)
              {
                 $res[] = $row;
              }
-            $this->_fetchMode = MYSQL_ASSOC;
+            $this->_fetchMode = MYSQLI_ASSOC;
         }
         return $res;
     }
@@ -360,7 +359,7 @@ class DataBase
     {
         $conn = $this->connect($conn_name);
 
-        $rc = @mysql_query($sql, $conn);
+        $rc = @mysqli_query($conn, $sql);
         $this->_nbreq++;
 
         /* début debug log */
@@ -401,7 +400,7 @@ class DataBase
      */
     function freeResult($result)
     {
-        return mysql_free_result($result);
+        return mysqli_free_result($result);
     }
 
     /**
@@ -409,7 +408,7 @@ class DataBase
      */
     function numRows($result)
     {
-        return mysql_num_rows($result);
+        return mysqli_num_rows($result);
     }
 
     /**
@@ -417,7 +416,7 @@ class DataBase
      */
     function fetchRow($result)
     {
-        return mysql_fetch_row($result);
+        return mysqli_fetch_row($result);
     }
 
     /**
@@ -425,7 +424,7 @@ class DataBase
      */
     function fetchFirstField($result)
     {
-        $res = mysql_fetch_array($result, MYSQL_NUM);
+        $res = mysqli_fetch_array($result, MYSQLI_NUM);
         if (is_array($res)) {
             return $res[0];
         }
@@ -437,11 +436,11 @@ class DataBase
      */
     function fetchObject($result)
     {
-        return mysql_fetch_object($result);
+        return mysqli_fetch_object($result);
     }
 
     /**
-     * Execute mysql_fetch_assoc sur un resultset, ne touche pas à la valeur de
+     * Execute mysqli_fetch_assoc sur un resultset, ne touche pas à la valeur de
      * {@see self::$fetchMode}.
      *
      * @param resource $result
@@ -449,7 +448,7 @@ class DataBase
      */
     function fetchAssoc($result)
     {
-        return mysql_fetch_assoc($result);
+        return mysqli_fetch_assoc($result);
     }
 
     /**
@@ -504,7 +503,7 @@ class DataBase
         $conn_key = self::generateConnectionKey($conn_name);
 
         if (isset($this->_current_conn[$conn_key])) {
-            return mysql_affected_rows($this->_current_conn[$conn_key]);
+            return mysqli_affected_rows($this->_current_conn[$conn_key]);
         }
         return -1;
     }
@@ -520,7 +519,7 @@ class DataBase
 
         $conn_key = self::generateConnectionKey($conn_name);
         if(isset($this->_current_conn[$conn_key])) {
-            return mysql_insert_id($this->_current_conn[$conn_key]);
+            return mysqli_insert_id($this->_current_conn[$conn_key]);
         }
         return -1;
     }
@@ -537,14 +536,14 @@ class DataBase
         $conn_key = self::generateConnectionKey($conn_name);
 
         if(isset($this->_current_conn[$conn_key])) {
-            return mysql_real_escape_string($string, $this->_current_conn[$conn_key]);
+            return mysqli_real_escape_string($this->_current_conn[$conn_key], $string);
         } else {
             // throw Exception plutot
             mail('gus@adhocmusic.com', 'debug', 'NO LINK ???' . print_r($_SERVER, true));
         }
 
         // deprecated !
-        //return mysql_escape_string($string);
+        //return mysqli_escape_string($string);
 
         // moche !
         return addslashes($string);
@@ -556,7 +555,7 @@ class DataBase
     function errno($conn_name)
     {
         $conn_key = self::generateConnectionKey($conn_name);
-        return mysql_errno($this->_current_conn[$conn_key]);
+        return mysqli_errno($this->_current_conn[$conn_key]);
     }
 
     /**
