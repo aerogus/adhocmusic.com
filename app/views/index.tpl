@@ -22,34 +22,6 @@
   </div>
 </div>
 
-{*
-<div class="box">
-  <div class="pa0" style="padding: 0">
-    <div id="feature_list">
-      <ul id="tabs">
-      {foreach from=$featured item=f}
-        <li>
-          <a href="{$f.link|escape}">
-            <h3>{$f.title|escape}</h3>
-            <span>{$f.description|escape}</span>
-          </a>
-        </li>
-        {/foreach}
-      </ul>
-      <ul id="output">
-      {foreach from=$featured item=f}
-        <li>
-          <a href="{$f.link|escape}">
-            <img src="{$f.image|escape}" alt="" />
-          </a>
-        </li>
-      {/foreach}
-      </ul>
-    </div>
-  </div>
-</div>
-*}
-
 <div class="grid-3-tiny-2-small-1">
 
   <div class="box">
@@ -63,7 +35,7 @@
 
 <div class="box">
   <header>
-    <h2>Agenda</h2>
+    <h2><a href="/events/" title="Agenda culturel">Agenda</a></h2>
   </header>
   <div>
 <ul>
