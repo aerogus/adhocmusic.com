@@ -8,12 +8,12 @@ class Trail
     /**
      *
      */
-    protected $_path = array();
+    protected static $_instance = null;
 
     /**
      *
      */
-    protected static $_instance = null;
+    protected $_path = array();
 
     /**
      *
@@ -24,18 +24,6 @@ class Trail
             return new Trail();
         }
         return self::$_instance;
-    }
-
-    /**
-     *
-     */
-    static function deleteInstance()
-    {
-        if (isset(self::$_instance)) {
-            self::$_instance = null;
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -53,21 +41,10 @@ class Trail
      */
     function addStep($title, $link = '')
     {
-        if (mb_strlen($link) == 0) {
-            $link = $_SERVER['REQUEST_URI'];
-        }
         $this->_path[] = array(
             'title' => $title,
-            'link'  => $link,
+            'link' => $link,
         );
-    }
-
-    /**
-     *
-     */
-    function init()
-    {
-        $this->_path = array();
     }
 
     /**

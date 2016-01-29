@@ -1,40 +1,26 @@
 /* Breadcrumb Styles */
 
-.breadCrumb
+.breadcrumb
+  max-width 1000px
+  margin 0 auto
   text-align left
 
   ul
 
     li
-      display inline
+      display inline-block
 
-      div.chevronOverlay
-        position absolute
-        right 0
-        top 0
-        z-index 2
-
-      span
-        display block
-        overflow hidden
-
-      a
+      a, span
         display inline-block
         padding 5px
         margin 10 5px 0 0
         background #f0f0f0
-        border 2px solid
 
-.breadCrumb ul li.first a:hover
-  background-position 0 -16px
+      a
+        font-weight bold
 
-.breadCrumb ul li.last
-  background none
-  margin-right 0
-  padding-right 0
+      &:after
+        content ' > '
 
-.chevronOverlay
-  display none
-  background url(/img/breadcrumbs/chevron_overlay.png) no-repeat 100% 0
-  width 13px
-  height 20px
+      &:last-child:after
+          content ''

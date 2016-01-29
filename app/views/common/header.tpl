@@ -105,20 +105,21 @@
   </div>
 </div>
 
-{if !empty($trail)}
-<div class="breadCrumbHolder module">
-  <div id="breadCrumb" class="breadCrumb module">
-  {if ($trail|@count) > 1}
-    <ul>
+</div>{* #menu-wrapper *}
+
+{* file d'ariane *}
+{if !empty($trail) && ($trail|@count) > 1}
+<div class="breadcrumb">
+  <ul>
     {foreach from=$trail item=item name=breadcrumb}
+      {if !empty($item.link)}
       <li><a href="{$item.link|escape}">{$item.title|escape}</a></li>
+      {else}
+      <li><span>{$item.title|escape}</span></li>
+      {/if}
     {/foreach}
-    </ul>
-  {/if}
-  </div>
+  </ul>
 </div>
 {/if}
-
-</div>{* #menu-wrapper *}
 
 <div class="site_content clearfix">

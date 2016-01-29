@@ -29,7 +29,6 @@ class AdHocSmarty extends Smarty
         $this->registerPlugin('function', 'pagination', array('AdHocSmarty', 'function_pagination'));
         $this->registerPlugin('function', 'html_input_date_hourminute', array('AdHocSmarty', 'function_html_input_date_hourminute'));
         $this->registerPlugin('function', 'calendar', array('AdHocSmarty', 'function_calendar'));
-        $this->registerPlugin('function', 'css_border_radius', array('AdHocSmarty', 'function_css_border_radius'));
         $this->registerPlugin('function', 'image', array('EmailSmarty', 'function_image'));
 
         // modifiers smarty
@@ -37,9 +36,6 @@ class AdHocSmarty extends Smarty
         $this->registerPlugin('modifier', 'pseudo_by_id', array('AdHocSmarty', 'modifier_pseudo_by_id'));
         $this->registerPlugin('modifier', 'avatar_by_id', array('AdHocSmarty', 'modifier_avatar_by_id'));
         $this->registerPlugin('modifier', 'display_on_off_icon', array('AdHocSmarty', 'modifier_display_on_off_icon'));
-
-        // blocks smarty
-        $this->registerPlugin('block', 't', array('AdHocSmarty', 'block_t'));
 
         // assignations générales
         $this->assign('title', "♫ AD'HOC : Les Musiques Actuelles");
@@ -66,12 +62,6 @@ class AdHocSmarty extends Smarty
                 $this->assign('my_counters', array(
                     'nb_unread_messages' => (int) Messagerie::getMyUnreadMessagesCount(),
                     'nb_messages'        => (int) Messagerie::getMyMessagesCount(),
-                    //'nb_groupes'         => (int) Groupe::getMyGroupesCount(),
-                    //'nb_photos'          => (int) Photo::getMyPhotosCount(),
-                    //'nb_audios'          => (int) Audio::getMyAudiosCount(),
-                    //'nb_videos'          => (int) Video::getMyVideosCount(),
-                    //'nb_events'          => (int) Event::getMyEventsCount(),
-                    //'nb_lieux'           => (int) Lieu::getMyLieuxCount(),
                 ));
 
             } else {
@@ -386,14 +376,14 @@ class AdHocSmarty extends Smarty
             $trow++;
         }
 
-        if($month == 1) {
+        if($month === 1) {
             $prev_month = 12;
             $prev_year = $year - 1;
         } else {
             $prev_month = $month - 1;
             $prev_year = $year;
         }
-        if($month == 12) {
+        if($month === 12) {
             $next_month = 1;
             $next_year = $year + 1;
         } else {
@@ -411,18 +401,6 @@ class AdHocSmarty extends Smarty
         $smarty->assign('next_month', $next_month);
         $smarty->assign('next_year', $next_year);
         return $smarty->fetch('events/calendar.tpl');
-    }
-
-    /**
-     * compatibilité css multi-browser
-     * @param array ['radius']
-     */
-    static function function_css_border_radius($params)
-    {
-        $css  = "border-radius: " . $params['radius'] . ";\n";
-        $css .= "    -moz-border-radius: " . $params['radius'] . ";\n";
-        $css .= "    -webkit-border-radius: " . $params['radius'] . ";\n";
-        return $css;
     }
 
     /* fin fonctions */
@@ -502,110 +480,6 @@ class AdHocSmarty extends Smarty
     /* fin modifiers */
 
     /**
-     * translate
-     *
-     * @param unknown_type $string
-     * @param unknown_type $arguments
-     * @param unknown_type $options
-     * @throws Exception
-     */
-    static function translate($string, $arguments = array(), $options = array())
-    {
-        $module = empty($options['module']) ? false : $options['module'];
-        $locale = empty($options['locale']) ? false : $options['locale'];
-
-        $plural = (is_array($string) && isset($string[1])) ? $string[1] : false;
-        $string = (is_array($string) && isset($string[0])) ? $string[0] : (string) $string;
-
-        $out = $string;
-
-        if ($plural && !isset($arguments['count'])) {
-            throw new Exception("You need to supply a 'count' argument when using plural form.");
-        }
-
-        if ($module) {
-            if ($plural) {
-                $out = dngettext($module, $string, $plural, (int) $arguments['count']);
-            } else {
-                $out = dgettext($module, $string);
-            }
-        } else {
-            if ($plural) {
-                $out = ngettext($string, $plural, (int) $arguments['count']);
-            } else {
-                $out = gettext($string);
-            }
-        }
-        if (count($arguments)) {
-            foreach ($arguments as $key => $value) {
-                $out = str_replace('%' . $key, $value, $out);
-            }
-        }
-
-        return $out;
-    }
-
-    /**
-     * block t
-     *
-     * @param unknown_type $params
-     * @param unknown_type $text
-     * @param unknown_type $smarty
-     * @param unknown_type $repeat
-     */
-    static function block_t($params, $text, $smarty, &$repeat)
-    {
-        if (is_null($text)) {
-            return;
-        }
-        $text = trim($text);
-        $options = array(
-            'module' => isset($params['module']) ? $params['module'] : false,
-            'locale' => isset($params['locale']) ? $params['locale'] : false
-        );
-        $assign = isset($params['assign']) ? $params['assign'] : false;
-        $escape = isset($params['escape']) ? $params['escape'] : false;
-        $escape_args = isset($params['escape_args']) ? $params['escape_args'] : 'html';
-
-        $plural = isset($params['plural']) ? trim($params['plural']) : false;
-
-        unset($params['escape'], $params['assign'], $params['locale'], $params['module'],
-            $params['escape_args'], $params['plural']);
-
-        if (!empty($params['id'])) {
-            $id = $params['id'];
-            $plural_id = $id . '_PLURAL';
-        } else {
-            $id = false;
-        }
-        unset($params['id']);
-        if (count($params) && $escape_args) {
-            foreach ($params as $key=>$value) {
-                $params[$key] = self::smarty_modifier_escape($value, $escape_args);
-            }
-        }
-        assert(empty($id));
-        if ($id) {
-            $out = locale::translate($plural ? array($id, $plural_id) : $id, $params, $options);
-        }
-        if (empty($out) || ($id && ($out == $id || $out == $plural_id))) {
-            $out = self::translate($plural ? array($text, $plural) : $text, $params, $options);
-        }
-        if ($escape) {
-            if ($escape === 'jquery_metadata') {
-                $out = self::smarty_modifier_escape(smarty_modifier_escape($out, 'javascript'), 'html');
-            } else {
-                $out = self::smarty_modifier_escape($out, $escape);
-            }
-        }
-        if ($assign) {
-            $smarty->assign($assign, $out);
-            return TRUE;
-        }
-        return $out;
-    }
-
-    /**
      * Ajoute d'une feuille de style
      *
      * @param string $style_name url de la feuille de style
@@ -651,10 +525,8 @@ class AdHocSmarty extends Smarty
     function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null, $display = false, $merge_tpl_vars = true, $no_output_filter = false)
     {
         /* fil d'ariane */
-        if(defined('TRAIL_ENABLED')) {
-            $trail = Trail::getInstance();
-            $this->assign('trail', $trail->getPath());
-        }
+        $trail = Trail::getInstance();
+        $this->assign('trail', $trail->getPath());
 
         return parent::fetch($template, $cache_id, $compile_id, $parent, $display, $merge_tpl_vars, $no_output_filter);
     }
