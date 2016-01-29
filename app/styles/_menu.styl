@@ -14,38 +14,33 @@
 
   > li
     display inline-block
+    color color_black
 
-  > li:hover, li.menuselected:hover
-    background-color color_red
-
-  > li.menuselected
-    background-color transparent
+  > li:hover
+    background-color color_black
+    color #fff
 
   > li > a
     display block
-    color #000
     padding .2rem .6rem
     text-transform uppercase
 
   > li > ul
-    background-color color_red
-    margin 0
-    left 0
-    float left
+    display none
+    position absolute
+    background-color color_black
+    color #fff
     z-index 10
-    display inline
+    text-align left
 
   > li > ul > li
-    display inline
-    float left
     font-size .5em
 
   > li > ul > li > a
-    font bold 1.1em Arial
-    color #fff
+    font 1.4em TradeGothic, Arial
+    text-transform uppercase
     padding 5px
-    height 20px
-    display block
+    display inline-block
 
 /* social icons */
 

@@ -84,7 +84,6 @@ jQuery(document).ready(function ($) {
     adhoc.init();
 
     // menu
-    $("ul#menu_haut li").find("ul").hide();
     $("ul#menu_haut li").hover(function () {
         $(this).find("ul").show();
     }, function () {

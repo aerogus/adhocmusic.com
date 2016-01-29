@@ -2,7 +2,7 @@
  * general
  */
 
-#header
+header
   max-width 1000px
   margin 20px auto
 
@@ -17,7 +17,7 @@
   height 92px
   background url(/img/logo_adhoc.png)
 
-  & span
+  span
     display none
 
 #megabanner
@@ -25,17 +25,10 @@
   width 728px
   height 90px
 
-  & img
+  img
     width 728px
     height 90px
     display block
-
-#featured
-  width 172px !important
-  height 244px !important
-
-  & ul
-    margin 0
 
 #recherche input[type=text]
   border none
@@ -75,25 +68,10 @@
   font-weight bold
   display block
 
-.button:hover
-  background #0f0f0f
-  color #fff
-  text-decoration none
-
-#chemin
-  margin 0
-  padding 10px 0 0 15px
-  font-size  90%
-
-  & .item
+  &:hover
+    background #0f0f0f
     color #fff
-    font-weight bold
-
-#countdown
-  position absolute
-  padding 10px 0 0 15px
-  right 10px
-  font-size  90%
+    text-decoration none
 
 /**************
  * box login
@@ -108,13 +86,13 @@
   font-size 13px
   font-weight bold
 
-#boxlogin-outter > span
-  color #000
-  padding-left 18px
+  > span
+    color #000
+    padding-left 18px
 
-#boxlogin-outter > span > a
-  color #000
-  text-decoration none
+    > a
+      color #000
+      text-decoration none
 
 #boxlogin-inner
   margin-top 10px
@@ -128,18 +106,18 @@
   margin-top 14px
   padding 0
 
-.mbr li
-  padding-bottom 5px
-  padding-left 20px
-  margin-left 5px
-  background-repeat no-repeat
-  background-position 0%
+  li
+    padding-bottom 5px
+    padding-left 20px
+    margin-left 5px
+    background-repeat no-repeat
+    background-position 0%
 
-.mbr li:hover
-  background-color #ececec
+    &:hover
+      background-color #ececec
 
-.mbr li a:hover
-  text-decoration none
+    a:hover
+      text-decoration none
 
 .mbradmin
   background-image url(/img/icones/cadenas.png)
@@ -213,11 +191,11 @@
 tr
   vertical-align top
 
-tr.odd
-  background-color #ddd
+  .odd
+    background-color #ddd
 
-tr.even
-  background-color #eee
+  .even
+    background-color #eee
 
 /**************
  * cadre autour des mini images
@@ -235,11 +213,9 @@ div.pic
   -moz-border-radius 10px
   -webkit-border-radius 5px
 
-div.pt
-
-div.pic img
-  border 1px solid
-  border-color #444 #aaa #aaa #444
+  img
+    border 1px solid
+    border-color #444 #aaa #aaa #444
 
 div.ls img
   height 75px
@@ -287,8 +263,6 @@ pre
 /**************
  * listes
  **************/
-
-
 
 #newsletter ul
   list-style square
@@ -347,7 +321,6 @@ input:focus, textarea:focus
 
 fieldset ol li
   clear right
-
 
 /**************
  * code de partage
@@ -685,6 +658,10 @@ ul.partenaire li
   height 100%
   width 100%
 
+/**
+ * Bouton retour en haut
+ */
+
 #up
   position fixed
   bottom 20px
@@ -700,14 +677,18 @@ ul.partenaire li
   -moz-border-radius 2px
   border-radius 2px
 
-#up:hover
-  background-color #dd0000
+  &:hover
+    background-color #dd0000
 
-#up img
-  display block
-  width 32px
-  height 32px
-  margin 0 auto
+  img
+    display block
+    width 32px
+    height 32px
+    margin 0 auto
+
+/**
+ * Page plan du site
+ */
 
 div.tree_top
   background url(/img/tree/top.png) no-repeat -1px -3px
@@ -760,6 +741,10 @@ ul.tree li ul li.last
 
 ul.tree a
   padding-left 2px
+
+/**
+ * Alerting
+ */
 
 div.alerting-sub a, div.alerting-auth a, div.alerting-unsub a
   background url(/img/icones/star.png) no-repeat left top

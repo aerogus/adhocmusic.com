@@ -86,9 +86,9 @@
 
 <body>
 
-<div id="header" class="clearfix">
+<header class="clearfix">
   <a id="logo" href="/" title="Cliquez pour revenir à l'accueil"><span>AD'HOC</span></a>
-</div>
+</header>
 
 <div id="menu-wrapper">
 
