@@ -250,7 +250,7 @@ class Tools
     static function redirect($url, $status = '301')
     {
         if((strpos($url, 'http://') === false) && (strpos($url, 'https://') === false)) {
-            $url = DYN_URL . $url;
+            $url = HOME_URL . $url;
         }
 
         if (!headers_sent()) {
