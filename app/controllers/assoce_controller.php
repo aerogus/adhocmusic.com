@@ -19,7 +19,7 @@ class Controller
 
         $trail = Trail::getInstance();
         $trail->addStep("L'Association", "/assoce");
-        $trail->addStep("Présentation", "/assoce/presentation");
+        $trail->addStep("Présentation");
 
         $smarty->assign('photos', Photo::getPhotos(array(
             'online' => true,
@@ -50,7 +50,7 @@ class Controller
 
         $trail = Trail::getInstance();
         $trail->addStep("L'Association", "/assoce");
-        $trail->addStep("Les Concerts", "/assoce/concerts");
+        $trail->addStep("Les Concerts");
 
         $smarty->assign('photos', Photo::getPhotos(array(
             'online' => true,
@@ -83,7 +83,7 @@ class Controller
 
         $trail = Trail::getInstance();
         $trail->addStep("L'Association", "/assoce");
-        $trail->addStep("L'Equipe", "/assoce/equipe");
+        $trail->addStep("L'Equipe");
 
         $smarty->assign('photos', Photo::getPhotos(array(
             'online' => true,
@@ -117,7 +117,7 @@ class Controller
 
         $trail = Trail::getInstance();
         $trail->addStep("L'Association", "/assoce");
-        $trail->addStep("Statuts", "/assoce/statuts");
+        $trail->addStep("Statuts");
 
         $smarty->assign('photos', Photo::getPhotos(array(
             'online' => true,

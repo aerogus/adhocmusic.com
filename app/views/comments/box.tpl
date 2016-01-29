@@ -3,26 +3,26 @@ $(function () {
   $("#form-comment-box-write").submit(function () {
     var valid = true;
 {if empty($is_auth)}
-    if ($("#form-comment-box-pseudo").val() == "") {
+    if ($("#form-comment-box-pseudo").val().length === 0) {
       $("#error_pseudo").fadeIn();
       valid = false;
     } else {
       $("#error_pseudo").fadeOut();
     }
-    if ($("#form-comment-box-email").val() == "") {
+    if ($("#form-comment-box-email").val().length === 0) {
       $("#error_email").fadeIn();
       valid = false;
     } else {
       $("#error_email").fadeOut();
     }
-    if ($("#form-comment-box-antispam").val() != "oui") {
+    if ($("#form-comment-box-antispam").val() !== "oui") {
       $("#error_antispam").fadeIn();
       valid = false;
     } else {
       $("#error_antispam").fadeOut();
     }
 {/if}
-    if ($("#form-comment-box-text").val() == "") {
+    if ($("#form-comment-box-text").val().length === 0) {
       $("#error_text").fadeIn();
       valid = false;
     } else {
@@ -105,7 +105,7 @@ $(function () {
 <div id="comment-box">
 <h4>Commenter</h4>
 <form id="form-comment-box-write" name="form-comment-box-write" action="/comments/create" method="POST">
-  <ol>
+  <ul>
     {if !empty($is_auth)}
     <li style="min-height: 50px;">
       <label for="form-comment-box-pseudo">Pseudo</label>
@@ -118,18 +118,18 @@ $(function () {
     <li>
       <div class="error" id="error_pseudo"{if empty($error_pseudo)} style="display: none"{/if}>Vous devez écrire votre pseudonyme.</div>
       <label for="form-comment-box-pseudo">Pseudo</label>
-      <input type="text" id="form-comment-box-pseudo" name="pseudo">
+      <input type="text" id="form-comment-box-pseudo" name="pseudo" placeholder="Pseudo">
     </li>
     <li>
       <div class="error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez écrire votre email (elle ne sera pas publiée).</div>
       <label for="form-comment-box-email">Email</label>
-      <input type="text" id="form-comment-box-email" name="email">
+      <input type="text" id="form-comment-box-email" name="email" placeholder="Email">
     </li>
     {/if}
     <li>
       <div class="error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose.</div>
       <label for="form-comment-box-text">Texte</label>
-      <textarea id="form-comment-box-text" name="text"></textarea>
+      <textarea id="form-comment-box-text" name="text" placeholder="Votre commentaire"></textarea>
     </li>
     {if empty($is_auth)}
     <li>
@@ -143,6 +143,6 @@ $(function () {
       <input type="hidden" name="type" value="{$type|escape}">
       <input type="hidden" name="id_content" value="{$id_content|escape}">
     </li>
-  </ol>
+  </ul>
 </form>
 </div>

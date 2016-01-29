@@ -273,6 +273,11 @@ class Controller
     {
         $smarty = new AdHocSmarty();
 
+        $smarty->assign('menuselected', 'home');
+
+        $trail = Trail::getInstance();
+        $trail->addStep("Hébergement");
+
         $smarty->assign('sites', array(
             array(
                 'title' => 'saisonsenvrac.fr',
