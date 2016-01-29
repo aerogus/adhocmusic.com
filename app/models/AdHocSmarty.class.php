@@ -482,7 +482,7 @@ class AdHocSmarty extends Smarty
      */
     function enqueue_style($style_name)
     {
-        $this->append('styles', $style_name);
+        $this->append('stylesheets', $style_name);
     }
 
     /**
