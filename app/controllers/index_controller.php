@@ -11,7 +11,7 @@ class Controller
         $smarty->assign('title', "♫ AD'HOC : les Musiques Actuelles en Essonne");
         $smarty->assign('description', "Portail de référence sur les musiques actuelles en Essonne, Agenda culturel géolocalisé, Vidéos de concerts, promotion d'artistes ...");
         $smarty->assign('og_type', 'website');
-        $smarty->assign('og_image', STATIC_URL . '/img/screenshot-homepage.jpg');
+        $smarty->assign('og_image', HOME_URL . '/img/screenshot-homepage.jpg');
 
         $smarty->assign('menuselected', 'home');
 

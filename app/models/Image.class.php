@@ -8,7 +8,7 @@
 define('IMG_CACHE_PATH', ADHOC_ROOT_PATH . '/cache/img');
 
 // chemin http
-define('IMG_CACHE_URL', STATIC_URL . '/img/cache');
+define('IMG_CACHE_URL', HOME_URL . '/img/cache');
 
 /**
  * Classe de création et de conversion d'images

@@ -484,7 +484,7 @@ class Tools
      */
     static function getIconByExtension($ext)
     {
-        $icons_url = STATIC_URL . '/img/icones/';
+        $icons_url = '/img/icones/';
         $default_icon = 'file.png';
 
         // à finir

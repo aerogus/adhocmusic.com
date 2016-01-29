@@ -1,5 +1,5 @@
 <config>
-  <param name="mp3" value="{foreach from=$audios item=audio name=mp3}{if !$smarty.foreach.mp3.first}|{/if}{#STATIC_URL#}/media/audio/{$audio.id}.mp3{/foreach}" />
+  <param name="mp3" value="{foreach from=$audios item=audio name=mp3}{if !$smarty.foreach.mp3.first}|{/if}/media/audio/{$audio.id}.mp3{/foreach}" />
   <param name="title" value="{foreach from=$audios item=audio name=title}{if !$smarty.foreach.title.first}|{/if}{$audio.name|escape}{/foreach}" />
   <param name="width" value="250" />
   <param name="height" value="150" />

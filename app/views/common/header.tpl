@@ -53,7 +53,7 @@
 {/foreach}
 
 {if !empty($css_jquery_ui)}
-<link rel="stylesheet" href="{#STATIC_URL#}/css/adhoc/jquery-ui-1.8.2.custom.css">
+<link rel="stylesheet" href="/css/adhoc/jquery-ui-1.8.2.custom.css">
 {/if}
 
 {foreach from=$header_scripts item=script_url}
@@ -61,22 +61,22 @@
 {/foreach}
 
 {if !empty($js_jquery_tools)}
-<script src="{#STATIC_URL#}/js/jquery.tools.min.js"></script>
+<script src="/js/jquery.tools.min.js"></script>
 {/if}
 {if !empty($swfobject)}
 <script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 {/if}
 {if !empty($js_jquery_ui)}
-<script src="{#STATIC_URL#}/js/jquery-ui-1.8.16.custom.min.js"></script>
+<script src="/js/jquery-ui-1.8.16.custom.min.js"></script>
 {/if}
 {if !empty($js_jquery_ui_datepicker)}
-<script src="{#STATIC_URL#}/js/jquery-ui-datepicker-fr.js"></script>
+<script src="/js/jquery-ui-datepicker-fr.js"></script>
 {/if}
 {if !empty($js_jquery_ui_timepicker)}
-<script src="{#STATIC_URL#}/js/jquery-ui-timepicker-addon-0.5.min.js"></script>
+<script src="/js/jquery-ui-timepicker-addon-0.5.min.js"></script>
 {/if}
 {if !empty($js_jquery_tablesorter)}
-<script src="{#STATIC_URL#}/js/jquery.tablesorter.min.js"></script>
+<script src="/js/jquery.tablesorter.min.js"></script>
 {/if}
 {if !empty($js_gmap)}
 <script src="https://maps.google.com/maps/api/js?libraries=geometry&region=FR"></script>

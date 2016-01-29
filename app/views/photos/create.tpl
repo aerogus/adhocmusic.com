@@ -7,17 +7,17 @@
     <li>
       <div class="error" id="error_file"{if empty($error_file)} style="display: none"{/if}>Vous devez choisir une photo !</div>
       <input type="file" name="file" id="file" value="" style="float: right;" />
-      <label for="file"><img src="{#STATIC_URL#}/img/icones/photo.png" alt="" /> Photo (.jpg)</label>
+      <label for="file"><img src="/img/icones/photo.png" alt="" /> Photo (.jpg)</label>
     </li>
     <li>
       <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la photo</div>
       <input type="text" id="name" name="name" size="50" value="" style="float: right" />
-      <label for="name"><img src="{#STATIC_URL#}/img/icones/signature.png" alt="" /> Titre</label>
+      <label for="name"><img src="/img/icones/signature.png" alt="" /> Titre</label>
     </li>
     <li>
       <div class="error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe</div>
       <input type="text" id="credits" name="credits" size="50" value="" style="float: right" />
-      <label for="credits"><img src="{#STATIC_URL#}/img/icones/photo.png" alt="" /> Photographe</label>
+      <label for="credits"><img src="/img/icones/photo.png" alt="" /> Photographe</label>
     </li>
     <li>
     {if !empty($groupe)}
@@ -32,7 +32,7 @@
         {/foreach}
       </select>
     {/if}
-      <label for="id_groupe"><img src="{#STATIC_URL#}/img/icones/groupe.png" alt="" /> Groupe</label>
+      <label for="id_groupe"><img src="/img/icones/groupe.png" alt="" /> Groupe</label>
     </li>
     <li>
     {if !empty($lieu)}
@@ -52,7 +52,7 @@
         {/foreach}
       </select>
     {/if}
-      <label for="id_lieu"><img src="{#STATIC_URL#}/img/icones/lieu.png" alt="" /> Lieu</label>
+      <label for="id_lieu"><img src="/img/icones/lieu.png" alt="" /> Lieu</label>
     </li>
     <li>
     {if !empty($event)}
@@ -63,11 +63,11 @@
         <option value="0">Aucun</option>
       </select>
     {/if}
-      <label for="id_event"><img src="{#STATIC_URL#}/img/icones/event.png" alt="" /> Evénement</label>
+      <label for="id_event"><img src="/img/icones/event.png" alt="" /> Evénement</label>
     </li>
     <li>
       <input type="checkbox" name="online" checked="checked" style="float: right" />
-      <label for="online"><img src="{#STATIC_URL#}/img/icones/eye.png" alt="" /> Afficher publiquement</label>
+      <label for="online"><img src="/img/icones/eye.png" alt="" /> Afficher publiquement</label>
     </li>
   </ol>
   <input id="form-photo-create-submit" name="form-photo-create-submit" class="button" type="submit" value="Enregistrer" />

@@ -43,13 +43,9 @@ class AdHocSmarty extends Smarty
         $this->assign('sessid', session_id());
         $this->assign('menuselected', null);
         $this->assign('uri', $_SERVER['REQUEST_URI']);
-        $this->assign('url', DYN_URL . $_SERVER['REQUEST_URI']);
+        $this->assign('url', HOME_URL . $_SERVER['REQUEST_URI']);
         $this->assign('fb_app_id', FB_ADHOCMUSIC_APP_ID);
         $this->assign('fb_page_id', FB_ADHOCMUSIC_PAGE_ID);
-
-        if(defined('STATIC_URL')) {
-            $this->config_vars['STATIC_URL'] = STATIC_URL;
-        }
 
         if(!empty($_SESSION['membre'])) {
             $this->assign('me', $_SESSION['membre']);
@@ -115,12 +111,12 @@ class AdHocSmarty extends Smarty
         } else {
             $chemin = '';
             if(is_numeric($params['id'])) {
-                $chemin .= STATIC_URL . '/media/audio/'.$params['id'].'.mp3';
+                $chemin .= MEDIA_URL . '/media/audio/'.$params['id'].'.mp3';
             } elseif(is_array($params['id'])) {
                 $first  = true;
                 foreach($params['id'] as $id) {
                     if(!$first) { $chemin .= '|'; }
-                    $chemin .= STATIC_URL . '/media/audio/'.$id.'.mp3';
+                    $chemin .= MEDIA_URL . '/media/audio/'.$id.'.mp3';
                     $first = false;
                 }
             } else {
@@ -131,37 +127,37 @@ class AdHocSmarty extends Smarty
         switch($params['type'])
         {
             case 'dewplayer-mini':
-                return '<object type="application/x-shockwave-flash" data="' . STATIC_URL . '/swf/dewplayer-mini.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" width="160" height="20">'."\n"
+                return '<object type="application/x-shockwave-flash" data="/swf/dewplayer-mini.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" width="160" height="20">'."\n"
                      . '<param name="wmode" value="transparent" />'."\n"
-                     . '<param name="movie" value="' . STATIC_URL. '/swf/dewplayer-mini.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" />'."\n"
+                     . '<param name="movie" value="/swf/dewplayer-mini.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" />'."\n"
                      . '</object>'."\n";
                 break;
 
             case 'dewplayer':
-                return '<object type="application/x-shockwave-flash" data="' . STATIC_URL . '/swf/dewplayer.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" width="200" height="20">'."\n"
+                return '<object type="application/x-shockwave-flash" data="/swf/dewplayer.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" width="200" height="20">'."\n"
                      . '<param name="wmode" value="transparent" />'."\n"
-                     . '<param name="movie" value="' . STATIC_URL . '/swf/dewplayer.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" />'."\n"
+                     . '<param name="movie" value="/swf/dewplayer.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" />'."\n"
                      . '</object>'."\n";
                 break;
 
             case 'dewplayer-multi':
-                return '<object type="application/x-shockwave-flash" data="' . STATIC_URL . '/swf/dewplayer-mini.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" width="240" height="20">'."\n"
+                return '<object type="application/x-shockwave-flash" data="/swf/dewplayer-mini.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" width="240" height="20">'."\n"
                      . '<param name="wmode" value="transparent" />'."\n"
-                     . '<param name="movie" value="' . STATIC_URL . '/swf/dewplayer-multi.swf?mp3='.urlencode($chemin).'.mp3&amp;bgcolor='.$bgcolor.'&amp;showtime=1" />'."\n"
+                     . '<param name="movie" value="/swf/dewplayer-multi.swf?mp3='.urlencode($chemin).'.mp3&amp;bgcolor='.$bgcolor.'&amp;showtime=1" />'."\n"
                      . '</object>'."\n";
                 break;
 
             case 'player_mp3_multi':
-                return '<object type="application/x-shockwave-flash" data="' . STATIC_URL . '/swf/player_mp3_multi.swf" width="250" height="150">'."\n"
-                     . '<param name="movie" value="' . STATIC_URL . '/swf/player_mp3_multi.swf" />'."\n"
+                return '<object type="application/x-shockwave-flash" data="/swf/player_mp3_multi.swf" width="250" height="150">'."\n"
+                     . '<param name="movie" value="/swf/player_mp3_multi.swf" />'."\n"
                      . '<param name="wmode" value="transparent" />'."\n"
                      . '<param name="FlashVars" value="configxml=http://www.adhocmusic.com/groupes/playlist/'.$id_groupe.'.xml&amp;skin" />'."\n"
                      . '</object>'."\n";
                 break;
 
             case 'player_mp3_nano':
-                return '<object type="application/x-shockwave-flash" data="' . STATIC_URL . '/swf/player_mp3_maxi.swf" width="25" height="20">'."\n"
-                     . '<param name="movie" value="' . STATIC_URL . '/swf/player_mp3_maxi.swf" />'."\n"
+                return '<object type="application/x-shockwave-flash" data="/swf/player_mp3_maxi.swf" width="25" height="20">'."\n"
+                     . '<param name="movie" value="/swf/player_mp3_maxi.swf" />'."\n"
                      . '<param name="FlashVars" value="mp3='.urlencode($chemin).'&amp;bgcolor=2f2f2f&amp;showslider=0&amp;width=25" />'."\n"
                      . '</object>'."\n";
                 break;
@@ -455,8 +451,8 @@ class AdHocSmarty extends Smarty
         }
 
         $url = '';
-        if(file_exists(ADHOC_ROOT_PATH . '/media/membre/' . $id_contact . '.jpg')) {
-            $url = STATIC_URL . '/media/membre/' . $id_contact . '.jpg';
+        if(file_exists(MEDIA_PATH . '/membre/' . $id_contact . '.jpg')) {
+            $url = MEDIA_URL . '/membre/' . $id_contact . '.jpg';
         }
 
         self::$avatars[$id_contact] = $url;
@@ -474,7 +470,7 @@ class AdHocSmarty extends Smarty
         } else {
             $icon = 'disabled.png';
         }
-        return '<img src="' . STATIC_URL . '/img/icones/' . $icon . '" alt="" />';
+        return '<img src="/img/icones/' . $icon . '" alt="">';
     }
 
     /* fin modifiers */

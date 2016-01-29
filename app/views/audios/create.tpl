@@ -49,12 +49,12 @@ $(function() {
     <li>
       <div class="error" id="error_file"{if empty($error_file)} style="display: none"{/if}>Vous devez choisir un fichier .mp3 à uploader</div>
       <input type="file" name="file" value="" style="float: right;" />
-      <label for="file"><img src="{#STATIC_URL#}/img/icones/audio.png" alt="" /> Audio (.mp3 16bits/44Khz/stéréo, &lt; 16 Mo)</label>
+      <label for="file"><img src="/img/icones/audio.png" alt="" /> Audio (.mp3 16bits/44Khz/stéréo, &lt; 16 Mo)</label>
     </li>
     <li>
       <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner un titre</div>
       <input type="text" name="name" size="50" value="" style="float: right;" />
-      <label for="name"><img src="{#STATIC_URL#}/img/icones/signature.png" alt="" /> Titre</label>
+      <label for="name"><img src="/img/icones/signature.png" alt="" /> Titre</label>
     </li>
     <li>
     {if !empty($groupe)}
@@ -69,7 +69,7 @@ $(function() {
         {/foreach}
       </select>
     {/if}
-      <label for="groupe"><img src="{#STATIC_URL#}/img/icones/groupe.png" alt="" /> Groupe</label>
+      <label for="groupe"><img src="/img/icones/groupe.png" alt="" /> Groupe</label>
     </li>
     <li>
     {if !empty($lieu)}
@@ -89,7 +89,7 @@ $(function() {
         {/foreach}
       </select>
     {/if}
-      <label for="id_lieu"><img src="{#STATIC_URL#}/img/icones/lieu.png" alt="" /> Lieu</label>
+      <label for="id_lieu"><img src="/img/icones/lieu.png" alt="" /> Lieu</label>
     </li>
     <li>
     {if !empty($event)}
@@ -100,7 +100,7 @@ $(function() {
         <option value="0">Aucun</option>
       </select>
     {/if}
-      <label for="id_event"><img src="{#STATIC_URL#}/img/icones/event.png" alt="" /> Evénement</label>
+      <label for="id_event"><img src="/img/icones/event.png" alt="" /> Evénement</label>
     </li>
   </ol>
   <input id="form-audio-create-submit" name="form-audio-create-submit" class="button" type="submit" value="Enregistrer" />

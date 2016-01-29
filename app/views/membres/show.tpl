@@ -15,7 +15,7 @@
 <table>
   <tr>
     <td>Pseudo :</td>
-    <td><strong>{$membre->getPseudo()|escape}</strong> <a href="/messagerie/write?pseudo={$membre->getPseudo()|escape}"><img src="{#STATIC_URL#}/img/icones/email_write.png" alt="" />Lui Ecrire</a></td>
+    <td><strong>{$membre->getPseudo()|escape}</strong> <a href="/messagerie/write?pseudo={$membre->getPseudo()|escape}"><img src="/img/icones/email_write.png" alt="" />Lui Ecrire</a></td>
   </tr>
   <tr>
     <td>Site :</td>
@@ -71,7 +71,7 @@
   {if $membre->getFacebookProfileId()}
   <tr>
     <td>Facebook :</td>
-    <td><a href="http://www.facebook.com/profile.php?id={$membre->getFacebookProfileId()}"><img src="{#STATIC_URL#}/img/facebook.gif" alt="" /></a></td>
+    <td><a href="http://www.facebook.com/profile.php?id={$membre->getFacebookProfileId()}"><img src="/img/facebook.gif" alt="" /></a></td>
   </tr>
   {/if}
 

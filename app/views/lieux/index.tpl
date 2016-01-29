@@ -105,7 +105,7 @@ function placePoints(map) {
     clearPoints();
     $('#search-results').show();
     $('#search-results > tbody').empty();
-    var image = new google.maps.MarkerImage('{#STATIC_URL#}/img/pin/note.png',
+    var image = new google.maps.MarkerImage('/img/pin/note.png',
       new google.maps.Size(32, 32), // taille
       new google.maps.Point(0,0),   // origine
       new google.maps.Point(16, 16)  // ancre

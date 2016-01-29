@@ -87,6 +87,22 @@ class MembreAdhoc extends Membre
     );
 
     /**
+     * @return string
+     */
+    protected static function _getBaseUrl()
+    {
+        return MEDIA_URL . '/membre/ca';
+    }
+
+    /**
+     * @return string
+     */
+    protected static function _getBasePath()
+    {
+        return MEDIA_PATH . '/membre/ca';
+    }
+
+    /**
      * @param bool
      * @return array
      */
@@ -166,7 +182,7 @@ class MembreAdhoc extends Membre
      */
     function setFunction($val)
     {
-        if ($this->_function != $val)
+        if ($this->_function !== $val)
         {
             $this->_function = (string) $val;
             $this->_modified_fields['membre_adhoc']['function'] = true;
@@ -178,7 +194,7 @@ class MembreAdhoc extends Membre
      */
     function setBirthDate($val)
     {
-        if ($this->_birth_date != $val)
+        if ($this->_birth_date !== $val)
         {
             $this->_birth_date = (string) $val;
             $this->_modified_fields['membre_adhoc']['function'] = true;
@@ -190,7 +206,7 @@ class MembreAdhoc extends Membre
      */
     function setActive($val)
     {
-        if ($this->_active != $val)
+        if ($this->_active !== $val)
         {
             $this->_active = (bool) $val;
             $this->_modified_fields['membre_adhoc']['active'] = true;
@@ -202,7 +218,7 @@ class MembreAdhoc extends Membre
      */
     function setRank($val)
     {
-        if ($this->_rank != $val)
+        if ($this->_rank !== $val)
         {
             $this->_rank = (int) $val;
             $this->_modified_fields['membre_adhoc']['rank'] = true;
@@ -214,7 +230,7 @@ class MembreAdhoc extends Membre
      */
     function setOfficialPseudo($val)
     {
-        if ($this->_official_pseudo != $val)
+        if ($this->_official_pseudo !== $val)
         {
             $this->_official_pseudo = (string) $val;
             $this->_modified_fields['membre_adhoc']['official_pseudo'] = true;
@@ -226,7 +242,7 @@ class MembreAdhoc extends Membre
      */
     function setDescription($val)
     {
-        if ($this->_description != $val)
+        if ($this->_description !== $val)
         {
             $this->_description = (string) $val;
             $this->_modified_fields['membre_adhoc']['description'] = true;
@@ -263,8 +279,8 @@ class MembreAdhoc extends Membre
         foreach($mbrs as $idx => $mbr)
         {
             $mbrs[$idx]['avatar_interne'] = false;
-            if(file_exists(ADHOC_ROOT_PATH . '/media/membre/ca/' . $mbr['id'] . '.jpg')) {
-                $mbrs[$idx]['avatar_interne'] = STATIC_URL . '/media/membre/ca/' . $mbr['id'] . '.jpg?ts=' . $mbr['modified_on_ts'];
+            if(file_exists(self::_getBasePath() . '/' . $mbr['id'] . '.jpg')) {
+                $mbrs[$idx]['avatar_interne'] = self::_getBaseUrl() . '/' . $mbr['id'] . '.jpg?ts=' . $mbr['modified_on_ts'];
             }
             $mbrs[$idx]['url'] = self::getUrlById($mbr['id']);
         }

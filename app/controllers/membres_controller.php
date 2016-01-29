@@ -42,6 +42,9 @@ class Controller
         return $smarty->fetch('membres/show.tpl');
     }
 
+    /**
+     * Création d'un compte membre
+     */
     static function create()
     {
         if(Tools::isAuth()) {
@@ -69,21 +72,13 @@ class Controller
             'email'          => '',
             'last_name'      => '',
             'first_name'     => '',
-            'address'        => '',
-            'cp'             => '',
             'city'           => '',
             'country'        => '',
             'id_country'     => 'FR', // France
             'id_region'      => 'A8', // Ile-de-France
             'id_departement' => '91', // Essonne
             'id_city'        => '',
-            'tel'            => '',
-            'port'           => '',
-            'site'           => '',
             'mailing'        => true,
-            'text'           => '',
-            'facebook_profile_id' => 0,
-            'facebook_auto_login' => true,
             'csrf'           => '',
         );
 
@@ -93,7 +88,7 @@ class Controller
             $city = '';
 
             $country = WorldCountry::getName((string) Route::params('id_country'));
-            if(((string) Route::params('id_country') == 'FR') && ((int) Route::params('id_city') > 0)) {
+            if(((string) Route::params('id_country') === 'FR') && ((int) Route::params('id_city') > 0)) {
                 $cp = City::getCp((int) Route::params('id_city'));
                 $city = City::getName((int) Route::params('id_city'));
             }
@@ -103,7 +98,6 @@ class Controller
                 'email'          => trim(strtolower((string) Route::params('email'))),
                 'last_name'      => trim((string) Route::params('last_name')),
                 'first_name'     => trim((string) Route::params('first_name')),
-                'address'        => trim((string) Route::params('address')),
                 'cp'             => $cp,
                 'id_city'        => (int) Route::params('id_city'),
                 'city'           => $city,
@@ -111,13 +105,7 @@ class Controller
                 'country'        => $country,
                 'id_region'      => trim((string) Route::params('id_region')),
                 'id_departement' => trim((string) Route::params('id_departement')),
-                'tel'            => trim((string) Route::params('tel')),
-                'port'           => trim((string) Route::params('port')),
-                'site'           => trim((string) Route::params('site')),
-                'text'           => trim((string) Route::params('text')),
-                'mailing'        => (bool)Route::params('mailing'),
-                'facebook_profile_id' => (string) Route::params('facebook_profile_id'),
-                'facebook_auto_login' => (bool) Route::params('facebook_auto_login'),
+                'mailing'        => (bool) Route::params('mailing'),
                 'csrf'           => '',
             );
 
@@ -128,11 +116,11 @@ class Controller
                 if(empty($errors)) {
 
                     $membre = Membre::init();
+                    $membre->setEmail($data['email']);
                     $membre->setPseudo($data['pseudo']);
                     $membre->setPassword($data['password']);
                     $membre->setLastName($data['last_name']);
                     $membre->setFirstName($data['first_name']);
-                    $membre->setAddress($data['address']);
                     $membre->setCp($data['cp']);
                     $membre->setCity($data['city']);
                     $membre->setCountry($data['country']);
@@ -140,15 +128,8 @@ class Controller
                     $membre->setIdDepartement($data['id_departement']);
                     $membre->setIdRegion($data['id_region']);
                     $membre->setIdCountry($data['id_country']);
-                    $membre->setTel($data['tel']);
-                    $membre->setPort($data['port']);
-                    $membre->setText($data['text']);
-                    $membre->setEmail($data['email']);
-                    $membre->setSite($data['site']);
                     $membre->setMailing($data['mailing']);
                     $membre->setLevel(Membre::TYPE_STANDARD);
-                    //$membre->setFacebookProfileId($data['facebook_profile_id']);
-                    //$membre->setFacebookAutoLogin($data['facebook_auto_login']);
                     $membre->setCreatedNow();
 
                     if($membre->save()) {
@@ -285,7 +266,7 @@ class Controller
                     ForumPrive::delAllSubscriptions($member->getId());
                     if(is_array($forum)) {
                         foreach($forum as $f => $val) {
-                            if($val == 'on') {
+                            if($val === 'on') {
                                 ForumPrive::addSubscriberToForum($member->getId(), $f);
                             }
                         }
@@ -299,7 +280,7 @@ class Controller
                         $img->setType(IMAGETYPE_JPEG);
                         $img->setMaxWidth(112);
                         $img->setMaxHeight(174);
-                        $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/membre/ca/' . $_SESSION['membre']->getId() . '.jpg');
+                        $img->setDestFile(MEDIA_PATH . '/membre/ca/' . $_SESSION['membre']->getId() . '.jpg');
                         $img->write();
                         $img = null;
                     }
@@ -311,7 +292,7 @@ class Controller
                     $img->setType(IMAGETYPE_JPEG);
                     $img->setMaxWidth(112);
                     $img->setMaxHeight(250);
-                    $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/membre/' . $_SESSION['membre']->getId() . '.jpg');
+                    $img->setDestFile(MEDIA_PATH . '/membre/' . $_SESSION['membre']->getId() . '.jpg');
                     $img->write();
                     $img = null;
                 }

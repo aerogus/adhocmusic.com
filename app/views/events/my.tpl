@@ -41,7 +41,7 @@
   <p>
   Entrée : <strong>{$event->getPrice()|escape}</strong><br />
   {*
-  Lieu : <a href="/lieux/show/{$event->getIdLieu()}" title="Voir la fiche lieu"><strong>{$lieu->getName()|escape}</strong></a> <a href="/lieux/show/{$event->getIdLieu()}" title="Visualiser ce lieu sur une carte"><img src="{#STATIC_URL#}/img/icones/map.png" alt="" /></a> ({$lieu->getIdDepartement()} - {$lieu->getCity()})<br />
+  Lieu : <a href="/lieux/show/{$event->getIdLieu()}" title="Voir la fiche lieu"><strong>{$lieu->getName()|escape}</strong></a> <a href="/lieux/show/{$event->getIdLieu()}" title="Visualiser ce lieu sur une carte"><img src="/img/icones/map.png" alt="" /></a> ({$lieu->getIdDepartement()} - {$lieu->getCity()})<br />
  *}
   <a href="{$event->getUrl()}">Fiche complète</a><br />
   </p>

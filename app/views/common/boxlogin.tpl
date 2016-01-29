@@ -30,7 +30,7 @@
 
 <div style="padding: 5px;">
   <h5>Avec Facebook</h5>
-  <div><a href="{$fb_login_url}"><img src="{#STATIC_URL#}/img/facebook-connect.png" alt="Connexion" /></a></div>
+  <div><a href="{$fb_login_url}"><img src="/img/facebook-connect.png" alt="Connexion" /></a></div>
 </div>
 
 <div style="padding: 5px;">

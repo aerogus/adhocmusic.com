@@ -119,17 +119,17 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    protected static function _getWwwPath()
+    protected static function _getBaseUrl()
     {
-        return STATIC_URL . '/media/structure';
+        return MEDIA_URL . '/structure';
     }
 
     /**
      * @return string
      */
-    protected static function _getLocalPath()
+    protected static function _getBasePath()
     {
-        return ADHOC_ROOT_PATH . '/media/structure';
+        return MEDIA_PATH . '/structure';
     }
 
     /**
@@ -234,7 +234,7 @@ class Structure extends ObjectModel
      */
     static function getPictoById($id)
     {
-        return STATIC_URL . '/media/structure/' . (int) $id . '.png';
+        return self::_getBaseUrl() . '/' . (int) $id . '.png';
     }
 
     /* fin getters */
@@ -246,7 +246,7 @@ class Structure extends ObjectModel
      */
     function setName($val)
     {
-        if ($this->_name != $val)
+        if ($this->_name !== $val)
         {
             $this->_name = (string) $val;
             $this->_modified_fields['name'] = true;
@@ -258,7 +258,7 @@ class Structure extends ObjectModel
      */
     function setAddress($val)
     {
-        if ($this->_address != $val)
+        if ($this->_address !== $val)
         {
             $this->_address = (string) $val;
             $this->_modified_fields['address'] = true;
@@ -270,7 +270,7 @@ class Structure extends ObjectModel
      */
     function setCp($val)
     {
-        if ($this->_cp != $val)
+        if ($this->_cp !== $val)
         {
             $this->_cp = (string) $val;
             $this->_modified_fields['cp'] = true;
@@ -282,7 +282,7 @@ class Structure extends ObjectModel
      */
     function setCity($val)
     {
-        if ($this->_city != $val)
+        if ($this->_city !== $val)
         {
             $this->_city = (string) $val;
             $this->_modified_fields['city'] = true;
@@ -294,7 +294,7 @@ class Structure extends ObjectModel
      */
     function setTel($val)
     {
-        if ($this->_tel != $val)
+        if ($this->_tel !== $val)
         {
             $this->_tel = (string) $val;
             $this->_modified_fields['tel'] = true;
@@ -306,7 +306,7 @@ class Structure extends ObjectModel
      */
     function setFax($val)
     {
-        if ($this->_fax != $val)
+        if ($this->_fax !== $val)
         {
             $this->_fax = (string) $val;
             $this->_modified_fields['fax'] = true;
@@ -318,7 +318,7 @@ class Structure extends ObjectModel
      */
     function setIdDepartement($val)
     {
-        if ($this->_id_departement != $val)
+        if ($this->_id_departement !== $val)
         {
             $this->_id_departement = (string) $val;
             $this->_modified_fields['id_departement'] = true;
@@ -330,7 +330,7 @@ class Structure extends ObjectModel
      */
     function setText($val)
     {
-        if ($this->_text != $val)
+        if ($this->_text !== $val)
         {
             $this->_text = (string) $val;
             $this->_modified_fields['text'] = true;
@@ -342,7 +342,7 @@ class Structure extends ObjectModel
      */
     function setSite($val)
     {
-        if ($this->_site != $val)
+        if ($this->_site !== $val)
         {
             $this->_site = (string) $val;
             $this->_modified_fields['site'] = true;
@@ -354,7 +354,7 @@ class Structure extends ObjectModel
      */
     function setEmail($val)
     {
-        if ($this->_email != $val)
+        if ($this->_email !== $val)
         {
             $this->_email = (string) $val;
             $this->_modified_fields['email'] = true;
@@ -366,7 +366,7 @@ class Structure extends ObjectModel
      */
     function setIdCountry($val)
     {
-        if ($this->_id_country != $val)
+        if ($this->_id_country !== $val)
         {
             $this->_id_country = (string) $val;
             $this->_modified_fields['id_country'] = true;
@@ -409,8 +409,9 @@ class Structure extends ObjectModel
         $db = DataBase::getInstance();
         $res  = $db->query($sql);
         if($db->affectedRows()) {
-            if(file_exists(self::_getLocalPath() . '/' . $this->_id_structure . '.png')) {
-                unlink(self::_getLocalPath() . '/' . $this->_id_structure . '.png');
+            $file = self::_getBasePath() . '/' . $this->_id_structure . '.png';
+            if(file_exists($file)) {
+                unlink($file);
             }
             return true;
         }
@@ -459,8 +460,8 @@ class Structure extends ObjectModel
 
         if($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
-            if(file_exists(self::_getLocalPath() . '/' . $this->_id_structure . '.png')) {
-                $this->_photo = self::_getWwwPath() . '/' . $this->_id_structure . '.png';
+            if(file_exists(self::_getBasePath() . '/' . $this->_id_structure . '.png')) {
+                $this->_photo = self::_getBaseUrl() . '/' . $this->_id_structure . '.png';
             }
             return true;
         }

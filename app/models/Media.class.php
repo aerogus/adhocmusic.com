@@ -332,19 +332,19 @@ class Media extends ObjectModel
 
         foreach($tab_type as $type)
         {
-            if($type == 'audio')
+            if($type === 'audio')
             {
                 $audios = Audio::getAudios($params);
                 $split['audio'] = $audios;
                 $tab = array_merge($tab, $audios);
             }
-            if($type == 'photo')
+            if($type === 'photo')
             {
                 $photos = Photo::getPhotos($params);
                 $split['photo'] = $photos;
                 $tab = array_merge($tab, $photos);
             }
-            if($type == 'video')
+            if($type === 'video')
             {
                 $videos = Video::getVideos($params);
                 $split['video'] = $videos;

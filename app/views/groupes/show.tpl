@@ -40,16 +40,16 @@
         <p><strong>Liens</strong></p>
         <ul class="grplinks">
           {if $groupe->getSite()}
-          <li><a href="{$groupe->getSite()}" title="Site"><img src="{#STATIC_URL#}/img/icones/lien.png" alt="">Site</a></li>
+          <li><a href="{$groupe->getSite()}" title="Site"><img src="/img/icones/lien.png" alt="">Site</a></li>
           {/if}
           {if $groupe->getMySpace()}
-          <li><a href="{$groupe->getMySpace()}" title="MySpace"><img src="{#STATIC_URL#}/img/myspace.png" alt="">MySpace</a></li>
+          <li><a href="{$groupe->getMySpace()}" title="MySpace"><img src="/img/myspace.png" alt="">MySpace</a></li>
           {/if}
           {if $groupe->getFacebookPageId()}
-          <li><a href="{$groupe->getFacebookPageUrl()}" title="Facebook"><img src="{#STATIC_URL#}/img/facebook.gif" alt="">Facebook</a></li>
+          <li><a href="{$groupe->getFacebookPageUrl()}" title="Facebook"><img src="/img/facebook.gif" alt="">Facebook</a></li>
           {/if}
           {if $groupe->getTwitterId()}
-          <li><a href="{$groupe->getTwitterUrl()}" title="Twitter"><img src="{#STATIC_URL#}/img/icones/twitter.png" alt="">Twitter</a></li>
+          <li><a href="{$groupe->getTwitterUrl()}" title="Twitter"><img src="/img/icones/twitter.png" alt="">Twitter</a></li>
           {/if}
         </ul>
         {if $groupe->getCreatedOn()}
@@ -82,7 +82,7 @@
       <header>
         <h2>En Écoute</h2>
       </header>
-      <div style="background: url({#STATIC_URL#}/img/player_adhoc.png); width: 360px; height: 218px; position: relative; margin: 0 auto;">
+      <div style="background: url(/img/player_adhoc.png); width: 360px; height: 218px; position: relative; margin: 0 auto;">
         <img src="{$groupe->getMiniPhoto()}" alt="" style="position: absolute; top: 28px; left: 14px;" />
         <div style="position: absolute; top: 27px; left: 90px;">{audio_player id=$groupe->getId() type='player_mp3_multi'}</div>
       </div>

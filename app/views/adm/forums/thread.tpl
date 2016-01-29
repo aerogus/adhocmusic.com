@@ -66,7 +66,7 @@ $(function() {
 
 <div class="subscribers round-corners-all">
 {foreach from=$subs item=sub}
-<a href="/membres/show/{$sub.id_contact}" title="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}"><img src="{#STATIC_URL#}/media/membre/ca/{$sub.id_contact}.jpg" class="thread-avatar" alt="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}" /></a>
+<a href="/membres/show/{$sub.id_contact}" title="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}"><img src="/media/membre/ca/{$sub.id_contact}.jpg" class="thread-avatar" alt="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}" /></a>
 {/foreach}
 <br style="clear: both" />
 </div>
@@ -76,7 +76,7 @@ $(function() {
 {foreach from=$messages item=message key=cpt}
 <div class="clearfix message">
   <div class="message-meta">
-    <img src="{#STATIC_URL#}/media/membre/ca/{$message.created_by}.jpg" alt="">
+    <img src="/media/membre/ca/{$message.created_by}.jpg" alt="">
     <a href="/membres/show/{$message.created_by}">{$message.created_by|pseudo_by_id}</a><br>
     {$message.created_on|date_format:'%a %d %b %Y<br>%H:%M'}
   </div>

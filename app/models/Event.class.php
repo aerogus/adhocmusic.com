@@ -158,17 +158,17 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    protected static function _getWwwPath()
+    protected static function _getBaseUrl()
     {
-        return STATIC_URL . '/media/event';
+        return MEDIA_URL . '/event';
     }
 
     /**
      * @return string
      */
-    protected static function _getLocalPath()
+    protected static function _getBasePath()
     {
-        return ADHOC_ROOT_PATH . '/media/event';
+        return MEDIA_PATH . '/event';
     }
 
     /**
@@ -356,8 +356,8 @@ class Event extends ObjectModel
      */
     function getFullFlyerUrl()
     {
-        if(file_exists(ADHOC_ROOT_PATH . '/static/media/event/' . $this->_id_event . '.jpg')) {
-            return STATIC_URL . '/static/media/event/' . $this->_id_event.'.jpg';
+        if(file_exists(self::_getBasePath()  . '/' . $this->_id_event . '.jpg')) {
+            return self::_getBaseUrl() . '/' . $this->_id_event . '.jpg';
         }
         return false;
     }
@@ -394,10 +394,7 @@ class Event extends ObjectModel
      */
     static function getUrlById($id, $type = null)
     {
-        if($type == 'www') {
-            return 'http://www.adhocmusic.com/events/show/' . (int) $id;
-        }
-        return DYN_URL . '/events/show/' . (int) $id;
+        return '/events/show/' . (int) $id;
     }
 
     /**
@@ -439,7 +436,7 @@ class Event extends ObjectModel
      */
     function setCreatedOn($val)
     {
-        if ($this->_created_on != $val)
+        if ($this->_created_on !== $val)
         {
             $this->_created_on = (string) $val;
             $this->_modified_fields['created_on'] = true;
@@ -452,7 +449,7 @@ class Event extends ObjectModel
     function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_created_on != $now)
+        if ($this->_created_on !== $now)
         {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
@@ -464,7 +461,7 @@ class Event extends ObjectModel
      */
     function setModifiedOn($val)
     {
-        if ($this->_modified_on != $val)
+        if ($this->_modified_on !== $val)
         {
             $this->_modified_on = (string) $val;
             $this->_modified_fields['modified_on'] = true;
@@ -477,7 +474,7 @@ class Event extends ObjectModel
     function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_modified_on != $now)
+        if ($this->_modified_on !== $now)
         {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
@@ -489,7 +486,7 @@ class Event extends ObjectModel
      */
     function setName($val)
     {
-        if ($this->_name != $val)
+        if ($this->_name !== $val)
         {
             $this->_name = (string) $val;
             $this->_modified_fields['name'] = true;
@@ -519,7 +516,7 @@ class Event extends ObjectModel
      */
     function setFacebookEventAttending($val)
     {
-        if ($this->_facebook_event_attending != $val)
+        if ($this->_facebook_event_attending !== $val)
         {
             $this->_facebook_event_attending = (int) $val;
             $this->_modified_fields['facebook_event_attending'] = true;
@@ -531,7 +528,7 @@ class Event extends ObjectModel
      */
     function setDate($val)
     {
-        if ($this->_date != $val)
+        if ($this->_date !== $val)
         {
             $this->_date = (string) $val;
             $this->_modified_fields['date'] = true;
@@ -543,7 +540,7 @@ class Event extends ObjectModel
      */
     function setText($val)
     {
-        if ($this->_text != $val)
+        if ($this->_text !== $val)
         {
             $this->_text = (string) $val;
             $this->_modified_fields['text'] = true;
@@ -555,7 +552,7 @@ class Event extends ObjectModel
      */
     function setPrice($val)
     {
-        if ($this->_price != $val)
+        if ($this->_price !== $val)
         {
             $this->_price = (string) $val;
             $this->_modified_fields['price'] = true;
@@ -567,7 +564,7 @@ class Event extends ObjectModel
      */
     function setOnline($val)
     {
-        if ($this->_online != $val)
+        if ($this->_online !== $val)
         {
             $this->_online = (bool) $val;
             $this->_modified_fields['online'] = true;
@@ -579,7 +576,7 @@ class Event extends ObjectModel
      */
     function setIdLieu($val)
     {
-        if ($this->_id_lieu != $val)
+        if ($this->_id_lieu !== $val)
         {
             $this->_id_lieu = (int) $val;
             $this->_modified_fields['id_lieu'] = true;
@@ -591,7 +588,7 @@ class Event extends ObjectModel
      */
     function setIdContact($val)
     {
-        if ($this->_id_contact != $val)
+        if ($this->_id_contact !== $val)
         {
             $this->_id_contact = (int) $val;
             $this->_modified_fields['id_contact'] = true;
@@ -603,7 +600,7 @@ class Event extends ObjectModel
      */
     function setNbPhotos($val)
     {
-        if ($this->_nb_photos != $val)
+        if ($this->_nb_photos !== $val)
         {
             $this->_nb_photos = (int) $val;
             $this->_modified_fields['nb_photos'] = true;
@@ -615,7 +612,7 @@ class Event extends ObjectModel
      */
     function setNbAudios($val)
     {
-        if ($this->_nb_audios != $val)
+        if ($this->_nb_audios !== $val)
         {
             $this->_nb_audios = (int) $val;
             $this->_modified_fields['nb_audios'] = true;
@@ -627,7 +624,7 @@ class Event extends ObjectModel
      */
     function setNbVideos($val)
     {
-        if ($this->_nb_videos != $val)
+        if ($this->_nb_videos !== $val)
         {
             $this->_nb_videos = (int) $val;
             $this->_modified_fields['nb_videos'] = true;
@@ -896,12 +893,12 @@ class Event extends ObjectModel
         {
             $this->_dbToObject($res);
 
-            if(file_exists(self::_getLocalPath() . '/' . $this->getId() . '.jpg')) {
-                $this->_photo = self::_getWwwPath() . '/' . $this->getId() . '.jpg';
+            if(file_exists(self::_getBasePath() . '/' . $this->getId() . '.jpg')) {
+                $this->_photo = self::_getBaseUrl() . '/' . $this->getId() . '.jpg';
             }
 
-            if(file_exists(self::_getLocalPath() . '/' . $this->getId() . '-mini.jpg')) {
-                $this->_mini_photo = self::_getWwwPath() . '/' . $this->getId() . '-mini.jpg';
+            if(file_exists(self::_getBasePath() . '/' . $this->getId() . '-mini.jpg')) {
+                $this->_mini_photo = self::_getBaseUrl() . '/' . $this->getId() . '-mini.jpg';
             }
 
             //$this->_styles     = $this->getStyles();
@@ -930,7 +927,7 @@ class Event extends ObjectModel
 
         parent::delete();
 
-        $p = self::_getLocalPath() . '/' . $this->getId() . '.jpg';
+        $p = self::_getBasePath() . '/' . $this->getId() . '.jpg';
         if(file_exists($p)) {
             unlink($p);
         }
@@ -1141,9 +1138,9 @@ class Event extends ObjectModel
 
         $cpt = 0;
         foreach($res as $grp) {
-            $res[$cpt]['mini_photo'] = STATIC_URL . '/img/note_adhoc_64.png';
-            if(file_exists(ADHOC_ROOT_PATH . '/static/media/groupe/m' . $grp['id'] . '.jpg')) {
-                $res[$cpt]['mini_photo'] = STATIC_URL . '/media/groupe/m' . $grp['id'] . '.jpg';
+            $res[$cpt]['mini_photo'] = '/img/note_adhoc_64.png';
+            if(file_exists(MEDIA_PATH . '/groupe/m' . $grp['id'] . '.jpg')) {
+                $res[$cpt]['mini_photo'] = MEDIA_PATH . '/groupe/m' . $grp['id'] . '.jpg';
             }
             $cpt++;
         }
@@ -1526,7 +1523,7 @@ class Event extends ObjectModel
         $cache = Image::getLocalCachePath($uid);
 
         if(!file_exists($cache)) {
-            $source = ADHOC_ROOT_PATH . '/media/event/' . $id . '.jpg';
+            $source = self::_getBasePath() . '/' . $id . '.jpg';
             if(file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);

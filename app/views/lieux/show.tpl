@@ -25,7 +25,7 @@ $(function () {
     mapTypeId: google.maps.MapTypeId.HYBRID,
     disableDefaultUI: true
   });
-  var image = new google.maps.MarkerImage('{#STATIC_URL#}/img/pin/note.png',
+  var image = new google.maps.MarkerImage('/img/pin/note.png',
     new google.maps.Size(32, 32), // taille
     new google.maps.Point(0,0),   // origine
     new google.maps.Point(16, 16)  // ancre
@@ -70,7 +70,7 @@ $(function () {
 <br style="clear: both;" />
 
 {if $lieu->hasPano()}
-<a href="/lieux/pano/{$lieu->getId()}"><img src="{#STATIC_URL#}/img/icones/eye.png" title="Voir ce lieu en 3D" /></a>
+<a href="/lieux/pano/{$lieu->getId()}"><img src="/img/icones/eye.png" title="Voir ce lieu en 3D" /></a>
 {/if}
 
 {include file="comments/share.tpl" title="ce lieu" url=$lieu->getUrl()}

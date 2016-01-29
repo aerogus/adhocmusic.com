@@ -23,7 +23,6 @@ define('DB_ADHOC_DEFAULT',  1);
 define('SMARTY_TEMPLATE_PATH',   ADHOC_ROOT_PATH . '/app/views');
 define('SMARTY_TEMPLATE_C_PATH', ADHOC_ROOT_PATH . '/cache/smarty');
 
-define('STATIC_URL', 'https://www.adhocmusic.com');
 define('CACHE_URL',  'https://www.adhocmusic.com');
 
 // App AD'HOC Music

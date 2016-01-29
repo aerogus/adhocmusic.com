@@ -277,6 +277,22 @@ class Membre extends Contact
     );
 
     /**
+     * @return string
+     */
+    protected static function _getBaseUrl()
+    {
+        return MEDIA_URL . '/membre';
+    }
+
+    /**
+     * @return string
+     */
+    protected static function _getBasePath()
+    {
+        return MEDIA_PATH . '/membre';
+    }
+
+    /**
      * @param bool
      * @return array
      */
@@ -583,7 +599,7 @@ class Membre extends Contact
      */
     static function getUrlById($id_contact)
     {
-        return DYN_URL . '/membres/show/' . (int) $id_contact;
+        return '/membres/show/' . (int) $id_contact;
     }
 
     /**
@@ -616,11 +632,12 @@ class Membre extends Contact
 
     /**
      * @return string
+     * @todo uniquement dans MembreAdhoc ?
      */
     function getAvatarInterne()
     {
-        if (file_exists(ADHOC_ROOT_PATH . '/media/membre/ca/' . $this->getId() . '.jpg')) {
-            return STATIC_URL . '/media/membre/ca/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        if (file_exists(self::_getBasePath() . '/ca/' . $this->getId() . '.jpg')) {
+            return self::_getBasePath() . '/ca/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         }
         return false;
     }
@@ -630,8 +647,8 @@ class Membre extends Contact
      */
     function getAvatar()
     {
-        if (file_exists(ADHOC_ROOT_PATH . '/media/membre/' . $this->getId() . '.jpg')) {
-            return STATIC_URL . '/media/membre/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        if (file_exists(self::_getBasePath() . '/' . $this->getId() . '.jpg')) {
+            return self::_getBaseUrl() . '/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         }
         return false;
     }
@@ -645,7 +662,7 @@ class Membre extends Contact
      */
     function setPseudo($val)
     {
-        if ($this->_pseudo != $val)
+        if ($this->_pseudo !== $val)
         {
             $this->_pseudo = (string) $val;
             $this->_modified_fields['membre']['pseudo'] = true;
@@ -658,7 +675,7 @@ class Membre extends Contact
      */
     function setPassword($val)
     {
-        if ($this->_password != $val)
+        if ($this->_password !== $val)
         {
             $this->_password = (string) $val;
             $this->_modified_fields['membre']['password'] = true;
@@ -670,7 +687,7 @@ class Membre extends Contact
      */
     function setLastName($val)
     {
-        if ($this->_last_name != $val)
+        if ($this->_last_name !== $val)
         {
             $this->_last_name = (string) $val;
             $this->_modified_fields['membre']['last_name'] = true;
@@ -682,7 +699,7 @@ class Membre extends Contact
      */
     function setFirstName($val)
     {
-        if ($this->_first_name != $val)
+        if ($this->_first_name !== $val)
         {
             $this->_first_name = (string) $val;
             $this->_modified_fields['membre']['first_name'] = true;
@@ -694,7 +711,7 @@ class Membre extends Contact
      */
     function setAddress($val)
     {
-        if ($this->_address != $val)
+        if ($this->_address !== $val)
         {
             $this->_address = (string) $val;
             $this->_modified_fields['membre']['address'] = true;
@@ -706,7 +723,7 @@ class Membre extends Contact
      */
     function setCp($val)
     {
-        if ($this->_cp != $val)
+        if ($this->_cp !== $val)
         {
             $this->_cp = (string) $val;
             $this->_modified_fields['membre']['cp'] = true;
@@ -718,7 +735,7 @@ class Membre extends Contact
      */
     function setCity($val)
     {
-        if ($this->_city != $val)
+        if ($this->_city !== $val)
         {
             $this->_city = (string) $val;
             $this->_modified_fields['membre']['city'] = true;
@@ -730,7 +747,7 @@ class Membre extends Contact
      */
     function setCountry($val)
     {
-        if ($this->_country != $val)
+        if ($this->_country !== $val)
         {
             $this->_country = (string) $val;
             $this->_modified_fields['membre']['country'] = true;
@@ -742,7 +759,7 @@ class Membre extends Contact
      */
     function setIdCity($val)
     {
-        if ($this->_id_city != $val)
+        if ($this->_id_city !== $val)
         {
             $this->_id_city = (int) $val;
             $this->_modified_fields['membre']['id_city'] = true;
@@ -754,7 +771,7 @@ class Membre extends Contact
      */
     function setIdDepartement($val)
     {
-        if ($this->_id_departement != $val)
+        if ($this->_id_departement !== $val)
         {
             $this->_id_departement = (string) $val;
             $this->_modified_fields['membre']['id_departement'] = true;
@@ -766,7 +783,7 @@ class Membre extends Contact
      */
     function setIdRegion($val)
     {
-        if ($this->_id_region != $val)
+        if ($this->_id_region !== $val)
         {
             $this->_id_region = (string) $val;
             $this->_modified_fields['membre']['id_region'] = true;
@@ -778,7 +795,7 @@ class Membre extends Contact
      */
     function setIdCountry($val)
     {
-        if ($this->_id_country != $val)
+        if ($this->_id_country !== $val)
         {
             $this->_id_country = (string) $val;
             $this->_modified_fields['membre']['id_country'] = true;
@@ -790,7 +807,7 @@ class Membre extends Contact
      */
     function setTel($val)
     {
-        if ($this->_tel != $val)
+        if ($this->_tel !== $val)
         {
             $this->_tel = (string) $val;
             $this->_modified_fields['membre']['tel'] = true;
@@ -802,7 +819,7 @@ class Membre extends Contact
      */
     function setPort($val)
     {
-        if ($this->_port != $val)
+        if ($this->_port !== $val)
         {
             $this->_port = (string) $val;
             $this->_modified_fields['membre']['port'] = true;
@@ -814,7 +831,7 @@ class Membre extends Contact
      */
     function setSite($val)
     {
-        if ($this->_site != $val)
+        if ($this->_site !== $val)
         {
             $this->_site = (string) $val;
             $this->_modified_fields['membre']['site'] = true;
@@ -826,7 +843,7 @@ class Membre extends Contact
      */
     function setText($val)
     {
-        if ($this->_text != $val)
+        if ($this->_text !== $val)
         {
             $this->_text = (string) $val;
             $this->_modified_fields['membre']['text'] = true;
@@ -838,7 +855,7 @@ class Membre extends Contact
      */
     function setMailing($val)
     {
-        if ($this->_mailing != $val)
+        if ($this->_mailing !== $val)
         {
             $this->_mailing = (bool) $val;
             $this->_modified_fields['membre']['mailing'] = true;
@@ -850,7 +867,7 @@ class Membre extends Contact
      */
     function setLevel($val)
     {
-        if ($this->_level != $val)
+        if ($this->_level !== $val)
         {
             $this->_level = (int) $val;
             $this->_modified_fields['membre']['level'] = true;
@@ -862,7 +879,7 @@ class Membre extends Contact
      */
     function setFacebookProfileId($val)
     {
-        if ($this->_facebook_profile_id != $val)
+        if ($this->_facebook_profile_id !== $val)
         {
             $this->_facebook_profile_id = (int) $val;
             $this->_modified_fields['membre']['facebook_profile_id'] = true;
@@ -874,7 +891,7 @@ class Membre extends Contact
      */
     function setFacebookAutoLogin($val)
     {
-        if ($this->_facebook_auto_login != $val)
+        if ($this->_facebook_auto_login !== $val)
         {
             $this->_facebook_auto_login = (bool) $val;
             $this->_modified_fields['membre']['facebook_auto_login'] = true;
@@ -886,7 +903,7 @@ class Membre extends Contact
      */
     function setCreatedOn($val)
     {
-        if ($this->_created_on != $val)
+        if ($this->_created_on !== $val)
         {
             $this->_created_on = (string) $val;
             $this->_modified_fields['membre']['created_on'] = true;
@@ -899,7 +916,7 @@ class Membre extends Contact
     function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_created_on != $now)
+        if ($this->_created_on !== $now)
         {
             $this->_created_on = (string) $now;
             $this->_modified_fields['membre']['created_on'] = true;
@@ -911,7 +928,7 @@ class Membre extends Contact
      */
     function setModifiedOn($val)
     {
-        if ($this->_modified_on != $val)
+        if ($this->_modified_on !== $val)
         {
             $this->_modified_on = (string) $val;
             $this->_modified_fields['membre']['modified_on'] = true;
@@ -924,7 +941,7 @@ class Membre extends Contact
     function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_modified_on != $now)
+        if ($this->_modified_on !== $now)
         {
             $this->_modified_on = (string) $now;
             $this->_modified_fields['membre']['modified_on'] = true;
@@ -936,7 +953,7 @@ class Membre extends Contact
      */
     function setVisitedOn($val)
     {
-        if ($this->_visited_on != $val)
+        if ($this->_visited_on !== $val)
         {
             $this->_visited_on = (string) $val;
             $this->_modified_fields['membre']['visited_on'] = true;
@@ -949,7 +966,7 @@ class Membre extends Contact
     function setVisitedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_visited_on != $now)
+        if ($this->_visited_on !== $now)
         {
             $this->_visited_on = (string) $now;
             $this->_modified_fields['membre']['visited_on'] = true;
@@ -1110,7 +1127,7 @@ class Membre extends Contact
         }
         $sql .= "LIMIT " . $debut . ", " . $limit;
 
-        if($limit == 1) {
+        if($limit === 1) {
             $res = $db->queryWithFetchFirstRow($sql);
         } else {
             $res = $db->queryWithFetch($sql);

@@ -52,7 +52,7 @@
       </li>
       <li>
         <span style="float: right;">
-          <input type="text" id="date" name="date" value="{$event->getDate()|date_format:'%d/%m/%Y'}" style="width: 100px; background: url({#STATIC_URL#}/img/icones/event.png) no-repeat right top" />
+          <input type="text" id="date" name="date" value="{$event->getDate()|date_format:'%d/%m/%Y'}" style="width: 100px; background: url(/img/icones/event.png) no-repeat right top" />
           <select id="hourminute" name="hourminute">{html_input_date_hourminute hour=$event->getHour() minute=$event->getMinute()}</select>
         </span>
         <label for="date">Date</label>

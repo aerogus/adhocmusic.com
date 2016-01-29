@@ -100,6 +100,22 @@ class Featured extends ObjectModel
     /* début getters */
 
     /**
+     * @return string
+     */
+    protected static function _getBaseUrl()
+    {
+        return MEDIA_URL . '/featured';
+    }
+
+    /**
+     * @return string
+     */
+    protected static function _getBasePath()
+    {
+        return MEDIA_PATH . '/featured';
+    }
+
+    /**
      * @param string $mode
      * @return string
      */
@@ -187,7 +203,7 @@ class Featured extends ObjectModel
      */
     static function getImageById($id)
     {
-        return STATIC_URL . '/media/featured/' . (int) $id . '.jpg';
+        return self::_getBaseUrl() . '/' . (int) $id . '.jpg';
     }
 
     /**
@@ -211,7 +227,7 @@ class Featured extends ObjectModel
             throw new Exception('datdeb invalide');
         }
 
-        if ($this->_datdeb != $val)
+        if ($this->_datdeb !== $val)
         {
             $this->_datdeb = (string) $val;
             $this->_modified_fields['datdeb'] = true;
@@ -227,7 +243,7 @@ class Featured extends ObjectModel
             throw new Exception('datfin invalide');
         }
 
-        if ($this->_datfin != $val)
+        if ($this->_datfin !== $val)
         {
             $this->_datfin = (string) $val;
             $this->_modified_fields['datfin'] = true;
@@ -240,7 +256,7 @@ class Featured extends ObjectModel
     function setTitle($val)
     {
         $val = trim((string) $val);
-        if ($this->_title != $val)
+        if ($this->_title !== $val)
         {
             $this->_title = (string) $val;
             $this->_modified_fields['title'] = true;
@@ -253,7 +269,7 @@ class Featured extends ObjectModel
     function setDescription($val)
     {
         $val = trim((string) $val);
-        if ($this->_description != $val)
+        if ($this->_description !== $val)
         {
             $this->_description = (string) $val;
             $this->_modified_fields['description'] = true;
@@ -379,8 +395,9 @@ class Featured extends ObjectModel
     {
         if(parent::delete())
         {
-            if(file_exists(ADHOC_ROOT_PATH . '/media/featured/' . $this->getId() . '.jpg')) {
-                unlink(ADHOC_ROOT_PATH . '/media/featured/' . $this->getId() . '.jpg');
+            $file = self::_getBasePath() . '/' . $this->getId() . '.jpg';
+            if(file_exists($file)) {
+                unlink($file);
             }
             return true;
         }

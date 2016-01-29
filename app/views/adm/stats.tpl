@@ -1,6 +1,6 @@
 {include file="common/header.tpl"}
 
-<script src="{#STATIC_URL#}/js/jquery.flot.min.js"></script>
+<script src="/js/jquery.flot.min.js"></script>
 
 {include file="common/boxstart.tpl" boxtitle="Statistiques"}
 

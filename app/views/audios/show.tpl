@@ -6,8 +6,8 @@
 
 {else}
 
-<link rel="stylesheet" href="{#STATIC_URL#}/js/jplayer.blue.monday/jplayer.blue.monday.css" />
-<script src="{#STATIC_URL#}/js/jquery.jplayer.min.js"></script>
+<link rel="stylesheet" href="/js/jplayer.blue.monday/jplayer.blue.monday.css" />
+<script src="/js/jquery.jplayer.min.js"></script>
 
 <script>
 $(function() {
@@ -17,7 +17,7 @@ $(function() {
         mp3: "{$audio->getDirectUrl()}"
       });
     },
-    swfPath: "{#STATIC_URL#}/js",
+    swfPath: "/js",
     supplied: "mp3",
     wmode: "window"
   });

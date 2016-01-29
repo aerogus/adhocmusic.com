@@ -30,7 +30,7 @@
     {if !empty($events)}
     <ul>
     {foreach from=$events item=event}
-      <li><a title="Retirer de mon agenda" href="/alerting/unsub?type=e&amp;id_content={$event.id_event}"><img src="{#STATIC_URL#}/img/icones/delete.png" alt=""></a> <a href="/events/show/{$event.id_event}">{$event.name}</a></li>
+      <li><a title="Retirer de mon agenda" href="/alerting/unsub?type=e&amp;id_content={$event.id_event}"><img src="/img/icones/delete.png" alt=""></a> <a href="/events/show/{$event.id_event}">{$event.name}</a></li>
     {/foreach}
     </ul>
     {else}
@@ -49,7 +49,7 @@
     {if !empty($lieux)}
     <ul>
     {foreach from=$lieux item=lieu}
-      <li><a title="Se désabonner de ce lieu" href="/alerting/unsub?type=l&id_content={$lieu.id_lieu}"><img src="{#STATIC_URL#}/img/icones/delete.png" alt="" /></a> <a href="/lieux/show/{$lieu.id_lieu}">{$lieu.name}</a></li>
+      <li><a title="Se désabonner de ce lieu" href="/alerting/unsub?type=l&id_content={$lieu.id_lieu}"><img src="/img/icones/delete.png" alt="" /></a> <a href="/lieux/show/{$lieu.id_lieu}">{$lieu.name}</a></li>
     {/foreach}
     </ul>
     {else}

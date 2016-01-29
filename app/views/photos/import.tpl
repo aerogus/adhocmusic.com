@@ -57,17 +57,17 @@ $(function() {
     <li>
       <div class="error" id="error_file"{if empty($error_file)} style="display: none"{/if}>Vous devez renseigner le nom de l'archive .zip</div>
       <input type="text" name="file" id="file" size="50" value="Archive.zip" style="float: right;" />
-      <label for="file"><img src="{#STATIC_URL#}/img/icones/photo.png" alt="" /> Nom du fichier .zip</label>
+      <label for="file"><img src="/img/icones/photo.png" alt="" /> Nom du fichier .zip</label>
     </li>
     <li>
       <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour ces photos</div>
       <input type="text" id="name" name="name" size="50" value="" style="float: right" />
-      <label for="name"><img src="{#STATIC_URL#}/img/icones/signature.png" alt="" /> Titre</label>
+      <label for="name"><img src="/img/icones/signature.png" alt="" /> Titre</label>
     </li>
     <li>
       <div class="error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe</div>
       <input type="text" id="credits" name="credits" size="50" value="" style="float: right" />
-      <label for="credits"><img src="{#STATIC_URL#}/img/icones/photo.png" alt="" /> Photographe</label>
+      <label for="credits"><img src="/img/icones/photo.png" alt="" /> Photographe</label>
     </li>
     <li>
     {if !empty($groupe)}
@@ -82,7 +82,7 @@ $(function() {
         {/foreach}
       </select>
     {/if}
-      <label for="id_groupe"><img src="{#STATIC_URL#}/img/icones/groupe.png" alt="" /> Groupe</label>
+      <label for="id_groupe"><img src="/img/icones/groupe.png" alt="" /> Groupe</label>
     </li>
     <li>
     {if !empty($lieu)}
@@ -102,7 +102,7 @@ $(function() {
         {/foreach}
       </select>
     {/if}
-      <label for="id_lieu"><img src="{#STATIC_URL#}/img/icones/lieu.png" alt="" /> Lieu</label>
+      <label for="id_lieu"><img src="/img/icones/lieu.png" alt="" /> Lieu</label>
     </li>
     <li>
     {if !empty($event)}
@@ -113,7 +113,7 @@ $(function() {
         <option value="0">Aucun</option>
       </select>
     {/if}
-      <label for="id_event"><img src="{#STATIC_URL#}/img/icones/event.png" alt="" /> Evénement</label>
+      <label for="id_event"><img src="/img/icones/event.png" alt="" /> Evénement</label>
     </li>
   </ol>
   <input id="form-photo-import-submit" name="form-photo-import-submit" class="button" type="submit" value="Importer" />

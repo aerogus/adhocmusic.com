@@ -12,7 +12,7 @@
   <ol>
     <li>
       <input type="file" name="file" id="file" value="" style="float: right;" />
-      <label for="file"><img src="{#STATIC_URL#}/img/icones/photo.png" alt="" /> Photo (.jpg)</label>
+      <label for="file"><img src="/img/icones/photo.png" alt="" /> Photo (.jpg)</label>
     </li>
     <li>
       <p style="text-align: center"><img src="{$photo->getThumb400Url()}" alt="" /></p>
@@ -30,12 +30,12 @@
     <li>
       <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la photo</div>
       <input type="text" id="name" name="name" size="50" value="{$photo->getName()|escape}" style="float: right" />
-      <label for="name"><img src="{#STATIC_URL#}/img/icones/signature.png" alt="" /> Titre</label>
+      <label for="name"><img src="/img/icones/signature.png" alt="" /> Titre</label>
     </li>
     <li>
       <div class="error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe</div>
       <input type="text" id="credits" name="credits" size="50" value="{$photo->getCredits()|escape}" style="float: right" />
-      <label for="credits"><img src="{#STATIC_URL#}/img/icones/photo.png" alt="" /> Photographe</label>
+      <label for="credits"><img src="/img/icones/photo.png" alt="" /> Photographe</label>
     </li>
     <li>
       <select name="id_groupe" style="float: right">
@@ -44,7 +44,7 @@
         <option value="{$groupe.id}"{if $photo->getIdGroupe() == $groupe.id} selected="selected"{/if}>{$groupe.name|escape}</option>
         {/foreach}
       </select>
-      <label for="id_groupe"><img src="{#STATIC_URL#}/img/icones/groupe.png" alt="" /> Groupe</label>
+      <label for="id_groupe"><img src="/img/icones/groupe.png" alt="" /> Groupe</label>
     </li>
     <li>
       <select id="id_lieu" name="id_lieu" style="float: right">
@@ -59,17 +59,17 @@
         </optgroup>
         {/foreach}
       </select>
-      <label for="id_lieu"><img src="{#STATIC_URL#}/img/icones/lieu.png" alt="" /> Lieu</label>
+      <label for="id_lieu"><img src="/img/icones/lieu.png" alt="" /> Lieu</label>
     </li>
     <li>
       <select id="id_event" name="id_event" style="float: right">
         <option value="0">Aucun</option>
       </select>
-      <label for="id_event"><img src="{#STATIC_URL#}/img/icones/event.png" alt="" /> Evénement</label>
+      <label for="id_event"><img src="/img/icones/event.png" alt="" /> Evénement</label>
     </li>
     <li>
       <input type="checkbox" name="online"{if $photo->getOnline()} checked="checked"{/if} style="float: right" />
-      <label for="online"><img src="{#STATIC_URL#}/img/icones/eye.png" alt="" /> Afficher publiquement</label>
+      <label for="online"><img src="/img/icones/eye.png" alt="" /> Afficher publiquement</label>
     </li>
   </ol>
   <input name="form-photo-edit-submit" id="form-photo-edit-submit" class="button" type="submit" value="Enregistrer" />

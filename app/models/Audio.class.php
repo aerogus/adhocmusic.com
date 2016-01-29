@@ -74,17 +74,17 @@ class Audio extends Media
     /**
      * @return string
      */
-    protected static function _getWwwPath()
+    protected static function _getBaseUrl()
     {
-        return STATIC_URL . '/media/audio';
+        return MEDIA_URL . '/audio';
     }
 
     /**
      * @return string
      */
-    protected static function _getLocalPath()
+    protected static function _getBasePath()
     {
-        return ADHOC_ROOT_PATH . '/media/audio';
+        return MEDIA_PATH . '/audio';
     }
 
     /**
@@ -109,7 +109,7 @@ class Audio extends Media
      */
     static function getUrlById($id)
     {
-        return DYN_URL . '/audios/show/' . $id;
+        return HOME_URL . '/audios/show/' . $id;
     }
 
     /**
@@ -117,7 +117,7 @@ class Audio extends Media
      */
     function getDirectUrl()
     {
-        return 'https://www.adhocmusic.com/media/audio/' . $this->getId() . '.mp3';
+        return self::_getBasePath() . '/' . $this->getId() . '.mp3';
     }
 
     /**
@@ -125,7 +125,7 @@ class Audio extends Media
      */
     function getWaveForm()
     {
-        return 'http://static.adhocmusic.com/media/audiowaveform/' . $this->getId() . '.png';
+        return MEDIA_URL . '/audiowaveform/' . $this->getId() . '.png';
     }
 
     /* fin getters */
@@ -137,7 +137,7 @@ class Audio extends Media
      */
     function setMime($val)
     {
-        if ($this->_mime != $val)
+        if ($this->_mime !== $val)
         {
             $this->_mime = (string) $val;
             $this->_modified_fields['mime'] = true;
@@ -249,7 +249,7 @@ class Audio extends Media
         }
 
         $sql .= "ORDER BY ";
-        if($sort == "random") {
+        if($sort === "random") {
             $sql .= "RAND(" . time() . ") ";
         } else {
             $sql .= "`a`.`" . $sort . "` " . $sens . " ";
@@ -279,8 +279,9 @@ class Audio extends Media
     {
         if(parent::delete())
         {
-            if(file_exists(self::_getLocalPath() . '/' . $this->getId() . '.mp3')) {
-                unlink(self::_getLocalPath() . '/' . $this->getId() . '.mp3');
+            $file = self::_getBasePath() . '/' . $this->getId() . '.mp3';
+            if(file_exists($file)) {
+                unlink($file);
             }
             return true;
         }
@@ -348,12 +349,12 @@ class Audio extends Media
         } else {
             $chemin = '';
             if(is_numeric($id_audio)) {
-                $chemin .= self::_getWwwPath() . '/' . $id_audio . '.mp3';
+                $chemin .= self::_getBaseUrl() . '/' . $id_audio . '.mp3';
             } elseif(is_array($id_audio)) {
                 $first  = true;
                 foreach($id_audio as $id) {
                     if(!$first) { $chemin .= '|'; }
-                    $chemin .= self::_getWwwPath() . '/' . $id . '.mp3';
+                    $chemin .= self::_getBaseUrl() . '/' . $id . '.mp3';
                     $first = false;
                 }
             } else {

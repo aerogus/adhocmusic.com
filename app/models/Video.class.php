@@ -258,17 +258,17 @@ class Video extends Media
     /**
      * @return string
      */
-    protected static function _getWwwPath()
+    protected static function _getBaseUrl()
     {
-        return STATIC_URL . '/media/video';
+        return MEDIA_URL . '/video';
     }
 
     /**
      * @return string
      */
-    protected static function _getLocalPath()
+    protected static function _getBasePath()
     {
-        return ADHOC_ROOT_PATH . '/media/video';
+        return MEDIA_PATH . '/video';
     }
 
     /**
@@ -333,10 +333,7 @@ class Video extends Media
      */
     static function getUrlById($id, $type = null)
     {
-        if($type === 'www') {
-            return 'https://www.adhocmusic.com/videos/show/' . $id;
-        }
-        return DYN_URL . '/videos/show/' . $id;
+        return HOME_URL . '/videos/show/' . $id;
     }
 
     /**
@@ -356,7 +353,7 @@ class Video extends Media
      */
     function setIdHost($val)
     {
-        if ($this->_id_host != $val)
+        if ($this->_id_host !== $val)
         {
             $this->_id_host = (int) $val;
             $this->_modified_fields['id_host'] = true;
@@ -368,7 +365,7 @@ class Video extends Media
      */
     function setReference($val)
     {
-        if ($this->_reference != $val)
+        if ($this->_reference !== $val)
         {
             $this->_reference = (string) $val;
             $this->_modified_fields['reference'] = true;
@@ -380,7 +377,7 @@ class Video extends Media
      */
     function setWidth($val)
     {
-        if ($this->_width != $val)
+        if ($this->_width !== $val)
         {
             $this->_width = (int) $val;
             $this->_modified_fields['width'] = true;
@@ -392,7 +389,7 @@ class Video extends Media
      */
     function setHeight($val)
     {
-        if ($this->_height != $val)
+        if ($this->_height !== $val)
         {
             $this->_height = (int) $val;
             $this->_modified_fields['height'] = true;
@@ -674,12 +671,12 @@ class Video extends Media
                 $width  = $this->getWidth();
                 $height = $this->getHeight();
                 return ''
-                     . '<video width="680" height="360" poster="' . STATIC_URL . '/media/video/' . $this->getId() . '.jpg" controls="controls" preload="none">'
-                     . '<source type="video/mp4" src="' . STATIC_URL . '/media/video/' . $this->getReference() . '">'
+                     . '<video width="680" height="360" poster="/media/video/' . $this->getId() . '.jpg" controls="controls" preload="none">'
+                     . '<source type="video/mp4" src="/media/video/' . $this->getReference() . '">'
                      . '<object width="680" height="360" type="application/x-shockwave-flash" data="/mediaelement/flashmediaelement.swf">'
                      . '<param name="movie" value="/mediaelement/flashmediaelement.swf">'
                      . '<param name="flashvars" value="controls=true&file=/media/video/' . $this->getReference() . '">'
-                     . '<img src="' . STATIC_URL . '/media/video/' . $this->getId() . '.jpg" width="680" height="360" title="No video playback capabilities">'
+                     . '<img src="/media/video/' . $this->getId() . '.jpg" width="680" height="360" title="No video playback capabilities">'
                      . '</object>'
                      . '</video>';
             case self::HOST_VIMEO:
@@ -988,8 +985,9 @@ class Video extends Media
      */
     function deleteThumbnail()
     {
-        if(file_exists(self::_getLocalPath() . '/' . $this->getId() . '.jpg')) {
-            unlink(self::_getLocalPath() . '/' . $this->getId() . '.jpg');
+        $file = self::_getBasePath() . '/' . $this->getId() . '.jpg';
+        if(file_exists($file)) {
+            unlink($file);
             return true;
         }
         return false;
@@ -1004,8 +1002,8 @@ class Video extends Media
      */
     function storeThumbnail($remote_url)
     {
-        $tmp = self::_getLocalPath() . '/' . $this->_id_video . '.jpg.tmp';
-        $jpg = self::_getLocalPath() . '/' . $this->_id_video . '.jpg';
+        $tmp = self::_getBasePath() . '/' . $this->_id_video . '.jpg.tmp';
+        $jpg = self::_getBasePath() . '/' . $this->_id_video . '.jpg';
 
         file_put_contents($tmp, file_get_contents($remote_url));
         $objImg = new Image($tmp);
@@ -1044,7 +1042,7 @@ class Video extends Media
         $cache = Image::getLocalCachePath($uid);
 
         if(!file_exists($cache)) {
-            $source = ADHOC_ROOT_PATH . '/media/video/' . $id . '.jpg';
+            $source = self::_getBasePath() . '/video/' . $id . '.jpg';
             if(file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);

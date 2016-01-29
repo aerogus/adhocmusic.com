@@ -35,9 +35,9 @@
         </li>
         <li>
           <ul id="type" style="float: right;">
-            <li><img class="check_media" id="check_video" src="{#STATIC_URL#}/img/icones/media-video-24.png" alt="Vidéo"></li>
-            <li><img class="check_media" id="check_audio" src="{#STATIC_URL#}/img/icones/media-audio-24.png" alt="Audio"></li>
-            <li><img class="check_media" id="check_photo" src="{#STATIC_URL#}/img/icones/media-photo-24.png" alt="Photo"></li>
+            <li><img class="check_media" id="check_video" src="/img/icones/media-video-24.png" alt="Vidéo"></li>
+            <li><img class="check_media" id="check_audio" src="/img/icones/media-audio-24.png" alt="Audio"></li>
+            <li><img class="check_media" id="check_photo" src="/img/icones/media-photo-24.png" alt="Photo"></li>
           </ul>
           <input type="hidden" name="type_video" id="type_video" value="1">
           <input type="hidden" name="type_audio" id="type_audio" value="1">

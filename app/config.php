@@ -44,9 +44,9 @@ if(ENV === 'PROD') {
     define('_DB_PASSWORD_',    'kK2972Wd');
     define('_DB_DATABASE_',    'adhocmusic');
 
-    define('DYN_URL',          'http://www.adhocmusic.com');
-    define('STATIC_URL',       'http://www.adhocmusic.com');
+    define('HOME_URL',         'http://www.adhocmusic.com');
     define('CACHE_URL',        'http://www.adhocmusic.com');
+    define('MEDIA_URL',        'http://www.adhocmusic.com/media');
 
     ini_set('display_startup_errors', 0);
     ini_set('display_errors', 1);
@@ -59,9 +59,9 @@ if(ENV === 'PROD') {
     define('_DB_PASSWORD_',    'changeme');
     define('_DB_DATABASE_',    'adhoc');
 
-    define('DYN_URL',          'http://www.adhocmusic.localhost');
-    define('STATIC_URL',       'http://www.adhocmusic.localhost');
+    define('HOME_URL',         'http://www.adhocmusic.localhost');
     define('CACHE_URL',        'http://www.adhocmusic.localhost');
+    define('MEDIA_URL',        'http://www.adhocmusic.localhost/media');
 
     ini_set('display_startup_errors', 1);
     ini_set('display_errors', 1);
@@ -75,6 +75,7 @@ define('ADHOC_ROUTES_FILE',         ADHOC_ROOT_PATH . '/app/routes');
 define('ADHOC_SITE_PATH',           ADHOC_ROOT_PATH . '/app/models');
 define('ADHOC_LOG_PATH',            ADHOC_ROOT_PATH . '/log');
 define('DEFAULT_CONTROLLERS_PATH',  ADHOC_ROOT_PATH . '/app/controllers/');
+define('MEDIA_PATH',                ADHOC_ROOT_PATH . '/media');
 
 define('DB_ADHOC_DEFAULT',          1);
 
@@ -94,7 +95,7 @@ define('FB_API_KEY', '9bff9746d384c2b4dd0c4fa130bcaecd');
 define('FB_SECRET_KEY', 'c2ea0c274c21507404f21688f71f98c1');
 define('FB_APP_ROOT_URL', 'https://apps.facebook.com/adhocmusic');
 define('FB_APP_PAGE_URL', 'https://www.facebook.com/adhocmusic');
-define('FB_APP_DEFAUT_AVATAR_GROUPE', STATIC_URL . '/img/note_adhoc_64.png');
+define('FB_APP_DEFAUT_AVATAR_GROUPE', HOME_URL . '/img/note_adhoc_64.png');
 
 error_reporting(-1); // taquet
 ini_set('log_errors',             1);

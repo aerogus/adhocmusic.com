@@ -94,17 +94,17 @@ class Photo extends Media
     /**
      * @return string
      */
-    protected static function _getWwwPath()
+    protected static function _getBaseUrl()
     {
-        return STATIC_URL . '/media/photo';
+        return MEDIA_URL . '/photo';
     }
 
     /**
      * @return string
      */
-    protected static function _getLocalPath()
+    protected static function _getBasePath()
     {
-        return ADHOC_ROOT_PATH . '/media/photo';
+        return MEDIA_PATH . '/photo';
     }
 
     /**
@@ -156,10 +156,7 @@ class Photo extends Media
      */
     static function getUrlById($id, $type = null)
     {
-        if($type == 'www') {
-            return 'http://www.adhocmusic.com/photos/show/' . (int) $id;
-        }
-        return DYN_URL . '/photos/show/' . (int) $id;
+        return HOME_URL . '/photos/show/' . (int) $id;
     }
 
     /**
@@ -215,8 +212,9 @@ class Photo extends Media
             self::invalidatePhotoInCache($this->getId(), 400, 300, '000000', false, false);
             self::invalidatePhotoInCache($this->getId(), 680, 600, '000000', false, false);
 
-            if(file_exists(self::_getLocalPath() . '/' . $this->getId() . '.jpg')) {
-                unlink(self::_getLocalPath() . '/' . $this->getId() . '.jpg');
+            $file = self::_getBasePath() . '/' . $this->getId() . '.jpg';
+            if(file_exists($file)) {
+                unlink($file);
             }
             return true;
         }
@@ -503,7 +501,7 @@ class Photo extends Media
         $cache = Image::getLocalCachePath($uid);
 
         if(!file_exists($cache)) {
-            $source = ADHOC_ROOT_PATH . '/media/photo/' . $id . '.jpg';
+            $source = self::_getBasePath() . '/' . $id . '.jpg';
             if(file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);

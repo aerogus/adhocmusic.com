@@ -215,19 +215,19 @@ class Groupe extends ObjectModel
     /* début getters */
 
     /**
-    * @return string
-    */
-    protected static function _getWwwPath()
+     * @return string
+     */
+    protected static function _getBaseUrl()
     {
-        return STATIC_URL . '/media/groupe';
+        return MEDIA_URL . '/groupe';
     }
 
     /**
      * @return string
      */
-    protected static function _getLocalPath()
+    protected static function _getBasePath()
     {
-        return ADHOC_ROOT_PATH . '/media/groupe';
+        return MEDIA_PATH . '/groupe';
     }
 
     /**
@@ -576,8 +576,8 @@ class Groupe extends ObjectModel
      */
     function getPhoto()
     {
-        if(file_exists(self::_getLocalPath() . '/p' . $this->getId() . '.jpg')) {
-            return self::_getWwwPath() . '/p' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        if(file_exists(self::_getBasePath() . '/p' . $this->getId() . '.jpg')) {
+            return self::_getBaseUrl() . '/p' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         }
         return false;
     }
@@ -590,10 +590,10 @@ class Groupe extends ObjectModel
      */
     function getMiniPhoto()
     {
-        if(file_exists(self::_getLocalPath() . '/m' . $this->getId() . '.jpg')) {
-            return self::_getWwwPath() . '/m' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        if(file_exists(self::_getBasePath() . '/m' . $this->getId() . '.jpg')) {
+            return self::_getBaseUrl() . '/m' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         } else {
-            return STATIC_URL . '/img/note_adhoc_64.png';
+            return HOME_URL . '/img/note_adhoc_64.png';
         }
     }
 
@@ -604,12 +604,12 @@ class Groupe extends ObjectModel
      */
     function getLogo()
     {
-        if(file_exists(self::_getLocalPath() . '/l' . $this->getId() . '.png')) {
-            return self::_getWwwPath() . '/l' . $this->getId() . '.png?ts=' . $this->getModifiedOnTs();
-        } else if(file_exists(self::_getLocalPath() . '/l' . $this->getId() . '.gif')) {
-            return self::_getWwwPath() . '/l' . $this->getId() . '.gif?ts=' . $this->getModifiedOnTs();
-        } else if(file_exists(self::_getLocalPath() . '/l' . $this->getId() . '.jpg')) {
-            return self::_getWwwPath() . '/l' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        if(file_exists(self::_getBasePath() . '/l' . $this->getId() . '.png')) {
+            return self::_getBaseUrl() . '/l' . $this->getId() . '.png?ts=' . $this->getModifiedOnTs();
+        } else if(file_exists(self::_getBasePath() . '/l' . $this->getId() . '.gif')) {
+            return self::_getBaseUrl() . '/l' . $this->getId() . '.gif?ts=' . $this->getModifiedOnTs();
+        } else if(file_exists(self::_getBasePath() . '/l' . $this->getId() . '.jpg')) {
+            return self::_getBaseUrl() . '/l' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         }
     }
 
@@ -618,7 +618,7 @@ class Groupe extends ObjectModel
      */
     function getUrl()
     {
-        return DYN_URL . '/' . $this->_alias;
+        return HOME_URL . '/' . $this->_alias;
     }
 
     /**
@@ -635,7 +635,7 @@ class Groupe extends ObjectModel
             $alias = $ref;
         }
 
-        return DYN_URL . '/' . $alias;
+        return HOME_URL . '/' . $alias;
     }
 
     /**
@@ -653,9 +653,9 @@ class Groupe extends ObjectModel
      */
     static function getAvatarById($id_groupe)
     {
-        $avatar = 'http://static.adhocmusic.com/img/note_adhoc_64.png';
-        if(file_exists(self::_getLocalPath() . '/m' . $id_groupe . '.jpg')) {
-            $avatar = self::_getWwwPath() . '/m' . $id_groupe . '.jpg';
+        $avatar = HOME_URL . '/img/note_adhoc_64.png';
+        if(file_exists(self::_getBasePath() . '/m' . $id_groupe . '.jpg')) {
+            $avatar = self::_getBaseUrl() . '/m' . $id_groupe . '.jpg';
         }
         return $avatar;
     }
@@ -689,7 +689,7 @@ class Groupe extends ObjectModel
      */
     function setAlias($val)
     {
-        if ($this->_alias != $val)
+        if ($this->_alias !== $val)
         {
             $this->_alias = (string) $val;
             $this->_modified_fields['alias'] = true;
@@ -701,7 +701,7 @@ class Groupe extends ObjectModel
      */
     function setName($val)
     {
-        if ($this->_name != $val)
+        if ($this->_name !== $val)
         {
             $this->_name = (string) $val;
             $this->_modified_fields['name'] = true;
@@ -725,7 +725,7 @@ class Groupe extends ObjectModel
      */
     function setInfluences($val)
     {
-        if ($this->_influences != $val)
+        if ($this->_influences !== $val)
         {
             $this->_influences = (string) $val;
             $this->_modified_fields['influences'] = true;
@@ -737,7 +737,7 @@ class Groupe extends ObjectModel
      */
     function setLineup($val)
     {
-        if ($this->_lineup != $val)
+        if ($this->_lineup !== $val)
         {
             $this->_lineup = (string) $val;
             $this->_modified_fields['lineup'] = true;
@@ -749,7 +749,7 @@ class Groupe extends ObjectModel
      */
     function setMiniText($val)
     {
-        if ($this->_mini_text != $val)
+        if ($this->_mini_text !== $val)
         {
             $this->_mini_text = (string) $val;
             $this->_modified_fields['mini_text'] = true;
@@ -760,7 +760,7 @@ class Groupe extends ObjectModel
      */
     function setText($val)
     {
-        if ($this->_text != $val)
+        if ($this->_text !== $val)
         {
             $this->_text = (string) $val;
             $this->_modified_fields['text'] = true;
@@ -772,7 +772,7 @@ class Groupe extends ObjectModel
      */
     function setSite($val)
     {
-        if ($this->_site != $val)
+        if ($this->_site !== $val)
         {
             $this->_site = (string) $val;
             $this->_modified_fields['site'] = true;
@@ -788,7 +788,7 @@ class Groupe extends ObjectModel
         $val = str_replace('http://', '', $val);
         $val = str_replace('www.myspace.com/', '', $val);
 
-        if ($this->_myspace != $val)
+        if ($this->_myspace !== $val)
         {
             $this->_myspace = (string) $val;
             $this->_modified_fields['myspace'] = true;
@@ -800,7 +800,7 @@ class Groupe extends ObjectModel
      */
     function setFacebookPageId($val)
     {
-        if ($this->_facebook_page_id != $val)
+        if ($this->_facebook_page_id !== $val)
         {
             $this->_facebook_page_id = (string) $val;
             $this->_modified_fields['facebook_page_id'] = true;
@@ -812,7 +812,7 @@ class Groupe extends ObjectModel
      */
     function setTwitterId($val)
     {
-        if ($this->_twitter_id != $val)
+        if ($this->_twitter_id !== $val)
         {
             $this->_twitter_id = (string) $val;
             $this->_modified_fields['twitter_id'] = true;
@@ -824,7 +824,7 @@ class Groupe extends ObjectModel
      */
     function setIdDepartement($val)
     {
-        if ($this->_id_departement != $val)
+        if ($this->_id_departement !== $val)
         {
             $this->_id_departement = (string) $val;
             $this->_modified_fields['id_departement'] = true;
@@ -836,7 +836,7 @@ class Groupe extends ObjectModel
      */
     function setOnline($val)
     {
-        if ($this->_online != $val)
+        if ($this->_online !== $val)
         {
             $this->_online = (bool) $val;
             $this->_modified_fields['online'] = true;
@@ -860,7 +860,7 @@ class Groupe extends ObjectModel
      */
     function setCreatedOn($val)
     {
-        if ($this->_created_on != $val)
+        if ($this->_created_on !== $val)
         {
             $this->_created_on = (string) $val;
             $this->_modified_fields['created_on'] = true;
@@ -873,7 +873,7 @@ class Groupe extends ObjectModel
     function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_created_on != $now)
+        if ($this->_created_on !== $now)
         {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
@@ -885,7 +885,7 @@ class Groupe extends ObjectModel
      */
     function setModifiedOn($val)
     {
-        if ($this->_modified_on != $val)
+        if ($this->_modified_on !== $val)
         {
             $this->_modified_on = (string) $val;
             $this->_modified_fields['modified_on'] = true;
@@ -898,7 +898,7 @@ class Groupe extends ObjectModel
     function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_modified_on != $now)
+        if ($this->_modified_on !== $now)
         {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
@@ -910,7 +910,7 @@ class Groupe extends ObjectModel
      */
     function setDatdeb($val)
     {
-        if ($this->_datdeb != $val)
+        if ($this->_datdeb !== $val)
         {
             $this->_datdeb = (string) $val;
             $this->_modified_fields['datdeb'] = true;
@@ -922,7 +922,7 @@ class Groupe extends ObjectModel
      */
     function setDatfin($val)
     {
-        if ($this->_datfin != $val)
+        if ($this->_datfin !== $val)
         {
             $this->_datfin = (string) $val;
             $this->_modified_fields['datfin'] = true;
@@ -934,7 +934,7 @@ class Groupe extends ObjectModel
      */
     function setComment($val)
     {
-        if ($this->_comment != $val)
+        if ($this->_comment !== $val)
         {
             $this->_comment = (string) $val;
             $this->_modified_fields['comment'] = true;
@@ -946,7 +946,7 @@ class Groupe extends ObjectModel
      */
     function setEtat($val)
     {
-        if ($this->_etat != $val)
+        if ($this->_etat !== $val)
         {
             $this->_etat = (int) $val;
             $this->_modified_fields['etat'] = true;
@@ -958,7 +958,7 @@ class Groupe extends ObjectModel
      */
     function setTemplate($val)
     {
-        if ($this->_template != $val)
+        if ($this->_template !== $val)
         {
             $this->_template = (array) $val;
             $this->_modified_fields['template'] = true;
@@ -1038,17 +1038,17 @@ class Groupe extends ObjectModel
 
         parent::delete();
 
-        $p = self::_getLocalPath() . '/p' . $this->getId() . '.jpg';
+        $p = self::_getBasePath() . '/p' . $this->getId() . '.jpg';
         if(file_exists($p)) {
             unlink($p);
         }
 
-        $m = self::_getLocalPath() . '/m' . $this->getId() . '.jpg';
+        $m = self::_getBasePath() . '/m' . $this->getId() . '.jpg';
         if(file_exists($m)) {
             unlink($m);
         }
 
-        $l = self::_getLocalPath() . '/l' . $this->getId() . '.jpg';
+        $l = self::_getBasePath() . '/l' . $this->getId() . '.jpg';
         if(file_exists($l)) {
             unlink($l);
         }
@@ -1095,7 +1095,7 @@ class Groupe extends ObjectModel
         // @todo check datdeb et datfin
 
         // l'id_contact est il valide ?
-        if(($mbr = Membre::getInstance($id_contact)) == false) {
+        if(($mbr = Membre::getInstance($id_contact)) === false) {
             throw new Exception('id_contact introuvable');
         }
 
@@ -1190,7 +1190,7 @@ class Groupe extends ObjectModel
 
         foreach($this->_members as $member)
         {
-            if($member['id'] == $id_contact) {
+            if($member['id'] === $id_contact) {
                 return (int) $member['id_type_musicien'];
             }
         }
@@ -1348,9 +1348,9 @@ class Groupe extends ObjectModel
             $tab = array();
             foreach($res as $grp) {
                 $tab[$grp['id']] = $grp;
-                $mini_photo = STATIC_URL . '/img/note_adhoc_64.png';
-                if(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.jpg')) {
-                    $mini_photo = self::_getWwwPath() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
+                $mini_photo = '/img/note_adhoc_64.png';
+                if(file_exists(self::_getBasePath() . '/m' . $grp['id'] . '.jpg')) {
+                    $mini_photo = self::_getBaseUrl() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
                 }
                 $tab[$grp['id']]['mini_photo'] = $mini_photo;
                 $tab[$grp['id']]['nom_type_musicien'] = Membre::getTypeMusicienName($grp['id_type_musicien']);
@@ -1384,17 +1384,17 @@ class Groupe extends ObjectModel
         $cpt = 0;
         foreach($res as $grp) {
             $tab[$grp['lettre']][$cpt] = $grp;
-            $tab[$grp['lettre']][$cpt]['mini_photo'] = STATIC_URL . '/img/note_adhoc_64.png';
+            $tab[$grp['lettre']][$cpt]['mini_photo'] = '/img/note_adhoc_64.png';
             $tab[$grp['lettre']][$cpt]['class'] = 'grpinactif';
-            if(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.png')) {
-                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::_getWwwPath() . '/m' . $grp['id'] . '.png?ts=' . $grp['modified_on_ts'];
-            } elseif(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.jpg')) {
-                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::_getWwwPath() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
-            } elseif(file_exists(self::_getLocalPath() . '/m' . $grp['id'] . '.gif')) {
-                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::_getWwwPath() . '/m' . $grp['id'] . '.gif?ts=' . $grp['modified_on_ts'];
+            if(file_exists(self::_getBasePath() . '/m' . $grp['id'] . '.png')) {
+                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::_getBaseUrl() . '/m' . $grp['id'] . '.png?ts=' . $grp['modified_on_ts'];
+            } elseif(file_exists(self::_getBasePath() . '/m' . $grp['id'] . '.jpg')) {
+                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::_getBaseUrl() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
+            } elseif(file_exists(self::_getBasePath() . '/m' . $grp['id'] . '.gif')) {
+                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::_getBaseUrl() . '/m' . $grp['id'] . '.gif?ts=' . $grp['modified_on_ts'];
             }
 
-            if($grp['etat'] == self::ETAT_ACTIF) {
+            if($grp['etat'] === self::ETAT_ACTIF) {
                 $tab[$grp['lettre']][$cpt]['class'] = 'grpactif';
             }
             $cpt++;

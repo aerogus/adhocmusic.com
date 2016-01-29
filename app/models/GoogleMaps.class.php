@@ -69,7 +69,7 @@ class GoogleMaps
         if(!array_key_exists('sensor', $params))
             $params['sensor'] = 'false';
         if(!array_key_exists('icon', $params))
-            $params['icon'] = STATIC_URL . '/img/pin/note.png';
+            $params['icon'] = '/img/pin/note.png';
 
         return 'http://maps.google.com/maps/api/staticmap'
           . '?center=' . $params['loc']
