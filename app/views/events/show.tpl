@@ -8,7 +8,11 @@
 
 <div class="grid-2-1">
 
-  {include file="common/boxstart.tpl" boxtitle=$event->getName()|escape}
+  <div class="box">
+    <header>
+      <h3>{$event->getName()}</h3>
+    </header>
+    <div>
 
   {if $event->getFullFlyerUrl()}
   <img src="{$event->getFlyer400Url()}" alt="{$event->getName()|escape}" style="float: right; padding: 0 0 10px 10px;">
@@ -101,14 +105,12 @@
   </div>
   {/if}
 
-  {include file="common/boxend.tpl"}
+  </div>
 
-</div>
+</div>{* .box *}
 
 <div>
-
   {calendar year=$year month=$month day=$day}
-
 </div>
 
 {/if} {* test unknown event *}

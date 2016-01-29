@@ -11,15 +11,13 @@
 }
 </style>
 
-<div id="right">
+<div class="grid-2-1">
 
-{calendar year=$year month=$month day=$day}
-
-</div>
-
-<div id="left-center">
-
-{include file="common/boxstart.tpl" boxtitle="Agenda"}
+  <div class="box">
+    <header>
+      <h3>Agenda</h3>
+    </header>
+    <div>
 
 {if !sizeof($events)}
 <p>Aucune date annoncée pour cette période. <a href="/events/create">Inscrire une date</a></p>
@@ -93,8 +91,11 @@
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>{* .box *}
 
+<div>
+{calendar year=$year month=$month day=$day}
 </div>
 
 {include file="common/footer.tpl"}
