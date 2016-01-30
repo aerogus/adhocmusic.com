@@ -170,7 +170,7 @@ class Media extends ObjectModel
      */
     function setIdContact($val)
     {
-        if ($this->_id_contact != $val)
+        if ($this->_id_contact !== $val)
         {
             $this->_id_contact = (int) $val;
             $this->_modified_fields['id_contact'] = true;
@@ -182,7 +182,7 @@ class Media extends ObjectModel
      */
     function setIdGroupe($val)
     {
-        if ($this->_id_groupe != $val)
+        if ($this->_id_groupe !== $val)
         {
             $this->_id_groupe = (int) $val;
             $this->_modified_fields['id_groupe'] = true;
@@ -194,7 +194,7 @@ class Media extends ObjectModel
      */
     function setIdLieu($val)
     {
-        if ($this->_id_lieu != $val)
+        if ($this->_id_lieu !== $val)
         {
             $this->_id_lieu = (int) $val;
             $this->_modified_fields['id_lieu'] = true;
@@ -206,7 +206,7 @@ class Media extends ObjectModel
      */
     function setIdEvent($val)
     {
-        if ($this->_id_event != $val)
+        if ($this->_id_event !== $val)
         {
             $this->_id_event = (int) $val;
             $this->_modified_fields['id_event'] = true;
@@ -218,7 +218,7 @@ class Media extends ObjectModel
      */
     function setIdStructure($val)
     {
-        if ($this->_id_structure != $val)
+        if ($this->_id_structure !== $val)
         {
             $this->_id_structure = (int) $val;
             $this->_modified_fields['id_structure'] = true;
@@ -230,7 +230,7 @@ class Media extends ObjectModel
      */
     function setName($val)
     {
-        if ($this->_name != $val)
+        if ($this->_name !== $val)
         {
             $this->_name = (string) $val;
             $this->_modified_fields['name'] = true;
@@ -242,7 +242,7 @@ class Media extends ObjectModel
      */
     function setCreatedOn($val)
     {
-        if ($this->_created_on != $val)
+        if ($this->_created_on !== $val)
         {
             $this->_created_on = (string) $val;
             $this->_modified_fields['created_on'] = true;
@@ -255,7 +255,7 @@ class Media extends ObjectModel
     function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_created_on != $now)
+        if ($this->_created_on !== $now)
         {
             $this->_created_on = (string) $now;
             $this->_modified_fields['created_on'] = true;
@@ -267,7 +267,7 @@ class Media extends ObjectModel
      */
     function setModifiedOn($val)
     {
-        if ($this->_modified_on != $val)
+        if ($this->_modified_on !== $val)
         {
             $this->_modified_on = (string) $val;
             $this->_modified_fields['modified_on'] = true;
@@ -280,7 +280,7 @@ class Media extends ObjectModel
     function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_modified_on != $now)
+        if ($this->_modified_on !== $now)
         {
             $this->_modified_on = (string) $now;
             $this->_modified_fields['modified_on'] = true;
@@ -292,7 +292,7 @@ class Media extends ObjectModel
      */
     function setOnline($val)
     {
-        if ($this->_online != $val)
+        if ($this->_online !== $val)
         {
             $this->_online = (bool) $val;
             $this->_modified_fields['online'] = true;

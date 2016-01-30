@@ -2,17 +2,18 @@
 
 <script>
 $(function() {
-  $("#pseudo").keyup(function() {
-    $.getJSON('/membres/autocomplete-pseudo.json', { q: $(this).val() }, function(data) {
-      $("#suggests").empty();
-      $('<ul>').appendTo('#suggests');
-      $.each(data, function(key, val) {
-        $('<li><a href="/messagerie/write?pseudo='+encodeURIComponent(val.pseudo)+'">'+encodeURIComponent(val.pseudo)+'</li>').appendTo('#suggests');
-      });
-      $('</ul>').appendTo('#suggests');
+    $("#pseudo").keyup(function() {
+        $.getJSON('/membres/autocomplete-pseudo.json', { q: $(this).val() }, function(data) {
+            $("#suggests").empty();
+            $('<ul>').appendTo('#suggests');
+            $.each(data, function (key, val) {
+                $('<li><a href="/messagerie/write?pseudo='+encodeURIComponent(val.pseudo)+'">'+encodeURIComponent(val.pseudo)+'</li>').appendTo('#suggests');
+            });
+            $('</ul>').appendTo('#suggests');
+        });
     });
-  });
 });
+
 function deleteMessage(id, mode)
 {
     var params = "mode="+mode+"&id="+id;

@@ -232,7 +232,7 @@ class Exposant extends ObjectModel
      */
     function setName($val)
     {
-        if ($this->_name != $val)
+        if ($this->_name !== $val)
         {
             $this->_name = (string) $val;
             $this->_modified_fields['name'] = true;
@@ -244,7 +244,7 @@ class Exposant extends ObjectModel
      */
     function setEmail($val)
     {
-        if ($this->_email != $val)
+        if ($this->_email !== $val)
         {
             $this->_email = (string) $val;
             $this->_modified_fields['email'] = true;
@@ -256,7 +256,7 @@ class Exposant extends ObjectModel
      */
     function setPhone($val)
     {
-        if ($this->_phone != $val)
+        if ($this->_phone !== $val)
         {
             $this->_phone = (string) $val;
             $this->_modified_fields['phone'] = true;
@@ -268,7 +268,7 @@ class Exposant extends ObjectModel
      */
     function setSite($val)
     {
-        if ($this->_site != $val)
+        if ($this->_site !== $val)
         {
             $this->_site = (string) $val;
             $this->_modified_fields['site'] = true;
@@ -280,7 +280,7 @@ class Exposant extends ObjectModel
      */
     function setType($val)
     {
-        if ($this->_type != $val)
+        if ($this->_type !== $val)
         {
             $this->_type = (string) $val;
             $this->_modified_fields['type'] = true;
@@ -292,7 +292,7 @@ class Exposant extends ObjectModel
      */
     function setCity($val)
     {
-        if ($this->_city != $val)
+        if ($this->_city !== $val)
         {
             $this->_city = (string) $val;
             $this->_modified_fields['city'] = true;
@@ -304,7 +304,7 @@ class Exposant extends ObjectModel
      */
     function setState($val)
     {
-        if ($this->_state != $val)
+        if ($this->_state !== $val)
         {
             $this->_state = (string) $val;
             $this->_modified_fields['state'] = true;
@@ -316,7 +316,7 @@ class Exposant extends ObjectModel
      */
     function setCreatedOn($val)
     {
-        if ($this->_created_on != $val)
+        if ($this->_created_on !== $val)
         {
             $this->_created_on = (string) $val;
             $this->_modified_fields['created_on'] = true;
@@ -329,7 +329,7 @@ class Exposant extends ObjectModel
     function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_created_on != $now)
+        if ($this->_created_on !== $now)
         {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
@@ -341,7 +341,7 @@ class Exposant extends ObjectModel
      */
     function setModifiedOn($val)
     {
-        if ($this->_modified_on != $val)
+        if ($this->_modified_on !== $val)
         {
             $this->_modified_on = (string) $val;
             $this->_modified_fields['modified_on'] = true;
@@ -354,7 +354,7 @@ class Exposant extends ObjectModel
     function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_modified_on != $now)
+        if ($this->_modified_on !== $now)
         {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;

@@ -29,7 +29,7 @@
       <li><a href="/videos/create">Ajouter une vidéo</a></li>
     </ul>
   </li>
-  <li{if isset($menuselected) && $menuselected === 'contact'} class="menuselected"{/if}">
+  <li{if isset($menuselected) && $menuselected === 'contact'} class="menuselected"{/if}>
     <a href="/contact" accesskey="5" title="Contact">Contact</a>
   </li>
 </ul>

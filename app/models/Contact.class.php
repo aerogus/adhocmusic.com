@@ -163,7 +163,7 @@ class Contact extends ObjectModel
      */
     function setEmail($val)
     {
-        if ($this->_email != $val)
+        if ($this->_email !== $val)
         {
             $this->_email = (string) $val;
             $this->_modified_fields['contact']['email'] = true;
@@ -175,7 +175,7 @@ class Contact extends ObjectModel
      */
     function setLastnl($val)
     {
-        if ($this->_lastnl != $val)
+        if ($this->_lastnl !== $val)
         {
             $this->_lastnl = (string) $val;
             $this->_modified_fields['contact']['lastnl'] = true;
@@ -188,7 +188,7 @@ class Contact extends ObjectModel
     function setLastnlNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_lastnl != $now)
+        if ($this->_lastnl !== $now)
         {
             $this->_lastnl = (string) $now;
             $this->_modified_fields['contact']['lastnl'] = true;

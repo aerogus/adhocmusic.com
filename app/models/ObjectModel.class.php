@@ -163,7 +163,7 @@ abstract class ObjectModel
             return new static($id);
         } else {
             $pk = '_' . static::$_pk;
-            if (static::$_instance->$pk != $id) {
+            if (static::$_instance->$pk !== $id) {
                 // on a deja une instance, mais ce n'est pas le bon id
                 static::deleteInstance();
                 new static($id);
@@ -218,7 +218,7 @@ abstract class ObjectModel
     function save()
     {
         $db = DataBase::getInstance();
- 
+
         if(!$this->getId()) // INSERT
         {
             $sql = "INSERT INTO `" . static::$_table . "` (";
@@ -448,7 +448,7 @@ abstract class ObjectModel
         foreach($data as $k => $v)
         {
             if(array_key_exists($k, $all_fields))
-            { 
+            {
                 $att = '_' . $k;
                 if($all_fields[$k] == 'phpser') {
                     $this->$att = unserialize($v);

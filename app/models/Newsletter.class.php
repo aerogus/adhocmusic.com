@@ -151,7 +151,7 @@ class Newsletter extends ObjectModel
      */
     function setTitle($val)
     {
-        if ($this->_title != $val)
+        if ($this->_title !== $val)
         {
             $this->_title = (string) $val;
             $this->_modified_fields['title'] = true;
@@ -212,7 +212,7 @@ class Newsletter extends ObjectModel
              . "FROM `" . self::$_db_table_newsletter . "` "
              . "WHERE 1 ";
 
-        if(count($tab_id) && ($tab_id[0] != 0)) {
+        if(count($tab_id) && ($tab_id[0] !== 0)) {
             $sql .= "AND `id_newsletter` IN (" . implode(',', $tab_id) . ") ";
         }
 

@@ -90,9 +90,9 @@ class FAQ extends ObjectModel
     function setIdCategory($val)
     {
         $val = (int) $val;
-        if ($this->_id_category != (int) $val)
+        if ($this->_id_category !== $val)
         {
-            $this->_id_category = (int) $val;
+            $this->_id_category = $val;
             $this->_modified_fields['id_category'] = true;
         }
     }
@@ -103,9 +103,9 @@ class FAQ extends ObjectModel
     function setQuestion($val)
     {
         $val = trim((string) $val);
-        if ($this->_question != (string) $val)
+        if ($this->_question !== $val)
         {
-            $this->_question = (string) $val;
+            $this->_question = $val;
             $this->_modified_fields['question'] = true;
         }
     }
@@ -116,7 +116,7 @@ class FAQ extends ObjectModel
     function setAnswer($val)
     {
         $val = trim((string) $val);
-        if ($this->_answer != (string) $val)
+        if ($this->_answer !== (string) $val)
         {
             $this->_answer = (string) $val;
             $this->_modified_fields['answer'] = true;

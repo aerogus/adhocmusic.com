@@ -504,7 +504,7 @@ class Event extends ObjectModel
         }
         $val = str_replace('/', '', trim($val));
 
-        if ($this->_facebook_event_id != $val)
+        if ($this->_facebook_event_id !== $val)
         {
             $this->_facebook_event_id = (string) $val;
             $this->_modified_fields['facebook_event_id'] = true;
@@ -773,7 +773,7 @@ class Event extends ObjectModel
              . "LEFT JOIN `" . self::$_db_table_membre . "` `m` ON (`e`.`id_contact` = `m`.`id_contact`) "
              . "WHERE 1 ";
 
-        if(count($tab_lieu) && ($tab_lieu[0] != 0)) {
+        if(count($tab_lieu) && ($tab_lieu[0] !== 0)) {
             $sql .= "AND (0 ";
             foreach($tab_lieu as $id_lieu) {
                 $sql .= "OR `l`.`id_lieu` = " . (int) $id_lieu." ";
@@ -781,7 +781,7 @@ class Event extends ObjectModel
             $sql .= ") ";
         }
 
-        if(count($tab_style) && ($tab_style[0] != 0)) {
+        if(count($tab_style) && ($tab_style[0] !== 0)) {
             $sql .= "AND (0 ";
             foreach($tab_style as $id_style) {
                 $sql .= "OR `es`.`id_style` = " . (int) $id_style . " ";
@@ -789,7 +789,7 @@ class Event extends ObjectModel
             $sql .= ") ";
         }
 
-        if(count($tab_groupe) && ($tab_groupe[0] != 0)) {
+        if(count($tab_groupe) && ($tab_groupe[0] !== 0)) {
             $sql .= "AND (0 ";
             foreach($tab_groupe as $id_groupe) {
                 $sql .= "OR `p`.`id_groupe` = " . (int) $id_groupe." ";
@@ -797,7 +797,7 @@ class Event extends ObjectModel
             $sql .= ") ";
         }
 
-        if(count($tab_structure) && ($tab_structure[0] != 0)) {
+        if(count($tab_structure) && ($tab_structure[0] !== 0)) {
             $sql .= "AND (0 ";
             foreach($tab_structure as $id_structure) {
                 $sql .= "OR `o`.`id_structure` = " . (int) $id_structure . " ";
@@ -805,15 +805,15 @@ class Event extends ObjectModel
             $sql .= ") ";
         }
 
-        if(count($tab_id) && ($tab_id[0] != 0)) {
+        if(count($tab_id) && ($tab_id[0] !== 0)) {
             $sql .= "AND `e`.`id_event` IN (" . implode(',', $tab_id) . ") ";
         }
 
-        if(count($tab_contact) && ($tab_contact[0] != 0)) {
+        if(count($tab_contact) && ($tab_contact[0] !== 0)) {
             $sql .= "AND `e`.`id_contact` IN (" . implode(',', $tab_contact) . ") ";
         }
 
-        if(count($tab_departement) && ($tab_departement[0] != 0)) {
+        if(count($tab_departement) && ($tab_departement[0] !== 0)) {
             $sql .= "AND (0 ";
             foreach($tab_departement as $id_departement) {
                 $sql .= "OR `l`.`id_departement` = '" . $db->escape($id_departement) . "' ";

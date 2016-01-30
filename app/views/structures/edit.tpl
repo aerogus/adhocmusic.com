@@ -4,16 +4,16 @@
 
 <form id="form-structure-edit" name="form-structure-edit" method="post" action="/structures/edit">
   <fieldset>
-  <ol>
-    <li>
-      <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la structure</div>
-      <label for="name">Nom</label>
-      <input type="text" id="name" name="name" value="{$structure->getName()|escape}" />
-    </li>
-  </ol>
+    <ul>
+      <li>
+        <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la structure</div>
+        <label for="name">Nom</label>
+        <input type="text" id="name" name="name" value="{$structure->getName()|escape}">
+      </li>
+    </ul>
   </fieldset>
-  <input id="form-structure-edit-submit" name="form-structure-edit-submit" type="submit" value="Modifier" />
-  <input type="hidden" name="id" value="{$structure->getId()|escape}" />
+  <input id="form-structure-edit-submit" name="form-structure-edit-submit" type="submit" value="Modifier">
+  <input type="hidden" name="id" value="{$structure->getId()|escape}">
 </form>
 
 {include file="common/boxend.tpl"}

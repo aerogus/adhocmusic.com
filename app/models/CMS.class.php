@@ -209,7 +209,7 @@ class CMS extends ObjectModel
     function setAlias($val)
     {
         $val = trim((string) $val);
-        if ($this->_alias != $val)
+        if ($this->_alias !== $val)
         {
             $this->_alias = (string) $val;
             $this->_modified_fields['alias'] = true;
@@ -222,7 +222,7 @@ class CMS extends ObjectModel
     function setTitle($val)
     {
         $val = trim((string) $val);
-        if ($this->_title != $val)
+        if ($this->_title !== $val)
         {
             $this->_title = (string) $val;
             $this->_modified_fields['title'] = true;
@@ -234,7 +234,7 @@ class CMS extends ObjectModel
      */
     function setCreatedOn($val)
     {
-        if ($this->_created_on != $val)
+        if ($this->_created_on !== $val)
         {
             $this->_created_on = (string) $val;
             $this->_modified_fields['created_on'] = true;
@@ -247,7 +247,7 @@ class CMS extends ObjectModel
     function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_created_on != $now)
+        if ($this->_created_on !== $now)
         {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
@@ -259,7 +259,7 @@ class CMS extends ObjectModel
      */
     function setModifiedOn($val)
     {
-        if ($this->_modified_on != $val)
+        if ($this->_modified_on !== $val)
         {
             $this->_modified_on = (string) $val;
             $this->_modified_fields['modified_on'] = true;
@@ -272,7 +272,7 @@ class CMS extends ObjectModel
     function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_modified_on != $now)
+        if ($this->_modified_on !== $now)
         {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
@@ -285,7 +285,7 @@ class CMS extends ObjectModel
     function setMenuselected($val)
     {
         $val = trim((string) $val);
-        if ($this->_menuselected != $val)
+        if ($this->_menuselected !== $val)
         {
             $this->_menuselected = (string) $val;
             $this->_modified_fields['menuselected'] = true;
@@ -298,7 +298,7 @@ class CMS extends ObjectModel
     function setBreadcrumb($val)
     {
         $val = (array) $val;
-        if ($this->_breadcrumb != $val)
+        if ($this->_breadcrumb !== $val)
         {
             $this->_breadcrumb = (array) $val;
             $this->_modified_fields['breadcrumb'] = true;
@@ -311,7 +311,7 @@ class CMS extends ObjectModel
     function setContent($val)
     {
         $val = trim((string) $val);
-        if ($this->_content != $val)
+        if ($this->_content !== $val)
         {
             $this->_content = (string) $val;
             $this->_modified_fields['content'] = true;
@@ -324,7 +324,7 @@ class CMS extends ObjectModel
     function setOnline($val)
     {
         $val = (bool) $val;
-        if ($this->_online != $val)
+        if ($this->_online !== $val)
         {
             $this->_online = (bool) $val;
             $this->_modified_fields['online'] = true;
@@ -337,7 +337,7 @@ class CMS extends ObjectModel
     function setAuth($val)
     {
         $val = (int) $val;
-        if ($this->_auth != $val)
+        if ($this->_auth !== $val)
         {
             $this->_auth = (int) $val;
             $this->_modified_fields['auth'] = true;

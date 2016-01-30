@@ -713,7 +713,7 @@ class Groupe extends ObjectModel
      */
     function setStyle($val)
     {
-        if ($this->_style != $val)
+        if ($this->_style !== $val)
         {
             $this->_style = (string) $val;
             $this->_modified_fields['style'] = true;
@@ -848,7 +848,7 @@ class Groupe extends ObjectModel
      */
     function setVisite($val)
     {
-        if ($this->_visite != $val)
+        if ($this->_visite !== $val)
         {
             $this->_visite = (string) $val;
             $this->_modified_fields['visite'] = true;
@@ -1295,7 +1295,7 @@ class Groupe extends ObjectModel
              . "FROM `" . self::$_table . "` `g` "
              . "WHERE 1 ";
 
-        if(count($tab_id) && ($tab_id[0] != 0)) {
+        if(count($tab_id) && ($tab_id[0] !== 0)) {
             $sql .= "AND `g`.`id_groupe` IN (" . implode(',', $tab_id) . ") ";
         }
 

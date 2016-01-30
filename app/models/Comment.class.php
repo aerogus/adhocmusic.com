@@ -273,7 +273,7 @@ class Comment extends ObjectModel
     function setType($val)
     {
         $val = trim((string) $val);
-        if ($this->_type != $val)
+        if ($this->_type !== $val)
         {
             $this->_type = (string) $val;
             $this->_modified_fields['type'] = true;
@@ -286,7 +286,7 @@ class Comment extends ObjectModel
     function setIdContent($val)
     {
         $val = (int) $val;
-        if ($this->_id_content != $val)
+        if ($this->_id_content !== $val)
         {
             $this->_id_content = (int) $val;
             $this->_modified_fields['id_content'] = true;
@@ -298,7 +298,7 @@ class Comment extends ObjectModel
      */
     function setCreatedOn($val)
     {
-        if ($this->_created_on != $val)
+        if ($this->_created_on !== $val)
         {
             $this->_created_on = (string) $val;
             $this->_modified_fields['created_on'] = true;
@@ -311,7 +311,7 @@ class Comment extends ObjectModel
     function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_created_on != $now)
+        if ($this->_created_on !== $now)
         {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
@@ -323,7 +323,7 @@ class Comment extends ObjectModel
      */
     function setModifiedOn($val)
     {
-        if ($this->_modified_on != $val)
+        if ($this->_modified_on !== $val)
         {
             $this->_modified_on = (string) $val;
             $this->_modified_fields['modified_on'] = true;
@@ -336,7 +336,7 @@ class Comment extends ObjectModel
     function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_modified_on != $now)
+        if ($this->_modified_on !== $now)
         {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
@@ -349,7 +349,7 @@ class Comment extends ObjectModel
     function setOnline($val)
     {
         $val = (bool) $val;
-        if ($this->_online != $val)
+        if ($this->_online !== $val)
         {
             $this->_online = (bool) $val;
             $this->_modified_fields['online'] = true;
@@ -362,7 +362,7 @@ class Comment extends ObjectModel
     function setIdContact($val)
     {
         $val = (int) $val;
-        if ($this->_id_contact != $val)
+        if ($this->_id_contact !== $val)
         {
             $this->_id_contact = (int) $val;
             $this->_modified_fields['id_contact'] = true;
@@ -375,7 +375,7 @@ class Comment extends ObjectModel
     function setPseudo($val)
     {
         $val = trim((string) $val);
-        if ($this->_pseudo != $val)
+        if ($this->_pseudo !== $val)
         {
             $this->_pseudo = (string) $val;
             $this->_modified_fields['pseudo'] = true;
@@ -388,7 +388,7 @@ class Comment extends ObjectModel
     function setEmail($val)
     {
         $val = trim((string) $val);
-        if ($this->_email != $val)
+        if ($this->_email !== $val)
         {
             $this->_email = (string) $val;
             $this->_modified_fields['email'] = true;
@@ -401,7 +401,7 @@ class Comment extends ObjectModel
     function setText($val)
     {
         $val = trim((string) $val);
-        if ($this->_text != $val)
+        if ($this->_text !== $val)
         {
             $this->_text = (string) $val;
             $this->_modified_fields['text'] = true;
@@ -680,24 +680,24 @@ class Comment extends ObjectModel
 
         foreach($emails as $email)
         {
-            if($email == 'guillaume.seznec@gmail.com')
+            if($email === 'guillaume.seznec@gmail.com')
             {
-            if(Email::validate($email))
-            {
-    	        Email::send(
-        	        $email,
-            	    $subject,
-                	'new-commentaire',
-           			array(
-           			    'subject' => $subject,
-           			    'title'   => $title,
-           			    'pseudo'  => $this->getPseudo(),
-           			    'date'    => date('Y-m-d H:i:s'),
-           			    'url'     => $url,
-           			    'text'    => $this->getText(),
-           	   	    )
-            	);
-            }
+                if(Email::validate($email))
+                {
+          	        Email::send(
+              	        $email,
+                  	    $subject,
+                      	'new-commentaire',
+                   			array(
+                   			    'subject' => $subject,
+                   			    'title'   => $title,
+                   			    'pseudo'  => $this->getPseudo(),
+                   			    'date'    => date('Y-m-d H:i:s'),
+                   			    'url'     => $url,
+                   			    'text'    => $this->getText(),
+                 	   	  )
+                  	);
+                }
             }
         }
 

@@ -37,16 +37,31 @@ function adhoc_get_env()
     }
 }
 
+function is_ssl()
+{
+    return (bool) (
+        !empty($_SERVER['HTTPS'])
+     || !empty($_SERVER['REDIRECT_HTTPS'])
+     || ($_SERVER['REQUEST_SCHEME'] === 'https')
+    );
+}
+
 if(ENV === 'PROD') {
 
-    define('_DB_HOST_',        'localhost');
-    define('_DB_USER_',        'adhocmusic');
-    define('_DB_PASSWORD_',    'kK2972Wd');
-    define('_DB_DATABASE_',    'adhocmusic');
+    define('_DB_HOST_',     'localhost');
+    define('_DB_USER_',     'adhocmusic');
+    define('_DB_PASSWORD_', 'kK2972Wd');
+    define('_DB_DATABASE_', 'adhocmusic');
 
-    define('HOME_URL',         'http://www.adhocmusic.com');
-    define('CACHE_URL',        'http://www.adhocmusic.com');
-    define('MEDIA_URL',        'http://www.adhocmusic.com/media');
+    if(is_ssl()) {
+        define('HOME_URL',  'https://www.adhocmusic.com');
+        define('CACHE_URL', 'https://www.adhocmusic.com');
+        define('MEDIA_URL', 'https://www.adhocmusic.com/media');
+    } else {
+        define('HOME_URL',  'http://www.adhocmusic.com');
+        define('CACHE_URL', 'http://www.adhocmusic.com');
+        define('MEDIA_URL', 'http://www.adhocmusic.com/media');
+    }
 
     ini_set('display_startup_errors', 0);
     ini_set('display_errors', 1);
@@ -59,9 +74,15 @@ if(ENV === 'PROD') {
     define('_DB_PASSWORD_',    'changeme');
     define('_DB_DATABASE_',    'adhoc');
 
-    define('HOME_URL',         'http://www.adhocmusic.localhost');
-    define('CACHE_URL',        'http://www.adhocmusic.localhost');
-    define('MEDIA_URL',        'http://www.adhocmusic.localhost/media');
+    if(is_ssl()) {
+        define('HOME_URL',  'https://www.adhocmusic.localhost');
+        define('CACHE_URL', 'https://www.adhocmusic.localhost');
+        define('MEDIA_URL', 'https://www.adhocmusic.localhost/media');
+    } else {
+        define('HOME_URL',  'http://www.adhocmusic.localhost');
+        define('CACHE_URL', 'http://www.adhocmusic.localhost');
+        define('MEDIA_URL', 'http://www.adhocmusic.localhost/media');
+    }
 
     ini_set('display_startup_errors', 1);
     ini_set('display_errors', 1);

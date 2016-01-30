@@ -210,7 +210,7 @@ class AdHocSmarty extends Smarty
             $link_page = '';
         }
 
-        if (array_key_exists('link_base_params', $params) && $params['link_base_params'] != '') {
+        if (array_key_exists('link_base_params', $params) && $params['link_base_params'] !== '') {
             $link_base_params = '?'.$params['link_base_params'].'&amp;';
         } else {
             $link_base_params = '?';
@@ -364,7 +364,7 @@ class AdHocSmarty extends Smarty
         }
 
         // blancs de fin de mois
-        while((($nb_days_in_month + $blank_days) % 7) != 0 ) {
+        while((($nb_days_in_month + $blank_days) % 7) !== 0 ) {
             $cal[$row][$trow]['num'] = null;
             $cal[$row][$trow]['link'] = null;
             $cal[$row][$trow]['title'] = null;

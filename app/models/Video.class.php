@@ -511,27 +511,27 @@ class Video extends Media
             $sql .= "AND `v`.`online` = " . $online . " ";
         }
 
-        if(count($tab_groupe) && ($tab_groupe[0] != 0)) {
+        if(count($tab_groupe) && ($tab_groupe[0] !== 0)) {
             $sql .= "AND `v`.`id_groupe` IN (" . implode(',', $tab_groupe) . ") ";
         }
 
-        if(count($tab_structure) && ($tab_structure[0] != 0)) {
+        if(count($tab_structure) && ($tab_structure[0] !== 0)) {
             $sql .= "AND `v`.`id_structure` IN (" . implode(',', $tab_structure) . ") ";
         }
 
-        if(count($tab_lieu) && ($tab_lieu[0] != 0)) {
+        if(count($tab_lieu) && ($tab_lieu[0] !== 0)) {
             $sql .= "AND `v`.`id_lieu` IN (" . implode(',', $tab_lieu) . ") ";
         }
 
-        if(count($tab_event) && ($tab_event[0] != 0)) {
+        if(count($tab_event) && ($tab_event[0] !== 0)) {
             $sql .= "AND `v`.`id_event` IN (" . implode(',', $tab_event) . ") ";
         }
 
-        if(count($tab_id) && ($tab_id[0] != 0)) {
+        if(count($tab_id) && ($tab_id[0] !== 0)) {
             $sql .= "AND `v`.`id_video` IN (" . implode(',', $tab_id) . ") ";
         }
 
-        if(count($tab_contact) && ($tab_contact[0] != 0)) {
+        if(count($tab_contact) && ($tab_contact[0] !== 0)) {
             $sql .= "AND `v`.`id_contact` IN (" . implode(',', $tab_contact) . ") ";
         }
 

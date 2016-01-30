@@ -464,7 +464,7 @@ class DataBase
         if (empty($dbAndTableName)) {
             throw new AdHocException('Bad $dbAndTableName in '.__FUNCTION__);
         }
-        if ('`' != $dbAndTableName[0]) {
+        if ('`' !== $dbAndTableName[0]) {
             $dbAndTableName = '`'.$dbAndTableName.'`';
         }
 

@@ -282,7 +282,7 @@ class Featured extends ObjectModel
     function setLink($val)
     {
         $val = trim((string) $val);
-        if ($this->_link != $val)
+        if ($this->_link !== $val)
         {
             $this->_link = (string) $val;
             $this->_modified_fields['link'] = true;
@@ -295,7 +295,7 @@ class Featured extends ObjectModel
     function setOnline($val)
     {
         $val = (bool) $val;
-        if ($this->_online != $val)
+        if ($this->_online !== $val)
         {
             $this->_online = (bool) $val;
             $this->_modified_fields['online'] = true;
