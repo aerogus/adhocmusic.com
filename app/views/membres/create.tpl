@@ -8,7 +8,7 @@
 
 {if !empty($create)}
 
-<div class="success">Votre compte AD'HOC a bien été créé ! Regardez votre boite aux lettres électronique, elle vous confirme votre inscription, et un mot de passe vous a été attribué.<br />
+<div class="success">Votre compte AD'HOC a bien été créé ! Regardez votre boite aux lettres électronique, elle vous confirme votre inscription, et un mot de passe vous a été attribué.<br>
 Vous pourrez le modifier le modifier dans votre "Tableau de bord" / "Mes Infos Persos" / "Modifier le mot de passe"</div>
 
 <h3>Et Maintenant ?</h3>
@@ -40,7 +40,7 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
   <li>Inscrire et gérer sa fiche groupe</li>
 </ul>
 
-<hr />
+<hr>
 
 <form id="form-member-create" name="form-member-create" method="post" action="/membres/create">
   <ul>
@@ -102,7 +102,7 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
     </li>
     <li>
       <label for="mailing">Newsletter</label>
-      <span><input id="mailing" name="mailing" type="checkbox"{if !empty($data.mailing)} checked="checked"{/if} /> oui, je désire recevoir la lettre d'information (4 à 5 par an).</span>
+      <span><input id="mailing" name="mailing" type="checkbox"{if !empty($data.mailing)} checked="checked"{/if}> oui, je désire recevoir la lettre d'information (4 à 5 par an).</span>
     </li>
   </ul>
   <input type="hidden" name="csrf" value="{$data.csrf}">

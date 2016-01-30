@@ -40,12 +40,12 @@
       {if !empty($membre)}
       <li>
         <span id="created_on" style="float: right;"><a href="{$membre->getUrl()}">{$membre->getPseudo()|escape}</a> le {$audio->getCreatedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
-        <label for="created_on"><img src="/img/icones/upload.png" alt="" /> Envoyé par</label>
+        <label for="created_on"><img src="/img/icones/upload.png" alt=""> Envoyé par</label>
       </li>
       {/if}
       <li>
         <span id="modified_on" style="float: right;">{$audio->getModifiedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
-        <label for="modified_on"><img src="/img/icones/eye.png" alt="" /> Modifié le</label>
+        <label for="modified_on"><img src="/img/icones/eye.png" alt=""> Modifié le</label>
       </li>
       <li>
         <span id="mp3" style="float: right;">{audio_player id=$audio->getId()}</span>
@@ -53,8 +53,8 @@
       </li>
     </ol>
   </fieldset>
-  <input id="form-audio-delete-submit" name="form-audio-delete-submit" class="button" type="submit" value="Supprimer" />
-  <input type="hidden" name="id" value="{$audio->getId()|escape}" />
+  <input id="form-audio-delete-submit" name="form-audio-delete-submit" class="button" type="submit" value="Supprimer">
+  <input type="hidden" name="id" value="{$audio->getId()|escape}">
 </form>
 
 {/if}

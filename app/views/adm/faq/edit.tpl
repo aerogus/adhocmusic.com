@@ -3,7 +3,7 @@
 {include file="common/boxstart.tpl" boxtitle="Foire aux questions"}
 
 <form id="form-faq-edit" name="form-faq-edit" action="/adm/faq/edit" method="post">
-  <ol>
+  <ul>
     <li>
       <label for="id_category">Catégorie</label>
       <select name="id_category">
@@ -20,9 +20,9 @@
       <label for="answer">Réponse</label>
       <textarea id="answer" name="answer">{$faq->getAnswer()|escape}</textarea>
     </li>
-  </ol>
-  <input type="hidden" name="id_faq" value="{$faq->getId()}" />
-  <input id="form-faq-edit-submit" name="form-faq-edit-submit" type="submit" />
+  </ul>
+  <input type="hidden" name="id_faq" value="{$faq->getId()}">
+  <input id="form-faq-edit-submit" name="form-faq-edit-submit" type="submit">
 </form>
 
 {include file="common/boxend.tpl"}

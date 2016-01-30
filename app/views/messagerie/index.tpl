@@ -47,11 +47,11 @@ function deleteMessage(id, mode)
   </tr>
   {foreach from=$inbox key=cpt item=msg}
   <tr class="{if $cpt is odd}odd{else}even{/if}">
-    <td><img src="/img/icones/{if !empty($msg.read)}email_open.png{else}email.png{/if}" alt="" /></td>
+    <td><img src="/img/icones/{if !empty($msg.read)}email_open.png{else}email.png{/if}" alt=""></td>
     <td><a href="/messagerie/write?pseudo={$msg.pseudo|escape}">{$msg.pseudo|escape}</a></td>
     <td>{$msg.date|date_format:'%d/%m/%Y à %H:%M'}</td>
     <td><a href="/messagerie/read/{$msg.id|escape}">{$msg.text|truncate:40|escape}</a></td>
-    <td><img src="/img/icones/delete.png" class="del-msg-to" id="del-msg-to-{$msg.id|escape}" alt="Effacer" onclick="deleteMessage({$msg.id|escape}, 'to');" /></td>
+    <td><img src="/img/icones/delete.png" class="del-msg-to" id="del-msg-to-{$msg.id|escape}" alt="Effacer" onclick="deleteMessage({$msg.id|escape}, 'to');"></td>
   </tr>
   {/foreach}
 </table>
@@ -68,11 +68,11 @@ function deleteMessage(id, mode)
   </tr>
   {foreach from=$outbox key=cpt item=msg}
   <tr class="{if $cpt is odd}odd{else}even{/if}">
-    <td><img src="/img/icones/{if !empty($msg.read)}email_open.png{else}email.png{/if}" alt="" /></td>
+    <td><img src="/img/icones/{if !empty($msg.read)}email_open.png{else}email.png{/if}" alt=""></td>
     <td><a href="/messagerie/write?pseudo={$msg.pseudo|escape}">{$msg.pseudo|escape}</a></td>
     <td>{$msg.date|date_format:'%d/%m/%Y à %H:%M'}</td>
     <td><a href="/messagerie/read/{$msg.id|escape}">{$msg.text|truncate:40|escape}</a></td>
-    <td><img src="/img/icones/delete.png" class="del-msg-from" id="del-msg-from-{$msg.id|escape}" alt="Effacer" onclick="deleteMessage({$msg.id|escape}, 'from');" /></td>
+    <td><img src="/img/icones/delete.png" class="del-msg-from" id="del-msg-from-{$msg.id|escape}" alt="Effacer" onclick="deleteMessage({$msg.id|escape}, 'from');"></td>
   </tr>
   {/foreach}
 </table>
@@ -83,7 +83,7 @@ function deleteMessage(id, mode)
 <div id="right">
 {include file="common/boxstart.tpl" boxtitle="Ecrire à :"}
 <form action="/messagerie/write" method="get">
-  <input type="text" id="pseudo" name="pseudo" value="" autocomplete="off" />
+  <input type="text" id="pseudo" name="pseudo" value="" autocomplete="off">
   <div id="suggests" style="padding-left: 15px;"></div>
 </form>
 {include file="common/boxend.tpl"}

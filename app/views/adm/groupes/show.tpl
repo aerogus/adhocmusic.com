@@ -66,15 +66,15 @@
   </tr>
   <tr>
     <th>Photo</th>
-    <td>{if $groupe->getPhoto()}<img src="{$groupe->getPhoto()}" alt="" />{/if}</td>
+    <td>{if $groupe->getPhoto()}<img src="{$groupe->getPhoto()}" alt="">{/if}</td>
   </tr>
   <tr>
     <th>Logo</th>
-    <td>{if $groupe->getLogo()}<img src="{$groupe->getLogo()}" alt="" />{/if}</td>
+    <td>{if $groupe->getLogo()}<img src="{$groupe->getLogo()}" alt="">{/if}</td>
   </tr>
   <tr>
     <th>Mini Photo</th>
-    <td><img src="{$groupe->getMiniPhoto()}" alt="" /></td>
+    <td><img src="{$groupe->getMiniPhoto()}" alt=""></td>
   </tr>
   <tr>
     <th>Le Mot AD'HOC</th>

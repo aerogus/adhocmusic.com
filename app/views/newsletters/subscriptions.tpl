@@ -7,7 +7,7 @@
   <ol>
     <li>
       <label for="email">Email</label>
-      <input type="text" id="email" name="email" value="{$email}" />
+      <input type="text" id="email" name="email" value="{$email}">
     </li>
     <li>
       <label for="action">Action</label>
@@ -17,7 +17,7 @@
       </select>
     </li>
     <li>
-      <input type="submit" id="form-newsletter-submit" name="form-newsletter-submit" value="Valider" />
+      <input type="submit" id="form-newsletter-submit" name="form-newsletter-submit" value="Valider">
     </li>
   </ol>
 </form>

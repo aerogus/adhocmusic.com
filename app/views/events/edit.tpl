@@ -47,12 +47,12 @@
     <ol>
       <li>
         <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez indiquer un titre pour l'événement.</div>
-        <input id="name" name="name" style="float: right; width: 360px;" value="{$event->getName()|escape}" />
+        <input id="name" name="name" style="float: right; width: 360px;" value="{$event->getName()|escape}">
         <label for="name">Titre</label>
       </li>
       <li>
         <span style="float: right;">
-          <input type="text" id="date" name="date" value="{$event->getDate()|date_format:'%d/%m/%Y'}" style="width: 100px; background: url(/img/icones/event.png) no-repeat right top" />
+          <input type="text" id="date" name="date" value="{$event->getDate()|date_format:'%d/%m/%Y'}" style="width: 100px; background: url(/img/icones/event.png) no-repeat right top">
           <select id="hourminute" name="hourminute">{html_input_date_hourminute hour=$event->getHour() minute=$event->getMinute()}</select>
         </span>
         <label for="date">Date</label>
@@ -69,15 +69,15 @@
       </li>
       <li>
         <span style="float: right;">
-        <input type="file" id="flyer" name="flyer" value="{$data.file|escape}" />
+        <input type="file" id="flyer" name="flyer" value="{$data.file|escape}">
         {if $event->getFullFlyerUrl()}
-        <br /><img src="{$event->getFlyer400Url()}" alt="" />
+        <br><img src="{$event->getFlyer400Url()}" alt="">
         {/if}
         </span>
         <label for="flyer">Flyer (.jpg)</label>
       </li>
       <li>
-        <input type="text" id="flyer_url" name="flyer_url" style="float: right;" value="{$data.flyer_url|escape}" />
+        <input type="text" id="flyer_url" name="flyer_url" style="float: right;" value="{$data.flyer_url|escape}">
         <label for="flyer_url">ou Flyer (url)</label>
       </li>
       {*
@@ -134,7 +134,7 @@
         <label for="structure">Organisateur(s)</label>
       </li>
       <li>
-        <input type="checkbox" id="online" name="online" {if $event->getOnline()}checked="checked"{/if} style="float: right;" />
+        <input type="checkbox" id="online" name="online" {if $event->getOnline()}checked="checked"{/if} style="float: right;">
         <label for="online">Afficher</label>
       </li>
     </ol>
@@ -145,14 +145,14 @@
     <ol>
       <li>
         <span style="float: right;">
-          http://www.facebook.com/events/<input id="facebook_event_id" name="facebook_event_id" style="width: 360px;" value="{$event->getFacebookEventId()|escape}" />/
+          http://www.facebook.com/events/<input id="facebook_event_id" name="facebook_event_id" style="width: 360px;" value="{$event->getFacebookEventId()|escape}">/
         </span>
         <label for="facebook_event_id">n° Evénement (si déjà existant sur Facebook)</label>
       </li>
     </ol>
   </fieldset>
-  <input id="form-event-edit-submit" name="form-event-edit-submit" class="button" type="submit" value="Modifier" />
-  <input type="hidden" name="id" value="{$data.id|escape}" />
+  <input id="form-event-edit-submit" name="form-event-edit-submit" class="button" type="submit" value="Modifier">
+  <input type="hidden" name="id" value="{$data.id|escape}">
 </form>
 
 {include file="common/boxend.tpl"}

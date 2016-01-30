@@ -11,7 +11,7 @@
   <fieldset>
     <ol>
       <li>
-        <img src="{$photo->getThumb400Url()}" alt="" />
+        <img src="{$photo->getThumb400Url()}" alt="">
       </li>
       <li>
         Titre :
@@ -41,8 +41,8 @@
       {/if}
     </ol>
   </fieldset>
-  <input id="form-photo-delete-submit" name="form-photo-delete-submit" type="submit" class="button" value="Supprimer" />
-  <input type="hidden" name="id" value="{$photo->getId()}" />
+  <input id="form-photo-delete-submit" name="form-photo-delete-submit" type="submit" class="button" value="Supprimer">
+  <input type="hidden" name="id" value="{$photo->getId()}">
 </form>
 {include file="common/boxend.tpl"}
 

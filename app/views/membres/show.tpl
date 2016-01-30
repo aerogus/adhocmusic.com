@@ -9,13 +9,13 @@
 {include file="common/boxstart.tpl" boxtitle="Profil de {$membre->getPseudo()|escape}"}
 
 {if $membre->getAvatar()}
-<img src="{$membre->getAvatar()}" alt="{$membre->getPseudo()|escape}" style="float: right;" />
+<img src="{$membre->getAvatar()}" alt="{$membre->getPseudo()|escape}" style="float: right;">
 {/if}
 
 <table>
   <tr>
     <td>Pseudo :</td>
-    <td><strong>{$membre->getPseudo()|escape}</strong> <a href="/messagerie/write?pseudo={$membre->getPseudo()|escape}"><img src="/img/icones/email_write.png" alt="" />Lui Ecrire</a></td>
+    <td><strong>{$membre->getPseudo()|escape}</strong> <a href="/messagerie/write?pseudo={$membre->getPseudo()|escape}"><img src="/img/icones/email_write.png" alt="">Lui Ecrire</a></td>
   </tr>
   <tr>
     <td>Site :</td>
@@ -60,7 +60,7 @@
     <td>
     {foreach from=$photos item=photo}
     <div class="thumb-80">
-      <a href="{$photo.url}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}" /></a>
+      <a href="{$photo.url}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}"></a>
       <a class="overlay-80 overlay-photo-80" href="{$photo.url}?from=profil" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}"></a>
     </div>
     {/foreach}
@@ -71,7 +71,7 @@
   {if $membre->getFacebookProfileId()}
   <tr>
     <td>Facebook :</td>
-    <td><a href="http://www.facebook.com/profile.php?id={$membre->getFacebookProfileId()}"><img src="/img/facebook.gif" alt="" /></a></td>
+    <td><a href="http://www.facebook.com/profile.php?id={$membre->getFacebookProfileId()}"><img src="/img/facebook.gif" alt=""></a></td>
   </tr>
   {/if}
 

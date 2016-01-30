@@ -49,7 +49,7 @@
     {if !empty($lieux)}
     <ul>
     {foreach from=$lieux item=lieu}
-      <li><a title="Se désabonner de ce lieu" href="/alerting/unsub?type=l&id_content={$lieu.id_lieu}"><img src="/img/icones/delete.png" alt="" /></a> <a href="/lieux/show/{$lieu.id_lieu}">{$lieu.name}</a></li>
+      <li><a title="Se désabonner de ce lieu" href="/alerting/unsub?type=l&id_content={$lieu.id_lieu}"><img src="/img/icones/delete.png" alt=""></a> <a href="/lieux/show/{$lieu.id_lieu}">{$lieu.name}</a></li>
     {/foreach}
     </ul>
     {else}

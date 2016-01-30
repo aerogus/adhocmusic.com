@@ -140,7 +140,7 @@ $(function() {
   <ol>
     <li>
       <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir le nom du lieu</div>
-      <input id="name" name="name" type="text" size="50" value="{$lieu->getName()|escape}" style="float: right;" />
+      <input id="name" name="name" type="text" size="50" value="{$lieu->getName()|escape}" style="float: right;">
       <label for="name">Nom (*)</label>
     </li>
     <li>
@@ -159,8 +159,8 @@ $(function() {
       <label for="text">Description (*)</label>
     </li>
     <li>
-      <img src="{$lieu->getPhoto()}" alt="" style="float: right;" />
-      <input id="photo" name="photo" type="file" style="float: right;" />
+      <img src="{$lieu->getPhoto()}" alt="" style="float: right;">
+      <input id="photo" name="photo" type="file" style="float: right;">
       <label for="photo">Photo (format .jpg)</label>
     </li>
     <li>
@@ -196,42 +196,42 @@ $(function() {
     </li>
     <li>
       <div class="error" id="error_address"{if empty($error_address)} style="display: none"{/if}>Vous devez préciser l'adresse</div>
-      <input id="address" name="address" type="text" size="50" value="{$lieu->getAddress()|escape}" style="float: right;" />
+      <input id="address" name="address" type="text" size="50" value="{$lieu->getAddress()|escape}" style="float: right;">
       <label for="address">Adresse (*)</label>
     </li>
     <li>
       <div class="error" id="error_tel"{if empty($error_tel)} style="display: none"{/if}>Vous devez saisir le numéro de téléphone</div>
-      <input id="tel" name="tel" type="text" size="50" value="{$lieu->getTel()|escape}" style="float: right;" />
+      <input id="tel" name="tel" type="text" size="50" value="{$lieu->getTel()|escape}" style="float: right;">
       <label for="tel">Téléphone</label>
     </li>
     <li>
       <div class="error" id="error_fax"{if empty($error_fax)} style="display: none"{/if}>Vous devez saisir le numéro de fax</div>
-      <input id="fax" name="fax" type="text" size="50" value="{$lieu->getFax()|escape}" style="float: right;" />
+      <input id="fax" name="fax" type="text" size="50" value="{$lieu->getFax()|escape}" style="float: right;">
       <label for="fax">Fax</label>
     </li>
     <li>
       <div class="error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez saisir l'email de contact</div>
-      <input id="email" name="email" type="email" size="50" value="{$lieu->getEmail()|escape}" style="float: right;" />
+      <input id="email" name="email" type="email" size="50" value="{$lieu->getEmail()|escape}" style="float: right;">
       <label for="email">Email</label>
     </li>
     <li>
       <div class="error" id="error_site"{if empty($error_site)} style="display: none"{/if}>Vous devez saisir le site internet</div>
-      <input id="site" name="site" type="text" size="50" value="{$lieu->getSite()|escape}" style="float: right;" />
+      <input id="site" name="site" type="text" size="50" value="{$lieu->getSite()|escape}" style="float: right;">
       <label for="site">Site</label>
     </li>
     <li>
       <div class="error" id="error_lat"{if empty($error_lat)} style="display: none"{/if}>Vous devez préciser la latitude</div>
-      <input id="lat" name="lat" type="text" size="50" value="{$lieu->getLat()|escape}" style="float: right;" />
+      <input id="lat" name="lat" type="text" size="50" value="{$lieu->getLat()|escape}" style="float: right;">
       <label for="lat">Latitude</label>
     </li>
     <li>
       <div class="error" id="error_lng"{if empty($error_lng)} style="display: none"{/if}>Vous devez préciser la longitude</div>
-      <input id="lng" name="lng" type="text" size="50" value="{$lieu->getLng()|escape}" style="float: right;" />
+      <input id="lng" name="lng" type="text" size="50" value="{$lieu->getLng()|escape}" style="float: right;">
       <label for="lng">Longitude</label>
     </li>
   </ol>
-  <input id="form-lieu-edit-submit" name="form-lieu-edit-submit" class="button" type="submit" value="Modifier" />
-  <input type="hidden" name="id" value="{$lieu->getId()|escape}" />
+  <input id="form-lieu-edit-submit" name="form-lieu-edit-submit" class="button" type="submit" value="Modifier">
+  <input type="hidden" name="id" value="{$lieu->getId()|escape}">
 </form>
 
 {/if}

@@ -10,7 +10,7 @@
     <option value="{$action_id|escape}">{$action_lib|escape}</option>
     {/foreach}
   </select>
-  <input type="submit" value="OK" />
+  <input type="submit" value="OK">
 </form>
 
 <table>

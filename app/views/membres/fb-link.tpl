@@ -11,13 +11,13 @@
 <p class="validation">Voulez vous lier votre compte AD'HOC à ce profil Facebook ?</p>
 
 <p align="center">
-<img src="http://graph.facebook.com/{$fb_me->id}/picture" alt="" /><br />
-Nom : <strong>{$fb_me->last_name|escape}</strong><br />
+<img src="http://graph.facebook.com/{$fb_me->id}/picture" alt=""><br>
+Nom : <strong>{$fb_me->last_name|escape}</strong><br>
 Prénom : <strong>{$fb_me->first_name|escape}</strong>
 </p>
 
 <form id="form-fb-link" name="form-fb-link" action="/membres/fb-link" method="post">
-  <input type="submit" class="button" id="form-fb-link-submit" name="form-fb-link-submit" value="Lier" />
+  <input type="submit" class="button" id="form-fb-link-submit" name="form-fb-link-submit" value="Lier">
 </form>
 
 {else}

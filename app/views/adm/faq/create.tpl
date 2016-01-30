@@ -3,7 +3,7 @@
 {include file="common/boxstart.tpl" boxtitle="Foire aux questions"}
 
 <form id="form-faq-create" name="form-faq-create" action="/adm/faq/create" method="post">
-  <ol>
+  <ul>
     <li>
       <label for="id_category">Catégorie</label>
       <select name="id_category">
@@ -20,8 +20,8 @@
       <label for="answer">Réponse</label>
       <textarea id="answer" name="answer"></textarea>
     </li>
-  </ol>
-  <input id="form-faq-create-submit" name="form-faq-create-submit" type="submit" />
+  </ul>
+  <input id="form-faq-create-submit" name="form-faq-create-submit" type="submit">
 </form>
 
 {include file="common/boxend.tpl"}

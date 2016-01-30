@@ -25,23 +25,23 @@
 {if !empty($groupe)}
 <div class="metatop">Groupe</div>
 <div class="metacontent">
-  <a href="{$groupe->getUrl()}"><img style="float: right;" src="{$groupe->getMiniPhoto()}" alt="" /><strong>{$groupe->getName()|escape}</strong></a>
+  <a href="{$groupe->getUrl()}"><img style="float: right;" src="{$groupe->getMiniPhoto()}" alt=""><strong>{$groupe->getName()|escape}</strong></a>
 </div>
 <br style="clear: both;">
 {/if}
 {if !empty($event)}
 <div class="metatop">Evénement</div>
 <div class="metacontent">
-  <a href="{$event->getUrl()}"><img style="float: right;" src="{$event->getFlyer100Url()}" alt="" /><strong>{$event->getName()|escape}</strong></a><br />{$event->getDate()|date_format:'%d/%m/%Y'}
+  <a href="{$event->getUrl()}"><img style="float: right;" src="{$event->getFlyer100Url()}" alt=""><strong>{$event->getName()|escape}</strong></a><br>{$event->getDate()|date_format:'%d/%m/%Y'}
 </div>
 <br style="clear: both;">
 {/if}
 {if !empty($lieu)}
 <div class="metatop">Lieu</div>
 <div class="metacontent">
-  <a href="{$lieu->getUrl()}"><img style="float: right;" src="{$lieu->getMapUrl('64x64')}" alt="" /><strong>{$lieu->getName()|escape}</strong></a><br />{$lieu->getAddress()}<br />{$lieu->getCp()} {$lieu->getCity()|escape}
+  <a href="{$lieu->getUrl()}"><img style="float: right;" src="{$lieu->getMapUrl('64x64')}" alt=""><strong>{$lieu->getName()|escape}</strong></a><br>{$lieu->getAddress()}<br>{$lieu->getCp()} {$lieu->getCity()|escape}
 </div>
-<br style="clear: both;" />
+<br style="clear: both;">
 {/if}
 {if !empty($next) && !empty($prev)}
 <div class="metatop">Album</div>
@@ -88,7 +88,7 @@ $(function() {
   self.value = self.text();
   self.bind('click', function() {
     self
-      .html('<input style="width: 300px; font-size: 9px;" type="text" value="' + self.value + '" />')
+      .html('<input style="width: 300px; font-size: 9px;" type="text" value="' + self.value + '">')
       .find('input')
       .bind('blur', function(event) {
         self.value = $(this).val();
@@ -109,7 +109,7 @@ $(function() {
 
 <p align="center" id="photofull" class="photofull">
 {if !empty($next)}<a href="{$next}">{/if}
-<img src="{$photo->getThumb680Url()}" alt="{$photo->getName()|escape}" />
+<img src="{$photo->getThumb680Url()}" alt="{$photo->getName()|escape}">
 {if !empty($next)}</a>{/if}
 </p>
 

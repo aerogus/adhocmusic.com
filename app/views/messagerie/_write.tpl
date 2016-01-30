@@ -1,6 +1,6 @@
 <script>
 $(function() {
-    $("#form-message-write").submit(function() {
+    $("#form-message-write").submit(function () {
         var valid = true;
         if($("#text").val() === "") {
             $("#text").prev(".error").fadeIn();

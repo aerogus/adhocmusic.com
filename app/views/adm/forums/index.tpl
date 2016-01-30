@@ -26,4 +26,3 @@
 {include file="common/boxend.tpl"}
 
 {include file="common/footer.tpl"}
-

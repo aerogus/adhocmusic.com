@@ -53,10 +53,10 @@
           {/if}
         </ul>
         {if $groupe->getCreatedOn()}
-        <p><strong>Fiche créée le</strong><br />{$groupe->getCreatedOn()|date_format:"%d/%m/%Y %H:%M"}</p>
+        <p><strong>Fiche créée le</strong><br>{$groupe->getCreatedOn()|date_format:"%d/%m/%Y %H:%M"}</p>
         {/if}
         {if $groupe->getModifiedOn()}
-        <p><strong>Mise à jour le</strong><br />{$groupe->getModifiedOn()|date_format:"%d/%m/%Y %H:%M"}</p>
+        <p><strong>Mise à jour le</strong><br>{$groupe->getModifiedOn()|date_format:"%d/%m/%Y %H:%M"}</p>
         {/if}
       </div>
     </div>
@@ -69,7 +69,7 @@
       <div>
         {foreach from=$videos item=video}
         <div class="thumb-80">
-          <a href="{$video.url}" title="{$video.name|escape}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}" />{$video.name|truncate:15:"...":true:true|escape}</a>
+          <a href="{$video.url}" title="{$video.name|escape}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}">{$video.name|truncate:15:"...":true:true|escape}</a>
           <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}"></a>
         </div>
         {/foreach}
@@ -83,7 +83,7 @@
         <h2>En Écoute</h2>
       </header>
       <div style="background: url(/img/player_adhoc.png); width: 360px; height: 218px; position: relative; margin: 0 auto;">
-        <img src="{$groupe->getMiniPhoto()}" alt="" style="position: absolute; top: 28px; left: 14px;" />
+        <img src="{$groupe->getMiniPhoto()}" alt="" style="position: absolute; top: 28px; left: 14px;">
         <div style="position: absolute; top: 27px; left: 90px;">{audio_player id=$groupe->getId() type='player_mp3_multi'}</div>
       </div>
     </div>
@@ -120,7 +120,7 @@
       <div>
         {foreach from=$photos item=photo}
         <div class="thumb-80">
-          <a href="{$photo.url}" title="{$photo.name|escape}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}" />{$photo.name|truncate:15:"...":true:true|escape}</a>
+          <a href="{$photo.url}" title="{$photo.name|escape}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}">{$photo.name|truncate:15:"...":true:true|escape}</a>
           <a class="overlay-80 overlay-photo-80" href="{$photo.url}" title="{$photo.name|escape}"></a>
         </div>
         {/foreach}

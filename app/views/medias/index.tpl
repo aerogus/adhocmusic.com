@@ -18,7 +18,7 @@
       </header>
       <div>
         <form id="form-media-search" name="form-media-search" method="get" action="/media/">
-          <ol>
+          <ul>
             <li>
               <select id="groupe" name="groupe" style="float: right;">
                 <option value="0">---</option>
@@ -48,7 +48,7 @@
               <input type="hidden" name="type_photo" id="type_photo" value="1">
               <label for="type">Type</label>
             </li>
-          </ol>
+          </ul>
         </form>
 
         <h3>Résultats de la recherche</h3>

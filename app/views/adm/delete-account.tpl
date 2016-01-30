@@ -4,25 +4,25 @@
 
 <form method="get">
   <fieldset>
-    <ol>
+    <ul>
       <li>
         <label for="id">id_contact</label>
-        <input type="text" name="id" value="{if !empty($id)}{$id}{/if}" />
+        <input type="text" name="id" value="{if !empty($id)}{$id}{/if}">
       </li>
       <li>
         <label for="email">email</label>
-        <input type="text" name="email" value="{if !empty($email)}{$email}{/if}" />
+        <input type="text" name="email" value="{if !empty($email)}{$email}{/if}">
       </li>
-    </ol>
+    </ul>
   </fieldset>
-  <input type="submit" value="Ok" /></td>
+  <input type="submit" value="Ok"></td>
 </form>
 
-<hr />
+<hr>
 
 {if !empty($action)}
-  {if $action == 'show'}
-  {elseif $action == 'delete'}
+  {if $action === 'show'}
+  {elseif $action === 'delete'}
   {/if}
 {/if}
 

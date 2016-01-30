@@ -27,8 +27,8 @@
       <li>Longitude : {$lieu->getLng()|escape}</li>
     </ol>
   </fieldset>
-  <input id="form-lieu-delete-submit" name="form-lieu-delete-submit" type="submit" class="button" value="Supprimer" />
-  <input type="hidden" name="id" value="{$lieu->getId()|escape}" />
+  <input id="form-lieu-delete-submit" name="form-lieu-delete-submit" type="submit" class="button" value="Supprimer">
+  <input type="hidden" name="id" value="{$lieu->getId()|escape}">
 </form>
 
 {/if}

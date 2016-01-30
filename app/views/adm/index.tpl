@@ -103,16 +103,4 @@
   </div>
 </div>
 
-<div class="box">
-  <header>
-    <h2>Comptabilité / Facturation</h2>
-  </header>
-  <div>
-    <ul class="admlinks">
-      <li><a href="/adm/billing">Factures OVH</a></li>
-      <li><a href="/adm/domains">Nos domaines</a></li>
-    </ul>
-  </div>
-</div>
-
 {include file="common/footer.tpl"}

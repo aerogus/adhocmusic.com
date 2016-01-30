@@ -118,7 +118,7 @@ function placePoints(map) {
         title: point.name
       });
       markers.push(marker);
-      var bubble_content = '<a href="/lieux/show/' + point.id_lieu + '"><strong style="color: #000000">' + point.name + '</strong></a><br />' + point.address + '<br />' + point.cp + ' ' + point.city;
+      var bubble_content = '<a href="/lieux/show/' + point.id_lieu + '"><strong style="color: #000000">' + point.name + '</strong></a><br>' + point.address + '<br>' + point.cp + ' ' + point.city;
       showBubble(map, marker, bubble_content);
       $('<tr><td><a href="/lieux/show/' + point.id_lieu + '">' + point.name + '</a></td><td>' + point.address + '</td><td>' + point.cp + ' - ' + point.city + '</td><td>à ' + point.distance + ' km</td></tr>').appendTo('#search-results > tbody');
     });
@@ -140,8 +140,8 @@ function clearPoints()
 {include file="common/boxstart.tpl" boxtitle="Proche de chez vous"}
 {foreach from=$lieux item=lieu}
 <div style="margin 5px; padding: 5px">
-  <a href="/lieux/show/{$lieu.id_lieu}"><strong>{$lieu.name|escape}</strong></a><br />
-  <em>{$lieu.city|escape}</em><br />
+  <a href="/lieux/show/{$lieu.id_lieu}"><strong>{$lieu.name|escape}</strong></a><br>
+  <em>{$lieu.city|escape}</em><br>
   (à {$lieu.distance} km)
 </div>
 {/foreach}
@@ -153,7 +153,7 @@ function clearPoints()
 <ul>
   {foreach from=$comments item=comment}
   <li style="margin-bottom: 5px;">
-    <strong>{$comment.pseudo}</strong> le {$comment.created_on|date_format:'%d/%m/%Y'}<br />
+    <strong>{$comment.pseudo}</strong> le {$comment.created_on|date_format:'%d/%m/%Y'}<br>
     <a href="/{$comment.type_full}/show/{$comment.id_content}">{$comment.text|truncate:'200'}</a>
   </li>
   {/foreach}

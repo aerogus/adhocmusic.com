@@ -19,7 +19,7 @@
   </tr>
   <tr>
     <th>Imagette</th>
-    <td><img src="{$structure->getPicto()}" alt="" /></td>
+    <td><img src="{$structure->getPicto()}" alt=""></td>
   </tr>
   <tr>
     <th>Evénements</th>

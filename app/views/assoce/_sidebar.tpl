@@ -14,13 +14,13 @@
   <div>
   {foreach from=$videos item=video}
   <div class="thumb-80 thumb-video-80">
-    <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}" />{$video.name|truncate:15:"...":true:true|escape}</a>
+    <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}">{$video.name|truncate:15:"...":true:true|escape}</a>
     <a class="overlay-80 overlay-video-80" href="{$video.url}" title="Regarder {$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}"></a>
   </div>
   {/foreach}
   {foreach from=$photos item=photo}
   <div class="thumb-80 thumb-photo-80">
-    <a href="{$photo.url}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}" />{$photo.name|truncate:15:"...":true:true|escape}</a>
+    <a href="{$photo.url}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">{$photo.name|truncate:15:"...":true:true|escape}</a>
     <a class="overlay-80 overlay-photo-80" href="{$photo.url}" title="Voir {$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}"></a>
   </div>
   {/foreach}

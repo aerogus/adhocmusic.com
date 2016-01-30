@@ -57,7 +57,7 @@ $(function () {
 
   /**
    *
-   */  
+   */
   $('#id_country').change(function() {
     var id_country = $('#id_country').val();
     $('#id_region').empty();
@@ -128,7 +128,7 @@ $(function () {
   <ol>
     <li>
       <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir le nom du lieu</div>
-      <input id="name" name="name" type="text" size="50" value="" style="float: right;" />
+      <input id="name" name="name" type="text" size="50" value="" style="float: right;">
       <label for="name">Nom (*)</label>
     </li>
     <li>
@@ -147,7 +147,7 @@ $(function () {
       <label for="text">Description (*)</label>
     </li>
     <li>
-      <input id="photo" name="photo" type="file" style="float: right;" />
+      <input id="photo" name="photo" type="file" style="float: right;">
       <label for="photo">Photo (format .jpg)</label>
     </li>
     <li>
@@ -183,27 +183,27 @@ $(function () {
     </li>
     <li>
       <div class="error" id="error_address"{if empty($error_address)} style="display: none"{/if}>Vous devez préciser l'adresse</div>
-      <input id="address" name="address" type="text" size="50" value="" style="float: right;" />
+      <input id="address" name="address" type="text" size="50" value="" style="float: right;">
       <label for="address">Adresse (*)</label>
     </li>
     <li>
       <div class="error" id="error_tel"{if empty($error_tel)} style="display: none"{/if}>Vous devez saisir le numéro de téléphone</div>
-      <input id="tel" name="tel" type="text" size="50" value="" style="float: right;" />
+      <input id="tel" name="tel" type="text" size="50" value="" style="float: right;">
       <label for="tel">Téléphone</label>
     </li>
     <li>
       <div class="error" id="error_fax"{if empty($error_fax)} style="display: none"{/if}>Vous devez saisir le numéro de fax</div>
-      <input id="fax" name="fax" type="text" size="50" value="" style="float: right;" />
+      <input id="fax" name="fax" type="text" size="50" value="" style="float: right;">
       <label for="fax">Fax</label>
     </li>
     <li>
       <div class="error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez saisir l'email de contact</div>
-      <input id="email" name="email" type="email" size="50" value="" style="float: right;" />
+      <input id="email" name="email" type="email" size="50" value="" style="float: right;">
       <label for="email">Email</label>
     </li>
     <li>
       <div class="error" id="error_site"{if empty($error_site)} style="display: none"{/if}>Vous devez saisir le site internet</div>
-      <input id="site" name="site" type="text" size="50" value="" style="float: right;" />
+      <input id="site" name="site" type="text" size="50" value="" style="float: right;">
       <label for="site">Site</label>
     </li>
   </ol>

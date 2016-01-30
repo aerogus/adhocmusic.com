@@ -6,7 +6,7 @@
 
 {else}
 
-<link rel="stylesheet" href="/js/jplayer.blue.monday/jplayer.blue.monday.css" />
+<link rel="stylesheet" href="/js/jplayer.blue.monday/jplayer.blue.monday.css">
 <script src="/js/jquery.jplayer.min.js"></script>
 
 <script>
@@ -27,7 +27,7 @@ $(function() {
 {include file="common/boxstart.tpl" boxtitle=$audio->getName()|escape width="700px"}
 
 {if $audio->getIdGroupe()}
-<a href="{$groupe->getUrl()}"><img style="float: left; margin: 5px;" src="{$groupe->getMiniPhoto()}" alt="{$groupe->getName()|escape}" /></a>
+<a href="{$groupe->getUrl()}"><img style="float: left; margin: 5px;" src="{$groupe->getMiniPhoto()}" alt="{$groupe->getName()|escape}"></a>
 {/if}
 
 <div class="audiometa">
@@ -46,11 +46,11 @@ $(function() {
 </ul>
 </div>
 
-<br style="clear: both;" />
+<br style="clear: both;">
 
 {*
 <div id="player">
-  <img src="{$audio->getWaveForm()}" alt="" />
+  <img src="{$audio->getWaveForm()}" alt="">
 </div>
 *}
 
@@ -107,13 +107,13 @@ $(function() {
 {include file="common/boxstart.tpl" boxtitle="Photos et Vidéos de ce concert" width="700px"}
 {foreach from=$photos item=photo}
 <div class="thumb-80 thumb-photo-80">
-  <a href="{$photo.url}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}" /><br />{$photo.name|truncate:15:"...":true:true|escape}</a>
+  <a href="{$photo.url}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}"><br>{$photo.name|truncate:15:"...":true:true|escape}</a>
   <a class="overlay-80 overlay-photo-80" href="{$photo.url}" title="{$photo.name|escape}"></a>
 </div>
 {/foreach}
 {foreach from=$videos item=video}
 <div class="thumb-80 thumb-video-80">
-  <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}" /><br />{$video.name|truncate:15:"...":true:true|escape}</a>
+  <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}"><br>{$video.name|truncate:15:"...":true:true|escape}</a>
   <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}"></a>
 </div>
 {/foreach}

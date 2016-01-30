@@ -29,21 +29,21 @@
   {*
   <ul>
     {foreach from=$event->getStructures() item=structure}
-    <li><img src="{$structure->getPicto()}" alt="" title="{$structure->getName()}" /><strong>{$structure->getName()|escape}</strong></li>
+    <li><img src="{$structure->getPicto()}" alt="" title="{$structure->getName()}"><strong>{$structure->getName()|escape}</strong></li>
     {/foreach}
   </ul>
   *}
   </td>
   <td width="70%">
   <p align="justify">
-  <a href="{$event->getUrl()}"><img src="/dynimg/event/{$event->getId()}/100/100/666666/0/0.jpg" align="right" alt="{$event->getName()|escape}" /></a>
+  <a href="{$event->getUrl()}"><img src="/dynimg/event/{$event->getId()}/100/100/666666/0/0.jpg" align="right" alt="{$event->getName()|escape}"></a>
   </p>
   <p>
-  Entrée : <strong>{$event->getPrice()|escape}</strong><br />
+  Entrée : <strong>{$event->getPrice()|escape}</strong><br>
   {*
-  Lieu : <a href="/lieux/show/{$event->getIdLieu()}" title="Voir la fiche lieu"><strong>{$lieu->getName()|escape}</strong></a> <a href="/lieux/show/{$event->getIdLieu()}" title="Visualiser ce lieu sur une carte"><img src="/img/icones/map.png" alt="" /></a> ({$lieu->getIdDepartement()} - {$lieu->getCity()})<br />
+  Lieu : <a href="/lieux/show/{$event->getIdLieu()}" title="Voir la fiche lieu"><strong>{$lieu->getName()|escape}</strong></a> <a href="/lieux/show/{$event->getIdLieu()}" title="Visualiser ce lieu sur une carte"><img src="/img/icones/map.png" alt=""></a> ({$lieu->getIdDepartement()} - {$lieu->getCity()})<br>
  *}
-  <a href="{$event->getUrl()}">Fiche complète</a><br />
+  <a href="{$event->getUrl()}">Fiche complète</a><br>
   </p>
   </td>
 </tr>

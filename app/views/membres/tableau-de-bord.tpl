@@ -40,7 +40,7 @@
         </li>
         <li>
           <span style="float: right">
-          <img src="{$me->getAvatar()}" alt="" /><br />
+          <img src="{$me->getAvatar()}" alt=""><br>
           </span>
           <label for="avatar">Avatar</label>
         </li>
@@ -63,7 +63,7 @@
         </tr>
         {foreach from=$inbox key=cpt item=msg}
         <tr class="{if $cpt is odd}odd{else}even{/if}">
-          <td><img src="/img/icones/{if !empty($msg.read)}email_open.png{else}email.png{/if}" alt="" /></td>
+          <td><img src="/img/icones/{if !empty($msg.read)}email_open.png{else}email.png{/if}" alt=""></td>
           <td><a href="/messagerie/write?pseudo={$msg.pseudo|escape}">{$msg.pseudo|escape}</a></td>
           <td>{$msg.date|date_format:'%d/%m/%Y à %H:%M'}</td>
           <td><a href="/messagerie/read/{$msg.id|escape}">{$msg.text|truncate:40|escape}</a></td>
@@ -156,7 +156,7 @@
       <p>Vous avez {$nb_photos} photos</p>
       {foreach from=$photos item=photo}
       <div class="thumb-80">
-        <a href="/photos/edit/{$photo.id}?page={$page}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}" /><br />{$photo.name|truncate:15:"...":true:true|escape}</a>
+        <a href="/photos/edit/{$photo.id}?page={$page}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}"><br>{$photo.name|truncate:15:"...":true:true|escape}</a>
         <a class="overlay-80 overlay-photo-80" href="/photos/edit/{$photo.id}" title="{$photo.name|escape}"></a>
       </div>
       {/foreach}
@@ -177,7 +177,7 @@
       <p>Vous avez {$nb_videos} vidéos</p>
       {foreach from=$videos item=video}
       <div class="thumb-80">
-        <a href="/videos/edit/{$video.id}?page={$page}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}" /><br />{$video.name|truncate:15:"...":true:true|escape}</a>
+        <a href="/videos/edit/{$video.id}?page={$page}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}"><br>{$video.name|truncate:15:"...":true:true|escape}</a>
         <a class="overlay-80 overlay-video-80" href="/videos/edit/{$video.id}" title="{$video.name|escape}"></a>
       </div>
       {/foreach}

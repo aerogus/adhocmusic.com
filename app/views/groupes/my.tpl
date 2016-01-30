@@ -16,7 +16,7 @@
   </tr>
   {foreach from=$groupes item=groupe}
   <tr>
-    <td><a href="/groupes/edit/{$groupe.id}" title="{$groupe.name|escape}"><img src="{$groupe.mini_photo|escape}" alt="{$groupe.name|escape}" /><br />{$groupe.name|escape}</a></td>
+    <td><a href="/groupes/edit/{$groupe.id}" title="{$groupe.name|escape}"><img src="{$groupe.mini_photo|escape}" alt="{$groupe.name|escape}"><br>{$groupe.name|escape}</a></td>
     <td>{$groupe.nom_type_musicien}</td>
     <td>{$groupe.created_on|date_format:'%d/%m/%Y'}</td>
     <td>{$groupe.modified_on|date_format:'%d/%m/%Y'}</td>

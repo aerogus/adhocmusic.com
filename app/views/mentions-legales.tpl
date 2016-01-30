@@ -13,15 +13,15 @@
     </p>
     <h2>Hébergement</h2>
     <p>
-    Le site adhocmusic.com est hébergé par la société <strong>OVH</strong>,<br />
-    SAS au capital de 5 000 000 € RCS Roubaix – Tourcoing 424 761 419 00045<br />
-    Code APE 6202A - N° TVA : FR 22 424 761 419<br />
+    Le site adhocmusic.com est hébergé par la société <strong>OVH</strong>,<br>
+    SAS au capital de 5 000 000 € RCS Roubaix – Tourcoing 424 761 419 00045<br>
+    Code APE 6202A - N° TVA : FR 22 424 761 419<br>
     Siège social : 2 rue Kellermann 59100 Roubaix - France.
     </p>
     <h2>Respect de la législation "Informatiques et libertés"</h2>
     <p>
-    Le site <strong>adhocmusic.com</strong> est déclaré à la C.N.I.L. sous le n° 838403.<br />
-    Loi informatique et libertés du 6 janvier 1978.<br />
+    Le site <strong>adhocmusic.com</strong> est déclaré à la C.N.I.L. sous le n° 838403.<br>
+    Loi informatique et libertés du 6 janvier 1978.<br>
     Pour toute rectification et accès aux données personnelles, utilisez notre <a href="/contact">formulaire de contact</a>.
     </p>
     <h2>Droit à l'image</h2>

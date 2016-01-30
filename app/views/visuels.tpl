@@ -21,11 +21,11 @@
   </header>
   <div>
     <p align="justify">Pour ajouter sur votre site la bannière AD'HOC, voici le code à copier:</p>
-    <p align="center"><img src="/img/partners/banadhoc.png" width="468" height="60" alt="AD'HOC - Les Musiques actuelles en Essonne" align="middle" /></p>
+    <p align="center"><img src="/img/partners/banadhoc.png" width="468" height="60" alt="AD'HOC - Les Musiques actuelles en Essonne" align="middle"></p>
     <table cellpadding="10" align="center">
     <tr><td style="font-family: courier;">
-    &lt;!-- Banniere ADHOC --&gt;<br />
-    &lt;a href="http://www.adhocmusic.com" &gt;&lt;img src="http://www.adhocmusic.com/img/partners/banadhoc.png" width="468" height="60" alt="AD'HOC - Les Musiques actuelles en Essonne" align="middle" /&gt;&lt;/a&gt;<br />
+    &lt;!-- Banniere ADHOC --&gt;<br>
+    &lt;a href="http://www.adhocmusic.com" &gt;&lt;img src="http://www.adhocmusic.com/img/partners/banadhoc.png" width="468" height="60" alt="AD'HOC - Les Musiques actuelles en Essonne" align="middle" /&gt;&lt;/a&gt;<br>
     &lt;!-- Fin Banniere ADHOC --&gt;
     </td></tr>
     </table>

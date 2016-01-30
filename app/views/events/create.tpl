@@ -6,11 +6,11 @@
   <fieldset id="bloc-lieu">
     <legend>Infos sur le lieu</legend>
     {if !empty($lieu)}
-    <strong>{$lieu->getName()}</strong><br />
-    {$lieu->getAddress()}<br />
-    {$lieu->getCp()} {$lieu->getCity()}<br />
+    <strong>{$lieu->getName()}</strong><br>
+    {$lieu->getAddress()}<br>
+    {$lieu->getCp()} {$lieu->getCity()}<br>
     {$lieu->getCountry()}
-    <input type="hidden" id="id_lieu" name="id_lieu" value="{$lieu->getId()|escape}" />
+    <input type="hidden" id="id_lieu" name="id_lieu" value="{$lieu->getId()|escape}">
     {else}
     <ol>
       <li>
@@ -79,12 +79,12 @@
     <ol>
       <li>
         <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez indiquer un titre pour l'événement.</div>
-        <input id="name" name="name" style="float: right; width: 360px;" value="{$data.name|escape}" />
+        <input id="name" name="name" style="float: right; width: 360px;" value="{$data.name|escape}">
         <label for="name">Titre</label>
       </li>
       <li>
         <span style="float: right;">
-          <input type="text" id="date" name="date" value="{$data.date.date|date_format:'%d/%m/%Y'}" style="width: 100px; background: url(/img/icones/event.png) no-repeat right top;" />
+          <input type="text" id="date" name="date" value="{$data.date.date|date_format:'%d/%m/%Y'}" style="width: 100px; background: url(/img/icones/event.png) no-repeat right top;">
           <select id="hourminute" name="hourminute">{html_input_date_hourminute hour=$data.date.hour minute=$data.date.minute}</select>
         </span>
         <label for="date">Date</label>
@@ -100,11 +100,11 @@
         <label for="price">Tarifs (Entrée, Bar, Vestiaire ...)</label>
       </li>
       <li>
-        <input type="file" id="flyer" name="flyer" style="float: right;" value="{$data.file|escape}" />
+        <input type="file" id="flyer" name="flyer" style="float: right;" value="{$data.file|escape}">
         <label for="flyer">Flyer (.jpg)</label>
       </li>
       <li>
-        <input type="text" id="flyer_url" name="flyer_url" style="float: right;" value="{$data.flyer_url|escape}" />
+        <input type="text" id="flyer_url" name="flyer_url" style="float: right;" value="{$data.flyer_url|escape}">
         <label for="flyer_url">ou Flyer (url)</label>
       </li>
       {*
@@ -152,12 +152,12 @@
     <ol>
       <li>
         <span style="float: right;">
-          http://www.facebook.com/events/<input id="facebook_event_id" name="facebook_event_id" style="width: 360px;" value="{$data.facebook_event_id|escape}" />/
+          http://www.facebook.com/events/<input id="facebook_event_id" name="facebook_event_id" style="width: 360px;" value="{$data.facebook_event_id|escape}">/
         </span>
         <label for="facebook_event_id">n° Evénement (si déjà existant sur Facebook)</label>
       </li>
       <li>
-        <input type="checkbox" id="facebook_event_create" name="facebook_event_create" disabled="disabled" style="float: right;" />
+        <input type="checkbox" id="facebook_event_create" name="facebook_event_create" disabled="disabled" style="float: right;">
         <label for="facebook_event_create">Créer l'événement sur Facebook (si non existant)</label>
       </li>
     </ol>
@@ -166,12 +166,12 @@
     <legend>Annoncer plusieurs événements</legend>
     <ol>
       <li>
-        <input style="float: right;" type="checkbox" id="more-event" name="more-event"{if !empty($data.more_event)} selected="selected"{/if} />
+        <input style="float: right;" type="checkbox" id="more-event" name="more-event"{if !empty($data.more_event)} selected="selected"{/if}>
         <label for="more-event">Ajouter un autre événement pour le même lieu</label>
       </li>
     </ol>
   </fieldset>
-  <input id="form-event-create-submit" name="form-event-create-submit" class="button" type="submit" value="Ajouter" />
+  <input id="form-event-create-submit" name="form-event-create-submit" class="button" type="submit" value="Ajouter">
 </form>
 
 {include file="common/boxend.tpl"}

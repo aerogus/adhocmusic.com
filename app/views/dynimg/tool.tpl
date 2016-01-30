@@ -47,7 +47,7 @@
 </form>
 
 {if !empty($url)}
-<hr />
+<hr>
 <p>Url de l'image : <strong>{$url|escape}</strong></p>
 <p>Image : <img src="{$url|escape}" alt=""></p>
 {*<p><a href="">Invalider le cache pour cette imagette</a></p>*}

@@ -61,22 +61,22 @@ $(function() {
     </li>
     <li>
       <label for="lelogo">Logo (.jpg)</label>
-      <img src="{$groupe->getLogo()}" alt="" /><br /><input type="file" id="lelogo" name="lelogo" />
+      <img src="{$groupe->getLogo()}" alt=""><br><input type="file" id="lelogo" name="lelogo">
     </li>
     <li>
       <label for="photo">Photo (.jpg)</label>
-      <img src="{$groupe->getPhoto()}" alt="" /><br /><input type="file" id="photo" name="photo" />
+      <img src="{$groupe->getPhoto()}" alt=""><br><input type="file" id="photo" name="photo">
     </li>
     <li>
       <label for="mini_photo">Mini Photo carrée</label>
-      <img src="{$groupe->getMiniPhoto()}" alt="" /><br /><input type="file" id="mini_photo" name="mini_photo" />
+      <img src="{$groupe->getMiniPhoto()}" alt=""><br><input type="file" id="mini_photo" name="mini_photo">
     </li>
     <li>
       <div class="error" id="error_style"{if empty($error_style)} style="display: none"{/if}>Vous devez préciser le style musical</div>
       <label for="style">Style</label>
-      <input type="text" id="style" name="style" value="{$data.style|escape}" />
+      <input type="text" id="style" name="style" value="{$data.style|escape}">
       {*
-      <br />
+      <br>
       {section name=style start=0 loop=3}
       {$smarty.section.style.index + 1} - <select id="style" name="style[{$smarty.section.style.index}]">
         <option value="0">---</option>
@@ -90,23 +90,23 @@ $(function() {
     <li>
       <div class="error" id="error_influences"{if empty($error_influences)} style="display: none"{/if}>Vous devez préciser vos influences</div>
       <label for="influences">Influences</label>
-      <input type="text" id="influences" name="influences" value="{$data.influences|escape}" />
+      <input type="text" id="influences" name="influences" value="{$data.influences|escape}">
     </li>
     <li>
       <label for="site">Site</label>
-      <input type="text" id="site" name="site" size="50" value="{$data.site|escape}" /><br />Ne mettez pas votre url MySpace !
+      <input type="text" id="site" name="site" size="50" value="{$data.site|escape}"><br>Ne mettez pas votre url MySpace !
     </li>
     <li>
       <label for="myspace">Identifiant Myspace</label>
-      http://www.myspace.com/<input type="text" id="myspace" name="myspace" value="{$data.myspace}" />
+      http://www.myspace.com/<input type="text" id="myspace" name="myspace" value="{$data.myspace}">
     </li>
     <li>
       <label for="facebook_page_id">Identifiant Page Fan Facebook</label>
-      http://www.facebook.com/pages/{$groupe->getAlias()}/<input type="text" id="facebook_page_id" name="facebook_page_id" value="{$data.facebook_page_id|escape}" />
+      http://www.facebook.com/pages/{$groupe->getAlias()}/<input type="text" id="facebook_page_id" name="facebook_page_id" value="{$data.facebook_page_id|escape}">
     </li>
     <li>
       <label for="twitter_id">Identifiant Twitter</label>
-      http://www.twitter.com/<input type="text" id="twitter_id" name="twitter_id" value="{$data.twitter_id|escape}" />
+      http://www.twitter.com/<input type="text" id="twitter_id" name="twitter_id" value="{$data.twitter_id|escape}">
     </li>
     <li>
       <div class="error" id="error_lineup"{if empty($error_lineup)} style="display: none"{/if}>Vous devez préciser votre formation</div>
@@ -132,8 +132,8 @@ $(function() {
       </select>
     </li>
   </ol>
-  <input type="hidden" name="id" value="{$groupe->getId()|escape}" />
-  <input id="form-groupe-edit-submit" name="form-groupe-edit-submit" class="button" type="submit" value="Modifier" />
+  <input type="hidden" name="id" value="{$groupe->getId()|escape}">
+  <input id="form-groupe-edit-submit" name="form-groupe-edit-submit" class="button" type="submit" value="Modifier">
 </form>
 
 {include file="common/boxend.tpl"}

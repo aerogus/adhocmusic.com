@@ -85,8 +85,8 @@ $(function () {
 {if !empty($comment.id_contact)}
   <div style="position: absolute;">
   <a href="/membres/show/{$comment.id_contact}">
-  <strong>{$comment.pseudo_mbr}</strong><br />
-  <img src="{$comment.id_contact|avatar_by_id}" alt="" style="width: 50px; height: 50px; padding-top: 5px;" />
+  <strong>{$comment.pseudo_mbr}</strong><br>
+  <img src="{$comment.id_contact|avatar_by_id}" alt="" style="width: 50px; height: 50px; padding-top: 5px;">
   </a>
   </div>
   <span style="float: right;">{$comment.created_on|date_format:'le %d/%m/%Y à %H:%M'}</span>
@@ -109,7 +109,7 @@ $(function () {
     {if !empty($is_auth)}
     <li style="min-height: 50px;">
       <label for="form-comment-box-pseudo">Pseudo</label>
-      <img src="{$me->getAvatar()|escape}" alt="" style="padding-right: 5px; float: left; width: 50px; height: 50px;"> <strong>{$me->getPseudo()|escape}</strong><br />({$me->getFirstName()} {$me->getLastName()})
+      <img src="{$me->getAvatar()|escape}" alt="" style="padding-right: 5px; float: left; width: 50px; height: 50px;"> <strong>{$me->getPseudo()|escape}</strong><br>({$me->getFirstName()} {$me->getLastName()})
     </li>
     {else}
     <li>

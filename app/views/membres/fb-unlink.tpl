@@ -11,12 +11,12 @@
 <p class="validation">Voulez vous délier votre compte AD'HOC du profil Facebook suivant ?</p>
 
 <p align="center">
-  <img src="{$fb_me->avatar}" alt="{$fb_me->name|escape}" /><br />
+  <img src="{$fb_me->avatar}" alt="{$fb_me->name|escape}"><br>
   <strong>{$fb_me->first_name|escape} {$fb_me->last_name|escape}</strong>
 </p>
 
 <form id="form-fb-unlink" name="form-fb-unlink" action="/membres/fb-unlink" method="post">
-  <input type="submit" class="button" id="form-fb-unlink-submit" name="form-fb-unlink-submit" value="Délier" />
+  <input type="submit" class="button" id="form-fb-unlink-submit" name="form-fb-unlink-submit" value="Délier">
 </form>
 
 {else}

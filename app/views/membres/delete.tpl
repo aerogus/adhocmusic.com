@@ -10,8 +10,8 @@
 
 <form id="form-member-delete" name="form-member-delete" action="/membres/delete" method="POST">
 <p>Confirmer la suppression du membre {$membre->getPseudo()|escape} ?</p>
-<input type="submit" id="form-member-delete-submit" name="form-member-delete-submit" value="Supprimer" />
-<input type="hidden" name="id" value="{$membre->getId()|escape}" />
+<input type="submit" id="form-member-delete-submit" name="form-member-delete-submit" value="Supprimer">
+<input type="hidden" name="id" value="{$membre->getId()|escape}">
 </form>
 
 {/if}

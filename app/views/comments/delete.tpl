@@ -20,8 +20,8 @@ $(function() {
     </li>
   </ol>
   </fieldset>
-  <input id="form-comment-delete-submit" name="form-comment-delete-submit" type="submit" value="Supprimer" />
-  <input type="hidden" name="id" value="{$comment->getId()}" />
+  <input id="form-comment-delete-submit" name="form-comment-delete-submit" type="submit" value="Supprimer">
+  <input type="hidden" name="id" value="{$comment->getId()}">
 </form>
 
 {include file="common/boxend.tpl"}

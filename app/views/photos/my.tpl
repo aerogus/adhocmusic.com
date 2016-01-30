@@ -18,7 +18,7 @@
 
 {foreach from=$photos item=photo}
 <div class="thumb-80">
-  <a href="/photos/edit/{$photo.id}?page={$page}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}" /><br />{$photo.name|truncate:15:"...":true:true|escape}</a>
+  <a href="/photos/edit/{$photo.id}?page={$page}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}"><br>{$photo.name|truncate:15:"...":true:true|escape}</a>
   <a class="overlay-80 overlay-photo-80" href="/photos/edit/{$photo.id}" title="{$photo.name|escape}"></a>
 </div>
 {/foreach}

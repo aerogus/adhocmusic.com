@@ -52,7 +52,7 @@
   <p>Avec :</p>
   <ul>
   {foreach from=$groupes item=groupe}
-    <li><a href="{$groupe.url}"><img src="{$groupe.mini_photo}" style="float: left; margin: 2px; border: 1px solid #000000;" alt="" /></a><a href="{$groupe.url}"><strong>{$groupe.name|escape}</strong></a><br />({$groupe.style|escape})</li>
+    <li><a href="{$groupe.url}"><img src="{$groupe.mini_photo}" style="float: left; margin: 2px; border: 1px solid #000000;" alt=""></a><a href="{$groupe.url}"><strong>{$groupe.name|escape}</strong></a><br>({$groupe.style|escape})</li>
   {/foreach}
   </ul>
   {/if}
@@ -75,7 +75,7 @@
     <h3>Vidéos</h3>
     {foreach from=$videos item=video}
     <div class="thumb-80">
-      <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}" />{$video.name|truncate:15:"...":true:true|escape}</a>
+      <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}">{$video.name|truncate:15:"...":true:true|escape}</a>
       <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}"></a>
     </div>
     {/foreach}
@@ -87,7 +87,7 @@
     <h3>Photos</h3>
     {foreach from=$photos item=photo}
     <div class="thumb-80">
-      <a href="{$photo.url|escape}?from=event"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}" />{$photo.name|truncate:15:"...":true:true|escape}</a>
+      <a href="{$photo.url|escape}?from=event"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">{$photo.name|truncate:15:"...":true:true|escape}</a>
       <a class="overlay-80 overlay-photo-80" href="{$photo.url}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}"></a>
     </div>
     {/foreach}
@@ -99,7 +99,7 @@
     <h3>Sons</h3>
     <ul>
     {foreach from=$audios item=audio}
-      <li><strong>{$audio.name|escape}</strong> (<a href="{$audio.groupe_url}">{$audio.groupe_name|escape}</a>)<br />{audio_player id=$audio.id}</li>
+      <li><strong>{$audio.name|escape}</strong> (<a href="{$audio.groupe_url}">{$audio.groupe_name|escape}</a>)<br>{audio_player id=$audio.id}</li>
     {/foreach}
     </ul>
   </div>
