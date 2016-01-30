@@ -4,6 +4,8 @@ jQuery(document).ready(function ($) {
 
     'use strict';
 
+    $('.swipe-pagination li:first-child').addClass('on');
+
     var swipe = Swipe(document.getElementById('swipe'), {
         startSlide: 0,
         speed: 100,
