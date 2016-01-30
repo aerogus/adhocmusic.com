@@ -42,6 +42,7 @@ class AdHocSmarty extends Smarty
         $this->assign('svnrev', '6666'/*Tools::getHeadRevision()*/);
         $this->assign('sessid', session_id());
         $this->assign('menuselected', null);
+        $this->assign('HOME_URL', HOME_URL);
         $this->assign('uri', $_SERVER['REQUEST_URI']);
         $this->assign('url', HOME_URL . $_SERVER['REQUEST_URI']);
         $this->assign('fb_app_id', FB_ADHOCMUSIC_APP_ID);

@@ -11,7 +11,7 @@
 {else}
 <meta property="og:type" content="article">
 {/if}
-{if $og_type != 'video.movie' && $og_type != 'website'}
+{if $og_type !== 'video.movie' && $og_type !== 'website'}
 <meta property="fb:page_id" content="{$fb_page_id}">
 <meta property="og:language" content="fr">
 <meta property="og:author" content="adhocmusic">
@@ -19,7 +19,7 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="adhocmusic.com">
 <meta property="og:title" content="{$title|escape}">
-<meta property="og:url" content="http://www.adhocmusic.com{$uri}">
+<meta property="og:url" content="{$url}">
 <meta property="og:description" content="{if empty($description)}Portail de référence sur les musiques actuelles en Essonne, Agenda culturel géolocalisé, Vidéos de concerts, promotion d'artistes ...{else}{$description|escape}{/if}">
 
 {if !empty($og_audio)}
@@ -43,8 +43,8 @@
 
 {* fin open graph *}
 
-<link rel="author" href="http://www.adhocmusic.com/humans.txt">
-<link rel="shortcut icon" href="http://www.adhocmusic.com/favicon.ico">
+<link rel="author" href="{#HOME_URL#}/humans.txt">
+<link rel="shortcut icon" href="{#HOME_URL#}/favicon.ico">
 <meta name="robots" content="index,follow">
 <meta name="description" content="{if empty($description)}Portail de référence sur les musiques actuelles en Essonne, Agenda culturel géolocalisé, Vidéos de concerts, promotion d'artistes ...{else}{$description|escape}{/if}">
 
@@ -62,9 +62,6 @@
 
 {if !empty($js_jquery_tools)}
 <script src="/js/jquery.tools.min.js"></script>
-{/if}
-{if !empty($swfobject)}
-<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 {/if}
 {if !empty($js_jquery_ui)}
 <script src="/js/jquery-ui-1.8.16.custom.min.js"></script>

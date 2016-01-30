@@ -1,4 +1,4 @@
-{include file="common/header.tpl" swfobject=true}
+{include file="common/header.tpl"}
 
 <div class="grid-2-1">
 

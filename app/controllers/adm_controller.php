@@ -1001,6 +1001,4 @@ class Controller
 
         return $smarty->fetch('adm/appartient-a.tpl');
     }
-
-
 }
