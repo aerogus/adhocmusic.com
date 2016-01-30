@@ -2,8 +2,8 @@
 
 <div id="swipe" class="swipe clearfix">
   <ul class="swipe-wrap">
-    {foreach from=$featured item=f}
-    <li>
+    {foreach from=$featured key=idx item=f}
+    <li data-index="{$idx}">
       <a href="{$f.link}">
         <h2>{$f.title}<br><span>{$f.description}</span></h2>
         <img src="{$f.image}" title="{$f.description}" alt="">
@@ -13,8 +13,8 @@
   </ul>
   <div class="swipe-pagination-wrapper">
     <ul class="swipe-pagination">
-      {foreach from=$featured item=f}
-      <li class="" data-index="0">
+      {foreach from=$featured key=idx item=f}
+      <li data-index="{$idx}">
         <a href="{$f.link}"></a>
       </li>
       {/foreach}
