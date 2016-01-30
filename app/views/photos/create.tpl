@@ -3,25 +3,25 @@
 {include file="common/boxstart.tpl" boxtitle="Proposer une photo"}
 
 <form id="form-photo-create" name="form-photo-create" method="post" action="/photos/create" enctype="multipart/form-data">
-  <ol>
+  <ul>
     <li>
       <div class="error" id="error_file"{if empty($error_file)} style="display: none"{/if}>Vous devez choisir une photo !</div>
-      <input type="file" name="file" id="file" value="" style="float: right;" />
-      <label for="file"><img src="/img/icones/photo.png" alt="" /> Photo (.jpg)</label>
+      <input type="file" name="file" id="file" value="" style="float: right;">
+      <label for="file"><img src="/img/icones/photo.png" alt=""> Photo (.jpg)</label>
     </li>
     <li>
       <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la photo</div>
-      <input type="text" id="name" name="name" size="50" value="" style="float: right" />
-      <label for="name"><img src="/img/icones/signature.png" alt="" /> Titre</label>
+      <input type="text" id="name" name="name" size="50" value="" style="float: right">
+      <label for="name"><img src="/img/icones/signature.png" alt=""> Titre</label>
     </li>
     <li>
       <div class="error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe</div>
-      <input type="text" id="credits" name="credits" size="50" value="" style="float: right" />
-      <label for="credits"><img src="/img/icones/photo.png" alt="" /> Photographe</label>
+      <input type="text" id="credits" name="credits" size="50" value="" style="float: right">
+      <label for="credits"><img src="/img/icones/photo.png" alt=""> Photographe</label>
     </li>
     <li>
     {if !empty($groupe)}
-      <input type="hidden" name="id_groupe" value="{$groupe->getId()}" />
+      <input type="hidden" name="id_groupe" value="{$groupe->getId()}">
       <span style="float: right">{$groupe->getName()}</span>
     {else}
       <div class="error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier cette photo à soit un groupe, soit un lieu, soit un événement</div>
@@ -32,11 +32,11 @@
         {/foreach}
       </select>
     {/if}
-      <label for="id_groupe"><img src="/img/icones/groupe.png" alt="" /> Groupe</label>
+      <label for="id_groupe"><img src="/img/icones/groupe.png" alt=""> Groupe</label>
     </li>
     <li>
     {if !empty($lieu)}
-      <input type="hidden" name="id_lieu" value="{$lieu->getId()}" />
+      <input type="hidden" name="id_lieu" value="{$lieu->getId()}">
       <span style="float: right;">{$lieu->getName()}</span>
     {else}
       <select id="id_lieu" name="id_lieu" style="float: right">
@@ -52,25 +52,25 @@
         {/foreach}
       </select>
     {/if}
-      <label for="id_lieu"><img src="/img/icones/lieu.png" alt="" /> Lieu</label>
+      <label for="id_lieu"><img src="/img/icones/lieu.png" alt=""> Lieu</label>
     </li>
     <li>
     {if !empty($event)}
-      <input type="hidden" name="id_event" value="{$event->getId()}" />
+      <input type="hidden" name="id_event" value="{$event->getId()}">
       <span style="float: right;">{$event->getDate()} - {$event->getName()}</span>
     {else}
       <select id="id_event" name="id_event" style="float: right">
         <option value="0">Aucun</option>
       </select>
     {/if}
-      <label for="id_event"><img src="/img/icones/event.png" alt="" /> Evénement</label>
+      <label for="id_event"><img src="/img/icones/event.png" alt=""> Evénement</label>
     </li>
     <li>
-      <input type="checkbox" name="online" checked="checked" style="float: right" />
-      <label for="online"><img src="/img/icones/eye.png" alt="" /> Afficher publiquement</label>
+      <input type="checkbox" name="online" checked="checked" style="float: right">
+      <label for="online"><img src="/img/icones/eye.png" alt=""> Afficher publiquement</label>
     </li>
-  </ol>
-  <input id="form-photo-create-submit" name="form-photo-create-submit" class="button" type="submit" value="Enregistrer" />
+  </ul>
+  <input id="form-photo-create-submit" name="form-photo-create-submit" class="button" type="submit" value="Enregistrer">
 </form>
 
 {include file="common/boxend.tpl"}

@@ -1,5 +1,5 @@
 <ul id="menu_haut">
-  <li class="{if isset($menuselected) && $menuselected === 'home'}menuselected {/if}">
+  <li{if isset($menuselected) && $menuselected === 'home'} class="menuselected"{/if}>
     <a href="/" accesskey="1" title="Retour à l'accueil">Accueil</a>
     <ul>
       <li><a href="/map">Plan du site</a></li>
@@ -9,7 +9,7 @@
       <li><a href="/hosting">Hébergement</a></li>
     </ul>
   </li>
-  <li {if isset($menuselected) && $menuselected === 'assoce'} class="menuselected"{/if}>
+  <li{if isset($menuselected) && $menuselected === 'assoce'} class="menuselected"{/if}>
     <a href="/assoce" accesskey="2" title="Présentation de l'Association AD'HOC, l'équipe, nos concerts">L'Assoce</a>
     <ul>
       <li><a href="/assoce/presentation">Présentation</a></li>
@@ -18,18 +18,18 @@
       <li><a href="/assoce/statuts">Statuts</a></li>
     </ul>
   </li>
-  <li {if isset($menuselected) && $menuselected === 'groupes'} class="menuselected"{/if}>
-    <a href="/groupes/" accesskey="2" title="La liste et les fiches groupes du réseau AD'HOC">Groupes</a>
+  <li{if isset($menuselected) && $menuselected === 'groupes'} class="menuselected"{/if}>
+    <a href="/groupes/" accesskey="3" title="La liste et les fiches groupes du réseau AD'HOC">Groupes</a>
   </li>
-  <li {if isset($menuselected) && $menuselected === 'media'} class="menuselected"{/if}>
-    <a href="/medias/">Média</a>
+  <li{if isset($menuselected) && $menuselected === 'media'} class="menuselected"{/if}>
+    <a href="/medias/" accesskey="4" title="Média">Média</a>
     <ul>
       <li><a href="/audios/create">Ajouter un son</a></li>
       <li><a href="/photos/create">Ajouter une photo</a></li>
       <li><a href="/videos/create">Ajouter une vidéo</a></li>
     </ul>
   </li>
-  <li class="{if isset($menuselected) && $menuselected === 'contact'}menuselected {/if}">
-    <a href="/contact" accesskey="9" title="Contact">Contact</a>
+  <li{if isset($menuselected) && $menuselected === 'contact'} class="menuselected"{/if}">
+    <a href="/contact" accesskey="5" title="Contact">Contact</a>
   </li>
 </ul>

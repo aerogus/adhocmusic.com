@@ -2,12 +2,12 @@
 
 {if !empty($is_auth)}
 
-<p align="center">Bonjour <strong>{$me->getPseudo()|escape}</strong><br />
+<p align="center">Bonjour <strong>{$me->getPseudo()|escape}</strong><br>
 {if $my_counters.nb_unread_messages > 0}
   {if $my_counters.nb_unread_messages > 1}
-      <br /><a href="/messagerie/">{$my_counters.nb_unread_messages} nouveaux messages</a><br />
+      <br><a href="/messagerie/">{$my_counters.nb_unread_messages} nouveaux messages</a><br>
   {else}
-      <br /><a href="/messagerie/">1 nouveau message</a><br />
+      <br><a href="/messagerie/">1 nouveau message</a><br>
   {/if}
 {/if}
 </p>
@@ -30,20 +30,20 @@
 
 <div style="padding: 5px;">
   <h5>Avec Facebook</h5>
-  <div><a href="{$fb_login_url}"><img src="/img/facebook-connect.png" alt="Connexion" /></a></div>
+  <div><a href="{$fb_login_url}"><img src="/img/facebook-connect.png" alt="Connexion"></a></div>
 </div>
 
 <div style="padding: 5px;">
   <h5>Avec AD'HOC</h5>
 </div>
 
-<form id="form-login" name="form-login" method="post" action="https://www.adhocmusic.com/auth/login">
+<form id="form-login" name="form-login" method="post" action="/auth/login">
   <div class="error" id="error_login-pseudo"{if empty($error_login_pseudo)} style="display: none"{/if}>Pseudo vide !</div>
-  <input size="18" type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo" />
+  <input size="18" type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo">
   <div class="error" id="error_login-password"{if empty($error_login_password)} style="display: none"{/if}>Password vide !</div>
-  <input size="18" type="password" id="login-password" name="password" placeholder="Password" />
-  <input id="form-login-submit" name="form-login-submit" type="submit" value="Ok" />
-  {if !empty($referer)}<input type="hidden" id="login-referer" name="referer" value="{$referer|escape:'url'}" />{/if}
+  <input size="18" type="password" id="login-password" name="password" placeholder="Password">
+  <input id="form-login-submit" name="form-login-submit" type="submit" value="Ok">
+  {if !empty($referer)}<input type="hidden" id="login-referer" name="referer" value="{$referer|escape:'url'}">{/if}
   <ul>
     <li><a href="/auth/lost-password">mot de passe oublié</a></li>
     <li><a href="/membres/create">s'inscrire</a></li>

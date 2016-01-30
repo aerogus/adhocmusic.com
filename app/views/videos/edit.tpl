@@ -9,7 +9,7 @@
 {else}
 
 <form id="form-video-edit" name="form-video-edit" method="post" action="/videos/edit" enctype="multipart/form-data">
-  <ol>
+  <ul>
     <li>
       <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
       <input type="text" id="name" name="name" size="50" value="{$video->getName()|escape}" style="float: right;">
@@ -57,7 +57,7 @@
       <input id="online" type="checkbox" name="online"{if $video->getOnline()} checked="checked"{/if} style="float: right;">
       <label for="online">Afficher</label>
     </li>
-  </ol>
+  </ul>
   <input id="form-video-edit-submit" name="form-video-edit-submit" type="submit" class="button" value="Enregistrer">
   <input type="hidden" name="id" value="{$video->getId()|escape}">
 </form>
@@ -71,4 +71,3 @@
 {include file="common/boxend.tpl"}
 
 {include file="common/footer.tpl"}
-

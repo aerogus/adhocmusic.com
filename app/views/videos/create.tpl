@@ -2,7 +2,7 @@
 
 {include file="common/boxstart.tpl" boxtitle="Ajouter une vidéo"}
 <form id="form-video-create" name="form-video-create" method="post" action="/videos/create" enctype="multipart/form-data">
-  <ol>
+  <ul>
     <li>
       <div class="error" id="error_code"{if empty($error_code)} style="display: none"{/if}>Vous devez copier/coller un code de vidéo</div>
       <div class="error" id="error_unknown_host"{if empty($error_unknow_host)} style="display: none"{/if}>Code de la vidéo non reconnu ou hébergeur incompatible</div>
@@ -73,10 +73,9 @@
     {/if}
       <label for="id_event">Evénement</label>
     </li>
-  </ol>
+  </ul>
   <input id="form-video-create-submit" name="form-video-create-submit" class="button" type="submit" value="Enregistrer">
 </form>
 {include file="common/boxend.tpl"}
 
 {include file="common/footer.tpl"}
-
