@@ -77,7 +77,7 @@
     </li>
   </ul>
   <input name="form-photo-edit-submit" id="form-photo-edit-submit" class="button" type="submit" value="Enregistrer">
-  <input type="hidden" name="id" value="{$photo->getId()|escape}">
+  <input type="hidden" name="id" id="id_photo" value="{$photo->getId()|escape}">
   <a class="button" href="/photos/delete/{$photo->getId()}">Supprimer la photo</a>
 </form>
 

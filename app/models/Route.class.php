@@ -297,7 +297,6 @@ class Route
         self::$action_params = array_merge(self::$action_params, $_POST);
 
         if(ROUTE_MANAGE_FILES === true) {
-           //var_dump($_FILES);
             foreach ($_FILES as $param_name => $file) {
                 if($file['tmp_name']) {
                     self::$action_params[$param_name] = file_get_contents($file['tmp_name']);
@@ -409,7 +408,7 @@ class Route
      */
     protected static function _output($content_type, $content)
     {
-        if($content_type == 'application/xhtml+xml') {
+        if($content_type === 'application/xhtml+xml') {
             if(!(isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/xhtml+xml') !== false)) {
                 $content_type = 'text/html';
             }

@@ -10,7 +10,7 @@ jQuery(document).ready(function ($) {
 
     $('#id_lieu').change(function() {
         var id_lieu = $('#id_lieu').val();
-        var photo_id_event = {$photo->getIdEvent()};
+        var photo_id_event = $('#id_photo').val();
         $('#id_event').empty();
         $('<option value="0">---</option>').appendTo('#id_event');
         $.getJSON('/events/get-events-by-lieu.json', {

@@ -238,6 +238,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/photo-create.js');
+
         $id_groupe = (int) Route::params('id_groupe');
         if($id_groupe) {
             $groupe = Groupe::getInstance($id_groupe);
@@ -453,6 +455,8 @@ class Controller
         $id = (int) Route::params('id');
 
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_script('/js/photo-edit.js');
 
         $trail = Trail::getInstance();
         $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
