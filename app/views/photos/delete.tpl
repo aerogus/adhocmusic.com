@@ -9,7 +9,7 @@
 {include file="common/boxstart.tpl" boxtitle="Supprimer une photo"}
 <form id="form-photo-delete" name="form-photo-delete" method="post" action="/photos/delete">
   <fieldset>
-    <ol>
+    <ul>
       <li>
         <img src="{$photo->getThumb400Url()}" alt="">
       </li>
@@ -39,7 +39,7 @@
         {$lieu->getIdDepartement()} - {$lieu->getName()|escape}
       </li>
       {/if}
-    </ol>
+    </ul>
   </fieldset>
   <input id="form-photo-delete-submit" name="form-photo-delete-submit" type="submit" class="button" value="Supprimer">
   <input type="hidden" name="id" value="{$photo->getId()}">

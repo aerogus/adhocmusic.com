@@ -119,7 +119,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    protected static function _getBaseUrl()
+    static function getBaseUrl()
     {
         return MEDIA_URL . '/structure';
     }
@@ -127,7 +127,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    protected static function _getBasePath()
+    static function getBasePath()
     {
         return MEDIA_PATH . '/structure';
     }
@@ -234,7 +234,7 @@ class Structure extends ObjectModel
      */
     static function getPictoById($id)
     {
-        return self::_getBaseUrl() . '/' . (int) $id . '.png';
+        return self::getBaseUrl() . '/' . (int) $id . '.png';
     }
 
     /* fin getters */
@@ -409,7 +409,7 @@ class Structure extends ObjectModel
         $db = DataBase::getInstance();
         $res  = $db->query($sql);
         if($db->affectedRows()) {
-            $file = self::_getBasePath() . '/' . $this->_id_structure . '.png';
+            $file = self::getBasePath() . '/' . $this->_id_structure . '.png';
             if(file_exists($file)) {
                 unlink($file);
             }
@@ -460,8 +460,8 @@ class Structure extends ObjectModel
 
         if($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
-            if(file_exists(self::_getBasePath() . '/' . $this->_id_structure . '.png')) {
-                $this->_photo = self::_getBaseUrl() . '/' . $this->_id_structure . '.png';
+            if(file_exists(self::getBasePath() . '/' . $this->_id_structure . '.png')) {
+                $this->_photo = self::getBaseUrl() . '/' . $this->_id_structure . '.png';
             }
             return true;
         }

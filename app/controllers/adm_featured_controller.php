@@ -73,7 +73,7 @@ class Controller
                     $i->setType(IMAGETYPE_JPEG);
                     $i->setMaxWidth(self::IMG_WIDTH);
                     $i->setMaxHeight(self::IMG_HEIGHT);
-                    $i->setDestFile(ADHOC_ROOT_PATH . '/media/featured/' . (int) $f->getId() . '.jpg');
+                    $i->setDestFile(Featured::getBasePath() . '/' . (int) $f->getId() . '.jpg');
                     $i->write();
                 }
 
@@ -153,7 +153,7 @@ class Controller
                     $i->setType(IMAGETYPE_JPEG);
                     $i->setMaxWidth(self::IMG_WIDTH);
                     $i->setMaxHeight(self::IMG_HEIGHT);
-                    $i->setDestFile(ADHOC_ROOT_PATH . '/media/featured/' . $f->getId() . '.jpg');
+                    $i->setDestFile(Featured::getBasePath() . '/' . $f->getId() . '.jpg');
                     $i->write();
                 }
 

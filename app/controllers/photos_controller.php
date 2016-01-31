@@ -111,7 +111,7 @@ class Controller
                 $smarty->assign('menuselected', 'media');
                 $trail->addStep("Média", "/media/");
             }
-            $trail->addStep($photo->getName(), $photo->getUrl());
+            $trail->addStep($photo->getName());
 
             $tabwho = array();
             foreach($photo->getTag() as $_who) {
@@ -216,7 +216,7 @@ class Controller
                     $objImg->setType(IMAGETYPE_JPEG);
                     $objImg->setMaxWidth(1024);
                     $objImg->setMaxHeight(768);
-                    $objImg->setDestFile(ADHOC_ROOT_PATH . '/static/media/photo/' . $photo->getId() . '.jpg');
+                    $objImg->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg');
                     $objImg->write();
                 }
 
@@ -495,7 +495,7 @@ class Controller
                     $objImg->setType(IMAGETYPE_JPEG);
                     $objImg->setMaxWidth(1024);
                     $objImg->setMaxHeight(768);
-                    $objImg->setDestFile(ADHOC_ROOT_PATH . '/static/media/photo/' . $photo->getId() . '.jpg');
+                    $objImg->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg');
                     $objImg->write();
 
                     Photo::invalidatePhotoInCache($photo->getId(),  80,  80, '000000', false,  true);

@@ -136,7 +136,7 @@ class Controller
                 $smarty->assign('menuselected', 'media');
                 $trail->addStep("Média", "/media/");
             }
-            $trail->addStep($video->getName(), "/videos/show/" . $video->getId());
+            $trail->addStep($video->getName());
 
             // vidéos et photos liées à l'événement/lieu
             if($video->getIdEvent() && $video->getIdLieu()) {

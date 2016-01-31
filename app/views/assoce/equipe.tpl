@@ -15,7 +15,7 @@
           <li>
             <a href="{$membre.url|escape}">
               <div class="thumb-80 thumb-photo-80">
-                <img src="{$membre.avatar_interne|escape}" alt="" style="width: 80px; height: 80px;">
+                <img src="{$membre.avatar_interne|escape}" alt="">
                 <p align="center"><strong>{$membre.official_pseudo|escape}</strong></p>
               </div>
               <div>
@@ -42,7 +42,7 @@
           <li>
             <a href="{$membre.url|escape}">
               <div class="thumb-80 thumb-photo-80">
-                <img src="{$membre.avatar_interne|escape}" alt="" style="width: 80px; height: 80px;">
+                <img src="{$membre.avatar_interne|escape}" alt="">
                 <p align="center"><strong>{$membre.official_pseudo|escape}</strong></p>
               </div>
               <div>

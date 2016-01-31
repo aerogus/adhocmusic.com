@@ -193,7 +193,7 @@ class Lieu extends ObjectModel
     /**
      * @return string
      */
-    protected static function _getBaseUrl()
+    static function getBaseUrl()
     {
         return MEDIA_URL . '/lieu';
     }
@@ -201,7 +201,7 @@ class Lieu extends ObjectModel
     /**
      * @return string
      */
-    protected static function _getBasePath()
+    static function getBasePath()
     {
         return MEDIA_PATH . '/lieu';
     }
@@ -933,7 +933,7 @@ class Lieu extends ObjectModel
         $db->query($sql);
 
         if($db->affectedRows()) {
-            $file = self::_getBasePath() . '/' . (int) $this->getId() . '.jpg';
+            $file = self::getBasePath() . '/' . (int) $this->getId() . '.jpg';
             if(file_exists($file)) {
                 unlink($file);
             }
@@ -1046,8 +1046,8 @@ class Lieu extends ObjectModel
 
         $this->_distance = $res['distance'];
 
-        if(file_exists(self::_getBasePath() . '/' . $this->_id_lieu . '.jpg')) {
-            $this->_photo = self::_getBaseUrl() . '/' . $this->_id_lieu . '.jpg';
+        if(file_exists(self::getBasePath() . '/' . $this->_id_lieu . '.jpg')) {
+            $this->_photo = self::getBaseUrl() . '/' . $this->_id_lieu . '.jpg';
         } else {
             $this->_photo = null;
         }
@@ -1062,8 +1062,8 @@ class Lieu extends ObjectModel
      */
     function getPhoto()
     {
-        if(file_exists(self::_getBasePath() . '/' . $this->getId() . '.jpg')) {
-            return self::_getBaseUrl() . '/' . $this->getId() . '.jpg';
+        if(file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
+            return self::getBaseUrl() . '/' . $this->getId() . '.jpg';
         }
         return false;
     }

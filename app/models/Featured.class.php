@@ -102,7 +102,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    protected static function _getBaseUrl()
+    static function getBaseUrl()
     {
         return MEDIA_URL . '/featured';
     }
@@ -110,7 +110,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    protected static function _getBasePath()
+    static function getBasePath()
     {
         return MEDIA_PATH . '/featured';
     }
@@ -203,7 +203,7 @@ class Featured extends ObjectModel
      */
     static function getImageById($id)
     {
-        return self::_getBaseUrl() . '/' . (int) $id . '.jpg';
+        return self::getBaseUrl() . '/' . (int) $id . '.jpg';
     }
 
     /**
@@ -395,7 +395,7 @@ class Featured extends ObjectModel
     {
         if(parent::delete())
         {
-            $file = self::_getBasePath() . '/' . $this->getId() . '.jpg';
+            $file = self::getBasePath() . '/' . $this->getId() . '.jpg';
             if(file_exists($file)) {
                 unlink($file);
             }

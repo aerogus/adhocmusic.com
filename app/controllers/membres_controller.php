@@ -280,7 +280,7 @@ class Controller
                         $img->setType(IMAGETYPE_JPEG);
                         $img->setMaxWidth(112);
                         $img->setMaxHeight(174);
-                        $img->setDestFile(MEDIA_PATH . '/membre/ca/' . $_SESSION['membre']->getId() . '.jpg');
+                        $img->setDestFile(Membre::getBasePath() . '/ca/' . $_SESSION['membre']->getId() . '.jpg');
                         $img->write();
                         $img = null;
                     }
@@ -292,7 +292,7 @@ class Controller
                     $img->setType(IMAGETYPE_JPEG);
                     $img->setMaxWidth(112);
                     $img->setMaxHeight(250);
-                    $img->setDestFile(MEDIA_PATH . '/membre/' . $_SESSION['membre']->getId() . '.jpg');
+                    $img->setDestFile(Membre::getBasePath() . '/' . $_SESSION['membre']->getId() . '.jpg');
                     $img->write();
                     $img = null;
                 }

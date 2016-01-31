@@ -158,7 +158,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    protected static function _getBaseUrl()
+    static function getBaseUrl()
     {
         return MEDIA_URL . '/event';
     }
@@ -166,7 +166,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    protected static function _getBasePath()
+    static function getBasePath()
     {
         return MEDIA_PATH . '/event';
     }
@@ -356,8 +356,8 @@ class Event extends ObjectModel
      */
     function getFullFlyerUrl()
     {
-        if(file_exists(self::_getBasePath()  . '/' . $this->_id_event . '.jpg')) {
-            return self::_getBaseUrl() . '/' . $this->_id_event . '.jpg';
+        if(file_exists(self::getBasePath()  . '/' . $this->_id_event . '.jpg')) {
+            return self::getBaseUrl() . '/' . $this->_id_event . '.jpg';
         }
         return false;
     }
@@ -893,12 +893,12 @@ class Event extends ObjectModel
         {
             $this->_dbToObject($res);
 
-            if(file_exists(self::_getBasePath() . '/' . $this->getId() . '.jpg')) {
-                $this->_photo = self::_getBaseUrl() . '/' . $this->getId() . '.jpg';
+            if(file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
+                $this->_photo = self::getBaseUrl() . '/' . $this->getId() . '.jpg';
             }
 
-            if(file_exists(self::_getBasePath() . '/' . $this->getId() . '-mini.jpg')) {
-                $this->_mini_photo = self::_getBaseUrl() . '/' . $this->getId() . '-mini.jpg';
+            if(file_exists(self::getBasePath() . '/' . $this->getId() . '-mini.jpg')) {
+                $this->_mini_photo = self::getBaseUrl() . '/' . $this->getId() . '-mini.jpg';
             }
 
             //$this->_styles     = $this->getStyles();
@@ -927,7 +927,7 @@ class Event extends ObjectModel
 
         parent::delete();
 
-        $p = self::_getBasePath() . '/' . $this->getId() . '.jpg';
+        $p = self::getBasePath() . '/' . $this->getId() . '.jpg';
         if(file_exists($p)) {
             unlink($p);
         }
@@ -1523,7 +1523,7 @@ class Event extends ObjectModel
         $cache = Image::getLocalCachePath($uid);
 
         if(!file_exists($cache)) {
-            $source = self::_getBasePath() . '/' . $id . '.jpg';
+            $source = self::getBasePath() . '/' . $id . '.jpg';
             if(file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);

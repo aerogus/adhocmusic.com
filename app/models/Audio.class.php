@@ -74,7 +74,7 @@ class Audio extends Media
     /**
      * @return string
      */
-    protected static function _getBaseUrl()
+    static function getBaseUrl()
     {
         return MEDIA_URL . '/audio';
     }
@@ -82,7 +82,7 @@ class Audio extends Media
     /**
      * @return string
      */
-    protected static function _getBasePath()
+    static function getBasePath()
     {
         return MEDIA_PATH . '/audio';
     }
@@ -117,7 +117,7 @@ class Audio extends Media
      */
     function getDirectUrl()
     {
-        return self::_getBasePath() . '/' . $this->getId() . '.mp3';
+        return self::getBasePath() . '/' . $this->getId() . '.mp3';
     }
 
     /**
@@ -279,7 +279,7 @@ class Audio extends Media
     {
         if(parent::delete())
         {
-            $file = self::_getBasePath() . '/' . $this->getId() . '.mp3';
+            $file = self::getBasePath() . '/' . $this->getId() . '.mp3';
             if(file_exists($file)) {
                 unlink($file);
             }
@@ -349,12 +349,12 @@ class Audio extends Media
         } else {
             $chemin = '';
             if(is_numeric($id_audio)) {
-                $chemin .= self::_getBaseUrl() . '/' . $id_audio . '.mp3';
+                $chemin .= self::getBaseUrl() . '/' . $id_audio . '.mp3';
             } elseif(is_array($id_audio)) {
                 $first  = true;
                 foreach($id_audio as $id) {
                     if(!$first) { $chemin .= '|'; }
-                    $chemin .= self::_getBaseUrl() . '/' . $id . '.mp3';
+                    $chemin .= self::getBaseUrl() . '/' . $id . '.mp3';
                     $first = false;
                 }
             } else {

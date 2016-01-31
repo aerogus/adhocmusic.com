@@ -89,7 +89,7 @@ class MembreAdhoc extends Membre
     /**
      * @return string
      */
-    protected static function _getBaseUrl()
+    static function getBaseUrl()
     {
         return MEDIA_URL . '/membre/ca';
     }
@@ -97,7 +97,7 @@ class MembreAdhoc extends Membre
     /**
      * @return string
      */
-    protected static function _getBasePath()
+    static function getBasePath()
     {
         return MEDIA_PATH . '/membre/ca';
     }
@@ -279,8 +279,8 @@ class MembreAdhoc extends Membre
         foreach($mbrs as $idx => $mbr)
         {
             $mbrs[$idx]['avatar_interne'] = false;
-            if(file_exists(self::_getBasePath() . '/' . $mbr['id'] . '.jpg')) {
-                $mbrs[$idx]['avatar_interne'] = self::_getBaseUrl() . '/' . $mbr['id'] . '.jpg?ts=' . $mbr['modified_on_ts'];
+            if(file_exists(self::getBasePath() . '/' . $mbr['id'] . '.jpg')) {
+                $mbrs[$idx]['avatar_interne'] = self::getBaseUrl() . '/' . $mbr['id'] . '.jpg?ts=' . $mbr['modified_on_ts'];
             }
             $mbrs[$idx]['url'] = self::getUrlById($mbr['id']);
         }

@@ -7,6 +7,7 @@ class Controller
      * pour un pays donné, au format json
      *
      * @param string $_GET['c']
+     * @return array
      */
     static function getregion()
     {
@@ -108,5 +109,4 @@ class Controller
 
         return $tab;
     }
-    
 }

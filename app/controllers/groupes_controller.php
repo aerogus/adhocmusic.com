@@ -207,7 +207,7 @@ class Controller
                         $img->setKeepRatio(true);
                         $img->setMaxWidth(400);
                         $img->setMaxHeight(400);
-                        $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/groupe/l' . $groupe->getId() . '.jpg');
+                        $img->setDestFile(Groupe::getBasePath() . '/l' . $groupe->getId() . '.jpg');
                         $img->write();
                         $img = '';
                     }
@@ -218,7 +218,7 @@ class Controller
                         $img->setKeepRatio(true);
                         $img->setMaxWidth(400);
                         $img->setMaxHeight(400);
-                        $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/groupe/p' . $groupe->getId() . '.jpg');
+                        $img->setDestFile(Groupe::getBasePath() . '/p' . $groupe->getId() . '.jpg');
                         $img->write();
                         $img = '';
                     }
@@ -229,7 +229,7 @@ class Controller
                         $img->setKeepRatio(false);
                         $img->setMaxWidth(64);
                         $img->setMaxHeight(64);
-                        $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/groupe/m' . $groupe->getId() . '.jpg');
+                        $img->setDestFile(Groupe::getBasePath() . '/m' . $groupe->getId() . '.jpg');
                         $img->write();
                         $img = '';
                     }
@@ -373,7 +373,7 @@ class Controller
                     $img->setKeepRatio(true);
                     $img->setMaxWidth(400);
                     $img->setMaxHeight(400);
-                    $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/groupe/l' . $groupe->getId() . '.jpg');
+                    $img->setDestFile(Groupe::getBasePath() . '/l' . $groupe->getId() . '.jpg');
                     $img->write();
                     $img = '';
                 }
@@ -384,7 +384,7 @@ class Controller
                     $img->setKeepRatio(true);
                     $img->setMaxWidth(400);
                     $img->setMaxHeight(400);
-                    $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/groupe/p' . $groupe->getId() . '.jpg');
+                    $img->setDestFile(Groupe::getBasePath() . '/p' . $groupe->getId() . '.jpg');
                     $img->write();
                     $img = '';
                 }
@@ -395,7 +395,7 @@ class Controller
                     $img->setKeepRatio(false);
                     $img->setMaxWidth(64);
                     $img->setMaxHeight(64);
-                    $img->setDestFile(ADHOC_ROOT_PATH . '/static/media/groupe/m' . $groupe->getId() . '.jpg');
+                    $img->setDestFile(Groupe::getBasePath() . '/m' . $groupe->getId() . '.jpg');
                     $img->write();
                     $img = '';
                 }

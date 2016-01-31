@@ -279,7 +279,7 @@ class Membre extends Contact
     /**
      * @return string
      */
-    protected static function _getBaseUrl()
+    static function getBaseUrl()
     {
         return MEDIA_URL . '/membre';
     }
@@ -287,7 +287,7 @@ class Membre extends Contact
     /**
      * @return string
      */
-    protected static function _getBasePath()
+    static function getBasePath()
     {
         return MEDIA_PATH . '/membre';
     }
@@ -636,8 +636,8 @@ class Membre extends Contact
      */
     function getAvatarInterne()
     {
-        if (file_exists(self::_getBasePath() . '/ca/' . $this->getId() . '.jpg')) {
-            return self::_getBasePath() . '/ca/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        if (file_exists(self::getBasePath() . '/ca/' . $this->getId() . '.jpg')) {
+            return self::getBaseUrl() . '/ca/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         }
         return false;
     }
@@ -647,8 +647,8 @@ class Membre extends Contact
      */
     function getAvatar()
     {
-        if (file_exists(self::_getBasePath() . '/' . $this->getId() . '.jpg')) {
-            return self::_getBaseUrl() . '/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        if (file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
+            return self::getBaseUrl() . '/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         }
         return false;
     }

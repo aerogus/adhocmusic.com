@@ -258,7 +258,7 @@ class Video extends Media
     /**
      * @return string
      */
-    protected static function _getBaseUrl()
+    static function getBaseUrl()
     {
         return MEDIA_URL . '/video';
     }
@@ -266,7 +266,7 @@ class Video extends Media
     /**
      * @return string
      */
-    protected static function _getBasePath()
+    static function getBasePath()
     {
         return MEDIA_PATH . '/video';
     }
@@ -985,7 +985,7 @@ class Video extends Media
      */
     function deleteThumbnail()
     {
-        $file = self::_getBasePath() . '/' . $this->getId() . '.jpg';
+        $file = self::getBasePath() . '/' . $this->getId() . '.jpg';
         if(file_exists($file)) {
             unlink($file);
             return true;
@@ -1002,8 +1002,8 @@ class Video extends Media
      */
     function storeThumbnail($remote_url)
     {
-        $tmp = self::_getBasePath() . '/' . $this->_id_video . '.jpg.tmp';
-        $jpg = self::_getBasePath() . '/' . $this->_id_video . '.jpg';
+        $tmp = self::getBasePath() . '/' . $this->_id_video . '.jpg.tmp';
+        $jpg = self::getBasePath() . '/' . $this->_id_video . '.jpg';
 
         file_put_contents($tmp, file_get_contents($remote_url));
         $objImg = new Image($tmp);
@@ -1042,7 +1042,7 @@ class Video extends Media
         $cache = Image::getLocalCachePath($uid);
 
         if(!file_exists($cache)) {
-            $source = self::_getBasePath() . '/video/' . $id . '.jpg';
+            $source = self::getBasePath() . '/' . $id . '.jpg';
             if(file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);

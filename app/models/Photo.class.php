@@ -94,7 +94,7 @@ class Photo extends Media
     /**
      * @return string
      */
-    protected static function _getBaseUrl()
+    static function getBaseUrl()
     {
         return MEDIA_URL . '/photo';
     }
@@ -102,7 +102,7 @@ class Photo extends Media
     /**
      * @return string
      */
-    protected static function _getBasePath()
+    static function getBasePath()
     {
         return MEDIA_PATH . '/photo';
     }
@@ -212,7 +212,7 @@ class Photo extends Media
             self::invalidatePhotoInCache($this->getId(), 400, 300, '000000', false, false);
             self::invalidatePhotoInCache($this->getId(), 680, 600, '000000', false, false);
 
-            $file = self::_getBasePath() . '/' . $this->getId() . '.jpg';
+            $file = self::getBasePath() . '/' . $this->getId() . '.jpg';
             if(file_exists($file)) {
                 unlink($file);
             }
@@ -501,7 +501,7 @@ class Photo extends Media
         $cache = Image::getLocalCachePath($uid);
 
         if(!file_exists($cache)) {
-            $source = self::_getBasePath() . '/' . $id . '.jpg';
+            $source = self::getBasePath() . '/' . $id . '.jpg';
             if(file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);

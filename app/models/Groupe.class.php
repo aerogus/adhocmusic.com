@@ -217,7 +217,7 @@ class Groupe extends ObjectModel
     /**
      * @return string
      */
-    protected static function _getBaseUrl()
+    static function getBaseUrl()
     {
         return MEDIA_URL . '/groupe';
     }
@@ -225,7 +225,7 @@ class Groupe extends ObjectModel
     /**
      * @return string
      */
-    protected static function _getBasePath()
+    static function getBasePath()
     {
         return MEDIA_PATH . '/groupe';
     }
@@ -576,8 +576,8 @@ class Groupe extends ObjectModel
      */
     function getPhoto()
     {
-        if(file_exists(self::_getBasePath() . '/p' . $this->getId() . '.jpg')) {
-            return self::_getBaseUrl() . '/p' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        if(file_exists(self::getBasePath() . '/p' . $this->getId() . '.jpg')) {
+            return self::getBaseUrl() . '/p' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         }
         return false;
     }
@@ -590,8 +590,8 @@ class Groupe extends ObjectModel
      */
     function getMiniPhoto()
     {
-        if(file_exists(self::_getBasePath() . '/m' . $this->getId() . '.jpg')) {
-            return self::_getBaseUrl() . '/m' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        if(file_exists(self::getBasePath() . '/m' . $this->getId() . '.jpg')) {
+            return self::getBaseUrl() . '/m' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         } else {
             return HOME_URL . '/img/note_adhoc_64.png';
         }
@@ -604,12 +604,12 @@ class Groupe extends ObjectModel
      */
     function getLogo()
     {
-        if(file_exists(self::_getBasePath() . '/l' . $this->getId() . '.png')) {
-            return self::_getBaseUrl() . '/l' . $this->getId() . '.png?ts=' . $this->getModifiedOnTs();
-        } else if(file_exists(self::_getBasePath() . '/l' . $this->getId() . '.gif')) {
-            return self::_getBaseUrl() . '/l' . $this->getId() . '.gif?ts=' . $this->getModifiedOnTs();
-        } else if(file_exists(self::_getBasePath() . '/l' . $this->getId() . '.jpg')) {
-            return self::_getBaseUrl() . '/l' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        if(file_exists(self::getBasePath() . '/l' . $this->getId() . '.png')) {
+            return self::getBaseUrl() . '/l' . $this->getId() . '.png?ts=' . $this->getModifiedOnTs();
+        } else if(file_exists(self::getBasePath() . '/l' . $this->getId() . '.gif')) {
+            return self::getBaseUrl() . '/l' . $this->getId() . '.gif?ts=' . $this->getModifiedOnTs();
+        } else if(file_exists(self::getBasePath() . '/l' . $this->getId() . '.jpg')) {
+            return self::getBaseUrl() . '/l' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         }
     }
 
@@ -654,8 +654,8 @@ class Groupe extends ObjectModel
     static function getAvatarById($id_groupe)
     {
         $avatar = HOME_URL . '/img/note_adhoc_64.png';
-        if(file_exists(self::_getBasePath() . '/m' . $id_groupe . '.jpg')) {
-            $avatar = self::_getBaseUrl() . '/m' . $id_groupe . '.jpg';
+        if(file_exists(self::getBasePath() . '/m' . $id_groupe . '.jpg')) {
+            $avatar = self::getBaseUrl() . '/m' . $id_groupe . '.jpg';
         }
         return $avatar;
     }
@@ -1038,17 +1038,17 @@ class Groupe extends ObjectModel
 
         parent::delete();
 
-        $p = self::_getBasePath() . '/p' . $this->getId() . '.jpg';
+        $p = self::getBasePath() . '/p' . $this->getId() . '.jpg';
         if(file_exists($p)) {
             unlink($p);
         }
 
-        $m = self::_getBasePath() . '/m' . $this->getId() . '.jpg';
+        $m = self::getBasePath() . '/m' . $this->getId() . '.jpg';
         if(file_exists($m)) {
             unlink($m);
         }
 
-        $l = self::_getBasePath() . '/l' . $this->getId() . '.jpg';
+        $l = self::getBasePath() . '/l' . $this->getId() . '.jpg';
         if(file_exists($l)) {
             unlink($l);
         }
@@ -1349,8 +1349,8 @@ class Groupe extends ObjectModel
             foreach($res as $grp) {
                 $tab[$grp['id']] = $grp;
                 $mini_photo = '/img/note_adhoc_64.png';
-                if(file_exists(self::_getBasePath() . '/m' . $grp['id'] . '.jpg')) {
-                    $mini_photo = self::_getBaseUrl() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
+                if(file_exists(self::getBasePath() . '/m' . $grp['id'] . '.jpg')) {
+                    $mini_photo = self::getBaseUrl() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
                 }
                 $tab[$grp['id']]['mini_photo'] = $mini_photo;
                 $tab[$grp['id']]['nom_type_musicien'] = Membre::getTypeMusicienName($grp['id_type_musicien']);
@@ -1386,12 +1386,12 @@ class Groupe extends ObjectModel
             $tab[$grp['lettre']][$cpt] = $grp;
             $tab[$grp['lettre']][$cpt]['mini_photo'] = '/img/note_adhoc_64.png';
             $tab[$grp['lettre']][$cpt]['class'] = 'grpinactif';
-            if(file_exists(self::_getBasePath() . '/m' . $grp['id'] . '.png')) {
-                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::_getBaseUrl() . '/m' . $grp['id'] . '.png?ts=' . $grp['modified_on_ts'];
-            } elseif(file_exists(self::_getBasePath() . '/m' . $grp['id'] . '.jpg')) {
-                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::_getBaseUrl() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
-            } elseif(file_exists(self::_getBasePath() . '/m' . $grp['id'] . '.gif')) {
-                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::_getBaseUrl() . '/m' . $grp['id'] . '.gif?ts=' . $grp['modified_on_ts'];
+            if(file_exists(self::getBasePath() . '/m' . $grp['id'] . '.png')) {
+                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::getBaseUrl() . '/m' . $grp['id'] . '.png?ts=' . $grp['modified_on_ts'];
+            } elseif(file_exists(self::getBasePath() . '/m' . $grp['id'] . '.jpg')) {
+                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::getBaseUrl() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
+            } elseif(file_exists(self::getBasePath() . '/m' . $grp['id'] . '.gif')) {
+                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::getBaseUrl() . '/m' . $grp['id'] . '.gif?ts=' . $grp['modified_on_ts'];
             }
 
             if($grp['etat'] === self::ETAT_ACTIF) {
