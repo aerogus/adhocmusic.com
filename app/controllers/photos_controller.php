@@ -222,7 +222,7 @@ class Controller
 
                 Log::action(Log::ACTION_PHOTO_CREATE, $photo->getId());
 
-                Tools::redirect('/media/?create=1');
+                Tools::redirect('/medias/?create=1');
 
             } else {
 
@@ -398,7 +398,7 @@ class Controller
             rmdir(PHOTOS_EXTRACT_DIR);
             Log::write('photo', "delete du rep tmp");
 
-            Tools::redirect('/media/?create=1&nb='.$nb);
+            Tools::redirect('/medias/?create=1&nb='.$nb);
 
         }
 
@@ -510,7 +510,7 @@ class Controller
 
                 if($photo->save()) {
                     Log::action(Log::ACTION_PHOTO_EDIT, $photo->getId());
-                    Tools::redirect('/media/?edit=1');
+                    Tools::redirect('/medias/?edit=1');
                 }
 
             } else {
