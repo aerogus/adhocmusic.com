@@ -80,8 +80,6 @@
 1|auth|login|POST|/auth/login
 1|auth|fb_login|GET|/auth/fb-login
 1|auth|logout|GET|/auth/logout
-1|auth|fb_login|GET|/auth/fb-login
-1|auth|fb_test|GET|/auth/fb-test
 1|auth|change_password|GET|/auth/change-password
 1|auth|change_password|POST|/auth/change-password
 1|auth|lost_password|GET|/auth/lost-password

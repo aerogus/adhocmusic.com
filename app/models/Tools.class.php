@@ -349,7 +349,7 @@ class Tools
     }
 
     /**
-     * initialisation d'une session PHP5 native
+     * initialisation d'une session PHP native
      */
     static function sessionInit()
     {

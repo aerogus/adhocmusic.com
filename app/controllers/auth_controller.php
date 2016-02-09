@@ -61,6 +61,10 @@ class Controller
             $trail = Trail::getInstance();
             $trail->addStep("Identification");
 
+            //$fb_permissions = ['email'];
+            //$fb_login_url = $fb_helper->getLoginUrl(home_url('/login?do-fb-login=1', 'https'), $fb_permissions);
+            //$smarty->assign('fb_login_url', $fb_login_url);
+
             return $smarty->fetch('auth/login.tpl');
         }
     }

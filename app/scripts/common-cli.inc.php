@@ -27,8 +27,7 @@ define('CACHE_URL',  'https://www.adhocmusic.com');
 
 // App AD'HOC Music
 define('FB_APP_ID', '50959607741');
-define('FB_API_KEY', '9bff9746d384c2b4dd0c4fa130bcaecd');
-define('FB_SECRET_KEY', 'c2ea0c274c21507404f21688f71f98c1');
+define('FB_APP_SECRET_KEY', 'c2ea0c274c21507404f21688f71f98c1');
 
 /**
  * Chargement automatique des paquets gérés par composer
