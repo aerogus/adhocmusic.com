@@ -84,10 +84,10 @@ class AdHocSmarty extends Smarty
             ));
         }
 
-        $this->enqueue_style('/css/adhoc.css?v=20150909');
+        $this->enqueue_style('/css/adhoc.20160213.css');
 
         $this->enqueue_script('/js/jquery-2.2.0.min.js');
-        $this->enqueue_script('/js/adhoc.20160124.js');
+        $this->enqueue_script('/js/adhoc.20160213.js');
 
         $this->print_inline_script(file_get_contents(ADHOC_ROOT_PATH . '/app/assets/js/google-analytics.js'));
         $this->print_inline_script(file_get_contents(ADHOC_ROOT_PATH . '/app/assets/js/facebook-sdk.js'));

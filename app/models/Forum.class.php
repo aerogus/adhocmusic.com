@@ -16,7 +16,7 @@ abstract class Forum
      *
      * @var string
      */
-    protected static $path_smileys = 'http://static.adhocmusic.com/img/smileys/';
+    protected static $path_smileys = 'https://www.adhocmusic.com/img/smileys/';
 
     /**
      * liste des smileys a parser
