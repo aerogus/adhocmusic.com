@@ -37,6 +37,9 @@ function adhoc_get_env()
     }
 }
 
+/**
+ * @return bool
+ */
 function is_ssl()
 {
     return (bool) (

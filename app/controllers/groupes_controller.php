@@ -14,7 +14,6 @@ class Controller
         $trail = Trail::getInstance();
         $trail->addStep("Groupes", "/groupes/");
 
-//return sizeof(Groupe::getGroupesByName());
         $smarty->assign('liste_groupes', Groupe::getGroupesByName());
 
         return $smarty->fetch('groupes/index.tpl');
@@ -175,13 +174,6 @@ class Controller
             );
 
             if(self::_validate_form_groupe_create($data, $errors)) {
-
-                /* todo: extraire le page id à partir du nom d'utilisateur */
-                /*
-                $page = file_get_contents('http://graph.facebook.com/thestalls');
-                $page = json_decode($page);
-                var_dump($page->id);
-                */
 
                 $groupe = Groupe::init();
                 $groupe->setName($data['name']);

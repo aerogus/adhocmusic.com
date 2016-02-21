@@ -25,7 +25,7 @@ jQuery(document).ready(function ($) {
     });
 
     $('.del-msg-from').click(function () {
-        deleteMessahe($this).data('msg-id'), 'from');
+        deleteMessage($(this).data('msg-id'), 'from');
     });
 
     $("#form-message-write").submit(function () {
