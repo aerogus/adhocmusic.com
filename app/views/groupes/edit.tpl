@@ -12,49 +12,10 @@
 
 {else}
 
-<script>
-$(function() {
-  $("#form-groupe-edit").submit(function() {
-    var valid = true;
-    if($("#style").val() == "") {
-      $("#error_style").fadeIn();
-      valid = false;
-    } else {
-      $("#error_style").fadeOut();
-    }
-    if($("#influences").val() == "") {
-      $("#error_influences").fadeIn();
-      valid = false;
-    } else {
-      $("#error_influences").fadeOut();
-    }
-    if($("#lineup").val() == "") {
-      $("#error_lineup").fadeIn();
-      valid = false;
-    } else {
-      $("#error_lineup").fadeOut();
-    }
-    if($("#mini_text").val() == "") {
-      $("#error_mini_text").fadeIn();
-      valid = false;
-    } else {
-      $("#error_mini_text").fadeOut();
-    }
-    if($("#text").val() == "") {
-      $("#error_text").fadeIn();
-      valid = false;
-    } else {
-      $("#error_text").fadeOut();
-    }
-    return valid;
-  });
-});
-</script>
-
 {include file="common/boxstart.tpl" boxtitle=$groupe->getName()}
 
 <form id="form-groupe-edit" name="form-groupe-edit" method="post" action="/groupes/edit" enctype="multipart/form-data">
-  <ol>
+  <ul>
     <li>
       <label for="name">Nom</label>
       <span id="name">{$groupe->getName()|escape}</span>
@@ -123,6 +84,7 @@ $(function() {
       <label for="text">Présentation</label>
       <textarea id="text" name="text" cols="50" rows="20">{$data.text|escape}</textarea>
     </li>
+<!--
     <li>
       <label for="id_type_musicien">Ma fonction au sein de ce groupe</label>
       <select id="id_type_musicien" name="id_type_musicien">
@@ -131,7 +93,8 @@ $(function() {
         {/foreach}
       </select>
     </li>
-  </ol>
+-->
+  </ul>
   <input type="hidden" name="id" value="{$groupe->getId()|escape}">
   <input id="form-groupe-edit-submit" name="form-groupe-edit-submit" class="button" type="submit" value="Modifier">
 </form>

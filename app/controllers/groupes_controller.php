@@ -292,6 +292,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/groupe-edit.js');
+
         try {
             $groupe = Groupe::getInstance($id);
         } catch(Exception $e) {
@@ -305,7 +307,7 @@ class Controller
         $trail->addStep($groupe->getName());
 
         $smarty->assign('groupe', $groupe);
-        if(($id_type_musicien = $groupe->isMember($_SESSION['membre']->getId())) === false) {
+        if($groupe->isMember($_SESSION['membre']->getId()) === false) {
             $smarty->assign('not_my_groupe', true);
         }
 
@@ -336,7 +338,7 @@ class Controller
                 'myspace'          => (string) Route::params('myspace'),
                 'facebook_page_id' => (string) Route::params('facebook_page_id'),
                 'twitter_id'       => (string) Route::params('twitter_id'),
-                'id_type_musicien' => (int) Route::params('id_type_musicien'),
+                //'id_type_musicien' => (int) Route::params('id_type_musicien'),
             );
 
             if(self::_validate_form_groupe_edit($data, $errors)) {
@@ -357,7 +359,7 @@ class Controller
                 $groupe->setModifiedNow();
                 $groupe->save();
 
-                $groupe->updateMember($_SESSION['membre']->getId(), $data['id_type_musicien']);
+               // $groupe->updateMember($_SESSION['membre']->getId(), $data['id_type_musicien']);
 
                 if(is_uploaded_file($_FILES['lelogo']['tmp_name'])) {
                     $img = new Image($_FILES['lelogo']['tmp_name']);
@@ -407,8 +409,8 @@ class Controller
         }
 
         $smarty->assign('data', $data);
-        $smarty->assign('id_type_musicien', $id_type_musicien);
-        $smarty->assign('types_musicien', Membre::getTypesMusicien());
+        //$smarty->assign('id_type_musicien', $id_type_musicien);
+        //$smarty->assign('types_musicien', Membre::getTypesMusicien());
 
         return $smarty->fetch('groupes/edit.tpl');
     }
