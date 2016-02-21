@@ -403,9 +403,7 @@ class Controller
              . "ORDER BY `pseudo` ASC "
              . "LIMIT 0, 10";
 
-        $res = $db->queryWithFetch($sql);
-
-        return $res;
+        return $db->queryWithFetch($sql);
     }
 
     static function fb_link()

@@ -193,6 +193,8 @@ class Groupe extends ObjectModel
     protected $_styles = array();
 
     /**
+     * Membres liés au groupe
+     *
      * @var array
      */
     protected $_members = null;
@@ -1072,9 +1074,6 @@ class Groupe extends ObjectModel
         if(($res = $db->queryWithFetchFirstRow($sql)))
         {
             $this->_dbToObject($res);
-            //$this->_styles   = self::getStylesById($this->getId());
-            //$this->_template = unserialize($res['template']);
-            //$this->_members  = self::getMembersById($this->getId());
             return true;
         }
 
@@ -1177,7 +1176,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * un membre appartient-il au groupe courant ?
+     * un membre appartient-il au groupe ?
      *
      * @param int $id_contact
      * @return bool
@@ -1188,10 +1187,9 @@ class Groupe extends ObjectModel
             $this->_members = self::getMembersById($this->getId());
         }
 
-        foreach($this->_members as $member)
-        {
+        foreach($this->_members as $member) {
             if($member['id'] === $id_contact) {
-                return (int) $member['id_type_musicien'];
+                return true;
             }
         }
         return false;
