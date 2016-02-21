@@ -8,6 +8,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/messagerie.js');
+
         $smarty->assign('sent', (bool) Route::params('sent'));
 
         $trail = Trail::getInstance();
@@ -45,6 +47,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/messagerie.js');
+
         $trail = Trail::getInstance();
         $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
         $trail->addStep("Messagerie", "/messagerie/");
@@ -81,6 +85,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/messagerie.js');
+
         $trail = Trail::getInstance();
         $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
         $trail->addStep("Messagerie", "/messagerie/");
@@ -90,17 +96,17 @@ class Controller
         {
             $text = (string) Route::params('text');
             $to = (int) Route::params('to');
-    
+
             $db = DataBase::getInstance();
-    
+
             $sql = "INSERT INTO `adhoc_messagerie` "
                  . "(`from`, `to`, `text`, `date`) "
                  . "VALUES (" . (int) $_SESSION['membre']->getId() . ", " . (int) $to . ", '" . $db->escape($text) . "', NOW())";
-    
+
             $db->query($sql);
-    
+
             $dest = Membre::getInstance($to);
- 
+
             $data = array(
                 'pseudo_from' => $_SESSION['membre']->getPseudo(),
                 'pseudo_to' => $dest->getPseudo(),
@@ -113,7 +119,7 @@ class Controller
             } else {
                 $smarty->assign('error', "erreur envoi email");
                 return $smarty->fetch('messagerie/write.tpl');
-            }    
+            }
         }
 
         $pseudo = (string) Route::params('pseudo');

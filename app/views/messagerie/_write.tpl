@@ -1,17 +1,3 @@
-<script>
-$(function() {
-    $("#form-message-write").submit(function () {
-        var valid = true;
-        if($("#text").val() === "") {
-            $("#text").prev(".error").fadeIn();
-            valid = false;
-        } else {
-            $("#text").prev(".error").fadeOut();
-        }
-    });
-});
-</script>
-
 <form id="form-message-write" name="form-message-write" action="/messagerie/write" method="post">
   <ul>
     <li>
