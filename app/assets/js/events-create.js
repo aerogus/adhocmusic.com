@@ -15,25 +15,25 @@ jQuery(document).ready(function ($) {
 
     $("#form-event-create").submit(function () {
         var valid = true;
-        if($("#name").val() === "") {
+        if ($("#name").val() === "") {
             $("#error_name").fadeIn();
             valid = false;
         } else {
             $("#error_name").fadeOut();
         }
-        if($("#id_lieu").val() === "0") {
+        if ($("#id_lieu").val() === "0") {
             $("#error_id_lieu").fadeIn();
             valid = false;
         } else {
             $("#error_id_lieu").fadeOut();
         }
-        if($("#text").val() === "") {
+        if ($("#text").val() === "") {
             $("#error_text").fadeIn();
             valid = false;
         } else {
             $("#error_text").fadeOut();
         }
-        if($("#price").val() === "" || $("#price").val() === "0") {
+        if ($("#price").val() === "" || $("#price").val() === "0") {
             $("#error_price").fadeIn();
             valid = false;
         } else {
@@ -60,17 +60,17 @@ jQuery(document).ready(function ($) {
         $.getJSON('/geo/getregion.json', {
             c: id_country
         }, function (data) {
-          var selected = '';
-          $.each(data, function (region_id, region_name) {
-              if(event_id_region == region_id) {
-                  selected = ' selected="selected"';
-              } else {
-                  selected = '';
-              }
-              $('<option value="'+region_id+'"'+selected+'>'+region_name+'</option>').appendTo('#id_region');
-          });
+            var selected = '';
+            $.each(data, function (region_id, region_name) {
+                if (event_id_region === region_id) {
+                    selected = ' selected="selected"';
+                } else {
+                    selected = '';
+                }
+                $('<option value="' + region_id + '"' + selected + '>' + region_name + '</option>').appendTo('#id_region');
+            });
         });
-        if(id_country !== 'FR') {
+        if (id_country !== 'FR') {
             $('#id_departement').hide();
             $('#id_city').hide();
         } else {
@@ -94,19 +94,19 @@ jQuery(document).ready(function ($) {
         var event_id_departement = '{$data.id_departement}';
         $('#id_departement').empty();
         $('#id_city').empty();
-        if(id_country === 'FR') {
+        if (id_country === 'FR') {
             $('<option value="0">---</option>').appendTo('#id_departement');
             $.getJSON('/geo/getdepartement.json', {
                 r: id_region
             }, function (data) {
                 var selected = '';
                 $.each(data, function (departement_id, departement_name) {
-                  if(event_id_departement == departement_id) {
-                      selected = ' selected="selected"';
-                  } else {
-                      selected = '';
-                  }
-                  $('<option value="' + departement_id + '"' + selected + '>' + departement_id + ' - ' + departement_name + '</option>').appendTo('#id_departement');
+                    if (event_id_departement === departement_id) {
+                        selected = ' selected="selected"';
+                    } else {
+                        selected = '';
+                    }
+                    $('<option value="' + departement_id + '"' + selected + '>' + departement_id + ' - ' + departement_name + '</option>').appendTo('#id_departement');
                 });
             });
         }
@@ -125,14 +125,14 @@ jQuery(document).ready(function ($) {
         var id_country = $('#id_country').val();
         var id_departement = $('#id_departement').val();
         $('#id_city').empty();
-        if(id_country === 'FR') {
+        if (id_country === 'FR') {
             $('<option value="0">---</option>').appendTo('#id_city');
             $.getJSON('/geo/getcity.json', {
                 d: id_departement
             }, function (data) {
-              $.each(data, function(city_id, city_name) {
-                  $('<option value="' + city_id + '">' + city_name + '</option>').appendTo('#id_city');
-              });
+                $.each(data, function (city_id, city_name) {
+                    $('<option value="' + city_id + '">' + city_name + '</option>').appendTo('#id_city');
+                });
             });
         }
         $('#id_country').parent().css('background-color', '');
@@ -153,7 +153,7 @@ jQuery(document).ready(function ($) {
         $.getJSON('/geo/getlieu.json', {
             v: id_city
         }, function (data) {
-            $.each(data, function(lieu_id, lieu_name) {
+            $.each(data, function (lieu_id, lieu_name) {
                 $('<option value="' + lieu_id + '">' + lieu_name + '</option>').appendTo('#id_lieu');
             });
         });

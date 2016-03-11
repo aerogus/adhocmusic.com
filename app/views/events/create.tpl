@@ -1,4 +1,4 @@
-{include file="common/header.tpl" js_jquery_ui=true css_jquery_ui=true js_jquery_ui_datepicker=true}
+{include file="common/header.tpl"}
 
 {include file="common/boxstart.tpl" boxtitle="Ajouter une date"}
 

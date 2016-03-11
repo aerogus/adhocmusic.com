@@ -191,6 +191,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/events-create.js');
+
         $smarty->assign('menuselected', 'agenda');
 
         $trail = Trail::getInstance();
@@ -431,6 +433,8 @@ class Controller
         $id = (int) Route::params('id');
 
         Tools::auth(Membre::TYPE_STANDARD);
+
+        $smarty->enqueue_script('/js/events-edit.js');
 
         $trail = Trail::getInstance();
         $trail->addStep("Agenda", "/events/");
