@@ -21,6 +21,12 @@
   <li{if isset($menuselected) && $menuselected === 'groupes'} class="menuselected"{/if}>
     <a href="/groupes/" accesskey="3" title="La liste et les fiches groupes du réseau AD'HOC">Groupes</a>
   </li>
+  <li{if isset($menuselected) && $menuselected === 'agenda'} class="menuselected"{/if}>
+    <a href="/events/" accesskey="3" title="Agenda Culturel">Agenda</a>
+    <ul>
+      <li><a href="/events/create">Annoncer une date</a></li>
+    </ul>
+  </li>
   <li{if isset($menuselected) && $menuselected === 'media'} class="menuselected"{/if}>
     <a href="/medias/" accesskey="4" title="Média">Média</a>
     <ul>
