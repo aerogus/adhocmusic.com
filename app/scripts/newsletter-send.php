@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-
+die();
 // envoi d'une newsletter
 
 // n° de newsletter à traiter
@@ -11,6 +11,7 @@ require_once dirname(__FILE__) . '/common-cli.inc.php';
 $newsletter = Newsletter::getInstance(ID_NEWSLETTER);
 
 // base de test
+/*
 $subs = array(
     array('id_contact' => 1, 'email' => 'guillaume.seznec@gmail.com', 'pseudo' => 'gus', 'lastnl' => ''),
 //    array('id_contact' => 1, 'email' => 'gilles.taddei@gmail.com', 'pseudo' => 'gillex', 'lastnl' => ''),
@@ -18,9 +19,10 @@ $subs = array(
     array('id_contact' => 2, 'email' => 'truc.invalide@oiuofdsg.com', 'pseudo' => 'rien', 'lastnl' => ''),
     // array('id_contact' => 3, 'email' => 'newsletter@adhocmusic.com', 'pseudo' => 'test', 'lastnl' => ''),
 );
+*/
 
 // base de prod
-//$subs = Newsletter::getSubscribers();
+$subs = Newsletter::getSubscribers();
 
 echo "Trouvé : " . count($subs) . " emails\n";
 
@@ -38,7 +40,7 @@ foreach($subs as $sub)
 
     Email::send(
         $sub['email'],
-        "AD'HOC vous souhaite une bonne année 2016",
+        "Concert Reggae/Chanson + Expo le 19 mars à Epinay-sur-Orge",
         'newsletter-' . $newsletter->getId(),
         array(
             'id'            => $newsletter->getId(),

@@ -10,6 +10,9 @@ class Controller
 
         $smarty->assign('menuselected', 'agenda');
 
+//        $smarty->enqueue_script('/js/jquery-ui-1.8.16.custom.min.js');
+//        $smarty->enqueue_script();
+
         $smarty->enqueue_script('/js/events.js');
 
         $trail = Trail::getInstance();
@@ -190,6 +193,10 @@ class Controller
         Tools::auth(Membre::TYPE_STANDARD);
 
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_script('/js/jquery-ui-1.8.16.custom.min.js');
+        $smarty->enqueue_script('/js/jquery-ui-timepicker-addon-0.5.min.js');
+        $smarty->enqueue_script('/js/jquery-ui-datepicker-fr.js');
 
         $smarty->enqueue_script('/js/events-create.js');
 
@@ -434,13 +441,13 @@ class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty->enqueue_script('/js/events-edit.js');
-
         $trail = Trail::getInstance();
         $trail->addStep("Agenda", "/events/");
         $trail->addStep("Modifier une date");
 
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_script('/js/events-edit.js');
 
         $smarty->assign('menuselected', 'agenda');
 

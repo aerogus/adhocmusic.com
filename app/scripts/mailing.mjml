@@ -1,0 +1,56 @@
+<mj-body background-color="#f0f0f0">
+
+  <mj-section background-color="" padding-bottom="20" padding-top="20">
+    <mj-column width="100%" vertical-align="top">
+      <mj-image src="https://www.adhocmusic.com/dynimg/mailing-banner/73-0.jpg" alt="AD'HOC" align="center" border="none" width="550" padding-left="0" padding-right="0" padding-bottom="0" padding-top="0">
+      </mj-image>
+    </mj-column>
+  </mj-section>
+
+  <mj-section background-color="" padding-bottom="20" padding-top="0">
+    <mj-column width="100%" vertical-align="top">
+
+      <mj-image src="https://scontent-ams3-1.xx.fbcdn.net/hphotos-xal1/v/t1.0-9/12308522_920779474644109_1788084233841082042_n.jpg?oh=cdefd3c26c1fd8c325e7f48330f9e4db&oe=5757D814" alt="AD'HOC" align="center" border="none" width="600" padding-left="0" padding-right="0" padding-bottom="0" padding-top="0">
+      </mj-image>
+
+          <mj-text>
+La team AD'HOC a le plaisir de vous annoncer que sa prochaine soirée culturelle se déroulera le samedi 19 mars sous le signe du reggae et de la chanson. Afin de se préparer au Printemps, nous vous proposons une cure de bonne humeur, de chaleur et de douceur que vous pourrez vous fournir au cours de la soirée.
+    </mj-text>
+      
+      <mj-text>JAH ZIEK, GOUM'S & THE GROOVY TINGS et la belle LADY SUE se chargeront du soin auditif nécessaire à votre bien-être et A.V.B. se chargera de vos sensations tactiles avec son exposition tout en texture et volumes surprenants !</mj-text>
+
+<mj-text>Radio Mille Pattes sera notre partenaire reggae : suivez les sur les ondes : 92.9, et tentez de gagner vos places pour la soirée.
+</mj-text>
+    </mj-column>
+  </mj-section>
+
+  <mj-section background-color="#000" padding-bottom="0" padding-top="0">
+    <mj-column width="20%" vertical-align="top">
+      <mj-text align="center" color="#fff" font-family="Arial, sans-serif" font-size="16" padding-left="0" padding-right="0" padding-bottom="0" padding-top="0">
+        <p><a href="http://www.adhocmusic.com" style="text-decoration: none; color: inherit;"><span style="font-weight: bold;">Accueil</span></a></p>
+      </mj-text>
+    </mj-column>
+    <mj-column width="20%" vertical-align="top">
+      <mj-text align="center" color="#fff" font-family="Arial, sans-serif" font-size="16" padding-left="0" padding-right="0" padding-bottom="0" padding-top="0">
+        <p><a href="http://www.adhocmusic.com" style="text-decoration: none; color: inherit;"><span style="font-weight: bold;">L'Assoce</span></a></p>
+      </mj-text>
+    </mj-column>
+    <mj-column width="20%" vertical-align="top">
+      <mj-text align="center" color="#fff" font-family="Arial, sans-serif" font-size="16" padding-left="0" padding-right="0" padding-bottom="0" padding-top="0">
+        <p><a href="http://www.adhocmusic.com" style="text-decoration: none; color: inherit;"><span style="font-weight: bold;">Groupes</span></a></p>
+      </mj-text>
+    </mj-column>
+    <mj-column width="20%" vertical-align="top">
+      <mj-text align="center" color="#fff" font-family="Arial, sans-serif" font-size="16" padding-left="0" padding-right="0" padding-bottom="0" padding-top="0">
+        <p><a href="http://www.adhocmusic.com" style="text-decoration: none; color: inherit;"><span style="font-weight: bold;">Média</span></a></p>
+      </mj-text>
+    </mj-column>
+    <mj-column width="20%" vertical-align="top">
+      <mj-text align="center" color="#fff" font-family="Arial, sans-serif" font-size="16" padding-left="0" padding-right="0" padding-bottom="0" padding-top="0">
+        <p><a href="http://www.adhocmusic.com" style="text-decoration: none; color: inherit;"><span style="font-weight: bold;">Contact</span></a></p>
+      </mj-text>
+    </mj-column>
+  </mj-section>
+ 
+</mj-body>
+
