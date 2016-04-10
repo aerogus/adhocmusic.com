@@ -246,15 +246,20 @@ class Tools
      * redirection HTTP
      *
      * @param string url
+     * @param bool $force_ssl
      */
-    static function redirect($url, $status = '301')
+    static function redirect($url, $force_ssl = false)
     {
         if((strpos($url, 'http://') === false) && (strpos($url, 'https://') === false)) {
             $url = HOME_URL . $url;
         }
 
+        if($force_ssl) {
+            $url = str_replace('http:', 'https:', $url);
+        }
+
         if (!headers_sent()) {
-            header('Status: ' . $status);
+            header('Status: 301');
             header('Location: ' . $url);
             header('Connection: close');
             exit();
@@ -297,7 +302,7 @@ class Tools
         // non identifié
         if(empty($_SESSION['membre'])) {
             $_SESSION['redirect_after_auth'] = $_SERVER['REQUEST_URI'];
-            Tools::redirect('/auth/login');
+            Tools::redirect('/auth/login', true);
             exit();
         }
 
