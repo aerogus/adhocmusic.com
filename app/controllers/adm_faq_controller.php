@@ -81,7 +81,7 @@ class Controller
                 'answer'      => (string) Route::params('answer'),
             );
 
-            FAQ::getInstance($data['id_faq']);
+            $faq = FAQ::getInstance($data['id_faq']);
             $faq->setIdCategory($data['id_category']);
             $faq->setQuestion($data['question']);
             $faq->setAnswer($data['answer']);
