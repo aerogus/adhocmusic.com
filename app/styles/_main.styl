@@ -1,5 +1,5 @@
 /*
- * general
+ * structure générale
  */
 
 header
@@ -14,17 +14,6 @@ header
 
     span
       display none
-
-  .megabanner
-    width 468px
-    height 60px
-    margin 20px auto
-    display block
-
-    img
-      width 468px
-      height 60px
-      display block
 
 .site_content
     max-width 1000px
@@ -44,15 +33,9 @@ header
   color #333
   width 100px
   height 26px
-  -webkit-transition-duration 400ms
-  -webkit-transition-property width, background
-  -webkit-transition-timing-function ease
-  -moz-transition-duration 400ms
-  -moz-transition-property width, background
-  -moz-transition-timing-function ease
-  -o-transition-duration 400ms
-  -o-transition-property width, background
-  -o-transition-timing-function ease
+  transition-duration 400ms
+  transition-property width, background
+  transition-timing-function ease
 
 #recherche input[type=text]:focus, #recherche input[type=text]:hover
   font-style normal
@@ -155,8 +138,7 @@ header
   margin 6px 4px
   padding 3px 2px
   font-weight bold
-  -moz-border-radius 2px
-  -webkit-border-radius 2px
+  border-radius 2px
   background-color #040404
 
 /* squelette general */
@@ -211,8 +193,7 @@ div.pic
   background #222
   border 1px solid
   border-color #444 #999 #999 #444
-  -moz-border-radius 10px
-  -webkit-border-radius 5px
+  border-radius 10px
 
   img
     border 1px solid
@@ -399,8 +380,7 @@ fieldset ol li
   color #fff !important
   padding 5px
   text-align center
-  -webkit-border-radius 5px
-  -moz-border-radius 5px
+  border-radius 5px
   margin-top 15px
   font-weight bold
 
@@ -478,8 +458,7 @@ fieldset ol li
 .adecouvririmg span
   background #999 url(/img/gradient_gris.png)
   padding 0 15px
-  -moz-border-radius-bottomright 5px
-  -webkit-border-bottom-right-radius 5px
+  border-bottom-right-radius 5px
 
 /**************
  * page partenaire
@@ -513,51 +492,6 @@ ul.partenaire li
 .archive
   background-color #666666
 
-/* messages box */
-
-.info, .success, .warning, .error, .validation
-  border 1px solid
-  margin 10px
-  padding 15px 10px 15px 50px
-  background-repeat no-repeat
-  background-position 10px center
-  -moz-border-radius 5px
-  -webkit-border-radius 5px
-
-.info ul, .success ul, .warning ul, .error ul, .validation ul
-  padding 0
-  margin 0
-
-.info ul li, .success ul li, .warning ul li, .error ul li, .validation ul li
-  background url(/favicon.png) no-repeat 0 0
-  padding-left 25px
-  margin 5px
-
-.info
-  color #00529b
-  background-color #bde5f8
-  background-image url(/img/icones/info.png)
-
-.success
-  color #4f8a10
-  background-color #dff2bf
-  background-image url(/img/icones/success.png)
-
-.warning
-  color #9f6000
-  background-color #feefb3
-  background-image url(/img/icones/warning.png)
-
-.error
-  color #d8000c
-  background-color #ffbaba
-  background-image url(/img/icones/error.png)
-
-.validation
-  color #d63301
-  background-color #ffccba
-  background-image url(/img/icones/validation.png)
-
 .fb-profil
   float left
   border 1px solid #999
@@ -581,10 +515,7 @@ ul.partenaire li
   width 80px
   height 80px
   font-size 0.9em
-  -webkit-transition all 0.2s ease-in-out
-  -moz-transition all 0.2s ease-in-out
-  -o-transition all 0.2s ease-in-out
-  -ms-transition all 0.2s ease-in-out
+  transition all 0.2s ease-in-out
 
 .overlay-80
   visibility hidden
@@ -622,13 +553,8 @@ ul.partenaire li
   text-transform uppercase
   font-size 10px
 
-
-.thumb-100:hover
-
 .photofull img
   box-shadow 3px 3px 5px #999999
-  -moz-box-shadow 3px 3px 5px #999999
-  -webkit-box-shadow 3px 3px 5px #999999
   zoom 1
 
 /*
@@ -674,8 +600,6 @@ ul.partenaire li
   padding 0
   font-size 11px
   z-index 1800
-  -webkit-border-radius 2px
-  -moz-border-radius 2px
   border-radius 2px
 
   &:hover
@@ -686,62 +610,6 @@ ul.partenaire li
     width 32px
     height 32px
     margin 0 auto
-
-/**
- * Page plan du site
- */
-
-div.tree_top
-  background url(/img/tree/top.png) no-repeat -1px -3px
-  padding-left 24px
-  padding-bottom 10px
-  padding-top 3px
-
-ul.tree
-  margin-top -5px
-  margin-left -1px
-
-ul.tree, ul.tree ul
-  list-style-type none
-
-ul.tree li
-  padding-left 1.2em
-  border-left 1px #c0c0c0 solid
-  background url(/img/tree/horizontal.png) no-repeat left 10px
-  margin-left 1em
-  font-weight bold
-  padding-top 4px
-  padding-bottom 1px
-
-ul.tree a
-  padding-left 0.2em
-
-ul.tree a.selected
-  font-weight bold
-
-ul.tree li:last-child
-  background url(/img/tree/last.png) no-repeat -12px -2px
-  border none
-
-ul.tree
-  padding-left 0em
-
-ul.tree li.last
-  padding-bottom 0
-
-ul.tree li ul
-  padding 0
-
-ul.tree li ul li
-  padding 1px 0 1px 15px
-  font-size 11px
-  font-weight normal
-
-ul.tree li ul li.last
-  padding-bottom 0
-
-ul.tree a
-  padding-left 2px
 
 /**
  * Alerting
