@@ -71,6 +71,39 @@ class Controller
         return $smarty->fetch('assoce/concerts.tpl');
     }
 
+    static function afterworks()
+    {
+        $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
+        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
+        $smarty->enqueue_script('/js/assoce.js');
+
+        $smarty->assign('menuselected', 'assoce');
+
+        $trail = Trail::getInstance();
+        $trail->addStep("L'Association", "/assoce");
+        $trail->addStep("Les Afterworks");
+
+        $smarty->assign('photos', Photo::getPhotos(array(
+            'online' => true,
+            'sort'   => 'random',
+            'lieu'   => 1,
+            'limit'  => 3,
+        )));
+
+        $smarty->assign('videos', Video::getVideos(array(
+            'online' => true,
+            'sort'   => 'random',
+            'lieu'   => 1,
+            'limit'  => 6,
+        )));
+
+        $smarty->assign('events', array_reverse(Event::getAdHocEventsBySeason(), true));
+
+        return $smarty->fetch('assoce/afterworks.tpl');
+    }
+
     static function equipe()
     {
         $smarty = new AdHocSmarty();

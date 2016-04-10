@@ -66,6 +66,7 @@
 1|assoce|index|GET|/assoce/
 1|assoce|presentation|GET|/assoce/presentation
 1|assoce|concerts|GET|/assoce/concerts
+1|assoce|afterworks|GET|/assoce/afterworks
 1|assoce|equipe|GET|/assoce/equipe
 1|assoce|statuts|GET|/assoce/statuts
 1|assoce|index|GET|/associe
