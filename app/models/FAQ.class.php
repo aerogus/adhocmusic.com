@@ -49,7 +49,7 @@ class FAQ extends ObjectModel
      * @var array
      */
     protected static $_all_fields = array(
-        'id_category' => 'int',
+        'id_category' => 'num',
         'question'    => 'str',
         'answer'      => 'str',
     );
@@ -167,8 +167,7 @@ class FAQ extends ObjectModel
 
         $res = $db->queryWithFetch($sql);
 
-        foreach($res as $idx => $row)
-        {
+        foreach($res as $idx => $row) {
             $res[$idx]['category'] = self::getCategoryById($row['id_category']);
         }
 
