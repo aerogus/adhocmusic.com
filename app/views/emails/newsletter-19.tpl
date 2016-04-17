@@ -49,7 +49,7 @@ td{ }
 </tr>
 <tr>
 <td width="550" style="padding: 10px; background-color: #cccccc;">
-<img src="http://static.adhocmusic.com/img/patchconcerts.png" align="right" border="0" style="margin: 5px;"/>
+<img src="https://www.adhocmusic.com/img/patchconcerts.png" align="right" border="0" style="margin: 5px;"/>
 <p>AD'HOC est une association créée en 1996, dont l'objet est la <strong>promotion des musiques actuelles en Essonne</strong>. Notre activité principale est l'organisation de concerts amplifiés à la <strong>salle G. Pompidou d'Epinay sur Orge</strong> (3 à 4 par an). En 2001 nous avons créé le <strong>site internet</strong> <a href="http://www.adhocmusic.com" style="color: #000000"><strong>adhocmusic.com</strong></a>, ce qui a permis à l'association d'exister aussi en dehors des concerts et surtout de multiplier son carnet d'adresses de groupes à travers toute la France ! Nous sommes tous <strong>bénévoles</strong>, et simplement réunis par notre passion pour la musique.</p>
 </td>
 </tr>

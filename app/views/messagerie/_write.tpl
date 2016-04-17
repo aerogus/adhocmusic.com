@@ -2,7 +2,7 @@
   <ul>
     <li>
       <div class="error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
-      <label for="text">Ecrire à <a href="/membres/show/{$id_to|escape}">{$pseudo_to|escape}</a></label>
+      <label for="text">Ecrire à <a href="/membres/{$id_to|escape}">{$pseudo_to|escape}</a></label>
       <textarea id="text" name="text" cols="50" rows="10"></textarea>
     </li>
     <li>

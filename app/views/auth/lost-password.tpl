@@ -22,14 +22,14 @@
 $(function() {
   $("#form-lost-password").submit(function() {
     var valid = true;
-    if($("#email").val() == "") {
+    if($("#email").val().length === 0) {
       $("#email").prev(".error").fadeIn();
       valid = false;
     } else {
       $("#email").prev(".error").fadeOut();
     }
-    if($("#email").val() != "") {
-      if(validateEmail($("#email").val()) == 0) {
+    if($("#email").val().length !== 0) {
+      if(!validateEmail($("#email").val())) {
         $("#email").prev(".error").fadeIn();
         valid = false;
       } else {
