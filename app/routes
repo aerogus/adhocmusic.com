@@ -114,9 +114,7 @@
 1|emails|newsletter|GET|/emails/newsletter/:id
 1|emails|newsletter|GET|/newsletters/:id
 1|events|index|GET|/events/
-1|events|index|GET|/agenda/
 1|events|fetch|GET|/events/fetch
-1|events|show|GET|/events/:id
 1|events|my|GET|/events/my
 1|events|create|GET|/events/create
 1|events|create|POST|/events/create
@@ -125,6 +123,7 @@
 1|events|delete|GET|/events/delete/:id
 1|events|delete|POST|/events/delete
 1|events|get_events_by_lieu|GET|/events/get-events-by-lieu
+1|events|show|GET|/events/:id
 1|geo|countries|GET|/geo/countries
 1|geo|regions|GET|/geo/regions
 1|geo|departements|GET|/geo/departements

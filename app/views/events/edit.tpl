@@ -155,14 +155,13 @@
 {include file="common/boxend.tpl"}
 
 <script>
-var adhoc = adhoc || {};
-adhoc.lieu = {
-  id: {$lieu->getId()},
-  id_country: '{$lieu->getIdCountry()}',
-  id_region: '{$lieu->getIdRegion()}',
-  id_departement: '{$lieu->getIdDepartement}',
-  id_city: {$lieu->getIdCity()}
-}
+var lieu = {
+    id: {$lieu->getId()},
+    id_country: '{$lieu->getIdCountry()}',
+    id_region: '{$lieu->getIdRegion()}',
+    id_departement: '{$lieu->getIdDepartement()}',
+    id_city: {$lieu->getIdCity()}
+};
 </script>
 
 {include file="common/footer.tpl"}
