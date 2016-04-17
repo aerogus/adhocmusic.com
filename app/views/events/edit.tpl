@@ -160,11 +160,11 @@
 <script>
 var adhoc = adhoc || {};
 adhoc.lieu = {
-  id: {$lieu.id_lieu},
-  id_country: {$lieu.id_country},
-  id_region: {$lieu.id_region},
-  id_departement: {$lieu.id_departement},
-  id_city: {$lieu.id_city}
+  id: {$lieu->getId()},
+  id_country: '{$lieu->getIdCountry()}',
+  id_region: '{$lieu->getIdRegion()}',
+  id_departement: '{$lieu->getIdDepartement}',
+  id_city: {$lieu->getIdCity()}
 }
 </script>
 
