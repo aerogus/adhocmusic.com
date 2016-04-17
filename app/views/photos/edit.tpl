@@ -23,7 +23,7 @@
     </li>
     <li>
       <label for="id_contact">Ajouté par</label>
-      <span><a href="/membre/show/{$photo->getIdContact()}">{$photo->getPseudo()|escape}</a> le {$photo->getCreatedOn()|date_format:'%d/%m/%Y %H:%M'}</span>
+      <span><a href="/membre/{$photo->getIdContact()}">{$photo->getPseudo()|escape}</a> le {$photo->getCreatedOn()|date_format:'%d/%m/%Y %H:%M'}</span>
     </li>
     {if $photo->getModifiedOn()}
     <li>

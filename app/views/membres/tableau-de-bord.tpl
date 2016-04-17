@@ -83,7 +83,7 @@
       {if !empty($alerting_groupes)}
       <ul>
         {foreach from=$alerting_groupes item=groupe}
-        <li><a href="/groupes/show/{$groupe.id_groupe}">{$groupe.name}</a></li>
+        <li><a href="/groupes/{$groupe.id_groupe}">{$groupe.name}</a></li>
         {/foreach}
       </ul>
       {else}
@@ -93,7 +93,7 @@
       {if !empty($alerting_events)}
       <ul>
       {foreach from=$alerting_events item=event}
-        <li><a href="/events/show/{$event.id_event}">{$event.name}</a></li>
+        <li><a href="/events/{$event.id_event}">{$event.name}</a></li>
       {/foreach}
       </ul>
       {else}
@@ -103,7 +103,7 @@
       {if !empty($alerting_lieux)}
       <ul>
       {foreach from=$alerting_lieux item=lieu}
-        <li><a href="/lieux/show/{$lieu.id_lieu}">{$lieu.name}</a></li>
+        <li><a href="/lieux/{$lieu.id_lieu}">{$lieu.name}</a></li>
       {/foreach}
       </ul>
       {else}

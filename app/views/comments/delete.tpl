@@ -1,14 +1,5 @@
 {include file="common/header.tpl"}
 
-<script>
-$(function() {
-  $("#form-comment-delete").submit(function() {
-    var valid = true;
-    return valid;
-  });
-});
-</script>
-
 {include file="common/boxstart.tpl" boxtitle="Effacer un commentaire"}
 
 <form id="form-comment-delete" name="form-comment-delete" method="post" action="/comments/delete">

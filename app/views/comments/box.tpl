@@ -1,81 +1,3 @@
-<script>
-$(function () {
-  $("#form-comment-box-write").submit(function () {
-    var valid = true;
-{if empty($is_auth)}
-    if ($("#form-comment-box-pseudo").val().length === 0) {
-      $("#error_pseudo").fadeIn();
-      valid = false;
-    } else {
-      $("#error_pseudo").fadeOut();
-    }
-    if ($("#form-comment-box-email").val().length === 0) {
-      $("#error_email").fadeIn();
-      valid = false;
-    } else {
-      $("#error_email").fadeOut();
-    }
-    if ($("#form-comment-box-antispam").val() !== "oui") {
-      $("#error_antispam").fadeIn();
-      valid = false;
-    } else {
-      $("#error_antispam").fadeOut();
-    }
-{/if}
-    if ($("#form-comment-box-text").val().length === 0) {
-      $("#error_text").fadeIn();
-      valid = false;
-    } else {
-      $("#error_text").fadeOut();
-    }
-    return valid;
-  });
-});
-</script>
-
-<style>
-#comment-box {
-    wwidth: 500px;
-}
-#comment-box input, #comment-box textarea {
-    width: 300px;
-}
-#comment-box textarea {
-    height: 150px;
-}
-#comment-box input[type=submit] {
-    width: 90px;
-    margin-left: 120px;
-}
-#comment-box label {
-    float: left;
-    margin-right: 30px;
-    margin-top: 5px;
-    width: 90px;
-}
-#comment-box li {
-    margin: 5px;
-}
-#comments .comment {
-    margin: 5px;
-    padding: 10px;
-}
-#comments .odd {
-    background-color: #ececec;
-    border: 1px solid #cecece;
-}
-#comments .even {
-    background-color: #cecece;
-    border: 1px solid #acacac;
-}
-#comments .odd:hover {
-    border: 1px solid #333333;
-}
-#comments .even:hover {
-    border: 1px solid #333333;
-}
-</style>
-
 <div id="comments">
 
 {if !empty($comments)}
@@ -84,7 +6,7 @@ $(function () {
 <div class="comment {if $cpt is odd}odd{else}even{/if}" style="position: relative; min-height: 70px;">
 {if !empty($comment.id_contact)}
   <div style="position: absolute;">
-  <a href="/membres/show/{$comment.id_contact}">
+  <a href="/membres/{$comment.id_contact}">
   <strong>{$comment.pseudo_mbr}</strong><br>
   <img src="{$comment.id_contact|avatar_by_id}" alt="" style="width: 50px; height: 50px; padding-top: 5px;">
   </a>

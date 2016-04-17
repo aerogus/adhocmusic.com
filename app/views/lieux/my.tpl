@@ -32,7 +32,7 @@ $(function () {
       <td>{$lieu.id_city} ({$lieu.cp2|escape} - {$lieu.city2|escape})</td>
       <td>{$lieu.cp|escape}</td>
       <td>{$lieu.city|escape}</td>
-      <td><a href="/lieux/show/{$lieu.id|escape}">{$lieu.name|escape}</a></td>
+      <td><a href="/lieux/{$lieu.id|escape}">{$lieu.name|escape}</a></td>
       <td>{$lieu.nb_events}</td>
     </tr>
     {/foreach}

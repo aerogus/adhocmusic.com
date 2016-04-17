@@ -22,7 +22,7 @@
     <tr id="row-{$comment.id}">
       <td><input type="checkbox" id="com-del-{$comment.id}"></td>
       <td><a href="/comments/show/{$comment.id}">{$comment.id}</a></td>
-      <td><a href="/{$comment.type_full}/show/{$comment.id_content}">{$comment.type} {$comment.id_content}</a></td>
+      <td><a href="/{$comment.type_full}/{$comment.id_content}">{$comment.type} {$comment.id_content}</a></td>
       <td>{$comment.created_on}</td>
       <td>{$comment.online}</td>
       <td>{$comment.pseudo}<br>{$comment.email}</td>
