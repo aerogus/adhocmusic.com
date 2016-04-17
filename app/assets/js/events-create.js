@@ -1,21 +1,21 @@
-/*globals jQuery*/
+/*globals jQuery, adhoc*/
 
 jQuery(document).ready(function ($) {
 
     'use strict';
-
-    $.ajaxSetup({
-        async: false
-    });
 
     $("#date").datepicker({
         dateFormat: 'dd/mm/yy',
         showAnim: 'slideDown'
     });
 
+    $.ajaxSetup({
+        async: false
+    });
+
     $("#form-event-create").submit(function () {
         var valid = true;
-        if ($("#name").val() === "") {
+        if ($("#name").val().length === 0) {
             $("#error_name").fadeIn();
             valid = false;
         } else {
@@ -27,13 +27,13 @@ jQuery(document).ready(function ($) {
         } else {
             $("#error_id_lieu").fadeOut();
         }
-        if ($("#text").val() === "") {
+        if ($("#text").val().length === 0) {
             $("#error_text").fadeIn();
             valid = false;
         } else {
             $("#error_text").fadeOut();
         }
-        if ($("#price").val() === "" || $("#price").val() === "0") {
+        if ($("#price").val().length === 0) {
             $("#error_price").fadeIn();
             valid = false;
         } else {
@@ -52,7 +52,7 @@ jQuery(document).ready(function ($) {
     $('#id_country').change(function () {
         console.log('id_country change');
         var id_country = $('#id_country').val();
-        var event_id_region = '{$data.id_region}';
+        var event_id_region = adhoc.lieu.id_region;
         $('#id_region').empty();
         $('#id_departement').empty();
         $('#id_city').empty();

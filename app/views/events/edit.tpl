@@ -5,7 +5,7 @@
 <form name="form-event-edit" id="form-event-edit" action="/events/edit" enctype="multipart/form-data" method="post">
   <fieldset>
     <legend>Infos sur le lieu</legend>
-    <ol>
+    <ul>
       <li>
         <div class="error" id="error_id_lieu"{if empty($error_id_lieu)} style="display: none"{/if}>Vous devez indiquer un lieu pour l'événement ou le saisir s'il n'est pas encore référencé.</div>
         <select id="id_country" name="id_country" style="float: right;">
@@ -40,11 +40,11 @@
         </select>
         <label for="id_lieu">Lieu</label>
       </li>
-    </ol>
+    </ul>
   </fieldset>
   <fieldset>
     <legend>Infos sur l'événement</legend>
-    <ol>
+    <ul>
       <li>
         <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez indiquer un titre pour l'événement.</div>
         <input id="name" name="name" style="float: right; width: 360px;" value="{$event->getName()|escape}">
@@ -137,24 +137,35 @@
         <input type="checkbox" id="online" name="online" {if $event->getOnline()}checked="checked"{/if} style="float: right;">
         <label for="online">Afficher</label>
       </li>
-    </ol>
+    </ul>
   </fieldset>
   <div class="success">Nouveau: liez cet événement à un événement Facebook existant ou bien créez directement un événement Facebook !</div>
   <fieldset>
     <legend>Facebook</legend>
-    <ol>
+    <ul>
       <li>
         <span style="float: right;">
           http://www.facebook.com/events/<input id="facebook_event_id" name="facebook_event_id" style="width: 360px;" value="{$event->getFacebookEventId()|escape}">/
         </span>
         <label for="facebook_event_id">n° Evénement (si déjà existant sur Facebook)</label>
       </li>
-    </ol>
+    </ul>
   </fieldset>
   <input id="form-event-edit-submit" name="form-event-edit-submit" class="button" type="submit" value="Modifier">
   <input type="hidden" name="id" value="{$data.id|escape}">
 </form>
 
 {include file="common/boxend.tpl"}
+
+<script>
+var adhoc = adhoc || {};
+adhoc.lieu = {
+  id: {$lieu.id_lieu},
+  id_country: {$lieu.id_country},
+  id_region: {$lieu.id_region},
+  id_departement: {$lieu.id_departement},
+  id_city: {$lieu.id_city}
+}
+</script>
 
 {include file="common/footer.tpl"}

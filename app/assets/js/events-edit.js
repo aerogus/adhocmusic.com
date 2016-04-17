@@ -9,9 +9,13 @@ jQuery(document).ready(function ($) {
         showAnim: 'slideDown'
     });
 
+    $.ajaxSetup({
+        async: false
+    });
+
     $("#form-event-edit").submit(function () {
         var valid = true;
-        if ($("#name").val() === "") {
+        if ($("#name").val().length === 0) {
             $("#error_name").fadeIn();
             valid = false;
         } else {
@@ -23,13 +27,13 @@ jQuery(document).ready(function ($) {
         } else {
             $("#error_id_lieu").fadeOut();
         }
-        if ($("#text").val() === "") {
+        if ($("#text").val().length === 0) {
             $("#error_text").fadeIn();
             valid = false;
         } else {
             $("#error_text").fadeOut();
         }
-        if ($("#price").val() === "" || $("#price").val() === "0") {
+        if ($("#price").val().length === 0) {
             $("#error_price").fadeIn();
             valid = false;
         } else {
@@ -52,7 +56,7 @@ jQuery(document).ready(function ($) {
     $('#id_country').change(function () {
         console.log('id_country change');
         var id_country = $('#id_country').val();
-        var lieu_id_region = '{$lieu->getIdRegion()}';
+        var lieu_id_region = adhoc.lieu.id_region;
         $('#id_region').empty();
         $('#id_departement').empty();
         $('#id_city').empty();
@@ -85,9 +89,9 @@ jQuery(document).ready(function ($) {
     $('#id_region').change(function () {
         console.log('id_region change');
         var id_country = $('#id_country').val();
-        var lieu_id_region = adhoc.lieu_id_region;
+        var lieu_id_region = adhoc.lieu.id_region;
         var id_region = $('#id_region').val();
-        var lieu_id_departement = '{$lieu->getIdDepartement()}';
+        var lieu_id_departement = adhoc.lieu.id_departement;
         $('#id_departement').empty();
         $('#id_city').empty();
         if (id_country === 'FR') {
@@ -115,7 +119,7 @@ jQuery(document).ready(function ($) {
         console.log('id_departement change');
         var id_country = $('#id_country').val();
         var id_departement = $('#id_departement').val();
-        var lieu_id_city = '{$lieu->getIdCity()}';
+        var lieu_id_city = adhoc.lieu.id_city;
         $('#id_city').empty();
         if (id_country === 'FR') {
             $('<option value="0">---</option>').appendTo('#id_city');
@@ -141,7 +145,7 @@ jQuery(document).ready(function ($) {
     $('#id_city').change(function () {
         console.log('id_city change');
         var id_city = $('#id_city').val();
-        var lieu_id_lieu = adhoc.lieu_id_lieu;
+        var lieu_id_lieu = adhoc.lieu.id;
         $('#id_lieu').empty();
         $('<option value="0">---</option>').appendTo('#id_lieu');
         $.getJSON('/geo/getlieu.json', {
