@@ -11,7 +11,7 @@
     {if !empty($groupes)}
     <ul>
     {foreach from=$groupes item=groupe}
-      <li><a title="Se désabonner de ce groupe" href="/alerting/unsub?type=g&amp;id_content={$groupe.id_groupe}"><img src="/img/icones/delete.png" alt=""></a> <a href="/groupes/show/{$groupe.id_groupe}">{$groupe.name}</a></li>
+      <li><a title="Se désabonner de ce groupe" href="/alerting/unsub?type=g&amp;id_content={$groupe.id_groupe}"><img src="/img/icones/delete.png" alt=""></a> <a href="/groupes/{$groupe.id_groupe}">{$groupe.name}</a></li>
     {/foreach}
     </ul>
     {else}

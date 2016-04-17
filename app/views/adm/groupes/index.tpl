@@ -18,7 +18,7 @@
   <tbody>
     <tr class="{if $cpt is odd}odd{else}even{/if}">
       <td>{$groupe.id|escape}</td>
-      <td><a href="/adm/groupes/show/{$groupe.id}">{$groupe.name|truncate:'30'|escape}</a></td>
+      <td><a href="/adm/groupes/{$groupe.id}">{$groupe.name|truncate:'30'|escape}</a></td>
       <td>{$groupe.style|truncate:'30'|escape}</td>
       <td>{$groupe.created_on|date_format:'%d/%m/%y'}</td>
       <td>{$groupe.modified_on|date_format:'%d/%m/%y'}</td>

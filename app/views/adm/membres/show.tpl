@@ -95,7 +95,7 @@
   </tr>
   {foreach from=$membre->getGroupes() item=groupe}
   <tr>
-    <td><a href="/adm/groupes/show/{$groupe.id_groupe}">{$groupe.name|escape}</a></td>
+    <td><a href="/adm/groupes/{$groupe.id_groupe}">{$groupe.name|escape}</a></td>
     <td>{$groupe.type_musicien_name|escape}</td>
     <td><a class="button" href="/adm/appartient-a?from=membre&action=delete&membre={$membre->getId()}&groupe={$groupe.id_groupe}">Supprimer</a></td>
   </tr>

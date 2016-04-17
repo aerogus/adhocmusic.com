@@ -9,13 +9,13 @@
 
 {foreach from=$lieux item=lieu}
 <url>
-<loc>/lieux/show/{$lieu.id}</loc>
+<loc>/lieux/{$lieu.id}</loc>
 </url>
 {/foreach}
 
 {foreach from=$events item=event}
 <url>
-<loc>/events/show/{$event.id}</loc>
+<loc>/events/{$event.id}</loc>
 </url>
 {/foreach}
 

@@ -90,7 +90,7 @@
         <ul>
           {foreach from=$comments item=comment}
           <li style="clear: both; margin-bottom: 5px;">
-            <a href="/{$comment.type_full}/show/{$comment.id_content}">
+            <a href="/{$comment.type_full}/{$comment.id_content}">
               <img src="{image type='photo' id=$comment.id_content width=50 height=50 zoom=true}" alt="" style="float: left; padding-right: 5px; padding-bottom: 5px;" />
               <strong>{$comment.pseudo}</strong> le {$comment.created_on|date_format:'%d/%m/%Y'}<br />
               {$comment.text|truncate:'200'}
