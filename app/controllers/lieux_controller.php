@@ -209,6 +209,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/lieux-create.js');
+
         if(Tools::isSubmit('form-lieu-create'))
         {
             $data = array(
@@ -324,6 +326,8 @@ class Controller
         $trail->addStep("Modifier");
 
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_script('/js/lieux-edit.js');
 
         $smarty->assign('menuselected', 'lieux');
 
