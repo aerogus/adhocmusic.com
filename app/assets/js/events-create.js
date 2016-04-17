@@ -9,10 +9,6 @@ jQuery(document).ready(function ($) {
         showAnim: 'slideDown'
     });
 
-    $.ajaxSetup({
-        async: false
-    });
-
     $("#form-event-create").submit(function () {
         var valid = true;
         if ($("#name").val().length === 0) {

@@ -1,4 +1,4 @@
-/*globals jQuery, adhoc*/
+/*globals jQuery, lieu*/
 
 jQuery(document).ready(function ($) {
 
@@ -7,10 +7,6 @@ jQuery(document).ready(function ($) {
     $("#date").datepicker({
         dateFormat: 'dd/mm/yy',
         showAnim: 'slideDown'
-    });
-
-    $.ajaxSetup({
-        async: false
     });
 
     $("#form-event-edit").submit(function () {
@@ -42,10 +38,6 @@ jQuery(document).ready(function ($) {
         return valid;
     });
 
-    $.ajaxSetup({
-        async: false
-    });
-
     $('#id_country, #id_region, #id_departement, #id_city').keypress(function () {
         $(this).trigger('change');
     });
@@ -54,19 +46,17 @@ jQuery(document).ready(function ($) {
      * la sélection du pays charge la liste des régions
      */
     $('#id_country').change(function () {
-        console.log('id_country change');
-        var id_country = $('#id_country').val();
-        var lieu_id_region = adhoc.lieu.id_region;
+        console.log('id_country change to ' + lieu.id_country);
         $('#id_region').empty();
         $('#id_departement').empty();
         $('#id_city').empty();
         $('<option value="0">---</option>').appendTo('#id_region');
         $.getJSON('/geo/getregion.json', {
-            c: id_country
+            c: lieu.id_country
         }, function (data) {
             var selected = '';
             $.each(data, function (region_id, region_name) {
-                if (lieu_id_region === region_id) {
+                if (lieu.id_region === region_id) {
                     selected = ' selected="selected"';
                 } else {
                     selected = '';
@@ -74,7 +64,7 @@ jQuery(document).ready(function ($) {
                 $('<option value="' + region_id + '"' + selected + '>' + region_name + '</option>').appendTo('#id_region');
             });
         });
-        if (id_country !== 'FR') {
+        if (lieu.id_country !== 'FR') {
             $('#id_departement').hide();
             $('#id_city').hide();
         } else {
@@ -87,11 +77,11 @@ jQuery(document).ready(function ($) {
      * la sélection de la région charge la liste des départements
      */
     $('#id_region').change(function () {
-        console.log('id_region change');
+        console.log('id_region change to ' + lieu.id_region);
         var id_country = $('#id_country').val();
-        var lieu_id_region = adhoc.lieu.id_region;
+        var lieu_id_region = lieu.id_region;
         var id_region = $('#id_region').val();
-        var lieu_id_departement = adhoc.lieu.id_departement;
+        var lieu_id_departement = lieu.id_departement;
         $('#id_departement').empty();
         $('#id_city').empty();
         if (id_country === 'FR') {
@@ -116,10 +106,10 @@ jQuery(document).ready(function ($) {
      * la sélection du département charge la liste des villes
      */
     $('#id_departement').change(function () {
-        console.log('id_departement change');
+        console.log('id_departement change to ' + lieu.id_departement);
         var id_country = $('#id_country').val();
         var id_departement = $('#id_departement').val();
-        var lieu_id_city = adhoc.lieu.id_city;
+        var lieu_id_city = lieu.id_city;
         $('#id_city').empty();
         if (id_country === 'FR') {
             $('<option value="0">---</option>').appendTo('#id_city');
@@ -143,9 +133,9 @@ jQuery(document).ready(function ($) {
      * la sélection de la ville charge la liste des lieux de la ville
      */
     $('#id_city').change(function () {
-        console.log('id_city change');
+        console.log('id_city change to ' + lieu.id_city);
         var id_city = $('#id_city').val();
-        var lieu_id_lieu = adhoc.lieu.id;
+        var lieu_id_lieu = lieu.id;
         $('#id_lieu').empty();
         $('<option value="0">---</option>').appendTo('#id_lieu');
         $.getJSON('/geo/getlieu.json', {
