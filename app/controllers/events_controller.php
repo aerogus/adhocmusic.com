@@ -10,9 +10,6 @@ class Controller
 
         $smarty->assign('menuselected', 'agenda');
 
-//        $smarty->enqueue_script('/js/jquery-ui-1.8.16.custom.min.js');
-//        $smarty->enqueue_script();
-
         $smarty->enqueue_script('/js/events.js');
 
         $trail = Trail::getInstance();
@@ -197,7 +194,6 @@ class Controller
         $smarty->enqueue_script('/js/jquery-ui-1.8.16.custom.min.js');
         $smarty->enqueue_script('/js/jquery-ui-timepicker-addon-0.5.min.js');
         $smarty->enqueue_script('/js/jquery-ui-datepicker-fr.js');
-
         $smarty->enqueue_script('/js/events-create.js');
 
         $smarty->assign('menuselected', 'agenda');
@@ -421,6 +417,7 @@ class Controller
 
     /**
      * validation du formulaire de création event
+     *
      * @param array $data
      * @param array &$errors
      * @return bool
@@ -447,6 +444,9 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/jquery-ui-1.8.16.custom.min.js');
+        $smarty->enqueue_script('/js/jquery-ui-timepicker-addon-0.5.min.js');
+        $smarty->enqueue_script('/js/jquery-ui-datepicker-fr.js');
         $smarty->enqueue_script('/js/events-edit.js');
 
         $smarty->assign('menuselected', 'agenda');
@@ -596,6 +596,7 @@ class Controller
 
     /**
      * validation du formulaire de modification event
+     *
      * @param array $data
      * @param array &$errors
      * @return bool
@@ -610,6 +611,9 @@ class Controller
         return true;
     }
 
+    /**
+     * @return string ou HTTP:Redirect
+     */
     static function delete()
     {
         Tools::auth(Membre::TYPE_ADMIN);
@@ -644,6 +648,9 @@ class Controller
         return $smarty->fetch('events/delete.tpl');
     }
 
+    /**
+     * @return array
+     */
     static function get_events_by_lieu()
     {
         $id_lieu = (int) Route::params('l');
