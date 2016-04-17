@@ -127,11 +127,11 @@ class Controller
             } elseif($from === 'event' && $video->getIdEvent()) {
                 $smarty->assign('menuselected', 'event');
                 $trail->addStep("Agenda", "/events/");
-                $trail->addStep($event->getName(), "/events/show/" . $event->getId());
+                $trail->addStep($event->getName(), "/events/" . $event->getId());
             } elseif($from === 'lieu' && $video->getIdLieu()) {
                 $smarty->assign('menuselected', 'lieux');
                 $trail->addStep("Lieux", "/lieux/");
-                $trail->addStep($lieu->getName(), "/lieux/show/" . $lieu->getId());
+                $trail->addStep($lieu->getName(), "/lieux/" . $lieu->getId());
             } else {
                 $smarty->assign('menuselected', 'media');
                 $trail->addStep("Média", "/media/");

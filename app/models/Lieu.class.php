@@ -549,7 +549,7 @@ class Lieu extends ObjectModel
      */
     static function getUrlById($id)
     {
-        return HOME_URL . '/lieux/show/' . (int) $id;
+        return HOME_URL . '/lieux/' . (int) $id;
     }
 
     /**

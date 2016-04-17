@@ -70,7 +70,7 @@ class Controller
 
         // la balle au bond
         if($id == 91 || $id == 1339) {
-            Tools::redirect('/lieux/show/2091');
+            Tools::redirect('/lieux/2091');
         }
 
         $smarty = new AdHocSmarty();
@@ -189,7 +189,7 @@ class Controller
         $trail->addStep("Lieux de diffusion", "/lieux/");
         $trail->addStep(WorldRegion::getName('FR', Departement::getRegion($lieu->getIdDepartement())), "/lieux/?reg=".Departement::getRegion($lieu->getIdDepartement()));
         $trail->addStep(Departement::getName($lieu->getIdDepartement()), "/lieux/?reg=".Departement::getRegion($lieu->getIdDepartement())."&amp;dep=".$lieu->getIdDepartement());
-        $trail->addStep($lieu->getName(), "/lieux/show/" . $lieu->getId());
+        $trail->addStep($lieu->getName(), "/lieux/" . $lieu->getId());
         $trail->addStep("Panoramique");
 
         return $smarty->fetch('lieux/pano.tpl');
@@ -275,7 +275,7 @@ class Controller
 
                 Log::action(Log::ACTION_LIEU_CREATE, $lieu->getId());
 
-                Tools::redirect('/lieux/show/' . $lieu->getId() . '?create=1');
+                Tools::redirect('/lieux/' . $lieu->getId() . '?create=1');
             }
             else
             {
@@ -407,7 +407,7 @@ class Controller
 
                     Log::action(Log::ACTION_LIEU_EDIT, $lieu->getId());
 
-                    Tools::redirect('/lieux/show/' . $lieu->getId() . '?edit=1');
+                    Tools::redirect('/lieux/' . $lieu->getId() . '?edit=1');
                 }
             } else {
                 // erreurs

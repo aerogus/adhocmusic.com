@@ -109,7 +109,7 @@ class Audio extends Media
      */
     static function getUrlById($id)
     {
-        return HOME_URL . '/audios/show/' . $id;
+        return HOME_URL . '/audios/' . $id;
     }
 
     /**

@@ -967,10 +967,10 @@ class Controller
             switch($from)
             {
                 case "groupe":
-                    Tools::redirect('/adm/groupes/show/' . $id_groupe);
+                    Tools::redirect('/adm/groupes/' . $id_groupe);
                     break;
                 case "membre":
-                    Tools::redirect('/adm/membres/show/' . $id_contact);
+                    Tools::redirect('/adm/membres/' . $id_contact);
                     break;
             }
 

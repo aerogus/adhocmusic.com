@@ -16,10 +16,10 @@ class Stats extends ObjectModel
     const DATDEB = '2002-01-01';
 
     /* */
-    const LIEU_URL   = '/lieux/show/{ID}';
-    const GROUP_URL  = '/groupes/show/{ID}';
-    const PROFIL_URL = '/membres/show/{ID}';
-    const EVENT_URL  = '/events/show/{ID}';
+    const LIEU_URL   = '/lieux/{ID}';
+    const GROUP_URL  = '/groupes/{ID}';
+    const PROFIL_URL = '/membres/{ID}';
+    const EVENT_URL  = '/events/{ID}';
 
     /* */
     const BARGRAPH_MAX_WIDTH = 650;
@@ -159,7 +159,7 @@ class Stats extends ObjectModel
         $cpt = 0;
         foreach($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
-            $res[$cpt]['profil'] = "<a href=\"/membres/show/".$_res['id_contact']."\">".$_res['pseudo']."</a>";
+            $res[$cpt]['profil'] = "<a href=\"/membres/".$_res['id_contact']."\">".$_res['pseudo']."</a>";
             $cpt++;
         }
 

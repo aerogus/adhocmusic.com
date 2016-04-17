@@ -156,7 +156,7 @@ class Photo extends Media
      */
     static function getUrlById($id, $type = null)
     {
-        return HOME_URL . '/photos/show/' . (int) $id;
+        return HOME_URL . '/photos/' . (int) $id;
     }
 
     /**

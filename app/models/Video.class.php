@@ -333,7 +333,7 @@ class Video extends Media
      */
     static function getUrlById($id, $type = null)
     {
-        return HOME_URL . '/videos/show/' . $id;
+        return HOME_URL . '/videos/' . $id;
     }
 
     /**
@@ -550,6 +550,7 @@ class Video extends Media
             $res[$idx]['url'] = self::getUrlById($_res['id']);
             $res[$idx]['swf'] = self::getFlashUrl($_res['host_id'], $_res['reference']);
             $res[$idx]['thumb_80_80'] = self::getVideoThumbUrl($_res['id'], 80, 80, '000000', false, true);
+            $res[$idx]['thumb_100'] = self::getVideoThumbUrl($_res['id'], 100, 100, '000000', false, true);
         }
 
         return $res;
@@ -569,6 +570,7 @@ class Video extends Media
         {
             $this->deleteThumbnail();
             self::invalidateVideoThumbInCache($this->getId(), 80, 80, '000000', false, true);
+            self::invalidateVideoThumbInCache($this->getId(), 100, 100, '000000', false, true);
             return true;
         }
         return false;

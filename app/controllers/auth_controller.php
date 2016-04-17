@@ -2,8 +2,15 @@
 
 class Controller
 {
+    /**
+     * Page d'identification
+     */
     static function login()
     {
+        if(!is_ssl()) {
+        //    Tools::redirect('/auth/login', true);
+        }
+
         if(Tools::isSubmit('form-login'))
         {
             $pseudo = trim((string) Route::params('pseudo'));
@@ -69,10 +76,11 @@ class Controller
         }
     }
 
+    /**
+     * Page de déconnexion
+     */
     static function logout()
     {
-        $redirect = 'http://www.adhocmusic.com/?logout';
-
         // si bien identifié, destruction de la session
         if(!empty($_SESSION['membre'])) {
             Log::action(Log::ACTION_LOGOUT);
@@ -87,7 +95,7 @@ class Controller
             session_destroy();
         }
 
-        Tools::redirect($redirect);
+        Tools::redirect('/?logout');
     }
 
     static function change_password()
@@ -111,7 +119,7 @@ class Controller
             $password_new_1 = trim((string) Route::params('password_new_1'));
             $password_new_2 = trim((string) Route::params('password_new_2'));
 
-            if(($password_old != "") && ($password_new_1 != "") && ($password_new_1 == $password_new_2))
+            if(($password_old !== "") && ($password_new_1 !== "") && ($password_new_1 === $password_new_2))
             {
                 if($membre->checkPassword($password_old)) {
                     if($password_new_1 == $password_old) {
@@ -191,7 +199,7 @@ class Controller
     static function check_email()
     {
         $out = array();
-           $email = (string) Route::params('email');
+        $email = (string) Route::params('email');
         if(Email::validate($email)) {
             if($id_contact = Membre::getIdByEmail($email)) {
                 $out['status'] = 'KO_ALREADY_MEMBER';
@@ -207,7 +215,7 @@ class Controller
     static function check_pseudo()
     {
         $out = array();
-           $pseudo = (string) Route::params('pseudo');
+        $pseudo = (string) Route::params('pseudo');
         if($id_contact = Membre::getIdByPseudo($pseudo)) {
             $out['status'] = 'KO_PSEUDO_UNAVAILABLE';
         } else {

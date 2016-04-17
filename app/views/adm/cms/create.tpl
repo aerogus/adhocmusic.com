@@ -5,7 +5,7 @@ $(function() {
 
     $('textarea.tinymce').tinymce({
         // Location of TinyMCE script
-        script_url: 'http://static.adhocmusic.com/tinymce/tiny_mce.js',
+        script_url: 'https://www.adhocmusic.com/tinymce/tiny_mce.js',
 
         // General options
         theme: "advanced",

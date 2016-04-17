@@ -599,7 +599,7 @@ class Membre extends Contact
      */
     static function getUrlById($id_contact)
     {
-        return '/membres/show/' . (int) $id_contact;
+        return '/membres/' . (int) $id_contact;
     }
 
     /**

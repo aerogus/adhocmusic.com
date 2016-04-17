@@ -260,7 +260,7 @@ class Comment extends ObjectModel
      */
     static function getUrlById($id)
     {
-        return '/comments/show/' . $id;
+        return '/comments/' . $id;
     }
 
     /* fin getters */

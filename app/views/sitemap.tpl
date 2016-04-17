@@ -3,7 +3,7 @@
 
 {foreach from=$groupes item=groupe}
 <url>
-<loc>/groupes/show/{$groupe.id}</loc>
+<loc>/groupes/{$groupe.id}</loc>
 </url>
 {/foreach}
 

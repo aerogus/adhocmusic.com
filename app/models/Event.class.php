@@ -308,7 +308,7 @@ class Event extends ObjectModel
      */
     function getContactUrl()
     {
-        return '/membres/show/' . $this->_id_contact;
+        return '/membres/' . $this->_id_contact;
     }
 
     /**
@@ -394,7 +394,7 @@ class Event extends ObjectModel
      */
     static function getUrlById($id, $type = null)
     {
-        return '/events/show/' . (int) $id;
+        return '/events/' . (int) $id;
     }
 
     /**
