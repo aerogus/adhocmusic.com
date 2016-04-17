@@ -227,11 +227,12 @@ class Controller
             $id_groupe = (int) $_GET['groupe'];
         }
 
+        // défaut
         $id_country = 'FR';
         $id_region = 'A8';
         $id_departement = '91';
-        $id_city = '';
-        $id_lieu = 0;
+        $id_city = 91216;
+        $id_lieu = 1;
 
         if(isset($_GET['lieu'])) {
             $id_lieu = (int) $_GET['lieu'];
@@ -247,8 +248,6 @@ class Controller
         if(isset($_GET['structure'])) {
             $id_structure = (int) $_GET['structure'];
         }
-
-        $smarty->assign('countries', WorldCountry::getHashTable());
 
         // valeurs par défaut
         $data = array(
@@ -453,8 +452,6 @@ class Controller
 
         $event = Event::getInstance((int) $id);
         $lieu = Lieu::getInstance($event->getIdLieu());
-
-        $smarty->assign('countries', WorldCountry::getHashTable());
 
         $data = array(
             'id' => $event->getId(),

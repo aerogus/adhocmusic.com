@@ -10,33 +10,30 @@
         <div class="error" id="error_id_lieu"{if empty($error_id_lieu)} style="display: none"{/if}>Vous devez indiquer un lieu pour l'événement ou le saisir s'il n'est pas encore référencé.</div>
         <select id="id_country" name="id_country" style="float: right;">
           <option value="0">---</option>
-          {foreach from=$countries key=id item=name}
-          <option value="{$id}"{if $id == $lieu->getIdCountry()} selected="selected"{/if}>{$name.fr|escape}</option>
-          {/foreach}
         </select>
         <label for="id_country">Pays</label>
       </li>
       <li>
         <select id="id_region" name="id_region" style="float: right;">
-          <option value="0"></option>
+          <option value="0">---</option>
         </select>
         <label for="id_region">Région</label>
       </li>
       <li>
         <select id="id_departement" name="id_departement" style="float: right;">
-          <option value="0"></option>
+          <option value="0">---</option>
         </select>
         <label for="id_departement">Département</label>
       </li>
       <li>
         <select id="id_city" name="id_city" style="float: right;">
-          <option value="0"></option>
+          <option value="0">---</option>
         </select>
         <label for="id_city">Ville</label>
       </li>
       <li>
         <select id="id_lieu" name="id_lieu" style="float: right;">
-          <option value="0"></option>
+          <option value="0">---</option>
         </select>
         <label for="id_lieu">Lieu</label>
       </li>

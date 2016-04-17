@@ -51,7 +51,7 @@ jQuery(document).ready(function ($) {
         $('#id_departement').empty();
         $('#id_city').empty();
         $('<option value="0">---</option>').appendTo('#id_region');
-        $.getJSON('/geo/getregion.json', {
+        $.getJSON('/geo/regions.json', {
             c: lieu.id_country
         }, function (data) {
             var selected = '';
@@ -86,7 +86,7 @@ jQuery(document).ready(function ($) {
         $('#id_city').empty();
         if (id_country === 'FR') {
             $('<option value="0">---</option>').appendTo('#id_departement');
-            $.getJSON('/geo/getdepartement.json', {
+            $.getJSON('/geo/departements.json', {
                 r: id_region
             }, function (data) {
                 var selected = '';
@@ -113,7 +113,7 @@ jQuery(document).ready(function ($) {
         $('#id_city').empty();
         if (id_country === 'FR') {
             $('<option value="0">---</option>').appendTo('#id_city');
-            $.getJSON('/geo/getcity.json', {
+            $.getJSON('/geo/cities.json', {
                 d: id_departement
             }, function (data) {
                 var selected = '';
@@ -138,7 +138,7 @@ jQuery(document).ready(function ($) {
         var lieu_id_lieu = lieu.id;
         $('#id_lieu').empty();
         $('<option value="0">---</option>').appendTo('#id_lieu');
-        $.getJSON('/geo/getlieu.json', {
+        $.getJSON('/geo/lieux.json', {
             v: id_city
         }, function (data) {
             var selected = '';
@@ -153,10 +153,12 @@ jQuery(document).ready(function ($) {
         });
     });
 
-    $('#id_country').trigger('change');
-    $('#id_region').trigger('change');
-    $('#id_departement').trigger('change');
-    $('#id_city').trigger('change');
-    $('#id_lieu').trigger('change');
+    $.getJSON('/geo/countries.json', function () {
+        $('#id_country').trigger('change');
+        $('#id_region').trigger('change');
+        $('#id_departement').trigger('change');
+        $('#id_city').trigger('change');
+        $('#id_lieu').trigger('change');
+    });
 
 });

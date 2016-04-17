@@ -80,6 +80,8 @@ class WorldRegion extends Liste
     }
 
     /**
+     * Charge la liste des régions triés par pays
+     *
      * @return bool
      */
     protected function _loadFromDb()

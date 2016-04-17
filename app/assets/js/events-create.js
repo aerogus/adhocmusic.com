@@ -43,7 +43,7 @@ jQuery(document).ready(function ($) {
     });
 
     /**
-     *
+     * la sélection du pays charge la liste des régions
      */
     $('#id_country').change(function () {
         console.log('id_country change');
@@ -53,7 +53,7 @@ jQuery(document).ready(function ($) {
         $('#id_departement').empty();
         $('#id_city').empty();
         $('<option value="0">---</option>').appendTo('#id_region');
-        $.getJSON('/geo/getregion.json', {
+        $.getJSON('/geo/regions.json', {
             c: id_country
         }, function (data) {
             var selected = '';
@@ -81,7 +81,7 @@ jQuery(document).ready(function ($) {
     });
 
     /**
-     *
+     * la sélection de la région charge la liste des départements
      */
     $('#id_region').change(function () {
         console.log('id_region change');
@@ -92,7 +92,7 @@ jQuery(document).ready(function ($) {
         $('#id_city').empty();
         if (id_country === 'FR') {
             $('<option value="0">---</option>').appendTo('#id_departement');
-            $.getJSON('/geo/getdepartement.json', {
+            $.getJSON('/geo/departements.json', {
                 r: id_region
             }, function (data) {
                 var selected = '';
@@ -114,7 +114,7 @@ jQuery(document).ready(function ($) {
     });
 
     /**
-     *
+     * la sélection du département charge la liste des villes
      */
     $('#id_departement').change(function () {
         console.log('id_departement change');
@@ -123,7 +123,7 @@ jQuery(document).ready(function ($) {
         $('#id_city').empty();
         if (id_country === 'FR') {
             $('<option value="0">---</option>').appendTo('#id_city');
-            $.getJSON('/geo/getcity.json', {
+            $.getJSON('/geo/cities.json', {
                 d: id_departement
             }, function (data) {
                 $.each(data, function (city_id, city_name) {
@@ -139,14 +139,14 @@ jQuery(document).ready(function ($) {
     });
 
     /**
-     *
+     * la sélection de la ville charge la liste des lieux de la ville
      */
     $('#id_city').change(function () {
         console.log('id_city change');
         var id_city = $('#id_city').val();
         $('#id_lieu').empty();
         $('<option value="0">---</option>').appendTo('#id_lieu');
-        $.getJSON('/geo/getlieu.json', {
+        $.getJSON('/geo/lieux.json', {
             v: id_city
         }, function (data) {
             $.each(data, function (lieu_id, lieu_name) {
@@ -161,7 +161,7 @@ jQuery(document).ready(function ($) {
     });
 
     /**
-     *
+     * le changement de lieu met passe au vert tous les champs
      */
     $('#id_lieu').change(function () {
         console.log('id_lieu change');
@@ -173,8 +173,10 @@ jQuery(document).ready(function ($) {
         $('#bloc_lieu li').css('background-color', '#006600');
     });
 
-    $('#id_country').trigger('change');
-    $('#id_region').trigger('change');
-    $('#id_departement').trigger('change');
+    $.getJSON('/geo/countries.json', function () {
+        $('#id_country').trigger('change');
+        $('#id_region').trigger('change');
+        $('#id_departement').trigger('change');
+    });
 
 });

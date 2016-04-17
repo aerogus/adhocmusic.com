@@ -3,40 +3,47 @@
 class Controller
 {
     /**
+     * Retourne la liste des pays du monde
+     *
+     * @return array
+     */
+    static function countries()
+    {
+        return WorldCountry::getHashTable())
+    }
+
+    /**
      * retourne le tableau code region / nom region
-     * pour un pays donné, au format json
+     * pour un pays donné
      *
      * @param string $_GET['c']
      * @return array
      */
-    static function getregion()
+    static function regions()
     {
-        $tab = array();
+        if(empty($_GET['c']) {
+            return array();
+        }
+        $c = strtoupper(substr(trim((string) $_GET['c']), 0, 2));
 
-        if(!empty($_GET['c'])) {
-            $c = strtoupper(substr($_GET['c'], 0, 2));
-            $db = DataBase::getInstance();
-            $sql = "SELECT `id_region`, `name` "
-                 . "FROM `geo_world_region` "
-                 . "WHERE `id_country` = '" . $db->escape($c) . "' "
-                 . "ORDER BY `name` ASC";
-            $res = $db->queryWithFetch($sql);
-            foreach($res as $_res) {
-                $tab[$_res['id_region']] = $_res['name'];
-            }
+        $regions = WorldRegion::getHashTable();
+
+        if(array_key_exists($c, $regions)) {
+            return $regions[$c];
         }
 
-        return $tab;
+        return array();
     }
 
     /**
      * retourne le tableau code departement / nom departement
-     * pour une région donnée, au format json
+     * pour une région donnée
      * (France uniquement)
      *
      * @param string $_GET['r']
+     * @return array
      */
-    static function getdepartement()
+    static function departements()
     {
         $tab = array();
 
@@ -45,7 +52,7 @@ class Controller
             $db = DataBase::getInstance();
             $sql = "SELECT `id_departement`, `name` "
                  . "FROM `geo_fr_departement` "
-                 . "WHERE `id_world_region` = '".$db->escape($r)."' "
+                 . "WHERE `id_world_region` = '" . $db->escape($r) . "' "
                  . "ORDER BY `name` ASC";
             $res = $db->queryWithFetch($sql);
             foreach($res as $_res) {
@@ -58,12 +65,13 @@ class Controller
 
     /**
      * retourne le tableau code ville / nom ville
-     * pour un departement donné, au format json
+     * pour un departement donné
      * (France uniquement)
      *
      * @param string $_GET['d']
+     * @return array
      */
-    static function getcity()
+    static function cities()
     {
         $tab = array();
 
@@ -72,7 +80,7 @@ class Controller
             $db = DataBase::getInstance();
             $sql = "SELECT `id_city`, `name`, `cp` "
                  . "FROM `geo_fr_city` "
-                 . "WHERE `id_departement` = '".$db->escape($d)."' "
+                 . "WHERE `id_departement` = '" . $db->escape($d) . "' "
                  . "ORDER BY `name` ASC";
             $res = $db->queryWithFetch($sql);
             foreach($res as $_res) {
@@ -85,12 +93,12 @@ class Controller
 
     /**
      * retourne le tableau des lieux pour une ville donnée
-     * au format json
      * (France uniquement)
      *
      * @param string $_GET['v']
+     * @return array
      */
-    static function getlieu()
+    static function lieux()
     {
         $tab = array();
 
