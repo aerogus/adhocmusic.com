@@ -30,7 +30,7 @@
     vertical-align top
     padding 0 1rem
 
-/* afterworks par saison / épisodes
+/* afterworks par saison / épisodes */
 
 ol.episodes
   counter-reset episode
@@ -38,8 +38,14 @@ ol.episodes
   li
     list-style-type none
     counter-increment episode
-    padding-left 20px
+    margin-bottom 1rem
 
     &:before
-      content counter(repas) '#'
+      content '#'counter(episode)
+      margin-right 1rem
+      background #292933
+      color #fff
+      padding 5px
+      border-radius 50%
+      font-weight bold
 

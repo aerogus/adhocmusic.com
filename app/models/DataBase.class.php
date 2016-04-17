@@ -82,7 +82,7 @@ class DataBase
     protected function connect($conn_name = DB_ADHOC_DEFAULT)
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
-            throw new AdHocException('Serveur MySQL en maintenance');
+            throw new Exception('Serveur MySQL en maintenance');
         }
 
         $conn_key = self::generateConnectionKey($conn_name);
@@ -243,7 +243,7 @@ class DataBase
         try
         {
             $res = $this->queryWithFetch($sql, $conn_name);
-        } catch (AdHocException $e) {
+        } catch (Exception $e) {
             $error = $e;
         }
 
@@ -385,12 +385,12 @@ class DataBase
 
         if (false === $rc)
         {
-            $error = new Exception($conn);
-            $error->setQuery($sql);
+            //$error = new Exception($conn);
+            //$error->setQuery($sql);
             if ($closeConnectionOnError) {
                 $this->close($conn_name);
             }
-            throw $error;
+            throw new Exception($sql);
         }
         return $rc;
     }
@@ -462,7 +462,7 @@ class DataBase
     {
         $dbAndTableName = trim((string) $dbAndTableName);
         if (empty($dbAndTableName)) {
-            throw new AdHocException('Bad $dbAndTableName in '.__FUNCTION__);
+            throw new Exception('Bad $dbAndTableName in '.__FUNCTION__);
         }
         if ('`' !== $dbAndTableName[0]) {
             $dbAndTableName = '`'.$dbAndTableName.'`';
@@ -482,7 +482,7 @@ class DataBase
         }
         if ('' == $values)
         {
-            throw new AdHocException('No values to insert');
+            throw new Exception('No values to insert');
         } else {
             /* On écrase la virgule en trop au début. */
             $fields[0] = ' ';
@@ -497,7 +497,7 @@ class DataBase
     function affectedRows($conn_name = DB_ADHOC_DEFAULT)
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
-            throw new AdHocException('Serveur MySQL en maintenance');
+            throw new Exception('Serveur MySQL en maintenance');
         }
 
         $conn_key = self::generateConnectionKey($conn_name);
@@ -514,7 +514,7 @@ class DataBase
     function insertId($conn_name = DB_ADHOC_DEFAULT)
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
-            throw new AdHocException('Serveur MySQL en maintenance');
+            throw new Exception('Serveur MySQL en maintenance');
         }
 
         $conn_key = self::generateConnectionKey($conn_name);
@@ -530,7 +530,7 @@ class DataBase
     function escape($string, $conn_name = DB_ADHOC_DEFAULT)
     {
         if(true === self::$_connections_params[$conn_name]['hasMaintenance']) {
-            throw new AdHocException('Serveur MySQL en maintenance');
+            throw new Exception('Serveur MySQL en maintenance');
         }
 
         $conn_key = self::generateConnectionKey($conn_name);
