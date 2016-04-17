@@ -1001,13 +1001,4 @@ class Controller
 
         return $smarty->fetch('adm/appartient-a.tpl');
     }
-
-    static function phpinfo()
-    {
-        Tools::auth(Membre::TYPE_ADMIN);
-
-        ob_start();
-        phpinfo();
-        return ob_get_contents();
-    }
 }
