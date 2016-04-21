@@ -101,10 +101,10 @@
 <script>
 var lieu = {
     id: 0,
-    id_country: '',
-    id_region: '',
-    id_departement: '',
-    id_city: 0
+    id_country: 'FR',
+    id_region: 'A8',
+    id_departement: '91',
+    id_city: 91216
 };
 </script>
 

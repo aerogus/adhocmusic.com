@@ -19,49 +19,49 @@ jQuery(document).ready(function ($) {
         $(this).trigger('change');
     });
 
-    $.getJSON('/geo/countries.json', function () {
-        // récupérer les variables serveur
-        /*
-        lieu.id_country;
-        lieu.id_region;
-        lieu.id_departement;
-        lieu.id_city;
-        lieu.id_lieu;
-        */
-
-        // envoyer un evenement countries loaded
+    /**
+     * chargement des pays
+     */
+    $.getJSON('/geo/countries.json', function (data) {
+        $.each(data, function (country_id, country_name) {
+            $('<option/>', {
+                value: country_id,
+                text: country_name.fr
+            }).appendTo('#id_country');
+        });
+        if (lieu.id_country) {
+            $('#id_country option[value="' + lieu.id_country + '"]').prop('selected', true);
+            $('#id_country').trigger('change');
+            lieu.id_country = false;
+        }
     });
 
     /**
      * la sélection du pays charge la liste des régions
      */
     $('#id_country').change(function () {
-        console.log('id_country change to ' + lieu.id_country);
-        var id_country = $('#id_country').val();
-        var event_id_region = lieu.id_region;
-        $('#id_region').empty();
-        $('#id_departement').empty();
-        $('#id_city').empty();
-        $('<option value="0">---</option>').appendTo('#id_region');
+        var id_country = $(this).find('option:selected').val();
+        console.log('id_country change to ' + id_country);
         $.getJSON('/geo/regions.json', {
             c: id_country
         }, function (data) {
-            var selected = '';
+            $('#id_region, #id_departement, #id_city, #id_lieu').empty();
             $.each(data, function (region_id, region_name) {
-                if (event_id_region === region_id) {
-                    selected = ' selected="selected"';
-                } else {
-                    selected = '';
-                }
-                $('<option value="' + region_id + '"' + selected + '>' + region_name + '</option>').appendTo('#id_region');
+                $('<option/>', {
+                    value: region_id,
+                    text: region_name
+                }).appendTo('#id_region');
             });
+            if (lieu.id_region) {
+                $('#id_region option[value="' + lieu.id_region + '"]').prop('selected', true);
+                $('#id_region').trigger('change');
+                lieu.id_region = false;
+            }
         });
         if (id_country !== 'FR') {
-            $('#id_departement').hide();
-            $('#id_city').hide();
+            $('#id_departement, #id_city').hide();
         } else {
-            $('#id_departement').show();
-            $('#id_city').show();
+            $('#id_departement, #id_city').show();
         }
         $('#id_country').parent().css('background-color', '');
         $('#id_region').parent().css('background-color', '#660000');
@@ -74,26 +74,25 @@ jQuery(document).ready(function ($) {
      * la sélection de la région charge la liste des départements
      */
     $('#id_region').change(function () {
-        console.log('id_region change to ' + lieu.id_region);
-        var id_country = $('#id_country').val();
-        var id_region = $('#id_region').val();
-        var event_id_departement = '{$data.id_departement}';
-        $('#id_departement').empty();
-        $('#id_city').empty();
+        var id_country = $('#id_country').find('option:selected').val();
+        var id_region = $(this).find('option:selected').val();
+        console.log('id_region change to ' + id_region);
         if (id_country === 'FR') {
-            $('<option value="0">---</option>').appendTo('#id_departement');
             $.getJSON('/geo/departements.json', {
                 r: id_region
             }, function (data) {
-                var selected = '';
+                $('#id_departement, #id_city, #id_lieu').empty(); 
                 $.each(data, function (departement_id, departement_name) {
-                    if (event_id_departement === departement_id) {
-                        selected = ' selected="selected"';
-                    } else {
-                        selected = '';
-                    }
-                    $('<option value="' + departement_id + '"' + selected + '>' + departement_id + ' - ' + departement_name + '</option>').appendTo('#id_departement');
+                    $('<option/>', {
+                        value: departement_id,
+                        text: departement_name
+                    }).appendTo('#id_departement');
                 });
+                if (lieu.id_departement) {
+                    $('#id_departement option[value="' + lieu.id_departement + '"]').prop('selected', true);
+                    $('#id_departement').trigger('change');
+                    lieu.id_departement = false;
+                }
             });
         }
         $('#id_country').parent().css('background-color', '');
@@ -107,18 +106,26 @@ jQuery(document).ready(function ($) {
      * la sélection du département charge la liste des villes
      */
     $('#id_departement').change(function () {
-        console.log('id_departement change to ' + lieu.id_departement);
-        var id_country = $('#id_country').val();
-        var id_departement = $('#id_departement').val();
-        $('#id_city').empty();
+        var id_country = $('#id_country').find('option:selected').val();
+        var id_departement = $(this).find('option:selected').val();
+        console.log('id_departement change to ' + id_departement);
         if (id_country === 'FR') {
-            $('<option value="0">---</option>').appendTo('#id_city');
             $.getJSON('/geo/cities.json', {
                 d: id_departement
             }, function (data) {
+                $('#id_city, #id_lieu').empty();
                 $.each(data, function (city_id, city_name) {
-                    $('<option value="' + city_id + '">' + city_name + '</option>').appendTo('#id_city');
+                    $('<option/>', {
+                        value: city_id,
+                        text: city_name
+                    }).appendTo('#id_city');
                 });
+                if (lieu.id_city) {
+                    $('#id_city option[value="' + lieu.id_city + '"]').prop('selected', true);
+                    $('#id_city').trigger('change');
+                    lieu.id_city = false;
+                }
+                //$('#id_city').trigger('change');
             });
         }
         $('#id_country').parent().css('background-color', '');
@@ -132,16 +139,23 @@ jQuery(document).ready(function ($) {
      * la sélection de la ville charge la liste des lieux de la ville
      */
     $('#id_city').change(function () {
-        console.log('id_city change to ' + lieu.id_city);
-        var id_city = $('#id_city').val();
-        $('#id_lieu').empty();
-        $('<option value="0">---</option>').appendTo('#id_lieu');
+        var id_city = $(this).find('option:selected').val();
+        console.log('id_city change to ' + id_city);
         $.getJSON('/geo/lieux.json', {
             v: id_city
         }, function (data) {
+            $('#id_lieu').empty();
             $.each(data, function (lieu_id, lieu_name) {
-                $('<option value="' + lieu_id + '">' + lieu_name + '</option>').appendTo('#id_lieu');
+                $('<option>', { 
+                    value: lieu_id,
+                    text: lieu_name
+                }).appendTo('#id_lieu');
             });
+            if (lieu.id) {
+                $('#id_lieu option[value="' + lieu.id + '"]').prop('selected', true);
+                $('#id_lieu').trigger('change');
+                lieu.id = false;
+            }
         });
         $('#id_country').parent().css('background-color', '');
         $('#id_region').parent().css('background-color', '');
@@ -154,19 +168,14 @@ jQuery(document).ready(function ($) {
      * le changement de lieu met passe au vert tous les champs
      */
     $('#id_lieu').change(function () {
-        console.log('id_lieu change to ' + lieu.id);
+        var id_lieu = $(this).find('option:selected').val();
+        console.log('id_lieu change to ' + id_lieu);
         $('#id_country').parent().css('background-color', '');
         $('#id_region').parent().css('background-color', '');
         $('#id_departement').parent().css('background-color', '');
         $('#id_city').parent().css('background-color', '');
         $('#id_lieu').parent().css('background-color', '');
         $('#bloc_lieu li').css('background-color', '#006600');
-    });
-
-    $.getJSON('/geo/countries.json', function () {
-        $('#id_country').trigger('change');
-        $('#id_region').trigger('change');
-        $('#id_departement').trigger('change');
     });
 
 });

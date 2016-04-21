@@ -127,7 +127,7 @@
 1|geo|countries|GET|/geo/countries
 1|geo|regions|GET|/geo/regions
 1|geo|departements|GET|/geo/departements
-1|geo|cities|GET|/geo/getcities
+1|geo|cities|GET|/geo/cities
 1|geo|lieux|GET|/geo/lieux
 1|groupes|index|GET|/groupes/
 1|groupes|my|GET|/groupes/my
@@ -165,7 +165,6 @@
 1|medias|index|GET|/medias/
 1|medias|search_results|GET|/medias/search-results
 1|membres|tableau_de_bord|GET|/membres/tableau-de-bord
-1|membres|show|GET|/membres/:id
 1|membres|create|GET|/membres/create
 1|membres|create|POST|/membres/create
 1|membres|edit|GET|/membres/edit/:id
@@ -177,6 +176,7 @@
 1|membres|fb_link|POST|/membres/fb-link
 1|membres|fb_unlink|GET|/membres/fb-unlink
 1|membres|fb_unlink|POST|/membres/fb-unlink
+1|membres|show|GET|/membres/:id
 1|messagerie|index|GET|/messagerie/
 1|messagerie|read|GET|/messagerie/read/:id
 1|messagerie|write|GET|/messagerie/write

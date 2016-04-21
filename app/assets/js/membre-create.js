@@ -78,7 +78,7 @@ jQuery(document).ready(function ($) {
         } else {
             $('#first_name').prev('.error').fadeOut();
         }
-        if ($('#id_country').val() === '0') {
+        if ($('#id_country').val() === null) {
             $('#id_country').prev('.error').fadeIn();
             validate = false;
         } else {
