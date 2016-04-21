@@ -209,6 +209,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/lieux-create.js');
 
         if(Tools::isSubmit('form-lieu-create'))
@@ -292,7 +293,6 @@ class Controller
         $trail->addStep("Ajouter");
 
         $smarty->assign('types_lieu', Lieu::getTypes());
-        $smarty->assign('countries', WorldCountry::getHashTable());
 
         return $smarty->fetch('lieux/create.tpl');
     }
@@ -327,6 +327,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/lieux-edit.js');
 
         $smarty->assign('menuselected', 'lieux');
@@ -335,7 +336,6 @@ class Controller
             $lieu = Lieu::getInstance($id);
             $smarty->assign('lieu', $lieu);
             $smarty->assign('types_lieu', Lieu::getTypes());
-            $smarty->assign('countries', WorldCountry::getHashTable());
         } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_lieu', true);

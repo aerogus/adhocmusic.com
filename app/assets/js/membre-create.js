@@ -1,12 +1,8 @@
-/*globals jQuery, validateEmail*/
+/*globals jQuery, validateEmail, lieu */
 
 jQuery(document).ready(function ($) {
 
     'use strict';
-
-    $.ajaxSetup({
-        async: false
-    });
 
     $('#email').focus(function () {
         $('#bubble_email').fadeIn();
@@ -56,87 +52,6 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    $('#id_country').keypress(function () {
-        $('#id_country').trigger('change');
-    });
-
-    $('#id_region').keypress(function () {
-        $('#id_region').trigger('change');
-    });
-
-    $('#id_departement').keypress(function () {
-        $('#id_departement').trigger('change');
-    });
-
-    $('#id_country').change(function () {
-        var id_country = $('#id_country').val();
-        var membre_id_region = '{$data.id_region}';
-        $('#id_region').empty();
-        $('#id_departement').empty();
-        $('#id_city').empty();
-        $('<option value="0">---</option>').appendTo('#id_region');
-        $.getJSON('/geo/getregion.json', {
-            c: id_country
-        }, function (data) {
-            var selected = '';
-            $.each(data, function (region_id, region_name) {
-                if (membre_id_region === region_id) {
-                    selected = ' selected="selected"';
-                } else {
-                    selected = '';
-                }
-                $('<option value="' + region_id + '"' + selected + '>' + region_name + '</option>').appendTo('#id_region');
-            });
-        });
-        if (id_country !== 'FR') {
-            $('#id_departement').hide();
-            $('#id_city').hide();
-        } else {
-            $('#id_departement').show();
-            $('#id_city').show();
-        }
-    });
-
-    $('#id_region').change(function () {
-        var id_country = $('#id_country').val();
-        var id_region = $('#id_region').val();
-        var membre_id_departement = '{$data.id_departement}'; // FROM SERVER
-        $('#id_departement').empty();
-        $('#id_city').empty();
-        if (id_country === 'FR') {
-            $('<option value="0">---</option>').appendTo('#id_departement');
-            $.getJSON('/geo/getdepartement.json', {
-                r: id_region
-            }, function (data) {
-                var selected = '';
-                $.each(data, function (departement_id, departement_name) {
-                    if (membre_id_departement === departement_id) {
-                        selected = ' selected="selected"';
-                    } else {
-                        selected = '';
-                    }
-                    $('<option value="' + departement_id + '"' + selected + '>' + departement_id + ' - ' + departement_name + '</option>').appendTo('#id_departement');
-                });
-            });
-        }
-    });
-
-    $('#id_departement').change(function () {
-        var id_country = $('#id_country').val();
-        var id_departement = $('#id_departement').val();
-        $('#id_city').empty();
-        if (id_country === 'FR') {
-            $('<option value="0">---</option>').appendTo('#id_city');
-            $.getJSON('/geo/getcity.json', {
-                d: id_departement
-            }, function (data) {
-                $.each(data, function (city_id, city_name) {
-                    $('<option value="' + city_id + '">' + city_name + '</option>').appendTo('#id_city');
-                });
-            });
-        }
-    });
-
     $('#form-member-create').submit(function () {
         var validate = true;
         if ($('#pseudo').val().length === 0) {
@@ -171,9 +86,5 @@ jQuery(document).ready(function ($) {
         }
         return validate;
     });
-
-    $('#id_country').trigger('change');
-    $('#id_region').trigger('change');
-    $('#id_departement').trigger('change');
 
 });

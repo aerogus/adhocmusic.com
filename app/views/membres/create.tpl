@@ -74,30 +74,27 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
       <div class="error" id="error_id_country"{if empty($error_id_country)} style="display: none"{/if}>Vous devez préciser votre pays</div>
       <select id="id_country" name="id_country">
         <option value="0">---</option>
-        {foreach from=$countries key=id item=name}
-        <option value="{$id}"{if $data.id_country == $id} selected="selected"{/if}>{$name.fr|escape}</option>
-        {/foreach}
       </select>
     </li>
     <li>
       <label for="id_region">Région</label>
       <div class="error" id="error_id_region"{if empty($error_id_region)} style="display: none"{/if}>Vous devez saisir votre région</div>
       <select id="id_region" name="id_region">
-        <option value="0"></option>
+        <option value="0">---</option>
       </select>
     </li>
     <li>
       <label for="id_departement">Département</label>
       <div class="error" id="error_id_departement"{if empty($error_id_departement)} style="display: none"{/if}>Vous devez saisir votre département</div>
       <select id="id_departement" name="id_departement">
-        <option value="0"></option>
+        <option value="0">---</option>
       </select>
     </li>
     <li>
       <label for="id_city">Ville</label>
       <div class="error" id="error_id_city"{if empty($error_id_city)} style="display: none"{/if}>Vous devez choisir votre ville</div>
       <select id="id_city" name="id_city">
-        <option value="0"></option>
+        <option value="0">---</option>
       </select>
     </li>
     <li>
@@ -114,5 +111,15 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
 
 </div>
 </div>
+
+<script>
+var lieu = {
+    id: 0,
+    id_country: '',
+    id_region: '',
+    id_departement: '',
+    id_city: 0
+};
+</script>
 
 {include file="common/footer.tpl"}

@@ -173,4 +173,14 @@
 
 {include file="common/boxend.tpl"}
 
+<script>
+var lieu = {
+    id: 0,
+    id_country: '',
+    id_region: '',
+    id_departement: '',
+    id_city: 0
+};
+</script>
+
 {include file="common/footer.tpl"}

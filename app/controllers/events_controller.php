@@ -194,6 +194,7 @@ class Controller
         $smarty->enqueue_script('/js/jquery-ui-1.8.16.custom.min.js');
         $smarty->enqueue_script('/js/jquery-ui-timepicker-addon-0.5.min.js');
         $smarty->enqueue_script('/js/jquery-ui-datepicker-fr.js');
+        $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/events-create.js');
 
         $smarty->assign('menuselected', 'agenda');
@@ -446,6 +447,7 @@ class Controller
         $smarty->enqueue_script('/js/jquery-ui-1.8.16.custom.min.js');
         $smarty->enqueue_script('/js/jquery-ui-timepicker-addon-0.5.min.js');
         $smarty->enqueue_script('/js/jquery-ui-datepicker-fr.js');
+        $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/events-edit.js');
 
         $smarty->assign('menuselected', 'agenda');

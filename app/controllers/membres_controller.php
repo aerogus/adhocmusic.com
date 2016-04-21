@@ -53,6 +53,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/membre-create.js');
 
         $smarty->assign('title', "Inscription à l'association AD'HOC");
@@ -152,7 +153,6 @@ class Controller
 
         }
 
-        $smarty->assign('countries', WorldCountry::getHashTable());
         $smarty->assign('data', $data);
 
         return $smarty->fetch('membres/create.tpl');
@@ -214,6 +214,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/membre-edit.js');
 
         if(Tools::isSubmit('form-member-edit'))
@@ -323,8 +324,6 @@ class Controller
         if($_SESSION['membre']->isInterne()) {
             $smarty->assign('forum', ForumPrive::getSubscribedForums($_SESSION['membre']->getId()));
         }
-
-        $smarty->assign('countries', WorldCountry::getHashTable());
 
         return $smarty->fetch('membres/edit.tpl');
     }

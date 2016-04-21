@@ -125,34 +125,30 @@
         <div class="error" id="error_id_country"{if empty($error_id_country)} style="display: none"{/if}>Vous devez choisir un pays</div>
         <select id="id_country" name="id_country" style="float: right;">
           <option value="0">---</option>
-          {foreach from=$countries key=country_id item=country_name}
-          <option value="{$country_id}"{if $membre->getIdCountry() == $country_id} selected="selected"{/if}>{$country_name.fr|escape}</option>
-          {/foreach}
         </select>
         <label for="id_country">Pays (*)</label>
       </li>
       <li>
         <div class="error" id="error_id_region"{if empty($error_id_region)} style="display: none"{/if}>Vous devez choisir une région</div>
         <select id="id_region" name="id_region" style="float: right;">
-          <option value="0"></option>
+          <option value="0">---</option>
         </select>
         <label for="id_region">Région (*)</label>
       </li>
       <li>
         <div class="error" id="error_id_departement"{if empty($error_id_departement)} style="display: none"{/if}>Vous devez choisir un département</div>
         <select id="id_departement" name="id_departement" style="float: right;">
-          <option value="0"></option>
+          <option value="0">---</option>
         </select>
         <label for="id_departement">Département (*)</label>
       </li>
       <li>
         <div class="error" id="error_id_city"{if empty($error_id_city)} style="display: none"{/if}>Vous devez choisir une ville</div>
         <select id="id_city" name="id_city" style="float: right;">
-          <option value="0"></option>
+          <option value="0">---</option>
         </select>
         <label for="id_city">Ville (*)</label>
       </li>
-
       <li>
         <input id="tel" name="tel" type="text" size="40" maxlength="50" value="{$me->getTel()|escape}" style="float: right">
         <label for="tel">Téléphone</label>
@@ -184,5 +180,15 @@
 </form>
 
 {include file="common/boxend.tpl"}
+
+<script>
+var lieu = {
+    id: 0,
+    id_country: '{$me->getIdCountry()',
+    id_region: '{$me->getIdRegion()}',
+    id_departement: '{$me->getIdDepartement()}',
+    id_city: {$me->getIdCity()}
+};
+</script>
 
 {include file="common/footer.tpl"}
