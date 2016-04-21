@@ -9,7 +9,7 @@ class Controller
      */
     static function countries()
     {
-        return WorldCountry::getHashTable())
+        return WorldCountry::getHashTable();
     }
 
     /**
@@ -21,7 +21,7 @@ class Controller
      */
     static function regions()
     {
-        if(empty($_GET['c']) {
+        if(empty($_GET['c'])) {
             return array();
         }
         $c = strtoupper(substr(trim((string) $_GET['c']), 0, 2));
