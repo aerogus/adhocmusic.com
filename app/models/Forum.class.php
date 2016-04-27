@@ -432,8 +432,8 @@ abstract class Forum
              . "(`created_on`, `modified_on`, "
              . "`created_by`, `modified_by`, "
              . "`id_forum`, `nb_messages`, `nb_views`, `subject`) "
-             . "VALUES ( NOW(), FALSE, "
-             . (int) $params['id_contact'] . ", 0, "
+             . "VALUES (NOW(), NOW(), "
+             . (int) $params['id_contact'] . ", " . (int) $params['id_contact'] . ", "
              . "'" . $db->escape($params['id_forum']) ."', 0, 0, '" . $db->escape($params['subject']) . "')";
 
         $db->query($sql);
