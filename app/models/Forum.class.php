@@ -368,8 +368,8 @@ abstract class Forum
              . "`created_by`, `modified_by`, "
              . "`text`) "
              . "VALUE (" . (int) $params['id_thread'] . ", "
-             . "NOW(), FALSE, "
-             . (int) $params['id_contact'] . ", 0, "
+             . "NOW(), NOW(), "
+             . (int) $params['id_contact'] . ", " . (int) $params['id_contact'] . ", "
              . "'" . $db->escape($params['text']) . "')";
 
          $db->query($sql);
