@@ -27,6 +27,21 @@ class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
+        if(Tools::isSubmit('form-newsletter-create'))
+        {
+            $data = array(
+                'title'   => trim((string) Route::params('title')),
+                'content' => trim((string) Route::params('content')),
+            );
+
+            $newsletter = Newsletter::init();
+            $newsletter->setTitle($data['title']);
+            $newsletter->setContent($data['content']);
+            $newsletter->save();
+
+            Tools::redirect('/adm/newsletter/?create=1');
+        }
+
         $smarty = new AdHocSmarty();
 
         $smarty->assign('menuselected', 'prive');
@@ -46,28 +61,25 @@ class Controller
         return $smarty->fetch('adm/newsletter/create.tpl');
     }
 
-    static function create_submit()
-    {
-        Tools::auth(Membre::TYPE_INTERNE);
-
-        $data = array(
-            'title'   => trim((string) Route::params('title')),
-            'content' => trim((string) Route::params('content')),
-        );
-
-        $newsletter = Newsletter::init();
-        $newsletter->save();
-
-        $newsletter->setTitle($data['title']);
-        $newsletter->setContent($data['content']);
-        $newsletter->save();
-
-        Tools::redirect('/adm/newsletter/?create=1');
-    }
-
     static function edit()
     {
         Tools::auth(Membre::TYPE_INTERNE);
+
+        if(Tools::isSubmit('form-newsletter-edit'))
+        {
+            $data = array(
+                'id'      => (int) Route::params('id'),
+                'title'   => trim((string) Route::params('title')),
+                'content' => trim((string) Route::params('content')),
+            );
+
+            $newsletter = Newsletter::getInstance($data['id']);
+            $newsletter->setTitle($data['title']);
+            $newsletter->setContent($data['content']);
+            $newsletter->save();
+
+            Tools::redirect('/adm/newsletter/edit/'.(int) Route::params('id').'?edit=1');
+        }
 
         $id = (int) Route::params('id');
 
@@ -84,23 +96,4 @@ class Controller
 
         return $smarty->fetch('adm/newsletter/edit.tpl');
     }
-
-    static function edit_submit()
-    {
-        Tools::auth(Membre::TYPE_INTERNE);
-
-        $data = array(
-            'id'      => (int) Route::params('id'),
-            'title'   => trim((string) Route::params('title')),
-            'content' => trim((string) Route::params('content')),
-        );
-
-        $newsletter = Newsletter::getInstance($data['id']);
-        $newsletter->setTitle($data['title']);
-        $newsletter->setContent($data['content']);
-        $newsletter->save();
-
-        Tools::redirect('/adm/newsletter/edit/'.(int) Route::params('id').'?edit=1');
-    }
-
 }

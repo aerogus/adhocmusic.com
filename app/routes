@@ -27,9 +27,9 @@
 1|adm|appartient_a|POST|/adm/appartient-a
 1|adm_newsletter|index|GET|/adm/newsletter/
 1|adm_newsletter|create|GET|/adm/newsletter/create
-1|adm_newsletter|create_submit|POST|/adm/newsletter/create
+1|adm_newsletter|create|POST|/adm/newsletter/create
 1|adm_newsletter|edit|GET|/adm/newsletter/edit/:id
-1|adm_newsletter|edit_submit|POST|/adm/newsletter/edit
+1|adm_newsletter|edit|POST|/adm/newsletter/edit
 1|adm_featured|index|GET|/adm/featured/
 1|adm_featured|create|GET|/adm/featured/create
 1|adm_featured|create|POST|/adm/featured/create

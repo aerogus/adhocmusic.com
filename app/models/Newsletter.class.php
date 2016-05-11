@@ -46,18 +46,19 @@ class Newsletter extends ObjectModel
     /**
      * @var string
      */
-    protected $_content = '';
+    protected $_title = '';
 
     /**
      * @var string
      */
-    protected $_title = '';
+    protected $_content = '';
 
     /**
      * @var array
      */
     protected static $_all_fields = array(
         'title' => 'str',
+        'content' => 'str',
     );
 
     /**
@@ -122,7 +123,12 @@ class Newsletter extends ObjectModel
     function setContent($val)
     {
         file_put_contents(NEWSLETTER_TEMPLATE_PATH . '/newsletter-' . $this->getId() . '.tpl', $val);
-        return true;
+
+        if ($this->_content !== $val)
+        {
+            $this->_content = (string) $val;
+            $this->_modified_fields['content'] = true;
+        }
     }
 
     /**
@@ -172,7 +178,7 @@ class Newsletter extends ObjectModel
      * recherche des newsletters en fonction de critères donnés
      * @param array ['id']      => "3"
      *              ['contact'] => "1"
-     *              ['sort']    => "id_newsletter|send_date"
+     *              ['sort']    => "id_newsletter"
      *              ['sens']    => "ASC"
      *              ['debut']   => 0
      *              ['limit']   => 10
@@ -195,18 +201,12 @@ class Newsletter extends ObjectModel
             $sens = "DESC";
         }
 
-        $sort = "id_newsletter";
-        if(isset($params['sort'])
-           && ($params['sort'] === "send_date")) {
-            $sort = $params['sort'];
-        }
-
         $tab_id = array();
         if(array_key_exists('id', $params)) {
             $tab_id = explode(",", $params['id']);
         }
 
-        $db   = DataBase::getInstance();
+        $db = DataBase::getInstance();
 
         $sql = "SELECT `id_newsletter` AS `id`, `title` "
              . "FROM `" . self::$_db_table_newsletter . "` "
@@ -216,27 +216,14 @@ class Newsletter extends ObjectModel
             $sql .= "AND `id_newsletter` IN (" . implode(',', $tab_id) . ") ";
         }
 
-        $sql .= "ORDER BY ";
-        if($sort == "random") {
-            $sql .= "RAND(".time().") ";
-        } else {
-            $sql .= "`".$sort."` ".$sens." ";
-        }
+        $sql .= "ORDER BY `id_newsletter` " . $sens . " ";
+        $sql .= "LIMIT " . $debut . ", " . $limit;
 
-        $res  = $db->queryWithFetch($sql);
-        // attention: on a pas récup le contenu
-
-        if($limit == 1) {
-            $tab = array_pop($res);
-        } else {
-            $tab = array_slice($res, $debut, $limit);
-        }
-
-        return $tab;
+        return $db->queryWithFetch($sql);
     }
 
     /**
-     * stats d'affichage de l'image
+     * stats d'affichage de l'image de tracking
      *
      * @param array['id_contact']
      *             ['ip']
@@ -371,7 +358,7 @@ class Newsletter extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `title` "
+        $sql = "SELECT `title`, `content` "
              . "FROM `" . self::$_table . "` "
              . "WHERE `" . self::$_pk . "` = " . (int) $this->_id_newsletter;
 
