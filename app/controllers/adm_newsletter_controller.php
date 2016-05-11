@@ -52,8 +52,8 @@ class Controller
         $trail->addStep("Ajout");
 
         $data = array(
-            'title' => Newsletter::getDefaultTitle(),
-            'content' => Newsletter::getDefaultRawContent(),
+            'title' => '',
+            'content' => '',
         );
 
         $smarty->assign('data', $data);

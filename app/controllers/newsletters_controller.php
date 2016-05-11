@@ -39,12 +39,12 @@ class Controller
                $newsletter_id_contact = 0;
 
         $smarty->assign('title', $newsletter->getTitle());
-        $smarty->assign('description', substr(strip_tags($newsletter->getBodyHtml()), 0, 500));
+        $smarty->assign('description', substr(strip_tags($newsletter->getContent()), 0, 500));
         $smarty->assign('og_image', 'https://www.adhocmusic.com/img/cache/c/9/3/c938aee4553db039b3b6a8ca203f01a3.jpg'); // 5 nov.
         $smarty->assign('newsletter', $newsletter);
 
         $trail = Trail::getInstance();
-        $trail->addStep("Newsletters", "/newsletters/");
+        $trail->addStep("Newsletters", "/newsletters");
         $trail->addStep($newsletter->getTitle());
 
         return $smarty->fetch('newsletters/show.tpl');
@@ -58,7 +58,7 @@ class Controller
         $smarty = new AdHocSmarty();
 
         $trail = Trail::getInstance();
-        $trail->addStep("Newsletters", "/newsletters/");
+        $trail->addStep("Newsletters", "/newsletters");
         $trail->addStep("Gestion de l'abonnement");
 
         $smarty->assign('email', $email);

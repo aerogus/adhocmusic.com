@@ -108,7 +108,7 @@ class Email
         }
 
         // Bloque l'acheminement de certains mail, à commenter !!
-        $mail->Sender   = "contact@adhocmusic.com";
+        //$mail->Sender   = "contact@adhocmusic.com";
 
         $mail->Subject  = $subject;
         $mail->Body     = $body;

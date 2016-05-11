@@ -71,31 +71,7 @@ class Newsletter extends ObjectModel
      */
     function getContent()
     {
-        return self::getContentFromTemplate($this->getId(), false);
-    }
-
-    /**
-     * @return string
-     */
-    function getRawContent()
-    {
-        return self::getContentFromTemplate($this->getId(), true);
-    }
-
-    /**
-     * @return string
-     */
-    static function getDefaultRawContent()
-    {
-        return self::getContentFromTemplate('layout', true);
-    }
-
-    /**
-     * @return string
-     */
-    static function getDefaultTitle()
-    {
-        return 'Titre de la newsletter';
+        return (string) $this->_content;
     }
 
     /**
