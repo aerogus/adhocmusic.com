@@ -7,7 +7,7 @@
   <div>
     <ul>
       {foreach from=$newsletters item=newsletter}
-      <li><a href="/newsletters/show/{$newsletter.id}.html">{$newsletter.title|escape}</a></li>
+      <li><a href="/newsletters/{$newsletter.id}">{$newsletter.title|escape}</a></li>
       {/foreach}
     </ul>
   </div>

@@ -10,11 +10,11 @@
 <div id="newsletterbody">
 
 <div class="fb-share-box">
-<a class="fb-share-link" href="http://www.facebook.com/sharer/sharer.php?u={$newsletter->getUrl()|escape:'url'}">Partager</a>
+<a class="fb-share-link" href="https://www.facebook.com/sharer/sharer.php?u={$newsletter->getUrl()|escape:'url'}">Partager</a>
 <fb:like style="margin-left: 74px;" href="{$newsletter->getUrl()}" show_faces="false" width="600" font="arial" send="true"></fb:like>
 </div>
 
-{$newsletter->getBodyHtml()}
+{$newsletter->getContent()}
 
 </div>
 </div>

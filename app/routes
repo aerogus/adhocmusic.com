@@ -112,7 +112,6 @@
 1|emails|new_commentaire|GET|/emails/new-commentaire
 1|emails|log_action|GET|/emails/log-action
 1|emails|newsletter|GET|/emails/newsletter/:id
-1|emails|newsletter|GET|/newsletters/:id
 1|events|index|GET|/events/
 1|events|fetch|GET|/events/fetch
 1|events|my|GET|/events/my
@@ -182,9 +181,10 @@
 1|messagerie|write|GET|/messagerie/write
 1|messagerie|write|POST|/messagerie/write
 1|messagerie|delete|POST|/messagerie/delete
-1|newsletters|index|GET|/newsletters/
 1|newsletters|subscriptions|GET|/newsletters/subscriptions
 1|newsletters|subscriptions|POST|/newsletters/subscriptions
+1|newsletters|show|GET|/newsletters/:id
+1|newsletters|index|GET|/newsletters
 1|photos|my|GET|/photos/my
 1|photos|create|GET|/photos/create
 1|photos|import|GET|/photos/import
