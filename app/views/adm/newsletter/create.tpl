@@ -1,7 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Ajout Newsletter"}
-
+<div class="box">
+  <header>
+    <h1>Ajout Newsletter</h1>
+  </header>
+  <div>
 <form id="form-newsletter-create" name="form-newsletter-create" method="post" action="/adm/newsletter/create">
   <fieldset>
     <label for="title">Titre</label>
@@ -11,5 +14,7 @@
   </fieldset>
   <input id="form-newsletter-create-submit" name="form-newsletter-create-submit" class="button" type="submit" value="Ok">
 </form>
+  </div>
+</div>
 
 {include file="common/footer.tpl"}
