@@ -214,6 +214,8 @@ class Controller
 
         if(Tools::isSubmit('form-lieu-create'))
         {
+            //$city = City::getInstance((int) Route::params('id_city'));
+
             $data = array(
                 'id_country'     => (string) Route::params('id_country'),
                 'id_region'      => (string) Route::params('id_region'),

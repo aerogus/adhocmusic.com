@@ -120,14 +120,6 @@ class Audio extends Media
         return self::getBasePath() . '/' . $this->getId() . '.mp3';
     }
 
-    /**
-     * @return string
-     */
-    function getWaveForm()
-    {
-        return MEDIA_URL . '/audiowaveform/' . $this->getId() . '.png';
-    }
-
     /* fin getters */
 
     /* début setters */

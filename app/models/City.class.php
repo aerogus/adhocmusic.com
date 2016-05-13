@@ -134,13 +134,9 @@ class City extends Liste
              . "ORDER BY `id_departement` ASC, `name` ASC";
 
         static::$_liste = array();
-        if($res = $db->queryWithFetch($sql)) {
-            foreach($res as $_res) {
-                static::$_liste[$_res['id_city']] = array(
-                    'name' => $_res['name'],
-                    'id_departement' => $_res['id_departement'],
-                    'cp' => $_res['cp'],
-                );
+        if($rows = $db->queryWithFetch($sql)) {
+            foreach($rows as $row) {
+                static::$_liste[$row['id_city']] = $row;
             }
             return true;
         }

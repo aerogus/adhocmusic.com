@@ -21,25 +21,23 @@ http(s)://www.adhocmusic.com
 
 ## Installation du projet :
 
+# Clone localement le repository
 `git clone git@bitbucket.org:adhocmusic/adhocmusic.com.git`
-- clonage local du repository
 
+# Installe les dépendances npm définies dans package.json
 `npm install`
-`npm update`
-- installe/met à jour les dépendances npm définies dans package.json
 
+# Installe les dépendances composer (php) définies dans composer.json
 `composer install`
-`composer update`
-- installe / met à jour les dépendances composer (php) définies dans composer.json
 
-`brunch b`
+# Compile, concatène, minifie, exporte l'application dans public
 `brunch b -P`
-- Brunch compile, concatène, minifie, exporte l'application dans public
 
+# Crée les répertoires de log, de cache et de media et les rend accessible en écriture au serveur web
 `mkdir log && chmod 777 log`
-- Créer un répertoire de log et le rendre accessible en écriture au serveur web
+`mkdir cache cache/img cache/smarty && chmod 777 cache/*`
+`mkdir media media/audio media/photo media/video && chmod 777 media/*`
 
-`mkdir cache`
-`mkdir cache/img && chmod 777 cache/img`
-`mkdir cache/smarty && chmod 777 cache/smarty`
-- Création des répertoires de cache nécessaires et les rendre acessibles en écriture par le serveur web
+# charger la procédure stockée MySQL en invoquant la méthode suivante :
+Lieu::mysql_init_geo();
+

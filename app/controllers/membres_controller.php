@@ -90,6 +90,7 @@ class Controller
 
             $country = WorldCountry::getName((string) Route::params('id_country'));
             if(((string) Route::params('id_country') === 'FR') && ((int) Route::params('id_city') > 0)) {
+                //$city = City::getInstance((int) Route::params('id_city'));
                 $cp = City::getCp((int) Route::params('id_city'));
                 $city = City::getName((int) Route::params('id_city'));
             }
