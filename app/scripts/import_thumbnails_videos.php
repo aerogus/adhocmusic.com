@@ -21,7 +21,7 @@ define('URL_DEST', ADHOC_ROOT_PATH . '/media/video/');
 foreach($videos as $video)
 {
     echo "Video : ".$video['id_video']."\n";
-    if($video['id_host'] == Video::HOST_YOUTUBE || $video['id_host'] == Video::HOST_DAILYMOTION) {
+    if($video['id_host'] === Video::HOST_YOUTUBE || $video['id_host'] === Video::HOST_DAILYMOTION) {
         if($thumbUrl = Video::getRemoteThumbnail($video['id_host'], $video['reference'], false)) {
             echo "Thumb : ".$thumbUrl."\n";
             $thumb = file_get_contents($thumbUrl);
