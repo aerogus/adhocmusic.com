@@ -6,12 +6,12 @@
 class Trail
 {
     /**
-     *
+     * @var mixed
      */
     protected static $_instance = null;
 
     /**
-     *
+     * @var array
      */
     protected $_path = array();
 
@@ -36,18 +36,22 @@ class Trail
     }
 
     /**
+     * Ajoute un élément au fil d'ariane
+     *
      * @param string $title
-     * @param string $link
+     * @param string $link (opt.)
      */
     function addStep($title, $link = '')
     {
-        $this->_path[] = array(
+        $this->_path[] = [
             'title' => $title,
             'link' => $link,
-        );
+        ];
     }
 
     /**
+     * Retourne le fil d'ariane
+     *
      * @return array
      */
     function getPath()

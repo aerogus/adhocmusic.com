@@ -5,11 +5,7 @@
  *
  * On regroupe ici les méthodes communes à tous les gros objets AD'HOC
  * qui ont comme caractéristiques principales:
- * - un système de cache de contenu sur le filesystem (objets sérialisés)
  * - des méthodes d'accès/écriture des données
- *
- * pas de durée de validité du cache
- * il doit être clearé à chaque modif c'est tout
  *
  * @abstract
  *
@@ -40,17 +36,6 @@ abstract class ObjectModel
      * @var string
      */
     protected $_object_id = '';
-
-    /**
-     * paramètres du cache
-     */
-    protected $_cachable = false;
-    protected $_cache_time = 86400; // en secondes
-
-    /**
-     * chemin des objets cachés
-     */
-    protected $_cache_path = '';
 
     /**
      * Liste des attributs de l'objet
@@ -103,16 +88,6 @@ abstract class ObjectModel
     protected static $_db_table_world_region   = 'geo_world_region';
     protected static $_db_table_fr_departement = 'geo_fr_departement';
     protected static $_db_table_fr_city        = 'geo_fr_city';
-
-    /* db mailing */
-    protected static $_db_table_mailing_campaign   = 'mailing_campaign';
-    protected static $_db_table_mailing_contact    = 'mailing_contact';
-    protected static $_db_table_mailing_hit        = 'mailing_hit';
-    protected static $_db_table_mailing_link       = 'mailing_link';
-    protected static $_db_table_mailing_newsletter = 'mailing_newsletter';
-    protected static $_db_table_mailing_partner    = 'mailing_partner';
-    protected static $_db_table_mailing_stats      = 'mailing_stats';
-    protected static $_db_table_mailing_subscriber = 'mailing_subscriber';
 
     /**
      * codes type de médias
@@ -306,7 +281,6 @@ abstract class ObjectModel
                  . "SET " . $fields_to_save . " "
                  . "WHERE `" . static::$_pk . "` = " . (int) $this->getId();
 
-            $this->_clearFromCache();
             $this->_modified_fields = array();
 
             $db->query($sql);
@@ -336,110 +310,6 @@ abstract class ObjectModel
     }
 
     /**
-     * retourne le chemin de l'objet en cache
-     * @return string
-     */
-    protected function _getCachePath($id)
-    {
-        $this->_object_id = $id;
-        $tmp = str_pad($this->_object_id, 8, 0, STR_PAD_LEFT);
-        $this->_cache_path = strtolower(get_class($this)) . '/' . substr($tmp, 0, 4) . '/' . substr($tmp, 4) . '.obj.php';
-    }
-
-    /**
-     * Récupere l'instance de l'objet en cache
-     *
-     * @param string $cachePath
-     * @param int $cacheTime
-     * @return boolean
-     */
-    protected function _loadFromCache()
-    {
-        $cachePath = CACHE_PATH . $this->_cache_path;
-        if ($fp = fopen($cachePath, 'r') ) {
-            $ts = fread($fp, filesize($cachePath));
-            fclose ($fp);
-            if ($obj = unserialize($ts)) {
-                return $obj;
-            }
-        }
-        return false;
-    }
-
-    /**
-     *
-     */
-    protected function _storeInCache()
-    {
-        $tmp = explode('/', $this->_cache_path);
-        $newDir = CACHE_PATH;
-        for ($i=0 ; $i<(count($tmp)-1) ; $i++) {
-            $newDir .= $tmp[$i].'/';
-            if (!file_exists($newDir)) {
-                mkdir($newDir);
-            }
-        }
-        $cachePath = CACHE_PATH . $this->_cache_path;
-        if ($fp = fopen($cachePath . '.tmp', 'w')) {
-            if (fwrite($fp, serialize($this))) {
-                fclose($fp);
-                if (rename($cachePath . '.tmp', $cachePath)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * invalide le cache
-     */
-    protected function _clearFromCache()
-    {
-        //if(unlink($this->_object_id)) {
-            return true;
-        //}
-        return false;
-    }
-
-    /**
-     * Enregistre les parametres du tableau dans l'objet
-     *
-     * @param array $arr
-     * @return bool
-     */
-    protected function _arrayToObject($arr)
-    {
-        $fields = static::_getAllFields(true);
-        foreach($fields as $field)
-        {
-            if (isset($arr[$field]))
-            {
-                $att = '_' . $field;
-                $this->$att = $arr[$field];
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Enregistre l'objet dans un tableau
-     *
-     * @return array
-     */
-    protected function _objectToArray()
-    {
-        $res = array();
-        $fields = static::_getAllFields(true);
-        foreach($fields as $field)
-        {
-            $att = '_' . $field;
-            $res[$field] = $this->$att;
-        }
-        return $res;
-    }
-
-    /**
      * @param array
      */
     protected function _dbToObject($data)
@@ -450,43 +320,12 @@ abstract class ObjectModel
             if(array_key_exists($k, $all_fields))
             {
                 $att = '_' . $k;
-                if($all_fields[$k] == 'phpser') {
+                if($all_fields[$k] === 'phpser') {
                     $this->$att = unserialize($v);
                 } else {
                     $this->$att = $v;
                 }
             }
         }
-    }
-
-    /**
-     * @return bool
-     * @todo à implémenter
-     */
-    protected function _objectToDb()
-    {
-        return false;
-    }
-
-    /**
-     * lit le cache et charge les attributs dans l'objet (fils) courant
-     *
-     * @return bool
-     * @todo à implémenter
-     */
-    protected function _cacheToObject()
-    {
-        return false;
-    }
-
-    /**
-     * enregistre les attributs de l'objet courant dans le cache
-     *
-     * @return bool
-     * @todo à implémenter
-     */
-    protected function _objectToCache()
-    {
-        return false;
     }
 }

@@ -1354,8 +1354,6 @@ class Membre extends Contact
 
             }
 
-            $this->_clearFromCache();
-
             return true;
         }
     }

@@ -313,8 +313,6 @@ class Contact extends ObjectModel
 
             $db->query($sql);
 
-            $this->_clearFromCache();
-
             return true;
         }
     }

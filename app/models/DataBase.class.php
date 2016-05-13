@@ -104,7 +104,7 @@ class DataBase
         }
 
         if (!$this->_current_conn[$conn_key]) {
-            throw new Exception($this->_current_conn[$conn_key], 'Erreur connexion serveur MySQL');
+            throw new Exception('Erreur connexion serveur MySQL');
         }
 
         $select_db = @mysqli_select_db(
@@ -113,12 +113,8 @@ class DataBase
         );
 
         if (!$select_db) {
-            throw new Exception($this->_current_conn[$conn_key], 'Erreur connexion base MySQL');
+            throw new Exception('Erreur connexion base MySQL');
         }
-
-        // on précise l'encodage à utiliser pour la connexion
-        //$this->query("SET NAMES " . $this->_charset);
-        //$this->query("SET CHARACTER SET " . $this->_charset);
 
         return $this->_current_conn[$conn_key];
     }
@@ -385,12 +381,11 @@ class DataBase
 
         if (false === $rc)
         {
-            //$error = new Exception($conn);
-            //$error->setQuery($sql);
+            $err = mysqli_error($conn);
             if ($closeConnectionOnError) {
                 $this->close($conn_name);
             }
-            throw new Exception($sql);
+            throw new Exception($err);
         }
         return $rc;
     }

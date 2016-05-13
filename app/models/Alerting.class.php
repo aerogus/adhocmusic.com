@@ -351,6 +351,9 @@ class Alerting extends ObjectModel
         return $db->queryWithFetch($sql);
     }
 
+    /**
+     * Charge une alerte
+     */
     protected function _loadFromDb()
     {
         $db  = DataBase::getInstance();

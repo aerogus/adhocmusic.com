@@ -7,37 +7,43 @@ class Pagination
 {
     /**
      * Page selectionnée
-     * @param int
+     *
+     * @var int
      */
     protected $_selected_page = 0;
 
     /**
      * Page courante (pour boucles internes uniquement)
-     * @param int
+     *
+     * @var int
      */
     protected $_current_page = 0;
 
     /**
      * Nombre total d'élements
-     * @param int
+     *
+     * @var int
      */
-    protected $_nb_items = null;
+    protected $_nb_items = 0;
 
     /**
      * Nombre d'éléments par page
-     * @param int
+     *
+     * @var int
      */
     protected $_nb_items_per_page = 20;
 
     /**
      * Nombre de liens
-     * @param int
+     *
+     * @var int
      */
     protected $_nb_links = 5;
 
     /**
      * Nombre de pages
-     * @param int
+     *
+     * @var int
      */
     protected $_nb_pages = 0;
 
@@ -250,7 +256,7 @@ class Pagination
      */
     function getClass()
     {
-        if($this->getSelectedPage() == $this->getCurrentPage()) {
+        if($this->getSelectedPage() === $this->getCurrentPage()) {
             return 'selectedpage';
         }
         return 'unselectedpage';

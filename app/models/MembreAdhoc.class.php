@@ -595,8 +595,6 @@ class MembreAdhoc extends Membre
 
             }
 
-            $this->_clearFromCache();
-
             return true;
         }
     }
