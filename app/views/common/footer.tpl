@@ -14,8 +14,8 @@
   <li>
     <ul>
       <li><h4>Suivez nous</h4></li>
-      <li><a href="https://facebook.com/adhocmusic" title="AD'HOC Music sur Facebook"><img src="/img/emails/facebook.png" width="16" height="16" alt="Facebook">/adhocmusic</a></li>
-      <li><a href="https://twitter.com/adhocmusic" title="@adhocmusic sur Twitter"><img src="/img/emails/twitter.png" width="16" height="16" alt="Twitter">@adhocmusic</a></li>
+      <li class="facebook"><a href="https://facebook.com/adhocmusic" title="AD'HOC Music sur Facebook">/adhocmusic</a></li>
+      <li class="twitter"><a href="https://twitter.com/adhocmusic" title="@adhocmusic sur Twitter">@adhocmusic</a></li>
     </ul>
   </li>
   <li>
