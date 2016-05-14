@@ -27,6 +27,10 @@ class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
+        $smarty->enqueue_style('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.css');
+        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.js');
+        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/mode/xml/xml.js');
+
         if(Tools::isSubmit('form-newsletter-create'))
         {
             $data = array(
@@ -64,6 +68,11 @@ class Controller
     static function edit()
     {
         Tools::auth(Membre::TYPE_INTERNE);
+
+
+        $smarty->enqueue_style('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.css');
+        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.js');
+        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/mode/xml/xml.js');
 
         if(Tools::isSubmit('form-newsletter-edit'))
         {
