@@ -2,9 +2,12 @@
   "dependencies": {
     "after-brunch": "0.0.5",
     "auto-reload-brunch": "^2.0.0",
+    "autoprefixer": "^6.3.6",
     "brunch": "^1.8.3",
     "clean-css-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
+    "postcss-assets": "^4.1.0",
+    "postcss-brunch": "^0.5.0",
     "stylus-brunch": "^1.8.1"
   }
 }

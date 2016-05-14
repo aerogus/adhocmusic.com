@@ -54,12 +54,12 @@
 
   <div class="box">
     <header>
-      <h2>À voir</h2>
+      <h2>Souvenez vous</h2>
     </header>
-    <div>
+    <div class="reset">
   {foreach from=$videos item=video}
   <div class="thumb-80">
-    <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}">{$video.name|truncate:15:"...":true|escape}</a>
+    <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}"></a>
     <a class="overlay-80 overlay-video-80" href="{$video.url}" title="Regarder {$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}"></a>
   </div>
   {/foreach}

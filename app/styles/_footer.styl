@@ -15,7 +15,7 @@ footer
   max-width 680px
   margin 0 auto
 
-  & > li
+  > li
     display inline-block
     padding 0 1em 1em 1em
     vertical-align top
@@ -26,7 +26,7 @@ footer
         width 100%
         display block
 
-    & h4
+    h4
       font-family TradeGothic
       text-transform uppercase
       display block
@@ -34,10 +34,20 @@ footer
       color #fff
       border-bottom 1px solid
 
-    & a
+    a
       color #999
       display inline-block
       padding 2px 0
+
+  .facebook, .twitter
+    background-repeat no-repeat
+    padding-left 24px
+
+  .facebook
+    background-image inline('../img/social/facebook.svg')
+
+  .twitter
+    background-image inline('../img/social/twitter.svg')
 
 vendorize(property, value)
   -webkit-{property} value
