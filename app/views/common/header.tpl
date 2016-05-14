@@ -83,11 +83,9 @@
 
 <body>
 
-<header class="clearfix">
+<header class="hdr">
   <a class="logo" href="/" title="Cliquez pour revenir à l'accueil"><span>AD'HOC</span></a>
-{*
-  <a class="megabanner" href="/events/6753" title="AD'HOC - Samedi 19 mars 2016"><img src="/img/megabanner/adhoc-20160319.jpg" alt=""></a>
-*}
+  <a class="ads_banner" href="/events/6754" title="AD'HOC - Samedi 21 mai 2016"><img src="/img/megabanner/adhoc-20160521.jpg" alt=""></a>
 </header>
 
 <div id="menu-wrapper">
