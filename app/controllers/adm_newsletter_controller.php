@@ -69,7 +69,6 @@ class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-
         $smarty->enqueue_style('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.css');
         $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.js');
         $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/mode/xml/xml.js');
@@ -104,5 +103,23 @@ class Controller
         $smarty->assign('newsletter', Newsletter::getInstance($id));
 
         return $smarty->fetch('adm/newsletter/edit.tpl');
+    }
+
+    /**
+     * upload fichier pour newsletter
+     * il est stocké dans le répertoire dédié sans traitement particulier
+     */
+    static function upload()
+    {
+        if(Tools::isSubmit('form-newsletter-edit-upload')) {
+            $id = (int) Route::params('id');
+            if(is_uploaded_file($_FILES['file']['tmp_name'])) {
+                $n = Newsletter::getInstance($id);
+                if(!file_exists($n->getFilePath())) {
+                    mkdir($n->getFilePath());
+                }
+                move_uploaded_file($_FILES['file']['tmp_name'], $n->getFilePath() . '/' . $_FILES['file']['name']);
+            }
+        }
     }
 }
