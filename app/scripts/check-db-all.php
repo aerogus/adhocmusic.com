@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 
-require_once 'common-cli.inc.php';
+require_once dirname(__FILE__) . '/../config.php';
 require_once 'Console/Table.php';
 
 /**
@@ -462,7 +462,7 @@ foreach($res as $_res) {
     $tbl->addRow(array($_res['id_pm'], $_res['to']));
     // on efface les messages dont le destinataire est introuvable
     //$db->query("DELETE FROM adhoc_messagerie WHERE id_pm = " . (int) $_res['id_pm']);
-}   
+}
 if(sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {

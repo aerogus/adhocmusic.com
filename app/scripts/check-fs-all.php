@@ -7,7 +7,7 @@
  * Vérifie si un content du file system pas obsolète (ressource bdd effacée)
  */
 
-require_once 'common-cli.inc.php';
+require_once dirname(__FILE__) . '/../config.php';
 
 $db = DataBase::getInstance();
 
