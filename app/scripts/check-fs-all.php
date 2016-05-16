@@ -24,7 +24,7 @@ $membres = $db->queryWithFetchFirstFields($sql);
 $nb_membres = count($membres);
 
 // on parcourt le répertoire des images à la recherche des obsolètes
-$path = ADHOC_ROOT_PATH . "/media/membre/";
+$path = MEDIA_PATH . "/membre/";
 $cpt_files = 0;
 foreach (glob($path . "*.jpg") as $filename)
 {
@@ -50,7 +50,7 @@ $membres = $db->queryWithFetchFirstFields($sql);
 $nb_membres = count($membres);
 
 // on parcourt le répertoire des images à la recherche des obsolètes
-$path = ADHOC_ROOT_PATH . "/media/membre/ca/";
+$path = MEDIA_PATH . "/membre/ca/";
 $cpt_files = 0;
 foreach (glob($path . "*.jpg") as $filename)
 {
@@ -74,7 +74,7 @@ $sql = "SELECT `id_groupe` FROM `adhoc_groupe` ORDER BY `id_groupe` ASC";
 $groupes = $db->queryWithFetchFirstFields($sql);
 
 // on parcourt le répertoire des images à la recherche des obsolètes
-$path = ADHOC_ROOT_PATH . "/media/groupe/";
+$path = MEDIA_PATH . "/groupe/";
 
 $prefix = array("b","l","m","p");
 
@@ -96,7 +96,7 @@ $sql = "SELECT `id_audio` FROM `adhoc_audio` ORDER BY `id_audio` ASC";
 $audios = $db->queryWithFetchFirstFields($sql);
 
 // on parcourt le répertoire des mp3 à la recherche des obsolètes
-$path = ADHOC_ROOT_PATH . "/media/audio/";
+$path = MEDIA_PATH . "/audio/";
 
 foreach (glob($path . "*") as $filename)
 {
@@ -114,7 +114,7 @@ $sql = "SELECT `id_video` FROM `adhoc_video` ORDER BY `id_video` ASC";
 $videos = $db->queryWithFetchFirstFields($sql);
 
 // on parcourt le répertoire des vignettes videos à la recherche des obsolètes
-$path = ADHOC_ROOT_PATH . "/media/video/";
+$path = MEDIA_PATH . "/video/";
 
 foreach (glob($path . "*.jpg") as $filename)
 {
@@ -132,7 +132,7 @@ $sql = "SELECT `id_event` FROM `adhoc_event` ORDER BY `id_event` ASC";
 $events = $db->queryWithFetchFirstFields($sql);
 
 // on parcourt le répertoire des flyers événements à la recherche des obsolètes
-$path = ADHOC_ROOT_PATH . "/media/event/";
+$path = MEDIA_PATH . "/event/";
 
 foreach (glob($path . "*.jpg") as $filename)
 {

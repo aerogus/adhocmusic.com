@@ -6,7 +6,7 @@ die();
 // n° de newsletter à traiter
 define('ID_NEWSLETTER', 73);
 
-require_once dirname(__FILE__) . '/common-cli.inc.php';
+require_once dirname(__FILE__) . '/../config.php';
 
 $newsletter = Newsletter::getInstance(ID_NEWSLETTER);
 

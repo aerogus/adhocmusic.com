@@ -2,7 +2,6 @@
 <?php
 
 require_once dirname(__FILE__) . '/../config.php';
-require_once 'Console/Table.php';
 
 /**
  * vérification des incohérences dans la base de données AD'HOC
@@ -419,23 +418,6 @@ if(sizeof($res) > 0) {
 }
 unset($tbl);
 
-$sql = "SELECT `id_article`, `id_contact` FROM `adhoc_article` WHERE `id_contact` NOT IN (SELECT `id_contact` FROM `adhoc_membre`)";
-echo "\n26 - article lié à contact introuvable\n" . $sql . "\n";
-$tbl = new Console_Table();
-$tbl->setHeaders(array('id_article', 'id_contact'));
-$res = $db->queryWithFetch($sql);
-foreach($res as $_res) {
-    $tbl->addRow(array($_res['id_article'], $_res['id_contact']));
-    // on reaffecte à id_contact = 1 tous les articles orphelins
-    //$db->query('UPDATE adhoc_article SET id_contact = 1 WHERE id_article = ' . (int) $_res['id_article']);
-}
-if(sizeof($res) > 0) {
-    echo $tbl->getTable();
-} else {
-    echo "OK\n";
-}
-unset($tbl);
-
 $sql = "SELECT `id_pm`, `from` FROM `adhoc_messagerie` WHERE `from` NOT IN (SELECT `id_contact` FROM `adhoc_membre`)";
 echo "\n27 - message lié à membre expéditeur introuvable\n" . $sql . "\n";
 $tbl = new Console_Table();
@@ -469,35 +451,6 @@ if(sizeof($res) > 0) {
     echo "OK\n";
 }
 unset($tbl);
-
-echo "\n29 - Cohérence Suivi Thread\n";
-$sql = "SELECT `id_contact` FROM `adhoc_contact` ORDER BY `id_contact` ASC";
-$contacts = $db->queryWithFetchFirstFields($sql);
-$sql = "SELECT `id_thread` FROM `adhoc_forum_public_thread` ORDER BY `id_thread` ASC";
-$threads = $db->queryWithFetchFirstFields($sql);
-$sql = "SELECT `id_contact`, `id_thread` FROM `adhoc_forum_public_subscriber`";
-$res = $db->queryWithFetch($sql);
-foreach($res as $obj)
-{
-    if(!in_array($obj['id_contact'], $contacts)) {
-        echo "id_contact " . $obj['id_contact'] . " introuvable dans la table adhoc_contact\n";
-        // purge ?
-        //$sql = "DELETE FROM `adhoc_forum_public_subscriber` WHERE `id_contact` = " . (int) $obj['id_contact'];
-        //$res = $db->query($sql);
-    } else {
-        //echo "trouvé id_contact " . $obj['id_contact'] . "\n";
-    }
-    if(!in_array($obj['id_thread'], $threads)) {
-        echo "id_thread " . $obj['id_thread'] . " introuvable dans la table adhoc_forum_public_thread\n";
-        // purge ?
-        //$sql = "DELETE FROM `adhoc_forum_public_subscriber` WHERE `id_thread` = " . (int) $obj['id_thread'];
-        //$res = $db->query($sql);
-    } else {
-        //echo "trouvé id_thread " . $obj['id_thread'] . "\n";
-    }
-}
-echo "nb_threads  = " . count($threads) . "\n";
-echo "nb_contacts = " . count($contacts) . "\n";
 
 $sql = "SELECT `id_photo`, `name` FROM `adhoc_photo` WHERE `id_groupe` = 0 AND `id_event` = 0 AND `id_lieu` = 0";
 echo "\n30 - photo liée à aucun groupe/événement/lieu\n" . $sql . "\n";
