@@ -27,10 +27,6 @@ class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $smarty->enqueue_style('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.css');
-        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.js');
-        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/mode/xml/xml.js');
-
         if(Tools::isSubmit('form-newsletter-create'))
         {
             $data = array(
@@ -47,6 +43,11 @@ class Controller
         }
 
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_style('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.css');
+        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.js');
+        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/mode/xml/xml.js');
+        $smarty->enqueue_script('/js/adm/newsletter.js');
 
         $smarty->assign('menuselected', 'prive');
 
@@ -69,10 +70,6 @@ class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $smarty->enqueue_style('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.css');
-        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.js');
-        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/mode/xml/xml.js');
-
         if(Tools::isSubmit('form-newsletter-edit'))
         {
             $data = array(
@@ -92,6 +89,11 @@ class Controller
         $id = (int) Route::params('id');
 
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_style('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.css');
+        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.js');
+        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/mode/xml/xml.js');
+        $smarty->enqueue_script('/js/adm/newsletter.js');
 
         $smarty->assign('menuselected', 'prive');
 
