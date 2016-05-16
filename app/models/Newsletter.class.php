@@ -69,6 +69,38 @@ class Newsletter extends ObjectModel
     /**
      * @return string
      */
+    static function getBaseUrl()
+    {
+        return MEDIA_URL . '/newsletter';
+    }
+
+    /**
+     * @return string
+     */
+    static function getBasePath()
+    {
+        return MEDIA_PATH . '/newsletter';
+    }
+
+    /**
+     * @return string
+     */
+    function getFileUrl()
+    {
+        return self::getBaseUrl() . '/' . $this->getId();
+    }
+
+    /**
+     * @return string
+     */
+    function getFilePath()
+    {
+        return self::getBasePath() . '/' . $this->getId();
+    }
+
+    /**
+     * @return string
+     */
     function getContent()
     {
         return (string) $this->_content;
@@ -79,16 +111,9 @@ class Newsletter extends ObjectModel
      *
      * @return string
      */
-    static function getContentFromTemplate($id, $raw = false)
+    static function getContentRendered()
     {
-        if($raw) {
-            // brut
-            return file_get_contents(NEWSLETTER_TEMPLATE_PATH . '/newsletter-' . (string) $id . '.tpl');
-        } else {
-            // parsé
-            $smarty = new EmailSmarty();
-            return $smarty->fetch('newsletter-' . (string) $id . '.tpl');
-        }
+        return (string) $this->_content;
     }
 
     /**
@@ -98,8 +123,6 @@ class Newsletter extends ObjectModel
      */
     function setContent($val)
     {
-        file_put_contents(NEWSLETTER_TEMPLATE_PATH . '/newsletter-' . $this->getId() . '.tpl', $val);
-
         if ($this->_content !== $val)
         {
             $this->_content = (string) $val;
@@ -114,7 +137,7 @@ class Newsletter extends ObjectModel
      */
     function getUrl()
     {
-        return 'https://www.adhocmusic.com/emails/newsletter/' . $this->getId();
+        return HOME_URL . '/newsletters/' . $this->getId();
     }
 
     /**
@@ -258,7 +281,7 @@ class Newsletter extends ObjectModel
 
     /**
      * ajout d'un email à la newsletter
-     *
+     * @todo doublon avec script subscribe-email ?
      * @param string $email
      * @return int
      */
@@ -294,7 +317,7 @@ class Newsletter extends ObjectModel
 
     /**
      * suppression d'un email de la newsletter
-     *
+     * @todo doublon avec script unsubscribe-email ?
      * @param string $email
      * @return int
      */
