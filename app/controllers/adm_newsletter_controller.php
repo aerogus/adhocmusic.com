@@ -113,15 +113,15 @@ class Controller
      */
     static function upload()
     {
-        if(Tools::isSubmit('form-newsletter-edit-upload')) {
-            $id = (int) Route::params('id');
-            if(is_uploaded_file($_FILES['file']['tmp_name'])) {
-                $n = Newsletter::getInstance($id);
-                if(!file_exists($n->getFilePath())) {
-                    mkdir($n->getFilePath());
-                }
-                move_uploaded_file($_FILES['file']['tmp_name'], $n->getFilePath() . '/' . $_FILES['file']['name']);
+        $id = (int) Route::params('id');
+        if(is_uploaded_file($_FILES['file']['tmp_name'])) {
+            $n = Newsletter::getInstance($id);
+            if(!file_exists($n->getFilePath())) {
+                mkdir($n->getFilePath());
             }
+            move_uploaded_file($_FILES['file']['tmp_name'], $n->getFilePath() . '/' . $_FILES['file']['name']);
+            return 'OK';
         }
+        return 'KO';
     }
 }

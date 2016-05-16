@@ -17,8 +17,10 @@
   <input type="hidden" name="id" value="{$newsletter->getId()|escape}">
 </form>
 
-<form id="form-newsletter-edit-upload" name="form-newsletter-edit-upload" method="post" action="/adm/newsletter/edit">
-  <input type="file">
+<form id="form-newsletter-edit-upload" name="form-newsletter-edit-upload" method="post" action="/adm/newsletter/upload" enctype="multipart/form-data">
+  <input type="file" name="file">
+  <input type="submit" id="form-newsletter-edit-upload-submit" value="Envoyer">
+  <input type="hidden" name="id" value="{$newsletter->getId()|escape}">
 </form>
 
   </div>
