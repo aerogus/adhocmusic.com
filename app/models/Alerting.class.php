@@ -44,7 +44,7 @@ class Alerting extends ObjectModel
      * Date de création
      * @var string
      */
-    protected $_created_on = '';
+    protected $_created_on = NULL;
 
     /**
      * actif ?
@@ -75,7 +75,7 @@ class Alerting extends ObjectModel
      */
     protected static $_all_fields = array(
         'id_contact'  => 'num',
-        'created_on'  => 'str',
+        'created_on'  => 'date',
         'active'      => 'bool',
         'type'        => 'str',
         'id_content'  => 'num',

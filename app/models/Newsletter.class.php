@@ -54,11 +54,17 @@ class Newsletter extends ObjectModel
     protected $_content = '';
 
     /**
+     * @var string
+     */
+    protected $_html = '';
+
+    /**
      * @var array
      */
     protected static $_all_fields = array(
         'title' => 'str',
         'content' => 'str',
+        'html' => 'str',
     );
 
     /**
@@ -111,9 +117,23 @@ class Newsletter extends ObjectModel
      *
      * @return string
      */
-    static function getContentRendered()
+    function getHtml()
     {
-        return (string) $this->_content;
+        return (string) $this->_html;
+    }
+
+    /**
+     * set le champ body, html (partie variable de la lettre)
+     *
+     * @param string
+     */
+    function setHtml($val)
+    {
+        if ($this->_html !== $val)
+        {
+            $this->_html = (string) $val;
+            $this->_modified_fields['html'] = true;
+        }
     }
 
     /**
@@ -357,7 +377,7 @@ class Newsletter extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `title`, `content` "
+        $sql = "SELECT `title`, `content`, `html` "
              . "FROM `" . self::$_table . "` "
              . "WHERE `" . self::$_pk . "` = " . (int) $this->_id_newsletter;
 

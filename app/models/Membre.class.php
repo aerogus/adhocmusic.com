@@ -209,17 +209,17 @@ class Membre extends Contact
     /**
      * @var string
      */
-    protected $_created_on = '';
+    protected $_created_on = NULL;
 
     /**
      * @var string
      */
-    protected $_modified_on = '';
+    protected $_modified_on = NULL;
 
     /**
      * @var string
      */
-    protected $_visited_on = '';
+    protected $_visited_on = NULL;
 
     /**
      * @var array
@@ -260,9 +260,9 @@ class Membre extends Contact
         'level'          => 'num',
         'facebook_profile_id' => 'num',
         'facebook_auto_login' => 'bool',
-        'created_on'     => 'str',
-        'modified_on'    => 'str',
-        'visited_on'     => 'str',
+        'created_on'     => 'date',
+        'modified_on'    => 'date',
+        'visited_on'     => 'date',
     );
 
     /**

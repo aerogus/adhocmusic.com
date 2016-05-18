@@ -75,8 +75,8 @@ class Photo extends Media
         'id_event'     => 'num',
         'id_structure' => 'num',
         'name'         => 'str',
-        'created_on'   => 'str',
-        'modified_on'  => 'str',
+        'created_on'   => 'date',
+        'modified_on'  => 'date',
         'online'       => 'bool',
         'credits'      => 'str',
     );
