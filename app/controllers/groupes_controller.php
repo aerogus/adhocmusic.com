@@ -140,6 +140,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/groupe-create.js');
+
         $trail = Trail::getInstance();
         $trail->addStep("Groupes", "/groupes/");
         $trail->addStep("Inscription", "/groupes/create");
