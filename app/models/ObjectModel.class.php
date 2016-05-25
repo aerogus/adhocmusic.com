@@ -229,7 +229,7 @@ abstract class ObjectModel
                         $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
                         break;
                     default:
-                        throw new Exception('invalid field type');
+                        throw new Exception('invalid field type: ' . $type);
                         break;
                 }
             }
