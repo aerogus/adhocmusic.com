@@ -191,8 +191,9 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/jquery-ui-1.8.16.custom.min.js');
-        $smarty->enqueue_script('/js/jquery-ui-timepicker-addon-0.5.min.js');
+        $smarty->enqueue_style('/css/jquery-ui.min.css');
+
+        $smarty->enqueue_script('/js/jquery-ui.min.js');
         $smarty->enqueue_script('/js/jquery-ui-datepicker-fr.js');
         $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/events-create.js');
@@ -444,8 +445,9 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/jquery-ui-1.8.16.custom.min.js');
-        $smarty->enqueue_script('/js/jquery-ui-timepicker-addon-0.5.min.js');
+        $smarty->enqueue_style('/css/jquery-ui.min.css');
+
+        $smarty->enqueue_script('/js/jquery-ui.min.js');
         $smarty->enqueue_script('/js/jquery-ui-datepicker-fr.js');
         $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/events-edit.js');

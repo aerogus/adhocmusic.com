@@ -86,7 +86,7 @@ class Controller
             $smarty->assign('from', $from);
             $smarty->assign('title', "♫ " . $video->getName());
             $smarty->assign('description', $video->getName());
-            $smarty->assign('og_image', '/media/video/' . $video->getId() . '.jpg');
+            $smarty->assign('og_image', HOME_URL . '/media/video/' . $video->getId() . '.jpg');
             $smarty->assign('og_type', 'video.movie');
 
             $og_video = array(

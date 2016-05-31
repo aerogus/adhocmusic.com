@@ -1,33 +1,5 @@
 {include file="common/header.tpl"}
 
-<script>
-$(function() {
-
-    $("#datdeb, #datfin").datepicker({
-        dateFormat: 'yy-mm-dd',
-        showAnim: 'slideDown'
-    });
-
-    $("#form-featured-edit").submit(function () {
-        var valid = true;
-        if($("#title").val() === 0) {
-            $("#error_title").fadeIn();
-            valid = false;
-        } else {
-            $("#error_title").fadeOut();
-        }
-        if($("#description").val().length === 0) {
-            $("#error_description").fadeIn();
-            valid = false;
-        } else {
-            $("#error_description").fadeOut();
-        }
-        return valid;
-    });
-
-});
-</script>
-
 <div class="box">
   <header>
     <h1>Edition à l'affiche</h1>
@@ -52,7 +24,7 @@ $(function() {
         </li>
         <li>
           <div class="error" id="error_image"{if empty($error_image)} style="display: none"{/if}>Vous devez choisir une image</div>
-          <label for="image">Image (.jpg 427x240)</label>
+          <label for="image">Image (.jpg 1000x375)</label>
           <input type="file" name="image" id="image">
           <img src="{$data.image}" alt="">
         </li>

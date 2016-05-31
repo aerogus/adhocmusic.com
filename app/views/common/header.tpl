@@ -60,32 +60,13 @@
 <script src="{$script_url}"></script>
 {/foreach}
 
-{if !empty($js_jquery_tools)}
-<script src="/js/jquery.tools.min.js"></script>
-{/if}
-{if !empty($js_jquery_ui)}
-<script src="/js/jquery-ui-1.8.16.custom.min.js"></script>
-{/if}
-{if !empty($js_jquery_ui_datepicker)}
-<script src="/js/jquery-ui-datepicker-fr.js"></script>
-{/if}
-{if !empty($js_jquery_ui_timepicker)}
-<script src="/js/jquery-ui-timepicker-addon-0.5.min.js"></script>
-{/if}
-{if !empty($js_jquery_tablesorter)}
-<script src="/js/jquery.tablesorter.min.js"></script>
-{/if}
-{if !empty($js_gmap)}
-<script src="https://maps.google.com/maps/api/js?libraries=geometry&region=FR"></script>
-{/if}
-
 </head>
 
 <body>
 
 <header class="hdr">
   <a class="logo" href="/" title="Cliquez pour revenir à l'accueil"><span>AD'HOC</span></a>
-  <a class="ads_banner" href="/events/6754" title="AD'HOC - Samedi 21 mai 2016"><img src="/img/megabanner/adhoc-20160521.jpg" alt=""></a>
+  <a class="megabanner" href="/events/6754" title="AD'HOC - Samedi 21 mai 2016"><img src="/img/megabanner/adhoc-20160521.jpg" alt=""></a>
 </header>
 
 <div id="menu-wrapper">
