@@ -31,7 +31,7 @@
         </a>
       </li>
       <li>
-        <a href="http://www.mairie-villemoisson.fr/index.php/enfance-jeunesse/jeunesse/club-ados-paj">
+        <a href="http://www.mairie-villemoisson.fr/index.php/enfance-jeunesse/club-ados-paj.html">
           <img src="/img/partners/paj.png" alt="">
           <strong>La PAJ</strong><br>Le Club Ado de Villemoisson sur Orge
         </a>
