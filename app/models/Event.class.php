@@ -1477,7 +1477,7 @@ class Event extends ObjectModel
             'structure' => 1,
             'sort'      => 'date',
             'sens'      => 'ASC',
-            'limit'     => 100,
+            'limit'     => 1000,
         ));
 
         $tab = array();
@@ -1492,7 +1492,7 @@ class Event extends ObjectModel
             if(!array_key_exists($season, $tab)) {
                 $tab[$season] = array();
             }
-            $tab[$season][$evt['id']] = $evt;
+            $tab[$season][] = $evt;
         }
 
         return $tab;
