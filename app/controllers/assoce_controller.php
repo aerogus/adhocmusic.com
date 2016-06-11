@@ -66,7 +66,8 @@ class Controller
             'limit'  => 6,
         )));
 
-        $smarty->assign('events', array_reverse(Event::getAdHocEventsBySeason(), true));
+        // tri antéchrono des saisons
+        $smarty->assign('events', array_reverse(Event::getAdHocEventsBySeason()));
 
         return $smarty->fetch('assoce/concerts.tpl');
     }
