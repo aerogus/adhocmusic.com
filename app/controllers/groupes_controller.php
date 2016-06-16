@@ -191,7 +191,6 @@ class Controller
                 $groupe->setTwitterId($data['twitter_id']);
                 $groupe->setEtat(Groupe::ETAT_ACTIF);
                 $groupe->setOnline(true);
-                $groupe->setCreatedNow();
 
                 if($groupe->save()) {
 
@@ -229,7 +228,6 @@ class Controller
                     }
 
                     $groupe->linkMember($_SESSION['membre']->getId());
-                    $groupe->setModifiedNow();
                     $groupe->save();
 
                     Log::action(Log::ACTION_GROUP_CREATE, $groupe->getAlias());

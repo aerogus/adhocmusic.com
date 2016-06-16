@@ -13,11 +13,8 @@ Vous pourrez le modifier le modifier dans votre "Tableau de bord" / "Mes Infos P
 
 <h3>Et Maintenant ?</h3>
 
-<p>Vous avez un groupe de musique ? <a href="/groupes/create"> Inscrivez le</a></p>
-<p>Vous gérer une salle de concert ? <a href="/lieux/create">Référencez la</a> dans notre annuaire ou bien <a href="/events/create">saisissez une date</a> dans notre agenda géolocalisé</p>
-<p>Venez participer à notre <a href="/forums/forum/a">forum de discussion</a> ou bien <a href="/live">chattez avec nous en direct</a></p>
+<p>Vous avez un groupe de musique ? Vous voulez postuler pour nos concerts ? <a href="/groupes/create"> Inscrivez le</a></p>
 <p>Venez découvrir des centaines de <a href="/media/">photos, vidéos et musiques</a> de concerts</p>
-<p>Découvrez les dizaines d'<a href="/articles/">articles sur la musique</a> (chronique, live report, pédagogie, actualité locale ...) écrits par nos bénévoles, et par vous !</p>
 <p><a href="/contact">Contactez nous</a> pour toute question</p>
 
 <p>Et encore bienvenue chez vous !</p>

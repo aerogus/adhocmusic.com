@@ -314,12 +314,6 @@ class Controller
             }
         }
 
-        if($_SESSION['membre']->getFacebookProfileId() > 0) {
-            $fb_me = json_decode(file_get_contents('http://graph.facebook.com/' . $_SESSION['membre']->getFacebookProfileId()));
-            $fb_me->avatar = 'http://graph.facebook.com/' . $_SESSION['membre']->getFacebookProfileId() . '/picture';
-            $smarty->assign('fb_me', $fb_me);
-        }
-
         $smarty->assign('membre', $_SESSION['membre']);
 
         if($_SESSION['membre']->isInterne()) {
