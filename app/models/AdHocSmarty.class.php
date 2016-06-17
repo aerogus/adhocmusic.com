@@ -86,7 +86,7 @@ class AdHocSmarty extends Smarty
 
         $this->enqueue_style('/css/adhoc.20160213.css');
 
-        $this->enqueue_script('/js/jquery-2.2.4.min.js');
+        $this->enqueue_script('/js/jquery-3.0.0.min.js');
         $this->enqueue_script('/js/adhoc.20160213.js');
 
         $this->print_inline_script(file_get_contents(ADHOC_ROOT_PATH . '/app/assets/js/google-analytics.js'));
