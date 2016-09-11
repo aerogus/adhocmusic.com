@@ -51,7 +51,7 @@ class AdHocSmarty extends Smarty
         $fb = new Facebook\Facebook([
             'app_id' => FB_APP_ID,
             'app_secret' => FB_APP_SECRET,
-            'default_graph_version' => 'v2.5',
+            'default_graph_version' => 'v2.7',
         ]);
         $this->assign('fb', $fb);
         $fb_helper = $fb->getRedirectLoginHelper();
