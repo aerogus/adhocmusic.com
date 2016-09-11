@@ -123,22 +123,22 @@ class Groupe extends ObjectModel
     /**
      * @var string
      */
-    protected $_created_on = '';
+    protected $_created_on = NULL;
 
     /**
      * @var string
      */
-    protected $_modified_on = '';
+    protected $_modified_on = NULL;
 
     /**
      * @var string
      */
-    protected $_datdeb = '';
+    protected $_datdeb = NULL;
 
     /**
      * @var string
      */
-    protected $_datfin = '';
+    protected $_datfin = NULL;
 
     /**
      * @var string
@@ -173,10 +173,10 @@ class Groupe extends ObjectModel
         'id_departement'   => 'str',
         'online'           => 'bool',
         'visite'           => 'num',
-        'created_on'       => 'str',
-        'modified_on'      => 'str',
-        'datdeb'           => 'str',
-        'datfin'           => 'str',
+        'created_on'       => 'date',
+        'modified_on'      => 'date',
+        'datdeb'           => 'date',
+        'datfin'           => 'date',
         'comment'          => 'str',
         'etat'             => 'num',
         'template'         => 'phpser',
@@ -645,7 +645,7 @@ class Groupe extends ObjectModel
      */
     function getFacebookShareUrl()
     {
-        return 'http://www.facebook.com/sharer.php?u=' . urlencode($this->getUrl());
+        return 'https://www.facebook.com/sharer.php?u=' . urlencode($this->getUrl());
     }
 
     /**
@@ -1087,7 +1087,7 @@ class Groupe extends ObjectModel
      * @param id_type_musicien
      * @return bool
      */
-    function linkMember($id_contact, $id_type_musicien = 0, $datdeb = '0000-00-00', $datfin = '0000-00-00')
+    function linkMember($id_contact, $id_type_musicien = 0, $datdeb = NULL, $datfin = NULL)
     {
         // le groupe existe-t-il bien ?
 
@@ -1103,12 +1103,15 @@ class Groupe extends ObjectModel
         // tout est ok, on insère dans appartient_a
         $db = DataBase::getInstance();
 
+        $datdeb = is_null($datdeb) ? 'NULL' : "'" . $db->escape($datdeb) . "'";
+        $datfin = is_null($datfin) ? 'NULL' : "'" . $db->escape($datfin) . "'";
+
         $sql = "INSERT INTO `" . self::$_db_table_appartient_a . "` "
              . "(`id_groupe`, `id_contact`, "
              . "`id_type_musicien`, `datdeb`, `datfin`, "
              . "`adm`) "
              . "VALUES(" . (int) $this->getId() . ", " . (int) $id_contact . ", "
-             . (int) $id_type_musicien . ", '" . $db->escape($datdeb) . "', '" . $db->escape($datfin) . "', "
+             . (int) $id_type_musicien . ", " . $datdeb . ", " . $datfin . ", "
              . "TRUE)";
 
         $db->query($sql);

@@ -209,17 +209,17 @@ class Membre extends Contact
     /**
      * @var string
      */
-    protected $_created_on = '';
+    protected $_created_on = NULL;
 
     /**
      * @var string
      */
-    protected $_modified_on = '';
+    protected $_modified_on = NULL;
 
     /**
      * @var string
      */
-    protected $_visited_on = '';
+    protected $_visited_on = NULL;
 
     /**
      * @var array
@@ -260,9 +260,9 @@ class Membre extends Contact
         'level'          => 'num',
         'facebook_profile_id' => 'num',
         'facebook_auto_login' => 'bool',
-        'created_on'     => 'str',
-        'modified_on'    => 'str',
-        'visited_on'     => 'str',
+        'created_on'     => 'date',
+        'modified_on'    => 'date',
+        'visited_on'     => 'date',
     );
 
     /**
@@ -1204,8 +1204,11 @@ class Membre extends Contact
                     case 'phpser':
                         $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
                         break;
+                    case 'date':
+                        $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                        break;
                     default:
-                        throw new Exception('invalid field type');
+                        throw new Exception('invalid field type : ' . $type);
                         break;
                 }
             }
@@ -1248,8 +1251,11 @@ class Membre extends Contact
                     case 'phpser':
                         $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
                         break;
+                    case 'date':
+                        $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                        break;
                     default:
-                        throw new Exception('invalid field type');
+                        throw new Exception('invalid field type : ' . $type);
                         break;
                 }
             }
@@ -1279,27 +1285,30 @@ class Membre extends Contact
                         switch($fields['contact'][$field])
                         {
                             case 'num':
-                                $fields_to_save .= " `" . $field . "` = ".$db->escape($this->$att).", ";
+                                $fields_to_save .= " `" . $field . "` = ".$db->escape($this->$att).",";
                                 break;
                             case 'str':
-                                $fields_to_save .= " `" . $field . "` = '".$db->escape($this->$att)."', ";
+                                $fields_to_save .= " `" . $field . "` = '".$db->escape($this->$att)."',";
                                 break;
                             case 'bool':
-                                $fields_to_save .= " `" . $field . "` = ".(((bool) $this->$att) ? 'TRUE' : 'FALSE').", ";
+                                $fields_to_save .= " `" . $field . "` = ".(((bool) $this->$att) ? 'TRUE' : 'FALSE').",";
                                 break;
                             case 'pwd':
-                                $fields_to_save .= " `" . $field . "` = PASSWORD('".$db->escape($this->$att)."'), ";
+                                $fields_to_save .= " `" . $field . "` = PASSWORD('".$db->escape($this->$att)."'),";
                                 break;
                             case 'phpser':
-                                $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "', ";
+                                $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
+                                break;
+                            case 'date':
+                                $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
                                 break;
                             default:
-                                throw new Exception('invalid field type');
+                                throw new Exception('invalid field type : ' . $fields['contact'][$field]);
                                 break;
                         }
                     }
                 }
-                $fields_to_save = substr($fields_to_save, 0, -2);
+                $fields_to_save = substr($fields_to_save, 0, -1);
 
                 $sql  = "UPDATE `" . self::$_db_table_contact . "` "
                       . "SET " . $fields_to_save . " "
@@ -1322,27 +1331,30 @@ class Membre extends Contact
                         switch($fields['membre'][$field])
                         {
                             case 'num':
-                                $fields_to_save .= " `" . $field . "` = ".$db->escape($this->$att).", ";
+                                $fields_to_save .= " `" . $field . "` = ".$db->escape($this->$att).",";
                                 break;
                             case 'str':
-                                $fields_to_save .= " `" . $field . "` = '".$db->escape($this->$att)."', ";
+                                $fields_to_save .= " `" . $field . "` = '".$db->escape($this->$att)."',";
                                 break;
                             case 'bool':
-                                $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ", ";
+                                $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
                                 break;
                             case 'pwd':
-                                $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'), ";
+                                $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
                                 break;
                             case 'phpser':
-                                $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "', ";
+                                $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
+                                break;
+                            case 'date':
+                                $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
                                 break;
                             default:
-                                throw new Exception('invalid field type');
+                                throw new Exception('invalid field type : ' . $fields['membre'][$field]);
                                 break;
                         }
                     }
                 }
-                $fields_to_save = substr($fields_to_save, 0, -2);
+                $fields_to_save = substr($fields_to_save, 0, -1);
 
                 $sql  = "UPDATE `" . self::$_db_table_membre . "` "
                       . "SET " . $fields_to_save . " "

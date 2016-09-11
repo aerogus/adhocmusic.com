@@ -35,6 +35,12 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_style('/css/jquery-ui.min.css');
+
+        $smarty->enqueue_script('/js/jquery-ui.min.js');
+        $smarty->enqueue_script('/js/jquery-ui-datepicker-fr.js');
+        $smarty->enqueue_script('/js/adm/featured.js');
+
         // valeurs par défaut
         $data = array(
             'title'       => '',
@@ -110,6 +116,12 @@ class Controller
         $trail->addStep("Modifier");
 
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_style('/css/jquery-ui.min.css');
+
+        $smarty->enqueue_script('/js/jquery-ui.min.js');
+        $smarty->enqueue_script('/js/jquery-ui-datepicker-fr.js');
+        $smarty->enqueue_script('/js/adm/featured.js');
 
         $id = (int) Route::params('id');
         $f = Featured::getInstance($id);

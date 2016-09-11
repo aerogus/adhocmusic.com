@@ -43,7 +43,7 @@ class Event extends ObjectModel
     /**
      * @var string
      */
-    protected $_date = '';
+    protected $_date = NULL;
 
     /**
      * @var string
@@ -83,12 +83,12 @@ class Event extends ObjectModel
     /**
      * @var string
      */
-    protected $_created_on = '';
+    protected $_created_on = NULL;
 
     /**
      * @var string
      */
-    protected $_modified_on = '';
+    protected $_modified_on = NULL;
 
     /**
      * @var int
@@ -129,10 +129,10 @@ class Event extends ObjectModel
      * @var array
      */
     protected static $_all_fields = array(
-        'created_on'    => 'str',
-        'modified_on'   => 'str',
+        'created_on'    => 'date',
+        'modified_on'   => 'date',
         'name'          => 'str',
-        'date'          => 'str',
+        'date'          => 'date',
         'text'          => 'str',
         'price'         => 'str',
         'online'        => 'bool',
@@ -1477,7 +1477,7 @@ class Event extends ObjectModel
             'structure' => 1,
             'sort'      => 'date',
             'sens'      => 'ASC',
-            'limit'     => 100,
+            'limit'     => 1000,
         ));
 
         $tab = array();
@@ -1492,7 +1492,7 @@ class Event extends ObjectModel
             if(!array_key_exists($season, $tab)) {
                 $tab[$season] = array();
             }
-            $tab[$season][$evt['id']] = $evt;
+            $tab[$season][] = $evt;
         }
 
         return $tab;

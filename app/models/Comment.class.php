@@ -48,12 +48,12 @@ class Comment extends ObjectModel
     /**
      * @var string
      */
-    protected $_created_on = '';
+    protected $_created_on = NULL;
 
     /**
      * @var string
      */
-    protected $_modified_on = '';
+    protected $_modified_on = NULL;
 
     /**
      * @var bool
@@ -101,8 +101,8 @@ class Comment extends ObjectModel
     protected static $_all_fields = array(
         'type'        => 'str',
         'id_content'  => 'num',
-        'created_on'  => 'str',
-        'modified_on' => 'str',
+        'created_on'  => 'date',
+        'modified_on' => 'date',
         'online'      => 'bool',
         'id_contact'  => 'num',
         'pseudo'      => 'str',

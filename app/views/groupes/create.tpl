@@ -10,55 +10,10 @@ Vous pouvez contacter le <a href="/membres/show/1">webmaster</a> pour plus d'inf
 Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fiche groupe et dès à présent annoncer les concerts de votre groupe.</p>
 {/if}
 
-<script>
-$(function() {
-  $("#form-groupe-create").submit(function() {
-    var valid = true;
-    if($("#name").val() == "") {
-      $("#error_name").fadeIn();
-      valid = false;
-    } else {
-      $("#error_name").fadeOut();
-    }
-    if($("#style").val() == "") {
-      $("#error_style").fadeIn();
-      valid = false;
-    } else {
-      $("#error_style").fadeOut();
-    }
-    if($("#influences").val() == "") {
-      $("#error_influences").fadeIn();
-      valid = false;
-    } else {
-      $("#error_influences").fadeOut();
-    }
-    if($("#lineup").val() == "") {
-      $("#error_lineup").fadeIn();
-      valid = false;
-    } else {
-      $("#error_lineup").fadeOut();
-    }
-    if($("#mini_text").val() == "") {
-      $("#error_mini_text").fadeIn();
-      valid = false;
-    } else {
-      $("#error_mini_text").fadeOut();
-    }
-    if($("#text").val() == "") {
-      $("#error_text").fadeIn();
-      valid = false;
-    } else {
-      $("#error_text").fadeOut();
-    }
-    return valid;
-  });
-});
-</script>
-
 {include file="common/boxstart.tpl" boxtitle="Ajouter un Groupe"}
 
 <form id="form-groupe-create" name="form-groupe-create" method="post" action="/groupes/create" enctype="multipart/form-data">
-  <ol>
+  <ul>
     <li>
       <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner le nom de votre groupe</div>
       <label for="name">Nom</label>
@@ -135,7 +90,7 @@ $(function() {
         {/foreach}
       </select>
     </li>
-  </ol>
+  </ul>
   <input id="form-groupe-create-submit" name="form-groupe-create-submit" class="button" type="submit" value="Ajouter">
 </form>
 

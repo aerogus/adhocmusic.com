@@ -187,7 +187,7 @@ var lieu = {
     id_country: '{$me->getIdCountry()}',
     id_region: '{$me->getIdRegion()}',
     id_departement: '{$me->getIdDepartement()}',
-    id_city: {$me->getIdCity()}
+    id_city: '{$me->getIdCity()}'
 };
 </script>
 

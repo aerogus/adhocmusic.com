@@ -9,7 +9,7 @@
     <div>
 
       <img src="/img/idf.png" width="250" height="211" alt="Carte de l'Ile de France" class="alignright">
-      <p><strong>AD'HOC</strong> est une association à but non lucratif, originaire d'Epinay sur Orge (91 - Essonne) oeuvrant pour le développement de la scène musicale actuelle depuis plus de 10 ans (création en 1996).</p>
+      <p><strong>AD'HOC</strong> est une association à but non lucratif, originaire d'Epinay sur Orge (91 - Essonne) œuvrant pour le développement de la scène musicale actuelle depuis plus de 10 ans (création en 1996).</p>
       <p>Partant du constat que la vie musicale en Essonne et en France est morcelée, notre association a entrepris de s'insérer dans le paysage associatif afin d'établir des partenariats permettant de relayer l'action des diverses associations et donc d'en amplifier la portée. Cette action se fait bien sur à long terme car elle impose de constituer un réseau homogène de groupes, musiciens, associations, travailleurs audiovisuels, studios, tourneurs etc., et des partenariats solides avec des associations musicales ayant des activités différentes mais complémentaires (information, répétition, enregistrement, organisation de concerts, diffusion, etc.).</p>
       <p>Dans le cas d'<strong>AD'HOC</strong>, ces partenariats se sont d'abord faits avec les MJC de Villebon, de Chilly Mazarin, le Rack'Am de Brétigny, Radio Mille Pattes et Local'Zique de Saulx les Chartreux, le Point Info Rock de Draveil et l'Adiam91.</p>
       <p>L'association <strong>AD'HOC</strong> c'est une équipe d'une dizaine de personnes actives pour l'organisation des concerts, c'est près de 1800 membres internet, plus de 3500 inscrits à la newsletter, plus de 200 groupes référencés devant de toute la France.</p>

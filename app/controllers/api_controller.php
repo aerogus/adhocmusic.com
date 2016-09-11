@@ -8,7 +8,7 @@ class Controller
     const VERSION = 1.0;
 
     /**
-     *
+     * @return array
      */
     static function videos()
     {
@@ -20,7 +20,7 @@ class Controller
         $debut   = (int) Route::params('debut');
         $limit   = (int) Route::params('limit');
 
-        $videos  = Video::getVideos(array(
+        return Video::getVideos(array(
             'groupe'  => $groupe,
             'event'   => $event,
             'lieu'    => $lieu,
@@ -29,12 +29,10 @@ class Controller
             'debut'   => $debut,
             'limit'   => $limit,
         ));
-
-        return $videos;
     }
 
     /**
-     *
+     * @return array
      */
     static function audios()
     {
@@ -46,7 +44,7 @@ class Controller
         $debut   = (int) Route::params('debut');
         $limit   = (int) Route::params('limit');
 
-        $audios  = Audio::getAudios(array(
+        return Audio::getAudios(array(
             'groupe'  => $groupe,
             'event'   => $event,
             'lieu'    => $lieu,
@@ -55,12 +53,10 @@ class Controller
             'debut'   => $debut,
             'limit'   => $limit,
         ));
-
-        return $audios;
     }
 
     /**
-     *
+     * @return array
      */
     static function photos()
     {
@@ -72,7 +68,7 @@ class Controller
         $debut   = (int) Route::params('debut');
         $limit   = (int) Route::params('limit');
 
-        $photos  = Photo::getPhotos(array(
+        return Photo::getPhotos(array(
             'groupe'  => $groupe,
             'event'   => $event,
             'lieu'    => $lieu,
@@ -81,12 +77,10 @@ class Controller
             'debut'   => $debut,
             'limit'   => $limit,
         ));
-
-        return $photos;
     }
 
     /**
-     *
+     * @return array
      */
     static function events()
     {
@@ -98,7 +92,7 @@ class Controller
         $debut  = (int) Route::params('debut');
         $limit  = (int) Route::params('limit');
 
-        $events = Event::getEvents(array(
+        return Event::getEvents(array(
             'groupe'  => $groupe,
             'lieu'    => $lieu,
             'datdeb'  => $datdeb,
@@ -107,7 +101,5 @@ class Controller
             'debut'   => $debut,
             'limit'   => $limit,
         ));
-
-        return $events;
     }
 }

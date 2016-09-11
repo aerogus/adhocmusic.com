@@ -216,6 +216,9 @@ abstract class ObjectModel
                     case 'str':
                         $sql .= "'" . $db->escape($this->$att) . "',";
                         break;
+                    case 'date':
+                        $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                        break;
                     case 'bool':
                         $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
                         break;
@@ -226,7 +229,7 @@ abstract class ObjectModel
                         $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
                         break;
                     default:
-                        throw new Exception('invalid field type');
+                        throw new Exception('invalid field type: ' . $type);
                         break;
                 }
             }
@@ -260,14 +263,17 @@ abstract class ObjectModel
                         case 'str':
                             $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "', ";
                             break;
+                        case 'date':
+                            $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                            break;
                         case 'bool':
-                            $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ", ";
+                            $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
                             break;
                         case 'pwd':
-                            $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'), ";
+                            $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
                             break;
                         case 'phpser':
-                            $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "', ";
+                            $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
                             break;
                         default:
                             throw new Exception('invalid field type');
@@ -275,7 +281,7 @@ abstract class ObjectModel
                     }
                 }
             }
-            $fields_to_save = substr($fields_to_save, 0, -2);
+            $fields_to_save = substr($fields_to_save, 0, -1);
 
             $sql = "UPDATE `" . static::$_table . "` "
                  . "SET " . $fields_to_save . " "
