@@ -208,7 +208,7 @@ abstract class ObjectModel
                 switch($type)
                 {
                     case 'num':
-                        $sql .= $db->escape($this->$att) . ",";
+                        $sql .= (int) $this->$att . ",";
                         break;
                     case 'float':
                         $sql .= number_format((float) $this->$att, 8, ".", "") . ",";
@@ -252,7 +252,7 @@ abstract class ObjectModel
                     switch(static::$_all_fields[$field])
                     {
                         case 'num':
-                            $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ", ";
+                            $fields_to_save .= " `" . $field . "` = " . (int) $this->$att . ", ";
                             break;
                         case 'float':
                             $fields_to_save .= " `" . $field . "` = " . number_format((float) $this->$att, 8, ".", "") . ",";
