@@ -21,6 +21,7 @@ class Lieu extends ObjectModel
     const TYPE_MEDIA     = 5;
     const TYPE_POLY      = 6;
     const TYPE_EXTERIEUR = 7;
+    const TYPE_AFFICHAGE = 8;
 
     /**
      * Tableau des types de lieux
@@ -35,6 +36,7 @@ class Lieu extends ObjectModel
         self::TYPE_MEDIA     => "Télé/Radio",
         self::TYPE_POLY      => "Salle Polyvalente/communale/des fêtes",
         self::TYPE_EXTERIEUR => "Extérieur",
+        self::TYPE_AFFICHAGE => "Panneau d'affichage libre",
     );
 
     /**
@@ -1148,26 +1150,6 @@ class Lieu extends ObjectModel
             'sort' => 'date',
             'sens' => 'DESC',
         ));
-    }
-
-    /**
-     * retourne si un lieu a une panoramique
-     *
-     * @return bool
-     */
-    function hasPano()
-    {
-        switch($this->_id_lieu)
-        {
-            case 1:    // pidou
-            case 644:  // parc de saulx
-            case 1282: // parc des templiers
-            case 2012: // tour de montlhery
-                return true;
-
-            default:
-                return false;
-        }
     }
 
     /**
