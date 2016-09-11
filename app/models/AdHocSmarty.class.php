@@ -51,7 +51,7 @@ class AdHocSmarty extends Smarty
         $fb = new Facebook\Facebook([
             'app_id' => FB_APP_ID,
             'app_secret' => FB_APP_SECRET,
-            'default_graph_version' => 'v2.5',
+            'default_graph_version' => 'v2.7',
         ]);
         $this->assign('fb', $fb);
         $fb_helper = $fb->getRedirectLoginHelper();
@@ -86,7 +86,7 @@ class AdHocSmarty extends Smarty
 
         $this->enqueue_style('/css/adhoc.20160213.css');
 
-        $this->enqueue_script('/js/jquery-3.0.0.min.js');
+        $this->enqueue_script('/js/jquery-3.1.0.min.js');
         $this->enqueue_script('/js/adhoc.20160213.js');
 
         $this->print_inline_script(file_get_contents(ADHOC_ROOT_PATH . '/app/assets/js/google-analytics.js'));
