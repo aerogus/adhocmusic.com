@@ -57,7 +57,7 @@ class AdHocSmarty extends Smarty
         $fb_helper = $fb->getRedirectLoginHelper();
         $this->assign('fb_helper', $fb_helper);
         $fb_permissions = ['email'];
-        $fb_login_url = $fb_helper->getLoginUrl(HOME_URL . '/auth/fb-login', $fb_permissions);
+        $fb_login_url = $fb_helper->getLoginUrl(HOME_URL . '/auth/facebook-login-callback', $fb_permissions);
         $this->assign('fb_login_url', $fb_login_url);
 
         if(!empty($_SESSION['membre'])) {
