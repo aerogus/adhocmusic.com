@@ -394,7 +394,7 @@ class Event extends ObjectModel
      */
     static function getUrlById($id, $type = null)
     {
-        return '/events/' . (int) $id;
+        return HOME_URL . '/events/' . (int) $id;
     }
 
     /**

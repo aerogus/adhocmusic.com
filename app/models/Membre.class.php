@@ -202,6 +202,11 @@ class Membre extends Contact
     protected $_facebook_profile_id = 0;
 
     /**
+     * @var string
+     */
+    protected $_facebook_access_token = '';
+
+    /**
      * @string
      */
     protected $_facebook_auto_login = false;
@@ -259,6 +264,7 @@ class Membre extends Contact
         'mailing'        => 'bool',
         'level'          => 'num',
         'facebook_profile_id' => 'num',
+        'facebook_access_token' => 'str',
         'facebook_auto_login' => 'bool',
         'created_on'     => 'date',
         'modified_on'    => 'date',
@@ -503,7 +509,15 @@ class Membre extends Contact
      */
     function getFacebookProfileUrl()
     {
-        return 'http://www.facebook.com/profile.php?id=' . (string) $this->_facebook_profile_id;
+        return 'https://facebook.com/' . (string) $this->_facebook_profile_id;
+    }
+
+    /**
+     * @return string
+     */
+    function getFacebookAccessToken()
+    {
+        return (string) $this->_facebook_access_token;
     }
 
     /**
@@ -599,7 +613,7 @@ class Membre extends Contact
      */
     static function getUrlById($id_contact)
     {
-        return '/membres/' . (int) $id_contact;
+        return HOME_URL . '/membres/' . (int) $id_contact;
     }
 
     /**
@@ -883,6 +897,18 @@ class Membre extends Contact
         {
             $this->_facebook_profile_id = (int) $val;
             $this->_modified_fields['membre']['facebook_profile_id'] = true;
+        }
+    }
+
+    /**
+     * @param string
+     */
+    function setFacebookAccessToken($val)
+    {
+        if ($this->_facebook_access_token !== $val)
+        {
+            $this->_facebook_access_token = (string) $val;
+            $this->_modified_fields['membre']['facebook_access_token'] = true;
         }
     }
 
@@ -1385,7 +1411,7 @@ class Membre extends Contact
               . "`m`.`country`, `m`.`tel`, `m`.`port`, "
               . "`m`.`id_city`, `m`.`id_departement`, `m`.`id_region`, `m`.`id_country`, "
               . "`m`.`site`, `m`.`text`, "
-              . "`m`.`mailing`, `m`.`level`, `m`.`facebook_profile_id`, "
+              . "`m`.`mailing`, `m`.`level`, `m`.`facebook_profile_id`, `m`.`facebook_access_token`, "
               . "`m`.`created_on`, `m`.`modified_on`, `m`.`visited_on` "
               . "FROM `" . self::$_db_table_contact . "` `c`, `" . self::$_db_table_membre . "` `m` "
               . "WHERE `m`.`id_contact` = `c`.`id_contact` "
@@ -1749,6 +1775,11 @@ class Membre extends Contact
         return (int) $db->queryWithFetchFirstField($sql);
     }
 
+    /**
+     * retourne les pauvres vieux pas connectés depuis fort jadis
+     *
+     * @return array
+     */
     static function getOneYearUnactivesMembers()
     {
         $db = DataBase::getInstance();
