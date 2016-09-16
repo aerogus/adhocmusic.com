@@ -1,9 +1,6 @@
 exports.config =
   paths:
     watched: ['app']
-  modules:
-    definition: false
-    wrapper: false
   files:
     stylesheets:
       joinTo:
@@ -18,6 +15,6 @@ exports.config =
       processors: [
         # permet inline() en css
         require('postcss-assets')
-        require('autoprefixer')(['last 6 versions'])
+        require('autoprefixer')(['last 3 versions'])
       ]
 
