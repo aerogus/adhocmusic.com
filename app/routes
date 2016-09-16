@@ -78,7 +78,7 @@
 1|audios|show|GET|/audios/:id
 1|auth|login|GET|/auth/login
 1|auth|login|POST|/auth/login
-1|auth|fb_login|GET|/auth/fb-login
+1|auth|facebook_login_callback|GET|/auth/facebook-login-callback
 1|auth|logout|GET|/auth/logout
 1|auth|change_password|GET|/auth/change-password
 1|auth|change_password|POST|/auth/change-password
@@ -86,12 +86,12 @@
 1|auth|lost_password|POST|/auth/lost-password
 1|auth|check_email|GET|/auth/check-email
 1|auth|check_pseudo|GET|/auth/check-pseudo
-1|comments|index|GET|/comments/
-1|comments|show|GET|/comments/:id
 1|comments|fetch|GET|/comments/fetch/:type/:id_content
 1|comments|create|POST|/comments/create
 1|comments|delete|GET|/comments/delete/:id
 1|comments|delete|POST|/comments/delete
+1|comments|show|GET|/comments/:id
+1|comments|index|GET|/comments/
 1|comments|ajax_delete|POST|/comments/ajax-delete
 1|dynimg|logo_adhoc|GET|/dynimg/logo_adhoc/:hash
 1|dynimg|mailing_banner|GET|/dynimg/mailing-banner/:hash
