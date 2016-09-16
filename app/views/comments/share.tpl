@@ -1,5 +1,5 @@
 {if !empty($title)}
-<h4>Promouvoir {$title|escape}</h4>
+<h4>Partager {$title|escape}</h4>
 {/if}
 
 <ul class="social-share-box">

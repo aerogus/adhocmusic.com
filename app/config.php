@@ -45,7 +45,7 @@ function is_ssl()
     return (bool) (
         !empty($_SERVER['HTTPS'])
      || !empty($_SERVER['REDIRECT_HTTPS'])
-     || ($_SERVER['REQUEST_SCHEME'] === 'https')
+     || (!empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] === 'https')
     );
 }
 
@@ -162,3 +162,14 @@ function autoload($class_name)
 spl_autoload_register('autoload');
 
 Tools::sessionInit();
+
+// initialisation App AD'HOC Facebook avec autorisation 'email'
+
+$GLOBALS['fb'] = new Facebook\Facebook([
+    'app_id' => FB_APP_ID,
+    'app_secret' => FB_APP_SECRET,
+    'default_graph_version' => 'v2.7',
+]);
+
+$GLOBALS['fb_login_url'] = $fb->getRedirectLoginHelper()->getLoginUrl(HOME_URL . '/auth/facebook-login-callback', ['email']);
+

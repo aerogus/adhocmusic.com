@@ -47,18 +47,7 @@ class AdHocSmarty extends Smarty
         $this->assign('url', HOME_URL . $_SERVER['REQUEST_URI']);
         $this->assign('fb_app_id', FB_ADHOCMUSIC_APP_ID);
         $this->assign('fb_page_id', FB_ADHOCMUSIC_PAGE_ID);
-
-        $fb = new Facebook\Facebook([
-            'app_id' => FB_APP_ID,
-            'app_secret' => FB_APP_SECRET,
-            'default_graph_version' => 'v2.7',
-        ]);
-        $this->assign('fb', $fb);
-        $fb_helper = $fb->getRedirectLoginHelper();
-        $this->assign('fb_helper', $fb_helper);
-        $fb_permissions = ['email'];
-        $fb_login_url = $fb_helper->getLoginUrl(HOME_URL . '/auth/facebook-login-callback', $fb_permissions);
-        $this->assign('fb_login_url', $fb_login_url);
+        $this->assign('fb_login_url', $GLOBALS['fb_login_url']);
 
         if(!empty($_SESSION['membre'])) {
             $this->assign('me', $_SESSION['membre']);

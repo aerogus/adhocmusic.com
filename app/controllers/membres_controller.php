@@ -203,12 +203,8 @@ class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $id = (int) Route::params('id');
-
-        if($id != $_SESSION['membre']->getId()) {
-            Tools::auth(Membre::TYPE_STANDARD);
-        }
-
+        $id = $_SESSION['membre']->getId();
+        
         $trail = Trail::getInstance();
         $trail->addStep('Tableau de bord', '/membres/tableau-de-bord');
         $trail->addStep('Mes Infos Persos');
@@ -315,6 +311,23 @@ class Controller
         }
 
         $smarty->assign('membre', $_SESSION['membre']);
+        
+        $fb_me = false;
+
+        if($_SESSION['membre']->getFacebookAccessToken()) {
+            $GLOBALS['fb']->setDefaultAccessToken($_SESSION['membre']->getFacebookAccessToken());
+            try {
+                $response = $GLOBALS['fb']->get('/me?fields=picture,email,first_name,last_name');
+                $userNode = $response->getGraphUser();
+                $smarty->assign('fb_me', [
+                    'first_name' => $userNode->getField('first_name'),
+                    'last_name' => $userNode->getField('last_name'),
+                    'picture' => $userNode->getField('picture')->getUrl()
+                ]);
+            } catch(Exception $e) {
+                // app non autorisée ?
+            }
+        }
 
         if($_SESSION['membre']->isInterne()) {
             $smarty->assign('forum', ForumPrive::getSubscribedForums($_SESSION['membre']->getId()));
@@ -354,9 +367,9 @@ class Controller
 
     static function delete()
     {
-        Tools::auth(Membre::TYPE_ADMIN);
+        Tools::auth(Membre::TYPE_STANDARD);
 
-        $id = (int) Route::params('id');
+        $id = $_SESSION['membre']->getId();
 
         $smarty = new AdHocSmarty();
 
@@ -370,9 +383,22 @@ class Controller
 
         if(Tools::isSubmit('form-member-delete'))
         {
+            // effacement du membre
             if($membre->delete()) {
                 Log::action(Log::ACTION_MEMBER_DELETE, $id);
-                Tools::redirect('/?delete-member=ok');
+
+                // destruction de la session
+                $_SESSION = array();
+                if (ini_get("session.use_cookies")) {
+                    $params = session_get_cookie_params();
+                    setcookie(session_name(), '', time() - 42000,
+                        $params["path"], $params["domain"],
+                        $params["secure"], $params["httponly"]
+                    );
+                }
+                session_destroy();
+
+                Tools::redirect('/?member-deleted');
             }
         }
 
@@ -400,18 +426,17 @@ class Controller
         return $db->queryWithFetch($sql);
     }
 
+    /**
+     * lier un compte ad'hoc à l'appli FB
+     * = autoriser app FB ?
+     */
     static function fb_link()
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
+        
         if(Tools::isSubmit('form-fb-link'))
         {
-            $fbid = 0;
-            if(!empty($_SESSION['fb'])) {
-                $fb_me = json_decode(file_get_contents('http://graph.facebook.com/' . $_SESSION['fb']->getUser()));
-                $fbid = $fb_me->id;
-            }
-
             $membre = $_SESSION['membre'];
             $membre->setFacebookProfileId($fbid);
             $membre->setFacebookAutoLogin(true);
@@ -421,20 +446,13 @@ class Controller
         }
 
         $smarty = new AdHocSmarty();
-
-        if($_SESSION['membre']->getFacebookProfileId()) {
-            $smarty->assign('err_link', true);
-        } else {
-            if(!empty($_SESSION['fb'])) {
-                $fb_me = json_decode(file_get_contents('http://graph.facebook.com/' . $_SESSION['fb']->getUser()));
-                $smarty->assign('fb_me', $fb_me);
-            } else {
-                // recup info compte fb ?
-            }
-        }
         return $smarty->fetch('membres/fb-link.tpl');
     }
 
+    /**
+     * délier un compte ad'hoc de l'appli FB
+     * = désautoriser app FB ?
+     */
     static function fb_unlink()
     {
         Tools::auth(Membre::TYPE_STANDARD);

@@ -116,6 +116,7 @@ class Controller
 
                 $membre = Membre::getInstance($id_contact);
                 $membre->setVisitedNow();
+                $membre->setFacebookAccessToken($accessToken);
                 $membre->save();
 
                 $_SESSION['membre'] = $membre;

@@ -14,8 +14,8 @@
       <li>
       <p>Votre compte AD'HOC est lié avec le profil Facebook suivant :</p>
       <p align="center">
-        <img src="{$fb_me->avatar}" alt="{$fb_me->name}"><br>
-        <strong>{$fb_me->first_name|escape} {$fb_me->last_name|escape}</strong>
+        <img src="{$fb_me.picture}" alt="{$fb_me.first_name|escape} {$fb_me.last_name|escape}"><br>
+        <strong>{$fb_me.first_name|escape} {$fb_me.last_name|escape}</strong>
       </p>
       <p><a href="/membres/fb-unlink">Délier ce profil Facebook de mon compte AD'HOC</a></p>
       </li>

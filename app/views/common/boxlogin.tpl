@@ -15,7 +15,7 @@
 <ul class="mbr">
   <li><a href="/messagerie/">Ma Messagerie</a> (<strong>{$my_counters.nb_unread_messages}</strong>/{$my_counters.nb_messages})</li>
   <li><a href="/alerting/my">Mes Alertes</a></li>
-  <li><a href="/membres/edit/{$me->getId()}">Mes infos persos</a></li>
+  <li><a href="/membres/edit">Mes infos persos</a></li>
   <li><a href="/groupes/my">Mes Groupes</a></li>
   <li><a href="/photos/my">Mes Photos</a></li>
   <li><a href="/audios/my">Mes Musiques</a></li>

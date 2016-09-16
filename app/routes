@@ -167,9 +167,9 @@
 1|membres|tableau_de_bord|GET|/membres/tableau-de-bord
 1|membres|create|GET|/membres/create
 1|membres|create|POST|/membres/create
-1|membres|edit|GET|/membres/edit/:id
+1|membres|edit|GET|/membres/edit
 1|membres|edit|POST|/membres/edit
-1|membres|delete|GET|/membres/delete/:id
+1|membres|delete|GET|/membres/delete
 1|membres|delete|POST|/membres/delete
 1|membres|autocomplete_pseudo|GET|/membres/autocomplete-pseudo
 1|membres|fb_link|GET|/membres/fb-link
