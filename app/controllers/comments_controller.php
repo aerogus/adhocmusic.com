@@ -37,11 +37,11 @@ class Controller
     }
 
     static function create()
-{
-$fp = fopen('/var/www/adhocmusic.com/log/hack-comment.log', 'a');
-fwrite($fp, print_r($_GET, true) . "\n" . print_r($_POST, true) . "\n" . print_r($_SERVER, true));
-fclose($fp);
-die('hi');
+    {
+        $fp = fopen('/var/www/adhocmusic.com/log/hack-comment.log', 'a');
+        fwrite($fp, print_r($_GET, true) . "\n" . print_r($_POST, true) . "\n" . print_r($_SERVER, true));
+        fclose($fp);
+        die('hi');
 
         $data = array(
             'type'       => (string) Route::params('type'),
