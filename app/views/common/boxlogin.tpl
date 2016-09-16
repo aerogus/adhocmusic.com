@@ -28,15 +28,6 @@
 
 {else}
 
-<div style="padding: 5px;">
-  <h5>Avec Facebook</h5>
-  <div><a href="{$fb_login_url}"><img src="/img/facebook-connect.png" alt="Connexion"></a></div>
-</div>
-
-<div style="padding: 5px;">
-  <h5>Avec AD'HOC</h5>
-</div>
-
 <form id="form-login" name="form-login" method="post" action="/auth/login">
   <div class="error" id="error_login-pseudo"{if empty($error_login_pseudo)} style="display: none"{/if}>Pseudo vide !</div>
   <input size="18" type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo">
@@ -49,6 +40,7 @@
     <li><a href="/membres/create">s'inscrire</a></li>
   </ul>
 </form>
+<a href="{$fb_login_url}" class="btn fb-login">Continuer avec Facebook</a>
 
 {/if}
 

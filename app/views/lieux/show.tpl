@@ -69,10 +69,6 @@ $(function () {
 
 <br style="clear: both;">
 
-{if $lieu->hasPano()}
-<a href="/lieux/pano/{$lieu->getId()}"><img src="/img/icones/eye.png" title="Voir ce lieu en 3D"></a>
-{/if}
-
 {include file="comments/share.tpl" title="ce lieu" url=$lieu->getUrl()}
 
 {if !empty($alerting_sub_url)}
