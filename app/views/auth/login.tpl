@@ -25,6 +25,7 @@
         <li><a href="/membres/create">créer un compte</a></li>
       </ul>
     </form>
+    <a href="{$fb_login_url}" class="btn fb-login">Continuer avec Facebook</a>
   </div>
 </div>
 
