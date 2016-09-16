@@ -433,7 +433,6 @@ class Controller
     static function fb_link()
     {
         Tools::auth(Membre::TYPE_STANDARD);
-
         
         if(Tools::isSubmit('form-fb-link'))
         {
@@ -442,8 +441,10 @@ class Controller
             $membre->setFacebookAutoLogin(true);
             $membre->save();
 
-            Tools::redirect('/membres/edit/' . $membre->getId());
+            Tools::redirect('/membres/edit');
         }
+
+        $_SESSION['redirect_after_auth'] = HOME_URL . '/membres/edit';
 
         $smarty = new AdHocSmarty();
         return $smarty->fetch('membres/fb-link.tpl');
@@ -457,26 +458,20 @@ class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        if(Tools::isSubmit('form-fb-unlink'))
-        {
+        $fb = $GLOBALS['fb'];
+        $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+        try {
+            $resp = $fb->delete('/me/permissions');
             $membre = $_SESSION['membre'];
             $membre->setFacebookProfileId(0);
+            $membre->setFacebookAccessToken('');
             $membre->setFacebookAutoLogin(false);
             $membre->save();
-
-            Tools::redirect('/membres/edit/' . $membre->getId());
+        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+            // app non autorisée donc compte non lié
         }
 
-        $smarty = new AdHocSmarty();
-
-        if(!$_SESSION['membre']->getFacebookProfileId()) {
-            $smarty->assign('err_unlink', true);
-        } else {
-            $fb_me = json_decode(file_get_contents('http://graph.facebook.com/' . $_SESSION['membre']->getFacebookProfileId()));
-            $fb_me->avatar = 'http://graph.facebook.com/' . $_SESSION['membre']->getFacebookProfileId() . '/picture';
-            $smarty->assign('fb_me', $fb_me);
-        }
-        return $smarty->fetch('membres/fb-unlink.tpl');
+        Tools::redirect('/membres/edit');
     }
 
     static function tableau_de_bord()

@@ -150,6 +150,12 @@ class Controller
     {
         // si bien identifié, destruction de la session
         if(!empty($_SESSION['membre'])) {
+
+            // delete de la session FB
+            $membre = Membre::getInstance($_SESSION['membre']->getId());
+            $membre->setFacebookAccessToken('');
+            $membre->save();
+
             Log::action(Log::ACTION_LOGOUT);
             $_SESSION = array();
             if (ini_get("session.use_cookies")) {

@@ -8,24 +8,17 @@
 
 <form id="form-member-edit" name="form-member-edit" method="post" action="/membres/edit" enctype="multipart/form-data">
   <fieldset>
-    <legend>Facebook</legend>
-    <ol>
       {if !empty($fb_me)}
-      <li>
-      <p>Votre compte AD'HOC est lié avec le profil Facebook suivant :</p>
+      <p>Votre compte AD'HOC est lié au profil Facebook suivant:</p>
       <p align="center">
         <img src="{$fb_me.picture}" alt="{$fb_me.first_name|escape} {$fb_me.last_name|escape}"><br>
         <strong>{$fb_me.first_name|escape} {$fb_me.last_name|escape}</strong>
       </p>
       <p><a href="/membres/fb-unlink">Délier ce profil Facebook de mon compte AD'HOC</a></p>
-      </li>
       {else}
-      <li>
-      <p>Votre compte AD'HOC n'est lié avec aucun profil Facebook.</p>
+      <p>Votre compte AD'HOC n'est lié à aucun profil Facebook.</p>
       <p><a href="/membres/fb-link">Lier mon compte AD'HOC à mon profil Facebook</a></p>
-      </li>
       {/if}
-    </ol>
   </fieldset>
   {if $me->isInterne()}
   <fieldset>
