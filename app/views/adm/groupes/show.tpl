@@ -95,11 +95,11 @@
   <tr>
     <th>{$member.nom_type_musicien|escape}</th>
     <td>{$member.first_name|escape} {$member.last_name|escape} (<a href="/adm/membres/{$member.id}">{$member.pseudo|escape}</a>)</td>
-    <td><a class="button" href="/adm/appartient-a?from=groupe&action=delete&groupe={$groupe->getId()}&membre={$member.id}">Supprimer</a></td>
+    <td><a class="button" href="/adm/appartient-a?from=groupe&amp;action=delete&amp;groupe={$groupe->getId()}&amp;membre={$member.id}">Supprimer</a></td>
   </tr>
   {/foreach}
 </table>
-<a class="button" href="/adm/appartient-a?from=groupe&action=create&groupe={$groupe->getId()}">Ajout Membre</a>
+<a class="button" href="/adm/appartient-a?from=groupe&amp;action=create&amp;groupe={$groupe->getId()}">Ajout Membre</a>
 {include file="common/boxend.tpl"}
 
 {include file="common/footer.tpl"}
