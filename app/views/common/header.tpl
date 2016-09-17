@@ -66,7 +66,7 @@
 
 <header class="hdr">
   <a class="logo" href="/" title="Cliquez pour revenir à l'accueil"><span>AD'HOC</span></a>
-  <a class="megabanner" href="/events/6754" title="AD'HOC - Samedi 21 mai 2016"><img src="/img/megabanner/adhoc-20160521.jpg" alt=""></a>
+  <a class="megabanner" href="/events/6788" title="AD'HOC - Samedi 24 septembre 2016"><img src="/img/megabanner/adhoc-20160924.jpg" alt=""></a>
 </header>
 
 <div id="menu-wrapper">
