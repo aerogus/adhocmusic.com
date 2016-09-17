@@ -17,7 +17,7 @@
       <p><a href="/membres/fb-unlink">Délier ce profil Facebook de mon compte AD'HOC</a></p>
       {else}
       <p>Votre compte AD'HOC n'est lié à aucun profil Facebook.</p>
-      <p><a href="/membres/fb-link">Lier mon compte AD'HOC à mon profil Facebook</a></p>
+      <a href="{$fb_login_url}" class="btn fb-login">Lier mon compte AD'HOC à mon profil Facebook</a>
       {/if}
   </fieldset>
   {if $me->isInterne()}
