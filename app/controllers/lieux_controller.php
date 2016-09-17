@@ -171,38 +171,6 @@ class Controller
         return $smarty->fetch('lieux/show.tpl');
     }
 
-    /**
-     * @see http://www.fsoft.it/panorama/PTViewer/PT_Reference.htm
-     */
-    static function pano()
-    {
-        $id = (int) Route::params('id');
-
-        $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'lieux');
-
-        $lieu = Lieu::getInstance((int) $id);
-        $smarty->assign('lieu', $lieu);
-
-        $trail = Trail::getInstance();
-        $trail->addStep("Lieux de diffusion", "/lieux/");
-        $trail->addStep(WorldRegion::getName('FR', Departement::getRegion($lieu->getIdDepartement())), "/lieux/?reg=".Departement::getRegion($lieu->getIdDepartement()));
-        $trail->addStep(Departement::getName($lieu->getIdDepartement()), "/lieux/?reg=".Departement::getRegion($lieu->getIdDepartement())."&amp;dep=".$lieu->getIdDepartement());
-        $trail->addStep($lieu->getName(), "/lieux/" . $lieu->getId());
-        $trail->addStep("Panoramique");
-
-        return $smarty->fetch('lieux/pano.tpl');
-    }
-
-    /**
-     * @see http://www.panotools.org/mailarchive/msg/11501
-     */
-    static function pano_PTDefault()
-    {
-        return '';
-    }
-
     static function create()
     {
         Tools::auth(Membre::TYPE_STANDARD);

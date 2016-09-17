@@ -39,7 +39,7 @@ class Controller
 
         if(Tools::isSubmit('form-cms-create'))
         {
-            $data = array(
+            $data = [
                 'alias'        => (string) Route::params('alias'),
                 'menuselected' => (string) Route::params('menuselected'),
                 'breadcrumb'   => (string) Route::params('breadcrumb'),
@@ -47,7 +47,7 @@ class Controller
                 'content'      => (string) Route::params('content'),
                 'online'       => (bool) Route::params('online'),
                 'auth'         => (int) Route::params('auth'),
-            );
+            ];
 
             $cms = CMS::init();
             $cms->setAlias($data['alias']);
