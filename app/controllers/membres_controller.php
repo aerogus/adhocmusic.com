@@ -326,7 +326,11 @@ class Controller
                 ]);
             } catch(Exception $e) {
                 // app non autorisée ?
+                $_SESSION['redirect_after_auth'] = HOME_URL . '/membres/edit';
             }
+        } else {
+            // pas de session fb
+            $_SESSION['redirect_after_auth'] = HOME_URL . '/membres/edit';
         }
 
         if($_SESSION['membre']->isInterne()) {

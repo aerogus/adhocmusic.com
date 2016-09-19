@@ -44,6 +44,8 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/groupe-show.js');
+
         try {
             $groupe = Groupe::getInstance($id);
         } catch(Exception $e) {
@@ -67,19 +69,19 @@ class Controller
 
         $smarty->assign('is_loggued', !empty($_SESSION['membre']));
 
-        $smarty->assign('videos', Video::getVideos(array(
+        $smarty->assign('videos', Video::getVideos([
             'online' => true,
             'groupe' => (int) $groupe->getId(),
             'limit'  => 30,
-        )));
+        ]));
 
-        $audios = Audio::getAudios(array(
+        $audios = Audio::getAudios([
             'groupe' => (int) $groupe->getId(),
             'online' => true,
             'limit'  => 30,
             'sort'   => 'id_audio',
             'sens'   => 'DESC',
-        ));
+        ]);
 
         $smarty->assign('audios', $audios);
 
