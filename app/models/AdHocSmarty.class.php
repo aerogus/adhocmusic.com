@@ -79,7 +79,7 @@ class AdHocSmarty extends Smarty
         $this->enqueue_script('/js/adhoc.20160213.js');
 
         $this->print_inline_script(file_get_contents(ADHOC_ROOT_PATH . '/app/assets/js/google-analytics.js'));
-        $this->print_inline_script(file_get_contents(ADHOC_ROOT_PATH . '/app/assets/js/facebook-sdk.js'));
+        //$this->print_inline_script(file_get_contents(ADHOC_ROOT_PATH . '/app/assets/js/facebook-sdk.js'));
 
         return $this;
     }
