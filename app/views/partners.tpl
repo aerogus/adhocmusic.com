@@ -72,6 +72,12 @@
           <strong>Studio CLAP</strong><br>Réalisations de films et reportages
         </a>
       </li>
+      <li>
+        <a href="http://www.so-zik.fr">
+          <img src="/img/partners/so-zik.png" alt="">
+          <strong>SOZIK</strong><br>École de musique spinolienne
+        </a>
+      </li>
     </ul>
   </div>
 </div>
