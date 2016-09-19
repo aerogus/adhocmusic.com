@@ -537,11 +537,7 @@ class DataBase
             mail('gus@adhocmusic.com', 'debug', 'NO LINK ???' . print_r($_SERVER, true));
         }
 
-        // deprecated !
-        //return mysqli_escape_string($string);
-
-        // moche !
-        return addslashes($string);
+        return mysqli_escape_string($string);
     }
 
     /**
