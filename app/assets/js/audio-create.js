@@ -24,27 +24,23 @@ jQuery(document).ready(function ($) {
     $("#form-audio-create").submit(function () {
         var valid = true;
         if($("#file").val().length === 0) {
-            $("#file").prev(".error").fadeIn();
+            $("#file").parent().find(".error").fadeIn();
             valid = false;
         } else {
-            $("#file").prev(".error").fadeOut();
+            $("#file").parent().find(".error").fadeOut();
         }
         if($("#name").val().length === 0) {
-            $("#name").prev(".error").fadeIn();
+            $("#name").parent().find(".error").fadeIn();
             valid = false;
         } else {
-            $("#name").prev(".error").fadeOut();
+            $("#name").parent().find(".error").fadeOut();
         }
-
-/*
-        if($("#id_groupe").val() === "0") {
-            $("#id_groupe").prev(".error").fadeIn();
+        if($("#id_groupe").val() === "0" && $('#id_lieu').val() === "0" && $('#id_event').val() === "0") {
+            $("#id_groupe").parent().find(".error").fadeIn();
             valid = false;
         } else {
-            $("#id_groupe").prev(".error").fadeOut();
+            $("#id_groupe").parent().find(".error").fadeOut();
         }
-*/
-
         return valid;
     });
 });

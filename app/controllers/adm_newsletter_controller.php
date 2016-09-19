@@ -72,18 +72,18 @@ class Controller
 
         if(Tools::isSubmit('form-newsletter-edit'))
         {
-            $data = array(
+            $data = [
                 'id'      => (int) Route::params('id'),
                 'title'   => trim((string) Route::params('title')),
                 'content' => trim((string) Route::params('content')),
-            );
+            ];
 
             $newsletter = Newsletter::getInstance($data['id']);
             $newsletter->setTitle($data['title']);
             $newsletter->setContent($data['content']);
             $newsletter->save();
 
-            Tools::redirect('/adm/newsletter/edit/'.(int) Route::params('id').'?edit=1');
+            Tools::redirect('/adm/newsletter/edit/' . (int) Route::params('id') . '?edit=1');
         }
 
         $id = (int) Route::params('id');

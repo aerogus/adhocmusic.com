@@ -144,6 +144,22 @@ class Controller
     }
 
     /**
+     *
+     */
+    static function twitter_login_callback()
+    {
+        return 'TLC';
+    }
+
+    /**
+     *
+     */
+    static function google_login_callback()
+    {
+        return 'GLC';
+    }
+
+    /**
      * Page de déconnexion
      */
     static function logout()

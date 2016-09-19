@@ -146,7 +146,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/audios-create.js');
+        $smarty->enqueue_script('/js/audio-create.js');
 
         $trail = Trail::getInstance();
         $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
@@ -268,7 +268,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/audios-edit.js');
+        $smarty->enqueue_script('/js/audio-edit.js');
 
         $trail = Trail::getInstance();
         $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
