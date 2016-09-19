@@ -79,6 +79,8 @@
 1|auth|login|GET|/auth/login
 1|auth|login|POST|/auth/login
 1|auth|facebook_login_callback|GET|/auth/facebook-login-callback
+1|auth|twitter_login_callback|GET|/auth/twitter-login-callback
+1|auth|google_login_callback|GET|/auth/google-login-callback
 1|auth|logout|GET|/auth/logout
 1|auth|change_password|GET|/auth/change-password
 1|auth|change_password|POST|/auth/change-password
