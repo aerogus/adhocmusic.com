@@ -142,7 +142,7 @@
     <ul>
       <li>
         <span style="float: right;">
-          http://www.facebook.com/events/<input id="facebook_event_id" name="facebook_event_id" style="width: 360px;" value="{$event->getFacebookEventId()|escape}">/
+          https://www.facebook.com/events/<input id="facebook_event_id" name="facebook_event_id" style="width: 360px;" value="{$event->getFacebookEventId()|escape}">/
         </span>
         <label for="facebook_event_id">n° Evénement (si déjà existant sur Facebook)</label>
       </li>
