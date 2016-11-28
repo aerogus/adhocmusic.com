@@ -15,13 +15,7 @@
   <thead>
     <tr bgcolor="#666666">
       <td>
-        {*
-        <a href="http://www.adhocmusic.com"><img src="http://static.adhocmusic.com/img/emails/logo-adhoc.jpg" border="0" alt="AD'HOC" align="left" /></a>
-        *}
-        <p align="center"><a href="http://www.adhocmusic.com"><img src="http://static.adhocmusic.com/img/partners/banadhoc.png" alt="" /></a></p>
-        {*
-        <font face="arial" color="#ffffff" style="padding-left: 25px"><strong>Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996</strong></font>
-        *}
+        <p align="center"><a href="https://www.adhocmusic.com"><img src="https://www.adhocmusic.com/img/partners/banadhoc.png" alt="" /></a></p>
       </td>
     </tr>
   </thead>
