@@ -1,6 +1,6 @@
 # ADHOCMUSIC.COM
 
-http(s)://www.adhocmusic.com
+https://adhocmusic.com
 
 ## Technos utilisées
 
@@ -31,7 +31,7 @@ http(s)://www.adhocmusic.com
 `composer install`
 
 # Compile, concatène, minifie, exporte l'application dans public
-`brunch b -P`
+`brunch b -p`
 
 # Crée les répertoires de log, de cache et de media et les rend accessible en écriture au serveur web
 `mkdir log && chmod 777 log`
