@@ -35,7 +35,7 @@ class GoogleMaps
      */
     static function getInitJs()
     {
-        return 'http://maps.google.com/maps?file=api&amp;v='.self::VERSION.'&amp;sensor='.self::SENSOR.'&amp;key='.self::API_KEY;
+        return 'https://maps.google.com/maps?file=api&amp;v='.self::VERSION.'&amp;sensor='.self::SENSOR.'&amp;key='.self::API_KEY;
     }
 
     /**
@@ -71,7 +71,7 @@ class GoogleMaps
         if(!array_key_exists('icon', $params))
             $params['icon'] = '/img/pin/note.png';
 
-        return 'http://maps.google.com/maps/api/staticmap'
+        return 'https://maps.google.com/maps/api/staticmap'
           . '?center=' . $params['loc']
           . '&zoom=' . $params['zoom']
           . '&size=' . $params['size']
