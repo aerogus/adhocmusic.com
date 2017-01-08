@@ -1,16 +1,5 @@
 {include file="common/header.tpl"}
 
-<style>
-.fb-event-button, .fb-event-button:hover {
-    border: 1px solid #29447e;
-    padding: 4px;
-    background-color: #5c75a9;
-    color: #ffffff !important;
-    font-weight: bold;
-    text-decoration: none;
-}
-</style>
-
 <div class="grid-2-1">
 
   <div class="box">
@@ -93,6 +82,7 @@
 
   </div>
 </div>{* .box *}
+</div>{* .grid-2-1 *}
 
 <div>
 {calendar year=$year month=$month day=$day}
