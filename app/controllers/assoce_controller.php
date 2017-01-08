@@ -105,6 +105,31 @@ class Controller
         return $smarty->fetch('assoce/afterworks.tpl');
     }
 
+    static function formations()
+    {
+        $smarty = new AdHocSmarty();
+        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
+        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
+        $smarty->enqueue_script('/js/assoce.js');
+        $smarty->assign('menuselected', 'assoce');
+        $trail = Trail::getInstance();
+        $trail->addStep("L'Association", "/assoce");
+        $trail->addStep("L'Equipe");
+        $smarty->assign('photos', Photo::getPhotos(array(
+            'online' => true,
+            'sort'   => 'random',
+            'lieu'   => 1,
+            'limit'  => 3,
+        )));
+        $smarty->assign('videos', Video::getVideos(array(
+            'online' => true,
+            'sort'   => 'random',
+            'lieu'   => 1,
+            'limit'  => 6,
+        )));
+        return $smarty->fetch('assoce/formations.tpl');
+    }
+
     static function equipe()
     {
         $smarty = new AdHocSmarty();

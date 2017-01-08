@@ -351,4 +351,21 @@ class Controller
         // todo: track le hit
         Tools::redirect($url);
     }
+
+    /**
+     * test facebook webhook
+     */
+    static function fbwh()
+    {
+        $mode = Route::params('hub_mode');
+        $challenge = Route::params('hub_challenge');
+        $verify_token = Route::params('hub_verify_token');
+
+        $request_body = file_get_contents('php://input');
+        $data = json_decode($request_body);
+
+        mail('gus@adhocmusic.com', 'webhook', print_r($data, true));
+
+        return (string) $challenge;
+    }
 }
