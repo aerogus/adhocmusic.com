@@ -96,6 +96,9 @@
 1|comments|show|GET|/comments/:id
 1|comments|index|GET|/comments/
 1|comments|ajax_delete|POST|/comments/ajax-delete
+1|concours|ou_est_pidou|GET|/concours/ou-est-pidou
+1|concours|ou_est_pidou_get_target|GET|/concours/ou-est-pidou/target
+1|concours|ou_est_pidou_set_target|POST|/concours/ou-est-pidou/target
 1|dynimg|logo_adhoc|GET|/dynimg/logo_adhoc/:hash
 1|dynimg|mailing_banner|GET|/dynimg/mailing-banner/:hash
 1|dynimg|photo|GET|/dynimg/photo/:id/:width/:height/:bgcolor/:border/:zoom
