@@ -7,13 +7,10 @@
       <h2>Mes Infos Persos</h2>
     </header>
     <div>
-      {*
-      {if $me->getFacebookUid()}
-      {else}
-      <p class="warning"><a href="">Cliquez ici pour lier votre compte AD'HOC à votre compte Facebook</a></p>
-      {/if}
-      *}
-      <ul>
+        {if $me->isInterne()}
+        <a style="display:block;background:#f99;padding:5px;border:1px solid" href="/adm/">🔗<strong>Accès zone privée</strong></a>
+        {/if}
+      <ul>  
         <li>
           <strong style="float: right">{$me->getPseudo()|escape}</strong>
           <label for="pseudo">Pseudo</label>
@@ -46,6 +43,7 @@
         </li>
       </ul>
       <p><a href="/membres/edit/{$me->getId()}">Editer mes infos persos</a></p>
+      <p><a href="/auth/logout">Déconnexion</a></p>
     </div>
   </div>
 

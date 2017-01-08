@@ -64,29 +64,7 @@
 
 <body>
 
-<header class="hdr">
-  <a class="logo" href="/" title="Cliquez pour revenir à l'accueil"><span>AD'HOC</span></a>
-{*
-  <a class="megabanner" href="/events/6788" title="AD'HOC - Samedi 24 septembre 2016"><img src="/img/megabanner/adhoc-20160924.jpg" alt=""></a>
-*}
-</header>
-
-<div id="menu-wrapper">
-
-{include file="common/menu.tpl" menuselected=$menuselected}
-
-<div id="boxlogin-outter">
-  {if empty($is_auth)}
-  <span><a href="/auth/login">Connexion</a></span>
-  {else}
-  <span><a href="/membres/tableau-de-bord">Tableau de bord</a></span>
-  {/if}
-  <div id="boxlogin-inner" style="display: none;">
-  {include file="common/boxlogin.tpl"}
-  </div>
-</div>
-
-</div>{* #menu-wrapper *}
+{include file="common/menu-top.tpl"}
 
 {* file d'ariane *}
 {if !empty($trail) && ($trail|@count) > 1}

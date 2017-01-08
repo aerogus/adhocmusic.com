@@ -1,11 +1,11 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 
 require_once dirname(__FILE__) . '/../config.php';
 
 /**
  * vérification des incohérences dans la base de données AD'HOC
- * car les tables sont en myisam et n'ont pas l'intégrité référentielle
+ * car les tables sont en MyISAM et n'ont pas l'intégrité référentielle
  * une fois les incohérences éradiquées on pourra songer à passer
  * les tables importantes en innodb.
  */
@@ -17,11 +17,11 @@ echo "\n1 - membre lié à contact introuvable\n" . $sql . "\n";
 $tbl = new Console_Table();
 $tbl->setHeaders(array('id_contact'));
 $res = $db->queryWithFetch($sql);
-foreach($res as $_res) {
+foreach ($res as $_res) {
     $tbl->addRow(array($_res['id_contact']));
     // on supprime le membre invalide
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -33,12 +33,12 @@ echo "\n2 - appartient_a lié à membre introuvable\n" . $sql . "\n";
 $tbl = new Console_Table();
 $tbl->setHeaders(array('id_contact', 'id_groupe'));
 $res = $db->queryWithFetch($sql);
-foreach($res as $_res) {
+foreach ($res as $_res) {
     $tbl->addRow(array($_res['id_contact'], $_res['id_groupe']));
     // on supprime les liaisons groupes avec les membres introuvables
     //$db->query('DELETE FROM adhoc_appartient_a WHERE id_contact = ' . (int) $_res['id_contact']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -50,7 +50,7 @@ echo "\n3 - appartient_a lié à groupe introuvable\n" . $sql . "\n";
 $tbl = new Console_Table();
 $tbl->setHeaders(array('id_groupe', 'id_contact'));
 $res = $db->queryWithFetch($sql);
-foreach($res as $_res) {
+foreach ($res as $_res) {
     $tbl->addRow(array($_res['id_groupe'], $_res['id_contact']));
     // on supprime les liaisons groupes avec les groupes introuvables
     //$db->query('DELETE FROM adhoc_appartient_a WHERE id_groupe = ' . (int) $_res['id_groupe']);

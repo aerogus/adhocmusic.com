@@ -4,25 +4,25 @@ die();
 // envoi d'une newsletter
 
 // n° de newsletter à traiter
-define('ID_NEWSLETTER', 73);
+define('ID_NEWSLETTER', 75);
 
 require_once dirname(__FILE__) . '/../config.php';
 
 $newsletter = Newsletter::getInstance(ID_NEWSLETTER);
 
 // base de test
-/*
+
 $subs = array(
     array('id_contact' => 1, 'email' => 'guillaume.seznec@gmail.com', 'pseudo' => 'gus', 'lastnl' => ''),
 //    array('id_contact' => 1, 'email' => 'gilles.taddei@gmail.com', 'pseudo' => 'gillex', 'lastnl' => ''),
-    // array('id_contact' => 7018, 'email' => 'lara.etcheverry@gmail.com', 'pseudo' => 'lara', 'lastnl' => ''),
-    array('id_contact' => 2, 'email' => 'truc.invalide@oiuofdsg.com', 'pseudo' => 'rien', 'lastnl' => ''),
+//    array('id_contact' => 7018, 'email' => 'lara.etcheverry@gmail.com', 'pseudo' => 'lara', 'lastnl' => ''),
+//    array('id_contact' => 2, 'email' => 'truc.invalide@oiuofdsg.com', 'pseudo' => 'rien', 'lastnl' => ''),
     // array('id_contact' => 3, 'email' => 'newsletter@adhocmusic.com', 'pseudo' => 'test', 'lastnl' => ''),
 );
-*/
+
 
 // base de prod
-$subs = Newsletter::getSubscribers();
+//$subs = Newsletter::getSubscribers();
 
 echo "Trouvé : " . count($subs) . " emails\n";
 
@@ -40,8 +40,8 @@ foreach($subs as $sub)
 
     Email::send(
         $sub['email'],
-        "Concert Reggae/Chanson + Expo le 19 mars à Epinay-sur-Orge",
-        'newsletter-' . $newsletter->getId(),
+        $newsletter->getTitle(),
+        'newsletter',
         array(
             'id'            => $newsletter->getId(),
             'id_newsletter' => $newsletter->getId(),
@@ -51,6 +51,7 @@ foreach($subs as $sub)
             'unsub_url'     => 'https://www.adhocmusic.com/newsletters/subscriptions?action=unsub&email=' . $sub['email'],
             'email'         => $sub['email'],
             'pseudo'        => $sub['pseudo'],
+            'html'          => $newsletter->getHtml(),
         )
     );
 
