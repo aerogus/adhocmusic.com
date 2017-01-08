@@ -726,8 +726,8 @@ class Video extends Media
                 return 'http://b.static.ak.fbcdn.net/swf/mvp.swf?v=' . $reference;
 
             case self::HOST_ADHOC:
-                return 'http://www.adhocmusic.com/jwplayer/player.swf'
-                     . '?file=http://www.adhocmusic.com/media/video/' . $reference
+                return 'https://www.adhocmusic.com/jwplayer/player.swf'
+                     . '?file=https://www.adhocmusic.com/media/video/' . $reference
                      . '&backcolor=990000'
                      . '&frontcolor=FFFFFF'
                      . '&screencolor=000000'
