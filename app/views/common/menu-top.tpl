@@ -1,4 +1,5 @@
 <div class="top-bar">
+  <div class="top-bar-inner">
   <div class="top-bar-title">
     <a href="/"><strong>AD'HOC</strong></a>
   </div>
@@ -48,12 +49,13 @@
   </li>
   <li>
 {if empty($is_auth)}
-    <a class="avatar" href="/auth/login" accesskey="6" title="Identification"><span>Identification</span></a>
+    <a class="avatar" href="/auth/login" accesskey="6" title="Identification">🔒</a>
 {else}
-    <a class="avatar" href="/membres/tableau-de-bord" accesskey="6" title="Tableau de bord"><span>Tableau de bord</span></a>
+    <a class="avatar" href="/membres/tableau-de-bord" accesskey="6" title="Tableau de bord">🔓</a>
 {/if}
   </li>
   </ul>
   </nav>
+  </div>
   </div>
 </div>

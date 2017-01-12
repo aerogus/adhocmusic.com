@@ -1,8 +1,8 @@
 {include file="common/header.tpl"}
 
-<div class="grid-2-1">
+<div class="grid-2-small-1 has-gutter-l">
 
-  <div>
+  <div class="two-thirds">
 
     {if !empty($create)}
     <div class="success">Le contenu a bien été ajouté</div>
@@ -79,7 +79,7 @@
 
   </div>
 
-  <div>
+  <div class="one-third">
 
     {if !empty($comments)}
     <div class="box">

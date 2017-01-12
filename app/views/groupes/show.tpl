@@ -6,7 +6,7 @@
 
 {else}
 
-<div class="grid-2-small-1-tiny-1">
+<div class="grid-2-small-1-tiny-1 has-gutter-l">
 
   <div>{* colonne 1 *}
 
@@ -136,29 +136,27 @@
       <div>
         <ul>
           {foreach from=$f_events item=event}
-          <li><a href="/events/show/{$event.id|escape}">{$event.date|date_format:'%d/%m/%Y %H:%M'} - {$event.lieu_name|escape}</a></li>
+          <li><a href="/events/{$event.id|escape}">{$event.date|date_format:'%d/%m/%Y %H:%M'} - {$event.lieu_name|escape}</a></li>
           {/foreach}
         </ul>
       </div>
     </div>
     {/if}
 
+    {if $p_events|@count > 0}
     <div class="box">
       <header>
-        <h2>Concerts à venir</h2>
+        <h2>Concerts passés</h2>
       </header>
       <div>
-        {if $p_events|@count > 0}
         <ul>
           {foreach from=$p_events item=event}
-          <li><a href="/events/show/{$event.id|escape}">{$event.date|date_format:'%d/%m/%Y %H:%M'} - {$event.lieu_name|escape}</a></li>
+          <li><a href="/events/{$event.id|escape}">{$event.date|date_format:'%d/%m/%Y %H:%M'} - {$event.lieu_name|escape}</a></li>
           {/foreach}
         </ul>
-        {else}
-        <p>Aucun concert passé</p>
-        {/if}
       </div>
     </div>
+    {/if}
 
   </div>
 

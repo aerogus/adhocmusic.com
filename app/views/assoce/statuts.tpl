@@ -1,8 +1,8 @@
 {include file="common/header.tpl"}
 
-<div class="grid-2-1">
+<div class="grid-2-small-1 has-gutter-l">
 
-<div class="box">
+<div class="box two-thirds">
   <header>
     <h1>Statuts de l'Association AD'HOC</h1>
   </header>
@@ -103,7 +103,7 @@
   </div>
 </div>
 
-<div>
+<div class="one-third">
 {include file="assoce/_sidebar.tpl"}
 </div>
 

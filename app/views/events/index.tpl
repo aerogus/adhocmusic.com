@@ -1,8 +1,8 @@
 {include file="common/header.tpl"}
 
-<div class="grid-2-1">
+<div class="grid-2-small-1 has-gutter-l">
 
-  <div class="box">
+  <div class="box two-thirds">
     <header>
       <h3>Agenda</h3>
     </header>
@@ -80,11 +80,10 @@
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-  </div>
 </div>{* .box *}
 </div>{* .grid-2-1 *}
 
-<div>
+<div class="one-third">
 {calendar year=$year month=$month day=$day}
 </div>
 

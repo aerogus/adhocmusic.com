@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<div class="grid-3-tiny-2-small-1">
+<div class="grid-3-tiny-2-small-1 has-gutter-l">
 
   <div class="box">
     <header>

@@ -1,8 +1,8 @@
 {include file="common/header.tpl"}
 
-<div class="grid-2-1">
+<div class="grid-2-small-1 has-gutter-l">
 
-  <div>
+  <div class="two-thirds">
 
     <div class="box">
       <header>
@@ -60,7 +60,7 @@
 
   </div>
 
-  <div>
+  <div class="one-third">
   {include file="assoce/_sidebar.tpl"}
   </div>
 

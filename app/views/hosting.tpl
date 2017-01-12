@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div class="grid-3-small-2-tiny-1">
+<div class="grid-3-tiny-2-small-1 has-gutter-l">
   {foreach from=$sites item=site}
   <div class="box thumbs">
     <header>
