@@ -18,8 +18,6 @@ $(function () {
   });
 
   function set_target(x, y) {
-console.log(x,y);
-console.log(distance());
     $('.target')
       .css('top', y-16 + 'px')
       .css('left', x-16 + 'px')
@@ -39,6 +37,7 @@ console.log(distance());
     console.log('no');
     $('.target').hide();
     $('.popup').hide();
+    $('#map').find('.overlay').remove();
     modal = false;
   });
 
