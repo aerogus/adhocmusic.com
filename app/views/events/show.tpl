@@ -6,9 +6,9 @@
 
 {else}
 
-<div class="grid-2-1">
+<div class="grid-3-tiny-2-small-1 has-gutter-l">
 
-  <div class="box">
+  <div class="box two-thirds">
     <header>
       <h3>{$event->getName()}</h3>
     </header>
@@ -109,7 +109,7 @@
 
 </div>{* .box *}
 
-<div>
+<div class="one-third">
   {calendar year=$year month=$month day=$day}
 </div>
 

@@ -6,7 +6,9 @@
 
 {else}
 
-<div id="left">
+<div id="grid-3-tiny-2-small-1 has-gutter-l">
+
+<div class="one-third">
 
 <style>
 .metatop {
@@ -21,7 +23,7 @@
 }
 </style>
 
-{include file="common/boxstart.tpl" width="200px"}
+{include file="common/boxstart.tpl"}
 {if !empty($groupe)}
 <div class="metatop">Groupe</div>
 <div class="metacontent">
@@ -59,11 +61,11 @@
 
 </div>
 
-<div id="centerright" style="float: right;">
+<div class="two-thirds">
 
 <a name="p"></a>
 
-{include file="common/boxstart.tpl" boxtitle2=$photo->getName()|escape width="700px"}
+{include file="common/boxstart.tpl" boxtitle2=$photo->getName()|escape}
 
 <script>
 $(function() {

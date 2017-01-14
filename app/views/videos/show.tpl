@@ -19,9 +19,9 @@
 }
 </style>
 
-<div class="grid-2-1">
+<div class="grid-3-tiny-2-small-1 has-gutter-l">
 
-  <div>
+  <div class="two-thirds">
     <div class="box">
       <header>
         <h1>{$video->getName()|escape}</h1>
@@ -42,7 +42,7 @@
     </div>
   </div>
 
-  <div>
+  <div class="one-third">
 
     <div class="box">
       <header>

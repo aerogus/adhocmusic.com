@@ -12,11 +12,8 @@
         <h3>Saison {$season}</h3>
         <ul>
           {foreach from=$events_of_the_year item=event}
-          <li class="clearfix">
-            <a href="/events/{$event.id}"><img alt="" src="{$event.flyer_100_url}"><br>{$event.date|date_format:"%e %b"}.</a>
-            {if $event.nb_photos > 0}<img src="/img/icones/photo.png" alt="{$event.nb_photos} photo(s)" title="{$event.nb_photos} photo(s)">{/if}
-            {if $event.nb_videos > 0}<img src="/img/icones/video.png" alt="{$event.nb_videos} vidéo(s)" title="{$event.nb_videos} vidéo(s)">{/if}
-            {if $event.nb_audios > 0}<img src="/img/icones/audio.png" alt="{$event.nb_audios} audio(s)" title="{$event.nb_audios} audio(s)">{/if}
+          <li>
+            <a href="/events/{$event.id}"><img alt="" src="{$event.flyer_100_url}"><br>{$event.date|date_format:"%e %b"}</a>
           </li>
           {/foreach}
         </ul>

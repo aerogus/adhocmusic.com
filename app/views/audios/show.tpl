@@ -24,7 +24,7 @@ $(function() {
 });
 </script>
 
-{include file="common/boxstart.tpl" boxtitle=$audio->getName()|escape width="700px"}
+{include file="common/boxstart.tpl" boxtitle=$audio->getName()|escape}
 
 {if $audio->getIdGroupe()}
 <a href="{$groupe->getUrl()}"><img style="float: left; margin: 5px;" src="{$groupe->getMiniPhoto()}" alt="{$groupe->getName()|escape}"></a>

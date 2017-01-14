@@ -31,7 +31,7 @@
         {if $membres|@count > 0}
         <ul>
           {foreach from=$membres item=membre}
-          <li><a href="/membres/show/{$membre.id}">{$membre.pseudo|escape}</a> ({$membre.nom_type_musicien|escape})</li>
+          <li><a href="{$membre.url}">{$membre.pseudo|escape}</a> ({$membre.nom_type_musicien|escape})</li>
           {/foreach}
         </ul>
         {else}
