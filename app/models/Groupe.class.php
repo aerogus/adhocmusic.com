@@ -1236,6 +1236,7 @@ class Groupe extends ObjectModel
         foreach($res as $_res) {
             $res[$cpt]['id'] = intval($_res['id']);
             $res[$cpt]['nom_type_musicien'] = Membre::getTypeMusicienName($_res['id_type_musicien']);
+            $res[$cpt]['url'] = Membre::getUrlById($_res['id']);
             $cpt++;
         }
         return $res;
