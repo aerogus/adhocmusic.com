@@ -40,7 +40,7 @@ class Contact extends ObjectModel
     /**
      * @var string
      */
-    protected $_lastnl = '';
+    protected $_lastnl = NULL;
 
     /**
      * Liste des attributs de l'objet
@@ -52,7 +52,7 @@ class Contact extends ObjectModel
      */
     protected static $_all_fields = array(
         'email'  => 'str',
-        'lastnl' => 'str',
+        'lastnl' => 'date',
     );
 
     /**
