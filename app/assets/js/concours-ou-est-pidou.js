@@ -1,6 +1,7 @@
 $(function () {
 
   var map = $('#map');
+  var played = false;
   var modal = false;
   var x = null;
   var y = null;
@@ -8,7 +9,7 @@ $(function () {
   var nombre_de_dieses_a_la_cle = 298;
 
   map.click(function (e) {
-    if (modal) {
+    if (modal || played) {
       return;
     }
     x = e.pageX - $(this).offset().left;
@@ -17,6 +18,7 @@ $(function () {
     confirmation_box();
   });
 
+  // positionne la cible
   function set_target(x, y) {
     $('.target')
       .css('top', y-16 + 'px')
@@ -24,23 +26,25 @@ $(function () {
       .show();
   }
   
+  // click sur confirmer
   $('.yes').click(function (e) {
     e.stopPropagation();
-    console.log('yes');
     $('.popup').hide();
+    push_participation();
     overlay();
     modal = false;
   });
   
+  // click sur annuler
   $('.no').click(function (e) {
     e.stopPropagation();
-    console.log('no');
     $('.target').hide();
     $('.popup').hide();
     $('#map').find('.overlay').remove();
     modal = false;
   });
 
+  // affiche popup
   function confirmation_box() {
     $('.popup')
       .css('top', y+10 + 'px')
@@ -49,12 +53,33 @@ $(function () {
     modal = true;
   }
 
+  // envoi la réponse
+  function push_participation() {
+    $.post('/concours/ou-est-pidou', {
+      'x': x,
+      'y': y,
+      'd': distance(),
+      'n': $('#conc_name').val(),
+      'p': $('#conc_phone').val()
+    }, function () {
+      congrats();
+      played = true;
+    });
+  }
+
+  // surimpression carte ign
   function overlay() {
     $('<div/>')
       .addClass('overlay')
       .appendTo(map);
   }
 
+  // affichage merci
+  function congrats() {
+    $('.congrats').show();
+  }
+
+  // calcul distance
   function distance() {
     var dx = Math.abs(x - age_du_capitaine);
     var dy = Math.abs(y - nombre_de_dieses_a_la_cle);
