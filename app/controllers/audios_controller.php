@@ -94,7 +94,7 @@ class Controller
                 'type' => "application/mp3",
             ));
         } else {
-            $trail->addStep("Média", "/media/");
+            $trail->addStep("Média", "/medias/");
         }
 
         if($audio->getIdEvent()) {
@@ -317,7 +317,7 @@ class Controller
                         file_put_contents(ADHOC_ROOT_PATH . '/media/audio/' . $audio->getId() . '.mp3', $content);
                     }
                     Log::action(Log::ACTION_AUDIO_EDIT, $audio->getId());
-                    Tools::redirect('/media/?edit=1');
+                    Tools::redirect('/medias/?edit=1');
                 } else {
                     $smarty->assign('error_generic', true);
                 }
@@ -402,7 +402,7 @@ class Controller
         {
             if($audio->delete()) {
                 Log::action(Log::ACTION_AUDIO_DELETE, $audio->getId());
-                Tools::redirect('/media/?delete=1');
+                Tools::redirect('/medias/?delete=1');
             } else {
                 $errors['generic'] = true;
             }

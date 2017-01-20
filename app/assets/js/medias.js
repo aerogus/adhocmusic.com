@@ -78,7 +78,7 @@ jQuery(document).ready(function ($) {
             type += 'photo,';
         }
         if (type) {
-            $.get('/media/search-results', {
+            $.get('/medias/search-results', {
                 event: $(this).val(),
                 type: type
             }, function (data) {

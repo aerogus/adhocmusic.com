@@ -135,7 +135,7 @@ class Controller
                 $trail->addStep($lieu->getName(), "/lieux/" . $lieu->getId());
             } else {
                 $smarty->assign('menuselected', 'media');
-                $trail->addStep("Média", "/media/");
+                $trail->addStep("Média", "/medias/");
             }
             $trail->addStep($video->getName());
 

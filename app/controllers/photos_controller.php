@@ -109,7 +109,7 @@ class Controller
                 $trail->addStep($lieu->getName(), $lieu->getUrl());
             } else {
                 $smarty->assign('menuselected', 'media');
-                $trail->addStep("Média", "/media/");
+                $trail->addStep("Média", "/medias/");
             }
             $trail->addStep($photo->getName());
 
@@ -403,7 +403,7 @@ class Controller
         }
 
         $trail = Trail::getInstance();
-        $trail->addStep("Média", "/media/");
+        $trail->addStep("Média", "/medias/");
         $trail->addStep("Mes Photos", "/photos/my");
         $trail->addStep("Importer des photos");
 
@@ -616,7 +616,7 @@ class Controller
         {
             if($photo->delete()) {
                 Log::action(Log::ACTION_PHOTO_DELETE, $photo->getId());
-                Tools::redirect('/media/?delete=1');
+                Tools::redirect('/medias/?delete=1');
             }
         }
 
