@@ -1066,7 +1066,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `name`, `mini_text`, `text`, `style`, `lineup`, `etat`, "
-             . "`site`, `influences`, `created_on`, `modified_on`, `alias`, "
+             . "`site`, `online`, `influences`, `created_on`, `modified_on`, `alias`, "
              . "`myspace`, `facebook_page_id`, `twitter_id`, `template`, `comment` "
              . "FROM `" . self::$_table . "` "
              . "WHERE `" . self::$_pk . "` = " . (int) $this->getId();
