@@ -48,6 +48,9 @@ class Controller
 
         try {
             $groupe = Groupe::getInstance($id);
+            if (!$groupe->getOnline()) {
+                throw new Exception('groupe offline');
+            }
         } catch(Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_group', true);
