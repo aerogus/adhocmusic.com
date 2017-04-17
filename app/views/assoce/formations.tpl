@@ -63,12 +63,10 @@ Lieu: Epinay sur Orge <br>
 <p><strong>Séance 3: xx/xx/2017 de 10h à 1h du matin: concert de l'association - mise en pratique</strong></p>
 
 <h2>Conditions d'accès</h2>
-<p>Les 2 programmes de formations sont grauits, pour y participer il suffit de :</p>
+<p>Les 2 programmes de formations sont gratuits, pour y participer il suffit de :</p>
 <ul>
 <li>Adhérer à l'association AD'HOC (10E à l'année)</li>
-<li>S'engager en contre-partie à être bénévole sur au moins 3 concerts de l'association</li>
-<li>Noter que ce bénévolat vous permettra de poursuivre votre formation par la pratique</li>
-<li>Inscription via le site, <a href="/contact">page contact</a>. Précisez votre email et numéro de téléphone.</li>
+<li>Inscription via le site, <a href="/contact">page contact</a> en précisant votre email et numéro de téléphone.</li>
 </ul>
 
     </div>
