@@ -275,7 +275,7 @@ class Newsletter extends ObjectModel
         $sql = "SELECT `c`.`id_contact`, `c`.`email`, `c`.`lastnl`, `m`.`mailing`, `m`.`pseudo` "
              . "FROM (`" . self::$_db_table_contact . "` `c`) "
              . "LEFT JOIN `" . self::$_db_table_membre . "` `m` ON (`m`.`id_contact` = `c`.`id_contact`) "
-             . "WHERE (`m`.`mailing` IS NULL) OR (`m`.`mailing` = 1) "
+             . "WHERE ((`m`.`mailing` IS NULL) OR (`m`.`mailing` = 1)) "
              . "ORDER BY `c`.`id_contact` ASC "
              . "LIMIT " . (int) $debut . ", " . (int) $limit;
 
