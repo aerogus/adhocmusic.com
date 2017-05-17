@@ -42,7 +42,7 @@
           <label for="avatar">Avatar</label>
         </li>
       </ul>
-      <p><a href="/membres/edit/{$me->getId()}">Editer mes infos persos</a></p>
+      <p><a href="/membres/edit">Editer mes infos persos</a></p>
       <p><a href="/auth/logout">Déconnexion</a></p>
     </div>
   </div>
