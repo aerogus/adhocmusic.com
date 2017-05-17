@@ -279,6 +279,8 @@ class Controller
         }
         if(empty($data['mini_text'])) {
             $errors['mini_text'] = true;
+        } elseif(mb_strlen($data['mini_text']) > 255) {
+            $errors['mini_text'] = true;
         }
         if(empty($data['text'])) {
             $errors['text'] = true;
@@ -439,6 +441,8 @@ class Controller
             $errors['lineup'] = true;
         }
         if(empty($data['mini_text'])) {
+            $errors['mini_text'] = true;
+        } elseif(mb_strlen($data['mini_text']) > 255) {
             $errors['mini_text'] = true;
         }
         if(empty($data['text'])) {

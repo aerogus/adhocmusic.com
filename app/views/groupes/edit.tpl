@@ -75,7 +75,7 @@
       <textarea id="lineup" name="lineup" cols="50" rows="5">{$data.lineup|escape}</textarea>
     </li>
     <li>
-      <div class="error" id="error_mini_text"{if empty($error_mini_text)} style="display: none"{/if}>Vous devez préciser le champ biographie</div>
+      <div class="error" id="error_mini_text"{if empty($error_mini_text)} style="display: none"{/if}>Vous devez écrire une mini présentation de moins de 250 caractères</div>
       <label for="mini_text">Mini Présentation</label>
       <textarea id="mini_text" name="mini_text" cols="50" rows="5">{$data.mini_text|escape}</textarea>
     </li>

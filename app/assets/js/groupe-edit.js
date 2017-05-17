@@ -24,7 +24,7 @@ jQuery(document).ready(function ($) {
         } else {
             $("#error_lineup").fadeOut();
         }
-        if ($("#mini_text").val().length === 0) {
+        if ($("#mini_text").val().length === 0 || $("#mini_text").val().length > 255) {
             $("#error_mini_text").fadeIn();
             valid = false;
         } else {
