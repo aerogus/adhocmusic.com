@@ -20,7 +20,7 @@ class Controller
         $debut   = (int) Route::params('debut');
         $limit   = (int) Route::params('limit');
 
-        return Video::getVideos(array(
+        return Video::getVideos([
             'groupe'  => $groupe,
             'event'   => $event,
             'lieu'    => $lieu,
@@ -28,7 +28,7 @@ class Controller
             'sort'    => $sort,
             'debut'   => $debut,
             'limit'   => $limit,
-        ));
+        ]);
     }
 
     /**
@@ -44,7 +44,7 @@ class Controller
         $debut   = (int) Route::params('debut');
         $limit   = (int) Route::params('limit');
 
-        return Audio::getAudios(array(
+        return Audio::getAudios([
             'groupe'  => $groupe,
             'event'   => $event,
             'lieu'    => $lieu,
@@ -52,7 +52,7 @@ class Controller
             'sort'    => $sort,
             'debut'   => $debut,
             'limit'   => $limit,
-        ));
+        ]);
     }
 
     /**
@@ -68,7 +68,7 @@ class Controller
         $debut   = (int) Route::params('debut');
         $limit   = (int) Route::params('limit');
 
-        return Photo::getPhotos(array(
+        return Photo::getPhotos([
             'groupe'  => $groupe,
             'event'   => $event,
             'lieu'    => $lieu,
@@ -76,7 +76,7 @@ class Controller
             'sort'    => $sort,
             'debut'   => $debut,
             'limit'   => $limit,
-        ));
+        ]);
     }
 
     /**
@@ -92,14 +92,14 @@ class Controller
         $debut  = (int) Route::params('debut');
         $limit  = (int) Route::params('limit');
 
-        return Event::getEvents(array(
-            'groupe'  => $groupe,
-            'lieu'    => $lieu,
-            'datdeb'  => $datdeb,
-            'datfin'  => $datfin,
-            'sort'    => $sort,
-            'debut'   => $debut,
-            'limit'   => $limit,
-        ));
+        return Event::getEvents([
+            'groupe' => $groupe,
+            'lieu'   => $lieu,
+            'datdeb' => $datdeb,
+            'datfin' => $datfin,
+            'sort'   => $sort,
+            'debut'  => $debut,
+            'limit'  => $limit,
+        ]);
     }
 }
