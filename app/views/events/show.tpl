@@ -22,7 +22,7 @@
 
   <div id="event-box-info">
     <p><strong>Le {$jour} à {$heure}</strong></p>
-    <a href="/lieux/show/{$lieu->getId()}" title="{$lieu->getName()|escape}">
+    <a href="/lieux/{$lieu->getId()}" title="{$lieu->getName()|escape}">
       <img id="event-box-map" src="{$lieu->getMapUrl('64x64')}" alt="">
       <strong>{$lieu->getName()|escape}</strong><br>
       {$lieu->getAddress()}<br>
