@@ -729,28 +729,34 @@ class Event extends ObjectModel
             $fetch_fb = true;
         }
 
-        $tab_lieu        = array();
-        $tab_style       = array();
-        $tab_groupe      = array();
-        $tab_structure   = array();
-        $tab_id          = array();
-        $tab_departement = array();
-        $tab_contact     = array();
-
         $lat = 0;
         $lng = 0;
-        if(!empty($_SESSION)) {
+        if (!empty($_SESSION)) {
             $lat = (float) $_SESSION['lat'];
             $lng = (float) $_SESSION['lng'];
         }
 
-        if(array_key_exists('lieu', $params))        { $tab_lieu        = explode(",", $params['lieu']);  }
-        if(array_key_exists('style', $params))       { $tab_style       = explode(",", $params['style']);  }
-        if(array_key_exists('groupe', $params))      { $tab_groupe      = explode(",", $params['groupe']); }
-        if(array_key_exists('structure', $params))   { $tab_structure   = explode(",", $params['structure']); }
-        if(array_key_exists('id', $params))          { $tab_id          = explode(",", $params['id']); }
-        if(array_key_exists('departement', $params)) { $tab_departement = explode(",", $params['departement']); }
-        if(array_key_exists('contact', $params))     { $tab_contact     = explode(",", $params['contact']); }
+        // traitement des params complexes
+        foreach (['lieu', 'style', 'groupe', 'structure', 'id', 'departement', 'contact'] as $n) {
+            ${'tab_' . $n} = [];
+            if (array_key_exists($n, $params) && ($params[$n] !== 0) && ($params[$n] !== '0')) {
+                if (is_int($params[$n])) {
+                    ${'tab_' . $n}[0] = (int) $params[$n];
+                } else {
+                    ${'tab_' . $n} = explode(',', $params[$n]);
+                }
+                foreach (${'tab_' . $n} as $idx => $val) {
+                    ${'tab_' . $n}[$idx] = (int) $val;
+                }
+            }
+        }
+
+        $lat = 0;
+        $lng = 0;
+        if (!empty($_SESSION)) {
+            $lat = (float) $_SESSION['lat'];
+            $lng = (float) $_SESSION['lng'];
+        }
 
         $db = DataBase::getInstance();
 
@@ -773,7 +779,7 @@ class Event extends ObjectModel
              . "LEFT JOIN `" . self::$_db_table_membre . "` `m` ON (`e`.`id_contact` = `m`.`id_contact`) "
              . "WHERE 1 ";
 
-        if(count($tab_lieu) && ($tab_lieu[0] !== 0)) {
+        if(count($tab_lieu)) {
             $sql .= "AND (0 ";
             foreach($tab_lieu as $id_lieu) {
                 $sql .= "OR `l`.`id_lieu` = " . (int) $id_lieu." ";
@@ -781,7 +787,7 @@ class Event extends ObjectModel
             $sql .= ") ";
         }
 
-        if(count($tab_style) && ($tab_style[0] !== 0)) {
+        if(count($tab_style)) {
             $sql .= "AND (0 ";
             foreach($tab_style as $id_style) {
                 $sql .= "OR `es`.`id_style` = " . (int) $id_style . " ";
@@ -789,7 +795,7 @@ class Event extends ObjectModel
             $sql .= ") ";
         }
 
-        if(count($tab_groupe) && ($tab_groupe[0] !== 0)) {
+        if(count($tab_groupe)) {
             $sql .= "AND (0 ";
             foreach($tab_groupe as $id_groupe) {
                 $sql .= "OR `p`.`id_groupe` = " . (int) $id_groupe." ";
@@ -797,7 +803,7 @@ class Event extends ObjectModel
             $sql .= ") ";
         }
 
-        if(count($tab_structure) && ($tab_structure[0] !== 0)) {
+        if(count($tab_structure)) {
             $sql .= "AND (0 ";
             foreach($tab_structure as $id_structure) {
                 $sql .= "OR `o`.`id_structure` = " . (int) $id_structure . " ";
