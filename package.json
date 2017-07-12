@@ -7,7 +7,7 @@
   "devDependencies": {
     "after-brunch": "0.0.5",
     "auto-reload-brunch": "2.7.1",
-    "autoprefixer": "7.1.0",
+    "autoprefixer": "7.1.2",
     "brunch": "2.10.9",
     "clean-css-brunch": "2.10.0",
     "postcss-assets": "4.1.0",
