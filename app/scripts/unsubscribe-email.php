@@ -7,23 +7,21 @@ require_once dirname(__FILE__) . '/../config.php';
  * désabonne un email de la newsletter
  */
 
-$data = array(
-    // emails
-);
+// tableau d'emails
+$data = [];
 
-// ficher un email par ligne
+// fichier un email par ligne
 $data = file("emails.txt");
 
-foreach($data as $email)
-{
+foreach ($data as $email) {
     $email = trim((string) $email);
     echo $email . " : ";
-    if($id_contact = Contact::getIdByEmail($email)) {
+    if ($id_contact = Contact::getIdByEmail($email)) {
         echo "contact ? oui (" . $id_contact . ") - ";
-        if($pseudo = Membre::getPseudoById($id_contact)) {
+        if ($pseudo = Membre::getPseudoById($id_contact)) {
             echo "membre ? oui (" . $pseudo . ") - ";
             $membre = Membre::getInstance($id_contact);
-            if($membre->getMailing()) {
+            if ($membre->getMailing()) {
                 $membre->setMailing(false);
                 $membre->save();
                 echo "désinscription OK";
