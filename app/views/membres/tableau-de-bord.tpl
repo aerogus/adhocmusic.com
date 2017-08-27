@@ -1,15 +1,18 @@
 {include file="common/header.tpl"}
 
-<div class="grid-3-small-2-tiny-1">
+{if $me->isInterne()}
+<div style="margin-bottom:2em">
+   <a style="display:block;background:#f99;padding:5px;border:1px solid" href="/adm/">🔗 <strong>Accès zone privée</strong></a>
+</div>
+{/if}
+
+<div class="grid-3-small-2-tiny-1 has-gutter-l">
 
   <div class="box">
     <header>
       <h2>Mes Infos Persos</h2>
     </header>
     <div>
-        {if $me->isInterne()}
-        <a style="display:block;background:#f99;padding:5px;border:1px solid" href="/adm/">🔗<strong>Accès zone privée</strong></a>
-        {/if}
       <ul>  
         <li>
           <strong style="float: right">{$me->getPseudo()|escape}</strong>
