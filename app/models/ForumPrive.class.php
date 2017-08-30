@@ -65,18 +65,18 @@ class ForumPrive extends Forum
              . "LIMIT " . ((int) $page * FORUM_NB_MESSAGES_PER_PAGE) ."," . FORUM_NB_MESSAGES_PER_PAGE;
         $messages = $db->queryWithFetch($sql);
 
-        foreach($messages as $key => $message) {
+        foreach ($messages as $key => $message) {
             $wiki_parsing = false;
-            if($message['created_on'] > '2011-04-16 00:00:00' && $message['created_on'] < '2011-09-26 10:45:00') {
+            if ($message['created_on'] > '2011-04-16 00:00:00' && $message['created_on'] < '2011-09-26 10:45:00') {
                 $wiki_parsing = true;
             }
             $messages[$key]['parsed_text'] = self::parseMessage($message['text'], $wiki_parsing);
         }
 
-        return array(
+        return [
             'thread' => $thread,
             'messages' => $messages,
-        );
+        ];
     }
 
     /**
@@ -140,13 +140,13 @@ class ForumPrive extends Forum
 
         $forums = $db->queryWithFetchFirstFields($sql);
 
-        return array(
+        return [
             'a' => (bool) in_array('a', $forums),
             'b' => (bool) in_array('b', $forums),
             'e' => (bool) in_array('e', $forums),
             's' => (bool) in_array('s', $forums),
             't' => (bool) in_array('t', $forums),
-        );
+        ];
 
         //return $forums;
     }
@@ -165,7 +165,7 @@ class ForumPrive extends Forum
 
         $db->query($sql);
 
-        foreach($ids_forum as $id_forum)
+        foreach ($ids_forum as $id_forum)
         {
             $sql = "INSERT INTO `adhoc_forum_prive_subscriber` "
                  . "(`id_contact`, `id_forum`) "

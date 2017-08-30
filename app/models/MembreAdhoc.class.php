@@ -108,7 +108,7 @@ class MembreAdhoc extends Membre
      */
     protected function _getAllFields($fusion = true)
     {
-        if($fusion) {
+        if ($fusion) {
             return array_merge(
                 Contact::$_all_fields,
                 Membre::$_all_fields,
@@ -267,7 +267,7 @@ class MembreAdhoc extends Membre
              . "(YEAR(CURRENT_DATE) - YEAR(`ma`.`birth_date`)) - (RIGHT(CURRENT_DATE,5) < RIGHT(`ma`.`birth_date`, 5)) AS `age` "
              . "FROM `" . self::$_db_table_membre . "` `m`, `" . self::$_db_table_membre_adhoc . "` `ma` "
              . "WHERE `m`.`id_contact` = `ma`.`id_contact` ";
-        if($active) {
+        if ($active) {
              $sql .= "AND `ma`.`active` = TRUE ";
         } else {
              $sql .= "AND `ma`.`active` = FALSE ";
@@ -276,10 +276,10 @@ class MembreAdhoc extends Membre
 
         $mbrs = $db->queryWithFetch($sql);
 
-        foreach($mbrs as $idx => $mbr)
+        foreach ($mbrs as $idx => $mbr)
         {
             $mbrs[$idx]['avatar_interne'] = false;
-            if(file_exists(self::getBasePath() . '/' . $mbr['id'] . '.jpg')) {
+            if (file_exists(self::getBasePath() . '/' . $mbr['id'] . '.jpg')) {
                 $mbrs[$idx]['avatar_interne'] = self::getBaseUrl() . '/' . $mbr['id'] . '.jpg?ts=' . $mbr['modified_on_ts'];
             }
             $mbrs[$idx]['url'] = self::getUrlById($mbr['id']);
@@ -309,7 +309,7 @@ class MembreAdhoc extends Membre
              . "WHERE `m`.`id_contact` = `c`.`id_contact` "
              . "AND `m`.`id_contact` = " . (int) $this->_id_contact;
 
-        if($res = $db->queryWithFetchFirstRow($sql)) {
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             return true;
         }
@@ -326,18 +326,18 @@ class MembreAdhoc extends Membre
 
         $fields = self::_getAllFields(false);
 
-        if(!$this->getId()) // INSERT
+        if (!$this->getId()) // INSERT
         {
             /* table contact */
 
-            if($id_contact = Contact::getIdByEmail($email)) {
+            if ($id_contact = Contact::getIdByEmail($email)) {
 
                 $this->setId($id_contact);
 
             } else {
 
             $sql = "INSERT INTO `" . static::$_db_table_contact . "` (";
-            foreach($fields['contact'] as $field => $type) {
+            foreach ($fields['contact'] as $field => $type) {
                 $sql .= "`" . $field . "`,";
             }
             $sql = substr($sql, 0, -1);
@@ -472,9 +472,9 @@ class MembreAdhoc extends Membre
 
                 $fields_to_save = '';
                 foreach ($this->_modified_fields['contact'] as $field => $value) {
-                    if($value === true) {
+                    if ($value === true) {
                         $att = '_' . $field;
-                        switch($fields['contact'][$field])
+                        switch ($fields['contact'][$field])
                         {
                             case 'num':
                                 $fields_to_save .= " `" . $field."` = " . $db->escape($this->$att) . ",";
@@ -506,7 +506,7 @@ class MembreAdhoc extends Membre
                      . "SET " . $fields_to_save . " "
                      . "WHERE `id_contact` = " . (int) $this->_id_contact;
 
-                $this->_modified_fields['contact'] = array();
+                $this->_modified_fields['contact'] = [];
 
                 $db->query($sql);
 
@@ -518,9 +518,9 @@ class MembreAdhoc extends Membre
 
                 $fields_to_save = '';
                 foreach ($this->_modified_fields['membre'] as $field => $value) {
-                    if($value === true) {
+                    if ($value === true) {
                         $att = '_' . $field;
-                        switch($fields['membre'][$field])
+                        switch ($fields['membre'][$field])
                         {
                             case 'num':
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
@@ -564,9 +564,9 @@ class MembreAdhoc extends Membre
 
                 $fields_to_save = '';
                 foreach ($this->_modified_fields['membre_adhoc'] as $field => $value) {
-                    if($value === true) {
+                    if ($value === true) {
                         $att = '_' . $field;
-                        switch($fields['membre_adhoc'][$field])
+                        switch ($fields['membre_adhoc'][$field])
                         {
                             case 'num':
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
@@ -598,7 +598,7 @@ class MembreAdhoc extends Membre
                      . "SET " . $fields_to_save . " "
                      . "WHERE `id_contact` = " . (int) $this->_id_contact;
 
-                $this->_modified_fields['membre_adhoc'] = array();
+                $this->_modified_fields['membre_adhoc'] = [];
 
                 $db->query($sql);
 
