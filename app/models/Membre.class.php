@@ -53,20 +53,20 @@ class Membre extends Contact
      *
      * @var array
      */
-    protected static $_types_membre = array(
+    protected static $_types_membre = [
         self::TYPE_STANDARD  => "Standard",
         self::TYPE_REDACTEUR => "Rédacteur",
         self::TYPE_INTERNE   => "Interne",
         self::TYPE_BONUS     => "Bonus",
         self::TYPE_ADMIN     => "Administrateur",
-    );
+    ];
 
     /**
      * Tableau des types de musicien
      *
      * @var array
      */
-    protected static $_types_musicien = array(
+    protected static $_types_musicien = [
         self::TYPE_MUSICIEN_NON => " Non précisé",
         self::TYPE_MUSICIEN_BAT => "Batteur",
         self::TYPE_MUSICIEN_GTR => "Guitariste",
@@ -89,7 +89,7 @@ class Membre extends Contact
         self::TYPE_MUSICIEN_LUM => "Ingénieur lumière",
         self::TYPE_MUSICIEN_VLN => "Violoniste",
         self::TYPE_MUSICIEN_VLC => "Violoncelliste",
-    );
+    ];
 
     /**
      * @var mixed
@@ -229,7 +229,7 @@ class Membre extends Contact
     /**
      * @var array
      */
-    protected $_types = array();
+    protected $_types = [];
 
     /**
      * @var array
@@ -244,7 +244,7 @@ class Membre extends Contact
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'pseudo'         => 'str',
         'password'       => 'pwd',
         'last_name'      => 'str',
@@ -269,7 +269,7 @@ class Membre extends Contact
         'created_on'     => 'date',
         'modified_on'    => 'date',
         'visited_on'     => 'date',
-    );
+    ];
 
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
@@ -277,10 +277,10 @@ class Membre extends Contact
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      * @var array
      */
-    protected $_modified_fields = array(
-        'contact' => array(),
-        'membre'  => array(),
-    );
+    protected $_modified_fields = [
+        'contact' => [],
+        'membre'  => [],
+    ];
 
     /**
      * @return string
@@ -304,16 +304,16 @@ class Membre extends Contact
      */
     protected function _getAllFields($fusion = true)
     {
-        if($fusion) {
+        if ($fusion) {
             return array_merge(
                 Contact::$_all_fields,
                 Membre::$_all_fields
             );
         } else {
-            return array_merge(array(
+            return array_merge([
                 'contact' => Contact::$_all_fields,
                 'membre' => Membre::$_all_fields,
-            ));
+            ]);
         }
     }
 
@@ -533,7 +533,7 @@ class Membre extends Contact
      */
     function getCreatedOn()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
         }
         return false;
@@ -544,7 +544,7 @@ class Membre extends Contact
      */
     function getCreatedOnTs()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
         }
         return false;
@@ -555,7 +555,7 @@ class Membre extends Contact
      */
     function getModifiedOn()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
         }
         return false;
@@ -566,7 +566,7 @@ class Membre extends Contact
      */
     function getModifiedOnTs()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
              return (int) strtotime($this->_modified_on);
         }
         return false;
@@ -577,7 +577,7 @@ class Membre extends Contact
      */
     function getVisitedOn()
     {
-        if(Date::isDateTimeOk($this->_visited_on)) {
+        if (Date::isDateTimeOk($this->_visited_on)) {
             return (string) $this->_visited_on;
         }
         return false;
@@ -588,7 +588,7 @@ class Membre extends Contact
      */
     function getVisitedOnTs()
     {
-        if(Date::isDateTimeOk($this->_visited_on)) {
+        if (Date::isDateTimeOk($this->_visited_on)) {
              return (int) strtotime($this->_visited_on);
         }
         return false;
@@ -621,7 +621,7 @@ class Membre extends Contact
      */
     function getGroupes()
     {
-        if($this->_groupes === false)
+        if ($this->_groupes === false)
         {
             $db   = DataBase::getInstance();
 
@@ -634,7 +634,7 @@ class Membre extends Contact
 
             $this->_groupes = $db->queryWithFetch($sql);
 
-            foreach($this->_groupes as $key => $groupe)
+            foreach ($this->_groupes as $key => $groupe)
             {
                 $this->_groupes[$key]['type_musicien_name'] = self::getTypeMusicienName($groupe['id_type_musicien']);
                 $this->_groupes[$key]['url'] = Groupe::getUrlFiche($groupe['alias']);
@@ -1017,25 +1017,25 @@ class Membre extends Contact
              . "WHERE `m`.`id_contact` = `a`.`id_contact` "
              . "AND `a`.`id_groupe` = `g`.`id_groupe`";
 
-        if($id_type_musicien) {
+        if ($id_type_musicien) {
             $sql .= "AND `a`.`id_type_musicien` = " . (int) $id_type_musicien . " ";
         }
 
-        if($id_groupe) {
+        if ($id_groupe) {
             $sql .= "AND `g`.`id_groupe` = " . (int) $id_groupe;
         }
 
 
         $res = $db->queryWithFetch($sql);
-        $tab = array();
-        foreach($res as $_res)
+        $tab = [];
+        foreach ($res as $_res)
         {
-            $tab[$_res['id_contact']][] = array(
+            $tab[$_res['id_contact']][] = [
                 'id_groupe' => $_res['id_groupe'],
                 'id_type_musicien' => $_res['id_type_musicien'],
                 'type_musicien' => self::getTypeMusicienName($_res['id_type_musicien']),
                 'name' => $_res['name'],
-            );
+            ];
         }
         return $tab;
     }
@@ -1056,45 +1056,45 @@ class Membre extends Contact
      * @return array
 
      */
-    static function getMembres($params = array())
+    static function getMembres($params = [])
     {
         $pseudo = null;
-        if(isset($params['pseudo'])) {
+        if (isset($params['pseudo'])) {
             $pseudo = (string) $params['pseudo'];
         }
 
         $last_name = null;
-        if(isset($params['last_name'])) {
+        if (isset($params['last_name'])) {
             $last_name = (string) $params['last_name'];
         }
 
         $first_name = null;
-        if(isset($params['first_name'])) {
+        if (isset($params['first_name'])) {
             $first_name = (string) $params['first_name'];
         }
 
         $email = null;
-        if(isset($params['email'])) {
+        if (isset($params['email'])) {
             $email = (string) $params['email'];
         }
 
         $debut = 0;
-        if(isset($params['debut'])) {
+        if (isset($params['debut'])) {
             $debut = (int) $params['debut'];
         }
 
         $limit = 10;
-        if(isset($params['limit'])) {
+        if (isset($params['limit'])) {
             $limit = (int) $params['limit'];
         }
 
         $sens = "ASC";
-        if(isset($params['sens']) && $params['sens'] == "DESC") {
+        if (isset($params['sens']) && $params['sens'] == "DESC") {
             $sens = "DESC";
         }
 
         $sort = "id_contact";
-        if(isset($params['sort']) && (
+        if (isset($params['sort']) && (
             $params['sort'] == 'random' || $params['sort'] == 'id_contact'
          || $params['sort'] == 'last_name' || $params['sort'] == 'first_name'
          || $params['sort'] == 'email' || $params['sort'] == 'created_on'
@@ -1103,8 +1103,8 @@ class Membre extends Contact
             $sort = $params['sort'];
         }
 
-        $tab_id = array();
-        if(array_key_exists('id', $params)) {
+        $tab_id = [];
+        if (array_key_exists('id', $params)) {
             $tab_id = explode(",", $params['id']);
         }
 
@@ -1120,31 +1120,31 @@ class Membre extends Contact
              . "JOIN `" . self::$_db_table_contact . "` `c` ON (`m`.`id_contact` = `c`.`id_contact`) "
              . "WHERE 1 ";
 
-        if(count($tab_id) && ($tab_id[0] != 0)) {
+        if (count($tab_id) && ($tab_id[0] != 0)) {
             $sql .= "AND `m`.`id_contact` IN (" . implode(',', $tab_id) . ") ";
         }
 
-        if(!is_null($pseudo)) {
+        if (!is_null($pseudo)) {
             $sql .= "AND `m`.`pseudo` LIKE '" . $db->escape($pseudo) . "%' ";
         }
 
-        if(!is_null($last_name)) {
+        if (!is_null($last_name)) {
             $sql .= "AND `m`.`last_name` LIKE '" . $db->escape($last_name) . "%' ";
         }
 
-        if(!is_null($first_name)) {
+        if (!is_null($first_name)) {
             $sql .= "AND `m`.`first_name` LIKE '" . $db->escape($first_name) . "%' ";
         }
 
-        if(!is_null($email)) {
+        if (!is_null($email)) {
             $sql .= "AND `c`.`email` LIKE '" . $db->escape($email) . "%' ";
         }
 
         $sql .= "ORDER BY ";
-        if($sort == "random") {
+        if ($sort == "random") {
             $sql .= "RAND(".time().") ";
         } else {
-            if($sort == 'email' || $sort == 'lastnl') {
+            if ($sort == 'email' || $sort == 'lastnl') {
                 $t = 'c';
             } else {
                 $t = 'm';
@@ -1153,7 +1153,7 @@ class Membre extends Contact
         }
         $sql .= "LIMIT " . $debut . ", " . $limit;
 
-        if($limit === 1) {
+        if ($limit === 1) {
             $res = $db->queryWithFetchFirstRow($sql);
         } else {
             $res = $db->queryWithFetch($sql);
@@ -1171,7 +1171,7 @@ class Membre extends Contact
     {
         // on vérifie les clés étrangères
 
-        if($this->hasGroupe()) {
+        if ($this->hasGroupe()) {
             // on efface dans appartient_a
         }
 
@@ -1194,26 +1194,26 @@ class Membre extends Contact
 
         $fields = self::_getAllFields(false);
 
-        if(!$this->getId()) // INSERT
+        if (!$this->getId()) // INSERT
         {
             /* table contact */
 
-            if($id_contact = Contact::getIdByEmail($this->getEmail())) {
+            if ($id_contact = Contact::getIdByEmail($this->getEmail())) {
 
                 $this->setId($id_contact);
 
             } else {
 
             $sql = "INSERT INTO `" . static::$_db_table_contact . "` (";
-            foreach($fields['contact'] as $field => $type) {
+            foreach ($fields['contact'] as $field => $type) {
                 $sql .= "`" . $field . "`,";
             }
             $sql = substr($sql, 0, -1);
             $sql .= ") VALUES (";
 
-            foreach($fields['contact'] as $field => $type) {
+            foreach ($fields['contact'] as $field => $type) {
                 $att = '_' . $field;
-                switch($type)
+                switch ($type)
                 {
                     case 'num':
                         $sql .= $db->escape($this->$att) . ",";
@@ -1251,16 +1251,16 @@ class Membre extends Contact
 
             $sql = "INSERT INTO `" . static::$_db_table_membre . "` (";
             $sql .= "`id_contact`,";
-            foreach($fields['membre'] as $field => $type) {
+            foreach ($fields['membre'] as $field => $type) {
                 $sql .= "`" . $field . "`,";
             }
             $sql = substr($sql, 0, -1);
             $sql .= ") VALUES (";
             $sql .= (int) $this->getId() . ",";
 
-            foreach($fields['membre'] as $field => $type) {
+            foreach ($fields['membre'] as $field => $type) {
                 $att = '_' . $field;
-                switch($type)
+                switch ($type)
                 {
                     case 'num':
                         $sql .= $db->escape($this->$att) . ",";
@@ -1306,9 +1306,9 @@ class Membre extends Contact
 
                 $fields_to_save = '';
                 foreach ($this->_modified_fields['contact'] as $field => $value) {
-                    if($value === true) {
+                    if ($value === true) {
                         $att = '_' . $field;
-                        switch($fields['contact'][$field])
+                        switch ($fields['contact'][$field])
                         {
                             case 'num':
                                 $fields_to_save .= " `" . $field . "` = ".$db->escape($this->$att).",";
@@ -1340,7 +1340,7 @@ class Membre extends Contact
                       . "SET " . $fields_to_save . " "
                       . "WHERE `id_contact` = " . (int) $this->_id_contact;
 
-                $this->_modified_fields['contact'] = array();
+                $this->_modified_fields['contact'] = [];
 
                 $db->query($sql);
 
@@ -1352,9 +1352,9 @@ class Membre extends Contact
 
                 $fields_to_save = '';
                 foreach ($this->_modified_fields['membre'] as $field => $value) {
-                    if($value === true) {
+                    if ($value === true) {
                         $att = '_' . $field;
-                        switch($fields['membre'][$field])
+                        switch ($fields['membre'][$field])
                         {
                             case 'num':
                                 $fields_to_save .= " `" . $field . "` = ".$db->escape($this->$att).",";
@@ -1386,7 +1386,7 @@ class Membre extends Contact
                       . "SET " . $fields_to_save . " "
                       . "WHERE `id_contact` = " . (int) $this->_id_contact;
 
-                $this->_modified_fields['membre'] = array();
+                $this->_modified_fields['membre'] = [];
 
                 $db->query($sql);
 
@@ -1417,7 +1417,7 @@ class Membre extends Contact
               . "WHERE `m`.`id_contact` = `c`.`id_contact` "
               . "AND `m`.`id_contact` = " . (int) $this->_id_contact;
 
-        if($res = $db->queryWithFetchFirstRow($sql)) {
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             return true;
         }
@@ -1433,7 +1433,7 @@ class Membre extends Contact
      */
     function belongsTo($id_groupe)
     {
-        if(!$this->_id_contact) {
+        if (!$this->_id_contact) {
             throw new Exception('id_contact manquant');
         }
 
@@ -1475,8 +1475,8 @@ class Membre extends Contact
 
         $res = $db->queryWithFetch($sql);
 
-        $str = array();
-        foreach($res as $_res) {
+        $str = [];
+        foreach ($res as $_res) {
             $str[] = $_res['id_photo'];
         }
 
@@ -1607,7 +1607,7 @@ class Membre extends Contact
     {
         $db = DataBase::getInstance();
 
-        if(!is_numeric($id)) {
+        if (!is_numeric($id)) {
             return false;
         }
 
@@ -1631,12 +1631,12 @@ class Membre extends Contact
 
         $rows = $db->queryWithFetch($sql);
 
-        $out = array();
-        foreach($rows as $row) {
-            $out[$row['facebook_profile_id']] = array(
+        $out = [];
+        foreach ($rows as $row) {
+            $out[$row['facebook_profile_id']] = [
                 'pseudo' => $row['pseudo'],
                 'id_contact' => $row['id_contact'],
-            );
+            ];
         }
         return $out;
     }
@@ -1705,7 +1705,7 @@ class Membre extends Contact
      */
     static function getTypeMusicienName($cle)
     {
-        if(array_key_exists($cle, self::$_types_musicien)) {
+        if (array_key_exists($cle, self::$_types_musicien)) {
             return self::$_types_musicien[$cle];
         }
         return false;
@@ -1719,7 +1719,7 @@ class Membre extends Contact
      */
     static function getTypeMembreName($cle)
     {
-        if(array_key_exists($cle, self::$_types_membre)) {
+        if (array_key_exists($cle, self::$_types_membre)) {
             return self::$_types_membre[$cle];
         }
         return false;
@@ -1732,7 +1732,7 @@ class Membre extends Contact
      */
     static function getMembresCount()
     {
-        if(isset($_SESSION['global_counters']['nb_membres'])) {
+        if (isset($_SESSION['global_counters']['nb_membres'])) {
             return $_SESSION['global_counters']['nb_membres'];
         }
 
@@ -1757,11 +1757,11 @@ class Membre extends Contact
      */
     static function getIdByEmail($email = null)
     {
-        if($email == null) {
+        if ($email == null) {
             return 0;
         }
 
-        if(!Email::validate($email)) {
+        if (!Email::validate($email)) {
             throw new Exception('email syntaxiquement incorrect');
         }
 
