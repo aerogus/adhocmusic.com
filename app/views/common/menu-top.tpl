@@ -23,7 +23,7 @@
       <li><a href="/assoce/concerts">Concerts</a></li>
       <li><a href="/assoce/afterworks">Afterworks</a></li>
       <li><a href="/assoce/formations">Formations</a></li>
-      <li><a href="/assoce/equipe">Equipe</a></li>
+      <li><a href="/assoce/equipe">Équipe</a></li>
       <li><a href="/assoce/statuts">Statuts</a></li>
     </ul>
   </li>
