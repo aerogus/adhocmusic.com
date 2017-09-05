@@ -358,6 +358,8 @@ class Tools
      */
     static function sessionInit()
     {
+        ini_set('session.gc_maxlifetime', '7200'); // 2 heures
+
         session_name('ADHOCMUSIC');
         session_start();
 
