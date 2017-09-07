@@ -14,7 +14,7 @@
   <li>
     <ul>
       <li><h4>Suivez nous</h4></li>
-      <li class="facebook"><a href="https://facebook.com/adhocmusic" title="AD'HOC Music sur Facebook">/adhocmusic</a></li>
+      <li class="facebook"><a href="https://facebook.com/adhocmusic" title="@adhocmusic sur Facebook">@adhocmusic</a></li>
       <li class="twitter"><a href="https://twitter.com/adhocmusic" title="@adhocmusic sur Twitter">@adhocmusic</a></li>
     </ul>
   </li>
