@@ -37,6 +37,8 @@ class Controller
         $trail->addStep("Forums", "/adm/forums/");
         $trail->addStep($forum['title']);
 
+        $smarty->enqueue_script('/js/adm/forums.js');
+
         $smarty->assign('subs', ForumPrive::getSubscribers($id_forum));
         $smarty->assign('forum', $forum);
         $smarty->assign('threads', ForumPrive::getThreads($id_forum, $page));

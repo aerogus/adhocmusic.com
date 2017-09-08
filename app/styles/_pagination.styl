@@ -1,27 +1,30 @@
 /* pagination */
 
 .pagination
-  clear both
-  width 50%
-  margin 20px auto
-  text-align center
+  display flex
+  align-items center
+  justify-content center
+  margin 10px auto
 
-.unselectedpage, .selectedpage
-  padding 9px
-  text-decoration none
+  a
+    border-radius 50%
+    text-align center
+    width 24px
+    height 24px
+    line-height 24px
+    margin 0 5px
 
-.unselectedpage
-  background #333
-  color #fff
+  .unselectedpage
+    background #292933
+    color #fff
 
-.unselectedpage:hover
-  background #fff
-  color #000
+    &:hover
+      background #f0f0f0
+      color #292933
 
-.selectedpage
-  background #b00
-  color #fff
-  font-weight bold
+  .selectedpage
+    background #f7303c
+    color #fff
 
-.selectedpage:hover
-  background #f00
+    &:hover
+      background #f0f0f0

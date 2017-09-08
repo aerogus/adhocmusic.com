@@ -219,41 +219,41 @@ class AdHocSmarty extends Smarty
         }
 
         if ($p->hasPagination()) {
-            $out .= '<div class="pagination">' . "\n";
-            if($p->getNbPages() <= $p->getNbLinks()) {
+            $out .= '<div class="pagination">';
+            if ($p->getNbPages() <= $p->getNbLinks()) {
                  // pagination simple 1 2 3 4 5
-                 for($i = $p->getFirstPage() ; $i <= $p->getLastPage() ; $i++) {
+                 for ($i = $p->getFirstPage() ; $i <= $p->getLastPage() ; $i++) {
                      $p->setCurrentPage($i);
-                     $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>' . "\n";
+                     $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>';
                  }
             } else {
                 // pagination étendue
-                if($p->getSelectedPage() < ($p->getNbLinks() - 2)) {
+                if ($p->getSelectedPage() < ($p->getNbLinks() - 2)) {
                     // type début  : 1 2 3 4 ... 50
-                    for($i = $p->getFirstPage() ; $i < $p->getNbLinks() - 1 ; $i++) {
+                    for ($i = $p->getFirstPage() ; $i < $p->getNbLinks() - 1 ; $i++) {
                         $p->setCurrentPage($i);
-                        $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>' . "\n";
+                        $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>';
                     }
-                    $out .= ' ... ' . "\n";
-                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getLastPage().'" class="unselectedpage">'.$p->getLastPageNum().'</a>' . "\n";
-                } elseif($p->getSelectedPage() > ($p->getNbPages() - $p->getNbLinks() + 1)) {
+                    $out .= '…';
+                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getLastPage().'" class="unselectedpage">'.$p->getLastPageNum().'</a>';
+                } elseif ($p->getSelectedPage() > ($p->getNbPages() - $p->getNbLinks() + 1)) {
                     // type fin    : 1 ... 47 48 49 50
-                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getFirstPage().'" class="unselectedpage">'.$p->getFirstPageNum().'</a>' . "\n";
-                    $out .= ' ... ' . "\n";
-                    for($i = $p->getLastPage() - $p->getNbLinks() + 2 ; $i <= $p->getLastPage() ; $i++) {
+                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getFirstPage().'" class="unselectedpage">'.$p->getFirstPageNum().'</a>';
+                    $out .= '…';
+                    for ($i = $p->getLastPage() - $p->getNbLinks() + 2 ; $i <= $p->getLastPage() ; $i++) {
                         $p->setCurrentPage($i);
-                        $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>' . "\n";
+                        $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>';
                     }
                 } else {
                     // type milieu : 1 ... 24 25 26 ... 50
-                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getFirstPage().'" class="unselectedpage">'.$p->getFirstPageNum().'</a>' . "\n";
-                    $out .= ' ... ';
-                    for($i = ($p->getSelectedPage() - floor($p->getNbLinks() / 2) + 1) ; $i < ($p->getSelectedPage() + floor($p->getNbLinks() / 2)) ; $i++) {
+                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getFirstPage().'" class="unselectedpage">'.$p->getFirstPageNum().'</a>';
+                    $out .= '…';
+                    for ($i = ($p->getSelectedPage() - floor($p->getNbLinks() / 2) + 1) ; $i < ($p->getSelectedPage() + floor($p->getNbLinks() / 2)) ; $i++) {
                         $p->setCurrentPage($i);
-                        $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>' . "\n";
+                        $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>';
                     }
-                    $out .= ' ... ' . "\n";
-                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getLastPage().'" class="unselectedpage">'.$p->getLastPageNum().'</a>' . "\n";
+                    $out .= '…';
+                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getLastPage().'" class="unselectedpage">'.$p->getLastPageNum().'</a>';
                 }
             }
             $out .= '</div>';

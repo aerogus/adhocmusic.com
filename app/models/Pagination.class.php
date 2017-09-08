@@ -111,7 +111,7 @@ class Pagination
      */
     function setSelectedPage($nb)
     {
-        if(($nb >= $this->getFirstPage()) && ($nb <= $this->getLastPage())) {
+        if (($nb >= $this->getFirstPage()) && ($nb <= $this->getLastPage())) {
             $this->_selected_page = (int) $nb;
         }
     }
@@ -153,7 +153,7 @@ class Pagination
      */
     function setCurrentPage($nb)
     {
-        if(($nb >= $this->getFirstPage()) && ($nb <= $this->getLastPage())) {
+        if (($nb >= $this->getFirstPage()) && ($nb <= $this->getLastPage())) {
             $this->_current_page = (int) $nb;
         }
     }
@@ -203,7 +203,7 @@ class Pagination
      */
     function getLastPage()
     {
-        if($this->hasPagination()) {
+        if ($this->hasPagination()) {
             return floor(($this->getNbItems() - 1) / $this->getNbItemsPerPage());
         }
         return 0;
@@ -256,7 +256,7 @@ class Pagination
      */
     function getClass()
     {
-        if($this->getSelectedPage() === $this->getCurrentPage()) {
+        if ($this->getSelectedPage() === $this->getCurrentPage()) {
             return 'selectedpage';
         }
         return 'unselectedpage';
