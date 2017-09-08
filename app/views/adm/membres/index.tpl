@@ -8,7 +8,7 @@ $(function() {
   // recup param sort
   // recup param page
   // gestion params pseudo&last_name&first_name&email&with_groupe&id_type_membre&id_type_musicien
-  $("#pseudo").keyup(function() {
+  $("#pseudo").keyup(function () {
     var req = $(this).attr("value");
     $.getJSON('/adm/membres/ajax-search', { q:req }, function(data) {
       $("#suggests").empty();
