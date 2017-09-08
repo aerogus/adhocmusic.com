@@ -74,7 +74,7 @@ class DataBase
     /**
      * charser à utiliser pour la connexion
      */
-    protected $_charset = 'UTF8';
+    protected $_charset = 'utf8mb4';
 
     /**
      *
