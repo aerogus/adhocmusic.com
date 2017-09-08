@@ -1,19 +1,5 @@
 {include file="common/header.tpl"}
 
-<script>
-$(function() {
-    $(".toggle").hover(function () {
-        var toggle_id = $(this).attr('id').replace('toggle_', '');
-        $("#msg_" + toggle_id).toggle();
-    });
-    $(".thread-avatar").hover(function () {
-        $(this).addClass('thread-avatar-full');
-    }, function() {
-        $(this).removeClass('thread-avatar-full');
-    });
-});
-</script>
-
 {include file="common/boxstart.tpl" boxtitle="Forum : {$forum.title|escape}"}
 
 <div class="subscribers round-corners-all">
