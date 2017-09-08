@@ -1041,17 +1041,17 @@ class Groupe extends ObjectModel
         parent::delete();
 
         $p = self::getBasePath() . '/p' . $this->getId() . '.jpg';
-        if(file_exists($p)) {
+        if (file_exists($p)) {
             unlink($p);
         }
 
         $m = self::getBasePath() . '/m' . $this->getId() . '.jpg';
-        if(file_exists($m)) {
+        if (file_exists($m)) {
             unlink($m);
         }
 
         $l = self::getBasePath() . '/l' . $this->getId() . '.jpg';
-        if(file_exists($l)) {
+        if (file_exists($l)) {
             unlink($l);
         }
 
