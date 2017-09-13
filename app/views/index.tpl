@@ -1,5 +1,9 @@
 {include file="common/header.tpl"}
 
+<div class="info">
+  <p>Prochain événement : <a href="/events/6828">Samedi 7 octobre 1017 - Concert Rock / Folk + Expo Light Painting à Épinay-sur-Orge</a></p>
+</div>
+
 <div id="swipe" class="swipe clearfix">
   <ul class="swipe-wrap">
     {foreach from=$featured key=idx item=f}
