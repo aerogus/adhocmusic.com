@@ -332,7 +332,7 @@ class Event extends ObjectModel
      */
     function getFacebookEventUrl()
     {
-        return 'http://www.facebook.com/events/' . (string) $this->_facebook_event_id . '/';
+        return 'https://www.facebook.com/events/' . (string) $this->_facebook_event_id . '/';
     }
 
     /**
@@ -356,7 +356,7 @@ class Event extends ObjectModel
      */
     function getFullFlyerUrl()
     {
-        if(file_exists(self::getBasePath()  . '/' . $this->_id_event . '.jpg')) {
+        if (file_exists(self::getBasePath()  . '/' . $this->_id_event . '.jpg')) {
             return self::getBaseUrl() . '/' . $this->_id_event . '.jpg';
         }
         return false;
@@ -499,7 +499,7 @@ class Event extends ObjectModel
     function setFacebookEventId($val)
     {
         // pour les boulets qui copient/collent toute l'url
-        if(preg_match('#^https?://w{0,3}\.facebook.com/events/([0-9]{1,24})/{0,1}$#', $val, $matches)) {
+        if (preg_match('#^https?://w{0,3}\.facebook.com/events/([0-9]{1,24})/{0,1}$#', $val, $matches)) {
             $val = $matches[1];
         }
         $val = str_replace('/', '', trim($val));
