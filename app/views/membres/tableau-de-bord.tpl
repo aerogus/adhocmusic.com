@@ -1,8 +1,8 @@
 {include file="common/header.tpl"}
 
 {if $me->isInterne()}
-<div style="margin-bottom:2em">
-   <a style="display:block;background:#f99;padding:5px;border:1px solid" href="/adm/">🔗 <strong>Accès zone privée</strong></a>
+<div class="info">
+   <a href="/adm/">🔗 <strong>Accès zone privée</strong></a>
 </div>
 {/if}
 
