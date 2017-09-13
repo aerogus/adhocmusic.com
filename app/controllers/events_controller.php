@@ -168,16 +168,17 @@ class Controller
 
         $smarty->assign('groupes', $event->getGroupes());
 
-        if($event->getIdContact()) {
+        if ($event->getIdContact()) {
             try {
+                // le membre peut avoir été supprimé ...
                 $membre = Membre::getInstance($event->getIdContact());
                 $smarty->assign('membre', $membre);
-            } catch(Exception $e) {
-                mail('gus@adhocmusic.com', "[AD'HOC] Bug : evenement avec membre introuvable", print_r($e, true));
+            } catch (Exception $e) {
+                mail('gus@adhocmusic.com', "[AD'HOC] Bug : evenement " . $event->getId() . " avec membre " . $event->getIdContact() . " introuvable", print_r($e, true));
             }
         }
 
-        if(file_exists(ADHOC_ROOT_PATH . '/static/media/event/' . $event->getId() . '.jpg')) {
+        if (file_exists(ADHOC_ROOT_PATH . '/static/media/event/' . $event->getId() . '.jpg')) {
             $smarty->assign('flyer', true);
             $smarty->assign('og_image', $event->getFlyerUrl($event->getId()));
         }
