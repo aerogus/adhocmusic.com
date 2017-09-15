@@ -66,7 +66,7 @@ $(function() {
 
 <div class="subscribers round-corners-all">
 {foreach from=$subs item=sub}
-<a href="/membres/{$sub.id_contact}" title="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}"><img src="/media/membre/ca/{$sub.id_contact}.jpg" class="thread-avatar" alt="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}" /></a>
+<a href="/adm/membres/{$sub.id_contact}" title="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}"><img src="/media/membre/ca/{$sub.id_contact}.jpg" class="thread-avatar" alt="{$sub.pseudo|escape} - {$sub.port|escape} - {$sub.email|escape}" /></a>
 {/foreach}
 <br style="clear: both">
 </div>
