@@ -67,7 +67,7 @@ class Audio extends Media
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      * @var array
      */
-    protected $_modified_fields = array();
+    protected $_modified_fields = [];
 
     /* début getters */
 
@@ -117,7 +117,7 @@ class Audio extends Media
      */
     function getDirectUrl()
     {
-        return self::getBasePath() . '/' . $this->getId() . '.mp3';
+        return self::getBaseUrl() . '/' . $this->getId() . '.mp3';
     }
 
     /* fin getters */
