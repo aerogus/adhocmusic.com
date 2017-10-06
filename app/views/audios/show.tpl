@@ -6,22 +6,8 @@
 
 {else}
 
-<link rel="stylesheet" href="/js/jplayer.blue.monday/jplayer.blue.monday.css">
-<script src="/js/jquery.jplayer.min.js"></script>
-
 <script>
-$(function() {
-  $("#jquery_jplayer_1").jPlayer( {
-    ready: function (event) {
-      $(this).jPlayer("setMedia", {
-        mp3: "{$audio->getDirectUrl()}"
-      });
-    },
-    swfPath: "/js",
-    supplied: "mp3",
-    wmode: "window"
-  });
-});
+var audio_url = '{$og_audio.url}';
 </script>
 
 {include file="common/boxstart.tpl" boxtitle=$audio->getName()|escape}

@@ -21,13 +21,13 @@ class Controller
         $id = (int) Route::params('id');
         $online = (bool) Route::params('online');
 
-        if($id) {
+        if ($id) {
             $audio = Audio::getInstance($id);
             $audio->setOnline($online);
             $audio->save();
         }
 
-        if($_SESSION['membre']->getId() == 1) {
+        if ($_SESSION['membre']->getId() == 1) {
             $audios = Audio::getAudios(array(
                 'debut'   => $page * NB_AUDIOS_PER_PAGE,
                 'limit'   => NB_AUDIOS_PER_PAGE,
@@ -72,6 +72,10 @@ class Controller
             return $smarty->fetch('audios/show.tpl');
         }
 
+        $smarty->enqueue_style('/js/jplayer.blue.monday/jplayer.blue.monday.css');
+        $smarty->enqueue_script('/js/jquery.jplayer.min.js');
+        $smarty->enqueue_script('/js/audio-show.js');
+
         $trail = Trail::getInstance();
 
         $meta_description = "Titre : " . $audio->getName();
@@ -79,7 +83,7 @@ class Controller
         $smarty->assign('og_type', 'adhocmusic:song');
         $smarty->assign('og_push_listen_to_song', true);
 
-        if($audio->getIdGroupe()) {
+        if ($audio->getIdGroupe()) {
             $groupe = Groupe::getInstance($audio->getIdGroupe());
             $smarty->assign('groupe', $groupe);
             $smarty->assign('title', $audio->getName() . ' - ' . $groupe->getName());
@@ -97,7 +101,7 @@ class Controller
             $trail->addStep("Média", "/medias/");
         }
 
-        if($audio->getIdEvent()) {
+        if ($audio->getIdEvent()) {
             $event = Event::getInstance($audio->getIdEvent());
             $smarty->assign('event', $event);
             $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysql_datetime($event->getDate(), "d/m/Y") . ")";
