@@ -1,7 +1,7 @@
 {include file="common/header.tpl"}
 
 <div class="info">
-  <p>Prochain événement : <a href="/events/6828">Samedi 7 octobre 1017 - Concert Rock / Folk + Expo Light Painting à Épinay-sur-Orge</a></p>
+  <p>Prochain événement : <a href="/events/6834">Vendredi 22 décembre 1017 - AfterWork S03E03 à Épinay-sur-Orge</a></p>
 </div>
 
 <div id="swipe" class="swipe clearfix">
