@@ -21,7 +21,6 @@
           <li><a href="/mentions-legales">Mentions Légales</a></li>
           <li><a href="/partners">Partenaires</a></li>
           <li><a href="/visuels">Visuels</a></li>
-          <li><a href="/hosting">Hébergement</a></li>
         </ul>
       </li>
       <li>
