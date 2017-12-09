@@ -150,7 +150,6 @@
 1|index|shop|GET|/shop
 1|index|partners|GET|/partners
 1|index|visuels|GET|/visuels
-1|index|hosting|GET|/hosting
 1|index|contact|GET|/contact
 1|index|contact|POST|/contact
 1|index|sitemap|GET|/sitemap
