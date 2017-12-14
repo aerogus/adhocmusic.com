@@ -21,16 +21,15 @@ class AdHocClientApi
     static function query($data)
     {
         $params = '';
-        foreach($data as $field => $value) {
+        foreach ($data as $field => $value) {
             $params .= $field . '=' . $value . '&';
         }
 
         $resp = file_get_contents(self::API_URL . '/' . self::API_VERSION . '/' . $data['action'] . '.' . self::API_FORMAT . '?' . substr($params, 0, -1));
 
-        if(self::API_FORMAT === 'json') {
+        if (self::API_FORMAT === 'json') {
             return json_decode($resp);
         }
         return $resp;
     }
 }
-

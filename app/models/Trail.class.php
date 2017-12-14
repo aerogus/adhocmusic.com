@@ -13,7 +13,7 @@ class Trail
     /**
      * @var array
      */
-    protected $_path = array();
+    protected $_path = [];
 
     /**
      *
