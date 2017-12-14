@@ -2,8 +2,8 @@
 
 jQuery(document).ready(function ($) {
 
-    'use strict';
+  'use strict';
 
-    $('video').mediaelementplayer();
+  $('video').mediaelementplayer();
 
 });

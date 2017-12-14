@@ -25,7 +25,7 @@ $(function () {
       .css('left', x-16 + 'px')
       .show();
   }
-  
+
   // click sur confirmer
   $('.yes').click(function (e) {
     e.stopPropagation();
@@ -34,7 +34,7 @@ $(function () {
     overlay();
     modal = false;
   });
-  
+
   // click sur annuler
   $('.no').click(function (e) {
     e.stopPropagation();
@@ -87,4 +87,3 @@ $(function () {
   }
 
 });
-

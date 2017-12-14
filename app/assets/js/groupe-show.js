@@ -2,9 +2,8 @@
 
 jQuery(document).ready(function ($) {
 
-    'use strict';
+  'use strict';
 
-    console.log('groupe show');
+  console.log('groupe show');
 
 });
-
