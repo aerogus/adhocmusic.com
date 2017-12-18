@@ -591,12 +591,12 @@ class Video extends Media
             case self::HOST_YOUTUBE:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '';
                 if($iframe) {
-                    return '<iframe title="'.htmlspecialchars($this->getName()).'" width="'.$this->getWidth().'" height="'.$this->getHeight().'" src="http://www.youtube.com/embed/'.$this->_reference.'?rel=0" frameborder="0" allowfullscreen></iframe>' . "\n";
+                    return '<iframe title="'.htmlspecialchars($this->getName()).'" width="'.$this->getWidth().'" height="'.$this->getHeight().'" src="https://www.youtube.com/embed/'.$this->_reference.'?rel=0" frameborder="0" allowfullscreen></iframe>' . "\n";
                 } else {
                     return '<object width="'.$this->getWidth().'" height="'.$this->getHeight().'">' . "\n"
-                     . '<param name="movie" value="http://www.youtube.com/v/'.$this->_reference.'&amp;autoplay='.$strautoplay.'"></param>' . "\n"
+                     . '<param name="movie" value="https://www.youtube.com/v/'.$this->_reference.'&amp;autoplay='.$strautoplay.'"></param>' . "\n"
                      . '<param name="wmode" value="transparent"></param>' . "\n"
-                     . '<embed src="http://www.youtube.com/v/'.$this->_reference.'&amp;autoplay='.$strautoplay.'" type="application/x-shockwave-flash" wmode="transparent" width="'.$this->getWidth().'" height="'.$this->getHeight().'"></embed>' . "\n"
+                     . '<embed src="https://www.youtube.com/v/'.$this->_reference.'&amp;autoplay='.$strautoplay.'" type="application/x-shockwave-flash" wmode="transparent" width="'.$this->getWidth().'" height="'.$this->getHeight().'"></embed>' . "\n"
                      . '</object>' . "\n";
                 }
 
@@ -604,13 +604,13 @@ class Video extends Media
                 $autoplay ? $strautoplay = '1' : $strautoplay = '0';
                 // taille par défaut : l330 / h267
                 if($iframe) {
-                    return '<iframe frameborder="0" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" src="http://www.dailymotion.com/embed/video/'.$this->_reference.'?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&autoPlay='.$strautoplay.'&wmode=transparent"></iframe>' . "\n";
+                    return '<iframe frameborder="0" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" src="https://www.dailymotion.com/embed/video/'.$this->_reference.'?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&autoPlay='.$strautoplay.'&wmode=transparent"></iframe>' . "\n";
                 } else {
                     return '<object width="'.self::WIDTH.'" height="'.self::HEIGHT.'">' . "\n"
-                         . '<param name="movie" value="http://www.dailymotion.com/swf/'.$this->_reference.'&amp;autoplay='.$strautoplay.'"></param>' . "\n"
+                         . '<param name="movie" value="https://www.dailymotion.com/swf/'.$this->_reference.'&amp;autoplay='.$strautoplay.'"></param>' . "\n"
                          . '<param name="wmode" value="transparent"></param>' . "\n"
                          . '<param name="allowfullscreen" value="true"></param>' . "\n"
-                         . '<embed src="http://www.dailymotion.com/swf/'.$this->_reference.'&amp;autoplay='.$strautoplay.'" type="application/x-shockwave-flash" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" allowfullscreen="true" wmode="transparent"></embed>' . "\n"
+                         . '<embed src="https://www.dailymotion.com/swf/'.$this->_reference.'&amp;autoplay='.$strautoplay.'" type="application/x-shockwave-flash" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" allowfullscreen="true" wmode="transparent"></embed>' . "\n"
                          . '</object>' . "\n";
                 }
 
@@ -664,7 +664,7 @@ class Video extends Media
                      . '<param name="allowfullscreen" value="true" />' . "\n"
                      . '<param name="allowscriptaccess" value="always" />' . "\n"
                      . '<param name="movie" value="http://www.facebook.com/v/'.$this->_reference.'" />' . "\n"
-                     . '<embed src="http://www.facebook.com/v/'.$this->_reference.'" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'.self::WIDTH.'" height="'.self::HEIGHT.'">' . "\n"
+                     . '<embed src="https://www.facebook.com/v/'.$this->_reference.'" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'.self::WIDTH.'" height="'.self::HEIGHT.'">' . "\n"
                      . '</embed>' . "\n"
                      . '</object>' . "\n";
 
