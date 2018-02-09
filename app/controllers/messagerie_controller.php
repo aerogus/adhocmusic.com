@@ -107,13 +107,13 @@ class Controller
 
             $dest = Membre::getInstance($to);
 
-            $data = array(
+            $data = [
                 'pseudo_from' => $_SESSION['membre']->getPseudo(),
                 'pseudo_to' => $dest->getPseudo(),
                 'text' => $text,
-            );
+            ];
 
-            if(Email::send($dest->getEmail(), "Vous avez reçu un message privé", 'message-received', $data)) {
+            if (Email::send($dest->getEmail(), "Vous avez reçu un message privé", 'message-received', $data)) {
                 Log::action(Log::ACTION_MESSAGE, $to);
                 Tools::redirect('/messagerie/?sent=1');
             } else {
@@ -123,7 +123,7 @@ class Controller
         }
 
         $pseudo = (string) Route::params('pseudo');
-        if(!($id = Membre::getIdByPseudo($pseudo))) {
+        if (!($id = Membre::getIdByPseudo($pseudo))) {
             die('KO');
         }
 
@@ -151,7 +151,7 @@ class Controller
                 $champ = "del_to";
                 break;
             default:
-                return array('status' => 'KO');
+                return ['status' => 'KO'];
                 break;
         }
 
@@ -163,6 +163,6 @@ class Controller
 
         $db->query($sql);
 
-        return array('status' => 'OK');
+        return ['status' => 'OK'];
     }
 }

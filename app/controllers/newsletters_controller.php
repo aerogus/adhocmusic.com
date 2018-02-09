@@ -9,10 +9,10 @@ class Controller
         $trail = Trail::getInstance();
         $trail->addStep("Newsletters");
 
-        $smarty->assign('newsletters', Newsletter::getNewsletters(array(
+        $smarty->assign('newsletters', Newsletter::getNewsletters([
             'sens' => 'DESC',
             'limit' => 50,
-        )));
+        ]));
 
         return $smarty->fetch('newsletters/index.tpl');
     }

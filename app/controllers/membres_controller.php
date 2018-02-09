@@ -31,12 +31,12 @@ class Controller
 
         $ids_photo = Membre::getTaggedPhotos($membre->getId());
         if(mb_strlen($ids_photo) > 0) {
-            $smarty->assign('photos', Photo::getPhotos(array(
+            $smarty->assign('photos', Photo::getPhotos([
                 'online' => true,
                 'sort'   => 'random',
                 'limit'  => 500,
                 'id'     => $ids_photo,
-            )));
+            ]));
         }
 
         return $smarty->fetch('membres/show.tpl');
@@ -68,7 +68,7 @@ class Controller
         $smarty->assign('create', (bool) Route::params('create'));
 
         // valeurs par défaut
-        $data = array(
+        $data = [
             'pseudo'         => '',
             'email'          => '',
             'last_name'      => '',
@@ -81,21 +81,21 @@ class Controller
             'id_city'        => '',
             'mailing'        => true,
             'csrf'           => '',
-        );
+        ];
 
-        if(Tools::isSubmit('form-member-create'))
+        if (Tools::isSubmit('form-member-create'))
         {
             $cp = '';
             $city = '';
 
             $country = WorldCountry::getName((string) Route::params('id_country'));
-            if(((string) Route::params('id_country') === 'FR') && ((int) Route::params('id_city') > 0)) {
+            if (((string) Route::params('id_country') === 'FR') && ((int) Route::params('id_city') > 0)) {
                 //$city = City::getInstance((int) Route::params('id_city'));
                 $cp = City::getCp((int) Route::params('id_city'));
                 $city = City::getName((int) Route::params('id_city'));
             }
 
-            $data = array(
+            $data = [
                 'pseudo'         => trim((string) Route::params('pseudo')),
                 'email'          => trim(strtolower((string) Route::params('email'))),
                 'last_name'      => trim((string) Route::params('last_name')),
@@ -109,13 +109,13 @@ class Controller
                 'id_departement' => trim((string) Route::params('id_departement')),
                 'mailing'        => (bool) Route::params('mailing'),
                 'csrf'           => '',
-            );
+            ];
 
-            if(self::_validate_form_member_create($data, $errors)) {
+            if (self::_validate_form_member_create($data, $errors)) {
 
                 $data['password'] = Membre::generatePassword(8);
 
-                if(empty($errors)) {
+                if (empty($errors)) {
 
                     $membre = Membre::init();
                     $membre->setEmail($data['email']);
@@ -167,7 +167,7 @@ class Controller
      */
     protected static function _validate_form_member_create($data, &$errors)
     {
-        $errors = array();
+        $errors = [];
         if (empty($data['pseudo'])) {
             $errors['pseudo'] = true;
         }
@@ -218,7 +218,7 @@ class Controller
         {
             $member = $_SESSION['membre'];
 
-            $data = array(
+            $data = [
                 'last_name' => trim((string) Route::params('last_name')),
                 'first_name' => trim((string) Route::params('first_name')),
                 'address' => trim((string) Route::params('address')),
@@ -235,9 +235,9 @@ class Controller
                 'email' => trim((string) Route::params('email')),
                 'site' => trim((string) Route::params('site')),
                 'mailing' => (bool) Route::params('mailing'),
-            );
+            ];
 
-            if(self::_validate_form_member_edit($data, $errors)) {
+            if (self::_validate_form_member_edit($data, $errors)) {
 
                 $member->setLastName($data['last_name']);
                 $member->setFirstName($data['first_name']);
@@ -259,12 +259,12 @@ class Controller
 
                 $member->save();
 
-                if($member->isInterne()) {
+                if ($member->isInterne()) {
                     $forum = Route::params('forum');
                     ForumPrive::delAllSubscriptions($member->getId());
-                    if(is_array($forum)) {
-                        foreach($forum as $f => $val) {
-                            if($val === 'on') {
+                    if (is_array($forum)) {
+                        foreach ($forum as $f => $val) {
+                            if ($val === 'on') {
                                 ForumPrive::addSubscriberToForum($member->getId(), $f);
                             }
                         }
@@ -272,8 +272,8 @@ class Controller
                 }
 
                 /* traitement de la photo officielle envoyée (112*174) */
-                if($member->isInterne()) {
-                    if(is_uploaded_file($_FILES['photo']['tmp_name'])) {
+                if ($member->isInterne()) {
+                    if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
                         $img = new Image($_FILES['photo']['tmp_name']);
                         $img->setType(IMAGETYPE_JPEG);
                         $img->setMaxWidth(112);
@@ -285,7 +285,7 @@ class Controller
                 }
 
                 /* traitement de l'avatar (112*---) */
-                if(is_uploaded_file($_FILES['avatar']['tmp_name'])) {
+                if (is_uploaded_file($_FILES['avatar']['tmp_name'])) {
                     $img = new Image($_FILES['avatar']['tmp_name']);
                     $img->setType(IMAGETYPE_JPEG);
                     $img->setMaxWidth(112);
@@ -302,7 +302,7 @@ class Controller
             } else {
 
                 if (!empty($errors)) {
-                    foreach($errors as $k => $v) {
+                    foreach ($errors as $k => $v) {
                         $smarty->assign('error_' . $k, $v);
                     }
                 }
@@ -314,7 +314,7 @@ class Controller
         
         $fb_me = false;
 
-        if($_SESSION['membre']->getFacebookAccessToken()) {
+        if ($_SESSION['membre']->getFacebookAccessToken()) {
             $GLOBALS['fb']->setDefaultAccessToken($_SESSION['membre']->getFacebookAccessToken());
             try {
                 $response = $GLOBALS['fb']->get('/me?fields=picture,email,first_name,last_name');
@@ -324,7 +324,7 @@ class Controller
                     'last_name' => $userNode->getField('last_name'),
                     'picture' => $userNode->getField('picture')->getUrl()
                 ]);
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 // app non autorisée ?
                 $_SESSION['redirect_after_auth'] = HOME_URL . '/membres/edit';
             }
@@ -333,7 +333,7 @@ class Controller
             $_SESSION['redirect_after_auth'] = HOME_URL . '/membres/edit';
         }
 
-        if($_SESSION['membre']->isInterne()) {
+        if ($_SESSION['membre']->isInterne()) {
             $smarty->assign('forum', ForumPrive::getSubscribedForums($_SESSION['membre']->getId()));
         }
 
@@ -348,7 +348,7 @@ class Controller
      */
     protected static function _validate_form_member_edit($data, &$errors)
     {
-        $errors = array();
+        $errors = [];
         if (empty($data['email'])) {
             $errors['email'] = true;
         } elseif(!Email::validate($data['email'])) {
@@ -392,7 +392,7 @@ class Controller
                 Log::action(Log::ACTION_MEMBER_DELETE, $id);
 
                 // destruction de la session
-                $_SESSION = array();
+                $_SESSION = [];
                 if (ini_get("session.use_cookies")) {
                     $params = session_get_cookie_params();
                     setcookie(session_name(), '', time() - 42000,
@@ -416,7 +416,7 @@ class Controller
         $q = trim((string) Route::params('q'));
 
         if(strlen($q) < 1) {
-            return array();
+            return [];
         }
 
         $db = DataBase::getInstance();
@@ -489,31 +489,31 @@ class Controller
 
         $smarty->assign('groupes', Groupe::getMyGroupes());
 
-        $smarty->assign('photos', Photo::getPhotos(array(
+        $smarty->assign('photos', Photo::getPhotos([
             'contact' => $_SESSION['membre']->getId(),
             'limit'   => 4,
             'debut'   => 0,
             'sort'    => 'id',
             'sens'    => 'DESC',
-        )));
+        ]));
         $smarty->assign('nb_photos', Photo::getMyPhotosCount());
 
-        $smarty->assign('videos', Video::getVideos(array(
+        $smarty->assign('videos', Video::getVideos([
             'contact' => $_SESSION['membre']->getId(),
             'limit'   => 4,
             'debut'   => 0,
             'sort'    => 'id',
             'sens'    => 'DESC',
-        )));
+        ]));
         $smarty->assign('nb_videos', Video::getMyVideosCount());
 
-        $smarty->assign('audios', Audio::getAudios(array(
+        $smarty->assign('audios', Audio::getAudios([
             'contact' => $_SESSION['membre']->getId(),
             'debut'   => 0,
             'limit'   => 5,
             'sort'    => 'id',
             'sens'    => 'DESC',
-        )));
+        ]));
         $smarty->assign('nb_audios', Audio::getMyAudiosCount());
 
         $db = DataBase::getInstance();

@@ -109,28 +109,28 @@ class Controller
             $subject   = (string) Route::params('subject');
             $text      = (string) Route::params('text');
 
-            $msg = ForumPrive::addMessage(array(
+            $msg = ForumPrive::addMessage([
                 'id_contact' => $_SESSION['membre']->getId(),
                 'id_forum'   => $id_forum,
                 'id_thread'  => $id_thread,
                 'subject'    => $subject,
                 'text'       => $text,
-            ));
+            ]);
 
             /* début alerte mail aux abonnés */
 
             $subs = ForumPrive::getSubscribers($msg['id_forum']);
             $forum = ForumPrive::getForum($msg['id_forum']);
-            if(!$subject) {
+            if (!$subject) {
                 $msgs = ForumPrive::getMessages($msg['id_thread']);
                 $subject = $msgs['thread']['subject'];
             }
 
-            if(sizeof($subs)) {
+            if (sizeof($subs)) {
 
-                foreach($subs as $sub) {
+                foreach ($subs as $sub) {
 
-                    $data = array(
+                    $data = [
                         'title' => 'Nouveau message',
                         'pseudo_to' => $sub['pseudo'],
                         'pseudo_from' => $_SESSION['membre']->getPseudo(),
@@ -139,7 +139,7 @@ class Controller
                         'id_thread' => $msg['id_thread'],
                         'subject' => $subject,
                         'text' => $text,
-                    );
+                    ];
 
                     Email::send(
                         $sub['email'],

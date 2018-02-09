@@ -41,12 +41,12 @@ class Controller
 
         $smarty->assign('structure', $structure);
 
-        $smarty->assign('events', Event::getEvents(array(
+        $smarty->assign('events', Event::getEvents([
             'structure' => $structure->getId(),
             'sort'      => 'date',
             'sens'      => 'ASC',
             'limit'     => 500,
-        )));
+        ]));
 
         return $smarty->fetch('structures/show.tpl');
     }
@@ -64,7 +64,7 @@ class Controller
 
         if(Tools::isSubmit('form-structure-create'))
         {
-            $data = array(
+            $data = [
                 'name' => (string) Route::params('name'),
                 'id_departement' => '',
                 'id_country' => 'FR',
@@ -76,9 +76,9 @@ class Controller
                 'text' => '',
                 'site' => '',
                 'email' => '',
-            );
+            ];
 
-            if(self::_validate_form_structure_create($data, $errors))
+            if (self::_validate_form_structure_create($data, $errors))
             {
                 $structure = Structure::init();
                 $structure->setName($data['name']);
@@ -104,7 +104,7 @@ class Controller
      */
     protected static function _validate_form_structure_create($data, &$errors)
     {
-        $errors = array();
+        $errors = [];
 
         if(count($errors)) {
             return false;
@@ -127,11 +127,11 @@ class Controller
 
         if(Tools::isSubmit('form-structure-edit'))
         {
-            $data = array(
+            $data = [
                 'name' => (string) Route::params('name'),
-            );
+            ];
 
-            if(self::_validate_form_structure_edit($data, $errors))
+            if (self::_validate_form_structure_edit($data, $errors))
             {
                 $structure = Structure::getInstance((int) Route::params('id'));
                 $structure->setName($data['name']);
@@ -161,9 +161,9 @@ class Controller
      */
     protected static function _validate_form_structure_edit($data, &$errors)
     {
-        $errors = array();
+        $errors = [];
 
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;

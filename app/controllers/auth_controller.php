@@ -173,7 +173,7 @@ class Controller
             $membre->save();
 
             Log::action(Log::ACTION_LOGOUT);
-            $_SESSION = array();
+            $_SESSION = [];
             if (ini_get("session.use_cookies")) {
                 $params = session_get_cookie_params();
                 setcookie(session_name(), '', time() - 42000,
@@ -241,23 +241,23 @@ class Controller
         $trail->addStep("Membres", "/membres/tableau-de-bord");
         $trail->addStep("Mot de passe perdu");
 
-        if(Tools::isSubmit('form-lost-password'))
+        if (Tools::isSubmit('form-lost-password'))
         {
             $email = (string) Route::params('email');
-            if(Email::validate($email)) {
-                if($id_contact = Membre::getIdByEmail($email)) {
+            if (Email::validate($email)) {
+                if ($id_contact = Membre::getIdByEmail($email)) {
 
                     $membre = Membre::getInstance($id_contact);
                     $new_password = Membre::generatePassword(8);
                     $membre->setPassword($new_password);
                     $membre->save();
 
-                    $data = array(
+                    $data = [
                         'pseudo' => $membre->getPseudo(),
                         'new_password' => $new_password,
-                    );
+                    ];
 
-                    if(Email::send($membre->getEmail(), 'Perte du mot de passe', 'password-lost', $data)) {
+                    if (Email::send($membre->getEmail(), 'Perte du mot de passe', 'password-lost', $data)) {
                         Log::action(Log::ACTION_PASSWORD_REQUESTED);
                         $smarty->assign('sent_ok', true);
                     } else {
@@ -265,7 +265,7 @@ class Controller
                     }
 
                 } else {
-                    if($id_contact = Contact::getIdByEmail($email)) {
+                    if ($id_contact = Contact::getIdByEmail($email)) {
                         // pas membre mais contact
                         $smarty->assign('err_email_unknown', true);
                     } else {
@@ -287,7 +287,7 @@ class Controller
 
     static function check_email()
     {
-        $out = array();
+        $out = [];
         $email = (string) Route::params('email');
         if(Email::validate($email)) {
             if($id_contact = Membre::getIdByEmail($email)) {
@@ -303,7 +303,7 @@ class Controller
 
     static function check_pseudo()
     {
-        $out = array();
+        $out = [];
         $pseudo = (string) Route::params('pseudo');
         if($id_contact = Membre::getIdByPseudo($pseudo)) {
             $out['status'] = 'KO_PSEUDO_UNAVAILABLE';

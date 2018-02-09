@@ -22,7 +22,7 @@ class Controller
     static function regions()
     {
         if(empty($_GET['c'])) {
-            return array();
+            return [];
         }
         $c = strtoupper(substr(trim((string) $_GET['c']), 0, 2));
 
@@ -32,7 +32,7 @@ class Controller
             return $regions[$c];
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -45,7 +45,7 @@ class Controller
      */
     static function departements()
     {
-        $tab = array();
+        $tab = [];
 
         if(!empty($_GET['r'])) {
             $r = substr($_GET['r'], 0, 2);
@@ -73,7 +73,7 @@ class Controller
      */
     static function cities()
     {
-        $tab = array();
+        $tab = [];
 
         if(!empty($_GET['d'])) {
             $d = substr($_GET['d'], 0, 3);
@@ -100,7 +100,7 @@ class Controller
      */
     static function lieux()
     {
-        $tab = array();
+        $tab = [];
 
         if(!empty($_GET['v'])) {
             $id_city = (int) $_GET['v'];

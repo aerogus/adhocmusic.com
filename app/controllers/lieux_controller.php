@@ -204,7 +204,7 @@ class Controller
                 'id_contact'     => $_SESSION['membre']->getId(),
             );
 
-            if(self::_validate_form_lieu_create($data, $errors))
+            if (self::_validate_form_lieu_create($data, $errors))
             {
                 $lieu = Lieu::init();
                 $lieu->setIdCountry($data['id_country']);
@@ -275,11 +275,11 @@ class Controller
      */
     protected static function _validate_form_lieu_create($data, &$errors)
     {
-        $errors = array();
-        if(empty($data['name'])) {
+        $errors = [];
+        if (empty($data['name'])) {
             $errors['name'] = true;
         }
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;
@@ -399,11 +399,11 @@ class Controller
      */
     protected static function _validate_form_lieu_edit($data, &$errors)
     {
-        $errors = array();
-        if(empty($data['name'])) {
+        $errors = [];
+        if (empty($data['name'])) {
             $errors['name'] = true;
         }
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;
@@ -431,9 +431,9 @@ class Controller
             return $smarty->fetch('lieux/delete.tpl');
         }
 
-        if(Tools::isSubmit('form-lieu-delete'))
+        if (Tools::isSubmit('form-lieu-delete'))
         {
-            if($lieu->delete()) {
+            if ($lieu->delete()) {
                 Log::action(Log::ACTION_LIEU_DELETE, $lieu->getId());
                 Tools::redirect('/lieux/?delete=1');
             }
@@ -468,13 +468,13 @@ class Controller
         {
             case 'radius':
                 $distance = (int) Route::params('distance');
-                return Lieu::fetchLieuxByRadius(array(
+                return Lieu::fetchLieuxByRadius([
                     'lat'      => $lat,
                     'lng'      => $lng,
                     'distance' => $distance,
                     'order'    => 'distance',
                     'limit'    => $limit,
-                ));
+                ]);
                 break;
 
             case 'boundary':
@@ -496,7 +496,7 @@ class Controller
                         $lng_min = $lng_tmp;
                     }
                 }
-                return Lieu::fetchLieuxByBoundary(array(
+                return Lieu::fetchLieuxByBoundary([
                     'lat'     => $lat,
                     'lng'     => $lng,
                     'lat_min' => $lat_min,
@@ -504,7 +504,7 @@ class Controller
                     'lng_min' => $lng_min,
                     'lng_max' => $lng_max,
                     'limit'   => $limit,
-                ));
+                ]);
                 break;
 
             case 'admin':
@@ -522,7 +522,7 @@ class Controller
                 break;
 
             default:
-                return array();
+                return [];
                 break;
         }
     }

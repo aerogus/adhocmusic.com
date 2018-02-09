@@ -57,12 +57,12 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $groupes = Groupe::getGroupes(array(
+        $groupes = Groupe::getGroupes([
             'sort'  => $sort,
             'sens'  => $sens,
             'debut' => $page * ADM_NB_GROUPES_PER_PAGE,
             'limit' => ADM_NB_GROUPES_PER_PAGE,
-        ));
+        ]);
 
         $nb_groupes = Groupe::getGroupesCount(null, true);
 
@@ -120,12 +120,12 @@ class Controller
         $last_name = trim((string) Route::params('last_name'));
         $first_name = trim((string) Route::params('first_name'));
 
-        $tab_id = array();
+        $tab_id = [];
         //$with_groupe = (bool) Route::params('with_groupe');
         //$id_groupe = (int) Route::params('id_groupe');
         //$id_type_musicien = (int) Route::params('id_type_musicien');
 
-        $membres = Membre::getMembres(array(
+        $membres = Membre::getMembres([
             /*'id'         => $tab_id,*/
             'pseudo'     => $pseudo,
             'email'      => $email,
@@ -135,7 +135,7 @@ class Controller
             'sens'  => $sens,
             'debut' => $page * ADM_NB_MEMBERS_PER_PAGE,
             'limit' => ADM_NB_MEMBERS_PER_PAGE,
-        ));
+        ]);
 
         $nb_membres = Membre::getMembresCount(); // hors critères !
 
@@ -160,7 +160,7 @@ class Controller
         $smarty->assign('types_membre', Membre::getTypesMembre());
         $smarty->assign('types_musicien', Membre::getTypesMusicien());
 
-        $smarty->assign('search', array(
+        $smarty->assign('search', [
             'pseudo' => $pseudo,
             'last_name' => $last_name,
             'first_name' => $first_name,
@@ -168,7 +168,7 @@ class Controller
             'with_groupe' => false,
             'id_groupe' => 0,
             'id_type_musicien' => 0,
-        ));
+        ]);
 
         // pagination
         $smarty->assign('nb_items', $nb_membres);
@@ -244,7 +244,7 @@ class Controller
         $smarty->assign('title', "AD'HOC : Administration du site");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
-        $modules = array(
+        $modules = [
             '1' => "Inscriptions membres par mois",
             '2' => "Inscriptions groupes par mois",
             '3' => "Top contributeurs photos",
@@ -264,7 +264,7 @@ class Controller
             'I' => "Nombre d'événements annoncés par mois",
             'J' => "Répartition des vidéos par hébergeur",
             'K' => "Nombre de photos par lieu",
-        );
+        ];
 
         $smarty->assign('modules', $modules);
 
@@ -337,7 +337,7 @@ class Controller
 
         $rows = $db->queryWithFetch($sql);
 
-        $tab = array();
+        $tab = [];
         foreach($rows as $row)
         {
             $tab[$row['id_groupe']]['id_groupe'] = $row['id_groupe'];
@@ -349,7 +349,7 @@ class Controller
             );
         }
 
-        $ordre = array();
+        $ordre = [];
         foreach($tab as $id_groupe => $inf)
         {
             $ordre[$id_groupe] = count($inf['events']);
@@ -357,7 +357,7 @@ class Controller
 
         arsort($ordre);
 
-        $data = array();
+        $data = [];
         $rank = 1;
         foreach($ordre as $id_groupe => $nb)
         {
@@ -405,33 +405,33 @@ class Controller
 
         $rows = $db->queryWithFetch($sql);
 
-        $tab = array();
+        $tab = [];
         foreach($rows as $row)
         {
             $tab[$row['id_contact']]['id_contact'] = $row['id_contact'];
             $tab[$row['id_contact']]['first_name'] = $row['first_name'];
             $tab[$row['id_contact']]['last_name'] = $row['last_name'];
-            $tab[$row['id_contact']]['events'][] = array(
+            $tab[$row['id_contact']]['events'][] = [
                 'id_groupe'  => $row['id_groupe'],
                 'nom_groupe' => $row['nom_groupe'],
                 'id_event'   => $row['id_event'],
                 'nom_event'  => $row['nom_event'],
                 'date_event' => $row['date'],
-            );
+            ];
         }
 
-        $ordre = array();
-        foreach($tab as $contact => $inf)
+        $ordre = [];
+        foreach ($tab as $contact => $inf)
         {
             $ordre[$contact] = count($inf['events']);
         }
 
         arsort($ordre);
 
-        $data = array();
+        $data = [];
         $rank = 1;
 
-        foreach($ordre as $id_contact => $nb)
+        foreach ($ordre as $id_contact => $nb)
         {
             $data[$rank] = $tab[$id_contact];
             $data[$rank]['nb'] = $nb;
@@ -529,7 +529,7 @@ class Controller
              . "ORDER BY `name` ASC";
         $res = $db->queryWithFetch($sql);
 
-        $tab_groupes = array();
+        $tab_groupes = [];
         foreach($res as $_res) {
             $tab_groupes[$_res['id']] = $_res;
         }

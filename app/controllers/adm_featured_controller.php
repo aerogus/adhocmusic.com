@@ -42,18 +42,18 @@ class Controller
         $smarty->enqueue_script('/js/adm/featured.js');
 
         // valeurs par défaut
-        $data = array(
+        $data = [
             'title'       => '',
             'description' => '',
             'link'        => '',
             'datdeb'      => '',
             'datfin'      => '',
             'online'      => false,
-        );
+        ];
 
-        if(Tools::isSubmit('form-featured-create'))
+        if (Tools::isSubmit('form-featured-create'))
         {
-            $data = array(
+            $data = [
                 'title'       => trim((string) Route::params('title')),
                 'description' => trim((string) Route::params('description')),
                 'link'        => trim((string) Route::params('link')),
@@ -61,9 +61,9 @@ class Controller
                 'datdeb'      => trim((string) Route::params('datdeb') . ' 00:00:00'),
                 'datfin'      => trim((string) Route::params('datfin') . ' 23:59:59'),
                 'online'      => false,
-            );
+            ];
 
-            if(self::_validate_form($data, $errors)) {
+            if (self::_validate_form($data, $errors)) {
 
                 $f = Featured::init();
                 $f->setTitle($data['title']);
@@ -95,13 +95,13 @@ class Controller
         }
 
         $smarty->assign('data', $data);
-        $smarty->assign('events', Event::getEvents(array(
+        $smarty->assign('events', Event::getEvents([
             'online' => true,
             'datdeb' => date('Y-m-d H:i:s'),
             'sort'   => 'date',
             'sens'   => 'ASC',
             'limit'  => 500,
-        )));
+        ]));
 
         return $smarty->fetch('adm/featured/create.tpl');
     }
@@ -126,7 +126,7 @@ class Controller
         $id = (int) Route::params('id');
         $f = Featured::getInstance($id);
 
-        $data = array(
+        $data = [
             'id'          => $f->getId(),
             'title'       => $f->getTitle(),
             'description' => $f->getDescription(),
@@ -135,11 +135,11 @@ class Controller
             'datdeb'      => $f->getDatDeb(),
             'datfin'      => $f->getDatFin(),
             'online'      => $f->getOnline(),
-        );
+        ];
 
-        if(Tools::isSubmit('form-featured-edit'))
+        if (Tools::isSubmit('form-featured-edit'))
         {
-            $data = array(
+            $data = [
                 'id'          => $f->getId(),
                 'title'       => trim((string) Route::params('title')),
                 'description' => trim((string) Route::params('description')),
@@ -148,9 +148,9 @@ class Controller
                 'datdeb'      => trim((string) Route::params('datdeb') . ' 00:00:00'),
                 'datfin'      => trim((string) Route::params('datfin') . ' 23:59:59'),
                 'online'      => (bool) Route::params('online'),
-            );
+            ];
 
-            if(self::_validate_form($data, $errors)) {
+            if (self::_validate_form($data, $errors)) {
 
                 $f->setTitle($data['title']);
                 $f->setDescription($data['description']);
@@ -193,23 +193,23 @@ class Controller
      */
     protected static function _validate_form($data, &$errors)
     {
-        $errors = array();
-        if(empty($data['title'])) {
+        $errors = [];
+        if (empty($data['title'])) {
             $errors['title'] = "Vous devez saisir un titre";
         }
-        if(empty($data['description'])) {
+        if (empty($data['description'])) {
             $errors['description'] = "Vous devez saisir une description";
         }
-        if(empty($data['link'])) {
+        if (empty($data['link'])) {
             $errors['link'] = "Vous devez saisir un lien de destination";
         }
-        if(empty($data['datdeb'])) {
+        if (empty($data['datdeb'])) {
             $errors['datdeb'] = "Vous devez choisir une date de début de programmation";
         }
-        if(empty($data['datfin'])) {
+        if (empty($data['datfin'])) {
             $errors['datfin'] = "Vous devez saisir une date de fin de programmation";
         }
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;

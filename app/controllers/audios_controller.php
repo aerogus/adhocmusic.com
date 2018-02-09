@@ -28,21 +28,21 @@ class Controller
         }
 
         if ($_SESSION['membre']->getId() == 1) {
-            $audios = Audio::getAudios(array(
+            $audios = Audio::getAudios([
                 'debut'   => $page * NB_AUDIOS_PER_PAGE,
                 'limit'   => NB_AUDIOS_PER_PAGE,
                 'sort'    => 'id',
                 'sens'    => 'ASC',
-            ));
+            ]);
             $nb_audios = Audio::getAudiosCount();
         } else {
-            $audios = Audio::getAudios(array(
+            $audios = Audio::getAudios([
                 'contact' => $_SESSION['membre']->getId(),
                 'debut'   => $page * NB_AUDIOS_PER_PAGE,
                 'limit'   => NB_AUDIOS_PER_PAGE,
                 'sort'    => 'id',
                 'sens'    => 'ASC',
-            ));
+            ]);
             $nb_audios = Audio::getMyAudiosCount();
         }
         $smarty->assign('audios', $audios);

@@ -37,11 +37,11 @@ class Controller
 
         if(Tools::isSubmit('form-faq-create'))
         {
-            $data = array(
+            $data = [
                 'id_category' => (int) Route::params('id_category'),
                 'question'    => (string) Route::params('question'),
                 'answer'      => (string) Route::params('answer'),
-            );
+            ];
 
             $faq = FAQ::init();
             $faq->setIdCategory($data['id_category']);
@@ -74,12 +74,12 @@ class Controller
 
         if(Tools::isSubmit('form-faq-edit'))
         {
-            $data = array(
+            $data = [
                 'id_faq'      => (int) Route::params('id_faq'),
                 'id_category' => (int) Route::params('id_category'),
                 'question'    => (string) Route::params('question'),
                 'answer'      => (string) Route::params('answer'),
-            );
+            ];
 
             $faq = FAQ::getInstance($data['id_faq']);
             $faq->setIdCategory($data['id_category']);

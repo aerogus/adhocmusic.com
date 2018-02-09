@@ -22,13 +22,13 @@ class Controller
         $smarty->assign('edit', (bool) Route::params('edit'));
         $smarty->assign('delete', (bool) Route::params('delete'));
 
-        $photos = Photo::getPhotos(array(
+        $photos = Photo::getPhotos([
             'contact' => $_SESSION['membre']->getId(),
             'limit'   => NB_PHOTOS_PER_PAGE,
             'debut'   => $page * NB_PHOTOS_PER_PAGE,
             'sort'    => 'id',
             'sens'    => 'ASC',
-        ));
+        ]);
         $nb_photos = Photo::getMyPhotosCount();
 
         $smarty->assign('photos', $photos);
@@ -113,8 +113,8 @@ class Controller
             }
             $trail->addStep($photo->getName());
 
-            $tabwho = array();
-            foreach($photo->getTag() as $_who) {
+            $tabwho = [];
+            foreach ($photo->getTag() as $_who) {
                 $mbr = Membre::getInstance($_who['id_contact']);
                 $tabwho[] = '<a href="'.$mbr->getUrl().'"><strong>'.$mbr->getPseudo().'</strong></a>';
             }
@@ -122,15 +122,15 @@ class Controller
             $smarty->assign('who', $who, 'UTF8');
 
             // photo issu d'un album live ?
-            if($photo->getIdEvent() && $photo->getIdLieu()) {
-                $playlist = Photo::getPhotos(array(
+            if ($photo->getIdEvent() && $photo->getIdLieu()) {
+                $playlist = Photo::getPhotos([
                     'online' => true,
                     'event'  => $photo->getIdEvent(),
                     'lieu'   => $photo->getIdLieu(),
                     'sort'   => 'id',
                     'sens'   => 'ASC',
                     'limit'  => 200,
-                ));
+                ]);
 
                 // calcul photo suivante/précente
                 $idx = 0;
@@ -162,13 +162,13 @@ class Controller
             $smarty->assign('title', $meta_title);
             $smarty->assign('description', $meta_description);
 
-            $smarty->assign('comments', Comment::getComments(array(
+            $smarty->assign('comments', Comment::getComments([
                 'type'       => 'p',
                 'id_content' => $photo->getId(),
                 'online'     => true,
                 'sort'       => 'created_on',
                 'sens'       => 'ASC',
-            )));
+            ]));
 
         } else {
 
@@ -186,7 +186,7 @@ class Controller
 
         if(Tools::isSubmit('form-photo-create'))
         {
-            $data = array(
+            $data = [
                 'name' => trim((string) Route::params('name')),
                 'credits' => trim((string) Route::params('credits')),
                 'id_groupe' => (int) Route::params('id_groupe'),
@@ -195,9 +195,9 @@ class Controller
                 'id_contact' => (int) $_SESSION['membre']->getId(),
                 'id_structure' => 0,
                 'online' => (bool) Route::params('online'),
-            );
+            ];
 
-            if(self::_validate_form_photo_create($data, $errors)) {
+            if (self::_validate_form_photo_create($data, $errors)) {
 
                 $photo = Photo::init();
                 $photo->setName($data['name']);
@@ -241,28 +241,28 @@ class Controller
         $smarty->enqueue_script('/js/photo-create.js');
 
         $id_groupe = (int) Route::params('id_groupe');
-        if($id_groupe) {
+        if ($id_groupe) {
             $groupe = Groupe::getInstance($id_groupe);
             $smarty->assign('groupe', $groupe);
         } else {
-            $smarty->assign('groupes', Groupe::getGroupes(array(
+            $smarty->assign('groupes', Groupe::getGroupes([
                 'sort'   => 'name',
                 'sens'   => 'ASC',
-            )));
+            ]));
         }
 
         $id_lieu = (int) Route::params('id_lieu');
-        if($id_lieu) {
+        if ($id_lieu) {
             $lieu = Lieu::getInstance($id_lieu);
             $smarty->assign('lieu', $lieu);
-            $smarty->assign('events', Event::getEvents(array(
+            $smarty->assign('events', Event::getEvents([
                'online' => true,
                'datfin' => date('Y-m-d H:i:s'),
                'lieu'   => $lieu->getId(),
                'sort'   => 'date',
                'sens'   => 'ASC',
                'limit'  => 100,
-           )));
+            ]));
         } else {
             $smarty->assign('dep', Departement::getHashTable());
             $smarty->assign('lieux', Lieu::getLieuxByDep());
@@ -309,13 +309,13 @@ class Controller
             set_time_limit(0); // l'import peut prendre du temps !
 
             // creation repertoire temporaire
-            if(!file_exists(PHOTOS_EXTRACT_DIR)) {
+            if (!file_exists(PHOTOS_EXTRACT_DIR)) {
                 mkdir(PHOTOS_EXTRACT_DIR);
                 Log::write('photo', "création rep tmp");
             }
 
             // extensions à traiter
-            $exts = array('jpg', 'jpeg', 'JPG', 'JPEG');
+            $exts = ['jpg', 'jpeg', 'JPG', 'JPEG'];
 
             // à sécuriser
             $zip_name = PHOTOS_IMPORT_DIR . '/' . trim((string) Route::params('file'));
@@ -578,14 +578,14 @@ class Controller
      */
     protected static function _validate_form_photo_edit($data, &$errors)
     {
-        $errors = array();
-        if(empty($data['name'])) {
+        $errors = [];
+        if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la photo.";
         }
-        if(empty($data['credits'])) {
+        if (empty($data['credits'])) {
             $errors['credits'] = "Vous devez saisir le nom du photographe";
         }
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;

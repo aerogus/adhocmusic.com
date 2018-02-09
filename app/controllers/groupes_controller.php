@@ -96,38 +96,38 @@ class Controller
             }
         }
 
-        $smarty->assign('photos', Photo::getPhotos(array(
+        $smarty->assign('photos', Photo::getPhotos([
             'sort'   => 'random',
             'limit'  => 100,
             'groupe' => (int) $groupe->getId(),
             'online' => true,
-        )));
+        ]));
 
         // concerts à venir
-        $smarty->assign('f_events', Event::getEvents(array(
+        $smarty->assign('f_events', Event::getEvents([
             'datdeb' => date('Y-m-d H:i:s'),
             'sort'   => 'date',
             'sens'   => 'ASC',
             'groupe' => (int) $groupe->getId(),
             'online' => true,
             'limit'  => 50,
-        )));
+        ]));
 
         // concerts passés
-        $smarty->assign('p_events', Event::getEvents(array(
+        $smarty->assign('p_events', Event::getEvents([
             'datfin' => date('Y-m-d H:i:s'),
             'sort'   => 'date',
             'sens'   => 'DESC',
             'groupe' => (int) $groupe->getId(),
             'online' => true,
             'limit'  => 50,
-        )));
+        ]));
 
         $groupe->addVisite();
 
         // alerting
-        if(Tools::isAuth()) {
-            if(!Alerting::getIdByIds($_SESSION['membre']->getId(), 'g', $groupe->getId())) {
+        if (Tools::isAuth()) {
+            if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'g', $groupe->getId())) {
                 $smarty->assign('alerting_sub_url', 'http://www.adhocmusic.com/alerting/sub?type=g&id_content='.$groupe->getId());
             } else {
                 $smarty->assign('alerting_unsub_url', 'http://www.adhocmusic.com/alerting/unsub?type=g&id_content='.$groupe->getId());
@@ -152,7 +152,7 @@ class Controller
         $trail->addStep("Inscription", "/groupes/create");
 
         // valeurs par défaut
-        $data = array(
+        $data = [
             'name'             => '',
             'style'            => '',
             'influences'       => '',
@@ -163,11 +163,11 @@ class Controller
             'myspace'          => '',
             'facebook_page_id' => '',
             'twitter_id'       => '',
-        );
+        ];
 
-        if(Tools::isSubmit('form-groupe-create'))
+        if (Tools::isSubmit('form-groupe-create'))
         {
-            $data = array(
+            $data = [
                 'name'             => (string) Route::params('name'),
                 'style'            => (string) Route::params('style'),
                 'influences'       => (string) Route::params('influences'),
@@ -178,9 +178,9 @@ class Controller
                 'myspace'          => (string) Route::params('myspace'),
                 'facebook_page_id' => (string) Route::params('facebook_page_id'),
                 'twitter_id'       => (string) Route::params('twitter_id'),
-            );
+            ];
 
-            if(self::_validate_form_groupe_create($data, $errors)) {
+            if (self::_validate_form_groupe_create($data, $errors)) {
 
                 $groupe = Groupe::init();
                 $groupe->setName($data['name']);
@@ -197,9 +197,9 @@ class Controller
                 $groupe->setEtat(Groupe::ETAT_ACTIF);
                 $groupe->setOnline(true);
 
-                if($groupe->save()) {
+                if ($groupe->save()) {
 
-                    if(is_uploaded_file($_FILES['lelogo']['tmp_name'])) {
+                    if (is_uploaded_file($_FILES['lelogo']['tmp_name'])) {
                         $img = new Image($_FILES['lelogo']['tmp_name']);
                         $img->setType(IMAGETYPE_JPEG);
                         $img->setKeepRatio(true);
@@ -210,7 +210,7 @@ class Controller
                         $img = '';
                     }
 
-                    if(is_uploaded_file($_FILES['photo']['tmp_name'])) {
+                    if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
                         $img = new Image($_FILES['photo']['tmp_name']);
                         $img->setType(IMAGETYPE_JPEG);
                         $img->setKeepRatio(true);
@@ -221,7 +221,7 @@ class Controller
                         $img = '';
                     }
 
-                    if(is_uploaded_file($_FILES['mini_photo']['tmp_name'])) {
+                    if (is_uploaded_file($_FILES['mini_photo']['tmp_name'])) {
                         $img = new Image($_FILES['mini_photo']['tmp_name']);
                         $img->setType(IMAGETYPE_JPEG);
                         $img->setKeepRatio(false);
@@ -243,7 +243,7 @@ class Controller
             }
 
             if (!empty($errors)) {
-                foreach($errors as $k => $v) {
+                foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
             }
@@ -264,28 +264,28 @@ class Controller
      */
     protected static function _validate_form_groupe_create($data, &$errors)
     {
-        $errors = array();
-        if(empty($data['name'])) {
+        $errors = [];
+        if (empty($data['name'])) {
             $errors['name'] = true;
         }
-        if(empty($data['style'])) {
+        if (empty($data['style'])) {
             $errors['style'] = true;
         }
-        if(empty($data['influences'])) {
+        if (empty($data['influences'])) {
             $errors['influences'] = true;
         }
-        if(empty($data['lineup'])) {
+        if (empty($data['lineup'])) {
             $errors['lineup'] = true;
         }
-        if(empty($data['mini_text'])) {
+        if (empty($data['mini_text'])) {
             $errors['mini_text'] = true;
-        } elseif(mb_strlen($data['mini_text']) > 255) {
+        } elseif (mb_strlen($data['mini_text']) > 255) {
             $errors['mini_text'] = true;
         }
-        if(empty($data['text'])) {
+        if (empty($data['text'])) {
             $errors['text'] = true;
         }
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;

@@ -35,7 +35,7 @@ class Controller
         $query = (string) Route::params('query');
 
         if(mb_strlen($query) < 2) {
-            return array();
+            return [];
         }
 
         if(empty($type)) {
@@ -71,16 +71,16 @@ class Controller
                 break;
         }
 
-        $words  = array();
+        $words  = [];
 
         if ($res = $db->queryWithFetch($sql)) {
-            foreach($res as $_res) {
+            foreach ($res as $_res) {
                 $words[] = $_res['name'];
             }
         }
 
         $db->close();
 
-        return array($req, $words);
+        return [$req, $words];
     }
 }

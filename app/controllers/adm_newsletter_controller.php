@@ -14,10 +14,10 @@ class Controller
         $trail->addStep("Privé", "/adm/");
         $trail->addStep("Newsletter");
 
-        $smarty->assign('newsletters', Newsletter::getNewsletters(array(
+        $smarty->assign('newsletters', Newsletter::getNewsletters([
             'sens' => 'DESC',
             'limit' => 50,
-        )));
+        ]));
         $smarty->assign('nb_sub', Newsletter::getSubscribersCount());
 
         return $smarty->fetch('adm/newsletter/index.tpl');
@@ -29,10 +29,10 @@ class Controller
 
         if(Tools::isSubmit('form-newsletter-create'))
         {
-            $data = array(
+            $data = [
                 'title'   => trim((string) Route::params('title')),
                 'content' => trim((string) Route::params('content')),
-            );
+            ];
 
             $newsletter = Newsletter::init();
             $newsletter->setTitle($data['title']);
@@ -56,10 +56,10 @@ class Controller
         $trail->addStep("Newsletter", "/adm/newsletter/");
         $trail->addStep("Ajout");
 
-        $data = array(
+        $data = [
             'title' => '',
             'content' => '',
-        );
+        ];
 
         $smarty->assign('data', $data);
 

@@ -11,10 +11,10 @@ class Controller
         $trail = Trail::getInstance();
         $trail->addStep("Commentaires", '/comments/');
 
-        $comments = Comment::getComments(array(
+        $comments = Comment::getComments([
             'sort' => 'id',
             'sens' => 'DESC',
-        ));
+        ]);
         $smarty->assign('comments', $comments);
 
         return $smarty->fetch('comments/index.tpl');
@@ -43,14 +43,14 @@ class Controller
         fclose($fp);
         die('hi');
 
-        $data = array(
+        $data = [
             'type'       => (string) Route::params('type'),
             'id_content' => (int) Route::params('id_content'),
             'text'       => (string) Route::params('text'),
             'antispam'   => (string) Route::params('antispam'),
-        );
+        ];
 
-        if(!Tools::isAuth() && $data['antispam'] !== 'oui') {
+        if (!Tools::isAuth() && $data['antispam'] !== 'oui') {
             die('spam not allowed here !');
         }
 

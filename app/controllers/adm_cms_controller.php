@@ -85,7 +85,7 @@ class Controller
 
         if(Tools::isSubmit('form-cms-edit'))
         {
-            $data = array(
+            $data = [
                 'id_cms'       => (int) Route::params('id_cms'),
                 'alias'        => (string) Route::params('alias'),
                 'menuselected' => (string) Route::params('menuselected'),
@@ -94,7 +94,7 @@ class Controller
                 'content'      => (string) Route::params('content'),
                 'online'       => (bool) Route::params('online'),
                 'auth'         => (int) Route::params('auth'),
-            );
+            ];
 
             $cms = CMS::getInstance($data['id_cms']);
             $cms->setAlias($data['alias']);

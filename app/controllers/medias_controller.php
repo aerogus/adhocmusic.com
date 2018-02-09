@@ -12,14 +12,14 @@ class Controller
 
         $smarty->enqueue_script('/js/medias.js');
 
-        $last_media = Media::getMedia(array(
+        $last_media = Media::getMedia([
             'type'   => 'video,photo,audio',
             'sort'   => 'created_on',
             'sens'   => 'DESC',
             'online' => true,
             'limit'  => 6,
             'split'  => true,
-        ));
+        ]);
         $smarty->assign('last_media', $last_media);
 
         $id_groupe = (int) Route::params('groupe');
@@ -32,39 +32,39 @@ class Controller
         $smarty->assign('edit', (bool) Route::params('edit'));
         $smarty->assign('delete', (bool) Route::params('delete'));
 
-        $search_media = array();
+        $search_media = [];
 
         // recup groupes ayant des média
         $smarty->assign('groupes', Groupe::getGroupesWithMedia());
 
-        if($id_groupe) {
-            $search_media = Media::getMedia(array(
+        if ($id_groupe) {
+            $search_media = Media::getMedia([
                 'type'   => 'audio,photo,video',
                 'groupe' => $id_groupe,
                 'online' => true,
-            ));
+            ]);
         }
 
         // recup events ayant des média
         $smarty->assign('events', Event::getEventsWithMedia());
 
-        if($id_event) {
-            $search_media = Media::getMedia(array(
+        if ($id_event) {
+            $search_media = Media::getMedia([
                 'type'   => 'audio,photo,video',
                 'event'  => $id_event,
                 'online' => true,
-            ));
+            ]);
         }
 
         $smarty->assign('search_media', $search_media);
 
-        $comments = Comment::getComments(array(
+        $comments = Comment::getComments([
             'type'  => 's,p,v',
             'sort'  => 'id',
             'sens'  => 'DESC',
             'debut' => 0,
             'limit' => 5,
-        ));
+        ]);
         $smarty->assign('comments', $comments);
 
         return $smarty->fetch('medias/index.tpl');
@@ -76,24 +76,24 @@ class Controller
         $id_event  = (int) Route::params('event');
         $type      = (string) Route::params('type');
 
-        $search_media = array();
+        $search_media = [];
 
-        if($id_groupe) {
-            $search_media = Media::getMedia(array(
+        if ($id_groupe) {
+            $search_media = Media::getMedia([
                 'type'   => $type,
                 'groupe' => $id_groupe,
                 'online' => true,
                 'limit'  => 30,
-            ));
+            ]);
         }
 
-        if($id_event) {
-            $search_media = Media::getMedia(array(
+        if ($id_event) {
+            $search_media = Media::getMedia([
                 'type'   => $type,
                 'event'  => $id_event,
                 'online' => true,
                 'limit'  => 30,
-            ));
+            ]);
         }
 
         $smarty = new AdHocSmarty();
