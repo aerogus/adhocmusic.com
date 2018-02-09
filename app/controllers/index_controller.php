@@ -269,63 +269,6 @@ class Controller
         return $smarty->fetch('mentions-legales.tpl');
     }
 
-    static function hosting()
-    {
-        $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'home');
-
-        $trail = Trail::getInstance();
-        $trail->addStep("Hébergement");
-
-        $smarty->assign('sites', array(
-            array(
-                'title' => 'saisonsenvrac.fr',
-                'name' => "Saisons en vrac",
-                'url' => 'http://www.saisonsenvrac.fr',
-                'image' => '/img/hosting/saisonsenvrac.png',
-                'description' => 'Chansons pour enfants (mais pas que !) au rythme des saisons, par Hugo Barbet',
-            ),
-            array(
-                'title' => 'diemdelam.com',
-                'name' => "Diem Delam",
-                'url' => 'http://www.diemdelam.com',
-                'image' => '/img/hosting/diemdelam.png',
-                'description' => 'Artiste Hip-Hop essonnien',
-            ),
-            array(
-                'title' => 'e-core.fr',
-                'name' => "E-Core",
-                'url' => 'http://www.e-core.fr',
-                'image' => '/img/hosting/e-core.png',
-                'description' => 'Groupe Electro-Rock essonnien',
-            ),
-            array(
-                'title' => 'brucehernandezluthier.fr',
-                'name' => "Bruce Hernandez",
-                'url' => 'http://www.brucehernandezluthier.fr',
-                'image' => '/img/hosting/brucehernandezluthier.png',
-                'description' => 'Luthier longjumellois',
-            ),
-            array(
-                'title' => 'gorygorestudio.com',
-                'name' => "Gorygore",
-                'url' => 'http://www.gorygorestudio.com',
-                'image' => '/img/hosting/gorygore.png',
-                'description' => 'Photographe professionnel',
-            ),
-            array(
-                'title' => 'theholidayarmadillo.net',
-                'name' => "The Holiday Armadillo",
-                'url' => 'http://www.theholidayarmadillo.net',
-                'image' => '/img/hosting/theholidayarmadillo.png',
-                'description' => 'Groupe Rock Progressif essonnien',
-            ),
-        ));
-
-        return $smarty->fetch('hosting.tpl');
-    }
-
     static function cms()
     {
         $id = (int) Route::params('id');
