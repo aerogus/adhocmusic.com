@@ -24,7 +24,7 @@ abstract class Liste
      *
      * @var array
      */
-    protected static $_liste = array();
+    protected static $_liste = [];
 
     /**
      *

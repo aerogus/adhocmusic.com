@@ -87,7 +87,7 @@ class Featured extends ObjectModel
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'datdeb'      => 'str',
         'datfin'      => 'str',
         'title'       => 'str',
@@ -95,7 +95,7 @@ class Featured extends ObjectModel
         'link'        => 'str',
         'slot'        => 'num',
         'online'      => 'bool',
-    );
+    ];
 
     /* début getters */
 
@@ -343,7 +343,7 @@ class Featured extends ObjectModel
 
         $res = $db->queryWithFetch($sql);
 
-        $tab = array();
+        $tab = [];
         if(is_array($res))
         {
             $cpt = 0;

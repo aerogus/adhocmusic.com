@@ -430,25 +430,25 @@ class Controller
      */
     protected static function _validate_form_groupe_edit($data, &$errors)
     {
-        $errors = array();
-        if(empty($data['style'])) {
+        $errors = [];
+        if (empty($data['style'])) {
             $errors['style'] = true;
         }
-        if(empty($data['influences'])) {
+        if (empty($data['influences'])) {
             $errors['influences'] = true;
         }
-        if(empty($data['lineup'])) {
+        if (empty($data['lineup'])) {
             $errors['lineup'] = true;
         }
-        if(empty($data['mini_text'])) {
+        if (empty($data['mini_text'])) {
             $errors['mini_text'] = true;
-        } elseif(mb_strlen($data['mini_text']) > 255) {
+        } elseif (mb_strlen($data['mini_text']) > 255) {
             $errors['mini_text'] = true;
         }
-        if(empty($data['text'])) {
+        if (empty($data['text'])) {
             $errors['text'] = true;
         }
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;

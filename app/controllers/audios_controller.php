@@ -250,7 +250,7 @@ class Controller
      */
     protected static function _validate_form_audio_create($data, &$errors)
     {
-        $errors = array();
+        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = true;
         }
@@ -368,7 +368,7 @@ class Controller
      */
     protected static function _validate_form_audio_edit($data, &$errors)
     {
-        $errors = array();
+        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = true;
         }

@@ -60,7 +60,7 @@ class CMS extends ObjectModel
     /**
      * @var array
      */
-    protected $_breadcrumb = array();
+    protected $_breadcrumb = [];
 
     /**
      * @var string
@@ -85,7 +85,7 @@ class CMS extends ObjectModel
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'alias'        => 'str',
         'title'        => 'str',
         'created_on'   => 'date',
@@ -95,7 +95,7 @@ class CMS extends ObjectModel
         'content'      => 'str',
         'online'       => 'bool',
         'auth'         => 'int',
-    );
+    ];
 
     /* début getters */
 

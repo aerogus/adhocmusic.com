@@ -316,9 +316,9 @@ class Media extends ObjectModel
      *              ['split']     => false
      * @return array
      */
-    static function getMedia($params = array())
+    static function getMedia($params = [])
     {
-        $tab_type = array();
+        $tab_type = [];
         if(array_key_exists('type', $params)) {
             $tab_type = explode(",", $params['type']);
         }
@@ -327,24 +327,24 @@ class Media extends ObjectModel
             $params['split'] = false;
         }
 
-        $tab = array();
-        $split = array();
+        $tab = [];
+        $split = [];
 
-        foreach($tab_type as $type)
+        foreach ($tab_type as $type)
         {
-            if($type === 'audio')
+            if ($type === 'audio')
             {
                 $audios = Audio::getAudios($params);
                 $split['audio'] = $audios;
                 $tab = array_merge($tab, $audios);
             }
-            if($type === 'photo')
+            if ($type === 'photo')
             {
                 $photos = Photo::getPhotos($params);
                 $split['photo'] = $photos;
                 $tab = array_merge($tab, $photos);
             }
-            if($type === 'video')
+            if ($type === 'video')
             {
                 $videos = Video::getVideos($params);
                 $split['video'] = $videos;
@@ -356,7 +356,7 @@ class Media extends ObjectModel
             return $split;
         }
 
-        $date = array();
+        $date = [];
         foreach ($tab as $key => $row) {
             $date[$key] = $row['created_on'];
         }

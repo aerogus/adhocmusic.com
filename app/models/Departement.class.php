@@ -161,7 +161,7 @@ class Departement
      */
     static function getHashTable($cleReg = null)
     {
-        $out = array();
+        $out = [];
         foreach(self::$_liste as $cle => $info)
         {
             if(!is_null($cleReg)) {

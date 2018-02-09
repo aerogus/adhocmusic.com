@@ -597,7 +597,7 @@ class Controller
         }
 
         // todo: dans le tpl !!
-        $form_style = array();
+        $form_style = [];
         for($cpt_style = 0 ; $cpt_style < 3 ; $cpt_style ++) {
             $form_style[$cpt_style]  = '';
             $form_style[$cpt_style] .= "<select name=\"style[" . $cpt_style . "]\">";

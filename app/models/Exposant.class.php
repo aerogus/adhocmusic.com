@@ -92,7 +92,7 @@ class Exposant extends ObjectModel
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'name'        => 'str',
         'email'       => 'str',
         'phone'       => 'str',
@@ -103,7 +103,7 @@ class Exposant extends ObjectModel
         'state'       => 'str',
         'created_on'  => 'date',
         'modified_on' => 'date',
-    );
+    ];
 
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
@@ -111,7 +111,7 @@ class Exposant extends ObjectModel
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      * @var array
      */
-    protected $_modified_fields = array();
+    protected $_modified_fields = [];
 
     /* début getters */
 

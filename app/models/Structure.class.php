@@ -112,7 +112,7 @@ class Structure extends ObjectModel
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => TRUE'.
      * @var array
      */
-    protected $_modified_fields = array();
+    protected $_modified_fields = [];
 
     /* début getters */
 
@@ -433,7 +433,7 @@ class Structure extends ObjectModel
              . "FROM `" . self::$_db_table_structure . "` "
              . "ORDER BY `id_country` ASC, `id_departement` ASC, `city` ASC";
 
-        $tab = array();
+        $tab = [];
         if($res = $db->queryWithFetch($sql)) {
             foreach($res as $struct) {
                 $tab[$struct['id']] = $struct;

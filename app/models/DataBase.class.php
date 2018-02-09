@@ -47,7 +47,7 @@ class DataBase
     /**
      * tableau des connexions ouvertes
      */
-    protected $_current_conn = array();
+    protected $_current_conn = [];
 
     /**
      * compteur du nb de requete par instance de l'objet
@@ -64,7 +64,7 @@ class DataBase
     /**
      * @var array
      */
-    protected $_debug_log = array();
+    protected $_debug_log = [];
 
     /**
      * type de fetch
@@ -91,7 +91,7 @@ class DataBase
             return $this->_current_conn[$conn_key];
         }
 
-        $params = array();
+        $params = [];
 
         array_unshift($params, self::$_connections_params[$conn_name]['db_pass']);
         array_unshift($params, self::$_connections_params[$conn_name]['db_login']);
@@ -215,7 +215,7 @@ class DataBase
         if(!is_null(self::$_instance))
         {
             self::$_instance = null;
-            self::$_connections_params = array();
+            self::$_connections_params = [];
             return true;
         }
         return false;
@@ -313,7 +313,7 @@ class DataBase
         } elseif (true == $rc) {
             /* La requête s'est bien passée, c'était une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-            $res = array();
+            $res = [];
             while($row = mysqli_fetch_array($rc, MYSQLI_NUM))
             {
                 if(is_array($row)) {
@@ -338,7 +338,7 @@ class DataBase
         } elseif (true == $rc) {
             /* La requête s'est bien passée, c'était une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-             $res = array();
+             $res = [];
              while (($row = mysqli_fetch_array($rc, $this->_fetchMode)) !== NULL)
              {
                 $res[] = $row;

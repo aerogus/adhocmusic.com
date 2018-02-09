@@ -71,8 +71,8 @@ class WorldRegion extends Liste
      */
     protected function _getName($id_country, $id_region)
     {
-        if(array_key_exists($id_country, static::$_liste)) {
-            if(array_key_exists($id_region, static::$_liste[$id_country])) {
+        if (array_key_exists($id_country, static::$_liste)) {
+            if (array_key_exists($id_region, static::$_liste[$id_country])) {
                 return static::$_liste[$id_country][$id_region];
             }
         }
@@ -92,9 +92,9 @@ class WorldRegion extends Liste
              . "FROM `geo_world_region` "
              . "ORDER BY `id_country` ASC, `id_region` ASC";
 
-        static::$_liste = array();
-        if($res = $db->queryWithFetch($sql)) {
-            foreach($res as $_res) {
+        static::$_liste = [];
+        if ($res = $db->queryWithFetch($sql)) {
+            foreach ($res as $_res) {
                 static::$_liste[$_res['id_country']][$_res['id_region']] = $_res['name'];
             }
             return true;

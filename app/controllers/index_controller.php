@@ -37,12 +37,12 @@ class Controller
         ));
 
         // tri par mois
-        $evts = array();
+        $evts = [];
         foreach($events as $event)
         {
             $month = substr($event['date'], 0, 7).'-01';
             if(!array_key_exists($month, $evts)) {
-                $evts[$month] = array();
+                $evts[$month] = [];
             }
             $evts[$month][] = $event;
         }
@@ -190,23 +190,23 @@ class Controller
 
     protected static function _validate_form_contact($data, &$errors)
     {
-        $errors = array();
-        if(empty($data['name'])) {
+        $errors = [];
+        if (empty($data['name'])) {
             $errors['name'] = "Vous devez renseigner votre nom";
         }
-        if(empty($data['email'])) {
+        if (empty($data['email'])) {
             $errors['email'] = "Vous devez préciser votre email";
-        } elseif(!Email::validate($data['email'])) {
+        } elseif (!Email::validate($data['email'])) {
             $errors['email'] = "Votre Email semble invalide ...";
         }
-        if(empty($data['subject'])) {
+        if (empty($data['subject'])) {
             $errors['subject'] = "Vous devez saisir un sujet";
         }
-        if(empty($data['text'])) {
+        if (empty($data['text'])) {
             $errors['text'] = "Vous devez écrire quelque chose !";
-        } elseif(strlen($data['text']) < 8) {
+        } elseif (strlen($data['text']) < 8) {
             $errors['text'] = "Message un peu court !";
-        } elseif((strpos($data['text'], '[link=') !== false)
+        } elseif ((strpos($data['text'], '[link=') !== false)
               || (strpos($data['text'], '[url=') !== false)
               || (strpos($data['text'], '<a href=') !== false)) {
             $errors['text'] = "Message un peu douteux Michel !";

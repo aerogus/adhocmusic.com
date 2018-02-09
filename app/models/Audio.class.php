@@ -48,7 +48,7 @@ class Audio extends Media
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'id_contact'   => 'num',
         'id_groupe'    => 'num',
         'id_lieu'      => 'num',
@@ -59,7 +59,7 @@ class Audio extends Media
         'modified_on'  => 'date',
         'online'       => 'bool',
         'mime'         => 'str',
-    );
+    ];
 
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
@@ -152,7 +152,7 @@ class Audio extends Media
      *              ['limit']     => 10
      * @return array
      */
-    static function getAudios($params = array())
+    static function getAudios($params = [])
     {
         $debut = 0;
         if(isset($params['debut'])) {
@@ -175,12 +175,12 @@ class Audio extends Media
             $sort = $params['sort'];
         }
 
-        $tab_groupe    = array();
-        $tab_structure = array();
-        $tab_lieu      = array();
-        $tab_event     = array();
-        $tab_id        = array();
-        $tab_contact   = array();
+        $tab_groupe    = [];
+        $tab_structure = [];
+        $tab_lieu      = [];
+        $tab_event     = [];
+        $tab_id        = [];
+        $tab_contact   = [];
 
         if(array_key_exists('groupe', $params))    { $tab_groupe    = explode(",", $params['groupe']); }
         if(array_key_exists('structure', $params)) { $tab_structure = explode(",", $params['structure']); }
@@ -312,11 +312,11 @@ class Audio extends Media
      */
     static function getLastAudios($limit = 5)
     {
-        return self::getAudios(array(
+        return self::getAudios([
             'limit' => $limit,
             'sort'  => 'date',
             'sens'  => 'DESC',
-        ));
+        ]);
     }
 
     /**

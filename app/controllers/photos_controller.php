@@ -287,14 +287,14 @@ class Controller
      */
     protected static function _validate_form_photo_create($data, &$errors)
     {
-        $errors = array();
-        if(empty($data['name'])) {
+        $errors = [];
+        if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la photo.";
         }
-        if(empty($data['credits'])) {
+        if (empty($data['credits'])) {
             $errors['credits'] = "Vous devez saisir le nom du photographe";
         }
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;
@@ -304,7 +304,7 @@ class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        if(Tools::isSubmit('form-photo-import'))
+        if (Tools::isSubmit('form-photo-import'))
         {
             set_time_limit(0); // l'import peut prendre du temps !
 

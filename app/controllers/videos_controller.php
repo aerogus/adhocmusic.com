@@ -324,7 +324,7 @@ class Controller
      */
     protected static function _validate_form_video_create($data, &$errors)
     {
-        $errors = array();
+        $errors = [];
         if(empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
         }
@@ -437,11 +437,11 @@ class Controller
      */
     protected static function _validate_form_video_edit($data, &$errors)
     {
-        $errors = array();
-        if(empty($data['name'])) {
+        $errors = [];
+        if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
         }
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;

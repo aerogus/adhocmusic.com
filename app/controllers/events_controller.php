@@ -48,16 +48,16 @@ class Controller
         $nb_events = count($_events);
         $_events = array_slice($_events, $page * NB_EVENTS_PER_PAGE, NB_EVENTS_PER_PAGE);
 
-        $events = array();
+        $events = [];
         foreach($_events as $event) {
             $_day = substr($event['date'], 0, 10);
             if(!array_key_exists($_day, $events)) {
-                $events[$_day] = array();
+                $events[$_day] = [];
             }
-            $events[$_day][$event['id']] = array(
+            $events[$_day][$event['id']] = [
                 'tab' => $event,
                 'obj' => Event::getInstance($event['id'])
-            );
+            ];
         }
 
         $smarty->assign('title', "Agenda Concerts");
@@ -426,9 +426,9 @@ class Controller
      */
     protected static function _validate_form_event_create($data, &$errors)
     {
-        $errors = array();
+        $errors = [];
 
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;
@@ -605,9 +605,9 @@ class Controller
      */
     protected static function _validate_form_event_edit($data, &$errors)
     {
-        $errors = array();
+        $errors = [];
 
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;
@@ -657,16 +657,16 @@ class Controller
     {
         $id_lieu = (int) Route::params('l');
 
-        if(!$id_lieu) {
-            return array();
+        if (!$id_lieu) {
+            return [];
         }
 
-        return Event::getEvents(array(
+        return Event::getEvents([
             'online' => true,
             'lieu'   => $id_lieu,
             'sort'   => 'date',
             'sens'   => 'ASC',
             'limit'  => 100,
-        ));
+        ]);
     }
 }

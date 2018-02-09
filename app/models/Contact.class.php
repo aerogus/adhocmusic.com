@@ -50,10 +50,10 @@ class Contact extends ObjectModel
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'email'  => 'str',
         'lastnl' => 'date',
-    );
+    ];
 
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
@@ -61,9 +61,9 @@ class Contact extends ObjectModel
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      * @var array
      */
-    protected $_modified_fields = array(
-        'contact' => array(),
-    );
+    protected $_modified_fields = [
+        'contact' => [],
+    ];
 
     /**
      * @param bool
@@ -74,9 +74,9 @@ class Contact extends ObjectModel
         if($fusion) {
             return self::$_all_fields;
         } else {
-            return array(
+            return [
                 'contact' => self::$_all_fields,
-            );
+            ];
         }
     }
 
@@ -318,7 +318,7 @@ class Contact extends ObjectModel
                  . "SET " . $fields_to_save . " "
                  . "WHERE `id_contact` = " . (int) $this->_id_contact;
 
-            $this->_modified_fields['contact'] = array();
+            $this->_modified_fields['contact'] = [];
 
             $db->query($sql);
 

@@ -188,7 +188,7 @@ class Lieu extends ObjectModel
     /**
      *
      */
-    protected $_modified_fields = array();
+    protected $_modified_fields = [];
 
     /* début getters */
 
@@ -958,7 +958,7 @@ class Lieu extends ObjectModel
      *             ['country']
      * @return array
      */
-    static function getLieux($params = array())
+    static function getLieux($params = [])
     {
         $db = DataBase::getInstance();
 
@@ -1007,9 +1007,9 @@ class Lieu extends ObjectModel
 
         $res  = $db->queryWithFetch($sql);
 
-        $tab  = array();
+        $tab  = [];
         foreach(Departement::getHashTable() as $id_dep => $nom_dep) {
-            $tab[$id_dep] = array();
+            $tab[$id_dep] = [];
         }
         foreach($res as $lieu) {
             $tab[$lieu['id_departement']][$lieu['id']] = $lieu;
@@ -1293,10 +1293,10 @@ EOT;
         $limit   = (int) $params['limit'];
 
         if(($lat_min < -90) || ($lat_max > 90) || ($lng_min < -180) || ($lng_max > 180)) {
-            return array(); // hors limite
+            return []; // hors limite
         }
         if(($lat_min >= $lat_max) || ($lng_min >= $lng_max)) {
-            return array(); // pas dans le bon sens
+            return []; // pas dans le bon sens
         }
 
         $db = DataBase::getInstance();

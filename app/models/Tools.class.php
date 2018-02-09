@@ -425,8 +425,8 @@ class Tools
 
     static function array_sort($array, $on, $order=SORT_ASC)
     {
-        $new_array = array();
-        $sortable_array = array();
+        $new_array = [];
+        $sortable_array = [];
 
         if (count($array) > 0)
         {

@@ -314,7 +314,7 @@ abstract class Forum
 
         $res = $db->queryWithFetch($sql);
 
-        $tab = array();
+        $tab = [];
         foreach($res as $_res) {
             $tab[$_res['id_forum']] = $_res['nb_threads'];
         }
@@ -341,7 +341,7 @@ abstract class Forum
 
         $res = $db->queryWithFetch($sql);
 
-        $tab = array();
+        $tab = [];
         foreach($res as $_res) {
             $tab[$_res['id_forum']] = $_res['nb_messages'];
         }
@@ -497,7 +497,7 @@ abstract class Forum
      *              ['id_forum']
      * @return bool
      */
-    protected static function _updateForum($params = array())
+    protected static function _updateForum($params = [])
     {
         $db = DataBase::getInstance();
 

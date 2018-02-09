@@ -78,13 +78,13 @@ class WorldCountry extends Liste
              . "FROM `geo_world_country` "
              . "ORDER BY `name_fr` ASC";
 
-        static::$_liste = array();
+        static::$_liste = [];
         if($res = $db->queryWithFetch($sql)) {
             foreach($res as $_res) {
-                static::$_liste[$_res['id_country']] = array(
+                static::$_liste[$_res['id_country']] = [
                     'fr' => $_res['name_fr'],
                     'en' => $_res['name_en'],
-                );
+                ];
             }
             return true;
         }

@@ -46,7 +46,7 @@ abstract class ObjectModel
      * le tableau est défini dans les classes filles
      * @var array
      */
-    protected static $_all_fields = array();
+    protected static $_all_fields = [];
 
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
@@ -55,7 +55,7 @@ abstract class ObjectModel
      * (ou un tableau de tableau avec le nom de la db_table comme clé du 1er tableau)
      * @var array
      */
-    protected $_modified_fields = array();
+    protected $_modified_fields = [];
 
     /* db adhoc */
     protected static $_db_table_featured       = 'adhoc_featured';
@@ -287,7 +287,7 @@ abstract class ObjectModel
                  . "SET " . $fields_to_save . " "
                  . "WHERE `" . static::$_pk . "` = " . (int) $this->getId();
 
-            $this->_modified_fields = array();
+            $this->_modified_fields = [];
 
             $db->query($sql);
 

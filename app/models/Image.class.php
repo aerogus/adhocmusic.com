@@ -110,7 +110,7 @@ class Image
         $this->_jpeg_quality = 90;
         $this->_gif_quality  = 256;
         $this->_png_quality  = 16777216;
-        $this->_color        = array('r' => 0, 'g' => 0, 'b' => 0); // independant du handle
+        $this->_color        = ['r' => 0, 'g' => 0, 'b' => 0]; // independant du handle
         $this->_deltax       = 0;
         $this->_deltay       = 0;
 
@@ -274,11 +274,11 @@ class Image
      */
     function setColor($red = 0, $green = 0, $blue = 0)
     {
-        $this->_color = array(
+        $this->_color = [
             'r' => $red,
             'g' => $green,
             'b' => $blue,
-        );
+        ];
     }
 
     /**

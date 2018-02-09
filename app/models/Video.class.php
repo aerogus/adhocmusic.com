@@ -251,7 +251,7 @@ class Video extends Media
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      * @var array
      */
-    protected $_modified_fields = array();
+    protected $_modified_fields = [];
 
     /* début getters */
 
@@ -415,7 +415,7 @@ class Video extends Media
      */
     static function getVideoHosts()
     {
-        $tab = array();
+        $tab = [];
         foreach(self::$_tab_hosts as $id => $name) {
             $tab[] = array(
                 'id' => $id,
@@ -448,7 +448,7 @@ class Video extends Media
      *              ['limit']     => 10
      * @return array
      */
-    static function getVideos($params = array())
+    static function getVideos($params = [])
     {
         $debut = 0;
         if(isset($params['debut'])) {
@@ -471,12 +471,12 @@ class Video extends Media
             $sort = $params['sort'];
         }
 
-        $tab_groupe    = array();
-        $tab_structure = array();
-        $tab_lieu      = array();
-        $tab_event     = array();
-        $tab_id        = array();
-        $tab_contact   = array();
+        $tab_groupe    = [];
+        $tab_structure = [];
+        $tab_lieu      = [];
+        $tab_event     = [];
+        $tab_id        = [];
+        $tab_contact   = [];
 
         if(array_key_exists('groupe', $params))    { $tab_groupe    = explode(",", $params['groupe']); }
         if(array_key_exists('structure', $params)) { $tab_structure = explode(",", $params['structure']); }
@@ -544,7 +544,7 @@ class Video extends Media
         $sql .= "LIMIT " . $debut . ", " . $limit;
 
         $res_tmp = $db->queryWithFetch($sql);
-        $res = array();
+        $res = [];
         foreach($res_tmp as $idx => $_res) {
             $res[$idx] = $_res;
             $res[$idx]['url'] = self::getUrlById($_res['id']);
@@ -912,7 +912,7 @@ class Video extends Media
         {
             case self::HOST_YOUTUBE:
                 if($multi) {
-                    $url   = array();
+                    $url   = [];
                     $url[] = 'http://img.youtube.com/vi/' . $reference . '/1.jpg'; // 130*97
                     $url[] = 'http://img.youtube.com/vi/' . $reference . '/2.jpg'; // 130*97
                     $url[] = 'http://img.youtube.com/vi/' . $reference . '/3.jpg'; // 130*97

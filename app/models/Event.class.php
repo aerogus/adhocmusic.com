@@ -108,17 +108,17 @@ class Event extends ObjectModel
     /**
      * @var array
      */
-    protected $_styles = array();
+    protected $_styles = [];
 
     /**
      * @var array
      */
-    protected $_groupes = array();
+    protected $_groupes = [];
 
     /**
      * @var array
      */
-    protected $_structures = array();
+    protected $_structures = [];
 
     /**
      * Liste des attributs de l'objet
@@ -151,7 +151,7 @@ class Event extends ObjectModel
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      * @var array
      */
-    protected $_modified_fields = array();
+    protected $_modified_fields = [];
 
     /* début getters */
 
@@ -676,7 +676,7 @@ class Event extends ObjectModel
      * datdeb et datfin obligatoires, le reste facultatif
      * @return array
      */
-    static function getEvents($params = array())
+    static function getEvents($params = [])
     {
         if(array_key_exists('datdeb', $params)) {
             if(!empty($params['datdeb'])) {
@@ -853,7 +853,7 @@ class Event extends ObjectModel
 
         $res = $db->queryWithFetch($sql);
 
-        $evts = array();
+        $evts = [];
         foreach($res as $idx => $_res) {
             $evts[$idx] = $_res;
             $evts[$idx]['url'] = self::getUrlById($_res['id']);
@@ -1349,7 +1349,7 @@ class Event extends ObjectModel
 
         $res = $db->queryWithFetch($sql);
 
-        $tab = array();
+        $tab = [];
         foreach($res as $_res) {
             $tab[$_res['date']] = $_res['nb_events'];
         }
@@ -1486,7 +1486,7 @@ class Event extends ObjectModel
             'limit'     => 1000,
         ));
 
-        $tab = array();
+        $tab = [];
         foreach($evts as $evt) {
             $year = (int) mb_substr($evt['date'], 0, 4);
             $month = (int) mb_substr($evt['date'], 5, 2);
@@ -1496,7 +1496,7 @@ class Event extends ObjectModel
                 $season = (string) ($year - 1) . ' / ' . (string) $year;
             }
             if(!array_key_exists($season, $tab)) {
-                $tab[$season] = array();
+                $tab[$season] = [];
             }
             $tab[$season][] = $evt;
         }

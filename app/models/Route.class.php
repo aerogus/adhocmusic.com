@@ -13,12 +13,12 @@ class Route
     /**
      * @var array
      */
-    protected static $routes = array();
+    protected static $routes = [];
 
     /**
      * @var array
      */
-    protected static $action_params = array();
+    protected static $action_params = [];
 
     /**
      * @var string
@@ -91,7 +91,7 @@ class Route
         $response_format = DEFAULT_CONTROLLERS_FORMAT;
         $method = $params['method'];
         $path = $params['path'];
-        $matches = array();
+        $matches = [];
         $path = str_replace('?', '', $path);
         $path = str_replace($_SERVER['QUERY_STRING'], '', $path);
         if ((preg_match('/^(.+)[.]([a-z0-9-]+)$/i', $path, $matches)) > 0) {
@@ -311,7 +311,7 @@ class Route
     protected static function _examine_splitted_paths($params)
     {
         $action = FALSE;
-        $extra_params = array();
+        $extra_params = [];
         $splitted_path = $params['splitted_path'];
         $route_splitted_path = $params['route_splitted_path'];
         $route = $params['route'];
@@ -354,13 +354,13 @@ class Route
     protected static function _examine_splitted_path_component($params)
     {
         $found_action = FALSE;
-        $found_params = array();
+        $found_params = [];
         $route = $params['route'];
         $scanned_component = $params['scanned_component'];
         $component = $params['component'];
         if (empty($scanned_component)) {
             if (empty($component)) {
-                return array();
+                return [];
             }
             return FALSE;
         }
@@ -369,7 +369,7 @@ class Route
                 return FALSE;
             }
         } else {
-            $matches = array();
+            $matches = [];
             preg_match('/^:([a-z0-9_-]+)/i', $scanned_component, $matches);
             if (empty($matches[1])) {
                 return FALSE;

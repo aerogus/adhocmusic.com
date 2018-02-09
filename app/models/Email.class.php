@@ -87,7 +87,7 @@ class Email
      * @param string $attachment
      * @return bool
      */
-    static function send($to = '', $subject = 'sans sujet', $tplName = 'default', $data = array(), $attachment = null)
+    static function send($to = '', $subject = 'sans sujet', $tplName = 'default', $data = [], $attachment = null)
     {
         $subject = trim($subject);
 

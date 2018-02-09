@@ -91,7 +91,7 @@ class GoogleMaps
     static function getGeocode($addr)
     {
         if(empty($addr)) {
-            return array('status' => 'EMPTY_REQUEST');
+            return ['status' => 'EMPTY_REQUEST'];
         }
 
         $url  = 'http://maps.googleapis.com/maps/api/geocode/json'
@@ -100,17 +100,17 @@ class GoogleMaps
               . '&sensor=false';
         $data = file_get_contents($url);
         $data = json_decode($data);
-        if($data->status == 'OK') {
-            if(sizeof($data->results)) {
+        if ($data->status == 'OK') {
+            if (sizeof($data->results)) {
                 $lat = (float) $data->results[0]->geometry->location->lat;
                 $lng = (float) $data->results[0]->geometry->location->lng;
-                return array(
+                return [
                     'status' => 'OK',
                     'lat' => $lat,
                     'lng' => $lng,
-                );
+                ];
             }
         }
-        return array('status' => $data->status);
+        return ['status' => $data->status];
     }
 }

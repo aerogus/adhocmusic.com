@@ -436,7 +436,7 @@ class Comment extends ObjectModel
         throw new Exception('id_comment introuvable');
     }
 
-    static function getComments($params = array())
+    static function getComments($params = [])
     {
         $debut = 0;
         if(isset($params['debut'])) {
@@ -448,7 +448,7 @@ class Comment extends ObjectModel
             $limit = (int) $params['limit'];
         }
 
-        $tab_type = array();
+        $tab_type = [];
         if(array_key_exists('type', $params)) {
             $tab_type = explode(",", $params['type']);
         }
@@ -519,7 +519,7 @@ class Comment extends ObjectModel
      */
     function sendNotifs()
     {
-        $emails  = array();
+        $emails  = [];
         $subject = "Un nouveau commentaire a été posté ";
         $title   = '';
         $url     = 'http://www.adhocmusic.com';

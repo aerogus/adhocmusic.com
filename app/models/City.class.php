@@ -133,7 +133,7 @@ class City extends Liste
              . "FROM `geo_fr_city` "
              . "ORDER BY `id_departement` ASC, `name` ASC";
 
-        static::$_liste = array();
+        static::$_liste = [];
         if($rows = $db->queryWithFetch($sql)) {
             foreach($rows as $row) {
                 static::$_liste[$row['id_city']] = $row;

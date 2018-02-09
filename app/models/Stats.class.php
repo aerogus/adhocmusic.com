@@ -265,22 +265,22 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($rows, 'nb');
 
         $cpt = 0;
-        $data = array();
+        $data = [];
 
-        foreach($rows as $row) {
+        foreach ($rows as $row) {
             $data[$cpt] = $row;
             $data[$cpt]['bargraph'] = self::getBarGraph($row['nb'], $max);
             $data[$cpt]['nom_departement'] = Departement::getName($row['id_departement']);
             $cpt++;
         }
 
-        $out = array(
+        $out = [
             'data'  => $data,
             'cols'  => array('Département', 'Nb', 'Graphe'),
             'keys'  => array('nom_departement', 'nb', 'bargraph'),
             'total' => $total,
             'max'   => $max,
-        );
+        ];
 
         return $out;
     }
@@ -301,7 +301,7 @@ class Stats extends ObjectModel
 
         $rows = $db->queryWithFetch($sql);
 
-        $data = array();
+        $data = [];
 
         foreach($rows as $row) {
             if($reg = Departement::getRegion($row['id_departement'])) {

@@ -73,13 +73,13 @@ class Alerting extends ObjectModel
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'id_contact'  => 'num',
         'created_on'  => 'date',
         'active'      => 'bool',
         'type'        => 'str',
         'id_content'  => 'num',
-    );
+    ];
 
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
@@ -87,7 +87,7 @@ class Alerting extends ObjectModel
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      * @var array
      */
-    protected $_modified_fields = array();
+    protected $_modified_fields = [];
 
     /* début getters */
 

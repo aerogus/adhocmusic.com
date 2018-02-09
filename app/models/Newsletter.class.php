@@ -61,16 +61,16 @@ class Newsletter extends ObjectModel
     /**
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'title' => 'str',
         'content' => 'str',
         'html' => 'str',
-    );
+    ];
 
     /**
      * @var array
      */
-    protected $_modified_fields = array();
+    protected $_modified_fields = [];
 
     /**
      * @return string
@@ -203,7 +203,7 @@ class Newsletter extends ObjectModel
      *              ['limit']   => 10
      * @return array
      */
-    static function getNewsletters($params = array())
+    static function getNewsletters($params = [])
     {
         $debut = 0;
         if(isset($params['debut'])) {
@@ -220,7 +220,7 @@ class Newsletter extends ObjectModel
             $sens = "DESC";
         }
 
-        $tab_id = array();
+        $tab_id = [];
         if(array_key_exists('id', $params)) {
             $tab_id = explode(",", $params['id']);
         }

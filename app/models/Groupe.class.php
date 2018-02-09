@@ -153,7 +153,7 @@ class Groupe extends ObjectModel
     /**
      * @var array
      */
-    protected $_template = array();
+    protected $_template = [];
 
     /**
      * @var array
@@ -185,12 +185,12 @@ class Groupe extends ObjectModel
     /**
      * @var array
      */
-    protected $_modified_fields = array();
+    protected $_modified_fields = [];
 
     /**
      * @var array
      */
-    protected $_styles = array();
+    protected $_styles = [];
 
     /**
      * Membres liés au groupe
@@ -202,17 +202,17 @@ class Groupe extends ObjectModel
     /**
      * @var array
      */
-    protected $_audios = array();
+    protected $_audios = [];
 
     /**
      * @var array
      */
-    protected $_photos = array();
+    protected $_photos = [];
 
     /**
      * @var array
      */
-    protected $_videos = array();
+    protected $_videos = [];
 
     /* début getters */
 
@@ -1258,7 +1258,7 @@ class Groupe extends ObjectModel
      * @param array
      * @return array
      */
-    static function getGroupes($params = array())
+    static function getGroupes($params = [])
     {
         $debut = 0;
         if(isset($params['debut'])) {
@@ -1282,9 +1282,9 @@ class Groupe extends ObjectModel
             $sort = $params['sort'];
         }
 
-        $tab_style   = array();
-        $tab_id      = array();
-        $tab_contact = array();
+        $tab_style   = [];
+        $tab_id      = [];
+        $tab_contact = [];
 
         if(array_key_exists('style', $params))   { $tab_style   = explode(",", $params['style']);  }
         if(array_key_exists('id', $params))      { $tab_id      = explode(",", $params['id']); }
@@ -1348,7 +1348,7 @@ class Groupe extends ObjectModel
         $res = $db->queryWithFetch($sql);
 
         if($res) {
-            $tab = array();
+            $tab = [];
             foreach($res as $grp) {
                 $tab[$grp['id']] = $grp;
                 $mini_photo = '/img/note_adhoc_64.png';
@@ -1383,7 +1383,7 @@ class Groupe extends ObjectModel
 
         $res  = $db->queryWithFetch($sql);
 
-        $tab = array();
+        $tab = [];
         $cpt = 0;
         foreach($res as $grp) {
             $tab[$grp['lettre']][$cpt] = $grp;

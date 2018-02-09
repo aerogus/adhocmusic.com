@@ -65,14 +65,14 @@ class MembreAdhoc extends Membre
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'function'        => 'str',
         'birth_date'      => 'date',
         'active'          => 'bool',
         'rank'            => 'num',
         'official_pseudo' => 'str',
         'description'     => 'str',
-    );
+    ];
 
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
@@ -80,11 +80,11 @@ class MembreAdhoc extends Membre
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      * @var array
      */
-    protected $_modified_fields = array(
-        'contact' => array(),
-        'membre' => array(),
-        'membre_adhoc' => array(),
-    );
+    protected $_modified_fields = [
+        'contact' => [],
+        'membre' => [],
+        'membre_adhoc' => [],
+    ];
 
     /**
      * @return string
@@ -115,11 +115,11 @@ class MembreAdhoc extends Membre
                 MembreAdhoc::$_all_fields
             );
         } else {
-            return array_merge(array(
+            return array_merge([
                 'contact' => Contact::$_all_fields,
                 'membre' => Membre::$_all_fields,
                 'membre_adhoc' => MembreAdhoc::$_all_fields,
-            ));
+            ]);
         }
     }
 
@@ -552,7 +552,7 @@ class MembreAdhoc extends Membre
                      . "SET " . $fields_to_save . " "
                      . "WHERE `id_contact` = " . (int) $this->_id_contact;
 
-                $this->_modified_fields['membre'] = array();
+                $this->_modified_fields['membre'] = [];
 
                 $db->query($sql);
 

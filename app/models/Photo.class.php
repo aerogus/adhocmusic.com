@@ -58,7 +58,7 @@ class Photo extends Media
     /**
      * @var array
      */
-    protected $_tag = array();
+    protected $_tag = [];
 
     /**
      * Liste des attributs de l'objet
@@ -68,7 +68,7 @@ class Photo extends Media
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'id_contact'   => 'num',
         'id_groupe'    => 'num',
         'id_lieu'      => 'num',
@@ -79,7 +79,7 @@ class Photo extends Media
         'modified_on'  => 'date',
         'online'       => 'bool',
         'credits'      => 'str',
-    );
+    ];
 
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
@@ -87,7 +87,7 @@ class Photo extends Media
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      * @var array
      */
-    protected $_modified_fields = array();
+    protected $_modified_fields = [];
 
     /* debut getters */
 
@@ -288,7 +288,7 @@ class Photo extends Media
      *              ['fetchtags'] => false
      * @return array
      */
-    static function getPhotos($params = array())
+    static function getPhotos($params = [])
     {
         $debut = 0;
         if(isset($params['debut'])) {
@@ -316,12 +316,12 @@ class Photo extends Media
             $fetchtags = (bool) $params['fetchtags'];
         }
 
-        $tab_groupe    = array();
-        $tab_structure = array();
-        $tab_lieu      = array();
-        $tab_event     = array();
-        $tab_id        = array();
-        $tab_contact   = array();
+        $tab_groupe    = [];
+        $tab_structure = [];
+        $tab_lieu      = [];
+        $tab_event     = [];
+        $tab_id        = [];
+        $tab_contact   = [];
 
         if(array_key_exists('groupe', $params))    { $tab_groupe    = explode(",", $params['groupe']); }
         if(array_key_exists('structure', $params)) { $tab_structure = explode(",", $params['structure']); }
@@ -387,7 +387,7 @@ class Photo extends Media
         }
         $sql .= "LIMIT " . $debut . ", " . $limit;
 
-        $tab = array();
+        $tab = [];
 
         $cpt = 0;
         if($res = $db->queryWithFetch($sql)) {

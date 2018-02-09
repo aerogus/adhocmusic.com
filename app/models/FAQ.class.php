@@ -48,11 +48,11 @@ class FAQ extends ObjectModel
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'id_category' => 'num',
         'question'    => 'str',
         'answer'      => 'str',
-    );
+    ];
 
     /* début getters */
 
@@ -130,10 +130,10 @@ class FAQ extends ObjectModel
      */
     static function getCategories()
     {
-        return array(
+        return [
             1 => 'Le site',
             2 => 'Les concerts',
-        );
+        ];
     }
 
     /**

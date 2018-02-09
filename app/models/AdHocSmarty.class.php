@@ -5,8 +5,8 @@
  */
 class AdHocSmarty extends Smarty
 {
-    protected static $pseudos = array();
-    protected static $avatars = array();
+    protected static $pseudos = [];
+    protected static $avatars = [];
 
     /**
      *
@@ -305,7 +305,7 @@ class AdHocSmarty extends Smarty
     {
         $now  = time();
         $months = array('', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre');
-        $cal  = array();
+        $cal  = [];
 
         $year = date('Y', $now);
         if(array_key_exists('year', $params)) {

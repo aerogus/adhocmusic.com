@@ -54,7 +54,7 @@ class Style
      *
      * @var array
      */
-    protected static $_liste = array(
+    protected static $_liste = [
         self::ROC => "Rock",
         self::REG => "Reggae",
         self::TEC => "Techno",
@@ -86,7 +86,7 @@ class Style
         self::FOL => "Folk",
         self::LAT => "Latino",
         self::COU => "Country",
-    );
+    ];
 
     /**
      * retourne le tableau de la liste

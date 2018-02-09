@@ -62,7 +62,7 @@ class Log
     const ACTION_NEWSLETTER_SUB        = 47;
     const ACTION_NEWSLETTER_UNSUB      = 48;
 
-    protected static $_actions = array(
+    protected static $_actions = [
         self::ACTION_MEMBER_CREATE         => "Création d'un compte membre",
         self::ACTION_MEMBER_EDIT           => "Edition d'un compte membre",
         self::ACTION_MEMBER_DELETE         => "Suppression d'un compte membre",
@@ -111,7 +111,7 @@ class Log
         self::ACTION_COMMENT_DELETE        => "Suppression d'un commentaire",
         self::ACTION_NEWSLETTER_SUB        => "Inscription à la newsletter",
         self::ACTION_NEWSLETTER_UNSUB      => "Désinscription de la newsletter",
-    );
+    ];
 
     protected static $_log_file = null;
 
@@ -153,14 +153,14 @@ class Log
         self::_write('action', 'membre=' . $pseudo . ' (' . $id_contact . ') - action=' . self::$_actions[$action] . ' -  extra=' . $extra);
 
         Email::send(
-            array('guillaume.seznec@gmail.com', 'lara.etcheverry@gmail.com'),
+            ['guillaume@seznec.fr', 'lara@etcheverry.net'],
             '[log-action] ' . $pseudo . ' ' . self::$_actions[$action],
             'log-action',
-            array(
+            [
                 'pseudo' => $pseudo,
                 'action' => self::$_actions[$action],
                 'extra'  => $extra,
-            )
+            ]
         );
 
         $sql = "INSERT INTO `adhoc_log_action` "
