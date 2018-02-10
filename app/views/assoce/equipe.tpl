@@ -20,9 +20,7 @@
               </div>
               <div>
                 <strong>{$membre.first_name|escape} {$membre.last_name|escape}</strong><br>
-                <em>{$membre.function|escape}</em><br>
-                {$membre.age|escape} ans<br>
-                {$membre.description|escape}
+                <em>{$membre.function|escape}</em>
               </div>
             </a>
           </li>
@@ -40,18 +38,8 @@
         <ul class="staff">
           {foreach from=$omembres item=membre}
           <li>
-            <a href="{$membre.url|escape}">
-              <div class="thumb-80 thumb-photo-80">
-                <img src="{$membre.avatar_interne|escape}" alt="">
-                <p align="center"><strong>{$membre.official_pseudo|escape}</strong></p>
-              </div>
-              <div>
-                <strong>{$membre.first_name|escape} {$membre.last_name|escape}</strong><br>
-                <em>{$membre.function|escape}</em><br>
-                De {$membre.datdeb|date_format:'%Y'} à {$membre.datfin|date_format:'%Y'}<br>
-                {$membre.description|escape}
-              </div>
-            </a>
+            <strong>{$membre.first_name|escape} {$membre.last_name|escape}</strong>
+            ({$membre.datdeb|date_format:'%Y'} à {$membre.datfin|date_format:'%Y'})
           </li>
           {/foreach}
         </ul>

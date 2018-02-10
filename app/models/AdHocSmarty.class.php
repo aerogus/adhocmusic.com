@@ -49,37 +49,29 @@ class AdHocSmarty extends Smarty
         $this->assign('fb_page_id', FB_ADHOCMUSIC_PAGE_ID);
         $this->assign('fb_login_url', $GLOBALS['fb_login_url']);
 
-        if(!empty($_SESSION['membre'])) {
+        if (!empty($_SESSION['membre'])) {
             $this->assign('me', $_SESSION['membre']);
         }
 
-        if(defined('ADHOC_COUNTERS')) {
-            if(!empty($_SESSION['membre'])) {
+        if (defined('ADHOC_COUNTERS')) {
+            if (!empty($_SESSION['membre'])) {
                 $this->assign('is_auth', true);
 
-                $this->assign('my_counters', array(
+                $this->assign('my_counters', [
                     'nb_unread_messages' => (int) Messagerie::getMyUnreadMessagesCount(),
                     'nb_messages'        => (int) Messagerie::getMyMessagesCount(),
-                ));
+                ]);
 
             } else {
                 $this->assign('is_auth', false);
                 $this->assign('my_counters', false);
             }
-            $this->assign('global_counters', array(
-                'nb_groupes' => 426,// (int) Groupe::getGroupesCount(Groupe::ETAT_ACTIF),
-                'nb_events'  => 5401,// (int) Event::getEventsCount(),
-                'nb_lieux'   => 1759,// (int) Lieu::getLieuxCount(),
-            ));
         }
 
         $this->enqueue_style('/css/adhoc.20160213.css');
 
-        $this->enqueue_script('/js/jquery-3.2.1.min.js');
+        $this->enqueue_script('/js/jquery-3.3.1.min.js');
         $this->enqueue_script('/js/adhoc.20160213.js');
-
-        //$this->print_inline_script(file_get_contents(ADHOC_ROOT_PATH . '/app/assets/js/google-analytics.js'));
-        //$this->print_inline_script(file_get_contents(ADHOC_ROOT_PATH . '/app/assets/js/facebook-sdk.js'));
 
         return $this;
     }
@@ -96,28 +88,28 @@ class AdHocSmarty extends Smarty
      */
     static function function_audio_player($params)
     {
-        if(!array_key_exists('id', $params)) {
+        if (!array_key_exists('id', $params)) {
             return '';
         }
-        if(!array_key_exists('type', $params)) {
+        if (!array_key_exists('type', $params)) {
             $params['type']  = 'dewplayer';
         }
 
         $bgcolor = '666666';
 
-        if($params['type'] === 'player_mp3_multi') {
+        if ($params['type'] === 'player_mp3_multi') {
             $id_groupe = $params['id'];
-        } elseif($params['type'] === 'webradio') {
+        } elseif ($params['type'] === 'webradio') {
             $chemin = $params['id'];
             $type = 'dewplayer';
         } else {
             $chemin = '';
-            if(is_numeric($params['id'])) {
+            if (is_numeric($params['id'])) {
                 $chemin .= MEDIA_URL . '/media/audio/'.$params['id'].'.mp3';
-            } elseif(is_array($params['id'])) {
+            } elseif (is_array($params['id'])) {
                 $first  = true;
-                foreach($params['id'] as $id) {
-                    if(!$first) { $chemin .= '|'; }
+                foreach ($params['id'] as $id) {
+                    if (!$first) { $chemin .= '|'; }
                     $chemin .= MEDIA_URL . '/media/audio/'.$id.'.mp3';
                     $first = false;
                 }
