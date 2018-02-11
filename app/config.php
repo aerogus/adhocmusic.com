@@ -20,19 +20,12 @@ function adhoc_get_env()
     $host = php_uname('n');
     switch ($host)
     {
-        case 'ns1.adhocmusic.com':
         case 'ns2.adhocmusic.com':
-        case 'ns3.adhocmusic.com':
             return 'PROD';
             break;
 
-        case 'Mac-mini-Salon.local':
-        case 'Mac-mini-Bureau.local':
-            return 'DEV';
-            break;
-
         default:
-            die('Unknown environnement');
+            return 'DEV';
             break;
     }
 }
@@ -57,13 +50,13 @@ if (ENV === 'PROD') {
     define('_DB_DATABASE_', 'adhocmusic');
 
     if (is_ssl()) {
-        define('HOME_URL',  'https://adhocmusic.com');
-        define('CACHE_URL', 'https://adhocmusic.com');
-        define('MEDIA_URL', 'https://adhocmusic.com/media');
+        define('HOME_URL',  'https://www.adhocmusic.com');
+        define('CACHE_URL', 'https://static.adhocmusic.com/cache');
+        define('MEDIA_URL', 'https://static.adhocmusic.com/media');
     } else {
-        define('HOME_URL',  'http://adhocmusic.com');
-        define('CACHE_URL', 'http://adhocmusic.com');
-        define('MEDIA_URL', 'http://adhocmusic.com/media');
+        define('HOME_URL',  'http://www.adhocmusic.com');
+        define('CACHE_URL', 'http://static.adhocmusic.com/cache');
+        define('MEDIA_URL', 'http://static.adhocmusic.com/media');
     }
 
     ini_set('display_startup_errors', 0);
@@ -78,13 +71,13 @@ if (ENV === 'PROD') {
     define('_DB_DATABASE_',    'adhoc');
 
     if (is_ssl()) {
-        define('HOME_URL',  'https://adhocmusic.localhost');
-        define('CACHE_URL', 'https://adhocmusic.localhost');
-        define('MEDIA_URL', 'https://adhocmusic.localhost/media');
+        define('HOME_URL',  'https://www.adhocmusic.localhost');
+        define('CACHE_URL', 'https://static.adhocmusic.localhost/cache');
+        define('MEDIA_URL', 'https://static.adhocmusic.localhost/media');
     } else {
-        define('HOME_URL',  'http://adhocmusic.localhost');
-        define('CACHE_URL', 'http://adhocmusic.localhost');
-        define('MEDIA_URL', 'http://adhocmusic.localhost/media');
+        define('HOME_URL',  'http://www.adhocmusic.localhost');
+        define('CACHE_URL', 'http://static.adhocmusic.localhost/cache');
+        define('MEDIA_URL', 'http://static.adhocmusic.localhost/media');
     }
 
     ini_set('display_startup_errors', 1);
@@ -168,7 +161,7 @@ Tools::sessionInit();
 $GLOBALS['fb'] = new Facebook\Facebook([
     'app_id' => FB_APP_ID,
     'app_secret' => FB_APP_SECRET,
-    'default_graph_version' => 'v2.8',
+    'default_graph_version' => 'v2.12',
 ]);
 
 $GLOBALS['fb_login_url'] = $fb->getRedirectLoginHelper()->getLoginUrl(HOME_URL . '/auth/facebook-login-callback', ['email']);

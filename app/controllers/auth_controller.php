@@ -7,17 +7,17 @@ class Controller
      */
     static function login()
     {
-        if(!is_ssl()) {
-        //    Tools::redirect('/auth/login', true);
+        if (!is_ssl()) {
+            Tools::redirect('/auth/login', true);
         }
 
-        if(Tools::isSubmit('form-login'))
+        if (Tools::isSubmit('form-login'))
         {
             $pseudo = trim((string) Route::params('pseudo'));
             $password = trim((string) Route::params('password'));
             $facebook_uid = (int) Route::params('facebook_uid');
 
-            if($id_contact = Membre::checkPseudoPassword($pseudo, $password)) {
+            if ($id_contact = Membre::checkPseudoPassword($pseudo, $password)) {
 
                 // Authentification réussie, on ouvre une session
                 $membre = Membre::getInstance($id_contact);
@@ -25,7 +25,7 @@ class Controller
                 // update date derniere visite
                 $membre->setVisitedNow();
 
-                if($facebook_uid) {
+                if ($facebook_uid) {
                     $membre->setFacebookUid($facebook_uid);
                 }
 
@@ -33,7 +33,7 @@ class Controller
 
                 $_SESSION['membre'] = $membre;
 
-                if(!empty($_SESSION['redirect_after_auth'])) {
+                if (!empty($_SESSION['redirect_after_auth'])) {
                     $url = $_SESSION['redirect_after_auth'];
                     unset($_SESSION['redirect_after_auth']);
                 } else {
@@ -59,7 +59,7 @@ class Controller
         }
 
         // déjà authentifié
-        if(!empty($_SESSION['membre'])) {
+        if (!empty($_SESSION['membre'])) {
             Tools::redirect('/membres/tableau-de-bord');
         } else {
             $smarty = new AdHocSmarty();
@@ -78,22 +78,22 @@ class Controller
     static function facebook_login_callback()
     {
         $error = trim((string) Route::params('error'));
-        if($error === 'access_denied') {
+        if ($error === 'access_denied') {
             die("vous n'avez pas autorisé l'application AD'HOC :(");
         }
 
         $fb = new Facebook\Facebook([
             'app_id' => FB_APP_ID,
             'app_secret' => FB_APP_SECRET,
-            'default_graph_version' => 'v2.7',
+            'default_graph_version' => 'v2.12',
         ]);
 
         $helper = $fb->getRedirectLoginHelper();
         try {
             $accessToken = $helper->getAccessToken();
-        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+        } catch (Facebook\Exceptions\FacebookResponseException $e) {
             die('Graph returned an error: ' . $e->getMessage());
-        } catch(Facebook\Exceptions\FacebookSDKException $e) {
+        } catch (Facebook\Exceptions\FacebookSDKException $e) {
             die('Facebook SDK returned an error: ' . $e->getMessage());
         }
 
@@ -107,12 +107,12 @@ class Controller
             $email = $userNode->getField('email');
 
             // si l'email n'est pas autorisée, on ne peut pas relier avec un compte existant
-            if(!$email) {
+            if (!$email) {
                 die("Vous n'avez pas autorisé l'email dans l'appli Facebook AD'HOC, allez dans vos paramètres d'app et effacez l'app, une nouvelle demande d'autorisation vous sera proposée.");
             }
 
             // le membre est-il connu ?
-            if($id_contact = Membre::getIdByEmail($email)) {
+            if ($id_contact = Membre::getIdByEmail($email)) {
 
                 $membre = Membre::getInstance($id_contact);
                 $membre->setVisitedNow();
@@ -123,7 +123,7 @@ class Controller
 
                 Log::action(Log::ACTION_LOGIN_FACEBOOK);
 
-                if(!empty($_SESSION['redirect_after_auth'])) {
+                if (!empty($_SESSION['redirect_after_auth'])) {
                     $url = $_SESSION['redirect_after_auth'];
                     unset($_SESSION['redirect_after_auth']);
                 } else {
@@ -144,28 +144,12 @@ class Controller
     }
 
     /**
-     *
-     */
-    static function twitter_login_callback()
-    {
-        return 'TLC';
-    }
-
-    /**
-     *
-     */
-    static function google_login_callback()
-    {
-        return 'GLC';
-    }
-
-    /**
      * Page de déconnexion
      */
     static function logout()
     {
         // si bien identifié, destruction de la session
-        if(!empty($_SESSION['membre'])) {
+        if (!empty($_SESSION['membre'])) {
 
             // delete de la session FB
             $membre = Membre::getInstance($_SESSION['membre']->getId());
@@ -202,16 +186,16 @@ class Controller
 
         $membre = Membre::getInstance($_SESSION['membre']->getId());
 
-        if(Tools::isSubmit('form-password-change'))
+        if (Tools::isSubmit('form-password-change'))
         {
             $password_old   = trim((string) Route::params('password_old'));
             $password_new_1 = trim((string) Route::params('password_new_1'));
             $password_new_2 = trim((string) Route::params('password_new_2'));
 
-            if(($password_old !== "") && ($password_new_1 !== "") && ($password_new_1 === $password_new_2))
+            if (($password_old !== "") && ($password_new_1 !== "") && ($password_new_1 === $password_new_2))
             {
-                if($membre->checkPassword($password_old)) {
-                    if($password_new_1 == $password_old) {
+                if ($membre->checkPassword($password_old)) {
+                    if ($password_new_1 == $password_old) {
                         $smarty->assign('change_ok', true);
                     } else {
                         $membre->setPassword($password_new_1);
@@ -289,8 +273,8 @@ class Controller
     {
         $out = [];
         $email = (string) Route::params('email');
-        if(Email::validate($email)) {
-            if($id_contact = Membre::getIdByEmail($email)) {
+        if (Email::validate($email)) {
+            if ($id_contact = Membre::getIdByEmail($email)) {
                 $out['status'] = 'KO_ALREADY_MEMBER';
             } else {
                 $out['status'] = 'OK';
@@ -305,7 +289,7 @@ class Controller
     {
         $out = [];
         $pseudo = (string) Route::params('pseudo');
-        if($id_contact = Membre::getIdByPseudo($pseudo)) {
+        if ($id_contact = Membre::getIdByPseudo($pseudo)) {
             $out['status'] = 'KO_PSEUDO_UNAVAILABLE';
         } else {
             $out['status'] = 'OK';

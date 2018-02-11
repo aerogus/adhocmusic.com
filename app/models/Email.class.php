@@ -4,6 +4,9 @@
  * @package adhoc
  */
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 // PEAR QuickForm
 define('EMAIL_VALIDATE_REGEXP_1', <<<EOT
 /$^((\"[^\"\f\n\r\t\v\b]+\")|([\w\!\#\$\%\&\'\*\+\-\~\/\^\`\|\{\}]+(\.[\w\!\#\$\%\&\'\*\+\-\~\/\^\`\|\{\}]+)*))@((\[(((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9])))\])|(((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9])))|((([A-Za-z0-9\-])+\.)+[A-Za-z\-]+))$/
@@ -101,7 +104,7 @@ class Email
         $mail->CharSet  = "UTF-8";
         $mail->From     = "contact@adhocmusic.com";
         $mail->FromName = "Site AD'HOC";
-        if(!empty($data['email_reply_to'])) {
+        if (!empty($data['email_reply_to'])) {
             $mail->AddReplyTo($data['email_reply_to']);
         } else {
             $mail->AddReplyTo('contact@adhocmusic.com');
@@ -115,7 +118,7 @@ class Email
         $mail->AltBody  = strip_tags($body);
         $mail->WordWrap = 78;
 
-        if(is_array($to)) {
+        if (is_array($to)) {
             foreach($to as $_to) {
                 $mail->AddAddress($_to);
             }
@@ -123,7 +126,7 @@ class Email
             $mail->AddAddress($to);
         }
 
-        if(!is_null($attachment)) {
+        if (!is_null($attachment)) {
             $mail->AddStringAttachment($attachment, $_FILES[$attachment]['name'], 'base64', $_FILES[$attachment]['type']);
         }
 
