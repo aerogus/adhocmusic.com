@@ -27,7 +27,7 @@
 <div class="event">
   <div class="event_header">
     <div class="event_date">{$obj->getDate()|date_format:"%H:%M"}</div>
-    <div class="event_lieu"><a href="/lieux/show/{$tab.lieu_id}" title="{$tab.lieu_name|escape}"><strong>{$tab.lieu_name|escape}</strong></a><br>({$tab.lieu_id_departement} - {$tab.lieu_city})<br>à {$tab.lieu_distance} km</div>
+    <div class="event_lieu"><a href="/lieux/{$tab.lieu_id}" title="{$tab.lieu_name|escape}"><strong>{$tab.lieu_name|escape}</strong></a><br>({$tab.lieu_id_departement} - {$tab.lieu_city})<br>à {$tab.lieu_distance} km</div>
   </div>
   <div class="event_content">
     <span class="event_title" style="position: relative;">
