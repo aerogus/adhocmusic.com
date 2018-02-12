@@ -1,0 +1,79 @@
+##
+# Environnement de développement du site adhocmusic.com
+##
+
+version: '2'
+
+services:
+
+  apache:
+    build: ./conf/apache2
+    hostname: www
+    container_name: adhocmusic_apache
+    restart: always
+    networks:
+     adhocmusic:
+       aliases:
+         - adhocmusic.dev
+         - www.adhocmusic.dev
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - .:/var/www/adhocmusic.com:ro
+      - ./conf/apache2:/usr/local/apache2/conf:ro
+      - ./log/apache2:/var/log/apache2
+
+  php:
+    build: ./conf/php
+    hostname: php
+    container_name: adhocmusic_php
+    restart: always
+    networks:
+      ouifmfr:
+        aliases:
+          - php.adhocmusic.dev
+    depends_on:
+      - mysql
+    volumes:
+       - .:/var/www/adhocmusic.com
+       - ./log/php:/var/log/php
+
+  mysql:
+    build: ./conf/mysql
+    hostname: mysql
+    container_name: adhocmusic_mysql
+    restart: always
+    networks:
+      adhocmusic:
+        aliases:
+          - mysql.adhocmusic.dev
+    volumes:
+      - ./conf/mysql/initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./log/mysql:/var/log/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: adhocmusic
+      MYSQL_USER: adhocmusic
+      MYSQL_PASSWORD: changeme
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    hostname: pma
+    container_name: adhocmusic_pma
+    restart: always
+    networks:
+      ouifmfr:
+        aliases:
+          - pma.adhocmusic.dev
+    ports:
+      - 81:80
+      - 444:443
+    environment:
+      PMA_HOST: adhocmusic_mysql
+      PMA_USER: adhocmusic
+      PMA_PASSWORD: changeme
+
+networks:
+  adhocmusic:
+
