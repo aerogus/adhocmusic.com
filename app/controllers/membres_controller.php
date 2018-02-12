@@ -15,7 +15,7 @@ class Controller
 
         try {
             $membre = Membre::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_member', true);
             return $smarty->fetch('membres/show.tpl');
@@ -30,7 +30,7 @@ class Controller
         $smarty->assign('groupes', $membre->getGroupes());
 
         $ids_photo = Membre::getTaggedPhotos($membre->getId());
-        if(mb_strlen($ids_photo) > 0) {
+        if (mb_strlen($ids_photo) > 0) {
             $smarty->assign('photos', Photo::getPhotos([
                 'online' => true,
                 'sort'   => 'random',
@@ -47,7 +47,7 @@ class Controller
      */
     static function create()
     {
-        if(Tools::isAuth()) {
+        if (Tools::isAuth()) {
             Tools::redirect('/');
         }
 
@@ -134,7 +134,7 @@ class Controller
                     $membre->setLevel(Membre::TYPE_STANDARD);
                     $membre->setCreatedNow();
 
-                    if($membre->save()) {
+                    if ($membre->save()) {
                         Email::send($data['email'], "Inscription à l'Association AD'HOC", 'member-create', $data);
                         Log::action(Log::ACTION_MEMBER_CREATE, $membre->getId());
                         Tools::redirect('/membres/create?create=1');
@@ -147,7 +147,7 @@ class Controller
             }
 
             if (!empty($errors)) {
-                foreach($errors as $k => $v) {
+                foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
             }
@@ -171,17 +171,17 @@ class Controller
         if (empty($data['pseudo'])) {
             $errors['pseudo'] = true;
         }
-        if(!Membre::isPseudoAvailable($data['pseudo'])) {
+        if (!Membre::isPseudoAvailable($data['pseudo'])) {
             $errors['pseudo_unavailable'] = true;
         }
-        if($id_contact = Contact::getIdByEmail($data['email'])) {
-            if($pseudo = Membre::getPseudoById($id_contact)) {
+        if ($id_contact = Contact::getIdByEmail($data['email'])) {
+            if ($pseudo = Membre::getPseudoById($id_contact)) {
                 $errors['already_member'] = $pseudo;
             }
         }
         if (empty($data['email'])) {
             $errors['email'] = true;
-        } elseif(!Email::validate($data['email'])) {
+        } elseif (!Email::validate($data['email'])) {
             $errors['email'] = true;
         }
         if (empty($data['last_name'])) {
@@ -193,7 +193,7 @@ class Controller
         if (empty($data['id_country'])) {
             $errors['id_country'] = true;
         }
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;
@@ -214,7 +214,7 @@ class Controller
         $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/membre-edit.js');
 
-        if(Tools::isSubmit('form-member-edit'))
+        if (Tools::isSubmit('form-member-edit'))
         {
             $member = $_SESSION['membre'];
 
@@ -351,7 +351,7 @@ class Controller
         $errors = [];
         if (empty($data['email'])) {
             $errors['email'] = true;
-        } elseif(!Email::validate($data['email'])) {
+        } elseif (!Email::validate($data['email'])) {
             $errors['email'] = true;
         }
         if (empty($data['last_name'])) {
@@ -363,7 +363,7 @@ class Controller
         if (empty($data['id_country'])) {
             $errors['id_country'] = true;
         }
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;
@@ -379,16 +379,16 @@ class Controller
 
         try {
             $membre = Membre::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_member', true);
             return $smarty->fetch('membres/delete.tpl');
         }
 
-        if(Tools::isSubmit('form-member-delete'))
+        if (Tools::isSubmit('form-member-delete'))
         {
             // effacement du membre
-            if($membre->delete()) {
+            if ($membre->delete()) {
                 Log::action(Log::ACTION_MEMBER_DELETE, $id);
 
                 // destruction de la session
@@ -415,7 +415,7 @@ class Controller
     {
         $q = trim((string) Route::params('q'));
 
-        if(strlen($q) < 1) {
+        if (strlen($q) < 1) {
             return [];
         }
 
@@ -438,7 +438,7 @@ class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
         
-        if(Tools::isSubmit('form-fb-link'))
+        if (Tools::isSubmit('form-fb-link'))
         {
             $membre = $_SESSION['membre'];
             $membre->setFacebookProfileId($fbid);
@@ -471,7 +471,7 @@ class Controller
             $membre->setFacebookAccessToken('');
             $membre->setFacebookAutoLogin(false);
             $membre->save();
-        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+        } catch (Facebook\Exceptions\FacebookResponseException $e) {
             // app non autorisée donc compte non lié
         }
 

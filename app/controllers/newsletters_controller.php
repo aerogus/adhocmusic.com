@@ -25,7 +25,7 @@ class Controller
 
         try {
             $newsletter = Newsletter::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_newsletter', true);
             return $smarty->fetch('newsletters/show.tpl');
@@ -64,9 +64,9 @@ class Controller
         $smarty->assign('email', $email);
         $smarty->assign('action', $action);
 
-        if(Tools::isSubmit('form-newsletter'))
+        if (Tools::isSubmit('form-newsletter'))
         {
-            if(!Email::validate($email)) {
+            if (!Email::validate($email)) {
 
                 $smarty->assign('error_email', true);
 

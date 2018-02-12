@@ -34,11 +34,11 @@ class Controller
         $type = (string) Route::params('type');
         $query = (string) Route::params('query');
 
-        if(mb_strlen($query) < 2) {
+        if (mb_strlen($query) < 2) {
             return [];
         }
 
-        if(empty($type)) {
+        if (empty($type)) {
             $type = 'groupes';
         }
 

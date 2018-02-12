@@ -24,10 +24,10 @@ class Controller
         $day   = (int) Route::params('d');
         $page  = (int) Route::params('page');
 
-        if($year && $month && $day) {
+        if ($year && $month && $day) {
             $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, $month, $day, $year));
             $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, $month, $day, $year));
-        } elseif($year && $month) {
+        } elseif ($year && $month) {
             $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, $month, 1, $year));
             $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, $month, 31, $year));
         } else {
@@ -35,7 +35,7 @@ class Controller
             $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, date("m") + 1, date("d"), date("Y")));
         }
 
-        $_events = Event::getEvents(array(
+        $_events = Event::getEvents([
             'online' => true,
             'sort'   => 'date',
             'sens'   => 'ASC',
@@ -43,15 +43,15 @@ class Controller
             'datfin' => $datfin,
             'limit'  => 1000,
             'fetch_fb' => true,
-        ));
+        ]);
 
         $nb_events = count($_events);
         $_events = array_slice($_events, $page * NB_EVENTS_PER_PAGE, NB_EVENTS_PER_PAGE);
 
         $events = [];
-        foreach($_events as $event) {
+        foreach ($_events as $event) {
             $_day = substr($event['date'], 0, 10);
-            if(!array_key_exists($_day, $events)) {
+            if (!array_key_exists($_day, $events)) {
                 $events[$_day] = [];
             }
             $events[$_day][$event['id']] = [
@@ -104,7 +104,7 @@ class Controller
 
         try {
             $event = Event::getInstance((int) $id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_event', true);
             return $smarty->fetch('events/show.tpl');
@@ -123,8 +123,8 @@ class Controller
         $smarty->assign('description', "Date : " . Date::mysql_datetime($event->getDate(), 'd/m/Y') . " | Lieu : " . $lieu->getName() . " " . $lieu->getAddress() . " " . $lieu->getCp() . " " . $lieu->getCity());
 
         // alerting
-        if(Tools::isAuth()) {
-            if(!Alerting::getIdByIds($_SESSION['membre']->getId(), 'e', $event->getId())) {
+        if (Tools::isAuth()) {
+            if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'e', $event->getId())) {
                 $smarty->assign('alerting_sub_url', 'http://www.adhocmusic.com/alerting/sub?type=e&id_content='.$event->getId());
             } else {
                 $smarty->assign('alerting_unsub_url', 'http://www.adhocmusic.com/alerting/unsub?type=e&id_content='.$event->getId());
@@ -133,35 +133,35 @@ class Controller
             $smarty->assign('alerting_auth_url', 'http://www.adhocmusic.com/auth/login');
         }
 
-        $smarty->assign('photos', Photo::getPhotos(array(
+        $smarty->assign('photos', Photo::getPhotos([
             'event'  => $event->getId(),
             'online' => true,
             'sort'   => 'random',
             'limit'  => 100,
-        )));
+        ])));
 
-        $smarty->assign('audios', Audio::getAudios(array(
+        $smarty->assign('audios', Audio::getAudios([
             'event'  => $event->getId(),
             'online' => true,
             'sort'   => 'random',
             'limit'  => 100,
-        )));
+        ]));
 
-        $smarty->assign('videos', Video::getVideos(array(
+        $smarty->assign('videos', Video::getVideos([
             'event'  => $event->getId(),
             'online' => true,
             'sort'   => 'id',
             'sens'   => 'ASC',
             'limit'  => 100,
-        )));
+        ]));
 
-        $smarty->assign('comments', Comment::getComments(array(
+        $smarty->assign('comments', Comment::getComments([
            'type'       => 'e',
            'id_content' => $event->getId(),
            'online'     => true,
            'sort'       => 'created_on',
            'sens'       => 'ASC',
-        )));
+        ]));
 
         $smarty->assign('jour', Date::mysql_datetime($event->getDate(), "d/m/Y"));
         $smarty->assign('heure', Date::mysql_datetime($event->getDate(), "H:i"));
@@ -209,10 +209,10 @@ class Controller
         // $date = (string) $_GET['date'];
         // si date non valide : date du jour
         $date = '';
-        if(isset($_GET['date'])) {
+        if (isset($_GET['date'])) {
             $date = $_GET['date'];
         }
-        if(!(preg_match("/^(\d{4})-(\d{2})-(\d{2})$/", $date, $regs) && checkdate($regs[2], $regs[3], $regs[1]))) {
+        if (!(preg_match("/^(\d{4})-(\d{2})-(\d{2})$/", $date, $regs) && checkdate($regs[2], $regs[3], $regs[1]))) {
             $year  = date('Y');
             $month = date('m');
             $day   = date('d');
@@ -226,7 +226,7 @@ class Controller
         $minute = 30;
 
         $id_groupe = 0;
-        if(isset($_GET['groupe'])) {
+        if (isset($_GET['groupe'])) {
             $id_groupe = (int) $_GET['groupe'];
         }
 
@@ -237,7 +237,7 @@ class Controller
         $id_city = 91216;
         $id_lieu = 1;
 
-        if(isset($_GET['lieu'])) {
+        if (isset($_GET['lieu'])) {
             $id_lieu = (int) $_GET['lieu'];
             $lieu = Lieu::getInstance($id_lieu);
             $id_country = $lieu->getIdCountry();
@@ -248,19 +248,19 @@ class Controller
         }
 
         $id_structure = 0;
-        if(isset($_GET['structure'])) {
+        if (isset($_GET['structure'])) {
             $id_structure = (int) $_GET['structure'];
         }
 
         // valeurs par défaut
-        $data = array(
+        $data = [
             'id_country' => $id_country,
             'id_region' => $id_region,
             'id_departement' => $id_departement,
             'id_city' => $id_city,
             'id_lieu' => $id_lieu,
             'name'    => '',
-            'date'    => array(
+            'date'    => [
                 'year'   => $year,
                 'month'  => $month,
                 'day'    => $day,
@@ -268,41 +268,41 @@ class Controller
                 'minute' => $minute,
                 'hourminute' => $hour . ':' . $minute,
                 'date'   => $year . '-' . $month . '-' . $day,
-            ),
+            ],
             'file' => '',
             'flyer_url' => '',
-            'groupes' => array(
+            'groupes' => [
                 0 => $id_groupe,
                 1 => 0,
                 2 => 0,
                 3 => 0,
                 4 => 0,
-            ),
-            'styles' => array(
+            ],
+            'styles' => [
                 0 => 0,
                 1 => 0,
                 2 => 0,
-            ),
-            'structures' => array(
+            ],
+            'structures' => [
                0 => $id_structure,
                1 => 0,
                2 => 0,
-            ),
+            ],
             'text' => '',
             'price' => '',
             'facebook_event_id' => '',
             'facebook_event_create' => false,
             'more_event' => false,
-        );
+        ];
 
-        if(Tools::isSubmit('form-event-create'))
+        if (Tools::isSubmit('form-event-create'))
         {
             list($day, $month, $year) = explode('/', (string) Route::params('date'));
             $date       = $year . '-' . $month . '-' . $day;
             $hourminute = (string) Route::params('hourminute');
             $dt         = $date . ' '. $hourminute . ':00';
 
-            $data = array(
+            $data = [
                 'name'       => (string) Route::params('name'),
                 'id_lieu'    => (int) Route::params('id_lieu'),
                 'date'       => $dt,
@@ -315,9 +315,9 @@ class Controller
                 'flyer_url'  => (string) Route::params('flyer_url'),
                 'facebook_event_id' => (string) Route::params('facebook_event_id'),
                 'facebook_event_create' => (string) Route::params('facebook_event_create'),
-            );
+            ];
 
-            if(self::_validate_form_event_create($data, $errors)) {
+            if (self::_validate_form_event_create($data, $errors)) {
 
                 $event = Event::init();
                 $event->setName($data['name']);
@@ -329,9 +329,9 @@ class Controller
                 $event->setOnline(true);
                 $event->setFacebookEventId($data['facebook_event_id']);
                 $event->setCreatedNow();
-                if($event->save()) {
+                if ($event->save()) {
 
-                    if(is_uploaded_file($_FILES['flyer']['tmp_name'])) {
+                    if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
                         $img = new Image($_FILES['flyer']['tmp_name']);
                         $img->setType(IMAGETYPE_JPEG);
                         $img->setKeepRatio(true);
@@ -342,7 +342,7 @@ class Controller
                         $img = '';
                     }
 
-                    if($data['flyer_url']) {
+                    if ($data['flyer_url']) {
                         $tmpname = tempnam('/tmp', 'import-flyer-event');
                         $handle = fopen($tmpname, "w");
                         fwrite($handle, file_get_contents($data['flyer_url']));
@@ -361,32 +361,32 @@ class Controller
                     }
 
                     /*
-                    foreach(Route::params('style') as $idx => $id_style) {
-                        if($id_style != 0) {
+                    foreach (Route::params('style') as $idx => $id_style) {
+                        if ($id_style != 0) {
                             $event->linkStyle($id_style, $idx + 1);
                         }
                     }
                     */
 
-                    foreach(Route::params('structure') as $idx => $id_structure) {
-                        if($id_structure != 0) {
+                    foreach (Route::params('structure') as $idx => $id_structure) {
+                        if ($id_structure != 0) {
                             $event->linkStructure($id_structure);
                         }
                     }
 
-                    foreach(Route::params('groupe') as $idx => $id_groupe) {
-                        if($id_groupe != 0) {
+                    foreach (Route::params('groupe') as $idx => $id_groupe) {
+                        if ($id_groupe != 0) {
                             $event->linkGroupe($id_groupe);
                         }
                     }
 
                     Log::action(Log::ACTION_EVENT_CREATE, $event->getId());
 
-                    if($data['facebook_event_create']) {
+                    if ($data['facebook_event_create']) {
                         // créer l'évenement sur facebook
                     }
 
-                    if((bool) Route::params('more-event')) {
+                    if ((bool) Route::params('more-event')) {
                         Tools::redirect('/events/create?lieu=' . $event->getIdLieu());
                     } else {
                         Tools::redirect('/events/?create=1&date=' . $date);
@@ -408,10 +408,10 @@ class Controller
         $smarty->assign('data', $data);
 
         $smarty->assign('styles', Style::getHashTable());
-        $smarty->assign('groupes', Groupe::getGroupes(array(
+        $smarty->assign('groupes', Groupe::getGroupes([
             'sort'  => 'name',
             'sens'  => 'ASC',
-        )));
+        ]));
         $smarty->assign('structures', Structure::getStructures());
 
         return $smarty->fetch('events/create.tpl');
@@ -458,10 +458,10 @@ class Controller
         $event = Event::getInstance((int) $id);
         $lieu = Lieu::getInstance($event->getIdLieu());
 
-        $data = array(
+        $data = [
             'id' => $event->getId(),
             'name' => $event->getName(),
-            'date' => array(
+            'date' => [
                 'year' => $event->getYear(),
                 'month' => $event->getMonth(),
                 'day' => $event->getDay(),
@@ -469,7 +469,7 @@ class Controller
                 'minute' => $event->getMinute(),
                 'date' => $event->getDate(),
                 'hourminute' => $event->getHour() . ':' . $event->getMinute(),
-            ),
+            ],
             'text' => $event->getText(),
             'price' => $event->getPrice(),
             'file' => '',
@@ -477,16 +477,16 @@ class Controller
             'facebook_event_id' => $event->getFacebookEventId(),
             'facebook_event_create' => false,
             'online' => $event->getOnline(),
-        );
+        ];
 
-        if(Tools::isSubmit('form-event-edit'))
+        if (Tools::isSubmit('form-event-edit'))
         {
             list($day, $month, $year) = explode('/', (string) Route::params('date'));
             $date       = $year . '-' . $month . '-' . $day;
             $hourminute = Route::params('hourminute');
             $dt         = $date . ' ' . $hourminute . ':00';
 
-            $data = array(
+            $data = [
                 'id' => (int) Route::params('id'),
                 'name' => (string) Route::params('name'),
                 'id_lieu' => (int) Route::params('id_lieu'),
@@ -498,9 +498,9 @@ class Controller
                 'facebook_event_id' => (string) Route::params('facebook_event_id'),
                 'facebook_event_create' => (string) Route::params('facebook_event_create'),
                 'online' => (bool) Route::params('online'),
-            );
+            ];
 
-            if(self::_validate_form_event_edit($data, $errors)) {
+            if (self::_validate_form_event_edit($data, $errors)) {
 
                 $event = Event::getInstance($data['id']);
                 $event->setName($data['name']);
@@ -513,7 +513,7 @@ class Controller
                 $event->setModifiedNow();
                 $event->save();
 
-                if(is_uploaded_file($_FILES['flyer']['tmp_name'])) {
+                if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
                     $img = new Image($_FILES['flyer']['tmp_name']);
                     $img->setType(IMAGETYPE_JPEG);
                     $img->setKeepRatio(true);
@@ -527,7 +527,7 @@ class Controller
                     Event::invalidateFlyerInCache($event->getId(), '400', '400');
                 }
 
-                if($data['flyer_url']) {
+                if ($data['flyer_url']) {
                     $tmpname = tempnam('/tmp', 'import-flyer-event');
                     $handle = fopen($tmpname, "w");
                     fwrite($handle, file_get_contents($data['flyer_url']));
@@ -550,23 +550,23 @@ class Controller
 
                 /*
                 $event->unlinkStyles();
-                foreach(Route::params('style') as $idx => $id_style) {
-                    if($id_style != 0) {
+                foreach (Route::params('style') as $idx => $id_style) {
+                    if ($id_style != 0) {
                         $event->linkStyle($id_style, $idx + 1);
                     }
                 }
                 */
 
                 $event->unlinkStructures();
-                foreach(Route::params('structure') as $idx => $id_structure) {
-                    if($id_structure != 0) {
+                foreach (Route::params('structure') as $idx => $id_structure) {
+                    if ($id_structure != 0) {
                         $event->linkStructure($id_structure);
                     }
                 }
 
                 $event->unlinkGroupes();
-                foreach(Route::params('groupe') as $idx => $id_groupe) {
-                    if($id_groupe != 0) {
+                foreach (Route::params('groupe') as $idx => $id_groupe) {
+                    if ($id_groupe != 0) {
                         $event->linkGroupe($id_groupe);
                     }
                 }
@@ -587,10 +587,10 @@ class Controller
         $smarty->assign('lieu', $lieu);
 
         $smarty->assign('styles', Style::getHashTable());
-        $smarty->assign('groupes', Groupe::getGroupes(array(
+        $smarty->assign('groupes', Groupe::getGroupes([
             'sort'  => 'name',
             'sens'  => 'ASC',
-        )));
+        ]));
         $smarty->assign('structures', Structure::getStructures());
 
         return $smarty->fetch('events/edit.tpl');
@@ -630,15 +630,15 @@ class Controller
 
         try {
             $event = Event::getInstance((int) Route::params('id'));
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_event', true);
             return $smarty->fetch('events/show.tpl');
         }
 
-        if(Tools::isSubmit('form-event-delete'))
+        if (Tools::isSubmit('form-event-delete'))
         {
-            if($event->delete()) {
+            if ($event->delete()) {
                 Log::action(Log::ACTION_EVENT_DELETE, $event->getId());
                 Tools::redirect('/events/?delete=1');
             }

@@ -37,7 +37,7 @@ class Controller
         $sens = (string) Route::params('sens');
         $sort = (string) Route::params('sort');
 
-        if($sens === 'DESC') {
+        if ($sens === 'DESC') {
             $sens = 'DESC';
             $sensinv = 'ASC';
         } else {
@@ -45,7 +45,7 @@ class Controller
             $sensinv = 'DESC';
         }
 
-        if(!$sort) {
+        if (!$sort) {
             $sort = 'id_contact';
         }
 
@@ -99,7 +99,7 @@ class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        if(((string) Route::params('sens') === 'DESC')) {
+        if (((string) Route::params('sens') === 'DESC')) {
             $sens = 'DESC';
             $sensinv = 'ASC';
         } else {
@@ -107,7 +107,7 @@ class Controller
             $sensinv = 'DESC';
         }
 
-        if((string) Route::params('sort')) {
+        if ((string) Route::params('sort')) {
             $sort = (string) Route::params('sort');
         } else {
             $sort = 'id_contact';
@@ -148,7 +148,7 @@ class Controller
         $smarty->assign('page', $page);
 
         // test ajax
-        if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest')
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest')
         {
             return $smarty->fetch('adm/membres/index-res.tpl');
         }
@@ -228,12 +228,12 @@ class Controller
         Tools::auth(Membre::TYPE_INTERNE);
 
         $m = false;
-        if(isset($_GET['m'])) {
+        if (isset($_GET['m'])) {
             $m = substr($_GET['m'], 0, 1);
         }
 
         $domaine = false;
-        if(isset($_GET['domaine'])) {
+        if (isset($_GET['domaine'])) {
             $domaine = $_GET['domaine'];
         }
 
@@ -271,11 +271,11 @@ class Controller
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
         $trail->addStep("Statistiques", "/adm/stats");
-        if($m) {
+        if ($m) {
             $trail->addStep($modules[$m]);
         }
 
-        switch($m)
+        switch ($m)
         {
             case '1': $module = Stats::getNbInscriptionMembreByMonth(); break;
             case '2': $module = Stats::getNbInscriptionGroupeByMonth(); break;
@@ -338,19 +338,19 @@ class Controller
         $rows = $db->queryWithFetch($sql);
 
         $tab = [];
-        foreach($rows as $row)
+        foreach ($rows as $row)
         {
             $tab[$row['id_groupe']]['id_groupe'] = $row['id_groupe'];
             $tab[$row['id_groupe']]['nom_groupe'] = $row['nom_groupe'];
-            $tab[$row['id_groupe']]['events'][] = array(
+            $tab[$row['id_groupe']]['events'][] = [
                 'id'   => $row['id_event'],
                 'name' => $row['nom_event'],
                 'date' => $row['date'],
-            );
+            ];
         }
 
         $ordre = [];
-        foreach($tab as $id_groupe => $inf)
+        foreach ($tab as $id_groupe => $inf)
         {
             $ordre[$id_groupe] = count($inf['events']);
         }
@@ -359,7 +359,7 @@ class Controller
 
         $data = [];
         $rank = 1;
-        foreach($ordre as $id_groupe => $nb)
+        foreach ($ordre as $id_groupe => $nb)
         {
             $data[$rank] = $tab[$id_groupe];
             $data[$rank]['nb'] = $nb;
@@ -406,7 +406,7 @@ class Controller
         $rows = $db->queryWithFetch($sql);
 
         $tab = [];
-        foreach($rows as $row)
+        foreach ($rows as $row)
         {
             $tab[$row['id_contact']]['id_contact'] = $row['id_contact'];
             $tab[$row['id_contact']]['first_name'] = $row['first_name'];
@@ -452,7 +452,7 @@ class Controller
         $smarty->assign('menuselected', 'prive');
 
         $full = false;
-        if(isset($_GET['full'])) {
+        if (isset($_GET['full'])) {
             $full = true;
         }
         $smarty->assign('full', $full);
@@ -530,11 +530,11 @@ class Controller
         $res = $db->queryWithFetch($sql);
 
         $tab_groupes = [];
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $tab_groupes[$_res['id']] = $_res;
         }
 
-        foreach($tab_groupes as $id_grp => $grp)
+        foreach ($tab_groupes as $id_grp => $grp)
         {
             $sql = "SELECT `id_style`, `ordre` "
                  . "FROM `adhoc_groupe_style` "
@@ -543,11 +543,11 @@ class Controller
             $res = $db->query($sql);
 
             $cpt = 0;
-            while(list($grp_style_id, $grp_style_ordre) = $db->fetchRow($res)) {
+            while (list($grp_style_id, $grp_style_ordre) = $db->fetchRow($res)) {
                 $tab_groupes[$id_grp]['styles'][$grp_style_ordre] = Style::getName($grp_style_id);
                 $cpt++;
             }
-            if($cpt > 0) {
+            if ($cpt > 0) {
                 $tab_groupes[$id_grp]['bgcolor'] = '#009900'; // au moins 1 style : bien
             } else {
                 $tab_groupes[$id_grp]['bgcolor'] = '#990000'; // aucun style : mal
@@ -561,7 +561,7 @@ class Controller
 
     static function groupe_de_style_id()
     {
-        if(Tools::isSubmit('form-groupe-de-style')) {
+        if (Tools::isSubmit('form-groupe-de-style')) {
             return self::groupe_de_style_submit();
         }
 
@@ -589,22 +589,22 @@ class Controller
              . "ORDER BY `ordre` ASC "
              . "LIMIT 0, 3";
         $res = $db->query($sql);
-        $sty = array(0, 0, 0);
+        $sty = [0, 0, 0];
         $cpt = 0;
-        while(list($id_style) = $db->fetchRow($res)) {
+        while (list($id_style) = $db->fetchRow($res)) {
             $sty[$cpt] = $id_style;
             $cpt++;
         }
 
         // todo: dans le tpl !!
         $form_style = [];
-        for($cpt_style = 0 ; $cpt_style < 3 ; $cpt_style ++) {
+        for ($cpt_style = 0 ; $cpt_style < 3 ; $cpt_style ++) {
             $form_style[$cpt_style]  = '';
             $form_style[$cpt_style] .= "<select name=\"style[" . $cpt_style . "]\">";
             $form_style[$cpt_style] .= "<option value=\"0\">---</option>\n";
-            foreach(Style::getHashTable() as $id_style => $nom_style) {
+            foreach (Style::getHashTable() as $id_style => $nom_style) {
                 $form_style[$cpt_style] .= "<option value=\"" . $id_style . "\"";
-                if($id_style == $sty[$cpt_style]) {
+                if ($id_style == $sty[$cpt_style]) {
                     $form_style[$cpt_style] .= " selected=\"selected\"";
                 }
                 $form_style[$cpt_style] .= ">" . $nom_style . "</option>\n";
@@ -632,16 +632,16 @@ class Controller
              . "WHERE `id_groupe` = " . (int) $id_groupe;
         $res = $db->query($sql);
 
-        foreach($style as $ordre => $id_style) {
+        foreach ($style as $ordre => $id_style) {
             $ordre += 1;
-            if($id_style > 0) {
+            if ($id_style > 0) {
                 $sql = "INSERT INTO `adhoc_groupe_style` "
                      . "(`id_groupe`, `id_style`, `ordre`) "
                      . "VALUES (" . $id_groupe . ", " . $id_style . ", " . $ordre . ")";
-                try{
+                try {
                     $res = $db->query($sql);
                 }
-                catch(Exception $e) {
+                catch (Exception $e) {
                     die($e->getMessage());
                 }
             }
@@ -677,21 +677,21 @@ class Controller
         $page = (int) Route::params('page');
         $tag = (string) Route::params('tag');
 
-        $photos = Photo::getPhotos(array(
+        $photos = Photo::getPhotos([
             'limit' => ADM_TAG_NB_PHOTOS_PER_PAGE,
             'debut' => $page * ADM_TAG_NB_PHOTOS_PER_PAGE,
             'sort'  => 'id',
             'sens'  => 'DESC',
-        ));
+        ]);
 
         $nb_photos = count($photos);
 
-        if($nb_photos) {
-            foreach($photos as $key => $photo) {
-                if(is_array($photo['tag']) && count($photo['tag'])) {
+        if ($nb_photos) {
+            foreach ($photos as $key => $photo) {
+                if (is_array($photo['tag']) && count($photo['tag'])) {
                     $photos[$key]['bgcolor'] = '#00ff00';
                     $photos[$key]['nb_tags'] = count($photo['tag']);
-                    if($photos[$key]['nb_tags'] > 1) {
+                    if ($photos[$key]['nb_tags'] > 1) {
                         $photos[$key]['nb_tags_lib'] = $photos[$key]['nb_tags'] . ' tags';
                     } else {
                         $photos[$key]['nb_tags_lib'] = '1 tag';
@@ -710,7 +710,7 @@ class Controller
         $smarty->assign('page', $page);
         $smarty->assign('show_list', true);
 
-        if($tag == 'ok') {
+        if ($tag == 'ok') {
             $smarty->assign('tag_ok', true);
         }
 
@@ -758,9 +758,9 @@ class Controller
         $db->query($sql);
 
         // insert tags
-        for($cpt = 0 ; $cpt < ADM_TAG_NB_TAGS_PER_PHOTO ; $cpt++) {
+        for ($cpt = 0 ; $cpt < ADM_TAG_NB_TAGS_PER_PHOTO ; $cpt++) {
             $var = 'id_contact_' . $cpt;
-            if($_POST[$var] != 0) {
+            if ($_POST[$var] != 0) {
                 $sql = "INSERT IGNORE INTO `adhoc_est_marque_sur` "
                      . "(`id_media`, `id_type_media`, `id_contact`, `tagge_par`, `date`) "
                      . "VALUES(" . (int) $id_photo . ", " . (int) ObjectModel::TYPE_MEDIA_PHOTO . ", " . (int) $_POST[$var] . ", " . (int) $_SESSION['membre']->getId() . ", NOW())";
@@ -796,28 +796,28 @@ class Controller
         !empty($_GET['id']) ? $id = (int) $_GET['id'] : $id = '';
         $smarty->assign('id', $id);
 
-        switch($action)
+        switch ($action)
         {
             case 'show':
             default:
 
                 $out .= "<table>";
 
-                if($email != "") {
+                if ($email != "") {
                     $sql = "SELECT `id_contact`, `email` FROM `adhoc_contact` WHERE `email` = '" . $db->escape($email) . "'";
                     $res = $db->query($sql);
-                    if(list($id) = $db->fetchRow($res)) {
+                    if (list($id) = $db->fetchRow($res)) {
                         $out .= "<tr><td>Email <strong>" . $email . "</strong> trouvé - id_contact : <strong>" . $id . "</strong></td></tr>";
                     } else {
                         $out .= "<tr><td>Email <strong>" . $email . "</strong> non trouvé</td></tr>";
                     }
                 }
 
-                if($id > 0) {
+                if ($id > 0) {
 
                     $sql = "SELECT `email` FROM `adhoc_contact` WHERE `id_contact` = " . $id;
                     $res = $db->query($sql);
-                    if(list($email) = $db->fetchRow($res)) {
+                    if (list($email) = $db->fetchRow($res)) {
                         $out .= "<tr><td>table contact : <strong>oui</strong> - email = <strong>" . $email . "</strong> - <a href='/adm/delete-account?action=delete&id=" . $id . "'>EFFACER TOUT LE COMPTE</a></td></tr>";
                     } else {
                         $out .= "<tr><td>table contact : <strong>non</strong></td></tr>";
@@ -825,7 +825,7 @@ class Controller
 
                     $sql = "SELECT `pseudo`, `last_name`, `first_name`, `created_on`, `modified_on`, `visited_on` FROM `adhoc_membre` WHERE `id_contact` = " . $id;
                     $res = $db->query($sql);
-                    if(list($pseudo, $nom, $prenom, $crea, $modif, $visite) = $db->fetchRow($res)) {
+                    if (list($pseudo, $nom, $prenom, $crea, $modif, $visite) = $db->fetchRow($res)) {
                         $out .= "<tr><td>table membre : <strong>oui</strong> - pseudo = <strong>" . $pseudo . "</strong> - nom = <strong>" . $nom . "</strong> - prenom = <strong>" . $prenom . "</strong><br />";
                         $out .= "crea : " . $crea . " - modif : " . $modif . " - visite : " . $visite . "</td></tr>";
                     } else {
@@ -895,7 +895,7 @@ class Controller
 
         $out = '';
 
-        if(!$id) {
+        if (!$id) {
             return 'id invalide';
         }
 
@@ -947,10 +947,10 @@ class Controller
         $trail->addStep("Privé", "/adm/");
         $trail->addStep("Liaison Membre / Groupe");
 
-        if(Tools::isSubmit('form-appartient-a'))
+        if (Tools::isSubmit('form-appartient-a'))
         {
             $groupe = Groupe::getInstance($id_groupe);
-            switch($action)
+            switch ($action)
             {
                 case 'create':
                     $groupe->linkMember($id_contact, $id_type_musicien, $datdeb, $datfin);
@@ -964,7 +964,7 @@ class Controller
                     break;
             }
 
-            switch($from)
+            switch ($from)
             {
                 case "groupe":
                     Tools::redirect('/adm/groupes/' . $id_groupe);
@@ -983,7 +983,7 @@ class Controller
         $smarty->assign('id_contact', $id_contact);
         $smarty->assign('types', Membre::getTypesMusicien());
 
-        switch($action)
+        switch ($action)
         {
             case "create":
                 $smarty->assign('action_lib', 'Ajouter');

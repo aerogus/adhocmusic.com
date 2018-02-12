@@ -21,19 +21,19 @@ class Controller
         $trail->addStep("L'Association", "/assoce");
         $trail->addStep("Présentation");
 
-        $smarty->assign('photos', Photo::getPhotos(array(
+        $smarty->assign('photos', Photo::getPhotos([
             'online' => true,
             'sort'   => 'random',
             'lieu'   => 1,
             'limit'  => 3,
-        )));
+        ]));
 
-        $smarty->assign('videos', Video::getVideos(array(
+        $smarty->assign('videos', Video::getVideos([
             'online' => true,
             'sort'   => 'random',
             'lieu'   => 1,
             'limit'  => 6,
-        )));
+        ]));
 
         return $smarty->fetch('assoce/presentation.tpl');
     }
@@ -52,19 +52,19 @@ class Controller
         $trail->addStep("L'Association", "/assoce");
         $trail->addStep("Les Concerts");
 
-        $smarty->assign('photos', Photo::getPhotos(array(
+        $smarty->assign('photos', Photo::getPhotos([
             'online' => true,
             'sort'   => 'random',
             'lieu'   => 1,
             'limit'  => 3,
-        )));
+        ]));
 
-        $smarty->assign('videos', Video::getVideos(array(
+        $smarty->assign('videos', Video::getVideos([
             'online' => true,
             'sort'   => 'random',
             'lieu'   => 1,
             'limit'  => 6,
-        )));
+        ]));
 
         // tri antéchrono des saisons
         $smarty->assign('events', array_reverse(Event::getAdHocEventsBySeason()));
@@ -86,19 +86,19 @@ class Controller
         $trail->addStep("L'Association", "/assoce");
         $trail->addStep("Les Afterworks");
 
-        $smarty->assign('photos', Photo::getPhotos(array(
+        $smarty->assign('photos', Photo::getPhotos([
             'online' => true,
             'sort'   => 'random',
             'lieu'   => 1,
             'limit'  => 3,
-        )));
+        ]));
 
-        $smarty->assign('videos', Video::getVideos(array(
+        $smarty->assign('videos', Video::getVideos([
             'online' => true,
             'sort'   => 'random',
             'lieu'   => 1,
             'limit'  => 6,
-        )));
+        ]));
 
         $smarty->assign('events', array_reverse(Event::getAdHocEventsBySeason(), true));
 
@@ -115,18 +115,18 @@ class Controller
         $trail = Trail::getInstance();
         $trail->addStep("L'Association", "/assoce");
         $trail->addStep("L'Equipe");
-        $smarty->assign('photos', Photo::getPhotos(array(
+        $smarty->assign('photos', Photo::getPhotos([
             'online' => true,
             'sort'   => 'random',
             'lieu'   => 1,
             'limit'  => 3,
-        )));
-        $smarty->assign('videos', Video::getVideos(array(
+        ]));
+        $smarty->assign('videos', Video::getVideos([
             'online' => true,
             'sort'   => 'random',
             'lieu'   => 1,
             'limit'  => 6,
-        )));
+        ]));
         return $smarty->fetch('assoce/formations.tpl');
     }
 
@@ -144,19 +144,19 @@ class Controller
         $trail->addStep("L'Association", "/assoce");
         $trail->addStep("L'Equipe");
 
-        $smarty->assign('photos', Photo::getPhotos(array(
+        $smarty->assign('photos', Photo::getPhotos([
             'online' => true,
             'sort'   => 'random',
             'lieu'   => 1,
             'limit'  => 3,
-        )));
+        ]));
 
-        $smarty->assign('videos', Video::getVideos(array(
+        $smarty->assign('videos', Video::getVideos([
             'online' => true,
             'sort'   => 'random',
             'lieu'   => 1,
             'limit'  => 6,
-        )));
+        ]));
 
         $smarty->assign('membres', MembreAdhoc::getStaff(true));
         $smarty->assign('omembres', MembreAdhoc::getStaff(false));
@@ -178,19 +178,19 @@ class Controller
         $trail->addStep("L'Association", "/assoce");
         $trail->addStep("Statuts");
 
-        $smarty->assign('photos', Photo::getPhotos(array(
+        $smarty->assign('photos', Photo::getPhotos([
             'online' => true,
             'sort'   => 'random',
             'lieu'   => 1,
             'limit'  => 3,
-        )));
+        ]));
 
-        $smarty->assign('videos', Video::getVideos(array(
+        $smarty->assign('videos', Video::getVideos([
             'online' => true,
             'sort'   => 'random',
             'lieu'   => 1,
             'limit'  => 6,
-        )));
+        ]));
 
         return $smarty->fetch('assoce/statuts.tpl');
     }

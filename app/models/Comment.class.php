@@ -98,7 +98,7 @@ class Comment extends ObjectModel
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'type'        => 'str',
         'id_content'  => 'num',
         'created_on'  => 'date',
@@ -108,16 +108,16 @@ class Comment extends ObjectModel
         'pseudo'      => 'str',
         'email'       => 'str',
         'text'        => 'str',
-    );
+    ];
 
-    protected static $_types = array(
+    protected static $_types = [
         'l' => 'lieux',
         'p' => 'photos',
         'v' => 'videos',
         's' => 'audios',
         'e' => 'events',
         'g' => 'groupes',
-    );
+    ];
 
     /* début getters */
 
@@ -658,13 +658,13 @@ class Comment extends ObjectModel
                 break;
         }
 
-        $comments = Comment::getComments(array(
+        $comments = Comment::getComments([
             'type'       => $this->getType(),
             'id_content' => $this->getIdContent(),
             'sort'       => 'created_on',
             'sens'       => 'ASC',
             'online'     => true,
-        ));
+        ]);
 
         // -> gens ayant déjà posté sur ce contenu
         foreach ($comments as $comment)

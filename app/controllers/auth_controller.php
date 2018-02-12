@@ -201,7 +201,7 @@ class Controller
                         $membre->setPassword($password_new_1);
                         $membre->save();
                         Log::action(Log::ACTION_PASSWORD_CHANGED);
-                        Email::send($membre->getEmail(), 'Mot de passe modifié', 'password-changed', array('pseudo' => $membre->getPseudo()));
+                        Email::send($membre->getEmail(), 'Mot de passe modifié', 'password-changed', ['pseudo' => $membre->getPseudo()]);
                         $smarty->assign('change_ok', true);
                     }
                 } else {

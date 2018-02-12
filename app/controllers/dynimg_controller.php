@@ -21,11 +21,11 @@ class Controller
         list($id_newsletter, $id_contact) = explode('-', $hash);
 
         $ip = false;
-        if(isset($_SERVER['REMOTE_ADDR'])) {
+        if (isset($_SERVER['REMOTE_ADDR'])) {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
         $host = gethostbyaddr($ip);
-        if(isset($_SERVER['HTTP_USER_AGENT'])) {
+        if (isset($_SERVER['HTTP_USER_AGENT'])) {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
         }
 
@@ -42,7 +42,7 @@ class Controller
                  . "VALUES(" . (int) $id_newsletter . ", " . (int) $id_contact .", NOW(), '" . $db->escape($ip) . "', '" . $db->escape($host) . "', '" . $db->escape($useragent) . "')";
             $res = $db->query($sql);
 
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             // rien
         }
 
@@ -63,25 +63,25 @@ class Controller
 
         $uid = 'photo/'.$id.'/'.$width.'/'.$height.'/'.$bgcolor.'/'.$border.'/'.$zoom.'.'.self::_getOutputFormat();
 
-        if(!empty($_GET['d'])) {
+        if (!empty($_GET['d'])) {
             die(Image::getHttpCachePath($uid));
         }
 
         $cache = Image::getLocalCachePath($uid);
-        if(file_exists($cache) && DYNIMG_CACHE_ENABLED) {
+        if (file_exists($cache) && DYNIMG_CACHE_ENABLED) {
             return file_get_contents($cache);
         }
 
         $source = ADHOC_ROOT_PATH . '/media/photo/' . $id . '.jpg';
 
-        if(file_exists($source)) {
+        if (file_exists($source)) {
             $img = new Image($source);
             $img->setType(self::_getOutputFormat());
             $img->setMaxWidth($width);
             $img->setMaxHeight($height);
             $img->setBorder($border);
             $img->setKeepRatio(true);
-            if($zoom) {
+            if ($zoom) {
                 $img->setZoom();
             }
             $img->setHexColor($bgcolor);
@@ -104,18 +104,18 @@ class Controller
 
         $uid = 'video/'.$id.'/'.$width.'/'.$height.'/'.$bgcolor.'/'.$border.'/'.$zoom.'.'.self::_getOutputFormat();
 
-        if(!empty($_GET['d'])) {
+        if (!empty($_GET['d'])) {
             die(Image::getHttpCachePath($uid));
         }
 
         $cache = Image::getLocalCachePath($uid);
-        if(file_exists($cache) && DYNIMG_CACHE_ENABLED) {
+        if (file_exists($cache) && DYNIMG_CACHE_ENABLED) {
             return file_get_contents($cache);
         }
 
         $source = ADHOC_ROOT_PATH . '/media/video/' . $id . '.jpg';
 
-        if(file_exists($source)) {
+        if (file_exists($source)) {
             $img = new Image($source);
             $img->setType(self::_getOutputFormat());
             $img->setMaxWidth($width);
@@ -123,7 +123,7 @@ class Controller
             $img->setBorder($border);
             $img->setKeepRatio(true);
             $img->setHexColor($bgcolor);
-            if($zoom) {
+            if ($zoom) {
                 $img->setZoom();
             }
             $content = $img->get();
@@ -145,18 +145,18 @@ class Controller
 
         $uid = 'event/'.$id.'/'.$width.'/'.$height.'/'.$bgcolor.'/'.$border.'/'.$zoom.'.'.self::_getOutputFormat();
 
-        if(!empty($_GET['d'])) {
+        if (!empty($_GET['d'])) {
             die(Image::getHttpCachePath($uid));
         }
 
         $cache = Image::getLocalCachePath($uid);
-        if(file_exists($cache) && DYNIMG_CACHE_ENABLED) {
+        if (file_exists($cache) && DYNIMG_CACHE_ENABLED) {
             return file_get_contents($cache);
         }
 
         $source = ADHOC_ROOT_PATH . '/media/event/' . $id . '.jpg';
 
-        if(file_exists($source)) {
+        if (file_exists($source)) {
             $img = new Image($source);
             $img->setType(self::_getOutputFormat());
             $img->setMaxWidth($width);
@@ -164,7 +164,7 @@ class Controller
             $img->setBorder($border);
             $img->setKeepRatio(true);
             $img->setHexColor($bgcolor);
-            if($zoom) {
+            if ($zoom) {
                 $img->setZoom();
             }
             $content = $img->get();
@@ -223,18 +223,18 @@ class Controller
 
         $uid = 'featured/'.$id.'/'.$width.'/'.$height.'/'.$bgcolor.'/'.$border.'/'.$zoom.'.'.self::_getOutputFormat();
 
-        if(!empty($_GET['d'])) {
+        if (!empty($_GET['d'])) {
             die(Image::getHttpCachePath($uid));
         }
 
         $cache = Image::getLocalCachePath($uid);
-        if(file_exists($cache) && DYNIMG_CACHE_ENABLED) {
+        if (file_exists($cache) && DYNIMG_CACHE_ENABLED) {
             return file_get_contents($cache);
         }
 
         $source = ADHOC_ROOT_PATH . '/media/featured/' . $id . '.jpg';
 
-        if(file_exists($source)) {
+        if (file_exists($source)) {
             $img = new Image($source);
             $img->setType(self::_getOutputFormat());
             $img->setMaxWidth($width);
@@ -242,7 +242,7 @@ class Controller
             $img->setBorder($border);
             $img->setKeepRatio(true);
             $img->setHexColor($bgcolor);
-            if($zoom) {
+            if ($zoom) {
                 $img->setZoom();
             }
             $content = $img->get();
@@ -269,11 +269,11 @@ class Controller
         $border  = (bool)   Route::params('border');
         $zoom    = (bool)   Route::params('zoom');
         
-        if(!$width) $width = 80;
-        if(!$height) $height = 80;
-        if(!$bgcolor) $bgcolor = '000000';
+        if (!$width) $width = 80;
+        if (!$height) $height = 80;
+        if (!$bgcolor) $bgcolor = '000000';
 
-        switch($type)
+        switch ($type)
         {
             case 'photo':
                 $url = Photo::getPhotoUrl($id, $width, $height, $bgcolor, $border, $zoom);
@@ -310,7 +310,7 @@ class Controller
     private static function _getOutputFormat()
     {
         $format = Route::$response_format;
-        switch($format)
+        switch ($format)
         {
             case 'jpeg':
             case 'jpg':

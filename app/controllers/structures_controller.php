@@ -27,7 +27,7 @@ class Controller
 
         try {
             $structure = Structure::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_structure', true);
             return $smarty->fetch('structures/show.tpl');
@@ -184,9 +184,9 @@ class Controller
 
         $smarty->enqueue_script('/js/structure-delete.js');
 
-        if(Tools::isSubmit('form-structure-delete'))
+        if (Tools::isSubmit('form-structure-delete'))
         {
-            if($structure->delete())
+            if ($structure->delete())
             {
                 Tools::redirect('/structures/?delete=1');
             }

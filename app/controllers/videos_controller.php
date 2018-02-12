@@ -22,7 +22,7 @@ class Controller
 
         $page = (int) Route::params('page');
 
-        if($_SESSION['membre']->getId() == 1) {
+        if ($_SESSION['membre']->getId() == 1) {
             $videos = Video::getVideos([
                 'limit' => NB_VIDEOS_PER_PAGE,
                 'debut' => $page * NB_VIDEOS_PER_PAGE,
@@ -72,7 +72,7 @@ class Controller
 
         try {
             $video = Video::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_video', true);
             return $smarty->fetch('videos/show.tpl');
@@ -80,7 +80,7 @@ class Controller
 
         $meta_description = "Titre : " . $video->getName();
 
-        if($video->getOnline()) {
+        if ($video->getOnline()) {
 
             $smarty->assign('video', $video);
             $smarty->assign('from', $from);
@@ -89,47 +89,47 @@ class Controller
             $smarty->assign('og_image', HOME_URL . '/media/video/' . $video->getId() . '.jpg');
             $smarty->assign('og_type', 'video.movie');
 
-            $og_video = array(
+            $og_video = [
                 'url' => Video::getFlashUrl($video->getIdHost(), $video->getReference()),
                 'width' => $video->getWidth(),
                 'height' => $video->getHeight(),
                 'type' => "application/x-shockwave-flash",
-            );
+            ];
             $smarty->assign('og_video', $og_video);
 
-            if($video->getIdGroupe()) {
+            if ($video->getIdGroupe()) {
                 $groupe = Groupe::getInstance($video->getIdGroupe());
                 $smarty->assign('groupe', $groupe);
                 $smarty->assign('title', "♫ " . $video->getName() . " (" . $groupe->getName() . ")");
                 $meta_description .= " | Groupe : " . $groupe->getName();
             }
-            if($video->getIdEvent()) {
+            if ($video->getIdEvent()) {
                 $event = Event::getInstance($video->getIdEvent());
                 $smarty->assign('event', $event);
                 $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysql_datetime($event->getDate(), "d/m/Y") . ")";
             }
-            if($video->getIdLieu()) {
+            if ($video->getIdLieu()) {
                 $lieu = Lieu::getInstance($video->getIdLieu());
                 $smarty->assign('lieu', $lieu);
                 $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity() . ")";
             }
-            if($video->getIdContact()) {
+            if ($video->getIdContact()) {
                 $membre = Membre::getInstance($video->getIdContact());
                 $smarty->assign('membre', $membre);
             }
 
             // menu et fil d'ariane
-            if($from === 'groupe' && $video->getIdGroupe()) {
+            if ($from === 'groupe' && $video->getIdGroupe()) {
                 $smarty->assign('menuselected', 'groupe');
                 $trail->addStep("Groupes", "/groupes/");
                 $trail->addStep($groupe->getName(), $groupe->getUrl());
-            } elseif($from === 'profil' && $video->getIdContact()) {
+            } elseif ($from === 'profil' && $video->getIdContact()) {
                 $trail->addStep("Zone Membre", "/membres/");
-            } elseif($from === 'event' && $video->getIdEvent()) {
+            } elseif ($from === 'event' && $video->getIdEvent()) {
                 $smarty->assign('menuselected', 'event');
                 $trail->addStep("Agenda", "/events/");
                 $trail->addStep($event->getName(), "/events/" . $event->getId());
-            } elseif($from === 'lieu' && $video->getIdLieu()) {
+            } elseif ($from === 'lieu' && $video->getIdLieu()) {
                 $smarty->assign('menuselected', 'lieux');
                 $trail->addStep("Lieux", "/lieux/");
                 $trail->addStep($lieu->getName(), "/lieux/" . $lieu->getId());
@@ -140,32 +140,32 @@ class Controller
             $trail->addStep($video->getName());
 
             // vidéos et photos liées à l'événement/lieu
-            if($video->getIdEvent() && $video->getIdLieu()) {
-                $smarty->assign('photos', Photo::getPhotos(array(
+            if ($video->getIdEvent() && $video->getIdLieu()) {
+                $smarty->assign('photos', Photo::getPhotos([
                     'event'  => $video->getIdEvent(),
                     'groupe' => $video->getIdGroupe(),
                     'online' => true,
                     'sort'   => 'random',
                     'limit'  => 30,
-                )));
-                $smarty->assign('videos', Video::getVideos(array(
+                ]));
+                $smarty->assign('videos', Video::getVideos([
                     'event'  => $video->getIdEvent(),
                     'groupe' => $video->getIdGroupe(),
                     'online' => true,
                     'sort'   => 'random',
                     'limit'  => 30,
-                )));
+                ]));
             }
 
             $smarty->assign('description', $meta_description);
 
-            $smarty->assign('comments', Comment::getComments(array(
+            $smarty->assign('comments', Comment::getComments([
                 'type'       => 'v',
                 'id_content' => $video->getId(),
                 'online'     => true,
                 'sort'       => 'created_on',
                 'sens'       => 'ASC',
-            )));
+            ]));
 
         } else {
 
@@ -187,13 +187,13 @@ class Controller
 
         try {
             $video = Video::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_video', true);
             return $smarty->fetch('videos/embed.tpl');
         }
 
-        if($video->getOnline()) {
+        if ($video->getOnline()) {
             $smarty->assign('video', $video);
          } else {
             $smarty->assign('unknown_video', true);
@@ -213,9 +213,9 @@ class Controller
 
         $smarty->enqueue_script('/js/video-create.js');
 
-        if(Tools::isSubmit('form-video-create'))
+        if (Tools::isSubmit('form-video-create'))
         {
-            $data = array(
+            $data = [
                 'name' => (string) Route::params('name'),
                 'id_groupe' => (int) Route::params('id_groupe'),
                 'id_lieu' => (int) Route::params('id_lieu'),
@@ -226,11 +226,11 @@ class Controller
                 'id_host' => (int) Route::params('id_host'),
                 'code' => (string) Route::params('code'),
                 'reference' => (string) Route::params('reference'),
-            );
+            ];
 
-            if(self::_validate_form_video_create($data, $errors)) {
+            if (self::_validate_form_video_create($data, $errors)) {
 
-                if($data['id_host'] !== Video::HOST_ADHOC) {
+                if ($data['id_host'] !== Video::HOST_ADHOC) {
                     $info = Video::parseStringForVideoUrl($data['code']);
                     $data['id_host'] = $info['id_host'];
                     $data['reference'] = $info['reference'];
@@ -251,7 +251,7 @@ class Controller
                 $video->setCreatedNow();
                 $video->save();
 
-                if($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
+                if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
                     $video->storeThumbnail($vignette);
                 }
 
@@ -261,7 +261,7 @@ class Controller
 
             } else {
 
-                foreach($errors as $k => $v) {
+                foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
 
@@ -277,35 +277,35 @@ class Controller
         $smarty->assign('hosts', $hosts);
 
         $id_groupe = (int) Route::params('id_groupe');
-        if($id_groupe) {
+        if ($id_groupe) {
             $groupe = Groupe::getInstance($id_groupe);
             $smarty->assign('groupe', $groupe);
         } else {
-            $smarty->assign('groupes', Groupe::getGroupes(array(
+            $smarty->assign('groupes', Groupe::getGroupes([
                 'sort'   => 'name',
                 'sens'   => 'ASC',
-            )));
+            ]));
         }
 
         $id_lieu = (int) Route::params('id_lieu');
-        if($id_lieu) {
+        if ($id_lieu) {
             $lieu = Lieu::getInstance($id_lieu);
             $smarty->assign('lieu', $lieu);
-            $smarty->assign('events', Event::getEvents(array(
+            $smarty->assign('events', Event::getEvents([
                'online' => true,
                'datfin' => date('Y-m-d H:i:s'),
                'lieu'   => $lieu->getId(),
                'sort'   => 'date',
                'sens'   => 'ASC',
                'limit'  => 100,
-           )));
+            ]));
         } else {
             $smarty->assign('dep', Departement::getHashTable());
             $smarty->assign('lieux', Lieu::getLieuxByDep());
         }
 
         $id_event  = (int) Route::params('id_event');
-        if($id_event) {
+        if ($id_event) {
             $event = Event::getInstance($id_event);
             $smarty->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
@@ -325,17 +325,17 @@ class Controller
     protected static function _validate_form_video_create($data, &$errors)
     {
         $errors = [];
-        if(empty($data['name'])) {
+        if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
         }
-        if($data['id_host'] !== Video::HOST_ADHOC) {
-            if(empty($data['code'])) {
+        if ($data['id_host'] !== Video::HOST_ADHOC) {
+            if (empty($data['code'])) {
                 $errors['code'] = "Vous devez copier/coller un code de vidéo Youtube ou Dailymotion";
-            } elseif(Video::parseStringForVideoUrl($data['code']) === false) {
+            } elseif (Video::parseStringForVideoUrl($data['code']) === false) {
                 $errors['unknown_host'] = "Code de la vidéo non reconnu ou hébergeur incompatible";
             }
         }
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;
@@ -357,24 +357,24 @@ class Controller
 
         try {
             $video = Video::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_video', true);
             return $smarty->fetch('videos/edit.tpl');
         }
 
-        if(Tools::isSubmit('form-video-edit'))
+        if (Tools::isSubmit('form-video-edit'))
         {
-            $data = array(
+            $data = [
                 'id' => (int) Route::params('id'),
                 'name' => (string) Route::params('name'),
                 'id_lieu' => (int) Route::params('id_lieu'),
                 'id_event' => (int) Route::params('id_event'),
                 'id_groupe' => (int) Route::params('id_groupe'),
                 'online' => (bool) Route::params('online'),
-            );
+            ];
 
-            if(self::_validate_form_video_edit($data, $errors)) {
+            if (self::_validate_form_video_edit($data, $errors)) {
 
                 $video->setName($data['name']);
                 $video->setIdLieu($data['id_lieu']);
@@ -383,7 +383,7 @@ class Controller
                 $video->setOnline($data['online']);
                 $video->save();
 
-                if($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
+                if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
                     $video->storeThumbnail($vignette);
                     Video::invalidateVideoThumbInCache($video->getId(), 80, 80, '000000', false, true);
                 }
@@ -394,7 +394,7 @@ class Controller
 
             } else {
 
-                foreach($errors as $k => $v) {
+                foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
 
@@ -408,17 +408,17 @@ class Controller
 
         $smarty->assign('video', $video);
 
-        $smarty->assign('groupes', Groupe::getGroupes(array(
+        $smarty->assign('groupes', Groupe::getGroupes([
             'sort'   => 'name',
             'sens'   => 'ASC',
-         )));
+        ]));
 
         $smarty->assign('dep', Departement::getHashTable());
         $smarty->assign('lieux', Lieu::getLieuxByDep());
 
         $smarty->assign('page', $page);
 
-        if($video->getIdEvent()) {
+        if ($video->getIdEvent()) {
             $event = Event::getInstance($video->getIdEvent());
             $smarty->assign('event', $event);
             $lieu = Lieu::getInstance($video->getIdLieu());
@@ -465,15 +465,15 @@ class Controller
 
         try {
             $video = Video::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_video', true);
             return $smarty->fetch('videos/delete.tpl');
         }
 
-        if(Tools::isSubmit('form-video-delete'))
+        if (Tools::isSubmit('form-video-delete'))
         {
-            if($video->delete()) {
+            if ($video->delete()) {
                 Log::action(Log::ACTION_VIDEO_DELETE, $video->getId());
                 Tools::redirect('/medias/?delete=1');
             }
@@ -481,13 +481,13 @@ class Controller
 
         $smarty->assign('video', $video);
 
-        if($video->getIdGroupe()) {
+        if ($video->getIdGroupe()) {
             $smarty->assign('groupe', Groupe::getInstance($video->getIdGroupe()));
         }
-        if($video->getIdEvent()) {
+        if ($video->getIdEvent()) {
             $smarty->assign('event', Event::getInstance($video->getIdEvent()));
         }
-        if($video->getIdLieu()) {
+        if ($video->getIdLieu()) {
             $smarty->assign('lieu', Lieu::getInstance($video->getIdLieu()));
         }
 
@@ -501,17 +501,17 @@ class Controller
     {
         $code = (string) Route::params('code');
 
-        if($info = Video::parseStringForVideoUrl($code)) {
-            $out = array(
+        if ($info = Video::parseStringForVideoUrl($code)) {
+            $out = [
                 'status' => 'OK',
                 'data' => $info,
-            );
+            ];
             $out['data']['thumb'] = Video::getRemoteThumbnail($out['data']['id_host'], $out['data']['reference']);
             $out['data']['title'] = Video::getRemoteTitle($out['data']['id_host'], $out['data']['reference']);
         } else {
-            $out = array(
+            $out = [
                 'status' => 'KO',
-            );
+            ];
         }
 
         return $out;

@@ -15,18 +15,18 @@ class Controller
 
         $smarty->assign('menuselected', 'home');
 
-        $smarty->assign('videos', Video::getVideos(array(
+        $smarty->assign('videos', Video::getVideos([
             'online' => true,
             'sort'   => 'random',
             'lieu'   => 1,
             'limit'  => 6,
-        )));
+        ]));
 
         $smarty->assign('featured', Featured::getFeaturedHomepage());
         $smarty->enqueue_script('/js/swipe.min.js');
         $smarty->enqueue_script('/js/featured.js');
 
-        $events = Event::getEvents(array(
+        $events = Event::getEvents([
             'online'      => true,
             'sort'        => 'date',
             'sens'        => 'ASC',
@@ -34,7 +34,7 @@ class Controller
             'departement' => '91,92,93,94,95,75,78',
             'datdeb'      => date('Y-m-d'),
             'fetch_fb'    => false,
-        ));
+        ]);
 
         // tri par mois
         $evts = [];
@@ -106,7 +106,7 @@ class Controller
         $smarty->assign('faq', FAQ::getFAQs());
 
         // valeurs par défaut
-        $data = array(
+        $data = [
             'name'       => '',
             'email'      => '',
             'subject'    => '',
@@ -116,7 +116,7 @@ class Controller
             'mailing'    => true,
             'attachment' => '',
             'check'      => Tools::getCSRFToken(),
-        );
+        ];
 
         if (!empty($_SESSION['membre'])) {
             $data['name'] = $_SESSION['membre']->getFirstName() . " " . $_SESSION['membre']->getLastName() . " (" . $_SESSION['membre']->getPseudo() . ")";
@@ -129,7 +129,7 @@ class Controller
                 //die(); // mauvais code sécurité
             }
 
-            $data = array(
+            $data = [
                 'name'        => trim((string) Route::params('name')),
                 'email'       => trim((string) Route::params('email')),
                 'subject'     => trim((string) Route::params('subject')),
@@ -139,7 +139,7 @@ class Controller
                 'mailing'     => (bool) Route::params('mailing'),
                 'attachment'  => Route::params('attachment'),
                 'check'       => (string) Route::params('check'),
-            );
+            ];
 
             self::_validate_form_contact($data, $errors);
 
@@ -147,7 +147,7 @@ class Controller
 
                 // 1 - envoi du mail au destinataire
                 $data['email_reply_to'] = $data['email'];
-                if (Email::send(array('bureau@adhocmusic.com', 'site@adhocmusic.com', 'contact@adhocmusic.com'), $data['subject'], 'form-contact-to', $data)) {
+                if (Email::send(['bureau@adhocmusic.com', 'site@adhocmusic.com', 'contact@adhocmusic.com'], $data['subject'], 'form-contact-to', $data)) {
                     $smarty->assign('sent_ok', true);
                 } else {
                     $smarty->assign('sent_ko', true);
@@ -218,26 +218,26 @@ class Controller
     {
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('groupes', Groupe::getGroupes(array(
+        $smarty->assign('groupes', Groupe::getGroupes([
             'sort'   => 'id',
             'sens'   => 'ASC',
             'online' => true,
             'limit'  => false,
-        )));
+        ]));
 
-        $smarty->assign('lieux', Lieu::getLieux(array(
+        $smarty->assign('lieux', Lieu::getLieux([
             'sort'   => 'id',
             'sens'   => 'ASC',
             'online' => true,
             'limit'  => false,
-        )));
+        ]));
 
-        $smarty->assign('events', Event::getEvents(array(
+        $smarty->assign('events', Event::getEvents([
             'sort'   => 'id',
             'sens'   => 'ASC',
             'online' => true,
             'limit'  => false,
-        )));
+        ]));
 
         return $smarty->fetch('sitemap.tpl');
     }
@@ -274,7 +274,7 @@ class Controller
         $id = (int) Route::params('id');
         $cms = CMS::getInstance($id);
 
-        if($cms->getAuth()) {
+        if ($cms->getAuth()) {
             Tools::auth(Membre::TYPE_INTERNE);
         }
 

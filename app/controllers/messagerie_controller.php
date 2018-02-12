@@ -92,7 +92,7 @@ class Controller
         $trail->addStep("Messagerie", "/messagerie/");
         $trail->addStep("Ecrire un message");
 
-        if(Tools::isSubmit('form-message-write'))
+        if (Tools::isSubmit('form-message-write'))
         {
             $text = (string) Route::params('text');
             $to = (int) Route::params('to');

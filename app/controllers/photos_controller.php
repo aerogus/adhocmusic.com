@@ -50,7 +50,7 @@ class Controller
 
         try {
             $photo = Photo::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_photo', true);
             return $smarty->fetch('photos/show.tpl');
@@ -59,7 +59,7 @@ class Controller
         $meta_title = '';
         $meta_description = "Titre : " . $photo->getName();
 
-        if($photo->getOnline() || (!$photo->getOnline() && Tools::isAuth() && Tools::auth(Membre::TYPE_INTERNE))) {
+        if ($photo->getOnline() || (!$photo->getOnline() && Tools::isAuth() && Tools::auth(Membre::TYPE_INTERNE))) {
 
             $smarty->assign('photo', $photo);
             $smarty->assign('from', $from);
@@ -68,43 +68,43 @@ class Controller
 
             $meta_title .= $photo->getName();
 
-            if($photo->getIdGroupe()) {
+            if ($photo->getIdGroupe()) {
                 $groupe = Groupe::getInstance($photo->getIdGroupe());
                 $smarty->assign('groupe', $groupe);
                 $meta_title .= " - " . $groupe->getName();
                 $meta_description .= " | Groupe : " . $groupe->getName();
             }
-            if($photo->getIdEvent()) {
+            if ($photo->getIdEvent()) {
                 $event = Event::getInstance($photo->getIdEvent());
                 $smarty->assign('event', $event);
                 $meta_title .= " - " . $event->getName() . " (" . Date::mysql_datetime($event->getDate(), "d/m/Y") . ")";
                 $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysql_datetime($event->getDate(), "d/m/Y") . ")";
             }
-            if($photo->getIdLieu()) {
+            if ($photo->getIdLieu()) {
                 $lieu = Lieu::getInstance($photo->getIdLieu());
                 $smarty->assign('lieu', $lieu);
                 $meta_title .= " - " . $lieu->getName();
                 $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity() . ")";
             }
-            if($photo->getIdContact()) {
+            if ($photo->getIdContact()) {
                 try {
                     $membre = Membre::getInstance($photo->getIdContact());
                     $smarty->assign('membre', $membre);
-                } catch(Exception $e) {
+                } catch (Exception $e) {
                     mail('gus@adhocmusic.com', "[AD'HOC] Bug : photo avec membre introuvable", print_r($e, true));
                 }
             }
 
-            if($from == 'groupe' && $photo->getIdGroupe()) {
+            if ($from == 'groupe' && $photo->getIdGroupe()) {
                 $smarty->assign('menuselected', 'groupe');
                 $trail->addStep("Groupes", "/groupes/");
                 $trail->addStep($groupe->getName(), $groupe->getUrl());
-            } elseif($from == 'profil' && $photo->getIdContact()) {
+            } elseif ($from == 'profil' && $photo->getIdContact()) {
                 $trail->addStep("Zone Membre", "/membres/");
-            } elseif($from == 'event' && $photo->getIdEvent()) {
+            } elseif ($from == 'event' && $photo->getIdEvent()) {
                 $trail->addStep("Agenda", "/events/");
                 $trail->addStep($event->getName(), $event->getUrl());
-            } elseif($from == 'lieu' && $photo->getIdLieu()) {
+            } elseif ($from == 'lieu' && $photo->getIdLieu()) {
                 $trail->addStep("Lieux", "/lieux/");
                 $trail->addStep($lieu->getName(), $lieu->getUrl());
             } else {
@@ -135,15 +135,15 @@ class Controller
                 // calcul photo suivante/précente
                 $idx = 0;
                 $count = count($playlist);
-                foreach($playlist as $_idx => $_playlist) {
-                    if($_playlist['id'] == $photo->getId()) {
+                foreach ($playlist as $_idx => $_playlist) {
+                    if ($_playlist['id'] == $photo->getId()) {
                         $idx_photo = $_idx;
-                        if($_idx < ($count - 1)) {
+                        if ($_idx < ($count - 1)) {
                             $next = $_idx + 1;
                         } else {
                             $next = 0;
                         }
-                        if($_idx > 0) {
+                        if ($_idx > 0) {
                             $prev = $_idx - 1;
                         } else {
                             $prev = $count - 1;
@@ -184,7 +184,7 @@ class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        if(Tools::isSubmit('form-photo-create'))
+        if (Tools::isSubmit('form-photo-create'))
         {
             $data = [
                 'name' => trim((string) Route::params('name')),
@@ -211,7 +211,7 @@ class Controller
                 $photo->setCreatedNow();
                 $photo->save();
 
-                if(is_uploaded_file($_FILES['file']['tmp_name'])) {
+                if (is_uploaded_file($_FILES['file']['tmp_name'])) {
                     $objImg = new Image($_FILES['file']['tmp_name']);
                     $objImg->setType(IMAGETYPE_JPEG);
                     $objImg->setMaxWidth(1024);
@@ -269,7 +269,7 @@ class Controller
         }
 
         $id_event = (int) Route::params('id_event');
-        if($id_event) {
+        if ($id_event) {
             $event = Event::getInstance($id_event);
             $smarty->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
@@ -333,7 +333,7 @@ class Controller
             $nb = 0;
 
             // boucle des extensions
-            foreach($exts as $ext)
+            foreach ($exts as $ext)
             {
                 Log::write('photo', "boucle " . $ext);
 
@@ -342,7 +342,7 @@ class Controller
                 {
                     Log::write('photo', "traitement " . $filename . " (" . filesize($filename) . ") octets");
 
-                    $data = array(
+                    $data = [
                         'name' => trim((string) Route::params('name')),
                         'credits' => trim((string) Route::params('credits')),
                         'id_groupe' => (int) Route::params('id_groupe'),
@@ -351,10 +351,10 @@ class Controller
                         'id_contact' => (int) $_SESSION['membre']->getId(),
                         'id_structure' => 1,
                         'online' => true,
-                    );
+                    ];
                     self::_validate_form_photo_create($data, $errors);
 
-                    if(empty($errors)) {
+                    if (empty($errors)) {
 
                         $photo = Photo::init();
                         $photo->setName($data['name']);
@@ -410,35 +410,35 @@ class Controller
         $smarty = new AdHocSmarty();
 
         $id_groupe = (int) Route::params('id_groupe');
-        if($id_groupe) {
+        if ($id_groupe) {
             $groupe = Groupe::getInstance($id_groupe);
             $smarty->assign('groupe', $groupe);
         } else {
-            $smarty->assign('groupes', Groupe::getGroupes(array(
+            $smarty->assign('groupes', Groupe::getGroupes([
                 'sort'   => 'name',
                 'sens'   => 'ASC',
-            )));
+            ]));
         }
 
         $id_lieu = (int) Route::params('id_lieu');
-        if($id_lieu) {
+        if ($id_lieu) {
             $lieu = Lieu::getInstance($id_lieu);
             $smarty->assign('lieu', $lieu);
-            $smarty->assign('events', Event::getEvents(array(
+            $smarty->assign('events', Event::getEvents([
                'online' => true,
                'datfin' => date('Y-m-d H:i:s'),
                'lieu'   => $lieu->getId(),
                'sort'   => 'date',
                'sens'   => 'ASC',
                'limit'  => 100,
-           )));
+            ]));
         } else {
             $smarty->assign('dep', Departement::getHashTable());
             $smarty->assign('lieux', Lieu::getLieuxByDep());
         }
 
         $id_event = (int) Route::params('id_event');
-        if($id_event) {
+        if ($id_event) {
             $event = Event::getInstance($id_event);
             $smarty->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
@@ -465,15 +465,15 @@ class Controller
 
         try {
             $photo = Photo::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_photo', true);
             return $smarty->fetch('photos/edit.tpl');
         }
 
-        if(Tools::isSubmit('form-photo-edit'))
+        if (Tools::isSubmit('form-photo-edit'))
         {
-            $data = array(
+            $data = [
                 'id' => (int) $photo->getId(),
                 'name' => (string) Route::params('name'),
                 'credits' => (string) Route::params('credits'),
@@ -482,9 +482,9 @@ class Controller
                 'id_event' => (int) Route::params('id_event'),
                 'id_contact' => (int) Route::params('id_contact'),
                 'online' => (bool) Route::params('online'),
-            );
+            ];
 
-            if(self::_validate_form_photo_edit($data, $errors)) {
+            if (self::_validate_form_photo_edit($data, $errors)) {
 
                 $photo->setName($data['name']);
                 $photo->setCredits($data['credits']);
@@ -494,7 +494,7 @@ class Controller
                 $photo->setOnline($data['online']);
                 $photo->setModifiedNow();
 
-                if(is_uploaded_file($_FILES['file']['tmp_name'])) {
+                if (is_uploaded_file($_FILES['file']['tmp_name'])) {
                     $objImg = new Image($_FILES['file']['tmp_name']);
                     $objImg->setType(IMAGETYPE_JPEG);
                     $objImg->setMaxWidth(1024);
@@ -508,7 +508,7 @@ class Controller
                     Photo::invalidatePhotoInCache($photo->getId(), 680, 600, '000000', false, false);
                 }
 
-                if($photo->save()) {
+                if ($photo->save()) {
                     Log::action(Log::ACTION_PHOTO_EDIT, $photo->getId());
                     Tools::redirect('/medias/?edit=1');
                 }
@@ -522,15 +522,15 @@ class Controller
 
         $smarty->assign('photo', $photo);
 
-        $smarty->assign('groupes', Groupe::getGroupes(array(
+        $smarty->assign('groupes', Groupe::getGroupes([
             'sort'   => 'name',
             'sens'   => 'ASC',
-        )));
+        ]));
 
         $smarty->assign('dep', Departement::getHashTable());
         $smarty->assign('lieux', Lieu::getLieuxByDep());
 
-        if($photo->getIdEvent()) {
+        if ($photo->getIdEvent()) {
             $event = Event::getInstance($photo->getIdEvent());
             $smarty->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
@@ -542,7 +542,7 @@ class Controller
 
     static function ajax_update()
     {
-        if(!Tools::isAuth()) {
+        if (!Tools::isAuth()) {
             return 'KO';
         }
 
@@ -552,18 +552,18 @@ class Controller
 
         try {
             $photo = Photo::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return 'KO';
         }
 
-        if($name) {
+        if ($name) {
             $photo->setName($name);
         }
-        if($credits) {
+        if ($credits) {
             $photo->setCredits($credits);
         }
 
-        if($photo->save()) {
+        if ($photo->save()) {
             return 'OK';
         }
 
@@ -606,15 +606,15 @@ class Controller
 
         try {
             $photo = Photo::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_photo', true);
             return $smarty->fetch('photos/delete.tpl');
         }
 
-        if(Tools::isSubmit('form-photo-delete'))
+        if (Tools::isSubmit('form-photo-delete'))
         {
-            if($photo->delete()) {
+            if ($photo->delete()) {
                 Log::action(Log::ACTION_PHOTO_DELETE, $photo->getId());
                 Tools::redirect('/medias/?delete=1');
             }
@@ -622,13 +622,13 @@ class Controller
 
         $smarty->assign('photo', $photo);
 
-        if($photo->getIdGroupe()) {
+        if ($photo->getIdGroupe()) {
             $smarty->assign('groupe', Groupe::getInstance($photo->getIdGroupe()));
         }
-        if($photo->getIdEvent()) {
+        if ($photo->getIdEvent()) {
             $smarty->assign('event', Event::getInstance($photo->getIdEvent()));
         }
-        if($photo->getIdLieu()) {
+        if ($photo->getIdLieu()) {
             $smarty->assign('lieu', Lieu::getInstance($photo->getIdLieu()));
         }
 

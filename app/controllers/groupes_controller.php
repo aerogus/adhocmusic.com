@@ -51,7 +51,7 @@ class Controller
             if (!$groupe->getOnline()) {
                 throw new Exception('groupe offline');
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_group', true);
             return $smarty->fetch('groupes/show.tpl');
@@ -90,8 +90,8 @@ class Controller
 
         $smarty->assign('og_image', $groupe->getMiniPhoto());
 
-        if(!empty($_SESSION['membre'])) {
-            if($_SESSION['membre']->isInterne()) {
+        if (!empty($_SESSION['membre'])) {
+            if ($_SESSION['membre']->isInterne()) {
                 $smarty->assign('show_mot_adhoc', true);
             }
         }
@@ -303,7 +303,7 @@ class Controller
 
         try {
             $groupe = Groupe::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_groupe', true);
             return $smarty->fetch('groupes/edit.tpl');
@@ -314,11 +314,11 @@ class Controller
         $trail->addStep($groupe->getName());
 
         $smarty->assign('groupe', $groupe);
-        if($groupe->isMember($_SESSION['membre']->getId()) === false) {
+        if ($groupe->isMember($_SESSION['membre']->getId()) === false) {
             $smarty->assign('not_my_groupe', true);
         }
 
-        $data = array(
+        $data = [
             'id_groupe'        => $groupe->getId(),/*
             'name'             => $groupe->getName(),*/
             'style'            => $groupe->getStyle(),
@@ -330,11 +330,11 @@ class Controller
             'myspace'          => $groupe->getMyspace(),
             'facebook_page_id' => $groupe->getFacebookPageId(),
             'twitter_id'       => $groupe->getTwitterId(),
-        );
+        ];
 
-        if(Tools::isSubmit('form-groupe-edit'))
+        if (Tools::isSubmit('form-groupe-edit'))
         {
-            $data = array(
+            $data = [
                 'id_groupe'        => $groupe->getId(),
                 'style'            => (string) Route::params('style'),
                 'influences'       => (string) Route::params('influences'),
@@ -346,11 +346,11 @@ class Controller
                 'facebook_page_id' => (string) Route::params('facebook_page_id'),
                 'twitter_id'       => (string) Route::params('twitter_id'),
                 //'id_type_musicien' => (int) Route::params('id_type_musicien'),
-            );
+            ];
 
-            if(self::_validate_form_groupe_edit($data, $errors)) {
+            if (self::_validate_form_groupe_edit($data, $errors)) {
 
-                if($groupe->isMember($_SESSION['membre']->getId()) === false) {
+                if ($groupe->isMember($_SESSION['membre']->getId()) === false) {
                     return 'edition du groupe non autorisée';
                 }
 
@@ -368,7 +368,7 @@ class Controller
 
                // $groupe->updateMember($_SESSION['membre']->getId(), $data['id_type_musicien']);
 
-                if(is_uploaded_file($_FILES['lelogo']['tmp_name'])) {
+                if (is_uploaded_file($_FILES['lelogo']['tmp_name'])) {
                     $img = new Image($_FILES['lelogo']['tmp_name']);
                     $img->setType(IMAGETYPE_JPEG);
                     $img->setKeepRatio(true);
@@ -379,7 +379,7 @@ class Controller
                     $img = '';
                 }
 
-                if(is_uploaded_file($_FILES['photo']['tmp_name'])) {
+                if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
                     $img = new Image($_FILES['photo']['tmp_name']);
                     $img->setType(IMAGETYPE_JPEG);
                     $img->setKeepRatio(true);
@@ -390,7 +390,7 @@ class Controller
                     $img = '';
                 }
 
-                if(is_uploaded_file($_FILES['mini_photo']['tmp_name'])) {
+                if (is_uploaded_file($_FILES['mini_photo']['tmp_name'])) {
                     $img = new Image($_FILES['mini_photo']['tmp_name']);
                     $img->setType(IMAGETYPE_JPEG);
                     $img->setKeepRatio(false);
@@ -408,7 +408,7 @@ class Controller
             }
 
             if (!empty($errors)) {
-                foreach($errors as $k => $v) {
+                foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
             }
@@ -464,24 +464,24 @@ class Controller
 
         try {
             $groupe = Groupe::getInstance($id);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_groupe', true);
             return $smarty->fetch('groupes/delete.tpl');
         }
 
         $can_delete = true;
-        if($_SESSION['membre']->isAdmin() === false) {
-            if($groupe->isMember($_SESSION['membre']->getId()) !== true) {
+        if ($_SESSION['membre']->isAdmin() === false) {
+            if ($groupe->isMember($_SESSION['membre']->getId()) !== true) {
                 $smarty->assign('not_my_groupe', true);
                 $can_delete = false;
             }
         }
 
-        if(Tools::isSubmit('form-groupe-delete'))
+        if (Tools::isSubmit('form-groupe-delete'))
         {
-            if($can_delete) {
-                if($groupe->delete()) {
+            if ($can_delete) {
+                if ($groupe->delete()) {
                     Log::action(Log::ACTION_GROUP_DELETE, $groupe->getId());
                 }
                 Tools::redirect('/groupes/my?delete=1');
@@ -499,13 +499,13 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('audios', Audio::getAudios(array(
+        $smarty->assign('audios', Audio::getAudios([
             'online' => true,
             'groupe' => (int) $id,
             'limit'  => 10,
             'sort'   => 'id_audio',
             'sens'   => 'DESC',
-        )));
+        ]));
 
         return $smarty->fetch('groupes/playlist.tpl');
     }
