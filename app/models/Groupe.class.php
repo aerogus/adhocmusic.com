@@ -24,11 +24,11 @@ class Groupe extends ObjectModel
      *
      * @var array
      */
-    protected static $_etats = array(
+    protected static $_etats = [
         self::ETAT_ACTIF   => "Actif",
         self::ETAT_NONEWS  => "Pas de nouvelles",
         self::ETAT_INACTIF => "Inactif / Séparé",
-    );
+    ];
 
     /**
      * @var object
@@ -158,7 +158,7 @@ class Groupe extends ObjectModel
     /**
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'alias'            => 'str',
         'name'             => 'str',
         'style'            => 'str',
@@ -180,7 +180,7 @@ class Groupe extends ObjectModel
         'comment'          => 'str',
         'etat'             => 'num',
         'template'         => 'phpser',
-    );
+    ];
 
     /**
      * @var array
@@ -307,13 +307,13 @@ class Groupe extends ObjectModel
      */
     function getMySpaceId()
     {
-        if(strpos($this->_myspace, 'http://') !== false) {
+        if (strpos($this->_myspace, 'http://') !== false) {
             $this->_myspace = str_replace('http://', '', $this->_myspace);
         }
-        if(strpos($this->_myspace, 'www.myspace.com/') !== false) {
+        if (strpos($this->_myspace, 'www.myspace.com/') !== false) {
             $this->_myspace = str_replace('www.myspace.com/', '', $this->_myspace);
         }
-        if($this->_myspace) {
+        if ($this->_myspace) {
             return $this->_myspace;
         }
         return false;
@@ -324,16 +324,16 @@ class Groupe extends ObjectModel
      */
     function getMySpaceUrl()
     {
-        if(strpos($this->_myspace, 'http://') !== false) {
+        if (strpos($this->_myspace, 'http://') !== false) {
             $this->_myspace = str_replace('http://', '', $this->_myspace);
-         }
-         if(strpos($this->_myspace, 'www.myspace.com/') !== false) {
+        }
+        if (strpos($this->_myspace, 'www.myspace.com/') !== false) {
             $this->_myspace = str_replace('www.myspace.com/', '', $this->_myspace);
-         }
-         if($this->_myspace) {
-             return 'http://www.myspace.com/' . $this->_myspace;
-         }
-         return false;
+        }
+        if ($this->_myspace) {
+            return 'http://www.myspace.com/' . $this->_myspace;
+        }
+        return false;
     }
 
     /**
@@ -364,7 +364,7 @@ class Groupe extends ObjectModel
      */
     function getFacebookPageUrl()
     {
-        if($this->_facebook_page_id) {
+        if ($this->_facebook_page_id) {
             return 'https://www.facebook.com/pages/' . $this->_alias . '/' . $this->_facebook_page_id;
         }
         return false;
@@ -398,13 +398,13 @@ class Groupe extends ObjectModel
      */
     function getSite()
     {
-        if(strpos($this->_site, 'myspace') !== false) {
+        if (strpos($this->_site, 'myspace') !== false) {
             return false;
         }
-        if(strpos($this->_site, '.') === false) {
+        if (strpos($this->_site, '.') === false) {
             return false;
         }
-        if(strpos($this->_site, 'http://') !== 0) {
+        if (strpos($this->_site, 'http://') !== 0) {
             return 'http://'.$this->_site;
         }
         return $this->_site;
@@ -445,7 +445,7 @@ class Groupe extends ObjectModel
      */
     function getCreatedOn()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
         }
         return false;
@@ -458,7 +458,7 @@ class Groupe extends ObjectModel
      */
     function getCreatedOnTs()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
          }
          return false;
@@ -471,7 +471,7 @@ class Groupe extends ObjectModel
      */
     function getModifiedOn()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
         }
         return false;
@@ -484,7 +484,7 @@ class Groupe extends ObjectModel
      */
     function getModifiedOnTs()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
         }
         return false;
@@ -497,7 +497,7 @@ class Groupe extends ObjectModel
      */
     function getDatdeb()
     {
-        if(Date::isDateOk($this->_datdeb)) {
+        if (Date::isDateOk($this->_datdeb)) {
             return (string) $this->_datdeb;
         }
         return false;
@@ -510,7 +510,7 @@ class Groupe extends ObjectModel
      */
     function getDatfin()
     {
-        if(Date::isDateOk($this->_datfin)) {
+        if (Date::isDateOk($this->_datfin)) {
             return (string) $this->_datfin;
         }
         return false;
@@ -543,11 +543,11 @@ class Groupe extends ObjectModel
      */
     function getTemplate()
     {
-        if($this->_template) {
-            if(!array_key_exists('content_text_color', $this->_template)) {
+        if ($this->_template) {
+            if (!array_key_exists('content_text_color', $this->_template)) {
                 $this->_template['content_text_color'] = $this->_template['content_color'];
             }
-            if(!array_key_exists('content_link_color', $this->_template)) {
+            if (!array_key_exists('content_link_color', $this->_template)) {
                 $this->_template['content_link_color'] = 'ffffff';
             }
         }
@@ -578,7 +578,7 @@ class Groupe extends ObjectModel
      */
     function getPhoto()
     {
-        if(file_exists(self::getBasePath() . '/p' . $this->getId() . '.jpg')) {
+        if (file_exists(self::getBasePath() . '/p' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/p' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         }
         return false;
@@ -592,7 +592,7 @@ class Groupe extends ObjectModel
      */
     function getMiniPhoto()
     {
-        if(file_exists(self::getBasePath() . '/m' . $this->getId() . '.jpg')) {
+        if (file_exists(self::getBasePath() . '/m' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/m' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         } else {
             return HOME_URL . '/img/note_adhoc_64.png';
@@ -606,11 +606,11 @@ class Groupe extends ObjectModel
      */
     function getLogo()
     {
-        if(file_exists(self::getBasePath() . '/l' . $this->getId() . '.png')) {
+        if (file_exists(self::getBasePath() . '/l' . $this->getId() . '.png')) {
             return self::getBaseUrl() . '/l' . $this->getId() . '.png?ts=' . $this->getModifiedOnTs();
-        } else if(file_exists(self::getBasePath() . '/l' . $this->getId() . '.gif')) {
+        } else if (file_exists(self::getBasePath() . '/l' . $this->getId() . '.gif')) {
             return self::getBaseUrl() . '/l' . $this->getId() . '.gif?ts=' . $this->getModifiedOnTs();
-        } else if(file_exists(self::getBasePath() . '/l' . $this->getId() . '.jpg')) {
+        } else if (file_exists(self::getBasePath() . '/l' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/l' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         }
     }
@@ -631,7 +631,7 @@ class Groupe extends ObjectModel
      */
     static function getUrlFiche($ref, $type = 2)
     {
-        if(is_numeric($ref)) {
+        if (is_numeric($ref)) {
             $alias = Groupe::getAliasById($ref);
         } else {
             $alias = $ref;
@@ -656,7 +656,7 @@ class Groupe extends ObjectModel
     static function getAvatarById($id_groupe)
     {
         $avatar = HOME_URL . '/img/note_adhoc_64.png';
-        if(file_exists(self::getBasePath() . '/m' . $id_groupe . '.jpg')) {
+        if (file_exists(self::getBasePath() . '/m' . $id_groupe . '.jpg')) {
             $avatar = self::getBaseUrl() . '/m' . $id_groupe . '.jpg';
         }
         return $avatar;
@@ -676,7 +676,7 @@ class Groupe extends ObjectModel
              . "FROM `" . self::$_table . "` "
              . "WHERE `" . self::$_pk . "` = " . (int) $id_groupe;
 
-        if($alias = $db->queryWithFetchFirstField($sql)) {
+        if ($alias = $db->queryWithFetchFirstField($sql)) {
             return $alias;
         }
         return false;
@@ -976,7 +976,7 @@ class Groupe extends ObjectModel
      */
     static function getGroupesCount($etat = null, $force = false)
     {
-        if(isset($_SESSION['global_counters']['nb_groupes']) && $force === false) {
+        if (isset($_SESSION['global_counters']['nb_groupes']) && $force === false) {
             return $_SESSION['global_counters']['nb_groupes'];
         }
 
@@ -984,7 +984,7 @@ class Groupe extends ObjectModel
 
         $sql = "SELECT COUNT(*) "
              . "FROM `" . self::$_table . "` ";
-        if(!is_null($etat)) {
+        if (!is_null($etat)) {
             $sql .= "WHERE `etat` = " . (int) $etat;
         }
 
@@ -1000,11 +1000,11 @@ class Groupe extends ObjectModel
      */
     static function getMyGroupesCount()
     {
-        if(empty($_SESSION['membre'])) {
+        if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');
         }
 
-        if(isset($_SESSION['my_counters']['nb_groupes'])) {
+        if (isset($_SESSION['my_counters']['nb_groupes'])) {
             return $_SESSION['my_counters']['nb_groupes'];
         }
 
@@ -1071,7 +1071,7 @@ class Groupe extends ObjectModel
              . "FROM `" . self::$_table . "` "
              . "WHERE `" . self::$_pk . "` = " . (int) $this->getId();
 
-        if(($res = $db->queryWithFetchFirstRow($sql)))
+        if (($res = $db->queryWithFetchFirstRow($sql)))
         {
             $this->_dbToObject($res);
             return true;
@@ -1094,7 +1094,7 @@ class Groupe extends ObjectModel
         // @todo check datdeb et datfin
 
         // l'id_contact est il valide ?
-        if(($mbr = Membre::getInstance($id_contact)) === false) {
+        if (($mbr = Membre::getInstance($id_contact)) === false) {
             throw new Exception('id_contact introuvable');
         }
 
@@ -1186,12 +1186,12 @@ class Groupe extends ObjectModel
      */
     function isMember($id_contact)
     {
-        if(is_null($this->_members)) {
+        if (is_null($this->_members)) {
             $this->_members = self::getMembersById($this->getId());
         }
 
-        foreach($this->_members as $member) {
-            if($member['id'] === $id_contact) {
+        foreach ($this->_members as $member) {
+            if ($member['id'] === $id_contact) {
                 return true;
             }
         }
@@ -1205,7 +1205,7 @@ class Groupe extends ObjectModel
      */
     function getMembers()
     {
-        if(is_null($this->_members)) {
+        if (is_null($this->_members)) {
             $this->_members = self::getMembersById($this->getId());
         }
 
@@ -1233,7 +1233,7 @@ class Groupe extends ObjectModel
 
         $res = $db->queryWithFetch($sql);
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['id'] = intval($_res['id']);
             $res[$cpt]['nom_type_musicien'] = Membre::getTypeMusicienName($_res['id_type_musicien']);
             $res[$cpt]['url'] = Membre::getUrlById($_res['id']);
@@ -1261,22 +1261,22 @@ class Groupe extends ObjectModel
     static function getGroupes($params = [])
     {
         $debut = 0;
-        if(isset($params['debut'])) {
+        if (isset($params['debut'])) {
             $debut = (int) $params['debut'];
         }
 
         $limit = null;
-        if(isset($params['limit'])) {
+        if (isset($params['limit'])) {
             $limit = (int) $params['limit'];
         }
 
         $sens = 'ASC';
-        if(isset($params['sens']) && $params['sens'] == 'DESC') {
+        if (isset($params['sens']) && $params['sens'] == 'DESC') {
             $sens = 'DESC';
         }
 
         $sort = 'id_groupe';
-        if(isset($params['sort'])
+        if (isset($params['sort'])
            && ($params['sort'] == 'name' || $params['sort'] == 'random' ||
                $params['sort'] == 'created_on' || $params['sort'] == 'modified_on')) {
             $sort = $params['sort'];
@@ -1286,9 +1286,9 @@ class Groupe extends ObjectModel
         $tab_id      = [];
         $tab_contact = [];
 
-        if(array_key_exists('style', $params))   { $tab_style   = explode(",", $params['style']);  }
-        if(array_key_exists('id', $params))      { $tab_id      = explode(",", $params['id']); }
-        if(array_key_exists('contact', $params)) { $tab_contact = explode(",", $params['contact']); }
+        if (array_key_exists('style', $params))   { $tab_style   = explode(",", $params['style']);  }
+        if (array_key_exists('id', $params))      { $tab_id      = explode(",", $params['id']); }
+        if (array_key_exists('contact', $params)) { $tab_contact = explode(",", $params['contact']); }
 
         $db = DataBase::getInstance();
 
@@ -1298,24 +1298,24 @@ class Groupe extends ObjectModel
              . "FROM `" . self::$_table . "` `g` "
              . "WHERE 1 ";
 
-        if(count($tab_id) && ($tab_id[0] !== 0)) {
+        if (count($tab_id) && ($tab_id[0] !== 0)) {
             $sql .= "AND `g`.`id_groupe` IN (" . implode(',', $tab_id) . ") ";
         }
 
         $sql .= "ORDER BY ";
-        if($sort == "random") {
+        if ($sort == "random") {
             $sql .= "RAND(" . time() . ") ";
         } else {
             $sql .= "`g`.`" . $sort . "` " . $sens . " ";
         }
 
-        if(!is_null($limit)) {
+        if (!is_null($limit)) {
             $sql .= "LIMIT " . $debut . ", " . $limit;
         }
 
         $res = $db->queryWithFetch($sql);
 
-        if($limit == 1) {
+        if ($limit == 1) {
             $res = array_pop($res);
         }
 
@@ -1330,7 +1330,7 @@ class Groupe extends ObjectModel
      */
     static function getMyGroupes()
     {
-        if(empty($_SESSION['membre'])) {
+        if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');
         }
 
@@ -1347,12 +1347,12 @@ class Groupe extends ObjectModel
 
         $res = $db->queryWithFetch($sql);
 
-        if($res) {
+        if ($res) {
             $tab = [];
-            foreach($res as $grp) {
+            foreach ($res as $grp) {
                 $tab[$grp['id']] = $grp;
                 $mini_photo = '/img/note_adhoc_64.png';
-                if(file_exists(self::getBasePath() . '/m' . $grp['id'] . '.jpg')) {
+                if (file_exists(self::getBasePath() . '/m' . $grp['id'] . '.jpg')) {
                     $mini_photo = self::getBaseUrl() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
                 }
                 $tab[$grp['id']]['mini_photo'] = $mini_photo;
@@ -1389,15 +1389,15 @@ class Groupe extends ObjectModel
             $tab[$grp['lettre']][$cpt] = $grp;
             $tab[$grp['lettre']][$cpt]['mini_photo'] = '/img/note_adhoc_64.png';
             $tab[$grp['lettre']][$cpt]['class'] = 'grpinactif';
-            if(file_exists(self::getBasePath() . '/m' . $grp['id'] . '.png')) {
+            if (file_exists(self::getBasePath() . '/m' . $grp['id'] . '.png')) {
                 $tab[$grp['lettre']][$cpt]['mini_photo'] = self::getBaseUrl() . '/m' . $grp['id'] . '.png?ts=' . $grp['modified_on_ts'];
-            } elseif(file_exists(self::getBasePath() . '/m' . $grp['id'] . '.jpg')) {
+            } elseif (file_exists(self::getBasePath() . '/m' . $grp['id'] . '.jpg')) {
                 $tab[$grp['lettre']][$cpt]['mini_photo'] = self::getBaseUrl() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
-            } elseif(file_exists(self::getBasePath() . '/m' . $grp['id'] . '.gif')) {
+            } elseif (file_exists(self::getBasePath() . '/m' . $grp['id'] . '.gif')) {
                 $tab[$grp['lettre']][$cpt]['mini_photo'] = self::getBaseUrl() . '/m' . $grp['id'] . '.gif?ts=' . $grp['modified_on_ts'];
             }
 
-            if($grp['etat'] === self::ETAT_ACTIF) {
+            if ($grp['etat'] === self::ETAT_ACTIF) {
                 $tab[$grp['lettre']][$cpt]['class'] = 'grpactif';
             }
             $cpt++;
@@ -1409,7 +1409,7 @@ class Groupe extends ObjectModel
      * retourne l'id d'un groupe à partir de son alias
      *
      * @param string $alias
-     * @return int
+     * @return int ou false
      */
     static function getIdByAlias($alias)
     {
@@ -1419,7 +1419,10 @@ class Groupe extends ObjectModel
              . "FROM `" . self::$_table . "` "
              . "WHERE `alias` = '" . $db->escape($alias) . "'";
 
-        return (int) $db->queryWithFetchFirstField($sql);
+        if ($id_groupe = $db->queryWithFetchFirstField($sql)) {
+            return (int) $id_groupe;
+        }
+        return false;
     }
 
     /**
@@ -1433,7 +1436,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         // /!\ 64 bits
-        if(!is_numeric($fbpid)) {
+        if (!is_numeric($fbpid)) {
             return false;
         }
 
@@ -1441,7 +1444,7 @@ class Groupe extends ObjectModel
              . "FROM `" . self::$_table . "` "
              . "WHERE `facebook_page_id` = " . $fbpid;
 
-        if($id_groupe = $db->queryWithFetchFirstField($sql)) {
+        if ($id_groupe = $db->queryWithFetchFirstField($sql)) {
             return (int) $id_groupe;
         }
         return false;
@@ -1457,7 +1460,7 @@ class Groupe extends ObjectModel
         // le groupe existe-t-il bien ?
 
         // le style existe-il bien ?
-        if(!Style::isStyleOk($id_style)) {
+        if (!Style::isStyleOk($id_style)) {
             throw new Exception('id_style introuvable');
         }
 
@@ -1488,7 +1491,7 @@ class Groupe extends ObjectModel
         // le groupe existe-t-il bien ?
 
         // le style existe-il bien ?
-        if(!Style::isStyleOk($id_style)) {
+        if (!Style::isStyleOk($id_style)) {
             throw new Exception('id_style introuvable');
         }
 
@@ -1701,7 +1704,7 @@ class Groupe extends ObjectModel
              . "AND `p`.`id_event` = `e`.`id_event` "
              . "AND `e`.`id_lieu` = `l`.`id_lieu` "
              . "AND `g`.`id_groupe` = " . (int) $this->_id_groupe." ";
-        switch($type) {
+        switch ($type) {
             case 'all':
                 break;
             case 'prev':
