@@ -1,6 +1,6 @@
 <?php
 
-if(!defined('DEFAULT_CONTROLLERS_PATH')) {
+if (!defined('DEFAULT_CONTROLLERS_PATH')) {
     define('DEFAULT_CONTROLLERS_PATH', dirname(__FILE__) . '/../controllers/');
 }
 define('DEFAULT_CONTROLLER_SUFFIX', '_controller.php');
@@ -131,13 +131,13 @@ class Route
      */
     static function load($file)
     {
-        if(file_exists($file) && is_readable($file))
+        if (file_exists($file) && is_readable($file))
         {
             $routes = file($file);
-            foreach($routes as $route)
+            foreach ($routes as $route)
             {
                 $r = explode('|', trim($route));
-                if((string) $r[0] === '1') {
+                if ((string) $r[0] === '1') {
                     self::map_connect(array('controller' => (string) $r[1],
                                             'action' => (string) $r[2],
                                             'method' => (string) $r[3],
@@ -195,12 +195,12 @@ class Route
 
         $ret = call_user_func(array('Controller', $action));
 
-        if(is_array($ret) && array_key_exists('mode', $ret)) {
+        if (is_array($ret) && array_key_exists('mode', $ret)) {
             header('HTTP/1.1 200 OK');
-            if($ret['mode'] == 'inline') {
+            if ($ret['mode'] == 'inline') {
                 header('Content-Type: ' . $ret['content-type']);
                 header('Content-Disposition: inline; filename="' . $ret['basename'] . '"');
-            } elseif($ret['mode'] == 'download') {
+            } elseif ($ret['mode'] == 'download') {
                 header('Content-Type: application/octet-stream');
                 header('Content-Disposition: attachment; filename="' . $ret['basename'] . '"');
             }
@@ -296,9 +296,9 @@ class Route
         self::$action_params = array_merge(self::$action_params, $_GET);
         self::$action_params = array_merge(self::$action_params, $_POST);
 
-        if(ROUTE_MANAGE_FILES === true) {
+        if (ROUTE_MANAGE_FILES === true) {
             foreach ($_FILES as $param_name => $file) {
-                if($file['tmp_name']) {
+                if ($file['tmp_name']) {
                     self::$action_params[$param_name] = file_get_contents($file['tmp_name']);
                 }
             }
@@ -408,8 +408,8 @@ class Route
      */
     protected static function _output($content_type, $content)
     {
-        if($content_type === 'application/xhtml+xml') {
-            if(!(isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/xhtml+xml') !== false)) {
+        if ($content_type === 'application/xhtml+xml') {
+            if (!(isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/xhtml+xml') !== false)) {
                 $content_type = 'text/html';
             }
         }

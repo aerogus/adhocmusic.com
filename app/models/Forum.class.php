@@ -58,7 +58,7 @@ abstract class Forum
     static function parseMessage($texte, $wiki = false)
     {
         // 1 - gestion des frimousses
-        foreach(self::$smileys as $smiley) {
+        foreach (self::$smileys as $smiley) {
             // [0] = code / [1] nom du fichier .gif
             $texte = str_replace($smiley[0], "<img src='".self::$path_smileys.$smiley[1]."' alt='' />", $texte);
         }
@@ -171,17 +171,17 @@ abstract class Forum
     static function addMessage($params)
     {
         $new_thread = true;
-        if(array_key_exists('id_thread', $params)) {
-            if(is_numeric($params['id_thread']) && $params['id_thread'] > 0) {
+        if (array_key_exists('id_thread', $params)) {
+            if (is_numeric($params['id_thread']) && $params['id_thread'] > 0) {
                 $new_thread = false;
             }
         }
 
-        if($new_thread) {
-            if(!array_key_exists('subject', $params)) {
+        if ($new_thread) {
+            if (!array_key_exists('subject', $params)) {
                 throw new Exception('sujet manquant');
             }
-            if(strlen($params['subject']) == 0) {
+            if (strlen($params['subject']) == 0) {
                 throw new Exception('sujet vide');
             }
             $params['id_thread'] = static::_createThread(array(
@@ -261,22 +261,22 @@ abstract class Forum
      */
     static function delMessage($params)
     {
-        static::_deleteMessage(array(
+        static::_deleteMessage([
             'id_message' => $params['id_message'],
-        ));
+        ]);
 
-        static::_updateThread(array(
+        static::_updateThread([
             'id_thread'  => $params['id_thread'],
             'id_contact' => $params['id_contact'],
             'action'     => 'msgdel',
-        ));
+        ]);
 
-        static::_updateForum(array(
+        static::_updateForum([
             'id_forum'     => $params['id_forum'],
             'id_contact'   => null,
             'msgaction'    => 'msgdel',
             'threadaction' => '',
-        ));
+        ]);
 
         return true;
     }
@@ -315,11 +315,11 @@ abstract class Forum
         $res = $db->queryWithFetch($sql);
 
         $tab = [];
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $tab[$_res['id_forum']] = $_res['nb_threads'];
         }
 
-        if(!is_null($id_forum) && !empty($id_forum)) {
+        if (!is_null($id_forum) && !empty($id_forum)) {
             return (int) $tab[$id_forum];
         }
         return $tab;
@@ -342,11 +342,11 @@ abstract class Forum
         $res = $db->queryWithFetch($sql);
 
         $tab = [];
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $tab[$_res['id_forum']] = $_res['nb_messages'];
         }
 
-        if(!is_null($id_forum)) {
+        if (!is_null($id_forum)) {
             return (int) $tab[$id_forum];
         }
         return $tab;
@@ -454,9 +454,9 @@ abstract class Forum
         $db = DataBase::getInstance();
 
         $sql = "UPDATE `" . static::$_db_table_forum_thread . "` SET ";
-        if($params['action'] == 'msgadd') {
+        if ($params['action'] == 'msgadd') {
              $sql .= "`nb_messages` = `nb_messages` + 1, ";
-        } elseif($params['action'] == 'msgdel') {
+        } elseif ($params['action'] == 'msgdel') {
              $sql .= "`nb_messages` = `nb_messages` - 1, ";
         }
 
@@ -502,17 +502,17 @@ abstract class Forum
         $db = DataBase::getInstance();
 
         $sql = "UPDATE `" . static::$_db_table_forum_info . "` SET ";
-        if($params['msgaction'] == 'msgadd') {
+        if ($params['msgaction'] == 'msgadd') {
             $sql .= "`nb_messages` = `nb_messages` + 1, ";
-        } elseif($params['msgaction'] == 'msgdel') {
+        } elseif ($params['msgaction'] == 'msgdel') {
             $sql .= "`nb_messages` = `nb_messages` - 1, ";
         }
-        if($params['threadaction'] == 'threadadd') {
+        if ($params['threadaction'] == 'threadadd') {
             $sql .= "`nb_threads` = `nb_threads` + 1, ";
-        } elseif($params['threadaction'] == 'threaddel') {
+        } elseif ($params['threadaction'] == 'threaddel') {
             $sql .= "`nb_threads` = `nb_threads` - 1, ";
         }
-        if($params['id_contact']) {
+        if ($params['id_contact']) {
             $sql .= "`id_contact` = " . (int) $params['id_contact'] . ", `date` = NOW() ";
         }
         $sql .= "WHERE `id_forum` = '" . $db->escape($params['id_forum']) . "'";

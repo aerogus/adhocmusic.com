@@ -120,7 +120,7 @@ class CMS extends ObjectModel
      */
     function getCreatedOn()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
         }
         return false;
@@ -131,7 +131,7 @@ class CMS extends ObjectModel
      */
     function getCreatedOnTs()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
         }
         return false;
@@ -142,7 +142,7 @@ class CMS extends ObjectModel
      */
     function getModifiedOn()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
         }
         return false;
@@ -153,7 +153,7 @@ class CMS extends ObjectModel
      */
     function getModifiedOnTs()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
         }
         return false;
@@ -372,7 +372,7 @@ class CMS extends ObjectModel
              . "FROM `" . self::$_table . "` "
              . "WHERE `" . self::$_pk . "` = " . (int) $this->getId();
 
-        if($res = $db->queryWithFetchFirstRow($sql)) {
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             return true;
         }

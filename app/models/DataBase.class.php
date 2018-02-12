@@ -9,7 +9,7 @@
  */
 
 // base par défaut
-if(!defined('DB_ADHOC_DEFAULT')) {
+if (!defined('DB_ADHOC_DEFAULT')) {
     define('DB_ADHOC_DEFAULT', 1);
 }
 
@@ -98,7 +98,7 @@ class DataBase
         array_unshift($params, self::$_connections_params[$conn_name]['db_host']);
 
         $retries = DB_MYSQL_CONNECT_RETRIES;
-        while(empty($this->_current_conn[$conn_key]) && $retries > 0) {
+        while (empty($this->_current_conn[$conn_key]) && $retries > 0) {
             $retries--;
             $this->_current_conn[$conn_key] = @call_user_func_array('mysqli_connect', $params);
         }
@@ -195,7 +195,7 @@ class DataBase
      */
     static function getInstance()
     {
-        if(is_null(self::$_instance)) {
+        if (is_null(self::$_instance)) {
             return new DataBase();
         }
         return self::$_instance;
@@ -212,7 +212,7 @@ class DataBase
      */
     static function deleteInstance()
     {
-        if(!is_null(self::$_instance))
+        if (!is_null(self::$_instance))
         {
             self::$_instance = null;
             self::$_connections_params = [];
@@ -314,9 +314,9 @@ class DataBase
             /* La requête s'est bien passée, c'était une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = [];
-            while($row = mysqli_fetch_array($rc, MYSQLI_NUM))
+            while ($row = mysqli_fetch_array($rc, MYSQLI_NUM))
             {
-                if(is_array($row)) {
+                if (is_array($row)) {
                     array_push($res, $row[0]);
                 }
             }
@@ -362,14 +362,14 @@ class DataBase
 
         $traces = debug_backtrace();
         $backtrace = '';
-        if(is_array($traces))
+        if (is_array($traces))
         {
-            foreach($traces as $key => $trace)
+            foreach ($traces as $key => $trace)
             {
-                if(array_key_exists('class', $trace)) {
+                if (array_key_exists('class', $trace)) {
                     $backtrace .= $trace['class'];
                 }
-                if(array_key_exists('type', $trace)) {
+                if (array_key_exists('type', $trace)) {
                     $backtrace .= $trace['type'];
                 }
                 $backtrace .= $trace['function'].'() l.? <-- ';
@@ -465,7 +465,7 @@ class DataBase
 
         $fields = '';
         $values = '';
-        foreach($fieldsAndValues as $field => $value)
+        foreach ($fieldsAndValues as $field => $value)
         {
             $fields .= ', `'.(string) $field.'`';
             if ((is_array($value)) && (!empty($value['special'])))
@@ -513,7 +513,7 @@ class DataBase
         }
 
         $conn_key = self::generateConnectionKey($conn_name);
-        if(isset($this->_current_conn[$conn_key])) {
+        if (isset($this->_current_conn[$conn_key])) {
             return mysqli_insert_id($this->_current_conn[$conn_key]);
         }
         return -1;
@@ -524,13 +524,13 @@ class DataBase
      */
     function escape($string, $conn_name = DB_ADHOC_DEFAULT)
     {
-        if(true === self::$_connections_params[$conn_name]['hasMaintenance']) {
+        if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
             throw new Exception('Serveur MySQL en maintenance');
         }
 
         $conn_key = self::generateConnectionKey($conn_name);
 
-        if(isset($this->_current_conn[$conn_key])) {
+        if (isset($this->_current_conn[$conn_key])) {
             return mysqli_real_escape_string($this->_current_conn[$conn_key], $string);
         } else {
             // throw Exception plutot

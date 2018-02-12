@@ -74,7 +74,7 @@ class City extends Liste
      */
     protected function _isCityOk($id_city)
     {
-        if(array_key_exists($id_city, static::$_liste)) {
+        if (array_key_exists($id_city, static::$_liste)) {
             return true;
         }
         return false;
@@ -88,7 +88,7 @@ class City extends Liste
      */
     protected function _getName($id_city)
     {
-        if(array_key_exists($id_city, static::$_liste)) {
+        if (array_key_exists($id_city, static::$_liste)) {
             return static::$_liste[$id_city]['name'];
         }
         return false;
@@ -102,7 +102,7 @@ class City extends Liste
      */
     protected function _getIdDepartement($id_city)
     {
-        if(array_key_exists($id_city, static::$_liste)) {
+        if (array_key_exists($id_city, static::$_liste)) {
             return static::$_liste[$id_city]['id_departement'];
         }
         return false;
@@ -116,7 +116,7 @@ class City extends Liste
      */
     protected function _getCp($id_city)
     {
-        if(array_key_exists($id_city, static::$_liste)) {
+        if (array_key_exists($id_city, static::$_liste)) {
             return static::$_liste[$id_city]['cp'];
         }
         return false;
@@ -134,8 +134,8 @@ class City extends Liste
              . "ORDER BY `id_departement` ASC, `name` ASC";
 
         static::$_liste = [];
-        if($rows = $db->queryWithFetch($sql)) {
-            foreach($rows as $row) {
+        if ($rows = $db->queryWithFetch($sql)) {
+            foreach ($rows as $row) {
                 static::$_liste[$row['id_city']] = $row;
             }
             return true;

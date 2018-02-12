@@ -54,21 +54,21 @@ class GoogleMaps
      */
     static function getStaticMap($params)
     {
-        if(!array_key_exists('loc', $params))
+        if (!array_key_exists('loc', $params))
             return '';
-        if(!array_key_exists('zoom', $params))
+        if (!array_key_exists('zoom', $params))
             $params['zoom'] = '15';
-        if(!array_key_exists('size', $params))
+        if (!array_key_exists('size', $params))
             $params['size'] = '320x320';
-        if(!array_key_exists('maptype', $params))
+        if (!array_key_exists('maptype', $params))
             $params['maptype'] = 'roadmap';
-        if(!array_key_exists('format', $params))
+        if (!array_key_exists('format', $params))
             $params['format'] = 'png';
-        if(!array_key_exists('mobile', $params))
+        if (!array_key_exists('mobile', $params))
             $params['mobile'] = 'false';
-        if(!array_key_exists('sensor', $params))
+        if (!array_key_exists('sensor', $params))
             $params['sensor'] = 'false';
-        if(!array_key_exists('icon', $params))
+        if (!array_key_exists('icon', $params))
             $params['icon'] = '/img/pin/note.png';
 
         return 'https://maps.google.com/maps/api/staticmap'
@@ -90,7 +90,7 @@ class GoogleMaps
      */
     static function getGeocode($addr)
     {
-        if(empty($addr)) {
+        if (empty($addr)) {
             return ['status' => 'EMPTY_REQUEST'];
         }
 

@@ -162,10 +162,10 @@ class Departement
     static function getHashTable($cleReg = null)
     {
         $out = [];
-        foreach(self::$_liste as $cle => $info)
+        foreach (self::$_liste as $cle => $info)
         {
-            if(!is_null($cleReg)) {
-                if($info[self::CLEREG] == $cleReg) {
+            if (!is_null($cleReg)) {
+                if ($info[self::CLEREG] == $cleReg) {
                     $out[$cle] = $info[self::LIBDEP];
                 }
             } else {
@@ -184,7 +184,7 @@ class Departement
     static function getName($cleDep)
     {
         $cleDep = str_pad($cleDep, 2, '0', STR_PAD_LEFT);
-        if(self::isCleOk($cleDep)) {
+        if (self::isCleOk($cleDep)) {
             return self::$_liste[$cleDep][self::LIBDEP];
         }
         return false;
@@ -199,7 +199,7 @@ class Departement
     static function getRegion($cleDep)
     {
         $cleDep = str_pad($cleDep, 2, '0', STR_PAD_LEFT);
-        if(self::isCleOk($cleDep)) {
+        if (self::isCleOk($cleDep)) {
             return self::$_liste[$cleDep][self::CLEREG];
         }
         return false;
@@ -214,7 +214,7 @@ class Departement
     static function isCleOk($cle)
     {
         $cle = str_pad($cle, 2, '0', STR_PAD_LEFT);
-        if(array_key_exists($cle, self::getHashTable())) {
+        if (array_key_exists($cle, self::getHashTable())) {
             return true;
         }
         return false;

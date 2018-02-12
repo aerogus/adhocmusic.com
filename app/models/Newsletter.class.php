@@ -206,22 +206,22 @@ class Newsletter extends ObjectModel
     static function getNewsletters($params = [])
     {
         $debut = 0;
-        if(isset($params['debut'])) {
+        if (isset($params['debut'])) {
             $debut = (int) $params['debut'];
         }
 
         $limit = 10;
-        if(isset($params['limit'])) {
+        if (isset($params['limit'])) {
             $limit = (int) $params['limit'];
         }
 
         $sens = "ASC";
-        if(isset($params['sens']) && $params['sens'] === "DESC") {
+        if (isset($params['sens']) && $params['sens'] === "DESC") {
             $sens = "DESC";
         }
 
         $tab_id = [];
-        if(array_key_exists('id', $params)) {
+        if (array_key_exists('id', $params)) {
             $tab_id = explode(",", $params['id']);
         }
 
@@ -231,7 +231,7 @@ class Newsletter extends ObjectModel
              . "FROM `" . self::$_db_table_newsletter . "` "
              . "WHERE 1 ";
 
-        if(count($tab_id) && ($tab_id[0] !== 0)) {
+        if (count($tab_id) && ($tab_id[0] !== 0)) {
             $sql .= "AND `id_newsletter` IN (" . implode(',', $tab_id) . ") ";
         }
 
@@ -307,12 +307,12 @@ class Newsletter extends ObjectModel
      */
     static function addEmail($email)
     {
-        if($id_contact = Contact::getIdByEmail($email)) {
+        if ($id_contact = Contact::getIdByEmail($email)) {
             // contact ? oui
-            if($pseudo = Membre::getPseudoById($id_contact)) {
+            if ($pseudo = Membre::getPseudoById($id_contact)) {
                 // "membre ? oui
                 $membre = Membre::getInstance($id_contact);
-                if($membre->getMailing()) {
+                if ($membre->getMailing()) {
                     // déjà inscrit
                     return NEWSLETTER_SUB_KO_ALREADY_SUBSCRIBED_MEMBER;
                 } else {
@@ -343,12 +343,12 @@ class Newsletter extends ObjectModel
      */
     static function removeEmail($email)
     {
-        if($id_contact = Contact::getIdByEmail($email)) {
+        if ($id_contact = Contact::getIdByEmail($email)) {
             // contact ? oui
-            if($pseudo = Membre::getPseudoById($id_contact)) {
+            if ($pseudo = Membre::getPseudoById($id_contact)) {
                 // membre ? oui
                 $membre = Membre::getInstance($id_contact);
-                if($membre->getMailing()) {
+                if ($membre->getMailing()) {
                     $membre->setMailing(false);
                     $membre->save();
                     // déinscription OK
@@ -381,7 +381,7 @@ class Newsletter extends ObjectModel
              . "FROM `" . self::$_table . "` "
              . "WHERE `" . self::$_pk . "` = " . (int) $this->_id_newsletter;
 
-        if($res = $db->queryWithFetchFirstRow($sql)) {
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             return true;
         }
@@ -397,11 +397,11 @@ class Newsletter extends ObjectModel
         file_put_contents(ADHOC_ROOT_PATH . '/log/newsletters-hits.txt', date('Y-m-d H:i:s') . "\tnl" . $id_newsletter . "\tid" . $id_contact . "\turl" . $url ."\n", FILE_APPEND | LOCK_EX);
 
         $ip = false;
-        if(isset($_SERVER['REMOTE_ADDR'])) {
+        if (isset($_SERVER['REMOTE_ADDR'])) {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
         $host = gethostbyaddr($ip);
-        if(isset($_SERVER['HTTP_USER_AGENT'])) {
+        if (isset($_SERVER['HTTP_USER_AGENT'])) {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
         }
 
@@ -418,7 +418,7 @@ class Newsletter extends ObjectModel
                  . "VALUES(NOW(), " . (int) $id_newsletter . ", " . (int) $id_contact .", '" . $db->escape($url) . "', '" . $db->escape($ip) . "', '" . $db->escape($host) . "', '" . $db->escape($useragent) . "    ')";
             $res = $db->query($sql);
 
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             // rien
         }
     }

@@ -168,7 +168,7 @@ class Video extends Media
      */
     protected static $_table = 'adhoc_video';
 
-    const DEFAULT_THUMBNAIL = 'http://www.adhocmusic.com/img/videothumb.jpg';
+    const DEFAULT_THUMBNAIL = 'https://www.adhocmusic.com/img/videothumb.jpg';
 
     const HOST_YOUTUBE     = 1;
     const HOST_DAILYMOTION = 2;
@@ -179,7 +179,7 @@ class Video extends Media
     const HOST_ADHOC       = 7;
     const HOST_VIMEO       = 8;
 
-    protected static $_tab_hosts = array(
+    protected static $_tab_hosts = [
         self::HOST_YOUTUBE     => "YouTube",
         self::HOST_DAILYMOTION => "DailyMotion",
 //        self::HOST_MYSPACE     => "MySpace",
@@ -188,7 +188,7 @@ class Video extends Media
         self::HOST_FACEBOOK    => "Facebook",
         self::HOST_ADHOC       => "AD'HOC",
         self::HOST_VIMEO       => "Vimeo",
-    );
+    ];
 
     /**
      * dimensions du player
@@ -229,7 +229,7 @@ class Video extends Media
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'id_contact'   => 'num',
         'id_host'      => 'num',
         'reference'    => 'str',
@@ -243,7 +243,7 @@ class Video extends Media
         'online'       => 'bool',
         'width'        => 'num',
         'height'       => 'num',
-    );
+    ];
 
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
@@ -302,7 +302,7 @@ class Video extends Media
      */
     function getWidth()
     {
-        if($this->_width) {
+        if ($this->_width) {
             return (int) $this->_width;
         }
         return self::WIDTH;
@@ -313,7 +313,7 @@ class Video extends Media
      */
     function getHeight()
     {
-        if($this->_height) {
+        if ($this->_height) {
             return (int) $this->_height;
         }
         return self::HEIGHT;
@@ -416,11 +416,11 @@ class Video extends Media
     static function getVideoHosts()
     {
         $tab = [];
-        foreach(self::$_tab_hosts as $id => $name) {
-            $tab[] = array(
+        foreach (self::$_tab_hosts as $id => $name) {
+            $tab[] = [
                 'id' => $id,
                 'name' => $name,
-            );
+            ];
         }
         return $tab;
     }
@@ -451,22 +451,22 @@ class Video extends Media
     static function getVideos($params = [])
     {
         $debut = 0;
-        if(isset($params['debut'])) {
+        if (isset($params['debut'])) {
             $debut = (int) $params['debut'];
         }
 
         $limit = 10;
-        if(!empty($params['limit'])) {
+        if (!empty($params['limit'])) {
             $limit = (int) $params['limit'];
         }
 
         $sens = 'ASC';
-        if(isset($params['sens']) && $params['sens'] == 'DESC') {
+        if (isset($params['sens']) && $params['sens'] == 'DESC') {
             $sens = 'DESC';
         }
 
         $sort = 'id_video';
-        if(isset($params['sort'])
+        if (isset($params['sort'])
             && ($params['sort'] === 'date' || $params['sort'] === 'random')) {
             $sort = $params['sort'];
         }
@@ -478,12 +478,12 @@ class Video extends Media
         $tab_id        = [];
         $tab_contact   = [];
 
-        if(array_key_exists('groupe', $params))    { $tab_groupe    = explode(",", $params['groupe']); }
-        if(array_key_exists('structure', $params)) { $tab_structure = explode(",", $params['structure']); }
-        if(array_key_exists('lieu', $params))      { $tab_lieu      = explode(",", $params['lieu']); }
-        if(array_key_exists('event', $params))     { $tab_event     = explode(",", $params['event']); }
-        if(array_key_exists('id', $params))        { $tab_id        = explode(",", $params['id']); }
-        if(array_key_exists('contact', $params))   { $tab_contact   = explode(",", $params['contact']); }
+        if (array_key_exists('groupe', $params))    { $tab_groupe    = explode(",", $params['groupe']); }
+        if (array_key_exists('structure', $params)) { $tab_structure = explode(",", $params['structure']); }
+        if (array_key_exists('lieu', $params))      { $tab_lieu      = explode(",", $params['lieu']); }
+        if (array_key_exists('event', $params))     { $tab_event     = explode(",", $params['event']); }
+        if (array_key_exists('id', $params))        { $tab_id        = explode(",", $params['id']); }
+        if (array_key_exists('contact', $params))   { $tab_contact   = explode(",", $params['contact']); }
 
         $db = DataBase::getInstance();
 
@@ -502,8 +502,8 @@ class Video extends Media
              . "LEFT JOIN `" . self::$_db_table_membre . "` `m` ON (`v`.`id_contact` = `m`.`id_contact`) "
              . "WHERE 1 ";
 
-        if(array_key_exists('online', $params)) {
-            if($params['online']) {
+        if (array_key_exists('online', $params)) {
+            if ($params['online']) {
                 $online = 'TRUE';
             } else {
                 $online = 'FALSE';
@@ -511,32 +511,32 @@ class Video extends Media
             $sql .= "AND `v`.`online` = " . $online . " ";
         }
 
-        if(count($tab_groupe) && ($tab_groupe[0])) {
+        if (count($tab_groupe) && ($tab_groupe[0])) {
             $sql .= "AND `v`.`id_groupe` IN (" . implode(',', $tab_groupe) . ") ";
         }
 
-        if(count($tab_structure) && ($tab_structure[0])) {
+        if (count($tab_structure) && ($tab_structure[0])) {
             $sql .= "AND `v`.`id_structure` IN (" . implode(',', $tab_structure) . ") ";
         }
 
-        if(count($tab_lieu) && ($tab_lieu[0])) {
+        if (count($tab_lieu) && ($tab_lieu[0])) {
             $sql .= "AND `v`.`id_lieu` IN (" . implode(',', $tab_lieu) . ") ";
         }
 
-        if(count($tab_event) && ($tab_event[0])) {
+        if (count($tab_event) && ($tab_event[0])) {
             $sql .= "AND `v`.`id_event` IN (" . implode(',', $tab_event) . ") ";
         }
 
-        if(count($tab_id) && ($tab_id[0])) {
+        if (count($tab_id) && ($tab_id[0])) {
             $sql .= "AND `v`.`id_video` IN (" . implode(',', $tab_id) . ") ";
         }
 
-        if(count($tab_contact) && ($tab_contact[0])) {
+        if (count($tab_contact) && ($tab_contact[0])) {
             $sql .= "AND `v`.`id_contact` IN (" . implode(',', $tab_contact) . ") ";
         }
 
         $sql .= "ORDER BY ";
-        if($sort === "random") {
+        if ($sort === "random") {
             $sql .= "RAND(".time().") ";
         } else {
             $sql .= "`v`.`" . $sort . "` " . $sens . " ";
@@ -545,7 +545,7 @@ class Video extends Media
 
         $res_tmp = $db->queryWithFetch($sql);
         $res = [];
-        foreach($res_tmp as $idx => $_res) {
+        foreach ($res_tmp as $idx => $_res) {
             $res[$idx] = $_res;
             $res[$idx]['url'] = self::getUrlById($_res['id']);
             $res[$idx]['swf'] = self::getFlashUrl($_res['host_id'], $_res['reference']);
@@ -566,7 +566,7 @@ class Video extends Media
      */
     function delete()
     {
-        if(parent::delete())
+        if (parent::delete())
         {
             $this->deleteThumbnail();
             self::invalidateVideoThumbInCache($this->getId(), 80, 80, '000000', false, true);
@@ -586,11 +586,11 @@ class Video extends Media
      */
     function getPlayer($autoplay = false, $iframe = true)
     {
-        switch($this->_id_host)
+        switch ($this->_id_host)
         {
             case self::HOST_YOUTUBE:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '';
-                if($iframe) {
+                if ($iframe) {
                     return '<iframe title="'.htmlspecialchars($this->getName()).'" width="'.$this->getWidth().'" height="'.$this->getHeight().'" src="https://www.youtube.com/embed/'.$this->_reference.'?rel=0" frameborder="0" allowfullscreen></iframe>' . "\n";
                 } else {
                     return '<object width="'.$this->getWidth().'" height="'.$this->getHeight().'">' . "\n"
@@ -603,7 +603,7 @@ class Video extends Media
             case self::HOST_DAILYMOTION:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '0';
                 // taille par défaut : l330 / h267
-                if($iframe) {
+                if ($iframe) {
                     return '<iframe frameborder="0" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" src="https://www.dailymotion.com/embed/video/'.$this->_reference.'?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&autoPlay='.$strautoplay.'&wmode=transparent"></iframe>' . "\n";
                 } else {
                     return '<object width="'.self::WIDTH.'" height="'.self::HEIGHT.'">' . "\n"
@@ -683,7 +683,7 @@ class Video extends Media
                      . '</video>';
             case self::HOST_VIMEO:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '0';
-                if($iframe) {
+                if ($iframe) {
                     return '<iframe src="http://player.vimeo.com/video/'.$this->_reference.'?title=0&amp;byline=0&amp;portrait=0&amp;autoplay='.$strautoplay.'" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" frameborder="0"></iframe>' . "\n";
                 } else {
                     return '<object width="'.self::WIDTH.'" height="'.self::HEIGHT.'">' . "\n"
@@ -705,7 +705,7 @@ class Video extends Media
      */
     static function getFlashUrl($id_host, $reference)
     {
-        switch($id_host)
+        switch ($id_host)
         {
             case self::HOST_YOUTUBE:
                 return 'http://youtube.com/v/' . $reference . '&hl=fr';
@@ -890,7 +890,7 @@ class Video extends Media
              . "FROM `" . self::$_db_table_video . "` "
              . "WHERE `id_video` = " . (int) $this->_id_video;
 
-        if($res = $db->queryWithFetchFirstRow($sql)) {
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             return true;
         }
@@ -908,10 +908,10 @@ class Video extends Media
      */
     static function getRemoteThumbnail($id_host, $reference, $multi = false)
     {
-        switch($id_host)
+        switch ($id_host)
         {
             case self::HOST_YOUTUBE:
-                if($multi) {
+                if ($multi) {
                     $url   = [];
                     $url[] = 'http://img.youtube.com/vi/' . $reference . '/1.jpg'; // 130*97
                     $url[] = 'http://img.youtube.com/vi/' . $reference . '/2.jpg'; // 130*97
@@ -925,7 +925,7 @@ class Video extends Media
 
             case self::HOST_DAILYMOTION:
                 $headers = get_headers('http://www.dailymotion.com/thumbnail/video/' . $reference, 1);
-                if(is_array($headers['Location'])) {
+                if (is_array($headers['Location'])) {
                     $url = $headers['Location'][0];
                 } else {
                     $url = $headers['Location'];
@@ -960,7 +960,7 @@ class Video extends Media
      */
     static function getRemoteTitle($id_host, $reference)
     {
-        switch($id_host)
+        switch ($id_host)
         {
             case self::HOST_YOUTUBE:
             case self::HOST_DAILYMOTION:
@@ -988,7 +988,7 @@ class Video extends Media
     function deleteThumbnail()
     {
         $file = self::getBasePath() . '/' . $this->getId() . '.jpg';
-        if(file_exists($file)) {
+        if (file_exists($file)) {
             unlink($file);
             return true;
         }
@@ -1025,7 +1025,7 @@ class Video extends Media
         $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
 
-        if(file_exists($cache)) {
+        if (file_exists($cache)) {
             unlink($cache);
             return true;
         }
@@ -1043,16 +1043,16 @@ class Video extends Media
         $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
 
-        if(!file_exists($cache)) {
+        if (!file_exists($cache)) {
             $source = self::getBasePath() . '/' . $id . '.jpg';
-            if(file_exists($source)) {
+            if (file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);
                 $img->setMaxWidth($width);
                 $img->setMaxHeight($height);
                 $img->setBorder($border);
                 $img->setKeepRatio(true);
-                if($zoom) {
+                if ($zoom) {
                     $img->setZoom();
                 }
                 $img->setHexColor($bgcolor);
@@ -1075,11 +1075,11 @@ class Video extends Media
      */
     static function getMyVideosCount()
     {
-        if(empty($_SESSION['membre'])) {
+        if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');
         }
 
-        if(isset($_SESSION['my_counters']['nb_videos'])) {
+        if (isset($_SESSION['my_counters']['nb_videos'])) {
             return $_SESSION['my_counters']['nb_videos'];
         }
 
@@ -1103,7 +1103,7 @@ class Video extends Media
      */
     static function getVideosCount()
     {
-        if(isset($_SESSION['global_counters']['nb_videos'])) {
+        if (isset($_SESSION['global_counters']['nb_videos'])) {
             return $_SESSION['global_counters']['nb_videos'];
         }
 

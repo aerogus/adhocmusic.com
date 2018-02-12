@@ -121,20 +121,20 @@ class Featured extends ObjectModel
      */
     function getDatDeb($mode = false)
     {
-        if(!Date::isDateTimeOk($this->_datdeb)) {
+        if (!Date::isDateTimeOk($this->_datdeb)) {
             return false;
         }
 
         preg_match("/^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$/", $this->_datdeb, $regs);
-        if($mode === 'year') {
+        if ($mode === 'year') {
             return $regs[1];
-        } elseif($mode === 'month') {
+        } elseif ($mode === 'month') {
             return $regs[2];
-        } elseif($mode === 'day') {
+        } elseif ($mode === 'day') {
             return $regs[3];
-        } elseif($mode === 'hour') {
+        } elseif ($mode === 'hour') {
             return $regs[4];
-        } elseif($mode === 'minute') {
+        } elseif ($mode === 'minute') {
             return $regs[5];
         }
         return $this->_datdeb;
@@ -146,20 +146,20 @@ class Featured extends ObjectModel
      */
     function getDatFin($mode = false)
     {
-        if(!Date::isDateTimeOk($this->_datfin)) {
+        if (!Date::isDateTimeOk($this->_datfin)) {
             return false;
         }
 
         preg_match("/^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$/", $this->_datfin, $regs);
-        if($mode == 'year') {
+        if ($mode === 'year') {
             return $regs[1];
-        } elseif($mode === 'month') {
+        } elseif ($mode === 'month') {
             return $regs[2];
-        } elseif($mode === 'day') {
+        } elseif ($mode === 'day') {
             return $regs[3];
-        } elseif($mode === 'hour') {
+        } elseif ($mode === 'hour') {
             return $regs[4];
-        } elseif($mode === 'minute') {
+        } elseif ($mode === 'minute') {
             return $regs[5];
         }
         return $this->_datfin;
@@ -223,7 +223,7 @@ class Featured extends ObjectModel
      */
     function setDatDeb($val)
     {
-        if(!Date::isDateTimeOk($val)) {
+        if (!Date::isDateTimeOk($val)) {
             throw new Exception('datdeb invalide');
         }
 
@@ -239,7 +239,7 @@ class Featured extends ObjectModel
      */
     function setDatFin($val)
     {
-        if(!Date::isDateTimeOk($val)) {
+        if (!Date::isDateTimeOk($val)) {
             throw new Exception('datfin invalide');
         }
 
@@ -321,7 +321,7 @@ class Featured extends ObjectModel
 
         $res = $db->queryWithFetch($sql);
 
-        foreach($res as $cpt => $_res) {
+        foreach ($res as $cpt => $_res) {
             $res[$cpt]['image'] = self::getImageById($_res['id']);
         }
 
@@ -344,19 +344,19 @@ class Featured extends ObjectModel
         $res = $db->queryWithFetch($sql);
 
         $tab = [];
-        if(is_array($res))
+        if (is_array($res))
         {
             $cpt = 0;
             $now = date('Y-m-d H:i:s');
-            foreach($res as $cpt => $_res)
+            foreach ($res as $cpt => $_res)
             {
                 $tab[$cpt] = $_res;
                 $tab[$cpt]['image'] = self::getImageById($_res['id']);
-                if(($now > $_res['datdeb']) && ($now < $_res['datfin'])) {
+                if (($now > $_res['datdeb']) && ($now < $_res['datfin'])) {
                     $tab[$cpt]['class'] = 'enligne';
-                } elseif($now < $_res['datdeb']) {
+                } elseif ($now < $_res['datdeb']) {
                     $tab[$cpt]['class'] = "programme";
-                } elseif($now > $_res['datfin']) {
+                } elseif ($now > $_res['datfin']) {
                     $tab[$cpt]['class'] = "archive";
                 }
 
@@ -378,7 +378,7 @@ class Featured extends ObjectModel
              . "FROM `" . self::$_table . "` "
              . "WHERE `id_featured` = " . (int) $this->_id_featured;
 
-        if($res = $db->queryWithFetchFirstRow($sql)) {
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             return true;
         }
@@ -393,10 +393,10 @@ class Featured extends ObjectModel
      */
     function delete()
     {
-        if(parent::delete())
+        if (parent::delete())
         {
             $file = self::getBasePath() . '/' . $this->getId() . '.jpg';
-            if(file_exists($file)) {
+            if (file_exists($file)) {
                 unlink($file);
             }
             return true;

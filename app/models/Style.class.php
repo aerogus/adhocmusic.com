@@ -115,7 +115,7 @@ class Style
      */
     static function isStyleOk($id_style)
     {
-        if(array_key_exists($id_style, self::$_liste)) {
+        if (array_key_exists($id_style, self::$_liste)) {
             return true;
         }
         return false;

@@ -110,7 +110,7 @@ abstract class ObjectModel
      */
     function __construct($id = null)
     {
-        if(!is_null($id)) {
+        if (!is_null($id)) {
             $this->_object_id = md5(get_called_class() . '|' . $id);
             $pk = '_' . static::$_pk;
             $this->$pk = $id;
@@ -194,18 +194,18 @@ abstract class ObjectModel
     {
         $db = DataBase::getInstance();
 
-        if(!$this->getId()) // INSERT
+        if (!$this->getId()) // INSERT
         {
             $sql = "INSERT INTO `" . static::$_table . "` (";
-            foreach(static::$_all_fields as $field => $type) {
+            foreach (static::$_all_fields as $field => $type) {
                 $sql .= "`" . $field . "`,";
             }
             $sql = substr($sql, 0, -1);
             $sql .= ") VALUES (";
 
-            foreach(static::$_all_fields as $field => $type) {
+            foreach (static::$_all_fields as $field => $type) {
                 $att = '_' . $field;
-                switch($type)
+                switch ($type)
                 {
                     case 'num':
                         $sql .= (int) $this->$att . ",";
@@ -250,9 +250,9 @@ abstract class ObjectModel
 
             $fields_to_save = '';
             foreach ($this->_modified_fields as $field => $value) {
-                if($value === true) {
+                if ($value === true) {
                     $att = '_'.$field;
-                    switch(static::$_all_fields[$field])
+                    switch (static::$_all_fields[$field])
                     {
                         case 'num':
                             $fields_to_save .= " `" . $field . "` = " . (int) $this->$att . ", ";
@@ -309,7 +309,7 @@ abstract class ObjectModel
 
         $db->query($sql);
 
-        if($db->affectedRows()) {
+        if ($db->affectedRows()) {
             return true;
         }
         return false;
@@ -321,12 +321,12 @@ abstract class ObjectModel
     protected function _dbToObject($data)
     {
         $all_fields = static::_getAllFields(true);
-        foreach($data as $k => $v)
+        foreach ($data as $k => $v)
         {
-            if(array_key_exists($k, $all_fields))
+            if (array_key_exists($k, $all_fields))
             {
                 $att = '_' . $k;
-                if($all_fields[$k] === 'phpser') {
+                if ($all_fields[$k] === 'phpser') {
                     $this->$att = unserialize($v);
                 } else {
                     $this->$att = $v;

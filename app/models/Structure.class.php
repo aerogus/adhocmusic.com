@@ -92,7 +92,7 @@ class Structure extends ObjectModel
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'name'           => 'str',
         'address'        => 'str',
         'cp'             => 'str',
@@ -104,7 +104,7 @@ class Structure extends ObjectModel
         'site'           => 'str',
         'email'          => 'str',
         'id_country'     => 'str',
-    );
+    ];
 
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
@@ -383,22 +383,22 @@ class Structure extends ObjectModel
     function delete()
     {
         // check de la table evenement
-        if($this->hasEvents()) {
+        if ($this->hasEvents()) {
             throw new Exception('delete impossible, la structure est liée à des événements');
         }
 
         // check de la table audio
-        if($this->hasAudios()) {
+        if ($this->hasAudios()) {
             throw new Exception('delete impossible, la structure est liée à des audios');
         }
 
         // check de la table photo
-        if($this->hasPhotos()) {
+        if ($this->hasPhotos()) {
             throw new Exception('delete impossible, la structure est liée à des photos');
         }
 
         // check de la table video
-        if($this->hasVideos()) {
+        if ($this->hasVideos()) {
             throw new Exception('delete impossible, la structure est liée à des vidéos');
         }
 
@@ -408,9 +408,9 @@ class Structure extends ObjectModel
 
         $db = DataBase::getInstance();
         $res  = $db->query($sql);
-        if($db->affectedRows()) {
+        if ($db->affectedRows()) {
             $file = self::getBasePath() . '/' . $this->_id_structure . '.png';
-            if(file_exists($file)) {
+            if (file_exists($file)) {
                 unlink($file);
             }
             return true;
@@ -434,8 +434,8 @@ class Structure extends ObjectModel
              . "ORDER BY `id_country` ASC, `id_departement` ASC, `city` ASC";
 
         $tab = [];
-        if($res = $db->queryWithFetch($sql)) {
-            foreach($res as $struct) {
+        if ($res = $db->queryWithFetch($sql)) {
+            foreach ($res as $struct) {
                 $tab[$struct['id']] = $struct;
                 $tab[$struct['id']]['picto'] = self::getPictoById($struct['id']);
             }
@@ -458,9 +458,9 @@ class Structure extends ObjectModel
               . "FROM `" . self::$_db_table_structure . "` "
               . "WHERE `id_structure` = " . (int) $this->_id_structure;
 
-        if($res = $db->queryWithFetchFirstRow($sql)) {
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
-            if(file_exists(self::getBasePath() . '/' . $this->_id_structure . '.png')) {
+            if (file_exists(self::getBasePath() . '/' . $this->_id_structure . '.png')) {
                 $this->_photo = self::getBaseUrl() . '/' . $this->_id_structure . '.png';
             }
             return true;
@@ -483,9 +483,9 @@ class Structure extends ObjectModel
      */
     function getPhotos()
     {
-        return Photo::getPhotos(array(
+        return Photo::getPhotos([
             'structure' => $this->_id_structure,
-        ));
+        ]);
     }
 
     /**
@@ -503,9 +503,9 @@ class Structure extends ObjectModel
      */
     function getVideos()
     {
-        return Video::getVideos(array(
+        return Video::getVideos([
             'structure' => $this->_id_structure,
-        ));
+        ]);
     }
 
     /**
@@ -523,9 +523,9 @@ class Structure extends ObjectModel
      */
     function getAudios()
     {
-        return Audio::getAudios(array(
+        return Audio::getAudios([
             'structure' => $this->_id_structure,
-        ));
+        ]);
     }
 
     /**
@@ -543,8 +543,8 @@ class Structure extends ObjectModel
      */
     function getEvenements()
     {
-        return Event::getEvents(array(
+        return Event::getEvents([
             'structure' => $this->_id_structure,
-        ));
+        ]);
     }
 }

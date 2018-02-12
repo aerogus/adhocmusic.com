@@ -207,7 +207,7 @@ class Messagerie extends ObjectModel
              . "FROM `" . self::$_db_table_messagerie . "` "
              . "WHERE 1 ";
 
-        switch($mode)
+        switch ($mode)
         {
             case 'admin':
                 $sql .= "AND 1 ";
@@ -260,7 +260,7 @@ class Messagerie extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql  = "UPDATE `" . self::$_db_table_messagerie . "` ";
-        switch($who) {
+        switch ($who) {
             case 'from':
                 $sql .= 'SET `del_from` = TRUE ';
                 break;

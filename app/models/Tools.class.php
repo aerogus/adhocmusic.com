@@ -38,16 +38,16 @@ class Tools
      */
     static function charSet($str, $mode = 'UTF8')
     {
-        switch($mode)
+        switch ($mode)
         {
             case 'ISO':
-                if(self::isUTF8($str)) {
+                if (self::isUTF8($str)) {
                     $str = utf8_decode($str);
                 }
                 break;
 
             case 'UTF8':
-                if(!self::isUTF8($str)) {
+                if (!self::isUTF8($str)) {
                     $str = utf8_encode($str);
                 }
                 break;
@@ -150,7 +150,7 @@ class Tools
     static function tronc($chaine, $maxlength)
     {
         $chaine = trim($chaine);
-        if((mb_strlen($chaine) > $maxlength) && ($maxlength > 4)) {
+        if ((mb_strlen($chaine) > $maxlength) && ($maxlength > 4)) {
             return mb_substr($chaine, 0, $maxlength - 4, 'UTF-8')." ...";
         }
         return $chaine;
@@ -215,9 +215,9 @@ class Tools
      */
     static function isSubmit($formName, $method = 'POST')
     {
-        if($method == 'POST') {
+        if ($method == 'POST') {
             return (bool) !empty($_POST[$formName . '-submit']);
-        } elseif($method == 'GET') {
+        } elseif ($method == 'GET') {
             return (bool) !empty($_GET[$formName . '-submit']);
         } else {
             return (bool) Route::params($formName . '-submit');
@@ -250,11 +250,11 @@ class Tools
      */
     static function redirect($url, $force_ssl = false)
     {
-        if((strpos($url, 'http://') === false) && (strpos($url, 'https://') === false)) {
+        if ((strpos($url, 'http://') === false) && (strpos($url, 'https://') === false)) {
             $url = HOME_URL . $url;
         }
 
-        if($force_ssl) {
+        if ($force_ssl) {
             $url = str_replace('http:', 'https:', $url);
         }
 
@@ -280,10 +280,10 @@ class Tools
      */
     static function isAuth()
     {
-        if(empty($_SESSION['membre'])) {
+        if (empty($_SESSION['membre'])) {
             return false;
         }
-        if((int) $_SESSION['membre']->getId() > 0) {
+        if ((int) $_SESSION['membre']->getId() > 0) {
             return true;
         }
         return false;
@@ -300,14 +300,14 @@ class Tools
     static function auth($type)
     {
         // non identifié
-        if(empty($_SESSION['membre'])) {
+        if (empty($_SESSION['membre'])) {
             $_SESSION['redirect_after_auth'] = $_SERVER['REQUEST_URI'];
             Tools::redirect('/auth/login', true);
             exit();
         }
 
         // vérification des droits
-        if($_SESSION['membre']->getLevel() & $type) {
+        if ($_SESSION['membre']->getLevel() & $type) {
             return true;
         }
 
@@ -328,7 +328,7 @@ class Tools
     static function authGroupe($id_groupe)
     {
         // non identifié
-        if(empty($_SESSION['membre'])) {
+        if (empty($_SESSION['membre'])) {
             $_SESSION['redirect_after_auth'] = $_SERVER['REQUEST_URI'];
             Tools::redirect('/auth/login');
             exit();
@@ -343,7 +343,7 @@ class Tools
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId() . " "
              . "AND `id_groupe` = " . (int) $id_groupe;
 
-        if($id_contact = $db->queryWithFetchFirstField($sql)) {
+        if ($id_contact = $db->queryWithFetchFirstField($sql)) {
             return true;
         }
 
@@ -364,48 +364,48 @@ class Tools
         session_start();
 
         $_SESSION['lastaccess'] = date('Y-m-d H:i:s');
-        if(!empty($_SESSION['hits'])) {
+        if (!empty($_SESSION['hits'])) {
             $_SESSION['hits']++;
         } else {
             $_SESSION['hits'] = 1;
         }
-        if(!empty($_SERVER['REQUEST_METHOD'])) {
+        if (!empty($_SERVER['REQUEST_METHOD'])) {
             $_SESSION['httpmethod'] = $_SERVER['REQUEST_METHOD'];
         }
-        if(!empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['REQUEST_URI'])) {
+        if (!empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['REQUEST_URI'])) {
             $_SESSION['url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         }
-        if(!empty($_SERVER['HTTP_USER_AGENT'])) {
+        if (!empty($_SERVER['HTTP_USER_AGENT'])) {
             $_SESSION['ua'] = $_SERVER['HTTP_USER_AGENT'];
         }
-        if(!empty($_SERVER['REMOTE_ADDR'])) {
+        if (!empty($_SERVER['REMOTE_ADDR'])) {
             $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
         }
-        if(!empty($_SESSION['ip']) && empty($_SESSION['host'])) {
+        if (!empty($_SESSION['ip']) && empty($_SESSION['host'])) {
             //$_SESSION['host'] = gethostbyaddr($_SESSION['ip']);
             $_SESSION['host'] = $_SERVER['REMOTE_ADDR'];
         }
         $_SESSION['geoloc'] = '';
         $_SESSION['lat'] = '';
         $_SESSION['lng'] = '';
-        if(!empty($_SERVER['GEOIP_COUNTRY_CODE'])) {
+        if (!empty($_SERVER['GEOIP_COUNTRY_CODE'])) {
             $_SESSION['geoloc'] .= $_SERVER['GEOIP_COUNTRY_CODE'];
         }
         $_SESSION['geoloc'] .= '|';
-        if(!empty($_SERVER['GEOIP_REGION'])) {
+        if (!empty($_SERVER['GEOIP_REGION'])) {
             $_SESSION['geoloc'] .= $_SERVER['GEOIP_REGION'];
         }
         $_SESSION['geoloc'] .= '|';
-        if(!empty($_SERVER['GEOIP_CITY'])) {
+        if (!empty($_SERVER['GEOIP_CITY'])) {
             $_SESSION['geoloc'] .= $_SERVER['GEOIP_CITY'];
         }
         $_SESSION['geoloc'] .= '|';
-        if(!empty($_SERVER['GEOIP_LATITUDE'])) {
+        if (!empty($_SERVER['GEOIP_LATITUDE'])) {
             $_SESSION['geoloc'] .= $_SERVER['GEOIP_LATITUDE'];
             $_SESSION['lat'] = $_SERVER['GEOIP_LATITUDE'];
         }
         $_SESSION['geoloc'] .= '|';
-        if(!empty($_SERVER['GEOIP_LONGITUDE'])) {
+        if (!empty($_SERVER['GEOIP_LONGITUDE'])) {
             $_SESSION['geoloc'] .= $_SERVER['GEOIP_LONGITUDE'];
             $_SESSION['lng'] = $_SERVER['GEOIP_LONGITUDE'];
         }
@@ -468,7 +468,7 @@ class Tools
      */
     static function getTypeMimeByExtension($ext)
     {
-        $mimes = array(
+        $mimes = [
             'jpg'  => 'image/jpeg',
             'jpeg' => 'image/jpeg',
             'gif'  => 'image/gif',
@@ -477,9 +477,9 @@ class Tools
             'txt'  => 'text/plain',
             'zip'  => 'multipart/x-zip',
             'pdf'  => 'application/pdf',
-        );
+        ];
 
-        if(array_key_exists($ext, $mimes)) {
+        if (array_key_exists($ext, $mimes)) {
             return $mimes[$ext];
         }
         return false;
@@ -495,7 +495,7 @@ class Tools
         $default_icon = 'file.png';
 
         // à finir
-        $icons = array(
+        $icons = [
             'jpg'  => 'image.png',
             'jpeg' => 'image.png',
             'gif'  => 'image.png',
@@ -504,9 +504,9 @@ class Tools
             'txt'  => 'text.png',
             'zip'  => 'archive.png',
             'pdf'  => 'pdf.png',
-        );
+        ];
 
-        if(array_key_exists($ext, $icons)) {
+        if (array_key_exists($ext, $icons)) {
             return $icons_url . $icons[$ext];
         }
         return $icons_url . $default_icon;

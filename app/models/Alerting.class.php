@@ -104,7 +104,7 @@ class Alerting extends ObjectModel
      */
     function getCreatedOn()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
         }
         return false;
@@ -115,7 +115,7 @@ class Alerting extends ObjectModel
      */
     function getCreatedOnTs()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
         }
         return false;
@@ -154,7 +154,7 @@ class Alerting extends ObjectModel
      */
     function setIdContact($val)
     {
-        if($this->_id_contact !== (int) $val)
+        if ($this->_id_contact !== (int) $val)
         {
             $this->_id_contact = (int) $val;
             $this->_modified_fields['id_contact'] = true;
@@ -166,7 +166,7 @@ class Alerting extends ObjectModel
      */
     function setCreatedOn($val)
     {
-        if($this->_created_on !== $val)
+        if ($this->_created_on !== $val)
         {
             $this->_created_on = (string) $val;
             $this->_modified_fields['created_on'] = true;
@@ -178,7 +178,7 @@ class Alerting extends ObjectModel
      */
     function setActive($val)
     {
-        if($this->_active !== (bool) $val)
+        if ($this->_active !== (bool) $val)
         {
             $this->_active = (bool) $val;
             $this->_modified_fields['active'] = true;
@@ -190,7 +190,7 @@ class Alerting extends ObjectModel
      */
     function setType($val)
     {
-        if($this->_type !== (string) $val)
+        if ($this->_type !== (string) $val)
         {
             $this->_type = (string) $val;
             $this->_modified_fields['type'] = true;
@@ -202,7 +202,7 @@ class Alerting extends ObjectModel
      */
     function setIdContent($val)
     {
-        if($this->_id_content !== (int) $val)
+        if ($this->_id_content !== (int) $val)
         {
             $this->_id_content = (int) $val;
             $this->_modified_fields['id_content'] = true;
@@ -218,7 +218,7 @@ class Alerting extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if($this->_created_on !== $now) {
+        if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
         }
@@ -226,7 +226,7 @@ class Alerting extends ObjectModel
 
     static function addSubscriber($id_contact, $type, $id_content)
     {
-        if(self::getIdByIds($id_contact, $type, $id_content)) {
+        if (self::getIdByIds($id_contact, $type, $id_content)) {
             return false;
         }
 
@@ -237,7 +237,7 @@ class Alerting extends ObjectModel
         $a->setActive(true);
         $a->setIdContent($id_content);
 
-        if($a->save()) {
+        if ($a->save()) {
              return true;
         }
 
@@ -246,13 +246,13 @@ class Alerting extends ObjectModel
 
     static function delSubscriber($id_contact, $type, $id_content)
     {
-        if(!self::getIdByIds($id_contact, $type, $id_content)) {
+        if (!self::getIdByIds($id_contact, $type, $id_content)) {
             return false;
         }
 
-        if($id_alerting = Alerting::getIdByIds($id_contact, $type, $id_content)) {
+        if ($id_alerting = Alerting::getIdByIds($id_contact, $type, $id_content)) {
             $a = Alerting::getInstance($id_alerting);
-            if($a->delete()) {
+            if ($a->delete()) {
                 return true;
             }
         }
@@ -362,7 +362,7 @@ class Alerting extends ObjectModel
              . "FROM `" . self::$_table . "` "
              . "WHERE `id_alerting` = " . (int) $this->getId();
 
-        if($res = $db->queryWithFetchFirstRow($sql)) {
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             return true;
         }

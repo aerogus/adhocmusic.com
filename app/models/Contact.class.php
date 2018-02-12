@@ -71,7 +71,7 @@ class Contact extends ObjectModel
      */
     protected function _getAllFields($fusion = true)
     {
-        if($fusion) {
+        if ($fusion) {
             return self::$_all_fields;
         } else {
             return [
@@ -121,7 +121,7 @@ class Contact extends ObjectModel
      */
     static function getIdByEmail($email)
     {
-        if(!Email::validate($email)) {
+        if (!Email::validate($email)) {
             throw new Exception('email syntaxiquement incorrect');
         }
 
@@ -224,18 +224,18 @@ class Contact extends ObjectModel
 
         $fields = self::_getAllFields(false);
 
-        if(!$this->getId()) // INSERT
+        if (!$this->getId()) // INSERT
         {
             /* table contact */
 
             $sql = "INSERT INTO `" . static::$_db_table_contact . "` (";
-            foreach($fields['contact'] as $field => $type) {
+            foreach ($fields['contact'] as $field => $type) {
                 $sql .= "`" . $field . "`,";
             }
             $sql = substr($sql, 0, -1);
             $sql .= ") VALUES (";
 
-            foreach($fields['contact'] as $field => $type) {
+            foreach ($fields['contact'] as $field => $type) {
                 $att = '_' . $field;
                 switch($type)
                 {
@@ -283,10 +283,10 @@ class Contact extends ObjectModel
             /* table contact */
 
             $fields_to_save = '';
-            foreach($this->_modified_fields['contact'] as $field => $value) {
-                if($value === true) {
+            foreach ($this->_modified_fields['contact'] as $field => $value) {
+                if ($value === true) {
                     $att = '_' . $field;
-                    switch($fields['contact'][$field])
+                    switch ($fields['contact'][$field])
                     {
                         case 'num':
                             $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
@@ -339,7 +339,7 @@ class Contact extends ObjectModel
              . "FROM `" . self::$_db_table_contact . "` "
              . "WHERE `id_contact` = " . (int) $this->_id_contact;
 
-        if($res = $db->queryWithFetchFirstRow($sql)) {
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             return true;
         }

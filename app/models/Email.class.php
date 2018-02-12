@@ -70,7 +70,7 @@ class Email
         switch($mode)
         {
             case "1":
-            for($cpt = 0 ; $cpt < $length ; $cpt++ ) {
+            for ($cpt = 0 ; $cpt < $length ; $cpt++ ) {
                 $str .= '&#'.ord($email[$cpt]).';';
             }
             break;
@@ -95,7 +95,7 @@ class Email
         $subject = trim($subject);
 
         $tpl = new EmailSmarty();
-        foreach($data as $key => $value) {
+        foreach ($data as $key => $value) {
             $tpl->assign($key, $value);
         }
         $body = $tpl->fetch($tplName . '.tpl');
@@ -119,7 +119,7 @@ class Email
         $mail->WordWrap = 78;
 
         if (is_array($to)) {
-            foreach($to as $_to) {
+            foreach ($to as $_to) {
                 $mail->AddAddress($_to);
             }
         } else {
@@ -130,7 +130,7 @@ class Email
             $mail->AddStringAttachment($attachment, $_FILES[$attachment]['name'], 'base64', $_FILES[$attachment]['type']);
         }
 
-        if($mail->Send()) {
+        if ($mail->Send()) {
             return true;
         }
         return false;

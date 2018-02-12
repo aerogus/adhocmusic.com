@@ -184,7 +184,7 @@ class Exposant extends ObjectModel
      */
     function getCreatedOn()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
         }
         return false;
@@ -195,7 +195,7 @@ class Exposant extends ObjectModel
      */
     function getCreatedOnTs()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
         }
         return false;
@@ -206,7 +206,7 @@ class Exposant extends ObjectModel
      */
     function getModifiedOn()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
         }
         return false;
@@ -217,7 +217,7 @@ class Exposant extends ObjectModel
      */
     function getModifiedOnTs()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
         }
         return false;
@@ -407,7 +407,7 @@ class Exposant extends ObjectModel
              . "FROM `" . self::$_db_table_exposant . "` "
              . "WHERE `id_exposant` = " . (int) $this->_id_exposant;
 
-        if(($res = $db->queryWithFetchFirstRow($sql)))
+        if (($res = $db->queryWithFetchFirstRow($sql)))
         {
             $this->_dbToObject($res);
             return true;

@@ -1385,7 +1385,7 @@ class Groupe extends ObjectModel
 
         $tab = [];
         $cpt = 0;
-        foreach($res as $grp) {
+        foreach ($res as $grp) {
             $tab[$grp['lettre']][$cpt] = $grp;
             $tab[$grp['lettre']][$cpt]['mini_photo'] = '/img/note_adhoc_64.png';
             $tab[$grp['lettre']][$cpt]['class'] = 'grpinactif';

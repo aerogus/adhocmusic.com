@@ -150,7 +150,7 @@ class Comment extends ObjectModel
      */
     function getCreatedOn()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
         }
         return false;
@@ -161,7 +161,7 @@ class Comment extends ObjectModel
      */
     function getCreatedOnTs()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
         }
         return false;
@@ -172,7 +172,7 @@ class Comment extends ObjectModel
      */
     function getModifiedOn()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
         }
         return false;
@@ -183,7 +183,7 @@ class Comment extends ObjectModel
      */
     function getModifiedOnTs()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
         }
         return false;
@@ -425,7 +425,7 @@ class Comment extends ObjectModel
              . "LEFT JOIN `" . self::$_db_table_contact . "` `cnt` ON (`mbr`.`id_contact` = `cnt`.`id_contact`) "
              . "WHERE `" . self::$_pk . "` = " . (int) $this->getId();
 
-        if($res = $db->queryWithFetchFirstRow($sql)) {
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             $this->_pseudo_mbr = $res['pseudo_mbr'];
             $this->_email_mbr  = $res['email_mbr'];
@@ -439,27 +439,27 @@ class Comment extends ObjectModel
     static function getComments($params = [])
     {
         $debut = 0;
-        if(isset($params['debut'])) {
+        if (isset($params['debut'])) {
             $debut = (int) $params['debut'];
         }
 
         $limit = null;
-        if(isset($params['limit'])) {
+        if (isset($params['limit'])) {
             $limit = (int) $params['limit'];
         }
 
         $tab_type = [];
-        if(array_key_exists('type', $params)) {
+        if (array_key_exists('type', $params)) {
             $tab_type = explode(",", $params['type']);
         }
 
         $sens = 'ASC';
-        if(isset($params['sens']) && $params['sens'] == 'DESC') {
+        if (isset($params['sens']) && $params['sens'] == 'DESC') {
             $sens = 'DESC';
         }
 
         $sort = 'id_comment';
-        if(isset($params['sort'])
+        if (isset($params['sort'])
            && ($params['sort'] == 'created_on' || $params['sort'] == 'online')) {
             $sort = $params['sort'];
         }
@@ -473,14 +473,14 @@ class Comment extends ObjectModel
              . "LEFT JOIN `" . self::$_db_table_contact . "` `cnt` ON (`mbr`.`id_contact` = `cnt`.`id_contact`) "
              . "WHERE 1 ";
 
-        if(count($tab_type) && ($tab_type[0] != '')) {
+        if (count($tab_type) && ($tab_type[0] != '')) {
             $sql .= "AND `com`.`type` IN ('" . implode("','", $tab_type) . "') ";
         }
 
-        if(array_key_exists('id_contact', $params))     { $sql .= "AND `com`.`id_contact` = " . (int) $params['id_contact'] . " "; }
-        if(array_key_exists('id_content', $params))     { $sql .= "AND `com`.`id_content` = " . (int) $params['id_content'] . " "; }
-        if(array_key_exists('online', $params)) {
-            if($params['online']) {
+        if (array_key_exists('id_contact', $params))     { $sql .= "AND `com`.`id_contact` = " . (int) $params['id_contact'] . " "; }
+        if (array_key_exists('id_content', $params))     { $sql .= "AND `com`.`id_content` = " . (int) $params['id_content'] . " "; }
+        if (array_key_exists('online', $params)) {
+            if ($params['online']) {
                 $online = 'TRUE';
             } else {
                 $online = 'FALSE';
@@ -489,25 +489,25 @@ class Comment extends ObjectModel
         }
 
         $sql .= "ORDER BY ";
-        if($sort == "random") {
+        if ($sort == "random") {
             $sql .= "RAND(" . time() . ") ";
         } else {
             $sql .= "`com`.`" . $sort . "` " . $sens . " ";
         }
 
-        if(!is_null($limit)) {
+        if (!is_null($limit)) {
             $sql .= "LIMIT " . $debut . ", " . $limit;
         }
 
         $res = $db->queryWithFetch($sql);
 
-        foreach($res as $idx => $row)
+        foreach ($res as $idx => $row)
         {
             $res[$idx]['url'] = self::getUrlById($row['id']);
             $res[$idx]['type_full'] = self::$_types[$row['type']];
         }
 
-        if($limit == 1) {
+        if ($limit == 1) {
             $res = array_pop($res);
         }
 
@@ -524,7 +524,7 @@ class Comment extends ObjectModel
         $title   = '';
         $url     = 'http://www.adhocmusic.com';
 
-        switch($this->getType())
+        switch ($this->getType())
         {
             case 's': // audio
                 // -> uploadeur de l'audio
@@ -536,10 +536,10 @@ class Comment extends ObjectModel
                 $emails[] = $membre->getEmail();
 
                 // -> si lien avec groupe, contacts des groupes
-                if($audio->getIdGroupe()) {
+                if ($audio->getIdGroupe()) {
                     $groupe = Groupe::getInstance($audio->getIdGroupe());
                     $membres = $groupe->getMembers();
-                    foreach($membres as $membre) {
+                    foreach ($membres as $membre) {
                         $emails[] = $membre['email'];
                     }
                 }
@@ -555,10 +555,10 @@ class Comment extends ObjectModel
                 $emails[] = $membre->getEmail();
 
                 // -> si lien avec groupe, contacts des groupes
-                if($video->getIdGroupe()) {
+                if ($video->getIdGroupe()) {
                     $groupe = Groupe::getInstance($video->getIdGroupe());
                     $membres = $groupe->getMembers();
-                    foreach($membres as $membre) {
+                    foreach ($membres as $membre) {
                         $emails[] = $membre['email'];
                     }
                 }
@@ -572,14 +572,14 @@ class Comment extends ObjectModel
 
                 // -> gens abonnés au lieu
                 $ids_contact = Alerting::getIdsContactByLieu($lieu->getId());
-                foreach($ids_contact as $id_contact)
+                foreach ($ids_contact as $id_contact)
                 {
                     $membre = Membre::getInstance($id_contact);
                     $emails[] = $membre->getEmail();
                 }
 
                 // -> email contact du lieu
-                if($lieu->getEmail()) {
+                if ($lieu->getEmail()) {
                     $emails[] = $lieu->getEmail();
                 }
                 break;
@@ -592,15 +592,15 @@ class Comment extends ObjectModel
 
                 // -> gens taggés dessus
                 $whos = Photo::whoIsOn($photo->getId());
-                foreach($whos as $who) {
+                foreach ($whos as $who) {
                     $membre = Membre::getInstance($who['id_contact']);
                     $emails[] = $membre->getEmail();
                 }
 
                 // -> si lien avec événement, gens ayant dans leur agenda perso cette date
-                if($photo->getIdEvent()) {
+                if ($photo->getIdEvent()) {
                     $subs = Alerting::getIdsContactByEvent($photo->getIdEvent());
-                    foreach($subs as $sub) {
+                    foreach ($subs as $sub) {
                         $membre = Membre::getInstance($sub['id_contact']);
                         $emails[] = $membre->getEmail();
                     }
@@ -611,10 +611,10 @@ class Comment extends ObjectModel
                 $emails[] = $membre->getEmail();
 
                 // -> si lien avec groupe, contacts des groupes
-                if($photo->getIdGroupe()) {
+                if ($photo->getIdGroupe()) {
                     $groupe = Groupe::getInstance($photo->getIdGroupe());
                     $membres = $groupe->getMembers();
-                    foreach($membres as $membre) {
+                    foreach ($membres as $membre) {
                         $emails[] = $membre['email'];
                     }
                 }
@@ -628,7 +628,7 @@ class Comment extends ObjectModel
 
                 // -> personnes abonnés à l'événement
                 $ids_contact = Alerting::getIdsContactByEvent($event->getId());
-                foreach($ids_contact as $id_contact)
+                foreach ($ids_contact as $id_contact)
                 {
                     $membre = Membre::getInstance($id_contact);
                     $emails[] = $membre->getEmail();
@@ -636,11 +636,11 @@ class Comment extends ObjectModel
 
                 // -> si lien avec groupes, contacts des groupes
                 $grps = $event->getGroupes();
-                if(is_array($grps)) {
-                    foreach($grps as $grp) {
+                if (is_array($grps)) {
+                    foreach ($grps as $grp) {
                         $groupe = Groupe::getInstance($grp['id']);
                         $membres = $groupe->getMembers();
-                        foreach($membres as $membre) {
+                        foreach ($membres as $membre) {
                             $emails[] = $membre['email'];
                         }
                     }
@@ -652,7 +652,7 @@ class Comment extends ObjectModel
 
                 // -> email contact du lieu
                 $lieu = Lieu::getInstance($event->getIdLieu());
-                if($lieu->getEmail()) {
+                if ($lieu->getEmail()) {
                     $emails[] = $lieu->getEmail();
                 }
                 break;
@@ -667,36 +667,36 @@ class Comment extends ObjectModel
         ));
 
         // -> gens ayant déjà posté sur ce contenu
-        foreach($comments as $comment)
+        foreach ($comments as $comment)
         {
-            if($comment['id_contact']) {
+            if ($comment['id_contact']) {
                 $emails[] = $comment['email_mbr'];
-            } elseif($comment['email']) {
+            } elseif ($comment['email']) {
                 $emails[] = $comment['email'];
             }
         }
 
         $emails = array_unique($emails);
 
-        foreach($emails as $email)
+        foreach ($emails as $email)
         {
-            if($email === 'guillaume.seznec@gmail.com')
+            if ($email === 'guillaume.seznec@gmail.com')
             {
-                if(Email::validate($email))
+                if (Email::validate($email))
                 {
-          	        Email::send(
-              	        $email,
-                  	    $subject,
-                      	'new-commentaire',
-                   			array(
-                   			    'subject' => $subject,
-                   			    'title'   => $title,
-                   			    'pseudo'  => $this->getPseudo(),
-                   			    'date'    => date('Y-m-d H:i:s'),
-                   			    'url'     => $url,
-                   			    'text'    => $this->getText(),
-                 	   	  )
-                  	);
+                    Email::send(
+                        $email,
+                        $subject,
+                        'new-commentaire',
+                        [
+                           'subject' => $subject,
+                           'title'   => $title,
+                           'pseudo'  => $this->getPseudo(),
+                           'date'    => date('Y-m-d H:i:s'),
+                           'url'     => $url,
+                           'text'    => $this->getText(),
+                        ]
+                    );
                 }
             }
         }

@@ -43,7 +43,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -78,7 +78,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -157,7 +157,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $res[$cpt]['profil'] = "<a href=\"/membres/".$_res['id_contact']."\">".$_res['pseudo']."</a>";
             $cpt++;
@@ -194,7 +194,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -230,7 +230,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -303,9 +303,9 @@ class Stats extends ObjectModel
 
         $data = [];
 
-        foreach($rows as $row) {
-            if($reg = Departement::getRegion($row['id_departement'])) {
-                if(array_key_exists($reg, $data)) {
+        foreach ($rows as $row) {
+            if ($reg = Departement::getRegion($row['id_departement'])) {
+                if (array_key_exists($reg, $data)) {
                     $data[$reg]['nb'] += $row['nb'];
                 } else {
                     $data[$reg] = array(
@@ -319,7 +319,7 @@ class Stats extends ObjectModel
 
         list($total, $max) = self::getTotalAndMax($data, 'nb');
 
-        foreach($data as $_reg => $_data) {
+        foreach ($data as $_reg => $_data) {
             $data[$_reg]['bargraph'] = self::getBarGraph($_data['nb'], $max);
         }
 
@@ -352,7 +352,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -389,7 +389,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -425,7 +425,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -461,7 +461,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -497,7 +497,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -530,7 +530,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -596,7 +596,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -633,7 +633,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -669,7 +669,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -730,7 +730,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['bargraph'] = self::getBarGraph($_res['nb'], $max);
             $cpt++;
         }
@@ -764,7 +764,7 @@ class Stats extends ObjectModel
         list($total, $max) = self::getTotalAndMax($res, 'nb');
 
         $cpt = 0;
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $res[$cpt]['nom_hebergeur'] = Video::getHostNameByHostId($_res['host_id']);
             $res[$cpt]['bargraph']      = self::getBarGraph($_res['nb'], $max);
             $cpt++;
@@ -790,7 +790,7 @@ class Stats extends ObjectModel
      */
     static function getBarGraph($value, $max)
     {
-        if(($value > 0) && ($max > 0)) {
+        if (($value > 0) && ($max > 0)) {
             $width = ceil(($value / $max) * self::BARGRAPH_MAX_WIDTH);
             return "<div style=\"width: " . $width . "px; height: 10px; background: #bb0000; background-image: -moz-linear-gradient(top, #ff0000, #660000); background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ff0000), color-stop(1, #660000));\"><div>";
         }
@@ -809,10 +809,10 @@ class Stats extends ObjectModel
         $total = 0;
         $max = 0;
 
-        foreach($tab as $_tab) {
+        foreach ($tab as $_tab) {
             $nb = (int) $_tab[$champ];
             $total += $nb;
-            if($max < $nb) {
+            if ($max < $nb) {
                 $max = $nb;
             }
         }

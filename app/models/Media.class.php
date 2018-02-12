@@ -114,7 +114,7 @@ class Media extends ObjectModel
      */
     function getCreatedOn()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
         }
         return false;
@@ -125,7 +125,7 @@ class Media extends ObjectModel
      */
     function getCreatedOnTs()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
         }
         return false;
@@ -136,7 +136,7 @@ class Media extends ObjectModel
      */
     function getModifiedOn()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
         }
         return false;
@@ -147,7 +147,7 @@ class Media extends ObjectModel
      */
     function getModifiedOnTs()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
         }
         return false;
@@ -319,11 +319,11 @@ class Media extends ObjectModel
     static function getMedia($params = [])
     {
         $tab_type = [];
-        if(array_key_exists('type', $params)) {
+        if (array_key_exists('type', $params)) {
             $tab_type = explode(",", $params['type']);
         }
 
-        if(!array_key_exists('split', $params)) {
+        if (!array_key_exists('split', $params)) {
             $params['split'] = false;
         }
 
@@ -352,7 +352,7 @@ class Media extends ObjectModel
             }
         }
 
-        if($params['split']) {
+        if ($params['split']) {
             return $split;
         }
 

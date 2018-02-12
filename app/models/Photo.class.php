@@ -205,7 +205,7 @@ class Photo extends Media
      */
     function delete()
     {
-        if(parent::delete())
+        if (parent::delete())
         {
             self::invalidatePhotoInCache($this->getId(),  80,  80, '000000', false,  true);
             self::invalidatePhotoInCache($this->getId(), 130, 130, '000000', false, false);
@@ -213,7 +213,7 @@ class Photo extends Media
             self::invalidatePhotoInCache($this->getId(), 680, 600, '000000', false, false);
 
             $file = self::getBasePath() . '/' . $this->getId() . '.jpg';
-            if(file_exists($file)) {
+            if (file_exists($file)) {
                 unlink($file);
             }
             return true;
@@ -228,11 +228,11 @@ class Photo extends Media
      */
     static function getMyPhotosCount()
     {
-        if(empty($_SESSION['membre'])) {
+        if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');
         }
 
-        if(isset($_SESSION['my_counters']['nb_photos'])) {
+        if (isset($_SESSION['my_counters']['nb_photos'])) {
             return $_SESSION['my_counters']['nb_photos'];
         }
 
@@ -256,7 +256,7 @@ class Photo extends Media
      */
     static function getPhotosCount()
     {
-        if(isset($_SESSION['global_counters']['nb_photos'])) {
+        if (isset($_SESSION['global_counters']['nb_photos'])) {
             return $_SESSION['global_counters']['nb_photos'];
         }
 
@@ -291,28 +291,28 @@ class Photo extends Media
     static function getPhotos($params = [])
     {
         $debut = 0;
-        if(isset($params['debut'])) {
+        if (isset($params['debut'])) {
             $debut = (int) $params['debut'];
         }
 
         $limit = 10;
-        if(isset($params['limit'])) {
+        if (isset($params['limit'])) {
             $limit = (int) $params['limit'];
         }
 
         $sens = 'ASC';
-        if(isset($params['sens']) && $params['sens'] == 'DESC') {
+        if (isset($params['sens']) && $params['sens'] == 'DESC') {
             $sens = 'DESC';
         }
 
         $sort = 'id_photo';
-        if(isset($params['sort'])
+        if (isset($params['sort'])
            && ($params['sort'] == 'created_on' || $params['sort'] == 'random')) {
             $sort = $params['sort'];
         }
 
         $fetchtags = false;
-        if(isset($params['fetchtags'])) {
+        if (isset($params['fetchtags'])) {
             $fetchtags = (bool) $params['fetchtags'];
         }
 
@@ -323,12 +323,12 @@ class Photo extends Media
         $tab_id        = [];
         $tab_contact   = [];
 
-        if(array_key_exists('groupe', $params))    { $tab_groupe    = explode(",", $params['groupe']); }
-        if(array_key_exists('structure', $params)) { $tab_structure = explode(",", $params['structure']); }
-        if(array_key_exists('lieu', $params))      { $tab_lieu      = explode(",", $params['lieu']); }
-        if(array_key_exists('event', $params))     { $tab_event     = explode(",", $params['event']); }
-        if(array_key_exists('id', $params))        { $tab_id        = explode(",", $params['id']); }
-        if(array_key_exists('contact', $params))   { $tab_contact   = explode(",", $params['contact']); }
+        if (array_key_exists('groupe', $params))    { $tab_groupe    = explode(",", $params['groupe']); }
+        if (array_key_exists('structure', $params)) { $tab_structure = explode(",", $params['structure']); }
+        if (array_key_exists('lieu', $params))      { $tab_lieu      = explode(",", $params['lieu']); }
+        if (array_key_exists('event', $params))     { $tab_event     = explode(",", $params['event']); }
+        if (array_key_exists('id', $params))        { $tab_id        = explode(",", $params['id']); }
+        if (array_key_exists('contact', $params))   { $tab_contact   = explode(",", $params['contact']); }
 
         $db = DataBase::getInstance();
 
@@ -346,8 +346,8 @@ class Photo extends Media
              . "LEFT JOIN `" . self::$_db_table_membre . "` `m` ON (`p`.`id_contact` = `m`.`id_contact`) "
              . "WHERE 1 ";
 
-        if(array_key_exists('online', $params)) {
-            if($params['online']) {
+        if (array_key_exists('online', $params)) {
+            if ($params['online']) {
                 $online = 'TRUE';
             } else {
                 $online = 'FALSE';
@@ -355,32 +355,32 @@ class Photo extends Media
             $sql .= "AND `p`.`online` = ".$online." ";
         }
 
-        if(count($tab_groupe) && $tab_groupe[0] != 0) {
+        if (count($tab_groupe) && $tab_groupe[0] != 0) {
             $sql .= "AND `p`.`id_groupe` IN (" . implode(',', $tab_groupe) . ") ";
         }
 
-        if(count($tab_structure) && $tab_structure[0] != 0) {
+        if (count($tab_structure) && $tab_structure[0] != 0) {
             $sql .= "AND `p`.`id_structure` IN (" . implode(',', $tab_structure) . ") ";
         }
 
-        if(count($tab_lieu) && $tab_lieu[0] != 0) {
+        if (count($tab_lieu) && $tab_lieu[0] != 0) {
             $sql .= "AND `p`.`id_lieu` IN (" . implode(',', $tab_lieu) . ") ";
         }
 
-        if(count($tab_event) && $tab_event[0] != 0) {
+        if (count($tab_event) && $tab_event[0] != 0) {
             $sql .= "AND `p`.`id_event` IN (" . implode(',', $tab_event) . ") ";
         }
 
-        if(count($tab_id) && ($tab_id[0] != 0)) {
+        if (count($tab_id) && ($tab_id[0] != 0)) {
             $sql .= "AND `p`.`id_photo` IN (" . implode(',', $tab_id) . ") ";
         }
 
-        if(count($tab_contact) && ($tab_contact[0] != 0)) {
+        if (count($tab_contact) && ($tab_contact[0] != 0)) {
             $sql .= "AND `p`.`id_contact` IN (" . implode(',', $tab_contact) . ") ";
         }
 
         $sql .= "ORDER BY ";
-        if($sort == "random") {
+        if ($sort == "random") {
             $sql .= "RAND(" . time() . ") ";
         } else {
             $sql .= "`p`.`" . $sort . "` " . $sens . " ";
@@ -390,11 +390,11 @@ class Photo extends Media
         $tab = [];
 
         $cpt = 0;
-        if($res = $db->queryWithFetch($sql)) {
-            foreach($res as $_res) {
+        if ($res = $db->queryWithFetch($sql)) {
+            foreach ($res as $_res) {
                 $tab[$cpt] = $_res;
                 $tab[$cpt]['url'] = Photo::getUrlById($_res['id']);
-                if($fetchtags) {
+                if ($fetchtags) {
                     $tab[$cpt]['tag'] = Photo::whoIsOn($_res['id']);
                 }
                 $tab[$cpt]['thumb_80_80']   = Photo::getPhotoUrl($_res['id'],  80,  80, '000000', false,  true);
@@ -446,7 +446,7 @@ class Photo extends Media
              . "LEFT JOIN `" . self::$_db_table_membre . "` `m` ON (`p`.`id_contact` = `m`.`id_contact`) "
              . "WHERE `p`.`id_photo` = " . (int) $this->_id_photo;
 
-        if($res = $db->queryWithFetchFirstRow($sql)) {
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             $this->_tag = Photo::whoIsOn($this->_id_photo);
             $this->_pseudo = $res['pseudo'];
@@ -481,7 +481,7 @@ class Photo extends Media
         $uid = 'photo/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
 
-        if(file_exists($cache)) {
+        if (file_exists($cache)) {
             unlink($cache);
             return true;
         }
@@ -500,16 +500,16 @@ class Photo extends Media
         $uid = 'photo/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
 
-        if(!file_exists($cache)) {
+        if (!file_exists($cache)) {
             $source = self::getBasePath() . '/' . $id . '.jpg';
-            if(file_exists($source)) {
+            if (file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);
                 $img->setMaxWidth($width);
                 $img->setMaxHeight($height);
                 $img->setBorder($border);
                 $img->setKeepRatio(true);
-                if($zoom) {
+                if ($zoom) {
                     $img->setZoom();
                 }
                 $img->setHexColor($bgcolor);

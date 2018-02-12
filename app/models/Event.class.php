@@ -128,7 +128,7 @@ class Event extends ObjectModel
      * ceci est utile pour la formation de la requête
      * @var array
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'created_on'    => 'date',
         'modified_on'   => 'date',
         'name'          => 'str',
@@ -143,7 +143,7 @@ class Event extends ObjectModel
         'nb_photos'     => 'num',
         'nb_audios'     => 'num',
         'nb_videos'     => 'num',
-    );
+    ];
 
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
@@ -176,7 +176,7 @@ class Event extends ObjectModel
      */
     function getCreatedOn()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
         }
         return false;
@@ -187,7 +187,7 @@ class Event extends ObjectModel
      */
     function getCreatedOnTs()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
         }
         return false;
@@ -198,7 +198,7 @@ class Event extends ObjectModel
      */
     function getModifiedOn()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
         }
         return false;
@@ -209,7 +209,7 @@ class Event extends ObjectModel
      */
     function getModifiedOnTs()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
         }
         return false;
@@ -640,7 +640,7 @@ class Event extends ObjectModel
      */
     static function getEventsCount()
     {
-        if(isset($_SESSION['global_counters']['nb_events'])) {
+        if (isset($_SESSION['global_counters']['nb_events'])) {
             return $_SESSION['global_counters']['nb_events'];
         }
 
@@ -678,9 +678,9 @@ class Event extends ObjectModel
      */
     static function getEvents($params = [])
     {
-        if(array_key_exists('datdeb', $params)) {
-            if(!empty($params['datdeb'])) {
-                if(!(Date::isDateOk($params['datdeb']) || Date::isDateTimeOk($params['datdeb']))) {
+        if (array_key_exists('datdeb', $params)) {
+            if (!empty($params['datdeb'])) {
+                if (!(Date::isDateOk($params['datdeb']) || Date::isDateTimeOk($params['datdeb']))) {
                     throw new Exception('datdeb incorrecte');
                 }
             } else {
@@ -688,9 +688,9 @@ class Event extends ObjectModel
             }
         }
 
-        if(array_key_exists('datfin', $params)) {
-            if(!empty($params['datfin'])) {
-                if(!(Date::isDateOk($params['datfin']) || Date::isDateTimeOk($params['datfin']))) {
+        if (array_key_exists('datfin', $params)) {
+            if (!empty($params['datfin'])) {
+                if (!(Date::isDateOk($params['datfin']) || Date::isDateTimeOk($params['datfin']))) {
                     throw new Exception('datfin incorrecte');
                 }
             } else {
@@ -699,33 +699,33 @@ class Event extends ObjectModel
         }
 
         $debut = 0;
-        if(isset($params['debut']) && ((int) $params['debut'] > 0)) {
+        if (isset($params['debut']) && ((int) $params['debut'] > 0)) {
             $debut = (int) $params['debut'];
         }
 
         $limit = 10;
-        if(isset($params['limit']) && ((int) $params['limit'] > 0)) {
+        if (isset($params['limit']) && ((int) $params['limit'] > 0)) {
             $limit = (int) $params['limit'];
         }
 
         $sens = 'ASC';
-        if(isset($params['sens']) && $params['sens'] == 'DESC') {
+        if (isset($params['sens']) && $params['sens'] == 'DESC') {
             $sens = 'DESC';
         }
 
         $sort = 'id_event';
-        if(isset($params['sort'])
+        if (isset($params['sort'])
            && ($params['sort'] == 'date' || $params['sort'] == 'random')) {
             $sort = $params['sort'];
         }
 
         $online = null;
-        if(isset($params['online'])) {
+        if (isset($params['online'])) {
             $online = (bool) $params['online'];
         }
 
         $fetch_fb = false;
-        if(!empty($params['fetch_fb'])) {
+        if (!empty($params['fetch_fb'])) {
             $fetch_fb = true;
         }
 
@@ -779,64 +779,64 @@ class Event extends ObjectModel
              . "LEFT JOIN `" . self::$_db_table_membre . "` `m` ON (`e`.`id_contact` = `m`.`id_contact`) "
              . "WHERE 1 ";
 
-        if(count($tab_lieu)) {
+        if (count($tab_lieu)) {
             $sql .= "AND (0 ";
-            foreach($tab_lieu as $id_lieu) {
+            foreach ($tab_lieu as $id_lieu) {
                 $sql .= "OR `l`.`id_lieu` = " . (int) $id_lieu." ";
             }
             $sql .= ") ";
         }
 
-        if(count($tab_style)) {
+        if (count($tab_style)) {
             $sql .= "AND (0 ";
-            foreach($tab_style as $id_style) {
+            foreach ($tab_style as $id_style) {
                 $sql .= "OR `es`.`id_style` = " . (int) $id_style . " ";
             }
             $sql .= ") ";
         }
 
-        if(count($tab_groupe)) {
+        if (count($tab_groupe)) {
             $sql .= "AND (0 ";
-            foreach($tab_groupe as $id_groupe) {
+            foreach ($tab_groupe as $id_groupe) {
                 $sql .= "OR `p`.`id_groupe` = " . (int) $id_groupe." ";
             }
             $sql .= ") ";
         }
 
-        if(count($tab_structure)) {
+        if (count($tab_structure)) {
             $sql .= "AND (0 ";
-            foreach($tab_structure as $id_structure) {
+            foreach ($tab_structure as $id_structure) {
                 $sql .= "OR `o`.`id_structure` = " . (int) $id_structure . " ";
             }
             $sql .= ") ";
         }
 
-        if(count($tab_id) && ($tab_id[0] !== 0)) {
+        if (count($tab_id) && ($tab_id[0] !== 0)) {
             $sql .= "AND `e`.`id_event` IN (" . implode(',', $tab_id) . ") ";
         }
 
-        if(count($tab_contact) && ($tab_contact[0] !== 0)) {
+        if (count($tab_contact) && ($tab_contact[0] !== 0)) {
             $sql .= "AND `e`.`id_contact` IN (" . implode(',', $tab_contact) . ") ";
         }
 
-        if(count($tab_departement) && ($tab_departement[0] !== 0)) {
+        if (count($tab_departement) && ($tab_departement[0] !== 0)) {
             $sql .= "AND (0 ";
-            foreach($tab_departement as $id_departement) {
+            foreach ($tab_departement as $id_departement) {
                 $sql .= "OR `l`.`id_departement` = '" . $db->escape($id_departement) . "' ";
             }
             $sql .= ") ";
         }
 
-        if(array_key_exists('datdeb', $params)) {
+        if (array_key_exists('datdeb', $params)) {
             $sql .= "AND `e`.`date` >= '" . $db->escape($params['datdeb']) . "' ";
         }
 
-        if(array_key_exists('datfin', $params)) {
+        if (array_key_exists('datfin', $params)) {
             $sql .= "AND `e`.`date` <= '" . $db->escape($params['datfin']) . "' ";
         }
 
-        if(!is_null($online)) {
-            if($online) {
+        if (!is_null($online)) {
+            if ($online) {
                 $sql .= "AND `e`.`online` = TRUE ";
             } else {
                 $sql .= "AND `e`.`online` = FALSE ";
@@ -844,7 +844,7 @@ class Event extends ObjectModel
         }
 
         $sql .= "ORDER BY ";
-        if($sort == "random") {
+        if ($sort == "random") {
             $sql .= "RAND(" . time() . ") ";
         } else {
             $sql .= "`e`.`" . $sort . "` " . $sens . " ";
@@ -854,14 +854,14 @@ class Event extends ObjectModel
         $res = $db->queryWithFetch($sql);
 
         $evts = [];
-        foreach($res as $idx => $_res) {
+        foreach ($res as $idx => $_res) {
             $evts[$idx] = $_res;
             $evts[$idx]['url'] = self::getUrlById($_res['id']);
             $evts[$idx]['flyer_100_url'] = self::getFlyerUrl($_res['id'], 100, 100);
             $evts[$idx]['flyer_400_url'] = self::getFlyerUrl($_res['id'], 400, 400);
             $evts[$idx]['structure_picto'] = Structure::getPictoById($_res['structure_id']);
-            if(false && $_res['facebook_event_id'] && ($_res['facebook_event_attending'] == 0)) { // && $_res['modified_on'] > 1h) {
-                if(!empty($_SESSION['fb'])) {
+            if (false && $_res['facebook_event_id'] && ($_res['facebook_event_attending'] == 0)) { // && $_res['modified_on'] > 1h) {
+                if (!empty($_SESSION['fb'])) {
                     $tmp = $_SESSION['fb']->api('/' . $_res['facebook_event_id'] . '/attending');
                     $nb_attending = (int) sizeof($tmp['data']);
                     $evts[$idx]['facebook_event_attending'] = $nb_attending;
@@ -875,7 +875,7 @@ class Event extends ObjectModel
 
         unset($res);
 
-        if($limit == 1) {
+        if ($limit == 1) {
             $evts = array_pop($evts);
         }
 
@@ -895,15 +895,15 @@ class Event extends ObjectModel
              . "FROM `" . self::$_db_table_event . "` "
              . "WHERE `id_event` = " . (int) $this->_id_event;
 
-        if(($res = $db->queryWithFetchFirstRow($sql)))
+        if (($res = $db->queryWithFetchFirstRow($sql)))
         {
             $this->_dbToObject($res);
 
-            if(file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
+            if (file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
                 $this->_photo = self::getBaseUrl() . '/' . $this->getId() . '.jpg';
             }
 
-            if(file_exists(self::getBasePath() . '/' . $this->getId() . '-mini.jpg')) {
+            if (file_exists(self::getBasePath() . '/' . $this->getId() . '-mini.jpg')) {
                 $this->_mini_photo = self::getBaseUrl() . '/' . $this->getId() . '-mini.jpg';
             }
 
@@ -934,7 +934,7 @@ class Event extends ObjectModel
         parent::delete();
 
         $p = self::getBasePath() . '/' . $this->getId() . '.jpg';
-        if(file_exists($p)) {
+        if (file_exists($p)) {
             unlink($p);
         }
 
@@ -954,28 +954,28 @@ class Event extends ObjectModel
     function linkStyle($id_style, $ordre = 1)
     {
         // les paramètres sont-ils corrects ?
-        if(!$this->_id_event || !$id_style) {
+        if (!$this->_id_event || !$id_style) {
             throw new Exception('paramètres incorrects');
         }
 
-        if(!is_numeric($ordre)) {
+        if (!is_numeric($ordre)) {
             throw new Exception('ordre non numérique');
         }
 
         // événement valide ?
-        if(!self::isEventOk($this->_id_event)) {
+        if (!self::isEventOk($this->_id_event)) {
             throw new Exception('id_event introuvable');
         }
 
         // style valide ?
-        if(!Style::isStyleOk($id_style)) {
+        if (!Style::isStyleOk($id_style)) {
             throw new Exception('id_style introuvable');
         }
 
         // le style n'est-t-il pas déjà présent pour cet évenement ?
         $listeStyles = $this->getStyles();
-        foreach($listeStyles as $style) {
-            if($id_style == $style['id_style']) {
+        foreach ($listeStyles as $style) {
+            if ($id_style == $style['id_style']) {
                 throw new Exception('Style déjà présent pour cet événement');
             }
         }
@@ -1002,29 +1002,29 @@ class Event extends ObjectModel
     function unlinkStyle($id_style)
     {
         // les paramètres sont-ils corrects ?
-        if(!$this->_id_event || !$id_style) {
+        if (!$this->_id_event || !$id_style) {
             throw new Exception('paramètres incorrects');
         }
 
         // événement valide ?
-        if(!self::isEvenementOk($this->_id_event)) {
+        if (!self::isEvenementOk($this->_id_event)) {
             throw new Exception('id_event introuvable');
         }
 
         // style valide ?
-        if(!Style::isStyleOk($id_style)) {
+        if (!Style::isStyleOk($id_style)) {
             throw new Exception('id_style introuvable');
         }
 
         // style bien trouvé pour cet événement ?
         $listeStyles = $this->getStyles();
         $style_not_found = true;
-        foreach($listeStyles as $style) {
-            if($id_style == $style['id_style']) {
+        foreach ($listeStyles as $style) {
+            if ($id_style == $style['id_style']) {
                 $style_not_found = false;
             }
         }
-        if($style_not_found) {
+        if ($style_not_found) {
             throw new Exception('Style introuvable pour cet événement');
         }
 
@@ -1065,7 +1065,7 @@ class Event extends ObjectModel
      */
     function getStyle($idx)
     {
-        if(array_key_exists($idx, $this->_styles)) {
+        if (array_key_exists($idx, $this->_styles)) {
             return $this->_styles[$idx];
         }
         return false;
@@ -1143,9 +1143,9 @@ class Event extends ObjectModel
         $res = $db->queryWithFetch($sql);
 
         $cpt = 0;
-        foreach($res as $grp) {
+        foreach ($res as $grp) {
             $res[$cpt]['mini_photo'] = '/img/note_adhoc_64.png';
-            if(file_exists(MEDIA_PATH . '/groupe/m' . $grp['id'] . '.jpg')) {
+            if (file_exists(MEDIA_PATH . '/groupe/m' . $grp['id'] . '.jpg')) {
                 $res[$cpt]['mini_photo'] = MEDIA_PATH . '/groupe/m' . $grp['id'] . '.jpg';
             }
             $cpt++;
@@ -1162,7 +1162,7 @@ class Event extends ObjectModel
      */
     function getGroupe($idx)
     {
-        if(array_key_exists($idx, $this->_groupes)) {
+        if (array_key_exists($idx, $this->_groupes)) {
             return $this->_groupes[$idx];
         }
         return false;
@@ -1175,7 +1175,7 @@ class Event extends ObjectModel
      */
     function getGroupeId($idx)
     {
-        if(array_key_exists($idx, $this->_groupes)) {
+        if (array_key_exists($idx, $this->_groupes)) {
             return $this->_groupes[$idx]['id'];
         }
         return false;
@@ -1204,14 +1204,14 @@ class Event extends ObjectModel
     function linkStructure($id_structure)
     {
         // les paramètres sont-ils corrects ?
-        if(!$this->_id_event || !$id_structure) {
+        if (!$this->_id_event || !$id_structure) {
             throw new Exception('paramètres incorrects');
         }
 
         // la structure n'est-t-elle pas déjà présente pour l'événement ?
         $listeStructures = $this->getStructures();
-        foreach($listeStructures as $struct) {
-            if($id_structure == $struct['id']) {
+        foreach ($listeStructures as $struct) {
+            if ($id_structure == $struct['id']) {
                 throw new Exception('Structure déjà présente pour cet événement');
             }
         }
@@ -1238,19 +1238,19 @@ class Event extends ObjectModel
     function unlinkStructure($id_structure)
     {
         // les paramètres sont-ils corrects ?
-        if(!$this->_id_event || !$id_structure) {
+        if (!$this->_id_event || !$id_structure) {
             throw new Exception('paramètres incorrects');
         }
 
         // la structure est-elle bien présente pour cet événement ?
         $listeStructures = $this->getStructures();
         $struct_not_found = true;
-        foreach($listeStructures as $struct) {
-            if($id_structure == $struct['id_structure']) {
+        foreach ($listeStructures as $struct) {
+            if ($id_structure == $struct['id_structure']) {
                 $struct_not_found = false;
             }
         }
-        if($struct_not_found) {
+        if ($struct_not_found) {
             throw new Exception('Structure introuvable pour cet événement');
         }
 
@@ -1295,7 +1295,7 @@ class Event extends ObjectModel
      */
     function getStructure($idx)
     {
-        if(array_key_exists($idx, $this->_structures)) {
+        if (array_key_exists($idx, $this->_structures)) {
             return $this->_structures[$idx];
         }
         return false;
@@ -1308,7 +1308,7 @@ class Event extends ObjectModel
      */
     function getStructureId($idx)
     {
-        if(array_key_exists($idx, $this->_structures)) {
+        if (array_key_exists($idx, $this->_structures)) {
             return $this->_structures[$idx]['id'];
         }
         return false;
@@ -1350,7 +1350,7 @@ class Event extends ObjectModel
         $res = $db->queryWithFetch($sql);
 
         $tab = [];
-        foreach($res as $_res) {
+        foreach ($res as $_res) {
             $tab[$_res['date']] = $_res['nb_events'];
         }
         unset($res);
@@ -1365,10 +1365,10 @@ class Event extends ObjectModel
      */
     function getPhotos()
     {
-        return Photo::getPhotos(array(
+        return Photo::getPhotos([
             'event'  => $this->getId(),
             'online' => true,
-        ));
+        ]);
     }
 
     /**
@@ -1378,10 +1378,10 @@ class Event extends ObjectModel
      */
     function getVideos()
     {
-        return Video::getVideos(array(
+        return Video::getVideos([
             'event'  => $this->getId(),
             'online' => true,
-        ));
+        ]);
     }
 
     /**
@@ -1391,10 +1391,10 @@ class Event extends ObjectModel
      */
     function getAudios()
     {
-        return Audio::getAudios(array(
+        return Audio::getAudios([
             'event'  => $this->getId(),
             'online' => true,
-        ));
+        ]);
     }
 
     /**
@@ -1423,11 +1423,11 @@ class Event extends ObjectModel
      */
     static function getMyEventsCount()
     {
-        if(empty($_SESSION['membre'])) {
+        if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');
         }
 
-        if(isset($_SESSION['my_counters']['nb_events'])) {
+        if (isset($_SESSION['my_counters']['nb_events'])) {
             return $_SESSION['my_counters']['nb_events'];
         }
 
@@ -1460,7 +1460,7 @@ class Event extends ObjectModel
         echo $sql;
 
         $tmp = $db->queryWithFetch($sql);
-        foreach($tmp as $_tmp) {
+        foreach ($tmp as $_tmp) {
             $evt = Event::getInstance($_tmp['id_event']);
             $evt->setNbPhotos($_tmp['nb_photos']);
             $evt->setNbVideos($_tmp['nb_videos']);
@@ -1479,23 +1479,23 @@ class Event extends ObjectModel
      */
     static function getAdHocEventsBySeason()
     {
-        $evts = self::getEvents(array(
+        $evts = self::getEvents([
             'structure' => 1,
             'sort'      => 'date',
             'sens'      => 'ASC',
             'limit'     => 1000,
-        ));
+        ]);
 
         $tab = [];
-        foreach($evts as $evt) {
+        foreach ($evts as $evt) {
             $year = (int) mb_substr($evt['date'], 0, 4);
             $month = (int) mb_substr($evt['date'], 5, 2);
-            if($month > 7) {
+            if ($month > 7) {
                 $season = (string) $year . ' / ' . (string) ($year + 1);
             } else {
                 $season = (string) ($year - 1) . ' / ' . (string) $year;
             }
-            if(!array_key_exists($season, $tab)) {
+            if (!array_key_exists($season, $tab)) {
                 $tab[$season] = [];
             }
             $tab[$season][] = $evt;
@@ -1509,7 +1509,7 @@ class Event extends ObjectModel
         $uid = 'event/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
 
-        if(file_exists($cache)) {
+        if (file_exists($cache)) {
             unlink($cache);
             return true;
         }
@@ -1528,16 +1528,16 @@ class Event extends ObjectModel
         $uid = 'event/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
 
-        if(!file_exists($cache)) {
+        if (!file_exists($cache)) {
             $source = self::getBasePath() . '/' . $id . '.jpg';
-            if(file_exists($source)) {
+            if (file_exists($source)) {
                 $img = new Image($source);
                 $img->setType(IMAGETYPE_JPEG);
                 $img->setMaxWidth($width);
                 $img->setMaxHeight($height);
                 $img->setBorder($border);
                 $img->setKeepRatio(true);
-                if($zoom) {
+                if ($zoom) {
                     $img->setZoom();
                 }
                 $img->setHexColor($bgcolor);

@@ -1652,7 +1652,7 @@ class Membre extends Contact
         $lettres = 'abcdefghjkmnpqrstuvwxyz23456789';
         $str = '';
         $max = mb_strlen($lettres) - 1;
-        for($cpt = 0 ; $cpt < $length ; $cpt++) {
+        for ($cpt = 0 ; $cpt < $length ; $cpt++) {
             $str .= $lettres[rand(0, $max)];
         }
         return $str;

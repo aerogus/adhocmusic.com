@@ -99,7 +99,7 @@ class Image
      */
     function __construct($file = null)
     {
-        if(!is_null($file)) {
+        if (!is_null($file)) {
             $this->_file_sou = $file;
             $this->read();
         }
@@ -128,7 +128,7 @@ class Image
     {
         $this->_handle = imagecreatetruecolor($width, $height);
 
-        if($color) {
+        if ($color) {
             $color = str_replace('#', '', $color);
             $red   = hexdec(substr($color, 0, 2));
             $green = hexdec(substr($color, 2, 2));
@@ -150,11 +150,11 @@ class Image
      */
     function read()
     {
-        if($this->_file_sou && file_exists($this->_file_sou) && is_readable($this->_file_sou))
+        if ($this->_file_sou && file_exists($this->_file_sou) && is_readable($this->_file_sou))
         {
             $this->_type = exif_imagetype($this->_file_sou);
 
-            switch($this->_type)
+            switch ($this->_type)
             {
                 case IMAGETYPE_GIF:
                     $this->_handle = imagecreatefromgif($this->_file_sou);
@@ -200,7 +200,7 @@ class Image
      */
     function setZone($x1, $y1, $x2, $y2)
     {
-        if( ($x1 >= 0) && ($x2 > $x1) && ($this->_width > $x2) &&
+        if (($x1 >= 0) && ($x2 > $x1) && ($this->_width > $x2) &&
             ($y1 >= 0) && ($y2 > $y1) && ($this->_height > $y2)) {
 
             $this->_x1   = $x1;
@@ -228,7 +228,7 @@ class Image
         $y2 = 0;
 
         // cadrage
-        while(($x2 < $this->_width) && ($y2 < $this->_height)) {
+        while (($x2 < $this->_width) && ($y2 < $this->_height)) {
             $x2 += $ratio;
             $y2 += $ratio;
         }
@@ -331,7 +331,7 @@ class Image
      */
     function resize()
     {
-        if($this->_max_height && $this->_max_width && $this->_border) {
+        if ($this->_max_height && $this->_max_width && $this->_border) {
             $width = $this->_max_width;
             $height = $this->_max_height;
         } else {
@@ -366,12 +366,12 @@ class Image
         /**
          * calcul de la nouvelle taille de l'image
          */
-        if($this->_keep_ratio) {
-            if($this->_max_height) {
+        if ($this->_keep_ratio) {
+            if ($this->_max_height) {
                 $tmp_h = min($this->_hSel, $this->_max_height);
                 $rh1   = $tmp_h / $this->_hSel;
                 $tmp_l = round($this->_wSel * $rh1);
-                if($this->_max_width && $tmp_l) { // a debugguer
+                if ($this->_max_width && $tmp_l) { // a debugguer
                     $this->_new_l = min($this->_max_width, $tmp_l);
                     $rh2          = $this->_new_l / ($this->_wSel * $rh1);
                     $this->_new_h = round($this->_hSel * $rh1 * $rh2);
@@ -380,7 +380,7 @@ class Image
                     $this->_new_h = $tmp_h;
                 }
             } else {
-                if($this->_max_width) {
+                if ($this->_max_width) {
                     $this->_new_l = min($this->_wSel, $this->_max_width);
                     $rh           = $this->_new_l / $this->_wSel;
                     $this->_new_h = round($this->_hSel * $rh);
@@ -390,8 +390,8 @@ class Image
                 }
             }
         } else {
-            if($this->_max_height) {
-                if($this->_max_width) {
+            if ($this->_max_height) {
+                if ($this->_max_width) {
                     $this->_new_l = min($this->_wSel, $this->_max_width);
                     $this->_new_h = min($this->_hSel, $this->_max_height);
                 } else {
@@ -399,7 +399,7 @@ class Image
                     $this->_new_h = min($this->_hSel, $this->_max_height);
                 }
             } else {
-                if($this->_max_width) {
+                if ($this->_max_width) {
                     $this->_new_l = min($this->_wSel, $this->_max_width);
                     $this->_new_h = $this->_hSel;
                 } else {
@@ -412,7 +412,7 @@ class Image
         /**
          * calcul de l'offset en cas de bordure
          */
-        if($this->_max_height && $this->_max_width && $this->_border) {
+        if ($this->_max_height && $this->_max_width && $this->_border) {
             $this->_deltax = round(($this->_max_width - $this->_new_l) / 2);
             $this->_deltay = round(($this->_max_height - $this->_new_h) / 2);
         } else {
@@ -461,7 +461,7 @@ class Image
      */
     private function _display()
     {
-        switch($this->_type)
+        switch ($this->_type)
         {
             case IMAGETYPE_GIF:
                 header("Content-Type: image/gif");
@@ -508,7 +508,7 @@ class Image
      */
     private function _write($get_contents = false)
     {
-        switch($this->_type)
+        switch ($this->_type)
         {
             case IMAGETYPE_GIF:
                 $this->_handle3 = imagecreatetruecolor($this->_new_l, $this->_new_h);
@@ -531,8 +531,8 @@ class Image
                 break;
         }
 
-        if($get_contents) {
-            if(file_exists($this->_file_res)) {
+        if ($get_contents) {
+            if (file_exists($this->_file_res)) {
                 $img = file_get_contents($this->_file_res);
                 unlink($this->_file_res);
                 return $img;
@@ -596,13 +596,13 @@ class Image
         $d2 = substr($hash, 1, 1);
         $d3 = substr($hash, 2, 1);
 
-        if(is_dir($d0 . '/' . $d1) === false) {
+        if (is_dir($d0 . '/' . $d1) === false) {
             mkdir($d0 . '/' . $d1);
         }
-        if(is_dir($d0 . '/' . $d1 . '/' . $d2) === false) {
+        if (is_dir($d0 . '/' . $d1 . '/' . $d2) === false) {
             mkdir($d0 . '/' . $d1 . '/' . $d2);
         }
-        if(is_dir($d0 . '/' . $d1 . '/' . $d2 . '/' . $d3) === false) {
+        if (is_dir($d0 . '/' . $d1 . '/' . $d2 . '/' . $d3) === false) {
             mkdir($d0 . '/' . $d1 . '/' . $d2 . '/' . $d3);
         }
 

@@ -155,22 +155,22 @@ class Audio extends Media
     static function getAudios($params = [])
     {
         $debut = 0;
-        if(isset($params['debut'])) {
+        if (isset($params['debut'])) {
             $debut = (int) $params['debut'];
         }
 
         $limit = 10;
-        if(isset($params['limit'])) {
+        if (isset($params['limit'])) {
             $limit = (int) $params['limit'];
         }
 
         $sens = "ASC";
-        if(isset($params['sens']) && $params['sens'] == "DESC") {
+        if (isset($params['sens']) && $params['sens'] == "DESC") {
             $sens = "DESC";
         }
 
         $sort = "id_audio";
-        if(isset($params['sort'])
+        if (isset($params['sort'])
           && ($params['sort'] == "date" || $params['sort'] == "random")) {
             $sort = $params['sort'];
         }
@@ -182,12 +182,12 @@ class Audio extends Media
         $tab_id        = [];
         $tab_contact   = [];
 
-        if(array_key_exists('groupe', $params))    { $tab_groupe    = explode(",", $params['groupe']); }
-        if(array_key_exists('structure', $params)) { $tab_structure = explode(",", $params['structure']); }
-        if(array_key_exists('lieu', $params))      { $tab_lieu      = explode(",", $params['lieu']); }
-        if(array_key_exists('event', $params))     { $tab_event     = explode(",", $params['event']); }
-        if(array_key_exists('id', $params))        { $tab_id        = explode(",", $params['id']); }
-        if(array_key_exists('contact', $params))   { $tab_contact   = explode(",", $params['contact']); }
+        if (array_key_exists('groupe', $params))    { $tab_groupe    = explode(",", $params['groupe']); }
+        if (array_key_exists('structure', $params)) { $tab_structure = explode(",", $params['structure']); }
+        if (array_key_exists('lieu', $params))      { $tab_lieu      = explode(",", $params['lieu']); }
+        if (array_key_exists('event', $params))     { $tab_event     = explode(",", $params['event']); }
+        if (array_key_exists('id', $params))        { $tab_id        = explode(",", $params['id']); }
+        if (array_key_exists('contact', $params))   { $tab_contact   = explode(",", $params['contact']); }
 
         $db = DataBase::getInstance();
 
@@ -207,8 +207,8 @@ class Audio extends Media
              . "LEFT JOIN `" . self::$_db_table_event . "` `e` ON (`a`.`id_event` = `e`.`id_event`) "
              . "WHERE 1 ";
 
-        if(array_key_exists('online', $params)) {
-            if($params['online']) {
+        if (array_key_exists('online', $params)) {
+            if ($params['online']) {
                 $online = 'TRUE';
             } else {
                 $online = 'FALSE';
@@ -216,32 +216,32 @@ class Audio extends Media
             $sql .= "AND `a`.`online` = " . $online . " ";
         }
 
-        if(count($tab_groupe) && ($tab_groupe[0] != 0)) {
+        if (count($tab_groupe) && ($tab_groupe[0] != 0)) {
             $sql .= "AND `a`.`id_groupe` IN (" . implode(',', $tab_groupe) . ") ";
         }
 
-        if(count($tab_structure) && ($tab_structure[0] != 0)) {
+        if (count($tab_structure) && ($tab_structure[0] != 0)) {
             $sql .= "AND `a`.`id_structure` IN (" . implode(',', $tab_structure) . ") ";
         }
 
-        if(count($tab_lieu) && ($tab_lieu[0] != 0)) {
+        if (count($tab_lieu) && ($tab_lieu[0] != 0)) {
             $sql .= "AND `a`.`id_lieu` IN (" . implode(',', $tab_lieu) . ") ";
         }
 
-        if(count($tab_event) && ($tab_event[0] != 0)) {
+        if (count($tab_event) && ($tab_event[0] != 0)) {
             $sql .= "AND `a`.`id_event` IN (" . implode(',', $tab_event) . ") ";
         }
 
-        if(count($tab_id) && ($tab_id[0] != 0)) {
+        if (count($tab_id) && ($tab_id[0] != 0)) {
             $sql .= "AND `a`.`id_audio` IN (" . implode(',', $tab_id) . ") ";
         }
 
-        if(count($tab_contact) && ($tab_contact[0] != 0)) {
+        if (count($tab_contact) && ($tab_contact[0] != 0)) {
             $sql .= "AND `a`.`id_contact` IN (" . implode(',', $tab_contact) . ") ";
         }
 
         $sql .= "ORDER BY ";
-        if($sort === "random") {
+        if ($sort === "random") {
             $sql .= "RAND(" . time() . ") ";
         } else {
             $sql .= "`a`.`" . $sort . "` " . $sens . " ";
@@ -250,11 +250,11 @@ class Audio extends Media
 
         $res = $db->queryWithFetch($sql);
 
-        foreach($res as $idx => $_res) {
+        foreach ($res as $idx => $_res) {
             $res[$idx]['url'] = self::getUrlById($_res['id']);
         }
 
-        if($limit == 1) {
+        if ($limit == 1) {
             $res = array_pop($res);
         }
 
@@ -269,10 +269,10 @@ class Audio extends Media
      */
     function delete()
     {
-        if(parent::delete())
+        if (parent::delete())
         {
             $file = self::getBasePath() . '/' . $this->getId() . '.mp3';
-            if(file_exists($file)) {
+            if (file_exists($file)) {
                 unlink($file);
             }
             return true;
@@ -296,7 +296,7 @@ class Audio extends Media
              . "FROM `" . self::$_db_table_audio . "` `a` "
              . "WHERE `a`.`id_audio` = " . (int) $this->_id_audio;
 
-        if($res = $db->queryWithFetchFirstRow($sql)) {
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             return true;
         }
@@ -333,19 +333,19 @@ class Audio extends Media
     {
         $bgcolor = '666666';
 
-        if($type == 'player_mp3_multi') {
+        if ($type == 'player_mp3_multi') {
             $id_groupe = $id_audio;
-        } elseif($type == 'webradio') {
+        } elseif ($type == 'webradio') {
             $chemin = $id_audio;
             $type = 'dewplayer';
         } else {
             $chemin = '';
-            if(is_numeric($id_audio)) {
+            if (is_numeric($id_audio)) {
                 $chemin .= self::getBaseUrl() . '/' . $id_audio . '.mp3';
-            } elseif(is_array($id_audio)) {
+            } elseif (is_array($id_audio)) {
                 $first  = true;
-                foreach($id_audio as $id) {
-                    if(!$first) { $chemin .= '|'; }
+                foreach ($id_audio as $id) {
+                    if (!$first) { $chemin .= '|'; }
                     $chemin .= self::getBaseUrl() . '/' . $id . '.mp3';
                     $first = false;
                 }
@@ -354,7 +354,7 @@ class Audio extends Media
             }
         }
 
-        switch($type)
+        switch ($type)
         {
             case 'dewplayer-mini':
                 return '<object type="application/x-shockwave-flash" data="/swf/dewplayer-mini.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" width="160" height="20">'."\n"
@@ -401,11 +401,11 @@ class Audio extends Media
      */
     static function getMyAudiosCount()
     {
-        if(empty($_SESSION['membre'])) {
+        if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');
         }
 
-        if(isset($_SESSION['my_counters']['nb_audios'])) {
+        if (isset($_SESSION['my_counters']['nb_audios'])) {
             return $_SESSION['my_counters']['nb_audios'];
         }
 
@@ -429,7 +429,7 @@ class Audio extends Media
      */
     static function getAudiosCount()
     {
-        if(isset($_SESSION['global_counters']['nb_audios'])) {
+        if (isset($_SESSION['global_counters']['nb_audios'])) {
             return $_SESSION['global_counters']['nb_audios'];
         }
 

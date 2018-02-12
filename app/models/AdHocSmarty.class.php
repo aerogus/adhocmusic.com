@@ -259,17 +259,17 @@ class AdHocSmarty extends Smarty
     static function function_html_input_date_hourminute($params)
     {
         $hour = 0;
-        if(array_key_exists('hour', $params)) {
+        if (array_key_exists('hour', $params)) {
             $hour = (int) $params['hour'];
         }
 
         $minute = 0;
-        if(array_key_exists('minute', $params)) {
+        if (array_key_exists('minute', $params)) {
             $minute = (int) $params['minute'];
         }
 
         $step = 30;
-        if(array_key_exists('step', $params)) {
+        if (array_key_exists('step', $params)) {
             $step = (int) $params['step'];
         }
 
@@ -280,7 +280,7 @@ class AdHocSmarty extends Smarty
             for ($m = 0 ; $m < 60 ; $m += $step) {
                 $hm = str_pad((int) $h, 2, '0', STR_PAD_LEFT) . ':' . str_pad((int) $m, 2, '0', STR_PAD_LEFT);
                 $out .= "<option value=\"".$hm."\"";
-                if($hm == $hourminute) {
+                if ($hm == $hourminute) {
                     $out .= " selected=\"selected\"";
                 }
                 $out .= ">".$hm."</option>\n";
@@ -300,17 +300,17 @@ class AdHocSmarty extends Smarty
         $cal  = [];
 
         $year = date('Y', $now);
-        if(array_key_exists('year', $params)) {
+        if (array_key_exists('year', $params)) {
              $year = (int) $params['year'];
         }
 
         $month = date('m', $now);
-        if(array_key_exists('month', $params)) {
+        if (array_key_exists('month', $params)) {
             $month = (int) $params['month'];
         }
 
         $day = date('d', $now);
-        if(array_key_exists('day', $params)) {
+        if (array_key_exists('day', $params)) {
             $day = (int) $params['day'];
         }
 
@@ -321,14 +321,14 @@ class AdHocSmarty extends Smarty
         $trow = 0; // compteur global
 
         $blank_days = $start_day_number - 1;
-        if($blank_days < 0) {
+        if ($blank_days < 0) {
             $blank_days = 7 - abs($blank_days);
         }
 
         $events = Event::getEventsForAMonth($year, $month);
 
         // blancs de début de mois
-        for($x = 0 ; $x < $blank_days ; $x++) {
+        for ($x = 0 ; $x < $blank_days ; $x++) {
             $cal[$row][$trow]['num'] = null;
             $cal[$row][$trow]['link'] = null;
             $cal[$row][$trow]['title'] = null;
@@ -336,18 +336,18 @@ class AdHocSmarty extends Smarty
         }
 
         // création tableau
-        for($x = 1 ; $x <= $nb_days_in_month ; $x++) {
+        for ($x = 1 ; $x <= $nb_days_in_month ; $x++) {
             // nouvelle semaine
-            if(($x + $blank_days - 1) % 7 == 0) {
+            if (($x + $blank_days - 1) % 7 == 0) {
                 $row++;
             }
             $date = date('Y-m-d', mktime(0, 0, 0, $month, $x, $year));
             $cal[$row][$trow]['num'] = $x;
             $cal[$row][$trow]['selected'] = false;
-            if($day == $x) {
+            if ($day == $x) {
                 $cal[$row][$trow]['selected'] = true;
             }
-            if(array_key_exists($date, $events)) {
+            if (array_key_exists($date, $events)) {
                 $cal[$row][$trow]['link'] = '?y='.$year.'&m='.$month.'&d='.$x;
                 $cal[$row][$trow]['title'] = $events[$date] . ' events';
             } else {
@@ -358,7 +358,7 @@ class AdHocSmarty extends Smarty
         }
 
         // blancs de fin de mois
-        while((($nb_days_in_month + $blank_days) % 7) !== 0 ) {
+        while ((($nb_days_in_month + $blank_days) % 7) !== 0 ) {
             $cal[$row][$trow]['num'] = null;
             $cal[$row][$trow]['link'] = null;
             $cal[$row][$trow]['title'] = null;
@@ -366,14 +366,14 @@ class AdHocSmarty extends Smarty
             $trow++;
         }
 
-        if($month === 1) {
+        if ($month === 1) {
             $prev_month = 12;
             $prev_year = $year - 1;
         } else {
             $prev_month = $month - 1;
             $prev_year = $year;
         }
-        if($month === 12) {
+        if ($month === 12) {
             $next_month = 1;
             $next_year = $year + 1;
         } else {
@@ -419,7 +419,7 @@ class AdHocSmarty extends Smarty
      */
     static function modifier_pseudo_by_id($id_contact)
     {
-        if(array_key_exists($id_contact, self::$pseudos)) {
+        if (array_key_exists($id_contact, self::$pseudos)) {
             return self::$pseudos[$id_contact];
         }
 
@@ -440,12 +440,12 @@ class AdHocSmarty extends Smarty
      */
     static function modifier_avatar_by_id($id_contact)
     {
-        if(array_key_exists($id_contact, self::$avatars)) {
+        if (array_key_exists($id_contact, self::$avatars)) {
             return self::$avatars[$id_contact];
         }
 
         $url = '';
-        if(file_exists(MEDIA_PATH . '/membre/' . $id_contact . '.jpg')) {
+        if (file_exists(MEDIA_PATH . '/membre/' . $id_contact . '.jpg')) {
             $url = MEDIA_URL . '/membre/' . $id_contact . '.jpg';
         }
 
@@ -459,7 +459,7 @@ class AdHocSmarty extends Smarty
      */
     static function modifier_display_on_off_icon($val)
     {
-        if((bool) $val) {
+        if ((bool) $val) {
             $icon = 'enabled.png';
         } else {
             $icon = 'disabled.png';

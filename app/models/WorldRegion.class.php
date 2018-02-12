@@ -54,8 +54,8 @@ class WorldRegion extends Liste
      */
     protected function _isWorldRegionOk($id_country, $id_region)
     {
-        if(array_key_exists($id_country, static::$_liste)) {
-            if(array_key_exists($id_region, static::$_liste[$id_country])) {
+        if (array_key_exists($id_country, static::$_liste)) {
+            if (array_key_exists($id_region, static::$_liste[$id_country])) {
                 return true;
             }
         }

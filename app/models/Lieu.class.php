@@ -28,7 +28,7 @@ class Lieu extends ObjectModel
      *
      * @var array
      */
-    protected static $_types = array(
+    protected static $_types = [
         self::TYPE_CONCERT   => "Salle de Concerts",
         self::TYPE_CAFE      => "Café-Concerts/Pub/Péniche",
         self::TYPE_MJC       => "MJC / MPT",
@@ -37,7 +37,7 @@ class Lieu extends ObjectModel
         self::TYPE_POLY      => "Salle Polyvalente/communale/des fêtes",
         self::TYPE_EXTERIEUR => "Extérieur",
         self::TYPE_AFFICHAGE => "Panneau d'affichage libre",
-    );
+    ];
 
     /**
      *
@@ -162,7 +162,7 @@ class Lieu extends ObjectModel
     /**
      *
      */
-    protected static $_all_fields = array(
+    protected static $_all_fields = [
         'id_type'        => 'num',
         'name'           => 'str',
         'address'        => 'str',
@@ -183,7 +183,7 @@ class Lieu extends ObjectModel
         'lat'            => 'float',
         'lng'            => 'float',
         'online'         => 'bool',
-    );
+    ];
 
     /**
      *
@@ -406,10 +406,10 @@ class Lieu extends ObjectModel
      */
     function getSite()
     {
-        if(strpos($this->_site, '.') === false) {
+        if (strpos($this->_site, '.') === false) {
             return false;
         }
-        if(strpos($this->_site, 'http://') !== 0) {
+        if (strpos($this->_site, 'http://') !== 0) {
             return 'http://' . $this->_site;
         }
         return $this->_site;
@@ -463,7 +463,7 @@ class Lieu extends ObjectModel
      */
     function getGeocode()
     {
-        if($this->getLat() && $this->getLng()) {
+        if ($this->getLat() && $this->getLng()) {
             return number_format($this->getLat(), 6, '.', '')
                  . ','
                  . number_format($this->getLng(), 6, '.', '');
@@ -478,7 +478,7 @@ class Lieu extends ObjectModel
      */
     function getCreatedOn()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
         }
         return false;
@@ -491,7 +491,7 @@ class Lieu extends ObjectModel
      */
     function getCreatedOnTs()
     {
-        if(Date::isDateTimeOk($this->_created_on)) {
+        if (Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
         }
         return false;
@@ -504,7 +504,7 @@ class Lieu extends ObjectModel
      */
     function getModifiedOn()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
         }
         return false;
@@ -517,7 +517,7 @@ class Lieu extends ObjectModel
      */
     function getModifiedOnTs()
     {
-        if(Date::isDateTimeOk($this->_modified_on)) {
+        if (Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
         }
         return false;
@@ -561,12 +561,12 @@ class Lieu extends ObjectModel
      */
     function getMapUrl($size = '320x320', $zoom = 15, $maptype = 'roadmap')
     {
-        return GoogleMaps::getStaticMap(array(
+        return GoogleMaps::getStaticMap([
             'loc'     => $this->getGeocode(),
             'size'    => $size,
             'zoom'    => $zoom,
             'maptype' => $maptype,
-        ));
+        ]);
     }
 
     /**
@@ -692,7 +692,7 @@ class Lieu extends ObjectModel
      */
     function setIdDepartement($val)
     {
-        if(is_numeric($val)) {
+        if (is_numeric($val)) {
             $val = str_pad((int) $val, 2, "0", STR_PAD_LEFT);
         } else {
             $val = 'ext';
@@ -750,7 +750,7 @@ class Lieu extends ObjectModel
      */
     function setSite($val)
     {
-        if(strpos($val, 'http://') !== 0) {
+        if (strpos($val, 'http://') !== 0) {
             $val = 'http://' . $val;
         }
         if ($this->_site !== $val) {
@@ -889,7 +889,7 @@ class Lieu extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        if(isset($_SESSION['global_counters']['nb_lieux'])) {
+        if (isset($_SESSION['global_counters']['nb_lieux'])) {
             return $_SESSION['global_counters']['nb_lieux'];
         }
 
@@ -911,19 +911,19 @@ class Lieu extends ObjectModel
      */
     function delete()
     {
-        if($this->hasEvents()) {
+        if ($this->hasEvents()) {
             throw new Exception('suppression impossible : lieu avec événements');
         }
 
-        if($this->hasAudios()) {
+        if ($this->hasAudios()) {
             throw new Exception('suppression impossible : lieu avec audios');
         }
 
-        if($this->hasPhotos()) {
+        if ($this->hasPhotos()) {
             throw new Exception('suppression impossible : lieu avec photos');
         }
 
-        if($this->hasVideos()) {
+        if ($this->hasVideos()) {
             throw new Exception('suppression impossible : lieu avec videos');
         }
 
@@ -934,9 +934,9 @@ class Lieu extends ObjectModel
 
         $db->query($sql);
 
-        if($db->affectedRows()) {
+        if ($db->affectedRows()) {
             $file = self::getBasePath() . '/' . (int) $this->getId() . '.jpg';
-            if(file_exists($file)) {
+            if (file_exists($file)) {
                 unlink($file);
             }
             return true;
@@ -980,12 +980,12 @@ class Lieu extends ObjectModel
              . "AND `l`.`id_region` = `r`.`id_region` "
              . "AND `l`.`id_country` = `r`.`id_country` ";
 
-        if(array_key_exists('dep', $params))     { $sql .= "AND `l`.`id_departement` = '" . $db->escape($params['dep']) . "' "; }
-        if(array_key_exists('cp', $params))      { $sql .= "AND `l`.`cp` = '" . $db->escape($params['cp']) . "' "; }
-        if(array_key_exists('city', $params))    { $sql .= "AND `l`.`city` LIKE '%" . $db->escape($params['city']) . "%' "; }
-        if(array_key_exists('name', $params))    { $sql .= "AND `l`.`name` LIKE '%" . $db->escape($params['name']) . "%' "; }
-        if(array_key_exists('type', $params))    { $sql .= "AND `l`.`id_type` = " . (int) $params['type'] . " "; }
-        if(array_key_exists('country', $params)) { $sql .= "AND `l`.`id_country` = '" . $db->escape($params['country']) . "' "; }
+        if (array_key_exists('dep', $params))     { $sql .= "AND `l`.`id_departement` = '" . $db->escape($params['dep']) . "' "; }
+        if (array_key_exists('cp', $params))      { $sql .= "AND `l`.`cp` = '" . $db->escape($params['cp']) . "' "; }
+        if (array_key_exists('city', $params))    { $sql .= "AND `l`.`city` LIKE '%" . $db->escape($params['city']) . "%' "; }
+        if (array_key_exists('name', $params))    { $sql .= "AND `l`.`name` LIKE '%" . $db->escape($params['name']) . "%' "; }
+        if (array_key_exists('type', $params))    { $sql .= "AND `l`.`id_type` = " . (int) $params['type'] . " "; }
+        if (array_key_exists('country', $params)) { $sql .= "AND `l`.`id_country` = '" . $db->escape($params['country']) . "' "; }
 
         $sql .= "GROUP BY `l`.`id_lieu` ";
         $sql .= "ORDER by `l`.`id_country` ASC, `l`.`id_region` ASC, `l`.`id_departement` ASC, `v`.`name` ASC";
@@ -1008,14 +1008,14 @@ class Lieu extends ObjectModel
         $res  = $db->queryWithFetch($sql);
 
         $tab  = [];
-        foreach(Departement::getHashTable() as $id_dep => $nom_dep) {
+        foreach (Departement::getHashTable() as $id_dep => $nom_dep) {
             $tab[$id_dep] = [];
         }
-        foreach($res as $lieu) {
+        foreach ($res as $lieu) {
             $tab[$lieu['id_departement']][$lieu['id']] = $lieu;
         }
 
-        if(!is_null($dep) && array_key_exists($dep, $tab)) {
+        if (!is_null($dep) && array_key_exists($dep, $tab)) {
             return $tab[$dep];
         }
 
@@ -1040,7 +1040,7 @@ class Lieu extends ObjectModel
              . "FROM `" . self::$_db_table_lieu . "` `l` "
              . "WHERE `id_lieu` = " . (int) $this->_id_lieu;
 
-        if(($res = $db->queryWithFetchFirstRow($sql)) == false) {
+        if (($res = $db->queryWithFetchFirstRow($sql)) == false) {
             throw new Exception('id_lieu introuvable');
         }
 
@@ -1048,7 +1048,7 @@ class Lieu extends ObjectModel
 
         $this->_distance = $res['distance'];
 
-        if(file_exists(self::getBasePath() . '/' . $this->_id_lieu . '.jpg')) {
+        if (file_exists(self::getBasePath() . '/' . $this->_id_lieu . '.jpg')) {
             $this->_photo = self::getBaseUrl() . '/' . $this->_id_lieu . '.jpg';
         } else {
             $this->_photo = null;
@@ -1064,7 +1064,7 @@ class Lieu extends ObjectModel
      */
     function getPhoto()
     {
-        if(file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
+        if (file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/' . $this->getId() . '.jpg';
         }
         return false;
@@ -1085,9 +1085,9 @@ class Lieu extends ObjectModel
      */
     function getPhotos()
     {
-        return Photo::getPhotos(array(
+        return Photo::getPhotos([
             'lieu' => $this->_id_lieu,
-        ));
+        ]);
     }
 
     /**
@@ -1105,9 +1105,9 @@ class Lieu extends ObjectModel
      */
     function getVideos()
     {
-        return Video::getVideos(array(
+        return Video::getVideos([
             'lieu' => $this->_id_lieu,
-        ));
+        ]);
     }
 
     /**
@@ -1125,9 +1125,9 @@ class Lieu extends ObjectModel
      */
     function getAudios()
     {
-        return Audio::getAudios(array(
+        return Audio::getAudios([
             'lieu' => $this->_id_lieu,
-        ));
+        ]);
     }
 
     /**
@@ -1145,11 +1145,11 @@ class Lieu extends ObjectModel
      */
     function getEvents()
     {
-        return Event::getEvents(array(
+        return Event::getEvents([
             'lieu' => $this->_id_lieu,
             'sort' => 'date',
             'sens' => 'DESC',
-        ));
+        ]);
     }
 
     /**
@@ -1157,11 +1157,11 @@ class Lieu extends ObjectModel
      */
     static function getMyLieuxCount()
     {
-        if(empty($_SESSION['membre'])) {
+        if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');
         }
 
-        if(isset($_SESSION['my_counters']['nb_lieux'])) {
+        if (isset($_SESSION['my_counters']['nb_lieux'])) {
             return $_SESSION['my_counters']['nb_lieux'];
         }
 
@@ -1196,7 +1196,7 @@ class Lieu extends ObjectModel
      */
     static function getTypeName($cle)
     {
-        if(array_key_exists($cle, self::$_types)) {
+        if (array_key_exists($cle, self::$_types)) {
             return self::$_types[$cle];
         }
         return false;
@@ -1262,7 +1262,7 @@ EOT;
              . "FROM (`adhoc_lieu` `l`) "
              . "LEFT JOIN `geo_fr_city` `v` ON (`l`.`id_city` = `v`.`id_city`) "
              . "HAVING `distance` < " . number_format(($distance / 1000), 8, '.', '') . " ";
-        if($sort == 'rand') {
+        if ($sort == 'rand') {
             $sql .= "ORDER BY RAND() ";
         } else {
             $sql .= "ORDER BY `distance` ASC ";
@@ -1292,10 +1292,10 @@ EOT;
         $lng_max = (float) $params['lng_max'];
         $limit   = (int) $params['limit'];
 
-        if(($lat_min < -90) || ($lat_max > 90) || ($lng_min < -180) || ($lng_max > 180)) {
+        if (($lat_min < -90) || ($lat_max > 90) || ($lng_min < -180) || ($lng_max > 180)) {
             return []; // hors limite
         }
-        if(($lat_min >= $lat_max) || ($lng_min >= $lng_max)) {
+        if (($lat_min >= $lat_max) || ($lng_min >= $lng_max)) {
             return []; // pas dans le bon sens
         }
 

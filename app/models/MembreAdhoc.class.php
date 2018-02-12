@@ -343,9 +343,9 @@ class MembreAdhoc extends Membre
             $sql = substr($sql, 0, -1);
             $sql .= ") VALUES (";
 
-            foreach($fields['contact'] as $field => $type) {
+            foreach ($fields['contact'] as $field => $type) {
                 $att = '_' . $field;
-                switch($type)
+                switch ($type)
                 {
                     case 'num':
                         $sql .= $db->escape($this->$att) . ",";
@@ -380,16 +380,16 @@ class MembreAdhoc extends Membre
 
             $sql = "INSERT INTO `" . static::$_db_table_membre . "` (";
             $sql .= "`id_contact`,";
-            foreach($fields['membre'] as $field => $type) {
+            foreach ($fields['membre'] as $field => $type) {
                 $sql .= "`" . $field . "`,";
             }
             $sql = substr($sql, 0, -1);
             $sql .= ") VALUES (";
             $sql .= (int) $this->getId() . ",";
 
-            foreach($fields['membre'] as $field => $type) {
+            foreach ($fields['membre'] as $field => $type) {
                 $att = '_' . $field;
-                switch($type)
+                switch ($type)
                 {
                     case 'num':
                         $sql .= $db->escape($this->$att) . ",";
@@ -420,16 +420,16 @@ class MembreAdhoc extends Membre
 
             $sql = "INSERT INTO `" . static::$_db_table_membre_adhoc . "` (";
             $sql .= "`id_contact`,";
-            foreach($fields['membre_adhoc'] as $field => $type) {
+            foreach ($fields['membre_adhoc'] as $field => $type) {
                 $sql .= "`" . $field . "`,";
             }
             $sql = substr($sql, 0, -1);
             $sql .= ") VALUES (";
             $sql .= (int) $this->getId() . ",";
 
-            foreach($fields['membre_adhoc'] as $field => $type) {
+            foreach ($fields['membre_adhoc'] as $field => $type) {
                 $att = '_' . $field;
-                switch($type)
+                switch ($type)
                 {
                     case 'num':
                         $sql .= $db->escape($this->$att) . ",";

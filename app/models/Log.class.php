@@ -135,18 +135,18 @@ class Log
 
         $id_contact = 0;
         $pseudo = '';
-        if(!empty($_SESSION['membre'])) {
+        if (!empty($_SESSION['membre'])) {
             $id_contact = (int) $_SESSION['membre']->getId();
             $pseudo = (string) $_SESSION['membre']->getPseudo();
         }
 
         $ip = '';
-        if(!empty($_SESSION['ip'])) {
+        if (!empty($_SESSION['ip'])) {
             $ip = $_SESSION['ip'];
         }
 
         $host = '';
-        if(!empty($_SESSION['host'])) {
+        if (!empty($_SESSION['host'])) {
             $host = $_SESSION['host'];
         }
 
@@ -185,20 +185,20 @@ class Log
     {
         self::$_log_file = ADHOC_ROOT_PATH . '/log/' . strtolower(substr($type, 0, 12)) . '.log';
 
-        if(!file_exists(self::$_log_file)) {
+        if (!file_exists(self::$_log_file)) {
             touch(self::$_log_file);
         }
 
         $line = date('Y-m-d H:i:s') . ' - ' . $text;
 
-        if($save) {
+        if ($save) {
             self::$_log .= $line . "\n";
         }
 
         $out = false;
         if (is_writable(self::$_log_file)) {
-            if($fp = fopen(self::$_log_file, "a+")) {
-                if(!(fwrite($fp, $line . "\n") === false)) {
+            if ($fp = fopen(self::$_log_file, "a+")) {
+                if (!(fwrite($fp, $line . "\n") === false)) {
                     $out = true;
                 }
                 fclose($fp);
@@ -220,14 +220,14 @@ class Log
              . "`m`.`pseudo`, `l`.`ip`, `l`.`host`, `l`.`extra` "
              . "FROM (`adhoc_log_action` `l`) "
              . "LEFT JOIN `adhoc_membre` `m` ON (`m`.`id_contact` = `l`.`id_contact`) ";
-        if($action) {
+        if ($action) {
             $sql .= "WHERE `l`.`action` = " . (int) $action . " ";
         }
         $sql .= "ORDER BY `l`.`datetime` DESC";
 
         $logs = $db->queryWithFetch($sql);
 
-        foreach($logs as $key => $log)
+        foreach ($logs as $key => $log)
         {
             $logs[$key]['actionlib'] = self::$_actions[$log['action']];
         }

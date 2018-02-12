@@ -49,7 +49,7 @@ class WorldCountry extends Liste
     protected function _getName($id_country, $locale = 'fr_FR')
     {
         $lang = 'en';
-        if(strpos($locale, 'fr') !== false) {
+        if (strpos($locale, 'fr') !== false) {
             $lang = 'fr';
         }
         return static::$_liste[$id_country][$lang];
@@ -61,7 +61,7 @@ class WorldCountry extends Liste
      */
     protected function _isWorldCountryOk($id_country)
     {
-        if(array_key_exists($id_country, static::$_liste)) {
+        if (array_key_exists($id_country, static::$_liste)) {
             return true;
         }
         return false;
@@ -79,8 +79,8 @@ class WorldCountry extends Liste
              . "ORDER BY `name_fr` ASC";
 
         static::$_liste = [];
-        if($res = $db->queryWithFetch($sql)) {
-            foreach($res as $_res) {
+        if ($res = $db->queryWithFetch($sql)) {
+            foreach ($res as $_res) {
                 static::$_liste[$_res['id_country']] = [
                     'fr' => $_res['name_fr'],
                     'en' => $_res['name_en'],

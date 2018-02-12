@@ -55,18 +55,18 @@ class EmailSmarty extends Smarty
         $cache_local = Image::getLocalCachePath($uid);
         $cache_url = Image::getHttpCachePath($uid);
 
-        if(file_exists($cache_local)) {
+        if (file_exists($cache_local)) {
             return $cache_url;
         }
 
-        if(file_exists($source)) {
+        if (file_exists($source)) {
             $img = new Image($source);
             $img->setType(IMAGETYPE_JPEG);
             $img->setMaxWidth($width);
             $img->setMaxHeight($height);
             $img->setBorder($border);
             $img->setKeepRatio(true);
-            if($zoom) {
+            if ($zoom) {
                 $img->setZoom();
             }
             $img->setHexColor($bgcolor);

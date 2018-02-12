@@ -167,7 +167,7 @@ class FAQ extends ObjectModel
 
         $res = $db->queryWithFetch($sql);
 
-        foreach($res as $idx => $row) {
+        foreach ($res as $idx => $row) {
             $res[$idx]['category'] = self::getCategoryById($row['id_category']);
         }
 
@@ -185,7 +185,7 @@ class FAQ extends ObjectModel
              . "FROM `" . self::$_table . "` "
              . "WHERE `id_faq` = " . (int) $this->_id_faq;
 
-        if($res = $db->queryWithFetchFirstRow($sql)) {
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             return true;
         }

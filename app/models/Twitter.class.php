@@ -14,7 +14,7 @@ class Twitter
 
         $news = $db->queryWithFetch($sql);
 
-        foreach($news as $idx => $n)
+        foreach ($news as $idx => $n)
         {
             $news[$idx]['parsed_text_1'] = self::makeTextCliquable($n['text'], 1);
             $news[$idx]['parsed_text_2'] = self::makeTextCliquable($n['text'], 2);
@@ -35,7 +35,7 @@ class Twitter
 
       $news = $db->queryWithFetch($sql);
 
-      foreach($news as $idx => $n)
+      foreach ($news as $idx => $n)
       {
           $news[$idx]['groupe'] = Groupe::getInstance($n['id_groupe']);
           $news[$idx]['parsed_text_1'] = self::makeTextCliquable($n['text'], 1);
@@ -49,11 +49,11 @@ class Twitter
     {
         $regexp_url = "/(http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
 
-        if(preg_match($regexp_url, $str, $url)) {
-            if($mode == 1) {
+        if (preg_match($regexp_url, $str, $url)) {
+            if ($mode == 1) {
                 // seul le lien est cliquable
                 $output = preg_replace($regexp_url, '<a href="'.$url[0].'">'.$url[0].'</a>', $str);
-            } elseif($mode == 2) {
+            } elseif ($mode == 2) {
                 // l'ensemble du texte est cliquable, l'url est cachée
                 $str = str_replace($url[0], '', $str);
                 $output = '<a href="'.$url[0].'">'.$str.'</a>';
