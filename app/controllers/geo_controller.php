@@ -21,14 +21,14 @@ class Controller
      */
     static function regions()
     {
-        if(empty($_GET['c'])) {
+        if (empty($_GET['c'])) {
             return [];
         }
         $c = strtoupper(substr(trim((string) $_GET['c']), 0, 2));
 
         $regions = WorldRegion::getHashTable();
 
-        if(array_key_exists($c, $regions)) {
+        if (array_key_exists($c, $regions)) {
             return $regions[$c];
         }
 
@@ -47,7 +47,7 @@ class Controller
     {
         $tab = [];
 
-        if(!empty($_GET['r'])) {
+        if (!empty($_GET['r'])) {
             $r = substr($_GET['r'], 0, 2);
             $db = DataBase::getInstance();
             $sql = "SELECT `id_departement`, `name` "
@@ -55,7 +55,7 @@ class Controller
                  . "WHERE `id_world_region` = '" . $db->escape($r) . "' "
                  . "ORDER BY `name` ASC";
             $res = $db->queryWithFetch($sql);
-            foreach($res as $_res) {
+            foreach ($res as $_res) {
                 $tab[$_res['id_departement']] = $_res['name'];
             }
         }
@@ -75,7 +75,7 @@ class Controller
     {
         $tab = [];
 
-        if(!empty($_GET['d'])) {
+        if (!empty($_GET['d'])) {
             $d = substr($_GET['d'], 0, 3);
             $db = DataBase::getInstance();
             $sql = "SELECT `id_city`, `name`, `cp` "
@@ -83,7 +83,7 @@ class Controller
                  . "WHERE `id_departement` = '" . $db->escape($d) . "' "
                  . "ORDER BY `name` ASC";
             $res = $db->queryWithFetch($sql);
-            foreach($res as $_res) {
+            foreach ($res as $_res) {
                 $tab[$_res['id_city']] = $_res['cp'] . " - " . ucwords(strtolower($_res['name']));
             }
         }
@@ -102,7 +102,7 @@ class Controller
     {
         $tab = [];
 
-        if(!empty($_GET['v'])) {
+        if (!empty($_GET['v'])) {
             $id_city = (int) $_GET['v'];
             $db = DataBase::getInstance();
             $sql = "SELECT `id_lieu`, `name` "
@@ -110,7 +110,7 @@ class Controller
                  . "WHERE `id_city` = " . (int) $id_city . " "
                  . "ORDER BY `name` ASC";
             $res = $db->queryWithFetch($sql);
-            foreach($res as $_res) {
+            foreach ($res as $_res) {
                 $tab[$_res['id_lieu']] = ucwords(strtolower($_res['name']));
             }
         }

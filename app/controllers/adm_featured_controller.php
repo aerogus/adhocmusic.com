@@ -74,7 +74,7 @@ class Controller
                 $f->setOnline($data['online']);
                 $f->save();
 
-                if(is_uploaded_file($_FILES['image']['tmp_name'])) {
+                if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     $i = new Image($_FILES['image']['tmp_name']);
                     $i->setType(IMAGETYPE_JPEG);
                     $i->setMaxWidth(self::IMG_WIDTH);
@@ -88,7 +88,7 @@ class Controller
             }
 
             if (!empty($errors)) {
-                foreach($errors as $k => $v) {
+                foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
             }
@@ -160,7 +160,7 @@ class Controller
                 $f->setOnline($data['online']);
                 $f->save();
 
-                if(is_uploaded_file($_FILES['image']['tmp_name'])) {
+                if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     $i = new Image($_FILES['image']['tmp_name']);
                     $i->setType(IMAGETYPE_JPEG);
                     $i->setMaxWidth(self::IMG_WIDTH);
@@ -174,7 +174,7 @@ class Controller
             }
 
             if (!empty($errors)) {
-                foreach($errors as $k => $v) {
+                foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
             }
@@ -229,9 +229,9 @@ class Controller
         $id = (int) Route::params('id');
         $f = Featured::getInstance($id);
 
-        if(Tools::isSubmit('form-featured-delete'))
+        if (Tools::isSubmit('form-featured-delete'))
         {
-            if($f->delete()) {
+            if ($f->delete()) {
                 Tools::redirect('/adm/featured/?delete=1');
                 unlink(ADHOC_ROOT_PATH . '/static/media/featured/' . $f->getId() . '.jpg');
             }

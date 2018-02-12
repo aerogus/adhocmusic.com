@@ -35,7 +35,7 @@ class Controller
         $trail->addStep("Foire aux questions", "/adm/faq/");
         $trail->addStep("Création");
 
-        if(Tools::isSubmit('form-faq-create'))
+        if (Tools::isSubmit('form-faq-create'))
         {
             $data = [
                 'id_category' => (int) Route::params('id_category'),
@@ -72,7 +72,7 @@ class Controller
         $trail->addStep("Foire aux questions", "/adm/faq/");
         $trail->addStep("Edition");
 
-        if(Tools::isSubmit('form-faq-edit'))
+        if (Tools::isSubmit('form-faq-edit'))
         {
             $data = [
                 'id_faq'      => (int) Route::params('id_faq'),
@@ -111,7 +111,7 @@ class Controller
         $trail->addStep("Foire aux questions", "/adm/faq/");
         $trail->addStep("Suppression");
 
-        if(Tools::isSubmit('form-faq-delete'))
+        if (Tools::isSubmit('form-faq-delete'))
         {
             $faq = FAQ::getInstance($id);
             $faq->delete();

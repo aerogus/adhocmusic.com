@@ -37,7 +37,7 @@ class Controller
 
         $smarty->assign('auth', Membre::getTypesMembre());
 
-        if(Tools::isSubmit('form-cms-create'))
+        if (Tools::isSubmit('form-cms-create'))
         {
             $data = [
                 'alias'        => (string) Route::params('alias'),
@@ -83,7 +83,7 @@ class Controller
 
         $smarty->assign('auth', Membre::getTypesMembre());
 
-        if(Tools::isSubmit('form-cms-edit'))
+        if (Tools::isSubmit('form-cms-edit'))
         {
             $data = [
                 'id_cms'       => (int) Route::params('id_cms'),
@@ -130,7 +130,7 @@ class Controller
         $trail->addStep("Pages Statiques", "/adm/cms/");
         $trail->addStep("Suppression");
 
-        if(Tools::isSubmit('form-cms-delete'))
+        if (Tools::isSubmit('form-cms-delete'))
         {
            $cms = CMS::getInstance($id);
            $cms->delete();

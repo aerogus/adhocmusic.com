@@ -38,10 +38,10 @@ class Controller
 
         // tri par mois
         $evts = [];
-        foreach($events as $event)
+        foreach ($events as $event)
         {
             $month = substr($event['date'], 0, 7).'-01';
-            if(!array_key_exists($month, $evts)) {
+            if (!array_key_exists($month, $evts)) {
                 $evts[$month] = [];
             }
             $evts[$month][] = $event;
@@ -118,14 +118,14 @@ class Controller
             'check'      => Tools::getCSRFToken(),
         );
 
-        if(!empty($_SESSION['membre'])) {
+        if (!empty($_SESSION['membre'])) {
             $data['name'] = $_SESSION['membre']->getFirstName() . " " . $_SESSION['membre']->getLastName() . " (" . $_SESSION['membre']->getPseudo() . ")";
             $data['email'] = $_SESSION['membre']->getEmail();
         }
 
-        if(Tools::isSubmit('form-contact'))
+        if (Tools::isSubmit('form-contact'))
         {
-            if(Tools::checkCSRFToken((string) Route::params('check')) === false) {
+            if (Tools::checkCSRFToken((string) Route::params('check')) === false) {
                 //die(); // mauvais code sécurité
             }
 
@@ -143,23 +143,23 @@ class Controller
 
             self::_validate_form_contact($data, $errors);
 
-            if(empty($errors)) {
+            if (empty($errors)) {
 
                 // 1 - envoi du mail au destinataire
                 $data['email_reply_to'] = $data['email'];
-                if(Email::send(array('bureau@adhocmusic.com', 'site@adhocmusic.com', 'contact@adhocmusic.com'), $data['subject'], 'form-contact-to', $data)) {
+                if (Email::send(array('bureau@adhocmusic.com', 'site@adhocmusic.com', 'contact@adhocmusic.com'), $data['subject'], 'form-contact-to', $data)) {
                     $smarty->assign('sent_ok', true);
                 } else {
                     $smarty->assign('sent_ko', true);
                 }
 
                 // 2 - envoi de la copie à l'expéditeur
-                if($data['cc']) {
+                if ($data['cc']) {
                      $data['email_reply_to'] = 'site@adhocmusic.com';
                      Email::send($data['email'], "[cc]" . $data['subject'], 'form-contact-cc', $data);
                 }
 
-                if($data['mailing']) {
+                if ($data['mailing']) {
                     Newsletter::addEmail($data['email']);
                 }
 
@@ -167,7 +167,7 @@ class Controller
 
                 // erreur dans le form
                 $smarty->assign('show_form', true);
-                foreach($errors as $k => $v) {
+                foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
 

@@ -19,7 +19,7 @@ class Controller
 
     static function sub()
     {
-        if(Tools::isAuth() === false) {
+        if (Tools::isAuth() === false) {
             return 'not auth';
         }
 
@@ -29,7 +29,7 @@ class Controller
 
         $r = Alerting::addSubscriber($id_contact, $type, $id_content);
 
-        switch($type)
+        switch ($type)
         {
             case 'g':
                 Log::action(Log::ACTION_ALERTING_GROUPE_SUB, $id_content);
@@ -53,7 +53,7 @@ class Controller
 
     static function unsub()
     {
-        if(Tools::isAuth() === false) {
+        if (Tools::isAuth() === false) {
             return 'not auth';
         }
 
@@ -63,7 +63,7 @@ class Controller
 
         $r = Alerting::delSubscriber($id_contact, $type, $id_content);
 
-        switch($type)
+        switch ($type)
         {
             case 'g':
                 Log::action(Log::ACTION_ALERTING_GROUPE_UNSUB, $id_content);

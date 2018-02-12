@@ -62,7 +62,7 @@ class Controller
 
         $smarty->enqueue_script('/js/structure-create.js');
 
-        if(Tools::isSubmit('form-structure-create'))
+        if (Tools::isSubmit('form-structure-create'))
         {
             $data = [
                 'name' => (string) Route::params('name'),
@@ -106,7 +106,7 @@ class Controller
     {
         $errors = [];
 
-        if(count($errors)) {
+        if (count($errors)) {
             return false;
         }
         return true;
@@ -125,7 +125,7 @@ class Controller
 
         $smarty->enqueue_script('/js/structure-edit.js');
 
-        if(Tools::isSubmit('form-structure-edit'))
+        if (Tools::isSubmit('form-structure-edit'))
         {
             $data = [
                 'name' => (string) Route::params('name'),

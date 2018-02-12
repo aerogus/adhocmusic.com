@@ -61,7 +61,7 @@ class Controller
         $comment->setOnline(true);
         $comment->setText($data['text']);
 
-        if(Tools::isAuth()) {
+        if (Tools::isAuth()) {
             $comment->setIdContact($_SESSION['membre']->getId());
             $comment->setPseudo($_SESSION['membre']->getPseudo());
             $comment->setEmail($_SESSION['membre']->getEmail());
@@ -70,7 +70,7 @@ class Controller
             $comment->setEmail((string) Route::params('email'));
         }
 
-        if($id_comment = $comment->save()) {
+        if ($id_comment = $comment->save()) {
             Log::action(Log::ACTION_COMMENT_CREATE, $comment->getText());
             $comment->sendNotifs();
             Tools::redirect($_SERVER['HTTP_REFERER']);
@@ -84,7 +84,7 @@ class Controller
         $id = (int) Route::params('id');
         Tools::auth(Membre::TYPE_ADMIN);
         $comment = Comment::getInstance($id);
-        if($comment->delete()) {
+        if ($comment->delete()) {
             Log::action(Log::ACTION_COMMENT_DELETE, $comment->getId());
             return 'OK';
         }
@@ -101,9 +101,9 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        if(Tools::isSubmit('form-comment-delete'))
+        if (Tools::isSubmit('form-comment-delete'))
         {
-            if($comment->delete())
+            if ($comment->delete())
             {
                 Log::action(Log::ACTION_COMMENT_DELETE, $comment->getId());
                 Tools::redirect('/comments/?delete=1');

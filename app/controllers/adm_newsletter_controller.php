@@ -27,7 +27,7 @@ class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        if(Tools::isSubmit('form-newsletter-create'))
+        if (Tools::isSubmit('form-newsletter-create'))
         {
             $data = [
                 'title'   => trim((string) Route::params('title')),
@@ -70,7 +70,7 @@ class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        if(Tools::isSubmit('form-newsletter-edit'))
+        if (Tools::isSubmit('form-newsletter-edit'))
         {
             $data = [
                 'id'      => (int) Route::params('id'),
@@ -114,9 +114,9 @@ class Controller
     static function upload()
     {
         $id = (int) Route::params('id');
-        if(is_uploaded_file($_FILES['file']['tmp_name'])) {
+        if (is_uploaded_file($_FILES['file']['tmp_name'])) {
             $n = Newsletter::getInstance($id);
-            if(!file_exists($n->getFilePath())) {
+            if (!file_exists($n->getFilePath())) {
                 mkdir($n->getFilePath());
             }
             move_uploaded_file($_FILES['file']['tmp_name'], $n->getFilePath() . '/' . $_FILES['file']['name']);

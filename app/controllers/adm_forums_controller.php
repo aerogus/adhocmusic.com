@@ -97,11 +97,11 @@ class Controller
         $id_forum  = Route::params('id_forum');
         $id_thread = (int) Route::params('id_thread');
 
-        if(Tools::isSubmit('form-forum-write'))
+        if (Tools::isSubmit('form-forum-write'))
         {
             // a debuger
             /*
-            if(Tools::checkCSRFToken((string) Route::params('check')) === false) {
+            if (Tools::checkCSRFToken((string) Route::params('check')) === false) {
                 //die('csrf fail'); // mauvais code sécurité
             }
             */
@@ -158,11 +158,11 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        if(is_null($id_forum) && empty($id_thread)) {
+        if (is_null($id_forum) && empty($id_thread)) {
             $smarty->assign('error_params', true);
-        } elseif(!empty($id_thread)) {
+        } elseif (!empty($id_thread)) {
             $id_forum = ForumPrive::getIdForumByIdThread($id_thread);
-        } elseif(!is_null($id_forum)) {
+        } elseif (!is_null($id_forum)) {
             // rien
         }
 
