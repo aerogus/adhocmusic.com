@@ -31,6 +31,14 @@
 
 <a id="up" href="#" title="haut de la page"><img src="/img/icones/up.png" alt=""></a>
 
+{if $js_vars}
+<script>
+{foreach from=$js_vars item=js_var}
+{$js_var}
+{/foreach}
+</script>
+{/if}
+
 {foreach from=$footer_scripts item=script_url}
 <script src="{$script_url}"></script>
 {/foreach}

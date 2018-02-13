@@ -24,7 +24,6 @@ class Controller
 
         $lieux_proches = array_slice($lieux_proches, 0, 5);
 
-        $smarty->assign('js_gmap', true);
         $smarty->assign('lat', $lat);
         $smarty->assign('lng', $lng);
         $smarty->assign('my_geocode', $lat . ', ' . $lng);
@@ -68,17 +67,11 @@ class Controller
     {
         $id = (int) Route::params('id');
 
-        // la balle au bond
-        if ($id == 91 || $id == 1339) {
-            Tools::redirect('/lieux/2091');
-        }
-
         $smarty = new AdHocSmarty();
 
         $smarty->assign('create', (bool) Route::params('create'));
         $smarty->assign('edit', (bool) Route::params('edit'));
 
-        $smarty->assign('js_gmap', true);
         $smarty->assign('menuselected', 'lieux');
 
         try {
@@ -88,6 +81,11 @@ class Controller
             $smarty->assign('unknown_lieu', true);
             return $smarty->fetch('lieux/show.tpl');
         }
+
+        $smarty->set_js_var('lieu_geocode', $lieu->getGeocode());
+        $smarty->set_js_var('lieu_name', $lieu->getName());
+
+        $smarty->enqueue_script('/js/lieux-show.js');
 
         if (!$lieu->getLat() && !$lieu->getLng()) {
             $smarty->assign('geocode', true);
@@ -103,7 +101,7 @@ class Controller
         $trail->addStep("Lieux de diffusion", "/lieux/");
         $trail->addStep(WorldCountry::getName($lieu->getIdCountry()), "/lieux/?c=" . $lieu->getIdCountry());
         $trail->addStep(WorldRegion::getName($lieu->getIdCountry(), $lieu->getIdRegion()), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion());
-        if ($lieu->getIdCountry() == 'FR') {
+        if ($lieu->getIdCountry() === 'FR') {
             $trail->addStep(Departement::getName($lieu->getIdDepartement()), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion() . "&d=" . $lieu->getIdDepartement());
         }
         $trail->addStep($lieu->getName());
@@ -160,12 +158,12 @@ class Controller
         // alerting
         if (Tools::isAuth()) {
             if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'l', $lieu->getId())) {
-                $smarty->assign('alerting_sub_url', 'http://www.adhocmusic.com/alerting/sub?type=l&id_content='.$lieu->getId());
+                $smarty->assign('alerting_sub_url', 'https://www.adhocmusic.com/alerting/sub?type=l&id_content='.$lieu->getId());
             } else {
-                $smarty->assign('alerting_unsub_url', 'http://www.adhocmusic.com/alerting/unsub?type=l&id_content='.$lieu->getId());
+                $smarty->assign('alerting_unsub_url', 'https://www.adhocmusic.com/alerting/unsub?type=l&id_content='.$lieu->getId());
             }
         } else {
-            $smarty->assign('alerting_auth_url', 'http://www.adhocmusic.com/auth/login');
+            $smarty->assign('alerting_auth_url', 'https://www.adhocmusic.com/auth/login');
         }
 
         return $smarty->fetch('lieux/show.tpl');

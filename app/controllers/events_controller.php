@@ -96,7 +96,6 @@ class Controller
 
         $smarty->enqueue_script('/js/events-show.js');
 
-        $smarty->assign('js_gmap', true);
         $smarty->assign('menuselected', 'agenda');
 
         $trail = Trail::getInstance();

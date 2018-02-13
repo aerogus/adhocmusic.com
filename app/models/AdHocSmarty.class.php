@@ -495,6 +495,17 @@ class AdHocSmarty extends Smarty
     }
 
     /**
+     * ajoute une variable js utilisable dans les scripts du footer
+     * 
+     * @param string $key
+     * @param string $val
+     */
+    function set_js_var($key, $val)
+    {
+        $this->append('js_vars', $key . ' = "' . $val . '";');
+    }
+
+    /**
      * imprime un javascript en ligne dans le footer
      *
      * @param string $script
