@@ -39,6 +39,14 @@
 </script>
 {/if}
 
+{if $js_vars_arr}
+<script>
+{foreach from=$js_vars_arr item=js_var_val key=js_var_key}
+{$js_var_key} = {$js_var_val};
+{/foreach}
+</script>
+{/if}
+
 {foreach from=$footer_scripts item=script_url}
 <script src="{$script_url}"></script>
 {/foreach}
