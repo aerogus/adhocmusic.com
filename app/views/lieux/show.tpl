@@ -16,27 +16,6 @@
 
 {include file="common/boxstart.tpl" boxtitle=$lieu->getName()|escape}
 
-<script>
-var center = new google.maps.LatLng({$lieu->getGeocode()});
-var map = new google.maps.Map(document.getElementById("map_canvas"), {
-  zoom: 15,
-  center: center,
-  mapTypeId: google.maps.MapTypeId.HYBRID,
-  disableDefaultUI: true
-});
-var image = new google.maps.MarkerImage('/img/pin/note.png',
-  new google.maps.Size(32, 32), // taille
-  new google.maps.Point(0,0),   // origine
-  new google.maps.Point(16, 16)  // ancre
-);
-var marker = new google.maps.Marker({
-  position: center,
-  map: map,
-  icon: image,
-  title: '{$lieu->getName()|escape:'javascript'}'
-});
-</script>
-
 <div id="map_canvas" style="width: 320px; height: 320px; float: right;"></div>
 
 {*<img src="{$lieu->getMapUrl()}" alt="carte" align="right">*}
@@ -119,7 +98,7 @@ var marker = new google.maps.Marker({
 <div class="blocinfo">
 <h3>Sons</h3>
 <ul>
-{foreach from=$audios item=audio}
+{foreach $audios as $audio}
 <li>Titre : <strong>{$audio.name|escape}</strong><br>Groupe : <a href="http://www.adhocmusic.com/{$audio.groupe_alias}">{$audio.groupe_name}</a><br>Evénement : <a href="http://www.adhocmusic.com/events/show/{$audio.event_id}">{$audio.event_name}</a> ({$audio.event_date|date_format:'%d/%m/%Y'})<br>{audio_player id=$audio.id}</li>
 {/foreach}
 </ul>
@@ -129,7 +108,7 @@ var marker = new google.maps.Marker({
 {if !empty($videos)}
 <div class="blocinfo">
 <h3>Vidéos</h3>
-{foreach from=$videos item=video}
+{foreach $videos as $video}
 <div class="thumb-80">
   <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}">{$video.name|truncate:15:"...":true:true|escape}</a>
   <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}"></a>

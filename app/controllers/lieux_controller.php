@@ -82,10 +82,12 @@ class Controller
             return $smarty->fetch('lieux/show.tpl');
         }
 
-        $smarty->set_js_var('lieu_geocode', $lieu->getGeocode());
-        $smarty->set_js_var('lieu_name', $lieu->getName());
+        $smarty->set_js_var('lieu_lat', number_format($lieu->getLat(), 6, '.', ''));
+        $smarty->set_js_var('lieu_lng', number_format($lieu->getLng(), 6, '.', ''));
+        $smarty->set_js_var('lieu_name', '"' . $lieu->getName() . '"');
 
         $smarty->enqueue_script('/js/lieux-show.js');
+        $smarty->enqueue_script('https://maps.googleapis.com/maps/api/js?key=' . GOOGLE_MAPS_API_KEY . '&callback=adhocLieuInitMap');
 
         if (!$lieu->getLat() && !$lieu->getLng()) {
             $smarty->assign('geocode', true);

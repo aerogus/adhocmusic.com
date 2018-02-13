@@ -13,16 +13,9 @@
         <ul class="staff">
           {foreach from=$membres item=membre}
           <li>
-            <a href="{$membre.url|escape}">
-              <div class="thumb-80 thumb-photo-80">
-                <img src="{$membre.avatar_interne|escape}" alt="">
-                <p align="center"><strong>{$membre.official_pseudo|escape}</strong></p>
-              </div>
-              <div>
-                <strong>{$membre.first_name|escape} {$membre.last_name|escape}</strong><br>
-                <em>{$membre.function|escape}</em>
-              </div>
-            </a>
+            <img src="{$membre.avatar_interne|escape}" alt="">
+            <strong>{$membre.first_name|escape} {$membre.last_name|escape}</strong><br>
+            <em>{$membre.function|escape}</em>
           </li>
           {/foreach}
         </ul>
@@ -34,15 +27,13 @@
         <h1>Les anciens</h1>
       </header>
       <div>
-        <p>De 1996 à aujourd'hui, beaucoup de monde a participé à l'aventure AD'HOC de près ou de loin. Qu'ils en soient tous remerciés</p>
-        <ul class="staff">
+        <p>De 1996 à aujourd'hui, nombre de bénévoles ont participé à l'aventure AD'HOC de près ou de loin. Qu'ils en soient remerciés:</p>
+        <p>
           {foreach from=$omembres item=membre}
-          <li>
-            <strong>{$membre.first_name|escape} {$membre.last_name|escape}</strong>
-            ({$membre.datdeb|date_format:'%Y'} à {$membre.datfin|date_format:'%Y'})
-          </li>
+          <strong>{$membre.first_name|escape} {$membre.last_name|escape}</strong> ({$membre.datdeb|date_format:'%Y'} à {$membre.datfin|date_format:'%Y'}),
           {/foreach}
-        </ul>
+          et <strong>Francisque Vigouroux</strong> (1996 à 2002).
+        </p>
       </div>
     </div>
 

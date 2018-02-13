@@ -502,8 +502,9 @@ class AdHocSmarty extends Smarty
      */
     function set_js_var($key, $val)
     {
-        $this->append('js_vars', $key . ' = "' . $val . '";');
-        $this->append('js_vars_arr', [$key => $val]);
+        // à échapper !
+        $this->append('js_vars', 'var ' . $key . ' = ' . $val . ';');
+//        $this->append('js_vars_arr', [$key => $val]);
     }
 
     /**

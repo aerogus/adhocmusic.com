@@ -48,7 +48,7 @@
 <meta name="robots" content="index,follow">
 <meta name="description" content="{if empty($description)}Portail de référence sur les musiques actuelles en Essonne, Agenda culturel géolocalisé, Vidéos de concerts, promotion d'artistes ...{else}{$description|escape}{/if}">
 
-{foreach from=$stylesheets item=style_url}
+{foreach $stylesheets as $style_url}
 <link rel="stylesheet" href="{$style_url}">
 {/foreach}
 
@@ -56,7 +56,7 @@
 <link rel="stylesheet" href="/css/adhoc/jquery-ui-1.8.2.custom.css">
 {/if}
 
-{foreach from=$header_scripts item=script_url}
+{foreach $header_scripts as $script_url}
 <script src="{$script_url}"></script>
 {/foreach}
 

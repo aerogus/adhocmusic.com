@@ -137,7 +137,7 @@ class Controller
             'online' => true,
             'sort'   => 'random',
             'limit'  => 100,
-        ])));
+        ]));
 
         $smarty->assign('audios', Audio::getAudios([
             'event'  => $event->getId(),

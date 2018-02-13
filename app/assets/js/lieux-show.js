@@ -1,7 +1,8 @@
-/*globals adhoc */
+/*globals lieu_lat, lieu_lng, lieu_name */
 
-function () {
-  var center = new google.maps.LatLng(adhoc.lieu.geocode);
+function adhocLieuInitMap()
+{
+  var center = new google.maps.LatLng({lat: lieu_lat, lng: lieu_lng});
   var map = new google.maps.Map(document.getElementById("map_canvas"), {
     zoom: 15,
     center: center,
@@ -17,6 +18,6 @@ function () {
     position: center,
     map: map,
     icon: image,
-    title: adhoc.lieu.name
+    title: lieu_name
   });
-}());
+};

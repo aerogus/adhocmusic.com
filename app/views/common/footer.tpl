@@ -33,25 +33,25 @@
 
 {if $js_vars}
 <script>
-{foreach from=$js_vars item=js_var}
+{foreach $js_vars as $js_var}
 {$js_var}
 {/foreach}
 </script>
 {/if}
 
-{if $js_vars_arr}
+{if $js_vars_arr && false}
 <script>
-{foreach from=$js_vars_arr item=js_var_val key=js_var_key}
-{$js_var_key} = {$js_var_val};
+{foreach $js_vars_arr as $js_var}
+var {$js_var@key} = {$js_var};
 {/foreach}
 </script>
 {/if}
 
-{foreach from=$footer_scripts item=script_url}
+{foreach $footer_scripts as $script_url}
 <script src="{$script_url}"></script>
 {/foreach}
 
-{foreach from=$inline_scripts item=inline_script}
+{foreach $inline_scripts as $inline_script}
 <script>
 {$inline_script}
 </script>
