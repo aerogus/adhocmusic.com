@@ -48,16 +48,6 @@ class MembreAdhoc extends Membre
     protected $_rank = 0;
 
     /**
-     * @var string
-     */
-    protected $_official_pseudo = '';
-
-    /**
-     * @var string
-     */
-    protected $_description = '';
-
-    /**
      * Liste des attributs de l'objet
      * on précise si en base c'est de type :
      * - numérique/integer/float/bool (= int)
@@ -70,8 +60,6 @@ class MembreAdhoc extends Membre
         'birth_date'      => 'date',
         'active'          => 'bool',
         'rank'            => 'num',
-        'official_pseudo' => 'str',
-        'description'     => 'str',
     ];
 
     /**
@@ -157,22 +145,6 @@ class MembreAdhoc extends Membre
         return (int) $this->_rank;
     }
 
-    /**
-     * @return string
-     */
-    function getOfficialPseudo()
-    {
-        return (string) $this->_official_pseudo;
-    }
-
-    /**
-     * @return string
-     */
-    function getDescription()
-    {
-        return (string) $this->_description;
-    }
-
     /* fin getters */
 
     /* début setters */
@@ -225,30 +197,6 @@ class MembreAdhoc extends Membre
         }
     }
 
-    /**
-     * @param string
-     */
-    function setOfficialPseudo($val)
-    {
-        if ($this->_official_pseudo !== $val)
-        {
-            $this->_official_pseudo = (string) $val;
-            $this->_modified_fields['membre_adhoc']['official_pseudo'] = true;
-        }
-    }
-
-    /**
-     * @param string
-     */
-    function setDescription($val)
-    {
-        if ($this->_description !== $val)
-        {
-            $this->_description = (string) $val;
-            $this->_modified_fields['membre_adhoc']['description'] = true;
-        }
-    }
-
     /* fin setters */
 
     /**
@@ -260,10 +208,10 @@ class MembreAdhoc extends Membre
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `m`.`id_contact` AS `id`, `ma`.`official_pseudo`, "
+        $sql = "SELECT `m`.`id_contact` AS `id`, "
              . "`m`.`first_name`, `m`.`last_name`, `m`.`text`, "
              . "UNIX_TIMESTAMP(`m`.`modified_on`) AS `modified_on_ts`, "
-             . "`ma`.`function`, `ma`.`description`, `ma`.`datdeb`, `ma`.`datfin`, "
+             . "`ma`.`function`, `ma`.`datdeb`, `ma`.`datfin`, "
              . "(YEAR(CURRENT_DATE) - YEAR(`ma`.`birth_date`)) - (RIGHT(CURRENT_DATE,5) < RIGHT(`ma`.`birth_date`, 5)) AS `age` "
              . "FROM `" . self::$_db_table_membre . "` `m`, `" . self::$_db_table_membre_adhoc . "` `ma` "
              . "WHERE `m`.`id_contact` = `ma`.`id_contact` ";
