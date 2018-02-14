@@ -10,8 +10,8 @@ class EmailSmarty extends Smarty
         $this->setCompileDir(SMARTY_TEMPLATE_C_PATH);
         $this->setCacheDir(SMARTY_TEMPLATE_C_PATH);
 
-        $this->registerPlugin('modifier', 'link', array('EmailSmarty', 'modifier_link'));
-        $this->registerPlugin('function', 'image', array('EmailSmarty', 'function_image'));
+        $this->registerPlugin('modifier', 'link', ['EmailSmarty', 'modifier_link']);
+        $this->registerPlugin('function', 'image', ['EmailSmarty', 'function_image']);
     }
 
     /**

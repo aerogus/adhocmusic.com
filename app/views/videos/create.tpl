@@ -16,7 +16,7 @@
     </li>
     <li>
       <select id="id_host" name="id_host" style="float: right;">
-      {foreach from=$hosts item=host}
+      {foreach $hosts as $host}
       <option value="{$host.id|escape}">{$host.name|escape}</option>
       {/foreach}
       </select>
@@ -35,7 +35,7 @@
       <div class="error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier cette vidéo à soit un groupe, soit un lieu, soit un événement</div>
       <select id="id_groupe" name="id_groupe" style="float: right">
         <option value="0">Aucun</option>
-        {foreach from=$groupes item=groupe}
+        {foreach $groupes as $groupe}
         <option value="{$groupe.id}">{$groupe.name|escape}</option>
         {/foreach}
       </select>

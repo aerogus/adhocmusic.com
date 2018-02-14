@@ -21,8 +21,8 @@ define('URL_DEST', MEDIA_PATH . '/video/');
 foreach($videos as $video)
 {
     echo "Video : ".$video['id_video']."\n";
-    if($video['id_host'] === Video::HOST_YOUTUBE || $video['id_host'] === Video::HOST_DAILYMOTION) {
-        if($thumbUrl = Video::getRemoteThumbnail($video['id_host'], $video['reference'], false)) {
+    if ($video['id_host'] === Video::HOST_YOUTUBE || $video['id_host'] === Video::HOST_DAILYMOTION) {
+        if ($thumbUrl = Video::getRemoteThumbnail($video['id_host'], $video['reference'], false)) {
             echo "Thumb : ".$thumbUrl."\n";
             $thumb = file_get_contents($thumbUrl);
             $dest = URL_DEST . $video['id_video'] . '.jpg';

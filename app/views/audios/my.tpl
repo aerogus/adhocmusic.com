@@ -25,7 +25,7 @@
       <th>Modifié le</th>
     </tr>
   </thead>
-  {foreach from=$audios item=audio}
+  {foreach $audios as $audio}
   <tbody>    
     <tr>
       <td>{$audio.groupe_name|escape}</td>

@@ -54,20 +54,20 @@ class Route
     static function map_connect($params)
     {
         $extra_params = $params;
-        foreach (array('path', 'controller', 'action', 'method') as $key) {
+        foreach (['path', 'controller', 'action', 'method'] as $key) {
             unset($extra_params[$key]);
         }
         if (empty($params['method'])) {
             $params['method'] = 'GET';
         }
-        array_push(self::$routes, array(
+        array_push(self::$routes, [
             'controller' => $params['controller'],
             'path' => $params['path'],
             'splitted_path' => explode('/', $params['path']),
             'method' => strtoupper($params['method']),
             'action' => $params['action'],
             'extra_params' => $extra_params,
-        ));
+        ]);
     }
 
     /**
@@ -107,10 +107,10 @@ class Route
             if (strcasecmp($route['method'], $method) !== 0) {
                 continue;
             }
-            if (($ret = self::_examine_splitted_paths(array(
+            if (($ret = self::_examine_splitted_paths([
                 'route' => $route,
                 'splitted_path' => $splitted_path,
-                'route_splitted_path' => $route['splitted_path']))) === FALSE) {
+                'route_splitted_path' => $route['splitted_path']])) === FALSE) {
                 continue;
             }
             break;
@@ -118,12 +118,12 @@ class Route
         if ($ret === FALSE) {
             return FALSE;
         }
-        return array(
+        return [
             'route' => $route,
             'action' => $ret['action'],
             'response_format' => $response_format,
             'extra_params' => $ret['extra_params'],
-        );
+        ];
     }
 
     /**
@@ -138,10 +138,10 @@ class Route
             {
                 $r = explode('|', trim($route));
                 if ((string) $r[0] === '1') {
-                    self::map_connect(array('controller' => (string) $r[1],
-                                            'action' => (string) $r[2],
-                                            'method' => (string) $r[3],
-                                            'path' => (string) $r[4]));
+                    self::map_connect(['controller' => (string) $r[1],
+                                       'action' => (string) $r[2],
+                                       'method' => (string) $r[3],
+                                       'path' => (string) $r[4]]);
                 }
             }
             return true;
@@ -159,14 +159,14 @@ class Route
         if (isset($_SERVER['PATH_INFO'])) {
             $path = $_SERVER['PATH_INFO'];
         }
-        $ret = self::find_route(array(
+        $ret = self::find_route([
             'method' => $method,
             'path' => $path,
-        ));
+        ]);
         if ($ret === FALSE) {
             self::_route_log('-', '-', 'Route non trouvée : ' . $method . ' - ' . $path);
             header('HTTP/1.0 404 Not Found');
-            die("404 <script>window.location='http://www.adhocmusic.com/map?from=404'</script>");
+            die("404 <script>window.location='" . HOME_URL . "/map?from=404'</script>");
         }
         self::_init_params();
         self::$action_params = array_merge(
@@ -184,7 +184,7 @@ class Route
             die('503');
         }
         require_once $controller_file;
-        if (is_callable(array('Controller', $action)) === FALSE) {
+        if (is_callable(['Controller', $action]) === FALSE) {
             self::_route_log($controller, $action, 'Action non implémentée dans le contrôleur');
             header('HTTP/1.0 501 Not implemented');
             die('501');
@@ -193,7 +193,7 @@ class Route
 
         self::$response_format = strtolower($response_format);
 
-        $ret = call_user_func(array('Controller', $action));
+        $ret = call_user_func(['Controller', $action]);
 
         if (is_array($ret) && array_key_exists('mode', $ret)) {
             header('HTTP/1.1 200 OK');
@@ -323,10 +323,10 @@ class Route
         foreach ($route_splitted_path as $scanned_component) {
             $component = $splitted_path[$i];
             $i++;
-            if (($ret = self::_examine_splitted_path_component(array(
+            if (($ret = self::_examine_splitted_path_component([
                 'scanned_component' => $scanned_component,
                 'component' => $component,
-                'route' => $route))) === FALSE) {
+                'route' => $route])) === FALSE) {
                 return FALSE;
             }
             if (!empty($ret['found_action'])) {
@@ -342,10 +342,10 @@ class Route
         if (empty($action)) {
             $action = $route['action'];
         }
-        return array(
+        return [
             'action' => $action,
             'extra_params' => $extra_params,
-        );
+        ];
     }
 
     /**
@@ -397,10 +397,10 @@ class Route
         if (!empty($found_params['action'])) {
             $found_action = $found_params['action'];
         }
-        return array(
+        return [
             'found_action' => $found_action,
             'found_params' => $found_params,
-        );
+        ];
     }
 
     /**
@@ -414,7 +414,7 @@ class Route
             }
         }
 
-        $http_codes = array(
+        $http_codes = [
             '200' => 'HTTP/1.1 200 OK',
             '301' => 'HTTP/1.1 301 Moved Permanently',
             '302' => 'HTTP/1.1 302 Moved Temporarily',
@@ -423,7 +423,7 @@ class Route
             '403' => 'HTTP/1.1 403 Forbidden',
             '404' => 'HTTP/1.1 404 Not Found',
             '500' => 'HTTP/1.1 500 Internal Server Error',
-        );
+        ];
 
         header($http_codes[self::$http_code]);
         header('Content-Type: ' . $content_type . '; charset=utf-8');

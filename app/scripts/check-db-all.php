@@ -55,7 +55,7 @@ foreach ($res as $_res) {
     // on supprime les liaisons groupes avec les groupes introuvables
     //$db->query('DELETE FROM adhoc_appartient_a WHERE id_groupe = ' . (int) $_res['id_groupe']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -67,10 +67,10 @@ echo "\n4 - audio lié à groupe introuvable\n" . $sql . "\n";
 $tbl = new Console_Table();
 $tbl->setHeaders(array('id_audio', 'id_groupe'));
 $res = $db->queryWithFetch($sql);
-foreach($res as $_res) {
+foreach ($res as $_res) {
     $tbl->addRow(array($_res['id_audio'], $_res['id_groupe']));
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -82,10 +82,10 @@ echo "\n5 - audio lié à membre introuvable\n" . $sql . "\n";
 $tbl = new Console_Table();
 $tbl->setHeaders(array('id_audio', 'id_contact'));
 $res = $db->queryWithFetch($sql);
-foreach($res as $_res) {
+foreach ($res as $_res) {
     $tbl->addRow(array($_res['id_audio'], $_res['id_contact']));
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -97,10 +97,10 @@ echo "\n6 - audio lié à lieu introuvable\n" . $sql . "\n";
 $tbl = new Console_Table();
 $tbl->setHeaders(array('id_audio', 'id_groupe'));
 $res = $db->queryWithFetch($sql);
-foreach($res as $_res) {
+foreach ($res as $_res) {
     $tbl->addRow(array($_res['id_audio'], $_res['id_lieu']));
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -115,7 +115,7 @@ $res = $db->queryWithFetch($sql);
 foreach($res as $_res) {
     $tbl->addRow(array($_res['id_audio'], $_res['id_event']));
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -130,7 +130,7 @@ $res = $db->queryWithFetch($sql);
 foreach($res as $_res) {
     $tbl->addRow(array($_res['id_audio'], $_res['id_structure']));
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -147,7 +147,7 @@ foreach($res as $_res) {
     // on supprime les tags sur les membres introuvables
     //$db->query('DELETE FROM adhoc_est_marque_sur WHERE id_contact = ' . (int) $_res['id_contact_tagge']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -164,7 +164,7 @@ foreach($res as $_res) {
     // on supprime les tags des photos introuvables
     //$db->query('DELETE FROM `adhoc_est_marque_sur` WHERE `id_type_media` = ' . Media::TYPE_MEDIA_PHOTO . ' AND `id_media` = ' . (int) $_res['id_media']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -179,7 +179,7 @@ $res = $db->queryWithFetch($sql);
 foreach($res as $_res) {
     $tbl->addRow(array($_res['id_contact_taggeur'], $_res['id_contact_tagge'], $_res['id_media']));
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -196,7 +196,7 @@ foreach($res as $_res) {
     // on reaffecte à id_contact = 1 tous les events orphelins
     //$db->query("UPDATE adhoc_event SET id_contact = 1 WHERE id_event = " . (int) $_res['id_event']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -208,10 +208,10 @@ echo "\n13 - event lié à lieu introuvable\n" . $sql . "\n";
 $tbl = new Console_Table();
 $tbl->setHeaders(array('id_event', 'id_lieu'));
 $res = $db->queryWithFetch($sql);
-foreach($res as $_res) {
+foreach ($res as $_res) {
     $tbl->addRow(array($_res['id_event'], $_res['id_lieu']));
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -223,10 +223,10 @@ echo "\n14 - groupe lié à event introuvable\n" . $sql . "\n";
 $tbl = new Console_Table();
 $tbl->setHeaders(array('id_groupe', 'id_event'));
 $res = $db->queryWithFetch($sql);
-foreach($res as $_res) {
+foreach ($res as $_res) {
     $tbl->addRow(array($_res['id_groupe'], $_res['id_event']));
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -241,7 +241,7 @@ $res = $db->queryWithFetch($sql);
 foreach($res as $_res) {
     $tbl->addRow(array($_res['id_event'], $_res['id_groupe']));
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -258,7 +258,7 @@ foreach($res as $_res) {
     // on reaffecte à id_contact = 1 toutes les photos orphelines
     //$db->query('UPDATE adhoc_photo SET id_contact = 1 WHERE id_photo = ' . (int) $_res['id_photo']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -275,7 +275,7 @@ foreach($res as $_res) {
     // on délie le groupe s'il est introuvable
     //$db->query('UPDATE adhoc_photo SET id_groupe = 0 WHERE id_photo = ' . (int) $_res['id_photo']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -292,7 +292,7 @@ foreach($res as $_res) {
     // on délie le lieu s'il est introuvable
     //$db->query('UPDATE adhoc_photo SET id_lieu = 0 WHERE id_photo = ' . (int) $_res['id_photo']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -309,7 +309,7 @@ foreach($res as $_res) {
     // on délie l'event s'il est introuvable
     //$db->query('UPDATE adhoc_photo SET id_event = 0 WHERE id_photo = ' . (int) $_res['id_photo']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -326,7 +326,7 @@ foreach($res as $_res) {
     // on délie la structure si elle est introuvable
     //$db->query('UPDATE adhoc_photo SET id_structure = 0 WHERE id_photo = ' . (int) $_res['id_photo']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -343,7 +343,7 @@ foreach($res as $_res) {
     // on réaffecte à id_contact = 1 toutes les vidéos orphelines
     //$db->query('UPDATE adhoc_video SET id_contact = 1 WHERE id_video = ' . (int) $_res['id_video']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -360,7 +360,7 @@ foreach($res as $_res) {
     // on délie le groupe s'il est introuvable
     //$db->query('UPDATE adhoc_video SET id_groupe = 0 WHERE id_video = ' . (int) $_res['id_video']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -377,7 +377,7 @@ foreach($res as $_res) {
     // on délie le lieu s'il est introuvable
     //$db->query('UPDATE adhoc_video SET id_lieu = 0 WHERE id_video = ' . (int) $_res['id_video']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -389,12 +389,12 @@ echo "\n24 - vidéo liée à event introuvable\n" . $sql . "\n";
 $tbl = new Console_Table();
 $tbl->setHeaders(array('id_video', 'id_event'));
 $res = $db->queryWithFetch($sql);
-foreach($res as $_res) {
+foreach ($res as $_res) {
     $tbl->addRow(array($_res['id_video'], $_res['id_event']));
     // on délie l'event s'il est introuvable
     //$db->query('UPDATE adhoc_video SET id_event = 0 WHERE id_video = ' . (int) $_res['id_video']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -406,12 +406,12 @@ echo "\n25 - vidéo liée à structure introuvable\n" . $sql . "\n";
 $tbl = new Console_Table();
 $tbl->setHeaders(array('id_video', 'id_structure'));
 $res = $db->queryWithFetch($sql);
-foreach($res as $_res) {
+foreach ($res as $_res) {
     $tbl->addRow(array($_res['id_video'], $_res['id_structure']));
     // on délie la structure si elle est introuvable
     //$db->query('UPDATE adhoc_video SET id_structure = 0 WHERE id_video = ' . (int) $_res['id_video']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -428,7 +428,7 @@ foreach($res as $_res) {
     // on efface les messages dont l'expéditeur est introuvable
     //$db->query("DELETE FROM adhoc_messagerie WHERE id_pm = " . (int) $_res['id_pm']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -440,12 +440,12 @@ echo "\n28 - message lié à membre destinataire introuvable\n" . $sql . "\n";
 $tbl = new Console_Table();
 $tbl->setHeaders(array('id_pm', 'to'));
 $res = $db->queryWithFetch($sql);
-foreach($res as $_res) {
+foreach ($res as $_res) {
     $tbl->addRow(array($_res['id_pm'], $_res['to']));
     // on efface les messages dont le destinataire est introuvable
     //$db->query("DELETE FROM adhoc_messagerie WHERE id_pm = " . (int) $_res['id_pm']);
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -460,7 +460,7 @@ $res = $db->queryWithFetch($sql);
 foreach($res as $_res) {
     $tbl->addRow(array($_res['id_photo'], $_res['name']));
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -475,7 +475,7 @@ $res = $db->queryWithFetch($sql);
 foreach($res as $_res) {
     $tbl->addRow(array($_res['id_audio'], $_res['name']));
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -490,7 +490,7 @@ $res = $db->queryWithFetch($sql);
 foreach($res as $_res) {
     $tbl->addRow(array($_res['id_video'], $_res['name']));
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";
@@ -505,7 +505,7 @@ $res = $db->queryWithFetch($sql);
 foreach($res as $_res) {
     $tbl->addRow(array($_res['id_lieu'], $_res['date'], $_res['nb']));
 }
-if(sizeof($res) > 0) {
+if (sizeof($res) > 0) {
     echo $tbl->getTable();
 } else {
     echo "OK\n";

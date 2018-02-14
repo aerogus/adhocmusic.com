@@ -6,7 +6,7 @@
   </header>
   <div>
     <ul>
-      {foreach from=$newsletters item=newsletter}
+      {foreach $newsletters as $newsletter}
       <li><a href="/newsletters/{$newsletter.id}">{$newsletter.title|escape}</a></li>
       {/foreach}
     </ul>

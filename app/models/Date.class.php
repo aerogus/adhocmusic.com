@@ -16,14 +16,14 @@ class Date
     /**
      *
      */
-    public static $jours = array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
-    public static $jours_courts = array("Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam");
+    public static $jours = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+    public static $jours_courts = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
 
     /**
      *
      */
-    public static $mois = array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
-    public static $mois_courts = array("Jan", "Fév", "Mar", "Avr", "Mai", "Jui", "Jul", "Aoû", "Sep", "Oct", "Nov", "Déc");
+    public static $mois = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    public static $mois_courts = ["Jan", "Fév", "Mar", "Avr", "Mai", "Jui", "Jul", "Aoû", "Sep", "Oct", "Nov", "Déc"];
 
     // expressions regulières perl
     // [0-9] = \d

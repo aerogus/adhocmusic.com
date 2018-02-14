@@ -60,15 +60,15 @@ if (ENV === 'PROD') {
     }
 
     ini_set('display_startup_errors', 0);
-    ini_set('display_errors', 1);
-    define('ONERROR_SHOW', true);
+    ini_set('display_errors', 0);
+    define('ONERROR_SHOW', false);
 
 } elseif (ENV === 'DEV') {
 
-    define('_DB_HOST_',        '127.0.0.1');
-    define('_DB_USER_',        'root');
-    define('_DB_PASSWORD_',    'changeme');
-    define('_DB_DATABASE_',    'adhoc');
+    define('_DB_HOST_',     '127.0.0.1');
+    define('_DB_USER_',     'root');
+    define('_DB_PASSWORD_', 'changeme');
+    define('_DB_DATABASE_', 'adhoc');
 
     if (is_ssl()) {
         define('HOME_URL',  'https://www.adhocmusic.localhost');
@@ -86,6 +86,8 @@ if (ENV === 'PROD') {
 
 }
 
+define('DEBUG_MAIL', 'guillaume@seznec.fr');
+
 define('ADHOC_ROOT_PATH',           dirname(dirname(__FILE__)));
 define('ADHOC_LIB_PATH',            ADHOC_ROOT_PATH . '/models');
 define('ADHOC_ROUTES_FILE',         ADHOC_ROOT_PATH . '/app/routes');
@@ -102,14 +104,10 @@ define('ADHOC_COUNTERS', true);
 define('SMARTY_TEMPLATE_PATH',   ADHOC_ROOT_PATH . '/app/views');
 define('SMARTY_TEMPLATE_C_PATH', ADHOC_ROOT_PATH . '/cache/smarty');
 
-define('FB_FAN_PAGE_ID',        '161908907197840');
-define('FB_ADHOCMUSIC_PAGE_ID', '161908907197840');
-define('FB_ADHOCMUSIC_APP_ID',      '50959607741');
-
 define('GOOGLE_MAPS_API_KEY', 'AIzaSyBVsz6lTrtPcGaGy8-pNNLdmhDIg7Cng24');
 
-// App AD'HOC Music
 define('FB_APP_ID', '50959607741');
+define('FB_PAGE_ID', '161908907197840');
 define('FB_APP_SECRET', 'c2ea0c274c21507404f21688f71f98c1');
 define('FB_APP_ROOT_URL', 'https://apps.facebook.com/adhocmusic');
 define('FB_APP_PAGE_URL', 'https://www.facebook.com/adhocmusic');

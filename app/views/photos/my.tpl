@@ -16,7 +16,7 @@
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-{foreach from=$photos item=photo}
+{foreach $photos as $photo}
 <div class="thumb-80">
   <a href="/photos/edit/{$photo.id}?page={$page}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}"><br>{$photo.name|truncate:15:"...":true:true|escape}</a>
   <a class="overlay-80 overlay-photo-80" href="/photos/edit/{$photo.id}" title="{$photo.name|escape}"></a>

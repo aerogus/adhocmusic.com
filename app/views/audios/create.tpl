@@ -26,7 +26,7 @@
           <div class="error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier cette musique à soit un groupe, soit un lieu, soit un événement</div>
           <select id="id_groupe" name="id_groupe">
             <option value="0">Aucun</option>
-            {foreach from=$groupes item=groupe}
+            {foreach $groupes as $groupe}
             <option value="{$groupe.id}">{$groupe.name|escape}</option>
             {/foreach}
           </select>

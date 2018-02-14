@@ -16,27 +16,10 @@
 class GoogleMaps
 {
     /**
-     * clé pour le domaine www.adhocmusic.com
+     * défini dans config.php
+     * @param string
      */
-    const API_KEY = 'ABQIAAAA7PeOKqwrtUMPRPRF-gLCixTU5RmDj2SoHXiPTLad0-64-2MtShTh1QvrKRs0t2Rj95LauGO9RBqidg';
-
-    /**
-     * version de l'api à utiliser : 2.s|2|2.x
-     */
-    const VERSION = '2.x';
-
-    /**
-     * système avec GPS ?
-     */
-    const SENSOR = 'false';
-
-    /**
-     * retourne le javascript de chargement initial
-     */
-    static function getInitJs()
-    {
-        return 'https://maps.google.com/maps?file=api&amp;v='.self::VERSION.'&amp;sensor='.self::SENSOR.'&amp;key='.self::API_KEY;
-    }
+    const API_KEY = GOOGLE_MAPS_API_KEY;
 
     /**
      * retourne l'url de l'image statique d'une googlemap
@@ -71,7 +54,7 @@ class GoogleMaps
         if (!array_key_exists('icon', $params))
             $params['icon'] = '/img/pin/note.png';
 
-        return 'https://maps.google.com/maps/api/staticmap'
+        return 'https://maps.googleapis.com/maps/api/staticmap'
           . '?center=' . $params['loc']
           . '&zoom=' . $params['zoom']
           . '&size=' . $params['size']
@@ -79,7 +62,8 @@ class GoogleMaps
           . '&mobile=' . $params['mobile']
           . '&format=' . $params['format']
           . '&sensor=' . $params['sensor']
-          . '&markers=' . urlencode('icon:' . $params['icon'] . '|shadow:true|label:Lieu|' . $params['loc']);
+          . '&markers=' . urlencode('icon:' . $params['icon'] . '|shadow:true|label:Lieu|' . $params['loc'])
+          . '&key=' . self::API_KEY;
     }
 
     /**
@@ -97,7 +81,8 @@ class GoogleMaps
         $url  = 'http://maps.googleapis.com/maps/api/geocode/json'
               . '?address=' . urlencode($addr)
               . '&region=fr'
-              . '&sensor=false';
+              . '&key=' . self::API_KEY;
+
         $data = file_get_contents($url);
         $data = json_decode($data);
         if ($data->status == 'OK') {

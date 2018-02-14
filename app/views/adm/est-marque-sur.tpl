@@ -9,7 +9,7 @@
 {include file="common/boxstart.tpl" boxtitle="Taggage des photos"}
 
 {if !empty($nb_photos)}
-{foreach from=$photos item=photo}
+{foreach $photos as $photo}
 <div class="thumb-80">
 <a href="/adm/est-marque-sur/{$photo.id|escape}?page={$page|escape}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}"></a>
 <a class="overlay-80 overlay-photo-80" href="/adm/est-marque-sur/{$photo.id|escape}?page={$page|escape}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}"></a>
@@ -40,7 +40,7 @@
       {section name=cpt_tag loop=5}
       <select name="id_contact_{$smarty.section.cpt_tag.index}" size="1">
         <option value="0">---</option>
-        {foreach from=$membres item=membre}
+        {foreach $membres as $membre}
           <option value="{$membre.id_contact|escape}"{if !empty($tags)} selected="selected" {/if}>{$membre.last_name|escape} {$membre.first_name|escape} ({$membre.pseudo|escape})</option>
         {/foreach}
       </select><br>

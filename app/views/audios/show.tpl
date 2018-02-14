@@ -91,13 +91,13 @@ var audio_url = '{$og_audio.url}';
 
 {if !empty($photos) || !empty($videos)}
 {include file="common/boxstart.tpl" boxtitle="Photos et Vidéos de ce concert" width="700px"}
-{foreach from=$photos item=photo}
+{foreach $photos as $photo}
 <div class="thumb-80 thumb-photo-80">
   <a href="{$photo.url}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}"><br>{$photo.name|truncate:15:"...":true:true|escape}</a>
   <a class="overlay-80 overlay-photo-80" href="{$photo.url}" title="{$photo.name|escape}"></a>
 </div>
 {/foreach}
-{foreach from=$videos item=video}
+{foreach $videos as $video}
 <div class="thumb-80 thumb-video-80">
   <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}"><br>{$video.name|truncate:15:"...":true:true|escape}</a>
   <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}"></a>

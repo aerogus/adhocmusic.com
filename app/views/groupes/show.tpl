@@ -30,7 +30,7 @@
         <p><strong>Dont membres AD'HOC</strong></p>
         {if $membres|@count > 0}
         <ul>
-          {foreach from=$membres item=membre}
+          {foreach $membres as $membre}
           <li><a href="{$membre.url}">{$membre.pseudo|escape}</a> ({$membre.nom_type_musicien|escape})</li>
           {/foreach}
         </ul>
@@ -67,7 +67,7 @@
         <h2>Vidéos</h2>
       </header>
       <div>
-        {foreach from=$videos item=video}
+        {foreach $videos as $video}
         <div class="thumb-80">
           <a href="{$video.url}" title="{$video.name|escape}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}">{$video.name|truncate:15:"...":true:true|escape}</a>
           <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}"></a>
@@ -118,7 +118,7 @@
         <h2>Photos</h2>
       </header>
       <div>
-        {foreach from=$photos item=photo}
+        {foreach $photos as $photo}
         <div class="thumb-80">
           <a href="{$photo.url}" title="{$photo.name|escape}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}">{$photo.name|truncate:15:"...":true:true|escape}</a>
           <a class="overlay-80 overlay-photo-80" href="{$photo.url}" title="{$photo.name|escape}"></a>
@@ -135,7 +135,7 @@
       </header>
       <div>
         <ul>
-          {foreach from=$f_events item=event}
+          {foreach $f_events as $event}
           <li><a href="/events/{$event.id|escape}">{$event.date|date_format:'%d/%m/%Y %H:%M'} - {$event.lieu_name|escape}</a></li>
           {/foreach}
         </ul>
@@ -150,7 +150,7 @@
       </header>
       <div>
         <ul>
-          {foreach from=$p_events item=event}
+          {foreach $p_events as $event}
           <li><a href="/events/{$event.id|escape}">{$event.date|date_format:'%d/%m/%Y %H:%M'} - {$event.lieu_name|escape}</a></li>
           {/foreach}
         </ul>

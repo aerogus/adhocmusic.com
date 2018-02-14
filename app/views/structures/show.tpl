@@ -25,7 +25,7 @@
     <th>Evénements</th>
     <td>
       <ul>
-      {foreach from=$events item=event}
+      {foreach $events as $event}
         <li><a href="{$event.url|escape}">{$event.date|escape} : {$event.name|escape}</a></li>
       {/foreach}
       </ul>

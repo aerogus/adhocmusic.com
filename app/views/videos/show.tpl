@@ -86,7 +86,7 @@
         <h2>Du même concert</h2>
       </header>
       <div>
-        {foreach from=$videos item=vid}
+        {foreach $videos as $vid}
         {if $vid.id != $video->getId()}
         <div class="thumb-80">
           <a href="{$vid.url}"><img src="{$vid.thumb_80_80}" alt="{$vid.name|escape}"><br>{$vid.name|truncate:15:"...":true:true|escape}</a>
@@ -94,7 +94,7 @@
         </div>
         {/if}
         {/foreach}
-        {foreach from=$photos item=pho}
+        {foreach $photos as $pho}
         <div class="thumb-80">
           <a href="{$pho.url}"><img src="{$pho.thumb_80_80}" alt="{$pho.name|escape}"><br>{$pho.name|truncate:15:"...":true:true|escape}</a>
           <a class="overlay-80 overlay-photo-80" href="{$pho.url}" title="{$pho.name|escape}"></a>

@@ -2,7 +2,7 @@
 
 {include file="common/boxstart.tpl" boxtitle="Liste des structures"}
 <ul>
-  {foreach from=$structures item=structure}
+  {foreach $structures as $structure}
   <li><img src="{$structure.picto}" alt=""> <a href="/structures/{$structure.id}">{$structure.name|escape}</a></li>
   {/foreach}
 </ul>

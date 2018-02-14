@@ -173,7 +173,7 @@ class Controller
                 $membre = Membre::getInstance($event->getIdContact());
                 $smarty->assign('membre', $membre);
             } catch (Exception $e) {
-                mail('gus@adhocmusic.com', "[AD'HOC] Bug : evenement " . $event->getId() . " avec membre " . $event->getIdContact() . " introuvable", print_r($e, true));
+                mail(DEBUG_EMAIL, "[AD'HOC] Bug : evenement " . $event->getId() . " avec membre " . $event->getIdContact() . " introuvable", print_r($e, true));
             }
         }
 

@@ -45,8 +45,8 @@ class AdHocSmarty extends Smarty
         $this->assign('HOME_URL', HOME_URL);
         $this->assign('uri', $_SERVER['REQUEST_URI']);
         $this->assign('url', HOME_URL . $_SERVER['REQUEST_URI']);
-        $this->assign('fb_app_id', FB_ADHOCMUSIC_APP_ID);
-        $this->assign('fb_page_id', FB_ADHOCMUSIC_PAGE_ID);
+        $this->assign('fb_app_id', FB_APP_ID);
+        $this->assign('fb_page_id', FB_PAGE_ID);
         $this->assign('fb_login_url', $GLOBALS['fb_login_url']);
 
         if (!empty($_SESSION['membre'])) {

@@ -14,7 +14,7 @@
     <th>Création</th>
     <th>Modification</th>
   </tr>
-  {foreach from=$groupes item=groupe}
+  {foreach $groupes as $groupe}
   <tr>
     <td><a href="/groupes/edit/{$groupe.id}" title="{$groupe.name|escape}"><img src="{$groupe.mini_photo|escape}" alt="{$groupe.name|escape}"><br>{$groupe.name|escape}</a></td>
     <td>{$groupe.nom_type_musicien}</td>

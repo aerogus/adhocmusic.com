@@ -62,7 +62,7 @@
 <h3>Agenda</h3>
 {if !empty($events_f)}
 <ul>
-{foreach from=$events_f item=event}
+{foreach $events_f as $event}
 <li>{if $event.structure_id}<img src="{$event.structure_picto}" alt="" title="Organisé par {$event.structure_name|escape}">{/if}<a href="{$event.url}">Le {$event.date|date_format:"%d/%m/%Y %H:%M"} - {$event.name|escape}</a></li>
 {/foreach}
 </ul>

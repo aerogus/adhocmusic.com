@@ -307,7 +307,7 @@ class Controller
         $request_body = file_get_contents('php://input');
         $data = json_decode($request_body);
 
-        mail('gus@adhocmusic.com', 'webhook', print_r($data, true));
+        mail(DEBUG_MAIL, 'webhook', print_r($data, true));
 
         return (string) $challenge;
     }

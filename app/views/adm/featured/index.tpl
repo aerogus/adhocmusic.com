@@ -41,7 +41,7 @@
         </tr>
       </thead>
       <tbody>
-      {foreach from=$featured_admin item=f}
+      {foreach $featured_admin as $f}
         <tr class="{$f.class}">
           <td><a href="/adm/featured/edit/{$f.id}">{$f.title}<br>{$f.description}</a></td>
           <td><img src="{$f.image}" width="108" height="60" alt="" style="display: block" /></td>

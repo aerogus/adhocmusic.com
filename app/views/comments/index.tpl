@@ -18,7 +18,7 @@
     </tr>
   </thead>
   <tbody>
-  {foreach from=$comments item=comment}
+  {foreach $comments as $comment}
     <tr id="row-{$comment.id}">
       <td><input type="checkbox" id="com-del-{$comment.id}"></td>
       <td><a href="/comments/show/{$comment.id}">{$comment.id}</a></td>

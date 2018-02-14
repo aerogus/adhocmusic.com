@@ -31,7 +31,7 @@ foreach (glob($path . "*.jpg") as $filename)
     $cpt_files++;
     $filename = str_replace($path, "", $filename);
     $id = (int) str_replace(".jpg", "", $filename);
-    if(!in_array($id, $contacts)) {
+    if (!in_array($id, $contacts)) {
         echo "Avatar inutile (compte effacé) : " . $id . "\n";
         // purge ?
         //unlink($path . $id . ".jpg");
@@ -57,7 +57,7 @@ foreach (glob($path . "*.jpg") as $filename)
     $cpt_files++;
     $filename = str_replace($path, "", $filename);
     $id = (int) str_replace(".jpg", "", $filename);
-    if(!in_array($id, $membres)) {
+    if (!in_array($id, $membres)) {
         echo "Avatar interne inutile (compte effacé) : " . $id . "\n";
         // purge ?
         //unlink($path . $id . ".jpg");
@@ -76,14 +76,14 @@ $groupes = $db->queryWithFetchFirstFields($sql);
 // on parcourt le répertoire des images à la recherche des obsolètes
 $path = MEDIA_PATH . "/groupe/";
 
-$prefix = array("b","l","m","p");
+$prefix = ["b", "l", "m", "p"];
 
-foreach($prefix as $pre) {
+foreach ($prefix as $pre) {
     foreach (glob($path . $pre ."*") as $filename)
     {
         $filename = str_replace($pre, "", basename($filename));
         $res = preg_split('/\./', $filename);
-        if(!in_array((int) $res[0], $groupes)) {
+        if (!in_array((int) $res[0], $groupes)) {
             echo "images " . $pre . " groupes obsolètes pour id " . $res[0] . " (".$res[1]." trouvé)\n";
         }
     }
@@ -102,7 +102,7 @@ foreach (glob($path . "*") as $filename)
 {
     $filename = basename($filename);
     $res = preg_split('/\./', $filename);
-    if(!in_array((int) $res[0], $audios)) {
+    if (!in_array((int) $res[0], $audios)) {
         echo "mp3 obsolète pour id " . $res[0] . "\n";
     }
 }
@@ -120,7 +120,7 @@ foreach (glob($path . "*.jpg") as $filename)
 {
     $filename = basename($filename);
     $res = preg_split('/\./', $filename);
-    if(!in_array((int) $res[0], $videos)) {
+    if (!in_array((int) $res[0], $videos)) {
         echo "vignette vidéo obsolète pour id " . $res[0] . "\n";
     }
 }
@@ -138,7 +138,7 @@ foreach (glob($path . "*.jpg") as $filename)
 {
     $filename = basename($filename);
     $res = preg_split('/\./', $filename);
-    if(!in_array((int) $res[0], $events)) {
+    if (!in_array((int) $res[0], $events)) {
         echo "flyer événement obsolète pour id " . $res[0] . "\n";
     }
 }

@@ -29,15 +29,15 @@ class DataBase
     /**
      *
      */
-    protected static $_connections_params = array(
-           DB_ADHOC_DEFAULT => array(
+    protected static $_connections_params = [
+        DB_ADHOC_DEFAULT => [
             'hasMaintenance' => false,
             'db_host'        => _DB_HOST_,
             'db_login'       => _DB_USER_,
             'db_pass'        => _DB_PASSWORD_,
             'db_database'    => _DB_DATABASE_,
-           ),
-    );
+        ],
+    ];
 
     /**
      * conteneur de l'instance courante
@@ -534,7 +534,7 @@ class DataBase
             return mysqli_real_escape_string($this->_current_conn[$conn_key], $string);
         } else {
             // throw Exception plutot
-            mail('gus@adhocmusic.com', 'debug', 'NO LINK ???' . print_r($_SERVER, true));
+            mail(DEBUG_MAIL, 'debug', 'NO LINK ???' . print_r($_SERVER, true));
         }
 
         return mysqli_escape_string($string);

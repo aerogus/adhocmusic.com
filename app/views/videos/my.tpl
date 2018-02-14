@@ -8,7 +8,7 @@
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-{foreach from=$videos item=video}
+{foreach $videos as $video}
 <div class="video-list" style="margin: 10px; background-color: #ececec;">
 <a href="/videos/edit/{$video.id}"><img src="{$video.thumb_80_80}" style="float: left; margin-right: 10px;"/></a>
 <img src="/img/icones/signature.png"> <a href="/videos/edit/{$video.id}"><strong>{$video.name|escape}</strong></a><br>

@@ -83,7 +83,7 @@
       <h5>Groupes</h5>
       {if !empty($alerting_groupes)}
       <ul>
-        {foreach from=$alerting_groupes item=groupe}
+        {foreach $alerting_groupes as $groupe}
         <li><a href="/groupes/{$groupe.id_groupe}">{$groupe.name}</a></li>
         {/foreach}
       </ul>
@@ -93,7 +93,7 @@
       <h5>Agenda</h5>
       {if !empty($alerting_events)}
       <ul>
-      {foreach from=$alerting_events item=event}
+      {foreach $alerting_events as $event}
         <li><a href="/events/{$event.id_event}">{$event.name}</a></li>
       {/foreach}
       </ul>
@@ -103,7 +103,7 @@
       <h5>Lieux</h5>
       {if !empty($alerting_lieux)}
       <ul>
-      {foreach from=$alerting_lieux item=lieu}
+      {foreach $alerting_lieux as $lieu}
         <li><a href="/lieux/{$lieu.id_lieu}">{$lieu.name}</a></li>
       {/foreach}
       </ul>
@@ -128,7 +128,7 @@
           <th>Créé le</th>
           <th>Modifié le</th>
         </tr>
-        {foreach from=$groupes item=groupe}
+        {foreach $groupes as $groupe}
         <tr>
           <td><a href="/groupes/edit/{$groupe.id}" title="{$groupe.name|escape}">{$groupe.name|escape}</a></td>
           <td>{$groupe.nom_type_musicien}</td>
@@ -155,7 +155,7 @@
       <p>Aucune photo</p>
       {else}
       <p>Vous avez {$nb_photos} photos</p>
-      {foreach from=$photos item=photo}
+      {foreach $photos as $photo}
       <div class="thumb-80">
         <a href="/photos/edit/{$photo.id}?page={$page}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}"><br>{$photo.name|truncate:15:"...":true:true|escape}</a>
         <a class="overlay-80 overlay-photo-80" href="/photos/edit/{$photo.id}" title="{$photo.name|escape}"></a>
@@ -176,7 +176,7 @@
       <p>Aucune vidéo</p>
       {else}
       <p>Vous avez {$nb_videos} vidéos</p>
-      {foreach from=$videos item=video}
+      {foreach $videos as $video}
       <div class="thumb-80">
         <a href="/videos/edit/{$video.id}?page={$page}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}"><br>{$video.name|truncate:15:"...":true:true|escape}</a>
         <a class="overlay-80 overlay-video-80" href="/videos/edit/{$video.id}" title="{$video.name|escape}"></a>
@@ -206,7 +206,7 @@
             <th>Modifié le</th>
           </tr>
         </thead>
-        {foreach from=$audios item=audio}
+        {foreach $audios as $audio}
         <tbody>
           <tr>
             <td>{$audio.groupe_name|escape}</td>

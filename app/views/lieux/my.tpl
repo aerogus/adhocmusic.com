@@ -24,7 +24,7 @@ $(function () {
     </tr>
   </thead>
   <tbody>
-    {foreach from=$lieux item=lieu}
+    {foreach $lieux as $lieu}
     <tr>
       <td><a href="#" title="{$lieu.country|escape}">{$lieu.id_country}</a></td>
       <td><a href="#" title="{$lieu.region|escape}">{$lieu.id_region}</a></td>
