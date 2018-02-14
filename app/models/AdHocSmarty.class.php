@@ -7,6 +7,7 @@ class AdHocSmarty extends Smarty
 {
     protected static $pseudos = [];
     protected static $avatars = [];
+    protected static $js_vars = [];
 
     /**
      *
@@ -504,7 +505,7 @@ class AdHocSmarty extends Smarty
     {
         // à échapper !
         $this->append('js_vars', 'var ' . $key . ' = ' . $val . ';');
-//        $this->append('js_vars_arr', [$key => $val]);
+        $this->append('js_vars2', [$key => $val]);
     }
 
     /**

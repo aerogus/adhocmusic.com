@@ -39,12 +39,8 @@
 </script>
 {/if}
 
-{if $js_vars_arr && false}
-<script>
-{foreach $js_vars_arr as $js_var}
-var {$js_var@key} = {$js_var};
-{/foreach}
-</script>
+{if $js_vars2}
+var adhoc_js_var = {$js_var2|json_encode}
 {/if}
 
 {foreach $footer_scripts as $script_url}
