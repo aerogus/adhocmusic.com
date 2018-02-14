@@ -39,9 +39,11 @@
 </script>
 {/if}
 
-{if $js_vars2}
-var adhoc_js_var = {$js_var2|json_encode}
+<script>
+{if $script_vars}
+var asv = {$script_vars|json_encode_numeric_check nofilter}
 {/if}
+</script>
 
 {foreach $footer_scripts as $script_url}
 <script src="{$script_url}"></script>

@@ -1,8 +1,8 @@
-/*globals lieu_lat, lieu_lng, lieu_name */
+/*globals asv */
 
 function adhocLieuInitMap()
 {
-  var center = new google.maps.LatLng({lat: lieu_lat, lng: lieu_lng});
+  var center = new google.maps.LatLng({lat: asv.lieu.lat, lng: asv.lieu.lng});
   var map = new google.maps.Map(document.getElementById("map_canvas"), {
     zoom: 15,
     center: center,
@@ -18,6 +18,6 @@ function adhocLieuInitMap()
     position: center,
     map: map,
     icon: image,
-    title: lieu_name
+    title: asv.lieu.name
   });
 };

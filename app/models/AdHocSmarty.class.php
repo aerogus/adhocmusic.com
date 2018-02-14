@@ -7,7 +7,7 @@ class AdHocSmarty extends Smarty
 {
     protected static $pseudos = [];
     protected static $avatars = [];
-    protected static $js_vars = [];
+    protected $script_vars = [];
 
     /**
      *
@@ -37,6 +37,7 @@ class AdHocSmarty extends Smarty
         $this->registerPlugin('modifier', 'pseudo_by_id', array('AdHocSmarty', 'modifier_pseudo_by_id'));
         $this->registerPlugin('modifier', 'avatar_by_id', array('AdHocSmarty', 'modifier_avatar_by_id'));
         $this->registerPlugin('modifier', 'display_on_off_icon', array('AdHocSmarty', 'modifier_display_on_off_icon'));
+        $this->registerPlugin('modifier', 'json_encode_numeric_check', array('AdHocSmarty', 'modifier_json_encode_numeric_check'));
 
         // assignations générales
         $this->assign('title', "♫ AD'HOC : Les Musiques Actuelles");
@@ -468,6 +469,14 @@ class AdHocSmarty extends Smarty
         return '<img src="/img/icones/' . $icon . '" alt="">';
     }
 
+    /**
+     * @param mixed $val
+     */
+    static function modifier_json_encode_numeric_check($val)
+    {
+        return json_encode($val, JSON_NUMERIC_CHECK);
+    }
+
     /* fin modifiers */
 
     /**
@@ -501,11 +510,10 @@ class AdHocSmarty extends Smarty
      * @param string $key
      * @param string $val
      */
-    function set_js_var($key, $val)
+    function enqueue_script_var($key, $val)
     {
-        // à échapper !
-        $this->append('js_vars', 'var ' . $key . ' = ' . $val . ';');
-        $this->append('js_vars2', [$key => $val]);
+        $this->script_vars[$key] = $val;
+        $this->assign('script_vars', $this->script_vars);
     }
 
     /**

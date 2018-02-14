@@ -31,7 +31,6 @@
     est qu'on peut monter un lecteur réseau (nativement sous MacOSX ou Linux, avec <a href="http://www.netdrive.net">NetDrive sous Windows)</a></p>
     <ul class="admlinks">
       <li><a href="ftp://adhoc:squallpowa@ftp.adhocmusic.com">Listing FTP</a></li>
-      <li><a href="https://trac.adhocmusic.com">Trac</a></li>
     </ul>
   </div>
 </div>
