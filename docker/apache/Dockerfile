@@ -1,5 +1,5 @@
-FROM httpd:2.4.25
-MAINTAINER Guillaume Seznec <guillaume@seznec.fr>
+FROM httpd:2.4.29
+LABEL maintainer="guillaume@seznec.fr"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TIMEZONE Europe/Paris

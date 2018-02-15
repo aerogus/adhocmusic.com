@@ -12,6 +12,9 @@ bower_components
 # gestionnaire de paquets back-end avec autoloader
 vendor
 
+# tous les contenus utilisateur (audio, video, photo...) ici
+static
+
 # cache smarty, images ...
 cache
 

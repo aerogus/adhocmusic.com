@@ -2,35 +2,53 @@
 # Environnement de développement du site adhocmusic.com
 ##
 
-version: '2'
+version: '3'
 
 services:
 
-  apache:
-    build: ./conf/apache2
-    hostname: www
-    container_name: adhocmusic_apache
-    restart: always
-    networks:
-     adhocmusic:
-       aliases:
-         - adhocmusic.dev
-         - www.adhocmusic.dev
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - .:/var/www/adhocmusic.com:ro
-      - ./conf/apache2:/usr/local/apache2/conf:ro
-      - ./log/apache2:/var/log/apache2
+  # apache:
+  #   build: ./docker/apache
+  #   #image:
+  #   hostname: www
+  #   container_name: adhocmusic_apache
+  #   restart: always
+  #   networks:
+  #    adhocmusic:
+  #      aliases:
+  #        - adhocmusic.dev
+  #        - www.adhocmusic.dev
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   volumes:
+  #     - .:/var/www/adhocmusic.com:ro
+  #     - ./log/apache:/var/log/apache2
+
+  # static:
+  #   build: ./docker/static
+  #   #image:
+  #   hostname: static
+  #   container_name: adhocmusic_static
+  #   restart: always
+  #   networks:
+  #    adhocmusic:
+  #      aliases:
+  #        - static.adhocmusic.dev
+  #   ports:
+  #     - 82:80
+  #     - 445:443
+  #   volumes:
+  #     - ./static:/var/www/html:ro
+  #     - ./log/static:/var/log/apache2
 
   php:
-    build: ./conf/php
+    build: ./docker/php
+    #image:
     hostname: php
     container_name: adhocmusic_php
     restart: always
     networks:
-      ouifmfr:
+      adhocmusic:
         aliases:
           - php.adhocmusic.dev
     depends_on:
@@ -40,7 +58,8 @@ services:
        - ./log/php:/var/log/php
 
   mysql:
-    build: ./conf/mysql
+    build: ./docker/mysql
+    #image:
     hostname: mysql
     container_name: adhocmusic_mysql
     restart: always
@@ -49,7 +68,7 @@ services:
         aliases:
           - mysql.adhocmusic.dev
     volumes:
-      - ./conf/mysql/initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d:ro
       - ./log/mysql:/var/log/mysql
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 1
@@ -58,12 +77,13 @@ services:
       MYSQL_PASSWORD: changeme
 
   pma:
+    #build: ./docker/pma
     image: phpmyadmin/phpmyadmin
     hostname: pma
     container_name: adhocmusic_pma
     restart: always
     networks:
-      ouifmfr:
+      adhocmusic:
         aliases:
           - pma.adhocmusic.dev
     ports:

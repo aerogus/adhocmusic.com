@@ -1,2 +1,2 @@
-FROM mysql:5.7.21
+FROM phpymadmin:4.7.7
 LABEL maintainer="guillaume@seznec.fr"
