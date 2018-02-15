@@ -91,7 +91,7 @@ class Controller
                     $membre = Membre::getInstance($photo->getIdContact());
                     $smarty->assign('membre', $membre);
                 } catch (Exception $e) {
-                    mail(DEBUG_MAIL, "[AD'HOC] Bug : photo avec membre introuvable", print_r($e, true));
+                    mail(DEBUG_EMAIL, "[AD'HOC] Bug : photo avec membre introuvable", print_r($e, true));
                 }
             }
 

@@ -534,7 +534,7 @@ class DataBase
             return mysqli_real_escape_string($this->_current_conn[$conn_key], $string);
         } else {
             // throw Exception plutot
-            mail(DEBUG_MAIL, 'debug', 'NO LINK ???' . print_r($_SERVER, true));
+            mail(DEBUG_EMAIL, 'debug', 'NO LINK ???' . print_r($_SERVER, true));
         }
 
         return mysqli_escape_string($string);

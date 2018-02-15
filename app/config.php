@@ -86,7 +86,7 @@ if (ENV === 'PROD') {
 
 }
 
-define('DEBUG_MAIL', 'guillaume@seznec.fr');
+define('DEBUG_EMAIL', 'guillaume@seznec.fr');
 
 define('ADHOC_ROOT_PATH',           dirname(dirname(__FILE__)));
 define('ADHOC_LIB_PATH',            ADHOC_ROOT_PATH . '/models');
