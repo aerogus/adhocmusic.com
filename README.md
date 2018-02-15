@@ -58,3 +58,11 @@ mkdir media media/audio media/photo media/video && chmod 777 media/*
 ```
 Lieu::mysql_init_geo();
 ```
+
+
+Versions de prod :
+
+MySQL Server 5.7.21
+PHP 7.2.2
+Apache 2.4.29
+PhpMyAdmin 4.7.7
