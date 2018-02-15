@@ -1,5 +1,5 @@
 FROM php:7.2-fpm
-MAINTAINER Guillaume Seznec <guillaume@seznec.fr>
+LABEL maintainer="guillaume@seznec.fr"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TIMEZONE Europe/Paris
@@ -9,7 +9,6 @@ ENV TIMEZONE Europe/Paris
 RUN apt-get update \
   && apt-get upgrade -y \
   && apt-get install -y locales \
-  && apt-get install -y libpng12-dev \
   && docker-php-ext-install gettext \
   && docker-php-ext-install mysqli \
   && docker-php-ext-install gd \
