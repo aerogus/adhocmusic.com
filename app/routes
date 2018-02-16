@@ -202,10 +202,6 @@
 1|photos|delete|POST|/photos/delete
 1|photos|from_iphone|POST|/photos/from-iphone
 1|photos|show|GET|/photos/:id
-1|search|search|GET|/search/
-1|search|search|POST|/search
-1|search|index|GET|/search/:query
-1|search|autocomplete|GET|/search/autocomplete/:type/:query
 1|structures|index|GET|/structures/
 1|structures|create|GET|/structures/create
 1|structures|create|POST|/structures/create
