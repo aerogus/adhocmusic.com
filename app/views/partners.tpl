@@ -9,13 +9,13 @@
       <li>
         <a href="http://www.ouifm.fr">
           <img src="/img/partners/ouifm.png" alt="">
-          <strong>OÜI FM</strong><br>La Radio Rock Pop Soul
+          <strong>OÜI FM</strong><br>La Radio du Rock
         </a>
       </li>
       <li>
         <a href="http://www.ville-epinay-sur-orge.fr">
           <img src="/img/partners/epinay-sur-orge.png" alt="">
-          <strong>Epinay sur Orge</strong><br>Mairie d'Epinay sur Orge
+          <strong>Épinay-sur-Orge</strong><br>Mairie d'Épinay-sur-Orge
         </a>
       </li>
       <li>
@@ -27,7 +27,7 @@
       <li>
         <a href="http://www.essonne.fr">
           <img src="/img/partners/essonne.png" alt="">
-          <strong>Essonne</strong><br>Le conseil général de l'Essonne
+          <strong>Essonne</strong><br>Le département
         </a>
       </li>
       <li>
@@ -55,13 +55,7 @@
         </a>
       </li>
       <li>
-        <a href="http://www.zanzibart.com">
-          <img src="/img/partners/zanzibart.png" alt="">
-          <strong>Zanzibart</strong><br>Communauté d'artistes - des artistes des lieux des dates
-        </a>
-      </li>
-      <li>
-        <a href="http://libellulerock.perso.sfr.fr/news.html">
+        <a href="http://www.lecridelalibellule.fr">
           <img src="/img/partners/cridelalibellule.png" alt="">
           <strong>Le Cri de la Libellule</strong><br>Association musicale de Saint-Michel sur Orge
         </a>
