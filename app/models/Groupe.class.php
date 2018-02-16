@@ -1087,11 +1087,9 @@ class Groupe extends ObjectModel
      * @param id_type_musicien
      * @return bool
      */
-    function linkMember($id_contact, $id_type_musicien = 0, $datdeb = NULL, $datfin = NULL)
+    function linkMember($id_contact, $id_type_musicien = 0)
     {
         // le groupe existe-t-il bien ?
-
-        // @todo check datdeb et datfin
 
         // l'id_contact est il valide ?
         if (($mbr = Membre::getInstance($id_contact)) === false) {
@@ -1103,16 +1101,9 @@ class Groupe extends ObjectModel
         // tout est ok, on insère dans appartient_a
         $db = DataBase::getInstance();
 
-        $datdeb = is_null($datdeb) ? 'NULL' : "'" . $db->escape($datdeb) . "'";
-        $datfin = is_null($datfin) ? 'NULL' : "'" . $db->escape($datfin) . "'";
-
         $sql = "INSERT INTO `" . self::$_db_table_appartient_a . "` "
-             . "(`id_groupe`, `id_contact`, "
-             . "`id_type_musicien`, `datdeb`, `datfin`, "
-             . "`adm`) "
-             . "VALUES(" . (int) $this->getId() . ", " . (int) $id_contact . ", "
-             . (int) $id_type_musicien . ", " . $datdeb . ", " . $datfin . ", "
-             . "TRUE)";
+             . "(`id_groupe`, `id_contact`, `id_type_musicien` "
+             . "VALUES(" . (int) $this->getId() . ", " . (int) $id_contact . ", " . (int) $id_type_musicien . ")";
 
         $db->query($sql);
 
@@ -1225,7 +1216,7 @@ class Groupe extends ObjectModel
         $sql = "SELECT `m`.`id_contact` AS `id`, `c`.`email`, `m`.`last_name`, `m`.`first_name`, `m`.`pseudo`, "
              . "`m`.`facebook_profile_id`, `c`.`email`, `m`.`created_on`, "
              . "`m`.`modified_on`, `m`.`visited_on`, `m`.`text`, `m`.`site`, "
-             . "`a`.`id_groupe`, `a`.`id_type_musicien`, `a`.`datdeb`, `a`.`datfin` "
+             . "`a`.`id_groupe`, `a`.`id_type_musicien` "
              . "FROM `" . self::$_db_table_membre . "` `m`, `" . self::$_db_table_contact . "` `c`, `" . self::$_db_table_appartient_a . "` `a` "
              . "WHERE `m`.`id_contact` = `a`.`id_contact` "
              . "AND `m`.`id_contact` = `c`.`id_contact` "
@@ -1339,10 +1330,9 @@ class Groupe extends ObjectModel
         $sql = "SELECT `g`.`id_groupe` AS `id`, `g`.`alias`, "
              . "`g`.`created_on`, UNIX_TIMESTAMP(`g`.`created_on`) AS `created_on_ts`, "
              . "`g`.`modified_on`, UNIX_TIMESTAMP(`g`.`modified_on`) AS `modified_on_ts`, "
-             . "`g`.`name`, `a`.`adm`, `a`.`id_type_musicien` "
+             . "`g`.`name`, `a`.`id_type_musicien` "
              . "FROM `" . self::$_db_table_groupe . "` `g`, `" . self::$_db_table_appartient_a . "` `a` "
              . "WHERE `g`.`id_groupe` = `a`.`id_groupe` "
-             . "AND `a`.`adm` "
              . "AND `a`.`id_contact` = " . (int) $_SESSION['membre']->getId();
 
         $res = $db->queryWithFetch($sql);

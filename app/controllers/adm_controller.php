@@ -936,8 +936,6 @@ class Controller
         $id_groupe = (int) Route::params('groupe');
         $id_contact = (int) Route::params('membre');
         $id_type_musicien = (int) Route::params('type');
-        $datdeb = (string) Route::params('datdeb');
-        $datfin = (string) Route::params('datfin');
 
         $smarty = new AdHocSmarty();
 
@@ -953,14 +951,14 @@ class Controller
             switch ($action)
             {
                 case 'create':
-                    $groupe->linkMember($id_contact, $id_type_musicien, $datdeb, $datfin);
+                    $groupe->linkMember($id_contact, $id_type_musicien);
                     break;
                 case 'delete':
                     $groupe->unlinkMember($id_contact);
                     break;
                 case 'edit':
                     $groupe->unlinkMember($id_contact);
-                    $groupe->linkMember($id_contact, $id_type_musicien, $datdeb, $datfin);
+                    $groupe->linkMember($id_contact, $id_type_musicien);
                     break;
             }
 
