@@ -13,6 +13,7 @@
       <li><a href="/mentions-legales">Mentions Légales</a></li>
       <li><a href="/partners">Partenaires</a></li>
       <li><a href="/visuels">Visuels</a></li>
+      <li><a href="/shop">Boutique</a></li>
     </ul>
   </li>
   <li>
@@ -31,17 +32,9 @@
   </li>
   <li>
     <a href="/events/" accesskey="3" title="Agenda Culturel">Agenda</a>
-    <ul>
-      <li><a href="/events/create">Annoncer une date</a></li>
-    </ul>
   </li>
   <li>
     <a href="/medias/" accesskey="4" title="Média">Média</a>
-    <ul>
-      <li><a href="/audios/create">Ajouter un son</a></li>
-      <li><a href="/photos/create">Ajouter une photo</a></li>
-      <li><a href="/videos/create">Ajouter une vidéo</a></li>
-    </ul>
   </li>
   <li>
     <a href="/contact" accesskey="5" title="Contact">Contact</a>

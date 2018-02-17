@@ -73,18 +73,20 @@
     </div>
   </div>
   {/if}
-</div>
+</div>{* event *}
 {/foreach}
-</div>
+</div>{* events_of_the_day *}
 {/foreach}
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
+</div>{* .box-content *}
 </div>{* .box *}
-</div>{* .grid-2-1 *}
 
 <div class="one-third">
 {calendar year=$year month=$month day=$day}
 </div>
+
+</div>{* .grid-2-1 *}
 
 {include file="common/footer.tpl"}

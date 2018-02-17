@@ -120,7 +120,7 @@
       <div>
         {foreach $photos as $photo}
         <div class="thumb-80">
-          <a href="{$photo.url}" title="{$photo.name|escape}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}">{$photo.name|truncate:15:"...":true:true|escape}</a>
+          <a href="{$photo.url}" title="{$photo.name|escape}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}" style="display:block"></a>
           <a class="overlay-80 overlay-photo-80" href="{$photo.url}" title="{$photo.name|escape}"></a>
         </div>
         {/foreach}
