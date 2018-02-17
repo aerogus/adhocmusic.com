@@ -29,16 +29,6 @@ class Controller
 
         $smarty->assign('groupes', $membre->getGroupes());
 
-        $ids_photo = Membre::getTaggedPhotos($membre->getId());
-        if (mb_strlen($ids_photo) > 0) {
-            $smarty->assign('photos', Photo::getPhotos([
-                'online' => true,
-                'sort'   => 'random',
-                'limit'  => 500,
-                'id'     => $ids_photo,
-            ]));
-        }
-
         return $smarty->fetch('membres/show.tpl');
     }
 

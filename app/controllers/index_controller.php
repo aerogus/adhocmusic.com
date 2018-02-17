@@ -31,9 +31,7 @@ class Controller
             'sort'        => 'date',
             'sens'        => 'ASC',
             'limit'       => 30,
-            'departement' => '91,92,93,94,95,75,78',
             'datdeb'      => date('Y-m-d'),
-            'fetch_fb'    => false,
         ]);
 
         // tri par mois

@@ -258,8 +258,6 @@ class Controller
             'B' => "Nombre de lieux par département",
             'C' => "Nombre de lieux par région",
             'D' => "Top Visites Groupes",
-            'F' => "Membres les plus taggés",
-            'G' => "Membres les plus taggeurs",
             'H' => "Domaines Emails",
             'I' => "Nombre d'événements annoncés par mois",
             'J' => "Répartition des vidéos par hébergeur",
@@ -290,8 +288,6 @@ class Controller
             case 'B': $module = Stats::getNbLieuxByDepartement(); break;
             case 'C': $module = Stats::getNbLieuxByRegion(); break;
             case 'D': $module = Stats::getTopVisitesGroupes(); break;
-            case 'F': $module = Stats::getTopTagges(200); break;
-            case 'G': $module = Stats::getTopTaggeurs(200); break;
             case 'H': $module = Stats::getEmailsForDomaine($domaine); break;
             case 'H': $module = Stats::getEmailsDomaines(); break;
             case 'I': $module = Stats::getNbEventsByMonth(); break;
@@ -664,111 +660,6 @@ class Controller
         $smarty->assign('actions', Log::getActions());
         $smarty->assign('logs', Log::getLogsAction($action));
         return $smarty->fetch('adm/log-action.tpl');
-    }
-
-    static function est_marque_sur()
-    {
-        Tools::auth(Membre::TYPE_INTERNE);
-
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Taggage des photos");
-
-        $page = (int) Route::params('page');
-        $tag = (string) Route::params('tag');
-
-        $photos = Photo::getPhotos([
-            'limit' => ADM_TAG_NB_PHOTOS_PER_PAGE,
-            'debut' => $page * ADM_TAG_NB_PHOTOS_PER_PAGE,
-            'sort'  => 'id',
-            'sens'  => 'DESC',
-        ]);
-
-        $nb_photos = count($photos);
-
-        if ($nb_photos) {
-            foreach ($photos as $key => $photo) {
-                if (is_array($photo['tag']) && count($photo['tag'])) {
-                    $photos[$key]['bgcolor'] = '#00ff00';
-                    $photos[$key]['nb_tags'] = count($photo['tag']);
-                    if ($photos[$key]['nb_tags'] > 1) {
-                        $photos[$key]['nb_tags_lib'] = $photos[$key]['nb_tags'] . ' tags';
-                    } else {
-                        $photos[$key]['nb_tags_lib'] = '1 tag';
-                    }
-                } else {
-                    $photos[$key]['bgcolor'] = '#ff0000';
-                    $photos[$key]['nb_tags'] = 0;
-                    $photos[$key]['nb_tags_lib'] = '0 tag';
-                }
-            }
-        }
-
-        $smarty = new AdHocSmarty();
-        $smarty->assign('photos', $photos);
-        $smarty->assign('nb_photos', $nb_photos);
-        $smarty->assign('page', $page);
-        $smarty->assign('show_list', true);
-
-        if ($tag == 'ok') {
-            $smarty->assign('tag_ok', true);
-        }
-
-        return $smarty->fetch('adm/est-marque-sur.tpl');
-    }
-
-    static function est_marque_sur_id()
-    {
-        Tools::auth(Membre::TYPE_INTERNE);
-
-        $id = (int) Route::params('id');
-        $page = (int) Route::params('page');
-
-        $photo = Photo::getInstance($id);
-
-        // listing membre
-        $db = DataBase::getInstance();
-        $sql = "SELECT `id_contact`, `last_name`, `first_name`, `pseudo` "
-             . "FROM `adhoc_membre` "
-             . "ORDER BY `last_name` ASC, `first_name` ASC, `pseudo` ASC";
-        $membres = $db->queryWithFetch($sql);
-
-        $smarty = new AdHocSmarty();
-        $smarty->assign('page', $page);
-        $smarty->assign('photo', $photo);
-        $smarty->assign('show_photo', true);
-        $smarty->assign('membres', $membres);
-        $smarty->assign('nb_tags_per_photo', ADM_TAG_NB_TAGS_PER_PHOTO);
-        $smarty->assign('tags', $photo->getTag());
-        return $smarty->fetch('adm/est-marque-sur.tpl');
-    }
-
-    static function est_marque_sur_submit()
-    {
-        Tools::auth(Membre::TYPE_INTERNE);
-
-        $page = (int) Route::params('page');
-        $id_photo = (int) Route::params('id_photo');
-
-        // purge tags
-        $db = DataBase::getInstance();
-        $sql = "DELETE FROM `adhoc_est_marque_sur` "
-             . "WHERE `id_type_media` = " . (int) ObjectModel::TYPE_MEDIA_PHOTO . " "
-             . "AND `id_media` = " . (int) $id_photo;
-        $db->query($sql);
-
-        // insert tags
-        for ($cpt = 0 ; $cpt < ADM_TAG_NB_TAGS_PER_PHOTO ; $cpt++) {
-            $var = 'id_contact_' . $cpt;
-            if ($_POST[$var] != 0) {
-                $sql = "INSERT IGNORE INTO `adhoc_est_marque_sur` "
-                     . "(`id_media`, `id_type_media`, `id_contact`, `tagge_par`, `date`) "
-                     . "VALUES(" . (int) $id_photo . ", " . (int) ObjectModel::TYPE_MEDIA_PHOTO . ", " . (int) $_POST[$var] . ", " . (int) $_SESSION['membre']->getId() . ", NOW())";
-                $db->query($sql);
-            }
-        }
-
-        Tools::redirect('/adm/est-marque-sur?page=' . $page . '&tag=ok');
     }
 
     static function delete_account()
