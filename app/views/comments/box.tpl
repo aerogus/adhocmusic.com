@@ -35,7 +35,7 @@
     </li>
     {else}
     <li>
-      <p>Vous pouvez <a href="/auth/login">vous identifier</a> pour poster ce commentaire. <a href="/membres/create">Pas encore de compte ?</a></p>
+      <p><a href="/auth/login">Identifiez-vous</a> pour poster un commentaire. <a href="/membres/create">Pas encore de compte ?</a></p>
     </li>
     <li>
       <div class="error" id="error_pseudo"{if empty($error_pseudo)} style="display: none"{/if}>Vous devez écrire votre pseudonyme.</div>

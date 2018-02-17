@@ -5,5 +5,4 @@
 <ul class="social-share-box">
   <li><a href="https://www.facebook.com/sharer/sharer.php?u={$url|escape}" class="facebook">Facebook</a></li>
   <li><a href="http://twitter.com/home?status={$url|escape}%20via%20@adhocmusic" class="twitter">Twitter</a></li>
-  <li><a href="https://plus.google.com/share?url={$url|escape}" class="googleplus">Google+</a></li>
 </ul>
