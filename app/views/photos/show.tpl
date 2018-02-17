@@ -6,7 +6,7 @@
 
 {else}
 
-<div id="grid-3-tiny-2-small-1 has-gutter-l">
+<div class="grid-2-small-1 has-gutter-l">
 
 <div class="one-third">
 
@@ -66,48 +66,6 @@
 <a name="p"></a>
 
 {include file="common/boxstart.tpl" boxtitle2=$photo->getName()|escape}
-
-<script>
-$(function() {
-
-  $("#photofull").noContext();
-
-  {if !empty($prev) && !empty($next) && true}
-  $(document).keydown(function(e) {
-    if (e.keyCode == 37) {
-       window.location = '{$prev}#p';
-       e.preventDefault();
-    }
-    if (e.keyCode == 39) {
-       window.location = '{$next}#p';
-       e.preventDefault();
-    }
-  });
-  {/if}
-
-  {if empty($live_edit)}
-  var self = $("#pname");
-  self.value = self.text();
-  self.bind('click', function() {
-    self
-      .html('<input style="width: 300px; font-size: 9px;" type="text" value="' + self.value + '">')
-      .find('input')
-      .bind('blur', function(event) {
-        self.value = $(this).val();
-        self.text(self.value);
-        $.post('/photos/ajax_update', {
-          id: {$photo->getId()},
-          name: self.value
-        }, function(data) {
-          //alert(data);
-        });
-      })
-      .focus();
-  });
-  {/if}
-
-});
-</script>
 
 <p align="center" id="photofull" class="photofull">
 {if !empty($next)}<a href="{$next}">{/if}

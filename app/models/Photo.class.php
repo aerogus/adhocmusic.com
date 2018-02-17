@@ -56,11 +56,6 @@ class Photo extends Media
     protected $_credits = '';
 
     /**
-     * @var array
-     */
-    protected $_tag = [];
-
-    /**
      * Liste des attributs de l'objet
      * on précise si en base c'est de type :
      * - numérique/integer/float/bool (= num)
@@ -159,14 +154,6 @@ class Photo extends Media
         return HOME_URL . '/photos/' . (int) $id;
     }
 
-    /**
-     * @return array
-     */
-    function getTag()
-    {
-        return $this->_tag;
-    }
-
     /* fin getters */
 
     /* debut setters */
@@ -181,18 +168,6 @@ class Photo extends Media
         {
             $this->_credits = (string) $val;
             $this->_modified_fields['credits'] = true;
-        }
-    }
-
-    /**
-     * @param array d'id_contact
-     */
-    function setTag($val)
-    {
-        if ($this->_tag != $val)
-        {
-            $this->_tag = $val;
-            $this->_modified_fields['tag'] = true;
         }
     }
 
@@ -394,9 +369,6 @@ class Photo extends Media
             foreach ($res as $_res) {
                 $tab[$cpt] = $_res;
                 $tab[$cpt]['url'] = Photo::getUrlById($_res['id']);
-                if ($fetchtags) {
-                    $tab[$cpt]['tag'] = Photo::whoIsOn($_res['id']);
-                }
                 $tab[$cpt]['thumb_80_80']   = Photo::getPhotoUrl($_res['id'],  80,  80, '000000', false,  true);
                 $tab[$cpt]['thumb_130_130'] = Photo::getPhotoUrl($_res['id'], 130, 130, '000000', false, false);
                 $tab[$cpt]['thumb_400_300'] = Photo::getPhotoUrl($_res['id'], 400, 300, '000000', false, false);
@@ -406,25 +378,6 @@ class Photo extends Media
         }
 
         return $tab;
-    }
-
-    /**
-     * retourne les photos associées à un membre
-     *
-     * @param int $id_photo
-     * @return array
-     */
-    static function whoIsOn($id_photo)
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `e`.`id_contact`, `m`.`pseudo`, `e`.`id_media` AS `id_photo` "
-             . "FROM `" . self::$_db_table_est_marque_sur . "` `e`, `" . self::$_db_table_membre . "` `m` "
-             . "WHERE `e`.`id_contact` = `m`.`id_contact` "
-             . "AND `e`.`id_type_media` = " . (int) self::TYPE_MEDIA_PHOTO . " "
-             . "AND `e`.`id_media` = " . (int) $id_photo;
-
-        return $db->queryWithFetch($sql);
     }
 
     /**
@@ -448,7 +401,6 @@ class Photo extends Media
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
-            $this->_tag = Photo::whoIsOn($this->_id_photo);
             $this->_pseudo = $res['pseudo'];
             return true;
         }
