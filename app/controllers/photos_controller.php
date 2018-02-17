@@ -51,7 +51,6 @@ class Controller
         try {
             $photo = Photo::getInstance($id);
 	} catch (Exception $e) {
-	    mail(DEBUG_EMAIL, 'Exception ' . $e->getMessage(), print_r($e, true));
             Route::set_http_code('404');
             $smarty->assign('unknown_photo', true);
             return $smarty->fetch('photos/show.tpl');
