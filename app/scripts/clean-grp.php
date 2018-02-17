@@ -28,7 +28,7 @@ if (!($id_groupe = Groupe::getIdByAlias($alias)))
 $groupe = Groupe::getInstance($id_groupe);
 echo "Groupe: " . $groupe->getName() . "\n";
 
-$photos = Photo::getPhotos(['groupe' => $id_groupe]);
+$photos = Photo::getPhotos(['groupe' => $id_groupe, 'limit' => 100]);
 echo "Photos: ". sizeof($photos) . "\n";
 
 $audios = Audio::getAudios(['groupe' => $id_groupe]);
