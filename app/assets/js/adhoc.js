@@ -17,22 +17,14 @@ var adhoc = {
     $(window).scroll(function () {
       if ($(window).scrollTop() > 150) {
         toUp.fadeIn();
-      }
-      if ($(window).scrollTop() < 150) {
+      } else {
         toUp.fadeOut();
       }
     });
   },
 
   autoScroll: function (callback) {
-    var body;
-    if ($.browser.webkit) {
-      body = $('body');
-    } else {
-      body = $('html');
-    }
-
-    body.stop().animate({
+    $('html,body').stop().animate({
       scrollTop: 0
     }, 600, function () {
       if (typeof callback === 'function') {

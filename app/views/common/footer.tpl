@@ -29,7 +29,7 @@
 </ul>
 </footer>
 
-<a id="up" href="#" title="haut de la page"><img src="/img/icones/up.png" alt=""></a>
+<button type="button" id="up" name="retour en haut de la page">↑</button>
 
 {if $js_vars}
 <script>
