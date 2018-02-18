@@ -50,7 +50,7 @@ class Controller
 
         try {
             $photo = Photo::getInstance($id);
-        } catch (Exception $e) {
+	} catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_photo', true);
             return $smarty->fetch('photos/show.tpl');
@@ -112,14 +112,6 @@ class Controller
                 $trail->addStep("Média", "/medias/");
             }
             $trail->addStep($photo->getName());
-
-            $tabwho = [];
-            foreach ($photo->getTag() as $_who) {
-                $mbr = Membre::getInstance($_who['id_contact']);
-                $tabwho[] = '<a href="'.$mbr->getUrl().'"><strong>'.$mbr->getPseudo().'</strong></a>';
-            }
-            $who = implode(', ', $tabwho);
-            $smarty->assign('who', $who, 'UTF8');
 
             // photo issu d'un album live ?
             if ($photo->getIdEvent() && $photo->getIdLieu()) {

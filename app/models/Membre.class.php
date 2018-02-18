@@ -1460,30 +1460,6 @@ class Membre extends Contact
     }
 
     /**
-     * retourne les photos associées à un membre
-     *
-     * @return string
-     */
-    static function getTaggedPhotos($id_contact)
-    {
-        $db = DataBase::getInstance();
-
-        $sql  = "SELECT `id_contact`, `id_media` AS `id_photo` "
-              . "FROM `" . self::$_db_table_est_marque_sur . "` "
-              . "WHERE `id_contact` = " . (int) $id_contact." "
-              . "AND `id_type_media` = " . (int) self::TYPE_MEDIA_PHOTO;
-
-        $res = $db->queryWithFetch($sql);
-
-        $str = [];
-        foreach ($res as $_res) {
-            $str[] = $_res['id_photo'];
-        }
-
-        return implode(',', $str);
-    }
-
-    /**
      * le membre appartient-t-il au groupe "Membre Standard" ?
      *
      * @return bool

@@ -18,9 +18,6 @@
 1|adm|groupe_de_style_id|GET|/adm/groupe-de-style/:id
 1|adm|groupe_de_style|POST|/adm/groupe-de-style
 1|adm|log_action|GET|/adm/log-action
-1|adm|est_marque_sur|GET|/adm/est-marque-sur
-1|adm|est_marque_sur_id|GET|/adm/est-marque-sur/:id
-1|adm|est_marque_sur|POST|/adm/est-marque-sur
 1|adm|delete_account|GET|/adm/delete-account
 1|adm|delete_account|POST|/adm/delete-account
 1|adm|appartient_a|GET|/adm/appartient-a

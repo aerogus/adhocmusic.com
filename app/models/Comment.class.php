@@ -590,13 +590,6 @@ class Comment extends ObjectModel
                 $title = $photo->getName();
                 $url = $photo->getUrl();
 
-                // -> gens taggés dessus
-                $whos = Photo::whoIsOn($photo->getId());
-                foreach ($whos as $who) {
-                    $membre = Membre::getInstance($who['id_contact']);
-                    $emails[] = $membre->getEmail();
-                }
-
                 // -> si lien avec événement, gens ayant dans leur agenda perso cette date
                 if ($photo->getIdEvent()) {
                     $subs = Alerting::getIdsContactByEvent($photo->getIdEvent());

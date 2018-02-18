@@ -63,7 +63,6 @@ abstract class ObjectModel
     protected static $_db_table_article        = 'adhoc_article';
     protected static $_db_table_audio          = 'adhoc_audio';
     protected static $_db_table_contact        = 'adhoc_contact';
-    protected static $_db_table_est_marque_sur = 'adhoc_est_marque_sur';
     protected static $_db_table_event          = 'adhoc_event';
     protected static $_db_table_event_style    = 'adhoc_event_style';
     protected static $_db_table_exposant       = 'adhoc_exposant';

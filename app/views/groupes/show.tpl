@@ -42,9 +42,6 @@
           {if $groupe->getSite()}
           <li><a href="{$groupe->getSite()}" title="Site"><img src="/img/icones/lien.png" alt="">Site</a></li>
           {/if}
-          {if $groupe->getMySpace()}
-          <li><a href="{$groupe->getMySpace()}" title="MySpace"><img src="/img/myspace.png" alt="">MySpace</a></li>
-          {/if}
           {if $groupe->getFacebookPageId()}
           <li><a href="{$groupe->getFacebookPageUrl()}" title="Facebook"><img src="/img/facebook.gif" alt="">Facebook</a></li>
           {/if}
@@ -82,9 +79,12 @@
       <header>
         <h2>En Écoute</h2>
       </header>
-      <div style="background: url(/img/player_adhoc.png); width: 360px; height: 218px; position: relative; margin: 0 auto;">
-        <img src="{$groupe->getMiniPhoto()}" alt="" style="position: absolute; top: 28px; left: 14px;">
-        <div style="position: absolute; top: 27px; left: 90px;">{audio_player id=$groupe->getId() type='player_mp3_multi'}</div>
+      <div>  
+      <ul>
+        {foreach $audios as $audio}
+	    <li><a href="{$audio.url}">{$audio.name}</a><br><audio controls="controls" src="{$audio.direct_url}" style="background-color:#000"></audio></li>
+        {/foreach}
+      </ul>
       </div>
     </div>
     {/if}
@@ -120,7 +120,7 @@
       <div>
         {foreach $photos as $photo}
         <div class="thumb-80">
-          <a href="{$photo.url}" title="{$photo.name|escape}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}">{$photo.name|truncate:15:"...":true:true|escape}</a>
+          <a href="{$photo.url}" title="{$photo.name|escape}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}" style="display:block"></a>
           <a class="overlay-80 overlay-photo-80" href="{$photo.url}" title="{$photo.name|escape}"></a>
         </div>
         {/foreach}

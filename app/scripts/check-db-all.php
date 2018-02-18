@@ -105,43 +105,6 @@ foreach ($res as $_res) {
 echo sizeof($res) ? $tbl->getTable() : "OK\n";
 unset($tbl);
 
-$sql = "SELECT `id_contact` AS `id_contact_tagge`, `tagge_par` AS `id_contact_taggeur`, `id_media` FROM `adhoc_est_marque_sur` WHERE `id_contact` NOT IN (SELECT `id_contact` FROM `adhoc_membre`)";
-echo "\n9 - est_marque_sur lié à membre taggué introuvable\n";
-$tbl = new Console_Table();
-$tbl->setHeaders(array('id_contact_taggeur', 'id_contact_tagge', 'id_media'));
-$res = $db->queryWithFetch($sql);
-foreach ($res as $_res) {
-    $tbl->addRow(array($_res['id_contact_taggeur'], $_res['id_contact_tagge'], $_res['id_media']));
-    // on supprime les tags sur les membres introuvables
-    //$db->query('DELETE FROM adhoc_est_marque_sur WHERE id_contact = ' . (int) $_res['id_contact_tagge']);
-}
-echo sizeof($res) ? $tbl->getTable() : "OK\n";
-unset($tbl);
-
-$sql = "SELECT `id_contact` AS `id_contact_tagge`, `tagge_par` AS `id_contact_taggeur`, `id_media` FROM `adhoc_est_marque_sur` WHERE `id_media` NOT IN (SELECT `id_photo` FROM `adhoc_photo`)";
-echo "\n10 - est_marque_sur lié à média (photo) introuvable\n";
-$tbl = new Console_Table();
-$tbl->setHeaders(array('id_contact_tagge', 'id_contact_taggeur', 'id_media'));
-$res = $db->queryWithFetch($sql);
-foreach ($res as $_res) {
-    $tbl->addRow(array($_res['id_contact_tagge'], $_res['id_contact_taggeur'], $_res['id_media']));
-    // on supprime les tags des photos introuvables
-    //$db->query('DELETE FROM `adhoc_est_marque_sur` WHERE `id_type_media` = ' . Media::TYPE_MEDIA_PHOTO . ' AND `id_media` = ' . (int) $_res['id_media']);
-}
-echo sizeof($res) ? $tbl->getTable() : "OK\n";
-unset($tbl);
-
-$sql = "SELECT `tagge_par` AS `id_contact_taggeur`, `id_contact` AS `id_contact_tagge`, `id_media` FROM `adhoc_est_marque_sur` WHERE `tagge_par` NOT IN (SELECT `id_contact` FROM `adhoc_membre`)";
-echo "\n11 - est_marque_sur lié à membre taggeur introuvable\n";
-$tbl = new Console_Table();
-$tbl->setHeaders(array('id_contact_taggeur', 'id_contact_tagge', 'id_media'));
-$res = $db->queryWithFetch($sql);
-foreach ($res as $_res) {
-    $tbl->addRow(array($_res['id_contact_taggeur'], $_res['id_contact_tagge'], $_res['id_media']));
-}
-echo sizeof($res) ? $tbl->getTable() : "OK\n";
-unset($tbl);
-
 $sql = "SELECT `id_event`, `id_contact` FROM `adhoc_event` WHERE `id_contact` NOT IN (SELECT `id_contact` FROM `adhoc_membre`)";
 echo "\n12 - event lié à membre introuvable\n";
 $tbl = new Console_Table();

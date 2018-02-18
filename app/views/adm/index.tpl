@@ -62,7 +62,6 @@
        <li><a href="/adm/groupes/">Groupes</a></li>
        <li><a href="/adm/exposants/">Exposants</a></li>
        <li><a href="/adm/groupe-de-style">Groupe de Style</a></li>
-       <li><a href="/adm/est-marque-sur">Taggage photos</a></li>
        <li><a href="/adm/delete-account">Suppression Compte</a></li>
     </ul>
   </div>
@@ -90,8 +89,6 @@
       <li><a href="/adm/stats?m=C">Nombre de lieux par région</a></li>
       <li><a href="/adm/stats?m=D">Top Visites Groupes</a></li>
       <li><a href="/adm/stats?m=E">Top Visites Articles</a></li>
-      <li><a href="/adm/stats?m=F">Membres les plus taggés</a></li>
-      <li><a href="/adm/stats?m=G">Membres les plus taggeurs</a></li>
       <li><a href="/adm/stats?m=H">Domaines Emails</a></li>
       <li><a href="/adm/stats?m=I">Nombre d'événements annoncés par mois</a></li>
       <li><a href="/adm/stats?m=J">Répartition des vidéos par hébergeur</a></li>

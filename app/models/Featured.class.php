@@ -311,13 +311,11 @@ class Featured extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `id_featured`AS `id`, `title`, `description`, `link`
+        $sql = "SELECT `id_featured` AS `id`, `title`, `description`, `link`
                 FROM `" . self::$_db_table_featured . "`
-                WHERE `datdeb` < NOW()
-                AND `datfin` > NOW()
-                AND `online`
-                ORDER BY RAND()
-                LIMIT 0,8";
+                WHERE `datdeb` < DATE(NOW())
+                AND `datfin` > DATE(NOW())
+                AND `online`";
 
         $res = $db->queryWithFetch($sql);
 

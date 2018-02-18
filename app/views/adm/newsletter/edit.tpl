@@ -17,6 +17,7 @@
   <input type="hidden" name="id" value="{$newsletter->getId()|escape}">
 </form>
 
+<p>Uploader un fichier pour cette newsletter</p>
 <form id="form-newsletter-edit-upload" name="form-newsletter-edit-upload" method="post" action="/adm/newsletter/upload" enctype="multipart/form-data">
   <input type="file" name="file">
   <input type="submit" id="form-newsletter-edit-upload-submit" value="Envoyer">
