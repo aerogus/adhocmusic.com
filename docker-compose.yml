@@ -6,9 +6,24 @@ version: '3'
 
 services:
 
-  # apache:
+  # test avec haproxy ...
+  haproxy:
+    image: haproxy:1.8.4-alpine
+    hostname: haproxy
+    container_name: adhocmusic_haproxy
+    ports:
+      - 83:80
+    networks:
+      adhocmusic:
+        aliases:
+          - haproxy.adhocmusic.dev
+    volumes:
+      - ./docker/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+
+  # sert contenu statique et dynamique
+  # apache2:
   #   build: ./docker/apache
-  #   #image:
+  #   #image: httpd:2.4.29-alpine
   #   hostname: www
   #   container_name: adhocmusic_apache
   #   restart: always
@@ -19,31 +34,48 @@ services:
   #        - www.adhocmusic.dev
   #   ports:
   #     - 80:80
-  #     - 443:443
   #   volumes:
   #     - .:/var/www/adhocmusic.com:ro
   #     - ./log/apache:/var/log/apache2
 
-  # static:
-  #   build: ./docker/static
-  #   #image:
-  #   hostname: static
-  #   container_name: adhocmusic_static
+  # juste l'app php ?
+  # apache:
+  #   build: ./docker/apache
+  #   #image: httpd:2.4.29-alpine
+  #   hostname: www
+  #   container_name: adhocmusic_apache
   #   restart: always
   #   networks:
   #    adhocmusic:
   #      aliases:
-  #        - static.adhocmusic.dev
+  #        - adhocmusic.dev
+  #        - www.adhocmusic.dev
   #   ports:
-  #     - 82:80
-  #     - 445:443
+  #     - 80:80
   #   volumes:
-  #     - ./static:/var/www/html:ro
-  #     - ./log/static:/var/log/apache2
+  #     - .:/var/www/adhocmusic.com:ro
+  #     - ./log/apache:/var/log/apache2
+
+  # juste les contenus statiques ?
+  static:
+    #build: ./docker/static
+    image: httpd:2.4.29-alpine
+    hostname: static
+    container_name: adhocmusic_static
+    restart: always
+    networks:
+     adhocmusic:
+       aliases:
+         - static.adhocmusic.dev
+    ports:
+      - 80:80
+    volumes:
+      - ./static:/usr/local/apache2/htdocs:ro
+      - ./log/static:/var/log/apache2
 
   php:
     build: ./docker/php
-    #image:
+    #image: php:7.2.2-fpm
     hostname: php
     container_name: adhocmusic_php
     restart: always
@@ -59,7 +91,7 @@ services:
 
   mysql:
     build: ./docker/mysql
-    #image:
+    image: mysql:5.7.21
     hostname: mysql
     container_name: adhocmusic_mysql
     restart: always
@@ -88,7 +120,8 @@ services:
           - pma.adhocmusic.dev
     ports:
       - 81:80
-      - 444:443
+    volumes:
+      - ./docker/pma/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
     environment:
       PMA_HOST: adhocmusic_mysql
       PMA_USER: adhocmusic
