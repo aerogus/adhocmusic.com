@@ -13,7 +13,7 @@ bower_components
 vendor
 
 # tous les contenus utilisateur (audio, video, photo...) ici
-static
+/static
 
 # cache smarty, images ...
 cache
