@@ -15,6 +15,12 @@ vendor
 # tous les contenus utilisateur (audio, video, photo...) ici
 /static
 
+# stockage MySQL avec docker
+/db
+
+# cache smarty
+/smarty
+
 # cache smarty, images ...
 cache
 

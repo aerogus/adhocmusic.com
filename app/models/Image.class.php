@@ -4,12 +4,6 @@
  * @package adhoc
  */
 
-// chemin local
-define('IMG_CACHE_PATH', ADHOC_ROOT_PATH . '/cache/img');
-
-// chemin http
-define('IMG_CACHE_URL', CACHE_URL);
-
 /**
  * Classe de création et de conversion d'images
  *
