@@ -303,51 +303,6 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @var string
-     */
-    function getMySpaceId()
-    {
-        if (strpos($this->_myspace, 'http://') !== false) {
-            $this->_myspace = str_replace('http://', '', $this->_myspace);
-        }
-        if (strpos($this->_myspace, 'www.myspace.com/') !== false) {
-            $this->_myspace = str_replace('www.myspace.com/', '', $this->_myspace);
-        }
-        if ($this->_myspace) {
-            return $this->_myspace;
-        }
-        return false;
-    }
-
-    /**
-     * @var string
-     */
-    function getMySpaceUrl()
-    {
-        if (strpos($this->_myspace, 'http://') !== false) {
-            $this->_myspace = str_replace('http://', '', $this->_myspace);
-        }
-        if (strpos($this->_myspace, 'www.myspace.com/') !== false) {
-            $this->_myspace = str_replace('www.myspace.com/', '', $this->_myspace);
-        }
-        if ($this->_myspace) {
-            return 'http://www.myspace.com/' . $this->_myspace;
-        }
-        return false;
-    }
-
-    /**
-     * retourne le MySpace
-     *
-     * @return string
-     * @deprecated
-     */
-    function getMySpace()
-    {
-        return $this->getMySpaceUrl();
-    }
-
-    /**
      * retourne l'identificant de la page fan Facebook
      *
      * @return int (64bits) => str
