@@ -5,6 +5,9 @@ LABEL maintainer="guillaume@seznec.fr"
 # cette image contient déjà l'extension php mbstring
 RUN apt-get update && apt-get install -y \
   libpng-dev \
-  && docker-php-ext-install gd \
+  libjpeg62-turbo-dev \
+  && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
+  && docker-php-ext-install -j$(nproc) gd \
+  && docker-php-ext-install -j$(nproc) mysqli \
   && apt-get autoremove \
   && apt-get clean
