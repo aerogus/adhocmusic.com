@@ -45,10 +45,6 @@
     <td>{$groupe->getSite()}</td>
   </tr>
   <tr>
-    <th>MySpace</th>
-    <td>{$groupe->getMySpace()}</td>
-  </tr>
-  <tr>
     <th>Facebook Page Id</th>
     <td><a href="{$groupe->getFacebookPageUrl()}">{$groupe->getFacebookPageId()}</a></td>
   </tr>

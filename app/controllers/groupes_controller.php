@@ -160,7 +160,6 @@ class Controller
             'mini_text'        => '',
             'text'             => '',
             'site'             => '',
-            'myspace'          => '',
             'facebook_page_id' => '',
             'twitter_id'       => '',
         ];
@@ -175,7 +174,6 @@ class Controller
                 'mini_text'        => (string) Route::params('mini_text'),
                 'text'             => (string) Route::params('text'),
                 'site'             => (string) Route::params('site'),
-                'myspace'          => (string) Route::params('myspace'),
                 'facebook_page_id' => (string) Route::params('facebook_page_id'),
                 'twitter_id'       => (string) Route::params('twitter_id'),
             ];
@@ -191,7 +189,6 @@ class Controller
                 $groupe->setMiniText($data['mini_text']);
                 $groupe->setText($data['text']);
                 $groupe->setSite($data['site']);
-                $groupe->setMyspaceId($data['myspace']);
                 $groupe->setFacebookPageId($data['facebook_page_id']);
                 $groupe->setTwitterId($data['twitter_id']);
                 $groupe->setEtat(Groupe::ETAT_ACTIF);
@@ -319,15 +316,13 @@ class Controller
         }
 
         $data = [
-            'id_groupe'        => $groupe->getId(),/*
-            'name'             => $groupe->getName(),*/
+            'id_groupe'        => $groupe->getId(),
             'style'            => $groupe->getStyle(),
             'influences'       => $groupe->getInfluences(),
             'lineup'           => $groupe->getLineup(),
             'mini_text'        => $groupe->getMiniText(),
             'text'             => $groupe->getText(),
             'site'             => $groupe->getSite(),
-            'myspace'          => $groupe->getMyspace(),
             'facebook_page_id' => $groupe->getFacebookPageId(),
             'twitter_id'       => $groupe->getTwitterId(),
         ];
@@ -342,10 +337,8 @@ class Controller
                 'mini_text'        => (string) Route::params('mini_text'),
                 'text'             => (string) Route::params('text'),
                 'site'             => (string) Route::params('site'),
-                'myspace'          => (string) Route::params('myspace'),
                 'facebook_page_id' => (string) Route::params('facebook_page_id'),
                 'twitter_id'       => (string) Route::params('twitter_id'),
-                //'id_type_musicien' => (int) Route::params('id_type_musicien'),
             ];
 
             if (self::_validate_form_groupe_edit($data, $errors)) {
@@ -360,7 +353,6 @@ class Controller
                 $groupe->setMiniText($data['mini_text']);
                 $groupe->setText($data['text']);
                 $groupe->setSite($data['site']);
-                $groupe->setMyspaceId($data['myspace']);
                 $groupe->setFacebookPageId($data['facebook_page_id']);
                 $groupe->setTwitterId($data['twitter_id']);
                 $groupe->setModifiedNow();
@@ -416,8 +408,6 @@ class Controller
         }
 
         $smarty->assign('data', $data);
-        //$smarty->assign('id_type_musicien', $id_type_musicien);
-        //$smarty->assign('types_musicien', Membre::getTypesMusicien());
 
         return $smarty->fetch('groupes/edit.tpl');
     }

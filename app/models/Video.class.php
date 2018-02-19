@@ -8,10 +8,10 @@
  * 1 - YouTube
  */
 define('MEDIA_YOUTUBE_URL_PATTERN',
-    '~^http://([A-Za-z]{2,3}\.)?youtube\.com/watch[/]?\?v=([A-Za-z0-9_-]{1,32})~');
+    '~^https://([A-Za-z]{2,3}\.)?youtube\.com/watch[/]?\?v=([A-Za-z0-9_-]{1,32})~');
 
 define('__MEDIA_YOUTUBE_DIRECT_VIDEO_URL_PARTIAL_PATTERN',
-    'http://([A-Za-z]{2,3}\.)?youtube\.com/v/([A-Za-z0-9_-]{1,32})');
+    'https://([A-Za-z]{2,3}\.)?youtube\.com/v/([A-Za-z0-9_-]{1,32})');
 
 define('MEDIA_YOUTUBE_DIRECT_VIDEO_URL_PATTERN',
     '~^' . __MEDIA_YOUTUBE_DIRECT_VIDEO_URL_PARTIAL_PATTERN . '$~');
@@ -35,71 +35,13 @@ define('MEDIA_YOUTUBE_EMBED_PATTERN',
  * @see http://www.dailymotion.com/oembed/video/x5kyog_weezer-pork-and-beans_music?format=xml
  */
 define('__MEDIA_DAILYMOTION_DIRECT_VIDEO_URL_PARTIAL_PATTERN',
-    'http://([a-zA-Z0-9.]*\.)?dailymotion.com/(swf|video)/([0-9A-Za-z-]{1,32}).*');
+    'https://([a-zA-Z0-9.]*\.)?dailymotion.com/(swf|video)/([0-9A-Za-z-]{1,32}).*');
 
 define('MEDIA_DAILYMOTION_DIRECT_VIDEO_URL_PATTERN',
     '~^' . __MEDIA_DAILYMOTION_DIRECT_VIDEO_URL_PARTIAL_PATTERN . '$~');
 
 define('MEDIA_DAILYMOTION_EMBED_PATTERN',
     '~<embed src=["\']' . __MEDIA_DAILYMOTION_DIRECT_VIDEO_URL_PARTIAL_PATTERN . '["\'] .*></embed>~');
-
-/**
- * 3 - MySpace
- */
-define('MEDIA_MYSPACE_URL_PATTERN',
-    '~^http://(vids\.myspace\.com|myspacetv\.com)/index\.cfm\?fuseaction=vids\.individual&(videoid|VideoID)=([0-9]{1,10})~');
-
-define('__MEDIA_MYSPACE_DIRECT_VIDEO_URL_PARTIAL_PATTERN',
-    'http://(vids\.myspace\.com|myspacetv\.com)/index\.cfm\?fuseaction=vids\.individual&(videoid|VideoID)=([0-9]{1,10})');
-
-define('__MEDIA_MYSPACE_EMBED_PARTIAL_PATTERN',
-    'http://mediaservices.myspace.com/services/media/embed.aspx/m=([0-9]{1,10}),t=1,mt=video,searchID=,primarycolor=,secondarycolor=');
-
-define('MEDIA_MYSPACE_DIRECT_VIDEO_URL_PATTERN',
-    '~^' . __MEDIA_MYSPACE_DIRECT_VIDEO_URL_PARTIAL_PATTERN . '$~');
-
-define('MEDIA_MYSPACE_EMBED_PATTERN',
-       '~<a href="' . __MEDIA_MYSPACE_DIRECT_VIDEO_URL_PARTIAL_PATTERN . '">'.
-       '([0-9A-Za-z-: ]{1,50})</a><br />' .
-       '<object width="[0-9]{2,3}px" height="[0-9]{2,3}px" >' .
-       '<param name="allowFullScreen" value="true"/>' .
-       '<param name="wmode" value="transparent"/>' .
-       '<param name="movie" value="' . __MEDIA_MYSPACE_EMBED_PARTIAL_PATTERN . '"/>' .
-       '<embed src="' . __MEDIA_MYSPACE_EMBED_PARTIAL_PATTERN . '" width="[0-9]{2,3}" height="[0-9]{2,3}" allowFullScreen="true" type="application/x-shockwave-flash" wmode="transparent"/>' .
-       '</object>~');
-
-/**
- * 4 - Wat
- */
-define('MEDIA_WAT_EMBED_PATTERN',
-       '~^<param name="movie" value="http:\/\/www\.wat\.tv\/swf2\/([0-9a-zA-Z]{1,32}\/?[0-9]*)"/>~');
-
-define('MEDIA_WAT_DIRECT_PLAYER_PATTERN',
-       '');
-
-/**
- * 5 - Google Video
- */
-define('MEDIA_GOOGLEVIDEO_URL_PATTERN',
-    '~^http://video\.google.*/videoplay.*docid=([-]?[0-9]{1,32})~'); // pas de $, il peut il y avoir une tonne de params derriere :(
-
-define('__MEDIA_GOOGLEVIDEO_DIRECT_VIDEO_URL_PARTIAL_PATTERN',
-    'http://video.google\..*/googleplayer\.swf.*docId=([-]?[0-9]{1,32}).*');
-
-define('MEDIA_GOOGLEVIDEO_DIRECT_VIDEO_URL_PATTERN',
-    '~^' . __MEDIA_GOOGLEVIDEO_DIRECT_VIDEO_URL_PARTIAL_PATTERN.'$~i');
-
-// ça, c'est pas gérable, leur code d'embed est shuffled tous les trois mois
-/*
-define('MEDIA_GOOGLEVIDEO_EMBED_PATTERN',
-    '~<embed style=".*" id="VideoPlayback" '.
-    'type="application/x-shockwave-flash" src="'.
-    __MEDIA_GOOGLEVIDEO_DIRECT_VIDEO_URL_PARTIAL_PATTERN.
-    '"> </embed>~');
-*/
-
-define('MEDIA_GOOGLEVIDEO_EMBED_PATTERN',
-    '~'.__MEDIA_GOOGLEVIDEO_DIRECT_VIDEO_URL_PARTIAL_PATTERN.'~i');
 
 /**
  * 6 - Facebook
@@ -134,10 +76,10 @@ define('MEDIA_ADHOC_EMBED_PATTERN',
  */
 
 define('MEDIA_VIMEO_URL_PATTERN',
-       '~^http://(www\.)?vimeo.com/([0-9]{1,16})~');
+       '~^https://(www\.)?vimeo.com/([0-9]{1,16})~');
 
 define('MEDIA_VIMEO_DIRECT_VIDEO_URL_PATTERN',
-       '~^http://(www\.)?vimeo.com/([0-9]{1,16})~');
+       '~^https://(www\.)?vimeo.com/([0-9]{1,16})~');
 
 define('MEDIA_VIMEO_EMBED_PATTERN',
        '');
@@ -172,9 +114,6 @@ class Video extends Media
 
     const HOST_YOUTUBE     = 1;
     const HOST_DAILYMOTION = 2;
-    const HOST_MYSPACE     = 3;
-    const HOST_WAT         = 4;
-    const HOST_GOOGLE      = 5;
     const HOST_FACEBOOK    = 6;
     const HOST_ADHOC       = 7;
     const HOST_VIMEO       = 8;
@@ -182,9 +121,6 @@ class Video extends Media
     protected static $_tab_hosts = [
         self::HOST_YOUTUBE     => "YouTube",
         self::HOST_DAILYMOTION => "DailyMotion",
-//        self::HOST_MYSPACE     => "MySpace",
-//        self::HOST_WAT         => "Wat",
-//        self::HOST_GOOGLE      => "Google",
         self::HOST_FACEBOOK    => "Facebook",
         self::HOST_ADHOC       => "AD'HOC",
         self::HOST_VIMEO       => "Vimeo",
@@ -614,51 +550,6 @@ class Video extends Media
                          . '</object>' . "\n";
                 }
 
-            case self::HOST_MYSPACE:
-                $autoplay ? $strautoplay = '1' : $strautoplay = '0';
-                return '<object enableJSURL="false" enableHREF="false" saveEmbedTags="true" allowScriptAccess="never" allownetworking="internal" type="application/x-shockwave-flash" data="http://lads.myspace.com/videos/vplayer.swf" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" autostart="'.$strautoplay.'" wmode="transparent">' . "\n"
-                     . '<param name="movie" value="http://lads.myspace.com/videos/vplayer.swf" />' . "\n"
-                     . '<param name="wmode" value="transparent"></param>' . "\n"
-                     . '<param name="allowScriptAccess" value="never" />' . "\n"
-                     . '<param name="enableJSURL" value="false" />' . "\n"
-                     . '<param name="enableHREF" value="false" />' . "\n"
-                     . '<param name="saveEmbedTags" value="true" />' . "\n"
-                     . '<param name="AutoStart" value="'.$strautoplay.'" />' . "\n"
-                     . '<param name="flashvars" value="m='.$this->_reference.'&amp;type=video&amp;a='.$strautoplay.'" />' . "\n"
-                     . '</object>' . "\n";
-
-            case self::HOST_WAT:
-                $autoplay ? $strautoplay = 'true' : $strautoplay = 'false';
-                // taille par défaut : l320 / h256
-                // todo passer swf en swf2 ?
-                return '<object width="'.self::WIDTH.'" height="'.self::HEIGHT.'">'. "\n"
-                     . '<param name="movie" value="http://www.wat.tv/swf/'.$this->_reference.'"></param>'. "\n"
-                     . '<param name="wmode" value="transparent"></param>' . "\n"
-                     . '<param name="allowFullScreen" value="true"></param>' . "\n"
-                     . '<param name="allowScriptAccess" value="always"></param>' . "\n"
-                     . '<param name="autoplay" value="'.$strautoplay.'"></param>'. "\n"
-                     . '<embed src="http://www.wat.tv/swf/'.$this->_reference.'" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'.self::WIDTH.'" height="'.self::HEIGHT.'"></embed>'. "\n"
-                     . '</object>' . "\n";
-
-            case self::HOST_GOOGLE:
-                // todo : autostart
-                // taille par défaut : l400 / h325
-                return '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="'.self::WIDTH.'" height="'.self::HEIGHT.'">' . "\n"
-                     . '<param name="movie" value="http://video.google.com/googleplayer.swf?docId='.$this->_reference.'&amp;hl=fr" />' . "\n"
-                     . '<param name="wmode" value="transparent"></param>' . "\n"
-                     . '<param name="quality" value="high" />' . "\n"
-                     . '<param name="lang" value="fr" /><param name="dir_racine" value="" /><param name="id" value="610" />' . "\n"
-                     . '<!--[if !IE]> <-->' . "\n"
-                     . '<object data="http://video.google.com/googleplayer.swf?docId='.$this->_reference.'&amp;hl=fr" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" type="application/x-shockwave-flash">' . "\n"
-                     . '<param name="quality" value="high" />' . "\n"
-                     . '<param name="lang" value="fr" />' . "\n"
-                     . '<param name="dir_racine" value="" />' . "\n"
-                     . '<param name="id" value="610" />' . "\n"
-                     . '<param name="pluginurl" value="http://www.macromedia.com/go/getflashplayer" />' . "\n"
-                     . '</object>' . "\n"
-                     . '<!--> <![endif]-->' . "\n"
-                     . '</object>' . "\n";
-
             case self::HOST_FACEBOOK:
                 return '<object width="'.self::WIDTH.'" height="'.self::HEIGHT.'" >' . "\n"
                      . '<param name="allowfullscreen" value="true" />' . "\n"
@@ -762,28 +653,14 @@ class Video extends Media
         // YouTube
         if (preg_match(MEDIA_YOUTUBE_EMBED_PATTERN, $str, $matches)) {
             if (!empty($matches[2])) {
-                return array('id_host' => self::HOST_YOUTUBE, 'reference' => $matches[2]);
-            }
-        }
-
-        // GoogleVideo
-        if (preg_match(MEDIA_GOOGLEVIDEO_EMBED_PATTERN, $str, $matches)) {
-            if (!empty($matches[1])) {
-                return array('id_host' => self::HOST_GOOGLE, 'reference' => $matches[1]);
+                return ['id_host' => self::HOST_YOUTUBE, 'reference' => $matches[2]];
             }
         }
 
         // DailyMotion
         if (preg_match(MEDIA_DAILYMOTION_EMBED_PATTERN, $str, $matches)) {
             if (!empty($matches[3])) {
-                return array('id_host' => self::HOST_DAILYMOTION, 'reference' => $matches[3]);
-            }
-        }
-
-        // MySpace
-        if (preg_match(MEDIA_MYSPACE_EMBED_PATTERN, $str, $matches)) {
-            if (!empty($matches[3])) {
-                return array('id_host' => self::HOST_MYSPACE, 'reference' => $matches[3]);
+                return ['id_host' => self::HOST_DAILYMOTION, 'reference' => $matches[3]];
             }
         }
 
@@ -798,78 +675,56 @@ class Video extends Media
         // YouTube
         if (preg_match(MEDIA_YOUTUBE_URL_PATTERN, $str, $matches)) {
             if (!empty($matches[2])) {
-                return array('id_host' => self::HOST_YOUTUBE, 'reference' => $matches[2]);
+                return ['id_host' => self::HOST_YOUTUBE, 'reference' => $matches[2]];
             }
         }
 
         // YouTube
         if (preg_match(MEDIA_YOUTUBE_DIRECT_VIDEO_URL_PATTERN, $str, $matches)) {
             if (!empty($matches[2])) {
-                return array('id_host' => self::HOST_YOUTUBE, 'reference' => $matches[2]);
+                return ['id_host' => self::HOST_YOUTUBE, 'reference' => $matches[2]];
             }
         }
-
-        // Google ne veut pas qu'on choppe ses vidéos comme ca.
-        /*
-        if (preg_match(MEDIA_GOOGLEVIDEO_URL_PATTERN, $str, $matches)) {
-            if (!empty($matches[1])) {
-                return array('id_host' => self::HOST_GOOGLE, 'reference' => $matches[1]);
-            }
-        }*/
 
         // GoogleVideo
         if (preg_match(MEDIA_GOOGLEVIDEO_DIRECT_VIDEO_URL_PATTERN, $str, $matches)) {
             if (!empty($matches[1])) {
-                return array('id_host' => self::HOST_GOOGLE, 'reference' => $matches[1]);
+                return ['id_host' => self::HOST_GOOGLE, 'reference' => $matches[1]];
             }
         }
 
         // DailyMotion
         if (preg_match(MEDIA_DAILYMOTION_DIRECT_VIDEO_URL_PATTERN, $str, $matches)) {
             if (!empty($matches[3])) {
-                return array('id_host' => self::HOST_DAILYMOTION, 'reference' => $matches[3]);
-            }
-        }
-
-        // MySpace
-        if (preg_match(MEDIA_MYSPACE_URL_PATTERN, $str, $matches)) {
-            if (!empty($matches[3])) {
-                return array('id_host' => self::HOST_MYSPACE, 'reference' => $matches[3]);
-            }
-        }
-
-        // MySpace
-        if (preg_match(MEDIA_MYSPACE_DIRECT_VIDEO_URL_PATTERN, $str, $matches)) {
-            if (!empty($matches[3])) {
-                return array('id_host' => self::HOST_MYSPACE, 'reference' => $matches[3]);
+                return ['id_host' => self::HOST_DAILYMOTION, 'reference' => $matches[3]];
             }
         }
 
         // Facebook
         if (preg_match(MEDIA_FACEBOOK_URL_PATTERN, $str, $matches)) {
             if (!empty($matches[1])) {
-                return array('id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]);
+                return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
             }
         }
 
         // Facebook
         if (preg_match(MEDIA_FACEBOOK_URL_PATTERN, $str, $matches)) {
             if (!empty($matches[1])) {
-                return array('id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]);
+                return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
             }
         }
 
         // AD'HOC
         if (preg_match(MEDIA_ADHOC_URL_PATTERN, $str, $matches)) {
             if (!empty($matches[1])) {
-                return array('id_host' => self::HOST_ADHOC, 'reference' => $matches[1]);
+                return ['id_host' => self::HOST_ADHOC, 'reference' => $matches[1]];
             }
         }
 
         // Vimeo
         if (preg_match(MEDIA_VIMEO_URL_PATTERN, $str, $matches)) {
             if (!empty($matches[2])) {
-                return array('id_host' => self::HOST_VIMEO, 'reference' => $matches[2]);
+                return ['id_host' => self::HOST_VIMEO, 'reference' => $matches[2]];
             }
         }
 
@@ -913,18 +768,18 @@ class Video extends Media
             case self::HOST_YOUTUBE:
                 if ($multi) {
                     $url   = [];
-                    $url[] = 'http://img.youtube.com/vi/' . $reference . '/1.jpg'; // 130*97
-                    $url[] = 'http://img.youtube.com/vi/' . $reference . '/2.jpg'; // 130*97
-                    $url[] = 'http://img.youtube.com/vi/' . $reference . '/3.jpg'; // 130*97
-                    $url[] = 'http://img.youtube.com/vi/' . $reference . '/default.jpg'; // 130*97, = 1.jpg
-                    $url[] = 'http://img.youtube.com/vi/' . $reference . '/0.jpg'; // 320*240, = 2.jpg
+                    $url[] = 'https://img.youtube.com/vi/' . $reference . '/1.jpg'; // 130*97
+                    $url[] = 'https://img.youtube.com/vi/' . $reference . '/2.jpg'; // 130*97
+                    $url[] = 'https://img.youtube.com/vi/' . $reference . '/3.jpg'; // 130*97
+                    $url[] = 'https://img.youtube.com/vi/' . $reference . '/default.jpg'; // 130*97, = 1.jpg
+                    $url[] = 'https://img.youtube.com/vi/' . $reference . '/0.jpg'; // 320*240, = 2.jpg
                 } else {
-                    $url = 'http://img.youtube.com/vi/' . $reference . '/0.jpg';
+                    $url = 'https://img.youtube.com/vi/' . $reference . '/0.jpg';
                 }
                 return $url;
 
             case self::HOST_DAILYMOTION:
-                $headers = get_headers('http://www.dailymotion.com/thumbnail/video/' . $reference, 1);
+                $headers = get_headers('https://www.dailymotion.com/thumbnail/video/' . $reference, 1);
                 if (is_array($headers['Location'])) {
                     $url = $headers['Location'][0];
                 } else {
@@ -933,16 +788,13 @@ class Video extends Media
                 return $url;
 
             case self::HOST_ADHOC:
-                return 'http://static.adhocmusic.com/media/video/' . $reference . '.jpg';
+                return 'https://static.adhocmusic.com/media/video/' . $reference . '.jpg';
 
             case self::HOST_VIMEO:
-                $meta_url = 'http://vimeo.com/api/v2/video/' . $reference . '.json';
+                $meta_url = 'https://vimeo.com/api/v2/video/' . $reference . '.json';
                 $meta_info = json_decode(file_get_contents($meta_url));
                 return $meta_info[0]->thumbnail_large;
 
-            case self::HOST_MYSPACE:
-            case self::HOST_WAT:
-            case self::HOST_GOOGLE:
             case self::HOST_FACEBOOK:
                 return self::DEFAULT_THUMBNAIL;
 
@@ -965,15 +817,12 @@ class Video extends Media
             case self::HOST_YOUTUBE:
             case self::HOST_DAILYMOTION:
             case self::HOST_ADHOC:
-            case self::HOST_MYSPACE:
-            case self::HOST_WAT:
-            case self::HOST_GOOGLE:
             case self::HOST_FACEBOOK:
             default:
                 return '';
 
             case self::HOST_VIMEO:
-                $meta_url = 'http://vimeo.com/api/v2/video/' . $reference . '.json';
+                $meta_url = 'https://vimeo.com/api/v2/video/' . $reference . '.json';
                 $meta_info = json_decode(file_get_contents($meta_url));
                 return $meta_info[0]->title;
         }
@@ -1020,6 +869,9 @@ class Video extends Media
         return true;
     }
 
+    /**
+     *
+     */
     static function invalidateVideoThumbInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 1)
     {
         $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';

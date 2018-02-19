@@ -16,13 +16,13 @@ services:
     networks:
      adhoc:
        aliases:
-         - adhocmusic.dev
-         - www.adhocmusic.dev
-         - static.adhocmusic.dev
+         - adhocmusic.test
+         - www.adhocmusic.test
+         - static.adhocmusic.test
     ports:
       - 80:80
     volumes:
-      - .:/var/www/adhocmusic.dev:ro
+      - .:/var/www/adhocmusic.test:ro
       - ./log/apache:/var/log/apache2
 
   php:
@@ -34,11 +34,11 @@ services:
     networks:
       adhoc:
         aliases:
-          - php.adhocmusic.dev
+          - php.adhocmusic.test
     depends_on:
       - mysql
     volumes:
-       - .:/var/www/adhocmusic.dev
+       - .:/var/www/adhocmusic.test
        - ./log/php:/var/log/php
 
   mysql:
@@ -50,7 +50,7 @@ services:
     networks:
       adhoc:
         aliases:
-          - mysql.adhocmusic.dev
+          - mysql.adhocmusic.test
     volumes:
       - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d:ro
       - ./docker/mysql/mysql.conf.d:/etc/mysql/conf.d
@@ -70,11 +70,11 @@ services:
     networks:
       adhoc:
         aliases:
-          - pma.adhocmusic.dev
+          - pma.adhocmusic.test
     ports:
       - 81:80
     environment:
-      PMA_HOST: mysql.adhocmusic.dev
+      PMA_HOST: mysql.adhocmusic.test
 
 networks:
   adhoc:

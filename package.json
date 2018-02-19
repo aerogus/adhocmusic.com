@@ -4,6 +4,10 @@
   "description": "Site de l'association AD'HOC",
   "license": "UNLICENSED",
   "private": true,
+  "scripts": {
+    "start": "docker-compose up",
+    "stop": "docker-compose down"
+  },
   "devDependencies": {
     "after-brunch": "0.0.5",
     "auto-reload-brunch": "2.7.1",

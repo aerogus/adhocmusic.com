@@ -65,19 +65,19 @@ if (ENV === 'PROD') {
 
 } elseif (ENV === 'DEV') {
 
-    define('_DB_HOST_',     'mysql.adhocmusic.dev');
+    define('_DB_HOST_',     'mysql.adhocmusic.test');
     define('_DB_USER_',     'adhocmusic');
     define('_DB_PASSWORD_', 'changeme');
     define('_DB_DATABASE_', 'adhocmusic');
 
     if (is_ssl()) {
-        define('HOME_URL',  'https://www.adhocmusic.dev');
-        define('CACHE_URL', 'https://static.adhocmusic.dev/cache');
-        define('MEDIA_URL', 'https://static.adhocmusic.dev/media');
+        define('HOME_URL',  'https://www.adhocmusic.test');
+        define('CACHE_URL', 'https://static.adhocmusic.test/cache');
+        define('MEDIA_URL', 'https://static.adhocmusic.test/media');
     } else {
-        define('HOME_URL',  'http://www.adhocmusic.dev');
-        define('CACHE_URL', 'http://static.adhocmusic.dev/cache');
-        define('MEDIA_URL', 'http://static.adhocmusic.dev/media');
+        define('HOME_URL',  'http://www.adhocmusic.test');
+        define('CACHE_URL', 'http://static.adhocmusic.test/cache');
+        define('MEDIA_URL', 'http://static.adhocmusic.test/media');
     }
 
     ini_set('display_startup_errors', 1);

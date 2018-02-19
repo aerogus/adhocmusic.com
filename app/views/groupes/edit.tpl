@@ -55,11 +55,7 @@
     </li>
     <li>
       <label for="site">Site</label>
-      <input type="text" id="site" name="site" size="50" value="{$data.site|escape}"><br>Ne mettez pas votre url MySpace !
-    </li>
-    <li>
-      <label for="myspace">Identifiant Myspace</label>
-      http://www.myspace.com/<input type="text" id="myspace" name="myspace" value="{$data.myspace}">
+      <input type="text" id="site" name="site" size="50" value="{$data.site|escape}">
     </li>
     <li>
       <label for="facebook_page_id">Identifiant Page Fan Facebook</label>
@@ -84,16 +80,6 @@
       <label for="text">Présentation</label>
       <textarea id="text" name="text" cols="50" rows="20">{$data.text|escape}</textarea>
     </li>
-<!--
-    <li>
-      <label for="id_type_musicien">Ma fonction au sein de ce groupe</label>
-      <select id="id_type_musicien" name="id_type_musicien">
-        {foreach from=$types_musicien key=id item=name}
-        <option value="{$id}"{if $id == $id_type_musicien} selected="selected"{/if}>{$name|escape}</option>
-        {/foreach}
-      </select>
-    </li>
--->
   </ul>
   <input type="hidden" name="id" value="{$groupe->getId()|escape}">
   <input id="form-groupe-edit-submit" name="form-groupe-edit-submit" class="button" type="submit" value="Modifier">
@@ -104,10 +90,10 @@
 </div>
 
 <div id="right">
-<a href="/photos/create?id_groupe={$groupe->getId()|escape}" class="button">Ajouter une photo</a>
-<a href="/audios/create?id_groupe={$groupe->getId()|escape}" class="button">Ajouter une musique</a>
-<a href="/videos/create?id_groupe={$groupe->getId()|escape}" class="button">Ajouter une vidéo</a>
-<a href="{$groupe->getUrl()}" class="button">Voir la fiche</a>
+  <a href="/photos/create?id_groupe={$groupe->getId()|escape}" class="button">Ajouter une photo</a>
+  <a href="/audios/create?id_groupe={$groupe->getId()|escape}" class="button">Ajouter une musique</a>
+  <a href="/videos/create?id_groupe={$groupe->getId()|escape}" class="button">Ajouter une vidéo</a>
+  <a href="{$groupe->getUrl()}" class="button">Voir la fiche</a>
 </div>
 
 {/if}

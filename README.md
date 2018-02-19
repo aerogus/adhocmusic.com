@@ -2,67 +2,38 @@
 
 https://adhocmusic.com
 
-## Technos utilisées
+## Prérequis :
 
-* Stylus (pré-processeur CSS)
-  https://learnboost.github.io/stylus/
-
-## Outils de build requis :
-
-* npm (node package manager), fourni avec node.js
-```
-brew install node
-```
-
-* composer (gestionnaire de dépendances back-end php)
-```
-curl -sS https://getcomposer.org/installer | php
-mv composer.phar /usr/local/bin/composer
-```
-
-* brunch (project builder et task runner)
-```
-npm install -g brunch
-```
+node
+npm
+brunch
+composer
+docker
 
 ## Installation du projet :
 
-# Clone localement le repository
+ajouter la ligne suivante dans /etc/hosts :
+
 ```
+127.0.0.1 adhocmusic.test www.adhocmusic.test static.adhocmusic.test mysql.adhocmusic.test php.adhocmusic.test pma.adhocmusic.test
+```
+
+1er Démarrage :
+
+```
+cd ~/workspace
 git clone git@bitbucket.org:adhocmusic/adhocmusic.com.git
-```
-
-# Installe les dépendances npm définies dans package.json
-```
+cd adhocmusic.com
 npm install
-```
-
-# Installe les dépendances composer (php) définies dans composer.json
-```
 composer install
+brunch build --production
+docker-compose up
 ```
 
-# Compile, concatène, minifie, exporte l'application dans public
+Redémarrage avec reconstruction des containers :
+
 ```
-brunch b -p
+docker-compose down && docker-compose up --build
 ```
 
-# Crée les répertoires de log, de cache et de media et les rend accessible en écriture au serveur web
-```
-mkdir log && chmod 777 log
-mkdir cache cache/img cache/smarty && chmod 777 cache/*
-mkdir media media/audio media/photo media/video && chmod 777 media/*
-```
-
-# charger la procédure stockée MySQL en invoquant la méthode suivante :
-```
-Lieu::mysql_init_geo();
-```
-
-
-Versions de prod :
-
-MySQL Server 5.7.21
-PHP 7.2.2
-Apache 2.4.29
-PhpMyAdmin 4.7.7
+ou directement npm start
