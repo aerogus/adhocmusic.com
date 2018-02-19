@@ -1035,7 +1035,7 @@ class Lieu extends ObjectModel
              . " `cp`, `city`, `tel`, `fax`, `text`, `site`, `email`, "
              . " `id_city`, `id_departement`, `id_region`, `id_country`, `lat`, `lng`, "
              . " `id_contact`, `online`, "
-             . "`created_on`, `modified_on`, "
+             . "`created_on`, `modified_on` "
             // . "FORMAT(get_distance_metres('" . number_format((float)$_SESSION['lat'], 8, '.', '') . "', '" . number_format((float)$_SESSION['lng'], 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `distance` "
              . "FROM `" . self::$_db_table_lieu . "` `l` "
              . "WHERE `id_lieu` = " . (int) $this->_id_lieu;
