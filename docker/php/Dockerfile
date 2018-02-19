@@ -3,6 +3,7 @@ LABEL maintainer="guillaume@seznec.fr"
 
 # maj complète et install des paquets utiles
 # cette image contient déjà l'extension php mbstring
+# ajout du module GD compilé avec support gif/png/jpeg
 RUN apt-get update && apt-get install -y \
   libpng-dev \
   libjpeg62-turbo-dev \
