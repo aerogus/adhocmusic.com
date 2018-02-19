@@ -1102,7 +1102,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "INSERT INTO `" . self::$_db_table_appartient_a . "` "
-             . "(`id_groupe`, `id_contact`, `id_type_musicien` "
+             . "(`id_groupe`, `id_contact`, `id_type_musicien`) "
              . "VALUES(" . (int) $this->getId() . ", " . (int) $id_contact . ", " . (int) $id_type_musicien . ")";
 
         $db->query($sql);
