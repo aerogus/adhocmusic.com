@@ -6,127 +6,76 @@ version: '3'
 
 services:
 
-  # test avec haproxy ...
-  haproxy:
-    image: haproxy:1.8.4-alpine
-    hostname: haproxy
-    container_name: adhocmusic_haproxy
-    ports:
-      - 83:80
-    networks:
-      adhocmusic:
-        aliases:
-          - haproxy.adhocmusic.dev
-    volumes:
-      - ./docker/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-
   # sert contenu statique et dynamique
-  # apache2:
-  #   build: ./docker/apache
-  #   #image: httpd:2.4.29-alpine
-  #   hostname: www
-  #   container_name: adhocmusic_apache
-  #   restart: always
-  #   networks:
-  #    adhocmusic:
-  #      aliases:
-  #        - adhocmusic.dev
-  #        - www.adhocmusic.dev
-  #   ports:
-  #     - 80:80
-  #   volumes:
-  #     - .:/var/www/adhocmusic.com:ro
-  #     - ./log/apache:/var/log/apache2
-
-  # juste l'app php ?
-  # apache:
-  #   build: ./docker/apache
-  #   #image: httpd:2.4.29-alpine
-  #   hostname: www
-  #   container_name: adhocmusic_apache
-  #   restart: always
-  #   networks:
-  #    adhocmusic:
-  #      aliases:
-  #        - adhocmusic.dev
-  #        - www.adhocmusic.dev
-  #   ports:
-  #     - 80:80
-  #   volumes:
-  #     - .:/var/www/adhocmusic.com:ro
-  #     - ./log/apache:/var/log/apache2
-
-  # juste les contenus statiques ?
-  static:
-    #build: ./docker/static
-    image: httpd:2.4.29-alpine
-    hostname: static
-    container_name: adhocmusic_static
+  apache2:
+    build: ./docker/apache2
+    #image: httpd:2.4.29-alpine
+    hostname: www
+    container_name: adhoc_apache
     restart: always
     networks:
-     adhocmusic:
+     adhoc:
        aliases:
+         - adhocmusic.dev
+         - www.adhocmusic.dev
          - static.adhocmusic.dev
     ports:
       - 80:80
     volumes:
-      - ./static:/usr/local/apache2/htdocs:ro
-      - ./log/static:/var/log/apache2
+      - .:/var/www/adhocmusic.dev:ro
+      - ./log/apache:/var/log/apache2
 
   php:
     build: ./docker/php
     #image: php:7.2.2-fpm
     hostname: php
-    container_name: adhocmusic_php
+    container_name: adhoc_php
     restart: always
     networks:
-      adhocmusic:
+      adhoc:
         aliases:
           - php.adhocmusic.dev
     depends_on:
       - mysql
     volumes:
-       - .:/var/www/adhocmusic.com
+       - .:/var/www/adhocmusic.dev
        - ./log/php:/var/log/php
 
   mysql:
     build: ./docker/mysql
     image: mysql:5.7.21
     hostname: mysql
-    container_name: adhocmusic_mysql
+    container_name: adhoc_mysql
     restart: always
     networks:
-      adhocmusic:
+      adhoc:
         aliases:
           - mysql.adhocmusic.dev
     volumes:
       - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./docker/mysql/mysql.conf.d:/etc/mysql/conf.d
       - ./log/mysql:/var/log/mysql
+      - ./db:/var/lib/mysql
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_ROOT_PASSWORD: changeme
       MYSQL_DATABASE: adhocmusic
       MYSQL_USER: adhocmusic
       MYSQL_PASSWORD: changeme
 
   pma:
-    #build: ./docker/pma
     image: phpmyadmin/phpmyadmin
     hostname: pma
-    container_name: adhocmusic_pma
+    container_name: adhoc_pma
     restart: always
     networks:
-      adhocmusic:
+      adhoc:
         aliases:
           - pma.adhocmusic.dev
     ports:
       - 81:80
-    volumes:
-      - ./docker/pma/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
     environment:
-      PMA_HOST: adhocmusic_mysql
-      PMA_USER: adhocmusic
-      PMA_PASSWORD: changeme
+      PMA_HOST: mysql.adhocmusic.dev
 
 networks:
-  adhocmusic:
+  adhoc:
 

@@ -18,6 +18,9 @@ vendor
 # stockage MySQL avec docker
 /db
 
+/docker/mysql/initdb.d/*.sql
+/docker/mysql/initdb.d/*.sql.gz
+
 # cache smarty
 /smarty
 
