@@ -19,6 +19,18 @@ body
   -moz-osx-font-smoothing grayscale
   -webkit-font-smoothing antialiased /* fix bold mac osx */
 
+/* reset iOS */
+
+input
+  border-radius 0
+
+/* Remove inner shadow from inputs on mobile iOS */
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="email"]
+  -webkit-appearance none
+
 /* pas de stylage particulier des liens ... */
 
 a, a:link, a:visited, a:active, a:hover
