@@ -1,7 +1,7 @@
 <div class="top-bar">
   <div class="top-bar-inner">
     <div class="top-bar-title">
-      <a href="/"><strong>AD'HOC</strong></a>
+      <a href="/"><strong>AD’HOC</strong></a>
     </div>
     <div class="top-bar-right">
       <button id="btn-burger" class="top-bar-burger">≡</button>
@@ -18,7 +18,7 @@
             </ul>
           </li>
           <li>
-            <a href="/assoce" accesskey="2" title="Présentation de l'Association AD'HOC, l'équipe, nos concerts">L'Assoce</a>
+            <a href="/assoce" accesskey="2" title="Présentation de l’Association AD'HOC, l’équipe, nos concerts">L’Assoce</a>
             <ul>
               <li><a href="/assoce/presentation">Présentation</a></li>
               <li><a href="/assoce/concerts">Concerts</a></li>
