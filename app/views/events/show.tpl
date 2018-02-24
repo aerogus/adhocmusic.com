@@ -68,6 +68,8 @@
 
   {include file="comments/share.tpl" title="cet événement" url=$event->getUrl()}
 
+  <a style="margin: 10px 0; padding: 5px; border: 1px solid #999" href="/events/ical/{$event->getId()}.ics"><img src="/img/icones/cal.svg" width="16" height="16"> Ajout au calendrier</a>
+
   {include file="comments/box.tpl" type="e" id_content=$event->getId()}
 
   {if !empty($videos)}

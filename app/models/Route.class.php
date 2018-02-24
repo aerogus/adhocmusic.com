@@ -244,6 +244,9 @@ class Route
                 case 'xml':
                     self::_output('text/xml', $ret);
                     return TRUE;
+                case 'ics':
+                    self::_output('text/calendar', $ret);
+                    return TRUE;
                 case 'html':
                     self::_output('text/html', $ret);
                     return TRUE;

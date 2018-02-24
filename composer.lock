@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "09dbfa8f430bee564d17150b1045e150",
+    "content-hash": "18056bab970e9eee60ba7c074111bb21",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -59,6 +59,57 @@
                 "twitter"
             ],
             "time": "2017-06-30T22:02:01+00:00"
+        },
+        {
+            "name": "eluceo/ical",
+            "version": "0.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/markuspoerschke/iCal.git",
+                "reference": "913b89e67b9f7865e1399b2dbc22d21857e7e236"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/markuspoerschke/iCal/zipball/913b89e67b9f7865e1399b2dbc22d21857e7e236",
+                "reference": "913b89e67b9f7865e1399b2dbc22d21857e7e236",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.0"
+            },
+            "suggest": {
+                "ext-mbstring": "Massive performance enhancement of line folding"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Eluceo\\iCal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Markus Poerschke",
+                    "email": "markus@eluceo.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The eluceo/iCal package offers a abstraction layer for creating iCalendars. You can easily create iCal files by using PHP object instead of typing your *.ics file by hand. The output will follow RFC 5545 as best as possible.",
+            "homepage": "https://github.com/markuspoerschke/iCal",
+            "keywords": [
+                "calendar",
+                "iCalendar",
+                "ical",
+                "ics",
+                "php calendar"
+            ],
+            "time": "2017-10-26T11:24:45+00:00"
         },
         {
             "name": "facebook/graph-sdk",

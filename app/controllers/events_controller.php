@@ -88,6 +88,28 @@ class Controller
         return self::index();
     }
 
+    static function ical()
+    {
+        $id = (int) Route::params('id');
+
+        try {
+            $event = Event::getInstance((int) $id);
+        } catch (Exception $e) {
+            Route::set_http_code('404');
+            return 'not found';
+        }
+
+        $vCalendar = new \Eluceo\iCal\Component\Calendar('adhocmusic.com');
+        $vEvent = new \Eluceo\iCal\Component\Event();
+        $vEvent
+            ->setDtStart(new \DateTime($event->getDate()))
+            ->setDtEnd(new \DateTime($event->getDate()))
+            ->setNoTime(true)
+            ->setSummary($event->getName());
+        $vCalendar->addComponent($vEvent);
+        return $vCalendar->render();
+    }
+
     static function show()
     {
         $id = (int) Route::params('id');

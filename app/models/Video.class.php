@@ -599,22 +599,13 @@ class Video extends Media
         switch ($id_host)
         {
             case self::HOST_YOUTUBE:
-                return 'http://youtube.com/v/' . $reference . '&hl=fr';
+                return 'https://youtube.com/v/' . $reference . '&hl=fr';
 
             case self::HOST_DAILYMOTION:
-                return 'http://www.dailymotion.com/swf/' . $reference . '&autoplay=1';
-
-            case self::HOST_MYSPACE:
-                return 'http://lads.myspace.com/videos/vplayer.swf?m=' . $reference . '&type=video&a=1';
-
-            case self::HOST_WAT:
-                return 'http://www.wat.tv/swf/' . $reference;
-
-            case self::HOST_GOOGLE:
-                return 'http://video.google.com/googleplayer.swf?docId=' . $reference . '&hl=fr&playerMode=mini';
+                return 'https://www.dailymotion.com/swf/' . $reference . '&autoplay=1';
 
             case self::HOST_FACEBOOK:
-                return 'http://b.static.ak.fbcdn.net/swf/mvp.swf?v=' . $reference;
+                return 'https://b.static.ak.fbcdn.net/swf/mvp.swf?v=' . $reference;
 
             case self::HOST_ADHOC:
                 return 'https://www.adhocmusic.com/jwplayer/player.swf'
@@ -626,7 +617,7 @@ class Video extends Media
                      . '&controbar=over';
 
             case self::HOST_VIMEO:
-                return 'http://vimeo.com/' . $reference;
+                return 'https://vimeo.com/' . $reference;
 
             default:
                 return false;

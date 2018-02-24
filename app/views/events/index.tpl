@@ -61,6 +61,7 @@
         <a href="#" class="fb-event-button fb-event-declined">Non merci</a>
       </p>
       {/if}
+      <a style="margin: 10px 0; padding: 5px; border: 1px solid #999" href="/events/ical/{$obj->getId()}.ics"><img src="/img/icones/cal.svg" width="16" height="16">Ajout au calendrier</a>
       <br class="clear" style="clear: both;">
     </div>
   </div>
