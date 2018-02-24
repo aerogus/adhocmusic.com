@@ -3,7 +3,23 @@
 var adhoc = {
 
   init: function () {
+    adhoc.menu();
     adhoc.scrollToTop();
+  },
+
+  menu: function () {
+    var menuSelected = false;
+    $('#btn-burger').click(function() {
+      if (!menuSelected) {
+        $(this).addClass('selected');
+        $('.top-menu').addClass('selected');
+        menuSelected = true;
+      } else {
+        $(this).removeClass('selected')
+        $('.top-menu').removeClass('selected');
+        menuSelected = false;
+      }
+    });
   },
 
   scrollToTop: function () {
