@@ -20,12 +20,12 @@
       <input type="password" id="login-password" name="password" placeholder="Password">
       <input id="form-login-submit" name="form-login-submit" type="submit" value="Ok">
       {if !empty($referer)}<input type="hidden" id="login-referer" name="referer" value="{$referer|escape:'url'}">{/if}
+      <a href="{$fb_login_url}" class="btn fb-login">Continuer avec Facebook</a>
       <ul>
         <li><a href="/auth/lost-password">mot de passe oublié</a></li>
         <li><a href="/membres/create">créer un compte</a></li>
       </ul>
     </form>
-    <a href="{$fb_login_url}" class="btn fb-login">Continuer avec Facebook</a>
   </div>
 </div>
 

@@ -28,6 +28,12 @@
         <li>16 décembre 2016 avec SO'N<br>https://www.facebook.com/events/1057931160993773/</li>
         <li>24 février 2017 avec Joolsy + Trep1<br>https://www.facebook.com/events/1653787128267635/</li>
         <li>24 mars 2017 avec Special Guest<br>https://www.facebook.com/events/330054137362210/</li>
+        <li>...</li>
+      </ol>
+
+      <p>Calendrier saison #3 (2017/2018)</p>
+      <ol class="episodes">
+        <li>...</li>
       </ol>
 
     </div>
