@@ -66,6 +66,8 @@
 
 {include file="common/menu-top.tpl"}
 
+<div class="site_content clearfix">
+
 {* file d'ariane *}
 {if !empty($trail) && ($trail|@count) > 1}
 <div class="breadcrumb">
@@ -80,5 +82,3 @@
   </ul>
 </div>
 {/if}
-
-<div class="site_content clearfix">

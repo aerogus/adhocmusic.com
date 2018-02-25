@@ -1,25 +1,23 @@
 /* Breadcrumb Styles */
 
 .breadcrumb
-  max-width 1000px
-  margin 0 auto
-  text-align left
 
   ul
 
     li
       display inline-block
 
-      a, span
+      a,
+      span
         display inline-block
-        padding 1rem
-        margin 10 5px 0 0
+        padding 1rem 0
 
       a
         font-weight bold
 
       &:after
-        content ' / '
+        content '〉'
+        padding 1rem 0 1rem 1rem
 
       &:last-child:after
           content ''
