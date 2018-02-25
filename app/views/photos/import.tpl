@@ -55,17 +55,17 @@ $(function() {
 <form id="form-photo-import" name="form-photo-import" method="post" action="/photos/import" enctype="multipart/form-data">
   <ol>
     <li>
-      <div class="error" id="error_file"{if empty($error_file)} style="display: none"{/if}>Vous devez renseigner le nom de l'archive .zip</div>
+      <div class="infobulle error" id="error_file"{if empty($error_file)} style="display: none"{/if}>Vous devez renseigner le nom de l'archive .zip</div>
       <input type="text" name="file" id="file" size="50" value="Archive.zip" style="float: right;">
       <label for="file"><img src="/img/icones/photo.png" alt=""> Nom du fichier .zip</label>
     </li>
     <li>
-      <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour ces photos</div>
+      <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour ces photos</div>
       <input type="text" id="name" name="name" size="50" value="" style="float: right">
       <label for="name"><img src="/img/icones/signature.png" alt=""> Titre</label>
     </li>
     <li>
-      <div class="error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe</div>
+      <div class="infobulle error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe</div>
       <input type="text" id="credits" name="credits" size="50" value="" style="float: right">
       <label for="credits"><img src="/img/icones/photo.png" alt=""> Photographe</label>
     </li>
@@ -74,7 +74,7 @@ $(function() {
       <input type="hidden" name="id_groupe" value="{$groupe->getId()}">
       <span style="float: right">{$groupe->getName()}</span>
     {else}
-      <div class="error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier ces photos à soit un groupe, soit un lieu, soit un événement</div>
+      <div class="infobulle error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier ces photos à soit un groupe, soit un lieu, soit un événement</div>
       <select id="id_groupe" name="id_groupe" style="float: right">
         <option value="0">Aucun</option>
         {foreach $groupes as $groupe}

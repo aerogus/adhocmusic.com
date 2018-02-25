@@ -2,7 +2,7 @@
 
 {if !empty($unknown_member)}
 
-<p class="error">Ce membre est introuvable !</p>
+<p class="infobulle error">Ce membre est introuvable !</p>
 
 {else}
 

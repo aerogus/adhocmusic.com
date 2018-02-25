@@ -4,14 +4,14 @@
 
 {if !empty($unknown_video)}
 
-<p class="error">Cette vidéo est introuvable !</p>
+<p class="infobulle error">Cette vidéo est introuvable !</p>
 
 {else}
 
 <form id="form-video-edit" name="form-video-edit" method="post" action="/videos/edit" enctype="multipart/form-data">
   <ul>
     <li>
-      <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
+      <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
       <input type="text" id="name" name="name" size="50" value="{$video->getName()|escape}" style="float: right;">
       <label for="name">Titre</label>
     </li>

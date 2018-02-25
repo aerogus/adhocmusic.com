@@ -1,9 +1,7 @@
 {include file="common/header.tpl"}
 
 {if $me->isInterne()}
-<div class="info">
-   <a href="/adm/">🔗 <strong>Accès zone privée</strong></a>
-</div>
+<div class="infobulle info"><a href="/adm/">🔗 <strong>Accès zone privée</strong></a></div>
 {/if}
 
 <div class="grid-3-small-2-tiny-1 has-gutter-l">
@@ -88,7 +86,7 @@
         {/foreach}
       </ul>
       {else}
-      <p class="validation">Vous n'êtes abonné à aucun groupe</p>
+      <p class="infobulle validation"">Vous n'êtes abonné à aucun groupe</p>
       {/if}
       <h5>Agenda</h5>
       {if !empty($alerting_events)}
@@ -98,7 +96,7 @@
       {/foreach}
       </ul>
       {else}
-      <p class="validation">Vous n'avez aucun événement dans votre agenda</p>
+      <p class="infobulle validation"">Vous n'avez aucun événement dans votre agenda</p>
       {/if}
       <h5>Lieux</h5>
       {if !empty($alerting_lieux)}
@@ -108,7 +106,7 @@
       {/foreach}
       </ul>
       {else}
-      <p class="validation">Vous n'êtes abonné à aucun lieu</p>
+      <p class="infobulle validation"">Vous n'êtes abonné à aucun lieu</p>
       {/if}
       <p><a href="/alerting/my">Gérer toutes mes alertes</a></p>
     </div>

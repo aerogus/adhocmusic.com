@@ -4,11 +4,11 @@
 
 {if !empty($unknown_groupe)}
 
-<div class="error">Groupe introuvable</div>
+<div class="infobulle error">Groupe introuvable</div>
 
 {elseif !empty($not_my_groupe)}
 
-<div class="error">Vous ne pouvez pas supprimer ce groupe.</div>
+<div class="infobulle error">Vous ne pouvez pas supprimer ce groupe.</div>
 
 {else}
 

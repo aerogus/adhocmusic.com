@@ -1,7 +1,7 @@
 {include file="common/header.tpl"}
 
 {if !empty($from)}
-<div class="error">
+<div class="infobulle error">
   <p>La page que vous demandez n'existe pas</p>
   <p>Voici le plan du site ainsi que les principaux liens.</p>
 </div>

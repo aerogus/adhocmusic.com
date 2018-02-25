@@ -2,7 +2,7 @@
 
 {if !empty($unknown_comment)}
 
-<p class="error">Ce commentaire est introuvable !</p>
+<p class="infobulle error">Ce commentaire est introuvable !</p>
 
 {else}
 

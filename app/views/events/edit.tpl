@@ -7,7 +7,7 @@
     <legend>Infos sur le lieu</legend>
     <ul>
       <li>
-        <div class="error" id="error_id_lieu"{if empty($error_id_lieu)} style="display: none"{/if}>Vous devez indiquer un lieu pour l'événement ou le saisir s'il n'est pas encore référencé.</div>
+        <div class="infobulle error" id="error_id_lieu"{if empty($error_id_lieu)} style="display: none"{/if}>Vous devez indiquer un lieu pour l'événement ou le saisir s'il n'est pas encore référencé.</div>
         <select id="id_country" name="id_country" style="float: right;">
           <option value="0">---</option>
         </select>
@@ -43,7 +43,7 @@
     <legend>Infos sur l'événement</legend>
     <ul>
       <li>
-        <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez indiquer un titre pour l'événement.</div>
+        <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez indiquer un titre pour l'événement.</div>
         <input id="name" name="name" style="float: right; width: 360px;" value="{$event->getName()|escape}">
         <label for="name">Titre</label>
       </li>
@@ -55,12 +55,12 @@
         <label for="date">Date</label>
       </li>
       <li>
-        <div class="error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez mettre une description pour cet événement.</div>
+        <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez mettre une description pour cet événement.</div>
         <textarea id="text" name="text" cols="40" rows="10" style="float: right;">{$event->getText()|escape}</textarea>
         <label for="text">Description</label>
       </li>
       <li>
-        <div class="error" id="error_price"{if empty($error_price)} style="display: none"{/if}>Vous devez écrire les tarifs de l'entrée.</div>
+        <div class="infobulle error" id="error_price"{if empty($error_price)} style="display: none"{/if}>Vous devez écrire les tarifs de l'entrée.</div>
         <textarea id="price" name="price" cols="40" rows="2" style="float: right;">{$event->getPrice()|escape}</textarea>
         <label for="price">Tarifs (Entrée, Bar, Vestiaire ...)</label>
       </li>
@@ -136,7 +136,7 @@
       </li>
     </ul>
   </fieldset>
-  <div class="success">Nouveau: liez cet événement à un événement Facebook existant ou bien créez directement un événement Facebook !</div>
+  <div class="infobulle success">Nouveau: liez cet événement à un événement Facebook existant ou bien créez directement un événement Facebook !</div>
   <fieldset>
     <legend>Facebook</legend>
     <ul>

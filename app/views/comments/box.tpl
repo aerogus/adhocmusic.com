@@ -38,24 +38,24 @@
       <p><a href="/auth/login">Identifiez-vous</a> pour poster un commentaire. <a href="/membres/create">Pas encore de compte ?</a></p>
     </li>
     <li>
-      <div class="error" id="error_pseudo"{if empty($error_pseudo)} style="display: none"{/if}>Vous devez écrire votre pseudonyme.</div>
+      <div class="infobulle error" id="error_pseudo"{if empty($error_pseudo)} style="display: none"{/if}>Vous devez écrire votre pseudonyme.</div>
       <label for="form-comment-box-pseudo">Pseudo</label>
       <input type="text" id="form-comment-box-pseudo" name="pseudo" placeholder="Pseudo">
     </li>
     <li>
-      <div class="error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez écrire votre email (elle ne sera pas publiée).</div>
+      <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez écrire votre email (elle ne sera pas publiée).</div>
       <label for="form-comment-box-email">Email</label>
       <input type="text" id="form-comment-box-email" name="email" placeholder="Email">
     </li>
     {/if}
     <li>
-      <div class="error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose.</div>
+      <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose.</div>
       <label for="form-comment-box-text">Texte</label>
       <textarea id="form-comment-box-text" name="text" placeholder="Votre commentaire"></textarea>
     </li>
     {if empty($is_auth)}
     <li>
-      <div class="error" id="error_antispam"{if empty($error_antispam)} style="display: none"{/if}>Mince vous semblez être un robot !</div>
+      <div class="infobulle error" id="error_antispam"{if empty($error_antispam)} style="display: none"{/if}>Mince vous semblez être un robot !</div>
       <label for="form-comment-box-antispam">Ecrivez "<strong>oui</strong>" si vous êtes un vrai humain</label>
       <input type="text" id="form-comment-box-antispam" name="antispam">
     </li>

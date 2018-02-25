@@ -1,6 +1,6 @@
 {include file="common/header.tpl"}
 
-{if !empty($sent)}<p class="success">Votre message a bien été envoyé</p>{/if}
+{if !empty($sent)}<p class="infobulle success">Votre message a bien été envoyé</p>{/if}
 
 <div class="grid-2-1">
 

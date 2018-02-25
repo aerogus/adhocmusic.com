@@ -9,17 +9,17 @@
       <ul>
         <li>
           <label for="file">Photo (.jpg)</label>
-          <div class="error" id="error_file"{if empty($error_file)} style="display: none"{/if}>Vous devez choisir une photo !</div>
+          <div class="infobulle error" id="error_file"{if empty($error_file)} style="display: none"{/if}>Vous devez choisir une photo !</div>
           <input type="file" name="file" id="file" value="">
         </li>
         <li>
           <label for="name">Titre</label>
-          <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la photo</div>
+          <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la photo</div>
           <input type="text" id="name" name="name" placeholder="Titre" size="50" value="">
         </li>
         <li>
           <label for="credits">Photographe</label>
-          <div class="error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe</div>
+          <div class="infobulle error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe</div>
           <input type="text" id="credits" name="credits" placeholder="Photographe" size="50" value="">
         </li>
         <li>
@@ -28,7 +28,7 @@
           <input type="hidden" name="id_groupe" value="{$groupe->getId()}">
           <span>{$groupe->getName()}</span>
         {else}
-          <div class="error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier cette photo à soit un groupe, soit un lieu, soit un événement</div>
+          <div class="infobulle error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier cette photo à soit un groupe, soit un lieu, soit un événement</div>
           <select id="id_groupe" name="id_groupe">
             <option value="0">Aucun</option>
             {foreach $groupes as $groupe}

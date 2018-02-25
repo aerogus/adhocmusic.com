@@ -64,12 +64,12 @@ $(function() {
     <ol>
       <li>
         <label for="subject">Sujet</label>
-        <div class="error" id="error_subject"{if empty($error_subject)} style="display: none"{/if}>Vous devez saisir un sujet</div>
+        <div class="infobulle error" id="error_subject"{if empty($error_subject)} style="display: none"{/if}>Vous devez saisir un sujet</div>
         <input name="subject" id="subject" type="text" maxlength="80" value="{$subject|escape}" style="width: 360px;">
       </li>
       <li>
         <label for="text">Message</label>
-        <div class="error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
+        <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
         <textarea class="tinymce" name="text" id="text" rows="10" cols="80" style="width: 100%;">{$text|escape}</textarea>
       </li>
       <li>

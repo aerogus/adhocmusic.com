@@ -3,7 +3,7 @@
 {include file="common/boxstart.tpl" boxtitle="Mes Groupes"}
 
 {if !empty($delete)}
-<div class="success">Groupe supprimé</div>
+<div class="infobulle success">Groupe supprimé</div>
 {/if}
 
 {if $groupes|@count > 0}

@@ -2,16 +2,16 @@
 
 {if !empty($unknown_lieu)}
 
-<p class="error">Ce lieu est introuvable !</p>
+<p class="infobulle error">Ce lieu est introuvable !</p>
 
 {else}
 
 {if !empty($create)}
-<div class="success">Le lieu a bien été ajouté</div>
+<div class="infobulle success">Le lieu a bien été ajouté</div>
 {/if}
 
 {if !empty($edit)}
-<div class="success">Le lieu a bien été modifié</div>
+<div class="infobulle success">Le lieu a bien été modifié</div>
 {/if}
 
 {include file="common/boxstart.tpl" boxtitle=$lieu->getName()|escape}

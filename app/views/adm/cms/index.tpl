@@ -2,9 +2,9 @@
 
 {include file="common/boxstart.tpl" boxtitle="Pages Statiques"}
 
-{if !empty($create)}<p class="success">Page ajoutée</p>{/if}
-{if !empty($edit)}<p class="success">Page modifiée</p>{/if}
-{if !empty($delete)}<p class="success">Page supprimée</p>{/if}
+{if !empty($create)}<p class="infobulle success">Page ajoutée</p>{/if}
+{if !empty($edit)}<p class="infobulle success">Page modifiée</p>{/if}
+{if !empty($delete)}<p class="infobulle success">Page supprimée</p>{/if}
 
 <table>
   <tr>

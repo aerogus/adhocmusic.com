@@ -15,7 +15,7 @@
     {/foreach}
     </ul>
     {else}
-    <p class="validation">Vous n'êtes abonné à aucun groupe</p>
+    <p class="infobulle validation"">Vous n'êtes abonné à aucun groupe</p>
     {/if}
     <p>Pour ajouter un abonnement groupe, veuillez vous rendre sur une <a href="/groupes/">fiche groupe</a> et cliquez sur "S'abonner à ce groupe".</p>
   </div>
@@ -34,7 +34,7 @@
     {/foreach}
     </ul>
     {else}
-    <p class="validation">Vous n'avez aucun événement dans votre agenda</p>
+    <p class="infobulle validation"">Vous n'avez aucun événement dans votre agenda</p>
     {/if}
     <p>Pour ajouter un événement à votre agenda, veuillez vous rendre sur une <a href="/events/">fiche événement</a> et cliquez sur "Ajouter à mon agenda".</p>
   </div>
@@ -53,7 +53,7 @@
     {/foreach}
     </ul>
     {else}
-    <p class="validation">Vous n'êtes abonné à aucun lieu</p>
+    <p class="infobulle validation"">Vous n'êtes abonné à aucun lieu</p>
     {/if}
     <p>Pour ajouter un abonnement lieu, veuillez vous rendre sur une <a href="/lieux/">fiche lieu</a> et cliquez sur "S'abonner à ce lieu".</p>
   </div>

@@ -1,11 +1,11 @@
 {include file="common/header.tpl"}
 
 {if !empty($auth_failed)}
-<div class="error">Authentification échouée</div>
+<div class="infobulle error">Authentification échouée</div>
 {/if}
 
 {if !empty($auth_required)}
-<div class="warning">Vous devez posséder un compte AD'HOC pour accéder à cette page ou vous n'avez pas les droits suffisants</div>
+<div class="infobulle warning">Vous devez posséder un compte AD'HOC pour accéder à cette page ou vous n'avez pas les droits suffisants</div>
 {/if}
 
 <div class="box" style="width: 215px; margin: 0 auto 20px">
@@ -14,9 +14,9 @@
   </header>
   <div>
     <form id="form-login" name="form-login" method="post" action="/auth/login">
-      <div class="error" id="error_login-pseudo"{if empty($error_login_pseudo)} style="display: none"{/if}>Pseudo vide !</div>
+      <div class="infobulle error" id="error_login-pseudo"{if empty($error_login_pseudo)} style="display: none"{/if}>Pseudo vide !</div>
       <input type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo">
-      <div class="error" id="error_login-password"{if empty($error_login_password)} style="display: none"{/if}>Password vide !</div>
+      <div class="infobulle error" id="error_login-password"{if empty($error_login_password)} style="display: none"{/if}>Password vide !</div>
       <input type="password" id="login-password" name="password" placeholder="Password">
       <input id="form-login-submit" name="form-login-submit" type="submit" value="Ok">
       {if !empty($referer)}<input type="hidden" id="login-referer" name="referer" value="{$referer|escape:'url'}">{/if}

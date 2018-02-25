@@ -2,7 +2,7 @@
 
 {if !empty($unknown_group)}
 
-<p class="error">Ce groupe est introuvable !</p>
+<p class="infobulle error">Ce groupe est introuvable !</p>
 
 {else}
 
@@ -35,7 +35,7 @@
           {/foreach}
         </ul>
         {else}
-        <p class="warning">Aucun! Vous faites partie de ce groupe ? <a href="/contact">contactez nous</a></p>
+        <p class="infobulle warning">Aucun! Vous faites partie de ce groupe ? <a href="/contact">contactez nous</a></p>
         {/if}
         <p><strong>Liens</strong></p>
         <ul class="grplinks">

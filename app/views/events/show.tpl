@@ -2,7 +2,7 @@
 
 {if !empty($unknown_event)}
 
-<p class="error">Cet événement est introuvable !</p>
+<p class="infobulle error">Cet événement est introuvable !</p>
 
 {else}
 

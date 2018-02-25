@@ -9,7 +9,7 @@
     <div>
 
       {if !empty($sent_ok)}
-      <div class="success">
+      <div class="infobulle success">
         <strong>Votre message a bien été envoyé, merci !</strong><br>
         Nous tâcherons d'y répondre dans les plus brefs délais<br>
         Musicalement,<br>
@@ -18,7 +18,7 @@
       {/if}
 
       {if !empty($sent_ko)}
-      <div class="error">Message non envoyé</div>
+      <div class="infobulle error">Message non envoyé</div>
       {/if}
 
       {if !empty($show_form)}
@@ -28,22 +28,22 @@
       <form id="form-contact" name="form-contact" method="post" action="" enctype="multipart/form-data">
         <ul>
           <li>
-            <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner votre nom</div>
+            <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner votre nom</div>
             <label for="name">Nom</label>
             <input name="name" id="name" type="text" maxlength="80" value="{$name|escape}" style="width: 360px; padding: 5px;">
           </li>
           <li>
-            <div class="error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Votre Email est incorrect</div>
+            <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Votre Email est incorrect</div>
             <label for="email">Email</label>
             <input name="email" id="email" type="email" maxlength="80" value="{$email|escape}" style="width: 360px; padding: 5px;">
           </li>
           <li>
-            <div class="error" id="error_subject"{if empty($error_subject)} style="display: none"{/if}>Vous devez saisir un sujet</div>
+            <div class="infobulle error" id="error_subject"{if empty($error_subject)} style="display: none"{/if}>Vous devez saisir un sujet</div>
             <label for="subject">Sujet</label>
             <input name="subject" id="subject" type="text" maxlength="80" value="{$subject|escape}" style="width: 360px; padding: 5px;">
           </li>
           <li>
-            <div id="warning" class="warning" style="display: none">
+            <div id="warning" class="infobulle warning" style="display: none">
               <p><strong>Avant de nous contacter :</strong></p>
               <ul>
                 <li>La programmation des concerts de l'association AD'HOC se fait à partir de la base de données groupes du présent site. Si vous voulez participer à un de nos événements, merci de créer votre fiche groupe avant toute chose !</li>
@@ -51,7 +51,7 @@
                 <li>Vous désirez nous contacter pour d'autres sujets ? Voici notre formulaire de contact:</li>
               </ul>
             </div>
-            <div class="error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
+            <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
             <label for="text">Message</label>
             <textarea name="text" id="text" rows="10" cols="80" style="width: 360px; padding: 5px;">{$text|escape}</textarea>
           </li>

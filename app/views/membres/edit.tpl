@@ -3,7 +3,7 @@
 {include file="common/boxstart.tpl" boxtitle="Mes Infos Persos"}
 
 {if !empty($updated_ok)}
-<p class="success">Enregistrement effectué</p>
+<p class="infobulle success">Enregistrement effectué</p>
 {/if}
 
 <form id="form-member-edit" name="form-member-edit" method="post" action="/membres/edit" enctype="multipart/form-data">
@@ -83,12 +83,12 @@
         <label for="avatar">Avatar public (.jpg 100x---)</label>
       </li>
       <li>
-        <div class="error" id="error_last_name"{if empty($error_last_name)} style="display: none"{/if}>Vous devez renseigner votre nom</div>
+        <div class="infobulle error" id="error_last_name"{if empty($error_last_name)} style="display: none"{/if}>Vous devez renseigner votre nom</div>
         <input id="last_name" name="last_name" type="text" size="40" maxlength="50" value="{$me->getLastName()|escape}" style="float: right">
         <label for="last_name">Nom</label>
       </li>
       <li>
-        <div class="error" id="error_first_name"{if empty($error_first_name)} style="display: none"{/if}>Vous devez préciser votre prénom</div>
+        <div class="infobulle error" id="error_first_name"{if empty($error_first_name)} style="display: none"{/if}>Vous devez préciser votre prénom</div>
         <input id="first_name" name="first_name" type="text" size="40" maxlength="50" value="{$me->getFirstName()|escape}" style="float: right">
         <label for="first_name">Prénom</label>
       </li>
@@ -103,40 +103,40 @@
         <label for="cp">Code Postal</label>
       </li>
       <li>
-        <div class="error" id="error_city"{if empty($error_city)} style="display: none"{/if}>Vous devez renseigner votre ville</div>
+        <div class="infobulle error" id="error_city"{if empty($error_city)} style="display: none"{/if}>Vous devez renseigner votre ville</div>
         <input id="city" name="city" type="text" size="40" maxlength="50" value="{$me->getCity()|escape}" style="float: right">
         <label for="city">Ville</label>
       </li>
       <li>
-        <div class="error" id="error_country"{if  empty($error_country)} style="display: none"{/if}>Vous devez renseigner votre pays</div>
+        <div class="infobulle error" id="error_country"{if  empty($error_country)} style="display: none"{/if}>Vous devez renseigner votre pays</div>
         <input id="country" name="country" type="text" size="40" maxlength="50" value="{$me->getCountry()|escape}" style="float: right">
         <label for="country">Pays</label>
       </li>
       *}
 
       <li>
-        <div class="error" id="error_id_country"{if empty($error_id_country)} style="display: none"{/if}>Vous devez choisir un pays</div>
+        <div class="infobulle error" id="error_id_country"{if empty($error_id_country)} style="display: none"{/if}>Vous devez choisir un pays</div>
         <select id="id_country" name="id_country" style="float: right;">
           <option value="0">---</option>
         </select>
         <label for="id_country">Pays (*)</label>
       </li>
       <li>
-        <div class="error" id="error_id_region"{if empty($error_id_region)} style="display: none"{/if}>Vous devez choisir une région</div>
+        <div class="infobulle error" id="error_id_region"{if empty($error_id_region)} style="display: none"{/if}>Vous devez choisir une région</div>
         <select id="id_region" name="id_region" style="float: right;">
           <option value="0">---</option>
         </select>
         <label for="id_region">Région (*)</label>
       </li>
       <li>
-        <div class="error" id="error_id_departement"{if empty($error_id_departement)} style="display: none"{/if}>Vous devez choisir un département</div>
+        <div class="infobulle error" id="error_id_departement"{if empty($error_id_departement)} style="display: none"{/if}>Vous devez choisir un département</div>
         <select id="id_departement" name="id_departement" style="float: right;">
           <option value="0">---</option>
         </select>
         <label for="id_departement">Département (*)</label>
       </li>
       <li>
-        <div class="error" id="error_id_city"{if empty($error_id_city)} style="display: none"{/if}>Vous devez choisir une ville</div>
+        <div class="infobulle error" id="error_id_city"{if empty($error_id_city)} style="display: none"{/if}>Vous devez choisir une ville</div>
         <select id="id_city" name="id_city" style="float: right;">
           <option value="0">---</option>
         </select>
@@ -151,7 +151,7 @@
         <label for="port">Portable</label>
       </li>
       <li>
-        <div class="error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez renseigner votre email</div>
+        <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez renseigner votre email</div>
         <input id="email" name="email" type="email" size="40" maxlength="50" value="{$me->getEmail()|escape}" style="float: right">
         <label for="email">Email</label>
       </li>

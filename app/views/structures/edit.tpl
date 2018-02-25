@@ -6,7 +6,7 @@
   <fieldset>
     <ul>
       <li>
-        <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la structure</div>
+        <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la structure</div>
         <label for="name">Nom</label>
         <input type="text" id="name" name="name" value="{$structure->getName()|escape}">
       </li>

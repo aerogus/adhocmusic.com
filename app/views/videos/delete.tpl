@@ -2,7 +2,7 @@
 
 {if !empty($unknown_video)}
 
-<p class="error">Cette vidéo est introuvable !</p>
+<p class="infobulle error">Cette vidéo est introuvable !</p>
 
 {else}
 

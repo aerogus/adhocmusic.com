@@ -4,7 +4,7 @@
 
 {if !empty($unknown_lieu)}
 
-<p class="error">Ce lieu est introuvable !</p>
+<p class="infobulle error">Ce lieu est introuvable !</p>
 
 {else}
 
