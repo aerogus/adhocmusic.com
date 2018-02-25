@@ -8,8 +8,6 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('menuselected', 'prive');
-
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
         $trail->addStep("Forums", "/adm/forums/");
@@ -29,8 +27,6 @@ class Controller
         $forum = ForumPrive::getForum($id_forum);
 
         $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'prive');
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
@@ -58,8 +54,6 @@ class Controller
         $page = (int) Route::params('page');
 
         $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'prive');
 
         $data = ForumPrive::getMessages($id_thread, $page);
         $forum = ForumPrive::getForum($data['thread']['id_forum']);
@@ -167,8 +161,6 @@ class Controller
         }
 
         $forum = ForumPrive::getForum($id_forum);
-
-        $smarty->assign('menuselected', 'prive');
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");

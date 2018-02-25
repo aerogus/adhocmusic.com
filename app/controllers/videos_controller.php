@@ -120,21 +120,17 @@ class Controller
 
             // menu et fil d'ariane
             if ($from === 'groupe' && $video->getIdGroupe()) {
-                $smarty->assign('menuselected', 'groupe');
                 $trail->addStep("Groupes", "/groupes/");
                 $trail->addStep($groupe->getName(), $groupe->getUrl());
             } elseif ($from === 'profil' && $video->getIdContact()) {
                 $trail->addStep("Zone Membre", "/membres/");
             } elseif ($from === 'event' && $video->getIdEvent()) {
-                $smarty->assign('menuselected', 'event');
                 $trail->addStep("Agenda", "/events/");
                 $trail->addStep($event->getName(), "/events/" . $event->getId());
             } elseif ($from === 'lieu' && $video->getIdLieu()) {
-                $smarty->assign('menuselected', 'lieux');
                 $trail->addStep("Lieux", "/lieux/");
                 $trail->addStep($lieu->getName(), "/lieux/" . $lieu->getId());
             } else {
-                $smarty->assign('menuselected', 'media');
                 $trail->addStep("Média", "/medias/");
             }
             $trail->addStep($video->getName());

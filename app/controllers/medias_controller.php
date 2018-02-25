@@ -8,7 +8,6 @@ class Controller
         $trail->addStep("Média");
 
         $smarty = new AdHocSmarty();
-        $smarty->assign('menuselected', 'media');
 
         $smarty->enqueue_script('/js/medias.js');
 

@@ -96,7 +96,6 @@ class Controller
             }
 
             if ($from == 'groupe' && $photo->getIdGroupe()) {
-                $smarty->assign('menuselected', 'groupe');
                 $trail->addStep("Groupes", "/groupes/");
                 $trail->addStep($groupe->getName(), $groupe->getUrl());
             } elseif ($from == 'profil' && $photo->getIdContact()) {
@@ -108,7 +107,6 @@ class Controller
                 $trail->addStep("Lieux", "/lieux/");
                 $trail->addStep($lieu->getName(), $lieu->getUrl());
             } else {
-                $smarty->assign('menuselected', 'media');
                 $trail->addStep("Média", "/medias/");
             }
             $trail->addStep($photo->getName());

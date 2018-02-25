@@ -7,8 +7,6 @@ class Controller
         Tools::auth(Membre::TYPE_INTERNE);
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('menuselected', 'prive');
-
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
         $trail->addStep("Pages Statiques");
@@ -28,8 +26,6 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('menuselected', 'prive');
-
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
         $trail->addStep("Pages Statiques", "/adm/cms/");
@@ -41,7 +37,6 @@ class Controller
         {
             $data = [
                 'alias'        => (string) Route::params('alias'),
-                'menuselected' => (string) Route::params('menuselected'),
                 'breadcrumb'   => (string) Route::params('breadcrumb'),
                 'title'        => (string) Route::params('title'),
                 'content'      => (string) Route::params('content'),
@@ -51,7 +46,6 @@ class Controller
 
             $cms = CMS::init();
             $cms->setAlias($data['alias']);
-            $cms->setMenuselected($data['menuselected']);
             $cms->setBreadcrumb($data['breadcrumb']);
             $cms->setTitle($data['title']);
             $cms->setContent($data['content']);
@@ -74,8 +68,6 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('menuselected', 'prive');
-
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
         $trail->addStep("Pages Statiques", "/adm/cms/");
@@ -88,7 +80,6 @@ class Controller
             $data = [
                 'id_cms'       => (int) Route::params('id_cms'),
                 'alias'        => (string) Route::params('alias'),
-                'menuselected' => (string) Route::params('menuselected'),
                 'breadcrumb'   => (string) Route::params('breadcrumb'),
                 'title'        => (string) Route::params('title'),
                 'content'      => (string) Route::params('content'),
@@ -98,7 +89,6 @@ class Controller
 
             $cms = CMS::getInstance($data['id_cms']);
             $cms->setAlias($data['alias']);
-            $cms->setMenuselected($data['menuselected']);
             $cms->setBreadcrumb($data['breadcrumb']);
             $cms->setTitle($data['title']);
             $cms->setContent($data['content']);
@@ -122,8 +112,6 @@ class Controller
         $id = (int) Route::params('id');
 
         $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'prive');
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");

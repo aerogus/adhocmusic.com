@@ -8,8 +8,6 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('menuselected', 'prive');
-
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
         $trail->addStep("Foire aux questions");
@@ -27,8 +25,6 @@ class Controller
         Tools::auth(Membre::TYPE_INTERNE);
 
         $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'prive');
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
@@ -64,8 +60,6 @@ class Controller
         $id_faq = (int) Route::params('id');
 
         $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'prive');
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
@@ -103,8 +97,6 @@ class Controller
         $id = (int) Route::params('id');
 
         $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'prive');
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");

@@ -8,8 +8,6 @@ class Controller
     {
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('menuselected', 'agenda');
-
         $smarty->enqueue_script('/js/events.js');
 
         $trail = Trail::getInstance();
@@ -118,8 +116,6 @@ class Controller
 
         $smarty->enqueue_script('/js/events-show.js');
 
-        $smarty->assign('menuselected', 'agenda');
-
         $trail = Trail::getInstance();
         $trail->addStep("Agenda", "/events/");
 
@@ -219,8 +215,6 @@ class Controller
         $smarty->enqueue_script('/js/jquery-ui-datepicker-fr.js');
         $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/events-create.js');
-
-        $smarty->assign('menuselected', 'agenda');
 
         $trail = Trail::getInstance();
         $trail->addStep("Agenda", "/events/");
@@ -474,8 +468,6 @@ class Controller
         $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/events-edit.js');
 
-        $smarty->assign('menuselected', 'agenda');
-
         $event = Event::getInstance((int) $id);
         $lieu = Lieu::getInstance($event->getIdLieu());
 
@@ -642,8 +634,6 @@ class Controller
         Tools::auth(Membre::TYPE_ADMIN);
 
         $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'agenda');
 
         $trail = Trail::getInstance();
         $trail->addStep("Agenda", "/events/");

@@ -8,8 +8,6 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('menuselected', 'prive');
-
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
         $trail->addStep("Newsletter");
@@ -48,8 +46,6 @@ class Controller
         $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.js');
         $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/mode/xml/xml.js');
         $smarty->enqueue_script('/js/adm/newsletter.js');
-
-        $smarty->assign('menuselected', 'prive');
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
@@ -94,8 +90,6 @@ class Controller
         $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.js');
         $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/mode/xml/xml.js');
         $smarty->enqueue_script('/js/adm/newsletter.js');
-
-        $smarty->assign('menuselected', 'prive');
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");

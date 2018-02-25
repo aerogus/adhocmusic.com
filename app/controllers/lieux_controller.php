@@ -9,8 +9,6 @@ class Controller
         $lat = $_SESSION['lat'];
         $lng = $_SESSION['lng'];
 
-        $smarty->assign('menuselected', 'lieux');
-
         $trail = Trail::getInstance();
         $trail->addStep("Lieux de diffusion", "/lieux/");
 
@@ -47,8 +45,6 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('menuselected', 'lieux');
-
         $trail = Trail::getInstance();
         $trail->addStep("Lieux de diffusion", "/lieux/");
         $trail->addStep("Mes lieux");
@@ -71,8 +67,6 @@ class Controller
 
         $smarty->assign('create', (bool) Route::params('create'));
         $smarty->assign('edit', (bool) Route::params('edit'));
-
-        $smarty->assign('menuselected', 'lieux');
 
         try {
             $lieu = Lieu::getInstance($id);
@@ -257,8 +251,6 @@ class Controller
             }
         }
 
-        $smarty->assign('menuselected', 'lieux');
-
         $trail = Trail::getInstance();
         $trail->addStep("Lieux de diffusion", "/lieux/");
         $trail->addStep("Ajouter");
@@ -300,8 +292,6 @@ class Controller
 
         $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/lieux-edit.js');
-
-        $smarty->assign('menuselected', 'lieux');
 
         try {
             $lieu = Lieu::getInstance($id);
@@ -421,7 +411,6 @@ class Controller
         $trail->addStep("Supprimer");
 
         $smarty = new AdHocSmarty();
-        $smarty->assign('menuselected', 'lieux');
 
         try {
             $lieu = Lieu::getInstance($id);

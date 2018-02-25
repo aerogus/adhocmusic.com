@@ -13,8 +13,6 @@ class Controller
         $smarty->assign('og_type', 'website');
         $smarty->assign('og_image', HOME_URL . '/img/screenshot-homepage.jpg');
 
-        $smarty->assign('menuselected', 'home');
-
         $smarty->assign('videos', Video::getVideos([
             'online' => true,
             'sort'   => 'random',
@@ -51,20 +49,24 @@ class Controller
         return $smarty->fetch('index.tpl');
     }
 
+    /**
+     * Boutique AD'HOC
+     */
     static function shop()
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('shop.tpl');
     }
 
+    /**
+     * Les partenaires
+     */
     static function partners()
     {
         $smarty = new AdHocSmarty();
 
         $smarty->assign('title', "♫ Les Partenaires de l'association AD'HOC / Devenir Partenaire");
         $smarty->assign('description', "Les Partenaires de l'Association AD'HOC");
-
-        $smarty->assign('menuselected', 'home');
 
         $trail = Trail::getInstance();
         $trail->addStep("Partenaires");
@@ -79,8 +81,6 @@ class Controller
         $smarty->assign('title', "♫ Les Visuels de l'association AD'HOC");
         $smarty->assign('description', "Les visuels d'AD'HOC");
 
-        $smarty->assign('menuselected', 'home');
-
         $trail = Trail::getInstance();
         $trail->addStep("Visuels");
 
@@ -90,8 +90,6 @@ class Controller
     static function contact()
     {
         $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'contact');
 
         $smarty->enqueue_script('/js/contact.js');
 
@@ -247,8 +245,6 @@ class Controller
         $from = trim((string) Route::params('from'));
         $smarty->assign('from', $from);
 
-        $smarty->assign('menuselected', 'home');
-
         $trail = Trail::getInstance();
         $trail->addStep("Plan du Site");
 
@@ -258,8 +254,6 @@ class Controller
     static function mentions_legales()
     {
         $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'home');
 
         $trail = Trail::getInstance();
         $trail->addStep("Mentions Légales");
@@ -281,6 +275,9 @@ class Controller
         return $smarty->fetch('common/header.tpl') . $cms->getContent() . $smarty->fetch('common/footer.tpl');
     }
 
+    /**
+     * Redirection
+     */
     static function r()
     {
         $url = urldecode((string) Route::params('url'));
@@ -291,22 +288,5 @@ class Controller
         Newsletter::addHit($id_newsletter, $id_contact, $url);
         // todo: track le hit
         Tools::redirect($url);
-    }
-
-    /**
-     * test facebook webhook
-     */
-    static function fbwh()
-    {
-        $mode = Route::params('hub_mode');
-        $challenge = Route::params('hub_challenge');
-        $verify_token = Route::params('hub_verify_token');
-
-        $request_body = file_get_contents('php://input');
-        $data = json_decode($request_body);
-
-        mail(DEBUG_EMAIL, 'webhook', print_r($data, true));
-
-        return (string) $challenge;
     }
 }

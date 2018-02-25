@@ -62,7 +62,6 @@ class Controller
         $id = (int) Route::params('id');
 
         $smarty = new AdHocSmarty();
-        $smarty->assign('menuselected', 'media');
 
         try {
             $audio = Audio::getInstance($id);

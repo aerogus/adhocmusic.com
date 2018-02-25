@@ -15,8 +15,6 @@ class Controller
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
         $smarty->enqueue_script('/js/assoce.js');
 
-        $smarty->assign('menuselected', 'assoce');
-
         $trail = Trail::getInstance();
         $trail->addStep("L'Association", "/assoce");
         $trail->addStep("Présentation");
@@ -45,8 +43,6 @@ class Controller
         $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
         $smarty->enqueue_script('/js/assoce.js');
-
-        $smarty->assign('menuselected', 'assoce');
 
         $trail = Trail::getInstance();
         $trail->addStep("L'Association", "/assoce");
@@ -80,8 +76,6 @@ class Controller
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
         $smarty->enqueue_script('/js/assoce.js');
 
-        $smarty->assign('menuselected', 'assoce');
-
         $trail = Trail::getInstance();
         $trail->addStep("L'Association", "/assoce");
         $trail->addStep("Les Afterworks");
@@ -111,10 +105,11 @@ class Controller
         $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
         $smarty->enqueue_script('/js/assoce.js');
-        $smarty->assign('menuselected', 'assoce');
+
         $trail = Trail::getInstance();
         $trail->addStep("L'Association", "/assoce");
         $trail->addStep("L'Equipe");
+
         $smarty->assign('photos', Photo::getPhotos([
             'online' => true,
             'sort'   => 'random',
@@ -137,8 +132,6 @@ class Controller
         $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
         $smarty->enqueue_script('/js/assoce.js');
-
-        $smarty->assign('menuselected', 'assoce');
 
         $trail = Trail::getInstance();
         $trail->addStep("L'Association", "/assoce");
@@ -171,8 +164,6 @@ class Controller
         $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
         $smarty->enqueue_script('/js/assoce.js');
-
-        $smarty->assign('menuselected', 'assoce');
 
         $trail = Trail::getInstance();
         $trail->addStep("L'Association", "/assoce");

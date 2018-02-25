@@ -9,8 +9,6 @@ class Controller
         $smarty->assign('title', "♫ Les groupes de la communauté musicale AD'HOC");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
-        $smarty->assign('menuselected', 'groupes');
-
         $trail = Trail::getInstance();
         $trail->addStep("Groupes", "/groupes/");
 
@@ -67,8 +65,6 @@ class Controller
         $smarty->assign('title', "♫ ".$groupe->getName()." (".$groupe->getStyle().")");
         $smarty->assign('description', Tools::tronc($groupe->getMiniText(), 175));
         $smarty->assign('og_type', 'band');
-
-        $smarty->assign('menuselected', 'groupes');
 
         $smarty->assign('is_loggued', !empty($_SESSION['membre']));
 
@@ -481,22 +477,5 @@ class Controller
         $smarty->assign('groupe', $groupe);
 
         return $smarty->fetch('groupes/delete.tpl');
-    }
-
-    static function playlist()
-    {
-        $id = (int) Route::params('id');
-
-        $smarty = new AdHocSmarty();
-
-        $smarty->assign('audios', Audio::getAudios([
-            'online' => true,
-            'groupe' => (int) $id,
-            'limit'  => 10,
-            'sort'   => 'id_audio',
-            'sens'   => 'DESC',
-        ]));
-
-        return $smarty->fetch('groupes/playlist.tpl');
     }
 }

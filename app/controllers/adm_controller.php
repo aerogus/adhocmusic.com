@@ -239,8 +239,6 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('menuselected', 'prive');
-
         $smarty->assign('title', "AD'HOC : Administration du site");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
@@ -315,8 +313,6 @@ class Controller
 
         $db = DataBase::getInstance();
 
-        $smarty->assign('menuselected', 'prive');
-
         $smarty->assign('title', "AD'HOC : Administration du site");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
@@ -380,8 +376,6 @@ class Controller
 
         $db = DataBase::getInstance();
 
-        $smarty->assign('menuselected', 'prive');
-
         $smarty->assign('title', "AD'HOC : Administration du site");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
@@ -444,8 +438,6 @@ class Controller
         Tools::auth(Membre::TYPE_INTERNE);
 
         $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'prive');
 
         $full = false;
         if (isset($_GET['full'])) {
@@ -512,8 +504,6 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('menuselected', 'prive');
-
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
         $trail->addStep("Groupe de Style");
@@ -567,8 +557,6 @@ class Controller
 
         $db = DataBase::getInstance();
         $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'prive');
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
@@ -671,8 +659,6 @@ class Controller
         $out = '';
 
         $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'prive');
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
@@ -829,8 +815,6 @@ class Controller
         $id_type_musicien = (int) Route::params('type');
 
         $smarty = new AdHocSmarty();
-
-        $smarty->assign('menuselected', 'prive');
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
