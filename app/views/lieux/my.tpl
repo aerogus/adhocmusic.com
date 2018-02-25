@@ -1,16 +1,10 @@
-{include file="common/header.tpl" js_jquery_tablesorter=true}
-
-<script>
-$(function () {
-  $("#meslieux").tablesorter();
-});
-</script>
+{include file="common/header.tpl"}
 
 {include file="common/boxstart.tpl" boxtitle="Mes lieux"}
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-<table id="meslieux" class="tablesorter" style="font-size: 0.8em">
+<table>
   <thead>
     <tr>
       <th>Pays</th>

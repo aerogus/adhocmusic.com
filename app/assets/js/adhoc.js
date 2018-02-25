@@ -105,14 +105,6 @@ jQuery(document).ready(function ($) {
     $(this).children('.overlay-80').css('visibility', 'hidden');
   });
 
-  // login box
-  $('#boxlogin-outter').find('span').hover(function () {
-    $('#boxlogin-inner').show();
-  });
-  $('#boxlogin-inner').find('.boxtitle span').hover(function () {
-    $('#boxlogin-inner').hide();
-  });
-
   $('#form-login').submit(function () {
     var valid = true;
     if (!$('#login-pseudo').val().length) {

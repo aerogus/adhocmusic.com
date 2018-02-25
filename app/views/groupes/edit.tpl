@@ -36,17 +36,6 @@
       <div class="error" id="error_style"{if empty($error_style)} style="display: none"{/if}>Vous devez préciser le style musical</div>
       <label for="style">Style</label>
       <input type="text" id="style" name="style" value="{$data.style|escape}">
-      {*
-      <br>
-      {section name=style start=0 loop=3}
-      {$smarty.section.style.index + 1} - <select id="style" name="style[{$smarty.section.style.index}]">
-        <option value="0">---</option>
-        {foreach from=$styles key=id item=name}
-        <option value="{$id}"{if false} selected="selected"{/if}>{$name}</option>
-        {/foreach}
-      </select>
-      {/section}
-      *}
     </li>
     <li>
       <div class="error" id="error_influences"{if empty($error_influences)} style="display: none"{/if}>Vous devez préciser vos influences</div>

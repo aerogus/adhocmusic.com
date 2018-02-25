@@ -135,7 +135,7 @@ function clearPoints()
 
 </script>
 
-<div id="left">
+<div>
 
 {include file="common/boxstart.tpl" boxtitle="Proche de chez vous"}
 {foreach from=$lieux item=lieu}
