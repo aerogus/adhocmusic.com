@@ -77,8 +77,6 @@
 1|auth|login|GET|/auth/login
 1|auth|login|POST|/auth/login
 1|auth|facebook_login_callback|GET|/auth/facebook-login-callback
-1|auth|twitter_login_callback|GET|/auth/twitter-login-callback
-1|auth|google_login_callback|GET|/auth/google-login-callback
 1|auth|logout|GET|/auth/logout
 1|auth|change_password|GET|/auth/change-password
 1|auth|change_password|POST|/auth/change-password
@@ -138,7 +136,6 @@
 1|groupes|edit|POST|/groupes/edit
 1|groupes|delete|GET|/groupes/delete/:id
 1|groupes|delete|POST|/groupes/delete
-1|groupes|playlist|GET|/groupes/playlist/:id
 1|groupes|show|GET|/groupes/:id
 1|index|index|GET|/
 1|index|shop|GET|/shop
@@ -151,8 +148,6 @@
 1|index|mentions_legales|GET|/mentions-legales
 1|index|cms|GET|/cms/:id
 1|index|r|GET|/r/:url
-1|index|fbwh|GET|/fbwh
-1|index|fbwh|POST|/fbwh
 1|lieux|index|GET|/lieux/
 1|lieux|my|GET|/lieux/my
 1|lieux|create|GET|/lieux/create
