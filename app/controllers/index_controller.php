@@ -289,4 +289,14 @@ class Controller
         // todo: track le hit
         Tools::redirect($url);
     }
+
+    static function styleguide()
+    {
+        $smarty = new AdHocSmarty();
+
+        $trail = Trail::getInstance();
+        $trail->addStep("Guide de style");
+
+        return $smarty->fetch('styleguide.tpl');
+    }
 }
