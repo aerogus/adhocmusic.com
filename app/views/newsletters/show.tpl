@@ -1,6 +1,6 @@
 {if !empty($unknown_newsletter)}
 
-<p class="error">Cette newsletter est introuvable !</p>
+<p class="infobulle error">Cette newsletter est introuvable !</p>
 
 {else}
 

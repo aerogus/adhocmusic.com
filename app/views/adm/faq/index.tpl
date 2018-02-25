@@ -2,9 +2,9 @@
 
 {include file="common/boxstart.tpl" boxtitle="Foire aux questions"}
 
-{if !empty($create)}<p class="success">Question ajoutée</p>{/if}
-{if !empty($edit)}<p class="success">Question modifiée</p>{/if}
-{if !empty($delete)}<p class="success">Question supprimée</p>{/if}
+{if !empty($create)}<p class="infobulle success">Question ajoutée</p>{/if}
+{if !empty($edit)}<p class="infobulle success">Question modifiée</p>{/if}
+{if !empty($delete)}<p class="infobulle success">Question supprimée</p>{/if}
 
 <table>
   <tr>

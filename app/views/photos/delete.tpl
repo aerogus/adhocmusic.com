@@ -2,7 +2,7 @@
 
 {if !empty($unknown_photo)}
 
-<p class="error">Cette photo est introuvable !</p>
+<p class="infobulle error">Cette photo est introuvable !</p>
 
 {else}
 

@@ -4,11 +4,11 @@
 
 {if !empty($unknown_groupe)}
 
-<div class="error">Groupe introuvable</div>
+<div class="infobulle error">Groupe introuvable</div>
 
 {elseif !empty($not_my_groupe)}
 
-<div class="error">Vous ne pouvez pas éditer ce groupe.</div>
+<div class="infobulle error">Vous ne pouvez pas éditer ce groupe.</div>
 
 {else}
 
@@ -33,12 +33,12 @@
       <img src="{$groupe->getMiniPhoto()}" alt=""><br><input type="file" id="mini_photo" name="mini_photo">
     </li>
     <li>
-      <div class="error" id="error_style"{if empty($error_style)} style="display: none"{/if}>Vous devez préciser le style musical</div>
+      <div class="infobulle error" id="error_style"{if empty($error_style)} style="display: none"{/if}>Vous devez préciser le style musical</div>
       <label for="style">Style</label>
       <input type="text" id="style" name="style" value="{$data.style|escape}">
     </li>
     <li>
-      <div class="error" id="error_influences"{if empty($error_influences)} style="display: none"{/if}>Vous devez préciser vos influences</div>
+      <div class="infobulle error" id="error_influences"{if empty($error_influences)} style="display: none"{/if}>Vous devez préciser vos influences</div>
       <label for="influences">Influences</label>
       <input type="text" id="influences" name="influences" value="{$data.influences|escape}">
     </li>
@@ -55,17 +55,17 @@
       http://www.twitter.com/<input type="text" id="twitter_id" name="twitter_id" value="{$data.twitter_id|escape}">
     </li>
     <li>
-      <div class="error" id="error_lineup"{if empty($error_lineup)} style="display: none"{/if}>Vous devez préciser votre formation</div>
+      <div class="infobulle error" id="error_lineup"{if empty($error_lineup)} style="display: none"{/if}>Vous devez préciser votre formation</div>
       <label for="lineup">Lineup</label>
       <textarea id="lineup" name="lineup" cols="50" rows="5">{$data.lineup|escape}</textarea>
     </li>
     <li>
-      <div class="error" id="error_mini_text"{if empty($error_mini_text)} style="display: none"{/if}>Vous devez écrire une mini présentation de moins de 250 caractères</div>
+      <div class="infobulle error" id="error_mini_text"{if empty($error_mini_text)} style="display: none"{/if}>Vous devez écrire une mini présentation de moins de 250 caractères</div>
       <label for="mini_text">Mini Présentation</label>
       <textarea id="mini_text" name="mini_text" cols="50" rows="5">{$data.mini_text|escape}</textarea>
     </li>
     <li>
-      <div class="error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez préciser le champ biographie</div>
+      <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez préciser le champ biographie</div>
       <label for="text">Présentation</label>
       <textarea id="text" name="text" cols="50" rows="20">{$data.text|escape}</textarea>
     </li>

@@ -1,5 +1,5 @@
 {if !$search_media|@sizeof}
-<p class="error">Aucun résultat</p>
+<p class="infobulle error">Aucun résultat</p>
 {else}
 {foreach from=$search_media item=media}
 <div class="search-box-result">

@@ -8,7 +8,7 @@
 
 {if !empty($unknown_photo)}
 
-<p class="error">Cette photo est introuvable !</p>
+<p class="infobulle error">Cette photo est introuvable !</p>
 
 {else}
 
@@ -33,12 +33,12 @@
     {/if}
     <li>
       <label for="name">Titre</label>
-      <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la photo</div>
+      <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la photo</div>
       <input type="text" id="name" name="name" size="50" value="{$photo->getName()|escape}">
     </li>
     <li>
       <label for="credits">Photographe</label>
-      <div class="error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe</div>
+      <div class="infobulle error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe</div>
       <input type="text" id="credits" name="credits" size="50" value="{$photo->getCredits()|escape}">
     </li>
     <li>

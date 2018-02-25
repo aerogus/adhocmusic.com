@@ -4,13 +4,13 @@
 <form id="form-video-create" name="form-video-create" method="post" action="/videos/create" enctype="multipart/form-data">
   <ul>
     <li>
-      <div class="error" id="error_code"{if empty($error_code)} style="display: none"{/if}>Vous devez copier/coller un code de vidéo</div>
-      <div class="error" id="error_unknown_host"{if empty($error_unknow_host)} style="display: none"{/if}>Code de la vidéo non reconnu ou hébergeur incompatible</div>
+      <div class="infobulle error" id="error_code"{if empty($error_code)} style="display: none"{/if}>Vous devez copier/coller un code de vidéo</div>
+      <div class="infobulle error" id="error_unknown_host"{if empty($error_unknow_host)} style="display: none"{/if}>Code de la vidéo non reconnu ou hébergeur incompatible</div>
       <input type="text" id="code" name="code" size="50" value="" style="float: right;">
       <label for="code">Copiez/collez le code de la vidéo</label>
     </li>
     <li>
-      <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
+      <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
       <input type="text" id="name" name="name" size="50" value="" style="float: right;">
       <label for="name">Titre</label>
     </li>
@@ -32,7 +32,7 @@
       <input type="hidden" name="id_groupe" value="{$groupe->getId()}">
       <span style="float: right">{$groupe->getName()}</span>
     {else}
-      <div class="error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier cette vidéo à soit un groupe, soit un lieu, soit un événement</div>
+      <div class="infobulle error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier cette vidéo à soit un groupe, soit un lieu, soit un événement</div>
       <select id="id_groupe" name="id_groupe" style="float: right">
         <option value="0">Aucun</option>
         {foreach $groupes as $groupe}

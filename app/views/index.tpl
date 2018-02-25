@@ -1,8 +1,6 @@
 {include file="common/header.tpl"}
 
-<div class="info">
-  <p>Prochain événement : <a href="/events/6837">Vendredi 16 mars 2018 - AfterWork S03E06 à Épinay-sur-Orge</a></p>
-</div>
+<div class="infobulle info">Prochain événement : <a href="/events/6837">Vendredi 16 mars 2018 - AfterWork S03E06 à Épinay-sur-Orge</a></div>
 
 <div id="swipe" class="swipe clearfix">
   <ul class="swipe-wrap">

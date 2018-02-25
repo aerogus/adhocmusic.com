@@ -2,9 +2,9 @@
 
 {include file="common/boxstart.tpl" boxtitle="Mes photos"}
 
-{if !empty($create)}<p class="success">Photo ajoutée</p>{/if}
-{if !empty($edit)}<p class="success">Photo modifiée</p>{/if}
-{if !empty($delete)}<p class="success">Photo supprimée</p>{/if}
+{if !empty($create)}<p class="infobulle success">Photo ajoutée</p>{/if}
+{if !empty($edit)}<p class="infobulle success">Photo modifiée</p>{/if}
+{if !empty($delete)}<p class="infobulle success">Photo supprimée</p>{/if}
 
 <a href="/photos/create" class="button">Proposer une Photo</a>
 

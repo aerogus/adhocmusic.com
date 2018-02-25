@@ -4,7 +4,7 @@
 
 {if !empty($unknown_audio)}
 
-<p class="error">Cet audio est introuvable !</p>
+<p class="infobulle error">Cet audio est introuvable !</p>
 
 {else}
 

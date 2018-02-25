@@ -57,9 +57,9 @@ $(function () {
 </script>
 
 <form id="form-login" name="form-login" method="post" action="/auth/login-submit">
-  <div class="error" id="error_login-pseudo"{if empty($error_login_pseudo)} style="display: none"{/if}>Pseudo vide !</div>
+  <div class="infobulle error" id="error_login-pseudo"{if empty($error_login_pseudo)} style="display: none"{/if}>Pseudo vide !</div>
   <input size="18" type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo">
-  <div class="error" id="error_login-password"{if empty($error_login_password)} style="display: none"{/if}>Password vide !</div>
+  <div class="infobulle error" id="error_login-password"{if empty($error_login_password)} style="display: none"{/if}>Password vide !</div>
   <input size="18" type="password" id="login-password" name="password" placeholder="Password">
   <input type="submit" value="Ok">
   {if !empty($referer)}<input type="hidden" id="login-referer" name="referer" value="{$referer|escape:'url'}">{/if}

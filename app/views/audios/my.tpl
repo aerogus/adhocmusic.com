@@ -13,7 +13,7 @@
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
 {if !empty($delete)}
-<div class="success">La suppression du son a été effectuée</div>
+<div class="infobulle success">La suppression du son a été effectuée</div>
 {/if}
 
 <table>

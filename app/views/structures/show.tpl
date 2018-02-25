@@ -2,7 +2,7 @@
 
 {if !empty($unknown_structure)}
 
-<p class="error">Cette structure est introuvable !</p>
+<p class="infobulle error">Cette structure est introuvable !</p>
 
 {else}
 

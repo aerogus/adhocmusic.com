@@ -8,12 +8,12 @@
     <form name="form-audio-create" id="form-audio-create" method="post" action="/audios/create" enctype="multipart/form-data">
       <ul>
         <li>
-          <div class="error" id="error_file"{if empty($error_file)} style="display: none"{/if}>Vous devez choisir un fichier .mp3 à uploader</div>
+          <div class="infobulle error" id="error_file"{if empty($error_file)} style="display: none"{/if}>Vous devez choisir un fichier .mp3 à uploader</div>
           <label for="file">Audio (.mp3 16bits/44Khz/stéréo, &lt; 16 Mo)</label>
           <input type="file" id="file" name="file" value="">
         </li>
         <li>
-          <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner un titre</div>
+          <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner un titre</div>
           <label for="name">Titre</label>
           <input type="text" id="name" name="name" size="50" value="">
         </li>
@@ -23,7 +23,7 @@
           <input type="hidden" name="id_groupe" value="{$groupe->getId()}">
           <span>{$groupe->getName()}</span>
         {else}
-          <div class="error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier cette musique à soit un groupe, soit un lieu, soit un événement</div>
+          <div class="infobulle error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier cette musique à soit un groupe, soit un lieu, soit un événement</div>
           <select id="id_groupe" name="id_groupe">
             <option value="0">Aucun</option>
             {foreach $groupes as $groupe}

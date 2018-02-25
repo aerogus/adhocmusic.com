@@ -25,11 +25,11 @@
 
     <h2>Les infobulles</h2>
 
-    <div class="info">Infobulle info</div>
-    <div class="success">Infobulle success</div>
-    <div class="warning">Infobulle warning</div>
-    <div class="error">Infobulle error</div>
-    <div class="validation">Infobulle validation</div>
+    <div class="infobulle info">Infobulle info</div>
+    <div class="infobulle success">Infobulle success</div>
+    <div class="infobulle warning">Infobulle warning</div>
+    <div class="infobulle error">Infobulle error</div>
+    <div class="infobulle validation">Infobulle validation</div>
 
 
     <h2>Les listes</h2>

@@ -5,11 +5,11 @@
   <div class="two-thirds">
 
     {if !empty($create)}
-    <div class="success">Le contenu a bien été ajouté</div>
+    <div class="infobulle success">Le contenu a bien été ajouté</div>
     {elseif !empty($edit)}
-    <div class="success">Le contenu a bien été modifié</div>
+    <div class="infobulle success">Le contenu a bien été modifié</div>
     {elseif !empty($delete)}
-    <div class="success">Le contenu a bien été effacé</div>
+    <div class="infobulle success">Le contenu a bien été effacé</div>
     {/if}
 
     <div class="box">

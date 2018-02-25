@@ -96,7 +96,7 @@ $(function() {
   <ul>
     <li>
       <label for="text">Message</label>
-      <div class="error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
+      <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
       <textarea class="tinymce" name="text" id="text" rows="10" cols="80" style="width: 100%;">{$text|escape}</textarea>
     </li>
     <li>

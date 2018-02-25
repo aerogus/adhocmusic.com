@@ -8,7 +8,7 @@
 
 {if !empty($unknown_audio)}
 
-    <p class="error">Cet audio est introuvable !</p>
+    <p class="infobulle error">Cet audio est introuvable !</p>
 
 {else}
 
@@ -23,12 +23,12 @@
           <label for="file"><img src="/img/icones/audio.png" alt=""> Audio (.mp3 16bits/44Khz/stéréo, &lt; 16 Mo)</label>
         </li>
         <li>
-          <div class="error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner un titre</div>
+          <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner un titre</div>
           <input type="text" id="name" name="name" size="50" value="{$audio->getName()|escape}" style="float: right;">
           <label for="name"><img src="/img/icones/signature.png" alt=""> Titre</label>
         </li>
         <li>
-          <div class="error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez sélectionner un groupe</div>
+          <div class="infobulle error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez sélectionner un groupe</div>
           <select id="id_groupe" name="id_groupe" style="float: right;">
             <option value="0">Sans</option>
             {foreach from=$groupes item=groupe}
