@@ -18,7 +18,7 @@
             </ul>
           </li>
           <li>
-            <a href="/assoce" accesskey="2" title="Présentation de l’Association AD'HOC, l’équipe, nos concerts">L’Assoce</a>
+            <a href="/assoce" accesskey="2" title="Présentation de l’Association AD’HOC, l’équipe, nos concerts">L’Assoce</a>
             <ul>
               <li><a href="/assoce/presentation">Présentation</a></li>
               <li><a href="/assoce/concerts">Concerts</a></li>

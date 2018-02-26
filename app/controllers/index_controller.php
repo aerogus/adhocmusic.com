@@ -103,15 +103,13 @@ class Controller
 
         // valeurs par défaut
         $data = [
-            'name'       => '',
-            'email'      => '',
-            'subject'    => '',
-            'text'       => '',
-            'date'       => date('Y-m-d H:i:s'),
-            'cc'         => true,
-            'mailing'    => true,
-            'attachment' => '',
-            'check'      => Tools::getCSRFToken(),
+            'name'    => '',
+            'email'   => '',
+            'subject' => '',
+            'text'    => '',
+            'date'    => date('Y-m-d H:i:s'),
+            'mailing' => true,
+            'check'   => Tools::getCSRFToken(),
         ];
 
         if (!empty($_SESSION['membre'])) {
@@ -131,9 +129,7 @@ class Controller
                 'subject'     => trim((string) Route::params('subject')),
                 'text'        => trim((string) Route::params('text')),
                 'date'        => date('Y-m-d H:i:s'),
-                'cc'          => (bool) Route::params('cc'),
                 'mailing'     => (bool) Route::params('mailing'),
-                'attachment'  => Route::params('attachment'),
                 'check'       => (string) Route::params('check'),
             ];
 
@@ -150,10 +146,8 @@ class Controller
                 }
 
                 // 2 - envoi de la copie à l'expéditeur
-                if ($data['cc']) {
-                     $data['email_reply_to'] = 'site@adhocmusic.com';
-                     Email::send($data['email'], "[cc]" . $data['subject'], 'form-contact-cc', $data);
-                }
+                $data['email_reply_to'] = 'site@adhocmusic.com';
+                Email::send($data['email'], "[cc]" . $data['subject'], 'form-contact-cc', $data);
 
                 if ($data['mailing']) {
                     Newsletter::addEmail($data['email']);
@@ -176,9 +170,7 @@ class Controller
         $smarty->assign('email', $data['email']);
         $smarty->assign('subject', $data['subject']);
         $smarty->assign('text', $data['text']);
-        $smarty->assign('cc', $data['cc']);
         $smarty->assign('mailing', $data['mailing']);
-        $smarty->assign('attachment', $data['attachment']);
         $smarty->assign('check', $data['check']);
 
         return $smarty->fetch('contact.tpl');
@@ -290,6 +282,9 @@ class Controller
         Tools::redirect($url);
     }
 
+    /**
+     * Page guide de style
+     */
     static function styleguide()
     {
         $smarty = new AdHocSmarty();
