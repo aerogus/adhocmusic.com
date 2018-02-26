@@ -4,7 +4,7 @@
 // envoi d'une newsletter
 
 // n° de newsletter à traiter
-define('ID_NEWSLETTER', 78);
+define('ID_NEWSLETTER', 80);
 
 require_once dirname(__FILE__) . '/../config.php';
 
@@ -12,7 +12,7 @@ $newsletter = Newsletter::getInstance(ID_NEWSLETTER);
 
 // base de test
 $subs = [
-    ['id_contact' => 1, 'email' => 'guillaume.seznec@gmail.com', 'pseudo' => 'gus', 'lastnl' => ''],
+    ['id_contact' => 1, 'email' => 'guillaume@seznec.fr', 'pseudo' => 'gus', 'lastnl' => ''],
 //    ['id_contact' => 1, 'email' => 'gilles.taddei@gmail.com', 'pseudo' => 'gillex', 'lastnl' => ''],
 //    ['id_contact' => 7018, 'email' => 'lara.etcheverry@gmail.com', 'pseudo' => 'lara', 'lastnl' => ''],
 //    ['id_contact' => 2, 'email' => 'truc.invalide@oiuofdsg.com', 'pseudo' => 'rien', 'lastnl' => ''],
@@ -23,7 +23,7 @@ $subs = [
 //$subs = Newsletter::getSubscribers();
 
 echo "Trouvé : " . count($subs) . " emails\n";
-die();
+//die();
 // boucle des emails - expédition effective
 
 $n = 1;
@@ -48,7 +48,7 @@ foreach ($subs as $sub)
             'id_contact'    => $sub['id_contact'],
             'title'         => $newsletter->getTitle(),
             'url'           => $newsletter->getUrl(),
-            'unsub_url'     => 'https://adhocmusic.com/newsletters/subscriptions?action=unsub&email=' . $sub['email'],
+            'unsub_url'     => 'https://www.adhocmusic.com/newsletters/subscriptions?action=unsub&email=' . $sub['email'],
             'email'         => $sub['email'],
             'pseudo'        => $sub['pseudo'],
             'html'          => $newsletter->getHtml(),

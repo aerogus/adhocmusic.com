@@ -42,9 +42,9 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.css');
-        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.js');
-        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/mode/xml/xml.js');
+        $smarty->enqueue_style('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/codemirror.min.css');
+        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/codemirror.min.js');
+        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/mode/xml/xml.min.js');
         $smarty->enqueue_script('/js/adm/newsletter.js');
 
         $trail = Trail::getInstance();
@@ -77,6 +77,7 @@ class Controller
             $newsletter = Newsletter::getInstance($data['id']);
             $newsletter->setTitle($data['title']);
             $newsletter->setContent($data['content']);
+
             $newsletter->save();
 
             Tools::redirect('/adm/newsletter/edit/' . (int) Route::params('id') . '?edit=1');
@@ -86,9 +87,9 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.css');
-        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/lib/codemirror.js');
-        $smarty->enqueue_script('https://cdn.rawgit.com/codemirror/CodeMirror/master/mode/xml/xml.js');
+        $smarty->enqueue_style('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/codemirror.min.css');
+        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/codemirror.min.js');
+        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/mode/xml/xml.min.js');
         $smarty->enqueue_script('/js/adm/newsletter.js');
 
         $trail = Trail::getInstance();

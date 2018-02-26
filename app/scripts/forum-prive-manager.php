@@ -5,7 +5,7 @@ require_once dirname(__FILE__) . '/../config.php';
 
 // id_contact à ajouter
 $to_add = [
-2819877
+2819866
 ];
 
 // ajouter des personnes aux forums privés

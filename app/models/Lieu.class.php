@@ -1036,7 +1036,6 @@ class Lieu extends ObjectModel
              . " `id_city`, `id_departement`, `id_region`, `id_country`, `lat`, `lng`, "
              . " `id_contact`, `online`, "
              . "`created_on`, `modified_on` "
-            // . "FORMAT(get_distance_metres('" . number_format((float)$_SESSION['lat'], 8, '.', '') . "', '" . number_format((float)$_SESSION['lng'], 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `distance` "
              . "FROM `" . self::$_db_table_lieu . "` `l` "
              . "WHERE `id_lieu` = " . (int) $this->_id_lieu;
 
@@ -1045,8 +1044,6 @@ class Lieu extends ObjectModel
         }
 
         $this->_dbToObject($res);
-
-        $this->_distance = $res['distance'];
 
         if (file_exists(self::getBasePath() . '/' . $this->_id_lieu . '.jpg')) {
             $this->_photo = self::getBaseUrl() . '/' . $this->_id_lieu . '.jpg';
@@ -1337,8 +1334,7 @@ EOT;
 
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `l`.`id_lieu`, `l`.`name`, `l`.`address`, `v`.`cp`, `l`.`cp` AS `old_cp`, `v`.`name` AS `city`, `l`.`city` AS `old_city`, `l`.`lat`, `l`.`lng`, "
-             //. "FORMAT(get_distance_metres('" . number_format($lat, 8, '.', '') . "', '" . number_format($lng, 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `distance` "
+        $sql = "SELECT `l`.`id_lieu`, `l`.`name`, `l`.`address`, `v`.`cp`, `l`.`cp` AS `old_cp`, `v`.`name` AS `city`, `l`.`city` AS `old_city`, `l`.`lat`, `l`.`lng` "
              . "FROM (`adhoc_lieu` `l`) "
              . "LEFT JOIN `geo_fr_city` `v` ON (`l`.`id_city` = `v`.`id_city`) "
              . "WHERE 1 "
