@@ -254,13 +254,13 @@ abstract class ObjectModel
                     switch (static::$_all_fields[$field])
                     {
                         case 'num':
-                            $fields_to_save .= " `" . $field . "` = " . (int) $this->$att . ", ";
+                            $fields_to_save .= " `" . $field . "` = " . (int) $this->$att . ",";
                             break;
                         case 'float':
                             $fields_to_save .= " `" . $field . "` = " . number_format((float) $this->$att, 8, ".", "") . ",";
                             break;
                         case 'str':
-                            $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "', ";
+                            $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                             break;
                         case 'date':
                             $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";

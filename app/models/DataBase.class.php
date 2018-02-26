@@ -118,8 +118,10 @@ class DataBase
 
         // on précise l'encodage à utiliser pour la connexion
         // @TODO config docker
-        $this->query("SET NAMES " . $this->_charset);
-        $this->query("SET CHARACTER SET " . $this->_charset);
+        if (ENV !== 'PROD') {
+            $this->query("SET NAMES " . $this->_charset);
+            $this->query("SET CHARACTER SET " . $this->_charset);
+        }
 
         return $this->_current_conn[$conn_key];
     }
