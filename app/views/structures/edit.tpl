@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Modifier une structure"}
+<div class="box">
+  <header>
+    <h2>Modifier une structure</h2>
+  </header>
+  <div>
 
 <form id="form-structure-edit" name="form-structure-edit" method="post" action="/structures/edit">
   <fieldset>
@@ -16,6 +20,7 @@
   <input type="hidden" name="id" value="{$structure->getId()|escape}">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

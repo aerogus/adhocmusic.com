@@ -1,11 +1,16 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Liste des structures"}
-<ul>
-  {foreach $structures as $structure}
-  <li><img src="{$structure.picto}" alt=""> <a href="/structures/{$structure.id}">{$structure.name|escape}</a></li>
-  {/foreach}
-</ul>
-{include file="common/boxend.tpl"}
+<div class="box">
+  <header>
+    <h2>Liste des structures</h2>
+  </header>
+  <div>
+    <ul>
+    {foreach $structures as $structure}
+      <li><img src="{$structure.picto}" alt=""> <a href="/structures/{$structure.id}">{$structure.name|escape}</a></li>
+    {/foreach}
+    </ul>
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

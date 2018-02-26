@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Gestion des Vidéos"}
+<div class="box">
+  <header>
+    <h2>Mes Vidéos</h2>
+  </header>
+  <div>
 
 <a href="/videos/create" class="button">Ajouter une vidéo</a>
 
@@ -38,6 +42,7 @@
 
 <a href="/videos/create" class="button">Ajouter une vidéo</a>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

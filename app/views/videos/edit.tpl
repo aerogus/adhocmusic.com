@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Editer une vidéo"}
+<div class="box">
+  <header>
+    <h2>Éditer une vidéo</h2>
+  </header>
+  <div>
 
 {if !empty($unknown_video)}
 
@@ -68,6 +72,7 @@
 
 {/if} {* test unknown video *}
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

@@ -1,6 +1,11 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Ajouter une vidéo"}
+<div class="box">
+  <header>
+    <h2>Ajouter une vidéo</h2>
+  </header>
+  <div>
+
 <form id="form-video-create" name="form-video-create" method="post" action="/videos/create" enctype="multipart/form-data">
   <ul>
     <li>
@@ -76,6 +81,9 @@
   </ul>
   <input id="form-video-create-submit" name="form-video-create-submit" class="button" type="submit" value="Enregistrer">
 </form>
-{include file="common/boxend.tpl"}
+
+
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

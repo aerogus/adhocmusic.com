@@ -6,7 +6,11 @@
 
 {else}
 
-{include file="common/boxstart.tpl" boxtitle=$structure->getName()}
+<div class="box">
+  <header>
+    <h2>{$structure->getName()}</h2>
+  </header>
+  <div>
 
 <table>
   <tr>
@@ -33,7 +37,8 @@
   </tr>
 </table>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {/if} {* test unknown structure *}
 

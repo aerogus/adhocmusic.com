@@ -8,7 +8,7 @@ class Controller
 
         $trail = Trail::getInstance();
         $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Alertes", "/alerting/my");
+        $trail->addStep("Mes Alertes");
 
         $smarty = new AdHocSmarty();
         $smarty->assign('groupes', Alerting::getGroupesAlertingByIdContact($_SESSION['membre']->getId()));

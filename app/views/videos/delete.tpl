@@ -6,7 +6,12 @@
 
 {else}
 
-{include file="common/boxstart.tpl" boxtitle="Supprimer une vidéo"}
+<div class="box">
+  <header>
+    <h2>Supprimer une vidéo</h2>
+  </header>
+  <div>
+
 <form method="post" action="/videos/delete">
   <fieldset>
     <ol>
@@ -57,7 +62,9 @@
   <input id="form-video-delete-submit" name="form-video-delete-submit" class="button" type="submit" value="Confirmer la suppression">
   <input type="hidden" name="id" value="{$video->getId()|escape}">
 </form>
-{include file="common/boxend.tpl"}
+
+  </div>
+</div>
 
 {/if}
 

@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Mes Infos Persos"}
+<div class="box">
+  <header>
+    <h2>Mes Infos Persos</h2>
+  </header>
+  <div>
 
 {if !empty($updated_ok)}
 <p class="infobulle success">Enregistrement effectué</p>
@@ -172,7 +176,8 @@
   <input id="form-member-edit-submit" name="form-member-edit-submit" type="submit" class="button" value="Enregistrer">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 <script>
 var lieu = {

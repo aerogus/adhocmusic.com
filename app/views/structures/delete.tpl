@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Effacer une structure"}
+<div class="box">
+  <header>
+    <h2>Effacer une structure</h2>
+  </header>
+  <div>
 
 <form id="form-structure-delete" name="form-structure-delete" method="post" action="/structures/delete">
   <fieldset>
@@ -15,6 +19,7 @@
   <input type="hidden" name="id" value="{$structure->getId()}">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

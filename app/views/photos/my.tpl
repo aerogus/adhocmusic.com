@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Mes photos"}
+<div class="box">
+  <header>
+    <h2>Mes photos</h2>
+  </header>
+  <div>
 
 {if !empty($create)}<p class="infobulle success">Photo ajoutée</p>{/if}
 {if !empty($edit)}<p class="infobulle success">Photo modifiée</p>{/if}
@@ -29,6 +33,7 @@
 
 <a href="/photos/create" class="button">Proposer une Photo</a>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

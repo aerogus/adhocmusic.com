@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Gestion de mes musiques"}
+<div class="box">
+  <header>
+    <h2>Mes musiques</h2>
+  </header>
+  <div>
 
 <a href="/audios/create" class="button">Ajouter une Musique</a>
 
@@ -43,6 +47,7 @@
 
 <a href="/audios/create" class="button">Ajouter une Musique</a>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

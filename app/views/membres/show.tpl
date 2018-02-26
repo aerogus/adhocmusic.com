@@ -6,7 +6,11 @@
 
 {else}
 
-{include file="common/boxstart.tpl" boxtitle="Profil de {$membre->getPseudo()|escape}"}
+<div class="box">
+  <header>
+    <h2>Profil de {$membre->getPseudo()}</h2>
+  </header>
+  <div>
 
 {if $membre->getAvatar()}
 <img src="{$membre->getAvatar()}" alt="{$membre->getPseudo()|escape}" style="float: right;">
@@ -77,7 +81,8 @@
 
 </table>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {/if} {* test unknown membre *}
 

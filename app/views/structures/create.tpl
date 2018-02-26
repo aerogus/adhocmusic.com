@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Proposer une structure"}
+<div class="box">
+  <header>
+    <h2>Proposer une structure</h2>
+  </header>
+  <div>
 
 <form id="form-structure-create" name="form-structure-create" method="post" action="/structures/create">
   <fieldset>
@@ -15,6 +19,7 @@
   <input id="form-structure-create-submit" name="form-structure-create-submit" class="button" type="submit" value="Enregistrer">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}
