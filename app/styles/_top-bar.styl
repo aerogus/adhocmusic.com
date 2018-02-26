@@ -73,14 +73,18 @@
           transform rotate(-90deg)
       
       .top-menu
-        display none
+        display block
+        position absolute
+        width 100%
+        left 0
+        z-index 100
+        overflow hidden
+        background-color #292933
+        max-height 0
+        transition max-height .2s
         &.selected
           display block
-          position absolute
-          left 0
-          z-index 100
-          width 100%
-          background-color #292933
+          max-height 24rem
           > ul > li
             display block
             text-align right
