@@ -469,7 +469,7 @@ class Controller
         Tools::auth(Membre::TYPE_STANDARD);
 
         $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
+        $trail->addStep("Tableau de bord");
 
         $smarty = new AdHocSmarty();
 

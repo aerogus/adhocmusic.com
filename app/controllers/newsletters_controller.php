@@ -25,29 +25,13 @@ class Controller
 
         try {
             $newsletter = Newsletter::getInstance($id);
+            $smarty->assign('newsletter', $newsletter);
+            return $smarty->fetch('newsletters/show.tpl');
         } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_newsletter', true);
             return $smarty->fetch('newsletters/show.tpl');
         }
-
-        // oui je sais ...
-        // @see EmailSmarty::modifier_link
-        global $newsletter_id_newsletter;
-               $newsletter_id_newsletter = $newsletter->getId();
-        global $newsletter_id_contact;
-               $newsletter_id_contact = 0;
-
-        $smarty->assign('title', $newsletter->getTitle());
-        $smarty->assign('description', substr(strip_tags($newsletter->getContent()), 0, 500));
-        $smarty->assign('og_image', 'https://www.adhocmusic.com/img/cache/c/9/3/c938aee4553db039b3b6a8ca203f01a3.jpg'); // 5 nov.
-        $smarty->assign('newsletter', $newsletter);
-
-        $trail = Trail::getInstance();
-        $trail->addStep("Newsletters", "/newsletters");
-        $trail->addStep($newsletter->getTitle());
-
-        return $smarty->fetch('newsletters/show.tpl');
     }
 
     static function subscriptions()

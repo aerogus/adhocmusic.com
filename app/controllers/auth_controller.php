@@ -180,8 +180,8 @@ class Controller
         $smarty->enqueue_script('/js/change-password.js');
 
         $trail = Trail::getInstance();
-        $trail->addStep("Membres", "/membres/tableau-de-bord");
-        $trail->addStep("Mon Compte", "/membres/edit/" . $_SESSION['membre']->getId());
+        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
+        $trail->addStep("Mes Infos Persos", "/membres/edit");
         $trail->addStep("Changer le mot de passe");
 
         $membre = Membre::getInstance($_SESSION['membre']->getId());

@@ -28,7 +28,7 @@ class Controller
 
         $trail = Trail::getInstance();
         $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Groupes", "/groupes/my");
+        $trail->addStep("Mes Groupes");
 
         $smarty->assign('delete', (bool) Route::params('delete'));
         $smarty->assign('groupes', Groupe::getMyGroupes());
@@ -303,6 +303,7 @@ class Controller
         }
 
         $trail = Trail::getInstance();
+        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
         $trail->addStep("Mes Groupes", "/groupes/my");
         $trail->addStep($groupe->getName());
 
