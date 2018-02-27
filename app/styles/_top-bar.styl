@@ -1,3 +1,7 @@
+/**
+ * Barre du haut + menu
+ */
+
 .top-bar
   background #292933
   position fixed
@@ -84,7 +88,8 @@
         transition max-height .2s
         &.selected
           display block
-          max-height 24rem
+          /* 6*4 entrées de menu + 4 de la top-bar */
+          max-height 28rem
           > ul > li
             display block
             text-align right
