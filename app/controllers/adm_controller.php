@@ -27,6 +27,8 @@ class Controller
 
         $smarty->assign('forums', ForumPrive::getForums());
 
+        $smarty->enqueue_script('https://p.trellocdn.com/embed.min.js');
+
         return $smarty->fetch('adm/index.tpl');
     }
 

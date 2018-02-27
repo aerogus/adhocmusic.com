@@ -5,6 +5,11 @@
     <h2>Communication Interne</h2>
   </header>
   <div>
+
+    <blockquote class="trello-board-compact"><a href="https://trello.com/b/Wyw9vGyr">Soirée 24 mars</a></blockquote>
+    <blockquote class="trello-board-compact"><a href="https://trello.com/b/2HJ6aCeh">Festival</a></blockquote>
+    <blockquote class="trello-board-compact"><a href="https://trello.com/b/ONguDiiC">Soirée des 20 ans</a></blockquote>
+
     <table style="width: 100%">
       <thead>
         <tr>
@@ -32,6 +37,7 @@
     <ul class="admlinks">
       <li><a href="ftp://adhoc:squallpowa@ftp.adhocmusic.com">Listing FTP</a></li>
     </ul>
+
   </div>
 </div>
 
