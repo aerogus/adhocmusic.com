@@ -1,10 +1,6 @@
 {if !empty($unknown_newsletter)}
-
-<p class="infobulle error">Cette newsletter est introuvable !</p>
-
+newsletter introuvable
 {else}
-
 {$newsletter->getHtml()}
-
-{/if} {* test unknown newsletter *}
+{/if}
 

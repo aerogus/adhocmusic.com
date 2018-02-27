@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Mes Groupes"}
+<div class="box">
+  <header>
+    <h1>Mes Groupes</h1>
+  </header>
+  <div>
 
 {if !empty($delete)}
 <div class="infobulle success">Groupe supprimé</div>
@@ -30,6 +34,7 @@
 
 <a href="/groupes/create">Inscrire un Groupe</a>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

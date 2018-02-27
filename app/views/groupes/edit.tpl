@@ -12,7 +12,11 @@
 
 {else}
 
-{include file="common/boxstart.tpl" boxtitle=$groupe->getName()}
+<div class="box">
+  <header>
+    <h2>{$groupe->getName()}</h2>
+  </header>
+  <div>
 
 <form id="form-groupe-edit" name="form-groupe-edit" method="post" action="/groupes/edit" enctype="multipart/form-data">
   <ul>
@@ -74,7 +78,8 @@
   <input id="form-groupe-edit-submit" name="form-groupe-edit-submit" class="button" type="submit" value="Modifier">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 </div>
 
