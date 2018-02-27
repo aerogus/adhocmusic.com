@@ -18,9 +18,10 @@
         <a href="/">Accueil</a>
         <ul>
           <li><a href="/map">Plan du Site</a></li>
-          <li><a href="/mentions-legales">Mentions Légales</a></li>
+          <li><a href="/shop">Boutique</a></li>
           <li><a href="/partners">Partenaires</a></li>
           <li><a href="/visuels">Visuels</a></li>
+          <li><a href="/mentions-legales">Mentions Légales</a></li>
         </ul>
       </li>
       <li>
@@ -29,7 +30,8 @@
           <li><a href="/assoce/presentation">Présentation</a></li>
           <li><a href="/assoce/concerts">Concerts</a></li>
           <li><a href="/assoce/afterworks">Afterworks</a></li>
-          <li><a href="/assoce/equipe">Equipe</a></li>
+          <li><a href="/assoce/formations">Formations</a></li>
+          <li><a href="/assoce/equipe">Équipe</a></li>
           <li><a href="/assoce/statuts">Statuts</a></li>
         </ul>
       </li>
@@ -38,15 +40,15 @@
       </li>
       <li>
         <a href="/agenda/">Agenda</a>
-        <ul>
-          <li><a href="/agenda/create">Annoncer Une Date</a></li>
-        </ul>
       </li>
       <li>
         <a href="/media/">Média</a>
       </li>
       <li>
         <a href="/contact">Contact</a>
+      </li>
+      <li>
+        <a href="/login">Connexion</a>
       </li>
     </ul>
   </div>

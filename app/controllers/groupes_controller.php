@@ -10,7 +10,7 @@ class Controller
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
         $trail = Trail::getInstance();
-        $trail->addStep("Groupes", "/groupes/");
+        $trail->addStep("Groupes");
 
         $smarty->assign('liste_groupes', Groupe::getGroupesByName());
 

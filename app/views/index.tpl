@@ -1,6 +1,6 @@
 {include file="common/header.tpl"}
 
-<div class="infobulle info">Prochain événement : <a href="/events/6837">Vendredi 16 mars 2018 - AfterWork S03E06 à Épinay-sur-Orge</a></div>
+<div class="txtcenter italic mbs">Association œuvrant pour le développement des musiques actuelles à Épinay-sur-Orge (Essonne) depuis 1998</div>
 
 <div id="swipe" class="swipe clearfix">
   <ul class="swipe-wrap">
@@ -23,6 +23,8 @@
     </ul>
   </div>
 </div>
+
+<div class="txtcenter infobulle info">Prochain événement : <a href="/events/6837">Vendredi 16 mars 2018 - AfterWork S03E06</a></div>
 
 <div class="grid-3-tiny-2-small-1 has-gutter-l">
 
