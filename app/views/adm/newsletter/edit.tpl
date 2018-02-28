@@ -24,6 +24,7 @@
       <input type="hidden" name="id" value="{$newsletter->getId()|escape}">
     </form>
 
+    <p><a href="/newsletters/{$newsletter->getId()|escape}" target="_blank">Prévisualiser</a></p>
   </div>
 </div>
 

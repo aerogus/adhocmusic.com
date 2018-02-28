@@ -78,6 +78,27 @@ class Controller
             $newsletter->setTitle($data['title']);
             $newsletter->setContent($data['content']);
 
+            // API MJML.IO
+            $user = '0b7f9405-e21a-46ed-bc71-e5ae1b80081f'; // = App ID
+            $pass = 'cda5e512-82cf-4c9f-b901-f478359d02b7'; // = Secret Key
+
+            $mjml = $data['content'];
+
+            $c = curl_init();
+            curl_setopt($c, CURLOPT_URL, 'https://api.mjml.io/v1/render');
+            curl_setopt($c, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_setopt($c, CURLOPT_USERPWD, "$user:$pass");
+            curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($c, CURLOPT_POST, true);
+            curl_setopt($c, CURLOPT_POSTFIELDS, json_encode(['mjml' => $mjml]));
+
+            $response = curl_exec($c);
+            $json = json_decode($response);
+
+            if (!$json->error) {
+                $newsletter->setHtml($json->html);
+            }
+
             $newsletter->save();
 
             Tools::redirect('/adm/newsletter/edit/' . (int) Route::params('id') . '?edit=1');
