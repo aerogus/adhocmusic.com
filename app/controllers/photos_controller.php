@@ -296,6 +296,8 @@ class Controller
 
         if (Tools::isSubmit('form-photo-import'))
         {
+            die('a debuguer');
+
             set_time_limit(0); // l'import peut prendre du temps !
 
             // creation repertoire temporaire
@@ -393,7 +395,7 @@ class Controller
         }
 
         $trail = Trail::getInstance();
-        $trail->addStep("Média", "/medias/");
+        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
         $trail->addStep("Mes Photos", "/photos/my");
         $trail->addStep("Importer des photos");
 

@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Forums privés"}
+<div class="box">
+  <header>
+    <h2>Forums privés</h2>
+  </header>
+  <div>
 
 <table>
   <thead>
@@ -23,6 +27,7 @@
   </tbody>
 </table>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

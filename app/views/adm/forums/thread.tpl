@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle={$thread.subject|escape}}
+<div class="box">
+  <header>
+    <h2>{$thread.subject}</h2>
+  </header>
+  <div>
 
 <script>
 $(function() {
@@ -88,7 +92,8 @@ $(function() {
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/boxstart.tpl" boxtitle="Répondre"}
 

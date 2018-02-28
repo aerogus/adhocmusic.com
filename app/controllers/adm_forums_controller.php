@@ -10,7 +10,7 @@ class Controller
 
         $trail = Trail::getInstance();
         $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Forums", "/adm/forums/");
+        $trail->addStep("Forums");
 
         $smarty->assign('forums', ForumPrive::getForums());
 

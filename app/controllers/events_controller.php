@@ -121,8 +121,10 @@ class Controller
 
         try {
             $event = Event::getInstance((int) $id);
+            $trail->addStep($event->getName());
         } catch (Exception $e) {
             Route::set_http_code('404');
+            $trail->addStep("Évènement Introuvable");
             $smarty->assign('unknown_event', true);
             return $smarty->fetch('events/show.tpl');
         }

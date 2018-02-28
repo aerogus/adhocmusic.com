@@ -75,6 +75,7 @@
       </ul>
       <input id="form-photo-create-submit" name="form-photo-create-submit" class="button" type="submit" value="Enregistrer">
     </form>
+    <p><a href="/photos/import">Importer une archive de photos</a></p>
   </div>
 </div>
 

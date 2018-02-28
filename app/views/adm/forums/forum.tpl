@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Forum : {$forum.title|escape}"}
+<div class="box">
+  <header>
+    <h2>{$forum.title}</h2>
+  </header>
+  <div>
 
 <div class="subscribers round-corners-all">
 {foreach from=$subs item=sub}
@@ -35,6 +39,7 @@
 
 <a class="button" href="/adm/forums/write?id_forum={$forum.id_forum|escape}">Nouveau sujet</a>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

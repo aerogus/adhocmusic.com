@@ -1,10 +1,12 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl"}
-<p>Ce script permet d'importer plusieurs photos d'un coup. Elle doivent être de format .jpg et empaquetées dans une archive .zip déposé dans le répertoire suivant du serveur : /var/www/adhocmusic.com/import . Ensuite saisissez le nom de l'archive (le nom du fichier), renseignez les données communes à toutes les photos, puis cliquez sur importer. Astuce : après un concert, faites une archive par groupe ! Vous n'aurez juste plus qu'à ajuster le titre de chaque photo manuellement par la suite. Gain de temps !</p>
-{include file="common/boxend.tpl"}
+<div class="box">
+  <header>
+    <h2>Importer des photos</h2>
+  </header>
+  <div>
 
-{include file="common/boxstart.tpl" boxtitle="Importer plusieurs photos"}
+<div class="infobulle info">Ce script permet d'importer plusieurs photos d'un coup. Elle doivent être de format .jpg et empaquetées dans une archive .zip déposé dans le répertoire suivant du serveur : /var/www/adhocmusic.com/import . Ensuite saisissez le nom de l'archive (le nom du fichier), renseignez les données communes à toutes les photos, puis cliquez sur importer. Astuce : après un concert, faites une archive par groupe ! Vous n'aurez juste plus qu'à ajuster le titre de chaque photo manuellement par la suite. Gain de temps !</div>
 
 <script>
 $(function() {
@@ -119,6 +121,7 @@ $(function() {
   <input id="form-photo-import-submit" name="form-photo-import-submit" class="button" type="submit" value="Importer">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

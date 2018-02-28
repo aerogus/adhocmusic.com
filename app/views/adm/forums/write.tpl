@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Ecrire un message"}
+<div class="box">
+  <header>
+    <h2>Écrire un message</h2>
+  </header>
+  <div>
 
 <script>
 $(function() {
@@ -82,6 +86,7 @@ $(function() {
   <input name="id_thread" id="id_thread" type="hidden" value="{$id_thread|escape}">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}
