@@ -115,6 +115,8 @@
   {calendar year=$year month=$month day=$day}
 </div>
 
+</div>
+
 {/if} {* test unknown event *}
 
 {include file="common/footer.tpl"}
