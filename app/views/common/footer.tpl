@@ -16,6 +16,7 @@
       <li><h4>Suivez nous</h4></li>
       <li class="facebook"><a href="https://facebook.com/adhocmusic" title="@adhocmusic sur Facebook">@adhocmusic</a></li>
       <li class="twitter"><a href="https://twitter.com/adhocmusic" title="@adhocmusic sur Twitter">@adhocmusic</a></li>
+      <li class="email"><a href="https://www.adhocmusic.com/newsletters/subscriptions" title="Abonnement à la newsletter">Newsletter</a></li>
     </ul>
   </li>
   <li>

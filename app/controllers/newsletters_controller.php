@@ -58,11 +58,11 @@ class Controller
 
                 $smarty->assign('email', $email);
 
-                switch($action)
+                switch ($action)
                 {
                     case 'sub':
                         $ret = Newsletter::addEmail($email);
-                        switch($ret)
+                        switch ($ret)
                         {
                             case NEWSLETTER_SUB_OK_CONTACT_CREATED:
                             case NEWSLETTER_SUB_OK_RESUBSCRIBED_MEMBER:
@@ -78,7 +78,7 @@ class Controller
 
                     case 'unsub':
                         $ret = Newsletter::removeEmail($email);
-                        switch($ret)
+                        switch ($ret)
                         {
                             case NEWSLETTER_UNSUB_OK_UNSUBSCRIBED_MEMBER:
                             case NEWSLETTER_UNSUB_OK_CONTACT_DELETED:
@@ -96,11 +96,9 @@ class Controller
             }
 
         } // isSubmit
-
-        else {
-
+        else
+        {
             $smarty->assign('form', true);
-
         }
 
         return $smarty->fetch('newsletters/subscriptions.tpl');
