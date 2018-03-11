@@ -73,6 +73,16 @@ class Newsletter extends ObjectModel
     protected $_modified_fields = [];
 
     /**
+     * @var int
+     */
+    protected $_id_contact = 0;
+
+    /**
+     * @var array
+     */
+    protected $_tpl_vars = [];
+
+    /**
      * @return string
      */
     static function getBaseUrl()
@@ -120,6 +130,63 @@ class Newsletter extends ObjectModel
     function getHtml()
     {
         return (string) $this->_html;
+    }
+
+    /**
+     * Retourne le contenu après être passé à la moulinette
+     * des variables de templates et des liens de tracking
+     */
+    function getProcessedHtml()
+    {
+        $html = $this->getHtml();
+
+        // set des variables de templates
+        $html = str_replace(
+            array_keys($this->_tpl_vars),
+            array_values($this->_tpl_vars),
+            $html
+        );
+
+        // extraction des href
+        preg_match("/href=\"(.*)\")/g", $html, $urls);
+        var_dump($urls);
+
+        return $html;
+
+        // formation des liens de tracking
+        $tracking_links = [];
+        foreach ($urls as $url) {
+            $link  = 'https://www.adhocmusic.com/r/';
+            $link .= Tools::base64_encode($url);
+            $link .= '||';
+            $link .= Tools::base64_encode($this->getId() . '|' . $this->getIdContact());
+            $tracking_links[$url] = $link;
+        }
+
+        $html = str_replace(
+            array_keys($tracking_links),
+            array_values($tracking_links),
+            $html
+        );
+
+        return $html;
+    }
+
+    /**
+     * @param int $id_contact
+     */
+    function setIdContact($id_contact)
+    {
+        $this->_id_contact = (int) $id_contact;
+    }
+
+    /**
+     * @param string $key
+     * @param string $val
+     */
+    function setTplVar($key, $val)
+    {
+        $this->_tpl_vars[$key] = $val;
     }
 
     /**

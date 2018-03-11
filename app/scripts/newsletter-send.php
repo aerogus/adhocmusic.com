@@ -38,35 +38,16 @@ foreach ($subs as $sub)
     $newsletter_id_newsletter = ID_NEWSLETTER;
     $newsletter_id_contact = $sub['id_contact'];
 
-    $html = str_replace(
-        [
-            '%25%25email%25%25',
-	        '%25%25url%25%25'
-	    ],
-        [
-	        $sub['email'],
-	        $newsletter->getUrl()
-		],
-        $newsletter->getHtml()
-    );
+    $newsletter->setIdContact($sub['id_contact']);
+    $newsletter->setTplVar('%%email%%', $sub['email']);
+    $newsletter->setTplVar('%%pseudo%%', $sub['pseudo']);
+    $newsletter->setTplVar('%%url%%', $newsletter->getUrl());
 
     Email::send(
         $sub['email'],
         $newsletter->getTitle(),
         'newsletter',
-        [
-            /*
-            'id'            => $newsletter->getId(),
-            'id_newsletter' => $newsletter->getId(),
-            'id_contact'    => $sub['id_contact'],
-            'title'         => $newsletter->getTitle(),
-            'url'           => $newsletter->getUrl(),
-            'unsub_url'     => 'https://www.adhocmusic.com/newsletters/subscriptions?action=unsub&email=' . $sub['email'],
-            'email'         => $sub['email'],
-            'pseudo'        => $sub['pseudo'],
-            */
-            'html' => $newsletter->getHtml(),
-        ]
+        ['html' => $newsletter-getProcessedHtml()]
     );
 
     $n++;

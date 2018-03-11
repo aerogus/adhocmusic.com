@@ -268,17 +268,20 @@ class Controller
     }
 
     /**
-     * Redirection
+     * Redirection après tracking liens newsletter
+     * 
+     * ex: /r/XXX||YYY
+     * avec XXX = url de redirection en base64
+     * et   YYY = id_newsletter|id_contact en base64
      */
     static function r()
     {
         $url = urldecode((string) Route::params('url'));
         list($url, $from) = explode('||', $url);
-        $from = Tools::base64_url_decode($from);
         $url = Tools::base64_url_decode($url);
+        $from = Tools::base64_url_decode($from);
         list($id_newsletter, $id_contact) = explode('|', $from);
         Newsletter::addHit($id_newsletter, $id_contact, $url);
-        // todo: track le hit
         Tools::redirect($url);
     }
 
