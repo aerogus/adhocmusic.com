@@ -47,7 +47,7 @@ foreach ($subs as $sub)
         $sub['email'],
         $newsletter->getTitle(),
         'newsletter',
-        ['html' => $newsletter-getProcessedHtml()]
+        ['html' => $newsletter->getProcessedHtml()]
     );
 
     $n++;
