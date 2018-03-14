@@ -147,19 +147,19 @@ class Newsletter extends ObjectModel
             $html
         );
 
-        // extraction des href
-        preg_match("/href=\"(.*)\")/g", $html, $urls);
-        var_dump($urls);
+		// A DEBUGGUER
 
-        return $html;
+		/*
+        // extraction des liens href
+        $res = preg_match_all('/<a\shref="([^"]*)"/U', $html, $urls);
 
         // formation des liens de tracking
         $tracking_links = [];
-        foreach ($urls as $url) {
+        foreach ($urls[1] as $url) {
             $link  = 'https://www.adhocmusic.com/r/';
-            $link .= Tools::base64_encode($url);
+            $link .= Tools::base64_url_encode($url);
             $link .= '||';
-            $link .= Tools::base64_encode($this->getId() . '|' . $this->getIdContact());
+            $link .= Tools::base64_url_encode($this->getId() . '|' . $this->getIdContact());
             $tracking_links[$url] = $link;
         }
 
@@ -168,9 +168,15 @@ class Newsletter extends ObjectModel
             array_values($tracking_links),
             $html
         );
+		*/
 
         return $html;
     }
+
+	function getIdContact()
+	{
+		return (int) $this->_id_contact;
+	}
 
     /**
      * @param int $id_contact
