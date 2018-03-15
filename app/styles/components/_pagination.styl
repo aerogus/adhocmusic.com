@@ -4,17 +4,15 @@
   display flex
   align-items center
   justify-content center
-  margin 10px auto
+  margin 1rem auto
+  font-family Arial
 
   a
-    border-radius 50%
+    border-radius .5rem
     text-align center
-    width 24px
-    height 24px
-    line-height 24px
-    margin 0 5px
-
-  .unselectedpage
+    min-width 3rem
+    margin 0 .5rem
+    padding .5rem
     background #292933
     color #fff
 
@@ -22,9 +20,9 @@
       background #f0f0f0
       color #292933
 
-  .selectedpage
-    background #f7303c
-    color #fff
+    &.selected
+      background #f7303c
+      color #fff
 
-    &:hover
-      background #f0f0f0
+      &:hover
+        background #f0f0f0

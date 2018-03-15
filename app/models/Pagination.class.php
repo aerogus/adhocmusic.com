@@ -256,9 +256,6 @@ class Pagination
      */
     function getClass()
     {
-        if ($this->getSelectedPage() === $this->getCurrentPage()) {
-            return 'selectedpage';
-        }
-        return 'unselectedpage';
+        return ($this->getSelectedPage() === $this->getCurrentPage()) ? 'selected' : '';
     }
 }

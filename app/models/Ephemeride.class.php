@@ -23,7 +23,7 @@ class Ephemeride extends ObjectModel
      */
     function getAll()
     {
-        return $_data;
+        return $this->_data;
     }
 
     /**
@@ -35,9 +35,7 @@ class Ephemeride extends ObjectModel
     function getDate($date)
     {
         if (strlen($date) !== 5) return;
-
-        if (array_key_exists($date, $this->_data)) return;
-
+        if (!array_key_exists($date, $this->_data)) return;
         return $this->_data[$date];
     }
 
