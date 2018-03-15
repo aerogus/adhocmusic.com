@@ -44,7 +44,7 @@ class EmailSmarty extends Smarty
 
         $uid = $type . '/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
 
-        switch($type)
+        switch ($type)
         {
             case 'photo':  $source = ADHOC_ROOT_PATH . '/media/photo/' . $id . '.jpg'; break;
             case 'event':  $source = ADHOC_ROOT_PATH . '/media/event/' . $id . '.jpg'; break;

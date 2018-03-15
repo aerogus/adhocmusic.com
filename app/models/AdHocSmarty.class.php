@@ -120,7 +120,7 @@ class AdHocSmarty extends Smarty
             }
         }
 
-        switch($params['type'])
+        switch ($params['type'])
         {
             case 'dewplayer-mini':
                 return '<object type="application/x-shockwave-flash" data="/swf/dewplayer-mini.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" width="160" height="20">'."\n"

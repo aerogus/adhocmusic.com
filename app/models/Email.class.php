@@ -67,7 +67,7 @@ class Email
     {
         $str    = "";
         $length = mb_strlen($email);
-        switch($mode)
+        switch ($mode)
         {
             case "1":
             for ($cpt = 0 ; $cpt < $length ; $cpt++ ) {

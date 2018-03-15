@@ -142,7 +142,7 @@ class Controller
         $mode = (string) Route::params('mode');
         $id   = (int) Route::params('id');
 
-        switch($mode)
+        switch ($mode)
         {
             case "from":
                 $champ = "del_from";

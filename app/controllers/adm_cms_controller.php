@@ -36,12 +36,12 @@ class Controller
         if (Tools::isSubmit('form-cms-create'))
         {
             $data = [
-                'alias'        => (string) Route::params('alias'),
-                'breadcrumb'   => (string) Route::params('breadcrumb'),
-                'title'        => (string) Route::params('title'),
-                'content'      => (string) Route::params('content'),
-                'online'       => (bool) Route::params('online'),
-                'auth'         => (int) Route::params('auth'),
+                'alias'      => (string) Route::params('alias'),
+                'breadcrumb' => (string) Route::params('breadcrumb'),
+                'title'      => (string) Route::params('title'),
+                'content'    => (string) Route::params('content'),
+                'online'     => (bool) Route::params('online'),
+                'auth'       => (int) Route::params('auth'),
             ];
 
             $cms = CMS::init();

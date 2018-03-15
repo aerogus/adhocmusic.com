@@ -237,7 +237,7 @@ class Contact extends ObjectModel
 
             foreach ($fields['contact'] as $field => $type) {
                 $att = '_' . $field;
-                switch($type)
+                switch ($type)
                 {
                     case 'num':
                         $sql .= $db->escape($this->$att) . ",";
