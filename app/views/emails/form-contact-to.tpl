@@ -25,10 +25,6 @@
           <td>{$text|escape|@nl2br}</td>
         </tr>
         <tr>
-          <td>Copie :</td>
-          <td>{$cc|escape}</td>
-        </tr>
-        <tr>
           <td>Newsletter :</td>
           <td>{$mailing|escape}</td>
         </tr>
