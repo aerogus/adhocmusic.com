@@ -18,9 +18,7 @@
         <a href="/">Accueil</a>
         <ul>
           <li><a href="/map">Plan du Site</a></li>
-          <li><a href="/shop">Boutique</a></li>
           <li><a href="/partners">Partenaires</a></li>
-          <li><a href="/visuels">Visuels</a></li>
           <li><a href="/mentions-legales">Mentions Légales</a></li>
         </ul>
       </li>
@@ -32,7 +30,6 @@
           <li><a href="/assoce/afterworks">Afterworks</a></li>
           <li><a href="/assoce/formations">Formations</a></li>
           <li><a href="/assoce/equipe">Équipe</a></li>
-          <li><a href="/assoce/statuts">Statuts</a></li>
         </ul>
       </li>
       <li>

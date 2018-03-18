@@ -11,21 +11,17 @@
             <a href="/" accesskey="1" title="Retour à l'accueil">Accueil</a>
             <ul>
               <li><a href="/map">Plan du site</a></li>
-              <li><a href="/shop">Boutique</a></li>
               <li><a href="/partners">Partenaires</a></li>
-              <li><a href="/visuels">Visuels</a></li>
               <li><a href="/mentions-legales">Mentions Légales</a></li>
             </ul>
           </li>
           <li>
             <a href="/assoce" accesskey="2" title="Présentation de l’Association AD’HOC, l’équipe, nos concerts">L’Assoce</a>
             <ul>
-              <li><a href="/assoce/presentation">Présentation</a></li>
-              <li><a href="/assoce/concerts">Concerts</a></li>
-              <li><a href="/assoce/afterworks">Afterworks</a></li>
-              <li><a href="/assoce/formations">Formations</a></li>
-              <li><a href="/assoce/equipe">Équipe</a></li>
-              <li><a href="/assoce/statuts">Statuts</a></li>
+              <li><a href="/concerts">Concerts</a></li>
+              <li><a href="/afterworks">Afterworks</a></li>
+              <li><a href="/formations">Formations</a></li>
+              <li><a href="/equipe">Équipe</a></li>
             </ul>
           </li>
           <li>

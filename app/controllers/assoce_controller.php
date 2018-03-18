@@ -2,12 +2,7 @@
 
 class Controller
 {
-    static function index()
-    {
-        return self::presentation();
-    }
-
-    static function presentation()
+    static function assoce()
     {
         $smarty = new AdHocSmarty();
 
@@ -16,8 +11,7 @@ class Controller
         $smarty->enqueue_script('/js/assoce.js');
 
         $trail = Trail::getInstance();
-        $trail->addStep("L'Association", "/assoce");
-        $trail->addStep("Présentation");
+        $trail->addStep("L'Association");
 
         $smarty->assign('photos', Photo::getPhotos([
             'online' => true,
@@ -45,8 +39,7 @@ class Controller
         $smarty->enqueue_script('/js/assoce.js');
 
         $trail = Trail::getInstance();
-        $trail->addStep("L'Association", "/assoce");
-        $trail->addStep("Les Concerts");
+        $trail->addStep("Concerts");
 
         $smarty->assign('photos', Photo::getPhotos([
             'online' => true,
@@ -77,8 +70,7 @@ class Controller
         $smarty->enqueue_script('/js/assoce.js');
 
         $trail = Trail::getInstance();
-        $trail->addStep("L'Association", "/assoce");
-        $trail->addStep("Les Afterworks");
+        $trail->addStep("Afterworks");
 
         $smarty->assign('photos', Photo::getPhotos([
             'online' => true,
@@ -107,8 +99,7 @@ class Controller
         $smarty->enqueue_script('/js/assoce.js');
 
         $trail = Trail::getInstance();
-        $trail->addStep("L'Association", "/assoce");
-        $trail->addStep("L'Equipe");
+        $trail->addStep("Formation");
 
         $smarty->assign('photos', Photo::getPhotos([
             'online' => true,
@@ -134,8 +125,7 @@ class Controller
         $smarty->enqueue_script('/js/assoce.js');
 
         $trail = Trail::getInstance();
-        $trail->addStep("L'Association", "/assoce");
-        $trail->addStep("L'Equipe");
+        $trail->addStep("Équipe");
 
         $smarty->assign('photos', Photo::getPhotos([
             'online' => true,
@@ -155,34 +145,5 @@ class Controller
         $smarty->assign('omembres', MembreAdhoc::getStaff(false));
 
         return $smarty->fetch('assoce/equipe.tpl');
-    }
-
-    static function statuts()
-    {
-        $smarty = new AdHocSmarty();
-
-        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
-        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
-        $smarty->enqueue_script('/js/assoce.js');
-
-        $trail = Trail::getInstance();
-        $trail->addStep("L'Association", "/assoce");
-        $trail->addStep("Statuts");
-
-        $smarty->assign('photos', Photo::getPhotos([
-            'online' => true,
-            'sort'   => 'random',
-            'lieu'   => 1,
-            'limit'  => 3,
-        ]));
-
-        $smarty->assign('videos', Video::getVideos([
-            'online' => true,
-            'sort'   => 'random',
-            'lieu'   => 1,
-            'limit'  => 6,
-        ]));
-
-        return $smarty->fetch('assoce/statuts.tpl');
     }
 }

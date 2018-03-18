@@ -50,15 +50,6 @@ class Controller
     }
 
     /**
-     * Boutique AD'HOC
-     */
-    static function shop()
-    {
-        $smarty = new AdHocSmarty();
-        return $smarty->fetch('shop.tpl');
-    }
-
-    /**
      * Les partenaires
      */
     static function partners()
@@ -72,19 +63,6 @@ class Controller
         $trail->addStep("Partenaires");
 
         return $smarty->fetch('partners.tpl');
-    }
-
-    static function visuels()
-    {
-        $smarty = new AdHocSmarty();
-
-        $smarty->assign('title', "♫ Les Visuels de l'association AD'HOC");
-        $smarty->assign('description', "Les visuels d'AD'HOC");
-
-        $trail = Trail::getInstance();
-        $trail->addStep("Visuels");
-
-        return $smarty->fetch('visuels.tpl');
     }
 
     static function contact()

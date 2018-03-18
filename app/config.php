@@ -60,8 +60,8 @@ if (ENV === 'PROD') {
     }
 
     ini_set('display_startup_errors', 0);
-    ini_set('display_errors', 0);
-    define('ONERROR_SHOW', false);
+    ini_set('display_errors', 1);
+    define('ONERROR_SHOW', true);
 
 } elseif (ENV === 'DEV') {
 

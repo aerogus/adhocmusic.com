@@ -1703,6 +1703,7 @@ class Groupe extends ObjectModel
         $alias = trim($name);
         $alias = strtolower($alias);
         $alias = Tools::removeAccents($alias);
+        $alias = str_replace('|', '', $alias);
         $alias = str_replace('.', '', $alias);
         $alias = str_replace(' ', '', $alias);
         $alias = str_replace("'", '', $alias);
