@@ -97,6 +97,8 @@ class Controller
 
         if (Tools::isSubmit('form-contact'))
         {
+			die('maintenance'); // MAINTENANCE le temps de trouver la parade
+
             if (Tools::checkCSRFToken((string) Route::params('check')) === false) {
                 //die(); // mauvais code sécurité
             }
