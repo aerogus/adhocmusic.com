@@ -94,9 +94,11 @@ class Controller
 
             $response = curl_exec($c);
             $json = json_decode($response);
-
-            if (!$json->error) {
+            if (!$json->errors) {
                 $newsletter->setHtml($json->html);
+            } else {
+                print_r($json->errors);
+                die();
             }
 
             $newsletter->save();
