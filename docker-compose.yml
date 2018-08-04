@@ -9,7 +9,6 @@ services:
   # sert contenu statique et dynamique
   apache2:
     build: ./docker/apache2
-    #image: httpd:2.4.29-alpine
     hostname: www
     container_name: adhoc_apache
     restart: always
@@ -27,7 +26,6 @@ services:
 
   php:
     build: ./docker/php
-    #image: php:7.2.2-fpm
     hostname: php
     container_name: adhoc_php
     restart: always
