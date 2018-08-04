@@ -25,6 +25,9 @@
 
       <p>Merci de consulter la foire aux questions avant de nous contacter</p>
 
+      <p>Formulaire en maintenance, vous pouvez nous contacter à: contact arobase adhocmusic point com</p>
+
+      <div style="opacity:.1">
       <form id="form-contact" name="form-contact" method="post" action="" enctype="multipart/form-data">
         <ul>
           <li>
@@ -65,6 +68,8 @@
         </ul>
         <input name="check" id="check" type="hidden" value="{$check|escape}">
       </form>
+      </div>
+
 
       {/if}
 
