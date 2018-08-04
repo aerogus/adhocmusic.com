@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="txtcenter infobulle info">À venir : <a href="/events/6837">Vendredi 16 mars 2018 - AfterWork S03E06</a></div>
+<div class="txtcenter infobulle info">À venir : <a href="/events/6847">Samedi 26 mai 2018 - Festival Les Pieds dans l'Orge</a></div>
 
 <div class="grid-3-tiny-2-small-1 has-gutter-l">
 
