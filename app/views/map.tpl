@@ -23,13 +23,12 @@
         </ul>
       </li>
       <li>
-        <a href="/assoce/">L'Assoce</a>
+        <a href="/assoce">L'Assoce</a>
         <ul>
-          <li><a href="/assoce/presentation">Présentation</a></li>
-          <li><a href="/assoce/concerts">Concerts</a></li>
-          <li><a href="/assoce/afterworks">Afterworks</a></li>
-          <li><a href="/assoce/formations">Formations</a></li>
-          <li><a href="/assoce/equipe">Équipe</a></li>
+          <li><a href="/concerts">Concerts</a></li>
+          <li><a href="/afterworks">Afterworks</a></li>
+          <li><a href="/formations">Formations</a></li>
+          <li><a href="/equipe">Équipe</a></li>
         </ul>
       </li>
       <li>

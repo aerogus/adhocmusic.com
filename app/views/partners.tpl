@@ -7,15 +7,21 @@
   <div>
     <ul class="partners">
       <li>
-        <a href="http://www.ouifm.fr">
+        <a href="https://www.ouifm.fr">
           <img src="/img/partners/ouifm.png" alt="">
-          <strong>OÜI FM</strong><br>La Radio du Rock
+          <strong>OUI FM</strong><br>La Radio du Rock.
         </a>
       </li>
       <li>
         <a href="http://www.ville-epinay-sur-orge.fr">
           <img src="/img/partners/epinay-sur-orge.png" alt="">
           <strong>Épinay-sur-Orge</strong><br>Mairie d'Épinay-sur-Orge
+        </a>
+      </li>
+      <li>
+        <a href="https://brasserieoxbier.wordpress.com/">
+          <img src="/img/partners/ox.png" alt="">
+          <strong>OX</strong><br>Brasserie Artisanale de Marcoussis
         </a>
       </li>
       <li>
