@@ -85,6 +85,14 @@ define('MEDIA_VIMEO_EMBED_PATTERN',
        '');
 
 /**
+ * 9 - AD'HOC Tube
+ */
+
+//define('MEDIA_ADHOCTUBE_HOST', 'videos.adhocmusic.com');
+define('MEDIA_ADHOCTUBE_HOST', 'video.aerogus.net');
+define('MEDIA_ADHOCTUBE_URL_PATTERN', '~^https://' . MEDIA_ADHOCTUBE_HOST . '/videos/watch/([a-f0-9-]{36})~');
+
+/**
  * Classe Vidéo
  *
  * Classe de gestion des vidéos du site
@@ -117,13 +125,15 @@ class Video extends Media
     const HOST_FACEBOOK    = 6;
     const HOST_ADHOC       = 7;
     const HOST_VIMEO       = 8;
+    const HOST_ADHOCTUBE   = 9;
 
     protected static $_tab_hosts = [
         self::HOST_YOUTUBE     => "YouTube",
         self::HOST_DAILYMOTION => "DailyMotion",
         self::HOST_FACEBOOK    => "Facebook",
-        self::HOST_ADHOC       => "AD'HOC",
+        self::HOST_ADHOC       => "AD'HOC Legacy",
         self::HOST_VIMEO       => "Vimeo",
+        self::HOST_ADHOCTUBE   => "AD'HOC Tube",
     ];
 
     /**
@@ -572,6 +582,7 @@ class Video extends Media
                      . '<img src="/media/video/' . $this->getId() . '.jpg" width="680" height="360" title="No video playback capabilities">'
                      . '</object>'
                      . '</video>';
+
             case self::HOST_VIMEO:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '0';
                 if ($iframe) {
@@ -584,6 +595,10 @@ class Video extends Media
                          . '<embed src="http://vimeo.com/moogaloop.swf?clip_id='.$this->_reference.'&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1&amp;autoplay='.$strautoplay.'&amp;loop=0" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="'.self::WIDTH.'" height="'.self::HEIGHT.'"></embed>' . "\n"
                          . '</object>' . "\n";
                 }
+
+            case self::HOST_ADHOCTUBE:
+                return '<iframe width="'.self::WIDTH.'" height="'.self::HEIGHT.'" sandbox="allow-same-origin allow-scripts" src="https://'.MEDIA_ADHOCTUBE_HOST.'/videos/embed/'.$this->getReference().'" frameborder="0" allowfullscreen></iframe>' . "\n";
+
             default:
                 return false;
         }
@@ -656,8 +671,8 @@ class Video extends Media
         }
 
         // avant de commencer les urls, si jamais ya pas de http:// devant, on le rajoute
-        if (strpos($str, 'http://') === false) {
-            $str = 'http://' . $str;
+        if (strpos($str, 'http://') === false && strpos($str, 'https://') === false) {
+            $str = 'https://' . $str;
         }
 
         // 2 - on teste les urls, d'abord celle des pages contenant les videos, et ensuite
@@ -674,13 +689,6 @@ class Video extends Media
         if (preg_match(MEDIA_YOUTUBE_DIRECT_VIDEO_URL_PATTERN, $str, $matches)) {
             if (!empty($matches[2])) {
                 return ['id_host' => self::HOST_YOUTUBE, 'reference' => $matches[2]];
-            }
-        }
-
-        // GoogleVideo
-        if (preg_match(MEDIA_GOOGLEVIDEO_DIRECT_VIDEO_URL_PATTERN, $str, $matches)) {
-            if (!empty($matches[1])) {
-                return ['id_host' => self::HOST_GOOGLE, 'reference' => $matches[1]];
             }
         }
 
@@ -705,7 +713,7 @@ class Video extends Media
             }
         }
 
-        // AD'HOC
+        // AD'HOC Legacy
         if (preg_match(MEDIA_ADHOC_URL_PATTERN, $str, $matches)) {
             if (!empty($matches[1])) {
                 return ['id_host' => self::HOST_ADHOC, 'reference' => $matches[1]];
@@ -716,6 +724,13 @@ class Video extends Media
         if (preg_match(MEDIA_VIMEO_URL_PATTERN, $str, $matches)) {
             if (!empty($matches[2])) {
                 return ['id_host' => self::HOST_VIMEO, 'reference' => $matches[2]];
+            }
+         }
+
+        // AD'HOC Tube
+        if (preg_match(MEDIA_ADHOCTUBE_URL_PATTERN, $str, $matches)) {
+            if (!empty($matches[1])) {
+                return ['id_host' => self::HOST_ADHOCTUBE, 'reference' => $matches[1]];
             }
         }
 
@@ -788,6 +803,11 @@ class Video extends Media
 
             case self::HOST_FACEBOOK:
                 return self::DEFAULT_THUMBNAIL;
+
+            case self::HOST_ADHOCTUBE:
+                $meta_url = 'https://' . MEDIA_ADHOCTUBE_HOST . '/api/v1/videos/' . $reference;
+                $meta_info = json_decode(file_get_contents($meta_url));
+                return 'https://' . MEDIA_ADHOCTUBE_HOST . $meta_info->thumbnailPath;
 
             default:
                 return false;
