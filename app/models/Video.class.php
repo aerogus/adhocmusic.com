@@ -88,8 +88,7 @@ define('MEDIA_VIMEO_EMBED_PATTERN',
  * 9 - AD'HOC Tube
  */
 
-//define('MEDIA_ADHOCTUBE_HOST', 'videos.adhocmusic.com');
-define('MEDIA_ADHOCTUBE_HOST', 'video.aerogus.net');
+define('MEDIA_ADHOCTUBE_HOST', 'videos.adhocmusic.com');
 define('MEDIA_ADHOCTUBE_URL_PATTERN', '~^https://' . MEDIA_ADHOCTUBE_HOST . '/videos/watch/([a-f0-9-]{36})~');
 
 /**
@@ -536,29 +535,12 @@ class Video extends Media
         {
             case self::HOST_YOUTUBE:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '';
-                if ($iframe) {
-                    return '<iframe title="'.htmlspecialchars($this->getName()).'" width="'.$this->getWidth().'" height="'.$this->getHeight().'" src="https://www.youtube.com/embed/'.$this->_reference.'?rel=0" frameborder="0" allowfullscreen></iframe>' . "\n";
-                } else {
-                    return '<object width="'.$this->getWidth().'" height="'.$this->getHeight().'">' . "\n"
-                     . '<param name="movie" value="https://www.youtube.com/v/'.$this->_reference.'&amp;autoplay='.$strautoplay.'"></param>' . "\n"
-                     . '<param name="wmode" value="transparent"></param>' . "\n"
-                     . '<embed src="https://www.youtube.com/v/'.$this->_reference.'&amp;autoplay='.$strautoplay.'" type="application/x-shockwave-flash" wmode="transparent" width="'.$this->getWidth().'" height="'.$this->getHeight().'"></embed>' . "\n"
-                     . '</object>' . "\n";
-                }
+                return '<iframe title="'.htmlspecialchars($this->getName()).'" width="'.$this->getWidth().'" height="'.$this->getHeight().'" src="https://www.youtube.com/embed/'.$this->_reference.'?rel=0" frameborder="0" allowfullscreen></iframe>' . "\n";
 
             case self::HOST_DAILYMOTION:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '0';
                 // taille par défaut : l330 / h267
-                if ($iframe) {
-                    return '<iframe frameborder="0" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" src="https://www.dailymotion.com/embed/video/'.$this->_reference.'?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&autoPlay='.$strautoplay.'&wmode=transparent"></iframe>' . "\n";
-                } else {
-                    return '<object width="'.self::WIDTH.'" height="'.self::HEIGHT.'">' . "\n"
-                         . '<param name="movie" value="https://www.dailymotion.com/swf/'.$this->_reference.'&amp;autoplay='.$strautoplay.'"></param>' . "\n"
-                         . '<param name="wmode" value="transparent"></param>' . "\n"
-                         . '<param name="allowfullscreen" value="true"></param>' . "\n"
-                         . '<embed src="https://www.dailymotion.com/swf/'.$this->_reference.'&amp;autoplay='.$strautoplay.'" type="application/x-shockwave-flash" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" allowfullscreen="true" wmode="transparent"></embed>' . "\n"
-                         . '</object>' . "\n";
-                }
+                return '<iframe frameborder="0" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" src="https://www.dailymotion.com/embed/video/'.$this->_reference.'?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&autoPlay='.$strautoplay.'&wmode=transparent"></iframe>' . "\n";
 
             case self::HOST_FACEBOOK:
                 return '<object width="'.self::WIDTH.'" height="'.self::HEIGHT.'" >' . "\n"
@@ -573,8 +555,7 @@ class Video extends Media
                 $autoplay ? $strautoplay = 'true' : $strautoplay = 'false';
                 $width  = $this->getWidth();
                 $height = $this->getHeight();
-                return ''
-                     . '<video width="680" height="360" poster="/media/video/' . $this->getId() . '.jpg" controls="controls" preload="none">'
+                return '<video width="680" height="360" poster="/media/video/' . $this->getId() . '.jpg" controls="controls" preload="none">'
                      . '<source type="video/mp4" src="/media/video/' . $this->getReference() . '">'
                      . '<object width="680" height="360" type="application/x-shockwave-flash" data="/mediaelement/flashmediaelement.swf">'
                      . '<param name="movie" value="/mediaelement/flashmediaelement.swf">'
@@ -585,16 +566,7 @@ class Video extends Media
 
             case self::HOST_VIMEO:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '0';
-                if ($iframe) {
-                    return '<iframe src="http://player.vimeo.com/video/'.$this->_reference.'?title=0&amp;byline=0&amp;portrait=0&amp;autoplay='.$strautoplay.'" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" frameborder="0"></iframe>' . "\n";
-                } else {
-                    return '<object width="'.self::WIDTH.'" height="'.self::HEIGHT.'">' . "\n"
-                         . '<param name="allowfullscreen" value="true" />' . "\n"
-                         . '<param name="allowscriptaccess" value="always" />' . "\n"
-                         . '<param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id='.$this->_reference.'&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1&amp;autoplay='.$strautoplay.'&amp;loop=0" />' . "\n"
-                         . '<embed src="http://vimeo.com/moogaloop.swf?clip_id='.$this->_reference.'&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1&amp;autoplay='.$strautoplay.'&amp;loop=0" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="'.self::WIDTH.'" height="'.self::HEIGHT.'"></embed>' . "\n"
-                         . '</object>' . "\n";
-                }
+                return '<iframe src="https://player.vimeo.com/video/'.$this->_reference.'?title=0&amp;byline=0&amp;portrait=0&amp;autoplay='.$strautoplay.'" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" frameborder="0"></iframe>' . "\n";
 
             case self::HOST_ADHOCTUBE:
                 return '<iframe width="'.self::WIDTH.'" height="'.self::HEIGHT.'" sandbox="allow-same-origin allow-scripts" src="https://'.MEDIA_ADHOCTUBE_HOST.'/videos/embed/'.$this->getReference().'" frameborder="0" allowfullscreen></iframe>' . "\n";
