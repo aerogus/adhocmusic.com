@@ -219,7 +219,6 @@ class Controller
                 'id_structure' => 0,
                 'id_contact' => $_SESSION['membre']->getId(),
                 'online' => true,
-                'id_host' => (int) Route::params('id_host'),
                 'code' => (string) Route::params('code'),
                 'reference' => (string) Route::params('reference'),
             ];
@@ -324,12 +323,10 @@ class Controller
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
         }
-        if ($data['id_host'] !== Video::HOST_ADHOC) {
-            if (empty($data['code'])) {
-                $errors['code'] = "Vous devez copier/coller un code de vidéo Youtube ou Dailymotion";
-            } elseif (Video::parseStringForVideoUrl($data['code']) === false) {
-                $errors['unknown_host'] = "Code de la vidéo non reconnu ou hébergeur incompatible";
-            }
+        if (empty($data['code'])) {
+            $errors['code'] = "Vous devez copier/coller l'url de la vidéo";
+        } elseif (Video::parseStringForVideoUrl($data['code']) === false) {
+            $errors['unknown_host'] = "Url de la vidéo non reconnue";
         }
         if (count($errors)) {
             return false;
@@ -379,6 +376,7 @@ class Controller
                 $video->setOnline($data['online']);
                 $video->save();
 
+                // Permet le reset de la vignette
                 if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
                     $video->storeThumbnail($vignette);
                     Video::invalidateVideoThumbInCache($video->getId(), 80, 80, '000000', false, true);

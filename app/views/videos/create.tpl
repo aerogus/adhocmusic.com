@@ -6,31 +6,18 @@
   </header>
   <div>
 
-<form id="form-video-create" name="form-video-create" method="post" action="/videos/create" enctype="multipart/form-data">
+<form id="form-video-create" name="form-video-create" method="post" action="/videos/create">
   <ul>
     <li>
       <div class="infobulle error" id="error_code"{if empty($error_code)} style="display: none"{/if}>Vous devez copier/coller un code de vidéo</div>
       <div class="infobulle error" id="error_unknown_host"{if empty($error_unknow_host)} style="display: none"{/if}>Code de la vidéo non reconnu ou hébergeur incompatible</div>
       <input type="text" id="code" name="code" size="50" value="" style="float: right;">
-      <label for="code">Copiez/collez le code de la vidéo</label>
+      <label for="code">Url de la vidéo</label>
     </li>
     <li>
       <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
       <input type="text" id="name" name="name" size="50" value="" style="float: right;">
       <label for="name">Titre</label>
-    </li>
-    <li>
-      <select id="id_host" name="id_host" style="float: right;">
-      {foreach $hosts as $host}
-      <option value="{$host.id|escape}">{$host.name|escape}</option>
-      {/foreach}
-      </select>
-      <label for="id_host">Hébergeur</label>
-    </li>
-    <li>
-      <div id="thumb" style="float: right;"></div>
-      <label for="thumb">Miniature</label>
-      <br style="clear: both">
     </li>
     <li>
     {if !empty($groupe)}

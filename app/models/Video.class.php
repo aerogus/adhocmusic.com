@@ -59,14 +59,14 @@ define('MEDIA_FACEBOOK_EMBED_PATTERN',
        '');
 
 /**
- * 7 - AD'HOC
+ * 7 - AD'HOC Legacy
  */
 
 define('MEDIA_ADHOC_URL_PATTERN',
-       '~^http://www.adhocmusic.com/media/video/([a-zA-Z0-9]{1,32})\.([a-z]{3})~');
+       '~^https://(?:static|www).adhocmusic.com/media/video/([a-zA-Z0-9]{1,32})\.([a-z]{3})~');
 
 define('MEDIA_ADHOC_DIRECT_VIDEO_URL_PATTERN',
-       '~^http://www.adhocmusic.com/media/video/([a-zA-Z0-9]{1,32})\.([a-z]{3})~');
+       '~^https://(?:static|www).adhocmusic.com/media/video/([a-zA-Z0-9]{1,32})\.([a-z]{3})~');
 
 define('MEDIA_ADHOC_EMBED_PATTERN',
        '');
@@ -76,10 +76,10 @@ define('MEDIA_ADHOC_EMBED_PATTERN',
  */
 
 define('MEDIA_VIMEO_URL_PATTERN',
-       '~^https://(www\.)?vimeo.com/([0-9]{1,16})~');
+       '~^https://(?:www\.)?vimeo.com/([0-9]{1,16})~');
 
 define('MEDIA_VIMEO_DIRECT_VIDEO_URL_PATTERN',
-       '~^https://(www\.)?vimeo.com/([0-9]{1,16})~');
+       '~^https://(?:www\.)?vimeo.com/([0-9]{1,16})~');
 
 define('MEDIA_VIMEO_EMBED_PATTERN',
        '');
@@ -535,19 +535,19 @@ class Video extends Media
         {
             case self::HOST_YOUTUBE:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '';
-                return '<iframe title="'.htmlspecialchars($this->getName()).'" width="'.$this->getWidth().'" height="'.$this->getHeight().'" src="https://www.youtube.com/embed/'.$this->_reference.'?rel=0" frameborder="0" allowfullscreen></iframe>' . "\n";
+                return '<iframe title="'.htmlspecialchars($this->getName()).'" width="'.$this->getWidth().'" height="'.$this->getHeight().'" src="https://www.youtube.com/embed/'.$this->getReference().'?rel=0" frameborder="0" allowfullscreen></iframe>' . "\n";
 
             case self::HOST_DAILYMOTION:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '0';
                 // taille par défaut : l330 / h267
-                return '<iframe frameborder="0" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" src="https://www.dailymotion.com/embed/video/'.$this->_reference.'?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&autoPlay='.$strautoplay.'&wmode=transparent"></iframe>' . "\n";
+                return '<iframe frameborder="0" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" src="https://www.dailymotion.com/embed/video/'.$this->getReference().'?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&autoPlay='.$strautoplay.'&wmode=transparent"></iframe>' . "\n";
 
             case self::HOST_FACEBOOK:
                 return '<object width="'.self::WIDTH.'" height="'.self::HEIGHT.'" >' . "\n"
                      . '<param name="allowfullscreen" value="true" />' . "\n"
                      . '<param name="allowscriptaccess" value="always" />' . "\n"
-                     . '<param name="movie" value="http://www.facebook.com/v/'.$this->_reference.'" />' . "\n"
-                     . '<embed src="https://www.facebook.com/v/'.$this->_reference.'" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'.self::WIDTH.'" height="'.self::HEIGHT.'">' . "\n"
+                     . '<param name="movie" value="http://www.facebook.com/v/'.$this->getReference().'" />' . "\n"
+                     . '<embed src="https://www.facebook.com/v/'.$this->getReference().'" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'.self::WIDTH.'" height="'.self::HEIGHT.'">' . "\n"
                      . '</embed>' . "\n"
                      . '</object>' . "\n";
 
@@ -566,7 +566,7 @@ class Video extends Media
 
             case self::HOST_VIMEO:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '0';
-                return '<iframe src="https://player.vimeo.com/video/'.$this->_reference.'?title=0&amp;byline=0&amp;portrait=0&amp;autoplay='.$strautoplay.'" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" frameborder="0"></iframe>' . "\n";
+                return '<iframe src="https://player.vimeo.com/video/'.$this->getReference().'?title=0&amp;byline=0&amp;portrait=0&amp;autoplay='.$strautoplay.'" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" frameborder="0"></iframe>' . "\n";
 
             case self::HOST_ADHOCTUBE:
                 return '<iframe width="'.self::WIDTH.'" height="'.self::HEIGHT.'" sandbox="allow-same-origin allow-scripts" src="https://'.MEDIA_ADHOCTUBE_HOST.'/videos/embed/'.$this->getReference().'" frameborder="0" allowfullscreen></iframe>' . "\n";
@@ -694,8 +694,8 @@ class Video extends Media
 
         // Vimeo
         if (preg_match(MEDIA_VIMEO_URL_PATTERN, $str, $matches)) {
-            if (!empty($matches[2])) {
-                return ['id_host' => self::HOST_VIMEO, 'reference' => $matches[2]];
+            if (!empty($matches[1])) {
+                return ['id_host' => self::HOST_VIMEO, 'reference' => $matches[1]];
             }
          }
 
@@ -808,6 +808,11 @@ class Video extends Media
                 $meta_url = 'https://vimeo.com/api/v2/video/' . $reference . '.json';
                 $meta_info = json_decode(file_get_contents($meta_url));
                 return $meta_info[0]->title;
+
+            case self::HOST_ADHOCTUBE:
+                $meta_url = 'https://' . MEDIA_ADHOCTUBE_HOST . '/api/v1/videos/' . $reference;
+                $meta_info = json_decode(file_get_contents($meta_url));
+                return $meta_info->name;
         }
     }
 

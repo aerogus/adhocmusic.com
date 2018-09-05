@@ -12,7 +12,7 @@
 
 {else}
 
-<form id="form-video-edit" name="form-video-edit" method="post" action="/videos/edit" enctype="multipart/form-data">
+<form id="form-video-edit" name="form-video-edit" method="post" action="/videos/edit">
   <ul>
     <li>
       <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
