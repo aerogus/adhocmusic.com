@@ -1,2 +1,2 @@
-FROM mysql:5.7.21
+FROM mysql:5.7.23
 LABEL maintainer="guillaume@seznec.fr"

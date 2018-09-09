@@ -1,4 +1,4 @@
-FROM php:7.2.2-fpm
+FROM php:7.2.8-fpm
 LABEL maintainer="guillaume@seznec.fr"
 
 # maj complète et install des paquets utiles

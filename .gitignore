@@ -1,6 +1,9 @@
 # spam
 .DS_Store
 
+# données dans le contexte docker
+volumes
+
 # dépendances npm
 node_modules
 
