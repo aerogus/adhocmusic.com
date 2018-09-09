@@ -15,7 +15,7 @@ docker
 ajouter la ligne suivante dans /etc/hosts :
 
 ```
-127.0.0.1 adhocmusic.test www.adhocmusic.test static.adhocmusic.test mysql.adhocmusic.test php.adhocmusic.test pma.adhocmusic.test
+127.0.0.1 adhocmusic.test www.adhocmusic.test static.adhocmusic.test php.adhocmusic.test mysql.adhocmusic.test pma.adhocmusic.test
 ```
 
 1er Démarrage :

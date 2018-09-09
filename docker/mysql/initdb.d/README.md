@@ -1,2 +1,2 @@
-mettre ici un fichier adhocmusic.com.sql.gz contenant le dump de la base de prod
+mettre ici des fichiers .sql(.gz) qui seront exécutés à la création du conteneur
 
