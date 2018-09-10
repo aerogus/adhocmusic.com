@@ -9,7 +9,7 @@
  *
  * @see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class WorldCountry extends Liste
 {

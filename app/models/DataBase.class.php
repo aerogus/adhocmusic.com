@@ -21,7 +21,7 @@ ini_set('mysql.connect_timeout', 2);
 /**
  * classe de gestion de la base MySQL
  *
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  * @package adhoc
  */
 class DataBase

@@ -8,7 +8,7 @@
  * Classe abstraite Liste à étendre
  * utilisé pour World*
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class Liste
 {

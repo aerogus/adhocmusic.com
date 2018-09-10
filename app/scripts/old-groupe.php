@@ -13,7 +13,7 @@ $sql = "SELECT alias, modified_on FROM adhoc_groupe WHERE DATE(modified_on) < '2
 
 $rows = $db->queryWithFetch($sql);
 
-foreach($rows as $row) {
+foreach ($rows as $row) {
     echo $row['modified_on'] . " " . $row['alias'] . "\n";
 }
 

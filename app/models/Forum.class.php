@@ -7,7 +7,7 @@ define('FORUM_NB_MESSAGES_PER_PAGE', 50);
  * Classe de gestion des forums
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class Forum
 {
@@ -184,43 +184,43 @@ abstract class Forum
             if (strlen($params['subject']) == 0) {
                 throw new Exception('sujet vide');
             }
-            $params['id_thread'] = static::_createThread(array(
+            $params['id_thread'] = static::_createThread([
                 'id_forum'   => $params['id_forum'],
                 'subject'    => $params['subject'],
                 'id_contact' => $params['id_contact'],
-            ));
-            static::_updateForum(array(
+            ]);
+            static::_updateForum([
                 'id_forum'     => $params['id_forum'],
                 'id_contact'   => $params['id_contact'],
                 'msgaction'    => '',
                 'threadaction' => 'threadadd',
-            ));
+            ]);
         }
 
-        $id_message = static::_createMessage(array(
+        $id_message = static::_createMessage([
             'id_thread'  => $params['id_thread'],
             'id_contact' => $params['id_contact'],
             'text'       => $params['text'],
-        ));
+        ]);
 
-        static::_updateThread(array(
+        static::_updateThread([
             'id_thread'  => $params['id_thread'],
             'id_contact' => $params['id_contact'],
             'action'     => 'msgadd',
-        ));
+        ]);
 
-        static::_updateForum(array(
+        static::_updateForum([
             'id_forum'     => $params['id_forum'],
             'id_contact'   => $params['id_contact'],
             'msgaction'    => 'msgadd',
             'threadaction' => '',
-        ));
+        ]);
 
-        return array(
+        return [
             'id_message' => $id_message,
             'id_thread' => $params['id_thread'],
             'id_forum' => $params['id_forum'],
-        );
+        ];
     }
 
     /**
@@ -232,23 +232,23 @@ abstract class Forum
      */
     static function editMessage($params)
     {
-        static::_updateMessage(array(
+        static::_updateMessage([
             'id_message' => $params['id_message'],
             'text'       => $params['text'],
-        ));
+        ]);
 
-        static::_updateThread(array(
+        static::_updateThread([
             'id_thread'  => $params['id_thread'],
             'id_contact' => $params['id_contact'],
             'action'     => 'msgedit',
-        ));
+        ]);
 
-        static::_updateForum(array(
+        static::_updateForum([
             'id_forum'     => $params['id_forum'],
             'id_contact'   => null,
             'msgaction'    => 'msgedit',
             'threadaction' => '',
-        ));
+        ]);
 
         return true;
     }

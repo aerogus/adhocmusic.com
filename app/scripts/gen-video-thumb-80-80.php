@@ -10,15 +10,14 @@ require_once dirname(__FILE__) . '/../config.php';
 
 echo "nb vidéos : " . Video::getVideosCount() . "\n";
 
-$videos = Video::getVideos(array(
+$videos = Video::getVideos([
     'online' => true,
     'sort' => 'id_video',
     'sens' => 'ASC',
     'limit' => 2500,
-));
+]);
 
-foreach($videos as $video)
-{
+foreach ($videos as $video) {
     Video::invalidateVideoThumbInCache($video['id'], 80, 80, '000000', false, true);
     $url = Video::getVideoThumbUrl($video['id'], 80, 80, '000000', false, true);
     echo $video['id'] . " - " . $url . "\n";

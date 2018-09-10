@@ -10,7 +10,7 @@
  * Classe de gestion des styles musicaux
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Style
 {

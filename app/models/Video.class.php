@@ -98,7 +98,7 @@ define('MEDIA_ADHOCTUBE_URL_PATTERN', '~^https://' . MEDIA_ADHOCTUBE_HOST . '/vi
  * Appel conversion, upload etc ...
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Video extends Media
 {

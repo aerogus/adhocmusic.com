@@ -8,7 +8,7 @@
  * Classe WorldRegion
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class WorldRegion extends Liste
 {

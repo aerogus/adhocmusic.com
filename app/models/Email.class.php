@@ -35,7 +35,7 @@ EOT
  * outils pour travailler avec les emails
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  * @see PEAR::HTML_QuickForm/Rules/email.php
  */
 class Email

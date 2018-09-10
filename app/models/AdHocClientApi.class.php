@@ -4,7 +4,7 @@
  * Client de l'API REST/JSON AD'HOC
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class AdHocClientApi
 {

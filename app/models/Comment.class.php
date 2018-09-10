@@ -11,7 +11,7 @@
  * Video, Audio, Photo, Lieu, Event, Groupe, Membre
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Comment extends ObjectModel
 {
@@ -673,7 +673,7 @@ class Comment extends ObjectModel
 
         foreach ($emails as $email)
         {
-            if ($email === 'guillaume.seznec@gmail.com')
+            if ($email === 'guillaume@seznec.fr')
             {
                 if (Email::validate($email))
                 {

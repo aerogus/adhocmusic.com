@@ -8,7 +8,7 @@
  * Classe de gestion de l'appli messages privés
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Messagerie extends ObjectModel
 {

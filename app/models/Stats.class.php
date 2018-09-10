@@ -8,7 +8,7 @@
  * Classe de statistiques
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Stats extends ObjectModel
 {

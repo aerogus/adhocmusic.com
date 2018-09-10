@@ -10,7 +10,7 @@
  * Classe des alertes mails groupes/lieux
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Alerting extends ObjectModel
 {

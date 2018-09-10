@@ -7,7 +7,7 @@
 /**
  * Différentes méthodes et données relatives aux dates
  *
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  * @package adhoc
  * @deprecated bientôt
  */

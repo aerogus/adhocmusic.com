@@ -60,7 +60,7 @@ class Ephemeride extends ObjectModel
         $rows = $db->queryWithFetch($sql);
 
         $eph = [];
-        foreach($rows as $row) {
+        foreach ($rows as $row) {
             if (!array_key_exists($row['day'], $eph)) {
                 $eph[$row['day']] = [];
             }

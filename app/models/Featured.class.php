@@ -10,7 +10,7 @@
  * Classe de gestion du module sélection du mois
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Featured extends ObjectModel
 {

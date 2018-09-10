@@ -8,7 +8,7 @@
  * Classe Groupe
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Groupe extends ObjectModel
 {
@@ -1636,7 +1636,7 @@ class Groupe extends ObjectModel
     {
         // le groupe existe-t-il bien ?
 
-        //@todo Event::getEvents(array('groupe' => $id_groupe, 'type' => 'all|prev|next'))
+        //@todo Event::getEvents(['groupe' => $id_groupe, 'type' => 'all|prev|next'])
         // on extrait les événements associés au groupe
 
         $db = DataBase::getInstance();

@@ -11,7 +11,7 @@
  *
  * @package adhoc
  * @see http://classes.scriptsphp.net:81/doc.image
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Image
 {

@@ -8,7 +8,7 @@
  * classe de méthodes pratiques communes à tout le site AD'HOC
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Tools
 {
@@ -104,7 +104,11 @@ class Tools
      */
     static function replaceWordEntities($string)
     {
-        return str_replace(array("\r",'&#8216;','&#8217;','&#8230;'), array('',"'","'",'...'), $string);
+        return str_replace(
+            ["\r", '&#8216;', '&#8217;', '&#8230;'],
+            [''  , "'"      , "'"      , '...'    ],
+            $string
+        );
     }
 
     /**
@@ -112,11 +116,13 @@ class Tools
      */
     static function getContentType($extension)
     {
-        $mt['jpg']  = 'image/jpeg';
-        $mt['jpeg'] = 'image/jpeg';
-        $mt['gif']  = 'image/gif';
-        $mt['png']  = 'image/png';
-        $mt['wbmp'] = 'image/vnd.wap.wbmp';
+        $mt = [
+            'jpg'  => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'gif'  => 'image/gif',
+            'png'  => 'image/png',
+            'wbmp' => 'image/vnd.wap.wbmp',
+        ];
         if (isset($mt[$extension])) {
             return $mt[$extension];
         }

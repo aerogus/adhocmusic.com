@@ -10,7 +10,7 @@
  * gestion des exposants
  *
  * @package adhoc
- * @author Guillaume Seznec <guillaume.seznec@gmail.com>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Exposant extends ObjectModel
 {
