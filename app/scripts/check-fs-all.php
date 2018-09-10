@@ -81,10 +81,12 @@ $prefix = ["b", "l", "m", "p"];
 foreach ($prefix as $pre) {
     foreach (glob($path . $pre ."*") as $filename)
     {
+        $fullpath = $filename;
         $filename = str_replace($pre, "", basename($filename));
         $res = preg_split('/\./', $filename);
         if (!in_array((int) $res[0], $groupes)) {
             echo "images " . $pre . " groupes obsolètes pour id " . $res[0] . " (".$res[1]." trouvé)\n";
+            #echo "rm " . $fullpath . "\n";
         }
     }
 }
@@ -100,10 +102,12 @@ $path = MEDIA_PATH . "/audio/";
 
 foreach (glob($path . "*") as $filename)
 {
+    $fullpath = $filename;
     $filename = basename($filename);
     $res = preg_split('/\./', $filename);
     if (!in_array((int) $res[0], $audios)) {
         echo "mp3 obsolète pour id " . $res[0] . "\n";
+        #echo "rm " . $fullpath . "\n";
     }
 }
 
