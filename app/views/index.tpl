@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="txtcenter infobulle info">Prochain événement : <a href="/events/6856">Samedi 8 septembre 2018 - Journée des Associations</a></div>
+<div class="txtcenter infobulle info">Prochain événement : <a href="/events/6857">Délires 2.0 à Villemoisson-sur-Orge</a></div>
 
 <div class="grid-3-tiny-2-small-1 has-gutter-l">
 
