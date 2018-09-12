@@ -1796,7 +1796,7 @@ class Groupe extends ObjectModel
         $sql = "(SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
              . "FROM `adhoc_groupe` `g`, `adhoc_video` `v` "
              . "WHERE `g`.`id_groupe` = `v`.`id_groupe` "
-             . "AND `g`.`online` AND `v`.`online`)"
+             . "AND `g`.`online` AND `v`.`online`)"/*
              . " UNION "
              . "(SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
              . "FROM `adhoc_groupe` `g`, `adhoc_audio` `a` "
@@ -1806,7 +1806,7 @@ class Groupe extends ObjectModel
              . "(SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
              . "FROM `adhoc_groupe` `g`, `adhoc_photo` `p` "
              . "WHERE `g`.`id_groupe` = `p`.`id_groupe` "
-             . "AND `g`.`online` AND `p`.`online`)"
+             . "AND `g`.`online` AND `p`.`online`)"*/
              . " ORDER BY `name` ASC";
 
         return $db->queryWithFetch($sql);

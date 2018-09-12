@@ -14,7 +14,7 @@
 
     <div class="box">
       <header>
-        <h1>Rechercher un média</h1>
+        <h1>Rechercher une vidéo</h1>
       </header>
       <div>
         <form id="form-media-search" name="form-media-search" method="get" action="/media/">
@@ -37,18 +37,10 @@
               </select>
               <label for="event">Evénement</label>
             </li>
-            <li>
-              <ul id="type" style="float: right;">
-                <li><img class="check_media" id="check_video" src="/img/icones/media-video-24.png" alt="Vidéo"></li>
-                <li><img class="check_media" id="check_audio" src="/img/icones/media-audio-24.png" alt="Audio"></li>
-                <li><img class="check_media" id="check_photo" src="/img/icones/media-photo-24.png" alt="Photo"></li>
-              </ul>
-              <input type="hidden" name="type_video" id="type_video" value="1">
-              <input type="hidden" name="type_audio" id="type_audio" value="1">
-              <input type="hidden" name="type_photo" id="type_photo" value="1">
-              <label for="type">Type</label>
-            </li>
           </ul>
+          <input type="hidden" name="type_video" id="type_video" value="1">
+          <input type="hidden" name="type_audio" id="type_audio" value="0">
+          <input type="hidden" name="type_photo" id="type_photo" value="0">
         </form>
 
         <h3>Résultats de la recherche</h3>
@@ -57,10 +49,11 @@
       </div>
     </div>
 
-    <div class="boxtitle">Derniers Média ajoutés</div>
+    <div class="boxtitle">Dernières vidéos ajoutées</div>
 
     <ul id="search-box-results">
     {foreach from=$last_media key=type_media item=medias}
+    {if $type_media == 'video'}
     {foreach from=$medias item=media}
     <li class="search-box-result">
       <div class="search-box-result-{$media.type}">
@@ -74,6 +67,7 @@
       </div>
     </li>
     {/foreach}
+    {/if}
     {/foreach}
     </ul>
 

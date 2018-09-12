@@ -2,7 +2,7 @@
 
 <div class="txtcenter italic mas">Association œuvrant pour le développement des musiques actuelles à Épinay-sur-Orge (Essonne) depuis 1998</div>
 
-<div id="swipe" class="swipe clearfix">
+<div id="swipe" class="swipe clearfix mbs">
   <ul class="swipe-wrap">
     {foreach from=$featured key=idx item=f}
     <li data-index="{$idx}">
@@ -24,7 +24,9 @@
   </div>
 </div>
 
+<!--
 <div class="txtcenter infobulle info">Prochain événement : <a href="/events/6857">Délires 2.0 à Villemoisson-sur-Orge</a></div>
+-->
 
 <div class="grid-3-tiny-2-small-1 has-gutter-l">
 

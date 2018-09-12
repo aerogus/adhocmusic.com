@@ -1621,7 +1621,7 @@ class Event extends ObjectModel
              . "FROM `adhoc_event` `e`, `adhoc_lieu` `l`, `adhoc_video` `v` "
              . "WHERE `e`.`id_event` = `v`.`id_event` "
              . "AND `e`.`id_lieu` = `l`.`id_lieu` "
-             . "AND `e`.`online` AND `v`.`online`)"
+             . "AND `e`.`online` AND `v`.`online`)"/*
              . " UNION "
              . "(SELECT DISTINCT `e`.`id_event` AS `id`, `e`.`name`, `e`.`date`, "
              . "`l`.`name` AS `lieu_name`, `l`.`city` AS `lieu_city` "
@@ -1635,7 +1635,7 @@ class Event extends ObjectModel
              . "FROM `adhoc_event` `e`, `adhoc_lieu` `l`, `adhoc_photo` `p` "
              . "WHERE `e`.`id_event` = `p`.`id_event` "
              . "AND `e`.`id_lieu` = `l`.`id_lieu` "
-             . "AND `e`.`online` AND `p`.`online`)"
+             . "AND `e`.`online` AND `p`.`online`)"*/
              . " ORDER BY `date` DESC";
 
         return $db->queryWithFetch($sql);

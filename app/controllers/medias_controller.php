@@ -12,11 +12,11 @@ class Controller
         $smarty->enqueue_script('/js/medias.js');
 
         $last_media = Media::getMedia([
-            'type'   => 'video,photo,audio',
+            'type'   => 'video',//,photo,audio',
             'sort'   => 'created_on',
             'sens'   => 'DESC',
             'online' => true,
-            'limit'  => 6,
+            'limit'  => 18,
             'split'  => true,
         ]);
         $smarty->assign('last_media', $last_media);
@@ -38,7 +38,7 @@ class Controller
 
         if ($id_groupe) {
             $search_media = Media::getMedia([
-                'type'   => 'audio,photo,video',
+                'type'   => 'video',
                 'groupe' => $id_groupe,
                 'online' => true,
             ]);
@@ -49,7 +49,7 @@ class Controller
 
         if ($id_event) {
             $search_media = Media::getMedia([
-                'type'   => 'audio,photo,video',
+                'type'   => 'video',
                 'event'  => $id_event,
                 'online' => true,
             ]);

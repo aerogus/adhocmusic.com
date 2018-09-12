@@ -31,7 +31,7 @@
             <a href="/events/" accesskey="3" title="Agenda">Agenda</a>
           </li>
           <li>
-            <a href="/medias/" accesskey="4" title="Média">Média</a>
+            <a href="/medias/" accesskey="4" title="Vidéos">Vidéos</a>
           </li>
           <li>
             <a href="/contact" accesskey="5" title="Contact">Contact</a>
