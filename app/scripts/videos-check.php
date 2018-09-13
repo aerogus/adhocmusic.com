@@ -14,8 +14,11 @@ require_once dirname(__FILE__) . '/../config.php';
 $db = DataBase::getInstance();
 
 $videos = $db->queryWithFetch("SELECT * FROM adhoc_video WHERE id_host = 9");
-/*
-echo "Vidéos migrées de AD'HOC Legacy vers AD'HOC Tube, reste-il le mp4 localement ?\n";
+
+echo "##\n";
+echo "# Vidéos migrées de AD'HOC Legacy vers AD'HOC Tube, reste-il le mp4 localement ?\n";
+echo "##\n\n";
+
 foreach ($videos as $video) {
   echo $video['id_video'] . ' ' . $video['name'] . " : ";
   $f = '/var/www/adhocmusic.com/media/video/'.$video['id_video'].'.mp4';
@@ -26,13 +29,16 @@ foreach ($videos as $video) {
   }
   echo "\n";
 }
-*/
+echo "Total: " . count($videos) . "\n\n";
+
 $videos = $db->queryWithFetch("SELECT * FROM adhoc_video WHERE id_host = 7");
 
-echo "Vidéos AD'HOC Legacy à migrer vers AD'HOC Tube\n";
+echo "##\n";
+echo "# Vidéos AD'HOC Legacy à migrer vers AD'HOC Tube\n";
+echo "##\n\n";
 
 foreach ($videos as $video) {
   echo $video['id_video'] . ' ' . $video['name'] . " : https://www.adhocmusic.com/videos/" . $video['id_video'] . "\n";
 }
-
+echo "Total: " . count($videos) . "\n\n";
 
