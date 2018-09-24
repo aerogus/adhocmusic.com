@@ -139,14 +139,12 @@ class Controller
             if ($video->getIdEvent() && $video->getIdLieu()) {
                 $smarty->assign('photos', Photo::getPhotos([
                     'event'  => $video->getIdEvent(),
-                    'groupe' => $video->getIdGroupe(),
                     'online' => true,
                     'sort'   => 'random',
                     'limit'  => 30,
                 ]));
                 $smarty->assign('videos', Video::getVideos([
                     'event'  => $video->getIdEvent(),
-                    'groupe' => $video->getIdGroupe(),
                     'online' => true,
                     'sort'   => 'random',
                     'limit'  => 30,
@@ -346,7 +344,7 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/videos-edit.js');
+        $smarty->enqueue_script('/js/video-edit.js');
 
         try {
             $video = Video::getInstance($id);
