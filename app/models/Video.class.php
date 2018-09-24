@@ -55,9 +55,6 @@ define('MEDIA_FACEBOOK_URL_PATTERN2',
 define('MEDIA_FACEBOOK_DIRECT_VIDEO_URL_PATTERN',
        '');
 
-define('MEDIA_FACEBOOK_EMBED_PATTERN',
-       '');
-
 /**
  * 7 - AD'HOC Legacy
  */
@@ -68,9 +65,6 @@ define('MEDIA_ADHOC_URL_PATTERN',
 define('MEDIA_ADHOC_DIRECT_VIDEO_URL_PATTERN',
        '~^https://(?:static|www).adhocmusic.com/media/video/([a-zA-Z0-9]{1,32})\.([a-z]{3})~');
 
-define('MEDIA_ADHOC_EMBED_PATTERN',
-       '');
-
 /**
  * 8 - Vimeo
  */
@@ -80,9 +74,6 @@ define('MEDIA_VIMEO_URL_PATTERN',
 
 define('MEDIA_VIMEO_DIRECT_VIDEO_URL_PATTERN',
        '~^https://(?:www\.)?vimeo.com/([0-9]{1,16})~');
-
-define('MEDIA_VIMEO_EMBED_PATTERN',
-       '');
 
 /**
  * 9 - AD'HOC Tube
@@ -138,8 +129,8 @@ class Video extends Media
     /**
      * dimensions du player
      */
-    const WIDTH  = 640;
-    const HEIGHT = 480;
+    const WIDTH  = 660;
+    const HEIGHT = 371;
 
     /**
      * @var int
