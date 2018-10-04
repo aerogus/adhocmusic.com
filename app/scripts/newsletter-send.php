@@ -4,9 +4,13 @@
 // envoi d'une newsletter
 
 // n° de newsletter à traiter
-define('ID_NEWSLETTER', 81);
+define('ID_NEWSLETTER', 82);
 
 require_once dirname(__FILE__) . '/../config.php';
+
+// on temporise l'envoi des mails.
+// 2sec = 30 mails/minute = 1800 mails/heure
+define('MAIL_SEND_DELAY', 2);
 
 $newsletter = Newsletter::getInstance(ID_NEWSLETTER);
 
@@ -49,6 +53,8 @@ foreach ($subs as $sub)
         'newsletter',
         ['html' => $newsletter->getProcessedHtml()]
     );
+
+    sleep(MAIL_SEND_DELAY);
 
     $n++;
 }
