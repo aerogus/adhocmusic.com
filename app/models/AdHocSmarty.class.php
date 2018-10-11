@@ -26,18 +26,18 @@ class AdHocSmarty extends Smarty
         $this->muteExpectedErrors();
 
         // fonctions smarty
-        $this->registerPlugin('function', 'audio_player', array('AdHocSmarty', 'function_audio_player'));
-        $this->registerPlugin('function', 'pagination', array('AdHocSmarty', 'function_pagination'));
-        $this->registerPlugin('function', 'html_input_date_hourminute', array('AdHocSmarty', 'function_html_input_date_hourminute'));
-        $this->registerPlugin('function', 'calendar', array('AdHocSmarty', 'function_calendar'));
-        $this->registerPlugin('function', 'image', array('EmailSmarty', 'function_image'));
+        $this->registerPlugin('function', 'audio_player', ['AdHocSmarty', 'function_audio_player']);
+        $this->registerPlugin('function', 'pagination', ['AdHocSmarty', 'function_pagination']);
+        $this->registerPlugin('function', 'html_input_date_hourminute', ['AdHocSmarty', 'function_html_input_date_hourminute']);
+        $this->registerPlugin('function', 'calendar', ['AdHocSmarty', 'function_calendar']);
+        $this->registerPlugin('function', 'image', ['EmailSmarty', 'function_image']);
 
         // modifiers smarty
-        $this->registerPlugin('modifier', 'format_size', array('AdHocSmarty', 'modifier_format_size'));
-        $this->registerPlugin('modifier', 'pseudo_by_id', array('AdHocSmarty', 'modifier_pseudo_by_id'));
-        $this->registerPlugin('modifier', 'avatar_by_id', array('AdHocSmarty', 'modifier_avatar_by_id'));
-        $this->registerPlugin('modifier', 'display_on_off_icon', array('AdHocSmarty', 'modifier_display_on_off_icon'));
-        $this->registerPlugin('modifier', 'json_encode_numeric_check', array('AdHocSmarty', 'modifier_json_encode_numeric_check'));
+        $this->registerPlugin('modifier', 'format_size', ['AdHocSmarty', 'modifier_format_size']);
+        $this->registerPlugin('modifier', 'pseudo_by_id', ['AdHocSmarty', 'modifier_pseudo_by_id']);
+        $this->registerPlugin('modifier', 'avatar_by_id', ['AdHocSmarty', 'modifier_avatar_by_id']);
+        $this->registerPlugin('modifier', 'display_on_off_icon', ['AdHocSmarty', 'modifier_display_on_off_icon']);
+        $this->registerPlugin('modifier', 'json_encode_numeric_check', ['AdHocSmarty', 'modifier_json_encode_numeric_check']);
 
         // assignations générales
         $this->assign('title', "♫ AD'HOC : Les Musiques Actuelles");
@@ -298,7 +298,7 @@ class AdHocSmarty extends Smarty
     static function function_calendar($params)
     {
         $now  = time();
-        $months = array('', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre');
+        $months = ['', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
         $cal  = [];
 
         $year = date('Y', $now);
@@ -407,7 +407,7 @@ class AdHocSmarty extends Smarty
      */
     static function modifier_format_size($size)
     {
-        $sizes = array("  o", " Ko", " Mo", " Go", " To", " Po", " Eo", " Zo", " Yo");
+        $sizes = ["  o", " Ko", " Mo", " Go", " To", " Po", " Eo", " Zo", " Yo"];
         if ($size == 0) {
             return('0  o');
         } else {

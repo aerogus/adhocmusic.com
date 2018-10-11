@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-require_once dirname(__FILE__) . '/../config.php';
+require_once __DIR__ . '/../config.php';
 
 $eph = Ephemeride::getInstance(0);
 $res = $eph->getAll();

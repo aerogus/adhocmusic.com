@@ -5,7 +5,7 @@
  * vieux groupes n'ayant jamais mis à jour leur fiche depuis des lustres
  */
 
-require_once dirname(__FILE__) . '/../config.php';
+require_once __DIR__ . '/../config.php';
 
 $db = DataBase::getInstance();
 

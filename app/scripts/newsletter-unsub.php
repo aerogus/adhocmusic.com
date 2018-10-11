@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 
-require_once dirname(__FILE__) . '/../config.php';
+require_once __DIR__ . '/../config.php';
 
 /**
  * désabonne des emails de la newsletter

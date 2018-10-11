@@ -134,13 +134,13 @@ class Tools
      * @param string $rgbval
      * @return string
      */
-    static function rgb2hex($rgbval)
+    static function rgb2hex(string $rgbval)
     {
         if (preg_match_all('/rgb\((\d+),\s*(\d+),\s*(\d+)\)/', $rgbval, $matches)){
-            list($red, $green, $blue) = array($matches[1][0], $matches[2][0], $matches[3][0]);
+            list($red, $green, $blue) = [$matches[1][0], $matches[2][0], $matches[3][0]];
             return sprintf('#%02X%02X%02X', $red, $green, $blue);
         } elseif (preg_match_all('/^#([0-9a-f])([0-9a-f])([0-9a-f])$/', $rgbval, $matches)) {
-            list($red, $green, $blue) = array($matches[1][0], $matches[2][0], $matches[3][0]);
+            list($red, $green, $blue) = [$matches[1][0], $matches[2][0], $matches[3][0]];
             return '#'.$red.$red.$green.$green.$blue.$blue;
         }
         return $rgbval;

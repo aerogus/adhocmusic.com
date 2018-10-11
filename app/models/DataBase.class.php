@@ -233,7 +233,7 @@ class DataBase
      */
     function setFetchMode($fetchMode = MYSQLI_BOTH)
     {
-        if (in_array($fetchMode, array(MYSQLI_BOTH, MYSQLI_ASSOC, MYSQLI_NUM))) {
+        if (in_array($fetchMode, [MYSQLI_BOTH, MYSQLI_ASSOC, MYSQLI_NUM])) {
             $this->_fetchMode = $fetchMode;
         }
     }
