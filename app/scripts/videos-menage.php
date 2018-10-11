@@ -3,34 +3,29 @@
 
 require_once dirname(__FILE__) . '/../config.php';
 
-/**
- * Vérifie si les vidéos AD'HOC Tube on bien été effacées de AD'HOC Legacy
- */
-
-// extraire videos avec host_id = 9 (adhoctube)
-// pour l'id donné, checker existence du .mp4 local media/video/id.mp4
-// le .jpg reste
-
 $db = DataBase::getInstance();
 
-// stats par fournisseurs
-/*
-$d = $db->queryWithFetch("SELECT DISTINCT (id_host), COUNT(*) FROM adhoc_video GROUP BY id_host");
-var_dump($d); die();
-*/
+$videos = file('a-del.txt');
+echo "Vidéos YouTube invalides à supprimer\n";
+foreach ($videos as $video) {
+  $reference = trim($video);
+  //echo $reference . "\n";
+  $v = $db->queryWithFetch("SELECT * FROM adhoc_video WHERE id_host = 1 AND reference = '" . $reference . "'");
+  if (!empty($v)) {
+    echo 'https://www.adhocmusic.com/videos/delete/' . $v[0]['id_video'] . ' : ' . $v[0]['name'] . "\n";
+  }
+}
 
-/*
-$videos = $db->queryWithFetch("SELECT * FROM adhoc_video WHERE id_host = 1");
+exit;
 
-echo "Vidéos YouTube\n";
+$video = $db->queryWithFetch("SELECT * FROM adhoc_video WHERE id_host = 1");
 
 foreach ($videos as $video) {
     echo $video['reference'] . "\n";
 //    echo $video['id_video'] . ' ' . $video['name'] . " : " . $video['reference'] . "\n";
 }
 echo "Total: " . count($videos) . "\n\n";
-*/
-
+exit;
 $videos = $db->queryWithFetch("SELECT * FROM adhoc_video WHERE id_host = 9");
 
 echo "##\n";
@@ -56,9 +51,7 @@ echo "# Vidéos AD'HOC Legacy à migrer vers AD'HOC Tube\n";
 echo "##\n\n";
 
 foreach ($videos as $video) {
-//  echo $video['id_video'] . ' ' . $video['name'] . " : https://www.adhocmusic.com/videos/" . $video['id_video'] . "\n";
-  echo $video['name'] . ';' . $video['id_video'] . '.mp4;' . "\n";  
-//  echo "https://static.adhocmusic.com/media/video/" . $video['id_video'] . ".mp4\n";
+  echo $video['id_video'] . ' ' . $video['name'] . " : https://www.adhocmusic.com/videos/" . $video['id_video'] . "\n";
 }
 echo "Total: " . count($videos) . "\n\n";
 
