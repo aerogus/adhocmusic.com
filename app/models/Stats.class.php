@@ -48,13 +48,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Date', 'Nb', 'Graphe'),
-            'keys'  => array('date', 'nb', 'bargraph'),
+            'cols'  => ['Date', 'Nb', 'Graphe'],
+            'keys'  => ['date', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max
-        );
+        ];
 
         return $out;
     }
@@ -83,13 +83,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Date', 'Nb', 'Graphe'),
-            'keys'  => array('date', 'nb', 'bargraph'),
+            'cols'  => ['Date', 'Nb', 'Graphe'],
+            'keys'  => ['date', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max
-        );
+        ];
 
         return $out;
     }
@@ -163,13 +163,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Membre', 'Nb', 'Graphe'),
-            'keys'  => array('profil', 'nb', 'bargraph'),
+            'cols'  => ['Membre', 'Nb', 'Graphe'],
+            'keys'  => ['profil', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max
-        );
+        ];
 
         return $out;
     }
@@ -199,13 +199,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Pseudo', 'Nb', 'Graphe'),
-            'keys'  => array('pseudo', 'nb', 'bargraph'),
+            'cols'  => ['Pseudo', 'Nb', 'Graphe'],
+            'keys'  => ['pseudo', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max,
-        );
+        ];
 
         return $out;
     }
@@ -235,13 +235,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Lieu', 'Nb', 'Graphe'),
-            'keys'  => array('nom_lieu', 'nb', 'bargraph'),
+            'cols'  => ['Lieu', 'Nb', 'Graphe'],
+            'keys'  => ['nom_lieu', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max,
-        );
+        ];
 
         return $out;
     }
@@ -276,8 +276,8 @@ class Stats extends ObjectModel
 
         $out = [
             'data'  => $data,
-            'cols'  => array('Département', 'Nb', 'Graphe'),
-            'keys'  => array('nom_departement', 'nb', 'bargraph'),
+            'cols'  => ['Département', 'Nb', 'Graphe'],
+            'keys'  => ['nom_departement', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max,
         ];
@@ -308,11 +308,11 @@ class Stats extends ObjectModel
                 if (array_key_exists($reg, $data)) {
                     $data[$reg]['nb'] += $row['nb'];
                 } else {
-                    $data[$reg] = array(
+                    $data[$reg] = [
                         'id_region' => $reg,
                         'nom_region' => WorldRegion::getName('FR', $reg),
                         'nb' => $row['nb'],
-                    );
+                    ];
                 }
             }
         }
@@ -323,13 +323,13 @@ class Stats extends ObjectModel
             $data[$_reg]['bargraph'] = self::getBarGraph($_data['nb'], $max);
         }
 
-        $out = array(
+        $out = [
             'data'  => $data,
-            'cols'  => array('Région', 'Nb', 'Graphe'),
-            'keys'  => array('nom_region', 'nb', 'bargraph'),
+            'cols'  => ['Région', 'Nb', 'Graphe'],
+            'keys'  => ['nom_region', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max,
-        );
+        ];
 
         return $out;
     }
@@ -357,13 +357,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Mois', 'Nb', 'Graphe'),
-            'keys'  => array('date', 'nb', 'bargraph'),
+            'cols'  => ['Mois', 'Nb', 'Graphe'],
+            'keys'  => ['date', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max,
-        );
+            ];
 
         return $out;
     }
@@ -394,13 +394,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Pseudo', 'Nb', 'Graphe'),
-            'keys'  => array('pseudo', 'nb', 'bargraph'),
+            'cols'  => ['Pseudo', 'Nb', 'Graphe'],
+            'keys'  => ['pseudo', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max,
-        );
+        ];
 
         return $out;
     }
@@ -430,13 +430,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Pseudo', 'Nb', 'Graphe'),
-            'keys'  => array('pseudo', 'nb', 'bargraph'),
+            'cols'  => ['Pseudo', 'Nb', 'Graphe'],
+            'keys'  => ['pseudo', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max,
-        );
+        ];
 
         return $out;
     }
@@ -466,13 +466,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Pseudo', 'Nb', 'Graphe'),
-            'keys'  => array('pseudo', 'nb', 'bargraph'),
+            'cols'  => ['Pseudo', 'Nb', 'Graphe'],
+            'keys'  => ['pseudo', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max,
-        );
+        ];
 
         return $out;
     }
@@ -502,13 +502,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Pseudo', 'Nb', 'Graphe'),
-            'keys'  => array('pseudo', 'nb', 'bargraph'),
+            'cols'  => ['Pseudo', 'Nb', 'Graphe'],
+            'keys'  => ['pseudo', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max,
-        );
+        ];
 
         return $out;
     }
@@ -535,13 +535,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Groupe', 'Nb', 'Graphe'),
-            'keys'  => array('nom_groupe', 'nb', 'bargraph'),
+            'cols'  => ['Groupe', 'Nb', 'Graphe'],
+            'keys'  => ['nom_groupe', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max,
-        );
+        ];
 
         return $out;
     }
@@ -563,13 +563,13 @@ class Stats extends ObjectModel
 
         $res  = $db->queryWithFetch($sql);
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Pseudo', 'Date'),
-            'keys'  => array('pseudo', 'datetime'),
+            'cols'  => ['Pseudo', 'Date'],
+            'keys'  => ['pseudo', 'datetime'],
             'total' => 0,
             'max'   => 0,
-        );
+        ];
 
         return $out;
     }
@@ -599,13 +599,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Lieu', 'Nb', 'Graphe'),
-            'keys'  => array('name', 'nb', 'bargraph'),
+            'cols'  => ['Lieu', 'Nb', 'Graphe'],
+            'keys'  => ['name', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max,
-        );
+        ];
 
         return $out;
     }
@@ -626,13 +626,13 @@ class Stats extends ObjectModel
 
         $res  = $db->queryWithFetch($sql);
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('id_contact', 'Email', 'Ouverture Newsletter'),
-            'keys'  => array('id_contact', 'email', 'lastnl'),
+            'cols'  => ['id_contact', 'Email', 'Ouverture Newsletter'],
+            'keys'  => ['id_contact', 'email', 'lastnl'],
             'total' => 0,
             'max'   => 0,
-        );
+        ];
 
         return $out;
     }
@@ -660,13 +660,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Domaine', 'Nb', 'Graphe'),
-            'keys'  => array('domaine', 'nb', 'bargraph'),
+            'cols'  => ['Domaine', 'Nb', 'Graphe'],
+            'keys'  => ['domaine', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max,
-        );
+        ];
 
         return $out;
     }
@@ -695,13 +695,13 @@ class Stats extends ObjectModel
             $cpt++;
         }
 
-        $out  = array(
+        $out  = [
             'data'  => $res,
-            'cols'  => array('Hébergeur', 'Nb', 'Graphe'),
-            'keys'  => array('nom_hebergeur', 'nb', 'bargraph'),
+            'cols'  => ['Hébergeur', 'Nb', 'Graphe'],
+            'keys'  => ['nom_hebergeur', 'nb', 'bargraph'],
             'total' => $total,
             'max'   => $max,
-        );
+        ];
 
         return $out;
     }
@@ -726,10 +726,10 @@ class Stats extends ObjectModel
      * calcul du total et du max d'un tableau
      *
      * @param array $tab
-     * @param strin $champ
-     * @return array('total', 'max')
+     * @param string $champ
+     * @return array ['total', 'max']
      */
-    static function getTotalAndMax($tab, $champ)
+    static function getTotalAndMax(array $tab, string $champ)
     {
         $total = 0;
         $max = 0;
@@ -742,6 +742,6 @@ class Stats extends ObjectModel
             }
         }
 
-        return array($total, $max);
+        return [$total, $max];
     }
 }

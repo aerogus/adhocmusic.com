@@ -8,7 +8,7 @@
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 
-require_once dirname(__FILE__) . '/../config.php';
+require_once __DIR__ . '/../config.php';
 
 $videos = Video::getVideos([
     'limit' => 1000,

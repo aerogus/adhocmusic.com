@@ -6,7 +6,7 @@
 // n° de newsletter à traiter
 define('ID_NEWSLETTER', 82);
 
-require_once dirname(__FILE__) . '/../config.php';
+require_once __DIR__ . '/../config.php';
 
 // on temporise l'envoi des mails.
 // 2sec = 30 mails/minute = 1800 mails/heure

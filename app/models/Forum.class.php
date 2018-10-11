@@ -23,31 +23,31 @@ abstract class Forum
      *
      * @var array
      */
-    protected static $smileys = array(
-        array(":afro:",   "afro.gif"),
-        array(":angry:",  "angry.gif"),
-        array(":beer:",   "beer.gif"),
-        array(":chin:",   "chinois.gif"),
-        array(":pleure:", "pleure.gif"),
-        array(":yes:",    "yaisse.gif"),
-        array(":metal:",  "metalleux.gif"),
-        array(":grr:",    "grr.gif"),
-        array(":-D",      "laugh.gif"),
-        array(":love:",   "love.gif"),
-        array(":non:",    "non.gif"),
-        array(":ouch:",   "ouch.gif"),
-        array(":-\\",     "embarasse.gif"),
-        array(";-)",      "wink.gif"),
-        array(";-(",      "triste.gif"),
-        array(";o)",      "ouf.gif"),
-        array(":prof:",   "prof.gif"),
-        array(":-)",      "smile.gif"),
-        array(":yeah:",   "yeah.gif"),
-        array(":devil:",  "devil.gif"),
-        array(":cool:",   "cool.gif"),
-        array(":flower:", "flower.gif"),
-        array(":music:",  "music.gif"),
-    );
+    protected static $smileys = [
+        [":afro:",   "afro.gif"],
+        [":angry:",  "angry.gif"],
+        [":beer:",   "beer.gif"],
+        [":chin:",   "chinois.gif"],
+        [":pleure:", "pleure.gif"],
+        [":yes:",    "yaisse.gif"],
+        [":metal:",  "metalleux.gif"],
+        [":grr:",    "grr.gif"],
+        [":-D",      "laugh.gif"],
+        [":love:",   "love.gif"],
+        [":non:",    "non.gif"],
+        [":ouch:",   "ouch.gif"],
+        [":-\\",     "embarasse.gif"],
+        [";-)",      "wink.gif"],
+        [";-(",      "triste.gif"],
+        [";o)",      "ouf.gif"],
+        [":prof:",   "prof.gif"],
+        [":-)",      "smile.gif"],
+        [":yeah:",   "yeah.gif"],
+        [":devil:",  "devil.gif"],
+        [":cool:",   "cool.gif"],
+        [":flower:", "flower.gif"],
+        [":music:",  "music.gif"],
+    ];
 
     /**
      * Parse le message avec les différentes conventions des forums AD'HOC (smiley, pseudo html etc ...)
