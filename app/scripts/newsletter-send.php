@@ -4,7 +4,7 @@
 // envoi d'une newsletter
 
 // n° de newsletter à traiter
-define('ID_NEWSLETTER', 82);
+define('ID_NEWSLETTER', 84);
 
 require_once __DIR__ . '/../config.php';
 
@@ -21,6 +21,7 @@ $subs = [
 //    ['id_contact' => 7018, 'email' => 'lara.etcheverry@gmail.com', 'pseudo' => 'lara', 'lastnl' => ''],
 //    ['id_contact' => 2, 'email' => 'truc.invalide@oiuofdsg.com', 'pseudo' => 'rien', 'lastnl' => ''],
 //    ['id_contact' => 3, 'email' => 'newsletter@adhocmusic.com', 'pseudo' => 'test', 'lastnl' => ''],
+//    ['id_contact' => 2, 'email' => 'Musique.mjcviry@gmail.com', 'pseudo' => 'La Fée des Jam', 'lastnl' => ''],
 ];
 
 // base de prod

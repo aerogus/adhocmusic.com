@@ -42,9 +42,9 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/codemirror.min.css');
-        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/codemirror.min.js');
-        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/mode/xml/xml.min.js');
+        $smarty->enqueue_style('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/codemirror.min.css');
+        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/codemirror.min.js');
+        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/mode/xml/xml.min.js');
         $smarty->enqueue_script('/js/adm/newsletter.js');
 
         $trail = Trail::getInstance();
@@ -78,28 +78,14 @@ class Controller
             $newsletter->setTitle($data['title']);
             $newsletter->setContent($data['content']);
 
-            // API MJML.IO
-            $user = '0b7f9405-e21a-46ed-bc71-e5ae1b80081f'; // = App ID
-            $pass = 'cda5e512-82cf-4c9f-b901-f478359d02b7'; // = Secret Key
-
-            $mjml = $data['content'];
-
-            $c = curl_init();
-            curl_setopt($c, CURLOPT_URL, 'https://api.mjml.io/v1/render');
-            curl_setopt($c, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-            curl_setopt($c, CURLOPT_USERPWD, "$user:$pass");
-            curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($c, CURLOPT_POST, true);
-            curl_setopt($c, CURLOPT_POSTFIELDS, json_encode(['mjml' => $mjml]));
-
-            $response = curl_exec($c);
-            $json = json_decode($response);
-            if (!$json->errors) {
-                $newsletter->setHtml($json->html);
-            } else {
-                print_r($json->errors);
-                die();
-            }
+            // dépendance à mjml-cli via npm
+            // todo: directement via mjml -i et stdin ?
+            $tmp_file = '/tmp/mjml-content';
+            file_put_contents($tmp_file, $data['content']);
+		    exec('mjml "' . $tmp_file . '" -s', $html_arr);
+            unlink($tmp_file);
+            $html = implode("\n", $html_arr);
+            $newsletter->setHtml($html);
 
             $newsletter->save();
 
@@ -110,9 +96,9 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/codemirror.min.css');
-        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/codemirror.min.js');
-        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/mode/xml/xml.min.js');
+        $smarty->enqueue_style('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/codemirror.min.css');
+        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/codemirror.min.js');
+        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/mode/xml/xml.min.js');
         $smarty->enqueue_script('/js/adm/newsletter.js');
 
         $trail = Trail::getInstance();
