@@ -10,7 +10,10 @@ require_once __DIR__ . '/../config.php';
 
 // on temporise l'envoi des mails.
 // 2sec = 30 mails/minute = 1800 mails/heure
-define('MAIL_SEND_DELAY', 2);
+define('MAIL_SEND_DELAY', 1);
+
+// pour la gestion de reprise après plantage
+define('MIN_CONTACT_ID', 0);
 
 $newsletter = Newsletter::getInstance(ID_NEWSLETTER);
 
@@ -35,6 +38,9 @@ $n = 1;
 
 foreach ($subs as $sub)
 {
+    // suite après plantage
+    if ($sub['id_contact'] < MIN_CONTACT_ID) { continue; }
+
     $log = ID_NEWSLETTER . "\t" . $n . "\t" . $sub['id_contact'] . " \t\t" . $sub['lastnl'] . "\t\t" . $sub['email'] . "\t\t" . $sub['pseudo'];
     echo $log . "\n";
 

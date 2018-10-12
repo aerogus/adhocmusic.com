@@ -79,11 +79,7 @@ class Controller
             $newsletter->setContent($data['content']);
 
             // dépendance à mjml-cli via npm
-            // todo: directement via mjml -i et stdin ?
-            $tmp_file = '/tmp/mjml-content';
-            file_put_contents($tmp_file, $data['content']);
-		    exec('mjml "' . $tmp_file . '" -s', $html_arr);
-            unlink($tmp_file);
+            exec('mjml -i -s <<< "' . addslashes($data['content']) . '"', $html_arr);
             $html = implode("\n", $html_arr);
             $newsletter->setHtml($html);
 
