@@ -17,5 +17,8 @@
     "postcss-assets": "5.0.0",
     "postcss-brunch": "0.5.0",
     "stylus-brunch": "2.10.1"
+  },
+  "dependencies": {
+    "mjml-cli": "^4.2.0"
   }
 }
