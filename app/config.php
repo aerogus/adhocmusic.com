@@ -14,8 +14,10 @@ define('ENV', adhoc_get_env());
 /**
  * Retourne le type d'environnement
  * Se base sur le host du serveur
+ *
+ * @return string
  */
-function adhoc_get_env()
+function adhoc_get_env() : string
 {
     $host = php_uname('n');
     switch ($host)
@@ -33,7 +35,7 @@ function adhoc_get_env()
 /**
  * @return bool
  */
-function is_ssl()
+function is_ssl() : bool
 {
     return (bool) (
         !empty($_SERVER['HTTPS'])
@@ -127,10 +129,11 @@ ini_set('session.use_trans_sid', '0');
 
 /**
  * mini fonction de debug
+ *
  * @var mixed
- * @return string
  */
-function p($var) {
+function p(mixed $var)
+{
     echo '<pre>' . print_r($var, true) . '</pre>';
 }
 
@@ -139,7 +142,8 @@ function p($var) {
  * @var mixed
  * @return string
  */
-function d($var) {
+function d(mixed $var)
+{
     die('<pre>' . print_r($var, true) . '</pre>');
 }
 
@@ -152,7 +156,7 @@ require_once ADHOC_ROOT_PATH . '/vendor/autoload.php';
  * Chargement automatique des classes métiers AD'HOC
  * @param string Nom de la classe
  */
-function autoload($class_name)
+function autoload(string $class_name)
 {
     if (file_exists(ADHOC_SITE_PATH . '/' . $class_name . '.class.php')) {
         include_once ADHOC_SITE_PATH . '/' . $class_name . '.class.php';

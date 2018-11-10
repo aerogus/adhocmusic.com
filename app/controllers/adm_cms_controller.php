@@ -2,7 +2,7 @@
 
 class Controller
 {
-    static function index()
+    static function index() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
         $smarty = new AdHocSmarty();
@@ -20,7 +20,7 @@ class Controller
         return $smarty->fetch('adm/cms/index.tpl');
     }
 
-    static function create()
+    static function create() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -60,7 +60,7 @@ class Controller
         return $smarty->fetch('adm/cms/create.tpl');
     }
 
-    static function edit()
+    static function edit() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -105,7 +105,7 @@ class Controller
         return $smarty->fetch('adm/cms/edit.tpl');
     }
 
-    static function delete()
+    static function delete() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
