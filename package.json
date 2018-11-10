@@ -19,6 +19,6 @@
     "stylus-brunch": "2.10.1"
   },
   "dependencies": {
-    "mjml-cli": "^4.2.0"
+    "mjml-cli": "4.2.0"
   }
 }
