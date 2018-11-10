@@ -110,7 +110,7 @@ class Email
             $mail->AddReplyTo('contact@adhocmusic.com');
         }
 
-        // Bloque l'acheminement de certains mail, à commenter !!
+        // Bloque l'acheminement de certains mails, à commenter !!
         //$mail->Sender   = "contact@adhocmusic.com";
 
         $mail->Subject  = $subject;
