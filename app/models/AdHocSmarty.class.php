@@ -88,7 +88,7 @@ class AdHocSmarty extends Smarty
      * @todo les paramètres du dewplayer ont du changer avec la nouvelle version
      * @see http://www.alsacreations.fr/dewplayer
      */
-    static function function_audio_player($params)
+    static function function_audio_player(array $params) : string
     {
         if (!array_key_exists('id', $params)) {
             return '';
@@ -170,7 +170,7 @@ class AdHocSmarty extends Smarty
      *              ['nb_links'] ['separator']
      * @return string
      */
-    static function function_pagination($params)
+    static function function_pagination(array $params) : string
     {
         $out = '';
 
@@ -258,7 +258,7 @@ class AdHocSmarty extends Smarty
     /**
      * @param array ['hour'] ['minute'] ['step']
      */
-    static function function_html_input_date_hourminute($params)
+    static function function_html_input_date_hourminute(array $params) : string
     {
         $hour = 0;
         if (array_key_exists('hour', $params)) {
@@ -295,7 +295,7 @@ class AdHocSmarty extends Smarty
     /**
      * @param array ['year'] ['month'] ['day']
      */
-    static function function_calendar($params)
+    static function function_calendar(array $params) : string
     {
         $now  = time();
         $months = ['', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -405,7 +405,7 @@ class AdHocSmarty extends Smarty
      * @param int $size
      * @return string
      */
-    static function modifier_format_size($size)
+    static function modifier_format_size(int $size) : string
     {
         $sizes = ["  o", " Ko", " Mo", " Go", " To", " Po", " Eo", " Zo", " Yo"];
         if ($size == 0) {
@@ -419,7 +419,7 @@ class AdHocSmarty extends Smarty
      * récupère le pseudo à partir de l'id_contact et fait un cache
      * pour l'instance
      */
-    static function modifier_pseudo_by_id($id_contact)
+    static function modifier_pseudo_by_id(int $id_contact) : string
     {
         if (array_key_exists($id_contact, self::$pseudos)) {
             return self::$pseudos[$id_contact];
@@ -440,7 +440,7 @@ class AdHocSmarty extends Smarty
      * récupère l'avatar à partir de l'id_contact et fait un cache
      * pour l'instance
      */
-    static function modifier_avatar_by_id($id_contact)
+    static function modifier_avatar_by_id(int $id_contact) : string
     {
         if (array_key_exists($id_contact, self::$avatars)) {
             return self::$avatars[$id_contact];
@@ -459,7 +459,7 @@ class AdHocSmarty extends Smarty
     /**
      * récupère l'url de l'icone (tick/cross) relative à une valeur booléenne
      */
-    static function modifier_display_on_off_icon($val)
+    static function modifier_display_on_off_icon(bool $val) : string
     {
         if ((bool) $val) {
             $icon = 'enabled.png';

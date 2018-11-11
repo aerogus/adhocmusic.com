@@ -2,7 +2,7 @@
 
 class Controller
 {
-    static function index()
+    static function index() : string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -20,7 +20,7 @@ class Controller
         return $smarty->fetch('comments/index.tpl');
     }
 
-    static function show()
+    static function show() : string
     {
         $id = (int) Route::params('id');
         $comment = Comment::getInstance($id);
@@ -30,13 +30,13 @@ class Controller
         return $smarty->fetch('comments/show.tpl');
     }
 
-    static function fetch()
+    static function fetch() : string
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('comments/fetch.tpl');
     }
 
-    static function create()
+    static function create() : string
     {
         $fp = fopen('/var/www/adhocmusic.com/log/hack-comment.log', 'a');
         fwrite($fp, print_r($_GET, true) . "\n" . print_r($_POST, true) . "\n" . print_r($_SERVER, true));
@@ -79,7 +79,7 @@ class Controller
         return 'KO';
     }
 
-    static function ajax_delete()
+    static function ajax_delete() : string
     {
         $id = (int) Route::params('id');
         Tools::auth(Membre::TYPE_ADMIN);
@@ -91,7 +91,7 @@ class Controller
         return 'KO';
     }
 
-    static function delete()
+    static function delete() : string
     {
         $id = (int) Route::params('id');
 

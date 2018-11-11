@@ -2,7 +2,7 @@
 
 class Controller
 {
-    static function index()
+    static function index() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -21,7 +21,7 @@ class Controller
         return $smarty->fetch('adm/newsletter/index.tpl');
     }
 
-    static function create()
+    static function create() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -62,7 +62,7 @@ class Controller
         return $smarty->fetch('adm/newsletter/create.tpl');
     }
 
-    static function edit()
+    static function edit() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -111,7 +111,7 @@ class Controller
      * upload fichier pour newsletter
      * il est stocké dans le répertoire dédié sans traitement particulier
      */
-    static function upload()
+    static function upload() : string
     {
         $id = (int) Route::params('id');
         if (is_uploaded_file($_FILES['file']['tmp_name'])) {

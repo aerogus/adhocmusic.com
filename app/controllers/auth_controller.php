@@ -5,7 +5,7 @@ class Controller
     /**
      * Page d'identification
      */
-    static function login()
+    static function login() : string
     {
         if (!is_ssl()) {
             Tools::redirect('/auth/login', true);
@@ -171,7 +171,7 @@ class Controller
         Tools::redirect('/?logout');
     }
 
-    static function change_password()
+    static function change_password() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -285,7 +285,7 @@ class Controller
         return $out;
     }
 
-    static function check_pseudo()
+    static function check_pseudo() : array
     {
         $out = [];
         $pseudo = (string) Route::params('pseudo');

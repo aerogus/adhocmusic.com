@@ -2,7 +2,7 @@
 
 class Controller
 {
-    static function index()
+    static function index() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -20,7 +20,7 @@ class Controller
         return $smarty->fetch('adm/faq/index.tpl');
     }
 
-    static function create()
+    static function create() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -53,7 +53,7 @@ class Controller
         return $smarty->fetch('adm/faq/create.tpl');
     }
 
-    static function edit()
+    static function edit() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -90,7 +90,7 @@ class Controller
         return $smarty->fetch('adm/faq/edit.tpl');
     }
 
-    static function delete()
+    static function delete() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 

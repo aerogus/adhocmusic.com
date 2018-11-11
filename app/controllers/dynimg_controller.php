@@ -15,7 +15,7 @@ class Controller
         return self::trackable_image(ADHOC_ROOT_PATH . '/public/img/logo_adhoc.jpg');
     }
 
-    static function trackable_image($image)
+    static function trackable_image(string $image) : void
     {
         $hash = (string) Route::params('hash');
         list($id_newsletter, $id_contact) = explode('-', $hash);
@@ -52,7 +52,7 @@ class Controller
         die();
     }
 
-    static function photo()
+    static function photo() : string
     {
         $id = (int) Route::params('id');
         $width = (int) Route::params('width');
@@ -93,7 +93,7 @@ class Controller
         }
     }
 
-    static function video()
+    static function video() : string
     {
         $id = (int) Route::params('id');
         $width = (int) Route::params('width');
@@ -134,7 +134,7 @@ class Controller
         }
     }
 
-    static function event()
+    static function event() : string
     {
         $id = (int) Route::params('id');
         $width = (int) Route::params('width');
@@ -188,7 +188,7 @@ class Controller
      * ex : /dynimg/pixel/ffffff30
      *                    r g b a
      */
-    static function pixel()
+    static function pixel() : string
     {
         $tmp = '/tmp/adhocmusic-img-' . md5(time() . rand());
 
@@ -212,7 +212,7 @@ class Controller
         return $bin;
     }
 
-    static function featured()
+    static function featured() : string
     {
         $id = (int) Route::params('id');
         $width = (int) Route::params('width');
@@ -253,7 +253,7 @@ class Controller
         }
     }
 
-    static function tool()
+    static function tool() : string
     {
         $smarty = new AdHocSmarty();
 
@@ -299,7 +299,7 @@ class Controller
         return $smarty->fetch('dynimg/tool.tpl');
     }
 
-    protected static function _fallback()
+    protected static function _fallback() : string
     {
         $img = new Image();
         $img->init(2, 2, 'ffffff');
@@ -307,7 +307,7 @@ class Controller
         return $img->get();
     }
 
-    private static function _getOutputFormat()
+    private static function _getOutputFormat() : int
     {
         $format = Route::$response_format;
         switch ($format)

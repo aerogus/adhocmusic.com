@@ -6,7 +6,7 @@ define('PHOTOS_EXTRACT_DIR', PHOTOS_IMPORT_DIR . '/tmp');
 
 class Controller
 {
-    static function my()
+    static function my() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -40,7 +40,7 @@ class Controller
         return $smarty->fetch('photos/my.tpl');
     }
 
-    static function show()
+    static function show() : string
     {
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
@@ -50,7 +50,7 @@ class Controller
 
         try {
             $photo = Photo::getInstance($id);
-	} catch (Exception $e) {
+        } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_photo', true);
             return $smarty->fetch('photos/show.tpl');
@@ -170,7 +170,7 @@ class Controller
         return $smarty->fetch('photos/show.tpl');
     }
 
-    static function create()
+    static function create() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -275,7 +275,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_photo_create($data, &$errors)
+    protected static function _validate_form_photo_create(array $data, array &$errors) : bool
     {
         $errors = [];
         if (empty($data['name'])) {
@@ -290,7 +290,7 @@ class Controller
         return true;
     }
 
-    static function import()
+    static function import() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -440,7 +440,7 @@ class Controller
         return $smarty->fetch('photos/import.tpl');
     }
 
-    static function edit()
+    static function edit() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -532,7 +532,7 @@ class Controller
         return $smarty->fetch('photos/edit.tpl');
     }
 
-    static function ajax_update()
+    static function ajax_update() : string
     {
         if (!Tools::isAuth()) {
             return 'KO';
@@ -568,7 +568,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_photo_edit($data, &$errors)
+    protected static function _validate_form_photo_edit(array $data, array &$errors) : bool
     {
         $errors = [];
         if (empty($data['name'])) {
@@ -583,7 +583,7 @@ class Controller
         return true;
     }
 
-    static function delete()
+    static function delete() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 

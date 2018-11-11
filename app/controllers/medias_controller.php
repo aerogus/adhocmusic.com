@@ -2,7 +2,7 @@
 
 class Controller
 {
-    static function index()
+    static function index() : string
     {
         $trail = Trail::getInstance();
         $trail->addStep("Média");
@@ -69,7 +69,7 @@ class Controller
         return $smarty->fetch('medias/index.tpl');
     }
 
-    static function search_results()
+    static function search_results() : string
     {
         $id_groupe = (int) Route::params('groupe');
         $id_event  = (int) Route::params('event');

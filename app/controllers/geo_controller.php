@@ -7,7 +7,7 @@ class Controller
      *
      * @return array
      */
-    static function countries()
+    static function countries() : array
     {
         return WorldCountry::getHashTable();
     }
@@ -19,7 +19,7 @@ class Controller
      * @param string $_GET['c']
      * @return array
      */
-    static function regions()
+    static function regions() : array
     {
         if (empty($_GET['c'])) {
             return [];
@@ -43,7 +43,7 @@ class Controller
      * @param string $_GET['r']
      * @return array
      */
-    static function departements()
+    static function departements() : array
     {
         $tab = [];
 
@@ -71,7 +71,7 @@ class Controller
      * @param string $_GET['d']
      * @return array
      */
-    static function cities()
+    static function cities() : array
     {
         $tab = [];
 
@@ -98,7 +98,7 @@ class Controller
      * @param string $_GET['v']
      * @return array
      */
-    static function lieux()
+    static function lieux() : array
     {
         $tab = [];
 

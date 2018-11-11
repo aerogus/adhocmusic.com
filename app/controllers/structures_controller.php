@@ -8,7 +8,7 @@ class Controller
     /**
      *
      */
-    static function index()
+    static function index() : string
     {
         $trail = Trail::getInstance();
         $trail->addStep('Structures');
@@ -21,7 +21,7 @@ class Controller
     /**
      *
      */
-    static function show()
+    static function show() : string
     {
         $id = (int) Route::params('id');
 
@@ -54,7 +54,7 @@ class Controller
     /**
      *
      */
-    static function create()
+    static function create() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -102,7 +102,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_structure_create($data, &$errors)
+    protected static function _validate_form_structure_create(array $data, array &$errors) : bool
     {
         $errors = [];
 
@@ -115,7 +115,7 @@ class Controller
     /**
      *
      */
-    static function edit()
+    static function edit() : string
     {
         $id = (int) Route::params('id');
 
@@ -159,7 +159,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_structure_edit($data, &$errors)
+    protected static function _validate_form_structure_edit(array $data, array &$errors) : bool
     {
         $errors = [];
 
@@ -172,7 +172,7 @@ class Controller
     /**
      *
      */
-    static function delete()
+    static function delete() : string
     {
         $id = (int) Route::params('id');
 

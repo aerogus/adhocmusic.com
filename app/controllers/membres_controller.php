@@ -2,7 +2,7 @@
 
 class Controller
 {
-    static function show()
+    static function show() : string
     {
         $id = (int) Route::params('id');
 
@@ -33,7 +33,7 @@ class Controller
     /**
      * Création d'un compte membre
      */
-    static function create()
+    static function create() : string
     {
         if (Tools::isAuth()) {
             Tools::redirect('/');
@@ -151,7 +151,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_member_create($data, &$errors)
+    protected static function _validate_form_member_create(array $data, array &$errors) : bool
     {
         $errors = [];
         if (empty($data['pseudo'])) {
@@ -185,7 +185,7 @@ class Controller
         return true;
     }
 
-    static function edit()
+    static function edit() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -332,7 +332,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_member_edit($data, &$errors)
+    protected static function _validate_form_member_edit(array $data, array &$errors) : bool
     {
         $errors = [];
         if (empty($data['email'])) {
@@ -355,7 +355,7 @@ class Controller
         return true;
     }
 
-    static function delete()
+    static function delete() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -397,7 +397,7 @@ class Controller
         return $smarty->fetch('membres/delete.tpl');
     }
 
-    static function autocomplete_pseudo()
+    static function autocomplete_pseudo() : array
     {
         $q = trim((string) Route::params('q'));
 
@@ -420,7 +420,7 @@ class Controller
      * lier un compte ad'hoc à l'appli FB
      * = autoriser app FB ?
      */
-    static function fb_link()
+    static function fb_link() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
         
@@ -444,7 +444,7 @@ class Controller
      * délier un compte ad'hoc de l'appli FB
      * = désautoriser app FB ?
      */
-    static function fb_unlink()
+    static function fb_unlink() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -464,7 +464,7 @@ class Controller
         Tools::redirect('/membres/edit');
     }
 
-    static function tableau_de_bord()
+    static function tableau_de_bord() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 

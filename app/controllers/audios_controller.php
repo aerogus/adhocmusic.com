@@ -7,7 +7,7 @@ define('NB_AUDIOS_PER_PAGE', 80);
 
 class Controller
 {
-    static function my()
+    static function my() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -57,7 +57,7 @@ class Controller
         return $smarty->fetch('audios/my.tpl');
     }
 
-    static function show()
+    static function show() : string
     {
         $id = (int) Route::params('id');
 
@@ -143,7 +143,7 @@ class Controller
         return $smarty->fetch('audios/show.tpl');
     }
 
-    static function create()
+    static function create() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -247,7 +247,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_audio_create($data, &$errors)
+    protected static function _validate_form_audio_create($data, &$errors) : bool
     {
         $errors = [];
         if (empty($data['name'])) {
@@ -262,7 +262,7 @@ class Controller
         return true;
     }
 
-    static function edit()
+    static function edit() : string
     {
         $id = (int) Route::params('id');
         $page = (int) Route::params('page');
@@ -365,7 +365,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_audio_edit($data, &$errors)
+    protected static function _validate_form_audio_edit($data, &$errors) : bool
     {
         $errors = [];
         if (empty($data['name'])) {
@@ -380,7 +380,7 @@ class Controller
         return true;
     }
 
-    static function delete()
+    static function delete() : string
     {
         $id = (int) Route::params('id');
 

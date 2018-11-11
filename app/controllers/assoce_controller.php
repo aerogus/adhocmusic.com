@@ -2,7 +2,7 @@
 
 class Controller
 {
-    static function assoce()
+    static function assoce() : string
     {
         $smarty = new AdHocSmarty();
 
@@ -30,7 +30,7 @@ class Controller
         return $smarty->fetch('assoce/presentation.tpl');
     }
 
-    static function concerts()
+    static function concerts() : string
     {
         $smarty = new AdHocSmarty();
 
@@ -61,7 +61,7 @@ class Controller
         return $smarty->fetch('assoce/concerts.tpl');
     }
 
-    static function afterworks()
+    static function afterworks() : string
     {
         $smarty = new AdHocSmarty();
 
@@ -91,7 +91,7 @@ class Controller
         return $smarty->fetch('assoce/afterworks.tpl');
     }
 
-    static function formations()
+    static function formations() : string
     {
         $smarty = new AdHocSmarty();
         $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
@@ -116,7 +116,7 @@ class Controller
         return $smarty->fetch('assoce/formations.tpl');
     }
 
-    static function equipe()
+    static function equipe() : string
     {
         $smarty = new AdHocSmarty();
 

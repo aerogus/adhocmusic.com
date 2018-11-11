@@ -2,7 +2,7 @@
 
 class Controller
 {
-    static function index()
+    static function index() : string
     {
         $smarty = new AdHocSmarty();
 
@@ -17,7 +17,7 @@ class Controller
         return $smarty->fetch('groupes/index.tpl');
     }
 
-    static function my()
+    static function my() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -36,7 +36,7 @@ class Controller
         return $smarty->fetch('groupes/my.tpl');
     }
 
-    static function show()
+    static function show() : string
     {
         $id = (int) Route::params('id');
 
@@ -135,7 +135,7 @@ class Controller
         return $smarty->fetch('groupes/show.tpl');
     }
 
-    static function create()
+    static function create() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -255,7 +255,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_groupe_create($data, &$errors)
+    protected static function _validate_form_groupe_create(array $data, array &$errors) : bool
     {
         $errors = [];
         if (empty($data['name'])) {
@@ -284,7 +284,7 @@ class Controller
         return true;
     }
 
-    static function edit()
+    static function edit() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -415,7 +415,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_groupe_edit($data, &$errors)
+    protected static function _validate_form_groupe_edit(array $data, array &$errors) : bool
     {
         $errors = [];
         if (empty($data['style'])) {
@@ -441,7 +441,7 @@ class Controller
         return true;
     }
 
-    static function delete()
+    static function delete() : string
     {
         $id = (int) Route::params('id');
 

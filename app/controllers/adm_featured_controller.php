@@ -5,7 +5,7 @@ class Controller
     const IMG_WIDTH = 1000;
     const IMG_HEIGHT = 375;
 
-    static function index()
+    static function index() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -24,7 +24,7 @@ class Controller
         return $smarty->fetch('adm/featured/index.tpl');
     }
 
-    static function create()
+    static function create() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -106,7 +106,7 @@ class Controller
         return $smarty->fetch('adm/featured/create.tpl');
     }
 
-    static function edit()
+    static function edit() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -191,7 +191,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form($data, &$errors)
+    protected static function _validate_form($data, &$errors) : bool
     {
         $errors = [];
         if (empty($data['title'])) {
@@ -215,7 +215,7 @@ class Controller
         return true;
     }
 
-    static function delete()
+    static function delete() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 

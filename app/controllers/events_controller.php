@@ -4,7 +4,7 @@ define('NB_EVENTS_PER_PAGE', 100);
 
 class Controller
 {
-    static function index()
+    static function index() : string
     {
         $smarty = new AdHocSmarty();
 
@@ -76,17 +76,17 @@ class Controller
         return $smarty->fetch('events/index.tpl');
     }
 
-    static function fetch()
+    static function fetch() : string
     {
         return '';
     }
 
-    static function my()
+    static function my() : string
     {
         return self::index();
     }
 
-    static function ical()
+    static function ical() : string
     {
         $id = (int) Route::params('id');
 
@@ -108,7 +108,7 @@ class Controller
         return $vCalendar->render();
     }
 
-    static function show()
+    static function show() : string
     {
         $id = (int) Route::params('id');
 
@@ -205,7 +205,7 @@ class Controller
         return $smarty->fetch('events/show.tpl');
     }
 
-    static function create()
+    static function create() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -441,7 +441,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_event_create($data, &$errors)
+    protected static function _validate_form_event_create(array $data, array &$errors) : bool
     {
         $errors = [];
 
@@ -451,7 +451,7 @@ class Controller
         return true;
     }
 
-    static function edit()
+    static function edit() : string
     {
         $id = (int) Route::params('id');
 
@@ -618,7 +618,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_event_edit($data, &$errors)
+    protected static function _validate_form_event_edit(array $data, array &$errors) : bool
     {
         $errors = [];
 
@@ -631,7 +631,7 @@ class Controller
     /**
      * @return string ou HTTP:Redirect
      */
-    static function delete()
+    static function delete() : string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -666,7 +666,7 @@ class Controller
     /**
      * @return array
      */
-    static function get_events_by_lieu()
+    static function get_events_by_lieu() : array
     {
         $id_lieu = (int) Route::params('l');
 

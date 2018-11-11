@@ -10,7 +10,7 @@ class Controller
     /**
      * @return array
      */
-    static function videos()
+    static function videos() : array
     {
         $groupe  = (int) Route::params('groupe');
         $event   = (int) Route::params('event');
@@ -34,7 +34,7 @@ class Controller
     /**
      * @return array
      */
-    static function audios()
+    static function audios() : array
     {
         $groupe  = (int) Route::params('groupe');
         $event   = (int) Route::params('event');
@@ -58,7 +58,7 @@ class Controller
     /**
      * @return array
      */
-    static function photos()
+    static function photos() : array
     {
         $groupe  = (int) Route::params('groupe');
         $event   = (int) Route::params('event');
@@ -82,7 +82,7 @@ class Controller
     /**
      * @return array
      */
-    static function events()
+    static function events() : array
     {
         $groupe = (int) Route::params('groupe');
         $lieu   = (int) Route::params('lieu');

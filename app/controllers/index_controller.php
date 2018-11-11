@@ -2,7 +2,7 @@
 
 class Controller
 {
-    static function index()
+    static function index() : string
     {
         $page = (int) Route::params('page');
 
@@ -52,7 +52,7 @@ class Controller
     /**
      * Les partenaires
      */
-    static function partners()
+    static function partners() : string
     {
         $smarty = new AdHocSmarty();
 
@@ -65,7 +65,7 @@ class Controller
         return $smarty->fetch('partners.tpl');
     }
 
-    static function contact()
+    static function contact() : string
     {
         $smarty = new AdHocSmarty();
 
@@ -156,7 +156,7 @@ class Controller
         return $smarty->fetch('contact.tpl');
     }
 
-    protected static function _validate_form_contact($data, &$errors)
+    protected static function _validate_form_contact(array $data, array &$errors) : bool
     {
         $errors = [];
         if (empty($data['name'])) {
@@ -182,7 +182,7 @@ class Controller
         return true;
     }
 
-    static function sitemap()
+    static function sitemap() : string
     {
         $smarty = new AdHocSmarty();
 
@@ -210,7 +210,7 @@ class Controller
         return $smarty->fetch('sitemap.tpl');
     }
 
-    static function map()
+    static function map() : string
     {
         $smarty = new AdHocSmarty();
 
@@ -223,7 +223,7 @@ class Controller
         return $smarty->fetch('map.tpl');
     }
 
-    static function mentions_legales()
+    static function mentions_legales() : string
     {
         $smarty = new AdHocSmarty();
 
@@ -233,7 +233,7 @@ class Controller
         return $smarty->fetch('mentions-legales.tpl');
     }
 
-    static function cms()
+    static function cms() : string
     {
         $id = (int) Route::params('id');
         $cms = CMS::getInstance($id);
@@ -268,7 +268,7 @@ class Controller
     /**
      * Page guide de style
      */
-    static function styleguide()
+    static function styleguide() : string
     {
         $smarty = new AdHocSmarty();
 

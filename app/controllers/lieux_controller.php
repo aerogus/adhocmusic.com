@@ -2,7 +2,7 @@
 
 class Controller
 {
-    static function index()
+    static function index() : string
     {
         $smarty = new AdHocSmarty();
 
@@ -39,7 +39,7 @@ class Controller
         return $smarty->fetch('lieux/index.tpl');
     }
 
-    static function my()
+    static function my() : string
     {
         $page = (int) Route::params('page');
 
@@ -59,7 +59,7 @@ class Controller
 
     }
 
-    static function show()
+    static function show() : string
     {
         $id = (int) Route::params('id');
 
@@ -166,7 +166,7 @@ class Controller
         return $smarty->fetch('lieux/show.tpl');
     }
 
-    static function create()
+    static function create() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -266,7 +266,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_lieu_create($data, &$errors)
+    protected static function _validate_form_lieu_create(array $data, array &$errors) : bool
     {
         $errors = [];
         if (empty($data['name'])) {
@@ -278,7 +278,7 @@ class Controller
         return true;
     }
 
-    static function edit()
+    static function edit() : string
     {
         $id = (int) Route::params('id');
 
@@ -388,7 +388,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_lieu_edit($data, &$errors)
+    protected static function _validate_form_lieu_edit(array $data, array &$errors) : bool
     {
         $errors = [];
         if (empty($data['name'])) {
@@ -400,7 +400,7 @@ class Controller
         return true;
     }
 
-    static function delete()
+    static function delete() : string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -432,13 +432,13 @@ class Controller
         return $smarty->fetch('lieux/delete.tpl');
     }
 
-    static function geocode()
+    static function geocode() : string
     {
         $q  = (string) Route::params('q');
         return GoogleMaps::getGeocode($q);
     }
 
-    static function fetch()
+    static function fetch() : string
     {
         $mode  = (string) Route::params('mode'); // radius|boundary|admin
         $lat   = (float) Route::params('lat');

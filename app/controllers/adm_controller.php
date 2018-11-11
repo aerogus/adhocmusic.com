@@ -13,7 +13,7 @@ define('ADM_NEWSLETTER_GROUPE_CURRENT_ID', 37);
 
 class Controller
 {
-    static function index()
+    static function index() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -32,7 +32,7 @@ class Controller
         return $smarty->fetch('adm/index.tpl');
     }
 
-    static function groupes_index()
+    static function groupes_index() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -79,7 +79,7 @@ class Controller
         return $smarty->fetch('adm/groupes/index.tpl');
     }
 
-    static function groupes_show()
+    static function groupes_show() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -97,7 +97,7 @@ class Controller
         return $smarty->fetch('adm/groupes/show.tpl');
     }
 
-    static function membres_index()
+    static function membres_index() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -180,7 +180,7 @@ class Controller
         return $smarty->fetch('adm/membres/index.tpl');
     }
 
-    static function membres_show()
+    static function membres_show() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -198,7 +198,7 @@ class Controller
         return $smarty->fetch('adm/membres/show.tpl');
     }
 
-    static function membres_delete()
+    static function membres_delete() : string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -224,8 +224,7 @@ class Controller
         return $smarty->fetch('adm/membres/delete.tpl');
     }
 
-
-    static function stats()
+    static function stats() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -302,7 +301,7 @@ class Controller
         return $smarty->fetch('adm/stats.tpl');
     }
 
-    static function stats_top_groupes()
+    static function stats_top_groupes() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -365,7 +364,7 @@ class Controller
         return $smarty->fetch('adm/stats-top-groupes.tpl');
     }
 
-    static function stats_top_membres()
+    static function stats_top_membres() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -435,7 +434,7 @@ class Controller
         return $smarty->fetch('adm/stats-top-membres.tpl');
     }
 
-    static function stats_nl()
+    static function stats_nl() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -500,7 +499,7 @@ class Controller
         return $smarty->fetch('adm/stats-nl.tpl');
     }
 
-    static function groupe_de_style()
+    static function groupe_de_style() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -547,7 +546,7 @@ class Controller
         return $smarty->fetch('adm/groupe-de-style.tpl');
     }
 
-    static function groupe_de_style_id()
+    static function groupe_de_style_id() : string
     {
         if (Tools::isSubmit('form-groupe-de-style')) {
             return self::groupe_de_style_submit();
@@ -604,7 +603,7 @@ class Controller
         return $smarty->fetch('adm/groupe-de-style-id.tpl');
     }
 
-    static function groupe_de_style_submit()
+    static function groupe_de_style_submit() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -636,7 +635,7 @@ class Controller
         Tools::redirect('/adm/groupe-de-style');
     }
 
-    static function log_action()
+    static function log_action() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -652,7 +651,7 @@ class Controller
         return $smarty->fetch('adm/log-action.tpl');
     }
 
-    static function delete_account()
+    static function delete_account() : string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -764,7 +763,7 @@ class Controller
         return $smarty->fetch('adm/delete-account.tpl');
     }
 
-    static function delete_account_submit()
+    static function delete_account_submit() : string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -806,7 +805,7 @@ class Controller
         return $smarty->fetch('adm/delete-account.tpl');
     }
 
-    static function appartient_a()
+    static function appartient_a() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 

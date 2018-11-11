@@ -12,7 +12,7 @@ class Controller
     /**
      * Liste de mes vidéos
      */
-    static function my()
+    static function my() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -56,7 +56,7 @@ class Controller
     /**
      * Visualisation d'une vidéo
      */
-    static function show()
+    static function show() : string
     {
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
@@ -173,7 +173,7 @@ class Controller
     /**
      * Code playr embarqué
      */
-    static function embed()
+    static function embed() : string
     {
         $id = (int) Route::params('id');
 
@@ -199,7 +199,7 @@ class Controller
     /**
      * Ajout d'une vidéo
      */
-    static function create()
+    static function create() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -315,7 +315,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_video_create($data, &$errors)
+    protected static function _validate_form_video_create(array $data, array &$errors) : bool
     {
         $errors = [];
         if (empty($data['name'])) {
@@ -335,7 +335,7 @@ class Controller
     /**
      * Édition d'une vidéo
      */
-    static function edit()
+    static function edit() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -427,7 +427,7 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form_video_edit($data, &$errors)
+    protected static function _validate_form_video_edit(array $data, array &$errors) : bool
     {
         $errors = [];
         if (empty($data['name'])) {
@@ -442,7 +442,7 @@ class Controller
     /**
      * Suppression d'une vidéo
      */
-    static function delete()
+    static function delete() : string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -488,8 +488,10 @@ class Controller
 
     /**
      * Récupère des infos sur une vidéo
+     *
+     * @return array
      */
-    static function get_meta()
+    static function get_meta() : array
     {
         $code = (string) Route::params('code');
 
