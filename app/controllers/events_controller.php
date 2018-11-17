@@ -333,6 +333,7 @@ class Controller
                 'facebook_event_id' => (string) Route::params('facebook_event_id'),
                 'facebook_event_create' => (string) Route::params('facebook_event_create'),
             ];
+            $errors = [];
 
             if (self::_validate_form_event_create($data, $errors)) {
 
@@ -514,6 +515,7 @@ class Controller
                 'facebook_event_create' => (string) Route::params('facebook_event_create'),
                 'online' => (bool) Route::params('online'),
             ];
+            $errors = [];
 
             if (self::_validate_form_event_edit($data, $errors)) {
 
