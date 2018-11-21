@@ -922,6 +922,21 @@ class Event extends ObjectModel
     }
 
     /**
+     *
+     */
+    function deleteFlyer()
+    {
+        $p = self::getBasePath() . '/' . $this->getId() . '.jpg';
+        if (file_exists($p)) {
+             unlink($p);
+        }
+
+        // delete des caches images
+        self::invalidateFlyerInCache($this->getId(), '100', '100');
+        self::invalidateFlyerInCache($this->getId(), '400', '400');
+    }
+
+    /**
      * Suppression d'un événement
      */
     function delete()
@@ -930,17 +945,9 @@ class Event extends ObjectModel
         $this->unlinkStyles();
         $this->unlinkStructures();
         $this->unlinkGroupes();
+        $this->deleteFlyer();
 
         parent::delete();
-
-        $p = self::getBasePath() . '/' . $this->getId() . '.jpg';
-        if (file_exists($p)) {
-            unlink($p);
-        }
-
-        // delete des caches images
-        Event::invalidateFlyerInCache($this->getId(), '100', '100');
-        Event::invalidateFlyerInCache($this->getId(), '400', '400');
 
         return true;
     }
