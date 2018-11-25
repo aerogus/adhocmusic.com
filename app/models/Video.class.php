@@ -56,16 +56,6 @@ define('MEDIA_FACEBOOK_DIRECT_VIDEO_URL_PATTERN',
        '');
 
 /**
- * 7 - AD'HOC Legacy
- */
-
-define('MEDIA_ADHOC_URL_PATTERN',
-       '~^https://(?:static|www).adhocmusic.com/media/video/([a-zA-Z0-9]{1,32})\.([a-z]{3})~');
-
-define('MEDIA_ADHOC_DIRECT_VIDEO_URL_PATTERN',
-       '~^https://(?:static|www).adhocmusic.com/media/video/([a-zA-Z0-9]{1,32})\.([a-z]{3})~');
-
-/**
  * 8 - Vimeo
  */
 
@@ -113,7 +103,6 @@ class Video extends Media
     const HOST_YOUTUBE     = 1;
     const HOST_DAILYMOTION = 2;
     const HOST_FACEBOOK    = 6;
-    const HOST_ADHOC       = 7;
     const HOST_VIMEO       = 8;
     const HOST_ADHOCTUBE   = 9;
 
@@ -121,7 +110,6 @@ class Video extends Media
         self::HOST_YOUTUBE     => "YouTube",
         self::HOST_DAILYMOTION => "DailyMotion",
         self::HOST_FACEBOOK    => "Facebook",
-        self::HOST_ADHOC       => "AD'HOC Legacy",
         self::HOST_VIMEO       => "Vimeo",
         self::HOST_ADHOCTUBE   => "AD'HOC Tube",
     ];
@@ -542,19 +530,6 @@ class Video extends Media
                      . '</embed>' . "\n"
                      . '</object>' . "\n";
 
-            case self::HOST_ADHOC:
-                $autoplay ? $strautoplay = 'true' : $strautoplay = 'false';
-                $width  = $this->getWidth();
-                $height = $this->getHeight();
-                return '<video width="680" height="360" poster="/media/video/' . $this->getId() . '.jpg" controls="controls" preload="none">'
-                     . '<source type="video/mp4" src="/media/video/' . $this->getReference() . '">'
-                     . '<object width="680" height="360" type="application/x-shockwave-flash" data="/mediaelement/flashmediaelement.swf">'
-                     . '<param name="movie" value="/mediaelement/flashmediaelement.swf">'
-                     . '<param name="flashvars" value="controls=true&file=/media/video/' . $this->getReference() . '">'
-                     . '<img src="/media/video/' . $this->getId() . '.jpg" width="680" height="360" title="No video playback capabilities">'
-                     . '</object>'
-                     . '</video>';
-
             case self::HOST_VIMEO:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '0';
                 return '<iframe src="https://player.vimeo.com/video/'.$this->getReference().'?title=0&amp;byline=0&amp;portrait=0&amp;autoplay='.$strautoplay.'" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" frameborder="0"></iframe>' . "\n";
@@ -584,15 +559,6 @@ class Video extends Media
 
             case self::HOST_FACEBOOK:
                 return 'https://b.static.ak.fbcdn.net/swf/mvp.swf?v=' . $reference;
-
-            case self::HOST_ADHOC:
-                return 'https://www.adhocmusic.com/jwplayer/player.swf'
-                     . '?file=https://www.adhocmusic.com/media/video/' . $reference
-                     . '&backcolor=990000'
-                     . '&frontcolor=FFFFFF'
-                     . '&screencolor=000000'
-                     . '&autostart=true'
-                     . '&controbar=over';
 
             case self::HOST_VIMEO:
                 return 'https://vimeo.com/' . $reference;
@@ -676,13 +642,6 @@ class Video extends Media
             }
         }
 
-        // AD'HOC Legacy
-        if (preg_match(MEDIA_ADHOC_URL_PATTERN, $str, $matches)) {
-            if (!empty($matches[1])) {
-                return ['id_host' => self::HOST_ADHOC, 'reference' => $matches[1]];
-            }
-        }
-
         // Vimeo
         if (preg_match(MEDIA_VIMEO_URL_PATTERN, $str, $matches)) {
             if (!empty($matches[1])) {
@@ -756,9 +715,6 @@ class Video extends Media
                 }
                 return $url;
 
-            case self::HOST_ADHOC:
-                return 'https://static.adhocmusic.com/media/video/' . $reference . '.jpg';
-
             case self::HOST_VIMEO:
                 $meta_url = 'https://vimeo.com/api/v2/video/' . $reference . '.json';
                 $meta_info = json_decode(file_get_contents($meta_url));
@@ -790,7 +746,6 @@ class Video extends Media
         {
             case self::HOST_YOUTUBE:
             case self::HOST_DAILYMOTION:
-            case self::HOST_ADHOC:
             case self::HOST_FACEBOOK:
             default:
                 return '';

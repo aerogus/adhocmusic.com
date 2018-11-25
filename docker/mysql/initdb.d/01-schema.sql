@@ -529,6 +529,3 @@ ALTER TABLE `geo_world_country`
 
 ALTER TABLE `geo_world_region`
   ADD PRIMARY KEY (`id_country`,`id_region`);
-
-ALTER TABLE `_adhoc_est_marque_sur`
-  ADD PRIMARY KEY (`id_contact`,`id_type_media`,`id_media`);

@@ -223,13 +223,9 @@ class Controller
 
             if (self::_validate_form_video_create($data, $errors)) {
 
-                if ($data['id_host'] !== Video::HOST_ADHOC) {
-                    $info = Video::parseStringForVideoUrl($data['code']);
-                    $data['id_host'] = $info['id_host'];
-                    $data['reference'] = $info['reference'];
-                } else {
-                    $data['reference'] = time();
-                }
+                $info = Video::parseStringForVideoUrl($data['code']);
+                $data['id_host'] = $info['id_host'];
+                $data['reference'] = $info['reference'];
 
                 $video = Video::init();
                 $video->setName($data['name']);
