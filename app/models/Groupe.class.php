@@ -1813,10 +1813,12 @@ class Groupe extends ObjectModel
     }
 
     /**
+     * Retourne si un alias de groupe est disponible
+     *
      * @param string $alias
      * @return bool
      */
-    static function checkAliasAvailability($alias)
+    static function checkAliasAvailability(string $alias) : bool
     {
         $db = DataBase::getInstance();
 
