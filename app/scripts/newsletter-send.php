@@ -4,7 +4,7 @@
 // envoi d'une newsletter
 
 // n° de newsletter à traiter
-define('ID_NEWSLETTER', 84);
+define('ID_NEWSLETTER', 85);
 
 require_once __DIR__ . '/../config.php';
 

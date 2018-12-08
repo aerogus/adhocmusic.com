@@ -353,15 +353,6 @@ class Groupe extends ObjectModel
      */
     function getSite()
     {
-        if (strpos($this->_site, 'myspace') !== false) {
-            return false;
-        }
-        if (strpos($this->_site, '.') === false) {
-            return false;
-        }
-        if (strpos($this->_site, 'http://') !== 0) {
-            return 'http://'.$this->_site;
-        }
         return $this->_site;
     }
 
@@ -1698,20 +1689,17 @@ class Groupe extends ObjectModel
      * @param string $name
      * @return string
      */
-    static function genAlias($name)
+    static function genAlias(string $name) : string
     {
         $alias = trim($name);
         $alias = strtolower($alias);
         $alias = Tools::removeAccents($alias);
-        $alias = str_replace('|', '', $alias);
-        $alias = str_replace('.', '', $alias);
-        $alias = str_replace(' ', '', $alias);
-        $alias = str_replace("'", '', $alias);
-        $alias = str_replace('"', '', $alias);
-        $alias = str_replace('&', 'et', $alias);
-        $alias = str_replace('(', '', $alias);
-        $alias = str_replace(')', '', $alias);
-        $alias = str_replace('!', '', $alias);
+
+        $map_in  = ['/', '+', '|', '.', ' ', "'", '"', '&' , '(', ')', '!'];
+        $map_out = ['' , '' , '' , '' , '' , '' , '' , 'et', '' , '' ,  ''];
+
+        $alias = str_replace($map_in, $map_out, $alias);
+
         return $alias;
     }
 

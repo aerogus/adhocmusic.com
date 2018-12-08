@@ -27,16 +27,6 @@
         {if $groupe->getLineup()}
         <p><strong>Membres</strong><br>{$groupe->getLineup()|escape|@nl2br}</p>
         {/if}
-        <p><strong>Dont membres AD'HOC</strong></p>
-        {if $membres|@count > 0}
-        <ul>
-          {foreach $membres as $membre}
-          <li><a href="{$membre.url}">{$membre.pseudo|escape}</a> ({$membre.nom_type_musicien|escape})</li>
-          {/foreach}
-        </ul>
-        {else}
-        <p class="infobulle warning">Aucun! Vous faites partie de ce groupe ? <a href="/contact">contactez nous</a></p>
-        {/if}
         <p><strong>Liens</strong></p>
         <ul class="grplinks">
           {if $groupe->getSite()}

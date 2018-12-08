@@ -173,6 +173,7 @@ class Controller
                 'facebook_page_id' => (string) Route::params('facebook_page_id'),
                 'twitter_id'       => (string) Route::params('twitter_id'),
             ];
+            $errors = [];
 
             if (self::_validate_form_groupe_create($data, $errors)) {
 
@@ -337,7 +338,7 @@ class Controller
                 'facebook_page_id' => (string) Route::params('facebook_page_id'),
                 'twitter_id'       => (string) Route::params('twitter_id'),
             ];
-
+            $errors = [];
             if (self::_validate_form_groupe_edit($data, $errors)) {
 
                 if ($groupe->isMember($_SESSION['membre']->getId()) === false) {
