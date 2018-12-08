@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4cfb4e97af59ab1a97fbfbfc57288dba",
     "content-hash": "14af974c7b108b1f3e7f38eb6f4e6b89",
     "packages": [
         {
@@ -59,7 +58,7 @@
                 "social",
                 "twitter"
             ],
-            "time": "2018-07-04 01:28:41"
+            "time": "2018-07-04T01:28:41+00:00"
         },
         {
             "name": "eluceo/ical",
@@ -110,7 +109,7 @@
                 "ics",
                 "php calendar"
             ],
-            "time": "2018-03-13 19:39:55"
+            "time": "2018-03-13T19:39:55+00:00"
         },
         {
             "name": "facebook/graph-sdk",
@@ -168,7 +167,7 @@
                 "facebook",
                 "sdk"
             ],
-            "time": "2018-07-03 02:25:00"
+            "time": "2018-07-03T02:25:00+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -214,7 +213,7 @@
             ],
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
-            "time": "2017-06-27 22:17:23"
+            "time": "2017-06-27T22:17:23+00:00"
         },
         {
             "name": "google/apiclient",
@@ -273,7 +272,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2018-06-20 15:52:20"
+            "time": "2018-06-20T15:52:20+00:00"
         },
         {
             "name": "google/apiclient-services",
@@ -310,7 +309,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2018-10-29 00:22:47"
+            "time": "2018-10-29T00:22:47+00:00"
         },
         {
             "name": "google/auth",
@@ -357,7 +356,7 @@
                 "google",
                 "oauth2"
             ],
-            "time": "2018-09-17 20:29:21"
+            "time": "2018-09-17T20:29:21+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -422,7 +421,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2018-04-22 15:46:56"
+            "time": "2018-04-22T15:46:56+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -473,7 +472,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-12-20 10:07:11"
+            "time": "2016-12-20T10:07:11+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -538,7 +537,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-03-20 17:10:46"
+            "time": "2017-03-20T17:10:46+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -616,7 +615,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2018-11-05 09:00:11"
+            "time": "2018-11-05T09:00:11+00:00"
         },
         {
             "name": "pear/console_table",
@@ -671,7 +670,7 @@
             "keywords": [
                 "console"
             ],
-            "time": "2018-01-25 20:47:17"
+            "time": "2018-01-25T20:47:17+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -737,7 +736,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2018-03-27 13:49:45"
+            "time": "2018-03-27T13:49:45+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -829,7 +828,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2018-11-04 05:45:48"
+            "time": "2018-11-04T05:45:48+00:00"
         },
         {
             "name": "psr/cache",
@@ -875,7 +874,7 @@
                 "psr",
                 "psr-6"
             ],
-            "time": "2016-08-06 20:24:11"
+            "time": "2016-08-06T20:24:11+00:00"
         },
         {
             "name": "psr/http-message",
@@ -925,7 +924,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06 14:39:51"
+            "time": "2016-08-06T14:39:51+00:00"
         },
         {
             "name": "psr/log",
@@ -972,7 +971,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10 12:19:37"
+            "time": "2016-10-10T12:19:37+00:00"
         },
         {
             "name": "smarty/smarty",
@@ -1025,7 +1024,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-09-12 20:54:16"
+            "time": "2018-09-12T20:54:16+00:00"
         }
     ],
     "packages-dev": [],
