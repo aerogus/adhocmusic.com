@@ -112,6 +112,7 @@ class Controller
                 'mailing'     => (bool) Route::params('mailing'),
                 'check'       => (string) Route::params('check'),
             ];
+            $errors = [];
 
             self::_validate_form_contact($data, $errors);
 
@@ -158,7 +159,6 @@ class Controller
 
     protected static function _validate_form_contact(array $data, array &$errors) : bool
     {
-        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez renseigner votre nom";
         }

@@ -186,6 +186,7 @@ class Controller
                 'id_structure' => 0,
                 'online' => (bool) Route::params('online'),
             ];
+            $errors = [];
 
             if (self::_validate_form_photo_create($data, $errors)) {
 
@@ -277,7 +278,6 @@ class Controller
      */
     protected static function _validate_form_photo_create(array $data, array &$errors) : bool
     {
-        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la photo.";
         }
@@ -344,6 +344,8 @@ class Controller
                         'id_structure' => 1,
                         'online' => true,
                     ];
+                    $errors = [];
+
                     self::_validate_form_photo_create($data, $errors);
 
                     if (empty($errors)) {
@@ -475,6 +477,7 @@ class Controller
                 'id_contact' => (int) Route::params('id_contact'),
                 'online' => (bool) Route::params('online'),
             ];
+            $errors = [];
 
             if (self::_validate_form_photo_edit($data, $errors)) {
 
@@ -570,7 +573,6 @@ class Controller
      */
     protected static function _validate_form_photo_edit(array $data, array &$errors) : bool
     {
-        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la photo.";
         }

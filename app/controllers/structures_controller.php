@@ -77,6 +77,7 @@ class Controller
                 'site' => '',
                 'email' => '',
             ];
+            $errors = [];
 
             if (self::_validate_form_structure_create($data, $errors))
             {
@@ -104,8 +105,6 @@ class Controller
      */
     protected static function _validate_form_structure_create(array $data, array &$errors) : bool
     {
-        $errors = [];
-
         if (count($errors)) {
             return false;
         }
@@ -130,6 +129,7 @@ class Controller
             $data = [
                 'name' => (string) Route::params('name'),
             ];
+            $errors = [];
 
             if (self::_validate_form_structure_edit($data, $errors))
             {
@@ -161,8 +161,6 @@ class Controller
      */
     protected static function _validate_form_structure_edit(array $data, array &$errors) : bool
     {
-        $errors = [];
-
         if (count($errors)) {
             return false;
         }

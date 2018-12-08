@@ -258,7 +258,6 @@ class Controller
      */
     protected static function _validate_form_groupe_create(array $data, array &$errors) : bool
     {
-        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = true;
         }
@@ -339,6 +338,7 @@ class Controller
                 'twitter_id'       => (string) Route::params('twitter_id'),
             ];
             $errors = [];
+
             if (self::_validate_form_groupe_edit($data, $errors)) {
 
                 if ($groupe->isMember($_SESSION['membre']->getId()) === false) {
@@ -418,7 +418,6 @@ class Controller
      */
     protected static function _validate_form_groupe_edit(array $data, array &$errors) : bool
     {
-        $errors = [];
         if (empty($data['style'])) {
             $errors['style'] = true;
         }

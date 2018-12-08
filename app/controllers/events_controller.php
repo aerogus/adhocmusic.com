@@ -444,8 +444,6 @@ class Controller
      */
     protected static function _validate_form_event_create(array $data, array &$errors) : bool
     {
-        $errors = [];
-
         if (count($errors)) {
             return false;
         }
@@ -622,8 +620,6 @@ class Controller
      */
     protected static function _validate_form_event_edit(array $data, array &$errors) : bool
     {
-        $errors = [];
-
         if (count($errors)) {
             return false;
         }

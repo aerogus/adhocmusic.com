@@ -170,6 +170,7 @@ class Controller
                 'text'         => '',
                 'online'       => true,
             ];
+            $errors = [];
 
             if (self::_validate_form_audio_create($data, $errors)) {
                 $audio = Audio::init();
@@ -249,7 +250,6 @@ class Controller
      */
     protected static function _validate_form_audio_create($data, &$errors) : bool
     {
-        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = true;
         }
@@ -301,6 +301,7 @@ class Controller
                 'id_groupe' => (int) Route::params('id_groupe'),
                 'online' => (bool) Route::params('online'),
             ];
+            $errors = [];
 
             if (self::_validate_form_audio_edit($data, $errors)) {
 
@@ -367,7 +368,6 @@ class Controller
      */
     protected static function _validate_form_audio_edit($data, &$errors) : bool
     {
-        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = true;
         }

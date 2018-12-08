@@ -198,6 +198,7 @@ class Controller
                 'lng'            => (float) Route::params('lng'),
                 'id_contact'     => $_SESSION['membre']->getId(),
             ];
+            $errors = [];
 
             if (self::_validate_form_lieu_create($data, $errors))
             {
@@ -268,7 +269,6 @@ class Controller
      */
     protected static function _validate_form_lieu_create(array $data, array &$errors) : bool
     {
-        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = true;
         }
@@ -325,6 +325,7 @@ class Controller
                 'lat'            => (string) Route::params('lat'),
                 'lng'            => (string) Route::params('lng'),
             ];
+            $errors = [];
 
             if (self::_validate_form_lieu_edit($data, $errors))
             {
@@ -390,7 +391,6 @@ class Controller
      */
     protected static function _validate_form_lieu_edit(array $data, array &$errors) : bool
     {
-        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = true;
         }

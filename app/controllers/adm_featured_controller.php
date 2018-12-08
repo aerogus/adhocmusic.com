@@ -62,6 +62,7 @@ class Controller
                 'datfin'      => trim((string) Route::params('datfin') . ' 23:59:59'),
                 'online'      => false,
             ];
+            $errors = [];
 
             if (self::_validate_form($data, $errors)) {
 
@@ -149,6 +150,7 @@ class Controller
                 'datfin'      => trim((string) Route::params('datfin') . ' 23:59:59'),
                 'online'      => (bool) Route::params('online'),
             ];
+            $errors = [];
 
             if (self::_validate_form($data, $errors)) {
 
@@ -191,9 +193,8 @@ class Controller
      * @param array &$errors
      * @return bool
      */
-    protected static function _validate_form($data, &$errors) : bool
+    protected static function _validate_form(array $data, array &$errors) : bool
     {
-        $errors = [];
         if (empty($data['title'])) {
             $errors['title'] = "Vous devez saisir un titre";
         }

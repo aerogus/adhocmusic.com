@@ -220,6 +220,7 @@ class Controller
                 'code' => (string) Route::params('code'),
                 'reference' => (string) Route::params('reference'),
             ];
+            $errors = [];
 
             if (self::_validate_form_video_create($data, $errors)) {
 
@@ -313,7 +314,6 @@ class Controller
      */
     protected static function _validate_form_video_create(array $data, array &$errors) : bool
     {
-        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
         }
@@ -360,6 +360,7 @@ class Controller
                 'id_groupe' => (int) Route::params('id_groupe'),
                 'online' => (bool) Route::params('online'),
             ];
+            $errors = [];
 
             if (self::_validate_form_video_edit($data, $errors)) {
 
@@ -425,7 +426,6 @@ class Controller
      */
     protected static function _validate_form_video_edit(array $data, array &$errors) : bool
     {
-        $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
         }

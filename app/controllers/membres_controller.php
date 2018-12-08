@@ -96,6 +96,7 @@ class Controller
                 'mailing'        => (bool) Route::params('mailing'),
                 'csrf'           => '',
             ];
+            $errors = [];
 
             if (self::_validate_form_member_create($data, $errors)) {
 
@@ -153,7 +154,6 @@ class Controller
      */
     protected static function _validate_form_member_create(array $data, array &$errors) : bool
     {
-        $errors = [];
         if (empty($data['pseudo'])) {
             $errors['pseudo'] = true;
         }
@@ -222,6 +222,7 @@ class Controller
                 'site' => trim((string) Route::params('site')),
                 'mailing' => (bool) Route::params('mailing'),
             ];
+            $errors = [];
 
             if (self::_validate_form_member_edit($data, $errors)) {
 
@@ -334,7 +335,6 @@ class Controller
      */
     protected static function _validate_form_member_edit(array $data, array &$errors) : bool
     {
-        $errors = [];
         if (empty($data['email'])) {
             $errors['email'] = true;
         } elseif (!Email::validate($data['email'])) {
