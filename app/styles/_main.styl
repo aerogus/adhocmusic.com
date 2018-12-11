@@ -2,12 +2,26 @@
  * structure générale
  */
 
+html
+  min-height 100%
+  height 100%
+
+body
+  position relative
+  min-height 100%
+  height auto
 
 .site_content
-    max-width 1000px
-    /* 4rem de hauteur de top-bar fixed + 1rem de marge */
-    margin 5rem auto 0
-    position relative
+  max-width 1000px
+  /* 4rem de hauteur de top-bar fixed + 1rem de marge */
+  margin 5rem auto 0
+  position relative
+  /* hauteur approximative du footer en absolute */
+  padding-bottom 185px
+
+  @media screen and (max-width: 680px)
+    &
+      padding-bottom unset
 
 .button,
 .btn
