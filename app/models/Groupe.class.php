@@ -1207,6 +1207,11 @@ class Groupe extends ObjectModel
             $limit = (int) $params['limit'];
         }
 
+        $online = null;
+        if (isset($params['online'])) {
+            $online = (bool) $params['online'] ? 'TRUE' : 'FALSE';
+        }
+
         $sens = 'ASC';
         if (isset($params['sens']) && $params['sens'] == 'DESC') {
             $sens = 'DESC';
@@ -1235,6 +1240,10 @@ class Groupe extends ObjectModel
              . "FROM `" . self::$_table . "` `g` "
              . "WHERE 1 ";
 
+        if (!is_null($online)) {
+            $sql .= "AND `g`.`online` = " . $online . " ";
+        }
+
         if (count($tab_id) && ($tab_id[0] !== 0)) {
             $sql .= "AND `g`.`id_groupe` IN (" . implode(',', $tab_id) . ") ";
         }
@@ -1252,7 +1261,7 @@ class Groupe extends ObjectModel
 
         $res = $db->queryWithFetch($sql);
 
-        if ($limit == 1) {
+        if ($limit === 1) {
             $res = array_pop($res);
         }
 

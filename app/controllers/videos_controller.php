@@ -274,6 +274,7 @@ class Controller
             $smarty->assign('groupes', Groupe::getGroupes([
                 'sort'   => 'name',
                 'sens'   => 'ASC',
+                'online' => true,
             ]));
         }
 
