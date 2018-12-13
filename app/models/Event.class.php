@@ -1141,7 +1141,7 @@ class Event extends ObjectModel
 
         $sql = "SELECT `g`.`name`, `g`.`id_groupe` AS `id`, "
              . "`g`.`style`, `g`.`alias`, "
-             . "CONCAT('http://www.adhocmusic.com/', `g`.`alias`) AS `url` "
+             . "CONCAT('https://www.adhocmusic.com/', `g`.`alias`) AS `url` "
              . "FROM `".self::$_db_table_participe_a."` `p`, `".self::$_db_table_groupe."` `g` "
              . "WHERE `g`.`id_groupe` = `p`.`id_groupe` "
              . "AND `p`.`id_event` = " . (int) $this->_id_event . " "
@@ -1153,7 +1153,7 @@ class Event extends ObjectModel
         foreach ($res as $grp) {
             $res[$cpt]['mini_photo'] = '/img/note_adhoc_64.png';
             if (file_exists(MEDIA_PATH . '/groupe/m' . $grp['id'] . '.jpg')) {
-                $res[$cpt]['mini_photo'] = MEDIA_PATH . '/groupe/m' . $grp['id'] . '.jpg';
+                $res[$cpt]['mini_photo'] = MEDIA_URL . '/groupe/m' . $grp['id'] . '.jpg';
             }
             $cpt++;
         }
