@@ -31,26 +31,15 @@
     <p>Entrée : <strong>{$event->getPrice()|escape}</strong></p>
   </div>
 
-  {if !empty($alerting_sub_url)}
-  <div class="alerting-sub"><a href="{$alerting_sub_url}">Ajouter à mon agenda</a></div>
-  {elseif !empty($alerting_unsub_url)}
-  <div class="alerting-unsub"><a href="{$alerting_unsub_url}">Enlever de mon agenda</a></div>
-  {elseif !empty($alerting_auth_url)}
-  <div class="alerting-auth"><a href="{$alerting_auth_url}">Ajouter à mon agenda</a></div>
-  {/if}
-
   {if $event->getFacebookEventId()}
-  <p class="event_facebook" id="fb-event-{$event->getFacebookEventId()}">
-    <a href="{$event->getFacebookEventUrl()}">{$event->getFacebookEventAttending()} participants</a>
-    <a href="#" class="fb-event-button fb-event-attending">J'y vais</a>
-    <a href="#" class="fb-event-button fb-event-maybe">Peut-être</a>
-    <a href="#" class="fb-event-button fb-event-declined">Non merci</a>
+  <p class="event_facebook">
+    <a href="{$event->getFacebookEventUrl()}">Événement Facebook</a>
   </p>
   {/if}
 
   {if !empty($groupes)}
   <p>Avec :</p>
-  <ul>
+  <ul class="clearfix">
   {foreach from=$groupes item=groupe}
     <li><a href="{$groupe.url}"><img src="{$groupe.mini_photo}" style="float: left; margin: 2px; border: 1px solid #000000;" alt=""></a><a href="{$groupe.url}"><strong>{$groupe.name|escape}</strong></a><br>({$groupe.style|escape})</li>
   {/foreach}
@@ -68,7 +57,7 @@
 
   {include file="comments/share.tpl" title="cet événement" url=$event->getUrl()}
 
-  <a style="margin: 10px 0; padding: 5px; border: 1px solid #999" href="/events/ical/{$event->getId()}.ics"><img src="/img/icones/cal.svg" width="16" height="16"> Ajout au calendrier</a>
+  <a style="display:inline-block;background:#efefef;margin:10px 0;padding:5px" href="/events/ical/{$event->getId()}.ics"><img src="/img/icones/cal.svg" width="16" height="16"> Ajout au calendrier</a>
 
   {include file="comments/box.tpl" type="e" id_content=$event->getId()}
 
