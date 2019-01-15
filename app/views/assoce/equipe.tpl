@@ -9,7 +9,7 @@
         <h1>L'Equipe</h1>
       </header>
       <div>
-        <p>Voici les forces actives de l'association pour la saison 2017/2018</p>
+        <p>Voici les forces actives de l'association pour la saison 2018/2019</p>
         <ul class="staff">
           {foreach from=$membres item=membre}
           <li>
