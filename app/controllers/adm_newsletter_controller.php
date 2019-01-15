@@ -78,9 +78,8 @@ class Controller
             $newsletter->setTitle($data['title']);
             $newsletter->setContent($data['content']);
 
-            // dépendance à mjml-cli via npm
-            exec('mjml -i -s <<< "' . addslashes($data['content']) . '"', $html_arr);
-            $html = implode("\n", $html_arr);
+            // dépendance à mjml via npm
+            $html = shell_exec("mjml -i <<EOF\n" . $data['content'] . "\nEOF");
             $newsletter->setHtml($html);
 
             $newsletter->save();
