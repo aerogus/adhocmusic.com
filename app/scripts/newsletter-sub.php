@@ -5,19 +5,21 @@ require_once __DIR__ . '/../config.php';
 
 /**
  * abonne des emails à la newsletter
+ *
+ * @param string $argv[1] email(s) à inscrire séparés par une virgule
  */
 
-const EMAILS = 'newsletter-sub.csv';
-
-if (!empty($argv[1])) {
-    $data = [trim($argv[1])];
-} else {
-    if (!file_exists(EMAILS)) die(EMAILS . ' introuvable');
-    if (!($data = file(EMAILS))) die(EMAILS . ' vide');
+if (empty($argv[1])) {
+    echo "Usage: newsletter-sub.php email1,email2,email3,...\n";
+    exit;
 }
 
+$data = explode(',', $argv[1]);
+
 foreach ($data as $email) {
-    $email = trim((string) $email);
+    if (!$email = trim((string) $email)) {
+        continue;
+    }
     echo $email . " : ";
     if ($id_contact = Contact::getIdByEmail($email)) {
         echo "contact ? oui (" . $id_contact . ") - ";
