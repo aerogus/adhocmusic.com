@@ -40,7 +40,6 @@
     <li><a href="/membres/create">s'inscrire</a></li>
   </ul>
 </form>
-<a href="{$fb_login_url}" class="btn fb-login">Continuer avec Facebook</a>
 
 {/if}
 

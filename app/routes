@@ -74,7 +74,6 @@ audios|delete|POST|/audios/delete
 audios|show|GET|/audios/:id
 auth|login|GET|/auth/login
 auth|login|POST|/auth/login
-auth|facebook_login_callback|GET|/auth/facebook-login-callback
 auth|logout|GET|/auth/logout
 auth|change_password|GET|/auth/change-password
 auth|change_password|POST|/auth/change-password

@@ -24,10 +24,6 @@
   </div>
 </div>
 
-<!--
-<div class="txtcenter infobulle info">Prochain événement : <a href="/events/6857">Délires 2.0 à Villemoisson-sur-Orge</a></div>
--->
-
 <div class="grid-3-tiny-2-small-1 has-gutter-l">
 
   <div class="box">

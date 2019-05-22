@@ -8,4 +8,3 @@
 <div class="boxheader"{if !empty($boxbgcolor)} style="background: {$boxbgcolor};"{/if}></div>
 {/if}
 <div class="boxcontent"{if !empty($boxbgcolor)} style="background: {$boxbgcolor};"{/if}>
-        
