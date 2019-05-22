@@ -22,8 +22,7 @@ function adhoc_get_env() : string
     $host = php_uname('n');
     switch ($host)
     {
-        case 'ns1.adhocmusic.com':
-        case 'ns2.adhocmusic.com':
+        case 'rbx.aerogus.net':
             return 'PROD';
             break;
 
