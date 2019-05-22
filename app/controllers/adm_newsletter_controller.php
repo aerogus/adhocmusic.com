@@ -79,7 +79,8 @@ class Controller
             $newsletter->setContent($data['content']);
 
             // dépendance à mjml via npm
-            $html = shell_exec("mjml -i <<EOF\n" . $data['content'] . "\nEOF");
+            $mjmlBin = ADHOC_ROOT_PATH . '/node_modules/.bin/mjml';
+            $html = shell_exec($mjmlBin . " -i <<EOF\n" . $data['content'] . "\nEOF");
             $newsletter->setHtml($html);
 
             $newsletter->save();
