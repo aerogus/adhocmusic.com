@@ -3,8 +3,8 @@
 
 // envoi d'une newsletter
 
-// n° de newsletter à traiter
-define('ID_NEWSLETTER', 85);
+// n° de newslette a traiter
+define('ID_NEWSLETTER', 87);
 
 require_once __DIR__ . '/../config.php';
 
@@ -23,15 +23,13 @@ $subs = [
 //    ['id_contact' => 1, 'email' => 'gilles.taddei@gmail.com', 'pseudo' => 'gillex', 'lastnl' => ''],
 //    ['id_contact' => 7018, 'email' => 'lara.etcheverry@gmail.com', 'pseudo' => 'lara', 'lastnl' => ''],
 //    ['id_contact' => 2, 'email' => 'truc.invalide@oiuofdsg.com', 'pseudo' => 'rien', 'lastnl' => ''],
-//    ['id_contact' => 3, 'email' => 'newsletter@adhocmusic.com', 'pseudo' => 'test', 'lastnl' => ''],
-//    ['id_contact' => 2, 'email' => 'Musique.mjcviry@gmail.com', 'pseudo' => 'La Fée des Jam', 'lastnl' => ''],
 ];
 
 // base de prod
 //$subs = Newsletter::getSubscribers();
 
 echo "Trouvé : " . count($subs) . " emails\n";
-//die();
+die();
 // boucle des emails - expédition effective
 
 $n = 1;
