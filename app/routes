@@ -165,10 +165,6 @@ membres|edit|POST|/membres/edit
 membres|delete|GET|/membres/delete
 membres|delete|POST|/membres/delete
 membres|autocomplete_pseudo|GET|/membres/autocomplete-pseudo
-membres|fb_link|GET|/membres/fb-link
-membres|fb_link|POST|/membres/fb-link
-membres|fb_unlink|GET|/membres/fb-unlink
-membres|fb_unlink|POST|/membres/fb-unlink
 membres|show|GET|/membres/:id
 messagerie|index|GET|/messagerie/
 messagerie|read|GET|/messagerie/read/:id

@@ -298,27 +298,6 @@ class Controller
         }
 
         $smarty->assign('membre', $_SESSION['membre']);
-        
-        $fb_me = false;
-
-        if ($_SESSION['membre']->getFacebookAccessToken()) {
-            $GLOBALS['fb']->setDefaultAccessToken($_SESSION['membre']->getFacebookAccessToken());
-            try {
-                $response = $GLOBALS['fb']->get('/me?fields=picture,email,first_name,last_name');
-                $userNode = $response->getGraphUser();
-                $smarty->assign('fb_me', [
-                    'first_name' => $userNode->getField('first_name'),
-                    'last_name' => $userNode->getField('last_name'),
-                    'picture' => $userNode->getField('picture')->getUrl()
-                ]);
-            } catch (Exception $e) {
-                // app non autorisée ?
-                $_SESSION['redirect_after_auth'] = HOME_URL . '/membres/edit';
-            }
-        } else {
-            // pas de session fb
-            $_SESSION['redirect_after_auth'] = HOME_URL . '/membres/edit';
-        }
 
         if ($_SESSION['membre']->isInterne()) {
             $smarty->assign('forum', ForumPrive::getSubscribedForums($_SESSION['membre']->getId()));
@@ -414,54 +393,6 @@ class Controller
              . "LIMIT 0, 10";
 
         return $db->queryWithFetch($sql);
-    }
-
-    /**
-     * lier un compte ad'hoc à l'appli FB
-     * = autoriser app FB ?
-     */
-    static function fb_link() : string
-    {
-        Tools::auth(Membre::TYPE_STANDARD);
-        
-        if (Tools::isSubmit('form-fb-link'))
-        {
-            $membre = $_SESSION['membre'];
-            $membre->setFacebookProfileId($fbid);
-            $membre->setFacebookAutoLogin(true);
-            $membre->save();
-
-            Tools::redirect('/membres/edit');
-        }
-
-        $_SESSION['redirect_after_auth'] = HOME_URL . '/membres/edit';
-
-        $smarty = new AdHocSmarty();
-        return $smarty->fetch('membres/fb-link.tpl');
-    }
-
-    /**
-     * délier un compte ad'hoc de l'appli FB
-     * = désautoriser app FB ?
-     */
-    static function fb_unlink() : string
-    {
-        Tools::auth(Membre::TYPE_STANDARD);
-
-        $fb = $GLOBALS['fb'];
-        $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
-        try {
-            $resp = $fb->delete('/me/permissions');
-            $membre = $_SESSION['membre'];
-            $membre->setFacebookProfileId(0);
-            $membre->setFacebookAccessToken('');
-            $membre->setFacebookAutoLogin(false);
-            $membre->save();
-        } catch (Facebook\Exceptions\FacebookResponseException $e) {
-            // app non autorisée donc compte non lié
-        }
-
-        Tools::redirect('/membres/edit');
     }
 
     static function tableau_de_bord() : string
