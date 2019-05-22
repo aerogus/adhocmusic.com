@@ -11,19 +11,6 @@
 {/if}
 
 <form id="form-member-edit" name="form-member-edit" method="post" action="/membres/edit" enctype="multipart/form-data">
-  <fieldset>
-      {if !empty($fb_me)}
-      <p>Votre compte AD'HOC est lié au profil Facebook suivant:</p>
-      <p align="center">
-        <img src="{$fb_me.picture}" alt="{$fb_me.first_name|escape} {$fb_me.last_name|escape}"><br>
-        <strong>{$fb_me.first_name|escape} {$fb_me.last_name|escape}</strong>
-      </p>
-      <p><a href="/membres/fb-unlink">Délier ce profil Facebook de mon compte AD'HOC</a></p>
-      {else}
-      <p>Votre compte AD'HOC n'est lié à aucun profil Facebook.</p>
-      <a href="{$fb_login_url}" class="btn fb-login">Lier mon compte AD'HOC à mon profil Facebook</a>
-      {/if}
-  </fieldset>
   {if $me->isInterne()}
   <fieldset>
     <legend>Inscription Forums Privés</legend>
@@ -96,22 +83,6 @@
         <label for="address">Adresse</label>
         <input id="address" name="address" type="text" size="40" maxlength="50" value="{$me->getAddress()|escape}">
       </li>
-      {*
-      <li>
-        <label for="cp">Code Postal</label>
-        <input id="cp" name="cp" type="text" size="40" maxlength="50" value="{$me->getCp()|escape}">
-      </li>
-      <li>
-        <label for="city">Ville</label>
-        <div class="infobulle error" id="error_city"{if empty($error_city)} style="display: none"{/if}>Vous devez renseigner votre ville</div>
-        <input id="city" name="city" type="text" size="40" maxlength="50" value="{$me->getCity()|escape}">
-      </li>
-      <li>
-        <label for="country">Pays</label>
-        <div class="infobulle error" id="error_country"{if  empty($error_country)} style="display: none"{/if}>Vous devez renseigner votre pays</div>
-        <input id="country" name="country" type="text" size="40" maxlength="50" value="{$me->getCountry()|escape}">
-      </li>
-      *}
       <li>
         <label for="id_country">Pays (*)</label>
         <div class="infobulle error" id="error_id_country"{if empty($error_id_country)} style="display: none"{/if}>Vous devez choisir un pays</div>

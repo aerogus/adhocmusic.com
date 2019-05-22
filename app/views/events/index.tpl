@@ -53,14 +53,6 @@
       {/foreach}
       </ul>
       <p class="event_price">{$obj->getPrice()|escape|@nl2br}</p>
-      {if $obj->getFacebookEventId()}
-      <p class="event_facebook" id="fb-event-{$obj->getFacebookEventId()}">
-        <a href="{$obj->getFacebookEventUrl()}">{$obj->getFacebookEventAttending()} participants</a>
-        <a href="#" class="fb-event-button fb-event-attending">J'y vais</a>
-        <a href="#" class="fb-event-button fb-event-maybe">Peut-être</a>
-        <a href="#" class="fb-event-button fb-event-declined">Non merci</a>
-      </p>
-      {/if}
       <a style="margin: 10px 0; padding: 5px; border: 1px solid #999" href="/events/ical/{$obj->getId()}.ics"><img src="/img/icones/cal.svg" width="16" height="16">Ajout au calendrier</a>
       <br class="clear" style="clear: both;">
     </div>

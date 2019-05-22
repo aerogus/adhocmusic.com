@@ -40,7 +40,6 @@ class Controller
             'datdeb' => $datdeb,
             'datfin' => $datfin,
             'limit'  => 1000,
-            'fetch_fb' => true,
         ]);
 
         $nb_events = count($_events);

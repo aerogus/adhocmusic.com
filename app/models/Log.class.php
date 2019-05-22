@@ -91,7 +91,6 @@ class Log
         self::ACTION_FORUM_EDIT            => "Edition d'un message d'un forum",
         self::ACTION_FORUM_DELETE          => "Suppression d'un message d'un forum",
         self::ACTION_LOGIN                 => "Identification OK",
-        self::ACTION_LOGIN_FACEBOOK        => "Identification via FB OK",
         self::ACTION_LOGIN_FAILED          => "Identification KO",
         self::ACTION_LOGOUT                => "Déconnexion",
         self::ACTION_SEARCH                => "Requête de recherche",

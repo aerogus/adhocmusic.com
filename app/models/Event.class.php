@@ -672,7 +672,6 @@ class Event extends ObjectModel
      *              ['debut']       => 0
      *              ['limit']       => 5000
      *              ['online']      => true
-     *              ['fetch_fb']    => false
      * datdeb et datfin obligatoires, le reste facultatif
      * @return array
      */
@@ -722,11 +721,6 @@ class Event extends ObjectModel
         $online = null;
         if (isset($params['online'])) {
             $online = (bool) $params['online'];
-        }
-
-        $fetch_fb = false;
-        if (!empty($params['fetch_fb'])) {
-            $fetch_fb = true;
         }
 
         $lat = 0;
@@ -860,17 +854,6 @@ class Event extends ObjectModel
             $evts[$idx]['flyer_100_url'] = self::getFlyerUrl($_res['id'], 100, 100);
             $evts[$idx]['flyer_400_url'] = self::getFlyerUrl($_res['id'], 400, 400);
             $evts[$idx]['structure_picto'] = Structure::getPictoById($_res['structure_id']);
-            if (false && $_res['facebook_event_id'] && ($_res['facebook_event_attending'] == 0)) { // && $_res['modified_on'] > 1h) {
-                if (!empty($_SESSION['fb'])) {
-                    $tmp = $_SESSION['fb']->api('/' . $_res['facebook_event_id'] . '/attending');
-                    $nb_attending = (int) sizeof($tmp['data']);
-                    $evts[$idx]['facebook_event_attending'] = $nb_attending;
-                    $evt = Event::getInstance($_res['id']);
-                    $evt->setFacebookEventAttending($nb_attending);
-                    $evt->setModifiedNow();
-                    $evt->save();
-                }
-            }
         }
 
         unset($res);
