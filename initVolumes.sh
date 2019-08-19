@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ##
 # Création des volumes sur l'hôte docker nécessaires au fonctionnement du projet

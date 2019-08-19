@@ -2,13 +2,12 @@
 
 https://adhocmusic.com
 
-## Prérequis :
+## Prérequis globaux :
 
-node
-npm
-brunch
-composer
-docker
+- node
+- npm
+- composer
+- docker
 
 ## Installation du projet :
 
@@ -26,7 +25,7 @@ git clone git@bitbucket.org:adhocmusic/adhocmusic.com.git
 cd adhocmusic.com
 npm install
 composer install
-brunch build --production
+./node_modules/.bin/brunch build --production
 docker-compose up
 ```
 

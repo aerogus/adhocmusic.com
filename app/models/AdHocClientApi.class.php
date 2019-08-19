@@ -3,7 +3,6 @@
 /**
  * Client de l'API REST/JSON AD'HOC
  *
- * @package adhoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class AdHocClientApi
@@ -15,7 +14,8 @@ class AdHocClientApi
     /**
      * Exécute une requête sur l'API REST AD'HOC
      *
-     * @param array $data
+     * @param array $data données
+     *
      * @return string
      */
     static function query(array $data) : string
