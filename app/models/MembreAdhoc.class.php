@@ -91,10 +91,11 @@ class MembreAdhoc extends Membre
     }
 
     /**
-     * @param bool
+     * @param bool $fusion
+     *
      * @return array
      */
-    protected function _getAllFields($fusion = true)
+    protected function _getAllFields($fusion = true): array
     {
         if ($fusion) {
             return array_merge(
@@ -103,11 +104,13 @@ class MembreAdhoc extends Membre
                 MembreAdhoc::$_all_fields
             );
         } else {
-            return array_merge([
-                'contact' => Contact::$_all_fields,
-                'membre' => Membre::$_all_fields,
-                'membre_adhoc' => MembreAdhoc::$_all_fields,
-            ]);
+            return array_merge(
+                [
+                    'contact' => Contact::$_all_fields,
+                    'membre' => Membre::$_all_fields,
+                    'membre_adhoc' => MembreAdhoc::$_all_fields,
+                ]
+            );
         }
     }
 

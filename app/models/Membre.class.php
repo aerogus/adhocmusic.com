@@ -302,7 +302,7 @@ class Membre extends Contact
      * @param bool
      * @return array
      */
-    protected function _getAllFields($fusion = true)
+    protected function _getAllFields($fusion = true): array
     {
         if ($fusion) {
             return array_merge(
@@ -310,10 +310,12 @@ class Membre extends Contact
                 Membre::$_all_fields
             );
         } else {
-            return array_merge([
-                'contact' => Contact::$_all_fields,
-                'membre' => Membre::$_all_fields,
-            ]);
+            return array_merge(
+                [
+                    'contact' => Contact::$_all_fields,
+                    'membre' => Membre::$_all_fields,
+                ]
+            );
         }
     }
 

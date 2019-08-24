@@ -101,7 +101,7 @@ abstract class ObjectModel
      *
      * @return array
      */
-    protected function _getAllFields(bool $fusion = true)
+    protected function _getAllFields(bool $fusion = true): array
     {
         return static::$_all_fields;
     }
