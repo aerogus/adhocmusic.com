@@ -4,7 +4,8 @@
 # Création des volumes sur l'hôte docker nécessaires au fonctionnement du projet
 ##
 
-VOL_PATH=volumes
+ABS_PATH="$( cd "$(dirname "$0")" || return; pwd -P )"
+VOL_PATH="$ABS_PATH/volumes"
 
 dirs=(
   "$VOL_PATH"
