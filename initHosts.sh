@@ -3,7 +3,7 @@
 # Ajout des hostnames des conteneurs docker
 #
 
-rules="127.0.0.1 adhocmusic.test www.adhocmusic.test static.adhocmusic.test php.adhocmusic.test mysql.adhocmusic.test pma.adhocmusic.test"
+rules="127.0.0.1 adhocmusic.test www.adhocmusic.test static.adhocmusic.test php.adhocmusic.test mariadb.adhocmusic.test mysql.adhocmusic.test pma.adhocmusic.test"
 hosts="/etc/hosts"
 
 if ! grep -q "$rules" $hosts; then

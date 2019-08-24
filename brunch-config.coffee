@@ -13,6 +13,8 @@ exports.config =
       #'unlink ./public/img/cache && ln -s ../../cache/img ./public/img/cache'
     ]
     postcss:
+      options:
+        relative: true
       processors: [
         # permet inline() en css
         require('postcss-assets')

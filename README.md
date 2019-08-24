@@ -1,6 +1,6 @@
 # ADHOCMUSIC.COM
 
-https://adhocmusic.com
+https://www.adhocmusic.com
 
 ## Prérequis globaux :
 
