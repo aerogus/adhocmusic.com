@@ -4,7 +4,7 @@
 require_once __DIR__ . '/../config.php';
 
 /**
- * vérification des incohérences dans la base de données AD'HOC
+ * Vérification des incohérences dans la base de données AD'HOC
  * car les tables sont en MyISAM et n'ont pas l'intégrité référentielle
  * une fois les incohérences éradiquées on pourra songer à passer
  * les tables importantes en InnoDB.

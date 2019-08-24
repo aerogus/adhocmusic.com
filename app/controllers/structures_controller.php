@@ -3,7 +3,7 @@
 /**
  *
  */
-class Controller
+final class Controller
 {
     /**
      *
@@ -79,36 +79,18 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form_structure_create($data, $errors))
-            {
+            if (self::_validateStructureCreateForm($data, $errors)) {
                 $structure = Structure::init();
                 $structure->setName($data['name']);
                 $structure->setCreatedNow();
                 $structure->save();
-
                 Tools::redirect('/structures/?create=1');
-            }
-            else
-            {
+            } else {
                 // todo
             }
         }
 
         return $smarty->fetch('structures/create.tpl');
-    }
-
-    /**
-     * validation du formulaire de création structure
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_structure_create(array $data, array &$errors) : bool
-    {
-        if (count($errors)) {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -124,47 +106,26 @@ class Controller
 
         $smarty->enqueue_script('/js/structure-edit.js');
 
-        if (Tools::isSubmit('form-structure-edit'))
-        {
+        if (Tools::isSubmit('form-structure-edit')) {
             $data = [
                 'name' => (string) Route::params('name'),
             ];
             $errors = [];
 
-            if (self::_validate_form_structure_edit($data, $errors))
-            {
+            if (self::_validateStructureEditForm($data, $errors)) {
                 $structure = Structure::getInstance((int) Route::params('id'));
                 $structure->setName($data['name']);
                 $structure->setModifiedNow();
                 $structure->save();
-
                 Tools::redirect('/structures/?edit=1');
-            }
-            else
-            {
+            } else {
                 // todo
             }
-
         }
 
         $smarty->assign('structure', Structure::getInstance($id));
 
         return $smarty->fetch('structures/edit.tpl');
-    }
-
-    /**
-     * validation du formulaire de modification structure
-     *
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_structure_edit(array $data, array &$errors) : bool
-    {
-        if (count($errors)) {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -193,5 +154,37 @@ class Controller
         $smarty->assign('structure', $structure);
 
         return $smarty->fetch('structures/delete.tpl');
+    }
+
+    /**
+     * Validation du formulaire de création structure
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateStructureCreateForm(array $data, array &$errors) : bool
+    {
+        if (count($errors)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Validation du formulaire de modification structure
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateStructureEditForm(array $data, array &$errors) : bool
+    {
+        if (count($errors)) {
+            return false;
+        }
+        return true;
     }
 }

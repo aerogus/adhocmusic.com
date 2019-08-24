@@ -53,6 +53,7 @@ abstract class ObjectModel
      *
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      * (ou un tableau de tableau avec le nom de la db_table comme clé du 1er tableau)
+     *
      * @var array
      */
     protected $_modified_fields = [];
@@ -97,9 +98,10 @@ abstract class ObjectModel
 
     /**
      * @param bool
+     *
      * @return array
      */
-    protected function _getAllFields($fusion = true)
+    protected function _getAllFields(bool $fusion = true)
     {
         return static::$_all_fields;
     }
@@ -193,8 +195,8 @@ abstract class ObjectModel
     {
         $db = DataBase::getInstance();
 
-        if (!$this->getId()) // INSERT
-        {
+        if (!$this->getId()) { // INSERT
+
             $sql = "INSERT INTO `" . static::$_table . "` (";
             foreach (static::$_all_fields as $field => $type) {
                 $sql .= "`" . $field . "`,";
@@ -240,9 +242,9 @@ abstract class ObjectModel
             $this->setId((int) $db->insertId());
 
             return $this->getId();
-        }
-        else // UPDATE
-        {
+
+        } else { // UPDATE
+
             if (count($this->_modified_fields) == 0) {
                 return true;
             }
@@ -295,7 +297,7 @@ abstract class ObjectModel
     }
 
     /**
-     * efface l'enregistrement dans la table relative à l'objet
+     * Efface l'enregistrement dans la table relative à l'objet
      *
      * @return bool
      */
@@ -315,15 +317,13 @@ abstract class ObjectModel
     }
 
     /**
-     * @param array
+     * @param array $data
      */
     protected function _dbToObject($data)
     {
         $all_fields = static::_getAllFields(true);
-        foreach ($data as $k => $v)
-        {
-            if (array_key_exists($k, $all_fields))
-            {
+        foreach ($data as $k => $v) {
+            if (array_key_exists($k, $all_fields)) {
                 $att = '_' . $k;
                 if ($all_fields[$k] === 'phpser') {
                     $this->$att = unserialize($v);

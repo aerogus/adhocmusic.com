@@ -1,7 +1,9 @@
 #!/usr/bin/php
 <?php
 
-// envoi d'une newsletter
+/**
+ * Envoi d'une newsletter
+ */
 
 // n° de newslette a traiter
 define('ID_NEWSLETTER', 87);
@@ -20,9 +22,9 @@ $newsletter = Newsletter::getInstance(ID_NEWSLETTER);
 // base de test
 $subs = [
     ['id_contact' => 1, 'email' => 'guillaume@seznec.fr', 'pseudo' => 'gus', 'lastnl' => ''],
-//    ['id_contact' => 1, 'email' => 'gilles.taddei@gmail.com', 'pseudo' => 'gillex', 'lastnl' => ''],
-//    ['id_contact' => 7018, 'email' => 'lara.etcheverry@gmail.com', 'pseudo' => 'lara', 'lastnl' => ''],
-//    ['id_contact' => 2, 'email' => 'truc.invalide@oiuofdsg.com', 'pseudo' => 'rien', 'lastnl' => ''],
+    //['id_contact' => 1, 'email' => 'gilles.taddei@gmail.com', 'pseudo' => 'gillex', 'lastnl' => ''],
+    //['id_contact' => 7018, 'email' => 'lara.etcheverry@gmail.com', 'pseudo' => 'lara', 'lastnl' => ''],
+    //['id_contact' => 2, 'email' => 'truc.invalide@oiuofdsg.com', 'pseudo' => 'rien', 'lastnl' => ''],
 ];
 
 // base de prod
@@ -34,10 +36,11 @@ die();
 
 $n = 1;
 
-foreach ($subs as $sub)
-{
+foreach ($subs as $sub) {
     // suite après plantage
-    if ($sub['id_contact'] < MIN_CONTACT_ID) { continue; }
+    if ($sub['id_contact'] < MIN_CONTACT_ID) {
+        continue;
+    }
 
     $log = ID_NEWSLETTER . "\t" . $n . "\t" . $sub['id_contact'] . " \t\t" . $sub['lastnl'] . "\t\t" . $sub['email'] . "\t\t" . $sub['pseudo'];
     echo $log . "\n";

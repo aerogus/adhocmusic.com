@@ -4,7 +4,7 @@
 require_once __DIR__ . '/../config.php';
 
 /**
- * désabonne des emails de la newsletter
+ * Désabonne des emails de la newsletter
  *
  * @param string $argv[1] email(s) à désinscrire séparés par une virgule
  */

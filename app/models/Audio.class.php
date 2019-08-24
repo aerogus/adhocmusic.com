@@ -345,7 +345,9 @@ class Audio extends Media
             } elseif (is_array($id_audio)) {
                 $first  = true;
                 foreach ($id_audio as $id) {
-                    if (!$first) { $chemin .= '|'; }
+                    if (!$first) {
+                        $chemin .= '|';
+                    }
                     $chemin .= self::getBaseUrl() . '/' . $id . '.mp3';
                     $first = false;
                 }
@@ -397,7 +399,7 @@ class Audio extends Media
     }
 
     /**
-     * retourne le nombre total d'audios d'un visiteur loggué
+     * Retourne le nombre total d'audios d'un visiteur loggué
      */
     static function getMyAudiosCount()
     {
@@ -423,7 +425,7 @@ class Audio extends Media
     }
 
     /**
-     * retourne le nombre total d'audios
+     * Retourne le nombre total d'audios
      *
      * @return int
      */

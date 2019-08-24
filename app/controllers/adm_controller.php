@@ -11,7 +11,7 @@ define('ADM_NEWSLETTER_CURRENT_ID', 72);
 define('ADM_NEWSLETTER_NB_EMAILS_PER_LOT', 400);
 define('ADM_NEWSLETTER_GROUPE_CURRENT_ID', 37);
 
-class Controller
+final class Controller
 {
     static function index() : string
     {
@@ -59,12 +59,14 @@ class Controller
 
         $smarty = new AdHocSmarty();
 
-        $groupes = Groupe::getGroupes([
-            'sort'  => $sort,
-            'sens'  => $sens,
-            'debut' => $page * ADM_NB_GROUPES_PER_PAGE,
-            'limit' => ADM_NB_GROUPES_PER_PAGE,
-        ]);
+        $groupes = Groupe::getGroupes(
+            [
+                'sort'  => $sort,
+                'sens'  => $sens,
+                'debut' => $page * ADM_NB_GROUPES_PER_PAGE,
+                'limit' => ADM_NB_GROUPES_PER_PAGE,
+            ]
+        );
 
         $nb_groupes = Groupe::getGroupesCount(null, true);
 
@@ -150,8 +152,7 @@ class Controller
         $smarty->assign('page', $page);
 
         // test ajax
-        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest')
-        {
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
             return $smarty->fetch('adm/membres/index-res.tpl');
         }
 
@@ -331,8 +332,7 @@ class Controller
         $rows = $db->queryWithFetch($sql);
 
         $tab = [];
-        foreach ($rows as $row)
-        {
+        foreach ($rows as $row) {
             $tab[$row['id_groupe']]['id_groupe'] = $row['id_groupe'];
             $tab[$row['id_groupe']]['nom_groupe'] = $row['nom_groupe'];
             $tab[$row['id_groupe']]['events'][] = [
@@ -343,8 +343,7 @@ class Controller
         }
 
         $ordre = [];
-        foreach ($tab as $id_groupe => $inf)
-        {
+        foreach ($tab as $id_groupe => $inf) {
             $ordre[$id_groupe] = count($inf['events']);
         }
 
@@ -352,8 +351,7 @@ class Controller
 
         $data = [];
         $rank = 1;
-        foreach ($ordre as $id_groupe => $nb)
-        {
+        foreach ($ordre as $id_groupe => $nb) {
             $data[$rank] = $tab[$id_groupe];
             $data[$rank]['nb'] = $nb;
             $rank++;

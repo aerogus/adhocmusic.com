@@ -1,6 +1,6 @@
 <?php
 
-class Controller
+final class Controller
 {
     static function newsletter() : string
     {

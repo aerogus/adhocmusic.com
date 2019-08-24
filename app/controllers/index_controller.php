@@ -1,7 +1,12 @@
 <?php
 
-class Controller
+final class Controller
 {
+    /**
+     * Homepage
+     *
+     * @return string
+     */
     static function index() : string
     {
         $page = (int) Route::params('page');
@@ -13,29 +18,34 @@ class Controller
         $smarty->assign('og_type', 'website');
         $smarty->assign('og_image', HOME_URL . '/img/screenshot-homepage.jpg');
 
-        $smarty->assign('videos', Video::getVideos([
-            'online' => true,
-            'sort'   => 'random',
-            'lieu'   => 1,
-            'limit'  => 6,
-        ]));
+        $smarty->assign(
+            'videos', Video::getVideos(
+                [
+                    'online' => true,
+                    'sort'   => 'random',
+                    'lieu'   => 1,
+                    'limit'  => 6,
+                ]
+            )
+        );
 
         $smarty->assign('featured', Featured::getFeaturedHomepage());
         $smarty->enqueue_script('/js/swipe.min.js');
         $smarty->enqueue_script('/js/featured.js');
 
-        $events = Event::getEvents([
-            'online'      => true,
-            'sort'        => 'date',
-            'sens'        => 'ASC',
-            'limit'       => 30,
-            'datdeb'      => date('Y-m-d'),
-        ]);
+        $events = Event::getEvents(
+            [
+                'online' => true,
+                'sort'   => 'date',
+                'sens'   => 'ASC',
+                'limit'  => 30,
+                'datdeb' => date('Y-m-d'),
+            ]
+        );
 
         // tri par mois
         $evts = [];
-        foreach ($events as $event)
-        {
+        foreach ($events as $event) {
             $month = substr($event['date'], 0, 7).'-01';
             if (!array_key_exists($month, $evts)) {
                 $evts[$month] = [];
@@ -51,6 +61,8 @@ class Controller
 
     /**
      * Les partenaires
+     *
+     * @return string
      */
     static function partners() : string
     {
@@ -65,6 +77,11 @@ class Controller
         return $smarty->fetch('partners.tpl');
     }
 
+    /**
+     * Formulaire de contact
+     *
+     * @return string
+     */
     static function contact() : string
     {
         $smarty = new AdHocSmarty();
@@ -95,9 +112,7 @@ class Controller
             $data['email'] = $_SESSION['membre']->getEmail();
         }
 
-        if (Tools::isSubmit('form-contact'))
-        {
-			die('maintenance'); // MAINTENANCE le temps de trouver la parade
+        if (Tools::isSubmit('form-contact')) {
 
             if (Tools::checkCSRFToken((string) Route::params('check')) === false) {
                 //die(); // mauvais code sécurité
@@ -114,7 +129,7 @@ class Controller
             ];
             $errors = [];
 
-            self::_validate_form_contact($data, $errors);
+            self::_validateContactForm($data, $errors);
 
             if (empty($errors)) {
 
@@ -157,31 +172,11 @@ class Controller
         return $smarty->fetch('contact.tpl');
     }
 
-    protected static function _validate_form_contact(array $data, array &$errors) : bool
-    {
-        if (empty($data['name'])) {
-            $errors['name'] = "Vous devez renseigner votre nom";
-        }
-        if (empty($data['email'])) {
-            $errors['email'] = "Vous devez préciser votre email";
-        } elseif (!Email::validate($data['email'])) {
-            $errors['email'] = "Votre Email semble invalide ...";
-        }
-        if (empty($data['subject'])) {
-            $errors['subject'] = "Vous devez saisir un sujet";
-        }
-        if (empty($data['text'])) {
-            $errors['text'] = "Vous devez écrire quelque chose !";
-        } elseif (strlen($data['text']) < 8) {
-            $errors['text'] = "Message un peu court !";
-        } elseif ((strpos($data['text'], '[link=') !== false)
-              || (strpos($data['text'], '[url=') !== false)
-              || (strpos($data['text'], '<a href=') !== false)) {
-            $errors['text'] = "Message un peu douteux Michel !";
-        }
-        return true;
-    }
-
+    /**
+     * Plan du site
+     *
+     * @return string
+     */
     static function sitemap() : string
     {
         $smarty = new AdHocSmarty();
@@ -276,5 +271,39 @@ class Controller
         $trail->addStep("Guide de style");
 
         return $smarty->fetch('styleguide.tpl');
+    }
+
+    /**
+     * Routine de validation des données du formulaire
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateContactForm(array $data, array &$errors) : bool
+    {
+        if (empty($data['name'])) {
+            $errors['name'] = "Vous devez renseigner votre nom";
+        }
+        if (empty($data['email'])) {
+            $errors['email'] = "Vous devez préciser votre email";
+        } elseif (!Email::validate($data['email'])) {
+            $errors['email'] = "Votre Email semble invalide ...";
+        }
+        if (empty($data['subject'])) {
+            $errors['subject'] = "Vous devez saisir un sujet";
+        }
+        if (empty($data['text'])) {
+            $errors['text'] = "Vous devez écrire quelque chose !";
+        } elseif (strlen($data['text']) < 8) {
+            $errors['text'] = "Message un peu court !";
+        } elseif ((strpos($data['text'], '[link=') !== false)
+            || (strpos($data['text'], '[url=') !== false)
+            || (strpos($data['text'], '<a href=') !== false)
+        ) {
+            $errors['text'] = "Message un peu douteux Michel !";
+        }
+        return true;
     }
 }

@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 
+##
+# test de la validité syntaxique des scripts php
+##
+
+ABS_PATH="$( cd "$(dirname "$0")" || return; pwd -P )"
+
 declare -a dirs=(
-  "./.."
-  "./../assets"
-  "./../controllers"
-  "./../models"
-  "./../scripts"
+  "$ABS_PATH/.."
+  "$ABS_PATH/../assets"
+  "$ABS_PATH/../controllers"
+  "$ABS_PATH/../models"
+  "$ABS_PATH/../scripts"
 )
 
 reset=$(tput sgr0)
@@ -18,9 +24,9 @@ e_error() { printf "${red}✖ %s${reset}\n" "$@"; }
 echo "Test syntaxique du code PHP AD'HOC"
 echo "PHP v.$(php -v)"
 
-for dir in ${dirs[@]}; do
+for dir in "${dirs[@]}"; do
   printf "Répertoire: %s\n" "$dir"
-  for file in $dir/*.php; do
+  for file in "$dir"/*.php; do
     printf "Analyse: %s " "$file"
     res=$(php -l "$file" 2>&1)
     if [[ "$res" =~ "No syntax errors detected" ]]; then

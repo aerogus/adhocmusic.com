@@ -2,7 +2,7 @@
 <?php
 
 /**
- * vieux groupes n'ayant jamais mis à jour leur fiche depuis des lustres
+ * Vieux groupes n'ayant jamais mis à jour leur fiche depuis des lustres
  */
 
 require_once __DIR__ . '/../config.php';

@@ -147,9 +147,9 @@ class Newsletter extends ObjectModel
             $html
         );
 
-		// A DEBUGGUER
+        // A DEBUGGUER
 
-		/*
+        /*
         // extraction des liens href
         $res = preg_match_all('/<a\shref="([^"]*)"/U', $html, $urls);
 
@@ -168,15 +168,15 @@ class Newsletter extends ObjectModel
             array_values($tracking_links),
             $html
         );
-		*/
+        */
 
         return $html;
     }
 
-	function getIdContact()
-	{
-		return (int) $this->_id_contact;
-	}
+    function getIdContact()
+    {
+        return (int) $this->_id_contact;
+    }
 
     /**
      * @param int $id_contact
@@ -216,8 +216,7 @@ class Newsletter extends ObjectModel
      */
     function setContent($val)
     {
-        if ($this->_content !== $val)
-        {
+        if ($this->_content !== $val) {
             $this->_content = (string) $val;
             $this->_modified_fields['content'] = true;
         }

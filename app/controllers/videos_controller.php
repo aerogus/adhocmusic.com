@@ -7,7 +7,7 @@
 
 define('NB_VIDEOS_PER_PAGE', 48);
 
-class Controller
+final class Controller
 {
     /**
      * Liste de mes vidéos
@@ -31,13 +31,15 @@ class Controller
             ]);
             $nb_videos = Video::getVideosCount();
         } else {
-            $videos = Video::getVideos([
-                'contact' => $_SESSION['membre']->getId(),
-                'limit'   => NB_VIDEOS_PER_PAGE,
-                'debut'   => $page * NB_VIDEOS_PER_PAGE,
-                'sort'    => 'id',
-                'sens'    => 'ASC',
-            ]);
+            $videos = Video::getVideos(
+                [
+                    'contact' => $_SESSION['membre']->getId(),
+                    'limit'   => NB_VIDEOS_PER_PAGE,
+                    'debut'   => $page * NB_VIDEOS_PER_PAGE,
+                    'sort'    => 'id',
+                    'sens'    => 'ASC',
+                ]
+            );
             $nb_videos = Video::getMyVideosCount();
         }
 
@@ -55,6 +57,8 @@ class Controller
 
     /**
      * Visualisation d'une vidéo
+     *
+     * @return string
      */
     static function show() : string
     {
@@ -137,29 +141,41 @@ class Controller
 
             // vidéos et photos liées à l'événement/lieu
             if ($video->getIdEvent() && $video->getIdLieu()) {
-                $smarty->assign('photos', Photo::getPhotos([
-                    'event'  => $video->getIdEvent(),
-                    'online' => true,
-                    'sort'   => 'random',
-                    'limit'  => 30,
-                ]));
-                $smarty->assign('videos', Video::getVideos([
-                    'event'  => $video->getIdEvent(),
-                    'online' => true,
-                    'sort'   => 'random',
-                    'limit'  => 30,
-                ]));
+                $smarty->assign(
+                    'photos', Photo::getPhotos(
+                        [
+                            'event'  => $video->getIdEvent(),
+                            'online' => true,
+                            'sort'   => 'random',
+                            'limit'  => 30,
+                        ]
+                    )
+                );
+                $smarty->assign(
+                    'videos', Video::getVideos(
+                        [
+                            'event'  => $video->getIdEvent(),
+                            'online' => true,
+                            'sort'   => 'random',
+                            'limit'  => 30,
+                        ]
+                    )
+                );
             }
 
             $smarty->assign('description', $meta_description);
 
-            $smarty->assign('comments', Comment::getComments([
-                'type'       => 'v',
-                'id_content' => $video->getId(),
-                'online'     => true,
-                'sort'       => 'created_on',
-                'sens'       => 'ASC',
-            ]));
+            $smarty->assign(
+                'comments', Comment::getComments(
+                    [
+                        'type'       => 'v',
+                        'id_content' => $video->getId(),
+                        'online'     => true,
+                        'sort'       => 'created_on',
+                        'sens'       => 'ASC',
+                    ]
+                )
+            );
 
         } else {
 
@@ -189,7 +205,7 @@ class Controller
 
         if ($video->getOnline()) {
             $smarty->assign('video', $video);
-         } else {
+        } else {
             $smarty->assign('unknown_video', true);
         }
 
@@ -207,8 +223,7 @@ class Controller
 
         $smarty->enqueue_script('/js/video-create.js');
 
-        if (Tools::isSubmit('form-video-create'))
-        {
+        if (Tools::isSubmit('form-video-create')) {
             $data = [
                 'name' => (string) Route::params('name'),
                 'id_groupe' => (int) Route::params('id_groupe'),
@@ -222,7 +237,7 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form_video_create($data, $errors)) {
+            if (self::_validateVideoCreateForm($data, $errors)) {
 
                 $info = Video::parseStringForVideoUrl($data['code']);
                 $data['id_host'] = $info['id_host'];
@@ -307,29 +322,6 @@ class Controller
     }
 
     /**
-     * validation du formulaire de modification vidéo
-     *
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_video_create(array $data, array &$errors) : bool
-    {
-        if (empty($data['name'])) {
-            $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
-        }
-        if (empty($data['code'])) {
-            $errors['code'] = "Vous devez copier/coller l'url de la vidéo";
-        } elseif (Video::parseStringForVideoUrl($data['code']) === false) {
-            $errors['unknown_host'] = "Url de la vidéo non reconnue";
-        }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Édition d'une vidéo
      */
     static function edit() : string
@@ -363,7 +355,7 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form_video_edit($data, $errors)) {
+            if (self::_validateVideoEditForm($data, $errors)) {
 
                 $video->setName($data['name']);
                 $video->setIdLieu($data['id_lieu']);
@@ -416,24 +408,6 @@ class Controller
         }
 
         return $smarty->fetch('videos/edit.tpl');
-    }
-
-    /**
-     * validation du formulaire de modification vidéo
-     *
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_video_edit(array $data, array &$errors) : bool
-    {
-        if (empty($data['name'])) {
-            $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
-        }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -506,5 +480,48 @@ class Controller
         }
 
         return $out;
+    }
+
+    /**
+     * Validation du formulaire de modification vidéo
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateVideoCreateForm(array $data, array &$errors) : bool
+    {
+        if (empty($data['name'])) {
+            $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
+        }
+        if (empty($data['code'])) {
+            $errors['code'] = "Vous devez copier/coller l'url de la vidéo";
+        } elseif (Video::parseStringForVideoUrl($data['code']) === false) {
+            $errors['unknown_host'] = "Url de la vidéo non reconnue";
+        }
+        if (count($errors)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Validation du formulaire de modification vidéo
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateVideoEditForm(array $data, array &$errors) : bool
+    {
+        if (empty($data['name'])) {
+            $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
+        }
+        if (count($errors)) {
+            return false;
+        }
+        return true;
     }
 }

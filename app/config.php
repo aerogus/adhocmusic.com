@@ -126,9 +126,11 @@ ini_set('arg_separator.output',  '&amp;');
 ini_set('session.use_trans_sid', '0');
 
 /**
- * mini fonction de debug
+ * Mini fonction de debug
  *
- * @var mixed
+ * @param mixed $var
+ *
+ * @return void
  */
 function p(mixed $var)
 {
@@ -136,8 +138,10 @@ function p(mixed $var)
 }
 
 /**
- * mini fonction de debug
- * @var mixed
+ * Mini fonction de debug
+ *
+ * @param mixed $var
+ *
  * @return string
  */
 function d(mixed $var)
@@ -152,7 +156,8 @@ require_once ADHOC_ROOT_PATH . '/vendor/autoload.php';
 
 /**
  * Chargement automatique des classes métiers AD'HOC
- * @param string Nom de la classe
+ *
+ * @param string $class_name Nom de la classe
  */
 function autoload(string $class_name)
 {

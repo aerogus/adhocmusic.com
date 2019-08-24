@@ -1,7 +1,9 @@
 <?php
 
 /**
- * fonctions et modifiers custom pour Smarty
+ * Fonctions et modifiers custom pour Smarty
+ *
+ * @package AdHoc
  */
 class AdHocSmarty extends Smarty
 {
@@ -79,7 +81,7 @@ class AdHocSmarty extends Smarty
     /* début fonctions */
 
     /**
-     * retourne le player audio
+     * Retourne le player audio
      *
      * @param array ['type'] ['id']
      * @return string

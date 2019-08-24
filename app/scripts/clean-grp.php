@@ -13,8 +13,9 @@
 
 require_once __DIR__ . '/../config.php';
 
-if (empty($argv[1]))
-  die('usage: cleangrp.php alias_groupe');
+if (empty($argv[1])) {
+    die('usage: cleangrp.php alias_groupe');
+}
 
 $alias = $argv[1];
 $do = false;
@@ -22,8 +23,9 @@ if (!empty($argv[2])) {
     $do = (bool) $argv[2];
 }
 
-if (!($id_groupe = Groupe::getIdByAlias($alias)))
-  die('groupe ' . $alias . ' introuvable');
+if (!($id_groupe = Groupe::getIdByAlias($alias))) {
+    die('groupe ' . $alias . ' introuvable');
+}
 
 $groupe = Groupe::getInstance($id_groupe);
 echo "Groupe: " . $groupe->getName() . "\n";

@@ -1,6 +1,6 @@
 <?php
 
-class Controller
+final class Controller
 {
     static function index() : string
     {
@@ -33,8 +33,7 @@ class Controller
 
         $smarty->assign('auth', Membre::getTypesMembre());
 
-        if (Tools::isSubmit('form-cms-create'))
-        {
+        if (Tools::isSubmit('form-cms-create')) {
             $data = [
                 'alias'      => (string) Route::params('alias'),
                 'breadcrumb' => (string) Route::params('breadcrumb'),
@@ -75,8 +74,7 @@ class Controller
 
         $smarty->assign('auth', Membre::getTypesMembre());
 
-        if (Tools::isSubmit('form-cms-edit'))
-        {
+        if (Tools::isSubmit('form-cms-edit')) {
             $data = [
                 'id_cms'       => (int) Route::params('id_cms'),
                 'alias'        => (string) Route::params('alias'),
@@ -118,12 +116,10 @@ class Controller
         $trail->addStep("Pages Statiques", "/adm/cms/");
         $trail->addStep("Suppression");
 
-        if (Tools::isSubmit('form-cms-delete'))
-        {
-           $cms = CMS::getInstance($id);
-           $cms->delete();
-
-           Tools::redirect('/adm/cms/?delete=1');
+        if (Tools::isSubmit('form-cms-delete')) {
+            $cms = CMS::getInstance($id);
+            $cms->delete();
+            Tools::redirect('/adm/cms/?delete=1');
         }
 
         $smarty->assign('cms', CMS::getInstance($id));

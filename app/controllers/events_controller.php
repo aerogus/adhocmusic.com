@@ -2,7 +2,7 @@
 
 define('NB_EVENTS_PER_PAGE', 100);
 
-class Controller
+final class Controller
 {
     static function index() : string
     {
@@ -334,7 +334,7 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form_event_create($data, $errors)) {
+            if (self::_validateEventCreateForm($data, $errors)) {
 
                 $event = Event::init();
                 $event->setName($data['name']);
@@ -434,21 +434,6 @@ class Controller
         return $smarty->fetch('events/create.tpl');
     }
 
-    /**
-     * validation du formulaire de création event
-     *
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_event_create(array $data, array &$errors) : bool
-    {
-        if (count($errors)) {
-            return false;
-        }
-        return true;
-    }
-
     static function edit() : string
     {
         $id = (int) Route::params('id');
@@ -514,7 +499,7 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form_event_edit($data, $errors)) {
+            if (self::_validateEventEditForm($data, $errors)) {
 
                 $event = Event::getInstance($data['id']);
                 $event->setName($data['name']);
@@ -611,21 +596,6 @@ class Controller
     }
 
     /**
-     * validation du formulaire de modification event
-     *
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_event_edit(array $data, array &$errors) : bool
-    {
-        if (count($errors)) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * @return string ou HTTP:Redirect
      */
     static function delete() : string
@@ -678,5 +648,37 @@ class Controller
             'sens'   => 'ASC',
             'limit'  => 100,
         ]);
+    }
+
+    /**
+     * Validation du formulaire de création event
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateEventCreateForm(array $data, array &$errors) : bool
+    {
+        if (count($errors)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Validation du formulaire de modification event
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateEventEditForm(array $data, array &$errors) : bool
+    {
+        if (count($errors)) {
+            return false;
+        }
+        return true;
     }
 }

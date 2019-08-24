@@ -25,7 +25,7 @@ class Stats extends ObjectModel
     const BARGRAPH_MAX_WIDTH = 650;
 
     /**
-     * retourne le nombre d'inscriptions membres, par jour, depuis le début
+     * Retourne le nombre d'inscriptions membres, par jour, depuis le début
      *
      * @todo par mois et année
      * @return array
@@ -60,7 +60,7 @@ class Stats extends ObjectModel
     }
 
     /**
-     * retourne le nombre d'inscriptions groupes, par jour, depuis le début
+     * Retourne le nombre d'inscriptions groupes, par jour, depuis le début
      *
      * @todo par mois et année
      * @return array
@@ -138,7 +138,7 @@ class Stats extends ObjectModel
     }
 
     /**
-     * récupère la liste des membres ayant posté le plus de dates
+     * Récupère la liste des membres ayant posté le plus de dates
      *
      * @return array
      */
@@ -211,7 +211,7 @@ class Stats extends ObjectModel
     }
 
     /**
-     * récupère la liste des lieux avec le plus d'événements liés
+     * Récupère la liste des lieux avec le plus d'événements liés
      *
      * @return array
      */
@@ -247,7 +247,7 @@ class Stats extends ObjectModel
     }
 
     /**
-     * récupère le nombre de lieux référencés par département
+     * Récupère le nombre de lieux référencés par département
      *
      * @return array
      */
@@ -286,7 +286,7 @@ class Stats extends ObjectModel
     }
 
     /**
-     * récupère le nombre de lieux référencés par région
+     * Récupère le nombre de lieux référencés par région
      *
      * @return array
      */
@@ -335,7 +335,7 @@ class Stats extends ObjectModel
     }
 
     /**
-     * retourne le nombre d'événements annoncés dans l'agenda, par mois
+     * Retourne le nombre d'événements annoncés dans l'agenda, par mois
      *
      * @return array
      */
@@ -369,7 +369,7 @@ class Stats extends ObjectModel
     }
 
     /**
-     * récupère la liste des membres ayant posté le plus de messages
+     * Récupère la liste des membres ayant posté le plus de messages
      * dans les forums
      *
      * @return array
@@ -406,7 +406,7 @@ class Stats extends ObjectModel
     }
 
     /**
-     * récupère la liste des membres ayant posté le plus d'audios
+     * Récupère la liste des membres ayant posté le plus d'audios
      *
      * @return array
      */
@@ -442,7 +442,7 @@ class Stats extends ObjectModel
     }
 
     /**
-     * récupère la liste des membres ayant posté le plus de vidéos
+     * Récupère la liste des membres ayant posté le plus de vidéos
      *
      * @return array
      */
@@ -478,7 +478,7 @@ class Stats extends ObjectModel
     }
 
     /**
-     * récupère la liste des membres ayant posté le plus de photos
+     * Récupère la liste des membres ayant posté le plus de photos
      *
      * @return array
      */
@@ -514,7 +514,7 @@ class Stats extends ObjectModel
     }
 
     /**
-     * récupère la liste des groupes les plus visités
+     * Récupère la liste des groupes les plus visités
      *
      * @return array
      */
@@ -575,9 +575,10 @@ class Stats extends ObjectModel
     }
 
     /**
-     * récupère la liste des lieux ayant le + de photos
+     * Récupère la liste des lieux ayant le + de photos
      *
      * @param int $limit
+     *
      * @return array
      */
     static function getTopPhotosLieux()
@@ -611,9 +612,10 @@ class Stats extends ObjectModel
     }
 
     /**
-     * retourne les comptes pour un nom de domaine d'email donné
+     * Retourne les comptes pour un nom de domaine d'email donné
      *
      * @param string $domaine
+     *
      * @return array
      */
     static function getEmailsForDomaine($domaine)
@@ -638,7 +640,7 @@ class Stats extends ObjectModel
     }
 
     /**
-     * retourne les différents domaines présents dans la table contact
+     * Retourne les différents domaines présents dans la table contact
      *
      * @return array
      */
@@ -672,7 +674,7 @@ class Stats extends ObjectModel
     }
 
     /**
-     * retourne la répartition des vidéos de la base par hébergeur
+     * Retourne la répartition des vidéos de la base par hébergeur
      *
      * @return array
      */
@@ -707,10 +709,11 @@ class Stats extends ObjectModel
     }
 
     /**
-     * retourne l'image du bargraph
+     * Retourne l'image du bargraph
      *
      * @param int valeur courant
      * @param int valeur maximum
+     *
      * @return string
      */
     static function getBarGraph($value, $max)
@@ -723,10 +726,11 @@ class Stats extends ObjectModel
     }
 
     /**
-     * calcul du total et du max d'un tableau
+     * Calcul du total et du max d'un tableau
      *
      * @param array $tab
      * @param string $champ
+     *
      * @return array ['total', 'max']
      */
     static function getTotalAndMax(array $tab, string $champ)

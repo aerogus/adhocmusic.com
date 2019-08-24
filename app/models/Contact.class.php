@@ -66,10 +66,11 @@ class Contact extends ObjectModel
     ];
 
     /**
-     * @param bool
+     * @param bool $fusion
+     *
      * @return array
      */
-    protected function _getAllFields($fusion = true)
+    protected function _getAllFields($fusion = true): array
     {
         if ($fusion) {
             return self::$_all_fields;
@@ -91,9 +92,13 @@ class Contact extends ObjectModel
     }
 
     /**
-     * Extraction de l'email
+     * Extraction de l'email à partir de l'id
+     *
+     * @param int $id_contact id
+     *
+     * @return string|null
      */
-    static function getEmailById($id_contact)
+    static function getEmailById(int $id_contact)
     {
         $db = DataBase::getInstance();
 
@@ -117,6 +122,7 @@ class Contact extends ObjectModel
      * sinon si email null, retourne un tableau des id_contact avec email null
      *
      * @param string $email
+     *
      * @return int
      */
     static function getIdByEmail($email)

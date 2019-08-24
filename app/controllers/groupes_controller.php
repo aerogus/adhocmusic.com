@@ -1,6 +1,6 @@
 <?php
 
-class Controller
+final class Controller
 {
     static function index() : string
     {
@@ -175,7 +175,7 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form_groupe_create($data, $errors)) {
+            if (self::_validateGroupeCreateForm($data, $errors)) {
 
                 $groupe = Groupe::init();
                 $groupe->setName($data['name']);
@@ -250,40 +250,6 @@ class Controller
         return $smarty->fetch('groupes/create.tpl');
     }
 
-    /**
-     * validation du formulaire de création groupe
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_groupe_create(array $data, array &$errors) : bool
-    {
-        if (empty($data['name'])) {
-            $errors['name'] = true;
-        }
-        if (empty($data['style'])) {
-            $errors['style'] = true;
-        }
-        if (empty($data['influences'])) {
-            $errors['influences'] = true;
-        }
-        if (empty($data['lineup'])) {
-            $errors['lineup'] = true;
-        }
-        if (empty($data['mini_text'])) {
-            $errors['mini_text'] = true;
-        } elseif (mb_strlen($data['mini_text']) > 255) {
-            $errors['mini_text'] = true;
-        }
-        if (empty($data['text'])) {
-            $errors['text'] = true;
-        }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
-    }
-
     static function edit() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -339,7 +305,7 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form_groupe_edit($data, $errors)) {
+            if (self::_validateGroupeEditForm($data, $errors)) {
 
                 if ($groupe->isMember($_SESSION['membre']->getId()) === false) {
                     return 'edition du groupe non autorisée';
@@ -410,37 +376,6 @@ class Controller
         return $smarty->fetch('groupes/edit.tpl');
     }
 
-    /**
-     * validation du formulaire de modification groupe
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_groupe_edit(array $data, array &$errors) : bool
-    {
-        if (empty($data['style'])) {
-            $errors['style'] = true;
-        }
-        if (empty($data['influences'])) {
-            $errors['influences'] = true;
-        }
-        if (empty($data['lineup'])) {
-            $errors['lineup'] = true;
-        }
-        if (empty($data['mini_text'])) {
-            $errors['mini_text'] = true;
-        } elseif (mb_strlen($data['mini_text']) > 255) {
-            $errors['mini_text'] = true;
-        }
-        if (empty($data['text'])) {
-            $errors['text'] = true;
-        }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
-    }
-
     static function delete() : string
     {
         $id = (int) Route::params('id');
@@ -478,5 +413,74 @@ class Controller
         $smarty->assign('groupe', $groupe);
 
         return $smarty->fetch('groupes/delete.tpl');
+    }
+
+    /**
+     * Validation du formulaire de création groupe
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateGroupeCreateForm(array $data, array &$errors) : bool
+    {
+        if (empty($data['name'])) {
+            $errors['name'] = true;
+        }
+        if (empty($data['style'])) {
+            $errors['style'] = true;
+        }
+        if (empty($data['influences'])) {
+            $errors['influences'] = true;
+        }
+        if (empty($data['lineup'])) {
+            $errors['lineup'] = true;
+        }
+        if (empty($data['mini_text'])) {
+            $errors['mini_text'] = true;
+        } elseif (mb_strlen($data['mini_text']) > 255) {
+            $errors['mini_text'] = true;
+        }
+        if (empty($data['text'])) {
+            $errors['text'] = true;
+        }
+        if (count($errors)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Validation du formulaire de modification groupe
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateGroupeEditForm(array $data, array &$errors) : bool
+    {
+        if (empty($data['style'])) {
+            $errors['style'] = true;
+        }
+        if (empty($data['influences'])) {
+            $errors['influences'] = true;
+        }
+        if (empty($data['lineup'])) {
+            $errors['lineup'] = true;
+        }
+        if (empty($data['mini_text'])) {
+            $errors['mini_text'] = true;
+        } elseif (mb_strlen($data['mini_text']) > 255) {
+            $errors['mini_text'] = true;
+        }
+        if (empty($data['text'])) {
+            $errors['text'] = true;
+        }
+        if (count($errors)) {
+            return false;
+        }
+        return true;
     }
 }

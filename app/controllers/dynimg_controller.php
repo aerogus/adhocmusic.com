@@ -3,7 +3,7 @@
 define('DYNIMG_CACHE_PATH', ADHOC_ROOT_PATH . '/public/img/cache');
 define('DYNIMG_CACHE_ENABLED', true);
 
-class Controller
+final class Controller
 {
     static function mailing_banner()
     {
@@ -299,7 +299,7 @@ class Controller
         return $smarty->fetch('dynimg/tool.tpl');
     }
 
-    protected static function _fallback() : string
+    private static function _fallback() : string
     {
         $img = new Image();
         $img->init(2, 2, 'ffffff');

@@ -1,15 +1,11 @@
 <?php
 
 /**
- * @package adhoc
- */
-
-/**
  * Classe Alerting
  *
  * Classe des alertes mails groupes/lieux
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Alerting extends ObjectModel
@@ -54,12 +50,14 @@ class Alerting extends ObjectModel
 
     /**
      * type (g: groupe / l:lieu)
+     *
      * @var string
      */
     protected $_type = '';
 
     /**
      * id_groupe ou id_lieu
+     *
      * @var int
      */
     protected $_id_content = 0;

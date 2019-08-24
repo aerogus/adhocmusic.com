@@ -3,7 +3,7 @@
 /**
  * API AD'HOC
  */
-class Controller
+final class Controller
 {
     const VERSION = 1.0;
 

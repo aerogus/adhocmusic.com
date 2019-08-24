@@ -1,12 +1,6 @@
 <?php
 
 /**
- * @package adhoc
- */
-
-/**
- * Classe Structure
- *
  * Gestion des Structures / associations
  *
  * @package adhoc
@@ -90,6 +84,7 @@ class Structure extends ObjectModel
      * - numérique/integer/float/bool (= int)
      * - datetime/text (= str)
      * ceci est utile pour la formation de la requête
+     *
      * @var array
      */
     protected static $_all_fields = [
@@ -109,7 +104,8 @@ class Structure extends ObjectModel
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
      *
-     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => TRUE'.
+     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
+     *
      * @var array
      */
     protected $_modified_fields = [];
@@ -229,7 +225,8 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @var int
+     * @param int $id
+     *
      * @return string
      */
     static function getPictoById($id)
@@ -242,48 +239,44 @@ class Structure extends ObjectModel
     /* début setters */
 
     /**
-     * @param string
+     * @param string $val
      */
     function setName($val)
     {
-        if ($this->_name !== $val)
-        {
+        if ($this->_name !== $val) {
             $this->_name = (string) $val;
             $this->_modified_fields['name'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
     function setAddress($val)
     {
-        if ($this->_address !== $val)
-        {
+        if ($this->_address !== $val) {
             $this->_address = (string) $val;
             $this->_modified_fields['address'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
     function setCp($val)
     {
-        if ($this->_cp !== $val)
-        {
+        if ($this->_cp !== $val) {
             $this->_cp = (string) $val;
             $this->_modified_fields['cp'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
     function setCity($val)
     {
-        if ($this->_city !== $val)
-        {
+        if ($this->_city !== $val) {
             $this->_city = (string) $val;
             $this->_modified_fields['city'] = true;
         }
@@ -294,8 +287,7 @@ class Structure extends ObjectModel
      */
     function setTel($val)
     {
-        if ($this->_tel !== $val)
-        {
+        if ($this->_tel !== $val) {
             $this->_tel = (string) $val;
             $this->_modified_fields['tel'] = true;
         }
@@ -306,8 +298,7 @@ class Structure extends ObjectModel
      */
     function setFax($val)
     {
-        if ($this->_fax !== $val)
-        {
+        if ($this->_fax !== $val) {
             $this->_fax = (string) $val;
             $this->_modified_fields['fax'] = true;
         }
@@ -318,8 +309,7 @@ class Structure extends ObjectModel
      */
     function setIdDepartement($val)
     {
-        if ($this->_id_departement !== $val)
-        {
+        if ($this->_id_departement !== $val) {
             $this->_id_departement = (string) $val;
             $this->_modified_fields['id_departement'] = true;
         }
@@ -330,8 +320,7 @@ class Structure extends ObjectModel
      */
     function setText($val)
     {
-        if ($this->_text !== $val)
-        {
+        if ($this->_text !== $val) {
             $this->_text = (string) $val;
             $this->_modified_fields['text'] = true;
         }
@@ -342,8 +331,7 @@ class Structure extends ObjectModel
      */
     function setSite($val)
     {
-        if ($this->_site !== $val)
-        {
+        if ($this->_site !== $val) {
             $this->_site = (string) $val;
             $this->_modified_fields['site'] = true;
         }
@@ -354,8 +342,7 @@ class Structure extends ObjectModel
      */
     function setEmail($val)
     {
-        if ($this->_email !== $val)
-        {
+        if ($this->_email !== $val) {
             $this->_email = (string) $val;
             $this->_modified_fields['email'] = true;
         }
@@ -366,8 +353,7 @@ class Structure extends ObjectModel
      */
     function setIdCountry($val)
     {
-        if ($this->_id_country !== $val)
-        {
+        if ($this->_id_country !== $val) {
             $this->_id_country = (string) $val;
             $this->_modified_fields['id_country'] = true;
         }
@@ -419,7 +405,7 @@ class Structure extends ObjectModel
     }
 
     /**
-     * retourne le tableau de toutes les structures dans un tableau associatif
+     * Retourne le tableau de toutes les structures dans un tableau associatif
      *
      * @return array
      */
@@ -444,7 +430,7 @@ class Structure extends ObjectModel
     }
 
     /**
-     * retourne les infos sur une structure
+     * Retourne les infos sur une structure
      *
      * @return array
      */
@@ -477,15 +463,17 @@ class Structure extends ObjectModel
     }
 
     /**
-     * retourne les photos associées à cette structure
+     * Retourne les photos associées à cette structure
      *
      * @return array
      */
     function getPhotos()
     {
-        return Photo::getPhotos([
-            'structure' => $this->_id_structure,
-        ]);
+        return Photo::getPhotos(
+            [
+                'structure' => $this->_id_structure,
+            ]
+        );
     }
 
     /**
@@ -497,15 +485,17 @@ class Structure extends ObjectModel
     }
 
     /**
-     * retourne les vidéos associées à cette structure
+     * Retourne les vidéos associées à cette structure
      *
      * @return array
      */
     function getVideos()
     {
-        return Video::getVideos([
-            'structure' => $this->_id_structure,
-        ]);
+        return Video::getVideos(
+            [
+                'structure' => $this->_id_structure,
+            ]
+        );
     }
 
     /**
@@ -517,15 +507,17 @@ class Structure extends ObjectModel
     }
 
     /**
-     * retourne les audios associés à cette structure
+     * Retourne les audios associés à cette structure
      *
      * @return array
      */
     function getAudios()
     {
-        return Audio::getAudios([
-            'structure' => $this->_id_structure,
-        ]);
+        return Audio::getAudios(
+            [
+                'structure' => $this->_id_structure,
+            ]
+        );
     }
 
     /**
@@ -537,14 +529,16 @@ class Structure extends ObjectModel
     }
 
     /**
-     * retourne les événements rattachés à cette structure
+     * Retourne les événements rattachés à cette structure
      *
      * @return array
      */
     function getEvenements()
     {
-        return Event::getEvents([
-            'structure' => $this->_id_structure,
-        ]);
+        return Event::getEvents(
+            [
+                'structure' => $this->_id_structure,
+            ]
+        );
     }
 }

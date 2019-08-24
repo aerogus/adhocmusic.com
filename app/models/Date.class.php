@@ -32,10 +32,11 @@ class Date
     public static $regexp_datetime = "/^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2}):(\d{2})$/";
 
     /**
-     * fonction modulable de formatage de date MySQL
+     * Fonction modulable de formatage de date MySQL
      *
      * @param string $datetime
      * @param string $format
+     *
      * @return string
      */
     static function mysql_datetime($datetime, $format = "d/m/Y à H:i")
@@ -87,9 +88,10 @@ class Date
     }
 
     /**
-     * retourne si une datetime mysql est valide
+     * Retourne si une datetime mysql est valide
      *
      * @param string $date
+     *
      * @return bool
      */
     static function isDateTimeOk($datetime)

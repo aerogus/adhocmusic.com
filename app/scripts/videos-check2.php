@@ -38,14 +38,14 @@ echo "# Vidéos migrées de AD'HOC Legacy vers AD'HOC Tube, reste-il le mp4 loca
 echo "##\n\n";
 
 foreach ($videos as $video) {
-  echo $video['id_video'] . ' ' . $video['name'] . " : ";
-  $f = '/var/www/adhocmusic.com/media/video/'.$video['id_video'].'.mp4';
-  if (file_exists($f)) {
-    echo $f . ' tjrs là' . "\n";
-  } else {
-    echo "[OK]";
-  }
-  echo "\n";
+    echo $video['id_video'] . ' ' . $video['name'] . " : ";
+    $f = '/var/www/adhocmusic.com/media/video/'.$video['id_video'].'.mp4';
+    if (file_exists($f)) {
+        echo $f . ' tjrs là' . "\n";
+    } else {
+        echo "[OK]";
+    }
+    echo "\n";
 }
 echo "Total: " . count($videos) . "\n\n";
 
@@ -56,9 +56,8 @@ echo "# Vidéos AD'HOC Legacy à migrer vers AD'HOC Tube\n";
 echo "##\n\n";
 
 foreach ($videos as $video) {
-//  echo $video['id_video'] . ' ' . $video['name'] . " : https://www.adhocmusic.com/videos/" . $video['id_video'] . "\n";
-  echo $video['name'] . ';' . $video['id_video'] . '.mp4;' . "\n";  
-//  echo "https://static.adhocmusic.com/media/video/" . $video['id_video'] . ".mp4\n";
+    //echo $video['id_video'] . ' ' . $video['name'] . " : https://www.adhocmusic.com/videos/" . $video['id_video'] . "\n";
+    echo $video['name'] . ';' . $video['id_video'] . '.mp4;' . "\n";  
+    //echo "https://static.adhocmusic.com/media/video/" . $video['id_video'] . ".mp4\n";
 }
 echo "Total: " . count($videos) . "\n\n";
-

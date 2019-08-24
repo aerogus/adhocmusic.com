@@ -15,7 +15,7 @@
 class Style
 {
     /**
-     * codes style
+     * Codes style
      */
     const ROC =  1;
     const REG =  2;
@@ -89,23 +89,24 @@ class Style
     ];
 
     /**
-     * retourne le tableau de la liste
+     * Retourne le tableau de la liste
      *
      * @return array
      */
-    static function getHashTable()
+    static function getHashTable(): array
     {
         asort(self::$_liste);
         return self::$_liste;
     }
 
     /**
-     * retourne le libellé d'une clé de la liste
+     * Retourne le libellé d'une clé de la liste
      *
      * @param int
+     *
      * @return string
      */
-    static function getName($cle)
+    static function getName(int $cle): string
     {
         return self::$_liste[$cle];
     }
@@ -113,7 +114,7 @@ class Style
     /**
      *
      */
-    static function isStyleOk($id_style)
+    static function isStyleOk(int $id_style): bool
     {
         if (array_key_exists($id_style, self::$_liste)) {
             return true;

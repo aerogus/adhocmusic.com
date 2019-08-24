@@ -4,7 +4,7 @@
 require_once __DIR__ . '/../config.php';
 
 /**
- * abonne des emails à la newsletter
+ * Abonne des emails à la newsletter
  *
  * @param string $argv[1] email(s) à inscrire séparés par une virgule
  */

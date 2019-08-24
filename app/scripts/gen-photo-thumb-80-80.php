@@ -10,12 +10,14 @@ require_once __DIR__ . '/../config.php';
 
 echo "nb photos : " . Photo::getPhotosCount() . "\n";
 
-$photos = Photo::getPhotos([
-    'online' => true,
-    'sort' => 'id_photo',
-    'sens' => 'ASC',
-    'limit' => 2500,
-]);
+$photos = Photo::getPhotos(
+    [
+        'online' => true,
+        'sort' => 'id_photo',
+        'sens' => 'ASC',
+        'limit' => 2500,
+    ]
+);
 
 foreach ($photos as $photo) {
     Photo::invalidatePhotoInCache($photo['id'], 80, 80, '000000', false, true);

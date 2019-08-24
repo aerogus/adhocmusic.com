@@ -1,6 +1,6 @@
 <?php
 
-class Controller
+final class Controller
 {
     /**
      * Retourne la liste des pays du monde

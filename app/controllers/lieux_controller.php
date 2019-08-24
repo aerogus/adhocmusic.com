@@ -1,6 +1,6 @@
 <?php
 
-class Controller
+final class Controller
 {
     static function index() : string
     {
@@ -200,8 +200,8 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form_lieu_create($data, $errors))
-            {
+            if (self::_validateLieuCreateForm($data, $errors)) {
+
                 $lieu = Lieu::init();
                 $lieu->setIdCountry($data['id_country']);
                 $lieu->setIdRegion($data['id_region']);
@@ -261,23 +261,6 @@ class Controller
         return $smarty->fetch('lieux/create.tpl');
     }
 
-    /**
-     * validation du formulaire de création lieu
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_lieu_create(array $data, array &$errors) : bool
-    {
-        if (empty($data['name'])) {
-            $errors['name'] = true;
-        }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
-    }
-
     static function edit() : string
     {
         $id = (int) Route::params('id');
@@ -327,8 +310,8 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form_lieu_edit($data, $errors))
-            {
+            if (self::_validateLieuEditForm($data, $errors)) {
+
                 $lieu = Lieu::getInstance($data['id']);
                 $lieu->setIdCountry($data['id_country']);
                 $lieu->setIdRegion($data['id_region']);
@@ -381,23 +364,6 @@ class Controller
         }
 
         return $smarty->fetch('lieux/edit.tpl');
-    }
-
-    /**
-     * validation du formulaire de modification membre
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_lieu_edit(array $data, array &$errors) : bool
-    {
-        if (empty($data['name'])) {
-            $errors['name'] = true;
-        }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
     }
 
     static function delete() : string
@@ -515,5 +481,43 @@ class Controller
                 return [];
                 break;
         }
+    }
+
+    /**
+     * Validation du formulaire de création lieu
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs
+     *
+     * @return bool
+     */
+    private static function _validateLieuCreateForm(array $data, array &$errors) : bool
+    {
+        if (empty($data['name'])) {
+            $errors['name'] = true;
+        }
+        if (count($errors)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Validation du formulaire de modification membre
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateLieuEditForm(array $data, array &$errors) : bool
+    {
+        if (empty($data['name'])) {
+            $errors['name'] = true;
+        }
+        if (count($errors)) {
+            return false;
+        }
+        return true;
     }
 }

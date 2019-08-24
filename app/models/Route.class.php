@@ -102,21 +102,25 @@ class Route
         $splitted_path = explode('/', $path);
         $sizeof_splitted_path = sizeof($splitted_path);
 
-        $ret = FALSE;
+        $ret = false;
         foreach (self::$routes as $route) {
             if (strcasecmp($route['method'], $method) !== 0) {
                 continue;
             }
-            if (($ret = self::_examine_splitted_paths([
-                'route' => $route,
-                'splitted_path' => $splitted_path,
-                'route_splitted_path' => $route['splitted_path']])) === FALSE) {
+            $ret = self::_examine_splitted_paths(
+                [
+                    'route' => $route,
+                    'splitted_path' => $splitted_path,
+                    'route_splitted_path' => $route['splitted_path'],
+                ]
+            );
+            if ($ret === false) {
                 continue;
             }
             break;
         }
-        if ($ret === FALSE) {
-            return FALSE;
+        if ($ret === false) {
+            return false;
         }
         return [
             'route' => $route,
@@ -134,15 +138,16 @@ class Route
         if (file_exists($file) && is_readable($file))
         {
             $routes = file($file);
-            foreach ($routes as $route)
-            {
+            foreach ($routes as $route) {
                 $r = explode('|', trim($route));
-                self::map_connect([
-                    'controller' => (string) $r[0],
-                    'action' => (string) $r[1],
-                    'method' => (string) $r[2],
-                    'path' => (string) $r[3]
-                ]);
+                self::map_connect(
+                    [
+                        'controller' => (string) $r[0],
+                        'action' => (string) $r[1],
+                        'method' => (string) $r[2],
+                        'path' => (string) $r[3]
+                    ]
+                );
             }
             return true;
         }
@@ -159,11 +164,13 @@ class Route
         if (isset($_SERVER['PATH_INFO'])) {
             $path = $_SERVER['PATH_INFO'];
         }
-        $ret = self::find_route([
-            'method' => $method,
-            'path' => $path,
-        ]);
-        if ($ret === FALSE) {
+        $ret = self::find_route(
+            [
+                'method' => $method,
+                'path' => $path,
+            ]
+        );
+        if ($ret === false) {
             self::_route_log('-', '-', 'Route non trouvée : ' . $method . ' - ' . $path);
             header('HTTP/1.0 404 Not Found');
             die("404 <script>window.location='" . HOME_URL . "/map?from=404'</script>");
@@ -183,13 +190,13 @@ class Route
             header('HTTP/1.0 503 Service Unavailable');
             die('503');
         }
-        require_once $controller_file;
+        include_once $controller_file;
         if (is_callable(['Controller', $action]) === FALSE) {
             self::_route_log($controller, $action, 'Action non implémentée dans le contrôleur');
             header('HTTP/1.0 501 Not implemented');
             die('501');
         }
-        $ret = TRUE;
+        $ret = true;
 
         self::$response_format = strtolower($response_format);
 

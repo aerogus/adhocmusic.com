@@ -10,11 +10,13 @@
 
 require_once __DIR__ . '/../config.php';
 
-$videos = Video::getVideos([
-    'limit' => 1000,
-    'sort'  => 'id',
-    'sens'  => 'ASC',
-]);
+$videos = Video::getVideos(
+    [
+        'limit' => 1000,
+        'sort'  => 'id',
+        'sens'  => 'ASC',
+    ]
+);
 
 define('URL_DEST', MEDIA_PATH . '/video/');
 

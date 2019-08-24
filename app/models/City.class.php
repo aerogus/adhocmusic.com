@@ -15,13 +15,13 @@
 class City extends Liste
 {
     /**
-     * quelques racourcis codes insee
+     * Quelques racourcis codes insee
      */
     const SPINOLIE = 91216;
     const SAULX = 91587;
 
     /**
-     * instance de l'objet
+     * Instance de l'objet
      *
      * @var mixed
      */
@@ -31,6 +31,7 @@ class City extends Liste
      * Code insee ville ok ?
      *
      * @param int $id_city
+     *
      * @return bool
      */
     function isCityOk($id_city)

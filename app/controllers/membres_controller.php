@@ -1,6 +1,6 @@
 <?php
 
-class Controller
+final class Controller
 {
     static function show() : string
     {
@@ -98,7 +98,7 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form_member_create($data, $errors)) {
+            if (self::_validateMemberCreateForm($data, $errors)) {
 
                 $data['password'] = Membre::generatePassword(8);
 
@@ -144,45 +144,6 @@ class Controller
         $smarty->assign('data', $data);
 
         return $smarty->fetch('membres/create.tpl');
-    }
-
-    /**
-     * validation du formulaire de création membre
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_member_create(array $data, array &$errors) : bool
-    {
-        if (empty($data['pseudo'])) {
-            $errors['pseudo'] = true;
-        }
-        if (!Membre::isPseudoAvailable($data['pseudo'])) {
-            $errors['pseudo_unavailable'] = true;
-        }
-        if ($id_contact = Contact::getIdByEmail($data['email'])) {
-            if ($pseudo = Membre::getPseudoById($id_contact)) {
-                $errors['already_member'] = $pseudo;
-            }
-        }
-        if (empty($data['email'])) {
-            $errors['email'] = true;
-        } elseif (!Email::validate($data['email'])) {
-            $errors['email'] = true;
-        }
-        if (empty($data['last_name'])) {
-            $errors['last_name'] = true;
-        }
-        if (empty($data['first_name'])) {
-            $errors['first_name'] = true;
-        }
-        if (empty($data['id_country'])) {
-            $errors['id_country'] = true;
-        }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
     }
 
     static function edit() : string
@@ -306,34 +267,6 @@ class Controller
         return $smarty->fetch('membres/edit.tpl');
     }
 
-    /**
-     * validation du formulaire de modification membre
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_member_edit(array $data, array &$errors) : bool
-    {
-        if (empty($data['email'])) {
-            $errors['email'] = true;
-        } elseif (!Email::validate($data['email'])) {
-            $errors['email'] = true;
-        }
-        if (empty($data['last_name'])) {
-            $errors['last_name'] = true;
-        }
-        if (empty($data['first_name'])) {
-            $errors['first_name'] = true;
-        }
-        if (empty($data['id_country'])) {
-            $errors['id_country'] = true;
-        }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
-    }
-
     static function delete() : string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -450,5 +383,76 @@ class Controller
         $smarty->assign('alerting_events', Alerting::getEventsAlertingByIdContact($_SESSION['membre']->getId()));
 
         return $smarty->fetch('membres/tableau-de-bord.tpl');
+    }
+
+    /**
+     * Validation du formulaire de création membre
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateMemberCreateForm(array $data, array &$errors) : bool
+    {
+        if (empty($data['pseudo'])) {
+            $errors['pseudo'] = true;
+        }
+        if (!Membre::isPseudoAvailable($data['pseudo'])) {
+            $errors['pseudo_unavailable'] = true;
+        }
+        if ($id_contact = Contact::getIdByEmail($data['email'])) {
+            if ($pseudo = Membre::getPseudoById($id_contact)) {
+                $errors['already_member'] = $pseudo;
+            }
+        }
+        if (empty($data['email'])) {
+            $errors['email'] = true;
+        } elseif (!Email::validate($data['email'])) {
+            $errors['email'] = true;
+        }
+        if (empty($data['last_name'])) {
+            $errors['last_name'] = true;
+        }
+        if (empty($data['first_name'])) {
+            $errors['first_name'] = true;
+        }
+        if (empty($data['id_country'])) {
+            $errors['id_country'] = true;
+        }
+        if (count($errors)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Validation du formulaire de modification membre
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateMemberEditForm(array $data, array &$errors) : bool
+    {
+        if (empty($data['email'])) {
+            $errors['email'] = true;
+        } elseif (!Email::validate($data['email'])) {
+            $errors['email'] = true;
+        }
+        if (empty($data['last_name'])) {
+            $errors['last_name'] = true;
+        }
+        if (empty($data['first_name'])) {
+            $errors['first_name'] = true;
+        }
+        if (empty($data['id_country'])) {
+            $errors['id_country'] = true;
+        }
+        if (count($errors)) {
+            return false;
+        }
+        return true;
     }
 }

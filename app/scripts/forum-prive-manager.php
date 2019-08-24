@@ -10,9 +10,9 @@ $to_add = [
 
 // ajouter des personnes aux forums privés
 foreach (['a', 'b', 'e', 's', 't'] as $id_forum) {
-  foreach ($to_add as $id_contact) {
-    ForumPrive::addSubscriberToForum($id_contact, $id_forum);
-  }
+    foreach ($to_add as $id_contact) {
+        ForumPrive::addSubscriberToForum($id_contact, $id_forum);
+    }
 }
 
 // retirer des personnes aux forums privés

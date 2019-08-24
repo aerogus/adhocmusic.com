@@ -14,7 +14,7 @@
 class Departement
 {
     /**
-     * indices du tableau $tab_dep
+     * Indices du tableau $tab_dep
      */
     const CLEREG = 0;
     const LIBDEP = 1;
@@ -191,9 +191,10 @@ class Departement
     }
 
     /**
-     * retourne le code region d'un département
+     * Retourne le code region d'un département
      *
      * @param int $cleDep
+     *
      * @return int
      */
     static function getRegion($cleDep)
@@ -206,7 +207,7 @@ class Departement
     }
 
     /**
-     * clé ok ?
+     * Clé ok ?
      *
      * @param string
      * @return bool

@@ -320,7 +320,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne l'id du département (country FR only)
+     * Retourne l'id du département (country FR only)
      *
      * @return string
      */
@@ -330,7 +330,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne le nom du département
+     * Retourne le nom du département
      *
      * @return string
      */
@@ -340,7 +340,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne l'id de la région
+     * Retourne l'id de la région
      *
      * @return string
      */
@@ -350,7 +350,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne le nom de la région
+     * Retourne le nom de la région
      *
      * @return string
      */
@@ -360,7 +360,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne le code pays
+     * Retourne le code pays
      *
      * @return string
      */
@@ -370,7 +370,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne le nom du pays
+     * Retourne le nom du pays
      *
      * @return string
      */
@@ -380,7 +380,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne l'url de l'image du drapeau pays
+     * Retourne l'url de l'image du drapeau pays
      *
      * @return string
      */
@@ -390,7 +390,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne le texte de présentation
+     * Retourne le texte de présentation
      *
      * @return string
      */
@@ -400,7 +400,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne le site
+     * Retourne le site
      *
      * @return string
      */
@@ -416,7 +416,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne l'email
+     * Retourne l'email
      *
      * @return string
      */
@@ -426,7 +426,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne le contact créateur
+     * Retourne le contact créateur
      *
      * @return string
      */

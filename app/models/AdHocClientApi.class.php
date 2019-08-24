@@ -3,7 +3,8 @@
 /**
  * Client de l'API REST/JSON AD'HOC
  *
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class AdHocClientApi
 {

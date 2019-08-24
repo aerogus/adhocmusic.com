@@ -1,6 +1,6 @@
 <?php
 
-class Controller
+final class Controller
 {
     const IMG_WIDTH = 1000;
     const IMG_HEIGHT = 375;
@@ -64,7 +64,7 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form($data, $errors)) {
+            if (self::_validateForm($data, $errors)) {
 
                 $f = Featured::init();
                 $f->setTitle($data['title']);
@@ -152,7 +152,7 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form($data, $errors)) {
+            if (self::_validateForm($data, $errors)) {
 
                 $f->setTitle($data['title']);
                 $f->setDescription($data['description']);
@@ -187,35 +187,6 @@ class Controller
         return $smarty->fetch('adm/featured/edit.tpl');
     }
 
-    /**
-     * validation du formulaire featured
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form(array $data, array &$errors) : bool
-    {
-        if (empty($data['title'])) {
-            $errors['title'] = "Vous devez saisir un titre";
-        }
-        if (empty($data['description'])) {
-            $errors['description'] = "Vous devez saisir une description";
-        }
-        if (empty($data['link'])) {
-            $errors['link'] = "Vous devez saisir un lien de destination";
-        }
-        if (empty($data['datdeb'])) {
-            $errors['datdeb'] = "Vous devez choisir une date de début de programmation";
-        }
-        if (empty($data['datfin'])) {
-            $errors['datfin'] = "Vous devez saisir une date de fin de programmation";
-        }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
-    }
-
     static function delete() : string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -240,5 +211,36 @@ class Controller
 
         $smarty->assign('featured', $f);
         return $smarty->fetch('adm/featured/delete.tpl');
+    }
+
+    /**
+     * Validation du formulaire featured
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateForm(array $data, array &$errors) : bool
+    {
+        if (empty($data['title'])) {
+            $errors['title'] = "Vous devez saisir un titre";
+        }
+        if (empty($data['description'])) {
+            $errors['description'] = "Vous devez saisir une description";
+        }
+        if (empty($data['link'])) {
+            $errors['link'] = "Vous devez saisir un lien de destination";
+        }
+        if (empty($data['datdeb'])) {
+            $errors['datdeb'] = "Vous devez choisir une date de début de programmation";
+        }
+        if (empty($data['datfin'])) {
+            $errors['datfin'] = "Vous devez saisir une date de fin de programmation";
+        }
+        if (count($errors)) {
+            return false;
+        }
+        return true;
     }
 }

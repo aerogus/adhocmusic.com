@@ -5,7 +5,7 @@
 
 define('NB_AUDIOS_PER_PAGE', 80);
 
-class Controller
+final class Controller
 {
     static function my() : string
     {
@@ -172,7 +172,7 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form_audio_create($data, $errors)) {
+            if (self::_validateAudioCreateForm($data, $errors)) {
                 $audio = Audio::init();
                 $audio->setName($data['name']);
                 $audio->setIdGroupe($data['id_groupe']);
@@ -243,26 +243,6 @@ class Controller
         return $smarty->fetch('audios/create.tpl');
     }
 
-    /**
-     * validation du formulaire de création audio
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_audio_create($data, &$errors) : bool
-    {
-        if (empty($data['name'])) {
-            $errors['name'] = true;
-        }
-        if ($data['id_groupe'] == 0) {
-            $errors['id_groupe'] = true;
-        }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
-    }
-
     static function edit() : string
     {
         $id = (int) Route::params('id');
@@ -304,7 +284,7 @@ class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form_audio_edit($data, $errors)) {
+            if (self::_validateAudioEditForm($data, $errors)) {
 
                 $file = Route::params('file');
 
@@ -361,26 +341,6 @@ class Controller
         return $smarty->fetch('audios/edit.tpl');
     }
 
-    /**
-     * validation du formulaire de modification audio
-     * @param array $data
-     * @param array &$errors
-     * @return bool
-     */
-    protected static function _validate_form_audio_edit($data, &$errors) : bool
-    {
-        if (empty($data['name'])) {
-            $errors['name'] = true;
-        }
-        if ($data['id_groupe'] == 0) {
-            $errors['id_groupe'] = true;
-        }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
-    }
-
     static function delete() : string
     {
         $id = (int) Route::params('id');
@@ -430,5 +390,49 @@ class Controller
         }
 
         return $smarty->fetch('audios/delete.tpl');
+    }
+
+    /**
+     * Validation du formulaire de création audio
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateAudioCreateForm($data, &$errors) : bool
+    {
+        if (empty($data['name'])) {
+            $errors['name'] = true;
+        }
+        if ($data['id_groupe'] == 0) {
+            $errors['id_groupe'] = true;
+        }
+        if (count($errors)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Validation du formulaire de modification audio
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateAudioEditForm($data, &$errors) : bool
+    {
+        if (empty($data['name'])) {
+            $errors['name'] = true;
+        }
+        if ($data['id_groupe'] == 0) {
+            $errors['id_groupe'] = true;
+        }
+        if (count($errors)) {
+            return false;
+        }
+        return true;
     }
 }

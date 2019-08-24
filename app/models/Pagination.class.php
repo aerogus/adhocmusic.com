@@ -1,7 +1,7 @@
 <?php
 
 /**
- * classe générique de gestion d'une pagination
+ * Gestion d'une pagination
  */
 class Pagination
 {
@@ -149,25 +149,25 @@ class Pagination
     }
 
     /**
-     * @param int
+     * @param int $pageNumber
      */
-    function setCurrentPage($nb)
+    function setCurrentPage(int $pageNumber)
     {
-        if (($nb >= $this->getFirstPage()) && ($nb <= $this->getLastPage())) {
-            $this->_current_page = (int) $nb;
+        if (($pageNumber >= $this->getFirstPage()) && ($pageNumber <= $this->getLastPage())) {
+            $this->_current_page = $pageNumber;
         }
     }
 
     /**
      * @return int
      */
-    function getNbPages()
+    function getNbPages(): int
     {
         return $this->_nb_pages;
     }
 
     /**
-     * @return int ou bool
+     * @return int|bool
      */
     function getNextPage()
     {
@@ -175,7 +175,7 @@ class Pagination
     }
 
     /**
-     * @return int ou false
+     * @return int|false
      */
     function getPrevPage()
     {
@@ -185,7 +185,7 @@ class Pagination
     /**
      * @return int
      */
-    function getFirstPage()
+    function getFirstPage(): int
     {
         return 0;
     }
@@ -193,7 +193,7 @@ class Pagination
     /**
      * @return int
      */
-    function getFirstPageNum()
+    function getFirstPageNum(): int
     {
         return (int) ($this->getFirstPage() + 1);
     }
@@ -201,7 +201,7 @@ class Pagination
     /**
      * @return int
      */
-    function getLastPage()
+    function getLastPage(): int
     {
         if ($this->hasPagination()) {
             return floor(($this->getNbItems() - 1) / $this->getNbItemsPerPage());
@@ -212,7 +212,7 @@ class Pagination
     /**
      * @return int
      */
-    function getLastPageNum()
+    function getLastPageNum(): int
     {
         return (int) ($this->getLastPage() + 1);
     }
@@ -220,7 +220,7 @@ class Pagination
     /**
      * @return bool
      */
-    function hasNextPage()
+    function hasNextPage(): bool
     {
         return ($this->hasPagination() && ($this->getCurrentPage() < $this->getLastPage()));
     }
@@ -228,7 +228,7 @@ class Pagination
     /**
      * @return bool
      */
-    function hasPrevPage()
+    function hasPrevPage(): bool
     {
         return ($this->hasPagination() && ($this->getCurrentPage() > $this->getFirstPage()));
     }
@@ -236,7 +236,7 @@ class Pagination
     /**
      * @return bool
      */
-    function hasPagination()
+    function hasPagination(): bool
     {
         return (bool) ($this->getNbItems() > $this->getNbItemsPerPage());
     }
@@ -244,7 +244,7 @@ class Pagination
     /**
      * @return bool
      */
-    function hasItems()
+    function hasItems(): bool
     {
         return (bool) ($this->getNbItems() > 0);
     }
@@ -254,7 +254,7 @@ class Pagination
      *
      * @return string
      */
-    function getClass()
+    function getClass(): string
     {
         return ($this->getSelectedPage() === $this->getCurrentPage()) ? 'selected' : '';
     }
