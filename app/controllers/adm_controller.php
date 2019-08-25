@@ -13,7 +13,11 @@ define('ADM_NEWSLETTER_GROUPE_CURRENT_ID', 37);
 
 final class Controller
 {
-    static function index() : string
+
+    /**
+     * @return string
+     */
+    static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -32,7 +36,10 @@ final class Controller
         return $smarty->fetch('adm/index.tpl');
     }
 
-    static function groupes_index() : string
+    /**
+     * @return string
+     */
+    static function groupes_index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -81,7 +88,10 @@ final class Controller
         return $smarty->fetch('adm/groupes/index.tpl');
     }
 
-    static function groupes_show() : string
+    /**
+     * @return string
+     */
+    static function groupes_show(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -99,7 +109,10 @@ final class Controller
         return $smarty->fetch('adm/groupes/show.tpl');
     }
 
-    static function membres_index() : string
+    /**
+     * @return string
+     */
+    static function membres_index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -181,7 +194,10 @@ final class Controller
         return $smarty->fetch('adm/membres/index.tpl');
     }
 
-    static function membres_show() : string
+    /**
+     * @return string
+     */
+    static function membres_show(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -199,7 +215,7 @@ final class Controller
         return $smarty->fetch('adm/membres/show.tpl');
     }
 
-    static function membres_delete() : string
+    static function membres_delete(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -225,7 +241,7 @@ final class Controller
         return $smarty->fetch('adm/membres/delete.tpl');
     }
 
-    static function stats() : string
+    static function stats(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -302,7 +318,7 @@ final class Controller
         return $smarty->fetch('adm/stats.tpl');
     }
 
-    static function stats_top_groupes() : string
+    static function stats_top_groupes(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -362,7 +378,7 @@ final class Controller
         return $smarty->fetch('adm/stats-top-groupes.tpl');
     }
 
-    static function stats_top_membres() : string
+    static function stats_top_membres(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -432,7 +448,7 @@ final class Controller
         return $smarty->fetch('adm/stats-top-membres.tpl');
     }
 
-    static function stats_nl() : string
+    static function stats_nl(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -497,7 +513,7 @@ final class Controller
         return $smarty->fetch('adm/stats-nl.tpl');
     }
 
-    static function groupe_de_style() : string
+    static function groupe_de_style(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -544,7 +560,7 @@ final class Controller
         return $smarty->fetch('adm/groupe-de-style.tpl');
     }
 
-    static function groupe_de_style_id() : string
+    static function groupe_de_style_id(): string
     {
         if (Tools::isSubmit('form-groupe-de-style')) {
             return self::groupe_de_style_submit();
@@ -601,7 +617,7 @@ final class Controller
         return $smarty->fetch('adm/groupe-de-style-id.tpl');
     }
 
-    static function groupe_de_style_submit() : string
+    static function groupe_de_style_submit(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -633,7 +649,7 @@ final class Controller
         Tools::redirect('/adm/groupe-de-style');
     }
 
-    static function log_action() : string
+    static function log_action(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -649,7 +665,7 @@ final class Controller
         return $smarty->fetch('adm/log-action.tpl');
     }
 
-    static function delete_account() : string
+    static function delete_account(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -761,7 +777,7 @@ final class Controller
         return $smarty->fetch('adm/delete-account.tpl');
     }
 
-    static function delete_account_submit() : string
+    static function delete_account_submit(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -803,7 +819,7 @@ final class Controller
         return $smarty->fetch('adm/delete-account.tpl');
     }
 
-    static function appartient_a() : string
+    static function appartient_a(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 

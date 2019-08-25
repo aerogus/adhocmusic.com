@@ -7,7 +7,7 @@ define('NB_AUDIOS_PER_PAGE', 80);
 
 final class Controller
 {
-    static function my() : string
+    static function my(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -28,21 +28,25 @@ final class Controller
         }
 
         if ($_SESSION['membre']->getId() == 1) {
-            $audios = Audio::getAudios([
-                'debut'   => $page * NB_AUDIOS_PER_PAGE,
-                'limit'   => NB_AUDIOS_PER_PAGE,
-                'sort'    => 'id',
-                'sens'    => 'ASC',
-            ]);
+            $audios = Audio::getAudios(
+                [
+                    'debut'   => $page * NB_AUDIOS_PER_PAGE,
+                    'limit'   => NB_AUDIOS_PER_PAGE,
+                    'sort'    => 'id',
+                    'sens'    => 'ASC',
+                ]
+            );
             $nb_audios = Audio::getAudiosCount();
         } else {
-            $audios = Audio::getAudios([
-                'contact' => $_SESSION['membre']->getId(),
-                'debut'   => $page * NB_AUDIOS_PER_PAGE,
-                'limit'   => NB_AUDIOS_PER_PAGE,
-                'sort'    => 'id',
-                'sens'    => 'ASC',
-            ]);
+            $audios = Audio::getAudios(
+                [
+                    'contact' => $_SESSION['membre']->getId(),
+                    'debut'   => $page * NB_AUDIOS_PER_PAGE,
+                    'limit'   => NB_AUDIOS_PER_PAGE,
+                    'sort'    => 'id',
+                    'sens'    => 'ASC',
+                ]
+            );
             $nb_audios = Audio::getMyAudiosCount();
         }
         $smarty->assign('audios', $audios);
@@ -57,7 +61,7 @@ final class Controller
         return $smarty->fetch('audios/my.tpl');
     }
 
-    static function show() : string
+    static function show(): string
     {
         $id = (int) Route::params('id');
 
@@ -90,12 +94,14 @@ final class Controller
             $trail->addStep("Groupes", "/groupes/");
             $trail->addStep($groupe->getName(), $groupe->getUrl());
             $smarty->assign('og_image', $groupe->getMiniPhoto());
-            $smarty->assign('og_audio', [
-                'url' => $audio->getDirectUrl(),
-                'title' => $audio->getName(),
-                'artist' => $groupe->getName(),
-                'type' => "application/mp3",
-            ]);
+            $smarty->assign(
+                'og_audio', [
+                    'url' => $audio->getDirectUrl(),
+                    'title' => $audio->getName(),
+                    'artist' => $groupe->getName(),
+                    'type' => "application/mp3",
+                ]
+            );
         } else {
             $trail->addStep("Média", "/medias/");
         }
@@ -104,20 +110,28 @@ final class Controller
             $event = Event::getInstance($audio->getIdEvent());
             $smarty->assign('event', $event);
             $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysql_datetime($event->getDate(), "d/m/Y") . ")";
-            $smarty->assign('photos', Photo::getPhotos([
-                'event'  => $event->getId(),
-                'groupe' => $audio->getIdGroupe(),
-                'online' => true,
-                'sort'   => 'random',
-                'limit'  => 100,
-            ]));
-            $smarty->assign('videos', Video::getVideos([
-                'event'  => $event->getId(),
-                'groupe' => $audio->getIdGroupe(),
-                'online' => true,
-                'sort'   => 'random',
-                'limit'  => 100,
-            ]));
+            $smarty->assign(
+                'photos', Photo::getPhotos(
+                    [
+                        'event'  => $event->getId(),
+                        'groupe' => $audio->getIdGroupe(),
+                        'online' => true,
+                        'sort'   => 'random',
+                        'limit'  => 100,
+                    ]
+                )
+            );
+            $smarty->assign(
+                'videos', Video::getVideos(
+                    [
+                        'event'  => $event->getId(),
+                        'groupe' => $audio->getIdGroupe(),
+                        'online' => true,
+                        'sort'   => 'random',
+                        'limit'  => 100,
+                    ]
+                )
+            );
         }
 
         if ($audio->getIdLieu()) {
@@ -132,18 +146,22 @@ final class Controller
 
         $smarty->assign('audio', $audio);
 
-        $smarty->assign('comments', Comment::getComments([
-            'type'       => 's',
-            'id_content' => $audio->getId(),
-            'online'     => true,
-            'sort'       => 'created_on',
-            'sens'       => 'ASC',
-        ]));
+        $smarty->assign(
+            'comments', Comment::getComments(
+                [
+                    'type'       => 's',
+                    'id_content' => $audio->getId(),
+                    'online'     => true,
+                    'sort'       => 'created_on',
+                    'sens'       => 'ASC',
+                ]
+            )
+        );
 
         return $smarty->fetch('audios/show.tpl');
     }
 
-    static function create() : string
+    static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -156,8 +174,7 @@ final class Controller
         $trail->addStep("Mes Musiques", "/audios/my");
         $trail->addStep("Ajouter une musique");
 
-        if (Tools::isSubmit('form-audio-create'))
-        {
+        if (Tools::isSubmit('form-audio-create')) {
             set_time_limit(0); // l'upload peut prendre du temps !
 
             $data = [
@@ -206,25 +223,33 @@ final class Controller
             $groupe = Groupe::getInstance($id_groupe);
             $smarty->assign('groupe', $groupe);
         } else {
-            $smarty->assign('groupes', Groupe::getGroupes([
-                'sort'   => 'name',
-                'sens'   => 'ASC',
-                'online' => true,
-            ]));
+            $smarty->assign(
+                'groupes', Groupe::getGroupes(
+                    [
+                        'sort'   => 'name',
+                        'sens'   => 'ASC',
+                        'online' => true,
+                    ]
+                )
+            );
         }
 
         $id_lieu = (int) Route::params('id_lieu');
         if ($id_lieu) {
             $lieu = Lieu::getInstance($id_lieu);
             $smarty->assign('lieu', $lieu);
-            $smarty->assign('events', Event::getEvents([
-               'online' => true,
-               'datfin' => date('Y-m-d H:i:s'),
-               'lieu'   => $lieu->getId(),
-               'sort'   => 'date',
-               'sens'   => 'ASC',
-               'limit'  => 100,
-            ]));
+            $smarty->assign(
+                'events', Event::getEvents(
+                    [
+                        'online' => true,
+                        'datfin' => date('Y-m-d H:i:s'),
+                        'lieu'   => $lieu->getId(),
+                        'sort'   => 'date',
+                        'sens'   => 'ASC',
+                        'limit'  => 100,
+                    ]
+                )
+            );
         } else {
             $smarty->assign('dep', Departement::getHashTable());
             $smarty->assign('lieux', Lieu::getLieuxByDep());
@@ -243,7 +268,7 @@ final class Controller
         return $smarty->fetch('audios/create.tpl');
     }
 
-    static function edit() : string
+    static function edit(): string
     {
         $id = (int) Route::params('id');
         $page = (int) Route::params('page');
@@ -269,8 +294,7 @@ final class Controller
 
         $smarty->assign('audio', $audio);
 
-        if (Tools::isSubmit('form-audio-edit'))
-        {
+        if (Tools::isSubmit('form-audio-edit')) {
             set_time_limit(0); // l'upload peut prendre du temps !
 
             $data = [
@@ -317,10 +341,14 @@ final class Controller
 
         }
 
-        $smarty->assign('groupes', Groupe::getGroupes([
-            'sort'   => 'name',
-            'sens'   => 'ASC',
-        ]));
+        $smarty->assign(
+            'groupes', Groupe::getGroupes(
+                [
+                    'sort'   => 'name',
+                    'sens'   => 'ASC',
+                ]
+            )
+        );
 
         $smarty->assign('dep', Departement::getHashTable());
         $smarty->assign('lieux', Lieu::getLieuxByDep());
@@ -341,7 +369,10 @@ final class Controller
         return $smarty->fetch('audios/edit.tpl');
     }
 
-    static function delete() : string
+    /**
+     * @return string
+     */
+    static function delete(): string
     {
         $id = (int) Route::params('id');
 
@@ -362,8 +393,7 @@ final class Controller
             return $smarty->fetch('audios/delete.tpl');
         }
 
-        if (Tools::isSubmit('form-audio-delete'))
-        {
+        if (Tools::isSubmit('form-audio-delete')) {
             if ($audio->delete()) {
                 Log::action(Log::ACTION_AUDIO_DELETE, $audio->getId());
                 Tools::redirect('/medias/?delete=1');
@@ -400,7 +430,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateAudioCreateForm($data, &$errors) : bool
+    private static function _validateAudioCreateForm($data, &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = true;
@@ -422,7 +452,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateAudioEditForm($data, &$errors) : bool
+    private static function _validateAudioEditForm($data, &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = true;

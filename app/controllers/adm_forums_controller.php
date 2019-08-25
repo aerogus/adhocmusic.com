@@ -2,7 +2,7 @@
 
 final class Controller
 {
-    static function index() : string
+    static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -17,7 +17,7 @@ final class Controller
         return $smarty->fetch('adm/forums/index.tpl');
     }
 
-    static function forum() : string
+    static function forum(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -46,7 +46,7 @@ final class Controller
         return $smarty->fetch('adm/forums/forum.tpl');
     }
 
-    static function thread() : string
+    static function thread(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -84,7 +84,7 @@ final class Controller
         return $smarty->fetch('adm/forums/thread.tpl');
     }
 
-    static function write() : string
+    static function write(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 

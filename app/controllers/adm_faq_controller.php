@@ -2,7 +2,7 @@
 
 final class Controller
 {
-    static function index() : string
+    static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -20,7 +20,7 @@ final class Controller
         return $smarty->fetch('adm/faq/index.tpl');
     }
 
-    static function create() : string
+    static function create(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -31,8 +31,7 @@ final class Controller
         $trail->addStep("Foire aux questions", "/adm/faq/");
         $trail->addStep("Création");
 
-        if (Tools::isSubmit('form-faq-create'))
-        {
+        if (Tools::isSubmit('form-faq-create')) {
             $data = [
                 'id_category' => (int) Route::params('id_category'),
                 'question'    => (string) Route::params('question'),
@@ -53,7 +52,7 @@ final class Controller
         return $smarty->fetch('adm/faq/create.tpl');
     }
 
-    static function edit() : string
+    static function edit(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -66,8 +65,7 @@ final class Controller
         $trail->addStep("Foire aux questions", "/adm/faq/");
         $trail->addStep("Edition");
 
-        if (Tools::isSubmit('form-faq-edit'))
-        {
+        if (Tools::isSubmit('form-faq-edit')) {
             $data = [
                 'id_faq'      => (int) Route::params('id_faq'),
                 'id_category' => (int) Route::params('id_category'),
@@ -90,7 +88,7 @@ final class Controller
         return $smarty->fetch('adm/faq/edit.tpl');
     }
 
-    static function delete() : string
+    static function delete(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -103,8 +101,7 @@ final class Controller
         $trail->addStep("Foire aux questions", "/adm/faq/");
         $trail->addStep("Suppression");
 
-        if (Tools::isSubmit('form-faq-delete'))
-        {
+        if (Tools::isSubmit('form-faq-delete')) {
             $faq = FAQ::getInstance($id);
             $faq->delete();
 

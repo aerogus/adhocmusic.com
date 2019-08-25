@@ -10,7 +10,7 @@ final class Controller
     /**
      * @return array
      */
-    static function videos() : array
+    static function videos(): array
     {
         $groupe  = (int) Route::params('groupe');
         $event   = (int) Route::params('event');
@@ -20,21 +20,23 @@ final class Controller
         $debut   = (int) Route::params('debut');
         $limit   = (int) Route::params('limit');
 
-        return Video::getVideos([
-            'groupe'  => $groupe,
-            'event'   => $event,
-            'lieu'    => $lieu,
-            'contact' => $contact,
-            'sort'    => $sort,
-            'debut'   => $debut,
-            'limit'   => $limit,
-        ]);
+        return Video::getVideos(
+            [
+                'groupe'  => $groupe,
+                'event'   => $event,
+                'lieu'    => $lieu,
+                'contact' => $contact,
+                'sort'    => $sort,
+                'debut'   => $debut,
+                'limit'   => $limit,
+            ]
+        );
     }
 
     /**
      * @return array
      */
-    static function audios() : array
+    static function audios(): array
     {
         $groupe  = (int) Route::params('groupe');
         $event   = (int) Route::params('event');
@@ -44,21 +46,23 @@ final class Controller
         $debut   = (int) Route::params('debut');
         $limit   = (int) Route::params('limit');
 
-        return Audio::getAudios([
-            'groupe'  => $groupe,
-            'event'   => $event,
-            'lieu'    => $lieu,
-            'contact' => $contact,
-            'sort'    => $sort,
-            'debut'   => $debut,
-            'limit'   => $limit,
-        ]);
+        return Audio::getAudios(
+            [
+                'groupe'  => $groupe,
+                'event'   => $event,
+                'lieu'    => $lieu,
+                'contact' => $contact,
+                'sort'    => $sort,
+                'debut'   => $debut,
+                'limit'   => $limit,
+            ]
+        );
     }
 
     /**
      * @return array
      */
-    static function photos() : array
+    static function photos(): array
     {
         $groupe  = (int) Route::params('groupe');
         $event   = (int) Route::params('event');
@@ -68,21 +72,23 @@ final class Controller
         $debut   = (int) Route::params('debut');
         $limit   = (int) Route::params('limit');
 
-        return Photo::getPhotos([
-            'groupe'  => $groupe,
-            'event'   => $event,
-            'lieu'    => $lieu,
-            'contact' => $contact,
-            'sort'    => $sort,
-            'debut'   => $debut,
-            'limit'   => $limit,
-        ]);
+        return Photo::getPhotos(
+            [
+                'groupe'  => $groupe,
+                'event'   => $event,
+                'lieu'    => $lieu,
+                'contact' => $contact,
+                'sort'    => $sort,
+                'debut'   => $debut,
+                'limit'   => $limit,
+            ]
+        );
     }
 
     /**
      * @return array
      */
-    static function events() : array
+    static function events(): array
     {
         $groupe = (int) Route::params('groupe');
         $lieu   = (int) Route::params('lieu');
@@ -92,14 +98,16 @@ final class Controller
         $debut  = (int) Route::params('debut');
         $limit  = (int) Route::params('limit');
 
-        return Event::getEvents([
-            'groupe' => $groupe,
-            'lieu'   => $lieu,
-            'datdeb' => $datdeb,
-            'datfin' => $datfin,
-            'sort'   => $sort,
-            'debut'  => $debut,
-            'limit'  => $limit,
-        ]);
+        return Event::getEvents(
+            [
+                'groupe' => $groupe,
+                'lieu'   => $lieu,
+                'datdeb' => $datdeb,
+                'datfin' => $datfin,
+                'sort'   => $sort,
+                'debut'  => $debut,
+                'limit'  => $limit,
+            ]
+        );
     }
 }

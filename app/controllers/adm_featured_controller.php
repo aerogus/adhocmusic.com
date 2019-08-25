@@ -5,7 +5,7 @@ final class Controller
     const IMG_WIDTH = 1000;
     const IMG_HEIGHT = 375;
 
-    static function index() : string
+    static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -24,7 +24,7 @@ final class Controller
         return $smarty->fetch('adm/featured/index.tpl');
     }
 
-    static function create() : string
+    static function create(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -51,8 +51,7 @@ final class Controller
             'online'      => false,
         ];
 
-        if (Tools::isSubmit('form-featured-create'))
-        {
+        if (Tools::isSubmit('form-featured-create')) {
             $data = [
                 'title'       => trim((string) Route::params('title')),
                 'description' => trim((string) Route::params('description')),
@@ -96,18 +95,22 @@ final class Controller
         }
 
         $smarty->assign('data', $data);
-        $smarty->assign('events', Event::getEvents([
-            'online' => true,
-            'datdeb' => date('Y-m-d H:i:s'),
-            'sort'   => 'date',
-            'sens'   => 'ASC',
-            'limit'  => 500,
-        ]));
+        $smarty->assign(
+            'events', Event::getEvents(
+                [
+                    'online' => true,
+                    'datdeb' => date('Y-m-d H:i:s'),
+                    'sort'   => 'date',
+                    'sens'   => 'ASC',
+                    'limit'  => 500,
+                ]
+            )
+        );
 
         return $smarty->fetch('adm/featured/create.tpl');
     }
 
-    static function edit() : string
+    static function edit(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -138,8 +141,7 @@ final class Controller
             'online'      => $f->getOnline(),
         ];
 
-        if (Tools::isSubmit('form-featured-edit'))
-        {
+        if (Tools::isSubmit('form-featured-edit')) {
             $data = [
                 'id'          => $f->getId(),
                 'title'       => trim((string) Route::params('title')),
@@ -187,7 +189,7 @@ final class Controller
         return $smarty->fetch('adm/featured/edit.tpl');
     }
 
-    static function delete() : string
+    static function delete(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -201,8 +203,7 @@ final class Controller
         $id = (int) Route::params('id');
         $f = Featured::getInstance($id);
 
-        if (Tools::isSubmit('form-featured-delete'))
-        {
+        if (Tools::isSubmit('form-featured-delete')) {
             if ($f->delete()) {
                 Tools::redirect('/adm/featured/?delete=1');
                 unlink(ADHOC_ROOT_PATH . '/static/media/featured/' . $f->getId() . '.jpg');
@@ -221,7 +222,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateForm(array $data, array &$errors) : bool
+    private static function _validateForm(array $data, array &$errors): bool
     {
         if (empty($data['title'])) {
             $errors['title'] = "Vous devez saisir un titre";

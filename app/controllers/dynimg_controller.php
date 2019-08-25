@@ -5,16 +5,25 @@ define('DYNIMG_CACHE_ENABLED', true);
 
 final class Controller
 {
+    /**
+     *
+     */
     static function mailing_banner()
     {
         return self::trackable_image(ADHOC_ROOT_PATH . '/public/img/bandeau-mailing.jpg');
     }
 
+    /**
+     *
+     */
     static function logo_adhoc()
     {
         return self::trackable_image(ADHOC_ROOT_PATH . '/public/img/logo_adhoc.jpg');
     }
 
+    /**
+     *
+     */
     static function trackable_image(string $image) : void
     {
         $hash = (string) Route::params('hash');
@@ -52,7 +61,10 @@ final class Controller
         die();
     }
 
-    static function photo() : string
+    /**
+     *
+     */
+    static function photo(): string
     {
         $id = (int) Route::params('id');
         $width = (int) Route::params('width');
@@ -93,7 +105,7 @@ final class Controller
         }
     }
 
-    static function video() : string
+    static function video(): string
     {
         $id = (int) Route::params('id');
         $width = (int) Route::params('width');
@@ -134,7 +146,7 @@ final class Controller
         }
     }
 
-    static function event() : string
+    static function event(): string
     {
         $id = (int) Route::params('id');
         $width = (int) Route::params('width');
@@ -188,7 +200,7 @@ final class Controller
      * ex : /dynimg/pixel/ffffff30
      *                    r g b a
      */
-    static function pixel() : string
+    static function pixel(): string
     {
         $tmp = '/tmp/adhocmusic-img-' . md5(time() . rand());
 
@@ -212,7 +224,7 @@ final class Controller
         return $bin;
     }
 
-    static function featured() : string
+    static function featured(): string
     {
         $id = (int) Route::params('id');
         $width = (int) Route::params('width');
@@ -253,7 +265,7 @@ final class Controller
         }
     }
 
-    static function tool() : string
+    static function tool(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -299,7 +311,10 @@ final class Controller
         return $smarty->fetch('dynimg/tool.tpl');
     }
 
-    private static function _fallback() : string
+    /**
+     * @return string
+     */
+    private static function _fallback(): string
     {
         $img = new Image();
         $img->init(2, 2, 'ffffff');
@@ -307,7 +322,10 @@ final class Controller
         return $img->get();
     }
 
-    private static function _getOutputFormat() : int
+    /**
+     * @return int
+     */
+    private static function _getOutputFormat(): int
     {
         $format = Route::$response_format;
         switch ($format)

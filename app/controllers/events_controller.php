@@ -4,7 +4,7 @@ define('NB_EVENTS_PER_PAGE', 100);
 
 final class Controller
 {
-    static function index() : string
+    static function index(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -33,14 +33,16 @@ final class Controller
             $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, date("m") + 1, date("d"), date("Y")));
         }
 
-        $_events = Event::getEvents([
-            'online' => true,
-            'sort'   => 'date',
-            'sens'   => 'ASC',
-            'datdeb' => $datdeb,
-            'datfin' => $datfin,
-            'limit'  => 1000,
-        ]);
+        $_events = Event::getEvents(
+            [
+                'online' => true,
+                'sort'   => 'date',
+                'sens'   => 'ASC',
+                'datdeb' => $datdeb,
+                'datfin' => $datfin,
+                'limit'  => 1000,
+            ]
+        );
 
         $nb_events = count($_events);
         $_events = array_slice($_events, $page * NB_EVENTS_PER_PAGE, NB_EVENTS_PER_PAGE);
@@ -75,17 +77,17 @@ final class Controller
         return $smarty->fetch('events/index.tpl');
     }
 
-    static function fetch() : string
+    static function fetch(): string
     {
         return '';
     }
 
-    static function my() : string
+    static function my(): string
     {
         return self::index();
     }
 
-    static function ical() : string
+    static function ical(): string
     {
         $id = (int) Route::params('id');
 
@@ -107,7 +109,7 @@ final class Controller
         return $vCalendar->render();
     }
 
-    static function show() : string
+    static function show(): string
     {
         $id = (int) Route::params('id');
 
@@ -143,43 +145,59 @@ final class Controller
         // alerting
         if (Tools::isAuth()) {
             if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'e', $event->getId())) {
-                $smarty->assign('alerting_sub_url', 'http://www.adhocmusic.com/alerting/sub?type=e&id_content='.$event->getId());
+                $smarty->assign('alerting_sub_url', 'https://www.adhocmusic.com/alerting/sub?type=e&id_content='.$event->getId());
             } else {
-                $smarty->assign('alerting_unsub_url', 'http://www.adhocmusic.com/alerting/unsub?type=e&id_content='.$event->getId());
+                $smarty->assign('alerting_unsub_url', 'https://www.adhocmusic.com/alerting/unsub?type=e&id_content='.$event->getId());
             }
         } else {
-            $smarty->assign('alerting_auth_url', 'http://www.adhocmusic.com/auth/login');
+            $smarty->assign('alerting_auth_url', 'https://www.adhocmusic.com/auth/login');
         }
 
-        $smarty->assign('photos', Photo::getPhotos([
-            'event'  => $event->getId(),
-            'online' => true,
-            'sort'   => 'random',
-            'limit'  => 100,
-        ]));
+        $smarty->assign(
+            'photos', Photo::getPhotos(
+                [
+                    'event'  => $event->getId(),
+                    'online' => true,
+                    'sort'   => 'random',
+                    'limit'  => 100,
+                ]
+            )
+        );
 
-        $smarty->assign('audios', Audio::getAudios([
-            'event'  => $event->getId(),
-            'online' => true,
-            'sort'   => 'random',
-            'limit'  => 100,
-        ]));
+        $smarty->assign(
+            'audios', Audio::getAudios(
+                [
+                    'event'  => $event->getId(),
+                    'online' => true,
+                    'sort'   => 'random',
+                    'limit'  => 100,
+                ]
+            )
+        );
 
-        $smarty->assign('videos', Video::getVideos([
-            'event'  => $event->getId(),
-            'online' => true,
-            'sort'   => 'id',
-            'sens'   => 'ASC',
-            'limit'  => 100,
-        ]));
+        $smarty->assign(
+            'videos', Video::getVideos(
+                [
+                    'event'  => $event->getId(),
+                    'online' => true,
+                    'sort'   => 'id',
+                    'sens'   => 'ASC',
+                    'limit'  => 100,
+                ]
+            )
+        );
 
-        $smarty->assign('comments', Comment::getComments([
-           'type'       => 'e',
-           'id_content' => $event->getId(),
-           'online'     => true,
-           'sort'       => 'created_on',
-           'sens'       => 'ASC',
-        ]));
+        $smarty->assign(
+            'comments', Comment::getComments(
+                [
+                    'type'       => 'e',
+                    'id_content' => $event->getId(),
+                    'online'     => true,
+                    'sort'       => 'created_on',
+                    'sens'       => 'ASC',
+                ]
+            )
+        );
 
         $smarty->assign('jour', Date::mysql_datetime($event->getDate(), "d/m/Y"));
         $smarty->assign('heure', Date::mysql_datetime($event->getDate(), "H:i"));
@@ -204,7 +222,7 @@ final class Controller
         return $smarty->fetch('events/show.tpl');
     }
 
-    static function create() : string
+    static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -311,8 +329,7 @@ final class Controller
             'more_event' => false,
         ];
 
-        if (Tools::isSubmit('form-event-create'))
-        {
+        if (Tools::isSubmit('form-event-create')) {
             list($day, $month, $year) = explode('/', (string) Route::params('date'));
             $date       = $year . '-' . $month . '-' . $day;
             $hourminute = (string) Route::params('hourminute');
@@ -425,16 +442,20 @@ final class Controller
         $smarty->assign('data', $data);
 
         $smarty->assign('styles', Style::getHashTable());
-        $smarty->assign('groupes', Groupe::getGroupes([
-            'sort'  => 'name',
-            'sens'  => 'ASC',
-        ]));
+        $smarty->assign(
+            'groupes', Groupe::getGroupes(
+                [
+                    'sort'  => 'name',
+                    'sens'  => 'ASC',
+                ]
+            )
+        );
         $smarty->assign('structures', Structure::getStructures());
 
         return $smarty->fetch('events/create.tpl');
     }
 
-    static function edit() : string
+    static function edit(): string
     {
         $id = (int) Route::params('id');
 
@@ -477,8 +498,7 @@ final class Controller
             'online' => $event->getOnline(),
         ];
 
-        if (Tools::isSubmit('form-event-edit'))
-        {
+        if (Tools::isSubmit('form-event-edit')) {
             list($day, $month, $year) = explode('/', (string) Route::params('date'));
             $date       = $year . '-' . $month . '-' . $day;
             $hourminute = Route::params('hourminute');
@@ -586,10 +606,14 @@ final class Controller
         $smarty->assign('lieu', $lieu);
 
         $smarty->assign('styles', Style::getHashTable());
-        $smarty->assign('groupes', Groupe::getGroupes([
-            'sort'  => 'name',
-            'sens'  => 'ASC',
-        ]));
+        $smarty->assign(
+            'groupes', Groupe::getGroupes(
+                [
+                    'sort'  => 'name',
+                    'sens'  => 'ASC',
+                ]
+            )
+        );
         $smarty->assign('structures', Structure::getStructures());
 
         return $smarty->fetch('events/edit.tpl');
@@ -598,7 +622,7 @@ final class Controller
     /**
      * @return string ou HTTP:Redirect
      */
-    static function delete() : string
+    static function delete(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -616,8 +640,7 @@ final class Controller
             return $smarty->fetch('events/show.tpl');
         }
 
-        if (Tools::isSubmit('form-event-delete'))
-        {
+        if (Tools::isSubmit('form-event-delete')) {
             if ($event->delete()) {
                 Log::action(Log::ACTION_EVENT_DELETE, $event->getId());
                 Tools::redirect('/events/?delete=1');
@@ -633,7 +656,7 @@ final class Controller
     /**
      * @return array
      */
-    static function get_events_by_lieu() : array
+    static function get_events_by_lieu(): array
     {
         $id_lieu = (int) Route::params('l');
 
@@ -641,13 +664,15 @@ final class Controller
             return [];
         }
 
-        return Event::getEvents([
-            'online' => true,
-            'lieu'   => $id_lieu,
-            'sort'   => 'date',
-            'sens'   => 'ASC',
-            'limit'  => 100,
-        ]);
+        return Event::getEvents(
+            [
+                'online' => true,
+                'lieu'   => $id_lieu,
+                'sort'   => 'date',
+                'sens'   => 'ASC',
+                'limit'  => 100,
+            ]
+        );
     }
 
     /**
@@ -658,7 +683,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateEventCreateForm(array $data, array &$errors) : bool
+    private static function _validateEventCreateForm(array $data, array &$errors): bool
     {
         if (count($errors)) {
             return false;
@@ -674,7 +699,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateEventEditForm(array $data, array &$errors) : bool
+    private static function _validateEventEditForm(array $data, array &$errors): bool
     {
         if (count($errors)) {
             return false;

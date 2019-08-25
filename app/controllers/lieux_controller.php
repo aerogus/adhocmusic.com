@@ -2,7 +2,7 @@
 
 final class Controller
 {
-    static function index() : string
+    static function index(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -12,13 +12,15 @@ final class Controller
         $trail = Trail::getInstance();
         $trail->addStep("Lieux de diffusion", "/lieux/");
 
-        $lieux_proches = Lieu::fetchLieuxByRadius([
-            'lat'      => $lat,
-            'lng'      => $lng,
-            'distance' => 5000,
-            'sort'     => 'rand',
-            'limit'    => 25,
-        ]);
+        $lieux_proches = Lieu::fetchLieuxByRadius(
+            [
+                'lat'      => $lat,
+                'lng'      => $lng,
+                'distance' => 5000,
+                'sort'     => 'rand',
+                'limit'    => 25,
+            ]
+        );
 
         $lieux_proches = array_slice($lieux_proches, 0, 5);
 
@@ -27,19 +29,21 @@ final class Controller
         $smarty->assign('my_geocode', $lat . ', ' . $lng);
         $smarty->assign('lieux', $lieux_proches);
 
-        $comments = Comment::getComments([
-            'type' => 'l',
-            'sort' => 'id',
-            'sens' => 'DESC',
-            'debut' => 0,
-            'limit' => 5,
-        ]);
+        $comments = Comment::getComments(
+            [
+                'type' => 'l',
+                'sort' => 'id',
+                'sens' => 'DESC',
+                'debut' => 0,
+                'limit' => 5,
+            ]
+        );
         $smarty->assign('comments', $comments);
 
         return $smarty->fetch('lieux/index.tpl');
     }
 
-    static function my() : string
+    static function my(): string
     {
         $page = (int) Route::params('page');
 
@@ -59,7 +63,7 @@ final class Controller
 
     }
 
-    static function show() : string
+    static function show(): string
     {
         $id = (int) Route::params('id');
 
@@ -76,11 +80,13 @@ final class Controller
             return $smarty->fetch('lieux/show.tpl');
         }
 
-        $smarty->enqueue_script_var('lieu', [
-            'lat' => number_format($lieu->getLat(), 6, '.', ''),
-            'lng' => number_format($lieu->getLng(), 6, '.', ''),
-            'name' => $lieu->getName()
-        ]); 
+        $smarty->enqueue_script_var(
+            'lieu', [
+                'lat' => number_format($lieu->getLat(), 6, '.', ''),
+                'lng' => number_format($lieu->getLng(), 6, '.', ''),
+                'name' => $lieu->getName()
+            ]
+        );
         $smarty->enqueue_script('/js/lieux-show.js');
         $smarty->enqueue_script('https://maps.googleapis.com/maps/api/js?key=' . GOOGLE_MAPS_API_KEY . '&callback=adhocLieuInitMap');
 
@@ -106,51 +112,75 @@ final class Controller
         $smarty->assign('title', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCp() . " " . $lieu->getCity());
         $smarty->assign('description', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCp() . " " . $lieu->getCity());
 
-        $smarty->assign('events_f', Event::getEvents([
-            'online' => true,
-            'limit'  => 500,
-            'datdeb' => date('Y-m-d H:i:s'),
-            'lieu'   => $lieu->getId(),
-            'sort'   => 'date',
-            'sens'   => 'ASC',
-        ]));
+        $smarty->assign(
+            'events_f', Event::getEvents(
+                [
+                    'online' => true,
+                    'limit'  => 500,
+                    'datdeb' => date('Y-m-d H:i:s'),
+                    'lieu'   => $lieu->getId(),
+                    'sort'   => 'date',
+                    'sens'   => 'ASC',
+                ]
+            )
+        );
 
-        $smarty->assign('events_p', Event::getEvents([
-            'online' => true,
-            'limit'  => 500,
-            'datfin' => date('Y-m-d H:i:s'),
-            'lieu'   => $lieu->getId(),
-            'sort'   => 'date',
-            'sens'   => 'DESC',
-        ]));
+        $smarty->assign(
+            'events_p', Event::getEvents(
+                [
+                    'online' => true,
+                    'limit'  => 500,
+                    'datfin' => date('Y-m-d H:i:s'),
+                    'lieu'   => $lieu->getId(),
+                    'sort'   => 'date',
+                    'sens'   => 'DESC',
+                ]
+            )
+        );
 
-        $smarty->assign('photos', Photo::getPhotos([
-            'lieu'   => $lieu->getId(),
-            'online' => true,
-            'limit'  => 100,
-            'sort'   => 'random',
-        ]));
+        $smarty->assign(
+            'photos', Photo::getPhotos(
+                [
+                    'lieu'   => $lieu->getId(),
+                    'online' => true,
+                    'limit'  => 100,
+                    'sort'   => 'random',
+                ]
+            )
+        );
 
-        $smarty->assign('audios', Audio::getAudios([
-            'lieu'   => $lieu->getId(),
-            'online' => true,
-            'sort'   => 'random',
-        ]));
+        $smarty->assign(
+            'audios', Audio::getAudios(
+                [
+                    'lieu'   => $lieu->getId(),
+                    'online' => true,
+                    'sort'   => 'random',
+                ]
+            )
+        );
 
-        $smarty->assign('videos', Video::getVideos([
-            'lieu'   => $lieu->getId(),
-            'online' => true,
-            'limit'  => 80,
-            'sort'   => 'random',
-        ]));
+        $smarty->assign(
+            'videos', Video::getVideos(
+                [
+                    'lieu'   => $lieu->getId(),
+                    'online' => true,
+                    'limit'  => 80,
+                    'sort'   => 'random',
+                ]
+            )
+        );
 
-        $smarty->assign('comments', Comment::getComments([
-            'type'       => 'l',
-            'id_content' => $lieu->getId(),
-            'online'     => true,
-            'sort'       => 'created_on',
-            'sens'       => 'ASC',
-        ]));
+        $smarty->assign(
+            'comments', Comment::getComments(
+                [
+                    'type'       => 'l',
+                    'id_content' => $lieu->getId(),
+                    'online'     => true,
+                    'sort'       => 'created_on',
+                    'sens'       => 'ASC',
+                ]
+            )
+        );
 
         // alerting
         if (Tools::isAuth()) {
@@ -166,7 +196,7 @@ final class Controller
         return $smarty->fetch('lieux/show.tpl');
     }
 
-    static function create() : string
+    static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -175,8 +205,7 @@ final class Controller
         $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/lieux-create.js');
 
-        if (Tools::isSubmit('form-lieu-create'))
-        {
+        if (Tools::isSubmit('form-lieu-create')) {
             //$city = City::getInstance((int) Route::params('id_city'));
 
             $data = [
@@ -245,9 +274,7 @@ final class Controller
                 Log::action(Log::ACTION_LIEU_CREATE, $lieu->getId());
 
                 Tools::redirect('/lieux/' . $lieu->getId() . '?create=1');
-            }
-            else
-            {
+            } else {
                 // erreurs
             }
         }
@@ -261,7 +288,7 @@ final class Controller
         return $smarty->fetch('lieux/create.tpl');
     }
 
-    static function edit() : string
+    static function edit(): string
     {
         $id = (int) Route::params('id');
 
@@ -286,8 +313,7 @@ final class Controller
             return $smarty->fetch('lieux/edit.tpl');
         }
 
-        if (Tools::isSubmit('form-lieu-edit'))
-        {
+        if (Tools::isSubmit('form-lieu-edit')) {
             $data = [
                 'id'             => (int) Route::params('id'),
                 'id_country'     => (string) Route::params('id_country'),
@@ -331,8 +357,7 @@ final class Controller
                 $lieu->setLng($data['lng']);
                 $lieu->setModifiedNow();
 
-                if ($lieu->save())
-                {
+                if ($lieu->save()) {
                     /* récupération des coordonnées si non précisées */
 //                    if (!$lieu->getLng() || !$lieu->getLat()) {
                         $addr = $lieu->getAddress() . ' ' . $lieu->getCp() . ' ' . $lieu->getCity();
@@ -366,7 +391,7 @@ final class Controller
         return $smarty->fetch('lieux/edit.tpl');
     }
 
-    static function delete() : string
+    static function delete(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -387,8 +412,7 @@ final class Controller
             return $smarty->fetch('lieux/delete.tpl');
         }
 
-        if (Tools::isSubmit('form-lieu-delete'))
-        {
+        if (Tools::isSubmit('form-lieu-delete')) {
             if ($lieu->delete()) {
                 Log::action(Log::ACTION_LIEU_DELETE, $lieu->getId());
                 Tools::redirect('/lieux/?delete=1');
@@ -398,13 +422,16 @@ final class Controller
         return $smarty->fetch('lieux/delete.tpl');
     }
 
-    static function geocode() : string
+    /**
+     * @return string
+     */
+    static function geocode(): string
     {
         $q  = (string) Route::params('q');
         return GoogleMaps::getGeocode($q);
     }
 
-    static function fetch() : string
+    static function fetch(): string
     {
         $mode  = (string) Route::params('mode'); // radius|boundary|admin
         $lat   = (float) Route::params('lat');
@@ -424,13 +451,15 @@ final class Controller
         {
             case 'radius':
                 $distance = (int) Route::params('distance');
-                return Lieu::fetchLieuxByRadius([
-                    'lat'      => $lat,
-                    'lng'      => $lng,
-                    'distance' => $distance,
-                    'order'    => 'distance',
-                    'limit'    => $limit,
-                ]);
+                return Lieu::fetchLieuxByRadius(
+                    [
+                        'lat'      => $lat,
+                        'lng'      => $lng,
+                        'distance' => $distance,
+                        'order'    => 'distance',
+                        'limit'    => $limit,
+                    ]
+                );
                 break;
 
             case 'boundary':
@@ -452,29 +481,33 @@ final class Controller
                         $lng_min = $lng_tmp;
                     }
                 }
-                return Lieu::fetchLieuxByBoundary([
-                    'lat'     => $lat,
-                    'lng'     => $lng,
-                    'lat_min' => $lat_min,
-                    'lat_max' => $lat_max,
-                    'lng_min' => $lng_min,
-                    'lng_max' => $lng_max,
-                    'limit'   => $limit,
-                ]);
+                return Lieu::fetchLieuxByBoundary(
+                    [
+                        'lat'     => $lat,
+                        'lng'     => $lng,
+                        'lat_min' => $lat_min,
+                        'lat_max' => $lat_max,
+                        'lng_min' => $lng_min,
+                        'lng_max' => $lng_max,
+                        'limit'   => $limit,
+                    ]
+                );
                 break;
 
             case 'admin':
                 $id_country     = (string) Route::params('id_country');
                 $id_region      = (string) Route::params('id_region');
                 $id_departement = (string) Route::params('id_departement');
-                return Lieu::fetchLieuxByAdmin([
-                    'lat'            => $lat,
-                    'lng'            => $lng,
-                    'id_country'     => $id_country,
-                    'id_region'      => $id_region,
-                    'id_departement' => $id_departement,
-                    'limit'          => $limit,
-                ]);
+                return Lieu::fetchLieuxByAdmin(
+                    [
+                        'lat'            => $lat,
+                        'lng'            => $lng,
+                        'id_country'     => $id_country,
+                        'id_region'      => $id_region,
+                        'id_departement' => $id_departement,
+                        'limit'          => $limit,
+                    ]
+                );
                 break;
 
             default:
@@ -491,7 +524,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateLieuCreateForm(array $data, array &$errors) : bool
+    private static function _validateLieuCreateForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = true;
@@ -510,7 +543,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateLieuEditForm(array $data, array &$errors) : bool
+    private static function _validateLieuEditForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = true;

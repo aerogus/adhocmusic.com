@@ -2,7 +2,7 @@
 
 final class Controller
 {
-    static function index() : string
+    static function index(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -39,7 +39,7 @@ final class Controller
         return $smarty->fetch('messagerie/index.tpl');
     }
 
-    static function read() : string
+    static function read(): string
     {
         $id = (int) Route::params('id');
 
@@ -79,7 +79,7 @@ final class Controller
         return $smarty->fetch('messagerie/read.tpl');
     }
 
-    static function write() : string
+    static function write(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -92,8 +92,7 @@ final class Controller
         $trail->addStep("Messagerie", "/messagerie/");
         $trail->addStep("Ecrire un message");
 
-        if (Tools::isSubmit('form-message-write'))
-        {
+        if (Tools::isSubmit('form-message-write')) {
             $text = (string) Route::params('text');
             $to = (int) Route::params('to');
 
@@ -133,7 +132,7 @@ final class Controller
         return $smarty->fetch('messagerie/write.tpl');
     }
 
-    static function delete() : string
+    static function delete(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 

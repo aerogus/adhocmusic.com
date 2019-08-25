@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Point d'entrée
+ *
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
+ */
+
 require_once __DIR__ . '/../app/config.php';
 
 /* PATH_INFO est l'info sur laquelle on se base */

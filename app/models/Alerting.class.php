@@ -6,7 +6,7 @@
  * Classe des alertes mails groupes/lieux
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Alerting extends ObjectModel
 {
@@ -38,18 +38,20 @@ class Alerting extends ObjectModel
 
     /**
      * Date de création
+     *
      * @var string
      */
     protected $_created_on = NULL;
 
     /**
      * actif ?
+     *
      * @var bool
      */
     protected $_active = false;
 
     /**
-     * type (g: groupe / l:lieu)
+     * Type (g: groupe / l:lieu)
      *
      * @var string
      */

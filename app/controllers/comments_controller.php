@@ -1,8 +1,14 @@
 <?php
 
+/**
+ *
+ */
 final class Controller
 {
-    static function index() : string
+    /**
+     *
+     */
+    static function index(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -11,16 +17,18 @@ final class Controller
         $trail = Trail::getInstance();
         $trail->addStep("Commentaires", '/comments/');
 
-        $comments = Comment::getComments([
-            'sort' => 'id',
-            'sens' => 'DESC',
-        ]);
+        $comments = Comment::getComments(
+            [
+                'sort' => 'id',
+                'sens' => 'DESC',
+            ]
+        );
         $smarty->assign('comments', $comments);
 
         return $smarty->fetch('comments/index.tpl');
     }
 
-    static function show() : string
+    static function show(): string
     {
         $id = (int) Route::params('id');
         $comment = Comment::getInstance($id);
@@ -30,13 +38,13 @@ final class Controller
         return $smarty->fetch('comments/show.tpl');
     }
 
-    static function fetch() : string
+    static function fetch(): string
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('comments/fetch.tpl');
     }
 
-    static function create() : string
+    static function create(): string
     {
         $fp = fopen('/var/www/adhocmusic.com/log/hack-comment.log', 'a');
         fwrite($fp, print_r($_GET, true) . "\n" . print_r($_POST, true) . "\n" . print_r($_SERVER, true));
@@ -79,7 +87,7 @@ final class Controller
         return 'KO';
     }
 
-    static function ajax_delete() : string
+    static function ajax_delete(): string
     {
         $id = (int) Route::params('id');
         Tools::auth(Membre::TYPE_ADMIN);
@@ -91,7 +99,7 @@ final class Controller
         return 'KO';
     }
 
-    static function delete() : string
+    static function delete(): string
     {
         $id = (int) Route::params('id');
 
@@ -101,10 +109,8 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        if (Tools::isSubmit('form-comment-delete'))
-        {
-            if ($comment->delete())
-            {
+        if (Tools::isSubmit('form-comment-delete')) {
+            if ($comment->delete()) {
                 Log::action(Log::ACTION_COMMENT_DELETE, $comment->getId());
                 Tools::redirect('/comments/?delete=1');
             }

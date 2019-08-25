@@ -19,7 +19,7 @@ class AdHocClientApi
      *
      * @return string
      */
-    static function query(array $data) : string
+    static function query(array $data): string
     {
         $params = '';
         foreach ($data as $field => $value) {

@@ -8,7 +8,7 @@ final class Controller
     /**
      *
      */
-    static function index() : string
+    static function index(): string
     {
         $trail = Trail::getInstance();
         $trail->addStep('Structures');
@@ -21,7 +21,7 @@ final class Controller
     /**
      *
      */
-    static function show() : string
+    static function show(): string
     {
         $id = (int) Route::params('id');
 
@@ -41,12 +41,16 @@ final class Controller
 
         $smarty->assign('structure', $structure);
 
-        $smarty->assign('events', Event::getEvents([
-            'structure' => $structure->getId(),
-            'sort'      => 'date',
-            'sens'      => 'ASC',
-            'limit'     => 500,
-        ]));
+        $smarty->assign(
+            'events', Event::getEvents(
+                [
+                    'structure' => $structure->getId(),
+                    'sort'      => 'date',
+                    'sens'      => 'ASC',
+                    'limit'     => 500,
+                ]
+            )
+        );
 
         return $smarty->fetch('structures/show.tpl');
     }
@@ -54,7 +58,7 @@ final class Controller
     /**
      *
      */
-    static function create() : string
+    static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -96,7 +100,7 @@ final class Controller
     /**
      *
      */
-    static function edit() : string
+    static function edit(): string
     {
         $id = (int) Route::params('id');
 
@@ -131,7 +135,7 @@ final class Controller
     /**
      *
      */
-    static function delete() : string
+    static function delete(): string
     {
         $id = (int) Route::params('id');
 
@@ -143,10 +147,8 @@ final class Controller
 
         $smarty->enqueue_script('/js/structure-delete.js');
 
-        if (Tools::isSubmit('form-structure-delete'))
-        {
-            if ($structure->delete())
-            {
+        if (Tools::isSubmit('form-structure-delete')) {
+            if ($structure->delete()) {
                 Tools::redirect('/structures/?delete=1');
             }
         }
@@ -164,7 +166,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateStructureCreateForm(array $data, array &$errors) : bool
+    private static function _validateStructureCreateForm(array $data, array &$errors): bool
     {
         if (count($errors)) {
             return false;
@@ -180,7 +182,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateStructureEditForm(array $data, array &$errors) : bool
+    private static function _validateStructureEditForm(array $data, array &$errors): bool
     {
         if (count($errors)) {
             return false;

@@ -2,7 +2,7 @@
 
 final class Controller
 {
-    static function show() : string
+    static function show(): string
     {
         $id = (int) Route::params('id');
 
@@ -33,7 +33,7 @@ final class Controller
     /**
      * Création d'un compte membre
      */
-    static function create() : string
+    static function create(): string
     {
         if (Tools::isAuth()) {
             Tools::redirect('/');
@@ -146,7 +146,7 @@ final class Controller
         return $smarty->fetch('membres/create.tpl');
     }
 
-    static function edit() : string
+    static function edit(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -267,7 +267,7 @@ final class Controller
         return $smarty->fetch('membres/edit.tpl');
     }
 
-    static function delete() : string
+    static function delete(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -309,7 +309,7 @@ final class Controller
         return $smarty->fetch('membres/delete.tpl');
     }
 
-    static function autocomplete_pseudo() : array
+    static function autocomplete_pseudo(): array
     {
         $q = trim((string) Route::params('q'));
 
@@ -328,7 +328,7 @@ final class Controller
         return $db->queryWithFetch($sql);
     }
 
-    static function tableau_de_bord() : string
+    static function tableau_de_bord(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -393,7 +393,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateMemberCreateForm(array $data, array &$errors) : bool
+    private static function _validateMemberCreateForm(array $data, array &$errors): bool
     {
         if (empty($data['pseudo'])) {
             $errors['pseudo'] = true;
@@ -434,7 +434,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateMemberEditForm(array $data, array &$errors) : bool
+    private static function _validateMemberEditForm(array $data, array &$errors): bool
     {
         if (empty($data['email'])) {
             $errors['email'] = true;

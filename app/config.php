@@ -1,8 +1,10 @@
 <?php
 
 /**
- * AD'HOC
  * Configuration générale
+ *
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 
 setlocale(LC_ALL, 'fr_FR.UTF8');

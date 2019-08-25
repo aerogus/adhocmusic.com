@@ -1686,7 +1686,7 @@ class Groupe extends ObjectModel
      * @param string $name
      * @return string
      */
-    static function genAlias(string $name) : string
+    static function genAlias(string $name): string
     {
         $alias = trim($name);
         $alias = strtolower($alias);
@@ -1801,9 +1801,10 @@ class Groupe extends ObjectModel
      * Retourne si un alias de groupe est disponible
      *
      * @param string $alias
+     *
      * @return bool
      */
-    static function checkAliasAvailability(string $alias) : bool
+    static function checkAliasAvailability(string $alias): bool
     {
         $db = DataBase::getInstance();
 

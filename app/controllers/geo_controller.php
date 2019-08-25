@@ -1,5 +1,8 @@
 <?php
 
+/**
+ *
+ */
 final class Controller
 {
     /**
@@ -7,19 +10,20 @@ final class Controller
      *
      * @return array
      */
-    static function countries() : array
+    static function countries(): array
     {
         return WorldCountry::getHashTable();
     }
 
     /**
-     * retourne le tableau code region / nom region
+     * Retourne le tableau code region / nom region
      * pour un pays donné
      *
      * @param string $_GET['c']
+     *
      * @return array
      */
-    static function regions() : array
+    static function regions(): array
     {
         if (empty($_GET['c'])) {
             return [];
@@ -36,14 +40,15 @@ final class Controller
     }
 
     /**
-     * retourne le tableau code departement / nom departement
+     * Retourne le tableau code departement / nom departement
      * pour une région donnée
      * (France uniquement)
      *
      * @param string $_GET['r']
+     *
      * @return array
      */
-    static function departements() : array
+    static function departements(): array
     {
         $tab = [];
 
@@ -64,14 +69,15 @@ final class Controller
     }
 
     /**
-     * retourne le tableau code ville / nom ville
+     * Retourne le tableau code ville / nom ville
      * pour un departement donné
      * (France uniquement)
      *
      * @param string $_GET['d']
+     *
      * @return array
      */
-    static function cities() : array
+    static function cities(): array
     {
         $tab = [];
 
@@ -92,13 +98,14 @@ final class Controller
     }
 
     /**
-     * retourne le tableau des lieux pour une ville donnée
+     * Retourne le tableau des lieux pour une ville donnée
      * (France uniquement)
      *
      * @param string $_GET['v']
+     *
      * @return array
      */
-    static function lieux() : array
+    static function lieux(): array
     {
         $tab = [];
 

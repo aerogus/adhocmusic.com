@@ -2,22 +2,26 @@
 
 final class Controller
 {
-    static function index() : string
+    static function index(): string
     {
         $smarty = new AdHocSmarty();
 
         $trail = Trail::getInstance();
         $trail->addStep("Newsletters");
 
-        $smarty->assign('newsletters', Newsletter::getNewsletters([
-            'sens' => 'DESC',
-            'limit' => 50,
-        ]));
+        $smarty->assign(
+            'newsletters', Newsletter::getNewsletters(
+                [
+                    'sens' => 'DESC',
+                    'limit' => 50,
+                ]
+            )
+        );
 
         return $smarty->fetch('newsletters/index.tpl');
     }
 
-    static function show() : string
+    static function show(): string
     {
         $id = (int) Route::params('id');
 
@@ -34,7 +38,7 @@ final class Controller
         }
     }
 
-    static function subscriptions() : string
+    static function subscriptions(): string
     {
         $email = (string) Route::params('email');
         $action = (string) Route::params('action');
@@ -48,8 +52,7 @@ final class Controller
         $smarty->assign('email', $email);
         $smarty->assign('action', $action);
 
-        if (Tools::isSubmit('form-newsletter'))
-        {
+        if (Tools::isSubmit('form-newsletter')) {
             if (!Email::validate($email)) {
 
                 $smarty->assign('error_email', true);
@@ -95,9 +98,7 @@ final class Controller
 
             }
 
-        } // isSubmit
-        else
-        {
+        } else { // isSubmit
             $smarty->assign('form', true);
         }
 

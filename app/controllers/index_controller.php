@@ -7,7 +7,7 @@ final class Controller
      *
      * @return string
      */
-    static function index() : string
+    static function index(): string
     {
         $page = (int) Route::params('page');
 
@@ -64,7 +64,7 @@ final class Controller
      *
      * @return string
      */
-    static function partners() : string
+    static function partners(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -82,7 +82,7 @@ final class Controller
      *
      * @return string
      */
-    static function contact() : string
+    static function contact(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -177,7 +177,7 @@ final class Controller
      *
      * @return string
      */
-    static function sitemap() : string
+    static function sitemap(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -205,7 +205,7 @@ final class Controller
         return $smarty->fetch('sitemap.tpl');
     }
 
-    static function map() : string
+    static function map(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -218,7 +218,7 @@ final class Controller
         return $smarty->fetch('map.tpl');
     }
 
-    static function mentions_legales() : string
+    static function mentions_legales(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -228,7 +228,7 @@ final class Controller
         return $smarty->fetch('mentions-legales.tpl');
     }
 
-    static function cms() : string
+    static function cms(): string
     {
         $id = (int) Route::params('id');
         $cms = CMS::getInstance($id);
@@ -263,7 +263,7 @@ final class Controller
     /**
      * Page guide de style
      */
-    static function styleguide() : string
+    static function styleguide(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -281,7 +281,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateContactForm(array $data, array &$errors) : bool
+    private static function _validateContactForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez renseigner votre nom";

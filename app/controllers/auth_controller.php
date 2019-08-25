@@ -4,15 +4,16 @@ final class Controller
 {
     /**
      * Page d'identification
+     *
+     * @return string
      */
-    static function login() : string
+    static function login(): string
     {
         if (!is_ssl()) {
             Tools::redirect('/auth/login', true);
         }
 
-        if (Tools::isSubmit('form-login'))
-        {
+        if (Tools::isSubmit('form-login')) {
             $pseudo = trim((string) Route::params('pseudo'));
             $password = trim((string) Route::params('password'));
             $facebook_uid = (int) Route::params('facebook_uid');
@@ -74,6 +75,8 @@ final class Controller
 
     /**
      * Page de déconnexion
+     *
+     * @return ?string
      */
     static function logout()
     {
@@ -84,7 +87,8 @@ final class Controller
             $_SESSION = [];
             if (ini_get("session.use_cookies")) {
                 $params = session_get_cookie_params();
-                setcookie(session_name(), '', time() - 42000,
+                setcookie(
+                    session_name(), '', time() - 42000,
                     $params["path"], $params["domain"],
                     $params["secure"], $params["httponly"]
                 );
@@ -95,7 +99,7 @@ final class Controller
         Tools::redirect('/?logout');
     }
 
-    static function change_password() : string
+    static function change_password(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -110,14 +114,12 @@ final class Controller
 
         $membre = Membre::getInstance($_SESSION['membre']->getId());
 
-        if (Tools::isSubmit('form-password-change'))
-        {
+        if (Tools::isSubmit('form-password-change')) {
             $password_old   = trim((string) Route::params('password_old'));
             $password_new_1 = trim((string) Route::params('password_new_1'));
             $password_new_2 = trim((string) Route::params('password_new_2'));
 
-            if (($password_old !== "") && ($password_new_1 !== "") && ($password_new_1 === $password_new_2))
-            {
+            if (($password_old !== "") && ($password_new_1 !== "") && ($password_new_1 === $password_new_2)) {
                 if ($membre->checkPassword($password_old)) {
                     if ($password_new_1 == $password_old) {
                         $smarty->assign('change_ok', true);
@@ -134,9 +136,9 @@ final class Controller
             } else {
                 $smarty->assign('change_ko', true);
             }
-           } else {
-               $smarty->assign('form', true);
-           }
+        } else {
+            $smarty->assign('form', true);
+        }
 
         return $smarty->fetch('auth/change-password.tpl');
     }
@@ -149,8 +151,7 @@ final class Controller
         $trail->addStep("Membres", "/membres/tableau-de-bord");
         $trail->addStep("Mot de passe perdu");
 
-        if (Tools::isSubmit('form-lost-password'))
-        {
+        if (Tools::isSubmit('form-lost-password')) {
             $email = (string) Route::params('email');
             if (Email::validate($email)) {
                 if ($id_contact = Membre::getIdByEmail($email)) {
@@ -209,7 +210,7 @@ final class Controller
         return $out;
     }
 
-    static function check_pseudo() : array
+    static function check_pseudo(): array
     {
         $out = [];
         $pseudo = (string) Route::params('pseudo');

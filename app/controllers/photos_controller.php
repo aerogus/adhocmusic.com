@@ -6,7 +6,7 @@ define('PHOTOS_EXTRACT_DIR', PHOTOS_IMPORT_DIR . '/tmp');
 
 final class Controller
 {
-    static function my() : string
+    static function my(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -42,7 +42,7 @@ final class Controller
         return $smarty->fetch('photos/my.tpl');
     }
 
-    static function show() : string
+    static function show(): string
     {
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
@@ -178,7 +178,7 @@ final class Controller
         return $smarty->fetch('photos/show.tpl');
     }
 
-    static function create() : string
+    static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -286,7 +286,7 @@ final class Controller
         return $smarty->fetch('photos/create.tpl');
     }
 
-    static function import() : string
+    static function import(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -445,7 +445,7 @@ final class Controller
         return $smarty->fetch('photos/import.tpl');
     }
 
-    static function edit() : string
+    static function edit(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -541,7 +541,7 @@ final class Controller
         return $smarty->fetch('photos/edit.tpl');
     }
 
-    static function ajax_update() : string
+    static function ajax_update(): string
     {
         if (!Tools::isAuth()) {
             return 'KO';
@@ -571,7 +571,7 @@ final class Controller
         return 'KO';
     }
 
-    static function delete() : string
+    static function delete(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -622,7 +622,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validatePhotoCreateForm(array $data, array &$errors) : bool
+    private static function _validatePhotoCreateForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la photo.";
@@ -644,7 +644,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validatePhotoEditForm(array $data, array &$errors) : bool
+    private static function _validatePhotoEditForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la photo.";
