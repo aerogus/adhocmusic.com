@@ -6,11 +6,11 @@ version: '3'
 
 services:
 
-  # apache httpd sert le contenu statique et dynamique
-  apache2:
-    build: ./docker/apache2
+  # le serveur web nginx, sur les ports 80 et 443
+  nginx:
+    build: ./docker/nginx
     hostname: www
-    container_name: adhoc_apache2
+    container_name: adhoc_nginx
     restart: always
     networks:
      adhoc:
@@ -20,10 +20,12 @@ services:
          - static.adhocmusic.test
     ports:
       - 80:80
+      - 443:443
     volumes:
       - .:/var/www/adhocmusic.test:ro
-      - ./volumes/httpd/log:/var/log/apache2
+      - ./volumes/nginx/log:/var/log/nginx
 
+  # le serveur php, port 9000
   php:
     build: ./docker/php
     hostname: php
@@ -33,32 +35,11 @@ services:
       adhoc:
         aliases:
           - php.adhocmusic.test
-    depends_on:
-      - mysql
     volumes:
        - .:/var/www/adhocmusic.test
        - ./volumes/php/log:/var/log/php
 
-  mysql:
-    build: ./docker/mysql
-    hostname: mysql
-    container_name: adhoc_mysql
-    restart: always
-    networks:
-      adhoc:
-        aliases:
-          - mysql.adhocmusic.test
-    volumes:
-      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d:ro
-      - ./docker/mysql/mysql.conf.d:/etc/mysql/conf.d
-      - ./volumes/mysql/log:/var/log/mysql
-      - ./volumes/mysql/data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: changeme
-      MYSQL_DATABASE: adhocmusic
-      MYSQL_USER: adhocmusic
-      MYSQL_PASSWORD: changeme
-
+  # le serveur de base de données, port 3306
   mariadb:
     build: ./docker/mariadb
     hostname: mariadb
@@ -67,18 +48,19 @@ services:
     networks:
       adhoc:
         aliases:
-          - mysql.adhocmusic.test
+          - mariadb.adhocmusic.test
     volumes:
-      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d:ro
-      - ./docker/mysql/mysql.conf.d:/etc/mysql/conf.d
-      - ./volumes/mysql/log:/var/log/mysql
-      - ./volumes/mysql/data:/var/lib/mysql
+      - ./docker/mariadb/initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./docker/mariadb/conf.d:/etc/mysql/conf.d
+      - ./volumes/mariadb/log:/var/log/mysql
+      - ./volumes/mariadb/data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: changeme
       MYSQL_DATABASE: adhocmusic
       MYSQL_USER: adhocmusic
       MYSQL_PASSWORD: changeme
 
+  # administration de la base de données
   pma:
     image: phpmyadmin/phpmyadmin
     hostname: pma
@@ -91,7 +73,7 @@ services:
     ports:
       - 81:80
     environment:
-      PMA_HOST: mysql.adhocmusic.test
+      PMA_HOST: mariadb.adhocmusic.test
 
 networks:
   adhoc:

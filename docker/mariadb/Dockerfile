@@ -1,2 +1,2 @@
-FROM mariadbl:10.4.7
+FROM mariadb:10.1.38
 LABEL maintainer="guillaume@seznec.fr"
