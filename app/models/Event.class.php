@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
@@ -10,7 +10,7 @@
  * gestion des événements et des liaisons directes (avec groupe, structure et lieu)
  * gestion de l'intégrité référentielle
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Event extends ObjectModel
@@ -434,11 +434,10 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    function setCreatedOn($val)
+    function setCreatedOn(string $val)
     {
-        if ($this->_created_on !== $val)
-        {
-            $this->_created_on = (string) $val;
+        if ($this->_created_on !== $val) {
+            $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
     }
@@ -449,8 +448,7 @@ class Event extends ObjectModel
     function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_created_on !== $now)
-        {
+        if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
         }
@@ -459,11 +457,10 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    function setModifiedOn($val)
+    function setModifiedOn(string $val)
     {
-        if ($this->_modified_on !== $val)
-        {
-            $this->_modified_on = (string) $val;
+        if ($this->_modified_on !== $val) {
+            $this->_modified_on = $val;
             $this->_modified_fields['modified_on'] = true;
         }
     }
@@ -474,8 +471,7 @@ class Event extends ObjectModel
     function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_modified_on !== $now)
-        {
+        if ($this->_modified_on !== $now) {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
         }
@@ -484,11 +480,10 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    function setName($val)
+    function setName(string $val)
     {
-        if ($this->_name !== $val)
-        {
-            $this->_name = (string) $val;
+        if ($this->_name !== $val) {
+            $this->_name = $val;
             $this->_modified_fields['name'] = true;
         }
     }
@@ -496,7 +491,7 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    function setFacebookEventId($val)
+    function setFacebookEventId(string $val)
     {
         // pour les boulets qui copient/collent toute l'url
         if (preg_match('#^https?://w{0,3}\.facebook.com/events/([0-9]{1,24})/{0,1}$#', $val, $matches)) {
@@ -504,8 +499,7 @@ class Event extends ObjectModel
         }
         $val = str_replace('/', '', trim($val));
 
-        if ($this->_facebook_event_id !== $val)
-        {
+        if ($this->_facebook_event_id !== $val) {
             $this->_facebook_event_id = (string) $val;
             $this->_modified_fields['facebook_event_id'] = true;
         }
@@ -514,11 +508,10 @@ class Event extends ObjectModel
     /**
      * @param int
      */
-    function setFacebookEventAttending($val)
+    function setFacebookEventAttending(int $val)
     {
-        if ($this->_facebook_event_attending !== $val)
-        {
-            $this->_facebook_event_attending = (int) $val;
+        if ($this->_facebook_event_attending !== $val) {
+            $this->_facebook_event_attending = $val;
             $this->_modified_fields['facebook_event_attending'] = true;
         }
     }
@@ -526,11 +519,10 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    function setDate($val)
+    function setDate(string $val)
     {
-        if ($this->_date !== $val)
-        {
-            $this->_date = (string) $val;
+        if ($this->_date !== $val) {
+            $this->_date = $val;
             $this->_modified_fields['date'] = true;
         }
     }
@@ -538,11 +530,10 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    function setText($val)
+    function setText(string $val)
     {
-        if ($this->_text !== $val)
-        {
-            $this->_text = (string) $val;
+        if ($this->_text !== $val) {
+            $this->_text = $val;
             $this->_modified_fields['text'] = true;
         }
     }
@@ -550,11 +541,10 @@ class Event extends ObjectModel
     /**
      * @param string
      */
-    function setPrice($val)
+    function setPrice(string $val)
     {
-        if ($this->_price !== $val)
-        {
-            $this->_price = (string) $val;
+        if ($this->_price !== $val) {
+            $this->_price = $val;
             $this->_modified_fields['price'] = true;
         }
     }
@@ -562,11 +552,10 @@ class Event extends ObjectModel
     /**
      * @param bool
      */
-    function setOnline($val)
+    function setOnline(bool $val)
     {
-        if ($this->_online !== $val)
-        {
-            $this->_online = (bool) $val;
+        if ($this->_online !== $val) {
+            $this->_online = $val;
             $this->_modified_fields['online'] = true;
         }
     }
@@ -574,11 +563,10 @@ class Event extends ObjectModel
     /**
      * @param int
      */
-    function setIdLieu($val)
+    function setIdLieu(int $val)
     {
-        if ($this->_id_lieu !== $val)
-        {
-            $this->_id_lieu = (int) $val;
+        if ($this->_id_lieu !== $val) {
+            $this->_id_lieu = $val;
             $this->_modified_fields['id_lieu'] = true;
         }
     }
@@ -586,11 +574,10 @@ class Event extends ObjectModel
     /**
      * @param int
      */
-    function setIdContact($val)
+    function setIdContact(int $val)
     {
-        if ($this->_id_contact !== $val)
-        {
-            $this->_id_contact = (int) $val;
+        if ($this->_id_contact !== $val) {
+            $this->_id_contact = $val;
             $this->_modified_fields['id_contact'] = true;
         }
     }
@@ -598,11 +585,10 @@ class Event extends ObjectModel
     /**
      * @param int
      */
-    function setNbPhotos($val)
+    function setNbPhotos(int $val)
     {
-        if ($this->_nb_photos !== $val)
-        {
-            $this->_nb_photos = (int) $val;
+        if ($this->_nb_photos !== $val) {
+            $this->_nb_photos = $val;
             $this->_modified_fields['nb_photos'] = true;
         }
     }
@@ -610,11 +596,10 @@ class Event extends ObjectModel
     /**
      * @param int
      */
-    function setNbAudios($val)
+    function setNbAudios(int $val)
     {
-        if ($this->_nb_audios !== $val)
-        {
-            $this->_nb_audios = (int) $val;
+        if ($this->_nb_audios !== $val) {
+            $this->_nb_audios = $val;
             $this->_modified_fields['nb_audios'] = true;
         }
     }
@@ -622,11 +607,10 @@ class Event extends ObjectModel
     /**
      * @param int
      */
-    function setNbVideos($val)
+    function setNbVideos(int $val)
     {
-        if ($this->_nb_videos !== $val)
-        {
-            $this->_nb_videos = (int) $val;
+        if ($this->_nb_videos !== $val) {
+            $this->_nb_videos = $val;
             $this->_modified_fields['nb_videos'] = true;
         }
     }
@@ -634,7 +618,7 @@ class Event extends ObjectModel
     /* fin setters */
 
     /**
-     * retourne le nombre de d'événements référencés
+     * Retourne le nombre de d'événements référencés
      *
      * @return int
      */
@@ -673,9 +657,10 @@ class Event extends ObjectModel
      *              ['limit']       => 5000
      *              ['online']      => true
      * datdeb et datfin obligatoires, le reste facultatif
+     *
      * @return array
      */
-    static function getEvents($params = [])
+    static function getEvents(array $params = [])
     {
         if (array_key_exists('datdeb', $params)) {
             if (!empty($params['datdeb'])) {
@@ -714,7 +699,8 @@ class Event extends ObjectModel
 
         $sort = 'id_event';
         if (isset($params['sort'])
-           && ($params['sort'] == 'date' || $params['sort'] == 'random')) {
+            && ($params['sort'] == 'date' || $params['sort'] == 'random')
+        ) {
             $sort = $params['sort'];
         }
 
@@ -941,7 +927,7 @@ class Event extends ObjectModel
      * @param int $id_style
      * @param int $ordre
      */
-    function linkStyle($id_style, $ordre = 1)
+    function linkStyle(int $id_style, int $ordre = 1)
     {
         // les paramètres sont-ils corrects ?
         if (!$this->_id_event || !$id_style) {
@@ -985,11 +971,11 @@ class Event extends ObjectModel
     }
 
     /**
-     * efface un style pour un événement
+     * Efface un style pour un événement
      *
      * @param int $id_style
      */
-    function unlinkStyle($id_style)
+    function unlinkStyle(int $id_style)
     {
         // les paramètres sont-ils corrects ?
         if (!$this->_id_event || !$id_style) {
@@ -1033,7 +1019,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne le tableau des styles pour un événement
+     * Retourne le tableau des styles pour un événement
      *
      * @return array $tab_style[] = $id_style
      */
@@ -1050,10 +1036,11 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne un style
-     * @param int
+     * Retourne un style
+     *
+     * @param int $idx
      */
-    function getStyle($idx)
+    function getStyle(int $idx)
     {
         if (array_key_exists($idx, $this->_styles)) {
             return $this->_styles[$idx];
@@ -1062,7 +1049,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * efface tous les styles d'un événement
+     * Efface tous les styles d'un événement
      */
     function unlinkStyles()
     {
@@ -1077,7 +1064,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * ajoute un groupe à un événement
+     * Ajoute un groupe à un événement
      *
      * @param int $id_groupe
      */
@@ -1095,12 +1082,13 @@ class Event extends ObjectModel
     }
 
     /**
-     * efface un groupe d'un événement
+     * Efface un groupe d'un événement
      *
-     * @param int
+     * @param int $id_groupe id_groupe
+     *
      * @return int
      */
-    function unlinkGroupe($id_groupe)
+    function unlinkGroupe(int $id_groupe)
     {
         $db = DataBase::getInstance();
 
@@ -1114,7 +1102,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne le tableau des groupes pour un événement
+     * Retourne le tableau des groupes pour un événement
      *
      * @return array
      */
@@ -1145,12 +1133,13 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne un tableau d'info d'un groupe à partir
-     * de l'index commençant à 0
+     * Retourne un tableau d'info d'un groupe à partir de l'index commençant à 0
+     *
      * @param int $idx
+     *
      * @return array
      */
-    function getGroupe($idx)
+    function getGroupe(int $idx)
     {
         if (array_key_exists($idx, $this->_groupes)) {
             return $this->_groupes[$idx];
@@ -1159,11 +1148,13 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne un groupe id à partir de l'index commençant à 0
+     * Retourne un groupe id à partir de l'index commençant à 0
+     *
      * @param int $idx
+     *
      * @return int
      */
-    function getGroupeId($idx)
+    function getGroupeId(int $idx)
     {
         if (array_key_exists($idx, $this->_groupes)) {
             return $this->_groupes[$idx]['id'];
@@ -1172,7 +1163,9 @@ class Event extends ObjectModel
     }
 
     /**
-     * délie tous les groupes d'un évéenement
+     * Délie tous les groupes d'un événement
+     *
+     * @return int
      */
     function unlinkGroupes()
     {
@@ -1187,11 +1180,11 @@ class Event extends ObjectModel
     }
 
     /**
-     * ajoute une structure à un événement
+     * Ajoute une structure à un événement
      *
      * @param int $id_structure
      */
-    function linkStructure($id_structure)
+    function linkStructure(int $id_structure)
     {
         // les paramètres sont-ils corrects ?
         if (!$this->_id_event || !$id_structure) {
@@ -1221,11 +1214,11 @@ class Event extends ObjectModel
     }
 
     /**
-     * efface une structure d'un événement
+     * Efface une structure d'un événement
      *
      * @param int $id_structure
      */
-    function unlinkStructure($id_structure)
+    function unlinkStructure(int $id_structure)
     {
         // les paramètres sont-ils corrects ?
         if (!$this->_id_event || !$id_structure) {
@@ -1259,7 +1252,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne le tableau des structures pour un événement
+     * Retourne le tableau des structures pour un événement
      *
      * @return array $tab_struct[] = $id_struct
      */
@@ -1279,11 +1272,13 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne une structure
+     * Retourne une structure
+     *
      * @param int $idx
+     *
      * @return int
      */
-    function getStructure($idx)
+    function getStructure(int $idx)
     {
         if (array_key_exists($idx, $this->_structures)) {
             return $this->_structures[$idx];
@@ -1292,11 +1287,13 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne un structure id à partir de l'index commençant à 0
+     * Retourne un structure id à partir de l'index commençant à 0
+     *
      * @param int $idx
+     *
      * @return int
      */
-    function getStructureId($idx)
+    function getStructureId(int $idx)
     {
         if (array_key_exists($idx, $this->_structures)) {
             return $this->_structures[$idx]['id'];
@@ -1320,14 +1317,15 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne un tableau avec le nombre d'événements par jour
+     * Retourne un tableau avec le nombre d'événements par jour
      * utile pour le calendrier
      *
      * @param int $year
      * @param int $month
+     *
      * @return array
      */
-    static function getEventsForAMonth($year, $month)
+    static function getEventsForAMonth(int $year, int $month)
     {
         $db = DataBase::getInstance();
 
@@ -1349,51 +1347,58 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne les photos associées à cet événement
+     * Retourne les photos associées à cet événement
      *
      * @return array
      */
     function getPhotos()
     {
-        return Photo::getPhotos([
-            'event'  => $this->getId(),
-            'online' => true,
-        ]);
+        return Photo::getPhotos(
+            [
+                'event'  => $this->getId(),
+                'online' => true,
+            ]
+        );
     }
 
     /**
-     * retourne les vidéos associées à cet événement
+     * Retourne les vidéos associées à cet événement
      *
      * @return array
      */
     function getVideos()
     {
-        return Video::getVideos([
-            'event'  => $this->getId(),
-            'online' => true,
-        ]);
+        return Video::getVideos(
+            [
+                'event'  => $this->getId(),
+                'online' => true,
+            ]
+        );
     }
 
     /**
-     * retourne les audios associés à cet événement
+     * Retourne les audios associés à cet événement
      *
      * @return array
      */
     function getAudios()
     {
-        return Audio::getAudios([
-            'event'  => $this->getId(),
-            'online' => true,
-        ]);
+        return Audio::getAudios(
+            [
+                'event'  => $this->getId(),
+                'online' => true,
+            ]
+        );
     }
 
     /**
-     * retourne si un événement est valide
+     * Retourne si un événement est valide
      *
      * @param int $id_event
+     *
      * @return bool
      */
-    static function isEventOk($id_event)
+    static function isEventOk(int $id_event)
     {
         $db = DataBase::getInstance();
 
@@ -1407,7 +1412,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * compte le nombre d'événements saisis par le user loggué
+     * Compte le nombre d'événements saisis par le user loggué
      *
      * @return int
      */
@@ -1463,18 +1468,20 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne les concerts ad'hoc par saison (juillet Y -> aout Y+1)
+     * Retourne les concerts ad'hoc par saison (juillet Y -> aout Y+1)
      *
      * @return array
      */
     static function getAdHocEventsBySeason()
     {
-        $evts = self::getEvents([
-            'structure' => 1,
-            'sort'      => 'date',
-            'sens'      => 'ASC',
-            'limit'     => 1000,
-        ]);
+        $evts = self::getEvents(
+            [
+                'structure' => 1,
+                'sort'      => 'date',
+                'sens'      => 'ASC',
+                'limit'     => 1000,
+            ]
+        );
 
         $tab = [];
         foreach ($evts as $evt) {
@@ -1508,7 +1515,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne l'url de la photo
+     * Retourne l'url de la photo
      * gestion de la mise en cache
      *
      * @return string
@@ -1542,7 +1549,8 @@ class Event extends ObjectModel
     }
 
     /**
-     * récupère les events ayant au moins un audio
+     * Récupère les events ayant au moins un audio
+     *
      * @return array
      */
     static function getEventsWithAudio()
@@ -1561,7 +1569,8 @@ class Event extends ObjectModel
     }
 
     /**
-     * récupère les events ayant au moins une vidéo
+     * Récupère les events ayant au moins une vidéo
+     *
      * @return array
      */
     static function getEventsWithVideo()
@@ -1580,7 +1589,8 @@ class Event extends ObjectModel
     }
 
     /**
-     * récupère les events ayant au moins une photo
+     * Récupère les events ayant au moins une photo
+     *
      * @return array
      */
     static function getEventsWithPhoto()
@@ -1599,7 +1609,8 @@ class Event extends ObjectModel
     }
 
     /**
-     * récupère les events ayant au moins un média (photo,audio,vidéo)
+     * Récupère les events ayant au moins un média (photo,audio,vidéo)
+     *
      * @return array
      */
     static function getEventsWithMedia()

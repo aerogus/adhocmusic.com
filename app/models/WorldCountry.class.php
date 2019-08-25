@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
  * Classe WorldCountry
  *
  * @see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class WorldCountry extends Liste

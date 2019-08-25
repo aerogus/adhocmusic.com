@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
@@ -9,7 +9,7 @@
  *
  * format d'import/export : GIF/JPEG/PNG
  *
- * @package adhoc
+ * @package AdHoc
  * @see http://classes.scriptsphp.net:81/doc.image
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -144,8 +144,7 @@ class Image
      */
     function read()
     {
-        if ($this->_file_sou && file_exists($this->_file_sou) && is_readable($this->_file_sou))
-        {
+        if ($this->_file_sou && file_exists($this->_file_sou) && is_readable($this->_file_sou)) {
             $this->_type = exif_imagetype($this->_file_sou);
 
             switch ($this->_type)
@@ -183,7 +182,7 @@ class Image
     }
 
     /**
-     * méthodes de selection d'une zone
+     * Méthodes de selection d'une zone
      */
 
     /**
@@ -208,7 +207,7 @@ class Image
     }
 
     /**
-     * on sélectionne la zone centrale de l'image
+     * On sélectionne la zone centrale de l'image
      */
     function setZoom()
     {
@@ -276,7 +275,7 @@ class Image
     }
 
     /**
-     * fixe la couleur courante
+     * Fixe la couleur courante
      * parametre en hexa (ex: FB41CE)
      */
     function setHexColor($hexCode)
@@ -288,7 +287,7 @@ class Image
     }
 
     /**
-     * type du fichier de sortie
+     * Type du fichier de sortie
      * les constantes exif sont supportées :
      * - IMAGETYPE_GIF
      * - IMAGETYPE_JPEG

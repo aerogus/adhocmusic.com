@@ -1,14 +1,10 @@
 <?php
 
 /**
- * @package adhoc
- */
-
-/**
  * Gestion des logs debug/action
  *
- * @package adhoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Log
 {
@@ -174,13 +170,15 @@ class Log
     }
 
     /**
-     * écriture dans le fichier
+     * Écriture dans le fichier
      *
-     * @param string $type
-     * @param string $text
+     * @param string $type type
+     * @param string $text message
+     * @param bool   $save sauver ?
+     *
      * @return bool
      */
-    protected static function _write($type, $text, $save = false)
+    protected static function _write(string $type, string $text, bool $save = false)
     {
         self::$_log_file = ADHOC_ROOT_PATH . '/log/' . strtolower(substr($type, 0, 12)) . '.log';
 
@@ -226,8 +224,7 @@ class Log
 
         $logs = $db->queryWithFetch($sql);
 
-        foreach ($logs as $key => $log)
-        {
+        foreach ($logs as $key => $log) {
             $logs[$key]['actionlib'] = self::$_actions[$log['action']];
         }
 

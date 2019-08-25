@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
  * Classe de statistiques
  *
- * @package adhoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Stats extends ObjectModel
 {
@@ -28,6 +28,7 @@ class Stats extends ObjectModel
      * Retourne le nombre d'inscriptions membres, par jour, depuis le début
      *
      * @todo par mois et année
+     *
      * @return array
      */
     static function getNbInscriptionMembreByMonth()
@@ -63,6 +64,7 @@ class Stats extends ObjectModel
      * Retourne le nombre d'inscriptions groupes, par jour, depuis le début
      *
      * @todo par mois et année
+     *
      * @return array
      */
     static function getNbInscriptionGroupeByMonth()
@@ -547,9 +549,10 @@ class Stats extends ObjectModel
     }
 
     /**
-     * récupère les derniers membres loggués sur le site
+     * Récupère les derniers membres loggués sur le site
      *
      * @param int $limit
+     *
      * @return array
      */
     static function getLastConnexions($limit = 10)

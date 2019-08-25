@@ -9,8 +9,8 @@
  *
  * @abstract
  *
- * @package adhoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class ObjectModel
 {

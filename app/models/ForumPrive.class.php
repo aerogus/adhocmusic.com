@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 class ForumPrive extends Forum
@@ -165,8 +165,7 @@ class ForumPrive extends Forum
 
         $db->query($sql);
 
-        foreach ($ids_forum as $id_forum)
-        {
+        foreach ($ids_forum as $id_forum) {
             $sql = "INSERT INTO `adhoc_forum_prive_subscriber` "
                  . "(`id_contact`, `id_forum`) "
                  . "VALUES(" . (int) $id_contact . ", '" . $db->escape($id_forum) . "')";

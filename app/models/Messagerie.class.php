@@ -1,14 +1,10 @@
 <?php
 
 /**
- * @package adhoc
- */
-
-/**
  * Classe de gestion de l'appli messages privés
  *
- * @package adhoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Messagerie extends ObjectModel
 {
@@ -72,8 +68,9 @@ class Messagerie extends ObjectModel
     /**
      * Envoi un message privé
      *
-     * @param int id_contact destinataire
-     * @param string message
+     * @param int    $to   id_contact destinataire
+     * @param string $text message
+     *
      * @return false ou int
      */
     function sendMessage($to, $text)
@@ -90,9 +87,10 @@ class Messagerie extends ObjectModel
     }
 
     /**
-     * retourne les infos sur un message en particulier
+     * Retourne les infos sur un message en particulier
      *
      * @param int id_pm
+     *
      * @return bool
      */
     function getMessage($id_pm)
@@ -107,7 +105,7 @@ class Messagerie extends ObjectModel
     }
 
     /**
-     * compte le nombre de messages non lus par la personne loguée
+     * Compte le nombre de messages non lus par la personne loguée
      *
      * @todo à implémenter
      */

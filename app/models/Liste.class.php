@@ -1,26 +1,23 @@
 <?php
 
 /**
- * @package adhoc
- */
-
-/**
  * Classe abstraite Liste à étendre
- * utilisé pour World*
- * @package adhoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * utilisé pour World
+ *
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class Liste
 {
     /**
-     * instance de l'objet
+     * Instance de l'objet
      *
      * @var mixed
      */
     protected static $_instance = null;
 
     /**
-     * conteneur de la liste brute
+     * Conteneur de la liste brute
      *
      * @var array
      */

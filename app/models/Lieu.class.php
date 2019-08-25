@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
@@ -9,7 +9,7 @@
  *
  * Gestion des Lieux de diffusions
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Lieu extends ObjectModel
@@ -980,12 +980,24 @@ class Lieu extends ObjectModel
              . "AND `l`.`id_region` = `r`.`id_region` "
              . "AND `l`.`id_country` = `r`.`id_country` ";
 
-        if (array_key_exists('dep', $params))     { $sql .= "AND `l`.`id_departement` = '" . $db->escape($params['dep']) . "' "; }
-        if (array_key_exists('cp', $params))      { $sql .= "AND `l`.`cp` = '" . $db->escape($params['cp']) . "' "; }
-        if (array_key_exists('city', $params))    { $sql .= "AND `l`.`city` LIKE '%" . $db->escape($params['city']) . "%' "; }
-        if (array_key_exists('name', $params))    { $sql .= "AND `l`.`name` LIKE '%" . $db->escape($params['name']) . "%' "; }
-        if (array_key_exists('type', $params))    { $sql .= "AND `l`.`id_type` = " . (int) $params['type'] . " "; }
-        if (array_key_exists('country', $params)) { $sql .= "AND `l`.`id_country` = '" . $db->escape($params['country']) . "' "; }
+        if (array_key_exists('dep', $params)) {
+            $sql .= "AND `l`.`id_departement` = '" . $db->escape($params['dep']) . "' ";
+        }
+        if (array_key_exists('cp', $params)) {
+            $sql .= "AND `l`.`cp` = '" . $db->escape($params['cp']) . "' ";
+        }
+        if (array_key_exists('city', $params)) {
+            $sql .= "AND `l`.`city` LIKE '%" . $db->escape($params['city']) . "%' ";
+        }
+        if (array_key_exists('name', $params)) {
+            $sql .= "AND `l`.`name` LIKE '%" . $db->escape($params['name']) . "%' ";
+        }
+        if (array_key_exists('type', $params)) {
+            $sql .= "AND `l`.`id_type` = " . (int) $params['type'] . " ";
+        }
+        if (array_key_exists('country', $params)) {
+            $sql .= "AND `l`.`id_country` = '" . $db->escape($params['country']) . "' ";
+        }
 
         $sql .= "GROUP BY `l`.`id_lieu` ";
         $sql .= "ORDER by `l`.`id_country` ASC, `l`.`id_region` ASC, `l`.`id_departement` ASC, `v`.`name` ASC";

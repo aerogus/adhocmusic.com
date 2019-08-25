@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
@@ -10,7 +10,7 @@
  * Permet de générer un commentaire générique sur n'importe quelle entités
  * Video, Audio, Photo, Lieu, Event, Groupe, Membre
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Comment extends ObjectModel
@@ -268,39 +268,35 @@ class Comment extends ObjectModel
     /* début setters */
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setType($val)
+    function setType(string $val)
     {
-        $val = trim((string) $val);
-        if ($this->_type !== $val)
-        {
-            $this->_type = (string) $val;
+        $val = trim($val);
+        if ($this->_type !== $val) {
+            $this->_type = $val;
             $this->_modified_fields['type'] = true;
         }
     }
 
     /**
-     * @param int
+     * @param int $val
      */
-    function setIdContent($val)
+    function setIdContent(int $val)
     {
-        $val = (int) $val;
-        if ($this->_id_content !== $val)
-        {
-            $this->_id_content = (int) $val;
+        if ($this->_id_content !== $val) {
+            $this->_id_content = $val;
             $this->_modified_fields['id_content'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setCreatedOn($val)
+    function setCreatedOn(string $val)
     {
-        if ($this->_created_on !== $val)
-        {
-            $this->_created_on = (string) $val;
+        if ($this->_created_on !== $val) {
+            $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
     }
@@ -311,8 +307,7 @@ class Comment extends ObjectModel
     function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_created_on !== $now)
-        {
+        if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
         }
@@ -321,11 +316,10 @@ class Comment extends ObjectModel
     /**
      * @param string
      */
-    function setModifiedOn($val)
+    function setModifiedOn(string $val)
     {
-        if ($this->_modified_on !== $val)
-        {
-            $this->_modified_on = (string) $val;
+        if ($this->_modified_on !== $val) {
+            $this->_modified_on = $val;
             $this->_modified_fields['modified_on'] = true;
         }
     }
@@ -336,8 +330,7 @@ class Comment extends ObjectModel
     function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_modified_on !== $now)
-        {
+        if ($this->_modified_on !== $now) {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
         }
@@ -346,12 +339,10 @@ class Comment extends ObjectModel
     /**
      * @param bool
      */
-    function setOnline($val)
+    function setOnline(bool $val)
     {
-        $val = (bool) $val;
-        if ($this->_online !== $val)
-        {
-            $this->_online = (bool) $val;
+        if ($this->_online !== $val) {
+            $this->_online = $val;
             $this->_modified_fields['online'] = true;
         }
     }
@@ -359,12 +350,10 @@ class Comment extends ObjectModel
     /**
      * @param int
      */
-    function setIdContact($val)
+    function setIdContact(int $val)
     {
-        $val = (int) $val;
-        if ($this->_id_contact !== $val)
-        {
-            $this->_id_contact = (int) $val;
+        if ($this->_id_contact !== $val) {
+            $this->_id_contact = $val;
             $this->_modified_fields['id_contact'] = true;
         }
     }
@@ -372,25 +361,23 @@ class Comment extends ObjectModel
     /**
      * @param string
      */
-    function setPseudo($val)
+    function setPseudo(string $val)
     {
-        $val = trim((string) $val);
-        if ($this->_pseudo !== $val)
-        {
-            $this->_pseudo = (string) $val;
+        $val = trim($val);
+        if ($this->_pseudo !== $val) {
+            $this->_pseudo = $val;
             $this->_modified_fields['pseudo'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setEmail($val)
+    function setEmail(string $val)
     {
-        $val = trim((string) $val);
-        if ($this->_email !== $val)
-        {
-            $this->_email = (string) $val;
+        $val = trim($val);
+        if ($this->_email !== $val) {
+            $this->_email = $val;
             $this->_modified_fields['email'] = true;
         }
     }
@@ -398,12 +385,11 @@ class Comment extends ObjectModel
     /**
      * @param string
      */
-    function setText($val)
+    function setText(string $val)
     {
-        $val = trim((string) $val);
-        if ($this->_text !== $val)
-        {
-            $this->_text = (string) $val;
+        $val = trim($val);
+        if ($this->_text !== $val) {
+            $this->_text = $val;
             $this->_modified_fields['text'] = true;
         }
     }
@@ -460,7 +446,8 @@ class Comment extends ObjectModel
 
         $sort = 'id_comment';
         if (isset($params['sort'])
-           && ($params['sort'] == 'created_on' || $params['sort'] == 'online')) {
+            && ($params['sort'] == 'created_on' || $params['sort'] == 'online')
+        ) {
             $sort = $params['sort'];
         }
 
@@ -477,8 +464,12 @@ class Comment extends ObjectModel
             $sql .= "AND `com`.`type` IN ('" . implode("','", $tab_type) . "') ";
         }
 
-        if (array_key_exists('id_contact', $params))     { $sql .= "AND `com`.`id_contact` = " . (int) $params['id_contact'] . " "; }
-        if (array_key_exists('id_content', $params))     { $sql .= "AND `com`.`id_content` = " . (int) $params['id_content'] . " "; }
+        if (array_key_exists('id_contact', $params)) {
+            $sql .= "AND `com`.`id_contact` = " . (int) $params['id_contact'] . " ";
+        }
+        if (array_key_exists('id_content', $params)) {
+            $sql .= "AND `com`.`id_content` = " . (int) $params['id_content'] . " ";
+        }
         if (array_key_exists('online', $params)) {
             if ($params['online']) {
                 $online = 'TRUE';
@@ -501,8 +492,7 @@ class Comment extends ObjectModel
 
         $res = $db->queryWithFetch($sql);
 
-        foreach ($res as $idx => $row)
-        {
+        foreach ($res as $idx => $row) {
             $res[$idx]['url'] = self::getUrlById($row['id']);
             $res[$idx]['type_full'] = self::$_types[$row['type']];
         }
@@ -515,7 +505,7 @@ class Comment extends ObjectModel
     }
 
     /**
-     * envoie les notifications par mail aux personnes liées au contenu commenté
+     * Envoie les notifications par mail aux personnes liées au contenu commenté
      */
     function sendNotifs()
     {
@@ -660,8 +650,7 @@ class Comment extends ObjectModel
         ]);
 
         // -> gens ayant déjà posté sur ce contenu
-        foreach ($comments as $comment)
-        {
+        foreach ($comments as $comment) {
             if ($comment['id_contact']) {
                 $emails[] = $comment['email_mbr'];
             } elseif ($comment['email']) {
@@ -671,12 +660,9 @@ class Comment extends ObjectModel
 
         $emails = array_unique($emails);
 
-        foreach ($emails as $email)
-        {
-            if ($email === 'guillaume@seznec.fr')
-            {
-                if (Email::validate($email))
-                {
+        foreach ($emails as $email) {
+            if ($email === 'guillaume@seznec.fr') {
+                if (Email::validate($email)) {
                     Email::send(
                         $email,
                         $subject,
@@ -693,6 +679,5 @@ class Comment extends ObjectModel
                 }
             }
         }
-
     }
 }

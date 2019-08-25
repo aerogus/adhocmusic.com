@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
  * Classe Contact
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Contact extends ObjectModel
@@ -167,23 +167,21 @@ class Contact extends ObjectModel
     /**
      * @param string
      */
-    function setEmail($val)
+    function setEmail(string $val)
     {
-        if ($this->_email !== $val)
-        {
+        if ($this->_email !== $val) {
             $this->_email = (string) $val;
             $this->_modified_fields['contact']['email'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setLastnl($val)
+    function setLastnl(string $val)
     {
-        if ($this->_lastnl !== $val)
-        {
-            $this->_lastnl = (string) $val;
+        if ($this->_lastnl !== $val) {
+            $this->_lastnl = $val;
             $this->_modified_fields['contact']['lastnl'] = true;
         }
     }
@@ -194,8 +192,7 @@ class Contact extends ObjectModel
     function setLastnlNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_lastnl !== $now)
-        {
+        if ($this->_lastnl !== $now) {
             $this->_lastnl = (string) $now;
             $this->_modified_fields['contact']['lastnl'] = true;
         }
@@ -222,7 +219,7 @@ class Contact extends ObjectModel
     }
 
     /**
-     * sauve en DB table contact
+     * Sauve en DB table contact
      */
     function save()
     {
@@ -230,8 +227,8 @@ class Contact extends ObjectModel
 
         $fields = self::_getAllFields(false);
 
-        if (!$this->getId()) // INSERT
-        {
+        if (!$this->getId()) { // INSERT
+
             /* table contact */
 
             $sql = "INSERT INTO `" . static::$_db_table_contact . "` (";

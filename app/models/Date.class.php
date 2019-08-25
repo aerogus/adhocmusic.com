@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
  * Différentes méthodes et données relatives aux dates
  *
  * @author Guillaume Seznec <guillaume@seznec.fr>
- * @package adhoc
+ * @package AdHoc
  * @deprecated bientôt
  */
 class Date
@@ -54,14 +54,15 @@ class Date
      */
     function mysql_to_timestamp($date)
     {
-        if (!preg_match(self::$regexp_date, $date, $r)){
+        if (!preg_match(self::$regexp_date, $date, $r)) {
             return false;
         }
         return mktime($r[4], $r[5], $r[6], $r[2], $r[3], $r[1]);
     }
 
     /**
-     * c'est sensé faire la meme chose à peu près que mysql_datetime ...
+     * C'est sensé faire la meme chose à peu près que mysql_datetime ...
+     *
      * @param string|int (format mysql ou timestamp)
      * @return string
      */

@@ -6,7 +6,7 @@ define('FORUM_NB_MESSAGES_PER_PAGE', 50);
 /**
  * Classe de gestion des forums
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class Forum
@@ -52,10 +52,12 @@ abstract class Forum
     /**
      * Parse le message avec les différentes conventions des forums AD'HOC (smiley, pseudo html etc ...)
      *
-     * @param string
+     * @param string $texte texte
+     * @param bool $wiki wiki
+     *
      * @return string
      */
-    static function parseMessage($texte, $wiki = false)
+    static function parseMessage(string $texte, bool $wiki = false)
     {
         // 1 - gestion des frimousses
         foreach (self::$smileys as $smiley) {
@@ -104,7 +106,7 @@ abstract class Forum
     }
 
     /**
-     * retourne les infos d'un forum
+     * Retourne les infos d'un forum
      *
      * @return array
      */
@@ -144,10 +146,11 @@ abstract class Forum
     /**
      * Retourne l'id forum à partir de l'id thread
      *
-     * @param int $id_thread
+     * @param int $id_thread id_thread
+     *
      * @return string $id_forum
      */
-    static function getIdForumByIdThread($id_thread)
+    static function getIdForumByIdThread(int $id_thread)
     {
         $db = DataBase::getInstance();
 
@@ -159,16 +162,17 @@ abstract class Forum
     }
 
     /**
-     * ajoute un message
+     * Ajoute un message
      *
-     * @param array int ['id_contact']
-     *              str ['text']
-     *              str ['id_forum']
-     *              int ['id_thread'] (opt.)
-     *              str ['subject'] (opt.)
+     * @param array $params int ['id_contact']
+     *                      str ['text']
+     *                      str ['id_forum']
+     *                      int ['id_thread'] (opt.)
+     *                      str ['subject'] (opt.)
+     *
      * @return int $id_message
      */
-    static function addMessage($params)
+    static function addMessage(array $params)
     {
         $new_thread = true;
         if (array_key_exists('id_thread', $params)) {
@@ -184,37 +188,47 @@ abstract class Forum
             if (strlen($params['subject']) == 0) {
                 throw new Exception('sujet vide');
             }
-            $params['id_thread'] = static::_createThread([
-                'id_forum'   => $params['id_forum'],
-                'subject'    => $params['subject'],
-                'id_contact' => $params['id_contact'],
-            ]);
-            static::_updateForum([
-                'id_forum'     => $params['id_forum'],
-                'id_contact'   => $params['id_contact'],
-                'msgaction'    => '',
-                'threadaction' => 'threadadd',
-            ]);
+            $params['id_thread'] = static::_createThread(
+                [
+                    'id_forum'   => $params['id_forum'],
+                    'subject'    => $params['subject'],
+                    'id_contact' => $params['id_contact'],
+                ]
+            );
+            static::_updateForum(
+                [
+                    'id_forum'     => $params['id_forum'],
+                    'id_contact'   => $params['id_contact'],
+                    'msgaction'    => '',
+                    'threadaction' => 'threadadd',
+                ]
+            );
         }
 
-        $id_message = static::_createMessage([
-            'id_thread'  => $params['id_thread'],
-            'id_contact' => $params['id_contact'],
-            'text'       => $params['text'],
-        ]);
+        $id_message = static::_createMessage(
+            [
+                'id_thread'  => $params['id_thread'],
+                'id_contact' => $params['id_contact'],
+                'text'       => $params['text'],
+            ]
+        );
 
-        static::_updateThread([
-            'id_thread'  => $params['id_thread'],
-            'id_contact' => $params['id_contact'],
-            'action'     => 'msgadd',
-        ]);
+        static::_updateThread(
+            [
+                'id_thread'  => $params['id_thread'],
+                'id_contact' => $params['id_contact'],
+                'action'     => 'msgadd',
+            ]
+        );
 
-        static::_updateForum([
-            'id_forum'     => $params['id_forum'],
-            'id_contact'   => $params['id_contact'],
-            'msgaction'    => 'msgadd',
-            'threadaction' => '',
-        ]);
+        static::_updateForum(
+            [
+                'id_forum'     => $params['id_forum'],
+                'id_contact'   => $params['id_contact'],
+                'msgaction'    => 'msgadd',
+                'threadaction' => '',
+            ]
+        );
 
         return [
             'id_message' => $id_message,
@@ -224,31 +238,38 @@ abstract class Forum
     }
 
     /**
-     * Edite un message
+     * Édite un message
      *
-     * @param array
+     * @param array $params
+     *
      * @return bool
      *
      */
-    static function editMessage($params)
+    static function editMessage(array $params)
     {
-        static::_updateMessage([
-            'id_message' => $params['id_message'],
-            'text'       => $params['text'],
-        ]);
+        static::_updateMessage(
+            [
+                'id_message' => $params['id_message'],
+                'text'       => $params['text'],
+            ]
+        );
 
-        static::_updateThread([
-            'id_thread'  => $params['id_thread'],
-            'id_contact' => $params['id_contact'],
-            'action'     => 'msgedit',
-        ]);
+        static::_updateThread(
+            [
+                'id_thread'  => $params['id_thread'],
+                'id_contact' => $params['id_contact'],
+                'action'     => 'msgedit',
+            ]
+        );
 
-        static::_updateForum([
-            'id_forum'     => $params['id_forum'],
-            'id_contact'   => null,
-            'msgaction'    => 'msgedit',
-            'threadaction' => '',
-        ]);
+        static::_updateForum(
+            [
+                'id_forum'     => $params['id_forum'],
+                'id_contact'   => null,
+                'msgaction'    => 'msgedit',
+                'threadaction' => '',
+            ]
+        );
 
         return true;
     }
@@ -256,38 +277,46 @@ abstract class Forum
     /**
      * Efface un message
      *
-     * @param array
+     * @param array $params
+     *
      * @return bool
      */
-    static function delMessage($params)
+    static function delMessage(array $params)
     {
-        static::_deleteMessage([
-            'id_message' => $params['id_message'],
-        ]);
+        static::_deleteMessage(
+            [
+                'id_message' => $params['id_message'],
+            ]
+        );
 
-        static::_updateThread([
-            'id_thread'  => $params['id_thread'],
-            'id_contact' => $params['id_contact'],
-            'action'     => 'msgdel',
-        ]);
+        static::_updateThread(
+            [
+                'id_thread'  => $params['id_thread'],
+                'id_contact' => $params['id_contact'],
+                'action'     => 'msgdel',
+            ]
+        );
 
-        static::_updateForum([
-            'id_forum'     => $params['id_forum'],
-            'id_contact'   => null,
-            'msgaction'    => 'msgdel',
-            'threadaction' => '',
-        ]);
+        static::_updateForum(
+            [
+                'id_forum'     => $params['id_forum'],
+                'id_contact'   => null,
+                'msgaction'    => 'msgdel',
+                'threadaction' => '',
+            ]
+        );
 
         return true;
     }
 
     /**
-     * augmente le compteur de visite d'un thread
+     * Augmente le compteur de visite d'un thread
      *
      * @param int $id_thread
+     *
      * @return bool
      */
-    static function addView($id_thread)
+    static function addView(int $id_thread)
     {
         $db = DataBase::getInstance();
 
@@ -299,7 +328,7 @@ abstract class Forum
     }
 
     /**
-     * compte le nombre de threads par forum
+     * Compte le nombre de threads par forum
      *
      * @return array ou int
      */
@@ -326,7 +355,7 @@ abstract class Forum
     }
 
     /**
-     * compte le nombre de messages par forum
+     * Compte le nombre de messages par forum
      *
      * @return array ou int
      */
@@ -378,8 +407,9 @@ abstract class Forum
     }
 
     /**
-     * met à jour la table message
+     * Met à jour la table message
      * après update d'un message ?
+     *
      * @param array ['id_message']
      *              ['id_contact']
      *              ['text']
@@ -390,9 +420,9 @@ abstract class Forum
         $db = DataBase::getInstance();
 
         $sql = "UPDATE `" . static::$_db_table_forum_message . "` "
-             . "SET `text` = '" . $db->escape($params['text']. "', "
+             . "SET `text` = '" . $db->escape($params['text']) . "', "
              . "`modified_on` = NOW(), "
-             . "`modified_by` = " . (int) $params['id_contact']) . " "
+             . "`modified_by` = " . (int) $params['id_contact'] . " "
              . "WHERE `id_message` = " . (int) $params['id_message'];
 
         $db->query($sql);
@@ -404,9 +434,10 @@ abstract class Forum
      * Efface un message
      *
      * @param array ['id_message']
+     *
      * @return bool
      */
-    protected static function _deleteMessage($params)
+    protected static function _deleteMessage(array $params)
     {
         $db = DataBase::getInstance();
 
@@ -419,7 +450,8 @@ abstract class Forum
     }
 
     /**
-     * création d'un nouveau thread
+     * Création d'un nouveau thread
+     *
      * @param array ['id_forum']
      *              ['id_contact']
      *              ['subject']
@@ -442,7 +474,7 @@ abstract class Forum
     }
 
     /**
-     * met à jour la table thread
+     * Met à jour la table thread
      *
      * @param array ['action'] msgadd|msgedit|msgdel
      *              ['id_contact']
@@ -488,7 +520,7 @@ abstract class Forum
     }
 
     /**
-     * met à jour la table forum
+     * Met à jour la table forum
      * après insertion d'un message
      *
      * @param array ['msgaction'] msgadd|msgedit|msgdel

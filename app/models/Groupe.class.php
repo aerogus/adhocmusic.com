@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
  * Classe Groupe
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Groupe extends ObjectModel
@@ -633,61 +633,56 @@ class Groupe extends ObjectModel
     /* début setters */
 
     /**
-     * @param string
+     * @param string $val alias
      */
-    function setAlias($val)
+    function setAlias(string $val)
     {
-        if ($this->_alias !== $val)
-        {
-            $this->_alias = (string) $val;
+        if ($this->_alias !== $val) {
+            $this->_alias = $val;
             $this->_modified_fields['alias'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val nom
      */
-    function setName($val)
+    function setName(string $val)
     {
-        if ($this->_name !== $val)
-        {
-            $this->_name = (string) $val;
+        if ($this->_name !== $val) {
+            $this->_name = $val;
             $this->_modified_fields['name'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val style
      */
-    function setStyle($val)
+    function setStyle(string $val)
     {
-        if ($this->_style !== $val)
-        {
-            $this->_style = (string) $val;
+        if ($this->_style !== $val) {
+            $this->_style = $val;
             $this->_modified_fields['style'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val influences
      */
-    function setInfluences($val)
+    function setInfluences(string $val)
     {
-        if ($this->_influences !== $val)
-        {
-            $this->_influences = (string) $val;
+        if ($this->_influences !== $val) {
+            $this->_influences = $val;
             $this->_modified_fields['influences'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val lineup
      */
-    function setLineup($val)
+    function setLineup(string $val)
     {
-        if ($this->_lineup !== $val)
-        {
-            $this->_lineup = (string) $val;
+        if ($this->_lineup !== $val) {
+            $this->_lineup = $val;
             $this->_modified_fields['lineup'] = true;
         }
     }
@@ -695,22 +690,20 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    function setMiniText($val)
+    function setMiniText(string $val)
     {
-        if ($this->_mini_text !== $val)
-        {
-            $this->_mini_text = (string) $val;
+        if ($this->_mini_text !== $val) {
+            $this->_mini_text = $val;
             $this->_modified_fields['mini_text'] = true;
         }
     }
     /**
      * @param string
      */
-    function setText($val)
+    function setText(string $val)
     {
-        if ($this->_text !== $val)
-        {
-            $this->_text = (string) $val;
+        if ($this->_text !== $val) {
+            $this->_text = $val;
             $this->_modified_fields['text'] = true;
         }
     }
@@ -718,11 +711,10 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    function setSite($val)
+    function setSite(string $val)
     {
-        if ($this->_site !== $val)
-        {
-            $this->_site = (string) $val;
+        if ($this->_site !== $val) {
+            $this->_site = $val;
             $this->_modified_fields['site'] = true;
         }
     }
@@ -730,27 +722,25 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    function setMyspaceId($val)
+    function setMyspaceId(string $val)
     {
         $val = trim($val);
         $val = str_replace('http://', '', $val);
         $val = str_replace('www.myspace.com/', '', $val);
 
-        if ($this->_myspace !== $val)
-        {
-            $this->_myspace = (string) $val;
+        if ($this->_myspace !== $val) {
+            $this->_myspace = $val;
             $this->_modified_fields['myspace'] = true;
         }
     }
 
     /**
-     * @param string (int 64bits en fait)
+     * @param string $val id de page facebook (int 64bits en fait)
      */
-    function setFacebookPageId($val)
+    function setFacebookPageId(string $val)
     {
-        if ($this->_facebook_page_id !== $val)
-        {
-            $this->_facebook_page_id = (string) $val;
+        if ($this->_facebook_page_id !== $val) {
+            $this->_facebook_page_id = $val;
             $this->_modified_fields['facebook_page_id'] = true;
         }
     }
@@ -758,11 +748,10 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    function setTwitterId($val)
+    function setTwitterId(string $val)
     {
-        if ($this->_twitter_id !== $val)
-        {
-            $this->_twitter_id = (string) $val;
+        if ($this->_twitter_id !== $val) {
+            $this->_twitter_id = $val;
             $this->_modified_fields['twitter_id'] = true;
         }
     }
@@ -770,11 +759,10 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    function setIdDepartement($val)
+    function setIdDepartement(string $val)
     {
-        if ($this->_id_departement !== $val)
-        {
-            $this->_id_departement = (string) $val;
+        if ($this->_id_departement !== $val) {
+            $this->_id_departement = $val;
             $this->_modified_fields['id_departement'] = true;
         }
     }
@@ -782,11 +770,10 @@ class Groupe extends ObjectModel
     /**
      * @param bool
      */
-    function setOnline($val)
+    function setOnline(bool $val)
     {
-        if ($this->_online !== $val)
-        {
-            $this->_online = (bool) $val;
+        if ($this->_online !== $val) {
+            $this->_online = $val;
             $this->_modified_fields['online'] = true;
         }
     }
@@ -794,11 +781,10 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    function setVisite($val)
+    function setVisite(string $val)
     {
-        if ($this->_visite !== $val)
-        {
-            $this->_visite = (string) $val;
+        if ($this->_visite !== $val) {
+            $this->_visite = $val;
             $this->_modified_fields['visite'] = true;
         }
     }
@@ -806,48 +792,44 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    function setCreatedOn($val)
+    function setCreatedOn(string $val)
     {
-        if ($this->_created_on !== $val)
-        {
-            $this->_created_on = (string) $val;
+        if ($this->_created_on !== $val) {
+            $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
     }
 
     /**
-     * @param string
+     *
      */
     function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_created_on !== $now)
-        {
+        if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setModifiedOn($val)
+    function setModifiedOn(string $val)
     {
-        if ($this->_modified_on !== $val)
-        {
-            $this->_modified_on = (string) $val;
+        if ($this->_modified_on !== $val) {
+            $this->_modified_on = $val;
             $this->_modified_fields['modified_on'] = true;
         }
     }
 
     /**
-     * @param string
+     *
      */
     function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_modified_on !== $now)
-        {
+        if ($this->_modified_on !== $now) {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
         }
@@ -856,11 +838,10 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    function setDatdeb($val)
+    function setDatdeb(string $val)
     {
-        if ($this->_datdeb !== $val)
-        {
-            $this->_datdeb = (string) $val;
+        if ($this->_datdeb !== $val) {
+            $this->_datdeb = $val;
             $this->_modified_fields['datdeb'] = true;
         }
     }
@@ -868,11 +849,10 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    function setDatfin($val)
+    function setDatfin(string $val)
     {
-        if ($this->_datfin !== $val)
-        {
-            $this->_datfin = (string) $val;
+        if ($this->_datfin !== $val) {
+            $this->_datfin = $val;
             $this->_modified_fields['datfin'] = true;
         }
     }
@@ -880,11 +860,10 @@ class Groupe extends ObjectModel
     /**
      * @param string
      */
-    function setComment($val)
+    function setComment(string $val)
     {
-        if ($this->_comment !== $val)
-        {
-            $this->_comment = (string) $val;
+        if ($this->_comment !== $val) {
+            $this->_comment = $val;
             $this->_modified_fields['comment'] = true;
         }
     }
@@ -892,11 +871,10 @@ class Groupe extends ObjectModel
     /**
      * @param int
      */
-    function setEtat($val)
+    function setEtat(int $val)
     {
-        if ($this->_etat !== $val)
-        {
-            $this->_etat = (int) $val;
+        if ($this->_etat !== $val) {
+            $this->_etat = $val;
             $this->_modified_fields['etat'] = true;
         }
     }
@@ -904,11 +882,10 @@ class Groupe extends ObjectModel
     /**
      * @param array
      */
-    function setTemplate($val)
+    function setTemplate(array $val)
     {
-        if ($this->_template !== $val)
-        {
-            $this->_template = (array) $val;
+        if ($this->_template !== $val) {
+            $this->_template = $val;
             $this->_modified_fields['template'] = true;
         }
     }
@@ -916,7 +893,7 @@ class Groupe extends ObjectModel
     /* fin setters */
 
     /**
-     * retourne le nombre de groupes actifs
+     * Retourne le nombre de groupes actifs
      *
      * @return int
      */
@@ -1017,8 +994,7 @@ class Groupe extends ObjectModel
              . "FROM `" . self::$_table . "` "
              . "WHERE `" . self::$_pk . "` = " . (int) $this->getId();
 
-        if (($res = $db->queryWithFetchFirstRow($sql)))
-        {
+        if (($res = $db->queryWithFetchFirstRow($sql))) {
             $this->_dbToObject($res);
             return true;
         }
@@ -1219,8 +1195,11 @@ class Groupe extends ObjectModel
 
         $sort = 'id_groupe';
         if (isset($params['sort'])
-           && ($params['sort'] == 'name' || $params['sort'] == 'random' ||
-               $params['sort'] == 'created_on' || $params['sort'] == 'modified_on')) {
+            && ($params['sort'] === 'name'
+            || $params['sort'] === 'random'
+            || $params['sort'] === 'created_on'
+            || $params['sort'] === 'modified_on')
+        ) {
             $sort = $params['sort'];
         }
 
@@ -1228,9 +1207,15 @@ class Groupe extends ObjectModel
         $tab_id      = [];
         $tab_contact = [];
 
-        if (array_key_exists('style', $params))   { $tab_style   = explode(",", $params['style']);  }
-        if (array_key_exists('id', $params))      { $tab_id      = explode(",", $params['id']); }
-        if (array_key_exists('contact', $params)) { $tab_contact = explode(",", $params['contact']); }
+        if (array_key_exists('style', $params)) {
+            $tab_style = explode(",", $params['style']);
+        }
+        if (array_key_exists('id', $params)) {
+            $tab_id = explode(",", $params['id']);
+        }
+        if (array_key_exists('contact', $params)) {
+            $tab_contact = explode(",", $params['contact']);
+        }
 
         $db = DataBase::getInstance();
 
@@ -1269,7 +1254,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne le listing de ses propres groupes
+     * Retourne le listing de ses propres groupes
      * dont on est administrateur
      *
      * @return array
@@ -1309,9 +1294,9 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne le listing de tous les groupes affichables
+     * Tetourne le listing de tous les groupes affichables
      *
-     * tri par ordre alphabétique
+     * Tri par ordre alphabétique
      *
      * @return array
      */
@@ -1351,9 +1336,10 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'id d'un groupe à partir de son alias
+     * Retourne l'id d'un groupe à partir de son alias
      *
      * @param string $alias
+     *
      * @return int ou false
      */
     static function getIdByAlias($alias)
@@ -1371,9 +1357,10 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'id d'un groupe à partir d'id de sa page facebook
+     * Retourne l'id d'un groupe à partir d'id de sa page facebook
      *
      * @param int $fbpid
+     *
      * @return int
      */
     static function getIdByFacebookPageId($fbpid)
@@ -1396,9 +1383,10 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * ajoute un style au groupe
+     * Ajoute un style au groupe
      *
      * @param int $id_style
+     * @param int $ordre
      */
     function linkStyle($id_style, $ordre = 1)
     {
@@ -1424,7 +1412,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retire un style du groupe
+     * Retire un style du groupe
      *
      * @param int $id_style
      * @return bool

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
  * Classe MembreAdhoc
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class MembreAdhoc extends Membre
@@ -153,13 +153,12 @@ class MembreAdhoc extends Membre
     /* début setters */
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setFunction($val)
+    function setFunction(string $val)
     {
-        if ($this->_function !== $val)
-        {
-            $this->_function = (string) $val;
+        if ($this->_function !== $val) {
+            $this->_function = $val;
             $this->_modified_fields['membre_adhoc']['function'] = true;
         }
     }
@@ -167,11 +166,10 @@ class MembreAdhoc extends Membre
     /**
      * @param string
      */
-    function setBirthDate($val)
+    function setBirthDate(string $val)
     {
-        if ($this->_birth_date !== $val)
-        {
-            $this->_birth_date = (string) $val;
+        if ($this->_birth_date !== $val) {
+            $this->_birth_date = $val;
             $this->_modified_fields['membre_adhoc']['function'] = true;
         }
     }
@@ -179,23 +177,21 @@ class MembreAdhoc extends Membre
     /**
      * @param bool
      */
-    function setActive($val)
+    function setActive(bool $val)
     {
-        if ($this->_active !== $val)
-        {
-            $this->_active = (bool) $val;
+        if ($this->_active !== $val) {
+            $this->_active = $val;
             $this->_modified_fields['membre_adhoc']['active'] = true;
         }
     }
 
     /**
-     * @param int
+     * @param int $val
      */
-    function setRank($val)
+    function setRank(int $val)
     {
-        if ($this->_rank !== $val)
-        {
-            $this->_rank = (int) $val;
+        if ($this->_rank !== $val) {
+            $this->_rank = $val;
             $this->_modified_fields['membre_adhoc']['rank'] = true;
         }
     }
@@ -203,11 +199,13 @@ class MembreAdhoc extends Membre
     /* fin setters */
 
     /**
-     * retourne les données des membres internes
+     * Retourne les données des membres internes
+     *
+     * @param bool $active
      *
      * @return array
      */
-    static function getStaff($active = true)
+    static function getStaff(bool $active = true)
     {
         $db = DataBase::getInstance();
 
@@ -227,8 +225,7 @@ class MembreAdhoc extends Membre
 
         $mbrs = $db->queryWithFetch($sql);
 
-        foreach ($mbrs as $idx => $mbr)
-        {
+        foreach ($mbrs as $idx => $mbr) {
             $mbrs[$idx]['avatar_interne'] = false;
             if (file_exists(self::getBasePath() . '/' . $mbr['id'] . '.jpg')) {
                 $mbrs[$idx]['avatar_interne'] = self::getBaseUrl() . '/' . $mbr['id'] . '.jpg?ts=' . $mbr['modified_on_ts'];
@@ -240,8 +237,10 @@ class MembreAdhoc extends Membre
     }
 
     /**
-     * charge toutes les infos d'un membre adhoc/interne
+     * Charge toutes les infos d'un membre adhoc/interne
+     *
      * @todo récup champs spécifiques à membre_adhoc !
+     *
      * @return bool
      */
     protected function _loadFromDb()
@@ -269,7 +268,7 @@ class MembreAdhoc extends Membre
     }
 
     /**
-     * sauve en DB tables contact, membre et membre_adhoc
+     * Sauve en DB tables contact, membre et membre_adhoc
      */
     function save()
     {
@@ -277,8 +276,8 @@ class MembreAdhoc extends Membre
 
         $fields = self::_getAllFields(false);
 
-        if (!$this->getId()) // INSERT
-        {
+        if (!$this->getId()) { // INSERT
+
             /* table contact */
 
             if ($id_contact = Contact::getIdByEmail($email)) {
@@ -287,43 +286,43 @@ class MembreAdhoc extends Membre
 
             } else {
 
-            $sql = "INSERT INTO `" . static::$_db_table_contact . "` (";
-            foreach ($fields['contact'] as $field => $type) {
-                $sql .= "`" . $field . "`,";
-            }
-            $sql = substr($sql, 0, -1);
-            $sql .= ") VALUES (";
-
-            foreach ($fields['contact'] as $field => $type) {
-                $att = '_' . $field;
-                switch ($type)
-                {
-                    case 'num':
-                        $sql .= $db->escape($this->$att) . ",";
-                        break;
-                    case 'str':
-                        $sql .= "'" . $db->escape($this->$att) . "',";
-                        break;
-                    case 'bool':
-                        $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
-                        break;
-                    case 'pwd':
-                        $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
-                        break;
-                    case 'phpser':
-                        $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
-                        break;
-                    default:
-                        throw new Exception('invalid field type : ' . $type);
-                        break;
+                $sql = "INSERT INTO `" . static::$_db_table_contact . "` (";
+                foreach ($fields['contact'] as $field => $type) {
+                    $sql .= "`" . $field . "`,";
                 }
-            }
-            $sql = substr($sql, 0, -1);
-            $sql .= ")";
+                $sql = substr($sql, 0, -1);
+                $sql .= ") VALUES (";
 
-            $db->query($sql);
+                foreach ($fields['contact'] as $field => $type) {
+                    $att = '_' . $field;
+                    switch ($type)
+                    {
+                        case 'num':
+                            $sql .= $db->escape($this->$att) . ",";
+                            break;
+                        case 'str':
+                            $sql .= "'" . $db->escape($this->$att) . "',";
+                            break;
+                        case 'bool':
+                            $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
+                            break;
+                        case 'pwd':
+                            $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
+                            break;
+                        case 'phpser':
+                            $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
+                            break;
+                        default:
+                            throw new Exception('invalid field type : ' . $type);
+                            break;
+                    }
+                }
+                $sql = substr($sql, 0, -1);
+                $sql .= ")";
 
-            $this->setId((int) $db->insertId());
+                $db->query($sql);
+
+                $this->setId((int) $db->insertId());
 
             }
 

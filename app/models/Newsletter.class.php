@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 define('NEWSLETTER_SUB_KO_ALREADY_SUBSCRIBED_MEMBER', 0x11);
@@ -18,7 +18,7 @@ define('NEWSLETTER_TEMPLATE_PATH', ADHOC_ROOT_PATH . '/app/views/emails');
 /**
  * Classe de gestion de la newsletter AD'HOC
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Newsletter extends ObjectModel
@@ -196,25 +196,24 @@ class Newsletter extends ObjectModel
     }
 
     /**
-     * set le champ body, html (partie variable de la lettre)
+     * Set le champ body, html (partie variable de la lettre)
      *
-     * @param string
+     * @param string $val
      */
-    function setHtml($val)
+    function setHtml(string $val)
     {
-        if ($this->_html !== $val)
-        {
+        if ($this->_html !== $val) {
             $this->_html = (string) $val;
             $this->_modified_fields['html'] = true;
         }
     }
 
     /**
-     * set le champ body, html (partie variable de la lettre)
+     * Set le champ body, html (partie variable de la lettre)
      *
-     * @param string
+     * @param string $val
      */
-    function setContent($val)
+    function setContent(string $val)
     {
         if ($this->_content !== $val) {
             $this->_content = (string) $val;
@@ -242,21 +241,20 @@ class Newsletter extends ObjectModel
     }
 
     /**
-     * set le title de la lettre (= sujet du mail)
+     * Set le title de la lettre (= sujet du mail)
      *
      * @param string
      */
-    function setTitle($val)
+    function setTitle(string $val)
     {
-        if ($this->_title !== $val)
-        {
+        if ($this->_title !== $val) {
             $this->_title = (string) $val;
             $this->_modified_fields['title'] = true;
         }
     }
 
     /**
-     * retourne l'identifiant de la lettre
+     * Retourne l'identifiant de la lettre
      *
      * @return int
      */

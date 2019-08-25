@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
@@ -22,7 +22,7 @@ ini_set('mysql.connect_timeout', 2);
  * classe de gestion de la base MySQL
  *
  * @author Guillaume Seznec <guillaume@seznec.fr>
- * @package adhoc
+ * @package AdHoc
  */
 class DataBase
 {
@@ -133,8 +133,7 @@ class DataBase
     {
         $conn_key = self::generateConnectionKey($conn_name);
 
-        if (isset($this->_current_conn[$conn_key]))
-        {
+        if (isset($this->_current_conn[$conn_key])) {
             @mysqli_close($this->_current_conn[$conn_key]);
             unset($this->_current_conn[$conn_key]);
         }
@@ -219,8 +218,7 @@ class DataBase
      */
     static function deleteInstance()
     {
-        if (!is_null(self::$_instance))
-        {
+        if (!is_null(self::$_instance)) {
             self::$_instance = null;
             self::$_connections_params = [];
             return true;
@@ -264,8 +262,7 @@ class DataBase
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
-        if (true === $rc)
-        {
+        if (true === $rc) {
             /* La requête s'est bien passée, ce n'était pas une requête du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = true;
@@ -285,8 +282,7 @@ class DataBase
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
-        if (true === $rc)
-        {
+        if (true === $rc) {
             /* La requête s'est bien passée, ce n'était pas une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = true;
@@ -303,7 +299,7 @@ class DataBase
     }
 
     /**
-     * retourne dans un tableau à une dimension le premier champ
+     * Retourne dans un tableau à une dimension le premier champ
      * des lignes retournées
      *
      * @return array
@@ -312,8 +308,7 @@ class DataBase
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
-        if (true === $rc)
-        {
+        if (true === $rc) {
             /* La requête s'est bien passée, ce n'était pas une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = true;
@@ -321,8 +316,7 @@ class DataBase
             /* La requête s'est bien passée, c'était une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = [];
-            while ($row = mysqli_fetch_array($rc, MYSQLI_NUM))
-            {
+            while ($row = mysqli_fetch_array($rc, MYSQLI_NUM)) {
                 if (is_array($row)) {
                     array_push($res, $row[0]);
                 }
@@ -337,8 +331,7 @@ class DataBase
     function queryWithFetch($sql, $conn_name = DB_ADHOC_DEFAULT)
     {
         $rc = $this->query($sql, $conn_name);
-        if (true === $rc)
-        {
+        if (true === $rc) {
             /* La requête s'est bien passée, ce n'était pas une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = true;
@@ -369,10 +362,8 @@ class DataBase
 
         $traces = debug_backtrace();
         $backtrace = '';
-        if (is_array($traces))
-        {
-            foreach ($traces as $key => $trace)
-            {
+        if (is_array($traces)) {
+            foreach ($traces as $key => $trace) {
                 if (array_key_exists('class', $trace)) {
                     $backtrace .= $trace['class'];
                 }
@@ -386,8 +377,7 @@ class DataBase
 
         /* fin debug log */
 
-        if (false === $rc)
-        {
+        if (false === $rc) {
             $err = mysqli_error($conn);
             if ($closeConnectionOnError) {
                 $this->close($conn_name);
@@ -472,18 +462,15 @@ class DataBase
 
         $fields = '';
         $values = '';
-        foreach ($fieldsAndValues as $field => $value)
-        {
+        foreach ($fieldsAndValues as $field => $value) {
             $fields .= ', `'.(string) $field.'`';
-            if ((is_array($value)) && (!empty($value['special'])))
-            {
+            if ((is_array($value)) && (!empty($value['special']))) {
                 $values .= ', '.$value['special'];
             } else {
                 $values .= ", '".$this->escape((string) $value, $conn_name)."'";
             }
         }
-        if ('' == $values)
-        {
+        if ('' == $values) {
             throw new Exception('No values to insert');
         } else {
             /* On écrase la virgule en trop au début. */

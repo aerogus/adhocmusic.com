@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
@@ -10,7 +10,7 @@
  * Classe de gestion des photos du site
  * Upload, Appel conversion etc ...
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Photo extends Media
@@ -162,10 +162,9 @@ class Photo extends Media
     /**
      * @param string
      */
-    function setCredits($val)
+    function setCredits(string $val)
     {
-        if ($this->_credits != $val)
-        {
+        if ($this->_credits !== $val) {
             $this->_credits = (string) $val;
             $this->_modified_fields['credits'] = true;
         }
@@ -174,14 +173,13 @@ class Photo extends Media
     /* fin setters */
 
     /**
-     * efface une photo de la table photo + le fichier .jpg
+     * Efface une photo de la table photo + le fichier .jpg
      *
      * @return true
      */
     function delete()
     {
-        if (parent::delete())
-        {
+        if (parent::delete()) {
             self::invalidatePhotoInCache($this->getId(),  80,  80, '000000', false,  true);
             self::invalidatePhotoInCache($this->getId(), 130, 130, '000000', false, false);
             self::invalidatePhotoInCache($this->getId(), 400, 300, '000000', false, false);

@@ -4,7 +4,7 @@
  * Classe Media
  * parente de Audio, Video et Photo
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Media extends ObjectModel
@@ -168,47 +168,43 @@ class Media extends ObjectModel
     /**
      * @param int
      */
-    function setIdContact($val)
+    function setIdContact(int $val)
     {
-        if ($this->_id_contact !== $val)
-        {
-            $this->_id_contact = (int) $val;
+        if ($this->_id_contact !== $val) {
+            $this->_id_contact = $val;
             $this->_modified_fields['id_contact'] = true;
         }
     }
 
     /**
-     * @param int
+     * @param int $val
      */
-    function setIdGroupe($val)
+    function setIdGroupe(int $val)
     {
-        if ($this->_id_groupe !== $val)
-        {
-            $this->_id_groupe = (int) $val;
+        if ($this->_id_groupe !== $val) {
+            $this->_id_groupe = $val;
             $this->_modified_fields['id_groupe'] = true;
         }
     }
 
     /**
-     * @param int
+     * @param int $val
      */
-    function setIdLieu($val)
+    function setIdLieu(int $val)
     {
-        if ($this->_id_lieu !== $val)
-        {
-            $this->_id_lieu = (int) $val;
+        if ($this->_id_lieu !== $val) {
+            $this->_id_lieu = $val;
             $this->_modified_fields['id_lieu'] = true;
         }
     }
 
     /**
-     * @param int
+     * @param int $val
      */
-    function setIdEvent($val)
+    function setIdEvent(int $val)
     {
-        if ($this->_id_event !== $val)
-        {
-            $this->_id_event = (int) $val;
+        if ($this->_id_event !== $val) {
+            $this->_id_event = $val;
             $this->_modified_fields['id_event'] = true;
         }
     }
@@ -216,11 +212,10 @@ class Media extends ObjectModel
     /**
      * @param int
      */
-    function setIdStructure($val)
+    function setIdStructure(int $val)
     {
-        if ($this->_id_structure !== $val)
-        {
-            $this->_id_structure = (int) $val;
+        if ($this->_id_structure !== $val) {
+            $this->_id_structure = $val;
             $this->_modified_fields['id_structure'] = true;
         }
     }
@@ -228,11 +223,10 @@ class Media extends ObjectModel
     /**
      * @param string
      */
-    function setName($val)
+    function setName(string $val)
     {
-        if ($this->_name !== $val)
-        {
-            $this->_name = (string) $val;
+        if ($this->_name !== $val) {
+            $this->_name = $val;
             $this->_modified_fields['name'] = true;
         }
     }
@@ -240,11 +234,10 @@ class Media extends ObjectModel
     /**
      * @param string
      */
-    function setCreatedOn($val)
+    function setCreatedOn(string $val)
     {
-        if ($this->_created_on !== $val)
-        {
-            $this->_created_on = (string) $val;
+        if ($this->_created_on !== $val) {
+            $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
     }
@@ -255,21 +248,19 @@ class Media extends ObjectModel
     function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_created_on !== $now)
-        {
-            $this->_created_on = (string) $now;
+        if ($this->_created_on !== $now) {
+            $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setModifiedOn($val)
+    function setModifiedOn(string $val)
     {
-        if ($this->_modified_on !== $val)
-        {
-            $this->_modified_on = (string) $val;
+        if ($this->_modified_on !== $val) {
+            $this->_modified_on = $val;
             $this->_modified_fields['modified_on'] = true;
         }
     }
@@ -280,9 +271,8 @@ class Media extends ObjectModel
     function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_modified_on !== $now)
-        {
-            $this->_modified_on = (string) $now;
+        if ($this->_modified_on !== $now) {
+            $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
         }
     }
@@ -290,11 +280,10 @@ class Media extends ObjectModel
     /**
      * @param bool
      */
-    function setOnline($val)
+    function setOnline(bool $val)
     {
-        if ($this->_online !== $val)
-        {
-            $this->_online = (bool) $val;
+        if ($this->_online !== $val) {
+            $this->_online = $val;
             $this->_modified_fields['online'] = true;
         }
     }
@@ -302,7 +291,7 @@ class Media extends ObjectModel
     /* fin setters communs */
 
     /**
-     * recherche des média en fonction de critères donnés
+     * Recherche des média en fonction de critères donnés
      *
      * @param array ['groupe']    => "5"
      *              ['structure'] => "1,3"
@@ -314,9 +303,10 @@ class Media extends ObjectModel
      *              ['debut']     => 0
      *              ['limit']     => 10
      *              ['split']     => false
+     *
      * @return array
      */
-    static function getMedia($params = [])
+    static function getMedia(array $params = [])
     {
         $tab_type = [];
         if (array_key_exists('type', $params)) {
@@ -330,22 +320,18 @@ class Media extends ObjectModel
         $tab = [];
         $split = [];
 
-        foreach ($tab_type as $type)
-        {
-            if ($type === 'audio')
-            {
+        foreach ($tab_type as $type) {
+            if ($type === 'audio') {
                 $audios = Audio::getAudios($params);
                 $split['audio'] = $audios;
                 $tab = array_merge($tab, $audios);
             }
-            if ($type === 'photo')
-            {
+            if ($type === 'photo') {
                 $photos = Photo::getPhotos($params);
                 $split['photo'] = $photos;
                 $tab = array_merge($tab, $photos);
             }
-            if ($type === 'video')
-            {
+            if ($type === 'video') {
                 $videos = Video::getVideos($params);
                 $split['video'] = $videos;
                 $tab = array_merge($tab, $videos);

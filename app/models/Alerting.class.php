@@ -148,25 +148,23 @@ class Alerting extends ObjectModel
     /* début setters */
 
     /**
-     * @param int
+     * @param int $val
      */
-    function setIdContact($val)
+    function setIdContact(int $val)
     {
-        if ($this->_id_contact !== (int) $val)
-        {
-            $this->_id_contact = (int) $val;
+        if ($this->_id_contact !== $val) {
+            $this->_id_contact = $val;
             $this->_modified_fields['id_contact'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setCreatedOn($val)
+    function setCreatedOn(string $val)
     {
-        if ($this->_created_on !== $val)
-        {
-            $this->_created_on = (string) $val;
+        if ($this->_created_on !== $val) {
+            $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
     }
@@ -174,11 +172,10 @@ class Alerting extends ObjectModel
     /**
      * @param bool
      */
-    function setActive($val)
+    function setActive(bool $val)
     {
-        if ($this->_active !== (bool) $val)
-        {
-            $this->_active = (bool) $val;
+        if ($this->_active !== $val) {
+            $this->_active = $val;
             $this->_modified_fields['active'] = true;
         }
     }
@@ -186,11 +183,10 @@ class Alerting extends ObjectModel
     /**
      * @param string
      */
-    function setType($val)
+    function setType(string $val)
     {
-        if ($this->_type !== (string) $val)
-        {
-            $this->_type = (string) $val;
+        if ($this->_type !== $val) {
+            $this->_type = $val;
             $this->_modified_fields['type'] = true;
         }
     }
@@ -198,11 +194,10 @@ class Alerting extends ObjectModel
     /**
      * @param int
      */
-    function setIdContent($val)
+    function setIdContent(int $val)
     {
-        if ($this->_id_content !== (int) $val)
-        {
-            $this->_id_content = (int) $val;
+        if ($this->_id_content !== $val) {
+            $this->_id_content = $val;
             $this->_modified_fields['id_content'] = true;
         }
     }
@@ -222,7 +217,10 @@ class Alerting extends ObjectModel
         }
     }
 
-    static function addSubscriber($id_contact, $type, $id_content)
+    /**
+     *
+     */
+    static function addSubscriber(int $id_contact, string $type, int $id_content)
     {
         if (self::getIdByIds($id_contact, $type, $id_content)) {
             return false;
@@ -242,7 +240,7 @@ class Alerting extends ObjectModel
         return false;
     }
 
-    static function delSubscriber($id_contact, $type, $id_content)
+    static function delSubscriber(int $id_contact, string $type, int $id_content)
     {
         if (!self::getIdByIds($id_contact, $type, $id_content)) {
             return false;
@@ -258,7 +256,7 @@ class Alerting extends ObjectModel
         return false;
     }
 
-    static function getIdByIds($id_contact, $type, $id_content)
+    static function getIdByIds(int $id_contact, string $type, int $id_content)
     {
          $db = DataBase::getInstance();
 
@@ -271,7 +269,7 @@ class Alerting extends ObjectModel
         return (int) $db->queryWithFetchFirstField($sql);
     }
 
-    static function getLieuxAlertingByIdContact($id_contact)
+    static function getLieuxAlertingByIdContact(int $id_contact)
     {
         $db = DataBase::getInstance();
 

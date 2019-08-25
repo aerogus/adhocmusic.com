@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
  * Classe WorldRegion
  *
- * @package adhoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class WorldRegion extends Liste
 {
     /**
-     * instance de l'objet
+     * Instance de l'objet
      *
      * @var mixed
      */
@@ -63,10 +63,11 @@ class WorldRegion extends Liste
     }
 
     /**
-     * retourne le nom d'une région
+     * Retourne le nom d'une région
      *
      * @param string $id_country
      * @param string $id_region
+     *
      * @return string
      */
     protected function _getName($id_country, $id_region)

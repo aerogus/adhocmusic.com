@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
@@ -9,7 +9,7 @@
  *
  * gestion des exposants
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Exposant extends ObjectModel
@@ -228,25 +228,23 @@ class Exposant extends ObjectModel
     /* début setters */
 
     /**
-     * @param string
+     * @param string $val nom
      */
-    function setName($val)
+    function setName(string $val)
     {
-        if ($this->_name !== $val)
-        {
-            $this->_name = (string) $val;
+        if ($this->_name !== $val) {
+            $this->_name = $val;
             $this->_modified_fields['name'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val email
      */
-    function setEmail($val)
+    function setEmail(string $val)
     {
-        if ($this->_email !== $val)
-        {
-            $this->_email = (string) $val;
+        if ($this->_email !== $val) {
+            $this->_email = $val;
             $this->_modified_fields['email'] = true;
         }
     }
@@ -254,11 +252,10 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    function setPhone($val)
+    function setPhone(string $val)
     {
-        if ($this->_phone !== $val)
-        {
-            $this->_phone = (string) $val;
+        if ($this->_phone !== $val) {
+            $this->_phone = $val;
             $this->_modified_fields['phone'] = true;
         }
     }
@@ -266,71 +263,65 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    function setSite($val)
+    function setSite(string $val)
     {
-        if ($this->_site !== $val)
-        {
-            $this->_site = (string) $val;
+        if ($this->_site !== $val) {
+            $this->_site = $val;
             $this->_modified_fields['site'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setType($val)
+    function setType(string $val)
     {
-        if ($this->_type !== $val)
-        {
-            $this->_type = (string) $val;
+        if ($this->_type !== $val) {
+            $this->_type = $val;
             $this->_modified_fields['type'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setCity($val)
+    function setCity(string $val)
     {
-        if ($this->_city !== $val)
-        {
-            $this->_city = (string) $val;
+        if ($this->_city !== $val) {
+            $this->_city = $val;
             $this->_modified_fields['city'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setState($val)
+    function setState(string $val)
     {
-        if ($this->_state !== $val)
-        {
-            $this->_state = (string) $val;
+        if ($this->_state !== $val) {
+            $this->_state = $val;
             $this->_modified_fields['state'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setCreatedOn($val)
+    function setCreatedOn(string $val)
     {
-        if ($this->_created_on !== $val)
-        {
-            $this->_created_on = (string) $val;
+        if ($this->_created_on !== $val) {
+            $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
     }
 
     /**
-     * @param string
+     *
      */
     function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_created_on !== $now)
-        {
+        if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
         }
@@ -339,23 +330,21 @@ class Exposant extends ObjectModel
     /**
      * @param string
      */
-    function setModifiedOn($val)
+    function setModifiedOn(string $val)
     {
-        if ($this->_modified_on !== $val)
-        {
-            $this->_modified_on = (string) $val;
+        if ($this->_modified_on !== $val) {
+            $this->_modified_on = $val;
             $this->_modified_fields['modified_on'] = true;
         }
     }
 
     /**
-     * @param string
+     *
      */
     function setModifiedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_modified_on !== $now)
-        {
+        if ($this->_modified_on !== $now) {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
         }
@@ -364,7 +353,7 @@ class Exposant extends ObjectModel
     /* fin setters */
 
     /**
-     * retourne le nombre de d'exposants référencés
+     * Retourne le nombre de d'exposants référencés
      *
      * @return int
      */
@@ -407,8 +396,7 @@ class Exposant extends ObjectModel
              . "FROM `" . self::$_db_table_exposant . "` "
              . "WHERE `id_exposant` = " . (int) $this->_id_exposant;
 
-        if (($res = $db->queryWithFetchFirstRow($sql)))
-        {
+        if (($res = $db->queryWithFetchFirstRow($sql))) {
             $this->_dbToObject($res);
             return true;
         }

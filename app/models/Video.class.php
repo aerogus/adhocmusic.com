@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
@@ -78,7 +78,7 @@ define('MEDIA_ADHOCTUBE_URL_PATTERN', '~^https://' . MEDIA_ADHOCTUBE_HOST . '/vi
  * Classe de gestion des vidéos du site
  * Appel conversion, upload etc ...
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Video extends Media
@@ -273,13 +273,16 @@ class Video extends Media
     /* début setters */
 
     /**
-     * @param int
+     * Set l'id_host
+     *
+     * @param int $id_host identifiant hébergeur
+     *
+     * @return void
      */
-    function setIdHost($val)
+    function setIdHost(int $id_host)
     {
-        if ($this->_id_host !== $val)
-        {
-            $this->_id_host = (int) $val;
+        if ($this->_id_host !== $id_host) {
+            $this->_id_host = $id_host;
             $this->_modified_fields['id_host'] = true;
         }
     }
@@ -287,11 +290,10 @@ class Video extends Media
     /**
      * @param string
      */
-    function setReference($val)
+    function setReference(string $val)
     {
-        if ($this->_reference !== $val)
-        {
-            $this->_reference = (string) $val;
+        if ($this->_reference !== $val) {
+            $this->_reference = $val;
             $this->_modified_fields['reference'] = true;
         }
     }
@@ -299,11 +301,10 @@ class Video extends Media
     /**
      * @param int
      */
-    function setWidth($val)
+    function setWidth(int $val)
     {
-        if ($this->_width !== $val)
-        {
-            $this->_width = (int) $val;
+        if ($this->_width !== $val) {
+            $this->_width = $val;
             $this->_modified_fields['width'] = true;
         }
     }
@@ -311,11 +312,10 @@ class Video extends Media
     /**
      * @param bool
      */
-    function setHeight($val)
+    function setHeight(int $val)
     {
-        if ($this->_height !== $val)
-        {
-            $this->_height = (int) $val;
+        if ($this->_height !== $val) {
+            $this->_height = $val;
             $this->_modified_fields['height'] = true;
         }
     }
@@ -323,7 +323,7 @@ class Video extends Media
     /* fin setters */
 
     /**
-     * retourne le listing des hébergeurs supportés
+     * Retourne le listing des hébergeurs supportés
      *
      * @return array
      */
@@ -333,7 +333,7 @@ class Video extends Media
     }
 
     /**
-     * retourne le listing des hébergeurs supportés
+     * Retourne le listing des hébergeurs supportés
      *
      * @return array
      */
@@ -402,12 +402,24 @@ class Video extends Media
         $tab_id        = [];
         $tab_contact   = [];
 
-        if (array_key_exists('groupe', $params))    { $tab_groupe    = explode(",", $params['groupe']); }
-        if (array_key_exists('structure', $params)) { $tab_structure = explode(",", $params['structure']); }
-        if (array_key_exists('lieu', $params))      { $tab_lieu      = explode(",", $params['lieu']); }
-        if (array_key_exists('event', $params))     { $tab_event     = explode(",", $params['event']); }
-        if (array_key_exists('id', $params))        { $tab_id        = explode(",", $params['id']); }
-        if (array_key_exists('contact', $params))   { $tab_contact   = explode(",", $params['contact']); }
+        if (array_key_exists('groupe', $params)) {
+            $tab_groupe = explode(",", $params['groupe']);
+        }
+        if (array_key_exists('structure', $params)) {
+            $tab_structure = explode(",", $params['structure']);
+        }
+        if (array_key_exists('lieu', $params)) {
+            $tab_lieu = explode(",", $params['lieu']);
+        }
+        if (array_key_exists('event', $params)) {
+            $tab_event = explode(",", $params['event']);
+        }
+        if (array_key_exists('id', $params)) {
+            $tab_id = explode(",", $params['id']);
+        }
+        if (array_key_exists('contact', $params)) {
+            $tab_contact = explode(",", $params['contact']);
+        }
 
         $db = DataBase::getInstance();
 
@@ -481,17 +493,14 @@ class Video extends Media
     }
 
     /**
-     * efface une vidéo de la table vidéo
+     * Efface une vidéo de la table vidéo
      * + purge du fichier miniature
      *
-     * @param int $id_video
-     * @param string $reference
      * @return bool
      */
     function delete()
     {
-        if (parent::delete())
-        {
+        if (parent::delete()) {
             $this->deleteThumbnail();
             self::invalidateVideoThumbInCache($this->getId(), 80, 80, '000000', false, true);
             self::invalidateVideoThumbInCache($this->getId(), 100, 100, '000000', false, true);
@@ -501,7 +510,7 @@ class Video extends Media
     }
 
     /**
-     * retourne le code du player vidéo embarqué
+     * Retourne le code du player vidéo embarqué
      *
      * @see http://www.alsacreations.fr/dewtube
      * @see http://www.clubic.com/telecharger-fiche21739-riva-flv-encoder.html

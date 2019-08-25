@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
  * Classe Departement
  * /!\ dépend de la classe Region
  *
- * @package adhoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Departement
 {
@@ -51,6 +51,7 @@ class Departement
      * [code_department => [code_region, libelle_departement]
      *
      * @var array
+     *
      * @todo vérifier les code regions
      */
     public static $_liste = [
@@ -153,7 +154,7 @@ class Departement
     ];
 
     /**
-     * retourne le tableau des départements français
+     * Retourne le tableau des départements français
      * on peut limiter à une région particulière
      * c'est trié par n° de département
      *
@@ -162,8 +163,7 @@ class Departement
     static function getHashTable($cleReg = null)
     {
         $out = [];
-        foreach (self::$_liste as $cle => $info)
-        {
+        foreach (self::$_liste as $cle => $info) {
             if (!is_null($cleReg)) {
                 if ($info[self::CLEREG] == $cleReg) {
                     $out[$cle] = $info[self::LIBDEP];
@@ -176,9 +176,10 @@ class Departement
     }
 
     /**
-     * retourne le nom d'un département
+     * Retourne le nom d'un département
      *
      * @param int $cleDep
+     *
      * @return string
      */
     static function getName($cleDep)
@@ -210,6 +211,7 @@ class Departement
      * Clé ok ?
      *
      * @param string
+     *
      * @return bool
      */
     static function isCleOk($cle)

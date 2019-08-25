@@ -1,16 +1,12 @@
 <?php
 
 /**
- * @package adhoc
- */
-
-/**
  * Classe Style
  *
  * Classe de gestion des styles musicaux
  *
- * @package adhoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Style
 {

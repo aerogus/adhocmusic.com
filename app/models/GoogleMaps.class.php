@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
  * Gestion des cartes Google
  *
- * @package adhoc
+ * @package AdHoc
  *
  * @see http://code.google.com/intl/fr/apis/maps/documentation/services.html#Geocoding
  * @see http://code.google.com/intl/fr/apis/maps/documentation/geocoding/index.html
@@ -67,9 +67,10 @@ class GoogleMaps
     }
 
     /**
-     * fait une requête de geocoding à google
+     * Fait une requête de geocoding à google
      *
      * @param string $addr
+     *
      * @return array ou false
      */
     static function getGeocode($addr)

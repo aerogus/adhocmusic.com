@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
  * classe de méthodes pratiques communes à tout le site AD'HOC
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Tools
@@ -78,14 +78,14 @@ class Tools
      * Verification d'une url
      *
      * Retourne FALSE si l'url n'est pas conforme. (HTTP(S) uniquement!)
+     *
+     * @param string $url url à tester
+     *
      * @return bool
      */
     static function isUrlValid($url)
     {
-        if (preg_match('`^(http(s?)://){1}((\w+\.)+)\w{2,}(:\d+)?(/'.
-            '[\w\-\'"~#:.?!+=&%@/(\)\xA0-\xFF]'. /* <-- lache tes caractères !!!!! */
-            '*)?$`iD', $url))
-        {
+        if (preg_match('`^(http(s?)://){1}((\w+\.)+)\w{2,}(:\d+)?(/[\w\-\'"~#:.?!+=&%@/(\)\xA0-\xFF]*)?$`iD', $url)) {
             return true;
         }
         return false;
@@ -131,12 +131,14 @@ class Tools
 
     /**
      * Transforme une couleur de la forme "rgb(55,55,55)" ou #FA4 en #FFAA44
+     *
      * @param string $rgbval
+     *
      * @return string
      */
     static function rgb2hex(string $rgbval)
     {
-        if (preg_match_all('/rgb\((\d+),\s*(\d+),\s*(\d+)\)/', $rgbval, $matches)){
+        if (preg_match_all('/rgb\((\d+),\s*(\d+),\s*(\d+)\)/', $rgbval, $matches)) {
             list($red, $green, $blue) = [$matches[1][0], $matches[2][0], $matches[3][0]];
             return sprintf('#%02X%02X%02X', $red, $green, $blue);
         } elseif (preg_match_all('/^#([0-9a-f])([0-9a-f])([0-9a-f])$/', $rgbval, $matches)) {
@@ -202,19 +204,19 @@ class Tools
 
     /**
      * @param string
+     *
      * @return bool
      */
-    static function checkCSRFToken($CSRFToken)
+    static function checkCSRFToken(string $CSRFToken)
     {
-        if (isset($_SESSION['CSRFToken']) && mb_strlen($_SESSION['CSRFToken']) && $_SESSION['CSRFToken'] === $CSRFToken)
-        {
+        if (isset($_SESSION['CSRFToken']) && mb_strlen($_SESSION['CSRFToken']) && $_SESSION['CSRFToken'] === $CSRFToken) {
             return true;
         }
         return false;
     }
 
     /**
-     * retourne si un formulaire a été envoyé
+     * Retourne si un formulaire a été envoyé
      *
      * @param string $formName
      * @return bool
@@ -419,6 +421,7 @@ class Tools
 
     /**
      * @param string $str
+     *
      * @return string
      */
     static function htmlToText($str)
@@ -434,10 +437,8 @@ class Tools
         $new_array = [];
         $sortable_array = [];
 
-        if (count($array) > 0)
-        {
-            foreach ($array as $k => $v)
-            {
+        if (count($array) > 0) {
+            foreach ($array as $k => $v) {
                 if (is_array($v)) {
                     foreach ($v as $k2 => $v2) {
                         if ($k2 == $on) {
@@ -468,11 +469,13 @@ class Tools
     }
 
     /**
-     * @param string
+     * @param string $ext
+     *
      * @return string
+     *
      * @see http://www.commentcamarche.net/contents/courrier-electronique/mime.php3
      */
-    static function getTypeMimeByExtension($ext)
+    static function getTypeMimeByExtension(string $ext)
     {
         $mimes = [
             'jpg'  => 'image/jpeg',
@@ -492,7 +495,8 @@ class Tools
     }
 
     /**
-     * @param string
+     * @param string $ext
+     *
      * @return string
      */
     static function getIconByExtension($ext)

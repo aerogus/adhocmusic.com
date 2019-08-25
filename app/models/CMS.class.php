@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
  * Classe Content Management System
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class CMS extends ObjectModel
@@ -206,12 +206,11 @@ class CMS extends ObjectModel
     /**
      * @param string
      */
-    function setAlias($val)
+    function setAlias(string $val)
     {
-        $val = trim((string) $val);
-        if ($this->_alias !== $val)
-        {
-            $this->_alias = (string) $val;
+        $val = trim($val);
+        if ($this->_alias !== $val) {
+            $this->_alias = $val;
             $this->_modified_fields['alias'] = true;
         }
     }
@@ -219,11 +218,11 @@ class CMS extends ObjectModel
     /**
      * @param string
      */
-    function setTitle($val)
+    function setTitle(string $val)
     {
-        $val = trim((string) $val);
+        $val = trim($val);
         if ($this->_title !== $val) {
-            $this->_title = (string) $val;
+            $this->_title = $val;
             $this->_modified_fields['title'] = true;
         }
     }
@@ -231,10 +230,10 @@ class CMS extends ObjectModel
     /**
      * @param string
      */
-    function setCreatedOn($val)
+    function setCreatedOn(string $val)
     {
         if ($this->_created_on !== $val) {
-            $this->_created_on = (string) $val;
+            $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
     }
@@ -245,8 +244,7 @@ class CMS extends ObjectModel
     function setCreatedNow()
     {
         $now = date('Y-m-d H:i:s');
-        if ($this->_created_on !== $now)
-        {
+        if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
         }
@@ -255,16 +253,16 @@ class CMS extends ObjectModel
     /**
      * @param string
      */
-    function setModifiedOn($val)
+    function setModifiedOn(string $val)
     {
         if ($this->_modified_on !== $val) {
-            $this->_modified_on = (string) $val;
+            $this->_modified_on = $val;
             $this->_modified_fields['modified_on'] = true;
         }
     }
 
     /**
-     * @param string
+     *
      */
     function setModifiedNow()
     {
@@ -276,13 +274,13 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setMenuselected($val)
+    function setMenuselected(string $val)
     {
-        $val = trim((string) $val);
+        $val = trim($val);
         if ($this->_menuselected !== $val) {
-            $this->_menuselected = (string) $val;
+            $this->_menuselected = $val;
             $this->_modified_fields['menuselected'] = true;
         }
     }
@@ -290,48 +288,44 @@ class CMS extends ObjectModel
     /**
      * @param array
      */
-    function setBreadcrumb($val)
+    function setBreadcrumb(array $val)
     {
-        $val = (array) $val;
-        if ($this->_breadcrumb !== $val)
-        {
-            $this->_breadcrumb = (array) $val;
+        if ($this->_breadcrumb !== $val) {
+            $this->_breadcrumb = $val;
             $this->_modified_fields['breadcrumb'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setContent($val)
+    function setContent(string $val)
     {
-        $val = trim((string) $val);
+        $val = trim($val);
         if ($this->_content !== $val) {
-            $this->_content = (string) $val;
+            $this->_content = $val;
             $this->_modified_fields['content'] = true;
         }
     }
 
     /**
-     * @param bool
+     * @param bool $val
      */
-    function setOnline($val)
+    function setOnline(bool $val)
     {
-        $val = (bool) $val;
         if ($this->_online !== $val) {
-            $this->_online = (bool) $val;
+            $this->_online = $val;
             $this->_modified_fields['online'] = true;
         }
     }
 
     /**
-     * @param int
+     * @param int $val
      */
-    function setAuth($val)
+    function setAuth(int $val)
     {
-        $val = (int) $val;
         if ($this->_auth !== $val) {
-            $this->_auth = (int) $val;
+            $this->_auth = $val;
             $this->_modified_fields['auth'] = true;
         }
     }
@@ -339,16 +333,17 @@ class CMS extends ObjectModel
     /* fin setters */
 
     /**
-     * @var string
+     * @param string $alias alias
+     *
      * @return int ou false
      */
-    static function getIdByAlias($alias)
+    static function getIdByAlias(string $alias)
     {
         $db = DataBase::getInstance();
 
         $sql = "SELECT `" . self::$_pk . "` "
              . "FROM `" . self::$_table . "` "
-             . "WHERE `alias` = '".$db->escape($alias)."' AND `online`";
+             . "WHERE `alias` = '" . $db->escape($alias) . "' AND `online`";
 
         return $db->queryWithFetchFirstField($sql);
     }

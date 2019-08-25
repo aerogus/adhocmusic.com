@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
@@ -9,7 +9,7 @@
  *
  * Classe de gestion du module sélection du mois
  *
- * @package adhoc
+ * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Featured extends ObjectModel
@@ -221,44 +221,41 @@ class Featured extends ObjectModel
     /**
      * @param string YYYY-MM-DD HH:II:SS
      */
-    function setDatDeb($val)
+    function setDatDeb(string $val)
     {
         if (!Date::isDateTimeOk($val)) {
             throw new Exception('datdeb invalide');
         }
 
-        if ($this->_datdeb !== $val)
-        {
-            $this->_datdeb = (string) $val;
+        if ($this->_datdeb !== $val) {
+            $this->_datdeb = $val;
             $this->_modified_fields['datdeb'] = true;
         }
     }
 
     /**
-     * @param string YYYY-MM-DD HH:II:SS
+     * @param string $val YYYY-MM-DD HH:II:SS
      */
-    function setDatFin($val)
+    function setDatFin(string $val)
     {
         if (!Date::isDateTimeOk($val)) {
             throw new Exception('datfin invalide');
         }
 
-        if ($this->_datfin !== $val)
-        {
-            $this->_datfin = (string) $val;
+        if ($this->_datfin !== $val) {
+            $this->_datfin = $val;
             $this->_modified_fields['datfin'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val titre
      */
     function setTitle($val)
     {
-        $val = trim((string) $val);
-        if ($this->_title !== $val)
-        {
-            $this->_title = (string) $val;
+        $val = trim($val);
+        if ($this->_title !== $val) {
+            $this->_title = $val;
             $this->_modified_fields['title'] = true;
         }
     }
@@ -266,25 +263,23 @@ class Featured extends ObjectModel
     /**
      * @param string
      */
-    function setDescription($val)
+    function setDescription(string $val)
     {
-        $val = trim((string) $val);
-        if ($this->_description !== $val)
-        {
-            $this->_description = (string) $val;
+        $val = trim($val);
+        if ($this->_description !== $val) {
+            $this->_description = $val;
             $this->_modified_fields['description'] = true;
         }
     }
 
     /**
-     * @param string
+     * @param string $val
      */
-    function setLink($val)
+    function setLink(string $val)
     {
-        $val = trim((string) $val);
-        if ($this->_link !== $val)
-        {
-            $this->_link = (string) $val;
+        $val = trim($val);
+        if ($this->_link !== $val) {
+            $this->_link = $val;
             $this->_modified_fields['link'] = true;
         }
     }
@@ -292,12 +287,10 @@ class Featured extends ObjectModel
     /**
      * @param bool
      */
-    function setOnline($val)
+    function setOnline(bool $val)
     {
-        $val = (bool) $val;
-        if ($this->_online !== $val)
-        {
-            $this->_online = (bool) $val;
+        if ($this->_online !== $val) {
+            $this->_online = $val;
             $this->_modified_fields['online'] = true;
         }
     }
@@ -342,12 +335,10 @@ class Featured extends ObjectModel
         $res = $db->queryWithFetch($sql);
 
         $tab = [];
-        if (is_array($res))
-        {
+        if (is_array($res)) {
             $cpt = 0;
             $now = date('Y-m-d H:i:s');
-            foreach ($res as $cpt => $_res)
-            {
+            foreach ($res as $cpt => $_res) {
                 $tab[$cpt] = $_res;
                 $tab[$cpt]['image'] = self::getImageById($_res['id']);
                 if (($now > $_res['datdeb']) && ($now < $_res['datfin'])) {
@@ -385,14 +376,13 @@ class Featured extends ObjectModel
     }
 
     /**
-     * efface un featured en db + le fichier .jpg
+     * Efface un featured en db + le fichier .jpg
      *
      * @return true
      */
     function delete()
     {
-        if (parent::delete())
-        {
+        if (parent::delete()) {
             $file = self::getBasePath() . '/' . $this->getId() . '.jpg';
             if (file_exists($file)) {
                 unlink($file);

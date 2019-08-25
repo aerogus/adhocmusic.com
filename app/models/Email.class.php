@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -32,10 +32,11 @@ EOT
 );
 
 /**
- * outils pour travailler avec les emails
+ * Outils pour travailler avec les emails
  *
- * @package adhoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
+ *
  * @see PEAR::HTML_QuickForm/Rules/email.php
  */
 class Email
@@ -43,8 +44,9 @@ class Email
     /**
      * Validates an email address
      *
-     * @param     string    $email          Email address
-     * @return    boolean   true if email is valid
+     * @param string $email Email address
+     *
+     * @return bool true if email is valid
      */
     static function validate($email)
     {
@@ -55,15 +57,17 @@ class Email
     }
 
     /**
-     * retourne un email sous une forme cryptée (antispam)
+     * Retourne un email sous une forme cryptée (antispam)
      * (encodage de type &#123)
      *
-     * @param string $email
-     * @param string $mode (entité html par défaut)
+     * @param string $email email
+     * @param string $mode  mode (entité html par défaut)
+     *
      * @return string
+     *
      * @todo autre modes de cryptages
      */
-    static function crypt($email, $mode = 1)
+    static function crypt(string $email, string $mode = '1')
     {
         $str    = "";
         $length = mb_strlen($email);
@@ -82,15 +86,17 @@ class Email
     }
 
     /**
-     * envoi générique d'email à partir du site, via un template smarty
+     * Envoi générique d'email à partir du site, via un template smarty
+     *
      * @param string ou array $to
      * @param string $subject
-     * @param string $tpl
+     * @param string $tplName
      * @param array $data
      * @param string $attachment
+     *
      * @return bool
      */
-    static function send($to = '', $subject = 'sans sujet', $tplName = 'default', $data = [], $attachment = null)
+    static function send($to = '', string $subject = 'sans sujet', string $tplName = 'default', array $data = [], string $attachment = null)
     {
         $subject = trim($subject);
 

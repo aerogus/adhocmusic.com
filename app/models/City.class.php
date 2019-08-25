@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package adhoc
+ * @package AdHoc
  */
 
 /**
@@ -9,8 +9,8 @@
  * (villes de France uniquement)
  * pk = code insee
  *
- * @package adhoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class City extends Liste
 {
@@ -70,7 +70,7 @@ class City extends Liste
     /**
      * Code insee ville ok ?
      *
-     * @param int $id_city
+     * @param  int $id_city
      * @return bool
      */
     protected function _isCityOk($id_city)
@@ -82,9 +82,9 @@ class City extends Liste
     }
 
     /**
-     * retourne le nom d'une ville
+     * Retourne le nom d'une ville
      *
-     * @param int $id_city
+     * @param  int $id_city
      * @return string
      */
     protected function _getName($id_city)
@@ -96,9 +96,9 @@ class City extends Liste
     }
 
     /**
-     * retourne l'id du département
+     * Retourne l'id du département
      *
-     * @param int $id_city
+     * @param  int $id_city
      * @return string
      */
     protected function _getIdDepartement($id_city)
@@ -110,9 +110,9 @@ class City extends Liste
     }
 
     /**
-     * retourne le code postal
+     * Retourne le code postal
      *
-     * @param int $id_city
+     * @param  int $id_city
      * @return string
      */
     protected function _getCp($id_city)

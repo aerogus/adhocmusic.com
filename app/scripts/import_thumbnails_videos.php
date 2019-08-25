@@ -4,8 +4,8 @@
 /**
  * Script pour récupérer / remplacer les imagettes vidéos
  *
- * @package adhoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 
 require_once __DIR__ . '/../config.php';

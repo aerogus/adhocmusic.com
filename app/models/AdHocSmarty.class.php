@@ -111,7 +111,9 @@ class AdHocSmarty extends Smarty
             } elseif (is_array($params['id'])) {
                 $first  = true;
                 foreach ($params['id'] as $id) {
-                    if (!$first) { $chemin .= '|'; }
+                    if (!$first) {
+                        $chemin .= '|';
+                    }
                     $chemin .= MEDIA_URL . '/media/audio/'.$id.'.mp3';
                     $first = false;
                 }
