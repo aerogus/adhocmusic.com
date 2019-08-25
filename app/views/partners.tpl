@@ -7,12 +7,6 @@
   <div>
     <ul class="partners">
       <li>
-        <a href="https://www.ouifm.fr">
-          <img src="/img/partners/ouifm.png" alt="">
-          <strong>OUI FM</strong><br>La Radio du Rock.
-        </a>
-      </li>
-      <li>
         <a href="http://www.ville-epinay-sur-orge.fr">
           <img src="/img/partners/epinay-sur-orge.png" alt="">
           <strong>Épinay-sur-Orge</strong><br>Mairie d'Épinay-sur-Orge
@@ -64,12 +58,6 @@
         <a href="http://www.lecridelalibellule.fr">
           <img src="/img/partners/cridelalibellule.png" alt="">
           <strong>Le Cri de la Libellule</strong><br>Association musicale de Saint-Michel sur Orge
-        </a>
-      </li>
-      <li>
-        <a href="http://www.studioclap.fr">
-          <img src="/img/partners/studioclap.png" alt="">
-          <strong>Studio CLAP</strong><br>Réalisations de films et reportages
         </a>
       </li>
       <li>

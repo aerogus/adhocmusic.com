@@ -17,6 +17,8 @@ define('ENV', adhoc_get_env());
  * Retourne le type d'environnement
  * Se base sur le host du serveur
  *
+ * @todo un bon vieux fichier .env plutôt...
+ *
  * @return string
  */
 function adhoc_get_env() : string
@@ -130,7 +132,7 @@ ini_set('session.use_trans_sid', '0');
 /**
  * Mini fonction de debug
  *
- * @param mixed $var
+ * @param mixed $var variable
  *
  * @return void
  */
@@ -142,7 +144,7 @@ function p(mixed $var)
 /**
  * Mini fonction de debug
  *
- * @param mixed $var
+ * @param mixed $var variable
  *
  * @return string
  */
@@ -160,6 +162,8 @@ require_once ADHOC_ROOT_PATH . '/vendor/autoload.php';
  * Chargement automatique des classes métiers AD'HOC
  *
  * @param string $class_name Nom de la classe
+ *
+ * @return void
  */
 function autoload(string $class_name)
 {

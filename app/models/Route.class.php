@@ -363,7 +363,7 @@ class Route
      */
     protected static function _examine_splitted_path_component($params)
     {
-        $found_action = FALSE;
+        $found_action = false;
         $found_params = [];
         $route = $params['route'];
         $scanned_component = $params['scanned_component'];
@@ -372,35 +372,35 @@ class Route
             if (empty($component)) {
                 return [];
             }
-            return FALSE;
+            return false;
         }
         if ($scanned_component[0] !== ':') {
             if ($scanned_component !== $component) {
-                return FALSE;
+                return false;
             }
         } else {
             $matches = [];
             preg_match('/^:([a-z0-9_-]+)/i', $scanned_component, $matches);
             if (empty($matches[1])) {
-                return FALSE;
+                return false;
             }
             $scanned_component_splitted_action = explode(';', $scanned_component);
             $component_splitted_action = explode(';', $component);
             if (!empty($scanned_component_splitted_action[1])) {
                 if (empty($component_splitted_action[1])) {
-                    return FALSE;
+                    return false;
                 }
                 $component_action = $component_splitted_action[1];
                 if (empty($scanned_component_splitted_action[1])) {
-                    return FALSE;
+                    return false;
                 }
                 $scanned_component_action = $scanned_component_splitted_action[1];
                 if ($scanned_component_action !== $component_action) {
-                    return FALSE;
+                    return false;
                 }
                 $found_action = $route['action'];
             } elseif (!empty($component_splitted_action[1])) {
-                return FALSE;
+                return false;
             }
             $found_params[$matches[1]] = $component_splitted_action[0];
         }
@@ -447,11 +447,10 @@ class Route
      */
     protected static function _route_log($controller, $action, $log)
     {
-        $log_message =
-          '[' . addcslashes($controller, "\r\n|[]") . '] ' .
-          '[' . addcslashes($action, "\r\n|[]") . '] ' .
-          '[' . addcslashes($log, "\r\n|[]") . '] ';
-        if (($fp = fopen(ADHOC_LOG_PATH . '/route-errors.log', 'a')) !== FALSE) {
+        $log_message = '[' . addcslashes($controller, "\r\n|[]") . '] ' .
+                       '[' . addcslashes($action, "\r\n|[]") . '] ' .
+                       '[' . addcslashes($log, "\r\n|[]") . '] ';
+        if (($fp = fopen(ADHOC_LOG_PATH . '/route-errors.log', 'a')) !== false) {
             fputs($fp, $log_message . "\n");
             fclose($fp);
         }

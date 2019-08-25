@@ -1,14 +1,10 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
- * classe de méthodes pratiques communes à tout le site AD'HOC
+ * Mthodes pratiques communes à tout le site AD'HOC
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Tools
 {
@@ -17,26 +13,31 @@ class Tools
      */
     static function isUTF8($string)
     {
-        return preg_match('%^(?:
-                [\x09\x0A\x0D\x20-\x7E]
-                | [\xC2-\xDF][\x80-\xBF]
-                | \xE0[\xA0-\xBF][\x80-\xBF]
-                | [\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}
-                | \xED[\x80-\x9F][\x80-\xBF]
-                | \xF0[\x90-\xBF][\x80-\xBF]{2}
-                | [\xF1-\xF3][\x80-\xBF]{3}
-                | \xF4[\x80-\x8F][\x80-\xBF]{2}
-        )*$%xs', $string);
+        return preg_match(
+            '%^(?:
+            [\x09\x0A\x0D\x20-\x7E]
+            | [\xC2-\xDF][\x80-\xBF]
+            | \xE0[\xA0-\xBF][\x80-\xBF]
+            | [\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}
+            | \xED[\x80-\x9F][\x80-\xBF]
+            | \xF0[\x90-\xBF][\x80-\xBF]{2}
+            | [\xF1-\xF3][\x80-\xBF]{3}
+            | \xF4[\x80-\x8F][\x80-\xBF]{2}
+            )*$%xs', $string
+        );
     }
 
     /**
-     * conversion de l'encodage de caractères
-     * @todo prendre un array en entrée/sortie
-     * @param string chaine input
-     * @param string codage de sortie ISO|UTF8
+     * Conversion de l'encodage de caractères
+     *
+     * @param string $str  chaine input
+     * @param string $mode codage de sortie ISO|UTF8
+     *
      * @return string
+     *
+     * @todo prendre un array en entrée/sortie
      */
-    static function charSet($str, $mode = 'UTF8')
+    static function charSet(string $str, string $mode = 'UTF8')
     {
         switch ($mode)
         {
@@ -57,9 +58,11 @@ class Tools
     }
 
     /**
-     * retire les accents
+     * Retire les accents
      * /!\ ne fonctionne pas en utf8 donc bidouille
-     * @param string
+     *
+     * @param string $str chaîne
+     *
      * @return string
      */
     static function removeAccents($str)
@@ -100,7 +103,9 @@ class Tools
     }
 
     /**
+     * @param string $string chaîne
      *
+     * @return string
      */
     static function replaceWordEntities($string)
     {
@@ -112,7 +117,9 @@ class Tools
     }
 
     /**
+     * @param string $extension extension
      *
+     * @return string
      */
     static function getContentType($extension)
     {
@@ -132,7 +139,7 @@ class Tools
     /**
      * Transforme une couleur de la forme "rgb(55,55,55)" ou #FA4 en #FFAA44
      *
-     * @param string $rgbval
+     * @param string $rgbval valeur rgb
      *
      * @return string
      */
@@ -149,25 +156,28 @@ class Tools
     }
 
     /**
-     * tronque une chaine et ajoute ...
+     * Tronque une chaine et ajoute ...
      *
-     * @param string $string
-     * @param int $length
+     * @param string $chaine    chaîne
+     * @param int    $maxLength longueur maxi
+     *
      * @return string
      */
-    static function tronc($chaine, $maxlength)
+    static function tronc(string $chaine, int $maxLength)
     {
         $chaine = trim($chaine);
-        if ((mb_strlen($chaine) > $maxlength) && ($maxlength > 4)) {
-            return mb_substr($chaine, 0, $maxlength - 4, 'UTF-8')." ...";
+        if ((mb_strlen($chaine) > $maxlength) && ($maxLength > 4)) {
+            return mb_substr($chaine, 0, $maxLength - 4, 'UTF-8')." ...";
         }
         return $chaine;
     }
 
     /**
-     * nettoie une chaine de caractères
+     * Nettoie une chaine de caractères
      * utilisé sur les titres, texte blog, description, commentaires ...
+     *
      * @param string $texte
+     *
      * @return string
      */
     static function filtreTexte($texte)
@@ -219,9 +229,11 @@ class Tools
      * Retourne si un formulaire a été envoyé
      *
      * @param string $formName
+     * @param string $method
+     *
      * @return bool
      */
-    static function isSubmit($formName, $method = 'POST')
+    static function isSubmit(string $formName, string $method = 'POST')
     {
         if ($method == 'POST') {
             return (bool) !empty($_POST[$formName . '-submit']);
@@ -234,35 +246,37 @@ class Tools
 
     /**
      * @param string
+     *
      * @return string
      */
-    static function base64_url_encode($input)
+    static function base64_url_encode(string $input)
     {
         return strtr(base64_encode($input), '+/=', '-_,');
     }
 
     /**
      * @param string
+     *
      * @return string
      */
-    static function base64_url_decode($input)
+    static function base64_url_decode(string $input)
     {
         return base64_decode(strtr($input, '-_,', '+/='));
     }
 
     /**
-     * redirection HTTP
+     * Redirection HTTP
      *
      * @param string url
-     * @param bool $force_ssl
+     * @param bool $forceSsl
      */
-    static function redirect($url, $force_ssl = false)
+    static function redirect(string $url, bool $forceSsl = false)
     {
         if ((strpos($url, 'http://') === false) && (strpos($url, 'https://') === false)) {
             $url = HOME_URL . $url;
         }
 
-        if ($force_ssl) {
+        if ($forceSsl) {
             $url = str_replace('http:', 'https:', $url);
         }
 
@@ -282,7 +296,7 @@ class Tools
     }
 
     /**
-     * retourne si un internaute est identifié
+     * Retourne si un internaute est identifié
      *
      * @return bool
      */
@@ -303,9 +317,10 @@ class Tools
      * - a bien les droits d'accès à la page
      *
      * @param int $type
+     *
      * @return void
      */
-    static function auth($type)
+    static function auth(int $type)
     {
         // non identifié
         if (empty($_SESSION['membre'])) {
@@ -330,10 +345,11 @@ class Tools
      * - est loggué
      * - appartient bien au groupe en paramètre
      *
-     * @param int $id_groupe
+     * @param int $id_groupe id_groupe
+     *
      * @return void
      */
-    static function authGroupe($id_groupe)
+    static function authGroupe(int $id_groupe)
     {
         // non identifié
         if (empty($_SESSION['membre'])) {
@@ -362,7 +378,7 @@ class Tools
     }
 
     /**
-     * initialisation d'une session PHP native
+     * Initialisation d'une session PHP native
      */
     static function sessionInit()
     {
@@ -373,15 +389,14 @@ class Tools
 
         $_SESSION['lastaccess'] = date('Y-m-d H:i:s');
         if (!empty($_SESSION['hits'])) {
-            $_SESSION['hits']++;
-        } else {
-            $_SESSION['hits'] = 1;
+            $_SESSION['hits'] = 0;
         }
+        $_SESSION['hits']++;
         if (!empty($_SERVER['REQUEST_METHOD'])) {
             $_SESSION['httpmethod'] = $_SERVER['REQUEST_METHOD'];
         }
         if (!empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['REQUEST_URI'])) {
-            $_SESSION['url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+            $_SESSION['url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         }
         if (!empty($_SERVER['HTTP_USER_AGENT'])) {
             $_SESSION['ua'] = $_SERVER['HTTP_USER_AGENT'];
@@ -420,11 +435,13 @@ class Tools
     }
 
     /**
-     * @param string $str
+     * Html -> txt
+     *
+     * @param string $str chaîne
      *
      * @return string
      */
-    static function htmlToText($str)
+    static function htmlToText(string $str)
     {
         $str = strip_tags($str);
         $str = wordwrap($str, 80, "\n");
@@ -432,6 +449,9 @@ class Tools
         return $str;
     }
 
+    /**
+     *
+     */
     static function array_sort($array, $on, $order=SORT_ASC)
     {
         $new_array = [];
@@ -469,7 +489,7 @@ class Tools
     }
 
     /**
-     * @param string $ext
+     * @param string $ext extension
      *
      * @return string
      *
@@ -495,11 +515,11 @@ class Tools
     }
 
     /**
-     * @param string $ext
+     * @param string $ext extension
      *
      * @return string
      */
-    static function getIconByExtension($ext)
+    static function getIconByExtension(string $ext)
     {
         $icons_url = '/img/icones/';
         $default_icon = 'file.png';
