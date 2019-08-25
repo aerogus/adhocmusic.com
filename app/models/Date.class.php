@@ -34,12 +34,12 @@ class Date
     /**
      * Fonction modulable de formatage de date MySQL
      *
-     * @param string $datetime
-     * @param string $format
+     * @param string $datetime datetime
+     * @param string $format   format
      *
      * @return string
      */
-    static function mysql_datetime($datetime, $format = "d/m/Y à H:i")
+    static function mysql_datetime(string $datetime, string $format = "d/m/Y à H:i")
     {
         if (preg_match(self::$regexp_datetime, $datetime, $dt) && checkdate($dt[2], $dt[3], $dt[1])) {
             return date($format, mktime($dt[4], $dt[5], $dt[6], $dt[2], $dt[3], $dt[ 1]));
@@ -49,10 +49,14 @@ class Date
 
     /**
      * Conversion Date MySQL en Timestamp
-     * @param string $datetime
+     *
+     * @param string $date date
+     *
      * @return int
+     *
+     * @todo pourquoi date et par datetime ???
      */
-    function mysql_to_timestamp($date)
+    function mysql_to_timestamp(string $date)
     {
         if (!preg_match(self::$regexp_date, $date, $r)) {
             return false;
@@ -64,6 +68,7 @@ class Date
      * C'est sensé faire la meme chose à peu près que mysql_datetime ...
      *
      * @param string|int (format mysql ou timestamp)
+     *
      * @return string
      */
     static function formatDate($time)
@@ -73,9 +78,10 @@ class Date
     }
 
     /**
-     * retourne si une date est valide
+     * Retourne si une date est valide
      *
-     * @param string $date
+     * @param string $date date format YYYY-MM-DD ?
+     *
      * @return bool
      */
     static function isDateOk($date)
@@ -91,11 +97,11 @@ class Date
     /**
      * Retourne si une datetime mysql est valide
      *
-     * @param string $date
+     * @param string $datetime datetime
      *
      * @return bool
      */
-    static function isDateTimeOk($datetime)
+    static function isDateTimeOk(string $datetime)
     {
         if (preg_match(self::$regexp_datetime, $datetime, $regs)) {
             if (checkdate($regs[2], $regs[3], $regs[1])) {

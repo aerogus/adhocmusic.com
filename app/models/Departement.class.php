@@ -20,7 +20,8 @@ class Departement
     const LIBDEP = 1;
 
     /**
-     * codes régions FR
+     * Codes régions FR
+     *
      * @see http://www.maxmind.com/app/fips_include
      */
     const ALS = 'C1';
@@ -178,7 +179,7 @@ class Departement
     /**
      * Retourne le nom d'un département
      *
-     * @param int $cleDep
+     * @param int $cleDep clé département
      *
      * @return string
      */
@@ -194,7 +195,7 @@ class Departement
     /**
      * Retourne le code region d'un département
      *
-     * @param int $cleDep
+     * @param int $cleDep clé département
      *
      * @return int
      */
@@ -210,11 +211,11 @@ class Departement
     /**
      * Clé ok ?
      *
-     * @param string
+     * @param string $cle clé
      *
      * @return bool
      */
-    static function isCleOk($cle)
+    static function isCleOk(string $cle)
     {
         $cle = str_pad($cle, 2, '0', STR_PAD_LEFT);
         if (array_key_exists($cle, self::getHashTable())) {

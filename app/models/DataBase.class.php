@@ -1,11 +1,7 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
- * constantes utiles pour la classe DataBase
+ * Constantes utiles pour la classe DataBase
  */
 
 // base par défaut
@@ -19,10 +15,10 @@ define('DB_DUMMY_SEPARATOR', "\O"); /* à garder entre double quotes. */
 ini_set('mysql.connect_timeout', 2);
 
 /**
- * classe de gestion de la base MySQL
+ * Gestion de la base MySQL
  *
- * @author Guillaume Seznec <guillaume@seznec.fr>
  * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class DataBase
 {
@@ -40,22 +36,22 @@ class DataBase
     ];
 
     /**
-     * conteneur de l'instance courante
+     * Conteneur de l'instance courante
      */
     protected static $_instance = null;
 
     /**
-     * tableau des connexions ouvertes
+     * Tableau des connexions ouvertes
      */
     protected $_current_conn = [];
 
     /**
-     * compteur du nb de requete par instance de l'objet
+     * Compteur du nb de requete par instance de l'objet
      */
     protected $_nbreq = 0;
 
     /**
-     * compteur du nb total de temps utilisé par instance de l'objet
+     * Compteur du nb total de temps utilisé par instance de l'objet
      *
      * @var int
      */
@@ -67,12 +63,12 @@ class DataBase
     protected $_debug_log = [];
 
     /**
-     * type de fetch
+     * Type de fetch
      */
     protected $_fetchMode = MYSQLI_ASSOC;
 
     /**
-     * charser à utiliser pour la connexion
+     * Charset à utiliser pour la connexion
      */
     protected $_charset = 'utf8mb4';
 
@@ -146,8 +142,7 @@ class DataBase
     function closeAllConnections()
     {
         $connection_keys = array_keys($this->_current_conn);
-        foreach ($connection_keys as $conn_key)
-        {
+        foreach ($connection_keys as $conn_key) {
             @mysqli_close($this->_current_conn[$conn_key]);
             unset($this->_current_conn[$conn_key]);
         }
@@ -179,7 +174,7 @@ class DataBase
     }
 
     /**
-     * constructeur de la classe
+     * Constructeur de la classe
      */
     function __construct()
     {
@@ -338,11 +333,10 @@ class DataBase
         } elseif (true == $rc) {
             /* La requête s'est bien passée, c'était une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-             $res = [];
-             while (($row = mysqli_fetch_array($rc, $this->_fetchMode)) !== NULL)
-             {
+            $res = [];
+            while (($row = mysqli_fetch_array($rc, $this->_fetchMode)) !== null) {
                 $res[] = $row;
-             }
+            }
             $this->_fetchMode = MYSQLI_ASSOC;
         }
         return $res;
@@ -436,6 +430,7 @@ class DataBase
      * {@see self::$fetchMode}.
      *
      * @param resource $result
+     *
      * @return array|bool
      */
     function fetchAssoc($result)
@@ -514,7 +509,7 @@ class DataBase
     }
 
     /**
-     * échappe proprement les chaines
+     * Échappe proprement les chaines
      */
     function escape($string, $conn_name = DB_ADHOC_DEFAULT)
     {
@@ -535,7 +530,7 @@ class DataBase
     }
 
     /**
-     * retourne le n° de l'erreur sql
+     * Retourne le n° de l'erreur sql
      */
     function errno($conn_name)
     {
@@ -544,7 +539,7 @@ class DataBase
     }
 
     /**
-     * retourne un log des requêtes exécutées dans l'instance courante
+     * Retourne un log des requêtes exécutées dans l'instance courante
      *
      * @return array
      */
