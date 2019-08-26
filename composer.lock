@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f96d11570b2edb3545bc3bfaa21bfc2",
+    "content-hash": "fdb279f7eb9d473efe3a7dee7ed1db78",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -276,16 +276,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.110",
+            "version": "v0.111",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "9d9e0a4e180cf09a52ab04535ca4f669031f8c54"
+                "reference": "3bdb4e5be7fe49f8737f7b3a8a3a32ca68ff8f97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/9d9e0a4e180cf09a52ab04535ca4f669031f8c54",
-                "reference": "9d9e0a4e180cf09a52ab04535ca4f669031f8c54",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/3bdb4e5be7fe49f8737f7b3a8a3a32ca68ff8f97",
+                "reference": "3bdb4e5be7fe49f8737f7b3a8a3a32ca68ff8f97",
                 "shasum": ""
             },
             "require": {
@@ -309,7 +309,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2019-08-17T00:23:23+00:00"
+            "time": "2019-08-25T00:23:03+00:00"
         },
         {
             "name": "google/auth",
@@ -1080,16 +1080,16 @@
     "packages-dev": [
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.4.2",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8"
+                "reference": "379deb987e26c7cd103a7b387aea178baec96e48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8",
-                "reference": "b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/379deb987e26c7cd103a7b387aea178baec96e48",
+                "reference": "379deb987e26c7cd103a7b387aea178baec96e48",
                 "shasum": ""
             },
             "require": {
@@ -1122,12 +1122,12 @@
                 }
             ],
             "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
-            "homepage": "https://github.com/squizlabs/PHP_CodeSniffer",
+            "homepage": "http://www.squizlabs.com/php-codesniffer",
             "keywords": [
                 "phpcs",
                 "standards"
             ],
-            "time": "2019-04-10T23:49:02+00:00"
+            "time": "2018-12-19T23:57:18+00:00"
         }
     ],
     "aliases": [],
