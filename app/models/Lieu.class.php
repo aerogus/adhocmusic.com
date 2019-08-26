@@ -10,7 +10,7 @@
  * Gestion des Lieux de diffusions
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Lieu extends ObjectModel
 {

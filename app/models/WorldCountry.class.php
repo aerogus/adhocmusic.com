@@ -7,21 +7,22 @@
 /**
  * Classe WorldCountry
  *
- * @see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
+ *
+ * @see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
  */
 class WorldCountry extends Liste
 {
     /**
-     * instance de l'objet
+     * Instance de l'objet
      *
      * @var mixed
      */
     protected static $_instance = null;
 
     /**
-     * retourne le libellé d'un pays, en français ou anglais
+     * Retourne le libellé d'un pays, en français ou anglais
      *
      * @param int $cle
      * @return string

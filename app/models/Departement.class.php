@@ -159,9 +159,11 @@ class Departement
      * on peut limiter à une région particulière
      * c'est trié par n° de département
      *
+     * @param ?string $cleReg clé région
+     *
      * @return array[cleReg] = libelle
      */
-    static function getHashTable($cleReg = null)
+    static function getHashTable(string $cleReg = null)
     {
         $out = [];
         foreach (self::$_liste as $cle => $info) {

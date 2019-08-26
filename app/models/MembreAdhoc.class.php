@@ -8,7 +8,7 @@
  * Classe MembreAdhoc
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class MembreAdhoc extends Membre
 {

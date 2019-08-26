@@ -5,7 +5,7 @@
  * parente de Audio, Video et Photo
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Media extends ObjectModel
 {

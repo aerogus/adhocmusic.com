@@ -29,13 +29,18 @@ class Ephemeride extends ObjectModel
     /**
      * Retourne les données pour un jour donné
      *
-     * @param string date MM-DD
+     * @param string $date date format MM-DD
+     *
      * @return array ou false
      */
-    function getDate($date)
+    function getDate(string $date)
     {
-        if (strlen($date) !== 5) return;
-        if (!array_key_exists($date, $this->_data)) return;
+        if (strlen($date) !== 5) {
+            return;
+        }
+        if (!array_key_exists($date, $this->_data)) {
+            return;
+        }
         return $this->_data[$date];
     }
 

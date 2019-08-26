@@ -8,12 +8,12 @@
  * Classe Membre
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Membre extends Contact
 {
     /**
-     * gestion des droits utilisateurs
+     * Gestion des droits utilisateurs
      * par masque binaire
      */
     const TYPE_STANDARD  = 0x01; // 00001
@@ -23,7 +23,7 @@ class Membre extends Contact
     const TYPE_ADMIN     = 0x10; // 10000
 
     /**
-     * liste des types musiciens
+     * Liste des types musiciens
      */
     const TYPE_MUSICIEN_NON =  1;
     const TYPE_MUSICIEN_BAT =  2;

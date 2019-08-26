@@ -33,7 +33,8 @@ class Messagerie extends ObjectModel
     /**
      * Constructeur de la Classe
      *
-     * @param int $id_contact
+     * @param int $id_contact id_contact
+     *
      * @return void
      */
     function __construct($id_contact)

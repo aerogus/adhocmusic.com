@@ -12,9 +12,10 @@ class ForumPrive extends Forum
     protected static $_db_table_membre        = 'adhoc_membre';
 
     /**
-     * retourne le listing des threads d'un forum donné avec le contenu du 1er message
+     * Retourne le listing des threads d'un forum donné avec le contenu du 1er message
      *
      * @param int $page
+     *
      * @return array
      */
     static function getThreads($id_forum, $page = 0)
@@ -40,7 +41,7 @@ class ForumPrive extends Forum
     }
 
     /**
-     * retourne la page des messages d'un thread donné
+     * Retourne la page des messages d'un thread donné
      * (l'id_forum est implicite)
      *
      * @param int $id_thread
@@ -80,7 +81,7 @@ class ForumPrive extends Forum
     }
 
     /**
-     * retire tous les abonnements aux forums privés pour un membre interne
+     * Retire tous les abonnements aux forums privés pour un membre interne
      */
     static function delAllSubscriptions($id_contact)
     {
@@ -96,7 +97,7 @@ class ForumPrive extends Forum
     }
 
     /**
-     * retire un abonnement forum à un membre interne
+     * Retire un abonnement forum à un membre interne
      */
     static function delSubscriberToForum($id_contact, $id_forum)
     {
@@ -112,7 +113,7 @@ class ForumPrive extends Forum
     }
 
     /**
-     * ajoute un abonnement forum à un membre interne
+     * Ajoute un abonnement forum à un membre interne
      */
     static function addSubscriberToForum($id_contact, $id_forum)
     {
@@ -128,7 +129,7 @@ class ForumPrive extends Forum
     }
 
     /**
-     * retourne la liste des forums auxquels est abonné l'id_contact
+     * Retourne la liste des forums auxquels est abonné l'id_contact
      */
     static function getSubscribedForums($id_contact)
     {
@@ -152,8 +153,9 @@ class ForumPrive extends Forum
     }
 
     /**
-     * @param int id_contact
-     * @param array ids_forums
+     * @param int   $id_contact id_contact
+     * @param array $ids_forum  ids_forum
+     *
      * @see addSubscriberToForum / delSubscriberToForum
      */
     static function setSubscribedForums($id_contact, $ids_forum)

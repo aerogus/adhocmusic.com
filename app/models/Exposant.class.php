@@ -5,16 +5,14 @@
  */
 
 /**
- * Classe Exposant
- *
- * gestion des exposants
+ * Gestion des exposants
  *
  * @package AdHoc
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Exposant extends ObjectModel
 {
-	/**
+    /**
      * @var object
      */
     protected static $_instance = null;
@@ -109,6 +107,7 @@ class Exposant extends ObjectModel
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
      *
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
+     *
      * @var array
      */
     protected $_modified_fields = [];

@@ -7,12 +7,12 @@ define('FORUM_NB_MESSAGES_PER_PAGE', 50);
  * Classe de gestion des forums
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class Forum
 {
     /**
-     * chemin des smileys
+     * Chemin des smileys
      *
      * @var string
      */
@@ -53,7 +53,7 @@ abstract class Forum
      * Parse le message avec les différentes conventions des forums AD'HOC (smiley, pseudo html etc ...)
      *
      * @param string $texte texte
-     * @param bool $wiki wiki
+     * @param bool   $wiki  wiki
      *
      * @return string
      */
