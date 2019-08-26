@@ -12,10 +12,14 @@ final class Controller
         $trail->addStep("Privé", "/adm/");
         $trail->addStep("Newsletter");
 
-        $smarty->assign('newsletters', Newsletter::getNewsletters([
-            'sens' => 'DESC',
-            'limit' => 50,
-        ]));
+        $smarty->assign(
+            'newsletters', Newsletter::getNewsletters(
+                [
+                    'sens' => 'DESC',
+                    'limit' => 50,
+                ]
+            )
+        );
         $smarty->assign('nb_sub', Newsletter::getSubscribersCount());
 
         return $smarty->fetch('adm/newsletter/index.tpl');
@@ -25,8 +29,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        if (Tools::isSubmit('form-newsletter-create'))
-        {
+        if (Tools::isSubmit('form-newsletter-create')) {
             $data = [
                 'title'   => trim((string) Route::params('title')),
                 'content' => trim((string) Route::params('content')),
@@ -66,8 +69,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        if (Tools::isSubmit('form-newsletter-edit'))
-        {
+        if (Tools::isSubmit('form-newsletter-edit')) {
             $data = [
                 'id'      => (int) Route::params('id'),
                 'title'   => trim((string) Route::params('title')),
@@ -108,7 +110,7 @@ final class Controller
     }
 
     /**
-     * upload fichier pour newsletter
+     * Upload fichier pour newsletter
      * il est stocké dans le répertoire dédié sans traitement particulier
      */
     static function upload(): string

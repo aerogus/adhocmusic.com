@@ -1,7 +1,6 @@
 <?php
 
 /**
- * adhocmusic
  * Gestion des Vidéos
  */
 
@@ -22,13 +21,15 @@ final class Controller
 
         $page = (int) Route::params('page');
 
-        if ($_SESSION['membre']->getId() == 1) {
-            $videos = Video::getVideos([
-                'limit' => NB_VIDEOS_PER_PAGE,
-                'debut' => $page * NB_VIDEOS_PER_PAGE,
-                'sort'  => 'id',
-                'sens'  => 'ASC',
-            ]);
+        if ($_SESSION['membre']->getId() === 1) {
+            $videos = Video::getVideos(
+                [
+                    'limit' => NB_VIDEOS_PER_PAGE,
+                    'debut' => $page * NB_VIDEOS_PER_PAGE,
+                    'sort'  => 'id',
+                    'sens'  => 'ASC',
+                ]
+            );
             $nb_videos = Video::getVideosCount();
         } else {
             $videos = Video::getVideos(

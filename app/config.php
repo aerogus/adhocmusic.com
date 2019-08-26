@@ -21,7 +21,7 @@ define('ENV', adhoc_get_env());
  *
  * @return string
  */
-function adhoc_get_env() : string
+function adhoc_get_env(): string
 {
     $host = php_uname('n');
     switch ($host)
@@ -39,7 +39,7 @@ function adhoc_get_env() : string
 /**
  * @return bool
  */
-function is_ssl() : bool
+function is_ssl(): bool
 {
     return (bool) (
         !empty($_SERVER['HTTPS'])

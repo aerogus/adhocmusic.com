@@ -100,7 +100,7 @@ class Route
         }
         unset($matches);
         $splitted_path = explode('/', $path);
-        $sizeof_splitted_path = sizeof($splitted_path);
+        $sizeof_splitted_path = count($splitted_path);
 
         $ret = false;
         foreach (self::$routes as $route) {
@@ -327,7 +327,7 @@ class Route
         $route_splitted_path = $params['route_splitted_path'];
         $route = $params['route'];
 
-        if (sizeof($splitted_path) !== sizeof($route_splitted_path)) {
+        if (count($splitted_path) !== count($route_splitted_path)) {
             return false;
         }
         $i = 0;

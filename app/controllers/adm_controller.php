@@ -142,17 +142,19 @@ final class Controller
         //$id_groupe = (int) Route::params('id_groupe');
         //$id_type_musicien = (int) Route::params('id_type_musicien');
 
-        $membres = Membre::getMembres([
-            /*'id'         => $tab_id,*/
-            'pseudo'     => $pseudo,
-            'email'      => $email,
-            'last_name'  => $last_name,
-            'first_name' => $first_name,
-            'sort'  => $sort,
-            'sens'  => $sens,
-            'debut' => $page * ADM_NB_MEMBERS_PER_PAGE,
-            'limit' => ADM_NB_MEMBERS_PER_PAGE,
-        ]);
+        $membres = Membre::getMembres(
+            [
+                /*'id'         => $tab_id,*/
+                'pseudo'     => $pseudo,
+                'email'      => $email,
+                'last_name'  => $last_name,
+                'first_name' => $first_name,
+                'sort'  => $sort,
+                'sens'  => $sens,
+                'debut' => $page * ADM_NB_MEMBERS_PER_PAGE,
+                'limit' => ADM_NB_MEMBERS_PER_PAGE,
+            ]
+        );
 
         $nb_membres = Membre::getMembresCount(); // hors critères !
 
@@ -176,15 +178,17 @@ final class Controller
         $smarty->assign('types_membre', Membre::getTypesMembre());
         $smarty->assign('types_musicien', Membre::getTypesMusicien());
 
-        $smarty->assign('search', [
-            'pseudo' => $pseudo,
-            'last_name' => $last_name,
-            'first_name' => $first_name,
-            'email' => $email,
-            'with_groupe' => false,
-            'id_groupe' => 0,
-            'id_type_musicien' => 0,
-        ]);
+        $smarty->assign(
+            'search', [
+                'pseudo' => $pseudo,
+                'last_name' => $last_name,
+                'first_name' => $first_name,
+                'email' => $email,
+                'with_groupe' => false,
+                'id_groupe' => 0,
+                'id_type_musicien' => 0,
+            ]
+        );
 
         // pagination
         $smarty->assign('nb_items', $nb_membres);
@@ -411,8 +415,7 @@ final class Controller
         $rows = $db->queryWithFetch($sql);
 
         $tab = [];
-        foreach ($rows as $row)
-        {
+        foreach ($rows as $row) {
             $tab[$row['id_contact']]['id_contact'] = $row['id_contact'];
             $tab[$row['id_contact']]['first_name'] = $row['first_name'];
             $tab[$row['id_contact']]['last_name'] = $row['last_name'];
@@ -426,8 +429,7 @@ final class Controller
         }
 
         $ordre = [];
-        foreach ($tab as $contact => $inf)
-        {
+        foreach ($tab as $contact => $inf) {
             $ordre[$contact] = count($inf['events']);
         }
 
@@ -436,8 +438,7 @@ final class Controller
         $data = [];
         $rank = 1;
 
-        foreach ($ordre as $id_contact => $nb)
-        {
+        foreach ($ordre as $id_contact => $nb) {
             $data[$rank] = $tab[$id_contact];
             $data[$rank]['nb'] = $nb;
             $rank++;
@@ -535,8 +536,7 @@ final class Controller
             $tab_groupes[$_res['id']] = $_res;
         }
 
-        foreach ($tab_groupes as $id_grp => $grp)
-        {
+        foreach ($tab_groupes as $id_grp => $grp) {
             $sql = "SELECT `id_style`, `ordre` "
                  . "FROM `adhoc_groupe_style` "
                  . "WHERE `id_groupe` = " . (int) $grp['id'] . " "
@@ -695,7 +695,7 @@ final class Controller
 
                 $out .= "<table>";
 
-                if ($email != "") {
+                if ($email !== "") {
                     $sql = "SELECT `id_contact`, `email` FROM `adhoc_contact` WHERE `email` = '" . $db->escape($email) . "'";
                     $res = $db->query($sql);
                     if (list($id) = $db->fetchRow($res)) {
@@ -743,7 +743,7 @@ final class Controller
                     $res  = $db->query($sql);
                     $nb   = $db->numRows($res);
                     $out .= "<tr><td>table photo : <strong>" . $nb . " photo(s)</strong></td></tr>";
-/*
+                    /*
                     $sql  = "SELECT `id_contact` FROM `adhoc_forums` WHERE `id_contact` = " . $id;
                     $res  = $db->query($sql);
                     $nb   = $db->numRows($res);
@@ -753,7 +753,7 @@ final class Controller
                     $res  = $db->query($sql);
                     $nb   = $db->numRows($res);
                     $out .= "<tr><td>table suivi_thread : <strong>" . $nb . " suivi(s)</strong></td></tr>";
-*/
+                    */
                 }
 
                 $out .= "</table>";
@@ -835,8 +835,7 @@ final class Controller
         $trail->addStep("Privé", "/adm/");
         $trail->addStep("Liaison Membre / Groupe");
 
-        if (Tools::isSubmit('form-appartient-a'))
-        {
+        if (Tools::isSubmit('form-appartient-a')) {
             $groupe = Groupe::getInstance($id_groupe);
             switch ($action)
             {

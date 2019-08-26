@@ -98,7 +98,7 @@ class GoogleMaps
         $data = file_get_contents($url);
         $data = json_decode($data);
         if ($data->status == 'OK') {
-            if (sizeof($data->results)) {
+            if (count($data->results)) {
                 $lat = (float) $data->results[0]->geometry->location->lat;
                 $lng = (float) $data->results[0]->geometry->location->lng;
                 return [

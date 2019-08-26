@@ -181,26 +181,38 @@ final class Controller
     {
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('groupes', Groupe::getGroupes([
-            'sort'   => 'id',
-            'sens'   => 'ASC',
-            'online' => true,
-            'limit'  => false,
-        ]));
+        $smarty->assign(
+            'groupes', Groupe::getGroupes(
+                [
+                    'sort'   => 'id',
+                    'sens'   => 'ASC',
+                    'online' => true,
+                    'limit'  => false,
+                ]
+            )
+        );
 
-        $smarty->assign('lieux', Lieu::getLieux([
-            'sort'   => 'id',
-            'sens'   => 'ASC',
-            'online' => true,
-            'limit'  => false,
-        ]));
+        $smarty->assign(
+            'lieux', Lieu::getLieux(
+                [
+                    'sort'   => 'id',
+                    'sens'   => 'ASC',
+                    'online' => true,
+                    'limit'  => false,
+                ]
+            )
+        );
 
-        $smarty->assign('events', Event::getEvents([
-            'sort'   => 'id',
-            'sens'   => 'ASC',
-            'online' => true,
-            'limit'  => false,
-        ]));
+        $smarty->assign(
+            'events', Event::getEvents(
+                [
+                    'sort'   => 'id',
+                    'sens'   => 'ASC',
+                    'online' => true,
+                    'limit'  => false,
+                ]
+            )
+        );
 
         return $smarty->fetch('sitemap.tpl');
     }
@@ -245,7 +257,7 @@ final class Controller
     /**
      * Redirection après tracking liens newsletter
      * 
-     * ex: /r/XXX||YYY
+     * Ex: /r/XXX||YYY
      * avec XXX = url de redirection en base64
      * et   YYY = id_newsletter|id_contact en base64
      */

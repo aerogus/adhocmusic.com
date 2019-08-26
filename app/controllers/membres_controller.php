@@ -161,8 +161,7 @@ final class Controller
         $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/membre-edit.js');
 
-        if (Tools::isSubmit('form-member-edit'))
-        {
+        if (Tools::isSubmit('form-member-edit')) {
             $member = $_SESSION['membre'];
 
             $data = [
@@ -283,8 +282,7 @@ final class Controller
             return $smarty->fetch('membres/delete.tpl');
         }
 
-        if (Tools::isSubmit('form-member-delete'))
-        {
+        if (Tools::isSubmit('form-member-delete')) {
             // effacement du membre
             if ($membre->delete()) {
                 Log::action(Log::ACTION_MEMBER_DELETE, $id);
@@ -293,7 +291,8 @@ final class Controller
                 $_SESSION = [];
                 if (ini_get("session.use_cookies")) {
                     $params = session_get_cookie_params();
-                    setcookie(session_name(), '', time() - 42000,
+                    setcookie(
+                        session_name(), '', time() - 42000,
                         $params["path"], $params["domain"],
                         $params["secure"], $params["httponly"]
                     );
@@ -339,31 +338,43 @@ final class Controller
 
         $smarty->assign('groupes', Groupe::getMyGroupes());
 
-        $smarty->assign('photos', Photo::getPhotos([
-            'contact' => $_SESSION['membre']->getId(),
-            'limit'   => 4,
-            'debut'   => 0,
-            'sort'    => 'id',
-            'sens'    => 'DESC',
-        ]));
+        $smarty->assign(
+            'photos', Photo::getPhotos(
+                [
+                    'contact' => $_SESSION['membre']->getId(),
+                    'limit'   => 4,
+                    'debut'   => 0,
+                    'sort'    => 'id',
+                    'sens'    => 'DESC',
+                ]
+            )
+        );
         $smarty->assign('nb_photos', Photo::getMyPhotosCount());
 
-        $smarty->assign('videos', Video::getVideos([
-            'contact' => $_SESSION['membre']->getId(),
-            'limit'   => 4,
-            'debut'   => 0,
-            'sort'    => 'id',
-            'sens'    => 'DESC',
-        ]));
+        $smarty->assign(
+            'videos', Video::getVideos(
+                [
+                    'contact' => $_SESSION['membre']->getId(),
+                    'limit'   => 4,
+                    'debut'   => 0,
+                    'sort'    => 'id',
+                    'sens'    => 'DESC',
+                ]
+            )
+        );
         $smarty->assign('nb_videos', Video::getMyVideosCount());
 
-        $smarty->assign('audios', Audio::getAudios([
-            'contact' => $_SESSION['membre']->getId(),
-            'debut'   => 0,
-            'limit'   => 5,
-            'sort'    => 'id',
-            'sens'    => 'DESC',
-        ]));
+        $smarty->assign(
+            'audios', Audio::getAudios(
+                [
+                    'contact' => $_SESSION['membre']->getId(),
+                    'debut'   => 0,
+                    'limit'   => 5,
+                    'sort'    => 'id',
+                    'sens'    => 'DESC',
+                ]
+            )
+        );
         $smarty->assign('nb_audios', Audio::getMyAudiosCount());
 
         $db = DataBase::getInstance();

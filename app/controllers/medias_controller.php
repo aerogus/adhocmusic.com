@@ -11,14 +11,16 @@ final class Controller
 
         $smarty->enqueue_script('/js/medias.js');
 
-        $last_media = Media::getMedia([
-            'type'   => 'video',//,photo,audio',
-            'sort'   => 'created_on',
-            'sens'   => 'DESC',
-            'online' => true,
-            'limit'  => 18,
-            'split'  => true,
-        ]);
+        $last_media = Media::getMedia(
+            [
+                'type'   => 'video',//,photo,audio',
+                'sort'   => 'created_on',
+                'sens'   => 'DESC',
+                'online' => true,
+                'limit'  => 18,
+                'split'  => true,
+            ]
+        );
         $smarty->assign('last_media', $last_media);
 
         $id_groupe = (int) Route::params('groupe');
@@ -37,33 +39,39 @@ final class Controller
         $smarty->assign('groupes', Groupe::getGroupesWithMedia());
 
         if ($id_groupe) {
-            $search_media = Media::getMedia([
-                'type'   => 'video',
-                'groupe' => $id_groupe,
-                'online' => true,
-            ]);
+            $search_media = Media::getMedia(
+                [
+                    'type'   => 'video',
+                    'groupe' => $id_groupe,
+                    'online' => true,
+                ]
+            );
         }
 
         // recup events ayant des média
         $smarty->assign('events', Event::getEventsWithMedia());
 
         if ($id_event) {
-            $search_media = Media::getMedia([
-                'type'   => 'video',
-                'event'  => $id_event,
-                'online' => true,
-            ]);
+            $search_media = Media::getMedia(
+                [
+                    'type'   => 'video',
+                    'event'  => $id_event,
+                    'online' => true,
+                ]
+            );
         }
 
         $smarty->assign('search_media', $search_media);
 
-        $comments = Comment::getComments([
-            'type'  => 's,p,v',
-            'sort'  => 'id',
-            'sens'  => 'DESC',
-            'debut' => 0,
-            'limit' => 5,
-        ]);
+        $comments = Comment::getComments(
+            [
+                'type'  => 's,p,v',
+                'sort'  => 'id',
+                'sens'  => 'DESC',
+                'debut' => 0,
+                'limit' => 5,
+            ]
+        );
         $smarty->assign('comments', $comments);
 
         return $smarty->fetch('medias/index.tpl');
@@ -78,21 +86,25 @@ final class Controller
         $search_media = [];
 
         if ($id_groupe) {
-            $search_media = Media::getMedia([
-                'type'   => $type,
-                'groupe' => $id_groupe,
-                'online' => true,
-                'limit'  => 30,
-            ]);
+            $search_media = Media::getMedia(
+                [
+                    'type'   => $type,
+                    'groupe' => $id_groupe,
+                    'online' => true,
+                    'limit'  => 30,
+                ]
+            );
         }
 
         if ($id_event) {
-            $search_media = Media::getMedia([
-                'type'   => $type,
-                'event'  => $id_event,
-                'online' => true,
-                'limit'  => 30,
-            ]);
+            $search_media = Media::getMedia(
+                [
+                    'type'   => $type,
+                    'event'  => $id_event,
+                    'online' => true,
+                    'limit'  => 30,
+                ]
+            );
         }
 
         $smarty = new AdHocSmarty();

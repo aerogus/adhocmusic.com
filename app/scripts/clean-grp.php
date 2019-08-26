@@ -31,16 +31,16 @@ $groupe = Groupe::getInstance($id_groupe);
 echo "Groupe: " . $groupe->getName() . "\n";
 
 $photos = Photo::getPhotos(['groupe' => $id_groupe, 'limit' => 100]);
-echo "Photos: ". sizeof($photos) . "\n";
+echo "Photos: ". count($photos) . "\n";
 
 $audios = Audio::getAudios(['groupe' => $id_groupe]);
-echo "Audios: " . sizeof($audios) . "\n";
+echo "Audios: " . count($audios) . "\n";
 
 $videos = Video::getVideos(['groupe' => $id_groupe]);
-echo "Videos: " . sizeof($videos) . "\n";
+echo "Videos: " . count($videos) . "\n";
 
 $events = Event::getEvents(['groupe' => $id_groupe, 'limit' => 100]);
-echo "Evenements: " . sizeof($events) . "\n";
+echo "Evenements: " . count($events) . "\n";
 
 if ($do) {
 
