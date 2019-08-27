@@ -23,6 +23,8 @@ services:
       - 443:443
     volumes:
       - .:/var/www/adhocmusic.test:ro
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/ssl:/etc/nginx/ssl
       - ./volumes/nginx/log:/var/log/nginx
 
   # le serveur php, port 9000
@@ -37,6 +39,7 @@ services:
           - php.adhocmusic.test
     volumes:
        - .:/var/www/adhocmusic.test
+       - ./docker/php/php.ini:/etc/php.ini
        - ./volumes/php/log:/var/log/php
 
   # le serveur de base de données, port 3306

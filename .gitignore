@@ -2,39 +2,19 @@
 .DS_Store
 
 # données dans le contexte docker
-volumes
+/volumes
 
 # dépendances npm
-node_modules
-
-# dépendances bower
-# gestionnaire de paquets front-end
-bower_components
+/node_modules
 
 # dépendances composer
-# gestionnaire de paquets back-end avec autoloader
-vendor
+/vendor
 
 # tous les contenus utilisateur (audio, video, photo...) ici
 /static
 
-# stockage MySQL avec docker
-/db
-
-# cache smarty
-/smarty
-
-# cache smarty, images ...
-cache
-
 # medias utilisateurs (video, mp3, photos ...)
-media
-
-# FTP AD'HOC
-ftp
-
-# des logs ...
-log
+/media
 
 # export brunch
-public
+/public

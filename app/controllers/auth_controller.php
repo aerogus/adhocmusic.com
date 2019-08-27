@@ -9,7 +9,7 @@ final class Controller
      */
     static function login(): string
     {
-        if (!is_ssl()) {
+        if (!isSsl()) {
             Tools::redirect('/auth/login', true);
         }
 
