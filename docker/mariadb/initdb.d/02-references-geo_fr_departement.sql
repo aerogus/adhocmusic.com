@@ -95,19 +95,3 @@ INSERT INTO `geo_fr_departement` (`id_departement`, `id_world_region`, `id_regio
 ('93', 'A8', '', 'Seine Saint Denis'),
 ('94', 'A8', '', 'Val de Marne'),
 ('95', 'A8', '', 'Val d\'Oise');
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `geo_fr_departement`
---
-ALTER TABLE `geo_fr_departement`
-  ADD PRIMARY KEY (`id_departement`),
-  ADD KEY `id_region_old` (`id_region_insee`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
