@@ -1,5 +1,16 @@
 {include file="common/header.tpl"}
 
+
+  <div class="box">
+    <header>
+      <h3>Groupes</h3>
+    </header>
+    <div>
+
+{if !count($liste_groupes)}
+<p>Aucun groupe référencé. <a href="/groupes/create">Inscrire un groupe</a></p>
+{/if}
+
 {foreach from=$liste_groupes item=groupes key=key}
   <div class="box">
     <header>
@@ -12,5 +23,8 @@
     </ul>
   </div>
 {/foreach}
+
+</div>
+</div>
 
 {include file="common/footer.tpl"}

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Controlleur Medias
+ */
 final class Controller
 {
     static function index(): string

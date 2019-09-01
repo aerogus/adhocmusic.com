@@ -1,10 +1,6 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe WorldCountry
  *
  * @package AdHoc
@@ -24,30 +20,39 @@ class WorldCountry extends Liste
     /**
      * Retourne le libellé d'un pays, en français ou anglais
      *
-     * @param int $cle
+     * @param string $id_country code pays
+     * @param string $locale     locale
+     *
      * @return string
      */
-    static function getName($id_country, $locale = 'fr_FR')
+    static function getName(string $id_country, string $locale = 'fr_FR'): string
     {
         $o = static::getInstance();
         return $o->_getName($id_country, $locale);
     }
 
     /**
-     * @param string $id_country
+     * Le code pays est-il ok ?
+     *
+     * @param string $id_country code pays
+     *
      * @return bool
      */
-    static function isWorldCountryOk($id_country)
+    static function isWorldCountryOk(string $id_country): bool
     {
         $o = static::getInstance();
         return $o->_isWorldCountryOk($id_country);
     }
 
     /**
-     * @param string
+     * Retourne le nom du pays dans la locale demandée
+     *
+     * @param string $id_country code pays
+     * @param string $locale     locale
+     *
      * @return string
      */
-    protected function _getName($id_country, $locale = 'fr_FR')
+    protected function _getName(string $id_country, string $locale = 'fr_FR'): string
     {
         $lang = 'en';
         if (strpos($locale, 'fr') !== false) {
@@ -57,10 +62,13 @@ class WorldCountry extends Liste
     }
 
     /**
-     * @param string
+     * Retourne si le code pays est ok
+     *
+     * @param string $id_country code pays
+     *
      * @return bool
      */
-    protected function _isWorldCountryOk($id_country)
+    protected function _isWorldCountryOk(string $id_country): bool
     {
         if (array_key_exists($id_country, static::$_liste)) {
             return true;

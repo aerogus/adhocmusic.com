@@ -1,7 +1,15 @@
 <?php
 
+/**
+ * Controlleur Membre
+ */
 final class Controller
 {
+    /**
+     * Profil d'un membre
+     *
+     * @return string
+     */
     static function show(): string
     {
         $id = (int) Route::params('id');
@@ -32,6 +40,8 @@ final class Controller
 
     /**
      * Création d'un compte membre
+     *
+     * @return string
      */
     static function create(): string
     {
@@ -41,7 +51,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/geopicker.js');
+        //$smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/membre-create.js');
 
         $smarty->assign('title', "Inscription à l'association AD'HOC");
@@ -69,8 +79,7 @@ final class Controller
             'csrf'           => '',
         ];
 
-        if (Tools::isSubmit('form-member-create'))
-        {
+        if (Tools::isSubmit('form-member-create')) {
             $cp = '';
             $city = '';
 
@@ -146,6 +155,11 @@ final class Controller
         return $smarty->fetch('membres/create.tpl');
     }
 
+    /**
+     * Édition d'un membre
+     *
+     * @return string
+     */
     static function edit(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -266,6 +280,11 @@ final class Controller
         return $smarty->fetch('membres/edit.tpl');
     }
 
+    /**
+     * Suppression d'un membre
+     *
+     * @return string
+     */
     static function delete(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -308,7 +327,12 @@ final class Controller
         return $smarty->fetch('membres/delete.tpl');
     }
 
-    static function autocomplete_pseudo(): array
+    /**
+     * Retourne un tableau de pseudos vérifiant un pattern
+     *
+     * @return array
+     */
+    static function autocompletePseudo(): array
     {
         $q = trim((string) Route::params('q'));
 
@@ -327,7 +351,12 @@ final class Controller
         return $db->queryWithFetch($sql);
     }
 
-    static function tableau_de_bord(): string
+    /**
+     * Tableau de bord
+     *
+     * @return string
+     */
+    static function tableauDeBord(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
