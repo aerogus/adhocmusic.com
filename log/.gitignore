@@ -1,0 +1,3 @@
+# le répertoire doit être présent mais son contenu non versionné
+*
+!.gitignore

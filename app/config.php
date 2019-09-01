@@ -21,7 +21,7 @@ define('ENV', adhoc_get_env());
  *
  * @return string
  */
-function adhoc_get_env() : string
+function adhoc_get_env(): string
 {
     $host = php_uname('n');
     switch ($host)
@@ -39,13 +39,11 @@ function adhoc_get_env() : string
 /**
  * @return bool
  */
-function is_ssl() : bool
+function isSsl(): bool
 {
-    return (bool) (
-        !empty($_SERVER['HTTPS'])
-     || !empty($_SERVER['REDIRECT_HTTPS'])
-     || (!empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] === 'https')
-    );
+    return !empty($_SERVER['HTTPS'])
+        || !empty($_SERVER['REDIRECT_HTTPS'])
+        || (!empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] === 'https');
 }
 
 if (ENV === 'PROD') {
@@ -55,7 +53,7 @@ if (ENV === 'PROD') {
     define('_DB_PASSWORD_', 'kK2972Wd');
     define('_DB_DATABASE_', 'adhocmusic');
 
-    if (is_ssl()) {
+    if (isSsl()) {
         define('HOME_URL',  'https://www.adhocmusic.com');
         define('CACHE_URL', 'https://static.adhocmusic.com/cache');
         define('MEDIA_URL', 'https://static.adhocmusic.com/media');
@@ -71,12 +69,12 @@ if (ENV === 'PROD') {
 
 } elseif (ENV === 'DEV') {
 
-    define('_DB_HOST_',     'mysql.adhocmusic.test');
+    define('_DB_HOST_',     'mariadb.adhocmusic.test');
     define('_DB_USER_',     'adhocmusic');
     define('_DB_PASSWORD_', 'changeme');
     define('_DB_DATABASE_', 'adhocmusic');
 
-    if (is_ssl()) {
+    if (isSsl()) {
         define('HOME_URL',  'https://www.adhocmusic.test');
         define('CACHE_URL', 'https://static.adhocmusic.test/cache');
         define('MEDIA_URL', 'https://static.adhocmusic.test/media');
@@ -108,7 +106,7 @@ define('IMG_CACHE_PATH', ADHOC_ROOT_PATH . '/static/cache');
 // chemin http
 define('IMG_CACHE_URL', CACHE_URL);
 
-define('DB_ADHOC_DEFAULT',          1);
+define('DB_ADHOC_DEFAULT', 1);
 
 define('TRAIL_ENABLED', true);
 define('ADHOC_COUNTERS', true);

@@ -7,9 +7,10 @@
 /**
  * Différentes méthodes et données relatives aux dates
  *
- * @author Guillaume Seznec <guillaume@seznec.fr>
  * @package AdHoc
- * @deprecated bientôt
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
+ *
+ * @deprecated bientôt. ah ?
  */
 class Date
 {

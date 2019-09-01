@@ -1,43 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
---
--- Hôte : localhost
--- Généré le :  Dim 25 août 2019 à 18:54
--- Version du serveur :  10.1.38-MariaDB-0+deb9u1
--- Version de PHP :  7.3.8-1+0~20190807.43+debian9~1.gbp7731bf
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de données :  `adhocmusic`
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table `geo_world_region`
---
-
-CREATE TABLE `geo_world_region` (
-  `id_country` char(2) NOT NULL,
-  `id_region` char(2) NOT NULL,
-  `name` varchar(100) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `geo_world_region`
---
-
 INSERT INTO `geo_world_region` (`id_country`, `id_region`, `name`) VALUES
 ('AD', '02', 'Canillo'),
 ('AD', '03', 'Encamp'),
@@ -4288,18 +4248,3 @@ INSERT INTO `geo_world_region` (`id_country`, `id_region`, `name`) VALUES
 ('ZW', '08', 'Masvingo'),
 ('ZW', '09', 'Bulawayo'),
 ('ZW', '10', 'Harare');
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `geo_world_region`
---
-ALTER TABLE `geo_world_region`
-  ADD PRIMARY KEY (`id_country`,`id_region`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

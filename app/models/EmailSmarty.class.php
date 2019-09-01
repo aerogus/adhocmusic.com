@@ -1,5 +1,8 @@
 <?php
 
+/**
+ *
+ */
 class EmailSmarty extends Smarty
 {
     function __construct()

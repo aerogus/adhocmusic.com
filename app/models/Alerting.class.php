@@ -31,8 +31,9 @@ class Alerting extends ObjectModel
     protected $_id_alerting = 0;
 
     /**
-     * membre
-     * @var string
+     * Identifiant membre
+     *
+     * @var int
      */
     protected $_id_contact = 0;
 

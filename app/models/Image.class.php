@@ -7,11 +7,12 @@
 /**
  * Classe de création et de conversion d'images
  *
- * format d'import/export : GIF/JPEG/PNG
+ * Format d'import/export : GIF/JPEG/PNG
  *
  * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
+ *
  * @see http://classes.scriptsphp.net:81/doc.image
- * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Image
 {

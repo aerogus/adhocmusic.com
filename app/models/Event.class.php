@@ -7,11 +7,11 @@
 /**
  * Classe Event
  *
- * gestion des événements et des liaisons directes (avec groupe, structure et lieu)
+ * Gestion des événements et des liaisons directes (avec groupe, structure et lieu)
  * gestion de l'intégrité référentielle
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Event extends ObjectModel
 {
@@ -126,6 +126,7 @@ class Event extends ObjectModel
      * - numérique/integer/float/bool (= int)
      * - datetime/text (= str)
      * ceci est utile pour la formation de la requête
+     *
      * @var array
      */
     protected static $_all_fields = [
@@ -149,6 +150,7 @@ class Event extends ObjectModel
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
      *
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
+     *
      * @var array
      */
     protected $_modified_fields = [];
@@ -379,7 +381,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne l'url de la fiche événement
+     * Retourne l'url de la fiche événement
      *
      * @return string
      */
@@ -390,6 +392,7 @@ class Event extends ObjectModel
 
     /**
      * @param int $id
+     *
      * @return string
      */
     static function getUrlById($id, $type = null)
@@ -398,7 +401,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne le nombre de photos liées à l'événement
+     * Retourne le nombre de photos liées à l'événement
      *
      * @return int
      */
@@ -408,7 +411,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne le nombre d'audios liés à l'événement
+     * Retourne le nombre d'audios liés à l'événement
      *
      * @return int
      */
@@ -418,7 +421,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * retourne le nombre de vidéos liées à l'événement
+     * Retourne le nombre de vidéos liées à l'événement
      *
      * @return int
      */
@@ -432,7 +435,7 @@ class Event extends ObjectModel
     /* début setters */
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setCreatedOn(string $val)
     {
@@ -443,7 +446,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setCreatedNow()
     {
@@ -455,7 +458,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setModifiedOn(string $val)
     {
@@ -466,7 +469,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string
+     *
      */
     function setModifiedNow()
     {
@@ -478,7 +481,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setName(string $val)
     {
@@ -489,7 +492,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setFacebookEventId(string $val)
     {
@@ -506,7 +509,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param int
+     * @param int $val val
      */
     function setFacebookEventAttending(int $val)
     {
@@ -517,7 +520,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setDate(string $val)
     {
@@ -528,7 +531,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setText(string $val)
     {
@@ -539,7 +542,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setPrice(string $val)
     {
@@ -550,7 +553,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param bool
+     * @param bool $val val
      */
     function setOnline(bool $val)
     {
@@ -561,7 +564,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param int
+     * @param int $val val
      */
     function setIdLieu(int $val)
     {
@@ -572,7 +575,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param int
+     * @param int $val val
      */
     function setIdContact(int $val)
     {
@@ -583,7 +586,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param int
+     * @param int $val val
      */
     function setNbPhotos(int $val)
     {
@@ -594,7 +597,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param int
+     * @param int $val val
      */
     function setNbAudios(int $val)
     {
@@ -605,7 +608,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param int
+     * @param int $val val
      */
     function setNbVideos(int $val)
     {
@@ -643,19 +646,19 @@ class Event extends ObjectModel
     /**
      * Retourne un tableau d'objEvt pour des critères donnés
      *
-     * @param array ['datdeb']      => '2005-01-01'
-     *              ['datfin']      => '2005-03-03'
-     *              ['lieu']        => '1'
-     *              ['style']       => '1,3,5'
-     *              ['groupe']      => '5,6'
-     *              ['structure']   => '1'
-     *              ['id']          => '5'
-     *              ['departement'] => '91'
-     *              ['sort']        => id_event|datdeb|random
-     *              ['sens']        => ASC|DESC
-     *              ['debut']       => 0
-     *              ['limit']       => 5000
-     *              ['online']      => true
+     * @param array $params ['datdeb']      => '2005-01-01'
+     *                      ['datfin']      => '2005-03-03'
+     *                      ['lieu']        => '1'
+     *                      ['style']       => '1,3,5'
+     *                      ['groupe']      => '5,6'
+     *                      ['structure']   => '1'
+     *                      ['id']          => '5'
+     *                      ['departement'] => '91'
+     *                      ['sort']        => id_event|datdeb|random
+     *                      ['sens']        => ASC|DESC
+     *                      ['debut']       => 0
+     *                      ['limit']       => 5000
+     *                      ['online']      => true
      * datdeb et datfin obligatoires, le reste facultatif
      *
      * @return array
@@ -922,10 +925,10 @@ class Event extends ObjectModel
     }
 
     /**
-     * ajoute un style pour un événement
+     * Ajoute un style pour un événement
      *
-     * @param int $id_style
-     * @param int $ordre
+     * @param int $id_style id_style
+     * @param int $ordre ordre
      */
     function linkStyle(int $id_style, int $ordre = 1)
     {
@@ -973,7 +976,7 @@ class Event extends ObjectModel
     /**
      * Efface un style pour un événement
      *
-     * @param int $id_style
+     * @param int $id_style id_style
      */
     function unlinkStyle(int $id_style)
     {
@@ -1038,7 +1041,7 @@ class Event extends ObjectModel
     /**
      * Retourne un style
      *
-     * @param int $idx
+     * @param int $idx idx
      */
     function getStyle(int $idx)
     {
@@ -1066,9 +1069,9 @@ class Event extends ObjectModel
     /**
      * Ajoute un groupe à un événement
      *
-     * @param int $id_groupe
+     * @param int $id_groupe id_groupe
      */
-    function linkGroupe($id_groupe)
+    function linkGroupe(int $id_groupe)
     {
         $db = DataBase::getInstance();
 
@@ -1135,7 +1138,7 @@ class Event extends ObjectModel
     /**
      * Retourne un tableau d'info d'un groupe à partir de l'index commençant à 0
      *
-     * @param int $idx
+     * @param int $idx idx
      *
      * @return array
      */
@@ -1150,7 +1153,7 @@ class Event extends ObjectModel
     /**
      * Retourne un groupe id à partir de l'index commençant à 0
      *
-     * @param int $idx
+     * @param int $idx idx
      *
      * @return int
      */
@@ -1182,7 +1185,7 @@ class Event extends ObjectModel
     /**
      * Ajoute une structure à un événement
      *
-     * @param int $id_structure
+     * @param int $id_structure id_structure
      */
     function linkStructure(int $id_structure)
     {
@@ -1216,7 +1219,7 @@ class Event extends ObjectModel
     /**
      * Efface une structure d'un événement
      *
-     * @param int $id_structure
+     * @param int $id_structure id_structure
      */
     function unlinkStructure(int $id_structure)
     {
@@ -1274,7 +1277,7 @@ class Event extends ObjectModel
     /**
      * Retourne une structure
      *
-     * @param int $idx
+     * @param int $idx idx
      *
      * @return int
      */
@@ -1289,7 +1292,7 @@ class Event extends ObjectModel
     /**
      * Retourne un structure id à partir de l'index commençant à 0
      *
-     * @param int $idx
+     * @param int $idx idx
      *
      * @return int
      */
@@ -1302,7 +1305,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * efface toutes les structures d'un événement
+     * Efface toutes les structures d'un événement
      */
     function unlinkStructures()
     {
@@ -1320,8 +1323,8 @@ class Event extends ObjectModel
      * Retourne un tableau avec le nombre d'événements par jour
      * utile pour le calendrier
      *
-     * @param int $year
-     * @param int $month
+     * @param int $year année
+     * @param int $month mois
      *
      * @return array
      */
@@ -1394,7 +1397,7 @@ class Event extends ObjectModel
     /**
      * Retourne si un événement est valide
      *
-     * @param int $id_event
+     * @param int $id_event id_event
      *
      * @return bool
      */
@@ -1439,6 +1442,9 @@ class Event extends ObjectModel
         return $_SESSION['my_counters']['nb_events'];
     }
 
+    /**
+     *
+     */
     static function syncNbMedia()
     {
         $db = DataBase::getInstance();
@@ -1501,6 +1507,9 @@ class Event extends ObjectModel
         return $tab;
     }
 
+    /**
+     *
+     */
     static function invalidateFlyerInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
     {
         $uid = 'event/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';

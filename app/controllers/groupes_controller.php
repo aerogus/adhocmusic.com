@@ -68,19 +68,25 @@ final class Controller
 
         $smarty->assign('is_loggued', !empty($_SESSION['membre']));
 
-        $smarty->assign('videos', Video::getVideos([
-            'online' => true,
-            'groupe' => (int) $groupe->getId(),
-            'limit'  => 30,
-        ]));
+        $smarty->assign(
+            'videos', Video::getVideos(
+                [
+                    'online' => true,
+                    'groupe' => (int) $groupe->getId(),
+                    'limit'  => 30,
+                ]
+            )
+        );
 
-        $audios = Audio::getAudios([
-            'groupe' => (int) $groupe->getId(),
-            'online' => true,
-            'limit'  => 30,
-            'sort'   => 'id_audio',
-            'sens'   => 'DESC',
-        ]);
+        $audios = Audio::getAudios(
+            [
+                'groupe' => (int) $groupe->getId(),
+                'online' => true,
+                'limit'  => 30,
+                'sort'   => 'id_audio',
+                'sens'   => 'DESC',
+            ]
+        );
 
         $smarty->assign('audios', $audios);
 
@@ -92,32 +98,44 @@ final class Controller
             }
         }
 
-        $smarty->assign('photos', Photo::getPhotos([
-            'sort'   => 'random',
-            'limit'  => 100,
-            'groupe' => (int) $groupe->getId(),
-            'online' => true,
-        ]));
+        $smarty->assign(
+            'photos', Photo::getPhotos(
+                [
+                    'sort'   => 'random',
+                    'limit'  => 100,
+                    'groupe' => (int) $groupe->getId(),
+                    'online' => true,
+                ]
+            )
+        );
 
         // concerts à venir
-        $smarty->assign('f_events', Event::getEvents([
-            'datdeb' => date('Y-m-d H:i:s'),
-            'sort'   => 'date',
-            'sens'   => 'ASC',
-            'groupe' => (int) $groupe->getId(),
-            'online' => true,
-            'limit'  => 50,
-        ]));
+        $smarty->assign(
+            'f_events', Event::getEvents(
+                [
+                    'datdeb' => date('Y-m-d H:i:s'),
+                    'sort'   => 'date',
+                    'sens'   => 'ASC',
+                    'groupe' => (int) $groupe->getId(),
+                    'online' => true,
+                    'limit'  => 50,
+                ]
+            )
+        );
 
         // concerts passés
-        $smarty->assign('p_events', Event::getEvents([
-            'datfin' => date('Y-m-d H:i:s'),
-            'sort'   => 'date',
-            'sens'   => 'DESC',
-            'groupe' => (int) $groupe->getId(),
-            'online' => true,
-            'limit'  => 50,
-        ]));
+        $smarty->assign(
+            'p_events', Event::getEvents(
+                [
+                    'datfin' => date('Y-m-d H:i:s'),
+                    'sort'   => 'date',
+                    'sens'   => 'DESC',
+                    'groupe' => (int) $groupe->getId(),
+                    'online' => true,
+                    'limit'  => 50,
+                ]
+            )
+        );
 
         $groupe->addVisite();
 
@@ -290,8 +308,7 @@ final class Controller
             'twitter_id'       => $groupe->getTwitterId(),
         ];
 
-        if (Tools::isSubmit('form-groupe-edit'))
-        {
+        if (Tools::isSubmit('form-groupe-edit')) {
             $data = [
                 'id_groupe'        => $groupe->getId(),
                 'style'            => (string) Route::params('style'),
@@ -322,7 +339,7 @@ final class Controller
                 $groupe->setModifiedNow();
                 $groupe->save();
 
-               // $groupe->updateMember($_SESSION['membre']->getId(), $data['id_type_musicien']);
+                // $groupe->updateMember($_SESSION['membre']->getId(), $data['id_type_musicien']);
 
                 if (is_uploaded_file($_FILES['lelogo']['tmp_name'])) {
                     $img = new Image($_FILES['lelogo']['tmp_name']);
@@ -400,8 +417,7 @@ final class Controller
             }
         }
 
-        if (Tools::isSubmit('form-groupe-delete'))
-        {
+        if (Tools::isSubmit('form-groupe-delete')) {
             if ($can_delete) {
                 if ($groupe->delete()) {
                     Log::action(Log::ACTION_GROUP_DELETE, $groupe->getId());

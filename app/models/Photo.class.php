@@ -1,17 +1,13 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe Photo
  *
  * Classe de gestion des photos du site
  * Upload, Appel conversion etc ...
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Photo extends Media
 {
@@ -61,6 +57,7 @@ class Photo extends Media
      * - numérique/integer/float/bool (= num)
      * - datetime/text (= str)
      * ceci est utile pour la formation de la requête
+     *
      * @var array
      */
     protected static $_all_fields = [
@@ -80,6 +77,7 @@ class Photo extends Media
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
      *
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
+     *
      * @var array
      */
     protected $_modified_fields = [];
@@ -147,6 +145,7 @@ class Photo extends Media
 
     /**
      * @param int $id
+     *
      * @return string
      */
     static function getUrlById($id, $type = null)
@@ -160,12 +159,12 @@ class Photo extends Media
 
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setCredits(string $val)
     {
         if ($this->_credits !== $val) {
-            $this->_credits = (string) $val;
+            $this->_credits = $val;
             $this->_modified_fields['credits'] = true;
         }
     }
@@ -195,7 +194,7 @@ class Photo extends Media
     }
 
     /**
-     * retourne le nombre total de photos du visiteur loggué
+     * Retourne le nombre total de photos du visiteur loggué
      *
      * @return int
      */
@@ -223,7 +222,7 @@ class Photo extends Media
     }
 
     /**
-     * retourne le nombre total de photos
+     * Retourne le nombre total de photos
      *
      * @return int
      */
@@ -246,22 +245,23 @@ class Photo extends Media
     }
 
     /**
-     * recherche des photos en fonction de critères donnés
+     * Recherche des photos en fonction de critères donnés
      *
-     * @param array ['groupe']    => "5"
-     *              ['structure'] => "1,3"
-     *              ['lieu']      => "1"
-     *              ['event']     => "1"
-     *              ['id']        => "3"
-     *              ['contact']   => "1"
-     *              ['sort']      => "id_photo|date|random"
-     *              ['sens']      => "ASC"
-     *              ['debut']     => 0
-     *              ['limit']     => 10
-     *              ['fetchtags'] => false
+     * @param array $params ['groupe']    => "5"
+     *                      ['structure'] => "1,3"
+     *                      ['lieu']      => "1"
+     *                      ['event']     => "1"
+     *                      ['id']        => "3"
+     *                      ['contact']   => "1"
+     *                      ['sort']      => "id_photo|date|random"
+     *                      ['sens']      => "ASC"
+     *                      ['debut']     => 0
+     *                      ['limit']     => 10
+     *                      ['fetchtags'] => false
+     *
      * @return array
      */
-    static function getPhotos($params = [])
+    static function getPhotos(array $params = [])
     {
         $debut = 0;
         if (isset($params['debut'])) {
@@ -280,7 +280,8 @@ class Photo extends Media
 
         $sort = 'id_photo';
         if (isset($params['sort'])
-           && ($params['sort'] == 'created_on' || $params['sort'] == 'random')) {
+            && ($params['sort'] == 'created_on' || $params['sort'] == 'random')
+        ) {
             $sort = $params['sort'];
         }
 
@@ -296,12 +297,24 @@ class Photo extends Media
         $tab_id        = [];
         $tab_contact   = [];
 
-        if (array_key_exists('groupe', $params))    { $tab_groupe    = explode(",", $params['groupe']); }
-        if (array_key_exists('structure', $params)) { $tab_structure = explode(",", $params['structure']); }
-        if (array_key_exists('lieu', $params))      { $tab_lieu      = explode(",", $params['lieu']); }
-        if (array_key_exists('event', $params))     { $tab_event     = explode(",", $params['event']); }
-        if (array_key_exists('id', $params))        { $tab_id        = explode(",", $params['id']); }
-        if (array_key_exists('contact', $params))   { $tab_contact   = explode(",", $params['contact']); }
+        if (array_key_exists('groupe', $params)) {
+            $tab_groupe    = explode(",", $params['groupe']);
+        }
+        if (array_key_exists('structure', $params)) {
+            $tab_structure = explode(",", $params['structure']);
+        }
+        if (array_key_exists('lieu', $params)) {
+            $tab_lieu = explode(",", $params['lieu']);
+        }
+        if (array_key_exists('event', $params)) {
+            $tab_event = explode(",", $params['event']);
+        }
+        if (array_key_exists('id', $params)) {
+            $tab_id = explode(",", $params['id']);
+        }
+        if (array_key_exists('contact', $params)) {
+            $tab_contact = explode(",", $params['contact']);
+        }
 
         $db = DataBase::getInstance();
 
@@ -406,26 +419,41 @@ class Photo extends Media
         throw new Exception('Photo introuvable');
     }
 
+    /**
+     *
+     */
     function getThumb80Url()
     {
         return self::getPhotoUrl($this->getId(), 80, 80, '000000', false, true);
     }
 
+    /**
+     *
+     */
     function getThumb130Url()
     {
         return self::getPhotoUrl($this->getId(), 130, 130, '000000', false, false);
     }
 
+    /**
+     *
+     */
     function getThumb400Url()
     {
         return self::getPhotoUrl($this->getId(), 400, 300, '000000', false, false);
     }
 
+    /**
+     *
+     */
     function getThumb680Url()
     {
         return self::getPhotoUrl($this->getId(), 680, 600, '000000', false, false);
     }
 
+    /**
+     *
+     */
     static function invalidatePhotoInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
     {
         $uid = 'photo/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
@@ -440,7 +468,7 @@ class Photo extends Media
     }
 
     /**
-     * retourne l'url de la photo
+     * Retourne l'url de la photo
      * gestion de la mise en cache
      *
      * @return string

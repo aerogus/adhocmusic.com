@@ -26,34 +26,21 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
 
 {else}
 
-<h3>Création d'un compte AD'HOC</h3>
-<p>Le compte AD'HOC, dont l'inscription est totalement gratuite, donne accès à toute la zone membre du site.</p>
-<strong>Vos Avantages :</strong>
-<ul>
-  <li>Annoncer des concerts dans l'agenda</li>
-  <li>Communiquer entre membres par messagerie interne</li>
-  <li>S'abonner aux alertes</li>
-  <li>Faire partie d'une communauté de musiciens et d'amateurs de musique</li>
-  <li>Inscrire et gérer sa fiche groupe</li>
-</ul>
-
-<hr>
+<h3>Création d'un compte</h3>
 
 <form id="form-member-create" name="form-member-create" method="post" action="/membres/create">
   <ul>
     <li>
       <label for="email">Email</label>
-      <div class="infobulle warning" id="bubble_email" style="display: none;">Vous recevrez votre mot de passe à cette adresse</div>
       <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez saisir un email valide</div>
       <div id="error_invalid_email" class="infobulle error"{if empty($error_invalid_email)} style="display: none"{/if}>Votre email est invalide</div>
-      <div id="error_already_member" class="infobulle error"{if empty($error_already_member)} style="display: none"{/if}>Inscription impossible : votre email est déjà inscrit ! <a href="/auth/lost-password">Vous avez oublié votre mot de passe ?</a></div>
+      <div id="error_already_member" class="infobulle error"{if empty($error_already_member)} style="display: none"{/if}>Inscription impossible : un compte avec cet email existe déjà. <a href="/auth/lost-password">Mot de passe oublié ?</a></div>
       <input id="email" name="email" type="email" size="35" value="{$data.email|escape}" placeholder="Email">
     </li>
     <li>
       <label for="pseudo">Pseudo</label>
-      <div class="infobulle warning" id="bubble_pseudo" style="display: none;">Ce pseudo est nominatif, ce n'est pas le nom de votre groupe</div>
-      <div id="error_pseudo_unavailable" class="infobulle error"{if empty($error_pseudo_unavailable)} style="display: none"{/if}>Pseudo déjà utilisé, veuillez en fournir un autre</div>
-      <div class="infobulle error" id="error_pseudo"{if empty($error_pseudo)} style="display: none"{/if}>Vous devez saisir un pseudo de 5 à 10 caractères</div>
+      <div id="error_pseudo_unavailable" class="infobulle error"{if empty($error_pseudo_unavailable)} style="display: none"{/if}>Ce pseudo est pris, veuillez en choisir un autre</div>
+      <div class="infobulle error" id="error_pseudo"{if empty($error_pseudo)} style="display: none"{/if}>Vous devez saisir un pseudo entre 2 à 16 caractères</div>
       <input id="pseudo" name="pseudo" type="text" size="35" value="{$data.pseudo|escape}" placeholder="Pseudo">
     </li>
     <li>
@@ -67,29 +54,8 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
       <input id="first_name" name="first_name" type="text" size="35" value="{$data.first_name|escape}" placeholder="Prénom">
     </li>
     <li>
-      <label for="id_country">Pays</label>
-      <div class="infobulle error" id="error_id_country"{if empty($error_id_country)} style="display: none"{/if}>Vous devez préciser votre pays</div>
-      <select id="id_country" name="id_country"></select>
-    </li>
-    <li>
-      <label for="id_region">Région</label>
-      <div class="infobulle error" id="error_id_region"{if empty($error_id_region)} style="display: none"{/if}>Vous devez saisir votre région</div>
-      <select id="id_region" name="id_region"></select>
-    </li>
-    <li>
-      <label for="id_departement">Département</label>
-      <div class="infobulle error" id="error_id_departement"{if empty($error_id_departement)} style="display: none"{/if}>Vous devez saisir votre département</div>
-      <select id="id_departement" name="id_departement"></select>
-    </li>
-    <li>
-      <label for="id_city">Ville</label>
-      <div class="infobulle error" id="error_id_city"{if empty($error_id_city)} style="display: none"{/if}>Vous devez choisir votre ville</div>
-      <select id="id_city" name="id_city"></option>
-      </select>
-    </li>
-    <li>
       <label for="mailing">Newsletter</label>
-      <span><input id="mailing" name="mailing" type="checkbox"{if !empty($data.mailing)} checked="checked"{/if}> oui, je désire recevoir la lettre d'information (4 à 5 par an).</span>
+      <span><input id="mailing" name="mailing" type="checkbox"{if !empty($data.mailing)} checked="checked"{/if}> J'accepte de recevoir la lettre d'information mensuelle de l'association.</span>
     </li>
   </ul>
   <input type="hidden" name="csrf" value="{$data.csrf}">
@@ -101,15 +67,5 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
 
 </div>
 </div>
-
-<script>
-var lieu = {
-    id: 0,
-    id_country: 'FR',
-    id_region: 'A8',
-    id_departement: '91',
-    id_city: 91216
-};
-</script>
 
 {include file="common/footer.tpl"}

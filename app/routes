@@ -157,14 +157,14 @@ lieux|fetch|GET|/lieux/fetch
 lieux|show|GET|/lieux/:id
 medias|index|GET|/medias/
 medias|search_results|GET|/medias/search-results
-membres|tableau_de_bord|GET|/membres/tableau-de-bord
+membres|tableauDeBord|GET|/membres/tableau-de-bord
 membres|create|GET|/membres/create
 membres|create|POST|/membres/create
 membres|edit|GET|/membres/edit
 membres|edit|POST|/membres/edit
 membres|delete|GET|/membres/delete
 membres|delete|POST|/membres/delete
-membres|autocomplete_pseudo|GET|/membres/autocomplete-pseudo
+membres|autocompletePseudo|GET|/membres/autocomplete-pseudo
 membres|show|GET|/membres/:id
 messagerie|index|GET|/messagerie/
 messagerie|read|GET|/messagerie/read/:id

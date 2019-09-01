@@ -8,7 +8,7 @@
     </header>
     <div>
 
-{if !sizeof($events)}
+{if !count($events)}
 <p>Aucune date annoncée pour cette période. <a href="/events/create">Inscrire une date</a></p>
 {/if}
 

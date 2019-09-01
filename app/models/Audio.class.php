@@ -46,6 +46,7 @@ class Audio extends Media
      * - numérique/integer/float/bool (= int)
      * - datetime/text (= str)
      * ceci est utile pour la formation de la requête
+     *
      * @var array
      */
     protected static $_all_fields = [
@@ -65,6 +66,7 @@ class Audio extends Media
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
      *
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
+     *
      * @var array
      */
     protected $_modified_fields = [];
@@ -104,10 +106,11 @@ class Audio extends Media
     }
 
     /**
-     * @param int
+     * @param int $id id_audio
+     *
      * @return string
      */
-    static function getUrlById($id)
+    static function getUrlById(int $id)
     {
         return HOME_URL . '/audios/' . $id;
     }
@@ -125,13 +128,12 @@ class Audio extends Media
     /* début setters */
 
     /**
-     * @param string
+     * @param string $val typemime
      */
-    function setMime($val)
+    function setMime(string $val)
     {
-        if ($this->_mime !== $val)
-        {
-            $this->_mime = (string) $val;
+        if ($this->_mime !== $val) {
+            $this->_mime = $val;
             $this->_modified_fields['mime'] = true;
         }
     }
@@ -139,20 +141,21 @@ class Audio extends Media
     /* fin setters */
 
     /**
-     * recherche des audios en fonction de critères donnés
+     * Recherche des audios en fonction de critères donnés
      *
-     * @param array ['groupe']    => "5"
-     *              ['structure'] => "1,3"
-     *              ['lieu']      => "1"
-     *              ['event']     => "1"
-     *              ['contact']   => "1"
-     *              ['sort']      => "id_audio|date|random"
-     *              ['sens']      => "ASC"
-     *              ['debut']     => 0
-     *              ['limit']     => 10
+     * @param array $params ['groupe']    => "5"
+     *                      ['structure'] => "1,3"
+     *                      ['lieu']      => "1"
+     *                      ['event']     => "1"
+     *                      ['contact']   => "1"
+     *                      ['sort']      => "id_audio|date|random"
+     *                      ['sens']      => "ASC"
+     *                      ['debut']     => 0
+     *                      ['limit']     => 10
+     *
      * @return array
      */
-    static function getAudios($params = [])
+    static function getAudios(array $params = [])
     {
         $debut = 0;
         if (isset($params['debut'])) {
@@ -171,7 +174,8 @@ class Audio extends Media
 
         $sort = "id_audio";
         if (isset($params['sort'])
-          && ($params['sort'] == "date" || $params['sort'] == "random")) {
+            && ($params['sort'] == "date" || $params['sort'] == "random")
+        ) {
             $sort = $params['sort'];
         }
 
@@ -182,12 +186,24 @@ class Audio extends Media
         $tab_id        = [];
         $tab_contact   = [];
 
-        if (array_key_exists('groupe', $params))    { $tab_groupe    = explode(",", $params['groupe']); }
-        if (array_key_exists('structure', $params)) { $tab_structure = explode(",", $params['structure']); }
-        if (array_key_exists('lieu', $params))      { $tab_lieu      = explode(",", $params['lieu']); }
-        if (array_key_exists('event', $params))     { $tab_event     = explode(",", $params['event']); }
-        if (array_key_exists('id', $params))        { $tab_id        = explode(",", $params['id']); }
-        if (array_key_exists('contact', $params))   { $tab_contact   = explode(",", $params['contact']); }
+        if (array_key_exists('groupe', $params)) {
+            $tab_groupe = explode(",", $params['groupe']);
+        }
+        if (array_key_exists('structure', $params)) {
+            $tab_structure = explode(",", $params['structure']);
+        }
+        if (array_key_exists('lieu', $params)) {
+            $tab_lieu = explode(",", $params['lieu']);
+        }
+        if (array_key_exists('event', $params)) {
+            $tab_event = explode(",", $params['event']);
+        }
+        if (array_key_exists('id', $params)) {
+            $tab_id = explode(",", $params['id']);
+        }
+        if (array_key_exists('contact', $params)) {
+            $tab_contact = explode(",", $params['contact']);
+        }
 
         $db = DataBase::getInstance();
 
@@ -262,15 +278,14 @@ class Audio extends Media
     }
 
     /**
-     * efface un enregistrement de la table audio
+     * Efface un enregistrement de la table audio
      * + gestion de l'effacement du fichier
      *
      * @return bool
      */
     function delete()
     {
-        if (parent::delete())
-        {
+        if (parent::delete()) {
             $file = self::getBasePath() . '/' . $this->getId() . '.mp3';
             if (file_exists($file)) {
                 unlink($file);
@@ -305,22 +320,26 @@ class Audio extends Media
     }
 
     /**
-     * retourne les derniers audios postés
+     * Retourne les derniers audios postés
      *
      * @param int $limit
+     *
      * @return array
      */
-    static function getLastAudios($limit = 5)
+    static function getLastAudios(int $limit = 5)
     {
-        return self::getAudios([
-            'limit' => $limit,
-            'sort'  => 'date',
-            'sens'  => 'DESC',
-        ]);
+        return self::getAudios(
+            [
+                'limit' => $limit,
+                'sort'  => 'date',
+                'sens'  => 'DESC',
+            ]
+        );
     }
 
     /**
-     * retourne le player audio
+     * Retourne le player audio
+     *
      * @param int $id_audio ou array de int $id_audio
      * @param string $type
      * @return string

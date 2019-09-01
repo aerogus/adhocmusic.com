@@ -79,7 +79,7 @@ define('MEDIA_ADHOCTUBE_URL_PATTERN', '~^https://' . MEDIA_ADHOCTUBE_HOST . '/vi
  * Appel conversion, upload etc ...
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Video extends Media
 {
@@ -173,6 +173,7 @@ class Video extends Media
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
      *
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
+     *
      * @var array
      */
     protected $_modified_fields = [];
@@ -204,7 +205,7 @@ class Video extends Media
     }
 
     /**
-     * retourne le libellé d'un hébergeur
+     * Retourne le libellé d'un hébergeur
      *
      * @return string
      */
@@ -252,10 +253,12 @@ class Video extends Media
     }
 
     /**
-     * @param int
+     * @param int    $id   id_video
+     * @param string $type : à quoi sert-t-il ???
+     *
      * @return string
      */
-    static function getUrlById($id, $type = null)
+    static function getUrlById(int $id, string $type = null)
     {
         return HOME_URL . '/videos/' . $id;
     }
@@ -288,7 +291,7 @@ class Video extends Media
     }
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setReference(string $val)
     {
@@ -299,7 +302,7 @@ class Video extends Media
     }
 
     /**
-     * @param int
+     * @param int $val val
      */
     function setWidth(int $val)
     {
@@ -310,7 +313,7 @@ class Video extends Media
     }
 
     /**
-     * @param bool
+     * @param int $val val
      */
     function setHeight(int $val)
     {
@@ -350,29 +353,31 @@ class Video extends Media
     }
 
     /**
-     * @param int $host_id
+     * @param int $host_id identifiant hébergeur
+     *
      * @return string
      */
-    static function getHostNameByHostId($host_id)
+    static function getHostNameByHostId(int $host_id)
     {
         return self::$_tab_hosts[$host_id];
     }
 
     /**
-     * recherche des vidéos en fonction de critères donnés
+     * Recherche des vidéos en fonction de critères donnés
      *
-     * @param array ['groupe']    => "5"
-     *              ['structure'] => "1,3"
-     *              ['lieu']      => "1"
-     *              ['event']     => "1"
-     *              ['id']        => "3"
-     *              ['sort']      => "id_video|date|random"
-     *              ['sens']      => "ASC"
-     *              ['debut']     => 0
-     *              ['limit']     => 10
+     * @param array $params ['groupe']    => "5"
+     *                      ['structure'] => "1,3"
+     *                      ['lieu']      => "1"
+     *                      ['event']     => "1"
+     *                      ['id']        => "3"
+     *                      ['sort']      => "id_video|date|random"
+     *                      ['sens']      => "ASC"
+     *                      ['debut']     => 0
+     *                      ['limit']     => 10
+     *
      * @return array
      */
-    static function getVideos($params = [])
+    static function getVideos(array $params = [])
     {
         $debut = 0;
         if (isset($params['debut'])) {
@@ -512,12 +517,15 @@ class Video extends Media
     /**
      * Retourne le code du player vidéo embarqué
      *
+     * @param bool $autoplay autoplay
+     * @param bool $iframe   iframe
+     *
+     * @return string
+     *
      * @see http://www.alsacreations.fr/dewtube
      * @see http://www.clubic.com/telecharger-fiche21739-riva-flv-encoder.html
-     * @param bool $autoplay
-     * @return string
      */
-    function getPlayer($autoplay = false, $iframe = true)
+    function getPlayer(bool $autoplay = false, bool $iframe = true)
     {
         switch ($this->_id_host)
         {
@@ -552,11 +560,12 @@ class Video extends Media
     }
 
     /**
-     * @param int $id_host
-     * @param string $reference
+     * @param int    $id_host   id_host
+     * @param string $reference reference
+     *
      * @return string
      */
-    static function getFlashUrl($id_host, $reference)
+    static function getFlashUrl(int $id_host, string $reference)
     {
         switch ($id_host)
         {
@@ -578,14 +587,15 @@ class Video extends Media
     }
 
     /**
-     * cherche une url de video dans une chaine, et en ressort un tableau avec
+     * Cherche une url de video dans une chaine, et en ressort un tableau avec
      * un id pour le "fournisseur" de la video et l'id de la video chez ledit
      * fournisseur, ou bien FALSE.
      *
-     * @param string $code
+     * @param string $code code
+     *
      * @return array ou false
      */
-    static function parseStringForVideoUrl($str)
+    static function parseStringForVideoUrl(string $str)
     {
         $str = trim($str);
 
@@ -691,11 +701,12 @@ class Video extends Media
     }
 
     /**
-     * récupère l'url de la vignette de la vidéo
+     * Récupère l'url de la vignette de la vidéo
      *
-     * @param int $id_host
-     * @param string $reference
-     * @param bool $multi (retourne plusieurs vignettes si dispo)
+     * @param int    $id_host id_host
+     * @param string $reference reference
+     * @param bool   $multi (retourne plusieurs vignettes si dispo)
+     *
      * @return string ou array de string
      */
     static function getRemoteThumbnail($id_host, $reference, $multi = false)
@@ -747,6 +758,7 @@ class Video extends Media
      *
      * @param int $id_host
      * @param string $reference
+     *
      * @return string
      */
     static function getRemoteTitle($id_host, $reference)
@@ -772,9 +784,10 @@ class Video extends Media
     }
 
     /**
-     * efface une vignette locale
+     * Efface une vignette locale
      *
      * @param int $id_video
+     *
      * @return bool
      */
     function deleteThumbnail()
@@ -788,10 +801,11 @@ class Video extends Media
     }
 
     /**
-     * ecrit une vignette
+     * Écrit une vignette
      *
-     * @param int $id_video
-     * @param string $remote_url
+     * @param int    $id_video   id_video
+     * @param string $remote_url remote_url
+     *
      * @return bool
      */
     function storeThumbnail($remote_url)
@@ -829,8 +843,9 @@ class Video extends Media
     }
 
     /**
-     * retourne l'url de la vignette vidéo
+     * Retourne l'url de la vignette vidéo
      * gestion de la mise en cache
+     *
      * @return string
      */
     static function getVideoThumbUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 1)
@@ -864,7 +879,7 @@ class Video extends Media
     }
 
     /**
-     * retourne le nombre total de vidéos du visiteur loggué
+     * Retourne le nombre total de vidéos du visiteur loggué
      *
      * @return int
      */
@@ -892,7 +907,7 @@ class Video extends Media
     }
 
     /**
-     * retourne le nombre total de vidéos
+     * Retourne le nombre total de vidéos
      *
      * @return int
      */

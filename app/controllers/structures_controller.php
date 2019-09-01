@@ -66,8 +66,7 @@ final class Controller
 
         $smarty->enqueue_script('/js/structure-create.js');
 
-        if (Tools::isSubmit('form-structure-create'))
-        {
+        if (Tools::isSubmit('form-structure-create')) {
             $data = [
                 'name' => (string) Route::params('name'),
                 'id_departement' => '',

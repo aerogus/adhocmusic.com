@@ -1,7 +1,7 @@
 <?php
 
 /**
- * classe Foire aux questions
+ * Foire aux questions
  */
 class FAQ extends ObjectModel
 {

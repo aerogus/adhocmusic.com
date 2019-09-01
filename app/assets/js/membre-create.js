@@ -1,16 +1,8 @@
-/*globals jQuery, validateEmail, lieu */
+/*globals jQuery, validateEmail */
 
 jQuery(document).ready(function ($) {
 
   'use strict';
-
-  $('#email').focus(function () {
-    $('#bubble_email').fadeIn();
-  });
-
-  $('#pseudo').focus(function () {
-    $('#bubble_pseudo').fadeIn();
-  });
 
   $('#pseudo').blur(function () {
     if ($(this).val().length > 2) {
@@ -21,8 +13,7 @@ jQuery(document).ready(function ($) {
       }, function (data) {
         if (data.status === 'KO_PSEUDO_UNAVAILABLE') {
           $('#error_pseudo_unavailable').fadeIn();
-        }
-        if (data.status === 'OK') {
+        } else if (data.status === 'OK') {
           $('#error_pseudo_unavailable').fadeOut();
         }
       });
@@ -39,12 +30,10 @@ jQuery(document).ready(function ($) {
         if (data.status === 'KO_INVALID_EMAIL') {
           $('#error_invalid_email').fadeIn();
           $('#error_already_member').fadeOut();
-        }
-        if (data.status === 'KO_ALREADY_MEMBER') {
+        } else if (data.status === 'KO_ALREADY_MEMBER') {
           $('#error_invalid_email').fadeOut();
           $('#error_already_member').fadeIn();
-        }
-        if (data.status === 'OK') {
+        } else if (data.status === 'OK') {
           $('#error_invalid_email').fadeOut();
           $('#error_already_member').fadeOut();
         }
@@ -77,12 +66,6 @@ jQuery(document).ready(function ($) {
       validate = false;
     } else {
       $('#first_name').prev('.error').fadeOut();
-    }
-    if ($('#id_country').val() === null) {
-      $('#id_country').prev('.error').fadeIn();
-      validate = false;
-    } else {
-      $('#id_country').prev('.error').fadeOut();
     }
     return validate;
   });

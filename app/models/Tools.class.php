@@ -388,7 +388,7 @@ class Tools
         session_start();
 
         $_SESSION['lastaccess'] = date('Y-m-d H:i:s');
-        if (!empty($_SESSION['hits'])) {
+        if (empty($_SESSION['hits'])) {
             $_SESSION['hits'] = 0;
         }
         $_SESSION['hits']++;

@@ -91,8 +91,7 @@ final class Controller
         $id_forum  = Route::params('id_forum');
         $id_thread = (int) Route::params('id_thread');
 
-        if (Tools::isSubmit('form-forum-write'))
-        {
+        if (Tools::isSubmit('form-forum-write')) {
             // a debuger
             /*
             if (Tools::checkCSRFToken((string) Route::params('check')) === false) {
@@ -103,13 +102,15 @@ final class Controller
             $subject   = (string) Route::params('subject');
             $text      = (string) Route::params('text');
 
-            $msg = ForumPrive::addMessage([
-                'id_contact' => $_SESSION['membre']->getId(),
-                'id_forum'   => $id_forum,
-                'id_thread'  => $id_thread,
-                'subject'    => $subject,
-                'text'       => $text,
-            ]);
+            $msg = ForumPrive::addMessage(
+                [
+                    'id_contact' => $_SESSION['membre']->getId(),
+                    'id_forum'   => $id_forum,
+                    'id_thread'  => $id_thread,
+                    'subject'    => $subject,
+                    'text'       => $text,
+                ]
+            );
 
             /* début alerte mail aux abonnés */
 
@@ -120,7 +121,7 @@ final class Controller
                 $subject = $msgs['thread']['subject'];
             }
 
-            if (sizeof($subs)) {
+            if (count($subs)) {
 
                 foreach ($subs as $sub) {
 

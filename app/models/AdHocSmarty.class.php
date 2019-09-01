@@ -12,7 +12,7 @@ class AdHocSmarty extends Smarty
     protected $script_vars = [];
 
     /**
-     *
+     * Constructeur
      */
     function __construct()
     {
@@ -59,10 +59,12 @@ class AdHocSmarty extends Smarty
             if (!empty($_SESSION['membre'])) {
                 $this->assign('is_auth', true);
 
-                $this->assign('my_counters', [
-                    'nb_unread_messages' => (int) Messagerie::getMyUnreadMessagesCount(),
-                    'nb_messages'        => (int) Messagerie::getMyMessagesCount(),
-                ]);
+                $this->assign(
+                    'my_counters', [
+                        'nb_unread_messages' => (int) Messagerie::getMyUnreadMessagesCount(),
+                        'nb_messages'        => (int) Messagerie::getMyMessagesCount(),
+                    ]
+                );
 
             } else {
                 $this->assign('is_auth', false);
@@ -83,10 +85,12 @@ class AdHocSmarty extends Smarty
     /**
      * Retourne le player audio
      *
-     * @param array ['type'] ['id']
+     * @param array $params ['type'] ['id']
+     *
      * @return string
+     *
      * @todo les paramètres du dewplayer ont du changer avec la nouvelle version
-     * @see http://www.alsacreations.fr/dewplayer
+     * @see  http://www.alsacreations.fr/dewplayer
      */
     static function function_audio_player(array $params): string
     {
@@ -167,9 +171,14 @@ class AdHocSmarty extends Smarty
     /**
      * Méthode de pagination
      *
-     * @param array ['nb_items']* ['nb_items_per_page']* ['page']*
-     *              ['link_page'] ['link_base_params']
-     *              ['nb_links'] ['separator']
+     * @param array $params ['nb_items']
+     *                      ['nb_items_per_page']
+     *                      ['page']
+     *                      ['link_page']
+     *                      ['link_base_params']
+     *                      ['nb_links']
+     *                      ['separator']
+     *
      * @return string
      */
     static function function_pagination(array $params): string
@@ -217,16 +226,16 @@ class AdHocSmarty extends Smarty
         if ($p->hasPagination()) {
             $out .= '<div class="pagination">';
             if ($p->getNbPages() <= $p->getNbLinks()) {
-                 // pagination simple 1 2 3 4 5
-                 for ($i = $p->getFirstPage() ; $i <= $p->getLastPage() ; $i++) {
-                     $p->setCurrentPage($i);
-                     $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>';
-                 }
+                // pagination simple 1 2 3 4 5
+                for ($i = $p->getFirstPage(); $i <= $p->getLastPage(); $i++) {
+                    $p->setCurrentPage($i);
+                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>';
+                }
             } else {
                 // pagination étendue
                 if ($p->getSelectedPage() < ($p->getNbLinks() - 2)) {
                     // type début  : 1 2 3 4 ... 50
-                    for ($i = $p->getFirstPage() ; $i < $p->getNbLinks() - 1 ; $i++) {
+                    for ($i = $p->getFirstPage(); $i < $p->getNbLinks() - 1; $i++) {
                         $p->setCurrentPage($i);
                         $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>';
                     }
@@ -258,7 +267,9 @@ class AdHocSmarty extends Smarty
     }
 
     /**
-     * @param array ['hour'] ['minute'] ['step']
+     * @param array $params ['hour']
+     *                      ['minute']
+     *                      ['step']
      */
     static function function_html_input_date_hourminute(array $params): string
     {
@@ -295,7 +306,9 @@ class AdHocSmarty extends Smarty
     }
 
     /**
-     * @param array ['year'] ['month'] ['day']
+     * @param array $params ['year']
+     *                      ['month']
+     *                      ['day']
      */
     static function function_calendar(array $params): string
     {
@@ -402,9 +415,10 @@ class AdHocSmarty extends Smarty
     /* début modifiers */
 
     /**
-     * formatage d'un poids de fichier
+     * Formatage d'un poids de fichier
      *
-     * @param int $size
+     * @param int $size taille
+     *
      * @return string
      */
     static function modifier_format_size(int $size): string
@@ -418,8 +432,12 @@ class AdHocSmarty extends Smarty
     }
 
     /**
-     * récupère le pseudo à partir de l'id_contact et fait un cache
+     * Récupère le pseudo à partir de l'id_contact et fait un cache
      * pour l'instance
+     *
+     * @param int $id_contact id_contact
+     *
+     * @return string
      */
     static function modifier_pseudo_by_id(int $id_contact): string
     {
@@ -439,8 +457,12 @@ class AdHocSmarty extends Smarty
     }
 
     /**
-     * récupère l'avatar à partir de l'id_contact et fait un cache
+     * Récupère l'avatar à partir de l'id_contact et fait un cache
      * pour l'instance
+     *
+     * @param int $id_contact id_contact
+     *
+     * @return string
      */
     static function modifier_avatar_by_id(int $id_contact): string
     {
@@ -459,20 +481,20 @@ class AdHocSmarty extends Smarty
     }
 
     /**
-     * récupère l'url de l'icone (tick/cross) relative à une valeur booléenne
+     * Récupère l'url de l'icone (tick/cross) relative à une valeur booléenne
+     *
+     * @param bool $val val
+     *
+     * @return bool
      */
     static function modifier_display_on_off_icon(bool $val): string
     {
-        if ((bool) $val) {
-            $icon = 'enabled.png';
-        } else {
-            $icon = 'disabled.png';
-        }
+        $icon = $val ? 'enabled.png' : 'disabled.png';
         return '<img src="/img/icones/' . $icon . '" alt="">';
     }
 
     /**
-     * @param mixed $val
+     * @param mixed $val val
      */
     static function modifier_json_encode_numeric_check($val)
     {
@@ -486,7 +508,7 @@ class AdHocSmarty extends Smarty
      *
      * @param string $style_name url de la feuille de style
      */
-    function enqueue_style($style_name)
+    function enqueue_style(string $style_name)
     {
         $this->append('stylesheets', $style_name);
     }
@@ -497,7 +519,7 @@ class AdHocSmarty extends Smarty
      * @param string $script_name url du script
      * @param bool $in_footer
      */
-    function enqueue_script($script_name, $in_footer = true)
+    function enqueue_script(string $script_name, bool $in_footer = true)
     {
         if ($in_footer) {
             $this->append('footer_scripts', $script_name);
@@ -507,7 +529,7 @@ class AdHocSmarty extends Smarty
     }
 
     /**
-     * ajoute une variable js utilisable dans les scripts du footer
+     * Ajoute une variable js utilisable dans les scripts du footer
      * 
      * @param string $key
      * @param string $val
@@ -519,7 +541,7 @@ class AdHocSmarty extends Smarty
     }
 
     /**
-     * imprime un javascript en ligne dans le footer
+     * Imprime un javascript en ligne dans le footer
      *
      * @param string $script
      */
@@ -529,7 +551,7 @@ class AdHocSmarty extends Smarty
     }
 
     /**
-     * on hérite de Smarty::fetch
+     * On hérite de Smarty::fetch
      *
      * @param string $ |object $template the resource handle of the template file  or template object
      * @param mixed $cache_id cache id to be used with this template

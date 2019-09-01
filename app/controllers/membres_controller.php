@@ -1,7 +1,15 @@
 <?php
 
+/**
+ * Controlleur Membre
+ */
 final class Controller
 {
+    /**
+     * Profil d'un membre
+     *
+     * @return string
+     */
     static function show(): string
     {
         $id = (int) Route::params('id');
@@ -32,6 +40,8 @@ final class Controller
 
     /**
      * Création d'un compte membre
+     *
+     * @return string
      */
     static function create(): string
     {
@@ -41,7 +51,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/geopicker.js');
+        //$smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/membre-create.js');
 
         $smarty->assign('title', "Inscription à l'association AD'HOC");
@@ -69,8 +79,7 @@ final class Controller
             'csrf'           => '',
         ];
 
-        if (Tools::isSubmit('form-member-create'))
-        {
+        if (Tools::isSubmit('form-member-create')) {
             $cp = '';
             $city = '';
 
@@ -146,6 +155,11 @@ final class Controller
         return $smarty->fetch('membres/create.tpl');
     }
 
+    /**
+     * Édition d'un membre
+     *
+     * @return string
+     */
     static function edit(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -161,8 +175,7 @@ final class Controller
         $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/membre-edit.js');
 
-        if (Tools::isSubmit('form-member-edit'))
-        {
+        if (Tools::isSubmit('form-member-edit')) {
             $member = $_SESSION['membre'];
 
             $data = [
@@ -267,6 +280,11 @@ final class Controller
         return $smarty->fetch('membres/edit.tpl');
     }
 
+    /**
+     * Suppression d'un membre
+     *
+     * @return string
+     */
     static function delete(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -283,8 +301,7 @@ final class Controller
             return $smarty->fetch('membres/delete.tpl');
         }
 
-        if (Tools::isSubmit('form-member-delete'))
-        {
+        if (Tools::isSubmit('form-member-delete')) {
             // effacement du membre
             if ($membre->delete()) {
                 Log::action(Log::ACTION_MEMBER_DELETE, $id);
@@ -293,7 +310,8 @@ final class Controller
                 $_SESSION = [];
                 if (ini_get("session.use_cookies")) {
                     $params = session_get_cookie_params();
-                    setcookie(session_name(), '', time() - 42000,
+                    setcookie(
+                        session_name(), '', time() - 42000,
                         $params["path"], $params["domain"],
                         $params["secure"], $params["httponly"]
                     );
@@ -309,7 +327,12 @@ final class Controller
         return $smarty->fetch('membres/delete.tpl');
     }
 
-    static function autocomplete_pseudo(): array
+    /**
+     * Retourne un tableau de pseudos vérifiant un pattern
+     *
+     * @return array
+     */
+    static function autocompletePseudo(): array
     {
         $q = trim((string) Route::params('q'));
 
@@ -328,7 +351,12 @@ final class Controller
         return $db->queryWithFetch($sql);
     }
 
-    static function tableau_de_bord(): string
+    /**
+     * Tableau de bord
+     *
+     * @return string
+     */
+    static function tableauDeBord(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -339,31 +367,43 @@ final class Controller
 
         $smarty->assign('groupes', Groupe::getMyGroupes());
 
-        $smarty->assign('photos', Photo::getPhotos([
-            'contact' => $_SESSION['membre']->getId(),
-            'limit'   => 4,
-            'debut'   => 0,
-            'sort'    => 'id',
-            'sens'    => 'DESC',
-        ]));
+        $smarty->assign(
+            'photos', Photo::getPhotos(
+                [
+                    'contact' => $_SESSION['membre']->getId(),
+                    'limit'   => 4,
+                    'debut'   => 0,
+                    'sort'    => 'id',
+                    'sens'    => 'DESC',
+                ]
+            )
+        );
         $smarty->assign('nb_photos', Photo::getMyPhotosCount());
 
-        $smarty->assign('videos', Video::getVideos([
-            'contact' => $_SESSION['membre']->getId(),
-            'limit'   => 4,
-            'debut'   => 0,
-            'sort'    => 'id',
-            'sens'    => 'DESC',
-        ]));
+        $smarty->assign(
+            'videos', Video::getVideos(
+                [
+                    'contact' => $_SESSION['membre']->getId(),
+                    'limit'   => 4,
+                    'debut'   => 0,
+                    'sort'    => 'id',
+                    'sens'    => 'DESC',
+                ]
+            )
+        );
         $smarty->assign('nb_videos', Video::getMyVideosCount());
 
-        $smarty->assign('audios', Audio::getAudios([
-            'contact' => $_SESSION['membre']->getId(),
-            'debut'   => 0,
-            'limit'   => 5,
-            'sort'    => 'id',
-            'sens'    => 'DESC',
-        ]));
+        $smarty->assign(
+            'audios', Audio::getAudios(
+                [
+                    'contact' => $_SESSION['membre']->getId(),
+                    'debut'   => 0,
+                    'limit'   => 5,
+                    'sort'    => 'id',
+                    'sens'    => 'DESC',
+                ]
+            )
+        );
         $smarty->assign('nb_audios', Audio::getMyAudiosCount());
 
         $db = DataBase::getInstance();
