@@ -4,9 +4,7 @@
 
 footer
   background #292933
-  position absolute
-  width 100%
-  bottom 0
+  padding-bottom 20px
 
   @media screen and (max-width: 680px)
     &
@@ -14,15 +12,25 @@ footer
 
   &:before
     content ''
-    display: block
-    height 62px
-    background #ececec url(/img/foule.png) repeat-x
+    display block
+    height 50px
+    background #292933
+    transform skewY(-2deg)
+    top -25px
+    position relative
+    z-index -1
+
+    @media screen and (max-width: 680px)
+      &
+        height 24px
+        top -12px
 
 .footer
   max-width 680px
   margin 0 auto
 
   > li
+    margin-top -20px
     display inline-block
     padding 0 1em 1em 1em
     vertical-align top
@@ -39,12 +47,12 @@ footer
       display block
       margin .5rem 0
       color #fff
-      border-bottom 1px solid #999
+      border-bottom 1px solid #3a3a3d
 
     a
-      color #999
+      color #a7a7a7
       display block
-      padding 2px 0
+      padding 3px 0
 
   .facebook, .twitter, .instagram, .email
     background-repeat no-repeat
@@ -61,8 +69,6 @@ footer
 
   .email
     background-image inline('../assets/img/social/email.svg')
-    background-size 16px 16px
-    background-position 3px center
 
 vendorize(property, value)
   -webkit-{property} value
