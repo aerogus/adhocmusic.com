@@ -4,6 +4,7 @@
  * Fonctions et modifiers custom pour Smarty
  *
  * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class AdHocSmarty extends Smarty
 {

@@ -1,10 +1,6 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe Groupe
  *
  * @package AdHoc
@@ -13,7 +9,7 @@
 class Groupe extends ObjectModel
 {
     /**
-     * états des groupes
+     * États des groupes
      */
     const ETAT_ACTIF   = 1;
     const ETAT_NONEWS  = 2;
@@ -233,7 +229,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'alias
+     * Retourne l'alias
      *
      * @return string
      */
@@ -243,7 +239,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne le nom du groupe
+     * Retourne le nom du groupe
      *
      * @return string
      */
@@ -253,7 +249,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne le style du groupe
+     * Retourne le style du groupe
      *
      * @return string
      */
@@ -263,7 +259,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne les influences du groupe
+     * Retourne les influences du groupe
      *
      * @return string
      */
@@ -273,7 +269,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne le lineup du groupe
+     * Retourne le lineup du groupe
      *
      * @return string
      */
@@ -293,7 +289,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne le texte de présentation
+     * Retourne le texte de présentation
      *
      * @return string
      */
@@ -303,7 +299,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'identificant de la page fan Facebook
+     * Retourne l'identificant de la page fan Facebook
      *
      * @return int (64bits) => str
      */
@@ -313,7 +309,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'url de la page "fans" Facebook
+     * Retourne l'url de la page "fans" Facebook
      *
      * @return string
      */
@@ -326,7 +322,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'identifiant twitter
+     * Retourne l'identifiant twitter
      *
      * @return string
      */
@@ -336,7 +332,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'url du fil twitter
+     * Retourne l'url du fil twitter
      *
      * @return string
      */
@@ -346,9 +342,10 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'url du site officiel
+     * Retourne l'url du site officiel
      *
      * @return string
+     *
      * @todo check le http:// initial
      */
     function getSite()
@@ -357,7 +354,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne le département
+     * Retourne le département
      *
      * @return string
      */
@@ -375,7 +372,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne le nombre de visites
+     * Retourne le nombre de visites
      *
      * @return int
      */
@@ -385,7 +382,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne la date d'inscription
+     * Retourne la date d'inscription
      *
      * @return string
      */
@@ -398,7 +395,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne la date d'inscription sous forme de timestamp
+     * Retourne la date d'inscription sous forme de timestamp
      *
      * @return int
      */
@@ -411,7 +408,7 @@ class Groupe extends ObjectModel
      }
 
     /**
-     * retourne la date de modification de la fiche
+     * Retourne la date de modification de la fiche
      *
      * @return string
      */
@@ -424,7 +421,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne la date de modification de la fiche sous forme de timestamp
+     * Retourne la date de modification de la fiche sous forme de timestamp
      *
      * @return int
      */
@@ -437,7 +434,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne la date de début d'activité
+     * Retourne la date de début d'activité
      *
      * @return string
      */

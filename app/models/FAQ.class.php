@@ -2,6 +2,9 @@
 
 /**
  * Foire aux questions
+ *
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class FAQ extends ObjectModel
 {

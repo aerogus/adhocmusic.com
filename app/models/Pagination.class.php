@@ -2,6 +2,9 @@
 
 /**
  * Gestion d'une pagination
+ *
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Pagination
 {

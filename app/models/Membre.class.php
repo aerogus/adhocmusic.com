@@ -1,10 +1,6 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe Membre
  *
  * @package AdHoc
@@ -300,9 +296,10 @@ class Membre extends Contact
 
     /**
      * @param bool
+     *
      * @return array
      */
-    protected function _getAllFields($fusion = true): array
+    protected function _getAllFields(bool $fusion = true): array
     {
         if ($fusion) {
             return array_merge(
@@ -347,10 +344,11 @@ class Membre extends Contact
     /**
      * Extraction du nom
      *
-     * @param int
+     * @param int $id_contact id_contact
+     *
      * @return string
      */
-    static function getLastNameById($id_contact)
+    static function getLastNameById(int $id_contact)
     {
         $db = DataBase::getInstance();
 

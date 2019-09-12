@@ -1,9 +1,8 @@
 <?php
 
 /**
- * @package AdHoc
+ *
  */
-
 class ForumPrive extends Forum
 {
     protected static $_db_table_forum_info    = 'adhoc_forum_prive_info';

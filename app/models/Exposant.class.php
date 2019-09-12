@@ -1,14 +1,10 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Gestion des exposants
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Exposant extends ObjectModel
 {

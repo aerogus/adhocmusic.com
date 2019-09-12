@@ -1,17 +1,13 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe Audio
  *
  * Classe de gestion des audios du site
  * Appel des conversions etc ...
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Audio extends Media
 {

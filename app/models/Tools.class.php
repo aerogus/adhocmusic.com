@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Mthodes pratiques communes à tout le site AD'HOC
+ * Méthodes pratiques communes à tout le site AD'HOC
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
@@ -192,7 +192,7 @@ class Tools
     }
 
     /**
-     * retourne la révision SVN courante
+     * Retourne la révision SVN courante
      */
     static function getHeadRevision()
     {
@@ -245,7 +245,7 @@ class Tools
     }
 
     /**
-     * @param string
+     * @param string $input input
      *
      * @return string
      */
@@ -255,7 +255,7 @@ class Tools
     }
 
     /**
-     * @param string
+     * @param string $input input
      *
      * @return string
      */
@@ -267,8 +267,8 @@ class Tools
     /**
      * Redirection HTTP
      *
-     * @param string url
-     * @param bool $forceSsl
+     * @param string $url      url
+     * @param bool   $forceSsl forceSsl
      */
     static function redirect(string $url, bool $forceSsl = false)
     {

@@ -8,6 +8,12 @@ define('DEFAULT_CONTROLLERS_FORMAT', 'html');
 
 define('ROUTE_MANAGE_FILES', true);
 
+/**
+ * Gestion des routes
+ *
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
+ */
 class Route
 {
     /**
