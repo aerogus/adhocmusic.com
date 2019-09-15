@@ -1,14 +1,10 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe Contact
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Contact extends ObjectModel
 {

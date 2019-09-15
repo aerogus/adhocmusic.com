@@ -1,10 +1,6 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe City
  * (villes de France uniquement)
  * pk = code insee

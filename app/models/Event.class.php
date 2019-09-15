@@ -1,10 +1,6 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe Event
  *
  * Gestion des événements et des liaisons directes (avec groupe, structure et lieu)

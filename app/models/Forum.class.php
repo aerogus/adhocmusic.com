@@ -19,7 +19,7 @@ abstract class Forum
     protected static $path_smileys = 'https://www.adhocmusic.com/img/smileys/';
 
     /**
-     * liste des smileys a parser
+     * Liste des smileys a parser
      *
      * @var array
      */
@@ -125,7 +125,7 @@ abstract class Forum
     }
 
     /**
-     * retourne le listing des forums
+     * Retourne le listing des forums
      *
      * @return array
      */
@@ -240,12 +240,11 @@ abstract class Forum
     /**
      * Édite un message
      *
-     * @param array $params
+     * @param array $params params
      *
      * @return bool
-     *
      */
-    static function editMessage(array $params)
+    static function editMessage(array $params): bool
     {
         static::_updateMessage(
             [
@@ -277,11 +276,11 @@ abstract class Forum
     /**
      * Efface un message
      *
-     * @param array $params
+     * @param array $params params
      *
      * @return bool
      */
-    static function delMessage(array $params)
+    static function delMessage(array $params): bool
     {
         static::_deleteMessage(
             [
@@ -312,7 +311,7 @@ abstract class Forum
     /**
      * Augmente le compteur de visite d'un thread
      *
-     * @param int $id_thread
+     * @param int $id_thread id_thread
      *
      * @return bool
      */
@@ -504,7 +503,8 @@ abstract class Forum
     /**
      * Efface un thread
      *
-     * @param array
+     * @param array $params params
+     *
      * @return bool
      */
     protected static function _deleteThread($params)
@@ -527,9 +527,10 @@ abstract class Forum
      *              ['threadaction'] threadadd|threadedit|threaddel
      *              ['id_contact']
      *              ['id_forum']
+     *
      * @return bool
      */
-    protected static function _updateForum($params = [])
+    protected static function _updateForum($params = []): bool
     {
         $db = DataBase::getInstance();
 

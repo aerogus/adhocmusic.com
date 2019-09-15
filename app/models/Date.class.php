@@ -1,10 +1,6 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Différentes méthodes et données relatives aux dates
  *
  * @package AdHoc

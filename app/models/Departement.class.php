@@ -1,10 +1,6 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe Departement
  * /!\ dépend de la classe Region
  *

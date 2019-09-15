@@ -79,7 +79,7 @@ class WorldCountry extends Liste
     /**
      * @return bool
      */
-    protected function _loadFromDb()
+    protected function _loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 

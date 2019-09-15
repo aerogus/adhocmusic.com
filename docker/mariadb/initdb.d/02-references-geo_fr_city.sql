@@ -38977,18 +38977,3 @@ INSERT INTO `geo_fr_city` (`id_city`, `id_departement`, `cp`, `name`) VALUES
 (98890, '988', '98840', 'TONTOUTA'),
 (98891, '988', '98818', 'KOUAOUA'),
 (98000, '98', '98000', 'MONACO');
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `geo_fr_city`
---
-ALTER TABLE `geo_fr_city`
-  ADD PRIMARY KEY (`id_city`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

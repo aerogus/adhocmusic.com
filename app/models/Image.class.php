@@ -43,7 +43,7 @@ class Image
     protected $_color = null;           // couleur courante en Hexa
 
     /**
-     * zone de sélection (nouveau cadrage)
+     * Zone de sélection (nouveau cadrage)
      */
     protected $_x1 = 0;   // point supérieur gauche
     protected $_x2 = 0;   //

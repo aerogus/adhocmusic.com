@@ -1,10 +1,6 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe Lieu
  *
  * Gestion des Lieux de diffusions
@@ -195,7 +191,7 @@ class Lieu extends ObjectModel
     /**
      * @return string
      */
-    static function getBaseUrl()
+    static function getBaseUrl(): string
     {
         return MEDIA_URL . '/lieu';
     }
@@ -203,118 +199,118 @@ class Lieu extends ObjectModel
     /**
      * @return string
      */
-    static function getBasePath()
+    static function getBasePath(): string
     {
         return MEDIA_PATH . '/lieu';
     }
 
     /**
-     * retourne l'id type du lieu
+     * Retourne l'id type du lieu
      *
      * @return int
      */
-    function getIdType()
+    function getIdType(): int
     {
         return (int) $this->_id_type;
     }
 
     /**
-     * retourne le libellé du type de lieu
+     * Retourne le libellé du type de lieu
      *
-     * @return (string)
+     * @return string
      */
-    function getType()
+    function getType(): string
     {
         return (string) self::getTypeName($this->_id_type);
     }
 
     /**
-     * retourne le nom d'un lieu
+     * Retourne le nom d'un lieu
      *
      * @return string
      */
-    function getName()
+    function getName(): string
     {
         return (string) $this->_name;
     }
 
     /**
-     * retourne l'adresse
+     * Retourne l'adresse
      *
      * @return string
      */
-    function getAddress()
+    function getAddress(): string
     {
         return (string) $this->_address;
     }
 
     /**
-     * retourne le code postal
+     * Retourne le code postal
      *
      * @return string
      */
-    function getCp()
+    function getCp(): string
     {
         return (string) $this->_cp;
     }
 
     /**
-     * retourne le code postal à partir de l'id_city
+     * Retourne le code postal à partir de l'id_city
      *
      * @return string
      */
-    function getCpNew()
+    function getCpNew(): string
     {
         return (string) City::getCp($this->_id_city);
     }
 
     /**
-     * retourne la ville
+     * Retourne la ville
      *
      * @return string
      */
-    function getCity()
+    function getCity(): string
     {
         return (string) $this->_city;
     }
 
     /**
-     * retourne le nom de la ville à partir de l'id_city
+     * Retourne le nom de la ville à partir de l'id_city
      *
      * @return string
      */
-    function getCityNew()
+    function getCityNew(): string
     {
         return (string) City::getName($this->_id_city);
     }
 
     /**
-     * retourne le téléphone
+     * Retourne le téléphone
      *
      * @return string
      */
-    function getTel()
+    function getTel(): string
     {
         return (string) $this->_tel;
     }
 
     /**
-     * retourne le fax
+     * Retourne le fax
      *
      * @return string
      */
-    function getFax()
+    function getFax(): string
     {
         return (string) $this->_fax;
     }
 
     /**
-     * retourne l'id de la ville (country FR only)
+     * Retourne l'id de la ville (country FR only)
      * ça correspond au code insee
      *
      * @return int
      */
-    function getIdCity()
+    function getIdCity(): int
     {
         return (int) $this->_id_city;
     }
@@ -324,7 +320,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getIdDepartement()
+    function getIdDepartement(): string
     {
         return (string) $this->_id_departement;
     }
@@ -334,7 +330,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getDepartement()
+    function getDepartement(): string
     {
         return (string) Departement::getName($this->_id_departement);
     }
@@ -344,7 +340,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getIdRegion()
+    function getIdRegion(): string
     {
         return (string) $this->_id_region;
     }
@@ -354,7 +350,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getRegion()
+    function getRegion(): string
     {
         return (string) WorldRegion::getName($this->_id_country, $this->_id_region);
     }
@@ -364,7 +360,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getIdCountry()
+    function getIdCountry(): string
     {
         return (string) $this->_id_country;
     }
@@ -374,7 +370,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getCountry()
+    function getCountry(): string
     {
         return (string) WorldCountry::getName($this->_id_country);
     }
@@ -384,7 +380,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getCountryFlagUrl()
+    function getCountryFlagUrl(): string
     {
         return HOME_URL . '/img/flags/' . strtolower($this->_id_country) . '.png';
     }
@@ -394,7 +390,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getText()
+    function getText(): string
     {
         return (string) $this->_text;
     }
@@ -420,7 +416,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getEmail()
+    function getEmail(): string
     {
         return (string) $this->_email;
     }
@@ -428,40 +424,40 @@ class Lieu extends ObjectModel
     /**
      * Retourne le contact créateur
      *
-     * @return string
+     * @return int
      */
-    function getIdContact()
+    function getIdContact(): int
     {
         return (int) $this->_id_contact;
     }
 
     /**
-     * retourne la latitude
+     * Retourne la latitude
      *
      * @return float xx.xxxxxx
      */
-    function getLat()
+    function getLat(): float
     {
         return (float) $this->_lat;
     }
 
     /**
-     * retourne la longitude
+     * Retourne la longitude
      *
      * @return float xx.xxxxxx
      */
-    function getLng()
+    function getLng(): float
     {
         return (float) $this->_lng;
     }
 
     /**
-     * retourne les coordonnées utilisable
-     * par google maps
+     * Retourne les coordonnées utilisable
+     * par Google Maps. ex: X.XXXXXX,Y.YYYYYY
      *
      * @return string
      */
-    function getGeocode()
+    function getGeocode(): string
     {
         if ($this->getLat() && $this->getLng()) {
             return number_format($this->getLat(), 6, '.', '')
@@ -472,11 +468,11 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne la date de création
+     * Retourne la date de création
      *
      * @return string
      */
-    function getCreatedOn()
+    function getCreatedOn(): string
     {
         if (Date::isDateTimeOk($this->_created_on)) {
             return (string) $this->_created_on;
@@ -485,11 +481,11 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne la date de création sous forme d'un timestamp
+     * Retourne la date de création sous forme d'un timestamp
      *
      * @return int
      */
-    function getCreatedOnTs()
+    function getCreatedOnTs(): int
     {
         if (Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
@@ -498,11 +494,11 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne la date de modification
+     * Retourne la date de modification
      *
      * @return string
      */
-    function getModifiedOn()
+    function getModifiedOn(): string
     {
         if (Date::isDateTimeOk($this->_modified_on)) {
             return (string) $this->_modified_on;
@@ -511,11 +507,11 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne la date de modification sous forme d'un timestamp
+     * Retourne la date de modification sous forme d'un timestamp
      *
      * @return int
      */
-    function getModifiedOnTs()
+    function getModifiedOnTs(): int
     {
         if (Date::isDateTimeOk($this->_modified_on)) {
             return (int) strtotime($this->_modified_on);
@@ -524,11 +520,11 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne le switch affiche
+     * Retourne le switch affiche
      *
      * @return bool
      */
-    function getOnline()
+    function getOnline(): bool
     {
         return (bool) $this->_online;
     }
@@ -538,7 +534,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getUrl()
+    function getUrl(): string
     {
         return self::getUrlById($this->getId());
     }
@@ -546,33 +542,42 @@ class Lieu extends ObjectModel
     /**
      * Retourne l'url d'une fiche lieu à partir de son id
      *
-     * @param int $id
+     * @param int $id id
+     *
      * @return string
      */
-    static function getUrlById($id)
+    static function getUrlById(int $id): string
     {
         return HOME_URL . '/lieux/' . (int) $id;
     }
 
     /**
-     * retourne l'image de la carte
+     * Retourne l'image de la carte
+     *
+     * @param string $size    taille
+     * @param int    $zoom    zoom
+     * @param string $maptype type de carte
      *
      * @return string
      */
-    function getMapUrl($size = '320x320', $zoom = 15, $maptype = 'roadmap')
+    function getMapUrl(string $size = '320x320', int $zoom = 15, string $maptype = 'roadmap')
     {
-        return GoogleMaps::getStaticMap([
-            'loc'     => $this->getGeocode(),
-            'size'    => $size,
-            'zoom'    => $zoom,
-            'maptype' => $maptype,
-        ]);
+        return GoogleMaps::getStaticMap(
+            [
+                'loc'     => $this->getGeocode(),
+                'size'    => $size,
+                'zoom'    => $zoom,
+                'maptype' => $maptype,
+            ]
+        );
     }
 
     /**
+     * Retourne la distance
+     *
      * @return float
      */
-    function getDistance()
+    function getDistance(): float
     {
         return (float) $this->_distance;
     }
@@ -582,37 +587,43 @@ class Lieu extends ObjectModel
     /* début setters */
 
     /**
-     * set le type du lieu
+     * Set le type du lieu
      *
-     * @param int $id_type
+     * @param int $val val
+     *
+     * @return void
      */
-    function setIdType($val)
+    function setIdType(int $val)
     {
         if ($this->_id_type !== $val) {
-            $this->_id_type = (int) $val;
+            $this->_id_type = $val;
             $this->_modified_fields['id_type'] = true;
         }
     }
 
     /**
-     * set le nom
+     * Set le nom
      *
-     * @param string $nom
+     * @param string $val val
+     *
+     * @return void
      */
-    function setName($val)
+    function setName(string $val)
     {
         if ($this->_name !== $val) {
-            $this->_name = (string) $val;
+            $this->_name = $val;
             $this->_modified_fields['name'] = true;
         }
     }
 
     /**
-     * set l'adresse
+     * Set l'adresse
      *
-     * @param string $cp
+     * @param string $val val
+     *
+     * @return void
      */
-    function setAddress($val)
+    function setAddress(string $val)
     {
         if ($this->_address !== $val) {
             $this->_address = $val;
@@ -621,37 +632,43 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * set le code postal
+     * Set le code postal
      *
-     * @param string $cp
+     * @param string $val val
+     *
+     * @return void
      */
-    function setCp($val)
+    function setCp(string $val)
     {
         if ($this->_cp !== $val) {
-            $this->_cp = (string) $val;
+            $this->_cp = $val;
             $this->_modified_fields['cp'] = true;
         }
     }
 
     /**
-     * set la ville
+     * Set la ville
      *
-     * @param string $ville
+     * @param string $val val
+     *
+     * @return void
      */
-    function setCity($val)
+    function setCity(string $val)
     {
         if ($this->_city !== $val) {
-            $this->_city = (string) $val;
+            $this->_city = $val;
             $this->_modified_fields['city'] = true;
         }
     }
 
     /**
-     * set le téléphone
+     * Set le téléphone
      *
-     * @return string $tel
+     * @param string $val val
+     *
+     * @return void
      */
-    function setTel($val)
+    function setTel(string $val)
     {
         if ($this->_tel !== $val) {
             $this->_tel = $val;
@@ -660,35 +677,41 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * set le fax
+     * Set le fax
      *
-     * @return string $fax
+     * @param string $val val
+     *
+     * @return string
      */
-    function setFax($val)
+    function setFax(string $val)
     {
         if ($this->_fax !== $val) {
-            $this->_fax = (string) $val;
+            $this->_fax = $val;
             $this->_modified_fields['fax'] = true;
         }
     }
 
     /**
-     * set l'id de la ville
+     * Set l'id de la ville
      *
-     * @param int $id_city
+     * @param int $val val
+     *
+     * @return void
      */
-    function setIdCity($val)
+    function setIdCity(int $val)
     {
         if ($this->_id_city !== $val) {
-            $this->_id_city = (int) $val;
+            $this->_id_city = $val;
             $this->_modified_fields['id_city'] = true;
         }
     }
 
     /**
-     * set le département
+     * Set le département
      *
-     * @param string $id_departement
+     * @param string $val val
+     *
+     * @return void
      */
     function setIdDepartement($val)
     {
@@ -705,37 +728,43 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * set la région
+     * Set la région
      *
-     * @param string $id_region
+     * @param string $val val
+     *
+     * @return void
      */
-    function setIdRegion($val)
+    function setIdRegion(string $val)
     {
         if ($this->_id_region !== $val) {
-            $this->_id_region = (string) $val;
+            $this->_id_region = $val;
             $this->_modified_fields['id_region'] = true;
         }
     }
 
     /**
-     * set le code pays
+     * Set le code pays
      *
-     * @param string $pays
+     * @param string $val val
+     *
+     * @return void
      */
-    function setIdCountry($val)
+    function setIdCountry(string $val)
     {
         if ($this->_id_country !== $val) {
-            $this->_id_country = (string) $val;
+            $this->_id_country = $val;
             $this->_modified_fields['id_country'] = true;
         }
     }
 
     /**
-     * set le texte de présentation
+     * Set le texte de présentation
      *
-     * @param string $texte
+     * @param string $val val
+     *
+     * @return void
      */
-    function setText($val)
+    function setText(string $val)
     {
         if ($this->_text !== $val) {
             $this->_text = $val;
@@ -744,11 +773,13 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * set le site
+     * Set le site
      *
-     * @param string $site
+     * @param string $val val
+     *
+     * @return void
      */
-    function setSite($val)
+    function setSite(string $val)
     {
         if (strpos($val, 'http://') !== 0) {
             $val = 'http://' . $val;
@@ -760,11 +791,13 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * set l'email
+     * Set l'email
      *
-     * @param string $email
+     * @param string $val val
+     *
+     * @return void
      */
-    function setEmail($val)
+    function setEmail(string $val)
     {
         if ($this->_email !== $val) {
             $this->_email = $val;
@@ -773,11 +806,13 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * set le contact créateur
+     * Set le contact créateur
      *
-     * @param int
+     * @param int $val val
+     *
+     * @return void
      */
-    function setIdContact($val)
+    function setIdContact(int $val)
     {
         if ($this->_id_contact !== $val) {
             $this->_id_contact = $val;
@@ -786,48 +821,54 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * set la latitude
+     * Set la latitude
      *
-     * @param float $lat
+     * @param float $val val
+     * 
+     * @return void
      */
-    function setLat($val)
+    function setLat(float $val)
     {
         if ($this->_lat !== $val) {
-            $this->_lat = (float) $val;
+            $this->_lat = $val;
             $this->_modified_fields['lat'] = true;
         }
     }
 
     /**
-     * set la longitude
+     * Set la longitude
      *
-     * @param float $lng
+     * @param float $val val
+     *
+     * @return void
      */
-    function setLng($val)
+    function setLng(float $val)
     {
         if ($this->_lng !== $val) {
-            $this->_lng = (float) $val;
+            $this->_lng = $val;
             $this->_modified_fields['lng'] = true;
         }
     }
 
     /**
-     * set la date de création
+     * Set la date de création
      *
-     * @param string
+     * @param string $val val
+     *
+     * @return void
      */
-    function setCreatedOn($val)
+    function setCreatedOn(string $val)
     {
         if ($this->_created_on !== $val) {
-            $this->_created_on = (string) $val;
+            $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
     }
 
     /**
-     * set la date de création à now
+     * Set la date de création à now
      *
-     * @param string
+     * @return void
      */
     function setCreatedNow()
     {
@@ -839,22 +880,24 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * set la date de modification
+     * Set la date de modification
      *
-     * @param string
+     * @param string $val val
+     *
+     * @return void
      */
-    function setModifiedOn($val)
+    function setModifiedOn(string $val)
     {
         if ($this->_modified_on !== $val) {
-            $this->_modified_on = (string) $val;
+            $this->_modified_on = $val;
             $this->_modified_fields['modified_on'] = true;
         }
     }
 
     /**
-     * set la date de modification à now
+     * Set la date de modification à now
      *
-     * @param string
+     * @return void
      */
     function setModifiedNow()
     {
@@ -866,14 +909,16 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * set le switch affiche
+     * Set le switch affiche
      *
-     * @return bool $affiche
+     * @param bool $val val
+     *
+     * @return void
      */
-    function setOnline($val)
+    function setOnline(bool $val)
     {
         if ($this->_online !== $val) {
-            $this->_online = (bool) $val;
+            $this->_online = $val;
             $this->_modified_fields['online'] = true;
         }
     }
@@ -881,11 +926,11 @@ class Lieu extends ObjectModel
     /* fin setters */
 
     /**
-     * retourne le nombre de lieux référencés
+     * Retourne le nombre de lieux référencés
      *
      * @return int
      */
-    static function getLieuxCount()
+    static function getLieuxCount(): int
     {
         $db = DataBase::getInstance();
 
@@ -906,10 +951,10 @@ class Lieu extends ObjectModel
     /**
      * Suppression d'un lieu
      *
-     * @param int $id_lieu
      * @return bool
+     * @throws Exception
      */
-    function delete()
+    function delete(): bool
     {
         if ($this->hasEvents()) {
             throw new Exception('suppression impossible : lieu avec événements');
@@ -946,7 +991,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne le tableau de tous les lieux dans un tableau associatif
+     * Retourne le tableau de tous les lieux dans un tableau associatif
      * @todo faire comme Photos::getPhotos() <---
      * filtrage par département possible
      *
@@ -1035,7 +1080,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne les infos sur un lieu
+     * Retourne les infos sur un lieu
      *
      * @return bool
      */
@@ -1067,7 +1112,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne la photo principale du lieu
+     * Retourne la photo principale du lieu
      *
      * @return string
      */
@@ -1082,89 +1127,97 @@ class Lieu extends ObjectModel
     /**
      * @return bool
      */
-    function hasPhotos()
+    function hasPhotos(): bool
     {
         return (bool) count($this->getPhotos());
     }
 
     /**
-     * retourne les photos associées à ce lieu
+     * Retourne les photos associées à ce lieu
      *
      * @return array
      */
-    function getPhotos()
+    function getPhotos(): array
     {
-        return Photo::getPhotos([
-            'lieu' => $this->_id_lieu,
-        ]);
+        return Photo::getPhotos(
+            [
+                'lieu' => $this->_id_lieu,
+            ]
+        );
     }
 
     /**
      * @return bool
      */
-    function hasVideos()
+    function hasVideos(): bool
     {
         return (bool) count($this->getVideos());
     }
 
     /**
-     * retourne les vidéos associées à ce lieu
+     * Retourne les vidéos associées à ce lieu
      *
      * @return array
      */
     function getVideos()
     {
-        return Video::getVideos([
-            'lieu' => $this->_id_lieu,
-        ]);
+        return Video::getVideos(
+            [
+                'lieu' => $this->_id_lieu,
+            ]
+        );
     }
 
     /**
      * @return bool
      */
-    function hasAudios()
+    function hasAudios(): bool
     {
         return (bool) count($this->getAudios());
     }
 
     /**
-     * retourne les audios associés à ce lieu
+     * Retourne les audios associés à ce lieu
      *
      * @return array
      */
     function getAudios()
     {
-        return Audio::getAudios([
-            'lieu' => $this->_id_lieu,
-        ]);
+        return Audio::getAudios(
+            [
+                'lieu' => $this->_id_lieu,
+            ]
+        );
     }
 
     /**
      * @return bool
      */
-    function hasEvents()
+    function hasEvents(): bool
     {
         return (bool) count($this->getEvents());
     }
 
     /**
-     * retourne les événements rattachés au lieu
+     * Retourne les événements rattachés au lieu
      *
      * @return array
      */
     function getEvents()
     {
-        return Event::getEvents([
-            'lieu' => $this->_id_lieu,
-            'sort' => 'date',
-            'sens' => 'DESC',
-        ]);
+        return Event::getEvents(
+            [
+                'lieu' => $this->_id_lieu,
+                'sort' => 'date',
+                'sens' => 'DESC',
+            ]
+        );
     }
 
     /**
      * @return int
      */
-    static function getMyLieuxCount()
+    static function getMyLieuxCount(): int
     {
         if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');
@@ -1188,22 +1241,23 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * retourne les types de lieux
+     * Retourne les types de lieux
      *
      * @return array
      */
-    static function getTypes()
+    static function getTypes(): array
     {
         return self::$_types;
     }
 
     /**
-     * retourne le libellé d'un type de lieu
+     * Retourne le libellé d'un type de lieu
      *
-     * @param int
+     * @param int $cle cle
+     *
      * @return string
      */
-    static function getTypeName($cle)
+    static function getTypeName(int $cle)
     {
         if (array_key_exists($cle, self::$_types)) {
             return self::$_types[$cle];
@@ -1212,7 +1266,8 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * procédure stockée MySQL pour le calcul de distances
+     * Procédure stockée MySQL pour le calcul de distances
+     *
      * @todo debuguer car ca passe pas
      */
     static function mysql_init_geo()
@@ -1248,7 +1303,8 @@ EOT;
     }
 
     /**
-     * récupère les lieux autour d'un point et d'un rayon
+     * Récupère les lieux autour d'un point et d'un rayon
+     *
      * @param array float ['lat']
      *              float ['lng']
      *              int ['distance'] (en mètres)
@@ -1282,7 +1338,8 @@ EOT;
     }
 
     /**
-     * récupère les lieux dans une zone rectangulaire (point NW et point SE)
+     * Récupère les lieux dans une zone rectangulaire (point NW et point SE)
+     *
      * @param array float ['lat']
      *              float ['lng']
      *              float ['lat_min']
@@ -1326,13 +1383,15 @@ EOT;
     }
 
     /**
-     * récupère les lieux à partir de leur zone géographique administrative
+     * Récupère les lieux à partir de leur zone géographique administrative
+     *
      * @param array float ['lat']
      *              float ['lng']
      *              string ['id_country']
      *              string ['id_region']
      *              string ['id_departement']
      *              int ['limit']
+     *
      * @return array
      */
     static function fetchLieuxByAdmin($params)

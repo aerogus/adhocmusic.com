@@ -245,18 +245,3 @@ INSERT INTO `geo_world_country` (`id_country`, `name_fr`, `name_en`, `capname_fr
 ('YE', 'Yémen', 'Yemen', 'YÉMEN', 'YEMEN'),
 ('ZM', 'Zambie', 'Zambia', 'ZAMBIE', 'ZAMBIA'),
 ('ZW', 'Zimbabwe', 'Zimbabwe', 'ZIMBABWE', 'ZIMBABWE');
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `geo_world_country`
---
-ALTER TABLE `geo_world_country`
-  ADD PRIMARY KEY (`id_country`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

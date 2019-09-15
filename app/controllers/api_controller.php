@@ -8,6 +8,8 @@ final class Controller
     const VERSION = 1.0;
 
     /**
+     * Retourne une liste de vidéos
+     *
      * @return array
      */
     static function videos(): array
@@ -34,6 +36,8 @@ final class Controller
     }
 
     /**
+     * Retourne une liste d'audios
+     *
      * @return array
      */
     static function audios(): array
@@ -60,6 +64,8 @@ final class Controller
     }
 
     /**
+     * Retourne une liste de photos
+     *
      * @return array
      */
     static function photos(): array
@@ -86,6 +92,8 @@ final class Controller
     }
 
     /**
+     * Retourne une liste d'événements
+     *
      * @return array
      */
     static function events(): array

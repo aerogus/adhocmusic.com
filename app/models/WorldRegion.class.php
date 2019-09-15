@@ -1,10 +1,6 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe WorldRegion
  *
  * @package AdHoc
@@ -22,24 +18,26 @@ class WorldRegion extends Liste
     /**
      * Code pays ok ?
      *
-     * @param string $id_country
-     * @param string $id_region
+     * @param string $id_country id_country
+     * @param string $id_region  id_region
+     *
      * @return bool
      */
-    function isWorldRegionOk($id_country, $id_region)
+    function isWorldRegionOk(string $id_country, string $id_region)
     {
         $o = static::getInstance();
         return $o->_isWorldRegionOk($id_country, $id_region);
     }
 
     /**
-     * retourne le nom d'une région
+     * Retourne le nom d'une région
      *
-     * @param string $id_country
-     * @param string $id_region
+     * @param string $id_country id_country
+     * @param string $id_region  id_region
+     *
      * @return string
      */
-    static function getName($id_country, $id_region)
+    static function getName(string $id_country, string $id_region)
     {
         $o = static::getInstance();
         return $o->_getName($id_country, $id_region);
@@ -48,11 +46,12 @@ class WorldRegion extends Liste
     /**
      * Code pays ok ?
      *
-     * @param string $id_country
-     * @param string $id_region
+     * @param string $id_country id_country
+     * @param string $id_region  id_region
+     *
      * @return bool
      */
-    protected function _isWorldRegionOk($id_country, $id_region)
+    protected function _isWorldRegionOk(string $id_country, string $id_region)
     {
         if (array_key_exists($id_country, static::$_liste)) {
             if (array_key_exists($id_region, static::$_liste[$id_country])) {
@@ -70,7 +69,7 @@ class WorldRegion extends Liste
      *
      * @return string
      */
-    protected function _getName($id_country, $id_region)
+    protected function _getName(string $id_country, string $id_region)
     {
         if (array_key_exists($id_country, static::$_liste)) {
             if (array_key_exists($id_region, static::$_liste[$id_country])) {

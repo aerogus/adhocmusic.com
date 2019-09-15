@@ -1,14 +1,10 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe Content Management System
  *
  * @package AdHoc
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class CMS extends ObjectModel
 {

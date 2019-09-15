@@ -390,14 +390,6 @@ CREATE TABLE `geo_world_region` (
   `name` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `_adhoc_est_marque_sur` (
-  `id_contact` int(11) NOT NULL,
-  `id_type_media` tinyint(1) NOT NULL DEFAULT '1',
-  `id_media` int(11) NOT NULL,
-  `tagge_par` int(11) NOT NULL DEFAULT '0',
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
 ALTER TABLE `adhoc_alerting`
   ADD PRIMARY KEY (`id_alerting`);
 

@@ -1,10 +1,6 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * 1 - YouTube
  */
 define('MEDIA_YOUTUBE_URL_PATTERN',
@@ -115,7 +111,7 @@ class Video extends Media
     ];
 
     /**
-     * dimensions du player
+     * Dimensions du player
      */
     const WIDTH  = 660;
     const HEIGHT = 371;

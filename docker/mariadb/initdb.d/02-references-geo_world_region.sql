@@ -4248,18 +4248,3 @@ INSERT INTO `geo_world_region` (`id_country`, `id_region`, `name`) VALUES
 ('ZW', '08', 'Masvingo'),
 ('ZW', '09', 'Bulawayo'),
 ('ZW', '10', 'Harare');
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `geo_world_region`
---
-ALTER TABLE `geo_world_region`
-  ADD PRIMARY KEY (`id_country`,`id_region`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

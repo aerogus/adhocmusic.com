@@ -1,10 +1,6 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe Featured
  *
  * Classe de gestion du module sélection du mois

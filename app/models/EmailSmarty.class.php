@@ -5,6 +5,9 @@
  */
 class EmailSmarty extends Smarty
 {
+    /**
+     *
+     */
     function __construct()
     {
         parent::__construct();
@@ -32,7 +35,8 @@ class EmailSmarty extends Smarty
     }
 
     /**
-     * récupère l'url d'une image cachée (la cache si nécessaire)
+     * Récupère l'url d'une image cachée (la cache si nécessaire)
+     *
      * @param array ['type'] ['id'] ['width'] ['height'] ['bgcolor'] ['border'] ['zoom']
      */
     static function function_image($params)

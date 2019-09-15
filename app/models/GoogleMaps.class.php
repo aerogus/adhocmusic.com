@@ -1,10 +1,6 @@
 <?php
 
 /**
- * @package AdHoc
- */
-
-/**
  * Gestion des cartes Google
  *
  * @package AdHoc
