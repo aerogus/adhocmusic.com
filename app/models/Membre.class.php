@@ -295,7 +295,7 @@ class Membre extends Contact
     }
 
     /**
-     * @param bool
+     * @param bool $fusion fusion
      *
      * @return array
      */

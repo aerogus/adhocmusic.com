@@ -62,11 +62,11 @@ class Contact extends ObjectModel
     ];
 
     /**
-     * @param bool $fusion
+     * @param bool $fusion fusion
      *
      * @return array
      */
-    protected function _getAllFields($fusion = true): array
+    protected function _getAllFields(bool $fusion = true): array
     {
         if ($fusion) {
             return self::$_all_fields;
