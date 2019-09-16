@@ -35,6 +35,11 @@ final class Controller
         $trail->addStep("Cotisations", "/adm/subscriptions");
         $trail->addStep("Ajout");
 
+        $sub = Subscription::init();
+        $sub->setFirstName('Guillaume');
+        $sub->setLastName('Seznec');
+        $sub->save();
+
         return $smarty->fetch('adm/subscriptions/create.tpl');
     }
 

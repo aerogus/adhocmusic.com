@@ -81,6 +81,7 @@ abstract class ObjectModel
     protected static $_db_table_photo          = 'adhoc_photo';
     protected static $_db_table_statsnl        = 'adhoc_statsnl';
     protected static $_db_table_structure      = 'adhoc_structure';
+    protected static $_db_table_subscription   = 'adhoc_subscription';
     protected static $_db_table_video          = 'adhoc_video';
 
     /* db geo */
@@ -245,7 +246,7 @@ abstract class ObjectModel
 
         } else { // UPDATE
 
-            if (count($this->_modified_fields) == 0) {
+            if (count($this->_modified_fields) === 0) {
                 return true;
             }
 

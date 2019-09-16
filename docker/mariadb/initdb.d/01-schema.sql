@@ -343,6 +343,13 @@ CREATE TABLE `adhoc_structure` (
   `id_country` char(2) NOT NULL DEFAULT 'FR'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE `adhoc_subscription` (
+  `id_subscription` int(11) NOT NULL,
+  `first_name` varchar(250) NOT NULL,
+  `last_name` varchar(250) NOT NULL,
+  `cp` varchar(10) NOT NULL DEFAULT ''
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 CREATE TABLE `adhoc_video` (
   `id_video` int(11) NOT NULL,
   `id_contact` int(11) NOT NULL DEFAULT '1',
@@ -500,6 +507,9 @@ ALTER TABLE `adhoc_structure`
   ADD PRIMARY KEY (`id_structure`),
   ADD KEY `id_departement` (`id_departement`),
   ADD KEY `id_pays` (`id_country`);
+
+ALTER TABLE `adhoc_subscription`
+  ADD PRIMARY KEY (`id_subscription`);
 
 ALTER TABLE `adhoc_video`
   ADD PRIMARY KEY (`id_video`),
