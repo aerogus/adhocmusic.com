@@ -3,27 +3,18 @@
  */
 
 footer
-  background #292933
+  background #292933 url("/img/diag-white.svg") no-repeat
+  background-size 100% 4vw
+  padding-top 6vw
   padding-bottom 20px
+
 
   @media screen and (max-width: 680px)
     &
       position static
+      background-size 100% 4vw
+      padding-top 8vw
 
-  &:before
-    content ''
-    display block
-    height 50px
-    background #292933
-    transform skewY(-2deg)
-    top -25px
-    position relative
-    z-index -1
-
-    @media screen and (max-width: 680px)
-      &
-        height 24px
-        top -12px
 
 .footer
   max-width 680px
@@ -48,6 +39,10 @@ footer
       margin .5rem 0
       color #fff
       border-bottom 1px solid #3a3a3d
+
+      @media screen and (max-width: 680px)
+        &
+          margin 1rem 0
 
     a
       color #a7a7a7
