@@ -158,29 +158,29 @@ class Tools
     /**
      * Tronque une chaine et ajoute ...
      *
-     * @param string $chaine    chaîne
+     * @param string $str       chaîne
      * @param int    $maxLength longueur maxi
      *
      * @return string
      */
-    static function tronc(string $chaine, int $maxLength)
+    static function tronc(string $str, int $maxLength)
     {
-        $chaine = trim($chaine);
-        if ((mb_strlen($chaine) > $maxlength) && ($maxLength > 4)) {
-            return mb_substr($chaine, 0, $maxLength - 4, 'UTF-8')." ...";
+        $str = trim($str);
+        if ((mb_strlen($str) > $maxLength) && ($maxLength > 4)) {
+            return mb_substr($str, 0, $maxLength - 4, 'UTF-8')." ...";
         }
-        return $chaine;
+        return $str;
     }
 
     /**
      * Nettoie une chaine de caractères
      * utilisé sur les titres, texte blog, description, commentaires ...
      *
-     * @param string $texte
+     * @param string $texte texte
      *
      * @return string
      */
-    static function filtreTexte($texte)
+    static function filtreTexte(string $texte)
     {
         $texte = self::replaceWordEntities($texte);
         $texte = preg_replace('/&#\d+;/', '', html_entity_decode(strip_tags($texte, '<br>'))); // vire les tags html, sauf br
