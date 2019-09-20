@@ -204,40 +204,39 @@ class Tools
     }
 
     /**
+     * Set en session un jeton à usage unique
+     *
      * @return string
      */
-    static function getCSRFToken()
+    static function getCSRFToken(): string
     {
         $_SESSION['CSRFToken'] = substr(md5((string) time()), 0, 16);
         return $_SESSION['CSRFToken'];
     }
 
     /**
-     * @param string
+     * @param string $CSRFToken CSRFToken
      *
      * @return bool
      */
-    static function checkCSRFToken(string $CSRFToken)
+    static function checkCSRFToken(string $CSRFToken): bool
     {
-        if (isset($_SESSION['CSRFToken']) && mb_strlen($_SESSION['CSRFToken']) && $_SESSION['CSRFToken'] === $CSRFToken) {
-            return true;
-        }
-        return false;
+        return (!empty($_SESSION['CSRFToken']) && ($_SESSION['CSRFToken'] === $CSRFToken));
     }
 
     /**
      * Retourne si un formulaire a été envoyé
      *
-     * @param string $formName
-     * @param string $method
+     * @param string $formName formName
+     * @param string $method   method
      *
      * @return bool
      */
-    static function isSubmit(string $formName, string $method = 'POST')
+    static function isSubmit(string $formName, string $method = 'POST'): bool
     {
-        if ($method == 'POST') {
+        if ($method === 'POST') {
             return (bool) !empty($_POST[$formName . '-submit']);
-        } elseif ($method == 'GET') {
+        } elseif ($method === 'GET') {
             return (bool) !empty($_GET[$formName . '-submit']);
         } else {
             return (bool) Route::params($formName . '-submit');

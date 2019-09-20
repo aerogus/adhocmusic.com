@@ -4,10 +4,6 @@ jQuery(document).ready(function ($) {
 
   'use strict';
 
-  $('#text').focus(function () {
-    $('#warning').fadeIn();
-  });
-
   $('#form-contact').submit(function () {
     var valid = true;
     if ($('#name').val().length === 0) {

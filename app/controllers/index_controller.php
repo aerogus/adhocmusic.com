@@ -1,5 +1,18 @@
 <?php declare(strict_types=1);
 
+define(
+    'CONTACT_FORM_TO',
+    [
+        'guillaume@seznec.fr',
+        //'lara@etcheverry.net',
+        /*
+        'bureau@adhocmusic.com',
+        'site@adhocmusic.com',
+        'contact@adhocmusic.com',
+        */
+    ]
+);
+
 final class Controller
 {
     /**
@@ -111,36 +124,33 @@ final class Controller
 
         $smarty->assign('faq', FAQ::getFAQs());
 
-        // valeurs par défaut
-        $data = [
-            'name'    => '',
-            'email'   => '',
-            'subject' => '',
-            'text'    => '',
-            'date'    => date('Y-m-d H:i:s'),
-            'mailing' => true,
-            'check'   => Tools::getCSRFToken(),
-        ];
+        if (!Tools::isSubmit('form-contact')) {
 
-        if (!empty($_SESSION['membre'])) {
-            $data['name'] = $_SESSION['membre']->getFirstName() . " " . $_SESSION['membre']->getLastName() . " (" . $_SESSION['membre']->getPseudo() . ")";
-            $data['email'] = $_SESSION['membre']->getEmail();
-        }
+            // valeurs par défaut
+            $data = [
+                'name'    => '',
+                'email'   => '',
+                'subject' => '',
+                'text'    => '',
+                'mailing' => true,
+                'check'   => Tools::getCSRFToken(),
+            ];
 
-        if (Tools::isSubmit('form-contact')) {
-
-            if (Tools::checkCSRFToken((string) Route::params('check')) === false) {
-                //die(); // mauvais code sécurité
+            // si identifié, préremplissage de certains champs
+            if (!empty($_SESSION['membre'])) {
+                $data['name'] = $_SESSION['membre']->getFirstName() . " " . $_SESSION['membre']->getLastName() . " (" . $_SESSION['membre']->getPseudo() . ")";
+                $data['email'] = $_SESSION['membre']->getEmail();
             }
 
+        } else {
+
             $data = [
-                'name'        => trim((string) Route::params('name')),
-                'email'       => trim((string) Route::params('email')),
-                'subject'     => trim((string) Route::params('subject')),
-                'text'        => trim((string) Route::params('text')),
-                'date'        => date('Y-m-d H:i:s'),
-                'mailing'     => (bool) Route::params('mailing'),
-                'check'       => (string) Route::params('check'),
+                'name'    => trim((string) Route::params('name')),
+                'email'   => trim((string) Route::params('email')),
+                'subject' => trim((string) Route::params('subject')),
+                'text'    => trim((string) Route::params('text')),
+                'mailing' => (bool) Route::params('mailing'),
+                'check'   => (string) Route::params('check'),
             ];
             $errors = [];
 
@@ -148,25 +158,26 @@ final class Controller
 
             if (empty($errors)) {
 
-                // 1 - envoi du mail au destinataire
+                // 1. envoi du mail aux destinataires
                 $data['email_reply_to'] = $data['email'];
-                if (Email::send(['bureau@adhocmusic.com', 'site@adhocmusic.com', 'contact@adhocmusic.com'], $data['subject'], 'form-contact-to', $data)) {
+                if (Email::send(CONTACT_FORM_TO, $data['subject'], 'form-contact-to', $data)) {
                     $smarty->assign('sent_ok', true);
                 } else {
                     $smarty->assign('sent_ko', true);
                 }
 
-                // 2 - envoi de la copie à l'expéditeur
+                // 2. envoi de la copie à l'expéditeur
                 $data['email_reply_to'] = 'site@adhocmusic.com';
-                Email::send($data['email'], "[cc]" . $data['subject'], 'form-contact-cc', $data);
-
-                if ($data['mailing']) {
-                    Newsletter::addEmail($data['email']);
+                if (Email::send($data['email'], "[cc]" . $data['subject'], 'form-contact-cc', $data)) {
+                    if ($data['mailing']) {
+                        Newsletter::addEmail($data['email']);
+                    }
                 }
 
             } else {
 
                 // erreur dans le form
+                $smarty->assign('sent_ko', true);
                 $smarty->assign('show_form', true);
                 foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
@@ -232,6 +243,11 @@ final class Controller
         return $smarty->fetch('sitemap.tpl');
     }
 
+    /**
+     * Page plan du site
+     *
+     * @return string
+     */
     static function map(): string
     {
         $smarty = new AdHocSmarty();
@@ -245,6 +261,11 @@ final class Controller
         return $smarty->fetch('map.tpl');
     }
 
+    /**
+     * Page des mentions légales
+     *
+     * @return string
+     */
     static function mentions_legales(): string
     {
         $smarty = new AdHocSmarty();
@@ -255,6 +276,11 @@ final class Controller
         return $smarty->fetch('mentions-legales.tpl');
     }
 
+    /**
+     * Page dynamique issu du CMS
+     *
+     * @return string
+     */
     static function cms(): string
     {
         $id = (int) Route::params('id');
@@ -266,7 +292,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        return $smarty->fetch('common/header.tpl') . $cms->getContent() . $smarty->fetch('common/footer.tpl');
+        return
+            $smarty->fetch('common/header.tpl')
+          . $cms->getContent()
+          . $smarty->fetch('common/footer.tpl');
     }
 
     /**
@@ -289,6 +318,8 @@ final class Controller
 
     /**
      * Page guide de style
+     *
+     * @return string
      */
     static function styleguide(): string
     {
@@ -316,7 +347,7 @@ final class Controller
         if (empty($data['email'])) {
             $errors['email'] = "Vous devez préciser votre email";
         } elseif (!Email::validate($data['email'])) {
-            $errors['email'] = "Votre Email semble invalide ...";
+            $errors['email'] = "Votre email semble invalide ...";
         }
         if (empty($data['subject'])) {
             $errors['subject'] = "Vous devez saisir un sujet";
@@ -329,7 +360,10 @@ final class Controller
             || (strpos($data['text'], '[url=') !== false)
             || (strpos($data['text'], '<a href=') !== false)
         ) {
-            $errors['text'] = "Message un peu douteux Michel !";
+            $errors['text'] = "Message un peu douteux...";
+        }
+        if (!Tools::checkCSRFToken($data['check'])) {
+            $errors['check'] = "Code de vérification invalide";
         }
         return true;
     }

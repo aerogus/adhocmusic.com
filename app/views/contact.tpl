@@ -25,8 +25,6 @@
 
       <p>Merci de consulter la foire aux questions avant de nous contacter</p>
 
-      <p>Formulaire en maintenance, vous pouvez nous contacter à: contact arobase adhocmusic point com</p>
-
       <form id="form-contact" name="form-contact" method="post" action="" enctype="multipart/form-data">
         <ul>
           <li>
@@ -35,7 +33,7 @@
             <input name="name" id="name" type="text" maxlength="80" value="{$name|escape}" style="width: 360px; padding: 5px;">
           </li>
           <li>
-            <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Votre Email est incorrect</div>
+            <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Votre email semble incorrect</div>
             <label for="email">Email</label>
             <input name="email" id="email" type="email" maxlength="80" value="{$email|escape}" style="width: 360px; padding: 5px;">
           </li>
@@ -45,14 +43,6 @@
             <input name="subject" id="subject" type="text" maxlength="80" value="{$subject|escape}" style="width: 360px; padding: 5px;">
           </li>
           <li>
-            <div id="warning" class="infobulle warning" style="display: none">
-              <p><strong>Avant de nous contacter :</strong></p>
-              <ul>
-                <li>La programmation des concerts de l’association AD’HOC se fait à partir de la base de données groupes du présent site. Si vous voulez participer à un de nos événements, merci de créer votre fiche groupe avant toute chose !</li>
-                <li>Nous ne sommes pas responsables de la programmation des lieux de diffusions présents sur notre site. Merci de contacter directement les responsables du lieu !</li>
-                <li>Vous désirez nous contacter pour d’autres sujets ? Voici notre formulaire de contact:</li>
-              </ul>
-            </div>
             <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
             <label for="text">Message</label>
             <textarea name="text" id="text" rows="10" cols="80" style="width: 360px; padding: 5px;">{$text|escape}</textarea>
@@ -62,6 +52,7 @@
             <input type="checkbox" id="mailing" name="mailing" checked="{if !empty($mailing)}checked{/if}">
           </li>
           <li>
+            <div class="infobulle error" id="error_check"{if empty($error_check)} style="display: none"{/if}>Erreur à la vérification du code de sécurité</div>
             <input id="form-contact-submit" name="form-contact-submit" type="submit" value="Envoyer" class="button" style="padding: 5px 0;">
           </li>
         </ul>
@@ -91,12 +82,16 @@
         <h3>Questions fréquentes</h3>
       </header>
       <div>
-        {foreach from=$faq item=f}
-        <div class="faq">
-          <h3>{$f.question}</h3>
-          <p>{$f.answer}</p>
-        </div>
-        {/foreach}
+        {if $faq|@count > 0}
+          {foreach from=$faq item=f}
+          <div class="faq">
+            <h3>{$f.question}</h3>
+            <p>{$f.answer}</p>
+          </div>
+          {/foreach}
+        {else}
+          <p>Aucune question fréquente</p>
+        {/if}
       </div>
     </div>
 
