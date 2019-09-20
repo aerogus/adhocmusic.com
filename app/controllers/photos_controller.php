@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 define('NB_PHOTOS_PER_PAGE', 64);
 define('PHOTOS_IMPORT_DIR', ADHOC_ROOT_PATH . '/import');

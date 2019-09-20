@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * Classe Photo
@@ -298,22 +298,22 @@ class Photo extends Media
         $tab_contact   = [];
 
         if (array_key_exists('groupe', $params)) {
-            $tab_groupe    = explode(",", $params['groupe']);
+            $tab_groupe = explode(',', (string) $params['groupe']);
         }
         if (array_key_exists('structure', $params)) {
-            $tab_structure = explode(",", $params['structure']);
+            $tab_structure = explode(',', (string) $params['structure']);
         }
         if (array_key_exists('lieu', $params)) {
-            $tab_lieu = explode(",", $params['lieu']);
+            $tab_lieu = explode(',', (string) $params['lieu']);
         }
         if (array_key_exists('event', $params)) {
-            $tab_event = explode(",", $params['event']);
+            $tab_event = explode(',', (string) $params['event']);
         }
         if (array_key_exists('id', $params)) {
-            $tab_id = explode(",", $params['id']);
+            $tab_id = explode(',', (string) $params['id']);
         }
         if (array_key_exists('contact', $params)) {
-            $tab_contact = explode(",", $params['contact']);
+            $tab_contact = explode(',', (string) $params['contact']);
         }
 
         $db = DataBase::getInstance();
@@ -338,7 +338,7 @@ class Photo extends Media
             } else {
                 $online = 'FALSE';
             }
-            $sql .= "AND `p`.`online` = ".$online." ";
+            $sql .= "AND `p`.`online` = " . $online . " ";
         }
 
         if (count($tab_groupe) && $tab_groupe[0] != 0) {

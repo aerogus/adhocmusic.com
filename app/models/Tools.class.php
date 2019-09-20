@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * Méthodes pratiques communes à tout le site AD'HOC
@@ -208,7 +208,7 @@ class Tools
      */
     static function getCSRFToken()
     {
-        $_SESSION['CSRFToken'] = substr(md5(time()), 0, 16);
+        $_SESSION['CSRFToken'] = substr(md5((string) time()), 0, 16);
         return $_SESSION['CSRFToken'];
     }
 

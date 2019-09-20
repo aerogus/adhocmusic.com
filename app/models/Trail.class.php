@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * Gestion du fil d'Ariane / Trail / BreadCrumbs

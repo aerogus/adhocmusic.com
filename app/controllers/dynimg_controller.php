@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 define('DYNIMG_CACHE_PATH', ADHOC_ROOT_PATH . '/public/img/cache');
 define('DYNIMG_CACHE_ENABLED', true);

@@ -1,5 +1,5 @@
-#!/usr/bin/php
-<?php
+#!/usr/bin/env php
+<?php declare(strict_types=1);
 
 // outil cli pour afficher/cache un groupe
 // usage: ./grp.php aliasgroupe 0|1

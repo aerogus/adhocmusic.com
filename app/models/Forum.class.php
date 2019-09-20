@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 define('FORUM_NB_THREADS_PER_PAGE',  100);
 define('FORUM_NB_MESSAGES_PER_PAGE', 50);

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 define('NB_EVENTS_PER_PAGE', 100);
 
@@ -30,7 +30,7 @@ final class Controller
             $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, $month, 31, $year));
         } else {
             $datdeb = date('Y-m-d H:i:s');
-            $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, date("m") + 1, date("d"), date("Y")));
+            $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, (int) date('m') + 1, (int) date('d'), (int) date('Y')));
         }
 
         $_events = Event::getEvents(

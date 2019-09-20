@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 define('ADM_TAG_NB_TAGS_PER_PHOTO', 4);
 define('ADM_TAG_NB_PHOTOS_PER_PAGE', 180);

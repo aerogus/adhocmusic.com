@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * Configuration générale
@@ -84,8 +84,8 @@ if (ENV === 'PROD') {
         define('MEDIA_URL', 'http://static.adhocmusic.test/media');
     }
 
-    ini_set('display_startup_errors', 1);
-    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', '1');
+    ini_set('display_errors', '1');
     define('ONERROR_SHOW', true);
 
 }
@@ -122,7 +122,7 @@ define('FB_APP_PAGE_URL', 'https://www.facebook.com/adhocmusic');
 define('FB_APP_DEFAUT_AVATAR_GROUPE', HOME_URL . '/img/note_adhoc_64.png');
 
 error_reporting(-1); // taquet
-ini_set('log_errors',             1);
+ini_set('log_errors',             '1');
 ini_set('error_log',              ADHOC_LOG_PATH . '/www.adhocmusic.com.err');
 ini_set('arg_separator.output',  '&amp;');
 ini_set('session.use_trans_sid', '0');

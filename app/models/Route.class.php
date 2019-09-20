@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 if (!defined('DEFAULT_CONTROLLERS_PATH')) {
     define('DEFAULT_CONTROLLERS_PATH', __DIR__ . '/../controllers/');

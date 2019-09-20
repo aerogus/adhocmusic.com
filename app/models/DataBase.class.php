@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * Constantes utiles pour la classe DataBase
@@ -12,7 +12,7 @@ if (!defined('DB_ADHOC_DEFAULT')) {
 define('DB_MYSQL_CONNECT_RETRIES', 2);
 define('DB_DUMMY_SEPARATOR', "\O"); /* à garder entre double quotes. */
 
-ini_set('mysql.connect_timeout', 2);
+ini_set('mysql.connect_timeout', '2');
 
 /**
  * Gestion de la base MySQL

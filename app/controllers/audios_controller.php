@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 // Note : on retire liens vers events, structures et lieux du formulaire
 // pour plus de lisibilité, temporairement !

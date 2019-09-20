@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-<?php
+<?php declare(strict_types=1);
 
 /**
  * Vieux groupes n'ayant jamais mis à jour leur fiche depuis des lustres

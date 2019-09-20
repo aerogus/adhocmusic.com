@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * L'éphéméride extrait les groupes qui ont jour à Épinay durant toute

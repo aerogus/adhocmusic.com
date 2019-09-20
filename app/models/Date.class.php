@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * Différentes méthodes et données relatives aux dates
@@ -81,10 +81,10 @@ class Date
      *
      * @return bool
      */
-    static function isDateOk($date)
+    static function isDateOk(string $date)
     {
         if (preg_match(self::$regexp_date, $date, $regs)) {
-            if (checkdate($regs[2], $regs[3], $regs[1])) {
+            if (checkdate((int) $regs[2], (int) $regs[3], (int) $regs[1])) {
                 return true;
             }
         }
@@ -101,7 +101,7 @@ class Date
     static function isDateTimeOk(string $datetime)
     {
         if (preg_match(self::$regexp_datetime, $datetime, $regs)) {
-            if (checkdate($regs[2], $regs[3], $regs[1])) {
+            if (checkdate((int) $regs[2], (int) $regs[3], (int) $regs[1])) {
                 return true;
             }
         }

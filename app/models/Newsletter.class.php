@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 define('NEWSLETTER_SUB_KO_ALREADY_SUBSCRIBED_MEMBER', 0x11);
 define('NEWSLETTER_SUB_OK_RESUBSCRIBED_MEMBER', 0x12);
