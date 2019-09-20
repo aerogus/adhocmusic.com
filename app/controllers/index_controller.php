@@ -3,13 +3,9 @@
 define(
     'CONTACT_FORM_TO',
     [
-        'guillaume@seznec.fr',
-        //'lara@etcheverry.net',
-        /*
         'bureau@adhocmusic.com',
         'site@adhocmusic.com',
         'contact@adhocmusic.com',
-        */
     ]
 );
 
