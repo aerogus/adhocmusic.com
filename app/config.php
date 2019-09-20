@@ -9,7 +9,7 @@
 
 setlocale(LC_ALL, 'fr_FR.UTF8');
 ini_set('date.timezone', 'Europe/Paris');
-ini_set("default_charset", "UTF-8");
+ini_set('default_charset', 'UTF-8');
 
 define('ENV', adhoc_get_env());
 
@@ -63,8 +63,8 @@ if (ENV === 'PROD') {
         define('MEDIA_URL', 'http://static.adhocmusic.com/media');
     }
 
-    ini_set('display_startup_errors', 0);
-    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', '0');
+    ini_set('display_errors', '1');
     define('ONERROR_SHOW', true);
 
 } elseif (ENV === 'DEV') {

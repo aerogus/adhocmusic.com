@@ -362,7 +362,7 @@ class Groupe extends ObjectModel
      */
     function getOnline(): bool
     {
-        return $this->_online;
+        return (bool) $this->_online;
     }
 
     /**
@@ -385,10 +385,10 @@ class Groupe extends ObjectModel
      */
     function getCreatedOnTs(): ?string
     {
-        if (Date::isDateTimeOk($this->_created_on)) {
+        if (!is_null($this->created_on) && Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
         }
-        return false;
+        return null;
      }
 
     /**

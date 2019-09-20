@@ -38,8 +38,8 @@ class Date
      */
     static function mysql_datetime(string $datetime, string $format = "d/m/Y à H:i")
     {
-        if (preg_match(self::$regexp_datetime, $datetime, $dt) && checkdate($dt[2], $dt[3], $dt[1])) {
-            return date($format, mktime($dt[4], $dt[5], $dt[6], $dt[2], $dt[3], $dt[ 1]));
+        if (preg_match(self::$regexp_datetime, $datetime, $dt) && checkdate((int) $dt[2], (int) $dt[3], (int) $dt[1])) {
+            return date($format, mktime((int) $dt[4], (int) $dt[5], (int) $dt[6], (int) $dt[2], (int) $dt[3], (int) $dt[ 1]));
         }
         return false;
     }

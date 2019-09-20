@@ -219,9 +219,11 @@ class Video extends Media
     }
 
     /**
+     * Retourne la largeur de la vidéo
+     *
      * @return int
      */
-    function getWidth()
+    function getWidth(): int
     {
         if ($this->_width) {
             return (int) $this->_width;
@@ -230,9 +232,11 @@ class Video extends Media
     }
 
     /**
+     * Retourne la hauteur de la vidéo
+     *
      * @return int
      */
-    function getHeight()
+    function getHeight(): int
     {
         if ($this->_height) {
             return (int) $this->_height;
@@ -243,7 +247,7 @@ class Video extends Media
     /**
      * @return string
      */
-    function getUrl($type = null)
+    function getUrl($type = null): ?string
     {
         return self::getUrlById($this->getId(), $type);
     }
@@ -485,8 +489,8 @@ class Video extends Media
         $res = [];
         foreach ($res_tmp as $idx => $_res) {
             $res[$idx] = $_res;
-            $res[$idx]['url'] = self::getUrlById($_res['id']);
-            $res[$idx]['swf'] = self::getFlashUrl($_res['host_id'], $_res['reference']);
+            $res[$idx]['url'] = self::getUrlById((int) $_res['id']);
+            $res[$idx]['swf'] = self::getFlashUrl((int) $_res['host_id'], $_res['reference']);
             $res[$idx]['thumb_80_80'] = self::getVideoThumbUrl($_res['id'], 80, 80, '000000', false, true);
             $res[$idx]['thumb_100'] = self::getVideoThumbUrl($_res['id'], 100, 100, '000000', false, true);
         }

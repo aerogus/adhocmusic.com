@@ -183,22 +183,22 @@ class Audio extends Media
         $tab_contact   = [];
 
         if (array_key_exists('groupe', $params)) {
-            $tab_groupe = explode(",", $params['groupe']);
+            $tab_groupe = explode(',', (string) $params['groupe']);
         }
         if (array_key_exists('structure', $params)) {
-            $tab_structure = explode(",", $params['structure']);
+            $tab_structure = explode(',', (string) $params['structure']);
         }
         if (array_key_exists('lieu', $params)) {
-            $tab_lieu = explode(",", $params['lieu']);
+            $tab_lieu = explode(',', (string) $params['lieu']);
         }
         if (array_key_exists('event', $params)) {
-            $tab_event = explode(",", $params['event']);
+            $tab_event = explode(',', (string) $params['event']);
         }
         if (array_key_exists('id', $params)) {
-            $tab_id = explode(",", $params['id']);
+            $tab_id = explode(',', (string) $params['id']);
         }
         if (array_key_exists('contact', $params)) {
-            $tab_contact = explode(",", $params['contact']);
+            $tab_contact = explode(',', (string) $params['contact']);
         }
 
         $db = DataBase::getInstance();
@@ -263,7 +263,7 @@ class Audio extends Media
         $res = $db->queryWithFetch($sql);
 
         foreach ($res as $idx => $_res) {
-            $res[$idx]['url'] = self::getUrlById($_res['id']);
+            $res[$idx]['url'] = self::getUrlById((int) $_res['id']);
         }
 
         if ($limit == 1) {

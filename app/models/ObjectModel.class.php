@@ -328,6 +328,10 @@ abstract class ObjectModel
                 $att = '_' . $k;
                 if ($all_fields[$k] === 'phpser') {
                     $this->$att = unserialize($v);
+                } elseif ($all_fields[$k] === 'num') {
+                    $this->$att = (int) $v;
+                } elseif ($all_fields[$k] === 'bool') {
+                    $this->$att = (bool) $v;
                 } else {
                     $this->$att = $v;
                 }
