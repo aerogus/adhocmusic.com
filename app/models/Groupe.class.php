@@ -512,9 +512,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'url du logo
      *
-     * @return string
+     * @return string|null
      */
-    function getLogo(): string
+    function getLogo(): ?string
     {
         if (file_exists(self::getBasePath() . '/l' . $this->getId() . '.png')) {
             return self::getBaseUrl() . '/l' . $this->getId() . '.png?ts=' . $this->getModifiedOnTs();
