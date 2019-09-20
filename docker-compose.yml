@@ -52,6 +52,8 @@ services:
       adhoc:
         aliases:
           - mariadb.adhocmusic.test
+    ports:
+      - 3306:3306
     volumes:
       - ./docker/mariadb/initdb.d:/docker-entrypoint-initdb.d:ro
       - ./docker/mariadb/conf.d:/etc/mysql/conf.d

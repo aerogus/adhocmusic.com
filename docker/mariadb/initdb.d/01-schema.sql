@@ -36,7 +36,7 @@ CREATE TABLE `adhoc_cms` (
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_on` datetime DEFAULT NULL,
   `content` longtext NOT NULL,
-  `online` tinyint(4) NOT NULL,
+  `online` tinyint(1) NOT NULL,
   `auth` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -113,7 +113,7 @@ CREATE TABLE `adhoc_featured` (
   `datdeb` datetime NOT NULL,
   `datfin` datetime NOT NULL,
   `slot` int(11) NOT NULL,
-  `online` tinyint(4) NOT NULL
+  `online` tinyint(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `adhoc_forum_prive_info` (
@@ -152,8 +152,8 @@ CREATE TABLE `adhoc_forum_prive_thread` (
   `nb_messages` int(11) NOT NULL DEFAULT '0',
   `nb_views` int(11) NOT NULL DEFAULT '0',
   `subject` varchar(200) NOT NULL,
-  `online` tinyint(4) NOT NULL DEFAULT '1',
-  `closed` tinyint(4) NOT NULL DEFAULT '0'
+  `online` tinyint(1) NOT NULL DEFAULT NULL,
+  `closed` tinyint(1) NOT NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `adhoc_groupe` (
@@ -207,7 +207,7 @@ CREATE TABLE `adhoc_lieu` (
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
   `modified_on` datetime DEFAULT NULL,
   `id_contact` int(11) NOT NULL DEFAULT '0',
-  `online` tinyint(4) NOT NULL DEFAULT '0',
+  `online` tinyint(1) NOT NULL DEFAULT '0',
   `lat` float DEFAULT NULL,
   `lng` float DEFAULT NULL,
   `facebook_page_id` char(20) DEFAULT NULL
@@ -344,9 +344,15 @@ CREATE TABLE `adhoc_structure` (
 
 CREATE TABLE `adhoc_subscription` (
   `id_subscription` int(11) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `subscribed_at` datetime,
+  `adult` tinyint(1) NOT NULL,
+  `amount` float NOT NULL,
   `first_name` varchar(250) NOT NULL,
   `last_name` varchar(250) NOT NULL,
-  `cp` varchar(10) NOT NULL DEFAULT ''
+  `email` varchar(150) DEFAULT NULL,
+  `cp` varchar(10) NOT NULL,
+  `id_contact` int(11) NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `adhoc_video` (
@@ -530,3 +536,9 @@ ALTER TABLE `geo_world_country`
 
 ALTER TABLE `geo_world_region`
   ADD PRIMARY KEY (`id_country`,`id_region`);
+
+ALTER TABLE `adhoc_contact`
+  MODIFY `id_contact` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `adhoc_subscription`
+  MODIFY `id_subscription` int(11) NOT NULL AUTO_INCREMENT;

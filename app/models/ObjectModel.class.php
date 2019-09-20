@@ -59,6 +59,7 @@ abstract class ObjectModel
     protected $_modified_fields = [];
 
     /* db adhoc */
+    /* todo retirer tous ces trucs en dur... */
     protected static $_db_table_featured       = 'adhoc_featured';
     protected static $_db_table_appartient_a   = 'adhoc_appartient_a';
     protected static $_db_table_article        = 'adhoc_article';
@@ -199,40 +200,45 @@ abstract class ObjectModel
         if (!$this->getId()) { // INSERT
 
             $sql = "INSERT INTO `" . static::$_table . "` (";
-            foreach (static::$_all_fields as $field => $type) {
-                $sql .= "`" . $field . "`,";
+
+            foreach ($this->_modified_fields as $field => $value) {
+                if ($value === true) {
+                    $sql .= "`" . $field . "`,";
+                }
             }
             $sql = substr($sql, 0, -1);
             $sql .= ") VALUES (";
 
-            foreach (static::$_all_fields as $field => $type) {
-                $att = '_' . $field;
-                switch ($type)
-                {
-                    case 'num':
-                        $sql .= (int) $this->$att . ",";
-                        break;
-                    case 'float':
-                        $sql .= number_format((float) $this->$att, 8, ".", "") . ",";
-                        break;
-                    case 'str':
-                        $sql .= "'" . $db->escape($this->$att) . "',";
-                        break;
-                    case 'date':
-                        $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
-                        break;
-                    case 'bool':
-                        $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
-                        break;
-                    case 'pwd':
-                        $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
-                        break;
-                    case 'phpser':
-                        $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
-                        break;
-                    default:
-                        throw new Exception('invalid field type: ' . $type);
-                        break;
+            foreach ($this->_modified_fields as $field => $value) {
+                if ($value === true) {
+                    $att = '_' . $field;
+                    switch (static::$_all_fields[$field])
+                    {
+                        case 'num':
+                            $sql .= (int) $this->$att . ',';
+                            break;
+                        case 'float':
+                            $sql .= number_format((float) $this->$att, 8, '.', '') . ',';
+                            break;
+                        case 'str':
+                            $sql .= "'" . $db->escape($this->$att) . "',";
+                            break;
+                        case 'date':
+                            $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                            break;
+                        case 'bool':
+                            $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
+                            break;
+                        case 'pwd':
+                            $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
+                            break;
+                        case 'phpser':
+                            $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
+                            break;
+                        default:
+                            throw new Exception('invalid field type: ' . $type);
+                            break;
+                    }
                 }
             }
             $sql = substr($sql, 0, -1);
@@ -295,6 +301,26 @@ abstract class ObjectModel
 
             return true;
         }
+    }
+
+    /**
+     * Retourne une collection d'instances
+     *
+     * @return array
+     */
+    static function findAll(): array
+    {
+        $db = DataBase::getInstance();
+        $sql = "SELECT `" . static::$_pk . "` FROM `" . static::$_table . "`";
+        $objs = [];
+
+        if ($ids = $db->queryWithFetchFirstFields($sql)) {
+            foreach ($ids as $id) {
+                $objs[] = static::getInstance($id);
+            }
+        }
+
+        return $objs;
     }
 
     /**

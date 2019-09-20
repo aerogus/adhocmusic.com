@@ -57,9 +57,9 @@ adm_cms|delete|POST|/adm/cms/delete
 adm_subscriptions|index|GET|/adm/subscriptions
 adm_subscriptions|create|GET|/adm/subscriptions/create
 adm_subscriptions|create|POST|/adm/subscriptions/create
-adm_subscriptions|edit|GET|/adm/subscriptions/edit
+adm_subscriptions|edit|GET|/adm/subscriptions/edit:id
 adm_subscriptions|edit|POST|/adm/subscriptions/edit
-adm_subscriptions|delete|GET|/adm/subscriptions/delete
+adm_subscriptions|delete|GET|/adm/subscriptions/delete:id
 adm_subscriptions|delete|POST|/adm/subscriptions/delete
 api|lieux|GET|/api/1.0/lieux
 api|videos|GET|/api/1.0/videos

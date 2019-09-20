@@ -58,7 +58,6 @@ final class Controller
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
         Trail::getInstance()
-            ->addStep("Membres", "/membres/")
             ->addStep("Inscription");
 
         $smarty->assign('create', (bool) Route::params('create'));
@@ -69,39 +68,17 @@ final class Controller
             'email'          => '',
             'last_name'      => '',
             'first_name'     => '',
-            'city'           => '',
-            'country'        => '',
-            'id_country'     => 'FR', // France
-            'id_region'      => 'A8', // Ile-de-France
-            'id_departement' => '91', // Essonne
-            'id_city'        => '',
             'mailing'        => true,
             'csrf'           => '',
         ];
 
         if (Tools::isSubmit('form-member-create')) {
-            $cp = '';
-            $city = '';
-
-            $country = WorldCountry::getName((string) Route::params('id_country'));
-            if (((string) Route::params('id_country') === 'FR') && ((int) Route::params('id_city') > 0)) {
-                //$city = City::getInstance((int) Route::params('id_city'));
-                $cp = City::getCp((int) Route::params('id_city'));
-                $city = City::getName((int) Route::params('id_city'));
-            }
 
             $data = [
                 'pseudo'         => trim((string) Route::params('pseudo')),
                 'email'          => trim(strtolower((string) Route::params('email'))),
                 'last_name'      => trim((string) Route::params('last_name')),
                 'first_name'     => trim((string) Route::params('first_name')),
-                'cp'             => $cp,
-                'id_city'        => (int) Route::params('id_city'),
-                'city'           => $city,
-                'id_country'     => trim((string) Route::params('id_country')),
-                'country'        => $country,
-                'id_region'      => trim((string) Route::params('id_region')),
-                'id_departement' => trim((string) Route::params('id_departement')),
                 'mailing'        => (bool) Route::params('mailing'),
                 'csrf'           => '',
             ];
@@ -119,13 +96,6 @@ final class Controller
                     $membre->setPassword($data['password']);
                     $membre->setLastName($data['last_name']);
                     $membre->setFirstName($data['first_name']);
-                    $membre->setCp($data['cp']);
-                    $membre->setCity($data['city']);
-                    $membre->setCountry($data['country']);
-                    $membre->setIdCity($data['id_city']);
-                    $membre->setIdDepartement($data['id_departement']);
-                    $membre->setIdRegion($data['id_region']);
-                    $membre->setIdCountry($data['id_country']);
                     $membre->setMailing($data['mailing']);
                     $membre->setLevel(Membre::TYPE_STANDARD);
                     $membre->setCreatedNow();
@@ -435,30 +405,29 @@ final class Controller
      */
     private static function _validateMemberCreateForm(array $data, array &$errors): bool
     {
-        if (empty($data['pseudo'])) {
-            $errors['pseudo'] = true;
-        }
-        if (!Membre::isPseudoAvailable($data['pseudo'])) {
-            $errors['pseudo_unavailable'] = true;
-        }
-        if ($id_contact = Contact::getIdByEmail($data['email'])) {
-            if ($pseudo = Membre::getPseudoById($id_contact)) {
-                $errors['already_member'] = $pseudo;
-            }
-        }
         if (empty($data['email'])) {
             $errors['email'] = true;
         } elseif (!Email::validate($data['email'])) {
             $errors['email'] = true;
+        }
+
+        if (empty($data['pseudo'])) {
+            $errors['pseudo'] = true;
+        } elseif (!Membre::isPseudoAvailable($data['pseudo'])) {
+            $errors['pseudo_unavailable'] = true;
+        }
+        if ($id_contact = Contact::getIdByEmail($data['email'])) {
+            // si déjà Contact, pas un problème
+            if ($pseudo = Membre::getPseudoById($id_contact)) {
+                // si déjà Membre oui
+                $errors['already_member'] = $pseudo;
+            }
         }
         if (empty($data['last_name'])) {
             $errors['last_name'] = true;
         }
         if (empty($data['first_name'])) {
             $errors['first_name'] = true;
-        }
-        if (empty($data['id_country'])) {
-            $errors['id_country'] = true;
         }
         if (count($errors)) {
             return false;

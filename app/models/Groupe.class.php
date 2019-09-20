@@ -1211,7 +1211,7 @@ class Groupe extends ObjectModel
      *
      * @return array
      */
-    static function getMyGroupes()
+    static function getMyGroupes(): array
     {
         if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');
@@ -1242,11 +1242,11 @@ class Groupe extends ObjectModel
             }
             return $tab;
         }
-        return false;
+        return [];
     }
 
     /**
-     * Tetourne le listing de tous les groupes affichables
+     * Retourne le listing de tous les groupes affichables
      *
      * Tri par ordre alphabétique
      *

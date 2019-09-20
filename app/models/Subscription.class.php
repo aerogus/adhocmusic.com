@@ -31,12 +31,47 @@ class Subscription extends ObjectModel
     /**
      * @var string
      */
+    protected $_created_at = NULL;
+
+    /**
+     * @var string
+     */
+    protected $_subscribed_at = NULL;
+
+    /**
+     * @var bool
+     */
+    protected $_adult = NULL;
+
+    /**
+     * @var float
+     */
+    protected $_amount = 0.0;
+
+    /**
+     * @var string
+     */
     protected $_first_name = '';
 
     /**
      * @var string
      */
     protected $_last_name = '';
+
+    /**
+     * @var string
+     */
+    protected $_email = '';
+
+    /**
+     * @var string
+     */
+    protected $_cp = '';
+
+    /**
+     * @var int
+     */
+    protected $_id_contact = null;
 
     /**
      * Liste des attributs de l'objet
@@ -48,8 +83,15 @@ class Subscription extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'first_name' => 'str',
-        'last_name'  => 'str',
+        'created_at'    => 'date',
+        'subscribed_at' => 'date',
+        'amount'        => 'float',
+        'adult'         => 'bool',
+        'first_name'    => 'str',
+        'last_name'     => 'str',
+        'email'         => 'str',
+        'cp'            => 'str',
+        'id_contact'    => 'num',
     ];
 
     /**
@@ -62,6 +104,52 @@ class Subscription extends ObjectModel
     protected $_modified_fields = [];
 
     /* début getters */
+
+    /**
+     * Retourne la date de saise de la cotisation format YYYY-MM-DD HH:II:SS
+     *
+     * @return string|false
+     */
+    function getCreatedAt(): ?string
+    {
+        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
+            return $this->_created_at;
+        }
+        return null;
+    }
+
+    /**
+     * Retourne la date de la cotisation format YYYY-MM-DD HH:II:SS
+     *
+     * @return string|false
+     */
+    function getSubscribedAt(): ?string
+    {
+        if (!is_null($this->_subscribed_at) && Date::isDateTimeOk($this->_subscribed_at)) {
+            return $this->_subscribed_at;
+        }
+        return null;
+    }
+
+    /**
+     * Est-ce un adulte au moment de l'inscription
+     *
+     * @return bool
+     */
+    function getAdult(): bool
+    {
+        return $this->_adult;
+    }
+
+    /**
+     * Retourne le montant de la cotisation
+     *
+     * @return bool
+     */
+    function getAmount(): float
+    {
+        return $this->_amount;
+    }
 
     /**
      * @return string
@@ -84,11 +172,96 @@ class Subscription extends ObjectModel
     /* début setters */
 
     /**
+     * Test getter/setter
+     *
+     * @return bool|object
+     */
+    function isAdult(?bool $val)
+    {
+        if (is_null($val)) {
+            return (bool) $this->_adult;
+        } else {
+            if ($this->_adult !== $val) {
+                $this->_adult = $val;
+                $this->_modified_fields['adult'] = true;
+            }
+            return $this;
+        }
+    }
+
+    /**
+     * @param string $val val
+     */
+    function setCreatedAt(string $val)
+    {
+        if ($this->_created_at !== $val) {
+            $this->_created_at = $val;
+            $this->_modified_fields['created_at'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return object
+     */
+    function setCreatedNow(): object
+    {
+        $now = date('Y-m-d H:i:s');
+
+        if ($this->_created_at !== $now) {
+            $this->_created_at = $now;
+            $this->_modified_fields['created_at'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
      * @param string $val val
      *
-     * @return mixed
+     * @return object
      */
-    function setFirstName(string $val)
+    function setSubscribedAt(string $val): object
+    {
+        if ($this->_subscribed_at !== $val) {
+            $this->_subscribed_at = $val;
+            $this->_modified_fields['subscribed_at'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return object
+     */
+    function setAdult(bool $val): object
+    {
+        if ($this->_adult !== $val) {
+            $this->_adult = $val;
+            $this->_modified_fields['adult'] = true;
+        }
+        return $this;
+    }
+
+    /**
+     * @return object
+     */
+    function setAmount(float $val): object
+    {
+        if ($this->_amount !== $val) {
+            $this->_amount = $val;
+            $this->_modified_fields['amount'] = true;
+        }
+        return $this;
+    }
+
+    /**
+     * @param string $val val
+     *
+     * @return object
+     */
+    function setFirstName(string $val): object
     {
         if ($this->_first_name !== $val) {
             $this->_first_name = $val;
@@ -101,9 +274,9 @@ class Subscription extends ObjectModel
     /**
      * @param string $val val
      *
-     * @return mixed
+     * @return object
      */
-    function setLastName(string $val)
+    function setLastName(string $val): object
     {
         if ($this->_last_name !== $val) {
             $this->_last_name = $val;
@@ -113,10 +286,55 @@ class Subscription extends ObjectModel
         return $this;
     }
 
+    /**
+     * @param string $val val
+     *
+     * @return object
+     */
+    function setEmail(string $val): object
+    {
+        if ($this->_email !== $val) {
+            $this->_email = $val;
+            $this->_modified_fields['email'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $val val
+     *
+     * @return object
+     */
+    function setCp(string $val): object
+    {
+        if ($this->_cp !== $val) {
+            $this->_cp = $val;
+            $this->_modified_fields['cp'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param int $val val
+     *
+     * @return object
+     */
+    function setIdContact(int $val): object
+    {
+        if ($this->_id_contact !== $val) {
+            $this->_id_contact = $val;
+            $this->_modified_fields['id_contact'] = true;
+        }
+
+        return $this;
+    }
+
     /* fin setters */
 
     /**
-     * Retourne les infos sur une structure
+     * Retourne les infos sur une cotisation
      *
      * @return array
      */
@@ -124,7 +342,7 @@ class Subscription extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql  = "SELECT `first_name`, `last_name` "
+        $sql  = "SELECT `created_at`, `subscribed_at`, `amount`, `first_name`, `last_name`, `email`, `cp`, `id_contact` "
               . "FROM `" . self::$_db_table_subscription . "` "
               . "WHERE `id_subscription` = " . (int) $this->_id_subscription;
 
@@ -132,7 +350,7 @@ class Subscription extends ObjectModel
             $this->_dbToObject($res);
             return true;
         }
-        return false; // todo exception
-    }
 
+        throw new Exception('Cotisation introuvable');
+    }
 }

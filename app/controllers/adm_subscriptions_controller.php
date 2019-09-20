@@ -18,6 +18,8 @@ final class Controller
             ->addStep("Privé", "/adm/")
             ->addStep("Cotisations");
 
+        $smarty->assign('subscriptions', Subscription::findAll());
+
         return $smarty->fetch('adm/subscriptions/index.tpl');
     }
 
@@ -33,12 +35,7 @@ final class Controller
         Trail::getInstance()
             ->addStep("Privé", "/adm/")
             ->addStep("Cotisations", "/adm/subscriptions")
-            ->addStep("Ajout");
-
-        $sub = Subscription::init();
-        $sub->setFirstName('Guillaume');
-        $sub->setLastName('Seznec');
-        $sub->save();
+            ->addStep("Nouvelle cotisation");
 
         return $smarty->fetch('adm/subscriptions/create.tpl');
     }

@@ -1,20 +1,12 @@
 <div class="top-bar">
   <div class="top-bar-inner">
     <div class="top-bar-title">
-      <a href="/"><strong>AD’HOC</strong></a>
+      <a href="/" accesskey="1" title="Retour à l'accueil"><strong>AD’HOC</strong></a>
     </div>
     <div class="top-bar-right">
       <button id="btn-burger" class="top-bar-burger">≡</button>
       <nav class="top-menu">
         <ul>
-          <li>
-            <a href="/" accesskey="1" title="Retour à l'accueil">Accueil</a>
-            <ul>
-              <li><a href="/map">Plan du site</a></li>
-              <li><a href="/partners">Partenaires</a></li>
-              <li><a href="/mentions-legales">Mentions Légales</a></li>
-            </ul>
-          </li>
           <li>
             <a href="/assoce" accesskey="2" title="Présentation de l’Association AD’HOC, l’équipe, nos concerts">L’Assoce</a>
             <ul>

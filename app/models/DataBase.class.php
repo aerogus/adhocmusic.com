@@ -495,7 +495,7 @@ class DataBase
     /**
      *
      */
-    function insertId($conn_name = DB_ADHOC_DEFAULT)
+    function insertId(int $conn_name = DB_ADHOC_DEFAULT)
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
             throw new Exception('Serveur MySQL en maintenance');
@@ -511,7 +511,7 @@ class DataBase
     /**
      * Échappe proprement les chaines
      */
-    function escape($string, $conn_name = DB_ADHOC_DEFAULT)
+    function escape(string $string, int $conn_name = DB_ADHOC_DEFAULT)
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
             throw new Exception('Serveur MySQL en maintenance');
@@ -520,7 +520,7 @@ class DataBase
         $conn_key = self::generateConnectionKey($conn_name);
 
         if (isset($this->_current_conn[$conn_key])) {
-            return mysqli_real_escape_string($this->_current_conn[$conn_key], $string);
+            return mysqli_real_escape_string($this->_current_conn[$conn_key], (string) $string);
         } else {
             // throw Exception plutot
             mail(DEBUG_EMAIL, 'debug', 'NO LINK ???' . print_r($_SERVER, true));

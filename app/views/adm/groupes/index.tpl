@@ -14,8 +14,8 @@
       <th><a href="/adm/groupes/?sort=modified_on&amp;sens={$sensinv}&amp;page={$page}">Modif</a></th>
     </tr>
   </thead>
-  {foreach from=$groupes key=cpt item=groupe}
   <tbody>
+  {foreach from=$groupes key=cpt item=groupe}
     <tr class="{if $cpt is odd}odd{else}even{/if}">
       <td>{$groupe.id|escape}</td>
       <td><a href="/adm/groupes/{$groupe.id}">{$groupe.name|truncate:'30'|escape}</a></td>
@@ -23,8 +23,8 @@
       <td>{$groupe.created_on|date_format:'%d/%m/%y'}</td>
       <td>{$groupe.modified_on|date_format:'%d/%m/%y'}</td>
     </tr>
-  </tbody>
   {/foreach}
+  </tbody>
 </table>
 
 {include file="common/boxend.tpl"}

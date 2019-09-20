@@ -126,7 +126,8 @@ final class Controller
                     } else {
                         $membre->setPassword($password_new_1);
                         $membre->save();
-                        Log::action(Log::ACTION_PASSWORD_CHANGED);
+                        $smarty->assign('new_password', $password_new_1); // DEBUG ONLY
+                        Log::action(Log::ACTION_PASSWORD_CHANGED, $password_new_1);
                         Email::send($membre->getEmail(), 'Mot de passe modifié', 'password-changed', ['pseudo' => $membre->getPseudo()]);
                         $smarty->assign('change_ok', true);
                     }
@@ -149,6 +150,8 @@ final class Controller
     static function lost_password()
     {
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_script('/js/lost-password.js');
 
         Trail::getInstance()
             ->addStep("Membres", "/membres/tableau-de-bord")
@@ -174,6 +177,7 @@ final class Controller
                         $smarty->assign('sent_ok', true);
                     } else {
                         $smarty->assign('sent_ko', true);
+                        $smarty->assign('new_password', $new_password); // DEBUG ONLY
                     }
 
                 } else {
@@ -197,7 +201,10 @@ final class Controller
         return $smarty->fetch('auth/lost-password.tpl');
     }
 
-    static function check_email()
+    /**
+     * @return array
+     */
+    static function check_email(): array
     {
         $out = [];
         $email = (string) Route::params('email');
@@ -213,6 +220,9 @@ final class Controller
         return $out;
     }
 
+    /**
+     * @return array
+     */
     static function check_pseudo(): array
     {
         $out = [];

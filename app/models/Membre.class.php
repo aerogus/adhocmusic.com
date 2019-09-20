@@ -551,25 +551,25 @@ class Membre extends Contact
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getModifiedOn()
+    function getModifiedOn(): ?string
     {
-        if (Date::isDateTimeOk($this->_modified_on)) {
-            return (string) $this->_modified_on;
+        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+            return $this->_modified_on;
         }
-        return false;
+        return null;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    function getModifiedOnTs()
+    function getModifiedOnTs(): ?int
     {
-        if (Date::isDateTimeOk($this->_modified_on)) {
-             return (int) strtotime($this->_modified_on);
+        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+             return strtotime($this->_modified_on);
         }
-        return false;
+        return null;
     }
 
     /**
@@ -1596,7 +1596,7 @@ class Membre extends Contact
      */
     static function generatePassword($length = 8)
     {
-        srand((double) microtime() * date('YmdGis'));
+        srand((int) microtime());
         $lettres = 'abcdefghjkmnpqrstuvwxyz23456789';
         $str = '';
         $max = mb_strlen($lettres) - 1;

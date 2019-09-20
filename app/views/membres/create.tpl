@@ -32,9 +32,9 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
   <ul>
     <li>
       <label for="email">Email</label>
-      <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez saisir un email valide</div>
-      <div id="error_invalid_email" class="infobulle error"{if empty($error_invalid_email)} style="display: none"{/if}>Votre email est invalide</div>
-      <div id="error_already_member" class="infobulle error"{if empty($error_already_member)} style="display: none"{/if}>Inscription impossible : un compte avec cet email existe déjà. <a href="/auth/lost-password">Mot de passe oublié ?</a></div>
+      <div id="error_email"{if empty($error_email)} style="display: none"{/if} class="infobulle error">Vous devez saisir votre email</div>
+      <div id="error_invalid_email" class="infobulle error"{if empty($error_invalid_email)} style="display: none"{/if}>Cet email semble invalide</div>
+      <div id="error_already_member" class="infobulle error"{if empty($error_already_member)} style="display: none"{/if}>Inscription impossible car un compte avec cet email existe déjà. Vous avez <a href="/auth/lost-password">oublié votre mot de passe ?</a></div>
       <input id="email" name="email" type="email" size="35" value="{$data.email|escape}" placeholder="Email">
     </li>
     <li>

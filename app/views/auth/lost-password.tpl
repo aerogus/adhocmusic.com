@@ -8,6 +8,9 @@
 
 {if !empty($sent_ko)}
 <div class="infobulle error">Un nouveau mot de passe vous a été attribué mais l'envoi de l'email a échoué (c'est plutôt con !). Veuillez appeler le webmaster.</div>
+  {if !empty($new_password)}
+  <div class="infobulle success">{$new_password}</div>
+  {/if}
 {/if}
 
 {if !empty($err_email_unknown)}
@@ -17,29 +20,6 @@
 {if !empty($err_email_invalid)}
 <div class="infobulle error">Erreur Email synatiquement incorrect.</div>
 {/if}
-
-<script>
-$(function() {
-  $("#form-lost-password").submit(function() {
-    var valid = true;
-    if($("#email").val().length === 0) {
-      $("#email").prev(".error").fadeIn();
-      valid = false;
-    } else {
-      $("#email").prev(".error").fadeOut();
-    }
-    if($("#email").val().length !== 0) {
-      if(!validateEmail($("#email").val())) {
-        $("#email").prev(".error").fadeIn();
-        valid = false;
-      } else {
-        $("#email").prev(".error").fadeOut();
-      }
-    });
-    return valid;
-  });
-});
-</script>
 
 {if !empty($form)}
 <form id="form-lost-password" name="form-lost-password" method="post" action="/auth/lost-password">

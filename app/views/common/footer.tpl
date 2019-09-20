@@ -9,6 +9,7 @@
       <li><a href="/assoce">L’Association</a></li>
       <li><a href="/concerts">Nos Concerts</a></li>
       <li><a href="/equipe">L’Équipe</a></li>
+      <li><a href="/mentions-legales">Mentions légales</a></li>
     </ul>
   </li>
   <li>
@@ -23,8 +24,9 @@
   <li>
     <ul>
       <li><h4>Contact</h4></li>
-      <li><a href="/contact">Contactez nous</a></li>
+      <li><a href="/contact">Contactez-nous</a></li>
       <li><a href="/partners">Partenaires</a></li>
+      <li><a href="/map">Plan du site</a></li>
     </ul>
   </li>
 </ul>
