@@ -25,7 +25,7 @@
 
       <p>Merci de consulter la foire aux questions avant de nous contacter</p>
 
-      <form id="form-contact" name="form-contact" method="post" action="" enctype="multipart/form-data">
+      <form id="form-contact" name="form-contact" method="post" action="/contact" enctype="multipart/form-data">
         <ul>
           <li>
             <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner votre nom</div>

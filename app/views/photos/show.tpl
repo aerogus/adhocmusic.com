@@ -2,7 +2,7 @@
 
 {if !empty($unknown_photo)}
 
-<p class="infobulle error">Cette photo est introuvable !</p>
+<p class="infobulle error">Cette photo est introuvable</p>
 
 {else}
 
@@ -83,6 +83,8 @@
 {include file="comments/box.tpl" type="p" id_content=$photo->getId()}
 
 {include file="common/boxend.tpl"}
+
+</div>
 
 </div>
 
