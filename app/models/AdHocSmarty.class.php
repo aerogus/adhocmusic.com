@@ -254,7 +254,7 @@ class AdHocSmarty extends Smarty
                     // type milieu : 1 ... 24 25 26 ... 50
                     $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getFirstPage().'">'.$p->getFirstPageNum().'</a>';
                     $out .= '…';
-                    for ($i = ($p->getSelectedPage() - floor($p->getNbLinks() / 2) + 1) ; $i < ($p->getSelectedPage() + floor($p->getNbLinks() / 2)) ; $i++) {
+                    for ($i = (int) ($p->getSelectedPage() - floor($p->getNbLinks() / 2) + 1) ; $i < (int) ($p->getSelectedPage() + floor($p->getNbLinks() / 2)) ; $i++) {
                         $p->setCurrentPage($i);
                         $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>';
                     }

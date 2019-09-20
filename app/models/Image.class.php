@@ -192,18 +192,17 @@ class Image
      * 0 <= x1 < x2 < $this->_width
      * 0 <= y1 < y2 < $this->_height
      */
-    function setZone($x1, $y1, $x2, $y2)
+    function setZone(int $x1, int $y1, int $x2, int $y2)
     {
         if (($x1 >= 0) && ($x2 > $x1) && ($this->_width > $x2) &&
-            ($y1 >= 0) && ($y2 > $y1) && ($this->_height > $y2)) {
-
+            ($y1 >= 0) && ($y2 > $y1) && ($this->_height > $y2)
+        ) {
             $this->_x1   = $x1;
             $this->_y1   = $y1;
             $this->_x2   = $x2;
             $this->_y2   = $y2;
             $this->_wSel = $this->_x2 - $this->_x1 + 1;
             $this->_hSel = $this->_y2 - $this->_y1 + 1;
-
         }
     }
 
@@ -228,12 +227,12 @@ class Image
         }
 
         // arrondi
-        $x2 = floor($x2);
-        $y2 = floor($y2);
+        $x2 = intval($x2);
+        $y2 = intval($y2);
 
         // centrage de la sélection
-        $offsetx = floor(($this->_width - $x2) / 2);
-        $offsety = floor(($this->_height - $y2) / 2);
+        $offsetx = intval(($this->_width - $x2) / 2);
+        $offsety = intval(($this->_height - $y2) / 2);
 
         $x1 += $offsetx;
         $y1 += $offsety;
@@ -333,7 +332,7 @@ class Image
             $height = $this->_new_h;
         }
 
-        $this->_handle2 = imagecreatetruecolor($width, $height);
+        $this->_handle2 = imagecreatetruecolor((int) $width, (int) $height);
 
         // rempli le fond avec la couleur courante
         $bgcolor = imagecolorallocate($this->_handle2, $this->_color['r'], $this->_color['g'], $this->_color['b']);
@@ -368,7 +367,7 @@ class Image
                 if ($this->_max_width && $tmp_l) { // a debugguer
                     $this->_new_l = min($this->_max_width, $tmp_l);
                     $rh2          = $this->_new_l / ($this->_wSel * $rh1);
-                    $this->_new_h = round($this->_hSel * $rh1 * $rh2);
+                    $this->_new_h = (int) round($this->_hSel * $rh1 * $rh2);
                 } else {
                     $this->_new_l = $tmp_l;
                     $this->_new_h = $tmp_h;
@@ -377,7 +376,7 @@ class Image
                 if ($this->_max_width) {
                     $this->_new_l = min($this->_wSel, $this->_max_width);
                     $rh           = $this->_new_l / $this->_wSel;
-                    $this->_new_h = round($this->_hSel * $rh);
+                    $this->_new_h = (int) round($this->_hSel * $rh);
                 } else {
                     $this->_new_l = $this->_wSel;
                     $this->_new_h = $this->_hSel;

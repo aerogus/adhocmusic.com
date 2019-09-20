@@ -64,101 +64,101 @@ class Media extends ObjectModel
     /**
      * @return int
      */
-    function getIdContact()
+    function getIdContact(): int
     {
-        return (int) $this->_id_contact;
+        return $this->_id_contact;
     }
 
     /**
      * @return int
      */
-    function getIdGroupe()
+    function getIdGroupe(): int
     {
-        return (int) $this->_id_groupe;
+        return $this->_id_groupe;
     }
 
     /**
      * @return int
      */
-    function getIdLieu()
+    function getIdLieu(): int
     {
-        return (int) $this->_id_lieu;
+        return $this->_id_lieu;
     }
 
     /**
      * @return int
      */
-    function getIdEvent()
+    function getIdEvent(): int
     {
-        return (int) $this->_id_event;
+        return $this->_id_event;
     }
 
     /**
      * @return int
      */
-    function getIdStructure()
+    function getIdStructure(): int
     {
-        return (int) $this->_id_structure;
+        return $this->_id_structure;
     }
 
     /**
      * @return string
      */
-    function getName()
+    function getName(): string
     {
-        return (string) $this->_name;
+        return $this->_name;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     function getCreatedOn()
     {
-        if (Date::isDateTimeOk($this->_created_on)) {
-            return (string) $this->_created_on;
+        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
+            return $this->_created_on;
         }
-        return false;
+        return null;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    function getCreatedOnTs()
+    function getCreatedOnTs(): ?int
     {
-        if (Date::isDateTimeOk($this->_created_on)) {
-            return (int) strtotime($this->_created_on);
+        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
+            return strtotime($this->_created_on);
         }
-        return false;
+        return null;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getModifiedOn()
+    function getModifiedOn(): ?string
     {
-        if (Date::isDateTimeOk($this->_modified_on)) {
-            return (string) $this->_modified_on;
+        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+            return $this->_modified_on;
         }
-        return false;
+        return null;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     function getModifiedOnTs()
     {
-        if (Date::isDateTimeOk($this->_modified_on)) {
-            return (int) strtotime($this->_modified_on);
+        if (!is_null($this->modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+            return strtotime($this->_modified_on);
         }
-        return false;
+        return null;
     }
 
     /**
      * @return bool
      */
-    function getOnline()
+    function getOnline(): bool
     {
-        return (bool) $this->_online;
+        return $this->_online;
     }
 
     /* fin getters communs */
