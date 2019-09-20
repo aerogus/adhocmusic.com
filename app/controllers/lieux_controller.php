@@ -1,7 +1,13 @@
 <?php
 
+/**
+ *
+ */
 final class Controller
 {
+    /**
+     * @return string
+     */
     static function index(): string
     {
         $smarty = new AdHocSmarty();
@@ -9,8 +15,8 @@ final class Controller
         $lat = $_SESSION['lat'];
         $lng = $_SESSION['lng'];
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Lieux de diffusion", "/lieux/");
+        Trail::getInstance()
+            ->addStep("Lieux de diffusion", "/lieux/");
 
         $lieux_proches = Lieu::fetchLieuxByRadius(
             [
@@ -43,15 +49,18 @@ final class Controller
         return $smarty->fetch('lieux/index.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function my(): string
     {
         $page = (int) Route::params('page');
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Lieux de diffusion", "/lieux/");
-        $trail->addStep("Mes lieux");
+        Trail::getInstance()
+            ->addStep("Lieux de diffusion", "/lieux/")
+            ->addStep("Mes lieux");
 
         $smarty->assign('lieux', Lieu::getLieux());
 
@@ -63,6 +72,9 @@ final class Controller
 
     }
 
+    /**
+     * @return string
+     */
     static function show(): string
     {
         $id = (int) Route::params('id');
@@ -100,10 +112,10 @@ final class Controller
 
         $smarty->assign('lieu', $lieu);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Lieux de diffusion", "/lieux/");
-        $trail->addStep(WorldCountry::getName($lieu->getIdCountry()), "/lieux/?c=" . $lieu->getIdCountry());
-        $trail->addStep(WorldRegion::getName($lieu->getIdCountry(), $lieu->getIdRegion()), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion());
+        $trail = Trail::getInstance()
+            ->addStep("Lieux de diffusion", "/lieux/")
+            ->addStep(WorldCountry::getName($lieu->getIdCountry()), "/lieux/?c=" . $lieu->getIdCountry())
+            ->addStep(WorldRegion::getName($lieu->getIdCountry(), $lieu->getIdRegion()), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion());
         if ($lieu->getIdCountry() === 'FR') {
             $trail->addStep(Departement::getName($lieu->getIdDepartement()), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion() . "&d=" . $lieu->getIdDepartement());
         }
@@ -196,6 +208,9 @@ final class Controller
         return $smarty->fetch('lieux/show.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -279,24 +294,27 @@ final class Controller
             }
         }
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Lieux de diffusion", "/lieux/");
-        $trail->addStep("Ajouter");
+        Trail::getInstance()
+            ->addStep("Lieux de diffusion", "/lieux/")
+            ->addStep("Ajouter");
 
         $smarty->assign('types_lieu', Lieu::getTypes());
 
         return $smarty->fetch('lieux/create.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function edit(): string
     {
         $id = (int) Route::params('id');
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Lieux de diffusion", "/lieux/");
-        $trail->addStep("Modifier");
+        Trail::getInstance()
+            ->addStep("Lieux de diffusion", "/lieux/")
+            ->addStep("Modifier");
 
         $smarty = new AdHocSmarty();
 
@@ -391,15 +409,18 @@ final class Controller
         return $smarty->fetch('lieux/edit.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function delete(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
         $id = (int) Route::params('id');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Lieux de diffusion", "/lieux/");
-        $trail->addStep("Supprimer");
+        Trail::getInstance()
+            ->addStep("Lieux de diffusion", "/lieux/")
+            ->addStep("Supprimer");
 
         $smarty = new AdHocSmarty();
 
@@ -431,6 +452,9 @@ final class Controller
         return GoogleMaps::getGeocode($q);
     }
 
+    /**
+     * @return string
+     */
     static function fetch(): string
     {
         $mode  = (string) Route::params('mode'); // radius|boundary|admin

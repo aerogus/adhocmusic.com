@@ -1,5 +1,8 @@
 <?php
 
+/**
+ *
+ */
 final class Controller
 {
     /**
@@ -10,9 +13,9 @@ final class Controller
         Tools::auth(Membre::TYPE_INTERNE);
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Pages Statiques");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Pages Statiques");
 
         $smarty->assign('create', (bool) Route::params('create'));
         $smarty->assign('edit', (bool) Route::params('edit'));
@@ -32,10 +35,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Pages Statiques", "/adm/cms/");
-        $trail->addStep("Création");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Pages Statiques", "/adm/cms/")
+            ->addStep("Création");
 
         $smarty->assign('auth', Membre::getTypesMembre());
 
@@ -76,10 +79,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Pages Statiques", "/adm/cms/");
-        $trail->addStep("Edition");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Pages Statiques", "/adm/cms/")
+            ->addStep("Edition");
 
         $smarty->assign('auth', Membre::getTypesMembre());
 
@@ -123,10 +126,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Pages Statiques", "/adm/cms/");
-        $trail->addStep("Suppression");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Pages Statiques", "/adm/cms/")
+            ->addStep("Suppression");
 
         if (Tools::isSubmit('form-cms-delete')) {
             $cms = CMS::getInstance($id);

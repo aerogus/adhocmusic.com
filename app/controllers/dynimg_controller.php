@@ -269,9 +269,9 @@ final class Controller
     {
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Cache Image");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Cache Image");
 
         $type    = (string) Route::params('type');
         $id      = (int)    Route::params('id');

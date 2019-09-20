@@ -8,9 +8,9 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Newsletter");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Newsletter");
 
         $smarty->assign(
             'newsletters', Newsletter::getNewsletters(
@@ -50,10 +50,10 @@ final class Controller
         $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/mode/xml/xml.min.js');
         $smarty->enqueue_script('/js/adm/newsletter.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Newsletter", "/adm/newsletter/");
-        $trail->addStep("Ajout");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Newsletter", "/adm/newsletter/")
+            ->addStep("Ajout");
 
         $data = [
             'title' => '',
@@ -99,10 +99,10 @@ final class Controller
         $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/mode/xml/xml.min.js');
         $smarty->enqueue_script('/js/adm/newsletter.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Newsletter", "/adm/newsletter/");
-        $trail->addStep("Edition");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Newsletter", "/adm/newsletter/")
+            ->addStep("Edition");
 
         $smarty->assign('newsletter', Newsletter::getInstance($id));
 

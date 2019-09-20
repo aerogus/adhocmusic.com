@@ -10,8 +10,8 @@ final class Controller
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
         $smarty->enqueue_script('/js/assoce.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("L'Association");
+        Trail::getInstance()
+            ->addStep("L'Association");
 
         $smarty->assign(
             'photos', Photo::getPhotos(
@@ -46,8 +46,8 @@ final class Controller
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
         $smarty->enqueue_script('/js/assoce.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Concerts");
+        Trail::getInstance()
+            ->addStep("Concerts");
 
         $smarty->assign(
             'photos', Photo::getPhotos(
@@ -85,8 +85,8 @@ final class Controller
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
         $smarty->enqueue_script('/js/assoce.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Afterworks");
+        Trail::getInstance()
+            ->addStep("Afterworks");
 
         $smarty->assign(
             'photos', Photo::getPhotos(
@@ -122,8 +122,8 @@ final class Controller
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
         $smarty->enqueue_script('/js/assoce.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Formation");
+        Trail::getInstance()
+            ->addStep("Formation");
 
         $smarty->assign(
             'photos', Photo::getPhotos(
@@ -158,8 +158,8 @@ final class Controller
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
         $smarty->enqueue_script('/js/assoce.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Équipe");
+        Trail::getInstance()
+            ->addStep("Équipe");
 
         $smarty->assign(
             'photos', Photo::getPhotos(

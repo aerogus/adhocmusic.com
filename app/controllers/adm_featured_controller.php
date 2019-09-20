@@ -9,9 +9,9 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("A l'Affiche");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("A l'Affiche");
 
         $smarty = new AdHocSmarty();
 
@@ -28,10 +28,10 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("A l'Affiche", "/adm/featured/");
-        $trail->addStep("Ajouter");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("A l'Affiche", "/adm/featured/")
+            ->addStep("Ajouter");
 
         $smarty = new AdHocSmarty();
 
@@ -114,10 +114,10 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("A l'Affiche", "/adm/featured/");
-        $trail->addStep("Modifier");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("A l'Affiche", "/adm/featured/")
+            ->addStep("Modifier");
 
         $smarty = new AdHocSmarty();
 
@@ -193,10 +193,10 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("A l'Affiche", "/adm/featured/");
-        $trail->addStep("Supprimer");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("A l'Affiche", "/adm/featured/")
+            ->addStep("Supprimer");
 
         $smarty = new AdHocSmarty();
 

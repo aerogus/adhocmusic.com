@@ -2,6 +2,11 @@
 
 final class Controller
 {
+    /**
+     * Listing des groupes
+     *
+     * @return string
+     */
     static function index(): string
     {
         $smarty = new AdHocSmarty();
@@ -9,8 +14,8 @@ final class Controller
         $smarty->assign('title', "♫ Les groupes de la communauté musicale AD'HOC");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Groupes");
+        Trail::getInstance()
+            ->addStep("Groupes");
 
         $smarty->assign('liste_groupes', Groupe::getGroupesByName());
 
@@ -26,9 +31,9 @@ final class Controller
         $smarty->assign('title', "AD'HOC Music : Les Musiques actuelles en Essonne");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Groupes");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Groupes");
 
         $smarty->assign('delete', (bool) Route::params('delete'));
         $smarty->assign('groupes', Groupe::getMyGroupes());
@@ -36,6 +41,9 @@ final class Controller
         return $smarty->fetch('groupes/my.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function show(): string
     {
         $id = (int) Route::params('id');
@@ -58,9 +66,9 @@ final class Controller
         $smarty->assign('groupe', $groupe);
         $smarty->assign('membres', Groupe::getMembersById($groupe->getId()));
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Groupes", "/groupes/");
-        $trail->addStep($groupe->getName());
+        Trail::getInstance()
+            ->addStep("Groupes", "/groupes/")
+            ->addStep($groupe->getName());
 
         $smarty->assign('title', "♫ ".$groupe->getName()." (".$groupe->getStyle().")");
         $smarty->assign('description', Tools::tronc($groupe->getMiniText(), 175));
@@ -137,8 +145,6 @@ final class Controller
             )
         );
 
-        $groupe->addVisite();
-
         // alerting
         if (Tools::isAuth()) {
             if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'g', $groupe->getId())) {
@@ -153,6 +159,11 @@ final class Controller
         return $smarty->fetch('groupes/show.tpl');
     }
 
+    /**
+     * Formulaire de création d'un groupe
+     *
+     * @return string
+     */
     static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -161,9 +172,9 @@ final class Controller
 
         $smarty->enqueue_script('/js/groupe-create.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Groupes", "/groupes/");
-        $trail->addStep("Inscription", "/groupes/create");
+        Trail::getInstance()
+            ->addStep("Groupes", "/groupes/")
+            ->addStep("Inscription", "/groupes/create");
 
         // valeurs par défaut
         $data = [
@@ -178,8 +189,8 @@ final class Controller
             'twitter_id'       => '',
         ];
 
-        if (Tools::isSubmit('form-groupe-create'))
-        {
+        if (Tools::isSubmit('form-groupe-create')) {
+
             $data = [
                 'name'             => (string) Route::params('name'),
                 'style'            => (string) Route::params('style'),
@@ -268,6 +279,11 @@ final class Controller
         return $smarty->fetch('groupes/create.tpl');
     }
 
+    /**
+     * Formulaire d'édition d'un groupe
+     *
+     * @return string
+     */
     static function edit(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -286,10 +302,10 @@ final class Controller
             return $smarty->fetch('groupes/edit.tpl');
         }
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Groupes", "/groupes/my");
-        $trail->addStep($groupe->getName());
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Groupes", "/groupes/my")
+            ->addStep($groupe->getName());
 
         $smarty->assign('groupe', $groupe);
         if ($groupe->isMember($_SESSION['membre']->getId()) === false) {
@@ -393,6 +409,11 @@ final class Controller
         return $smarty->fetch('groupes/edit.tpl');
     }
 
+    /**
+     * Formulaire de suppression d'un groupe
+     *
+     * @return string
+     */
     static function delete(): string
     {
         $id = (int) Route::params('id');

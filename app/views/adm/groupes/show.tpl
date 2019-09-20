@@ -57,10 +57,6 @@
     <td>{$groupe->getModifiedOn()}</td>
   </tr>
   <tr>
-    <th>Template</th>
-    <td>{$groupe->getTemplate()}</td>
-  </tr>
-  <tr>
     <th>Photo</th>
     <td>{if $groupe->getPhoto()}<img src="{$groupe->getPhoto()}" alt="">{/if}</td>
   </tr>

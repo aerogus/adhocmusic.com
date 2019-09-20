@@ -7,8 +7,8 @@ final class Controller
 {
     static function index(): string
     {
-        $trail = Trail::getInstance();
-        $trail->addStep("Média");
+        Trail::getInstance()
+            ->addStep("Média");
 
         $smarty = new AdHocSmarty();
 

@@ -1,13 +1,19 @@
 <?php
 
+/**
+ *
+ */
 final class Controller
 {
+    /**
+     * @return string
+     */
     static function index(): string
     {
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Newsletters");
+        Trail::getInstance()
+            ->addStep("Newsletters");
 
         $smarty->assign(
             'newsletters', Newsletter::getNewsletters(
@@ -21,6 +27,9 @@ final class Controller
         return $smarty->fetch('newsletters/index.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function show(): string
     {
         $id = (int) Route::params('id');
@@ -38,6 +47,9 @@ final class Controller
         }
     }
 
+    /**
+     * @return string
+     */
     static function subscriptions(): string
     {
         $email = (string) Route::params('email');
@@ -45,9 +57,9 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Newsletters", "/newsletters");
-        $trail->addStep("Gestion de l'abonnement");
+        Trail::getInstance()
+            ->addStep("Newsletters", "/newsletters")
+            ->addStep("Gestion de l'abonnement");
 
         $smarty->assign('email', $email);
         $smarty->assign('action', $action);

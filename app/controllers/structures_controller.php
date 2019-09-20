@@ -10,8 +10,8 @@ final class Controller
      */
     static function index(): string
     {
-        $trail = Trail::getInstance();
-        $trail->addStep('Structures');
+        Trail::getInstance()
+            ->addStep('Structures');
 
         $smarty = new AdHocSmarty();
         $smarty->assign('structures', Structure::getStructures());
@@ -33,9 +33,9 @@ final class Controller
             return $smarty->fetch('structures/show.tpl');
         }
 
-        $trail = Trail::getInstance();
-        $trail->addStep('Structures', '/structures/');
-        $trail->addStep($structure->getName());
+        Trail::getInstance()
+            ->addStep('Structures', '/structures/')
+            ->addStep($structure->getName());
 
         $smarty = new AdHocSmarty();
 

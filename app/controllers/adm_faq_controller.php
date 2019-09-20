@@ -8,9 +8,9 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Foire aux questions");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Foire aux questions");
 
         $smarty->assign('create', (bool) Route::params('create'));
         $smarty->assign('edit', (bool) Route::params('edit'));
@@ -20,16 +20,19 @@ final class Controller
         return $smarty->fetch('adm/faq/index.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function create(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Foire aux questions", "/adm/faq/");
-        $trail->addStep("Création");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Foire aux questions", "/adm/faq/")
+            ->addStep("Création");
 
         if (Tools::isSubmit('form-faq-create')) {
             $data = [
@@ -52,6 +55,9 @@ final class Controller
         return $smarty->fetch('adm/faq/create.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function edit(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -60,10 +66,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Foire aux questions", "/adm/faq/");
-        $trail->addStep("Edition");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Foire aux questions", "/adm/faq/")
+            ->addStep("Edition");
 
         if (Tools::isSubmit('form-faq-edit')) {
             $data = [
@@ -96,10 +102,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Foire aux questions", "/adm/faq/");
-        $trail->addStep("Suppression");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Foire aux questions", "/adm/faq/")
+            ->addStep("Suppression");
 
         if (Tools::isSubmit('form-faq-delete')) {
             $faq = FAQ::getInstance($id);

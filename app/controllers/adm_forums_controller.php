@@ -8,9 +8,9 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Forums");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Forums");
 
         $smarty->assign('forums', ForumPrive::getForums());
 
@@ -28,10 +28,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Forums", "/adm/forums/");
-        $trail->addStep($forum['title']);
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Forums", "/adm/forums/")
+            ->addStep($forum['title']);
 
         $smarty->enqueue_script('/js/adm/forums.js');
 
@@ -58,11 +58,11 @@ final class Controller
         $data = ForumPrive::getMessages($id_thread, $page);
         $forum = ForumPrive::getForum($data['thread']['id_forum']);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Forums", "/adm/forums/");
-        $trail->addStep($forum['title'], "/adm/forums/forum/" . $forum['id_forum']);
-        $trail->addStep($data['thread']['subject']);
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Forums", "/adm/forums/")
+            ->addStep($forum['title'], "/adm/forums/forum/" . $forum['id_forum'])
+            ->addStep($data['thread']['subject']);
 
         $smarty->assign('id_forum', $forum['id_forum']);
         $smarty->assign('id_thread', $id_thread);
@@ -163,11 +163,11 @@ final class Controller
 
         $forum = ForumPrive::getForum($id_forum);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Forums", "/adm/forums/");
-        $trail->addStep($forum['title'], "/adm/forums/forum/" . $forum['id_forum']);
-        $trail->addStep("Ecrire un message");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Forums", "/adm/forums/")
+            ->addStep($forum['title'], "/adm/forums/forum/" . $forum['id_forum'])
+            ->addStep("Ecrire un message");
 
         // box écrire
         $smarty->assign('subject', '');

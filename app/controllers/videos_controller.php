@@ -15,9 +15,9 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Vidéos");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Vidéos");
 
         $page = (int) Route::params('page');
 
@@ -73,8 +73,6 @@ final class Controller
         $smarty->enqueue_script('/js/video-show.js');
         $smarty->enqueue_script('/js/comments-box.js');
 
-        $trail = Trail::getInstance();
-
         try {
             $video = Video::getInstance($id);
         } catch (Exception $e) {
@@ -125,20 +123,26 @@ final class Controller
 
             // menu et fil d'ariane
             if ($from === 'groupe' && $video->getIdGroupe()) {
-                $trail->addStep("Groupes", "/groupes/");
-                $trail->addStep($groupe->getName(), $groupe->getUrl());
+                Trail::getInstance()
+                    ->addStep("Groupes", "/groupes/")
+                    ->addStep($groupe->getName(), $groupe->getUrl());
             } elseif ($from === 'profil' && $video->getIdContact()) {
-                $trail->addStep("Zone Membre", "/membres/");
+                Trail::getInstance()
+                    ->addStep("Zone Membre", "/membres/");
             } elseif ($from === 'event' && $video->getIdEvent()) {
-                $trail->addStep("Agenda", "/events/");
-                $trail->addStep($event->getName(), "/events/" . $event->getId());
+                Trail::getInstance()
+                    ->addStep("Agenda", "/events/")
+                    ->addStep($event->getName(), "/events/" . $event->getId());
             } elseif ($from === 'lieu' && $video->getIdLieu()) {
-                $trail->addStep("Lieux", "/lieux/");
-                $trail->addStep($lieu->getName(), "/lieux/" . $lieu->getId());
+                Trail::getInstance()
+                    ->addStep("Lieux", "/lieux/")
+                    ->addStep($lieu->getName(), "/lieux/" . $lieu->getId());
             } else {
-                $trail->addStep("Média", "/medias/");
+                Trail::getInstance()
+                    ->addStep("Média", "/medias/");
             }
-            $trail->addStep($video->getName());
+            Trail::getInstance()
+                ->addStep($video->getName());
 
             // vidéos et photos liées à l'événement/lieu
             if ($video->getIdEvent() && $video->getIdLieu()) {
@@ -274,10 +278,10 @@ final class Controller
             }
         }
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Vidéos", "/videos/my");
-        $trail->addStep("Ajouter une vidéo");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Vidéos", "/videos/my")
+            ->addStep("Ajouter une vidéo");
 
         $hosts = Video::getVideoHosts();
         $smarty->assign('hosts', $hosts);
@@ -391,10 +395,10 @@ final class Controller
             }
         }
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Vidéos", "/videos/my");
-        $trail->addStep("Editer une vidéo");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Vidéos", "/videos/my")
+            ->addStep("Editer une vidéo");
 
         $smarty->assign('video', $video);
 
@@ -433,10 +437,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Vidéos", "/videos/my");
-        $trail->addStep("Supprimer une vidéo");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Vidéos", "/videos/my")
+            ->addStep("Supprimer une vidéo");
 
         try {
             $video = Video::getInstance($id);

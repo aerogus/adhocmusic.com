@@ -16,8 +16,8 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Membres", "/membres/");
+        $trail = Trail::getInstance()
+            ->addStep("Membres", "/membres/");
 
         try {
             $membre = Membre::getInstance($id);
@@ -57,9 +57,9 @@ final class Controller
         $smarty->assign('title', "Inscription à l'association AD'HOC");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Membres", "/membres/");
-        $trail->addStep("Inscription");
+        Trail::getInstance()
+            ->addStep("Membres", "/membres/")
+            ->addStep("Inscription");
 
         $smarty->assign('create', (bool) Route::params('create'));
 
@@ -166,9 +166,9 @@ final class Controller
 
         $id = $_SESSION['membre']->getId();
         
-        $trail = Trail::getInstance();
-        $trail->addStep('Tableau de bord', '/membres/tableau-de-bord');
-        $trail->addStep('Mes Infos Persos');
+        Trail::getInstance()
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes Infos Persos');
 
         $smarty = new AdHocSmarty();
 
@@ -360,8 +360,8 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord");
+        Trail::getInstance()
+            ->addStep("Tableau de bord");
 
         $smarty = new AdHocSmarty();
 

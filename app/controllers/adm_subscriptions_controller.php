@@ -14,9 +14,9 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Cotisations");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Cotisations");
 
         return $smarty->fetch('adm/subscriptions/index.tpl');
     }
@@ -30,10 +30,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Cotisations", "/adm/subscriptions");
-        $trail->addStep("Ajout");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Cotisations", "/adm/subscriptions")
+            ->addStep("Ajout");
 
         $sub = Subscription::init();
         $sub->setFirstName('Guillaume');
@@ -52,10 +52,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Cotisations", "/adm/subscriptions");
-        $trail->addStep("Édition");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Cotisations", "/adm/subscriptions")
+            ->addStep("Édition");
 
         return $smarty->fetch('adm/subscriptions/edit.tpl');
     }
@@ -69,10 +69,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Cotisations", "/adm/subscriptions");
-        $trail->addStep("Suppression");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Cotisations", "/adm/subscriptions")
+            ->addStep("Suppression");
 
         return $smarty->fetch('adm/subscriptions/delete.tpl');
     }

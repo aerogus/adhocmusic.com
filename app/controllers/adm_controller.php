@@ -26,8 +26,8 @@ final class Controller
         $smarty->assign('title', "AD'HOC : Administration du site");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé");
+        Trail::getInstance()
+            ->addStep("Privé");
 
         $smarty->assign('forums', ForumPrive::getForums());
 
@@ -60,9 +60,9 @@ final class Controller
 
         $page = (int) Route::params('page');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Groupes");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Groupes");
 
         $smarty = new AdHocSmarty();
 
@@ -99,10 +99,10 @@ final class Controller
 
         $groupe = Groupe::getInstance($id_groupe);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Groupes", "/adm/groupes/");
-        $trail->addStep($groupe->getName());
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Groupes", "/adm/groupes/")
+            ->addStep($groupe->getName());
 
         $smarty = new AdHocSmarty();
         $smarty->assign('groupe', $groupe);
@@ -171,9 +171,9 @@ final class Controller
             return $smarty->fetch('adm/membres/index-res.tpl');
         }
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Membres", "/adm/membres/");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Membres", "/adm/membres/");
 
         $smarty->assign('types_membre', Membre::getTypesMembre());
         $smarty->assign('types_musicien', Membre::getTypesMusicien());
@@ -209,10 +209,10 @@ final class Controller
 
         $membre = Membre::getInstance($id);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Membres", "/adm/membres/");
-        $trail->addStep($membre->getPseudo());
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Membres", "/adm/membres/")
+            ->addStep($membre->getPseudo());
 
         $smarty = new AdHocSmarty();
         $smarty->assign('membre', $membre);
@@ -227,10 +227,10 @@ final class Controller
 
         $membre = Membre::getInstance($id);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Membres", "/adm/membres/");
-        $trail->addStep("Suppresion de " . $membre->getPseudo());
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Membres", "/adm/membres/")
+            ->addStep("Suppresion de " . $membre->getPseudo());
 
         // ***
 
@@ -286,11 +286,11 @@ final class Controller
 
         $smarty->assign('modules', $modules);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Statistiques", "/adm/stats");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Statistiques", "/adm/stats");
         if ($m) {
-            $trail->addStep($modules[$m]);
+                Trail::getInstance()->addStep($modules[$m]);
         }
 
         switch ($m)
@@ -328,10 +328,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Statistiques", "/adm/stats");
-        $trail->addStep("Top Groupes");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Statistiques", "/adm/stats")
+            ->addStep("Top Groupes");
 
         $db = DataBase::getInstance();
 
@@ -388,10 +388,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Statistiques", "/adm/stats");
-        $trail->addStep("Top Membres");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Statistiques", "/adm/stats")
+            ->addStep("Top Membres");
 
         $db = DataBase::getInstance();
 
@@ -463,10 +463,10 @@ final class Controller
 
         $lastsend = '2015-06-02 12:00:00';
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Statistiques", "/adm/stats");
-        $trail->addStep("Newsletter");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Statistiques", "/adm/stats")
+            ->addStep("Newsletter");
 
         $db = DataBase::getInstance();
 
@@ -520,9 +520,9 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Groupe de Style");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Groupe de Style");
 
         $db = DataBase::getInstance();
 
@@ -560,6 +560,9 @@ final class Controller
         return $smarty->fetch('adm/groupe-de-style.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function groupe_de_style_id(): string
     {
         if (Tools::isSubmit('form-groupe-de-style')) {
@@ -573,13 +576,12 @@ final class Controller
         $db = DataBase::getInstance();
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Groupe de Style", "/adm/groupe-de-style");
-
         $groupe = Groupe::getInstance($id);
 
-        $trail->addStep($groupe->getName());
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Groupe de Style", "/adm/groupe-de-style")
+            ->addStep($groupe->getName());
 
         // styles du groupe sélectionné
         $sql = "SELECT `id_style` "
@@ -617,6 +619,9 @@ final class Controller
         return $smarty->fetch('adm/groupe-de-style-id.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function groupe_de_style_submit(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -649,15 +654,18 @@ final class Controller
         Tools::redirect('/adm/groupe-de-style');
     }
 
+    /**
+     * @return string
+     */
     static function log_action(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
         $action = (int) Route::params('action');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Log Action");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Log Action");
 
         $smarty = new AdHocSmarty();
         $smarty->assign('actions', Log::getActions());
@@ -675,9 +683,9 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Suppression Compte");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Suppression Compte");
 
         !empty($_GET['action']) ? $action = (string) $_GET['action'] : $action = 'show';
         $smarty->assign('action', $action);
@@ -777,6 +785,9 @@ final class Controller
         return $smarty->fetch('adm/delete-account.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function delete_account_submit(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
@@ -819,6 +830,9 @@ final class Controller
         return $smarty->fetch('adm/delete-account.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function appartient_a(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -831,9 +845,9 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Privé", "/adm/");
-        $trail->addStep("Liaison Membre / Groupe");
+        Trail::getInstance()
+            ->addStep("Privé", "/adm/")
+            ->addStep("Liaison Membre / Groupe");
 
         if (Tools::isSubmit('form-appartient-a')) {
             $groupe = Groupe::getInstance($id_groupe);

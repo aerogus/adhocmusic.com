@@ -71,8 +71,8 @@ final class Controller
         $smarty->assign('title', "♫ Les Partenaires de l'association AD'HOC / Devenir Partenaire");
         $smarty->assign('description', "Les Partenaires de l'Association AD'HOC");
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Partenaires");
+        Trail::getInstance()
+            ->addStep("Partenaires");
 
         $partners = [
             (object) ['id' => 'epinay-sur-orge', 'title' => "Épinay-sur-Orge", 'description' => "Mairie d'Épinay-sur-Orge", 'url' => "https://www.ville-epinay-sur-orge.fr"],
@@ -103,8 +103,8 @@ final class Controller
 
         $smarty->enqueue_script('/js/contact.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Contact");
+        Trail::getInstance()
+            ->addStep("Contact");
 
         $smarty->assign('title', "Contacter l'Association AD'HOC");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ..");
@@ -239,8 +239,8 @@ final class Controller
         $from = trim((string) Route::params('from'));
         $smarty->assign('from', $from);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Plan du Site");
+        Trail::getInstance()
+            ->addStep("Plan du Site");
 
         return $smarty->fetch('map.tpl');
     }
@@ -249,8 +249,8 @@ final class Controller
     {
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Mentions Légales");
+        Trail::getInstance()
+            ->addStep("Mentions Légales");
 
         return $smarty->fetch('mentions-legales.tpl');
     }
@@ -294,8 +294,8 @@ final class Controller
     {
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Guide de style");
+        Trail::getInstance()
+            ->addStep("Guide de style");
 
         return $smarty->fetch('styleguide.tpl');
     }

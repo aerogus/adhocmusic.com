@@ -172,7 +172,6 @@ CREATE TABLE `adhoc_groupe` (
   `twitter_id` varchar(50) NOT NULL,
   `id_departement` char(3) NOT NULL DEFAULT '',
   `online` tinyint(1) NOT NULL DEFAULT '0',
-  `visite` int(11) NOT NULL DEFAULT '0',
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
   `modified_on` datetime DEFAULT NULL,
   `cotised_on` datetime DEFAULT NULL,

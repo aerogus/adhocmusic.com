@@ -10,8 +10,8 @@ final class Controller
 
         $smarty->enqueue_script('/js/events.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Agenda");
+        Trail::getInstance()
+            ->addStep("Agenda");
 
         $smarty->assign('create', (bool) Route::params('create'));
         $smarty->assign('edit', (bool) Route::params('edit'));
@@ -117,8 +117,8 @@ final class Controller
 
         $smarty->enqueue_script('/js/events-show.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Agenda", "/events/");
+        $trail = Trail::getInstance()
+            ->addStep("Agenda", "/events/");
 
         try {
             $event = Event::getInstance((int) $id);
@@ -222,6 +222,9 @@ final class Controller
         return $smarty->fetch('events/show.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -235,9 +238,9 @@ final class Controller
         $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/events-create.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Agenda", "/events/");
-        $trail->addStep("Ajouter une date");
+        Trail::getInstance()
+            ->addStep("Agenda", "/events/")
+            ->addStep("Ajouter une date");
 
         // filtrage de la date
         // $date = (string) $_GET['date'];
@@ -455,15 +458,18 @@ final class Controller
         return $smarty->fetch('events/create.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function edit(): string
     {
         $id = (int) Route::params('id');
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Agenda", "/events/");
-        $trail->addStep("Modifier une date");
+        Trail::getInstance()
+            ->addStep("Agenda", "/events/")
+            ->addStep("Modifier une date");
 
         $smarty = new AdHocSmarty();
 
@@ -628,9 +634,9 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Agenda", "/events/");
-        $trail->addStep("Supprimer une date");
+        Trail::getInstance()
+            ->addStep("Agenda", "/events/")
+            ->addStep("Supprimer une date");
 
         try {
             $event = Event::getInstance((int) Route::params('id'));

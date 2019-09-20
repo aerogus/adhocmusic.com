@@ -49,8 +49,8 @@ final class Controller
 
                 Log::action(Log::ACTION_LOGIN_FAILED);
 
-                $trail = Trail::getInstance();
-                $trail->addStep("Identification");
+                Trail::getInstance()
+                    ->addStep("Identification");
 
                 $smarty = new AdHocSmarty();
                 $smarty->assign('auth_failed', true);
@@ -66,8 +66,8 @@ final class Controller
             $smarty = new AdHocSmarty();
             $smarty->assign('not_auth', true);
 
-            $trail = Trail::getInstance();
-            $trail->addStep("Identification");
+            Trail::getInstance()
+                ->addStep("Identification");
 
             return $smarty->fetch('auth/login.tpl');
         }
@@ -107,10 +107,10 @@ final class Controller
 
         $smarty->enqueue_script('/js/change-password.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Infos Persos", "/membres/edit");
-        $trail->addStep("Changer le mot de passe");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Infos Persos", "/membres/edit")
+            ->addStep("Changer le mot de passe");
 
         $membre = Membre::getInstance($_SESSION['membre']->getId());
 
@@ -143,13 +143,16 @@ final class Controller
         return $smarty->fetch('auth/change-password.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function lost_password()
     {
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Membres", "/membres/tableau-de-bord");
-        $trail->addStep("Mot de passe perdu");
+        Trail::getInstance()
+            ->addStep("Membres", "/membres/tableau-de-bord")
+            ->addStep("Mot de passe perdu");
 
         if (Tools::isSubmit('form-lost-password')) {
             $email = (string) Route::params('email');

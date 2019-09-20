@@ -14,6 +14,8 @@ class Trail
     protected static $_instance = null;
 
     /**
+     * Conteneur des données
+     *
      * @var array
      */
     protected $_path = [];
@@ -41,15 +43,18 @@ class Trail
     /**
      * Ajoute un élément au fil d'ariane
      *
-     * @param string $title
-     * @param string $link (opt.)
+     * @param string $title titre
+     * @param string $link  lien (optionnel)
+     * 
+     * @return mixed
      */
-    function addStep($title, $link = '')
+    function addStep(string $title, string $link = '')
     {
         $this->_path[] = [
             'title' => $title,
             'link' => $link,
         ];
+        return $this;
     }
 
     /**
@@ -57,7 +62,7 @@ class Trail
      *
      * @return array
      */
-    function getPath()
+    function getPath(): array
     {
         return $this->_path;
     }

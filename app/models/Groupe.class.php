@@ -112,11 +112,6 @@ class Groupe extends ObjectModel
     protected $_online = false;
 
     /**
-     * @var int
-     */
-    protected $_visite = 0;
-
-    /**
      * @var string
      */
     protected $_created_on = NULL;
@@ -149,11 +144,6 @@ class Groupe extends ObjectModel
     /**
      * @var array
      */
-    protected $_template = [];
-
-    /**
-     * @var array
-     */
     protected static $_all_fields = [
         'alias'            => 'str',
         'name'             => 'str',
@@ -168,14 +158,12 @@ class Groupe extends ObjectModel
         'twitter_id'       => 'str',
         'id_departement'   => 'str',
         'online'           => 'bool',
-        'visite'           => 'num',
         'created_on'       => 'date',
         'modified_on'      => 'date',
         'datdeb'           => 'date',
         'datfin'           => 'date',
         'comment'          => 'str',
         'etat'             => 'num',
-        'template'         => 'phpser',
     ];
 
     /**
@@ -213,6 +201,8 @@ class Groupe extends ObjectModel
     /* début getters */
 
     /**
+     * Retourne l'url de base des medias relatifs au groupe
+     *
      * @return string
      */
     static function getBaseUrl()
@@ -221,6 +211,8 @@ class Groupe extends ObjectModel
     }
 
     /**
+     * Retourne le chemin absolu des medias relatifs au groupe
+     *
      * @return string
      */
     static function getBasePath()
@@ -233,9 +225,9 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    function getAlias()
+    function getAlias(): string
     {
-        return (string) $this->_alias;
+        return $this->_alias;
     }
 
     /**
@@ -243,19 +235,19 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    function getName()
+    function getName(): string
     {
-        return (string) $this->_name;
+        return $this->_name;
     }
 
     /**
-     * Retourne le style du groupe
+     * Retourne le style du groupe (champ libre)
      *
      * @return string
      */
-    function getStyle()
+    function getStyle(): string
     {
-        return (string) $this->_style;
+        return $this->_style;
     }
 
     /**
@@ -263,9 +255,9 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    function getInfluences()
+    function getInfluences(): string
     {
-        return (string) $this->_influences;
+        return $this->_influences;
     }
 
     /**
@@ -273,19 +265,19 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    function getLineup()
+    function getLineup(): string
     {
-        return (string) $this->_lineup;
+        return $this->_lineup;
     }
 
     /**
-     * retourne le mini texte de présentation
+     * Retourne le mini texte de présentation
      *
      * @return string
      */
-    function getMiniText()
+    function getMiniText(): string
     {
-        return (string) $this->_mini_text;
+        return $this->_mini_text;
     }
 
     /**
@@ -293,19 +285,19 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    function getText()
+    function getText(): string
     {
-        return (string) $this->_text;
+        return $this->_text;
     }
 
     /**
      * Retourne l'identificant de la page fan Facebook
      *
-     * @return int (64bits) => str
+     * @return string (int 64bits réellement)
      */
-    function getFacebookPageId()
+    function getFacebookPageId(): string
     {
-        return (string) $this->_facebook_page_id;
+        return $this->_facebook_page_id;
     }
 
     /**
@@ -326,9 +318,9 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    function getTwitterId()
+    function getTwitterId(): string
     {
-        return (string) $this->_twitter_id;
+        return $this->_twitter_id;
     }
 
     /**
@@ -336,9 +328,9 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    function getTwitterUrl()
+    function getTwitterUrl(): string
     {
-        return (string) 'https://www.twitter.com/' . $this->_twitter_id;
+        return 'https://www.twitter.com/' . $this->_twitter_id;
     }
 
     /**
@@ -348,7 +340,7 @@ class Groupe extends ObjectModel
      *
      * @todo check le http:// initial
      */
-    function getSite()
+    function getSite(): string
     {
         return $this->_site;
     }
@@ -364,32 +356,24 @@ class Groupe extends ObjectModel
     }
 
     /**
+     * Retourne si un groupe doit être affiché
+     *
      * @return bool
      */
-    function getOnline()
+    function getOnline(): bool
     {
-        return (bool) $this->_online;
+        return $this->_online;
     }
 
     /**
-     * Retourne le nombre de visites
+     * Retourne la date d'inscription format YYYY-MM-DD HH:II:SS
      *
-     * @return int
+     * @return string|false
      */
-    function getVisite()
+    function getCreatedOn(): ?string
     {
-        return (int) $this->_visite;
-    }
-
-    /**
-     * Retourne la date d'inscription
-     *
-     * @return string
-     */
-    function getCreatedOn()
-    {
-        if (Date::isDateTimeOk($this->_created_on)) {
-            return (string) $this->_created_on;
+        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
+            return $this->_created_on;
         }
         return false;
     }
@@ -399,12 +383,12 @@ class Groupe extends ObjectModel
      *
      * @return int
      */
-    function getCreatedOnTs()
+    function getCreatedOnTs(): ?string
     {
         if (Date::isDateTimeOk($this->_created_on)) {
             return (int) strtotime($this->_created_on);
-         }
-         return false;
+        }
+        return false;
      }
 
     /**
@@ -447,7 +431,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne la date de fin d'activité
+     * Retourne la date de fin d'activité
      *
      * @return string
      */
@@ -460,7 +444,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne le "mot AD'HOC"
+     * Retourne le "mot AD'HOC"
      *
      * @return string
      */
@@ -470,7 +454,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'état du groupe
+     * Retourne l'état du groupe
      *
      * @return int
      */
@@ -480,30 +464,13 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne le template (couleurs custom en css)
-     *
-     * @return string
-     */
-    function getTemplate()
-    {
-        if ($this->_template) {
-            if (!array_key_exists('content_text_color', $this->_template)) {
-                $this->_template['content_text_color'] = $this->_template['content_color'];
-            }
-            if (!array_key_exists('content_link_color', $this->_template)) {
-                $this->_template['content_link_color'] = 'ffffff';
-            }
-        }
-        return $this->_template;
-    }
-
-    /**
-     * retourne le nom du groupe à partir de son id
+     * Retourne le nom du groupe à partir de son id
      *
      * @param string $id_groupe
+     *
      * @return string ou false
      */
-    static function getNameById($id_groupe)
+    static function getNameById(int $id_groupe)
     {
         $db = DataBase::getInstance();
 
@@ -515,7 +482,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'url de la photo principale
+     * Retourne l'url de la photo principale
      *
      * @return string
      */
@@ -528,7 +495,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'url de la mini photo
+     * Retourne l'url de la mini photo
      * (64x64)
      *
      * @return string
@@ -543,11 +510,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'url du logo
+     * Retourne l'url du logo
      *
      * @return string
      */
-    function getLogo()
+    function getLogo(): string
     {
         if (file_exists(self::getBasePath() . '/l' . $this->getId() . '.png')) {
             return self::getBaseUrl() . '/l' . $this->getId() . '.png?ts=' . $this->getModifiedOnTs();
@@ -567,9 +534,10 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'url d'une fiche groupe à partir de son alias ou son id
+     * Retourne l'url d'une fiche groupe à partir de son alias ou son id
      *
      * @param string $alias ou int $id_groupe
+     *
      * @return string
      */
     static function getUrlFiche($ref, $type = 2)
@@ -592,8 +560,10 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'image de l'avatar d'un groupe
+     * Retourne l'image de l'avatar d'un groupe
+     *
      * @param int id_groupe
+     *
      * @return string
      */
     static function getAvatarById($id_groupe)
@@ -606,12 +576,13 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * retourne l'alias d'un groupe à partir de son id
+     * Retourne l'alias d'un groupe à partir de son id
      *
      * @param int $id_groupe
+     *
      * @return string
      */
-    static function getAliasById($id_groupe)
+    static function getAliasById(int $id_groupe)
     {
         $db = DataBase::getInstance();
 
@@ -631,6 +602,8 @@ class Groupe extends ObjectModel
 
     /**
      * @param string $val alias
+     *
+     * @return mixed
      */
     function setAlias(string $val)
     {
@@ -638,6 +611,7 @@ class Groupe extends ObjectModel
             $this->_alias = $val;
             $this->_modified_fields['alias'] = true;
         }
+        return $this;
     }
 
     /**
@@ -685,7 +659,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setMiniText(string $val)
     {
@@ -695,7 +669,7 @@ class Groupe extends ObjectModel
         }
     }
     /**
-     * @param string
+     * @param string $val val
      */
     function setText(string $val)
     {
@@ -706,7 +680,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setSite(string $val)
     {
@@ -743,7 +717,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setTwitterId(string $val)
     {
@@ -754,7 +728,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string
+     * @param string $val val
      */
     function setIdDepartement(string $val)
     {
@@ -772,17 +746,6 @@ class Groupe extends ObjectModel
         if ($this->_online !== $val) {
             $this->_online = $val;
             $this->_modified_fields['online'] = true;
-        }
-    }
-
-    /**
-     * @param string
-     */
-    function setVisite(string $val)
-    {
-        if ($this->_visite !== $val) {
-            $this->_visite = $val;
-            $this->_modified_fields['visite'] = true;
         }
     }
 
@@ -873,17 +836,6 @@ class Groupe extends ObjectModel
         if ($this->_etat !== $val) {
             $this->_etat = $val;
             $this->_modified_fields['etat'] = true;
-        }
-    }
-
-    /**
-     * @param array
-     */
-    function setTemplate(array $val)
-    {
-        if ($this->_template !== $val) {
-            $this->_template = $val;
-            $this->_modified_fields['template'] = true;
         }
     }
 
@@ -987,7 +939,7 @@ class Groupe extends ObjectModel
 
         $sql = "SELECT `name`, `mini_text`, `text`, `style`, `lineup`, `etat`, "
              . "`site`, `online`, `influences`, `created_on`, `modified_on`, `alias`, "
-             . "`myspace`, `facebook_page_id`, `twitter_id`, `template`, `comment` "
+             . "`myspace`, `facebook_page_id`, `twitter_id`, `comment` "
              . "FROM `" . self::$_table . "` "
              . "WHERE `" . self::$_pk . "` = " . (int) $this->getId();
 
@@ -1218,7 +1170,7 @@ class Groupe extends ObjectModel
 
         $sql = "SELECT `g`.`id_groupe` AS `id`, `g`.`name`, `g`.`mini_text`, `g`.`text`, `g`.`style`, `g`.`lineup`, "
              . "`g`.`etat`, `g`.`site`, `g`.`influences`, `g`.`created_on`, `g`.`modified_on`, "
-             . "`g`.`alias`, `g`.`myspace`, `g`.`template`, `g`.`comment` "
+             . "`g`.`alias`, `g`.`myspace`, `g`.`comment` "
              . "FROM `" . self::$_table . "` `g` "
              . "WHERE 1 ";
 

@@ -13,9 +13,9 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Musiques");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Musiques");
 
         $page = (int) Route::params('page');;
         $id = (int) Route::params('id');
@@ -79,8 +79,6 @@ final class Controller
         $smarty->enqueue_script('/js/jquery.jplayer.min.js');
         $smarty->enqueue_script('/js/audio-show.js');
 
-        $trail = Trail::getInstance();
-
         $meta_description = "Titre : " . $audio->getName();
 
         $smarty->assign('og_type', 'adhocmusic:song');
@@ -91,8 +89,9 @@ final class Controller
             $smarty->assign('groupe', $groupe);
             $smarty->assign('title', $audio->getName() . ' - ' . $groupe->getName());
             $meta_description .= " | Groupe : " . $groupe->getName();
-            $trail->addStep("Groupes", "/groupes/");
-            $trail->addStep($groupe->getName(), $groupe->getUrl());
+            Trail::getInstance()
+                ->addStep("Groupes", "/groupes/")
+                ->addStep($groupe->getName(), $groupe->getUrl());
             $smarty->assign('og_image', $groupe->getMiniPhoto());
             $smarty->assign(
                 'og_audio', [
@@ -103,7 +102,8 @@ final class Controller
                 ]
             );
         } else {
-            $trail->addStep("Média", "/medias/");
+            Trail::getInstance()
+                ->addStep("Média", "/medias/");
         }
 
         if ($audio->getIdEvent()) {
@@ -140,7 +140,8 @@ final class Controller
             $smarty->assign('lieu', $lieu);
         }
 
-        $trail->addStep($audio->getName());
+        Trail::getInstance()
+            ->addStep($audio->getName());
 
         $smarty->assign('description', $meta_description);
 
@@ -161,6 +162,9 @@ final class Controller
         return $smarty->fetch('audios/show.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -169,10 +173,10 @@ final class Controller
 
         $smarty->enqueue_script('/js/audio-create.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Musiques", "/audios/my");
-        $trail->addStep("Ajouter une musique");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Musiques", "/audios/my")
+            ->addStep("Ajouter une musique");
 
         if (Tools::isSubmit('form-audio-create')) {
             set_time_limit(0); // l'upload peut prendre du temps !
@@ -279,10 +283,10 @@ final class Controller
 
         $smarty->enqueue_script('/js/audio-edit.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Musiques", "/audios/my");
-        $trail->addStep("Editer une musique");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Musiques", "/audios/my")
+            ->addStep("Editer une musique");
 
         try {
             $audio = Audio::getInstance($id);
@@ -380,10 +384,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Musiques", "/audios/my");
-        $trail->addStep("Supprimer une musique");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Musiques", "/audios/my")
+            ->addStep("Supprimer une musique");
 
         try {
             $audio = Audio::getInstance($id);

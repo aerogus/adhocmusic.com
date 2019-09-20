@@ -1,7 +1,13 @@
 <?php
 
+/**
+ *
+ */
 final class Controller
 {
+    /**
+     * @return string
+     */
     static function index(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -12,9 +18,9 @@ final class Controller
 
         $smarty->assign('sent', (bool) Route::params('sent'));
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Messagerie");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Messagerie");
 
         $db = DataBase::getInstance();
 
@@ -39,6 +45,9 @@ final class Controller
         return $smarty->fetch('messagerie/index.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function read(): string
     {
         $id = (int) Route::params('id');
@@ -49,10 +58,10 @@ final class Controller
 
         $smarty->enqueue_script('/js/messagerie.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Messagerie", "/messagerie/");
-        $trail->addStep("Lire un message");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Messagerie", "/messagerie/")
+            ->addStep("Lire un message");
 
         $db = DataBase::getInstance();
 
@@ -79,6 +88,9 @@ final class Controller
         return $smarty->fetch('messagerie/read.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function write(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -87,10 +99,10 @@ final class Controller
 
         $smarty->enqueue_script('/js/messagerie.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Messagerie", "/messagerie/");
-        $trail->addStep("Ecrire un message");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Messagerie", "/messagerie/")
+            ->addStep("Ecrire un message");
 
         if (Tools::isSubmit('form-message-write')) {
             $text = (string) Route::params('text');
@@ -132,6 +144,9 @@ final class Controller
         return $smarty->fetch('messagerie/write.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function delete(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);

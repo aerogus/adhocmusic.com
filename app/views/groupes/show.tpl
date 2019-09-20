@@ -2,7 +2,7 @@
 
 {if !empty($unknown_group)}
 
-<p class="infobulle error">Ce groupe est introuvable !</p>
+<p class="infobulle error">Ce groupe est introuvable</p>
 
 {else}
 

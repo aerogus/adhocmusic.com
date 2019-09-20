@@ -4,15 +4,21 @@ define('NB_PHOTOS_PER_PAGE', 64);
 define('PHOTOS_IMPORT_DIR', ADHOC_ROOT_PATH . '/import');
 define('PHOTOS_EXTRACT_DIR', PHOTOS_IMPORT_DIR . '/tmp');
 
+/**
+ *
+ */
 final class Controller
 {
+    /**
+     * @return string
+     */
     static function my(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Photos");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Photos");
 
         $smarty = new AdHocSmarty();
 
@@ -42,13 +48,15 @@ final class Controller
         return $smarty->fetch('photos/my.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function show(): string
     {
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
 
         $smarty = new AdHocSmarty();
-        $trail = Trail::getInstance();
 
         try {
             $photo = Photo::getInstance($id);
@@ -97,17 +105,18 @@ final class Controller
                 }
             }
 
+            $trail = Trail::getInstance();
             if ($from == 'groupe' && $photo->getIdGroupe()) {
-                $trail->addStep("Groupes", "/groupes/");
-                $trail->addStep($groupe->getName(), $groupe->getUrl());
+                $trail->addStep("Groupes", "/groupes/")
+                    ->addStep($groupe->getName(), $groupe->getUrl());
             } elseif ($from == 'profil' && $photo->getIdContact()) {
                 $trail->addStep("Zone Membre", "/membres/");
             } elseif ($from == 'event' && $photo->getIdEvent()) {
-                $trail->addStep("Agenda", "/events/");
-                $trail->addStep($event->getName(), $event->getUrl());
+                $trail->addStep("Agenda", "/events/")
+                    ->addStep($event->getName(), $event->getUrl());
             } elseif ($from == 'lieu' && $photo->getIdLieu()) {
-                $trail->addStep("Lieux", "/lieux/");
-                $trail->addStep($lieu->getName(), $lieu->getUrl());
+                $trail->addStep("Lieux", "/lieux/")
+                    ->addStep($lieu->getName(), $lieu->getUrl());
             } else {
                 $trail->addStep("Média", "/medias/");
             }
@@ -178,6 +187,9 @@ final class Controller
         return $smarty->fetch('photos/show.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -229,10 +241,10 @@ final class Controller
             }
         }
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Photos", "/photos/my");
-        $trail->addStep("Ajouter une photo");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Photos", "/photos/my")
+            ->addStep("Ajouter une photo");
 
         $smarty = new AdHocSmarty();
 
@@ -286,6 +298,9 @@ final class Controller
         return $smarty->fetch('photos/create.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function import(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -391,10 +406,10 @@ final class Controller
 
         }
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Photos", "/photos/my");
-        $trail->addStep("Importer des photos");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Photos", "/photos/my")
+            ->addStep("Importer des photos");
 
         $smarty = new AdHocSmarty();
 
@@ -445,6 +460,9 @@ final class Controller
         return $smarty->fetch('photos/import.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function edit(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -455,10 +473,10 @@ final class Controller
 
         $smarty->enqueue_script('/js/photo-edit.js');
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Photos", "/photos/my");
-        $trail->addStep("Editer une photo");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Photos", "/photos/my")
+            ->addStep("Editer une photo");
 
         try {
             $photo = Photo::getInstance($id);
@@ -541,6 +559,9 @@ final class Controller
         return $smarty->fetch('photos/edit.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function ajax_update(): string
     {
         if (!Tools::isAuth()) {
@@ -571,6 +592,9 @@ final class Controller
         return 'KO';
     }
 
+    /**
+     * @return string
+     */
     static function delete(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -579,10 +603,10 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $trail = Trail::getInstance();
-        $trail->addStep("Tableau de bord", "/membres/tableau-de-bord");
-        $trail->addStep("Mes Photos", "/photos/my");
-        $trail->addStep("Supprimer une photo");
+        Trail::getInstance()
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
+            ->addStep("Mes Photos", "/photos/my")
+            ->addStep("Supprimer une photo");
 
         try {
             $photo = Photo::getInstance($id);
