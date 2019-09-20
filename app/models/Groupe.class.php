@@ -295,7 +295,7 @@ class Groupe extends ObjectModel
      *
      * @return string (int 64bits réellement)
      */
-    function getFacebookPageId(): string
+    function getFacebookPageId(): ?string
     {
         return $this->_facebook_page_id;
     }
@@ -375,7 +375,7 @@ class Groupe extends ObjectModel
         if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
             return $this->_created_on;
         }
-        return false;
+        return null;
     }
 
     /**
@@ -394,27 +394,27 @@ class Groupe extends ObjectModel
     /**
      * Retourne la date de modification de la fiche
      *
-     * @return string
+     * @return string|null
      */
-    function getModifiedOn()
+    function getModifiedOn(): ?string
     {
-        if (Date::isDateTimeOk($this->_modified_on)) {
-            return (string) $this->_modified_on;
+        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+            return $this->_modified_on;
         }
-        return false;
+        return null;
     }
 
     /**
      * Retourne la date de modification de la fiche sous forme de timestamp
      *
-     * @return int
+     * @return int|null
      */
-    function getModifiedOnTs()
+    function getModifiedOnTs(): ?int
     {
-        if (Date::isDateTimeOk($this->_modified_on)) {
-            return (int) strtotime($this->_modified_on);
+        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+            return strtotime($this->_modified_on);
         }
-        return false;
+        return null;
     }
 
     /**
@@ -511,6 +511,7 @@ class Groupe extends ObjectModel
 
     /**
      * Retourne l'url du logo
+     * priorité png > gif > jpg
      *
      * @return string|null
      */
@@ -522,6 +523,8 @@ class Groupe extends ObjectModel
             return self::getBaseUrl() . '/l' . $this->getId() . '.gif?ts=' . $this->getModifiedOnTs();
         } else if (file_exists(self::getBasePath() . '/l' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/l' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        } else {
+            return null;
         }
     }
 
