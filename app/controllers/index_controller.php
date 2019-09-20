@@ -126,6 +126,8 @@ final class Controller
 
         if (!Tools::isSubmit('form-contact')) {
 
+            $smarty->assign('show_form', true);
+
             // valeurs par défaut
             $data = [
                 'name'    => '',
@@ -138,7 +140,7 @@ final class Controller
 
             // si identifié, préremplissage de certains champs
             if (!empty($_SESSION['membre'])) {
-                $data['name'] = $_SESSION['membre']->getFirstName() . " " . $_SESSION['membre']->getLastName() . " (" . $_SESSION['membre']->getPseudo() . ")";
+                $data['name'] = $_SESSION['membre']->getFirstName() . ' ' . $_SESSION['membre']->getLastName() . ' (' . $_SESSION['membre']->getPseudo() . ')';
                 $data['email'] = $_SESSION['membre']->getEmail();
             }
 
@@ -168,7 +170,7 @@ final class Controller
 
                 // 2. envoi de la copie à l'expéditeur
                 $data['email_reply_to'] = 'site@adhocmusic.com';
-                if (Email::send($data['email'], "[cc]" . $data['subject'], 'form-contact-cc', $data)) {
+                if (Email::send($data['email'], '[cc] ' . $data['subject'], 'form-contact-cc', $data)) {
                     if ($data['mailing']) {
                         Newsletter::addEmail($data['email']);
                     }
@@ -187,7 +189,6 @@ final class Controller
 
         }
 
-        $smarty->assign('show_form', true);
         $smarty->assign('name', $data['name']);
         $smarty->assign('email', $data['email']);
         $smarty->assign('subject', $data['subject']);

@@ -13,10 +13,6 @@
           <td>{$email|escape}</td>
         </tr>
         <tr>
-          <td>Date :</td>
-          <td>{$date|date_format:'le %d/%m/%Y à %H:%M:%S'}</td>
-        </tr>
-        <tr>
           <td>Sujet :</td>
           <td>{$subject|escape}</td>
         </tr>
