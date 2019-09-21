@@ -344,15 +344,15 @@ CREATE TABLE `adhoc_structure` (
 
 CREATE TABLE `adhoc_subscription` (
   `id_subscription` int(11) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `subscribed_at` datetime,
-  `adult` tinyint(1) NOT NULL,
-  `amount` float NOT NULL,
-  `first_name` varchar(250) NOT NULL,
-  `last_name` varchar(250) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `subscribed_at` date NOT NULL,
+  `adult` tinyint(1) DEFAULT NULL,
+  `amount` float NOT NULL DEFAULT '0',
+  `first_name` varchar(250) DEFAULT NULL,
+  `last_name` varchar(250) DEFAULT NULL,
   `email` varchar(150) DEFAULT NULL,
-  `cp` varchar(10) NOT NULL,
-  `id_contact` int(11) NULL
+  `cp` varchar(10) DEFAULT '',
+  `id_contact` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `adhoc_video` (
@@ -514,7 +514,8 @@ ALTER TABLE `adhoc_structure`
   ADD KEY `id_pays` (`id_country`);
 
 ALTER TABLE `adhoc_subscription`
-  ADD PRIMARY KEY (`id_subscription`);
+  ADD PRIMARY KEY (`id_subscription`),
+  ADD KEY `id_contact` (`id_contact`);
 
 ALTER TABLE `adhoc_video`
   ADD PRIMARY KEY (`id_video`),

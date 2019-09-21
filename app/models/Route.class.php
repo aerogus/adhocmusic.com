@@ -78,9 +78,10 @@ class Route
 
     /**
      * @param string
-     * @return mixed
+     *
+     * @return mixed|null
      */
-    static function params($key)
+    static function params(string $key)
     {
         if (!isset(self::$action_params[$key])) {
             return null;

@@ -61,6 +61,10 @@ adm_subscriptions|edit|GET|/adm/subscriptions/edit:id
 adm_subscriptions|edit|POST|/adm/subscriptions/edit
 adm_subscriptions|delete|GET|/adm/subscriptions/delete:id
 adm_subscriptions|delete|POST|/adm/subscriptions/delete
+adm_subscriptions|api_list|GET|/api/subscriptions/list
+adm_subscriptions|api_create|POST|/api/subscriptions/create
+adm_subscriptions|api_edit|POST|/api/subscriptions/edit/:id
+adm_subscriptions|api_delete|POST|/api/subscriptions/delete/:id
 api|lieux|GET|/api/1.0/lieux
 api|videos|GET|/api/1.0/videos
 api|audios|GET|/api/1.0/audios

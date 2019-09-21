@@ -1,6 +1,10 @@
 # spam
 .DS_Store
 
+# la configuration
+/conf
+!/conf/conf.dist.ini
+
 # données dans le contexte docker
 /volumes
 

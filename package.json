@@ -5,20 +5,28 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
+    "serve": "./node_modules/.bin/brunch watch --server",
+    "build": "./node_modules/.bin/brunch build --production",
     "start": "docker-compose up",
-    "stop": "docker-compose down"
+    "stop": "docker-compose down",
+    "clean": "rm -Rf node_modules public"
   },
   "devDependencies": {
     "after-brunch": "0.0.5",
     "auto-reload-brunch": "2.7.1",
     "autoprefixer": "9.6.1",
+    "babel-brunch": "7.0.1",
     "brunch": "2.10.17",
     "clean-css-brunch": "2.10.0",
+    "eslint": "6.4.0",
+    "eslint-config-airbnb-base": "14.0.0",
+    "eslint-plugin-import": "2.18.2",
+    "json-brunch": "1.5.4",
     "postcss-assets": "5.0.0",
     "postcss-brunch": "2.10.1",
     "stylus-brunch": "2.10.1"
   },
   "dependencies": {
-    "mjml": "4.4.1"
+    "mjml": "4.5.0"
   }
 }

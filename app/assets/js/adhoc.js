@@ -1,4 +1,4 @@
-/*global jQuery, window, screen, alert */
+/*global jQuery, window, alert */
 
 var adhoc = {
 
@@ -52,7 +52,6 @@ var adhoc = {
 };
 
 function validateEmail(email) {
-  //var re = /^[a-z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,3}$/;
   var re = /\S+@\S+\.\S+/;
   return re.test(email);
 }
@@ -64,15 +63,6 @@ function toggleDiv(id) {
   } else {
     div.style.display = 'none';
   }
-}
-
-function popup(page, name, popupwidth, popupheight) {
-  // screen ?
-  var coordleftpopup = Math.floor((screen.width / 2)  - (popupwidth / 2));
-  var coordtoppopup  = Math.floor((screen.height / 2) - (popupheight / 2));
-  var param = 'width=' + popupwidth + ',height=' + popupheight + ',left=' + coordleftpopup + ',top=' + coordtoppopup + ',scrollbars=no';
-  var w = window.open(page, name, param);
-  w.focus();
 }
 
 jQuery(document).ready(function ($) {

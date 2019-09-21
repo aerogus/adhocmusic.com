@@ -56,21 +56,17 @@ class AdHocSmarty extends Smarty
             $this->assign('me', $_SESSION['membre']);
         }
 
-        if (defined('ADHOC_COUNTERS')) {
-            if (!empty($_SESSION['membre'])) {
-                $this->assign('is_auth', true);
-
-                $this->assign(
-                    'my_counters', [
-                        'nb_unread_messages' => (int) Messagerie::getMyUnreadMessagesCount(),
-                        'nb_messages'        => (int) Messagerie::getMyMessagesCount(),
-                    ]
-                );
-
-            } else {
-                $this->assign('is_auth', false);
-                $this->assign('my_counters', false);
-            }
+        if (!empty($_SESSION['membre'])) {
+            $this->assign('is_auth', true);
+            $this->assign(
+                'my_counters', [
+                    'nb_unread_messages' => (int) Messagerie::getMyUnreadMessagesCount(),
+                    'nb_messages'        => (int) Messagerie::getMyMessagesCount(),
+                ]
+            );
+        } else {
+            $this->assign('is_auth', false);
+            $this->assign('my_counters', false);
         }
 
         $this->enqueue_style('/css/adhoc.20180225.css');

@@ -2,6 +2,9 @@ exports.config =
   paths:
     watched: ['app']
   files:
+    javascripts:
+      joinTo:
+        'js/modules/adhoc.js': /^app\/modules\/adhoc.js/
     stylesheets:
       joinTo:
         'css/adhoc.css': /^app\/styles\/adhoc.styl/

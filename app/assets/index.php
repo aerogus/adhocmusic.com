@@ -7,7 +7,7 @@
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 
-require_once __DIR__ . '/../app/config.php';
+require_once __DIR__ . '/../app/bootstrap.php';
 
 // PATH_INFO est l'info sur laquelle on se base pour calculer les routes
 if (!array_key_exists('PATH_INFO', $_SERVER)) {

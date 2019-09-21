@@ -4,7 +4,7 @@
 // outil cli pour afficher/cache un groupe
 // usage: ./grp.php aliasgroupe 0|1
 
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 $alias = $argv[1];
 $online = (bool) $argv[2];

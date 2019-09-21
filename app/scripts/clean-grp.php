@@ -11,7 +11,7 @@
  * + liaison groupe/evenement
  */
 
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 if (empty($argv[1])) {
     die('usage: cleangrp.php alias_groupe');

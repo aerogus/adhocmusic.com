@@ -340,6 +340,40 @@ class Tools
     }
 
     /**
+     * @return bool
+     */
+    static function isSsl(): bool
+    {
+        return !empty($_SERVER['HTTPS'])
+            || !empty($_SERVER['REDIRECT_HTTPS'])
+            || (!empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] === 'https');
+    }
+
+    /**
+     * Mini fonction de debug
+     *
+     * @param mixed $var variable
+     *
+     * @return void
+     */
+    static function p(mixed $var)
+    {
+        echo '<pre>' . print_r($var, true) . '</pre>';
+    }
+
+    /**
+     * Mini fonction de debug
+     *
+     * @param mixed $var variable
+     *
+     * @return string
+     */
+    static function d(mixed $var)
+    {
+        die('<pre>' . print_r($var, true) . '</pre>');
+    }
+
+    /**
      * Vérifie que l'internaute :
      * - est loggué
      * - appartient bien au groupe en paramètre

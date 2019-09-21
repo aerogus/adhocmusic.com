@@ -130,7 +130,7 @@ final class Controller
                 'email'   => '',
                 'subject' => '',
                 'text'    => '',
-                'mailing' => true,
+                'mailing' => false,
                 'check'   => Tools::getCSRFToken(),
             ];
 

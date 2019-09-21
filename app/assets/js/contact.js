@@ -4,6 +4,8 @@ jQuery(document).ready(function ($) {
 
   'use strict';
 
+  $('#check').val($('#form-contact-submit').data('check'));
+
   $('#form-contact').submit(function () {
     var valid = true;
     if ($('#name').val().length === 0) {

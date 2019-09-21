@@ -5,7 +5,7 @@
  * Vieux groupes n'ayant jamais mis à jour leur fiche depuis des lustres
  */
 
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 $db = DataBase::getInstance();
 

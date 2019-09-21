@@ -8,7 +8,7 @@
 // n° de newslette a traiter
 define('ID_NEWSLETTER', 87);
 
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 // on temporise l'envoi des mails.
 // 2sec = 30 mails/minute = 1800 mails/heure

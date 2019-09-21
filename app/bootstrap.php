@@ -11,40 +11,22 @@ setlocale(LC_ALL, 'fr_FR.UTF8');
 ini_set('date.timezone', 'Europe/Paris');
 ini_set('default_charset', 'UTF-8');
 
-define('ENV', adhoc_get_env());
+define('ENV', (php_uname('n') === 'rbx.aerogus.net') ? 'PROD' : 'DEV');
 
 /**
- * Retourne le type d'environnement
- * Se base sur le host du serveur
+ * Chargement automatique des classes métiers AD'HOC
  *
- * @todo un bon vieux fichier .env plutôt...
+ * @param string $class_name Nom de la classe
  *
- * @return string
+ * @return void
  */
-function adhoc_get_env(): string
+function autoload(string $class_name)
 {
-    $host = php_uname('n');
-    switch ($host)
-    {
-        case 'rbx.aerogus.net':
-            return 'PROD';
-            break;
-
-        default:
-            return 'DEV';
-            break;
+    if (file_exists(__DIR__ . '/models/' . $class_name . '.class.php')) {
+        include_once __DIR__ . '/models/' . $class_name . '.class.php';
     }
 }
-
-/**
- * @return bool
- */
-function isSsl(): bool
-{
-    return !empty($_SERVER['HTTPS'])
-        || !empty($_SERVER['REDIRECT_HTTPS'])
-        || (!empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] === 'https');
-}
+spl_autoload_register('autoload');
 
 if (ENV === 'PROD') {
 
@@ -53,7 +35,7 @@ if (ENV === 'PROD') {
     define('_DB_PASSWORD_', 'kK2972Wd');
     define('_DB_DATABASE_', 'adhocmusic');
 
-    if (isSsl()) {
+    if (Tools::isSsl()) {
         define('HOME_URL',  'https://www.adhocmusic.com');
         define('CACHE_URL', 'https://static.adhocmusic.com/cache');
         define('MEDIA_URL', 'https://static.adhocmusic.com/media');
@@ -74,7 +56,7 @@ if (ENV === 'PROD') {
     define('_DB_PASSWORD_', 'changeme');
     define('_DB_DATABASE_', 'adhocmusic');
 
-    if (isSsl()) {
+    if (Tools::isSsl()) {
         define('HOME_URL',  'https://www.adhocmusic.test');
         define('CACHE_URL', 'https://static.adhocmusic.test/cache');
         define('MEDIA_URL', 'https://static.adhocmusic.test/media');
@@ -92,13 +74,12 @@ if (ENV === 'PROD') {
 
 define('DEBUG_EMAIL', 'guillaume@seznec.fr');
 
-define('ADHOC_ROOT_PATH',           dirname(__DIR__));
-define('ADHOC_LIB_PATH',            ADHOC_ROOT_PATH . '/models');
-define('ADHOC_ROUTES_FILE',         ADHOC_ROOT_PATH . '/app/routes');
-define('ADHOC_SITE_PATH',           ADHOC_ROOT_PATH . '/app/models');
-define('ADHOC_LOG_PATH',            ADHOC_ROOT_PATH . '/log');
-define('DEFAULT_CONTROLLERS_PATH',  ADHOC_ROOT_PATH . '/app/controllers/');
-define('MEDIA_PATH',                ADHOC_ROOT_PATH . '/media');
+define('ADHOC_ROOT_PATH',          dirname(__DIR__));
+define('ADHOC_LIB_PATH',           ADHOC_ROOT_PATH . '/models');
+define('ADHOC_ROUTES_FILE',        ADHOC_ROOT_PATH . '/app/routes');
+define('ADHOC_LOG_PATH',           ADHOC_ROOT_PATH . '/log');
+define('DEFAULT_CONTROLLERS_PATH', ADHOC_ROOT_PATH . '/app/controllers/');
+define('MEDIA_PATH',               ADHOC_ROOT_PATH . '/media');
 
 // chemin local
 define('IMG_CACHE_PATH', ADHOC_ROOT_PATH . '/static/cache');
@@ -107,9 +88,6 @@ define('IMG_CACHE_PATH', ADHOC_ROOT_PATH . '/static/cache');
 define('IMG_CACHE_URL', CACHE_URL);
 
 define('DB_ADHOC_DEFAULT', 1);
-
-define('TRAIL_ENABLED', true);
-define('ADHOC_COUNTERS', true);
 
 define('SMARTY_TEMPLATE_PATH',   ADHOC_ROOT_PATH . '/app/views');
 define('SMARTY_TEMPLATE_C_PATH', ADHOC_ROOT_PATH . '/smarty');
@@ -128,47 +106,8 @@ ini_set('arg_separator.output',  '&amp;');
 ini_set('session.use_trans_sid', '0');
 
 /**
- * Mini fonction de debug
- *
- * @param mixed $var variable
- *
- * @return void
- */
-function p(mixed $var)
-{
-    echo '<pre>' . print_r($var, true) . '</pre>';
-}
-
-/**
- * Mini fonction de debug
- *
- * @param mixed $var variable
- *
- * @return string
- */
-function d(mixed $var)
-{
-    die('<pre>' . print_r($var, true) . '</pre>');
-}
-
-/**
  * Chargement automatique des paquets gérés par composer
  */
 require_once ADHOC_ROOT_PATH . '/vendor/autoload.php';
-
-/**
- * Chargement automatique des classes métiers AD'HOC
- *
- * @param string $class_name Nom de la classe
- *
- * @return void
- */
-function autoload(string $class_name)
-{
-    if (file_exists(ADHOC_SITE_PATH . '/' . $class_name . '.class.php')) {
-        include_once ADHOC_SITE_PATH . '/' . $class_name . '.class.php';
-    }
-}
-spl_autoload_register('autoload');
 
 Tools::sessionInit();

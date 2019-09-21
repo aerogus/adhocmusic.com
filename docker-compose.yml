@@ -64,6 +64,7 @@ services:
       MYSQL_DATABASE: adhocmusic
       MYSQL_USER: adhocmusic
       MYSQL_PASSWORD: changeme
+      TZ: Europe/Paris
 
   # administration de la base de données
   pma:

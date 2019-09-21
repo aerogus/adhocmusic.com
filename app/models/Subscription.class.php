@@ -46,27 +46,27 @@ class Subscription extends ObjectModel
     /**
      * @var float
      */
-    protected $_amount = 0.0;
+    protected $_amount = NULL;
 
     /**
      * @var string
      */
-    protected $_first_name = '';
+    protected $_first_name = NULL;
 
     /**
      * @var string
      */
-    protected $_last_name = '';
+    protected $_last_name = NULL;
 
     /**
      * @var string
      */
-    protected $_email = '';
+    protected $_email = NULL;
 
     /**
      * @var string
      */
-    protected $_cp = '';
+    protected $_cp = NULL;
 
     /**
      * @var int
@@ -136,7 +136,7 @@ class Subscription extends ObjectModel
      *
      * @return bool
      */
-    function getAdult(): bool
+    function getAdult(): ?bool
     {
         return $this->_adult;
     }
@@ -146,7 +146,7 @@ class Subscription extends ObjectModel
      *
      * @return bool
      */
-    function getAmount(): float
+    function getAmount(): ?float
     {
         return $this->_amount;
     }
@@ -154,7 +154,7 @@ class Subscription extends ObjectModel
     /**
      * @return string
      */
-    function getFirstName(): string
+    function getFirstName(): ?string
     {
         return $this->_first_name;
     }
@@ -162,32 +162,38 @@ class Subscription extends ObjectModel
     /**
      * @return string
      */
-    function getLastName(): string
+    function getLastName(): ?string
     {
         return $this->_last_name;
+    }
+
+    /**
+     * @return string
+     */
+    function getEmail(): ?string
+    {
+        return $this->_email;
+    }
+
+    /**
+     * @return string
+     */
+    function getCp(): ?string
+    {
+        return $this->_cp;
+    }
+
+    /**
+     * @return int
+     */
+    function getIdContact(): ?int
+    {
+        return $this->_id_contact;
     }
 
     /* fin getters */
 
     /* début setters */
-
-    /**
-     * Test getter/setter
-     *
-     * @return bool|object
-     */
-    function isAdult(?bool $val)
-    {
-        if (is_null($val)) {
-            return (bool) $this->_adult;
-        } else {
-            if ($this->_adult !== $val) {
-                $this->_adult = $val;
-                $this->_modified_fields['adult'] = true;
-            }
-            return $this;
-        }
-    }
 
     /**
      * @param string $val val

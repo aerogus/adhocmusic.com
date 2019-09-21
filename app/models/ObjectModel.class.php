@@ -201,47 +201,51 @@ abstract class ObjectModel
 
             $sql = "INSERT INTO `" . static::$_table . "` (";
 
-            foreach ($this->_modified_fields as $field => $value) {
-                if ($value === true) {
-                    $sql .= "`" . $field . "`,";
-                }
-            }
-            $sql = substr($sql, 0, -1);
-            $sql .= ") VALUES (";
-
-            foreach ($this->_modified_fields as $field => $value) {
-                if ($value === true) {
-                    $att = '_' . $field;
-                    switch (static::$_all_fields[$field])
-                    {
-                        case 'num':
-                            $sql .= (int) $this->$att . ',';
-                            break;
-                        case 'float':
-                            $sql .= number_format((float) $this->$att, 8, '.', '') . ',';
-                            break;
-                        case 'str':
-                            $sql .= "'" . $db->escape($this->$att) . "',";
-                            break;
-                        case 'date':
-                            $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
-                            break;
-                        case 'bool':
-                            $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
-                            break;
-                        case 'pwd':
-                            $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
-                            break;
-                        case 'phpser':
-                            $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
-                            break;
-                        default:
-                            throw new Exception('invalid field type: ' . $type);
-                            break;
+            if (count($this->_modified_fields) > 0) {
+                foreach ($this->_modified_fields as $field => $value) {
+                    if ($value === true) {
+                        $sql .= "`" . $field . "`,";
                     }
                 }
+                $sql = substr($sql, 0, -1);
             }
-            $sql = substr($sql, 0, -1);
+            $sql .= ") VALUES (";
+
+            if (count($this->_modified_fields) > 0) {
+                foreach ($this->_modified_fields as $field => $value) {
+                    if ($value === true) {
+                        $att = '_' . $field;
+                        switch (static::$_all_fields[$field]) {
+                            case 'num':
+                                $sql .= (int) $this->$att . ',';
+                                break;
+                            case 'float':
+                                $sql .= number_format((float) $this->$att, 8, '.', '') . ',';
+                                break;
+                            case 'str':
+                                $sql .= "'" . $db->escape($this->$att) . "',";
+                                break;
+                            case 'date':
+                                $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                                break;
+                            case 'bool':
+                                $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
+                                break;
+                            case 'pwd':
+                                $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
+                                break;
+                            case 'phpser':
+                                $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
+                                break;
+                            default:
+                                throw new Exception('invalid field type: ' . $type);
+                                break;
+                        }
+                    }
+                }
+                $sql = substr($sql, 0, -1);
+            }
+
             $sql .= ")";
 
             $db->query($sql);
@@ -352,14 +356,25 @@ abstract class ObjectModel
         foreach ($data as $k => $v) {
             if (array_key_exists($k, $all_fields)) {
                 $att = '_' . $k;
-                if ($all_fields[$k] === 'phpser') {
-                    $this->$att = unserialize($v);
-                } elseif ($all_fields[$k] === 'num') {
-                    $this->$att = (int) $v;
-                } elseif ($all_fields[$k] === 'bool') {
-                    $this->$att = (bool) $v;
-                } else {
-                    $this->$att = $v;
+                switch ($all_fields[$k]) {
+                    case 'phpser':
+                        $this->$att = unserialize($v);
+                        break;
+                    case 'num':
+                        $this->$att = (int) $v;
+                        break;
+                    case 'float':
+                        $this->$att = (float) $v;
+                        break;
+                    case 'bool':
+                        $this->$att = (bool) $v;
+                        break;
+                    case 'str':
+                        $this->$att = (string) $v;
+                        break;
+                    case 'date':
+                    default:
+                        $this->$att = $v;
                 }
             }
         }
