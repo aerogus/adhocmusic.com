@@ -1,8 +1,6 @@
 {include file="common/header.tpl"}
 
-<div class="grid-2-small-1 has-gutter-l">
-
-  <div class="box two-thirds">
+  <div class="box">
     <header>
       <h1>Les Afterworks</h1>
     </header>
@@ -63,12 +61,7 @@
       </ol>
 
     </div>
-  </div>
 
-  <div class="one-third">
-  {include file="assoce/_sidebar.tpl"}
   </div>
-
-</div>
 
 {include file="common/footer.tpl"}

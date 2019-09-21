@@ -12,9 +12,10 @@ final class Controller
     {
         $smarty = new AdHocSmarty();
 
-        $lat = $_SESSION['lat'];
-        $lng = $_SESSION['lng'];
+        $smarty->enqueue_script('/js/lieux-index.js');
 
+        $lat =  48.6726957;
+        $lng = 2.3239693;
         Trail::getInstance()
             ->addStep("Lieux de diffusion", "/lieux/");
 
@@ -27,7 +28,7 @@ final class Controller
                 'limit'    => 25,
             ]
         );
-
+        $lieux_proches = [];
         $lieux_proches = array_slice($lieux_proches, 0, 5);
 
         $smarty->assign('lat', $lat);

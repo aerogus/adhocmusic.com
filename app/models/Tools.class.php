@@ -438,32 +438,7 @@ class Tools
             $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
         }
         if (!empty($_SESSION['ip']) && empty($_SESSION['host'])) {
-            //$_SESSION['host'] = gethostbyaddr($_SESSION['ip']);
             $_SESSION['host'] = $_SERVER['REMOTE_ADDR'];
-        }
-        $_SESSION['geoloc'] = '';
-        $_SESSION['lat'] = '';
-        $_SESSION['lng'] = '';
-        if (!empty($_SERVER['GEOIP_COUNTRY_CODE'])) {
-            $_SESSION['geoloc'] .= $_SERVER['GEOIP_COUNTRY_CODE'];
-        }
-        $_SESSION['geoloc'] .= '|';
-        if (!empty($_SERVER['GEOIP_REGION'])) {
-            $_SESSION['geoloc'] .= $_SERVER['GEOIP_REGION'];
-        }
-        $_SESSION['geoloc'] .= '|';
-        if (!empty($_SERVER['GEOIP_CITY'])) {
-            $_SESSION['geoloc'] .= $_SERVER['GEOIP_CITY'];
-        }
-        $_SESSION['geoloc'] .= '|';
-        if (!empty($_SERVER['GEOIP_LATITUDE'])) {
-            $_SESSION['geoloc'] .= $_SERVER['GEOIP_LATITUDE'];
-            $_SESSION['lat'] = $_SERVER['GEOIP_LATITUDE'];
-        }
-        $_SESSION['geoloc'] .= '|';
-        if (!empty($_SERVER['GEOIP_LONGITUDE'])) {
-            $_SESSION['geoloc'] .= $_SERVER['GEOIP_LONGITUDE'];
-            $_SESSION['lng'] = $_SERVER['GEOIP_LONGITUDE'];
         }
     }
 

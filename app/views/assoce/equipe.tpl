@@ -1,9 +1,5 @@
 {include file="common/header.tpl"}
 
-<div class="grid-2-small-1 has-gutter-l">
-
-  <div class="two-thirds">
-
     <div class="box">
       <header>
         <h1>L'Equipe</h1>
@@ -38,11 +34,5 @@
     </div>
 
   </div>
-
-  <div class="one-third">
-  {include file="assoce/_sidebar.tpl"}
-  </div>
-
-</div>
 
 {include file="common/footer.tpl"}

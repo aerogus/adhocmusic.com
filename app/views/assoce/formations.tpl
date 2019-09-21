@@ -1,8 +1,6 @@
 {include file="common/header.tpl"}
 
-<div class="grid-2-small-1 has-gutter-l">
-
-  <div class="box two-thirds">
+  <div class="box">
     <header>
       <h1>Formations Technique et sonorisation de concert</h1>
     </header>
@@ -69,13 +67,7 @@ Lieu: Epinay sur Orge <br>
 <li>Inscription via le site, <a href="/contact">page contact</a> en précisant votre email et numéro de téléphone.</li>
 </ul>
 
-    </div>
-  </div>
-
-  <div class="one-third">
-  {include file="assoce/_sidebar.tpl"}
-  </div>
-
+</div>
 </div>
 
 {include file="common/footer.tpl"}

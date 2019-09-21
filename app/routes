@@ -73,6 +73,7 @@ api|events|GET|/api/1.0/events
 assoce|assoce|GET|/assoce
 assoce|concerts|GET|/concerts
 assoce|afterworks|GET|/afterworks
+assoce|festival|GET|/festival
 assoce|formations|GET|/formations
 assoce|equipe|GET|/equipe
 audios|my|GET|/audios/my

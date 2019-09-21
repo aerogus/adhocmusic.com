@@ -2,74 +2,26 @@
 
 final class Controller
 {
+    /**
+     * @return string
+     */
     static function assoce(): string
     {
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
-        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
-        $smarty->enqueue_script('/js/assoce.js');
-
-        Trail::getInstance()
-            ->addStep("L'Association");
-
-        $smarty->assign(
-            'photos', Photo::getPhotos(
-                [
-                    'online' => true,
-                    'sort'   => 'random',
-                    'lieu'   => 1,
-                    'limit'  => 3,
-                ]
-            )
-        );
-
-        $smarty->assign(
-            'videos', Video::getVideos(
-                [
-                    'online' => true,
-                    'sort'   => 'random',
-                    'lieu'   => 1,
-                    'limit'  => 6,
-                ]
-            )
-        );
+        Trail::getInstance()->addStep("L'Association");
 
         return $smarty->fetch('assoce/presentation.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function concerts(): string
     {
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
-        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
-        $smarty->enqueue_script('/js/assoce.js');
-
-        Trail::getInstance()
-            ->addStep("Concerts");
-
-        $smarty->assign(
-            'photos', Photo::getPhotos(
-                [
-                    'online' => true,
-                    'sort'   => 'random',
-                    'lieu'   => 1,
-                    'limit'  => 3,
-                ]
-            )
-        );
-
-        $smarty->assign(
-            'videos', Video::getVideos(
-                [
-                    'online' => true,
-                    'sort'   => 'random',
-                    'lieu'   => 1,
-                    'limit'  => 6,
-                ]
-            )
-        );
+        Trail::getInstance()->addStep("Concerts");
 
         // tri antéchrono des saisons
         $smarty->assign('events', array_reverse(Event::getAdHocEventsBySeason()));
@@ -77,111 +29,52 @@ final class Controller
         return $smarty->fetch('assoce/concerts.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function afterworks(): string
     {
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
-        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
-        $smarty->enqueue_script('/js/assoce.js');
-
-        Trail::getInstance()
-            ->addStep("Afterworks");
-
-        $smarty->assign(
-            'photos', Photo::getPhotos(
-                [
-                    'online' => true,
-                    'sort'   => 'random',
-                    'lieu'   => 1,
-                    'limit'  => 3,
-                ]
-            )
-        );
-
-        $smarty->assign(
-            'videos', Video::getVideos(
-                [
-                    'online' => true,
-                    'sort'   => 'random',
-                    'lieu'   => 1,
-                    'limit'  => 6,
-                ]
-            )
-        );
+        Trail::getInstance()->addStep("Afterworks");
 
         $smarty->assign('events', array_reverse(Event::getAdHocEventsBySeason(), true));
 
         return $smarty->fetch('assoce/afterworks.tpl');
     }
 
+    /**
+     * @return string
+     */
+    static function festival(): string
+    {
+        $smarty = new AdHocSmarty();
+
+        Trail::getInstance()->addStep("Festival");
+
+        return $smarty->fetch('assoce/festival.tpl');
+    }
+
+    /**
+     * @return string
+     */
     static function formations(): string
     {
         $smarty = new AdHocSmarty();
-        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
-        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
-        $smarty->enqueue_script('/js/assoce.js');
 
-        Trail::getInstance()
-            ->addStep("Formation");
-
-        $smarty->assign(
-            'photos', Photo::getPhotos(
-                [
-                    'online' => true,
-                    'sort'   => 'random',
-                    'lieu'   => 1,
-                    'limit'  => 3,
-                ]
-            )
-        );
-
-        $smarty->assign(
-            'videos', Video::getVideos(
-                [
-                    'online' => true,
-                    'sort'   => 'random',
-                    'lieu'   => 1,
-                    'limit'  => 6,
-                ]
-            )
-        );
+        Trail::getInstance()->addStep("Formation");
 
         return $smarty->fetch('assoce/formations.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function equipe(): string
     {
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
-        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
-        $smarty->enqueue_script('/js/assoce.js');
-
-        Trail::getInstance()
-            ->addStep("Équipe");
-
-        $smarty->assign(
-            'photos', Photo::getPhotos(
-                [
-                    'online' => true,
-                    'sort'   => 'random',
-                    'lieu'   => 1,
-                    'limit'  => 3,
-                ]
-            )
-        );
-
-        $smarty->assign(
-            'videos', Video::getVideos(
-                [
-                    'online' => true,
-                    'sort'   => 'random',
-                    'lieu'   => 1,
-                    'limit'  => 6,
-                ]
-            )
-        );
+        Trail::getInstance()->addStep("Équipe");
 
         $smarty->assign('membres', MembreAdhoc::getStaff(true));
         $smarty->assign('omembres', MembreAdhoc::getStaff(false));
