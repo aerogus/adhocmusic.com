@@ -710,10 +710,6 @@ class Event extends ObjectModel
 
         $lat = 0;
         $lng = 0;
-        if (!empty($_SESSION)) {
-            $lat = (float) $_SESSION['lat'];
-            $lng = (float) $_SESSION['lng'];
-        }
 
         // traitement des params complexes
         foreach (['lieu', 'style', 'groupe', 'structure', 'id', 'departement', 'contact'] as $n) {
@@ -730,13 +726,6 @@ class Event extends ObjectModel
             }
         }
 
-        $lat = 0;
-        $lng = 0;
-        if (!empty($_SESSION)) {
-            $lat = (float) $_SESSION['lat'];
-            $lng = (float) $_SESSION['lng'];
-        }
-
         $db = DataBase::getInstance();
 
         $sql = "SELECT DISTINCT `e`.`id_event` AS `id`, `e`.`name`, "
@@ -745,7 +734,7 @@ class Event extends ObjectModel
              . "`e`.`nb_photos`, `e`.`nb_audios`, `e`.`nb_videos`, "
              . "`l`.`id_lieu` AS `lieu_id`, `l`.`name` AS `lieu_name`, "
              . "`l`.`city` AS `lieu_city`, `l`.`id_departement` AS `lieu_id_departement`, "
-            // . "FORMAT(get_distance_metres('" . number_format($lat, 8, '.', '') . "', '" . number_format($lng, 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `lieu_distance`, "
+             . "FORMAT(get_distance_metres('" . number_format($lat, 8, '.', '') . "', '" . number_format($lng, 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `lieu_distance`, "
              . "`l`.`address` AS `lieu_address`, `l`.`cp` AS `lieu_cp`, `l`.`id_country` AS `lieu_country`, "
              . "`s`.`id_structure` AS `structure_id`, `s`.`name` AS `structure_name`, "
              . "`m`.`id_contact` AS `membre_id`, `m`.`pseudo` AS `membre_pseudo` "
@@ -863,8 +852,7 @@ class Event extends ObjectModel
              . "FROM `" . self::$_db_table_event . "` "
              . "WHERE `id_event` = " . (int) $this->_id_event;
 
-        if (($res = $db->queryWithFetchFirstRow($sql)))
-        {
+        if (($res = $db->queryWithFetchFirstRow($sql))) {
             $this->_dbToObject($res);
 
             if (file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
