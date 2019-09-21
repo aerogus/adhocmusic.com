@@ -1,7 +1,5 @@
 {include file="common/header.tpl"}
 
-<div class="txtcenter italic mas">Association œuvrant pour le développement des musiques actuelles à Épinay-sur-Orge (Essonne) depuis 1998</div>
-
 <div id="swipe" class="swipe clearfix mbs">
   <ul class="swipe-wrap">
     {foreach from=$featured key=idx item=f}

@@ -19,7 +19,7 @@
       {/foreach}
       <div class="concerts">
         <h3>Saisons 1994 à 1997</h3>
-        <p>C'est très flou, il y a eu quelques concerts à cette époque, sous le nom de l'association Casimir (ou dépendant directement du comité des fêtes d'Epinay sur Orge), mais je n'ai plus de traces des flyers. Si vous avez des infos contactez nous pour nos archives :)</p>
+        <p>C’est très flou, il y a eu quelques concerts à cette époque, sous le nom de l’association Casimir (ou dépendant directement du comité des fêtes d’Épinay sur Orge), mais je n’ai plus de traces des flyers. Si vous avez des infos contactez nous pour nos archives :)</p>
       </div>
     </div>
   </div>{* .box *}

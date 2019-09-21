@@ -30,14 +30,6 @@
       {/foreach}
       </tbody>
     </table>
-    <p>Pour accéder au FTP, vous pouvez aussi utiliser <a href="http://filezilla-project.org/download.php?type=client">FileZilla</a>.<br />
-    Host: <strong>ftp.adhocmusic.com</strong>, Login: <strong>adhoc</strong>, Password: <strong>squallpowa</strong>, Port: <strong>21</strong></p>
-    <p>Vous pouvez aussi accéder au FTP par webdav à l'adresse <a href="https://ftp.adhocmusic.com">https://ftp.adhocmusic.com</a>. L'avantage
-    est qu'on peut monter un lecteur réseau (nativement sous MacOSX ou Linux, avec <a href="http://www.netdrive.net">NetDrive sous Windows)</a></p>
-    <ul class="admlinks">
-      <li><a href="ftp://adhoc:squallpowa@ftp.adhocmusic.com">Listing FTP</a></li>
-    </ul>
-
   </div>
 </div>
 

@@ -2,10 +2,10 @@
 
     <div class="box">
       <header>
-        <h1>L'Equipe</h1>
+        <h1>L’Équipe</h1>
       </header>
       <div>
-        <p>Voici les forces actives de l'association pour la saison 2018/2019</p>
+        <p>Voici les forces actives de l’association pour la saison 2018/2019</p>
         <ul class="staff">
           {foreach from=$membres item=membre}
           <li>
@@ -23,7 +23,7 @@
         <h1>Les anciens</h1>
       </header>
       <div>
-        <p>De 1996 à aujourd'hui, nombre de bénévoles ont participé à l'aventure AD'HOC de près ou de loin. Qu'ils en soient remerciés:</p>
+        <p>De 1996 à aujourd’hui, nombre de bénévoles ont participé à l’aventure AD’HOC de près ou de loin. Qu’ils en soient remerciés:</p>
         <p>
           {foreach from=$omembres item=membre}
           <strong>{$membre.first_name|escape} {$membre.last_name|escape}</strong> ({$membre.datdeb|date_format:'%Y'} à {$membre.datfin|date_format:'%Y'}),

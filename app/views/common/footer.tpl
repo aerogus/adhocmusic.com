@@ -2,34 +2,35 @@
 </div>{* .site-content *}
 
 <footer>
-<ul class="footer clearfix">
-  <li>
-    <ul>
-      <li><h4>Qui sommes-nous ?</h4></li>
-      <li><a href="/assoce">L’Association</a></li>
-      <li><a href="/concerts">Nos Concerts</a></li>
-      <li><a href="/equipe">L’Équipe</a></li>
-      <li><a href="/mentions-legales">Mentions légales</a></li>
-    </ul>
-  </li>
-  <li>
-    <ul>
-      <li><h4>Suivez nous</h4></li>
-      <li class="facebook"><a href="https://facebook.com/adhocmusic" title="@adhocmusic sur Facebook">@adhocmusic</a></li>
-      <li class="twitter"><a href="https://twitter.com/adhocmusic" title="@adhocmusic sur Twitter">@adhocmusic</a></li>
-      <li class="instagram"><a href="https://instagram.com/adhoc.music" title="@adhoc.music sur Instagram">@adhoc.music</a></li>
-      <li class="email"><a href="https://www.adhocmusic.com/newsletters/subscriptions" title="Abonnement à la newsletter">Newsletter</a></li>
-    </ul>
-  </li>
-  <li>
-    <ul>
-      <li><h4>Contact</h4></li>
-      <li><a href="/contact">Contactez-nous</a></li>
-      <li><a href="/partners">Partenaires</a></li>
-      <li><a href="/map">Plan du site</a></li>
-    </ul>
-  </li>
-</ul>
+  <ul class="footer clearfix">
+    <li>
+      <ul>
+        <li><h4>Qui sommes-nous ?</h4></li>
+        <li><a href="/assoce">L’Association</a></li>
+        <li><a href="/concerts">Nos Concerts</a></li>
+        <li><a href="/equipe">L’Équipe</a></li>
+        <li><a href="/mentions-legales">Mentions légales</a></li>
+      </ul>
+    </li>
+    <li>
+      <ul>
+        <li><h4>Suivez nous</h4></li>
+        <li class="facebook"><a href="https://facebook.com/adhocmusic" title="@adhocmusic sur Facebook">@adhocmusic</a></li>
+        <li class="twitter"><a href="https://twitter.com/adhocmusic" title="@adhocmusic sur Twitter">@adhocmusic</a></li>
+        <li class="instagram"><a href="https://instagram.com/adhoc.music" title="@adhoc.music sur Instagram">@adhoc.music</a></li>
+        <li class="email"><a href="https://www.adhocmusic.com/newsletters/subscriptions" title="Abonnement à la newsletter">Newsletter</a></li>
+      </ul>
+    </li>
+    <li>
+      <ul>
+        <li><h4>Contact</h4></li>
+        <li><a href="/contact">Contactez-nous</a></li>
+        <li><a href="/partners">Partenaires</a></li>
+        <li><a href="/map">Plan du site</a></li>
+      </ul>
+    </li>
+  </ul>
+  <div class="txtcenter italic mas">Association œuvrant pour le développement des musiques actuelles à Épinay-sur-Orge depuis 1996</div>
 </footer>
 
 <button type="button" id="up" name="retour en haut de la page">↑</button>
