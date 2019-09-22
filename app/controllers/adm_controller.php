@@ -545,7 +545,7 @@ final class Controller
 
             $cpt = 0;
             while (list($grp_style_id, $grp_style_ordre) = $db->fetchRow($res)) {
-                $tab_groupes[$id_grp]['styles'][$grp_style_ordre] = Style::getName($grp_style_id);
+                $tab_groupes[$id_grp]['styles'][$grp_style_ordre] = Style::getName((int) $grp_style_id);
                 $cpt++;
             }
             if ($cpt > 0) {

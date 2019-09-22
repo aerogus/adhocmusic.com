@@ -136,7 +136,7 @@ class ForumPrive extends Forum
 
         $sql = "SELECT `id_forum` "
              . "FROM `adhoc_forum_prive_subscriber` "
-             . "WHERE `id_contact` = " . (int) $db->escape($id_contact);
+             . "WHERE `id_contact` = " . (int) $id_contact;
 
         $forums = $db->queryWithFetchFirstFields($sql);
 

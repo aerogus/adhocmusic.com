@@ -462,7 +462,7 @@ class Photo extends Media
      *
      * @return string
      */
-    static function getPhotoUrl(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', int $border = 0, int $zoom = 0): string
+    static function getPhotoUrl(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = false): string
     {
         $uid = 'photo/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
