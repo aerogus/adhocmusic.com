@@ -193,8 +193,10 @@ class DataBase
      * Renvoie une instance de l'objet, en re-utilisant une
      * existante si possible. Attention: appeller le constructeur soit meme
      * sans passer par cette fonction ecrasera toute instance stockee
+     *
+     * @return object
      */
-    static function getInstance()
+    static function getInstance(): object
     {
         if (is_null(self::$_instance)) {
             return new DataBase();

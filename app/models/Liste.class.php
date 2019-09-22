@@ -33,9 +33,9 @@ abstract class Liste
     }
 
     /**
-     *
+     * @return object
      */
-    static function getInstance()
+    static function getInstance(): object
     {
         //if (is_null(static::$_instance)) {
             return new static();

@@ -44,9 +44,9 @@ class Messagerie extends ObjectModel
     }
 
     /**
-     *
+     * @return object
      */
-    static function getInstance($id_contact)
+    static function getInstance($id_contact): object
     {
         if (is_null(self::$_instance)) {
             return new Messagerie($id_contact);

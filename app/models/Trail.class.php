@@ -21,9 +21,9 @@ class Trail
     protected $_path = [];
 
     /**
-     *
+     * @return object
      */
-    static function getInstance()
+    static function getInstance(): object
     {
         if (is_null(self::$_instance)) {
             return new Trail();
