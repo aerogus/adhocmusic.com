@@ -90,15 +90,15 @@ final class Controller
 
                 if (empty($errors)) {
 
-                    $membre = Membre::init();
-                    $membre->setEmail($data['email']);
-                    $membre->setPseudo($data['pseudo']);
-                    $membre->setPassword($data['password']);
-                    $membre->setLastName($data['last_name']);
-                    $membre->setFirstName($data['first_name']);
-                    $membre->setMailing($data['mailing']);
-                    $membre->setLevel(Membre::TYPE_STANDARD);
-                    $membre->setCreatedNow();
+                    $membre = Membre::init()
+                        ->setEmail($data['email'])
+                        ->setPseudo($data['pseudo'])
+                        ->setPassword($data['password'])
+                        ->setLastName($data['last_name'])
+                        ->setFirstName($data['first_name'])
+                        ->setMailing($data['mailing'])
+                        ->setLevel(Membre::TYPE_STANDARD)
+                        ->setCreatedNow();
 
                     if ($membre->save()) {
                         Email::send($data['email'], "Inscription à l'Association AD'HOC", 'member-create', $data);
@@ -170,25 +170,24 @@ final class Controller
 
             if (self::_validate_form_member_edit($data, $errors)) {
 
-                $member->setLastName($data['last_name']);
-                $member->setFirstName($data['first_name']);
-                $member->setAddress($data['address']);
-                $member->setCp($data['cp']);
-                $member->setCity($data['city']);
-                $member->setCountry($data['country']);
-                $member->setIdCity($data['id_city']);
-                $member->setIdDepartement($data['id_departement']);
-                $member->setIdRegion($data['id_region']);
-                $member->setIdCountry($data['id_country']);
-                $member->setTel($data['tel']);
-                $member->setPort($data['port']);
-                $member->setText($data['text']);
-                $member->setEmail($data['email']);
-                $member->setSite($data['site']);
-                $member->setMailing($data['mailing']);
-                $member->setModifiedNow();
-
-                $member->save();
+                $member->setLastName($data['last_name'])
+                    ->setFirstName($data['first_name'])
+                    ->setAddress($data['address'])
+                    ->setCp($data['cp'])
+                    ->setCity($data['city'])
+                    ->setCountry($data['country'])
+                    ->setIdCity($data['id_city'])
+                    ->setIdDepartement($data['id_departement'])
+                    ->setIdRegion($data['id_region'])
+                    ->setIdCountry($data['id_country'])
+                    ->setTel($data['tel'])
+                    ->setPort($data['port'])
+                    ->setText($data['text'])
+                    ->setEmail($data['email'])
+                    ->setSite($data['site'])
+                    ->setMailing($data['mailing'])
+                    ->setModifiedNow()
+                    ->save();
 
                 if ($member->isInterne()) {
                     $forum = Route::params('forum');

@@ -367,11 +367,11 @@ class Photo extends Media
         if ($res = $db->queryWithFetch($sql)) {
             foreach ($res as $_res) {
                 $tab[$cpt] = $_res;
-                $tab[$cpt]['url'] = Photo::getUrlById($_res['id']);
-                $tab[$cpt]['thumb_80_80']   = Photo::getPhotoUrl($_res['id'],  80,  80, '000000', false,  true);
-                $tab[$cpt]['thumb_130_130'] = Photo::getPhotoUrl($_res['id'], 130, 130, '000000', false, false);
-                $tab[$cpt]['thumb_400_300'] = Photo::getPhotoUrl($_res['id'], 400, 300, '000000', false, false);
-                $tab[$cpt]['thumb_680_600'] = Photo::getPhotoUrl($_res['id'], 680, 600, '000000', false, false);
+                $tab[$cpt]['url'] = Photo::getUrlById((int) $_res['id']);
+                $tab[$cpt]['thumb_80_80']   = Photo::getPhotoUrl((int) $_res['id'],  80,  80, '000000', false,  true);
+                $tab[$cpt]['thumb_130_130'] = Photo::getPhotoUrl((int) $_res['id'], 130, 130, '000000', false, false);
+                $tab[$cpt]['thumb_400_300'] = Photo::getPhotoUrl((int) $_res['id'], 400, 300, '000000', false, false);
+                $tab[$cpt]['thumb_680_600'] = Photo::getPhotoUrl((int) $_res['id'], 680, 600, '000000', false, false);
                 $cpt++;
             }
         }
@@ -462,7 +462,7 @@ class Photo extends Media
      *
      * @return string
      */
-    static function getPhotoUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0): string
+    static function getPhotoUrl(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', int $border = 0, int $zoom = 0): string
     {
         $uid = 'photo/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);

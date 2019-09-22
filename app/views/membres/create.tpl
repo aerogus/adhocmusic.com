@@ -55,7 +55,7 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
     </li>
     <li>
       <label for="mailing">Newsletter</label>
-      <span><input id="mailing" name="mailing" type="checkbox"{if !empty($data.mailing)} checked="checked"{/if}> J'accepte de recevoir la lettre d'information mensuelle de l'association.</span>
+      <span><input id="mailing" name="mailing" type="checkbox"{if !empty($data.mailing)} checked="checked"{/if}> J'accepte de recevoir les lettres d'information de l'association.</span>
     </li>
   </ul>
   <input type="hidden" name="csrf" value="{$data.csrf}">

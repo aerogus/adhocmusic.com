@@ -126,7 +126,7 @@ class Log
     /**
      *
      */
-    static function action($action, $extra = '')
+    static function action(int $action, $extra = null)
     {
         $db = DataBase::getInstance();
 
@@ -146,6 +146,8 @@ class Log
         if (!empty($_SESSION['host'])) {
             $host = $_SESSION['host'];
         }
+
+        $extra = (string) $extra;
 
         self::_write('action', 'membre=' . $pseudo . ' (' . $id_contact . ') - action=' . self::$_actions[$action] . ' -  extra=' . $extra);
 

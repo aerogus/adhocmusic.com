@@ -1,20 +1,22 @@
-CREATE TABLE `adhoc_alerting` (
-  `id_alerting` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_alerting` (
+  `id_alerting` int(11) NOT NULL AUTO_INCREMENT,
   `id_contact` int(11) NOT NULL,
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `active` tinyint(4) NOT NULL,
+  `active` tinyint(1) NOT NULL,
   `type` char(1) NOT NULL,
-  `id_content` int(11) NOT NULL
+  `id_content` int(11) NOT NULL,
+  PRIMARY KEY (`id_alerting`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_appartient_a` (
+CREATE TABLE IF NOT EXISTS `adhoc_appartient_a` (
   `id_contact` int(11) NOT NULL DEFAULT '0',
   `id_groupe` int(11) NOT NULL DEFAULT '0',
-  `id_type_musicien` int(11) NOT NULL DEFAULT '1'
+  `id_type_musicien` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_contact`,`id_groupe`,`id_type_musicien`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_audio` (
-  `id_audio` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_audio` (
+  `id_audio` int(11) NOT NULL AUTO_INCREMENT,
   `id_contact` int(11) NOT NULL DEFAULT '1',
   `id_groupe` int(11) NOT NULL DEFAULT '0',
   `id_lieu` int(11) NOT NULL DEFAULT '0',
@@ -24,11 +26,18 @@ CREATE TABLE `adhoc_audio` (
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_on` datetime DEFAULT NULL,
   `online` tinyint(1) NOT NULL DEFAULT '0',
-  `mime` varchar(100) NOT NULL
+  `mime` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_audio`),
+  KEY `id_groupe` (`id_groupe`),
+  KEY `id_lieu` (`id_lieu`),
+  KEY `id_structure` (`id_structure`),
+  KEY `id_contact` (`id_contact`),
+  KEY `hash` (`mime`),
+  KEY `id_event` (`id_event`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_cms` (
-  `id_cms` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_cms` (
+  `id_cms` int(11) NOT NULL AUTO_INCREMENT,
   `alias` varchar(64) NOT NULL,
   `menuselected` varchar(16) NOT NULL,
   `breadcrumb` varchar(250) NOT NULL,
@@ -37,11 +46,13 @@ CREATE TABLE `adhoc_cms` (
   `modified_on` datetime DEFAULT NULL,
   `content` longtext NOT NULL,
   `online` tinyint(1) NOT NULL,
-  `auth` int(11) NOT NULL
+  `auth` int(11) NOT NULL,
+  PRIMARY KEY (`id_cms`),
+  UNIQUE KEY `alias` (`alias`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_comment` (
-  `id_comment` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_comment` (
+  `id_comment` int(11) NOT NULL AUTO_INCREMENT,
   `type` char(1) NOT NULL,
   `id_content` int(11) NOT NULL,
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -50,17 +61,20 @@ CREATE TABLE `adhoc_comment` (
   `id_contact` int(11) NOT NULL,
   `pseudo` varchar(50) DEFAULT NULL,
   `email` varchar(80) DEFAULT NULL,
-  `text` text NOT NULL
+  `text` text NOT NULL,
+  PRIMARY KEY (`id_comment`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_contact` (
-  `id_contact` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_contact` (
+  `id_contact` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(150) DEFAULT NULL,
-  `lastnl` datetime DEFAULT NULL
+  `lastnl` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_contact`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_event` (
-  `id_event` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_event` (
+  `id_event` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `date` datetime DEFAULT NULL,
   `text` text NOT NULL,
@@ -74,17 +88,21 @@ CREATE TABLE `adhoc_event` (
   `modified_on` datetime DEFAULT NULL,
   `nb_photos` int(11) NOT NULL DEFAULT '0',
   `nb_audios` int(11) NOT NULL DEFAULT '0',
-  `nb_videos` int(11) NOT NULL DEFAULT '0'
+  `nb_videos` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_event`),
+  KEY `id_lieu` (`id_lieu`),
+  KEY `id_contact` (`id_contact`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_event_style` (
+CREATE TABLE IF NOT EXISTS `adhoc_event_style` (
   `id_event` int(11) NOT NULL DEFAULT '0',
   `id_style` int(11) NOT NULL DEFAULT '0',
-  `ordre` int(11) NOT NULL DEFAULT '1'
+  `ordre` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_event`,`id_style`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_exposant` (
-  `id_exposant` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_exposant` (
+  `id_exposant` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `phone` varchar(100) NOT NULL,
@@ -94,18 +112,21 @@ CREATE TABLE `adhoc_exposant` (
   `description` mediumtext NOT NULL,
   `state` mediumtext NOT NULL,
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified_on` datetime DEFAULT NULL
+  `modified_on` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_exposant`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_faq` (
-  `id_faq` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_faq` (
+  `id_faq` int(11) NOT NULL AUTO_INCREMENT,
   `id_category` int(11) NOT NULL,
-  `question` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `answer` text CHARACTER SET latin1 NOT NULL
+  `question` varchar(255) NOT NULL,
+  `answer` text NOT NULL,
+  PRIMARY KEY (`id_faq`),
+  KEY `id_category` (`id_category`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_featured` (
-  `id_featured` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_featured` (
+  `id_featured` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `description` varchar(100) NOT NULL,
   `link` varchar(100) NOT NULL,
@@ -113,10 +134,11 @@ CREATE TABLE `adhoc_featured` (
   `datdeb` datetime NOT NULL,
   `datfin` datetime NOT NULL,
   `slot` int(11) NOT NULL,
-  `online` tinyint(1) NOT NULL
+  `online` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id_featured`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_forum_prive_info` (
+CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_info` (
   `id_forum` char(1) NOT NULL,
   `title` varchar(50) NOT NULL,
   `description` tinytext NOT NULL,
@@ -124,25 +146,29 @@ CREATE TABLE `adhoc_forum_prive_info` (
   `nb_threads` int(11) NOT NULL DEFAULT '0',
   `id_thread` int(11) DEFAULT NULL,
   `id_contact` int(11) NOT NULL,
-  `date` datetime NOT NULL
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id_forum`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_forum_prive_message` (
-  `id_message` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_message` (
+  `id_message` int(11) NOT NULL AUTO_INCREMENT,
   `id_thread` int(11) NOT NULL,
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_on` datetime DEFAULT NULL,
   `created_by` int(11) NOT NULL,
   `modified_by` int(11) DEFAULT NULL,
-  `text` text CHARACTER SET utf8 NOT NULL
+  `text` text NOT NULL,
+  PRIMARY KEY (`id_message`),
+  KEY `id_thread` (`id_thread`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `adhoc_forum_prive_subscriber` (
+CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_subscriber` (
   `id_forum` char(1) NOT NULL,
-  `id_contact` int(11) NOT NULL
+  `id_contact` int(11) NOT NULL,
+  UNIQUE KEY `id_forum` (`id_forum`,`id_contact`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_forum_prive_thread` (
+CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_thread` (
   `id_forum` char(1) NOT NULL,
   `id_thread` int(11) NOT NULL,
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -152,12 +178,14 @@ CREATE TABLE `adhoc_forum_prive_thread` (
   `nb_messages` int(11) NOT NULL DEFAULT '0',
   `nb_views` int(11) NOT NULL DEFAULT '0',
   `subject` varchar(200) NOT NULL,
-  `online` tinyint(1) NOT NULL DEFAULT NULL,
-  `closed` tinyint(1) NOT NULL DEFAULT NULL
+  `online` tinyint(1) NOT NULL DEFAULT '0',
+  `closed` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_thread`),
+  KEY `id_forum` (`id_forum`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_groupe` (
-  `id_groupe` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_groupe` (
+  `id_groupe` int(11) NOT NULL AUTO_INCREMENT,
   `alias` varchar(50) DEFAULT NULL,
   `name` varchar(250) NOT NULL,
   `style` varchar(250) NOT NULL DEFAULT '',
@@ -179,17 +207,22 @@ CREATE TABLE `adhoc_groupe` (
   `datfin` date DEFAULT NULL,
   `comment` text NOT NULL,
   `etat` int(11) NOT NULL DEFAULT '1',
-  `template` tinytext NOT NULL
+  `template` tinytext NOT NULL,
+  PRIMARY KEY (`id_groupe`),
+  UNIQUE KEY `alias` (`alias`),
+  KEY `id_departement` (`id_departement`),
+  KEY `facebook_page_id` (`facebook_page_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_groupe_style` (
+CREATE TABLE IF NOT EXISTS `adhoc_groupe_style` (
   `id_groupe` int(11) NOT NULL DEFAULT '0',
   `id_style` int(11) NOT NULL DEFAULT '0',
-  `ordre` int(11) NOT NULL DEFAULT '1'
+  `ordre` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_groupe`,`id_style`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_lieu` (
-  `id_lieu` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_lieu` (
+  `id_lieu` int(11) NOT NULL AUTO_INCREMENT,
   `id_type` int(11) NOT NULL DEFAULT '1',
   `name` varchar(250) NOT NULL,
   `address` varchar(100) NOT NULL,
@@ -210,10 +243,15 @@ CREATE TABLE `adhoc_lieu` (
   `online` tinyint(1) NOT NULL DEFAULT '0',
   `lat` float DEFAULT NULL,
   `lng` float DEFAULT NULL,
-  `facebook_page_id` char(20) DEFAULT NULL
+  `facebook_page_id` char(20) DEFAULT NULL,
+  PRIMARY KEY (`id_lieu`),
+  KEY `id_departement` (`id_departement`),
+  KEY `id_pays` (`id_country`),
+  KEY `lat` (`lat`,`lng`),
+  KEY `id_region` (`id_region`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_log_action` (
+CREATE TABLE IF NOT EXISTS `adhoc_log_action` (
   `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `action` bigint(20) NOT NULL,
   `id_contact` int(11) NOT NULL,
@@ -222,7 +260,7 @@ CREATE TABLE `adhoc_log_action` (
   `extra` tinytext
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_membre` (
+CREATE TABLE IF NOT EXISTS `adhoc_membre` (
   `id_contact` int(11) NOT NULL,
   `pseudo` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
@@ -246,41 +284,51 @@ CREATE TABLE `adhoc_membre` (
   `level` tinyint(4) NOT NULL DEFAULT '1',
   `facebook_profile_id` bigint(20) UNSIGNED DEFAULT NULL,
   `facebook_access_token` text,
-  `facebook_auto_login` tinyint(4) NOT NULL,
+  `facebook_auto_login` tinyint(1) NOT NULL,
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
   `modified_on` datetime DEFAULT NULL,
-  `visited_on` datetime DEFAULT NULL
+  `visited_on` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_contact`),
+  KEY `cp_membre` (`cp`),
+  KEY `facebook_uid` (`facebook_profile_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_membre_adhoc` (
+CREATE TABLE IF NOT EXISTS `adhoc_membre_adhoc` (
   `id_contact` int(11) NOT NULL DEFAULT '0',
   `function` varchar(50) NOT NULL,
   `birth_date` date DEFAULT NULL,
   `datdeb` date DEFAULT NULL,
   `datfin` date DEFAULT NULL,
-  `active` tinyint(4) NOT NULL DEFAULT '1',
-  `rank` tinyint(4) NOT NULL DEFAULT '0'
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `rank` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_contact`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_messagerie` (
-  `id_pm` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_messagerie` (
+  `id_pm` int(11) NOT NULL AUTO_INCREMENT,
   `from` int(11) NOT NULL DEFAULT '0',
   `to` int(11) NOT NULL DEFAULT '0',
   `text` text NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `read` tinyint(1) NOT NULL DEFAULT '0',
   `del_from` tinyint(1) NOT NULL DEFAULT '0',
-  `del_to` tinyint(1) NOT NULL DEFAULT '0'
+  `del_to` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_pm`),
+  KEY `from` (`from`),
+  KEY `to` (`to`),
+  KEY `del_from` (`del_from`),
+  KEY `del_to` (`del_to`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_newsletter` (
-  `id_newsletter` tinyint(4) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_newsletter` (
+  `id_newsletter` tinyint(4) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `content` text NOT NULL,
-  `html` text NOT NULL
+  `html` text NOT NULL,
+  PRIMARY KEY (`id_newsletter`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `adhoc_newsletter_hit` (
+CREATE TABLE IF NOT EXISTS `adhoc_newsletter_hit` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_newsletter` int(11) NOT NULL,
   `id_contact` int(11) NOT NULL,
@@ -290,18 +338,20 @@ CREATE TABLE `adhoc_newsletter_hit` (
   `useragent` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_organise_par` (
+CREATE TABLE IF NOT EXISTS `adhoc_organise_par` (
   `id_event` int(11) NOT NULL,
-  `id_structure` int(11) NOT NULL
+  `id_structure` int(11) NOT NULL,
+  PRIMARY KEY (`id_event`,`id_structure`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_participe_a` (
+CREATE TABLE IF NOT EXISTS `adhoc_participe_a` (
   `id_event` int(11) NOT NULL,
-  `id_groupe` int(11) NOT NULL
+  `id_groupe` int(11) NOT NULL,
+  PRIMARY KEY (`id_event`,`id_groupe`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_photo` (
-  `id_photo` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_photo` (
+  `id_photo` int(11) NOT NULL AUTO_INCREMENT,
   `id_contact` int(11) NOT NULL DEFAULT '1',
   `id_groupe` int(11) NOT NULL DEFAULT '0',
   `id_lieu` int(11) NOT NULL DEFAULT '0',
@@ -313,10 +363,16 @@ CREATE TABLE `adhoc_photo` (
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
   `modified_on` datetime DEFAULT NULL,
   `online` tinyint(1) NOT NULL DEFAULT '0',
-  `credits` varchar(200) NOT NULL DEFAULT ''
+  `credits` varchar(200) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id_photo`),
+  KEY `id_groupe` (`id_groupe`),
+  KEY `id_lieu` (`id_lieu`),
+  KEY `id_structure` (`id_structure`),
+  KEY `id_contact` (`id_contact`),
+  KEY `id_event` (`id_event`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_statsnl` (
+CREATE TABLE IF NOT EXISTS `adhoc_statsnl` (
   `id_contact` int(11) NOT NULL,
   `email` varchar(100) NOT NULL DEFAULT '',
   `pseudo` varchar(50) NOT NULL,
@@ -327,8 +383,8 @@ CREATE TABLE `adhoc_statsnl` (
   `id_newsletter` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_structure` (
-  `id_structure` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_structure` (
+  `id_structure` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
   `address` tinytext NOT NULL,
   `cp` varchar(10) NOT NULL DEFAULT '',
@@ -339,11 +395,14 @@ CREATE TABLE `adhoc_structure` (
   `text` text NOT NULL,
   `site` varchar(250) NOT NULL DEFAULT '',
   `email` varchar(250) NOT NULL DEFAULT '',
-  `id_country` char(2) NOT NULL DEFAULT 'FR'
+  `id_country` char(2) NOT NULL DEFAULT 'FR',
+  PRIMARY KEY (`id_structure`),
+  KEY `id_departement` (`id_departement`),
+  KEY `id_pays` (`id_country`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_subscription` (
-  `id_subscription` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_subscription` (
+  `id_subscription` int(11) NOT NULL AUTO_INCREMENT,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `subscribed_at` date NOT NULL,
   `adult` tinyint(1) DEFAULT NULL,
@@ -352,11 +411,13 @@ CREATE TABLE `adhoc_subscription` (
   `last_name` varchar(250) DEFAULT NULL,
   `email` varchar(150) DEFAULT NULL,
   `cp` varchar(10) DEFAULT '',
-  `id_contact` int(11) DEFAULT NULL
+  `id_contact` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_subscription`),
+  KEY `id_contact` (`id_contact`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `adhoc_video` (
-  `id_video` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adhoc_video` (
+  `id_video` int(11) NOT NULL AUTO_INCREMENT,
   `id_contact` int(11) NOT NULL DEFAULT '1',
   `id_host` tinyint(4) NOT NULL DEFAULT '1',
   `reference` varchar(50) NOT NULL DEFAULT '',
@@ -371,175 +432,44 @@ CREATE TABLE `adhoc_video` (
   `online` tinyint(1) NOT NULL DEFAULT '0',
   `width` mediumint(9) NOT NULL DEFAULT '0',
   `height` mediumint(9) NOT NULL DEFAULT '0',
-  `nb_views` int(11) NOT NULL DEFAULT '0'
+  `nb_views` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_video`),
+  KEY `id_groupe` (`id_groupe`),
+  KEY `id_lieu` (`id_lieu`),
+  KEY `id_structure` (`id_structure`),
+  KEY `id_contact` (`id_contact`),
+  KEY `id_event` (`id_event`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `geo_fr_city` (
+CREATE TABLE IF NOT EXISTS `geo_fr_city` (
   `id_city` int(11) NOT NULL COMMENT 'code insee',
   `id_departement` char(3) NOT NULL,
   `cp` char(5) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_city`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `geo_fr_departement` (
+CREATE TABLE IF NOT EXISTS `geo_fr_departement` (
   `id_departement` char(3) NOT NULL,
   `id_world_region` char(2) NOT NULL,
   `id_region_insee` char(2) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_departement`),
+  KEY `id_region_old` (`id_region_insee`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `geo_world_country` (
+CREATE TABLE IF NOT EXISTS `geo_world_country` (
   `id_country` char(2) NOT NULL,
   `name_fr` varchar(100) NOT NULL,
   `name_en` varchar(100) NOT NULL,
   `capname_fr` varchar(100) NOT NULL,
-  `capname_en` varchar(100) NOT NULL
+  `capname_en` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_country`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `geo_world_region` (
+CREATE TABLE IF NOT EXISTS `geo_world_region` (
   `id_country` char(2) NOT NULL,
   `id_region` char(2) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_country`,`id_region`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-ALTER TABLE `adhoc_alerting`
-  ADD PRIMARY KEY (`id_alerting`);
-
-ALTER TABLE `adhoc_appartient_a`
-  ADD PRIMARY KEY (`id_contact`,`id_groupe`,`id_type_musicien`);
-
-ALTER TABLE `adhoc_audio`
-  ADD PRIMARY KEY (`id_audio`),
-  ADD KEY `id_groupe` (`id_groupe`),
-  ADD KEY `id_lieu` (`id_lieu`),
-  ADD KEY `id_structure` (`id_structure`),
-  ADD KEY `id_contact` (`id_contact`),
-  ADD KEY `hash` (`mime`),
-  ADD KEY `id_event` (`id_event`);
-
-ALTER TABLE `adhoc_cms`
-  ADD PRIMARY KEY (`id_cms`),
-  ADD UNIQUE KEY `alias` (`alias`);
-
-ALTER TABLE `adhoc_comment`
-  ADD PRIMARY KEY (`id_comment`);
-
-ALTER TABLE `adhoc_contact`
-  ADD PRIMARY KEY (`id_contact`),
-  ADD UNIQUE KEY `email` (`email`);
-
-ALTER TABLE `adhoc_event`
-  ADD PRIMARY KEY (`id_event`),
-  ADD KEY `id_lieu` (`id_lieu`),
-  ADD KEY `id_contact` (`id_contact`);
-
-ALTER TABLE `adhoc_event_style`
-  ADD PRIMARY KEY (`id_event`,`id_style`);
-
-ALTER TABLE `adhoc_exposant`
-  ADD PRIMARY KEY (`id_exposant`);
-
-ALTER TABLE `adhoc_faq`
-  ADD PRIMARY KEY (`id_faq`),
-  ADD KEY `id_category` (`id_category`);
-
-ALTER TABLE `adhoc_featured`
-  ADD PRIMARY KEY (`id_featured`);
-
-ALTER TABLE `adhoc_forum_prive_info`
-  ADD PRIMARY KEY (`id_forum`);
-
-ALTER TABLE `adhoc_forum_prive_message`
-  ADD PRIMARY KEY (`id_message`),
-  ADD KEY `id_thread` (`id_thread`);
-
-ALTER TABLE `adhoc_forum_prive_subscriber`
-  ADD UNIQUE KEY `id_forum` (`id_forum`,`id_contact`);
-
-ALTER TABLE `adhoc_forum_prive_thread`
-  ADD PRIMARY KEY (`id_thread`),
-  ADD KEY `id_forum` (`id_forum`);
-
-ALTER TABLE `adhoc_groupe`
-  ADD PRIMARY KEY (`id_groupe`),
-  ADD UNIQUE KEY `alias` (`alias`),
-  ADD KEY `id_departement` (`id_departement`),
-  ADD KEY `facebook_page_id` (`facebook_page_id`);
-
-ALTER TABLE `adhoc_groupe_style`
-  ADD PRIMARY KEY (`id_groupe`,`id_style`);
-
-ALTER TABLE `adhoc_lieu`
-  ADD PRIMARY KEY (`id_lieu`),
-  ADD KEY `id_departement` (`id_departement`),
-  ADD KEY `id_pays` (`id_country`),
-  ADD KEY `lat` (`lat`,`lng`),
-  ADD KEY `id_region` (`id_region`);
-
-ALTER TABLE `adhoc_membre`
-  ADD PRIMARY KEY (`id_contact`),
-  ADD KEY `cp_membre` (`cp`),
-  ADD KEY `facebook_uid` (`facebook_profile_id`);
-
-ALTER TABLE `adhoc_membre_adhoc`
-  ADD PRIMARY KEY (`id_contact`);
-
-ALTER TABLE `adhoc_messagerie`
-  ADD PRIMARY KEY (`id_pm`),
-  ADD KEY `from` (`from`),
-  ADD KEY `to` (`to`),
-  ADD KEY `del_from` (`del_from`),
-  ADD KEY `del_to` (`del_to`);
-
-ALTER TABLE `adhoc_newsletter`
-  ADD PRIMARY KEY (`id_newsletter`);
-
-ALTER TABLE `adhoc_organise_par`
-  ADD PRIMARY KEY (`id_event`,`id_structure`);
-
-ALTER TABLE `adhoc_participe_a`
-  ADD PRIMARY KEY (`id_event`,`id_groupe`);
-
-ALTER TABLE `adhoc_photo`
-  ADD PRIMARY KEY (`id_photo`),
-  ADD KEY `id_groupe` (`id_groupe`),
-  ADD KEY `id_lieu` (`id_lieu`),
-  ADD KEY `id_structure` (`id_structure`),
-  ADD KEY `id_contact` (`id_contact`),
-  ADD KEY `id_event` (`id_event`);
-
-ALTER TABLE `adhoc_structure`
-  ADD PRIMARY KEY (`id_structure`),
-  ADD KEY `id_departement` (`id_departement`),
-  ADD KEY `id_pays` (`id_country`);
-
-ALTER TABLE `adhoc_subscription`
-  ADD PRIMARY KEY (`id_subscription`),
-  ADD KEY `id_contact` (`id_contact`);
-
-ALTER TABLE `adhoc_video`
-  ADD PRIMARY KEY (`id_video`),
-  ADD KEY `id_groupe` (`id_groupe`),
-  ADD KEY `id_lieu` (`id_lieu`),
-  ADD KEY `id_structure` (`id_structure`),
-  ADD KEY `id_contact` (`id_contact`),
-  ADD KEY `id_event` (`id_event`);
-
-ALTER TABLE `geo_fr_city`
-  ADD PRIMARY KEY (`id_city`);
-
-ALTER TABLE `geo_fr_departement`
-  ADD PRIMARY KEY (`id_departement`),
-  ADD KEY `id_region_old` (`id_region_insee`);
-
-ALTER TABLE `geo_world_country`
-  ADD PRIMARY KEY (`id_country`);
-
-ALTER TABLE `geo_world_region`
-  ADD PRIMARY KEY (`id_country`,`id_region`);
-
-ALTER TABLE `adhoc_contact`
-  MODIFY `id_contact` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `adhoc_subscription`
-  MODIFY `id_subscription` int(11) NOT NULL AUTO_INCREMENT;

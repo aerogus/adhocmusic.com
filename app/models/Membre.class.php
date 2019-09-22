@@ -1176,46 +1176,46 @@ class Membre extends Contact
 
             } else {
 
-            $sql = "INSERT INTO `" . static::$_db_table_contact . "` (";
-            foreach ($fields['contact'] as $field => $type) {
-                $sql .= "`" . $field . "`,";
-            }
-            $sql = substr($sql, 0, -1);
-            $sql .= ") VALUES (";
-
-            foreach ($fields['contact'] as $field => $type) {
-                $att = '_' . $field;
-                switch ($type)
-                {
-                    case 'num':
-                        $sql .= $db->escape($this->$att) . ",";
-                        break;
-                    case 'str':
-                        $sql .= "'" . $db->escape($this->$att) . "',";
-                        break;
-                    case 'bool':
-                        $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
-                        break;
-                    case 'pwd':
-                        $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
-                        break;
-                    case 'phpser':
-                        $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
-                        break;
-                    case 'date':
-                        $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
-                        break;
-                    default:
-                        throw new Exception('invalid field type : ' . $type);
-                        break;
+                $sql = "INSERT INTO `" . static::$_db_table_contact . "` (";
+                foreach ($fields['contact'] as $field => $type) {
+                    $sql .= "`" . $field . "`,";
                 }
-            }
-            $sql = substr($sql, 0, -1);
-            $sql .= ")";
+                $sql = substr($sql, 0, -1);
+                $sql .= ") VALUES (";
 
-            $db->query($sql);
+                foreach ($fields['contact'] as $field => $type) {
+                    $att = '_' . $field;
+                    switch ($type) {
+                        case 'num':
+                        case 'float':
+                            $sql .= $db->escape((string) $this->$att) . ",";
+                            break;
+                        case 'str':
+                            $sql .= "'" . $db->escape($this->$att) . "',";
+                            break;
+                        case 'bool':
+                            $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
+                            break;
+                        case 'pwd':
+                            $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
+                            break;
+                        case 'phpser':
+                            $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
+                            break;
+                        case 'date':
+                            $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                            break;
+                        default:
+                            throw new Exception('invalid field type : ' . $type);
+                            break;
+                    }
+                }
+                $sql = substr($sql, 0, -1);
+                $sql .= ")";
 
-            $this->setId((int) $db->insertId());
+                $db->query($sql);
+
+                $this->setId((int) $db->insertId());
 
             }
 
@@ -1232,10 +1232,10 @@ class Membre extends Contact
 
             foreach ($fields['membre'] as $field => $type) {
                 $att = '_' . $field;
-                switch ($type)
-                {
+                switch ($type) {
                     case 'num':
-                        $sql .= $db->escape($this->$att) . ",";
+                    case 'float':
+                        $sql .= $db->escape((string) $this->$att) . ",";
                         break;
                     case 'str':
                         $sql .= "'" . $db->escape($this->$att) . "',";
@@ -1264,11 +1264,11 @@ class Membre extends Contact
 
             return $this->getId();
 
-        }
-        else // UPDATE
-        {
+        } else { // UPDATE
+
             if ((count($this->_modified_fields['contact']) === 0)
-             && (count($this->_modified_fields['membre']) === 0)) {
+                && (count($this->_modified_fields['membre']) === 0)
+            ) {
                 return true; // pas de changement
             }
 
@@ -1280,8 +1280,7 @@ class Membre extends Contact
                 foreach ($this->_modified_fields['contact'] as $field => $value) {
                     if ($value === true) {
                         $att = '_' . $field;
-                        switch ($fields['contact'][$field])
-                        {
+                        switch ($fields['contact'][$field]) {
                             case 'num':
                                 $fields_to_save .= " `" . $field . "` = ".$db->escape($this->$att).",";
                                 break;
@@ -1326,8 +1325,7 @@ class Membre extends Contact
                 foreach ($this->_modified_fields['membre'] as $field => $value) {
                     if ($value === true) {
                         $att = '_' . $field;
-                        switch ($fields['membre'][$field])
-                        {
+                        switch ($fields['membre'][$field]) {
                             case 'num':
                                 $fields_to_save .= " `" . $field . "` = ".$db->escape($this->$att).",";
                                 break;
@@ -1369,9 +1367,10 @@ class Membre extends Contact
     }
 
     /**
-     * charge toutes les infos d'un membre
+     * Charge toutes les infos d'un membre
      *
      * @return bool
+     * @throws Exception
      */
     protected function _loadFromDb()
     {
