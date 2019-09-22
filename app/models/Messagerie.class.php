@@ -57,7 +57,7 @@ class Messagerie extends ObjectModel
     /**
      *
      */
-    static function deleteInstance()
+    static function deleteInstance(): bool
     {
         if (isset(self::$_instance)) {
             self::$_instance = null;

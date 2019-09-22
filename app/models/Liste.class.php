@@ -44,9 +44,9 @@ abstract class Liste
     }
 
     /**
-     *
+     * @return bool
      */
-    static function deleteInstance()
+    static function deleteInstance(): bool
     {
         if (isset(static::$_instance)) {
             static::$_instance = null;
@@ -56,7 +56,7 @@ abstract class Liste
     }
 
     /**
-     * retourne le tableau de la liste
+     * Retourne le tableau de la liste
      *
      * @return array
      */

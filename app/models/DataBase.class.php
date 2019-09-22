@@ -212,8 +212,10 @@ class DataBase
      * un unset sur chacune des references.
      * Ce n'est necessaire que si vous voulez faire le menage avant
      * la fin du script, bien sur.
+     *
+     * @return bool
      */
-    static function deleteInstance()
+    static function deleteInstance(): bool
     {
         if (!is_null(self::$_instance)) {
             self::$_instance = null;
