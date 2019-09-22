@@ -182,7 +182,7 @@ class FAQ extends ObjectModel
         $res = $db->queryWithFetch($sql);
 
         foreach ($res as $idx => $row) {
-            $res[$idx]['category'] = self::getCategoryById($row['id_category']);
+            $res[$idx]['category'] = self::getCategoryById((int) $row['id_category']);
         }
 
         return $res;

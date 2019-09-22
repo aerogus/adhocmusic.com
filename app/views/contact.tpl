@@ -48,7 +48,7 @@
             <textarea name="text" id="text" rows="10" cols="80" style="width: 360px; padding: 5px;">{$text|escape}</textarea>
           </li>
           <li>
-            <label for="mailing">Je souhaite recevoir la newsletter mensuelle</label>
+            <label for="mailing">J'accepte de recevoir les lettres d'information de l'association</label>
             <input type="checkbox" id="mailing" name="mailing" checked="{if !empty($mailing)}checked{/if}">
           </li>
           <li>
