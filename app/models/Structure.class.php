@@ -115,7 +115,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    static function getBaseUrl()
+    static function getBaseUrl(): string
     {
         return MEDIA_URL . '/structure';
     }
@@ -123,7 +123,7 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    static function getBasePath()
+    static function getBasePath(): string
     {
         return MEDIA_PATH . '/structure';
     }
@@ -131,105 +131,105 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    function getName()
+    function getName(): string
     {
-        return (string) $this->_name;
+        return $this->_name;
     }
 
     /**
      * @return string
      */
-    function getAddress()
+    function getAddress(): string
     {
-        return (string) $this->_address;
+        return $this->_address;
     }
 
     /**
      * @return string
      */
-    function getCp()
+    function getCp(): string
     {
-        return (string) $this->_cp;
+        return $this->_cp;
     }
 
     /**
      * @return string
      */
-    function getCity()
+    function getCity(): string
     {
-        return (string) $this->_city;
+        return $this->_city;
     }
 
     /**
      * @return string
      */
-    function getTel()
+    function getTel(): string
     {
-        return (string) $this->_tel;
+        return $this->_tel;
     }
 
     /**
      * @return string
      */
-    function getFax()
+    function getFax(): string
     {
-        return (string) $this->_fax;
+        return $this->_fax;
     }
 
     /**
      * @return string
      */
-    function getIdDepartement()
+    function getIdDepartement(): string
     {
-        return (string) $this->_id_departement;
+        return $this->_id_departement;
     }
 
     /**
      * @return string
      */
-    function getText()
+    function getText(): string
     {
-        return (string) $this->_text;
+        return $this->_text;
     }
 
     /**
      * @return string
      */
-    function getSite()
+    function getSite(): string
     {
-        return (string) $this->_site;
+        return $this->_site;
     }
 
     /**
      * @return string
      */
-    function getEmail()
+    function getEmail(): string
     {
-        return (string) $this->_email;
+        return $this->_email;
     }
 
     /**
      * @return string
      */
-    function getIdCountry()
+    function getIdCountry(): string
     {
-        return (string) $this->_id_country;
+        return $this->_id_country;
     }
 
     /**
      * @return string
      */
-    function getPicto()
+    function getPicto(): string
     {
         return self::getPictoById((int) $this->getId());
     }
 
     /**
-     * @param int $id
+     * @param int $id id
      *
      * @return string
      */
-    static function getPictoById($id)
+    static function getPictoById($id): string
     {
         return self::getBaseUrl() . '/' . (int) $id . '.png';
     }
@@ -239,124 +239,168 @@ class Structure extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $val
+     * @param string $val val
+     *
+     * @return object
      */
-    function setName($val)
+    function setName(string $val): object
     {
         if ($this->_name !== $val) {
-            $this->_name = (string) $val;
+            $this->_name = $val;
             $this->_modified_fields['name'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string $val
+     * @param string $val val
+     *
+     * @return object
      */
-    function setAddress($val)
+    function setAddress(string $val): object
     {
         if ($this->_address !== $val) {
-            $this->_address = (string) $val;
+            $this->_address = $val;
             $this->_modified_fields['address'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string $val
+     * @param string $val val
+     *
+     * @return object
      */
-    function setCp($val)
+    function setCp(string $val): object
     {
         if ($this->_cp !== $val) {
-            $this->_cp = (string) $val;
+            $this->_cp = $val;
             $this->_modified_fields['cp'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string $val
+     * @param string $val val
+     *
+     * @return object
      */
-    function setCity($val)
+    function setCity(string $val): object
     {
         if ($this->_city !== $val) {
-            $this->_city = (string) $val;
+            $this->_city = $val;
             $this->_modified_fields['city'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setTel($val)
+    function setTel(string $val): object
     {
         if ($this->_tel !== $val) {
-            $this->_tel = (string) $val;
+            $this->_tel = $val;
             $this->_modified_fields['tel'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setFax($val)
+    function setFax(string $val): object
     {
         if ($this->_fax !== $val) {
-            $this->_fax = (string) $val;
+            $this->_fax = $val;
             $this->_modified_fields['fax'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setIdDepartement($val)
+    function setIdDepartement(string $val): object
     {
         if ($this->_id_departement !== $val) {
-            $this->_id_departement = (string) $val;
+            $this->_id_departement = $val;
             $this->_modified_fields['id_departement'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setText($val)
+    function setText(string $val): object
     {
         if ($this->_text !== $val) {
-            $this->_text = (string) $val;
+            $this->_text = $val;
             $this->_modified_fields['text'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setSite($val)
+    function setSite(string $val): object
     {
         if ($this->_site !== $val) {
-            $this->_site = (string) $val;
+            $this->_site = $val;
             $this->_modified_fields['site'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setEmail($val)
+    function setEmail(string $val): object
     {
         if ($this->_email !== $val) {
-            $this->_email = (string) $val;
+            $this->_email = $val;
             $this->_modified_fields['email'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setIdCountry($val)
+    function setIdCountry(string $val): object
     {
         if ($this->_id_country !== $val) {
-            $this->_id_country = (string) $val;
+            $this->_id_country = $val;
             $this->_modified_fields['id_country'] = true;
         }
+
+        return $this;
     }
 
     /* fin setters */
@@ -365,6 +409,7 @@ class Structure extends ObjectModel
      * Suppression d'une structure
      *
      * @return bool
+     * @throws Exception
      */
     function delete()
     {
@@ -409,7 +454,7 @@ class Structure extends ObjectModel
      *
      * @return array
      */
-    static function getStructures()
+    static function getStructures(): array
     {
         $db = DataBase::getInstance();
 
@@ -432,7 +477,8 @@ class Structure extends ObjectModel
     /**
      * Retourne les infos sur une structure
      *
-     * @return array
+     * @return bool
+     * @throws Exception
      */
     function _loadFromDb()
     {
@@ -451,13 +497,13 @@ class Structure extends ObjectModel
             }
             return true;
         }
-        return false; // todo exception
+        throw new Exception('Structure introuvable');
     }
 
     /**
      * @return bool
      */
-    function hasPhotos()
+    function hasPhotos(): bool
     {
         return (bool) $this->getPhotos();
     }
@@ -467,7 +513,7 @@ class Structure extends ObjectModel
      *
      * @return array
      */
-    function getPhotos()
+    function getPhotos(): array
     {
         return Photo::getPhotos(
             [
@@ -479,7 +525,7 @@ class Structure extends ObjectModel
     /**
      * @return bool
      */
-    function hasVideos()
+    function hasVideos(): bool
     {
         return (bool) $this->getVideos();
     }
@@ -489,7 +535,7 @@ class Structure extends ObjectModel
      *
      * @return array
      */
-    function getVideos()
+    function getVideos(): array
     {
         return Video::getVideos(
             [
@@ -501,7 +547,7 @@ class Structure extends ObjectModel
     /**
      * @return bool
      */
-    function hasAudios()
+    function hasAudios(): bool
     {
         return (bool) $this->getAudios();
     }
@@ -511,7 +557,7 @@ class Structure extends ObjectModel
      *
      * @return array
      */
-    function getAudios()
+    function getAudios(): array
     {
         return Audio::getAudios(
             [
@@ -523,9 +569,9 @@ class Structure extends ObjectModel
     /**
      * @return bool
      */
-    function hasEvenements()
+    function hasEvents(): bool
     {
-        return (bool) $this->getEvenements();
+        return (bool) $this->getEvents();
     }
 
     /**
@@ -533,7 +579,7 @@ class Structure extends ObjectModel
      *
      * @return array
      */
-    function getEvenements()
+    function getEvents(): array
     {
         return Event::getEvents(
             [

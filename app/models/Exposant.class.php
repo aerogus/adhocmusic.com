@@ -71,12 +71,12 @@ class Exposant extends ObjectModel
     /**
      * @var string
      */
-    protected $_created_on = NULL;
+    protected $_created_on = null;
 
     /**
      * @var string
      */
-    protected $_modified_on = NULL;
+    protected $_modified_on = null;
 
     /**
      * Liste des attributs de l'objet

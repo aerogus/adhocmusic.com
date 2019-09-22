@@ -87,6 +87,7 @@ class Log
         self::ACTION_FORUM_EDIT            => "Edition d'un message d'un forum",
         self::ACTION_FORUM_DELETE          => "Suppression d'un message d'un forum",
         self::ACTION_LOGIN                 => "Identification OK",
+        self::ACTION_LOGIN_FACEBOOK        => "Identification via Facebook",
         self::ACTION_LOGIN_FAILED          => "Identification KO",
         self::ACTION_LOGOUT                => "Déconnexion",
         self::ACTION_SEARCH                => "Requête de recherche",
@@ -113,10 +114,11 @@ class Log
     protected static $_log = '';
 
     /**
-     * @param string $file
-     * @param string $log
+     * @param string $file file
+     * @param string $log  log
+     * @param bool   $save save
      */
-    static function write($file, $log, $save = false)
+    static function write($file, $log, bool $save = false)
     {
         return self::_write($file, $log, $save);
     }
@@ -148,7 +150,7 @@ class Log
         self::_write('action', 'membre=' . $pseudo . ' (' . $id_contact . ') - action=' . self::$_actions[$action] . ' -  extra=' . $extra);
 
         Email::send(
-            ['guillaume@seznec.fr', 'lara@etcheverry.net'],
+            DEBUG_EMAIL,
             '[log-action] ' . $pseudo . ' ' . self::$_actions[$action],
             'log-action',
             [
@@ -205,11 +207,13 @@ class Log
     }
 
     /**
-     * récupère les logs action
-     * @param int filtrer un type d'événement
+     * Récupère les logs action
+     *
+     * @param int $action filtrer un type d'événement
+     *
      * @return array
      */
-    static function getLogsAction($action = 0)
+    static function getLogsAction(int $action)
     {
         $db = DataBase::getInstance();
 
@@ -217,7 +221,7 @@ class Log
              . "`m`.`pseudo`, `l`.`ip`, `l`.`host`, `l`.`extra` "
              . "FROM (`adhoc_log_action` `l`) "
              . "LEFT JOIN `adhoc_membre` `m` ON (`m`.`id_contact` = `l`.`id_contact`) ";
-        if ($action) {
+        if ($action > 0) {
             $sql .= "WHERE `l`.`action` = " . (int) $action . " ";
         }
         $sql .= "ORDER BY `l`.`datetime` DESC";

@@ -26,11 +26,11 @@ class City extends Liste
     /**
      * Code insee ville ok ?
      *
-     * @param int $id_city
+     * @param int $id_city code insee ville
      *
      * @return bool
      */
-    function isCityOk($id_city)
+    function isCityOk(int $id_city)
     {
         $o = static::getInstance();
         return $o->_isCityOk($id_city);
@@ -94,7 +94,8 @@ class City extends Liste
     /**
      * Retourne l'id du département
      *
-     * @param  int $id_city
+     * @param int $id_city
+     *
      * @return string
      */
     protected function _getIdDepartement($id_city)
@@ -108,7 +109,8 @@ class City extends Liste
     /**
      * Retourne le code postal
      *
-     * @param  int $id_city
+     * @param int $id_city
+     *
      * @return string
      */
     protected function _getCp($id_city)
@@ -122,7 +124,7 @@ class City extends Liste
     /**
      * @return bool
      */
-    protected function _loadFromDb()
+    protected function _loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 

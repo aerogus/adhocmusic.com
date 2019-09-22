@@ -49,6 +49,7 @@ class FAQ extends ObjectModel
      * - numérique/integer/float/bool (= num)
      * - datetime/text (= str)
      * ceci est utile pour la formation de la requête
+     *
      * @var array
      */
     protected static $_all_fields = [
@@ -62,25 +63,25 @@ class FAQ extends ObjectModel
     /**
      * @return int
      */
-    function getIdCategory()
+    function getIdCategory(): int
     {
-        return (int) $this->_id_category;
+        return $this->_id_category;
     }
 
     /**
      * @return string
      */
-    function getQuestion()
+    function getQuestion(): string
     {
-        return (string) $this->_question;
+        return $this->_question;
     }
 
     /**
      * @return string
      */
-    function getAnswer()
+    function getAnswer(): string
     {
-        return (string) $this->_answer;
+        return $this->_answer;
     }
 
     /* fin getters */
@@ -88,50 +89,58 @@ class FAQ extends ObjectModel
     /* début setters */
 
     /**
-     * @param int
+     * @param int $val val
+     *
+     * @return object
      */
-    function setIdCategory($val)
+    function setIdCategory(int $val): object
     {
-        $val = (int) $val;
-        if ($this->_id_category !== $val)
-        {
+        if ($this->_id_category !== $val) {
             $this->_id_category = $val;
             $this->_modified_fields['id_category'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setQuestion($val)
+    function setQuestion(string $val): object
     {
-        $val = trim((string) $val);
-        if ($this->_question !== $val)
-        {
+        $val = trim($val);
+        if ($this->_question !== $val) {
             $this->_question = $val;
             $this->_modified_fields['question'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setAnswer($val)
+    function setAnswer(string $val): object
     {
-        $val = trim((string) $val);
-        if ($this->_answer !== (string) $val)
-        {
+        $val = trim($val);
+        if ($this->_answer !== $val) {
             $this->_answer = (string) $val;
             $this->_modified_fields['answer'] = true;
         }
+
+        return $this;
     }
 
     /* fin setters */
 
     /**
-     *
+     * @return array
      */
-    static function getCategories()
+    static function getCategories(): array
     {
         return [
             1 => 'Le site',
@@ -142,16 +151,18 @@ class FAQ extends ObjectModel
     /**
      * @return string
      */
-    function getCategory()
+    function getCategory(): string
     {
         $categories = self::getCategories();
         return $categories[$this->_id_category];
     }
 
     /**
+     * @param int $id_category id_category
+     *
      * @return string
      */
-    static function getCategoryById($id_category)
+    static function getCategoryById(int $id_category): string
     {
         $categories = self::getCategories();
         return $categories[$id_category];
@@ -160,7 +171,7 @@ class FAQ extends ObjectModel
     /**
      * @return array
      */
-    static function getFAQs()
+    static function getFAQs(): array
     {
         $db = DataBase::getInstance();
 
@@ -178,9 +189,10 @@ class FAQ extends ObjectModel
     }
 
     /**
-     *
+     * @return bool
+     * @throws Exception
      */
-    protected function _loadFromDb()
+    protected function _loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 

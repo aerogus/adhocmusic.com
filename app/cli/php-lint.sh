@@ -11,7 +11,7 @@ declare -a dirs=(
   "$ABS_PATH/../assets"
   "$ABS_PATH/../controllers"
   "$ABS_PATH/../models"
-  "$ABS_PATH/../scripts"
+  "$ABS_PATH/../cli"
 )
 
 reset=$(tput sgr0)

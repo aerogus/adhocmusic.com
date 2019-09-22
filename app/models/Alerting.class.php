@@ -42,7 +42,7 @@ class Alerting extends ObjectModel
      *
      * @var string
      */
-    protected $_created_on = NULL;
+    protected $_created_on = null;
 
     /**
      * actif ?

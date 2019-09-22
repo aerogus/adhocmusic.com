@@ -98,7 +98,7 @@ class Style
     /**
      * Retourne le libellé d'une clé de la liste
      *
-     * @param int
+     * @param int $cle clé
      *
      * @return string
      */

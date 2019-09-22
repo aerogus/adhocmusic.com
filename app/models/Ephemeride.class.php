@@ -21,7 +21,7 @@ class Ephemeride extends ObjectModel
      *
      * @return array
      */
-    function getAll()
+    function getAll(): array
     {
         return $this->_data;
     }

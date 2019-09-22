@@ -72,7 +72,7 @@ class Audio extends Media
     /**
      * @return string
      */
-    static function getBaseUrl()
+    static function getBaseUrl(): string
     {
         return MEDIA_URL . '/audio';
     }
@@ -80,7 +80,7 @@ class Audio extends Media
     /**
      * @return string
      */
-    static function getBasePath()
+    static function getBasePath(): string
     {
         return MEDIA_PATH . '/audio';
     }
@@ -88,15 +88,15 @@ class Audio extends Media
     /**
      * @return string
      */
-    function getMime()
+    function getMime(): string
     {
-        return (string) $this->_mime;
+        return $this->_mime;
     }
 
     /**
      * @return string
      */
-    function getUrl()
+    function getUrl(): string
     {
         return self::getUrlById($this->getId());
     }
@@ -106,7 +106,7 @@ class Audio extends Media
      *
      * @return string
      */
-    static function getUrlById(int $id)
+    static function getUrlById(int $id): string
     {
         return HOME_URL . '/audios/' . $id;
     }
@@ -114,7 +114,7 @@ class Audio extends Media
     /**
      * @return string
      */
-    function getDirectUrl()
+    function getDirectUrl(): string
     {
         return self::getBaseUrl() . '/' . $this->getId() . '.mp3';
     }
@@ -125,13 +125,17 @@ class Audio extends Media
 
     /**
      * @param string $val typemime
+     *
+     * @return object
      */
-    function setMime(string $val)
+    function setMime(string $val): object
     {
         if ($this->_mime !== $val) {
             $this->_mime = $val;
             $this->_modified_fields['mime'] = true;
         }
+
+        return $this;
     }
 
     /* fin setters */
@@ -279,7 +283,7 @@ class Audio extends Media
      *
      * @return bool
      */
-    function delete()
+    function delete(): bool
     {
         if (parent::delete()) {
             $file = self::getBasePath() . '/' . $this->getId() . '.mp3';
@@ -292,16 +296,17 @@ class Audio extends Media
     }
 
     /**
-     *
+     * @return bool
+     * @throws Exception
      */
-    protected function _loadFromDb()
+    protected function _loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 
         $sql = "SELECT `a`.`name`, `a`.`mime`, "
              . "`a`.`created_on`, `a`.`modified_on`, "
              . "`a`.`online`, `a`.`id_contact`, "
-             . "CONCAT('http://static.adhocmusic.com/media/audio/', `a`.`id_audio`, '.mp3') AS `direct_url`, "
+             . "CONCAT('https://static.adhocmusic.com/media/audio/', `a`.`id_audio`, '.mp3') AS `direct_url`, "
              . "`a`.`id_groupe`, `a`.`id_structure`, "
              . "`a`.`id_event`, `a`.`id_lieu` "
              . "FROM `" . self::$_db_table_audio . "` `a` "
@@ -318,7 +323,7 @@ class Audio extends Media
     /**
      * Retourne les derniers audios postés
      *
-     * @param int $limit
+     * @param int $limit limite
      *
      * @return array
      */
@@ -422,21 +427,13 @@ class Audio extends Media
             throw new Exception('non identifié');
         }
 
-        if (isset($_SESSION['my_counters']['nb_audios'])) {
-            return $_SESSION['my_counters']['nb_audios'];
-        }
-
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
              . "FROM `" . self::$_db_table_audio . "` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
 
-        $nb_audios = $db->queryWithFetchFirstField($sql);
-
-        $_SESSION['my_counters']['nb_audios'] = $nb_audios;
-
-        return $_SESSION['my_counters']['nb_audios'];
+        return $db->queryWithFetchFirstField($sql);
     }
 
     /**
@@ -446,19 +443,11 @@ class Audio extends Media
      */
     static function getAudiosCount()
     {
-        if (isset($_SESSION['global_counters']['nb_audios'])) {
-            return $_SESSION['global_counters']['nb_audios'];
-        }
-
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
              . "FROM `" . self::$_db_table_audio . "`";
 
-        $nb_audios = $db->queryWithFetchFirstField($sql);
-
-        $_SESSION['global_counters']['nb_audios'] = $nb_audios;
-
-        return $_SESSION['global_counters']['nb_audios'];
+        return $db->queryWithFetchFirstField($sql);
     }
 }

@@ -123,17 +123,17 @@ abstract class ObjectModel
     }
 
     /**
-     *
+     * @return object
      */
-    static function init()
+    static function init(): object
     {
         return new static();
     }
 
     /**
-     *
+     * @return object
      */
-    static function getInstance($id)
+    static function getInstance($id): object
     {
         if (is_null(static::$_instance)) {
             // pas du tout d'instance: on en crée une, le constructeur ira s'enregistrer
@@ -153,9 +153,9 @@ abstract class ObjectModel
     }
 
     /**
-     *
+     * @return bool
      */
-    static function deleteInstance()
+    static function deleteInstance(): bool
     {
         if (isset(static::$_instance)) {
             static::$_instance = null;
@@ -165,9 +165,9 @@ abstract class ObjectModel
     }
 
     /**
-     *
+     * @return string
      */
-    function getObjectId()
+    function getObjectId(): string
     {
         return $this->_object_id;
     }
@@ -348,9 +348,9 @@ abstract class ObjectModel
     }
 
     /**
-     * @param array $data
+     * @param array $data data
      */
-    protected function _dbToObject($data)
+    protected function _dbToObject(array $data)
     {
         $all_fields = static::_getAllFields(true);
         foreach ($data as $k => $v) {

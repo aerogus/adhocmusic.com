@@ -36,7 +36,7 @@ class Contact extends ObjectModel
     /**
      * @var string
      */
-    protected $_lastnl = NULL;
+    protected $_lastnl = null;
 
     /**
      * Liste des attributs de l'objet
@@ -44,6 +44,7 @@ class Contact extends ObjectModel
      * - numérique/integer/float/bool (= int)
      * - datetime/text (= str)
      * ceci est utile pour la formation de la requête
+     *
      * @var array
      */
     protected static $_all_fields = [

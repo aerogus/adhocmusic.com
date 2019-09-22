@@ -31,42 +31,42 @@ class Subscription extends ObjectModel
     /**
      * @var string
      */
-    protected $_created_at = NULL;
+    protected $_created_at = null;
 
     /**
      * @var string
      */
-    protected $_subscribed_at = NULL;
+    protected $_subscribed_at = null;
 
     /**
      * @var bool
      */
-    protected $_adult = NULL;
+    protected $_adult = null;
 
     /**
      * @var float
      */
-    protected $_amount = NULL;
+    protected $_amount = null;
 
     /**
      * @var string
      */
-    protected $_first_name = NULL;
+    protected $_first_name = null;
 
     /**
      * @var string
      */
-    protected $_last_name = NULL;
+    protected $_last_name = null;
 
     /**
      * @var string
      */
-    protected $_email = NULL;
+    protected $_email = null;
 
     /**
      * @var string
      */
-    protected $_cp = NULL;
+    protected $_cp = null;
 
     /**
      * @var int

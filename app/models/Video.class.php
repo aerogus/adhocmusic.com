@@ -179,7 +179,7 @@ class Video extends Media
     /**
      * @return string
      */
-    static function getBaseUrl()
+    static function getBaseUrl(): string
     {
         return MEDIA_URL . '/video';
     }
@@ -187,7 +187,7 @@ class Video extends Media
     /**
      * @return string
      */
-    static function getBasePath()
+    static function getBasePath(): string
     {
         return MEDIA_PATH . '/video';
     }
@@ -195,9 +195,9 @@ class Video extends Media
     /**
      * @return int
      */
-    function getIdHost()
+    function getIdHost(): int
     {
-        return (int) $this->_id_host;
+        return $this->_id_host;
     }
 
     /**
@@ -205,17 +205,17 @@ class Video extends Media
      *
      * @return string
      */
-    function getHostName()
+    function getHostName(): string
     {
-        return (string) self::$_tab_hosts[$this->_id_host];
+        return self::$_tab_hosts[$this->_id_host];
     }
 
     /**
      * @return string
      */
-    function getReference()
+    function getReference(): string
     {
-        return (string) $this->_reference;
+        return $this->_reference;
     }
 
     /**
@@ -226,7 +226,7 @@ class Video extends Media
     function getWidth(): int
     {
         if ($this->_width) {
-            return (int) $this->_width;
+            return $this->_width;
         }
         return self::WIDTH;
     }
@@ -239,7 +239,7 @@ class Video extends Media
     function getHeight(): int
     {
         if ($this->_height) {
-            return (int) $this->_height;
+            return $this->_height;
         }
         return self::HEIGHT;
     }
@@ -258,7 +258,7 @@ class Video extends Media
      *
      * @return string
      */
-    static function getUrlById(int $id, string $type = null)
+    static function getUrlById(int $id, string $type = null): string
     {
         return HOME_URL . '/videos/' . $id;
     }
@@ -266,7 +266,7 @@ class Video extends Media
     /**
      * @return string
      */
-    function getDirectUrl()
+    function getDirectUrl(): string
     {
         return self::getFlashUrl($this->getIdHost(), $this->getReference());
     }
@@ -280,7 +280,7 @@ class Video extends Media
      *
      * @param int $id_host identifiant hébergeur
      *
-     * @return void
+     * @return object
      */
     function setIdHost(int $id_host)
     {
@@ -288,10 +288,14 @@ class Video extends Media
             $this->_id_host = $id_host;
             $this->_modified_fields['id_host'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val val
+     *
+     * @return object
      */
     function setReference(string $val)
     {
@@ -299,10 +303,14 @@ class Video extends Media
             $this->_reference = $val;
             $this->_modified_fields['reference'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param int $val val
+     * 
+     * @return object
      */
     function setWidth(int $val)
     {
@@ -310,10 +318,14 @@ class Video extends Media
             $this->_width = $val;
             $this->_modified_fields['width'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param int $val val
+     *
+     * @return object
      */
     function setHeight(int $val)
     {
@@ -321,6 +333,8 @@ class Video extends Media
             $this->_height = $val;
             $this->_modified_fields['height'] = true;
         }
+
+        return $this;
     }
 
     /* fin setters */
@@ -330,7 +344,7 @@ class Video extends Media
      *
      * @return array
      */
-    static function getHosts()
+    static function getHosts(): array
     {
         return self::$_tab_hosts;
     }
@@ -340,7 +354,7 @@ class Video extends Media
      *
      * @return array
      */
-    static function getVideoHosts()
+    static function getVideoHosts(): array
     {
         $tab = [];
         foreach (self::$_tab_hosts as $id => $name) {
@@ -357,7 +371,7 @@ class Video extends Media
      *
      * @return string
      */
-    static function getHostNameByHostId(int $host_id)
+    static function getHostNameByHostId(int $host_id): string
     {
         return self::$_tab_hosts[$host_id];
     }
@@ -377,7 +391,7 @@ class Video extends Media
      *
      * @return array
      */
-    static function getVideos(array $params = [])
+    static function getVideos(array $params = []): array
     {
         $debut = 0;
         if (isset($params['debut'])) {
@@ -504,7 +518,7 @@ class Video extends Media
      *
      * @return bool
      */
-    function delete()
+    function delete(): bool
     {
         if (parent::delete()) {
             $this->deleteThumbnail();
@@ -521,12 +535,12 @@ class Video extends Media
      * @param bool $autoplay autoplay
      * @param bool $iframe   iframe
      *
-     * @return string
+     * @return string|null
      *
      * @see http://www.alsacreations.fr/dewtube
      * @see http://www.clubic.com/telecharger-fiche21739-riva-flv-encoder.html
      */
-    function getPlayer(bool $autoplay = false, bool $iframe = true)
+    function getPlayer(bool $autoplay = false, bool $iframe = true): ?string
     {
         switch ($this->_id_host)
         {
@@ -556,7 +570,7 @@ class Video extends Media
                 return '<iframe width="'.self::WIDTH.'" height="'.self::HEIGHT.'" sandbox="allow-same-origin allow-scripts" src="https://'.MEDIA_ADHOCTUBE_HOST.'/videos/embed/'.$this->getReference().'" frameborder="0" allowfullscreen></iframe>' . "\n";
 
             default:
-                return false;
+                return null;
         }
     }
 
@@ -564,9 +578,9 @@ class Video extends Media
      * @param int    $id_host   id_host
      * @param string $reference reference
      *
-     * @return string
+     * @return string|null
      */
-    static function getFlashUrl(int $id_host, string $reference)
+    static function getFlashUrl(int $id_host, string $reference): ?string
     {
         switch ($id_host)
         {
@@ -583,7 +597,7 @@ class Video extends Media
                 return 'https://vimeo.com/' . $reference;
 
             default:
-                return false;
+                return null;
         }
     }
 
@@ -681,6 +695,9 @@ class Video extends Media
 
     /**
      * @todo comme Photo et Audio, requete plus complete ?
+     *
+     * @return bool
+     * @throws Exception
      */
     protected function _loadFromDb()
     {
@@ -704,9 +721,9 @@ class Video extends Media
     /**
      * Récupère l'url de la vignette de la vidéo
      *
-     * @param int    $id_host id_host
+     * @param int    $id_host   id_host
      * @param string $reference reference
-     * @param bool   $multi (retourne plusieurs vignettes si dispo)
+     * @param bool   $multi     (retourne plusieurs vignettes si dispo)
      *
      * @return string ou array de string
      */
@@ -755,23 +772,17 @@ class Video extends Media
     }
 
     /**
-     * récupère le title distant de la vidéo
+     * Récupère le title distant de la vidéo
      *
-     * @param int $id_host
-     * @param string $reference
+     * @param int    $id_host   identifiant hébergeur
+     * @param string $reference code référence
      *
      * @return string
      */
-    static function getRemoteTitle($id_host, $reference)
+    static function getRemoteTitle(int $id_host, string $reference): ?string
     {
         switch ($id_host)
         {
-            case self::HOST_YOUTUBE:
-            case self::HOST_DAILYMOTION:
-            case self::HOST_FACEBOOK:
-            default:
-                return '';
-
             case self::HOST_VIMEO:
                 $meta_url = 'https://vimeo.com/api/v2/video/' . $reference . '.json';
                 $meta_info = json_decode(file_get_contents($meta_url));
@@ -781,17 +792,21 @@ class Video extends Media
                 $meta_url = 'https://' . MEDIA_ADHOCTUBE_HOST . '/api/v1/videos/' . $reference;
                 $meta_info = json_decode(file_get_contents($meta_url));
                 return $meta_info->name;
+
+            case self::HOST_YOUTUBE:
+            case self::HOST_DAILYMOTION:
+            case self::HOST_FACEBOOK:
+            default:
+                return null;
         }
     }
 
     /**
      * Efface une vignette locale
      *
-     * @param int $id_video
-     *
      * @return bool
      */
-    function deleteThumbnail()
+    function deleteThumbnail(): bool
     {
         $file = self::getBasePath() . '/' . $this->getId() . '.jpg';
         if (file_exists($file)) {
@@ -804,12 +819,11 @@ class Video extends Media
     /**
      * Écrit une vignette
      *
-     * @param int    $id_video   id_video
      * @param string $remote_url remote_url
      *
      * @return bool
      */
-    function storeThumbnail($remote_url)
+    function storeThumbnail(string $remote_url)
     {
         $tmp = self::getBasePath() . '/' . $this->_id_video . '.jpg.tmp';
         $jpg = self::getBasePath() . '/' . $this->_id_video . '.jpg';
@@ -828,7 +842,7 @@ class Video extends Media
     }
 
     /**
-     *
+     * @return bool
      */
     static function invalidateVideoThumbInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 1)
     {
@@ -890,21 +904,13 @@ class Video extends Media
             throw new Exception('non identifié');
         }
 
-        if (isset($_SESSION['my_counters']['nb_videos'])) {
-            return $_SESSION['my_counters']['nb_videos'];
-        }
-
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
              . "FROM `" . self::$_db_table_video . "` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
 
-        $nb_videos = $db->queryWithFetchFirstField($sql);
-
-        $_SESSION['my_counters']['nb_videos'] = $nb_videos;
-
-        return $_SESSION['my_counters']['nb_videos'];
+        return $db->queryWithFetchFirstField($sql);
     }
 
     /**
@@ -923,10 +929,6 @@ class Video extends Media
         $sql = "SELECT COUNT(*) "
              . "FROM `" . self::$_db_table_video . "`";
 
-        $nb_videos = $db->queryWithFetchFirstField($sql);
-
-        $_SESSION['global_counters']['nb_videos'] = $nb_videos;
-
-        return $_SESSION['global_counters']['nb_videos'];
+        return $db->queryWithFetchFirstField($sql);
     }
 }

@@ -47,12 +47,12 @@ class Media extends ObjectModel
     /**
      * @var string
      */
-    protected $_created_on = NULL;
+    protected $_created_on = null;
 
     /**
      * @var string
      */
-    protected $_modified_on = NULL;
+    protected $_modified_on = null;
 
     /**
      * @var bool
@@ -166,40 +166,54 @@ class Media extends ObjectModel
     /* début setters communs */
 
     /**
-     * @param int
+     * @param int $val val
+     *
+     * @return object
      */
-    function setIdContact(int $val)
+    function setIdContact(int $val): object
     {
         if ($this->_id_contact !== $val) {
             $this->_id_contact = $val;
             $this->_modified_fields['id_contact'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param int $val
+     * @param int $val val
+     *
+     * @return object
      */
-    function setIdGroupe(int $val)
+    function setIdGroupe(int $val): object
     {
         if ($this->_id_groupe !== $val) {
             $this->_id_groupe = $val;
             $this->_modified_fields['id_groupe'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param int $val
+     * @param int $val val
+     *
+     * @return object
      */
-    function setIdLieu(int $val)
+    function setIdLieu(int $val): object
     {
         if ($this->_id_lieu !== $val) {
             $this->_id_lieu = $val;
             $this->_modified_fields['id_lieu'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param int $val
+     * @param int $val val
+     *
+     * @return object
      */
     function setIdEvent(int $val)
     {
@@ -207,21 +221,29 @@ class Media extends ObjectModel
             $this->_id_event = $val;
             $this->_modified_fields['id_event'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param int
+     * @param int $val val
+     *
+     * @return object
      */
-    function setIdStructure(int $val)
+    function setIdStructure(int $val): object
     {
         if ($this->_id_structure !== $val) {
             $this->_id_structure = $val;
             $this->_modified_fields['id_structure'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
     function setName(string $val)
     {
@@ -229,10 +251,14 @@ class Media extends ObjectModel
             $this->_name = $val;
             $this->_modified_fields['name'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
     function setCreatedOn(string $val)
     {
@@ -240,10 +266,12 @@ class Media extends ObjectModel
             $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     *
+     * @return object
      */
     function setCreatedNow()
     {
@@ -252,10 +280,14 @@ class Media extends ObjectModel
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string $val
+     * @param string $val $val
+     *
+     * @return object
      */
     function setModifiedOn(string $val)
     {
@@ -263,10 +295,12 @@ class Media extends ObjectModel
             $this->_modified_on = $val;
             $this->_modified_fields['modified_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     *
+     * @return object
      */
     function setModifiedNow()
     {
@@ -275,10 +309,14 @@ class Media extends ObjectModel
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param bool
+     * @param bool $val val
+     *
+     * @return object
      */
     function setOnline(bool $val)
     {
@@ -286,6 +324,8 @@ class Media extends ObjectModel
             $this->_online = $val;
             $this->_modified_fields['online'] = true;
         }
+
+        return $this;
     }
 
     /* fin setters communs */

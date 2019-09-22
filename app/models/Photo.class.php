@@ -87,7 +87,7 @@ class Photo extends Media
     /**
      * @return string
      */
-    static function getBaseUrl()
+    static function getBaseUrl(): string
     {
         return MEDIA_URL . '/photo';
     }
@@ -95,7 +95,7 @@ class Photo extends Media
     /**
      * @return string
      */
-    static function getBasePath()
+    static function getBasePath(): string
     {
         return MEDIA_PATH . '/photo';
     }
@@ -103,26 +103,26 @@ class Photo extends Media
     /**
      * @return string
      */
-    function getPseudo()
+    function getPseudo(): string
     {
-        return (string) $this->_pseudo;
+        return $this->_pseudo;
     }
 
 
     /**
      * @return int
      */
-    function getHeight()
+    function getHeight(): string
     {
-        return (int) $this->_height;
+        return $this->_height;
     }
 
     /**
      * @return int
      */
-    function getWidth()
+    function getWidth(): string
     {
-        return (int) $this->_width;
+        return $this->_width;
     }
 
 
@@ -130,25 +130,25 @@ class Photo extends Media
     /**
      * @return string
      */
-    function getCredits()
+    function getCredits(): string
     {
-        return (string) $this->_credits;
+        return $this->_credits;
     }
 
     /**
      * @return string
      */
-    function getUrl($type = null)
+    function getUrl($type = null): string
     {
         return self::getUrlById($this->getId(), $type);
     }
 
     /**
-     * @param int $id
+     * @param int $id id
      *
      * @return string
      */
-    static function getUrlById($id, $type = null)
+    static function getUrlById(int $id, $type = null): string
     {
         return HOME_URL . '/photos/' . (int) $id;
     }
@@ -160,6 +160,8 @@ class Photo extends Media
 
     /**
      * @param string $val val
+     *
+     * @return object
      */
     function setCredits(string $val)
     {
@@ -167,6 +169,8 @@ class Photo extends Media
             $this->_credits = $val;
             $this->_modified_fields['credits'] = true;
         }
+
+        return $this;
     }
 
     /* fin setters */
@@ -174,9 +178,9 @@ class Photo extends Media
     /**
      * Efface une photo de la table photo + le fichier .jpg
      *
-     * @return true
+     * @return bool
      */
-    function delete()
+    function delete(): bool
     {
         if (parent::delete()) {
             self::invalidatePhotoInCache($this->getId(),  80,  80, '000000', false,  true);
@@ -204,21 +208,13 @@ class Photo extends Media
             throw new Exception('non identifié');
         }
 
-        if (isset($_SESSION['my_counters']['nb_photos'])) {
-            return $_SESSION['my_counters']['nb_photos'];
-        }
-
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
              . "FROM `".self::$_db_table_photo."` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
 
-        $nb_photos = $db->queryWithFetchFirstField($sql);
-
-        $_SESSION['my_counters']['nb_photos'] = $nb_photos;
-
-        return $_SESSION['my_counters']['nb_photos'];
+        return $db->queryWithFetchFirstField($sql);
     }
 
     /**
@@ -228,20 +224,12 @@ class Photo extends Media
      */
     static function getPhotosCount()
     {
-        if (isset($_SESSION['global_counters']['nb_photos'])) {
-            return $_SESSION['global_counters']['nb_photos'];
-        }
-
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
              . "FROM `" . self::$_db_table_photo . "`";
 
-        $nb_photos = $db->queryWithFetchFirstField($sql);
-
-        $_SESSION['global_counters']['nb_photos'] = $nb_photos;
-
-        return $_SESSION['global_counters']['nb_photos'];
+        return $db->queryWithFetchFirstField($sql);
     }
 
     /**
@@ -392,9 +380,10 @@ class Photo extends Media
     }
 
     /**
-     *
+     * @return bool
+     * @throws Exception
      */
-    protected function _loadFromDb()
+    protected function _loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 
@@ -420,39 +409,39 @@ class Photo extends Media
     }
 
     /**
-     *
+     * @return string
      */
-    function getThumb80Url()
+    function getThumb80Url(): string
     {
         return self::getPhotoUrl($this->getId(), 80, 80, '000000', false, true);
     }
 
     /**
-     *
+     * @return string
      */
-    function getThumb130Url()
+    function getThumb130Url(): string
     {
         return self::getPhotoUrl($this->getId(), 130, 130, '000000', false, false);
     }
 
     /**
-     *
+     * @return string
      */
-    function getThumb400Url()
+    function getThumb400Url(): string
     {
         return self::getPhotoUrl($this->getId(), 400, 300, '000000', false, false);
     }
 
     /**
-     *
+     * @return string
      */
-    function getThumb680Url()
+    function getThumb680Url(): string
     {
         return self::getPhotoUrl($this->getId(), 680, 600, '000000', false, false);
     }
 
     /**
-     *
+     * @return bool
      */
     static function invalidatePhotoInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
     {
@@ -473,7 +462,7 @@ class Photo extends Media
      *
      * @return string
      */
-    static function getPhotoUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
+    static function getPhotoUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0): string
     {
         $uid = 'photo/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);

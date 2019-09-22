@@ -673,6 +673,9 @@ final class Controller
         return $smarty->fetch('adm/log-action.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function delete_account(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
@@ -703,7 +706,7 @@ final class Controller
 
                 $out .= "<table>";
 
-                if ($email !== "") {
+                if ($email !== '') {
                     $sql = "SELECT `id_contact`, `email` FROM `adhoc_contact` WHERE `email` = '" . $db->escape($email) . "'";
                     $res = $db->query($sql);
                     if (list($id) = $db->fetchRow($res)) {

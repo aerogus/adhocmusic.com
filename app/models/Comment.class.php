@@ -44,12 +44,12 @@ class Comment extends ObjectModel
     /**
      * @var string
      */
-    protected $_created_on = NULL;
+    protected $_created_on = null;
 
     /**
      * @var string
      */
-    protected $_modified_on = NULL;
+    protected $_modified_on = null;
 
     /**
      * @var bool
@@ -188,25 +188,25 @@ class Comment extends ObjectModel
     /**
      * @return bool
      */
-    function getOnline()
+    function getOnline(): bool
     {
-        return (bool) $this->_online;
+        return $this->_online;
     }
 
     /**
      * @return int
      */
-    function getIdContact()
+    function getIdContact(): int
     {
-        return (int) $this->_id_contact;
+        return $this->_id_contact;
     }
 
     /**
      * @return string
      */
-    function getText()
+    function getText(): string
     {
-        return (string) $this->_text;
+        return $this->_text;
     }
 
     /**
@@ -508,7 +508,7 @@ class Comment extends ObjectModel
         $emails  = [];
         $subject = "Un nouveau commentaire a été posté ";
         $title   = '';
-        $url     = 'http://www.adhocmusic.com';
+        $url     = 'https://www.adhocmusic.com';
 
         switch ($this->getType())
         {
@@ -558,8 +558,7 @@ class Comment extends ObjectModel
 
                 // -> gens abonnés au lieu
                 $ids_contact = Alerting::getIdsContactByLieu($lieu->getId());
-                foreach ($ids_contact as $id_contact)
-                {
+                foreach ($ids_contact as $id_contact) {
                     $membre = Membre::getInstance($id_contact);
                     $emails[] = $membre->getEmail();
                 }
@@ -607,8 +606,7 @@ class Comment extends ObjectModel
 
                 // -> personnes abonnés à l'événement
                 $ids_contact = Alerting::getIdsContactByEvent($event->getId());
-                foreach ($ids_contact as $id_contact)
-                {
+                foreach ($ids_contact as $id_contact) {
                     $membre = Membre::getInstance($id_contact);
                     $emails[] = $membre->getEmail();
                 }
@@ -637,13 +635,15 @@ class Comment extends ObjectModel
                 break;
         }
 
-        $comments = Comment::getComments([
-            'type'       => $this->getType(),
-            'id_content' => $this->getIdContent(),
-            'sort'       => 'created_on',
-            'sens'       => 'ASC',
-            'online'     => true,
-        ]);
+        $comments = Comment::getComments(
+            [
+                'type'       => $this->getType(),
+                'id_content' => $this->getIdContent(),
+                'sort'       => 'created_on',
+                'sens'       => 'ASC',
+                'online'     => true,
+            ]
+        );
 
         // -> gens ayant déjà posté sur ce contenu
         foreach ($comments as $comment) {
