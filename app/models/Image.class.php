@@ -365,39 +365,39 @@ class Image
                 $rh1   = $tmp_h / $this->_hSel;
                 $tmp_l = round($this->_wSel * $rh1);
                 if ($this->_max_width && $tmp_l) { // a debugguer
-                    $this->_new_l = min($this->_max_width, $tmp_l);
+                    $this->_new_l = (int) min($this->_max_width, $tmp_l);
                     $rh2          = $this->_new_l / ($this->_wSel * $rh1);
                     $this->_new_h = (int) round($this->_hSel * $rh1 * $rh2);
                 } else {
-                    $this->_new_l = $tmp_l;
-                    $this->_new_h = $tmp_h;
+                    $this->_new_l = (int) $tmp_l;
+                    $this->_new_h = (int) $tmp_h;
                 }
             } else {
                 if ($this->_max_width) {
-                    $this->_new_l = min($this->_wSel, $this->_max_width);
+                    $this->_new_l = (int) min($this->_wSel, $this->_max_width);
                     $rh           = $this->_new_l / $this->_wSel;
                     $this->_new_h = (int) round($this->_hSel * $rh);
                 } else {
-                    $this->_new_l = $this->_wSel;
-                    $this->_new_h = $this->_hSel;
+                    $this->_new_l = (int) $this->_wSel;
+                    $this->_new_h = (int) $this->_hSel;
                 }
             }
         } else {
             if ($this->_max_height) {
                 if ($this->_max_width) {
-                    $this->_new_l = min($this->_wSel, $this->_max_width);
-                    $this->_new_h = min($this->_hSel, $this->_max_height);
+                    $this->_new_l = (int) min($this->_wSel, $this->_max_width);
+                    $this->_new_h = (int) min($this->_hSel, $this->_max_height);
                 } else {
                     $this->_new_l = $this->_wSel;
-                    $this->_new_h = min($this->_hSel, $this->_max_height);
+                    $this->_new_h = (int) min($this->_hSel, $this->_max_height);
                 }
             } else {
                 if ($this->_max_width) {
-                    $this->_new_l = min($this->_wSel, $this->_max_width);
-                    $this->_new_h = $this->_hSel;
+                    $this->_new_l = (int) min($this->_wSel, $this->_max_width);
+                    $this->_new_h = (int) $this->_hSel;
                 } else {
-                    $this->_new_l = $this->_wSel;
-                    $this->_new_h = $this->_hSel;
+                    $this->_new_l = (int) $this->_wSel;
+                    $this->_new_h = (int) $this->_hSel;
                 }
             }
         }
