@@ -3,6 +3,26 @@
 .box
   margin-bottom 2rem
 
+  &.box__biseau-top > div
+    background #fff url("/img/tri/top-left-ececec.svg") no-repeat top
+    background-size 100% 4vw
+    padding-top 4vw
+
+  &.box__biseau-bottom > div
+    background #fff url("/img/tri/bottom-right-ececec.svg") no-repeat bottom
+    background-size 100% 4vw
+    padding-bottom 4vw
+
+  &.box__biseau-top-bottom > div
+    background-color #fff
+    bbackground url("/img/tri/top-left-ececec.svg") no-repeat top, url("/img/tri/bottom-right-ececec.svg") no-repeat bottom
+    background-image url("/img/tri/top-left-ececec.svg"), url("/img/tri/bottom-right-ececec.svg")
+    background-repeat no-repeat, no-repeat
+    background-position top, bottom
+    background-size 100% 4vw
+    padding-top 4vw
+    padding-bottom 4vw
+
   &:after
     content ""
     display block
@@ -32,7 +52,7 @@
         z-index -1
 
   > div
-    background #fff
+    background-color #fff
     color #333
     padding 10px
     clear right

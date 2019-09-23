@@ -2,31 +2,31 @@
 
 https://www.adhocmusic.com
 
-## Prérequis globaux :
+## Prérequis
 
 - node
 - npm
 - composer
 - docker
 
-## Installation du projet :
+## Installation
 
-ajouter la ligne suivante dans /etc/hosts :
+ajouter la ligne suivante dans `/etc/hosts` :
 
 ```
 127.0.0.1 adhocmusic.test www.adhocmusic.test static.adhocmusic.test php.adhocmusic.test mysql.adhocmusic.test pma.adhocmusic.test
 ```
 
-1er Démarrage :
+1er démarrage :
 
 ```
 cd ~/workspace
 git clone git@bitbucket.org:adhocmusic/adhocmusic.com.git
 cd adhocmusic.com
-npm install
 composer install
-./node_modules/.bin/brunch build --production
-docker-compose up
+npm install
+npm run build
+npm start
 ```
 
 Redémarrage avec reconstruction des containers :
