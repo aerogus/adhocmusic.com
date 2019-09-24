@@ -14,8 +14,7 @@ body
 .site_content
   max-width 1000px
   /* 4rem de hauteur de top-bar fixed + 1rem de marge */
-  /* 3rem pour le footer */
-  margin 5rem auto 3rem
+  margin 5rem auto 0
   position relative
 
   @media screen and (max-width: 680px)
@@ -37,31 +36,6 @@ body
     background #0f0f0f
     color #fff
     text-decoration none
-
-/**************
- * box login
- **************/
-
-#form-login #login-pseudo,
-#form-login #login-password
-  padding-left 10px
-  margin-bottom 10px
-  width 100%
-
-#form-login ul
-  margin-right 5px
-
-#form-login li
-  font-size 1em
-  text-align right
-  margin-top 10px
-
-#form-login input[type=submit]
-  width 100%
-  margin-bottom 10px
-  padding 3px 2px
-  font-weight bold
-  background-color #040404
 
 /* squelette general */
 
@@ -234,19 +208,6 @@ fieldset ol li
   color #fff
   font-family Courier
 
-.spacer
-  visibility hidden
-  clear both
-
-/**************
- * moteur de recherche
- **************/
-
-.match
-  background #ff0
-  color #000
-  font-weight bold
-
 /**************
  * divers
  **************/
@@ -275,38 +236,6 @@ fieldset ol li
 
 .blocinfo td
   text-align left
-
-/**************
- * inscription
- **************/
-
-.registerblock
-  float left
-  width 185px
-  margin 5px
-  padding 10px
-  background #fff
-
-.registerblock h3
-  color #fff
-  padding 5px
-  text-align center
-  background-color #bb0000
-  margin-bottom 15px
-
-.registerbutton
-  display block
-  background-color #300
-  color #fff !important
-  padding 5px
-  text-align center
-  border-radius 5px
-  margin-top 15px
-  font-weight bold
-
-.registerbutton:hover
-  background-color #c00
-  color #fff
 
 /**************
  * page groupes
@@ -356,29 +285,6 @@ fieldset ol li
     padding-right 5px
     width 16px
     height 16px
-
-/**************
- * box à découvrir
- **************/
-
-.adecouvrir
-  clear left
-  border-bottom 1px #ececec solid
-  padding 5px 0 5px 0
-
-.adecouvririmg
-  margin 5px 0 10px 0
-
-.adecouvririmg a
-  color #300
-
-.adecouvririmg img
-  border 1px solid #999
-
-.adecouvririmg span
-  background #999 url(/img/gradient_gris.png)
-  padding 0 15px
-  border-bottom-right-radius 5px
 
 /**************
  * page partenaire

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*!
-* www.KNACSS.com v7.0.2 (januar, 4 2017) @author: Alsacreations, Raphael Goetter
+* www.KNACSS.com v7.1.1 (december, 10 2018) @author: Alsacreations, Raphael Goetter
 * Licence WTFPL http://www.wtfpl.net/
 */
 /* ----------------------------- */
@@ -11,7 +11,6 @@
 2- Libraries  :
   - Base
   - Print
-  - Misc (hyphens)
   - Layout (alignment, modules, positionning)
   - Utilities (width and spacers helpers)
   - Responsive helpers
@@ -19,7 +18,6 @@
   - Grillade (Grid System)
 3- Components :
   - Media object
-  - Autogrid object
   - Skip Links for accessibility
   - Tables
   - Forms
@@ -41,12 +39,22 @@ html {
   font-family: sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  -ms-overflow-style: scrollbar;
+     -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+  overflow-style: scrollbar;
   -webkit-tap-highlight-color: transparent;
 }
 
 @-ms-viewport {
+  width: device-width;
+}
+
+@-o-viewport {
+  width: device-width;
+}
+
+@viewport {
   width: device-width;
 }
 
@@ -90,7 +98,7 @@ abbr[title],
 abbr[data-original-title] {
   text-decoration: underline;
   -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
+          text-decoration: underline dotted;
   cursor: help;
   border-bottom: 0;
 }
@@ -134,7 +142,7 @@ dfn {
 
 b,
 strong {
-  font-weight: bolder;
+  font-weight: bold;
 }
 
 small {
@@ -161,7 +169,6 @@ a {
   color: #007bff;
   text-decoration: none;
   background-color: transparent;
-  -webkit-text-decoration-skip: objects;
 }
 
 a:hover {
@@ -195,7 +202,6 @@ pre {
   margin-top: 0;
   margin-bottom: 1rem;
   overflow: auto;
-  -ms-overflow-style: scrollbar;
 }
 
 figure {
@@ -221,7 +227,7 @@ select,
 summary,
 textarea {
   -ms-touch-action: manipulation;
-  touch-action: manipulation;
+      touch-action: manipulation;
 }
 
 table {
@@ -280,6 +286,8 @@ html [type="button"],
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;
+     -moz-appearance: button;
+          appearance: button;
 }
 
 button::-moz-focus-inner,
@@ -302,6 +310,8 @@ input[type="time"],
 input[type="datetime-local"],
 input[type="month"] {
   -webkit-appearance: listbox;
+     -moz-appearance: listbox;
+          appearance: listbox;
 }
 
 textarea {
@@ -340,16 +350,20 @@ progress {
 [type="search"] {
   outline-offset: -2px;
   -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 [type="search"]::-webkit-search-cancel-button,
 [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
+          appearance: none;
 }
 
 ::-webkit-file-upload-button {
   font: inherit;
   -webkit-appearance: button;
+          appearance: button;
 }
 
 output {
@@ -367,9 +381,20 @@ template {
 [hidden] {
   display: none !important;
 }
+
 /* ----------------------------- */
 /* ==Base (basic styles)         */
 /* ----------------------------- */
+/* disable animations styles when reduced rotion is enabled */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    -webkit-animation: none !important;
+            animation: none !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+  }
+}
+
 /* switching to border-box model for all elements */
 html {
   -webkit-box-sizing: border-box;
@@ -763,81 +788,7 @@ kbd {
 /* ----------------------------- */
 /* ==Global Micro Layout         */
 /* ----------------------------- */
-/* module, gains superpower "BFC" Block Formating Context */
-.mod,
-.bfc {
-  overflow: hidden;
-}
-
-/* blocks that needs to be placed under floats */
-.clear {
-  clear: both;
-}
-
-/* blocks that must contain floats */
-.clearfix::after {
-  content: "";
-  display: table;
-  clear: both;
-  border-collapse: collapse;
-}
-
-/* simple blocks alignment */
-.left {
-  margin-right: auto;
-}
-
-.right {
-  margin-left: auto;
-}
-
-.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* text and contents alignment */
-.txtleft {
-  text-align: left;
-}
-
-.txtright {
-  text-align: right;
-}
-
-.txtcenter {
-  text-align: center;
-}
-
-/* floating elements */
-.fl {
-  float: left;
-}
-
-img.fl {
-  margin-right: 1rem;
-}
-
-.fr {
-  float: right;
-}
-
-img.fr {
-  margin-left: 1rem;
-}
-
-img.fl,
-img.fr {
-  margin-bottom: 0.5rem;
-}
-
-/* inline-block */
-.inbl {
-  display: inline-block;
-  vertical-align: top;
-}
-
-/* flexbox layout
+/* Flexbox layout is KNACSS choice
 http://www.alsacreations.com/tuto/lire/1493-css3-flexbox-layout-module.html
 */
 .flex-container, .flex-container--row,
@@ -895,7 +846,7 @@ http://www.alsacreations.com/tuto/lire/1493-css3-flexbox-layout-module.html
 .item-fluid {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 0%;
-          flex: 1 1 0%;
+          flex: 1 1;
 }
 
 .flex-item-first,
@@ -982,6 +933,98 @@ http://www.alsacreations.com/tuto/lire/1493-css3-flexbox-layout-module.html
 .u-txt-ellipsis {
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+/* text and contents alignment */
+.txtleft,
+.u-txt-left {
+  text-align: left;
+}
+
+.txtright,
+.u-txt-right {
+  text-align: right;
+}
+
+.txtcenter,
+.u-txt-center {
+  text-align: center;
+}
+
+/* blocks that need to be placed under floats */
+.clear,
+.u-clear {
+  clear: both;
+}
+
+/* blocks that must contain floats */
+.clearfix::after,
+.u-clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+  border-collapse: collapse;
+}
+
+/* simple blocks alignment */
+.left .u-left {
+  margin-right: auto;
+}
+
+.right,
+.u-right {
+  margin-left: auto;
+}
+
+.center,
+.u-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Global Micro Layout */
+/* ------------------- */
+/* module, gains superpower "BFC" Block Formating Context */
+.mod,
+.u-mod,
+.bfc,
+.u-bfc {
+  overflow: hidden;
+}
+
+/* floating elements */
+.fl,
+.u-fl {
+  float: left;
+}
+
+img.fl,
+img.u-fl {
+  margin-right: 1rem;
+}
+
+.fr,
+.u-fr {
+  float: right;
+}
+
+img.fr,
+img.u-fr {
+  margin-left: 1rem;
+}
+
+img.fl,
+img.fr,
+img.u-fl,
+img.u-fr {
+  margin-bottom: 0.5rem;
+}
+
+/* inline-block */
+.inbl,
+.u-inbl {
+  display: inline-block;
+  vertical-align: top;
 }
 
 /* State Helpers */
@@ -1650,6 +1693,7 @@ ul.is-unstyled, ul.unstyled {
 @media (min-width: 480px) {
   [class*=" grid-"],
   [class^="grid-"] {
+    display: -ms-grid;
     display: grid;
     grid-auto-flow: dense;
   }
@@ -1670,6 +1714,7 @@ ul.is-unstyled, ul.unstyled {
 @media (min-width: 480px) {
   .autogrid,
   .grid {
+    display: -ms-grid;
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
@@ -1689,46 +1734,57 @@ ul.is-unstyled, ul.unstyled {
 }
 
 [class*="grid-2"] {
+  -ms-grid-columns: (1fr)[2];
   grid-template-columns: repeat(2, 1fr);
 }
 
 [class*="grid-3"] {
+  -ms-grid-columns: (1fr)[3];
   grid-template-columns: repeat(3, 1fr);
 }
 
 [class*="grid-4"] {
+  -ms-grid-columns: (1fr)[4];
   grid-template-columns: repeat(4, 1fr);
 }
 
 [class*="grid-5"] {
+  -ms-grid-columns: (1fr)[5];
   grid-template-columns: repeat(5, 1fr);
 }
 
 [class*="grid-6"] {
+  -ms-grid-columns: (1fr)[6];
   grid-template-columns: repeat(6, 1fr);
 }
 
 [class*="grid-7"] {
+  -ms-grid-columns: (1fr)[7];
   grid-template-columns: repeat(7, 1fr);
 }
 
 [class*="grid-8"] {
+  -ms-grid-columns: (1fr)[8];
   grid-template-columns: repeat(8, 1fr);
 }
 
 [class*="grid-9"] {
+  -ms-grid-columns: (1fr)[9];
   grid-template-columns: repeat(9, 1fr);
 }
 
 [class*="grid-10"] {
+  -ms-grid-columns: (1fr)[10];
   grid-template-columns: repeat(10, 1fr);
 }
 
 [class*="grid-11"] {
+  -ms-grid-columns: (1fr)[11];
   grid-template-columns: repeat(11, 1fr);
 }
 
 [class*="grid-12"] {
+  -ms-grid-columns: (1fr)[12];
   grid-template-columns: repeat(12, 1fr);
 }
 
@@ -1831,24 +1887,28 @@ ul.is-unstyled, ul.unstyled {
 /* intermediate breakpoints */
 @media (min-width: 480px) and (max-width: 767px) {
   [class*="grid-"][class*="-small-1"] {
+    -ms-grid-columns: (1fr)[1];
     grid-template-columns: repeat(1, 1fr);
   }
   [class*="col-"][class*="-small-1"] {
     grid-column: auto/span 1;
   }
   [class*="grid-"][class*="-small-2"] {
+    -ms-grid-columns: (1fr)[2];
     grid-template-columns: repeat(2, 1fr);
   }
   [class*="col-"][class*="-small-2"] {
     grid-column: auto/span 2;
   }
   [class*="grid-"][class*="-small-3"] {
+    -ms-grid-columns: (1fr)[3];
     grid-template-columns: repeat(3, 1fr);
   }
   [class*="col-"][class*="-small-3"] {
     grid-column: auto/span 3;
   }
   [class*="grid-"][class*="-small-4"] {
+    -ms-grid-columns: (1fr)[4];
     grid-template-columns: repeat(4, 1fr);
   }
   [class*="col-"][class*="-small-4"] {
@@ -1886,7 +1946,7 @@ ul.is-unstyled, ul.unstyled {
 /* ----------------------------- */
 /* ==Media object                */
 /* ----------------------------- */
-/* recommanded HTML : <div class="media"><img class="media-figure"><div class="media-content"></div></div> */
+/* recommended HTML : <div class="media"><img class="media-figure"><div class="media-content"></div></div> */
 /* see http://codepen.io/raphaelgoetter/pen/KMWWwj */
 @media (min-width: 480px) {
   .media {
@@ -1900,10 +1960,11 @@ ul.is-unstyled, ul.unstyled {
   .media-content {
     -webkit-box-flex: 1;
         -ms-flex: 1 1 0%;
-            flex: 1 1 0%;
+            flex: 1 1;
   }
   .media-figure--center {
     -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
         align-self: center;
   }
   .media--reverse {
@@ -2030,7 +2091,6 @@ label {
 [type="week"],
 select,
 textarea {
-  white-space: nowrap;
   font-family: inherit;
   font-size: inherit;
   border: 0;
@@ -2079,7 +2139,7 @@ textarea {
   min-height: 5em;
   vertical-align: top;
   resize: vertical;
-  white-space: normal;
+  white-space: pre-wrap;
 }
 
 /* 'x' appears on right of search input when text is entered. This removes it */
@@ -2091,8 +2151,44 @@ textarea {
   color: #777;
 }
 
-input:-moz-placeholder,
-textarea:-moz-placeholder {
+::-moz-placeholder {
+  color: #777;
+}
+
+:-ms-input-placeholder {
+  color: #777;
+}
+
+::-ms-input-placeholder {
+  color: #777;
+}
+
+::placeholder {
+  color: #777;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #777;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #777;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #777;
+}
+
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+  color: #777;
+}
+
+input::placeholder,
+textarea::placeholder {
   color: #777;
 }
 
@@ -2252,7 +2348,7 @@ button:focus {
 .button--ghost:active,
 .button--ghost:focus,
 .button--ghost:hover {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .btn--small,
@@ -2283,8 +2379,8 @@ button:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 .btn--unstyled:focus,
@@ -2304,9 +2400,10 @@ button:focus {
 }
 
 .nav-button > * {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  vertical-align: top;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -2378,9 +2475,9 @@ button:focus {
 /* ==Checkbox, radio, switch     */
 /* ----------------------------- */
 /* use .checkbox class on input type=checkbox */
-/* recommanded HTML : <input type="checkbox" class="checkbox" id="c1"><label for="c1">click here</label> */
+/* recommended HTML : <input type="checkbox" class="checkbox" id="c1"><label for="c1">click here</label> */
 /* use .radio class on input type=radio */
-/* recommanded HTML : <input type="radio" class="radio" name="radio" id="r1"><label for="r1">Click here</label> */
+/* recommended HTML : <input type="radio" class="radio" name="radio" id="r1"><label for="r1">Click here</label> */
 /* use .switch class on input type=checkbox */
 .checkbox {
   border-radius: 4px;
@@ -2403,9 +2500,6 @@ button:focus {
   vertical-align: text-bottom;
   outline: 0;
   cursor: pointer;
-  -webkit-box-shadow: inset 0 0 0 1px #333;
-          box-shadow: inset 0 0 0 1px #333;
-  background: #fff;
 }
 
 .switch ~ label,
@@ -2424,13 +2518,14 @@ button:focus {
   width: 4rem;
   height: 2rem;
   line-height: 2rem;
-  font-size: 60%;
+  font-size: 70%;
   -webkit-box-shadow: inset -2rem 0 0 #333, inset 0 0 0 1px #333;
           box-shadow: inset -2rem 0 0 #333, inset 0 0 0 1px #333;
   -webkit-transition: -webkit-box-shadow .15s;
   transition: -webkit-box-shadow .15s;
   transition: box-shadow .15s;
   transition: box-shadow .15s, -webkit-box-shadow .15s;
+  background-color: #fff;
 }
 
 .switch::before, .switch::after {
@@ -2458,12 +2553,15 @@ button:focus {
 .checkbox {
   width: 2rem;
   height: 2rem;
+  -webkit-box-shadow: inset 0 0 0 1px #333;
+          box-shadow: inset 0 0 0 1px #333;
+  background-color: #fff;
   -webkit-transition: background-color .15s;
   transition: background-color .15s;
 }
 
 .checkbox:checked {
-  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNy4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgOCA4IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA4IDgiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTYuNCwxTDUuNywxLjdMMi45LDQuNUwyLjEsMy43TDEuNCwzTDAsNC40bDAuNywwLjdsMS41LDEuNWwwLjcsMC43bDAuNy0wLjdsMy41LTMuNWwwLjctMC43TDYuNCwxTDYuNCwxeiINCgkvPg0KPC9zdmc+DQo=);
+  background-image: url("data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%208%208%22%20enable-background%3D%22new%200%200%208%208%22%20xml%3Aspace%3D%22preserve%22%3E%20%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M6.4%2C1L5.7%2C1.7L2.9%2C4.5L2.1%2C3.7L1.4%2C3L0%2C4.4l0.7%2C0.7l1.5%2C1.5l0.7%2C0.7l0.7-0.7l3.5-3.5l0.7-0.7L6.4%2C1L6.4%2C1z%22%20%2F%3E%0A%3C%2Fsvg%3E");
   background-size: 60% 60%;
   background-position: center;
   background-repeat: no-repeat;
@@ -2473,16 +2571,20 @@ button:focus {
 .radio {
   width: 2rem;
   height: 2rem;
-  -webkit-transition: background-color .15s;
-  transition: background-color .15s;
+  background-size: 0% 0%;
+  -webkit-transition: background-size .15s;
+  transition: background-size .15s;
+  -webkit-box-shadow: inset 0 0 0 1px #333;
+          box-shadow: inset 0 0 0 1px #333;
+  background-color: #fff;
 }
 
 .radio:checked {
-  background-image: url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20standalone%3D%22no%22%3F%3E%3Csvg%20version%3D%221.1%22%20width%3D%2240%22%20height%3D%2240%22%0AviewBox%3D%220%200%2080%2080%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Ccircle%20cx%3D%2240%22%20cy%3D%2240%22%20r%3D%2224%22%20style%3D%22fill%3A%23ffffff%22/%3E%3C/svg%3E);
-  background-size: 80% 80%;
+  background-image: url("data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20standalone%3D%22no%22%3F%3E%3Csvg%20version%3D%221.1%22%20width%3D%22100%22%20height%3D%22100%22%0AviewBox%3D%220%200%2080%2080%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Ccircle%20cx%3D%2240%22%20cy%3D%2240%22%20r%3D%2224%22%20style%3D%22fill%3A%23333333%22/%3E%3C/svg%3E");
+  background-size: 90% 90%;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #333;
+  background-color: #fff;
 }
 
 /* ----------------------------- */

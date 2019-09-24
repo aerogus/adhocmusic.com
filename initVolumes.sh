@@ -9,11 +9,15 @@ VOL_PATH="$ABS_PATH/volumes"
 
 dirs=(
   "$VOL_PATH"
-  "$VOL_PATH/mysql"
-  "$VOL_PATH/mysql/data"
-  "$VOL_PATH/mysql/log"
+  "$VOL_PATH/mariadb"
+  "$VOL_PATH/mariadb/data"
+  "$VOL_PATH/mariadb/log"
+  "$VOL_PATH/nginx"
+  "$VOL_PATH/nginx/log"
   "$VOL_PATH/php"
   "$VOL_PATH/php/log"
+  "$VOL_PATH/pma"
+  "$VOL_PATH/pma/log"
 )
 
 for dir in "${dirs[@]}"; do
