@@ -17,19 +17,19 @@
     <p>Veuillez cocher les cases des forums dont vous voulez recevoir les notifications de nouveaux messages par email</p>
     <ul>
       <li>
-        <input type="checkbox" name="forum[a]" id="forum[a]"{if !empty($forum['a'])} checked="checked"{/if}> Général
+        <input type="checkbox" class="switch" name="forum[a]" id="forum[a]"{if !empty($forum['a'])} checked="checked"{/if}> Général
       </li>
       <li>
-        <input type="checkbox" name="forum[b]" id="forum[b]"{if !empty($forum['b'])} checked="checked"{/if}> Bureau
+        <input type="checkbox" class="switch" name="forum[b]" id="forum[b]"{if !empty($forum['b'])} checked="checked"{/if}> Bureau
       </li>
       <li>
-        <input type="checkbox" name="forum[e]" id="forum[e]"{if !empty($forum['e'])} checked="checked"{/if}> Exposition
+        <input type="checkbox" class="switch" name="forum[e]" id="forum[e]"{if !empty($forum['e'])} checked="checked"{/if}> Exposition
       </li>
       <li>
-        <input type="checkbox" name="forum[s]" id="forum[s]"{if !empty($forum['s'])} checked="checked"{/if}> Site
+        <input type="checkbox" class="switch" name="forum[s]" id="forum[s]"{if !empty($forum['s'])} checked="checked"{/if}> Site
       </li>
       <li>
-        <input type="checkbox" name="forum[t]" id="forum[t]"{if !empty($forum['t'])} checked="checked"{/if}> Technique
+        <input type="checkbox" class="switch" name="forum[t]" id="forum[t]"{if !empty($forum['t'])} checked="checked"{/if}> Technique
       </li>
     </ul>
   </fieldset>
@@ -126,7 +126,7 @@
       </li>
       <li>
         <label for="mailing">Newsletter</label>
-        <span><input id="mailing" name="mailing" type="checkbox"{if $me->getMailing()} checked="checked"{/if}> oui, je veux recevoir la newsletter mensuelle</span>
+        <span><input id="mailing" class="switch" name="mailing" type="checkbox"{if $me->getMailing()} checked="checked"{/if}> oui, je veux recevoir la newsletter mensuelle</span>
       </li>
       <li>
         <label for="site">Site Internet</label>

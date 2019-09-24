@@ -8,8 +8,7 @@
     <h2>L'Association</h3>
     <p>
     Le site <strong>adhocmusic.com</strong> est édité par <strong>AD'HOC</strong>,
-    Association loi 1901, dont les statuts sont consultables sur <a href="/assoce/statuts">cette page</a>.
-    Le directeur de la publication est Lara Etcheverry en sa qualité de présidente.
+    Association loi 1901 à but non lucratif basée à Épinay-sur-Orge. Le directeur de la publication est Guillaume Seznec en sa qualité de président.
     </p>
     <h2>Hébergement</h2>
     <p>

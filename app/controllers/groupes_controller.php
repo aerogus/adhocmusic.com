@@ -173,8 +173,9 @@ final class Controller
         $smarty->enqueue_script('/js/groupe-create.js');
 
         Trail::getInstance()
-            ->addStep("Groupes", "/groupes/")
-            ->addStep("Inscription", "/groupes/create");
+            ->addStep("Tableau de bord", "/membres/tableau-de-bord/")
+            ->addStep("Mes Groupes", "/groupes/my")
+            ->addStep("Inscription");
 
         // valeurs par défaut
         $data = [

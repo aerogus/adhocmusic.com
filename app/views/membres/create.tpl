@@ -1,8 +1,8 @@
 {include file="common/header.tpl"}
 
-<div class="box">
+<div class="box" style="width: 320px; margin: 0 auto 20px">
   <header>
-    <h2>Inscription</h2>
+    <h2>Création d'un compte</h2>
   </header>
   <div>
 
@@ -25,8 +25,6 @@ Vous pourrez le modifier le modifier dans votre "Tableau de bord" / "Mes Infos P
 déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="/auth/lost-password">cliquez ici</a> pour le récupérer.</div>
 
 {else}
-
-<h3>Création d'un compte</h3>
 
 <form id="form-member-create" name="form-member-create" method="post" action="/membres/create">
   <ul>
@@ -65,7 +63,7 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
 
 {/if}
 
-</div>
+  </div>
 </div>
 
 {include file="common/footer.tpl"}

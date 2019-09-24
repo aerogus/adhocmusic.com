@@ -154,8 +154,7 @@ final class Controller
         $smarty->enqueue_script('/js/lost-password.js');
 
         Trail::getInstance()
-            ->addStep("Membres", "/membres/tableau-de-bord")
-            ->addStep("Mot de passe perdu");
+            ->addStep("Mot de passe oublié");
 
         if (Tools::isSubmit('form-lost-password')) {
             $email = (string) Route::params('email');

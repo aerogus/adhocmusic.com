@@ -4,7 +4,9 @@
 <div class="infobulle info"><a href="/adm/">🔗 <strong>Accès zone privée</strong></a></div>
 {/if}
 
-<div class="grid-3-small-2-tiny-1 has-gutter-l">
+<div class="grid-4-small-2-tiny-1 has-gutter-l">
+
+  <div class="col-1">
 
   <div class="box">
     <header>
@@ -48,6 +50,10 @@
     </div>
   </div>
 
+  </div>
+
+  <div class="col-2">
+
   <div class="box">
     <header>
       <h2>Messages reçus</h2>
@@ -73,9 +79,13 @@
     </div>
   </div>
 
+  </div>
+
+  <div class="col-1">
+
   <div class="box">
     <header>
-      <h2>Mes Abonnements</h2>
+      <h2>Mes alertes</h2>
     </header>
     <div>
       <h5>Groupes</h5>
@@ -86,9 +96,9 @@
         {/foreach}
       </ul>
       {else}
-      <p class="infobulle validation"">Vous n'êtes abonné à aucun groupe</p>
+      <p class="infobulle validation"">Aucun abonnement groupe</p>
       {/if}
-      <h5>Agenda</h5>
+      <h5>Évènements</h5>
       {if !empty($alerting_events)}
       <ul>
       {foreach $alerting_events as $event}
@@ -96,7 +106,7 @@
       {/foreach}
       </ul>
       {else}
-      <p class="infobulle validation"">Vous n'avez aucun événement dans votre agenda</p>
+      <p class="infobulle validation"">Aucun abonnement évènement</p>
       {/if}
       <h5>Lieux</h5>
       {if !empty($alerting_lieux)}
@@ -106,17 +116,19 @@
       {/foreach}
       </ul>
       {else}
-      <p class="infobulle validation"">Vous n'êtes abonné à aucun lieu</p>
+      <p class="infobulle validation"">Aucun abonnement lieu</p>
       {/if}
       <p><a href="/alerting/my">Gérer toutes mes alertes</a></p>
     </div>
+  </div>
+
   </div>
 
   <div class="box">
     <header>
       <h2>Mes Groupes</h2>
     </header>
-    <div class="blocinfo">
+    <div>
       {if $groupes|@count > 0}
       <p>Vous administrez le(s) groupe(s) suivant(s) :</p>
       <table>
@@ -135,12 +147,11 @@
         </tr>
         {/foreach}
       </table>
-      {else}
-      <p>Vous n'administrez aucun groupe</p>
-      <p>Vous avez un groupe de musique ? inscrivez le sur AD'HOC !</p>
-      {/if}
       <p><a href="/groupes/my">Tous mes groupes</a></p>
-      <p><a href="/groupes/create">Inscrire un Groupe</a></p>
+      {else}
+      <p>aucun groupe</p>
+      {/if}
+      <p><a href="/groupes/create">Inscrire un groupe</a></p>
     </div>
   </div>
 
@@ -160,8 +171,8 @@
       </div>
       {/foreach}
       <p><a href="/photos/my">Toutes mes photos</a></p>
-      <p><a href="/photos/create">Proposer une Photo</a></p>
       {/if}
+      <p><a href="/photos/create">Ajouter une photo</a></p>
     </div>
   </div>
 
@@ -181,8 +192,8 @@
       </div>
       {/foreach}
       <p><a href="/videos/my">Toutes mes vidéos</a></p>
-      <p><a href="/videos/create">Proposer une Vidéo</a></p>
       {/if}
+      <p><a href="/videos/create">Ajouter une vidéo</a></p>
     </div>
   </div>
 
@@ -215,9 +226,9 @@
         </tbody>
         {/foreach}
       </table>
-      {/if}
       <p><a href="/audios/my">Toutes mes musiques</a></p>
-      <p><a href="/audios/create">Ajouter une Musique</a></p>
+      {/if}
+      <p><a href="/audios/create">Ajouter une musique</a></p>
     </div>
   </div>
 

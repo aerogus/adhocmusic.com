@@ -18,15 +18,4 @@
   </div>
 </div>
 
-<div class="box">
-  <header>
-    <h2>Devenir partenaire ?</h2>
-  </header>
-  <div>
-    <p><strong>AD'HOC</strong> est ouvert à différentes propositions de partenariat, en particulier avec des sites musicaux, webzines et autres agendas culturels.</p>
-    <p>N'hésitez pas à faire un lien vers notre site. Toutes les bannières et logos sont disponibles sur la page "<a href="/visuels">visuels</a>"</p>
-    <p>Pour tout renseignement complémentaire, vous pouvez <a href="/contact"><strong>nous contacter</strong></a>.</p>
-  </div>
-</div>
-
 {include file="common/footer.tpl"}

@@ -12,11 +12,12 @@ class ForumPrive extends Forum
     /**
      * Retourne le listing des threads d'un forum donné avec le contenu du 1er message
      *
-     * @param int $page
+     * @param string $id_forum id_forum
+     * @param int    $page     page
      *
      * @return array
      */
-    static function getThreads($id_forum, $page = 0)
+    static function getThreads(string $id_forum, int $page = 0): array
     {
         $db = DataBase::getInstance();
 
@@ -33,19 +34,19 @@ class ForumPrive extends Forum
              . "ORDER BY  `t`.`modified_on` DESC, `m`.`id_thread` DESC , `m`.`id_message` DESC "
              . "LIMIT " . ((int) $page * FORUM_NB_THREADS_PER_PAGE) ."," . FORUM_NB_THREADS_PER_PAGE;
 
-        $threads = $db->queryWithFetch($sql);
-
-        return $threads;
+        return $db->queryWithFetch($sql);
     }
 
     /**
      * Retourne la page des messages d'un thread donné
      * (l'id_forum est implicite)
      *
-     * @param int $id_thread
-     * @param int $page
+     * @param int $id_thread id_thread
+     * @param int $page      page
+     *
+     * @return array
      */
-    static function getMessages($id_thread, $page = 0)
+    static function getMessages(int $id_thread, int $page = 0): array
     {
         $db = DataBase::getInstance();
 
@@ -80,8 +81,12 @@ class ForumPrive extends Forum
 
     /**
      * Retire tous les abonnements aux forums privés pour un membre interne
+     *
+     * @param int $id_contact id_contact
+     *
+     * @return bool
      */
-    static function delAllSubscriptions($id_contact)
+    static function delAllSubscriptions(int $id_contact)
     {
         $db = DataBase::getInstance();
 
@@ -97,7 +102,7 @@ class ForumPrive extends Forum
     /**
      * Retire un abonnement forum à un membre interne
      */
-    static function delSubscriberToForum($id_contact, $id_forum)
+    static function delSubscriberToForum(int $id_contact, string $id_forum)
     {
         $db = DataBase::getInstance();
 
@@ -113,7 +118,7 @@ class ForumPrive extends Forum
     /**
      * Ajoute un abonnement forum à un membre interne
      */
-    static function addSubscriberToForum($id_contact, $id_forum)
+    static function addSubscriberToForum(int $id_contact, string $id_forum)
     {
         $db = DataBase::getInstance();
 
@@ -156,7 +161,7 @@ class ForumPrive extends Forum
      *
      * @see addSubscriberToForum / delSubscriberToForum
      */
-    static function setSubscribedForums($id_contact, $ids_forum)
+    static function setSubscribedForums(int $id_contact, array $ids_forum)
     {
         $db = DataBase::getInstance();
 
@@ -177,12 +182,13 @@ class ForumPrive extends Forum
     }
 
     /**
-     * retourne la liste des inscrits à un forum privé donné
+     * Retourne la liste des inscrits à un forum privé donné
      *
-     * @param string $id_forum
+     * @param string $id_forum id_forum
+     *
      * @return array
      */
-    static function getSubscribers($id_forum)
+    static function getSubscribers(string $id_forum)
     {
         $db = DataBase::getInstance();
 
@@ -192,8 +198,6 @@ class ForumPrive extends Forum
              . "AND `m`.`id_contact` = `s`.`id_contact` "
              . "AND `s`.`id_forum` = '" . $db->escape($id_forum) . "'";
 
-        $subs = $db->queryWithFetch($sql);
-
-        return $subs;
+        return $db->queryWithFetch($sql);
     }
 }

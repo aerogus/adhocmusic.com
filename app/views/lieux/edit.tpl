@@ -40,7 +40,7 @@
       <label for="text">Description (*)</label>
     </li>
     <li>
-      <img src="{$lieu->getPhoto()}" alt="" style="float: right;">
+      <img src="{$lieu->getPhotoUrl()}" alt="" style="float: right;">
       <input id="photo" name="photo" type="file" style="float: right;">
       <label for="photo">Photo (format .jpg)</label>
     </li>

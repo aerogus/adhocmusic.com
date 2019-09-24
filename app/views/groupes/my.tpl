@@ -29,7 +29,6 @@
 </table>
 {else}
 <p>Vous n'administrez aucun groupe</p>
-<p>Vous avez un groupe de musique ? inscrivez le sur AD'HOC !</p>
 {/if}
 
 <a href="/groupes/create">Inscrire un Groupe</a>

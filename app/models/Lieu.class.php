@@ -41,11 +41,15 @@ class Lieu extends ObjectModel
     protected static $_instance = null;
 
     /**
+     * Nom de la clé primaire
      *
+     * @var string
      */
     protected static $_pk = 'id_lieu';
 
     /**
+     * Nom de la table
+     *
      * @var string
      */
     protected static $_table = 'adhoc_lieu';
@@ -156,6 +160,11 @@ class Lieu extends ObjectModel
     protected $_online = false;
 
     /**
+     * @var string
+     */
+    protected $_photo_url = null;
+
+    /**
      *
      */
     protected static $_all_fields = [
@@ -182,7 +191,7 @@ class Lieu extends ObjectModel
     ];
 
     /**
-     *
+     * @var array
      */
     protected $_modified_fields = [];
 
@@ -400,7 +409,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getSite()
+    function getSite(): string
     {
         if (strpos($this->_site, '.') === false) {
             return false;
@@ -573,13 +582,23 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * Retourne la distance
+     * Retourne la distance (à la position actuelle si renseignée)
      *
      * @return float
      */
     function getDistance(): float
     {
         return $this->_distance;
+    }
+
+    /**
+     * Retourne l'url de la photo du lieu
+     *
+     * @return string|null
+     */
+    function getPhotoUrl(): ?string
+    {
+        return $this->_photo_url;
     }
 
     /* fin getters */
@@ -591,14 +610,16 @@ class Lieu extends ObjectModel
      *
      * @param int $val val
      *
-     * @return void
+     * @return object
      */
-    function setIdType(int $val)
+    function setIdType(int $val): object
     {
         if ($this->_id_type !== $val) {
             $this->_id_type = $val;
             $this->_modified_fields['id_type'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -606,14 +627,16 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return void
+     * @return object
      */
-    function setName(string $val)
+    function setName(string $val): object
     {
         if ($this->_name !== $val) {
             $this->_name = $val;
             $this->_modified_fields['name'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -621,14 +644,16 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return void
+     * @return object
      */
-    function setAddress(string $val)
+    function setAddress(string $val): object
     {
         if ($this->_address !== $val) {
             $this->_address = $val;
             $this->_modified_fields['address'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -636,14 +661,16 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return void
+     * @return object
      */
-    function setCp(string $val)
+    function setCp(string $val): object
     {
         if ($this->_cp !== $val) {
             $this->_cp = $val;
             $this->_modified_fields['cp'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -651,14 +678,16 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return void
+     * @return object
      */
-    function setCity(string $val)
+    function setCity(string $val): object
     {
         if ($this->_city !== $val) {
             $this->_city = $val;
             $this->_modified_fields['city'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -666,14 +695,16 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return void
+     * @return object
      */
-    function setTel(string $val)
+    function setTel(string $val): object
     {
         if ($this->_tel !== $val) {
             $this->_tel = $val;
             $this->_modified_fields['tel'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -681,14 +712,16 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return string
+     * @return object
      */
-    function setFax(string $val)
+    function setFax(string $val): object
     {
         if ($this->_fax !== $val) {
             $this->_fax = $val;
             $this->_modified_fields['fax'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -696,14 +729,16 @@ class Lieu extends ObjectModel
      *
      * @param int $val val
      *
-     * @return void
+     * @return object
      */
-    function setIdCity(int $val)
+    function setIdCity(int $val): object
     {
         if ($this->_id_city !== $val) {
             $this->_id_city = $val;
             $this->_modified_fields['id_city'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -711,9 +746,9 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return void
+     * @return object
      */
-    function setIdDepartement($val)
+    function setIdDepartement(string $val): object
     {
         if (is_numeric($val)) {
             $val = str_pad((int) $val, 2, '0', STR_PAD_LEFT);
@@ -725,6 +760,8 @@ class Lieu extends ObjectModel
             $this->_id_departement = $val;
             $this->_modified_fields['id_departement'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -732,14 +769,16 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return void
+     * @return object
      */
-    function setIdRegion(string $val)
+    function setIdRegion(string $val): object
     {
         if ($this->_id_region !== $val) {
             $this->_id_region = $val;
             $this->_modified_fields['id_region'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -747,14 +786,16 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return void
+     * @return object
      */
-    function setIdCountry(string $val)
+    function setIdCountry(string $val): object
     {
         if ($this->_id_country !== $val) {
             $this->_id_country = $val;
             $this->_modified_fields['id_country'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -762,14 +803,16 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return void
+     * @return object
      */
-    function setText(string $val)
+    function setText(string $val): object
     {
         if ($this->_text !== $val) {
             $this->_text = $val;
             $this->_modified_fields['text'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -777,9 +820,9 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return void
+     * @return object
      */
-    function setSite(string $val)
+    function setSite(string $val): object
     {
         if (strpos($val, 'http://') !== 0) {
             $val = 'http://' . $val;
@@ -788,6 +831,8 @@ class Lieu extends ObjectModel
             $this->_site = $val;
             $this->_modified_fields['site'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -795,14 +840,16 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return void
+     * @return object
      */
-    function setEmail(string $val)
+    function setEmail(string $val): object
     {
         if ($this->_email !== $val) {
             $this->_email = $val;
             $this->_modified_fields['email'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -810,14 +857,16 @@ class Lieu extends ObjectModel
      *
      * @param int $val val
      *
-     * @return void
+     * @return object
      */
-    function setIdContact(int $val)
+    function setIdContact(int $val): object
     {
         if ($this->_id_contact !== $val) {
             $this->_id_contact = $val;
             $this->_modified_fields['id_contact'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -825,14 +874,16 @@ class Lieu extends ObjectModel
      *
      * @param float $val val
      * 
-     * @return void
+     * @return object
      */
-    function setLat(float $val)
+    function setLat(float $val): object
     {
         if ($this->_lat !== $val) {
             $this->_lat = $val;
             $this->_modified_fields['lat'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -840,14 +891,16 @@ class Lieu extends ObjectModel
      *
      * @param float $val val
      *
-     * @return void
+     * @return object
      */
-    function setLng(float $val)
+    function setLng(float $val): object
     {
         if ($this->_lng !== $val) {
             $this->_lng = $val;
             $this->_modified_fields['lng'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -855,28 +908,32 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return void
+     * @return object
      */
-    function setCreatedOn(string $val)
+    function setCreatedOn(string $val): object
     {
         if ($this->_created_on !== $val) {
             $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
+
+        return $this;
     }
 
     /**
      * Set la date de création à now
      *
-     * @return void
+     * @return object
      */
-    function setCreatedNow()
+    function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_created_on !== $now) {
             $this->_created_on = (string) $now;
             $this->_modified_fields['created_on'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -884,28 +941,32 @@ class Lieu extends ObjectModel
      *
      * @param string $val val
      *
-     * @return void
+     * @return object
      */
-    function setModifiedOn(string $val)
+    function setModifiedOn(string $val): object
     {
         if ($this->_modified_on !== $val) {
             $this->_modified_on = $val;
             $this->_modified_fields['modified_on'] = true;
         }
+
+        return $this;
     }
 
     /**
      * Set la date de modification à now
      *
-     * @return void
+     * @return object
      */
-    function setModifiedNow()
+    function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_modified_on != $now) {
             $this->_modified_on = (string) $now;
             $this->_modified_fields['modified_on'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -913,14 +974,16 @@ class Lieu extends ObjectModel
      *
      * @param bool $val val
      *
-     * @return void
+     * @return object
      */
-    function setOnline(bool $val)
+    function setOnline(bool $val): object
     {
         if ($this->_online !== $val) {
             $this->_online = $val;
             $this->_modified_fields['online'] = true;
         }
+
+        return $this;
     }
 
     /* fin setters */
@@ -934,8 +997,7 @@ class Lieu extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . Lieu::getDbTable() . "`";
+        $sql = "SELECT COUNT(*) FROM `" . Lieu::getDbTable() . "`";
 
         return $db->queryWithFetchFirstField($sql);
     }
@@ -1078,42 +1140,13 @@ class Lieu extends ObjectModel
      */
     protected function _loadFromDb()
     {
-        $db = DataBase::getInstance();
+        parent::_loadFromDb();
 
-        $sql = "SELECT `id_lieu` AS `id`, `id_type`, `name`, `address`, "
-             . " `cp`, `city`, `tel`, `fax`, `text`, `site`, `email`, "
-             . " `id_city`, `id_departement`, `id_region`, `id_country`, `lat`, `lng`, "
-             . " `id_contact`, `online`, "
-             . "`created_on`, `modified_on` "
-             . "FROM `" . Lieu::getDbTable() . "` `l` "
-             . "WHERE `id_lieu` = " . (int) $this->_id_lieu;
-
-        if (($res = $db->queryWithFetchFirstRow($sql)) == false) {
-            throw new Exception('id_lieu introuvable');
-        }
-
-        $this->_dbToObject($res);
-
-        if (file_exists(self::getBasePath() . '/' . $this->_id_lieu . '.jpg')) {
-            $this->_photo = self::getBaseUrl() . '/' . $this->_id_lieu . '.jpg';
-        } else {
-            $this->_photo = null;
+        if (file_exists(self::getBasePath() . '/' . (string) $this->getId() . '.jpg')) {
+            $this->_photo_url = self::getBaseUrl() . '/' . (string) $this->getId() . '.jpg';
         }
 
         return true;
-    }
-
-    /**
-     * Retourne la photo principale du lieu
-     *
-     * @return string|null
-     */
-    function getPhoto(): ?string
-    {
-        if (file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
-            return self::getBaseUrl() . '/' . $this->getId() . '.jpg';
-        }
-        return null;
     }
 
     /**

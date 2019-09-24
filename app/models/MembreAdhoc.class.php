@@ -422,12 +422,13 @@ class MembreAdhoc extends Membre
             $db->query($sql);
 
             return $this->getId();
-        }
-        else // UPDATE
-        {
+
+        } else { // UPDATE
+
             if ((count($this->_modified_fields['contact']) === 0)
-             && (count($this->_modified_fields['membre']) === 0)
-             && (count($this->_modified_fields['membre_adhoc']) === 0)) {
+                && (count($this->_modified_fields['membre']) === 0)
+                && (count($this->_modified_fields['membre_adhoc']) === 0)
+            ) {
                 return true; // pas de changement
             }
 
@@ -439,8 +440,7 @@ class MembreAdhoc extends Membre
                 foreach ($this->_modified_fields['contact'] as $field => $value) {
                     if ($value === true) {
                         $att = '_' . $field;
-                        switch ($fields['contact'][$field])
-                        {
+                        switch ($fields['contact'][$field]) {
                             case 'num':
                                 $fields_to_save .= " `" . $field."` = " . $db->escape($this->$att) . ",";
                                 break;
@@ -485,8 +485,7 @@ class MembreAdhoc extends Membre
                 foreach ($this->_modified_fields['membre'] as $field => $value) {
                     if ($value === true) {
                         $att = '_' . $field;
-                        switch ($fields['membre'][$field])
-                        {
+                        switch ($fields['membre'][$field]) {
                             case 'num':
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
@@ -531,8 +530,7 @@ class MembreAdhoc extends Membre
                 foreach ($this->_modified_fields['membre_adhoc'] as $field => $value) {
                     if ($value === true) {
                         $att = '_' . $field;
-                        switch ($fields['membre_adhoc'][$field])
-                        {
+                        switch ($fields['membre_adhoc'][$field]) {
                             case 'num':
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
