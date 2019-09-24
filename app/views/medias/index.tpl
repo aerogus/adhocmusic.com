@@ -1,8 +1,8 @@
 {include file="common/header.tpl"}
 
-<div class="grid-2-small-1 has-gutter-l">
+<div class="grid-3-small-1 has-gutter-l">
 
-  <div class="two-thirds">
+  <div class="col-2-small-1">
 
     {if !empty($create)}
     <div class="infobulle success">Le contenu a bien été ajouté</div>
@@ -47,7 +47,8 @@
         <div id="search-results"></div>
 
       </div>
-    </div>
+    </div>{* .box *}
+    </div>{* .col-2-1-small *}
 
     <div class="boxtitle">Dernières vidéos ajoutées</div>
 
@@ -73,7 +74,7 @@
 
   </div>
 
-  <div class="one-third">
+  <div class="col-1">
 
     {if !empty($comments)}
     <div class="box">
@@ -98,6 +99,6 @@
 
   </div>
 
-</div>{* .grid-2-1 *}
+</div>{* .grid-3-small-1 *}
 
 {include file="common/footer.tpl"}

@@ -26,12 +26,12 @@ class Contact extends ObjectModel
     /**
      * @var int
      */
-    protected $_id_contact = 0;
+    protected $_id_contact = null;
 
     /**
      * @var string
      */
-    protected $_email = '';
+    protected $_email = null;
 
     /**
      * @var string
@@ -81,11 +81,11 @@ class Contact extends ObjectModel
     /* début getters */
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getEmail()
+    function getEmail(): ?string
     {
-        return (string) $this->_email;
+        return $this->_email;
     }
 
     /**
@@ -99,19 +99,24 @@ class Contact extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `email` "
-             . "FROM `" . self::$_db_table_contact . "` "
-             . "WHERE `id_contact` = " . (int) $id_contact;
+        $sql = sprintf(
+            'SELECT `email` FROM `%s` WHERE `id_contact` = %d',
+            self::$_db_table_contact,
+            $id_contact
+        );
 
         return $db->queryWithFetchFirstField($sql);
     }
 
     /**
-     * @return string
+     * Retourne la date de la dernière consultation d'une newsletter
+     * (si tracker activé)
+     *
+     * @return string|null
      */
-    function getLastnl()
+    function getLastnl(): ?string
     {
-        return (string) $this->_lastnl;
+        return $this->_lastnl;
     }
 
     /**
@@ -121,8 +126,9 @@ class Contact extends ObjectModel
      * @param string $email
      *
      * @return int
+     * @throws Exception
      */
-    static function getIdByEmail($email)
+    static function getIdByEmail(string $email)
     {
         if (!Email::validate($email)) {
             throw new Exception('email syntaxiquement incorrect');
@@ -163,17 +169,23 @@ class Contact extends ObjectModel
 
     /**
      * @param string
+     *
+     * @return object
      */
     function setEmail(string $val)
     {
         if ($this->_email !== $val) {
-            $this->_email = (string) $val;
+            $this->_email = $val;
             $this->_modified_fields['contact']['email'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val
+     *
+     * @return object
      */
     function setLastnl(string $val)
     {
@@ -181,6 +193,8 @@ class Contact extends ObjectModel
             $this->_lastnl = $val;
             $this->_modified_fields['contact']['lastnl'] = true;
         }
+
+        return $this;
     }
 
     /**
@@ -193,6 +207,8 @@ class Contact extends ObjectModel
             $this->_lastnl = (string) $now;
             $this->_modified_fields['contact']['lastnl'] = true;
         }
+
+        return $this;
     }
 
     /* fin setters */
@@ -229,43 +245,50 @@ class Contact extends ObjectModel
             /* table contact */
 
             $sql = "INSERT INTO `" . static::$_db_table_contact . "` (";
-            foreach ($fields['contact'] as $field => $type) {
-                $sql .= "`" . $field . "`,";
+
+            if (count($this->_modified_fields['contact']) > 0) {
+                foreach ($fields['contact'] as $field => $type) {
+                    $sql .= "`" . $field . "`,";
+                }
+                $sql = substr($sql, 0, -1);
             }
-            $sql = substr($sql, 0, -1);
+            
             $sql .= ") VALUES (";
 
-            foreach ($fields['contact'] as $field => $type) {
-                $att = '_' . $field;
-                switch ($type)
-                {
-                    case 'num':
-                        $sql .= $db->escape($this->$att) . ",";
-                        break;
-                    case 'str':
-                        $sql .= "'" . $db->escape($this->$att) . "',";
-                        break;
-                    case 'date':
-                        $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
-                        break;
-                    case 'bool':
-                        $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
-                        break;
-                    case 'pwd':
-                        $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
-                        break;
-                    case 'phpser':
-                        $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
-                        break;
-                    case 'date':
-                        $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
-                        break;
-                    default:
-                        throw new Exception('invalid field type : ' . $type);
-                        break;
+            if (count($this->_modified_fields['contact']) > 0) {
+                foreach ($fields['contact'] as $field => $type) {
+                    $att = '_' . $field;
+                    if (is_null($this->$att)) {
+                        $sql .= 'NULL,';
+                    } else {
+                        switch ($type) {
+                            case 'num':
+                            case 'float': // ? à vérifier
+                                $sql .= $db->escape($this->$att) . ",";
+                                break;
+                            case 'str':
+                                $sql .= "'" . $db->escape($this->$att) . "',";
+                                break;
+                            case 'date':
+                                $sql .= "'" . $db->escape($this->$att) . "',";
+                                break;
+                            case 'bool':
+                                $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
+                                break;
+                            case 'pwd':
+                                $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
+                                break;
+                            case 'phpser':
+                                $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
+                                break;
+                            default:
+                                throw new Exception('invalid field type : ' . $type);
+                                break;
+                        }
+                    }
                 }
+                $sql = substr($sql, 0, -1);
             }
-            $sql = substr($sql, 0, -1);
             $sql .= ")";
 
             $db->query($sql);
@@ -286,29 +309,33 @@ class Contact extends ObjectModel
             foreach ($this->_modified_fields['contact'] as $field => $value) {
                 if ($value === true) {
                     $att = '_' . $field;
-                    switch ($fields['contact'][$field])
-                    {
-                        case 'num':
-                            $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
-                            break;
-                        case 'str':
-                            $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
-                            break;
-                        case 'bool':
-                            $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
-                            break;
-                        case 'bool':
-                            $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
-                            break;
-                        case 'phpser':
-                            $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
-                            break;
-                        case 'date':
-                            $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
-                            break;
-                        default:
-                            throw new Exception('invalid field type : ' . $fields['contact'][$field]);
-                            break;
+                    if (is_null($this->$att)) {
+                        $sql .= " `" . $field . "` = NULL,";
+                    } else {
+                        switch ($fields['contact'][$field]) {
+                            case 'num':
+                            case 'float': // ? à vérifier
+                                $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
+                                break;
+                            case 'str':
+                                $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
+                                break;
+                            case 'bool':
+                                $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
+                                break;
+                            case 'bool':
+                                $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
+                                break;
+                            case 'phpser':
+                                $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
+                                break;
+                            case 'date':
+                                $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                                break;
+                            default:
+                                throw new Exception('invalid field type : ' . $fields['contact'][$field]);
+                                break;
+                        }
                     }
                 }
             }

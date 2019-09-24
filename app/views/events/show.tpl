@@ -100,7 +100,7 @@
 
 </div>{* .box *}
 
-<div class="one-third">
+<div class="col-1">
   {calendar year=$year month=$month day=$day}
 </div>
 

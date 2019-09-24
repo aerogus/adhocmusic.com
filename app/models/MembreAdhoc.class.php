@@ -36,7 +36,7 @@ class MembreAdhoc extends Membre
     /**
      * @var bool
      */
-    protected $_active = 0;
+    protected $_active = false;
 
     /**
      * @var int
@@ -115,33 +115,33 @@ class MembreAdhoc extends Membre
     /**
      * @return string
      */
-    function getFunction()
+    function getFunction(): string
     {
-        return (string) $this->_function;
+        return $this->_function;
     }
 
     /**
      * @return string
      */
-    function getBirthDate()
+    function getBirthDate(): string
     {
-        return (string) $this->_birth_date;
+        return $this->_birth_date;
     }
 
     /**
      * @return bool
      */
-    function getActive()
+    function getActive(): bool
     {
-        return (bool) $this->_active;
+        return $this->_active;
     }
 
     /**
      * @return int
      */
-    function getRank()
+    function getRank(): int
     {
-        return (int) $this->_rank;
+        return $this->_rank;
     }
 
     /* fin getters */
@@ -149,7 +149,9 @@ class MembreAdhoc extends Membre
     /* début setters */
 
     /**
-     * @param string $val
+     * @param string $val val
+     *
+     * @return object
      */
     function setFunction(string $val)
     {
@@ -157,10 +159,14 @@ class MembreAdhoc extends Membre
             $this->_function = $val;
             $this->_modified_fields['membre_adhoc']['function'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
     function setBirthDate(string $val)
     {
@@ -168,10 +174,14 @@ class MembreAdhoc extends Membre
             $this->_birth_date = $val;
             $this->_modified_fields['membre_adhoc']['function'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param bool
+     * @param bool $val val
+     *
+     * @return object
      */
     function setActive(bool $val)
     {
@@ -179,10 +189,14 @@ class MembreAdhoc extends Membre
             $this->_active = $val;
             $this->_modified_fields['membre_adhoc']['active'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param int $val
+     * @param int $val val
+     *
+     * @return object
      */
     function setRank(int $val)
     {
@@ -190,6 +204,8 @@ class MembreAdhoc extends Membre
             $this->_rank = $val;
             $this->_modified_fields['membre_adhoc']['rank'] = true;
         }
+
+        return $this;
     }
 
     /* fin setters */
@@ -283,37 +299,40 @@ class MembreAdhoc extends Membre
             } else {
 
                 $sql = "INSERT INTO `" . static::$_db_table_contact . "` (";
-                foreach ($fields['contact'] as $field => $type) {
-                    $sql .= "`" . $field . "`,";
+                if (count($this->_modified_fields['contact']) > 0) {
+                    foreach ($fields['contact'] as $field => $type) {
+                        $sql .= "`" . $field . "`,";
+                    }
+                    $sql = substr($sql, 0, -1);
                 }
-                $sql = substr($sql, 0, -1);
                 $sql .= ") VALUES (";
 
-                foreach ($fields['contact'] as $field => $type) {
-                    $att = '_' . $field;
-                    switch ($type)
-                    {
-                        case 'num':
-                            $sql .= $db->escape($this->$att) . ",";
-                            break;
-                        case 'str':
-                            $sql .= "'" . $db->escape($this->$att) . "',";
-                            break;
-                        case 'bool':
-                            $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
-                            break;
-                        case 'pwd':
-                            $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
-                            break;
-                        case 'phpser':
-                            $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
-                            break;
-                        default:
-                            throw new Exception('invalid field type : ' . $type);
-                            break;
+                if (count($this->_modified_fields['contact']) > 0) {
+                    foreach ($fields['contact'] as $field => $type) {
+                        $att = '_' . $field;
+                        switch ($type) {
+                            case 'num':
+                                $sql .= $db->escape($this->$att) . ",";
+                                break;
+                            case 'str':
+                                $sql .= "'" . $db->escape($this->$att) . "',";
+                                break;
+                            case 'bool':
+                                $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
+                                break;
+                            case 'pwd':
+                                $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
+                                break;
+                            case 'phpser':
+                                $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
+                                break;
+                            default:
+                                throw new Exception('invalid field type : ' . $type);
+                                break;
+                        }
                     }
+                    $sql = substr($sql, 0, -1);
                 }
-                $sql = substr($sql, 0, -1);
                 $sql .= ")";
 
                 $db->query($sql);

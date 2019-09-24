@@ -17,16 +17,16 @@ ajouter la ligne suivante dans `/etc/hosts` :
 127.0.0.1 adhocmusic.test www.adhocmusic.test static.adhocmusic.test php.adhocmusic.test mysql.adhocmusic.test pma.adhocmusic.test
 ```
 
-1er démarrage :
+1er démarrage et développement :
 
 ```
 cd ~/workspace
 git clone git@bitbucket.org:adhocmusic/adhocmusic.com.git
 cd adhocmusic.com
-composer install
-npm install
-npm run build
-npm start
+composer install (dépendances php)
+npm install (dépendances js)
+npm run serve (brunch watch)
+npm start (docker-compose up)
 ```
 
 Redémarrage avec reconstruction des containers :

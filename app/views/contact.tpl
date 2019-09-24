@@ -1,8 +1,10 @@
 {include file="common/header.tpl"}
 
-<div class="grid-2-small-1 has-gutter-l">
+<div class="grid-3-small-1 has-gutter-l">
 
-  <div class="box two-thirds">
+  <div class="col-2-small-1">
+
+  <div class="box">
     <header>
       <h3>Contacter AD’HOC</h3>
     </header>
@@ -49,7 +51,7 @@
           </li>
           <li>
             <label for="mailing">J'accepte de recevoir les lettres d'information de l'association</label>
-            <input type="checkbox" id="mailing" name="mailing" checked="{if !empty($mailing)}checked{/if}">
+            <input type="checkbox" class="switch" id="mailing" name="mailing" checked="{if !empty($mailing)}checked{/if}">
           </li>
           <li>
             <div class="infobulle error" id="error_check"{if empty($error_check)} style="display: none"{/if}>Erreur à la vérification du code de sécurité</div>
@@ -63,8 +65,9 @@
 
     </div>
   </div>{* .box *}
+  </div>{* .col-2-small-1 *}
 
-  <div class="one-third">
+  <div class="col-1">
 
     <div class="box">
       <header>

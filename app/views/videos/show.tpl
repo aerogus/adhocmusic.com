@@ -21,7 +21,7 @@
 
 <div class="grid-3-tiny-2-small-1 has-gutter-l">
 
-  <div class="two-thirds">
+  <div class="col-2-small-1">
     <div class="box">
       <header>
         <h1>{$video->getName()|escape}</h1>
@@ -42,7 +42,7 @@
     </div>
   </div>
 
-  <div class="one-third">
+  <div class="col-1">
 
     <div class="box">
       <header>

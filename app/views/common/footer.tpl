@@ -30,7 +30,7 @@
       </ul>
     </li>
   </ul>
-  <div class="txtcenter italic mas">Association œuvrant pour le développement des musiques actuelles à Épinay-sur-Orge depuis 1996</div>
+  <div class="txtcenter italic mas">Association loi 1901 à but non lucratif œuvrant pour le développement des musiques actuelles à <a href="https://www.ville-epinay-sur-orge.fr">Épinay-sur-Orge</a> depuis 1996</div>
 </footer>
 
 <button type="button" id="up" name="retour en haut de la page">↑</button>

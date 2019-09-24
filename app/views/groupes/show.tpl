@@ -8,7 +8,7 @@
 
 <div class="grid-2-small-1-tiny-1 has-gutter-l">
 
-  <div>{* colonne 1 *}
+  <div class="col-1">
 
     <div class="box">
       <header>
@@ -80,7 +80,7 @@
     {/if}
 
   </div>
-  <div>{* colonne 2 *}
+  <div class="col-1">{* colonne 2 *}
 
     <div class="box">
       <header>

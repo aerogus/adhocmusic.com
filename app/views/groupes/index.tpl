@@ -8,7 +8,7 @@
     <div>
 
 {if !count($liste_groupes)}
-<p>Aucun groupe référencé. <a href="/groupes/create">Inscrire un groupe</a></p>
+<p>Aucun groupe référencé.</p>
 {/if}
 
 {foreach from=$liste_groupes item=groupes key=key}

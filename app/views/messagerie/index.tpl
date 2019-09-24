@@ -4,7 +4,7 @@
 
 <div class="grid-2-small-1-tiny-1 has-gutter-l">
 
-  <div>
+  <div class="col-1">
 
     <div class="box">
       <header>
@@ -60,16 +60,20 @@
 
   </div>
 
-  <div class="box">
-    <header>
-      <h1>Écrire à :</h1>
-    </header>
-    <div>
-      <form action="/messagerie/write" method="get">
-        <input type="text" id="pseudo" name="pseudo" value="" autocomplete="off">
-        <div id="suggests" style="padding-left: 15px;"></div>
-      </form>
+  <div class="col-1">
+
+    <div class="box">
+      <header>
+        <h1>Écrire à :</h1>
+      </header>
+      <div>
+        <form action="/messagerie/write" method="get">
+          <input type="text" id="pseudo" name="pseudo" value="" autocomplete="off">
+          <div id="suggests" style="padding-left:15px"></div>
+        </form>
+      </div>
     </div>
+
   </div>
 
 </div>
