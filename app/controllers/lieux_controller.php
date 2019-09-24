@@ -278,13 +278,12 @@ final class Controller
 
                 /* Upload de la photo */
                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
-                    $objImg = new Image($_FILES['photo']['tmp_name']);
-                    $objImg->setType(IMAGETYPE_JPEG);
-                    $objImg->setMaxWidth(400);
-                    $objImg->setMaxHeight(400);
-                    $objImg->setDestFile(Lieu::getBasePath() . '/' . $lieu->getId() . '.jpg');
-                    $objImg->write();
-                    $objImg = "";
+                    (new Image($_FILES['photo']['tmp_name']))
+                        ->setType(IMAGETYPE_JPEG)
+                        ->setMaxWidth(400)
+                        ->setMaxHeight(400)
+                        ->setDestFile(Lieu::getBasePath() . '/' . $lieu->getId() . '.jpg')
+                        ->write();
                 }
 
                 Log::action(Log::ACTION_LIEU_CREATE, $lieu->getId());
@@ -389,13 +388,12 @@ final class Controller
 
                     /* Upload de la photo */
                     if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
-                        $objImg = new Image($_FILES['photo']['tmp_name']);
-                        $objImg->setType(IMAGETYPE_JPEG);
-                        $objImg->setMaxWidth(400);
-                        $objImg->setMaxHeight(400);
-                        $objImg->setDestFile(Lieu::getBasePath() . '/' . $lieu->getId() . '.jpg');
-                        $objImg->write();
-                        $objImg = "";
+                        (new Image($_FILES['photo']['tmp_name']))
+                            ->setType(IMAGETYPE_JPEG)
+                            ->setMaxWidth(400)
+                            ->setMaxHeight(400)
+                            ->setDestFile(Lieu::getBasePath() . '/' . $lieu->getId() . '.jpg')
+                            ->write();
                     }
 
                     Log::action(Log::ACTION_LIEU_EDIT, $lieu->getId());

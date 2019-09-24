@@ -65,22 +65,22 @@ final class Controller
 
             if (self::_validateForm($data, $errors)) {
 
-                $f = Featured::init();
-                $f->setTitle($data['title']);
-                $f->setDescription($data['description']);
-                $f->setLink($data['link']);
-                $f->setDatDeb($data['datdeb']);
-                $f->setDatFin($data['datfin']);
-                $f->setOnline($data['online']);
-                $f->save();
+                Featured::init()
+                    ->setTitle($data['title'])
+                    ->setDescription($data['description'])
+                    ->setLink($data['link'])
+                    ->setDatDeb($data['datdeb'])
+                    ->setDatFin($data['datfin'])
+                    ->setOnline($data['online'])
+                    ->save();
 
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-                    $i = new Image($_FILES['image']['tmp_name']);
-                    $i->setType(IMAGETYPE_JPEG);
-                    $i->setMaxWidth(self::IMG_WIDTH);
-                    $i->setMaxHeight(self::IMG_HEIGHT);
-                    $i->setDestFile(Featured::getBasePath() . '/' . (int) $f->getId() . '.jpg');
-                    $i->write();
+                    (new Image($_FILES['image']['tmp_name']))
+                        ->setType(IMAGETYPE_JPEG)
+                        ->setMaxWidth(self::IMG_WIDTH)
+                        ->setMaxHeight(self::IMG_HEIGHT)
+                        ->setDestFile(Featured::getBasePath() . '/' . (int) $f->getId() . '.jpg')
+                        ->write();
                 }
 
                 Tools::redirect('/adm/featured/?create=1');
@@ -156,21 +156,21 @@ final class Controller
 
             if (self::_validateForm($data, $errors)) {
 
-                $f->setTitle($data['title']);
-                $f->setDescription($data['description']);
-                $f->setLink($data['link']);
-                $f->setDatDeb($data['datdeb']);
-                $f->setDatFin($data['datfin']);
-                $f->setOnline($data['online']);
-                $f->save();
+                $f->setTitle($data['title'])
+                    ->setDescription($data['description'])
+                    ->setLink($data['link'])
+                    ->setDatDeb($data['datdeb'])
+                    ->setDatFin($data['datfin'])
+                    ->setOnline($data['online'])
+                    ->save();
 
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-                    $i = new Image($_FILES['image']['tmp_name']);
-                    $i->setType(IMAGETYPE_JPEG);
-                    $i->setMaxWidth(self::IMG_WIDTH);
-                    $i->setMaxHeight(self::IMG_HEIGHT);
-                    $i->setDestFile(Featured::getBasePath() . '/' . $f->getId() . '.jpg');
-                    $i->write();
+                    (new Image($_FILES['image']['tmp_name']))
+                        ->setType(IMAGETYPE_JPEG)
+                        ->setMaxWidth(self::IMG_WIDTH)
+                        ->setMaxHeight(self::IMG_HEIGHT)
+                        ->setDestFile(Featured::getBasePath() . '/' . $f->getId() . '.jpg')
+                        ->write();
                 }
 
                 Tools::redirect('/adm/featured/?edit=1');

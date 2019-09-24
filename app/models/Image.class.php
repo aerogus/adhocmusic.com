@@ -118,8 +118,10 @@ class Image
      * @param int $width > 1
      * @param int $height > 1
      * @param string $color (ex: #ffffff)
+     *
+     * @return object
      */
-    function init($width = 16, $height = 16, $color = false)
+    function init($width = 16, $height = 16, $color = false): object
     {
         $this->_handle = imagecreatetruecolor($width, $height);
 
@@ -137,6 +139,8 @@ class Image
         $this->_ratio  = $this->_width / $this->_height;
 
         $this->selectAll();
+
+        return $this;
     }
 
     /**
@@ -191,8 +195,10 @@ class Image
      * règle :
      * 0 <= x1 < x2 < $this->_width
      * 0 <= y1 < y2 < $this->_height
+     * 
+     * @return object
      */
-    function setZone(int $x1, int $y1, int $x2, int $y2)
+    function setZone(int $x1, int $y1, int $x2, int $y2): object
     {
         if (($x1 >= 0) && ($x2 > $x1) && ($this->_width > $x2) &&
             ($y1 >= 0) && ($y2 > $y1) && ($this->_height > $y2)
@@ -204,42 +210,54 @@ class Image
             $this->_wSel = $this->_x2 - $this->_x1 + 1;
             $this->_hSel = $this->_y2 - $this->_y1 + 1;
         }
+
+        return $this;
     }
 
     /**
      * On sélectionne la zone centrale de l'image
+     *
+     * @param bool $zoom bool
+     *
+     * @return object
      */
-    function setZoom()
+    function setZoom(bool $zoom = true): object
     {
-        // ratio de l'image destination
-        $ratio = $this->_max_width / $this->_max_height;
+        if ($zoom) {
 
-        // coordonnées de la sélection avant calcul
-        $x1 = 0;
-        $y1 = 0;
-        $x2 = 0;
-        $y2 = 0;
+            // ratio de l'image destination
+            $ratio = $this->_max_width / $this->_max_height;
 
-        // cadrage
-        while (($x2 < $this->_width) && ($y2 < $this->_height)) {
-            $x2 += $ratio;
-            $y2 += $ratio;
+            // coordonnées de la sélection avant calcul
+            $x1 = 0;
+            $y1 = 0;
+            $x2 = 0;
+            $y2 = 0;
+
+            // cadrage
+            while (($x2 < $this->_width) && ($y2 < $this->_height)) {
+                $x2 += $ratio;
+                $y2 += $ratio;
+            }
+
+            // arrondi
+            $x2 = intval($x2);
+            $y2 = intval($y2);
+
+            // centrage de la sélection
+            $offsetx = intval(($this->_width - $x2) / 2);
+            $offsety = intval(($this->_height - $y2) / 2);
+
+            $x1 += $offsetx;
+            $y1 += $offsety;
+            $x2 += $offsetx - 1;
+            $y2 += $offsety - 1;
+
+            $this->setZone($x1, $y1, $x2, $y2);
+
         }
 
-        // arrondi
-        $x2 = intval($x2);
-        $y2 = intval($y2);
-
-        // centrage de la sélection
-        $offsetx = intval(($this->_width - $x2) / 2);
-        $offsety = intval(($this->_height - $y2) / 2);
-
-        $x1 += $offsetx;
-        $y1 += $offsety;
-        $x2 += $offsetx - 1;
-        $y2 += $offsety - 1;
-
-        $this->setZone($x1, $y1, $x2, $y2);
+        return $this;
     }
 
     /**
@@ -253,37 +271,55 @@ class Image
     /**
      * defini le nom du fichier destination
      *
-     * @param string $file
+     * @param string $file file
+     *
+     * @return object
      */
-    function setDestFile($file)
+    function setDestFile(string $file): object
     {
         $this->_file_res = $file;
+
+        return $this;
     }
 
     /**
      * fixe la couleur courante
      *
      * 3 paramàtres de 0 à 255 chacun
+     * 
+     * @param int $red rouge
+     * @param int $green vert
+     * @param int $blue bleu
+     *
+     * @return object
      */
-    function setColor($red = 0, $green = 0, $blue = 0)
+    function setColor(int $red = 0, int $green = 0, int $blue = 0): object
     {
         $this->_color = [
             'r' => $red,
             'g' => $green,
             'b' => $blue,
         ];
+
+        return $this;
     }
 
     /**
      * Fixe la couleur courante
      * parametre en hexa (ex: FB41CE)
+     *
+     * @param string $hexCode hexCode
+     *
+     * @return object
      */
-    function setHexColor($hexCode)
+    function setHexColor(string $hexCode): object
     {
         $red   = hexdec(substr($hexCode, 0, 2));
         $green = hexdec(substr($hexCode, 2, 2));
         $blue  = hexdec(substr($hexCode, 4, 2));
         $this->setColor($red, $green, $blue);
+
+        return $this;
     }
 
     /**
@@ -292,30 +328,43 @@ class Image
      * - IMAGETYPE_GIF
      * - IMAGETYPE_JPEG
      * - IMAGETYPE_PNG
+     *
+     * @param int $type type
+     * @return object
      */
-    function setType($type)
+    function setType(int $type): object
     {
-        $this->_type = (int) $type;
+        $this->_type = $type;
+
+        return $this;
     }
 
     /**
      * fixe une contrainte de largeur maxi
      *
-     * @param int
+     * @param int $maxWidth largeur maxi
+     *
+     * @return object
      */
-    function setMaxWidth($maxWidth)
+    function setMaxWidth(int $maxWidth): object
     {
-        $this->_max_width = (int) $maxWidth;
+        $this->_max_width = $maxWidth;
+
+        return $this;
     }
 
     /**
      * fixe une contrainte de hauteur maxi
      *
-     * @param int
+     * @param int $maxHeight hauteur maxi
+     *
+     * @return object
      */
-    function setMaxHeight($maxHeight)
+    function setMaxHeight(int $maxHeight): object
     {
-        $this->_max_height = (int) $maxHeight;
+        $this->_max_height = $maxHeight;
+
+        return $this;
     }
 
     /**
@@ -418,21 +467,29 @@ class Image
     /**
      * indique si on doit garder les proportions
      *
-     * @param bool
+     * @param bool $bool bool
+     *
+     * @return object
      */
-    function setKeepRatio($bool)
+    function setKeepRatio(bool $bool): object
     {
-        $this->_keep_ratio = (bool) $bool;
+        $this->_keep_ratio = $bool;
+
+        return $this;
     }
 
     /**
      * indique si on doit ajouter des bordures
      *
-     * @param bool
+     * @param bool $bool bool
+     *
+     * @return object
      */
-    function setBorder($bool)
+    function setBorder(bool $bool): object
     {
-        $this->_border = (bool) $bool;
+        $this->_border = $bool;
+
+        return $this;
     }
 
     /**

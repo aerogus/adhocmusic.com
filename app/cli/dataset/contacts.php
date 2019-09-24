@@ -12,18 +12,6 @@ $data = [
     ['lara@adhocmusic.com', 'Lara', 'Etcheverry'],
 ];
 
-echo Contact::getDbTable();
-echo Membre::getDbTable();
-die;
-
-/*
-$c = Contact::getInstance(24);
-var_dump($c);
-die;
-*/
-
-//Contact::getInstance(2)->delete();
-
 foreach ($data as $idx => $_data) {
     $id_contact = Contact::init()
         ->setEmail($_data[0])
@@ -35,7 +23,4 @@ foreach ($data as $idx => $_data) {
         ->setLastName($_data[2])
         ->save();
     echo "créa membre\n";
-
-    //Contact::getInstance($id_contact)->delete();
-    echo "delete contact (donc membre)\n";
 }

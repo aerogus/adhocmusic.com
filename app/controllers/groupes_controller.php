@@ -206,53 +206,50 @@ final class Controller
 
             if (self::_validateGroupeCreateForm($data, $errors)) {
 
-                $groupe = Groupe::init();
-                $groupe->setName($data['name']);
-                $groupe->setAlias(Groupe::genAlias($data['name']));
-                $groupe->setStyle($data['style']);
-                $groupe->setInfluences($data['influences']);
-                $groupe->setLineup($data['lineup']);
-                $groupe->setMiniText($data['mini_text']);
-                $groupe->setText($data['text']);
-                $groupe->setSite($data['site']);
-                $groupe->setFacebookPageId($data['facebook_page_id']);
-                $groupe->setTwitterId($data['twitter_id']);
-                $groupe->setEtat(Groupe::ETAT_ACTIF);
-                $groupe->setOnline(true);
+                $groupe = Groupe::init()
+                    ->setName($data['name'])
+                    ->setAlias(Groupe::genAlias($data['name']))
+                    ->setStyle($data['style'])
+                    ->setInfluences($data['influences'])
+                    ->setLineup($data['lineup'])
+                    ->setMiniText($data['mini_text'])
+                    ->setText($data['text'])
+                    ->setSite($data['site'])
+                    ->setFacebookPageId($data['facebook_page_id'])
+                    ->setTwitterId($data['twitter_id'])
+                    ->setEtat(Groupe::ETAT_ACTIF)
+                    ->setOnline(true);
 
                 if ($groupe->save()) {
 
                     if (is_uploaded_file($_FILES['lelogo']['tmp_name'])) {
-                        $img = new Image($_FILES['lelogo']['tmp_name']);
-                        $img->setType(IMAGETYPE_JPEG);
-                        $img->setKeepRatio(true);
-                        $img->setMaxWidth(400);
-                        $img->setMaxHeight(400);
-                        $img->setDestFile(Groupe::getBasePath() . '/l' . $groupe->getId() . '.jpg');
-                        $img->write();
-                        $img = '';
+                        (new Image($_FILES['lelogo']['tmp_name']))
+                            ->setType(IMAGETYPE_JPEG)
+                            ->setKeepRatio(true)
+                            ->setMaxWidth(400)
+                            ->setMaxHeight(400)
+                            ->setDestFile(Groupe::getBasePath() . '/l' . $groupe->getId() . '.jpg')
+                            ->write();
                     }
 
                     if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
-                        $img = new Image($_FILES['photo']['tmp_name']);
-                        $img->setType(IMAGETYPE_JPEG);
-                        $img->setKeepRatio(true);
-                        $img->setMaxWidth(400);
-                        $img->setMaxHeight(400);
-                        $img->setDestFile(Groupe::getBasePath() . '/p' . $groupe->getId() . '.jpg');
-                        $img->write();
-                        $img = '';
+                        (new Image($_FILES['photo']['tmp_name']))
+                            ->setType(IMAGETYPE_JPEG)
+                            ->setKeepRatio(true)
+                            ->setMaxWidth(400)
+                            ->setMaxHeight(400)
+                            ->setDestFile(Groupe::getBasePath() . '/p' . $groupe->getId() . '.jpg')
+                            ->write();
                     }
 
                     if (is_uploaded_file($_FILES['mini_photo']['tmp_name'])) {
-                        $img = new Image($_FILES['mini_photo']['tmp_name']);
-                        $img->setType(IMAGETYPE_JPEG);
-                        $img->setKeepRatio(false);
-                        $img->setMaxWidth(64);
-                        $img->setMaxHeight(64);
-                        $img->setDestFile(Groupe::getBasePath() . '/m' . $groupe->getId() . '.jpg');
-                        $img->write();
-                        $img = '';
+                        (new Image($_FILES['mini_photo']['tmp_name']))
+                            ->setType(IMAGETYPE_JPEG)
+                            ->setKeepRatio(false)
+                            ->setMaxWidth(64)
+                            ->setMaxHeight(64)
+                            ->setDestFile(Groupe::getBasePath() . '/m' . $groupe->getId() . '.jpg')
+                            ->write();
                     }
 
                     $groupe->linkMember($_SESSION['membre']->getId());
@@ -344,50 +341,47 @@ final class Controller
                     return 'edition du groupe non autorisée';
                 }
 
-                $groupe->setStyle($data['style']);
-                $groupe->setInfluences($data['influences']);
-                $groupe->setLineup($data['lineup']);
-                $groupe->setMiniText($data['mini_text']);
-                $groupe->setText($data['text']);
-                $groupe->setSite($data['site']);
-                $groupe->setFacebookPageId($data['facebook_page_id']);
-                $groupe->setTwitterId($data['twitter_id']);
-                $groupe->setModifiedNow();
-                $groupe->save();
+                $groupe->setStyle($data['style'])
+                    ->setInfluences($data['influences'])
+                    ->setLineup($data['lineup'])
+                    ->setMiniText($data['mini_text'])
+                    ->setText($data['text'])
+                    ->setSite($data['site'])
+                    ->setFacebookPageId($data['facebook_page_id'])
+                    ->setTwitterId($data['twitter_id'])
+                    ->setModifiedNow()
+                    ->save();
 
                 // $groupe->updateMember($_SESSION['membre']->getId(), $data['id_type_musicien']);
 
                 if (is_uploaded_file($_FILES['lelogo']['tmp_name'])) {
-                    $img = new Image($_FILES['lelogo']['tmp_name']);
-                    $img->setType(IMAGETYPE_JPEG);
-                    $img->setKeepRatio(true);
-                    $img->setMaxWidth(400);
-                    $img->setMaxHeight(400);
-                    $img->setDestFile(Groupe::getBasePath() . '/l' . $groupe->getId() . '.jpg');
-                    $img->write();
-                    $img = '';
+                    (new Image($_FILES['lelogo']['tmp_name']))
+                        ->setType(IMAGETYPE_JPEG)
+                        ->setKeepRatio(true)
+                        ->setMaxWidth(400)
+                        ->setMaxHeight(400)
+                        ->setDestFile(Groupe::getBasePath() . '/l' . $groupe->getId() . '.jpg')
+                        ->write();
                 }
 
                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
-                    $img = new Image($_FILES['photo']['tmp_name']);
-                    $img->setType(IMAGETYPE_JPEG);
-                    $img->setKeepRatio(true);
-                    $img->setMaxWidth(400);
-                    $img->setMaxHeight(400);
-                    $img->setDestFile(Groupe::getBasePath() . '/p' . $groupe->getId() . '.jpg');
-                    $img->write();
-                    $img = '';
+                    (new Image($_FILES['photo']['tmp_name']))
+                        ->setType(IMAGETYPE_JPEG)
+                        ->setKeepRatio(true)
+                        ->setMaxWidth(400)
+                        ->setMaxHeight(400)
+                        ->setDestFile(Groupe::getBasePath() . '/p' . $groupe->getId() . '.jpg')
+                        ->write();
                 }
 
                 if (is_uploaded_file($_FILES['mini_photo']['tmp_name'])) {
-                    $img = new Image($_FILES['mini_photo']['tmp_name']);
-                    $img->setType(IMAGETYPE_JPEG);
-                    $img->setKeepRatio(false);
-                    $img->setMaxWidth(64);
-                    $img->setMaxHeight(64);
-                    $img->setDestFile(Groupe::getBasePath() . '/m' . $groupe->getId() . '.jpg');
-                    $img->write();
-                    $img = '';
+                    (new Image($_FILES['mini_photo']['tmp_name']))
+                        ->setType(IMAGETYPE_JPEG)
+                        ->setKeepRatio(false)
+                        ->setMaxWidth(64)
+                        ->setMaxHeight(64)
+                        ->setDestFile(Groupe::getBasePath() . '/m' . $groupe->getId() . '.jpg')
+                        ->write();
                 }
 
                 Log::action(Log::ACTION_GROUP_EDIT, $groupe->getId());

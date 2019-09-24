@@ -829,13 +829,12 @@ class Video extends Media
         $jpg = self::getBasePath() . '/' . $this->_id_video . '.jpg';
 
         file_put_contents($tmp, file_get_contents($remote_url));
-        $objImg = new Image($tmp);
-        $objImg->setType(IMAGETYPE_JPEG);
-        $objImg->setMaxWidth(320);
-        $objImg->setMaxHeight(240);
-        $objImg->setDestFile($jpg);
-        $objImg->write();
-        unset($objImg);
+        (new Image($tmp))
+            ->setType(IMAGETYPE_JPEG)
+            ->setMaxWidth(320)
+            ->setMaxHeight(240)
+            ->setDestFile($jpg)
+            ->write();
         unlink($tmp);
 
         return true;
@@ -871,20 +870,18 @@ class Video extends Media
         if (!file_exists($cache)) {
             $source = self::getBasePath() . '/' . $id . '.jpg';
             if (file_exists($source)) {
-                $img = new Image($source);
-                $img->setType(IMAGETYPE_JPEG);
-                $img->setMaxWidth($width);
-                $img->setMaxHeight($height);
-                $img->setBorder($border);
-                $img->setKeepRatio(true);
-                if ($zoom) {
-                    $img->setZoom();
-                }
-                $img->setHexColor($bgcolor);
+                $img = (new Image($source))
+                    ->setType(IMAGETYPE_JPEG)
+                    ->setMaxWidth($width)
+                    ->setMaxHeight($height)
+                    ->setBorder($border)
+                    ->setKeepRatio(true)
+                    ->setZoom($zoom)
+                    ->setHexColor($bgcolor);
                 Image::writeCache($uid, $img->get());
             } else {
-                $img = new Image();
-                $img->init(16, 16, '000000');
+                $img = (new Image())
+                    ->init(16, 16, '000000');
                 Image::writeCache($uid, $img->get());
                 Log::write('video', 'vignette vidéo ' . $id . ' introuvable | uid : ' . $uid);
             }

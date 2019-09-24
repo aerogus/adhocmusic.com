@@ -87,16 +87,14 @@ final class Controller
         $source = ADHOC_ROOT_PATH . '/media/photo/' . $id . '.jpg';
 
         if (file_exists($source)) {
-            $img = new Image($source);
-            $img->setType(self::_getOutputFormat());
-            $img->setMaxWidth($width);
-            $img->setMaxHeight($height);
-            $img->setBorder($border);
-            $img->setKeepRatio(true);
-            if ($zoom) {
-                $img->setZoom();
-            }
-            $img->setHexColor($bgcolor);
+            $img = (new Image($source))
+                ->setType(self::_getOutputFormat())
+                ->setMaxWidth($width)
+                ->setMaxHeight($height)
+                ->setBorder($border)
+                ->setKeepRatio(true)
+                ->setZoom($zoom)
+                ->setHexColor($bgcolor);
             $content = $img->get();
             Image::writeCache($uid, $content);
             return $content;
@@ -128,16 +126,14 @@ final class Controller
         $source = ADHOC_ROOT_PATH . '/media/video/' . $id . '.jpg';
 
         if (file_exists($source)) {
-            $img = new Image($source);
-            $img->setType(self::_getOutputFormat());
-            $img->setMaxWidth($width);
-            $img->setMaxHeight($height);
-            $img->setBorder($border);
-            $img->setKeepRatio(true);
-            $img->setHexColor($bgcolor);
-            if ($zoom) {
-                $img->setZoom();
-            }
+            $img = (new Image($source))
+                ->setType(self::_getOutputFormat())
+                ->setMaxWidth($width)
+                ->setMaxHeight($height)
+                ->setBorder($border)
+                ->setKeepRatio(true)
+                ->setHexColor($bgcolor)
+                ->setZoom($zoom);
             $content = $img->get();
             Image::writeCache($uid, $content);
             return $content;
@@ -169,16 +165,14 @@ final class Controller
         $source = ADHOC_ROOT_PATH . '/media/event/' . $id . '.jpg';
 
         if (file_exists($source)) {
-            $img = new Image($source);
-            $img->setType(self::_getOutputFormat());
-            $img->setMaxWidth($width);
-            $img->setMaxHeight($height);
-            $img->setBorder($border);
-            $img->setKeepRatio(true);
-            $img->setHexColor($bgcolor);
-            if ($zoom) {
-                $img->setZoom();
-            }
+            $img = (new Image($source))
+                ->setType(self::_getOutputFormat())
+                ->setMaxWidth($width)
+                ->setMaxHeight($height)
+                ->setBorder($border)
+                ->setKeepRatio(true)
+                ->setHexColor($bgcolor)
+                ->setZoom($zoom);
             $content = $img->get();
             Image::writeCache($uid, $content);
             return $content;
@@ -247,16 +241,14 @@ final class Controller
         $source = ADHOC_ROOT_PATH . '/media/featured/' . $id . '.jpg';
 
         if (file_exists($source)) {
-            $img = new Image($source);
-            $img->setType(self::_getOutputFormat());
-            $img->setMaxWidth($width);
-            $img->setMaxHeight($height);
-            $img->setBorder($border);
-            $img->setKeepRatio(true);
-            $img->setHexColor($bgcolor);
-            if ($zoom) {
-                $img->setZoom();
-            }
+            $img = (new Image($source))
+                ->setType(self::_getOutputFormat())
+                ->setMaxWidth($width)
+                ->setMaxHeight($height)
+                ->setBorder($border)
+                ->setKeepRatio(true)
+                ->setHexColor($bgcolor)
+                ->setZoom($zoom);
             $content = $img->get();
             Image::writeCache($uid, $content);
             return $content;
@@ -316,9 +308,9 @@ final class Controller
      */
     private static function _fallback(): string
     {
-        $img = new Image();
-        $img->init(2, 2, 'ffffff');
-        $img->setType(self::_getOutputFormat());
+        $img = (new Image())
+            ->init(2, 2, 'ffffff')
+            ->setType(self::_getOutputFormat());
         return $img->get();
     }
 

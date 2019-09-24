@@ -209,25 +209,25 @@ final class Controller
 
             if (self::_validatePhotoCreateForm($data, $errors)) {
 
-                $photo = Photo::init();
-                $photo->setName($data['name']);
-                $photo->setCredits($data['credits']);
-                $photo->setIdGroupe($data['id_groupe']);
-                $photo->setIdLieu($data['id_lieu']);
-                $photo->setIdEvent($data['id_event']);
-                $photo->setIdContact($data['id_contact']);
-                $photo->setIdStructure($data['id_structure']);
-                $photo->setOnline($data['online']);
-                $photo->setCreatedNow();
-                $photo->save();
+                $photo = Photo::init()
+                    ->setName($data['name'])
+                    ->setCredits($data['credits'])
+                    ->setIdGroupe($data['id_groupe'])
+                    ->setIdLieu($data['id_lieu'])
+                    ->setIdEvent($data['id_event'])
+                    ->setIdContact($data['id_contact'])
+                    ->setIdStructure($data['id_structure'])
+                    ->setOnline($data['online'])
+                    ->setCreatedNow()
+                    ->save();
 
                 if (is_uploaded_file($_FILES['file']['tmp_name'])) {
-                    $objImg = new Image($_FILES['file']['tmp_name']);
-                    $objImg->setType(IMAGETYPE_JPEG);
-                    $objImg->setMaxWidth(1024);
-                    $objImg->setMaxHeight(768);
-                    $objImg->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg');
-                    $objImg->write();
+                    (new Image($_FILES['file']['tmp_name']))
+                        ->setType(IMAGETYPE_JPEG)
+                        ->setMaxWidth(1024)
+                        ->setMaxHeight(768)
+                        ->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg')
+                        ->write();
                 }
 
                 Log::action(Log::ACTION_PHOTO_CREATE, $photo->getId());
@@ -360,26 +360,26 @@ final class Controller
 
                     if (empty($errors)) {
 
-                        $photo = Photo::init();
-                        $photo->setName($data['name']);
-                        $photo->setCredits($data['credits']);
-                        $photo->setIdGroupe($data['id_groupe']);
-                        $photo->setIdLieu($data['id_lieu']);
-                        $photo->setIdEvent($data['id_event']);
-                        $photo->setIdContact($data['id_contact']);
-                        $photo->setIdStructure($data['id_structure']);
-                        $photo->setOnline($data['online']);
-                        $photo->setCreatedNow();
-                        $photo->save();
+                        $photo = Photo::init()
+                            ->setName($data['name'])
+                            ->setCredits($data['credits'])
+                            ->setIdGroupe($data['id_groupe'])
+                            ->setIdLieu($data['id_lieu'])
+                            ->setIdEvent($data['id_event'])
+                            ->setIdContact($data['id_contact'])
+                            ->setIdStructure($data['id_structure'])
+                            ->setOnline($data['online'])
+                            ->setCreatedNow()
+                            ->save();
 
                         Log::write('photo', "création image " . $photo->getId());
 
-                        $objImg = new Image($filename);
-                        $objImg->setType(IMAGETYPE_JPEG);
-                        $objImg->setMaxWidth(1024);
-                        $objImg->setMaxHeight(768);
-                        $objImg->setDestFile(ADHOC_ROOT_PATH . '/static/media/photo/' . $photo->getId() . '.jpg');
-                        $objImg->write();
+                        (new Image($filename))
+                            ->setType(IMAGETYPE_JPEG)
+                            ->setMaxWidth(1024)
+                            ->setMaxHeight(768)
+                            ->setDestFile(ADHOC_ROOT_PATH . '/static/media/photo/' . $photo->getId() . '.jpg')
+                            ->write();
 
                         unlink($filename);
                         Log::write('photo', "delete de " . $filename);

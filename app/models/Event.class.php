@@ -1493,16 +1493,14 @@ class Event extends ObjectModel
         if (!file_exists($cache)) {
             $source = self::getBasePath() . '/' . $id . '.jpg';
             if (file_exists($source)) {
-                $img = new Image($source);
-                $img->setType(IMAGETYPE_JPEG);
-                $img->setMaxWidth($width);
-                $img->setMaxHeight($height);
-                $img->setBorder($border);
-                $img->setKeepRatio(true);
-                if ($zoom) {
-                    $img->setZoom();
-                }
-                $img->setHexColor($bgcolor);
+                $img = (new Image($source))
+                    ->setType(IMAGETYPE_JPEG)
+                    ->setMaxWidth($width)
+                    ->setMaxHeight($height)
+                    ->setBorder($border)
+                    ->setKeepRatio(true)
+                    ->setZoom($zoom)
+                    ->setHexColor($bgcolor);
                 Image::writeCache($uid, $img->get());
             } else {
                 // ce n'est pas une erreur, tous les events n'ont pas de flyers

@@ -369,14 +369,13 @@ final class Controller
                 if ($event->save()) {
 
                     if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
-                        $img = new Image($_FILES['flyer']['tmp_name']);
-                        $img->setType(IMAGETYPE_JPEG);
-                        $img->setKeepRatio(true);
-                        $img->setMaxWidth(1024);
-                        $img->setMaxHeight(768);
-                        $img->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg');
-                        $img->write();
-                        $img = '';
+                        (new Image($_FILES['flyer']['tmp_name']))
+                            ->setType(IMAGETYPE_JPEG)
+                            ->setKeepRatio(true)
+                            ->setMaxWidth(1024)
+                            ->setMaxHeight(768)
+                            ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
+                            ->write();
                     }
 
                     if ($data['flyer_url']) {
@@ -385,14 +384,13 @@ final class Controller
                         fwrite($handle, file_get_contents($data['flyer_url']));
                         fclose($handle);
 
-                        $img = new Image($tmpname);
-                        $img->setType(IMAGETYPE_JPEG);
-                        $img->setKeepRatio(true);
-                        $img->setMaxWidth(1024);
-                        $img->setMaxHeight(768);
-                        $img->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg');
-                        $img->write();
-                        $img = '';
+                        (new Image($tmpname))
+                            ->setType(IMAGETYPE_JPEG)
+                            ->setKeepRatio(true)
+                            ->setMaxWidth(1024)
+                            ->setMaxHeight(768)
+                            ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
+                            ->write();
 
                         unlink($tmpname);
                     }
@@ -539,14 +537,13 @@ final class Controller
                 $event->save();
 
                 if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
-                    $img = new Image($_FILES['flyer']['tmp_name']);
-                    $img->setType(IMAGETYPE_JPEG);
-                    $img->setKeepRatio(true);
-                    $img->setMaxWidth(1024);
-                    $img->setMaxHeight(768);
-                    $img->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg');
-                    $img->write();
-                    $img = "";
+                    (new Image($_FILES['flyer']['tmp_name']))
+                        ->setType(IMAGETYPE_JPEG)
+                        ->setKeepRatio(true)
+                        ->setMaxWidth(1024)
+                        ->setMaxHeight(768)
+                        ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
+                        ->write();
 
                     Event::invalidateFlyerInCache($event->getId(), '100', '100');
                     Event::invalidateFlyerInCache($event->getId(), '400', '400');
@@ -558,14 +555,13 @@ final class Controller
                     fwrite($handle, file_get_contents($data['flyer_url']));
                     fclose($handle);
 
-                    $img = new Image($tmpname);
-                    $img->setType(IMAGETYPE_JPEG);
-                    $img->setKeepRatio(true);
-                    $img->setMaxWidth(1024);
-                    $img->setMaxHeight(768);
-                    $img->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg');
-                    $img->write();
-                    $img = '';
+                    (new Image($tmpname))
+                        ->setType(IMAGETYPE_JPEG)
+                        ->setKeepRatio(true)
+                        ->setMaxWidth(1024)
+                        ->setMaxHeight(768)
+                        ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
+                        ->write();
 
                     unlink($tmpname);
 

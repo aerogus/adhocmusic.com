@@ -482,8 +482,8 @@ class Photo extends Media
                 $img->setHexColor($bgcolor);
                 Image::writeCache($uid, $img->get());
             } else {
-                $img = new Image();
-                $img->init(16, 16, '000000');
+                $img = (new Image())
+                    ->init(16, 16, '000000');
                 Image::writeCache($uid, $img->get());
                 Log::write('photo', 'photo ' . $id . ' introuvable | uid : ' . $uid);
             }

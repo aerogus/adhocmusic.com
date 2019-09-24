@@ -204,25 +204,23 @@ final class Controller
                 /* traitement de la photo officielle envoyée (112*174) */
                 if ($member->isInterne()) {
                     if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
-                        $img = new Image($_FILES['photo']['tmp_name']);
-                        $img->setType(IMAGETYPE_JPEG);
-                        $img->setMaxWidth(112);
-                        $img->setMaxHeight(174);
-                        $img->setDestFile(Membre::getBasePath() . '/ca/' . $_SESSION['membre']->getId() . '.jpg');
-                        $img->write();
-                        $img = null;
+                        (new Image($_FILES['photo']['tmp_name']))
+                            ->setType(IMAGETYPE_JPEG)
+                            ->setMaxWidth(112)
+                            ->setMaxHeight(174)
+                            ->setDestFile(Membre::getBasePath() . '/ca/' . $_SESSION['membre']->getId() . '.jpg')
+                            ->write();
                     }
                 }
 
                 /* traitement de l'avatar (112*---) */
                 if (is_uploaded_file($_FILES['avatar']['tmp_name'])) {
-                    $img = new Image($_FILES['avatar']['tmp_name']);
-                    $img->setType(IMAGETYPE_JPEG);
-                    $img->setMaxWidth(112);
-                    $img->setMaxHeight(250);
-                    $img->setDestFile(Membre::getBasePath() . '/' . $_SESSION['membre']->getId() . '.jpg');
-                    $img->write();
-                    $img = null;
+                    (new Image($_FILES['avatar']['tmp_name']))
+                        ->setType(IMAGETYPE_JPEG)
+                        ->setMaxWidth(112)
+                        ->setMaxHeight(250)
+                        ->setDestFile(Membre::getBasePath() . '/' . $_SESSION['membre']->getId() . '.jpg')
+                        ->write();
                 }
 
                 Log::action(Log::ACTION_MEMBER_EDIT, $member->getId());
