@@ -851,23 +851,15 @@ class Groupe extends ObjectModel
      */
     static function getGroupesCount($etat = null, $force = false)
     {
-        if (isset($_SESSION['global_counters']['nb_groupes']) && $force === false) {
-            return $_SESSION['global_counters']['nb_groupes'];
-        }
-
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
-             . "FROM `" . self::$_table . "` ";
+             . "FROM `" . Groupe::getDbTable() . "` ";
         if (!is_null($etat)) {
             $sql .= "WHERE `etat` = " . (int) $etat;
         }
 
-        $nb_groupes = $db->queryWithFetchFirstField($sql);
-
-        $_SESSION['global_counters']['nb_groupes'] = $nb_groupes;
-
-        return $_SESSION['global_counters']['nb_groupes'];
+        return $db->queryWithFetchFirstField($sql);
     }
 
     /**
@@ -1091,7 +1083,7 @@ class Groupe extends ObjectModel
              . "`m`.`facebook_profile_id`, `c`.`email`, `m`.`created_on`, "
              . "`m`.`modified_on`, `m`.`visited_on`, `m`.`text`, `m`.`site`, "
              . "`a`.`id_groupe`, `a`.`id_type_musicien` "
-             . "FROM `" . self::$_db_table_membre . "` `m`, `" . self::$_db_table_contact . "` `c`, `" . self::$_db_table_appartient_a . "` `a` "
+             . "FROM `" . Membre::getDbTable() . "` `m`, `" . Contact::getDbTable() . "` `c`, `" . self::$_db_table_appartient_a . "` `a` "
              . "WHERE `m`.`id_contact` = `a`.`id_contact` "
              . "AND `m`.`id_contact` = `c`.`id_contact` "
              . "AND `a`.`id_groupe` = " . (int) $id_groupe;
@@ -1223,7 +1215,7 @@ class Groupe extends ObjectModel
              . "`g`.`created_on`, UNIX_TIMESTAMP(`g`.`created_on`) AS `created_on_ts`, "
              . "`g`.`modified_on`, UNIX_TIMESTAMP(`g`.`modified_on`) AS `modified_on_ts`, "
              . "`g`.`name`, `a`.`id_type_musicien` "
-             . "FROM `" . self::$_db_table_groupe . "` `g`, `" . self::$_db_table_appartient_a . "` `a` "
+             . "FROM `" . Groupe::getDbTable() . "` `g`, `" . self::$_db_table_appartient_a . "` `a` "
              . "WHERE `g`.`id_groupe` = `a`.`id_groupe` "
              . "AND `a`.`id_contact` = " . (int) $_SESSION['membre']->getId();
 
@@ -1471,7 +1463,7 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "UPDATE `" . self::$_db_table_photo . "` "
+        $sql = "UPDATE `" . Photo::getDbTable() . "` "
              . "SET `id_groupe` = 0 "
              . "WHERE `id_groupe` = " . (int) $this->getId();
 
@@ -1509,7 +1501,7 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "UPDATE `" . self::$_db_table_audio . "` "
+        $sql = "UPDATE `" . Audio::getDbTable() . "` "
              . "SET `id_groupe` = 0 "
              . "WHERE `id_groupe` = " . (int) $this->getId();
 
@@ -1547,7 +1539,7 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "UPDATE `" . self::$_db_table_video . "` "
+        $sql = "UPDATE `" . Video::getDbTable() . "` "
              . "SET `id_groupe` = 0 "
              . "WHERE `id_groupe` = " . (int) $this->getId();
 
@@ -1583,8 +1575,8 @@ class Groupe extends ObjectModel
 
         $sql = "SELECT `e`.`id_event`, `e`.`name` AS `nom_event`, `e`.`date`, "
              . "`l`.`id_lieu`, `l`.`name` AS `nom_lieu` "
-             . "FROM `" . self::$_db_table_event . "` `e`, `" . self::$_db_table_participe_a . "` `p`, "
-             . "`" . self::$_db_table_groupe . "` `g`, `" . self::$_db_table_lieu . "` `l` "
+             . "FROM `" . Event::getDbTable() . "` `e`, `" . self::$_db_table_participe_a . "` `p`, "
+             . "`" . Groupe::getDbTable() . "` `g`, `" . Lieu::getDbTable() . "` `l` "
              . "WHERE `p`.`id_groupe` = `g`.`id_groupe` "
              . "AND `p`.`id_event` = `e`.`id_event` "
              . "AND `e`.`id_lieu` = `l`.`id_lieu` "
@@ -1680,7 +1672,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
-             . "FROM `" . self::$_db_table_groupe . "` `g`, `" . self::$_db_table_audio . "` `a` "
+             . "FROM `" . Groupe::getDbTable() . "` `g`, `" . Audio::getDbTable() . "` `a` "
              . "WHERE `g`.`id_groupe` = `a`.`id_groupe` "
              . "AND `g`.`online` AND `a`.`online` "
              . "ORDER BY `g`.`name` ASC";
@@ -1697,7 +1689,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
-             . "FROM `" . self::$_db_table_groupe . "` `g`, `" . self::$_db_table_video . "` `v` "
+             . "FROM `" . Groupe::getDbTable() . "` `g`, `" . Video::getDbTable() . "` `v` "
              . "WHERE `g`.`id_groupe` = `v`.`id_groupe` "
              . "AND `g`.`online` AND `v`.`online` "
              . "ORDER BY `g`.`name` ASC";
@@ -1714,7 +1706,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
-             . "FROM `" . self::$_db_table_groupe . "` `g`, `" . self::$_db_table_photo . "` `p` "
+             . "FROM `" . Groupe::getDbTable() . "` `g`, `" . Photo::getDbTable() . "` `p` "
              . "WHERE `g`.`id_groupe` = `p`.`id_groupe` "
              . "AND `g`.`online` AND `p`.`online` "
              . "ORDER BY `g`.`name` ASC";

@@ -450,12 +450,12 @@ class Video extends Media
              . "`l`.`id_lieu` AS `lieu_id`, `l`.`name` AS `lieu_name`, `l`.`city`, `l`.`id_departement` AS `departement_id`, "
              . "`e`.`id_event` AS `event_id`, `e`.`name` AS `event_name`, `e`.`date` AS `event_date`, "
              . "`m`.`id_contact` AS `contact_id`, `m`.`pseudo` "
-             . "FROM (`" . self::$_db_table_video . "` `v`) "
-             . "LEFT JOIN `" . self::$_db_table_groupe . "` `g` ON (`v`.`id_groupe` = `g`.`id_groupe`) "
-             . "LEFT JOIN `" . self::$_db_table_structure . "` `s` ON (`v`.`id_structure` = `s`.`id_structure`) "
-             . "LEFT JOIN `" . self::$_db_table_lieu . "` `l` ON (`v`.`id_lieu` = `l`.`id_lieu`) "
-             . "LEFT JOIN `" . self::$_db_table_event . "` `e` ON (`v`.`id_event` = `e`.`id_event`) "
-             . "LEFT JOIN `" . self::$_db_table_membre . "` `m` ON (`v`.`id_contact` = `m`.`id_contact`) "
+             . "FROM (`" . Video::getDbTable() . "` `v`) "
+             . "LEFT JOIN `" . Groupe::getDbTable() . "` `g` ON (`v`.`id_groupe` = `g`.`id_groupe`) "
+             . "LEFT JOIN `" . Structure::getDbTable() . "` `s` ON (`v`.`id_structure` = `s`.`id_structure`) "
+             . "LEFT JOIN `" . Lieu::getDbTable() . "` `l` ON (`v`.`id_lieu` = `l`.`id_lieu`) "
+             . "LEFT JOIN `" . Event::getDbTable() . "` `e` ON (`v`.`id_event` = `e`.`id_event`) "
+             . "LEFT JOIN `" . Membre::getDbTable() . "` `m` ON (`v`.`id_contact` = `m`.`id_contact`) "
              . "WHERE 1 ";
 
         if (array_key_exists('online', $params)) {
@@ -707,7 +707,7 @@ class Video extends Media
              . "`online`, `id_host`, `reference`, `id_groupe`, `id_structure`, "
              . "`id_lieu`, `id_event`, `id_contact`, "
              . "`width`, `height` "
-             . "FROM `" . self::$_db_table_video . "` "
+             . "FROM `" . Video::getDbTable() . "` "
              . "WHERE `id_video` = " . (int) $this->_id_video;
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
@@ -907,7 +907,7 @@ class Video extends Media
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
-             . "FROM `" . self::$_db_table_video . "` "
+             . "FROM `" . Video::getDbTable() . "` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
 
         return $db->queryWithFetchFirstField($sql);
@@ -920,14 +920,9 @@ class Video extends Media
      */
     static function getVideosCount()
     {
-        if (isset($_SESSION['global_counters']['nb_videos'])) {
-            return $_SESSION['global_counters']['nb_videos'];
-        }
-
         $db = DataBase::getInstance();
 
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . self::$_db_table_video . "`";
+        $sql = "SELECT COUNT(*) FROM `" . Video::getDbTable() . "`";
 
         return $db->queryWithFetchFirstField($sql);
     }

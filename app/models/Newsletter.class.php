@@ -306,7 +306,7 @@ class Newsletter extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_newsletter` AS `id`, `title` "
-             . "FROM `" . self::$_db_table_newsletter . "` "
+             . "FROM `" . Newsletter::getDbTable() . "` "
              . "WHERE 1 ";
 
         if (count($tab_id) && ($tab_id[0] !== 0)) {
@@ -352,8 +352,8 @@ class Newsletter extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `c`.`id_contact`, `c`.`email`, `c`.`lastnl`, `m`.`mailing`, `m`.`pseudo` "
-             . "FROM (`" . self::$_db_table_contact . "` `c`) "
-             . "LEFT JOIN `" . self::$_db_table_membre . "` `m` ON (`m`.`id_contact` = `c`.`id_contact`) "
+             . "FROM (`" . Contact::getDbTable() . "` `c`) "
+             . "LEFT JOIN `" . Membre::getDbTable() . "` `m` ON (`m`.`id_contact` = `c`.`id_contact`) "
              . "WHERE ((`m`.`mailing` IS NULL) OR (`m`.`mailing` = 1)) "
              . "ORDER BY `c`.`id_contact` ASC "
              . "LIMIT " . (int) $debut . ", " . (int) $limit;
@@ -371,8 +371,8 @@ class Newsletter extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(`c`.`id_contact`) "
-             . "FROM (`" . self::$_db_table_contact . "` `c`) "
-             . "LEFT JOIN `" . self::$_db_table_membre . "` `m` ON (`m`.`id_contact` = `c`.`id_contact`) "
+             . "FROM (`" . Contact::getDbTable() . "` `c`) "
+             . "LEFT JOIN `" . Membre::getDbTable() . "` `m` ON (`m`.`id_contact` = `c`.`id_contact`) "
              . "WHERE (`m`.`mailing` IS NULL) OR (`m`.`mailing` = 1) ";
 
         return $db->queryWithFetchFirstField($sql);
@@ -453,25 +453,6 @@ class Newsletter extends ObjectModel
             // contact ? non - donc pas inscrit
             return NEWSLETTER_UNSUB_KO_UNKNOWN_CONTACT;
         }
-    }
-
-    /**
-     *
-     */
-    protected function _loadFromDb()
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `title`, `content`, `html` "
-             . "FROM `" . self::$_table . "` "
-             . "WHERE `" . self::$_pk . "` = " . (int) $this->_id_newsletter;
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
-            return true;
-        }
-
-        throw new Exception('id_newsletter introuvable');
     }
 
     /**

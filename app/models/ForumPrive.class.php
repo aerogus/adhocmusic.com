@@ -8,7 +8,6 @@ class ForumPrive extends Forum
     protected static $_db_table_forum_info    = 'adhoc_forum_prive_info';
     protected static $_db_table_forum_thread  = 'adhoc_forum_prive_thread';
     protected static $_db_table_forum_message = 'adhoc_forum_prive_message';
-    protected static $_db_table_membre        = 'adhoc_membre';
 
     /**
      * Retourne le listing des threads d'un forum donné avec le contenu du 1er message

@@ -7,19 +7,35 @@
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-$emails = [
-    'gus@adhocmusic.com',
-    'lara@adhocmusic.com',
+$data = [
+    ['gus@adhocmusic.com', 'Gus', 'Seznec'],
+    ['lara@adhocmusic.com', 'Lara', 'Etcheverry'],
 ];
 
+echo Contact::getDbTable();
+echo Membre::getDbTable();
+die;
+
 /*
-Contact::getInstance(1)->delete();
-Contact::getInstance(2)->delete();
+$c = Contact::getInstance(24);
+var_dump($c);
+die;
 */
 
-foreach ($emails as $email) {
+//Contact::getInstance(2)->delete();
+
+foreach ($data as $idx => $_data) {
     $id_contact = Contact::init()
-        ->setEmail($email)
+        ->setEmail($_data[0])
         ->save();
-    echo $id_contact;
+    echo "créa  contact " . $id_contact . "\n";
+
+    Membre::getInstance($id_contact)
+        ->setFirstName($_data[1])
+        ->setLastName($_data[2])
+        ->save();
+    echo "créa membre\n";
+
+    //Contact::getInstance($id_contact)->delete();
+    echo "delete contact (donc membre)\n";
 }

@@ -347,25 +347,6 @@ class CMS extends ObjectModel
     /**
      *
      */
-    protected function _loadFromDb()
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_cms` AS `id`, `alias`, `menuselected`, `title`, `content`, `online`, `auth` "
-             . "FROM `" . self::$_table . "` "
-             . "WHERE `" . self::$_pk . "` = " . (int) $this->getId();
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
-            return true;
-        }
-
-        throw new Exception('id_cms introuvable');
-    }
-
-    /**
-     *
-     */
     static function getCMSs()
     {
         $db = DataBase::getInstance();

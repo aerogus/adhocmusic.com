@@ -32,7 +32,7 @@ class Stats extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(`id_contact`) AS `nb`, DATE_FORMAT(`created_on`, '%Y-%m') AS `date`, UNIX_TIMESTAMP(`created_on`) * 1000 AS `ts` "
-             . "FROM `".self::$_db_table_membre."` "
+             . "FROM `".Membre::getDbTable()."` "
              . "GROUP BY DATE_FORMAT(`created_on`, '%Y-%m') "
              . "ORDER BY `created_on` ASC";
 
@@ -68,7 +68,7 @@ class Stats extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(`id_groupe`) AS `nb`, DATE_FORMAT(`created_on`, '%Y-%m') AS `date`, UNIX_TIMESTAMP(`created_on`) * 1000 AS `ts` "
-             . "FROM `".self::$_db_table_groupe."` "
+             . "FROM `".Groupe::getDbTable()."` "
              . "GROUP BY DATE_FORMAT(`created_on`, '%Y-%m') "
              . "ORDER BY `created_on` ASC";
 
@@ -99,18 +99,18 @@ class Stats extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `".self::$_db_table_membre."`.`id_contact` AS `contact_id`, `".self::$_db_table_membre."`.`name` AS `membre_name`, `".self::$_db_table_membre."`.`first_name` AS `membre_first_name`, "
-             . "`".self::$_db_table_groupe."`.`id_groupe` AS `groupe_id`, `".self::$_db_table_groupe."`.`name` AS `groupe_name`, "
-             . "`".self::$_db_table_event."`.`id_event` AS `event_id`, `".self::$_db_table_event."`.`date` AS `event_date`, `".self::$_db_table_event."`.`name` AS `event_name` "
-             . "FROM `".self::$_db_table_membre."`, `".self::$_db_table_appartient_a."`, `".self::$_db_table_event."`, `".self::$_db_table_participe_a."`, `".self::$_db_table_groupe."`, `".self::$_db_table_organise_par."` "
-             . "WHERE `".self::$_db_table_event."`.`id_event` = `".self::$_db_table_organise_par."`.`id_event` "
-             . "AND `".self::$_db_table_participe_a."`.`id_event` = `".self::$_db_table_event."`.`id_event` "
-             . "AND `".self::$_db_table_membre."`.`id_contact` = `".self::$_db_table_apprtient_a."`.`id_contact` "
-             . "AND `".self::$_db_table_apprtient_a."`.`id_groupe` = `".self::$_db_table_groupe."`.`id_groupe` "
-             . "AND `".self::$_db_table_participe_a."`.`id_groupe` = `".self::$_db_table_groupe."`.`id_groupe` "
+        $sql = "SELECT `".Membre::getDbTable()."`.`id_contact` AS `contact_id`, `".Membre::getDbTable()."`.`name` AS `membre_name`, `".Membre::getDbTable()."`.`first_name` AS `membre_first_name`, "
+             . "`".Groupe::getDbTable()."`.`id_groupe` AS `groupe_id`, `".Groupe::getDbTable()."`.`name` AS `groupe_name`, "
+             . "`".Event::getDbTable()."`.`id_event` AS `event_id`, `".Event::getDbTable()."`.`date` AS `event_date`, `".Event::getDbTable()."`.`name` AS `event_name` "
+             . "FROM `".Membre::getDbTable()."`, `".self::$_db_table_appartient_a."`, `".Event::getDbTable()."`, `".self::$_db_table_participe_a."`, `".Groupe::getDbTable()."`, `".self::$_db_table_organise_par."` "
+             . "WHERE `".Event::getDbTable()."`.`id_event` = `".self::$_db_table_organise_par."`.`id_event` "
+             . "AND `".self::$_db_table_participe_a."`.`id_event` = `".Event::getDbTable()."`.`id_event` "
+             . "AND `".Membre::getDbTable()."`.`id_contact` = `".self::$_db_table_apprtient_a."`.`id_contact` "
+             . "AND `".self::$_db_table_apprtient_a."`.`id_groupe` = `".Groupe::getDbTable()."`.`id_groupe` "
+             . "AND `".self::$_db_table_participe_a."`.`id_groupe` = `".Groupe::getDbTable()."`.`id_groupe` "
              . "AND `".self::$_db_table_organise_par."`.`id_structure` = 1 "
-             . "AND `".self::$_db_table_event."`.`id_lieu` IN(1, 383, 404, 507) "
-             . "ORDER BY `".self::$_db_table_event."`.`date` DESC ";
+             . "AND `".Event::getDbTable()."`.`id_lieu` IN(1, 383, 404, 507) "
+             . "ORDER BY `".Event::getDbTable()."`.`date` DESC ";
 
         return $db->queryWithFetch($sql);
     }
@@ -122,15 +122,15 @@ class Stats extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `".self::$_db_table_groupe."`.`id_groupe` AS `groupe_id`, `".self::$_db_table_groupe."`.`name` AS `groupe_name`, "
-             . "`".self::$_db_table_event."`.`id_event` AS `event_id`, `".self::$_db_table_event."`.`name` AS `event_name`, `".self::$_db_table_event."`.`date` AS `event_date` "
-             . "FROM `".self::$_db_table_event."`, `".self::$_db_table_participe_a."`, `".self::$_db_table_groupe."`, `".self::$_db_table_organise_par."` "
-             . "WHERE `".self::$_db_table_event."`.`id_event` = `".self::$_db_table_organise_par."`.`id_event` "
-             . "AND `".self::$_db_table_participe_a."`.`id_event` = `".self::$_db_table_event."`.`id_event` "
-             . "AND `".self::$_db_table_participe_a."`.`id_groupe` = `".self::$_db_table_groupe."`.`id_groupe` "
+        $sql = "SELECT `".Groupe::getDbTable()."`.`id_groupe` AS `groupe_id`, `".Groupe::getDbTable()."`.`name` AS `groupe_name`, "
+             . "`".Event::getDbTable()."`.`id_event` AS `event_id`, `".Event::getDbTable()."`.`name` AS `event_name`, `".Event::getDbTable()."`.`date` AS `event_date` "
+             . "FROM `".Event::getDbTable()."`, `".self::$_db_table_participe_a."`, `".Groupe::getDbTable()."`, `".self::$_db_table_organise_par."` "
+             . "WHERE `".Event::getDbTable()."`.`id_event` = `".self::$_db_table_organise_par."`.`id_event` "
+             . "AND `".self::$_db_table_participe_a."`.`id_event` = `".Event::getDbTable()."`.`id_event` "
+             . "AND `".self::$_db_table_participe_a."`.`id_groupe` = `".Groupe::getDbTable()."`.`id_groupe` "
              . "AND `".self::$_db_table_organise_par."`.`id_structure` = 1 "
-             . "AND `".self::$_db_table_event."`.`id_lieu` IN(1, 383, 404, 507) "
-             . "ORDER BY `".self::$_db_table_event."`.`date` DESC ";
+             . "AND `".Event::getDbTable()."`.`id_lieu` IN(1, 383, 404, 507) "
+             . "ORDER BY `".Event::getDbTable()."`.`date` DESC ";
 
         return $db->queryWithFetch($sql);
     }
@@ -144,10 +144,10 @@ class Stats extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `".self::$_db_table_membre."`.`pseudo`, `".self::$_db_table_event."`.`id_contact`, COUNT(`".self::$_db_table_event."`.`id_event`) AS `nb` "
-             . "FROM (`".self::$_db_table_event."`) "
-             . "LEFT JOIN `".self::$_db_table_membre."` ON (`".self::$_db_table_event."`.`id_contact` = `".self::$_db_table_membre."`.`id_contact`) "
-             . "GROUP BY `".self::$_db_table_event."`.`id_contact` "
+        $sql = "SELECT `".Membre::getDbTable()."`.`pseudo`, `".Event::getDbTable()."`.`id_contact`, COUNT(`".Event::getDbTable()."`.`id_event`) AS `nb` "
+             . "FROM (`".Event::getDbTable()."`) "
+             . "LEFT JOIN `".Membre::getDbTable()."` ON (`".Event::getDbTable()."`.`id_contact` = `".Membre::getDbTable()."`.`id_contact`) "
+             . "GROUP BY `".Event::getDbTable()."`.`id_contact` "
              . "ORDER BY `nb` DESC "
              . "LIMIT 0, 500";
 
@@ -181,10 +181,10 @@ class Stats extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `".self::$_db_table_membre."`.`pseudo`, `".self::$_db_table_lieu."`.`id_contact`, COUNT(`".self::$_db_table_lieu."`.`id_lieu`) AS `nb` "
-             . "FROM `".self::$_db_table_lieu."` "
-             . "LEFT JOIN `".self::$_db_table_membre."` ON (`".self::$_db_table_lieu."`.`id_contact` = `".self::$_db_table_membre."`.`id_contact`) "
-             . "GROUP BY `".self::$_db_table_lieu."`.`id_contact` "
+        $sql = "SELECT `".Membre::getDbTable()."`.`pseudo`, `".Lieu::getDbTable()."`.`id_contact`, COUNT(`".Lieu::getDbTable()."`.`id_lieu`) AS `nb` "
+             . "FROM `".Lieu::getDbTable()."` "
+             . "LEFT JOIN `".Membre::getDbTable()."` ON (`".Lieu::getDbTable()."`.`id_contact` = `".Membre::getDbTable()."`.`id_contact`) "
+             . "GROUP BY `".Lieu::getDbTable()."`.`id_contact` "
              . "ORDER BY `nb` DESC "
              . "LIMIT 0, 500";
 
@@ -217,10 +217,10 @@ class Stats extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `".self::$_db_table_lieu."`.`id_lieu`, COUNT(`".self::$_db_table_event."`.`id_lieu`) AS `nb`, `".self::$_db_table_lieu."`.`name` AS `nom_lieu` "
-             . "FROM `".self::$_db_table_event."`, `".self::$_db_table_lieu."` "
-             . "WHERE `".self::$_db_table_event."`.`id_lieu` = `".self::$_db_table_lieu."`.`id_lieu` "
-             . "GROUP BY `".self::$_db_table_event."`.`id_lieu` "
+        $sql = "SELECT `".Lieu::getDbTable()."`.`id_lieu`, COUNT(`".Event::getDbTable()."`.`id_lieu`) AS `nb`, `".Lieu::getDbTable()."`.`name` AS `nom_lieu` "
+             . "FROM `".Event::getDbTable()."`, `".Lieu::getDbTable()."` "
+             . "WHERE `".Event::getDbTable()."`.`id_lieu` = `".Lieu::getDbTable()."`.`id_lieu` "
+             . "GROUP BY `".Event::getDbTable()."`.`id_lieu` "
              . "ORDER BY `nb` DESC "
              . "LIMIT 0, 500";
 
@@ -254,7 +254,7 @@ class Stats extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_departement`, COUNT(`id_lieu`) AS `nb` "
-             . "FROM `" . self::$_db_table_lieu . "` "
+             . "FROM `" . Lieu::getDbTable() . "` "
              . "GROUP BY `id_departement` "
              . "ORDER BY `nb` DESC";
 
@@ -293,7 +293,7 @@ class Stats extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_departement`, COUNT(`id_lieu`) AS `nb` "
-             . "FROM `".self::$_db_table_lieu."` "
+             . "FROM `".Lieu::getDbTable()."` "
              . "GROUP BY `id_departement` "
              . "ORDER BY `nb` DESC";
 
@@ -342,7 +342,7 @@ class Stats extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT DATE_FORMAT(`date`, '%Y-%m') AS `date`, COUNT(`id_event`) AS `nb` "
-             . "FROM `".self::$_db_table_event."` "
+             . "FROM `".Event::getDbTable()."` "
              . "GROUP BY DATE_FORMAT(`date`, '%Y-%m') "
              . "ORDER BY DATE_FORMAT(`date`, '%Y-%m') ASC";
 
@@ -376,9 +376,9 @@ class Stats extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `".self::$_db_table_membre."`.`pseudo`, `".self::$_db_table_forums."`.`created_by`, COUNT(`".self::$_db_table_forums."`.`id_message`) AS `nb` "
+        $sql = "SELECT `".Membre::getDbTable()."`.`pseudo`, `".self::$_db_table_forums."`.`created_by`, COUNT(`".self::$_db_table_forums."`.`id_message`) AS `nb` "
              . "FROM `".self::$_db_table_forums."` "
-             . "LEFT JOIN `".self::$_db_table_membre."` ON (`".self::$_db_table_forums."`.`created_by` = `".self::$_db_table_membre."`.`id_contact`) "
+             . "LEFT JOIN `".Membre::getDbTable()."` ON (`".self::$_db_table_forums."`.`created_by` = `".Membre::getDbTable()."`.`id_contact`) "
              . "GROUP BY `".self::$_db_table_forums."`.`created_by` "
              . "ORDER BY `nb` DESC "
              . "LIMIT 0, 500";
@@ -412,10 +412,10 @@ class Stats extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `".self::$_db_table_membre."`.`pseudo`, `".self::$_db_table_audio."`.`id_contact`, COUNT(`".self::$_db_table_audio."`.`id_audio`) AS `nb` "
-             . "FROM `".self::$_db_table_audio."` "
-             . "LEFT JOIN `".self::$_db_table_membre."` ON (`".self::$_db_table_audio."`.`id_contact` = `".self::$_db_table_membre."`.`id_contact`) "
-             . "GROUP BY `".self::$_db_table_audio."`.`id_contact` "
+        $sql = "SELECT `".Membre::getDbTable()."`.`pseudo`, `".Audio::getDbTable()."`.`id_contact`, COUNT(`".Audio::getDbTable()."`.`id_audio`) AS `nb` "
+             . "FROM `".Audio::getDbTable()."` "
+             . "LEFT JOIN `".Membre::getDbTable()."` ON (`".Audio::getDbTable()."`.`id_contact` = `".Membre::getDbTable()."`.`id_contact`) "
+             . "GROUP BY `".Audio::getDbTable()."`.`id_contact` "
              . "ORDER BY `nb` DESC "
              . "LIMIT 0, 500";
 
@@ -448,10 +448,10 @@ class Stats extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `".self::$_db_table_membre."`.`pseudo`, `".self::$_db_table_video."`.`id_contact`, COUNT(`".self::$_db_table_video."`.`id_video`) AS `nb` "
-             . "FROM `".self::$_db_table_video."` "
-             . "LEFT JOIN `".self::$_db_table_membre."` ON (`".self::$_db_table_video."`.`id_contact` = `".self::$_db_table_membre."`.`id_contact`) "
-             . "GROUP BY `".self::$_db_table_video."`.`id_contact` "
+        $sql = "SELECT `".Membre::getDbTable()."`.`pseudo`, `".Video::getDbTable()."`.`id_contact`, COUNT(`".Video::getDbTable()."`.`id_video`) AS `nb` "
+             . "FROM `" . Video::getDbTable() . "` "
+             . "LEFT JOIN `".Membre::getDbTable()."` ON (`".Video::getDbTable()."`.`id_contact` = `".Membre::getDbTable()."`.`id_contact`) "
+             . "GROUP BY `".Video::getDbTable()."`.`id_contact` "
              . "ORDER BY `nb` DESC "
              . "LIMIT 0, 500";
 
@@ -484,10 +484,10 @@ class Stats extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `".self::$_db_table_membre."`.`pseudo`, `".self::$_db_table_photo."`.`id_contact`, COUNT(`".self::$_db_table_photo."`.`id_photo`) AS `nb` "
-             . "FROM `".self::$_db_table_photo."` "
-             . "LEFT JOIN `".self::$_db_table_membre."` ON (`".self::$_db_table_photo."`.`id_contact` = `".self::$_db_table_membre."`.`id_contact`) "
-             . "GROUP BY `".self::$_db_table_photo."`.`id_contact` "
+        $sql = "SELECT `".Membre::getDbTable()."`.`pseudo`, `".Photo::getDbTable()."`.`id_contact`, COUNT(`".Photo::getDbTable()."`.`id_photo`) AS `nb` "
+             . "FROM `".Photo::getDbTable()."` "
+             . "LEFT JOIN `".Membre::getDbTable()."` ON (`".Photo::getDbTable()."`.`id_contact` = `".Membre::getDbTable()."`.`id_contact`) "
+             . "GROUP BY `".Photo::getDbTable()."`.`id_contact` "
              . "ORDER BY `nb` DESC "
              . "LIMIT 0, 500";
 
@@ -521,7 +521,7 @@ class Stats extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_groupe`, `name` AS `nom_groupe`, `visite` AS `nb` "
-             . "FROM `".self::$_db_table_groupe."` "
+             . "FROM `".Groupe::getDbTable()."` "
              . "ORDER BY `visite` DESC";
 
         $res  = $db->queryWithFetch($sql);
@@ -556,7 +556,7 @@ class Stats extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_contact`, `pseudo`, DATE_FORMAT(`visited_on`, '%d/%m/%Y %H:%i:%s') AS `datetime` "
-             . "FROM `".self::$_db_table_membre."` "
+             . "FROM `".Membre::getDbTable()."` "
              . "ORDER BY `visited_on` DESC "
              . "LIMIT 0, ".(int) $limit;
 
@@ -585,7 +585,7 @@ class Stats extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `l`.`id_lieu`, `l`.`name`, COUNT(*) AS `nb` "
-             . "FROM `" . self::$_db_table_lieu . "` `l`, `" . self::$_db_table_photo . "` `p` "
+             . "FROM `" . Lieu::getDbTable() . "` `l`, `" . Photo::getDbTable() . "` `p` "
              . "WHERE `l`.`id_lieu` = `p`.`id_lieu` "
              . "GROUP BY `p`.`id_lieu` "
              . "ORDER BY `nb` DESC";
@@ -622,7 +622,7 @@ class Stats extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_contact`, `email`, `lastnl` "
-             . "FROM `" . self::$_db_table_contact . "` "
+             . "FROM `" . Contact::getDbTable() . "` "
              . "WHERE `email` LIKE '%" . $db->escape($domaine) . "'";
 
         $res  = $db->queryWithFetch($sql);
@@ -648,7 +648,7 @@ class Stats extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT SUBSTRING(`email`, INSTR(`email`,'@') + 1) AS `domaine`, COUNT(*) AS `nb` "
-             . "FROM `".self::$_db_table_contact."` "
+             . "FROM `".Contact::getDbTable()."` "
              . "GROUP BY `domaine` "
              . "ORDER BY `nb` DESC";
 
@@ -682,7 +682,7 @@ class Stats extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(`id_video`) AS `nb`, `id_host` AS `host_id`"
-             . "FROM `".self::$_db_table_video."` "
+             . "FROM `".Video::getDbTable()."` "
              . "GROUP BY `id_host` "
              . "ORDER BY COUNT(`id_video`) DESC";
 

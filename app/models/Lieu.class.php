@@ -935,7 +935,7 @@ class Lieu extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
-             . "FROM `" . self::$_db_table_lieu . "`";
+             . "FROM `" . Lieu::getDbTable() . "`";
 
         return $db->queryWithFetchFirstField($sql);
     }
@@ -1008,10 +1008,10 @@ class Lieu extends ObjectModel
              . "`l`.`city`, `l`.`tel`, `l`.`fax`, `l`.`id_departement`, `d`.`name` AS `departement`, `l`.`text`, "
              . "`l`.`site`, `l`.`email`, `l`.`id_city`, `v`.`name` AS `city2`, `l`.`id_region`, `r`.`name` AS `region`, `l`.`id_country`, `c`.`name_fr` AS `country`, `l`.`created_on`, `l`.`modified_on`, "
              . "FORMAT(get_distance_metres('" . number_format($lat, 8, '.', '') . "', '" . number_format($lng, 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `distance` "
-             . "FROM (`" . self::$_db_table_lieu . "` `l`, `" . self::$_db_table_world_country . "` `c`, `" . self::$_db_table_world_region . "` `r`) "
+             . "FROM (`" . Lieu::getDbTable() . "` `l`, `" . self::$_db_table_world_country . "` `c`, `" . self::$_db_table_world_region . "` `r`) "
              . "LEFT JOIN `" . self::$_db_table_fr_departement . "` `d` ON (`l`.`id_departement` = `d`.`id_departement`) "
              . "LEFT JOIN `" . self::$_db_table_fr_city . "` `v` ON (`l`.`id_city` = `v`.`id_city`) "
-             . "LEFT JOIN `" . self::$_db_table_event . "` `e` ON (`l`.`id_lieu` = `e`.`id_lieu`) "
+             . "LEFT JOIN `" . Event::getDbTable() . "` `e` ON (`l`.`id_lieu` = `e`.`id_lieu`) "
              . "WHERE 1 "
              . "AND `l`.`id_country` = `c`.`id_country` "
              . "AND `l`.`id_region` = `r`.`id_region` "
@@ -1051,7 +1051,7 @@ class Lieu extends ObjectModel
 
         $sql = "SELECT `id_lieu` AS `id`, `name`, `id_departement`, "
              . "`address`, `cp`, `city`, `id_city` "
-             . "FROM `" . self::$_db_table_lieu . "` "
+             . "FROM `" . Lieu::getDbTable() . "` "
              . "ORDER BY `id_departement` ASC, `city` ASC, `cp` ASC";
 
         $res  = $db->queryWithFetch($sql);
@@ -1085,7 +1085,7 @@ class Lieu extends ObjectModel
              . " `id_city`, `id_departement`, `id_region`, `id_country`, `lat`, `lng`, "
              . " `id_contact`, `online`, "
              . "`created_on`, `modified_on` "
-             . "FROM `" . self::$_db_table_lieu . "` `l` "
+             . "FROM `" . Lieu::getDbTable() . "` `l` "
              . "WHERE `id_lieu` = " . (int) $this->_id_lieu;
 
         if (($res = $db->queryWithFetchFirstRow($sql)) == false) {
@@ -1218,7 +1218,7 @@ class Lieu extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
-             . "FROM `" . self::$_db_table_lieu . "` "
+             . "FROM `" . Lieu::getDbTable() . "` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
 
         return $db->queryWithFetchFirstField($sql);

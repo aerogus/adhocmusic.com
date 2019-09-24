@@ -27,16 +27,16 @@ foreach ($data as $email) {
             echo "membre ? oui (" . $pseudo . ") - ";
             $membre = Membre::getInstance($id_contact);
             if ($membre->getMailing()) {
-                $membre->setMailing(false);
-                $membre->save();
+                $membre->setMailing(false)
+                    ->save();
                 echo "désinscription OK";
             } else {
                 echo "déja désinscrit";
             }
         } else {
             echo "membre ? non - ";
-            $contact = Contact::getInstance($id_contact);
-            $contact->delete();
+            Contact::getInstance($id_contact)
+                ->delete();
             echo "delete du contact OK";
         }
     } else {

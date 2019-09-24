@@ -113,109 +113,109 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    function getName()
+    function getName(): string
     {
-        return (string) $this->_name;
+        return $this->_name;
     }
 
     /**
      * @return string
      */
-    function getEmail()
+    function getEmail(): string
     {
-        return (string) $this->_email;
+        return $this->_email;
     }
 
     /**
      * @return string
      */
-    function getPhone()
+    function getPhone(): string
     {
-        return (string) $this->_phone;
+        return $this->_phone;
     }
 
     /**
      * @return string
      */
-    function getSite()
+    function getSite(): string
     {
-        return (string) $this->_site;
+        return $this->_site;
     }
 
     /**
      * @return string
      */
-    function getType()
+    function getType(): string
     {
-        return (string) $this->_type;
+        return $this->_type;
     }
 
     /**
      * @return string
      */
-    function getCity()
+    function getCity(): string
     {
-        return (string) $this->_city;
+        return $this->_city;
     }
 
     /**
      * @return string
      */
-    function getDescription()
+    function getDescription(): string
     {
-        return (string) $this->_description;
+        return $this->_description;
     }
 
     /**
      * @return string
      */
-    function getState()
+    function getState(): string
     {
-        return (string) $this->_state;
+        return $this->_state;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getCreatedOn()
+    function getCreatedOn(): ?string
     {
         if (Date::isDateTimeOk($this->_created_on)) {
-            return (string) $this->_created_on;
+            return $this->_created_on;
         }
-        return false;
+        return null;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    function getCreatedOnTs()
+    function getCreatedOnTs(): ?int
     {
         if (Date::isDateTimeOk($this->_created_on)) {
-            return (int) strtotime($this->_created_on);
+            return strtotime($this->_created_on);
         }
-        return false;
+        return null;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getModifiedOn()
+    function getModifiedOn(): ?string
     {
         if (Date::isDateTimeOk($this->_modified_on)) {
-            return (string) $this->_modified_on;
+            return $this->_modified_on;
         }
-        return false;
+        return null;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    function getModifiedOnTs()
+    function getModifiedOnTs(): ?int
     {
         if (Date::isDateTimeOk($this->_modified_on)) {
-            return (int) strtotime($this->_modified_on);
+            return strtotime($this->_modified_on);
         }
-        return false;
+        return null;
     }
 
     /* fin getters */
@@ -224,125 +224,165 @@ class Exposant extends ObjectModel
 
     /**
      * @param string $val nom
+     *
+     * @return object
      */
-    function setName(string $val)
+    function setName(string $val): object
     {
         if ($this->_name !== $val) {
             $this->_name = $val;
             $this->_modified_fields['name'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val email
+     *
+     * @return object
      */
-    function setEmail(string $val)
+    function setEmail(string $val): object
     {
         if ($this->_email !== $val) {
             $this->_email = $val;
             $this->_modified_fields['email'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val téléphone
+     *
+     * @return object
      */
-    function setPhone(string $val)
+    function setPhone(string $val): object
     {
         if ($this->_phone !== $val) {
             $this->_phone = $val;
             $this->_modified_fields['phone'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setSite(string $val)
+    function setSite(string $val): object
     {
         if ($this->_site !== $val) {
             $this->_site = $val;
             $this->_modified_fields['site'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string $val
+     * @param string $val val
+     *
+     * @return object
      */
-    function setType(string $val)
+    function setType(string $val): object
     {
         if ($this->_type !== $val) {
             $this->_type = $val;
             $this->_modified_fields['type'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string $val
+     * @param string $val val
+     *
+     * @return object
      */
-    function setCity(string $val)
+    function setCity(string $val): object
     {
         if ($this->_city !== $val) {
             $this->_city = $val;
             $this->_modified_fields['city'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val
+     *
+     * @return object
      */
-    function setState(string $val)
+    function setState(string $val): object
     {
         if ($this->_state !== $val) {
             $this->_state = $val;
             $this->_modified_fields['state'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val
+     *
+     * @return object
      */
-    function setCreatedOn(string $val)
+    function setCreatedOn(string $val): object
     {
         if ($this->_created_on !== $val) {
             $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     *
+     * @return object
      */
-    function setCreatedNow()
+    function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string
+     *
+     * @return object
      */
-    function setModifiedOn(string $val)
+    function setModifiedOn(string $val): object
     {
         if ($this->_modified_on !== $val) {
             $this->_modified_on = $val;
             $this->_modified_fields['modified_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     *
+     * @return object
      */
-    function setModifiedNow()
+    function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_modified_on !== $now) {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
         }
+
+        return $this;
     }
 
     /* fin setters */
@@ -356,8 +396,7 @@ class Exposant extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . self::$_db_table_exposant . "`";
+        $sql = "SELECT COUNT(*) FROM `" . Exposant::getDbTable() . "`";
 
         return $db->queryWithFetchFirstField($sql);
     }
@@ -371,32 +410,12 @@ class Exposant extends ObjectModel
 
         $sql = "SELECT `id_exposant` AS `id`, `name`, `email`, `phone`, "
              . "`site`, `type`, `city`, `description`, `state`, `created_on`, `modified_on` "
-             . "FROM `" . self::$_db_table_exposant . "` "
+             . "FROM `" . Exposant::getDbTable() . "` "
              . "WHERE 1 ";
 
         $res = $db->queryWithFetch($sql);
 
         return $res;
-    }
-
-    /**
-     *
-     */
-    protected function _loadFromDb()
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_exposant` AS `id`, `name`, `email`, `phone`, "
-             . "`site`, `type`, `city`, `description`, `state`, `created_on`, `modified_on` "
-             . "FROM `" . self::$_db_table_exposant . "` "
-             . "WHERE `id_exposant` = " . (int) $this->_id_exposant;
-
-        if (($res = $db->queryWithFetchFirstRow($sql))) {
-            $this->_dbToObject($res);
-            return true;
-        }
-
-        throw new Exception('id_exposant_introuvable');
     }
 
     /**

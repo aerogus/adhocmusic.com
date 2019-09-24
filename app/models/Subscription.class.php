@@ -338,25 +338,4 @@ class Subscription extends ObjectModel
     }
 
     /* fin setters */
-
-    /**
-     * Retourne les infos sur une cotisation
-     *
-     * @return array
-     */
-    function _loadFromDb()
-    {
-        $db = DataBase::getInstance();
-
-        $sql  = "SELECT `created_at`, `subscribed_at`, `amount`, `first_name`, `last_name`, `email`, `cp`, `id_contact` "
-              . "FROM `" . self::$_db_table_subscription . "` "
-              . "WHERE `id_subscription` = " . (int) $this->_id_subscription;
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
-            return true;
-        }
-
-        throw new Exception('Cotisation introuvable');
-    }
 }

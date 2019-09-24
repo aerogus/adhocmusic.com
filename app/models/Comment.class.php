@@ -402,16 +402,15 @@ class Comment extends ObjectModel
         $sql = "SELECT `com`.`type`, `com`.`id_content`, `com`.`created_on`, `com`.`modified_on`, "
              . "`com`.`online`, `com`.`id_contact`, `com`.`pseudo`, `com`.`text`, `mbr`.`pseudo` AS `pseudo_mbr`, "
              . "`com`.`email`, `cnt`.`email` AS `email_mbr` "
-             . "FROM `" . self::$_table . "` `com` "
-             . "LEFT JOIN `" . self::$_db_table_membre . "` `mbr` ON (`com`.`id_contact` = `mbr`.`id_contact`) "
-             . "LEFT JOIN `" . self::$_db_table_contact . "` `cnt` ON (`mbr`.`id_contact` = `cnt`.`id_contact`) "
+             . "FROM `" . Comment::getDbTable() . "` `com` "
+             . "LEFT JOIN `" . Membre::getDbTable() . "` `mbr` ON (`com`.`id_contact` = `mbr`.`id_contact`) "
+             . "LEFT JOIN `" . Contact::getDbTable() . "` `cnt` ON (`mbr`.`id_contact` = `cnt`.`id_contact`) "
              . "WHERE `" . self::$_pk . "` = " . (int) $this->getId();
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             $this->_pseudo_mbr = $res['pseudo_mbr'];
             $this->_email_mbr  = $res['email_mbr'];
-            //$this->_type_full  = self::$_types[$res['type']];
             return true;
         }
 
@@ -451,9 +450,9 @@ class Comment extends ObjectModel
 
         $sql = "SELECT `com`.`id_comment` AS `id`, `com`.`type`, `com`.`id_content`, `com`.`created_on`, `com`.`modified_on`, `com`.`online`, "
              . "`com`.`id_contact`, `mbr`.`pseudo` AS `pseudo_mbr`, `com`.`pseudo`, `com`.`email`, `com`.`text`, `cnt`.`email` AS `email_mbr` "
-             . "FROM `" . self::$_table . "` `com` "
-             . "LEFT JOIN `" . self::$_db_table_membre . "` `mbr` ON (`com`.`id_contact` = `mbr`.`id_contact`) "
-             . "LEFT JOIN `" . self::$_db_table_contact . "` `cnt` ON (`mbr`.`id_contact` = `cnt`.`id_contact`) "
+             . "FROM `" . Comment::getDbTable() . "` `com` "
+             . "LEFT JOIN `" . Membre::getDbTable() . "` `mbr` ON (`com`.`id_contact` = `mbr`.`id_contact`) "
+             . "LEFT JOIN `" . Contact::getDbTable() . "` `cnt` ON (`mbr`.`id_contact` = `cnt`.`id_contact`) "
              . "WHERE 1 ";
 
         if (count($tab_type) && ($tab_type[0] != '')) {

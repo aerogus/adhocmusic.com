@@ -60,30 +60,14 @@ abstract class ObjectModel
 
     /* db adhoc */
     /* todo retirer tous ces trucs en dur... */
-    protected static $_db_table_featured       = 'adhoc_featured';
     protected static $_db_table_appartient_a   = 'adhoc_appartient_a';
-    protected static $_db_table_article        = 'adhoc_article';
-    protected static $_db_table_audio          = 'adhoc_audio';
-    protected static $_db_table_contact        = 'adhoc_contact';
-    protected static $_db_table_event          = 'adhoc_event';
     protected static $_db_table_event_style    = 'adhoc_event_style';
-    protected static $_db_table_exposant       = 'adhoc_exposant';
-    protected static $_db_table_faq            = 'adhoc_faq';
     protected static $_db_table_forums         = 'adhoc_forum_public_message';
-    protected static $_db_table_groupe         = 'adhoc_groupe';
     protected static $_db_table_groupe_style   = 'adhoc_groupe_style';
-    protected static $_db_table_lieu           = 'adhoc_lieu';
-    protected static $_db_table_membre         = 'adhoc_membre';
-    protected static $_db_table_membre_adhoc   = 'adhoc_membre_adhoc';
-    protected static $_db_table_newsletter     = 'adhoc_newsletter';
     protected static $_db_table_organise_par   = 'adhoc_organise_par';
     protected static $_db_table_participe_a    = 'adhoc_participe_a';
     protected static $_db_table_messagerie     = 'adhoc_messagerie';
-    protected static $_db_table_photo          = 'adhoc_photo';
     protected static $_db_table_statsnl        = 'adhoc_statsnl';
-    protected static $_db_table_structure      = 'adhoc_structure';
-    protected static $_db_table_subscription   = 'adhoc_subscription';
-    protected static $_db_table_video          = 'adhoc_video';
 
     /* db geo */
     protected static $_db_table_world_country  = 'geo_world_country';
@@ -120,6 +104,16 @@ abstract class ObjectModel
             $this->_loadFromDb();
             static::$_instance = $this;
         }
+    }
+
+    /**
+     * Retourne le nom de la table associée à cet objet
+     *
+     * @return string
+     */
+    static function getDbTable(): string
+    {
+        return static::$_table;
     }
 
     /**
@@ -183,11 +177,15 @@ abstract class ObjectModel
 
     /**
      * @var mixed
+     *
+     * @return object
      */
     function setId($val)
     {
         $pk = '_' . static::$_pk;
         $this->$pk = $val;
+
+        return $this;
     }
 
     /**
@@ -345,6 +343,27 @@ abstract class ObjectModel
             return true;
         }
         return false;
+    }
+
+    /**
+     * Charge toutes les infos d'une entité
+     *
+     * @return bool
+     * @throws Exception
+     */
+    protected function _loadFromDb()
+    {
+        $db = DataBase::getInstance();
+
+        $sql  = "SELECT * FROM `" . static::$_table . "` WHERE `" . static::$_pk . "` = " . (int) $this->{'_' . static::$_pk};
+
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
+            $this->_dbToObject($res);
+            return true;
+        }
+        return false;
+
+        throw new Exception('Object introuvable');
     }
 
     /**

@@ -301,7 +301,7 @@ class Featured extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_featured` AS `id`, `title`, `description`, `link`
-                FROM `" . self::$_db_table_featured . "`
+                FROM `" . self::getDbTable() . "`
                 WHERE `datdeb` < DATE(NOW())
                 AND `datfin` > DATE(NOW())
                 AND `online`";
@@ -325,7 +325,7 @@ class Featured extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_featured` AS `id`, `title`, `description`, `link`, `datdeb`, `datfin`, `slot`, `online` "
-             . "FROM `" . self::$_db_table_featured . "` "
+             . "FROM `" . self::getDbTable() . "` "
              . "ORDER BY `online` DESC, `id_featured` DESC";
 
         $res = $db->queryWithFetch($sql);
@@ -350,25 +350,6 @@ class Featured extends ObjectModel
         }
 
         return $tab;
-    }
-
-    /**
-     *
-     */
-    protected function _loadFromDb()
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_featured`, `title`, `description`, `link`, `datdeb`, `datfin`, `online` "
-             . "FROM `" . self::$_table . "` "
-             . "WHERE `id_featured` = " . (int) $this->_id_featured;
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
-            return true;
-        }
-
-        throw new Exception('Featured introuvable');
     }
 
     /**

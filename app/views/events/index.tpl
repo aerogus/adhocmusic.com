@@ -57,15 +57,6 @@
       <br class="clear" style="clear: both;">
     </div>
   </div>
-  {if $obj->getNbVideos() || $obj->getNbPhotos() || $obj->getNbAudios()}
-  <div class="event_footer">
-    <div class="event_media">
-      <span class="event_media_video"><a href="{$obj->getUrl()}">({$obj->getNbVideos()})</a></span>
-      <span class="event_media_photo"><a href="{$obj->getUrl()}">({$obj->getNbPhotos()})</a></span>
-      <span class="event_media_audio"><a href="{$obj->getUrl()}">({$obj->getNbAudios()})</a></span>
-    </div>
-  </div>
-  {/if}
 </div>{* event *}
 {/foreach}
 </div>{* events_of_the_day *}

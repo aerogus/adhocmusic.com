@@ -226,7 +226,7 @@ class MembreAdhoc extends Membre
              . "UNIX_TIMESTAMP(`m`.`modified_on`) AS `modified_on_ts`, "
              . "`ma`.`function`, `ma`.`datdeb`, `ma`.`datfin`, "
              . "(YEAR(CURRENT_DATE) - YEAR(`ma`.`birth_date`)) - (RIGHT(CURRENT_DATE,5) < RIGHT(`ma`.`birth_date`, 5)) AS `age` "
-             . "FROM `" . self::$_db_table_membre . "` `m`, `" . self::$_db_table_membre_adhoc . "` `ma` "
+             . "FROM `" . Membre::getDbTable() . "` `m`, `" . MembreAdhoc::getDbTable() . "` `ma` "
              . "WHERE `m`.`id_contact` = `ma`.`id_contact` ";
         if ($active) {
              $sql .= "AND `ma`.`active` = TRUE ";
@@ -267,7 +267,7 @@ class MembreAdhoc extends Membre
              . "`m`.`country`, `m`.`facebook_uid`, "
              . "`m`.`tel`, `m`.`port`, "
              . "`m`.`mailing`, `c`.`lastnl` "
-             . "FROM `" . self::$_db_table_contact . "` `c`, `" . self::$_db_table_membre . "` `m` "
+             . "FROM `" . Contact::getDbTable() . "` `c`, `" . Membre::getDbTable() . "` `m` "
              . "WHERE `m`.`id_contact` = `c`.`id_contact` "
              . "AND `m`.`id_contact` = " . (int) $this->_id_contact;
 
@@ -298,7 +298,7 @@ class MembreAdhoc extends Membre
 
             } else {
 
-                $sql = "INSERT INTO `" . static::$_db_table_contact . "` (";
+                $sql = "INSERT INTO `" . Contact::getDbTable() . "` (";
                 if (count($this->_modified_fields['contact']) > 0) {
                     foreach ($fields['contact'] as $field => $type) {
                         $sql .= "`" . $field . "`,";
@@ -343,7 +343,7 @@ class MembreAdhoc extends Membre
 
             /* table membre */
 
-            $sql = "INSERT INTO `" . static::$_db_table_membre . "` (";
+            $sql = "INSERT INTO `" . Membre::getDbTable() . "` (";
             $sql .= "`id_contact`,";
             foreach ($fields['membre'] as $field => $type) {
                 $sql .= "`" . $field . "`,";
@@ -383,7 +383,7 @@ class MembreAdhoc extends Membre
 
             /* table membre_adhoc */
 
-            $sql = "INSERT INTO `" . static::$_db_table_membre_adhoc . "` (";
+            $sql = "INSERT INTO `" . MembreAdhoc::getDbTable() . "` (";
             $sql .= "`id_contact`,";
             foreach ($fields['membre_adhoc'] as $field => $type) {
                 $sql .= "`" . $field . "`,";
@@ -467,7 +467,7 @@ class MembreAdhoc extends Membre
                 }
                 $fields_to_save = substr($fields_to_save, 0, -1);
 
-                $sql = "UPDATE `" . self::$_db_table_contact . "` "
+                $sql = "UPDATE `" . Contact::getDbTable() . "` "
                      . "SET " . $fields_to_save . " "
                      . "WHERE `id_contact` = " . (int) $this->_id_contact;
 
@@ -513,7 +513,7 @@ class MembreAdhoc extends Membre
                 }
                 $fields_to_save = substr($fields_to_save, 0, -1);
 
-                $sql = "UPDATE `".self::$_db_table_membre."` "
+                $sql = "UPDATE `".Membre::getDbTable()."` "
                      . "SET " . $fields_to_save . " "
                      . "WHERE `id_contact` = " . (int) $this->_id_contact;
 
@@ -559,7 +559,7 @@ class MembreAdhoc extends Membre
                 }
                 $fields_to_save = substr($fields_to_save, 0, -1);
 
-                $sql = "UPDATE `" . self::$_db_table_membre_adhoc . "` "
+                $sql = "UPDATE `" . MembreAdhoc::getDbTable() . "` "
                      . "SET " . $fields_to_save . " "
                      . "WHERE `id_contact` = " . (int) $this->_id_contact;
 

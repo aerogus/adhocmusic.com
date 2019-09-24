@@ -434,7 +434,7 @@ class Structure extends ObjectModel
         }
 
         // tout est ok on delete
-        $sql = "DELETE FROM `" . self::$_db_table_structure . "` "
+        $sql = "DELETE FROM `" . Structure::getDbTable() . "` "
              . "WHERE `id_structure` = " . (int) $this->_id_structure;
 
         $db = DataBase::getInstance();
@@ -461,7 +461,7 @@ class Structure extends ObjectModel
         $sql = "SELECT `id_structure` AS `id`, `name`, `address`, `cp`, "
              . "`city`, `tel`, `fax`, `id_departement`, "
              . "`text`, `site`, `email`, `id_country` "
-             . "FROM `" . self::$_db_table_structure . "` "
+             . "FROM `" . Structure::getDbTable() . "` "
              . "ORDER BY `id_country` ASC, `id_departement` ASC, `city` ASC";
 
         $tab = [];
@@ -482,16 +482,7 @@ class Structure extends ObjectModel
      */
     function _loadFromDb()
     {
-        $db = DataBase::getInstance();
-
-        $sql  = "SELECT `name`, "
-              . "`address`, `cp`, `city`, `tel`, `fax`, `id_departement`, "
-              . "`text`, `site`, `email`, `id_country` "
-              . "FROM `" . self::$_db_table_structure . "` "
-              . "WHERE `id_structure` = " . (int) $this->_id_structure;
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
+        if (parent::_loadFromDb()) {
             if (file_exists(self::getBasePath() . '/' . $this->_id_structure . '.png')) {
                 $this->_photo = self::getBaseUrl() . '/' . $this->_id_structure . '.png';
             }

@@ -396,101 +396,91 @@ class Event extends ObjectModel
         return HOME_URL . '/events/' . (int) $id;
     }
 
-    /**
-     * Retourne le nombre de photos liées à l'événement
-     *
-     * @return int
-     */
-    function getNbPhotos()
-    {
-        return (int) $this->_nb_photos;
-    }
-
-    /**
-     * Retourne le nombre d'audios liés à l'événement
-     *
-     * @return int
-     */
-    function getNbAudios()
-    {
-        return (int) $this->_nb_audios;
-    }
-
-    /**
-     * Retourne le nombre de vidéos liées à l'événement
-     *
-     * @return int
-     */
-    function getNbVideos()
-    {
-        return (int) $this->_nb_videos;
-    }
-
     /* fin getters */
 
     /* début setters */
 
     /**
      * @param string $val val
+     * 
+     * @return object
      */
-    function setCreatedOn(string $val)
+    function setCreatedOn(string $val): object
     {
         if ($this->_created_on !== $val) {
             $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val val
+     *
+     * @return object
      */
-    function setCreatedNow()
+    function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val val
+     *
+     * @return object
      */
-    function setModifiedOn(string $val)
+    function setModifiedOn(string $val): object
     {
         if ($this->_modified_on !== $val) {
             $this->_modified_on = $val;
             $this->_modified_fields['modified_on'] = true;
         }
+
+        return $this;
     }
 
     /**
      *
      */
-    function setModifiedNow()
+    function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_modified_on !== $now) {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val val
+     *
+     * @return object
      */
-    function setName(string $val)
+    function setName(string $val): object
     {
         if ($this->_name !== $val) {
             $this->_name = $val;
             $this->_modified_fields['name'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val val
+     *
+     * @return object
      */
-    function setFacebookEventId(string $val)
+    function setFacebookEventId(string $val): object
     {
         // pour les boulets qui copient/collent toute l'url
         if (preg_match('#^https?://w{0,3}\.facebook.com/events/([0-9]{1,24})/{0,1}$#', $val, $matches)) {
@@ -502,116 +492,113 @@ class Event extends ObjectModel
             $this->_facebook_event_id = (string) $val;
             $this->_modified_fields['facebook_event_id'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param int $val val
+     *
+     * @return object
      */
-    function setFacebookEventAttending(int $val)
+    function setFacebookEventAttending(int $val): object
     {
         if ($this->_facebook_event_attending !== $val) {
             $this->_facebook_event_attending = $val;
             $this->_modified_fields['facebook_event_attending'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val val
+     *
+     * @return object
      */
-    function setDate(string $val)
+    function setDate(string $val): object
     {
         if ($this->_date !== $val) {
             $this->_date = $val;
             $this->_modified_fields['date'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val val
+     * 
+     * @return object
      */
-    function setText(string $val)
+    function setText(string $val): object
     {
         if ($this->_text !== $val) {
             $this->_text = $val;
             $this->_modified_fields['text'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val val
+     *
+     * @return object
      */
-    function setPrice(string $val)
+    function setPrice(string $val): object
     {
         if ($this->_price !== $val) {
             $this->_price = $val;
             $this->_modified_fields['price'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param bool $val val
+     *
+     * @return object
      */
-    function setOnline(bool $val)
+    function setOnline(bool $val): object
     {
         if ($this->_online !== $val) {
             $this->_online = $val;
             $this->_modified_fields['online'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param int $val val
+     *
+     * @return object
      */
-    function setIdLieu(int $val)
+    function setIdLieu(int $val): object
     {
         if ($this->_id_lieu !== $val) {
             $this->_id_lieu = $val;
             $this->_modified_fields['id_lieu'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param int $val val
+     *
+     * @return object
      */
-    function setIdContact(int $val)
+    function setIdContact(int $val): object
     {
         if ($this->_id_contact !== $val) {
             $this->_id_contact = $val;
             $this->_modified_fields['id_contact'] = true;
         }
-    }
 
-    /**
-     * @param int $val val
-     */
-    function setNbPhotos(int $val)
-    {
-        if ($this->_nb_photos !== $val) {
-            $this->_nb_photos = $val;
-            $this->_modified_fields['nb_photos'] = true;
-        }
-    }
-
-    /**
-     * @param int $val val
-     */
-    function setNbAudios(int $val)
-    {
-        if ($this->_nb_audios !== $val) {
-            $this->_nb_audios = $val;
-            $this->_modified_fields['nb_audios'] = true;
-        }
-    }
-
-    /**
-     * @param int $val val
-     */
-    function setNbVideos(int $val)
-    {
-        if ($this->_nb_videos !== $val) {
-            $this->_nb_videos = $val;
-            $this->_modified_fields['nb_videos'] = true;
-        }
+        return $this;
     }
 
     /* fin setters */
@@ -623,20 +610,12 @@ class Event extends ObjectModel
      */
     static function getEventsCount()
     {
-        if (isset($_SESSION['global_counters']['nb_events'])) {
-            return $_SESSION['global_counters']['nb_events'];
-        }
-
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
-             . "FROM `".self::$_db_table_event."`";
+             . "FROM `".Event::getDbTable()."`";
 
-        $nb_events = $db->queryWithFetchFirstField($sql);
-
-        $_SESSION['global_counters']['nb_events'] = $nb_events;
-
-        return $_SESSION['global_counters']['nb_events'];
+        return $db->queryWithFetchFirstField($sql);
     }
 
     /**
@@ -731,20 +710,19 @@ class Event extends ObjectModel
         $sql = "SELECT DISTINCT `e`.`id_event` AS `id`, `e`.`name`, "
              . "`e`.`text`, `e`.`date`, `e`.`price`, `e`.`facebook_event_id`, `e`.`facebook_event_attending`, `e`.`online`, "
              . "`e`.`created_on`, `e`.`modified_on`, "
-             . "`e`.`nb_photos`, `e`.`nb_audios`, `e`.`nb_videos`, "
              . "`l`.`id_lieu` AS `lieu_id`, `l`.`name` AS `lieu_name`, "
              . "`l`.`city` AS `lieu_city`, `l`.`id_departement` AS `lieu_id_departement`, "
              . "FORMAT(get_distance_metres('" . number_format($lat, 8, '.', '') . "', '" . number_format($lng, 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `lieu_distance`, "
              . "`l`.`address` AS `lieu_address`, `l`.`cp` AS `lieu_cp`, `l`.`id_country` AS `lieu_country`, "
              . "`s`.`id_structure` AS `structure_id`, `s`.`name` AS `structure_name`, "
              . "`m`.`id_contact` AS `membre_id`, `m`.`pseudo` AS `membre_pseudo` "
-             . "FROM (`" . self::$_db_table_event . "` `e`) "
-             . "LEFT JOIN `" . self::$_db_table_lieu . "` `l` ON (`e`.`id_lieu` = `l`.`id_lieu`) "
+             . "FROM (`" . Event::getDbTable() . "` `e`) "
+             . "LEFT JOIN `" . Lieu::getDbTable() . "` `l` ON (`e`.`id_lieu` = `l`.`id_lieu`) "
              . "LEFT JOIN `" . self::$_db_table_participe_a . "` `p` ON (`e`.`id_event` = `p`.`id_event`) "
              . "LEFT JOIN `" . self::$_db_table_organise_par . "` `o` ON (`e`.`id_event` = `o`.`id_event`) "
-             . "LEFT JOIN `" . self::$_db_table_structure . "` `s` ON (`o`.`id_structure` = `s`.`id_structure`) "
+             . "LEFT JOIN `" . Structure::getDbTable() . "` `s` ON (`o`.`id_structure` = `s`.`id_structure`) "
              . "LEFT JOIN `" . self::$_db_table_event_style . "` `es` ON (`e`.`id_event` = `es`.`id_event`) "
-             . "LEFT JOIN `" . self::$_db_table_membre . "` `m` ON (`e`.`id_contact` = `m`.`id_contact`) "
+             . "LEFT JOIN `" . Membre::getDbTable() . "` `m` ON (`e`.`id_contact` = `m`.`id_contact`) "
              . "WHERE 1 ";
 
         if (count($tab_lieu)) {
@@ -847,9 +825,8 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_event` AS `id`, `name`, `text`, `id_contact`, `online`, "
-             . "`price`, `date`, TIMESTAMP(`date`) AS `timestamp`, `facebook_event_id`, `facebook_event_attending`, "
-             . "`id_lieu`, `nb_photos`, `nb_audios`, `nb_videos` "
-             . "FROM `" . self::$_db_table_event . "` "
+             . "`price`, `date`, TIMESTAMP(`date`) AS `timestamp`, `facebook_event_id`, `facebook_event_attending`, `id_lieu` "
+             . "FROM `" . Event::getDbTable() . "` "
              . "WHERE `id_event` = " . (int) $this->_id_event;
 
         if (($res = $db->queryWithFetchFirstRow($sql))) {
@@ -863,13 +840,8 @@ class Event extends ObjectModel
                 $this->_mini_photo = self::getBaseUrl() . '/' . $this->getId() . '-mini.jpg';
             }
 
-            //$this->_styles     = $this->getStyles();
             $this->_groupes    = $this->getGroupes();
             $this->_structures = $this->getStructures();
-
-            $this->_nb_photos = $res['nb_photos'];
-            $this->_nb_audios = $res['nb_audios'];
-            $this->_nb_videos = $res['nb_videos'];
 
             return true;
         }
@@ -1100,7 +1072,7 @@ class Event extends ObjectModel
         $sql = "SELECT `g`.`name`, `g`.`id_groupe` AS `id`, "
              . "`g`.`style`, `g`.`alias`, "
              . "CONCAT('https://www.adhocmusic.com/', `g`.`alias`) AS `url` "
-             . "FROM `".self::$_db_table_participe_a."` `p`, `".self::$_db_table_groupe."` `g` "
+             . "FROM `".self::$_db_table_participe_a."` `p`, `".Groupe::getDbTable()."` `g` "
              . "WHERE `g`.`id_groupe` = `p`.`id_groupe` "
              . "AND `p`.`id_event` = " . (int) $this->_id_event . " "
              . "ORDER BY `g`.`id_groupe` ASC";
@@ -1251,7 +1223,7 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `o`.`id_structure` AS `id`, `s`.`name` "
-             . "FROM `" . self::$_db_table_organise_par . "` `o`, `" . self::$_db_table_structure . "` `s` "
+             . "FROM `" . self::$_db_table_organise_par . "` `o`, `" . Structure::getDbTable() . "` `s` "
              . "WHERE `s`.`id_structure` = `o`.`id_structure` "
              . "AND `o`.`id_event` = " . (int) $this->getId();
 
@@ -1390,7 +1362,7 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_event` "
-             . "FROM `" . self::$_db_table_event . "` "
+             . "FROM `" . Event::getDbTable() . "` "
              . "WHERE `id_event` = " . (int) $id_event;
 
         $res = $db->query($sql);
@@ -1416,7 +1388,7 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
-             . "FROM `" . self::$_db_table_event . "` "
+             . "FROM `" . Event::getDbTable() . "` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
 
         $nb_events = $db->queryWithFetchFirstField($sql);

@@ -101,7 +101,7 @@ class Contact extends ObjectModel
 
         $sql = sprintf(
             'SELECT `email` FROM `%s` WHERE `id_contact` = %d',
-            self::$_db_table_contact,
+            Contact::getDbTable(),
             $id_contact
         );
 
@@ -137,7 +137,7 @@ class Contact extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_contact` "
-             . "FROM `" . self::$_db_table_contact . "` "
+             . "FROM `" . Contact::getDbTable() . "` "
              ." WHERE `email` = '".$db->escape($email)."'";
 
         return $db->queryWithFetchFirstField($sql);
@@ -155,7 +155,7 @@ class Contact extends ObjectModel
          $db   = DataBase::getInstance();
 
          $sql  = "SELECT `id_contact` "
-               . "FROM `" . self::$_db_table_contact . "` "
+               . "FROM `" . Contact::getDbTable() . "` "
                . "WHERE `email` = '" . $db->escape($email) . "'";
 
          $res  = $db->query($sql);
@@ -223,7 +223,7 @@ class Contact extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_db_table_contact . "` "
+        $sql = "DELETE FROM `" . Contact::getDbTable() . "` "
              . "WHERE `id_contact` = " . (int) $this->_id_contact;
 
         $db->query($sql);
@@ -244,7 +244,7 @@ class Contact extends ObjectModel
 
             /* table contact */
 
-            $sql = "INSERT INTO `" . static::$_db_table_contact . "` (";
+            $sql = "INSERT INTO `" . Contact::getDbTable() . "` (";
 
             if (count($this->_modified_fields['contact']) > 0) {
                 foreach ($fields['contact'] as $field => $type) {
@@ -341,7 +341,7 @@ class Contact extends ObjectModel
             }
             $fields_to_save = substr($fields_to_save, 0, -1);
 
-            $sql = "UPDATE `" . self::$_db_table_contact . "` "
+            $sql = "UPDATE `" . Contact::getDbTable() . "` "
                  . "SET " . $fields_to_save . " "
                  . "WHERE `id_contact` = " . (int) $this->_id_contact;
 
@@ -351,26 +351,5 @@ class Contact extends ObjectModel
 
             return true;
         }
-    }
-
-    /**
-     * charge toutes les infos d'un contact
-     *
-     * @return bool
-     */
-    protected function _loadFromDb()
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `email`, `lastnl` "
-             . "FROM `" . self::$_db_table_contact . "` "
-             . "WHERE `id_contact` = " . (int) $this->_id_contact;
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
-            return true;
-        }
-
-        throw new Exception('Contact introuvable');
     }
 }

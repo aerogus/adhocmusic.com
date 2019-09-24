@@ -216,11 +216,11 @@ class Audio extends Media
              . "`l`.`id_lieu` AS `lieu_id`, `l`.`name` AS `lieu_name`, "
              . "CONCAT('https://www.adhocmusic.com/media/groupe/m', `g`.`id_groupe`, '.jpg') AS `thumb_80_80`, "
              . "CONCAT('https://www.adhocmusic.com/media/audio/', `a`.`id_audio`, '.mp3') AS `direct_url` "
-             . "FROM (`" . self::$_db_table_audio . "` `a`) "
-             . "LEFT JOIN `" . self::$_db_table_groupe . "` `g` ON (`a`.`id_groupe` = `g`.`id_groupe`) "
-             . "LEFT JOIN `" . self::$_db_table_structure . "` `s` ON (`a`.`id_structure` = `s`.`id_structure`) "
-             . "LEFT JOIN `" . self::$_db_table_lieu . "` `l` ON (`a`.`id_lieu` = `l`.`id_lieu`) "
-             . "LEFT JOIN `" . self::$_db_table_event . "` `e` ON (`a`.`id_event` = `e`.`id_event`) "
+             . "FROM (`" . Audio::getDbTable() . "` `a`) "
+             . "LEFT JOIN `" . Groupe::getDbTable() . "` `g` ON (`a`.`id_groupe` = `g`.`id_groupe`) "
+             . "LEFT JOIN `" . Structure::getDbTable() . "` `s` ON (`a`.`id_structure` = `s`.`id_structure`) "
+             . "LEFT JOIN `" . Lieu::getDbTable() . "` `l` ON (`a`.`id_lieu` = `l`.`id_lieu`) "
+             . "LEFT JOIN `" . Event::getDbTable() . "` `e` ON (`a`.`id_event` = `e`.`id_event`) "
              . "WHERE 1 ";
 
         if (array_key_exists('online', $params)) {
@@ -309,7 +309,7 @@ class Audio extends Media
              . "CONCAT('https://static.adhocmusic.com/media/audio/', `a`.`id_audio`, '.mp3') AS `direct_url`, "
              . "`a`.`id_groupe`, `a`.`id_structure`, "
              . "`a`.`id_event`, `a`.`id_lieu` "
-             . "FROM `" . self::$_db_table_audio . "` `a` "
+             . "FROM `" . Audio::getDbTable() . "` `a` "
              . "WHERE `a`.`id_audio` = " . (int) $this->_id_audio;
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
@@ -430,7 +430,7 @@ class Audio extends Media
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
-             . "FROM `" . self::$_db_table_audio . "` "
+             . "FROM `" . Audio::getDbTable() . "` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
 
         return $db->queryWithFetchFirstField($sql);
@@ -446,7 +446,7 @@ class Audio extends Media
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
-             . "FROM `" . self::$_db_table_audio . "`";
+             . "FROM `" . Audio::getDbTable() . "`";
 
         return $db->queryWithFetchFirstField($sql);
     }

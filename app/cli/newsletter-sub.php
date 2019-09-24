@@ -29,8 +29,8 @@ foreach ($data as $email) {
             if ($membre->getMailing()) {
                 echo "déjà inscrit";
             } else {
-                $membre->setMailing(true);
-                $membre->save();
+                $membre->setMailing(true)
+                    ->save();
                 echo "réinscription OK";
             }
         } else {
@@ -38,9 +38,9 @@ foreach ($data as $email) {
         }
     } else {
         echo "contact ? non - ";
-        $contact = Contact::init();
-        $contact->setEmail($email);
-        $id = $contact->save();
+        $id = Contact::init()
+            ->setEmail($email)
+            ->save();
         echo "création du contact OK (" . $id . ")";
     }
     echo "\n";

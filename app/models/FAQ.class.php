@@ -187,24 +187,4 @@ class FAQ extends ObjectModel
 
         return $res;
     }
-
-    /**
-     * @return bool
-     * @throws Exception
-     */
-    protected function _loadFromDb(): bool
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_faq`, `id_category`, `question`, `answer` "
-             . "FROM `" . self::$_table . "` "
-             . "WHERE `id_faq` = " . (int) $this->_id_faq;
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
-            return true;
-        }
-
-        throw new Exception('FAQ introuvable');
-    }
 }

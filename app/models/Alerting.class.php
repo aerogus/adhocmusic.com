@@ -349,23 +349,4 @@ class Alerting extends ObjectModel
 
         return $db->queryWithFetch($sql);
     }
-
-    /**
-     * Charge une alerte
-     */
-    protected function _loadFromDb()
-    {
-        $db  = DataBase::getInstance();
-
-        $sql = "SELECT * "
-             . "FROM `" . self::$_table . "` "
-             . "WHERE `id_alerting` = " . (int) $this->getId();
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
-            return true;
-        }
-
-        throw new Exception('Alerting introuvable');
-    }
 }

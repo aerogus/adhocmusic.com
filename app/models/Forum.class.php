@@ -117,7 +117,7 @@ abstract class Forum
         $sql = "SELECT `f`.`id_forum`, `f`.`title`, `f`.`description`, "
              . "`f`.`nb_messages`, `f`.`nb_threads`, "
              . "`f`.`id_contact`, `m`.`pseudo`, `f`.`date` "
-             . "FROM `" . static::$_db_table_forum_info . "` `f`, `" . static::$_db_table_membre . "` `m` "
+             . "FROM `" . static::$_db_table_forum_info . "` `f`, `" . Membre::getDbTable() . "` `m` "
              . "WHERE `f`.`id_contact` = `m`.`id_contact` "
              . "AND `f`.`id_forum` = '" . $db->escape($id_forum) . "'";
 
@@ -136,7 +136,7 @@ abstract class Forum
         $sql = "SELECT `f`.`id_forum`, `f`.`title`, `f`.`description`, "
              . "`f`.`nb_messages`, `f`.`nb_threads`, "
              . "`f`.`id_contact`, `m`.`pseudo`, `f`.`date` "
-             . "FROM `" . static::$_db_table_forum_info . "` `f`, `" . static::$_db_table_membre . "` `m` "
+             . "FROM `" . static::$_db_table_forum_info . "` `f`, `" . Membre::getDbTable() . "` `m` "
              . "WHERE `f`.`id_contact` = `m`.`id_contact` "
              . "ORDER BY `f`.`id_forum` ASC";
 

@@ -211,7 +211,7 @@ class Photo extends Media
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
-             . "FROM `".self::$_db_table_photo."` "
+             . "FROM `".Photo::getDbTable()."` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
 
         return $db->queryWithFetchFirstField($sql);
@@ -227,7 +227,7 @@ class Photo extends Media
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
-             . "FROM `" . self::$_db_table_photo . "`";
+             . "FROM `" . Photo::getDbTable() . "`";
 
         return $db->queryWithFetchFirstField($sql);
     }
@@ -312,12 +312,12 @@ class Photo extends Media
              . "`l`.`id_lieu` AS `lieu_id`, `l`.`id_departement` AS `departement_id`, `l`.`name` AS `lieu_name`, `l`.`city`, "
              . "`e`.`id_event` AS `event_id`, `e`.`name` AS `event_name`, `e`.`date` AS `event_date`, "
              . "`m`.`id_contact` AS `contact_id`, `m`.`pseudo` "
-             . "FROM (`" . self::$_db_table_photo . "` `p`) "
-             . "LEFT JOIN `" . self::$_db_table_groupe . "` `g` ON (`p`.`id_groupe` = `g`.`id_groupe`) "
-             . "LEFT JOIN `" . self::$_db_table_structure . "` `s` ON (`p`.`id_structure` = `s`.`id_structure`) "
-             . "LEFT JOIN `" . self::$_db_table_lieu . "` `l` ON (`p`.`id_lieu` = `l`.`id_lieu`) "
-             . "LEFT JOIN `" . self::$_db_table_event . "` `e` ON (`p`.`id_event` = `e`.`id_event`) "
-             . "LEFT JOIN `" . self::$_db_table_membre . "` `m` ON (`p`.`id_contact` = `m`.`id_contact`) "
+             . "FROM (`" . Photo::getDbTable() . "` `p`) "
+             . "LEFT JOIN `" . Groupe::getDbTable() . "` `g` ON (`p`.`id_groupe` = `g`.`id_groupe`) "
+             . "LEFT JOIN `" . Structure::getDbTable() . "` `s` ON (`p`.`id_structure` = `s`.`id_structure`) "
+             . "LEFT JOIN `" . Lieu::getDbTable() . "` `l` ON (`p`.`id_lieu` = `l`.`id_lieu`) "
+             . "LEFT JOIN `" . Event::getDbTable() . "` `e` ON (`p`.`id_event` = `e`.`id_event`) "
+             . "LEFT JOIN `" . Membre::getDbTable() . "` `m` ON (`p`.`id_contact` = `m`.`id_contact`) "
              . "WHERE 1 ";
 
         if (array_key_exists('online', $params)) {
@@ -391,12 +391,12 @@ class Photo extends Media
              . "`p`.`credits`, `p`.`online`, `m`.`pseudo`, "
              . "`p`.`id_groupe`, `p`.`id_structure`, "
              . "`p`.`id_lieu`, `p`.`id_event`, `p`.`id_contact` "
-             . "FROM `" . self::$_db_table_photo . "` `p` "
-             . "LEFT JOIN `" . self::$_db_table_groupe . "` `g` ON (`p`.`id_groupe` = `g`.`id_groupe`) "
-             . "LEFT JOIN `" . self::$_db_table_structure . "` `s` ON (`p`.`id_structure` = `s`.`id_structure`) "
-             . "LEFT JOIN `" . self::$_db_table_lieu . "` `l` ON (`p`.`id_lieu` = `l`.`id_lieu`) "
-             . "LEFT JOIN `" . self::$_db_table_event . "` `e` ON (`p`.`id_event` = `e`.`id_event`) "
-             . "LEFT JOIN `" . self::$_db_table_membre . "` `m` ON (`p`.`id_contact` = `m`.`id_contact`) "
+             . "FROM `" . Photo::getDbTable() . "` `p` "
+             . "LEFT JOIN `" . Groupe::getDbTable() . "` `g` ON (`p`.`id_groupe` = `g`.`id_groupe`) "
+             . "LEFT JOIN `" . Structure::getDbTable() . "` `s` ON (`p`.`id_structure` = `s`.`id_structure`) "
+             . "LEFT JOIN `" . Lieu::getDbTable() . "` `l` ON (`p`.`id_lieu` = `l`.`id_lieu`) "
+             . "LEFT JOIN `" . Event::getDbTable() . "` `e` ON (`p`.`id_event` = `e`.`id_event`) "
+             . "LEFT JOIN `" . Membre::getDbTable() . "` `m` ON (`p`.`id_contact` = `m`.`id_contact`) "
              . "WHERE `p`.`id_photo` = " . (int) $this->_id_photo;
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
