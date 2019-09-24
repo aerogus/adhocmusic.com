@@ -229,12 +229,12 @@ class Alerting extends ObjectModel
             return false;
         }
 
-        $a = Alerting::init();
-        $a->setIdContact($id_contact);
-        $a->setCreatedNow();
-        $a->setType($type);
-        $a->setActive(true);
-        $a->setIdContent($id_content);
+        $a = Alerting::init()
+            ->setIdContact($id_contact)
+            ->setCreatedNow()
+            ->setType($type)
+            ->setActive(true)
+            ->setIdContent($id_content);
 
         if ($a->save()) {
              return true;

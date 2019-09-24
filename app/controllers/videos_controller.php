@@ -248,18 +248,18 @@ final class Controller
                 $data['id_host'] = $info['id_host'];
                 $data['reference'] = $info['reference'];
 
-                $video = Video::init();
-                $video->setName($data['name']);
-                $video->setIdGroupe($data['id_groupe']);
-                $video->setIdLieu($data['id_lieu']);
-                $video->setIdEvent($data['id_event']);
-                $video->setIdStructure($data['id_structure']);
-                $video->setIdContact($data['id_contact']);
-                $video->setOnline($data['online']);
-                $video->setIdHost($data['id_host']);
-                $video->setReference($data['reference']);
-                $video->setCreatedNow();
-                $video->save();
+                $video = Video::init()
+                    ->setName($data['name'])
+                    ->setIdGroupe($data['id_groupe'])
+                    ->setIdLieu($data['id_lieu'])
+                    ->setIdEvent($data['id_event'])
+                    ->setIdStructure($data['id_structure'])
+                    ->setIdContact($data['id_contact'])
+                    ->setOnline($data['online'])
+                    ->setIdHost($data['id_host'])
+                    ->setReference($data['reference'])
+                    ->setCreatedNow()
+                    ->save();
 
                 if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
                     $video->storeThumbnail($vignette);
@@ -369,12 +369,12 @@ final class Controller
 
             if (self::_validateVideoEditForm($data, $errors)) {
 
-                $video->setName($data['name']);
-                $video->setIdLieu($data['id_lieu']);
-                $video->setIdEvent($data['id_event']);
-                $video->setIdGroupe($data['id_groupe']);
-                $video->setOnline($data['online']);
-                $video->save();
+                $video->setName($data['name'])
+                    ->setIdLieu($data['id_lieu'])
+                    ->setIdEvent($data['id_event'])
+                    ->setIdGroupe($data['id_groupe'])
+                    ->setOnline($data['online'])
+                    ->save();
 
                 // Permet le reset de la vignette
                 if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {

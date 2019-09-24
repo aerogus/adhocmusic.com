@@ -51,15 +51,15 @@ final class Controller
                 'auth'       => (int) Route::params('auth'),
             ];
 
-            $cms = CMS::init();
-            $cms->setAlias($data['alias']);
-            $cms->setBreadcrumb($data['breadcrumb']);
-            $cms->setTitle($data['title']);
-            $cms->setContent($data['content']);
-            $cms->setOnline($data['online']);
-            $cms->setCreatedNow();
-            $cms->setAuth($data['auth']);
-            $cms->save();
+            CMS::init()
+                ->setAlias($data['alias'])
+                ->setBreadcrumb($data['breadcrumb'])
+                ->setTitle($data['title'])
+                ->setContent($data['content'])
+                ->setOnline($data['online'])
+                ->setCreatedNow()
+                ->setAuth($data['auth'])
+                ->save();
 
             Tools::redirect('/adm/cms/?create=1');
         }
@@ -96,15 +96,15 @@ final class Controller
                 'auth'         => (int) Route::params('auth'),
             ];
 
-            $cms = CMS::getInstance($data['id_cms']);
-            $cms->setAlias($data['alias']);
-            $cms->setBreadcrumb($data['breadcrumb']);
-            $cms->setTitle($data['title']);
-            $cms->setContent($data['content']);
-            $cms->setOnline($data['online']);
-            $cms->setAuth($data['auth']);
-            $cms->setModifiedNow();
-            $cms->save();
+            CMS::getInstance($data['id_cms'])
+                ->setAlias($data['alias'])
+                ->setBreadcrumb($data['breadcrumb'])
+                ->setTitle($data['title'])
+                ->setContent($data['content'])
+                ->setOnline($data['online'])
+                ->setAuth($data['auth'])
+                ->setModifiedNow()
+                ->save();
 
             Tools::redirect('/adm/cms/?edit=1');
         }
@@ -131,8 +131,7 @@ final class Controller
             ->addStep("Suppression");
 
         if (Tools::isSubmit('form-cms-delete')) {
-            $cms = CMS::getInstance($id);
-            $cms->delete();
+            CMS::getInstance($id)->delete();
             Tools::redirect('/adm/cms/?delete=1');
         }
 

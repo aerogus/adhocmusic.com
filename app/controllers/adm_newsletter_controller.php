@@ -35,10 +35,10 @@ final class Controller
                 'content' => trim((string) Route::params('content')),
             ];
 
-            $newsletter = Newsletter::init();
-            $newsletter->setTitle($data['title']);
-            $newsletter->setContent($data['content']);
-            $newsletter->save();
+            Newsletter::init()
+                ->setTitle($data['title'])
+                ->setContent($data['content'])
+                ->save();
 
             Tools::redirect('/adm/newsletter/?create=1');
         }
@@ -76,16 +76,15 @@ final class Controller
                 'content' => trim((string) Route::params('content')),
             ];
 
-            $newsletter = Newsletter::getInstance($data['id']);
-            $newsletter->setTitle($data['title']);
-            $newsletter->setContent($data['content']);
-
             // dépendance à mjml via npm
             $mjmlBin = ADHOC_ROOT_PATH . '/node_modules/.bin/mjml';
             $html = shell_exec($mjmlBin . " -i <<EOF\n" . $data['content'] . "\nEOF");
-            $newsletter->setHtml($html);
 
-            $newsletter->save();
+            Newsletter::getInstance($data['id'])
+                ->setTitle($data['title'])
+                ->setContent($data['content'])
+                ->setHtml($html)
+                ->save();
 
             Tools::redirect('/adm/newsletter/edit/' . (int) Route::params('id') . '?edit=1');
         }

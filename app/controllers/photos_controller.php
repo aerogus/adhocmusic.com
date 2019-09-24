@@ -501,21 +501,21 @@ final class Controller
 
             if (self::_validatePhotoEditForm($data, $errors)) {
 
-                $photo->setName($data['name']);
-                $photo->setCredits($data['credits']);
-                $photo->setIdGroupe($data['id_groupe']);
-                $photo->setIdLieu($data['id_lieu']);
-                $photo->setIdEvent($data['id_event']);
-                $photo->setOnline($data['online']);
-                $photo->setModifiedNow();
+                $photo->setName($data['name'])
+                    ->setCredits($data['credits'])
+                    ->setIdGroupe($data['id_groupe'])
+                    ->setIdLieu($data['id_lieu'])
+                    ->setIdEvent($data['id_event'])
+                    ->setOnline($data['online'])
+                    ->setModifiedNow();
 
                 if (is_uploaded_file($_FILES['file']['tmp_name'])) {
-                    $objImg = new Image($_FILES['file']['tmp_name']);
-                    $objImg->setType(IMAGETYPE_JPEG);
-                    $objImg->setMaxWidth(1024);
-                    $objImg->setMaxHeight(768);
-                    $objImg->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg');
-                    $objImg->write();
+                    (new Image($_FILES['file']['tmp_name']))
+                        ->setType(IMAGETYPE_JPEG)
+                        ->setMaxWidth(1024)
+                        ->setMaxHeight(768)
+                        ->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg')
+                        ->write();
 
                     Photo::invalidatePhotoInCache($photo->getId(),  80,  80, '000000', false,  true);
                     Photo::invalidatePhotoInCache($photo->getId(), 130, 130, '000000', false, false);

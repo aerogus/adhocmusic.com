@@ -194,15 +194,15 @@ final class Controller
             $errors = [];
 
             if (self::_validateAudioCreateForm($data, $errors)) {
-                $audio = Audio::init();
-                $audio->setName($data['name']);
-                $audio->setIdGroupe($data['id_groupe']);
-                $audio->setIdLieu($data['id_lieu']);
-                $audio->setIdEvent($data['id_event']);
-                $audio->setIdContact($data['id_contact']);
-                $audio->setIdStructure($data['id_structure']);
-                $audio->setOnline($data['online']);
-                $audio->setCreatedNow();
+                $audio = Audio::init()
+                    ->setName($data['name'])
+                    ->setIdGroupe($data['id_groupe'])
+                    ->setIdLieu($data['id_lieu'])
+                    ->setIdEvent($data['id_event'])
+                    ->setIdContact($data['id_contact'])
+                    ->setIdStructure($data['id_structure'])
+                    ->setOnline($data['online'])
+                    ->setCreatedNow();
                 if ($audio->save()) {
                     if ($content = Route::params('file')) {
                         file_put_contents(ADHOC_ROOT_PATH . '/media/audio/' . $audio->getId() . '.mp3', $content);
@@ -316,14 +316,13 @@ final class Controller
 
                 $file = Route::params('file');
 
-                $audio->setName($data['name']);
-                $audio->setIdLieu($data['id_lieu']);
-                $audio->setIdContact($data['id_contact']);
-                $audio->setIdEvent($data['id_event']);
-                //$audio->setIdStructure($data['id_structure']);
-                $audio->setIdGroupe($data['id_groupe']);
-                $audio->setOnline($data['online']);
-                $audio->setModifiedNow();
+                $audio->setName($data['name'])
+                    ->setIdLieu($data['id_lieu'])
+                    ->setIdContact($data['id_contact'])
+                    ->setIdEvent($data['id_event'])
+                    ->setIdGroupe($data['id_groupe'])
+                    ->setOnline($data['online'])
+                    ->setModifiedNow();
 
                 if ($audio->save()) {
                     if ($content = Route::params('file')) {

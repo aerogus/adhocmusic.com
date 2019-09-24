@@ -62,20 +62,20 @@ final class Controller
             die('spam not allowed here !');
         }
 
-        $comment = Comment::init();
-        $comment->setType($data['type']);
-        $comment->setIdContent($data['id_content']);
-        $comment->setCreatedNow();
-        $comment->setOnline(true);
-        $comment->setText($data['text']);
+        $comment = Comment::init()
+            ->setType($data['type'])
+            ->setIdContent($data['id_content'])
+            ->setCreatedNow()
+            ->setOnline(true)
+            ->setText($data['text']);
 
         if (Tools::isAuth()) {
-            $comment->setIdContact($_SESSION['membre']->getId());
-            $comment->setPseudo($_SESSION['membre']->getPseudo());
-            $comment->setEmail($_SESSION['membre']->getEmail());
+            $comment->setIdContact($_SESSION['membre']->getId())
+                ->setPseudo($_SESSION['membre']->getPseudo())
+                ->setEmail($_SESSION['membre']->getEmail());
         } else {
-            $comment->setPseudo((string) Route::params('pseudo'));
-            $comment->setEmail((string) Route::params('email'));
+            $comment->setPseudo((string) Route::params('pseudo'))
+                ->setEmail((string) Route::params('email'));
         }
 
         if ($id_comment = $comment->save()) {

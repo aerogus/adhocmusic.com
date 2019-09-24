@@ -356,16 +356,16 @@ final class Controller
 
             if (self::_validateEventCreateForm($data, $errors)) {
 
-                $event = Event::init();
-                $event->setName($data['name']);
-                $event->setIdLieu($data['id_lieu']);
-                $event->setDate($data['date']);
-                $event->setText($data['text']);
-                $event->setPrice($data['price']);
-                $event->setIdContact($data['id_contact']);
-                $event->setOnline(true);
-                $event->setFacebookEventId($data['facebook_event_id']);
-                $event->setCreatedNow();
+                $event = Event::init()
+                    ->setName($data['name'])
+                    ->setIdLieu($data['id_lieu'])
+                    ->setDate($data['date'])
+                    ->setText($data['text'])
+                    ->setPrice($data['price'])
+                    ->setIdContact($data['id_contact'])
+                    ->setOnline(true)
+                    ->setFacebookEventId($data['facebook_event_id'])
+                    ->setCreatedNow();
                 if ($event->save()) {
 
                     if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
@@ -525,16 +525,16 @@ final class Controller
 
             if (self::_validateEventEditForm($data, $errors)) {
 
-                $event = Event::getInstance($data['id']);
-                $event->setName($data['name']);
-                $event->setIdLieu($data['id_lieu']);
-                $event->setDate($data['date']);
-                $event->setText($data['text']);
-                $event->setPrice($data['price']);
-                $event->setOnline($data['online']);
-                $event->setFacebookEventId($data['facebook_event_id']);
-                $event->setModifiedNow();
-                $event->save();
+                $event = Event::getInstance($data['id'])
+                    ->setName($data['name'])
+                    ->setIdLieu($data['id_lieu'])
+                    ->setDate($data['date'])
+                    ->setText($data['text'])
+                    ->setPrice($data['price'])
+                    ->setOnline($data['online'])
+                    ->setFacebookEventId($data['facebook_event_id'])
+                    ->setModifiedNow()
+                    ->save();
 
                 if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
                     (new Image($_FILES['flyer']['tmp_name']))

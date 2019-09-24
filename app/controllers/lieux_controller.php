@@ -247,24 +247,24 @@ final class Controller
 
             if (self::_validateLieuCreateForm($data, $errors)) {
 
-                $lieu = Lieu::init();
-                $lieu->setIdCountry($data['id_country']);
-                $lieu->setIdRegion($data['id_region']);
-                $lieu->setIdDepartement($data['id_departement']);
-                $lieu->setIdCity($data['id_city']);
-                $lieu->setIdType($data['id_type']);
-                $lieu->setName($data['name']);
-                $lieu->setAddress($data['address']);
-                $lieu->setCp($data['cp']);
-                $lieu->setCity($data['city']);
-                $lieu->setText($data['text']);
-                $lieu->setTel($data['tel']);
-                $lieu->setFax($data['fax']);
-                $lieu->setEmail($data['email']);
-                $lieu->setSite($data['site']);
-                $lieu->setIdContact($data['id_contact']);
-                $lieu->setCreatedNow();
-                $lieu->save();
+                $lieu = Lieu::init()
+                    ->setIdCountry($data['id_country'])
+                    ->setIdRegion($data['id_region'])
+                    ->setIdDepartement($data['id_departement'])
+                    ->setIdCity($data['id_city'])
+                    ->setIdType($data['id_type'])
+                    ->setName($data['name'])
+                    ->setAddress($data['address'])
+                    ->setCp($data['cp'])
+                    ->setCity($data['city'])
+                    ->setText($data['text'])
+                    ->setTel($data['tel'])
+                    ->setFax($data['fax'])
+                    ->setEmail($data['email'])
+                    ->setSite($data['site'])
+                    ->setIdContact($data['id_contact'])
+                    ->setCreatedNow()
+                    ->save();
 
                 /* récupération des coordonnées si non précisées */
 //                if (!$lieu->getLng() || !$lieu->getLat()) {
@@ -356,24 +356,24 @@ final class Controller
 
             if (self::_validateLieuEditForm($data, $errors)) {
 
-                $lieu = Lieu::getInstance($data['id']);
-                $lieu->setIdCountry($data['id_country']);
-                $lieu->setIdRegion($data['id_region']);
-                $lieu->setIdDepartement($data['id_departement']);
-                $lieu->setIdCity($data['id_city']);
-                $lieu->setIdType($data['id_type']);
-                $lieu->setName($data['name']);
-                $lieu->setAddress($data['address']);
-                $lieu->setCp($data['cp']);
-                $lieu->setCity($data['city']);
-                $lieu->setText($data['text']);
-                $lieu->setTel($data['tel']);
-                $lieu->setFax($data['fax']);
-                $lieu->setEmail($data['email']);
-                $lieu->setSite($data['site']);
-                $lieu->setLat($data['lat']);
-                $lieu->setLng($data['lng']);
-                $lieu->setModifiedNow();
+                $lieu = Lieu::getInstance($data['id'])
+                    ->setIdCountry($data['id_country'])
+                    ->setIdRegion($data['id_region'])
+                    ->setIdDepartement($data['id_departement'])
+                    ->setIdCity($data['id_city'])
+                    ->setIdType($data['id_type'])
+                    ->setName($data['name'])
+                    ->setAddress($data['address'])
+                    ->setCp($data['cp'])
+                    ->setCity($data['city'])
+                    ->setText($data['text'])
+                    ->setTel($data['tel'])
+                    ->setFax($data['fax'])
+                    ->setEmail($data['email'])
+                    ->setSite($data['site'])
+                    ->setLat($data['lat'])
+                    ->setLng($data['lng'])
+                    ->setModifiedNow();
 
                 if ($lieu->save()) {
                     /* récupération des coordonnées si non précisées */

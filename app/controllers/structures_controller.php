@@ -83,10 +83,10 @@ final class Controller
             $errors = [];
 
             if (self::_validateStructureCreateForm($data, $errors)) {
-                $structure = Structure::init();
-                $structure->setName($data['name']);
-                $structure->setCreatedNow();
-                $structure->save();
+                Structure::init()
+                    ->setName($data['name'])
+                    ->setCreatedNow()
+                    ->save();
                 Tools::redirect('/structures/?create=1');
             } else {
                 // todo
@@ -116,10 +116,10 @@ final class Controller
             $errors = [];
 
             if (self::_validateStructureEditForm($data, $errors)) {
-                $structure = Structure::getInstance((int) Route::params('id'));
-                $structure->setName($data['name']);
-                $structure->setModifiedNow();
-                $structure->save();
+                Structure::getInstance((int) Route::params('id'))
+                    ->setName($data['name'])
+                    ->setModifiedNow()
+                    ->save();
                 Tools::redirect('/structures/?edit=1');
             } else {
                 // todo
