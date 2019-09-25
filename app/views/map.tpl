@@ -36,16 +36,16 @@
         <a href="/groupes/">Groupes</a>
       </li>
       <li>
-        <a href="/agenda/">Agenda</a>
+        <a href="/events/">Agenda</a>
       </li>
       <li>
-        <a href="/media/">Média</a>
+        <a href="/medias/">Média</a>
       </li>
       <li>
         <a href="/contact">Contact</a>
       </li>
       <li>
-        <a href="/login">Connexion</a>
+        <a href="/auth/login">Connexion</a>
       </li>
     </ul>
   </div>

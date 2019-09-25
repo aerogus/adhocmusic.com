@@ -9,7 +9,7 @@
     <div>
 
 {if !count($events)}
-<p>Aucune date annoncée pour cette période. <a href="/events/create">Inscrire une date</a></p>
+<p>Aucune date annoncée pour cette période. <a href="/events/create">Inscrire un évènement</a></p>
 {/if}
 
 {if !empty($create)}<p class="infobulle success">Evénement ajouté</p>{/if}

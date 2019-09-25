@@ -1,25 +1,20 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Gestion de l'abonnement à la Newsletter AD'HOC"}
-
+<div class="box" style="width: 215px; margin: 0 auto 20px">
+  <header>
+    <h2>Abonnement à la newsletter</h2>
+  </header>
+  <div>
 {if !empty($form)}
 <form id="form-newsletter" name="form-newsletter" action="/newsletters/subscriptions" method="post">
-  <ol>
-    <li>
-      <label for="email">Email</label>
-      <input type="text" id="email" name="email" value="{$email}">
-    </li>
-    <li>
-      <label for="action">Action</label>
-      <select id="action" name="action">
-        <option value="sub" {if ($action=='sub')} selected="selected"{/if}>Inscription</option>
-        <option value="unsub" {if ($action=='unsub')} selected="selected"{/if}>Désinscription</option>
-      </select>
-    </li>
-    <li>
-      <input type="submit" id="form-newsletter-submit" name="form-newsletter-submit" value="Valider">
-    </li>
-  </ol>
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email" value="{$email}">
+  <label for="action">Action</label>
+  <select id="action" name="action">
+    <option value="sub" {if ($action == 'sub')} selected="selected"{/if}>Inscription</option>
+    <option value="unsub" {if ($action == 'unsub')} selected="selected"{/if}>Désinscription</option>
+  </select>
+  <input class="button" type="submit" id="form-newsletter-submit" name="form-newsletter-submit" value="Valider">
 </form>
 {/if}
 
@@ -37,6 +32,7 @@
 <div class="infobulle error">L'email <strong>{$email|escape}</strong> n'est pas inscrite à la newsletter AD'HOC.</div>
 {/if}
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}
