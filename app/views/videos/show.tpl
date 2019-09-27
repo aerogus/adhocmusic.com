@@ -19,7 +19,7 @@
 }
 </style>
 
-<div class="grid-3-tiny-2-small-1 has-gutter-l">
+<div class="grid-3-small-1 has-gutter-l">
 
   <div class="col-2-small-1">
     <div class="box">
@@ -31,15 +31,17 @@
       </div>
     </div>
 
+    {if false}{* commentaires désactivés *}
     <div class="box">
       <header>
         <h2>Commentaires</h2>
       </header>
       <div>
-        {* {include file="common/disqus.tpl"} *}
         {include file="comments/box.tpl" type="v" id_content=$video->getId()}
       </div>
     </div>
+    {/if}
+
   </div>
 
   <div class="col-1">
@@ -72,11 +74,17 @@
       <div class="metacontent">
         <a href="{$event->getUrl()}"><img style="float: right;" src="{$event->getFlyer100Url()}" alt=""><strong>{$event->getName()|escape}</strong></a><br>{$event->getDate()|date_format:'%d/%m/%Y'}
       </div>
-      {if !empty($lieu)}
+    </div>
+    {/if}
+
+    {if !empty($lieu)}
+    <div class="box">
+      <header>
+        <h2>Lieu</h2>
+      </header>
       <div class="metacontent">
         <a href="{$lieu->getUrl()}"><img style="float: right;" src="{$lieu->getMapUrl('64x64')}" alt=""><strong>{$lieu->getName()|escape}</strong></a><br>{$lieu->getAddress()}<br>{$lieu->getCp()} {$lieu->getCity()|escape}
       </div>
-      {/if}
     </div>
     {/if}
 

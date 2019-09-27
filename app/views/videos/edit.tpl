@@ -58,7 +58,7 @@
       <label for="event">Événement</label>
     </li>
     <li>
-      <input id="online" type="checkbox" name="online"{if $video->getOnline()} checked="checked"{/if} style="float: right;">
+      <input id="online" class="switch" type="checkbox" name="online"{if $video->getOnline()} checked="checked"{/if} style="float: right;">
       <label for="online">Afficher</label>
     </li>
   </ul>

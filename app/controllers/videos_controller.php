@@ -170,6 +170,7 @@ final class Controller
 
             $smarty->assign('description', $meta_description);
 
+            /*
             $smarty->assign(
                 'comments', Comment::getComments(
                     [
@@ -181,6 +182,7 @@ final class Controller
                     ]
                 )
             );
+            */
 
         } else {
 
