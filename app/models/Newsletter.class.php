@@ -81,7 +81,7 @@ class Newsletter extends ObjectModel
     /**
      * @return string
      */
-    static function getBaseUrl()
+    static function getBaseUrl(): string
     {
         return MEDIA_URL . '/newsletter';
     }
@@ -89,7 +89,7 @@ class Newsletter extends ObjectModel
     /**
      * @return string
      */
-    static function getBasePath()
+    static function getBasePath(): string
     {
         return MEDIA_PATH . '/newsletter';
     }
@@ -97,7 +97,7 @@ class Newsletter extends ObjectModel
     /**
      * @return string
      */
-    function getFileUrl()
+    function getFileUrl(): string
     {
         return self::getBaseUrl() . '/' . $this->getId();
     }
@@ -105,27 +105,29 @@ class Newsletter extends ObjectModel
     /**
      * @return string
      */
-    function getFilePath()
+    function getFilePath(): string
     {
         return self::getBasePath() . '/' . $this->getId();
     }
 
     /**
-     * @return string
-     */
-    function getContent()
-    {
-        return (string) $this->_content;
-    }
-
-    /**
-     * retourne le contenu
+     * Retourne le contenu source MJML
      *
      * @return string
      */
-    function getHtml()
+    function getContent(): string
     {
-        return (string) $this->_html;
+        return $this->_content;
+    }
+
+    /**
+     * Retourne le contenu compilé en HTML
+     *
+     * @return string
+     */
+    function getHtml(): string
+    {
+        return $this->_html;
     }
 
     /**
@@ -170,6 +172,8 @@ class Newsletter extends ObjectModel
     }
 
     /**
+     * Retourne l'id_contact courant
+     *
      * @return int
      */
     function getIdContact(): int
@@ -178,31 +182,45 @@ class Newsletter extends ObjectModel
     }
 
     /**
-     * @param int $id_contact
+     * Set l'id_contact courant
+     *
+     * @param int $id_contact id_contact
+     *
+     * @return object
      */
-    function setIdContact(int $id_contact)
+    function setIdContact(int $id_contact): object
     {
         $this->_id_contact = $id_contact;
+
+        return $this;
     }
 
     /**
-     * @param string $key
-     * @param string $val
+     * Set une variable de template
+     * 
+     * @param string $key clé
+     * @param string $val valeur
+     *
+     * @return object
      */
-    function setTplVar($key, $val)
+    function setTplVar($key, $val): object
     {
         $this->_tpl_vars[$key] = $val;
+
+        return $this;
     }
 
     /**
      * Set le champ body, html (partie variable de la lettre)
      *
-     * @param string $val
+     * @param string $html HTML
+     *
+     * @return object
      */
-    function setHtml(string $val)
+    function setHtml(string $html): object
     {
-        if ($this->_html !== $val) {
-            $this->_html = $val;
+        if ($this->_html !== $html) {
+            $this->_html = $html;
             $this->_modified_fields['html'] = true;
         }
 
@@ -212,12 +230,14 @@ class Newsletter extends ObjectModel
     /**
      * Set le champ body, html (partie variable de la lettre)
      *
-     * @param string $val
+     * @param string $content contenu source MJML
+     *
+     * @return object
      */
-    function setContent(string $val)
+    function setContent(string $content): object
     {
-        if ($this->_content !== $val) {
-            $this->_content = $val;
+        if ($this->_content !== $content) {
+            $this->_content = $content;
             $this->_modified_fields['content'] = true;
         }
 
@@ -229,7 +249,7 @@ class Newsletter extends ObjectModel
      *
      * @return string
      */
-    function getUrl()
+    function getUrl(): string
     {
         return HOME_URL . '/newsletters/' . $this->getId();
     }
@@ -248,8 +268,10 @@ class Newsletter extends ObjectModel
      * Set le title de la lettre (= sujet du mail)
      *
      * @param string $val val
+     *
+     * @return object
      */
-    function setTitle(string $val)
+    function setTitle(string $val): object
     {
         if ($this->_title !== $val) {
             $this->_title = (string) $val;
@@ -281,7 +303,7 @@ class Newsletter extends ObjectModel
      *
      * @return array
      */
-    static function getNewsletters($params = [])
+    static function getNewsletters(array $params = []): array
     {
         $debut = 0;
         if (isset($params['debut'])) {
@@ -326,9 +348,10 @@ class Newsletter extends ObjectModel
      *             ['ip']
      *             ['host']
      *             ['useragent']
+     *
      * @return bool
      */
-    static function addStats($params)
+    static function addStats(array $params): bool
     {
         $db = DataBase::getInstance();
 
@@ -342,12 +365,12 @@ class Newsletter extends ObjectModel
     /**
      * Retourne les abonnés actifs à la newsletter
      *
-     * @param int $debut  début
+     * @param int $debut début
      * @param int $limit limite
      *
      * @return array
      */
-    static function getSubscribers(int $debut = 0, int $limit = 10000)
+    static function getSubscribers(int $debut = 0, int $limit = 10000): array
     {
         $db = DataBase::getInstance();
 
@@ -398,8 +421,8 @@ class Newsletter extends ObjectModel
                     // déjà inscrit
                     return NEWSLETTER_SUB_KO_ALREADY_SUBSCRIBED_MEMBER;
                 } else {
-                    $membre->setMailing(true);
-                    $membre->save();
+                    $membre->setMailing(true)
+                        ->save();
                     // réinscription OK
                     return NEWSLETTER_SUB_OK_RESUBSCRIBED_MEMBER;
                 }
@@ -426,7 +449,7 @@ class Newsletter extends ObjectModel
      *
      * @return int
      */
-    static function removeEmail($email)
+    static function removeEmail(string $email)
     {
         if ($id_contact = Contact::getIdByEmail($email)) {
             // contact ? oui
@@ -434,8 +457,8 @@ class Newsletter extends ObjectModel
                 // membre ? oui
                 $membre = Membre::getInstance($id_contact);
                 if ($membre->getMailing()) {
-                    $membre->setMailing(false);
-                    $membre->save();
+                    $membre->setMailing(false)
+                        ->save();
                     // déinscription OK
                     return NEWSLETTER_UNSUB_OK_UNSUBSCRIBED_MEMBER;
                 } else {
@@ -444,8 +467,8 @@ class Newsletter extends ObjectModel
                 }
             } else {
                 // membre ? non
-                $contact = Contact::getInstance($id_contact);
-                $contact->delete();
+                $contact = Contact::getInstance($id_contact)
+                    ->delete();
                 // delete du contact OK
                 return NEWSLETTER_UNSUB_OK_CONTACT_DELETED;
             }
@@ -457,8 +480,12 @@ class Newsletter extends ObjectModel
 
     /**
      * Stats vite fait ...
+     * 
+     * @param int    $id_newsletter id_newsletter
+     * @param int    $id_contact    id_contact
+     * @param string $url           url
      */
-    static function addHit($id_newsletter, $id_contact, $url)
+    static function addHit(int $id_newsletter, int $id_contact, string $url)
     {
         file_put_contents(ADHOC_ROOT_PATH . '/log/newsletters-hits.txt', date('Y-m-d H:i:s') . "\tnl" . $id_newsletter . "\tid" . $id_contact . "\turl" . $url ."\n", FILE_APPEND | LOCK_EX);
 
@@ -473,9 +500,9 @@ class Newsletter extends ObjectModel
 
         try {
 
-            $contact = Contact::getInstance((int) $id_contact);
-            $contact->setLastnlNow();
-            $contact->save();
+            $contact = Contact::getInstance($id_contact)
+                ->setLastnlNow()
+                ->save();
 
             $db = DataBase::getInstance();
 

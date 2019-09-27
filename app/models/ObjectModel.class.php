@@ -314,8 +314,8 @@ abstract class ObjectModel
     {
         $db = DataBase::getInstance();
         $sql = "SELECT `" . static::$_pk . "` FROM `" . static::$_table . "`";
-        $objs = [];
 
+        $objs = [];
         if ($ids = $db->queryWithFetchFirstFields($sql)) {
             foreach ($ids as $id) {
                 $objs[] = static::getInstance($id);

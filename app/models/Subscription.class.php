@@ -293,14 +293,19 @@ class Subscription extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $email email
      *
      * @return object
+     * @throws Exception
      */
-    function setEmail(string $val): object
+    function setEmail(string $email): object
     {
-        if ($this->_email !== $val) {
-            $this->_email = $val;
+        if (!Email::validate($email)) {
+            throw new Exception('email ' . $email . ' invalide');
+        }
+
+        if ($this->_email !== $email) {
+            $this->_email = $email;
             $this->_modified_fields['email'] = true;
         }
 

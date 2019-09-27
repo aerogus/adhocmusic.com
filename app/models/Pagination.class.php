@@ -261,7 +261,7 @@ class Pagination
     }
 
     /**
-     * classe css a utiliser
+     * Classe css a utiliser
      *
      * @return string
      */
