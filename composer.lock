@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a27e5c0d74df1ced7f512450059e7721",
+    "content-hash": "0bd091418b1bea0017d40aa580ba4bb4",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -96,8 +96,8 @@
             "authors": [
                 {
                     "name": "Markus Poerschke",
-                    "role": "Developer",
-                    "email": "markus@eluceo.de"
+                    "email": "markus@eluceo.de",
+                    "role": "Developer"
                 }
             ],
             "description": "The eluceo/iCal package offers a abstraction layer for creating iCalendars. You can easily create iCal files by using PHP object instead of typing your *.ics file by hand. The output will follow RFC 5545 as best as possible.",
@@ -278,16 +278,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.114",
+            "version": "v0.115",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "22746bfd8d8d5a4f8bbe5e22559d9976810c177c"
+                "reference": "b907bd827f3bfc4a80eebabdf61bee12baaac971"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/22746bfd8d8d5a4f8bbe5e22559d9976810c177c",
-                "reference": "22746bfd8d8d5a4f8bbe5e22559d9976810c177c",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/b907bd827f3bfc4a80eebabdf61bee12baaac971",
+                "reference": "b907bd827f3bfc4a80eebabdf61bee12baaac971",
                 "shasum": ""
             },
             "require": {
@@ -311,7 +311,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2019-09-16T00:23:14+00:00"
+            "time": "2019-09-21T00:23:39+00:00"
         },
         {
             "name": "google/auth",
@@ -2454,16 +2454,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.4.2",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8"
+                "reference": "0afebf16a2e7f1e434920fa976253576151effe9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8",
-                "reference": "b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/0afebf16a2e7f1e434920fa976253576151effe9",
+                "reference": "0afebf16a2e7f1e434920fa976253576151effe9",
                 "shasum": ""
             },
             "require": {
@@ -2501,7 +2501,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2019-04-10T23:49:02+00:00"
+            "time": "2019-09-26T23:12:26+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",

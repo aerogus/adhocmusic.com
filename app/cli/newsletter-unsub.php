@@ -6,20 +6,21 @@ require_once __DIR__ . '/../bootstrap.php';
 /**
  * Désabonne des emails de la newsletter
  *
- * @param string $argv[1] email(s) à désinscrire séparés par une virgule
+ * @param string $argv[] email(s) à désinscrire séparés par une espace
  */
 
-if (empty($argv[1])) {
-    echo "Usage: newsletter-unsub.php email1,email2,email3,...\n";
+if ($argc < 2) {
+    echo "Usage: newsletter-unsub.php email1 email2 email3 ...\n";
     exit;
 }
 
-$data = explode(',', $argv[1]);
-
-foreach ($data as $email) {
-    if (!$email = trim((string) $email)) {
+for ($idx = 1 ; $idx < $argc ; $idx++) {
+    $email = trim((string) $argv[$idx]);
+    if (!Email::validate($email)) {
+        echo "[ERR] email " . $email . " invalide\n";
         continue;
     }
+
     echo $email . " : ";
     if ($id_contact = Contact::getIdByEmail($email)) {
         echo "contact ? oui (" . $id_contact . ") - ";

@@ -1,8 +1,8 @@
 {include file="common/header.tpl"}
 
-<div class="grid-3-small-1 has-gutter-l">
+<div class="grid-2-small-1 has-gutter-l">
 
-  <div class="col-2-small-1">
+  <div class="col-1">
 
   <div class="box">
     <header>
@@ -65,7 +65,8 @@
 
     </div>
   </div>{* .box *}
-  </div>{* .col-2-small-1 *}
+
+  </div>{* .col-1 *}
 
   <div class="col-1">
 
@@ -98,8 +99,8 @@
       </div>
     </div>
 
-  </div>
+  </div>{* .col-1 *}
 
-</div>
+</div>{* .grid-2-small-1 *}
 
 {include file="common/footer.tpl"}

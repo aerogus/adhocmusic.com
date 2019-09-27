@@ -2,19 +2,26 @@
 
 <div class="box" style="width: 215px; margin: 0 auto 20px">
   <header>
-    <h2>Abonnement à la newsletter</h2>
+    <h2>Newsletter</h2>
   </header>
   <div>
 {if !empty($form)}
 <form id="form-newsletter" name="form-newsletter" action="/newsletters/subscriptions" method="post">
-  <label for="email">Email</label>
-  <input type="email" id="email" name="email" value="{$email}">
-  <label for="action">Action</label>
-  <select id="action" name="action">
-    <option value="sub" {if ($action == 'sub')} selected="selected"{/if}>Inscription</option>
-    <option value="unsub" {if ($action == 'unsub')} selected="selected"{/if}>Désinscription</option>
-  </select>
-  <input class="button" type="submit" id="form-newsletter-submit" name="form-newsletter-submit" value="Valider">
+  <div>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" value="{$email}">
+  </div>
+  <div style="margin: 10px 0">
+    <input type="radio" class="radio" name="action" value="sub" {if ($action == 'sub')} checked="checked"{/if}>
+    <label for="sub" style="display:inline">Inscription</label>
+  </div>
+  <div style="margin: 10px 0">
+    <input type="radio" class="radio" name="action" value="unsub" {if ($action == 'unsub')} checked="checked"{/if}>
+    <label for="unsub" style="display:inline">Désinscription</label>
+  </div>
+  <div>
+    <input class="button" type="submit" id="form-newsletter-submit" name="form-newsletter-submit" value="Valider">
+  </div>
 </form>
 {/if}
 

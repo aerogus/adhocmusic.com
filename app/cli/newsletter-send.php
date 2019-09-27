@@ -50,10 +50,10 @@ foreach ($subs as $sub) {
     $newsletter_id_newsletter = ID_NEWSLETTER;
     $newsletter_id_contact = $sub['id_contact'];
 
-    $newsletter->setIdContact($sub['id_contact']);
-    $newsletter->setTplVar('%%email%%', $sub['email']);
-    $newsletter->setTplVar('%%pseudo%%', $sub['pseudo']);
-    $newsletter->setTplVar('%%url%%', $newsletter->getUrl());
+    $newsletter->setIdContact($sub['id_contact'])
+        ->setTplVar('%%email%%', $sub['email'])
+        ->setTplVar('%%pseudo%%', $sub['pseudo'])
+        ->setTplVar('%%url%%', $newsletter->getUrl());
 
     Email::send(
         $sub['email'],
@@ -66,4 +66,3 @@ foreach ($subs as $sub) {
 
     $n++;
 }
-

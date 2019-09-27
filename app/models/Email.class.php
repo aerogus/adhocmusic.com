@@ -3,29 +3,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// PEAR QuickForm
-define('EMAIL_VALIDATE_REGEXP_1', <<<EOT
-/$^((\"[^\"\f\n\r\t\v\b]+\")|([\w\!\#\$\%\&\'\*\+\-\~\/\^\`\|\{\}]+(\.[\w\!\#\$\%\&\'\*\+\-\~\/\^\`\|\{\}]+)*))@((\[(((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9])))\])|(((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9])))|((([A-Za-z0-9\-])+\.)+[A-Za-z\-]+))$/
-EOT
-);
-
-// http://www.regular-expressions.info/email.html
-define('EMAIL_VALIDATE_REGEXP_2',  <<<EOT
-/^[a-z0-9!#$%&'*+?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)$/
-EOT
-);
-
-// source ?
-define('EMAIL_VALIDATE_REGEXP_SIMPLE', <<<EOT
-/^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/
-EOT
-);
-
-// source ? mais ca marche bien
-define('EMAIL_VALIDATE_REGEXP_3', <<<EOT
-/^([a-z0-9!#$%&'*+\\/=?^_`{|}~-]+)(\\.[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@([a-z0-9-]+)(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$/i
-EOT
-);
+define('EMAIL_VALIDATE_REGEXP', '/^.+\@.+\..+$/i');
 
 /**
  * Outils pour travailler avec les emails
@@ -46,7 +24,7 @@ class Email
      */
     static function validate($email)
     {
-        if (preg_match(EMAIL_VALIDATE_REGEXP_3, $email)) {
+        if (preg_match(EMAIL_VALIDATE_REGEXP, $email)) {
             return true;
         }
         return false;
