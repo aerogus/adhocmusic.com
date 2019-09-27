@@ -6,7 +6,7 @@
 
 {else}
 
-<div class="grid-2-small-1-tiny-1 has-gutter-l">
+<div class="grid-2-small-1 has-gutter-l">
 
   <div class="col-1">
 

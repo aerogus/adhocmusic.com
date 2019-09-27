@@ -6,9 +6,9 @@
 
 {else}
 
-<div class="grid-3-tiny-2-small-1 has-gutter-l">
+<div class="grid-3-small-1 has-gutter-l">
 
-  <div class="box two-thirds">
+  <div class="box col-2-small-1">
     <header>
       <h3>{$event->getName()}</h3>
     </header>
