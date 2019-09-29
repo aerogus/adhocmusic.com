@@ -108,7 +108,6 @@ class Photo extends Media
         return $this->_pseudo;
     }
 
-
     /**
      * @return int
      */
@@ -124,8 +123,6 @@ class Photo extends Media
     {
         return $this->_width;
     }
-
-
 
     /**
      * @return string
@@ -157,13 +154,12 @@ class Photo extends Media
 
     /* debut setters */
 
-
     /**
      * @param string $val val
      *
      * @return object
      */
-    function setCredits(string $val)
+    function setCredits(string $val): object
     {
         if ($this->_credits !== $val) {
             $this->_credits = $val;
@@ -385,6 +381,11 @@ class Photo extends Media
      */
     protected function _loadFromDb(): bool
     {
+        // new 2019
+        if (!parent::_loadFromDb()) {
+            throw new Exception('Photo introuvable');
+        }
+
         $db = DataBase::getInstance();
 
         $sql = "SELECT `p`.`name`, `p`.`created_on`, `p`.`modified_on`, "

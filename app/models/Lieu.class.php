@@ -1137,10 +1137,13 @@ class Lieu extends ObjectModel
      * Retourne les infos sur un lieu
      *
      * @return bool
+     * @throws Exception
      */
     protected function _loadFromDb()
     {
-        parent::_loadFromDb();
+        if (!parent::_loadFromDb()) {
+            throw new Exception('lieu introuvable');
+        }
 
         if (file_exists(self::getBasePath() . '/' . (string) $this->getId() . '.jpg')) {
             $this->_photo_url = self::getBaseUrl() . '/' . (string) $this->getId() . '.jpg';

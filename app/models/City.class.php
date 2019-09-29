@@ -37,27 +37,33 @@ class City extends Liste
     }
 
     /**
+     * @param int $id_city id_city
      *
+     * @return string
      */
-    static function getName($id_city)
+    static function getName(int $id_city)
     {
         $o = static::getInstance();
         return $o->_getName($id_city);
     }
 
     /**
+     * @param int $id_city id_city
      *
+     * @return string
      */
-    static function getIdDepartement($id_city)
+    static function getIdDepartement(int $id_city)
     {
         $o = static::getInstance();
         return $o->_getIdDepartement($id_city);
     }
 
     /**
+     * @param int $id_city id_city
      *
+     * @return string
      */
-    static function getCp($id_city)
+    static function getCp(int $id_city)
     {
         $o = static::getInstance();
         return $o->_getCp($id_city);
@@ -66,10 +72,11 @@ class City extends Liste
     /**
      * Code insee ville ok ?
      *
-     * @param  int $id_city
+     * @param int $id_city id_city
+     *
      * @return bool
      */
-    protected function _isCityOk($id_city)
+    protected function _isCityOk(int $id_city)
     {
         if (array_key_exists($id_city, static::$_liste)) {
             return true;
@@ -80,10 +87,11 @@ class City extends Liste
     /**
      * Retourne le nom d'une ville
      *
-     * @param  int $id_city
+     * @param int $id_city id_city
+     *
      * @return string
      */
-    protected function _getName($id_city)
+    protected function _getName(int $id_city)
     {
         if (array_key_exists($id_city, static::$_liste)) {
             return static::$_liste[$id_city]['name'];
@@ -94,11 +102,11 @@ class City extends Liste
     /**
      * Retourne l'id du département
      *
-     * @param int $id_city
+     * @param int $id_city id_city
      *
      * @return string
      */
-    protected function _getIdDepartement($id_city)
+    protected function _getIdDepartement(int $id_city)
     {
         if (array_key_exists($id_city, static::$_liste)) {
             return static::$_liste[$id_city]['id_departement'];
@@ -109,11 +117,11 @@ class City extends Liste
     /**
      * Retourne le code postal
      *
-     * @param int $id_city
+     * @param int $id_city id_city
      *
      * @return string
      */
-    protected function _getCp($id_city)
+    protected function _getCp(int $id_city)
     {
         if (array_key_exists($id_city, static::$_liste)) {
             return static::$_liste[$id_city]['cp'];

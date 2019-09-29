@@ -79,6 +79,7 @@ class CMS extends ObjectModel
      * - numérique/integer/float/bool (= num)
      * - datetime/text (= str)
      * ceci est utile pour la formation de la requête
+     *
      * @var array
      */
     protected static $_all_fields = [
@@ -98,75 +99,75 @@ class CMS extends ObjectModel
     /**
      * @return string
      */
-    function getAlias()
+    function getAlias(): string
     {
-        return (string) $this->_alias;
+        return $this->_alias;
     }
 
     /**
      * @return string
      */
-    function getTitle()
+    function getTitle(): string
     {
-        return (string) $this->_title;
+        return $this->_title;
+    }
+
+    /**
+     * @return string|null
+     */
+    function getCreatedOn(): ?string
+    {
+        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
+            return $this->_created_on;
+        }
+        return null;
+    }
+
+    /**
+     * @return int|null
+     */
+    function getCreatedOnTs(): ?int
+    {
+        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
+            return strtotime($this->_created_on);
+        }
+        return null;
+    }
+
+    /**
+     * @return string|null
+     */
+    function getModifiedOn(): ?string
+    {
+        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+            return $this->_modified_on;
+        }
+        return null;
+    }
+
+    /**
+     * @return int|null
+     */
+    function getModifiedOnTs(): ?int
+    {
+        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+            return strtotime($this->_modified_on);
+        }
+        return null;
     }
 
     /**
      * @return string
      */
-    function getCreatedOn()
+    function getMenuselected(): string
     {
-        if (Date::isDateTimeOk($this->_created_on)) {
-            return (string) $this->_created_on;
-        }
-        return false;
-    }
-
-    /**
-     * @return int
-     */
-    function getCreatedOnTs()
-    {
-        if (Date::isDateTimeOk($this->_created_on)) {
-            return (int) strtotime($this->_created_on);
-        }
-        return false;
-    }
-
-    /**
-     * @return string
-     */
-    function getModifiedOn()
-    {
-        if (Date::isDateTimeOk($this->_modified_on)) {
-            return (string) $this->_modified_on;
-        }
-        return false;
-    }
-
-    /**
-     * @return int
-     */
-    function getModifiedOnTs()
-    {
-        if (Date::isDateTimeOk($this->_modified_on)) {
-            return (int) strtotime($this->_modified_on);
-        }
-        return false;
-    }
-
-    /**
-     * @return string
-     */
-    function getMenuselected()
-    {
-        return (string) $this->_menuselected;
+        return $this->_menuselected;
     }
 
     /**
      * @return array
      */
-    function getBreadcrumb()
+    function getBreadcrumb(): array
     {
         return $this->_breadcrumb;
     }
@@ -174,25 +175,25 @@ class CMS extends ObjectModel
     /**
      * @return string
      */
-    function getContent()
+    function getContent(): string
     {
-        return (string) $this->_content;
+        return $this->_content;
     }
 
     /**
      * @return bool
      */
-    function getOnline()
+    function getOnline(): bool
     {
-        return (bool) $this->_online;
+        return $this->_online;
     }
 
     /**
      * @return int
      */
-    function getAuth()
+    function getAuth(): int
     {
-        return (int) $this->_auth;
+        return $this->_auth;
     }
 
     /* fin getters */
@@ -200,130 +201,170 @@ class CMS extends ObjectModel
     /* début setters */
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setAlias(string $val)
+    function setAlias(string $val): object
     {
         $val = trim($val);
         if ($this->_alias !== $val) {
             $this->_alias = $val;
             $this->_modified_fields['alias'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setTitle(string $val)
+    function setTitle(string $val): object
     {
         $val = trim($val);
         if ($this->_title !== $val) {
             $this->_title = $val;
             $this->_modified_fields['title'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setCreatedOn(string $val)
+    function setCreatedOn(string $val): object
     {
         if ($this->_created_on !== $val) {
             $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @return object
      */
-    function setCreatedNow()
+    function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setModifiedOn(string $val)
+    function setModifiedOn(string $val): object
     {
         if ($this->_modified_on !== $val) {
             $this->_modified_on = $val;
             $this->_modified_fields['modified_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     *
+     * @return object
      */
-    function setModifiedNow()
+    function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_modified_on !== $now) {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string $val
+     * @param string $val val
+     *
+     * @return object
      */
-    function setMenuselected(string $val)
+    function setMenuselected(string $val): object
     {
         $val = trim($val);
         if ($this->_menuselected !== $val) {
             $this->_menuselected = $val;
             $this->_modified_fields['menuselected'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param array
+     * @param array $val val
+     *
+     * @return object
      */
-    function setBreadcrumb(array $val)
+    function setBreadcrumb(array $val): object
     {
         if ($this->_breadcrumb !== $val) {
             $this->_breadcrumb = $val;
             $this->_modified_fields['breadcrumb'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string $val
+     * @param string $val val
+     *
+     * @return object
      */
-    function setContent(string $val)
+    function setContent(string $val): object
     {
         $val = trim($val);
         if ($this->_content !== $val) {
             $this->_content = $val;
             $this->_modified_fields['content'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param bool $val
+     * @param bool $val val
+     *
+     * @return object
      */
-    function setOnline(bool $val)
+    function setOnline(bool $val): object
     {
         if ($this->_online !== $val) {
             $this->_online = $val;
             $this->_modified_fields['online'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param int $val
+     * @param int $val val
+     *
+     * @return object
      */
-    function setAuth(int $val)
+    function setAuth(int $val): object
     {
         if ($this->_auth !== $val) {
             $this->_auth = $val;
             $this->_modified_fields['auth'] = true;
         }
+
+        return $this;
     }
 
     /* fin setters */
@@ -345,9 +386,9 @@ class CMS extends ObjectModel
     }
 
     /**
-     *
+     * @return array
      */
-    static function getCMSs()
+    static function getCMSs(): array
     {
         $db = DataBase::getInstance();
 

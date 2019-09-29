@@ -91,7 +91,7 @@ class Contact extends ObjectModel
     /**
      * Extraction de l'email à partir de l'id
      *
-     * @param int $id_contact id
+     * @param int $id_contact id_contact
      *
      * @return string|null
      */
@@ -150,7 +150,7 @@ class Contact extends ObjectModel
      * @return bool
      * @deprecated doublon avec getIdByEmail
      */
-     static function isEmailFound($email)
+     static function isEmailFound(string $email)
      {
          $db   = DataBase::getInstance();
 
@@ -168,11 +168,11 @@ class Contact extends ObjectModel
     /* début setters*/
 
     /**
-     * @param string
+     * @param string $val val
      *
      * @return object
      */
-    function setEmail(string $val)
+    function setEmail(string $val): object
     {
         if ($this->_email !== $val) {
             $this->_email = $val;
@@ -183,11 +183,11 @@ class Contact extends ObjectModel
     }
 
     /**
-     * @param string $val
+     * @param string $val val
      *
      * @return object
      */
-    function setLastnl(string $val)
+    function setLastnl(string $val): object
     {
         if ($this->_lastnl !== $val) {
             $this->_lastnl = $val;
@@ -198,9 +198,9 @@ class Contact extends ObjectModel
     }
 
     /**
-     *
+     * @return object
      */
-    function setLastnlNow()
+    function setLastnlNow(): object
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_lastnl !== $now) {

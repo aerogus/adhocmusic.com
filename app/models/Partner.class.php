@@ -22,4 +22,12 @@ class Partner extends ObjectModel
      * @var string
      */
     protected static $_table = 'adhoc_partner';
+
+    /* début getters */
+
+    /* fin getters */
+
+    /* début setters */
+
+    /* fin setters */
 }

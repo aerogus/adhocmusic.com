@@ -147,6 +147,7 @@ class Video extends Media
      * - numérique/integer/float/bool (= int)
      * - datetime/text (= str)
      * ceci est utile pour la formation de la requête
+     *
      * @var array
      */
     protected static $_all_fields = [
@@ -282,7 +283,7 @@ class Video extends Media
      *
      * @return object
      */
-    function setIdHost(int $id_host)
+    function setIdHost(int $id_host): object
     {
         if ($this->_id_host !== $id_host) {
             $this->_id_host = $id_host;
@@ -297,7 +298,7 @@ class Video extends Media
      *
      * @return object
      */
-    function setReference(string $val)
+    function setReference(string $val): object
     {
         if ($this->_reference !== $val) {
             $this->_reference = $val;
@@ -312,7 +313,7 @@ class Video extends Media
      * 
      * @return object
      */
-    function setWidth(int $val)
+    function setWidth(int $val): object
     {
         if ($this->_width !== $val) {
             $this->_width = $val;
@@ -327,7 +328,7 @@ class Video extends Media
      *
      * @return object
      */
-    function setHeight(int $val)
+    function setHeight(int $val): object
     {
         if ($this->_height !== $val) {
             $this->_height = $val;
@@ -701,21 +702,9 @@ class Video extends Media
      */
     protected function _loadFromDb()
     {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `name`, `created_on`, `created_on` AS `modified_on`, "
-             . "`online`, `id_host`, `reference`, `id_groupe`, `id_structure`, "
-             . "`id_lieu`, `id_event`, `id_contact`, "
-             . "`width`, `height` "
-             . "FROM `" . Video::getDbTable() . "` "
-             . "WHERE `id_video` = " . (int) $this->_id_video;
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
-            return true;
+        if (!parent::_loadFromDb()) {
+            throw new Exception('Vidéo introuvable');
         }
-
-        throw new Exception('Vidéo introuvable');
     }
 
     /**
@@ -894,8 +883,9 @@ class Video extends Media
      * Retourne le nombre total de vidéos du visiteur loggué
      *
      * @return int
+     * @throws Exception
      */
-    static function getMyVideosCount()
+    static function getMyVideosCount(): int
     {
         if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');

@@ -92,6 +92,7 @@ class Comment extends ObjectModel
      * - numérique/integer/float/bool (= num)
      * - datetime/text (= str)
      * ceci est utile pour la formation de la requête
+     *
      * @var array
      */
     protected static $_all_fields = [
@@ -120,15 +121,15 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    function getType()
+    function getType(): string
     {
-        return (string) $this->_type;
+        return $this->_type;
     }
 
     /**
      * @return string
      */
-    function getFullType()
+    function getFullType(): string
     {
         return self::$_types[$this->_type];
     }
@@ -136,53 +137,53 @@ class Comment extends ObjectModel
     /**
      * @return int
      */
-    function getIdContent()
+    function getIdContent(): int
     {
-        return (int) $this->_id_content;
+        return $this->_id_content;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getCreatedOn()
+    function getCreatedOn(): ?string
     {
-        if (Date::isDateTimeOk($this->_created_on)) {
-            return (string) $this->_created_on;
+        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
+            return $this->_created_on;
         }
-        return false;
-    }
-
-    /**
-     * @return int
-     */
-    function getCreatedOnTs()
-    {
-        if (Date::isDateTimeOk($this->_created_on)) {
-            return (int) strtotime($this->_created_on);
-        }
-        return false;
-    }
-
-    /**
-     * @return string
-     */
-    function getModifiedOn()
-    {
-        if (Date::isDateTimeOk($this->_modified_on)) {
-            return (string) $this->_modified_on;
-        }
-        return false;
+        return null;
     }
 
     /**
      * @return int
      */
-    function getModifiedOnTs()
+    function getCreatedOnTs(): ?int
     {
-        if (Date::isDateTimeOk($this->_modified_on)) {
-            return (int) strtotime($this->_modified_on);
+        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
+            return strtotime($this->_created_on);
         }
-        return false;
+        return null;
+    }
+
+    /**
+     * @return string|null
+     */
+    function getModifiedOn(): ?string
+    {
+        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+            return $this->_modified_on;
+        }
+        return null;
+    }
+
+    /**
+     * @return int
+     */
+    function getModifiedOnTs(): ?int
+    {
+        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+            return strtotime($this->_modified_on);
+        }
+        return null;
     }
 
     /**
@@ -212,51 +213,51 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    function getPseudoMbr()
+    function getPseudoMbr(): string
     {
-        return (string) $this->_pseudo_mbr;
+        return $this->_pseudo_mbr;
     }
 
     /**
      * @return string
      */
-    function getPseudo()
+    function getPseudo(): string
     {
-        $this->getPseudoMbr() ? $pseudo = $this->getPseudoMbr() : $pseudo = $this->_pseudo;
-        return (string) $pseudo;
+        return $this->getPseudoMbr() ? $this->getPseudoMbr() : $this->_pseudo;
     }
 
     /**
      * @return string
      */
-    function getEmailMbr()
+    function getEmailMbr(): string
     {
-        return (string) $this->_email_mbr;
+        return $this->_email_mbr;
     }
 
     /**
      * @return string
      */
-    function getEmail()
+    function getEmail(): string
     {
-        $this->getEmailMbr() ? $email = $this->getEmailMbr() : $email = $this->_email;
-        return (string) $email;
+        return $this->getEmailMbr() ? $this->getEmailMbr() : $this->_email;
     }
 
     /**
      * @return string
      */
-    function getUrl()
+    function getUrl(): string
     {
         return self::getUrlById($this->getId());
     }
 
     /**
+     * @param int $id_comment id_comment
+     *
      * @return string
      */
-    static function getUrlById($id)
+    static function getUrlById(int $id_comment): string
     {
-        return HOME_URL . '/comments/' . $id;
+        return HOME_URL . '/comments/' . (string) $id_comment;
     }
 
     /* fin getters */
@@ -264,130 +265,170 @@ class Comment extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $val
+     * @param string $val val
+     *
+     * @return object
      */
-    function setType(string $val)
+    function setType(string $val): object
     {
         $val = trim($val);
         if ($this->_type !== $val) {
             $this->_type = $val;
             $this->_modified_fields['type'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param int $val
+     * @param int $val val
+     *
+     * @return object
      */
-    function setIdContent(int $val)
+    function setIdContent(int $val): object
     {
         if ($this->_id_content !== $val) {
             $this->_id_content = $val;
             $this->_modified_fields['id_content'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string $val
+     * @param string $val val
+     *
+     * @return object
      */
-    function setCreatedOn(string $val)
+    function setCreatedOn(string $val): object
     {
         if ($this->_created_on !== $val) {
             $this->_created_on = $val;
             $this->_modified_fields['created_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @return object
      */
-    function setCreatedNow()
+    function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setModifiedOn(string $val)
+    function setModifiedOn(string $val): object
     {
         if ($this->_modified_on !== $val) {
             $this->_modified_on = $val;
             $this->_modified_fields['modified_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @return object
      */
-    function setModifiedNow()
+    function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_modified_on !== $now) {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param bool
+     * @param bool $val val
+     *
+     * @return object
      */
-    function setOnline(bool $val)
+    function setOnline(bool $val): object
     {
         if ($this->_online !== $val) {
             $this->_online = $val;
             $this->_modified_fields['online'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param int
+     * @param int $val val
+     *
+     * @return object
      */
-    function setIdContact(int $val)
+    function setIdContact(int $val): object
     {
         if ($this->_id_contact !== $val) {
             $this->_id_contact = $val;
             $this->_modified_fields['id_contact'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setPseudo(string $val)
+    function setPseudo(string $val): object
     {
         $val = trim($val);
         if ($this->_pseudo !== $val) {
             $this->_pseudo = $val;
             $this->_modified_fields['pseudo'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string $val
+     * @param string $val $val
+     *
+     * @return object
      */
-    function setEmail(string $val)
+    function setEmail(string $val): object
     {
         $val = trim($val);
         if ($this->_email !== $val) {
             $this->_email = $val;
             $this->_modified_fields['email'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val val
+     *
+     * @return object
      */
-    function setText(string $val)
+    function setText(string $val): object
     {
         $val = trim($val);
         if ($this->_text !== $val) {
             $this->_text = $val;
             $this->_modified_fields['text'] = true;
         }
+
+        return $this;
     }
 
     /* fin setters */
@@ -417,7 +458,12 @@ class Comment extends ObjectModel
         throw new Exception('id_comment introuvable');
     }
 
-    static function getComments($params = [])
+    /**
+     * @param array $params params
+     *
+     * @return array
+     */
+    static function getComments(array $params = [])
     {
         $debut = 0;
         if (isset($params['debut'])) {

@@ -301,23 +301,9 @@ class Audio extends Media
      */
     protected function _loadFromDb(): bool
     {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `a`.`name`, `a`.`mime`, "
-             . "`a`.`created_on`, `a`.`modified_on`, "
-             . "`a`.`online`, `a`.`id_contact`, "
-             . "CONCAT('https://static.adhocmusic.com/media/audio/', `a`.`id_audio`, '.mp3') AS `direct_url`, "
-             . "`a`.`id_groupe`, `a`.`id_structure`, "
-             . "`a`.`id_event`, `a`.`id_lieu` "
-             . "FROM `" . Audio::getDbTable() . "` `a` "
-             . "WHERE `a`.`id_audio` = " . (int) $this->_id_audio;
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
-            return true;
+        if (!parent::_loadFromDb()) {
+            throw new Exception('Audio introuvable');
         }
-
-        throw new Exception('Audio introuvable');
     }
 
     /**
