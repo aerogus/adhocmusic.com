@@ -549,4 +549,34 @@ class Tools
         }
         return $icons_url . $default_icon;
     }
+
+    /**
+     * @return int
+     */
+    static function makeSeed(): int
+    {
+        list($usec, $sec) = explode(' ', microtime());
+        $number = $sec * 1000000 + ($usec * 1000000);
+        return (int) $number;
+    }
+
+    /**
+     * Génération d'un mot de passe de n caractères
+     * (les caractères iI lL oO 0 sont interdits)
+     *
+     * @param int $length longueur
+     *
+     * @return string
+     */
+    static function generatePassword(int $length = 16)
+    {
+        mt_srand(self::makeSeed());
+        $lettres = 'aAbBcCdDeEfFgGhHjJkKmMnNpPqQrRsStTuUvVwWxXyYzZ23456789#?=!_-$%+;:';
+        $str = '';
+        $max = mb_strlen($lettres) - 1;
+        for ($cpt = 0 ; $cpt < $length ; $cpt++) {
+            $str .= $lettres[rand(0, $max)];
+        }
+        return $str;
+    }
 }

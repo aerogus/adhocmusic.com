@@ -86,7 +86,7 @@ final class Controller
 
             if (self::_validateMemberCreateForm($data, $errors)) {
 
-                $data['password'] = Membre::generatePassword(8);
+                $data['password'] = Tools::generatePassword(8);
 
                 if (empty($errors)) {
 

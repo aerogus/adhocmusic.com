@@ -165,7 +165,7 @@ final class Controller
                 if ($id_contact = Membre::getIdByEmail($email)) {
 
                     $membre = Membre::getInstance($id_contact);
-                    $new_password = Membre::generatePassword(8);
+                    $new_password = Tools::generatePassword(8);
                     $membre->setPassword($new_password);
                     $membre->save();
 

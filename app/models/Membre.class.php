@@ -260,6 +260,7 @@ class Membre extends Contact
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
      *
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
+     *
      * @var array
      */
     protected $_modified_fields = [
@@ -270,7 +271,7 @@ class Membre extends Contact
     /**
      * @return string
      */
-    static function getBaseUrl()
+    static function getBaseUrl(): string
     {
         return MEDIA_URL . '/membre';
     }
@@ -278,7 +279,7 @@ class Membre extends Contact
     /**
      * @return string
      */
-    static function getBasePath()
+    static function getBasePath(): string
     {
         return MEDIA_PATH . '/membre';
     }
@@ -308,26 +309,26 @@ class Membre extends Contact
     /**
      * @return string
      */
-    function getPseudo()
+    function getPseudo(): string
     {
-        return (string) $this->_pseudo;
+        return $this->_pseudo;
     }
 
     /**
      * @return string
      * /!\ sous forme cryptée mysql
      */
-    function getPassword()
+    function getPassword(): string
     {
-        return (string) $this->_password;
+        return $this->_password;
     }
 
     /**
      * @return string
      */
-    function getLastName()
+    function getLastName(): string
     {
-        return (string) $this->_last_name;
+        return $this->_last_name;
     }
 
     /**
@@ -337,7 +338,7 @@ class Membre extends Contact
      *
      * @return string
      */
-    static function getLastNameById(int $id_contact)
+    static function getLastNameById(int $id_contact): string
     {
         $db = DataBase::getInstance();
 
@@ -351,24 +352,25 @@ class Membre extends Contact
     /**
      * @return string
      */
-    function getFirstName()
+    function getFirstName(): string
     {
-        return (string) $this->_first_name;
+        return $this->_first_name;
     }
 
     /**
      * Extraction du prénom
      *
-     * @param int
+     * @param int $id_contact id_contact
+     *
      * @return string
      */
-    static function getFirstNameById($id_contact)
+    static function getFirstNameById(int $id_contact)
     {
-        $db   = DataBase::getInstance();
+        $db = DataBase::getInstance();
 
-        $sql  = "SELECT `first_name` "
-              . "FROM `" . Membre::getDbTable() . "` "
-              . "WHERE `id_contact` = " . (int) $id_contact;
+        $sql = "SELECT `first_name` "
+             . "FROM `" . Membre::getDbTable() . "` "
+             . "WHERE `id_contact` = " . (int) $id_contact;
 
         return $db->queryWithFetchFirstField($sql);
     }
@@ -376,151 +378,151 @@ class Membre extends Contact
     /**
      * @return string
      */
-    function getAddress()
+    function getAddress(): string
     {
-        return (string) $this->_address;
+        return $this->_address;
     }
 
     /**
      * @return string
      */
-    function getCp()
+    function getCp(): string
     {
-        return (string) $this->_cp;
+        return $this->_cp;
     }
 
     /**
      * @return string
      */
-    function getCity()
+    function getCity(): string
     {
-        return (string) $this->_city;
+        return $this->_city;
     }
 
     /**
      * @return string
      */
-    function getCountry()
+    function getCountry(): string
     {
-        return (string) $this->_country;
+        return $this->_country;
     }
 
     /**
      * @return int
      */
-    function getIdCity()
+    function getIdCity(): int
     {
-        return (int) $this->_id_city;
+        return $this->_id_city;
     }
 
     /**
      * @return string
      */
-    function getIdDepartement()
+    function getIdDepartement(): string
     {
-        return (string) $this->_id_departement;
+        return $this->_id_departement;
     }
 
     /**
      * @return string
      */
-    function getIdRegion()
+    function getIdRegion(): string
     {
-        return (string) $this->_id_region;
+        return $this->_id_region;
     }
 
     /**
      * @return string
      */
-    function getIdCountry()
+    function getIdCountry(): string
     {
-        return (string) $this->_id_country;
+        return $this->_id_country;
     }
 
     /**
      * @return string
      */
-    function getTel()
+    function getTel(): string
     {
-        return (string) $this->_tel;
+        return $this->_tel;
     }
 
     /**
      * @return string
      */
-    function getPort()
+    function getPort(): string
     {
-        return (string) $this->_port;
+        return $this->_port;
     }
 
     /**
      * @return string
      */
-    function getSite()
+    function getSite(): string
     {
-        return (string) $this->_site;
+        return $this->_site;
     }
 
     /**
      * @return string
      */
-    function getText()
+    function getText(): string
     {
-        return (string) $this->_text;
+        return $this->_text;
     }
 
     /**
      * @return bool
      */
-    function getMailing()
+    function getMailing(): bool
     {
-        return (bool) $this->_mailing;
+        return $this->_mailing;
     }
 
     /**
      * @return int
      */
-    function getLevel()
+    function getLevel(): int
     {
-        return (int) $this->_level;
-    }
-
-    /**
-     * @return int
-     */
-    function getFacebookProfileId()
-    {
-        return (string) $this->_facebook_profile_id;
+        return $this->_level;
     }
 
     /**
      * @return string
      */
-    function getFacebookProfileUrl()
+    function getFacebookProfileId(): string
     {
-        return 'https://facebook.com/' . (string) $this->_facebook_profile_id;
+        return $this->_facebook_profile_id;
     }
 
     /**
      * @return string
      */
-    function getCreatedOn()
+    function getFacebookProfileUrl(): string
     {
-        if (Date::isDateTimeOk($this->_created_on)) {
-            return (string) $this->_created_on;
+        return 'https://facebook.com/' . $this->_facebook_profile_id;
+    }
+
+    /**
+     * @return string|null
+     */
+    function getCreatedOn(): ?string
+    {
+        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
+            return $this->_created_on;
         }
-        return false;
+        return null;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     function getCreatedOnTs()
     {
-        if (Date::isDateTimeOk($this->_created_on)) {
-            return (int) strtotime($this->_created_on);
+        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
+            return strtotime($this->_created_on);
         }
-        return false;
+        return null;
     }
 
     /**
@@ -546,25 +548,25 @@ class Membre extends Contact
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getVisitedOn()
+    function getVisitedOn(): ?string
     {
-        if (Date::isDateTimeOk($this->_visited_on)) {
-            return (string) $this->_visited_on;
+        if (!is_null($this->_visited_on) && Date::isDateTimeOk($this->_visited_on)) {
+            return $this->_visited_on;
         }
-        return false;
+        return null;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    function getVisitedOnTs()
+    function getVisitedOnTs(): ?int
     {
-        if (Date::isDateTimeOk($this->_visited_on)) {
-             return (int) strtotime($this->_visited_on);
+        if (!is_null($this->_visited_on) && Date::isDateTimeOk($this->_visited_on)) {
+             return strtotime($this->_visited_on);
         }
-        return false;
+        return null;
     }
 
     /**
@@ -572,7 +574,7 @@ class Membre extends Contact
      *
      * @return string
      */
-    function getUrl()
+    function getUrl(): string
     {
         return self::getUrlById($this->getId());
     }
@@ -584,7 +586,7 @@ class Membre extends Contact
      *
      * @return string
      */
-    static function getUrlById(int $id_contact)
+    static function getUrlById(int $id_contact): string
     {
         return HOME_URL . '/membres/' . (string) $id_contact;
     }
@@ -592,7 +594,7 @@ class Membre extends Contact
     /**
      * @return array
      */
-    function getGroupes()
+    function getGroupes(): array
     {
         if ($this->_groupes === false) {
             $db   = DataBase::getInstance();
@@ -616,26 +618,26 @@ class Membre extends Contact
     }
 
     /**
-     * @return string
+     * @return string|null
      * @todo uniquement dans MembreAdhoc ?
      */
-    function getAvatarInterne()
+    function getAvatarInterne(): ?string
     {
         if (file_exists(self::getBasePath() . '/ca/' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/ca/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         }
-        return false;
+        return null;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getAvatar()
+    function getAvatar(): ?string
     {
         if (file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
         }
-        return false;
+        return null;
     }
 
     /* fin getters */
@@ -674,7 +676,7 @@ class Membre extends Contact
     }
 
     /**
-     * @param string
+     * @param string $val val
      *
      * @return object
      */
@@ -780,6 +782,8 @@ class Membre extends Contact
 
     /**
      * @param string $val val
+     *
+     * @return object
      */
     function setIdDepartement(string $val): object
     {
@@ -853,6 +857,8 @@ class Membre extends Contact
 
     /**
      * @param string $val val
+     *
+     * @return object
      */
     function setSite(string $val): object
     {
@@ -1017,8 +1023,8 @@ class Membre extends Contact
      * Retourne les id de membres appartenant à au moins un groupe
      * qu'on peut optionnellement spécifier et/ou un type de musicien
      *
-     * @param int $id_groupe
-     * @param int $id_type_musicien
+     * @param int $id_groupe        id_groupe
+     * @param int $id_type_musicien id_type_musicien
      *
      * @return array
      */
@@ -1066,10 +1072,10 @@ class Membre extends Contact
      *              ['sens']          => "ASC|DESC"
      *              ['debut']         => 0
      *              ['limit']         => 10
+     *
      * @return array
-
      */
-    static function getMembres($params = [])
+    static function getMembres(array $params = [])
     {
         $pseudo = null;
         if (isset($params['pseudo'])) {
@@ -1108,11 +1114,12 @@ class Membre extends Contact
 
         $sort = "id_contact";
         if (isset($params['sort']) && (
-            $params['sort'] == 'random' || $params['sort'] == 'id_contact'
-         || $params['sort'] == 'last_name' || $params['sort'] == 'first_name'
-         || $params['sort'] == 'email' || $params['sort'] == 'created_on'
-         || $params['sort'] == 'modified_on' || $params['sort'] == 'visited_on'
-         || $params['sort'] == 'pseudo' || $params['sort'] == 'lastnl')) {
+            $params['sort'] === 'random' || $params['sort'] === 'id_contact'
+         || $params['sort'] === 'last_name' || $params['sort'] === 'first_name'
+         || $params['sort'] === 'email' || $params['sort'] === 'created_on'
+         || $params['sort'] === 'modified_on' || $params['sort'] === 'visited_on'
+         || $params['sort'] === 'pseudo' || $params['sort'] === 'lastnl')
+        ) {
             $sort = $params['sort'];
         }
 
@@ -1180,7 +1187,7 @@ class Membre extends Contact
      *
      * @return int
      */
-    function delete()
+    function delete(): int
     {
         // on vérifie les clés étrangères
 
@@ -1437,7 +1444,7 @@ class Membre extends Contact
     }
 
     /**
-     * vérifie l'appartenance d'une personne à un groupe
+     * Vérifie l'appartenance d'une personne à un groupe
      *
      * @param int $id_groupe id_groupe
      *
@@ -1473,7 +1480,7 @@ class Membre extends Contact
     }
 
     /**
-     * le membre appartient-t-il au groupe "Membre Standard" ?
+     * Le membre appartient-t-il au groupe "Membre Standard" ?
      *
      * @return bool
      */
@@ -1483,7 +1490,7 @@ class Membre extends Contact
     }
 
     /**
-     * le membre appartient-t-il au groupe "Rédacteur" ?
+     * Le membre appartient-t-il au groupe "Rédacteur" ?
      *
      * @return bool
      */
@@ -1493,7 +1500,7 @@ class Membre extends Contact
     }
 
     /**
-     * le membre appartient-t-il au groupe "Membre Interne" ?
+     * Le membre appartient-t-il au groupe "Membre Interne" ?
      *
      * @return bool
      */
@@ -1503,7 +1510,7 @@ class Membre extends Contact
     }
 
     /**
-     * le membre appartient-t-il au groupe "Bonus" ?
+     * Le membre appartient-t-il au groupe "Bonus" ?
      *
      * @return bool
      */
@@ -1513,7 +1520,7 @@ class Membre extends Contact
     }
 
     /**
-     * le membre appartient-t-il au groupe "Admin Système" ?
+     * Le membre appartient-t-il au groupe "Admin Système" ?
      *
      * @return bool
      */
@@ -1525,10 +1532,11 @@ class Membre extends Contact
     /**
      * Retourne le pseudo du compte, méthode statique
      *
-     * @param int $id_contact
+     * @param int $id_contact id_contact
+     *
      * @return string
      */
-    static function getPseudoById($id_contact)
+    static function getPseudoById(int $id_contact)
     {
         $db = DataBase::getInstance();
 
@@ -1542,10 +1550,11 @@ class Membre extends Contact
     /**
      * Retourne l'id du compte, méthode statique
      *
-     * @param string $pseudo
-     * @return id
+     * @param string $pseudo pseudo
+     *
+     * @return int
      */
-    static function getIdByPseudo($pseudo)
+    static function getIdByPseudo($pseudo): int
     {
         $db = DataBase::getInstance();
 
@@ -1557,28 +1566,30 @@ class Membre extends Contact
     }
 
     /**
-     * vérifie le password d'un membre
+     * Vérifie le password d'un membre
      *
-     * @param string $password
+     * @param string $password password
+     *
      * @return int id_contact ou false
      */
-    function checkPassword($password)
+    function checkPassword(string $password)
     {
         return self::checkPseudoPassword($this->_pseudo, $password);
     }
 
     /**
-     * retourne si le pseudo est disponible
+     * Retourne si le pseudo est disponible
      *
-     * @param string $pseudo
+     * @param string $pseudo pseudo
+     *
      * @return bool
      */
-    static function isPseudoAvailable($pseudo)
+    static function isPseudoAvailable(string $pseudo): bool
     {
         $db = DataBase::getInstance();
 
         $sql  = "SELECT `pseudo` "
-              . "FROM `" . self::$_table . "` "
+              . "FROM `" . Membre::getDbTable() . "` "
               . "WHERE `pseudo` = '" . $db->escape($pseudo) . "' ";
 
         $pseudo = $db->queryWithFetchFirstField($sql);
@@ -1587,12 +1598,13 @@ class Membre extends Contact
     }
 
     /**
-     * retourne si un membre facebook a un compte adhoc
+     * Retourne si un membre facebook a un compte adhoc
      *
-     * @param int $id Facebook Profile Id
+     * @param string $id Facebook Profile Id
+     *
      * @return int $id_contact
      */
-    static function getIdContactByFacebookProfileId($id)
+    static function getIdContactByFacebookProfileId(string $id)
     {
         $db = DataBase::getInstance();
 
@@ -1601,7 +1613,7 @@ class Membre extends Contact
         }
 
         $sql  = "SELECT `" . self::$_pk . "` "
-              . "FROM `" . self::$_table . "` "
+              . "FROM `" . Membre::getDbTable() . "` "
               . "WHERE `facebook_profile_id` = " . $id;
 
         return (int) $db->queryWithFetchFirstField($sql);
@@ -1610,7 +1622,7 @@ class Membre extends Contact
     /**
      * @return array
      */
-    static function getAdHocAccountsLinkedWithFacebookAccounts()
+    static function getAdHocAccountsLinkedWithFacebookAccounts(): array
     {
         $db = DataBase::getInstance();
 
@@ -1631,35 +1643,19 @@ class Membre extends Contact
     }
 
     /**
-     * Generation d un mot de passe de n caractères
-     * (les caractères iI lL oO 0 sont interdits)
-     * nouveau : que des minuscules et des chiffres
-     */
-    static function generatePassword($length = 8)
-    {
-        srand((int) microtime());
-        $lettres = 'abcdefghjkmnpqrstuvwxyz23456789';
-        $str = '';
-        $max = mb_strlen($lettres) - 1;
-        for ($cpt = 0 ; $cpt < $length ; $cpt++) {
-            $str .= $lettres[rand(0, $max)];
-        }
-        return $str;
-    }
-
-    /**
-     * Vérifie le couple pseudo/password
+     * Vérifie le couple pseudo/password et retourne l'id_contact
      *
-     * @param string $pseudo
-     * @param string $password
+     * @param string $pseudo   pseudo
+     * @param string $password password
+     *
      * @return int id_contact ou false
      */
-    static function checkPseudoPassword($pseudo, $password)
+    static function checkPseudoPassword(string $pseudo, string $password): int
     {
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_contact` "
-             . "FROM `" . self::$_table . "` "
+             . "FROM `" . Membre::getDbTable() . "` "
              . "WHERE `pseudo` = '" . $db->escape($pseudo) . "' "
              . "AND `password` = PASSWORD('" . $db->escape($password) . "')";
 
@@ -1667,59 +1663,61 @@ class Membre extends Contact
     }
 
     /**
-     * retourne les types de musiciens
+     * Retourne les types de musiciens
      *
      * @return array
      */
-    static function getTypesMusicien()
+    static function getTypesMusicien(): array
     {
         return self::$_types_musicien;
     }
 
     /**
-     * retourne les types de membres
+     * Retourne les types de membres
      *
      * @return array
      */
-    static function getTypesMembre()
+    static function getTypesMembre(): array
     {
         return self::$_types_membre;
     }
 
     /**
-     * retourne le libellé d'une clé de la liste
+     * Retourne le libellé d'une clé de la liste
      *
-     * @param int
-     * @return string
+     * @param int $cle clé
+     *
+     * @return string|null
      */
-    static function getTypeMusicienName($cle)
+    static function getTypeMusicienName(int $cle): ?string
     {
         if (array_key_exists($cle, self::$_types_musicien)) {
             return self::$_types_musicien[$cle];
         }
-        return false;
+        return null;
     }
 
     /**
-     * retourne le libellé d'une clé de la liste
+     * Retourne le libellé d'une clé de la liste
      *
-     * @param int
-     * @return string
+     * @param int $cle clé
+     *
+     * @return string|null
      */
-    static function getTypeMembreName($cle)
+    static function getTypeMembreName(int $cle): ?string
     {
         if (array_key_exists($cle, self::$_types_membre)) {
             return self::$_types_membre[$cle];
         }
-        return false;
+        return null;
     }
 
     /**
-     * retourne le nombre total de membres
+     * Retourne le nombre total de membres
      *
      * @return int
      */
-    static function getMembresCount()
+    static function getMembresCount(): int
     {
         $db = DataBase::getInstance();
 
@@ -1737,7 +1735,7 @@ class Membre extends Contact
      *
      * @return int
      */
-    static function getIdByEmail($email = null)
+    static function getIdByEmail(string $email = null)
     {
         if (is_null($email)) {
             return 0;
@@ -1758,11 +1756,11 @@ class Membre extends Contact
     }
 
     /**
-     * retourne les pauvres vieux pas connectés depuis fort jadis
+     * Retourne les pauvres vieux pas connectés depuis fort jadis
      *
      * @return array
      */
-    static function getOneYearUnactivesMembers()
+    static function getOneYearUnactivesMembers(): array
     {
         $db = DataBase::getInstance();
 
