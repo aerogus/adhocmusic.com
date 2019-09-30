@@ -534,7 +534,7 @@ class Comment extends ObjectModel
         $res = $db->queryWithFetch($sql);
 
         foreach ($res as $idx => $row) {
-            $res[$idx]['url'] = self::getUrlById($row['id']);
+            $res[$idx]['url'] = self::getUrlById((int) $row['id']);
             $res[$idx]['type_full'] = self::$_types[$row['type']];
         }
 
