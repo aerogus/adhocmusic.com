@@ -161,8 +161,9 @@ final class Controller
                     ->setLink($data['link'])
                     ->setDatDeb($data['datdeb'])
                     ->setDatFin($data['datfin'])
-                    ->setOnline($data['online'])
-                    ->save();
+                    ->setOnline($data['online']);
+
+                $f->save();
 
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     (new Image($_FILES['image']['tmp_name']))

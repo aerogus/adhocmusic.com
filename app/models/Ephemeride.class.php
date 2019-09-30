@@ -45,9 +45,9 @@ class Ephemeride extends ObjectModel
     }
 
     /**
-     * @return array
+     * @return bool
      */
-    protected function _loadFromDb()
+    protected function _loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 
@@ -77,6 +77,6 @@ class Ephemeride extends ObjectModel
 
         $this->_data = $eph;
 
-        return $eph;
+        return true;
     }
 }

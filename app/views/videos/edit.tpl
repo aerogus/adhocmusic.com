@@ -16,28 +16,29 @@
   <ul>
     <li>
       <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
-      <input type="text" id="name" name="name" size="50" value="{$video->getName()|escape}" style="float: right;">
       <label for="name">Titre</label>
+      <input type="text" id="name" name="name" size="50" value="{$video->getName()|escape}" style="float: right;">
     </li>
     <li>
-      <span id="host" style="float: right;">{$video->getHostName()|escape}</span>
       <label for="host">Hébergeur</label>
+      <span id="host">{$video->getHostName()|escape}</span>
     </li>
     <li>
-      <span id="reference" style="float: right;">{$video->getReference()|escape}</span>
       <label for="reference">Référence</label>
+      <span id="reference">{$video->getReference()|escape}</span>
     </li>
     <li>
-      <select id="id_groupe" name="id_groupe" style="float: right;">
+      <label for="groupe">Groupe</label>
+      <select id="id_groupe" name="id_groupe">
         <option value="0">Sans</option>
         {foreach $groupes as $groupe}
         <option value="{$groupe.id}"{if $video->getIdGroupe() == $groupe.id} selected="selected"{/if}>{$groupe.name|escape}</option>
         {/foreach}
       </select>
-      <label for="groupe">Groupe</label>
     </li>
     <li>
-      <select id="id_lieu" name="id_lieu" style="float: right">
+      <label for="id_lieu">Lieu</label>
+      <select id="id_lieu" name="id_lieu">
         <optgroup label="Autre">
           <option value="0">aucun / non référencé</option>
         </optgroup>
@@ -49,16 +50,15 @@
         </optgroup>
         {/foreach}
       </select>
-      <label for="id_lieu">Lieu</label>
     </li>
     <li>
-      <select id="id_event" name="id_event" style="float: right;">
+      <label for="event">Événement</label>
+      <select id="id_event" name="id_event">
         <option value="0">Aucun</option>
       </select>
-      <label for="event">Événement</label>
     </li>
     <li>
-      <input id="online" class="switch" type="checkbox" name="online"{if $video->getOnline()} checked="checked"{/if} style="float: right;">
+      <input id="online" class="switch" type="checkbox" name="online"{if $video->getOnline()} checked="checked"{/if}>
       <label for="online">Afficher</label>
     </li>
   </ul>

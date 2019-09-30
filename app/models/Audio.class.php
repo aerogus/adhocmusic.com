@@ -304,6 +304,7 @@ class Audio extends Media
         if (!parent::_loadFromDb()) {
             throw new Exception('Audio introuvable');
         }
+        return true;
     }
 
     /**

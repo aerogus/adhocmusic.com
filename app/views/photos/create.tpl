@@ -2,7 +2,7 @@
 
 <div class="box">
   <header>
-    <h1>Proposer une photo</h1>
+    <h1>Ajouter une photo</h1>
   </header>
   <div>
     <form id="form-photo-create" name="form-photo-create" method="post" action="/photos/create" enctype="multipart/form-data">
@@ -70,7 +70,7 @@
         </li>
         <li>
           <label for="online">Afficher publiquement</label>
-          <input type="checkbox" name="online" checked="checked">
+          <input class="switch" type="checkbox" name="online" checked="checked">
         </li>
       </ul>
       <input id="form-photo-create-submit" name="form-photo-create-submit" class="button" type="submit" value="Enregistrer">

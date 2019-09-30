@@ -10,6 +10,8 @@ final class Controller
 {
     /**
      * Liste de mes vidéos
+     *
+     * @return string
      */
     static function my(): string
     {
@@ -194,7 +196,9 @@ final class Controller
     }
 
     /**
-     * Code playr embarqué
+     * Code player embarqué
+     *
+     * @return string
      */
     static function embed(): string
     {
@@ -221,6 +225,8 @@ final class Controller
 
     /**
      * Ajout d'une vidéo
+     *
+     * @return string
      */
     static function create(): string
     {
@@ -260,8 +266,9 @@ final class Controller
                     ->setOnline($data['online'])
                     ->setIdHost($data['id_host'])
                     ->setReference($data['reference'])
-                    ->setCreatedNow()
-                    ->save();
+                    ->setCreatedNow();
+
+                $video->save();
 
                 if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
                     $video->storeThumbnail($vignette);
@@ -338,6 +345,8 @@ final class Controller
 
     /**
      * Édition d'une vidéo
+     *
+     * @return string
      */
     static function edit(): string
     {
@@ -375,8 +384,9 @@ final class Controller
                     ->setIdLieu($data['id_lieu'])
                     ->setIdEvent($data['id_event'])
                     ->setIdGroupe($data['id_groupe'])
-                    ->setOnline($data['online'])
-                    ->save();
+                    ->setOnline($data['online']);
+
+                $video->save();
 
                 // Permet le reset de la vignette
                 if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
@@ -430,6 +440,8 @@ final class Controller
 
     /**
      * Suppression d'une vidéo
+     *
+     * @return string
      */
     static function delete(): string
     {

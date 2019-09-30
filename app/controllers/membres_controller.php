@@ -190,8 +190,9 @@ final class Controller
                     ->setEmail($data['email'])
                     ->setSite($data['site'])
                     ->setMailing($data['mailing'])
-                    ->setModifiedNow()
-                    ->save();
+                    ->setModifiedNow();
+
+                $member->save();
 
                 if ($member->isInterne()) {
                     $forum = Route::params('forum');

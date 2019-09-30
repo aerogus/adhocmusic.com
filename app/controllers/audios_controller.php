@@ -7,6 +7,9 @@ define('NB_AUDIOS_PER_PAGE', 80);
 
 final class Controller
 {
+    /**
+     * @return string
+     */
     static function my(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -61,6 +64,9 @@ final class Controller
         return $smarty->fetch('audios/my.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function show(): string
     {
         $id = (int) Route::params('id');
@@ -272,6 +278,9 @@ final class Controller
         return $smarty->fetch('audios/create.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function edit(): string
     {
         $id = (int) Route::params('id');
@@ -438,8 +447,10 @@ final class Controller
         if (empty($data['name'])) {
             $errors['name'] = true;
         }
-        if ($data['id_groupe'] == 0) {
+        if (($data['id_groupe'] === 0) && ($data['id_event'] === 0) && ($data['id_lieu'] === 0)) {
             $errors['id_groupe'] = true;
+            $errors['id_event'] = true;
+            $errors['id_lieu'] = true;
         }
         if (count($errors)) {
             return false;
@@ -460,8 +471,10 @@ final class Controller
         if (empty($data['name'])) {
             $errors['name'] = true;
         }
-        if ($data['id_groupe'] == 0) {
+        if (($data['id_groupe'] === 0) && ($data['id_event'] === 0) && ($data['id_lieu'] === 0)) {
             $errors['id_groupe'] = true;
+            $errors['id_event'] = true;
+            $errors['id_lieu'] = true;
         }
         if (count($errors)) {
             return false;

@@ -1419,22 +1419,21 @@ class Membre extends Contact
      * @return bool
      * @throws Exception
      */
-    protected function _loadFromDb()
+    protected function _loadFromDb(): bool
     {
-        if (parent::_loadFromDb()) {
-
-            $db = DataBase::getInstance();
-
-            $sql  = "SELECT * FROM `" . self::$_table . "` WHERE `" . static::$_pk . "` = " . (int) $this->{'_' . static::$_pk};
-
-            if ($res = $db->queryWithFetchFirstRow($sql)) {
-                $this->_dbToObject($res);
-                return true;
-            }
-            return false;
-
+        if (!parent::_loadFromDb()) {
             throw new Exception('Membre introuvable');
         }
+
+        $db = DataBase::getInstance();
+
+        $sql  = "SELECT * FROM `" . self::$_table . "` WHERE `" . static::$_pk . "` = " . (int) $this->{'_' . static::$_pk};
+
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
+            $this->_dbToObject($res);
+            return true;
+        }
+        return false;
     }
 
     /**

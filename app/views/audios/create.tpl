@@ -2,7 +2,7 @@
 
 <div class="box">
   <header>
-    <h1>Ajouter une Musique</h1>
+    <h1>Ajouter une musique</h1>
   </header>
   <div>
     <form name="form-audio-create" id="form-audio-create" method="post" action="/audios/create" enctype="multipart/form-data">

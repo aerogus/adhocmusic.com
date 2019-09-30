@@ -1003,13 +1003,16 @@ class Groupe extends ObjectModel
     }
 
     /**
-     *
+     * @return bool
+     * @throws Exception
      */
-    protected function _loadFromDb()
+    protected function _loadFromDb(): bool
     {
         if (!parent::_loadFromDb()) {
             throw new Exception('id_groupe introuvable');
         }
+
+        return true;
     }
 
     /**

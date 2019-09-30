@@ -10,7 +10,11 @@
 var audio_url = '{$og_audio.url}';
 </script>
 
-{include file="common/boxstart.tpl" boxtitle=$audio->getName()|escape}
+<div class="box">
+  <header>
+    <h1>{$audio->getName()|escape}</h1>
+  </header>
+  <div>
 
 {if $audio->getIdGroupe()}
 <a href="{$groupe->getUrl()}"><img style="float: left; margin: 5px;" src="{$groupe->getMiniPhoto()}" alt="{$groupe->getName()|escape}"></a>
@@ -87,7 +91,8 @@ var audio_url = '{$og_audio.url}';
 
 {include file="comments/box.tpl" type="a" id_content=$audio->getId()}
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {if !empty($photos) || !empty($videos)}
 {include file="common/boxstart.tpl" boxtitle="Photos et Vidéos de ce concert" width="700px"}
@@ -105,8 +110,6 @@ var audio_url = '{$og_audio.url}';
 {/foreach}
 {include file="common/boxend.tpl"}
 {/if}
-
-{include file="common/boxend.tpl"}
 
 {/if} {* test unknown audio *}
 

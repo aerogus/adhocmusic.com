@@ -41,11 +41,11 @@ final class Controller
                 'answer'      => (string) Route::params('answer'),
             ];
 
-            $faq = FAQ::init();
-            $faq->setIdCategory($data['id_category']);
-            $faq->setQuestion($data['question']);
-            $faq->setAnswer($data['answer']);
-            $faq->save();
+            FAQ::init()
+                ->setIdCategory($data['id_category'])
+                ->setQuestion($data['question'])
+                ->setAnswer($data['answer'])
+                ->save();
 
             Tools::redirect('/adm/faq/?create=1');
         }
@@ -79,11 +79,11 @@ final class Controller
                 'answer'      => (string) Route::params('answer'),
             ];
 
-            $faq = FAQ::getInstance($data['id_faq']);
-            $faq->setIdCategory($data['id_category']);
-            $faq->setQuestion($data['question']);
-            $faq->setAnswer($data['answer']);
-            $faq->save();
+            FAQ::getInstance($data['id_faq'])
+                ->setIdCategory($data['id_category'])
+                ->setQuestion($data['question'])
+                ->setAnswer($data['answer'])
+                ->save();
 
             Tools::redirect('/adm/faq/?edit=1');
         }

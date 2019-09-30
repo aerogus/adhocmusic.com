@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Modifier un lieu"}
+<div class="box">
+  <header>
+    <h1>Éditer un lieu</h1>
+  </header>
+  <div>
 
 {if !empty($unknown_lieu)}
 
@@ -114,7 +118,8 @@
 
 {/if}
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 <script>
 var lieu = {

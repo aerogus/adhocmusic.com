@@ -350,7 +350,7 @@ abstract class ObjectModel
      * @return bool
      * @throws Exception
      */
-    protected function _loadFromDb()
+    protected function _loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 
@@ -361,8 +361,6 @@ abstract class ObjectModel
             return true;
         }
         return false;
-
-        throw new Exception('Object introuvable');
     }
 
     /**

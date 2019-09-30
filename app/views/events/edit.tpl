@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Modifier une date"}
+<div class="box">
+  <header>
+    <h1>Éditer une date</h1>
+  </header>
+  <div>
 
 <form name="form-event-edit" id="form-event-edit" action="/events/edit" enctype="multipart/form-data" method="post">
   <fieldset>
@@ -152,7 +156,8 @@
   <input type="hidden" name="id" value="{$data.id|escape}">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 <script>
 var lieu = {

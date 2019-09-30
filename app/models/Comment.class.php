@@ -434,9 +434,10 @@ class Comment extends ObjectModel
     /* fin setters */
 
     /**
-     *
+     * @return bool
+     * @throws Exception
      */
-    protected function _loadFromDb()
+    protected function _loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 

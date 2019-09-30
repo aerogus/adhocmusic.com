@@ -350,8 +350,9 @@ final class Controller
                     ->setSite($data['site'])
                     ->setFacebookPageId($data['facebook_page_id'])
                     ->setTwitterId($data['twitter_id'])
-                    ->setModifiedNow()
-                    ->save();
+                    ->setModifiedNow();
+
+                $groupe->save();
 
                 // $groupe->updateMember($_SESSION['membre']->getId(), $data['id_type_musicien']);
 

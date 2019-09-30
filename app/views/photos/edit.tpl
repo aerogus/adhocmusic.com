@@ -73,7 +73,7 @@
     </li>
     <li>
       <label for="online">Afficher publiquement</label>
-      <input type="checkbox" name="online"{if $photo->getOnline()} checked="checked"{/if}>
+      <input class="switch" type="checkbox" name="online"{if $photo->getOnline()} checked="checked"{/if}>
     </li>
   </ul>
   <input name="form-photo-edit-submit" id="form-photo-edit-submit" class="button" type="submit" value="Enregistrer">

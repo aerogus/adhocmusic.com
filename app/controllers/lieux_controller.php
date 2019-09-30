@@ -239,8 +239,6 @@ final class Controller
                 'fax'            => (string) Route::params('fax'),
                 'email'          => (string) Route::params('email'),
                 'site'           => (string) Route::params('site'),
-                'lat'            => (float) Route::params('lat'),
-                'lng'            => (float) Route::params('lng'),
                 'id_contact'     => $_SESSION['membre']->getId(),
             ];
             $errors = [];
@@ -263,18 +261,19 @@ final class Controller
                     ->setEmail($data['email'])
                     ->setSite($data['site'])
                     ->setIdContact($data['id_contact'])
-                    ->setCreatedNow()
-                    ->save();
+                    ->setCreatedNow();
 
-                /* récupération des coordonnées si non précisées */
-//                if (!$lieu->getLng() || !$lieu->getLat()) {
-                    $addr = $lieu->getAddress() . ' ' . $lieu->getCp() . ' ' . $lieu->getCity();
-                    if ($coords = GoogleMaps::getGeocode($addr)) {
+                $lieu->save();
+
+                // calcul des coordonnées
+                $addr = $lieu->getAddress() . ' ' . $lieu->getCp() . ' ' . $lieu->getCity();
+                if ($coords = GoogleMaps::getGeocode($addr)) { // TODO nouvelle clé API Google (ou autre service de Geocoding !)
+                    if ($coords['status'] === 'OK') {
                         $lieu->setLat($coords['lat']);
                         $lieu->setLng($coords['lng']);
                         $lieu->save();
                     }
-//                }
+                }
 
                 /* Upload de la photo */
                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {

@@ -411,11 +411,8 @@ class Lieu extends ObjectModel
      */
     function getSite(): string
     {
-        if (strpos($this->_site, '.') === false) {
-            return false;
-        }
-        if (strpos($this->_site, 'http://') !== 0) {
-            return 'http://' . $this->_site;
+        if (strpos($this->_site, '://') === false) {
+            return 'https://' . $this->_site;
         }
         return $this->_site;
     }
@@ -751,7 +748,7 @@ class Lieu extends ObjectModel
     function setIdDepartement(string $val): object
     {
         if (is_numeric($val)) {
-            $val = str_pad((int) $val, 2, '0', STR_PAD_LEFT);
+            $val = str_pad($val, 2, '0', STR_PAD_LEFT);
         } else {
             $val = 'ext';
         }
@@ -1139,7 +1136,7 @@ class Lieu extends ObjectModel
      * @return bool
      * @throws Exception
      */
-    protected function _loadFromDb()
+    protected function _loadFromDb(): bool
     {
         if (!parent::_loadFromDb()) {
             throw new Exception('lieu introuvable');

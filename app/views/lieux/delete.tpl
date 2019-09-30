@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Supprimer un lieu"}
+<div class="box">
+  <header>
+    <h1>Supprimer un lieu</h1>
+  </header>
+  <div>
 
 {if !empty($unknown_lieu)}
 
@@ -33,6 +37,7 @@
 
 {/if}
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

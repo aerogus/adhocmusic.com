@@ -218,8 +218,9 @@ final class Controller
                     ->setIdContact($data['id_contact'])
                     ->setIdStructure($data['id_structure'])
                     ->setOnline($data['online'])
-                    ->setCreatedNow()
-                    ->save();
+                    ->setCreatedNow();
+
+                $photo->save();
 
                 if (is_uploaded_file($_FILES['file']['tmp_name'])) {
                     (new Image($_FILES['file']['tmp_name']))
@@ -369,8 +370,9 @@ final class Controller
                             ->setIdContact($data['id_contact'])
                             ->setIdStructure($data['id_structure'])
                             ->setOnline($data['online'])
-                            ->setCreatedNow()
-                            ->save();
+                            ->setCreatedNow();
+
+                        $photo->save();
 
                         Log::write('photo', "création image " . $photo->getId());
 

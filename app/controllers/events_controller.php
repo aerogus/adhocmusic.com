@@ -533,8 +533,9 @@ final class Controller
                     ->setPrice($data['price'])
                     ->setOnline($data['online'])
                     ->setFacebookEventId($data['facebook_event_id'])
-                    ->setModifiedNow()
-                    ->save();
+                    ->setModifiedNow();
+
+                $event->save();
 
                 if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
                     (new Image($_FILES['flyer']['tmp_name']))

@@ -40,9 +40,9 @@ final class Controller
 
         try {
 
-            $contact = Contact::getInstance((int) $id_contact);
-            $contact->setLastnlNow();
-            $contact->save();
+            Contact::getInstance((int) $id_contact)
+                ->setLastnlNow()
+                ->save();
 
             $db = DataBase::getInstance();
 

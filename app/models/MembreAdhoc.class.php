@@ -255,7 +255,7 @@ class MembreAdhoc extends Membre
      *
      * @return bool
      */
-    protected function _loadFromDb()
+    protected function _loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 

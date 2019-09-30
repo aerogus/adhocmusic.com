@@ -78,21 +78,22 @@ class GoogleMaps
      *
      * @param string $addr addr
      *
-     * @return array ou false
+     * @return array
      */
-    static function getGeocode($addr)
+    static function getGeocode(string $addr)
     {
         if (empty($addr)) {
             return ['status' => 'EMPTY_REQUEST'];
         }
 
-        $url  = 'http://maps.googleapis.com/maps/api/geocode/json'
+        $url  = 'https://maps.googleapis.com/maps/api/geocode/json'
               . '?address=' . urlencode($addr)
               . '&region=fr'
               . '&key=' . self::API_KEY;
 
         $data = file_get_contents($url);
         $data = json_decode($data);
+
         if ($data->status === 'OK') {
             if (count($data->results)) {
                 $lat = (float) $data->results[0]->geometry->location->lat;
@@ -103,7 +104,12 @@ class GoogleMaps
                     'lng' => $lng,
                 ];
             }
+        } else {
+            return [
+                'status' => $data->status,
+                'lat' => 0.0,
+                'lng' => 0.0,
+            ];
         }
-        return ['status' => $data->status];
     }
 }

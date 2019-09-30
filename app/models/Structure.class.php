@@ -480,15 +480,16 @@ class Structure extends ObjectModel
      * @return bool
      * @throws Exception
      */
-    function _loadFromDb()
+    function _loadFromDb(): bool
     {
-        if (parent::_loadFromDb()) {
-            if (file_exists(self::getBasePath() . '/' . $this->_id_structure . '.png')) {
-                $this->_photo = self::getBaseUrl() . '/' . $this->_id_structure . '.png';
-            }
-            return true;
+        if (!parent::_loadFromDb()) {
+            throw new Exception('Structure introuvable');
         }
-        throw new Exception('Structure introuvable');
+
+        if (file_exists(self::getBasePath() . '/' . (string) $this->_id_structure . '.png')) {
+            $this->_photo = self::getBaseUrl() . '/' . (string) $this->_id_structure . '.png';
+        }
+        return true;
     }
 
     /**

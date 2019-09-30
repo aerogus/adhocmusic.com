@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Ajouter une date"}
+<div class="box">
+  <header>
+    <h1>Ajouter une date</h1>
+  </header>
+  <div>
 
 <form name="form-event-create" id="form-event-create" action="/events/create" enctype="multipart/form-data" method="post">
   <fieldset id="bloc-lieu">
@@ -15,33 +19,33 @@
     <ul>
       <li>
         <div class="infobulle error" id="error_id_lieu"{if empty($error_id_lieu)} style="display: none"{/if}>Vous devez indiquer un lieu pour l'événement ou le saisir s'il n'est pas encore référencé.</div>
-        <select id="id_country" name="id_country" style="float: right;">
-          <option value="0">---</option>
-        </select>
         <label for="id_country">Pays</label>
-      </li>
-      <li>
-        <select id="id_region" name="id_region" style="float: right;">
+        <select id="id_country" name="id_country">
           <option value="0">---</option>
         </select>
+      </li>
+      <li>
         <label for="id_region">Région</label>
-      <li>
-        <select id="id_departement" name="id_departement" style="float: right;">
+        <select id="id_region" name="id_region">
           <option value="0">---</option>
         </select>
+      <li>
         <label for="id_departement">Département</label>
-      </li>
-      <li>
-        <select id="id_city" name="id_city" style="float: right;">
+        <select id="id_departement" name="id_departement">
           <option value="0">---</option>
         </select>
+      </li>
+      <li>
         <label for="id_city">Ville</label>
-      </li>
-      <li>
-        <select id="id_lieu" name="id_lieu" style="float: right;">
+        <select id="id_city" name="id_city">
           <option value="0">---</option>
         </select>
+      </li>
+      <li>
         <label for="id_lieu">Lieu</label>
+        <select id="id_lieu" name="id_lieu">
+          <option value="0">---</option>
+        </select>
       </li>
       <li>
         <p>Pas dans la liste ? <a href="/lieux/create">Créer le lieu</a></p>
@@ -53,7 +57,7 @@
   <legend>Artistes</legend>
   <ul>
     <li>
-      <span style="float: right;">
+      <span>
         <ul>
           {section name=cpt_groupe loop=3}
           <li>
@@ -76,11 +80,11 @@
     <ul>
       <li>
         <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez indiquer un titre pour l'événement.</div>
-        <input id="name" name="name" style="float: right; width: 360px;" value="{$data.name|escape}">
+        <input id="name" name="name" style="width:360px" value="{$data.name|escape}">
         <label for="name">Titre</label>
       </li>
       <li>
-        <span style="float: right;">
+        <span>
           <input type="text" id="date" name="date" value="{$data.date.date|date_format:'%d/%m/%Y'}" style="width: 100px; background: url(/img/icones/event.png) no-repeat right top;">
           <select id="hourminute" name="hourminute">{html_input_date_hourminute hour=$data.date.hour minute=$data.date.minute}</select>
         </span>
@@ -171,7 +175,8 @@
   <input id="form-event-create-submit" name="form-event-create-submit" class="button" type="submit" value="Ajouter">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 <script>
 var lieu = {
