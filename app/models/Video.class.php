@@ -248,20 +248,19 @@ class Video extends Media
     /**
      * @return string
      */
-    function getUrl($type = null): ?string
+    function getUrl(): ?string
     {
-        return self::getUrlById($this->getId(), $type);
+        return self::getUrlById($this->getId());
     }
 
     /**
-     * @param int    $id   id_video
-     * @param string $type : à quoi sert-t-il ???
+     * @param int $id_video id_video
      *
      * @return string
      */
-    static function getUrlById(int $id, string $type = null): string
+    static function getUrlById(int $id_video): string
     {
-        return HOME_URL . '/videos/' . $id;
+        return HOME_URL . '/videos/' . (string) $id_video;
     }
 
     /**

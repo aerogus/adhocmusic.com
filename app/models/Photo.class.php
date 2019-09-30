@@ -135,19 +135,19 @@ class Photo extends Media
     /**
      * @return string
      */
-    function getUrl($type = null): string
+    function getUrl(): string
     {
-        return self::getUrlById($this->getId(), $type);
+        return self::getUrlById($this->getId());
     }
 
     /**
-     * @param int $id id
+     * @param int $id_photo id_photo
      *
      * @return string
      */
-    static function getUrlById(int $id, $type = null): string
+    static function getUrlById(int $id_photo): string
     {
-        return HOME_URL . '/photos/' . (int) $id;
+        return HOME_URL . '/photos/' . (string) $id_photo;
     }
 
     /* fin getters */

@@ -102,13 +102,13 @@ class Audio extends Media
     }
 
     /**
-     * @param int $id id_audio
+     * @param int $id_audio id_audio
      *
      * @return string
      */
-    static function getUrlById(int $id): string
+    static function getUrlById(int $id_audio): string
     {
-        return HOME_URL . '/audios/' . $id;
+        return HOME_URL . '/audios/' . (string) $id_audio;
     }
 
     /**

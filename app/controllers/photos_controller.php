@@ -153,8 +153,8 @@ final class Controller
                         }
                     }
                 }
-                $smarty->assign('next', Photo::getUrlById($playlist[$next]['id']));
-                $smarty->assign('prev', Photo::getUrlById($playlist[$prev]['id']));
+                $smarty->assign('next', Photo::getUrlById((int) $playlist[$next]['id']));
+                $smarty->assign('prev', Photo::getUrlById((int) $playlist[$prev]['id']));
 
                 $smarty->assign('idx_photo', $idx_photo + 1);
                 $smarty->assign('nb_photos', $count);

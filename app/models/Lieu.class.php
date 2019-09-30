@@ -551,13 +551,13 @@ class Lieu extends ObjectModel
     /**
      * Retourne l'url d'une fiche lieu à partir de son id
      *
-     * @param int $id id
+     * @param int $id_lieu id_lieu
      *
      * @return string
      */
-    static function getUrlById(int $id): string
+    static function getUrlById(int $id_lieu): string
     {
-        return HOME_URL . '/lieux/' . (int) $id;
+        return HOME_URL . '/lieux/' . (string) $id_lieu;
     }
 
     /**

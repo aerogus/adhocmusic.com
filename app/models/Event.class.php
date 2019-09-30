@@ -381,19 +381,19 @@ class Event extends ObjectModel
      *
      * @return string
      */
-    function getUrl($type = null)
+    function getUrl()
     {
-        return self::getUrlById($this->getId(), $type);
+        return self::getUrlById($this->getId());
     }
 
     /**
-     * @param int $id
+     * @param int $id_event id_event
      *
      * @return string
      */
-    static function getUrlById($id, $type = null)
+    static function getUrlById(int $id_event)
     {
-        return HOME_URL . '/events/' . (int) $id;
+        return HOME_URL . '/events/' . (string) $id_event;
     }
 
     /* fin getters */
@@ -416,8 +416,6 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string $val val
-     *
      * @return object
      */
     function setCreatedNow(): object
@@ -447,7 +445,7 @@ class Event extends ObjectModel
     }
 
     /**
-     *
+     * @return object
      */
     function setModifiedNow(): object
     {
@@ -802,7 +800,7 @@ class Event extends ObjectModel
         $evts = [];
         foreach ($res as $idx => $_res) {
             $evts[$idx] = $_res;
-            $evts[$idx]['url'] = self::getUrlById($_res['id']);
+            $evts[$idx]['url'] = self::getUrlById((int) $_res['id']);
             $evts[$idx]['flyer_100_url'] = self::getFlyerUrl($_res['id'], 100, 100);
             $evts[$idx]['flyer_400_url'] = self::getFlyerUrl($_res['id'], 400, 400);
             $evts[$idx]['structure_picto'] = Structure::getPictoById($_res['structure_id']);

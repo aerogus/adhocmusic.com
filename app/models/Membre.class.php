@@ -570,7 +570,6 @@ class Membre extends Contact
     /**
      * Retourne l'url de la fiche d'un membre AD'HOC
      *
-     * @param bool
      * @return string
      */
     function getUrl()
@@ -581,12 +580,13 @@ class Membre extends Contact
     /**
      * Retourne l'url de la fiche d'un membre AD'HOC
      *
-     * @param int $id_contact
+     * @param int $id_contact id_contact
+     *
      * @return string
      */
-    static function getUrlById($id_contact)
+    static function getUrlById(int $id_contact)
     {
-        return HOME_URL . '/membres/' . (int) $id_contact;
+        return HOME_URL . '/membres/' . (string) $id_contact;
     }
 
     /**
