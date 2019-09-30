@@ -156,7 +156,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    static function getBaseUrl()
+    static function getBaseUrl(): string
     {
         return MEDIA_URL . '/event';
     }
@@ -164,75 +164,75 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    static function getBasePath()
+    static function getBasePath(): string
     {
         return MEDIA_PATH . '/event';
     }
 
     /**
+     * @return string|null
+     */
+    function getCreatedOn(): ?string
+    {
+        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
+            return $this->_created_on;
+        }
+        return null;
+    }
+
+    /**
+     * @return int|null
+     */
+    function getCreatedOnTs(): ?int
+    {
+        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
+            return strtotime($this->_created_on);
+        }
+        return null;
+    }
+
+    /**
+     * @return string|null
+     */
+    function getModifiedOn(): ?string
+    {
+        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+            return $this->_modified_on;
+        }
+        return null;
+    }
+
+    /**
+     * @return int|null
+     */
+    function getModifiedOnTs(): ?int
+    {
+        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+            return strtotime($this->_modified_on);
+        }
+        return null;
+    }
+
+    /**
      * @return string
      */
-    function getCreatedOn()
+    function getName(): string
     {
-        if (Date::isDateTimeOk($this->_created_on)) {
-            return (string) $this->_created_on;
-        }
-        return false;
-    }
-
-    /**
-     * @return int
-     */
-    function getCreatedOnTs()
-    {
-        if (Date::isDateTimeOk($this->_created_on)) {
-            return (int) strtotime($this->_created_on);
-        }
-        return false;
-    }
-
-    /**
-     * @return string
-     */
-    function getModifiedOn()
-    {
-        if (Date::isDateTimeOk($this->_modified_on)) {
-            return (string) $this->_modified_on;
-        }
-        return false;
-    }
-
-    /**
-     * @return int
-     */
-    function getModifiedOnTs()
-    {
-        if (Date::isDateTimeOk($this->_modified_on)) {
-            return (int) strtotime($this->_modified_on);
-        }
-        return false;
-    }
-
-    /**
-     * @return string
-     */
-    function getName()
-    {
-        return (string) $this->_name;
+        return $this->_name;
     }
 
     /**
      * @return string yyyy-mm-dd hh:ii:ss
      */
-    function getDate()
+    function getDate(): string
     {
-        return (string) $this->_date;
+        return $this->_date;
     }
 
     /**
      * @return int
      */
-    function getDay()
+    function getDay(): int
     {
         return (int) date('d', strtotime($this->_date));
     }
@@ -240,7 +240,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getMonth()
+    function getMonth(): int
     {
         return (int) date('m', strtotime($this->_date));
     }
@@ -248,7 +248,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getYear()
+    function getYear(): int
     {
         return (int) date('Y', strtotime($this->_date));
     }
@@ -256,7 +256,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getHour()
+    function getHour(): int
     {
         return (int) date('H', strtotime($this->_date));
     }
@@ -264,7 +264,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getMinute()
+    function getMinute(): int
     {
         return (int) date('i', strtotime($this->_date));
     }
@@ -272,47 +272,47 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    function getText()
+    function getText(): string
     {
-        return (string) $this->_text;
+        return $this->_text;
     }
 
     /**
      * @return string
      */
-    function getPrice()
+    function getPrice(): string
     {
-        return (string) $this->_price;
+        return $this->_price;
     }
 
     /**
      * @return bool
      */
-    function getOnline()
+    function getOnline(): bool
     {
-        return (bool) $this->_online;
+        return $this->_online;
     }
 
     /**
      * @return int
      */
-    function getIdContact()
+    function getIdContact(): int
     {
-        return (int) $this->_id_contact;
+        return $this->_id_contact;
     }
 
     /**
      * @return string
      */
-    function getContactUrl()
+    function getContactUrl(): string
     {
-        return '/membres/' . $this->_id_contact;
+        return HOME_URL . '/membres/' . (string) $this->_id_contact;
     }
 
     /**
      * @return string
      */
-    function getContactPseudo()
+    function getContactPseudo(): string
     {
         return Membre::getPseudoById($this->_id_contact);
     }
@@ -320,15 +320,15 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    function getFacebookEventId()
+    function getFacebookEventId(): string
     {
-        return (string) $this->_facebook_event_id;
+        return $this->_facebook_event_id;
     }
 
     /**
      * @return string
      */
-    function getFacebookEventUrl()
+    function getFacebookEventUrl(): string
     {
         return 'https://www.facebook.com/events/' . (string) $this->_facebook_event_id . '/';
     }
@@ -336,42 +336,42 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getFacebookEventAttending()
+    function getFacebookEventAttending(): int
     {
-        return (int) $this->_facebook_event_attending;
+        return $this->_facebook_event_attending;
     }
 
     /**
      * @return int
      */
-    function getIdLieu()
+    function getIdLieu(): int
     {
-        return (int) $this->_id_lieu;
+        return $this->_id_lieu;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getFullFlyerUrl()
+    function getFullFlyerUrl(): ?string
     {
-        if (file_exists(self::getBasePath()  . '/' . $this->_id_event . '.jpg')) {
-            return self::getBaseUrl() . '/' . $this->_id_event . '.jpg';
+        if (file_exists(self::getBasePath()  . '/' . (string) $this->_id_event . '.jpg')) {
+            return self::getBaseUrl() . '/' . (string) $this->_id_event . '.jpg';
         }
-        return false;
+        return null;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getFlyer100Url()
+    function getFlyer100Url(): ?string
     {
         return self::getFlyerUrl($this->getId(), 100, 100);
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getFlyer400Url()
+    function getFlyer400Url(): ?string
     {
         return self::getFlyerUrl($this->getId(), 400, 400);
     }
@@ -381,7 +381,7 @@ class Event extends ObjectModel
      *
      * @return string
      */
-    function getUrl()
+    function getUrl(): string
     {
         return self::getUrlById($this->getId());
     }
@@ -613,7 +613,7 @@ class Event extends ObjectModel
         $sql = "SELECT COUNT(*) "
              . "FROM `".Event::getDbTable()."`";
 
-        return $db->queryWithFetchFirstField($sql);
+        return (int) $db->queryWithFetchFirstField($sql);
     }
 
     /**
@@ -882,7 +882,10 @@ class Event extends ObjectModel
      * Ajoute un style pour un événement
      *
      * @param int $id_style id_style
-     * @param int $ordre ordre
+     * @param int $ordre    ordre
+     *
+     * @return int
+     * @throws Exception
      */
     function linkStyle(int $id_style, int $ordre = 1)
     {
@@ -931,6 +934,8 @@ class Event extends ObjectModel
      * Efface un style pour un événement
      *
      * @param int $id_style id_style
+     *
+     * @return int
      */
     function unlinkStyle(int $id_style)
     {
@@ -1373,14 +1378,10 @@ class Event extends ObjectModel
      *
      * @return int
      */
-    static function getMyEventsCount()
+    static function getMyEventsCount(): int
     {
         if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');
-        }
-
-        if (isset($_SESSION['my_counters']['nb_events'])) {
-            return $_SESSION['my_counters']['nb_events'];
         }
 
         $db = DataBase::getInstance();
@@ -1389,11 +1390,7 @@ class Event extends ObjectModel
              . "FROM `" . Event::getDbTable() . "` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
 
-        $nb_events = $db->queryWithFetchFirstField($sql);
-
-        $_SESSION['my_counters']['nb_events'] = $nb_events;
-
-        return $_SESSION['my_counters']['nb_events'];
+        return (int) $db->queryWithFetchFirstField($sql);
     }
 
     /**
@@ -1483,13 +1480,13 @@ class Event extends ObjectModel
      *
      * @return string
      */
-    static function getFlyerUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
+    static function getFlyerUrl(int $id_event, int $width = 80, int $height = 80, string $bgcolor = '000000', $border = 0, $zoom = 0)
     {
-        $uid = 'event/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
+        $uid = 'event/' . $id_event . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
 
         if (!file_exists($cache)) {
-            $source = self::getBasePath() . '/' . $id . '.jpg';
+            $source = self::getBasePath() . '/' . $id_event . '.jpg';
             if (file_exists($source)) {
                 $img = (new Image($source))
                     ->setType(IMAGETYPE_JPEG)
@@ -1502,7 +1499,7 @@ class Event extends ObjectModel
                 Image::writeCache($uid, $img->get());
             } else {
                 // ce n'est pas une erreur, tous les events n'ont pas de flyers
-                return false;
+                return null;
             }
         }
 
@@ -1514,7 +1511,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    static function getEventsWithAudio()
+    static function getEventsWithAudio(): array
     {
         $db = DataBase::getInstance();
 
@@ -1534,7 +1531,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    static function getEventsWithVideo()
+    static function getEventsWithVideo(): array
     {
         $db = DataBase::getInstance();
 
@@ -1554,7 +1551,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    static function getEventsWithPhoto()
+    static function getEventsWithPhoto(): array
     {
         $db = DataBase::getInstance();
 
@@ -1574,7 +1571,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    static function getEventsWithMedia()
+    static function getEventsWithMedia(): array
     {
         $db = DataBase::getInstance();
 

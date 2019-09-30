@@ -101,9 +101,13 @@ final class Controller
                         ->setCreatedNow();
 
                     if ($membre->save()) {
-                        Email::send($data['email'], "Inscription à l'Association AD'HOC", 'member-create', $data);
                         Log::action(Log::ACTION_MEMBER_CREATE, $membre->getId());
-                        Tools::redirect('/membres/create?create=1');
+                        if (Email::send($data['email'], "Inscription à l'Association AD'HOC", 'member-create', $data)) {
+                            Tools::redirect('/membres/create?create=1');
+                        } else {
+                            $smarty->assign('password', $data['password']); // DEBUG ONLY
+                            $errors['generic'] = true;
+                        }
                     } else {
                         $errors['generic'] = true;
                     }

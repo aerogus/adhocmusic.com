@@ -198,7 +198,7 @@ class Photo extends Media
      *
      * @return int
      */
-    static function getMyPhotosCount()
+    static function getMyPhotosCount(): int
     {
         if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');
@@ -207,10 +207,10 @@ class Photo extends Media
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
-             . "FROM `".Photo::getDbTable()."` "
+             . "FROM `" . Photo::getDbTable() . "` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
 
-        return $db->queryWithFetchFirstField($sql);
+        return (int) $db->queryWithFetchFirstField($sql);
     }
 
     /**
@@ -218,14 +218,14 @@ class Photo extends Media
      *
      * @return int
      */
-    static function getPhotosCount()
+    static function getPhotosCount(): int
     {
         $db = DataBase::getInstance();
 
         $sql = "SELECT COUNT(*) "
              . "FROM `" . Photo::getDbTable() . "`";
 
-        return $db->queryWithFetchFirstField($sql);
+        return (int) $db->queryWithFetchFirstField($sql);
     }
 
     /**
@@ -245,7 +245,7 @@ class Photo extends Media
      *
      * @return array
      */
-    static function getPhotos(array $params = [])
+    static function getPhotos(array $params = []): array
     {
         $debut = 0;
         if (isset($params['debut'])) {

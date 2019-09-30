@@ -24,6 +24,10 @@ Vous pourrez le modifier le modifier dans votre "Tableau de bord" / "Mes Infos P
 <div class="infobulle error">Erreur à l'inscription. Votre email est déjà présente, vous avez
 déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="/auth/lost-password">cliquez ici</a> pour le récupérer.</div>
 
+  {if !empty($password)}
+    <div class="infobulle info">Password: {$password}</div>
+  {/if}
+
 {else}
 
 <form id="form-member-create" name="form-member-create" method="post" action="/membres/create">

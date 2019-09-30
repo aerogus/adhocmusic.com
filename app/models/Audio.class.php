@@ -407,7 +407,7 @@ class Audio extends Media
     /**
      * Retourne le nombre total d'audios d'un visiteur loggué
      */
-    static function getMyAudiosCount()
+    static function getMyAudiosCount(): int
     {
         if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');
@@ -419,7 +419,7 @@ class Audio extends Media
              . "FROM `" . Audio::getDbTable() . "` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
 
-        return $db->queryWithFetchFirstField($sql);
+        return (int) $db->queryWithFetchFirstField($sql);
     }
 
     /**

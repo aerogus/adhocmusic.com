@@ -99,6 +99,9 @@ final class Controller
         Tools::redirect('/?logout');
     }
 
+    /**
+     * @return string
+     */
     static function change_password(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -119,7 +122,7 @@ final class Controller
             $password_new_1 = trim((string) Route::params('password_new_1'));
             $password_new_2 = trim((string) Route::params('password_new_2'));
 
-            if (($password_old !== "") && ($password_new_1 !== "") && ($password_new_1 === $password_new_2)) {
+            if (($password_old !== '') && ($password_new_1 !== '') && ($password_new_1 === $password_new_2)) {
                 if ($membre->checkPassword($password_old)) {
                     if ($password_new_1 == $password_old) {
                         $smarty->assign('change_ok', true);
@@ -147,7 +150,7 @@ final class Controller
     /**
      * @return string
      */
-    static function lost_password()
+    static function lost_password(): string
     {
         $smarty = new AdHocSmarty();
 

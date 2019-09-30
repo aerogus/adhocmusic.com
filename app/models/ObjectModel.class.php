@@ -66,7 +66,6 @@ abstract class ObjectModel
     protected static $_db_table_groupe_style   = 'adhoc_groupe_style';
     protected static $_db_table_organise_par   = 'adhoc_organise_par';
     protected static $_db_table_participe_a    = 'adhoc_participe_a';
-    protected static $_db_table_messagerie     = 'adhoc_messagerie';
     protected static $_db_table_statsnl        = 'adhoc_statsnl';
 
     /* db geo */
@@ -76,14 +75,14 @@ abstract class ObjectModel
     protected static $_db_table_fr_city        = 'geo_fr_city';
 
     /**
-     * codes type de médias
+     * Codes type de médias
      */
     const TYPE_MEDIA_PHOTO = 0x01;
     const TYPE_MEDIA_AUDIO = 0x02;
     const TYPE_MEDIA_VIDEO = 0x11; // 0x04 ça serait mieux
 
     /**
-     * @param bool
+     * @param bool $fusion fusion
      *
      * @return array
      */

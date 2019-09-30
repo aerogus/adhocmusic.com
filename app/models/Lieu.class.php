@@ -1231,7 +1231,7 @@ class Lieu extends ObjectModel
      *
      * @return array
      */
-    function getEvents()
+    function getEvents(): array
     {
         return Event::getEvents(
             [
@@ -1257,7 +1257,7 @@ class Lieu extends ObjectModel
              . "FROM `" . Lieu::getDbTable() . "` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
 
-        return $db->queryWithFetchFirstField($sql);
+        return (int) $db->queryWithFetchFirstField($sql);
     }
 
     /**
