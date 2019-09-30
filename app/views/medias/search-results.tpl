@@ -1,4 +1,4 @@
-{if !$search_media|@sizeof}
+{if !$search_media|@count}
 <p class="infobulle error">Aucun résultat</p>
 {else}
 {foreach from=$search_media item=media}
