@@ -9,11 +9,15 @@
 class Tools
 {
     /**
+     * @param string $string string
+     *
      * @see http://w3.org/International/questions/qa-forms-utf-8.html
+     *
+     * @return bool
      */
-    static function isUTF8($string)
+    static function isUTF8(string $string): bool
     {
-        return preg_match(
+        return (bool) preg_match(
             '%^(?:
             [\x09\x0A\x0D\x20-\x7E]
             | [\xC2-\xDF][\x80-\xBF]
@@ -37,7 +41,7 @@ class Tools
      *
      * @todo prendre un array en entrée/sortie
      */
-    static function charSet(string $str, string $mode = 'UTF8')
+    static function charSet(string $str, string $mode = 'UTF8'): string
     {
         switch ($mode)
         {
@@ -65,7 +69,7 @@ class Tools
      *
      * @return string
      */
-    static function removeAccents($str)
+    static function removeAccents(string $str): string
     {
         $str = self::charSet($str, 'ISO');
         $str = strtr(
@@ -86,7 +90,7 @@ class Tools
      *
      * @return bool
      */
-    static function isUrlValid($url)
+    static function isUrlValid(string $url): bool
     {
         if (preg_match('`^(http(s?)://){1}((\w+\.)+)\w{2,}(:\d+)?(/[\w\-\'"~#:.?!+=&%@/(\)\xA0-\xFF]*)?$`iD', $url)) {
             return true;
@@ -95,9 +99,11 @@ class Tools
     }
 
     /**
+     * @param string $string string
      *
+     * @return string
      */
-    static function stripBBCode($string)
+    static function stripBBCode(string $string): string
     {
         return preg_replace('!\\[((\\w+(=[^\\]]+)?)|(/\\w+))\\]!', '', $string);
     }
@@ -107,7 +113,7 @@ class Tools
      *
      * @return string
      */
-    static function replaceWordEntities($string)
+    static function replaceWordEntities(string $string): string
     {
         return str_replace(
             ["\r", '&#8216;', '&#8217;', '&#8230;'],
@@ -119,9 +125,9 @@ class Tools
     /**
      * @param string $extension extension
      *
-     * @return string
+     * @return string|null
      */
-    static function getContentType($extension)
+    static function getContentType(string $extension): ?string
     {
         $mt = [
             'jpg'  => 'image/jpeg',
@@ -130,10 +136,10 @@ class Tools
             'png'  => 'image/png',
             'wbmp' => 'image/vnd.wap.wbmp',
         ];
-        if (isset($mt[$extension])) {
+        if (array_key_exists($extension, $mt)) {
             return $mt[$extension];
         }
-        return false;
+        return null;
     }
 
     /**
@@ -143,7 +149,7 @@ class Tools
      *
      * @return string
      */
-    static function rgb2hex(string $rgbval)
+    static function rgb2hex(string $rgbval): string
     {
         if (preg_match_all('/rgb\((\d+),\s*(\d+),\s*(\d+)\)/', $rgbval, $matches)) {
             list($red, $green, $blue) = [$matches[1][0], $matches[2][0], $matches[3][0]];
@@ -163,7 +169,7 @@ class Tools
      *
      * @return string
      */
-    static function tronc(string $str, int $maxLength)
+    static function tronc(string $str, int $maxLength): string
     {
         $str = trim($str);
         if ((mb_strlen($str) > $maxLength) && ($maxLength > 4)) {
@@ -180,7 +186,7 @@ class Tools
      *
      * @return string
      */
-    static function filtreTexte(string $texte)
+    static function filtreTexte(string $texte): string
     {
         $texte = self::replaceWordEntities($texte);
         $texte = preg_replace('/&#\d+;/', '', html_entity_decode(strip_tags($texte, '<br>'))); // vire les tags html, sauf br
@@ -189,18 +195,6 @@ class Tools
         $texte = preg_replace('/(<br\/> ){3,}/', '<br />', $texte); // on limite les sauts de lignes répétés <br />
         $texte = preg_replace("/(\n){2,}/", "\n", $texte); // on limite les sauts de lignes répétés \n
         return $texte;
-    }
-
-    /**
-     * Retourne la révision SVN courante
-     */
-    static function getHeadRevision()
-    {
-        if (!file_exists($file = $_SERVER['DOCUMENT_ROOT'].'/.svn/entries')) {
-            return date('Ymd');
-        }
-        $svn = file($file);
-        return isset($svn[3]) ? (int) $svn[3] : date('Ymd');
     }
 
     /**
@@ -248,7 +242,7 @@ class Tools
      *
      * @return string
      */
-    static function base64_url_encode(string $input)
+    static function base64_url_encode(string $input): string
     {
         return strtr(base64_encode($input), '+/=', '-_,');
     }
@@ -258,7 +252,7 @@ class Tools
      *
      * @return string
      */
-    static function base64_url_decode(string $input)
+    static function base64_url_decode(string $input): string
     {
         return base64_decode(strtr($input, '-_,', '+/='));
     }
@@ -268,6 +262,8 @@ class Tools
      *
      * @param string $url      url
      * @param bool   $forceSsl forceSsl
+     *
+     * @return void
      */
     static function redirect(string $url, bool $forceSsl = false)
     {
@@ -299,7 +295,7 @@ class Tools
      *
      * @return bool
      */
-    static function isAuth()
+    static function isAuth(): bool
     {
         if (empty($_SESSION['membre'])) {
             return false;
@@ -315,7 +311,7 @@ class Tools
      * - est loggué
      * - a bien les droits d'accès à la page
      *
-     * @param int $type
+     * @param int $type type
      *
      * @return void
      */
@@ -366,7 +362,7 @@ class Tools
      *
      * @param mixed $var variable
      *
-     * @return string
+     * @return void
      */
     static function d(mixed $var)
     {
@@ -412,6 +408,8 @@ class Tools
 
     /**
      * Initialisation d'une session PHP native
+     *
+     * @return void
      */
     static function sessionInit()
     {
@@ -449,7 +447,7 @@ class Tools
      *
      * @return string
      */
-    static function htmlToText(string $str)
+    static function htmlToText(string $str): string
     {
         $str = strip_tags($str);
         $str = wordwrap($str, 80, "\n");
@@ -458,9 +456,15 @@ class Tools
     }
 
     /**
+     * Tri de tableau
      *
+     * @param array $array array
+     * @param       $on    ?
+     * @param int   $order order
+     *
+     * @return array
      */
-    static function array_sort($array, $on, $order=SORT_ASC)
+    static function array_sort($array, $on, int $order = SORT_ASC): array
     {
         $new_array = [];
         $sortable_array = [];
@@ -478,8 +482,7 @@ class Tools
                 }
             }
 
-            switch ($order)
-            {
+            switch ($order) {
                 case SORT_ASC:
                     asort($sortable_array);
                     break;
@@ -499,11 +502,11 @@ class Tools
     /**
      * @param string $ext extension
      *
-     * @return string
+     * @return string|null
      *
      * @see http://www.commentcamarche.net/contents/courrier-electronique/mime.php3
      */
-    static function getTypeMimeByExtension(string $ext)
+    static function getTypeMimeByExtension(string $ext): ?string
     {
         $mimes = [
             'jpg'  => 'image/jpeg',
@@ -519,7 +522,7 @@ class Tools
         if (array_key_exists($ext, $mimes)) {
             return $mimes[$ext];
         }
-        return false;
+        return null;
     }
 
     /**
@@ -527,7 +530,7 @@ class Tools
      *
      * @return string
      */
-    static function getIconByExtension(string $ext)
+    static function getIconByExtension(string $ext): string
     {
         $icons_url = '/img/icones/';
         $default_icon = 'file.png';
@@ -551,6 +554,8 @@ class Tools
     }
 
     /**
+     * Initialisateur de la graine
+     *
      * @return int
      */
     static function makeSeed(): int
@@ -562,21 +567,20 @@ class Tools
 
     /**
      * Génération d'un mot de passe de n caractères
-     * (les caractères iI lL oO 0 sont interdits)
      *
      * @param int $length longueur
      *
      * @return string
      */
-    static function generatePassword(int $length = 16)
+    static function generatePassword(int $length = 16): string
     {
+        $lettres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         mt_srand(self::makeSeed());
-        $lettres = 'aAbBcCdDeEfFgGhHjJkKmMnNpPqQrRsStTuUvVwWxXyYzZ23456789#?=!_-$%+;:';
-        $str = '';
+        $password = '';
         $max = mb_strlen($lettres) - 1;
-        for ($cpt = 0 ; $cpt < $length ; $cpt++) {
-            $str .= $lettres[rand(0, $max)];
+        for ($cpt = 0; $cpt < $length; $cpt++) {
+            $password .= $lettres[rand(0, $max)];
         }
-        return $str;
+        return $password;
     }
 }

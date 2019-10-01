@@ -1434,7 +1434,7 @@ class Membre extends Contact
 
         $db = DataBase::getInstance();
 
-        $sql  = "SELECT * FROM `" . self::$_table . "` WHERE `" . static::$_pk . "` = " . (int) $this->{'_' . static::$_pk};
+        $sql  = "SELECT * FROM `" . Membre::getDbTable() . "` WHERE `" . static::$_pk . "` = " . (int) $this->{'_' . static::$_pk};
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
@@ -1541,7 +1541,7 @@ class Membre extends Contact
         $db = DataBase::getInstance();
 
         $sql  = "SELECT `pseudo` "
-              . "FROM `" . self::$_table . "` "
+              . "FROM `" . Membre::getDbTable() . "` "
               . "WHERE `" . self::$_pk . "` = " . (int) $id_contact;
 
         return $db->queryWithFetchFirstField($sql);
@@ -1559,7 +1559,7 @@ class Membre extends Contact
         $db = DataBase::getInstance();
 
         $sql  = "SELECT `" . self::$_pk . "` "
-              . "FROM `" . self::$_table . "` "
+              . "FROM `" . Membre::getDbTable() . "` "
               . "WHERE `pseudo` = '" . $db->escape($pseudo) . "'";
 
         return $db->queryWithFetchFirstField($sql);
@@ -1627,7 +1627,7 @@ class Membre extends Contact
         $db = DataBase::getInstance();
 
         $sql  = "SELECT `id_contact`, `pseudo`, `facebook_profile_id` "
-              . "FROM `" . self::$_table . "` "
+              . "FROM `" . Membre::getDbTable() . "` "
               . "WHERE `facebook_profile_id` IS NOT NULL";
 
         $rows = $db->queryWithFetch($sql);

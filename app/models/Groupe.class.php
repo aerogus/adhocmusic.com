@@ -475,7 +475,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `name` "
-             . "FROM `" . self::$_table . "` "
+             . "FROM `" . Groupe::getDbTable() . "` "
              . "WHERE `" . self::$_pk . "` = " . (int) $id_groupe;
 
         return $db->queryWithFetchFirstField($sql);
@@ -594,7 +594,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `alias` "
-             . "FROM `" . self::$_table . "` "
+             . "FROM `" . Groupe::getDbTable() . "` "
              . "WHERE `" . self::$_pk . "` = " . (int) $id_groupe;
 
         if ($alias = $db->queryWithFetchFirstField($sql)) {
@@ -1248,7 +1248,7 @@ class Groupe extends ObjectModel
         $sql = "SELECT `g`.`id_groupe` AS `id`, `g`.`name`, `g`.`mini_text`, `g`.`text`, `g`.`style`, `g`.`lineup`, "
              . "`g`.`etat`, `g`.`site`, `g`.`influences`, `g`.`created_on`, `g`.`modified_on`, "
              . "`g`.`alias`, `g`.`myspace`, `g`.`comment` "
-             . "FROM `" . self::$_table . "` `g` "
+             . "FROM `" . Groupe::getDbTable() . "` `g` "
              . "WHERE 1 ";
 
         if (!is_null($online)) {
@@ -1333,7 +1333,7 @@ class Groupe extends ObjectModel
         $sql = "SELECT `id_groupe` AS `id`, `name`, UPPER(SUBSTRING(`name`, 1, 1)) AS `lettre`, "
              . "`mini_text`, `style`, `alias`, `modified_on`, UNIX_TIMESTAMP(`modified_on`) AS `modified_on_ts`, `etat`, "
              . "CONCAT('http://www.adhocmusic.com/', `alias`) AS `url` "
-             . "FROM `" . self::$_table . "` "
+             . "FROM `" . Groupe::getDbTable() . "` "
              . "WHERE `online` "
              . "ORDER BY `etat` ASC, `name` ASC";
 
@@ -1373,7 +1373,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `" . self::$_pk . "` "
-             . "FROM `" . self::$_table . "` "
+             . "FROM `" . Groupe::getDbTable() . "` "
              . "WHERE `alias` = '" . $db->escape($alias) . "'";
 
         if ($id_groupe = $db->queryWithFetchFirstField($sql)) {
@@ -1399,7 +1399,7 @@ class Groupe extends ObjectModel
         }
 
         $sql = "SELECT `id_groupe` "
-             . "FROM `" . self::$_table . "` "
+             . "FROM `" . Groupe::getDbTable() . "` "
              . "WHERE `facebook_page_id` = " . $fbpid;
 
         if ($id_groupe = $db->queryWithFetchFirstField($sql)) {
@@ -1746,7 +1746,7 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "UPDATE `" . self::$_table . "` "
+        $sql = "UPDATE `" . Groupe::getDbTable() . "` "
              . "SET `visite` = `visite` + 1 "
              . "WHERE `id_groupe` = " . (int) $this->getId();
 
@@ -1849,7 +1849,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `alias` "
-             . "FROM `" . self::$_table . "` "
+             . "FROM `" . Groupe::getDbTable() . "` "
              . "WHERE `alias` = '" . $db->escape($alias) . "'";
 
         return $db->queryWithFetchFirstField($sql);

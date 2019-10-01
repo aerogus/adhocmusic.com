@@ -1025,7 +1025,7 @@ class Lieu extends ObjectModel
 
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_table . "` "
+        $sql = "DELETE FROM `" . Lieu::getDbTable() . "` "
              . "WHERE `" . self::$_pk . "` = " . (int) $this->getId();
 
         $db->query($sql);

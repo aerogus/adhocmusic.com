@@ -49,11 +49,6 @@ class CMS extends ObjectModel
     protected $_modified_on = null;
 
     /**
-     * @var string
-     */
-    protected $_menuselected = '';
-
-    /**
      * @var array
      */
     protected $_breadcrumb = [];
@@ -87,7 +82,6 @@ class CMS extends ObjectModel
         'title'        => 'str',
         'created_on'   => 'date',
         'modified_on'  => 'date',
-        'menuselected' => 'str',
         'breadbcrumb'  => 'phpser',
         'content'      => 'str',
         'online'       => 'bool',
@@ -157,14 +151,6 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @return string
-     */
-    function getMenuselected(): string
-    {
-        return $this->_menuselected;
-    }
-
-    /**
      * @return array
      */
     function getBreadcrumb(): array
@@ -201,15 +187,15 @@ class CMS extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $val val
+     * @param string $alias alias
      *
      * @return object
      */
-    function setAlias(string $val): object
+    function setAlias(string $alias): object
     {
-        $val = trim($val);
-        if ($this->_alias !== $val) {
-            $this->_alias = $val;
+        $alias = trim($alias);
+        if ($this->_alias !== $alias) {
+            $this->_alias = $alias;
             $this->_modified_fields['alias'] = true;
         }
 
@@ -291,22 +277,6 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @param string $val val
-     *
-     * @return object
-     */
-    function setMenuselected(string $val): object
-    {
-        $val = trim($val);
-        if ($this->_menuselected !== $val) {
-            $this->_menuselected = $val;
-            $this->_modified_fields['menuselected'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
      * @param array $val val
      *
      * @return object
@@ -370,6 +340,8 @@ class CMS extends ObjectModel
     /* fin setters */
 
     /**
+     * Récupère l'id_cms à partir de l'alias
+     *
      * @param string $alias alias
      *
      * @return int ou false
@@ -379,7 +351,7 @@ class CMS extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `" . self::$_pk . "` "
-             . "FROM `" . self::$_table . "` "
+             . "FROM `" . CMS::getDbTable() . "` "
              . "WHERE `alias` = '" . $db->escape($alias) . "' AND `online`";
 
         return $db->queryWithFetchFirstField($sql);
@@ -392,9 +364,9 @@ class CMS extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `id_cms` AS `id`, `alias`, `menuselected`, `breadcrumb`, `created_on`, `modified_on`, "
+        $sql = "SELECT `id_cms` AS `id`, `alias`, `breadcrumb`, `created_on`, `modified_on`, "
              . "`title`, `content`, `online`, `auth` "
-             . "FROM `" . self::$_table . "` "
+             . "FROM `" . CMS::getDbTable() . "` "
              . "ORDER BY `alias` ASC";
 
         return $db->queryWithFetch($sql);
