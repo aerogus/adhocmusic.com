@@ -669,13 +669,13 @@ class Event extends ObjectModel
         }
 
         $sens = 'ASC';
-        if (isset($params['sens']) && $params['sens'] == 'DESC') {
+        if (isset($params['sens']) && $params['sens'] === 'DESC') {
             $sens = 'DESC';
         }
 
         $sort = 'id_event';
         if (isset($params['sort'])
-            && ($params['sort'] == 'date' || $params['sort'] == 'random')
+            && ($params['sort'] === 'date' || $params['sort'] === 'random')
         ) {
             $sort = $params['sort'];
         }
@@ -788,7 +788,7 @@ class Event extends ObjectModel
         }
 
         $sql .= "ORDER BY ";
-        if ($sort == "random") {
+        if ($sort === "random") {
             $sql .= "RAND(" . time() . ") ";
         } else {
             $sql .= "`e`.`" . $sort . "` " . $sens . " ";
@@ -808,7 +808,7 @@ class Event extends ObjectModel
 
         unset($res);
 
-        if ($limit == 1) {
+        if ($limit === 1) {
             $evts = array_pop($evts);
         }
 
@@ -912,7 +912,7 @@ class Event extends ObjectModel
         // le style n'est-t-il pas déjà présent pour cet évenement ?
         $listeStyles = $this->getStyles();
         foreach ($listeStyles as $style) {
-            if ($id_style == $style['id_style']) {
+            if ($id_style === $style['id_style']) {
                 throw new Exception('Style déjà présent pour cet événement');
             }
         }
@@ -959,7 +959,7 @@ class Event extends ObjectModel
         $listeStyles = $this->getStyles();
         $style_not_found = true;
         foreach ($listeStyles as $style) {
-            if ($id_style == $style['id_style']) {
+            if ($id_style === $style['id_style']) {
                 $style_not_found = false;
             }
         }
@@ -1157,7 +1157,7 @@ class Event extends ObjectModel
         // la structure n'est-t-elle pas déjà présente pour l'événement ?
         $listeStructures = $this->getStructures();
         foreach ($listeStructures as $struct) {
-            if ($id_structure == $struct['id']) {
+            if ($id_structure === $struct['id']) {
                 throw new Exception('Structure déjà présente pour cet événement');
             }
         }
@@ -1192,7 +1192,7 @@ class Event extends ObjectModel
         $listeStructures = $this->getStructures();
         $struct_not_found = true;
         foreach ($listeStructures as $struct) {
-            if ($id_structure == $struct['id_structure']) {
+            if ($id_structure === $struct['id_structure']) {
                 $struct_not_found = false;
             }
         }

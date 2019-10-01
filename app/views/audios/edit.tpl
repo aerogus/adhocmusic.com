@@ -6,39 +6,40 @@
   </header>
   <div>
 
-{if !empty($unknown_audio)}
+    {if !empty($unknown_audio)}
 
     <p class="infobulle error">Cet audio est introuvable !</p>
 
-{else}
+    {else}
 
     <form name="form-audio-edit" id="form-audio-edit" method="post" action="/audios/edit" enctype="multipart/form-data">
       <ul>
         <li>
-           <span id="mp3" style="float: right;">{audio_player id=$audio->getId()}</span>
-           <label for="mp3"><img src="/img/icones/audio.png" alt=""> Ecouter</label>
+          <label for="mp3">Écouter</label>
+          <span id="mp3">{audio_player id=$audio->getId()}</span>
         </li>
         <li>
-          <input type="file" name="file" value="" style="float: right;">
-          <label for="file"><img src="/img/icones/audio.png" alt=""> Audio (.mp3 16bits/44Khz/stéréo, &lt; 16 Mo)</label>
+          <label for="file">Audio (.mp3 16bits/44Khz/stéréo, &lt; 16 Mo)</label>
+          <input type="file" id="file" name="file" value="">
         </li>
         <li>
+          <label for="name">Titre</label>
           <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner un titre</div>
-          <input type="text" id="name" name="name" size="50" value="{$audio->getName()|escape}" style="float: right;">
-          <label for="name"><img src="/img/icones/signature.png" alt=""> Titre</label>
+          <input type="text" id="name" name="name" size="50" value="{$audio->getName()|escape}">
         </li>
         <li>
+          <label for="id_groupe">Groupe</label>
           <div class="infobulle error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez sélectionner un groupe</div>
-          <select id="id_groupe" name="id_groupe" style="float: right;">
+          <select id="id_groupe" name="id_groupe">
             <option value="0">Sans</option>
             {foreach from=$groupes item=groupe}
             <option value="{$groupe.id}"{if $audio->getIdGroupe() == $groupe.id} selected="selected"{/if}>{$groupe.name|escape}</option>
             {/foreach}
           </select>
-          <label for="id_groupe"><img src="/img/icones/groupe.png" alt=""> Groupe</label>
         </li>
         <li>
-          <select id="id_lieu" name="id_lieu" style="float: right;">
+          <label for="id_lieu">Lieu</label>
+          <select id="id_lieu" name="id_lieu">
             <optgroup label="Autre">
               <option value="0">aucun / non référencé</option>
             </optgroup>
@@ -50,30 +51,29 @@
             </optgroup>
             {/foreach}
           </select>
-          <label for="id_lieu"><img src="/img/icones/lieu.png" alt=""> Lieu</label>
         </li>
         <li>
-          <select id="id_event" name="id_event" style="float: right;">
+          <label for="id_event">Événement</label>
+          <select id="id_event" name="id_event">
             <option value="0">Aucun</option>
           </select>
-          <label for="id_event"><img src="/img/icones/event.png" alt=""> Evénement</label>
         </li>
         <li>
-          <span id="online" style="float: right;">{$audio->getOnline()}</span>
-          <label for="online"><img src="/img/icones/eye.png" alt=""> Afficher</label>
+          <label for="online">Afficher</label>
+          <span id="online">{$audio->getOnline()}</span>
         </li>
         <li>
-          <span id="created_on" style="float: right;"><a href="{$membre->getUrl()}">{$membre->getPseudo()|escape}</a>
+          <label for="created_on">Envoyé par</label>
+          <span id="created_on"><a href="{$membre->getUrl()}">{$membre->getPseudo()|escape}</a>
           le {$audio->getCreatedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
-          <label for="created_on"><img src="/img/icones/upload.png" alt=""> Envoyé par</label>
         </li>
         <li>
-          <span id="modified_on" style="float: right;">{$audio->getModifiedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
-          <label for="modified_on"><img src="/img/icones/eye.png" alt=""> Modifié le</label>
+          <label for="modified_on">Modifié le</label>
+          <span id="modified_on">{$audio->getModifiedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
         </li>
         <li>
-          <span id="delete" style="float: right;"><a href="/audios/delete/{$audio->getId()}"><img src="/img/icones/delete.png" alt=""></a></span>
-          <label for="delete"><img src="/img/icones/delete.png" alt=""> Supprimer</label>
+          <label for="delete">Supprimer</label>
+          <span id="delete"><a href="/audios/delete/{$audio->getId()}">Supprimer</a></span>
         </li>
       </ul>
       <input id="form-audio-edit-submit" name="form-audio-edit-submit" class="button" type="submit" value="Enregistrer">

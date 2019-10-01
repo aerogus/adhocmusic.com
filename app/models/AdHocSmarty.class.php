@@ -290,7 +290,7 @@ class AdHocSmarty extends Smarty
             for ($m = 0 ; $m < 60 ; $m += $step) {
                 $hm = str_pad((int) $h, 2, '0', STR_PAD_LEFT) . ':' . str_pad((int) $m, 2, '0', STR_PAD_LEFT);
                 $out .= "<option value=\"".$hm."\"";
-                if ($hm == $hourminute) {
+                if ($hm === $hourminute) {
                     $out .= " selected=\"selected\"";
                 }
                 $out .= ">".$hm."</option>\n";
@@ -350,13 +350,13 @@ class AdHocSmarty extends Smarty
         // création tableau
         for ($x = 1 ; $x <= $nb_days_in_month ; $x++) {
             // nouvelle semaine
-            if (($x + $blank_days - 1) % 7 == 0) {
+            if (($x + $blank_days - 1) % 7 === 0) {
                 $row++;
             }
             $date = date('Y-m-d', mktime(0, 0, 0, $month, $x, $year));
             $cal[$row][$trow]['num'] = $x;
             $cal[$row][$trow]['selected'] = false;
-            if ($day == $x) {
+            if ($day === $x) {
                 $cal[$row][$trow]['selected'] = true;
             }
             if (array_key_exists($date, $events)) {
@@ -419,7 +419,7 @@ class AdHocSmarty extends Smarty
     static function modifier_format_size(int $size): string
     {
         $sizes = ["  o", " Ko", " Mo", " Go", " To", " Po", " Eo", " Zo", " Yo"];
-        if ($size == 0) {
+        if ($size === 0) {
             return('0  o');
         } else {
             return (round($size/pow(1024, ($i = floor(log($size, 1024)))), 2) . $sizes[$i]);

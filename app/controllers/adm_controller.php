@@ -605,7 +605,7 @@ final class Controller
             $form_style[$cpt_style] .= "<option value=\"0\">---</option>\n";
             foreach (Style::getHashTable() as $id_style => $nom_style) {
                 $form_style[$cpt_style] .= "<option value=\"" . $id_style . "\"";
-                if ($id_style == $sty[$cpt_style]) {
+                if ($id_style === $sty[$cpt_style]) {
                     $form_style[$cpt_style] .= " selected=\"selected\"";
                 }
                 $form_style[$cpt_style] .= ">" . $nom_style . "</option>\n";

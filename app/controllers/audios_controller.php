@@ -30,7 +30,7 @@ final class Controller
             $audio->save();
         }
 
-        if ($_SESSION['membre']->getId() == 1) {
+        if ($_SESSION['membre']->getId() === 1) {
             $audios = Audio::getAudios(
                 [
                     'debut'   => $page * NB_AUDIOS_PER_PAGE,
@@ -211,7 +211,10 @@ final class Controller
                     ->setCreatedNow();
                 if ($audio->save()) {
                     if ($content = Route::params('file')) {
-                        file_put_contents(ADHOC_ROOT_PATH . '/media/audio/' . $audio->getId() . '.mp3', $content);
+                        if (!is_dir(Audio::getBasePath())) {
+                            mkdir(Audio::getBasePath(), 0755, true);
+                        }
+                        file_put_contents(Audio::getBasePath() . '/' . $audio->getId() . '.mp3', $content);
                     } else {
                         mail(DEBUG_EMAIL, 'bug audio create', 'bug audio create');
                     }
@@ -323,8 +326,6 @@ final class Controller
 
             if (self::_validateAudioEditForm($data, $errors)) {
 
-                $file = Route::params('file');
-
                 $audio->setName($data['name'])
                     ->setIdLieu($data['id_lieu'])
                     ->setIdContact($data['id_contact'])
@@ -335,7 +336,10 @@ final class Controller
 
                 if ($audio->save()) {
                     if ($content = Route::params('file')) {
-                        file_put_contents(ADHOC_ROOT_PATH . '/media/audio/' . $audio->getId() . '.mp3', $content);
+                        if (!is_dir(Audio::getBasePath())) {
+                            mkdir(Audio::getBasePath(), 0755, true);
+                        }
+                        file_put_contents(Audio::getBasePath() . '/' . $audio->getId() . '.mp3', $content);
                     }
                     Log::action(Log::ACTION_AUDIO_EDIT, $audio->getId());
                     Tools::redirect('/medias/?edit=1');

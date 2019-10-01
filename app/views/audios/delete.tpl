@@ -1,64 +1,67 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Supprimer un Son"}
+<div class="box">
+  <header>
+    <h1>Supprimer un son</h1>
+  </header>
+  <div>
 
-{if !empty($unknown_audio)}
+    {if !empty($unknown_audio)}
 
-<p class="infobulle error">Cet audio est introuvable !</p>
+    <p class="infobulle error">Cet audio est introuvable !</p>
 
-{else}
+    {else}
 
-<form id="form-audio-delete" name="form-audio-delete" method="post" action="/audios/delete">
-  <fieldset style="width: 75%;">
-    <ol>
-      <li>
-        <span id="name" style="float: right;">{$audio->getName()|escape}</span>
-        <label for="name">Nom</label>
-      </li>
-      {if !empty($groupe)}
-      <li>
-        <span id="groupe" style="float: right;">{$groupe->getName()|escape}</span>
-        <label for="groupe">Groupe</label>
-      </li>
-      {/if}
-      {if !empty($event)}
-      <li>
-        <span id="event" style="float: right;">{$event->getDate()|date_format:"%d/%m/%Y %h:%i"} - {$event->getName()|escape}</span>
-        <label for="event">Evénement</label>
-      </li>
-      {/if}
-      {if !empty($lieu)}
+    <form id="form-audio-delete" name="form-audio-delete" method="post" action="/audios/delete">
+      <ul>
         <li>
-          <span id="lieu" style="float: right;">{$lieu->getIdDepartement()} - {$lieu->getName()|escape}</span>
-          <label for="lieu">Lieu</label>
+          <label for="name">Nom</label>
+          <span id="name">{$audio->getName()|escape}</span>
         </li>
-      {/if}
-      <li>
-        <span id="online" style="float: right;">{$audio->getOnline()}</span>
-        <label for="online">Afficher</label>
-      </li>
-      {if !empty($membre)}
-      <li>
-        <span id="created_on" style="float: right;"><a href="{$membre->getUrl()}">{$membre->getPseudo()|escape}</a> le {$audio->getCreatedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
-        <label for="created_on"><img src="/img/icones/upload.png" alt=""> Envoyé par</label>
-      </li>
-      {/if}
-      <li>
-        <span id="modified_on" style="float: right;">{$audio->getModifiedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
-        <label for="modified_on"><img src="/img/icones/eye.png" alt=""> Modifié le</label>
-      </li>
-      <li>
-        <span id="mp3" style="float: right;">{audio_player id=$audio->getId()}</span>
-        <label for="mp3">Ecouter</label>
-      </li>
-    </ol>
-  </fieldset>
-  <input id="form-audio-delete-submit" name="form-audio-delete-submit" class="button" type="submit" value="Supprimer">
-  <input type="hidden" name="id" value="{$audio->getId()|escape}">
-</form>
+        {if !empty($groupe)}
+        <li>
+          <label for="groupe">Groupe</label>
+          <span id="groupe">{$groupe->getName()|escape}</span>
+        </li>
+        {/if}
+        {if !empty($event)}
+        <li>
+          <label for="event">Événement</label>
+          <span id="event">{$event->getDate()|date_format:"%d/%m/%Y %h:%i"} - {$event->getName()|escape}</span>
+        </li>
+        {/if}
+        {if !empty($lieu)}
+        <li>
+          <label for="lieu">Lieu</label>
+          <span id="lieu">{$lieu->getIdDepartement()} - {$lieu->getName()|escape}</span>
+        </li>
+        {/if}
+        <li>
+          <label for="online">Afficher</label>
+          <span id="online">{$audio->getOnline()}</span>
+        </li>
+        {if !empty($membre)}
+        <li>
+          <label for="created_on">Envoyé par</label>
+          <span id="created_on"><a href="{$membre->getUrl()}">{$membre->getPseudo()|escape}</a> le {$audio->getCreatedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
+        </li>
+        {/if}
+        <li>
+          <label for="modified_on">Modifié le</label>
+          <span id="modified_on" style="float: right;">{$audio->getModifiedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
+        </li>
+        <li>
+          <span id="mp3" style="float: right;">{audio_player id=$audio->getId()}</span>
+          <label for="mp3">Ecouter</label>
+        </li>
+      </ul>
+      <input id="form-audio-delete-submit" name="form-audio-delete-submit" class="button" type="submit" value="Supprimer">
+      <input type="hidden" name="id" value="{$audio->getId()|escape}">
+    </form>
 
-{/if}
+    {/if}
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

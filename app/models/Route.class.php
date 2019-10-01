@@ -210,10 +210,10 @@ class Route
 
         if (is_array($ret) && array_key_exists('mode', $ret)) {
             header('HTTP/1.1 200 OK');
-            if ($ret['mode'] == 'inline') {
+            if ($ret['mode'] === 'inline') {
                 header('Content-Type: ' . $ret['content-type']);
                 header('Content-Disposition: inline; filename="' . $ret['basename'] . '"');
-            } elseif ($ret['mode'] == 'download') {
+            } elseif ($ret['mode'] === 'download') {
                 header('Content-Type: application/octet-stream');
                 header('Content-Disposition: attachment; filename="' . $ret['basename'] . '"');
             }

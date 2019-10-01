@@ -20,8 +20,8 @@ jQuery(document).ready(function ($) {
   });
 
   /**
-     * chargement des pays
-     */
+   * chargement des pays
+   */
   $.getJSON('/geo/countries.json', function (data) {
     $.each(data, function (country_id, country_name) {
       $('<option/>', {
@@ -37,8 +37,8 @@ jQuery(document).ready(function ($) {
   });
 
   /**
-     * la sélection du pays charge la liste des régions
-     */
+   * la sélection du pays charge la liste des régions
+   */
   $('#id_country').change(function () {
     var id_country = $(this).find('option:selected').val();
     console.log('id_country change to ' + id_country);
@@ -71,8 +71,8 @@ jQuery(document).ready(function ($) {
   });
 
   /**
-     * la sélection de la région charge la liste des départements
-     */
+   * la sélection de la région charge la liste des départements
+   */
   $('#id_region').change(function () {
     var id_country = $('#id_country').find('option:selected').val();
     var id_region = $(this).find('option:selected').val();
@@ -103,8 +103,8 @@ jQuery(document).ready(function ($) {
   });
 
   /**
-     * la sélection du département charge la liste des villes
-     */
+   * la sélection du département charge la liste des villes
+   */
   $('#id_departement').change(function () {
     var id_country = $('#id_country').find('option:selected').val();
     var id_departement = $(this).find('option:selected').val();
@@ -136,8 +136,8 @@ jQuery(document).ready(function ($) {
   });
 
   /**
-     * la sélection de la ville charge la liste des lieux de la ville
-     */
+   * la sélection de la ville charge la liste des lieux de la ville
+   */
   $('#id_city').change(function () {
     var id_city = $(this).find('option:selected').val();
     console.log('id_city change to ' + id_city);
@@ -165,8 +165,8 @@ jQuery(document).ready(function ($) {
   });
 
   /**
-     * le changement de lieu met passe au vert tous les champs
-     */
+   * le changement de lieu met passe au vert tous les champs
+   */
   $('#id_lieu').change(function () {
     var id_lieu = $(this).find('option:selected').val();
     console.log('id_lieu change to ' + id_lieu);

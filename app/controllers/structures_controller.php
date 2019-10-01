@@ -75,7 +75,6 @@ final class Controller
                 'cp' => '',
                 'address' => '',
                 'tel' => '',
-                'fax' => '',
                 'text' => '',
                 'site' => '',
                 'email' => '',

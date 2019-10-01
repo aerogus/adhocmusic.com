@@ -258,13 +258,13 @@ class Photo extends Media
         }
 
         $sens = 'ASC';
-        if (isset($params['sens']) && $params['sens'] == 'DESC') {
+        if (isset($params['sens']) && $params['sens'] === 'DESC') {
             $sens = 'DESC';
         }
 
         $sort = 'id_photo';
         if (isset($params['sort'])
-            && ($params['sort'] == 'created_on' || $params['sort'] == 'random')
+            && ($params['sort'] === 'created_on' || $params['sort'] === 'random')
         ) {
             $sort = $params['sort'];
         }
@@ -350,7 +350,7 @@ class Photo extends Media
         }
 
         $sql .= "ORDER BY ";
-        if ($sort == "random") {
+        if ($sort === "random") {
             $sql .= "RAND(" . time() . ") ";
         } else {
             $sql .= "`p`.`" . $sort . "` " . $sens . " ";

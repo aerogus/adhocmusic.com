@@ -90,11 +90,6 @@ class Lieu extends ObjectModel
     protected $_tel = '';
 
     /**
-     * @var string
-     */
-    protected $_fax = '';
-
-    /**
      * @var int
      */
     protected $_id_city = '';
@@ -174,7 +169,6 @@ class Lieu extends ObjectModel
         'cp'             => 'str',
         'city'           => 'str',
         'tel'            => 'str',
-        'fax'            => 'str',
         'id_city'        => 'num',
         'id_departement' => 'str',
         'id_region'      => 'str',
@@ -301,16 +295,6 @@ class Lieu extends ObjectModel
     function getTel(): string
     {
         return $this->_tel;
-    }
-
-    /**
-     * Retourne le fax
-     *
-     * @return string
-     */
-    function getFax(): string
-    {
-        return $this->_fax;
     }
 
     /**
@@ -705,23 +689,6 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * Set le fax
-     *
-     * @param string $val val
-     *
-     * @return object
-     */
-    function setFax(string $val): object
-    {
-        if ($this->_fax !== $val) {
-            $this->_fax = $val;
-            $this->_modified_fields['fax'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
      * Set l'id de la ville
      *
      * @param int $val val
@@ -1052,9 +1019,10 @@ class Lieu extends ObjectModel
      *             ['name']
      *             ['type']
      *             ['country']
+     *
      * @return array
      */
-    static function getLieux($params = [])
+    static function getLieux($params = []): array
     {
         $db = DataBase::getInstance();
 
@@ -1064,7 +1032,7 @@ class Lieu extends ObjectModel
         $sql = "SELECT "
              . "COUNT(DISTINCT `e`.`id_event`) AS `nb_events`, "
              . "`l`.`id_lieu` AS `id`, `l`.`id_type`, `l`.`name`, `l`.`address`, `l`.`cp`, `v`.`cp` AS `cp2`, "
-             . "`l`.`city`, `l`.`tel`, `l`.`fax`, `l`.`id_departement`, `d`.`name` AS `departement`, `l`.`text`, "
+             . "`l`.`city`, `l`.`tel`, `l`.`id_departement`, `d`.`name` AS `departement`, `l`.`text`, "
              . "`l`.`site`, `l`.`email`, `l`.`id_city`, `v`.`name` AS `city2`, `l`.`id_region`, `r`.`name` AS `region`, `l`.`id_country`, `c`.`name_fr` AS `country`, `l`.`created_on`, `l`.`modified_on`, "
              . "FORMAT(get_distance_metres('" . number_format($lat, 8, '.', '') . "', '" . number_format($lng, 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `distance` "
              . "FROM (`" . Lieu::getDbTable() . "` `l`, `" . self::$_db_table_world_country . "` `c`, `" . self::$_db_table_world_region . "` `r`) "
@@ -1345,7 +1313,7 @@ EOT;
              . "FROM (`adhoc_lieu` `l`) "
              . "LEFT JOIN `geo_fr_city` `v` ON (`l`.`id_city` = `v`.`id_city`) "
              . "HAVING `distance` < " . number_format(($distance / 1000), 8, '.', '') . " ";
-        if ($sort == 'rand') {
+        if ($sort === 'rand') {
             $sql .= "ORDER BY RAND() ";
         } else {
             $sql .= "ORDER BY `distance` ASC ";

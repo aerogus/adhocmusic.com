@@ -265,7 +265,7 @@ class DataBase
             /* La requête s'est bien passée, ce n'était pas une requête du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = true;
-        } elseif (true == $rc) {
+        } elseif (true === $rc) {
             /* La requête s'est bien passée, c'était une requête du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = mysqli_fetch_array($rc, $this->_fetchMode);
@@ -285,7 +285,7 @@ class DataBase
             /* La requête s'est bien passée, ce n'était pas une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = true;
-        } elseif (true == $rc) {
+        } elseif (true === $rc) {
             /* La requête s'est bien passée, c'était une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = mysqli_fetch_array($rc, MYSQLI_NUM); // MYSQLI_NUM : ici on ne peut pas respecter $this->_fetchMode
@@ -311,7 +311,7 @@ class DataBase
             /* La requête s'est bien passée, ce n'était pas une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = true;
-        } elseif (true == $rc) {
+        } elseif (true === $rc) {
             /* La requête s'est bien passée, c'était une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = [];
@@ -469,7 +469,7 @@ class DataBase
                 $values .= ", '".$this->escape((string) $value, $conn_name)."'";
             }
         }
-        if ('' == $values) {
+        if ('' === $values) {
             throw new Exception('No values to insert');
         } else {
             /* On écrase la virgule en trop au début. */

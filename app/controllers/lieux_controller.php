@@ -236,7 +236,6 @@ final class Controller
                 'city'           => City::getName((int) Route::params('id_city')),
                 'text'           => (string) Route::params('text'),
                 'tel'            => (string) Route::params('tel'),
-                'fax'            => (string) Route::params('fax'),
                 'email'          => (string) Route::params('email'),
                 'site'           => (string) Route::params('site'),
                 'id_contact'     => $_SESSION['membre']->getId(),
@@ -257,7 +256,6 @@ final class Controller
                     ->setCity($data['city'])
                     ->setText($data['text'])
                     ->setTel($data['tel'])
-                    ->setFax($data['fax'])
                     ->setEmail($data['email'])
                     ->setSite($data['site'])
                     ->setIdContact($data['id_contact'])
@@ -344,7 +342,6 @@ final class Controller
                 'city'           => City::getName((int) Route::params('id_city')),
                 'text'           => (string) Route::params('text'),
                 'tel'            => (string) Route::params('tel'),
-                'fax'            => (string) Route::params('fax'),
                 'email'          => (string) Route::params('email'),
                 'site'           => (string) Route::params('site'),
                 'id_contact'     => $_SESSION['membre']->getId(),
@@ -367,7 +364,6 @@ final class Controller
                     ->setCity($data['city'])
                     ->setText($data['text'])
                     ->setTel($data['tel'])
-                    ->setFax($data['fax'])
                     ->setEmail($data['email'])
                     ->setSite($data['site'])
                     ->setLat($data['lat'])

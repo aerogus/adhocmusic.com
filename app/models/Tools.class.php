@@ -473,7 +473,7 @@ class Tools
             foreach ($array as $k => $v) {
                 if (is_array($v)) {
                     foreach ($v as $k2 => $v2) {
-                        if ($k2 == $on) {
+                        if ($k2 === $on) {
                             $sortable_array[$k] = $v2;
                         }
                     }
