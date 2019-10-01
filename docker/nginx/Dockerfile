@@ -2,6 +2,8 @@ FROM nginx:1.10.3
 
 LABEL maintainer="guillaume@seznec.fr"
 
+RUN ln -s /var/www/adhocmusic.test/static /static
+
 #COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # créer les certificats avec cette commande (Common name doit être *.adhocmusic.test)

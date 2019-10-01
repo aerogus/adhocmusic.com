@@ -1,4 +1,4 @@
-/*globals jQuery, validateEmail, lieu*/
+/*globals jQuery, validateEmail*/
 
 jQuery(document).ready(function ($) {
 

@@ -6,8 +6,6 @@
   </header>
   <div>
 
-<div class="infobulle info">Un lieu est indépendant de tout événement ou groupe.</div>
-
 <style>
 #form-lieu-create li {
     display: block;

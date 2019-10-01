@@ -1,4 +1,4 @@
-/*globals jQuery, adhoc*/
+/*globals jQuery*/
 
 jQuery(document).ready(function ($) {
 

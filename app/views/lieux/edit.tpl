@@ -12,8 +12,6 @@
 
 {else}
 
-<div class="infobulle info">Un lieu est indépendant de tout événement ou groupe.</div>
-
 <style>
 #form-lieu-edit li {
     display: block;
