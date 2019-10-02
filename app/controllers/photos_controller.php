@@ -139,7 +139,7 @@ final class Controller
                 $idx = 0;
                 $count = count($playlist);
                 foreach ($playlist as $_idx => $_playlist) {
-                    if ($_playlist['id'] === $photo->getId()) {
+                    if ((int) $_playlist['id'] === (int) $photo->getId()) {
                         $idx_photo = $_idx;
                         if ($_idx < ($count - 1)) {
                             $next = $_idx + 1;
@@ -158,7 +158,7 @@ final class Controller
 
                 $smarty->assign('idx_photo', $idx_photo + 1);
                 $smarty->assign('nb_photos', $count);
-                $meta_title .= " - " . ($idx_photo + 1) . "/" . $count;
+                $meta_title .= ' - ' . ($idx_photo + 1) . '/' . $count;
                 $smarty->assign('playlist', $playlist);
             }
 
