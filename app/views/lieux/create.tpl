@@ -6,23 +6,16 @@
   </header>
   <div>
 
-<style>
-#form-lieu-create li {
-    display: block;
-    clear: both;
-}
-</style>
-
 <form id="form-lieu-create" name="form-lieu-create" action="/lieux/create" method="post" enctype="multipart/form-data" accept="image/jpeg">
-  <ol>
+  <ul>
     <li>
-      <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir le nom du lieu</div>
       <label for="name">Nom (*)</label>
+      <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir le nom du lieu</div>
       <input id="name" name="name" type="text" size="50" value="">
     </li>
     <li>
-      <div class="infobulle error" id="error_id_type"{if empty($error_id_type)} style="display: none"{/if}>Vous devez préciser le type de lieu</div>
       <label for="id_type">Type (*)</label>
+      <div class="infobulle error" id="error_id_type"{if empty($error_id_type)} style="display: none"{/if}>Vous devez préciser le type de lieu</div>
       <select id="id_type" name="id_type">
         <option value="0">--------</option>
         {foreach from=$types_lieu key=type_lieu_id item=type_lieu_name}
@@ -31,8 +24,8 @@
       </select>
     </li>
     <li>
-      <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez entrer une description pour le lieu</div>
       <label for="text">Description (*)</label>
+      <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez entrer une description pour le lieu</div>
       <textarea id="text" name="text" rows="5" cols="20"></textarea>
     </li>
     <li>
@@ -40,59 +33,54 @@
       <input id="photo" name="photo" type="file">
     </li>
     <li>
-      <div class="infobulle error" id="error_id_country"{if empty($error_id_country)} style="display: none"{/if}>Vous devez choisir un pays</div>
       <label for="id_country">Pays (*)</label>
+      <div class="infobulle error" id="error_id_country"{if empty($error_id_country)} style="display: none"{/if}>Vous devez choisir un pays</div>
       <select id="id_country" name="id_country">
         <option value="0">---</option>
       </select>
     </li>
     <li>
-      <div class="infobulle error" id="error_id_region"{if empty($error_id_region)} style="display: none"{/if}>Vous devez choisir une région</div>
       <label for="id_region">Région (*)</label>
+      <div class="infobulle error" id="error_id_region"{if empty($error_id_region)} style="display: none"{/if}>Vous devez choisir une région</div>
       <select id="id_region" name="id_region">
         <option value="0">---</option>
       </select>
     </li>
     <li>
-      <div class="infobulle error" id="error_id_departement"{if empty($error_id_departement)} style="display: none"{/if}>Vous devez choisir un département</div>
       <label for="id_departement">Département (*)</label>
+      <div class="infobulle error" id="error_id_departement"{if empty($error_id_departement)} style="display: none"{/if}>Vous devez choisir un département</div>
       <select id="id_departement" name="id_departement">
         <option value="0">---</option>
       </select>
     </li>
     <li>
-      <div class="infobulle error" id="error_id_city"{if empty($error_id_city)} style="display: none"{/if}>Vous devez choisir une ville</div>
       <label for="id_city">Ville (*)</label>
+      <div class="infobulle error" id="error_id_city"{if empty($error_id_city)} style="display: none"{/if}>Vous devez choisir une ville</div>
       <select id="id_city" name="id_city">
         <option value="0">---</option>
       </select>
     </li>
     <li>
-      <div class="infobulle error" id="error_address"{if empty($error_address)} style="display: none"{/if}>Vous devez préciser l'adresse</div>
       <label for="address">Adresse (*)</label>
+      <div class="infobulle error" id="error_address"{if empty($error_address)} style="display: none"{/if}>Vous devez préciser l'adresse</div>
       <input id="address" name="address" type="text" size="50" value="">
     </li>
     <li>
-      <div class="infobulle error" id="error_tel"{if empty($error_tel)} style="display: none"{/if}>Vous devez saisir le numéro de téléphone</div>
       <label for="tel">Téléphone</label>
+      <div class="infobulle error" id="error_tel"{if empty($error_tel)} style="display: none"{/if}>Vous devez saisir le numéro de téléphone</div>
       <input id="tel" name="tel" type="text" size="50" value="">
     </li>
     <li>
-      <div class="infobulle error" id="error_fax"{if empty($error_fax)} style="display: none"{/if}>Vous devez saisir le numéro de fax</div>
-      <label for="fax">Fax</label>
-      <input id="fax" name="fax" type="text" size="50" value="">
-    </li>
-    <li>
-      <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez saisir l'email de contact</div>
       <label for="email">Email</label>
+      <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez saisir l'email de contact</div>
       <input id="email" name="email" type="email" size="50" value="">
     </li>
     <li>
-      <div class="infobulle error" id="error_site"{if empty($error_site)} style="display: none"{/if}>Vous devez saisir le site internet</div>
       <label for="site">Site</label>
+      <div class="infobulle error" id="error_site"{if empty($error_site)} style="display: none"{/if}>Vous devez saisir le site internet</div>
       <input id="site" name="site" type="text" size="50" value="">
     </li>
-  </ol>
+  </ul>
   <input id="form-lieu-create-submit" name="form-lieu-create-submit" class="button" type="submit" value="Ajouter">
 </form>
 

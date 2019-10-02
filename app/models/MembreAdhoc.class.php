@@ -73,7 +73,7 @@ class MembreAdhoc extends Membre
     /**
      * @return string
      */
-    static function getBaseUrl()
+    static function getBaseUrl(): string
     {
         return MEDIA_URL . '/membre/ca';
     }
@@ -81,7 +81,7 @@ class MembreAdhoc extends Membre
     /**
      * @return string
      */
-    static function getBasePath()
+    static function getBasePath(): string
     {
         return MEDIA_PATH . '/membre/ca';
     }
@@ -153,7 +153,7 @@ class MembreAdhoc extends Membre
      *
      * @return object
      */
-    function setFunction(string $val)
+    function setFunction(string $val): object
     {
         if ($this->_function !== $val) {
             $this->_function = $val;
@@ -168,7 +168,7 @@ class MembreAdhoc extends Membre
      *
      * @return object
      */
-    function setBirthDate(string $val)
+    function setBirthDate(string $val): object
     {
         if ($this->_birth_date !== $val) {
             $this->_birth_date = $val;
@@ -183,7 +183,7 @@ class MembreAdhoc extends Membre
      *
      * @return object
      */
-    function setActive(bool $val)
+    function setActive(bool $val): object
     {
         if ($this->_active !== $val) {
             $this->_active = $val;
@@ -198,7 +198,7 @@ class MembreAdhoc extends Membre
      *
      * @return object
      */
-    function setRank(int $val)
+    function setRank(int $val): object
     {
         if ($this->_rank !== $val) {
             $this->_rank = $val;
@@ -217,7 +217,7 @@ class MembreAdhoc extends Membre
      *
      * @return array
      */
-    static function getStaff(bool $active = true)
+    static function getStaff(bool $active = true): array
     {
         $db = DataBase::getInstance();
 
@@ -242,7 +242,7 @@ class MembreAdhoc extends Membre
             if (file_exists(self::getBasePath() . '/' . $mbr['id'] . '.jpg')) {
                 $mbrs[$idx]['avatar_interne'] = self::getBaseUrl() . '/' . $mbr['id'] . '.jpg?ts=' . $mbr['modified_on_ts'];
             }
-            $mbrs[$idx]['url'] = self::getUrlById($mbr['id']);
+            $mbrs[$idx]['url'] = self::getUrlById((int) $mbr['id']);
         }
 
         return $mbrs;
@@ -254,6 +254,7 @@ class MembreAdhoc extends Membre
      * @todo récup champs spécifiques à membre_adhoc !
      *
      * @return bool
+     * @throws Exception
      */
     protected function _loadFromDb(): bool
     {

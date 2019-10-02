@@ -1215,7 +1215,7 @@ class Groupe extends ObjectModel
         }
 
         $sens = 'ASC';
-        if (isset($params['sens']) && $params['sens'] == 'DESC') {
+        if (isset($params['sens']) && $params['sens'] === 'DESC') {
             $sens = 'DESC';
         }
 
@@ -1260,7 +1260,7 @@ class Groupe extends ObjectModel
         }
 
         $sql .= "ORDER BY ";
-        if ($sort == "random") {
+        if ($sort === "random") {
             $sql .= "RAND(" . time() . ") ";
         } else {
             $sql .= "`g`.`" . $sort . "` " . $sens . " ";

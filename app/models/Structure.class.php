@@ -56,11 +56,6 @@ class Structure extends ObjectModel
     /**
      * @var string
      */
-    protected $_fax = '';
-
-    /**
-     * @var string
-     */
     protected $_id_departement = '';
 
     /**
@@ -93,7 +88,6 @@ class Structure extends ObjectModel
         'cp'             => 'str',
         'city'           => 'str',
         'tel'            => 'str',
-        'fax'            => 'str',
         'id_departement' => 'str',
         'text'           => 'str',
         'site'           => 'str',
@@ -166,14 +160,6 @@ class Structure extends ObjectModel
     function getTel(): string
     {
         return $this->_tel;
-    }
-
-    /**
-     * @return string
-     */
-    function getFax(): string
-    {
-        return $this->_fax;
     }
 
     /**
@@ -318,21 +304,6 @@ class Structure extends ObjectModel
      *
      * @return object
      */
-    function setFax(string $val): object
-    {
-        if ($this->_fax !== $val) {
-            $this->_fax = $val;
-            $this->_modified_fields['fax'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param string $val val
-     *
-     * @return object
-     */
     function setIdDepartement(string $val): object
     {
         if ($this->_id_departement !== $val) {
@@ -459,7 +430,7 @@ class Structure extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_structure` AS `id`, `name`, `address`, `cp`, "
-             . "`city`, `tel`, `fax`, `id_departement`, "
+             . "`city`, `tel`, `id_departement`, "
              . "`text`, `site`, `email`, `id_country` "
              . "FROM `" . Structure::getDbTable() . "` "
              . "ORDER BY `id_country` ASC, `id_departement` ASC, `city` ASC";

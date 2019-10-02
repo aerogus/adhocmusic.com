@@ -164,7 +164,7 @@ class Departement
         $out = [];
         foreach (self::$_liste as $cle => $info) {
             if (!is_null($cleReg)) {
-                if ($info[self::CLEREG] == $cleReg) {
+                if ($info[self::CLEREG] === $cleReg) {
                     $out[$cle] = $info[self::LIBDEP];
                 }
             } else {

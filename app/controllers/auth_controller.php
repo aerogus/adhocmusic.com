@@ -124,7 +124,7 @@ final class Controller
 
             if (($password_old !== '') && ($password_new_1 !== '') && ($password_new_1 === $password_new_2)) {
                 if ($membre->checkPassword($password_old)) {
-                    if ($password_new_1 == $password_old) {
+                    if ($password_new_1 === $password_old) {
                         $smarty->assign('change_ok', true);
                     } else {
                         $membre->setPassword($password_new_1);

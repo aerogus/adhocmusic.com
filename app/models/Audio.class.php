@@ -168,13 +168,13 @@ class Audio extends Media
         }
 
         $sens = "ASC";
-        if (isset($params['sens']) && $params['sens'] == "DESC") {
+        if (isset($params['sens']) && $params['sens'] === "DESC") {
             $sens = "DESC";
         }
 
         $sort = "id_audio";
         if (isset($params['sort'])
-            && ($params['sort'] == "date" || $params['sort'] == "random")
+            && ($params['sort'] === "date" || $params['sort'] === "random")
         ) {
             $sort = $params['sort'];
         }
@@ -270,7 +270,7 @@ class Audio extends Media
             $res[$idx]['url'] = self::getUrlById((int) $_res['id']);
         }
 
-        if ($limit == 1) {
+        if ($limit === 1) {
             $res = array_pop($res);
         }
 
@@ -340,9 +340,9 @@ class Audio extends Media
     {
         $bgcolor = '666666';
 
-        if ($type == 'player_mp3_multi') {
+        if ($type === 'player_mp3_multi') {
             $id_groupe = $id_audio;
-        } elseif ($type == 'webradio') {
+        } elseif ($type === 'webradio') {
             $chemin = $id_audio;
             $type = 'dewplayer';
         } else {

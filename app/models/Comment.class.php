@@ -482,13 +482,13 @@ class Comment extends ObjectModel
         }
 
         $sens = 'ASC';
-        if (isset($params['sens']) && $params['sens'] == 'DESC') {
+        if (isset($params['sens']) && $params['sens'] === 'DESC') {
             $sens = 'DESC';
         }
 
         $sort = 'id_comment';
         if (isset($params['sort'])
-            && ($params['sort'] == 'created_on' || $params['sort'] == 'online')
+            && ($params['sort'] === 'created_on' || $params['sort'] === 'online')
         ) {
             $sort = $params['sort'];
         }
@@ -522,7 +522,7 @@ class Comment extends ObjectModel
         }
 
         $sql .= "ORDER BY ";
-        if ($sort == "random") {
+        if ($sort === "random") {
             $sql .= "RAND(" . time() . ") ";
         } else {
             $sql .= "`com`.`" . $sort . "` " . $sens . " ";
@@ -539,7 +539,7 @@ class Comment extends ObjectModel
             $res[$idx]['type_full'] = self::$_types[$row['type']];
         }
 
-        if ($limit == 1) {
+        if ($limit === 1) {
             $res = array_pop($res);
         }
 

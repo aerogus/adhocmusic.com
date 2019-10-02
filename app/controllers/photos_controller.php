@@ -106,15 +106,15 @@ final class Controller
             }
 
             $trail = Trail::getInstance();
-            if ($from == 'groupe' && $photo->getIdGroupe()) {
+            if ($from === 'groupe' && $photo->getIdGroupe()) {
                 $trail->addStep("Groupes", "/groupes/")
                     ->addStep($groupe->getName(), $groupe->getUrl());
-            } elseif ($from == 'profil' && $photo->getIdContact()) {
+            } elseif ($from === 'profil' && $photo->getIdContact()) {
                 $trail->addStep("Zone Membre", "/membres/");
-            } elseif ($from == 'event' && $photo->getIdEvent()) {
+            } elseif ($from === 'event' && $photo->getIdEvent()) {
                 $trail->addStep("Agenda", "/events/")
                     ->addStep($event->getName(), $event->getUrl());
-            } elseif ($from == 'lieu' && $photo->getIdLieu()) {
+            } elseif ($from === 'lieu' && $photo->getIdLieu()) {
                 $trail->addStep("Lieux", "/lieux/")
                     ->addStep($lieu->getName(), $lieu->getUrl());
             } else {
@@ -139,7 +139,7 @@ final class Controller
                 $idx = 0;
                 $count = count($playlist);
                 foreach ($playlist as $_idx => $_playlist) {
-                    if ($_playlist['id'] == $photo->getId()) {
+                    if ($_playlist['id'] === $photo->getId()) {
                         $idx_photo = $_idx;
                         if ($_idx < ($count - 1)) {
                             $next = $_idx + 1;

@@ -185,7 +185,7 @@ abstract class Forum
             if (!array_key_exists('subject', $params)) {
                 throw new Exception('sujet manquant');
             }
-            if (strlen($params['subject']) == 0) {
+            if (strlen($params['subject']) === 0) {
                 throw new Exception('sujet vide');
             }
             $params['id_thread'] = static::_createThread(
@@ -478,6 +478,7 @@ abstract class Forum
      * @param array ['action'] msgadd|msgedit|msgdel
      *              ['id_contact']
      *              ['id_thread']
+     *
      * @return bool
      */
     protected static function _updateThread($params)
@@ -485,9 +486,9 @@ abstract class Forum
         $db = DataBase::getInstance();
 
         $sql = "UPDATE `" . static::$_db_table_forum_thread . "` SET ";
-        if ($params['action'] == 'msgadd') {
+        if ($params['action'] === 'msgadd') {
              $sql .= "`nb_messages` = `nb_messages` + 1, ";
-        } elseif ($params['action'] == 'msgdel') {
+        } elseif ($params['action'] === 'msgdel') {
              $sql .= "`nb_messages` = `nb_messages` - 1, ";
         }
 
@@ -535,14 +536,14 @@ abstract class Forum
         $db = DataBase::getInstance();
 
         $sql = "UPDATE `" . static::$_db_table_forum_info . "` SET ";
-        if ($params['msgaction'] == 'msgadd') {
+        if ($params['msgaction'] === 'msgadd') {
             $sql .= "`nb_messages` = `nb_messages` + 1, ";
-        } elseif ($params['msgaction'] == 'msgdel') {
+        } elseif ($params['msgaction'] === 'msgdel') {
             $sql .= "`nb_messages` = `nb_messages` - 1, ";
         }
-        if ($params['threadaction'] == 'threadadd') {
+        if ($params['threadaction'] === 'threadadd') {
             $sql .= "`nb_threads` = `nb_threads` + 1, ";
-        } elseif ($params['threadaction'] == 'threaddel') {
+        } elseif ($params['threadaction'] === 'threaddel') {
             $sql .= "`nb_threads` = `nb_threads` - 1, ";
         }
         if ($params['id_contact']) {

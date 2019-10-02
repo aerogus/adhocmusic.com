@@ -1108,7 +1108,7 @@ class Membre extends Contact
         }
 
         $sens = "ASC";
-        if (isset($params['sens']) && $params['sens'] == "DESC") {
+        if (isset($params['sens']) && $params['sens'] === "DESC") {
             $sens = "DESC";
         }
 
@@ -1161,10 +1161,10 @@ class Membre extends Contact
         }
 
         $sql .= "ORDER BY ";
-        if ($sort == "random") {
+        if ($sort === "random") {
             $sql .= "RAND(".time().") ";
         } else {
-            if ($sort == 'email' || $sort == 'lastnl') {
+            if ($sort === 'email' || $sort === 'lastnl') {
                 $t = 'c';
             } else {
                 $t = 'm';
