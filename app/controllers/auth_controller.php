@@ -9,8 +9,9 @@ final class Controller
      */
     static function login(): string
     {
-        if (!Tools::isSsl()) {
-            Tools::redirect('/auth/login', true);
+        // déjà authentifié
+        if (!empty($_SESSION['membre'])) {
+            Tools::redirect('/membres/tableau-de-bord');
         }
 
         if (Tools::isSubmit('form-login')) {
@@ -54,18 +55,13 @@ final class Controller
             }
         }
 
-        // déjà authentifié
-        if (!empty($_SESSION['membre'])) {
-            Tools::redirect('/membres/tableau-de-bord');
-        } else {
-            $smarty = new AdHocSmarty();
-            $smarty->assign('not_auth', true);
+        $smarty = new AdHocSmarty();
+        $smarty->assign('not_auth', true);
 
-            Trail::getInstance()
-                ->addStep("Identification");
+        Trail::getInstance()
+            ->addStep("Identification");
 
-            return $smarty->fetch('auth/login.tpl');
-        }
+        return $smarty->fetch('auth/login.tpl');
     }
 
     /**
@@ -147,6 +143,11 @@ final class Controller
      */
     static function lost_password(): string
     {
+        // déjà authentifié
+        if (!empty($_SESSION['membre'])) {
+            Tools::redirect('/membres/tableau-de-bord');
+        }
+
         $smarty = new AdHocSmarty();
 
         $smarty->enqueue_script('/js/lost-password.js');
@@ -199,6 +200,8 @@ final class Controller
     }
 
     /**
+     * Retourne si un email est déjà présente en base
+     *
      * @return array
      */
     static function check_email(): array
@@ -218,6 +221,8 @@ final class Controller
     }
 
     /**
+     * Retourne la disponibilité d'un pseudo
+     *
      * @return array
      */
     static function check_pseudo(): array

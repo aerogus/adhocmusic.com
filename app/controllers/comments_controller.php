@@ -28,6 +28,9 @@ final class Controller
         return $smarty->fetch('comments/index.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function show(): string
     {
         $id = (int) Route::params('id');
@@ -38,12 +41,18 @@ final class Controller
         return $smarty->fetch('comments/show.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function fetch(): string
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('comments/fetch.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function create(): string
     {
         $fp = fopen('/var/www/adhocmusic.com/log/hack-comment.log', 'a');
@@ -87,6 +96,9 @@ final class Controller
         return 'KO';
     }
 
+    /**
+     * @return string
+     */
     static function ajax_delete(): string
     {
         $id = (int) Route::params('id');
@@ -99,6 +111,9 @@ final class Controller
         return 'KO';
     }
 
+    /**
+     * @return string
+     */
     static function delete(): string
     {
         $id = (int) Route::params('id');
