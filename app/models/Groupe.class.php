@@ -484,16 +484,14 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'url de la photo principale
      *
-     * @return string
+     * @return string|null
      */
-    function getPhoto(): string
+    function getPhoto(): ?string
     {
         if (file_exists(self::getBasePath() . '/p' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/p' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
-        } else {
-            // todo photo par défaut, dans une méthode statique
-            return false;
         }
+        return null;
     }
 
     /**
@@ -526,10 +524,8 @@ class Groupe extends ObjectModel
             return self::getBaseUrl() . '/l' . $this->getId() . '.gif?ts=' . $this->getModifiedOnTs();
         } else if (file_exists(self::getBasePath() . '/l' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/l' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
-        } else {
-            // todo logo par défaut, dans une méthode statique
-            return null;
         }
+        return null;
     }
 
     /**
@@ -545,7 +541,7 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'url d'une fiche groupe à partir de son alias ou son id
      *
-     * @param string $ref
+     * @param string $ref ref
      *
      * @return string
      */
@@ -575,11 +571,11 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    static function getAvatarById($id_groupe): string
+    static function getAvatarById(int $id_groupe): string
     {
         $avatar = HOME_URL . '/img/note_adhoc_64.png';
-        if (file_exists(self::getBasePath() . '/m' . $id_groupe . '.jpg')) {
-            $avatar = self::getBaseUrl() . '/m' . $id_groupe . '.jpg';
+        if (file_exists(self::getBasePath() . '/m' . (string) $id_groupe . '.jpg')) {
+            $avatar = self::getBaseUrl() . '/m' . (string) $id_groupe . '.jpg';
         }
         return $avatar;
     }
@@ -589,9 +585,9 @@ class Groupe extends ObjectModel
      *
      * @param int $id_groupe id_groupe
      *
-     * @return string
+     * @return string|null
      */
-    static function getAliasById(int $id_groupe)
+    static function getAliasById(int $id_groupe): ?string
     {
         $db = DataBase::getInstance();
 
@@ -602,7 +598,7 @@ class Groupe extends ObjectModel
         if ($alias = $db->queryWithFetchFirstField($sql)) {
             return $alias;
         }
-        return false;
+        return null;
     }
 
     /* fin getters */
