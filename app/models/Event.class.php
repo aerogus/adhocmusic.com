@@ -803,7 +803,7 @@ class Event extends ObjectModel
             $evts[$idx]['url'] = self::getUrlById((int) $_res['id']);
             $evts[$idx]['flyer_100_url'] = self::getFlyerUrl((int) $_res['id'], 100, 100);
             $evts[$idx]['flyer_400_url'] = self::getFlyerUrl((int) $_res['id'], 400, 400);
-            $evts[$idx]['structure_picto'] = Structure::getPictoById($_res['structure_id']);
+            $evts[$idx]['structure_picto'] = Structure::getPictoById((int) $_res['structure_id']);
         }
 
         unset($res);
