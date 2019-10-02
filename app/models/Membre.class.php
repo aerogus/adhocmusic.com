@@ -1525,7 +1525,7 @@ class Membre extends Contact
               . "FROM `" . Membre::getDbTable() . "` "
               . "WHERE `pseudo` = '" . $db->escape($pseudo) . "'";
 
-        return $db->queryWithFetchFirstField($sql);
+        return (int) $db->queryWithFetchFirstField($sql);
     }
 
     /**

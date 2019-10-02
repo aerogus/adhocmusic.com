@@ -1175,7 +1175,7 @@ class Groupe extends ObjectModel
         $cpt = 0;
         foreach ($res as $_res) {
             $res[$cpt]['id'] = intval($_res['id']);
-            $res[$cpt]['nom_type_musicien'] = Membre::getTypeMusicienName($_res['id_type_musicien']);
+            $res[$cpt]['nom_type_musicien'] = Membre::getTypeMusicienName((int) $_res['id_type_musicien']);
             $res[$cpt]['url'] = Membre::getUrlById((int) $_res['id']);
             $cpt++;
         }
@@ -1314,7 +1314,7 @@ class Groupe extends ObjectModel
                     $mini_photo = self::getBaseUrl() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
                 }
                 $tab[$grp['id']]['mini_photo'] = $mini_photo;
-                $tab[$grp['id']]['nom_type_musicien'] = Membre::getTypeMusicienName($grp['id_type_musicien']);
+                $tab[$grp['id']]['nom_type_musicien'] = Membre::getTypeMusicienName((int) $grp['id_type_musicien']);
             }
             return $tab;
         }
