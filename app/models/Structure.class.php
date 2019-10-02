@@ -439,7 +439,7 @@ class Structure extends ObjectModel
         if ($res = $db->queryWithFetch($sql)) {
             foreach ($res as $struct) {
                 $tab[$struct['id']] = $struct;
-                $tab[$struct['id']]['picto'] = self::getPictoById($struct['id']);
+                $tab[$struct['id']]['picto'] = self::getPictoById((int) $struct['id']);
             }
         }
         return $tab;

@@ -581,8 +581,8 @@ final class Controller
 
                 $event->unlinkStructures();
                 foreach (Route::params('structure') as $idx => $id_structure) {
-                    if ($id_structure != 0) {
-                        $event->linkStructure($id_structure);
+                    if ($id_structure) {
+                        $event->linkStructure((int) $id_structure);
                     }
                 }
 

@@ -283,12 +283,12 @@ class AdHocSmarty extends Smarty
             $step = (int) $params['step'];
         }
 
-        $hourminute = str_pad((int) $hour, 2, '0', STR_PAD_LEFT) . ':' . str_pad((int) $minute, 2, '0', STR_PAD_LEFT);
+        $hourminute = str_pad((string) $hour, 2, '0', STR_PAD_LEFT) . ':' . str_pad((string) $minute, 2, '0', STR_PAD_LEFT);
 
         $out = '';
         for ($h = 0 ; $h < 24 ; $h++) {
             for ($m = 0 ; $m < 60 ; $m += $step) {
-                $hm = str_pad((int) $h, 2, '0', STR_PAD_LEFT) . ':' . str_pad((int) $m, 2, '0', STR_PAD_LEFT);
+                $hm = str_pad((string) $h, 2, '0', STR_PAD_LEFT) . ':' . str_pad((string) $m, 2, '0', STR_PAD_LEFT);
                 $out .= "<option value=\"".$hm."\"";
                 if ($hm === $hourminute) {
                     $out .= " selected=\"selected\"";
