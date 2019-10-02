@@ -158,11 +158,11 @@ class Messagerie extends ObjectModel
     }
 
     /**
-     * compte le nombre de messages reçus par la personne loguée
+     * Compte le nombre de messages reçus par la personne loguée
      *
      * @todo à implémenter
      */
-    function getMessagesCount()
+    function getMessagesCount(): int
     {
         $db = DataBase::getInstance();
 
@@ -240,7 +240,7 @@ class Messagerie extends ObjectModel
      *
      * @return bool
      */
-    function setRead($id_pm)
+    function setRead(int $id_pm)
     {
         $db = DataBase::getInstance();
 

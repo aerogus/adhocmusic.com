@@ -821,31 +821,22 @@ class Event extends ObjectModel
      */
     protected function _loadFromDb(): bool
     {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_event` AS `id`, `name`, `text`, `id_contact`, `online`, "
-             . "`price`, `date`, TIMESTAMP(`date`) AS `timestamp`, `facebook_event_id`, `facebook_event_attending`, `id_lieu` "
-             . "FROM `" . Event::getDbTable() . "` "
-             . "WHERE `id_event` = " . (int) $this->_id_event;
-
-        if (($res = $db->queryWithFetchFirstRow($sql))) {
-            $this->_dbToObject($res);
-
-            if (file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
-                $this->_photo = self::getBaseUrl() . '/' . $this->getId() . '.jpg';
-            }
-
-            if (file_exists(self::getBasePath() . '/' . $this->getId() . '-mini.jpg')) {
-                $this->_mini_photo = self::getBaseUrl() . '/' . $this->getId() . '-mini.jpg';
-            }
-
-            $this->_groupes    = $this->getGroupes();
-            $this->_structures = $this->getStructures();
-
-            return true;
+        if (!parent::_loadFromDb()) {
+            throw new Exception('id_event_introuvable');
         }
 
-        throw new Exception('id_event_introuvable');
+        if (file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
+            $this->_photo = self::getBaseUrl() . '/' . $this->getId() . '.jpg';
+        }
+
+        if (file_exists(self::getBasePath() . '/' . $this->getId() . '-mini.jpg')) {
+            $this->_mini_photo = self::getBaseUrl() . '/' . $this->getId() . '-mini.jpg';
+        }
+
+        $this->_groupes    = $this->getGroupes();
+        $this->_structures = $this->getStructures();
+
+        return true;
     }
 
     /**
@@ -986,7 +977,7 @@ class Event extends ObjectModel
      *
      * @return array $tab_style[] = $id_style
      */
-    function getStyles()
+    function getStyles(): array
     {
         $db = DataBase::getInstance();
 
@@ -1002,13 +993,15 @@ class Event extends ObjectModel
      * Retourne un style
      *
      * @param int $idx idx
+     *
+     * @return string|null
      */
-    function getStyle(int $idx)
+    function getStyle(int $idx): ?string
     {
         if (array_key_exists($idx, $this->_styles)) {
             return $this->_styles[$idx];
         }
-        return false;
+        return null;
     }
 
     /**
@@ -1069,7 +1062,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    function getGroupes()
+    function getGroupes(): array
     {
         $db = DataBase::getInstance();
 
@@ -1219,9 +1212,8 @@ class Event extends ObjectModel
      *
      * @return array $tab_struct[] = $id_struct
      */
-    function getStructures()
+    function getStructures(): array
     {
-
         // retourne le tableau id => nom
 
         $db = DataBase::getInstance();
@@ -1239,14 +1231,14 @@ class Event extends ObjectModel
      *
      * @param int $idx idx
      *
-     * @return int
+     * @return array|null
      */
     function getStructure(int $idx)
     {
         if (array_key_exists($idx, $this->_structures)) {
             return $this->_structures[$idx];
         }
-        return false;
+        return null;
     }
 
     /**
@@ -1314,7 +1306,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    function getPhotos()
+    function getPhotos(): array
     {
         return Photo::getPhotos(
             [
@@ -1329,7 +1321,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    function getVideos()
+    function getVideos(): array
     {
         return Video::getVideos(
             [
@@ -1344,7 +1336,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    function getAudios()
+    function getAudios(): array
     {
         return Audio::getAudios(
             [
@@ -1430,7 +1422,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    static function getAdHocEventsBySeason()
+    static function getAdHocEventsBySeason(): array
     {
         $evts = self::getEvents(
             [

@@ -193,11 +193,6 @@ class Membre extends Contact
     protected $_level = 0;
 
     /**
-     * @var int
-     */
-    protected $_facebook_profile_id = 0;
-
-    /**
      * @var string
      */
     protected $_created_on = null;
@@ -250,7 +245,6 @@ class Membre extends Contact
         'text'           => 'str',
         'mailing'        => 'bool',
         'level'          => 'num',
-        'facebook_profile_id' => 'num',
         'created_on'     => 'date',
         'modified_on'    => 'date',
         'visited_on'     => 'date',
@@ -488,22 +482,6 @@ class Membre extends Contact
     }
 
     /**
-     * @return string
-     */
-    function getFacebookProfileId(): string
-    {
-        return $this->_facebook_profile_id;
-    }
-
-    /**
-     * @return string
-     */
-    function getFacebookProfileUrl(): string
-    {
-        return 'https://facebook.com/' . $this->_facebook_profile_id;
-    }
-
-    /**
      * @return string|null
      */
     function getCreatedOn(): ?string
@@ -517,7 +495,7 @@ class Membre extends Contact
     /**
      * @return int|null
      */
-    function getCreatedOnTs()
+    function getCreatedOnTs(): ?int
     {
         if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
             return strtotime($this->_created_on);
@@ -916,21 +894,6 @@ class Membre extends Contact
     }
 
     /**
-     * @param int $val val
-     *
-     * @return object
-     */
-    function setFacebookProfileId(int $val): object
-    {
-        if ($this->_facebook_profile_id !== $val) {
-            $this->_facebook_profile_id = $val;
-            $this->_modified_fields['membre']['facebook_profile_id'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
      * @param string $val val
      *
      * @return object
@@ -1131,7 +1094,7 @@ class Membre extends Contact
         $db = DataBase::getInstance();
 
         $sql = "SELECT `m`.`id_contact` AS `id`, `m`.`last_name`, `m`.`first_name`, `m`.`pseudo`, "
-             . "`m`.`facebook_profile_id`, `c`.`email`, `c`.`lastnl`, "
+             . "`c`.`email`, `c`.`lastnl`, "
              . "`m`.`created_on`, `m`.`modified_on`, `m`.`visited_on`, "
              . "`m`.`text`, `m`.`site`, "
              . "`m`.`city`, `m`.`cp`, "
@@ -1595,51 +1558,6 @@ class Membre extends Contact
         $pseudo = $db->queryWithFetchFirstField($sql);
 
         return !(bool) $pseudo;
-    }
-
-    /**
-     * Retourne si un membre facebook a un compte adhoc
-     *
-     * @param string $id Facebook Profile Id
-     *
-     * @return int $id_contact
-     */
-    static function getIdContactByFacebookProfileId(string $id)
-    {
-        $db = DataBase::getInstance();
-
-        if (!is_numeric($id)) {
-            return false;
-        }
-
-        $sql  = "SELECT `" . self::$_pk . "` "
-              . "FROM `" . Membre::getDbTable() . "` "
-              . "WHERE `facebook_profile_id` = " . $id;
-
-        return (int) $db->queryWithFetchFirstField($sql);
-    }
-
-    /**
-     * @return array
-     */
-    static function getAdHocAccountsLinkedWithFacebookAccounts(): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql  = "SELECT `id_contact`, `pseudo`, `facebook_profile_id` "
-              . "FROM `" . Membre::getDbTable() . "` "
-              . "WHERE `facebook_profile_id` IS NOT NULL";
-
-        $rows = $db->queryWithFetch($sql);
-
-        $out = [];
-        foreach ($rows as $row) {
-            $out[$row['facebook_profile_id']] = [
-                'pseudo' => $row['pseudo'],
-                'id_contact' => $row['id_contact'],
-            ];
-        }
-        return $out;
     }
 
     /**

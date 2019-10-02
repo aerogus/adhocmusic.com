@@ -145,7 +145,7 @@ class Media extends ObjectModel
     /**
      * @return int|null
      */
-    function getModifiedOnTs()
+    function getModifiedOnTs(): ?int
     {
         if (!is_null($this->modified_on) && Date::isDateTimeOk($this->_modified_on)) {
             return strtotime($this->_modified_on);
@@ -215,7 +215,7 @@ class Media extends ObjectModel
      *
      * @return object
      */
-    function setIdEvent(int $val)
+    function setIdEvent(int $val): object
     {
         if ($this->_id_event !== $val) {
             $this->_id_event = $val;
@@ -245,7 +245,7 @@ class Media extends ObjectModel
      *
      * @return object
      */
-    function setName(string $val)
+    function setName(string $val): object
     {
         if ($this->_name !== $val) {
             $this->_name = $val;
@@ -260,7 +260,7 @@ class Media extends ObjectModel
      *
      * @return object
      */
-    function setCreatedOn(string $val)
+    function setCreatedOn(string $val): object
     {
         if ($this->_created_on !== $val) {
             $this->_created_on = $val;
@@ -273,7 +273,7 @@ class Media extends ObjectModel
     /**
      * @return object
      */
-    function setCreatedNow()
+    function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_created_on !== $now) {
@@ -289,7 +289,7 @@ class Media extends ObjectModel
      *
      * @return object
      */
-    function setModifiedOn(string $val)
+    function setModifiedOn(string $val): object
     {
         if ($this->_modified_on !== $val) {
             $this->_modified_on = $val;
@@ -302,7 +302,7 @@ class Media extends ObjectModel
     /**
      * @return object
      */
-    function setModifiedNow()
+    function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
         if ($this->_modified_on !== $now) {
@@ -318,7 +318,7 @@ class Media extends ObjectModel
      *
      * @return object
      */
-    function setOnline(bool $val)
+    function setOnline(bool $val): object
     {
         if ($this->_online !== $val) {
             $this->_online = $val;

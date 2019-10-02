@@ -73,10 +73,6 @@
     <td>{$membre->getSite()}</td>
   </tr>
   <tr>
-    <th>Facebook Profile Id</th>
-    <td>{if $membre->getFacebookProfileId()}<a href="{$membre->getFacebookProfileUrl()}">{$membre->getFacebookProfileId()}</a>{/if}</td>
-  </tr>
-  <tr>
     <th>Niveau</th>
     <td>{$membre->getLevel()}</td>
   </tr>

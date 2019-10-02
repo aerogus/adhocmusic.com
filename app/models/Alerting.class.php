@@ -151,14 +151,14 @@ class Alerting extends ObjectModel
     /* début setters */
 
     /**
-     * @param int $val val
+     * @param int $id_contact id_contact
      *
      * @return object
      */
-    function setIdContact(int $val): object
+    function setIdContact(int $id_contact): object
     {
-        if ($this->_id_contact !== $val) {
-            $this->_id_contact = $val;
+        if ($this->_id_contact !== $id_contact) {
+            $this->_id_contact = $id_contact;
             $this->_modified_fields['id_contact'] = true;
         }
 
@@ -200,7 +200,7 @@ class Alerting extends ObjectModel
      *
      * @return object
      */
-    function setType(string $val)
+    function setType(string $val): object
     {
         if ($this->_type !== $val) {
             $this->_type = $val;
@@ -215,7 +215,7 @@ class Alerting extends ObjectModel
      *
      * @return object
      */
-    function setIdContent(int $val)
+    function setIdContent(int $val): object
     {
         if ($this->_id_content !== $val) {
             $this->_id_content = $val;
@@ -232,7 +232,7 @@ class Alerting extends ObjectModel
      *
      * @return object
      */
-    function setCreatedNow()
+    function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 

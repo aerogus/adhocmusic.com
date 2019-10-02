@@ -215,9 +215,9 @@ class Structure extends ObjectModel
      *
      * @return string
      */
-    static function getPictoById($id): string
+    static function getPictoById(int $id): string
     {
-        return self::getBaseUrl() . '/' . (int) $id . '.png';
+        return self::getBaseUrl() . '/' . (string) $id . '.png';
     }
 
     /* fin getters */

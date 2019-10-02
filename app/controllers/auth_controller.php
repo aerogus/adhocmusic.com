@@ -16,7 +16,6 @@ final class Controller
         if (Tools::isSubmit('form-login')) {
             $pseudo = trim((string) Route::params('pseudo'));
             $password = trim((string) Route::params('password'));
-            $facebook_uid = (int) Route::params('facebook_uid');
 
             if ($id_contact = Membre::checkPseudoPassword($pseudo, $password)) {
 
@@ -25,10 +24,6 @@ final class Controller
 
                 // update date derniere visite
                 $membre->setVisitedNow();
-
-                if ($facebook_uid) {
-                    $membre->setFacebookUid($facebook_uid);
-                }
 
                 $membre->save();
 

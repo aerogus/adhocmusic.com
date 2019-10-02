@@ -533,6 +533,8 @@ class Groupe extends ObjectModel
     }
 
     /**
+     * Retourne l'url d'une fiche groupe
+     *
      * @return string
      */
     function getUrl(): string
@@ -543,16 +545,16 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'url d'une fiche groupe à partir de son alias ou son id
      *
-     * @param string $alias ou int $id_groupe
+     * @param string $ref
      *
      * @return string
      */
-    static function getUrlFiche($ref, $type = 2)
+    static function getUrlFiche(string $ref)
     {
         if (is_numeric($ref)) {
-            $alias = Groupe::getAliasById($ref);
+            $alias = Groupe::getAliasById((int) $ref);
         } else {
-            $alias = $ref;
+            $alias = trim($ref);
         }
 
         return HOME_URL . '/' . $alias;
@@ -612,7 +614,7 @@ class Groupe extends ObjectModel
      *
      * @return object
      */
-    function setAlias(string $val)
+    function setAlias(string $val): object
     {
         if ($this->_alias !== $val) {
             $this->_alias = $val;
@@ -627,7 +629,7 @@ class Groupe extends ObjectModel
      *
      * @return object
      */
-    function setName(string $val)
+    function setName(string $val): object
     {
         if ($this->_name !== $val) {
             $this->_name = $val;
@@ -849,7 +851,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     *
+     * @return object
      */
     function setModifiedNow(): object
     {
@@ -912,10 +914,10 @@ class Groupe extends ObjectModel
      *
      * @return object
      */
-    function setEtat(int $val): object
+    function setEtat(int $etat): object
     {
-        if ($this->_etat !== $val) {
-            $this->_etat = $val;
+        if ($this->_etat !== $etat) {
+            $this->_etat = $etat;
             $this->_modified_fields['etat'] = true;
         }
 
@@ -1161,7 +1163,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `m`.`id_contact` AS `id`, `c`.`email`, `m`.`last_name`, `m`.`first_name`, `m`.`pseudo`, "
-             . "`m`.`facebook_profile_id`, `c`.`email`, `m`.`created_on`, "
+             . "`c`.`email`, `m`.`created_on`, "
              . "`m`.`modified_on`, `m`.`visited_on`, `m`.`text`, `m`.`site`, "
              . "`a`.`id_groupe`, `a`.`id_type_musicien` "
              . "FROM `" . Membre::getDbTable() . "` `m`, `" . Contact::getDbTable() . "` `c`, `" . self::$_db_table_appartient_a . "` `a` "

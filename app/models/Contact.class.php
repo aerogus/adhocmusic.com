@@ -215,11 +215,12 @@ class Contact extends ObjectModel
 
     /**
      * Suppression d'un contact
+     *
      * @todo vérification des liaisons avec table membre
      *
      * @return int
      */
-    function delete()
+    function delete(): int
     {
         $db = DataBase::getInstance();
 

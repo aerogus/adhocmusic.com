@@ -70,7 +70,7 @@ class Pagination
     }
 
     /**
-     * @param int $nb
+     * @param int $nb nb
      */
     function setNbItems(int $nb)
     {
@@ -110,7 +110,7 @@ class Pagination
     }
 
     /**
-     * @param int
+     * @param int $nb nb
      */
     function setSelectedPage(int $nb)
     {
@@ -128,7 +128,7 @@ class Pagination
     }
 
     /**
-     * @param int $nb
+     * @param int $nb nb
      */
     function setNbLinks(int $nb)
     {
@@ -152,7 +152,7 @@ class Pagination
     }
 
     /**
-     * @param int $pageNumber
+     * @param int $pageNumber pageNumber
      */
     function setCurrentPage(int $pageNumber)
     {

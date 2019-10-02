@@ -72,13 +72,6 @@
   </tr>
   {/if}
 
-  {if $membre->getFacebookProfileId()}
-  <tr>
-    <td>Facebook :</td>
-    <td><a href="http://www.facebook.com/profile.php?id={$membre->getFacebookProfileId()}"><img src="/img/facebook.gif" alt=""></a></td>
-  </tr>
-  {/if}
-
 </table>
 
   </div>

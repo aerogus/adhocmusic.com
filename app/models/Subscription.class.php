@@ -197,8 +197,10 @@ class Subscription extends ObjectModel
 
     /**
      * @param string $val val
+     *
+     * @return object
      */
-    function setCreatedAt(string $val)
+    function setCreatedAt(string $val): object
     {
         if ($this->_created_at !== $val) {
             $this->_created_at = $val;
@@ -239,6 +241,8 @@ class Subscription extends ObjectModel
     }
 
     /**
+     * @param bool $val val
+     *
      * @return object
      */
     function setAdult(bool $val): object
@@ -251,6 +255,8 @@ class Subscription extends ObjectModel
     }
 
     /**
+     * @param float $val val
+     *
      * @return object
      */
     function setAmount(float $val): object

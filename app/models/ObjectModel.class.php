@@ -166,7 +166,7 @@ abstract class ObjectModel
     }
 
     /**
-     * @return int ou string
+     * @return int ou string (quand ??)
      */
     function getId()
     {

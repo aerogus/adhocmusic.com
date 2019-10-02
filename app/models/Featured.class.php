@@ -98,7 +98,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    static function getBaseUrl()
+    static function getBaseUrl(): string
     {
         return MEDIA_URL . '/featured';
     }
@@ -106,108 +106,115 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    static function getBasePath()
+    static function getBasePath(): string
     {
         return MEDIA_PATH . '/featured';
     }
 
     /**
-     * @param string $mode
+     * @param string $mode mode
+     *
      * @return string
      */
-    function getDatDeb($mode = false)
+    function getDatDeb(string $mode = null)
     {
         if (!Date::isDateTimeOk($this->_datdeb)) {
             return false;
         }
 
         preg_match("/^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$/", $this->_datdeb, $regs);
-        if ($mode === 'year') {
-            return $regs[1];
-        } elseif ($mode === 'month') {
-            return $regs[2];
-        } elseif ($mode === 'day') {
-            return $regs[3];
-        } elseif ($mode === 'hour') {
-            return $regs[4];
-        } elseif ($mode === 'minute') {
-            return $regs[5];
+        switch ($mode) {
+            case 'year':
+                return $regs[1];
+            case 'month':
+                return $regs[2];
+            case 'day':
+                return $regs[3];
+            case 'hour':
+                return $regs[4];
+            case 'minute':
+                return $regs[5];
+            default:
+                return $this->_datdeb;
         }
-        return $this->_datdeb;
     }
 
     /**
-     * @param string $mode
+     * @param string $mode mode
+     *
      * @return string
      */
-    function getDatFin($mode = false)
+    function getDatFin(string $mode = null)
     {
         if (!Date::isDateTimeOk($this->_datfin)) {
             return false;
         }
 
         preg_match("/^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$/", $this->_datfin, $regs);
-        if ($mode === 'year') {
-            return $regs[1];
-        } elseif ($mode === 'month') {
-            return $regs[2];
-        } elseif ($mode === 'day') {
-            return $regs[3];
-        } elseif ($mode === 'hour') {
-            return $regs[4];
-        } elseif ($mode === 'minute') {
-            return $regs[5];
+        switch ($mode) {
+            case 'year':
+                return $regs[1];
+            case 'month':
+                return $regs[2];
+            case 'day':
+                return $regs[3];
+            case 'hour':
+                return $regs[4];
+            case 'minute':
+                return $regs[5];
+            default:
+                return $this->_datfin;
         }
-        return $this->_datfin;
     }
 
     /**
      * @return string
      */
-    function getTitle()
+    function getTitle(): string
     {
-        return (string) $this->_title;
+        return $this->_title;
     }
 
     /**
      * @return string
      */
-    function getDescription()
+    function getDescription(): string
     {
-        return (string) $this->_description;
+        return $this->_description;
     }
 
     /**
      * @return string
      */
-    function getLink()
+    function getLink(): string
     {
-        return (string) $this->_link;
+        return $this->_link;
     }
 
     /**
      * @return string
      */
-    function getImage()
+    function getImage(): string
     {
         return self::getImageById((int) $this->getId());
     }
 
     /**
-     * @param int
+     * @param int $id id
+     *
      * @return string
      */
-    static function getImageById($id)
+    static function getImageById(int $id): string
     {
-        return self::getBaseUrl() . '/' . (int) $id . '.jpg';
+        return self::getBaseUrl() . '/' . (string) $id . '.jpg';
     }
 
     /**
      * @return bool
      */
-    function getOnline()
+    function getOnline(): bool
     {
-        return (bool) $this->_online;
+        return $this->_online;
     }
 
     /* fin getters */
@@ -215,9 +222,11 @@ class Featured extends ObjectModel
     /* début setters */
 
     /**
-     * @param string YYYY-MM-DD HH:II:SS
+     * @param string $val date format YYYY-MM-DD HH:II:SS
+     *
+     * @return object
      */
-    function setDatDeb(string $val)
+    function setDatDeb(string $val): object
     {
         if (!Date::isDateTimeOk($val)) {
             throw new Exception('datdeb invalide');
@@ -227,12 +236,16 @@ class Featured extends ObjectModel
             $this->_datdeb = $val;
             $this->_modified_fields['datdeb'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val YYYY-MM-DD HH:II:SS
+     *
+     * @return object
      */
-    function setDatFin(string $val)
+    function setDatFin(string $val): object
     {
         if (!Date::isDateTimeOk($val)) {
             throw new Exception('datfin invalide');
@@ -242,53 +255,71 @@ class Featured extends ObjectModel
             $this->_datfin = $val;
             $this->_modified_fields['datfin'] = true;
         }
+
+        return $this;
     }
 
     /**
      * @param string $val titre
+     *
+     * @return object
      */
-    function setTitle($val)
+    function setTitle(string $val): object
     {
         $val = trim($val);
         if ($this->_title !== $val) {
             $this->_title = $val;
             $this->_modified_fields['title'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string
+     * @param string $val description
+     *
+     * @return object
      */
-    function setDescription(string $val)
+    function setDescription(string $val): object
     {
         $val = trim($val);
         if ($this->_description !== $val) {
             $this->_description = $val;
             $this->_modified_fields['description'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param string $val
+     * @param string $val lien
+     *
+     * @return object
      */
-    function setLink(string $val)
+    function setLink(string $val): object
     {
         $val = trim($val);
         if ($this->_link !== $val) {
             $this->_link = $val;
             $this->_modified_fields['link'] = true;
         }
+
+        return $this;
     }
 
     /**
-     * @param bool
+     * @param bool $val val
+     *
+     * @return bool
      */
-    function setOnline(bool $val)
+    function setOnline(bool $val): object
     {
         if ($this->_online !== $val) {
             $this->_online = $val;
             $this->_modified_fields['online'] = true;
         }
+
+        return $this;
     }
 
     /* fin setters */
@@ -296,7 +327,7 @@ class Featured extends ObjectModel
     /**
      * @return array
      */
-    static function getFeaturedHomepage()
+    static function getFeaturedHomepage(): array
     {
         $db = DataBase::getInstance();
 
@@ -309,18 +340,18 @@ class Featured extends ObjectModel
         $res = $db->queryWithFetch($sql);
 
         foreach ($res as $cpt => $_res) {
-            $res[$cpt]['image'] = self::getImageById($_res['id']);
+            $res[$cpt]['image'] = self::getImageById((int) $_res['id']);
         }
 
         return $res;
     }
 
     /**
-     * retourne les à l'affiche
+     * Retourne les à l'affiche
      *
      * @return array
      */
-    static function getFeaturedAdmin()
+    static function getFeaturedAdmin(): array
     {
         $db = DataBase::getInstance();
 
@@ -332,11 +363,10 @@ class Featured extends ObjectModel
 
         $tab = [];
         if (is_array($res)) {
-            $cpt = 0;
             $now = date('Y-m-d H:i:s');
             foreach ($res as $cpt => $_res) {
                 $tab[$cpt] = $_res;
-                $tab[$cpt]['image'] = self::getImageById($_res['id']);
+                $tab[$cpt]['image'] = self::getImageById((int) $_res['id']);
                 if (($now > $_res['datdeb']) && ($now < $_res['datfin'])) {
                     $tab[$cpt]['class'] = 'enligne';
                 } elseif ($now < $_res['datdeb']) {
@@ -344,8 +374,6 @@ class Featured extends ObjectModel
                 } elseif ($now > $_res['datfin']) {
                     $tab[$cpt]['class'] = "archive";
                 }
-
-                //$cpt++;
             }
         }
 
@@ -355,9 +383,9 @@ class Featured extends ObjectModel
     /**
      * Efface un featured en db + le fichier .jpg
      *
-     * @return true
+     * @return bool
      */
-    function delete()
+    function delete(): bool
     {
         if (parent::delete()) {
             $file = self::getBasePath() . '/' . $this->getId() . '.jpg';

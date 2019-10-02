@@ -313,7 +313,7 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @param string $val
+     * @param string $val val
      *
      * @return object
      */
@@ -328,7 +328,7 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @param string $val
+     * @param string $val val
      *
      * @return object
      */
@@ -357,7 +357,7 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @param string
+     * @param string $val val
      *
      * @return object
      */

@@ -1152,7 +1152,7 @@ class Lieu extends ObjectModel
      *
      * @return array
      */
-    function getVideos()
+    function getVideos(): array
     {
         return Video::getVideos(
             [
@@ -1174,7 +1174,7 @@ class Lieu extends ObjectModel
      *
      * @return array
      */
-    function getAudios()
+    function getAudios(): array
     {
         return Audio::getAudios(
             [

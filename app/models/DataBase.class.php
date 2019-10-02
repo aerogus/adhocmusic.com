@@ -205,7 +205,7 @@ class DataBase
     }
 
     /**
-     * Detruit une instance d'un objet. Attention: appeller unset()
+     * Détruit une instance d'un objet. Attention: appeller unset()
      * soit meme sur une instance obtenue avec new ou la methode
      * getInstance n'est pas suffisant, car ca ne fait que detruire
      * la reference. Il faut appeller cette methode *et* faire
@@ -227,8 +227,10 @@ class DataBase
 
     /**
      * Modifie le fetchMode uniquement pour la prochaine requête
+     *
+     * @param int $fetchMode fetchMode
      */
-    function setFetchMode($fetchMode = MYSQLI_BOTH)
+    function setFetchMode(int $fetchMode = MYSQLI_BOTH)
     {
         if (in_array($fetchMode, [MYSQLI_BOTH, MYSQLI_ASSOC, MYSQLI_NUM])) {
             $this->_fetchMode = $fetchMode;
@@ -240,8 +242,7 @@ class DataBase
      */
     function queryWithFetchAndClose($sql, $conn_name = DB_ADHOC_DEFAULT)
     {
-        try
-        {
+        try {
             $res = $this->queryWithFetch($sql, $conn_name);
         } catch (Exception $e) {
             $error = $e;
@@ -547,7 +548,7 @@ class DataBase
      *
      * @return array
      */
-    function getDebugLog()
+    function getDebugLog(): array
     {
         return $this->_debug_log;
     }

@@ -91,8 +91,10 @@ class Image
      * Constructeur
      * charge le handle d'un fichier si passé en paramètre
      * sinon crée une nouvelle image aux dimensions données
+     *
+     * @param string $file file
      */
-    function __construct($file = null)
+    function __construct(string $file = null)
     {
         if (!is_null($file)) {
             $this->_file_sou = $file;
@@ -113,15 +115,15 @@ class Image
     }
 
     /**
-     * créé une image à partir de ... rien
+     * Créé une image à partir de ... rien
      *
-     * @param int $width > 1
-     * @param int $height > 1
-     * @param string $color (ex: #ffffff)
+     * @param int    $width  > 1
+     * @param int    $height > 1
+     * @param string $color  (ex: #ffffff)
      *
      * @return object
      */
-    function init($width = 16, $height = 16, $color = false): object
+    function init(int $width = 16, int $height = 16, string $color = null): object
     {
         $this->_handle = imagecreatetruecolor($width, $height);
 
@@ -146,8 +148,11 @@ class Image
     /**
      * Charge un fichier dans l'attribut $this->_handle
      * retourn false en cas d'erreur
+     *
+     * @return bool
+     * @throws Exception
      */
-    function read()
+    function read(): bool
     {
         if ($this->_file_sou && file_exists($this->_file_sou) && is_readable($this->_file_sou)) {
             $this->_type = exif_imagetype($this->_file_sou);
@@ -191,11 +196,16 @@ class Image
      */
 
     /**
-     * défini une zone valide dans l'image source
+     * Défini une zone valide dans l'image source
      * règle :
      * 0 <= x1 < x2 < $this->_width
      * 0 <= y1 < y2 < $this->_height
      * 
+     * @param int $x1 x1
+     * @param int $y1 y1
+     * @param int $x2 x2
+     * @param int $y2 y2
+     *
      * @return object
      */
     function setZone(int $x1, int $y1, int $x2, int $y2): object
@@ -261,7 +271,7 @@ class Image
     }
 
     /**
-     * selection de toute l'image
+     * Sélection de toute l'image
      */
     function selectAll()
     {
@@ -269,7 +279,7 @@ class Image
     }
 
     /**
-     * defini le nom du fichier destination
+     * Defini le nom du fichier destination
      *
      * @param string $file file
      *
@@ -283,13 +293,13 @@ class Image
     }
 
     /**
-     * fixe la couleur courante
+     * Fixe la couleur courante
      *
      * 3 paramàtres de 0 à 255 chacun
      * 
-     * @param int $red rouge
+     * @param int $red   rouge
      * @param int $green vert
-     * @param int $blue bleu
+     * @param int $blue  bleu
      *
      * @return object
      */
@@ -330,6 +340,7 @@ class Image
      * - IMAGETYPE_PNG
      *
      * @param int $type type
+     *
      * @return object
      */
     function setType(int $type): object
@@ -340,7 +351,7 @@ class Image
     }
 
     /**
-     * fixe une contrainte de largeur maxi
+     * Fixe une contrainte de largeur maxi
      *
      * @param int $maxWidth largeur maxi
      *
@@ -354,7 +365,7 @@ class Image
     }
 
     /**
-     * fixe une contrainte de hauteur maxi
+     * Fixe une contrainte de hauteur maxi
      *
      * @param int $maxHeight hauteur maxi
      *
@@ -368,7 +379,7 @@ class Image
     }
 
     /**
-     * redimensionnement de l'image
+     * Redimensionnement de l'image
      * handle -> handle2
      */
     function resize()
@@ -397,7 +408,7 @@ class Image
     }
 
     /**
-     * calcul des nouvelles hauteurs et largeurs à partir de la zone
+     * Calcul des nouvelles hauteurs et largeurs à partir de la zone
      * sélectionnée de l'image source et des contraintes
      * (max_width, max_height et keep_ratio)
      * calcul aussi l'offset si bordure
@@ -406,7 +417,7 @@ class Image
     function calculTaille()
     {
         /**
-         * calcul de la nouvelle taille de l'image
+         * Calcul de la nouvelle taille de l'image
          */
         if ($this->_keep_ratio) {
             if ($this->_max_height) {
@@ -452,7 +463,7 @@ class Image
         }
 
         /**
-         * calcul de l'offset en cas de bordure
+         * Calcul de l'offset en cas de bordure
          */
         if ($this->_max_height && $this->_max_width && $this->_border) {
             $this->_deltax = round(($this->_max_width - $this->_new_l) / 2);
@@ -465,7 +476,7 @@ class Image
     }
 
     /**
-     * indique si on doit garder les proportions
+     * Indique si on doit garder les proportions
      *
      * @param bool $bool bool
      *
@@ -479,7 +490,7 @@ class Image
     }
 
     /**
-     * indique si on doit ajouter des bordures
+     * Indique si on doit ajouter des bordures
      *
      * @param bool $bool bool
      *
@@ -493,11 +504,11 @@ class Image
     }
 
     /**
-     * méthodes de sortie du flux
+     * Méthodes de sortie du flux
      */
 
     /**
-     * affiche l'image à l'écran
+     * Affiche l'image à l'écran
      */
     function display()
     {
@@ -507,7 +518,7 @@ class Image
     }
 
     /**
-     * affichage de l'image à l'écran
+     * Affichage de l'image à l'écran
      */
     private function _display()
     {
@@ -533,7 +544,7 @@ class Image
     }
 
     /**
-     * ecrit la nouvelle image sur disque
+     * Écrit la nouvelle image sur disque
      */
     function write()
     {
@@ -543,7 +554,8 @@ class Image
     }
 
     /**
-     * retourne l'image sous forme de chaine binaire
+     * Retourne l'image sous forme de chaine binaire
+     *
      * @return string
      */
     function get()
@@ -592,12 +604,13 @@ class Image
     }
 
     /**
-     * retourne le chemin local de l'image cachée
+     * Retourne le chemin local de l'image cachée
      *
-     * @param string $uid
+     * @param string $uid uid
+     *
      * @return string
      */
-    static function getLocalCachePath($uid)
+    static function getLocalCachePath(string $uid): string
     {
         $hash = md5(trim($uid));
 
@@ -612,12 +625,13 @@ class Image
     }
 
     /**
-     * retourne l'url de l'image cachée
+     * Retourne l'url de l'image cachée
      *
-     * @param string uid
+     * @param string $uid uid
+     *
      * @return string
      */
-    static function getHttpCachePath($uid)
+    static function getHttpCachePath(string $uid): string
     {
         $hash = md5(trim($uid));
 
@@ -632,12 +646,14 @@ class Image
     }
 
     /**
-     * écrit le cache
+     * Écrit le cache
      *
-     * @param string $uid
+     * @param string $uid     UID
      * @param string $content (bin)
+     *
+     * @return bool
      */
-    static function writeCache($uid, $content)
+    static function writeCache(string $uid, string $content): bool
     {
         $hash = md5(trim($uid));
 

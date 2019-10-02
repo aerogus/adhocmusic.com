@@ -276,13 +276,10 @@ CREATE TABLE IF NOT EXISTS `adhoc_membre` (
   `_msn` varchar(50) NOT NULL DEFAULT '',
   `mailing` char(1) NOT NULL DEFAULT '1',
   `level` tinyint(4) NOT NULL DEFAULT '1',
-  `facebook_profile_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
   `modified_on` datetime DEFAULT NULL,
   `visited_on` datetime DEFAULT NULL,
   PRIMARY KEY (`id_contact`),
-  KEY `cp_membre` (`cp`),
-  KEY `facebook_uid` (`facebook_profile_id`),
   CONSTRAINT `fk_membre_contact`
     FOREIGN KEY (id_contact) REFERENCES adhoc_contact (id_contact)
     ON DELETE CASCADE

@@ -99,7 +99,7 @@ class Newsletter extends ObjectModel
      */
     function getFileUrl(): string
     {
-        return self::getBaseUrl() . '/' . $this->getId();
+        return self::getBaseUrl() . '/' . (string) $this->getId();
     }
 
     /**
@@ -107,7 +107,7 @@ class Newsletter extends ObjectModel
      */
     function getFilePath(): string
     {
-        return self::getBasePath() . '/' . $this->getId();
+        return self::getBasePath() . '/' . (string) $this->getId();
     }
 
     /**

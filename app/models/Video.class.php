@@ -832,7 +832,7 @@ class Video extends Media
     /**
      * @return bool
      */
-    static function invalidateVideoThumbInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 1)
+    static function invalidateVideoThumbInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 1): bool
     {
         $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
@@ -851,7 +851,7 @@ class Video extends Media
      *
      * @return string
      */
-    static function getVideoThumbUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 1)
+    static function getVideoThumbUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 1): string
     {
         $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
