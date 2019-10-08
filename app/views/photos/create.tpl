@@ -8,9 +8,9 @@
     <form id="form-photo-create" name="form-photo-create" method="post" action="/photos/create" enctype="multipart/form-data">
       <ul>
         <li>
-          <label for="file">Photo (.jpg)</label>
+          <label for="file[]">Photo (.jpg)</label>
           <div class="infobulle error" id="error_file"{if empty($error_file)} style="display: none"{/if}>Vous devez choisir une photo !</div>
-          <input type="file" name="file" id="file" value="">
+          <input type="file" name="file[]" id="file" value="" multiple>
         </li>
         <li>
           <label for="name">Titre</label>

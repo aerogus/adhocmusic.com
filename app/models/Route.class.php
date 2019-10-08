@@ -316,7 +316,7 @@ class Route
 
         if (ROUTE_MANAGE_FILES === true) {
             foreach ($_FILES as $param_name => $file) {
-                if ($file['tmp_name']) {
+                if (!is_array($file) && $file['tmp_name']) {
                     self::$action_params[$param_name] = file_get_contents($file['tmp_name']);
                 }
             }

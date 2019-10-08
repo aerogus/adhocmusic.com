@@ -189,12 +189,9 @@ newsletters|show|GET|/newsletters/:id
 newsletters|index|GET|/newsletters
 photos|my|GET|/photos/my
 photos|create|GET|/photos/create
-photos|import|GET|/photos/import
-photos|import|POST|/photos/import
 photos|create|POST|/photos/create
 photos|edit|GET|/photos/edit/:id
 photos|edit|POST|/photos/edit
-photos|ajax_update|POST|/photos/ajax_update
 photos|delete|GET|/photos/delete/:id
 photos|delete|POST|/photos/delete
 photos|from_iphone|POST|/photos/from-iphone

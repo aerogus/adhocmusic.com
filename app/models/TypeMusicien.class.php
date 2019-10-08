@@ -17,6 +17,7 @@ class TypeMusicien extends ObjectModel
      * @var string
      */
     protected static $_pk = 'id_type_musicien';
+
     /**
      * @var string
      */
@@ -59,7 +60,7 @@ class TypeMusicien extends ObjectModel
     /**
      * @return string
      */
-    static function getName(): string
+    function getName(): string
     {
         return $this->_name;
     }

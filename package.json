@@ -14,7 +14,7 @@
   "devDependencies": {
     "after-brunch": "0.0.5",
     "auto-reload-brunch": "2.7.1",
-    "autoprefixer": "9.6.1",
+    "autoprefixer": "9.6.4",
     "babel-brunch": "7.0.1",
     "brunch": "2.10.17",
     "clean-css-brunch": "2.10.0",

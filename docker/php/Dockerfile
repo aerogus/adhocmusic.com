@@ -1,4 +1,4 @@
-FROM php:7.3.9-fpm
+FROM php:7.3.10-fpm
 LABEL maintainer="guillaume@seznec.fr"
 
 # maj complète et install des paquets utiles
@@ -9,4 +9,5 @@ RUN apt-get update && apt-get install -y \
   libjpeg62-turbo-dev \
   && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install -j$(nproc) gd \
+  && docker-php-ext-install -j$(nproc) exif \
   && docker-php-ext-install -j$(nproc) mysqli

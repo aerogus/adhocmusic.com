@@ -79,7 +79,7 @@ define('ADHOC_LIB_PATH',           ADHOC_ROOT_PATH . '/models');
 define('ADHOC_ROUTES_FILE',        ADHOC_ROOT_PATH . '/app/routes');
 define('ADHOC_LOG_PATH',           ADHOC_ROOT_PATH . '/log');
 define('DEFAULT_CONTROLLERS_PATH', ADHOC_ROOT_PATH . '/app/controllers/');
-define('MEDIA_PATH',               ADHOC_ROOT_PATH . '/media');
+define('MEDIA_PATH',               ADHOC_ROOT_PATH . '/static/media');
 
 // chemin local
 define('IMG_CACHE_PATH', ADHOC_ROOT_PATH . '/static/cache');

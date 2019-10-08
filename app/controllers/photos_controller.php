@@ -202,38 +202,36 @@ final class Controller
                 'id_lieu' => (int) Route::params('id_lieu'),
                 'id_event' => (int) Route::params('id_event'),
                 'id_contact' => (int) $_SESSION['membre']->getId(),
-                'id_structure' => 0,
                 'online' => (bool) Route::params('online'),
             ];
             $errors = [];
 
             if (self::_validatePhotoCreateForm($data, $errors)) {
 
-                $photo = Photo::init()
-                    ->setName($data['name'])
-                    ->setCredits($data['credits'])
-                    ->setIdGroupe($data['id_groupe'])
-                    ->setIdLieu($data['id_lieu'])
-                    ->setIdEvent($data['id_event'])
-                    ->setIdContact($data['id_contact'])
-                    ->setIdStructure($data['id_structure'])
-                    ->setOnline($data['online'])
-                    ->setCreatedNow();
+                foreach ($_FILES['file']['tmp_name'] as $uploaded_photo_path) {
+                    if (is_uploaded_file($uploaded_photo_path)) {
+                        $photo = Photo::init()
+                            ->setName($data['name'])
+                            ->setCredits($data['credits'])
+                            ->setIdGroupe($data['id_groupe'])
+                            ->setIdLieu($data['id_lieu'])
+                            ->setIdEvent($data['id_event'])
+                            ->setIdContact($data['id_contact'])
+                            ->setOnline($data['online']);
 
-                $photo->save();
-
-                if (is_uploaded_file($_FILES['file']['tmp_name'])) {
-                    (new Image($_FILES['file']['tmp_name']))
-                        ->setType(IMAGETYPE_JPEG)
-                        ->setMaxWidth(1024)
-                        ->setMaxHeight(768)
-                        ->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg')
-                        ->write();
+                        if ($photo->save()) {
+                            (new Image($uploaded_photo_path))
+                                ->setType(IMAGETYPE_JPEG)
+                                ->setMaxWidth(1024)
+                                ->setMaxHeight(768)
+                                ->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg')
+                                ->write();
+                            Log::action(Log::ACTION_PHOTO_CREATE, $photo->getId());
+                        }
+                    }
                 }
 
-                Log::action(Log::ACTION_PHOTO_CREATE, $photo->getId());
-
-                Tools::redirect('/medias/?create=1');
+                Tools::redirect('/photos/my');
 
             } else {
 
@@ -302,169 +300,6 @@ final class Controller
     /**
      * @return string
      */
-    static function import(): string
-    {
-        Tools::auth(Membre::TYPE_INTERNE);
-
-        if (Tools::isSubmit('form-photo-import')) {
-
-            //@TODO A DEBUGGER
-            die('a debuguer');
-
-            set_time_limit(0); // l'import peut prendre du temps !
-
-            // creation repertoire temporaire
-            if (!file_exists(PHOTOS_EXTRACT_DIR)) {
-                mkdir(PHOTOS_EXTRACT_DIR);
-                Log::write('photo', "création rep tmp");
-            }
-
-            // extensions à traiter
-            $exts = ['jpg', 'jpeg', 'JPG', 'JPEG'];
-
-            // à sécuriser
-            $zip_name = PHOTOS_IMPORT_DIR . '/' . trim((string) Route::params('file'));
-
-            // extraction de l'archive
-            $zip = new ZipArchive();
-            if ($zip->open($zip_name) === true) {
-                $zip->extractTo(PHOTOS_EXTRACT_DIR);
-                $zip->close();
-                Log::write('photo', "extraction archive ok");
-            } else {
-                Log::write('photo', "échec à l'extraction de l'archive");
-            }
-
-            $nb = 0;
-
-            // boucle des extensions
-            foreach ($exts as $ext) {
-                Log::write('photo', "boucle " . $ext);
-
-                // boucle des fichiers
-                foreach (glob(PHOTOS_EXTRACT_DIR . "/*." . $ext) as $filename) {
-                    Log::write('photo', "traitement " . $filename . " (" . filesize($filename) . ") octets");
-
-                    $data = [
-                        'name' => trim((string) Route::params('name')),
-                        'credits' => trim((string) Route::params('credits')),
-                        'id_groupe' => (int) Route::params('id_groupe'),
-                        'id_lieu' => (int) Route::params('id_lieu'),
-                        'id_event' => (int) Route::params('id_event'),
-                        'id_contact' => (int) $_SESSION['membre']->getId(),
-                        'id_structure' => 1,
-                        'online' => true,
-                    ];
-                    $errors = [];
-
-                    self::_validatePhotoCreateForm($data, $errors);
-
-                    if (empty($errors)) {
-
-                        $photo = Photo::init()
-                            ->setName($data['name'])
-                            ->setCredits($data['credits'])
-                            ->setIdGroupe($data['id_groupe'])
-                            ->setIdLieu($data['id_lieu'])
-                            ->setIdEvent($data['id_event'])
-                            ->setIdContact($data['id_contact'])
-                            ->setIdStructure($data['id_structure'])
-                            ->setOnline($data['online'])
-                            ->setCreatedNow();
-
-                        $photo->save();
-
-                        Log::write('photo', "création image " . $photo->getId());
-
-                        (new Image($filename))
-                            ->setType(IMAGETYPE_JPEG)
-                            ->setMaxWidth(1024)
-                            ->setMaxHeight(768)
-                            ->setDestFile(ADHOC_ROOT_PATH . '/static/media/photo/' . $photo->getId() . '.jpg')
-                            ->write();
-
-                        unlink($filename);
-                        Log::write('photo', "delete de " . $filename);
-
-                        Log::action(Log::ACTION_PHOTO_CREATE, $photo->getId());
-
-                        $nb++;
-
-                    } else {
-
-                        // errors
-
-                    }
-
-                }
-
-            }
-
-            // ménage
-            rmdir(PHOTOS_EXTRACT_DIR);
-            Log::write('photo', "delete du rep tmp");
-
-            Tools::redirect('/medias/?create=1&nb='.$nb);
-
-        }
-
-        Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Photos", "/photos/my")
-            ->addStep("Importer des photos");
-
-        $smarty = new AdHocSmarty();
-
-        $id_groupe = (int) Route::params('id_groupe');
-        if ($id_groupe) {
-            $groupe = Groupe::getInstance($id_groupe);
-            $smarty->assign('groupe', $groupe);
-        } else {
-            $smarty->assign(
-                'groupes', Groupe::getGroupes(
-                    [
-                        'sort'   => 'name',
-                        'sens'   => 'ASC',
-                    ]
-                )
-            );
-        }
-
-        $id_lieu = (int) Route::params('id_lieu');
-        if ($id_lieu) {
-            $lieu = Lieu::getInstance($id_lieu);
-            $smarty->assign('lieu', $lieu);
-            $smarty->assign(
-                'events', Event::getEvents(
-                    [
-                        'online' => true,
-                        'datfin' => date('Y-m-d H:i:s'),
-                        'lieu'   => $lieu->getId(),
-                        'sort'   => 'date',
-                        'sens'   => 'ASC',
-                        'limit'  => 100,
-                    ]
-                )
-            );
-        } else {
-            $smarty->assign('dep', Departement::getHashTable());
-            $smarty->assign('lieux', Lieu::getLieuxByDep());
-        }
-
-        $id_event = (int) Route::params('id_event');
-        if ($id_event) {
-            $event = Event::getInstance($id_event);
-            $smarty->assign('event', $event);
-            $lieu = Lieu::getInstance($event->getIdLieu());
-            $smarty->assign('lieu', $lieu);
-        }
-
-        return $smarty->fetch('photos/import.tpl');
-    }
-
-    /**
-     * @return string
-     */
     static function edit(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -527,7 +362,7 @@ final class Controller
 
                 if ($photo->save()) {
                     Log::action(Log::ACTION_PHOTO_EDIT, $photo->getId());
-                    Tools::redirect('/medias/?edit=1');
+                    Tools::redirect('/photos/my');
                 }
 
             } else {
@@ -564,39 +399,6 @@ final class Controller
     /**
      * @return string
      */
-    static function ajax_update(): string
-    {
-        if (!Tools::isAuth()) {
-            return 'KO';
-        }
-
-        $id = (int) Route::params('id');
-        $name = trim((string) Route::params('name'));
-        $credits = trim((string) Route::params('credits'));
-
-        try {
-            $photo = Photo::getInstance($id);
-        } catch (Exception $e) {
-            return 'KO';
-        }
-
-        if ($name) {
-            $photo->setName($name);
-        }
-        if ($credits) {
-            $photo->setCredits($credits);
-        }
-
-        if ($photo->save()) {
-            return 'OK';
-        }
-
-        return 'KO';
-    }
-
-    /**
-     * @return string
-     */
     static function delete(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -621,7 +423,7 @@ final class Controller
         if (Tools::isSubmit('form-photo-delete')) {
             if ($photo->delete()) {
                 Log::action(Log::ACTION_PHOTO_DELETE, $photo->getId());
-                Tools::redirect('/medias/?delete=1');
+                Tools::redirect('/photos/my');
             }
         }
 

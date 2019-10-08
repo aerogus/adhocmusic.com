@@ -43,7 +43,7 @@
     </li>
     <li>
       <label for="id_groupe">Groupe</label>
-      <select name="id_groupe" style="float: right">
+      <select name="id_groupe">
         <option value="0">Aucun</option>
         {foreach $groupes as $groupe}
         <option value="{$groupe.id}"{if $photo->getIdGroupe() == $groupe.id} selected="selected"{/if}>{$groupe.name|escape}</option>
