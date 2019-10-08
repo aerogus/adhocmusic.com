@@ -118,6 +118,8 @@ CREATE TABLE IF NOT EXISTS `adhoc_faq` (
   `id_category` int(11) NOT NULL,
   `question` varchar(255) NOT NULL,
   `answer` text NOT NULL,
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_faq`),
   KEY `id_category` (`id_category`)
 );
