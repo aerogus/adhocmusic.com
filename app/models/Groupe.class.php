@@ -1072,9 +1072,9 @@ class Groupe extends ObjectModel
      *
      * @param int $id_contact id_contact
      *
-     * @return int
+     * @return bool
      */
-    function unlinkMember(int $id_contact): int
+    function unlinkMember(int $id_contact): bool
     {
         // le groupe existe-t-il bien ?
 
@@ -1087,12 +1087,12 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_appartient_a . "` "
-             . "WHERE `id_groupe` = " . (int) $this->getId() . " "
-             . "AND `id_contact` = " . (int) $id_contact;
+             . "WHERE `" . Groupe::getDbPk() . "` = " . (int) $this->getId() . " "
+             . "AND `" . Membre::getDbPk() . "` = " . (int) $id_contact;
 
         $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
@@ -1171,7 +1171,7 @@ class Groupe extends ObjectModel
         $cpt = 0;
         foreach ($res as $_res) {
             $res[$cpt]['id'] = intval($_res['id']);
-            $res[$cpt]['nom_type_musicien'] = Membre::getTypeMusicienName((int) $_res['id_type_musicien']);
+            $res[$cpt]['nom_type_musicien'] = TypeMusicien::getInstance((int) $_res['id_type_musicien'])->getName();
             $res[$cpt]['url'] = Membre::getUrlById((int) $_res['id']);
             $cpt++;
         }
@@ -1310,7 +1310,7 @@ class Groupe extends ObjectModel
                     $mini_photo = self::getBaseUrl() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
                 }
                 $tab[$grp['id']]['mini_photo'] = $mini_photo;
-                $tab[$grp['id']]['nom_type_musicien'] = Membre::getTypeMusicienName((int) $grp['id_type_musicien']);
+                $tab[$grp['id']]['nom_type_musicien'] = TypeMusicien::getInstance((int) $grp['id_type_musicien']->getName());
             }
             return $tab;
         }

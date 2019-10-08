@@ -56,6 +56,8 @@ class FAQ extends ObjectModel
         'id_category' => 'num',
         'question'    => 'str',
         'answer'      => 'str',
+        'created_on'  => 'date',
+        'modified_on' => 'date',
     ];
 
     /* début getters */
@@ -82,6 +84,58 @@ class FAQ extends ObjectModel
     function getAnswer(): string
     {
         return $this->_answer;
+    }
+
+    /**
+     * Retourne la date d'inscription format YYYY-MM-DD HH:II:SS
+     *
+     * @return string|false
+     */
+    function getCreatedOn(): ?string
+    {
+        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
+            return $this->_created_on;
+        }
+        return null;
+    }
+
+    /**
+     * Retourne la date d'inscription sous forme de timestamp
+     *
+     * @return int
+     */
+    function getCreatedOnTs(): ?string
+    {
+        if (!is_null($this->created_on) && Date::isDateTimeOk($this->_created_on)) {
+            return (int) strtotime($this->_created_on);
+        }
+        return null;
+     }
+
+    /**
+     * Retourne la date de modification de la fiche
+     *
+     * @return string|null
+     */
+    function getModifiedOn(): ?string
+    {
+        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+            return $this->_modified_on;
+        }
+        return null;
+    }
+
+    /**
+     * Retourne la date de modification de la fiche sous forme de timestamp
+     *
+     * @return int|null
+     */
+    function getModifiedOnTs(): ?int
+    {
+        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
+            return strtotime($this->_modified_on);
+        }
+        return null;
     }
 
     /* fin getters */
@@ -128,8 +182,64 @@ class FAQ extends ObjectModel
     {
         $val = trim($val);
         if ($this->_answer !== $val) {
-            $this->_answer = (string) $val;
+            $this->_answer = $val;
             $this->_modified_fields['answer'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $val val
+     *
+     * @return object
+     */
+    function setCreatedOn(string $val): object
+    {
+        if ($this->_created_on !== $val) {
+            $this->_created_on = $val;
+            $this->_modified_fields['created_on'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return object
+     */
+    function setCreatedNow(): object
+    {
+        $now = date('Y-m-d H:i:s');
+        if ($this->_created_on !== $now) {
+            $this->_created_on = $now;
+            $this->_modified_fields['created_on'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $val val
+     */
+    function setModifiedOn(string $val): object
+    {
+        if ($this->_modified_on !== $val) {
+            $this->_modified_on = $val;
+            $this->_modified_fields['modified_on'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return object
+     */
+    function setModifiedNow(): object
+    {
+        $now = date('Y-m-d H:i:s');
+        if ($this->_modified_on !== $now) {
+            $this->_modified_on = $now;
+            $this->_modified_fields['modified_on'] = true;
         }
 
         return $this;

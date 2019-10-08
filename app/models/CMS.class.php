@@ -350,7 +350,7 @@ class CMS extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `" . self::$_pk . "` "
+        $sql = "SELECT `" . CMS::getDbPk() . "` "
              . "FROM `" . CMS::getDbTable() . "` "
              . "WHERE `alias` = '" . $db->escape($alias) . "' AND `online`";
 

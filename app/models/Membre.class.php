@@ -587,7 +587,7 @@ class Membre extends Contact
             $this->_groupes = $db->queryWithFetch($sql);
 
             foreach ($this->_groupes as $key => $groupe) {
-                $this->_groupes[$key]['type_musicien_name'] = self::getTypeMusicienName((int) $groupe['id_type_musicien']);
+                $this->_groupes[$key]['type_musicien_name'] = TypeMusicien::getInstance((int) $groupe['id_type_musicien'])->getName();
                 $this->_groupes[$key]['url'] = Groupe::getUrlFiche($groupe['alias']);
             }
         }
@@ -1015,7 +1015,7 @@ class Membre extends Contact
             $tab[$_res['id_contact']][] = [
                 'id_groupe' => $_res['id_groupe'],
                 'id_type_musicien' => $_res['id_type_musicien'],
-                'type_musicien' => self::getTypeMusicienName($_res['id_type_musicien']),
+                'type_musicien' => TypeMusicien::getInstance((int) $_res['id_type_musicien'])->getName(),
                 'name' => $_res['name'],
             ];
         }
