@@ -78,6 +78,7 @@ class Tools
             utf8_decode("aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn")
         );
         $str = self::charSet($str, 'UTF8');
+
         return $str;
     }
 

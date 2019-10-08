@@ -4,11 +4,6 @@
  * Constantes utiles pour la classe DataBase
  */
 
-// base par défaut
-if (!defined('DB_ADHOC_DEFAULT')) {
-    define('DB_ADHOC_DEFAULT', 1);
-}
-
 define('DB_MYSQL_CONNECT_RETRIES', 2);
 define('DB_DUMMY_SEPARATOR', "\O"); /* à garder entre double quotes. */
 
@@ -23,10 +18,10 @@ ini_set('mysql.connect_timeout', '2');
 class DataBase
 {
     /**
-     *
+     * @var array
      */
     protected static $_connections_params = [
-        DB_ADHOC_DEFAULT => [
+        0 => [
             'hasMaintenance' => false,
             'db_host'        => _DB_HOST_,
             'db_login'       => _DB_USER_,
@@ -75,7 +70,7 @@ class DataBase
     /**
      *
      */
-    protected function connect($conn_name = DB_ADHOC_DEFAULT)
+    protected function connect($conn_name = 0)
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
             throw new Exception('Serveur MySQL en maintenance');
@@ -112,20 +107,13 @@ class DataBase
             throw new Exception('Erreur connexion base MySQL');
         }
 
-        // on précise l'encodage à utiliser pour la connexion
-        // @TODO config docker
-        if (ENV !== 'PROD') {
-            $this->query("SET NAMES " . $this->_charset);
-            $this->query("SET CHARACTER SET " . $this->_charset);
-        }
-
         return $this->_current_conn[$conn_key];
     }
 
     /**
      *
      */
-    function close($conn_name = DB_ADHOC_DEFAULT)
+    function close($conn_name = 0)
     {
         $conn_key = self::generateConnectionKey($conn_name);
 
@@ -168,7 +156,7 @@ class DataBase
     /**
      *
      */
-    static function isServerInMaintenance($conn_name = DB_ADHOC_DEFAULT)
+    static function isServerInMaintenance($conn_name = 0)
     {
         return self::$_connections_params[$conn_name]['hasMaintenance'];
     }
@@ -240,7 +228,7 @@ class DataBase
     /**
      *
      */
-    function queryWithFetchAndClose($sql, $conn_name = DB_ADHOC_DEFAULT)
+    function queryWithFetchAndClose($sql, $conn_name = 0)
     {
         try {
             $res = $this->queryWithFetch($sql, $conn_name);
@@ -258,7 +246,7 @@ class DataBase
     /**
      *
      */
-    function queryWithFetchFirstRow($sql, $conn_name = DB_ADHOC_DEFAULT)
+    function queryWithFetchFirstRow($sql, $conn_name = 0)
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
@@ -278,7 +266,7 @@ class DataBase
     /**
      *
      */
-    function queryWithFetchFirstField($sql, $conn_name = DB_ADHOC_DEFAULT)
+    function queryWithFetchFirstField($sql, $conn_name = 0)
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
@@ -304,7 +292,7 @@ class DataBase
      *
      * @return array
      */
-    function queryWithFetchFirstFields($sql, $conn_name = DB_ADHOC_DEFAULT)
+    function queryWithFetchFirstFields($sql, $conn_name = 0)
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
@@ -328,7 +316,7 @@ class DataBase
     /**
      *
      */
-    function queryWithFetch($sql, $conn_name = DB_ADHOC_DEFAULT)
+    function queryWithFetch($sql, $conn_name = 0)
     {
         $rc = $this->query($sql, $conn_name);
         if (true === $rc) {
@@ -350,7 +338,7 @@ class DataBase
     /**
      *
      */
-    function query($sql, $conn_name = DB_ADHOC_DEFAULT, $closeConnectionOnError = true)
+    function query($sql, $conn_name = 0, $closeConnectionOnError = true)
     {
         $conn = $this->connect($conn_name);
 
@@ -450,7 +438,7 @@ class DataBase
      * $fieldsAndValues est un tableau ('fieldname' => $value), $value peut être
      * un tableau pour certaines fonction spéciales (NOW(), ...).
      */
-    function getInsertQuery($dbAndTableName, $fieldsAndValues, $conn_name = DB_ADHOC_DEFAULT)
+    function getInsertQuery($dbAndTableName, $fieldsAndValues, $conn_name = 0)
     {
         $dbAndTableName = trim((string) $dbAndTableName);
         if (empty($dbAndTableName)) {
@@ -483,7 +471,7 @@ class DataBase
     /**
      *
      */
-    function affectedRows($conn_name = DB_ADHOC_DEFAULT)
+    function affectedRows($conn_name = 0)
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
             throw new Exception('Serveur MySQL en maintenance');
@@ -500,7 +488,7 @@ class DataBase
     /**
      *
      */
-    function insertId(int $conn_name = DB_ADHOC_DEFAULT)
+    function insertId(int $conn_name = 0)
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
             throw new Exception('Serveur MySQL en maintenance');
@@ -516,7 +504,7 @@ class DataBase
     /**
      * Échappe proprement les chaines
      */
-    function escape(string $string, int $conn_name = DB_ADHOC_DEFAULT)
+    function escape(string $string, int $conn_name = 0)
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
             throw new Exception('Serveur MySQL en maintenance');

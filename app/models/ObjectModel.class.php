@@ -21,18 +21,21 @@ abstract class ObjectModel
 
     /**
      * Champ clé primaire de l'objet fils
+     *
      * @var string
      */
     protected static $_pk = '';
 
     /**
-     * table de la bdd utilisée par l'objet
+     * Table de la bdd utilisée par l'objet
+     *
      * @var string
      */
     protected static $_table = '';
 
     /**
      * Identifiant unique d'objet
+     *
      * @var string
      */
     protected $_object_id = '';
@@ -44,6 +47,7 @@ abstract class ObjectModel
      * - datetime/text (= str)
      * ceci est utile pour la formation de la requête
      * le tableau est défini dans les classes filles
+     *
      * @var array
      */
     protected static $_all_fields = [];
@@ -113,6 +117,16 @@ abstract class ObjectModel
     static function getDbTable(): string
     {
         return static::$_table;
+    }
+
+    /**
+     * Retourne le nom du champ de la clé primaire
+     *
+     * @return string
+     */
+    static function getDbPk(): string
+    {
+        return static::$_pk;
     }
 
     /**
@@ -305,9 +319,21 @@ abstract class ObjectModel
     }
 
     /**
+     * @param int $id id
+     *
+     * @return object
+     * @throws Exception
+     */
+    static function find(int $id): object
+    {
+        return static::getInstance($id);
+    }
+
+    /**
      * Retourne une collection d'instances
      *
      * @return array
+     * @throws Exception
      */
     static function findAll(): array
     {
@@ -325,6 +351,24 @@ abstract class ObjectModel
     }
 
     /**
+     * Affichage d'info de debug sur l'objet
+     *
+     * @return string
+     */
+    function __toString(): string
+    {
+        $out  = '';
+        $out .= 'class     : ' . __CLASS__ . "\n";
+        $out .= 'className : ' . static::class . "\n";
+        $out .= 'object_id : ' . $this->getObjectId() . "\n";
+        $out .= 'id        : ' . $this->getId() . "\n";
+        $out .= 'table     : ' . $this->getDbTable() . "\n";
+        $out .= 'pk        : ' . $this->getDbPk() . "\n";
+
+        return $out;
+    }
+
+    /**
      * Efface l'enregistrement dans la table relative à l'objet
      *
      * @return bool
@@ -333,10 +377,7 @@ abstract class ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . static::$_table . "` "
-             . "WHERE `" . static::$_pk . "` = " . (int) $this->getId();
-
-        $db->query($sql);
+        $db->query(sprintf('DELETE FROM `%s` WHERE `%s` = %d', $this->getDbTable(), $this->getDbPk(), $this->getId()));
 
         if ($db->affectedRows()) {
             return true;
@@ -364,7 +405,11 @@ abstract class ObjectModel
     }
 
     /**
+     * Conversion des champs issus de la db en propriétés typées de l'objet
+     *
      * @param array $data data
+     *
+     * @return bool
      */
     protected function _dbToObject(array $data)
     {
@@ -394,5 +439,7 @@ abstract class ObjectModel
                 }
             }
         }
+
+        return true;
     }
 }

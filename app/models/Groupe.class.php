@@ -420,27 +420,27 @@ class Groupe extends ObjectModel
     /**
      * Retourne la date de début d'activité
      *
-     * @return string
+     * @return string|null
      */
-    function getDatdeb()
+    function getDatdeb(): ?string
     {
-        if (Date::isDateOk($this->_datdeb)) {
-            return (string) $this->_datdeb;
+        if (!is_null($this->_datdeb) && Date::isDateOk($this->_datdeb)) {
+            return $this->_datdeb;
         }
-        return false;
+        return null;
     }
 
     /**
      * Retourne la date de fin d'activité
      *
-     * @return string
+     * @return string|null
      */
-    function getDatfin()
+    function getDatfin(): ?string
     {
-        if (Date::isDateOk($this->_datfin)) {
-            return (string) $this->_datfin;
+        if (!is_null($this->_datfin) && Date::isDateOk($this->_datfin)) {
+            return $this->_datfin;
         }
-        return false;
+        return null;
     }
 
     /**
@@ -448,9 +448,9 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    function getComment()
+    function getComment(): string
     {
-        return (string) $this->_comment;
+        return $this->_comment;
     }
 
     /**
@@ -458,9 +458,9 @@ class Groupe extends ObjectModel
      *
      * @return int
      */
-    function getEtat()
+    function getEtat(): int
     {
-        return (int) $this->_etat;
+        return $this->_etat;
     }
 
     /**
@@ -545,7 +545,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    static function getUrlFiche(string $ref)
+    static function getUrlFiche(string $ref): string
     {
         if (is_numeric($ref)) {
             $alias = Groupe::getAliasById((int) $ref);
@@ -630,6 +630,7 @@ class Groupe extends ObjectModel
         if ($this->_name !== $val) {
             $this->_name = $val;
             $this->_modified_fields['name'] = true;
+            $this->setAlias(self::genAlias($val));
         }
 
         return $this;
@@ -1095,17 +1096,16 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * Purge les membres d'un groupe
-     * (= efface les relations des membres avec ce groupe)
+     * Délie tous les membres d'un groupe
      *
-     * @return bool
+     * @return int
      */
-    function unlinkMembers(): bool
+    function unlinkMembers(): int
     {
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_appartient_a . "` "
-             . "WHERE `id_groupe` = " . (int) $this->getId();
+             . "WHERE `" . $this->getDbPk() . "` = " . (int) $this->getId();
 
         $db->query($sql);
 
@@ -1330,7 +1330,7 @@ class Groupe extends ObjectModel
 
         $sql = "SELECT `id_groupe` AS `id`, `name`, UPPER(SUBSTRING(`name`, 1, 1)) AS `lettre`, "
              . "`mini_text`, `style`, `alias`, `modified_on`, UNIX_TIMESTAMP(`modified_on`) AS `modified_on_ts`, `etat`, "
-             . "CONCAT('http://www.adhocmusic.com/', `alias`) AS `url` "
+             . "CONCAT('" . HOME_URL . "/', `alias`) AS `url` "
              . "FROM `" . Groupe::getDbTable() . "` "
              . "WHERE `online` "
              . "ORDER BY `etat` ASC, `name` ASC";
@@ -1362,11 +1362,11 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'id d'un groupe à partir de son alias
      *
-     * @param string $alias
+     * @param string $alias alias
      *
-     * @return int ou false
+     * @return int|null
      */
-    static function getIdByAlias($alias)
+    static function getIdByAlias(string $alias): ?int
     {
         $db = DataBase::getInstance();
 
@@ -1377,7 +1377,7 @@ class Groupe extends ObjectModel
         if ($id_groupe = $db->queryWithFetchFirstField($sql)) {
             return (int) $id_groupe;
         }
-        return false;
+        return null;
     }
 
     /**
@@ -1387,13 +1387,13 @@ class Groupe extends ObjectModel
      *
      * @return int
      */
-    static function getIdByFacebookPageId(int $fbpid)
+    static function getIdByFacebookPageId(int $fbpid): ?int
     {
         $db = DataBase::getInstance();
 
         // /!\ 64 bits
         if (!is_numeric($fbpid)) {
-            return false;
+            return null;
         }
 
         $sql = "SELECT `id_groupe` "
@@ -1403,7 +1403,7 @@ class Groupe extends ObjectModel
         if ($id_groupe = $db->queryWithFetchFirstField($sql)) {
             return (int) $id_groupe;
         }
-        return false;
+        return null;
     }
 
     /**
@@ -1721,7 +1721,7 @@ class Groupe extends ObjectModel
     static function genAlias(string $name): string
     {
         $alias = trim($name);
-        $alias = strtolower($alias);
+        $alias = mb_strtolower($alias);
         $alias = Tools::removeAccents($alias);
 
         $map_in  = ['/', '+', '|', '.', ' ', "'", '"', '&' , '(', ')', '!'];
@@ -1736,7 +1736,6 @@ class Groupe extends ObjectModel
      * Ajoute une visite à la fiche
      *
      * @todo getInstance / setVisite = getVisite + 1 / save
-     * @param int $id_groupe
      *
      * @return bool
      */

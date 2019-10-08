@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_audio` (
   `id_structure` int(11) NOT NULL DEFAULT '0',
   `name` varchar(250) NOT NULL,
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified_on` datetime DEFAULT NULL,
+  `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `online` tinyint(1) NOT NULL DEFAULT '0',
   `mime` varchar(100) NOT NULL,
   PRIMARY KEY (`id_audio`),
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_cms` (
   `breadcrumb` varchar(250) NOT NULL,
   `title` varchar(100) NOT NULL,
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified_on` datetime DEFAULT NULL,
+  `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `content` longtext NOT NULL,
   `online` tinyint(1) NOT NULL,
   `auth` int(11) NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_comment` (
   `type` char(1) NOT NULL,
   `id_content` int(11) NOT NULL,
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
-  `modified_on` datetime DEFAULT NULL,
+  `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `online` tinyint(1) NOT NULL,
   `id_contact` int(11) NOT NULL,
   `pseudo` varchar(50) DEFAULT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_event` (
   `facebook_event_id` char(20) NOT NULL,
   `facebook_event_attending` int(11) NOT NULL DEFAULT '0',
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified_on` datetime DEFAULT NULL,
+  `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_event`),
   KEY `id_lieu` (`id_lieu`),
   KEY `id_contact` (`id_contact`)
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_exposant` (
   `description` mediumtext NOT NULL,
   `state` mediumtext NOT NULL,
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified_on` datetime DEFAULT NULL,
+  `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_exposant`)
 );
 
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_message` (
   `id_message` int(11) NOT NULL AUTO_INCREMENT,
   `id_thread` int(11) NOT NULL,
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified_on` datetime DEFAULT NULL,
+  `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `modified_by` int(11) DEFAULT NULL,
   `text` text NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_thread` (
   `id_forum` char(1) NOT NULL,
   `id_thread` int(11) NOT NULL,
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified_on` datetime DEFAULT NULL,
+  `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `modified_by` int(11) DEFAULT NULL,
   `nb_messages` int(11) NOT NULL DEFAULT '0',
@@ -198,8 +198,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_groupe` (
   `id_departement` char(3) NOT NULL DEFAULT '',
   `online` tinyint(1) NOT NULL DEFAULT '0',
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
-  `modified_on` datetime DEFAULT NULL,
-  `cotised_on` datetime DEFAULT NULL,
+  `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `datdeb` date DEFAULT NULL,
   `datfin` date DEFAULT NULL,
   `comment` text NOT NULL,
@@ -233,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_lieu` (
   `email` varchar(250) NOT NULL DEFAULT '',
   `id_country` char(2) NOT NULL DEFAULT 'FR',
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
-  `modified_on` datetime DEFAULT NULL,
+  `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `id_contact` int(11) NOT NULL DEFAULT '0',
   `online` tinyint(1) NOT NULL DEFAULT '0',
   `lat` float DEFAULT NULL,
@@ -277,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_membre` (
   `mailing` char(1) NOT NULL DEFAULT '1',
   `level` tinyint(4) NOT NULL DEFAULT '1',
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
-  `modified_on` datetime DEFAULT NULL,
+  `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `visited_on` datetime DEFAULT NULL,
   PRIMARY KEY (`id_contact`),
   CONSTRAINT `fk_membre_contact`
@@ -358,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_photo` (
   `_height` int(11) NOT NULL DEFAULT '0',
   `_width` int(11) NOT NULL DEFAULT '0',
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
-  `modified_on` datetime DEFAULT NULL,
+  `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `online` tinyint(1) NOT NULL DEFAULT '0',
   `credits` varchar(200) NOT NULL DEFAULT '',
   PRIMARY KEY (`id_photo`),
@@ -397,6 +396,12 @@ CREATE TABLE IF NOT EXISTS `adhoc_structure` (
   KEY `id_pays` (`id_country`)
 );
 
+CREATE TABLE IF NOT EXISTS `adhoc_style` (
+  `id_style` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) NOT NULL,
+  PRIMARY KEY (`id_style`)
+);
+
 CREATE TABLE IF NOT EXISTS `adhoc_subscription` (
   `id_subscription` int(11) NOT NULL AUTO_INCREMENT,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -412,6 +417,12 @@ CREATE TABLE IF NOT EXISTS `adhoc_subscription` (
   KEY `id_contact` (`id_contact`)
 );
 
+CREATE TABLE IF NOT EXISTS `adhoc_type_musicien` (
+  `id_type_musicien` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) NOT NULL,
+  PRIMARY KEY (`id_type_musicien`)
+);
+
 CREATE TABLE IF NOT EXISTS `adhoc_video` (
   `id_video` int(11) NOT NULL AUTO_INCREMENT,
   `id_contact` int(11) NOT NULL DEFAULT '1',
@@ -424,7 +435,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_video` (
   `name` varchar(250) NOT NULL,
   `text` mediumtext NOT NULL,
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified_on` datetime DEFAULT NULL,
+  `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `online` tinyint(1) NOT NULL DEFAULT '0',
   `width` mediumint(9) NOT NULL DEFAULT '0',
   `height` mediumint(9) NOT NULL DEFAULT '0',

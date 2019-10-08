@@ -7,7 +7,12 @@
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-$styles = ["Rock",
+$s = Style::find(1);
+echo $s;
+die;
+
+$styles = [
+  "Rock",
        "Reggae",
      "Techno",
       "Métal",
