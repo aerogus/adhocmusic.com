@@ -242,9 +242,8 @@ final class Controller
                 'id_groupe' => (int) Route::params('id_groupe'),
                 'id_lieu' => (int) Route::params('id_lieu'),
                 'id_event' => (int) Route::params('id_event'),
-                'id_structure' => 0,
                 'id_contact' => $_SESSION['membre']->getId(),
-                'online' => true,
+                'online' => (bool) Route::params('online'),
                 'code' => (string) Route::params('code'),
                 'reference' => (string) Route::params('reference'),
             ];
@@ -261,7 +260,6 @@ final class Controller
                     ->setIdGroupe($data['id_groupe'])
                     ->setIdLieu($data['id_lieu'])
                     ->setIdEvent($data['id_event'])
-                    ->setIdStructure($data['id_structure'])
                     ->setIdContact($data['id_contact'])
                     ->setOnline($data['online'])
                     ->setIdHost($data['id_host'])
@@ -276,7 +274,7 @@ final class Controller
 
                 Log::action(Log::ACTION_VIDEO_CREATE, $video->getId());
 
-                Tools::redirect('/medias/?create=1');
+                Tools::redirect('/videos/my');
 
             } else {
 
@@ -396,7 +394,7 @@ final class Controller
 
                 Log::action(Log::ACTION_VIDEO_EDIT, $video->getId());
 
-                Tools::redirect('/medias/?edit=1');
+                Tools::redirect('/videos/my');
 
             } else {
 
@@ -467,7 +465,7 @@ final class Controller
         if (Tools::isSubmit('form-video-delete')) {
             if ($video->delete()) {
                 Log::action(Log::ACTION_VIDEO_DELETE, $video->getId());
-                Tools::redirect('/medias/?delete=1');
+                Tools::redirect('/videos/my');
             }
         }
 

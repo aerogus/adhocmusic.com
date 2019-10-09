@@ -58,8 +58,8 @@
       </select>
     </li>
     <li>
-      <input id="online" class="switch" type="checkbox" name="online"{if $video->getOnline()} checked="checked"{/if}>
-      <label for="online">Afficher</label>
+      <label for="online">Afficher publiquement</label>
+      <input class="switch" type="checkbox" name="online"{if $video->getOnline()} checked="checked"{/if}>
     </li>
   </ul>
   <input id="form-video-edit-submit" name="form-video-edit-submit" type="submit" class="button" value="Enregistrer">

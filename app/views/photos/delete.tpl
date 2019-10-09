@@ -6,45 +6,43 @@
 
 {else}
 
-{include file="common/boxstart.tpl" boxtitle="Supprimer une photo"}
-<form id="form-photo-delete" name="form-photo-delete" method="post" action="/photos/delete">
-  <fieldset>
-    <ul>
-      <li>
-        <img src="{$photo->getThumb400Url()}" alt="">
-      </li>
-      <li>
-        Titre :
-        {$photo->getName()|escape}
-      </li>
-      <li>
-        Photographe :
-        {$photo->getCredits()|escape}
-      </li>
-      {if !empty($groupe)}
-      <li>
-        Groupe :
-        {$groupe->getName()|escape}
-      </li>
-      {/if}
-      {if !empty($event)}
-      <li>
-        Evénement :
-        {$event->getDate()} - {$event->getName()|escape}
-      </li>
-      {/if}
-      {if !empty($lieu)}
-      <li>
-        Lieu :
-        {$lieu->getIdDepartement()} - {$lieu->getName()|escape}
-      </li>
-      {/if}
-    </ul>
-  </fieldset>
-  <input id="form-photo-delete-submit" name="form-photo-delete-submit" type="submit" class="button" value="Supprimer">
-  <input type="hidden" name="id" value="{$photo->getId()}">
-</form>
-{include file="common/boxend.tpl"}
+<div class="box">
+  <header>
+    <h1>Supprimer une photo</h1>
+  </header>
+  <div>
+    <form id="form-photo-delete" name="form-photo-delete" method="post" action="/photos/delete">
+      <ul>
+        <li>
+          <img src="{$photo->getThumb400Url()}" alt="">
+        </li>
+        <li>
+          Titre : {$photo->getName()|escape}
+        </li>
+        <li>
+          Photographe : {$photo->getCredits()|escape}
+        </li>
+        {if !empty($groupe)}
+        <li>
+          Groupe : {$groupe->getName()|escape}
+        </li>
+        {/if}
+        {if !empty($event)}
+        <li>
+          Événement : {$event->getDate()} - {$event->getName()|escape}
+        </li>
+        {/if}
+        {if !empty($lieu)}
+        <li>
+          Lieu : {$lieu->getIdDepartement()} - {$lieu->getName()|escape}
+        </li>
+        {/if}
+      </ul>
+      <input id="form-photo-delete-submit" name="form-photo-delete-submit" type="submit" class="button" value="Supprimer">
+      <input type="hidden" name="id" value="{$photo->getId()}">
+    </form>
+  </div>
+</div>
 
 {/if}
 

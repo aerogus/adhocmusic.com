@@ -587,7 +587,11 @@ class Membre extends Contact
             $this->_groupes = $db->queryWithFetch($sql);
 
             foreach ($this->_groupes as $key => $groupe) {
-                $this->_groupes[$key]['type_musicien_name'] = TypeMusicien::getInstance((int) $groupe['id_type_musicien'])->getName();
+                try {
+                    $this->_groupes[$key]['type_musicien_name'] = TypeMusicien::getInstance((int) $groupe['id_type_musicien'])->getName();
+                } catch (Exception $e) {
+                    $this->_groupes[$key]['type_musicien_name'] = 'non défini';
+                }
                 $this->_groupes[$key]['url'] = Groupe::getUrlFiche($groupe['alias']);
             }
         }
@@ -1653,12 +1657,8 @@ class Membre extends Contact
      *
      * @return int
      */
-    static function getIdByEmail(string $email = null)
+    static function getIdByEmail(string $email): int
     {
-        if (is_null($email)) {
-            return 0;
-        }
-
         if (!Email::validate($email)) {
             throw new Exception('email syntaxiquement incorrect');
         }

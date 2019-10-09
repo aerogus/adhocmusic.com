@@ -23,7 +23,7 @@
           <input type="hidden" name="id_groupe" value="{$groupe->getId()}">
           <span>{$groupe->getName()}</span>
         {else}
-          <div class="infobulle error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier cette musique à soit un groupe, soit un lieu, soit un événement</div>
+          <div class="infobulle error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier cette musique à un groupe, un lieu ou un événement</div>
           <select id="id_groupe" name="id_groupe">
             <option value="0">Aucun</option>
             {foreach $groupes as $groupe}
@@ -62,6 +62,10 @@
             <option value="0">Aucun</option>
           </select>
         {/if}
+        </li>
+        <li>
+          <label for="online">Afficher publiquement</label>
+          <input class="switch" type="checkbox" name="online" checked="checked">
         </li>
       </ul>
       <input id="form-audio-create-submit" name="form-audio-create-submit" class="button" type="submit" value="Enregistrer">

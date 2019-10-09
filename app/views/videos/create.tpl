@@ -64,6 +64,10 @@
           </select>
           {/if}
         </li>
+        <li>
+          <label for="online">Afficher publiquement</label>
+          <input class="switch" type="checkbox" name="online" checked="checked">
+        </li>
       </ul>
       <input id="form-video-create-submit" name="form-video-create-submit" class="button" type="submit" value="Enregistrer">
     </form>

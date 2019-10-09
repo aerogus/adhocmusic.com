@@ -123,12 +123,12 @@ class Contact extends ObjectModel
      * Extraction de l'id_contact a partir de l'email (celui-ci étant unique)
      * sinon si email null, retourne un tableau des id_contact avec email null
      *
-     * @param string $email
+     * @param string $email email
      *
      * @return int
      * @throws Exception
      */
-    static function getIdByEmail(string $email)
+    static function getIdByEmail(string $email): int
     {
         if (!Email::validate($email)) {
             throw new Exception('email syntaxiquement incorrect');
@@ -138,9 +138,9 @@ class Contact extends ObjectModel
 
         $sql = "SELECT `id_contact` "
              . "FROM `" . Contact::getDbTable() . "` "
-             ." WHERE `email` = '".$db->escape($email)."'";
+             ." WHERE `email` = '" . $db->escape($email) . "'";
 
-        return $db->queryWithFetchFirstField($sql);
+        return (int) $db->queryWithFetchFirstField($sql);
     }
 
     /**
@@ -150,17 +150,17 @@ class Contact extends ObjectModel
      * @return bool
      * @deprecated doublon avec getIdByEmail
      */
-     static function isEmailFound(string $email)
+     static function isEmailFound(string $email): bool
      {
-         $db   = DataBase::getInstance();
+         $db = DataBase::getInstance();
 
-         $sql  = "SELECT `id_contact` "
-               . "FROM `" . Contact::getDbTable() . "` "
-               . "WHERE `email` = '" . $db->escape($email) . "'";
+         $sql = "SELECT `id_contact` "
+              . "FROM `" . Contact::getDbTable() . "` "
+              . "WHERE `email` = '" . $db->escape($email) . "'";
 
-         $res  = $db->query($sql);
+         $res = $db->query($sql);
 
-         return $db->numRows($res);
+         return (bool) $db->numRows($res);
     }
 
     /* fin getters */

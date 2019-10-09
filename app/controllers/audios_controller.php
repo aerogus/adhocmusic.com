@@ -188,14 +188,12 @@ final class Controller
             set_time_limit(0); // l'upload peut prendre du temps !
 
             $data = [
-                'name'         => trim((string) Route::params('name')),
-                'id_groupe'    => (int) Route::params('id_groupe'),
-                'id_lieu'      => (int) Route::params('id_lieu'),
-                'id_event'     => (int) Route::params('id_event'),
-                'id_contact'   => (int) $_SESSION['membre']->getId(),
-                'id_structure' => 0,
-                'text'         => '',
-                'online'       => true,
+                'name'       => trim((string) Route::params('name')),
+                'id_groupe'  => (int) Route::params('id_groupe'),
+                'id_lieu'    => (int) Route::params('id_lieu'),
+                'id_event'   => (int) Route::params('id_event'),
+                'id_contact' => (int) $_SESSION['membre']->getId(),
+                'online'     => (bool) Route::params('online'),
             ];
             $errors = [];
 
@@ -206,7 +204,6 @@ final class Controller
                     ->setIdLieu($data['id_lieu'])
                     ->setIdEvent($data['id_event'])
                     ->setIdContact($data['id_contact'])
-                    ->setIdStructure($data['id_structure'])
                     ->setOnline($data['online'])
                     ->setCreatedNow();
                 if ($audio->save()) {
@@ -219,7 +216,7 @@ final class Controller
                         mail(DEBUG_EMAIL, 'bug audio create', 'bug audio create');
                     }
                     Log::action(Log::ACTION_AUDIO_CREATE, $audio->getId());
-                    Tools::redirect('/medias/?create=1');
+                    Tools::redirect('/audios/my');
                 } else {
                     $smarty->assign('error_generic', true);
                 }
@@ -318,7 +315,6 @@ final class Controller
                 'id_lieu' => (int) Route::params('id_lieu'),
                 'id_contact' => (int) $_SESSION['membre']->getId(),
                 'id_event' => (int) Route::params('id_event'),
-                /*'id_structure' => (int) Route::params('id_structure'),*/
                 'id_groupe' => (int) Route::params('id_groupe'),
                 'online' => (bool) Route::params('online'),
             ];
@@ -342,7 +338,7 @@ final class Controller
                         file_put_contents(Audio::getBasePath() . '/' . $audio->getId() . '.mp3', $content);
                     }
                     Log::action(Log::ACTION_AUDIO_EDIT, $audio->getId());
-                    Tools::redirect('/medias/?edit=1');
+                    Tools::redirect('/audios/my');
                 } else {
                     $smarty->assign('error_generic', true);
                 }
@@ -412,7 +408,7 @@ final class Controller
         if (Tools::isSubmit('form-audio-delete')) {
             if ($audio->delete()) {
                 Log::action(Log::ACTION_AUDIO_DELETE, $audio->getId());
-                Tools::redirect('/medias/?delete=1');
+                Tools::redirect('/audios/my');
             } else {
                 $errors['generic'] = true;
             }

@@ -59,8 +59,8 @@
           </select>
         </li>
         <li>
-          <label for="online">Afficher</label>
-          <span id="online">{$audio->getOnline()}</span>
+          <label for="online">Afficher publiquement</label>
+          <input class="switch" type="checkbox" name="online"{if $audio->getOnline()} checked="checked"{/if}>
         </li>
         <li>
           <label for="created_on">Envoyé par</label>
@@ -78,8 +78,6 @@
       </ul>
       <input id="form-audio-edit-submit" name="form-audio-edit-submit" class="button" type="submit" value="Enregistrer">
       <input type="hidden" name="id" value="{$audio->getId()}">
-      <input type="hidden" name="online" value="{$audio->getOnline()}">
-      <input type="hidden" name="id_structure" value="{$audio->getIdStructure()}">
     </form>
 
 {/if} {* test unknown audio *}
