@@ -65,12 +65,12 @@ class Email
      * @param string ou array $to
      * @param string $subject
      * @param string $tplName
-     * @param array $data
+     * @param array  $data
      * @param string $attachment
      *
      * @return bool
      */
-    static function send($to = '', string $subject = 'sans sujet', string $tplName = 'default', array $data = [], string $attachment = null)
+    static function send($to = '', string $subject = 'sans sujet', string $tplName = 'default', array $data = [], string $attachment = null): bool
     {
         $subject = trim($subject);
 
