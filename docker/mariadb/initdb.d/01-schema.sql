@@ -209,6 +209,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_alerting` (
   `id_content` int(11) NOT NULL,
   PRIMARY KEY (`id_alerting`),
   KEY `id_contact` (`id_contact`),
+  KEY `active` (`active`),
   CONSTRAINT `fk_alerting_contact` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`)
 );
 
@@ -290,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_event` (
   KEY `id_lieu` (`id_lieu`),
   KEY `id_contact` (`id_contact`),
   KEY `online` (`online`),
-  CONSTRAINT `fk_event_contact` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`),
+  CONSTRAINT `fk_event_membre` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`),
   CONSTRAINT `fk_event_lieu` FOREIGN KEY (`id_lieu`) REFERENCES `adhoc_lieu` (`id_lieu`)
 );
 
@@ -348,7 +349,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_info` (
   `nb_threads` int(11) NOT NULL DEFAULT '0',
   `id_thread` int(11) DEFAULT NULL,
   `id_contact` int(11) DEFAULT NULL,
-  `date` datetime NOT NULL,
+  `date` datetime DEFAULT NULL,
   PRIMARY KEY (`id_forum`),
   CONSTRAINT `fk_forum_membre` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`)
 );

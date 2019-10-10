@@ -1,4 +1,5 @@
 INSERT INTO `adhoc_type_musicien` (`id_type_musicien`, `name`) VALUES
+(0, 'Non défini'),
 (1, 'Batteur'),
 (2, 'Guitariste'),
 (3, 'Bassiste'),
@@ -19,4 +20,5 @@ INSERT INTO `adhoc_type_musicien` (`id_type_musicien`, `name`) VALUES
 (18, 'Ingénieur son'),
 (19, 'Ingénieur lumière'),
 (20, 'Violoniste'),
-(21, 'Violoncelliste');
+(21, 'Violoncelliste'),
+(22, 'Contrebassiste');
