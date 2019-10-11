@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_membre_adhoc` (
 CREATE TABLE IF NOT EXISTS `adhoc_log_action` (
   `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `action` bigint(20) NOT NULL,
-  `id_contact` int(10) UNSIGNED NOT NULL,
+  `id_contact` int(10) UNSIGNED DEFAULT NULL,
   `ip` varchar(40) NOT NULL,
   `host` varchar(100) NOT NULL,
   `extra` tinytext,
