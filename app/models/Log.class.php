@@ -130,7 +130,7 @@ class Log
     {
         $db = DataBase::getInstance();
 
-        $id_contact = null;
+        $id_contact = 'NULL';
         $pseudo = '';
         if (!empty($_SESSION['membre'])) {
             $id_contact = (int) $_SESSION['membre']->getId();
