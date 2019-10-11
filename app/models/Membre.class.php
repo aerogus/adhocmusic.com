@@ -1121,9 +1121,14 @@ class Membre extends Contact
             // id retrouvé à partir de email ?
             if ($this->getEmail() && ($id_contact = Contact::getIdByEmail($this->getEmail()))) {
 
+                // l'id_contact est retrouvé à partir de l'email, c'est donc déjà un Contact
+                // on ne touche pas à la table, on charge juste l'id
+
                 $this->setId($id_contact);
 
             } else {
+
+                // l'id_contact n'a pas été trouvé à partir de l'email, on doit créer un Contact
 
                 $sql = "INSERT INTO `" . Contact::getDbTable() . "` (";
                 foreach ($fields['contact'] as $field => $type) {
@@ -1171,6 +1176,10 @@ class Membre extends Contact
                 $this->setId((int) $db->insertId());
 
             }
+
+        }
+
+        if (!Membre::getPseudoById($this->getId())) { // INSERT
 
             /* table membre */
 
@@ -1235,16 +1244,17 @@ class Membre extends Contact
                         $att = '_' . $field;
                         switch ($fields['contact'][$field]) {
                             case 'num':
-                                $fields_to_save .= " `" . $field . "` = ".$db->escape($this->$att).",";
+                            case 'float':
+                                $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
                             case 'str':
-                                $fields_to_save .= " `" . $field . "` = '".$db->escape($this->$att)."',";
+                                $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
-                                $fields_to_save .= " `" . $field . "` = ".(((bool) $this->$att) ? 'TRUE' : 'FALSE').",";
+                                $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
                                 break;
                             case 'pwd':
-                                $fields_to_save .= " `" . $field . "` = PASSWORD('".$db->escape($this->$att)."'),";
+                                $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
                                 break;
                             case 'phpser':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
@@ -1280,10 +1290,11 @@ class Membre extends Contact
                         $att = '_' . $field;
                         switch ($fields['membre'][$field]) {
                             case 'num':
-                                $fields_to_save .= " `" . $field . "` = ".$db->escape($this->$att).",";
+                            case 'float':
+                                $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
                             case 'str':
-                                $fields_to_save .= " `" . $field . "` = '".$db->escape($this->$att)."',";
+                                $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
                                 $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
@@ -1327,13 +1338,12 @@ class Membre extends Contact
      */
     protected function _loadFromDb(): bool
     {
-        if (!parent::_loadFromDb()) {
-            throw new Exception('Membre introuvable');
-        }
-
         $db = DataBase::getInstance();
 
-        $sql  = "SELECT * FROM `" . Membre::getDbTable() . "` WHERE `" . static::$_pk . "` = " . (int) $this->{'_' . static::$_pk};
+        $sql  = "SELECT *
+                 FROM `" . Membre::getDbTable() . "`, `". Contact::getDbTable() . "`
+                 WHERE `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = `" . Contact::getDbTable() . "`.`" . Contact::getDbPk() . "`
+                 AND `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = " . (int) $this->{'_' . Membre::getDbPk()};
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);

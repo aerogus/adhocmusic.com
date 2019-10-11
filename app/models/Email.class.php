@@ -116,7 +116,6 @@ class Email
             }
         }
 
-        $mail->getAdd
         if (!is_null($attachment)) {
             $mail->AddStringAttachment($attachment, $_FILES[$attachment]['name'], 'base64', $_FILES[$attachment]['type']);
         }

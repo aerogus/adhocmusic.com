@@ -56,6 +56,7 @@ class Contact extends ObjectModel
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
      *
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
+     *
      * @var array
      */
     protected $_modified_fields = [
@@ -214,6 +215,27 @@ class Contact extends ObjectModel
     /* fin setters */
 
     /**
+     * Charge toutes les infos d'une entité
+     *
+     * @return bool
+     * @throws Exception
+     */
+    protected function _loadFromDb(): bool
+    {
+        $db = DataBase::getInstance();
+
+        $sql  = "SELECT *
+                 FROM `" . Contact::getDbTable() . "`
+                 WHERE `" . Contact::getDbPk() . "` = " . (int) $this->{'_' . Contact::getDbPk()};
+
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
+            $this->_dbToObject($res);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Suppression d'un contact
      *
      * @todo vérification des liaisons avec table membre
@@ -297,9 +319,9 @@ class Contact extends ObjectModel
             $this->setId((int) $db->insertId());
 
             return $this->getId();
-        }
-        else // UPDATE
-        {
+
+        } else { // UPDATE
+
             if (count($this->_modified_fields['contact']) === 0) {
                 return true; // pas de changement
             }

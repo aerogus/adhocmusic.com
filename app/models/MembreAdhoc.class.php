@@ -49,19 +49,21 @@ class MembreAdhoc extends Membre
      * - numérique/integer/float/bool (= int)
      * - datetime/text (= str)
      * ceci est utile pour la formation de la requête
+     *
      * @var array
      */
     protected static $_all_fields = [
-        'function'        => 'str',
-        'birth_date'      => 'date',
-        'active'          => 'bool',
-        'rank'            => 'num',
+        'function'   => 'str',
+        'birth_date' => 'date',
+        'active'     => 'bool',
+        'rank'       => 'num',
     ];
 
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
      *
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
+     *
      * @var array
      */
     protected $_modified_fields = [
@@ -213,7 +215,7 @@ class MembreAdhoc extends Membre
     /**
      * Retourne les données des membres internes
      *
-     * @param bool $active
+     * @param bool $active membre actif ?
      *
      * @return array
      */
@@ -260,17 +262,11 @@ class MembreAdhoc extends Membre
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `c`.`email`, `m`.`pseudo`, "
-             . "`m`.`password`, `m`.`last_name`, `m`.`first_name`, "
-             . "`m`.`site`, `m`.`text`, `m`.`created_on`, "
-             . "`m`.`modified_on`, `m`.`visited_on`, "
-             . "`m`.`address`, `m`.`cp`, `m`.`city`, "
-             . "`m`.`country`, `m`.`facebook_uid`, "
-             . "`m`.`tel`, `m`.`port`, "
-             . "`m`.`mailing`, `c`.`lastnl` "
-             . "FROM `" . Contact::getDbTable() . "` `c`, `" . Membre::getDbTable() . "` `m` "
-             . "WHERE `m`.`id_contact` = `c`.`id_contact` "
-             . "AND `m`.`id_contact` = " . (int) $this->_id_contact;
+        $sql  = "SELECT *
+                 FROM `" . MembreAdhoc::getDbTable() . "`, `" . Membre::getDbTable() . "`, `". Contact::getDbTable() . "`
+                 WHERE `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "`
+                  AND `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = `" . Contact::getDbTable() . "`.`" . Contact::getDbPk() . "`
+                  AND `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = " . (int) $this->{'_' . MembreAdhoc::getDbPk()};
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
@@ -325,6 +321,7 @@ class MembreAdhoc extends Membre
                         $att = '_' . $field;
                         switch ($type) {
                             case 'num':
+                            case 'float':
                                 $sql .= $db->escape($this->$att) . ",";
                                 break;
                             case 'str':
@@ -367,9 +364,9 @@ class MembreAdhoc extends Membre
 
             foreach ($fields['membre'] as $field => $type) {
                 $att = '_' . $field;
-                switch ($type)
-                {
+                switch ($type) {
                     case 'num':
+                    case 'float':
                         $sql .= $db->escape($this->$att) . ",";
                         break;
                     case 'str':
@@ -407,9 +404,9 @@ class MembreAdhoc extends Membre
 
             foreach ($fields['membre_adhoc'] as $field => $type) {
                 $att = '_' . $field;
-                switch ($type)
-                {
+                switch ($type) {
                     case 'num':
+                    case 'float':
                         $sql .= $db->escape($this->$att) . ",";
                         break;
                     case 'str':
@@ -455,6 +452,7 @@ class MembreAdhoc extends Membre
                         $att = '_' . $field;
                         switch ($fields['contact'][$field]) {
                             case 'num':
+                            case 'float':
                                 $fields_to_save .= " `" . $field."` = " . $db->escape($this->$att) . ",";
                                 break;
                             case 'str':
@@ -500,6 +498,7 @@ class MembreAdhoc extends Membre
                         $att = '_' . $field;
                         switch ($fields['membre'][$field]) {
                             case 'num':
+                            case 'float':
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
                             case 'str':
@@ -545,6 +544,7 @@ class MembreAdhoc extends Membre
                         $att = '_' . $field;
                         switch ($fields['membre_adhoc'][$field]) {
                             case 'num':
+                            case 'float':
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
                             case 'str':
