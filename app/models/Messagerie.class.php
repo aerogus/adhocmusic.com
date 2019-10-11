@@ -55,7 +55,7 @@ class Messagerie extends ObjectModel
     }
 
     /**
-     *
+     * @return bool
      */
     static function deleteInstance(): bool
     {
@@ -69,18 +69,18 @@ class Messagerie extends ObjectModel
     /**
      * Envoi un message privé
      *
-     * @param int    $to   id_contact destinataire
-     * @param string $text message
+     * @param int    $id_to id_contact du destinataire
+     * @param string $text  message
      *
      * @return false ou int
      */
-    function sendMessage(int $to, string $text): int
+    function sendMessage(int $id_to, string $text): int
     {
         $db = DataBase::getInstance();
 
         $sql = "INSERT INTO `" . Messagerie::getDbTable() . "` "
-             . "(`from`, `to`, `text`, `date`) "
-             . "VALUES(" . (int) $this->_id_contact . ", " . (int) $to . ", '" . $db->escape($text) . "', NOW())";
+             . "(`id_from`, `id_to`, `text`, `date`) "
+             . "VALUES(" . (int) $this->_id_contact . ", " . (int) $id_to . ", '" . $db->escape($text) . "', NOW())";
 
         $db->query($sql);
 
@@ -98,7 +98,7 @@ class Messagerie extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `id_pm`, `from`, `to`, `text`, `date`, `read`, `del_from`, `del_to` "
+        $sql = "SELECT `id_pm`, `id_from`, `id_to`, `text`, `date`, `read`, `del_from`, `del_to` "
              . "FROM `" . Messagerie::getDbTable() . "` "
              . "WHERE `id_pm` = " . (int) $id_pm;
 
@@ -108,6 +108,8 @@ class Messagerie extends ObjectModel
     /**
      * Compte le nombre de messages non lus par la personne loguée
      *
+     * @todo différente avec la méthode suivante ?
+     *
      * @return int
      */
     function getUnreadMessagesCount(): int
@@ -116,14 +118,16 @@ class Messagerie extends ObjectModel
 
         $sql = "SELECT COUNT(`id_pm`) "
              . "FROM `" . Messagerie::getDbTable() . "` "
-             . "WHERE `to` = " . (int) $this->_id_contact . " "
-             . "AND `read` = FALSE";
+             . "WHERE `id_to` = " . (int) $this->_id_contact . " "
+             . "AND `read_to` = FALSE";
 
         return (int) $db->queryWithFetchFirstField($sql);
     }
 
     /**
      * Compte le nombre de messages non lus par la personne loguée
+     *
+     * @todo différente avec la méthode précédente ?
      *
      * @return int
      */
@@ -134,7 +138,7 @@ class Messagerie extends ObjectModel
         $sql = "SELECT COUNT(`id_pm`) "
              . "FROM `" . Messagerie::getDbTable() . "` "
              . "WHERE `to` = " . (int) $_SESSION['membre']->getId() . " "
-             . "AND `read` = FALSE "
+             . "AND `read_to` = FALSE "
              . "AND `del_to` = FALSE";
 
         return (int) $db->queryWithFetchFirstField($sql);
@@ -151,7 +155,7 @@ class Messagerie extends ObjectModel
 
         $sql = "SELECT COUNT(`id_pm`) "
              . "FROM `" . Messagerie::getDbTable() . "` "
-             . "WHERE `from` = " . (int) $this->_id_contact . " "
+             . "WHERE `id_from` = " . (int) $this->_id_contact . " "
              . "AND `del_from` = FALSE";
 
         return (int) $db->queryWithFetchFirstField($sql);
@@ -168,7 +172,7 @@ class Messagerie extends ObjectModel
 
         $sql = "SELECT COUNT(`id_pm`) "
              . "FROM `" . Messagerie::getDbTable() . "` "
-             . "WHERE `to` = " . (int) $this->_id_contact . " "
+             . "WHERE `id_to` = " . (int) $this->_id_contact . " "
              . "AND `del_to` = FALSE";
 
         return (int) $db->queryWithFetchFirstField($sql);
@@ -185,7 +189,7 @@ class Messagerie extends ObjectModel
 
         $sql = "SELECT COUNT(`id_pm`) "
              . "FROM `" . Messagerie::getDbTable() . "` "
-             . "WHERE `to` = " . (int) $_SESSION['membre']->getId() . " "
+             . "WHERE `id_to` = " . (int) $_SESSION['membre']->getId() . " "
              . "AND `del_to` = FALSE";
 
         return (int) $db->queryWithFetchFirstField($sql);
@@ -205,7 +209,7 @@ class Messagerie extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `id_pm`, `from`, `to`, `text`, `date`, `read`, `del_from`, `del_to` "
+        $sql = "SELECT `id_pm`, `id_from`, `id_to`, `text`, `date`, `read_to`, `del_from`, `del_to` "
              . "FROM `" . Messagerie::getDbTable() . "` "
              . "WHERE 1 ";
 
@@ -216,11 +220,11 @@ class Messagerie extends ObjectModel
                 break;
 
             case 'recus':
-                $sql .= "AND `to` = " . (int) $this->_id_contact . " AND `del_to` = FALSE ";
+                $sql .= "AND `id_to` = " . (int) $this->_id_contact . " AND `del_to` = FALSE ";
                 break;
 
             case 'sent':
-                $sql .= "AND `from` = " . (int) $this->_id_contact . " AND `del_from` = FALSE ";
+                $sql .= "AND `id_from` = " . (int) $this->_id_contact . " AND `del_from` = FALSE ";
                 break;
 
             default:
@@ -240,12 +244,12 @@ class Messagerie extends ObjectModel
      *
      * @return bool
      */
-    function setRead(int $id_pm)
+    function setRead(int $id_pm): bool
     {
         $db = DataBase::getInstance();
 
         $sql = "UPDATE `" . Messagerie::getDbTable() . "` "
-             . "SET `read` = TRUE "
+             . "SET `read_to` = TRUE "
              . "WHERE `id_pm` = " . (int) $id_pm;
 
         $db->query($sql);

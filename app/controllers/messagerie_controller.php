@@ -24,19 +24,19 @@ final class Controller
 
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `p`.`id_pm` AS `id`, `m`.`pseudo`, `p`.`from`, `p`.`date`, `p`.`read`, `p`.`text` "
+        $sql = "SELECT `p`.`id_pm` AS `id`, `m`.`pseudo`, `p`.`id_from`, `p`.`date`, `p`.`read_to`, `p`.`text` "
              . "FROM `adhoc_messagerie` `p`, `adhoc_membre` `m` "
              . "WHERE `p`.`from` = `m`.`id_contact` "
-             . "AND `p`.`to` = " . (int) $_SESSION['membre']->getId() . " "
+             . "AND `p`.`id_to` = " . (int) $_SESSION['membre']->getId() . " "
              . "AND `p`.`del_to` = FALSE "
              . "ORDER BY `p`.`date` DESC";
 
         $smarty->assign('inbox', $db->queryWithFetch($sql));
 
-        $sql = "SELECT `p`.`id_pm` AS `id`, `m`.`pseudo`, `p`.`to`, `p`.`date`, `p`.`read`, `p`.`text` "
+        $sql = "SELECT `p`.`id_pm` AS `id`, `m`.`pseudo`, `p`.`to`, `p`.`date`, `p`.`read_to`, `p`.`text` "
              . "FROM `adhoc_messagerie` `p`, `adhoc_membre` `m` "
-             . "WHERE `p`.`to` = `m`.`id_contact` "
-             . "AND `p`.`from` = " . (int) $_SESSION['membre']->getId() . " "
+             . "WHERE `p`.`id_to` = `m`.`id_contact` "
+             . "AND `p`.`id_from` = " . (int) $_SESSION['membre']->getId() . " "
              . "AND `p`.`del_from` = FALSE "
              . "ORDER BY `p`.`date` DESC";
 
@@ -65,12 +65,12 @@ final class Controller
 
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `m`.`pseudo`, `p`.`from`, `p`.`to`, `p`.`date`, `p`.`read`, `p`.`text` "
+        $sql = "SELECT `m`.`pseudo`, `p`.`id_from`, `p`.`id_to`, `p`.`date`, `p`.`read_to`, `p`.`text` "
              . "FROM `adhoc_messagerie` `p`, `adhoc_membre` `m` "
-             . "WHERE `p`.`from` = `m`.`id_contact` "
+             . "WHERE `p`.`id_from` = `m`.`id_contact` "
              . "AND `p`.`id_pm` = " . (int) $id . " "
              . "AND `p`.`del_to` = FALSE "
-             . "AND (`p`.`from` = " . (int) $_SESSION['membre']->getId() . " OR `p`.`to` = " . (int) $_SESSION['membre']->getId() . ")";
+             . "AND (`p`.`id_from` = " . (int) $_SESSION['membre']->getId() . " OR `p`.`id_to` = " . (int) $_SESSION['membre']->getId() . ")";
 
         $msg = $db->queryWithFetchFirstRow($sql);
         $smarty->assign('msg', $msg);
@@ -80,7 +80,7 @@ final class Controller
         $smarty->assign('id_from', $_SESSION['membre']->getId());
 
         $sql = "UPDATE `adhoc_messagerie` "
-             . "SET `read` = 1 "
+             . "SET `read_to` = 1 "
              . "WHERE `id_pm` = " . (int) $id;
 
         $db->query($sql);
@@ -111,7 +111,7 @@ final class Controller
             $db = DataBase::getInstance();
 
             $sql = "INSERT INTO `adhoc_messagerie` "
-                 . "(`from`, `to`, `text`, `date`) "
+                 . "(`id_from`, `id_to`, `text`, `date`) "
                  . "VALUES (" . (int) $_SESSION['membre']->getId() . ", " . (int) $to . ", '" . $db->escape($text) . "', NOW())";
 
             $db->query($sql);
@@ -172,8 +172,8 @@ final class Controller
         $sql = "UPDATE `adhoc_messagerie` "
              . "SET `" . $champ . "` = TRUE "
              . "WHERE `id_pm` = " . (int) $id . " "
-             . "AND (`from` = " . (int) $_SESSION['membre']->getId() . " "
-             . "OR `to` = " . (int) $_SESSION['membre']->getId() . ")";
+             . "AND (`id_from` = " . (int) $_SESSION['membre']->getId() . " "
+             . "OR `id_to` = " . (int) $_SESSION['membre']->getId() . ")";
 
         $db->query($sql);
 

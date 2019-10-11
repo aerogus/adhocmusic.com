@@ -77,7 +77,6 @@ final class Controller
         Trail::getInstance()->addStep("Équipe");
 
         $smarty->assign('membres', MembreAdhoc::getStaff(true));
-        $smarty->assign('omembres', MembreAdhoc::getStaff(false));
 
         return $smarty->fetch('assoce/equipe.tpl');
     }

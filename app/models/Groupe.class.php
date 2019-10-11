@@ -1741,26 +1741,6 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * Ajoute une visite à la fiche
-     *
-     * @todo getInstance / setVisite = getVisite + 1 / save
-     *
-     * @return bool
-     */
-    function addVisite(): bool
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "UPDATE `" . Groupe::getDbTable() . "` "
-             . "SET `visite` = `visite` + 1 "
-             . "WHERE `id_groupe` = " . (int) $this->getId();
-
-        $res = $db->query($sql);
-
-        return $db->affectedRows($res);
-    }
-
-    /**
      * Récupère les groupes ayant au moins un audio
      *
      * @return array

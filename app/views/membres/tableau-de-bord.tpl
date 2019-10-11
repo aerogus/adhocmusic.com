@@ -45,7 +45,7 @@
           <label for="avatar">Avatar</label>
         </li>
       </ul>
-      <p><a href="/membres/edit">Editer mes infos persos</a></p>
+      <p><a href="/membres/edit">Éditer mes infos persos</a></p>
       <p><a href="/auth/logout">Déconnexion</a></p>
     </div>
   </div>
@@ -68,7 +68,7 @@
         </tr>
         {foreach from=$inbox key=cpt item=msg}
         <tr class="{if $cpt is odd}odd{else}even{/if}">
-          <td><img src="/img/icones/{if !empty($msg.read)}email_open.png{else}email.png{/if}" alt=""></td>
+          <td><img src="/img/icones/{if !empty($msg.read_to)}email_open.png{else}email.png{/if}" alt=""></td>
           <td><a href="/messagerie/write?pseudo={$msg.pseudo|escape}">{$msg.pseudo|escape}</a></td>
           <td>{$msg.date|date_format:'%d/%m/%Y à %H:%M'}</td>
           <td><a href="/messagerie/read/{$msg.id|escape}">{$msg.text|truncate:40|escape}</a></td>
