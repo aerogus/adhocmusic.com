@@ -380,10 +380,10 @@ final class Controller
 
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `p`.`id_pm` AS `id`, `m`.`pseudo`, `p`.`from`, `p`.`date`, `p`.`read`, `p`.`text` "
+        $sql = "SELECT `p`.`id_pm` AS `id`, `m`.`pseudo`, `p`.`id_from`, `p`.`date`, `p`.`read_to`, `p`.`text` "
              . "FROM `adhoc_messagerie` `p`, `adhoc_membre` `m` "
-             . "WHERE `p`.`from` = `m`.`id_contact` "
-             . "AND `p`.`to` = " . (int) $_SESSION['membre']->getId() . " "
+             . "WHERE `p`.`id_from` = `m`.`id_contact` "
+             . "AND `p`.`id_to` = " . (int) $_SESSION['membre']->getId() . " "
              . "AND `p`.`del_to` = FALSE "
              . "ORDER BY `p`.`date` DESC "
              . "LIMIT 0, 5";

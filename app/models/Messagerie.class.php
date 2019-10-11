@@ -137,7 +137,7 @@ class Messagerie extends ObjectModel
 
         $sql = "SELECT COUNT(`id_pm`) "
              . "FROM `" . Messagerie::getDbTable() . "` "
-             . "WHERE `to` = " . (int) $_SESSION['membre']->getId() . " "
+             . "WHERE `id_to` = " . (int) $_SESSION['membre']->getId() . " "
              . "AND `read_to` = FALSE "
              . "AND `del_to` = FALSE";
 
