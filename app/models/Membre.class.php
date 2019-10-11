@@ -19,32 +19,6 @@ class Membre extends Contact
     const TYPE_ADMIN     = 0x10; // 10000
 
     /**
-     * Liste des types musiciens
-     */
-    const TYPE_MUSICIEN_NON =  1;
-    const TYPE_MUSICIEN_BAT =  2;
-    const TYPE_MUSICIEN_GTR =  3;
-    const TYPE_MUSICIEN_BAS =  4;
-    const TYPE_MUSICIEN_CHA =  5;
-    const TYPE_MUSICIEN_CHO =  6;
-    const TYPE_MUSICIEN_SAX =  7;
-    const TYPE_MUSICIEN_FLU =  8;
-    const TYPE_MUSICIEN_TRP =  9;
-    const TYPE_MUSICIEN_TRB = 10;
-    const TYPE_MUSICIEN_PRC = 11;
-    const TYPE_MUSICIEN_ORG = 12;
-    const TYPE_MUSICIEN_CLA = 13;
-    const TYPE_MUSICIEN_SAM = 14;
-    const TYPE_MUSICIEN_PIA = 15;
-    const TYPE_MUSICIEN_MAN = 16;
-    const TYPE_MUSICIEN_DJ  = 17;
-    const TYPE_MUSICIEN_VJ  = 18;
-    const TYPE_MUSICIEN_SON = 19;
-    const TYPE_MUSICIEN_LUM = 20;
-    const TYPE_MUSICIEN_VLN = 21;
-    const TYPE_MUSICIEN_VLC = 22;
-
-    /**
      * Tableau des types de membre
      *
      * @var array
@@ -55,36 +29,6 @@ class Membre extends Contact
         self::TYPE_INTERNE   => "Interne",
         self::TYPE_BONUS     => "Bonus",
         self::TYPE_ADMIN     => "Administrateur",
-    ];
-
-    /**
-     * Tableau des types de musicien
-     *
-     * @var array
-     */
-    protected static $_types_musicien = [
-        self::TYPE_MUSICIEN_NON => " Non précisé",
-        self::TYPE_MUSICIEN_BAT => "Batteur",
-        self::TYPE_MUSICIEN_GTR => "Guitariste",
-        self::TYPE_MUSICIEN_BAS => "Bassiste",
-        self::TYPE_MUSICIEN_CHA => "Chanteur",
-        self::TYPE_MUSICIEN_CHO => "Choriste",
-        self::TYPE_MUSICIEN_SAX => "Saxophoniste",
-        self::TYPE_MUSICIEN_FLU => "Flûtiste",
-        self::TYPE_MUSICIEN_TRP => "Trompettiste",
-        self::TYPE_MUSICIEN_TRB => "Tromboniste",
-        self::TYPE_MUSICIEN_PRC => "Percussioniste",
-        self::TYPE_MUSICIEN_ORG => "Organiste",
-        self::TYPE_MUSICIEN_CLA => "Clavieriste",
-        self::TYPE_MUSICIEN_SAM => "Sampliste",
-        self::TYPE_MUSICIEN_PIA => "Pianiste",
-        self::TYPE_MUSICIEN_MAN => "Manager",
-        self::TYPE_MUSICIEN_DJ  => "DJ",
-        self::TYPE_MUSICIEN_VJ  => "VJ",
-        self::TYPE_MUSICIEN_SON => "Ingénieur son",
-        self::TYPE_MUSICIEN_LUM => "Ingénieur lumière",
-        self::TYPE_MUSICIEN_VLN => "Violoniste",
-        self::TYPE_MUSICIEN_VLC => "Violoncelliste",
     ];
 
     /**
@@ -597,18 +541,6 @@ class Membre extends Contact
         }
 
         return $this->_groupes;
-    }
-
-    /**
-     * @return string|null
-     * @todo uniquement dans MembreAdhoc ?
-     */
-    function getAvatarInterne(): ?string
-    {
-        if (file_exists(self::getBasePath() . '/ca/' . $this->getId() . '.jpg')) {
-            return self::getBaseUrl() . '/ca/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
-        }
-        return null;
     }
 
     /**

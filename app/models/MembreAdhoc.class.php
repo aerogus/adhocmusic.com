@@ -281,6 +281,18 @@ class MembreAdhoc extends Membre
     }
 
     /**
+     * @return string|null
+     * @todo uniquement dans MembreAdhoc ?
+     */
+    function getAvatarInterne(): ?string
+    {
+        if (file_exists(self::getBasePath() . '/ca/' . $this->getId() . '.jpg')) {
+            return self::getBaseUrl() . '/ca/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        }
+        return null;
+    }
+
+    /**
      * Sauve en DB tables contact, membre et membre_adhoc
      */
     function save()

@@ -22,7 +22,7 @@ class Email
      *
      * @return bool true if email is valid
      */
-    static function validate($email)
+    static function validate(string $email): bool
     {
         if (preg_match(EMAIL_VALIDATE_REGEXP, $email)) {
             return true;
@@ -43,13 +43,12 @@ class Email
      */
     static function crypt(string $email, string $mode = '1')
     {
-        $str    = "";
+        $str    = '';
         $length = mb_strlen($email);
-        switch ($mode)
-        {
-            case "1":
-            for ($cpt = 0 ; $cpt < $length ; $cpt++ ) {
-                $str .= '&#'.ord($email[$cpt]).';';
+        switch ($mode) {
+            case '1':
+            for ($cpt = 0 ; $cpt < $length ; $cpt++) {
+                $str .= '&#' . ord($email[$cpt]) . ';';
             }
             break;
 
@@ -99,13 +98,25 @@ class Email
         $mail->WordWrap = 78;
 
         if (is_array($to)) {
+            $cpt = 0;
             foreach ($to as $_to) {
-                $mail->AddAddress($_to);
+                if (Email::validate($_to)) {
+                    $mail->AddAddress($_to);
+                    $cpt++;
+                }
+            }
+            if ($cpt === 0) {
+                return false;
             }
         } else {
-            $mail->AddAddress($to);
+            if (Email::validate($to)) {
+                $mail->AddAddress($to);
+            } else {
+                return false;
+            }
         }
 
+        $mail->getAdd
         if (!is_null($attachment)) {
             $mail->AddStringAttachment($attachment, $_FILES[$attachment]['name'], 'base64', $_FILES[$attachment]['type']);
         }
