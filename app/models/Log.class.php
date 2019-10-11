@@ -130,7 +130,7 @@ class Log
     {
         $db = DataBase::getInstance();
 
-        $id_contact = 0;
+        $id_contact = null;
         $pseudo = '';
         if (!empty($_SESSION['membre'])) {
             $id_contact = (int) $_SESSION['membre']->getId();
@@ -167,7 +167,7 @@ class Log
              . "`id_contact`, `extra`, "
              . "`ip`, `host`) "
              . "VALUES(NOW(), " . (int) $action . ", "
-             . (int) $id_contact . ", '".$db->escape($extra)."', "
+             . $id_contact . ", '".$db->escape($extra)."', "
              . "'" . $db->escape($ip) . "', '" . $db->escape($host) . "')";
 
         return $db->query($sql);
