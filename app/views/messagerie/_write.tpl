@@ -6,7 +6,7 @@
       <textarea id="text" name="text" cols="50" rows="10"></textarea>
     </li>
     <li>
-      <input type="hidden" id="id_to" name="id_to" value="{$id_to|escape}">
+      <input type="hidden" id="to" name="to" value="{$id_to|escape}">
       <input id="form-message-write-submit" name="form-message-write-submit" type="submit" value="Envoyer">
     </li>
   </ul>

@@ -26,14 +26,14 @@ final class Controller
 
         $sql = "SELECT `p`.`id_pm` AS `id`, `m`.`pseudo`, `p`.`id_from`, `p`.`date`, `p`.`read_to`, `p`.`text` "
              . "FROM `adhoc_messagerie` `p`, `adhoc_membre` `m` "
-             . "WHERE `p`.`from` = `m`.`id_contact` "
+             . "WHERE `p`.`id_from` = `m`.`id_contact` "
              . "AND `p`.`id_to` = " . (int) $_SESSION['membre']->getId() . " "
              . "AND `p`.`del_to` = FALSE "
              . "ORDER BY `p`.`date` DESC";
 
         $smarty->assign('inbox', $db->queryWithFetch($sql));
 
-        $sql = "SELECT `p`.`id_pm` AS `id`, `m`.`pseudo`, `p`.`to`, `p`.`date`, `p`.`read_to`, `p`.`text` "
+        $sql = "SELECT `p`.`id_pm` AS `id`, `m`.`pseudo`, `p`.`id_to`, `p`.`date`, `p`.`read_to`, `p`.`text` "
              . "FROM `adhoc_messagerie` `p`, `adhoc_membre` `m` "
              . "WHERE `p`.`id_to` = `m`.`id_contact` "
              . "AND `p`.`id_from` = " . (int) $_SESSION['membre']->getId() . " "
@@ -76,7 +76,7 @@ final class Controller
         $smarty->assign('msg', $msg);
 
         $smarty->assign('pseudo_to', $msg['pseudo']);
-        $smarty->assign('id_to', $msg['from']);
+        $smarty->assign('id_to', $msg['id_from']);
         $smarty->assign('id_from', $_SESSION['membre']->getId());
 
         $sql = "UPDATE `adhoc_messagerie` "
