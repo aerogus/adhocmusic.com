@@ -49,87 +49,87 @@ class Membre extends Contact
     /**
      * @var string
      */
-    protected $_pseudo = '';
+    protected $_pseudo = null;
 
     /**
      * @var string
      */
-    protected $_password = '';
+    protected $_password = null;
 
     /**
      * @var string
      */
-    protected $_last_name = '';
+    protected $_last_name = null;
 
     /**
      * @var string
      */
-    protected $_first_name = '';
+    protected $_first_name = null;
 
     /**
      * @var string
      */
-    protected $_address = '';
+    protected $_address = null;
 
     /**
      * @var string
      */
-    protected $_cp = '';
+    protected $_cp = null;
 
     /**
      * @var string
      */
-    protected $_city = '';
+    protected $_city = null;
 
     /**
      * @var string
      */
-    protected $_country = '';
+    protected $_country = null;
 
     /**
      * @var int
      */
-    protected $_id_city = 0;
+    protected $_id_city = null;
 
     /**
      * @var string
      */
-    protected $_id_departement = '';
+    protected $_id_departement = null;
 
     /**
      * @var string
      */
-    protected $_id_region = '';
+    protected $_id_region = null;
 
     /**
      * @var string
      */
-    protected $_id_country = '';
+    protected $_id_country = null;
 
     /**
      * @var string
      */
-    protected $_tel = '';
+    protected $_tel = null;
 
     /**
      * @var string
      */
-    protected $_port = '';
+    protected $_port = null;
 
     /**
      * @var string
      */
-    protected $_site = '';
+    protected $_site = null;
 
     /**
      * @var string
      */
-    protected $_text = '';
+    protected $_text = null;
 
     /**
      * @var bool
      */
-    protected $_mailing = true;
+    protected $_mailing = false;
 
     /**
      * @var int
@@ -245,166 +245,130 @@ class Membre extends Contact
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getPseudo(): string
+    function getPseudo(): ?string
     {
         return $this->_pseudo;
     }
 
     /**
-     * @return string
+     * @return string|null
      * /!\ sous forme cryptée mysql
      */
-    function getPassword(): string
+    function getPassword(): ?string
     {
         return $this->_password;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getLastName(): string
+    function getLastName(): ?string
     {
         return $this->_last_name;
     }
 
     /**
-     * Extraction du nom
-     *
-     * @param int $id_contact id_contact
-     *
-     * @return string
+     * @return string|null
      */
-    static function getLastNameById(int $id_contact): string
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `last_name` "
-             . "FROM `" . Membre::getDbTable() . "` "
-             . "WHERE `id_contact` = " . (int) $id_contact;
-
-        return $db->queryWithFetchFirstField($sql);
-    }
-
-    /**
-     * @return string
-     */
-    function getFirstName(): string
+    function getFirstName(): ?string
     {
         return $this->_first_name;
     }
 
     /**
-     * Extraction du prénom
-     *
-     * @param int $id_contact id_contact
-     *
-     * @return string
+     * @return string|null
      */
-    static function getFirstNameById(int $id_contact)
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `first_name` "
-             . "FROM `" . Membre::getDbTable() . "` "
-             . "WHERE `id_contact` = " . (int) $id_contact;
-
-        return $db->queryWithFetchFirstField($sql);
-    }
-
-    /**
-     * @return string
-     */
-    function getAddress(): string
+    function getAddress(): ?string
     {
         return $this->_address;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getCp(): string
+    function getCp(): ?string
     {
         return $this->_cp;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getCity(): string
+    function getCity(): ?string
     {
         return $this->_city;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getCountry(): string
+    function getCountry(): ?string
     {
         return $this->_country;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    function getIdCity(): int
+    function getIdCity(): ?int
     {
         return $this->_id_city;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getIdDepartement(): string
+    function getIdDepartement(): ?string
     {
         return $this->_id_departement;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getIdRegion(): string
+    function getIdRegion(): ?string
     {
         return $this->_id_region;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getIdCountry(): string
+    function getIdCountry(): ?string
     {
         return $this->_id_country;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getTel(): string
+    function getTel(): ?string
     {
         return $this->_tel;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getPort(): string
+    function getPort(): ?string
     {
         return $this->_port;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getSite(): string
+    function getSite(): ?string
     {
         return $this->_site;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getText(): string
+    function getText(): ?string
     {
         return $this->_text;
     }
@@ -571,11 +535,11 @@ class Membre extends Contact
     /* début setters */
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setPseudo(string $val): object
+    function setPseudo(?string $val): object
     {
         if ($this->_pseudo !== $val) {
             $this->_pseudo = $val;
@@ -586,12 +550,12 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      * /!\ le donner sous forme cryptée mysql ?
      *
      * @return object
      */
-    function setPassword(string $val): object
+    function setPassword(?string $val): object
     {
         if ($this->_password !== $val) {
             $this->_password = $val;
@@ -602,11 +566,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setLastName(string $val): object
+    function setLastName(?string $val): object
     {
         if ($this->_last_name !== $val) {
             $this->_last_name = $val;
@@ -617,11 +581,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setFirstName(string $val): object
+    function setFirstName(?string $val): object
     {
         if ($this->_first_name !== $val) {
             $this->_first_name = $val;
@@ -632,11 +596,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setAddress(string $val): object
+    function setAddress(?string $val): object
     {
         if ($this->_address !== $val) {
             $this->_address = $val;
@@ -647,11 +611,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setCp(string $val): object
+    function setCp(?string $val): object
     {
         if ($this->_cp !== $val) {
             $this->_cp = $val;
@@ -662,11 +626,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setCity(string $val): object
+    function setCity(?string $val): object
     {
         if ($this->_city !== $val) {
             $this->_city = $val;
@@ -677,11 +641,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setCountry(string $val): object
+    function setCountry(?string $val): object
     {
         if ($this->_country !== $val) {
             $this->_country = $val;
@@ -692,11 +656,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param int $val val
+     * @param int|null $val val
      *
      * @return object
      */
-    function setIdCity(int $val): object
+    function setIdCity(?int $val): object
     {
         if ($this->_id_city !== $val) {
             $this->_id_city = $val;
@@ -707,11 +671,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setIdDepartement(string $val): object
+    function setIdDepartement(?string $val): object
     {
         if ($this->_id_departement !== $val) {
             $this->_id_departement = $val;
@@ -722,11 +686,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      * 
      * @return object
      */
-    function setIdRegion(string $val): object
+    function setIdRegion(?string $val): object
     {
         if ($this->_id_region !== $val) {
             $this->_id_region = $val;
@@ -737,11 +701,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setIdCountry(string $val): object
+    function setIdCountry(?string $val): object
     {
         if ($this->_id_country !== $val) {
             $this->_id_country = $val;
@@ -752,11 +716,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setTel(string $val): object
+    function setTel(?string $val): object
     {
         if ($this->_tel !== $val) {
             $this->_tel = $val;
@@ -767,11 +731,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setPort(string $val): object
+    function setPort(?string $val): object
     {
         if ($this->_port !== $val) {
             $this->_port = $val;
@@ -782,11 +746,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setSite(string $val): object
+    function setSite(?string $val): object
     {
         if ($this->_site !== $val) {
             $this->_site = $val;
@@ -797,11 +761,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setText(string $val): object
+    function setText(?string $val): object
     {
         if ($this->_text !== $val) {
             $this->_text = $val;
@@ -827,14 +791,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param int $val val
+     * @param int $level level
      *
      * @return object
      */
-    function setLevel(int $val): object
+    function setLevel(int $level): object
     {
-        if ($this->_level !== $val) {
-            $this->_level = $val;
+        if ($this->_level !== $level) {
+            $this->_level = $level;
             $this->_modified_fields['membre']['level'] = true;
         }
 
@@ -842,14 +806,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string $created_on date de création "YYYY-MM-DD HH:II:SS"
      *
      * @return object
      */
-    function setCreatedOn(string $val): object
+    function setCreatedOn(string $created_on): object
     {
-        if ($this->_created_on !== $val) {
-            $this->_created_on = $val;
+        if ($this->_created_on !== $created_on) {
+            $this->_created_on = $created_on;
             $this->_modified_fields['membre']['created_on'] = true;
         }
 
@@ -871,14 +835,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $modified_on date de modification "YYYY-MM-DD HH:II:SS"
      *
      * @return object
      */
-    function setModifiedOn(string $val): object
+    function setModifiedOn(?string $modified_on): object
     {
-        if ($this->_modified_on !== $val) {
-            $this->_modified_on = $val;
+        if ($this->_modified_on !== $modified_on) {
+            $this->_modified_on = $modified_on;
             $this->_modified_fields['membre']['modified_on'] = true;
         }
 
@@ -900,14 +864,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $val val
+     * @param string|null $visited_on date de dernière connexion "YYYY-MM-DD HH:II:SS"
      *
      * @return object
      */
-    function setVisitedOn(string $val): object
+    function setVisitedOn(?string $visited_on): object
     {
-        if ($this->_visited_on !== $val) {
-            $this->_visited_on = $val;
+        if ($this->_visited_on !== $visited_on) {
+            $this->_visited_on = $visited_on;
             $this->_modified_fields['membre']['visited_on'] = true;
         }
 
@@ -955,7 +919,6 @@ class Membre extends Contact
         if ($id_groupe) {
             $sql .= "AND `g`.`id_groupe` = " . (int) $id_groupe;
         }
-
 
         $res = $db->queryWithFetch($sql);
         $tab = [];
@@ -1123,6 +1086,7 @@ class Membre extends Contact
     {
         $db = DataBase::getInstance();
 
+        // retourne les champs non fusionnés
         $fields = self::_getAllFields(false);
 
         // si pas d'id ou id mais n'est pas membre, on insert membre
@@ -1140,16 +1104,94 @@ class Membre extends Contact
 
             } else {
 
-                // l'id_contact n'a pas été trouvé à partir de l'email, on doit créer un Contact
+                // l'id_contact n'a pas été trouvé à partir de l'email
+                // on doit donc d'abord créer un Contact
 
-                $sql = "INSERT INTO `" . Contact::getDbTable() . "` (";
-                foreach ($fields['contact'] as $field => $type) {
-                    $sql .= "`" . $field . "`,";
+                $sql = 'INSERT INTO `' . Contact::getDbTable() . '` (';
+                if (count($this->_modified_fields['contact']) > 0) {
+                    foreach ($this->_modified_fields['contact'] as $field => $value) {
+                        if ($value === true) {
+                            $sql .= '`' . $field . '`,';
+                        }
+                    }
+                    $sql = substr($sql, 0, -1);
+                }
+                $sql .= ') VALUES (';
+
+                if (count($this->_modified_fields['contact']) > 0) {
+                    foreach ($this->_modified_fields['contact'] as $field => $value) {
+                        if ($value !== true) {
+                            continue;
+                        }
+                        $type = $fields['contact'][$field];
+                        $att = '_' . $field;
+                        if (is_null($this->$att)) {
+                            $sql .= 'NULL,';
+                        } else {
+                            switch ($type) {
+                                case 'num':
+                                case 'float':
+                                    $sql .= $db->escape((string) $this->$att) . ',';
+                                    break;
+                                case 'str':
+                                    $sql .= "'" . $db->escape($this->$att) . "',";
+                                    break;
+                                case 'bool':
+                                    $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
+                                    break;
+                                case 'pwd':
+                                    $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
+                                    break;
+                                case 'phpser':
+                                    $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
+                                    break;
+                                case 'date':
+                                    $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                                    break;
+                                default:
+                                    throw new Exception('invalid field type : ' . $type);
+                                    break;
+                            }
+                        }
+                    }
+                    $sql = substr($sql, 0, -1);
+                }
+                $sql .= ')';
+
+                $db->query($sql);
+
+                $this->setId((int) $db->insertId());
+
+            }
+
+        }
+
+        // à ce stade le contact est créé, on ne sait pas encore si c'est un membre
+        // on essaye de récupérer le pseudo à partir de l'id_contact
+
+        if (!Membre::getPseudoById($this->getId())) { // INSERT
+
+            /* table membre */
+
+            $sql = 'INSERT INTO `' . Membre::getDbTable() . '` (';
+            $sql .= '`' . Membre::getDbPk() . '`,';
+            if (count($this->_modified_fields['membre']) > 0) {
+                foreach ($this->_modified_fields['membre'] as $field => $value) {
+                    if ($value === true) {
+                        $sql .= '`' . $field . '`,';
+                    }
                 }
                 $sql = substr($sql, 0, -1);
-                $sql .= ") VALUES (";
+            }
+            $sql .= ') VALUES (';
+            $sql .= (int) $this->getId() . ',';
 
-                foreach ($fields['contact'] as $field => $type) {
+            if (count($this->_modified_fields['membre']) > 0) {
+                foreach ($this->_modified_fields['membre'] as $field => $value) {
+                    if ($value !== true) {
+                        continue;
+                    }
+                    $type = $fields['membre'][$field];
                     $att = '_' . $field;
                     if (is_null($this->$att)) {
                         $sql .= 'NULL,';
@@ -1181,60 +1223,12 @@ class Membre extends Contact
                     }
                 }
                 $sql = substr($sql, 0, -1);
-                $sql .= ")";
-
-                $db->query($sql);
-
-                $this->setId((int) $db->insertId());
-
             }
-
-        }
-
-        if (!Membre::getPseudoById($this->getId())) { // INSERT
-
-            /* table membre */
-
-            $sql = "INSERT INTO `" . Membre::getDbTable() . "` (";
-            $sql .= "`id_contact`,";
-            foreach ($fields['membre'] as $field => $type) {
-                $sql .= "`" . $field . "`,";
-            }
-            $sql = substr($sql, 0, -1);
-            $sql .= ") VALUES (";
-            $sql .= (int) $this->getId() . ",";
-
-            foreach ($fields['membre'] as $field => $type) {
-                $att = '_' . $field;
-                switch ($type) {
-                    case 'num':
-                    case 'float':
-                        $sql .= $db->escape((string) $this->$att) . ",";
-                        break;
-                    case 'str':
-                        $sql .= "'" . $db->escape($this->$att) . "',";
-                        break;
-                    case 'bool':
-                        $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
-                        break;
-                    case 'pwd':
-                        $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
-                        break;
-                    case 'phpser':
-                        $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
-                        break;
-                    case 'date':
-                        $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
-                        break;
-                    default:
-                        throw new Exception('invalid field type : ' . $type);
-                        break;
-                }
-            }
-            $sql = substr($sql, 0, -1);
-            $sql .= ")";
+            $sql .= ')';
 
             $db->query($sql);
+
+            // nouveau membre bien créé !
 
             return $this->getId();
 
@@ -1243,48 +1237,49 @@ class Membre extends Contact
             if ((count($this->_modified_fields['contact']) === 0)
                 && (count($this->_modified_fields['membre']) === 0)
             ) {
-                return true; // pas de changement
+                return true; // pas de changement, ni dans Contact ni dans Membre
             }
 
-            /* table contact */
+            /* UPDATE contact */
 
             if (count($this->_modified_fields['contact']) > 0) {
 
                 $fields_to_save = '';
                 foreach ($this->_modified_fields['contact'] as $field => $value) {
-                    if ($value === true) {
-                        $att = '_' . $field;
-                        switch ($fields['contact'][$field]) {
-                            case 'num':
-                            case 'float':
-                                $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
-                                break;
-                            case 'str':
-                                $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
-                                break;
-                            case 'bool':
-                                $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
-                                break;
-                            case 'pwd':
-                                $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
-                                break;
-                            case 'phpser':
-                                $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            case 'date':
-                                $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
-                                break;
-                            default:
-                                throw new Exception('invalid field type : ' . $fields['contact'][$field]);
-                                break;
-                        }
+                    if ($value !== true) {
+                        continue;
+                    }
+                    $att = '_' . $field;
+                    switch ($fields['contact'][$field]) {
+                        case 'num':
+                        case 'float':
+                            $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
+                            break;
+                        case 'str':
+                            $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
+                            break;
+                        case 'bool':
+                            $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
+                            break;
+                        case 'pwd':
+                            $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
+                            break;
+                        case 'phpser':
+                            $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
+                            break;
+                        case 'date':
+                            $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                            break;
+                        default:
+                            throw new Exception('invalid field type : ' . $fields['contact'][$field]);
+                            break;
                     }
                 }
                 $fields_to_save = substr($fields_to_save, 0, -1);
 
-                $sql  = "UPDATE `" . Contact::getDbTable() . "` "
-                      . "SET " . $fields_to_save . " "
-                      . "WHERE `id_contact` = " . (int) $this->_id_contact;
+                $sql  = 'UPDATE `' . Contact::getDbTable() . '` '
+                      . 'SET ' . $fields_to_save . ' '
+                      . 'WHERE `' . Contact::getDbPk() . '` = ' . (int) $this->getId();
 
                 $this->_modified_fields['contact'] = [];
 
@@ -1292,45 +1287,46 @@ class Membre extends Contact
 
             }
 
-            /* table membre */
+            /* UPDATE membre */
 
             if (count($this->_modified_fields['membre']) > 0) {
 
                 $fields_to_save = '';
                 foreach ($this->_modified_fields['membre'] as $field => $value) {
-                    if ($value === true) {
-                        $att = '_' . $field;
-                        switch ($fields['membre'][$field]) {
-                            case 'num':
-                            case 'float':
-                                $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
-                                break;
-                            case 'str':
-                                $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
-                                break;
-                            case 'bool':
-                                $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
-                                break;
-                            case 'pwd':
-                                $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
-                                break;
-                            case 'phpser':
-                                $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            case 'date':
-                                $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
-                                break;
-                            default:
-                                throw new Exception('invalid field type : ' . $fields['membre'][$field]);
-                                break;
-                        }
+                    if ($value !== true) {
+                        continue;
+                    }
+                    $att = '_' . $field;
+                    switch ($fields['membre'][$field]) {
+                        case 'num':
+                        case 'float':
+                            $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
+                            break;
+                        case 'str':
+                            $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
+                            break;
+                        case 'bool':
+                            $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
+                            break;
+                        case 'pwd':
+                            $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
+                            break;
+                        case 'phpser':
+                            $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
+                            break;
+                        case 'date':
+                            $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                            break;
+                        default:
+                            throw new Exception('invalid field type : ' . $fields['membre'][$field]);
+                            break;
                     }
                 }
                 $fields_to_save = substr($fields_to_save, 0, -1);
 
-                $sql  = "UPDATE `" . Membre::getDbTable() . "` "
-                      . "SET " . $fields_to_save . " "
-                      . "WHERE `id_contact` = " . (int) $this->_id_contact;
+                $sql = 'UPDATE `' . Membre::getDbTable() . '` '
+                     . 'SET ' . $fields_to_save . ' '
+                     . 'WHERE `' . Membre::getDbPk() . '` = ' . (int) $this->getId();
 
                 $this->_modified_fields['membre'] = [];
 

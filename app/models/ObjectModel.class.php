@@ -210,54 +210,55 @@ abstract class ObjectModel
 
         if (!$this->getId()) { // INSERT
 
-            $sql = "INSERT INTO `" . static::$_table . "` (";
+            $sql = 'INSERT INTO `' . $this->getDbTable() . '` (';
 
             if (count($this->_modified_fields) > 0) {
                 foreach ($this->_modified_fields as $field => $value) {
                     if ($value === true) {
-                        $sql .= "`" . $field . "`,";
+                        $sql .= '`' . $field . '`,';
                     }
                 }
                 $sql = substr($sql, 0, -1);
             }
-            $sql .= ") VALUES (";
+            $sql .= ') VALUES (';
 
             if (count($this->_modified_fields) > 0) {
                 foreach ($this->_modified_fields as $field => $value) {
-                    if ($value === true) {
-                        $att = '_' . $field;
-                        switch (static::$_all_fields[$field]) {
-                            case 'num':
-                                $sql .= (int) $this->$att . ',';
-                                break;
-                            case 'float':
-                                $sql .= number_format((float) $this->$att, 8, '.', '') . ',';
-                                break;
-                            case 'str':
-                                $sql .= "'" . $db->escape($this->$att) . "',";
-                                break;
-                            case 'date':
-                                $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
-                                break;
-                            case 'bool':
-                                $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
-                                break;
-                            case 'pwd':
-                                $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
-                                break;
-                            case 'phpser':
-                                $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            default:
-                                throw new Exception('invalid field type: ' . $type);
-                                break;
-                        }
+                    if ($value !== true) {
+                        continue;
+                    }
+                    $att = '_' . $field;
+                    switch (static::$_all_fields[$field]) {
+                        case 'num':
+                            $sql .= (int) $this->$att . ',';
+                            break;
+                        case 'float':
+                            $sql .= number_format((float) $this->$att, 8, '.', '') . ',';
+                            break;
+                        case 'str':
+                            $sql .= "'" . $db->escape($this->$att) . "',";
+                            break;
+                        case 'date':
+                            $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                            break;
+                        case 'bool':
+                            $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
+                            break;
+                        case 'pwd':
+                            $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
+                            break;
+                        case 'phpser':
+                            $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
+                            break;
+                        default:
+                            throw new Exception('invalid field type: ' . $type);
+                            break;
                     }
                 }
                 $sql = substr($sql, 0, -1);
             }
 
-            $sql .= ")";
+            $sql .= ')';
 
             $db->query($sql);
 
@@ -273,42 +274,42 @@ abstract class ObjectModel
 
             $fields_to_save = '';
             foreach ($this->_modified_fields as $field => $value) {
-                if ($value === true) {
-                    $att = '_'.$field;
-                    switch (static::$_all_fields[$field])
-                    {
-                        case 'num':
-                            $fields_to_save .= " `" . $field . "` = " . (int) $this->$att . ",";
-                            break;
-                        case 'float':
-                            $fields_to_save .= " `" . $field . "` = " . number_format((float) $this->$att, 8, ".", "") . ",";
-                            break;
-                        case 'str':
-                            $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
-                            break;
-                        case 'date':
-                            $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
-                            break;
-                        case 'bool':
-                            $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
-                            break;
-                        case 'pwd':
-                            $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
-                            break;
-                        case 'phpser':
-                            $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
-                            break;
-                        default:
-                            throw new Exception('invalid field type');
-                            break;
-                    }
+                if ($value !== true) {
+                    continue;
+                }
+                $att = '_'.$field;
+                switch (static::$_all_fields[$field]) {
+                    case 'num':
+                        $fields_to_save .= " `" . $field . "` = " . (int) $this->$att . ",";
+                        break;
+                    case 'float':
+                        $fields_to_save .= " `" . $field . "` = " . number_format((float) $this->$att, 8, ".", "") . ",";
+                        break;
+                    case 'str':
+                        $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
+                        break;
+                    case 'date':
+                        $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                        break;
+                    case 'bool':
+                        $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
+                        break;
+                    case 'pwd':
+                        $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
+                        break;
+                    case 'phpser':
+                        $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
+                        break;
+                    default:
+                        throw new Exception('invalid field type');
+                        break;
                 }
             }
             $fields_to_save = substr($fields_to_save, 0, -1);
 
-            $sql = "UPDATE `" . static::$_table . "` "
-                 . "SET " . $fields_to_save . " "
-                 . "WHERE `" . static::$_pk . "` = " . (int) $this->getId();
+            $sql = 'UPDATE `' . $this->getDbTable() . '` '
+                 . 'SET ' . $fields_to_save . ' '
+                 . 'WHERE `' . $this->getDbPk() . '` = ' . (int) $this->getId();
 
             $this->_modified_fields = [];
 
