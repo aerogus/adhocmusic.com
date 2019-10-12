@@ -75,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_membre` (
   `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `visited_on` datetime DEFAULT NULL,
   PRIMARY KEY (`id_contact`),
+  UNIQUE KEY `pseudo` (`pseudo`),
   CONSTRAINT `fk_membre_contact` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_contact` (`id_contact`)
 );
 
