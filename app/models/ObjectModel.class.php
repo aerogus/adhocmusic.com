@@ -339,7 +339,7 @@ abstract class ObjectModel
     static function findAll(): array
     {
         $db = DataBase::getInstance();
-        $sql = "SELECT `" . static::$_pk . "` FROM `" . static::$_table . "`";
+        $sql = 'SELECT `' . static::getDbPk() . '` FROM `' . static::getDbTable() . '`';
 
         $objs = [];
         if ($ids = $db->queryWithFetchFirstFields($sql)) {

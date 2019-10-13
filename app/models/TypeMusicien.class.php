@@ -70,14 +70,14 @@ class TypeMusicien extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $val val
+     * @param string $name nom
      *
      * @return object
      */
-    function setName(string $val): object
+    function setName(string $name): object
     {
-        if ($this->_name !== $val) {
-            $this->_name = $val;
+        if ($this->_name !== $name) {
+            $this->_name = $name;
             $this->_modified_fields['name'] = true;
         }
 

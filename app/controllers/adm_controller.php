@@ -176,7 +176,7 @@ final class Controller
             ->addStep("Membres", "/adm/membres/");
 
         $smarty->assign('types_membre', Membre::getTypesMembre());
-        $smarty->assign('types_musicien', Membre::getTypesMusicien());
+        $smarty->assign('types_musicien', TypeMusicien::findAll());
 
         $smarty->assign(
             'search', [
@@ -885,7 +885,7 @@ final class Controller
         $smarty->assign('from', $from);
         $smarty->assign('id_groupe', $id_groupe);
         $smarty->assign('id_contact', $id_contact);
-        $smarty->assign('types', Membre::getTypesMusicien());
+        $smarty->assign('types', TypeMusicien::findAll());
 
         switch ($action)
         {

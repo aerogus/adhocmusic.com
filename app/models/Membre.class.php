@@ -1535,16 +1535,6 @@ class Membre extends Contact
     }
 
     /**
-     * Retourne les types de musiciens
-     *
-     * @return array
-     */
-    static function getTypesMusicien(): array
-    {
-        return self::$_types_musicien;
-    }
-
-    /**
      * Retourne les types de membres
      *
      * @return array
@@ -1552,21 +1542,6 @@ class Membre extends Contact
     static function getTypesMembre(): array
     {
         return self::$_types_membre;
-    }
-
-    /**
-     * Retourne le libellé d'une clé de la liste
-     *
-     * @param int $cle clé
-     *
-     * @return string|null
-     */
-    static function getTypeMusicienName(int $cle): ?string
-    {
-        if (array_key_exists($cle, self::$_types_musicien)) {
-            return self::$_types_musicien[$cle];
-        }
-        return null;
     }
 
     /**
