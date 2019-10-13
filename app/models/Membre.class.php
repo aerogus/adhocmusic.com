@@ -1593,10 +1593,9 @@ class Membre extends Contact
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . Membre::getDbTable() . "`";
+        $sql = 'SELECT COUNT(*) FROM `' . Membre::getDbTable() . '`';
 
-        return $db->queryWithFetchFirstField($sql);
+        return (int) $db->queryWithFetchFirstField($sql);
     }
 
     /**
