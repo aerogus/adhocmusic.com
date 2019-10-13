@@ -1021,7 +1021,7 @@ class Groupe extends ObjectModel
      *
      * @return bool
      */
-    function linkMember(int $id_contact, int $id_type_musicien = 0): bool
+    function linkMember(int $id_contact, int $id_type_musicien): bool
     {
         // le groupe existe-t-il bien ?
 
@@ -1417,18 +1417,15 @@ class Groupe extends ObjectModel
      * Ajoute un style au groupe
      *
      * @param int $id_style id_style
-     * @param int $ordre    ordre
      *
      * @return int
      */
-    function linkStyle(int $id_style, int $ordre = 1): int
+    function linkStyle(int $id_style): int
     {
         // le groupe existe-t-il bien ?
 
         // le style existe-il bien ?
-        if (!Style::isStyleOk($id_style)) {
-            throw new Exception('id_style introuvable');
-        }
+        $style = Style::getInstance($id_style);
 
         // le groupe n'a-t-il pas déjà ce style ?
 
@@ -1436,8 +1433,8 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "INSERT INTO `" . self::$_db_table_groupe_style . "` "
-             . "(`id_groupe`, `id_style`, `ordre`) "
-             . "VALUES(" . (int) $this->getId() . ", " . (int) $id_style . ", " . (int) $ordre . ")";
+             . "(`id_groupe`, `id_style`) "
+             . "VALUES(" . (int) $this->getId() . ", " . (int) $style->getId() . ")";
 
         $db->query($sql);
 
@@ -1458,15 +1455,13 @@ class Groupe extends ObjectModel
         // le groupe existe-t-il bien ?
 
         // le style existe-il bien ?
-        if (!Style::isStyleOk($id_style)) {
-            throw new Exception('id_style introuvable');
-        }
+        $style = Style::getInstance($id_style);
 
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_groupe_style  ."` "
              . "WHERE `id_groupe` = " . (int) $this->getId() . " "
-             . "AND `id_style` = " . (int) $id_style;
+             . "AND `id_style` = " . (int) $style->getId();
 
         $db->query($sql);
 
@@ -1517,10 +1512,9 @@ class Groupe extends ObjectModel
 
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `id_style` AS `id` "
+        $sql = "SELECT `id_style` "
              . "FROM `" . self::$_db_table_groupe_style . "` "
-             . "WHERE `id_groupe` = " . (int) $id_groupe . " "
-             . "ORDER BY `ordre` ASC";
+             . "WHERE `id_groupe` = " . (int) $id_groupe;
 
         return $db->queryWithFetch($sql);
     }

@@ -896,9 +896,7 @@ class Event extends ObjectModel
         }
 
         // style valide ?
-        if (!Style::isStyleOk($id_style)) {
-            throw new Exception('id_style introuvable');
-        }
+        $style = Style::getInstance($id_style);
 
         // le style n'est-t-il pas déjà présent pour cet évenement ?
         $listeStyles = $this->getStyles();
@@ -942,9 +940,7 @@ class Event extends ObjectModel
         }
 
         // style valide ?
-        if (!Style::isStyleOk($id_style)) {
-            throw new Exception('id_style introuvable');
-        }
+        $style = Style::getInstance($is_style);
 
         // style bien trouvé pour cet événement ?
         $listeStyles = $this->getStyles();

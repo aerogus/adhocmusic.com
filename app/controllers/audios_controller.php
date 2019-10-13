@@ -17,8 +17,8 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Musiques");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes musiques');
 
         $page = (int) Route::params('page');;
         $id = (int) Route::params('id');
@@ -181,7 +181,7 @@ final class Controller
 
         Trail::getInstance()
             ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Musiques", "/audios/my")
+            ->addStep("Mes musiques", "/audios/my")
             ->addStep("Ajouter une musique");
 
         if (Tools::isSubmit('form-audio-create')) {
@@ -189,29 +189,30 @@ final class Controller
 
             $data = [
                 'name'       => trim((string) Route::params('name')),
-                'id_groupe'  => (int) Route::params('id_groupe'),
-                'id_lieu'    => (int) Route::params('id_lieu'),
-                'id_event'   => (int) Route::params('id_event'),
+                'id_groupe'  => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
+                'id_lieu'    => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
+                'id_event'   => Route::params('id_event') ? (int) Route::params('id_event') : null,
                 'id_contact' => (int) $_SESSION['membre']->getId(),
                 'online'     => (bool) Route::params('online'),
             ];
             $errors = [];
 
-            if (self::_validateAudioCreateForm($data, $errors)) {
+            if (self::_validateAudioForm($data, $errors)) {
                 $audio = Audio::init()
                     ->setName($data['name'])
                     ->setIdGroupe($data['id_groupe'])
                     ->setIdLieu($data['id_lieu'])
                     ->setIdEvent($data['id_event'])
                     ->setIdContact($data['id_contact'])
-                    ->setOnline($data['online'])
-                    ->setCreatedNow();
+                    ->setOnline($data['online']);
+
                 if ($audio->save()) {
-                    if ($content = Route::params('file')) {
+                    $uploaded_audio_path = $_FILES['file']['tmp_name'];
+                    if (is_uploaded_file($uploaded_audio_path)) {
                         if (!is_dir(Audio::getBasePath())) {
                             mkdir(Audio::getBasePath(), 0755, true);
                         }
-                        file_put_contents(Audio::getBasePath() . '/' . $audio->getId() . '.mp3', $content);
+                        move_uploaded_file($uploaded_audio_path, Audio::getBasePath() . '/' . $audio->getId() . '.mp3');
                     } else {
                         mail(DEBUG_EMAIL, 'bug audio create', 'bug audio create');
                     }
@@ -312,30 +313,32 @@ final class Controller
 
             $data = [
                 'name' => (string) Route::params('name'),
-                'id_lieu' => (int) Route::params('id_lieu'),
+                'id_groupe'  => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
+                'id_lieu'    => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
+                'id_event'   => Route::params('id_event') ? (int) Route::params('id_event') : null,
                 'id_contact' => (int) $_SESSION['membre']->getId(),
-                'id_event' => (int) Route::params('id_event'),
-                'id_groupe' => (int) Route::params('id_groupe'),
                 'online' => (bool) Route::params('online'),
             ];
             $errors = [];
 
-            if (self::_validateAudioEditForm($data, $errors)) {
+            if (self::_validateAudioForm($data, $errors)) {
 
                 $audio->setName($data['name'])
                     ->setIdLieu($data['id_lieu'])
                     ->setIdContact($data['id_contact'])
                     ->setIdEvent($data['id_event'])
                     ->setIdGroupe($data['id_groupe'])
-                    ->setOnline($data['online'])
-                    ->setModifiedNow();
+                    ->setOnline($data['online']);
 
                 if ($audio->save()) {
-                    if ($content = Route::params('file')) {
+                    $uploaded_audio_path = $_FILES['file']['tmp_name'];
+                    if (is_uploaded_file($uploaded_audio_path)) {
                         if (!is_dir(Audio::getBasePath())) {
                             mkdir(Audio::getBasePath(), 0755, true);
                         }
-                        file_put_contents(Audio::getBasePath() . '/' . $audio->getId() . '.mp3', $content);
+                        move_uploaded_file($uploaded_audio_path, Audio::getBasePath() . '/' . $audio->getId() . '.mp3');
+                    } else {
+                        mail(DEBUG_EMAIL, 'bug audio create', 'bug audio create');
                     }
                     Log::action(Log::ACTION_AUDIO_EDIT, $audio->getId());
                     Tools::redirect('/audios/my');
@@ -435,38 +438,14 @@ final class Controller
     }
 
     /**
-     * Validation du formulaire de création audio
+     * Validation du formulaire création/édition audio
      *
      * @param array $data   tableau des données
      * @param array $errors tableau des erreurs (par référence)
      *
      * @return bool
      */
-    private static function _validateAudioCreateForm($data, &$errors): bool
-    {
-        if (empty($data['name'])) {
-            $errors['name'] = true;
-        }
-        if (($data['id_groupe'] === 0) && ($data['id_event'] === 0) && ($data['id_lieu'] === 0)) {
-            $errors['id_groupe'] = true;
-            $errors['id_event'] = true;
-            $errors['id_lieu'] = true;
-        }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Validation du formulaire de modification audio
-     *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
-     *
-     * @return bool
-     */
-    private static function _validateAudioEditForm($data, &$errors): bool
+    private static function _validateAudioForm($data, &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = true;

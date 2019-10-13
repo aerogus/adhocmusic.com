@@ -905,12 +905,12 @@ class Video extends Media
      *
      * @return int
      */
-    static function getVideosCount()
+    static function getVideosCount(): int
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT COUNT(*) FROM `" . Video::getDbTable() . "`";
+        $sql = 'SELECT COUNT(*) FROM `' . Video::getDbTable() . '`';
 
-        return $db->queryWithFetchFirstField($sql);
+        return (int) $db->queryWithFetchFirstField($sql);
     }
 }

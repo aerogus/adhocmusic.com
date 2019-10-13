@@ -64,8 +64,8 @@ $(function() {
       <li>
         <label for="id_type_musicien">Musicien de type</label>
         <select id="id_type_musicien" name="id_type_musicien">
-          {foreach from=$types_musicien key=type_musicien_id item=type_musicien_name}
-          <option value="{$type_musicien_id|escape}">{$type_musicien_name|escape}</option>
+          {foreach from=$types_musicien item=type_musicien}
+          <option value="{$type_musicien->getId()|escape}">{$type_musicien->getName()|escape}</option>
           {/foreach}
         </select>
       </li>

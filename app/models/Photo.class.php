@@ -222,8 +222,7 @@ class Photo extends Media
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . Photo::getDbTable() . "`";
+        $sql = 'SELECT COUNT(*) FROM `' . Photo::getDbTable() . '`';
 
         return (int) $db->queryWithFetchFirstField($sql);
     }

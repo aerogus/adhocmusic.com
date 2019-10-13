@@ -198,15 +198,15 @@ final class Controller
             $data = [
                 'name' => trim((string) Route::params('name')),
                 'credits' => trim((string) Route::params('credits')),
-                'id_groupe' => (int) Route::params('id_groupe'),
-                'id_lieu' => (int) Route::params('id_lieu'),
-                'id_event' => (int) Route::params('id_event'),
+                'id_groupe' => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
+                'id_lieu' => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
+                'id_event' => Route::params('id_event') ? (int) Route::params('id_event') : null,
                 'id_contact' => (int) $_SESSION['membre']->getId(),
                 'online' => (bool) Route::params('online'),
             ];
             $errors = [];
 
-            if (self::_validatePhotoCreateForm($data, $errors)) {
+            if (self::_validatePhotoForm($data, $errors)) {
 
                 foreach ($_FILES['file']['tmp_name'] as $uploaded_photo_path) {
                     if (is_uploaded_file($uploaded_photo_path)) {
@@ -328,23 +328,22 @@ final class Controller
                 'id' => (int) $photo->getId(),
                 'name' => (string) Route::params('name'),
                 'credits' => (string) Route::params('credits'),
-                'id_groupe' => (int) Route::params('id_groupe'),
-                'id_lieu' => (int) Route::params('id_lieu'),
-                'id_event' => (int) Route::params('id_event'),
+                'id_groupe' => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
+                'id_lieu' => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
+                'id_event' => Route::params('id_event') ? (int) Route::params('id_event') : null,
                 'id_contact' => (int) Route::params('id_contact'),
                 'online' => (bool) Route::params('online'),
             ];
             $errors = [];
 
-            if (self::_validatePhotoEditForm($data, $errors)) {
+            if (self::_validatePhotoForm($data, $errors)) {
 
                 $photo->setName($data['name'])
                     ->setCredits($data['credits'])
                     ->setIdGroupe($data['id_groupe'])
                     ->setIdLieu($data['id_lieu'])
                     ->setIdEvent($data['id_event'])
-                    ->setOnline($data['online'])
-                    ->setModifiedNow();
+                    ->setOnline($data['online']);
 
                 if (is_uploaded_file($_FILES['file']['tmp_name'])) {
                     (new Image($_FILES['file']['tmp_name']))
@@ -450,29 +449,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validatePhotoCreateForm(array $data, array &$errors): bool
-    {
-        if (empty($data['name'])) {
-            $errors['name'] = "Vous devez saisir un titre pour la photo.";
-        }
-        if (empty($data['credits'])) {
-            $errors['credits'] = "Vous devez saisir le nom du photographe";
-        }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Validation du formulaire de modification photo
-     *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
-     *
-     * @return bool
-     */
-    private static function _validatePhotoEditForm(array $data, array &$errors): bool
+    private static function _validatePhotoForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la photo.";

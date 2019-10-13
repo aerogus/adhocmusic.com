@@ -84,7 +84,6 @@ final class Controller
             if (self::_validateStructureCreateForm($data, $errors)) {
                 Structure::init()
                     ->setName($data['name'])
-                    ->setCreatedNow()
                     ->save();
                 Tools::redirect('/structures/?create=1');
             } else {
@@ -117,7 +116,6 @@ final class Controller
             if (self::_validateStructureEditForm($data, $errors)) {
                 Structure::getInstance((int) Route::params('id'))
                     ->setName($data['name'])
-                    ->setModifiedNow()
                     ->save();
                 Tools::redirect('/structures/?edit=1');
             } else {

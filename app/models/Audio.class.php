@@ -207,15 +207,17 @@ class Audio extends Media
 
         $db = DataBase::getInstance();
 
+        // @TODO retirer ces références à adhocmusic.com en dur !!!
+
         $sql = "SELECT `a`.`id_audio` AS `id`, `a`.`name`, 'audio' AS `type`, "
              . "`a`.`online`, `a`.`created_on`, `a`.`modified_on`, "
              . "`g`.`id_groupe` AS `groupe_id`, `g`.`name` AS `groupe_name`, `g`.`alias` AS `groupe_alias`, "
-             . "CONCAT('http://www.adhocmusic.com/', `g`.`alias`) AS `groupe_url`, "
+             . "CONCAT('https://www.adhocmusic.com/', `g`.`alias`) AS `groupe_url`, "
              . "`s`.`id_structure` AS `structure_id`, `s`.`name` AS `structure_name`, "
              . "`e`.`id_event` AS `event_id`, `e`.`name` AS `event_name`, `e`.`date` AS `event_date`, "
              . "`l`.`id_lieu` AS `lieu_id`, `l`.`name` AS `lieu_name`, "
-             . "CONCAT('https://www.adhocmusic.com/media/groupe/m', `g`.`id_groupe`, '.jpg') AS `thumb_80_80`, "
-             . "CONCAT('https://www.adhocmusic.com/media/audio/', `a`.`id_audio`, '.mp3') AS `direct_url` "
+             . "CONCAT('https://static.adhocmusic.com/media/groupe/m', `g`.`id_groupe`, '.jpg') AS `thumb_80_80`, "
+             . "CONCAT('https://static.adhocmusic.com/media/audio/', `a`.`id_audio`, '.mp3') AS `direct_url` "
              . "FROM (`" . Audio::getDbTable() . "` `a`) "
              . "LEFT JOIN `" . Groupe::getDbTable() . "` `g` ON (`a`.`id_groupe` = `g`.`id_groupe`) "
              . "LEFT JOIN `" . Structure::getDbTable() . "` `s` ON (`a`.`id_structure` = `s`.`id_structure`) "
@@ -428,13 +430,12 @@ class Audio extends Media
      *
      * @return int
      */
-    static function getAudiosCount()
+    static function getAudiosCount(): int
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . Audio::getDbTable() . "`";
+        $sql = 'SELECT COUNT(*) FROM `' . Audio::getDbTable() . '`';
 
-        return $db->queryWithFetchFirstField($sql);
+        return (int) $db->queryWithFetchFirstField($sql);
     }
 }

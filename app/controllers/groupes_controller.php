@@ -173,9 +173,9 @@ final class Controller
         $smarty->enqueue_script('/js/groupe-create.js');
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord/")
-            ->addStep("Mes Groupes", "/groupes/my")
-            ->addStep("Inscription");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes Groupes', '/groupes/my')
+            ->addStep('Inscription');
 
         // valeurs par défaut
         $data = [
@@ -272,7 +272,7 @@ final class Controller
         }
 
         $smarty->assign('data', $data);
-        $smarty->assign('types_musicien', Membre::getTypesMusicien());
+        $smarty->assign('types_musicien', TypeMusicien::findAll());
 
         return $smarty->fetch('groupes/create.tpl');
     }
@@ -349,8 +349,7 @@ final class Controller
                     ->setText($data['text'])
                     ->setSite($data['site'])
                     ->setFacebookPageId($data['facebook_page_id'])
-                    ->setTwitterId($data['twitter_id'])
-                    ->setModifiedNow();
+                    ->setTwitterId($data['twitter_id']);
 
                 $groupe->save();
 

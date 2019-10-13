@@ -545,7 +545,7 @@ final class Controller
 
             $cpt = 0;
             while (list($grp_style_id, $grp_style_ordre) = $db->fetchRow($res)) {
-                $tab_groupes[$id_grp]['styles'][$grp_style_ordre] = Style::getName((int) $grp_style_id);
+                $tab_groupes[$id_grp]['styles'][$grp_style_ordre] = Style::getInstance((int) $grp_style_id)->getName();
                 $cpt++;
             }
             if ($cpt > 0) {
@@ -603,12 +603,12 @@ final class Controller
             $form_style[$cpt_style]  = '';
             $form_style[$cpt_style] .= "<select name=\"style[" . $cpt_style . "]\">";
             $form_style[$cpt_style] .= "<option value=\"0\">---</option>\n";
-            foreach (Style::getHashTable() as $id_style => $nom_style) {
-                $form_style[$cpt_style] .= "<option value=\"" . $id_style . "\"";
-                if ($id_style === $sty[$cpt_style]) {
+            foreach (Style::findAll() as $style) {
+                $form_style[$cpt_style] .= "<option value=\"" . $style->getId() . "\"";
+                if ($style->getId() === $sty[$cpt_style]) {
                     $form_style[$cpt_style] .= " selected=\"selected\"";
                 }
-                $form_style[$cpt_style] .= ">" . $nom_style . "</option>\n";
+                $form_style[$cpt_style] .= ">" . $style->getName() . "</option>\n";
             }
             $form_style[$cpt_style] .= "</select>";
         }

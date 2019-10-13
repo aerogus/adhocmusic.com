@@ -258,8 +258,7 @@ final class Controller
                     ->setTel($data['tel'])
                     ->setEmail($data['email'])
                     ->setSite($data['site'])
-                    ->setIdContact($data['id_contact'])
-                    ->setCreatedNow();
+                    ->setIdContact($data['id_contact']);
 
                 $lieu->save();
 
@@ -367,8 +366,7 @@ final class Controller
                     ->setEmail($data['email'])
                     ->setSite($data['site'])
                     ->setLat($data['lat'])
-                    ->setLng($data['lng'])
-                    ->setModifiedNow();
+                    ->setLng($data['lng']);
 
                 if ($lieu->save()) {
                     /* récupération des coordonnées si non précisées */

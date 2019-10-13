@@ -239,9 +239,9 @@ final class Controller
         if (Tools::isSubmit('form-video-create')) {
             $data = [
                 'name' => (string) Route::params('name'),
-                'id_groupe' => (int) Route::params('id_groupe'),
-                'id_lieu' => (int) Route::params('id_lieu'),
-                'id_event' => (int) Route::params('id_event'),
+                'id_groupe' => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
+                'id_lieu' => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
+                'id_event' => Route::params('id_event') ? (int) Route::params('id_event') : null,
                 'id_contact' => $_SESSION['membre']->getId(),
                 'online' => (bool) Route::params('online'),
                 'code' => (string) Route::params('code'),
@@ -263,8 +263,7 @@ final class Controller
                     ->setIdContact($data['id_contact'])
                     ->setOnline($data['online'])
                     ->setIdHost($data['id_host'])
-                    ->setReference($data['reference'])
-                    ->setCreatedNow();
+                    ->setReference($data['reference']);
 
                 $video->save();
 
@@ -369,9 +368,9 @@ final class Controller
             $data = [
                 'id' => (int) Route::params('id'),
                 'name' => (string) Route::params('name'),
-                'id_lieu' => (int) Route::params('id_lieu'),
-                'id_event' => (int) Route::params('id_event'),
-                'id_groupe' => (int) Route::params('id_groupe'),
+                'id_groupe' => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
+                'id_lieu' => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
+                'id_event' => Route::params('id_event') ? (int) Route::params('id_event') : null,
                 'online' => (bool) Route::params('online'),
             ];
             $errors = [];

@@ -364,8 +364,8 @@ final class Controller
                     ->setPrice($data['price'])
                     ->setIdContact($data['id_contact'])
                     ->setOnline(true)
-                    ->setFacebookEventId($data['facebook_event_id'])
-                    ->setCreatedNow();
+                    ->setFacebookEventId($data['facebook_event_id']);
+
                 if ($event->save()) {
 
                     if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
@@ -442,7 +442,7 @@ final class Controller
 
         $smarty->assign('data', $data);
 
-        $smarty->assign('styles', Style::getHashTable());
+        $smarty->assign('styles', Style::findAll());
         $smarty->assign(
             'groupes', Groupe::getGroupes(
                 [
@@ -532,8 +532,7 @@ final class Controller
                     ->setText($data['text'])
                     ->setPrice($data['price'])
                     ->setOnline($data['online'])
-                    ->setFacebookEventId($data['facebook_event_id'])
-                    ->setModifiedNow();
+                    ->setFacebookEventId($data['facebook_event_id']);
 
                 $event->save();
 
@@ -608,7 +607,7 @@ final class Controller
         $smarty->assign('event', $event);
         $smarty->assign('lieu', $lieu);
 
-        $smarty->assign('styles', Style::getHashTable());
+        $smarty->assign('styles', Style::findAll());
         $smarty->assign(
             'groupes', Groupe::getGroupes(
                 [

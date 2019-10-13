@@ -20,24 +20,24 @@ class Media extends ObjectModel
     protected $_id_contact = 0;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected $_id_groupe = 0;
+    protected $_id_groupe = null;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected $_id_lieu = 0;
+    protected $_id_lieu = null;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected $_id_event = 0;
+    protected $_id_event = null;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected $_id_structure = 0;
+    protected $_id_structure = null;
 
     /**
      * @var string
@@ -70,33 +70,33 @@ class Media extends ObjectModel
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    function getIdGroupe(): int
+    function getIdGroupe(): ?int
     {
         return $this->_id_groupe;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    function getIdLieu(): int
+    function getIdLieu(): ?int
     {
         return $this->_id_lieu;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    function getIdEvent(): int
+    function getIdEvent(): ?int
     {
         return $this->_id_event;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    function getIdStructure(): int
+    function getIdStructure(): ?int
     {
         return $this->_id_structure;
     }
@@ -181,11 +181,11 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param int $val val
+     * @param int|null $val val
      *
      * @return object
      */
-    function setIdGroupe(int $val): object
+    function setIdGroupe(?int $val): object
     {
         if ($this->_id_groupe !== $val) {
             $this->_id_groupe = $val;
@@ -196,11 +196,11 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param int $val val
+     * @param int|null $val val
      *
      * @return object
      */
-    function setIdLieu(int $val): object
+    function setIdLieu(?int $val): object
     {
         if ($this->_id_lieu !== $val) {
             $this->_id_lieu = $val;
@@ -211,11 +211,11 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param int $val val
+     * @param int|null $val val
      *
      * @return object
      */
-    function setIdEvent(int $val): object
+    function setIdEvent(?int $val): object
     {
         if ($this->_id_event !== $val) {
             $this->_id_event = $val;
@@ -226,11 +226,11 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param int $val val
+     * @param int|null $val val
      *
      * @return object
      */
-    function setIdStructure(int $val): object
+    function setIdStructure(?int $val): object
     {
         if ($this->_id_structure !== $val) {
             $this->_id_structure = $val;
@@ -256,11 +256,11 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string|null $val val
      *
      * @return object
      */
-    function setCreatedOn(string $val): object
+    function setCreatedOn(?string $val): object
     {
         if ($this->_created_on !== $val) {
             $this->_created_on = $val;
@@ -285,11 +285,11 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param string $val $val
+     * @param string|null $val $val
      *
      * @return object
      */
-    function setModifiedOn(string $val): object
+    function setModifiedOn(?string $val): object
     {
         if ($this->_modified_on !== $val) {
             $this->_modified_on = $val;

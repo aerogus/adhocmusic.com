@@ -75,8 +75,8 @@ Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fic
         <li>
           <label for="id_type_musicien">Ma fonction au sein de ce groupe</label>
           <select id="id_type_musicien" name="id_type_musicien">
-            {foreach from=$types_musicien key=id item=name}
-            <option value="{$id|escape}">{$name|escape}</option>
+            {foreach from=$types_musicien item=type_musicien}
+            <option value="{$type_musicien->getId()|escape}">{$type_musicien->getName()|escape}</option>
             {/foreach}
           </select>
         </li>

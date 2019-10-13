@@ -97,8 +97,7 @@ final class Controller
                         ->setLastName($data['last_name'])
                         ->setFirstName($data['first_name'])
                         ->setMailing($data['mailing'])
-                        ->setLevel(Membre::TYPE_STANDARD)
-                        ->setCreatedNow();
+                        ->setLevel(Membre::TYPE_STANDARD);
 
                     if ($membre->save()) {
                         Log::action(Log::ACTION_MEMBER_CREATE, $membre->getId());
@@ -189,8 +188,7 @@ final class Controller
                     ->setText($data['text'])
                     ->setEmail($data['email'])
                     ->setSite($data['site'])
-                    ->setMailing($data['mailing'])
-                    ->setModifiedNow();
+                    ->setMailing($data['mailing']);
 
                 $member->save();
 

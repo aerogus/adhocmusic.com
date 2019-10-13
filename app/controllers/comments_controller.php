@@ -74,7 +74,6 @@ final class Controller
         $comment = Comment::init()
             ->setType($data['type'])
             ->setIdContent($data['id_content'])
-            ->setCreatedNow()
             ->setOnline(true)
             ->setText($data['text']);
 

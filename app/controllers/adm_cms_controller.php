@@ -57,7 +57,6 @@ final class Controller
                 ->setTitle($data['title'])
                 ->setContent($data['content'])
                 ->setOnline($data['online'])
-                ->setCreatedNow()
                 ->setAuth($data['auth'])
                 ->save();
 
@@ -103,7 +102,6 @@ final class Controller
                 ->setContent($data['content'])
                 ->setOnline($data['online'])
                 ->setAuth($data['auth'])
-                ->setModifiedNow()
                 ->save();
 
             Tools::redirect('/adm/cms/?edit=1');
