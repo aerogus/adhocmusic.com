@@ -934,13 +934,12 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . Groupe::getDbTable() . "` ";
+        $sql = 'SELECT COUNT(*) FROM `' . Groupe::getDbTable() . '` ';
         if (!is_null($etat)) {
-            $sql .= "WHERE `etat` = " . (int) $etat;
+            $sql .= 'WHERE `etat` = ' . (int) $etat;
         }
 
-        return $db->queryWithFetchFirstField($sql);
+        return (int) $db->queryWithFetchFirstField($sql);
     }
 
     /**
@@ -956,11 +955,11 @@ class Groupe extends ObjectModel
 
         $db = DataBase::getInstance();
 
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . self::$_db_table_appartient_a . "` "
-             . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
+        $sql = 'SELECT COUNT(*) '
+             . 'FROM `' . self::$_db_table_appartient_a . '` '
+             . 'WHERE `id_contact` = ' . (int) $_SESSION['membre']->getId();
 
-        return $db->queryWithFetchFirstField($sql);
+        return (int) $db->queryWithFetchFirstField($sql);
     }
 
     /**
