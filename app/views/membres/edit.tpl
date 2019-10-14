@@ -12,8 +12,6 @@
 
 <form id="form-member-edit" name="form-member-edit" method="post" action="/membres/edit" enctype="multipart/form-data">
   {if $me->isInterne()}
-  <fieldset>
-    <legend>Inscription Forums Privés</legend>
     <p>Veuillez cocher les cases des forums dont vous voulez recevoir les notifications de nouveaux messages par email</p>
     <ul>
       <li>
@@ -32,10 +30,7 @@
         <input type="checkbox" class="switch" name="forum[t]" id="forum[t]"{if !empty($forum['t'])} checked="checked"{/if}> Technique
       </li>
     </ul>
-  </fieldset>
   {/if}
-  <fieldset>
-    <legend>Mes Infos</legend>
     <ul>
       <li>
         <span id="created_on" style="float: right">{$me->getCreatedOn()|date_format:"%d/%m/%Y %H:%M"}</span>
@@ -137,7 +132,6 @@
         <textarea name="text" cols="49" rows="10">{$me->getText()|escape}</textarea>
       </li>
     </ul>
-  </fieldset>
   <input id="form-member-edit-submit" name="form-member-edit-submit" type="submit" class="button" value="Enregistrer">
 </form>
 

@@ -1130,8 +1130,10 @@ class Membre extends Contact
                         } else {
                             switch ($type) {
                                 case 'num':
+                                    $sql .= (int) $this->$att . ',';
+                                    break;
                                 case 'float':
-                                    $sql .= $db->escape((string) $this->$att) . ',';
+                                    $sql .= number_format((float) $this->$att, 8, '.', '') . ',';
                                     break;
                                 case 'str':
                                     $sql .= "'" . $db->escape($this->$att) . "',";
@@ -1198,8 +1200,10 @@ class Membre extends Contact
                     } else {
                         switch ($type) {
                             case 'num':
+                                $sql .= (int) $this->$att . ',';
+                                break;
                             case 'float':
-                                $sql .= $db->escape((string) $this->$att) . ",";
+                                $sql .= number_format((float) $this->$att, 8, '.', '') . ',';
                                 break;
                             case 'str':
                                 $sql .= "'" . $db->escape($this->$att) . "',";
@@ -1255,8 +1259,10 @@ class Membre extends Contact
                     } else {
                         switch ($fields['contact'][$field]) {
                             case 'num':
+                                $fields_to_save .= " `" . $field . "` = " . (int) $this->$att . ",";
+                                break;
                             case 'float':
-                                $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
+                                $fields_to_save .= " `" . $field . "` = " . number_format((float) $this->$att, 8, ".", "") . ",";
                                 break;
                             case 'str':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
@@ -1306,8 +1312,10 @@ class Membre extends Contact
                     } else {
                         switch ($fields['membre'][$field]) {
                             case 'num':
+                                $fields_to_save .= " `" . $field . "` = " . (int) $this->$att . ",";
+                                break;
                             case 'float':
-                                $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
+                                $fields_to_save .= " `" . $field . "` = " . number_format((float) $this->$att, 8, ".", "") . ",";
                                 break;
                             case 'str':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
@@ -1409,7 +1417,7 @@ class Membre extends Contact
      *
      * @return bool
      */
-    function isStandard()
+    function isStandard(): bool
     {
         return (bool) ($this->_level & self::TYPE_STANDARD);
     }
@@ -1419,7 +1427,7 @@ class Membre extends Contact
      *
      * @return bool
      */
-    function isRedacteur()
+    function isRedacteur(): bool
     {
         return (bool) ($this->_level & self::TYPE_REDACTEUR);
     }
@@ -1429,7 +1437,7 @@ class Membre extends Contact
      *
      * @return bool
      */
-    function isInterne()
+    function isInterne(): bool
     {
         return (bool) ($this->_level & self::TYPE_INTERNE);
     }
@@ -1439,7 +1447,7 @@ class Membre extends Contact
      *
      * @return bool
      */
-    function isBonus()
+    function isBonus(): bool
     {
         return (bool) ($this->_level & self::TYPE_BONUS);
     }
@@ -1449,7 +1457,7 @@ class Membre extends Contact
      *
      * @return bool
      */
-    function isAdmin()
+    function isAdmin(): bool
     {
         return (bool) ($this->_level & self::TYPE_ADMIN);
     }

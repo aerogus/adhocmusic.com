@@ -180,9 +180,9 @@ final class Controller
         $smarty->enqueue_script('/js/audio-create.js');
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes musiques", "/audios/my")
-            ->addStep("Ajouter une musique");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes musiques', '/audios/my')
+            ->addStep('Ajouter une musique');
 
         if (Tools::isSubmit('form-audio-create')) {
             set_time_limit(0); // l'upload peut prendre du temps !
@@ -294,9 +294,9 @@ final class Controller
         $smarty->enqueue_script('/js/audio-edit.js');
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Musiques", "/audios/my")
-            ->addStep("Editer une musique");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes musiques', '/audios/my')
+            ->addStep('Éditer une musique');
 
         try {
             $audio = Audio::getInstance($id);
@@ -396,9 +396,9 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Musiques", "/audios/my")
-            ->addStep("Supprimer une musique");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes musiques', '/audios/my')
+            ->addStep('Supprimer une musique');
 
         try {
             $audio = Audio::getInstance($id);

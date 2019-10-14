@@ -171,7 +171,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validate_form_member_edit($data, $errors)) {
+            if (self::_validateMemberEditForm($data, $errors)) {
 
                 $member->setLastName($data['last_name'])
                     ->setFirstName($data['first_name'])
@@ -331,7 +331,7 @@ final class Controller
         Tools::auth(Membre::TYPE_STANDARD);
 
         Trail::getInstance()
-            ->addStep("Tableau de bord");
+            ->addStep('Tableau de bord');
 
         $smarty = new AdHocSmarty();
 

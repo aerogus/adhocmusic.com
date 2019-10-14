@@ -69,9 +69,17 @@
       <textarea id="mini_text" name="mini_text" cols="50" rows="5">{$data.mini_text|escape}</textarea>
     </li>
     <li>
-      <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez préciser le champ biographie</div>
+      <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez préciser le champ présentation</div>
       <label for="text">Présentation</label>
       <textarea id="text" name="text" cols="50" rows="20">{$data.text|escape}</textarea>
+    </li>
+    <li>
+      <label for="id_type_musicien">Ma fonction au sein de ce groupe</label>
+      <select id="id_type_musicien" name="id_type_musicien">
+        {foreach from=$types_musicien item=type_musicien}
+        <option value="{$type_musicien->getId()|escape}"{if $data.id_type_musicien === $type_musicien->getId()} selected="selected"{/if}>{$type_musicien->getName()|escape}</option>
+        {/foreach}
+      </select>
     </li>
   </ul>
   <input type="hidden" name="id" value="{$groupe->getId()|escape}">

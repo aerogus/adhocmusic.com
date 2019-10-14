@@ -17,8 +17,8 @@ final class Controller
         Tools::auth(Membre::TYPE_STANDARD);
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Photos");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes photos');
 
         $smarty = new AdHocSmarty();
 
@@ -208,6 +208,8 @@ final class Controller
 
             if (self::_validatePhotoForm($data, $errors)) {
 
+                // cf. max_file_uploads (par défaut 20, les fichiers suivants sont ignorés)
+
                 foreach ($_FILES['file']['tmp_name'] as $uploaded_photo_path) {
                     if (is_uploaded_file($uploaded_photo_path)) {
                         $photo = Photo::init()
@@ -220,10 +222,13 @@ final class Controller
                             ->setOnline($data['online']);
 
                         if ($photo->save()) {
+                            if (!is_dir(Photo::getBasePath())) {
+                                mkdir(Photo::getBasePath(), 0755, true);
+                            }
                             (new Image($uploaded_photo_path))
                                 ->setType(IMAGETYPE_JPEG)
-                                ->setMaxWidth(1024)
-                                ->setMaxHeight(768)
+                                ->setMaxWidth(2048)
+                                ->setMaxHeight(2048)
                                 ->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg')
                                 ->write();
                             Log::action(Log::ACTION_PHOTO_CREATE, $photo->getId());
@@ -241,9 +246,9 @@ final class Controller
         }
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Photos", "/photos/my")
-            ->addStep("Ajouter une photo");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes photos', '/photos/my')
+            ->addStep('Ajouter une photo');
 
         $smarty = new AdHocSmarty();
 
@@ -311,9 +316,9 @@ final class Controller
         $smarty->enqueue_script('/js/photo-edit.js');
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Photos", "/photos/my")
-            ->addStep("Editer une photo");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes photos', '/photos/my')
+            ->addStep('Editer une photo');
 
         try {
             $photo = Photo::getInstance($id);
@@ -346,10 +351,13 @@ final class Controller
                     ->setOnline($data['online']);
 
                 if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+                    if (!is_dir(Photo::getBasePath())) {
+                        mkdir(Photo::getBasePath(), 0755, true);
+                    }
                     (new Image($_FILES['file']['tmp_name']))
                         ->setType(IMAGETYPE_JPEG)
-                        ->setMaxWidth(1024)
-                        ->setMaxHeight(768)
+                        ->setMaxWidth(2048)
+                        ->setMaxHeight(2048)
                         ->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg')
                         ->write();
 
@@ -407,9 +415,9 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Photos", "/photos/my")
-            ->addStep("Supprimer une photo");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes photos', '/photos/my')
+            ->addStep('Supprimer une photo');
 
         try {
             $photo = Photo::getInstance($id);

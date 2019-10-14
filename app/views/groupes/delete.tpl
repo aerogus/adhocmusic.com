@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Supprimer un groupe"}
+<div class="box">
+  <header>
+    <h1>Supprimer un groupe</h1>
+  </header>
+  <div>
 
 {if !empty($unknown_groupe)}
 
@@ -12,7 +16,7 @@
 
 {else}
 
-<p>Confirmer suppression du groupe {$groupe->getName()} ?</p>
+<p>Confirmer la suppression du groupe {$groupe->getName()} ?</p>
 
 <ul>
   <li>ceci effacera définitivement un groupe de la base + la photo, mini photo, logo</li>
@@ -24,11 +28,12 @@
 
 <form id="form-groupe-delete" name="form-groupe-delete" action="/groupes/delete" method="post">
   <input type="hidden" name="id" value="{$groupe->getId()}">
-  <input id="form-groupe-delete-submit" name="form-groupe-delete-submit" type="submit" value="OK">
+  <input class="button" id="form-groupe-delete-submit" name="form-groupe-delete-submit" type="submit" value="OK">
 </form>
 
 {/if}
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

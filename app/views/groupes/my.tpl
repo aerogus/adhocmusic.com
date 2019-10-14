@@ -31,7 +31,7 @@
 <p>Vous n'administrez aucun groupe</p>
 {/if}
 
-<a href="/groupes/create">Inscrire un Groupe</a>
+<a href="/groupes/create">Inscrire un groupe</a>
 
   </div>
 </div>

@@ -10,6 +10,13 @@
 
   <div class="col-1">
 
+    {if !empty($groupe)}
+    <div class="box">
+      <header>
+        <h1>{$groupe->getName()}</h1>
+      </header>
+      <div>
+
     {include file="common/boxstart.tpl"}
     {if !empty($groupe)}
     <div class="metatop">Groupe</div>

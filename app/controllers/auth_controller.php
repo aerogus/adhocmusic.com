@@ -102,9 +102,9 @@ final class Controller
         $smarty->enqueue_script('/js/change-password.js');
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Infos Persos", "/membres/edit")
-            ->addStep("Changer le mot de passe");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes infos persos', '/membres/edit')
+            ->addStep('Changer le mot de passe');
 
         $membre = Membre::getInstance($_SESSION['membre']->getId());
 

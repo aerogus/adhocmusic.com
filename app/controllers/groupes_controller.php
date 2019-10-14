@@ -32,8 +32,8 @@ final class Controller
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Groupes");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes groupes');
 
         $smarty->assign('delete', (bool) Route::params('delete'));
         $smarty->assign('groupes', Groupe::getMyGroupes());
@@ -174,7 +174,7 @@ final class Controller
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes Groupes', '/groupes/my')
+            ->addStep('Mes groupes', '/groupes/my')
             ->addStep('Inscription');
 
         // valeurs par défaut
@@ -199,9 +199,10 @@ final class Controller
                 'lineup'           => (string) Route::params('lineup'),
                 'mini_text'        => (string) Route::params('mini_text'),
                 'text'             => (string) Route::params('text'),
-                'site'             => (string) Route::params('site'),
-                'facebook_page_id' => (string) Route::params('facebook_page_id'),
-                'twitter_id'       => (string) Route::params('twitter_id'),
+                'site'             => Route::params('site') ? (string) Route::params('site') : null,
+                'facebook_page_id' => Route::params('facebook_page_id') ? (string) Route::params('facebook_page_id') : null,
+                'twitter_id'       => Route::params('twitter_id') ? (string) Route::params('twitter_id') : null,
+                'id_type_musicien' => (int) Route::params('id_type_musicien'),
             ];
             $errors = [];
 
@@ -253,12 +254,12 @@ final class Controller
                             ->write();
                     }
 
-                    $groupe->linkMember($_SESSION['membre']->getId());
+                    $groupe->linkMember($_SESSION['membre']->getId(), $data['id_type_musicien']);
                     $groupe->save();
 
                     Log::action(Log::ACTION_GROUP_CREATE, $groupe->getAlias());
 
-                    Tools::redirect('/' . $groupe->getAlias());
+                    Tools::redirect('/groupes/my');
 
                 }
             }
@@ -301,12 +302,12 @@ final class Controller
         }
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Groupes", "/groupes/my")
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes groupes', '/groupes/my')
             ->addStep($groupe->getName());
 
         $smarty->assign('groupe', $groupe);
-        if ($groupe->isMember($_SESSION['membre']->getId()) === false) {
+        if (($id_type_musicien = $groupe->isMember($_SESSION['membre']->getId())) === false) {
             $smarty->assign('not_my_groupe', true);
         }
 
@@ -320,6 +321,7 @@ final class Controller
             'site'             => $groupe->getSite(),
             'facebook_page_id' => $groupe->getFacebookPageId(),
             'twitter_id'       => $groupe->getTwitterId(),
+            'id_type_musicien' => $id_type_musicien,
         ];
 
         if (Tools::isSubmit('form-groupe-edit')) {
@@ -330,9 +332,10 @@ final class Controller
                 'lineup'           => (string) Route::params('lineup'),
                 'mini_text'        => (string) Route::params('mini_text'),
                 'text'             => (string) Route::params('text'),
-                'site'             => (string) Route::params('site'),
-                'facebook_page_id' => (string) Route::params('facebook_page_id'),
-                'twitter_id'       => (string) Route::params('twitter_id'),
+                'site'             => Route::params('site') ? (string) Route::params('site') : null,
+                'facebook_page_id' => Route::params('facebook_page_id') ? (string) Route::params('facebook_page_id') : null,
+                'twitter_id'       => Route::params('twitter_id') ? (string) Route::params('twitter_id') : null,
+                'id_type_musicien' => (int) Route::params('id_type_musicien'),
             ];
             $errors = [];
 
@@ -353,7 +356,7 @@ final class Controller
 
                 $groupe->save();
 
-                // $groupe->updateMember($_SESSION['membre']->getId(), $data['id_type_musicien']);
+                $groupe->updateMember($_SESSION['membre']->getId(), $data['id_type_musicien']);
 
                 if (is_uploaded_file($_FILES['lelogo']['tmp_name'])) {
                     (new Image($_FILES['lelogo']['tmp_name']))
@@ -400,6 +403,7 @@ final class Controller
         }
 
         $smarty->assign('data', $data);
+        $smarty->assign('types_musicien', TypeMusicien::findAll());
 
         return $smarty->fetch('groupes/edit.tpl');
     }
@@ -426,8 +430,8 @@ final class Controller
         }
 
         $can_delete = true;
-        if ($_SESSION['membre']->isAdmin() === false) {
-            if ($groupe->isMember($_SESSION['membre']->getId()) !== true) {
+        if ($_SESSION['membre']->isAdmin() === false) { // protection seul un admin peut supprimer un groupe
+            if ($groupe->isMember($_SESSION['membre']->getId()) === false) { // protection seul un membre du groupe peut supprimer son groupe
                 $smarty->assign('not_my_groupe', true);
                 $can_delete = false;
             }

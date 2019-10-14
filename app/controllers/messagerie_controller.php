@@ -19,8 +19,8 @@ final class Controller
         $smarty->assign('sent', (bool) Route::params('sent'));
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Messagerie");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Messagerie');
 
         $db = DataBase::getInstance();
 
@@ -59,9 +59,9 @@ final class Controller
         $smarty->enqueue_script('/js/messagerie.js');
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Messagerie", "/messagerie/")
-            ->addStep("Lire un message");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Messagerie', '/messagerie/')
+            ->addStep('Lire un message');
 
         $db = DataBase::getInstance();
 
@@ -100,9 +100,9 @@ final class Controller
         $smarty->enqueue_script('/js/messagerie.js');
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Messagerie", "/messagerie/")
-            ->addStep("Ecrire un message");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Messagerie', '/messagerie/')
+            ->addStep('Écrire un message');
 
         if (Tools::isSubmit('form-message-write')) {
             $text = (string) Route::params('text');

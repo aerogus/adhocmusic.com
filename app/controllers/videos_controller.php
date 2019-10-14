@@ -18,8 +18,8 @@ final class Controller
         Tools::auth(Membre::TYPE_STANDARD);
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Vidéos");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes vidéos');
 
         $page = (int) Route::params('page');
 
@@ -267,6 +267,10 @@ final class Controller
 
                 $video->save();
 
+                if (!is_dir(Video::getBasePath())) {
+                    mkdir(Video::getBasePath(), 0755, true);
+                }
+
                 if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
                     $video->storeThumbnail($vignette);
                 }
@@ -285,9 +289,9 @@ final class Controller
         }
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Vidéos", "/videos/my")
-            ->addStep("Ajouter une vidéo");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes vidéos', '/videos/my')
+            ->addStep('Ajouter une vidéo');
 
         $hosts = Video::getVideoHosts();
         $smarty->assign('hosts', $hosts);
@@ -385,6 +389,10 @@ final class Controller
 
                 $video->save();
 
+                if (!is_dir(Video::getBasePath())) {
+                    mkdir(Video::getBasePath(), 0755, true);
+                }
+
                 // Permet le reset de la vignette
                 if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
                     $video->storeThumbnail($vignette);
@@ -405,9 +413,9 @@ final class Controller
         }
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Vidéos", "/videos/my")
-            ->addStep("Editer une vidéo");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes vidéos', '/videos/my')
+            ->addStep('Éditer une vidéo');
 
         $smarty->assign('video', $video);
 
@@ -449,9 +457,9 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Vidéos", "/videos/my")
-            ->addStep("Supprimer une vidéo");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes Vidéos', '/videos/my')
+            ->addStep('Supprimer une vidéo');
 
         try {
             $video = Video::getInstance($id);

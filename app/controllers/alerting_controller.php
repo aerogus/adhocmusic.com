@@ -7,8 +7,8 @@ final class Controller
         Tools::auth(Membre::TYPE_STANDARD);
 
         Trail::getInstance()
-            ->addStep("Tableau de bord", "/membres/tableau-de-bord")
-            ->addStep("Mes Alertes");
+            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
+            ->addStep('Mes alertes');
 
         $smarty = new AdHocSmarty();
         $smarty->assign('groupes', Alerting::getGroupesAlertingByIdContact($_SESSION['membre']->getId()));

@@ -10,7 +10,6 @@ Vous pouvez contacter le <a href="/membres/show/1">webmaster</a> pour plus d'inf
 Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fiche groupe et dès à présent annoncer les concerts de votre groupe.</p>
 {/if}
 
-
 <div class="box">
   <header>
     <h1>Ajouter un groupe</h1>
@@ -68,7 +67,7 @@ Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fic
           <textarea id="mini_text" name="mini_text" cols="50" rows="5">{$data.mini_text|escape}</textarea>
         </li>
         <li>
-          <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez préciser le champ biographie</div>
+          <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez préciser le champ présentation</div>
           <label for="text">Présentation</label>
           <textarea id="text" name="text" cols="50" rows="20">{$data.text|escape}</textarea>
         </li>
