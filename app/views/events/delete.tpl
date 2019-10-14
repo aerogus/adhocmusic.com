@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Supprimer une date"}
+<div class="box">
+  <header>
+    <h1>Supprimer une date</h1>
+  </header>
+  <div>
 
 <form name="form-event-delete" id="form-event-delete" action="/events/delete" method="post">
   <fieldset>
@@ -16,6 +20,7 @@
   <input type="hidden" name="id" value="{$event->getId()|escape}">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

@@ -30,16 +30,7 @@
     <div class="event_lieu"><a href="/lieux/{$tab.lieu_id}" title="{$tab.lieu_name|escape}"><strong>{$tab.lieu_name|escape}</strong></a><br>{$tab.lieu_id_departement} {$tab.lieu_city}</div>
   </div>
   <div class="event_content">
-    <span class="event_title" style="position: relative;">
-      <div class="edit-event" style="display: none; position: absolute; right: 5px; top: 0;">
-        <ul style="text-align: right;">
-          <li style="margin-bottom: 2px; padding-right: 3px;"><a href="/events/edit/{$obj->getId()}"><img src="/img/icones/gear.png" alt=""></a></li>
-          <li style="border: 1px solid #fff; margin-bottom: 2px; background-color: #333; padding: 3px;"><a href="/events/edit/{$obj->getId()}">Editer <img src="/img/icones/event_edit.png" alt=""></a></li>
-          <li style="border: 1px solid #fff; margin-bottom: 2px; background-color: #333; padding: 3px;"><a href="/photos/create?id_event={$obj->getId()}">Ajout photo <img src="/img/icones/photo_add.png" alt=""></a></li>
-          <li style="border: 1px solid #fff; margin-bottom: 2px; background-color: #333; padding: 3px;"><a href="/videos/create?id_event={$obj->getId()}">Ajout vidéo <img src="/img/icones/video_add.png" alt=""></a></li>
-          <li style="border: 1px solid #fff; margin-bottom: 2px; background-color: #333; padding: 3px;"><a href="/audios/create?id_event={$obj->getId()}">Ajout audio <img src="/img/icones/audio_add.png" alt=""></a></li>
-        </ul>
-      </div>
+    <span class="event_title">
       <a href="{$obj->getUrl()|escape}"><strong>{$obj->getName()|upper|escape}</strong></a>
     </span>
     <div class="event_body">

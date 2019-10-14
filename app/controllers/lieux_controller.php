@@ -14,10 +14,10 @@ final class Controller
 
         $smarty->enqueue_script('/js/lieux-index.js');
 
-        $lat =  48.6726957;
+        $lat = 48.6726957;
         $lng = 2.3239693;
         Trail::getInstance()
-            ->addStep("Lieux de diffusion", "/lieux/");
+            ->addStep('Lieux', '/lieux/');
 
         $lieux_proches = Lieu::fetchLieuxByRadius(
             [
@@ -60,7 +60,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Lieux de diffusion", "/lieux/")
+            ->addStep("Lieux", "/lieux/")
             ->addStep("Mes lieux");
 
         $smarty->assign('lieux', Lieu::getLieux());
@@ -114,7 +114,7 @@ final class Controller
         $smarty->assign('lieu', $lieu);
 
         $trail = Trail::getInstance()
-            ->addStep("Lieux de diffusion", "/lieux/")
+            ->addStep("Lieux", "/lieux/")
             ->addStep(WorldCountry::getName($lieu->getIdCountry()), "/lieux/?c=" . $lieu->getIdCountry())
             ->addStep(WorldRegion::getName($lieu->getIdCountry(), $lieu->getIdRegion()), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion());
         if ($lieu->getIdCountry() === 'FR') {
@@ -291,7 +291,7 @@ final class Controller
         }
 
         Trail::getInstance()
-            ->addStep("Lieux de diffusion", "/lieux/")
+            ->addStep("Lieux", "/lieux/")
             ->addStep("Ajouter");
 
         $smarty->assign('types_lieu', Lieu::getTypes());
@@ -309,7 +309,7 @@ final class Controller
         Tools::auth(Membre::TYPE_STANDARD);
 
         Trail::getInstance()
-            ->addStep("Lieux de diffusion", "/lieux/")
+            ->addStep("Lieux", "/lieux/")
             ->addStep("Modifier");
 
         $smarty = new AdHocSmarty();
@@ -411,7 +411,7 @@ final class Controller
         $id = (int) Route::params('id');
 
         Trail::getInstance()
-            ->addStep("Lieux de diffusion", "/lieux/")
+            ->addStep("Lieux", "/lieux/")
             ->addStep("Supprimer");
 
         $smarty = new AdHocSmarty();
