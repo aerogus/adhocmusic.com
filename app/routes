@@ -194,7 +194,6 @@ photos|edit|GET|/photos/edit/:id
 photos|edit|POST|/photos/edit
 photos|delete|GET|/photos/delete/:id
 photos|delete|POST|/photos/delete
-photos|from_iphone|POST|/photos/from-iphone
 photos|show|GET|/photos/:id
 structures|index|GET|/structures/
 structures|create|GET|/structures/create

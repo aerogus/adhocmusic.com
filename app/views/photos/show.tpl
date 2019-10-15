@@ -10,13 +10,6 @@
 
   <div class="col-1">
 
-    {if !empty($groupe)}
-    <div class="box">
-      <header>
-        <h1>{$groupe->getName()}</h1>
-      </header>
-      <div>
-
     {include file="common/boxstart.tpl"}
     {if !empty($groupe)}
     <div class="metatop">Groupe</div>
@@ -68,8 +61,8 @@
     </p>
 
     <p align="center" style="margin: 10px 0px;">
-    <span id="pname">{$photo->getName()|escape}</span>
-    <span id="pcredits">{if !empty($has_credits)}(<i>crédits: {$photo->getCredits()|escape}</i>){/if}</span>
+      <span id="pname">{$photo->getName()|escape}</span>
+      <span id="pcredits">{if !empty($has_credits)}(<i>crédits: {$photo->getCredits()|escape}</i>){/if}</span>
     </p>
 
     {include file="comments/share.tpl" title="cette photo" url=$photo->getUrl()}

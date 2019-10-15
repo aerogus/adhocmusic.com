@@ -45,7 +45,17 @@ class ForumPrive extends Forum
              . "ORDER BY  `t`.`modified_on` DESC, `m`.`id_thread` DESC , `m`.`id_message` DESC "
              . "LIMIT " . ((int) $page * FORUM_NB_THREADS_PER_PAGE) ."," . FORUM_NB_THREADS_PER_PAGE;
 
-        return $db->queryWithFetch($sql);
+        $threads = $db->queryWithFetch($sql);
+
+        if (is_array($threads)) {
+            foreach ($threads as $idx => $thread) {
+                $threads[$idx]['url'] = HOME_URL . '/adm/forums/thread/' . $thread['id_thread'];
+                $threads[$idx]['created_by_url'] = HOME_URL . '/membres/' . $thread['created_by'];
+                $threads[$idx]['created_by_avatar'] = MEDIA_URL . '/membre/ca/' . $thread['created_by'] . '.jpg';
+            }
+        }
+
+        return $threads;
     }
 
     /**
@@ -68,6 +78,10 @@ class ForumPrive extends Forum
              . "WHERE `id_thread` = " . (int) $id_thread;
         $thread = $db->queryWithFetchFirstRow($sql);
 
+        $thread['url'] = HOME_URL . '/adm/forums/thread/' . $thread['id_thread'];
+        $thread['created_by_url'] = HOME_URL . '/membres/' . $thread['created_by'];
+        $thread['created_by_avatar'] = MEDIA_URL . '/membre/ca/' . $thread['created_by'] . '.jpg';
+
         $sql = "SELECT `id_message`, `id_thread`, `created_on`, `modified_on`, "
              . "`created_by`, `modified_by`, `text` "
              . "FROM `" . static::$_db_table_forum_message . "` "
@@ -76,12 +90,15 @@ class ForumPrive extends Forum
              . "LIMIT " . ((int) $page * FORUM_NB_MESSAGES_PER_PAGE) ."," . FORUM_NB_MESSAGES_PER_PAGE;
         $messages = $db->queryWithFetch($sql);
 
-        foreach ($messages as $key => $message) {
+        foreach ($messages as $idx => $message) {
             $wiki_parsing = false;
             if ($message['created_on'] > '2011-04-16 00:00:00' && $message['created_on'] < '2011-09-26 10:45:00') {
                 $wiki_parsing = true;
             }
-            $messages[$key]['parsed_text'] = self::parseMessage($message['text'], $wiki_parsing);
+            $messages[$idx]['parsed_text'] = self::parseMessage($message['text'], $wiki_parsing);
+            $messages[$idx]['url'] = HOME_URL . '/adm/forums/thread/' . $message['id_thread'];
+            $messages[$idx]['created_by_url'] = HOME_URL . '/membres/' . $message['created_by'];
+            $messages[$idx]['created_by_avatar'] = MEDIA_URL . '/membre/ca/' . $message['created_by'] . '.jpg';
         }
 
         return [
@@ -107,7 +124,6 @@ class ForumPrive extends Forum
         $db->query($sql);
 
         return true;
-        //return $db->affectedRows();
     }
 
     /**
@@ -223,10 +239,10 @@ class ForumPrive extends Forum
 
         $subs = $db->queryWithFetch($sql);
 
-        if (!is_array($subs)) {
+        if (is_array($subs)) {
             foreach ($subs as $idx => $sub) {
                 $subs[$idx]['url'] = HOME_URL . '/membres/' . $sub['id_contact'];
-                $subs[$idx]['avatar'] = MEDIA_URL . '/membres/ca/' . $sub['id_contact'] . '.jpg';
+                $subs[$idx]['avatar'] = MEDIA_URL . '/membre/ca/' . $sub['id_contact'] . '.jpg';
             }
         }
 
