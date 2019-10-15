@@ -5,8 +5,19 @@
  */
 class ForumPrive extends Forum
 {
+    /**
+     * @var string
+     */
     protected static $_db_table_forum_info    = 'adhoc_forum_prive_info';
+
+    /**
+     * @var string
+     */
     protected static $_db_table_forum_thread  = 'adhoc_forum_prive_thread';
+
+    /**
+     * @var string
+     */
     protected static $_db_table_forum_message = 'adhoc_forum_prive_message';
 
     /**
@@ -86,7 +97,7 @@ class ForumPrive extends Forum
      *
      * @return bool
      */
-    static function delAllSubscriptions(int $id_contact)
+    static function delAllSubscriptions(int $id_contact): bool
     {
         $db = DataBase::getInstance();
 
@@ -101,8 +112,13 @@ class ForumPrive extends Forum
 
     /**
      * Retire un abonnement forum à un membre interne
+     *
+     * @param int    $id_contact id_contact
+     * @param string $id_forum   id_forum
+     *
+     * @return bool
      */
-    static function delSubscriberToForum(int $id_contact, string $id_forum)
+    static function delSubscriberToForum(int $id_contact, string $id_forum): bool
     {
         $db = DataBase::getInstance();
 
@@ -117,8 +133,13 @@ class ForumPrive extends Forum
 
     /**
      * Ajoute un abonnement forum à un membre interne
+     *
+     * @param int    $id_contact id_contact
+     * @param string $id_forum   id_forum
+     *
+     * @return bool
      */
-    static function addSubscriberToForum(int $id_contact, string $id_forum)
+    static function addSubscriberToForum(int $id_contact, string $id_forum): bool
     {
         $db = DataBase::getInstance();
 
@@ -133,8 +154,12 @@ class ForumPrive extends Forum
 
     /**
      * Retourne la liste des forums auxquels est abonné l'id_contact
+     *
+     * @param int $id_contact id_contact
+     *
+     * @return array
      */
-    static function getSubscribedForums($id_contact)
+    static function getSubscribedForums(int $id_contact): array
     {
         $db = DataBase::getInstance();
 
@@ -151,8 +176,6 @@ class ForumPrive extends Forum
             's' => (bool) in_array('s', $forums),
             't' => (bool) in_array('t', $forums),
         ];
-
-        //return $forums;
     }
 
     /**
@@ -198,6 +221,15 @@ class ForumPrive extends Forum
              . "AND `m`.`id_contact` = `s`.`id_contact` "
              . "AND `s`.`id_forum` = '" . $db->escape($id_forum) . "'";
 
-        return $db->queryWithFetch($sql);
+        $subs = $db->queryWithFetch($sql);
+
+        if (!is_array($subs)) {
+            foreach ($subs as $idx => $sub) {
+                $subs[$idx]['url'] = HOME_URL . '/membres/' . $sub['id_contact'];
+                $subs[$idx]['avatar'] = MEDIA_URL . '/membres/ca/' . $sub['id_contact'] . '.jpg';
+            }
+        }
+
+        return $subs;
     }
 }
