@@ -2,6 +2,9 @@
 
 final class Controller
 {
+    /**
+     * @return string
+     */
     static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -9,8 +12,8 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Newsletter");
+            ->addStep('Privé', '/adm/')
+            ->addStep('Newsletter');
 
         $smarty->assign(
             'newsletters', Newsletter::getNewsletters(
@@ -25,6 +28,9 @@ final class Controller
         return $smarty->fetch('adm/newsletter/index.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function create(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -45,15 +51,15 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/codemirror.min.css');
-        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/codemirror.min.js');
-        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/mode/xml/xml.min.js');
+        $smarty->enqueue_style('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css');
+        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.js');
+        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/xml/xml.min.js');
         $smarty->enqueue_script('/js/adm/newsletter.js');
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Newsletter", "/adm/newsletter/")
-            ->addStep("Ajout");
+            ->addStep('Privé', '/adm/')
+            ->addStep('Newsletter', '/adm/newsletter/')
+            ->addStep('Ajout');
 
         $data = [
             'title' => '',
@@ -65,6 +71,9 @@ final class Controller
         return $smarty->fetch('adm/newsletter/create.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function edit(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -93,15 +102,15 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/codemirror.min.css');
-        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/codemirror.min.js');
-        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/mode/xml/xml.min.js');
+        $smarty->enqueue_style('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css');
+        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.js');
+        $smarty->enqueue_script('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/xml/xml.min.js');
         $smarty->enqueue_script('/js/adm/newsletter.js');
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Newsletter", "/adm/newsletter/")
-            ->addStep("Edition");
+            ->addStep('Privé', '/adm/')
+            ->addStep('Newsletter', '/adm/newsletter/')
+            ->addStep('Édition');
 
         $smarty->assign('newsletter', Newsletter::getInstance($id));
 
@@ -111,10 +120,13 @@ final class Controller
     /**
      * Upload fichier pour newsletter
      * il est stocké dans le répertoire dédié sans traitement particulier
+     *
+     * @return string
      */
     static function upload(): string
     {
         $id = (int) Route::params('id');
+
         if (is_uploaded_file($_FILES['file']['tmp_name'])) {
             $n = Newsletter::getInstance($id);
             if (!file_exists($n->getFilePath())) {
