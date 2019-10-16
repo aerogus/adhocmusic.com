@@ -6,7 +6,7 @@
  */
 
 // n° de newslette a traiter
-define('ID_NEWSLETTER', 87);
+define('ID_NEWSLETTER', 88);
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -15,7 +15,7 @@ require_once __DIR__ . '/../bootstrap.php';
 define('MAIL_SEND_DELAY', 1);
 
 // pour la gestion de reprise après plantage
-define('MIN_CONTACT_ID', 0);
+define('MIN_ID_CONTACT', 0);
 
 $newsletter = Newsletter::getInstance(ID_NEWSLETTER);
 
@@ -31,14 +31,14 @@ $subs = [
 //$subs = Newsletter::getSubscribers();
 
 echo "Trouvé : " . count($subs) . " emails\n";
-die();
+die;
 // boucle des emails - expédition effective
 
 $n = 1;
 
 foreach ($subs as $sub) {
     // suite après plantage
-    if ($sub['id_contact'] < MIN_CONTACT_ID) {
+    if ($sub['id_contact'] < MIN_ID_CONTACT) {
         continue;
     }
 
@@ -48,9 +48,9 @@ foreach ($subs as $sub) {
     Log::write('nl-send', $log);
 
     $newsletter_id_newsletter = ID_NEWSLETTER;
-    $newsletter_id_contact = $sub['id_contact'];
+    $newsletter_id_contact = (int) $sub['id_contact'];
 
-    $newsletter->setIdContact($sub['id_contact'])
+    $newsletter->setIdContact((int) $sub['id_contact'])
         ->setTplVar('%%email%%', $sub['email'])
         ->setTplVar('%%pseudo%%', $sub['pseudo'])
         ->setTplVar('%%url%%', $newsletter->getUrl());
