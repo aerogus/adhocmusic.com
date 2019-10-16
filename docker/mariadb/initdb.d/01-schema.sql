@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_type_musicien` (
 
 CREATE TABLE IF NOT EXISTS `adhoc_contact` (
   `id_contact` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `email` varchar(150) DEFAULT NULL,
+  `email` varchar(150) NOT NULL,
   `lastnl` datetime DEFAULT NULL,
   PRIMARY KEY (`id_contact`),
   UNIQUE KEY `email` (`email`)
