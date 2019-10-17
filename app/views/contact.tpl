@@ -25,8 +25,6 @@
 
       {if !empty($show_form)}
 
-      <p>Merci de consulter la foire aux questions avant de nous contacter</p>
-
       <form id="form-contact" name="form-contact" method="post" action="/contact" enctype="multipart/form-data">
         <ul>
           <li>
@@ -51,7 +49,7 @@
           </li>
           <li>
             <label for="mailing">J'accepte de recevoir les lettres d'information de l'association</label>
-            <input type="checkbox" class="switch" id="mailing" name="mailing" checked="{if !empty($mailing)}checked{/if}">
+            <input type="checkbox" class="switch" id="mailing" name="mailing"{if !empty($mailing)} checked="checked"{/if}>
           </li>
           <li>
             <div class="infobulle error" id="error_check"{if empty($error_check)} style="display: none"{/if}>Erreur à la vérification du code de sécurité</div>
