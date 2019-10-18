@@ -10,7 +10,7 @@
       <p>Aucun groupe référencé.</p>
     </div>
     {else}
-    <div class="reset grid-6-small-3 has-gutter">
+    <div class="reset grid-8-small-4 has-gutter">
       {foreach from=$groupes item=groupe}
       <div class="grpitem">
         <a href="{$groupe['url']}">
