@@ -17,7 +17,14 @@ final class Controller
         Trail::getInstance()
             ->addStep("Groupes");
 
-        $smarty->assign('liste_groupes', Groupe::getGroupesByName());
+        $smarty->assign(
+            'groupes', Groupe::getGroupes(
+                [
+                    'online' => true,
+                    'sort' => 'name',
+                ]
+            )
+        );
 
         return $smarty->fetch('groupes/index.tpl');
     }

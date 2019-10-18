@@ -1,30 +1,26 @@
 {include file="common/header.tpl"}
 
-
   <div class="box">
     <header>
       <h3>Groupes</h3>
     </header>
+
+    {if !count($groupes)}
     <div>
-
-{if !count($liste_groupes)}
-<p>Aucun groupe référencé.</p>
-{/if}
-
-{foreach from=$liste_groupes item=groupes key=key}
-  <div class="box">
-    <header>
-      <h2>{$key|escape}</h2>
-    </header>
-    <ul class="groupes">
-    {foreach $groupes as $groupe}
-      {include file="groupes/_groupe.tpl" groupe=$groupe}
-    {/foreach}
-    </ul>
+      <p>Aucun groupe référencé.</p>
+    </div>
+    {else}
+    <div class="reset grid-6-small-3 has-gutter">
+      {foreach from=$groupes item=groupe}
+      <div class="item">
+        <a href="{$groupe['url']}">
+          <img src="{$groupe['mini_photo']}" alt="" />
+          <p>{$groupe['name']}</p>
+        </a>
+      </div>
+      {/foreach}
+    </div>
+    {/if}
   </div>
-{/foreach}
-
-</div>
-</div>
 
 {include file="common/footer.tpl"}
