@@ -386,7 +386,8 @@ abstract class ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $db->query(sprintf('DELETE FROM `%s` WHERE `%s` = %d', $this->getDbTable(), $this->getDbPk(), $this->getId()));
+        $sql = sprintf('DELETE FROM `%s` WHERE `%s` = %d', $this->getDbTable(), $this->getDbPk(), $this->getId());
+        $db->query($sql);
 
         if ($db->affectedRows()) {
             return true;

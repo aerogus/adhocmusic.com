@@ -8,7 +8,7 @@
   <form id="form-faq-delete" name="form-faq-delete" action="/adm/faq/delete" method="post">
     <p>Confirmer la suppression de cette question ?</p>
     <input class="button" id="form-faq-delete-submit" name="form-faq-delete-submit" type="submit" value="Supprimer">
-    <input type="hidden" name="id_faq" value="{$faq->getId()}">
+    <input type="hidden" name="id" value="{$faq->getId()}">
   </form>
   </div>
 </div>

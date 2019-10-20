@@ -98,6 +98,9 @@ final class Controller
         return $smarty->fetch('adm/faq/edit.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function delete(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -112,9 +115,7 @@ final class Controller
             ->addStep('Suppression');
 
         if (Tools::isSubmit('form-faq-delete')) {
-            $faq = FAQ::getInstance($id);
-            $faq->delete();
-
+            FAQ::getInstance($id)->delete();
             Tools::redirect('/adm/faq/?delete=1');
         }
 

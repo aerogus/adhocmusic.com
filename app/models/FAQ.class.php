@@ -324,10 +324,10 @@ class FAQ extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `id_faq`, `id_category`, `question`, `answer` "
+        $sql = "SELECT `id_faq`, `id_category`, `question`, `answer`, `online` "
              . "FROM `adhoc_faq` "
              . "WHERE 1 ";
-        if ($all) {
+        if (!$all) {
             $sql .= "AND `online` ";
         }
         $sql .= "ORDER BY `id_faq` ASC";
