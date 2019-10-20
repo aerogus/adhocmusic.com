@@ -35,5 +35,19 @@ jQuery(document).ready(function ($) {
     return valid;
   });
 
+  $('.faq p').hide();
+  $('.faq h3').click((event) => {
+    console.log('click');
+    let arrow = $(event.currentTarget).find('i');
+    let answer = $(event.currentTarget).parent().find('p');
+    if (arrow.hasClass('icon-arrow--right')) {
+      arrow.removeClass('icon-arrow--right').addClass('icon-arrow--down');
+      answer.show();
+    } else {
+      arrow.removeClass('icon-arrow--down').addClass('icon-arrow--right');
+      answer.hide();
+    }
+  });
+
 });
 

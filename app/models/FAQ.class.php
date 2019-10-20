@@ -24,9 +24,9 @@ class FAQ extends ObjectModel
     protected static $_table = 'adhoc_faq';
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected $_id_faq = 0;
+    protected $_id_faq = null;
 
     /**
      * @var int
@@ -44,6 +44,11 @@ class FAQ extends ObjectModel
     protected $_answer = '';
 
     /**
+     * @var bool
+     */
+    protected $_online = false;
+
+    /**
      * Liste des attributs de l'objet
      * on précise si en base c'est de type :
      * - numérique/integer/float/bool (= num)
@@ -56,6 +61,7 @@ class FAQ extends ObjectModel
         'id_category' => 'num',
         'question'    => 'str',
         'answer'      => 'str',
+        'online'      => 'bool',
         'created_on'  => 'date',
         'modified_on' => 'date',
     ];
@@ -87,9 +93,17 @@ class FAQ extends ObjectModel
     }
 
     /**
-     * Retourne la date d'inscription format YYYY-MM-DD HH:II:SS
+     * @return bool
+     */
+    function getOnline(): bool
+    {
+        return $this->_online;
+    }
+
+    /**
+     * Retourne la date de création format YYYY-MM-DD HH:II:SS
      *
-     * @return string|false
+     * @return string|null
      */
     function getCreatedOn(): ?string
     {
@@ -100,9 +114,9 @@ class FAQ extends ObjectModel
     }
 
     /**
-     * Retourne la date d'inscription sous forme de timestamp
+     * Retourne la date de création sous forme d'un timestamp
      *
-     * @return int
+     * @return int|null
      */
     function getCreatedOnTs(): ?string
     {
@@ -110,10 +124,10 @@ class FAQ extends ObjectModel
             return (int) strtotime($this->_created_on);
         }
         return null;
-     }
+    }
 
     /**
-     * Retourne la date de modification de la fiche
+     * Retourne la date de modification
      *
      * @return string|null
      */
@@ -126,7 +140,7 @@ class FAQ extends ObjectModel
     }
 
     /**
-     * Retourne la date de modification de la fiche sous forme de timestamp
+     * Retourne la date de modification sous forme d'un timestamp
      *
      * @return int|null
      */
@@ -143,14 +157,14 @@ class FAQ extends ObjectModel
     /* début setters */
 
     /**
-     * @param int $val val
+     * @param int $id_category id_category
      *
      * @return object
      */
-    function setIdCategory(int $val): object
+    function setIdCategory(int $id_category): object
     {
-        if ($this->_id_category !== $val) {
-            $this->_id_category = $val;
+        if ($this->_id_category !== $id_category) {
+            $this->_id_category = $id_category;
             $this->_modified_fields['id_category'] = true;
         }
 
@@ -158,15 +172,15 @@ class FAQ extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $question question
      *
      * @return object
      */
-    function setQuestion(string $val): object
+    function setQuestion(string $question): object
     {
-        $val = trim($val);
-        if ($this->_question !== $val) {
-            $this->_question = $val;
+        $question = trim($question);
+        if ($this->_question !== $question) {
+            $this->_question = $question;
             $this->_modified_fields['question'] = true;
         }
 
@@ -174,15 +188,15 @@ class FAQ extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $answer réponse
      *
      * @return object
      */
-    function setAnswer(string $val): object
+    function setAnswer(string $answer): object
     {
-        $val = trim($val);
-        if ($this->_answer !== $val) {
-            $this->_answer = $val;
+        $answer = trim($answer);
+        if ($this->_answer !== $answer) {
+            $this->_answer = $answer;
             $this->_modified_fields['answer'] = true;
         }
 
@@ -190,14 +204,29 @@ class FAQ extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param bool $online online
      *
      * @return object
      */
-    function setCreatedOn(string $val): object
+    function setOnline(bool $online): object
     {
-        if ($this->_created_on !== $val) {
-            $this->_created_on = $val;
+        if ($this->_online !== $online) {
+            $this->_online = $online;
+            $this->_modified_fields['online'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $created_on date de création format "YYYY-MM-DD HH:II:SS"
+     *
+     * @return object
+     */
+    function setCreatedOn(string $created_on): object
+    {
+        if ($this->_created_on !== $created_on) {
+            $this->_created_on = $created_on;
             $this->_modified_fields['created_on'] = true;
         }
 
@@ -219,12 +248,14 @@ class FAQ extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $modified_on date de modification format "YYYY-MM-DD HH:II:SS"
+     *
+     * @return object
      */
-    function setModifiedOn(string $val): object
+    function setModifiedOn(string $modified_on): object
     {
-        if ($this->_modified_on !== $val) {
-            $this->_modified_on = $val;
+        if ($this->_modified_on !== $modified_on) {
+            $this->_modified_on = $modified_on;
             $this->_modified_fields['modified_on'] = true;
         }
 
@@ -259,35 +290,47 @@ class FAQ extends ObjectModel
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getCategory(): string
+    function getCategory(): ?string
     {
         $categories = self::getCategories();
-        return $categories[$this->_id_category];
+        if (array_key_exists($this->_id_category, $categories)) {
+            return $categories[$this->_id_category];
+        }
+        return null;
     }
 
     /**
      * @param int $id_category id_category
      *
-     * @return string
+     * @return string|null
      */
-    static function getCategoryById(int $id_category): string
+    static function getCategoryById(int $id_category): ?string
     {
         $categories = self::getCategories();
-        return $categories[$id_category];
+        if (array_key_exists($id_category, $categories)) {
+            return $categories[$id_category];
+        }
+        return null;
     }
 
     /**
+     * @param bool $all tout (mode admin)
+     *
      * @return array
      */
-    static function getFAQs(): array
+    static function getFAQs(bool $all = false): array
     {
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_faq`, `id_category`, `question`, `answer` "
-             . "FROM `adhoc_faq`"
-             . "ORDER BY `id_faq` ASC";
+             . "FROM `adhoc_faq` "
+             . "WHERE 1 ";
+        if ($all) {
+            $sql .= "AND `online` ";
+        }
+        $sql .= "ORDER BY `id_faq` ASC";
 
         $res = $db->queryWithFetch($sql);
 

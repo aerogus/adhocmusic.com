@@ -1,8 +1,11 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Foire aux questions"}
-
-<form id="form-faq-create" name="form-faq-create" action="/adm/faq/create" method="post">
+<div class="box">
+  <header>
+    <h1>Ajout d'une question fréquente</h1>
+  </header>
+  <div>
+  <form id="form-faq-create" name="form-faq-create" action="/adm/faq/create" method="post">
   <ul>
     <li>
       <label for="id_category">Catégorie</label>
@@ -20,10 +23,14 @@
       <label for="answer">Réponse</label>
       <textarea id="answer" name="answer"></textarea>
     </li>
+    <li>
+      <label for="online">Afficher</label>
+      <input class="switch" type="checkbox" id="online" name="online">
+    </li>
   </ul>
-  <input id="form-faq-create-submit" name="form-faq-create-submit" type="submit">
-</form>
-
-{include file="common/boxend.tpl"}
+  <input class="button" id="form-faq-create-submit" name="form-faq-create-submit" type="submit">
+  </form>
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

@@ -9,13 +9,13 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Foire aux questions");
+            ->addStep('Privé', '/adm/')
+            ->addStep('Foire aux questions');
 
         $smarty->assign('create', (bool) Route::params('create'));
         $smarty->assign('edit', (bool) Route::params('edit'));
         $smarty->assign('delete', (bool) Route::params('delete'));
-        $smarty->assign('faq', FAQ::getFAQs());
+        $smarty->assign('faq', FAQ::getFAQs(true));
 
         return $smarty->fetch('adm/faq/index.tpl');
     }
@@ -30,21 +30,23 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Foire aux questions", "/adm/faq/")
-            ->addStep("Création");
+            ->addStep('Privé', '/adm/')
+            ->addStep('Foire aux questions', '/adm/faq/')
+            ->addStep('Création');
 
         if (Tools::isSubmit('form-faq-create')) {
             $data = [
                 'id_category' => (int) Route::params('id_category'),
                 'question'    => (string) Route::params('question'),
                 'answer'      => (string) Route::params('answer'),
+                'online'      => (bool) Route::params('online'),
             ];
 
             FAQ::init()
                 ->setIdCategory($data['id_category'])
                 ->setQuestion($data['question'])
                 ->setAnswer($data['answer'])
+                ->setOnline($data['online'])
                 ->save();
 
             Tools::redirect('/adm/faq/?create=1');
@@ -67,9 +69,9 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Foire aux questions", "/adm/faq/")
-            ->addStep("Edition");
+            ->addStep('Privé', '/adm/')
+            ->addStep('Foire aux questions', '/adm/faq/')
+            ->addStep('Édition');
 
         if (Tools::isSubmit('form-faq-edit')) {
             $data = [
@@ -77,12 +79,14 @@ final class Controller
                 'id_category' => (int) Route::params('id_category'),
                 'question'    => (string) Route::params('question'),
                 'answer'      => (string) Route::params('answer'),
+                'online'      => (bool) Route::params('online'),
             ];
 
             FAQ::getInstance($data['id_faq'])
                 ->setIdCategory($data['id_category'])
                 ->setQuestion($data['question'])
                 ->setAnswer($data['answer'])
+                ->setOnline($data['online'])
                 ->save();
 
             Tools::redirect('/adm/faq/?edit=1');
@@ -103,9 +107,9 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Foire aux questions", "/adm/faq/")
-            ->addStep("Suppression");
+            ->addStep('Privé', '/adm/')
+            ->addStep('Foire aux questions', '/adm/faq/')
+            ->addStep('Suppression');
 
         if (Tools::isSubmit('form-faq-delete')) {
             $faq = FAQ::getInstance($id);

@@ -89,7 +89,7 @@
         {if $faq|@count > 0}
           {foreach from=$faq item=f}
           <div class="faq">
-            <h3>{$f.question}</h3>
+            <h3 class="flex-row-reverse">{$f.question} <i class="icon-arrow--right"></i></h3>
             <p>{$f.answer}</p>
           </div>
           {/foreach}

@@ -6,7 +6,7 @@
 {if !empty($edit)}<p class="infobulle success">Question modifiée</p>{/if}
 {if !empty($delete)}<p class="infobulle success">Question supprimée</p>{/if}
 
-<table>
+<table class="table">
   <tr>
     <th>Id</th>
     <th>Catégorie</th>
