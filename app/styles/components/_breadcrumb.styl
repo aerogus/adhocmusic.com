@@ -2,6 +2,7 @@
 
 .breadcrumb
   margin 0 1rem 1rem 1rem
+  text-transform uppercase
 
   ul
 
@@ -12,15 +13,14 @@
       span
         display inline-block
 
-      a
+      &:last-child
         font-weight bold
-        &:hover
-          text-decoration underline
 
       &:after
-        color #666
-        content '〉'
+        color #292933
+        content '/'
         padding-left 1rem
+        padding-right .5rem
 
       &:last-child:after
           content ''

@@ -1028,6 +1028,10 @@ class Groupe extends ObjectModel
      */
     function linkMember(int $id_contact, int $id_type_musicien): bool
     {
+        // on ne peut pas lier un groupe qui n'a pas d'id
+        if (!$this->getId()) {
+            return false;
+        }
         // le groupe existe-t-il bien ?
 
         // l'id_contact est il valide ?
@@ -1247,8 +1251,9 @@ class Groupe extends ObjectModel
 
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `g`.`id_groupe` AS `id`, `g`.`name`, `g`.`mini_text`, `g`.`text`, `g`.`style`, `g`.`lineup`, "
-             . "`g`.`etat`, `g`.`site`, `g`.`influences`, `g`.`created_on`, `g`.`modified_on`, "
+        $sql = "SELECT `g`.`id_groupe` AS `id`, `g`.`name`, `g`.`alias`, `g`.`mini_text`, `g`.`text`, `g`.`style`, `g`.`lineup`, "
+             . "`g`.`etat`, `g`.`site`, `g`.`influences`, `g`.`created_on`, UNIX_TIMESTAMP(`g`.`created_on`) AS `created_on_ts`, "
+             . " `g`.`modified_on`, UNIX_TIMESTAMP(`g`.`modified_on`) AS `modified_on_ts`, "
              . "`g`.`alias`, `g`.`myspace`, `g`.`comment` "
              . "FROM `" . Groupe::getDbTable() . "` `g` "
              . "WHERE 1 ";
@@ -1274,8 +1279,16 @@ class Groupe extends ObjectModel
 
         $res = $db->queryWithFetch($sql);
 
-        if ($limit === 1) {
-            $res = array_pop($res);
+        foreach ($res as $idx => $grp) {
+            $res[$idx]['url'] = HOME_URL . '/' . $res[$idx]['alias'];
+            $res[$idx]['mini_photo'] = '/img/note_adhoc_64.png';
+            if (file_exists(self::getBasePath() . '/m' . $res[$idx]['id'] . '.png')) {
+                $res[$idx]['mini_photo'] = self::getBaseUrl() . '/m' . $res[$idx]['id'] . '.png?ts=' . $res[$idx]['modified_on_ts'];
+            } elseif (file_exists(self::getBasePath() . '/m' . $res[$idx]['id'] . '.jpg')) {
+                $res[$idx]['mini_photo'] = self::getBaseUrl() . '/m' . $res[$idx]['id'] . '.jpg?ts=' . $res[$idx]['modified_on_ts'];
+            } elseif (file_exists(self::getBasePath() . '/m' . $res[$idx]['id'] . '.gif')) {
+                $res[$idx]['mini_photo'] = self::getBaseUrl() . '/m' . $res[$idx]['id'] . '.gif?ts=' . $res[$idx]['modified_on_ts'];
+            }
         }
 
         return $res;
@@ -1319,48 +1332,6 @@ class Groupe extends ObjectModel
             return $tab;
         }
         return [];
-    }
-
-    /**
-     * Retourne le listing de tous les groupes affichables
-     *
-     * Tri par ordre alphabétique
-     *
-     * @return array
-     */
-    static function getGroupesByName(): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_groupe` AS `id`, `name`, UPPER(SUBSTRING(`name`, 1, 1)) AS `lettre`, "
-             . "`mini_text`, `style`, `alias`, `modified_on`, UNIX_TIMESTAMP(`modified_on`) AS `modified_on_ts`, `etat`, "
-             . "CONCAT('" . HOME_URL . "/', `alias`) AS `url` "
-             . "FROM `" . Groupe::getDbTable() . "` "
-             . "WHERE `online` "
-             . "ORDER BY `etat` ASC, `name` ASC";
-
-        $res  = $db->queryWithFetch($sql);
-
-        $tab = [];
-        $cpt = 0;
-        foreach ($res as $grp) {
-            $tab[$grp['lettre']][$cpt] = $grp;
-            $tab[$grp['lettre']][$cpt]['mini_photo'] = '/img/note_adhoc_64.png';
-            $tab[$grp['lettre']][$cpt]['class'] = 'grpinactif';
-            if (file_exists(self::getBasePath() . '/m' . $grp['id'] . '.png')) {
-                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::getBaseUrl() . '/m' . $grp['id'] . '.png?ts=' . $grp['modified_on_ts'];
-            } elseif (file_exists(self::getBasePath() . '/m' . $grp['id'] . '.jpg')) {
-                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::getBaseUrl() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
-            } elseif (file_exists(self::getBasePath() . '/m' . $grp['id'] . '.gif')) {
-                $tab[$grp['lettre']][$cpt]['mini_photo'] = self::getBaseUrl() . '/m' . $grp['id'] . '.gif?ts=' . $grp['modified_on_ts'];
-            }
-
-            if ($grp['etat'] === self::ETAT_ACTIF) {
-                $tab[$grp['lettre']][$cpt]['class'] = 'grpactif';
-            }
-            $cpt++;
-        }
-        return $tab;
     }
 
     /**

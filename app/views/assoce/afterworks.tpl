@@ -7,6 +7,8 @@
     <div>
 
       <p>Depuis la rentrée 2015, AD’HOC propose un nouveau rendez-vous musical à Épinay-sur-Orge: les <em>Afterworks</em>. Ils se déroulent un vendredi soir par mois dans les salles annexes du parc de la mairie d’Épinay-sur-Orge de 19h30 à 22h30. Des artistes sont invités à se produire pour un set acoustique.</p>
+<p align="center">
+<iframe width="560" height="315" sandbox="allow-same-origin allow-scripts" src="https://videos.adhocmusic.com/videos/embed/480852e4-78ba-4ec0-935b-cd55cf069216" frameborder="0" allowfullscreen></iframe></p>
       <p>Si le cœur vous en dit, apportez vos instruments et venez jouer avec eux avant ou après leur set pour une jam session. Non musiciens, vous êtes aussi les bienvenus, ces afterworks sont avant tout un prétexte pour se retrouver régulièrement dans une ambiance cosy et conviviale. Apportez votre paquet de chips, votre bouteille de jus de fruits préféré et vous êtes avec nous pour une soirée détente après une dure semaine de boulot.</p>
 
       <h2>Saison #5 (2019/2020)</h2>
