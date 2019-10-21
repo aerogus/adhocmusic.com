@@ -98,7 +98,7 @@ final class Controller
                 'url' => Video::getFlashUrl($video->getIdHost(), $video->getReference()),
                 'width' => $video->getWidth(),
                 'height' => $video->getHeight(),
-                'type' => "application/x-shockwave-flash",
+                'type' => 'application/x-shockwave-flash',
             ];
             $smarty->assign('og_video', $og_video);
 
@@ -450,7 +450,7 @@ final class Controller
      */
     static function delete(): string
     {
-        Tools::auth(Membre::TYPE_ADMIN);
+        Tools::auth(Membre::TYPE_STANDARD);
 
         $id = (int) Route::params('id');
 
@@ -458,7 +458,7 @@ final class Controller
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes Vidéos', '/videos/my')
+            ->addStep('Mes vidéos', '/videos/my')
             ->addStep('Supprimer une vidéo');
 
         try {

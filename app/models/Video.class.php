@@ -271,6 +271,17 @@ class Video extends Media
         return self::getFlashUrl($this->getIdHost(), $this->getReference());
     }
 
+    /**
+     * @return string|null
+     */
+    function getThumbnailUrl(): ?string
+    {
+        if (file_exists(self::getBasePath() .'/' . $this->getId() . '.jpg')) {
+            return self::getBaseUrl() . '/' . $this->getId() . '.jpg';
+        }
+        return null;
+    }
+
     /* fin getters */
 
     /* début setters */

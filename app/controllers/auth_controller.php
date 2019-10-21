@@ -59,7 +59,7 @@ final class Controller
         $smarty->assign('not_auth', true);
 
         Trail::getInstance()
-            ->addStep("Identification");
+            ->addStep('Se connecter');
 
         return $smarty->fetch('auth/login.tpl');
     }

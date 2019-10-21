@@ -17,6 +17,7 @@
           <label for="name">Titre</label>
           <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
           <input type="text" id="name" name="name" size="50" value="">
+          <div id="thumb" class="pts"></div>
         </li>
         <li>
           <label for="id_groupe">Groupe</label>

@@ -2,7 +2,7 @@
 
 <div class="box" style="width: 320px; margin: 0 auto 20px">
   <header>
-    <h2>Création d'un compte</h2>
+    <h2>Créer un compte</h2>
   </header>
   <div>
 

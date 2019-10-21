@@ -11,58 +11,54 @@
     <h2>Supprimer une vidéo</h2>
   </header>
   <div>
-
-<form method="post" action="/videos/delete">
-  <fieldset>
-    <ol>
+  <form method="post" action="/videos/delete">
+    <ul>
       <li>
-        <span id="name" style="float: right;">{$video->getName()|escape}</span>
         <label for="name">Nom</label>
+        <span id="name">{$video->getName()|escape}</span>
       </li>
       <li>
-        <span id="thumb" style="float: right;"><img src="/media/video/{$video->getId()}.jpg" alt=""></span>
         <label for="thumb">Miniature</label>
+        <span id="thumb"><img src="{$video->getThumbnailUrl()}" alt=""></span>
       </li>
       <li>
-        <span id="id_host" style="float: right;">{$video->getIdHost()}</span>
         <label for="id_host">Hébergeur</label>
+        <span id="id_host">{$video->getIdHost()}</span>
       </li>
       <li>
-        <span id="reference" style="float: right;">{$video->getReference()}</span>
         <label for="reference">Référence</label>
+        <span id="reference">{$video->getReference()}</span>
       </li>
       {if !empty($groupe)}
       <li>
-        <span id="groupe" style="float: right;">{$groupe->getName()|escape}</span>
         <label for="groupe">Groupe</label>
+        <span id="groupe">{$groupe->getName()|escape}</span>
       </li>
       {/if}
       {if !empty($event)}
       <li>
-        <span id="event" style="float: right;">{$event->getDate()} - {$event->getName()|escape}</span>
-        <label for="event">Evénement</label>
+        <label for="event">Événement</label>
+        <span id="event">{$event->getDate()} - {$event->getName()|escape}</span>
       </li>
       {/if}
       {if !empty($lieu)}
       <li>
-        <span id="lieu" style="float: right;">{$lieu->getName()|escape}</span>
         <label for="lieu">Lieu</label>
+        <span id="lieu">{$lieu->getName()|escape}</span>
       </li>
       {/if}
       <li>
-        <span id="online" style="float: right;">{$video->getOnline()}</span>
         <label for="online">Afficher</label>
+        <span id="online">{$video->getOnline()}</span>
       </li>
       <li>
-        <span id="player" style="float: right;">{$video->getPlayer()}</span>
         <label for="player">Voir</label>
+        <span id="player">{$video->getPlayer()}</span>
       </li>
-    </ol>
-  </fieldset>
-  <input id="form-video-delete-submit" name="form-video-delete-submit" class="button" type="submit" value="Confirmer la suppression">
-  <input type="hidden" name="id" value="{$video->getId()|escape}">
-</form>
-
+    </ul>
+    <input id="form-video-delete-submit" name="form-video-delete-submit" class="button" type="submit" value="Confirmer la suppression">
+    <input type="hidden" name="id" value="{$video->getId()|escape}">
+  </form>
   </div>
 </div>
 

@@ -17,7 +17,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         $trail = Trail::getInstance()
-            ->addStep("Membres", "/membres/");
+            ->addStep('Membres', '/membres/');
 
         try {
             $membre = Membre::getInstance($id);
@@ -58,7 +58,7 @@ final class Controller
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
         Trail::getInstance()
-            ->addStep("Inscription");
+            ->addStep('Créer un compte');
 
         $smarty->assign('create', (bool) Route::params('create'));
 
