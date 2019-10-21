@@ -66,8 +66,6 @@ final class Controller
         $data = [
             'pseudo'         => '',
             'email'          => '',
-            'last_name'      => '',
-            'first_name'     => '',
             'mailing'        => true,
             'csrf'           => '',
         ];
@@ -77,8 +75,6 @@ final class Controller
             $data = [
                 'pseudo'         => trim((string) Route::params('pseudo')),
                 'email'          => trim(strtolower((string) Route::params('email'))),
-                'last_name'      => trim((string) Route::params('last_name')),
-                'first_name'     => trim((string) Route::params('first_name')),
                 'mailing'        => (bool) Route::params('mailing'),
                 'csrf'           => '',
             ];
@@ -94,8 +90,6 @@ final class Controller
                         ->setEmail($data['email'])
                         ->setPseudo($data['pseudo'])
                         ->setPassword($data['password'])
-                        ->setLastName($data['last_name'])
-                        ->setFirstName($data['first_name'])
                         ->setMailing($data['mailing'])
                         ->setLevel(Membre::TYPE_STANDARD);
 
@@ -423,12 +417,6 @@ final class Controller
                 $errors['already_member'] = $pseudo;
             }
         }
-        if (empty($data['last_name'])) {
-            $errors['last_name'] = true;
-        }
-        if (empty($data['first_name'])) {
-            $errors['first_name'] = true;
-        }
         if (count($errors)) {
             return false;
         }
@@ -449,12 +437,6 @@ final class Controller
             $errors['email'] = true;
         } elseif (!Email::validate($data['email'])) {
             $errors['email'] = true;
-        }
-        if (empty($data['last_name'])) {
-            $errors['last_name'] = true;
-        }
-        if (empty($data['first_name'])) {
-            $errors['first_name'] = true;
         }
         if (empty($data['id_country'])) {
             $errors['id_country'] = true;

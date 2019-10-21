@@ -46,23 +46,13 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
       <input id="pseudo" name="pseudo" type="text" size="35" value="{$data.pseudo|escape}" placeholder="Pseudo">
     </li>
     <li>
-      <label for="last_name">Nom</label>
-      <div class="infobulle error" id="error_last_name"{if empty($error_last_name)} style="display: none"{/if}>Vous devez saisir votre nom</div>
-      <input id="last_name" name="last_name" type="text" size="35" value="{$data.last_name|escape}" placeholder="Nom">
-    </li>
-    <li>
-      <label for="first_name">Prénom</label>
-      <div class="infobulle error" id="error_first_name"{if empty($error_first_name)} style="display: none"{/if}>Vous devez saisir votre prénom</div>
-      <input id="first_name" name="first_name" type="text" size="35" value="{$data.first_name|escape}" placeholder="Prénom">
-    </li>
-    <li>
       <label for="mailing">Newsletter</label>
       <span><input id="mailing" class="switch" name="mailing" type="checkbox"{if !empty($data.mailing)} checked="checked"{/if}> J'accepte de recevoir les lettres d'information de l'association.</span>
     </li>
   </ul>
   <input type="hidden" name="csrf" value="{$data.csrf}">
   <input type="hidden" name="text" value="{$data.text|escape}">
-  <input id="form-membrer-create-submit" name="form-member-create-submit" class="button" type="submit" value="S'Inscrire">
+  <input id="form-membrer-create-submit" name="form-member-create-submit" class="button" type="submit" value="S'inscrire">
 </form>
 
 {/if}

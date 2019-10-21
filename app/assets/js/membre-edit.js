@@ -6,18 +6,6 @@ jQuery(document).ready(function ($) {
 
   $('#form-member-edit').submit(function () {
     var valid = true;
-    if ($('#last_name').val().length === 0) {
-      $('#last_name').prev('.error').fadeIn();
-      valid = false;
-    } else {
-      $('#last_name').prev('.error').fadeOut();
-    }
-    if ($('#first_name').val().length === 0) {
-      $('#first_name').prev('.error').fadeIn();
-      valid = false;
-    } else {
-      $('#first_name').prev('.error').fadeOut();
-    }
     if ($('#id_city').val().length === 0) {
       $('#id_city').prev('.error').fadeIn();
       valid = false;
