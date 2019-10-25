@@ -164,7 +164,6 @@ final class Controller
                 [
                     'event'  => $event->getId(),
                     'online' => true,
-                    'sort'   => 'random',
                     'limit'  => 100,
                 ]
             )
