@@ -10,7 +10,7 @@
 
   <div class="box col-2-small-1">
     <header>
-      <h3>{$event->getName()}</h3>
+      <h1>{$event->getName()}</h1>
     </header>
     <div>
 
@@ -59,8 +59,6 @@
 
   <a style="display:inline-block;background:#efefef;margin:10px 0;padding:5px" href="/events/ical/{$event->getId()}.ics"><img src="/img/icones/cal.svg" width="16" height="16"> Ajout au calendrier</a>
 
-  {include file="comments/box.tpl" type="e" id_content=$event->getId()}
-
   {if !empty($videos)}
   <div class="blocinfo">
     <h3>Vidéos</h3>
@@ -68,18 +66,6 @@
     <div class="thumb-80">
       <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}">{$video.name|truncate:15:"...":true:true|escape}</a>
       <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}"></a>
-    </div>
-    {/foreach}
-  </div>
-  {/if}
-
-  {if !empty($photos)}
-  <div class="blocinfo">
-    <h3>Photos</h3>
-    {foreach from=$photos item=photo}
-    <div class="thumb-80">
-      <a href="{$photo.url|escape}?from=event"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">{$photo.name|truncate:15:"...":true:true|escape}</a>
-      <a class="overlay-80 overlay-photo-80" href="{$photo.url}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}"></a>
     </div>
     {/foreach}
   </div>
@@ -105,6 +91,23 @@
 </div>
 
 </div>
+
+  {if !empty($photos)}
+  <div class="box">
+    <header>
+      <h2>Photos</h2>
+    </header>
+    <div class="reset gallery">
+    {foreach from=$photos item=photo}
+      <div class="photo">
+        <a href="{$photo.thumb_1000}" data-at-1000="{$photo.thumb_1000}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
+          <img src="{$photo.thumb_320}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
+        </a>
+      </div>
+    {/foreach}
+    </div>
+  </div>
+  {/if}
 
 {/if} {* test unknown event *}
 

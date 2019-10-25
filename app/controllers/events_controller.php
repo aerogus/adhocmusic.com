@@ -115,6 +115,12 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_style('/css/baguetteBox.min.css');
+
+        $smarty->enqueue_script('/js/masonry-4.2.2.min.js');
+        $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
+        $smarty->enqueue_script('/js/baguetteBox-1.11.0.min.js');
+
         $smarty->enqueue_script('/js/events-show.js');
 
         $trail = Trail::getInstance()
@@ -214,6 +220,7 @@ final class Controller
             }
         }
 
+        // moche !
         if (file_exists(ADHOC_ROOT_PATH . '/static/media/event/' . $event->getId() . '.jpg')) {
             $smarty->assign('flyer', true);
             $smarty->assign('og_image', $event->getFlyerUrl($event->getId()));
@@ -405,13 +412,13 @@ final class Controller
 
                     foreach (Route::params('structure') as $idx => $id_structure) {
                         if ($id_structure != 0) {
-                            $event->linkStructure($id_structure);
+                            $event->linkStructure((int) $id_structure);
                         }
                     }
 
                     foreach (Route::params('groupe') as $idx => $id_groupe) {
                         if ($id_groupe != 0) {
-                            $event->linkGroupe($id_groupe);
+                            $event->linkGroupe((int) $id_groupe);
                         }
                     }
 
