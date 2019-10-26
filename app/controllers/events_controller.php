@@ -11,7 +11,7 @@ final class Controller
         $smarty->enqueue_script('/js/events.js');
 
         Trail::getInstance()
-            ->addStep("Agenda");
+            ->addStep('Agenda');
 
         $smarty->assign('create', (bool) Route::params('create'));
         $smarty->assign('edit', (bool) Route::params('edit'));
@@ -75,16 +75,6 @@ final class Controller
         $smarty->assign('day', ($day ? $day : date('d')));
 
         return $smarty->fetch('events/index.tpl');
-    }
-
-    static function fetch(): string
-    {
-        return '';
-    }
-
-    static function my(): string
-    {
-        return self::index();
     }
 
     static function ical(): string

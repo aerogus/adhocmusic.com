@@ -121,8 +121,6 @@ emails|new_commentaire|GET|/emails/new-commentaire
 emails|log_action|GET|/emails/log-action
 emails|newsletter|GET|/emails/newsletter/:id
 events|index|GET|/events/
-events|fetch|GET|/events/fetch
-events|my|GET|/events/my
 events|create|GET|/events/create
 events|create|POST|/events/create
 events|edit|GET|/events/edit/:id
