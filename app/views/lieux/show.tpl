@@ -100,13 +100,14 @@
   <header>
     <h2>Photos</h2>
   </header>
-  <div>
-    {foreach from=$photos item=photo}
-    <div class="thumb-80">
-      <a href="{$photo.url|escape}?from=lieu"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">{$photo.name|truncate:15:"...":true:true|escape}</a>
-      <a class="overlay-80 overlay-photo-80" href="{$photo.url}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}"></a>
+  <div class="reset gallery">
+  {foreach from=$photos item=photo}
+    <div class="photo">
+      <a href="{$photo.thumb_1000}" data-at-1000="{$photo.thumb_1000}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
+        <img src="{$photo.thumb_320}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
+      </a>
     </div>
-    {/foreach}
+  {/foreach}
   </div>
 </div>
 {/if}

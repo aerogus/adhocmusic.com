@@ -22,15 +22,15 @@ final class Controller
         $day   = (int) Route::params('d');
         $page  = (int) Route::params('page');
 
-        if ($year && $month && $day) {
-            $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, $month, $day, $year));
-            $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, $month, $day, $year));
-        } elseif ($year && $month) {
-            $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, $month, 1, $year));
-            $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, $month, 31, $year));
-        } else {
-            $datdeb = date('Y-m-d H:i:s');
-            $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, (int) date('m') + 1, (int) date('d'), (int) date('Y')));
+        if ($year && $month && $day) { // filtrage d'un jour donné
+            $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, $month, $day, $year)); // début de la journée
+            $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, $month, $day, $year)); // fin de la journée
+        } elseif ($year && $month) { // filtrage au mois
+            $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, $month, 1, $year)); // 1er du mois
+            $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, $month, 31, $year)); // dernier du mois
+        } else { // par défaut filtrage des 3 prochains mois
+            $datdeb = date('Y-m-d H:i:s'); // now
+            $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, (int) date('m') + 3, (int) date('d'), (int) date('Y')));
         }
 
         $_events = Event::getEvents(
@@ -114,7 +114,7 @@ final class Controller
         $smarty->enqueue_script('/js/events-show.js');
 
         $trail = Trail::getInstance()
-            ->addStep("Agenda", "/events/");
+            ->addStep('Agenda', '/events/');
 
         try {
             $event = Event::getInstance((int) $id);
