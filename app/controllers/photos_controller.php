@@ -209,6 +209,10 @@ final class Controller
             if (self::_validatePhotoForm($data, $errors)) {
 
                 // cf. max_file_uploads (par défaut 20, les fichiers suivants sont ignorés)
+                ini_set('max_file_uploads', '50');
+
+                // 10min max (le calcul de resize est long)
+                ini_set('max_execution_time', '600');
 
                 foreach ($_FILES['file']['tmp_name'] as $uploaded_photo_path) {
                     if (is_uploaded_file($uploaded_photo_path)) {
@@ -225,6 +229,7 @@ final class Controller
                             if (!is_dir(Photo::getBasePath())) {
                                 mkdir(Photo::getBasePath(), 0755, true);
                             }
+                            // le resize HD peut-être long
                             (new Image($uploaded_photo_path))
                                 ->setType(IMAGETYPE_JPEG)
                                 ->setMaxWidth(2048)
