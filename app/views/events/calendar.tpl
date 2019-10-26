@@ -24,7 +24,7 @@
         {elseif $cel.link == null}
           <td class="none{if $cel.selected} today{/if}">{$cel.num}</td>
         {else}
-          <td class="event{if $cel.selected} today{/if}"><a href="/events/{$cel.link}" title="{$cel.title}">{$cel.num}</a></td>
+          <td class="event{if $cel.selected} today{/if}"><a href="#day-{$year}-{$month}-{$cel.num|string_format:"%02d"}" title="{$cel.title}">{$cel.num}</a></td>
         {/if}
      {/foreach}
     </tr>

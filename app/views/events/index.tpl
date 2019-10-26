@@ -6,7 +6,7 @@
     <header>
       <h3>Agenda</h3>
     </header>
-    <div>
+    <div class="reset">
 
 {if !count($events)}
 <p>Aucune date annoncée pour cette période. <a href="/events/create">Inscrire un évènement</a></p>
@@ -19,17 +19,17 @@
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
 {foreach from=$events item=events_of_the_day key=day}
-<div class="events_of_the_day">
+<div id="day-{$day|date_format:"%Y-%m-%d"}" class="events_of_the_day">
 <h3>{$day|date_format:"%A %d %B %Y"}</h3>
 {foreach from=$events_of_the_day item=event}
 {assign var='obj' value=$event.obj}
 {assign var='tab' value=$event.tab}
-<div class="event">
-  <div class="event_header">
+<div class="event grid-3-small-1">
+  <div class="event_header col-1">
     <div class="event_date">{$obj->getDate()|date_format:"%H:%M"}</div>
     <div class="event_lieu"><a href="/lieux/{$tab.lieu_id}" title="{$tab.lieu_name|escape}"><strong>{$tab.lieu_name|escape}</strong></a><br>{$tab.lieu_id_departement} {$tab.lieu_city}</div>
   </div>
-  <div class="event_content">
+  <div class="event_content col-2">
     <span class="event_title">
       <a href="{$obj->getUrl()|escape}"><strong>{$obj->getName()|upper|escape}</strong></a>
     </span>
