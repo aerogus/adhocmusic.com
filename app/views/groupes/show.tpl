@@ -27,6 +27,7 @@
         {if $groupe->getLineup()}
         <p><strong>Membres</strong><br>{$groupe->getLineup()|escape|@nl2br}</p>
         {/if}
+        {if $groupe->getSite() || $groupe->getFacebookPageId() || $groupe->getTwitterId()}
         <p><strong>Liens</strong></p>
         <ul class="grplinks">
           {if $groupe->getSite()}
@@ -39,11 +40,12 @@
           <li><a href="{$groupe->getTwitterUrl()}" title="Twitter"><img src="/img/icones/twitter.png" alt="">Twitter</a></li>
           {/if}
         </ul>
+        {/if}
         {if $groupe->getCreatedOn()}
-        <p><strong>Fiche créée le</strong><br>{$groupe->getCreatedOn()|date_format:"%d/%m/%Y %H:%M"}</p>
+        <p><strong>Fiche créée le</strong><br>{$groupe->getCreatedOn()|date_format:"%d/%m/%Y"}</p>
         {/if}
         {if $groupe->getModifiedOn()}
-        <p><strong>Mise à jour le</strong><br>{$groupe->getModifiedOn()|date_format:"%d/%m/%Y %H:%M"}</p>
+        <p><strong>Mise à jour le</strong><br>{$groupe->getModifiedOn()|date_format:"%d/%m/%Y"}</p>
         {/if}
       </div>
     </div>
@@ -102,22 +104,6 @@
       </div>
     </div>
 
-    {if $photos|@count > 0}
-    <div class="box">
-      <header>
-        <h2>Photos</h2>
-      </header>
-      <div>
-        {foreach $photos as $photo}
-        <div class="thumb-80">
-          <a href="{$photo.url}" title="{$photo.name|escape}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}" style="display:block"></a>
-          <a class="overlay-80 overlay-photo-80" href="{$photo.url}" title="{$photo.name|escape}"></a>
-        </div>
-        {/foreach}
-      </div>
-    </div>
-    {/if}
-
     {if $f_events|@count > 0}
     <div class="box">
       <header>
@@ -151,6 +137,23 @@
   </div>
 
 </div>
+
+{if !empty($photos)}
+<div class="box">
+  <header>
+    <h2>Photos</h2>
+  </header>
+  <div class="reset gallery">
+  {foreach from=$photos item=photo}
+    <div class="photo">
+      <a href="{$photo.thumb_1000}" data-at-1000="{$photo.thumb_1000}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
+        <img src="{$photo.thumb_320}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
+      </a>
+    </div>
+  {/foreach}
+  </div>
+</div>
+{/if}
 
 {/if} {* test unknown group *}
 
