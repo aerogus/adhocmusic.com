@@ -357,6 +357,7 @@ class Photo extends Media
             foreach ($res as $_res) {
                 $tab[$cpt] = $_res;
                 $tab[$cpt]['url'] = Photo::getUrlById((int) $_res['id']);
+                // @TODO /!\ getPhotoUrl génère la miniature si non existante, très lourd! à optimiser
                 $tab[$cpt]['thumb_80_80']   = Photo::getPhotoUrl((int) $_res['id'],   80,  80, '000000', false,  true);
                 $tab[$cpt]['thumb_320']     = Photo::getPhotoUrl((int) $_res['id'],  320,   0, '000000', false, false);
                 $tab[$cpt]['thumb_680_600'] = Photo::getPhotoUrl((int) $_res['id'],  680, 600, '000000', false, false);

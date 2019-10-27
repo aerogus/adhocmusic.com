@@ -131,22 +131,11 @@
     <div>
       {if $groupes|@count > 0}
       <p>Vous administrez le(s) groupe(s) suivant(s) :</p>
-      <table>
-        <tr>
-          <th>Groupe</th>
-          <th>Poste</th>
-          <th>Créé le</th>
-          <th>Modifié le</th>
-        </tr>
+      <ul>
         {foreach $groupes as $groupe}
-        <tr>
-          <td><a href="/groupes/edit/{$groupe.id}" title="{$groupe.name|escape}">{$groupe.name|escape}</a></td>
-          <td>{$groupe.nom_type_musicien}</td>
-          <td>{$groupe.created_on|date_format:'%d/%m/%Y'}</td>
-          <td>{$groupe.modified_on|date_format:'%d/%m/%Y'}</td>
-        </tr>
+        <li><a href="/groupes/edit/{$groupe.id}" title="{$groupe.name|escape}">{$groupe.name|escape}</a></li>
         {/foreach}
-      </table>
+      </ul>
       <p><a href="/groupes/my">Tous mes groupes</a></p>
       {else}
       <p>aucun groupe</p>
@@ -164,12 +153,6 @@
       <p>Aucune photo</p>
       {else}
       <p>Vous avez {$nb_photos} photos</p>
-      {foreach $photos as $photo}
-      <div class="thumb-80">
-        <a href="/photos/edit/{$photo.id}?page={$page}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}"><br>{$photo.name|truncate:15:"...":true:true|escape}</a>
-        <a class="overlay-80 overlay-photo-80" href="/photos/edit/{$photo.id}" title="{$photo.name|escape}"></a>
-      </div>
-      {/foreach}
       <p><a href="/photos/my">Toutes mes photos</a></p>
       {/if}
       <p><a href="/photos/create">Ajouter une photo</a></p>
@@ -185,12 +168,6 @@
       <p>Aucune vidéo</p>
       {else}
       <p>Vous avez {$nb_videos} vidéos</p>
-      {foreach $videos as $video}
-      <div class="thumb-80">
-        <a href="/videos/edit/{$video.id}?page={$page}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}"><br>{$video.name|truncate:15:"...":true:true|escape}</a>
-        <a class="overlay-80 overlay-video-80" href="/videos/edit/{$video.id}" title="{$video.name|escape}"></a>
-      </div>
-      {/foreach}
       <p><a href="/videos/my">Toutes mes vidéos</a></p>
       {/if}
       <p><a href="/videos/create">Ajouter une vidéo</a></p>

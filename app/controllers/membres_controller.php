@@ -329,47 +329,6 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('groupes', Groupe::getMyGroupes());
-
-        $smarty->assign(
-            'photos', Photo::getPhotos(
-                [
-                    'contact' => $_SESSION['membre']->getId(),
-                    'limit'   => 4,
-                    'debut'   => 0,
-                    'sort'    => 'id',
-                    'sens'    => 'DESC',
-                ]
-            )
-        );
-        $smarty->assign('nb_photos', Photo::getMyPhotosCount());
-
-        $smarty->assign(
-            'videos', Video::getVideos(
-                [
-                    'contact' => $_SESSION['membre']->getId(),
-                    'limit'   => 4,
-                    'debut'   => 0,
-                    'sort'    => 'id',
-                    'sens'    => 'DESC',
-                ]
-            )
-        );
-        $smarty->assign('nb_videos', Video::getMyVideosCount());
-
-        $smarty->assign(
-            'audios', Audio::getAudios(
-                [
-                    'contact' => $_SESSION['membre']->getId(),
-                    'debut'   => 0,
-                    'limit'   => 5,
-                    'sort'    => 'id',
-                    'sens'    => 'DESC',
-                ]
-            )
-        );
-        $smarty->assign('nb_audios', Audio::getMyAudiosCount());
-
         $db = DataBase::getInstance();
 
         $sql = "SELECT `p`.`id_pm` AS `id`, `m`.`pseudo`, `p`.`id_from`, `p`.`date`, `p`.`read_to`, `p`.`text` "
@@ -383,8 +342,13 @@ final class Controller
         $smarty->assign('inbox', $db->queryWithFetch($sql));
 
         $smarty->assign('alerting_groupes', Alerting::getGroupesAlertingByIdContact($_SESSION['membre']->getId()));
-        $smarty->assign('alerting_lieux', Alerting::getLieuxAlertingByIdContact($_SESSION['membre']->getId()));
         $smarty->assign('alerting_events', Alerting::getEventsAlertingByIdContact($_SESSION['membre']->getId()));
+        $smarty->assign('alerting_lieux', Alerting::getLieuxAlertingByIdContact($_SESSION['membre']->getId()));
+
+        $smarty->assign('groupes', Groupe::getMyGroupes());
+        $smarty->assign('nb_photos', Photo::getMyPhotosCount());
+        $smarty->assign('nb_videos', Video::getMyVideosCount());
+        $smarty->assign('nb_audios', Audio::getMyAudiosCount());
 
         return $smarty->fetch('membres/tableau-de-bord.tpl');
     }
