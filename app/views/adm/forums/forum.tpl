@@ -16,7 +16,7 @@
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-<table>
+<table class="table table--zebra">
   <thead>
     <tr>
       <th>Sujet <em>(Réponses)</em></th>

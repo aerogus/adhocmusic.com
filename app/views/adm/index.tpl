@@ -4,13 +4,9 @@
   <header>
     <h2>Communication Interne</h2>
   </header>
-  <div>
+  <div class="reset">
 
-    <blockquote class="trello-board-compact"><a href="https://trello.com/b/Wyw9vGyr">Soirée 24 mars</a></blockquote>
-    <blockquote class="trello-board-compact"><a href="https://trello.com/b/2HJ6aCeh">Festival</a></blockquote>
-    <blockquote class="trello-board-compact"><a href="https://trello.com/b/ONguDiiC">Soirée des 20 ans</a></blockquote>
-
-    <table style="width: 100%">
+    <table class="table table--zebra">
       <thead>
         <tr>
           <th>Forum</th>
@@ -37,7 +33,7 @@
   <header>
     <h2>Editorial du site</h2>
   </header>
-  <div>
+  <div class="reset">
     <ul class="admlinks">
       <li><a href="/adm/featured/">À la une</a></li>
       <li><a href="/adm/newsletter/">Newsletter</a></li>
@@ -53,7 +49,7 @@
   <header>
     <h2>Statistiques / Log</h2>
   </header>
-  <div>
+  <div class="reset">
     <ul class="admlinks">
        <li><a href="/adm/membres/">Membres</a></li>
        <li><a href="/adm/groupes/">Groupes</a></li>
@@ -68,7 +64,7 @@
   <header>
     <h2>Statistiques / Log</h2>
   </header>
-  <div>
+  <div class="reset">
     <ul class="admlinks">
       <li><a href="/adm/stats-top-membres">Membres ayant le + joué à AD'HOC</a></li>
       <li><a href="/adm/stats-top-groupes">Groupes ayant le + joué à AD'HOC</a></li>

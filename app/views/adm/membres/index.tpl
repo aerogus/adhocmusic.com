@@ -1,30 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Membres"}
-
-<script>
-$(function() {
-  // recup param sens
-  // recup param sort
-  // recup param page
-  // gestion params pseudo&last_name&first_name&email&with_groupe&id_type_membre&id_type_musicien
-  $("#pseudo").keyup(function () {
-    var req = $(this).attr("value");
-    $.getJSON('/adm/membres/ajax-search', { q:req }, function(data) {
-      $("#suggests").empty();
-      $('<ul>').appendTo('#suggests');
-      $.each(data, function(key,val) {
-        $('<li><a href="/messagerie/write?pseudo='+encodeURIComponent(val.pseudo)+'">'+encodeURIComponent(val.pseudo)+'</li>').appendTo('#suggests');
-      });
-      $('</ul>').appendTo('#suggests');
-    });
-  });
-  $("#form-member-search").submit(function() {
-    var valid = true;
-    return valid;
-  });
-});
-</script>
+<div class="box">
+  <header>
+    <h1>Membres</h1>
+  </header>
+  <div class="reset">
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page link_base_params=$link_base_params}
 
@@ -75,7 +55,7 @@ $(function() {
   </form>
 </fieldset>
 
-<table id="tab-members" style="width: 720px; float: right;">
+<table class="table table--zebra" id="tab-members" style="width: 720px; float: right;">
 
   <thead>
     <tr>
@@ -97,6 +77,7 @@ $(function() {
 
 <br style="clear: both;" />
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

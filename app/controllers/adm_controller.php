@@ -55,7 +55,7 @@ final class Controller
         }
 
         if (!$sort) {
-            $sort = 'id_contact';
+            $sort = 'name';
         }
 
         $page = (int) Route::params('page');

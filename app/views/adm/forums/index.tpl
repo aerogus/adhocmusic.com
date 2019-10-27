@@ -4,13 +4,13 @@
   <header>
     <h2>Forums privés</h2>
   </header>
-  <div>
+  <div class="reset">
 
-<table>
+<table class="table table--zebra">
   <thead>
     <tr>
       <th>Forum</th>
-      <th>Dernier Message</th>
+      <th>Dernier message</th>
       <th>Discussions</th>
       <th>Messages</th>
     </tr>

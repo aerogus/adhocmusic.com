@@ -1,10 +1,14 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Groupes"}
+<div class="box">
+  <header>
+    <h1>Groupes</h1>
+  </header>
+  <div class="reset">
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-<table id="tab-groupes" style="width: 720px;">
+<table class="table table--zebra" id="tab-groupes">
   <thead>
     <tr>
       <th><a href="/adm/groupes/?sort=id&amp;sens={$sensinv}&amp;page={$page}">Id</a></th>
@@ -27,6 +31,7 @@
   </tbody>
 </table>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}
