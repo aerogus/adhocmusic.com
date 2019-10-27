@@ -435,7 +435,7 @@ class Photo extends Media
     /**
      * @return bool
      */
-    static function invalidatePhotoInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
+    static function invalidatePhotoInCache(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = false): bool
     {
         $uid = 'photo/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
