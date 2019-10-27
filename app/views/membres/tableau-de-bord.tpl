@@ -146,14 +146,14 @@
 
   <div class="box">
     <header>
-      <h2>Mes Photos</h2>
+      <h2>Mes photos</h2>
     </header>
     <div>
-      {if $photos|@count == 0}
-      <p>Aucune photo</p>
-      {else}
+      {if $nb_photos > 0}
       <p>Vous avez {$nb_photos} photos</p>
       <p><a href="/photos/my">Toutes mes photos</a></p>
+      {else}
+      <p>Aucune photo</p>
       {/if}
       <p><a href="/photos/create">Ajouter une photo</a></p>
     </div>
@@ -161,14 +161,14 @@
 
   <div class="box">
     <header>
-      <h2>Mes Vidéos</h2>
+      <h2>Mes vidéos</h2>
     </header>
     <div>
-      {if $videos|@count == 0}
-      <p>Aucune vidéo</p>
-      {else}
+      {if $nb_videos > 0}
       <p>Vous avez {$nb_videos} vidéos</p>
       <p><a href="/videos/my">Toutes mes vidéos</a></p>
+      {else}
+      <p>Aucune vidéo</p>
       {/if}
       <p><a href="/videos/create">Ajouter une vidéo</a></p>
     </div>
@@ -176,34 +176,14 @@
 
   <div class="box">
     <header>
-      <h2>Mes Musiques</h2>
+      <h2>Mes musiques</h2>
     </header>
     <div>
-      {if $audios|@sizeof == 0}
-      <p>Aucune musique</p>
-      {else}
+      {if $nb_audios > 0}
       <p>Vous avez {$nb_audios} audios</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Groupe</th>
-            <th>Titre</th>
-            <th>Créé le</th>
-            <th>Modifié le</th>
-          </tr>
-        </thead>
-        {foreach $audios as $audio}
-        <tbody>
-          <tr>
-            <td>{$audio.groupe_name|escape}</td>
-            <td><a href="/audios/edit/{$audio.id|escape}">{$audio.name|escape}</a></td>
-            <td>{$audio.created_on|date_format:'%d/%m/%Y'}</td>
-            <td>{$audio.modified_on|date_format:'%d/%m/%Y'}</td>
-          </tr>
-        </tbody>
-        {/foreach}
-      </table>
       <p><a href="/audios/my">Toutes mes musiques</a></p>
+      {else}
+      <p>Aucune musique</p>
       {/if}
       <p><a href="/audios/create">Ajouter une musique</a></p>
     </div>
