@@ -4,7 +4,7 @@
   <header>
     <h2>Mes photos</h2>
   </header>
-  <div>
+  <div class="reset gallery">
 
 {if !empty($create)}<p class="infobulle success">Photo ajoutée</p>{/if}
 {if !empty($edit)}<p class="infobulle success">Photo modifiée</p>{/if}
@@ -20,11 +20,12 @@
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-{foreach $photos as $photo}
-<div class="thumb-80">
-  <a href="/photos/edit/{$photo.id}?page={$page}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}"><br>{$photo.name|truncate:15:"...":true:true|escape}</a>
-  <a class="overlay-80 overlay-photo-80" href="/photos/edit/{$photo.id}" title="{$photo.name|escape}"></a>
-</div>
+{foreach from=$photos item=photo}
+  <div class="photo">
+    <a href="/photos/edit/{$photo.id}?page={$page}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
+      <img src="{$photo.thumb_320}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
+    </a>
+  </div>
 {/foreach}
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}

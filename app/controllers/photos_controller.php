@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 
-define('NB_PHOTOS_PER_PAGE', 64);
-define('PHOTOS_IMPORT_DIR', ADHOC_ROOT_PATH . '/import');
-define('PHOTOS_EXTRACT_DIR', PHOTOS_IMPORT_DIR . '/tmp');
+define('NB_PHOTOS_PER_PAGE', 48);
 
 /**
  *
@@ -21,6 +19,10 @@ final class Controller
             ->addStep('Mes photos');
 
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_script('/js/masonry-4.2.2.min.js');
+        $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
+        $smarty->enqueue_script('/js/photo-my.js');
 
         $page = (int) Route::params('page');
 
