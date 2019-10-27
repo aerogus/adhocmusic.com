@@ -19,7 +19,7 @@ final class Controller
             'newsletters', Newsletter::getNewsletters(
                 [
                     'sens' => 'DESC',
-                    'limit' => 50,
+                    'limit' => 500,
                 ]
             )
         );

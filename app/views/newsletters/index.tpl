@@ -4,16 +4,23 @@
   <header>
     <h2>Newsletters</h2>
   </header>
-  <div>
-    {if $newsletters|@count > 0}
-    <ul>
+  <div class="reset">
+    <table class="table table--zebra">
+      <thead>
+        <tr>
+<!--          <th>Date</th>-->
+          <th>Sujet</th>
+        </tr>
+      </thead>
+      <tbody>
       {foreach $newsletters as $newsletter}
-      <li><a href="/newsletters/{$newsletter.id}">{$newsletter.title|escape}</a></li>
+        <tr>
+<!--          <td>{$newsletter.created_on}</td>-->
+          <td><a href="/newsletters/{$newsletter.id}">{$newsletter.title|escape}</a></td>
+        </tr>
       {/foreach}
-    </ul>
-    {else}
-    <p>Aucune newsletter</p>
-    {/if}
+      </tbody>
+    </table>
   </div>
 </div>
 
