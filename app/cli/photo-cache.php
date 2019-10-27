@@ -9,7 +9,7 @@ require_once __DIR__ . '/../bootstrap.php';
 
 echo "nb photos trouvées : " . Photo::getPhotosCount() . "\n";
 
-define('CACHE_ERASE',  true);
+define('CACHE_ERASE',  false);
 define('CACHE_CREATE', true);
 
 $photos = Photo::getPhotos(
@@ -24,6 +24,7 @@ foreach ($photos as $photo) {
 
     // efface le cache des formats anciens et actuels
     if (CACHE_ERASE) {
+        echo "erase " . $photo['id'] . "\n";
         if (Photo::invalidatePhotoInCache((int) $photo['id'],   80,  80, '000000', false,  true)) { // carré 80
             echo "erase " . $photo['id'] . " -    80x80\n";
         }
@@ -42,9 +43,11 @@ foreach ($photos as $photo) {
         if (Photo::invalidatePhotoInCache((int) $photo['id'], 1000,   0, '000000', false, false)) { // new 2019
             echo "erase " . $photo['id'] . " -   1000x0\n";
         }
+        flush();
     }
 
     if (CACHE_CREATE) {
+        echo "create " . $photo['id'] . "\n";
         $url = Photo::getPhotoUrl((int) $photo['id'],    80,  80, '000000', false,  true);
         echo "create " . $photo['id'] . " -   80x80 - " . $url . "\n";
         $url = Photo::getPhotoUrl((int) $photo['id'],   680, 600, '000000', false, false);

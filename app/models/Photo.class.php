@@ -240,7 +240,6 @@ class Photo extends Media
      *                      ['sens']      => "ASC"
      *                      ['debut']     => 0
      *                      ['limit']     => 10
-     *                      ['fetchtags'] => false
      *
      * @return array
      */
@@ -266,11 +265,6 @@ class Photo extends Media
             && ($params['sort'] === 'created_on' || $params['sort'] === 'random')
         ) {
             $sort = $params['sort'];
-        }
-
-        $fetchtags = false;
-        if (isset($params['fetchtags'])) {
-            $fetchtags = (bool) $params['fetchtags'];
         }
 
         $tab_groupe    = [];
