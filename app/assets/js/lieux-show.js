@@ -4,19 +4,23 @@ jQuery(document).ready(function () {
 
   'use strict';
 
-  let gallery = new Masonry('.gallery', {
-    itemSelector: '.photo',
-    fitWidth: true,
-    gutter: 20
-  });
+  if (document.getElementsByClassName('gallery').length > 0) {
 
-  imagesLoaded('.gallery', function () {
-    gallery.layout();
-  });
+    let gallery = new Masonry('.gallery', {
+      itemSelector: '.photo',
+      fitWidth: true,
+      gutter: 20
+    });
 
-  baguetteBox.run('.gallery', {
-    overlayBackgroundColor: '#141416'
-  });
+    imagesLoaded('.gallery', function () {
+      gallery.layout();
+    });
+
+    baguetteBox.run('.gallery', {
+      overlayBackgroundColor: '#141416'
+    });
+
+  }
 
 });
 

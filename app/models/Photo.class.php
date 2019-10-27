@@ -111,7 +111,7 @@ class Photo extends Media
     /**
      * @return int
      */
-    function getHeight(): string
+    function getHeight(): int
     {
         return $this->_height;
     }
@@ -119,7 +119,7 @@ class Photo extends Media
     /**
      * @return int
      */
-    function getWidth(): string
+    function getWidth(): int
     {
         return $this->_width;
     }
@@ -364,9 +364,7 @@ class Photo extends Media
                 $tab[$cpt] = $_res;
                 $tab[$cpt]['url'] = Photo::getUrlById((int) $_res['id']);
                 $tab[$cpt]['thumb_80_80']   = Photo::getPhotoUrl((int) $_res['id'],   80,  80, '000000', false,  true);
-                $tab[$cpt]['thumb_130_130'] = Photo::getPhotoUrl((int) $_res['id'],  130, 130, '000000', false, false);
                 $tab[$cpt]['thumb_320']     = Photo::getPhotoUrl((int) $_res['id'],  320,   0, '000000', false, false);
-                $tab[$cpt]['thumb_400_300'] = Photo::getPhotoUrl((int) $_res['id'],  400, 300, '000000', false, false);
                 $tab[$cpt]['thumb_680_600'] = Photo::getPhotoUrl((int) $_res['id'],  680, 600, '000000', false, false);
                 $tab[$cpt]['thumb_1000']    = Photo::getPhotoUrl((int) $_res['id'], 1000,   0, '000000', false, false);
                 $cpt++;
@@ -421,17 +419,9 @@ class Photo extends Media
     /**
      * @return string
      */
-    function getThumb130Url(): string
+    function getThumb320Url(): string
     {
-        return self::getPhotoUrl($this->getId(), 130, 130, '000000', false, false);
-    }
-
-    /**
-     * @return string
-     */
-    function getThumb400Url(): string
-    {
-        return self::getPhotoUrl($this->getId(), 400, 300, '000000', false, false);
+        return self::getPhotoUrl($this->getId(), 320, 0, '000000', false, false);
     }
 
     /**
