@@ -26,7 +26,7 @@ if (!$alias) {
     echo "Liste des groupes n'ayant jamais joué à Épinay\n";
     $rows = $db->queryWithFetch($sql);
     foreach ($rows as $idx => $row) {
-        echo $idx . ' ' . $row['alias'] . "\n";
+        echo $idx . ' ' . $row['alias'] . " (" . $row['id_groupe'] . ")\n";
     }
     die();
 }
