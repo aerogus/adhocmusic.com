@@ -36,17 +36,6 @@ final class Controller
         $smarty->assign('my_geocode', $lat . ', ' . $lng);
         $smarty->assign('lieux', $lieux_proches);
 
-        $comments = Comment::getComments(
-            [
-                'type' => 'l',
-                'sort' => 'id',
-                'sens' => 'DESC',
-                'debut' => 0,
-                'limit' => 5,
-            ]
-        );
-        $smarty->assign('comments', $comments);
-
         return $smarty->fetch('lieux/index.tpl');
     }
 

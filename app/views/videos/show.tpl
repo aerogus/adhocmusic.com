@@ -26,7 +26,7 @@
       <header>
         <h1>{$video->getName()|escape}</h1>
       </header>
-      <div style="padding: 0">
+      <div class="reset">
       {$video->getPlayer(true)}
       </div>
     </div>

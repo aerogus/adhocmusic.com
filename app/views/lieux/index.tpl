@@ -13,19 +13,6 @@
 </table>
 {include file="common/boxend.tpl"}
 
-{if !empty($comments)}
-{include file="common/boxstart.tpl" boxtitle="Derniers commentaires"}
-<ul>
-  {foreach from=$comments item=comment}
-  <li style="margin-bottom: 5px;">
-    <strong>{$comment.pseudo}</strong> le {$comment.created_on|date_format:'%d/%m/%Y'}<br>
-    <a href="/{$comment.type_full}/show/{$comment.id_content}">{$comment.text|truncate:'200'}</a>
-  </li>
-  {/foreach}
-</ul>
-{include file="common/boxend.tpl"}
-{/if}
-
 </div>
 
 <div id="center-right">
