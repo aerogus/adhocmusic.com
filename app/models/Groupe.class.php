@@ -1517,7 +1517,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "UPDATE `" . Photo::getDbTable() . "` "
-             . "SET `id_groupe` = 0 "
+             . "SET `id_groupe` = NULL "
              . "WHERE `id_groupe` = " . (int) $this->getId();
 
         $db->query($sql);
@@ -1555,7 +1555,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "UPDATE `" . Audio::getDbTable() . "` "
-             . "SET `id_groupe` = 0 "
+             . "SET `id_groupe` = NULL "
              . "WHERE `id_groupe` = " . (int) $this->getId();
 
         $db->query($sql);
@@ -1593,7 +1593,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "UPDATE `" . Video::getDbTable() . "` "
-             . "SET `id_groupe` = 0 "
+             . "SET `id_groupe` = NULL "
              . "WHERE `id_groupe` = " . (int) $this->getId();
 
         $db->query($sql);
