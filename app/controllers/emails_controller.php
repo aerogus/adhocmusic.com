@@ -6,7 +6,7 @@
 final class Controller
 {
     /**
-     *
+     * @return string
      */
     static function newsletter(): string
     {
@@ -33,12 +33,12 @@ final class Controller
         $smarty->assign('title', $newsletter->getTitle());
         $smarty->assign('email', '');
         $smarty->assign('url', $newsletter->getUrl());
-        $smarty->assign('unsub_url', 'http://www.adhocmusic.com/newsletters/subscriptions?action=unsub&email=');
+        $smarty->assign('unsub_url', HOME_URL . '/newsletters/subscriptions?action=unsub&email=');
         return $smarty->fetch('newsletter-' . $newsletter->getId() . '.tpl');
     }
 
     /**
-     *
+     * @return string
      */
     static function form_contact_cc(): string
     {
@@ -52,7 +52,7 @@ final class Controller
     }
 
     /**
-     * 
+     * @return string
      */
     static function form_contact_to(): string
     {
@@ -61,7 +61,7 @@ final class Controller
     }
 
     /**
-     *
+     * @return string
      */
     static function forum_prive_new_message(): string
     {
@@ -70,7 +70,7 @@ final class Controller
     }
 
     /**
-     *
+     * @return string
      */
     static function member_create(): string
     {
@@ -79,7 +79,7 @@ final class Controller
     }
 
     /**
-     *
+     * @return string
      */
     static function message_received(): string
     {
@@ -97,7 +97,7 @@ final class Controller
     }
 
     /**
-     *
+     * @return string
      */
     static function password_changed(): string
     {
@@ -106,7 +106,7 @@ final class Controller
     }
 
     /**
-     *
+     * @return string
      */
     static function password_lost(): string
     {
@@ -115,7 +115,7 @@ final class Controller
     }
 
     /**
-     *
+     * @return string
      */
     static function you_have_a_group(): string
     {
@@ -124,7 +124,7 @@ final class Controller
     }
 
     /**
-     *
+     * @return string
      */
     static function you_have_a_lieu(): string
     {
@@ -133,7 +133,7 @@ final class Controller
     }
 
     /**
-     *
+     * @return string
      */
     static function new_commentaire(): string
     {
@@ -148,7 +148,7 @@ final class Controller
     }
 
     /**
-     *
+     * @return string
      */
     static function log_action(): string
     {

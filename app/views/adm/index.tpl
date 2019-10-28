@@ -46,13 +46,12 @@
 
 <div class="box">
   <header>
-    <h2>Statistiques / Log</h2>
+    <h2>Données</h2>
   </header>
   <div class="reset">
     <ul class="admlinks">
        <li><a href="/adm/membres/">Membres</a></li>
        <li><a href="/adm/groupes/">Groupes</a></li>
-       <li><a href="/adm/exposants/">Exposants</a></li>
        <li><a href="/adm/groupe-de-style">Groupe de Style</a></li>
        <li><a href="/adm/delete-account">Suppression Compte</a></li>
     </ul>
