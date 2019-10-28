@@ -39,7 +39,6 @@
       <li><a href="/adm/newsletter/">Newsletter</a></li>
       <li><a href="/adm/faq/">Foire aux questions</a></li>
       <li><a href="/adm/cms/">Pages statiques</a></li>
-      <li><a href="/dynimg/tool">Cache Image</a></li>
       <li><a href="/comments/">Commentaires</a></li>
     </ul>
   </div>
