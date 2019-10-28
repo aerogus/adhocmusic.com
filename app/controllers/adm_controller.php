@@ -1,19 +1,10 @@
 <?php declare(strict_types=1);
 
-define('ADM_TAG_NB_TAGS_PER_PHOTO', 4);
-define('ADM_TAG_NB_PHOTOS_PER_PAGE', 180);
-
 define('ADM_NB_MEMBERS_PER_PAGE', 25);
-
 define('ADM_NB_GROUPES_PER_PAGE', 1000);
-
-define('ADM_NEWSLETTER_CURRENT_ID', 72);
-define('ADM_NEWSLETTER_NB_EMAILS_PER_LOT', 400);
-define('ADM_NEWSLETTER_GROUPE_CURRENT_ID', 37);
 
 final class Controller
 {
-
     /**
      * @return string
      */
@@ -30,8 +21,6 @@ final class Controller
             ->addStep("Privé");
 
         $smarty->assign('forums', ForumPrive::getForums());
-
-        $smarty->enqueue_script('https://p.trellocdn.com/embed.min.js');
 
         return $smarty->fetch('adm/index.tpl');
     }
@@ -219,6 +208,9 @@ final class Controller
         return $smarty->fetch('adm/membres/show.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function membres_delete(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
@@ -245,6 +237,9 @@ final class Controller
         return $smarty->fetch('adm/membres/delete.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function stats(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -322,6 +317,9 @@ final class Controller
         return $smarty->fetch('adm/stats.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function stats_top_groupes(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -382,6 +380,9 @@ final class Controller
         return $smarty->fetch('adm/stats-top-groupes.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function stats_top_membres(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -449,6 +450,9 @@ final class Controller
         return $smarty->fetch('adm/stats-top-membres.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function stats_nl(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -514,6 +518,9 @@ final class Controller
         return $smarty->fetch('adm/stats-nl.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function groupe_de_style(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
