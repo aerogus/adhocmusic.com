@@ -8,7 +8,7 @@
 
 <form name="form-event-create" id="form-event-create" action="/events/create" enctype="multipart/form-data" method="post">
   <fieldset id="bloc-lieu">
-    <legend>Infos sur le lieu</legend>
+    <legend>Lieu</legend>
     {if !empty($lieu)}
     <strong>{$lieu->getName()}</strong><br>
     {$lieu->getAddress()}<br>
@@ -57,7 +57,7 @@
   <legend>Artistes</legend>
   <ul>
     <li>
-      <label for="groupe">Groupe(s) AD'HOC</label>
+      <label for="groupe">Groupe(s)</label>
       <ul>
         {section name=cpt_groupe loop=3}
         <li>
@@ -74,7 +74,7 @@
   </ul>
   </fieldset>
   <fieldset id="bloc-event">
-    <legend>Infos sur l'événement</legend>
+    <legend>Événement</legend>
     <ul>
       <li>
         <label for="name">Titre</label>
