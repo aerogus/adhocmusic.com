@@ -359,14 +359,6 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return string|null
-     */
-    function getFlyer400Url(): ?string
-    {
-        return self::getFlyerUrl($this->getId(), 400, 400);
-    }
-
-    /**
      * Retourne l'url de la fiche événement
      *
      * @return string
@@ -793,7 +785,6 @@ class Event extends ObjectModel
             $evts[$idx]['url'] = self::getUrlById((int) $_res['id']);
             $evts[$idx]['flyer_100_url'] = self::getFlyerUrl((int) $_res['id'], 100, 100);
             $evts[$idx]['flyer_320_url'] = self::getFlyerUrl((int) $_res['id'], 320, 0);
-            $evts[$idx]['flyer_400_url'] = self::getFlyerUrl((int) $_res['id'], 400, 400);
             $evts[$idx]['structure_picto'] = Structure::getPictoById((int) $_res['structure_id']);
         }
 

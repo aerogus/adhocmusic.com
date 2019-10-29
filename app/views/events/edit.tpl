@@ -70,7 +70,7 @@
         <label for="flyer">Flyer (.jpg)</label>
         <input type="file" id="flyer" name="flyer" value="{$data.file|escape}">
         {if $event->getFullFlyerUrl()}
-        <br><img src="{$event->getFlyer400Url()}" alt="">
+        <br><img src="{$event->getFlyer320Url()}" alt="">
         {/if}
       </li>
       <li>
