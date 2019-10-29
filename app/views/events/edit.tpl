@@ -8,7 +8,7 @@
 
 <form name="form-event-edit" id="form-event-edit" action="/events/edit" enctype="multipart/form-data" method="post">
   <fieldset>
-    <legend>Infos sur le lieu</legend>
+    <legend>Lieu</legend>
     <ul>
       <li>
         <label for="id_country">Pays</label>
@@ -44,7 +44,7 @@
     </ul>
   </fieldset>
   <fieldset>
-    <legend>Infos sur l'événement</legend>
+    <legend>Événement</legend>
     <ul>
       <li>
         <label for="name">Titre</label>
@@ -70,7 +70,7 @@
         <label for="flyer">Flyer (.jpg)</label>
         <input type="file" id="flyer" name="flyer" value="{$data.file|escape}">
         {if $event->getFullFlyerUrl()}
-        <br><img src="{$event->getFlyer400Url()}" alt="">
+        <br><img src="{$event->getFlyer320Url()}" alt="">
         {/if}
       </li>
       <li>
@@ -85,7 +85,7 @@
             <select id="style" name="style[{$smarty.section.cpt_style.index}]">
               <option value="">-- Choix d'un style --</option>
               {foreach from=$styles key=style_id item=style_name}
-              <option value="{$style_id|escape}"{if $event->getStyle(cpt_style) == $style_id} selected="selected"{/if}>{$style_name|escape}</option>
+              <option value="{$style_id|escape}" data-pouet="{$smarty.section.cpt_style.index}" {if $event->getStyle($smarty.section.cpt_style.index) == $style_id} selected="selected"{/if}>{$style_name|escape}</option>
               {/foreach}
             </select>
           </li>
@@ -93,7 +93,7 @@
         </ul>
       </li>
       <li>
-        <label for="groupe">Groupe(s) AD'HOC</label>
+        <label for="groupe">Artistes</label>
         <ul>
           {section name=cpt_groupe loop=5}
           <li>
