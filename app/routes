@@ -10,16 +10,10 @@ adm|membres_index|GET|/adm/membres/ajax-search
 adm|membres_show|GET|/adm/membres/:id
 adm|membres_delete|GET|/adm/membres/delete/:id
 adm|membres_delete|POST|/adm/membres/delete
-adm|stats|GET|/adm/stats
-adm|stats_top_groupes|GET|/adm/stats-top-groupes
-adm|stats_top_membres|GET|/adm/stats-top-membres
-adm|stats_nl|GET|/adm/stats-nl
 adm|groupe_de_style|GET|/adm/groupe-de-style
 adm|groupe_de_style_id|GET|/adm/groupe-de-style/:id
 adm|groupe_de_style|POST|/adm/groupe-de-style
 adm|log_action|GET|/adm/log-action
-adm|delete_account|GET|/adm/delete-account
-adm|delete_account|POST|/adm/delete-account
 adm|appartient_a|GET|/adm/appartient-a
 adm|appartient_a|POST|/adm/appartient-a
 adm_newsletter|index|GET|/adm/newsletter/

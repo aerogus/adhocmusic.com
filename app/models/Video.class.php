@@ -113,8 +113,8 @@ class Video extends Media
     /**
      * Dimensions du player
      */
-    const WIDTH  = 660;
-    const HEIGHT = 371;
+    const DEFAULT_WIDTH  = 660;
+    const DEFAULT_HEIGHT = 371;
 
     /**
      * @var int
@@ -229,7 +229,7 @@ class Video extends Media
         if ($this->_width) {
             return $this->_width;
         }
-        return self::WIDTH;
+        return self::DEFAULT_WIDTH;
     }
 
     /**
@@ -242,7 +242,7 @@ class Video extends Media
         if ($this->_height) {
             return $this->_height;
         }
-        return self::HEIGHT;
+        return self::DEFAULT_HEIGHT;
     }
 
     /**
@@ -304,14 +304,14 @@ class Video extends Media
     }
 
     /**
-     * @param string $val val
+     * @param string $reference reference
      *
      * @return object
      */
-    function setReference(string $val): object
+    function setReference(string $reference): object
     {
-        if ($this->_reference !== $val) {
-            $this->_reference = $val;
+        if ($this->_reference !== $reference) {
+            $this->_reference = $reference;
             $this->_modified_fields['reference'] = true;
         }
 
@@ -593,19 +593,18 @@ class Video extends Media
      */
     static function getFlashUrl(int $id_host, string $reference): ?string
     {
-        switch ($id_host)
-        {
+        switch ($id_host) {
             case self::HOST_YOUTUBE:
-                return 'https://youtube.com/v/' . $reference . '&hl=fr';
+                return "https://youtube.com/v/{$reference}&hl=fr";
 
             case self::HOST_DAILYMOTION:
-                return 'https://www.dailymotion.com/swf/' . $reference . '&autoplay=1';
+                return "https://www.dailymotion.com/swf/{$reference}&autoplay=1";
 
             case self::HOST_FACEBOOK:
-                return 'https://b.static.ak.fbcdn.net/swf/mvp.swf?v=' . $reference;
+                return "https://b.static.ak.fbcdn.net/swf/mvp.swf?v={$reference}";
 
             case self::HOST_VIMEO:
-                return 'https://vimeo.com/' . $reference;
+                return "https://vimeo.com/{$reference}";
 
             default:
                 return null;
@@ -727,20 +726,20 @@ class Video extends Media
      *
      * @return string ou array de string
      */
-    static function getRemoteThumbnail($id_host, $reference, $multi = false)
+    static function getRemoteThumbnail(int $id_host, string $reference, bool $multi = false)
     {
         switch ($id_host)
         {
             case self::HOST_YOUTUBE:
                 if ($multi) {
                     $url   = [];
-                    $url[] = 'https://img.youtube.com/vi/' . $reference . '/1.jpg'; // 130*97
-                    $url[] = 'https://img.youtube.com/vi/' . $reference . '/2.jpg'; // 130*97
-                    $url[] = 'https://img.youtube.com/vi/' . $reference . '/3.jpg'; // 130*97
-                    $url[] = 'https://img.youtube.com/vi/' . $reference . '/default.jpg'; // 130*97, = 1.jpg
-                    $url[] = 'https://img.youtube.com/vi/' . $reference . '/0.jpg'; // 320*240, = 2.jpg
+                    $url[] = "https://img.youtube.com/vi/{$reference}/1.jpg"; // 130*97
+                    $url[] = "https://img.youtube.com/vi/{$reference}/2.jpg"; // 130*97
+                    $url[] = "https://img.youtube.com/vi/{$reference}/3.jpg"; // 130*97
+                    $url[] = "https://img.youtube.com/vi/{$reference}/default.jpg"; // 130*97, = 1.jpg
+                    $url[] = "https://img.youtube.com/vi/{$reference}/0.jpg"; // 320*240, = 2.jpg
                 } else {
-                    $url = 'https://img.youtube.com/vi/' . $reference . '/0.jpg';
+                    $url = "https://img.youtube.com/vi/{$reference}/0.jpg";
                 }
                 return $url;
 

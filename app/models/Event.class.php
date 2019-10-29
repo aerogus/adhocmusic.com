@@ -87,21 +87,6 @@ class Event extends ObjectModel
     protected $_modified_on = null;
 
     /**
-     * @var int
-     */
-    protected $_nb_photos = 0;
-
-    /**
-     * @var int
-     */
-    protected $_nb_audios = 0;
-
-    /**
-     * @var int
-     */
-    protected $_nb_videos = 0;
-
-    /**
      * @var array
      */
     protected $_styles = [];
@@ -137,9 +122,6 @@ class Event extends ObjectModel
         'id_contact'    => 'num',
         'facebook_event_id' => 'str',
         'facebook_event_attending' => 'num',
-        'nb_photos'     => 'num',
-        'nb_audios'     => 'num',
-        'nb_videos'     => 'num',
     ];
 
     /**
@@ -330,7 +312,7 @@ class Event extends ObjectModel
      */
     function getFacebookEventUrl(): string
     {
-        return 'https://www.facebook.com/events/' . (string) $this->_facebook_event_id . '/';
+        return "https://www.facebook.com/events/{$this->_facebook_event_id}";
     }
 
     /**
@@ -1383,37 +1365,6 @@ class Event extends ObjectModel
     }
 
     /**
-     *
-     */
-    static function syncNbMedia()
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `e`.`id_event`, COUNT(DISTINCT `a`.`id_audio`) AS `nb_audios`, "
-             . "COUNT(DISTINCT `p`.`id_photo`) AS `nb_photos`, "
-             . "COUNT(DISTINCT `v`.`id_video`) AS `nb_videos` "
-             . "FROM (`adhoc_event` `e`) "
-             . "LEFT JOIN `adhoc_audio` `a` ON `a`.`id_event` = `e`.`id_event` "
-             . "LEFT JOIN `adhoc_photo` `p` ON `p`.`id_event` = `e`.`id_event` "
-             . "LEFT JOIN `adhoc_video` `v` ON `v`.`id_event` = `e`.`id_event` "
-             . "GROUP BY `e`.`id_event`";
-
-        echo $sql;
-
-        $tmp = $db->queryWithFetch($sql);
-        foreach ($tmp as $_tmp) {
-            $evt = Event::getInstance($_tmp['id_event']);
-            $evt->setNbPhotos($_tmp['nb_photos']);
-            $evt->setNbVideos($_tmp['nb_videos']);
-            $evt->setNbAudios($_tmp['nb_audios']);
-            $evt->save();
-            echo "*";
-        }
-        echo "FIN";
-        die();
-    }
-
-    /**
      * Retourne les concerts ad'hoc par saison (juillet Y -> aout Y+1)
      *
      * @return array
@@ -1531,60 +1482,6 @@ class Event extends ObjectModel
              . "AND `e`.`id_lieu` = `l`.`id_lieu` "
              . "AND `e`.`online` AND `v`.`online` "
              . "ORDER BY `e`.`date` DESC";
-
-        return $db->queryWithFetch($sql);
-    }
-
-    /**
-     * Récupère les events ayant au moins une photo
-     *
-     * @return array
-     */
-    static function getEventsWithPhoto(): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT DISTINCT `e`.`id_event` AS `id`, `e`.`name`, `e`.`date`, "
-             . "`l`.`name` AS `lieu_name`, `l`.`city` AS `lieu_city` "
-             . "FROM `adhoc_event` `e`, `adhoc_lieu` `l`, `adhoc_photo` `p` "
-             . "WHERE `e`.`id_event` = `p`.`id_event` "
-             . "AND `e`.`id_lieu` = `l`.`id_lieu` "
-             . "AND `e`.`online` AND `p`.`online` "
-             . "ORDER BY `e`.`date` DESC";
-
-        return $db->queryWithFetch($sql);
-    }
-
-    /**
-     * Récupère les events ayant au moins un média (photo,audio,vidéo)
-     *
-     * @return array
-     */
-    static function getEventsWithMedia(): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "(SELECT DISTINCT `e`.`id_event` AS `id`, `e`.`name`, `e`.`date`, "
-             . "`l`.`name` AS `lieu_name`, `l`.`city` AS `lieu_city` "
-             . "FROM `adhoc_event` `e`, `adhoc_lieu` `l`, `adhoc_video` `v` "
-             . "WHERE `e`.`id_event` = `v`.`id_event` "
-             . "AND `e`.`id_lieu` = `l`.`id_lieu` "
-             . "AND `e`.`online` AND `v`.`online`)"/*
-             . " UNION "
-             . "(SELECT DISTINCT `e`.`id_event` AS `id`, `e`.`name`, `e`.`date`, "
-             . "`l`.`name` AS `lieu_name`, `l`.`city` AS `lieu_city` "
-             . "FROM `adhoc_event` `e`, `adhoc_lieu` `l`, `adhoc_audio` `a` "
-             . "WHERE `e`.`id_event` = `a`.`id_event` "
-             . "AND `e`.`id_lieu` = `l`.`id_lieu` "
-             . "AND `e`.`online` AND `a`.`online`)"
-             . " UNION "
-             . "(SELECT DISTINCT `e`.`id_event` AS `id`, `e`.`name`, `e`.`date`, "
-             . "`l`.`name` AS `lieu_name`, `l`.`city` AS `lieu_city` "
-             . "FROM `adhoc_event` `e`, `adhoc_lieu` `l`, `adhoc_photo` `p` "
-             . "WHERE `e`.`id_event` = `p`.`id_event` "
-             . "AND `e`.`id_lieu` = `l`.`id_lieu` "
-             . "AND `e`.`online` AND `p`.`online`)"*/
-             . " ORDER BY `date` DESC";
 
         return $db->queryWithFetch($sql);
     }

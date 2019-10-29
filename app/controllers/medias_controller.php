@@ -8,7 +8,7 @@ final class Controller
     static function index(): string
     {
         Trail::getInstance()
-            ->addStep("Média");
+            ->addStep('Média');
 
         $smarty = new AdHocSmarty();
 
@@ -16,7 +16,7 @@ final class Controller
 
         $last_media = Media::getMedia(
             [
-                'type'   => 'video',//,photo,audio',
+                'type'   => 'video',
                 'sort'   => 'created_on',
                 'sens'   => 'DESC',
                 'online' => true,
@@ -52,7 +52,7 @@ final class Controller
         }
 
         // recup events ayant des média
-        $smarty->assign('events', Event::getEventsWithMedia());
+        $smarty->assign('events', Event::getEventsWithVideo());
 
         if ($id_event) {
             $search_media = Media::getMedia(
@@ -80,6 +80,9 @@ final class Controller
         return $smarty->fetch('medias/index.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function search_results(): string
     {
         $id_groupe = (int) Route::params('groupe');
