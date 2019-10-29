@@ -11,7 +11,24 @@
     <h1>{$video->getName()|escape}</h1>
   </header>
   <div class="reset">
-  {$video->getPlayer(true)}
+    <style>
+.fluid-video-player {
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
+}
+.fluid-video-player iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+</style>
+    <div class="fluid-video-player">
+    {$video->getPlayer(true)}
+    </div>
   </div>
 </div>
 
