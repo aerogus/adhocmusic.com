@@ -72,8 +72,14 @@ final class Controller
 
         $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
         $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
+
+        $smarty->enqueue_style('/css/baguetteBox.min.css');
+
+        $smarty->enqueue_script('/js/masonry-4.2.2.min.js');
+        $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
+        $smarty->enqueue_script('/js/baguetteBox-1.11.0.min.js');
+
         $smarty->enqueue_script('/js/video-show.js');
-        $smarty->enqueue_script('/js/comments-box.js');
 
         try {
             $video = Video::getInstance($id);

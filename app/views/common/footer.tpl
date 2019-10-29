@@ -43,11 +43,11 @@
 </script>
 {/if}
 
-<script>
 {if $script_vars}
+<script>
 var asv = {$script_vars|json_encode_numeric_check nofilter}
-{/if}
 </script>
+{/if}
 
 {foreach $footer_scripts as $script_url}
 <script src="{$script_url}"></script>

@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>{$title|escape}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="fb:app_id" content="{$fb_app_id|escape}">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 {* début open graph *}
 {if !empty($og_type)}
 <meta property="og:type" content="{$og_type|escape}">
@@ -12,7 +11,6 @@
 <meta property="og:type" content="article">
 {/if}
 {if $og_type !== 'video.movie' && $og_type !== 'website'}
-<meta property="fb:page_id" content="{$fb_page_id}">
 <meta property="og:language" content="fr">
 <meta property="og:author" content="adhocmusic">
 {/if}
@@ -52,10 +50,6 @@
 <link rel="stylesheet" href="{$style_url}">
 {/foreach}
 
-{if !empty($css_jquery_ui)}
-<link rel="stylesheet" href="/css/adhoc/jquery-ui-1.8.2.custom.css">
-{/if}
-
 {foreach $header_scripts as $script_url}
 <script src="{$script_url}"></script>
 {/foreach}
@@ -74,7 +68,7 @@
   <ul>
     {foreach from=$trail item=item name=breadcrumb}
       {if !empty($item.link)}
-      <li><a href="{$item.link|escape}">{$item.title|escape}</a></li>
+      <li><a href="{$item.link|escape}" title="{$item.description|escape}">{$item.title|escape}</a></li>
       {else}
       <li><span>{$item.title|escape}</span></li>
       {/if}

@@ -46,8 +46,8 @@ if (ENV === 'PROD') {
     }
 
     ini_set('display_startup_errors', '0');
-    ini_set('display_errors', '1');
-    define('ONERROR_SHOW', true);
+    ini_set('display_errors', '0');
+    define('ONERROR_SHOW', false);
 
 } elseif (ENV === 'DEV') {
 
@@ -92,7 +92,6 @@ define('SMARTY_TEMPLATE_C_PATH', ADHOC_ROOT_PATH . '/smarty');
 
 define('GOOGLE_MAPS_API_KEY', 'AIzaSyBVsz6lTrtPcGaGy8-pNNLdmhDIg7Cng24');
 
-define('FB_APP_ID', '50959607741');
 define('FB_PAGE_ID', '161908907197840');
 define('FB_APP_PAGE_URL', 'https://www.facebook.com/adhocmusic');
 define('FB_APP_DEFAUT_AVATAR_GROUPE', HOME_URL . '/img/note_adhoc_64.png');

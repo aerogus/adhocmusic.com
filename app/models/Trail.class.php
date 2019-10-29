@@ -36,7 +36,7 @@ class Trail
      */
     function __construct()
     {
-        $this->addStep('Accueil', '/');
+        $this->addStep('Accueil', '/', "Retour à l'accueil");
         self::$_instance = $this;
     }
 
@@ -45,14 +45,16 @@ class Trail
      *
      * @param string $title titre
      * @param string $link  lien (optionnel)
+     * @param string $description description (optionnel)
      * 
      * @return mixed
      */
-    function addStep(string $title, string $link = '')
+    function addStep(string $title, string $link = '', string $description = '')
     {
         $this->_path[] = [
             'title' => $title,
             'link' => $link,
+            'description' => $description,
         ];
         return $this;
     }

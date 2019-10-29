@@ -353,6 +353,14 @@ class Event extends ObjectModel
     /**
      * @return string|null
      */
+    function getFlyer320Url(): ?string
+    {
+        return self::getFlyerUrl((int) $this->getId(), 320, 0);
+    }
+
+    /**
+     * @return string|null
+     */
     function getFlyer400Url(): ?string
     {
         return self::getFlyerUrl($this->getId(), 400, 400);
@@ -784,6 +792,7 @@ class Event extends ObjectModel
             $evts[$idx] = $_res;
             $evts[$idx]['url'] = self::getUrlById((int) $_res['id']);
             $evts[$idx]['flyer_100_url'] = self::getFlyerUrl((int) $_res['id'], 100, 100);
+            $evts[$idx]['flyer_320_url'] = self::getFlyerUrl((int) $_res['id'], 320, 0);
             $evts[$idx]['flyer_400_url'] = self::getFlyerUrl((int) $_res['id'], 400, 400);
             $evts[$idx]['structure_picto'] = Structure::getPictoById((int) $_res['structure_id']);
         }
@@ -1420,9 +1429,9 @@ class Event extends ObjectModel
      *
      * @return string
      */
-    static function getFlyerUrl(int $id_event, int $width = 80, int $height = 80, string $bgcolor = '000000', $border = 0, $zoom = 0)
+    static function getFlyerUrl(int $id_event, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = false)
     {
-        $uid = 'event/' . $id_event . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
+        $uid = 'event/' . $id_event . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . (int) $border . '/' . (int) $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
 
         if (!file_exists($cache)) {

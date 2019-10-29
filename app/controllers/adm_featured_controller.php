@@ -56,30 +56,29 @@ final class Controller
                 'title'       => trim((string) Route::params('title')),
                 'description' => trim((string) Route::params('description')),
                 'link'        => trim((string) Route::params('link')),
-                'image'       => '',
                 'datdeb'      => trim((string) Route::params('datdeb') . ' 00:00:00'),
                 'datfin'      => trim((string) Route::params('datfin') . ' 23:59:59'),
-                'online'      => false,
+                'online'      => (bool) Route::params('online'),
             ];
             $errors = [];
 
             if (self::_validateForm($data, $errors)) {
 
-                Featured::init()
+                $f = Featured::init()
                     ->setTitle($data['title'])
                     ->setDescription($data['description'])
                     ->setLink($data['link'])
                     ->setDatDeb($data['datdeb'])
                     ->setDatFin($data['datfin'])
-                    ->setOnline($data['online'])
-                    ->save();
+                    ->setOnline($data['online']);
+                $f->save();
 
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     (new Image($_FILES['image']['tmp_name']))
                         ->setType(IMAGETYPE_JPEG)
                         ->setMaxWidth(self::IMG_WIDTH)
                         ->setMaxHeight(self::IMG_HEIGHT)
-                        ->setDestFile(Featured::getBasePath() . '/' . (int) $f->getId() . '.jpg')
+                        ->setDestFile(Featured::getBasePath() . '/' . $f->getId() . '.jpg')
                         ->write();
                 }
 
@@ -147,7 +146,6 @@ final class Controller
                 'title'       => trim((string) Route::params('title')),
                 'description' => trim((string) Route::params('description')),
                 'link'        => trim((string) Route::params('link')),
-                'image'       => '',
                 'datdeb'      => trim((string) Route::params('datdeb') . ' 00:00:00'),
                 'datfin'      => trim((string) Route::params('datfin') . ' 23:59:59'),
                 'online'      => (bool) Route::params('online'),

@@ -113,8 +113,8 @@ class Video extends Media
     /**
      * Dimensions du player
      */
-    const DEFAULT_WIDTH  = 660;
-    const DEFAULT_HEIGHT = 371;
+    const DEFAULT_WIDTH  = 1000;
+    const DEFAULT_HEIGHT = 562;
 
     /**
      * @var int
@@ -562,23 +562,23 @@ class Video extends Media
             case self::HOST_DAILYMOTION:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '0';
                 // taille par défaut : l330 / h267
-                return '<iframe frameborder="0" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" src="https://www.dailymotion.com/embed/video/'.$this->getReference().'?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&autoPlay='.$strautoplay.'&wmode=transparent"></iframe>' . "\n";
+                return '<iframe frameborder="0" width="'.self::DEFAULT_WIDTH.'" height="'.self::DEFAULT_HEIGHT.'" src="https://www.dailymotion.com/embed/video/'.$this->getReference().'?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&autoPlay='.$strautoplay.'&wmode=transparent"></iframe>' . "\n";
 
             case self::HOST_FACEBOOK:
-                return '<object width="'.self::WIDTH.'" height="'.self::HEIGHT.'" >' . "\n"
+                return '<object width="'.self::DEFAULT_WIDTH.'" height="'.self::DEFAULT_HEIGHT.'" >' . "\n"
                      . '<param name="allowfullscreen" value="true" />' . "\n"
                      . '<param name="allowscriptaccess" value="always" />' . "\n"
                      . '<param name="movie" value="http://www.facebook.com/v/'.$this->getReference().'" />' . "\n"
-                     . '<embed src="https://www.facebook.com/v/'.$this->getReference().'" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'.self::WIDTH.'" height="'.self::HEIGHT.'">' . "\n"
+                     . '<embed src="https://www.facebook.com/v/'.$this->getReference().'" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'.self::DEFAULT_WIDTH.'" height="'.self::DEFAULT_HEIGHT.'">' . "\n"
                      . '</embed>' . "\n"
                      . '</object>' . "\n";
 
             case self::HOST_VIMEO:
                 $autoplay ? $strautoplay = '1' : $strautoplay = '0';
-                return '<iframe src="https://player.vimeo.com/video/'.$this->getReference().'?title=0&amp;byline=0&amp;portrait=0&amp;autoplay='.$strautoplay.'" width="'.self::WIDTH.'" height="'.self::HEIGHT.'" frameborder="0"></iframe>' . "\n";
+                return '<iframe src="https://player.vimeo.com/video/'.$this->getReference().'?title=0&amp;byline=0&amp;portrait=0&amp;autoplay='.$strautoplay.'" width="'.self::DEFAULT_WIDTH.'" height="'.self::DEFAULT_HEIGHT.'" frameborder="0"></iframe>' . "\n";
 
             case self::HOST_ADHOCTUBE:
-                return '<iframe width="'.self::WIDTH.'" height="'.self::HEIGHT.'" sandbox="allow-same-origin allow-scripts" src="https://'.MEDIA_ADHOCTUBE_HOST.'/videos/embed/'.$this->getReference().'" frameborder="0" allowfullscreen></iframe>' . "\n";
+                return '<iframe width="'.self::DEFAULT_WIDTH.'" height="'.self::DEFAULT_HEIGHT.'" sandbox="allow-same-origin allow-scripts" src="https://'.MEDIA_ADHOCTUBE_HOST.'/videos/embed/'.$this->getReference().'" frameborder="0" allowfullscreen></iframe>' . "\n";
 
             default:
                 return null;

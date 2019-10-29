@@ -75,7 +75,7 @@ final class Controller
 
             $smarty->assign('photo', $photo);
             $smarty->assign('from', $from);
-            $smarty->assign('og_image', $photo->getThumb130Url());
+            $smarty->assign('og_image', $photo->getThumb320Url());
             $smarty->assign('has_credits', (bool) $photo->getCredits());
 
             $meta_title .= $photo->getName();

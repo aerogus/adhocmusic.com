@@ -48,7 +48,7 @@
             <textarea name="text" id="text" rows="10" cols="80" style="width: 360px; padding: 5px;">{$text|escape}</textarea>
           </li>
           <li>
-            <label for="mailing">J'accepte de recevoir les lettres d'information de l'association</label>
+            <label for="mailing">Je souhaite recevoir les newsletters de l'association</label>
             <input type="checkbox" class="switch" id="mailing" name="mailing"{if !empty($mailing)} checked="checked"{/if}>
           </li>
           <li>
@@ -83,7 +83,7 @@
       <header>
         <h3>Questions fréquentes</h3>
       </header>
-      <div>
+      <div class="reset">
         {if $faq|@count > 0}
           {foreach from=$faq item=f}
           <div class="faq">

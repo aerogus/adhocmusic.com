@@ -13,7 +13,7 @@
   <div>
 
     {if $event->getFullFlyerUrl()}
-    <img src="{$event->getFlyer400Url()}" alt="{$event->getName()|escape}" style="float: right; padding: 0 0 10px 10px;">
+    <img src="{$event->getFlyer320Url()}" alt="{$event->getName()|escape}" style="float: right; margin: 0 0 10px 10px;">
     {/if}
 
     <p style="padding: 10px;" align="justify">{$event->getText()|escape|@nl2br}</p>
@@ -21,7 +21,8 @@
     <div id="event-box-info">
       <p><strong>Le {$jour} à {$heure}</strong></p>
       <a href="/lieux/{$lieu->getId()}" title="{$lieu->getName()|escape}">
-        <img id="event-box-map" src="{$lieu->getMapUrl('64x64')}" alt="">
+        <!-- map à debugguer -->
+        <!--<img id="event-box-map" src="{$lieu->getMapUrl('64x64')}" alt="">-->
         <strong>{$lieu->getName()|escape}</strong><br>
         {$lieu->getAddress()}<br>
         {$lieu->getCp()} - {$lieu->getCity()|escape}
@@ -37,7 +38,7 @@
 
     {if !empty($groupes)}
     <p>Avec :</p>
-    <ul class="clearfix">
+    <ul class="grid-3">
     {foreach from=$groupes item=groupe}
       <li><a href="{$groupe.url}"><img src="{$groupe.mini_photo}" style="float: left; margin: 2px; border: 1px solid #000000;" alt=""></a><a href="{$groupe.url}"><strong>{$groupe.name|escape}</strong></a><br>({$groupe.style|escape})</li>
     {/foreach}
@@ -57,31 +58,39 @@
 
     <a style="display:inline-block;background:#efefef;margin:10px 0;padding:5px" href="/events/ical/{$event->getId()}.ics"><img src="/img/icones/cal.svg" width="16" height="16"> Ajout au calendrier</a>
 
-    {if !empty($videos)}
-    <div class="blocinfo">
-      <h3>Vidéos</h3>
-      {foreach from=$videos item=video}
-      <div class="thumb-80">
-        <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}">{$video.name|truncate:15:"...":true:true|escape}</a>
-        <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}"></a>
-      </div>
-      {/foreach}
-    </div>
-    {/if}
-
-    {if !empty($audios)}
-    <div class="blocinfo">
-      <h3>Sons</h3>
-      <ul>
-      {foreach from=$audios item=audio}
-        <li><strong>{$audio.name|escape}</strong> (<a href="{$audio.groupe_url}">{$audio.groupe_name|escape}</a>)<br>{audio_player id=$audio.id}</li>
-      {/foreach}
-      </ul>
-    </div>
-    {/if}
-
   </div>
 </div>{* .box *}
+
+{if !empty($audios)}
+<div class="box">
+  <header>
+    <h2>Sons</h2>
+  </header>
+  <div>
+    <ul>
+    {foreach from=$audios item=audio}
+      <li><strong>{$audio.name|escape}</strong> (<a href="{$audio.groupe_url}">{$audio.groupe_name|escape}</a>)<br>{audio_player id=$audio.id}</li>
+    {/foreach}
+    </ul>
+  </div>
+</div>
+{/if}
+
+{if !empty($videos)}
+<div class="box">
+  <header>
+    <h2>Vidéos</h2>
+  </header>
+  <div class="reset grid-6">
+    {foreach from=$videos item=video}
+    <div class="thumb-80">
+      <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}">{$video.name|truncate:15:"...":true:true|escape}</a>
+      <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}"></a>
+    </div>
+    {/foreach}
+  </div>
+</div>
+{/if}
 
 {if !empty($photos)}
 <div class="box">
