@@ -32,13 +32,13 @@
   </div>
 </div>
 
-<div class="grid-4 has-gutter-l">
+<div class="grid-4-small-2 has-gutter-l">
 
   <div class="box">
     <header>
       <h2>Partager cette vidéo</h2>
     </header>
-    <div>
+    <div class="reset">
       {include file="comments/share.tpl" title="" url=$video->getUrl()}
     </div>
   </div>
