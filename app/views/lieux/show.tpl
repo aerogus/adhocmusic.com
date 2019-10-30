@@ -48,18 +48,6 @@
 
     <br style="clear: both;">
 
-    {include file="comments/share.tpl" title="ce lieu" url=$lieu->getUrl()}
-
-    {if !empty($alerting_sub_url)}
-    <div class="alerting-sub"><a href="{$alerting_sub_url}">S'abonner à ce lieu</a></div>
-    {elseif !empty($alerting_unsub_url)}
-    <div class="alerting-unsub"><a href="{$alerting_unsub_url}">Se désabonner de ce lieu</a></div>
-    {elseif !empty($alerting_auth_url)}
-    <div class="alerting-auth"><a href="{$alerting_auth_url}">S'abonner à ce lieu</a></div>
-    {/if}
-
-    {include file="comments/box.tpl" type="l" id_content=$lieu->getId()}
-
   </div>
 </div>
 
@@ -132,10 +120,10 @@
   <header>
     <h2>Vidéos</h2>
   </header>
-  <div>
+  <div class="reset grid-3">
     {foreach $videos as $video}
-    <div class="thumb-80">
-      <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}">{$video.name|truncate:15:"...":true:true|escape}</a>
+    <div>
+      <a href="{$video.url}"><img src="{$video.thumb_320}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}">{$video.name|truncate:15:"...":true:true|escape}</a>
       <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}"></a>
     </div>
     {/foreach}

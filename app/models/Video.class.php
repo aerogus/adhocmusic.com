@@ -516,8 +516,9 @@ class Video extends Media
             $res[$idx] = $_res;
             $res[$idx]['url'] = self::getUrlById((int) $_res['id']);
             $res[$idx]['swf'] = self::getFlashUrl((int) $_res['host_id'], $_res['reference']);
-            $res[$idx]['thumb_80_80'] = self::getVideoThumbUrl($_res['id'], 80, 80, '000000', false, true);
-            $res[$idx]['thumb_100'] = self::getVideoThumbUrl($_res['id'], 100, 100, '000000', false, true);
+            $res[$idx]['thumb_80_80'] = self::getVideoThumbUrl((int) $_res['id'], 80, 80, '000000', false, true);
+            $res[$idx]['thumb_100'] = self::getVideoThumbUrl((int) $_res['id'], 100, 100, '000000', false, true);
+            $res[$idx]['thumb_320'] = self::getVideoThumbUrl((int) $_res['id'], 320, 0);
         }
 
         return $res;
@@ -533,8 +534,8 @@ class Video extends Media
     {
         if (parent::delete()) {
             $this->deleteThumbnail();
-            self::invalidateVideoThumbInCache($this->getId(), 80, 80, '000000', false, true);
-            self::invalidateVideoThumbInCache($this->getId(), 100, 100, '000000', false, true);
+            self::invalidateVideoThumbInCache((int) $this->getId(), 80, 80, '000000', false, true);
+            self::invalidateVideoThumbInCache((int) $this->getId(), 100, 100, '000000', false, true);
             return true;
         }
         return false;
@@ -842,9 +843,9 @@ class Video extends Media
     /**
      * @return bool
      */
-    static function invalidateVideoThumbInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 1): bool
+    static function invalidateVideoThumbInCache(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = true): bool
     {
-        $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
+        $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . (int) $border . '/' . (int) $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
 
         if (file_exists($cache)) {
@@ -861,9 +862,9 @@ class Video extends Media
      *
      * @return string
      */
-    static function getVideoThumbUrl($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 1): string
+    static function getVideoThumbUrl(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = true): string
     {
-        $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
+        $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . (int) $border . '/' . (int) $zoom . '.jpg';
         $cache = Image::getLocalCachePath($uid);
 
         if (!file_exists($cache)) {

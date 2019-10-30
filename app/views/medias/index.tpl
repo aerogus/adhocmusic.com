@@ -1,9 +1,5 @@
 {include file="common/header.tpl"}
 
-<div class="grid-3-small-1 has-gutter-l">
-
-  <div class="col-2-small-1">
-
     {if !empty($create)}
     <div class="infobulle success">Le contenu a bien été ajouté</div>
     {elseif !empty($edit)}
@@ -53,7 +49,7 @@
       </header>
     </div>
 
-    <ul id="search-box-results">
+    <ul id="search-box-results" class="grid-8">
     {foreach from=$last_media key=type_media item=medias}
     {if $type_media == 'video'}
     {foreach from=$medias item=media}
@@ -72,36 +68,5 @@
     {/if}
     {/foreach}
     </ul>
-
-  </div>{* .col-2-small-1 *}
-
-  <div class="col-1">
-
-    <div class="box">
-      <header>
-        <h1>Derniers commentaires</h1>
-      </header>
-      <div>
-        {if !empty($comments)}
-        <ul>
-          {foreach from=$comments item=comment}
-          <li style="clear:both;margin-bottom:5px">
-            <a href="/{$comment.type_full}/{$comment.id_content}">
-              <img src="{image type='photo' id=$comment.id_content width=50 height=50 zoom=true}" alt="" style="float: left; padding-right: 5px; padding-bottom: 5px;" />
-              <strong>{$comment.pseudo}</strong> le {$comment.created_on|date_format:'%d/%m/%Y'}<br />
-              {$comment.text|truncate:'200'}
-            </a>
-          </li>
-          {/foreach}
-        </ul>
-        {else}
-        <p>Aucun commentaire</p>
-        {/if}
-      </div>
-    </div>{* .box *}
-
-  </div>{* .col-1 *}
-
-</div>{* .grid-3-small-1 *}
 
 {include file="common/footer.tpl"}
