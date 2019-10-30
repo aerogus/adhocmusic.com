@@ -18,7 +18,7 @@
       <input type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo">
       <div class="infobulle error" id="error_login-password"{if empty($error_login_password)} style="display: none"{/if}>Mot de passe vide !</div>
       <input type="password" id="login-password" name="password" placeholder="Mot de passe">
-      <input id="form-login-submit" name="form-login-submit" type="submit" value="Ok">
+      <input id="form-login-submit" name="form-login-submit" type="submit" value="Connexion">
       {if !empty($referer)}<input type="hidden" id="login-referer" name="referer" value="{$referer|escape:'url'}">{/if}
       <ul>
         <li><a href="/auth/lost-password">mot de passe oublié</a></li>
