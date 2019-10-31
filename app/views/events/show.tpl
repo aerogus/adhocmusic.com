@@ -13,10 +13,10 @@
   <div>
 
     {if $event->getFullFlyerUrl()}
-    <img src="{$event->getFlyer320Url()}" alt="{$event->getName()|escape}" style="float: right; margin: 0 0 10px 10px;">
+    <img src="{$event->getFlyer320Url()}" alt="{$event->getName()|escape}" style="display: block; margin: 0 auto 10px;">
     {/if}
 
-    <p style="padding: 10px;" align="justify">{$event->getText()|escape|@nl2br}</p>
+    <p align="justify">{$event->getText()|escape|@nl2br}</p>
 
     <div id="event-box-info">
       <p><strong>Le {$jour} à {$heure}</strong></p>
@@ -53,10 +53,6 @@
     {/foreach}
     </ul>
     {/if}
-
-    {include file="comments/share.tpl" title="cet événement" url=$event->getUrl()}
-
-    <a style="display:inline-block;background:#efefef;margin:10px 0;padding:5px" href="/events/ical/{$event->getId()}.ics"><img src="/img/icones/cal.svg" width="16" height="16"> Ajout au calendrier</a>
 
   </div>
 </div>{* .box *}
