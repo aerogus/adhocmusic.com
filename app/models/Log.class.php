@@ -237,15 +237,18 @@ class Log
         return $logs;
     }
 
-    static function getLog()
+    /**
+     * @return string
+     */
+    static function getLog(): string
     {
-        return (string) self::$_log;
+        return self::$_log;
     }
 
     /**
      * @return array
      */
-    static function getActions()
+    static function getActions(): array
     {
         return self::$_actions;
     }

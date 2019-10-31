@@ -83,33 +83,6 @@ class Tools
     }
 
     /**
-     * Verification d'une url
-     *
-     * Retourne FALSE si l'url n'est pas conforme. (HTTP(S) uniquement!)
-     *
-     * @param string $url url à tester
-     *
-     * @return bool
-     */
-    static function isUrlValid(string $url): bool
-    {
-        if (preg_match('`^(http(s?)://){1}((\w+\.)+)\w{2,}(:\d+)?(/[\w\-\'"~#:.?!+=&%@/(\)\xA0-\xFF]*)?$`iD', $url)) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * @param string $string string
-     *
-     * @return string
-     */
-    static function stripBBCode(string $string): string
-    {
-        return preg_replace('!\\[((\\w+(=[^\\]]+)?)|(/\\w+))\\]!', '', $string);
-    }
-
-    /**
      * @param string $string chaîne
      *
      * @return string
@@ -124,45 +97,6 @@ class Tools
     }
 
     /**
-     * @param string $extension extension
-     *
-     * @return string|null
-     */
-    static function getContentType(string $extension): ?string
-    {
-        $mt = [
-            'jpg'  => 'image/jpeg',
-            'jpeg' => 'image/jpeg',
-            'gif'  => 'image/gif',
-            'png'  => 'image/png',
-            'wbmp' => 'image/vnd.wap.wbmp',
-        ];
-        if (array_key_exists($extension, $mt)) {
-            return $mt[$extension];
-        }
-        return null;
-    }
-
-    /**
-     * Transforme une couleur de la forme "rgb(55,55,55)" ou #FA4 en #FFAA44
-     *
-     * @param string $rgbval valeur rgb
-     *
-     * @return string
-     */
-    static function rgb2hex(string $rgbval): string
-    {
-        if (preg_match_all('/rgb\((\d+),\s*(\d+),\s*(\d+)\)/', $rgbval, $matches)) {
-            list($red, $green, $blue) = [$matches[1][0], $matches[2][0], $matches[3][0]];
-            return sprintf('#%02X%02X%02X', $red, $green, $blue);
-        } elseif (preg_match_all('/^#([0-9a-f])([0-9a-f])([0-9a-f])$/', $rgbval, $matches)) {
-            list($red, $green, $blue) = [$matches[1][0], $matches[2][0], $matches[3][0]];
-            return '#'.$red.$red.$green.$green.$blue.$blue;
-        }
-        return $rgbval;
-    }
-
-    /**
      * Tronque une chaine et ajoute ...
      *
      * @param string $str       chaîne
@@ -173,29 +107,10 @@ class Tools
     static function tronc(string $str, int $maxLength): string
     {
         $str = trim($str);
-        if ((mb_strlen($str) > $maxLength) && ($maxLength > 4)) {
-            return mb_substr($str, 0, $maxLength - 4, 'UTF-8')." ...";
+        if ((mb_strlen($str) > $maxLength) && ($maxLength > 1)) {
+            return mb_substr($str, 0, $maxLength - 4, 'UTF-8') . '…';
         }
         return $str;
-    }
-
-    /**
-     * Nettoie une chaine de caractères
-     * utilisé sur les titres, texte blog, description, commentaires ...
-     *
-     * @param string $texte texte
-     *
-     * @return string
-     */
-    static function filtreTexte(string $texte): string
-    {
-        $texte = self::replaceWordEntities($texte);
-        $texte = preg_replace('/&#\d+;/', '', html_entity_decode(strip_tags($texte, '<br>'))); // vire les tags html, sauf br
-        $texte = str_replace('<br />', '<br /> ', $texte); // important: laisser l'espace après le <br /> pour les eventuels decoupages du texte
-        $texte = preg_replace('`(.)(\1{3,})`s', '$1', $texte); // supprimer les redondances de plus de 3 caractères
-        $texte = preg_replace('/(<br\/> ){3,}/', '<br />', $texte); // on limite les sauts de lignes répétés <br />
-        $texte = preg_replace("/(\n){2,}/", "\n", $texte); // on limite les sauts de lignes répétés \n
-        return $texte;
     }
 
     /**
@@ -347,67 +262,6 @@ class Tools
     }
 
     /**
-     * Mini fonction de debug
-     *
-     * @param mixed $var variable
-     *
-     * @return void
-     */
-    static function p(mixed $var)
-    {
-        echo '<pre>' . print_r($var, true) . '</pre>';
-    }
-
-    /**
-     * Mini fonction de debug
-     *
-     * @param mixed $var variable
-     *
-     * @return void
-     */
-    static function d(mixed $var)
-    {
-        die('<pre>' . print_r($var, true) . '</pre>');
-    }
-
-    /**
-     * Vérifie que l'internaute :
-     * - est loggué
-     * - appartient bien au groupe en paramètre
-     *
-     * @param int $id_groupe id_groupe
-     *
-     * @return void
-     */
-    static function authGroupe(int $id_groupe)
-    {
-        // non identifié
-        if (empty($_SESSION['membre'])) {
-            $_SESSION['redirect_after_auth'] = $_SERVER['REQUEST_URI'];
-            Tools::redirect('/auth/login');
-            exit();
-        }
-
-        // droits sur le groupe ?
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_contact` "
-             . "FROM `adhoc_appartient_a` "
-             . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId() . " "
-             . "AND `id_groupe` = " . (int) $id_groupe;
-
-        if ($id_contact = $db->queryWithFetchFirstField($sql)) {
-            return true;
-        }
-
-        // pas les droits
-        $_SESSION['redirect_after_auth'] = $_SERVER['REQUEST_URI'];
-        Tools::redirect('/auth/login');
-        exit();
-    }
-
-    /**
      * Initialisation d'une session PHP native
      *
      * @return void
@@ -419,24 +273,8 @@ class Tools
         session_name('ADHOCMUSIC');
         session_start();
 
-        $_SESSION['lastaccess'] = date('Y-m-d H:i:s');
-        if (empty($_SESSION['hits'])) {
-            $_SESSION['hits'] = 0;
-        }
-        $_SESSION['hits']++;
-        if (!empty($_SERVER['REQUEST_METHOD'])) {
-            $_SESSION['httpmethod'] = $_SERVER['REQUEST_METHOD'];
-        }
-        if (!empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['REQUEST_URI'])) {
-            $_SESSION['url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        }
-        if (!empty($_SERVER['HTTP_USER_AGENT'])) {
-            $_SESSION['ua'] = $_SERVER['HTTP_USER_AGENT'];
-        }
         if (!empty($_SERVER['REMOTE_ADDR'])) {
             $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
-        }
-        if (!empty($_SESSION['ip']) && empty($_SESSION['host'])) {
             $_SESSION['host'] = $_SERVER['REMOTE_ADDR'];
         }
     }
@@ -498,60 +336,6 @@ class Tools
         }
 
         return $new_array;
-    }
-
-    /**
-     * @param string $ext extension
-     *
-     * @return string|null
-     *
-     * @see http://www.commentcamarche.net/contents/courrier-electronique/mime.php3
-     */
-    static function getTypeMimeByExtension(string $ext): ?string
-    {
-        $mimes = [
-            'jpg'  => 'image/jpeg',
-            'jpeg' => 'image/jpeg',
-            'gif'  => 'image/gif',
-            'png'  => 'image/png',
-            'wbmp' => 'image/vnd.wap.wbmp',
-            'txt'  => 'text/plain',
-            'zip'  => 'multipart/x-zip',
-            'pdf'  => 'application/pdf',
-        ];
-
-        if (array_key_exists($ext, $mimes)) {
-            return $mimes[$ext];
-        }
-        return null;
-    }
-
-    /**
-     * @param string $ext extension
-     *
-     * @return string
-     */
-    static function getIconByExtension(string $ext): string
-    {
-        $icons_url = '/img/icones/';
-        $default_icon = 'file.png';
-
-        // à finir
-        $icons = [
-            'jpg'  => 'image.png',
-            'jpeg' => 'image.png',
-            'gif'  => 'image.png',
-            'png'  => 'image.png',
-            'wbmp' => 'image.png',
-            'txt'  => 'text.png',
-            'zip'  => 'archive.png',
-            'pdf'  => 'pdf.png',
-        ];
-
-        if (array_key_exists($ext, $icons)) {
-            return $icons_url . $icons[$ext];
-        }
-        return $icons_url . $default_icon;
     }
 
     /**
