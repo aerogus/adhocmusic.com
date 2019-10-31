@@ -37,16 +37,6 @@ class Photo extends Media
     protected $_pseudo = '';
 
     /**
-     * @var int
-     */
-    protected $_height = 0;
-
-    /**
-     * @var int
-     */
-    protected $_width = 0;
-
-    /**
      * @var string
      */
     protected $_credits = '';
@@ -106,22 +96,6 @@ class Photo extends Media
     function getPseudo(): string
     {
         return $this->_pseudo;
-    }
-
-    /**
-     * @return int
-     */
-    function getHeight(): int
-    {
-        return $this->_height;
-    }
-
-    /**
-     * @return int
-     */
-    function getWidth(): int
-    {
-        return $this->_width;
     }
 
     /**

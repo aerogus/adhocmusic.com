@@ -81,14 +81,7 @@ final class Controller
             return $smarty->fetch('audios/show.tpl');
         }
 
-        $smarty->enqueue_style('/js/jplayer.blue.monday/jplayer.blue.monday.css');
-        $smarty->enqueue_script('/js/jquery.jplayer.min.js');
-        $smarty->enqueue_script('/js/audio-show.js');
-
         $meta_description = "Titre : " . $audio->getName();
-
-        $smarty->assign('og_type', 'adhocmusic:song');
-        $smarty->assign('og_push_listen_to_song', true);
 
         if ($audio->getIdGroupe()) {
             $groupe = Groupe::getInstance($audio->getIdGroupe());
@@ -101,7 +94,7 @@ final class Controller
             $smarty->assign('og_image', $groupe->getMiniPhoto());
             $smarty->assign(
                 'og_audio', [
-                    'url' => $audio->getDirectUrl(),
+                    'url' => $audio->getDirectMp3Url(),
                     'title' => $audio->getName(),
                     'artist' => $groupe->getName(),
                     'type' => "application/mp3",

@@ -1,10 +1,6 @@
 <?php declare(strict_types=1);
 
 /**
- * @package AdHoc
- */
-
-/**
  * Classe de création et de conversion d'images
  *
  * Format d'import/export : GIF/JPEG/PNG
@@ -107,7 +103,7 @@ class Image
         $this->_jpeg_quality = 90;
         $this->_gif_quality  = 256;
         $this->_png_quality  = 16777216;
-        $this->_color        = ['r' => 0, 'g' => 0, 'b' => 0]; // independant du handle
+        $this->_color        = ['r' => 0, 'g' => 0, 'b' => 0]; // indépendant du handle
         $this->_deltax       = 0;
         $this->_deltay       = 0;
 
@@ -568,7 +564,7 @@ class Image
     /**
      * écriture des images générées
      */
-    private function _write($get_contents = false)
+    private function _write(bool $get_contents = false)
     {
         switch ($this->_type)
         {

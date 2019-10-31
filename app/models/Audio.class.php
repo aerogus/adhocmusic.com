@@ -32,11 +32,6 @@ class Audio extends Media
     protected $_id_audio = 0;
 
     /**
-     * @var string
-     */
-    protected $_mime = '';
-
-    /**
      * Liste des attributs de l'objet
      * on précise si en base c'est de type :
      * - numérique/integer/float/bool (= int)
@@ -55,7 +50,6 @@ class Audio extends Media
         'created_on'   => 'date',
         'modified_on'  => 'date',
         'online'       => 'bool',
-        'mime'         => 'str',
     ];
 
     /**
@@ -88,14 +82,6 @@ class Audio extends Media
     /**
      * @return string
      */
-    function getMime(): string
-    {
-        return $this->_mime;
-    }
-
-    /**
-     * @return string
-     */
     function getUrl(): string
     {
         return self::getUrlById($this->getId());
@@ -114,29 +100,28 @@ class Audio extends Media
     /**
      * @return string
      */
-    function getDirectUrl(): string
+    function getDirectMp3Url(): ?string
     {
-        return self::getBaseUrl() . '/' . $this->getId() . '.mp3';
+        if (file_exists(self::getBasePath() . '/' . $this->getId() . '.mp3')) {
+            return self::getBaseUrl() . '/' . $this->getId() . '.mp3';
+        }
+        return null;
+    }
+
+    /**
+     * @return string|null
+     */
+    function getDirectAacUrl(): ?string
+    {
+        if (file_exists(self::getBasePath() . '/' . $this->getId() . '.m4a')) {
+            return self::getBaseUrl() . '/' . $this->getId() . '.m4a';
+        }
+        return null;
     }
 
     /* fin getters */
 
     /* début setters */
-
-    /**
-     * @param string $val typemime
-     *
-     * @return object
-     */
-    function setMime(string $val): object
-    {
-        if ($this->_mime !== $val) {
-            $this->_mime = $val;
-            $this->_modified_fields['mime'] = true;
-        }
-
-        return $this;
-    }
 
     /* fin setters */
 
@@ -325,86 +310,6 @@ class Audio extends Media
                 'sens'  => 'DESC',
             ]
         );
-    }
-
-    /**
-     * Retourne le player audio
-     *
-     * @param int $id_audio ou array de int $id_audio
-     * @param string $type
-     * @return string
-     * @todo les paramètres du dewplayer ont du changer avec la nouvelle version
-     * @see http://www.alsacreations.fr/dewplayer
-     * @deprecated
-     * @see Smarty::function_audio_player()
-     */
-    static function getPlayer($id_audio, $type = 'dewplayer-mini')
-    {
-        $bgcolor = '666666';
-
-        if ($type === 'player_mp3_multi') {
-            $id_groupe = $id_audio;
-        } elseif ($type === 'webradio') {
-            $chemin = $id_audio;
-            $type = 'dewplayer';
-        } else {
-            $chemin = '';
-            if (is_numeric($id_audio)) {
-                $chemin .= self::getBaseUrl() . '/' . $id_audio . '.mp3';
-            } elseif (is_array($id_audio)) {
-                $first  = true;
-                foreach ($id_audio as $id) {
-                    if (!$first) {
-                        $chemin .= '|';
-                    }
-                    $chemin .= self::getBaseUrl() . '/' . $id . '.mp3';
-                    $first = false;
-                }
-            } else {
-                return false;
-            }
-        }
-
-        switch ($type)
-        {
-            case 'dewplayer-mini':
-                return '<object type="application/x-shockwave-flash" data="/swf/dewplayer-mini.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" width="160" height="20">'."\n"
-                     . '<param name="wmode" value="transparent" />'."\n"
-                     . '<param name="movie" value="/swf/dewplayer-mini.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" />'."\n"
-                     . '</object>'."\n";
-                break;
-
-            case 'dewplayer':
-                return '<object type="application/x-shockwave-flash" data="/swf/dewplayer.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" width="200" height="20">'."\n"
-                     . '<param name="wmode" value="transparent" />'."\n"
-                     . '<param name="movie" value="/swf/dewplayer.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" />'."\n"
-                     . '</object>'."\n";
-                break;
-
-            case 'dewplayer-multi':
-                return '<object type="application/x-shockwave-flash" data="/swf/dewplayer-mini.swf?mp3='.urlencode($chemin).'&amp;bgcolor='.$bgcolor.'&amp;showtime=1" width="240" height="20">'."\n"
-                     . '<param name="wmode" value="transparent" />'."\n"
-                     . '<param name="movie" value="/swf/dewplayer-multi.swf?mp3='.urlencode($chemin).'.mp3&amp;bgcolor='.$bgcolor.'&amp;showtime=1" />'."\n"
-                     . '</object>'."\n";
-                break;
-
-            case 'player_mp3_multi':
-                return '<object type="application/x-shockwave-flash" data="/swf/player_mp3_multi.swf" width="250" height="150">'."\n"
-                     . '<param name="movie" value="/swf/player_mp3_multi.swf" />'."\n"
-                     . '<param name="wmode" value="transparent" />'."\n"
-                     . '<param name="FlashVars" value="configxml=/swf/player_mp3_multi.php/'.$id_groupe.'" />'."\n"
-                     . '</object>'."\n";
-                break;
-
-            case 'player_mp3_nano':
-                return '<object type="application/x-shockwave-flash" data="/swf/player_mp3_maxi.swf" width="25" height="20">'."\n"
-                     . '<param name="movie" value="/swf/player_mp3_maxi.swf" />'."\n"
-                     . '<param name="FlashVars" value="mp3='.urlencode($chemin).'&amp;bgcolor=2f2f2f&amp;showslider=0&amp;width=25" />'."\n"
-                     . '</object>'."\n";
-                break;
-        }
-
-        return false;
     }
 
     /**
