@@ -29,7 +29,6 @@ class AdHocSmarty extends Smarty
         $this->muteExpectedErrors();
 
         // fonctions smarty
-        $this->registerPlugin('function', 'audio_player', ['AdHocSmarty', 'function_audio_player']);
         $this->registerPlugin('function', 'pagination', ['AdHocSmarty', 'function_pagination']);
         $this->registerPlugin('function', 'html_input_date_hourminute', ['AdHocSmarty', 'function_html_input_date_hourminute']);
         $this->registerPlugin('function', 'calendar', ['AdHocSmarty', 'function_calendar']);

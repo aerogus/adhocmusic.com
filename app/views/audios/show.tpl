@@ -38,10 +38,6 @@ var audio_url = '{$og_audio.url}';
 
 <audio controls="controls" src="{$audio->getDirectMp3Url()}" style="background-color:#000"></audio>
 
-{include file="comments/share.tpl" title="cette chanson" url=$audio->getUrl()}
-
-{include file="comments/box.tpl" type="a" id_content=$audio->getId()}
-
   </div>
 </div>
 

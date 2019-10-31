@@ -51,8 +51,8 @@
           <span id="modified_on" style="float: right;">{$audio->getModifiedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
         </li>
         <li>
-          <span id="mp3" style="float: right;">{audio_player id=$audio->getId()}</span>
           <label for="mp3">Ecouter</label>
+          <audio id="mp3" src="{$audio->getDirectMp3Url()}"></audio>
         </li>
       </ul>
       <input id="form-audio-delete-submit" name="form-audio-delete-submit" class="button" type="submit" value="Supprimer">
