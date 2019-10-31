@@ -2,12 +2,12 @@
     Webmaster: Guillaume Seznec
     Contact: gus [at] adhocmusic.com
     Twitter: @aerogus
-    From: Epinay sur Orge, Essonne, France
+    From: Épinay-sur-Orge, Essonne, France
 
 /* THANKS */
 
 /* SITE */
-    Last update: 2018/10/11
+    Last update: 2019/10/31
     Language: French
     Doctype: HTML5
     IDE: Visual Studio Code
