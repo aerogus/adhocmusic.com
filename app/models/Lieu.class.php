@@ -345,7 +345,7 @@ class Lieu extends ObjectModel
      */
     function getRegion(): string
     {
-        return WorldRegion::getName($this->_id_country, $this->_id_region);
+        return (string) WorldRegion::getName($this->_id_country, $this->_id_region);
     }
 
     /**
@@ -974,37 +974,13 @@ class Lieu extends ObjectModel
      */
     function delete(): bool
     {
-        if ($this->hasEvents()) {
-            throw new Exception('suppression impossible : lieu avec événements');
-        }
-
-        if ($this->hasAudios()) {
-            throw new Exception('suppression impossible : lieu avec audios');
-        }
-
-        if ($this->hasPhotos()) {
-            throw new Exception('suppression impossible : lieu avec photos');
-        }
-
-        if ($this->hasVideos()) {
-            throw new Exception('suppression impossible : lieu avec videos');
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql = "DELETE FROM `" . Lieu::getDbTable() . "` "
-             . "WHERE `" . self::$_pk . "` = " . (int) $this->getId();
-
-        $db->query($sql);
-
-        if ($db->affectedRows()) {
+        if (parent::delete()) {
             $file = self::getBasePath() . '/' . (int) $this->getId() . '.jpg';
             if (file_exists($file)) {
                 unlink($file);
             }
             return true;
         }
-
         return false;
     }
 

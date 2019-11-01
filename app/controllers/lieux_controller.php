@@ -111,7 +111,7 @@ final class Controller
         $trail = Trail::getInstance()
             ->addStep("Lieux", "/lieux/")
             ->addStep(WorldCountry::getName($lieu->getIdCountry()), "/lieux/?c=" . $lieu->getIdCountry())
-            ->addStep(WorldRegion::getName($lieu->getIdCountry(), $lieu->getIdRegion()), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion());
+            ->addStep((string) WorldRegion::getName($lieu->getIdCountry(), $lieu->getIdRegion()), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion());
         if ($lieu->getIdCountry() === 'FR') {
             $trail->addStep(Departement::getName($lieu->getIdDepartement()), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion() . "&d=" . $lieu->getIdDepartement());
         }
