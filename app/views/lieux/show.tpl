@@ -91,7 +91,7 @@
   <div class="reset gallery">
   {foreach from=$photos item=photo}
     <div class="photo">
-      <a href="{$photo.thumb_1000}" data-at-1000="{$photo.thumb_1000}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
+      <a href="{$photo.thumb_1000}" data-id="{$photo.id}" data-at-1000="{$photo.thumb_1000}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
         <img src="{$photo.thumb_320}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
       </a>
     </div>
@@ -108,7 +108,7 @@
   <div>
     <ul>
       {foreach $audios as $audio}
-      <li>Titre : <strong>{$audio.name|escape}</strong><br>Groupe : <a href="http://www.adhocmusic.com/{$audio.groupe_alias}">{$audio.groupe_name}</a><br>Evénement : <a href="http://www.adhocmusic.com/events/show/{$audio.event_id}">{$audio.event_name}</a> ({$audio.event_date|date_format:'%d/%m/%Y'})<br>{audio_player id=$audio.id}</li>
+      <li>Titre : <strong>{$audio.name|escape}</strong><br>Groupe : <a href="http://www.adhocmusic.com/{$audio.groupe_alias}">{$audio.groupe_name}</a><br>Evénement : <a href="http://www.adhocmusic.com/events/show/{$audio.event_id}">{$audio.event_name}</a> ({$audio.event_date|date_format:'%d/%m/%Y'})<br><audio src="{$audio.id}"></audio></li>
       {/foreach}
     </ul>
   </div>

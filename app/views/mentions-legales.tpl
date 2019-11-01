@@ -25,8 +25,7 @@
     </p>
     <h2>Droit à l'image</h2>
     <p>
-    Le site héberge des photos de manifestations publiques musicales,
-    avec capacité de marquage nominatif. <a href="/contact">Contactez nous</a> pour toute demande de mise hors ligne.
+    Le site héberge des photos de manifestations publiques musicales, vous pouvez <a href="/contact">nous contacter</a> pour toute demande de mise hors ligne.
     </p>
     <h2>Propriété intellectuelle</h2>
     <p>

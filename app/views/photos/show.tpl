@@ -65,10 +65,6 @@
       <span id="pcredits">{if !empty($has_credits)}(<i>crédits: {$photo->getCredits()|escape}</i>){/if}</span>
     </p>
 
-    {include file="comments/share.tpl" title="cette photo" url=$photo->getUrl()}
-
-    {include file="comments/box.tpl" type="p" id_content=$photo->getId()}
-
     {include file="common/boxend.tpl"}
 
   </div>{* .col-2-small-1 *}
