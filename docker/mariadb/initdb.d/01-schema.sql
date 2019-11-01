@@ -145,21 +145,6 @@ CREATE TABLE IF NOT EXISTS `adhoc_newsletter_hit` (
   CONSTRAINT `fk_newsletter_hit_contact` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_contact` (`id_contact`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_statsnl` (
-  `id_contact` int(10) UNSIGNED NOT NULL,
-  `email` varchar(100) NOT NULL DEFAULT '',
-  `pseudo` varchar(50) NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `ip` varchar(30) NOT NULL DEFAULT '',
-  `host` varchar(100) NOT NULL DEFAULT '',
-  `useragent` varchar(100) NOT NULL DEFAULT '',
-  `id_newsletter` smallint(5) UNSIGNED NOT NULL,
-  KEY `id_contact` (`id_contact`),
-  KEY `id_newsletter`(`id_newsletter`),
-  CONSTRAINT `fk_statsnl_contact` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_contact` (`id_contact`),
-  CONSTRAINT `fk_statsnl_newsletter` FOREIGN KEY (`id_newsletter`) REFERENCES `adhoc_newsletter` (`id_newsletter`)
-);
-
 CREATE TABLE IF NOT EXISTS `adhoc_groupe` (
   `id_groupe` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `alias` varchar(50) NOT NULL,
