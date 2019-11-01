@@ -23,11 +23,151 @@ class Partner extends ObjectModel
      */
     protected static $_table = 'adhoc_partner';
 
+    /**
+     * @var int
+     */
+    protected $_id_partner = 0;
+
+    /**
+     * @var string
+     */
+    protected $_title = '';
+
+    /**
+     * @var string
+     */
+    protected $_description = '';
+
+    /**
+     * @var string
+     */
+    protected $_url = '';
+
+    /**
+     * Liste des attributs de l'objet
+     * on précise si en base c'est de type :
+     * - numérique/integer/float/bool (= num)
+     * - datetime/text (= str)
+     * ceci est utile pour la formation de la requête
+     *
+     * @var array
+     */
+    protected static $_all_fields = [
+        'title'       => 'str',
+        'description' => 'str',
+        'url'         => 'str',
+    ];
+
+    /**
+     * Tableau des attributs modifiés depuis la dernière sauvegarde.
+     *
+     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
+     *
+     * @var array
+     */
+    protected $_modified_fields = [];
+
     /* début getters */
+
+    /**
+     * @return string
+     */
+    static function getBaseUrl(): string
+    {
+        return MEDIA_URL . '/partner';
+    }
+
+    /**
+     * @return string
+     */
+    static function getBasePath(): string
+    {
+        return MEDIA_PATH . '/partner';
+    }
+
+    /**
+     * @return string
+     */
+    function getTitle(): string
+    {
+        return $this->_title;
+    }
+
+    /**
+     * @return string
+     */
+    function getDescription(): string
+    {
+        return $this->_description;
+    }
+
+    /**
+     * @return string
+     */
+    function getUrl(): string
+    {
+        return $this->_url;
+    }
+
+    /**
+     * @return string|null
+     */
+    function getIconUrl(): ?string
+    {
+        if (file_exists(self::getBasePath() . '/' . $this->getId() . '.png')) {
+            return self::getBaseUrl() . '/' . $this->getId() . '.png';
+        }
+        return null;
+    }
 
     /* fin getters */
 
     /* début setters */
+
+    /**
+     * @param string $name name
+     *
+     * @return object
+     */
+    function setName(string $name): object
+    {
+        if ($this->_name !== $name) {
+            $this->_name = $name;
+            $this->_modified_fields['name'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $description description
+     *
+     * @return object
+     */
+    function setDescription(string $description): object
+    {
+        if ($this->_description !== $description) {
+            $this->_description = $description;
+            $this->_modified_fields['description'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $url url
+     *
+     * @return object
+     */
+    function setUrl(string $url): object
+    {
+        if ($this->_url !== $url) {
+            $this->_url = $url;
+            $this->_modified_fields['url'] = true;
+        }
+
+        return $this;
+    }
 
     /* fin setters */
 }

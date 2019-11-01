@@ -8,9 +8,9 @@
     <ul class="partners">
     {foreach from=$partners item=partner}
       <li>
-        <a href="{$partner->url}">
-          <img src="/img/partners/{$partner->id}.png" alt="">
-          <strong>{$partner->title}</strong><br>{$partner->description}
+        <a href="{$partner->getUrl()}">
+          <img src="{$partner->getIconUrl()}" alt="">
+          <strong>{$partner->getTitle()}</strong><br>{$partner->getDescription()}
         </a>
       </li>
     {/foreach}

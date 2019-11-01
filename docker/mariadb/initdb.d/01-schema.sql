@@ -191,6 +191,14 @@ CREATE TABLE IF NOT EXISTS `adhoc_structure` (
   KEY `id_pays` (`id_country`)
 );
 
+CREATE TABLE IF NOT EXISTS `adhoc_partner` (
+  `id_partner` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` varchar(250) NOT NULL,
+  `description` varchar(250) NOT NULL,
+  `url` varchar(250) NOT NULL,
+  PRIMARY KEY (`id_partner`)
+);
+
 CREATE TABLE IF NOT EXISTS `adhoc_alerting` (
   `id_alerting` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_contact` int(10) UNSIGNED NOT NULL,

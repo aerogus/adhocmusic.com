@@ -83,6 +83,7 @@ final class Controller
         Trail::getInstance()
             ->addStep("Partenaires");
 
+        /*
         $partners = [
             (object) ['id' => 'epinay-sur-orge', 'title' => "Épinay-sur-Orge", 'description' => "Mairie d'Épinay-sur-Orge", 'url' => "https://www.ville-epinay-sur-orge.fr"],
             (object) ['id' => 'ox', 'title' => "OX", 'description' => "Brasserie Artisanale de Marcoussis", 'url' => "http://brasserieoxbier.wordpress.com"],
@@ -95,8 +96,9 @@ final class Controller
             (object) ['id' => 'cridelalibellule', 'title' => "Le Cri de la Libellule", 'description' => "Association musicale de Saint-Michel sur Orge", 'url' => "http://www.lecridelalibellule.fr"],
             (object) ['id' => 'so-zik', 'title' => "SOZIK", 'description' => "École de musique spinolienne", 'url' => "https://www.so-zik.fr"],
         ];
+        */
 
-        $smarty->assign('partners', $partners);
+        $smarty->assign('partners', Partner::findAll());
 
         return $smarty->fetch('partners.tpl');
     }
