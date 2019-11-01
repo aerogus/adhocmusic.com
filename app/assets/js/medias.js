@@ -4,7 +4,7 @@ jQuery(document).ready(function ($) {
 
   'use strict';
 
-  $('#search-results').html('Sélectionnez un groupe ou événement et un type de média');
+  $('#search-results').html('Sélectionnez un groupe ou événement');
 
   $('#groupe').change(function () {
     $('#event').val(0);
