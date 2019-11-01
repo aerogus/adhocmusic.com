@@ -1,8 +1,10 @@
 {include file="common/header.tpl"}
 
-<div>
-
-{include file="common/boxstart.tpl" boxtitle="Proche de chez vous"}
+<div class="box">
+  <header>
+    <h1>Proche de chez vous</h1>
+  </header>
+  <div>
 {foreach from=$lieux item=lieu}
 <div style="margin 5px; padding: 5px">
   <a href="/lieux/show/{$lieu.id_lieu}"><strong>{$lieu.name|escape}</strong></a><br>
@@ -11,13 +13,14 @@
 </div>
 {/foreach}
 </table>
-{include file="common/boxend.tpl"}
-
+  </div>
 </div>
 
-<div id="center-right">
-
-{include file="common/boxstart.tpl" boxtitle="Lieux de diffusion"}
+<div class="box">
+  <header>
+    <h1>Lieux de diffusion</h1>
+  </header>
+  <div>
 
 <form id="form-lieu-search" name="form-lieu-search">
   <legend>Chercher un lieu</legend>
@@ -54,8 +57,7 @@
   </tbody>
 </table>
 
-{include file="common/boxend.tpl"}
-
+  </div>
 </div>
 
 {include file="common/footer.tpl"}

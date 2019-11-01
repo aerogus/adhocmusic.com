@@ -13,6 +13,17 @@
       span
         display inline-block
 
+      a.home
+        span
+          &.mobile
+            display none
+
+          @media screen and (max-width: 680px)
+            &
+              display none
+              &.mobile
+                display inline-block
+
       &:last-child
         font-weight bold
 

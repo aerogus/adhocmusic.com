@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Commentaires"}
+<div class="box">
+  <header>
+    <h1>Commentaires</h1>
+  </header>
+  <div>
 
 <form id="form-comments-delete" id="form-comments-delete">
 
@@ -54,6 +58,7 @@ $(function() {
 });
 </script>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

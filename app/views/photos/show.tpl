@@ -10,7 +10,11 @@
 
   <div class="col-1">
 
-    {include file="common/boxstart.tpl"}
+    <div class="box">
+      <header>
+        <h1></h1>
+      </header>
+      <div>
     {if !empty($groupe)}
     <div class="metatop">Groupe</div>
     <div class="metacontent">
@@ -44,7 +48,8 @@
       {$who}
     </div>
     {/if}
-    {include file="common/boxend.tpl"}
+    </div>
+    </div>
 
   </div>{* .col-1 *}
 
@@ -52,7 +57,11 @@
 
     <a name="p"></a>
 
-    {include file="common/boxstart.tpl" boxtitle2=$photo->getName()|escape}
+    <div class="box">
+      <header>
+        <h1>{$photo->getName()}</h1>
+      </header>
+      <div>
 
     <p align="center" id="photofull" class="photofull">
     {if !empty($next)}<a href="{$next}">{/if}
@@ -65,7 +74,8 @@
       <span id="pcredits">{if !empty($has_credits)}(<i>crédits: {$photo->getCredits()|escape}</i>){/if}</span>
     </p>
 
-    {include file="common/boxend.tpl"}
+      </div>
+    </div>
 
   </div>{* .col-2-small-1 *}
 

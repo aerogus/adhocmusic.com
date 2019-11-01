@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
 /**
- * Classe de gestion des types de musiciens
+ * Classe de gestion des types de photos
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class TypeMusicien extends Reference
+class PhotoType extends Reference
 {
     /**
      * @var object
@@ -16,15 +16,15 @@ class TypeMusicien extends Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_type_musicien';
+    protected static $_pk = 'id_photo_type';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_type_musicien';
+    protected static $_table = 'adhoc_photo_type';
 
     /**
      * @var int
      */
-    protected $_id_type_musicien = 0;
+    protected $_id_photo_type = 0;
 }

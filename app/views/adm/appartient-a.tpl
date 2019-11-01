@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Liaison Membre / Groupe"}
+<div class="box">
+  <header>
+    <h1>Liaison Membre / Groupe</h1>
+  </header>
+  <div>
 
 <form id="form-appartient-a" name="form-appartient-a" method="post" action="/adm/appartient-a">
   <table align="center">
@@ -29,6 +33,7 @@
   <input type="hidden" name="from" value="{$from}">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

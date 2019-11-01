@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Mes lieux"}
+<div class="box">
+  <header>
+    <h1>Mes lieux</h1>
+  </header>
+  <div>
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
@@ -35,6 +39,7 @@
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

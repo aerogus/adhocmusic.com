@@ -59,16 +59,9 @@ adm_subscriptions|api_list|GET|/api/subscriptions/list
 adm_subscriptions|api_create|POST|/api/subscriptions/create
 adm_subscriptions|api_edit|POST|/api/subscriptions/edit/:id
 adm_subscriptions|api_delete|POST|/api/subscriptions/delete/:id
-api|lieux|GET|/api/1.0/lieux
-api|videos|GET|/api/1.0/videos
-api|audios|GET|/api/1.0/audios
-api|photos|GET|/api/1.0/photos
-api|events|GET|/api/1.0/events
 assoce|assoce|GET|/assoce
 assoce|concerts|GET|/concerts
 assoce|afterworks|GET|/afterworks
-assoce|festival|GET|/festival
-assoce|formations|GET|/formations
 assoce|equipe|GET|/equipe
 audios|my|GET|/audios/my
 audios|create|GET|/audios/create
@@ -146,7 +139,6 @@ index|map|GET|/map
 index|mentions_legales|GET|/mentions-legales
 index|cms|GET|/cms/:id
 index|r|GET|/r/:url
-index|styleguide|GET|/styleguide
 lieux|index|GET|/lieux/
 lieux|my|GET|/lieux/my
 lieux|create|GET|/lieux/create

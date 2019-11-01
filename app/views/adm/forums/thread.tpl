@@ -95,7 +95,11 @@ $(function() {
   </div>
 </div>
 
-{include file="common/boxstart.tpl" boxtitle="Répondre"}
+<div class="box">
+  <header>
+    <h1>Répondre</h1>
+  </header>
+  <div>
 
 <form id="form-forum-write" name="form-forum-write" method="post" action="/adm/forums/write">
   <ul>
@@ -113,6 +117,7 @@ $(function() {
   <input name="id_thread" id="id_thread" type="hidden" value="{$id_thread|escape}">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

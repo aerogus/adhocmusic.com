@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Membre"}
+<div class="box">
+  <header>
+    <h1>Membre</h1>
+  </header>
+  <div>
 
 <table>
   <caption>Infos générales</caption>
@@ -99,6 +103,7 @@
 </table>
 <a class="button" href="/adm/appartient-a?from=membre&action=create&membre={$membre->getId()}">Ajout Groupe</a>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

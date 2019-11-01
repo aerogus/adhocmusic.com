@@ -342,27 +342,6 @@ class Newsletter extends ObjectModel
     }
 
     /**
-     * Stats d'affichage de l'image de tracking
-     *
-     * @param array['id_contact']
-     *             ['ip']
-     *             ['host']
-     *             ['useragent']
-     *
-     * @return bool
-     */
-    static function addStats(array $params): bool
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "INSERT INTO `" . self::$_db_table_statsnl . "` "
-             . "(`id_contact`, `date`, `ip`, `host`, `useragent`) "
-             . "VALUES(".(int) $params['id_contact'].", NOW(), '".$db->escape($params['ip'])."', '".$db->escape($params['host'])."', '".$db->escape($params['useragent'])."')";
-
-        return $db->query($sql);
-    }
-
-    /**
      * Retourne les abonnés actifs à la newsletter
      *
      * @param int $debut début

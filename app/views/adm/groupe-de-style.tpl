@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Liaisons groupe / styles"}
+<div class="box">
+  <header>
+    <h1>Liaisons groupe / styles</h1>
+  </header>
+  <div>
 
 <div class="infobulle info">Un groupe est lié à un style en texte libre, et à 1 à 3 styles prédéfinis d'une liste déroulante. C'est de ce dernier choix que dépend l'affichage et le classement du groupe. Un groupe doit obligatoirement avoir un style sélectionné sinon il n'apparaitra pas dans la liste des groupes. Merci donc de veiller à ce que tous les groupes aient un style (= vert). Si groupe est en rouge, sélectionnez 1 à 3 styles pour le définir. Merci !</div>
 <table>
@@ -32,6 +36,7 @@
   </tbody>
 </table>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

@@ -44,13 +44,6 @@ final class Controller
                 ->setLastnlNow()
                 ->save();
 
-            $db = DataBase::getInstance();
-
-            $sql = "INSERT INTO `adhoc_statsnl` "
-                 . "(`id_newsletter`, `id_contact`, `date`, `ip`, `host`, `useragent`) "
-                 . "VALUES(" . (int) $id_newsletter . ", " . (int) $id_contact .", NOW(), '" . $db->escape($ip) . "', '" . $db->escape($host) . "', '" . $db->escape($useragent) . "')";
-            $res = $db->query($sql);
-
         } catch (Exception $e) {
             // rien
         }

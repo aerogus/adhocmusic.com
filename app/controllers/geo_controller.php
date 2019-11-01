@@ -85,7 +85,7 @@ final class Controller
             $d = substr($_GET['d'], 0, 3);
             $db = DataBase::getInstance();
             $sql = "SELECT `id_city`, `name`, `cp` "
-                 . "FROM `geo_fr_city` "
+                 . "FROM `" . City::getDbTable() . "` "
                  . "WHERE `id_departement` = '" . $db->escape($d) . "' "
                  . "ORDER BY `name` ASC";
             $res = $db->queryWithFetch($sql);

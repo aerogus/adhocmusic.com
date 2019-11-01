@@ -46,30 +46,6 @@ final class Controller
     /**
      * @return string
      */
-    static function festival(): string
-    {
-        $smarty = new AdHocSmarty();
-
-        Trail::getInstance()->addStep("Festival");
-
-        return $smarty->fetch('assoce/festival.tpl');
-    }
-
-    /**
-     * @return string
-     */
-    static function formations(): string
-    {
-        $smarty = new AdHocSmarty();
-
-        Trail::getInstance()->addStep("Formation");
-
-        return $smarty->fetch('assoce/formations.tpl');
-    }
-
-    /**
-     * @return string
-     */
     static function equipe(): string
     {
         $smarty = new AdHocSmarty();

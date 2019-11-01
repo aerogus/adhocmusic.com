@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Cotisations"}
+<div class="box">
+  <header>
+    <h1>Cotisations</h1>
+  </header>
+  <div>
 
 <a href="/adm/subscriptions/create">Saisir une cotisation</a>
 
@@ -25,6 +29,7 @@
   </tbody>
 </table>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

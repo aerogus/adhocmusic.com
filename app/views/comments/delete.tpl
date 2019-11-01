@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Effacer un commentaire"}
+<div class="box">
+  <header>
+    <h1>Effacer un commentaire</h1>
+  </header>
+  <div>
 
 <form id="form-comment-delete" name="form-comment-delete" method="post" action="/comments/delete">
   <fieldset>
@@ -15,6 +19,7 @@
   <input type="hidden" name="id" value="{$comment->getId()}">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

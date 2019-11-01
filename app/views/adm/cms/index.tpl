@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Pages Statiques"}
+<div class="box">
+  <header>
+    <h1>Pages Statiques</h1>
+  </header>
+  <div>
 
 {if !empty($create)}<p class="infobulle success">Page ajoutée</p>{/if}
 {if !empty($edit)}<p class="infobulle success">Page modifiée</p>{/if}
@@ -25,6 +29,7 @@
 
 <a class="button" href="/adm/cms/create">Ajouter une page</a>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

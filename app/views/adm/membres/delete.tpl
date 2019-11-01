@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Membre"}
+<div class="box">
+  <header>
+    <h1>Membre</h1>
+  </header>
+  <div>
 
 <table>
   <caption>Infos générales</caption>
@@ -28,6 +32,7 @@
 
 <p>Confirmer la suppression ?</p>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

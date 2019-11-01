@@ -22,7 +22,7 @@ abstract class ObjectModel
     /**
      * Champ clé primaire de l'objet fils
      *
-     * @var string
+     * @var string|array
      */
     protected static $_pk = '';
 
@@ -70,13 +70,6 @@ abstract class ObjectModel
     protected static $_db_table_groupe_style   = 'adhoc_groupe_style';
     protected static $_db_table_organise_par   = 'adhoc_organise_par';
     protected static $_db_table_participe_a    = 'adhoc_participe_a';
-    protected static $_db_table_statsnl        = 'adhoc_statsnl';
-
-    /* db geo */
-    protected static $_db_table_world_country  = 'geo_world_country';
-    protected static $_db_table_world_region   = 'geo_world_region';
-    protected static $_db_table_fr_departement = 'geo_fr_departement';
-    protected static $_db_table_fr_city        = 'geo_fr_city';
 
     /**
      * Codes type de médias
@@ -101,9 +94,18 @@ abstract class ObjectModel
     function __construct($id = null)
     {
         if (!is_null($id)) {
-            $this->_object_id = md5(get_called_class() . '|' . $id);
-            $pk = '_' . static::$_pk;
-            $this->$pk = $id;
+            $this->_object_id = md5(get_called_class() . '|' . print_r($id, true));
+            if (is_array($id)) {
+                // clé primaire multiple
+                foreach (static::$_pk as $field) {
+                    $pk = '_' . $field;
+                    $this->$pk = $id[$field];
+                }
+            } else {
+                // clé primaire simple
+                $pk = '_' . static::$_pk;
+                $this->$pk = $id;
+            }
             $this->_loadFromDb();
             static::$_instance = $this;
         }
@@ -120,11 +122,11 @@ abstract class ObjectModel
     }
 
     /**
-     * Retourne le nom du champ de la clé primaire
+     * Retourne le nom du/des champ(s) de la clé primaire
      *
-     * @return string
+     * @return string|array
      */
-    static function getDbPk(): string
+    static function getDbPk()
     {
         return static::$_pk;
     }
@@ -138,6 +140,8 @@ abstract class ObjectModel
     }
 
     /**
+     * @param mixed $id int|string|array
+     *
      * @return object
      */
     static function getInstance($id): object
@@ -146,6 +150,14 @@ abstract class ObjectModel
             // pas du tout d'instance: on en crée une, le constructeur ira s'enregistrer
             // dans la variable statique.
             return new static($id);
+        } elseif (is_array(static::$_pk)) {
+            foreach (static::$_pk as $pk) {
+                if (static::$_instance->$pk !== $id[$pk]) {
+                    // on a deja une instance, mais ce n'est pas le bon id
+                    static::deleteInstance();
+                    new static($id);
+                }
+            }
         } else {
             $pk = '_' . static::$_pk;
             if (static::$_instance->$pk !== $id) {
@@ -180,12 +192,21 @@ abstract class ObjectModel
     }
 
     /**
-     * @return int ou string (quand ??)
+     * @return int ou string ou array si clé multiple
      */
     function getId()
     {
-        $pk = '_' . static::$_pk;
-        return $this->$pk;
+        if (is_array(static::$_pk)) {
+            $pks = [];
+            foreach (static::$_pk as $_pk) {
+                $pk = '_' . $_pk;
+                $pks[$_pk] = $this->$pk;
+            }
+            return $pks;
+        } else {
+            $pk = '_' . static::$_pk;
+            return $this->$pk;
+        }
     }
 
     /**
@@ -193,10 +214,17 @@ abstract class ObjectModel
      *
      * @return object
      */
-    function setId($val)
+    function setId($id)
     {
-        $pk = '_' . static::$_pk;
-        $this->$pk = $val;
+        if (is_array($id)) {
+            foreach ($val as $key => $val) {
+                $pk = '_' . $key;
+                $this->$pk = $val;
+            }
+        } else {
+            $pk = '_' . static::$_pk;
+            $this->$pk = $id;
+        }
 
         return $this;
     }
@@ -328,12 +356,12 @@ abstract class ObjectModel
     }
 
     /**
-     * @param int $id id
+     * @param mixed $id id
      *
      * @return object
      * @throws Exception
      */
-    static function find(int $id): object
+    static function find($id): object
     {
         return static::getInstance($id);
     }
@@ -370,9 +398,9 @@ abstract class ObjectModel
         $out .= 'class     : ' . __CLASS__ . "\n";
         $out .= 'className : ' . static::class . "\n";
         $out .= 'object_id : ' . $this->getObjectId() . "\n";
-        $out .= 'id        : ' . $this->getId() . "\n";
+        $out .= 'id        : ' . print_r($this->getId(), true) . "\n";
         $out .= 'table     : ' . $this->getDbTable() . "\n";
-        $out .= 'pk        : ' . $this->getDbPk() . "\n";
+        $out .= 'pk        : ' . print_r($this->getDbPk(), true) . "\n";
 
         return $out;
     }

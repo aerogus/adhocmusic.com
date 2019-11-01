@@ -40,7 +40,11 @@ $(function() {
 });
 </script>
 
-{include file="common/boxstart.tpl" boxtitle="Pages Statiques"}
+<div class="box">
+  <header>
+    <h1>Pages Statiques</h1>
+  </header>
+  <div>
 
 <form id="form-cms-create" name="form-cms-create" action="/adm/cms/create" method="post">
   <ul>
@@ -77,6 +81,7 @@ $(function() {
   <input id="form-cms-create-submit" name="form-cms-create-submit" type="submit" value="OK" class="button">
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

@@ -44,7 +44,7 @@
 <link rel="author" href="{#HOME_URL#}/humans.txt">
 <link rel="shortcut icon" href="{#HOME_URL#}/favicon.ico">
 <meta name="robots" content="index,follow">
-<meta name="description" content="{if empty($description)}Portail de référence sur les musiques actuelles en Essonne, Agenda culturel géolocalisé, Vidéos de concerts, promotion d'artistes ...{else}{$description|escape}{/if}">
+<meta name="description" content="{if empty($description)}Soutien des musiques actuelles en Essonne, agenda culturel, vidéos de concerts...{else}{$description|escape}{/if}">
 
 {foreach $stylesheets as $style_url}
 <link rel="stylesheet" href="{$style_url}">
@@ -66,12 +66,17 @@
 {if !empty($trail) && ($trail|@count) > 1}
 <div class="breadcrumb">
   <ul>
-    {foreach from=$trail item=item name=breadcrumb}
-      {if !empty($item.link)}
-      <li><a href="{$item.link|escape}" title="{$item.description|escape}">{$item.title|escape}</a></li>
-      {else}
-      <li><span>{$item.title|escape}</span></li>
-      {/if}
+    {foreach from=$trail key=key item=item name=breadcrumb}
+    <li>
+    {if !empty($item.link)}
+      <a {if $key == 0} class="home"{/if} href="{$item.link|escape}" title="{$item.description|escape}">
+        <span class="mobile">🏠</span>
+        <span>{$item.title|escape}</span>
+      </a>
+    {else}
+    <span>{$item.title|escape}</span>
+    {/if}
+    </li>
     {/foreach}
   </ul>
 </div>

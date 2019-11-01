@@ -6,7 +6,7 @@
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class WorldRegion extends Liste
+class WorldRegion extends Reference
 {
     /**
      * Instance de l'objet
@@ -16,90 +16,41 @@ class WorldRegion extends Liste
     protected static $_instance = null;
 
     /**
-     * Code pays ok ?
-     *
-     * @param string $id_country id_country
-     * @param string $id_region  id_region
+     * @var string
+     */
+    protected static $_pk = ['id_country', 'id_region'];
+
+    /**
+     * @var string
+     */
+    protected static $_table = 'geo_world_country';
+
+    /**
+     * @var string
+     */
+    protected $_id_country = null;
+
+    /**
+     * @var string
+     */
+    protected $_id_region = null;
+
+    /**
+     * Charge toutes les infos d'une entité
      *
      * @return bool
+     * @throws Exception
      */
-    function isWorldRegionOk(string $id_country, string $id_region)
-    {
-        $o = static::getInstance();
-        return $o->_isWorldRegionOk($id_country, $id_region);
-    }
-
-    /**
-     * Retourne le nom d'une région
-     *
-     * @param string $id_country id_country
-     * @param string $id_region  id_region
-     *
-     * @return string
-     */
-    static function getName(string $id_country, string $id_region)
-    {
-        $o = static::getInstance();
-        return $o->_getName($id_country, $id_region);
-    }
-
-    /**
-     * Code pays ok ?
-     *
-     * @param string $id_country id_country
-     * @param string $id_region  id_region
-     *
-     * @return bool
-     */
-    protected function _isWorldRegionOk(string $id_country, string $id_region)
-    {
-        if (array_key_exists($id_country, static::$_liste)) {
-            if (array_key_exists($id_region, static::$_liste[$id_country])) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Retourne le nom d'une région
-     *
-     * @param string $id_country
-     * @param string $id_region
-     *
-     * @return string
-     */
-    protected function _getName(string $id_country, string $id_region)
-    {
-        if (array_key_exists($id_country, static::$_liste)) {
-            if (array_key_exists($id_region, static::$_liste[$id_country])) {
-                return static::$_liste[$id_country][$id_region];
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Charge la liste des régions triés par pays
-     *
-     * @return bool
-     */
-    protected function _loadFromDb()
+    protected function _loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `id_country`, `id_region`, `name` "
-             . "FROM `geo_world_region` "
-             . "ORDER BY `id_country` ASC, `id_region` ASC";
+        $sql  = "SELECT * FROM `" . static::$_table . "` WHERE `" . static::$_pk . "` = " . (int) $this->{'_' . static::$_pk};
 
-        static::$_liste = [];
-        if ($res = $db->queryWithFetch($sql)) {
-            foreach ($res as $_res) {
-                static::$_liste[$_res['id_country']][$_res['id_region']] = $_res['name'];
-            }
+        if ($res = $db->queryWithFetchFirstRow($sql)) {
+            $this->_dbToObject($res);
             return true;
         }
         return false;
-
     }
 }

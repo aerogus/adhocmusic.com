@@ -1,7 +1,11 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Cotisation"}
-
-{include file="common/boxend.tpl"}
+<div class="box">
+  <header>
+    <h1>Cotisation</h1>
+  </header>
+  <div>
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

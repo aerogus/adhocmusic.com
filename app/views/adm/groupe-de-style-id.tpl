@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle="Liaisons groupe / styles"}
+<div class="box">
+  <header>
+    <h1>Liaisons groupe / styles</h1>
+  </header>
+  <div>
 
 <form id="form-groupe-de-style" name="form-groupe-de-style" action="/adm/groupe-de-style" method="post">
   <fieldset>
@@ -43,6 +47,7 @@
   <input type="hidden" name="id_groupe" value="{$groupe->getId()|escape}" />
 </form>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

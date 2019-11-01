@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
 /**
- * Classe de gestion des types de musiciens
+ * Classe de gestion des catégories de FAQ
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class TypeMusicien extends Reference
+class FAQCategory extends Reference
 {
     /**
      * @var object
@@ -16,15 +16,15 @@ class TypeMusicien extends Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_type_musicien';
+    protected static $_pk = 'id_faq_category';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_type_musicien';
+    protected static $_table = 'adhoc_faq_category';
 
     /**
      * @var int
      */
-    protected $_id_type_musicien = 0;
+    protected $_id_faq_category = 0;
 }

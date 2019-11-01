@@ -42,7 +42,11 @@ var audio_url = '{$og_audio.url}';
 </div>
 
 {if !empty($photos) || !empty($videos)}
-{include file="common/boxstart.tpl" boxtitle="Photos et Vidéos de ce concert" width="700px"}
+<div class="box">
+  <header>
+    <h2>Photos et vidéos de ce concert</h2>
+  </header>
+  <div>
 {foreach $photos as $photo}
 <div class="thumb-80 thumb-photo-80">
   <a href="{$photo.url}"><img src="{$photo.thumb_80_80}" alt="{$photo.name|escape}"><br>{$photo.name|truncate:15:"...":true:true|escape}</a>
@@ -55,7 +59,8 @@ var audio_url = '{$og_audio.url}';
   <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}"></a>
 </div>
 {/foreach}
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 {/if}
 
 {/if} {* test unknown audio *}

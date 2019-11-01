@@ -40,7 +40,11 @@ $(function() {
 });
 </script>
 
-{include file="common/boxstart.tpl" boxtitle="Pages Statiques"}
+<div class="box">
+  <header>
+    <h1>Pages Statiques</h1>
+  </header>
+  <div>
 
 <form id="form-cms-edit" name="form-cms-edit" action="/adm/cms/edit" method="post">
   <ul>
@@ -84,6 +88,7 @@ $(function() {
 
 <a href="/adm/cms/delete/{$cms->getId()|escape}">Effacer la page</a>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

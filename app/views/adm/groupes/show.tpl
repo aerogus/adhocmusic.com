@@ -1,6 +1,10 @@
 {include file="common/header.tpl"}
 
-{include file="common/boxstart.tpl" boxtitle=$groupe->getName()}
+<div class="box">
+  <header>
+    <h1>{$groupe->getName()}</h1>
+  </header>
+  <div>
 
 <table>
   <caption>Infos générales</caption>
@@ -92,6 +96,8 @@
   {/foreach}
 </table>
 <a class="button" href="/adm/appartient-a?from=groupe&amp;action=create&amp;groupe={$groupe->getId()}">Ajout Membre</a>
-{include file="common/boxend.tpl"}
+
+  </div>
+</div>
 
 {include file="common/footer.tpl"}

@@ -314,21 +314,6 @@ final class Controller
     }
 
     /**
-     * Page guide de style
-     *
-     * @return string
-     */
-    static function styleguide(): string
-    {
-        $smarty = new AdHocSmarty();
-
-        Trail::getInstance()
-            ->addStep("Guide de style");
-
-        return $smarty->fetch('styleguide.tpl');
-    }
-
-    /**
      * Routine de validation des données du formulaire
      *
      * @param array $data   tableau des données

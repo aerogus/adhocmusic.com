@@ -6,7 +6,11 @@
 
 {else}
 
-{include file="common/boxstart.tpl" boxtitle="Commentaire"}
+<div class="box">
+  <header>
+    <h1>Commentaire</h1>
+  </header>
+  <div>
 
 <table>
   <tr>
@@ -19,7 +23,8 @@
   </tr>
 </table>
 
-{include file="common/boxend.tpl"}
+  </div>
+</div>
 
 {/if} {* test unknown comment *}
 
