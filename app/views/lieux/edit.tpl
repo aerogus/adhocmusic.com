@@ -24,8 +24,8 @@
       <div class="infobulle error" id="error_id_type"{if empty($error_id_type)} style="display: none"{/if}>Vous devez préciser le type de lieu</div>
       <select id="id_type" name="id_type">
         <option value="0">--------</option>
-        {foreach from=$types_lieu key=type_lieu_id item=type_lieu_name}
-        <option value="{$type_lieu_id}"{if $type_lieu_id == $lieu->getIdType()} selected="selected"{/if}>{$type_lieu_name|escape}</option>
+        {foreach from=$lieu_types item=lieu_type}
+        <option value="{$lieu_type->getId()}"{if $lieu_type->getId() == $lieu->getIdType()} selected="selected"{/if}>{$lieu_type->getName()|escape}</option>
         {/foreach}
       </select>
     </li>

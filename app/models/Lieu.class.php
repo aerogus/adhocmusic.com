@@ -10,31 +10,6 @@
  */
 class Lieu extends ObjectModel
 {
-    const TYPE_CONCERT   = 1;
-    const TYPE_CAFE      = 2;
-    const TYPE_MJC       = 3;
-    const TYPE_STUDIO    = 4;
-    const TYPE_MEDIA     = 5;
-    const TYPE_POLY      = 6;
-    const TYPE_EXTERIEUR = 7;
-    const TYPE_AFFICHAGE = 8;
-
-    /**
-     * Tableau des types de lieux
-     *
-     * @var array
-     */
-    protected static $_types = [
-        self::TYPE_CONCERT   => "Salle de Concerts",
-        self::TYPE_CAFE      => "Café-Concerts/Pub/Péniche",
-        self::TYPE_MJC       => "MJC / MPT",
-        self::TYPE_STUDIO    => "Studio de répétition/enregistrement",
-        self::TYPE_MEDIA     => "Télé/Radio",
-        self::TYPE_POLY      => "Salle Polyvalente/communale/des fêtes",
-        self::TYPE_EXTERIEUR => "Extérieur",
-        self::TYPE_AFFICHAGE => "Panneau d'affichage libre",
-    ];
-
     /**
      *
      */
@@ -1208,22 +1183,19 @@ class Lieu extends ObjectModel
      */
     static function getTypes(): array
     {
-        return self::$_types;
+        return LieuType::findAll();
     }
 
     /**
      * Retourne le libellé d'un type de lieu
      *
-     * @param int $cle cle
+     * @param int $id_lieu_type id_lieu_type
      *
      * @return string
      */
-    static function getTypeName(int $cle)
+    static function getTypeName(int $id_lieu_type)
     {
-        if (array_key_exists($cle, self::$_types)) {
-            return self::$_types[$cle];
-        }
-        return false;
+        return LieuType::getInstance($id_lieu_type)->getName();
     }
 
     /**

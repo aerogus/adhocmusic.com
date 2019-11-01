@@ -11,30 +11,11 @@
 class City extends Liste
 {
     /**
-     * Quelques racourcis codes insee
-     */
-    const SPINOLIE = 91216;
-    const SAULX = 91587;
-
-    /**
      * Instance de l'objet
      *
      * @var mixed
      */
     protected static $_instance = null;
-
-    /**
-     * Code insee ville ok ?
-     *
-     * @param int $id_city code insee ville
-     *
-     * @return bool
-     */
-    function isCityOk(int $id_city)
-    {
-        $o = static::getInstance();
-        return $o->_isCityOk($id_city);
-    }
 
     /**
      * @param int $id_city id_city
@@ -67,21 +48,6 @@ class City extends Liste
     {
         $o = static::getInstance();
         return $o->_getCp($id_city);
-    }
-
-    /**
-     * Code insee ville ok ?
-     *
-     * @param int $id_city id_city
-     *
-     * @return bool
-     */
-    protected function _isCityOk(int $id_city)
-    {
-        if (array_key_exists($id_city, static::$_liste)) {
-            return true;
-        }
-        return false;
     }
 
     /**

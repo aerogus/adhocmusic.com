@@ -31,6 +31,12 @@ CREATE TABLE IF NOT EXISTS `geo_world_region` (
   PRIMARY KEY (`id_country`,`id_region`)
 );
 
+CREATE TABLE `adhoc_lieu_type` (
+  `id_lieu_type` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) NOT NULL,
+  PRIMARY KEY (`id_lieu_type`)
+);
+
 CREATE TABLE IF NOT EXISTS `adhoc_style` (
   `id_style` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
@@ -248,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_comment` (
 
 CREATE TABLE IF NOT EXISTS `adhoc_lieu` (
   `id_lieu` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_type` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `id_type` int(10) UNSIGNED DEFAULT NULL,
   `name` varchar(250) NOT NULL,
   `address` varchar(100) NOT NULL,
   `cp` varchar(10) NOT NULL DEFAULT '',
@@ -273,7 +279,9 @@ CREATE TABLE IF NOT EXISTS `adhoc_lieu` (
   KEY `id_pays` (`id_country`),
   KEY `lat` (`lat`,`lng`),
   KEY `id_region` (`id_region`),
-  KEY `online` (`online`)
+  KEY `online` (`online`),
+  KEY `id_type` (`id_type`),
+  CONSTRAINT `fk_lieu_lieu_type` FOREIGN KEY (`id_type`) REFERENCES `adhoc_lieu_type` (`id_lieu_type`),
 );
 
 CREATE TABLE IF NOT EXISTS `adhoc_event` (

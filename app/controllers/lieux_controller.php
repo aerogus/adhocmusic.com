@@ -289,7 +289,7 @@ final class Controller
             ->addStep("Lieux", "/lieux/")
             ->addStep("Ajouter");
 
-        $smarty->assign('types_lieu', Lieu::getTypes());
+        $smarty->assign('lieu_types', LieuType::findAll());
 
         return $smarty->fetch('lieux/create.tpl');
     }
@@ -315,7 +315,7 @@ final class Controller
         try {
             $lieu = Lieu::getInstance($id);
             $smarty->assign('lieu', $lieu);
-            $smarty->assign('types_lieu', Lieu::getTypes());
+            $smarty->assign('lieu_types', LieuType::findAll());
         } catch (Exception $e) {
             Route::set_http_code('404');
             $smarty->assign('unknown_lieu', true);
