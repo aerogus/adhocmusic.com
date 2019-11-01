@@ -87,12 +87,6 @@ comments|delete|POST|/comments/delete
 comments|show|GET|/comments/:id
 comments|index|GET|/comments/
 comments|ajax_delete|POST|/comments/ajax-delete
-dynimg|logo_adhoc|GET|/dynimg/logo_adhoc/:hash
-dynimg|mailing_banner|GET|/dynimg/mailing-banner/:hash
-dynimg|photo|GET|/dynimg/photo/:id/:width/:height/:bgcolor/:border/:zoom
-dynimg|video|GET|/dynimg/video/:id/:width/:height/:bgcolor/:border/:zoom
-dynimg|event|GET|/dynimg/event/:id/:width/:height/:bgcolor/:border/:zoom
-dynimg|pixel|GET|/dynimg/pixel/:color
 emails|form_contact_cc|GET|/emails/form-contact-cc
 emails|form_contact_to|GET|/emails/form-contact-to
 emails|forum_prive_new_message|GET|/emails/forum-prive-new-message
