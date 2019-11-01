@@ -15,7 +15,7 @@ final class Controller
         $smarty->assign('create', (bool) Route::params('create'));
         $smarty->assign('edit', (bool) Route::params('edit'));
         $smarty->assign('delete', (bool) Route::params('delete'));
-        $smarty->assign('faq', FAQ::getFAQs(true));
+        $smarty->assign('faq', FAQ::findAll());
 
         return $smarty->fetch('adm/faq/index.tpl');
     }
@@ -52,7 +52,7 @@ final class Controller
             Tools::redirect('/adm/faq/?create=1');
         }
 
-        $smarty->assign('categories', FAQ::getCategories());
+        $smarty->assign('categories', FAQCategory::findAll());
 
         return $smarty->fetch('adm/faq/create.tpl');
     }
@@ -92,7 +92,7 @@ final class Controller
             Tools::redirect('/adm/faq/?edit=1');
         }
 
-        $smarty->assign('categories', FAQ::getCategories());
+        $smarty->assign('categories', FAQCategory::findAll());
         $smarty->assign('faq', FAQ::getInstance($id_faq));
 
         return $smarty->fetch('adm/faq/edit.tpl');

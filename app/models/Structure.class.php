@@ -384,33 +384,7 @@ class Structure extends ObjectModel
      */
     function delete()
     {
-        // check de la table evenement
-        if ($this->hasEvents()) {
-            throw new Exception('delete impossible, la structure est liée à des événements');
-        }
-
-        // check de la table audio
-        if ($this->hasAudios()) {
-            throw new Exception('delete impossible, la structure est liée à des audios');
-        }
-
-        // check de la table photo
-        if ($this->hasPhotos()) {
-            throw new Exception('delete impossible, la structure est liée à des photos');
-        }
-
-        // check de la table video
-        if ($this->hasVideos()) {
-            throw new Exception('delete impossible, la structure est liée à des vidéos');
-        }
-
-        // tout est ok on delete
-        $sql = "DELETE FROM `" . Structure::getDbTable() . "` "
-             . "WHERE `id_structure` = " . (int) $this->_id_structure;
-
-        $db = DataBase::getInstance();
-        $res  = $db->query($sql);
-        if ($db->affectedRows()) {
+        if (parent::delete()) {
             $file = self::getBasePath() . '/' . $this->_id_structure . '.png';
             if (file_exists($file)) {
                 unlink($file);
@@ -418,31 +392,6 @@ class Structure extends ObjectModel
             return true;
         }
         return false;
-    }
-
-    /**
-     * Retourne le tableau de toutes les structures dans un tableau associatif
-     *
-     * @return array
-     */
-    static function getStructures(): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_structure` AS `id`, `name`, `address`, `cp`, "
-             . "`city`, `tel`, `id_departement`, "
-             . "`text`, `site`, `email`, `id_country` "
-             . "FROM `" . Structure::getDbTable() . "` "
-             . "ORDER BY `id_country` ASC, `id_departement` ASC, `city` ASC";
-
-        $tab = [];
-        if ($res = $db->queryWithFetch($sql)) {
-            foreach ($res as $struct) {
-                $tab[$struct['id']] = $struct;
-                $tab[$struct['id']]['picto'] = self::getPictoById((int) $struct['id']);
-            }
-        }
-        return $tab;
     }
 
     /**

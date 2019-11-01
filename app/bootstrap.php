@@ -35,15 +35,9 @@ if (ENV === 'PROD') {
     define('_DB_PASSWORD_', 'kK2972Wd');
     define('_DB_DATABASE_', 'adhocmusic');
 
-    if (Tools::isSsl()) {
-        define('HOME_URL',  'https://www.adhocmusic.com');
-        define('CACHE_URL', 'https://static.adhocmusic.com/cache');
-        define('MEDIA_URL', 'https://static.adhocmusic.com/media');
-    } else {
-        define('HOME_URL',  'http://www.adhocmusic.com');
-        define('CACHE_URL', 'http://static.adhocmusic.com/cache');
-        define('MEDIA_URL', 'http://static.adhocmusic.com/media');
-    }
+    define('HOME_URL',  'https://www.adhocmusic.com');
+    define('CACHE_URL', 'https://static.adhocmusic.com/cache');
+    define('MEDIA_URL', 'https://static.adhocmusic.com/media');
 
     ini_set('display_startup_errors', '0');
     ini_set('display_errors', '0');
@@ -56,15 +50,9 @@ if (ENV === 'PROD') {
     define('_DB_PASSWORD_', 'changeme');
     define('_DB_DATABASE_', 'adhocmusic');
 
-    if (Tools::isSsl()) {
-        define('HOME_URL',  'https://www.adhocmusic.test');
-        define('CACHE_URL', 'https://static.adhocmusic.test/cache');
-        define('MEDIA_URL', 'https://static.adhocmusic.test/media');
-    } else {
-        define('HOME_URL',  'http://www.adhocmusic.test');
-        define('CACHE_URL', 'http://static.adhocmusic.test/cache');
-        define('MEDIA_URL', 'http://static.adhocmusic.test/media');
-    }
+    define('HOME_URL',  'https://www.adhocmusic.test');
+    define('CACHE_URL', 'https://static.adhocmusic.test/cache');
+    define('MEDIA_URL', 'https://static.adhocmusic.test/media');
 
     ini_set('display_startup_errors', '1');
     ini_set('display_errors', '1');

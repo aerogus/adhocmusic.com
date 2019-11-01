@@ -84,6 +84,7 @@ class Exposant extends ObjectModel
      * - numérique/integer/float/bool (= int)
      * - datetime/text (= str)
      * ceci est utile pour la formation de la requête
+     *
      * @var array
      */
     protected static $_all_fields = [
@@ -223,14 +224,14 @@ class Exposant extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $val nom
+     * @param string $name nom
      *
      * @return object
      */
-    function setName(string $val): object
+    function setName(string $name): object
     {
-        if ($this->_name !== $val) {
-            $this->_name = $val;
+        if ($this->_name !== $name) {
+            $this->_name = $name;
             $this->_modified_fields['name'] = true;
         }
 
@@ -238,14 +239,14 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @param string $val email
+     * @param string $email email
      *
      * @return object
      */
-    function setEmail(string $val): object
+    function setEmail(string $email): object
     {
-        if ($this->_email !== $val) {
-            $this->_email = $val;
+        if ($this->_email !== $email) {
+            $this->_email = $email;
             $this->_modified_fields['email'] = true;
         }
 
@@ -253,14 +254,14 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @param string $val téléphone
+     * @param string $phone téléphone
      *
      * @return object
      */
-    function setPhone(string $val): object
+    function setPhone(string $phone): object
     {
-        if ($this->_phone !== $val) {
-            $this->_phone = $val;
+        if ($this->_phone !== $phone) {
+            $this->_phone = $phone;
             $this->_modified_fields['phone'] = true;
         }
 
@@ -268,14 +269,14 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $site site
      *
      * @return object
      */
-    function setSite(string $val): object
+    function setSite(string $site): object
     {
-        if ($this->_site !== $val) {
-            $this->_site = $val;
+        if ($this->_site !== $site) {
+            $this->_site = $site;
             $this->_modified_fields['site'] = true;
         }
 
@@ -283,14 +284,14 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $type type
      *
      * @return object
      */
-    function setType(string $val): object
+    function setType(string $type): object
     {
-        if ($this->_type !== $val) {
-            $this->_type = $val;
+        if ($this->_type !== $type) {
+            $this->_type = $type;
             $this->_modified_fields['type'] = true;
         }
 
@@ -298,14 +299,14 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $city city
      *
      * @return object
      */
-    function setCity(string $val): object
+    function setCity(string $city): object
     {
-        if ($this->_city !== $val) {
-            $this->_city = $val;
+        if ($this->_city !== $city) {
+            $this->_city = $city;
             $this->_modified_fields['city'] = true;
         }
 
@@ -348,6 +349,7 @@ class Exposant extends ObjectModel
     function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
+
         if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
@@ -377,6 +379,7 @@ class Exposant extends ObjectModel
     function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
+
         if ($this->_modified_on !== $now) {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
@@ -399,30 +402,5 @@ class Exposant extends ObjectModel
         $sql = "SELECT COUNT(*) FROM `" . Exposant::getDbTable() . "`";
 
         return $db->queryWithFetchFirstField($sql);
-    }
-
-    /**
-     * @return array
-     */
-    static function getExposants()
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_exposant` AS `id`, `name`, `email`, `phone`, "
-             . "`site`, `type`, `city`, `description`, `state`, `created_on`, `modified_on` "
-             . "FROM `" . Exposant::getDbTable() . "` "
-             . "WHERE 1 ";
-
-        $res = $db->queryWithFetch($sql);
-
-        return $res;
-    }
-
-    /**
-     * Suppression d'un exposant
-     */
-    function delete()
-    {
-        parent::delete();
     }
 }

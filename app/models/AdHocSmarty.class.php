@@ -51,25 +51,15 @@ class AdHocSmarty extends Smarty
 
         if (!empty($_SESSION['membre'])) {
             $this->assign('me', $_SESSION['membre']);
-        }
-
-        if (!empty($_SESSION['membre'])) {
             $this->assign('is_auth', true);
-            $this->assign(
-                'my_counters', [
-                    'nb_unread_messages' => (int) Messagerie::getMyUnreadMessagesCount(),
-                    'nb_messages'        => (int) Messagerie::getMyMessagesCount(),
-                ]
-            );
         } else {
             $this->assign('is_auth', false);
-            $this->assign('my_counters', false);
         }
 
-        $this->enqueue_style('/css/adhoc.20180225.css');
+        $this->enqueue_style('/css/adhoc.css');
 
         $this->enqueue_script('/js/jquery-3.4.1.min.js');
-        $this->enqueue_script('/js/adhoc.20180225.js');
+        $this->enqueue_script('/js/adhoc.js');
 
         return $this;
     }
@@ -439,10 +429,10 @@ class AdHocSmarty extends Smarty
     /**
      * Ajoute une variable js utilisable dans les scripts du footer
      * 
-     * @param string $key
-     * @param string $val
+     * @param string $key key
+     * @param string $val val
      */
-    function enqueue_script_var($key, $val)
+    function enqueue_script_var(string $key, string $val)
     {
         $this->script_vars[$key] = $val;
         $this->assign('script_vars', $this->script_vars);
@@ -451,9 +441,9 @@ class AdHocSmarty extends Smarty
     /**
      * Imprime un javascript en ligne dans le footer
      *
-     * @param string $script
+     * @param string $script script
      */
-    function print_inline_script($script)
+    function print_inline_script(string $script)
     {
         $this->append('inline_scripts', $script);
     }

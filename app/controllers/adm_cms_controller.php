@@ -20,7 +20,7 @@ final class Controller
         $smarty->assign('edit', (bool) Route::params('edit'));
         $smarty->assign('delete', (bool) Route::params('delete'));
 
-        $smarty->assign('cmss', CMS::getCMSs());
+        $smarty->assign('cmss', CMS::findAll());
 
         return $smarty->fetch('adm/cms/index.tpl');
     }

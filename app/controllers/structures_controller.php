@@ -14,7 +14,7 @@ final class Controller
             ->addStep('Structures');
 
         $smarty = new AdHocSmarty();
-        $smarty->assign('structures', Structure::getStructures());
+        $smarty->assign('structures', Structure::findAll());
         return $smarty->fetch('structures/index.tpl');
     }
 

@@ -6,8 +6,6 @@ if (!defined('DEFAULT_CONTROLLERS_PATH')) {
 define('DEFAULT_CONTROLLER_SUFFIX', '_controller.php');
 define('DEFAULT_CONTROLLERS_FORMAT', 'html');
 
-define('ROUTE_MANAGE_FILES', true);
-
 /**
  * Gestion des routes
  *
@@ -313,14 +311,6 @@ class Route
     {
         self::$action_params = array_merge(self::$action_params, $_GET);
         self::$action_params = array_merge(self::$action_params, $_POST);
-
-        if (ROUTE_MANAGE_FILES === true) {
-            foreach ($_FILES as $param_name => $file) {
-                if (!is_array($file) && $file['tmp_name']) {
-                    self::$action_params[$param_name] = file_get_contents($file['tmp_name']);
-                }
-            }
-        }
     }
 
     /**

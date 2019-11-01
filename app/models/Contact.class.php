@@ -169,14 +169,14 @@ class Contact extends ObjectModel
     /* début setters*/
 
     /**
-     * @param string $val val
+     * @param string $email email
      *
      * @return object
      */
-    function setEmail(string $val): object
+    function setEmail(string $email): object
     {
-        if ($this->_email !== $val) {
-            $this->_email = $val;
+        if ($this->_email !== $email) {
+            $this->_email = $email;
             $this->_modified_fields['contact']['email'] = true;
         }
 
@@ -184,14 +184,14 @@ class Contact extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $lastnl lastnl
      *
      * @return object
      */
-    function setLastnl(string $val): object
+    function setLastnl(string $lastnl): object
     {
-        if ($this->_lastnl !== $val) {
-            $this->_lastnl = $val;
+        if ($this->_lastnl !== $lastnl) {
+            $this->_lastnl = $lastnl;
             $this->_modified_fields['contact']['lastnl'] = true;
         }
 
@@ -204,8 +204,9 @@ class Contact extends ObjectModel
     function setLastnlNow(): object
     {
         $now = date('Y-m-d H:i:s');
+
         if ($this->_lastnl !== $now) {
-            $this->_lastnl = (string) $now;
+            $this->_lastnl = $now;
             $this->_modified_fields['contact']['lastnl'] = true;
         }
 
@@ -237,8 +238,6 @@ class Contact extends ObjectModel
 
     /**
      * Suppression d'un contact
-     *
-     * @todo vérification des liaisons avec table membre
      *
      * @return int
      */

@@ -447,7 +447,7 @@ final class Controller
                 ]
             )
         );
-        $smarty->assign('structures', Structure::getStructures());
+        $smarty->assign('structures', Structure::findAll());
 
         return $smarty->fetch('events/create.tpl');
     }
@@ -612,7 +612,7 @@ final class Controller
                 ]
             )
         );
-        $smarty->assign('structures', Structure::getStructures());
+        $smarty->assign('structures', Structure::findAll());
 
         return $smarty->fetch('events/edit.tpl');
     }

@@ -178,20 +178,6 @@ final class Controller
 
             $smarty->assign('description', $meta_description);
 
-            /*
-            $smarty->assign(
-                'comments', Comment::getComments(
-                    [
-                        'type'       => 'v',
-                        'id_content' => $video->getId(),
-                        'online'     => true,
-                        'sort'       => 'created_on',
-                        'sens'       => 'ASC',
-                    ]
-                )
-            );
-            */
-
         } else {
 
             $smarty->assign('unknown_video', true);

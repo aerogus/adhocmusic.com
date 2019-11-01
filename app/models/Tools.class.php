@@ -241,6 +241,7 @@ class Tools
         }
 
         // vérification des droits
+        // "&" pour la comparaison binaire
         if ($_SESSION['membre']->getLevel() & $type) {
             return true;
         }
@@ -249,16 +250,6 @@ class Tools
         $_SESSION['redirect_after_auth'] = $_SERVER['REQUEST_URI'];
         Tools::redirect('/auth/login');
         exit();
-    }
-
-    /**
-     * @return bool
-     */
-    static function isSsl(): bool
-    {
-        return !empty($_SERVER['HTTPS'])
-            || !empty($_SERVER['REDIRECT_HTTPS'])
-            || (!empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] === 'https');
     }
 
     /**
@@ -275,7 +266,6 @@ class Tools
 
         if (!empty($_SERVER['REMOTE_ADDR'])) {
             $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
-            $_SESSION['host'] = $_SERVER['REMOTE_ADDR'];
         }
     }
 

@@ -266,16 +266,20 @@ class Audio extends Media
 
     /**
      * Efface un enregistrement de la table audio
-     * + gestion de l'effacement du fichier
+     * + gestion de l'effacement du/des fichier(s)
      *
      * @return bool
      */
     function delete(): bool
     {
         if (parent::delete()) {
-            $file = self::getBasePath() . '/' . $this->getId() . '.mp3';
-            if (file_exists($file)) {
-                unlink($file);
+            $mp3File = self::getBasePath() . '/' . $this->getId() . '.mp3';
+            if (file_exists($mp3File)) {
+                unlink($mp3File);
+            }
+            $aacFile = self::getBasePath() . '/' . $this->getId() . '.m4a';
+            if (file_exists($aacFile)) {
+                unlink($aacFile);
             }
             return true;
         }
@@ -292,24 +296,6 @@ class Audio extends Media
             throw new Exception('Audio introuvable');
         }
         return true;
-    }
-
-    /**
-     * Retourne les derniers audios postés
-     *
-     * @param int $limit limite
-     *
-     * @return array
-     */
-    static function getLastAudios(int $limit = 5)
-    {
-        return self::getAudios(
-            [
-                'limit' => $limit,
-                'sort'  => 'date',
-                'sens'  => 'DESC',
-            ]
-        );
     }
 
     /**

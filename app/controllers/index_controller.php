@@ -120,7 +120,7 @@ final class Controller
         $smarty->assign('title', "Contacter l'Association AD'HOC");
         $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ..");
 
-        $smarty->assign('faq', FAQ::getFAQs());
+        $smarty->assign('faq', FAQ::findAll());
 
         if (!Tools::isSubmit('form-contact')) {
 

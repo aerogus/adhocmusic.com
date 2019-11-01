@@ -867,8 +867,9 @@ class Lieu extends ObjectModel
     function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
+
         if ($this->_created_on !== $now) {
-            $this->_created_on = (string) $now;
+            $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
         }
 
@@ -900,8 +901,9 @@ class Lieu extends ObjectModel
     function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
+
         if ($this->_modified_on != $now) {
-            $this->_modified_on = (string) $now;
+            $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
         }
 

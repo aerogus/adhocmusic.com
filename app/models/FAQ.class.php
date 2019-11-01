@@ -239,6 +239,7 @@ class FAQ extends ObjectModel
     function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
+
         if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
@@ -268,6 +269,7 @@ class FAQ extends ObjectModel
     function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
+
         if ($this->_modified_on !== $now) {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;
@@ -277,67 +279,4 @@ class FAQ extends ObjectModel
     }
 
     /* fin setters */
-
-    /**
-     * @return array
-     */
-    static function getCategories(): array
-    {
-        return [
-            1 => 'Le site',
-            2 => 'Les concerts',
-        ];
-    }
-
-    /**
-     * @return string|null
-     */
-    function getCategory(): ?string
-    {
-        $categories = self::getCategories();
-        if (array_key_exists($this->_id_category, $categories)) {
-            return $categories[$this->_id_category];
-        }
-        return null;
-    }
-
-    /**
-     * @param int $id_category id_category
-     *
-     * @return string|null
-     */
-    static function getCategoryById(int $id_category): ?string
-    {
-        $categories = self::getCategories();
-        if (array_key_exists($id_category, $categories)) {
-            return $categories[$id_category];
-        }
-        return null;
-    }
-
-    /**
-     * @param bool $all tout (mode admin)
-     *
-     * @return array
-     */
-    static function getFAQs(bool $all = false): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_faq`, `id_category`, `question`, `answer`, `online` "
-             . "FROM `adhoc_faq` "
-             . "WHERE 1 ";
-        if (!$all) {
-            $sql .= "AND `online` ";
-        }
-        $sql .= "ORDER BY `id_faq` ASC";
-
-        $res = $db->queryWithFetch($sql);
-
-        foreach ($res as $idx => $row) {
-            $res[$idx]['category'] = self::getCategoryById((int) $row['id_category']);
-        }
-
-        return $res;
-    }
 }

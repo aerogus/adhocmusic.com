@@ -2,7 +2,6 @@
 
 /**
  * Classe Departement
- * /!\ dépend de la classe Region
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>

@@ -45,7 +45,7 @@ class Alerting extends ObjectModel
     protected $_created_on = null;
 
     /**
-     * actif ?
+     * Actif ?
      *
      * @var bool
      */
@@ -86,6 +86,7 @@ class Alerting extends ObjectModel
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
      *
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
+     *
      * @var array
      */
     protected $_modified_fields = [];
@@ -166,14 +167,14 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $created_on created_on
      *
      * @return object
      */
-    function setCreatedOn(string $val): object
+    function setCreatedOn(string $created_on): object
     {
-        if ($this->_created_on !== $val) {
-            $this->_created_on = $val;
+        if ($this->_created_on !== $created_on) {
+            $this->_created_on = $created_on;
             $this->_modified_fields['created_on'] = true;
         }
 
@@ -181,14 +182,14 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @param bool $val val
+     * @param bool $active active
      *
      * @return object
      */
-    function setActive(bool $val): object
+    function setActive(bool $active): object
     {
-        if ($this->_active !== $val) {
-            $this->_active = $val;
+        if ($this->_active !== $active) {
+            $this->_active = $active;
             $this->_modified_fields['active'] = true;
         }
 
@@ -200,10 +201,10 @@ class Alerting extends ObjectModel
      *
      * @return object
      */
-    function setType(string $val): object
+    function setType(string $type): object
     {
-        if ($this->_type !== $val) {
-            $this->_type = $val;
+        if ($this->_type !== $type) {
+            $this->_type = $type;
             $this->_modified_fields['type'] = true;
         }
 
@@ -211,14 +212,14 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @param int $val val
+     * @param int $id_content id_content
      *
      * @return object
      */
-    function setIdContent(int $val): object
+    function setIdContent(int $id_content): object
     {
-        if ($this->_id_content !== $val) {
-            $this->_id_content = $val;
+        if ($this->_id_content !== $id_content) {
+            $this->_id_content = $id_content;
             $this->_modified_fields['id_content'] = true;
         }
 

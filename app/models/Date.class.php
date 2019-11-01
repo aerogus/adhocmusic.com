@@ -45,36 +45,6 @@ class Date
     }
 
     /**
-     * Conversion Date MySQL en Timestamp
-     *
-     * @param string $date date
-     *
-     * @return int
-     *
-     * @todo pourquoi date et par datetime ???
-     */
-    function mysql_to_timestamp(string $date)
-    {
-        if (!preg_match(self::$regexp_date, $date, $r)) {
-            return false;
-        }
-        return mktime($r[4], $r[5], $r[6], $r[2], $r[3], $r[1]);
-    }
-
-    /**
-     * C'est sensé faire la meme chose à peu près que mysql_datetime ...
-     *
-     * @param string|int (format mysql ou timestamp)
-     *
-     * @return string
-     */
-    static function formatDate($time)
-    {
-        $time = is_numeric($time) ? $time : strtotime($time);
-        return date('d/m/Y à H:i', $time);
-    }
-
-    /**
      * Retourne si une date est valide
      *
      * @param string $date date format YYYY-MM-DD ?

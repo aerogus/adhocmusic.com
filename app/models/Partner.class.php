@@ -125,15 +125,15 @@ class Partner extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $name name
+     * @param string $title titre
      *
      * @return object
      */
-    function setName(string $name): object
+    function setTitle(string $title): object
     {
-        if ($this->_name !== $name) {
-            $this->_name = $name;
-            $this->_modified_fields['name'] = true;
+        if ($this->_title !== $title) {
+            $this->_title = $title;
+            $this->_modified_fields['title'] = true;
         }
 
         return $this;

@@ -42,6 +42,8 @@ class City extends Reference
      */
     protected $_cp = null;
 
+    /* début getter */
+
     /**
      * @return string
      */
@@ -57,4 +59,10 @@ class City extends Reference
     {
         return $this->_cp;
     }
+
+    /* fin getters */
+
+    /* début setters */
+
+    /* fin setters */
 }

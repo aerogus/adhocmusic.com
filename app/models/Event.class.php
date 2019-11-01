@@ -383,14 +383,14 @@ class Event extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $val val
+     * @param string $created_on created_on
      * 
      * @return object
      */
-    function setCreatedOn(string $val): object
+    function setCreatedOn(string $created_on): object
     {
-        if ($this->_created_on !== $val) {
-            $this->_created_on = $val;
+        if ($this->_created_on !== $created_on) {
+            $this->_created_on = $created_on;
             $this->_modified_fields['created_on'] = true;
         }
 
@@ -403,6 +403,7 @@ class Event extends ObjectModel
     function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
+
         if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['created_on'] = true;
@@ -432,6 +433,7 @@ class Event extends ObjectModel
     function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
+
         if ($this->_modified_on !== $now) {
             $this->_modified_on = $now;
             $this->_modified_fields['modified_on'] = true;

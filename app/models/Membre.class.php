@@ -826,6 +826,7 @@ class Membre extends Contact
     function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
+
         if ($this->_created_on !== $now) {
             $this->_created_on = $now;
             $this->_modified_fields['membre']['created_on'] = true;
@@ -855,6 +856,7 @@ class Membre extends Contact
     function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
+
         if ($this->_modified_on !== $now) {
             $this->_modified_on = $now;
             $this->_modified_fields['membre']['modified_on'] = true;
@@ -884,6 +886,7 @@ class Membre extends Contact
     function setVisitedNow(): object
     {
         $now = date('Y-m-d H:i:s');
+
         if ($this->_visited_on !== $now) {
             $this->_visited_on = $now;
             $this->_modified_fields['membre']['visited_on'] = true;
