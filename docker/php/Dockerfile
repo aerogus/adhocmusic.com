@@ -1,6 +1,5 @@
-FROM php:7.3.10-fpm
+FROM php:7.3.11-fpm
 LABEL maintainer="guillaume@seznec.fr"
-
 
 # maj complète et install des paquets utiles
 # cette image contient déjà l'extension php mbstring
