@@ -87,7 +87,7 @@ abstract class Reference extends ObjectModel
      * @return bool
      * @throws Exception
      */
-    function _loadFromDb(): bool
+    protected function _loadFromDb(): bool
     {
         if (!parent::_loadFromDb()) {
             throw new Exception('Référence introuvable');

@@ -23,7 +23,7 @@ class WorldRegion extends Reference
     /**
      * @var string
      */
-    protected static $_table = 'geo_world_country';
+    protected static $_table = 'geo_world_region';
 
     /**
      * @var string
@@ -36,6 +36,65 @@ class WorldRegion extends Reference
     protected $_id_region = null;
 
     /**
+     * @var string
+     */
+    protected $_name = null;
+
+    /**
+     * Liste des attributs de l'objet
+     * on précise si en base c'est de type :
+     * - numérique/integer/float/bool (= int)
+     * - datetime/text (= str)
+     * ceci est utile pour la formation de la requête
+     *
+     * @var array
+     */
+    protected static $_all_fields = [
+        'name' => 'string',
+    ];
+
+    /**
+     * Tableau des attributs modifiés depuis la dernière sauvegarde.
+     *
+     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
+     *
+     * @var array
+     */
+    protected $_modified_fields = [];
+
+    /* début getters */
+
+    /**
+     * @return string
+     */
+    function getIdCountry(): string
+    {
+        return $this->_id_country;
+    }
+
+    /**
+     * @return string
+     */
+    function getIdRegion(): string
+    {
+        return $this->_id_region;
+    }
+
+    /**
+     * @return string
+     */
+    function getName(): string
+    {
+        return $this->_name;
+    }
+
+    /* fin getters */
+
+    /* début setters */
+
+    /* fin setters */
+
+    /**
      * Charge toutes les infos d'une entité
      *
      * @return bool
@@ -45,12 +104,16 @@ class WorldRegion extends Reference
     {
         $db = DataBase::getInstance();
 
-        $sql  = "SELECT * FROM `" . static::$_table . "` WHERE `" . static::$_pk . "` = " . (int) $this->{'_' . static::$_pk};
+        $sql = "SELECT * FROM `" . static::$_table . "` WHERE 1";
+        foreach (static::$_pk as $fieldName) {
+            $propName = '_' . $fieldName;
+            $sql .= " AND `${fieldName}` = '" . $this->$propName . "'";
+        }
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
             return true;
         }
-        return false;
+        throw new Exception('WorldRegion introuvable');
     }
 }
