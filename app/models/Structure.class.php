@@ -83,16 +83,16 @@ class Structure extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'name'           => 'str',
-        'address'        => 'str',
-        'cp'             => 'str',
-        'city'           => 'str',
-        'tel'            => 'str',
-        'id_departement' => 'str',
-        'text'           => 'str',
-        'site'           => 'str',
-        'email'          => 'str',
-        'id_country'     => 'str',
+        'name'           => 'string',
+        'address'        => 'string',
+        'cp'             => 'string',
+        'city'           => 'string',
+        'tel'            => 'string',
+        'id_departement' => 'string',
+        'text'           => 'string',
+        'site'           => 'string',
+        'email'          => 'string',
+        'id_country'     => 'string',
     ];
 
     /**

@@ -72,13 +72,14 @@ class Alerting extends ObjectModel
      * - datetime/text (= str)
      * - booléen (= bool)
      * ceci est utile pour la formation de la requête
+     *
      * @var array
      */
     protected static $_all_fields = [
         'id_contact'  => 'num',
         'created_on'  => 'date',
         'active'      => 'bool',
-        'type'        => 'str',
+        'type'        => 'string',
         'id_content'  => 'num',
     ];
 

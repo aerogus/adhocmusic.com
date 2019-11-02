@@ -84,11 +84,11 @@ class Featured extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'datdeb'      => 'str',
-        'datfin'      => 'str',
-        'title'       => 'str',
-        'description' => 'str',
-        'link'        => 'str',
+        'datdeb'      => 'string',
+        'datfin'      => 'string',
+        'title'       => 'string',
+        'description' => 'string',
+        'link'        => 'string',
         'slot'        => 'num',
         'online'      => 'bool',
     ];

@@ -53,9 +53,9 @@ class Partner extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'title'       => 'str',
-        'description' => 'str',
-        'url'         => 'str',
+        'title'       => 'string',
+        'description' => 'string',
+        'url'         => 'string',
     ];
 
     /**

@@ -59,8 +59,8 @@ class FAQ extends ObjectModel
      */
     protected static $_all_fields = [
         'id_category' => 'num',
-        'question'    => 'str',
-        'answer'      => 'str',
+        'question'    => 'string',
+        'answer'      => 'string',
         'online'      => 'bool',
         'created_on'  => 'date',
         'modified_on' => 'date',

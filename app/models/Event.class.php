@@ -113,14 +113,14 @@ class Event extends ObjectModel
     protected static $_all_fields = [
         'created_on'    => 'date',
         'modified_on'   => 'date',
-        'name'          => 'str',
+        'name'          => 'string',
         'date'          => 'date',
-        'text'          => 'str',
-        'price'         => 'str',
+        'text'          => 'string',
+        'price'         => 'string',
         'online'        => 'bool',
         'id_lieu'       => 'num',
         'id_contact'    => 'num',
-        'facebook_event_id' => 'str',
+        'facebook_event_id' => 'string',
         'facebook_event_attending' => 'num',
     ];
 

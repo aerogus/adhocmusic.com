@@ -48,7 +48,7 @@ class Contact extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'email'  => 'str',
+        'email'  => 'string',
         'lastnl' => 'date',
     ];
 
@@ -285,10 +285,10 @@ class Contact extends ObjectModel
                     } else {
                         switch ($type) {
                             case 'num':
-                            case 'float': // ? à vérifier
+                            case 'float':
                                 $sql .= $db->escape($this->$att) . ",";
                                 break;
-                            case 'str':
+                            case 'string':
                                 $sql .= "'" . $db->escape($this->$att) . "',";
                                 break;
                             case 'date':
@@ -336,10 +336,10 @@ class Contact extends ObjectModel
                     } else {
                         switch ($fields['contact'][$field]) {
                             case 'num':
-                            case 'float': // ? à vérifier
+                            case 'float':
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
-                            case 'str':
+                            case 'string':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':

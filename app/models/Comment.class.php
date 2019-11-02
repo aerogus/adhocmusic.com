@@ -96,15 +96,15 @@ class Comment extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'type'        => 'str',
+        'type'        => 'string',
         'id_content'  => 'num',
         'created_on'  => 'date',
         'modified_on' => 'date',
         'online'      => 'bool',
         'id_contact'  => 'num',
-        'pseudo'      => 'str',
-        'email'       => 'str',
-        'text'        => 'str',
+        'pseudo'      => 'string',
+        'email'       => 'string',
+        'text'        => 'string',
     ];
 
     protected static $_types = [

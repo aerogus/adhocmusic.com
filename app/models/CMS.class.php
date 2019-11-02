@@ -78,12 +78,12 @@ class CMS extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'alias'        => 'str',
-        'title'        => 'str',
+        'alias'        => 'string',
+        'title'        => 'string',
         'created_on'   => 'date',
         'modified_on'  => 'date',
         'breadbcrumb'  => 'phpser',
-        'content'      => 'str',
+        'content'      => 'string',
         'online'       => 'bool',
         'auth'         => 'int',
     ];

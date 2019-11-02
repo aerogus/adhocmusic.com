@@ -38,7 +38,7 @@ abstract class Reference extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'name' => 'str',
+        'name' => 'string',
     ];
 
     /**

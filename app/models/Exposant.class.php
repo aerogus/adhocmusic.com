@@ -88,14 +88,14 @@ class Exposant extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'name'        => 'str',
-        'email'       => 'str',
-        'phone'       => 'str',
-        'site'        => 'str',
-        'type'        => 'str',
-        'city'        => 'str',
-        'description' => 'str',
-        'state'       => 'str',
+        'name'        => 'string',
+        'email'       => 'string',
+        'phone'       => 'string',
+        'site'        => 'string',
+        'type'        => 'string',
+        'city'        => 'string',
+        'description' => 'string',
+        'state'       => 'string',
         'created_on'  => 'date',
         'modified_on' => 'date',
     ];

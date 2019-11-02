@@ -171,22 +171,22 @@ class Membre extends Contact
      * @var array
      */
     protected static $_all_fields = [
-        'pseudo'         => 'str',
+        'pseudo'         => 'string',
         'password'       => 'pwd',
-        'last_name'      => 'str',
-        'first_name'     => 'str',
-        'address'        => 'str',
-        'cp'             => 'str',
-        'city'           => 'str',
-        'country'        => 'str',
+        'last_name'      => 'string',
+        'first_name'     => 'string',
+        'address'        => 'string',
+        'cp'             => 'string',
+        'city'           => 'string',
+        'country'        => 'string',
         'id_city'        => 'num',
-        'id_departement' => 'str',
-        'id_region'      => 'str',
-        'id_country'     => 'str',
-        'tel'            => 'str',
-        'port'           => 'str',
-        'site'           => 'str',
-        'text'           => 'str',
+        'id_departement' => 'string',
+        'id_region'      => 'string',
+        'id_country'     => 'string',
+        'tel'            => 'string',
+        'port'           => 'string',
+        'site'           => 'string',
+        'text'           => 'string',
         'mailing'        => 'bool',
         'level'          => 'num',
         'created_on'     => 'date',
@@ -1138,7 +1138,7 @@ class Membre extends Contact
                                 case 'float':
                                     $sql .= number_format((float) $this->$att, 8, '.', '') . ',';
                                     break;
-                                case 'str':
+                                case 'string':
                                     $sql .= "'" . $db->escape($this->$att) . "',";
                                     break;
                                 case 'bool':
@@ -1208,7 +1208,7 @@ class Membre extends Contact
                             case 'float':
                                 $sql .= number_format((float) $this->$att, 8, '.', '') . ',';
                                 break;
-                            case 'str':
+                            case 'string':
                                 $sql .= "'" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
@@ -1267,7 +1267,7 @@ class Membre extends Contact
                             case 'float':
                                 $fields_to_save .= " `" . $field . "` = " . number_format((float) $this->$att, 8, ".", "") . ",";
                                 break;
-                            case 'str':
+                            case 'string':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
@@ -1320,7 +1320,7 @@ class Membre extends Contact
                             case 'float':
                                 $fields_to_save .= " `" . $field . "` = " . number_format((float) $this->$att, 8, ".", "") . ",";
                                 break;
-                            case 'str':
+                            case 'string':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':

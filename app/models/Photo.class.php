@@ -56,11 +56,11 @@ class Photo extends Media
         'id_lieu'      => 'num',
         'id_event'     => 'num',
         'id_structure' => 'num',
-        'name'         => 'str',
+        'name'         => 'string',
         'created_on'   => 'date',
         'modified_on'  => 'date',
         'online'       => 'bool',
-        'credits'      => 'str',
+        'credits'      => 'string',
     ];
 
     /**

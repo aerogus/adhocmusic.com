@@ -87,10 +87,10 @@ class Subscription extends ObjectModel
         'subscribed_at' => 'date',
         'amount'        => 'float',
         'adult'         => 'bool',
-        'first_name'    => 'str',
-        'last_name'     => 'str',
-        'email'         => 'str',
-        'cp'            => 'str',
+        'first_name'    => 'string',
+        'last_name'     => 'string',
+        'email'         => 'string',
+        'cp'            => 'string',
         'id_contact'    => 'num',
     ];
 

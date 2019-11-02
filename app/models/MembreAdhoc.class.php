@@ -53,7 +53,7 @@ class MembreAdhoc extends Membre
      * @var array
      */
     protected static $_all_fields = [
-        'function'   => 'str',
+        'function'   => 'string',
         'birth_date' => 'date',
         'active'     => 'bool',
         'rank'       => 'num',
@@ -324,7 +324,7 @@ class MembreAdhoc extends Membre
                             case 'float':
                                 $sql .= $db->escape($this->$att) . ",";
                                 break;
-                            case 'str':
+                            case 'string':
                                 $sql .= "'" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
@@ -369,7 +369,7 @@ class MembreAdhoc extends Membre
                     case 'float':
                         $sql .= $db->escape($this->$att) . ",";
                         break;
-                    case 'str':
+                    case 'string':
                         $sql .= "'" . $db->escape($this->$att) . "',";
                         break;
                     case 'bool':
@@ -409,7 +409,7 @@ class MembreAdhoc extends Membre
                     case 'float':
                         $sql .= $db->escape($this->$att) . ",";
                         break;
-                    case 'str':
+                    case 'string':
                         $sql .= "'" . $db->escape($this->$att) . "',";
                         break;
                     case 'bool':
@@ -455,7 +455,7 @@ class MembreAdhoc extends Membre
                             case 'float':
                                 $fields_to_save .= " `" . $field."` = " . $db->escape($this->$att) . ",";
                                 break;
-                            case 'str':
+                            case 'string':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
@@ -501,7 +501,7 @@ class MembreAdhoc extends Membre
                             case 'float':
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
-                            case 'str':
+                            case 'string':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
@@ -547,7 +547,7 @@ class MembreAdhoc extends Membre
                             case 'float':
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
-                            case 'str':
+                            case 'string':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':

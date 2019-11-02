@@ -20,7 +20,7 @@ abstract class ObjectModel
     protected static $_instance = null;
 
     /**
-     * Champ clé primaire de l'objet fils
+     * Champ clé primaire (simple ou multiple) de l'objet fils
      *
      * @var string|array
      */
@@ -72,13 +72,6 @@ abstract class ObjectModel
     protected static $_db_table_participe_a    = 'adhoc_participe_a';
 
     /**
-     * Codes type de médias
-     */
-    const TYPE_MEDIA_PHOTO = 0x01;
-    const TYPE_MEDIA_AUDIO = 0x02;
-    const TYPE_MEDIA_VIDEO = 0x11; // 0x04 ça serait mieux
-
-    /**
      * @param bool $fusion fusion
      *
      * @return array
@@ -89,7 +82,7 @@ abstract class ObjectModel
     }
 
     /**
-     *
+     * @param mixed $id id
      */
     function __construct($id = null)
     {
@@ -132,6 +125,8 @@ abstract class ObjectModel
     }
 
     /**
+     * Intérêt par rapport au contructeur direct ?
+     *
      * @return object
      */
     static function init(): object
@@ -192,7 +187,7 @@ abstract class ObjectModel
     }
 
     /**
-     * @return int ou string ou array si clé multiple
+     * @return int ou string ou array si clé primaire multiple
      */
     function getId()
     {
@@ -210,7 +205,7 @@ abstract class ObjectModel
     }
 
     /**
-     * @var mixed
+     * @var mixed $id id
      *
      * @return object
      */
@@ -266,7 +261,7 @@ abstract class ObjectModel
                             case 'float':
                                 $sql .= number_format((float) $this->$att, 8, '.', '') . ',';
                                 break;
-                            case 'str':
+                            case 'string':
                                 $sql .= "'" . $db->escape($this->$att) . "',";
                                 break;
                             case 'date':
@@ -320,7 +315,7 @@ abstract class ObjectModel
                         case 'float':
                             $fields_to_save .= " `" . $field . "` = " . number_format((float) $this->$att, 8, ".", "") . ",";
                             break;
-                        case 'str':
+                        case 'string':
                             $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                             break;
                         case 'date':
@@ -468,7 +463,7 @@ abstract class ObjectModel
                     case 'bool':
                         $this->$att = (bool) $v;
                         break;
-                    case 'str':
+                    case 'string':
                         $this->$att = (string) $v;
                         break;
                     case 'date':
