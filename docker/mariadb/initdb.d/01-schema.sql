@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `geo_world_region` (
   PRIMARY KEY (`id_country`,`id_region`)
 );
 
-CREATE TABLE `adhoc_lieu_type` (
+CREATE TABLE IF NOT EXISTS `adhoc_lieu_type` (
   `id_lieu_type` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
   PRIMARY KEY (`id_lieu_type`)
@@ -274,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_lieu` (
   KEY `id_region` (`id_region`),
   KEY `online` (`online`),
   KEY `id_type` (`id_type`),
-  CONSTRAINT `fk_lieu_lieu_type` FOREIGN KEY (`id_type`) REFERENCES `adhoc_lieu_type` (`id_lieu_type`),
+  CONSTRAINT `fk_lieu_lieu_type` FOREIGN KEY (`id_type`) REFERENCES `adhoc_lieu_type` (`id_lieu_type`)
 );
 
 CREATE TABLE IF NOT EXISTS `adhoc_event` (
