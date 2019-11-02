@@ -8,19 +8,15 @@ CREATE TABLE IF NOT EXISTS `geo_fr_city` (
 
 CREATE TABLE IF NOT EXISTS `geo_fr_departement` (
   `id_departement` char(3) NOT NULL,
-  `id_world_region` char(2) NOT NULL,
-  `id_region_insee` char(2) NOT NULL,
+  `id_region` char(2) NOT NULL,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id_departement`),
-  KEY `id_region_old` (`id_region_insee`)
+  KEY `id_region` (`id_region`)
 );
 
 CREATE TABLE IF NOT EXISTS `geo_world_country` (
   `id_country` char(2) NOT NULL,
-  `name_fr` varchar(100) NOT NULL,
-  `name_en` varchar(100) NOT NULL,
-  `capname_fr` varchar(100) NOT NULL,
-  `capname_en` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id_country`)
 );
 
