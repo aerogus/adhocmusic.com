@@ -76,11 +76,12 @@ class Alerting extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'id_contact'  => 'num',
+        'id_alerting' => 'int', // pk
+        'id_contact'  => 'int',
         'created_on'  => 'date',
         'active'      => 'bool',
         'type'        => 'string',
-        'id_content'  => 'num',
+        'id_content'  => 'int',
     ];
 
     /**
@@ -93,6 +94,14 @@ class Alerting extends ObjectModel
     protected $_modified_fields = [];
 
     /* début getters */
+
+    /**
+     * @return int
+     */
+    function getIdAlerting(): int
+    {
+        return $this->_id_alerting;
+    }
 
     /**
      * @return int
@@ -198,7 +207,7 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $type type
      *
      * @return object
      */

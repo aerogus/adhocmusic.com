@@ -50,7 +50,9 @@ class WorldRegion extends Reference
      * @var array
      */
     protected static $_all_fields = [
-        'name' => 'string',
+        'id_country' => 'string',
+        'id_region'  => 'string',
+        'name'       => 'string',
     ];
 
     /**

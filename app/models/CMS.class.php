@@ -59,9 +59,9 @@ class CMS extends ObjectModel
     protected $_content = '';
 
     /**
-     * @var string
+     * @var bool
      */
-    protected $_online = '';
+    protected $_online = false;
 
     /**
      * @var int
@@ -78,6 +78,7 @@ class CMS extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
+        'id_cms'       => 'int',
         'alias'        => 'string',
         'title'        => 'string',
         'created_on'   => 'date',

@@ -145,6 +145,7 @@ class Groupe extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
+        'id_groupe'        => 'int',
         'alias'            => 'string',
         'name'             => 'string',
         'style'            => 'string',
@@ -163,7 +164,7 @@ class Groupe extends ObjectModel
         'datdeb'           => 'date',
         'datfin'           => 'date',
         'comment'          => 'string',
-        'etat'             => 'num',
+        'etat'             => 'int',
     ];
 
     /**

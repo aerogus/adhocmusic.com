@@ -88,6 +88,7 @@ class Exposant extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
+        'id_exposant' => 'int',
         'name'        => 'string',
         'email'       => 'string',
         'phone'       => 'string',

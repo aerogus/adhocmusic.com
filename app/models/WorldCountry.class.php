@@ -47,7 +47,8 @@ class WorldCountry extends Reference
      * @var array
      */
     protected static $_all_fields = [
-        'name' => 'string',
+        'id_country' => 'string',
+        'name'       => 'string',
     ];
 
     /**

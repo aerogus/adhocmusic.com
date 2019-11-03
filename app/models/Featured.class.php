@@ -81,15 +81,17 @@ class Featured extends ObjectModel
      * - numérique/integer/float/bool (= num)
      * - datetime/text (= str)
      * ceci est utile pour la formation de la requête
+     *
      * @var array
      */
     protected static $_all_fields = [
+        'id_featured' => 'int',
         'datdeb'      => 'string',
         'datfin'      => 'string',
         'title'       => 'string',
         'description' => 'string',
         'link'        => 'string',
-        'slot'        => 'num',
+        'slot'        => 'int',
         'online'      => 'bool',
     ];
 

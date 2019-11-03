@@ -58,9 +58,10 @@ class Newsletter extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'title'   => 'string',
-        'content' => 'string',
-        'html'    => 'string',
+        'id_newsletter' => 'int',
+        'title'         => 'string',
+        'content'       => 'string',
+        'html'          => 'string',
     ];
 
     /**

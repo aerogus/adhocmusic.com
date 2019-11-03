@@ -6,7 +6,7 @@
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class Style extends ObjectModel
+class Style extends Reference
 {
     /**
      * @var object
@@ -43,7 +43,8 @@ class Style extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'name' => 'string',
+        'id_style' => 'int',
+        'name'     => 'string',
     ];
 
     /**

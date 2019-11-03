@@ -151,19 +151,20 @@ class Video extends Media
      * @var array
      */
     protected static $_all_fields = [
-        'id_contact'   => 'num',
-        'id_host'      => 'num',
+        'id_video'     => 'int',
+        'id_contact'   => 'int',
+        'id_host'      => 'int',
         'reference'    => 'string',
-        'id_groupe'    => 'num',
-        'id_lieu'      => 'num',
-        'id_event'     => 'num',
-        'id_structure' => 'num',
+        'id_groupe'    => 'int',
+        'id_lieu'      => 'int',
+        'id_event'     => 'int',
+        'id_structure' => 'int',
         'name'         => 'string',
         'created_on'   => 'date',
         'modified_on'  => 'date',
         'online'       => 'bool',
-        'width'        => 'num',
-        'height'       => 'num',
+        'width'        => 'int',
+        'height'       => 'int',
     ];
 
     /**

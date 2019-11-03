@@ -111,6 +111,7 @@ class Event extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
+        'id_event'      => 'int',
         'created_on'    => 'date',
         'modified_on'   => 'date',
         'name'          => 'string',
@@ -118,10 +119,10 @@ class Event extends ObjectModel
         'text'          => 'string',
         'price'         => 'string',
         'online'        => 'bool',
-        'id_lieu'       => 'num',
-        'id_contact'    => 'num',
+        'id_lieu'       => 'int',
+        'id_contact'    => 'int',
         'facebook_event_id' => 'string',
-        'facebook_event_attending' => 'num',
+        'facebook_event_attending' => 'int',
     ];
 
     /**
@@ -149,6 +150,14 @@ class Event extends ObjectModel
     static function getBasePath(): string
     {
         return MEDIA_PATH . '/event';
+    }
+
+    /**
+     * @return int
+     */
+    function getIdEvent(): int
+    {
+        return $this->_id_event;
     }
 
     /**
@@ -413,14 +422,14 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $modified_on modified_on
      *
      * @return object
      */
-    function setModifiedOn(string $val): object
+    function setModifiedOn(string $modified_on): object
     {
-        if ($this->_modified_on !== $val) {
-            $this->_modified_on = $val;
+        if ($this->_modified_on !== $modified_on) {
+            $this->_modified_on = $modified_on;
             $this->_modified_fields['modified_on'] = true;
         }
 
@@ -443,14 +452,14 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $name name
      *
      * @return object
      */
-    function setName(string $val): object
+    function setName(string $name): object
     {
-        if ($this->_name !== $val) {
-            $this->_name = $val;
+        if ($this->_name !== $name) {
+            $this->_name = $name;
             $this->_modified_fields['name'] = true;
         }
 
@@ -458,20 +467,20 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $facebook_event_id facebook_event_id
      *
      * @return object
      */
-    function setFacebookEventId(string $val): object
+    function setFacebookEventId(string $facebook_event_id): object
     {
         // pour les boulets qui copient/collent toute l'url
-        if (preg_match('#^https?://w{0,3}\.facebook.com/events/([0-9]{1,24})/{0,1}$#', $val, $matches)) {
-            $val = $matches[1];
+        if (preg_match('#^https?://w{0,3}\.facebook.com/events/([0-9]{1,24})/{0,1}$#', $facebook_event_id, $matches)) {
+            $facebook_event_id = $matches[1];
         }
-        $val = str_replace('/', '', trim($val));
+        $facebook_event_id = str_replace('/', '', trim($facebook_event_id));
 
-        if ($this->_facebook_event_id !== $val) {
-            $this->_facebook_event_id = (string) $val;
+        if ($this->_facebook_event_id !== $facebook_event_id) {
+            $this->_facebook_event_id = $facebook_event_id;
             $this->_modified_fields['facebook_event_id'] = true;
         }
 

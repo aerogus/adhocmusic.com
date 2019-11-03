@@ -53,10 +53,11 @@ class MembreAdhoc extends Membre
      * @var array
      */
     protected static $_all_fields = [
+        'id_contact' => 'int',
         'function'   => 'string',
         'birth_date' => 'date',
         'active'     => 'bool',
-        'rank'       => 'num',
+        'rank'       => 'int',
     ];
 
     /**
@@ -320,7 +321,7 @@ class MembreAdhoc extends Membre
                     foreach ($fields['contact'] as $field => $type) {
                         $att = '_' . $field;
                         switch ($type) {
-                            case 'num':
+                            case 'int':
                             case 'float':
                                 $sql .= $db->escape($this->$att) . ",";
                                 break;
@@ -330,7 +331,7 @@ class MembreAdhoc extends Membre
                             case 'bool':
                                 $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
                                 break;
-                            case 'pwd':
+                            case 'password':
                                 $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
                                 break;
                             case 'phpser':
@@ -365,7 +366,7 @@ class MembreAdhoc extends Membre
             foreach ($fields['membre'] as $field => $type) {
                 $att = '_' . $field;
                 switch ($type) {
-                    case 'num':
+                    case 'int':
                     case 'float':
                         $sql .= $db->escape($this->$att) . ",";
                         break;
@@ -375,7 +376,7 @@ class MembreAdhoc extends Membre
                     case 'bool':
                         $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
                         break;
-                    case 'pwd':
+                    case 'password':
                         $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
                         break;
                     case 'phpser':
@@ -405,7 +406,7 @@ class MembreAdhoc extends Membre
             foreach ($fields['membre_adhoc'] as $field => $type) {
                 $att = '_' . $field;
                 switch ($type) {
-                    case 'num':
+                    case 'int':
                     case 'float':
                         $sql .= $db->escape($this->$att) . ",";
                         break;
@@ -415,7 +416,7 @@ class MembreAdhoc extends Membre
                     case 'bool':
                         $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
                         break;
-                    case 'pwd':
+                    case 'password':
                         $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
                         break;
                     case 'phpser':
@@ -451,7 +452,7 @@ class MembreAdhoc extends Membre
                     if ($value === true) {
                         $att = '_' . $field;
                         switch ($fields['contact'][$field]) {
-                            case 'num':
+                            case 'int':
                             case 'float':
                                 $fields_to_save .= " `" . $field."` = " . $db->escape($this->$att) . ",";
                                 break;
@@ -461,7 +462,7 @@ class MembreAdhoc extends Membre
                             case 'bool':
                                 $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
                                 break;
-                            case 'pwd':
+                            case 'password':
                                 $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
                                 break;
                             case 'phpser':
@@ -497,7 +498,7 @@ class MembreAdhoc extends Membre
                     if ($value === true) {
                         $att = '_' . $field;
                         switch ($fields['membre'][$field]) {
-                            case 'num':
+                            case 'int':
                             case 'float':
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
@@ -507,7 +508,7 @@ class MembreAdhoc extends Membre
                             case 'bool':
                                 $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
                                 break;
-                            case 'pwd':
+                            case 'password':
                                 $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
                                 break;
                             case 'phpser':
@@ -543,7 +544,7 @@ class MembreAdhoc extends Membre
                     if ($value === true) {
                         $att = '_' . $field;
                         switch ($fields['membre_adhoc'][$field]) {
-                            case 'num':
+                            case 'int':
                             case 'float':
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
@@ -553,7 +554,7 @@ class MembreAdhoc extends Membre
                             case 'bool':
                                 $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
                                 break;
-                            case 'pwd':
+                            case 'password':
                                 $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
                                 break;
                             case 'phpser':

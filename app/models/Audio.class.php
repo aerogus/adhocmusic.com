@@ -41,11 +41,12 @@ class Audio extends Media
      * @var array
      */
     protected static $_all_fields = [
-        'id_contact'   => 'num',
-        'id_groupe'    => 'num',
-        'id_lieu'      => 'num',
-        'id_event'     => 'num',
-        'id_structure' => 'num',
+        'id_audio'     => 'int', // pk
+        'id_contact'   => 'int',
+        'id_groupe'    => 'int',
+        'id_lieu'      => 'int',
+        'id_event'     => 'int',
+        'id_structure' => 'int',
         'name'         => 'string',
         'created_on'   => 'date',
         'modified_on'  => 'date',
@@ -300,6 +301,9 @@ class Audio extends Media
 
     /**
      * Retourne le nombre total d'audios d'un visiteur loggué
+     *
+     * @return int
+     * @throws Exception
      */
     static function getMyAudiosCount(): int
     {

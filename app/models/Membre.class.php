@@ -171,15 +171,16 @@ class Membre extends Contact
      * @var array
      */
     protected static $_all_fields = [
+        'id_contact'     => 'id_contact',
         'pseudo'         => 'string',
-        'password'       => 'pwd',
+        'password'       => 'password',
         'last_name'      => 'string',
         'first_name'     => 'string',
         'address'        => 'string',
         'cp'             => 'string',
         'city'           => 'string',
         'country'        => 'string',
-        'id_city'        => 'num',
+        'id_city'        => 'int',
         'id_departement' => 'string',
         'id_region'      => 'string',
         'id_country'     => 'string',
@@ -188,7 +189,7 @@ class Membre extends Contact
         'site'           => 'string',
         'text'           => 'string',
         'mailing'        => 'bool',
-        'level'          => 'num',
+        'level'          => 'int',
         'created_on'     => 'date',
         'modified_on'    => 'date',
         'visited_on'     => 'date',
@@ -1132,7 +1133,7 @@ class Membre extends Contact
                             $sql .= 'NULL,';
                         } else {
                             switch ($type) {
-                                case 'num':
+                                case 'int':
                                     $sql .= (int) $this->$att . ',';
                                     break;
                                 case 'float':
@@ -1144,7 +1145,7 @@ class Membre extends Contact
                                 case 'bool':
                                     $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
                                     break;
-                                case 'pwd':
+                                case 'password':
                                     $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
                                     break;
                                 case 'phpser':
@@ -1202,7 +1203,7 @@ class Membre extends Contact
                         $sql .= 'NULL,';
                     } else {
                         switch ($type) {
-                            case 'num':
+                            case 'int':
                                 $sql .= (int) $this->$att . ',';
                                 break;
                             case 'float':
@@ -1214,7 +1215,7 @@ class Membre extends Contact
                             case 'bool':
                                 $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
                                 break;
-                            case 'pwd':
+                            case 'password':
                                 $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
                                 break;
                             case 'phpser':
@@ -1261,7 +1262,7 @@ class Membre extends Contact
                         $fields_to_save .= " `" . $field . "` = NULL,";
                     } else {
                         switch ($fields['contact'][$field]) {
-                            case 'num':
+                            case 'int':
                                 $fields_to_save .= " `" . $field . "` = " . (int) $this->$att . ",";
                                 break;
                             case 'float':
@@ -1273,7 +1274,7 @@ class Membre extends Contact
                             case 'bool':
                                 $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
                                 break;
-                            case 'pwd':
+                            case 'password':
                                 $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
                                 break;
                             case 'phpser':
@@ -1314,7 +1315,7 @@ class Membre extends Contact
                         $fields_to_save .= " `" . $field . "` = NULL,";
                     } else {
                         switch ($fields['membre'][$field]) {
-                            case 'num':
+                            case 'int':
                                 $fields_to_save .= " `" . $field . "` = " . (int) $this->$att . ",";
                                 break;
                             case 'float':
@@ -1326,7 +1327,7 @@ class Membre extends Contact
                             case 'bool':
                                 $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
                                 break;
-                            case 'pwd':
+                            case 'password':
                                 $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
                                 break;
                             case 'phpser':

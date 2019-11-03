@@ -83,6 +83,7 @@ class Structure extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
+        'id_structure'   => 'int',
         'name'           => 'string',
         'address'        => 'string',
         'cp'             => 'string',

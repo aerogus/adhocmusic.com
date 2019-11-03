@@ -83,15 +83,16 @@ class Subscription extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'created_at'    => 'date',
-        'subscribed_at' => 'date',
-        'amount'        => 'float',
-        'adult'         => 'bool',
-        'first_name'    => 'string',
-        'last_name'     => 'string',
-        'email'         => 'string',
-        'cp'            => 'string',
-        'id_contact'    => 'num',
+        'id_subscription' => 'int',
+        'created_at'      => 'date',
+        'subscribed_at'   => 'date',
+        'amount'          => 'float',
+        'adult'           => 'bool',
+        'first_name'      => 'string',
+        'last_name'       => 'string',
+        'email'           => 'string',
+        'cp'              => 'string',
+        'id_contact'      => 'int',
     ];
 
     /**

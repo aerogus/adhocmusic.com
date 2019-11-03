@@ -255,7 +255,7 @@ abstract class ObjectModel
                         $sql .= 'NULL,';
                     } else {
                         switch (static::$_all_fields[$field]) {
-                            case 'num':
+                            case 'int':
                                 $sql .= (int) $this->$att . ',';
                                 break;
                             case 'float':
@@ -270,7 +270,7 @@ abstract class ObjectModel
                             case 'bool':
                                 $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
                                 break;
-                            case 'pwd':
+                            case 'password':
                                 $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
                                 break;
                             case 'phpser':
@@ -309,7 +309,7 @@ abstract class ObjectModel
                     $fields_to_save .= " `" . $field . "` = NULL,";
                 } else {
                     switch (static::$_all_fields[$field]) {
-                        case 'num':
+                        case 'int':
                             $fields_to_save .= " `" . $field . "` = " . (int) $this->$att . ",";
                             break;
                         case 'float':
@@ -324,7 +324,7 @@ abstract class ObjectModel
                         case 'bool':
                             $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
                             break;
-                        case 'pwd':
+                        case 'password':
                             $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
                             break;
                         case 'phpser':
@@ -454,7 +454,7 @@ abstract class ObjectModel
                     case 'phpser':
                         $this->$att = unserialize($v);
                         break;
-                    case 'num':
+                    case 'int':
                         $this->$att = (int) $v;
                         break;
                     case 'float':

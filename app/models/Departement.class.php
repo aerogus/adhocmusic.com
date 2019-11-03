@@ -50,7 +50,9 @@ class Departement extends Reference
      * @var array
      */
     protected static $_all_fields = [
-        'name' => 'string',
+        'id_departement' => 'string',
+        'id_region'      => 'string',
+        'name'           => 'string',
     ];
 
     /**

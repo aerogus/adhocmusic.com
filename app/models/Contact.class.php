@@ -48,8 +48,9 @@ class Contact extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'email'  => 'string',
-        'lastnl' => 'date',
+        'id_contact' => 'int',
+        'email'      => 'string',
+        'lastnl'     => 'date',
     ];
 
     /**
@@ -284,7 +285,7 @@ class Contact extends ObjectModel
                         $sql .= 'NULL,';
                     } else {
                         switch ($type) {
-                            case 'num':
+                            case 'int':
                             case 'float':
                                 $sql .= $db->escape($this->$att) . ",";
                                 break;
@@ -297,7 +298,7 @@ class Contact extends ObjectModel
                             case 'bool':
                                 $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
                                 break;
-                            case 'pwd':
+                            case 'password':
                                 $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
                                 break;
                             case 'phpser':
@@ -335,7 +336,7 @@ class Contact extends ObjectModel
                         $sql .= " `" . $field . "` = NULL,";
                     } else {
                         switch ($fields['contact'][$field]) {
-                            case 'num':
+                            case 'int':
                             case 'float':
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
@@ -345,7 +346,7 @@ class Contact extends ObjectModel
                             case 'bool':
                                 $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
                                 break;
-                            case 'bool':
+                            case 'password':
                                 $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
                                 break;
                             case 'phpser':

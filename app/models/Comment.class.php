@@ -97,11 +97,11 @@ class Comment extends ObjectModel
      */
     protected static $_all_fields = [
         'type'        => 'string',
-        'id_content'  => 'num',
+        'id_content'  => 'int',
         'created_on'  => 'date',
         'modified_on' => 'date',
         'online'      => 'bool',
-        'id_contact'  => 'num',
+        'id_contact'  => 'int',
         'pseudo'      => 'string',
         'email'       => 'string',
         'text'        => 'string',
@@ -265,15 +265,16 @@ class Comment extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $val val
+     * @param string $type type
      *
      * @return object
      */
-    function setType(string $val): object
+    function setType(string $type): object
     {
-        $val = trim($val);
-        if ($this->_type !== $val) {
-            $this->_type = $val;
+        $type = trim($type);
+
+        if ($this->_type !== $type) {
+            $this->_type = $type;
             $this->_modified_fields['type'] = true;
         }
 
@@ -281,14 +282,14 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param int $val val
+     * @param int $id_content id_content
      *
      * @return object
      */
-    function setIdContent(int $val): object
+    function setIdContent(int $id_content): object
     {
-        if ($this->_id_content !== $val) {
-            $this->_id_content = $val;
+        if ($this->_id_content !== $id_content) {
+            $this->_id_content = $id_content;
             $this->_modified_fields['id_content'] = true;
         }
 
@@ -296,14 +297,14 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $created_on created_on
      *
      * @return object
      */
-    function setCreatedOn(string $val): object
+    function setCreatedOn(string $created_on): object
     {
-        if ($this->_created_on !== $val) {
-            $this->_created_on = $val;
+        if ($this->_created_on !== $created_on) {
+            $this->_created_on = $created_on;
             $this->_modified_fields['created_on'] = true;
         }
 
@@ -326,14 +327,14 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $modified_on modified_on
      *
      * @return object
      */
-    function setModifiedOn(string $val): object
+    function setModifiedOn(string $modified_on): object
     {
-        if ($this->_modified_on !== $val) {
-            $this->_modified_on = $val;
+        if ($this->_modified_on !== $modified_on) {
+            $this->_modified_on = $modified_on;
             $this->_modified_fields['modified_on'] = true;
         }
 
@@ -356,14 +357,14 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param bool $val val
+     * @param bool $online online
      *
      * @return object
      */
-    function setOnline(bool $val): object
+    function setOnline(bool $online): object
     {
-        if ($this->_online !== $val) {
-            $this->_online = $val;
+        if ($this->_online !== $online) {
+            $this->_online = $online;
             $this->_modified_fields['online'] = true;
         }
 
@@ -371,14 +372,14 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param int $val val
+     * @param int $id_contact id_contact
      *
      * @return object
      */
-    function setIdContact(int $val): object
+    function setIdContact(int $id_contact): object
     {
-        if ($this->_id_contact !== $val) {
-            $this->_id_contact = $val;
+        if ($this->_id_contact !== $id_contact) {
+            $this->_id_contact = $id_contact;
             $this->_modified_fields['id_contact'] = true;
         }
 
@@ -386,15 +387,16 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $pseudo pseudo
      *
      * @return object
      */
-    function setPseudo(string $val): object
+    function setPseudo(string $pseudo): object
     {
-        $val = trim($val);
-        if ($this->_pseudo !== $val) {
-            $this->_pseudo = $val;
+        $pseudo = trim($pseudo);
+
+        if ($this->_pseudo !== $pseudo) {
+            $this->_pseudo = $pseudo;
             $this->_modified_fields['pseudo'] = true;
         }
 
@@ -402,15 +404,16 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param string $val $val
+     * @param string $email email
      *
      * @return object
      */
-    function setEmail(string $val): object
+    function setEmail(string $email): object
     {
-        $val = trim($val);
-        if ($this->_email !== $val) {
-            $this->_email = $val;
+        $email = trim($email);
+
+        if ($this->_email !== $email) {
+            $this->_email = $email;
             $this->_modified_fields['email'] = true;
         }
 
@@ -418,15 +421,16 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $text text
      *
      * @return object
      */
-    function setText(string $val): object
+    function setText(string $text): object
     {
-        $val = trim($val);
-        if ($this->_text !== $val) {
-            $this->_text = $val;
+        $text = trim($text);
+
+        if ($this->_text !== $text) {
+            $this->_text = $text;
             $this->_modified_fields['text'] = true;
         }
 
