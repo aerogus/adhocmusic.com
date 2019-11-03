@@ -319,18 +319,4 @@ class Audio extends Media
 
         return (int) $db->queryWithFetchFirstField($sql);
     }
-
-    /**
-     * Retourne le nombre total d'audios
-     *
-     * @return int
-     */
-    static function getAudiosCount(): int
-    {
-        $db = DataBase::getInstance();
-
-        $sql = 'SELECT COUNT(*) FROM `' . Audio::getDbTable() . '`';
-
-        return (int) $db->queryWithFetchFirstField($sql);
-    }
 }

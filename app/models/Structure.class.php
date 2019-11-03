@@ -226,14 +226,14 @@ class Structure extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $val val
+     * @param string $name name
      *
      * @return object
      */
-    function setName(string $val): object
+    function setName(string $name): object
     {
-        if ($this->_name !== $val) {
-            $this->_name = $val;
+        if ($this->_name !== $name) {
+            $this->_name = $name;
             $this->_modified_fields['name'] = true;
         }
 
@@ -241,14 +241,14 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $address adresse
      *
      * @return object
      */
-    function setAddress(string $val): object
+    function setAddress(string $address): object
     {
-        if ($this->_address !== $val) {
-            $this->_address = $val;
+        if ($this->_address !== $address) {
+            $this->_address = $address;
             $this->_modified_fields['address'] = true;
         }
 
@@ -256,14 +256,14 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $cp code postal
      *
      * @return object
      */
-    function setCp(string $val): object
+    function setCp(string $cp): object
     {
-        if ($this->_cp !== $val) {
-            $this->_cp = $val;
+        if ($this->_cp !== $cp) {
+            $this->_cp = $cp;
             $this->_modified_fields['cp'] = true;
         }
 
@@ -271,14 +271,14 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $city city
      *
      * @return object
      */
-    function setCity(string $val): object
+    function setCity(string $city): object
     {
-        if ($this->_city !== $val) {
-            $this->_city = $val;
+        if ($this->_city !== $city) {
+            $this->_city = $city;
             $this->_modified_fields['city'] = true;
         }
 
@@ -286,14 +286,14 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $tel téléphone
      *
      * @return object
      */
-    function setTel(string $val): object
+    function setTel(string $tel): object
     {
-        if ($this->_tel !== $val) {
-            $this->_tel = $val;
+        if ($this->_tel !== $tel) {
+            $this->_tel = $tel;
             $this->_modified_fields['tel'] = true;
         }
 
@@ -301,14 +301,14 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $id_departement id_departement
      *
      * @return object
      */
-    function setIdDepartement(string $val): object
+    function setIdDepartement(string $id_departement): object
     {
-        if ($this->_id_departement !== $val) {
-            $this->_id_departement = $val;
+        if ($this->_id_departement !== $id_departement) {
+            $this->_id_departement = $id_departement;
             $this->_modified_fields['id_departement'] = true;
         }
 
@@ -316,14 +316,14 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $text texte
      *
      * @return object
      */
-    function setText(string $val): object
+    function setText(string $text): object
     {
-        if ($this->_text !== $val) {
-            $this->_text = $val;
+        if ($this->_text !== $text) {
+            $this->_text = $text;
             $this->_modified_fields['text'] = true;
         }
 
@@ -331,14 +331,14 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $site site
      *
      * @return object
      */
-    function setSite(string $val): object
+    function setSite(string $site): object
     {
-        if ($this->_site !== $val) {
-            $this->_site = $val;
+        if ($this->_site !== $site) {
+            $this->_site = $site;
             $this->_modified_fields['site'] = true;
         }
 
@@ -346,14 +346,14 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $email email
      *
      * @return object
      */
-    function setEmail(string $val): object
+    function setEmail(string $email): object
     {
-        if ($this->_email !== $val) {
-            $this->_email = $val;
+        if ($this->_email !== $email) {
+            $this->_email = $email;
             $this->_modified_fields['email'] = true;
         }
 
@@ -361,14 +361,14 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $id_country id_country
      *
      * @return object
      */
-    function setIdCountry(string $val): object
+    function setIdCountry(string $id_country): object
     {
-        if ($this->_id_country !== $val) {
-            $this->_id_country = $val;
+        if ($this->_id_country !== $id_country) {
+            $this->_id_country = $id_country;
             $this->_modified_fields['id_country'] = true;
         }
 

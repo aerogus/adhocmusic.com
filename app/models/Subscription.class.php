@@ -197,14 +197,14 @@ class Subscription extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $val val
+     * @param string $created_at created_at
      *
      * @return object
      */
-    function setCreatedAt(string $val): object
+    function setCreatedAt(string $created_at): object
     {
-        if ($this->_created_at !== $val) {
-            $this->_created_at = $val;
+        if ($this->_created_at !== $created_at) {
+            $this->_created_at = $created_at;
             $this->_modified_fields['created_at'] = true;
         }
 
@@ -227,14 +227,14 @@ class Subscription extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $subscribed_at subscribed_at
      *
      * @return object
      */
-    function setSubscribedAt(string $val): object
+    function setSubscribedAt(string $subscribed_at): object
     {
-        if ($this->_subscribed_at !== $val) {
-            $this->_subscribed_at = $val;
+        if ($this->_subscribed_at !== $subscribed_at) {
+            $this->_subscribed_at = $subscribed_at;
             $this->_modified_fields['subscribed_at'] = true;
         }
 
@@ -242,42 +242,42 @@ class Subscription extends ObjectModel
     }
 
     /**
-     * @param bool $val val
+     * @param bool $adult adult
      *
      * @return object
      */
-    function setAdult(bool $val): object
+    function setAdult(bool $adult): object
     {
-        if ($this->_adult !== $val) {
-            $this->_adult = $val;
+        if ($this->_adult !== $adult) {
+            $this->_adult = $adult;
             $this->_modified_fields['adult'] = true;
         }
         return $this;
     }
 
     /**
-     * @param float $val val
+     * @param float $amount amount
      *
      * @return object
      */
-    function setAmount(float $val): object
+    function setAmount(float $amount): object
     {
-        if ($this->_amount !== $val) {
-            $this->_amount = $val;
+        if ($this->_amount !== $amount) {
+            $this->_amount = $amount;
             $this->_modified_fields['amount'] = true;
         }
         return $this;
     }
 
     /**
-     * @param string $val val
+     * @param string $first_name first_name
      *
      * @return object
      */
-    function setFirstName(string $val): object
+    function setFirstName(string $first_name): object
     {
-        if ($this->_first_name !== $val) {
-            $this->_first_name = $val;
+        if ($this->_first_name !== $first_name) {
+            $this->_first_name = $first_name;
             $this->_modified_fields['first_name'] = true;
         }
 
@@ -285,14 +285,14 @@ class Subscription extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $last_name last_name
      *
      * @return object
      */
-    function setLastName(string $val): object
+    function setLastName(string $last_name): object
     {
-        if ($this->_last_name !== $val) {
-            $this->_last_name = $val;
+        if ($this->_last_name !== $last_name) {
+            $this->_last_name = $last_name;
             $this->_modified_fields['last_name'] = true;
         }
 
@@ -320,14 +320,14 @@ class Subscription extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $cp cp
      *
      * @return object
      */
-    function setCp(string $val): object
+    function setCp(string $cp): object
     {
-        if ($this->_cp !== $val) {
-            $this->_cp = $val;
+        if ($this->_cp !== $cp) {
+            $this->_cp = $cp;
             $this->_modified_fields['cp'] = true;
         }
 
@@ -335,14 +335,14 @@ class Subscription extends ObjectModel
     }
 
     /**
-     * @param int $val val
+     * @param int $id_contact id_contact
      *
      * @return object
      */
-    function setIdContact(int $val): object
+    function setIdContact(int $id_contact): object
     {
-        if ($this->_id_contact !== $val) {
-            $this->_id_contact = $val;
+        if ($this->_id_contact !== $id_contact) {
+            $this->_id_contact = $id_contact;
             $this->_modified_fields['id_contact'] = true;
         }
 

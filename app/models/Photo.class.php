@@ -130,14 +130,14 @@ class Photo extends Media
     /* debut setters */
 
     /**
-     * @param string $val val
+     * @param string $credits credits
      *
      * @return object
      */
-    function setCredits(string $val): object
+    function setCredits(string $credits): object
     {
-        if ($this->_credits !== $val) {
-            $this->_credits = $val;
+        if ($this->_credits !== $credits) {
+            $this->_credits = $credits;
             $this->_modified_fields['credits'] = true;
         }
 

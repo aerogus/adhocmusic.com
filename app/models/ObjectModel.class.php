@@ -419,6 +419,42 @@ abstract class ObjectModel
     }
 
     /**
+     * Retourne le nombre d'entités référencés
+     *
+     * @return int
+     */
+    static function count(): int
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT COUNT(*) "
+             . "FROM `" . static::getDbTable() . "`";
+
+        return (int) $db->queryWithFetchFirstField($sql);
+    }
+
+    /**
+     * Compte le nombre d'entités liées au user loggué
+     *
+     * @return int
+     * @throws Exception
+     */
+    static function countMy(): int
+    {
+        if (empty($_SESSION['membre'])) {
+            throw new Exception('non identifié');
+        }
+
+        $db = DataBase::getInstance();
+
+        $sql = "SELECT COUNT(*) "
+             . "FROM `" . static::getDbTable() . "` "
+             . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
+
+        return (int) $db->queryWithFetchFirstField($sql);
+    }
+
+    /**
      * Charge toutes les infos d'une entité
      *
      * @return bool

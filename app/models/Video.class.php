@@ -320,14 +320,14 @@ class Video extends Media
     }
 
     /**
-     * @param int $val val
+     * @param int $width width
      * 
      * @return object
      */
-    function setWidth(int $val): object
+    function setWidth(int $width): object
     {
-        if ($this->_width !== $val) {
-            $this->_width = $val;
+        if ($this->_width !== $width) {
+            $this->_width = $width;
             $this->_modified_fields['width'] = true;
         }
 
@@ -335,14 +335,14 @@ class Video extends Media
     }
 
     /**
-     * @param int $val val
+     * @param int $height height
      *
      * @return object
      */
-    function setHeight(int $val): object
+    function setHeight(int $height): object
     {
-        if ($this->_height !== $val) {
-            $this->_height = $val;
+        if ($this->_height !== $height) {
+            $this->_height = $height;
             $this->_modified_fields['height'] = true;
         }
 
@@ -908,20 +908,6 @@ class Video extends Media
         $sql = "SELECT COUNT(*) "
              . "FROM `" . Video::getDbTable() . "` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
-
-        return (int) $db->queryWithFetchFirstField($sql);
-    }
-
-    /**
-     * Retourne le nombre total de vidéos
-     *
-     * @return int
-     */
-    static function getVideosCount(): int
-    {
-        $db = DataBase::getInstance();
-
-        $sql = 'SELECT COUNT(*) FROM `' . Video::getDbTable() . '`';
 
         return (int) $db->queryWithFetchFirstField($sql);
     }

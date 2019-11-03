@@ -224,18 +224,18 @@ class Featured extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $val date format YYYY-MM-DD HH:II:SS
+     * @param string $datdeb date format YYYY-MM-DD HH:II:SS
      *
      * @return object
      */
-    function setDatDeb(string $val): object
+    function setDatDeb(string $datdeb): object
     {
-        if (!Date::isDateTimeOk($val)) {
+        if (!Date::isDateTimeOk($datdeb)) {
             throw new Exception('datdeb invalide');
         }
 
-        if ($this->_datdeb !== $val) {
-            $this->_datdeb = $val;
+        if ($this->_datdeb !== $datdeb) {
+            $this->_datdeb = $datdeb;
             $this->_modified_fields['datdeb'] = true;
         }
 
@@ -243,18 +243,18 @@ class Featured extends ObjectModel
     }
 
     /**
-     * @param string $val YYYY-MM-DD HH:II:SS
+     * @param string $datfin YYYY-MM-DD HH:II:SS
      *
      * @return object
      */
-    function setDatFin(string $val): object
+    function setDatFin(string $datfin): object
     {
-        if (!Date::isDateTimeOk($val)) {
+        if (!Date::isDateTimeOk($datfin)) {
             throw new Exception('datfin invalide');
         }
 
-        if ($this->_datfin !== $val) {
-            $this->_datfin = $val;
+        if ($this->_datfin !== $datfin) {
+            $this->_datfin = $datfin;
             $this->_modified_fields['datfin'] = true;
         }
 
@@ -262,15 +262,16 @@ class Featured extends ObjectModel
     }
 
     /**
-     * @param string $val titre
+     * @param string $title titre
      *
      * @return object
      */
-    function setTitle(string $val): object
+    function setTitle(string $title): object
     {
-        $val = trim($val);
-        if ($this->_title !== $val) {
-            $this->_title = $val;
+        $title = trim($title);
+
+        if ($this->_title !== $title) {
+            $this->_title = $title;
             $this->_modified_fields['title'] = true;
         }
 
@@ -278,15 +279,16 @@ class Featured extends ObjectModel
     }
 
     /**
-     * @param string $val description
+     * @param string $description description
      *
      * @return object
      */
-    function setDescription(string $val): object
+    function setDescription(string $description): object
     {
-        $val = trim($val);
-        if ($this->_description !== $val) {
-            $this->_description = $val;
+        $description = trim($description);
+
+        if ($this->_description !== $description) {
+            $this->_description = $description;
             $this->_modified_fields['description'] = true;
         }
 
@@ -294,15 +296,16 @@ class Featured extends ObjectModel
     }
 
     /**
-     * @param string $val lien
+     * @param string $link lien
      *
      * @return object
      */
-    function setLink(string $val): object
+    function setLink(string $link): object
     {
-        $val = trim($val);
-        if ($this->_link !== $val) {
-            $this->_link = $val;
+        $link = trim($link);
+
+        if ($this->_link !== $link) {
+            $this->_link = $link;
             $this->_modified_fields['link'] = true;
         }
 
@@ -310,14 +313,14 @@ class Featured extends ObjectModel
     }
 
     /**
-     * @param bool $val val
+     * @param bool $online online
      *
      * @return bool
      */
-    function setOnline(bool $val): object
+    function setOnline(bool $online): object
     {
-        if ($this->_online !== $val) {
-            $this->_online = $val;
+        if ($this->_online !== $online) {
+            $this->_online = $online;
             $this->_modified_fields['online'] = true;
         }
 

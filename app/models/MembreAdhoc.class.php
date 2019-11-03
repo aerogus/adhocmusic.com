@@ -152,14 +152,14 @@ class MembreAdhoc extends Membre
     /* début setters */
 
     /**
-     * @param string $val val
+     * @param string $function function
      *
      * @return object
      */
-    function setFunction(string $val): object
+    function setFunction(string $function): object
     {
-        if ($this->_function !== $val) {
-            $this->_function = $val;
+        if ($this->_function !== $function) {
+            $this->_function = $function;
             $this->_modified_fields['membre_adhoc']['function'] = true;
         }
 
@@ -167,14 +167,14 @@ class MembreAdhoc extends Membre
     }
 
     /**
-     * @param string $val val
+     * @param string $birth_date birth_date
      *
      * @return object
      */
-    function setBirthDate(string $val): object
+    function setBirthDate(string $birth_date): object
     {
-        if ($this->_birth_date !== $val) {
-            $this->_birth_date = $val;
+        if ($this->_birth_date !== $birth_date) {
+            $this->_birth_date = $birth_date;
             $this->_modified_fields['membre_adhoc']['function'] = true;
         }
 
@@ -182,14 +182,14 @@ class MembreAdhoc extends Membre
     }
 
     /**
-     * @param bool $val val
+     * @param bool $active active
      *
      * @return object
      */
-    function setActive(bool $val): object
+    function setActive(bool $active): object
     {
-        if ($this->_active !== $val) {
-            $this->_active = $val;
+        if ($this->_active !== $active) {
+            $this->_active = $active;
             $this->_modified_fields['membre_adhoc']['active'] = true;
         }
 
@@ -197,14 +197,14 @@ class MembreAdhoc extends Membre
     }
 
     /**
-     * @param int $val val
+     * @param int $rank rang
      *
      * @return object
      */
-    function setRank(int $val): object
+    function setRank(int $rank): object
     {
-        if ($this->_rank !== $val) {
-            $this->_rank = $val;
+        if ($this->_rank !== $rank) {
+            $this->_rank = $rank;
             $this->_modified_fields['membre_adhoc']['rank'] = true;
         }
 

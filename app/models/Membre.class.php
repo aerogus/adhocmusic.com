@@ -536,14 +536,14 @@ class Membre extends Contact
     /* début setters */
 
     /**
-     * @param string|null $val val
+     * @param string|null $pseudo pseudo
      *
      * @return object
      */
-    function setPseudo(?string $val): object
+    function setPseudo(?string $pseudo): object
     {
-        if ($this->_pseudo !== $val) {
-            $this->_pseudo = $val;
+        if ($this->_pseudo !== $pseudo) {
+            $this->_pseudo = $pseudo;
             $this->_modified_fields['membre']['pseudo'] = true;
         }
 
@@ -551,15 +551,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
-     * /!\ le donner sous forme cryptée mysql ?
+     * @param string|null $password password
      *
      * @return object
      */
-    function setPassword(?string $val): object
+    function setPassword(?string $password): object
     {
-        if ($this->_password !== $val) {
-            $this->_password = $val;
+        if ($this->_password !== $password) {
+            $this->_password = $password;
             $this->_modified_fields['membre']['password'] = true;
         }
 
@@ -567,14 +566,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $last_name last_name
      *
      * @return object
      */
-    function setLastName(?string $val): object
+    function setLastName(?string $last_name): object
     {
-        if ($this->_last_name !== $val) {
-            $this->_last_name = $val;
+        if ($this->_last_name !== $last_name) {
+            $this->_last_name = $last_name;
             $this->_modified_fields['membre']['last_name'] = true;
         }
 
@@ -582,14 +581,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $first_name first_name
      *
      * @return object
      */
-    function setFirstName(?string $val): object
+    function setFirstName(?string $first_name): object
     {
-        if ($this->_first_name !== $val) {
-            $this->_first_name = $val;
+        if ($this->_first_name !== $first_name) {
+            $this->_first_name = $first_name;
             $this->_modified_fields['membre']['first_name'] = true;
         }
 
@@ -597,14 +596,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $address adresse
      *
      * @return object
      */
-    function setAddress(?string $val): object
+    function setAddress(?string $address): object
     {
-        if ($this->_address !== $val) {
-            $this->_address = $val;
+        if ($this->_address !== $address) {
+            $this->_address = $address;
             $this->_modified_fields['membre']['address'] = true;
         }
 
@@ -612,14 +611,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $cp code postal
      *
      * @return object
      */
-    function setCp(?string $val): object
+    function setCp(?string $cp): object
     {
-        if ($this->_cp !== $val) {
-            $this->_cp = $val;
+        if ($this->_cp !== $cp) {
+            $this->_cp = $cp;
             $this->_modified_fields['membre']['cp'] = true;
         }
 
@@ -627,14 +626,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $city city
      *
      * @return object
      */
-    function setCity(?string $val): object
+    function setCity(?string $city): object
     {
-        if ($this->_city !== $val) {
-            $this->_city = $val;
+        if ($this->_city !== $city) {
+            $this->_city = $city;
             $this->_modified_fields['membre']['city'] = true;
         }
 
@@ -642,14 +641,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $country country
      *
      * @return object
      */
-    function setCountry(?string $val): object
+    function setCountry(?string $country): object
     {
-        if ($this->_country !== $val) {
-            $this->_country = $val;
+        if ($this->_country !== $country) {
+            $this->_country = $country;
             $this->_modified_fields['membre']['country'] = true;
         }
 
@@ -657,14 +656,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param int|null $val val
+     * @param int|null $id_city id_city
      *
      * @return object
      */
-    function setIdCity(?int $val): object
+    function setIdCity(?int $id_city): object
     {
-        if ($this->_id_city !== $val) {
-            $this->_id_city = $val;
+        if ($this->_id_city !== $id_city) {
+            $this->_id_city = $id_city;
             $this->_modified_fields['membre']['id_city'] = true;
         }
 
@@ -672,14 +671,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $id_departement id_departement
      *
      * @return object
      */
-    function setIdDepartement(?string $val): object
+    function setIdDepartement(?string $id_departement): object
     {
-        if ($this->_id_departement !== $val) {
-            $this->_id_departement = $val;
+        if ($this->_id_departement !== $id_departement) {
+            $this->_id_departement = $id_departement;
             $this->_modified_fields['membre']['id_departement'] = true;
         }
 
@@ -687,14 +686,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $id_region id_region
      * 
      * @return object
      */
-    function setIdRegion(?string $val): object
+    function setIdRegion(?string $id_region): object
     {
-        if ($this->_id_region !== $val) {
-            $this->_id_region = $val;
+        if ($this->_id_region !== $id_region) {
+            $this->_id_region = $id_region;
             $this->_modified_fields['membre']['id_region'] = true;
         }
 
@@ -702,14 +701,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $id_country id_country
      *
      * @return object
      */
-    function setIdCountry(?string $val): object
+    function setIdCountry(?string $id_country): object
     {
-        if ($this->_id_country !== $val) {
-            $this->_id_country = $val;
+        if ($this->_id_country !== $id_country) {
+            $this->_id_country = $id_country;
             $this->_modified_fields['membre']['id_country'] = true;
         }
 
@@ -717,14 +716,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $tel téléphone
      *
      * @return object
      */
-    function setTel(?string $val): object
+    function setTel(?string $tel): object
     {
-        if ($this->_tel !== $val) {
-            $this->_tel = $val;
+        if ($this->_tel !== $tel) {
+            $this->_tel = $tel;
             $this->_modified_fields['membre']['tel'] = true;
         }
 
@@ -732,14 +731,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $port port
      *
      * @return object
      */
-    function setPort(?string $val): object
+    function setPort(?string $port): object
     {
-        if ($this->_port !== $val) {
-            $this->_port = $val;
+        if ($this->_port !== $port) {
+            $this->_port = $port;
             $this->_modified_fields['membre']['port'] = true;
         }
 
@@ -747,14 +746,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $site site
      *
      * @return object
      */
-    function setSite(?string $val): object
+    function setSite(?string $site): object
     {
-        if ($this->_site !== $val) {
-            $this->_site = $val;
+        if ($this->_site !== $site) {
+            $this->_site = $site;
             $this->_modified_fields['membre']['site'] = true;
         }
 
@@ -762,14 +761,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $text texte
      *
      * @return object
      */
-    function setText(?string $val): object
+    function setText(?string $text): object
     {
-        if ($this->_text !== $val) {
-            $this->_text = $val;
+        if ($this->_text !== $text) {
+            $this->_text = $text;
             $this->_modified_fields['membre']['text'] = true;
         }
 
@@ -777,14 +776,14 @@ class Membre extends Contact
     }
 
     /**
-     * @param bool $val val
+     * @param bool $mailing mailing
      *
      * @return object
      */
-    function setMailing(bool $val): object
+    function setMailing(bool $mailing): object
     {
-        if ($this->_mailing !== $val) {
-            $this->_mailing = $val;
+        if ($this->_mailing !== $mailing) {
+            $this->_mailing = $mailing;
             $this->_modified_fields['membre']['mailing'] = true;
         }
 
@@ -1577,20 +1576,6 @@ class Membre extends Contact
             return self::$_types_membre[$cle];
         }
         return null;
-    }
-
-    /**
-     * Retourne le nombre total de membres
-     *
-     * @return int
-     */
-    static function getMembresCount(): int
-    {
-        $db = DataBase::getInstance();
-
-        $sql = 'SELECT COUNT(*) FROM `' . Membre::getDbTable() . '`';
-
-        return (int) $db->queryWithFetchFirstField($sql);
     }
 
     /**

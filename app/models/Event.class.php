@@ -488,14 +488,14 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param int $val val
+     * @param int $facebook_event_attending facebook_event_attending
      *
      * @return object
      */
-    function setFacebookEventAttending(int $val): object
+    function setFacebookEventAttending(int $facebook_event_attending): object
     {
-        if ($this->_facebook_event_attending !== $val) {
-            $this->_facebook_event_attending = $val;
+        if ($this->_facebook_event_attending !== $facebook_event_attending) {
+            $this->_facebook_event_attending = $facebook_event_attending;
             $this->_modified_fields['facebook_event_attending'] = true;
         }
 
@@ -503,14 +503,14 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $date date
      *
      * @return object
      */
-    function setDate(string $val): object
+    function setDate(string $date): object
     {
-        if ($this->_date !== $val) {
-            $this->_date = $val;
+        if ($this->_date !== $date) {
+            $this->_date = $date;
             $this->_modified_fields['date'] = true;
         }
 
@@ -518,14 +518,14 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $text text
      * 
      * @return object
      */
-    function setText(string $val): object
+    function setText(string $text): object
     {
-        if ($this->_text !== $val) {
-            $this->_text = $val;
+        if ($this->_text !== $text) {
+            $this->_text = $text;
             $this->_modified_fields['text'] = true;
         }
 
@@ -533,14 +533,14 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $price price
      *
      * @return object
      */
-    function setPrice(string $val): object
+    function setPrice(string $price): object
     {
-        if ($this->_price !== $val) {
-            $this->_price = $val;
+        if ($this->_price !== $price) {
+            $this->_price = $price;
             $this->_modified_fields['price'] = true;
         }
 
@@ -548,14 +548,14 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param bool $val val
+     * @param bool $online online
      *
      * @return object
      */
-    function setOnline(bool $val): object
+    function setOnline(bool $online): object
     {
-        if ($this->_online !== $val) {
-            $this->_online = $val;
+        if ($this->_online !== $online) {
+            $this->_online = $online;
             $this->_modified_fields['online'] = true;
         }
 
@@ -563,14 +563,14 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param int $val val
+     * @param int $id_lieu id_lieu
      *
      * @return object
      */
-    function setIdLieu(int $val): object
+    function setIdLieu(int $id_lieu): object
     {
-        if ($this->_id_lieu !== $val) {
-            $this->_id_lieu = $val;
+        if ($this->_id_lieu !== $id_lieu) {
+            $this->_id_lieu = $id_lieu;
             $this->_modified_fields['id_lieu'] = true;
         }
 
@@ -578,14 +578,14 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param int $val val
+     * @param int $id_contact id_contact
      *
      * @return object
      */
-    function setIdContact(int $val): object
+    function setIdContact(int $id_contact): object
     {
-        if ($this->_id_contact !== $val) {
-            $this->_id_contact = $val;
+        if ($this->_id_contact !== $id_contact) {
+            $this->_id_contact = $id_contact;
             $this->_modified_fields['id_contact'] = true;
         }
 
@@ -593,21 +593,6 @@ class Event extends ObjectModel
     }
 
     /* fin setters */
-
-    /**
-     * Retourne le nombre de d'événements référencés
-     *
-     * @return int
-     */
-    static function getEventsCount()
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT COUNT(*) "
-             . "FROM `".Event::getDbTable()."`";
-
-        return (int) $db->queryWithFetchFirstField($sql);
-    }
 
     /**
      * Retourne un tableau d'objEvt pour des critères donnés

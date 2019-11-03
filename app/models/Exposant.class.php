@@ -315,14 +315,14 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $state état
      *
      * @return object
      */
-    function setState(string $val): object
+    function setState(string $state): object
     {
-        if ($this->_state !== $val) {
-            $this->_state = $val;
+        if ($this->_state !== $state) {
+            $this->_state = $state;
             $this->_modified_fields['state'] = true;
         }
 
@@ -330,14 +330,14 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $created_on created_on
      *
      * @return object
      */
-    function setCreatedOn(string $val): object
+    function setCreatedOn(string $created_on): object
     {
-        if ($this->_created_on !== $val) {
-            $this->_created_on = $val;
+        if ($this->_created_on !== $created_on) {
+            $this->_created_on = $created_on;
             $this->_modified_fields['created_on'] = true;
         }
 
@@ -360,14 +360,14 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $modified_on modified_on
      *
      * @return object
      */
-    function setModifiedOn(string $val): object
+    function setModifiedOn(string $modified_on): object
     {
-        if ($this->_modified_on !== $val) {
-            $this->_modified_on = $val;
+        if ($this->_modified_on !== $modified_on) {
+            $this->_modified_on = $modified_on;
             $this->_modified_fields['modified_on'] = true;
         }
 
@@ -390,18 +390,4 @@ class Exposant extends ObjectModel
     }
 
     /* fin setters */
-
-    /**
-     * Retourne le nombre de d'exposants référencés
-     *
-     * @return int
-     */
-    static function getExposantsCount()
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT COUNT(*) FROM `" . Exposant::getDbTable() . "`";
-
-        return $db->queryWithFetchFirstField($sql);
-    }
 }

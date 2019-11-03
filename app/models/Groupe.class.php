@@ -752,14 +752,14 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $val id de page facebook (int 64bits en fait)
+     * @param string|null $facebook_page_id page facebook (int 64bits en fait)
      *
      * @return object
      */
-    function setFacebookPageId(?string $val): object
+    function setFacebookPageId(?string $facebook_page_id): object
     {
-        if ($this->_facebook_page_id !== $val) {
-            $this->_facebook_page_id = $val;
+        if ($this->_facebook_page_id !== $facebook_page_id) {
+            $this->_facebook_page_id = $facebook_page_id;
             $this->_modified_fields['facebook_page_id'] = true;
         }
 
@@ -767,14 +767,14 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $twitter_id twitter_id
      *
      * @return object
      */
-    function setTwitterId(?string $val): object
+    function setTwitterId(?string $twitter_id): object
     {
-        if ($this->_twitter_id !== $val) {
-            $this->_twitter_id = $val;
+        if ($this->_twitter_id !== $twitter_id) {
+            $this->_twitter_id = $twitter_id;
             $this->_modified_fields['twitter_id'] = true;
         }
 
@@ -782,14 +782,14 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $id_departement id_departement
      *
      * @return object
      */
-    function setIdDepartement(string $val): object
+    function setIdDepartement(string $id_departement): object
     {
-        if ($this->_id_departement !== $val) {
-            $this->_id_departement = $val;
+        if ($this->_id_departement !== $id_departement) {
+            $this->_id_departement = $id_departement;
             $this->_modified_fields['id_departement'] = true;
         }
 
@@ -797,14 +797,14 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param bool $val val
+     * @param bool $online online
      *
      * @return object
      */
-    function setOnline(bool $val): object
+    function setOnline(bool $online): object
     {
-        if ($this->_online !== $val) {
-            $this->_online = $val;
+        if ($this->_online !== $online) {
+            $this->_online = $online;
             $this->_modified_fields['online'] = true;
         }
 
@@ -812,14 +812,14 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $created_on created_on
      *
      * @return object
      */
-    function setCreatedOn(?string $val): object
+    function setCreatedOn(?string $created_on): object
     {
-        if ($this->_created_on !== $val) {
-            $this->_created_on = $val;
+        if ($this->_created_on !== $created_on) {
+            $this->_created_on = $created_on;
             $this->_modified_fields['created_on'] = true;
         }
 
@@ -842,12 +842,12 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $modified_on modified_on
      */
-    function setModifiedOn(?string $val): object
+    function setModifiedOn(?string $modified_on): object
     {
-        if ($this->_modified_on !== $val) {
-            $this->_modified_on = $val;
+        if ($this->_modified_on !== $modified_on) {
+            $this->_modified_on = $modified_on;
             $this->_modified_fields['modified_on'] = true;
         }
 
@@ -870,14 +870,14 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $datdeb date début
      *
      * @return object
      */
-    function setDatdeb(?string $val): object
+    function setDatdeb(?string $datdeb): object
     {
-        if ($this->_datdeb !== $val) {
-            $this->_datdeb = $val;
+        if ($this->_datdeb !== $datdeb) {
+            $this->_datdeb = $datdeb;
             $this->_modified_fields['datdeb'] = true;
         }
 
@@ -885,14 +885,14 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $datfin date fin
      *
      * @return object
      */
-    function setDatfin(?string $val): object
+    function setDatfin(?string $datfin): object
     {
-        if ($this->_datfin !== $val) {
-            $this->_datfin = $val;
+        if ($this->_datfin !== $datfin) {
+            $this->_datfin = $datfin;
             $this->_modified_fields['datfin'] = true;
         }
 
@@ -900,14 +900,14 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $comment comment
      *
      * @return object
      */
-    function setComment(string $val): object
+    function setComment(string $comment): object
     {
-        if ($this->_comment !== $val) {
-            $this->_comment = $val;
+        if ($this->_comment !== $comment) {
+            $this->_comment = $comment;
             $this->_modified_fields['comment'] = true;
         }
 
@@ -930,25 +930,6 @@ class Groupe extends ObjectModel
     }
 
     /* fin setters */
-
-    /**
-     * Retourne le nombre de groupes actifs
-     *
-     * @param int $etat etat 0|1|2 ?
-     *
-     * @return int
-     */
-    static function getGroupesCount(?int $etat = null): int
-    {
-        $db = DataBase::getInstance();
-
-        $sql = 'SELECT COUNT(*) FROM `' . Groupe::getDbTable() . '` ';
-        if (!is_null($etat)) {
-            $sql .= 'WHERE `etat` = ' . (int) $etat;
-        }
-
-        return (int) $db->queryWithFetchFirstField($sql);
-    }
 
     /**
      * Retourne le nombre de mes groupes

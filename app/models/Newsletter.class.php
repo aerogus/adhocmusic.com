@@ -268,14 +268,14 @@ class Newsletter extends ObjectModel
     /**
      * Set le title de la lettre (= sujet du mail)
      *
-     * @param string $val val
+     * @param string $title title
      *
      * @return object
      */
-    function setTitle(string $val): object
+    function setTitle(string $title): object
     {
-        if ($this->_title !== $val) {
-            $this->_title = (string) $val;
+        if ($this->_title !== $title) {
+            $this->_title = $title;
             $this->_modified_fields['title'] = true;
         }
 

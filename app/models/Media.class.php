@@ -166,14 +166,14 @@ class Media extends ObjectModel
     /* début setters communs */
 
     /**
-     * @param int $val val
+     * @param int $id_contact id_contact
      *
      * @return object
      */
-    function setIdContact(int $val): object
+    function setIdContact(int $id_contact): object
     {
-        if ($this->_id_contact !== $val) {
-            $this->_id_contact = $val;
+        if ($this->_id_contact !== $id_contact) {
+            $this->_id_contact = $id_contact;
             $this->_modified_fields['id_contact'] = true;
         }
 
@@ -181,14 +181,14 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param int|null $val val
+     * @param int|null $id_groupe id_groupe
      *
      * @return object
      */
-    function setIdGroupe(?int $val): object
+    function setIdGroupe(?int $id_groupe): object
     {
-        if ($this->_id_groupe !== $val) {
-            $this->_id_groupe = $val;
+        if ($this->_id_groupe !== $id_groupe) {
+            $this->_id_groupe = $id_groupe;
             $this->_modified_fields['id_groupe'] = true;
         }
 
@@ -196,14 +196,14 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param int|null $val val
+     * @param int|null $id_lieu id_lieu
      *
      * @return object
      */
-    function setIdLieu(?int $val): object
+    function setIdLieu(?int $id_lieu): object
     {
-        if ($this->_id_lieu !== $val) {
-            $this->_id_lieu = $val;
+        if ($this->_id_lieu !== $id_lieu) {
+            $this->_id_lieu = $id_lieu;
             $this->_modified_fields['id_lieu'] = true;
         }
 
@@ -211,14 +211,14 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param int|null $val val
+     * @param int|null $id_event id_event
      *
      * @return object
      */
-    function setIdEvent(?int $val): object
+    function setIdEvent(?int $id_event): object
     {
-        if ($this->_id_event !== $val) {
-            $this->_id_event = $val;
+        if ($this->_id_event !== $id_event) {
+            $this->_id_event = $id_event;
             $this->_modified_fields['id_event'] = true;
         }
 
@@ -226,14 +226,14 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param int|null $val val
+     * @param int|null $id_structure id_structure
      *
      * @return object
      */
-    function setIdStructure(?int $val): object
+    function setIdStructure(?int $id_structure): object
     {
-        if ($this->_id_structure !== $val) {
-            $this->_id_structure = $val;
+        if ($this->_id_structure !== $id_structure) {
+            $this->_id_structure = $id_structure;
             $this->_modified_fields['id_structure'] = true;
         }
 
@@ -241,14 +241,14 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param string $val val
+     * @param string $name name
      *
      * @return object
      */
-    function setName(string $val): object
+    function setName(string $name): object
     {
-        if ($this->_name !== $val) {
-            $this->_name = $val;
+        if ($this->_name !== $name) {
+            $this->_name = $name;
             $this->_modified_fields['name'] = true;
         }
 
@@ -256,14 +256,14 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param string|null $val val
+     * @param string|null $created_on created_on
      *
      * @return object
      */
-    function setCreatedOn(?string $val): object
+    function setCreatedOn(?string $created_on): object
     {
-        if ($this->_created_on !== $val) {
-            $this->_created_on = $val;
+        if ($this->_created_on !== $created_on) {
+            $this->_created_on = $created_on;
             $this->_modified_fields['created_on'] = true;
         }
 
@@ -286,14 +286,14 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param string|null $val $val
+     * @param string|null $modified_on modified_on
      *
      * @return object
      */
-    function setModifiedOn(?string $val): object
+    function setModifiedOn(?string $modified_on): object
     {
-        if ($this->_modified_on !== $val) {
-            $this->_modified_on = $val;
+        if ($this->_modified_on !== $modified_on) {
+            $this->_modified_on = $modified_on;
             $this->_modified_fields['modified_on'] = true;
         }
 
@@ -316,14 +316,14 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param bool $val val
+     * @param bool $online online
      *
      * @return object
      */
-    function setOnline(bool $val): object
+    function setOnline(bool $online): object
     {
-        if ($this->_online !== $val) {
-            $this->_online = $val;
+        if ($this->_online !== $online) {
+            $this->_online = $online;
             $this->_modified_fields['online'] = true;
         }
 

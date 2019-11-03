@@ -565,14 +565,14 @@ class Lieu extends ObjectModel
     /**
      * Set le type du lieu
      *
-     * @param int $val val
+     * @param int $id_type id_type
      *
      * @return object
      */
-    function setIdType(int $val): object
+    function setIdType(int $id_type): object
     {
-        if ($this->_id_type !== $val) {
-            $this->_id_type = $val;
+        if ($this->_id_type !== $id_type) {
+            $this->_id_type = $id_type;
             $this->_modified_fields['id_type'] = true;
         }
 
@@ -582,14 +582,14 @@ class Lieu extends ObjectModel
     /**
      * Set le nom
      *
-     * @param string $val val
+     * @param string $name name
      *
      * @return object
      */
-    function setName(string $val): object
+    function setName(string $name): object
     {
-        if ($this->_name !== $val) {
-            $this->_name = $val;
+        if ($this->_name !== $name) {
+            $this->_name = $name;
             $this->_modified_fields['name'] = true;
         }
 
@@ -599,14 +599,14 @@ class Lieu extends ObjectModel
     /**
      * Set l'adresse
      *
-     * @param string $val val
+     * @param string $address adresse
      *
      * @return object
      */
-    function setAddress(string $val): object
+    function setAddress(string $address): object
     {
-        if ($this->_address !== $val) {
-            $this->_address = $val;
+        if ($this->_address !== $address) {
+            $this->_address = $address;
             $this->_modified_fields['address'] = true;
         }
 
@@ -616,14 +616,14 @@ class Lieu extends ObjectModel
     /**
      * Set le code postal
      *
-     * @param string $val val
+     * @param string $cp code postal
      *
      * @return object
      */
-    function setCp(string $val): object
+    function setCp(string $cp): object
     {
-        if ($this->_cp !== $val) {
-            $this->_cp = $val;
+        if ($this->_cp !== $cp) {
+            $this->_cp = $cp;
             $this->_modified_fields['cp'] = true;
         }
 
@@ -633,14 +633,14 @@ class Lieu extends ObjectModel
     /**
      * Set la ville
      *
-     * @param string $val val
+     * @param string $city city
      *
      * @return object
      */
-    function setCity(string $val): object
+    function setCity(string $city): object
     {
-        if ($this->_city !== $val) {
-            $this->_city = $val;
+        if ($this->_city !== $city) {
+            $this->_city = $city;
             $this->_modified_fields['city'] = true;
         }
 
@@ -650,14 +650,14 @@ class Lieu extends ObjectModel
     /**
      * Set le téléphone
      *
-     * @param string $val val
+     * @param string $tel téléphone
      *
      * @return object
      */
-    function setTel(string $val): object
+    function setTel(string $tel): object
     {
-        if ($this->_tel !== $val) {
-            $this->_tel = $val;
+        if ($this->_tel !== $tel) {
+            $this->_tel = $tel;
             $this->_modified_fields['tel'] = true;
         }
 
@@ -667,14 +667,14 @@ class Lieu extends ObjectModel
     /**
      * Set l'id de la ville
      *
-     * @param int $val val
+     * @param int $id_city id_city
      *
      * @return object
      */
-    function setIdCity(int $val): object
+    function setIdCity(int $id_city): object
     {
-        if ($this->_id_city !== $val) {
-            $this->_id_city = $val;
+        if ($this->_id_city !== $id_city) {
+            $this->_id_city = $id_city;
             $this->_modified_fields['id_city'] = true;
         }
 
@@ -684,20 +684,20 @@ class Lieu extends ObjectModel
     /**
      * Set le département
      *
-     * @param string $val val
+     * @param string $id_departement id_departement
      *
      * @return object
      */
-    function setIdDepartement(string $val): object
+    function setIdDepartement(string $id_departement): object
     {
-        if (is_numeric($val)) {
-            $val = str_pad($val, 2, '0', STR_PAD_LEFT);
+        if (is_numeric($id_departement)) {
+            $id_departement = str_pad($id_departement, 2, '0', STR_PAD_LEFT);
         } else {
-            $val = 'ext';
+            $id_departement = 'ext';
         }
 
-        if ($this->_id_departement !== $val) {
-            $this->_id_departement = $val;
+        if ($this->_id_departement !== $id_departement) {
+            $this->_id_departement = $id_departement;
             $this->_modified_fields['id_departement'] = true;
         }
 
@@ -707,14 +707,14 @@ class Lieu extends ObjectModel
     /**
      * Set la région
      *
-     * @param string $val val
+     * @param string $id_region id_region
      *
      * @return object
      */
-    function setIdRegion(string $val): object
+    function setIdRegion(string $id_region): object
     {
-        if ($this->_id_region !== $val) {
-            $this->_id_region = $val;
+        if ($this->_id_region !== $id_region) {
+            $this->_id_region = $id_region;
             $this->_modified_fields['id_region'] = true;
         }
 
@@ -724,14 +724,14 @@ class Lieu extends ObjectModel
     /**
      * Set le code pays
      *
-     * @param string $val val
+     * @param string $id_country id_country
      *
      * @return object
      */
-    function setIdCountry(string $val): object
+    function setIdCountry(string $id_country): object
     {
-        if ($this->_id_country !== $val) {
-            $this->_id_country = $val;
+        if ($this->_id_country !== $id_country) {
+            $this->_id_country = $id_country;
             $this->_modified_fields['id_country'] = true;
         }
 
@@ -741,14 +741,14 @@ class Lieu extends ObjectModel
     /**
      * Set le texte de présentation
      *
-     * @param string $val val
+     * @param string $text texte
      *
      * @return object
      */
-    function setText(string $val): object
+    function setText(string $text): object
     {
-        if ($this->_text !== $val) {
-            $this->_text = $val;
+        if ($this->_text !== $text) {
+            $this->_text = $text;
             $this->_modified_fields['text'] = true;
         }
 
@@ -758,17 +758,17 @@ class Lieu extends ObjectModel
     /**
      * Set le site
      *
-     * @param string $val val
+     * @param string $site site
      *
      * @return object
      */
-    function setSite(string $val): object
+    function setSite(string $site): object
     {
-        if (strpos($val, 'http://') !== 0) {
-            $val = 'http://' . $val;
+        if (strpos($site, 'http://') !== 0) {
+            $site = 'http://' . $site;
         }
-        if ($this->_site !== $val) {
-            $this->_site = $val;
+        if ($this->_site !== $site) {
+            $this->_site = $site;
             $this->_modified_fields['site'] = true;
         }
 
@@ -778,14 +778,14 @@ class Lieu extends ObjectModel
     /**
      * Set l'email
      *
-     * @param string $val val
+     * @param string $email email
      *
      * @return object
      */
-    function setEmail(string $val): object
+    function setEmail(string $email): object
     {
-        if ($this->_email !== $val) {
-            $this->_email = $val;
+        if ($this->_email !== $email) {
+            $this->_email = $email;
             $this->_modified_fields['email'] = true;
         }
 
@@ -795,14 +795,14 @@ class Lieu extends ObjectModel
     /**
      * Set le contact créateur
      *
-     * @param int $val val
+     * @param int $id_contact id_contact
      *
      * @return object
      */
-    function setIdContact(int $val): object
+    function setIdContact(int $id_contact): object
     {
-        if ($this->_id_contact !== $val) {
-            $this->_id_contact = $val;
+        if ($this->_id_contact !== $id_contact) {
+            $this->_id_contact = $id_contact;
             $this->_modified_fields['id_contact'] = true;
         }
 
@@ -812,14 +812,14 @@ class Lieu extends ObjectModel
     /**
      * Set la latitude
      *
-     * @param float $val val
+     * @param float $lat latitude
      * 
      * @return object
      */
-    function setLat(float $val): object
+    function setLat(float $lat): object
     {
-        if ($this->_lat !== $val) {
-            $this->_lat = $val;
+        if ($this->_lat !== $lat) {
+            $this->_lat = $lat;
             $this->_modified_fields['lat'] = true;
         }
 
@@ -829,14 +829,14 @@ class Lieu extends ObjectModel
     /**
      * Set la longitude
      *
-     * @param float $val val
+     * @param float $lng longitude
      *
      * @return object
      */
-    function setLng(float $val): object
+    function setLng(float $lng): object
     {
-        if ($this->_lng !== $val) {
-            $this->_lng = $val;
+        if ($this->_lng !== $lng) {
+            $this->_lng = $lng;
             $this->_modified_fields['lng'] = true;
         }
 
@@ -846,14 +846,14 @@ class Lieu extends ObjectModel
     /**
      * Set la date de création
      *
-     * @param string $val val
+     * @param string $created_on created_on
      *
      * @return object
      */
-    function setCreatedOn(string $val): object
+    function setCreatedOn(string $created_on): object
     {
-        if ($this->_created_on !== $val) {
-            $this->_created_on = $val;
+        if ($this->_created_on !== $created_on) {
+            $this->_created_on = $created_on;
             $this->_modified_fields['created_on'] = true;
         }
 
@@ -880,14 +880,14 @@ class Lieu extends ObjectModel
     /**
      * Set la date de modification
      *
-     * @param string $val val
+     * @param string $modified_on modified_on
      *
      * @return object
      */
-    function setModifiedOn(string $val): object
+    function setModifiedOn(string $modified_on): object
     {
-        if ($this->_modified_on !== $val) {
-            $this->_modified_on = $val;
+        if ($this->_modified_on !== $modified_on) {
+            $this->_modified_on = $modified_on;
             $this->_modified_fields['modified_on'] = true;
         }
 
@@ -914,14 +914,14 @@ class Lieu extends ObjectModel
     /**
      * Set le switch affiche
      *
-     * @param bool $val val
+     * @param bool $online online
      *
      * @return object
      */
-    function setOnline(bool $val): object
+    function setOnline(bool $online): object
     {
-        if ($this->_online !== $val) {
-            $this->_online = $val;
+        if ($this->_online !== $online) {
+            $this->_online = $online;
             $this->_modified_fields['online'] = true;
         }
 
@@ -929,20 +929,6 @@ class Lieu extends ObjectModel
     }
 
     /* fin setters */
-
-    /**
-     * Retourne le nombre de lieux référencés
-     *
-     * @return int
-     */
-    static function getLieuxCount(): int
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT COUNT(*) FROM `" . Lieu::getDbTable() . "`";
-
-        return $db->queryWithFetchFirstField($sql);
-    }
 
     /**
      * Suppression d'un lieu
