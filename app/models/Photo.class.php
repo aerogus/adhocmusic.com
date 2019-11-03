@@ -169,40 +169,6 @@ class Photo extends Media
     }
 
     /**
-     * Retourne le nombre total de photos du visiteur loggué
-     *
-     * @return int
-     */
-    static function getMyPhotosCount(): int
-    {
-        if (empty($_SESSION['membre'])) {
-            throw new Exception('non identifié');
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . Photo::getDbTable() . "` "
-             . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
-
-        return (int) $db->queryWithFetchFirstField($sql);
-    }
-
-    /**
-     * Retourne le nombre total de photos
-     *
-     * @return int
-     */
-    static function getPhotosCount(): int
-    {
-        $db = DataBase::getInstance();
-
-        $sql = 'SELECT COUNT(*) FROM `' . Photo::getDbTable() . '`';
-
-        return (int) $db->queryWithFetchFirstField($sql);
-    }
-
-    /**
      * Recherche des photos en fonction de critères donnés
      *
      * @param array $params ['groupe']    => "5"

@@ -346,9 +346,9 @@ final class Controller
         $smarty->assign('alerting_lieux', Alerting::getLieuxAlertingByIdContact($_SESSION['membre']->getId()));
 
         $smarty->assign('groupes', Groupe::getMyGroupes());
-        $smarty->assign('nb_photos', Photo::getMyPhotosCount());
-        $smarty->assign('nb_videos', Video::getMyVideosCount());
-        $smarty->assign('nb_audios', Audio::getMyAudiosCount());
+        $smarty->assign('nb_photos', Photo::countMy());
+        $smarty->assign('nb_videos', Video::countMy());
+        $smarty->assign('nb_audios', Audio::countMy());
 
         return $smarty->fetch('membres/tableau-de-bord.tpl');
     }

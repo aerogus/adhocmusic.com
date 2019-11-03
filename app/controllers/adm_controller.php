@@ -64,7 +64,7 @@ final class Controller
             ]
         );
 
-        $nb_groupes = Groupe::getGroupesCount(null, true);
+        $nb_groupes = Groupe::count();
 
         $smarty->assign('sensinv', $sensinv);
         $smarty->assign('groupes', $groupes);
@@ -145,7 +145,7 @@ final class Controller
             ]
         );
 
-        $nb_membres = Membre::getMembresCount(); // hors critères !
+        $nb_membres = Membre::count();
 
         $smarty = new AdHocSmarty();
 

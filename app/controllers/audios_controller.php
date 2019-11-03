@@ -39,7 +39,7 @@ final class Controller
                     'sens'    => 'ASC',
                 ]
             );
-            $nb_audios = Audio::getAudiosCount();
+            $nb_audios = Audio::count();
         } else {
             $audios = Audio::getAudios(
                 [
@@ -50,7 +50,7 @@ final class Controller
                     'sens'    => 'ASC',
                 ]
             );
-            $nb_audios = Audio::getMyAudiosCount();
+            $nb_audios = Audio::countMy();
         }
         $smarty->assign('audios', $audios);
 

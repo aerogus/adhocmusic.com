@@ -32,7 +32,7 @@ final class Controller
                     'sens'  => 'ASC',
                 ]
             );
-            $nb_videos = Video::getVideosCount();
+            $nb_videos = Video::count();
         } else {
             $videos = Video::getVideos(
                 [
@@ -43,7 +43,7 @@ final class Controller
                     'sens'    => 'ASC',
                 ]
             );
-            $nb_videos = Video::getMyVideosCount();
+            $nb_videos = Video::countMy();
         }
 
         $smarty = new AdHocSmarty();

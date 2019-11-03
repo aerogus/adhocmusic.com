@@ -1341,26 +1341,6 @@ class Event extends ObjectModel
     }
 
     /**
-     * Compte le nombre d'événements saisis par le user loggué
-     *
-     * @return int
-     */
-    static function getMyEventsCount(): int
-    {
-        if (empty($_SESSION['membre'])) {
-            throw new Exception('non identifié');
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . Event::getDbTable() . "` "
-             . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
-
-        return (int) $db->queryWithFetchFirstField($sql);
-    }
-
-    /**
      * Retourne les concerts ad'hoc par saison (juillet Y -> aout Y+1)
      *
      * @return array

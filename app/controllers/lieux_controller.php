@@ -54,7 +54,7 @@ final class Controller
 
         $smarty->assign('lieux', Lieu::getLieux());
 
-        $smarty->assign('nb_items', Lieu::getLieuxCount());
+        $smarty->assign('nb_items', Lieu::count());
         $smarty->assign('nb_items_per_page', 200);
         $smarty->assign('page', $page);
 

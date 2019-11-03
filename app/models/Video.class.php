@@ -890,25 +890,4 @@ class Video extends Media
 
         return Image::getHttpCachePath($uid);
     }
-
-    /**
-     * Retourne le nombre total de vidéos du visiteur loggué
-     *
-     * @return int
-     * @throws Exception
-     */
-    static function getMyVideosCount(): int
-    {
-        if (empty($_SESSION['membre'])) {
-            throw new Exception('non identifié');
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . Video::getDbTable() . "` "
-             . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
-
-        return (int) $db->queryWithFetchFirstField($sql);
-    }
 }

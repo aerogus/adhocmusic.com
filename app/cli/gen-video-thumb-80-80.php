@@ -8,7 +8,7 @@ require_once __DIR__ . '/../bootstrap.php';
  * en 80x80 zoomé
  */
 
-echo "nb vidéos : " . Video::getVideosCount() . "\n";
+echo "nb vidéos : " . Video::count() . "\n";
 
 $videos = Video::getVideos(
     [

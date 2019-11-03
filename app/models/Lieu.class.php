@@ -1148,24 +1148,6 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * @return int
-     */
-    static function getMyLieuxCount(): int
-    {
-        if (empty($_SESSION['membre'])) {
-            throw new Exception('non identifié');
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . Lieu::getDbTable() . "` "
-             . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
-
-        return (int) $db->queryWithFetchFirstField($sql);
-    }
-
-    /**
      * Retourne les types de lieux
      *
      * @return array

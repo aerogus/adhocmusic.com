@@ -26,7 +26,7 @@ jQuery(document).ready(function ($) {
     $.each(data, function (country_id, country_name) {
       $('<option/>', {
         value: country_id,
-        text: country_name.fr
+        text: country_name
       }).appendTo('#id_country');
     });
     if (lieu.id_country) {

@@ -12,7 +12,11 @@ final class Controller
      */
     static function countries(): array
     {
-        return WorldCountry::getHashTable();
+        $arr = [];
+        foreach (WorldCountry::findAll() as $wc) {
+            $arr[$wc->getIdCountry()] = $wc->getName();
+        }
+        return $arr;
     }
 
     /**

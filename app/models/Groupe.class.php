@@ -936,7 +936,7 @@ class Groupe extends ObjectModel
      *
      * @return int
      */
-    static function getMyGroupesCount(): int
+    static function countMy(): int
     {
         if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');

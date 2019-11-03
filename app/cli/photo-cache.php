@@ -7,7 +7,7 @@ require_once __DIR__ . '/../bootstrap.php';
  * Vide et regénère le cache de l'ensemble des photos
  */
 
-echo "nb photos trouvées : " . Photo::getPhotosCount() . "\n";
+echo "nb photos trouvées : " . Photo::count() . "\n";
 
 define('CACHE_ERASE',  false);
 define('CACHE_CREATE', true);

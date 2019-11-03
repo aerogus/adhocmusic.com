@@ -298,25 +298,4 @@ class Audio extends Media
         }
         return true;
     }
-
-    /**
-     * Retourne le nombre total d'audios d'un visiteur loggué
-     *
-     * @return int
-     * @throws Exception
-     */
-    static function getMyAudiosCount(): int
-    {
-        if (empty($_SESSION['membre'])) {
-            throw new Exception('non identifié');
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . Audio::getDbTable() . "` "
-             . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
-
-        return (int) $db->queryWithFetchFirstField($sql);
-    }
 }

@@ -39,7 +39,7 @@ final class Controller
                 'sens'    => 'ASC',
             ]
         );
-        $nb_photos = Photo::getMyPhotosCount();
+        $nb_photos = Photo::countMy();
 
         $smarty->assign('photos', $photos);
 
