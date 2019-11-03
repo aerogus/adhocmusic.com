@@ -97,6 +97,31 @@ class WorldRegion extends Reference
     /* fin setters */
 
     /**
+     * Retourne une collection d'instances
+     *
+     * @param string $id_country id_country
+     *
+     * @return array
+     * @throws Exception
+     */
+    static function findByCountry(string $id_country): array
+    {
+        $db = DataBase::getInstance();
+        $objs = [];
+
+        $sql = "SELECT `" . implode('`,`', static::getDbPk()) . "` "
+             . "FROM `" . static::getDbTable() . "` "
+             . "WHERE `id_country` = '" . $id_country . "'";
+
+        $rows = $db->queryWithFetch($sql);
+        foreach ($rows as $row) {
+            $objs[] = static::getInstance($row);
+        }
+
+        return $objs;
+    }
+
+    /**
      * Charge toutes les infos d'une entité
      *
      * @return bool

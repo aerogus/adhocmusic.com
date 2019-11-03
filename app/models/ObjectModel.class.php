@@ -147,7 +147,8 @@ abstract class ObjectModel
             return new static($id);
         } elseif (is_array(static::$_pk)) {
             foreach (static::$_pk as $pk) {
-                if (static::$_instance->$pk !== $id[$pk]) {
+                $propName = '_' . $pk;
+                if (static::$_instance->$propName !== $id[$pk]) {
                     // on a deja une instance, mais ce n'est pas le bon id
                     static::deleteInstance();
                     new static($id);
@@ -370,13 +371,25 @@ abstract class ObjectModel
     static function findAll(): array
     {
         $db = DataBase::getInstance();
-        $sql = 'SELECT `' . static::getDbPk() . '` FROM `' . static::getDbTable() . '`';
-
         $objs = [];
-        if ($ids = $db->queryWithFetchFirstFields($sql)) {
-            foreach ($ids as $id) {
-                $objs[] = static::getInstance($id);
+
+        if (is_array(static::getDbPk())) {
+
+            $sql = 'SELECT `' . implode('`,`', static::getDbPk()) . '` FROM `' . static::getDbTable() . '`';
+            $rows = $db->queryWithFetch($sql);
+            foreach ($rows as $row) {
+                $objs[] = static::getInstance($row);
             }
+
+        } else {
+
+            $sql = 'SELECT `' . static::getDbPk() . '` FROM `' . static::getDbTable() . '`';
+            if ($ids = $db->queryWithFetchFirstFields($sql)) {
+                foreach ($ids as $id) {
+                    $objs[] = static::getInstance($id);
+                }
+            }
+
         }
 
         return $objs;

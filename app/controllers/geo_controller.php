@@ -6,7 +6,7 @@
 final class Controller
 {
     /**
-     * Retourne la liste des pays du monde
+     * Retourne la liste des pays du monde [id_country => name, ...]
      *
      * @return array
      */
@@ -29,18 +29,19 @@ final class Controller
      */
     static function regions(): array
     {
-        if (empty($_GET['c'])) {
-            return [];
+        $id_country = (string) Route::params('id_country');
+        $id_country = strtoupper(substr(trim($id_country), 0, 2));
+
+        // todo filtre par pays
+        $regions = WorldRegion::findByCountry($id_country);
+
+        $arr = [];
+        foreach ($regions as $region) {
+            if ($region->getIdCountry() === $id_country) {
+                $arr[$region->getIdRegion()] = $region->getName();
+            }
         }
-        $c = strtoupper(substr(trim((string) $_GET['c']), 0, 2));
-
-        $regions = WorldRegion::getHashTable();
-
-        if (array_key_exists($c, $regions)) {
-            return $regions[$c];
-        }
-
-        return [];
+        return $arr;
     }
 
     /**
@@ -61,7 +62,7 @@ final class Controller
             $db = DataBase::getInstance();
             $sql = "SELECT `id_departement`, `name` "
                  . "FROM `geo_fr_departement` "
-                 . "WHERE `id_world_region` = '" . $db->escape($r) . "' "
+                 . "WHERE `id_region` = '" . $db->escape($r) . "' "
                  . "ORDER BY `name` ASC";
             $res = $db->queryWithFetch($sql);
             foreach ($res as $_res) {

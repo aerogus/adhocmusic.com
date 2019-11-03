@@ -314,9 +314,9 @@ class DataBase
     }
 
     /**
-     *
+     * @param string $sql
      */
-    function queryWithFetch($sql, $conn_name = 0)
+    function queryWithFetch(string $sql, $conn_name = 0)
     {
         $rc = $this->query($sql, $conn_name);
         if (true === $rc) {

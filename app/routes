@@ -111,7 +111,7 @@ events|get_events_by_lieu|GET|/events/get-events-by-lieu
 events|ical|GET|/events/ical/:id
 events|show|GET|/events/:id
 geo|countries|GET|/geo/countries
-geo|regions|GET|/geo/regions
+geo|regions|GET|/geo/regions/:id_country
 geo|departements|GET|/geo/departements
 geo|cities|GET|/geo/cities
 geo|lieux|GET|/geo/lieux
