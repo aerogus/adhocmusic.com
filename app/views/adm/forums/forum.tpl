@@ -26,7 +26,7 @@
   </thead>
   <tbody>
   {foreach from=$threads key=cpt item=thread}
-    <tr class="{if $cpt is odd}odd{else}even{/if}">
+    <tr>
       <td><img src="{$thread.created_by_avatar}" style="padding-right: 5px" class="thread-avatar" alt="" /><a class="toggle" id="toggle_{$thread.id_thread}" href="{$thread.url}"><strong>{$thread.subject|escape}</strong></a> <em>({$thread.nb_replies|escape})</em><br />Par <a href="{$thread.created_by_url}">{$thread.created_by|pseudo_by_id}</a> le {$thread.created_on|date_format:'%d/%m/%Y à %H:%M'}
       <p style="display: none" class="msg" id="msg_{$thread.id_thread}">{$thread.text|@strip_tags|@nl2br}</p></td>
       <td>Par <a href="/membres/{$thread.modified_by}">{$thread.modified_by|pseudo_by_id}</a><br />le {$thread.modified_on|date_format:'%d/%m/%Y à %H:%M'}</td>

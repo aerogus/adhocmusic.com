@@ -18,7 +18,7 @@
     <th>En Ligne</th>
   </tr>
   {foreach from=$cmss key=cpt item=cms}
-  <tr class="{if $cpt is odd}odd{else}even{/if}">
+  <tr>
     <td>{$cms.id|escape}</td>
     <td><a href="/adm/cms/edit/{$cms.id|escape}">{$cms.alias|escape}</a></td>
     <td>{$cms.title|escape}</td>

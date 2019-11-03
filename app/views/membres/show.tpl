@@ -12,8 +12,8 @@
   </header>
   <div>
 
-{if $membre->getAvatar()}
-<img src="{$membre->getAvatar()}" alt="{$membre->getPseudo()|escape}" style="float: right;">
+{if $membre->getAvatarUrl()}
+<img src="{$membre->getAvatarUrl()}" alt="{$membre->getPseudo()|escape}" style="float: right;">
 {/if}
 
 <table>

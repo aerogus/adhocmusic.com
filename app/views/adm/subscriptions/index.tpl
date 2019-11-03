@@ -19,7 +19,7 @@
   </thead>
   <tbody>
     {foreach from=$subscriptions item=subscription}
-    <tr class="{if $cpt is odd}odd{else}even{/if}">
+    <tr>
       <td>{$subscription->getSubscribedAt()}</td>
       <td>{$subscription->getCreatedAt()}</td>
       <td>{$subscription->getFirstName()}</td>

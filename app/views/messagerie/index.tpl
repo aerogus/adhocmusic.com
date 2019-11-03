@@ -20,7 +20,7 @@
             <th>&nbsp;</th>
           </tr>
           {foreach from=$inbox key=cpt item=msg}
-          <tr class="{if $cpt is odd}odd{else}even{/if}">
+          <tr>
             <td><img src="/img/icones/{if !empty($msg.read_to)}email_open.png{else}email.png{/if}" alt=""></td>
             <td><a href="/messagerie/write?pseudo={$msg.pseudo|escape}">{$msg.pseudo|escape}</a></td>
             <td>{$msg.date|date_format:'%d/%m/%Y à %H:%M'}</td>
@@ -46,7 +46,7 @@
             <th>&nbsp;</th>
           </tr>
           {foreach from=$outbox key=cpt item=msg}
-          <tr class="{if $cpt is odd}odd{else}even{/if}">
+          <tr>
             <td><img src="/img/icones/{if !empty($msg.read)}email_open.png{else}email.png{/if}" alt=""></td>
             <td><a href="/messagerie/write?pseudo={$msg.pseudo|escape}">{$msg.pseudo|escape}</a></td>
             <td>{$msg.date|date_format:'%d/%m/%Y à %H:%M'}</td>

@@ -16,7 +16,7 @@
     <th>En ligne</th>
   </tr>
   {foreach from=$faq key=cpt item=f}
-  <tr class="{if $cpt is odd}odd{else}even{/if}">
+  <tr>
     <td>{$f.id_faq}</td>
     <td>{$f.category}</td>
     <td><a href="/adm/faq/edit/{$f.id_faq|escape}">{$f.question|escape}</a></td>

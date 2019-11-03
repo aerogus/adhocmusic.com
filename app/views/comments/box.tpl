@@ -31,7 +31,7 @@
     {if !empty($is_auth)}
     <li style="min-height: 50px;">
       <label for="form-comment-box-pseudo">Pseudo</label>
-      <img src="{$me->getAvatar()|escape}" alt="" style="padding-right: 5px; float: left; width: 50px; height: 50px;"> <strong>{$me->getPseudo()|escape}</strong><br>({$me->getFirstName()} {$me->getLastName()})
+      <img src="{$me->getAvatarUrl()|escape}" alt="" style="padding-right: 5px; float: left; width: 50px; height: 50px;"> <strong>{$me->getPseudo()|escape}</strong><br>({$me->getFirstName()} {$me->getLastName()})
     </li>
     {else}
     <li>

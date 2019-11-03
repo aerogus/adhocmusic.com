@@ -577,7 +577,7 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    static function getAvatarById(int $id_groupe): string
+    static function getAvatarUrlById(int $id_groupe): string
     {
         $avatar = HOME_URL . '/img/note_adhoc_64.png';
         if (file_exists(self::getBasePath() . '/m' . (string) $id_groupe . '.jpg')) {

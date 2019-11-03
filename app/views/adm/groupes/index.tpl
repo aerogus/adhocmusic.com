@@ -20,7 +20,7 @@
   </thead>
   <tbody>
   {foreach from=$groupes key=cpt item=groupe}
-    <tr class="{if $cpt is odd}odd{else}even{/if}">
+    <tr>
       <td>{$groupe.id|escape}</td>
       <td><a href="/adm/groupes/{$groupe.id}">{$groupe.name|truncate:'30'|escape}</a></td>
       <td>{$groupe.style|truncate:'30'|escape}</td>

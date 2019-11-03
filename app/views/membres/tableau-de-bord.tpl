@@ -40,7 +40,7 @@
         </li>
         <li>
           <span style="float: right">
-          <img src="{$me->getAvatar()}" alt=""><br>
+          <img src="{$me->getAvatarUrl()}" alt=""><br>
           </span>
           <label for="avatar">Avatar</label>
         </li>

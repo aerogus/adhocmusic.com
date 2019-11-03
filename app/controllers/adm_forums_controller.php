@@ -129,7 +129,7 @@ final class Controller
                         'title' => 'Nouveau message',
                         'pseudo_to' => $sub['pseudo'],
                         'pseudo_from' => $_SESSION['membre']->getPseudo(),
-                        'avatar' => $_SESSION['membre']->getAvatarInterne(),
+                        'avatar' => $_SESSION['membre']->getAvatarInterneUrl(),
                         'forum_name' => $forum['title'],
                         'id_thread' => $msg['id_thread'],
                         'subject' => $subject,

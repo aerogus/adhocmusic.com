@@ -55,13 +55,13 @@
       {if $me->isInterne()}
       <li>
         <label for="photo">Photo "corporate" (.jpg 100x100)</label>
-        <img src="{$me->getAvatarInterne()}" alt=""><br>
+        <img src="{$me->getAvatarInterneUrl()}" alt=""><br>
         <input type="file" name="photo">
       </li>
       {/if}
       <li>
         <label for="avatar">Avatar public (.jpg 100x---)</label>
-        <img src="{$me->getAvatar()}" alt=""><br>
+        <img src="{$me->getAvatarUrl()}" alt=""><br>
         <input type="file" name="avatar">
       </li>
       <li>

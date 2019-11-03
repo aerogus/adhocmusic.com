@@ -509,9 +509,11 @@ class Membre extends Contact
     }
 
     /**
+     * Retourne l'url de la photo du membre
+     *
      * @return string|null
      */
-    function getAvatar(): ?string
+    function getAvatarUrl(): ?string
     {
         if (file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
@@ -520,10 +522,12 @@ class Membre extends Contact
     }
 
     /**
+     * Retourne l'url de la photo du membre AD'HOC
+     *
      * @return string|null
      * @todo uniquement dans MembreAdhoc ?
      */
-    function getAvatarInterne(): ?string
+    function getAvatarInterneUrl(): ?string
     {
         if (file_exists(self::getBasePath() . '/ca/' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/ca/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();

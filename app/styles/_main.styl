@@ -40,69 +40,6 @@ body
     color #fff
     text-decoration none
 
-/* squelette general */
-
-#right
-  float right
-  width 300px
-
-#center
-  position relative
-  float left
-  width 530px
-
-#left-center
-  position relative
-  float left
-  width 680px
-
-#center-right
-  position relative
-  float right
-  width 680px
-
-/**************
- * tableau
- **************/
-
-tr
-  vertical-align top
-
-  .odd
-    background-color #ddd
-
-  .even
-    background-color #eee
-
-/**************
- * cadre autour des mini images
- **************/
-
-div.pic
-  float left
-  height 125px
-  width 125px
-  padding 0
-  margin 5px 12px 20px 12px
-  background #222
-  border 1px solid
-  border-color #444 #999 #999 #444
-  border-radius 10px
-
-  img
-    border 1px solid
-    border-color #444 #aaa #aaa #444
-
-div.ls img
-  height 75px
-  width 100px
-  margin 25px 2px 2px 12px
-
-div.pt img
-  height 100px
-  width 75px
-  margin 12px 0 0 25px
-
 /**************
  * icones outils
  **************/
@@ -180,7 +117,8 @@ input, textarea
   &.error
     border-color #d8000c
 
-input[type=submit], input[type=button]
+input[type=submit],
+input[type=button]
   background #040404
   color #fff
   border 0
@@ -210,35 +148,6 @@ fieldset ol li
   background-color #000
   color #fff
   font-family Courier
-
-/**************
- * divers
- **************/
-
-.rubrique
-  color  #ff9
-  background none repeat
-  font-weight bold
-
-.texterub
-  color #fff
-  background none repeat
-
-.blocinfo
-  position relative
-  margin 10px
-  padding 5px
-  clear both
-
-.blocinfo h3
-  margin 5px auto 15px
-  text-align center
-  background-color #bb0000
-  color #ffffff
-  text-shadow #000000 1px 1px
-
-.blocinfo td
-  text-align left
 
 /**************
  * page groupes
@@ -299,15 +208,6 @@ ul.partenaire li
   margin 10px
   padding 5px
 
-.admvideos
-  float left
-  width 282px
-  height 235px
-  overflow auto
-  margin 5px
-  background #666
-  padding 5px
-
 /**************
  * adm featured
  **************/
@@ -320,21 +220,6 @@ ul.partenaire li
 
 .archive
   background-color #666666
-
-.fb-profil
-  float left
-  border 1px solid #999
-  padding 5px
-  width 150px
-  height 70px
-  margin 5px
-  background-color #922
-
-.fb-profil-with-account
-  background-color #292
-
-.fb-profil img
-  float right
 
 /* thumbnails photo et video */
 
@@ -418,7 +303,9 @@ ul.partenaire li
  * Alerting
  */
 
-div.alerting-sub a, div.alerting-auth a, div.alerting-unsub a
+div.alerting-sub a,
+div.alerting-auth a,
+div.alerting-unsub a
   background url(/img/icones/star.png) no-repeat left top
   margin 5px
   padding 3px 5px 3px 20px
@@ -426,5 +313,7 @@ div.alerting-sub a, div.alerting-auth a, div.alerting-unsub a
   border 1px solid #cad4e7
   text-decoration none
 
-div.alerting-sub a:hover, div.alerting-auth a:hover, div.alerting-unsub a:hover
+div.alerting-sub a:hover,
+div.alerting-auth a:hover,
+div.alerting-unsub a:hover
   border 1px solid #a8b2c5

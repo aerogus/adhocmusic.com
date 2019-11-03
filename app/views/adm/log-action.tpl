@@ -25,7 +25,7 @@
     <th>Host</th>
   </tr>
   {foreach from=$logs key=cpt item=log}
-  <tr class="{if $cpt is odd}odd{else}even{/if}">
+  <tr>
     <td>{$log.datetime|date_format:'%d/%m/%y %H:%M:%S'}</td>
     <td><a href="/membres/show/{$log.id_contact|escape}">{$log.pseudo|escape}</a></td>
     <td><strong>{$log.actionlib|escape}</strong>{if !empty($log.extra)} ({$log.extra|escape}){/if}</td>

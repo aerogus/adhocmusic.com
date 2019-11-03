@@ -481,9 +481,45 @@ abstract class ObjectModel
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_dbToObject($res);
+            $this->_saveInCache();
             return true;
         }
         return false;
+    }
+
+    /**
+     * Sauve l'objet dans le cache
+     *
+     * @return bool
+     */
+    protected function _saveInCache(): bool
+    {
+        // seulement si l'objet est bien chargé, getId() not null ?
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function _loadFromCache(): bool
+    {
+        // si clé trouvée dans le cache, charge l'objet
+
+        // _objectToCache()
+        // _cacheToObject(array $typedData)
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function _deleteFromCache(): bool
+    {
+        // efface la clé dans le cache
+        // nécessaire à chaque changement de l'objet réel
+
+        return true;
     }
 
     /**

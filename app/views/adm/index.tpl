@@ -17,7 +17,7 @@
       </thead>
       <tbody>
       {foreach from=$forums key=cpt item=forum}
-        <tr class="{if $cpt is odd}odd{else}even{/if}">
+        <tr>
           <td><a href="/adm/forums/forum/{$forum.id_forum|escape}"><strong>{$forum.title|escape}</strong></a><br />{$forum.description|escape}</td>
           <td>Par <a href="/membres/{$forum.id_contact}">{$forum.pseudo}</a><br />le {$forum.date|date_format:'%d/%m/%Y à %H:%M'}</td>
           <td>{$forum.nb_threads|escape}</td>

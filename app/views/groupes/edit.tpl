@@ -1,6 +1,6 @@
 {include file="common/header.tpl"}
 
-<div id="left-center">
+<div>
 
 {if !empty($unknown_groupe)}
 
@@ -91,7 +91,7 @@
 
 </div>
 
-<div id="right">
+<div>
   <a href="/photos/create?id_groupe={$groupe->getId()|escape}" class="button">Ajouter une photo</a>
   <a href="/audios/create?id_groupe={$groupe->getId()|escape}" class="button">Ajouter une musique</a>
   <a href="/videos/create?id_groupe={$groupe->getId()|escape}" class="button">Ajouter une vidéo</a>

@@ -1,6 +1,6 @@
   {foreach from=$membres key=cpt item=membre}
   <tbody>
-    <tr class="{if $cpt is odd}odd{else}even{/if}">
+    <tr>
       <td>{$membre.id|escape}</td>
       <td><a href="/adm/membres/{$membre.id}">{$membre.pseudo|escape}</a></td>
       <td>{$membre.last_name|escape}</td>
