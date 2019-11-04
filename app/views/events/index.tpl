@@ -1,20 +1,22 @@
 {include file="common/header.tpl"}
 
+{if !empty($create)}<p class="infobulle success">Evénement ajouté</p>{/if}
+{if !empty($edit)}<p class="infobulle success">Evénement modifié</p>{/if}
+{if !empty($delete)}<p class="infobulle success">Evénement supprimé</p>{/if}
+
 <div class="grid-3-small-1 has-gutter-l">
 
   <div class="box col-2-small-1">
     <header>
       <h1>Agenda</h1>
     </header>
-    <div class="reset">
 
-{if !count($events)}
-<p>Aucune date annoncée pour cette période. <a href="/events/create">Inscrire un évènement</a></p>
-{/if}
-
-{if !empty($create)}<p class="infobulle success">Evénement ajouté</p>{/if}
-{if !empty($edit)}<p class="infobulle success">Evénement modifié</p>{/if}
-{if !empty($delete)}<p class="infobulle success">Evénement supprimé</p>{/if}
+    {if !count($events)}
+    <div>
+      <p>Aucune date annoncée pour cette période. <a href="/events/create">Inscrire un évènement</a></p>
+    </div>
+    {else}
+    <div>
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
@@ -55,7 +57,8 @@
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-</div>{* .box-content *}
+  </div>
+{/if}
 </div>{* .box *}
 
 <div class="col-1">

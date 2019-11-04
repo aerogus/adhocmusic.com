@@ -47,26 +47,33 @@
   <header>
     <h2>Dernières vidéos ajoutées</h2>
   </header>
-</div>
-
-<ul id="search-box-results" class="grid-8">
-{foreach from=$last_media key=type_media item=medias}
-{if $type_media == 'video'}
-{foreach from=$medias item=media}
-<li class="search-box-result">
-  <div class="search-box-result-{$media.type}">
-    <div class="thumb-100">
-      <a href="{$media.url}">
-        <img src="{$media.thumb_80_80}" style="width: 100px; height: 100px;" alt="{$media.name|escape}">
-        <h3>{$media.name|truncate:35:"...":true:true|escape}</h3>
-      </a>
-      <a class="overlay-100 overlay-{$media.type}-100" href="{$media.url}" title="{$media.name|escape}"></a>
-    </div>
+  {if count($last_media.video)}
+  <div class="reset">
+    <ul id="search-box-results" class="grid-8">
+    {foreach from=$last_media key=type_media item=medias}
+    {if $type_media == 'video'}
+      {foreach from=$medias item=media}
+      <li class="search-box-result">
+        <div class="search-box-result-{$media.type}">
+          <div class="thumb-100">
+            <a href="{$media.url}">
+              <img src="{$media.thumb_80_80}" style="width: 100px; height: 100px;" alt="{$media.name|escape}">
+              <h3>{$media.name|truncate:35:"...":true:true|escape}</h3>
+            </a>
+            <a class="overlay-100 overlay-{$media.type}-100" href="{$media.url}" title="{$media.name|escape}"></a>
+          </div>
+        </div>
+      </li>
+      {/foreach}
+    {/if}
+    {/foreach}
+    </ul>
   </div>
-</li>
-{/foreach}
-{/if}
-{/foreach}
-</ul>
+  {else}
+  <div>
+    <p>Aucune vidéo ajoutée</p>
+  </div>
+  {/if}
+</div>
 
 {include file="common/footer.tpl"}
