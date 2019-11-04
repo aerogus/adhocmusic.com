@@ -4,7 +4,7 @@
 
   <div class="box col-2-small-1">
     <header>
-      <h3>Agenda</h3>
+      <h1>Agenda</h1>
     </header>
     <div class="reset">
 

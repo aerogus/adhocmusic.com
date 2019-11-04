@@ -6,7 +6,7 @@
 
   <div class="box">
     <header>
-      <h3>Contacter AD’HOC</h3>
+      <h1>Contacter AD’HOC</h1>
     </header>
     <div>
 
@@ -30,22 +30,22 @@
           <li>
             <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner votre nom</div>
             <label for="name">Nom</label>
-            <input name="name" id="name" type="text" maxlength="80" value="{$name|escape}" style="width: 360px; padding: 5px;">
+            <input name="name" id="name" type="text" maxlength="80" value="{$name|escape}" style="width:100%">
           </li>
           <li>
             <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Votre email semble incorrect</div>
             <label for="email">Email</label>
-            <input name="email" id="email" type="email" maxlength="80" value="{$email|escape}" style="width: 360px; padding: 5px;">
+            <input name="email" id="email" type="email" maxlength="80" value="{$email|escape}" style="width:100%">
           </li>
           <li>
             <div class="infobulle error" id="error_subject"{if empty($error_subject)} style="display: none"{/if}>Vous devez saisir un sujet</div>
             <label for="subject">Sujet</label>
-            <input name="subject" id="subject" type="text" maxlength="80" value="{$subject|escape}" style="width: 360px; padding: 5px;">
+            <input name="subject" id="subject" type="text" maxlength="80" value="{$subject|escape}" style="width:100%">
           </li>
           <li>
             <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
             <label for="text">Message</label>
-            <textarea name="text" id="text" rows="10" cols="80" style="width: 360px; padding: 5px;">{$text|escape}</textarea>
+            <textarea name="text" id="text" rows="10" cols="80" style="width:100%">{$text|escape}</textarea>
           </li>
           <li>
             <label for="mailing">Je souhaite recevoir la newsletter</label>
@@ -70,7 +70,7 @@
 
     <div class="box">
       <header>
-        <h3>Adresse Postale</h3>
+        <h2>Adresse Postale</h2>
       </header>
       <div>
         <strong>Association AD’HOC</strong><br>
@@ -81,20 +81,22 @@
 
     <div class="box">
       <header>
-        <h3>Questions fréquentes</h3>
+        <h2>Questions fréquentes</h2>
       </header>
+      {if $faq|@count > 0}
       <div class="reset">
-        {if $faq|@count > 0}
-          {foreach from=$faq item=f}
-          <div class="faq">
-            <h3 class="flex-row-reverse">{$f.question} <i class="icon-arrow--right"></i></h3>
-            <p>{$f.answer}</p>
-          </div>
-          {/foreach}
-        {else}
-          <p>Aucune question fréquente</p>
-        {/if}
+        {foreach from=$faq item=f}
+        <div class="faq">
+          <h3 class="flex-row-reverse">{$f.question} <i class="icon-arrow--right"></i></h3>
+          <p>{$f.answer}</p>
+        </div>
+        {/foreach}
       </div>
+      {else}
+      <div>
+        <p>Aucune questions fréquentes</p>
+      </div>
+      {/if}
     </div>
 
   </div>{* .col-1 *}

@@ -5,6 +5,7 @@
     <h1>Partenaires</h1>
   </header>
   <div>
+    {if $partners|@count > 0}
     <ul class="partners">
     {foreach from=$partners item=partner}
       <li>
@@ -15,6 +16,9 @@
       </li>
     {/foreach}
     </ul>
+    {else}
+    Pas de partenaires référencés
+    {/if}
   </div>
 </div>
 

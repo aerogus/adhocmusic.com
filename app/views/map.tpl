@@ -9,7 +9,7 @@
 
 <div class="box">
   <header>
-    <h3>Plan du site</h3>
+    <h1>Plan du site</h1>
   </header>
   <div>
     <div class="tree_top"><a href="/">adhocmusic.com</a></div>

@@ -2,7 +2,7 @@
 
 <div class="box">
   <header>
-    <h3>Message à {$pseudo_to}</h3>
+    <h1>Message à {$pseudo_to}</h1>
   </header>
   <div>
     {include file="messagerie/_write.tpl"}

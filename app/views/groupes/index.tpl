@@ -2,7 +2,7 @@
 
   <div class="box">
     <header>
-      <h3>Groupes</h3>
+      <h1>Groupes</h1>
     </header>
 
     {if !count($groupes)}
