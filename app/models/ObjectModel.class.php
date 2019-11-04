@@ -82,22 +82,28 @@ abstract class ObjectModel
     }
 
     /**
+     * Construction de l'objet
+     *
+     * La clé primaire $id peut être soit simple (et on donne directement sa valeur),
+     * soit mutiple et on donne un tableau ['pkName1' => pkValue1, 'pkName2' => pkValue2 ]
+     *
      * @param mixed $id id
      */
     function __construct($id = null)
     {
         if (!is_null($id)) {
-            $this->_object_id = md5(get_called_class() . '|' . print_r($id, true));
             if (is_array($id)) {
                 // clé primaire multiple
                 foreach (static::$_pk as $field) {
                     $pk = '_' . $field;
                     $this->$pk = $id[$field];
                 }
+                $this->_object_id = get_called_class() . '-' . implode('-', array_values($id)); // ex: WorldRegion-FR-96
             } else {
                 // clé primaire simple
                 $pk = '_' . static::$_pk;
                 $this->$pk = $id;
+                $this->_object_id = get_called_class() . '-' . (string) $id; // ex: Membre-1234
             }
             $this->_loadFromDb();
             static::$_instance = $this;
@@ -136,6 +142,8 @@ abstract class ObjectModel
 
     /**
      * @param mixed $id int|string|array
+     *
+     * @todo à optimiser le chargement et la gestion du cache
      *
      * @return object
      */
@@ -188,6 +196,10 @@ abstract class ObjectModel
     }
 
     /**
+     * Retourne la valeur de la clé primaire
+     * - Soit la valeur si clé primaire simple
+     * - Soit un tableau ['pkName1' => pkValue1, 'pkName2' => pkValue2] si clé primaire multiple
+     *
      * @return int ou string ou array si clé primaire multiple
      */
     function getId()
@@ -206,6 +218,9 @@ abstract class ObjectModel
     }
 
     /**
+     * Set la valeur de la clé primaire
+     * Todo gérer si pk simple ou multiple, le typage, si nom du champ est bien une pk
+     *
      * @var mixed $id id
      *
      * @return object
@@ -263,10 +278,8 @@ abstract class ObjectModel
                                 $sql .= number_format((float) $this->$att, 8, '.', '') . ',';
                                 break;
                             case 'string':
-                                $sql .= "'" . $db->escape($this->$att) . "',";
-                                break;
                             case 'date':
-                                $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                                $sql .= "'" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
                                 $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
@@ -317,10 +330,8 @@ abstract class ObjectModel
                             $fields_to_save .= " `" . $field . "` = " . number_format((float) $this->$att, 8, ".", "") . ",";
                             break;
                         case 'string':
-                            $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
-                            break;
                         case 'date':
-                            $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
+                            $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                             break;
                         case 'bool':
                             $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
@@ -549,9 +560,9 @@ abstract class ObjectModel
                         $this->$att = (bool) $v;
                         break;
                     case 'string':
+                    case 'date':
                         $this->$att = (string) $v;
                         break;
-                    case 'date':
                     default:
                         $this->$att = $v;
                 }

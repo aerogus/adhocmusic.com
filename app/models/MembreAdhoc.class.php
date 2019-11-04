@@ -445,6 +445,7 @@ class MembreAdhoc extends Membre
                                 $fields_to_save .= " `" . $field."` = " . $db->escape($this->$att) . ",";
                                 break;
                             case 'string':
+                            case 'date':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
@@ -455,9 +456,6 @@ class MembreAdhoc extends Membre
                                 break;
                             case 'phpser':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            case 'date':
-                                $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $fields['contact'][$field]);
@@ -491,6 +489,7 @@ class MembreAdhoc extends Membre
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
                             case 'string':
+                            case 'date':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
@@ -501,9 +500,6 @@ class MembreAdhoc extends Membre
                                 break;
                             case 'phpser':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            case 'date':
-                                $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $fields['membre'][$field]);
@@ -537,6 +533,7 @@ class MembreAdhoc extends Membre
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
                             case 'string':
+                            case 'date':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
@@ -547,9 +544,6 @@ class MembreAdhoc extends Membre
                                 break;
                             case 'phpser':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            case 'date':
-                                $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $fields['membre_adhoc'][$field]);

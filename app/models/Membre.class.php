@@ -1213,6 +1213,7 @@ class Membre extends Contact
                                 $sql .= number_format((float) $this->$att, 8, '.', '') . ',';
                                 break;
                             case 'string':
+                            case 'date':
                                 $sql .= "'" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
@@ -1223,9 +1224,6 @@ class Membre extends Contact
                                 break;
                             case 'phpser':
                                 $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            case 'date':
-                                $sql .= (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $type);
@@ -1272,6 +1270,7 @@ class Membre extends Contact
                                 $fields_to_save .= " `" . $field . "` = " . number_format((float) $this->$att, 8, ".", "") . ",";
                                 break;
                             case 'string':
+                            case 'date':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
@@ -1282,9 +1281,6 @@ class Membre extends Contact
                                 break;
                             case 'phpser':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            case 'date':
-                                $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $fields['contact'][$field]);
@@ -1325,6 +1321,7 @@ class Membre extends Contact
                                 $fields_to_save .= " `" . $field . "` = " . number_format((float) $this->$att, 8, ".", "") . ",";
                                 break;
                             case 'string':
+                            case 'date':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
@@ -1335,9 +1332,6 @@ class Membre extends Contact
                                 break;
                             case 'phpser':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            case 'date':
-                                $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $fields['membre'][$field]);

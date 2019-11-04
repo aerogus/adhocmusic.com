@@ -290,8 +290,6 @@ class Contact extends ObjectModel
                                 $sql .= $db->escape($this->$att) . ",";
                                 break;
                             case 'string':
-                                $sql .= "'" . $db->escape($this->$att) . "',";
-                                break;
                             case 'date':
                                 $sql .= "'" . $db->escape($this->$att) . "',";
                                 break;
@@ -341,6 +339,7 @@ class Contact extends ObjectModel
                                 $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
                             case 'string':
+                            case 'date':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
                                 break;
                             case 'bool':
@@ -351,9 +350,6 @@ class Contact extends ObjectModel
                                 break;
                             case 'phpser':
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            case 'date':
-                                $fields_to_save .= "`" . $field . "` = " . (is_null($this->$att) ? 'NULL' : "'" . $db->escape($this->$att) . "'") . ",";
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $fields['contact'][$field]);
