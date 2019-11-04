@@ -48,7 +48,7 @@ class Contact extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'id_contact' => 'int',
+        'id_contact' => 'int', // pk
         'email'      => 'string',
         'lastnl'     => 'date',
     ];
@@ -81,6 +81,14 @@ class Contact extends ObjectModel
     }
 
     /* début getters */
+
+    /**
+     * @return int|null
+     */
+    function getIdContact(): ?int
+    {
+        return $this->_id_contact;
+    }
 
     /**
      * @return string|null

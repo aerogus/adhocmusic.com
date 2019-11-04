@@ -53,7 +53,7 @@ class MembreAdhoc extends Membre
      * @var array
      */
     protected static $_all_fields = [
-        'id_contact' => 'int',
+        'id_contact' => 'int', // pk
         'function'   => 'string',
         'birth_date' => 'date',
         'active'     => 'bool',

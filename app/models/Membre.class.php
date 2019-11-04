@@ -171,7 +171,7 @@ class Membre extends Contact
      * @var array
      */
     protected static $_all_fields = [
-        'id_contact'     => 'id_contact',
+        'id_contact'     => 'int', // pk
         'pseudo'         => 'string',
         'password'       => 'password',
         'last_name'      => 'string',
@@ -463,7 +463,7 @@ class Membre extends Contact
      */
     function getUrl(): string
     {
-        return self::getUrlById($this->getId());
+        return self::getUrlById($this->getIdContact());
     }
 
     /**
@@ -1097,7 +1097,7 @@ class Membre extends Contact
         $fields = self::_getAllFields(false);
 
         // si pas d'id ou id mais n'est pas membre, on insert membre
-        if (!$this->getId() || ($this->getId() && !Membre::getPseudoById($this->getId()))) { // INSERT
+        if (!$this->getId() || ($this->getId() && !Membre::getPseudoById($this->getIdContact()))) { // INSERT
 
             /* table contact */
 
@@ -1178,7 +1178,7 @@ class Membre extends Contact
         // à ce stade le contact est créé, on ne sait pas encore si c'est un membre
         // on essaye de récupérer le pseudo à partir de l'id_contact
 
-        if (!Membre::getPseudoById($this->getId())) { // INSERT
+        if (!Membre::getPseudoById($this->getIdContact())) { // INSERT
 
             /* table membre */
 
