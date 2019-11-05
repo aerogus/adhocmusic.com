@@ -2,7 +2,7 @@
 
   <div class="box">
     <header>
-      <h3>Les Concerts</h3>
+      <h1>Les concerts</h1>
     </header>
     <div>
       {foreach from=$events key=season item=events_of_the_year}

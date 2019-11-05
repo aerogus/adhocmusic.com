@@ -2,7 +2,7 @@
 
     <div class="box">
       <header>
-        <h1>L’Équipe</h1>
+        <h1>L’équipe</h1>
       </header>
       <div>
         <p>Voici les forces actives de l’association pour la saison 2019/2020</p>

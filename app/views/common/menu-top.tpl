@@ -12,7 +12,7 @@
             <ul>
               <li><a href="/concerts">Concerts</a></li>
               <li><a href="/afterworks">Afterworks</a></li>
-              <li><a href="https://lespiedsdanslorge.org">Le Festival</a></li>
+              <li><a href="/festival">Le festival</a></li>
               <li><a href="/equipe">Équipe</a></li>
             </ul>
           </li>

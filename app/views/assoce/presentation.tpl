@@ -2,7 +2,7 @@
 
   <div class="box">
     <header>
-      <h1>Présentation de l’Association AD’HOC</h1>
+      <h1>Présentation de l’association</h1>
     </header>
     <div>
 
@@ -27,7 +27,7 @@
       <p>A noter que nous profitons également de ce canal de diffusion pour retransmettre les concerts AD’HOC en direct sur internet !</p>
       <p>Soyez donc à l’écoute.</p>
 
-      <p class="txtright">Le Bureau de l’Association</p>
+      <p class="txtright">Le bureau de l’association</p>
 
     </div>
   </div>

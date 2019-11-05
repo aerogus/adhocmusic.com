@@ -6,7 +6,7 @@
 
   <div class="box">
     <header>
-      <h1>Contacter AD’HOC</h1>
+      <h1>Contacter l'association AD’HOC</h1>
     </header>
     <div>
 
