@@ -49,7 +49,10 @@ footer
       display block
       padding 3px 0
 
-  .facebook, .twitter, .instagram, .email
+  .facebook,
+  .twitter,
+  .instagram,
+  .email
     background-repeat no-repeat
     padding-left 24px
 
@@ -64,11 +67,3 @@ footer
 
   .email
     background-image inline('../assets/img/social/email.svg')
-
-vendorize(property, value)
-  -webkit-{property} value
-  {property} value
-
-.footer img
-  vendorize(filter, grayscale(1))
-  margin-right 5px
