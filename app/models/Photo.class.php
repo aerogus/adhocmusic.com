@@ -336,7 +336,7 @@ class Photo extends Media
              . "WHERE `p`.`id_photo` = " . (int) $this->_id_photo;
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
+            $this->_arrayToObject($res);
             $this->_pseudo = $res['pseudo'];
             return true;
         }

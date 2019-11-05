@@ -109,7 +109,7 @@ class Departement extends Reference
         $sql  = "SELECT * FROM `" . static::$_table . "` WHERE `" . static::$_pk . "` = '" . $this->{'_' . static::$_pk} . "'";
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
+            $this->_arrayToObject($res);
             return true;
         }
         return false;

@@ -270,7 +270,7 @@ class MembreAdhoc extends Membre
                   AND `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = " . (int) $this->{'_' . MembreAdhoc::getDbPk()};
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
+            $this->_arrayToObject($res);
             return true;
         }
 

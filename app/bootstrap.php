@@ -68,6 +68,7 @@ define('ADHOC_ROUTES_FILE',        ADHOC_ROOT_PATH . '/app/routes');
 define('ADHOC_LOG_PATH',           ADHOC_ROOT_PATH . '/log');
 define('DEFAULT_CONTROLLERS_PATH', ADHOC_ROOT_PATH . '/app/controllers/');
 define('MEDIA_PATH',               ADHOC_ROOT_PATH . '/static/media');
+define('OBJECT_CACHE_PATH',        ADHOC_ROOT_PATH . '/object-cache');
 
 // chemin local
 define('IMG_CACHE_PATH', ADHOC_ROOT_PATH . '/static/cache');

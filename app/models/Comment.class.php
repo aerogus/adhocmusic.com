@@ -456,7 +456,7 @@ class Comment extends ObjectModel
              . "WHERE `" . self::$_pk . "` = " . (int) $this->getId();
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
+            $this->_arrayToObject($res);
             $this->_pseudo_mbr = $res['pseudo_mbr'];
             $this->_email_mbr  = $res['email_mbr'];
             return true;

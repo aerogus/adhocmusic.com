@@ -239,7 +239,7 @@ class Contact extends ObjectModel
                  WHERE `" . Contact::getDbPk() . "` = " . (int) $this->{'_' . Contact::getDbPk()};
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
+            $this->_arrayToObject($res);
             return true;
         }
         return false;

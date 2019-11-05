@@ -98,14 +98,17 @@ abstract class ObjectModel
                     $pk = '_' . $field;
                     $this->$pk = $id[$field];
                 }
-                $this->_object_id = get_called_class() . '-' . implode('-', array_values($id)); // ex: WorldRegion-FR-96
+                $this->_object_id = get_called_class() . ':' . implode(':', array_values($id)); // ex: WorldRegion:FR:96
             } else {
                 // clé primaire simple
                 $pk = '_' . static::$_pk;
                 $this->$pk = $id;
-                $this->_object_id = get_called_class() . '-' . (string) $id; // ex: Membre-1234
+                $this->_object_id = get_called_class() . ':' . (string) $id; // ex: Membre:1234
             }
-            $this->_loadFromDb();
+            if (!$this->_loadFromCache()) {
+                $this->_loadFromDb();
+                ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
+            }
             static::$_instance = $this;
         }
     }
@@ -305,6 +308,8 @@ abstract class ObjectModel
 
             $this->setId((int) $db->insertId());
 
+            ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
+
             return $this->getId();
 
         } else { // UPDATE
@@ -357,6 +362,8 @@ abstract class ObjectModel
             $this->_modified_fields = [];
 
             $db->query($sql);
+
+            ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
 
             return true;
         }
@@ -433,6 +440,8 @@ abstract class ObjectModel
     {
         $db = DataBase::getInstance();
 
+        ObjectCache::unset($this->getObjectId());
+
         $sql = sprintf('DELETE FROM `%s` WHERE `%s` = %d', $this->getDbTable(), $this->getDbPk(), $this->getId());
         $db->query($sql);
 
@@ -479,7 +488,21 @@ abstract class ObjectModel
     }
 
     /**
-     * Charge toutes les infos d'une entité
+     * Charge toutes les infos d'une entité à partir du cache
+     *
+     * @return bool
+     */
+    protected function _loadFromCache(): bool
+    {
+        if ($cachedData = unserialize(ObjectCache::get($this->getObjectId()))) {
+            $this->_arrayToObject($cachedData);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Charge toutes les infos d'une entité à partir de la base de données
      *
      * @return bool
      * @throws Exception
@@ -491,46 +514,10 @@ abstract class ObjectModel
         $sql  = "SELECT * FROM `" . static::$_table . "` WHERE `" . static::$_pk . "` = " . (int) $this->{'_' . static::$_pk};
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
-            $this->_saveInCache();
+            $this->_arrayToObject($res);
             return true;
         }
         return false;
-    }
-
-    /**
-     * Sauve l'objet dans le cache
-     *
-     * @return bool
-     */
-    protected function _saveInCache(): bool
-    {
-        // seulement si l'objet est bien chargé, getId() not null ?
-
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function _loadFromCache(): bool
-    {
-        // si clé trouvée dans le cache, charge l'objet
-
-        // _objectToCache()
-        // _cacheToObject(array $typedData)
-        return false;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function _deleteFromCache(): bool
-    {
-        // efface la clé dans le cache
-        // nécessaire à chaque changement de l'objet réel
-
-        return true;
     }
 
     /**
@@ -540,7 +527,7 @@ abstract class ObjectModel
      *
      * @return bool
      */
-    protected function _dbToObject(array $data)
+    protected function _arrayToObject(array $data)
     {
         $all_fields = static::_getAllFields(true);
         foreach ($data as $k => $v) {
@@ -570,5 +557,23 @@ abstract class ObjectModel
         }
 
         return true;
+    }
+
+    /**
+     * @return array
+     */
+    protected function _objectToArray(): array
+    {
+        $arr = [];
+        $all_fields = static::_getAllFields(true);
+
+        foreach ($all_fields as $field => $type) {
+            $att = '_' . $field;
+            if (property_exists($this, $att)) {
+                $arr[$field] = $this->$att;
+            }
+        }
+
+        return $arr;
     }
 }

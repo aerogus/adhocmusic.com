@@ -138,7 +138,7 @@ class WorldRegion extends Reference
         }
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_dbToObject($res);
+            $this->_arrayToObject($res);
             return true;
         }
         throw new Exception('WorldRegion introuvable');
