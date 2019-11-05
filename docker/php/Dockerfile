@@ -22,4 +22,5 @@ ENV LANG=fr_FR.UTF-8
 
 RUN mkdir -p /var/www/adhocmusic.test/object-cache
 RUN chown www-data:www-data /var/www/adhocmusic.test/object-cache
+RUN chmod 777 /var/www/adhocmusic.test/object-cache
 VOLUME /var/www/adhocmusic.test/object-cache

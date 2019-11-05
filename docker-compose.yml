@@ -42,7 +42,7 @@ services:
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
       - ./volumes/php/log:/var/log/php
     tmpfs:
-      - /var/www/adhocmusic.test/object-cache
+      - /var/www/adhocmusic.test/object-cache:noexec,mode=0777
 
   # le serveur de base de données, port 3306
   mariadb:

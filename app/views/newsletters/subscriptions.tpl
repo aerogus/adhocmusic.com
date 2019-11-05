@@ -1,6 +1,6 @@
 {include file="common/header.tpl"}
 
-<div class="box" style="width: 215px; margin: 0 auto 20px">
+<div class="box" style="width: 320px; margin: 0 auto 20px">
   <header>
     <h2>Newsletter</h2>
   </header>
@@ -8,8 +8,8 @@
 {if !empty($form)}
 <form id="form-newsletter" name="form-newsletter" action="/newsletters/subscriptions" method="post">
   <div>
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" value="{$email}">
+    <label for="email">E-mail</label>
+    <input type="email" id="email" name="email" placeholder="E-mail" style="width:100%" value="{$email}">
   </div>
   <div style="margin: 10px 0">
     <input type="radio" class="radio" name="action" value="sub" {if ($action == 'sub')} checked="checked"{/if}>

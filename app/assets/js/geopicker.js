@@ -42,9 +42,7 @@ jQuery(document).ready(function ($) {
   $('#id_country').change(function () {
     var id_country = $(this).find('option:selected').val();
     console.log('id_country change to ' + id_country);
-    $.getJSON('/geo/regions.json', {
-      c: id_country
-    }, function (data) {
+    $.getJSON('/geo/regions/' + id_country + '.json', function (data) {
       $('#id_region, #id_departement, #id_city, #id_lieu').empty();
       $.each(data, function (region_id, region_name) {
         $('<option/>', {
