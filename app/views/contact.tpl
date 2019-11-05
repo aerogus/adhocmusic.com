@@ -45,7 +45,7 @@
           <li>
             <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
             <label for="text">Message</label>
-            <textarea name="text" id="text" rows="10" cols="80" style="width:100%">{$text|escape}</textarea>
+            <textarea name="text" id="text" style="width:100%;height:160px">{$text|escape}</textarea>
           </li>
           <li>
             <label for="mailing">Je souhaite recevoir la newsletter</label>

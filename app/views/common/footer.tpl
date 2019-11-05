@@ -6,9 +6,9 @@
     <li>
       <ul>
         <li><h4>Qui sommes-nous ?</h4></li>
-        <li><a href="/assoce">L’Association</a></li>
-        <li><a href="/concerts">Nos Concerts</a></li>
-        <li><a href="/equipe">L’Équipe</a></li>
+        <li><a href="/assoce">L’association</a></li>
+        <li><a href="/concerts">Nos concerts</a></li>
+        <li><a href="/equipe">L’équipe</a></li>
         <li><a href="/mentions-legales">Mentions légales</a></li>
       </ul>
     </li>
