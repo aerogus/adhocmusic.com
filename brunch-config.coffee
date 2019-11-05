@@ -5,7 +5,6 @@ exports.config =
     stylesheets:
       joinTo:
         'css/adhoc.css': /^app\/styles\/adhoc.styl/
-        'css/concours-ou-est-pidou.css': /^app\/styles\/concours-ou-est-pidou.styl/
   plugins:
     postcss:
       options:
