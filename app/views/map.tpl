@@ -17,9 +17,9 @@
       <li>
         <a href="/">Accueil</a>
         <ul>
-          <li><a href="/map">Plan du Site</a></li>
+          <li><a href="/map">Plan du site</a></li>
           <li><a href="/partners">Partenaires</a></li>
-          <li><a href="/mentions-legales">Mentions Légales</a></li>
+          <li><a href="/mentions-legales">Mentions légales</a></li>
         </ul>
       </li>
       <li>
@@ -27,8 +27,7 @@
         <ul>
           <li><a href="/concerts">Concerts</a></li>
           <li><a href="/afterworks">Afterworks</a></li>
-          <li><a href="https://lespiedsdanslorge.org">Le Festival</a></li>
-          <li><a href="/formations">Formations</a></li>
+          <li><a href="/festival">Le Festival</a></li>
           <li><a href="/equipe">Équipe</a></li>
         </ul>
       </li>

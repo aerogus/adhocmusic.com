@@ -2,7 +2,7 @@
 # Environnement de développement du site adhocmusic.com
 ##
 
-version: '3'
+version: '3.7'
 
 services:
 
@@ -13,11 +13,11 @@ services:
     container_name: adhoc_nginx
     restart: always
     networks:
-     adhoc:
-       aliases:
-         - adhocmusic.test
-         - www.adhocmusic.test
-         - static.adhocmusic.test
+      adhoc:
+        aliases:
+          - adhocmusic.test
+          - www.adhocmusic.test
+          - static.adhocmusic.test
     ports:
       - 80:80
       - 443:443
@@ -38,9 +38,11 @@ services:
         aliases:
           - php.adhocmusic.test
     volumes:
-       - .:/var/www/adhocmusic.test
-       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
-       - ./volumes/php/log:/var/log/php
+      - .:/var/www/adhocmusic.test
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./volumes/php/log:/var/log/php
+    tmpfs:
+      - /var/www/adhocmusic.test/object-cache
 
   # le serveur de base de données, port 3306
   mariadb:
@@ -83,4 +85,3 @@ services:
 
 networks:
   adhoc:
-

@@ -51,7 +51,7 @@ class ObjectCache
      */
     static function set(string $key, string $value): bool
     {
-        if (file_put_contents(self::getBasePath() . '/' . $key, $value)) {
+        if (file_put_contents(self::getBasePath() . '/' . $key, $value) !== false) {
             return true;
         }
         return false;

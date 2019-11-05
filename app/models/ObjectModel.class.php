@@ -105,9 +105,15 @@ abstract class ObjectModel
                 $this->$pk = $id;
                 $this->_object_id = get_called_class() . ':' . (string) $id; // ex: Membre:1234
             }
-            if (!$this->_loadFromCache()) {
-                $this->_loadFromDb();
+
+            if ($this->_loadFromCache()) {
+                // chargement ok du cache
+            } elseif ($this->_loadFromDb()) {
+                // chargement ok de la bdd
+                // alimentation du cache
                 ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
+            } else {
+                // erreur au chargement
             }
             static::$_instance = $this;
         }
@@ -494,8 +500,8 @@ abstract class ObjectModel
      */
     protected function _loadFromCache(): bool
     {
-        if ($cachedData = unserialize(ObjectCache::get($this->getObjectId()))) {
-            $this->_arrayToObject($cachedData);
+        if (($cachedData = ObjectCache::get($this->getObjectId())) !== null) {
+            $this->_arrayToObject(unserialize($cachedData));
             return true;
         }
         return false;
@@ -511,7 +517,26 @@ abstract class ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql  = "SELECT * FROM `" . static::$_table . "` WHERE `" . static::$_pk . "` = " . (int) $this->{'_' . static::$_pk};
+        $sql = "SELECT * FROM `" . static::$_table . "` ";
+
+        if (!is_array(static::$_pk)) {
+            // clé primaire simple
+            if (static::$_all_fields[static::$_pk] === 'int') {
+                $sql .= "WHERE `" . static::$_pk . "` = " . (int) $this->{'_' . static::$_pk};
+            } elseif (static::$_all_fields[static::$_pk] === 'string') {
+                $sql .= "WHERE `" . static::$_pk . "` = '" . $this->{'_' . static::$_pk} . "'";
+            }
+        } else {
+            // clé primaire multiple
+            $sql .= "WHERE 1 ";
+            foreach (static::$_pk as $pk) {
+                if (static::$_all_fields[$pk] === 'int') {
+                    $sql .= "AND `" . $pk . "` = " . (int) $this->{'_' . $pk} . " ";
+                } elseif (static::$_all_fields[static::$_pk] === 'string') {
+                    $sql .= "AND `" . $pk . "` = '" . $this->{'_' . $pk} . "' ";
+                }
+            }
+        }
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_arrayToObject($res);
