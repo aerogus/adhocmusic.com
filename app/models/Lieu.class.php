@@ -1024,8 +1024,8 @@ class Lieu extends ObjectModel
         $res  = $db->queryWithFetch($sql);
 
         $tab  = [];
-        foreach (Departement::getHashTable() as $id_dep => $nom_dep) {
-            $tab[$id_dep] = [];
+        foreach (Departement::findAll() as $dep) {
+            $tab[$dep->getId()] = [];
         }
         foreach ($res as $lieu) {
             $tab[$lieu['id_departement']][$lieu['id']] = $lieu;
