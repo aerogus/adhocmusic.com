@@ -9,12 +9,12 @@
       <ul>
         <li>
           <div class="infobulle error" id="error_file"{if empty($error_file)} style="display: none"{/if}>Vous devez choisir un fichier .mp3 à uploader</div>
-          <label for="file">Audio (.mp3 16bits/44KHz/stéréo, &lt; 16 Mo)</label>
+          <label for="file">Audio (*) (.mp3 16bits/44KHz/stéréo, &lt; 16 Mo)</label>
           <input type="file" id="file" name="file" value="">
         </li>
         <li>
           <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner un titre</div>
-          <label for="name">Titre</label>
+          <label for="name">Titre (*)</label>
           <input type="text" id="name" name="name" size="50" value="">
         </li>
         <li>

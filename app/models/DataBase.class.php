@@ -336,9 +336,11 @@ class DataBase
     }
 
     /**
-     *
+     * @param string $sql                    requête SQL
+     * @param int    $conn_name              identifiant de connexion
+     * @param bool   $closeConnectionOnError fermer la connexion en cas d'erreur
      */
-    function query($sql, $conn_name = 0, $closeConnectionOnError = true)
+    function query(string $sql, int $conn_name = 0, bool $closeConnectionOnError = true)
     {
         $conn = $this->connect($conn_name);
 

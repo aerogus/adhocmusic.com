@@ -10,11 +10,11 @@
         <li>
           <div class="infobulle error" id="error_code"{if empty($error_code)} style="display: none"{/if}>Vous devez copier/coller un code de vidéo</div>
           <div class="infobulle error" id="error_unknown_host"{if empty($error_unknow_host)} style="display: none"{/if}>Code de la vidéo non reconnu ou hébergeur incompatible</div>
-          <label for="code">Url de la vidéo</label>
+          <label for="code">Url de la vidéo (*)</label>
           <input type="text" id="code" name="code" size="50" value="">
         </li>
         <li>
-          <label for="name">Titre</label>
+          <label for="name">Titre (*)</label>
           <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
           <input type="text" id="name" name="name" size="50" value="">
           <div id="thumb" class="pts"></div>

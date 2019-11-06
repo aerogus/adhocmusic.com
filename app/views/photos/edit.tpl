@@ -32,14 +32,14 @@
     </li>
     {/if}
     <li>
-      <label for="name">Titre</label>
+      <label for="name">Titre (*)</label>
       <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la photo</div>
-      <input type="text" id="name" name="name" size="50" value="{$photo->getName()|escape}">
+      <input type="text" id="name" name="name" placeholder="Titre" size="50" value="{$photo->getName()|escape}">
     </li>
     <li>
-      <label for="credits">Photographe</label>
+      <label for="credits">Crédits (*)</label>
       <div class="infobulle error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe</div>
-      <input type="text" id="credits" name="credits" size="50" value="{$photo->getCredits()|escape}">
+      <input type="text" id="credits" name="credits" placeholder="Nom du photographe" size="50" value="{$photo->getCredits()|escape}">
     </li>
     <li>
       <label for="id_groupe">Groupe</label>

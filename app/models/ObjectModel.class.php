@@ -557,7 +557,7 @@ abstract class ObjectModel
             foreach (static::$_pk as $pk) {
                 if (static::$_all_fields[$pk] === 'int') {
                     $sql .= "AND `" . $pk . "` = " . (int) $this->{'_' . $pk} . " ";
-                } elseif (static::$_all_fields[static::$_pk] === 'string') {
+                } elseif (static::$_all_fields[$pk] === 'string') {
                     $sql .= "AND `" . $pk . "` = '" . $this->{'_' . $pk} . "' ";
                 }
             }

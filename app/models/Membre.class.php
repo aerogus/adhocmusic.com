@@ -1374,7 +1374,8 @@ class Membre extends Contact
             $this->_arrayToObject($res);
             return true;
         }
-        return false;
+
+        throw new Exception('Membre introuvable');
     }
 
     /**

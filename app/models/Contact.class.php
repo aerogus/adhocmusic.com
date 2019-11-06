@@ -238,7 +238,8 @@ class Contact extends ObjectModel
             $this->_arrayToObject($res);
             return true;
         }
-        return false;
+
+        throw new Exception('Contact introuvable');
     }
 
     /**

@@ -15,6 +15,10 @@
     <form id="form-audio-delete" name="form-audio-delete" method="post" action="/audios/delete">
       <ul>
         <li>
+          <label for="mp3">Écouter</label>
+          <audio controls id="mp3" src="{$audio->getDirectMp3Url()}"></audio>
+        </li>
+        <li>
           <label for="name">Nom</label>
           <span id="name">{$audio->getName()|escape}</span>
         </li>

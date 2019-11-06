@@ -19,7 +19,7 @@ Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fic
       <ul>
         <li>
           <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner le nom de votre groupe</div>
-          <label for="name">Nom</label>
+          <label for="name">Nom (*)</label>
           <input type="text" id="name" name="name" value="{$data.name|escape}">
         </li>
         <li>
@@ -36,12 +36,12 @@ Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fic
         </li>
         <li>
           <div class="infobulle error" id="error_style"{if empty($error_style)} style="display: none"{/if}>Vous devez préciser le style musical</div>
-          <label for="style">Style</label>
+          <label for="style">Style (*)</label>
           <input type="text" id="style" name="style" size="50" value="{$data.style|escape}">
         </li>
         <li>
           <div class="infobulle error" id="error_influences"{if empty($error_influences)} style="display: none"{/if}>Vous devez préciser vos influences</div>
-          <label for="influences">Influences</label>
+          <label for="influences">Influences (*)</label>
           <input type="text" id="influences" name="influences" size="50" value="{$data.influences|escape}">
         </li>
         <li>
@@ -58,17 +58,17 @@ Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fic
         </li>
         <li>
           <div class="infobulle error" id="error_lineup"{if empty($error_lineup)} style="display: none"{/if}>Vous devez préciser votre formation</div>
-          <label for="lineup">Lineup</label>
+          <label for="lineup">Lineup (*)</label>
           <textarea id="lineup" name="lineup" cols="50" rows="5">{$data.lineup|escape}</textarea>
         </li>
         <li>
           <div class="infobulle error" id="error_mini_text"{if empty($error_mini_text)} style="display: none"{/if}>Vous devez écrire une mini présentation de moins de 250 caractères</div>
-          <label for="mini_text">Mini Présentation</label>
+          <label for="mini_text">Mini Présentation (*)</label>
           <textarea id="mini_text" name="mini_text" cols="50" rows="5">{$data.mini_text|escape}</textarea>
         </li>
         <li>
           <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez préciser le champ présentation</div>
-          <label for="text">Présentation</label>
+          <label for="text">Présentation (*)</label>
           <textarea id="text" name="text" cols="50" rows="20">{$data.text|escape}</textarea>
         </li>
         <li>

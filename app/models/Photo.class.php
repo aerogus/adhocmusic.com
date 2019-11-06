@@ -303,10 +303,10 @@ class Photo extends Media
      */
     protected function _loadFromDb(): bool
     {
-        // new 2019
         if (!parent::_loadFromDb()) {
             throw new Exception('Photo introuvable');
         }
+        return true;
     }
 
     /**

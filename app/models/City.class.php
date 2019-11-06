@@ -51,6 +51,7 @@ class City extends Reference
         'id_city'        => 'int', // pk
         'id_departement' => 'string',
         'cp'             => 'int',
+        'name'           => 'string',
     ];
 
     /* début getter */

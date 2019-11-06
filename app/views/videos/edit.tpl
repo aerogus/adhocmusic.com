@@ -16,7 +16,7 @@
   <ul>
     <li>
       <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
-      <label for="name">Titre</label>
+      <label for="name">Titre (*)</label>
       <input type="text" id="name" name="name" size="50" value="{$video->getName()|escape}">
     </li>
     <li>

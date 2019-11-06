@@ -57,23 +57,4 @@ class WorldCountry extends Reference
     /* début setters */
 
     /* fin setters */
-
-    /**
-     * Charge toutes les infos d'une entité
-     *
-     * @return bool
-     * @throws Exception
-     */
-    protected function _loadFromDb(): bool
-    {
-        $db = DataBase::getInstance();
-
-        $sql  = "SELECT * FROM `" . static::$_table . "` WHERE `" . static::$_pk . "` = '" . $this->{'_' . static::$_pk} . "'";
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_arrayToObject($res);
-            return true;
-        }
-        return false;
-    }
 }

@@ -55,7 +55,7 @@ final class Controller
      */
     static function create(): string
     {
-        $fp = fopen('/var/www/adhocmusic.com/log/hack-comment.log', 'a');
+        $fp = fopen(ADHOC_ROOT_PATH . '/log/hack-comment.log', 'a');
         fwrite($fp, print_r($_GET, true) . "\n" . print_r($_POST, true) . "\n" . print_r($_SERVER, true));
         fclose($fp);
         die('hi');

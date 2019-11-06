@@ -23,8 +23,6 @@ final class Controller
      * Retourne le tableau code region / nom region
      * pour un pays donné
      *
-     * @param string $_GET['c']
-     *
      * @return array
      */
     static function regions(): array
@@ -49,25 +47,24 @@ final class Controller
      * pour une région donnée
      * (France uniquement)
      *
-     * @param string $_GET['r']
-     *
      * @return array
      */
     static function departements(): array
     {
+        $id_region = (string) Route::params('id_region');
+        $id_region = strtoupper(substr(trim($id_region), 0, 2));
+
         $tab = [];
 
-        if (!empty($_GET['r'])) {
-            $r = substr($_GET['r'], 0, 2);
-            $db = DataBase::getInstance();
-            $sql = "SELECT `id_departement`, `name` "
-                 . "FROM `geo_fr_departement` "
-                 . "WHERE `id_region` = '" . $db->escape($r) . "' "
-                 . "ORDER BY `name` ASC";
-            $res = $db->queryWithFetch($sql);
-            foreach ($res as $_res) {
-                $tab[$_res['id_departement']] = $_res['name'];
-            }
+        $db = DataBase::getInstance();
+        $sql = "SELECT `id_departement`, `name` FROM `geo_fr_departement` ";
+        if (!empty($id_region)) {
+            $sql .= "WHERE `id_region` = '" . $db->escape($id_region) . "' ";
+        }
+        $sql .= "ORDER BY `name` ASC";
+        $res = $db->queryWithFetch($sql);
+        foreach ($res as $_res) {
+            $tab[$_res['id_departement']] = $_res['name'];
         }
 
         return $tab;

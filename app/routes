@@ -114,6 +114,7 @@ events|show|GET|/events/:id
 geo|countries|GET|/geo/countries
 geo|regions|GET|/geo/regions/:id_country
 geo|departements|GET|/geo/departements
+geo|departements|GET|/geo/departements/:id_region
 geo|cities|GET|/geo/cities
 geo|lieux|GET|/geo/lieux
 groupes|index|GET|/groupes/

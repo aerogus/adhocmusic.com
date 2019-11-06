@@ -14,14 +14,14 @@
           <div class="infobulle info">En cas de photos multiples, les données suivantes sont communes</div>
         </li>
         <li>
-          <label for="name">Titre</label>
+          <label for="name">Titre (*)</label>
           <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la/les photo(s)</div>
           <input type="text" id="name" name="name" placeholder="Titre" size="50" value="">
         </li>
         <li>
-          <label for="credits">Photographe</label>
+          <label for="credits">Crédits (*)</label>
           <div class="infobulle error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe pour cette/ces photo(s)</div>
-          <input type="text" id="credits" name="credits" placeholder="Photographe" size="50" value="">
+          <input type="text" id="credits" name="credits" placeholder="Nom du photographe" size="50" value="">
         </li>
         <li>
           <label for="id_groupe">Groupe</label>

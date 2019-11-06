@@ -16,14 +16,14 @@
       <ul>
         <li>
           <label for="mp3">Écouter</label>
-          <span id="mp3">{audio_player id=$audio->getId()}</span>
+          <audio controls id="mp3" src="{$audio->getDirectMp3Url()}"></audio>
         </li>
         <li>
-          <label for="file">Audio (.mp3 16bits/44Khz/stéréo, &lt; 16 Mo)</label>
+          <label for="file">Audio (*) (.mp3 16bits/44Khz/stéréo, &lt; 16 Mo)</label>
           <input type="file" id="file" name="file" value="">
         </li>
         <li>
-          <label for="name">Titre</label>
+          <label for="name">Titre (*) </label>
           <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner un titre</div>
           <input type="text" id="name" name="name" size="50" value="{$audio->getName()|escape}">
         </li>
