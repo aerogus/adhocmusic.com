@@ -135,10 +135,12 @@ class Lieu extends ObjectModel
     protected $_photo_url = null;
 
     /**
+     * Liste des attributs de l'objet
      *
+     * @var array
      */
     protected static $_all_fields = [
-        'id_lieu'        => 'int',
+        'id_lieu'        => 'int', // pk
         'id_type'        => 'int',
         'name'           => 'string',
         'address'        => 'string',
@@ -159,11 +161,6 @@ class Lieu extends ObjectModel
         'lng'            => 'float',
         'online'         => 'bool',
     ];
-
-    /**
-     * @var array
-     */
-    protected $_modified_fields = [];
 
     /* début getters */
 

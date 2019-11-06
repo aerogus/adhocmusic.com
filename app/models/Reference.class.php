@@ -14,11 +14,15 @@ abstract class Reference extends ObjectModel
     protected static $_instance = null;
 
     /**
+     * [à étendre dans l'objet fils]
+     *
      * @var string
      */
     protected static $_pk = '';
 
     /**
+     * [à étendre dans l'objet fils]
+     *
      * @var string
      */
     protected static $_table = '';
@@ -27,28 +31,6 @@ abstract class Reference extends ObjectModel
      * @var string
      */
     protected $_name = '';
-
-    /**
-     * Liste des attributs de l'objet
-     * on précise si en base c'est de type :
-     * - numérique/integer/float/bool (= int)
-     * - datetime/text (= str)
-     * ceci est utile pour la formation de la requête
-     *
-     * @var array
-     */
-    protected static $_all_fields = [
-        'name' => 'string',
-    ];
-
-    /**
-     * Tableau des attributs modifiés depuis la dernière sauvegarde.
-     *
-     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
-     *
-     * @var array
-     */
-    protected $_modified_fields = [];
 
     /* début getters */
 
@@ -90,7 +72,7 @@ abstract class Reference extends ObjectModel
     protected function _loadFromDb(): bool
     {
         if (!parent::_loadFromDb()) {
-            throw new Exception('Référence introuvable');
+            throw new Exception('Référence introuvable dans ' . get_called_class());
         }
 
         return true;

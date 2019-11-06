@@ -33,10 +33,6 @@ class Audio extends Media
 
     /**
      * Liste des attributs de l'objet
-     * on précise si en base c'est de type :
-     * - numérique/integer/float/bool (= int)
-     * - datetime/text (= str)
-     * ceci est utile pour la formation de la requête
      *
      * @var array
      */
@@ -52,15 +48,6 @@ class Audio extends Media
         'modified_on'  => 'date',
         'online'       => 'bool',
     ];
-
-    /**
-     * Tableau des attributs modifiés depuis la dernière sauvegarde.
-     *
-     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
-     *
-     * @var array
-     */
-    protected $_modified_fields = [];
 
     /* début getters */
 

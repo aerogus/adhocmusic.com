@@ -36,63 +36,39 @@ class Departement extends Reference
     protected $_id_region = null;
 
     /**
-     * @var string
-     */
-    protected $_name = null;
-
-    /**
      * Liste des attributs de l'objet
-     * on précise si en base c'est de type :
-     * - numérique/integer/float/bool (= int)
-     * - datetime/text (= str)
-     * ceci est utile pour la formation de la requête
      *
      * @var array
      */
     protected static $_all_fields = [
-        'id_departement' => 'string',
+        'id_departement' => 'string', // pk
         'id_region'      => 'string',
         'name'           => 'string',
     ];
 
-    /**
-     * Tableau des attributs modifiés depuis la dernière sauvegarde.
-     *
-     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
-     *
-     * @var array
-     */
-    protected $_modified_fields = [];
-
     /* début getters */
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getIdDepartement(): string
+    function getIdDepartement(): ?string
     {
         return $this->_id_department;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getIdRegion(): string
+    function getIdRegion(): ?string
     {
         return $this->_id_region;
-    }
-
-    /**
-     * @return string
-     */
-    function getName(): string
-    {
-        return $this->_name;
     }
 
     /* fin getters */
 
     /* début setters */
+
+    // à implémenter
 
     /* fin setters */
 

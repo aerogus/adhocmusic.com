@@ -43,15 +43,11 @@ class Photo extends Media
 
     /**
      * Liste des attributs de l'objet
-     * on précise si en base c'est de type :
-     * - numérique/integer/float/bool (= num)
-     * - datetime/text (= str)
-     * ceci est utile pour la formation de la requête
      *
      * @var array
      */
     protected static $_all_fields = [
-        'id_photo'     => 'int',
+        'id_photo'     => 'int', // pk
         'id_contact'   => 'int',
         'id_groupe'    => 'int',
         'id_lieu'      => 'int',
@@ -63,15 +59,6 @@ class Photo extends Media
         'online'       => 'bool',
         'credits'      => 'string',
     ];
-
-    /**
-     * Tableau des attributs modifiés depuis la dernière sauvegarde.
-     *
-     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
-     *
-     * @var array
-     */
-    protected $_modified_fields = [];
 
     /* debut getters */
 

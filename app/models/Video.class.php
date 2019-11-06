@@ -151,7 +151,7 @@ class Video extends Media
      * @var array
      */
     protected static $_all_fields = [
-        'id_video'     => 'int',
+        'id_video'     => 'int', // pk
         'id_contact'   => 'int',
         'id_host'      => 'int',
         'reference'    => 'string',
@@ -166,15 +166,6 @@ class Video extends Media
         'width'        => 'int',
         'height'       => 'int',
     ];
-
-    /**
-     * Tableau des attributs modifiés depuis la dernière sauvegarde.
-     *
-     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
-     *
-     * @var array
-     */
-    protected $_modified_fields = [];
 
     /* début getters */
 

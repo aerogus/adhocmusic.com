@@ -29,76 +29,12 @@ class Style extends Reference
     protected $_id_style = 0;
 
     /**
-     * @var string
-     */
-    protected $_name = '';
-
-    /**
      * Liste des attributs de l'objet
-     * on précise si en base c'est de type :
-     * - numérique/integer/float/bool (= int)
-     * - datetime/text (= str)
-     * ceci est utile pour la formation de la requête
      *
      * @var array
      */
     protected static $_all_fields = [
-        'id_style' => 'int',
+        'id_style' => 'int', // pk
         'name'     => 'string',
     ];
-
-    /**
-     * Tableau des attributs modifiés depuis la dernière sauvegarde.
-     *
-     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
-     *
-     * @var array
-     */
-    protected $_modified_fields = [];
-
-    /* début getters */
-
-    /**
-     * @return string
-     */
-    function getName(): string
-    {
-        return $this->_name;
-    }
-
-    /* fin getters */
-
-    /* début setters */
-
-    /**
-     * @param string $name nom du style
-     *
-     * @return object
-     */
-    function setName(string $name): object
-    {
-        if ($this->_name !== $name) {
-            $this->_name = $name;
-            $this->_modified_fields['name'] = true;
-        }
-
-        return $this;
-    }
-
-    /* fin setters */
-
-    /**
-     * Retourne les infos sur un style
-     *
-     * @return bool
-     * @throws Exception
-     */
-    function _loadFromDb(): bool
-    {
-        if (!parent::_loadFromDb()) {
-            throw new Exception('Style introuvable');
-        }
-
-        return true;
-    }
 }

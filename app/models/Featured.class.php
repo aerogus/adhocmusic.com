@@ -77,15 +77,11 @@ class Featured extends ObjectModel
 
     /**
      * Liste des attributs de l'objet
-     * on précise si en base c'est de type :
-     * - numérique/integer/float/bool (= num)
-     * - datetime/text (= str)
-     * ceci est utile pour la formation de la requête
      *
      * @var array
      */
     protected static $_all_fields = [
-        'id_featured' => 'int',
+        'id_featured' => 'int', // pk
         'datdeb'      => 'string',
         'datfin'      => 'string',
         'title'       => 'string',

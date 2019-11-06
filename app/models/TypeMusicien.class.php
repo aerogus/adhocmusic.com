@@ -27,4 +27,14 @@ class TypeMusicien extends Reference
      * @var int
      */
     protected $_id_type_musicien = 0;
+
+    /**
+     * Liste des attributs de l'objet
+     *
+     * @var array
+     */
+    protected static $_all_fields = [
+        'id_type_musicien' => 'int', // pk
+        'name'             => 'string',
+    ];
 }

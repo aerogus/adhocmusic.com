@@ -44,10 +44,6 @@ class City extends Reference
 
     /**
      * Liste des attributs de l'objet
-     * on précise si en base c'est de type :
-     * - numérique/integer/float/bool (= int)
-     * - datetime/text (= str)
-     * ceci est utile pour la formation de la requête
      *
      * @var array
      */
@@ -57,37 +53,28 @@ class City extends Reference
         'cp'             => 'int',
     ];
 
-    /**
-     * Tableau des attributs modifiés depuis la dernière sauvegarde.
-     *
-     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
-     *
-     * @var array
-     */
-    protected $_modified_fields = [];
-
     /* début getter */
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getIdCity()
+    function getIdCity(): ?string
     {
         return $this->_id_city;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getIdDepartement()
+    function getIdDepartement(): ?string
     {
         return $this->_id_department;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getCp()
+    function getCp(): ?string
     {
         return $this->_cp;
     }
@@ -95,6 +82,8 @@ class City extends Reference
     /* fin getters */
 
     /* début setters */
+
+    // à implémenter
 
     /* fin setters */
 }

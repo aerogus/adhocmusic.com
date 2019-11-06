@@ -27,4 +27,14 @@ class PhotoType extends Reference
      * @var int
      */
     protected $_id_photo_type = 0;
+
+    /**
+     * Liste des attributs de l'objet
+     *
+     * @var array
+     */
+    protected static $_all_fields = [
+        'id_photo_type' => 'int', // pk
+        'name'          => 'string',
+    ];
 }

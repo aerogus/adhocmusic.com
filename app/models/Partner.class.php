@@ -53,20 +53,11 @@ class Partner extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'id_partner'  => 'int',
+        'id_partner'  => 'int', // pk
         'title'       => 'string',
         'description' => 'string',
         'url'         => 'string',
     ];
-
-    /**
-     * Tableau des attributs modifiés depuis la dernière sauvegarde.
-     *
-     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
-     *
-     * @var array
-     */
-    protected $_modified_fields = [];
 
     /* début getters */
 

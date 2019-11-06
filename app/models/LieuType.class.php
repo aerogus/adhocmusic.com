@@ -27,4 +27,14 @@ class LieuType extends Reference
      * @var int
      */
     protected $_id_lieu_type = 0;
+
+    /**
+     * Liste des attributs de l'objet
+     *
+     * @var array
+     */
+    protected static $_all_fields = [
+        'id_lieu_type' => 'int', // pk
+        'name'         => 'string',
+    ];
 }

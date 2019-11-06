@@ -27,4 +27,14 @@ class FAQCategory extends Reference
      * @var int
      */
     protected $_id_faq_category = 0;
+
+    /**
+     * Liste des attributs de l'objet
+     *
+     * @var array
+     */
+    protected static $_all_fields = [
+        'id_faq_category' => 'int', // pk
+        'name'            => 'string',
+    ];
 }

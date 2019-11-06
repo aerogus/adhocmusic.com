@@ -88,14 +88,11 @@ class Comment extends ObjectModel
 
     /**
      * Liste des attributs de l'objet
-     * on précise si en base c'est de type :
-     * - numérique/integer/float/bool (= num)
-     * - datetime/text (= str)
-     * ceci est utile pour la formation de la requête
      *
      * @var array
      */
     protected static $_all_fields = [
+        'id_comment'  => 'int', // pk
         'type'        => 'string',
         'id_content'  => 'int',
         'created_on'  => 'date',

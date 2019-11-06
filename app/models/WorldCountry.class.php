@@ -33,16 +33,7 @@ class WorldCountry extends Reference
     protected $_id_country = null;
 
     /**
-     * @var string
-     */
-    protected $_name = null;
-
-    /**
      * Liste des attributs de l'objet
-     * on précise si en base c'est de type :
-     * - numérique/integer/float/bool (= int)
-     * - datetime/text (= str)
-     * ceci est utile pour la formation de la requête
      *
      * @var array
      */
@@ -50,15 +41,6 @@ class WorldCountry extends Reference
         'id_country' => 'string',
         'name'       => 'string',
     ];
-
-    /**
-     * Tableau des attributs modifiés depuis la dernière sauvegarde.
-     *
-     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
-     *
-     * @var array
-     */
-    protected $_modified_fields = [];
 
     /* début getters */
 
@@ -68,14 +50,6 @@ class WorldCountry extends Reference
     function getIdCountry(): string
     {
         return $this->_id_country;
-    }
-
-    /**
-     * @return string
-     */
-    function getName(): string
-    {
-        return $this->_name;
     }
 
     /* fin getters */

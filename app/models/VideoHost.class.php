@@ -21,4 +21,14 @@ class VideoHost extends Reference
      * @var int
      */
     protected $_id_video_host = 0;
+
+    /**
+     * Liste des attributs de l'objet
+     *
+     * @var array
+     */
+    protected static $_all_fields = [
+        'id_video_host' => 'int', // pk
+        'name'          => 'string',
+    ];
 }

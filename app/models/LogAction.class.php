@@ -27,4 +27,14 @@ class LogAction extends Reference
      * @var int
      */
     protected $_id_log_action = 0;
+
+    /**
+     * Liste des attributs de l'objet
+     *
+     * @var array
+     */
+    protected static $_all_fields = [
+        'id_log_action' => 'int', // pk
+        'name'          => 'string',
+    ];
 }

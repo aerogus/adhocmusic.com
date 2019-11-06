@@ -142,10 +142,12 @@ class Groupe extends ObjectModel
     protected $_etat = 0;
 
     /**
+     * Liste des attributs de l'objet
+     *
      * @var array
      */
     protected static $_all_fields = [
-        'id_groupe'        => 'int',
+        'id_groupe'        => 'int', // pk
         'alias'            => 'string',
         'name'             => 'string',
         'style'            => 'string',
@@ -166,11 +168,6 @@ class Groupe extends ObjectModel
         'comment'          => 'string',
         'etat'             => 'int',
     ];
-
-    /**
-     * @var array
-     */
-    protected $_modified_fields = [];
 
     /**
      * @var array
