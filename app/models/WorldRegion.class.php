@@ -99,27 +99,4 @@ class WorldRegion extends Reference
 
         return $objs;
     }
-
-    /**
-     * Charge toutes les infos d'une entité
-     *
-     * @return bool
-     * @throws Exception
-     */
-    protected function _loadFromDb(): bool
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT * FROM `" . static::$_table . "` WHERE 1";
-        foreach (static::$_pk as $fieldName) {
-            $propName = '_' . $fieldName;
-            $sql .= " AND `${fieldName}` = '" . $this->$propName . "'";
-        }
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_arrayToObject($res);
-            return true;
-        }
-        throw new Exception('WorldRegion introuvable');
-    }
 }

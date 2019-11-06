@@ -373,31 +373,13 @@ class Structure extends ObjectModel
     function delete()
     {
         if (parent::delete()) {
-            $file = self::getBasePath() . '/' . $this->_id_structure . '.png';
-            if (file_exists($file)) {
-                unlink($file);
+            $pngFile = self::getBasePath() . '/' . $this->_id_structure . '.png';
+            if (file_exists($pngFile)) {
+                unlink($pngFile);
             }
             return true;
         }
         return false;
-    }
-
-    /**
-     * Retourne les infos sur une structure
-     *
-     * @return bool
-     * @throws Exception
-     */
-    function _loadFromDb(): bool
-    {
-        if (!parent::_loadFromDb()) {
-            throw new Exception('Structure introuvable');
-        }
-
-        if (file_exists(self::getBasePath() . '/' . (string) $this->_id_structure . '.png')) {
-            $this->_photo = self::getBaseUrl() . '/' . (string) $this->_id_structure . '.png';
-        }
-        return true;
     }
 
     /**

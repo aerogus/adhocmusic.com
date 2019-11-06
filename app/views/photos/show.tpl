@@ -10,46 +10,49 @@
 
   <div class="col-1">
 
+    {if !empty($groupe)}
     <div class="box">
       <header>
-        <h1></h1>
+        <h2>Groupe</h2>
       </header>
       <div>
-    {if !empty($groupe)}
-    <div class="metatop">Groupe</div>
-    <div class="metacontent">
-      <a href="{$groupe->getUrl()}"><img style="float: right;" src="{$groupe->getMiniPhoto()}" alt=""><strong>{$groupe->getName()|escape}</strong></a>
+        <a href="{$groupe->getUrl()}"><img style="float: right;" src="{$groupe->getMiniPhoto()}" alt=""><strong>{$groupe->getName()|escape}</strong></a>
+      </div>
     </div>
-    <br style="clear: both;">
     {/if}
+
     {if !empty($event)}
-    <div class="metatop">Evénement</div>
-    <div class="metacontent">
-      <a href="{$event->getUrl()}"><img style="float: right;" src="{$event->getFlyer100Url()}" alt=""><strong>{$event->getName()|escape}</strong></a><br>{$event->getDate()|date_format:'%d/%m/%Y'}
+    <div class="box">
+      <header>
+        <h2>Événement</h2>
+      </header>
+      <div>
+        <a href="{$event->getUrl()}"><img style="float: right;" src="{$event->getFlyer100Url()}" alt=""><strong>{$event->getName()|escape}</strong></a><br>{$event->getDate()|date_format:'%d/%m/%Y'}
+      </div>
     </div>
-    <br style="clear: both;">
     {/if}
+
     {if !empty($lieu)}
-    <div class="metatop">Lieu</div>
-    <div class="metacontent">
-      <a href="{$lieu->getUrl()}"><img style="float: right;" src="{$lieu->getMapUrl('64x64')}" alt=""><strong>{$lieu->getName()|escape}</strong></a><br>{$lieu->getAddress()}<br>{$lieu->getCp()} {$lieu->getCity()|escape}
+    <div class="box">
+      <header>
+        <h2>Lieu</h2>
+      </header>
+      <div>
+        <a href="{$lieu->getUrl()}"><img style="float: right;" src="{$lieu->getMapUrl('64x64')}" alt=""><strong>{$lieu->getName()|escape}</strong></a><br>{$lieu->getAddress()}<br>{$lieu->getCp()} {$lieu->getCity()|escape}
+      </div>
     </div>
-    <br style="clear: both;">
     {/if}
+
     {if !empty($next) && !empty($prev)}
-    <div class="metatop">Album</div>
-    <div class="metacontent">
-      <p align="center"><a href="{$prev}#p">←</a> photo {$idx_photo}/{$nb_photos} <a href="{$next}#p">→</a></p>
+    <div class="box">
+      <header>
+        <h2>Album</h2>
+      </header>
+      <div>
+        <p align="center"><a href="{$prev}#p">←</a> photo {$idx_photo}/{$nb_photos} <a href="{$next}#p">→</a></p>
+      </div>
     </div>
     {/if}
-    {if !empty($who)}
-    <div class="metatop">Sur cette photo</div>
-    <div class="metacontent">
-      {$who}
-    </div>
-    {/if}
-    </div>
-    </div>
 
   </div>{* .col-1 *}
 

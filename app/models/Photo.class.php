@@ -307,28 +307,6 @@ class Photo extends Media
         if (!parent::_loadFromDb()) {
             throw new Exception('Photo introuvable');
         }
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `p`.`name`, `p`.`created_on`, `p`.`modified_on`, "
-             . "`p`.`credits`, `p`.`online`, `m`.`pseudo`, "
-             . "`p`.`id_groupe`, `p`.`id_structure`, "
-             . "`p`.`id_lieu`, `p`.`id_event`, `p`.`id_contact` "
-             . "FROM `" . Photo::getDbTable() . "` `p` "
-             . "LEFT JOIN `" . Groupe::getDbTable() . "` `g` ON (`p`.`id_groupe` = `g`.`id_groupe`) "
-             . "LEFT JOIN `" . Structure::getDbTable() . "` `s` ON (`p`.`id_structure` = `s`.`id_structure`) "
-             . "LEFT JOIN `" . Lieu::getDbTable() . "` `l` ON (`p`.`id_lieu` = `l`.`id_lieu`) "
-             . "LEFT JOIN `" . Event::getDbTable() . "` `e` ON (`p`.`id_event` = `e`.`id_event`) "
-             . "LEFT JOIN `" . Membre::getDbTable() . "` `m` ON (`p`.`id_contact` = `m`.`id_contact`) "
-             . "WHERE `p`.`id_photo` = " . (int) $this->_id_photo;
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_arrayToObject($res);
-            $this->_pseudo = $res['pseudo'];
-            return true;
-        }
-
-        throw new Exception('Photo introuvable');
     }
 
     /**

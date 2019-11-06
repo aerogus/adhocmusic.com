@@ -4,13 +4,8 @@
  * L'éphéméride extrait les groupes qui ont jour à Épinay durant toute
  * l'histoire de l'association
  */
-class Ephemeride extends ObjectModel
+class Ephemeride
 {
-    /**
-     * @var mixed
-     */
-    protected static $_instance = null;
-
     /**
      * @var array
      */
@@ -45,9 +40,9 @@ class Ephemeride extends ObjectModel
     }
 
     /**
-     * @return bool
+     *
      */
-    protected function _loadFromDb(): bool
+    function __construct()
     {
         $db = DataBase::getInstance();
 
@@ -64,19 +59,17 @@ class Ephemeride extends ObjectModel
 
         $rows = $db->queryWithFetch($sql);
 
-        $eph = [];
+        $data = [];
         foreach ($rows as $row) {
-            if (!array_key_exists($row['day'], $eph)) {
-                $eph[$row['day']] = [];
+            if (!array_key_exists($row['day'], $data)) {
+                $data[$row['day']] = [];
             }
-            if (!array_key_exists($row['year'], $eph[$row['day']])) {
-                $eph[$row['day']][$row['year']] = [];
+            if (!array_key_exists($row['year'], $data[$row['day']])) {
+                $data[$row['day']][$row['year']] = [];
             }
-            array_push($eph[$row['day']][$row['year']], $row['name']);
+            array_push($data[$row['day']][$row['year']], $row['name']);
         }
 
-        $this->_data = $eph;
-
-        return true;
+        $this->_data = $data;
     }
 }

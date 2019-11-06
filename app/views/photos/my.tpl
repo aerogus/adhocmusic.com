@@ -2,7 +2,7 @@
 
 <div class="box">
   <header>
-    <h2>Mes photos</h2>
+    <h1>Mes photos</h1>
   </header>
   <div class="reset">
 

@@ -2,7 +2,7 @@
 
 <div class="box">
   <header>
-    <h2>Éditer une vidéo</h2>
+    <h1>Éditer une vidéo</h1>
   </header>
   <div>
 
@@ -42,9 +42,9 @@
         <optgroup label="Autre">
           <option value="0">aucun / non référencé</option>
         </optgroup>
-        {foreach from=$dep item=dep_name key=dep_id}
-        <optgroup label="{$dep_id} - {$dep_name|escape}">
-          {foreach from=$lieux[$dep_id] item=lieu}
+        {foreach from=$deps item=dep}
+        <optgroup label="{$dep->getId()} - {$dep->getName()|escape}">
+          {foreach from=$lieux[$dep->getId()] item=lieu}
           <option value="{$lieu.id}"{if $video->getIdLieu() == $lieu.id} selected="selected"{/if}>{$lieu.cp} {$lieu.city|escape} : {$lieu.name|escape}</option>
           {/foreach}
         </optgroup>

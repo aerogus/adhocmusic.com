@@ -1,9 +1,13 @@
 #!/usr/bin/env php
 <?php declare(strict_types=1);
 
+/**
+ * Calcul de l'éphéméride AD'HOC
+ */
+
 require_once __DIR__ . '/../bootstrap.php';
 
-$eph = Ephemeride::getInstance(0);
+$eph = (new Ephemeride())->getAll();
 $res = $eph->getAll();
 
 foreach ($res as $day => $data) {
@@ -12,4 +16,3 @@ foreach ($res as $day => $data) {
         echo "- " . $year . ": " . implode($groupes, " + ") . "\n";
     }
 }
-

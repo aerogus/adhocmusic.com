@@ -321,7 +321,7 @@ final class Controller
                 )
             );
         } else {
-            $smarty->assign('dep', Departement::findAll());
+            $smarty->assign('deps', Departement::findAll());
             $smarty->assign('lieux', Lieu::getLieuxByDep());
         }
 
@@ -420,7 +420,7 @@ final class Controller
             )
         );
 
-        $smarty->assign('dep', Departement::findAll());
+        $smarty->assign('deps', Departement::findAll());
         $smarty->assign('lieux', Lieu::getLieuxByDep());
 
         $smarty->assign('page', $page);

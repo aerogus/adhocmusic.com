@@ -2,7 +2,7 @@
 
 <div class="box">
   <header>
-    <h2>Mes Vidéos</h2>
+    <h1>Mes vidéos</h1>
   </header>
   <div>
 

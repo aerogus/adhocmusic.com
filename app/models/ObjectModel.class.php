@@ -417,7 +417,12 @@ abstract class ObjectModel
 
         if (is_array(static::getDbPk())) {
 
-            $sql = 'SELECT `' . implode('`,`', static::getDbPk()) . '` FROM `' . static::getDbTable() . '`';
+            $sql = 'SELECT `' . implode('`,`', static::getDbPk()) . '` FROM `' . static::getDbTable() . '` ORDER BY';
+            foreach (static::getDbPk() as $pk) {
+                $sql .= ' `' . $pk . '` ASC,';
+            }
+            $sql = substr($sql, 0, -1); // retrait de la dernière virgule
+
             $rows = $db->queryWithFetch($sql);
             foreach ($rows as $row) {
                 $objs[] = static::getInstance($row);
@@ -425,7 +430,7 @@ abstract class ObjectModel
 
         } else {
 
-            $sql = 'SELECT `' . static::getDbPk() . '` FROM `' . static::getDbTable() . '`';
+            $sql = 'SELECT `' . static::getDbPk() . '` FROM `' . static::getDbTable() . '` ORDER BY `' . static::getDbPk() . '` ASC';
             if ($ids = $db->queryWithFetchFirstFields($sql)) {
                 foreach ($ids as $id) {
                     $objs[] = static::getInstance($id);

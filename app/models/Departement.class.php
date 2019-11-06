@@ -53,7 +53,7 @@ class Departement extends Reference
      */
     function getIdDepartement(): ?string
     {
-        return $this->_id_department;
+        return $this->_id_departement;
     }
 
     /**
@@ -71,23 +71,4 @@ class Departement extends Reference
     // à implémenter
 
     /* fin setters */
-
-    /**
-     * Charge toutes les infos d'une entité
-     *
-     * @return bool
-     * @throws Exception
-     */
-    protected function _loadFromDb(): bool
-    {
-        $db = DataBase::getInstance();
-
-        $sql  = "SELECT * FROM `" . static::$_table . "` WHERE `" . static::$_pk . "` = '" . $this->{'_' . static::$_pk} . "'";
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_arrayToObject($res);
-            return true;
-        }
-        return false;
-    }
 }

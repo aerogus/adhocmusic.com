@@ -1008,8 +1008,10 @@ class Lieu extends ObjectModel
 
     /**
      * Retourne les lieux d'un département
+     *
+     * @param string $dep département
      */
-    static function getLieuxByDep($dep = null)
+    static function getLieuxByDep(string $dep = null)
     {
         $db = DataBase::getInstance();
 
@@ -1018,20 +1020,19 @@ class Lieu extends ObjectModel
              . "FROM `" . Lieu::getDbTable() . "` "
              . "ORDER BY `id_departement` ASC, `city` ASC, `cp` ASC";
 
-        $res  = $db->queryWithFetch($sql);
+        $rows = $db->queryWithFetch($sql);
 
         $tab  = [];
         foreach (Departement::findAll() as $dep) {
             $tab[$dep->getId()] = [];
         }
-        foreach ($res as $lieu) {
-            $tab[$lieu['id_departement']][$lieu['id']] = $lieu;
+        foreach ($rows as $row) {
+            $tab[(string) $row['id_departement']][$row['id']] = $row;
         }
 
-        if (!is_null($dep) && array_key_exists($dep, $tab)) {
-            return $tab[$dep];
+        if (!is_null($dep) && array_key_exists($dep->getId(), $tab)) {
+            return $tab[$dep->getId()];
         }
-
         return $tab;
     }
 

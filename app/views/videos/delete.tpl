@@ -8,7 +8,7 @@
 
 <div class="box">
   <header>
-    <h2>Supprimer une vidéo</h2>
+    <h1>Supprimer une vidéo</h1>
   </header>
   <div>
   <form method="post" action="/videos/delete">
