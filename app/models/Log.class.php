@@ -3,12 +3,15 @@
 /**
  * Gestion des logs debug/action
  *
+ * @todo extends ObjectModel
+ *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Log
 {
     // liste des actions utilisateur à logguer
+    // @todo migrer dans LogAction
     const ACTION_MEMBER_CREATE         =  1;
     const ACTION_MEMBER_EDIT           =  2;
     const ACTION_MEMBER_DELETE         =  3;
@@ -58,6 +61,7 @@ class Log
     const ACTION_NEWSLETTER_SUB        = 47;
     const ACTION_NEWSLETTER_UNSUB      = 48;
 
+    // @todo migrer dans LogAction
     protected static $_actions = [
         self::ACTION_MEMBER_CREATE         => "Création d'un compte membre",
         self::ACTION_MEMBER_EDIT           => "Edition d'un compte membre",
@@ -109,8 +113,14 @@ class Log
         self::ACTION_NEWSLETTER_UNSUB      => "Désinscription de la newsletter",
     ];
 
+    /**
+     * @var string
+     */
     protected static $_log_file = null;
 
+    /**
+     * @var string
+     */
     protected static $_log = '';
 
     /**
@@ -118,7 +128,7 @@ class Log
      * @param string $log  log
      * @param bool   $save save
      */
-    static function write($file, $log, bool $save = false)
+    static function write(string $file, string $log, bool $save = false)
     {
         return self::_write($file, $log, $save);
     }

@@ -206,8 +206,9 @@ final class Controller
      */
     static function check_email(): array
     {
-        $out = [];
         $email = (string) Route::params('email');
+        $out = ['email' => $email];
+
         if (Email::validate($email)) {
             if ($id_contact = Membre::getIdByEmail($email)) {
                 $out['status'] = 'KO_ALREADY_MEMBER';
@@ -227,8 +228,9 @@ final class Controller
      */
     static function check_pseudo(): array
     {
-        $out = [];
         $pseudo = (string) Route::params('pseudo');
+        $out = ['pseudo' => $pseudo];
+
         if ($id_contact = Membre::getIdByPseudo($pseudo)) {
             $out['status'] = 'KO_PSEUDO_UNAVAILABLE';
         } else {

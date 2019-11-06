@@ -34,6 +34,13 @@ abstract class ObjectModel
     protected static $_table = '';
 
     /**
+     * L'objet peut-il être mis en cache ?
+     *
+     * @var bool
+     */
+    protected static $_cachable = false;
+
+    /**
      * Identifiant unique d'objet
      *
      * @var string
@@ -106,12 +113,14 @@ abstract class ObjectModel
                 $this->_object_id = get_called_class() . ':' . (string) $id; // ex: Membre:1234
             }
 
-            if ($this->_loadFromCache()) {
+            if (static::isCachable() && $this->_loadFromCache()) {
                 // chargement ok du cache
             } elseif ($this->_loadFromDb()) {
                 // chargement ok de la bdd
-                // alimentation du cache
-                ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
+                if (static::isCachable()) {
+                    // alimentation du cache
+                    ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
+                }
             } else {
                 // erreur au chargement
             }
@@ -194,6 +203,14 @@ abstract class ObjectModel
             return true;
         }
         return false;
+    }
+
+    /**
+     * @return bool
+     */
+    static function isCachable(): bool
+    {
+        return static::$_cachable;
     }
 
     /**
@@ -314,7 +331,9 @@ abstract class ObjectModel
 
             $this->setId((int) $db->insertId());
 
-            ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
+            if (self::isCachable()) {
+                ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
+            }
 
             return $this->getId();
 
@@ -369,7 +388,9 @@ abstract class ObjectModel
 
             $db->query($sql);
 
-            ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
+            if (static::isCachable()) {
+                ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
+            }
 
             return true;
         }
@@ -446,7 +467,9 @@ abstract class ObjectModel
     {
         $db = DataBase::getInstance();
 
-        ObjectCache::unset($this->getObjectId());
+        if (static::isCachable()) {
+            ObjectCache::unset($this->getObjectId());
+        }
 
         $sql = sprintf('DELETE FROM `%s` WHERE `%s` = %d', $this->getDbTable(), $this->getDbPk(), $this->getId());
         $db->query($sql);

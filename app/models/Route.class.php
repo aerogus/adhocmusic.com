@@ -84,7 +84,7 @@ class Route
     static function params(string $key)
     {
         if (isset(self::$action_params[$key])) {
-            self::$action_params[$key];
+            return self::$action_params[$key];
         }
         return null;
     }
