@@ -71,7 +71,7 @@ final class Controller
                 throw new Exception('groupe offline');
             }
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_group', true);
             return $smarty->fetch('groupes/show.tpl');
         }
@@ -309,7 +309,7 @@ final class Controller
         try {
             $groupe = Groupe::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_groupe', true);
             return $smarty->fetch('groupes/edit.tpl');
         }
@@ -437,7 +437,7 @@ final class Controller
         try {
             $groupe = Groupe::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_groupe', true);
             return $smarty->fetch('groupes/delete.tpl');
         }

@@ -63,7 +63,7 @@ final class Controller
         try {
             $photo = Photo::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_photo', true);
             return $smarty->fetch('photos/show.tpl');
         }
@@ -330,7 +330,7 @@ final class Controller
         try {
             $photo = Photo::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_photo', true);
             return $smarty->fetch('photos/edit.tpl');
         }
@@ -429,7 +429,7 @@ final class Controller
         try {
             $photo = Photo::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_photo', true);
             return $smarty->fetch('photos/delete.tpl');
         }

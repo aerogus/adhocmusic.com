@@ -77,7 +77,7 @@ final class Controller
         try {
             $lieu = Lieu::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_lieu', true);
             return $smarty->fetch('lieux/show.tpl');
         }
@@ -317,7 +317,7 @@ final class Controller
             $smarty->assign('lieu', $lieu);
             $smarty->assign('lieu_types', LieuType::findAll());
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_lieu', true);
             return $smarty->fetch('lieux/edit.tpl');
         }
@@ -415,7 +415,7 @@ final class Controller
             $lieu = Lieu::getInstance($id);
             $smarty->assign('lieu', $lieu);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_lieu', true);
             return $smarty->fetch('lieux/delete.tpl');
         }

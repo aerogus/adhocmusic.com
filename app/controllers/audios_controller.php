@@ -76,7 +76,7 @@ final class Controller
         try {
             $audio = Audio::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_audio', true);
             return $smarty->fetch('audios/show.tpl');
         }
@@ -294,7 +294,7 @@ final class Controller
         try {
             $audio = Audio::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_audio', true);
             return $smarty->fetch('audios/edit.tpl');
         }
@@ -396,7 +396,7 @@ final class Controller
         try {
             $audio = Audio::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_audio', true);
             return $smarty->fetch('audios/delete.tpl');
         }

@@ -84,7 +84,7 @@ final class Controller
         try {
             $video = Video::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_video', true);
             return $smarty->fetch('videos/show.tpl');
         }
@@ -201,7 +201,7 @@ final class Controller
         try {
             $video = Video::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_video', true);
             return $smarty->fetch('videos/embed.tpl');
         }
@@ -355,7 +355,7 @@ final class Controller
         try {
             $video = Video::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_video', true);
             return $smarty->fetch('videos/edit.tpl');
         }
@@ -456,7 +456,7 @@ final class Controller
         try {
             $video = Video::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_video', true);
             return $smarty->fetch('videos/delete.tpl');
         }

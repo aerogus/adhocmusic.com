@@ -45,9 +45,9 @@ class Route
     public static $response_format = DEFAULT_CONTROLLERS_FORMAT;
 
     /**
-     * @param string
+     * @param int $http_code n° de code http
      */
-    static function set_http_code($code)
+    static function set_http_code(int $http_code)
     {
         self::$http_code = $code;
     }
@@ -55,7 +55,7 @@ class Route
     /**
      * @param array
      */
-    static function map_connect($params)
+    static function map_connect(array $params)
     {
         $extra_params = $params;
         foreach (['path', 'controller', 'action', 'method'] as $key) {
@@ -64,28 +64,29 @@ class Route
         if (empty($params['method'])) {
             $params['method'] = 'GET';
         }
-        array_push(self::$routes, [
-            'controller' => $params['controller'],
-            'path' => $params['path'],
-            'splitted_path' => explode('/', $params['path']),
-            'method' => strtoupper($params['method']),
-            'action' => $params['action'],
-            'extra_params' => $extra_params,
-        ]);
+        array_push(
+            self::$routes, [
+                'controller' => $params['controller'],
+                'path' => $params['path'],
+                'splitted_path' => explode('/', $params['path']),
+                'method' => strtoupper($params['method']),
+                'action' => $params['action'],
+                'extra_params' => $extra_params,
+            ]
+        );
     }
 
     /**
-     * @param string
+     * @param string $key clé
      *
      * @return mixed|null
      */
     static function params(string $key)
     {
-        if (!isset(self::$action_params[$key])) {
-            return null;
+        if (isset(self::$action_params[$key])) {
+            self::$action_params[$key];
         }
-
-        return self::$action_params[$key];
+        return null;
     }
 
     /**
@@ -99,6 +100,7 @@ class Route
         $matches = [];
         $path = str_replace('?', '', $path);
         $path = str_replace($_SERVER['QUERY_STRING'], '', $path);
+        // recherche extension de fichier dans url
         if ((preg_match('/^(.+)[.]([a-z0-9-]+)$/i', $path, $matches)) > 0) {
             $path = $matches[1];
             $response_format = $matches[2];
@@ -137,8 +139,10 @@ class Route
 
     /**
      * @param string $file fichier
+     *
+     * @return bool
      */
-    static function load(string $file)
+    static function load(string $file): bool
     {
         if (file_exists($file) && is_readable($file)) {
             $routes = file($file);
@@ -177,7 +181,7 @@ class Route
         if ($ret === false) {
             self::_route_log('-', '-', 'Route non trouvée : ' . $method . ' - ' . $path);
             header('HTTP/1.0 404 Not Found');
-            die("404 <script>window.location='" . HOME_URL . "/map?from=404'</script>");
+            die("HTTP 404 Not Found<script>window.location='" . HOME_URL . "/map?from=404'</script>");
         }
         self::_init_params();
         self::$action_params = array_merge(
@@ -192,13 +196,13 @@ class Route
         if (file_exists($controller_file) === false) {
             self::_route_log($controller, $action, 'Contrôleur inaccessible');
             header('HTTP/1.0 503 Service Unavailable');
-            die('503');
+            die('HTTP 503 Service Unavailable');
         }
         include_once $controller_file;
         if (is_callable(['Controller', $action]) === false) {
             self::_route_log($controller, $action, 'Action non implémentée dans le contrôleur');
             header('HTTP/1.0 501 Not implemented');
-            die('501');
+            die('HTTP 501 Not implemented');
         }
         $ret = true;
 
@@ -224,12 +228,11 @@ class Route
         if ($ret === false) {
             self::_route_log($controller, $action, 'Erreur generique');
             header('HTTP/1.0 500 Internal Server Error');
-            die('500');
+            die('500 Internal Server Error');
         }
 
         if (is_string($ret)) {
-            switch (strtolower($response_format))
-            {
+            switch (strtolower($response_format)) {
                 case 'jpeg':
                 case 'jpg':
                     self::_output('image/jpeg', $ret);
@@ -272,7 +275,7 @@ class Route
         if (!is_array($ret)) {
             self::_route_log($controller, $action, 'Le retour n\'est pas un tableau');
             header('HTTP/1.0 500 Internal Server Error');
-            die('500');
+            die('500 Internal Server Error');
         }
 
         if (isset($ret['return_code']) && $ret['return_code'] <= 0) {
@@ -286,8 +289,7 @@ class Route
         // a affiner, pour API, ouverture cross-domain
         header("Access-Control-Allow-Origin: *");
 
-        switch (strtolower($response_format))
-        {
+        switch (strtolower($response_format)) {
             case 'json':
                 self::_output('application/json', json_encode($ret));
                 return true;
@@ -301,7 +303,7 @@ class Route
         }
 
         header('HTTP/1.0 500 Internal Server Error');
-        die('500');
+        die('500 Internal Server Error');
     }
 
     /**
@@ -314,7 +316,7 @@ class Route
     }
 
     /**
-     * @param array $params
+     * @param array $params paramètres
      */
     protected static function _examine_splitted_paths(array $params)
     {
@@ -361,9 +363,9 @@ class Route
     }
 
     /**
-     * @param array
+     * @param array $params paramètres
      */
-    protected static function _examine_splitted_path_component($params)
+    protected static function _examine_splitted_path_component(array $params)
     {
         $found_action = false;
         $found_params = [];
@@ -416,9 +418,10 @@ class Route
     }
 
     /**
-     *
+     * @param string $content_type type de contenu
+     * @param string $content      contenu
      */
-    protected static function _output($content_type, $content)
+    protected static function _output(string $content_type, string $content)
     {
         if ($content_type === 'application/xhtml+xml') {
             if (!(isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/xhtml+xml') !== false)) {
@@ -427,14 +430,14 @@ class Route
         }
 
         $http_codes = [
-            '200' => 'HTTP/1.1 200 OK',
-            '301' => 'HTTP/1.1 301 Moved Permanently',
-            '302' => 'HTTP/1.1 302 Moved Temporarily',
-            '304' => 'HTTP/1.1 304 Not Modified',
-            '400' => 'HTTP/1.1 400 Bad Request',
-            '403' => 'HTTP/1.1 403 Forbidden',
-            '404' => 'HTTP/1.1 404 Not Found',
-            '500' => 'HTTP/1.1 500 Internal Server Error',
+            200 => 'HTTP/1.1 200 OK',
+            301 => 'HTTP/1.1 301 Moved Permanently',
+            302 => 'HTTP/1.1 302 Moved Temporarily',
+            304 => 'HTTP/1.1 304 Not Modified',
+            400 => 'HTTP/1.1 400 Bad Request',
+            403 => 'HTTP/1.1 403 Forbidden',
+            404 => 'HTTP/1.1 404 Not Found',
+            500 => 'HTTP/1.1 500 Internal Server Error',
         ];
 
         header($http_codes[self::$http_code]);
@@ -445,9 +448,13 @@ class Route
     }
 
     /**
+     * Ajoute une log
      *
+     * @param string $controller controlleur
+     * @param string $action     action
+     * @param string $log        log
      */
-    protected static function _route_log($controller, $action, $log)
+    protected static function _route_log(string $controller, string $action, string $log)
     {
         $log_message = '[' . addcslashes($controller, "\r\n|[]") . '] ' .
                        '[' . addcslashes($action, "\r\n|[]") . '] ' .

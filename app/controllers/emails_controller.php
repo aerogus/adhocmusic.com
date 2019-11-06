@@ -15,7 +15,7 @@ final class Controller
         try {
             $newsletter = Newsletter::getInstance($id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             return 'newsletter introuvable';
         }
 

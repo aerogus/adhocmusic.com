@@ -77,6 +77,9 @@ final class Controller
         return $smarty->fetch('events/index.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function ical(): string
     {
         $id = (int) Route::params('id');
@@ -84,7 +87,7 @@ final class Controller
         try {
             $event = Event::getInstance((int) $id);
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             return 'not found';
         }
 
@@ -120,7 +123,7 @@ final class Controller
             $event = Event::getInstance((int) $id);
             $trail->addStep($event->getName());
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $trail->addStep("Évènement Introuvable");
             $smarty->assign('unknown_event', true);
             return $smarty->fetch('events/show.tpl');
@@ -633,7 +636,7 @@ final class Controller
         try {
             $event = Event::getInstance((int) Route::params('id'));
         } catch (Exception $e) {
-            Route::set_http_code('404');
+            Route::set_http_code(404);
             $smarty->assign('unknown_event', true);
             return $smarty->fetch('events/show.tpl');
         }

@@ -94,6 +94,6 @@ ini_set('session.use_trans_sid', '0');
 /**
  * Chargement automatique des paquets gérés par composer
  */
-require_once ADHOC_ROOT_PATH . '/vendor/autoload.php';
+require_once ADHOC_ROOT_PATH . '/vendor/autoload.php'; // prend bien 60ms
 
 Tools::sessionInit();
