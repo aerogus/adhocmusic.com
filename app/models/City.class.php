@@ -50,7 +50,7 @@ class City extends Reference
     protected static $_all_fields = [
         'id_city'        => 'int', // pk
         'id_departement' => 'string',
-        'cp'             => 'int',
+        'cp'             => 'string',
         'name'           => 'string',
     ];
 

@@ -254,7 +254,7 @@ class Alerting extends ObjectModel
             return false;
         }
 
-        $a = Alerting::init()
+        $a = (new Alerting())
             ->setIdContact($id_contact)
             ->setCreatedNow()
             ->setType($type)

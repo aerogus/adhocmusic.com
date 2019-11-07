@@ -82,7 +82,7 @@ final class Controller
             $errors = [];
 
             if (self::_validateStructureCreateForm($data, $errors)) {
-                Structure::init()
+                (new Structure())
                     ->setName($data['name'])
                     ->save();
                 Tools::redirect('/structures/?create=1');

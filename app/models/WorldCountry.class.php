@@ -52,6 +52,16 @@ class WorldCountry extends Reference
         return $this->_id_country;
     }
 
+    /**
+     * Retourne l'url de l'image du drapeau pays
+     *
+     * @return string
+     */
+    function getFlagUrl(): string
+    {
+        return HOME_URL . '/img/flags/' . strtolower($this->_id_country) . '.png';
+    }
+
     /* fin getters */
 
     /* début setters */

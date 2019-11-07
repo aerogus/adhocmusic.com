@@ -51,7 +51,7 @@ final class Controller
                 'auth'       => (int) Route::params('auth'),
             ];
 
-            CMS::init()
+            (new CMS())
                 ->setAlias($data['alias'])
                 ->setBreadcrumb($data['breadcrumb'])
                 ->setTitle($data['title'])

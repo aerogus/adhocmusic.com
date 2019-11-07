@@ -146,16 +146,6 @@ abstract class ObjectModel
     }
 
     /**
-     * Intérêt par rapport au contructeur direct ?
-     *
-     * @return object
-     */
-    static function init(): object
-    {
-        return new static();
-    }
-
-    /**
      * @param mixed $id int|string|array
      *
      * @todo à optimiser le chargement et la gestion du cache

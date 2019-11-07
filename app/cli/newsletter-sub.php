@@ -39,7 +39,7 @@ for ($idx = 1 ; $idx < $argc ; $idx++) {
         }
     } else {
         echo "contact ? non - ";
-        $id = Contact::init()
+        $id = (new Contact())
             ->setEmail($email)
             ->save();
         echo "création du contact OK (" . $id . ")";

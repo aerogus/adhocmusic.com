@@ -114,7 +114,7 @@ final class Controller
     {
         //Tools::auth(Membre::TYPE_INTERNE);
 
-        $s = Subscription::init();
+        $s = new Subscription();
 
         if (!is_null(Route::params('subscribed_at'))) {
             $s->setSubscribedAt((string) Route::params('subscribed_at'));

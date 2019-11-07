@@ -86,7 +86,7 @@ final class Controller
 
                 if (empty($errors)) {
 
-                    $membre = Membre::init()
+                    $membre = (new Membre())
                         ->setEmail($data['email'])
                         ->setPseudo($data['pseudo'])
                         ->setPassword($data['password'])

@@ -221,7 +221,7 @@ final class Controller
 
             if (self::_validateGroupeCreateForm($data, $errors)) {
 
-                $groupe = Groupe::init()
+                $groupe = (new Groupe())
                     ->setName($data['name'])
                     ->setAlias(Groupe::genAlias($data['name']))
                     ->setStyle($data['style'])

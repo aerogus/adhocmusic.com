@@ -430,9 +430,9 @@ class AdHocSmarty extends Smarty
      * Ajoute une variable js utilisable dans les scripts du footer
      * 
      * @param string $key key
-     * @param string $val val
+     * @param mixed $val val
      */
-    function enqueue_script_var(string $key, string $val)
+    function enqueue_script_var(string $key, $val)
     {
         $this->script_vars[$key] = $val;
         $this->assign('script_vars', $this->script_vars);

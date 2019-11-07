@@ -42,7 +42,7 @@ final class Controller
                 'online'      => (bool) Route::params('online'),
             ];
 
-            FAQ::init()
+            (new FAQ())
                 ->setIdCategory($data['id_category'])
                 ->setQuestion($data['question'])
                 ->setAnswer($data['answer'])

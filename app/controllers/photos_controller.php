@@ -218,7 +218,7 @@ final class Controller
 
                 foreach ($_FILES['file']['tmp_name'] as $uploaded_photo_path) {
                     if (is_uploaded_file($uploaded_photo_path)) {
-                        $photo = Photo::init()
+                        $photo = (new Photo())
                             ->setName($data['name'])
                             ->setCredits($data['credits'])
                             ->setIdGroupe($data['id_groupe'])

@@ -110,10 +110,10 @@ final class Controller
 
         $trail = Trail::getInstance()
             ->addStep("Lieux", "/lieux/")
-            ->addStep(WorldCountry::getName($lieu->getIdCountry()), "/lieux/?c=" . $lieu->getIdCountry())
-            ->addStep((string) WorldRegion::getName($lieu->getIdCountry(), $lieu->getIdRegion()), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion());
+            ->addStep(WorldCountry::getInstance($lieu->getIdCountry())->getName(), "/lieux/?c=" . $lieu->getIdCountry())
+            ->addStep(WorldRegion::getInstance(['id_country' => $lieu->getIdCountry(), 'id_region' => $lieu->getIdRegion()])->getName(), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion());
         if ($lieu->getIdCountry() === 'FR') {
-            $trail->addStep(Departement::getName($lieu->getIdDepartement()), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion() . "&d=" . $lieu->getIdDepartement());
+            $trail->addStep(Departement::getInstance($lieu->getIdDepartement())->getName(), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion() . "&d=" . $lieu->getIdDepartement());
         }
         $trail->addStep($lieu->getName());
 
@@ -178,6 +178,7 @@ final class Controller
             )
         );
 
+        /*
         $smarty->assign(
             'comments', Comment::getComments(
                 [
@@ -189,16 +190,17 @@ final class Controller
                 ]
             )
         );
+        */
 
         // alerting
         if (Tools::isAuth()) {
             if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'l', $lieu->getId())) {
-                $smarty->assign('alerting_sub_url', 'https://www.adhocmusic.com/alerting/sub?type=l&id_content='.$lieu->getId());
+                $smarty->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=l&id_content='.$lieu->getId());
             } else {
-                $smarty->assign('alerting_unsub_url', 'https://www.adhocmusic.com/alerting/unsub?type=l&id_content='.$lieu->getId());
+                $smarty->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=l&id_content='.$lieu->getId());
             }
         } else {
-            $smarty->assign('alerting_auth_url', 'https://www.adhocmusic.com/auth/login');
+            $smarty->assign('alerting_auth_url', HOME_URL .  '/auth/login');
         }
 
         return $smarty->fetch('lieux/show.tpl');
@@ -217,7 +219,7 @@ final class Controller
         $smarty->enqueue_script('/js/lieux-create.js');
 
         if (Tools::isSubmit('form-lieu-create')) {
-            //$city = City::getInstance((int) Route::params('id_city'));
+            $city = City::getInstance((int) Route::params('id_city'));
 
             $data = [
                 'id_country'     => (string) Route::params('id_country'),
@@ -227,8 +229,8 @@ final class Controller
                 'id_type'        => (int) Route::params('id_type'),
                 'name'           => (string) Route::params('name'),
                 'address'        => (string) Route::params('address'),
-                'cp'             => City::getCp((int) Route::params('id_city')),
-                'city'           => City::getName((int) Route::params('id_city')),
+                'cp'             => $city->getCp(),
+                'city'           => $city->getName(),
                 'text'           => (string) Route::params('text'),
                 'tel'            => (string) Route::params('tel'),
                 'email'          => (string) Route::params('email'),
@@ -239,7 +241,7 @@ final class Controller
 
             if (self::_validateLieuCreateForm($data, $errors)) {
 
-                $lieu = Lieu::init()
+                $lieu = (new Lieu())
                     ->setIdCountry($data['id_country'])
                     ->setIdRegion($data['id_region'])
                     ->setIdDepartement($data['id_departement'])
@@ -323,6 +325,8 @@ final class Controller
         }
 
         if (Tools::isSubmit('form-lieu-edit')) {
+            $city = City::getInstance((int) Route::params('id_city'));
+
             $data = [
                 'id'             => (int) Route::params('id'),
                 'id_country'     => (string) Route::params('id_country'),
@@ -332,8 +336,8 @@ final class Controller
                 'id_type'        => (int) Route::params('id_type'),
                 'name'           => (string) Route::params('name'),
                 'address'        => (string) Route::params('address'),
-                'cp'             => City::getCp((int) Route::params('id_city')),
-                'city'           => City::getName((int) Route::params('id_city')),
+                'cp'             => $city->getCp(),
+                'city'           => $city->getName(),
                 'text'           => (string) Route::params('text'),
                 'tel'            => (string) Route::params('tel'),
                 'email'          => (string) Route::params('email'),

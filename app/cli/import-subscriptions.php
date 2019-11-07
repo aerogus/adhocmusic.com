@@ -15,7 +15,7 @@ define('IMPORT_FILE', __DIR__ . '/subscriptions.csv');
 if (($handle = fopen(IMPORT_FILE, 'r')) !== false) {
     while (($data = fgetcsv($handle, 1000, ',')) !== false) {
         echo "Insertion cotisation\n";
-        Subscription::init()
+        (new Subscription())
             ->setSubscribedAt($data[0])
             ->setAmount((float) $data[1])
             ->setFirstName($data[2])

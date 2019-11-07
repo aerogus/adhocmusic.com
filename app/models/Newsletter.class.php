@@ -409,7 +409,7 @@ class Newsletter extends ObjectModel
             }
         } else {
             // contact ? non
-            Contact::init()
+            (new Contact())
                 ->setEmail($email)
                 ->save();
             // création du contact OK

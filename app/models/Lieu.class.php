@@ -237,7 +237,7 @@ class Lieu extends ObjectModel
      */
     function getCpNew(): string
     {
-        return City::getCp($this->_id_city);
+        return City::getInstance($this->_id_city)->getCp();
     }
 
     /**
@@ -257,7 +257,7 @@ class Lieu extends ObjectModel
      */
     function getCityNew(): string
     {
-        return City::getName($this->_id_city);
+        return City::getInstance($this->_id_city)->getName();
     }
 
     /**
@@ -298,7 +298,7 @@ class Lieu extends ObjectModel
      */
     function getDepartement(): string
     {
-        return Departement::getName($this->_id_departement);
+        return Departement::getInstance($this->_id_departement)->getName();
     }
 
     /**
@@ -318,7 +318,12 @@ class Lieu extends ObjectModel
      */
     function getRegion(): string
     {
-        return (string) WorldRegion::getName($this->_id_country, $this->_id_region);
+        return WorldRegion::getInstance(
+            [
+                'id_country' => $this->_id_country,
+                'id_region' => $this->_id_region,
+            ]
+        )->getName();
     }
 
     /**
@@ -338,7 +343,7 @@ class Lieu extends ObjectModel
      */
     function getCountry(): string
     {
-        return WorldCountry::getName($this->_id_country);
+        return WorldCountry::getInstance($this->_id_country)->getName();
     }
 
     /**
@@ -348,7 +353,7 @@ class Lieu extends ObjectModel
      */
     function getCountryFlagUrl(): string
     {
-        return HOME_URL . '/img/flags/' . strtolower($this->_id_country) . '.png';
+        return WorldCountry::getInstance($this->_id_country)->getFlagUrl();
     }
 
     /**

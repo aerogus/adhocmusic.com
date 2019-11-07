@@ -41,7 +41,7 @@ final class Controller
                 'content' => trim((string) Route::params('content')),
             ];
 
-            Newsletter::init()
+            (new Newsletter())
                 ->setTitle($data['title'])
                 ->setContent($data['content'])
                 ->save();

@@ -138,7 +138,11 @@ final class Controller
 
             // si identifié, préremplissage de certains champs
             if (!empty($_SESSION['membre'])) {
-                $data['name'] = $_SESSION['membre']->getFirstName() . ' ' . $_SESSION['membre']->getLastName() . ' (' . $_SESSION['membre']->getPseudo() . ')';
+                if ($_SESSION['membre']->getFirstName() || $_SESSION['membre']->getLastName()) {
+                    $data['name'] = $_SESSION['membre']->getFirstName() . ' ' . $_SESSION['membre']->getLastName() . ' (' . $_SESSION['membre']->getPseudo() . ')';
+                } else {
+                    $data['name'] = $_SESSION['membre']->getPseudo();
+                }
                 $data['email'] = $_SESSION['membre']->getEmail();
             }
 

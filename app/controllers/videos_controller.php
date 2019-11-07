@@ -247,7 +247,7 @@ final class Controller
                 $data['id_host'] = $info['id_host'];
                 $data['reference'] = $info['reference'];
 
-                $video = Video::init()
+                $video = (new Video())
                     ->setName($data['name'])
                     ->setIdGroupe($data['id_groupe'])
                     ->setIdLieu($data['id_lieu'])

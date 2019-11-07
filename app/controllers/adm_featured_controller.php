@@ -64,7 +64,7 @@ final class Controller
 
             if (self::_validateForm($data, $errors)) {
 
-                $f = Featured::init()
+                $f = (new Featured())
                     ->setTitle($data['title'])
                     ->setDescription($data['description'])
                     ->setLink($data['link'])

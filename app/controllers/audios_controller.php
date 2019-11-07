@@ -191,7 +191,7 @@ final class Controller
             $errors = [];
 
             if (self::_validateAudioForm($data, $errors)) {
-                $audio = Audio::init()
+                $audio = (new Audio())
                     ->setName($data['name'])
                     ->setIdGroupe($data['id_groupe'])
                     ->setIdLieu($data['id_lieu'])

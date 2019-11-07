@@ -71,7 +71,7 @@ final class Controller
             die('spam not allowed here !');
         }
 
-        $comment = Comment::init()
+        $comment = (new Comment())
             ->setType($data['type'])
             ->setIdContent($data['id_content'])
             ->setOnline(true)

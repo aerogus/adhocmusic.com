@@ -356,7 +356,7 @@ final class Controller
 
             if (self::_validateEventCreateForm($data, $errors)) {
 
-                $event = Event::init()
+                $event = (new Event())
                     ->setName($data['name'])
                     ->setIdLieu($data['id_lieu'])
                     ->setDate($data['date'])
