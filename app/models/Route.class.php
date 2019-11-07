@@ -49,7 +49,7 @@ class Route
      */
     static function set_http_code(int $http_code)
     {
-        self::$http_code = $code;
+        self::$http_code = $http_code;
     }
 
     /**

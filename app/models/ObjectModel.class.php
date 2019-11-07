@@ -38,7 +38,7 @@ abstract class ObjectModel
      *
      * @var bool
      */
-    protected static $_cachable = false;
+    protected static $_cachable = true;
 
     /**
      * Identifiant unique d'objet

@@ -87,8 +87,8 @@
       <div class="reset">
         {foreach from=$faq item=f}
         <div class="faq">
-          <h3 class="flex-row-reverse">{$f.question} <i class="icon-arrow--right"></i></h3>
-          <p>{$f.answer}</p>
+          <h3 class="flex-row-reverse">{$f->getQuestion()} <i class="icon-arrow--right"></i></h3>
+          <p>{$f->getAnswer()}</p>
         </div>
         {/foreach}
       </div>

@@ -65,7 +65,7 @@
   <div>
     <ul>
     {foreach from=$audios item=audio}
-      <li><strong>{$audio.name|escape}</strong> (<a href="{$audio.groupe_url}">{$audio.groupe_name|escape}</a>)<br>{audio_player id=$audio.id}</li>
+      <li><strong>{$audio.name|escape}</strong> (<a href="{$audio.groupe_url}">{$audio.groupe_name|escape}</a>)<br><audio controls src="https://static.adhocmusic.com/media/audio/{$audio.id}.mp3"></audio></li>
     {/foreach}
     </ul>
   </div>
