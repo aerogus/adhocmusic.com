@@ -22,16 +22,16 @@
 {/if}
 
 {if !empty($err_email_invalid)}
-<div class="infobulle error">Erreur Email synatiquement incorrect.</div>
+<div class="infobulle error">Erreur e-mail synatiquement incorrect.</div>
 {/if}
 
 {if !empty($form)}
 <form id="form-lost-password" name="form-lost-password" method="post" action="/auth/lost-password">
-  Veuillez entrer l'E-mail que vous avez utilisé pour l'inscription, un nouveau mot de passe vous sera envoyé par E-mail.</p>
+  Veuillez entrer l'e-mail que vous avez utilisé pour l'inscription, un nouveau mot de passe vous sera envoyé par e-mail.</p>
   <label for="email">E-mail</label>
-  <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez renseigner votre E-mail ou E-mail invalide</div>
+  <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez renseigner votre e-mail ou e-mail invalide</div>
   <input name="email" id="email" type="email" placeholder="E-mail" style="width:100%">
-  <input id="form-lost-password-submit" name="form-lost-password-submit" class="button" type="submit" value="Ok">
+  <input id="form-lost-password-submit" name="form-lost-password-submit" class="button" style="width:100%" type="submit" value="Ok">
 </form>
 {/if}
 

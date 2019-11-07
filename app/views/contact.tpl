@@ -6,7 +6,7 @@
 
   <div class="box">
     <header>
-      <h1>Contacter l'association AD’HOC</h1>
+      <h1>Contacter l’association AD’HOC</h1>
     </header>
     <div>
 
@@ -30,22 +30,22 @@
           <li>
             <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner votre nom</div>
             <label for="name">Nom</label>
-            <input name="name" id="name" type="text" maxlength="80" value="{$name|escape}" style="width:100%">
+            <input name="name" id="name" type="text" maxlength="80" placeholder="Votre nom" value="{$name|escape}" style="width:100%">
           </li>
           <li>
             <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Votre email semble incorrect</div>
-            <label for="email">Email</label>
-            <input name="email" id="email" type="email" maxlength="80" value="{$email|escape}" style="width:100%">
+            <label for="email">E-mail</label>
+            <input name="email" id="email" type="email" maxlength="80" placeholder="Votre e-mail" value="{$email|escape}" style="width:100%">
           </li>
           <li>
             <div class="infobulle error" id="error_subject"{if empty($error_subject)} style="display: none"{/if}>Vous devez saisir un sujet</div>
             <label for="subject">Sujet</label>
-            <input name="subject" id="subject" type="text" maxlength="80" value="{$subject|escape}" style="width:100%">
+            <input name="subject" id="subject" type="text" maxlength="80" placeholder="Votre sujet" value="{$subject|escape}" style="width:100%">
           </li>
           <li>
             <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
             <label for="text">Message</label>
-            <textarea name="text" id="text" style="width:100%;height:160px">{$text|escape}</textarea>
+            <textarea name="text" id="text" placeholder="Votre message" style="width:100%;height:160px">{$text|escape}</textarea>
           </li>
           <li>
             <label for="mailing">Je souhaite recevoir la newsletter</label>
