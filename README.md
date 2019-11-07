@@ -23,10 +23,10 @@ ajouter la ligne suivante dans `/etc/hosts` :
 cd ~/workspace
 git clone git@bitbucket.org:adhocmusic/adhocmusic.com.git
 cd adhocmusic.com
-composer install (dépendances php)
-npm install (dépendances js)
-npm run serve (brunch watch)
-npm start (docker-compose up)
+composer install
+npm install
+brunch build
+docker-compose up
 ```
 
 Redémarrage avec reconstruction des containers :
@@ -36,3 +36,12 @@ docker-compose down && docker-compose up --build
 ```
 
 ou directement npm start
+
+Construction pour la prod :
+
+
+```
+composer install --no-dev
+npm install --only=prod
+brunch build --production
+```
