@@ -282,7 +282,6 @@ CREATE TABLE IF NOT EXISTS `adhoc_event` (
   `id_lieu` int(10) UNSIGNED NOT NULL,
   `id_contact` int(10) UNSIGNED NOT NULL,
   `facebook_event_id` char(20) DEFAULT NULL,
-  `facebook_event_attending` int(10) UNSIGNED DEFAULT NULL,
   `online` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,

@@ -72,11 +72,6 @@ class Event extends ObjectModel
     protected $_facebook_event_id = '';
 
     /**
-     * @var int
-     */
-    protected $_facebook_event_attending = 0;
-
-    /**
      * @var string
      */
     protected $_created_on = null;
@@ -118,7 +113,6 @@ class Event extends ObjectModel
         'id_lieu'       => 'int',
         'id_contact'    => 'int',
         'facebook_event_id' => 'string',
-        'facebook_event_attending' => 'int',
     ];
 
     /* début getters */
@@ -475,21 +469,6 @@ class Event extends ObjectModel
     }
 
     /**
-     * @param int $facebook_event_attending facebook_event_attending
-     *
-     * @return object
-     */
-    function setFacebookEventAttending(int $facebook_event_attending): object
-    {
-        if ($this->_facebook_event_attending !== $facebook_event_attending) {
-            $this->_facebook_event_attending = $facebook_event_attending;
-            $this->_modified_fields['facebook_event_attending'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
      * @param string $date date
      *
      * @return object
@@ -671,7 +650,7 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT DISTINCT `e`.`id_event` AS `id`, `e`.`name`, "
-             . "`e`.`text`, `e`.`date`, `e`.`price`, `e`.`facebook_event_id`, `e`.`facebook_event_attending`, `e`.`online`, "
+             . "`e`.`text`, `e`.`date`, `e`.`price`, `e`.`facebook_event_id`, `e`.`online`, "
              . "`e`.`created_on`, `e`.`modified_on`, "
              . "`l`.`id_lieu` AS `lieu_id`, `l`.`name` AS `lieu_name`, "
              . "`l`.`city` AS `lieu_city`, `l`.`id_departement` AS `lieu_id_departement`, "

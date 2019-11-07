@@ -43,7 +43,7 @@ define('MEDIA_DAILYMOTION_EMBED_PATTERN',
  * 6 - Facebook
  */
 define('MEDIA_FACEBOOK_URL_PATTERN',
-       '~^http://www.facebook.com/v/([0-9]{1,16})~');
+       '~^https://www.facebook.com/v/([0-9]{1,16})~');
 
 define('MEDIA_FACEBOOK_URL_PATTERN2',
        '~^https://www.facebook.com/video/video.php?v=([0-9]{1,16})~');

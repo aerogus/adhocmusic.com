@@ -78,6 +78,9 @@ final class Controller
     }
 
     /**
+     * Retourne le .ics (calendrier) pour l'événement
+     * Dépendance composer de Eluceo\iCal
+     *
      * @return string
      */
     static function ical(): string
@@ -327,7 +330,6 @@ final class Controller
             'text' => '',
             'price' => '',
             'facebook_event_id' => '',
-            'facebook_event_create' => false,
             'more_event' => false,
         ];
 
@@ -349,7 +351,6 @@ final class Controller
                 'more-event' => (bool) Route::params('more-event'),
                 'flyer_url'  => (string) Route::params('flyer_url'),
                 'facebook_event_id' => (string) Route::params('facebook_event_id'),
-                'facebook_event_create' => (string) Route::params('facebook_event_create'),
             ];
             $errors = [];
 
@@ -415,10 +416,6 @@ final class Controller
                     }
 
                     Log::action(Log::ACTION_EVENT_CREATE, $event->getId());
-
-                    if ($data['facebook_event_create']) {
-                        // créer l'évenement sur facebook
-                    }
 
                     if ((bool) Route::params('more-event')) {
                         Tools::redirect('/events/create?lieu=' . $event->getIdLieu());
@@ -497,7 +494,6 @@ final class Controller
             'file' => '',
             'flyer_url' => '',
             'facebook_event_id' => $event->getFacebookEventId(),
-            'facebook_event_create' => false,
             'online' => $event->getOnline(),
         ];
 
@@ -517,7 +513,6 @@ final class Controller
                 'text' => (string) Route::params('text'),
                 'price' => (string) Route::params('price'),
                 'facebook_event_id' => (string) Route::params('facebook_event_id'),
-                'facebook_event_create' => (string) Route::params('facebook_event_create'),
                 'online' => (bool) Route::params('online'),
             ];
             $errors = [];
