@@ -59,7 +59,7 @@ class WorldCountry extends Reference
      */
     function getFlagUrl(): string
     {
-        return HOME_URL . '/img/flags/' . strtolower($this->_id_country) . '.png';
+        return MEDIA_URL . '/country/' . strtolower($this->_id_country) . '.png';
     }
 
     /* fin getters */
