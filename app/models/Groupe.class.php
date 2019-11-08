@@ -1182,6 +1182,7 @@ class Groupe extends ObjectModel
      *
      * @return array
      */
+    /*
     static function find(array $params = []): array
     {
         $db = DataBase::getInstance();
@@ -1203,6 +1204,7 @@ class Groupe extends ObjectModel
 
         return $objs;
     }
+    */
 
     /**
      * Retourne un tableau de groupes en fonction de critères donnés
