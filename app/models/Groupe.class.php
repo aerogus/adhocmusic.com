@@ -1178,7 +1178,36 @@ class Groupe extends ObjectModel
     }
 
     /**
+     * Retourne une collection de groupes répondant au(x) critère(s)
+     *
+     * @return array
+     */
+    static function find(array $params = []): array
+    {
+        $db = DataBase::getInstance();
+        $objs = [];
+
+        $sql = "SELECT `id_groupe` FROM `" . Groupe::getDbTable() . "` WHERE 1 ";
+
+        if (isset($params['id_contact'])) {
+            // extraire dans adhoc_appartient_a les id_groupe correspondant au id_contact
+            $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'];
+            $ids_groupes = $db->queryWithFetch($subSql);
+            $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
+        }
+
+        $rows = $db->queryWithFetch($sql);
+        foreach ($rows as $row) {
+            $objs[] = static::getInstance($row);
+        }
+
+        return $objs;
+    }
+
+    /**
      * Retourne un tableau de groupes en fonction de critères donnés
+     *
+     * @deprecated (soon)
      *
      * @param array $params params
      *

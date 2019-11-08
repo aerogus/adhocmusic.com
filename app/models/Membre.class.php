@@ -483,6 +483,12 @@ class Membre extends Contact
      */
     function getGroupes(): array
     {
+        return Groupe::find(
+            [
+                'id_contact' => (int) $this->getId()
+            ]
+        );
+
         if ($this->_groupes === false) {
             $db   = DataBase::getInstance();
 
