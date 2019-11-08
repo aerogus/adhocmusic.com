@@ -68,7 +68,7 @@ define('ADHOC_ROUTES_FILE',        ADHOC_ROOT_PATH . '/app/routes');
 define('ADHOC_LOG_PATH',           ADHOC_ROOT_PATH . '/log');
 define('DEFAULT_CONTROLLERS_PATH', ADHOC_ROOT_PATH . '/app/controllers/');
 define('MEDIA_PATH',               ADHOC_ROOT_PATH . '/static/media');
-define('OBJECT_CACHE_PATH',        ADHOC_ROOT_PATH . '/object-cache');
+define('OBJECT_CACHE_PATH',        ADHOC_ROOT_PATH . '/tmpfs/objects');
 
 // chemin local
 define('IMG_CACHE_PATH', ADHOC_ROOT_PATH . '/static/cache');
@@ -77,7 +77,7 @@ define('IMG_CACHE_PATH', ADHOC_ROOT_PATH . '/static/cache');
 define('IMG_CACHE_URL', CACHE_URL);
 
 define('SMARTY_TEMPLATE_PATH',   ADHOC_ROOT_PATH . '/app/views');
-define('SMARTY_TEMPLATE_C_PATH', ADHOC_ROOT_PATH . '/smarty');
+define('SMARTY_TEMPLATE_C_PATH', ADHOC_ROOT_PATH . '/tmpfs/smarty');
 
 define('GOOGLE_MAPS_API_KEY', 'AIzaSyBVsz6lTrtPcGaGy8-pNNLdmhDIg7Cng24');
 
