@@ -22,3 +22,6 @@
 
 # export brunch
 /public
+
+# fs en ram
+/tmpfs
