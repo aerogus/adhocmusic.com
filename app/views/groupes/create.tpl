@@ -41,7 +41,7 @@ Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fic
         </li>
         <li>
           <div class="infobulle error" id="error_influences"{if empty($error_influences)} style="display: none"{/if}>Vous devez préciser vos influences</div>
-          <label for="influences">Influences (*)</label>
+          <label for="influences">Influences</label>
           <input type="text" id="influences" name="influences" size="50" value="{$data.influences|escape}">
         </li>
         <li>

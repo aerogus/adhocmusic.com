@@ -43,7 +43,7 @@
     </li>
     <li>
       <div class="infobulle error" id="error_influences"{if empty($error_influences)} style="display: none"{/if}>Vous devez préciser vos influences</div>
-      <label for="influences">Influences (*)</label>
+      <label for="influences">Influences</label>
       <input type="text" id="influences" name="influences" value="{$data.influences|escape}">
     </li>
     <li>
