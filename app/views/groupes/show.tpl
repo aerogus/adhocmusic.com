@@ -86,28 +86,20 @@
 
     <div class="box">
       <header>
-        <h1>Présentation</h1>
+        <h2>Présentation</h2>
       </header>
       <div>
         {if $groupe->getPhoto()}
         <img src="{$groupe->getPhoto()}" alt="{$groupe->getName()|escape}" title="{$groupe->getName()|escape}">
         {/if}
         <p align="justify">{$groupe->getText()|nl2br}</p>
-        {include file="comments/share.tpl" title="ce groupe" url=$groupe->getUrl()}
-        {if !empty($alerting_sub_url)}
-        <div class="alerting-sub"><a href="{$alerting_sub_url}">S'abonner à ce groupe</a></div>
-        {elseif !empty($alerting_unsub_url)}
-        <div class="alerting-unsub"><a href="{$alerting_unsub_url}">Se désabonner de ce groupe</a></div>
-        {elseif !empty($alerting_auth_url)}
-        <div class="alerting-auth"><a href="{$alerting_auth_url}">S'abonner à ce groupe</a></div>
-        {/if}
       </div>
     </div>
 
     {if $f_events|@count > 0}
     <div class="box">
       <header>
-        <h2>Concerts à venir</h2>
+        <h2>Évènements à venir</h2>
       </header>
       <div>
         <ul>
@@ -122,7 +114,7 @@
     {if $p_events|@count > 0}
     <div class="box">
       <header>
-        <h2>Concerts passés</h2>
+        <h2>Évènements passés</h2>
       </header>
       <div>
         <ul>
