@@ -12,12 +12,6 @@ jQuery(document).ready(function ($) {
     } else {
       $('#error_style').fadeOut();
     }
-    if ($('#influences').val().length === 0) {
-      $('#error_influences').fadeIn();
-      valid = false;
-    } else {
-      $('#error_influences').fadeOut();
-    }
     if ($('#lineup').val().length === 0) {
       $('#error_lineup').fadeIn();
       valid = false;
