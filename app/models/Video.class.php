@@ -42,9 +42,7 @@ define('MEDIA_DAILYMOTION_EMBED_PATTERN',
 /**
  * 6 - Facebook
  */
-define('MEDIA_FACEBOOK_URL_PATTERN1', '~^https://www.facebook.com/v/([0-9]{1,16})~');
-define('MEDIA_FACEBOOK_URL_PATTERN2', '~^https://www.facebook.com/video/video.php?v=([0-9]{1,16})~');
-define('MEDIA_FACEBOOK_URL_PATTERN3', '~^https://www.facebook.com/watch/?v=([0-9]{1,16})~');
+define('MEDIA_FACEBOOK_URL_PATTERN', '~^https://www\.facebook\.com/watch/\?v=([0-9]{1,16})~');
 define('MEDIA_FACEBOOK_DIRECT_VIDEO_URL_PATTERN', '');
 
 /**
@@ -541,26 +539,16 @@ class Video extends Media
         switch ($this->_id_host)
         {
             case self::HOST_YOUTUBE:
-                $autoplay ? $strautoplay = '1' : $strautoplay = '';
                 return '<iframe title="'.htmlspecialchars($this->getName()).'" src="https://www.youtube.com/embed/'.$this->getReference().'?rel=0" allowfullscreen></iframe>' . "\n";
 
             case self::HOST_DAILYMOTION:
-                $autoplay ? $strautoplay = '1' : $strautoplay = '0';
-                // taille par défaut : l330 / h267
-                return '<iframe src="https://www.dailymotion.com/embed/video/'.$this->getReference().'?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&autoPlay='.$strautoplay.'&wmode=transparent"></iframe>' . "\n";
+                return '<iframe src="https://www.dailymotion.com/embed/video/'.$this->getReference().'?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&wmode=transparent"></iframe>' . "\n";
 
             case self::HOST_FACEBOOK:
-                return '<object>' . "\n"
-                     . '<param name="allowfullscreen" value="true" />' . "\n"
-                     . '<param name="allowscriptaccess" value="always" />' . "\n"
-                     . '<param name="movie" value="http://www.facebook.com/v/'.$this->getReference().'" />' . "\n"
-                     . '<embed src="https://www.facebook.com/v/'.$this->getReference().'" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'.self::DEFAULT_WIDTH.'" height="'.self::DEFAULT_HEIGHT.'">' . "\n"
-                     . '</embed>' . "\n"
-                     . '</object>' . "\n";
+                return '<iframe src="https://www.facebook.com/video/embed?video_id=' . $this->getReference() . '" allowfullscreen></iframe>' . "\n";
 
             case self::HOST_VIMEO:
-                $autoplay ? $strautoplay = '1' : $strautoplay = '0';
-                return '<iframe src="https://player.vimeo.com/video/'.$this->getReference().'?title=0&amp;byline=0&amp;portrait=0&amp;autoplay='.$strautoplay.'"></iframe>' . "\n";
+                return '<iframe src="https://player.vimeo.com/video/'.$this->getReference().'?title=0&amp;byline=0&amp;portrait=0&amp;autoplay='.$strautoplay.'" allowfullscreen></iframe>' . "\n";
 
             case self::HOST_ADHOCTUBE:
                 return '<iframe sandbox="allow-same-origin allow-scripts" src="https://'.MEDIA_ADHOCTUBE_HOST.'/videos/embed/'.$this->getReference().'" allowfullscreen></iframe>' . "\n";
