@@ -1,0 +1,4 @@
+# le répertoire doit être présent mais son contenu non versionné
+# cache en RAM du cache smarty
+*
+!.gitignore
