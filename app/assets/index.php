@@ -7,7 +7,13 @@
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 
-require_once __DIR__ . '/../app/bootstrap.php';
+if (file_exists(__DIR__ . '/../../app/bootstrap.php')) {
+    include __DIR__ . '/../../app/bootstrap.php'; // ./tmpfs/www -> ./app : "../.."
+} elseif (file_exists(__DIR__ . '/../app/bootstrap.php')) {
+    include __DIR__ . '/../app/bootstrap.php'; // ./public    -> ./app : "../"
+} else {
+    die('bootstrap inrouvable');
+}
 
 // PATH_INFO est l'info sur laquelle on se base pour calculer les routes
 if (!array_key_exists('PATH_INFO', $_SERVER)) {
