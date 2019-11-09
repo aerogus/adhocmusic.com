@@ -142,7 +142,7 @@ final class Controller
         $smarty->assign('pseudo', 'pseudo');
         $smarty->assign('date', '2011-12-25 06:00:00');
         $smarty->assign('title', 'Titre du contenu');
-        $smarty->assign('url', 'http://www.adhocmusic.com');
+        $smarty->assign('url', HOME_URL);
         $smarty->assign('text', 'Contenu du commentaire');
         return $smarty->fetch('new-commentaire.tpl');
     }

@@ -147,12 +147,12 @@ final class Controller
         // alerting
         if (Tools::isAuth()) {
             if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'e', $event->getId())) {
-                $smarty->assign('alerting_sub_url', 'https://www.adhocmusic.com/alerting/sub?type=e&id_content='.$event->getId());
+                $smarty->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=e&id_content='.$event->getId());
             } else {
-                $smarty->assign('alerting_unsub_url', 'https://www.adhocmusic.com/alerting/unsub?type=e&id_content='.$event->getId());
+                $smarty->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=e&id_content='.$event->getId());
             }
         } else {
-            $smarty->assign('alerting_auth_url', 'https://www.adhocmusic.com/auth/login');
+            $smarty->assign('alerting_auth_url', HOME_URL . '/auth/login');
         }
 
         $smarty->assign(

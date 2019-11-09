@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+define('GROUPE_MINI_PHOTO_SIZE', 128);
+
 final class Controller
 {
     /**
@@ -161,12 +163,12 @@ final class Controller
         // alerting
         if (Tools::isAuth()) {
             if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'g', $groupe->getId())) {
-                $smarty->assign('alerting_sub_url', 'http://www.adhocmusic.com/alerting/sub?type=g&id_content='.$groupe->getId());
+                $smarty->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=g&id_content='.$groupe->getId());
             } else {
-                $smarty->assign('alerting_unsub_url', 'http://www.adhocmusic.com/alerting/unsub?type=g&id_content='.$groupe->getId());
+                $smarty->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=g&id_content='.$groupe->getId());
             }
         } else {
-            $smarty->assign('alerting_auth_url', 'http://www.adhocmusic.com/auth/login');
+            $smarty->assign('alerting_auth_url', HOME_URL . '/auth/login');
         }
 
         return $smarty->fetch('groupes/show.tpl');
@@ -261,8 +263,8 @@ final class Controller
                         (new Image($_FILES['mini_photo']['tmp_name']))
                             ->setType(IMAGETYPE_JPEG)
                             ->setKeepRatio(false)
-                            ->setMaxWidth(64)
-                            ->setMaxHeight(64)
+                            ->setMaxWidth(GROUPE_MINI_PHOTO_SIZE)
+                            ->setMaxHeight(GROUPE_MINI_PHOTO_SIZE)
                             ->setDestFile(Groupe::getBasePath() . '/m' . $groupe->getId() . '.jpg')
                             ->write();
                     }
@@ -395,8 +397,8 @@ final class Controller
                     (new Image($_FILES['mini_photo']['tmp_name']))
                         ->setType(IMAGETYPE_JPEG)
                         ->setKeepRatio(false)
-                        ->setMaxWidth(64)
-                        ->setMaxHeight(64)
+                        ->setMaxWidth(128)
+                        ->setMaxHeight(128)
                         ->setDestFile(Groupe::getBasePath() . '/m' . $groupe->getId() . '.jpg')
                         ->write();
                 }
@@ -480,9 +482,6 @@ final class Controller
         if (empty($data['style'])) {
             $errors['style'] = true;
         }
-        if (empty($data['influences'])) {
-            $errors['influences'] = true;
-        }
         if (empty($data['lineup'])) {
             $errors['lineup'] = true;
         }
@@ -512,9 +511,6 @@ final class Controller
     {
         if (empty($data['style'])) {
             $errors['style'] = true;
-        }
-        if (empty($data['influences'])) {
-            $errors['influences'] = true;
         }
         if (empty($data['lineup'])) {
             $errors['lineup'] = true;
