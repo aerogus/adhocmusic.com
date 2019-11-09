@@ -42,14 +42,10 @@ define('MEDIA_DAILYMOTION_EMBED_PATTERN',
 /**
  * 6 - Facebook
  */
-define('MEDIA_FACEBOOK_URL_PATTERN',
-       '~^https://www.facebook.com/v/([0-9]{1,16})~');
-
-define('MEDIA_FACEBOOK_URL_PATTERN2',
-       '~^https://www.facebook.com/video/video.php?v=([0-9]{1,16})~');
-
-define('MEDIA_FACEBOOK_DIRECT_VIDEO_URL_PATTERN',
-       '');
+define('MEDIA_FACEBOOK_URL_PATTERN1', '~^https://www.facebook.com/v/([0-9]{1,16})~');
+define('MEDIA_FACEBOOK_URL_PATTERN2', '~^https://www.facebook.com/video/video.php?v=([0-9]{1,16})~');
+define('MEDIA_FACEBOOK_URL_PATTERN3', '~^https://www.facebook.com/watch/?v=([0-9]{1,16})~');
+define('MEDIA_FACEBOOK_DIRECT_VIDEO_URL_PATTERN', '');
 
 /**
  * 8 - Vimeo
@@ -661,15 +657,22 @@ class Video extends Media
             }
         }
 
-        // Facebook
-        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN, $str, $matches)) {
+        // Facebook v1
+        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN1, $str, $matches)) {
             if (!empty($matches[1])) {
                 return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
             }
         }
 
-        // Facebook
-        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN, $str, $matches)) {
+        // Facebook v2
+        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN2, $str, $matches)) {
+            if (!empty($matches[1])) {
+                return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
+            }
+        }
+
+        // Facebook v3
+        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN3, $str, $matches)) {
             if (!empty($matches[1])) {
                 return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
             }
@@ -680,7 +683,7 @@ class Video extends Media
             if (!empty($matches[1])) {
                 return ['id_host' => self::HOST_VIMEO, 'reference' => $matches[1]];
             }
-         }
+        }
 
         // AD'HOC Tube
         if (preg_match(MEDIA_ADHOCTUBE_URL_PATTERN, $str, $matches)) {
