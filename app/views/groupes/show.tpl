@@ -41,12 +41,6 @@
           {/if}
         </ul>
         {/if}
-        {if $groupe->getCreatedOn()}
-        <p><strong>Fiche créée le</strong><br>{$groupe->getCreatedOn()|date_format:"%d/%m/%Y"}</p>
-        {/if}
-        {if $groupe->getModifiedOn()}
-        <p><strong>Mise à jour le</strong><br>{$groupe->getModifiedOn()|date_format:"%d/%m/%Y"}</p>
-        {/if}
       </div>
     </div>
 
