@@ -15,7 +15,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Commentaires", '/comments/');
+            ->addStep("Commentaires", '/comments');
 
         $comments = Comment::getComments(
             [

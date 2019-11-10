@@ -17,7 +17,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         $trail = Trail::getInstance()
-            ->addStep('Membres', '/membres/');
+            ->addStep('Membres', '/membres');
 
         try {
             $membre = Membre::getInstance($id);
@@ -64,19 +64,19 @@ final class Controller
 
         // valeurs par défaut
         $data = [
-            'pseudo'         => '',
-            'email'          => '',
-            'mailing'        => true,
-            'csrf'           => '',
+            'pseudo'  => '',
+            'email'   => '',
+            'mailing' => true,
+            'csrf'    => '',
         ];
 
         if (Tools::isSubmit('form-member-create')) {
 
             $data = [
-                'pseudo'         => trim((string) Route::params('pseudo')),
-                'email'          => trim(strtolower((string) Route::params('email'))),
-                'mailing'        => (bool) Route::params('mailing'),
-                'csrf'           => '',
+                'pseudo'  => trim((string) Route::params('pseudo')),
+                'email'   => trim(strtolower((string) Route::params('email'))),
+                'mailing' => (bool) Route::params('mailing'),
+                'csrf'    => '',
             ];
             $errors = [];
 

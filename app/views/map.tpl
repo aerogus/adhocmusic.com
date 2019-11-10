@@ -32,13 +32,13 @@
         </ul>
       </li>
       <li>
-        <a href="/groupes/">Groupes</a>
+        <a href="/groupes">Groupes</a>
       </li>
       <li>
-        <a href="/events/">Agenda</a>
+        <a href="/events">Agenda</a>
       </li>
       <li>
-        <a href="/medias/">Média</a>
+        <a href="/medias">Média</a>
       </li>
       <li>
         <a href="/contact">Contact</a>

@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use \Reference\Departement;
+
 define('NB_PHOTOS_PER_PAGE', 48);
 
 /**
@@ -109,18 +111,18 @@ final class Controller
 
             $trail = Trail::getInstance();
             if ($from === 'groupe' && $photo->getIdGroupe()) {
-                $trail->addStep("Groupes", "/groupes/")
+                $trail->addStep("Groupes", "/groupes")
                     ->addStep($groupe->getName(), $groupe->getUrl());
             } elseif ($from === 'profil' && $photo->getIdContact()) {
-                $trail->addStep("Zone Membre", "/membres/");
+                $trail->addStep("Zone Membre", "/membres");
             } elseif ($from === 'event' && $photo->getIdEvent()) {
-                $trail->addStep("Agenda", "/events/")
+                $trail->addStep("Agenda", "/events")
                     ->addStep($event->getName(), $event->getUrl());
             } elseif ($from === 'lieu' && $photo->getIdLieu()) {
-                $trail->addStep("Lieux", "/lieux/")
+                $trail->addStep("Lieux", "/lieux")
                     ->addStep($lieu->getName(), $lieu->getUrl());
             } else {
-                $trail->addStep("Média", "/medias/");
+                $trail->addStep("Média", "/medias");
             }
             $trail->addStep($photo->getName());
 

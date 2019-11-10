@@ -77,26 +77,11 @@ final class Controller
     {
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('title', "♫ Les Partenaires de l'association AD'HOC / Devenir Partenaire");
+        $smarty->assign('title', "♫ Les Partenaires de l'association AD'HOC");
         $smarty->assign('description', "Les Partenaires de l'Association AD'HOC");
 
         Trail::getInstance()
             ->addStep("Partenaires");
-
-        /*
-        $partners = [
-            (object) ['id' => 'epinay-sur-orge', 'title' => "Épinay-sur-Orge", 'description' => "Mairie d'Épinay-sur-Orge", 'url' => "https://www.ville-epinay-sur-orge.fr"],
-            (object) ['id' => 'ox', 'title' => "OX", 'description' => "Brasserie Artisanale de Marcoussis", 'url' => "http://brasserieoxbier.wordpress.com"],
-            (object) ['id' => 'mjcigny', 'title' => "MJC Jean Villar", 'description' => "MJC d'Igny", 'url' => "http://www.mjc-igny.org"],
-            (object) ['id' => 'essonne', 'title' => "Essonne", 'description' => "Le département", 'url' => "http://www.essonne.fr"],
-            (object) ['id' => 'paj', 'title' => "La PAJ", 'description' => "Le Club-Ados de Villemoisson sur Orge", 'url' => "http://www.villemoisson.fr/enfance-jeunesse/club-ados"],
-            (object) ['id' => 'rackam', 'title' => "Le Rack'Am", 'description' => "Scène de Musiques Actuelles à Brétigny sur Orge", 'url' => "http://www.lerackam.com"],
-            (object) ['id' => 'mjcsavigny', 'title' => "MJC François Rabelais", 'description' => "MJC de Savigny sur Orge", 'url' => "http://www.mjcsavigny.net"],
-            (object) ['id' => 'reggaepromo', 'title' => "Reggae Promo", 'description' => "Promo de groupes Reggae. Actu, Concerts, Festivals, Jeux-Concours. Les nouveaux groupes de Reggae de la scène Française", 'url' => "http://www.reggae-promo.com"],
-            (object) ['id' => 'cridelalibellule', 'title' => "Le Cri de la Libellule", 'description' => "Association musicale de Saint-Michel sur Orge", 'url' => "http://www.lecridelalibellule.fr"],
-            (object) ['id' => 'so-zik', 'title' => "SOZIK", 'description' => "École de musique spinolienne", 'url' => "https://www.so-zik.fr"],
-        ];
-        */
 
         $smarty->assign('partners', Partner::findAll());
 

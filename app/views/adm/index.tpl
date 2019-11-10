@@ -35,11 +35,11 @@
   </header>
   <div class="reset">
     <ul class="admlinks">
-      <li><a href="/adm/featured/">À la une</a></li>
-      <li><a href="/adm/newsletter/">Newsletter</a></li>
-      <li><a href="/adm/faq/">Foire aux questions</a></li>
-      <li><a href="/adm/cms/">Pages statiques</a></li>
-      <li><a href="/comments/">Commentaires</a></li>
+      <li><a href="/adm/featured">À la une</a></li>
+      <li><a href="/adm/newsletter">Newsletter</a></li>
+      <li><a href="/adm/faq">Foire aux questions</a></li>
+      <li><a href="/adm/cms">Pages statiques</a></li>
+      <li><a href="/comments">Commentaires</a></li>
     </ul>
   </div>
 </div>
@@ -50,8 +50,8 @@
   </header>
   <div class="reset">
     <ul class="admlinks">
-       <li><a href="/adm/membres/">Membres</a></li>
-       <li><a href="/adm/groupes/">Groupes</a></li>
+       <li><a href="/adm/membres">Membres</a></li>
+       <li><a href="/adm/groupes">Groupes</a></li>
        <li><a href="/adm/groupe-de-style">Groupe de Style</a></li>
     </ul>
   </div>

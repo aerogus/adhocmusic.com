@@ -13,7 +13,7 @@
     <h1>Rechercher une vidéo</h1>
   </header>
   <div>
-    <form id="form-media-search" name="form-media-search" method="get" action="/media/">
+    <form id="form-media-search" name="form-media-search" method="get" action="/medias">
       <ul>
         <li>
           <label for="groupe">Groupe</label>

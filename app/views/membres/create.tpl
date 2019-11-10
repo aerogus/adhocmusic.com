@@ -14,7 +14,7 @@ Vous pourrez le modifier le modifier dans votre "Tableau de bord" / "Mes Infos P
 <h3>Et Maintenant ?</h3>
 
 <p>Vous avez un groupe de musique ? Vous voulez postuler pour nos concerts ? <a href="/groupes/create"> Inscrivez le</a></p>
-<p>Venez découvrir des centaines de <a href="/media/">photos, vidéos et musiques</a> de concerts</p>
+<p>Venez découvrir des centaines de <a href="/medias">photos, vidéos et musiques</a> de concerts</p>
 <p><a href="/contact">Contactez nous</a> pour toute question</p>
 
 <p>Et encore bienvenue chez vous !</p>

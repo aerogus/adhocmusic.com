@@ -1,12 +1,16 @@
 <?php declare(strict_types=1);
 
+namespace Reference;
+
+use \DataBase;
+
 /**
  * Classe WorldRegion
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class WorldRegion extends Reference
+class WorldRegion extends \Reference
 {
     /**
      * Instance de l'objet

@@ -15,7 +15,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
+            ->addStep("Privé", "/adm")
             ->addStep("Cotisations");
 
         $smarty->assign('subscriptions', Subscription::findAll());
@@ -33,7 +33,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
+            ->addStep("Privé", "/adm")
             ->addStep("Cotisations", "/adm/subscriptions")
             ->addStep("Nouvelle cotisation");
 
@@ -50,7 +50,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
+            ->addStep("Privé", "/adm")
             ->addStep("Cotisations", "/adm/subscriptions")
             ->addStep("Édition");
 
@@ -67,7 +67,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
+            ->addStep("Privé", "/adm")
             ->addStep("Cotisations", "/adm/subscriptions")
             ->addStep("Suppression");
 

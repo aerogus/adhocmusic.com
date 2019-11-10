@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use \Reference\City;
+
 /**
  *
  */
@@ -17,7 +19,7 @@ final class Controller
         $lat = 48.6726957;
         $lng = 2.3239693;
         Trail::getInstance()
-            ->addStep('Lieux', '/lieux/');
+            ->addStep('Lieux', '/lieux');
 
         $lieux_proches = Lieu::fetchLieuxByRadius(
             [
@@ -49,7 +51,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Lieux", "/lieux/")
+            ->addStep("Lieux", "/lieux")
             ->addStep("Mes lieux");
 
         $smarty->assign('lieux', Lieu::getLieux());
@@ -109,7 +111,7 @@ final class Controller
         $smarty->assign('lieu', $lieu);
 
         $trail = Trail::getInstance()
-            ->addStep("Lieux", "/lieux/")
+            ->addStep("Lieux", "/lieux")
             ->addStep(WorldCountry::getInstance($lieu->getIdCountry())->getName(), "/lieux/?c=" . $lieu->getIdCountry())
             ->addStep(WorldRegion::getInstance(['id_country' => $lieu->getIdCountry(), 'id_region' => $lieu->getIdRegion()])->getName(), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion());
         if ($lieu->getIdCountry() === 'FR') {
@@ -288,7 +290,7 @@ final class Controller
         }
 
         Trail::getInstance()
-            ->addStep("Lieux", "/lieux/")
+            ->addStep("Lieux", "/lieux")
             ->addStep("Ajouter");
 
         $smarty->assign('lieu_types', LieuType::findAll());
@@ -306,7 +308,7 @@ final class Controller
         Tools::auth(Membre::TYPE_STANDARD);
 
         Trail::getInstance()
-            ->addStep("Lieux", "/lieux/")
+            ->addStep("Lieux", "/lieux")
             ->addStep("Modifier");
 
         $smarty = new AdHocSmarty();
@@ -410,7 +412,7 @@ final class Controller
         $id = (int) Route::params('id');
 
         Trail::getInstance()
-            ->addStep("Lieux", "/lieux/")
+            ->addStep("Lieux", "/lieux")
             ->addStep("Supprimer");
 
         $smarty = new AdHocSmarty();

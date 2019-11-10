@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use \Reference\Departement;
+
 // Note : on retire liens vers events, structures et lieux du formulaire
 // pour plus de lisibilité, temporairement !
 
@@ -89,7 +91,7 @@ final class Controller
             $smarty->assign('title', $audio->getName() . ' - ' . $groupe->getName());
             $meta_description .= " | Groupe : " . $groupe->getName();
             Trail::getInstance()
-                ->addStep("Groupes", "/groupes/")
+                ->addStep("Groupes", "/groupes")
                 ->addStep($groupe->getName(), $groupe->getUrl());
             $smarty->assign('og_image', $groupe->getMiniPhoto());
             $smarty->assign(
@@ -102,7 +104,7 @@ final class Controller
             );
         } else {
             Trail::getInstance()
-                ->addStep("Média", "/medias/");
+                ->addStep("Média", "/medias");
         }
 
         if ($audio->getIdEvent()) {

@@ -34,7 +34,7 @@ final class Controller
         }
 
         Trail::getInstance()
-            ->addStep('Structures', '/structures/')
+            ->addStep('Structures', '/structures')
             ->addStep($structure->getName());
 
         $smarty = new AdHocSmarty();

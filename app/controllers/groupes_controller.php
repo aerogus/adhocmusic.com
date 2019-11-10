@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use \Reference\TypeMusicien;
+
 define('GROUPE_MINI_PHOTO_SIZE', 128);
 
 final class Controller
@@ -82,7 +84,7 @@ final class Controller
         $smarty->assign('membres', Groupe::getMembersById($groupe->getId()));
 
         Trail::getInstance()
-            ->addStep("Groupes", "/groupes/")
+            ->addStep("Groupes", "/groupes")
             ->addStep($groupe->getName());
 
         $smarty->assign('title', "♫ ".$groupe->getName()." (".$groupe->getStyle().")");

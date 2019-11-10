@@ -9,7 +9,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
+            ->addStep("Privé", "/adm")
             ->addStep("Forums");
 
         $smarty->assign('forums', ForumPrive::getForums());
@@ -29,8 +29,8 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Forums", "/adm/forums/")
+            ->addStep("Privé", "/adm")
+            ->addStep("Forums", "/adm/forums")
             ->addStep($forum['title']);
 
         $smarty->enqueue_script('/js/adm/forums.js');
@@ -59,8 +59,8 @@ final class Controller
         $forum = ForumPrive::getForum($data['thread']['id_forum']);
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Forums", "/adm/forums/")
+            ->addStep("Privé", "/adm")
+            ->addStep("Forums", "/adm/forums")
             ->addStep($forum['title'], "/adm/forums/forum/" . $forum['id_forum'])
             ->addStep($data['thread']['subject']);
 
@@ -164,8 +164,8 @@ final class Controller
         $forum = ForumPrive::getForum($id_forum);
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Forums", "/adm/forums/")
+            ->addStep("Privé", "/adm")
+            ->addStep("Forums", "/adm/forums")
             ->addStep($forum['title'], "/adm/forums/forum/" . $forum['id_forum'])
             ->addStep("Ecrire un message");
 

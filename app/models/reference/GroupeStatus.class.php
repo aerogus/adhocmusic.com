@@ -1,12 +1,14 @@
 <?php declare(strict_types=1);
 
+namespace Reference;
+
 /**
- * Classe MembreType
+ * Classe de gestion des états de groupes
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class MembreType extends Reference
+class GroupeStatus extends \Reference
 {
     /**
      * @var object
@@ -16,17 +18,17 @@ class MembreType extends Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_membre_type';
+    protected static $_pk = 'id_groupe_status';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_membre_type';
+    protected static $_table = 'adhoc_groupe_status';
 
     /**
      * @var int
      */
-    protected $_id_membre_type = 0;
+    protected $_id_groupe_status = 0;
 
     /**
      * Liste des attributs de l'objet
@@ -34,7 +36,7 @@ class MembreType extends Reference
      * @var array
      */
     protected static $_all_fields = [
-        'id_membre_type' => 'int', // pk
-        'name'           => 'string',
+        'id_groupe_status' => 'int', // pk
+        'name'             => 'string',
     ];
 }

@@ -60,7 +60,7 @@ final class Controller
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Messagerie', '/messagerie/')
+            ->addStep('Messagerie', '/messagerie')
             ->addStep('Lire un message');
 
         $db = DataBase::getInstance();
@@ -101,7 +101,7 @@ final class Controller
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Messagerie', '/messagerie/')
+            ->addStep('Messagerie', '/messagerie')
             ->addStep('Écrire un message');
 
         if (Tools::isSubmit('form-message-write')) {

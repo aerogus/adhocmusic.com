@@ -17,13 +17,13 @@
             </ul>
           </li>
           <li>
-            <a href="/events/" accesskey="2" title="Agenda">Agenda</a>
+            <a href="/events" accesskey="2" title="Agenda">Agenda</a>
           </li>
           <li>
-            <a href="/medias/" accesskey="3" title="Vidéos">Vidéos</a>
+            <a href="/medias" accesskey="3" title="Vidéos">Vidéos</a>
           </li>
           <li>
-            <a href="/groupes/" accesskey="4" title="Groupes">Groupes</a>
+            <a href="/groupes" accesskey="4" title="Groupes">Groupes</a>
           </li>
           <li>
             <a href="/contact" accesskey="5" title="Contact">Contact</a>

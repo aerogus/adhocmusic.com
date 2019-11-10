@@ -1,5 +1,9 @@
 <?php declare(strict_types=1);
 
+use \Reference\City;
+use \Reference\Departement;
+use \Reference\WorldCountry;
+
 /**
  * Classe Lieu
  *

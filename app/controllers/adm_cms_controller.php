@@ -13,7 +13,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
+            ->addStep("Privé", "/adm")
             ->addStep("Pages Statiques");
 
         $smarty->assign('create', (bool) Route::params('create'));
@@ -35,8 +35,8 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Pages Statiques", "/adm/cms/")
+            ->addStep("Privé", "/adm")
+            ->addStep("Pages Statiques", "/adm/cms")
             ->addStep("Création");
 
         $smarty->assign('auth', Membre::getTypesMembre());
@@ -60,7 +60,7 @@ final class Controller
                 ->setAuth($data['auth'])
                 ->save();
 
-            Tools::redirect('/adm/cms/?create=1');
+            Tools::redirect('/adm/cms?create=1');
         }
 
         return $smarty->fetch('adm/cms/create.tpl');
@@ -78,8 +78,8 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Pages Statiques", "/adm/cms/")
+            ->addStep("Privé", "/adm")
+            ->addStep("Pages Statiques", "/adm/cms")
             ->addStep("Edition");
 
         $smarty->assign('auth', Membre::getTypesMembre());
@@ -104,7 +104,7 @@ final class Controller
                 ->setAuth($data['auth'])
                 ->save();
 
-            Tools::redirect('/adm/cms/?edit=1');
+            Tools::redirect('/adm/cms?edit=1');
         }
 
         $smarty->assign('cms', CMS::getInstance($id));
@@ -124,13 +124,13 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Pages Statiques", "/adm/cms/")
+            ->addStep("Privé", "/adm")
+            ->addStep("Pages Statiques", "/adm/cms")
             ->addStep("Suppression");
 
         if (Tools::isSubmit('form-cms-delete')) {
             CMS::getInstance($id)->delete();
-            Tools::redirect('/adm/cms/?delete=1');
+            Tools::redirect('/adm/cms?delete=1');
         }
 
         $smarty->assign('cms', CMS::getInstance($id));

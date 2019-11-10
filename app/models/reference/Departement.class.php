@@ -1,12 +1,14 @@
 <?php declare(strict_types=1);
 
+namespace Reference;
+
 /**
  * Classe Departement
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class Departement extends Reference
+class Departement extends \Reference
 {
     /**
      * Instance de l'objet

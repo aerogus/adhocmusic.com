@@ -10,7 +10,7 @@ final class Controller
         Tools::auth(Membre::TYPE_INTERNE);
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
+            ->addStep("Privé", "/adm")
             ->addStep("A l'Affiche");
 
         $smarty = new AdHocSmarty();
@@ -29,8 +29,8 @@ final class Controller
         Tools::auth(Membre::TYPE_INTERNE);
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("A l'Affiche", "/adm/featured/")
+            ->addStep("Privé", "/adm")
+            ->addStep("A l'Affiche", "/adm/featured")
             ->addStep("Ajouter");
 
         $smarty = new AdHocSmarty();
@@ -82,7 +82,7 @@ final class Controller
                         ->write();
                 }
 
-                Tools::redirect('/adm/featured/?create=1');
+                Tools::redirect('/adm/featured?create=1');
 
             }
 
@@ -114,8 +114,8 @@ final class Controller
         Tools::auth(Membre::TYPE_INTERNE);
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("A l'Affiche", "/adm/featured/")
+            ->addStep("Privé", "/adm")
+            ->addStep("A l'Affiche", "/adm/featured")
             ->addStep("Modifier");
 
         $smarty = new AdHocSmarty();
@@ -172,7 +172,7 @@ final class Controller
                         ->write();
                 }
 
-                Tools::redirect('/adm/featured/?edit=1');
+                Tools::redirect('/adm/featured?edit=1');
 
             }
 
@@ -193,8 +193,8 @@ final class Controller
         Tools::auth(Membre::TYPE_INTERNE);
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("A l'Affiche", "/adm/featured/")
+            ->addStep("Privé", "/adm")
+            ->addStep("A l'Affiche", "/adm/featured")
             ->addStep("Supprimer");
 
         $smarty = new AdHocSmarty();
@@ -204,7 +204,7 @@ final class Controller
 
         if (Tools::isSubmit('form-featured-delete')) {
             if ($f->delete()) {
-                Tools::redirect('/adm/featured/?delete=1');
+                Tools::redirect('/adm/featured?delete=1');
                 unlink(ADHOC_ROOT_PATH . '/static/media/featured/' . $f->getId() . '.jpg');
             }
         }

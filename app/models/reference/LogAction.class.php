@@ -1,12 +1,14 @@
 <?php declare(strict_types=1);
 
+namespace Reference;
+
 /**
- * Classe de gestion des types de lieux
+ * Actions de log
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class LieuType extends Reference
+class LogAction extends \Reference
 {
     /**
      * @var object
@@ -16,17 +18,17 @@ class LieuType extends Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_lieu_type';
+    protected static $_pk = 'id_log_action';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_lieu_type';
+    protected static $_table = 'adhoc_log_action';
 
     /**
      * @var int
      */
-    protected $_id_lieu_type = 0;
+    protected $_id_log_action = 0;
 
     /**
      * Liste des attributs de l'objet
@@ -34,7 +36,7 @@ class LieuType extends Reference
      * @var array
      */
     protected static $_all_fields = [
-        'id_lieu_type' => 'int', // pk
-        'name'         => 'string',
+        'id_log_action' => 'int', // pk
+        'name'          => 'string',
     ];
 }

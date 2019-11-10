@@ -16,14 +16,23 @@ define('ENV', (php_uname('n') === 'rbx.aerogus.net') ? 'PROD' : 'DEV');
 /**
  * Chargement automatique des classes métiers AD'HOC
  *
- * @param string $class_name Nom de la classe
+ * @param string $className Nom de la classe
  *
  * @return void
  */
-function autoload(string $class_name)
+function autoload(string $className)
 {
-    if (file_exists(__DIR__ . '/models/' . $class_name . '.class.php')) {
-        include_once __DIR__ . '/models/' . $class_name . '.class.php';
+    $nameSpace = explode('\\', $className);
+    foreach ($nameSpace as $key => $value) {
+        if ($key < (count($nameSpace) - 1)) {
+            $nameSpace[$key] = strtolower($value);
+        }
+    }
+    //$nameSpace[count($nameSpace) - 1] = strtolower($nameSpace[count($nameSpace) - 1]);
+    $className = implode('/', $nameSpace);
+    $classPath = __DIR__ . '/models/' . $className . '.class.php';
+    if (file_exists($classPath)) {
+        include_once $classPath;
     }
 }
 spl_autoload_register('autoload');

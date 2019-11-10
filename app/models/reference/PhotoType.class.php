@@ -1,12 +1,14 @@
 <?php declare(strict_types=1);
 
+namespace Reference;
+
 /**
- * Actions de log
+ * Classe de gestion des types de photos
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class LogAction extends Reference
+class PhotoType extends \Reference
 {
     /**
      * @var object
@@ -16,17 +18,17 @@ class LogAction extends Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_log_action';
+    protected static $_pk = 'id_photo_type';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_log_action';
+    protected static $_table = 'adhoc_photo_type';
 
     /**
      * @var int
      */
-    protected $_id_log_action = 0;
+    protected $_id_photo_type = 0;
 
     /**
      * Liste des attributs de l'objet
@@ -34,7 +36,7 @@ class LogAction extends Reference
      * @var array
      */
     protected static $_all_fields = [
-        'id_log_action' => 'int', // pk
+        'id_photo_type' => 'int', // pk
         'name'          => 'string',
     ];
 }

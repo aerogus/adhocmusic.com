@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace Reference;
+
 /**
  * Classe WorldCountry
  *
@@ -8,7 +10,7 @@
  *
  * @see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
  */
-class WorldCountry extends Reference
+class WorldCountry extends \Reference
 {
     /**
      * Instance de l'objet

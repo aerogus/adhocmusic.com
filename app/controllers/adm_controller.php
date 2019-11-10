@@ -50,7 +50,7 @@ final class Controller
         $page = (int) Route::params('page');
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
+            ->addStep("Privé", "/adm")
             ->addStep("Groupes");
 
         $smarty = new AdHocSmarty();
@@ -89,8 +89,8 @@ final class Controller
         $groupe = Groupe::getInstance($id_groupe);
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Groupes", "/adm/groupes/")
+            ->addStep("Privé", "/adm")
+            ->addStep("Groupes", "/adm/groupes")
             ->addStep($groupe->getName());
 
         $smarty = new AdHocSmarty();
@@ -161,8 +161,8 @@ final class Controller
         }
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Membres", "/adm/membres/");
+            ->addStep("Privé", "/adm")
+            ->addStep("Membres", "/adm/membres");
 
         $smarty->assign('types_membre', Membre::getTypesMembre());
         $smarty->assign('types_musicien', TypeMusicien::findAll());
@@ -199,8 +199,8 @@ final class Controller
         $membre = Membre::getInstance($id);
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Membres", "/adm/membres/")
+            ->addStep("Privé", "/adm")
+            ->addStep("Membres", "/adm/membres")
             ->addStep($membre->getPseudo());
 
         $smarty = new AdHocSmarty();
@@ -220,8 +220,8 @@ final class Controller
         $membre = Membre::getInstance($id);
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
-            ->addStep("Membres", "/adm/membres/")
+            ->addStep("Privé", "/adm")
+            ->addStep("Membres", "/adm/membres")
             ->addStep("Suppresion de " . $membre->getPseudo());
 
         // ***
@@ -247,7 +247,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
+            ->addStep("Privé", "/adm")
             ->addStep("Groupe de Style");
 
         $db = DataBase::getInstance();
@@ -305,7 +305,7 @@ final class Controller
         $groupe = Groupe::getInstance($id);
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
+            ->addStep("Privé", "/adm")
             ->addStep("Groupe de Style", "/adm/groupe-de-style")
             ->addStep($groupe->getName());
 
@@ -390,7 +390,7 @@ final class Controller
         $action = (int) Route::params('action');
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
+            ->addStep("Privé", "/adm")
             ->addStep("Log Action");
 
         $smarty = new AdHocSmarty();
@@ -413,7 +413,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
+            ->addStep("Privé", "/adm")
             ->addStep("Suppression Compte");
 
         !empty($_GET['action']) ? $action = (string) $_GET['action'] : $action = 'show';
@@ -575,7 +575,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Privé", "/adm/")
+            ->addStep("Privé", "/adm")
             ->addStep("Liaison Membre / Groupe");
 
         if (Tools::isSubmit('form-appartient-a')) {

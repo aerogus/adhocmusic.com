@@ -28,7 +28,7 @@
 
   <div class="box">
     <header>
-      <h2><a href="/events/" title="Agenda">Agenda</a></h2>
+      <h2><a href="/events" title="Agenda">Agenda</a></h2>
     </header>
     <div class="reset">
       <ul>

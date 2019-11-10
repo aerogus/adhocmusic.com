@@ -34,7 +34,7 @@ class GoogleMaps
      *
      * @see http://code.google.com/intl/fr/apis/maps/documentation/staticmaps/
      */
-    static function getStaticMap($params)
+    static function getStaticMap(array $params): string
     {
         if (!array_key_exists('loc', $params)) {
             return '';
@@ -76,11 +76,11 @@ class GoogleMaps
     /**
      * Fait une requête de geocoding à google
      *
-     * @param string $addr addr
+     * @param string $addr adresse postale
      *
-     * @return array
+     * @return array ['status' => string, 'lat' => float, 'lng' => float]
      */
-    static function getGeocode(string $addr)
+    static function getGeocode(string $addr): array
     {
         if (empty($addr)) {
             return ['status' => 'EMPTY_REQUEST'];

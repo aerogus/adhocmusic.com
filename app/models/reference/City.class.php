@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace Reference;
+
 /**
  * Classe City
  * (villes de France uniquement)
@@ -8,7 +10,7 @@
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class City extends Reference
+class City extends \Reference
 {
     /**
      * Instance de l'objet

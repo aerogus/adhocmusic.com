@@ -1,6 +1,6 @@
 {include file="common/header.tpl"}
 
-<div class="box" style="width: 215px; margin: 0 auto 20px">
+<div class="box" style="width: 320px; margin: 0 auto 20px">
   <header>
     <h1>Changer le mot de passe</h1>
   </header>
@@ -11,16 +11,20 @@
 
 {if !empty($form)}
 <form id="form-password-change" name="form-password-change" method="post" action="/auth/change-password">
+
   <div class="infobulle error" id="error_password_old"{if empty($error_password_old)} style="display: none"{/if}>Vous devez indiquer votre mot de passe actuel</div>
-  <input id="password_old" name="password_old" type="password" size="30" maxlength="50" style="float: right">
-  <label for="password_old">Mot de passe actuel</label>
+  <label for="password_old">Mot de passe actuel (*)</label>
+  <input id="password_old" name="password_old" type="password" style="width:100%" maxlength="50">
+
   <div class="infobulle error" id="error_password_new_1"{if empty($error_password_new_1)} style="display: none"{/if}>Vous devez indiquer un nouveau mot de passe</div>
-  <input id="password_new_1" name="password_new_1" type="password" size="30" maxlength="50" style="float: right">
-  <label for="password_new_1">Nouveau mot de passe</label>
+  <label for="password_new_1">Nouveau mot de passe (*)</label>
+  <input id="password_new_1" name="password_new_1" type="password" style="width:100%" maxlength="50">
+
   <div class="infobulle error" id="error_password_new_2"{if empty($error_password_new_2)} style="display: none"{/if}>Vous devez indiquer un nouveau mot de passe</div>
   <div class="infobulle error" id="error_password_new_check"{if empty($error_password_new_check)} style="display: none"{/if}>Problème dans votre saisie</div>
-  <input id="password_new_2" name="password_new_2" type="password" size="30" maxlength="50" style="float: right">
-  <label for="password_new_2">Nouveau mot de passe (vérification)</label>
+  <label for="password_new_2">Vérification nouveau mot de passe (*)</label>
+  <input id="password_new_2" name="password_new_2" type="password" style="width:100%" maxlength="50">
+
   <input id="form-password-change-submit" name="form-password-change-submit" type="submit" class="button" value="Modifier">
 </form>
 {/if}

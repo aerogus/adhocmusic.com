@@ -12,7 +12,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep('Privé', '/adm/')
+            ->addStep('Privé', '/adm')
             ->addStep('Newsletter');
 
         $smarty->assign(
@@ -46,7 +46,7 @@ final class Controller
                 ->setContent($data['content'])
                 ->save();
 
-            Tools::redirect('/adm/newsletter/?create=1');
+            Tools::redirect('/adm/newsletter?create=1');
         }
 
         $smarty = new AdHocSmarty();
@@ -57,8 +57,8 @@ final class Controller
         $smarty->enqueue_script('/js/adm/newsletter.js');
 
         Trail::getInstance()
-            ->addStep('Privé', '/adm/')
-            ->addStep('Newsletter', '/adm/newsletter/')
+            ->addStep('Privé', '/adm')
+            ->addStep('Newsletter', '/adm/newsletter')
             ->addStep('Ajout');
 
         $data = [
@@ -108,8 +108,8 @@ final class Controller
         $smarty->enqueue_script('/js/adm/newsletter.js');
 
         Trail::getInstance()
-            ->addStep('Privé', '/adm/')
-            ->addStep('Newsletter', '/adm/newsletter/')
+            ->addStep('Privé', '/adm')
+            ->addStep('Newsletter', '/adm/newsletter')
             ->addStep('Édition');
 
         $smarty->assign('newsletter', Newsletter::getInstance($id));

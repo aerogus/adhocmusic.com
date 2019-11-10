@@ -9,7 +9,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep('Privé', '/adm/')
+            ->addStep('Privé', '/adm')
             ->addStep('Foire aux questions');
 
         $smarty->assign('create', (bool) Route::params('create'));
@@ -30,8 +30,8 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep('Privé', '/adm/')
-            ->addStep('Foire aux questions', '/adm/faq/')
+            ->addStep('Privé', '/adm')
+            ->addStep('Foire aux questions', '/adm/faq')
             ->addStep('Création');
 
         if (Tools::isSubmit('form-faq-create')) {
@@ -49,7 +49,7 @@ final class Controller
                 ->setOnline($data['online'])
                 ->save();
 
-            Tools::redirect('/adm/faq/?create=1');
+            Tools::redirect('/adm/faq?create=1');
         }
 
         $smarty->assign('categories', FAQCategory::findAll());
@@ -69,8 +69,8 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep('Privé', '/adm/')
-            ->addStep('Foire aux questions', '/adm/faq/')
+            ->addStep('Privé', '/adm')
+            ->addStep('Foire aux questions', '/adm/faq')
             ->addStep('Édition');
 
         if (Tools::isSubmit('form-faq-edit')) {
@@ -89,7 +89,7 @@ final class Controller
                 ->setOnline($data['online'])
                 ->save();
 
-            Tools::redirect('/adm/faq/?edit=1');
+            Tools::redirect('/adm/faq?edit=1');
         }
 
         $smarty->assign('categories', FAQCategory::findAll());
@@ -110,13 +110,13 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep('Privé', '/adm/')
-            ->addStep('Foire aux questions', '/adm/faq/')
+            ->addStep('Privé', '/adm')
+            ->addStep('Foire aux questions', '/adm/faq')
             ->addStep('Suppression');
 
         if (Tools::isSubmit('form-faq-delete')) {
             FAQ::getInstance($id)->delete();
-            Tools::redirect('/adm/faq/?delete=1');
+            Tools::redirect('/adm/faq?delete=1');
         }
 
         $smarty->assign('faq', FAQ::getInstance($id));

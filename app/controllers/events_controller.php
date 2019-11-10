@@ -120,7 +120,7 @@ final class Controller
         $smarty->enqueue_script('/js/events-show.js');
 
         $trail = Trail::getInstance()
-            ->addStep('Agenda', '/events/');
+            ->addStep('Agenda', '/events');
 
         try {
             $event = Event::getInstance((int) $id);
@@ -241,7 +241,7 @@ final class Controller
         $smarty->enqueue_script('/js/events-create.js');
 
         Trail::getInstance()
-            ->addStep("Agenda", "/events/")
+            ->addStep("Agenda", "/events")
             ->addStep("Ajouter une date");
 
         // filtrage de la date
@@ -462,7 +462,7 @@ final class Controller
         Tools::auth(Membre::TYPE_STANDARD);
 
         Trail::getInstance()
-            ->addStep("Agenda", "/events/")
+            ->addStep("Agenda", "/events")
             ->addStep("Modifier une date");
 
         $smarty = new AdHocSmarty();
@@ -625,7 +625,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()
-            ->addStep("Agenda", "/events/")
+            ->addStep("Agenda", "/events")
             ->addStep("Supprimer une date");
 
         try {

@@ -1,12 +1,14 @@
 <?php declare(strict_types=1);
 
+namespace Reference;
+
 /**
- * Classe de gestion des styles musicaux
+ * Classe MembreType
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class Style extends Reference
+class MembreType extends \Reference
 {
     /**
      * @var object
@@ -16,17 +18,17 @@ class Style extends Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_style';
+    protected static $_pk = 'id_membre_type';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_style';
+    protected static $_table = 'adhoc_membre_type';
 
     /**
      * @var int
      */
-    protected $_id_style = 0;
+    protected $_id_membre_type = 0;
 
     /**
      * Liste des attributs de l'objet
@@ -34,7 +36,7 @@ class Style extends Reference
      * @var array
      */
     protected static $_all_fields = [
-        'id_style' => 'int', // pk
-        'name'     => 'string',
+        'id_membre_type' => 'int', // pk
+        'name'           => 'string',
     ];
 }

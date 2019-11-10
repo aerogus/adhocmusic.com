@@ -1,7 +1,7 @@
 {include file="common/header.tpl"}
 
 {if $me->isInterne()}
-<div class="infobulle info"><a href="/adm/">🔗 <strong>Accès zone privée</strong></a></div>
+<div class="infobulle info"><a href="/adm">🔗 <strong>Accès zone privée</strong></a></div>
 {/if}
 
 <div class="grid-4-small-2-tiny-1 has-gutter-l">
@@ -75,7 +75,7 @@
         </tr>
         {/foreach}
       </table>
-      <p><a href="/messagerie/">Tous mes messages</a></p>
+      <p><a href="/messagerie">Tous mes messages</a></p>
     </div>
   </div>
 

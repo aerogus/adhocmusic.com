@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use \Reference\Departement;
+
 /**
  * Gestion des Vidéos
  */
@@ -132,22 +134,22 @@ final class Controller
             // menu et fil d'ariane
             if ($from === 'groupe' && $video->getIdGroupe()) {
                 Trail::getInstance()
-                    ->addStep("Groupes", "/groupes/")
+                    ->addStep("Groupes", "/groupes")
                     ->addStep($groupe->getName(), $groupe->getUrl());
             } elseif ($from === 'profil' && $video->getIdContact()) {
                 Trail::getInstance()
-                    ->addStep("Zone Membre", "/membres/");
+                    ->addStep("Zone Membre", "/membres");
             } elseif ($from === 'event' && $video->getIdEvent()) {
                 Trail::getInstance()
-                    ->addStep("Agenda", "/events/")
+                    ->addStep("Agenda", "/events")
                     ->addStep($event->getName(), "/events/" . $event->getId());
             } elseif ($from === 'lieu' && $video->getIdLieu()) {
                 Trail::getInstance()
-                    ->addStep("Lieux", "/lieux/")
+                    ->addStep("Lieux", "/lieux")
                     ->addStep($lieu->getName(), "/lieux/" . $lieu->getId());
             } else {
                 Trail::getInstance()
-                    ->addStep("Média", "/medias/");
+                    ->addStep("Média", "/medias");
             }
             Trail::getInstance()
                 ->addStep($video->getName());
