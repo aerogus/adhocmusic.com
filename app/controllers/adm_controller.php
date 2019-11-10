@@ -1,5 +1,8 @@
 <?php declare(strict_types=1);
 
+use \Reference\Style;
+use \Reference\TypeMusicien;
+
 define('ADM_NB_MEMBERS_PER_PAGE', 25);
 define('ADM_NB_GROUPES_PER_PAGE', 1000);
 

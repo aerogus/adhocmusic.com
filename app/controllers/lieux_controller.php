@@ -1,6 +1,9 @@
 <?php declare(strict_types=1);
 
 use \Reference\City;
+use \Reference\LieuType;
+use \Reference\WorldCountry;
+use \Reference\WorldRegion;
 
 /**
  *

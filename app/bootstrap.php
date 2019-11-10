@@ -22,17 +22,10 @@ define('ENV', (php_uname('n') === 'rbx.aerogus.net') ? 'PROD' : 'DEV');
  */
 function autoload(string $className)
 {
-    $nameSpace = explode('\\', $className);
-    foreach ($nameSpace as $key => $value) {
-        if ($key < (count($nameSpace) - 1)) {
-            $nameSpace[$key] = strtolower($value);
-        }
-    }
-    //$nameSpace[count($nameSpace) - 1] = strtolower($nameSpace[count($nameSpace) - 1]);
-    $className = implode('/', $nameSpace);
+    $className = str_replace('\\', '/', $className);
     $classPath = __DIR__ . '/models/' . $className . '.class.php';
     if (file_exists($classPath)) {
-        include_once $classPath;
+        include $classPath;
     }
 }
 spl_autoload_register('autoload');
@@ -77,7 +70,11 @@ define('ADHOC_ROUTES_FILE',        ADHOC_ROOT_PATH . '/app/routes');
 define('ADHOC_LOG_PATH',           ADHOC_ROOT_PATH . '/log');
 define('DEFAULT_CONTROLLERS_PATH', ADHOC_ROOT_PATH . '/app/controllers/');
 define('MEDIA_PATH',               ADHOC_ROOT_PATH . '/static/media');
+
 define('OBJECT_CACHE_PATH',        ADHOC_ROOT_PATH . '/tmpfs/objects');
+if (!is_dir(OBJECT_CACHE_PATH)) {
+    mkdir(OBJECT_CACHE_PATH, 0755, true);
+}
 
 // chemin local
 define('IMG_CACHE_PATH', ADHOC_ROOT_PATH . '/static/cache');
@@ -87,6 +84,9 @@ define('IMG_CACHE_URL', CACHE_URL);
 
 define('SMARTY_TEMPLATE_PATH',   ADHOC_ROOT_PATH . '/app/views');
 define('SMARTY_TEMPLATE_C_PATH', ADHOC_ROOT_PATH . '/tmpfs/smarty');
+if (!is_dir(SMARTY_TEMPLATE_C_PATH)) {
+    mkdir(SMARTY_TEMPLATE_C_PATH, 0755, true);
+}
 
 define('GOOGLE_MAPS_API_KEY', 'AIzaSyBVsz6lTrtPcGaGy8-pNNLdmhDIg7Cng24');
 

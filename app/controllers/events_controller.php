@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use \Reference\Style;
+
 define('NB_EVENTS_PER_PAGE', 100);
 
 final class Controller

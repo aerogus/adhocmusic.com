@@ -1,5 +1,8 @@
 <?php declare(strict_types=1);
 
+use \Reference\Style;
+use \Reference\TypeMusicien;
+
 /**
  * Classe Groupe
  *

@@ -2,7 +2,9 @@
 
 use \Reference\City;
 use \Reference\Departement;
+use \Reference\LieuType;
 use \Reference\WorldCountry;
+use \Reference\WorldRegion;
 
 /**
  * Classe Lieu
