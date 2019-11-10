@@ -17,7 +17,7 @@
 # tous les contenus utilisateur (audio, video, photo...) ici
 /static
 
-# medias utilisateurs (video, mp3, photos ...)
+# medias utilisateurs (video, mp3, photos...)
 /media
 
 # export brunch
