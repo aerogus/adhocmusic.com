@@ -334,27 +334,23 @@ class DataBase
     }
 
     /**
-     * @param string $sql                    requête SQL
-     * @param int    $conn_name              identifiant de connexion
-     * @param bool   $closeConnectionOnError fermer la connexion en cas d'erreur
+     * @param string $sql       requête SQL
+     * @param int    $conn_name identifiant de connexion
      *
      * @return array
      * @throws Exception
      */
-    function query(string $sql, int $conn_name = 0, bool $closeConnectionOnError = true)
+    function query(string $sql, int $conn_name = 0)
     {
         $conn = $this->connect($conn_name);
 
+        // debug
         file_put_contents(ADHOC_ROOT_PATH . '/sqldebug.log', $sql . "\n", FILE_APPEND);
 
-        $rc = @mysqli_query($conn, $sql);
+        $rc = mysqli_query($conn, $sql);
 
         if (false === $rc) {
-            $err = mysqli_error($conn);
-            if ($closeConnectionOnError) {
-                $this->close($conn_name);
-            }
-            throw new Exception($err);
+            throw new Exception(mysqli_error($conn));
         }
         return $rc;
     }

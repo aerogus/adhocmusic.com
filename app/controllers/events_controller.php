@@ -478,7 +478,13 @@ final class Controller
         $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/events-edit.js');
 
-        $event = Event::getInstance($id);
+        try {
+            $event = Event::getInstance($id);
+        } catch (Exception $e) {
+            Route::set_http_code(404);
+            return '404';
+        }
+
         $lieu = Lieu::getInstance($event->getIdLieu());
 
         $data = [

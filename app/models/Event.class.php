@@ -789,7 +789,7 @@ class Event extends ObjectModel
     {
         $p = self::getBasePath() . '/' . $this->getId() . '.jpg';
         if (file_exists($p)) {
-             unlink($p);
+            unlink($p);
         }
 
         // delete des caches images
@@ -818,10 +818,9 @@ class Event extends ObjectModel
      *
      * @param int $id_style id_style
      *
-     * @return int
-     * @throws Exception
+     * @return bool
      */
-    function linkStyle(int $id_style)
+    function linkStyle(int $id_style): bool
     {
         $db = DataBase::getInstance();
 
@@ -831,7 +830,7 @@ class Event extends ObjectModel
 
         try {
             $db->query($sql);
-            return $db->affectedRows();
+            return (bool) $db->affectedRows();
         } catch (Exception $e) {
             return false;
         }
@@ -842,12 +841,10 @@ class Event extends ObjectModel
      *
      * @param int $id_style id_style
      *
-     * @return int
+     * @return bool
      */
-    function unlinkStyle(int $id_style)
+    function unlinkStyle(int $id_style): bool
     {
-        $style = Style::getInstance($id_style);
-
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_event_style . "` "
@@ -856,7 +853,7 @@ class Event extends ObjectModel
 
         $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
@@ -882,8 +879,10 @@ class Event extends ObjectModel
 
     /**
      * Efface tous les styles d'un événement
+     *
+     * @return bool
      */
-    function unlinkStyles()
+    function unlinkStyles(): bool
     {
         $db = DataBase::getInstance();
 
@@ -892,15 +891,17 @@ class Event extends ObjectModel
 
         $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
      * Ajoute un groupe à un événement
      *
      * @param int $id_groupe id_groupe
+     *
+     * @return bool
      */
-    function linkGroupe(int $id_groupe)
+    function linkGroupe(int $id_groupe): bool
     {
         $db = DataBase::getInstance();
 
@@ -910,7 +911,7 @@ class Event extends ObjectModel
 
         try {
             $db->query($sql);
-            return $db->affectedRows();
+            return (bool) $db->affectedRows();
         } catch (Exception $e) {
             return false;
         }
@@ -921,7 +922,7 @@ class Event extends ObjectModel
      *
      * @param int $id_groupe id_groupe
      *
-     * @return int
+     * @return bool
      */
     function unlinkGroupe(int $id_groupe)
     {
@@ -933,7 +934,7 @@ class Event extends ObjectModel
 
         $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
@@ -946,7 +947,7 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_groupe` "
-             . "FROM `".self::$_db_table_participe_a."` "
+             . "FROM `" . self::$_db_table_participe_a . "` "
              . "WHERE `id_event` = " . (int) $this->_id_event;
 
         return array_map(
@@ -960,9 +961,9 @@ class Event extends ObjectModel
     /**
      * Délie tous les groupes d'un événement
      *
-     * @return int
+     * @return bool
      */
-    function unlinkGroupes()
+    function unlinkGroupes(): bool
     {
         $db = DataBase::getInstance();
 
@@ -971,15 +972,17 @@ class Event extends ObjectModel
 
         $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
      * Ajoute une structure à un événement
      *
      * @param int $id_structure id_structure
+     *
+     * @return bool
      */
-    function linkStructure(int $id_structure)
+    function linkStructure(int $id_structure): bool
     {
         $db = DataBase::getInstance();
 
@@ -987,17 +990,22 @@ class Event extends ObjectModel
              . " (`id_event`, `id_structure`) "
              . "VALUES (" . (int) $this->_id_event . ", " . (int) $id_structure . ")";
 
-        $db->query($sql);
-
-        return $db->affectedRows();
+        try {
+            $db->query($sql);
+            return (bool) $db->affectedRows();
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
     /**
      * Efface une structure d'un événement
      *
      * @param int $id_structure id_structure
+     *
+     * @return bool
      */
-    function unlinkStructure(int $id_structure)
+    function unlinkStructure(int $id_structure): bool
     {
         $db = DataBase::getInstance();
 
@@ -1007,7 +1015,7 @@ class Event extends ObjectModel
 
         $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
@@ -1033,8 +1041,10 @@ class Event extends ObjectModel
 
     /**
      * Efface toutes les structures d'un événement
+     *
+     * @return bool
      */
-    function unlinkStructures()
+    function unlinkStructures(): bool
     {
         $db = DataBase::getInstance();
 
@@ -1043,7 +1053,7 @@ class Event extends ObjectModel
 
         $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
