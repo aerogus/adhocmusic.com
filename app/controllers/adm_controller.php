@@ -273,7 +273,7 @@ final class Controller
             }
         }
 
-        $smarty->assign('groupes', $tab_groupes);
+        $smarty->assign('groupes', $groupes);
 
         return $smarty->fetch('adm/groupe-de-style.tpl');
     }

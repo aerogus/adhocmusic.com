@@ -15,12 +15,12 @@
     <th>Question</th>
     <th>En ligne</th>
   </tr>
-  {foreach from=$faq key=cpt item=f}
+  {foreach from=$faq item=f}
   <tr>
-    <td>{$f.id_faq}</td>
-    <td>{$f.category}</td>
-    <td><a href="/adm/faq/edit/{$f.id_faq|escape}">{$f.question|escape}</a></td>
-    <td>{$f.online}</td>
+    <td>{$f->getId()}</td>
+    <td>{$f->getIdCategory()}</td>
+    <td><a href="/adm/faq/edit/{$f->getId()|escape}">{$f->getQuestion()|escape}</a></td>
+    <td>{$f->getOnline()}</td>
   </tr>
   {/foreach}
   </table>
