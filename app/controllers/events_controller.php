@@ -31,7 +31,7 @@ final class Controller
             $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, $month, 1, $year)); // 1er du mois
             $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, $month, 31, $year)); // dernier du mois
         } else { // par défaut filtrage des 3 prochains mois
-            $datdeb = date('Y-m-d H:i:s'); // now
+            $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, $month, $day, $year)); // aujourd'hui
             $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, (int) date('m') + 3, (int) date('d'), (int) date('Y')));
         }
 
