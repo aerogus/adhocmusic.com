@@ -16,10 +16,10 @@
       <img src="{$membre->getAvatarUrl()}" alt="{$membre->getPseudo()|escape}">
       {/if}
       <strong>{$membre->getPseudo()|escape}</strong>
-      <a class="button" href="/messagerie/write?pseudo={$membre->getPseudo()|escape}">Lui écrire</a></td>
       {if $membre->getSite()}
       <a href="{$membre->getSite()}">{$membre->getSite()}</a>
       {/if}
+      <a class="button" href="/messagerie/write?pseudo={$membre->getPseudo()|escape}">Lui écrire</a>
     </div>
     <div class="col-2">
       {$membre->getText()}
