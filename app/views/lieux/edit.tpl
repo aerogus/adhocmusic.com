@@ -73,16 +73,6 @@
       <input id="address" name="address" type="text" size="50" value="{$lieu->getAddress()|escape}">
     </li>
     <li>
-      <label for="tel">Téléphone</label>
-      <div class="infobulle error" id="error_tel"{if empty($error_tel)} style="display: none"{/if}>Vous devez saisir le numéro de téléphone</div>
-      <input id="tel" name="tel" type="text" size="50" value="{$lieu->getTel()|escape}">
-    </li>
-    <li>
-      <label for="email">Email</label>
-      <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez saisir l'email de contact</div>
-      <input id="email" name="email" type="email" size="50" value="{$lieu->getEmail()|escape}">
-    </li>
-    <li>
       <label for="site">Site</label>
       <div class="infobulle error" id="error_site"{if empty($error_site)} style="display: none"{/if}>Vous devez saisir le site internet</div>
       <input id="site" name="site" type="text" size="50" value="{$lieu->getSite()|escape}">

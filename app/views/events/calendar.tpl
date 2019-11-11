@@ -1,9 +1,9 @@
 <table class="calendar">
   <thead>
     <tr class="top">
-      <th><a href="/events/?y={$prev_year}&amp;m={$prev_month}">◀</a></th>
-      <th colspan="5"><a href="/events/?y={$year}&amp;m={$month}">{$months[$month]} {$year}</a></th>
-      <th><a href="/events/?y={$next_year}&amp;m={$next_month}">▶</a></th>
+      <th><a href="/events?y={$prev_year}&amp;m={$prev_month}">◀</a></th>
+      <th colspan="5"><a href="/events?y={$year}&amp;m={$month}">{$months[$month]} {$year}</a></th>
+      <th><a href="/events?y={$next_year}&amp;m={$next_month}">▶</a></th>
     </tr>
     <tr class="days">
       <th>Lun</th>

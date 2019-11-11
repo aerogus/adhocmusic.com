@@ -41,23 +41,6 @@ class DataBase
     protected $_current_conn = [];
 
     /**
-     * Compteur du nb de requete par instance de l'objet
-     */
-    protected $_nbreq = 0;
-
-    /**
-     * Compteur du nb total de temps utilisé par instance de l'objet
-     *
-     * @var int
-     */
-    protected $_nbtps = 0;
-
-    /**
-     * @var array
-     */
-    protected $_debug_log = [];
-
-    /**
      * Type de fetch
      */
     protected $_fetchMode = MYSQLI_ASSOC;
@@ -68,7 +51,9 @@ class DataBase
     protected $_charset = 'utf8mb4';
 
     /**
+     * @param int $conn_name identifiant de connexion
      *
+     * @throws Exception
      */
     protected function connect($conn_name = 0)
     {
@@ -111,9 +96,9 @@ class DataBase
     }
 
     /**
-     *
+     * @param int $conn_name identifiant de connexion
      */
-    function close($conn_name = 0)
+    function close(int $conn_name = 0)
     {
         $conn_key = self::generateConnectionKey($conn_name);
 
@@ -142,8 +127,12 @@ class DataBase
      * dans le tableau de connections. Il est nécessaire d'inclure l'utilisateur
      * et le password pour être cohérent avec les infos dont php se sert pour la
      * re-utilisation d'un lien existant lors d'un mysqli_connect.
+     *
+     * @param int $conn_name identifiant de connexion
+     *
+     * @return string
      */
-    protected static function generateConnectionKey($conn_name)
+    protected static function generateConnectionKey(int $conn_name): string
     {
         $conn_key = self::$_connections_params[$conn_name]['db_host'] .
                     DB_DUMMY_SEPARATOR .
@@ -154,9 +143,9 @@ class DataBase
     }
 
     /**
-     *
+     * @param int $conn_name identifiant de connexion
      */
-    static function isServerInMaintenance($conn_name = 0)
+    static function isServerInMaintenance(int $conn_name = 0)
     {
         return self::$_connections_params[$conn_name]['hasMaintenance'];
     }
@@ -171,16 +160,9 @@ class DataBase
     }
 
     /**
-     *
-     */
-    function __destruct()
-    {
-    }
-
-    /**
      * Renvoie une instance de l'objet, en re-utilisant une
-     * existante si possible. Attention: appeller le constructeur soit meme
-     * sans passer par cette fonction ecrasera toute instance stockee
+     * existante si possible. Attention: appeler le constructeur soit même
+     * sans passer par cette fonction écrasera toute instance stockée
      *
      * @return object
      */
@@ -226,9 +208,13 @@ class DataBase
     }
 
     /**
+     * @param string $sql       requête SQL
+     * @param int    $conn_name identifiant de connexion
      *
+     * @return array
+     * @throws Exception
      */
-    function queryWithFetchAndClose($sql, $conn_name = 0)
+    function queryWithFetchAndClose(string $sql, int $conn_name = 0)
     {
         try {
             $res = $this->queryWithFetch($sql, $conn_name);
@@ -244,9 +230,12 @@ class DataBase
     }
 
     /**
+     * @param string $sql       requête SQL
+     * @param int    $conn_name identifiant de connexion
      *
+     * @return array
      */
-    function queryWithFetchFirstRow($sql, $conn_name = 0)
+    function queryWithFetchFirstRow(string $sql, int $conn_name = 0)
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
@@ -264,9 +253,12 @@ class DataBase
     }
 
     /**
+     * @param string $sql       requête SQL
+     * @param int    $conn_name identifiant de connexion
      *
+     * @return array
      */
-    function queryWithFetchFirstField($sql, $conn_name = 0)
+    function queryWithFetchFirstField(string $sql, int $conn_name = 0)
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
@@ -290,9 +282,12 @@ class DataBase
      * Retourne dans un tableau à une dimension le premier champ
      * des lignes retournées
      *
+     * @param string $sql       requête SQL
+     * @param int    $conn_name identifiant de connexion
+     *
      * @return array
      */
-    function queryWithFetchFirstFields($sql, $conn_name = 0)
+    function queryWithFetchFirstFields(string $sql, int $conn_name = 0)
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
@@ -314,9 +309,12 @@ class DataBase
     }
 
     /**
-     * @param string $sql
+     * @param string $sql       sql
+     * @param int    $conn_name identifiant de connexion
+     *
+     * @return array
      */
-    function queryWithFetch(string $sql, $conn_name = 0)
+    function queryWithFetch(string $sql, int $conn_name = 0)
     {
         $rc = $this->query($sql, $conn_name);
         if (true === $rc) {
@@ -339,32 +337,17 @@ class DataBase
      * @param string $sql                    requête SQL
      * @param int    $conn_name              identifiant de connexion
      * @param bool   $closeConnectionOnError fermer la connexion en cas d'erreur
+     *
+     * @return array
+     * @throws Exception
      */
     function query(string $sql, int $conn_name = 0, bool $closeConnectionOnError = true)
     {
         $conn = $this->connect($conn_name);
 
+        file_put_contents(ADHOC_ROOT_PATH . '/sqldebug.log', $sql . "\n", FILE_APPEND);
+
         $rc = @mysqli_query($conn, $sql);
-        $this->_nbreq++;
-
-        /* début debug log */
-
-        $traces = debug_backtrace();
-        $backtrace = '';
-        if (is_array($traces)) {
-            foreach ($traces as $key => $trace) {
-                if (array_key_exists('class', $trace)) {
-                    $backtrace .= $trace['class'];
-                }
-                if (array_key_exists('type', $trace)) {
-                    $backtrace .= $trace['type'];
-                }
-                $backtrace .= $trace['function'].'() l.? <-- ';
-            }
-        }
-        $backtrace .= '\O/';
-
-        /* fin debug log */
 
         if (false === $rc) {
             $err = mysqli_error($conn);
@@ -439,8 +422,15 @@ class DataBase
      * $dbAndTable devrait être entre `...` sinon ça pourrait faire des trucs étranges.
      * $fieldsAndValues est un tableau ('fieldname' => $value), $value peut être
      * un tableau pour certaines fonction spéciales (NOW(), ...).
+     *
+     * @param string $dbAndTableName  dbAndTableName
+     * @param array  $fieldsAndValues fieldsAndValues
+     * @param int    $conn_name       identifiant de connexion
+     *
+     * @return string
+     * @throws Exception
      */
-    function getInsertQuery($dbAndTableName, $fieldsAndValues, $conn_name = 0)
+    function getInsertQuery(string $dbAndTableName, array $fieldsAndValues, int $conn_name = 0)
     {
         $dbAndTableName = trim((string) $dbAndTableName);
         if (empty($dbAndTableName)) {
@@ -471,9 +461,12 @@ class DataBase
     }
 
     /**
+     * @param int $conn_name identifiant de connexion
      *
+     * @return int
+     * @throws Exception
      */
-    function affectedRows($conn_name = 0)
+    function affectedRows(int $conn_name = 0)
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
             throw new Exception('Serveur MySQL en maintenance');
@@ -488,9 +481,12 @@ class DataBase
     }
 
     /**
+     * @param int $conn_name identifiant de connexion
      *
+     * @return int
+     * @throws Exception
      */
-    function insertId(int $conn_name = 0)
+    function insertId(int $conn_name = 0): int
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
             throw new Exception('Serveur MySQL en maintenance');
@@ -505,6 +501,12 @@ class DataBase
 
     /**
      * Échappe proprement les chaines
+     *
+     * @param string $string    string
+     * @param int    $conn_name identifiant de connexion
+     *
+     * @return string
+     * @throws Exception
      */
     function escape(string $string, int $conn_name = 0)
     {
@@ -521,25 +523,17 @@ class DataBase
             mail(DEBUG_EMAIL, 'debug', 'NO LINK ???' . print_r($_SERVER, true));
         }
 
-        return mysqli_escape_string($string);
+        return mysqli_escape_string($this->_current_conn[$conn_key], $string);
     }
 
     /**
      * Retourne le n° de l'erreur sql
+     *
+     * @param int $conn_name identifiant de connexion
      */
-    function errno($conn_name)
+    function errno(int $conn_name)
     {
         $conn_key = self::generateConnectionKey($conn_name);
         return mysqli_errno($this->_current_conn[$conn_key]);
-    }
-
-    /**
-     * Retourne un log des requêtes exécutées dans l'instance courante
-     *
-     * @return array
-     */
-    function getDebugLog(): array
-    {
-        return $this->_debug_log;
     }
 }

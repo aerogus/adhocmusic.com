@@ -116,12 +116,7 @@ final class Controller
 
         $trail = Trail::getInstance()
             ->addStep("Lieux", "/lieux")
-            ->addStep(WorldCountry::getInstance($lieu->getIdCountry())->getName(), "/lieux/?c=" . $lieu->getIdCountry())
-            ->addStep(WorldRegion::getInstance(['id_country' => $lieu->getIdCountry(), 'id_region' => $lieu->getIdRegion()])->getName(), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion());
-        if ($lieu->getIdCountry() === 'FR') {
-            $trail->addStep(Departement::getInstance($lieu->getIdDepartement())->getName(), "/lieux/?c=" . $lieu->getIdCountry() . "&r=" . $lieu->getIdRegion() . "&d=" . $lieu->getIdDepartement());
-        }
-        $trail->addStep($lieu->getName());
+            ->addStep($lieu->getName());
 
         $smarty->assign('title', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCp() . " " . $lieu->getCity());
         $smarty->assign('description', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCp() . " " . $lieu->getCity());
@@ -238,8 +233,6 @@ final class Controller
                 'cp'             => $city->getCp(),
                 'city'           => $city->getName(),
                 'text'           => (string) Route::params('text'),
-                'tel'            => (string) Route::params('tel'),
-                'email'          => (string) Route::params('email'),
                 'site'           => (string) Route::params('site'),
                 'id_contact'     => $_SESSION['membre']->getId(),
             ];
@@ -258,8 +251,6 @@ final class Controller
                     ->setCp($data['cp'])
                     ->setCity($data['city'])
                     ->setText($data['text'])
-                    ->setTel($data['tel'])
-                    ->setEmail($data['email'])
                     ->setSite($data['site'])
                     ->setIdContact($data['id_contact']);
 
@@ -345,8 +336,6 @@ final class Controller
                 'cp'             => $city->getCp(),
                 'city'           => $city->getName(),
                 'text'           => (string) Route::params('text'),
-                'tel'            => (string) Route::params('tel'),
-                'email'          => (string) Route::params('email'),
                 'site'           => (string) Route::params('site'),
                 'id_contact'     => $_SESSION['membre']->getId(),
                 'lat'            => (string) Route::params('lat'),
@@ -367,8 +356,6 @@ final class Controller
                     ->setCp($data['cp'])
                     ->setCity($data['city'])
                     ->setText($data['text'])
-                    ->setTel($data['tel'])
-                    ->setEmail($data['email'])
                     ->setSite($data['site'])
                     ->setLat($data['lat'])
                     ->setLng($data['lng']);

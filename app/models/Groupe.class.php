@@ -223,6 +223,16 @@ class Groupe extends ObjectModel
     }
 
     /**
+     * Retourne l'id_groupe
+     *
+     * @return string
+     */
+    function getIdGroupe(): int
+    {
+        return $this->_id_groupe;
+    }
+
+    /**
      * Retourne l'alias
      *
      * @return string

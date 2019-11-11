@@ -19,30 +19,30 @@
     <ul>
       <li>
         <div class="infobulle error" id="error_id_lieu"{if empty($error_id_lieu)} style="display: none"{/if}>Vous devez indiquer un lieu pour l'événement ou le saisir s'il n'est pas encore référencé.</div>
-        <label for="id_country">Pays</label>
+        <label for="id_country">Pays (*)</label>
         <select id="id_country" name="id_country">
           <option value="">---</option>
         </select>
       </li>
       <li>
-        <label for="id_region">Région</label>
+        <label for="id_region">Région (*)</label>
         <select id="id_region" name="id_region">
           <option value="">---</option>
         </select>
       <li>
-        <label for="id_departement">Département</label>
+        <label for="id_departement">Département (*)</label>
         <select id="id_departement" name="id_departement">
           <option value="">---</option>
         </select>
       </li>
       <li>
-        <label for="id_city">Ville</label>
+        <label for="id_city">Ville (*)</label>
         <select id="id_city" name="id_city">
           <option value="">---</option>
         </select>
       </li>
       <li>
-        <label for="id_lieu">Lieu</label>
+        <label for="id_lieu">Lieu (*)</label>
         <select id="id_lieu" name="id_lieu">
           <option value="">---</option>
         </select>
@@ -64,7 +64,7 @@
           <select id="groupe" name="groupe[{$smarty.section.cpt_groupe.index}]">
             <option value="">-- Choix d'un groupe --</option>
             {foreach from=$groupes item=groupe}
-            <option value="{$groupe.id|escape}"{if $data.groupes.0 == $groupe.id} selected="selected"{/if}>{$groupe.name|escape}</option>
+            <option value="{$groupe->getId()|escape}"{if $data.groupes.0 === $groupe->getId()} selected="selected"{/if}>{$groupe->getName()|escape}</option>
             {/foreach}
           </select>
         </li>
@@ -77,22 +77,22 @@
     <legend>Événement</legend>
     <ul>
       <li>
-        <label for="name">Titre</label>
+        <label for="name">Titre (*)</label>
         <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez indiquer un titre pour l'événement.</div>
-        <input id="name" name="name" value="{$data.name|escape}">
+        <input type="text" id="name" name="name" value="{$data.name|escape}">
       </li>
       <li>
-        <label for="date">Date</label>
+        <label for="date">Date (*)</label>
         <input type="text" id="date" name="date" value="{$data.date.date|date_format:'%d/%m/%Y'}">
         <select id="hourminute" name="hourminute">{html_input_date_hourminute hour=$data.date.hour minute=$data.date.minute}</select>
       </li>
       <li>
-        <label for="text">Description</label>
+        <label for="text">Description (*)</label>
         <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez mettre une description pour cet événement.</div>
         <textarea name="text" id="text" cols="40" rows="10">{$data.text|escape}</textarea>
       </li>
       <li>
-        <label for="price">Tarifs (Entrée, Bar, Vestiaire ...)</label>
+        <label for="price">Tarifs (Entrée, Bar, Vestiaire ...) (*)</label>
         <div class="infobulle error" id="error_price"{if empty($error_price)} style="display: none"{/if}>Vous devez écrire les tarifs de l'entrée.</div>
         <textarea name="price" id="price" cols="40" rows="2">{$data.price|escape}</textarea>
       </li>
@@ -112,7 +112,7 @@
             <select id="style" name="style[{$smarty.section.cpt_style.index}]">
               <option value="">-- Choix d'un style --</option>
               {foreach from=$styles item=style}
-              <option value="{$style->getId|escape}"{if $data.styles.0 === $style->getId()} selected="selected"{/if}>{$style->getName()|escape}</option>
+              <option value="{$style->getId()|escape}"{if $data.styles.0 === $style->getId()} selected="selected"{/if}>{$style->getName()|escape}</option>
               {/foreach}
             </select>
           </li>
@@ -127,7 +127,7 @@
             <select id="structure" name="structure[{$smarty.section.cpt_structure.index}]">
               <option value="">-- Choix d'une structure --</option>
               {foreach from=$structures item=structure}
-              <option value="{$structure.id|escape}"{if $data.structures.0 == $structure.id} selected="selected"{/if}>{$structure.name|escape}</option>
+              <option value="{$structure->getId()|escape}"{if $data.structures.0 == $structure->getId()} selected="selected"{/if}>{$structure->getName()|escape}</option>
               {/foreach}
             </select>
           </li>
@@ -142,7 +142,7 @@
       <li>
         <label for="facebook_event_id">n° Evénement (si déjà existant sur Facebook)</label>
         <span>
-          https://www.facebook.com/events/<input id="facebook_event_id" name="facebook_event_id" style="width: 360px;" value="{$data.facebook_event_id|escape}">/
+          https://www.facebook.com/events/<input id="facebook_event_id" type="text" name="facebook_event_id" value="{$data.facebook_event_id|escape}">
         </span>
       </li>
     </ul>

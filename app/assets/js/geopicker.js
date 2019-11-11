@@ -41,7 +41,6 @@ jQuery(document).ready(function ($) {
    */
   $('#id_country').change(function () {
     var id_country = $(this).find('option:selected').val();
-    console.log('id_country change to ' + id_country);
     $.getJSON('/geo/regions/' + id_country + '.json', function (data) {
       $('#id_region, #id_departement, #id_city, #id_lieu').empty();
       $.each(data, function (region_id, region_name) {
@@ -61,11 +60,6 @@ jQuery(document).ready(function ($) {
     } else {
       $('#id_departement, #id_city').show();
     }
-    $('#id_country').parent().css('background-color', '');
-    $('#id_region').parent().css('background-color', '#660000');
-    $('#id_departement').parent().css('background-color', '');
-    $('#id_city').parent().css('background-color', '');
-    $('#id_lieu').parent().css('background-color', '');
   });
 
   /**
@@ -74,7 +68,6 @@ jQuery(document).ready(function ($) {
   $('#id_region').change(function () {
     var id_country = $('#id_country').find('option:selected').val();
     var id_region = $(this).find('option:selected').val();
-    console.log('id_region change to ' + id_region);
     if (id_country === 'FR') {
       $.getJSON('/geo/departements.json', {
         r: id_region
@@ -93,11 +86,6 @@ jQuery(document).ready(function ($) {
         }
       });
     }
-    $('#id_country').parent().css('background-color', '');
-    $('#id_region').parent().css('background-color', '');
-    $('#id_departement').parent().css('background-color', '#660000');
-    $('#id_city').parent().css('background-color', '');
-    $('#id_lieu').parent().css('background-color', '');
   });
 
   /**
@@ -106,7 +94,6 @@ jQuery(document).ready(function ($) {
   $('#id_departement').change(function () {
     var id_country = $('#id_country').find('option:selected').val();
     var id_departement = $(this).find('option:selected').val();
-    console.log('id_departement change to ' + id_departement);
     if (id_country === 'FR') {
       $.getJSON('/geo/cities.json', {
         d: id_departement
@@ -123,14 +110,8 @@ jQuery(document).ready(function ($) {
           $('#id_city').trigger('change');
           lieu.id_city = false;
         }
-        //$('#id_city').trigger('change');
       });
     }
-    $('#id_country').parent().css('background-color', '');
-    $('#id_region').parent().css('background-color', '');
-    $('#id_departement').parent().css('background-color', '');
-    $('#id_city').parent().css('background-color', '#660000');
-    $('#id_lieu').parent().css('background-color', '');
   });
 
   /**
@@ -138,7 +119,6 @@ jQuery(document).ready(function ($) {
    */
   $('#id_city').change(function () {
     var id_city = $(this).find('option:selected').val();
-    console.log('id_city change to ' + id_city);
     $.getJSON('/geo/lieux.json', {
       v: id_city
     }, function (data) {
@@ -155,25 +135,5 @@ jQuery(document).ready(function ($) {
         lieu.id = false;
       }
     });
-    $('#id_country').parent().css('background-color', '');
-    $('#id_region').parent().css('background-color', '');
-    $('#id_departement').parent().css('background-color', '');
-    $('#id_city').parent().css('background-color', '');
-    $('#id_lieu').parent().css('background-color', '#660000');
   });
-
-  /**
-   * le changement de lieu met passe au vert tous les champs
-   */
-  $('#id_lieu').change(function () {
-    var id_lieu = $(this).find('option:selected').val();
-    console.log('id_lieu change to ' + id_lieu);
-    $('#id_country').parent().css('background-color', '');
-    $('#id_region').parent().css('background-color', '');
-    $('#id_departement').parent().css('background-color', '');
-    $('#id_city').parent().css('background-color', '');
-    $('#id_lieu').parent().css('background-color', '');
-    $('#bloc_lieu li').css('background-color', '#006600');
-  });
-
 });

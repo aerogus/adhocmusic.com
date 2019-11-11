@@ -66,11 +66,6 @@ class Lieu extends ObjectModel
     protected $_city = '';
 
     /**
-     * @var string
-     */
-    protected $_tel = '';
-
-    /**
      * @var int
      */
     protected $_id_city = '';
@@ -99,11 +94,6 @@ class Lieu extends ObjectModel
      * @var string
      */
     protected $_site = '';
-
-    /**
-     * @var string
-     */
-    protected $_email = '';
 
     /**
      * @var int
@@ -152,14 +142,12 @@ class Lieu extends ObjectModel
         'address'        => 'string',
         'cp'             => 'string',
         'city'           => 'string',
-        'tel'            => 'string',
         'id_city'        => 'int',
         'id_departement' => 'string',
         'id_region'      => 'string',
         'id_country'     => 'string',
         'text'           => 'string',
         'site'           => 'string',
-        'email'          => 'string',
         'id_contact'     => 'int',
         'created_on'     => 'date',
         'modified_on'    => 'date',
@@ -264,16 +252,6 @@ class Lieu extends ObjectModel
     function getCityNew(): string
     {
         return City::getInstance($this->_id_city)->getName();
-    }
-
-    /**
-     * Retourne le téléphone
-     *
-     * @return string
-     */
-    function getTel(): string
-    {
-        return $this->_tel;
     }
 
     /**
@@ -383,16 +361,6 @@ class Lieu extends ObjectModel
             return 'https://' . $this->_site;
         }
         return $this->_site;
-    }
-
-    /**
-     * Retourne l'email
-     *
-     * @return string
-     */
-    function getEmail(): string
-    {
-        return $this->_email;
     }
 
     /**
@@ -656,23 +624,6 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * Set le téléphone
-     *
-     * @param string $tel téléphone
-     *
-     * @return object
-     */
-    function setTel(string $tel): object
-    {
-        if ($this->_tel !== $tel) {
-            $this->_tel = $tel;
-            $this->_modified_fields['tel'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
      * Set l'id de la ville
      *
      * @param int $id_city id_city
@@ -778,23 +729,6 @@ class Lieu extends ObjectModel
         if ($this->_site !== $site) {
             $this->_site = $site;
             $this->_modified_fields['site'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set l'email
-     *
-     * @param string $email email
-     *
-     * @return object
-     */
-    function setEmail(string $email): object
-    {
-        if ($this->_email !== $email) {
-            $this->_email = $email;
-            $this->_modified_fields['email'] = true;
         }
 
         return $this;
@@ -980,8 +914,8 @@ class Lieu extends ObjectModel
         $sql = "SELECT "
              . "COUNT(DISTINCT `e`.`id_event`) AS `nb_events`, "
              . "`l`.`id_lieu` AS `id`, `l`.`id_type`, `l`.`name`, `l`.`address`, `l`.`cp`, `v`.`cp` AS `cp2`, "
-             . "`l`.`city`, `l`.`tel`, `l`.`id_departement`, `d`.`name` AS `departement`, `l`.`text`, "
-             . "`l`.`site`, `l`.`email`, `l`.`id_city`, `v`.`name` AS `city2`, `l`.`id_region`, `r`.`name` AS `region`, `l`.`id_country`, `c`.`name_fr` AS `country`, `l`.`created_on`, `l`.`modified_on`, "
+             . "`l`.`city`, `l`.`id_departement`, `d`.`name` AS `departement`, `l`.`text`, "
+             . "`l`.`site`, `l`.`id_city`, `v`.`name` AS `city2`, `l`.`id_region`, `r`.`name` AS `region`, `l`.`id_country`, `c`.`name_fr` AS `country`, `l`.`created_on`, `l`.`modified_on`, "
              . "FORMAT(get_distance_metres('" . number_format($lat, 8, '.', '') . "', '" . number_format($lng, 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `distance` "
              . "FROM (`" . Lieu::getDbTable() . "` `l`, `" . WorldCountry::getDbTable() . "` `c`, `" . WorldRegion::getDbTable() . "` `r`) "
              . "LEFT JOIN `" . Departement::getDbTable() . "` `d` ON (`l`.`id_departement` = `d`.`id_departement`) "

@@ -779,9 +779,6 @@ class Event extends ObjectModel
             $this->_mini_photo = self::getBaseUrl() . '/' . $this->getId() . '-mini.jpg';
         }
 
-        $this->_groupes    = $this->getGroupes();
-        $this->_structures = $this->getStructures();
-
         return true;
     }
 
@@ -820,50 +817,24 @@ class Event extends ObjectModel
      * Ajoute un style pour un événement
      *
      * @param int $id_style id_style
-     * @param int $ordre    ordre
      *
      * @return int
      * @throws Exception
      */
-    function linkStyle(int $id_style, int $ordre = 1)
+    function linkStyle(int $id_style)
     {
-        // les paramètres sont-ils corrects ?
-        if (!$this->_id_event || !$id_style) {
-            throw new Exception('paramètres incorrects');
-        }
-
-        if (!is_numeric($ordre)) {
-            throw new Exception('ordre non numérique');
-        }
-
-        // événement valide ?
-        if (!self::isEventOk($this->_id_event)) {
-            throw new Exception('id_event introuvable');
-        }
-
-        // style valide ?
-        $style = Style::getInstance($id_style);
-
-        // le style n'est-t-il pas déjà présent pour cet évenement ?
-        $listeStyles = $this->getStyles();
-        foreach ($listeStyles as $style) {
-            if ($id_style === $style['id_style']) {
-                throw new Exception('Style déjà présent pour cet événement');
-            }
-        }
-
-        // tout est ok on ajoute la liaison événement/style
-        // (retourne actuellement une erreur en cas de duplicate key !)
-
         $db = DataBase::getInstance();
 
         $sql = "INSERT INTO `" . self::$_db_table_event_style . "` "
-             . "(`id_event`, `id_style`, `ordre`) "
-             . "VALUES (" . $this->_id_event . ", " . $id_style . ", " . $ordre . ")";
+             . "(`id_event`, `id_style`) "
+             . "VALUES (" . $this->_id_event . ", " . $id_style . ")";
 
-        $db->query($sql);
-
-        return $db->affectedRows();
+        try {
+            $db->query($sql);
+            return $db->affectedRows();
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
     /**
@@ -875,33 +846,7 @@ class Event extends ObjectModel
      */
     function unlinkStyle(int $id_style)
     {
-        // les paramètres sont-ils corrects ?
-        if (!$this->_id_event || !$id_style) {
-            throw new Exception('paramètres incorrects');
-        }
-
-        // événement valide ?
-        if (!self::isEvenementOk($this->_id_event)) {
-            throw new Exception('id_event introuvable');
-        }
-
-        // style valide ?
-        $style = Style::getInstance($is_style);
-
-        // style bien trouvé pour cet événement ?
-        $listeStyles = $this->getStyles();
-        $style_not_found = true;
-        foreach ($listeStyles as $style) {
-            if ($id_style === $style['id_style']) {
-                $style_not_found = false;
-            }
-        }
-        if ($style_not_found) {
-            throw new Exception('Style introuvable pour cet événement');
-        }
-
-        // tout est ok on supprime la liaison événement/style
-        // retourne 0 si la liaison n'existait pas, 1 sinon
+        $style = Style::getInstance($id_style);
 
         $db = DataBase::getInstance();
 
@@ -917,7 +862,7 @@ class Event extends ObjectModel
     /**
      * Retourne le tableau des styles pour un événement
      *
-     * @return array $tab_style[] = $id_style
+     * @return array
      */
     function getStyles(): array
     {
@@ -925,25 +870,14 @@ class Event extends ObjectModel
 
         $sql = "SELECT `id_style` "
              . "FROM `" . self::$_db_table_event_style . "` "
-             . "WHERE `id_event` = " . (int) $this->getId() . " "
-             . "ORDER BY `ordre` ASC";
+             . "WHERE `id_event` = " . (int) $this->getId();
 
-        return $db->queryWithFetch($sql);
-    }
-
-    /**
-     * Retourne un style
-     *
-     * @param int $idx idx
-     *
-     * @return string|null
-     */
-    function getStyle(int $idx): ?string
-    {
-        if (array_key_exists($idx, $this->_styles)) {
-            return $this->_styles[$idx];
-        }
-        return null;
+        return array_map(
+            function ($id_style) {
+                return (int) $id_style;
+            },
+            $db->queryWithFetchFirstFields($sql)
+        );
     }
 
     /**
@@ -974,9 +908,12 @@ class Event extends ObjectModel
              . "(`id_event`, `id_groupe`) "
              . "VALUES (" . (int) $this->_id_event . ", " . (int) $id_groupe . ")";
 
-        $db->query($sql);
-
-        return $db->affectedRows();
+        try {
+            $db->query($sql);
+            return $db->affectedRows();
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
     /**
@@ -1008,56 +945,16 @@ class Event extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `g`.`name`, `g`.`id_groupe` AS `id`, "
-             . "`g`.`style`, `g`.`alias`, "
-             . "CONCAT('https://www.adhocmusic.com/', `g`.`alias`) AS `url` "
-             . "FROM `".self::$_db_table_participe_a."` `p`, `".Groupe::getDbTable()."` `g` "
-             . "WHERE `g`.`id_groupe` = `p`.`id_groupe` "
-             . "AND `p`.`id_event` = " . (int) $this->_id_event . " "
-             . "ORDER BY `g`.`id_groupe` ASC";
+        $sql = "SELECT `id_groupe` "
+             . "FROM `".self::$_db_table_participe_a."` "
+             . "WHERE `id_event` = " . (int) $this->_id_event;
 
-        $res = $db->queryWithFetch($sql);
-
-        $cpt = 0;
-        foreach ($res as $grp) {
-            $res[$cpt]['mini_photo'] = '/img/note_adhoc_64.png';
-            if (file_exists(MEDIA_PATH . '/groupe/m' . $grp['id'] . '.jpg')) {
-                $res[$cpt]['mini_photo'] = MEDIA_URL . '/groupe/m' . $grp['id'] . '.jpg';
-            }
-            $cpt++;
-        }
-
-        return $res;
-    }
-
-    /**
-     * Retourne un tableau d'info d'un groupe à partir de l'index commençant à 0
-     *
-     * @param int $idx idx
-     *
-     * @return array
-     */
-    function getGroupe(int $idx)
-    {
-        if (array_key_exists($idx, $this->_groupes)) {
-            return $this->_groupes[$idx];
-        }
-        return false;
-    }
-
-    /**
-     * Retourne un groupe id à partir de l'index commençant à 0
-     *
-     * @param int $idx idx
-     *
-     * @return int
-     */
-    function getGroupeId(int $idx)
-    {
-        if (array_key_exists($idx, $this->_groupes)) {
-            return $this->_groupes[$idx]['id'];
-        }
-        return false;
+        return array_map(
+            function ($id_groupe) {
+                return (int) $id_groupe;
+            },
+            $db->queryWithFetchFirstFields($sql)
+        );
     }
 
     /**
@@ -1084,22 +981,6 @@ class Event extends ObjectModel
      */
     function linkStructure(int $id_structure)
     {
-        // les paramètres sont-ils corrects ?
-        if (!$this->_id_event || !$id_structure) {
-            throw new Exception('paramètres incorrects');
-        }
-
-        // la structure n'est-t-elle pas déjà présente pour l'événement ?
-        $listeStructures = $this->getStructures();
-        foreach ($listeStructures as $struct) {
-            if ($id_structure === $struct['id']) {
-                throw new Exception('Structure déjà présente pour cet événement');
-            }
-        }
-
-        // tout est ok on ajoute la liaison événement/structure
-        // (retourne actuellement une erreur en cas de duplicate key !)
-
         $db = DataBase::getInstance();
 
         $sql = "INSERT INTO `" . self::$_db_table_organise_par . "` "
@@ -1118,26 +999,6 @@ class Event extends ObjectModel
      */
     function unlinkStructure(int $id_structure)
     {
-        // les paramètres sont-ils corrects ?
-        if (!$this->_id_event || !$id_structure) {
-            throw new Exception('paramètres incorrects');
-        }
-
-        // la structure est-elle bien présente pour cet événement ?
-        $listeStructures = $this->getStructures();
-        $struct_not_found = true;
-        foreach ($listeStructures as $struct) {
-            if ($id_structure === $struct['id_structure']) {
-                $struct_not_found = false;
-            }
-        }
-        if ($struct_not_found) {
-            throw new Exception('Structure introuvable pour cet événement');
-        }
-
-        // tout est ok on supprime la liaison événement/structure
-        // retourne 0 si la liaison n'existait pas, 1 sinon
-
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_organise_par . "` "
@@ -1152,50 +1013,22 @@ class Event extends ObjectModel
     /**
      * Retourne le tableau des structures pour un événement
      *
-     * @return array $tab_struct[] = $id_struct
+     * @return array
      */
     function getStructures(): array
     {
-        // retourne le tableau id => nom
-
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `o`.`id_structure` AS `id`, `s`.`name` "
-             . "FROM `" . self::$_db_table_organise_par . "` `o`, `" . Structure::getDbTable() . "` `s` "
-             . "WHERE `s`.`id_structure` = `o`.`id_structure` "
-             . "AND `o`.`id_event` = " . (int) $this->getId();
+        $sql = "SELECT `id_structure` "
+             . "FROM `" . self::$_db_table_organise_par . "` "
+             . "WHERE `id_event` = " . (int) $this->getId();
 
-        return $db->queryWithFetch($sql);
-    }
-
-    /**
-     * Retourne une structure
-     *
-     * @param int $idx idx
-     *
-     * @return array|null
-     */
-    function getStructure(int $idx)
-    {
-        if (array_key_exists($idx, $this->_structures)) {
-            return $this->_structures[$idx];
-        }
-        return null;
-    }
-
-    /**
-     * Retourne un structure id à partir de l'index commençant à 0
-     *
-     * @param int $idx idx
-     *
-     * @return int
-     */
-    function getStructureId(int $idx)
-    {
-        if (array_key_exists($idx, $this->_structures)) {
-            return $this->_structures[$idx]['id'];
-        }
-        return false;
+        return array_map(
+            function ($id_structure) {
+                return (int) $id_structure;
+            },
+            $db->queryWithFetchFirstFields($sql)
+        );
     }
 
     /**
@@ -1217,7 +1050,7 @@ class Event extends ObjectModel
      * Retourne un tableau avec le nombre d'événements par jour
      * utile pour le calendrier
      *
-     * @param int $year année
+     * @param int $year  année
      * @param int $month mois
      *
      * @return array
@@ -1286,26 +1119,6 @@ class Event extends ObjectModel
                 'online' => true,
             ]
         );
-    }
-
-    /**
-     * Retourne si un événement est valide
-     *
-     * @param int $id_event id_event
-     *
-     * @return bool
-     */
-    static function isEventOk(int $id_event)
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_event` "
-             . "FROM `" . Event::getDbTable() . "` "
-             . "WHERE `id_event` = " . (int) $id_event;
-
-        $res = $db->query($sql);
-
-        return (bool) $db->numRows($res);
     }
 
     /**

@@ -55,18 +55,21 @@ final class Controller
             if (!array_key_exists($_day, $events)) {
                 $events[$_day] = [];
             }
-            $events[$_day][$event['id']] = [
-                'tab' => $event,
-                'obj' => Event::getInstance($event['id'])
-            ];
+            $events[$_day][$event['id']] = Event::getInstance($event['id']);
+            $events[$_day][$event['id']]->lieu = Lieu::getInstance($events[$_day][$event['id']]->getIdLieu());
+            $events[$_day][$event['id']]->groupes = array_map(
+                function ($id_groupe) {
+                    return Groupe::getInstance($id_groupe);
+                },
+                $events[$_day][$event['id']]->getGroupes()
+            );
         }
 
         $smarty->assign('title', "Agenda Concerts");
         $smarty->assign('description', "Agenda Concert");
 
-        // sous forme de tableau et d'objet ...
-        $smarty->assign('_events', $_events);
         $smarty->assign('events', $events);
+        $smarty->assign('styles', Style::findAll());
 
         $smarty->assign('nb_items', $nb_events);
         $smarty->assign('nb_items_per_page', NB_EVENTS_PER_PAGE);
@@ -205,7 +208,14 @@ final class Controller
         $smarty->assign('jour', Date::mysql_datetime($event->getDate(), "d/m/Y"));
         $smarty->assign('heure', Date::mysql_datetime($event->getDate(), "H:i"));
 
-        $smarty->assign('groupes', $event->getGroupes());
+        $smarty->assign(
+            'groupes', array_map(
+                function ($id_groupe) {
+                    return Groupe::getInstance($id_groupe);
+                },
+                $event->getGroupes()
+            )
+        );
 
         if ($event->getIdContact()) {
             try {
@@ -217,8 +227,7 @@ final class Controller
             }
         }
 
-        // moche !
-        if (file_exists(ADHOC_ROOT_PATH . '/static/media/event/' . $event->getId() . '.jpg')) {
+        if (file_exists(MEDIA_PATH . '/event/' . $event->getId() . '.jpg')) {
             $smarty->assign('flyer', true);
             $smarty->assign('og_image', $event->getFlyerUrl($event->getId()));
         }
@@ -275,8 +284,8 @@ final class Controller
         $id_country = 'FR';
         $id_region = 'A8';
         $id_departement = '91';
-        $id_city = 91216;
-        $id_lieu = 1;
+        $id_city = 91216; // "Épinay-sur-Orge
+        $id_lieu = 1; // Salle G. Pompidou
 
         if (isset($_GET['lieu'])) {
             $id_lieu = (int) $_GET['lieu'];
@@ -313,21 +322,21 @@ final class Controller
             'file' => '',
             'flyer_url' => '',
             'groupes' => [
-                0 => $id_groupe,
-                1 => 0,
-                2 => 0,
-                3 => 0,
-                4 => 0,
+                $id_groupe,
+                0,
+                0,
+                0,
+                0,
             ],
             'styles' => [
-                0 => 0,
-                1 => 0,
-                2 => 0,
+                0,
+                0,
+                0,
             ],
             'structures' => [
-               0 => $id_structure,
-               1 => 0,
-               2 => 0,
+               $id_structure,
+               0,
+               0,
             ],
             'text' => '',
             'price' => '',
@@ -345,7 +354,6 @@ final class Controller
                 'name'       => (string) Route::params('name'),
                 'id_lieu'    => (int) Route::params('id_lieu'),
                 'date'       => $dt,
-                'flyers'     => Route::params('flyer'),
                 'text'       => (string) Route::params('text'),
                 'price'      => (string) Route::params('price'),
                 'id_contact' => $_SESSION['membre']->getId(),
@@ -397,23 +405,24 @@ final class Controller
                         unlink($tmpname);
                     }
 
-                    /*
-                    foreach (Route::params('style') as $idx => $id_style) {
-                        if ($id_style != 0) {
-                            $event->linkStyle($id_style, $idx + 1);
-                        }
-                    }
-                    */
-
-                    foreach (Route::params('structure') as $idx => $id_structure) {
-                        if ($id_structure != 0) {
-                            $event->linkStructure((int) $id_structure);
+                    foreach (Route::params('style') as $id_style) {
+                        $id_style = (int) $id_style;
+                        if ($id_style !== 0) {
+                            $event->linkStyle($id_style);
                         }
                     }
 
-                    foreach (Route::params('groupe') as $idx => $id_groupe) {
-                        if ($id_groupe != 0) {
-                            $event->linkGroupe((int) $id_groupe);
+                    foreach (Route::params('structure') as $id_structure) {
+                        $id_structure = (int) $id_structure;
+                        if ($id_structure !== 0) {
+                            $event->linkStructure($id_structure);
+                        }
+                    }
+
+                    foreach (Route::params('groupe') as $id_groupe) {
+                        $id_groupe = (int) $id_groupe;
+                        if ($id_groupe !== 0) {
+                            $event->linkGroupe($id_groupe);
                         }
                     }
 
@@ -422,7 +431,7 @@ final class Controller
                     if ((bool) Route::params('more-event')) {
                         Tools::redirect('/events/create?lieu=' . $event->getIdLieu());
                     } else {
-                        Tools::redirect('/events/?create=1&date=' . $date);
+                        Tools::redirect('/events?create=1&date=' . $date);
                     }
 
                 } else {
@@ -441,14 +450,7 @@ final class Controller
         $smarty->assign('data', $data);
 
         $smarty->assign('styles', Style::findAll());
-        $smarty->assign(
-            'groupes', Groupe::getGroupes(
-                [
-                    'sort'  => 'name',
-                    'sens'  => 'ASC',
-                ]
-            )
-        );
+        $smarty->assign('groupes', Groupe::findAll());
         $smarty->assign('structures', Structure::findAll());
 
         return $smarty->fetch('events/create.tpl');
@@ -476,7 +478,7 @@ final class Controller
         $smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/events-edit.js');
 
-        $event = Event::getInstance((int) $id);
+        $event = Event::getInstance($id);
         $lieu = Lieu::getInstance($event->getIdLieu());
 
         $data = [
@@ -493,8 +495,10 @@ final class Controller
             ],
             'text' => $event->getText(),
             'price' => $event->getPrice(),
-            'file' => '',
             'flyer_url' => '',
+            'groupes' => $event->getGroupes(),
+            'styles' => $event->getStyles(),
+            'structures' => $event->getStructures(),
             'facebook_event_id' => $event->getFacebookEventId(),
             'online' => $event->getOnline(),
         ];
@@ -565,32 +569,33 @@ final class Controller
                     Event::invalidateFlyerInCache($event->getId(), '400', '400');
                 }
 
-                /*
                 $event->unlinkStyles();
-                foreach (Route::params('style') as $idx => $id_style) {
-                    if ($id_style != 0) {
-                        $event->linkStyle($id_style, $idx + 1);
+                foreach (Route::params('style') as $id_style) {
+                    $id_style = (int) $id_style;
+                    if ($id_style !== 0) {
+                        $event->linkStyle($id_style);
                     }
                 }
-                */
 
                 $event->unlinkStructures();
-                foreach (Route::params('structure') as $idx => $id_structure) {
-                    if ($id_structure) {
-                        $event->linkStructure((int) $id_structure);
+                foreach (Route::params('structure') as $id_structure) {
+                    $id_structure = (int) $id_structure;
+                    if ($id_structure !== 0) {
+                        $event->linkStructure($id_structure);
                     }
                 }
 
                 $event->unlinkGroupes();
-                foreach (Route::params('groupe') as $idx => $id_groupe) {
-                    if ($id_groupe != 0) {
+                foreach (Route::params('groupe') as $id_groupe) {
+                    $id_groupe = (int) $id_groupe;
+                    if ($id_groupe !== 0) {
                         $event->linkGroupe($id_groupe);
                     }
                 }
 
                 Log::action(Log::ACTION_EVENT_EDIT, $event->getId());
 
-                Tools::redirect('/events/?edit=1&y='.$year.'&m='.$month.'&d='.$day);
+                Tools::redirect('/events?edit=1&y='.$year.'&m='.$month.'&d='.$day);
 
             } else {
 
@@ -604,14 +609,7 @@ final class Controller
         $smarty->assign('lieu', $lieu);
 
         $smarty->assign('styles', Style::findAll());
-        $smarty->assign(
-            'groupes', Groupe::getGroupes(
-                [
-                    'sort'  => 'name',
-                    'sens'  => 'ASC',
-                ]
-            )
-        );
+        $smarty->assign('groupes', Groupe::findAll());
         $smarty->assign('structures', Structure::findAll());
 
         return $smarty->fetch('events/edit.tpl');
@@ -641,7 +639,7 @@ final class Controller
         if (Tools::isSubmit('form-event-delete')) {
             if ($event->delete()) {
                 Log::action(Log::ACTION_EVENT_DELETE, $event->getId());
-                Tools::redirect('/events/?delete=1');
+                Tools::redirect('/events?delete=1');
             }
         }
 

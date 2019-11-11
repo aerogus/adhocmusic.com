@@ -40,7 +40,7 @@
     <p>Avec :</p>
     <ul class="grid-3">
     {foreach from=$groupes item=groupe}
-      <li><a href="{$groupe.url}"><img src="{$groupe.mini_photo}" style="float: left; margin: 2px; border: 1px solid #000000;" alt=""></a><a href="{$groupe.url}"><strong>{$groupe.name|escape}</strong></a><br>({$groupe.style|escape})</li>
+      <li><a href="{$groupe->getUrl()}"><img src="{$groupe->getMiniPhoto()}" style="float: left; margin: 2px; border: 1px solid #000000;" alt=""></a><a href="{$groupe->getUrl()}"><strong>{$groupe->getName()|escape}</strong></a><br>({$groupe->getStyle()|escape})</li>
     {/foreach}
     </ul>
     {/if}
@@ -49,7 +49,7 @@
     <p>Organisateur :</p>
     <ul>
     {foreach from=$structures item=structure}
-      <li><img src="{$structure.picto}" alt="" title="{$structure.name}"><strong>{$structure.name|escape}</strong></li>
+      <li><img src="{$structure->getPicto()}" alt="" title="{$structure->getName()}"><strong>{$structure->getName()|escape}</strong></li>
     {/foreach}
     </ul>
     {/if}

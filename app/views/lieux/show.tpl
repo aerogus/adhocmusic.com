@@ -35,8 +35,6 @@
 
     <div class="infos" style="padding: 10px;">
       {$lieu->getType()}<br>
-      {$lieu->getTel()|escape}<br>
-      {$lieu->getEmail()|escape:'email'}<br>
       {if $lieu->getSite()}
       <a href="{$lieu->getSite()}">{$lieu->getSite()}</a><br>
       {/if}
@@ -51,22 +49,20 @@
   </div>
 </div>
 
+{if !empty($events_f)}
 <div class="box">
   <header>
     <h2>Agenda</h2>
   </header>
   <div>
-    {if !empty($events_f)}
     <ul>
       {foreach $events_f as $event}
       <li>{if $event.structure_id}<img src="{$event.structure_picto}" alt="" title="Organisé par {$event.structure_name|escape}">{/if}<a href="{$event.url}">Le {$event.date|date_format:"%d/%m/%Y %H:%M"} - {$event.name|escape}</a></li>
       {/foreach}
     </ul>
-    {else}
-      <p>Aucun événement ! <a href="/events/create?id_lieu={$lieu->getId()}">Proposer un événement</a></p>
-    {/if}
   </div>
 </div>
+{/if}
 
 {if !empty($events_p)}
 <div class="box">
