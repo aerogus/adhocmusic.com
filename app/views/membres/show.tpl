@@ -11,18 +11,18 @@
     <h1>Profil de {$membre->getPseudo()}</h1>
   </header>
   <div class="grid-3">
-    <div>
+    <div class="col-1 profile">
       {if $membre->getAvatarUrl()}
       <img src="{$membre->getAvatarUrl()}" alt="{$membre->getPseudo()|escape}">
       {/if}
       <strong>{$membre->getPseudo()|escape}</strong>
-      <a href="/messagerie/write?pseudo={$membre->getPseudo()|escape}">Lui écrire</a></td>
+      <a class="button" href="/messagerie/write?pseudo={$membre->getPseudo()|escape}">Lui écrire</a></td>
       {if $membre->getSite()}
       <a href="{$membre->getSite()}">{$membre->getSite()}</a>
       {/if}
     </div>
     <div class="col-2">
-      <p>{$membre->getText()}</p>
+      {$membre->getText()}
     </div>
   </div>
 </div>
