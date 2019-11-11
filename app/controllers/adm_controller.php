@@ -258,29 +258,18 @@ final class Controller
         $sql = "SELECT `id_groupe` AS `id`, `name`, `style`, `text`, `mini_text`, `influences` "
              . "FROM `adhoc_groupe` "
              . "ORDER BY `name` ASC";
-        $res = $db->queryWithFetch($sql);
 
-        $tab_groupes = [];
-        foreach ($res as $_res) {
-            $tab_groupes[$_res['id']] = $_res;
-        }
+        $groupes = $db->queryWithFetch($sql);
 
-        foreach ($tab_groupes as $id_grp => $grp) {
-            $sql = "SELECT `id_style`, `ordre` "
+        foreach ($groupes as $key => $groupe) {
+            $sql = "SELECT `id_style` "
                  . "FROM `adhoc_groupe_style` "
-                 . "WHERE `id_groupe` = " . (int) $grp['id'] . " "
-                 . "ORDER BY `ordre` ASC";
-            $res = $db->query($sql);
+                 . "WHERE `id_groupe` = " . (int) $groupe['id'];
+            $ids_style = $db->queryWithFetchFirstFields($sql);
 
-            $cpt = 0;
-            while (list($grp_style_id, $grp_style_ordre) = $db->fetchRow($res)) {
-                $tab_groupes[$id_grp]['styles'][$grp_style_ordre] = Style::getInstance((int) $grp_style_id)->getName();
-                $cpt++;
-            }
-            if ($cpt > 0) {
-                $tab_groupes[$id_grp]['bgcolor'] = '#009900'; // au moins 1 style : bien
-            } else {
-                $tab_groupes[$id_grp]['bgcolor'] = '#990000'; // aucun style : mal
+            $groupes[$key]['styles'] = [];
+            foreach ($ids_style as $id_style) {
+                $groupes[$key]['styles'][] = Style::getInstance($id_style);
             }
         }
 
