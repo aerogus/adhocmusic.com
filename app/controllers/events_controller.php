@@ -31,7 +31,7 @@ final class Controller
             $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, $month, 1, $year)); // 1er du mois
             $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, $month, 31, $year)); // dernier du mois
         } else { // par défaut filtrage des 3 prochains mois
-            $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, $month, $day, $year)); // aujourd'hui
+            $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, (int) date('m'), (int) date('d'), (int) date('Y'))); // aujourd'hui
             $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, (int) date('m') + 3, (int) date('d'), (int) date('Y')));
         }
 
@@ -45,7 +45,7 @@ final class Controller
                 'limit'  => 1000,
             ]
         );
-
+//echo $datdeb . $datfin; die;
         $nb_events = count($_events);
         $_events = array_slice($_events, $page * NB_EVENTS_PER_PAGE, NB_EVENTS_PER_PAGE);
 
