@@ -39,6 +39,12 @@ CREATE TABLE IF NOT EXISTS `adhoc_style` (
   PRIMARY KEY (`id_style`)
 );
 
+CREATE TABLE IF NOT EXISTS `adhoc_faq_category` (
+  `id_faq_category` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_faq_category`)
+);
+
 CREATE TABLE IF NOT EXISTS `adhoc_type_musicien` (
   `id_type_musicien` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
@@ -320,7 +326,8 @@ CREATE TABLE IF NOT EXISTS `adhoc_faq` (
   `modified_on` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_faq`),
   KEY `id_category` (`id_category`),
-  KEY `online` (`online`)
+  KEY `online` (`online`),
+  CONSTRAINT `fk_faq_faq_category` FOREIGN KEY (`id_category`) REFERENCES `adhoc_faq_category` (`id_faq_category`)
 );
 
 CREATE TABLE IF NOT EXISTS `adhoc_featured` (
