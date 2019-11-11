@@ -384,14 +384,18 @@ abstract class ObjectModel
     }
 
     /**
-     * @param mixed $id id
+     * Cherche une collection d'instance de l'objet répondant à certains critères
+     * champs communs: order_by => fieldName, sort => ASC|DESC, limit => int
+     *
+     * @param array $params params
      *
      * @return object
      * @throws Exception
      */
-    static function find($id): object
+    static function find(array $params): array
     {
-        return static::getInstance($id);
+        // à implémenter
+        return [];
     }
 
     /**
@@ -402,6 +406,14 @@ abstract class ObjectModel
      */
     static function findAll(): array
     {
+        // version factorisée
+        /*
+        return static::find([
+            'order_by' => static::getDbPk(),
+            'sort' => 'ASC',
+        ]);
+        */
+
         $db = DataBase::getInstance();
         $objs = [];
 
@@ -463,6 +475,7 @@ abstract class ObjectModel
             ObjectCache::unset($this->getObjectId());
         }
 
+        // @todo cas pk array, pk non int
         $sql = sprintf('DELETE FROM `%s` WHERE `%s` = %d', $this->getDbTable(), $this->getDbPk(), $this->getId());
         $db->query($sql);
 

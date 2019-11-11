@@ -2,6 +2,7 @@
 
 use \Reference\Style;
 use \Reference\TypeMusicien;
+use \Reference\GroupeStatus;
 
 /**
  * Classe Groupe
@@ -1185,8 +1186,7 @@ class Groupe extends ObjectModel
      *
      * @return array
      */
-    /*
-    static function find(array $params = []): array
+    static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];
@@ -1196,18 +1196,25 @@ class Groupe extends ObjectModel
         if (isset($params['id_contact'])) {
             // extraire dans adhoc_appartient_a les id_groupe correspondant au id_contact
             $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'];
-            $ids_groupes = $db->queryWithFetch($subSql);
+            $ids_groupe = $db->queryWithFetchFirstFields($subSql);
             $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
         }
 
-        $rows = $db->queryWithFetch($sql);
-        foreach ($rows as $row) {
-            $objs[] = static::getInstance($row);
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+            $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+        }
+
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+            $sql .= $params['sort'];
+        }
+
+        $ids_groupe = $db->queryWithFetchFirstFields($sql);
+        foreach ($ids_groupe as $id_groupe) {
+            $objs[] = static::getInstance((int) $id_groupe);
         }
 
         return $objs;
     }
-    */
 
     /**
      * Retourne un tableau de groupes en fonction de critères donnés

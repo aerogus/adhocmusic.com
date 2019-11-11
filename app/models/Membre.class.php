@@ -481,32 +481,16 @@ class Membre extends Contact
      */
     function getGroupes(): array
     {
-        return Groupe::find(
-            [
-                'id_contact' => (int) $this->getId()
-            ]
-        );
-
         if ($this->_groupes === false) {
-            $db   = DataBase::getInstance();
 
-            $sql  = "SELECT `g`.`alias`, `g`.`id_groupe`, `g`.`name`, `a`.`id_type_musicien` "
-                  . "FROM `" . self::$_db_table_appartient_a . "` `a`, "
-                  . "`" . Groupe::getDbTable() . "` `g` "
-                  . "WHERE `a`.`id_groupe` = `g`.`id_groupe` "
-                  . "AND `a`.`id_contact` = " . (int) $this->getId(). " "
-                  . "ORDER BY `g`.`name` ASC";
+            $this->_groupes = Groupe::find(
+                [
+                    'id_contact' => (int) $this->getId(),
+                    'order_by' => 'alias',
+                    'sort' => 'ASC',
+                ]
+            );
 
-            $this->_groupes = $db->queryWithFetch($sql);
-
-            foreach ($this->_groupes as $key => $groupe) {
-                try {
-                    $this->_groupes[$key]['type_musicien_name'] = TypeMusicien::getInstance((int) $groupe['id_type_musicien'])->getName();
-                } catch (Exception $e) {
-                    $this->_groupes[$key]['type_musicien_name'] = 'non défini';
-                }
-                $this->_groupes[$key]['url'] = Groupe::getUrlFiche($groupe['alias']);
-            }
         }
 
         return $this->_groupes;
@@ -544,11 +528,11 @@ class Membre extends Contact
     /* début setters */
 
     /**
-     * @param string|null $pseudo pseudo
+     * @param string $pseudo pseudo
      *
      * @return object
      */
-    function setPseudo(?string $pseudo): object
+    function setPseudo(string $pseudo): object
     {
         if ($this->_pseudo !== $pseudo) {
             $this->_pseudo = $pseudo;
@@ -559,11 +543,11 @@ class Membre extends Contact
     }
 
     /**
-     * @param string|null $password password
+     * @param string $password password
      *
      * @return object
      */
-    function setPassword(?string $password): object
+    function setPassword(string $password): object
     {
         if ($this->_password !== $password) {
             $this->_password = $password;
