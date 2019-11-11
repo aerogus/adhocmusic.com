@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use \Reference\FAQCategory;
+
 /**
  * Foire aux questions
  *
