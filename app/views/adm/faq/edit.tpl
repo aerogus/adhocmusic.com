@@ -10,8 +10,8 @@
     <li>
       <label for="id_category">Catégorie</label>
       <select name="id_category">
-      {foreach from=$categories key=cat_id item=cat_name}
-        <option value="{$cat_id}"{if $faq->getIdCategory() == $cat_id} selected="selected"{/if}>{$cat_name}</option>
+      {foreach from=$categories item=cat}
+        <option value="{$cat->getId()}"{if $faq->getIdCategory() === $cat->getId()} selected="selected"{/if}>{$cat->getName()}</option>
       {/foreach}
       </select>
     </li>

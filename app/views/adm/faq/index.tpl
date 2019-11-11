@@ -18,7 +18,7 @@
   {foreach from=$faq item=f}
   <tr>
     <td>{$f->getId()}</td>
-    <td>{$f->getIdCategory()}</td>
+    <td>{$f->getCategory()->getName()}</td>
     <td><a href="/adm/faq/edit/{$f->getId()|escape}">{$f->getQuestion()|escape}</a></td>
     <td>{$f->getOnline()}</td>
   </tr>

@@ -10,8 +10,8 @@
     <li>
       <label for="id_category">Catégorie</label>
       <select name="id_category">
-      {foreach from=$categories key=cat_id item=cat_name}
-        <option value="{$cat_id}">{$cat_name}</option>
+      {foreach from=$categories item=cat}
+        <option value="{$cat->getId()}">{$cat->getName()}</option>
       {/foreach}
       </select>
     </li>

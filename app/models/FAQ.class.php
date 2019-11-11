@@ -74,6 +74,14 @@ class FAQ extends ObjectModel
     }
 
     /**
+     * @return object
+     */
+    function getCategory(): object
+    {
+        return FAQCategory::getInstance($this->_id_category);
+    }
+
+    /**
      * @return string
      */
     function getQuestion(): string
