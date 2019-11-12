@@ -1194,6 +1194,8 @@ class Groupe extends ObjectModel
     /**
      * Retourne une collection de groupes répondant au(x) critère(s)
      *
+     * @param array $params params ['id_contact' => int, 'order_by' => string, 'sort => string]
+     *
      * @return array
      */
     static function find(array $params): array
@@ -1206,16 +1208,29 @@ class Groupe extends ObjectModel
         if (isset($params['id_contact'])) {
             // extraire dans adhoc_appartient_a les id_groupe correspondant au id_contact
             $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'] . " ";
-            $ids_groupe = $db->queryWithFetchFirstFields($subSql);
-            $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
+            if ($ids_groupe = $db->queryWithFetchFirstFields($subSql)) {
+                $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
+            } else {
+                return $objs;
+            }
+        }
+
+        if (isset($params['online'])) {
+            $sql .= "AND `online` = ";
+            $sql .= $params['online'] ? "TRUE" : "FALSE";
+            $sql .= " ";
         }
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+        } else {
+            $sql .= "ORDER BY `" . static::$_pk . "` ";
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
             $sql .= $params['sort'];
+        } else {
+            $sql .= "ASC";
         }
 
         $ids_groupe = $db->queryWithFetchFirstFields($sql);
