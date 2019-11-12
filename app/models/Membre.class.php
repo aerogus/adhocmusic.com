@@ -486,6 +486,7 @@ class Membre extends Contact
             $this->_groupes = Groupe::find(
                 [
                     'id_contact' => (int) $this->getId(),
+                    'online' => true,
                     'order_by' => 'alias',
                     'sort' => 'ASC',
                 ]
