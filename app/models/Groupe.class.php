@@ -1205,7 +1205,7 @@ class Groupe extends ObjectModel
 
         if (isset($params['id_contact'])) {
             // extraire dans adhoc_appartient_a les id_groupe correspondant au id_contact
-            $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'];
+            $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'] . " ";
             $ids_groupe = $db->queryWithFetchFirstFields($subSql);
             $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
         }
