@@ -40,7 +40,7 @@
     <p>Avec :</p>
     <ul class="grid-3">
     {foreach from=$groupes item=groupe}
-      <li><a href="{$groupe->getUrl()}"><img src="{$groupe->getMiniPhoto()}" style="float: left; margin: 2px; border: 1px solid #000000;" alt=""></a><a href="{$groupe->getUrl()}"><strong>{$groupe->getName()|escape}</strong></a><br>({$groupe->getStyle()|escape})</li>
+      <li><a href="{$groupe->getUrl()}"><img src="{$groupe->getMiniPhoto()}" style="float: left; margin: 2px; border: 1px solid #777" alt=""></a><a href="{$groupe->getUrl()}"><strong>{$groupe->getName()|escape}</strong></a><br>({$groupe->getStyle()|escape})</li>
     {/foreach}
     </ul>
     {/if}
