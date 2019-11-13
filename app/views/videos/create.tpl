@@ -29,7 +29,7 @@
           <select id="id_groupe" name="id_groupe">
             <option value="0">Aucun</option>
             {foreach $groupes as $groupe}
-            <option value="{$groupe.id}">{$groupe.name|escape}</option>
+            <option value="{$groupe->getIdGroupe()}">{$groupe->getName()|escape}</option>
             {/foreach}
           </select>
           {/if}

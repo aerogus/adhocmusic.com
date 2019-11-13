@@ -6,7 +6,7 @@
 final class Controller
 {
     /**
-     *
+     * @return string
      */
     static function index(): string
     {
@@ -19,7 +19,7 @@ final class Controller
     }
 
     /**
-     *
+     * @return string
      */
     static function show(): string
     {
@@ -56,7 +56,7 @@ final class Controller
     }
 
     /**
-     *
+     * @return string
      */
     static function create(): string
     {
@@ -95,7 +95,7 @@ final class Controller
     }
 
     /**
-     *
+     * @return string
      */
     static function edit(): string
     {
@@ -129,7 +129,7 @@ final class Controller
     }
 
     /**
-     *
+     * @return string
      */
     static function delete(): string
     {

@@ -4,7 +4,6 @@ use \Reference\Style;
 use \Reference\TypeMusicien;
 
 define('ADM_NB_MEMBERS_PER_PAGE', 25);
-define('ADM_NB_GROUPES_PER_PAGE', 1000);
 
 final class Controller
 {
@@ -35,47 +34,20 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $sens = (string) Route::params('sens');
-        $sort = (string) Route::params('sort');
-
-        if ($sens === 'DESC') {
-            $sens = 'DESC';
-            $sensinv = 'ASC';
-        } else {
-            $sens = 'ASC';
-            $sensinv = 'DESC';
-        }
-
-        if (!$sort) {
-            $sort = 'name';
-        }
-
-        $page = (int) Route::params('page');
-
         Trail::getInstance()
             ->addStep("Privé", "/adm")
             ->addStep("Groupes");
 
         $smarty = new AdHocSmarty();
 
-        $groupes = Groupe::getGroupes(
-            [
-                'sort'  => $sort,
-                'sens'  => $sens,
-                'debut' => $page * ADM_NB_GROUPES_PER_PAGE,
-                'limit' => ADM_NB_GROUPES_PER_PAGE,
-            ]
+        $smarty->assign(
+            'groupes', Groupe::find(
+                [
+                    'order_by' => 'name',
+                    'sort' => 'ASC',
+                ]
+            )
         );
-
-        $nb_groupes = Groupe::count();
-
-        $smarty->assign('sensinv', $sensinv);
-        $smarty->assign('groupes', $groupes);
-
-        // pagination
-        $smarty->assign('page', $page);
-        $smarty->assign('nb_items', $nb_groupes);
-        $smarty->assign('nb_items_per_page', ADM_NB_GROUPES_PER_PAGE);
 
         return $smarty->fetch('adm/groupes/index.tpl');
     }

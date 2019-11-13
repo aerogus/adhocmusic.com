@@ -1192,7 +1192,7 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * Retourne une collection de groupes répondant au(x) critère(s)
+     * Retourne une collection d'objets "Groupe" répondant au(x) critère(s)
      *
      * @param array $params params ['id_contact' => int, 'order_by' => string, 'sort => string]
      *
@@ -1206,7 +1206,6 @@ class Groupe extends ObjectModel
         $sql = "SELECT `id_groupe` FROM `" . Groupe::getDbTable() . "` WHERE 1 ";
 
         if (isset($params['id_contact'])) {
-            // extraire dans adhoc_appartient_a les id_groupe correspondant au id_contact
             $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'] . " ";
             if ($ids_groupe = $db->queryWithFetchFirstFields($subSql)) {
                 $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
@@ -1239,146 +1238,6 @@ class Groupe extends ObjectModel
         }
 
         return $objs;
-    }
-
-    /**
-     * Retourne un tableau de groupes en fonction de critères donnés
-     *
-     * @deprecated (soon)
-     *
-     * @param array $params params
-     *
-     * @return array
-     */
-    static function getGroupes(array $params = []): array
-    {
-        $debut = 0;
-        if (isset($params['debut'])) {
-            $debut = (int) $params['debut'];
-        }
-
-        $limit = null;
-        if (isset($params['limit'])) {
-            $limit = (int) $params['limit'];
-        }
-
-        $online = null;
-        if (isset($params['online'])) {
-            $online = (bool) $params['online'] ? 'TRUE' : 'FALSE';
-        }
-
-        $sens = 'ASC';
-        if (isset($params['sens']) && $params['sens'] === 'DESC') {
-            $sens = 'DESC';
-        }
-
-        $sort = 'id_groupe';
-        if (isset($params['sort'])
-            && ($params['sort'] === 'name'
-            || $params['sort'] === 'random'
-            || $params['sort'] === 'created_on'
-            || $params['sort'] === 'modified_on')
-        ) {
-            $sort = $params['sort'];
-        }
-
-        $tab_style   = [];
-        $tab_id      = [];
-        $tab_contact = [];
-
-        if (array_key_exists('style', $params)) {
-            $tab_style = explode(",", $params['style']);
-        }
-        if (array_key_exists('id', $params)) {
-            $tab_id = explode(",", $params['id']);
-        }
-        if (array_key_exists('contact', $params)) {
-            $tab_contact = explode(",", $params['contact']);
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `g`.`id_groupe` AS `id`, `g`.`name`, `g`.`alias`, `g`.`mini_text`, `g`.`text`, `g`.`style`, `g`.`lineup`, "
-             . "`g`.`etat`, `g`.`site`, `g`.`influences`, `g`.`created_on`, UNIX_TIMESTAMP(`g`.`created_on`) AS `created_on_ts`, "
-             . " `g`.`modified_on`, UNIX_TIMESTAMP(`g`.`modified_on`) AS `modified_on_ts`, "
-             . "`g`.`alias`, `g`.`myspace`, `g`.`comment` "
-             . "FROM `" . Groupe::getDbTable() . "` `g` "
-             . "WHERE 1 ";
-
-        if (!is_null($online)) {
-            $sql .= "AND `g`.`online` = " . $online . " ";
-        }
-
-        if (count($tab_id) && ($tab_id[0] !== 0)) {
-            $sql .= "AND `g`.`id_groupe` IN (" . implode(',', $tab_id) . ") ";
-        }
-
-        $sql .= "ORDER BY ";
-        if ($sort === "random") {
-            $sql .= "RAND(" . time() . ") ";
-        } else {
-            $sql .= "`g`.`" . $sort . "` " . $sens . " ";
-        }
-
-        if (!is_null($limit)) {
-            $sql .= "LIMIT " . $debut . ", " . $limit;
-        }
-
-        $res = $db->queryWithFetch($sql);
-
-        foreach ($res as $idx => $grp) {
-            $res[$idx]['url'] = HOME_URL . '/' . $res[$idx]['alias'];
-            $res[$idx]['mini_photo'] = '/img/note_adhoc_64.png';
-            if (file_exists(self::getBasePath() . '/m' . $res[$idx]['id'] . '.png')) {
-                $res[$idx]['mini_photo'] = self::getBaseUrl() . '/m' . $res[$idx]['id'] . '.png?ts=' . $res[$idx]['modified_on_ts'];
-            } elseif (file_exists(self::getBasePath() . '/m' . $res[$idx]['id'] . '.jpg')) {
-                $res[$idx]['mini_photo'] = self::getBaseUrl() . '/m' . $res[$idx]['id'] . '.jpg?ts=' . $res[$idx]['modified_on_ts'];
-            } elseif (file_exists(self::getBasePath() . '/m' . $res[$idx]['id'] . '.gif')) {
-                $res[$idx]['mini_photo'] = self::getBaseUrl() . '/m' . $res[$idx]['id'] . '.gif?ts=' . $res[$idx]['modified_on_ts'];
-            }
-        }
-
-        return $res;
-    }
-
-    /**
-     * Retourne le listing de ses propres groupes
-     * dont on est administrateur
-     *
-     * @return array
-     */
-    static function getMyGroupes(): array
-    {
-        if (empty($_SESSION['membre'])) {
-            throw new Exception('non identifié');
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `g`.`id_groupe` AS `id`, `g`.`alias`, "
-             . "`g`.`created_on`, UNIX_TIMESTAMP(`g`.`created_on`) AS `created_on_ts`, "
-             . "`g`.`modified_on`, UNIX_TIMESTAMP(`g`.`modified_on`) AS `modified_on_ts`, "
-             . "`g`.`name`, `a`.`id_type_musicien` "
-             . "FROM `" . Groupe::getDbTable() . "` `g`, `" . self::$_db_table_appartient_a . "` `a` "
-             . "WHERE `g`.`id_groupe` = `a`.`id_groupe` "
-             . "AND `a`.`id_contact` = " . (int) $_SESSION['membre']->getId();
-
-        $res = $db->queryWithFetch($sql);
-
-        if ($res) {
-            $tab = [];
-            foreach ($res as $grp) {
-                $tab[$grp['id']] = $grp;
-                $mini_photo = '/img/note_adhoc_64.png';
-                if (file_exists(self::getBasePath() . '/m' . $grp['id'] . '.jpg')) {
-                    $mini_photo = self::getBaseUrl() . '/m' . $grp['id'] . '.jpg?ts=' . $grp['modified_on_ts'];
-                }
-                $tab[$grp['id']]['mini_photo'] = $mini_photo;
-                $tab[$grp['id']]['nom_type_musicien'] = TypeMusicien::getInstance((int) $grp['id_type_musicien'])->getName();
-            }
-            return $tab;
-        }
-        return [];
     }
 
     /**

@@ -14,16 +14,14 @@
 <table>
   <tr>
     <th>Groupe</th>
-    <th>Poste</th>
     <th>Création</th>
     <th>Modification</th>
   </tr>
   {foreach $groupes as $groupe}
   <tr>
-    <td><a href="/groupes/edit/{$groupe.id}" title="{$groupe.name|escape}"><img src="{$groupe.mini_photo|escape}" alt="{$groupe.name|escape}"><br>{$groupe.name|escape}</a></td>
-    <td>{$groupe.nom_type_musicien}</td>
-    <td>{$groupe.created_on|date_format:'%d/%m/%Y'}</td>
-    <td>{$groupe.modified_on|date_format:'%d/%m/%Y'}</td>
+    <td><a href="/groupes/edit/{$groupe->getIdGroupe()}" title="{$groupe->getName()|escape}"><img src="{$groupe->getMiniPhoto()|escape}" alt="{$groupe->getName()|escape}"><br>{$groupe->getName()|escape}</a></td>
+    <td>{$groupe->getCreatedOn()|date_format:'%d/%m/%Y'}</td>
+    <td>{$groupe->getModifiedOn()|date_format:'%d/%m/%Y'}</td>
   </tr>
   {/foreach}
 </table>

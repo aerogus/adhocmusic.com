@@ -196,12 +196,11 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         $smarty->assign(
-            'groupes', Groupe::getGroupes(
+            'groupes', Groupe::find(
                 [
-                    'sort'   => 'id',
-                    'sens'   => 'ASC',
                     'online' => true,
-                    'limit'  => false,
+                    'order_by' => 'name',
+                    'sort' => 'ASC',
                 ]
             )
         );

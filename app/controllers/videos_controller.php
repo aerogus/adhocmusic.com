@@ -296,11 +296,11 @@ final class Controller
             $smarty->assign('groupe', $groupe);
         } else {
             $smarty->assign(
-                'groupes', Groupe::getGroupes(
+                'groupes', Groupe::find(
                     [
-                        'sort'   => 'name',
-                        'sens'   => 'ASC',
                         'online' => true,
+                        'order_by' => 'name',
+                        'sort' => 'ASC',
                     ]
                 )
             );
@@ -414,10 +414,11 @@ final class Controller
         $smarty->assign('video', $video);
 
         $smarty->assign(
-            'groupes', Groupe::getGroupes(
+            'groupes', Groupe::find(
                 [
-                    'sort'   => 'name',
-                    'sens'   => 'ASC',
+                    'online' => true,
+                    'order_by' => 'name',
+                    'sort' => 'ASC',
                 ]
             )
         );

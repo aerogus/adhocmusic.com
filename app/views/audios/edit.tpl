@@ -33,7 +33,7 @@
           <select id="id_groupe" name="id_groupe">
             <option value="0">Sans</option>
             {foreach from=$groupes item=groupe}
-            <option value="{$groupe.id}"{if $audio->getIdGroupe() == $groupe.id} selected="selected"{/if}>{$groupe.name|escape}</option>
+            <option value="{$groupe->getId()}"{if $audio->getIdGroupe() === $groupe->getIdGroupe()} selected="selected"{/if}>{$groupe->getName()|escape}</option>
             {/foreach}
           </select>
         </li>

@@ -25,18 +25,18 @@
         </li>
         <li>
           <label for="id_groupe">Groupe</label>
-        {if !empty($groupe)}
+          {if !empty($groupe)}
           <input type="hidden" name="id_groupe" value="{$groupe->getId()}">
           <span>{$groupe->getName()}</span>
-        {else}
+          {else}
           <div class="infobulle error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier cette/ces photo(s) à un groupe, un lieu ou un événement</div>
           <select id="id_groupe" name="id_groupe">
             <option value="0">Aucun</option>
             {foreach $groupes as $groupe}
-            <option value="{$groupe.id}">{$groupe.name|escape}</option>
+            <option value="{$groupe->getIdGroupe()}">{$groupe->getName()|escape}</option>
             {/foreach}
           </select>
-        {/if}
+          {/if}
         </li>
         <li>
           <label for="id_lieu">Lieu</label>

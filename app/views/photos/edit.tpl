@@ -46,7 +46,7 @@
       <select name="id_groupe">
         <option value="0">Aucun</option>
         {foreach $groupes as $groupe}
-        <option value="{$groupe.id}"{if $photo->getIdGroupe() == $groupe.id} selected="selected"{/if}>{$groupe.name|escape}</option>
+        <option value="{$groupe->getIdGroupe()}"{if $photo->getIdGroupe() == $groupe->getIdGroupe()} selected="selected"{/if}>{$groupe->getName()|escape}</option>
         {/foreach}
       </select>
     </li>
