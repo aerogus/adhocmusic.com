@@ -915,7 +915,7 @@ class Lieu extends ObjectModel
              . "COUNT(DISTINCT `e`.`id_event`) AS `nb_events`, "
              . "`l`.`id_lieu` AS `id`, `l`.`id_type`, `l`.`name`, `l`.`address`, `l`.`cp`, `v`.`cp` AS `cp2`, "
              . "`l`.`city`, `l`.`id_departement`, `d`.`name` AS `departement`, `l`.`text`, "
-             . "`l`.`site`, `l`.`id_city`, `v`.`name` AS `city2`, `l`.`id_region`, `r`.`name` AS `region`, `l`.`id_country`, `c`.`name_fr` AS `country`, `l`.`created_on`, `l`.`modified_on`, "
+             . "`l`.`site`, `l`.`id_city`, `v`.`name` AS `city2`, `l`.`id_region`, `r`.`name` AS `region`, `l`.`id_country`, `c`.`name` AS `country`, `l`.`created_on`, `l`.`modified_on`, "
              . "FORMAT(get_distance_metres('" . number_format($lat, 8, '.', '') . "', '" . number_format($lng, 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `distance` "
              . "FROM (`" . Lieu::getDbTable() . "` `l`, `" . WorldCountry::getDbTable() . "` `c`, `" . WorldRegion::getDbTable() . "` `r`) "
              . "LEFT JOIN `" . Departement::getDbTable() . "` `d` ON (`l`.`id_departement` = `d`.`id_departement`) "
