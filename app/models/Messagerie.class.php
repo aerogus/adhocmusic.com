@@ -213,8 +213,7 @@ class Messagerie extends ObjectModel
              . "FROM `" . Messagerie::getDbTable() . "` "
              . "WHERE 1 ";
 
-        switch ($mode)
-        {
+        switch ($mode) {
             case 'admin':
                 $sql .= "AND 1 ";
                 break;

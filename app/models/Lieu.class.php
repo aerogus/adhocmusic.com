@@ -891,6 +891,19 @@ class Lieu extends ObjectModel
     }
 
     /**
+     * Retourne une collection d'objets "Lieu" répondant au(x) critère(s)
+     *
+     * @param array $params param
+     *
+     * @return array
+     */
+    static function find(array $params): array
+    {
+        // @TODO à implémenter
+        return [];
+    }
+
+    /**
      * Retourne le tableau de tous les lieux dans un tableau associatif
      * @todo faire comme Photos::getPhotos() <---
      * filtrage par département possible

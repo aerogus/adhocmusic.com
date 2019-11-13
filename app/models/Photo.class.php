@@ -156,6 +156,19 @@ class Photo extends Media
     }
 
     /**
+     * Retourne une collection d'objets "Photo" répondant au(x) critère(s)
+     *
+     * @param array $params param
+     *
+     * @return array
+     */
+    static function find(array $params): array
+    {
+        // @TODO à implémenter
+        return [];
+    }
+
+    /**
      * Recherche des photos en fonction de critères donnés
      *
      * @param array $params ['groupe']    => "5"

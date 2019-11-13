@@ -563,6 +563,19 @@ class Event extends ObjectModel
     /* fin setters */
 
     /**
+     * Retourne une collection d'objets "Event" répondant au(x) critère(s)
+     *
+     * @param array $params param
+     *
+     * @return array
+     */
+    static function find(array $params): array
+    {
+        // @TODO à implémenter
+        return [];
+    }
+
+    /**
      * Retourne un tableau d'objEvt pour des critères donnés
      *
      * @param array $params ['datdeb']      => '2005-01-01'

@@ -383,6 +383,19 @@ class Structure extends ObjectModel
     }
 
     /**
+     * Retourne une collection d'objets "Structure" répondant au(x) critère(s)
+     *
+     * @param array $params param
+     *
+     * @return array
+     */
+    static function find(array $params): array
+    {
+        // @TODO à implémenter
+        return [];
+    }
+
+    /**
      * @return bool
      */
     function hasPhotos(): bool

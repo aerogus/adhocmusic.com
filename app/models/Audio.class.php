@@ -114,6 +114,19 @@ class Audio extends Media
     /* fin setters */
 
     /**
+     * Retourne une collection d'objets "Audio" répondant au(x) critère(s)
+     *
+     * @param array $params param
+     *
+     * @return array
+     */
+    static function find(array $params): array
+    {
+        // @TODO à implémenter
+        return [];
+    }
+
+    /**
      * Recherche des audios en fonction de critères donnés
      *
      * @param array $params ['groupe']    => "5"

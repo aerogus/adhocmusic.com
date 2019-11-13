@@ -370,6 +370,19 @@ class Video extends Media
     }
 
     /**
+     * Retourne une collection d'objets "Video" répondant au(x) critère(s)
+     *
+     * @param array $params param
+     *
+     * @return array
+     */
+    static function find(array $params): array
+    {
+        // @TODO à implémenter
+        return [];
+    }
+
+    /**
      * Recherche des vidéos en fonction de critères donnés
      *
      * @param array $params ['groupe']    => "5"

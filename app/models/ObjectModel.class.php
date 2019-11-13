@@ -387,16 +387,14 @@ abstract class ObjectModel
      * Cherche une collection d'instance de l'objet répondant à certains critères
      * champs communs: order_by => fieldName, sort => ASC|DESC, limit => int
      *
+     * À implémenter dans les classes filles
+     *
      * @param array $params params
      *
      * @return object
      * @throws Exception
      */
-    static function find(array $params): array
-    {
-        // à implémenter
-        return [];
-    }
+    abstract static function find(array $params): array;
 
     /**
      * Retourne une collection d'instances

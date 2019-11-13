@@ -463,6 +463,19 @@ class Comment extends ObjectModel
     }
 
     /**
+     * Retourne une collection d'objets "Comment" répondant au(x) critère(s)
+     *
+     * @param array $params param
+     *
+     * @return array
+     */
+    static function find(array $params): array
+    {
+        // @TODO à implémenter
+        return [];
+    }
+
+    /**
      * @param array $params params
      *
      * @return array
