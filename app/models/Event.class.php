@@ -656,7 +656,6 @@ class Event extends ObjectModel
              . "`e`.`created_on`, `e`.`modified_on`, "
              . "`l`.`id_lieu` AS `lieu_id`, `l`.`name` AS `lieu_name`, "
              . "`l`.`city` AS `lieu_city`, `l`.`id_departement` AS `lieu_id_departement`, "
-             . "FORMAT(get_distance_metres('" . number_format($lat, 8, '.', '') . "', '" . number_format($lng, 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `lieu_distance`, "
              . "`l`.`address` AS `lieu_address`, `l`.`cp` AS `lieu_cp`, `l`.`id_country` AS `lieu_country`, "
              . "`s`.`id_structure` AS `structure_id`, `s`.`name` AS `structure_name`, "
              . "`m`.`id_contact` AS `membre_id`, `m`.`pseudo` AS `membre_pseudo` "
