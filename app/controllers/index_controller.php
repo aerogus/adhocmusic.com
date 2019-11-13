@@ -55,7 +55,7 @@ final class Controller
         // tri par mois
         $evts = [];
         foreach ($events as $event) {
-            $month = substr($event['date'], 0, 7).'-01';
+            $month = substr($event['date'], 0, 7) . '-01';
             if (!array_key_exists($month, $evts)) {
                 $evts[$month] = [];
             }
