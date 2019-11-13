@@ -12,7 +12,7 @@
   <thead>
     <tr>
       <th>Id</th>
-      <th>>Nom</th>
+      <th>Nom</th>
       <th>Style</th>
       <th>Créa</th>
       <th>Modif</th>
@@ -24,8 +24,8 @@
       <td>{$groupe->getIdGroupe()|escape}</td>
       <td><a href="/adm/groupes/{$groupe->getIdGroupe()}">{$groupe->getName()|truncate:'30'|escape}</a></td>
       <td>{$groupe->getStyle()|truncate:'30'|escape}</td>
-      <td>{$groupe.getCreatedOn()|date_format:'%d/%m/%y'}</td>
-      <td>{$groupe.getModifiedOn()|date_format:'%d/%m/%y'}</td>
+      <td>{$groupe->getCreatedOn()|date_format:'%d/%m/%y'}</td>
+      <td>{$groupe->getModifiedOn()|date_format:'%d/%m/%y'}</td>
     </tr>
   {/foreach}
   </tbody>
