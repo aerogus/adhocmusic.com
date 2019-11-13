@@ -13,9 +13,9 @@
     <div class="reset grid-8-small-4 has-gutter">
       {foreach from=$groupes item=groupe}
       <div class="grpitem">
-        <a href="{$groupe['url']}">
-          <img src="{$groupe['mini_photo']}" alt="" />
-          <p>{$groupe['name']}</p>
+        <a href="{$groupe->getUrl()}">
+          <img src="{$groupe->getMiniPhoto()}" alt="" />
+          <p>{$groupe->getName()}</p>
         </a>
       </div>
       {/foreach}

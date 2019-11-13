@@ -345,7 +345,11 @@ final class Controller
         $smarty->assign('alerting_events', Alerting::getEventsAlertingByIdContact($_SESSION['membre']->getId()));
         $smarty->assign('alerting_lieux', Alerting::getLieuxAlertingByIdContact($_SESSION['membre']->getId()));
 
-        $smarty->assign('groupes', Groupe::getMyGroupes());
+        $smarty->assign(
+            'groupes', Groupe::find(
+                ['id_contact' => $_SESSION['membre']->getId()]
+            )
+        );
         $smarty->assign('nb_photos', Photo::countMy());
         $smarty->assign('nb_videos', Video::countMy());
         $smarty->assign('nb_audios', Audio::countMy());

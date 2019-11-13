@@ -133,7 +133,7 @@
       <p>Vous administrez le(s) groupe(s) suivant(s) :</p>
       <ul>
         {foreach $groupes as $groupe}
-        <li><a href="/groupes/edit/{$groupe.id}" title="{$groupe.name|escape}">{$groupe.name|escape}</a></li>
+        <li><a href="/groupes/edit/{$groupe->getIdGroupe()}" title="{$groupe->getName()|escape}">{$groupe->getName()|escape}</a></li>
         {/foreach}
       </ul>
       <p><a href="/groupes/my">Tous mes groupes</a></p>

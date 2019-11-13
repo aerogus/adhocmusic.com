@@ -22,10 +22,11 @@ final class Controller
             ->addStep("Groupes");
 
         $smarty->assign(
-            'groupes', Groupe::getGroupes(
+            'groupes', Groupe::find(
                 [
                     'online' => true,
-                    'sort' => 'name',
+                    'order_by' => 'name',
+                    'sort' => 'ASC',
                 ]
             )
         );
@@ -47,7 +48,12 @@ final class Controller
             ->addStep('Mes groupes');
 
         $smarty->assign('delete', (bool) Route::params('delete'));
-        $smarty->assign('groupes', Groupe::getMyGroupes());
+
+        $smarty->assign(
+            'groupes', Groupe::find(
+                ['id_contact' => $_SESSION['membre']->getId()]
+            )
+        );
 
         return $smarty->fetch('groupes/my.tpl');
     }
