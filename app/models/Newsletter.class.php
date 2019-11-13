@@ -290,53 +290,37 @@ class Newsletter extends ObjectModel
     }
 
     /**
-     * Recherche des newsletters en fonction de critères donnés
+     * Retourne une collection d'objets "Newsletter" répondant au(x) critère(s)
      *
-     * @param array ['id']      => "3"
-     *              ['contact'] => "1"
-     *              ['sort']    => "id_newsletter"
-     *              ['sens']    => "ASC"
-     *              ['debut']   => 0
-     *              ['limit']   => 10
+     * @param array $params params ['order_by' => string, 'sort => string]
      *
      * @return array
      */
-    static function getNewsletters(array $params = []): array
+    static function find(array $params): array
     {
-        $debut = 0;
-        if (isset($params['debut'])) {
-            $debut = (int) $params['debut'];
-        }
-
-        $limit = 10;
-        if (isset($params['limit'])) {
-            $limit = (int) $params['limit'];
-        }
-
-        $sens = "ASC";
-        if (isset($params['sens']) && $params['sens'] === "DESC") {
-            $sens = "DESC";
-        }
-
-        $tab_id = [];
-        if (array_key_exists('id', $params)) {
-            $tab_id = explode(",", $params['id']);
-        }
-
         $db = DataBase::getInstance();
+        $objs = [];
 
-        $sql = "SELECT `id_newsletter` AS `id`, `title` "
-             . "FROM `" . Newsletter::getDbTable() . "` "
-             . "WHERE 1 ";
+        $sql = "SELECT `id_newsletter` FROM `" . Newsletter::getDbTable() . "` WHERE 1 ";
 
-        if (count($tab_id) && ($tab_id[0] !== 0)) {
-            $sql .= "AND `id_newsletter` IN (" . implode(',', $tab_id) . ") ";
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+            $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+        } else {
+            $sql .= "ORDER BY `" . static::$_pk . "` ";
         }
 
-        $sql .= "ORDER BY `id_newsletter` " . $sens . " ";
-        $sql .= "LIMIT " . $debut . ", " . $limit;
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+            $sql .= $params['sort'];
+        } else {
+            $sql .= "ASC";
+        }
 
-        return $db->queryWithFetch($sql);
+        $ids_newsletter = $db->queryWithFetchFirstFields($sql);
+        foreach ($ids_newsletter as $id_newsletter) {
+            $objs[] = static::getInstance((int) $id_newsletter);
+        }
+
+        return $objs;
     }
 
     /**

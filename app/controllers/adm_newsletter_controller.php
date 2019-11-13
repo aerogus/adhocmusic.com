@@ -16,10 +16,10 @@ final class Controller
             ->addStep('Newsletter');
 
         $smarty->assign(
-            'newsletters', Newsletter::getNewsletters(
+            'newsletters', Newsletter::find(
                 [
-                    'sens' => 'DESC',
-                    'limit' => 50,
+                    'order_by' => 'id_newsletter',
+                    'sort' => 'DESC',
                 ]
             )
         );
