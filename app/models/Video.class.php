@@ -228,6 +228,8 @@ class Video extends Media
     }
 
     /**
+     * Retourne l'url de la page de la vidéo
+     *
      * @return string
      */
     function getUrl(): ?string
@@ -246,11 +248,25 @@ class Video extends Media
     }
 
     /**
+     * Retourne l'url directe d'un média .mp4
+     *
      * @return string
      */
-    function getDirectUrl(): string
+    function getDirectMp4Url(): ?string
     {
-        return self::getFlashUrl($this->getIdHost(), $this->getReference());
+        switch ($this->_id_host) {
+            case self::HOST_ADHOCTUBE:
+                $meta_url = 'https://' . MEDIA_ADHOCTUBE_HOST . '/api/v1/videos/' . $this->_reference;
+                $meta_info = json_decode(file_get_contents($meta_url));
+                return $meta_info->files[0]->fileUrl;
+                break;
+            case self::HOST_YOUTUBE:
+            case self::HOST_DAILYMOTION:
+            case self::HOST_FACEBOOK:
+            case self::HOST_VIMEO:
+            default:
+                return null;
+        }
     }
 
     /**
@@ -510,7 +526,6 @@ class Video extends Media
         foreach ($res_tmp as $idx => $_res) {
             $res[$idx] = $_res;
             $res[$idx]['url'] = self::getUrlById((int) $_res['id']);
-            $res[$idx]['swf'] = self::getFlashUrl((int) $_res['host_id'], $_res['reference']);
             $res[$idx]['thumb_80_80'] = self::getVideoThumbUrl((int) $_res['id'], 80, 80, '000000', false, true);
             $res[$idx]['thumb_100'] = self::getVideoThumbUrl((int) $_res['id'], 100, 100, '000000', false, true);
             $res[$idx]['thumb_320'] = self::getVideoThumbUrl((int) $_res['id'], 320, 0);
@@ -549,8 +564,7 @@ class Video extends Media
      */
     function getPlayer(bool $autoplay = false, bool $iframe = true): ?string
     {
-        switch ($this->_id_host)
-        {
+        switch ($this->_id_host) {
             case self::HOST_YOUTUBE:
                 return '<iframe title="'.htmlspecialchars($this->getName()).'" src="https://www.youtube.com/embed/'.$this->getReference().'?rel=0" allowfullscreen></iframe>' . "\n";
 
@@ -565,32 +579,6 @@ class Video extends Media
 
             case self::HOST_ADHOCTUBE:
                 return '<iframe sandbox="allow-same-origin allow-scripts" src="https://'.MEDIA_ADHOCTUBE_HOST.'/videos/embed/'.$this->getReference().'" allowfullscreen></iframe>' . "\n";
-
-            default:
-                return null;
-        }
-    }
-
-    /**
-     * @param int    $id_host   id_host
-     * @param string $reference reference
-     *
-     * @return string|null
-     */
-    static function getFlashUrl(int $id_host, string $reference): ?string
-    {
-        switch ($id_host) {
-            case self::HOST_YOUTUBE:
-                return "https://youtube.com/v/{$reference}&hl=fr";
-
-            case self::HOST_DAILYMOTION:
-                return "https://www.dailymotion.com/swf/{$reference}&autoplay=1";
-
-            case self::HOST_FACEBOOK:
-                return "https://b.static.ak.fbcdn.net/swf/mvp.swf?v={$reference}";
-
-            case self::HOST_VIMEO:
-                return "https://vimeo.com/{$reference}";
 
             default:
                 return null;
@@ -658,22 +646,8 @@ class Video extends Media
             }
         }
 
-        // Facebook v1
-        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN1, $str, $matches)) {
-            if (!empty($matches[1])) {
-                return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
-            }
-        }
-
-        // Facebook v2
-        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN2, $str, $matches)) {
-            if (!empty($matches[1])) {
-                return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
-            }
-        }
-
-        // Facebook v3
-        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN3, $str, $matches)) {
+        // Facebook
+        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN, $str, $matches)) {
             if (!empty($matches[1])) {
                 return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
             }

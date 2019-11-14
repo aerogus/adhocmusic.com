@@ -59,7 +59,7 @@
     <li>
       <label for="groupe">Groupe(s)</label>
       <ul>
-        {section name=cpt_groupe loop=3}
+        {section name=cpt_groupe loop=5}
         <li>
           <select id="groupe" name="groupe[{$smarty.section.cpt_groupe.index}]">
             <option value="">-- Choix d'un groupe --</option>

@@ -102,11 +102,13 @@ final class Controller
             $smarty->assign('og_image', MEDIA_URL . '/video/' . $video->getId() . '.jpg');
             $smarty->assign('og_type', 'video.movie');
 
+            // @see https://developers.facebook.com/docs/sharing/webmasters?locale=fr_FR
             $og_video = [
-                'url' => Video::getFlashUrl($video->getIdHost(), $video->getReference()),
+                'url' => $video->getDirectMp4Url(),
+                'secure_url' => $video->getDirectMp4Url(),
+                'type' => 'video/mp4',
                 'width' => $video->getWidth(),
                 'height' => $video->getHeight(),
-                'type' => 'application/x-shockwave-flash',
             ];
             $smarty->assign('og_video', $og_video);
 

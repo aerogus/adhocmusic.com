@@ -394,7 +394,10 @@ abstract class ObjectModel
      * @return object
      * @throws Exception
      */
-    abstract static function find(array $params): array;
+    static function find(array $params): array
+    {
+        return [];
+    }
 
     /**
      * Retourne une collection d'instances

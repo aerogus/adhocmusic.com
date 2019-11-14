@@ -221,6 +221,23 @@ class Contact extends ObjectModel
     /* fin setters */
 
     /**
+     * Cherche une collection d'instance de l'objet répondant à certains critères
+     * champs communs: order_by => fieldName, sort => ASC|DESC, limit => int
+     *
+     * À implémenter dans les classes filles
+     *
+     * @param array $params params
+     *
+     * @return object
+     * @throws Exception
+     */
+    static function find(array $params): array
+    {
+        // @TODO à implémenter
+        return [];
+    }
+
+    /**
      * Charge toutes les infos d'une entité
      *
      * @return bool

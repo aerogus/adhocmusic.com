@@ -58,7 +58,7 @@
 
 <body>
 
-{include file="common/menu-top.tpl"}
+{include file="common/menu-header.tpl"}
 
 <div class="site_content clearfix">
 

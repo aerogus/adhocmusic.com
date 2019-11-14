@@ -17,20 +17,22 @@ footer
 
 
 .footer
-  max-width 680px
+  max-width 960px
   margin 0 auto
+  display flex
+  flex-wrap wrap
 
   > li
     margin-top -20px
-    display inline-block
-    padding 0 1em 1em 1em
+    display inline-flex
     vertical-align top
-    width 32%
+    width 25%
+    padding 1rem
 
     @media screen and (max-width: 680px)
       &
-        width 100%
-        display block
+        margin-top 0
+        width 50%
 
     h4
       font-family TradeGothic
