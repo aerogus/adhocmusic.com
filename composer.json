@@ -5,8 +5,8 @@
     "license": "proprietary",
     "require": {
         "php": ">=7.3",
-        "smarty/smarty": "3.1.33",
-        "phpmailer/phpmailer": "6.1.1",
+        "smarty/smarty": "3.1.34",
+        "phpmailer/phpmailer": "6.1.2",
         "pear/console_table": "1.3.1",
         "eluceo/ical": "0.15.1"
     },
