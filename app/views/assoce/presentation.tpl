@@ -6,6 +6,10 @@
     </header>
     <div>
 
+      <div class="fluid-video-player ratio-16-9">
+        <iframe sandbox="allow-same-origin allow-scripts" src="https://videos.adhocmusic.com/videos/embed/059f295a-4d0d-435e-8c6b-0b2a0823d8d3?title=0&amp;warningTitle=0" frameborder="0" allowfullscreen></iframe>
+      </div>
+
       <img src="/img/idf.png" width="250" height="211" alt="Carte de l’Ile de France" class="fr">
       <p><strong>AD’HOC</strong> est une association à but non lucratif, originaire d’Épinay-sur-Orge (91 - Essonne) œuvrant pour le développement de la scène musicale actuelle depuis plus de 10 ans (création en 1996).</p>
       <p>Partant du constat que la vie musicale en Essonne et en France est morcelée, notre association a entrepris de s’insérer dans le paysage associatif afin d’établir des partenariats permettant de relayer l’action des diverses associations et donc d’en amplifier la portée. Cette action se fait bien sur à long terme car elle impose de constituer un réseau homogène de groupes, musiciens, associations, travailleurs audiovisuels, studios, tourneurs etc., et des partenariats solides avec des associations musicales ayant des activités différentes mais complémentaires (information, répétition, enregistrement, organisation de concerts, diffusion, etc.).</p>

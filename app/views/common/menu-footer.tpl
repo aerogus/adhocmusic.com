@@ -4,7 +4,7 @@
       <ul>
         <li><h4>Qui sommes-nous ?</h4></li>
         <li><a href="/assoce">L’association</a></li>
-        <li><a href="/assoce">L’équipe</a></li>
+        <li><a href="/equipe">L’équipe</a></li>
       </ul>
     </li>
     <li>

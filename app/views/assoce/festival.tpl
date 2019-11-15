@@ -13,13 +13,13 @@
       <h2>Édition 2019</h2>
 
       <div class="fluid-video-player ratio-16-9">
-        <iframe sandbox="allow-same-origin allow-scripts" src="https://videos.adhocmusic.com/videos/embed/0c20e037-b7a5-42c7-bf94-4a91755edcd8" frameborder="0" allowfullscreen></iframe>
+        <iframe sandbox="allow-same-origin allow-scripts" src="https://videos.adhocmusic.com/videos/embed/0c20e037-b7a5-42c7-bf94-4a91755edcd8?title=0&amp;warningTitle=0" frameborder="0" allowfullscreen></iframe>
       </div>
 
       <h2>Édition 2018</h2>
 
       <div class="fluid-video-player ratio-16-9">
-        <iframe sandbox="allow-same-origin allow-scripts" src="https://videos.adhocmusic.com/videos/embed/c3c8daa4-2c52-4151-aae0-517263385c65" frameborder="0" allowfullscreen></iframe>
+        <iframe sandbox="allow-same-origin allow-scripts" src="https://videos.adhocmusic.com/videos/embed/c3c8daa4-2c52-4151-aae0-517263385c65?title=0&amp;warningTitle=0" frameborder="0" allowfullscreen></iframe>
       </div>
 
     </div>
