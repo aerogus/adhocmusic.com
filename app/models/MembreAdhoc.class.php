@@ -261,11 +261,11 @@ class MembreAdhoc extends Membre
     {
         $db = DataBase::getInstance();
 
-        $sql  = "SELECT *
-                 FROM `" . MembreAdhoc::getDbTable() . "`, `" . Membre::getDbTable() . "`, `". Contact::getDbTable() . "`
-                 WHERE `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "`
-                  AND `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = `" . Contact::getDbTable() . "`.`" . Contact::getDbPk() . "`
-                  AND `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = " . (int) $this->{'_' . MembreAdhoc::getDbPk()};
+        $sql = "SELECT * "
+             . "FROM `" . MembreAdhoc::getDbTable() . "`, `" . Membre::getDbTable() . "`, `". Contact::getDbTable() . "` "
+             . "WHERE `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` "
+             . "AND `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = `" . Contact::getDbTable() . "`.`" . Contact::getDbPk() . "` "
+             . "AND `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = " . (int) $this->{'_' . MembreAdhoc::getDbPk()};
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_arrayToObject($res);

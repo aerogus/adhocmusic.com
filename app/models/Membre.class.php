@@ -1369,10 +1369,10 @@ class Membre extends Contact
     {
         $db = DataBase::getInstance();
 
-        $sql  = "SELECT *
-                 FROM `" . Membre::getDbTable() . "`, `". Contact::getDbTable() . "`
-                 WHERE `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = `" . Contact::getDbTable() . "`.`" . Contact::getDbPk() . "`
-                 AND `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = " . (int) $this->{'_' . Membre::getDbPk()};
+        $sql = "SELECT * "
+             . "FROM `" . Membre::getDbTable() . "`, `". Contact::getDbTable() . "` "
+             . "WHERE `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = `" . Contact::getDbTable() . "`.`" . Contact::getDbPk() . "` "
+             . "AND `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = " . (int) $this->{'_' . Membre::getDbPk()};
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->_arrayToObject($res);

@@ -1083,11 +1083,11 @@ class Event extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT DATE(`date`) AS `date`, COUNT(`id_event`) AS `nb_events`
-                FROM `adhoc_event`
-                WHERE YEAR(`date`) = " . (int) $year . "
-                AND MONTH(`date`) = " .(int) $month . "
-                GROUP BY DATE(`date`)";
+        $sql = "SELECT DATE(`date`) AS `date`, COUNT(`id_event`) AS `nb_events` "
+             . "FROM `adhoc_event` "
+             . "WHERE YEAR(`date`) = " . (int) $year . " "
+             . "AND MONTH(`date`) = " .(int) $month . " "
+             . "GROUP BY DATE(`date`)";
 
         $res = $db->queryWithFetch($sql);
 

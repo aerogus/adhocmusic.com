@@ -53,7 +53,7 @@ class Route
     }
 
     /**
-     * @param array
+     * @param array $params params
      */
     static function map_connect(array $params)
     {
