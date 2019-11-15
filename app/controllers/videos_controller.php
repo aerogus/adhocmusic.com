@@ -72,9 +72,6 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('/mediaelement/mediaelementplayer.css');
-        $smarty->enqueue_script('/mediaelement/mediaelement-and-player.min.js');
-
         $smarty->enqueue_style('/css/baguetteBox.min.css');
 
         $smarty->enqueue_script('/js/masonry-4.2.2.min.js');

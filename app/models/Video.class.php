@@ -575,10 +575,10 @@ class Video extends Media
                 return '<iframe src="https://www.facebook.com/video/embed?video_id=' . $this->getReference() . '" allowfullscreen></iframe>' . "\n";
 
             case self::HOST_VIMEO:
-                return '<iframe src="https://player.vimeo.com/video/'.$this->getReference().'?title=0&amp;byline=0&amp;portrait=0&amp;autoplay='.$strautoplay.'" allowfullscreen></iframe>' . "\n";
+                return '<iframe src="https://player.vimeo.com/video/'.$this->getReference().'?title=0&amp;byline=0&amp;portrait=0" allowfullscreen></iframe>' . "\n";
 
             case self::HOST_ADHOCTUBE:
-                return '<iframe sandbox="allow-same-origin allow-scripts" src="https://'.MEDIA_ADHOCTUBE_HOST.'/videos/embed/'.$this->getReference().'" allowfullscreen></iframe>' . "\n";
+                return '<iframe sandbox="allow-same-origin allow-scripts" src="https://'.MEDIA_ADHOCTUBE_HOST.'/videos/embed/'.$this->getReference().'?title=0&amp;warningTitle=0" allowfullscreen></iframe>' . "\n";
 
             default:
                 return null;
