@@ -10,7 +10,7 @@
       {if !empty($groupes)}
       <ul>
       {foreach from=$groupes item=groupe}
-        <li><a title="Se désabonner de ce groupe" href="/alerting/unsub?type=g&amp;id_content={$groupe.id_groupe}"><img src="/img/icones/delete.png" alt=""></a> <a href="/groupes/{$groupe.id_groupe}">{$groupe.name}</a></li>
+        <li><a title="Se désabonner de ce groupe" href="/alerting/unsub?type=g&amp;id_content={$groupe->getIdGroupe()}"><img src="/img/icones/delete.png" alt=""></a> <a href="{$groupe->getUrl()}">{$groupe->getName()}</a></li>
       {/foreach}
       </ul>
       {else}
@@ -29,7 +29,7 @@
       {if !empty($events)}
       <ul>
       {foreach from=$events item=event}
-        <li><a title="Retirer de mon agenda" href="/alerting/unsub?type=e&amp;id_content={$event.id_event}"><img src="/img/icones/delete.png" alt=""></a> <a href="/events/show/{$event.id_event}">{$event.name}</a></li>
+        <li><a title="Retirer de mon agenda" href="/alerting/unsub?type=e&amp;id_content={$event->getIdEvent()}"><img src="/img/icones/delete.png" alt=""></a> <a href="{$event->getUrl()}">{$event->getName()}</a></li>
       {/foreach}
       </ul>
       {else}
@@ -48,7 +48,7 @@
       {if !empty($lieux)}
       <ul>
       {foreach from=$lieux item=lieu}
-        <li><a title="Se désabonner de ce lieu" href="/alerting/unsub?type=l&id_content={$lieu.id_lieu}"><img src="/img/icones/delete.png" alt=""></a> <a href="/lieux/show/{$lieu.id_lieu}">{$lieu.name}</a></li>
+        <li><a title="Se désabonner de ce lieu" href="/alerting/unsub?type=l&id_content={$lieu->getIdLieu()}"><img src="/img/icones/delete.png" alt=""></a> <a href="{$lieu->getUrl()}">{$lieu->getName()}</a></li>
       {/foreach}
       </ul>
       {else}

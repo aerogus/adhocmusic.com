@@ -23,8 +23,8 @@
 <div class="gallery">
 {foreach from=$photos item=photo}
   <div class="photo">
-    <a href="/photos/edit/{$photo.id}?page={$page}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
-      <img src="{$photo.thumb_320}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
+    <a href="/photos/edit/{$photo->getIdPhoto()}?page={$page}" title="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
+      <img src="{$photo->getThumb320Url()}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
     </a>
   </div>
 {/foreach}

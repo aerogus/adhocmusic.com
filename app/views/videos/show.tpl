@@ -66,14 +66,14 @@
 {if !empty($videos)}
 <div class="box">
   <header>
-    <h2>Vidéos Du même concert</h2>
+    <h2>Vidéos du même concert</h2>
   </header>
   <div class="reset grid-6">
-    {foreach $videos as $vid}
-    {if $vid.id != $video->getId()}
+    {foreach $videos as $_video}
+    {if $_video->getIdVideo() !== $video->getIdVideo()}
     <div class="thumb-80">
-      <a href="{$vid.url}"><img src="{$vid.thumb_80_80}" alt="{$vid.name|escape}"><br>{$vid.name|truncate:15:"...":true:true|escape}</a>
-      <a class="overlay-80 overlay-video-80" href="{$vid.url}" title="{$vid.name|escape}"></a>
+      <a href="{$_video->getUrl()}"><img src="{$_video->getThumb80Url()}" alt="{$_video->getName()|escape}"><br>{$_video->getName()|truncate:15:"...":true:true|escape}</a>
+      <a class="overlay-80 overlay-video-80" href="{$_video->getUrl()}" title="{$_video->getName()|escape}"></a>
     </div>
     {/if}
     {/foreach}
@@ -89,8 +89,8 @@
   <div class="reset gallery">
   {foreach from=$photos item=photo}
     <div class="photo">
-      <a href="{$photo.thumb_1000}" data-at-1000="{$photo.thumb_1000}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
-        <img src="{$photo.thumb_320}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
+      <a href="{$photo->getThumb1000Url()}" data-at-1000="{$photo->getThumb1000Url()}" title="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe->getName()|escape}){/if}">
+        <img src="{$photo->getThumb320Url()}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe->getName()|escape}){/if}">
       </a>
     </div>
   {/foreach}

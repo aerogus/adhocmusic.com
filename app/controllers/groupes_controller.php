@@ -87,7 +87,7 @@ final class Controller
         }
 
         $smarty->assign('groupe', $groupe);
-        $smarty->assign('membres', Groupe::getMembersById($groupe->getId()));
+        $smarty->assign('membres', $groupe->getMembers());
 
         Trail::getInstance()
             ->addStep("Groupes", "/groupes")

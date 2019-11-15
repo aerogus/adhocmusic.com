@@ -80,6 +80,17 @@ class Media extends ObjectModel
     }
 
     /**
+     * @return object|null
+     */
+    function getGroupe(): ?object
+    {
+        if (!is_null($this->getIdGroupe())) {
+            return Groupe::getInstance($this->getIdGroupe());
+        }
+        return null;
+    }
+
+    /**
      * @return int|null
      */
     function getIdLieu(): ?int
@@ -333,6 +344,81 @@ class Media extends ObjectModel
     }
 
     /* fin setters communs */
+
+    /**
+     * Retourne une collection d'objets "Media" (Audio|Photo|Video) répondant au(x) critère(s) donné(s)
+     *
+     * @param array $params [
+     *                      'id_contact' => int,
+     *                      'id_groupe' => int,
+     *                      'id_event' => int,
+     *                      'id_lieu' => int,
+     *                      'id_structure' => int,
+     *                      'online' => bool,
+     *                      'order_by' => string,
+     *                      'sort' => string,
+     *                      'start' => int,
+     *                      'limit' => int,
+     *                      ]
+     *
+     * @return array
+     */
+    static function find(array $params): array
+    {
+        $db = DataBase::getInstance();
+        $objs = [];
+
+        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+
+        if (isset($params['id_contact'])) {
+            $sql .= "AND `id_contact` = " . (int) $params['id_contact'] . " ";
+        }
+
+        if (isset($params['id_groupe'])) {
+            $sql .= "AND `id_groupe` = " . (int) $params['id_groupe'] . " ";
+        }
+
+        if (isset($params['id_event'])) {
+            $sql .= "AND `id_event` = " . (int) $params['id_event'] . " ";
+        }
+
+        if (isset($params['id_lieu'])) {
+            $sql .= "AND `id_lieu` = " . (int) $params['id_lieu'] . " ";
+        }
+
+        if (isset($params['id_structure'])) {
+            $sql .= "AND `id_structure` = " . (int) $params['id_structure'] . " ";
+        }
+
+        if (isset($params['online'])) {
+            $sql .= "AND `online` = ";
+            $sql .= $params['online'] ? "TRUE" : "FALSE";
+            $sql .= " ";
+        }
+
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+            $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+        } else {
+            $sql .= "ORDER BY `" . static::getDbPk() . "` ";
+        }
+
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+            $sql .= $params['sort'];
+        } else {
+            $sql .= "ASC";
+        }
+
+        if (isset($params['start']) && isset($params['limit'])) {
+            $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
+        }
+
+        $ids = $db->queryWithFetchFirstFields($sql);
+        foreach ($ids as $id) {
+            $objs[] = static::getInstance((int) $id);
+        }
+
+        return $objs;
+    }
 
     /**
      * Recherche des média en fonction de critères donnés

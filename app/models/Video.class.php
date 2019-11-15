@@ -378,19 +378,6 @@ class Video extends Media
     }
 
     /**
-     * Retourne une collection d'objets "Video" répondant au(x) critère(s)
-     *
-     * @param array $params param
-     *
-     * @return array
-     */
-    static function find(array $params): array
-    {
-        // @TODO à implémenter
-        return [];
-    }
-
-    /**
      * Efface une vidéo de la table vidéo
      * + purge du fichier miniature
      *
@@ -545,26 +532,14 @@ class Video extends Media
      *
      * @param int    $id_host   id_host
      * @param string $reference reference
-     * @param bool   $multi     (retourne plusieurs vignettes si dispo)
      *
-     * @return string ou array de string
+     * @return string|null
      */
-    static function getRemoteThumbnail(int $id_host, string $reference, bool $multi = false)
+    static function getRemoteThumbnail(int $id_host, string $reference): ?string
     {
-        switch ($id_host)
-        {
+        switch ($id_host) {
             case self::HOST_YOUTUBE:
-                if ($multi) {
-                    $url   = [];
-                    $url[] = "https://img.youtube.com/vi/{$reference}/1.jpg"; // 130*97
-                    $url[] = "https://img.youtube.com/vi/{$reference}/2.jpg"; // 130*97
-                    $url[] = "https://img.youtube.com/vi/{$reference}/3.jpg"; // 130*97
-                    $url[] = "https://img.youtube.com/vi/{$reference}/default.jpg"; // 130*97, = 1.jpg
-                    $url[] = "https://img.youtube.com/vi/{$reference}/0.jpg"; // 320*240, = 2.jpg
-                } else {
-                    $url = "https://img.youtube.com/vi/{$reference}/0.jpg";
-                }
-                return $url;
+                return "https://img.youtube.com/vi/{$reference}/0.jpg";
 
             case self::HOST_DAILYMOTION:
                 $headers = get_headers('https://www.dailymotion.com/thumbnail/video/' . $reference, 1);
@@ -589,7 +564,7 @@ class Video extends Media
                 return 'https://' . MEDIA_ADHOCTUBE_HOST . $meta_info->thumbnailPath;
 
             default:
-                return false;
+                return null;
         }
     }
 
@@ -603,8 +578,7 @@ class Video extends Media
      */
     static function getRemoteTitle(int $id_host, string $reference): ?string
     {
-        switch ($id_host)
-        {
+        switch ($id_host) {
             case self::HOST_VIMEO:
                 $meta_url = 'https://vimeo.com/api/v2/video/' . $reference . '.json';
                 $meta_info = json_decode(file_get_contents($meta_url));
@@ -630,7 +604,7 @@ class Video extends Media
      */
     function deleteThumbnail(): bool
     {
-        $file = self::getBasePath() . '/' . $this->getId() . '.jpg';
+        $file = self::getBasePath() . '/' . $this->getIdVideo() . '.jpg';
         if (file_exists($file)) {
             unlink($file);
             return true;

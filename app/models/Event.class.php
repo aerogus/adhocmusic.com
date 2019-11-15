@@ -312,17 +312,20 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getFacebookEventAttending(): int
-    {
-        return $this->_facebook_event_attending;
-    }
-
-    /**
-     * @return int
-     */
     function getIdLieu(): int
     {
         return $this->_id_lieu;
+    }
+
+    /**
+     * @return object|null
+     */
+    function getLieu(): ?object
+    {
+        if (!is_null($this->getIdLieu())) {
+            return Lieu::getInstance($this->getIdLieu());
+        }
+        return null;
     }
 
     /**
@@ -360,6 +363,20 @@ class Event extends ObjectModel
     function getUrl(): string
     {
         return HOME_URL . '/events/' . $this->getIdEvent();
+    }
+
+    /**
+     * @return array
+     */
+    function getGroupes(): array
+    {
+        return Groupe::find(
+            [
+                'id_event' => $this->getIdEvent(),
+                'order_by' => 'name',
+                'sort' => 'ASC',
+            ]
+        );
     }
 
     /* fin getters */
@@ -555,16 +572,93 @@ class Event extends ObjectModel
     /* fin setters */
 
     /**
-     * Retourne une collection d'objets "Event" répondant au(x) critère(s)
+     * Retourne une collection d'objets "Event" répondant au(x) critère(s) donné(s)
      *
-     * @param array $params param
+     * @param array $params [
+     *                      'id_contact' => int,
+     *                      'id_groupe' => int,
+     *                      'id_lieu' => int,
+     *                      'id_structure' => int,
+     *                      'datdeb' => string,
+     *                      'datfin' => string,
+     *                      'online' => bool,
+     *                      'order_by' => string,
+     *                      'sort' => string,
+     *                      'start' => int,
+     *                      'limit' => int,
+     *                      ]
      *
      * @return array
      */
     static function find(array $params): array
     {
-        // @TODO à implémenter
-        return [];
+        $db = DataBase::getInstance();
+        $objs = [];
+
+        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+
+        if (isset($params['id_contact'])) {
+            $sql .= "AND `id_contact` = " . (int) $params['id_contact'] . " ";
+        }
+
+        if (isset($params['id_groupe'])) {
+            $subSql = "SELECT `id_event` FROM `adhoc_participe_a` WHERE `id_groupe` = " . (int) $params['id_groupe'] . " ";
+            if ($ids_event = $db->queryWithFetchFirstFields($subSql)) {
+                $sql .= "AND `id_event` IN (" . implode(',', (array) $ids_event) . ") ";
+            } else {
+                return $objs;
+            }
+        }
+
+        if (isset($params['id_structure'])) {
+            $subSql = "SELECT `id_event` FROM `adhoc_organise_par` WHERE `id_structure` = " . (int) $params['id_structure'] . " ";
+            if ($ids_structure = $db->queryWithFetchFirstFields($subSql)) {
+                $sql .= "AND `id_structure` IN (" . implode(',', (array) $ids_structure) . ") ";
+            } else {
+                return $objs;
+            }
+        }
+
+        if (isset($params['id_lieu'])) {
+            $sql .= "AND `id_lieu` = " . (int) $params['id_lieu'] . " ";
+        }
+
+        if (isset($params['datdeb'])) {
+            $sql .= "AND `date` >= '" . $db->escape($params['datdeb']) . "' ";
+        }
+
+        if (isset($params['datfin'])) {
+            $sql .= "AND `date` <= '" . $db->escape($params['datfin']) . "' ";
+        }
+
+        if (isset($params['online'])) {
+            $sql .= "AND `online` = ";
+            $sql .= $params['online'] ? "TRUE" : "FALSE";
+            $sql .= " ";
+        }
+
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+            $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+        } else {
+            $sql .= "ORDER BY `" . static::$_pk . "` ";
+        }
+
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+            $sql .= $params['sort'] . " ";
+        } else {
+            $sql .= "ASC ";
+        }
+
+        if (isset($params['start']) && isset($params['limit'])) {
+            $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
+        }
+
+        $ids = $db->queryWithFetchFirstFields($sql);
+        foreach ($ids as $id) {
+            $objs[] = static::getInstance((int) $id);
+        }
+
+        return $objs;
     }
 
     /**
@@ -669,17 +763,11 @@ class Event extends ObjectModel
      */
     function getStyles(): array
     {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_style` "
-             . "FROM `" . self::$_db_table_event_style . "` "
-             . "WHERE `id_event` = " . (int) $this->getId();
-
-        return array_map(
-            function ($id_style) {
-                return (int) $id_style;
-            },
-            $db->queryWithFetchFirstFields($sql)
+        return Style::find(
+            [
+                'id_event' => $this->getIdEvent(),
+                'sort' => 'name',
+            ]
         );
     }
 
@@ -693,7 +781,7 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_event_style . "` "
-             . "WHERE `id_event` = " . (int) $this->_id_event;
+             . "WHERE `id_event` = " . (int) $this->getIdEvent();
 
         $db->query($sql);
 
@@ -713,7 +801,7 @@ class Event extends ObjectModel
 
         $sql = "INSERT INTO `" . self::$_db_table_participe_a . "` "
              . "(`id_event`, `id_groupe`) "
-             . "VALUES (" . (int) $this->_id_event . ", " . (int) $id_groupe . ")";
+             . "VALUES (" . (int) $this->getIdEvent() . ", " . (int) $id_groupe . ")";
 
         try {
             $db->query($sql);
@@ -730,38 +818,17 @@ class Event extends ObjectModel
      *
      * @return bool
      */
-    function unlinkGroupe(int $id_groupe)
+    function unlinkGroupe(int $id_groupe): bool
     {
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_participe_a . "` "
-             . "WHERE `id_event` = " . (int) $this->_id_event . " "
+             . "WHERE `id_event` = " . (int) $this->getIdEvent() . " "
              . "AND `id_groupe` = " . (int) $id_groupe;
 
         $db->query($sql);
 
         return (bool) $db->affectedRows();
-    }
-
-    /**
-     * Retourne le tableau des groupes pour un événement
-     *
-     * @return array
-     */
-    function getGroupes(): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_groupe` "
-             . "FROM `" . self::$_db_table_participe_a . "` "
-             . "WHERE `id_event` = " . (int) $this->_id_event;
-
-        return array_map(
-            function ($id_groupe) {
-                return (int) $id_groupe;
-            },
-            $db->queryWithFetchFirstFields($sql)
-        );
     }
 
     /**
@@ -774,7 +841,7 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_participe_a . "` "
-             . "WHERE `id_event` = " . (int) $this->_id_event;
+             . "WHERE `id_event` = " . (int) $this->getIdEvent();
 
         $db->query($sql);
 
@@ -794,7 +861,7 @@ class Event extends ObjectModel
 
         $sql = "INSERT INTO `" . self::$_db_table_organise_par . "` "
              . " (`id_event`, `id_structure`) "
-             . "VALUES (" . (int) $this->_id_event . ", " . (int) $id_structure . ")";
+             . "VALUES (" . (int) $this->getIdEvent() . ", " . (int) $id_structure . ")";
 
         try {
             $db->query($sql);
@@ -831,17 +898,11 @@ class Event extends ObjectModel
      */
     function getStructures(): array
     {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_structure` "
-             . "FROM `" . self::$_db_table_organise_par . "` "
-             . "WHERE `id_event` = " . (int) $this->getId();
-
-        return array_map(
-            function ($id_structure) {
-                return (int) $id_structure;
-            },
-            $db->queryWithFetchFirstFields($sql)
+        return Structure::find(
+            [
+                'id_event' => $this->getIdEvent(),
+                'order_by' => 'name',
+            ]
         );
     }
 
@@ -855,7 +916,7 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_organise_par . "` "
-             . "WHERE `id_event` = " . (int) $this->getId();
+             . "WHERE `id_event` = " . (int) $this->getIdEvent();
 
         $db->query($sql);
 
@@ -1017,26 +1078,6 @@ class Event extends ObjectModel
         }
 
         return Image::getHttpCachePath($uid);
-    }
-
-    /**
-     * Récupère les events ayant au moins un audio
-     *
-     * @return array
-     */
-    static function getEventsWithAudio(): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT DISTINCT `e`.`id_event` AS `id`, `e`.`name`, `e`.`date`, "
-             . "`l`.`name` AS `lieu_name`, `l`.`city` AS `lieu_city` "
-             . "FROM `adhoc_event` `e`, `adhoc_lieu` `l`, `adhoc_audio` `a` "
-             . "WHERE `e`.`id_event` = `a`.`id_event` "
-             . "AND `e`.`id_lieu` = `l`.`id_lieu` "
-             . "AND `e`.`online` AND `a`.`online` "
-             . "ORDER BY `e`.`date` DESC";
-
-        return $db->queryWithFetch($sql);
     }
 
     /**

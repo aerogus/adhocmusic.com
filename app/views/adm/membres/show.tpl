@@ -88,18 +88,16 @@
     <caption>Ses Groupes</caption>
     <tr>
       <th>Nom</th>
-      <th>Poste</th>
       <th>Supprimer</th>
     </tr>
     {foreach from=$membre->getGroupes() item=groupe}
     <tr>
-      <td><a href="/adm/groupes/{$groupe.id_groupe}">{$groupe.name|escape}</a></td>
-      <td>{$groupe.type_musicien_name|escape}</td>
-      <td><a class="button" href="/adm/appartient-a?from=membre&action=delete&membre={$membre->getId()}&groupe={$groupe.id_groupe}">Supprimer</a></td>
+      <td><a href="/adm/groupes/{$groupe->getIdGroupe()}">{$groupe->getName()|escape}</a></td>
+      <td><a class="button" href="/adm/appartient-a?from=membre&action=delete&membre={$membre->getIdContact()}&groupe={$groupe->getIdGroupe()}">Supprimer</a></td>
     </tr>
     {/foreach}
   </table>
-  <a class="button" href="/adm/appartient-a?from=membre&action=create&membre={$membre->getId()}">Ajout Groupe</a>
+  <a class="button" href="/adm/appartient-a?from=membre&action=create&membre={$membre->getIdContact()}">Ajout Groupe</a>
   </div>
 </div>
 

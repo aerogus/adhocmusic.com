@@ -4,9 +4,9 @@
   <ul class="swipe-wrap">
     {foreach from=$featured key=idx item=f}
     <li data-index="{$idx}">
-      <a href="{$f.link}">
-        <h2>{$f.title}<br><span>{$f.description}</span></h2>
-        <img src="{$f.image}" title="{$f.description}" alt="">
+      <a href="{$f->getLink()}">
+        <h2>{$f->getTitle()}<br><span>{$f->getDescription()}</span></h2>
+        <img src="{$f->getImage()}" title="{$f->getDescription()}" alt="">
       </a>
     </li>
     {/foreach}
@@ -15,7 +15,7 @@
     <ul class="swipe-pagination">
       {foreach from=$featured key=idx item=f}
       <li data-index="{$idx}">
-        <a href="{$f.link}"></a>
+        <a href="{$f->getLink()}"></a>
       </li>
       {/foreach}
     </ul>
@@ -37,7 +37,7 @@
           <strong>{$month|date_format:"%B %Y"|capitalize}</strong>
           <ul>
           {foreach from=$mevts key=month item=evt}
-            <li><span style="font-weight: bold; color: #cc0000;" title="{$evt.date|date_format:"%A %e %B à %H:%M"}">{$evt.date|date_format:"%d"}</span> <a href="/events/{$evt.id}" title="{$evt.name|escape}">{$evt.name|truncate:'40'|escape}</a></li>
+            <li><span style="font-weight: bold; color: #cc0000;" title="{$evt->getDate()|date_format:"%A %e %B à %H:%M"}">{$evt->getDate()|date_format:"%d"}</span> <a href="{$evt->getUrl()}" title="{$evt->getName()|escape}">{$evt->getName()|truncate:'40'|escape}</a></li>
           {/foreach}
           </ul>
         </li>
@@ -57,8 +57,8 @@
       <div class="reset">
         {foreach from=$videos item=video}
         <div class="thumb-80">
-          <a href="{$video.url}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}"></a>
-          <a class="overlay-80 overlay-video-80" href="{$video.url}" title="Regarder {$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}"></a>
+          <a href="{$video->getUrl()}"><img src="{$video->getThumb80Url()}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe->getName()|escape}){/if}"></a>
+          <a class="overlay-80 overlay-video-80" href="{$video->getUrl()}" title="Regarder {$video->geName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe->getName()|escape}){/if}"></a>
         </div>
         {/foreach}
       </div>

@@ -1081,18 +1081,10 @@ class Groupe extends ObjectModel
      */
     function unlinkMember(int $id_contact): bool
     {
-        // le groupe existe-t-il bien ?
-
-        // l'id_contact est il valide ?
-
-        // la relation est elle bien présente ?
-
-        // tout est ok, on delete dans groupe_membre
-
         $db = DataBase::getInstance();
 
         $sql = 'DELETE FROM `' . self::$_db_table_appartient_a . '` '
-             . 'WHERE `' . Groupe::getDbPk() . '` = ' . (int) $this->getId() . ' '
+             . 'WHERE `' . Groupe::getDbPk() . '` = ' . (int) $this->getIdGroupe() . ' '
              . 'AND `' . Membre::getDbPk() . '` = ' . (int) $id_contact;
 
         $db->query($sql);
@@ -1110,7 +1102,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = 'DELETE FROM `' . self::$_db_table_appartient_a . '` '
-             . 'WHERE `' . $this->getDbPk() . '` = ' . (int) $this->getId();
+             . 'WHERE `' . $this->getDbPk() . '` = ' . (int) $this->getIdGroupe();
 
         $db->query($sql);
 
@@ -1122,17 +1114,14 @@ class Groupe extends ObjectModel
      *
      * @param int $id_contact id_contact
      *
-     * @return int|false id_type_musicien si appartient, false sinon
+     * @return bool true si appartient, false sinon
      */
-    function isMember(int $id_contact)
+    function isMember(int $id_contact): bool
     {
-        if (is_null($this->_members)) {
-            $this->_members = self::getMembersById($this->getId());
-        }
-
-        foreach ($this->_members as $member) {
-            if ($member['id'] === $id_contact) {
-                return $member['id_type_musicien'];
+        $membres = $this->getMembers();
+        foreach ($membres as $membre) {
+            if ($membre->getIdContact() === $id_contact) {
+                return true;
             }
         }
         return false;
@@ -1145,42 +1134,11 @@ class Groupe extends ObjectModel
      */
     function getMembers(): array
     {
-        if (is_null($this->_members)) {
-            $this->_members = self::getMembersById($this->getId());
-        }
-
-        return $this->_members;
-    }
-
-    /**
-     * Retourne un tableau des membres liés à ce groupe
-     *
-     * @param int $id_groupe id_groupe
-     *
-     * @return array
-     */
-    static function getMembersById(int $id_groupe): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `m`.`id_contact` AS `id`, `c`.`email`, `m`.`last_name`, `m`.`first_name`, `m`.`pseudo`, "
-             . "`c`.`email`, `m`.`created_on`, "
-             . "`m`.`modified_on`, `m`.`visited_on`, `m`.`text`, `m`.`site`, "
-             . "`a`.`id_groupe`, `a`.`id_type_musicien` "
-             . "FROM `" . Membre::getDbTable() . "` `m`, `" . Contact::getDbTable() . "` `c`, `" . self::$_db_table_appartient_a . "` `a` "
-             . "WHERE `m`.`id_contact` = `a`.`id_contact` "
-             . "AND `m`.`id_contact` = `c`.`id_contact` "
-             . "AND `a`.`id_groupe` = " . (int) $id_groupe;
-
-        $res = $db->queryWithFetch($sql);
-        $cpt = 0;
-        foreach ($res as $_res) {
-            $res[$cpt]['id'] = intval($_res['id']);
-            $res[$cpt]['nom_type_musicien'] = TypeMusicien::getInstance((int) $_res['id_type_musicien'])->getName();
-            $res[$cpt]['url'] = Membre::getUrlById((int) $_res['id']);
-            $cpt++;
-        }
-        return $res;
+        return Membre::find(
+            [
+                'id_groupe' => $this->getIdGroupe()
+            ]
+        );
     }
 
     /**
@@ -1203,6 +1161,8 @@ class Groupe extends ObjectModel
      *                      'online' => bool,
      *                      'order_by' => string,
      *                      'sort' => string,
+     *                      'start' => int,
+     *                      'limit' => int,
      *                      ]
      *
      * @return array
@@ -1212,7 +1172,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `id_groupe` FROM `" . Groupe::getDbTable() . "` WHERE 1 ";
+        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
 
         if (isset($params['id_contact'])) {
             $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'] . " ";
@@ -1244,14 +1204,18 @@ class Groupe extends ObjectModel
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
-            $sql .= $params['sort'];
+            $sql .= $params['sort'] . " ";
         } else {
-            $sql .= "ASC";
+            $sql .= "ASC ";
         }
 
-        $ids_groupe = $db->queryWithFetchFirstFields($sql);
-        foreach ($ids_groupe as $id_groupe) {
-            $objs[] = static::getInstance((int) $id_groupe);
+        if (isset($params['start']) && isset($params['limit'])) {
+            $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
+        }
+
+        $ids = $db->queryWithFetchFirstFields($sql);
+        foreach ($ids as $id) {
+            $objs[] = static::getInstance((int) $id);
         }
 
         return $objs;

@@ -14,18 +14,18 @@
 
 {foreach $videos as $video}
 <div class="video-list" style="margin: 10px; background-color: #ececec;">
-<a href="/videos/edit/{$video.id}"><img src="{$video.thumb_80_80}" style="float: left; margin-right: 10px;"/></a>
-<img src="/img/icones/signature.png"> <a href="/videos/edit/{$video.id}"><strong>{$video.name|escape}</strong></a><br>
-{if $video.groupe_id}
- <img src="/img/icones/groupe.png"> {$video.groupe_name|escape}
+<a href="/videos/edit/{$video->getIdVideo()}"><img src="{$video->getThumb80Url()}" style="float: left; margin-right: 10px;"/></a>
+<img src="/img/icones/signature.png"> <a href="/videos/edit/{$video->getIdVideo()}"><strong>{$video->getName()|escape}</strong></a><br>
+{if $video->getIdGroupe()}
+ <img src="/img/icones/groupe.png"> {$video->getGroupe()->getName()|escape}
 {/if}
-{if $video.event_id}
- <img src="/img/icones/event.png"> {$video.event_name|escape}
+{if $video->getIdEvent()}
+ <img src="/img/icones/event.png"> {$video->getEvent()->getName()|escape}
 {/if}
-{if $video.lieu_id}
- <img src="/img/icones/lieu.png"> {$video.lieu_name|escape}
+{if $video->getIdLieu()}
+ <img src="/img/icones/lieu.png"> {$video->getLieu()->getName()|escape}
 {/if}
-<br><img src="/img/icones/eye.png"> {if $video.online}<span style="color: #00ff00;">En Ligne</span>{else}<span style="color: #ff0000">Hors Ligne</span>{/if}
+<br><img src="/img/icones/eye.png"> {if $video->getOnline()}<span style="color: #00ff00;">En Ligne</span>{else}<span style="color: #ff0000">Hors Ligne</span>{/if}
 <br style="clear: both">
 </div>
 {/foreach}

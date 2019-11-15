@@ -384,19 +384,48 @@ abstract class ObjectModel
     }
 
     /**
-     * Cherche une collection d'instance de l'objet répondant à certains critères
-     * champs communs: order_by => fieldName, sort => ASC|DESC, limit => int
+     * Retourne une collection d'objets "ObjectModel" répondant au(x) critère(s) donné(s)
      *
-     * À implémenter dans les classes filles
+     * À surcharger dans les classes filles
      *
-     * @param array $params params
+     * @param array $params [
+     *                      'order_by' => string,
+     *                      'sort' => string,
+     *                      'start' => int,
+     *                      'limit' => int,
+     *                      ]
      *
-     * @return object
-     * @throws Exception
+     * @return array
      */
     static function find(array $params): array
     {
-        return [];
+        $db = DataBase::getInstance();
+        $objs = [];
+
+        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+            $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+        } else {
+            $sql .= "ORDER BY `" . static::getDbPk() . "` ";
+        }
+
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+            $sql .= $params['sort'] . " ";
+        } else {
+            $sql .= "ASC ";
+        }
+
+        if (isset($params['start']) && isset($params['limit'])) {
+            $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
+        }
+
+        $ids = $db->queryWithFetchFirstFields($sql);
+        foreach ($ids as $id) {
+            $objs[] = static::getInstance((int) $id);
+        }
+
+        return $objs;
     }
 
     /**

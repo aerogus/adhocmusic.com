@@ -920,19 +920,6 @@ class Membre extends Contact
     }
 
     /**
-     * Retourne une collection d'objets "Membre" répondant au(x) critère(s)
-     *
-     * @param array $params param
-     *
-     * @return array
-     */
-    static function find(array $params): array
-    {
-        // @TODO à implémenter
-        return [];
-    }
-
-    /**
      * Recherche des membres en fonction de critères donnés
      *
      * @param array ['id']            => "3"

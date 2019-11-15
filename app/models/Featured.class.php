@@ -328,19 +328,6 @@ class Featured extends ObjectModel
     /* fin setters */
 
     /**
-     * Retourne une collection d'objets "Featured" répondant au(x) critère(s)
-     *
-     * @param array $params param
-     *
-     * @return array
-     */
-    static function find(array $params): array
-    {
-        // @TODO à implémenter
-        return [];
-    }
-
-    /**
      * @return array
      */
     static function getFeaturedHomepage(): array

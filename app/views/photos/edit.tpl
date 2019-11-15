@@ -59,7 +59,7 @@
         {foreach from=$deps item=dep}
         <optgroup label="{$dep->getId()} - {$dep->getName()|escape}">
           {foreach from=$lieux[$dep->getId()] item=lieu}
-          <option value="{$lieu.id}"{if $photo->getIdLieu() == $lieu.id} selected="selected"{/if}>{$lieu.cp} {$lieu.city|escape} : {$lieu.name|escape}</option>
+          <option value="{$lieu->getIdLieu()}"{if $photo->getIdLieu() === $lieu->getIdLieu()} selected="selected"{/if}>{$lieu->getCp()} {$lieu->getCity()|escape} : {$lieu->getName()|escape}</option>
           {/foreach}
         </optgroup>
         {/foreach}

@@ -2,7 +2,7 @@
 
 <div class="box">
   <header>
-    <h2>Modifier une structure</h2>
+    <h1>Modifier une structure</h1>
   </header>
   <div>
 

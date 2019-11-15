@@ -2,7 +2,7 @@
 
 <div class="box">
   <header>
-    <h2>Proposer une structure</h2>
+    <h1>Ajouter une structure</h1>
   </header>
   <div>
 

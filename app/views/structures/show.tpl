@@ -8,14 +8,14 @@
 
 <div class="box">
   <header>
-    <h2>{$structure->getName()}</h2>
+    <h1>{$structure->getName()}</h1>
   </header>
   <div>
 
 <table>
   <tr>
     <th>Id</th>
-    <td>{$structure->getId()}</td>
+    <td>{$structure->getIdStructure()}</td>
   </tr>
   <tr>
     <th>Nom</th>
@@ -30,7 +30,7 @@
     <td>
       <ul>
       {foreach $events as $event}
-        <li><a href="{$event.url|escape}">{$event.date|escape} : {$event.name|escape}</a></li>
+        <li><a href="{$event->getUrl()|escape}">{$event->getDate()|escape} : {$event->getName()|escape}</a></li>
       {/foreach}
       </ul>
     </td>

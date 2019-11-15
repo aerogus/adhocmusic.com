@@ -45,7 +45,7 @@
         {foreach from=$deps item=dep}
         <optgroup label="{$dep->getId()} - {$dep->getName()|escape}">
           {foreach from=$lieux[$dep->getId()] item=lieu}
-          <option value="{$lieu.id}"{if $video->getIdLieu() == $lieu.id} selected="selected"{/if}>{$lieu.cp} {$lieu.city|escape} : {$lieu.name|escape}</option>
+          <option value="{$lieu->getIdLieu()}"{if $video->getIdLieu() === $lieu->getIdLieu()} selected="selected"{/if}>{$lieu->getCp()} {$lieu->getCity()|escape} : {$lieu->getName()|escape}</option>
           {/foreach}
         </optgroup>
         {/foreach}
@@ -63,10 +63,10 @@
     </li>
   </ul>
   <input id="form-video-edit-submit" name="form-video-edit-submit" type="submit" class="button" value="Enregistrer">
-  <input type="hidden" name="id" value="{$video->getId()|escape}">
+  <input type="hidden" name="id" value="{$video->getIdVideo()|escape}">
 </form>
 
-<p align="center"><a href="/videos/delete/{$video->getId()|escape}" class="button">Supprimer</a></p>
+<p align="center"><a href="/videos/delete/{$video->getIdVideo()|escape}" class="button">Supprimer</a></p>
 
 <p align="center">{$video->getPlayer()}</p>
 

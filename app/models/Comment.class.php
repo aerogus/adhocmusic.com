@@ -455,19 +455,6 @@ class Comment extends ObjectModel
     }
 
     /**
-     * Retourne une collection d'objets "Comment" répondant au(x) critère(s)
-     *
-     * @param array $params param
-     *
-     * @return array
-     */
-    static function find(array $params): array
-    {
-        // @TODO à implémenter
-        return [];
-    }
-
-    /**
      * Envoie les notifications par mail aux personnes liées au contenu commenté
      */
     function sendNotifs()

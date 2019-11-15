@@ -52,8 +52,8 @@
       <div>
         {foreach $videos as $video}
         <div class="thumb-80">
-          <a href="{$video.url}" title="{$video.name|escape}"><img src="{$video.thumb_80_80}" alt="{$video.name|escape}">{$video.name|truncate:15:"...":true:true|escape}</a>
-          <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}"></a>
+          <a href="{$video->getUrl()}" title="{$video->getName()|escape}"><img src="{$video->getThumb80Url()}" alt="{$video->getName()|escape}">{$video->getName()|truncate:15:"...":true:true|escape}</a>
+          <a class="overlay-80 overlay-video-80" href="{$video->getUrl()}" title="{$video->getName()|escape}"></a>
         </div>
         {/foreach}
       </div>
@@ -68,7 +68,7 @@
       <div>  
       <ul>
         {foreach $audios as $audio}
-	    <li><a href="{$audio.url}">{$audio.name}</a><br><audio controls="controls" src="{$audio.direct_url}" style="background-color:#000"></audio></li>
+        <li><a href="{$audio->getUrl()}">{$audio->getName()}</a><br><audio controls="controls" src="{$audio->getDirectMp3Url()}" style="background-color:#000"></audio></li>
         {/foreach}
       </ul>
       </div>
@@ -98,7 +98,7 @@
       <div>
         <ul>
           {foreach $f_events as $event}
-          <li><a href="/events/{$event.id|escape}">{$event.date|date_format:'%d/%m/%Y %H:%M'} - {$event.lieu_name|escape}</a></li>
+          <li><a href="{$event->getUrl()|escape}">{$event->getDate()|date_format:'%d/%m/%Y %H:%M'} - {$event->getLieu()->getName()|escape}</a></li>
           {/foreach}
         </ul>
       </div>
@@ -113,7 +113,7 @@
       <div>
         <ul>
           {foreach $p_events as $event}
-          <li><a href="/events/{$event.id|escape}">{$event.date|date_format:'%d/%m/%Y %H:%M'} - {$event.lieu_name|escape}</a></li>
+          <li><a href="{$event->getUrl()|escape}">{$event->getDate()|date_format:'%d/%m/%Y %H:%M'} - {$event->getLieu()->getName()|escape}</a></li>
           {/foreach}
         </ul>
       </div>
@@ -132,8 +132,8 @@
   <div class="reset gallery">
   {foreach from=$photos item=photo}
     <div class="photo">
-      <a href="{$photo.thumb_1000}" data-at-1000="{$photo.thumb_1000}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
-        <img src="{$photo.thumb_320}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
+      <a href="{$photo->getThumb1000Url()}" data-at-1000="{$photo->getThumb1000Url()}" title="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
+        <img src="{$photo->getThumb320Url()}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
       </a>
     </div>
   {/foreach}

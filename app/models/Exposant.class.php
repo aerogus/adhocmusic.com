@@ -379,17 +379,4 @@ class Exposant extends ObjectModel
     }
 
     /* fin setters */
-
-    /**
-     * Retourne une collection d'objets "Exposant" répondant au(x) critère(s)
-     *
-     * @param array $params param
-     *
-     * @return array
-     */
-    static function find(array $params): array
-    {
-        // @TODO à implémenter
-        return [];
-    }
 }

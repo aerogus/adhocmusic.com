@@ -2,12 +2,12 @@
 
 <div class="box">
   <header>
-    <h2>Liste des structures</h2>
+    <h1>Liste des structures</h1>
   </header>
   <div>
     <ul>
     {foreach $structures as $structure}
-      <li><img src="{$structure.picto}" alt=""> <a href="/structures/{$structure.id}">{$structure.name|escape}</a></li>
+      <li><img src="{$structure->getPicto()}" alt=""> <a href="{$structure->getUrl()}">{$structure->getName()|escape}</a></li>
     {/foreach}
     </ul>
   </div>

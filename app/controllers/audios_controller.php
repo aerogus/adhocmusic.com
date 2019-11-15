@@ -35,10 +35,10 @@ final class Controller
         if ($_SESSION['membre']->getId() === 1) {
             $audios = Audio::find(
                 [
-                    'start'    => $page * NB_AUDIOS_PER_PAGE,
-                    'limit'    => NB_AUDIOS_PER_PAGE,
                     'order_by' => 'id_audio',
-                    'sort'     => 'ASC',
+                    'sort' => 'ASC',
+                    'start' => $page * NB_AUDIOS_PER_PAGE,
+                    'limit' => NB_AUDIOS_PER_PAGE,
                 ]
             );
             $nb_audios = Audio::count();
@@ -46,10 +46,10 @@ final class Controller
             $audios = Audio::find(
                 [
                     'id_contact' => $_SESSION['membre']->getId(),
-                    'start'      => $page * NB_AUDIOS_PER_PAGE,
-                    'limit'      => NB_AUDIOS_PER_PAGE,
-                    'order_by'   => 'id_audio',
-                    'sort'       => 'ASC',
+                    'order_by' => 'id_audio',
+                    'sort' => 'ASC',
+                    'start' => $page * NB_AUDIOS_PER_PAGE,
+                    'limit' => NB_AUDIOS_PER_PAGE,
                 ]
             );
             $nb_audios = Audio::countMy();

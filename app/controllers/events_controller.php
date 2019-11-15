@@ -22,7 +22,6 @@ final class Controller
         $year  = (int) Route::params('y');
         $month = (int) Route::params('m');
         $day   = (int) Route::params('d');
-        $page  = (int) Route::params('page');
 
         if ($year && $month && $day) { // filtrage d'un jour donné
             $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, $month, $day, $year)); // début de la journée
@@ -42,38 +41,22 @@ final class Controller
                 'online' => true,
                 'order_by' => 'date',
                 'sort' => 'ASC',
-                'limit' => 1000,
             ]
         );
 
-        $nb_events = count($_events);
-        $_events = array_slice($_events, $page * NB_EVENTS_PER_PAGE, NB_EVENTS_PER_PAGE);
-
         $events = [];
         foreach ($_events as $event) {
-            $_day = substr($event['date'], 0, 10);
+            $_day = substr($event->getDate(), 0, 10);
             if (!array_key_exists($_day, $events)) {
                 $events[$_day] = [];
             }
-            $events[$_day][$event['id']] = Event::getInstance($event['id']);
-            $events[$_day][$event['id']]->lieu = Lieu::getInstance($events[$_day][$event['id']]->getIdLieu());
-            $events[$_day][$event['id']]->groupes = array_map(
-                function ($id_groupe) {
-                    return Groupe::getInstance($id_groupe);
-                },
-                $events[$_day][$event['id']]->getGroupes()
-            );
+            $events[$_day][] = Event::getInstance($event->getIdEvent());
         }
 
         $smarty->assign('title', "Agenda Concerts");
         $smarty->assign('description', "Agenda Concert");
 
         $smarty->assign('events', $events);
-        $smarty->assign('styles', Style::findAll());
-
-        $smarty->assign('nb_items', $nb_events);
-        $smarty->assign('nb_items_per_page', NB_EVENTS_PER_PAGE);
-        $smarty->assign('page', $page);
 
         $smarty->assign('year', ($year ? $year : date('Y')));
         $smarty->assign('month', ($month ? $month : date('m')));
@@ -164,8 +147,8 @@ final class Controller
             'photos', Photo::find(
                 [
                     'id_event' => $event->getIdEvent(),
-                    'online'   => true,
-                    'limit'    => 100,
+                    'online' => true,
+                    'limit' => 100,
                 ]
             )
         );
@@ -174,9 +157,9 @@ final class Controller
             'audios', Audio::find(
                 [
                     'id_event' => $event->getIdEvent(),
-                    'online'   => true,
+                    'online' => true,
                     'order_by' => 'random',
-                    'limit'    => 100,
+                    'limit' => 100,
                 ]
             )
         );
@@ -185,10 +168,10 @@ final class Controller
             'videos', Video::find(
                 [
                     'id_event' => $event->getIdEvent(),
-                    'online'   => true,
+                    'online' => true,
                     'order_by' => 'id_video',
-                    'sort'     => 'ASC',
-                    'limit'    => 100,
+                    'sort' => 'ASC',
+                    'limit' => 100,
                 ]
             )
         );
@@ -196,11 +179,11 @@ final class Controller
         $smarty->assign(
             'comments', Comment::find(
                 [
-                    'id_type'    => 'e',
+                    'id_type' => 'e',
                     'id_content' => $event->getIdEvent(),
-                    'online'     => true,
-                    'order_by'   => 'created_on',
-                    'sort'       => 'ASC',
+                    'online' => true,
+                    'order_by' => 'created_on',
+                    'sort' => 'ASC',
                 ]
             )
         );

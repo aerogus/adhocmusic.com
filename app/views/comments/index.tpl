@@ -23,15 +23,15 @@
   </thead>
   <tbody>
   {foreach $comments as $comment}
-    <tr id="row-{$comment.id}">
-      <td><input type="checkbox" id="com-del-{$comment.id}"></td>
-      <td><a href="/comments/show/{$comment.id}">{$comment.id}</a></td>
+    <tr id="row-{$comment->getIdComment()}">
+      <td><input type="checkbox" id="com-del-{$comment->getIdComment()}"></td>
+      <td><a href="/comments/show/{$comment->getIdComment()}">{$comment->getIdComment()}</a></td>
       <td><a href="/{$comment.type_full}/{$comment.id_content}">{$comment.type} {$comment.id_content}</a></td>
-      <td>{$comment.created_on}</td>
-      <td>{$comment.online}</td>
-      <td>{$comment.pseudo}<br>{$comment.email}</td>
-      <td><a href="/membres/show/{$comment.id_contact}">{$comment.pseudo_mbr}</a><br>{$comment.email_mbr}</td>
-      <td>{$comment.text|@nl2br}</td>
+      <td>{$comment->getCreatedOn()}</td>
+      <td>{$comment->getOnline()}</td>
+      <td>{$comment->getPseudo()}<br>{$comment->getEmail()}</td>
+      <td><a href="/membres/show/{$comment->getIdCcontact()}">{$comment->getPseudo()}</a><br>{$comment->getEmail()}</td>
+      <td>{$comment->getText()|@nl2br}</td>
     </tr>
   {/foreach}
   </tbody>
@@ -40,23 +40,6 @@
 <input name="form-comments-delete-submit" id="form-comments-delete-submit" type="submit" value="Effacer sélectionnés">
 
 </form>
-
-<script>
-$(function() {
-  $("#form-comments-delete").submit(function(event) {
-    $("#sablier").show();
-    event.preventDefault();
-    var checked = $(this).find('input:checked');
-    var ids = checked.map(function() {
-      var id = this.id.replace('com-del-', '');
-      $.post('/comments/ajax-delete', { id: id }, function(data) {
-        $("#row-" + id).hide();
-      });
-    });
-    $("#sablier").hide();
-  });
-});
-</script>
 
   </div>
 </div>

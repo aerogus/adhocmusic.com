@@ -18,8 +18,6 @@
     {else}
     <div>
 
-{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
-
 {foreach from=$events key=day item=events_of_the_day}
 <div id="day-{$day|date_format:"%Y-%m-%d"}" class="events_of_the_day">
 <h3>{$day|date_format:"%A %d %B %Y"}</h3>
@@ -27,7 +25,7 @@
 <div class="event grid-3-small-1">
   <div class="event_header col-1">
     <div class="event_date">{$event->getDate()|date_format:"%H:%M"}</div>
-    <div class="event_lieu"><a href="/lieux/{$event->lieu->getId()}" title="{$event->lieu->getName()|escape}"><strong>{$event->lieu->getName()|escape}</strong></a><br>{$event->lieu->getIdDepartement()} {$event->lieu->getCity()}</div>
+    <div class="event_lieu"><a href="/lieux/{$event->getLieu()->getIdLieu()}" title="{$event->getLieu()->getName()|escape}"><strong>{$event->getLieu()->getName()|escape}</strong></a><br>{$event->getLieu()->getIdDepartement()} {$event->getLieu()->getCity()}</div>
   </div>
   <div class="event_content col-2">
     <span class="event_title">
@@ -52,8 +50,6 @@
 {/foreach}
 </div>{* events_of_the_day *}
 {/foreach}
-
-{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
   </div>
 {/if}

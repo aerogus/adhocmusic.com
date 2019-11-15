@@ -82,7 +82,7 @@ class FAQ extends ObjectModel
      */
     function getCategory(): object
     {
-        return FAQCategory::getInstance($this->_id_category);
+        return FAQCategory::getInstance($this->getIdCategory());
     }
 
     /**
@@ -290,15 +290,70 @@ class FAQ extends ObjectModel
     /* fin setters */
 
     /**
-     * Retourne une collection d'objets "FAQ" répondant au(x) critère(s)
+     * Retourne une collection d'objets "FAQ" répondant au(x) critère(s) donné(s)
      *
-     * @param array $params param
+     * @param array $params [
+     *                      'id_category' => int,
+     *                      'online' => bool,
+     *                      'order_by' => string,
+     *                      'sort' => string,
+     *                      'start' => int,
+     *                      'limit' => int,
+     *                      ]
      *
      * @return array
      */
     static function find(array $params): array
     {
-        // @TODO à implémenter
-        return [];
+        $db = DataBase::getInstance();
+        $objs = [];
+
+        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+
+        if (isset($params['id_contact'])) {
+            $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'] . " ";
+            if ($ids_groupe = $db->queryWithFetchFirstFields($subSql)) {
+                $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
+            } else {
+                return $objs;
+            }
+        }
+
+        if (isset($params['alias'])) {
+            $sql .= "AND `alias` = '" . $db->escape($params['alias']) . "' ";
+        }
+
+        if (isset($params['facebook_page_id'])) {
+            $sql .= "AND `facebook_page_id` = " . (int) $params['facebook_page_id'] . " ";
+        }
+
+        if (isset($params['online'])) {
+            $sql .= "AND `online` = ";
+            $sql .= $params['online'] ? "TRUE" : "FALSE";
+            $sql .= " ";
+        }
+
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+            $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+        } else {
+            $sql .= "ORDER BY `" . static::$_pk . "` ";
+        }
+
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+            $sql .= $params['sort'] . " ";
+        } else {
+            $sql .= "ASC ";
+        }
+
+        if (isset($params['start']) && isset($params['limit'])) {
+            $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
+        }
+
+        $ids = $db->queryWithFetchFirstFields($sql);
+        foreach ($ids as $id) {
+            $objs[] = static::getInstance((int) $id);
+        }
+
+        return $objs;
     }
 }

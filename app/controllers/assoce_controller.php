@@ -38,8 +38,6 @@ final class Controller
 
         Trail::getInstance()->addStep("Afterworks");
 
-        $smarty->assign('events', array_reverse(Event::getAdHocEventsBySeason(), true));
-
         return $smarty->fetch('assoce/afterworks.tpl');
     }
 

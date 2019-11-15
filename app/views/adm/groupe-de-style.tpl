@@ -15,14 +15,14 @@
     </tr>
   </thead>
   <tbody>
-    {foreach from=$groupes key=id_grp item=groupe}
+    {foreach from=$groupes item=groupe}
     <tr>
-      <td><a href="/adm/groupe-de-style/{$groupe.id|escape}">{$groupe.name|escape}</a></td>
-      <td>{$groupe.style|escape}</td>
+      <td><a href="/adm/groupe-de-style/{$groupe->getIdGroupe()|escape}">{$groupe->getName()|escape}</a></td>
+      <td>{$groupe->getStyle()|escape}</td>
       <td>
-      {if !empty($groupe.styles)}
+      {if !empty($groupe->getStyles())}
       <ul>
-      {foreach from=$groupe.styles item=style}
+      {foreach from=$groupe->getStyles() item=style}
       <li>{$style->getName()|escape}</li>
       {/foreach}
       </ul>

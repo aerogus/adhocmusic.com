@@ -51,7 +51,7 @@ final class Controller
             );
         }
 
-        // recup events ayant des média
+        // recup events ayant des vidéos
         $smarty->assign('events', Event::getEventsWithVideo());
 
         if ($id_event) {

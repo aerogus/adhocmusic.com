@@ -20,7 +20,7 @@
           <select id="groupe" name="groupe">
             <option value="0">---</option>
             {foreach from=$groupes item=groupe}
-            <option value="{$groupe.id}">{$groupe.name|escape}</option>
+            <option value="{$groupe->getIdGroupe()}">{$groupe->getName()|escape}</option>
             {/foreach}
           </select>
         </li>
@@ -29,7 +29,7 @@
           <select id="event" name="event">
             <option value="0">---</option>
             {foreach from=$events item=event}
-            <option value="{$event.id}">{$event.date|date_format:'%d/%m/%Y'} - {$event.name|escape} - {$event.lieu_name}</option>
+            <option value="{$event->getIdEvent()}">{$event->getDate()|date_format:'%d/%m/%Y'} - {$event->getName()|escape} - {$event->getLieu->getName()}</option>
             {/foreach}
           </select>
         </li>

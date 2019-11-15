@@ -1,17 +1,3 @@
-<script>
-$(function() {
-    // thumbnail photo et video
-    $(".thumb-80").hover(
-        function() {
-            $(this).children('.overlay-80').css('visibility', 'visible');
-        },
-        function() {
-            $(this).children('.overlay-80').css('visibility', 'hidden');
-        }
-    );
-});
-</script>
-
 {foreach from=$search_audios item=audio}
 <div class="search-box-result">
 <div class="search-box-result-audio">

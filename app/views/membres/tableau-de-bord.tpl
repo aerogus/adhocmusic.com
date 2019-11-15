@@ -92,7 +92,7 @@
       {if !empty($alerting_groupes)}
       <ul>
         {foreach $alerting_groupes as $groupe}
-        <li><a href="/groupes/{$groupe.id_groupe}">{$groupe.name}</a></li>
+        <li><a href="{$groupe->getUrl()}">{$groupe->getName()}</a></li>
         {/foreach}
       </ul>
       {else}
@@ -102,7 +102,7 @@
       {if !empty($alerting_events)}
       <ul>
       {foreach $alerting_events as $event}
-        <li><a href="/events/{$event.id_event}">{$event.name}</a></li>
+        <li><a href="{$event->getUrl()}">{$event->getName()}</a></li>
       {/foreach}
       </ul>
       {else}
@@ -112,7 +112,7 @@
       {if !empty($alerting_lieux)}
       <ul>
       {foreach $alerting_lieux as $lieu}
-        <li><a href="/lieux/{$lieu.id_lieu}">{$lieu.name}</a></li>
+        <li><a href="{$lieu->getUrl()}">{$lieu->getName()}</a></li>
       {/foreach}
       </ul>
       {else}

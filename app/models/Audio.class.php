@@ -106,19 +106,6 @@ class Audio extends Media
     /* fin setters */
 
     /**
-     * Retourne une collection d'objets "Audio" répondant au(x) critère(s)
-     *
-     * @param array $params param
-     *
-     * @return array
-     */
-    static function find(array $params): array
-    {
-        // @TODO à implémenter
-        return [];
-    }
-
-    /**
      * Efface un enregistrement de la table audio
      * + gestion de l'effacement du/des fichier(s)
      *
