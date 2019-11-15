@@ -89,4 +89,15 @@ class City extends \Reference
     // à implémenter
 
     /* fin setters */
+
+    /**
+     * Retourne une collection d'objets "City" répondant au(x) critère(s)
+     *
+     * @param array $params params ['id_departement' => string, 'order_by' => string, 'sort' => string]
+     *
+     * @return array
+     */
+    static function find(array $params): array
+    {
+    }
 }

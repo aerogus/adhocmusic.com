@@ -9,6 +9,8 @@
 class Trail
 {
     /**
+     * Instance de l'objet
+     *
      * @var mixed
      */
     protected static $_instance = null;
@@ -43,8 +45,8 @@ class Trail
     /**
      * Ajoute un élément au fil d'ariane
      *
-     * @param string $title titre
-     * @param string $link  lien (optionnel)
+     * @param string $title       titre
+     * @param string $link        lien (optionnel)
      * @param string $description description (optionnel)
      * 
      * @return mixed

@@ -17,7 +17,9 @@ use \Reference\WorldRegion;
 class Lieu extends ObjectModel
 {
     /**
+     * Instance de l'objet
      *
+     * @var mixed
      */
     protected static $_instance = null;
 

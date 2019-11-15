@@ -74,7 +74,9 @@ define('MEDIA_ADHOCTUBE_URL_PATTERN', '~^https://' . MEDIA_ADHOCTUBE_HOST . '/vi
 class Video extends Media
 {
     /**
-     * @var object
+     * Instance de l'objet
+     *
+     * @var mixed
      */
     protected static $_instance = null;
 

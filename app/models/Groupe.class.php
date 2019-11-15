@@ -13,6 +13,13 @@ use \Reference\GroupeStatus;
 class Groupe extends ObjectModel
 {
     /**
+     * Instance de l'objet
+     *
+     * @var mixed
+     */
+    protected static $_instance = null;
+
+    /**
      * États des groupes
      */
     const ETAT_ACTIF   = 1;
@@ -29,11 +36,6 @@ class Groupe extends ObjectModel
         self::ETAT_NONEWS  => "Pas de nouvelles",
         self::ETAT_INACTIF => "Inactif / Séparé",
     ];
-
-    /**
-     * @var object
-     */
-    protected static $_instance = null;
 
     /**
      * @var int
@@ -1192,9 +1194,16 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * Retourne une collection d'objets "Groupe" répondant au(x) critère(s)
+     * Retourne une collection d'objets "Groupe" répondant au(x) critère(s) donné(s)
      *
-     * @param array $params params ['id_contact' => int, 'order_by' => string, 'sort => string]
+     * @param array $params [
+     *                      'id_contact' => int,
+     *                      'alias' => string,
+     *                      'facebook_page_id' => string,
+     *                      'online' => bool,
+     *                      'order_by' => string,
+     *                      'sort' => string,
+     *                      ]
      *
      * @return array
      */
@@ -1212,6 +1221,14 @@ class Groupe extends ObjectModel
             } else {
                 return $objs;
             }
+        }
+
+        if (isset($params['alias'])) {
+            $sql .= "AND `alias` = '" . $db->escape($params['alias']) . "' ";
+        }
+
+        if (isset($params['facebook_page_id'])) {
+            $sql .= "AND `facebook_page_id` = " . (int) $params['facebook_page_id'] . " ";
         }
 
         if (isset($params['online'])) {
@@ -1249,14 +1266,8 @@ class Groupe extends ObjectModel
      */
     static function getIdByAlias(string $alias): ?int
     {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `" . self::$_pk . "` "
-             . "FROM `" . Groupe::getDbTable() . "` "
-             . "WHERE `alias` = '" . $db->escape($alias) . "'";
-
-        if ($id_groupe = $db->queryWithFetchFirstField($sql)) {
-            return (int) $id_groupe;
+        if ($groupes = self::find(['alias' => $alias])) {
+            return $groupes[0]->getIdGroupe();
         }
         return null;
     }
@@ -1264,25 +1275,14 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'id d'un groupe à partir d'id de sa page facebook
      *
-     * @param int $fbpid fbpid
+     * @param int $facebook_page_id facebook_page_id
      *
-     * @return int
+     * @return int|null
      */
-    static function getIdByFacebookPageId(int $fbpid): ?int
+    static function getIdByFacebookPageId(int $facebook_page_id): ?int
     {
-        $db = DataBase::getInstance();
-
-        // /!\ 64 bits
-        if (!is_numeric($fbpid)) {
-            return null;
-        }
-
-        $sql = "SELECT `id_groupe` "
-             . "FROM `" . Groupe::getDbTable() . "` "
-             . "WHERE `facebook_page_id` = " . $fbpid;
-
-        if ($id_groupe = $db->queryWithFetchFirstField($sql)) {
-            return (int) $id_groupe;
+        if ($groupes = self::find(['facebook_page_id' => $facebook_page_id])) {
+            return $groupes[0]->getIdGroupe();
         }
         return null;
     }

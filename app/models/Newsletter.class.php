@@ -20,7 +20,9 @@ define('NEWSLETTER_TEMPLATE_PATH', ADHOC_ROOT_PATH . '/app/views/emails');
 class Newsletter extends ObjectModel
 {
     /**
-     * @var object
+     * Instance de l'objet
+     *
+     * @var mixed
      */
     protected static $_instance = null;
 

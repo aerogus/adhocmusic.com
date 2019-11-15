@@ -11,6 +11,8 @@ namespace Reference;
 class FAQCategory extends \Reference
 {
     /**
+     * Instance de l'objet
+     *
      * @var object
      */
     protected static $_instance = null;

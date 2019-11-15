@@ -10,7 +10,9 @@
 class Media extends ObjectModel
 {
     /**
-     * @var object
+     * Instance de l'objet
+     *
+     * @var mixed
      */
     protected static $_instance = null;
 

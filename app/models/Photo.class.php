@@ -12,7 +12,9 @@
 class Photo extends Media
 {
     /**
-     * @var object
+     * Instance de l'objet
+     *
+     * @var mixed
      */
     protected static $_instance = null;
 

@@ -9,6 +9,8 @@
 class Contact extends ObjectModel
 {
     /**
+     * Instance de l'objet
+     *
      * @var mixed
      */
     protected static $_instance = null;

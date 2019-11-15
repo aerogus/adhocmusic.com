@@ -11,6 +11,8 @@ namespace Reference;
 class Style extends \Reference
 {
     /**
+     * Instance de l'objet
+     *
      * @var object
      */
     protected static $_instance = null;

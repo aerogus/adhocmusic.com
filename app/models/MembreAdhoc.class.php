@@ -9,6 +9,8 @@
 class MembreAdhoc extends Membre
 {
     /**
+     * Instance de l'objet
+     *
      * @var mixed
      */
     protected static $_instance = null;

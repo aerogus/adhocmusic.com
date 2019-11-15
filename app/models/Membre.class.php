@@ -11,6 +11,13 @@ use \Reference\TypeMusicien;
 class Membre extends Contact
 {
     /**
+     * Instance de l'objet
+     *
+     * @var mixed
+     */
+    protected static $_instance = null;
+
+    /**
      * Gestion des droits utilisateurs
      * par masque binaire
      */
@@ -32,11 +39,6 @@ class Membre extends Contact
         self::TYPE_BONUS     => "Bonus",
         self::TYPE_ADMIN     => "Administrateur",
     ];
-
-    /**
-     * @var mixed
-     */
-    protected static $_instance = null;
 
     /**
      * @var string
