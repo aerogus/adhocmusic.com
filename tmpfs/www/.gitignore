@@ -1,4 +1,0 @@
-# le répertoire doit être présent mais son contenu non versionné
-# docroot de www, généré par brunch
-*
-!.gitignore
