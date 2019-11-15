@@ -44,6 +44,7 @@ if (ENV === 'PROD') {
     ini_set('display_startup_errors', '0');
     ini_set('display_errors', '0');
     define('ONERROR_SHOW', false);
+    define('DEBUG_MODE', false);
 
 } elseif (ENV === 'DEV') {
 
@@ -59,6 +60,7 @@ if (ENV === 'PROD') {
     ini_set('display_startup_errors', '1');
     ini_set('display_errors', '1');
     define('ONERROR_SHOW', true);
+    define('DEBUG_MODE', true);
 
 }
 
