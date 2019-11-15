@@ -4,7 +4,7 @@
 <div class="infobulle info"><a href="/adm">🔗 <strong>Accès zone privée</strong></a></div>
 {/if}
 
-<div class="grid-4-small-2-tiny-1 has-gutter-l">
+<div class="grid-4-small-2-tiny-1 has-gutter">
 
   <div class="col-1">
 

@@ -4,7 +4,7 @@
 {if !empty($edit)}<p class="infobulle success">Evénement modifié</p>{/if}
 {if !empty($delete)}<p class="infobulle success">Evénement supprimé</p>{/if}
 
-<div class="grid-3-small-1 has-gutter-l">
+<div class="grid-3-small-1 has-gutter">
 
   <div class="box col-2-small-1">
     <header>

@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<div class="grid-4-small-2 has-gutter-l">
+<div class="grid-4-small-2 has-gutter">
 
   <div class="box">
     <header>

@@ -2,7 +2,7 @@
 
 {if !empty($sent)}<p class="infobulle success">Votre message a bien été envoyé</p>{/if}
 
-<div class="grid-2-small-1-tiny-1 has-gutter-l">
+<div class="grid-2-small-1-tiny-1 has-gutter">
 
   <div class="col-1">
 

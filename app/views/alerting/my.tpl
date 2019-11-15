@@ -1,6 +1,6 @@
 {include file="common/header.tpl"}
 
-<div class="grid-3-small-2-tiny-1 has-gutter-l">
+<div class="grid-3-small-2-tiny-1 has-gutter">
 
   <div class="box">
     <header>

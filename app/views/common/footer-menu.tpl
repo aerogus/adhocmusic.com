@@ -5,6 +5,7 @@
         <li><h4>Qui sommes-nous ?</h4></li>
         <li><a href="/assoce">L’association</a></li>
         <li><a href="/equipe">L’équipe</a></li>
+        <li><a href="/mentions-legales">Mentions légales</a></li>
       </ul>
     </li>
     <li>
@@ -28,7 +29,6 @@
       <ul>
         <li><h4>Contact</h4></li>
         <li><a href="/contact">Contactez-nous</a></li>
-        <li><a href="/mentions-legales">Mentions légales</a></li>
         <li><a href="/partners">Partenaires</a></li>
         <li><a href="/map">Plan du site</a></li>
       </ul>

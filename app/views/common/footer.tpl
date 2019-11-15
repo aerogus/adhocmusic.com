@@ -1,7 +1,7 @@
 
 </div>{* .site-content *}
 
-{include file="common/menu-footer.tpl"}
+{include file="common/footer-menu.tpl"}
 
 <button type="button" id="up" name="retour en haut de la page">↑</button>
 
