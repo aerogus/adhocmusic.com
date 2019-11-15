@@ -15,7 +15,7 @@ class Groupe extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var mixed
+     * @var object
      */
     protected static $_instance = null;
 
@@ -649,7 +649,7 @@ class Groupe extends ObjectModel
         if ($this->_name !== $name) {
             $this->_name = $name;
             $this->_modified_fields['name'] = true;
-            $this->setAlias(self::genAlias($name));
+            $this->setAlias(Tools::genAlias($name));
         }
 
         return $this;
@@ -1518,47 +1518,6 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * Retourne les événements futurs rattachés au groupe
-     *
-     * @param int    $limit limite
-     * @param string $type  prev|next|all
-     *
-     * @return array
-     */
-    function getEvents(int $limit = 10, string $type = 'all'): array
-    {
-        // le groupe existe-t-il bien ?
-
-        //@todo Event::getEvents(['groupe' => $id_groupe, 'type' => 'all|prev|next'])
-        // on extrait les événements associés au groupe
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `e`.`id_event`, `e`.`name` AS `nom_event`, `e`.`date`, "
-             . "`l`.`id_lieu`, `l`.`name` AS `nom_lieu` "
-             . "FROM `" . Event::getDbTable() . "` `e`, `" . self::$_db_table_participe_a . "` `p`, "
-             . "`" . Groupe::getDbTable() . "` `g`, `" . Lieu::getDbTable() . "` `l` "
-             . "WHERE `p`.`id_groupe` = `g`.`id_groupe` "
-             . "AND `p`.`id_event` = `e`.`id_event` "
-             . "AND `e`.`id_lieu` = `l`.`id_lieu` "
-             . "AND `g`.`id_groupe` = " . (int) $this->_id_groupe." ";
-        switch ($type) {
-            case 'all':
-                break;
-            case 'prev':
-                $sql .= "AND `e`.`date` < NOW() ";
-                break;
-            case 'next':
-                $sql .= "AND `e`.`date` > NOW() ";
-                break;
-        }
-        $sql .= "ORDER BY `e`.`date` ASC "
-              . "LIMIT 0," . (int) $limit;
-
-        return $db->queryWithFetch($sql);
-    }
-
-    /**
      * Délie les événements d'un groupe
      *
      * @return int
@@ -1573,38 +1532,6 @@ class Groupe extends ObjectModel
         $db->query($sql);
 
         return $db->affectedRows();
-    }
-
-    /**
-     * @param string $name name
-     *
-     * @return bool
-     */
-    static function nameAvailable($name): bool
-    {
-        return true; // lol
-    }
-
-    /**
-     * Retourne l'"alias" d'un nom de groupe à partir de son nom réel
-     * (= filtre les caratères non url-compliant)
-     *
-     * @param string $name name
-     *
-     * @return string
-     */
-    static function genAlias(string $name): string
-    {
-        $alias = trim($name);
-        $alias = mb_strtolower($alias);
-        $alias = Tools::removeAccents($alias);
-
-        $map_in  = ['/', '+', '|', '.', ' ', "'", '"', '&' , '(', ')', '!'];
-        $map_out = ['' , '' , '' , '' , '' , '' , '' , 'et', '' , '' ,  ''];
-
-        $alias = str_replace($map_in, $map_out, $alias);
-
-        return $alias;
     }
 
     /**

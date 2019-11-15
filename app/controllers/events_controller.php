@@ -35,17 +35,17 @@ final class Controller
             $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, (int) date('m') + 3, (int) date('d'), (int) date('Y')));
         }
 
-        $_events = Event::getEvents(
+        $_events = Event::find(
             [
-                'online' => true,
-                'sort'   => 'date',
-                'sens'   => 'ASC',
                 'datdeb' => $datdeb,
                 'datfin' => $datfin,
-                'limit'  => 1000,
+                'online' => true,
+                'order_by' => 'date',
+                'sort' => 'ASC',
+                'limit' => 1000,
             ]
         );
-//echo $datdeb . $datfin; die;
+
         $nb_events = count($_events);
         $_events = array_slice($_events, $page * NB_EVENTS_PER_PAGE, NB_EVENTS_PER_PAGE);
 
@@ -161,46 +161,46 @@ final class Controller
         }
 
         $smarty->assign(
-            'photos', Photo::getPhotos(
+            'photos', Photo::find(
                 [
-                    'event'  => $event->getId(),
-                    'online' => true,
-                    'limit'  => 100,
+                    'id_event' => $event->getIdEvent(),
+                    'online'   => true,
+                    'limit'    => 100,
                 ]
             )
         );
 
         $smarty->assign(
-            'audios', Audio::getAudios(
+            'audios', Audio::find(
                 [
-                    'event'  => $event->getId(),
-                    'online' => true,
-                    'sort'   => 'random',
-                    'limit'  => 100,
+                    'id_event' => $event->getIdEvent(),
+                    'online'   => true,
+                    'order_by' => 'random',
+                    'limit'    => 100,
                 ]
             )
         );
 
         $smarty->assign(
-            'videos', Video::getVideos(
+            'videos', Video::find(
                 [
-                    'event'  => $event->getId(),
-                    'online' => true,
-                    'sort'   => 'id',
-                    'sens'   => 'ASC',
-                    'limit'  => 100,
+                    'id_event' => $event->getIdEvent(),
+                    'online'   => true,
+                    'order_by' => 'id_video',
+                    'sort'     => 'ASC',
+                    'limit'    => 100,
                 ]
             )
         );
 
         $smarty->assign(
-            'comments', Comment::getComments(
+            'comments', Comment::find(
                 [
-                    'type'       => 'e',
-                    'id_content' => $event->getId(),
+                    'id_type'    => 'e',
+                    'id_content' => $event->getIdEvent(),
                     'online'     => true,
-                    'sort'       => 'created_on',
-                    'sens'       => 'ASC',
+                    'order_by'   => 'created_on',
+                    'sort'       => 'ASC',
                 ]
             )
         );
@@ -666,13 +666,13 @@ final class Controller
             return [];
         }
 
-        return Event::getEvents(
+        return Event::find(
             [
+                'id_lieu' => $id_lieu,
                 'online' => true,
-                'lieu'   => $id_lieu,
-                'sort'   => 'date',
-                'sens'   => 'ASC',
-                'limit'  => 100,
+                'order_by' => 'date',
+                'sort' => 'ASC',
+                'limit' => 100,
             ]
         );
     }

@@ -12,7 +12,7 @@ class Media extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var mixed
+     * @var object
      */
     protected static $_instance = null;
 
@@ -366,17 +366,17 @@ class Media extends ObjectModel
 
         foreach ($tab_type as $type) {
             if ($type === 'audio') {
-                $audios = Audio::getAudios($params);
+                $audios = Audio::find($params);
                 $split['audio'] = $audios;
                 $tab = array_merge($tab, $audios);
             }
             if ($type === 'photo') {
-                $photos = Photo::getPhotos($params);
+                $photos = Photo::find($params);
                 $split['photo'] = $photos;
                 $tab = array_merge($tab, $photos);
             }
             if ($type === 'video') {
-                $videos = Video::getVideos($params);
+                $videos = Video::find($params);
                 $split['video'] = $videos;
                 $tab = array_merge($tab, $videos);
             }

@@ -16,7 +16,7 @@ class Event extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var mixed
+     * @var object
      */
     protected static $_instance = null;
 
@@ -359,17 +359,7 @@ class Event extends ObjectModel
      */
     function getUrl(): string
     {
-        return self::getUrlById((int) $this->getId());
-    }
-
-    /**
-     * @param int $id_event id_event
-     *
-     * @return string
-     */
-    static function getUrlById(int $id_event): string
-    {
-        return HOME_URL . '/events/' . (string) $id_event;
+        return HOME_URL . '/events/' . $this->getIdEvent();
     }
 
     /* fin getters */
@@ -575,204 +565,6 @@ class Event extends ObjectModel
     {
         // @TODO à implémenter
         return [];
-    }
-
-    /**
-     * Retourne un tableau d'objEvt pour des critères donnés
-     *
-     * @param array $params ['datdeb']      => '2005-01-01'
-     *                      ['datfin']      => '2005-03-03'
-     *                      ['lieu']        => '1'
-     *                      ['style']       => '1,3,5'
-     *                      ['groupe']      => '5,6'
-     *                      ['structure']   => '1'
-     *                      ['id']          => '5'
-     *                      ['departement'] => '91'
-     *                      ['sort']        => id_event|datdeb|random
-     *                      ['sens']        => ASC|DESC
-     *                      ['debut']       => 0
-     *                      ['limit']       => 5000
-     *                      ['online']      => true
-     * datdeb et datfin obligatoires, le reste facultatif
-     *
-     * @return array
-     */
-    static function getEvents(array $params = [])
-    {
-        if (array_key_exists('datdeb', $params)) {
-            if (!empty($params['datdeb'])) {
-                if (!(Date::isDateOk($params['datdeb']) || Date::isDateTimeOk($params['datdeb']))) {
-                    throw new Exception('datdeb incorrecte');
-                }
-            } else {
-                unset($params['datdeb']);
-            }
-        }
-
-        if (array_key_exists('datfin', $params)) {
-            if (!empty($params['datfin'])) {
-                if (!(Date::isDateOk($params['datfin']) || Date::isDateTimeOk($params['datfin']))) {
-                    throw new Exception('datfin incorrecte');
-                }
-            } else {
-                unset($params['datfin']);
-            }
-        }
-
-        $debut = 0;
-        if (isset($params['debut']) && ((int) $params['debut'] > 0)) {
-            $debut = (int) $params['debut'];
-        }
-
-        $limit = 10;
-        if (isset($params['limit']) && ((int) $params['limit'] > 0)) {
-            $limit = (int) $params['limit'];
-        }
-
-        $sens = 'ASC';
-        if (isset($params['sens']) && $params['sens'] === 'DESC') {
-            $sens = 'DESC';
-        }
-
-        $sort = 'id_event';
-        if (isset($params['sort'])
-            && ($params['sort'] === 'date' || $params['sort'] === 'random')
-        ) {
-            $sort = $params['sort'];
-        }
-
-        $online = null;
-        if (isset($params['online'])) {
-            $online = (bool) $params['online'];
-        }
-
-        $lat = 0;
-        $lng = 0;
-
-        // traitement des params complexes
-        foreach (['lieu', 'style', 'groupe', 'structure', 'id', 'departement', 'contact'] as $n) {
-            ${'tab_' . $n} = [];
-            if (array_key_exists($n, $params) && ($params[$n] !== 0) && ($params[$n] !== '0')) {
-                if (is_int($params[$n])) {
-                    ${'tab_' . $n}[0] = (int) $params[$n];
-                } else {
-                    ${'tab_' . $n} = explode(',', $params[$n]);
-                }
-                foreach (${'tab_' . $n} as $idx => $val) {
-                    ${'tab_' . $n}[$idx] = (int) $val;
-                }
-            }
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT DISTINCT `e`.`id_event` AS `id`, `e`.`name`, "
-             . "`e`.`text`, `e`.`date`, `e`.`price`, `e`.`facebook_event_id`, `e`.`online`, "
-             . "`e`.`created_on`, `e`.`modified_on`, "
-             . "`l`.`id_lieu` AS `lieu_id`, `l`.`name` AS `lieu_name`, "
-             . "`l`.`city` AS `lieu_city`, `l`.`id_departement` AS `lieu_id_departement`, "
-             . "`l`.`address` AS `lieu_address`, `l`.`cp` AS `lieu_cp`, `l`.`id_country` AS `lieu_country`, "
-             . "`s`.`id_structure` AS `structure_id`, `s`.`name` AS `structure_name`, "
-             . "`m`.`id_contact` AS `membre_id`, `m`.`pseudo` AS `membre_pseudo` "
-             . "FROM (`" . Event::getDbTable() . "` `e`) "
-             . "LEFT JOIN `" . Lieu::getDbTable() . "` `l` ON (`e`.`id_lieu` = `l`.`id_lieu`) "
-             . "LEFT JOIN `" . self::$_db_table_participe_a . "` `p` ON (`e`.`id_event` = `p`.`id_event`) "
-             . "LEFT JOIN `" . self::$_db_table_organise_par . "` `o` ON (`e`.`id_event` = `o`.`id_event`) "
-             . "LEFT JOIN `" . Structure::getDbTable() . "` `s` ON (`o`.`id_structure` = `s`.`id_structure`) "
-             . "LEFT JOIN `" . self::$_db_table_event_style . "` `es` ON (`e`.`id_event` = `es`.`id_event`) "
-             . "LEFT JOIN `" . Membre::getDbTable() . "` `m` ON (`e`.`id_contact` = `m`.`id_contact`) "
-             . "WHERE 1 ";
-
-        if (count($tab_lieu)) {
-            $sql .= "AND (0 ";
-            foreach ($tab_lieu as $id_lieu) {
-                $sql .= "OR `l`.`id_lieu` = " . (int) $id_lieu." ";
-            }
-            $sql .= ") ";
-        }
-
-        if (count($tab_style)) {
-            $sql .= "AND (0 ";
-            foreach ($tab_style as $id_style) {
-                $sql .= "OR `es`.`id_style` = " . (int) $id_style . " ";
-            }
-            $sql .= ") ";
-        }
-
-        if (count($tab_groupe)) {
-            $sql .= "AND (0 ";
-            foreach ($tab_groupe as $id_groupe) {
-                $sql .= "OR `p`.`id_groupe` = " . (int) $id_groupe." ";
-            }
-            $sql .= ") ";
-        }
-
-        if (count($tab_structure)) {
-            $sql .= "AND (0 ";
-            foreach ($tab_structure as $id_structure) {
-                $sql .= "OR `o`.`id_structure` = " . (int) $id_structure . " ";
-            }
-            $sql .= ") ";
-        }
-
-        if (count($tab_id) && ($tab_id[0] !== 0)) {
-            $sql .= "AND `e`.`id_event` IN (" . implode(',', $tab_id) . ") ";
-        }
-
-        if (count($tab_contact) && ($tab_contact[0] !== 0)) {
-            $sql .= "AND `e`.`id_contact` IN (" . implode(',', $tab_contact) . ") ";
-        }
-
-        if (count($tab_departement) && ($tab_departement[0] !== 0)) {
-            $sql .= "AND (0 ";
-            foreach ($tab_departement as $id_departement) {
-                $sql .= "OR `l`.`id_departement` = '" . $db->escape($id_departement) . "' ";
-            }
-            $sql .= ") ";
-        }
-
-        if (array_key_exists('datdeb', $params)) {
-            $sql .= "AND `e`.`date` >= '" . $db->escape($params['datdeb']) . "' ";
-        }
-
-        if (array_key_exists('datfin', $params)) {
-            $sql .= "AND `e`.`date` <= '" . $db->escape($params['datfin']) . "' ";
-        }
-
-        if (!is_null($online)) {
-            if ($online) {
-                $sql .= "AND `e`.`online` = TRUE ";
-            } else {
-                $sql .= "AND `e`.`online` = FALSE ";
-            }
-        }
-
-        $sql .= "ORDER BY ";
-        if ($sort === "random") {
-            $sql .= "RAND(" . time() . ") ";
-        } else {
-            $sql .= "`e`.`" . $sort . "` " . $sens . " ";
-        }
-        $sql .= "LIMIT " . $debut . ", " . $limit;
-
-        $res = $db->queryWithFetch($sql);
-
-        $evts = [];
-        foreach ($res as $idx => $_res) {
-            $evts[$idx] = $_res;
-            $evts[$idx]['url'] = self::getUrlById((int) $_res['id']);
-            $evts[$idx]['flyer_100_url'] = self::getFlyerUrl((int) $_res['id'], 100, 100);
-            $evts[$idx]['flyer_320_url'] = self::getFlyerUrl((int) $_res['id'], 320, 0);
-            $evts[$idx]['structure_picto'] = Structure::getPictoById((int) $_res['structure_id']);
-        }
-
-        unset($res);
-
-        if ($limit === 1) {
-            $evts = array_pop($evts);
-        }
-
-        return $evts;
     }
 
     /**
@@ -1107,9 +899,9 @@ class Event extends ObjectModel
      */
     function getPhotos(): array
     {
-        return Photo::getPhotos(
+        return Photo::find(
             [
-                'event'  => $this->getId(),
+                'id_event'  => $this->getIdEvent(),
                 'online' => true,
             ]
         );
@@ -1122,9 +914,9 @@ class Event extends ObjectModel
      */
     function getVideos(): array
     {
-        return Video::getVideos(
+        return Video::find(
             [
-                'event'  => $this->getId(),
+                'id_event' => $this->getIdEvent(),
                 'online' => true,
             ]
         );
@@ -1137,9 +929,9 @@ class Event extends ObjectModel
      */
     function getAudios(): array
     {
-        return Audio::getAudios(
+        return Audio::find(
             [
-                'event'  => $this->getId(),
+                'id_event' => $this->getIdEvent(),
                 'online' => true,
             ]
         );
@@ -1152,12 +944,12 @@ class Event extends ObjectModel
      */
     static function getAdHocEventsBySeason(): array
     {
-        $evts = self::getEvents(
+        $evts = self::find(
             [
-                'structure' => 1,
-                'sort'      => 'date',
-                'sens'      => 'ASC',
-                'limit'     => 1000,
+                'id_structure' => 1,
+                'order_by' => 'date',
+                'sort' => 'ASC',
+                'limit' => 1000,
             ]
         );
 

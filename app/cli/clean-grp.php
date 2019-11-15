@@ -30,42 +30,38 @@ if (!($id_groupe = Groupe::getIdByAlias($alias))) {
 $groupe = Groupe::getInstance($id_groupe);
 echo "Groupe: " . $groupe->getName() . "\n";
 
-$photos = Photo::getPhotos(['groupe' => $id_groupe, 'limit' => 100]);
+$photos = Photo::find(['id_groupe' => $id_groupe, 'limit' => 100]);
 echo "Photos: ". count($photos) . "\n";
 
-$audios = Audio::getAudios(['groupe' => $id_groupe]);
+$audios = Audio::find(['id_groupe' => $id_groupe]);
 echo "Audios: " . count($audios) . "\n";
 
-$videos = Video::getVideos(['groupe' => $id_groupe]);
+$videos = Video::find(['id_groupe' => $id_groupe]);
 echo "Videos: " . count($videos) . "\n";
 
-$events = Event::getEvents(['groupe' => $id_groupe, 'limit' => 100]);
+$events = Event::find(['id_groupe' => $id_groupe, 'limit' => 100]);
 echo "Evenements: " . count($events) . "\n";
 
 if ($do) {
 
     foreach ($photos as $photo) {
-        $p = Photo::getInstance($photo['id']);
-        echo "delete photo " . $p->getName() . "\n";
-        $p->delete();
+        echo "delete photo " . $photo->getName() . "\n";
+        $photo->delete();
     }
 
     foreach ($audios as $audio) {
-        $a = Audio::getInstance($audio['id']);
-        echo "delete audio " . $a->getName() . "\n";
-        $a->delete();
+        echo "delete audio " . $audio->getName() . "\n";
+        $audio->delete();
     }
 
     foreach ($videos as $video) {
-        $v = Video::getInstance($video['id']);
-        echo "delete video " . $v->getName() . "\n";
-        $v->delete();
+        echo "delete video " . $video->getName() . "\n";
+        $video->delete();
     }
 
     foreach ($events as $event) {
-        $e = Event::getInstance($event['id']);
-        echo "delete event " . $e->getName() . "\n";
-        $e->delete();
+        echo "delete event " . $event->getName() . "\n";
+        $event->delete();
     }
 
     echo "delete groupe " . $groupe->getName();

@@ -66,12 +66,12 @@ final class Controller
 
         $smarty->assign('search_media', $search_media);
 
-        $comments = Comment::getComments(
+        $comments = Comment::find(
             [
-                'type'  => 's,p,v',
-                'sort'  => 'id',
-                'sens'  => 'DESC',
-                'debut' => 0,
+                'id_type' => ['s', 'p', 'v'],
+                'order_by' => 'id_comment',
+                'sort'  => 'DESC',
+                'start' => 0,
                 'limit' => 5,
             ]
         );
@@ -94,10 +94,10 @@ final class Controller
         if ($id_groupe) {
             $search_media = Media::getMedia(
                 [
-                    'type'   => $type,
+                    'type' => $type,
                     'groupe' => $id_groupe,
                     'online' => true,
-                    'limit'  => 30,
+                    'limit' => 30,
                 ]
             );
         }
@@ -105,10 +105,10 @@ final class Controller
         if ($id_event) {
             $search_media = Media::getMedia(
                 [
-                    'type'   => $type,
-                    'event'  => $id_event,
+                    'type' => $type,
+                    'event' => $id_event,
                     'online' => true,
-                    'limit'  => 30,
+                    'limit' => 30,
                 ]
             );
         }

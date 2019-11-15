@@ -26,23 +26,23 @@ final class Controller
         $page = (int) Route::params('page');
 
         if ($_SESSION['membre']->getId() === 1) {
-            $videos = Video::getVideos(
+            $videos = Video::find(
                 [
+                    'order_by' => 'id_video',
+                    'sort' => 'ASC',
+                    'start' => $page * NB_VIDEOS_PER_PAGE,
                     'limit' => NB_VIDEOS_PER_PAGE,
-                    'debut' => $page * NB_VIDEOS_PER_PAGE,
-                    'sort'  => 'id',
-                    'sens'  => 'ASC',
                 ]
             );
             $nb_videos = Video::count();
         } else {
-            $videos = Video::getVideos(
+            $videos = Video::find(
                 [
-                    'contact' => $_SESSION['membre']->getId(),
-                    'limit'   => NB_VIDEOS_PER_PAGE,
-                    'debut'   => $page * NB_VIDEOS_PER_PAGE,
-                    'sort'    => 'id',
-                    'sens'    => 'ASC',
+                    'id_contact' => $_SESSION['membre']->getId(),
+                    'order_by' => 'id_video',
+                    'sort' => 'ASC',
+                    'start' => $page * NB_VIDEOS_PER_PAGE,
+                    'limit' => NB_VIDEOS_PER_PAGE,
                 ]
             );
             $nb_videos = Video::countMy();
@@ -156,22 +156,22 @@ final class Controller
             // vidéos et photos liées à l'événement/lieu
             if ($video->getIdEvent() && $video->getIdLieu()) {
                 $smarty->assign(
-                    'photos', Photo::getPhotos(
+                    'photos', Photo::find(
                         [
-                            'event'  => $video->getIdEvent(),
+                            'id_event' => $video->getIdEvent(),
                             'online' => true,
-                            'sort'   => 'random',
-                            'limit'  => 30,
+                            'order_by' => 'random',
+                            'limit' => 30,
                         ]
                     )
                 );
                 $smarty->assign(
-                    'videos', Video::getVideos(
+                    'videos', Video::find(
                         [
-                            'event'  => $video->getIdEvent(),
+                            'id_event' => $video->getIdEvent(),
                             'online' => true,
-                            'sort'   => 'random',
-                            'limit'  => 30,
+                            'order_by' => 'random',
+                            'limit' => 30,
                         ]
                     )
                 );
@@ -310,14 +310,14 @@ final class Controller
             $lieu = Lieu::getInstance($id_lieu);
             $smarty->assign('lieu', $lieu);
             $smarty->assign(
-                'events', Event::getEvents(
+                'events', Event::find(
                     [
                         'online' => true,
                         'datfin' => date('Y-m-d H:i:s'),
-                        'lieu'   => $lieu->getId(),
-                        'sort'   => 'date',
-                        'sens'   => 'ASC',
-                        'limit'  => 100,
+                        'id_lieu' => $lieu->getIdLieu(),
+                        'order_by' => 'date',
+                        'sort' => 'ASC',
+                        'limit' => 100,
                     ]
                 )
             );
@@ -329,8 +329,8 @@ final class Controller
         $id_event  = (int) Route::params('id_event');
         if ($id_event) {
             $event = Event::getInstance($id_event);
-            $smarty->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
+            $smarty->assign('event', $event);
             $smarty->assign('lieu', $lieu);
         }
 
@@ -429,8 +429,8 @@ final class Controller
 
         if ($video->getIdEvent()) {
             $event = Event::getInstance($video->getIdEvent());
-            $smarty->assign('event', $event);
             $lieu = Lieu::getInstance($video->getIdLieu());
+            $smarty->assign('event', $event);
             $smarty->assign('lieu', $lieu);
         }
 

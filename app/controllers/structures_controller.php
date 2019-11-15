@@ -42,12 +42,13 @@ final class Controller
         $smarty->assign('structure', $structure);
 
         $smarty->assign(
-            'events', Event::getEvents(
+            'events', Event::find(
                 [
-                    'structure' => $structure->getId(),
-                    'sort'      => 'date',
-                    'sens'      => 'ASC',
-                    'limit'     => 500,
+                    'id_structure' => $structure->getIdStructure(),
+                    'online' => true,
+                    'order_by' => 'date',
+                    'sort' => 'ASC',
+                    'limit' => 500,
                 ]
             )
         );

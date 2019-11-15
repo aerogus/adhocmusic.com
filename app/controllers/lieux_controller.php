@@ -58,7 +58,7 @@ final class Controller
             ->addStep("Lieux", "/lieux")
             ->addStep("Mes lieux");
 
-        $smarty->assign('lieux', Lieu::getLieux());
+        $smarty->assign('lieux', Lieu::findAll());
 
         $smarty->assign('nb_items', Lieu::count());
         $smarty->assign('nb_items_per_page', 200);
@@ -122,72 +122,72 @@ final class Controller
         $smarty->assign('description', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCp() . " " . $lieu->getCity());
 
         $smarty->assign(
-            'events_f', Event::getEvents(
+            'events_f', Event::find(
                 [
+                    'id_lieu' => $lieu->getIdLieu(),
                     'online' => true,
-                    'limit'  => 500,
                     'datdeb' => date('Y-m-d H:i:s'),
-                    'lieu'   => $lieu->getId(),
-                    'sort'   => 'date',
-                    'sens'   => 'ASC',
+                    'order_by' => 'date',
+                    'sort' => 'ASC',
+                    'limit' => 500,
                 ]
             )
         );
 
         $smarty->assign(
-            'events_p', Event::getEvents(
+            'events_p', Event::find(
                 [
+                    'id_lieu'   => $lieu->getIdLieu(),
                     'online' => true,
-                    'limit'  => 500,
                     'datfin' => date('Y-m-d H:i:s'),
-                    'lieu'   => $lieu->getId(),
-                    'sort'   => 'date',
-                    'sens'   => 'DESC',
+                    'order_by'   => 'date',
+                    'sort'   => 'DESC',
+                    'limit'  => 500,
                 ]
             )
         );
 
         $smarty->assign(
-            'photos', Photo::getPhotos(
+            'photos', Photo::find(
                 [
-                    'lieu'   => $lieu->getId(),
+                    'id_lieu' => $lieu->getIdLieu(),
                     'online' => true,
-                    'limit'  => 100,
-                    'sort'   => 'random',
+                    'order_by' => 'random',
+                    'limit' => 100,
                 ]
             )
         );
 
         $smarty->assign(
-            'audios', Audio::getAudios(
+            'audios', Audio::find(
                 [
-                    'lieu'   => $lieu->getId(),
+                    'id_lieu' => $lieu->getIdLieu(),
                     'online' => true,
-                    'sort'   => 'random',
+                    'order_by' => 'random',
                 ]
             )
         );
 
         $smarty->assign(
-            'videos', Video::getVideos(
+            'videos', Video::find(
                 [
-                    'lieu'   => $lieu->getId(),
+                    'id_lieu' => $lieu->getIdLieu(),
                     'online' => true,
-                    'limit'  => 80,
-                    'sort'   => 'random',
+                    'order_by' => 'random',
+                    'limit' => 80,
                 ]
             )
         );
 
         /*
         $smarty->assign(
-            'comments', Comment::getComments(
+            'comments', Comment::find(
                 [
-                    'type'       => 'l',
-                    'id_content' => $lieu->getId(),
-                    'online'     => true,
-                    'sort'       => 'created_on',
-                    'sens'       => 'ASC',
+                    'id_type' => 'l',
+                    'id_content' => $lieu->getIdLieu(),
+                    'online' => true,
+                    'order_by' => 'created_on',
+                    'sort' => 'ASC',
                 ]
             )
         );

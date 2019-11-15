@@ -76,7 +76,7 @@ class Video extends Media
     /**
      * Instance de l'objet
      *
-     * @var mixed
+     * @var object
      */
     protected static $_instance = null;
 
@@ -236,17 +236,7 @@ class Video extends Media
      */
     function getUrl(): ?string
     {
-        return self::getUrlById($this->getId());
-    }
-
-    /**
-     * @param int $id_video id_video
-     *
-     * @return string
-     */
-    static function getUrlById(int $id_video): string
-    {
-        return HOME_URL . '/videos/' . (string) $id_video;
+        return HOME_URL . '/videos/' . $this->getIdVideo();
     }
 
     /**
@@ -398,142 +388,6 @@ class Video extends Media
     {
         // @TODO à implémenter
         return [];
-    }
-
-    /**
-     * Recherche des vidéos en fonction de critères donnés
-     *
-     * @param array $params ['groupe']    => "5"
-     *                      ['structure'] => "1,3"
-     *                      ['lieu']      => "1"
-     *                      ['event']     => "1"
-     *                      ['id']        => "3"
-     *                      ['sort']      => "id_video|date|random"
-     *                      ['sens']      => "ASC"
-     *                      ['debut']     => 0
-     *                      ['limit']     => 10
-     *
-     * @return array
-     */
-    static function getVideos(array $params = []): array
-    {
-        $debut = 0;
-        if (isset($params['debut'])) {
-            $debut = (int) $params['debut'];
-        }
-
-        $limit = 10;
-        if (!empty($params['limit'])) {
-            $limit = (int) $params['limit'];
-        }
-
-        $sens = 'ASC';
-        if (isset($params['sens']) && $params['sens'] === 'DESC') {
-            $sens = 'DESC';
-        }
-
-        $sort = 'id_video';
-        if (isset($params['sort'])
-            && ($params['sort'] === 'date' || $params['sort'] === 'random')
-        ) {
-            $sort = $params['sort'];
-        }
-
-        $tab_groupe    = [];
-        $tab_structure = [];
-        $tab_lieu      = [];
-        $tab_event     = [];
-        $tab_id        = [];
-        $tab_contact   = [];
-
-        if (array_key_exists('groupe', $params)) {
-            $tab_groupe = explode(',', (string) $params['groupe']);
-        }
-        if (array_key_exists('structure', $params)) {
-            $tab_structure = explode(',', (string) $params['structure']);
-        }
-        if (array_key_exists('lieu', $params)) {
-            $tab_lieu = explode(',', (string) $params['lieu']);
-        }
-        if (array_key_exists('event', $params)) {
-            $tab_event = explode(',', (string) $params['event']);
-        }
-        if (array_key_exists('id', $params)) {
-            $tab_id = explode(',', (string) $params['id']);
-        }
-        if (array_key_exists('contact', $params)) {
-            $tab_contact = explode(',', (string) $params['contact']);
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `v`.`id_video` AS `id`, `v`.`name`, `v`.`online`, `v`.`id_host` AS `host_id`, `v`.`reference`, 'video' AS `type`, "
-             . "`v`.`width`, `v`.`height`, `v`.`created_on`, `v`.`modified_on`, "
-             . "`g`.`id_groupe` AS `groupe_id`, `g`.`name` AS `groupe_name`, `g`.`alias` AS `groupe_alias`, "
-             . "`s`.`id_structure` AS `structure_id`, `s`.`name` AS `structure_name`, "
-             . "`l`.`id_lieu` AS `lieu_id`, `l`.`name` AS `lieu_name`, `l`.`city`, `l`.`id_departement` AS `departement_id`, "
-             . "`e`.`id_event` AS `event_id`, `e`.`name` AS `event_name`, `e`.`date` AS `event_date`, "
-             . "`m`.`id_contact` AS `contact_id`, `m`.`pseudo` "
-             . "FROM (`" . Video::getDbTable() . "` `v`) "
-             . "LEFT JOIN `" . Groupe::getDbTable() . "` `g` ON (`v`.`id_groupe` = `g`.`id_groupe`) "
-             . "LEFT JOIN `" . Structure::getDbTable() . "` `s` ON (`v`.`id_structure` = `s`.`id_structure`) "
-             . "LEFT JOIN `" . Lieu::getDbTable() . "` `l` ON (`v`.`id_lieu` = `l`.`id_lieu`) "
-             . "LEFT JOIN `" . Event::getDbTable() . "` `e` ON (`v`.`id_event` = `e`.`id_event`) "
-             . "LEFT JOIN `" . Membre::getDbTable() . "` `m` ON (`v`.`id_contact` = `m`.`id_contact`) "
-             . "WHERE 1 ";
-
-        if (array_key_exists('online', $params)) {
-            if ($params['online']) {
-                $online = 'TRUE';
-            } else {
-                $online = 'FALSE';
-            }
-            $sql .= "AND `v`.`online` = " . $online . " ";
-        }
-
-        if (count($tab_groupe) && ($tab_groupe[0])) {
-            $sql .= "AND `v`.`id_groupe` IN (" . implode(',', $tab_groupe) . ") ";
-        }
-
-        if (count($tab_structure) && ($tab_structure[0])) {
-            $sql .= "AND `v`.`id_structure` IN (" . implode(',', $tab_structure) . ") ";
-        }
-
-        if (count($tab_lieu) && ($tab_lieu[0])) {
-            $sql .= "AND `v`.`id_lieu` IN (" . implode(',', $tab_lieu) . ") ";
-        }
-
-        if (count($tab_event) && ($tab_event[0])) {
-            $sql .= "AND `v`.`id_event` IN (" . implode(',', $tab_event) . ") ";
-        }
-
-        if (count($tab_id) && ($tab_id[0])) {
-            $sql .= "AND `v`.`id_video` IN (" . implode(',', $tab_id) . ") ";
-        }
-
-        if (count($tab_contact) && ($tab_contact[0])) {
-            $sql .= "AND `v`.`id_contact` IN (" . implode(',', $tab_contact) . ") ";
-        }
-
-        $sql .= "ORDER BY ";
-        if ($sort === "random") {
-            $sql .= "RAND(".time().") ";
-        } else {
-            $sql .= "`v`.`" . $sort . "` " . $sens . " ";
-        }
-        $sql .= "LIMIT " . $debut . ", " . $limit;
-
-        $res_tmp = $db->queryWithFetch($sql);
-        $res = [];
-        foreach ($res_tmp as $idx => $_res) {
-            $res[$idx] = $_res;
-            $res[$idx]['url'] = self::getUrlById((int) $_res['id']);
-            $res[$idx]['thumb_80_80'] = self::getVideoThumbUrl((int) $_res['id'], 80, 80, '000000', false, true);
-            $res[$idx]['thumb_100'] = self::getVideoThumbUrl((int) $_res['id'], 100, 100, '000000', false, true);
-            $res[$idx]['thumb_320'] = self::getVideoThumbUrl((int) $_res['id'], 320, 0);
-        }
-
-        return $res;
     }
 
     /**

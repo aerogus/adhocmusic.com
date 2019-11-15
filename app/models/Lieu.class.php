@@ -19,7 +19,7 @@ class Lieu extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var mixed
+     * @var object
      */
     protected static $_instance = null;
 
@@ -480,19 +480,7 @@ class Lieu extends ObjectModel
      */
     function getUrl(): string
     {
-        return self::getUrlById($this->getId());
-    }
-
-    /**
-     * Retourne l'url d'une fiche lieu à partir de son id
-     *
-     * @param int $id_lieu id_lieu
-     *
-     * @return string
-     */
-    static function getUrlById(int $id_lieu): string
-    {
-        return HOME_URL . '/lieux/' . (string) $id_lieu;
+        return HOME_URL . '/lieux/' . $this->getIdLieu();
     }
 
     /**
@@ -906,88 +894,28 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * Retourne le tableau de tous les lieux dans un tableau associatif
-     * @todo faire comme Photos::getPhotos() <---
-     * filtrage par département possible
-     *
-     * @param array['dep']
-     *             ['city']
-     *             ['cp']
-     *             ['name']
-     *             ['type']
-     *             ['country']
-     *
-     * @return array
-     */
-    static function getLieux($params = []): array
-    {
-        $db = DataBase::getInstance();
-
-        array_key_exists('lat', $_SESSION) ? $lat = $_SESSION['lat'] : $lat = 0;
-        array_key_exists('lng', $_SESSION) ? $lng = $_SESSION['lng'] : $lng = 0;
-
-        $sql = "SELECT "
-             . "COUNT(DISTINCT `e`.`id_event`) AS `nb_events`, "
-             . "`l`.`id_lieu` AS `id`, `l`.`id_type`, `l`.`name`, `l`.`address`, `l`.`cp`, `v`.`cp` AS `cp2`, "
-             . "`l`.`city`, `l`.`id_departement`, `d`.`name` AS `departement`, `l`.`text`, "
-             . "`l`.`site`, `l`.`id_city`, `v`.`name` AS `city2`, `l`.`id_region`, `r`.`name` AS `region`, `l`.`id_country`, `c`.`name` AS `country`, `l`.`created_on`, `l`.`modified_on`, "
-             . "FORMAT(get_distance_metres('" . number_format($lat, 8, '.', '') . "', '" . number_format($lng, 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `distance` "
-             . "FROM (`" . Lieu::getDbTable() . "` `l`, `" . WorldCountry::getDbTable() . "` `c`, `" . WorldRegion::getDbTable() . "` `r`) "
-             . "LEFT JOIN `" . Departement::getDbTable() . "` `d` ON (`l`.`id_departement` = `d`.`id_departement`) "
-             . "LEFT JOIN `" . City::getDbTable() . "` `v` ON (`l`.`id_city` = `v`.`id_city`) "
-             . "LEFT JOIN `" . Event::getDbTable() . "` `e` ON (`l`.`id_lieu` = `e`.`id_lieu`) "
-             . "WHERE 1 "
-             . "AND `l`.`id_country` = `c`.`id_country` "
-             . "AND `l`.`id_region` = `r`.`id_region` "
-             . "AND `l`.`id_country` = `r`.`id_country` ";
-
-        if (array_key_exists('dep', $params)) {
-            $sql .= "AND `l`.`id_departement` = '" . $db->escape($params['dep']) . "' ";
-        }
-        if (array_key_exists('cp', $params)) {
-            $sql .= "AND `l`.`cp` = '" . $db->escape($params['cp']) . "' ";
-        }
-        if (array_key_exists('city', $params)) {
-            $sql .= "AND `l`.`city` LIKE '%" . $db->escape($params['city']) . "%' ";
-        }
-        if (array_key_exists('name', $params)) {
-            $sql .= "AND `l`.`name` LIKE '%" . $db->escape($params['name']) . "%' ";
-        }
-        if (array_key_exists('type', $params)) {
-            $sql .= "AND `l`.`id_type` = " . (int) $params['type'] . " ";
-        }
-        if (array_key_exists('country', $params)) {
-            $sql .= "AND `l`.`id_country` = '" . $db->escape($params['country']) . "' ";
-        }
-
-        $sql .= "GROUP BY `l`.`id_lieu` ";
-        $sql .= "ORDER by `l`.`id_country` ASC, `l`.`id_region` ASC, `l`.`id_departement` ASC, `v`.`name` ASC";
-
-        return $db->queryWithFetch($sql);
-    }
-
-    /**
      * Retourne les lieux d'un département
      *
      * @param string $dep département
+     *
+     * @return array
      */
     static function getLieuxByDep(string $dep = null)
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `id_lieu` AS `id`, `name`, `id_departement`, "
-             . "`address`, `cp`, `city`, `id_city` "
+        $sql = "SELECT `id_lieu`, `id_departement` "
              . "FROM `" . Lieu::getDbTable() . "` "
              . "ORDER BY `id_departement` ASC, `city` ASC, `cp` ASC";
 
         $rows = $db->queryWithFetch($sql);
 
-        $tab  = [];
+        $tab = [];
         foreach (Departement::findAll() as $dep) {
             $tab[$dep->getId()] = [];
         }
         foreach ($rows as $row) {
-            $tab[(string) $row['id_departement']][$row['id']] = $row;
+            $tab[(string) $row['id_departement']][] = Lieu::getInstance((int) $row['id_lieu']);
         }
 
         if (!is_null($dep) && array_key_exists($dep->getId(), $tab)) {
@@ -1008,8 +936,8 @@ class Lieu extends ObjectModel
             throw new Exception('lieu introuvable');
         }
 
-        if (file_exists(self::getBasePath() . '/' . (string) $this->getId() . '.jpg')) {
-            $this->_photo_url = self::getBaseUrl() . '/' . (string) $this->getId() . '.jpg';
+        if (file_exists(self::getBasePath() . '/' . (string) $this->getIdLieu() . '.jpg')) {
+            $this->_photo_url = self::getBaseUrl() . '/' . (string) $this->getIdLieu() . '.jpg';
         }
 
         return true;
@@ -1030,9 +958,9 @@ class Lieu extends ObjectModel
      */
     function getPhotos(): array
     {
-        return Photo::getPhotos(
+        return Photo::find(
             [
-                'lieu' => $this->_id_lieu,
+                'id_lieu' => $this->getIdLieu(),
             ]
         );
     }
@@ -1052,9 +980,9 @@ class Lieu extends ObjectModel
      */
     function getVideos(): array
     {
-        return Video::getVideos(
+        return Video::find(
             [
-                'lieu' => $this->_id_lieu,
+                'id_lieu' => $this->getIdLieu(),
             ]
         );
     }
@@ -1074,9 +1002,9 @@ class Lieu extends ObjectModel
      */
     function getAudios(): array
     {
-        return Audio::getAudios(
+        return Audio::find(
             [
-                'lieu' => $this->_id_lieu,
+                'id_lieu' => $this->getIdLieu(),
             ]
         );
     }
@@ -1096,11 +1024,11 @@ class Lieu extends ObjectModel
      */
     function getEvents(): array
     {
-        return Event::getEvents(
+        return Event::find(
             [
-                'lieu' => $this->_id_lieu,
-                'sort' => 'date',
-                'sens' => 'DESC',
+                'id_lieu' => $this->getIdLieu(),
+                'order_by' => 'date',
+                'sort' => 'DESC',
             ]
         );
     }

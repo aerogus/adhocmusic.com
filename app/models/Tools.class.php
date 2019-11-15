@@ -358,4 +358,26 @@ class Tools
         }
         return $password;
     }
+
+    /**
+     * Retourne l'"alias" d'un nom de groupe ou d'un titre d'article à partir de son nom réel
+     * (= filtre les caratères non url-compliant)
+     *
+     * @param string $name name
+     *
+     * @return string
+     */
+    static function genAlias(string $name): string
+    {
+        $alias = trim($name);
+        $alias = mb_strtolower($alias);
+        $alias = Tools::removeAccents($alias);
+
+        $map_in  = ['/', '+', '|', '.', ' ', "'", '"', '&' , '(', ')', '!'];
+        $map_out = ['' , '' , '' , '' , '' , '' , '' , 'et', '' , '' ,  ''];
+
+        $alias = str_replace($map_in, $map_out, $alias);
+
+        return $alias;
+    }
 }

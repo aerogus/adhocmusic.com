@@ -33,23 +33,23 @@ final class Controller
         }
 
         if ($_SESSION['membre']->getId() === 1) {
-            $audios = Audio::getAudios(
+            $audios = Audio::find(
                 [
-                    'debut'   => $page * NB_AUDIOS_PER_PAGE,
-                    'limit'   => NB_AUDIOS_PER_PAGE,
-                    'sort'    => 'id',
-                    'sens'    => 'ASC',
+                    'start'    => $page * NB_AUDIOS_PER_PAGE,
+                    'limit'    => NB_AUDIOS_PER_PAGE,
+                    'order_by' => 'id_audio',
+                    'sort'     => 'ASC',
                 ]
             );
             $nb_audios = Audio::count();
         } else {
-            $audios = Audio::getAudios(
+            $audios = Audio::find(
                 [
-                    'contact' => $_SESSION['membre']->getId(),
-                    'debut'   => $page * NB_AUDIOS_PER_PAGE,
-                    'limit'   => NB_AUDIOS_PER_PAGE,
-                    'sort'    => 'id',
-                    'sens'    => 'ASC',
+                    'id_contact' => $_SESSION['membre']->getId(),
+                    'start'      => $page * NB_AUDIOS_PER_PAGE,
+                    'limit'      => NB_AUDIOS_PER_PAGE,
+                    'order_by'   => 'id_audio',
+                    'sort'       => 'ASC',
                 ]
             );
             $nb_audios = Audio::countMy();
@@ -112,24 +112,24 @@ final class Controller
             $smarty->assign('event', $event);
             $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysql_datetime($event->getDate(), "d/m/Y") . ")";
             $smarty->assign(
-                'photos', Photo::getPhotos(
+                'photos', Photo::find(
                     [
-                        'event'  => $event->getId(),
-                        'groupe' => $audio->getIdGroupe(),
+                        'id_event' => $event->getIdEvent(),
+                        'id_groupe' => $audio->getIdGroupe(),
                         'online' => true,
-                        'sort'   => 'random',
-                        'limit'  => 100,
+                        'order_by' => 'random',
+                        'limit' => 100,
                     ]
                 )
             );
             $smarty->assign(
-                'videos', Video::getVideos(
+                'videos', Video::find(
                     [
-                        'event'  => $event->getId(),
-                        'groupe' => $audio->getIdGroupe(),
+                        'id_event' => $event->getIdEvent(),
+                        'id_groupe' => $audio->getIdGroupe(),
                         'online' => true,
-                        'sort'   => 'random',
-                        'limit'  => 100,
+                        'order_by' => 'random',
+                        'limit' => 100,
                     ]
                 )
             );
@@ -149,13 +149,13 @@ final class Controller
         $smarty->assign('audio', $audio);
 
         $smarty->assign(
-            'comments', Comment::getComments(
+            'comments', Comment::find(
                 [
-                    'type'       => 's',
-                    'id_content' => $audio->getId(),
-                    'online'     => true,
-                    'sort'       => 'created_on',
-                    'sens'       => 'ASC',
+                    'id_type' => 's',
+                    'id_content' => $audio->getIdAudio(),
+                    'online' => true,
+                    'order_by' => 'created_on',
+                    'sort' => 'ASC',
                 ]
             )
         );
@@ -245,14 +245,14 @@ final class Controller
             $lieu = Lieu::getInstance($id_lieu);
             $smarty->assign('lieu', $lieu);
             $smarty->assign(
-                'events', Event::getEvents(
+                'events', Event::find(
                     [
                         'online' => true,
                         'datfin' => date('Y-m-d H:i:s'),
-                        'lieu'   => $lieu->getId(),
-                        'sort'   => 'date',
-                        'sens'   => 'ASC',
-                        'limit'  => 100,
+                        'id_lieu' => $lieu->getIdLieu(),
+                        'order_by' => 'date',
+                        'sort' => 'ASC',
+                        'limit' => 100,
                     ]
                 )
             );

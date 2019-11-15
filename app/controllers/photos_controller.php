@@ -32,13 +32,13 @@ final class Controller
         $smarty->assign('edit', (bool) Route::params('edit'));
         $smarty->assign('delete', (bool) Route::params('delete'));
 
-        $photos = Photo::getPhotos(
+        $photos = Photo::find(
             [
-                'contact' => $_SESSION['membre']->getId(),
-                'limit'   => NB_PHOTOS_PER_PAGE,
-                'debut'   => $page * NB_PHOTOS_PER_PAGE,
-                'sort'    => 'id',
-                'sens'    => 'ASC',
+                'id_contact' => $_SESSION['membre']->getIdContact(),
+                'order_by' => 'id_photo',
+                'sort' => 'ASC',
+                'start' => $page * NB_PHOTOS_PER_PAGE,
+                'limit' => NB_PHOTOS_PER_PAGE,
             ]
         );
         $nb_photos = Photo::countMy();
@@ -128,14 +128,14 @@ final class Controller
 
             // photo issu d'un album live ?
             if ($photo->getIdEvent() && $photo->getIdLieu()) {
-                $playlist = Photo::getPhotos(
+                $playlist = Photo::find(
                     [
                         'online' => true,
-                        'event'  => $photo->getIdEvent(),
-                        'lieu'   => $photo->getIdLieu(),
-                        'sort'   => 'id',
-                        'sens'   => 'ASC',
-                        'limit'  => 200,
+                        'id_event' => $photo->getIdEvent(),
+                        'id_lieu' => $photo->getIdLieu(),
+                        'order_by' => 'id_photo',
+                        'sort' => 'ASC',
+                        'limit' => 200,
                     ]
                 );
 
@@ -143,7 +143,7 @@ final class Controller
                 $idx = 0;
                 $count = count($playlist);
                 foreach ($playlist as $_idx => $_playlist) {
-                    if ((int) $_playlist['id'] === (int) $photo->getId()) {
+                    if ($_playlist->getIdPhoto() === $photo->getIdPhoto()) {
                         $idx_photo = $_idx;
                         if ($_idx < ($count - 1)) {
                             $next = $_idx + 1;
@@ -157,8 +157,8 @@ final class Controller
                         }
                     }
                 }
-                $smarty->assign('next', Photo::getUrlById((int) $playlist[$next]['id']));
-                $smarty->assign('prev', Photo::getUrlById((int) $playlist[$prev]['id']));
+                $smarty->assign('next', $playlist[$next]->getUrl());
+                $smarty->assign('prev', $playlist[$prev]->getUrl());
 
                 $smarty->assign('idx_photo', $idx_photo + 1);
                 $smarty->assign('nb_photos', $count);
@@ -170,13 +170,13 @@ final class Controller
             $smarty->assign('description', $meta_description);
 
             $smarty->assign(
-                'comments', Comment::getComments(
+                'comments', Comment::find(
                     [
-                        'type'       => 'p',
-                        'id_content' => $photo->getId(),
-                        'online'     => true,
-                        'sort'       => 'created_on',
-                        'sens'       => 'ASC',
+                        'id_type' => 'p',
+                        'id_content' => $photo->getIdPhoto(),
+                        'online' => true,
+                        'order_by' => 'created_on',
+                        'sort' => 'ASC',
                     ]
                 )
             );
@@ -284,14 +284,14 @@ final class Controller
             $lieu = Lieu::getInstance($id_lieu);
             $smarty->assign('lieu', $lieu);
             $smarty->assign(
-                'events', Event::getEvents(
+                'events', Event::find(
                     [
                         'online' => true,
                         'datfin' => date('Y-m-d H:i:s'),
-                        'lieu'   => $lieu->getId(),
-                        'sort'   => 'date',
-                        'sens'   => 'ASC',
-                        'limit'  => 100,
+                        'id_lieu' => $lieu->getIdLieu(),
+                        'order_by' => 'date',
+                        'sort' => 'ASC',
+                        'limit' => 100,
                     ]
                 )
             );
@@ -370,10 +370,10 @@ final class Controller
                         ->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg')
                         ->write();
 
-                    Photo::invalidatePhotoInCache($photo->getId(),  80,  80, '000000', false,  true);
-                    Photo::invalidatePhotoInCache($photo->getId(), 130, 130, '000000', false, false);
-                    Photo::invalidatePhotoInCache($photo->getId(), 400, 300, '000000', false, false);
-                    Photo::invalidatePhotoInCache($photo->getId(), 680, 600, '000000', false, false);
+                    Photo::invalidatePhotoInCache($photo->getIdPhoto(),  80,  80, '000000', false,  true);
+                    Photo::invalidatePhotoInCache($photo->getIdPhoto(), 130, 130, '000000', false, false);
+                    Photo::invalidatePhotoInCache($photo->getIdPhoto(), 400, 300, '000000', false, false);
+                    Photo::invalidatePhotoInCache($photo->getIdPhoto(), 680, 600, '000000', false, false);
                 }
 
                 if ($photo->save()) {

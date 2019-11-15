@@ -14,7 +14,7 @@ class Comment extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var mixed
+     * @var object
      */
     protected static $_instance = null;
 
@@ -246,17 +246,7 @@ class Comment extends ObjectModel
      */
     function getUrl(): string
     {
-        return self::getUrlById($this->getId());
-    }
-
-    /**
-     * @param int $id_comment id_comment
-     *
-     * @return string
-     */
-    static function getUrlById(int $id_comment): string
-    {
-        return HOME_URL . '/comments/' . (string) $id_comment;
+        return HOME_URL . '/comments/' . $this->getIdComment();
     }
 
     /* fin getters */
@@ -475,93 +465,6 @@ class Comment extends ObjectModel
     {
         // @TODO à implémenter
         return [];
-    }
-
-    /**
-     * @param array $params params
-     *
-     * @return array
-     */
-    static function getComments(array $params = [])
-    {
-        $debut = 0;
-        if (isset($params['debut'])) {
-            $debut = (int) $params['debut'];
-        }
-
-        $limit = null;
-        if (isset($params['limit'])) {
-            $limit = (int) $params['limit'];
-        }
-
-        $tab_type = [];
-        if (array_key_exists('type', $params)) {
-            $tab_type = explode(",", $params['type']);
-        }
-
-        $sens = 'ASC';
-        if (isset($params['sens']) && $params['sens'] === 'DESC') {
-            $sens = 'DESC';
-        }
-
-        $sort = 'id_comment';
-        if (isset($params['sort'])
-            && ($params['sort'] === 'created_on' || $params['sort'] === 'online')
-        ) {
-            $sort = $params['sort'];
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `com`.`id_comment` AS `id`, `com`.`type`, `com`.`id_content`, `com`.`created_on`, `com`.`modified_on`, `com`.`online`, "
-             . "`com`.`id_contact`, `mbr`.`pseudo` AS `pseudo_mbr`, `com`.`pseudo`, `com`.`email`, `com`.`text`, `cnt`.`email` AS `email_mbr` "
-             . "FROM `" . Comment::getDbTable() . "` `com` "
-             . "LEFT JOIN `" . Membre::getDbTable() . "` `mbr` ON (`com`.`id_contact` = `mbr`.`id_contact`) "
-             . "LEFT JOIN `" . Contact::getDbTable() . "` `cnt` ON (`mbr`.`id_contact` = `cnt`.`id_contact`) "
-             . "WHERE 1 ";
-
-        if (count($tab_type) && ($tab_type[0] != '')) {
-            $sql .= "AND `com`.`type` IN ('" . implode("','", $tab_type) . "') ";
-        }
-
-        if (array_key_exists('id_contact', $params)) {
-            $sql .= "AND `com`.`id_contact` = " . (int) $params['id_contact'] . " ";
-        }
-        if (array_key_exists('id_content', $params)) {
-            $sql .= "AND `com`.`id_content` = " . (int) $params['id_content'] . " ";
-        }
-        if (array_key_exists('online', $params)) {
-            if ($params['online']) {
-                $online = 'TRUE';
-            } else {
-                $online = 'FALSE';
-            }
-            $sql .= "AND `com`.`online` = " . $online . " ";
-        }
-
-        $sql .= "ORDER BY ";
-        if ($sort === "random") {
-            $sql .= "RAND(" . time() . ") ";
-        } else {
-            $sql .= "`com`.`" . $sort . "` " . $sens . " ";
-        }
-
-        if (!is_null($limit)) {
-            $sql .= "LIMIT " . $debut . ", " . $limit;
-        }
-
-        $res = $db->queryWithFetch($sql);
-
-        foreach ($res as $idx => $row) {
-            $res[$idx]['url'] = self::getUrlById((int) $row['id']);
-            $res[$idx]['type_full'] = self::$_types[$row['type']];
-        }
-
-        if ($limit === 1) {
-            $res = array_pop($res);
-        }
-
-        return $res;
     }
 
     /**

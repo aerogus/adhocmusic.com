@@ -14,7 +14,7 @@ class Photo extends Media
     /**
      * Instance de l'objet
      *
-     * @var mixed
+     * @var object
      */
     protected static $_instance = null;
 
@@ -101,17 +101,7 @@ class Photo extends Media
      */
     function getUrl(): string
     {
-        return self::getUrlById($this->getId());
-    }
-
-    /**
-     * @param int $id_photo id_photo
-     *
-     * @return string
-     */
-    static function getUrlById(int $id_photo): string
-    {
-        return HOME_URL . '/photos/' . (string) $id_photo;
+        return HOME_URL . '/photos/' . $this->getIdPhoto();
     }
 
     /* fin getters */
@@ -168,148 +158,6 @@ class Photo extends Media
     {
         // @TODO à implémenter
         return [];
-    }
-
-    /**
-     * Recherche des photos en fonction de critères donnés
-     *
-     * @param array $params ['groupe']    => "5"
-     *                      ['structure'] => "1,3"
-     *                      ['lieu']      => "1"
-     *                      ['event']     => "1"
-     *                      ['id']        => "3"
-     *                      ['contact']   => "1"
-     *                      ['sort']      => "id_photo|date|random"
-     *                      ['sens']      => "ASC"
-     *                      ['debut']     => 0
-     *                      ['limit']     => 10
-     *
-     * @return array
-     */
-    static function getPhotos(array $params = []): array
-    {
-        $debut = 0;
-        if (isset($params['debut'])) {
-            $debut = (int) $params['debut'];
-        }
-
-        $limit = 10;
-        if (isset($params['limit'])) {
-            $limit = (int) $params['limit'];
-        }
-
-        $sens = 'ASC';
-        if (isset($params['sens']) && $params['sens'] === 'DESC') {
-            $sens = 'DESC';
-        }
-
-        $sort = 'id_photo';
-        if (isset($params['sort'])
-            && ($params['sort'] === 'created_on' || $params['sort'] === 'random')
-        ) {
-            $sort = $params['sort'];
-        }
-
-        $tab_groupe    = [];
-        $tab_structure = [];
-        $tab_lieu      = [];
-        $tab_event     = [];
-        $tab_id        = [];
-        $tab_contact   = [];
-
-        if (array_key_exists('groupe', $params)) {
-            $tab_groupe = explode(',', (string) $params['groupe']);
-        }
-        if (array_key_exists('structure', $params)) {
-            $tab_structure = explode(',', (string) $params['structure']);
-        }
-        if (array_key_exists('lieu', $params)) {
-            $tab_lieu = explode(',', (string) $params['lieu']);
-        }
-        if (array_key_exists('event', $params)) {
-            $tab_event = explode(',', (string) $params['event']);
-        }
-        if (array_key_exists('id', $params)) {
-            $tab_id = explode(',', (string) $params['id']);
-        }
-        if (array_key_exists('contact', $params)) {
-            $tab_contact = explode(',', (string) $params['contact']);
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `p`.`id_photo` AS `id`, `p`.`name`, `p`.`credits`, `p`.`online`, `p`.`created_on`, 'photo' AS `type`, "
-             . "`g`.`id_groupe` AS `groupe_id`, `g`.`name` AS `groupe_name`, `g`.`alias` AS `groupe_alias`, "
-             . "`s`.`id_structure` AS `structure_id`, `s`.`name` AS `structure_name`, "
-             . "`l`.`id_lieu` AS `lieu_id`, `l`.`id_departement` AS `departement_id`, `l`.`name` AS `lieu_name`, `l`.`city`, "
-             . "`e`.`id_event` AS `event_id`, `e`.`name` AS `event_name`, `e`.`date` AS `event_date`, "
-             . "`m`.`id_contact` AS `contact_id`, `m`.`pseudo` "
-             . "FROM (`" . Photo::getDbTable() . "` `p`) "
-             . "LEFT JOIN `" . Groupe::getDbTable() . "` `g` ON (`p`.`id_groupe` = `g`.`id_groupe`) "
-             . "LEFT JOIN `" . Structure::getDbTable() . "` `s` ON (`p`.`id_structure` = `s`.`id_structure`) "
-             . "LEFT JOIN `" . Lieu::getDbTable() . "` `l` ON (`p`.`id_lieu` = `l`.`id_lieu`) "
-             . "LEFT JOIN `" . Event::getDbTable() . "` `e` ON (`p`.`id_event` = `e`.`id_event`) "
-             . "LEFT JOIN `" . Membre::getDbTable() . "` `m` ON (`p`.`id_contact` = `m`.`id_contact`) "
-             . "WHERE 1 ";
-
-        if (array_key_exists('online', $params)) {
-            if ($params['online']) {
-                $online = 'TRUE';
-            } else {
-                $online = 'FALSE';
-            }
-            $sql .= "AND `p`.`online` = " . $online . " ";
-        }
-
-        if (count($tab_groupe) && $tab_groupe[0] != 0) {
-            $sql .= "AND `p`.`id_groupe` IN (" . implode(',', $tab_groupe) . ") ";
-        }
-
-        if (count($tab_structure) && $tab_structure[0] != 0) {
-            $sql .= "AND `p`.`id_structure` IN (" . implode(',', $tab_structure) . ") ";
-        }
-
-        if (count($tab_lieu) && $tab_lieu[0] != 0) {
-            $sql .= "AND `p`.`id_lieu` IN (" . implode(',', $tab_lieu) . ") ";
-        }
-
-        if (count($tab_event) && $tab_event[0] != 0) {
-            $sql .= "AND `p`.`id_event` IN (" . implode(',', $tab_event) . ") ";
-        }
-
-        if (count($tab_id) && ($tab_id[0] != 0)) {
-            $sql .= "AND `p`.`id_photo` IN (" . implode(',', $tab_id) . ") ";
-        }
-
-        if (count($tab_contact) && ($tab_contact[0] != 0)) {
-            $sql .= "AND `p`.`id_contact` IN (" . implode(',', $tab_contact) . ") ";
-        }
-
-        $sql .= "ORDER BY ";
-        if ($sort === "random") {
-            $sql .= "RAND(" . time() . ") ";
-        } else {
-            $sql .= "`p`.`" . $sort . "` " . $sens . " ";
-        }
-        $sql .= "LIMIT " . $debut . ", " . $limit;
-
-        $tab = [];
-
-        $cpt = 0;
-        if ($res = $db->queryWithFetch($sql)) {
-            foreach ($res as $_res) {
-                $tab[$cpt] = $_res;
-                $tab[$cpt]['url'] = Photo::getUrlById((int) $_res['id']);
-                // @TODO /!\ getPhotoUrl génère la miniature si non existante, très lourd! à optimiser
-                $tab[$cpt]['thumb_80_80']   = Photo::getPhotoUrl((int) $_res['id'],   80,  80, '000000', false,  true);
-                $tab[$cpt]['thumb_320']     = Photo::getPhotoUrl((int) $_res['id'],  320,   0, '000000', false, false);
-                $tab[$cpt]['thumb_680_600'] = Photo::getPhotoUrl((int) $_res['id'],  680, 600, '000000', false, false);
-                $tab[$cpt]['thumb_1000']    = Photo::getPhotoUrl((int) $_res['id'], 1000,   0, '000000', false, false);
-                $cpt++;
-            }
-        }
-
-        return $tab;
     }
 
     /**

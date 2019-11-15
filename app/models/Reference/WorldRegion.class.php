@@ -15,7 +15,7 @@ class WorldRegion extends \Reference
     /**
      * Instance de l'objet
      *
-     * @var mixed
+     * @var object
      */
     protected static $_instance = null;
 

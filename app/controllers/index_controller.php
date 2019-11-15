@@ -28,12 +28,12 @@ final class Controller
         $smarty->assign('og_image', HOME_URL . '/img/screenshot-homepage.jpg');
 
         $smarty->assign(
-            'videos', Video::getVideos(
+            'videos', Video::find(
                 [
+                    'id_lieu' => 1,
                     'online' => true,
-                    'sort'   => 'random',
-                    'lieu'   => 1,
-                    'limit'  => 6,
+                    'order_by' => 'random',
+                    'limit' => 6,
                 ]
             )
         );
@@ -42,28 +42,27 @@ final class Controller
         $smarty->enqueue_script('/js/swipe.min.js');
         $smarty->enqueue_script('/js/featured.js');
 
-        $events = Event::getEvents(
+        $events = Event::find(
             [
-                'online' => true,
-                'sort'   => 'date',
-                'sens'   => 'ASC',
-                'limit'  => 30,
                 'datdeb' => date('Y-m-d'),
+                'online' => true,
+                'order_by' => 'date',
+                'sort' => 'ASC',
+                'limit' => 30,
             ]
         );
 
         // tri par mois
         $evts = [];
         foreach ($events as $event) {
-            $month = substr($event['date'], 0, 7) . '-01';
+            $month = substr($event->getDate(), 0, 7) . '-01';
             if (!array_key_exists($month, $evts)) {
                 $evts[$month] = [];
             }
             $evts[$month][] = $event;
         }
         $smarty->assign('evts', $evts);
-
-        $smarty->assign('events', $events);
+        $smarty->assign('events', $events); // utile ?
 
         return $smarty->fetch('index.tpl');
     }
@@ -206,23 +205,21 @@ final class Controller
         );
 
         $smarty->assign(
-            'lieux', Lieu::getLieux(
+            'lieux', Lieu::find(
                 [
-                    'sort'   => 'id',
-                    'sens'   => 'ASC',
                     'online' => true,
-                    'limit'  => false,
+                    'order_by' => 'id_lieu',
+                    'sort' => 'ASC',
                 ]
             )
         );
 
         $smarty->assign(
-            'events', Event::getEvents(
+            'events', Event::find(
                 [
-                    'sort'   => 'id',
-                    'sens'   => 'ASC',
                     'online' => true,
-                    'limit'  => false,
+                    'order_by' => 'id_event',
+                    'sort' => 'ASC',
                 ]
             )
         );

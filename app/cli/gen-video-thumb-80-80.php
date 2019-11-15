@@ -10,19 +10,19 @@ require_once __DIR__ . '/../bootstrap.php';
 
 echo "nb vidéos : " . Video::count() . "\n";
 
-$videos = Video::getVideos(
+$videos = Video::find(
     [
         'online' => true,
-        'sort' => 'id_video',
-        'sens' => 'ASC',
+        'order_by' => 'id_video',
+        'sort' => 'ASC',
         'limit' => 2500,
     ]
 );
 
 foreach ($videos as $video) {
-    Video::invalidateVideoThumbInCache($video['id'], 80, 80, '000000', false, true);
-    $url = Video::getVideoThumbUrl($video['id'], 80, 80, '000000', false, true);
-    echo $video['id'] . " - " . $url . "\n";
+    Video::invalidateVideoThumbInCache($video->getIdVideo(), 80, 80, '000000', false, true);
+    $url = Video::getVideoThumbUrl($video->getIdVideo(), 80, 80, '000000', false, true);
+    echo $video->getIdVideo() . " - " . $url . "\n";
     flush();
 }
 

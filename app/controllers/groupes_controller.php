@@ -100,22 +100,22 @@ final class Controller
         $smarty->assign('is_loggued', !empty($_SESSION['membre']));
 
         $smarty->assign(
-            'videos', Video::getVideos(
+            'videos', Video::find(
                 [
+                    'id_groupe' => $groupe->getIdGroupe(),
                     'online' => true,
-                    'groupe' => (int) $groupe->getId(),
-                    'limit'  => 30,
+                    'limit' => 30,
                 ]
             )
         );
 
-        $audios = Audio::getAudios(
+        $audios = Audio::find(
             [
-                'groupe' => (int) $groupe->getId(),
+                'id_groupe' => $groupe->getIdGroupe(),
                 'online' => true,
-                'limit'  => 30,
-                'sort'   => 'id_audio',
-                'sens'   => 'DESC',
+                'order_by' => 'id_audio',
+                'sort' => 'DESC',
+                'limit' => 30,
             ]
         );
 
@@ -130,40 +130,40 @@ final class Controller
         }
 
         $smarty->assign(
-            'photos', Photo::getPhotos(
+            'photos', Photo::find(
                 [
-                    'sort'   => 'random',
-                    'limit'  => 100,
-                    'groupe' => (int) $groupe->getId(),
+                    'id_groupe' => $groupe->getIdGroupe(),
                     'online' => true,
+                    'order_by' => 'random',
+                    'limit' => 100,
                 ]
             )
         );
 
         // concerts à venir
         $smarty->assign(
-            'f_events', Event::getEvents(
+            'f_events', Event::find(
                 [
+                    'id_groupe' => $groupe->getIdGroupe(),
                     'datdeb' => date('Y-m-d H:i:s'),
-                    'sort'   => 'date',
-                    'sens'   => 'ASC',
-                    'groupe' => (int) $groupe->getId(),
                     'online' => true,
-                    'limit'  => 50,
+                    'order_by' => 'date',
+                    'sort' => 'ASC',
+                    'limit' => 50,
                 ]
             )
         );
 
         // concerts passés
         $smarty->assign(
-            'p_events', Event::getEvents(
+            'p_events', Event::find(
                 [
+                    'id_groupe' => $groupe->getIdGroupe(),
                     'datfin' => date('Y-m-d H:i:s'),
-                    'sort'   => 'date',
-                    'sens'   => 'DESC',
-                    'groupe' => (int) $groupe->getId(),
                     'online' => true,
-                    'limit'  => 50,
+                    'order_by' => 'date',
+                    'sort' => 'DESC',
+                    'limit' => 50,
                 ]
             )
         );
@@ -233,7 +233,7 @@ final class Controller
 
                 $groupe = (new Groupe())
                     ->setName($data['name'])
-                    ->setAlias(Groupe::genAlias($data['name']))
+                    ->setAlias(Tools::genAlias($data['name']))
                     ->setStyle($data['style'])
                     ->setInfluences($data['influences'])
                     ->setLineup($data['lineup'])

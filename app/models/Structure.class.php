@@ -11,7 +11,7 @@ class Structure extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var mixed
+     * @var object
      */
     protected static $_instance = null;
 
@@ -412,9 +412,9 @@ class Structure extends ObjectModel
      */
     function getPhotos(): array
     {
-        return Photo::getPhotos(
+        return Photo::find(
             [
-                'structure' => $this->_id_structure,
+                'id_structure' => $this->getIdStructure(),
             ]
         );
     }
@@ -434,9 +434,9 @@ class Structure extends ObjectModel
      */
     function getVideos(): array
     {
-        return Video::getVideos(
+        return Video::find(
             [
-                'structure' => $this->_id_structure,
+                'id_structure' => $this->getIdStructure(),
             ]
         );
     }
@@ -456,9 +456,9 @@ class Structure extends ObjectModel
      */
     function getAudios(): array
     {
-        return Audio::getAudios(
+        return Audio::find(
             [
-                'structure' => $this->_id_structure,
+                'id_structure' => $this->getIdStructure(),
             ]
         );
     }
@@ -478,9 +478,9 @@ class Structure extends ObjectModel
      */
     function getEvents(): array
     {
-        return Event::getEvents(
+        return Event::find(
             [
-                'structure' => $this->_id_structure,
+                'id_structure' => $this->getIdStructure(),
             ]
         );
     }

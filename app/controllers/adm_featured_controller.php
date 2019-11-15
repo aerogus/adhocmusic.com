@@ -95,13 +95,13 @@ final class Controller
 
         $smarty->assign('data', $data);
         $smarty->assign(
-            'events', Event::getEvents(
+            'events', Event::find(
                 [
                     'online' => true,
                     'datdeb' => date('Y-m-d H:i:s'),
-                    'sort'   => 'date',
-                    'sens'   => 'ASC',
-                    'limit'  => 500,
+                    'order_by' => 'date',
+                    'sort' => 'ASC',
+                    'limit' => 500,
                 ]
             )
         );

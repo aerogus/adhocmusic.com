@@ -13,7 +13,7 @@ class Membre extends Contact
     /**
      * Instance de l'objet
      *
-     * @var mixed
+     * @var object
      */
     protected static $_instance = null;
 
@@ -463,19 +463,7 @@ class Membre extends Contact
      */
     function getUrl(): string
     {
-        return self::getUrlById($this->getIdContact());
-    }
-
-    /**
-     * Retourne l'url de la fiche d'un membre AD'HOC
-     *
-     * @param int $id_contact id_contact
-     *
-     * @return string
-     */
-    static function getUrlById(int $id_contact): string
-    {
-        return HOME_URL . '/membres/' . (string) $id_contact;
+        return HOME_URL . '/membres/' . $this->getIdContact();
     }
 
     /**
@@ -487,7 +475,7 @@ class Membre extends Contact
 
             $this->_groupes = Groupe::find(
                 [
-                    'id_contact' => (int) $this->getId(),
+                    'id_contact' => $this->getIdContact(),
                     'online' => true,
                     'order_by' => 'alias',
                     'sort' => 'ASC',
