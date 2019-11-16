@@ -1052,6 +1052,7 @@ class Groupe extends ObjectModel
      *
      * @param array $params [
      *                      'id_contact' => int,
+     *                      'id_event' => int,
      *                      'alias' => string,
      *                      'facebook_page_id' => string,
      *                      'online' => bool,
@@ -1072,6 +1073,15 @@ class Groupe extends ObjectModel
 
         if (isset($params['id_contact'])) {
             $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'] . " ";
+            if ($ids_groupe = $db->queryWithFetchFirstFields($subSql)) {
+                $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
+            } else {
+                return $objs;
+            }
+        }
+
+        if (isset($params['id_event'])) {
+            $subSql = "SELECT `id_groupe` FROM `adhoc_participe_a` WHERE `id_event` = " . (int) $params['id_event'] . " ";
             if ($ids_groupe = $db->queryWithFetchFirstFields($subSql)) {
                 $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
             } else {
@@ -1281,7 +1291,7 @@ class Groupe extends ObjectModel
             $audio->setIdGroupe(null)->save();
         }
 
-        return count($audio);
+        return count($audios);
     }
 
     /**

@@ -132,8 +132,8 @@
   <div class="reset gallery">
   {foreach from=$photos item=photo}
     <div class="photo">
-      <a href="{$photo->getThumb1000Url()}" data-at-1000="{$photo->getThumb1000Url()}" title="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
-        <img src="{$photo->getThumb320Url()}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
+      <a href="{$photo->getThumbUrl(1000)}" data-at-1000="{$photo->getThumbUrl(1000)}" title="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
+        <img src="{$photo->getThumbUrl(320)}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
       </a>
     </div>
   {/foreach}

@@ -294,7 +294,7 @@ class Lieu extends ObjectModel
      */
     function getDepartement(): string
     {
-        return Departement::getInstance($this->_id_departement)->getName();
+        return Departement::getInstance($this->getIdDepartement())->getName();
     }
 
     /**

@@ -34,6 +34,9 @@ final class Controller
         return $smarty->fetch('groupes/index.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function my(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
@@ -109,17 +112,17 @@ final class Controller
             )
         );
 
-        $audios = Audio::find(
-            [
-                'id_groupe' => $groupe->getIdGroupe(),
-                'online' => true,
-                'order_by' => 'id_audio',
-                'sort' => 'DESC',
-                'limit' => 30,
-            ]
+        $smarty->assign(
+            'audios', Audio::find(
+                [
+                    'id_groupe' => $groupe->getIdGroupe(),
+                    'online' => true,
+                    'order_by' => 'id_audio',
+                    'sort' => 'DESC',
+                    'limit' => 30,
+                ]
+            )
         );
-
-        $smarty->assign('audios', $audios);
 
         $smarty->assign('og_image', $groupe->getMiniPhoto());
 

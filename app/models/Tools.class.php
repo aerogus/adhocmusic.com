@@ -373,11 +373,10 @@ class Tools
         $alias = mb_strtolower($alias);
         $alias = Tools::removeAccents($alias);
 
-        $map_in  = ['/', '+', '|', '.', ' ', "'", '"', '&' , '(', ')', '!'];
-        $map_out = ['' , '' , '' , '' , '' , '' , '' , 'et', '' , '' ,  ''];
-
-        $alias = str_replace($map_in, $map_out, $alias);
-
-        return $alias;
+        return str_replace(
+            ['/', '+', '|', '.', ' ', "'", '"',  '&', '(', ')', '!', '°'],
+            [ '',  '',  '',  '',  '',  '',  '', 'et',  '',  '',  '',  ''],
+            $alias
+        );
     }
 }

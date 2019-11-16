@@ -102,12 +102,14 @@ abstract class ObjectModel
                     $pk = '_' . $field;
                     $this->$pk = $id[$field];
                 }
-                $this->_object_id = get_called_class() . ':' . implode(':', array_values($id)); // ex: WorldRegion:FR:96
+                $this->loadObjectId();
+                //$this->_object_id = get_called_class() . ':' . implode(':', array_values($id)); // ex: WorldRegion:FR:96
             } else {
                 // clé primaire simple
                 $pk = '_' . static::$_pk;
                 $this->$pk = $id;
-                $this->_object_id = get_called_class() . ':' . (string) $id; // ex: Membre:1234
+                $this->loadObjectId();
+                //$this->_object_id = get_called_class() . ':' . (string) $id; // ex: Membre:1234
             }
 
             if (static::isCachable() && $this->_loadFromCache()) {
@@ -317,6 +319,7 @@ abstract class ObjectModel
             $db->query($sql);
 
             $this->setId((int) $db->insertId());
+            $this->loadObjectId();
 
             if (self::isCachable()) {
                 ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
@@ -472,6 +475,27 @@ abstract class ObjectModel
         }
 
         return $objs;
+    }
+
+    /**
+     *
+     */
+    function loadObjectId()
+    {
+        if (is_array(static::$_pk)) {
+            $this->_object_id = get_called_class() . ':' . implode(':', array_values($this->getId())); // ex: WorldRegion:FR:96
+        } else {
+            $this->_object_id = get_called_class() . ':' . $this->getId(); // ex: Membre:1234
+        }
+    }
+
+    /**
+     *
+     */
+    static function resetAutoIncrement()
+    {
+        DataBase::getInstance()
+            ->query("ALTER TABLE `" . static::getDbTable() . "` AUTO_INCREMENT = 1");
     }
 
     /**

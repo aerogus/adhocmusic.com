@@ -137,12 +137,12 @@ final class Controller
         $smarty->assign(
             'events_p', Event::find(
                 [
-                    'id_lieu'   => $lieu->getIdLieu(),
+                    'id_lieu' => $lieu->getIdLieu(),
                     'online' => true,
                     'datfin' => date('Y-m-d H:i:s'),
-                    'order_by'   => 'date',
-                    'sort'   => 'DESC',
-                    'limit'  => 500,
+                    'order_by' => 'date',
+                    'sort' => 'DESC',
+                    'limit' => 500,
                 ]
             )
         );
@@ -178,20 +178,6 @@ final class Controller
                 ]
             )
         );
-
-        /*
-        $smarty->assign(
-            'comments', Comment::find(
-                [
-                    'id_type' => 'l',
-                    'id_content' => $lieu->getIdLieu(),
-                    'online' => true,
-                    'order_by' => 'created_on',
-                    'sort' => 'ASC',
-                ]
-            )
-        );
-        */
 
         // alerting
         if (Tools::isAuth()) {

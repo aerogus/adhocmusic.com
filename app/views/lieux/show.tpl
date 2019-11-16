@@ -57,7 +57,7 @@
   <div>
     <ul>
       {foreach $events_f as $event}
-      <li>{if $event.structure_id}<img src="{$event.structure_picto}" alt="" title="Organisé par {$event.structure_name|escape}">{/if}<a href="{$event.url}">Le {$event.date|date_format:"%d/%m/%Y %H:%M"} - {$event.name|escape}</a></li>
+      <li>{if $event->getStructure()}<img src="{$event->getStructure()->getPicto()}" alt="" title="Organisé par {$event->getStructure()->getName()|escape}">{/if}<a href="{$event->getUrl()}">Le {$event->getDate()|date_format:"%d/%m/%Y %H:%M"} - {$event->getName()|escape}</a></li>
       {/foreach}
     </ul>
   </div>
@@ -72,7 +72,7 @@
   <div>
     <ul>
       {foreach from=$events_p item=event}
-      <li>{if $event.structure_id}<img src="{$event.structure_picto}" alt="" title="Organisé par {$event.structure_name|escape}">{/if}<a href="{$event.url}">Le {$event.date|date_format:"%d/%m/%Y %H:%M"} - {$event.name|escape}</a></li>
+      <li>{if $event->getStructure()}<img src="{$event->getStructure()->getPicto()}" alt="" title="Organisé par {$event->getStructure()->getName()|escape}">{/if}<a href="{$event->getUrl()}">Le {$event->getDate()|date_format:"%d/%m/%Y %H:%M"} - {$event->getName()|escape}</a></li>
       {/foreach}
     </ul>
   </div>
@@ -87,8 +87,8 @@
   <div class="reset gallery">
   {foreach from=$photos item=photo}
     <div class="photo">
-      <a href="{$photo.thumb_1000}" data-id="{$photo.id}" data-at-1000="{$photo.thumb_1000}" title="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
-        <img src="{$photo.thumb_320}" alt="{$photo.name|escape}{if !empty($photo.groupe_name)} ({$photo.groupe_name|escape}){/if}">
+      <a href="{$photo->getThumbUrl(1000)}" data-id="{$photo->getIdPhoto()}" data-at-1000="{$photo->getThumbUrl(1000)}" title="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
+        <img src="{$photo->getThumbUrl(320)}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
       </a>
     </div>
   {/foreach}
@@ -104,7 +104,7 @@
   <div>
     <ul>
       {foreach $audios as $audio}
-      <li>Titre : <strong>{$audio.name|escape}</strong><br>Groupe : <a href="http://www.adhocmusic.com/{$audio.groupe_alias}">{$audio.groupe_name}</a><br>Evénement : <a href="http://www.adhocmusic.com/events/show/{$audio.event_id}">{$audio.event_name}</a> ({$audio.event_date|date_format:'%d/%m/%Y'})<br><audio src="{$audio.id}"></audio></li>
+      <li>Titre : <strong>{$audio->getName()|escape}</strong><br>Groupe : <a href="{$audio->getGroupe()->getUrl()}">{$audio->getGroupe()->getName()}</a><br>Evénement : <a href="{$audio->getEvent()->getUrl()}">{$audio->getEvent()->getName()}</a> ({$audio->getEvent()->getDate()|date_format:'%d/%m/%Y'})<br><audio src="{$audio->getDirectMp3Url()}"></audio></li>
       {/foreach}
     </ul>
   </div>
@@ -119,8 +119,8 @@
   <div class="reset grid-3">
     {foreach $videos as $video}
     <div>
-      <a href="{$video.url}"><img src="{$video.thumb_320}" alt="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}">{$video.name|truncate:15:"...":true:true|escape}</a>
-      <a class="overlay-80 overlay-video-80" href="{$video.url}" title="{$video.name|escape}{if !empty($video.groupe_name)} ({$video.groupe_name|escape}){/if}"></a>
+      <a href="{$video->getUrl()}"><img src="{$video->getThumbUrl(320)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe()->getName())} ({$video->getGroupe()->getName()|escape}){/if}">{$video->getName()|truncate:15:"...":true:true|escape}</a>
+      <a class="overlay-80 overlay-video-80" href="{$video->getUrl()}" title="{$video->getName()|escape}{if !empty($video->getGroupe()->getName())} ({$video->getGroupe()->getName()|escape}){/if}"></a>
     </div>
     {/foreach}
   </div>

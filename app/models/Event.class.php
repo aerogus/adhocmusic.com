@@ -612,8 +612,8 @@ class Event extends ObjectModel
 
         if (isset($params['id_structure'])) {
             $subSql = "SELECT `id_event` FROM `adhoc_organise_par` WHERE `id_structure` = " . (int) $params['id_structure'] . " ";
-            if ($ids_structure = $db->queryWithFetchFirstFields($subSql)) {
-                $sql .= "AND `id_structure` IN (" . implode(',', (array) $ids_structure) . ") ";
+            if ($ids_event = $db->queryWithFetchFirstFields($subSql)) {
+                $sql .= "AND `id_event` IN (" . implode(',', (array) $ids_event) . ") ";
             } else {
                 return $objs;
             }
@@ -1005,28 +1005,27 @@ class Event extends ObjectModel
      */
     static function getAdHocEventsBySeason(): array
     {
-        $evts = self::find(
+        $events = self::find(
             [
-                'id_structure' => 1,
+                'id_structure' => 1, // AD'HOC
                 'order_by' => 'date',
                 'sort' => 'ASC',
+                'start' => 0,
                 'limit' => 1000,
             ]
         );
 
         $tab = [];
-        foreach ($evts as $evt) {
-            $year = (int) mb_substr($evt['date'], 0, 4);
-            $month = (int) mb_substr($evt['date'], 5, 2);
-            if ($month > 7) {
-                $season = (string) $year . ' / ' . (string) ($year + 1);
+        foreach ($events as $event) {
+            if ($event->getMonth() > 7) {
+                $season = (string) $event->getYear() . ' / ' . (string) ($event->getYear() + 1);
             } else {
-                $season = (string) ($year - 1) . ' / ' . (string) $year;
+                $season = (string) ($event->getYear() - 1) . ' / ' . (string) $event->getYear();
             }
             if (!array_key_exists($season, $tab)) {
                 $tab[$season] = [];
             }
-            $tab[$season][] = $evt;
+            $tab[$season][] = $event;
         }
 
         return $tab;

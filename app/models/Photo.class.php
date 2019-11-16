@@ -81,6 +81,14 @@ class Photo extends Media
     }
 
     /**
+     * @return int
+     */
+    function getIdPhoto(): int
+    {
+        return $this->_id_photo;
+    }
+
+    /**
      * @return string
      */
     function getPseudo(): string
@@ -157,6 +165,25 @@ class Photo extends Media
             throw new Exception('Photo introuvable');
         }
         return true;
+    }
+
+    /**
+     * @return string|null
+     */
+    function getThumbUrl(int $maxWidth = 0): ?string
+    {
+        $sourcePath = self::getBasePath() . '/' . $this->getIdPhoto() . '.jpg';
+
+        if (!$maxWidth) {
+            return self::getBaseUrl() . '/' . $this->getIdPhoto() . '.jpg';
+        } else {
+            $uid = 'photo/' . $id . '/' . $maxWidth;
+            $cachePath = Image::getCachePath($uid);
+            if (!file_exists($cachePath)) {
+                // @TODO ajouter à une file de calcul
+            }
+            return Image::getCacheUrl($uid);
+        }
     }
 
     /**

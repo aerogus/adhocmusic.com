@@ -115,7 +115,7 @@ final class Controller
             $trail->addStep($event->getName());
         } catch (Exception $e) {
             Route::set_http_code(404);
-            $trail->addStep("Évènement Introuvable");
+            $trail->addStep("Évènement introuvable");
             $smarty->assign('unknown_event', true);
             return $smarty->fetch('events/show.tpl');
         }
@@ -125,9 +125,6 @@ final class Controller
         $smarty->assign('day', $event->getDay());
 
         $smarty->assign('event', $event);
-
-        //$lieu = Lieu::getInstance($event->getIdLieu());
-        //$smarty->assign('lieu', $lieu);
 
         $smarty->assign('title', "♫ ". $event->getName());
         $smarty->assign('description', "Date : " . Date::mysql_datetime($event->getDate(), 'd/m/Y') . " | Lieu : " . $event->getLieu()->getName() . " " . $event->getLieu()->getAddress() . " " . $event->getLieu()->getCp() . " " . $event->getLieu()->getCity());

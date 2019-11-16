@@ -270,6 +270,16 @@ class Video extends Media
     }
 
     /**
+     * Retourne le chemin de l'imagette par défaut
+     *
+     * @return string
+     */
+    static function getDefaultThumbPath(): string
+    {
+        return ADHOC_ROOT_PATH . '/assets/img/videothumb.jpg';
+    }
+
+    /**
      * @return string|null
      */
     function getThumbUrl(int $maxWidth = 0): ?string
@@ -279,14 +289,16 @@ class Video extends Media
             $sourcePath = self::getDefaultThumbPath();
         }
 
-        return self::getBaseUrl() . '/' . $this->getIdVideo() . '.jpg';
-
-        $uid = 'video/' . $id . '/' . $maxWidth;
-        $cachePath = Image::getCachePath($uid);
-        if (!file_exists($cachePath)) {
-            // @TODO ajouter à une file de calcul
+        if (!$maxWidth) {
+            return self::getBaseUrl() . '/' . $this->getIdVideo() . '.jpg';
+        } else {
+            $uid = 'video/' . $id . '/' . $maxWidth;
+            $cachePath = Image::getCachePath($uid);
+            if (!file_exists($cachePath)) {
+                // @TODO ajouter à une file de calcul
+            }
+            return Image::getCacheUrl($uid);
         }
-        return Image::getCacheUrl($uid);
     }
 
     /* fin getters */
