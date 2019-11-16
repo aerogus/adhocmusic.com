@@ -103,13 +103,11 @@ abstract class ObjectModel
                     $this->$pk = $id[$field];
                 }
                 $this->loadObjectId();
-                //$this->_object_id = get_called_class() . ':' . implode(':', array_values($id)); // ex: WorldRegion:FR:96
             } else {
                 // clé primaire simple
                 $pk = '_' . static::$_pk;
                 $this->$pk = $id;
                 $this->loadObjectId();
-                //$this->_object_id = get_called_class() . ':' . (string) $id; // ex: Membre:1234
             }
 
             if (static::isCachable() && $this->_loadFromCache()) {

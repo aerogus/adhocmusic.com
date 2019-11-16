@@ -141,12 +141,11 @@ class Photo extends Media
     function delete(): bool
     {
         if (parent::delete()) {
-            self::invalidatePhotoInCache($this->getId(),  80,  80, '000000', false,  true);
-            self::invalidatePhotoInCache($this->getId(), 130, 130, '000000', false, false);
-            self::invalidatePhotoInCache($this->getId(), 400, 300, '000000', false, false);
-            self::invalidatePhotoInCache($this->getId(), 680, 600, '000000', false, false);
+            foreach ([80, 320, 680, 100] as $maxWidth) {
+                $this->clearThumb($maxWidth);
+            }
 
-            $file = self::getBasePath() . '/' . $this->getId() . '.jpg';
+            $file = self::getBasePath() . '/' . $this->getIdPhoto() . '.jpg';
             if (file_exists($file)) {
                 unlink($file);
             }
@@ -187,35 +186,11 @@ class Photo extends Media
     }
 
     /**
-     * @return string
-     */
-    function getThumb80Url(): string
-    {
-        return self::getPhotoUrl($this->getId(), 80, 80, '000000', false, true);
-    }
-
-    /**
-     * @return string
-     */
-    function getThumb320Url(): string
-    {
-        return self::getPhotoUrl($this->getId(), 320, 0, '000000', false, false);
-    }
-
-    /**
-     * @return string
-     */
-    function getThumb680Url(): string
-    {
-        return self::getPhotoUrl($this->getId(), 680, 600, '000000', false, false);
-    }
-
-    /**
      * @return bool
      */
-    static function invalidatePhotoInCache(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = false): bool
+    function clearThumb(int $maxWidth = 0): bool
     {
-        $uid = 'photo/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
+        $uid = 'photo/' . $this->getIdPhoto() . '/' . $maxWidth;
         $cache = Image::getCachePath($uid);
 
         if (file_exists($cache)) {
@@ -227,38 +202,35 @@ class Photo extends Media
     }
 
     /**
-     * Retourne l'url de la photo
-     * gestion de la mise en cache
+     * Génère la miniature d'une photo
+     *
+     * @param int $maxWidth maxWidth
      *
      * @return string
      */
-    static function getPhotoUrl(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = false): string
+    function genThumb(int $maxWidth = 0): string
     {
-        $uid = 'photo/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
-        $cache = Image::getCachePath($uid);
-
-        if (!file_exists($cache)) {
-            $source = self::getBasePath() . '/' . $id . '.jpg';
-            if (file_exists($source)) {
-                $img = new Image($source);
-                $img->setType(IMAGETYPE_JPEG);
-                $img->setMaxWidth($width);
-                $img->setMaxHeight($height);
-                $img->setBorder($border);
-                $img->setKeepRatio(true);
-                if ($zoom) {
-                    $img->setZoom();
-                }
-                $img->setHexColor($bgcolor);
-                Image::writeCache($uid, $img->get());
-            } else {
-                $img = (new Image())
-                    ->init(16, 16, '000000');
-                Image::writeCache($uid, $img->get());
-                Log::write('photo', 'photo ' . $id . ' introuvable | uid : ' . $uid);
-            }
+        if (!$maxWidth) {
+            return false;
         }
 
-        return Image::getCacheUrl($uid);
+        $uid = 'photo/' . $this->getIdPhoto() . '/' . $maxWidth;
+        $cache = Image::getCachePath($uid);
+
+        if (file_exists($cache)) {
+            unlink($cache);
+        }
+
+        $source = self::getBasePath() . '/' . $this->getIdPhoto() . '.jpg';
+        if (!file_exists($source)) {
+            return false;
+        }
+
+        $img = new Image($source);
+        $img->setType(IMAGETYPE_JPEG);
+        $img->setMaxWidth($width);
+        Image::writeCache($uid, $img->get());
+
+        return true;
     }
 }

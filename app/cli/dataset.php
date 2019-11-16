@@ -8,6 +8,7 @@ require_once __DIR__ . '/../bootstrap.php';
 // ménage données factices
 
 foreach (Event::findAll() as $e) $e->delete();
+foreach (Structure::findAll() as $s) $s->delete();
 foreach (Lieu::findAll() as $l) $l->delete();
 foreach (Audio::findAll() as $a) $a->delete();
 foreach (Photo::findAll() as $p) $p->delete();
@@ -18,6 +19,7 @@ foreach (FAQ::findAll() as $f) $f->delete();
 // reset auto incrément
 
 Event::resetAutoIncrement();
+Structure::resetAutoIncrement();
 Lieu::resetAutoIncrement();
 Audio::resetAutoIncrement();
 Photo::resetAutoIncrement();
@@ -28,25 +30,36 @@ FAQ::resetAutoIncrement();
 // insertion données factices
 
 for ($n = 1 ; $n <= 10 ; $n++) {
+    echo "insertion structure " . $n . "\n";
+    (new Structure())
+        ->setName("Structure n°" . $n)
+        ->save();
+}
+
+for ($n = 1 ; $n <= 10 ; $n++) {
     echo "insertion lieu " . $n . "\n";
     (new Lieu())
         ->setIdContact(1)
+        ->setIdType(1)
         ->setName("Lieu n°" . $n)
         ->setText("Texte lieu n°" . $n)
         ->setIdCountry('FR')
+        ->setIdRegion('A8')
         ->setIdDepartement('91')
+        ->setIdCity(91216)
         ->setOnline(true)
         ->save();
 }
 
 for ($n = 1 ; $n <= 10 ; $n++) {
     echo "insertion groupe " . $n . "\n";
-    (new Groupe())
+    $groupe = (new Groupe())
         ->setName("Groupe n°" . $n)
         ->setMiniText("Mini Texte n°" . $n)
         ->setText("Bio n°" . $n)
-        ->setOnline(true)
-        ->save();
+        ->setOnline(true);
+    $groupe->save();
+    $groupe->linkMember(1, 2);
 }
 
 for ($n = 1 ; $n <= 10 ; $n++) {
@@ -60,6 +73,7 @@ for ($n = 1 ; $n <= 10 ; $n++) {
         ->setOnline(true);
     $event->save();
     $event->linkGroupe($n);
+    $event->linkStructure($n);
 }
 
 for ($n = 1 ; $n <= 10 ; $n++) {

@@ -74,7 +74,7 @@ abstract class Reference extends ObjectModel
     protected function _loadFromDb(): bool
     {
         if (!parent::_loadFromDb()) {
-            throw new Exception('Référence introuvable dans ' . get_called_class());
+            throw new Exception('Référence ' . print_r($this->getId(), true) . ' introuvable dans ' . get_called_class());
         }
 
         return true;

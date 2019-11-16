@@ -57,7 +57,8 @@
   <div>
     <ul>
       {foreach $events_f as $event}
-      <li>{if $event->getStructure()}<img src="{$event->getStructure()->getPicto()}" alt="" title="Organisé par {$event->getStructure()->getName()|escape}">{/if}<a href="{$event->getUrl()}">Le {$event->getDate()|date_format:"%d/%m/%Y %H:%M"} - {$event->getName()|escape}</a></li>
+      {assign var=structures value=$event->getStructures()}
+      <li>{if $structures}<img src="{$structures[0]->getPicto()}" alt="" title="Organisé par {$structures[0]->getName()|escape}">{/if}<a href="{$event->getUrl()}">Le {$event->getDate()|date_format:"%d/%m/%Y %H:%M"} - {$event->getName()|escape}</a></li>
       {/foreach}
     </ul>
   </div>
@@ -72,7 +73,8 @@
   <div>
     <ul>
       {foreach from=$events_p item=event}
-      <li>{if $event->getStructure()}<img src="{$event->getStructure()->getPicto()}" alt="" title="Organisé par {$event->getStructure()->getName()|escape}">{/if}<a href="{$event->getUrl()}">Le {$event->getDate()|date_format:"%d/%m/%Y %H:%M"} - {$event->getName()|escape}</a></li>
+      {assign var=structures value=$event->getStructures()}
+      <li>{if $structures}<img src="{$structures[0]->getPicto()}" alt="" title="Organisé par {$structures[0]->getName()|escape}">{/if}<a href="{$event->getUrl()}">Le {$event->getDate()|date_format:"%d/%m/%Y %H:%M"} - {$event->getName()|escape}</a></li>
       {/foreach}
     </ul>
   </div>

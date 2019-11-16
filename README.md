@@ -45,3 +45,15 @@ composer install --no-dev
 npm install --only=prod
 brunch build --production
 ```
+
+
+## Format des images
+
+Les Photo sont redimensionnées en 2048*2048 à leur arrivées
+elles sont converties en :
+
+- 1000x0
+- 680x0
+- 320x0
+
+Les Video doivent avoir une miniature 320x180

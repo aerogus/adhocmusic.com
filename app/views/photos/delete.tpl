@@ -14,7 +14,7 @@
     <form id="form-photo-delete" name="form-photo-delete" method="post" action="/photos/delete">
       <ul>
         <li>
-          <img src="{$photo->getThumb320Url()}" alt="">
+          <img src="{$photo->getThumbUrl(320)}" alt="">
         </li>
         <li>
           Titre : {$photo->getName()|escape}

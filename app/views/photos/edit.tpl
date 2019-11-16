@@ -19,7 +19,7 @@
       <input type="file" name="file" id="file" value="">
     </li>
     <li>
-      <p style="text-align: center"><img src="{$photo->getThumb320Url()}" alt=""></p>
+      <p style="text-align: center"><img src="{$photo->getThumbUrl(320)}" alt=""></p>
     </li>
     <li>
       <label for="id_contact">Ajouté par</label>

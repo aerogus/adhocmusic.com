@@ -316,8 +316,8 @@ class Lieu extends ObjectModel
     {
         return WorldRegion::getInstance(
             [
-                'id_country' => $this->_id_country,
-                'id_region' => $this->_id_region,
+                'id_country' => $this->getIdCountry(),
+                'id_region' => $this->getIdRegion(),
             ]
         )->getName();
     }

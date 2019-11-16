@@ -77,7 +77,7 @@ final class Controller
 
             $smarty->assign('photo', $photo);
             $smarty->assign('from', $from);
-            $smarty->assign('og_image', $photo->getThumb320Url());
+            $smarty->assign('og_image', $photo->getThumbUrl(320));
             $smarty->assign('has_credits', (bool) $photo->getCredits());
 
             $meta_title .= $photo->getName();
@@ -241,6 +241,14 @@ final class Controller
                                 ->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg')
                                 ->write();
                             Log::action(Log::ACTION_PHOTO_CREATE, $photo->getId());
+
+                            // les générations des thumbs à faire en asynchrone
+                            /*
+                            foreach ([80, 320, 680, 1000] as $maxWidth) {
+                                $photo->genThumb($maxWidth);
+                            }
+                            */
+
                         }
                     }
                 }
@@ -370,10 +378,11 @@ final class Controller
                         ->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg')
                         ->write();
 
-                    Photo::invalidatePhotoInCache($photo->getIdPhoto(),  80,  80, '000000', false,  true);
-                    Photo::invalidatePhotoInCache($photo->getIdPhoto(), 130, 130, '000000', false, false);
-                    Photo::invalidatePhotoInCache($photo->getIdPhoto(), 400, 300, '000000', false, false);
-                    Photo::invalidatePhotoInCache($photo->getIdPhoto(), 680, 600, '000000', false, false);
+                    foreach ([80, 320, 680, 1000] as $maxWidth) {
+                        $photo->clearThumb($maxWidth);
+                        $photo->genThumb($maxWidth);
+                    }
+
                 }
 
                 if ($photo->save()) {

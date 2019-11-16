@@ -403,9 +403,9 @@ class Media extends ObjectModel
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
-            $sql .= $params['sort'];
+            $sql .= $params['sort'] . " ";
         } else {
-            $sql .= "ASC";
+            $sql .= "ASC ";
         }
 
         if (isset($params['start']) && isset($params['limit'])) {

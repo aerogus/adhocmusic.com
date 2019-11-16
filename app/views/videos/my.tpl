@@ -14,7 +14,7 @@
 
 {foreach $videos as $video}
 <div class="video-list" style="margin: 10px; background-color: #ececec;">
-<a href="/videos/edit/{$video->getIdVideo()}"><img src="{$video->getThumb80Url()}" style="float: left; margin-right: 10px;"/></a>
+<a href="/videos/edit/{$video->getIdVideo()}"><img src="{$video->getThumbUrl(80)}" style="float: left; margin-right: 10px;"/></a>
 <img src="/img/icones/signature.png"> <a href="/videos/edit/{$video->getIdVideo()}"><strong>{$video->getName()|escape}</strong></a><br>
 {if $video->getIdGroupe()}
  <img src="/img/icones/groupe.png"> {$video->getGroupe()->getName()|escape}

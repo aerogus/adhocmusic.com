@@ -280,6 +280,10 @@ class Video extends Media
     }
 
     /**
+     * Retourne l'url d'une minuature de photo (sans vérifier son existence)
+     *
+     * @param int $maxWidth maxWidth
+     *
      * @return string|null
      */
     function getThumbUrl(int $maxWidth = 0): ?string
@@ -416,8 +420,9 @@ class Video extends Media
     {
         if (parent::delete()) {
             $this->deleteThumbnail();
-            self::invalidateVideoThumbInCache((int) $this->getId(), 80, 80, '000000', false, true);
-            self::invalidateVideoThumbInCache((int) $this->getId(), 100, 100, '000000', false, true);
+            foreach ([80, 320] as $maxWidth) {
+                $this->clearThumb($maxWidth);
+            }
             return true;
         }
         return false;
@@ -654,7 +659,6 @@ class Video extends Media
         (new Image($tmp))
             ->setType(IMAGETYPE_JPEG)
             ->setMaxWidth(320)
-            ->setMaxHeight(240)
             ->setDestFile($jpg)
             ->write();
         unlink($tmp);
@@ -663,11 +667,15 @@ class Video extends Media
     }
 
     /**
+     * Efface une miniature donnée
+     *
+     * @param int $maxWidth maxWidth
+     *
      * @return bool
      */
-    static function invalidateVideoThumbInCache(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = true): bool
+    function clearThumb(int $maxWidth = 0): bool
     {
-        $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . (int) $border . '/' . (int) $zoom . '.jpg';
+        $uid = 'video/' . $this->getIdVideo() . '/' . $maxWidth;
         $cache = Image::getCachePath($uid);
 
         if (file_exists($cache)) {
@@ -679,36 +687,35 @@ class Video extends Media
     }
 
     /**
-     * Retourne l'url de la vignette vidéo
-     * gestion de la mise en cache
+     * Génère la miniature d'une vidéo
+     *
+     * @param int $maxWidth maxWidth
      *
      * @return string
      */
-    static function getVideoThumbUrl(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = true): string
+    function genThumb(int $maxWidth = 0): string
     {
-        $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . (int) $border . '/' . (int) $zoom . '.jpg';
-        $cache = Image::getCachePath($uid);
-
-        if (!file_exists($cache)) {
-            $source = self::getBasePath() . '/' . $id . '.jpg';
-            if (file_exists($source)) {
-                $img = (new Image($source))
-                    ->setType(IMAGETYPE_JPEG)
-                    ->setMaxWidth($width)
-                    ->setMaxHeight($height)
-                    ->setBorder($border)
-                    ->setKeepRatio(true)
-                    ->setZoom($zoom)
-                    ->setHexColor($bgcolor);
-                Image::writeCache($uid, $img->get());
-            } else {
-                $img = (new Image())
-                    ->init(16, 16, '000000');
-                Image::writeCache($uid, $img->get());
-                Log::write('video', 'vignette vidéo ' . $id . ' introuvable | uid : ' . $uid);
-            }
+        if (!$maxWidth) {
+            return false;
         }
 
-        return Image::getCacheUrl($uid);
+        $uid = 'video/' . $this->getIdVideo() . '/' . $maxWidth;
+        $cache = Image::getCachePath($uid);
+
+        if (file_exists($cache)) {
+            unlink($cache);
+        }
+
+        $source = self::getBasePath() . '/' . $this->getIdVideo() . '.jpg';
+        if (!file_exists($source)) {
+            return false;
+        }
+
+        $img = new Image($source);
+        $img->setType(IMAGETYPE_JPEG);
+        $img->setMaxWidth($width);
+        Image::writeCache($uid, $img->get());
+
+        return true;
     }
 }

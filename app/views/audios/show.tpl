@@ -49,13 +49,13 @@ var audio_url = '{$og_audio.url}';
   <div>
 {foreach $photos as $photo}
 <div class="thumb-80 thumb-photo-80">
-  <a href="{$photo->getUrl()}"><img src="{$photo->getThumb80Url()}" alt="{$photo->getName()|escape}"><br>{$photo->getName()|truncate:15:"...":true:true|escape}</a>
+  <a href="{$photo->getUrl()}"><img src="{$photo->getThumbUrl(80)}" alt="{$photo->getName()|escape}"><br>{$photo->getName()|truncate:15:"...":true:true|escape}</a>
   <a class="overlay-80 overlay-photo-80" href="{$photo->getUrl()}" title="{$photo->getName()|escape}"></a>
 </div>
 {/foreach}
 {foreach $videos as $video}
 <div class="thumb-80 thumb-video-80">
-  <a href="{$video->getUrl()}"><img src="{$video->getThumb80Url()}" alt="{$video->getName()|escape}"><br>{$video->getName()|truncate:15:"...":true:true|escape}</a>
+  <a href="{$video->getUrl()}"><img src="{$video->getThumbUrl(80)}" alt="{$video->getName()|escape}"><br>{$video->getName()|truncate:15:"...":true:true|escape}</a>
   <a class="overlay-80 overlay-video-80" href="{$video->getUrl()}" title="{$video->getName()|escape}"></a>
 </div>
 {/foreach}

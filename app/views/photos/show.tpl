@@ -68,7 +68,7 @@
 
     <p align="center" id="photofull" class="photofull">
     {if !empty($next)}<a href="{$next}">{/if}
-    <img src="{$photo->getThumb680Url()}" alt="{$photo->getName()|escape}">
+    <img src="{$photo->getThumbUrl(680)}" alt="{$photo->getName()|escape}">
     {if !empty($next)}</a>{/if}
     </p>
 

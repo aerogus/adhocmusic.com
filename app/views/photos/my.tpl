@@ -24,7 +24,7 @@
 {foreach from=$photos item=photo}
   <div class="photo">
     <a href="/photos/edit/{$photo->getIdPhoto()}?page={$page}" title="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
-      <img src="{$photo->getThumb320Url()}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
+      <img src="{$photo->getThumbUrl(320)}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
     </a>
   </div>
 {/foreach}

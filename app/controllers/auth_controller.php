@@ -74,7 +74,6 @@ final class Controller
         // si bien identifié, destruction de la session
         if (!empty($_SESSION['membre'])) {
 
-            Log::action(Log::ACTION_LOGOUT);
             $_SESSION = [];
             if (ini_get("session.use_cookies")) {
                 $params = session_get_cookie_params();
@@ -85,6 +84,9 @@ final class Controller
                 );
             }
             session_destroy();
+
+            Log::action(Log::ACTION_LOGOUT);
+
         }
 
         Tools::redirect('/?logout');

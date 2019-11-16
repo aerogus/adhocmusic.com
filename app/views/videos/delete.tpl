@@ -19,7 +19,7 @@
       </li>
       <li>
         <label for="thumb">Miniature</label>
-        <span id="thumb"><img src="{$video->getThumbnailUrl()}" alt=""></span>
+        <span id="thumb"><img src="{$video->getThumbUrl()}" alt=""></span>
       </li>
       <li>
         <label for="id_host">Hébergeur</label>

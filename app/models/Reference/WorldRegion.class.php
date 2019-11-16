@@ -80,7 +80,7 @@ class WorldRegion extends \Reference
     /* fin setters */
 
     /**
-     * Retourne une collection d'instances
+     * Retourne une collection d'instances WorldRegion
      *
      * @param string $id_country id_country
      *

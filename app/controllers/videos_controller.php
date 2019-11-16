@@ -389,7 +389,8 @@ final class Controller
                 // Permet le reset de la vignette
                 if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
                     $video->storeThumbnail($vignette);
-                    Video::invalidateVideoThumbInCache($video->getId(), 80, 80, '000000', false, true);
+                    $video->clearThumb(80);
+                    $video->genThumb(80);
                 }
 
                 Log::action(Log::ACTION_VIDEO_EDIT, $video->getId());

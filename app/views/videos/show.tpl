@@ -72,7 +72,7 @@
     {foreach $videos as $_video}
     {if $_video->getIdVideo() !== $video->getIdVideo()}
     <div class="thumb-80">
-      <a href="{$_video->getUrl()}"><img src="{$_video->getThumb80Url()}" alt="{$_video->getName()|escape}"><br>{$_video->getName()|truncate:15:"...":true:true|escape}</a>
+      <a href="{$_video->getUrl()}"><img src="{$_video->getThumbUrl(80)}" alt="{$_video->getName()|escape}"><br>{$_video->getName()|truncate:15:"...":true:true|escape}</a>
       <a class="overlay-80 overlay-video-80" href="{$_video->getUrl()}" title="{$_video->getName()|escape}"></a>
     </div>
     {/if}
@@ -89,8 +89,8 @@
   <div class="reset gallery">
   {foreach from=$photos item=photo}
     <div class="photo">
-      <a href="{$photo->getThumb1000Url()}" data-at-1000="{$photo->getThumb1000Url()}" title="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe->getName()|escape}){/if}">
-        <img src="{$photo->getThumb320Url()}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe->getName()|escape}){/if}">
+      <a href="{$photo->getThumbUrl(1000)}" data-at-1000="{$photo->getThumbUrl(1000)}" title="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe->getName()|escape}){/if}">
+        <img src="{$photo->getThumbUrl(320)}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe->getName()|escape}){/if}">
       </a>
     </div>
   {/foreach}
