@@ -41,8 +41,8 @@ services:
       - .:/var/www/adhocmusic.test
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
       - ./volumes/php/log:/var/log/php
-    tmpfs:
-      - /var/www/adhocmusic.test/tmpfs:noexec,mode=0755,uid=33,gid=33
+    #tmpfs:
+    #  - /var/www/adhocmusic.test/tmpfs:noexec,mode=0755,uid=33,gid=33
 
   # le serveur de base de données, port 3306
   mariadb:
