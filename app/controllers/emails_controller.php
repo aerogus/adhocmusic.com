@@ -8,38 +8,6 @@ final class Controller
     /**
      * @return string
      */
-    static function newsletter(): string
-    {
-        $id = (int) Route::params('id');
-
-        try {
-            $newsletter = Newsletter::getInstance($id);
-        } catch (Exception $e) {
-            Route::set_http_code(404);
-            return 'newsletter introuvable';
-        }
-
-        // oui je sais ...
-        // @see EmailSmarty::modifier_link
-        global $newsletter_id_newsletter;
-               $newsletter_id_newsletter = $newsletter->getId();
-        global $newsletter_id_contact;
-               $newsletter_id_contact = 0;
-
-        $smarty = new EmailSmarty();
-        $smarty->assign('id', $newsletter->getId());
-        $smarty->assign('id_newsletter', $newsletter->getId());
-        $smarty->assign('id_contact', 0);
-        $smarty->assign('title', $newsletter->getTitle());
-        $smarty->assign('email', '');
-        $smarty->assign('url', $newsletter->getUrl());
-        $smarty->assign('unsub_url', HOME_URL . '/newsletters/subscriptions?action=unsub&email=');
-        return $smarty->fetch('newsletter-' . $newsletter->getId() . '.tpl');
-    }
-
-    /**
-     * @return string
-     */
     static function form_contact_cc(): string
     {
         $smarty = new EmailSmarty();
@@ -88,15 +56,6 @@ final class Controller
     }
 
     /**
-     *
-     */
-    static function one_year_unactive_member(): string
-    {
-        $smarty = new EmailSmarty();
-        return $smarty->fetch('one-year-unactive-member.tpl');
-    }
-
-    /**
      * @return string
      */
     static function password_changed(): string
@@ -112,24 +71,6 @@ final class Controller
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('password-lost.tpl');
-    }
-
-    /**
-     * @return string
-     */
-    static function you_have_a_group(): string
-    {
-        $smarty = new EmailSmarty();
-        return $smarty->fetch('you-have-a-group.tpl');
-    }
-
-    /**
-     * @return string
-     */
-    static function you_have_a_lieu(): string
-    {
-        $smarty = new EmailSmarty();
-        return $smarty->fetch('you-have-a-lieu.tpl');
     }
 
     /**

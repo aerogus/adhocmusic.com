@@ -42,7 +42,7 @@ $(function() {
 
 <div class="box">
   <header>
-    <h1>Pages Statiques</h1>
+    <h1>Ajouter une page statique</h1>
   </header>
   <div>
 
@@ -51,7 +51,7 @@ $(function() {
     <li>
       <label for="uri">URI</label>
       <span>Ceci détermine l'adresse que vous voulez donner à la page. Attention aux doublons</span>
-      http://www.adhocmusic.com <input type="text" id="uri" name="uri" value="/a-changer">
+      https://www.adhocmusic.com <input type="text" id="uri" name="uri" placeholder="/a-changer" value="">
     </li>
     <li>
       <label for="menuselected">Menu</label>
@@ -62,7 +62,7 @@ $(function() {
     <li>
       <label for="breadcrumb">Fil d'ariane</label>
       <span>Le fil d'ariane quoi ...</span>
-      <input type="text" id="breadcrumb" name="breadcrumb" value="page1|url1|page2">
+      <input type="text" id="breadcrumb" name="breadcrumb" placeholder="page1|url1|page2" value="">
     </li>
     <li>
       <label for="content">Contenu</label>

@@ -72,6 +72,14 @@ class FAQ extends ObjectModel
     /**
      * @return int
      */
+    function getIdFAQ(): int
+    {
+        return $this->_id_faq;
+    }
+
+    /**
+     * @return int
+     */
     function getIdCategory(): int
     {
         return $this->_id_category;
@@ -310,21 +318,8 @@ class FAQ extends ObjectModel
 
         $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
 
-        if (isset($params['id_contact'])) {
-            $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'] . " ";
-            if ($ids_groupe = $db->queryWithFetchFirstFields($subSql)) {
-                $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
-            } else {
-                return $objs;
-            }
-        }
-
-        if (isset($params['alias'])) {
-            $sql .= "AND `alias` = '" . $db->escape($params['alias']) . "' ";
-        }
-
-        if (isset($params['facebook_page_id'])) {
-            $sql .= "AND `facebook_page_id` = " . (int) $params['facebook_page_id'] . " ";
+        if (isset($params['id_category'])) {
+            $sql .= "AND `id_category` = " . (int) $params['id_category'] . " ";
         }
 
         if (isset($params['online'])) {
@@ -336,7 +331,7 @@ class FAQ extends ObjectModel
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
-            $sql .= "ORDER BY `" . static::$_pk . "` ";
+            $sql .= "ORDER BY `" . static::getDbPk() . "` ";
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {

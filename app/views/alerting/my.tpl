@@ -4,7 +4,7 @@
 
   <div class="box">
     <header>
-      <h2>Mes Abonnements Groupes</h2>
+      <h1>Mes abonnements groupes</h1>
     </header>
     <div>
       {if !empty($groupes)}
@@ -23,7 +23,7 @@
 
   <div class="box">
     <header>
-      <h2>Mon Agenda</h2>
+      <h2>Mon agenda</h2>
     </header>
     <div>
       {if !empty($events)}
@@ -42,7 +42,7 @@
 
   <div class="box">
     <header>
-      <h2>Mes Abonnements Lieux</h2>
+      <h1>Mes abonnements lieux</h1>
     </header>
     <div>
       {if !empty($lieux)}

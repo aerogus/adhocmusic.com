@@ -17,12 +17,12 @@
     <th>Titre</th>
     <th>En Ligne</th>
   </tr>
-  {foreach from=$cmss key=cpt item=cms}
+  {foreach from=$cmss item=cms}
   <tr>
-    <td>{$cms.id|escape}</td>
-    <td><a href="/adm/cms/edit/{$cms.id|escape}">{$cms.alias|escape}</a></td>
-    <td>{$cms.title|escape}</td>
-    <td>{$cms.online|display_on_off_icon}</td>
+    <td>{$cms->getIdCMS()|escape}</td>
+    <td><a href="/adm/cms/edit/{$cms->getIdCMS()|escape}">{$cms->getAlias()|escape}</a></td>
+    <td>{$cms->getTitle()|escape}</td>
+    <td>{$cms->getOnline()|display_on_off_icon}</td>
   </tr>
   {/foreach}
 </table>

@@ -93,14 +93,10 @@ emails|form_contact_to|GET|/emails/form-contact-to
 emails|forum_prive_new_message|GET|/emails/forum-prive-new-message
 emails|member_create|GET|/emails/member-create
 emails|message_received|GET|/emails/message-received
-emails|one_year_unactive_member|GET|/emails/one-year-unactive-member
 emails|password_changed|GET|/emails/password-changed
 emails|password_lost|GET|/emails/password-lost
-emails|you_have_a_group|GET|/emails/you-have-a-group
-emails|you_have_a_lieu|GET|/emails/you-have-a-lieu
 emails|new_commentaire|GET|/emails/new-commentaire
 emails|log_action|GET|/emails/log-action
-emails|newsletter|GET|/emails/newsletter/:id
 events|index|GET|/events
 events|create|GET|/events/create
 events|create|POST|/events/create

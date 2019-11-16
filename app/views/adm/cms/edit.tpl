@@ -42,7 +42,7 @@ $(function() {
 
 <div class="box">
   <header>
-    <h1>Pages Statiques</h1>
+    <h1>Éditer une page statique</h1>
   </header>
   <div>
 

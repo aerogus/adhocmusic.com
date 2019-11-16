@@ -15,7 +15,7 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>{$comment->getId()}</td>
+    <td>{$comment->getIdComment()}</td>
   </tr>
   <tr>
     <th>Texte</th>

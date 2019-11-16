@@ -3,19 +3,19 @@
 
 {foreach $groupes as $groupe}
 <url>
-<loc>/groupes/{$groupe.id}</loc>
+<loc>{$groupe->getUrl()}</loc>
 </url>
 {/foreach}
 
 {foreach $lieux as $lieu}
 <url>
-<loc>/lieux/{$lieu.id}</loc>
+<loc>{$lieu->getUrl()}</loc>
 </url>
 {/foreach}
 
 {foreach $events as $event}
 <url>
-<loc>/events/{$event.id}</loc>
+<loc>{$event->getUrl()}</loc>
 </url>
 {/foreach}
 
