@@ -175,33 +175,6 @@ class Groupe extends ObjectModel
         'etat'             => 'int',
     ];
 
-    /**
-     * @var array
-     */
-    protected $_styles = [];
-
-    /**
-     * Membres liés au groupe
-     *
-     * @var array
-     */
-    protected $_members = null;
-
-    /**
-     * @var array
-     */
-    protected $_audios = [];
-
-    /**
-     * @var array
-     */
-    protected $_photos = [];
-
-    /**
-     * @var array
-     */
-    protected $_videos = [];
-
     /* début getters */
 
     /**
@@ -354,8 +327,6 @@ class Groupe extends ObjectModel
      * Retourne l'url du site officiel
      *
      * @return string|null
-     *
-     * @todo check le http:// initial
      */
     function getSite(): ?string
     {
@@ -367,9 +338,9 @@ class Groupe extends ObjectModel
      *
      * @return string
      */
-    function getIdDepartement()
+    function getIdDepartement(): string
     {
-        return (string) $this->_id_departement;
+        return $this->_id_departement;
     }
 
     /**
@@ -489,13 +460,7 @@ class Groupe extends ObjectModel
      */
     static function getNameById(int $id_groupe): string
     {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `name` "
-             . "FROM `" . Groupe::getDbTable() . "` "
-             . "WHERE `" . Groupe::getDbPk() . "` = " . (int) $id_groupe;
-
-        return $db->queryWithFetchFirstField($sql);
+        return Groupe::getInstance($id_groupe)->getName();
     }
 
     /**
@@ -505,8 +470,8 @@ class Groupe extends ObjectModel
      */
     function getPhoto(): ?string
     {
-        if (file_exists(self::getBasePath() . '/p' . $this->getId() . '.jpg')) {
-            return self::getBaseUrl() . '/p' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+        if (file_exists(self::getBasePath() . '/p' . $this->getIdGroupe() . '.jpg')) {
+            return self::getBaseUrl() . '/p' . $this->getIdGroupe() . '.jpg?ts=' . $this->getModifiedOnTs();
         }
         return null;
     }
@@ -552,25 +517,7 @@ class Groupe extends ObjectModel
      */
     function getUrl(): string
     {
-        return HOME_URL . '/' . $this->_alias;
-    }
-
-    /**
-     * Retourne l'url d'une fiche groupe à partir de son alias ou son id
-     *
-     * @param string $ref ref
-     *
-     * @return string
-     */
-    static function getUrlFiche(string $ref): string
-    {
-        if (is_numeric($ref)) {
-            $alias = Groupe::getAliasById((int) $ref);
-        } else {
-            $alias = trim($ref);
-        }
-
-        return HOME_URL . '/' . $alias;
+        return HOME_URL . '/' . $this->getAlias();
     }
 
     /**
@@ -581,43 +528,6 @@ class Groupe extends ObjectModel
     function getFacebookShareUrl(): string
     {
         return 'https://www.facebook.com/sharer.php?u=' . urlencode($this->getUrl());
-    }
-
-    /**
-     * Retourne l'image de l'avatar d'un groupe
-     *
-     * @param int $id_groupe id_groupe
-     *
-     * @return string
-     */
-    static function getAvatarUrlById(int $id_groupe): string
-    {
-        $avatar = HOME_URL . '/img/note_adhoc_64.png';
-        if (file_exists(self::getBasePath() . '/m' . (string) $id_groupe . '.jpg')) {
-            $avatar = self::getBaseUrl() . '/m' . (string) $id_groupe . '.jpg';
-        }
-        return $avatar;
-    }
-
-    /**
-     * Retourne l'alias d'un groupe à partir de son id
-     *
-     * @param int $id_groupe id_groupe
-     *
-     * @return string|null
-     */
-    static function getAliasById(int $id_groupe): ?string
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `alias` "
-             . "FROM `" . Groupe::getDbTable() . "` "
-             . "WHERE `" . self::$_pk . "` = " . (int) $id_groupe;
-
-        if ($alias = $db->queryWithFetchFirstField($sql)) {
-            return $alias;
-        }
-        return null;
     }
 
     /* fin getters */
@@ -1025,25 +935,11 @@ class Groupe extends ObjectModel
      */
     function linkMember(int $id_contact, int $id_type_musicien): bool
     {
-        // on ne peut pas lier un groupe qui n'a pas d'id
-        if (!$this->getId()) {
-            return false;
-        }
-        // le groupe existe-t-il bien ?
-
-        // l'id_contact est il valide ?
-        if (($mbr = Membre::getInstance($id_contact)) === false) {
-            throw new Exception('id_contact introuvable');
-        }
-
-        // la relation est elle deja présente ?
-
-        // tout est ok, on insère dans appartient_a
         $db = DataBase::getInstance();
 
         $sql = 'INSERT INTO `' . self::$_db_table_appartient_a . '` '
              . '(`' . Groupe::getDbPk() . '`, `' . Membre::getDbPk() . '`, `' . TypeMusicien::getDbPk() . '`) '
-             . 'VALUES(' . (int) $this->getId() . ', ' . (int) $id_contact . ', ' . (int) $id_type_musicien . ')';
+             . 'VALUES(' . (int) $this->getIdGroupe() . ', ' . (int) $id_contact . ', ' . (int) $id_type_musicien . ')';
 
         $db->query($sql);
 
@@ -1064,7 +960,7 @@ class Groupe extends ObjectModel
 
         $sql = 'UPDATE `' . self::$_db_table_appartient_a . '` '
              . 'SET `' . TypeMusicien::getDbPk() . '` = ' . (int) $id_type_musicien . ' '
-             . 'WHERE `' . Groupe::getDbPk() . '` = ' . (int) $this->getId() . ' '
+             . 'WHERE `' . Groupe::getDbPk() . '` = ' . (int) $this->getIdGroupe() . ' '
              . 'AND `' . Membre::getDbPk() . '` = ' . (int) $id_contact;
 
         $db->query($sql);
@@ -1256,27 +1152,19 @@ class Groupe extends ObjectModel
      *
      * @param int $id_style id_style
      *
-     * @return int
+     * @return bool
      */
-    function linkStyle(int $id_style): int
+    function linkStyle(int $id_style): bool
     {
-        // le groupe existe-t-il bien ?
-
-        // le style existe-il bien ?
-        $style = Style::getInstance($id_style);
-
-        // le groupe n'a-t-il pas déjà ce style ?
-
-        // c'est ok on ajoute le style
         $db = DataBase::getInstance();
 
         $sql = "INSERT INTO `" . self::$_db_table_groupe_style . "` "
              . "(`id_groupe`, `id_style`) "
-             . "VALUES(" . (int) $this->getId() . ", " . (int) $style->getId() . ")";
+             . "VALUES(" . (int) $this->getIdGroupe() . ", " . (int) $id_style . ")";
 
         $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
@@ -1288,22 +1176,15 @@ class Groupe extends ObjectModel
      */
     function unlinkStyle(int $id_style): bool
     {
-        // les paramètres sont-ils corrects ?
-
-        // le groupe existe-t-il bien ?
-
-        // le style existe-il bien ?
-        $style = Style::getInstance($id_style);
-
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_groupe_style  ."` "
-             . "WHERE `id_groupe` = " . (int) $this->getId() . " "
-             . "AND `id_style` = " . (int) $style->getId();
+             . "WHERE `id_groupe` = " . (int) $this->getIdGroupe() . " "
+             . "AND `id_style` = " . (int) $id_style;
 
         $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
@@ -1313,14 +1194,10 @@ class Groupe extends ObjectModel
      */
     function unlinkStyles(): bool
     {
-        // les paramètres sont-ils corrects ?
-
-        // le groupe existe-t-il bien ?
-
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_groupe_style . "` "
-             . "WHERE `id_groupe` = " . (int) $this->getId();
+             . "WHERE `id_groupe` = " . (int) $this->getIdGroupe();
 
         $db->query($sql);
 
@@ -1334,27 +1211,7 @@ class Groupe extends ObjectModel
      */
     function getStyles(): array
     {
-        return $this->_styles;
-    }
-
-    /**
-     * Retourne les styles du groupe
-     *
-     * @param int $id_groupe id_groupe
-     *
-     * @return array
-     */
-    static function getStylesById(int $id_groupe): array
-    {
-        // le groupe existe-t-il ?
-
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_style` "
-             . "FROM `" . self::$_db_table_groupe_style . "` "
-             . "WHERE `id_groupe` = " . (int) $id_groupe;
-
-        return $db->queryWithFetch($sql);
+        return Style::find(['id_groupe' => $this->getIdGroupe()]);
     }
 
     /**
@@ -1374,25 +1231,22 @@ class Groupe extends ObjectModel
      */
     function getPhotos(): array
     {
-        return $this->_photos;
+        return Photo::find(['id_groupe' => $this->getIdGroupe()]);
     }
 
     /**
-     * Délie les photos d'un groupe
+     * Délie toutes les photos d'un groupe
      *
      * @return int
      */
     function unlinkPhotos()
     {
-        $db = DataBase::getInstance();
+        $photos = Photo::find(['id_groupe' => $this->getIdGroupe()]);
+        foreach ($photos as $photo) {
+            $photo->setIdGroupe(null)->save();
+        }
 
-        $sql = "UPDATE `" . Photo::getDbTable() . "` "
-             . "SET `id_groupe` = NULL "
-             . "WHERE `id_groupe` = " . (int) $this->getId();
-
-        $db->query($sql);
-
-        return $db->affectedRows();
+        return count($photos);
     }
 
     /**
@@ -1412,7 +1266,7 @@ class Groupe extends ObjectModel
      */
     function getAudios(): array
     {
-        return $this->_audios;
+        return Audio::find(['id_groupe' => $this->getIdGroupe()]);
     }
 
     /**
@@ -1422,15 +1276,12 @@ class Groupe extends ObjectModel
      */
     function unlinkAudios(): int
     {
-        $db = DataBase::getInstance();
+        $audios = Audio::find(['id_groupe' => $this->getIdGroupe()]);
+        foreach ($audios as $audio) {
+            $audio->setIdGroupe(null)->save();
+        }
 
-        $sql = "UPDATE `" . Audio::getDbTable() . "` "
-             . "SET `id_groupe` = NULL "
-             . "WHERE `id_groupe` = " . (int) $this->getId();
-
-        $db->query($sql);
-
-        return $db->affectedRows();
+        return count($audio);
     }
 
     /**
@@ -1450,7 +1301,7 @@ class Groupe extends ObjectModel
      */
     function getVideos(): array
     {
-        return $this->_videos;
+        return Video::find(['id_groupe' => $this->getIdGroupe()]);
     }
 
     /**
@@ -1460,15 +1311,12 @@ class Groupe extends ObjectModel
      */
     function unlinkVideos()
     {
-        $db = DataBase::getInstance();
+        $videos = Video::find(['id_groupe' => $this->getIdGroupe()]);
+        foreach ($videos as $video) {
+            $video->setIdGroupe(null)->save();
+        }
 
-        $sql = "UPDATE `" . Video::getDbTable() . "` "
-             . "SET `id_groupe` = NULL "
-             . "WHERE `id_groupe` = " . (int) $this->getId();
-
-        $db->query($sql);
-
-        return $db->affectedRows();
+        return count($videos);
     }
 
     /**
@@ -1482,6 +1330,16 @@ class Groupe extends ObjectModel
     }
 
     /**
+     * Retourne les events associées à ce groupe
+     *
+     * @return array
+     */
+    function getEvents(): array
+    {
+        return Event::find(['id_groupe' => $this->getIdGroupe()]);
+    }
+
+    /**
      * Délie les événements d'un groupe
      *
      * @return int
@@ -1491,65 +1349,11 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_participe_a . "` "
-             . "WHERE `id_groupe` = " . (int) $this->getId();
+             . "WHERE `id_groupe` = " . (int) $this->getIdGroupe();
 
         $db->query($sql);
 
         return $db->affectedRows();
-    }
-
-    /**
-     * Récupère les groupes ayant au moins un audio
-     *
-     * @return array
-     */
-    static function getGroupesWithAudio(): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
-             . "FROM `" . Groupe::getDbTable() . "` `g`, `" . Audio::getDbTable() . "` `a` "
-             . "WHERE `g`.`id_groupe` = `a`.`id_groupe` "
-             . "AND `g`.`online` AND `a`.`online` "
-             . "ORDER BY `g`.`name` ASC";
-
-        return $db->queryWithFetch($sql);
-    }
-
-    /**
-     * Récupère les groupes ayant au moins une vidéo
-     *
-     * @return array
-     */
-    static function getGroupesWithVideo(): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
-             . "FROM `" . Groupe::getDbTable() . "` `g`, `" . Video::getDbTable() . "` `v` "
-             . "WHERE `g`.`id_groupe` = `v`.`id_groupe` "
-             . "AND `g`.`online` AND `v`.`online` "
-             . "ORDER BY `g`.`name` ASC";
-
-        return $db->queryWithFetch($sql);
-    }
-
-    /**
-     * Récupère les groupes ayant au moins une photo
-     *
-     * @return array
-     */
-    static function getGroupesWithPhoto(): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
-             . "FROM `" . Groupe::getDbTable() . "` `g`, `" . Photo::getDbTable() . "` `p` "
-             . "WHERE `g`.`id_groupe` = `p`.`id_groupe` "
-             . "AND `g`.`online` AND `p`.`online` "
-             . "ORDER BY `g`.`name` ASC";
-
-        return $db->queryWithFetch($sql);
     }
 
     /**
@@ -1564,7 +1368,7 @@ class Groupe extends ObjectModel
         $sql = "(SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
              . "FROM `adhoc_groupe` `g`, `adhoc_video` `v` "
              . "WHERE `g`.`id_groupe` = `v`.`id_groupe` "
-             . "AND `g`.`online` AND `v`.`online`)"/*
+             . "AND `g`.`online` AND `v`.`online`)"
              . " UNION "
              . "(SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
              . "FROM `adhoc_groupe` `g`, `adhoc_audio` `a` "
@@ -1574,27 +1378,9 @@ class Groupe extends ObjectModel
              . "(SELECT DISTINCT `g`.`id_groupe` AS `id`, `g`.`name` "
              . "FROM `adhoc_groupe` `g`, `adhoc_photo` `p` "
              . "WHERE `g`.`id_groupe` = `p`.`id_groupe` "
-             . "AND `g`.`online` AND `p`.`online`)"*/
+             . "AND `g`.`online` AND `p`.`online`)"
              . " ORDER BY `name` ASC";
 
         return $db->queryWithFetch($sql);
-    }
-
-    /**
-     * Retourne si un alias de groupe est disponible
-     *
-     * @param string $alias alias
-     *
-     * @return bool
-     */
-    static function checkAliasAvailability(string $alias): bool
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `alias` "
-             . "FROM `" . Groupe::getDbTable() . "` "
-             . "WHERE `alias` = '" . $db->escape($alias) . "'";
-
-        return $db->queryWithFetchFirstField($sql);
     }
 }

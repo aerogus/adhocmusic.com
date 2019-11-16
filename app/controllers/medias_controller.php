@@ -38,8 +38,15 @@ final class Controller
 
         $search_media = [];
 
-        // recup groupes ayant des média
-        $smarty->assign('groupes', Groupe::getGroupesWithMedia());
+        $smarty->assign(
+            'groupes', Groupe::find(
+                [
+                    'online' => true,
+                    'order_by' => 'name',
+                    'sort' => 'ASC',
+                ]
+            )
+        );
 
         if ($id_groupe) {
             $search_media = Media::getMedia(

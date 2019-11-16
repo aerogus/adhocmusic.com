@@ -3,7 +3,7 @@
 {if !empty($unknown_video)}
 <p class="infobulle error">Cette vidéo est introuvable !</p>
 {else}
-{$video->getPlayer(true)}
+{$video->getPlayer()}
 {/if} {* test unknown video *}
 </body>
 </html>

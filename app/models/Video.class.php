@@ -180,6 +180,14 @@ class Video extends Media
     /**
      * @return int
      */
+    function getIdVideo(): int
+    {
+        return $this->_id_video;
+    }
+
+    /**
+     * @return int
+     */
     function getIdHost(): int
     {
         return $this->_id_host;
@@ -264,12 +272,21 @@ class Video extends Media
     /**
      * @return string|null
      */
-    function getThumbnailUrl(): ?string
+    function getThumbUrl(int $maxWidth = 0): ?string
     {
-        if (file_exists(self::getBasePath() .'/' . $this->getId() . '.jpg')) {
-            return self::getBaseUrl() . '/' . $this->getId() . '.jpg';
+        $sourcePath = self::getBasePath() . '/' . $this->getIdVideo() . '.jpg';
+        if (!file_exists($sourcePath)) {
+            $sourcePath = self::getDefaultThumbPath();
         }
-        return null;
+
+        return self::getBaseUrl() . '/' . $this->getIdVideo() . '.jpg';
+
+        $uid = 'video/' . $id . '/' . $maxWidth;
+        $cachePath = Image::getCachePath($uid);
+        if (!file_exists($cachePath)) {
+            // @TODO ajouter à une file de calcul
+        }
+        return Image::getCacheUrl($uid);
     }
 
     /* fin getters */
@@ -397,31 +414,28 @@ class Video extends Media
     /**
      * Retourne le code du player vidéo embarqué
      *
-     * @param bool $autoplay autoplay
-     * @param bool $iframe   iframe
-     *
      * @return string|null
      *
      * @see http://www.alsacreations.fr/dewtube
      * @see http://www.clubic.com/telecharger-fiche21739-riva-flv-encoder.html
      */
-    function getPlayer(bool $autoplay = false, bool $iframe = true): ?string
+    function getPlayer(): ?string
     {
-        switch ($this->_id_host) {
+        switch ($this->getIdHost()) {
             case self::HOST_YOUTUBE:
-                return '<iframe title="'.htmlspecialchars($this->getName()).'" src="https://www.youtube.com/embed/'.$this->getReference().'?rel=0" allowfullscreen></iframe>' . "\n";
+                return '<iframe src="https://www.youtube.com/embed/' . $this->getReference() . '?rel=0" allowfullscreen></iframe>' . "\n";
 
             case self::HOST_DAILYMOTION:
-                return '<iframe src="https://www.dailymotion.com/embed/video/'.$this->getReference().'?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&wmode=transparent"></iframe>' . "\n";
+                return '<iframe src="https://www.dailymotion.com/embed/video/' . $this->getReference() . '?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&wmode=transparent" allowfullscreen></iframe>' . "\n";
 
             case self::HOST_FACEBOOK:
                 return '<iframe src="https://www.facebook.com/video/embed?video_id=' . $this->getReference() . '" allowfullscreen></iframe>' . "\n";
 
             case self::HOST_VIMEO:
-                return '<iframe src="https://player.vimeo.com/video/'.$this->getReference().'?title=0&amp;byline=0&amp;portrait=0" allowfullscreen></iframe>' . "\n";
+                return '<iframe src="https://player.vimeo.com/video/' . $this->getReference() . '?title=0&amp;byline=0&amp;portrait=0" allowfullscreen></iframe>' . "\n";
 
             case self::HOST_ADHOCTUBE:
-                return '<iframe sandbox="allow-same-origin allow-scripts" src="https://'.MEDIA_ADHOCTUBE_HOST.'/videos/embed/'.$this->getReference().'?title=0&amp;warningTitle=0" allowfullscreen></iframe>' . "\n";
+                return '<iframe src="https://' . MEDIA_ADHOCTUBE_HOST . '/videos/embed/' . $this->getReference() . '?title=0&amp;warningTitle=0" sandbox="allow-same-origin allow-scripts" allowfullscreen></iframe>' . "\n";
 
             default:
                 return null;
@@ -437,9 +451,9 @@ class Video extends Media
      *
      * @return array ou false
      */
-    static function parseStringForVideoUrl(string $str)
+    static function parseStringForVideoUrl(string $code)
     {
-        $str = trim($str);
+        $str = trim($code);
 
         // attention, l'ordre des tests est très important, plusieurs media différents
         // pouvant partager le même type d'urls.
@@ -642,7 +656,7 @@ class Video extends Media
     static function invalidateVideoThumbInCache(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = true): bool
     {
         $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . (int) $border . '/' . (int) $zoom . '.jpg';
-        $cache = Image::getLocalCachePath($uid);
+        $cache = Image::getCachePath($uid);
 
         if (file_exists($cache)) {
             unlink($cache);
@@ -661,7 +675,7 @@ class Video extends Media
     static function getVideoThumbUrl(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = true): string
     {
         $uid = 'video/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . (int) $border . '/' . (int) $zoom . '.jpg';
-        $cache = Image::getLocalCachePath($uid);
+        $cache = Image::getCachePath($uid);
 
         if (!file_exists($cache)) {
             $source = self::getBasePath() . '/' . $id . '.jpg';
@@ -683,6 +697,6 @@ class Video extends Media
             }
         }
 
-        return Image::getHttpCachePath($uid);
+        return Image::getCacheUrl($uid);
     }
 }

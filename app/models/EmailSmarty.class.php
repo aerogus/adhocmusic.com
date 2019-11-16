@@ -59,8 +59,8 @@ class EmailSmarty extends Smarty
             default:       $source = ''; break;
         }
 
-        $cache_local = Image::getLocalCachePath($uid);
-        $cache_url = Image::getHttpCachePath($uid);
+        $cache_local = Image::getCachePath($uid);
+        $cache_url = Image::getCacheUrl($uid);
 
         if (file_exists($cache_local)) {
             return $cache_url;

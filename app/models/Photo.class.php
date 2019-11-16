@@ -189,7 +189,7 @@ class Photo extends Media
     static function invalidatePhotoInCache(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = false): bool
     {
         $uid = 'photo/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
-        $cache = Image::getLocalCachePath($uid);
+        $cache = Image::getCachePath($uid);
 
         if (file_exists($cache)) {
             unlink($cache);
@@ -208,7 +208,7 @@ class Photo extends Media
     static function getPhotoUrl(int $id, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = false): string
     {
         $uid = 'photo/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
-        $cache = Image::getLocalCachePath($uid);
+        $cache = Image::getCachePath($uid);
 
         if (!file_exists($cache)) {
             $source = self::getBasePath() . '/' . $id . '.jpg';
@@ -232,6 +232,6 @@ class Photo extends Media
             }
         }
 
-        return Image::getHttpCachePath($uid);
+        return Image::getCacheUrl($uid);
     }
 }

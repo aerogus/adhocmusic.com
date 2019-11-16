@@ -126,11 +126,11 @@ final class Controller
 
         $smarty->assign('event', $event);
 
-        $lieu = Lieu::getInstance($event->getIdLieu());
-        $smarty->assign('lieu', $lieu);
+        //$lieu = Lieu::getInstance($event->getIdLieu());
+        //$smarty->assign('lieu', $lieu);
 
         $smarty->assign('title', "♫ ". $event->getName());
-        $smarty->assign('description', "Date : " . Date::mysql_datetime($event->getDate(), 'd/m/Y') . " | Lieu : " . $lieu->getName() . " " . $lieu->getAddress() . " " . $lieu->getCp() . " " . $lieu->getCity());
+        $smarty->assign('description', "Date : " . Date::mysql_datetime($event->getDate(), 'd/m/Y') . " | Lieu : " . $event->getLieu()->getName() . " " . $event->getLieu()->getAddress() . " " . $event->getLieu()->getCp() . " " . $event->getLieu()->getCity());
 
         // alerting
         if (Tools::isAuth()) {
@@ -176,29 +176,8 @@ final class Controller
             )
         );
 
-        $smarty->assign(
-            'comments', Comment::find(
-                [
-                    'id_type' => 'e',
-                    'id_content' => $event->getIdEvent(),
-                    'online' => true,
-                    'order_by' => 'created_on',
-                    'sort' => 'ASC',
-                ]
-            )
-        );
-
         $smarty->assign('jour', Date::mysql_datetime($event->getDate(), "d/m/Y"));
         $smarty->assign('heure', Date::mysql_datetime($event->getDate(), "H:i"));
-
-        $smarty->assign(
-            'groupes', array_map(
-                function ($id_groupe) {
-                    return Groupe::getInstance($id_groupe);
-                },
-                $event->getGroupes()
-            )
-        );
 
         if ($event->getIdContact()) {
             try {

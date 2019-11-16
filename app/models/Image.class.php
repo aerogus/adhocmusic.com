@@ -606,7 +606,7 @@ class Image
      *
      * @return string
      */
-    static function getLocalCachePath(string $uid): string
+    static function getCachePath(string $uid): string
     {
         $hash = md5(trim($uid));
 
@@ -615,9 +615,7 @@ class Image
         $d2 = substr($hash, 1, 1);
         $d3 = substr($hash, 2, 1);
 
-        $path = $d0 . '/' . $d1 . '/' . $d2 . '/' . $d3 . '/' . $hash . '.jpg';
-
-        return $path;
+        return $d0 . '/' . $d1 . '/' . $d2 . '/' . $d3 . '/' . $hash . '.jpg';
     }
 
     /**
@@ -627,7 +625,7 @@ class Image
      *
      * @return string
      */
-    static function getHttpCachePath(string $uid): string
+    static function getCacheUrl(string $uid): string
     {
         $hash = md5(trim($uid));
 
@@ -636,9 +634,7 @@ class Image
         $d2 = substr($hash, 1, 1);
         $d3 = substr($hash, 2, 1);
 
-        $url = $d0 . '/' . $d1 . '/' . $d2 . '/' . $d3 . '/' . $hash . '.jpg';
-
-        return $url;
+        return $d0 . '/' . $d1 . '/' . $d2 . '/' . $d3 . '/' . $hash . '.jpg';
     }
 
     /**

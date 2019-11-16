@@ -1038,7 +1038,7 @@ class Event extends ObjectModel
     static function invalidateFlyerInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
     {
         $uid = 'event/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
-        $cache = Image::getLocalCachePath($uid);
+        $cache = Image::getCachePath($uid);
 
         if (file_exists($cache)) {
             unlink($cache);
@@ -1057,7 +1057,7 @@ class Event extends ObjectModel
     static function getFlyerUrl(int $id_event, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = false)
     {
         $uid = 'event/' . $id_event . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . (int) $border . '/' . (int) $zoom . '.jpg';
-        $cache = Image::getLocalCachePath($uid);
+        $cache = Image::getCachePath($uid);
 
         if (!file_exists($cache)) {
             $source = self::getBasePath() . '/' . $id_event . '.jpg';
@@ -1077,7 +1077,7 @@ class Event extends ObjectModel
             }
         }
 
-        return Image::getHttpCachePath($uid);
+        return Image::getCacheUrl($uid);
     }
 
     /**

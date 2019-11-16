@@ -12,7 +12,7 @@
   </header>
   <div class="reset">
     <div class="fluid-video-player ratio-16-9">
-    {$video->getPlayer(true)}
+    {$video->getPlayer()}
     </div>
   </div>
 </div>

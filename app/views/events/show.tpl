@@ -20,12 +20,10 @@
 
     <div id="event-box-info">
       <p><strong>Le {$jour} à {$heure}</strong></p>
-      <a href="/lieux/{$lieu->getId()}" title="{$lieu->getName()|escape}">
-        <!-- map à debugguer -->
-        <!--<img id="event-box-map" src="{$lieu->getMapUrl('64x64')}" alt="">-->
-        <strong>{$lieu->getName()|escape}</strong><br>
-        {$lieu->getAddress()}<br>
-        {$lieu->getCp()} - {$lieu->getCity()|escape}
+      <a href="/lieux/{$event->getLieu()->getIdLieu()}" title="{$event->getLieu()->getName()|escape}">
+        <strong>{$event->getLieu()->getName()|escape}</strong><br>
+        {$event->getLieu()->getAddress()}<br>
+        {$event->getLieu()->getCp()} - {$event->getLieu()->getCity()|escape}
       </a>
       <p>Entrée : <strong>{$event->getPrice()|escape}</strong></p>
     </div>
@@ -36,10 +34,10 @@
     </p>
     {/if}
 
-    {if !empty($groupes)}
+    {if !empty($event->getGroupes())}
     <p>Avec :</p>
     <ul class="grid-3">
-    {foreach from=$groupes item=groupe}
+    {foreach from=$event->getGroupes() item=groupe}
       <li><a href="{$groupe->getUrl()}"><img src="{$groupe->getMiniPhoto()}" style="float: left; margin: 2px; border: 1px solid #777" alt=""></a><a href="{$groupe->getUrl()}"><strong>{$groupe->getName()|escape}</strong></a><br>({$groupe->getStyle()|escape})</li>
     {/foreach}
     </ul>
@@ -80,7 +78,7 @@
   <div class="reset grid-6">
     {foreach from=$videos item=video}
     <div class="thumb-80">
-      <a href="{$video->getUrl()}"><img src="{$video->getThumb80Url()}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe->getName()|escape}){/if}">{$video->getName()|truncate:15:"...":true:true|escape}</a>
+      <a href="{$video->getUrl()}"><img src="{$video->getThumbUrl(80)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe->getName()|escape}){/if}">{$video->getName()|truncate:15:"...":true:true|escape}</a>
       <a class="overlay-80 overlay-video-80" href="{$video->getUrl()}" title="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}"></a>
     </div>
     {/foreach}
@@ -96,8 +94,8 @@
   <div class="reset gallery">
   {foreach from=$photos item=photo}
     <div class="photo">
-      <a href="{$photo->getThumb1000Url()}" data-at-1000="{$photo->getThumb1000Url()}" title="{$photo.name|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
-        <img src="{$photo->getThumb320Url()}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
+      <a href="{$photo->getThumbUrl(1000)}" data-at-1000="{$photo->getThumbUrl(1000)}" title="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
+        <img src="{$photo->getThumbUrl(320)}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
       </a>
     </div>
   {/foreach}
