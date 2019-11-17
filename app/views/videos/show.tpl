@@ -45,7 +45,7 @@
       <h2>Événement</h2>
     </header>
     <div>
-      <a href="{$event->getUrl()}"><img style="float: right;" src="{$event->getFlyer100Url()}" alt=""><strong>{$event->getName()|escape}</strong></a><br>{$event->getDate()|date_format:'%d/%m/%Y'}
+      <a href="{$event->getUrl()}"><img style="float: right;" src="{$event->getThumbUrl(100)}" alt=""><strong>{$event->getName()|escape}</strong></a><br>{$event->getDate()|date_format:'%d/%m/%Y'}
     </div>
   </div>
   {/if}

@@ -11,7 +11,7 @@
         <ul>
           {foreach from=$events_of_the_year item=event}
           <li>
-            <a href="{$event->getUrl()}"><img alt="" src="{$event->getFlyer100Url()}"><br>{$event->getDate()|date_format:"%e %b"}</a>
+            <a href="{$event->getUrl()}"><img alt="" src="{$event->getThumbUrl(100)}"><br>{$event->getDate()|date_format:"%e %b"}</a>
           </li>
           {/foreach}
         </ul>

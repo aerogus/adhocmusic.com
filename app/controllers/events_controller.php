@@ -188,7 +188,7 @@ final class Controller
 
         if (file_exists(MEDIA_PATH . '/event/' . $event->getId() . '.jpg')) {
             $smarty->assign('flyer', true);
-            $smarty->assign('og_image', $event->getFlyerUrl($event->getId()));
+            $smarty->assign('og_image', $event->getFlyerUrl());
         }
 
         return $smarty->fetch('events/show.tpl');

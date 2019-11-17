@@ -333,7 +333,7 @@ final class Controller
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
             ->addStep('Mes photos', '/photos/my')
-            ->addStep('Editer une photo');
+            ->addStep('Éditer une photo');
 
         try {
             $photo = Photo::getInstance($id);
@@ -373,7 +373,7 @@ final class Controller
                         ->setType(IMAGETYPE_JPEG)
                         ->setMaxWidth(2048)
                         ->setMaxHeight(2048)
-                        ->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg')
+                        ->setDestFile(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg')
                         ->write();
 
                     foreach ([80, 320, 680, 1000] as $maxWidth) {

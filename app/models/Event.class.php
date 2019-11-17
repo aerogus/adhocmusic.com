@@ -621,7 +621,7 @@ class Event extends ObjectModel
      */
     function deleteFlyer(): bool
     {
-        $p = self::getBasePath() . '/' . $this->getId() . '.jpg';
+        $p = self::getBasePath() . '/' . $this->getIdEvent() . '.jpg';
         if (file_exists($p)) {
             unlink($p);
         }
@@ -635,12 +635,73 @@ class Event extends ObjectModel
     }
 
     /**
+     * @return string|null
+     */
+    function getThumbUrl(int $maxWidth = 0): ?string
+    {
+        $sourcePath = self::getBasePath() . '/' . $this->getIdEvent() . '.jpg';
+
+        if (!$maxWidth) {
+            return self::getBaseUrl() . '/' . $this->getIdEvent() . '.jpg';
+        } else {
+            $uid = 'event/' . $this->getIdEvent() . '/' . $maxWidth;
+            $cachePath = Image::getCachePath($uid);
+            if (!file_exists($cachePath)) {
+                // @TODO ajouter à une file de calcul
+            }
+            return Image::getCacheUrl($uid);
+        }
+    }
+
+    /**
      * @param int $maxWidth maxWidth
      *
      * @return bool
      */
-    function clearThumb(int $maxWidth): bool
+    function clearThumb(int $maxWidth = 0): bool
     {
+        $uid = 'event/' . $this->getIdEvent() . '/' . $maxWidth;
+        $cache = Image::getCachePath($uid);
+
+        if (file_exists($cache)) {
+            unlink($cache);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Génère la miniature d'une photo
+     *
+     * @param int $maxWidth maxWidth
+     *
+     * @return bool
+     */
+    function genThumb(int $maxWidth = 0): bool
+    {
+        if (!$maxWidth) {
+            return false;
+        }
+
+        $uid = 'event/' . $this->getIdEvent() . '/' . $maxWidth;
+        $cache = Image::getCachePath($uid);
+
+        if (file_exists($cache)) {
+            unlink($cache);
+        }
+
+        $source = self::getBasePath() . '/' . $this->getIdEvent() . '.jpg';
+        if (!file_exists($source)) {
+            return false;
+        }
+
+        $img = (new Image($source))
+            ->setType(IMAGETYPE_JPEG)
+            ->setMaxWidth($maxWidth);
+
+        Image::writeCache($uid, $img->get());
+
         return true;
     }
 
