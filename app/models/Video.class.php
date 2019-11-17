@@ -65,10 +65,7 @@ define('MEDIA_ADHOCTUBE_HOST', 'videos.adhocmusic.com');
 define('MEDIA_ADHOCTUBE_URL_PATTERN', '~^https://' . MEDIA_ADHOCTUBE_HOST . '/videos/watch/([a-f0-9-]{36})~');
 
 /**
- * Classe Vidéo
- *
- * Classe de gestion des vidéos du site
- * Appel conversion, upload etc ...
+ * Classe de gestion des vidéos
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
@@ -91,8 +88,6 @@ class Video extends Media
      * @var string
      */
     protected static $_table = 'adhoc_video';
-
-    const DEFAULT_THUMBNAIL = 'https://www.adhocmusic.com/img/videothumb.jpg';
 
     const HOST_YOUTUBE     = 1;
     const HOST_DAILYMOTION = 2;
@@ -278,7 +273,17 @@ class Video extends Media
      */
     static function getDefaultThumbPath(): string
     {
-        return ADHOC_ROOT_PATH . '/assets/img/videothumb.jpg';
+        return ADHOC_ROOT_PATH . '/assets/img/default-video-thumb.jpg';
+    }
+
+    /**
+     * Retourne le chemin de l'imagette par défaut
+     *
+     * @return string
+     */
+    static function getDefaultThumbUrl(): string
+    {
+        return HOME_URL . '/img/default-video-thumb.jpg';
     }
 
     /**
@@ -552,7 +557,7 @@ class Video extends Media
                 return $meta_info[0]->thumbnail_large;
 
             case self::HOST_FACEBOOK:
-                return self::DEFAULT_THUMBNAIL;
+                return null;
 
             case self::HOST_ADHOCTUBE:
                 $meta_url = 'https://' . MEDIA_ADHOCTUBE_HOST . '/api/v1/videos/' . $reference;
