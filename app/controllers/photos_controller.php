@@ -238,16 +238,14 @@ final class Controller
                                 ->setType(IMAGETYPE_JPEG)
                                 ->setMaxWidth(2048)
                                 ->setMaxHeight(2048)
-                                ->setDestFile(Photo::getBasePath() . '/' . $photo->getId() . '.jpg')
+                                ->setDestFile(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg')
                                 ->write();
-                            Log::action(Log::ACTION_PHOTO_CREATE, $photo->getId());
+                            Log::action(Log::ACTION_PHOTO_CREATE, $photo->getIdPhoto());
 
                             // les générations des thumbs à faire en asynchrone
-                            /*
                             foreach ([80, 320, 680, 1000] as $maxWidth) {
                                 $photo->genThumb($maxWidth);
                             }
-                            */
 
                         }
                     }

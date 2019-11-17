@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use \Reference\VideoHost;
+
 /**
  * 1 - YouTube
  */
@@ -194,13 +196,13 @@ class Video extends Media
     }
 
     /**
-     * Retourne le libellé d'un hébergeur
+     * Retourne l'objet VideoHost
      *
-     * @return string
+     * @return object
      */
-    function getHostName(): string
+    function getHost(): object
     {
-        return self::$_tab_hosts[$this->_id_host];
+        return VideoHost::getInstance($this->getIdHost());
     }
 
     /**
@@ -296,7 +298,7 @@ class Video extends Media
         if (!$maxWidth) {
             return self::getBaseUrl() . '/' . $this->getIdVideo() . '.jpg';
         } else {
-            $uid = 'video/' . $id . '/' . $maxWidth;
+            $uid = 'video/' . $this->getIdVideo() . '/' . $maxWidth;
             $cachePath = Image::getCachePath($uid);
             if (!file_exists($cachePath)) {
                 // @TODO ajouter à une file de calcul
@@ -372,43 +374,6 @@ class Video extends Media
     }
 
     /* fin setters */
-
-    /**
-     * Retourne le listing des hébergeurs supportés
-     *
-     * @return array
-     */
-    static function getHosts(): array
-    {
-        return self::$_tab_hosts;
-    }
-
-    /**
-     * Retourne le listing des hébergeurs supportés
-     *
-     * @return array
-     */
-    static function getVideoHosts(): array
-    {
-        $tab = [];
-        foreach (self::$_tab_hosts as $id => $name) {
-            $tab[] = [
-                'id' => $id,
-                'name' => $name,
-            ];
-        }
-        return $tab;
-    }
-
-    /**
-     * @param int $host_id identifiant hébergeur
-     *
-     * @return string
-     */
-    static function getHostNameByHostId(int $host_id): string
-    {
-        return self::$_tab_hosts[$host_id];
-    }
 
     /**
      * Efface une vidéo de la table vidéo
@@ -691,9 +656,9 @@ class Video extends Media
      *
      * @param int $maxWidth maxWidth
      *
-     * @return string
+     * @return bool
      */
-    function genThumb(int $maxWidth = 0): string
+    function genThumb(int $maxWidth = 0): bool
     {
         if (!$maxWidth) {
             return false;
@@ -711,9 +676,9 @@ class Video extends Media
             return false;
         }
 
-        $img = new Image($source);
-        $img->setType(IMAGETYPE_JPEG);
-        $img->setMaxWidth($width);
+        $img = (new Image($source))
+            ->setType(IMAGETYPE_JPEG)
+            ->setMaxWidth($maxWidth);
         Image::writeCache($uid, $img->get());
 
         return true;

@@ -100,6 +100,8 @@ for ($n = 1 ; $n <= 10 ; $n++) {
     echo "insertion video " . $n . "\n";
     (new Video())
         ->setIdContact(1)
+        ->setIdHost(1)
+        ->setReference('gfdsfkl')
         ->setName("Vidéo n°" . $n)
         ->setIdGroupe($n)
         ->setOnline(true)

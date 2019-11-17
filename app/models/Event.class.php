@@ -86,21 +86,6 @@ class Event extends ObjectModel
     protected $_modified_on = null;
 
     /**
-     * @var array
-     */
-    protected $_styles = [];
-
-    /**
-     * @var array
-     */
-    protected $_groupes = [];
-
-    /**
-     * @var array
-     */
-    protected $_structures = [];
-
-    /**
      * Liste des attributs de l'objet
      *
      * @var array
@@ -280,22 +265,6 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    function getContactUrl(): string
-    {
-        return HOME_URL . '/membres/' . (string) $this->_id_contact;
-    }
-
-    /**
-     * @return string
-     */
-    function getContactPseudo(): string
-    {
-        return Membre::getPseudoById($this->_id_contact);
-    }
-
-    /**
-     * @return string
-     */
     function getFacebookEventId(): string
     {
         return $this->_facebook_event_id;
@@ -326,33 +295,6 @@ class Event extends ObjectModel
             return Lieu::getInstance($this->getIdLieu());
         }
         return null;
-    }
-
-    /**
-     * @return string|null
-     */
-    function getFullFlyerUrl(): ?string
-    {
-        if (file_exists(self::getBasePath()  . '/' . (string) $this->_id_event . '.jpg')) {
-            return self::getBaseUrl() . '/' . (string) $this->_id_event . '.jpg';
-        }
-        return null;
-    }
-
-    /**
-     * @return string|null
-     */
-    function getFlyer100Url(): ?string
-    {
-        return self::getFlyerUrl((int) $this->getId(), 100, 100);
-    }
-
-    /**
-     * @return string|null
-     */
-    function getFlyer320Url(): ?string
-    {
-        return self::getFlyerUrl((int) $this->getId(), 320, 0);
     }
 
     /**
@@ -668,24 +610,16 @@ class Event extends ObjectModel
     protected function _loadFromDb(): bool
     {
         if (!parent::_loadFromDb()) {
-            throw new Exception('id_event_introuvable');
-        }
-
-        if (file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
-            $this->_photo = self::getBaseUrl() . '/' . $this->getId() . '.jpg';
-        }
-
-        if (file_exists(self::getBasePath() . '/' . $this->getId() . '-mini.jpg')) {
-            $this->_mini_photo = self::getBaseUrl() . '/' . $this->getId() . '-mini.jpg';
+            throw new Exception('id_event introuvable');
         }
 
         return true;
     }
 
     /**
-     *
+     * @return bool
      */
-    function deleteFlyer()
+    function deleteFlyer(): bool
     {
         $p = self::getBasePath() . '/' . $this->getId() . '.jpg';
         if (file_exists($p)) {
@@ -693,8 +627,21 @@ class Event extends ObjectModel
         }
 
         // delete des caches images
-        self::invalidateFlyerInCache($this->getId(), '100', '100');
-        self::invalidateFlyerInCache($this->getId(), '400', '400');
+        foreach ([100, 320, 400] as $maxWidth) {
+            $this->clearThumb($maxWidth);
+        }
+
+        return true;
+    }
+
+    /**
+     * @param int $maxWidth maxWidth
+     *
+     * @return bool
+     */
+    function clearThumb(int $maxWidth): bool
+    {
+        return true;
     }
 
     /**
@@ -726,7 +673,7 @@ class Event extends ObjectModel
 
         $sql = "INSERT INTO `" . self::$_db_table_event_style . "` "
              . "(`id_event`, `id_style`) "
-             . "VALUES (" . $this->_id_event . ", " . $id_style . ")";
+             . "VALUES (" . (int) $this->getIdEvent() . ", " . (int) $id_style . ")";
 
         try {
             $db->query($sql);
@@ -748,7 +695,7 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_event_style . "` "
-             . "WHERE `id_event` = " . (int) $this->_id_event . " "
+             . "WHERE `id_event` = " . (int) $this->getIdEvent() . " "
              . "AND `id_style` = " . (int) $id_style;
 
         $db->query($sql);
@@ -883,7 +830,7 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$_db_table_organise_par . "` "
-             . "WHERE `id_event` = " . (int) $this->_id_event . " "
+             . "WHERE `id_event` = " . (int) $this->getIdEvent() . " "
              . "AND `id_structure` = " . (int) $id_structure;
 
         $db->query($sql);
@@ -1029,54 +976,6 @@ class Event extends ObjectModel
         }
 
         return $tab;
-    }
-
-    /**
-     *
-     */
-    static function invalidateFlyerInCache($id, $width = 80, $height = 80, $bgcolor = '000000', $border = 0, $zoom = 0)
-    {
-        $uid = 'event/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
-        $cache = Image::getCachePath($uid);
-
-        if (file_exists($cache)) {
-            unlink($cache);
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Retourne l'url de la photo
-     * gestion de la mise en cache
-     *
-     * @return string
-     */
-    static function getFlyerUrl(int $id_event, int $width = 80, int $height = 80, string $bgcolor = '000000', bool $border = false, bool $zoom = false)
-    {
-        $uid = 'event/' . $id_event . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . (int) $border . '/' . (int) $zoom . '.jpg';
-        $cache = Image::getCachePath($uid);
-
-        if (!file_exists($cache)) {
-            $source = self::getBasePath() . '/' . $id_event . '.jpg';
-            if (file_exists($source)) {
-                $img = (new Image($source))
-                    ->setType(IMAGETYPE_JPEG)
-                    ->setMaxWidth($width)
-                    ->setMaxHeight($height)
-                    ->setBorder($border)
-                    ->setKeepRatio(true)
-                    ->setZoom($zoom)
-                    ->setHexColor($bgcolor);
-                Image::writeCache($uid, $img->get());
-            } else {
-                // ce n'est pas une erreur, tous les events n'ont pas de flyers
-                return null;
-            }
-        }
-
-        return Image::getCacheUrl($uid);
     }
 
     /**

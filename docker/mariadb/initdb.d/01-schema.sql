@@ -39,6 +39,12 @@ CREATE TABLE IF NOT EXISTS `adhoc_style` (
   PRIMARY KEY (`id_style`)
 );
 
+CREATE TABLE IF NOT EXISTS `adhoc_video_host` (
+  `id_video_host` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_video_host`)
+);
+
 CREATE TABLE IF NOT EXISTS `adhoc_faq_category` (
   `id_faq_category` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,

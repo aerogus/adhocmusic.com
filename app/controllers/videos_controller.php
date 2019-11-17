@@ -286,9 +286,6 @@ final class Controller
             ->addStep('Mes vidéos', '/videos/my')
             ->addStep('Ajouter une vidéo');
 
-        $hosts = Video::getVideoHosts();
-        $smarty->assign('hosts', $hosts);
-
         $id_groupe = (int) Route::params('id_groupe');
         if ($id_groupe) {
             $groupe = Groupe::getInstance($id_groupe);

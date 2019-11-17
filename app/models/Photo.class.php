@@ -176,7 +176,7 @@ class Photo extends Media
         if (!$maxWidth) {
             return self::getBaseUrl() . '/' . $this->getIdPhoto() . '.jpg';
         } else {
-            $uid = 'photo/' . $id . '/' . $maxWidth;
+            $uid = 'photo/' . $this->getIdPhoto() . '/' . $maxWidth;
             $cachePath = Image::getCachePath($uid);
             if (!file_exists($cachePath)) {
                 // @TODO ajouter à une file de calcul
@@ -206,9 +206,9 @@ class Photo extends Media
      *
      * @param int $maxWidth maxWidth
      *
-     * @return string
+     * @return bool
      */
-    function genThumb(int $maxWidth = 0): string
+    function genThumb(int $maxWidth = 0): bool
     {
         if (!$maxWidth) {
             return false;
@@ -226,9 +226,10 @@ class Photo extends Media
             return false;
         }
 
-        $img = new Image($source);
-        $img->setType(IMAGETYPE_JPEG);
-        $img->setMaxWidth($width);
+        $img = (new Image($source))
+            ->setType(IMAGETYPE_JPEG)
+            ->setMaxWidth($maxWidth);
+
         Image::writeCache($uid, $img->get());
 
         return true;
