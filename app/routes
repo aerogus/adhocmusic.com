@@ -95,7 +95,7 @@ emails|member_create|GET|/emails/member-create
 emails|message_received|GET|/emails/message-received
 emails|password_changed|GET|/emails/password-changed
 emails|password_lost|GET|/emails/password-lost
-emails|new_commentaire|GET|/emails/new-commentaire
+emails|new_comment|GET|/emails/new-comment
 emails|log_action|GET|/emails/log-action
 events|index|GET|/events
 events|create|GET|/events/create

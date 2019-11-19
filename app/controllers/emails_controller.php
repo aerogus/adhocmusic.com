@@ -11,11 +11,15 @@ final class Controller
     static function form_contact_cc(): string
     {
         $smarty = new EmailSmarty();
-        $smarty->assign('name', 'Mon nom');
-        $smarty->assign('email', 'email@email.com');
-        $smarty->assign('date', '2011-12-25 00:00:00');
-        $smarty->assign('subject', 'Mon sujet');
-        $smarty->assign('text', 'Mon texte');
+        $smarty->assign(
+            [
+                'name' => 'Mon nom',
+                'email' => 'email@email.com',
+                'date' => '2011-12-25 00:00:00',
+                'subject' => 'Mon sujet',
+                'text' => 'Mon texte',
+            ]
+        );
         return $smarty->fetch('form-contact-cc.tpl');
     }
 
@@ -76,16 +80,20 @@ final class Controller
     /**
      * @return string
      */
-    static function new_commentaire(): string
+    static function new_comment(): string
     {
         $smarty = new EmailSmarty();
-        $smarty->assign('subject', "Un nouveau commentaire a été posté sur la vidéo machin");
-        $smarty->assign('pseudo', 'pseudo');
-        $smarty->assign('date', '2011-12-25 06:00:00');
-        $smarty->assign('title', 'Titre du contenu');
-        $smarty->assign('url', HOME_URL);
-        $smarty->assign('text', 'Contenu du commentaire');
-        return $smarty->fetch('new-commentaire.tpl');
+        $smarty->assign(
+            [
+                'subject' => "Un nouveau commentaire a été posté sur la vidéo machin",
+                'pseudo' => 'pseudo',
+                'date' => '2011-12-25 06:00:00',
+                'title' => 'Titre du contenu',
+                'url' => HOME_URL,
+                'text' => 'Contenu du commentaire',
+            ]
+        );
+        return $smarty->fetch('new-comment.tpl');
     }
 
     /**
@@ -94,10 +102,14 @@ final class Controller
     static function log_action(): string
     {
         $smarty = new EmailSmarty();
-        $smarty->assign('subject', "gus a ajouté un nouveau lieu");
-        $smarty->assign('pseudo', 'gus');
-        $smarty->assign('action', 'a ajouté un nouveau lieu');
-        $smarty->assign('extra', '1');
+        $smarty->assign(
+            [
+                'subject' => "gus a ajouté un nouveau lieu",
+                'pseudo' => 'gus',
+                'action' => 'a ajouté un nouveau lieu',
+                'extra' => '1',
+            ]
+        );
         return $smarty->fetch('log-action.tpl');
     }
 }

@@ -15,31 +15,7 @@
           <td><strong>{$pseudo|escape}</strong></td>
         </tr>
         <tr>
-          <td>Password :</td>
-          <td><strong>{$password|escape}</strong></td>
-        </tr>
-        <tr>
-          <td>Nom :</td>
-          <td>{$last_name|escape}</td>
-        </tr>
-        <tr>
-          <td>Prénom :</td>
-          <td>{$first_name|escape}</td>
-        </tr>
-        <tr>
-          <td>Code Postal :</td>
-          <td>{$cp|escape}</td>
-        </tr>
-        <tr>
-          <td>Ville :</td>
-          <td>{$city|escape}</td>
-        </tr>
-        <tr>
-          <td>Pays :</td>
-          <td>{$country|escape}</td>
-        </tr>
-        <tr>
-          <td>Email :</td>
+          <td>E-mail :</td>
           <td>{$email|escape}</td>
         </tr>
       </table>
