@@ -60,7 +60,7 @@ final class Controller
         $events = [];
         foreach ($_events as $event) {
             $month = substr($event->getDate(), 0, 7) . '-01';
-            if (!array_key_exists($month, $evts)) {
+            if (!array_key_exists($month, $events)) {
                 $events[$month] = [];
             }
             $events[$month][] = $event;

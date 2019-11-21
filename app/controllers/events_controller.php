@@ -6,6 +6,9 @@ define('NB_EVENTS_PER_PAGE', 100);
 
 final class Controller
 {
+    /**
+     * @return string
+     */
     static function index(): string
     {
         $smarty = new AdHocSmarty();
@@ -93,6 +96,9 @@ final class Controller
         return $vCalendar->render();
     }
 
+    /**
+     * @return string
+     */
     static function show(): string
     {
         $id = (int) Route::params('id');
@@ -186,9 +192,8 @@ final class Controller
             }
         }
 
-        if (file_exists(MEDIA_PATH . '/event/' . $event->getId() . '.jpg')) {
-            $smarty->assign('flyer', true);
-            $smarty->assign('og_image', $event->getFlyerUrl());
+        if (file_exists(Event::getBasePath() . '/' . $event->getIdEvent() . '.jpg')) {
+            $smarty->assign('og_image', $event->getThumbUrl());
         }
 
         return $smarty->fetch('events/show.tpl');
