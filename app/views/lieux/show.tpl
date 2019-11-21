@@ -106,7 +106,10 @@
   <div>
     <ul>
       {foreach $audios as $audio}
-      <li>Titre : <strong>{$audio->getName()|escape}</strong><br>Groupe : <a href="{$audio->getGroupe()->getUrl()}">{$audio->getGroupe()->getName()}</a><br>Evénement : <a href="{$audio->getEvent()->getUrl()}">{$audio->getEvent()->getName()}</a> ({$audio->getEvent()->getDate()|date_format:'%d/%m/%Y'})<br><audio src="{$audio->getDirectMp3Url()}"></audio></li>
+      <li>Titre : <strong>{$audio->getName()|escape}</strong>
+      {if !empty($audio->getGroupe()}<br>Groupe : <a href="{$audio->getGroupe()->getUrl()}">{$audio->getGroupe()->getName()}</a>{/if}
+      {if !empty($audio->getEvent()}<br>Evénement : <a href="{$audio->getEvent()->getUrl()}">{$audio->getEvent()->getName()}</a> ({$audio->getEvent()->getDate()|date_format:'%d/%m/%Y'}){/if}
+      <br><audio src="{$audio->getDirectMp3Url()}"></audio></li>
       {/foreach}
     </ul>
   </div>
@@ -121,8 +124,8 @@
   <div class="reset grid-3">
     {foreach $videos as $video}
     <div>
-      <a href="{$video->getUrl()}"><img src="{$video->getThumbUrl(320)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe()->getName())} ({$video->getGroupe()->getName()|escape}){/if}">{$video->getName()|truncate:15:"...":true:true|escape}</a>
-      <a class="overlay-80 overlay-video-80" href="{$video->getUrl()}" title="{$video->getName()|escape}{if !empty($video->getGroupe()->getName())} ({$video->getGroupe()->getName()|escape}){/if}"></a>
+      <a href="{$video->getUrl()}"><img src="{$video->getThumbUrl(320)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}">{$video->getName()|truncate:15:"...":true:true|escape}</a>
+      <a class="overlay-80 overlay-video-80" href="{$video->getUrl()}" title="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}"></a>
     </div>
     {/foreach}
   </div>
