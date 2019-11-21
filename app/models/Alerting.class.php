@@ -325,7 +325,7 @@ class Alerting extends ObjectModel
         $sql = "SELECT `id_content` "
              . "FROM `adhoc_alerting` "
              . "WHERE `id_contact` = " . (int) $id_contact . " "
-             . "AND `a`.`type` = 'l'";
+             . "AND `type` = 'l'";
 
         $rows = $db->queryWithFetch($sql);
         $lieux = [];
@@ -405,7 +405,7 @@ class Alerting extends ObjectModel
         $sql = "SELECT `id_content` "
              . "FROM `adhoc_alerting` "
              . "WHERE `id_contact` = " . (int) $id_contact . " "
-             . "AND `a`.`type` = 'e'";
+             . "AND `type` = 'e'";
 
         $rows = $db->queryWithFetch($sql);
         $events = [];
