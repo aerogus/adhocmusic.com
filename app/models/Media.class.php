@@ -85,7 +85,11 @@ class Media extends ObjectModel
     function getGroupe(): ?object
     {
         if (!is_null($this->getIdGroupe())) {
-            return Groupe::getInstance($this->getIdGroupe());
+            try {
+                return Groupe::getInstance($this->getIdGroupe());
+            } catch (Exception $e) {
+                return null;
+            }
         }
         return null;
     }
