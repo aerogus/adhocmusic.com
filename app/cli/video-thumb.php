@@ -4,8 +4,7 @@
 require_once __DIR__ . '/../bootstrap.php';
 
 /**
- * génère dans le cache l'ensemble des vignettes vidéos
- * en 80x80 zoomé
+ * Vide et regénère le cache de l'ensemble des miniature des vidéos
  */
 
 echo "nb de vidéos trouvées : " . Video::count() . "\n";
