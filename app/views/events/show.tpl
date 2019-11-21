@@ -78,7 +78,7 @@
   <div class="reset grid-6">
     {foreach from=$videos item=video}
     <div class="thumb-80">
-      <a href="{$video->getUrl()}"><img src="{$video->getThumbUrl(80)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe->getName()|escape}){/if}">{$video->getName()|truncate:15:"...":true:true|escape}</a>
+      <a href="{$video->getUrl()}"><img src="{$video->getThumbUrl(80)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}">{$video->getName()|truncate:15:"...":true:true|escape}</a>
       <a class="overlay-80 overlay-video-80" href="{$video->getUrl()}" title="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}"></a>
     </div>
     {/foreach}
