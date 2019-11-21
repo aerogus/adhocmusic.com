@@ -44,3 +44,5 @@ foreach ($photos as $photo) {
     }
 
 }
+
+echo "fin\n";

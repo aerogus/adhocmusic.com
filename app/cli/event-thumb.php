@@ -44,3 +44,5 @@ foreach ($events as $event) {
     }
 
 }
+
+echo "fin\n";

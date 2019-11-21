@@ -44,3 +44,5 @@ foreach ($videos as $video) {
     }
 
 }
+
+echo "fin\n";
