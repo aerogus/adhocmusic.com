@@ -16,7 +16,6 @@ $photos = Photo::find(
     [
         'order_by' => 'id_photo',
         'sort' => 'ASC',
-        'start' => 0,
         'limit' => 5000,
     ]
 );

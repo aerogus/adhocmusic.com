@@ -78,7 +78,6 @@ final class Controller
                 'id_type' => ['s', 'p', 'v'],
                 'order_by' => 'id_comment',
                 'sort'  => 'DESC',
-                'start' => 0,
                 'limit' => 5,
             ]
         );

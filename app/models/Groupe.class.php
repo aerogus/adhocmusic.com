@@ -1115,6 +1115,10 @@ class Groupe extends ObjectModel
             $sql .= "ASC ";
         }
 
+        if (!isset($params['start'])) {
+            $params['start'] = 0;
+        }
+
         if (isset($params['start']) && isset($params['limit'])) {
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }

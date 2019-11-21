@@ -591,6 +591,10 @@ class Event extends ObjectModel
             $sql .= "ASC ";
         }
 
+        if (!isset($params['start'])) {
+            $params['start'] = 0;
+        }
+
         if (isset($params['start']) && isset($params['limit'])) {
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
@@ -1018,7 +1022,6 @@ class Event extends ObjectModel
                 'id_structure' => 1, // AD'HOC
                 'order_by' => 'date',
                 'sort' => 'ASC',
-                'start' => 0,
                 'limit' => 1000,
             ]
         );

@@ -17,7 +17,6 @@ $videos = Video::find(
     [
         'order_by' => 'id_video',
         'sort' => 'ASC',
-        'start' => 0,
         'limit' => 2500,
     ]
 );

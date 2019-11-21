@@ -22,7 +22,6 @@ final class Controller
                     'current' => true,
                     'order_by' => 'modified_on',
                     'sort' => 'DESC',
-                    'start' => 0,
                     'limit' => 6,
                 ]
             )
