@@ -57,8 +57,8 @@
       <div class="reset">
         {foreach from=$videos item=video}
         <div class="thumb-80">
-          <a href="{$video->getUrl()}"><img src="{$video->getThumbUrl(80)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe->getName()|escape}){/if}"></a>
-          <a class="overlay-80 overlay-video-80" href="{$video->getUrl()}" title="Regarder {$video->geName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe->getName()|escape}){/if}"></a>
+          <a href="{$video->getUrl()}"><img src="{$video->getThumbUrl(80)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}"></a>
+          <a class="overlay-80 overlay-video-80" href="{$video->getUrl()}" title="Regarder {$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}"></a>
         </div>
         {/foreach}
       </div>
