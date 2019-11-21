@@ -9,7 +9,7 @@
       <p><strong>{$subject|escape}</strong></p>
       {/if}
       {$text|@nl2br}
-      <p>Pour y répondre, <a href="http://www.adhocmusic.com/adm/forums/thread/{$id_thread|escape}">clique ici</a>.</p>
+      <p>Pour y répondre, <a href="https://www.adhocmusic.com/adm/forums/thread/{$id_thread|escape}">clique ici</a>.</p>
     </td>
   </tr>
 </tbody>

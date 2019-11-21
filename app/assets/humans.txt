@@ -7,7 +7,7 @@
 /* THANKS */
 
 /* SITE */
-    Last update: 2019/10/31
+    Last update: 2019/11/17
     Language: French
     Doctype: HTML5
     IDE: Visual Studio Code

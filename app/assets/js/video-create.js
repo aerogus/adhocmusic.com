@@ -12,7 +12,7 @@ jQuery(document).ready(function ($) {
       if (data.status === 'OK') {
         $('#id_host').val(data.data.id_host);
         $('#name').val(data.data.title);
-        $('<img src="' + data.data.thumb + '" width="160" height="120" alt="" />').appendTo('#thumb');
+        $('<img src="' + data.data.thumb + '" alt="" />').appendTo('#thumb');
       }
     });
   });

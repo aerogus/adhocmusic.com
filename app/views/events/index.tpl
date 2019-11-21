@@ -32,8 +32,8 @@
       <a href="{$event->getUrl()|escape}"><strong>{$event->getName()|upper|escape}</strong></a>
     </span>
     <div class="event_body">
-      {if $event->getFlyer320Url()}
-      <a href="{$event->getUrl()}"><img src="{$event->getFlyer320Url()}" style="float: right; margin: 0 0 5px 5px" alt="{$event->getName()|escape}"></a>
+      {if $event->getThumbUrl(320)}
+      <a href="{$event->getUrl()}"><img src="{$event->getThumbUrl(320)}" style="float: right; margin: 0 0 5px 5px" alt="{$event->getName()|escape}"></a>
       {/if}
       {$event->getText()|@nl2br}
       <ul>

@@ -4,7 +4,7 @@
   <header>
     <h1>Mes vidéos</h1>
   </header>
-  <div>
+  <div class="reset">
 
 <a href="/videos/create" class="button">Ajouter une vidéo</a>
 
@@ -12,25 +12,15 @@
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
+<div class="gallery">
 {foreach $videos as $video}
-<div class="video-list" style="margin: 10px; background-color: #ececec;">
-<a href="/videos/edit/{$video->getIdVideo()}"><img src="{$video->getThumbUrl(80)}" style="float: left; margin-right: 10px;"/></a>
-<img src="/img/icones/signature.png"> <a href="/videos/edit/{$video->getIdVideo()}"><strong>{$video->getName()|escape}</strong></a><br>
-{if $video->getIdGroupe()}
- <img src="/img/icones/groupe.png"> {$video->getGroupe()->getName()|escape}
-{/if}
-{if $video->getIdEvent()}
- <img src="/img/icones/event.png"> {$video->getEvent()->getName()|escape}
-{/if}
-{if $video->getIdLieu()}
- <img src="/img/icones/lieu.png"> {$video->getLieu()->getName()|escape}
-{/if}
-<br><img src="/img/icones/eye.png"> {if $video->getOnline()}<span style="color: #00ff00;">En Ligne</span>{else}<span style="color: #ff0000">Hors Ligne</span>{/if}
-<br style="clear: both">
-</div>
+  <div class="photo">
+    <a href="/videos/edit/{$video->getIdVideo()}?page={$page}" title="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}">
+      <img src="{$video->getThumbUrl(320)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}">
+    </a>
+  </div>
 {/foreach}
-
-<br style="clear: both">
+</div>
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 

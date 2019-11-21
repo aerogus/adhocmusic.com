@@ -9,7 +9,7 @@
           <td>De :</td>
           <td>{$name|escape}</td>
         <tr>
-          <td>Email :</td>
+          <td>E-mail :</td>
           <td>{$email|escape}</td>
         </tr>
         <tr>

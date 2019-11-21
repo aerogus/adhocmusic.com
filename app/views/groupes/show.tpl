@@ -34,10 +34,10 @@
           <li><a href="{$groupe->getSite()}" title="Site"><img src="/img/icones/lien.png" alt="">Site</a></li>
           {/if}
           {if $groupe->getFacebookPageId()}
-          <li><a href="{$groupe->getFacebookPageUrl()}" title="Facebook"><img src="/img/facebook.gif" alt="">Facebook</a></li>
+          <li><a href="{$groupe->getFacebookPageUrl()}" title="Facebook"><img src="/img/social/facebook.svg" alt="">Facebook</a></li>
           {/if}
           {if $groupe->getTwitterId()}
-          <li><a href="{$groupe->getTwitterUrl()}" title="Twitter"><img src="/img/icones/twitter.png" alt="">Twitter</a></li>
+          <li><a href="{$groupe->getTwitterUrl()}" title="Twitter"><img src="/img/social/twitter.svg" alt="">Twitter</a></li>
           {/if}
         </ul>
         {/if}

@@ -21,7 +21,7 @@
     </li>
     <li>
       <label for="host">Hébergeur</label>
-      <span id="host">{$video->getHostName()|escape}</span>
+      <span id="host">{$video->getHost()->getName()|escape}</span>
     </li>
     <li>
       <label for="reference">Référence</label>

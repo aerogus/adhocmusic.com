@@ -666,8 +666,6 @@ class Image
 
         $dest = IMG_CACHE_PATH . '/' . $d1 . '/' . $d2 . '/' . $d3 . '/' . $hash . '.jpg';
 
-        file_put_contents($dest, $content);
-
-        return true;
+        return (bool) file_put_contents($dest, $content);
     }
 }

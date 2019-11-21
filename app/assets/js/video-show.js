@@ -1,6 +1,6 @@
-/*global jQuery*/
+/*global jQuery,Masonry,imagesLoaded,baguetteBox*/
 
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function () {
 
   'use strict';
 

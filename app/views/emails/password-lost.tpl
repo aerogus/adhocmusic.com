@@ -8,9 +8,6 @@
     <td>Voici votre nouveau mot de passe : <strong>{$new_password}</strong></td>
   </tr>
   <tr>
-    <td>Musicalement,</td>
-  </tr>
-  <tr>
     <td>L'association AD'HOC</td>
   </tr>
 </tbody>

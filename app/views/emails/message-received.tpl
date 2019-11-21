@@ -11,10 +11,7 @@
     <td>{$text|@nl2br}</td>
   </tr>
   <tr>
-    <td>Pour y répondre, veuillez vous connecter vous sur le <a style="color: #000000;" href="http://www.adhocmusic.com">site AD'HOC</a></td>
-  </tr>
-  <tr>
-    <td>Musicalement,</td>
+    <td>Pour y répondre, veuillez vous connecter vous sur le <a style="color: #000000;" href="https://www.adhocmusic.com">site AD'HOC</a></td>
   </tr>
   <tr>
     <td>L'équipe AD'HOC</td>

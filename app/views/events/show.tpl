@@ -12,8 +12,8 @@
   </header>
   <div>
 
-    {if $event->getFullFlyerUrl()}
-    <img src="{$event->getFlyer320Url()}" alt="{$event->getName()|escape}" style="display: block; margin: 0 auto 10px;">
+    {if $event->getThumbUrl()}
+    <img src="{$event->getThumbUrl(320)}" alt="{$event->getName()|escape}" style="display: block; margin: 0 auto 10px;">
     {/if}
 
     <p align="justify">{$event->getText()|escape|@nl2br}</p>
