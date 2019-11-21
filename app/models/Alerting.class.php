@@ -322,13 +322,17 @@ class Alerting extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `a`.*, `l`.`id_lieu`, `l`.`name` "
-             . "FROM `adhoc_alerting` `a`, `adhoc_lieu` `l` "
-             . "WHERE `a`.`id_contact` = " . (int) $id_contact . " "
-             . "AND `a`.`id_content` = `l`.`id_lieu` "
+        $sql = "SELECT `id_content` "
+             . "FROM `adhoc_alerting` "
+             . "WHERE `id_contact` = " . (int) $id_contact . " "
              . "AND `a`.`type` = 'l'";
 
-        return $db->queryWithFetch($sql);
+        $rows = $db->queryWithFetch($sql);
+        $lieux = [];
+        foreach ($rows as $row) {
+            $lieux[] = Lieu::getInstance((int) $row['id_content']);
+        }
+        return $lieux;
     }
 
     /**
@@ -358,13 +362,17 @@ class Alerting extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `a`.*, `g`.`id_groupe`, `g`.`name` "
-             . "FROM `adhoc_alerting` `a`, `adhoc_groupe` `g` "
-             . "WHERE `a`.`id_contact` = " . (int) $id_contact . " "
-             . "AND `a`.`id_content` = `g`.`id_groupe` "
-             . "AND `a`.`type` = 'g'";
+        $sql = "SELECT `id_content` "
+             . "FROM `adhoc_alerting` "
+             . "WHERE `id_contact` = " . (int) $id_contact . " "
+             . "AND `type` = 'g'";
 
-        return $db->queryWithFetch($sql);
+        $rows = $db->queryWithFetch($sql);
+        $groupes = [];
+        foreach ($rows as $row) {
+            $groupes[] = Groupe::getInstance((int) $row['id_content']);
+        }
+        return $groupes;
     }
 
     /**
@@ -394,13 +402,17 @@ class Alerting extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `a`.*, `e`.`id_event`, `e`.`name` "
-             . "FROM `adhoc_alerting` `a`, `adhoc_event` `e` "
-             . "WHERE `a`.`id_contact` = " . (int) $id_contact . " "
-             . "AND `a`.`id_content` = `e`.`id_event` "
+        $sql = "SELECT `id_content` "
+             . "FROM `adhoc_alerting` "
+             . "WHERE `id_contact` = " . (int) $id_contact . " "
              . "AND `a`.`type` = 'e'";
 
-        return $db->queryWithFetch($sql);
+        $rows = $db->queryWithFetch($sql);
+        $events = [];
+        foreach ($rows as $row) {
+            $events[] = Event::getInstance((int) $row['id_content']);
+        }
+        return $events;
     }
 
     /**
