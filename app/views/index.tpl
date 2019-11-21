@@ -32,12 +32,12 @@
     </header>
     <div class="reset">
       <ul>
-      {foreach from=$evts key=month item=mevts}
+      {foreach from=$events key=month item=month_events}
         <li class="mbs">
           <strong>{$month|date_format:"%B %Y"|capitalize}</strong>
           <ul>
-          {foreach from=$mevts key=month item=evt}
-            <li><span style="font-weight: bold; color: #cc0000;" title="{$evt->getDate()|date_format:"%A %e %B à %H:%M"}">{$evt->getDate()|date_format:"%d"}</span> <a href="{$evt->getUrl()}" title="{$evt->getName()|escape}">{$evt->getName()|truncate:'40'|escape}</a></li>
+          {foreach from=$month_events key=month item=event}
+            <li><span style="font-weight: bold; color: #cc0000;" title="{$event->getDate()|date_format:"%A %e %B à %H:%M"}">{$event->getDate()|date_format:"%d"}</span> <a href="{$event->getUrl()}" title="{$event->getName()|escape}">{$event->getName()|truncate:'40'|escape}</a></li>
           {/foreach}
           </ul>
         </li>

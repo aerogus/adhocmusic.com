@@ -103,6 +103,21 @@ class Media extends ObjectModel
     }
 
     /**
+     * @return object|null
+     */
+    function getLieu(): ?object
+    {
+        if (!is_null($this->getIdLieu())) {
+            try {
+                return Lieu::getInstance($this->getIdLieu());
+            } catch (Exception $e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
      * @return int|null
      */
     function getIdEvent(): ?int
@@ -111,11 +126,41 @@ class Media extends ObjectModel
     }
 
     /**
+     * @return object|null
+     */
+    function getEvent(): ?object
+    {
+        if (!is_null($this->getIdEvent())) {
+            try {
+                return Event::getInstance($this->getIdEvent());
+            } catch (Exception $e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
      * @return int|null
      */
     function getIdStructure(): ?int
     {
         return $this->_id_structure;
+    }
+
+    /**
+     * @return object|null
+     */
+    function getStructure(): ?object
+    {
+        if (!is_null($this->getIdStructure())) {
+            try {
+                return Structure::getInstance($this->getIdStructure());
+            } catch (Exception $e) {
+                return null;
+            }
+        }
+        return null;
     }
 
     /**
