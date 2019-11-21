@@ -21,9 +21,11 @@ $photos = Photo::find(
 
 foreach ($photos as $photo) {
 
+    echo "Traitement photo " . $photo->getIdPhoto() . "\n";
+
     if (CACHE_ERASE) {
         echo "erase " . $photo->getIdPhoto() . "\n";
-        foreach ([80, 320, 680, 100] as $maxWidth) {
+        foreach ([80, 320, 680, 1000] as $maxWidth) {
             if ($photo->clearThumb($maxWidth)) {
                 echo "erase OK " . $photo->getIdPhoto() . " - " . $maxWidth . "\n";
             }
@@ -33,7 +35,7 @@ foreach ($photos as $photo) {
 
     if (CACHE_CREATE) {
         echo "create " . $photo->getIdPhoto() . "\n";
-        foreach ([80, 320, 680, 100] as $maxWidth) {
+        foreach ([80, 320, 680, 1000] as $maxWidth) {
             if ($photo->genThumb($maxWidth)) {
                 echo "create OK " . $photo->getIdPhoto() . " - " . $maxWidth . " : " . $photo->getThumbUrl($maxWidth) . "\n";
             }
