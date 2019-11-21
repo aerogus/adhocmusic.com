@@ -524,6 +524,9 @@ class Event extends ObjectModel
      *                      'datdeb' => string,
      *                      'datfin' => string,
      *                      'online' => bool,
+     *                      'with_audio' => bool,
+     *                      'with_photo' => bool,
+     *                      'with_video' => bool,
      *                      'order_by' => string,
      *                      'sort' => string,
      *                      'start' => int,
@@ -579,6 +582,15 @@ class Event extends ObjectModel
             $sql .= " ";
         }
 
+        if (isset($params['with_audio'])) {
+            $subSql = "SELECT COUNT(*) FROM `adhoc_audio` WHERE `id_event` = " . (int) $this->getIdEvent() . " ";
+            if ($ids_groupe = $db->queryWithFetchFirstFields($subSql)) {
+                $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
+            } else {
+                return $objs;
+            }
+        }
+
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
@@ -601,7 +613,17 @@ class Event extends ObjectModel
 
         $ids = $db->queryWithFetchFirstFields($sql);
         foreach ($ids as $id) {
-            $objs[] = static::getInstance((int) $id);
+            $obj = static::getInstance((int) $id);
+            if (!empty($params['with_audio']) && !$obj->getAudios()) {
+                continue;
+            }
+            if (!empty($params['with_photo']) && !$obj->getPhotos()) {
+                continue;
+            }
+            if (!empty($params['with_video']) && !$obj->getVideos()) {
+                continue;
+            }
+            $objs[] = $obj;
         }
 
         return $objs;
@@ -1040,25 +1062,5 @@ class Event extends ObjectModel
         }
 
         return $tab;
-    }
-
-    /**
-     * Récupère les events ayant au moins une vidéo
-     *
-     * @return array
-     */
-    static function getEventsWithVideo(): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT DISTINCT `e`.`id_event` AS `id`, `e`.`name`, `e`.`date`, "
-             . "`l`.`name` AS `lieu_name`, `l`.`city` AS `lieu_city` "
-             . "FROM `adhoc_event` `e`, `adhoc_lieu` `l`, `adhoc_video` `v` "
-             . "WHERE `e`.`id_event` = `v`.`id_event` "
-             . "AND `e`.`id_lieu` = `l`.`id_lieu` "
-             . "AND `e`.`online` AND `v`.`online` "
-             . "ORDER BY `e`.`date` DESC";
-
-        return $db->queryWithFetch($sql);
     }
 }

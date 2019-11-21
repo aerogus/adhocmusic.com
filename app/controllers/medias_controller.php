@@ -5,6 +5,9 @@
  */
 final class Controller
 {
+    /**
+     * @return string
+     */
     static function index(): string
     {
         Trail::getInstance()
@@ -14,74 +17,26 @@ final class Controller
 
         $smarty->enqueue_script('/js/medias.js');
 
-        $last_media = Media::getMedia(
-            [
-                'type'   => 'video',
-                'sort'   => 'created_on',
-                'sens'   => 'DESC',
-                'online' => true,
-                'limit'  => 18,
-                'split'  => true,
-            ]
-        );
-        $smarty->assign('last_media', $last_media);
-
-        $id_groupe = (int) Route::params('groupe');
-        $id_event  = (int) Route::params('event');
-
-        $smarty->assign('id_groupe', $id_groupe);
-        $smarty->assign('id_event', $id_event);
-
-        $smarty->assign('create', (bool) Route::params('create'));
-        $smarty->assign('edit', (bool) Route::params('edit'));
-        $smarty->assign('delete', (bool) Route::params('delete'));
-
-        $search_media = [];
-
         $smarty->assign(
-            'groupes', Groupe::find(
+            'last_videos', Video::find(
                 [
                     'online' => true,
-                    'order_by' => 'name',
-                    'sort' => 'ASC',
+                    'order_by'   => 'created_on',
+                    'sort'   => 'DESC',
+                    'limit'  => 18,
                 ]
             )
         );
 
-        if ($id_groupe) {
-            $search_media = Media::getMedia(
-                [
-                    'type'   => 'video',
-                    'groupe' => $id_groupe,
-                    'online' => true,
-                ]
-            );
-        }
-
         // recup events ayant des vidéos
-        $smarty->assign('events', Event::getEventsWithVideo());
-
-        if ($id_event) {
-            $search_media = Media::getMedia(
+        $smarty->assign(
+            'events', Event::find(
                 [
-                    'type'   => 'video',
-                    'event'  => $id_event,
                     'online' => true,
+                    'with_video' => true,
                 ]
-            );
-        }
-
-        $smarty->assign('search_media', $search_media);
-
-        $comments = Comment::find(
-            [
-                'id_type' => ['s', 'p', 'v'],
-                'order_by' => 'id_comment',
-                'sort'  => 'DESC',
-                'limit' => 5,
-            ]
+            )
         );
-        $smarty->assign('comments', $comments);
 
         return $smarty->fetch('medias/index.tpl');
     }

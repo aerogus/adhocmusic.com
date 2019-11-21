@@ -243,7 +243,7 @@ class MembreAdhoc extends Membre
             if (file_exists(self::getBasePath() . '/' . $mbr['id'] . '.jpg')) {
                 $mbrs[$idx]['avatar_interne'] = self::getBaseUrl() . '/' . $mbr['id'] . '.jpg?ts=' . $mbr['modified_on_ts'];
             }
-            $mbrs[$idx]['url'] = self::getUrlById((int) $mbr['id']);
+            $mbrs[$idx]['url'] = HOME_URL . '/membres/' . $mbr['id'];
         }
 
         return $mbrs;
