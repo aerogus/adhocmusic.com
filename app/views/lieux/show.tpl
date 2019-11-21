@@ -107,8 +107,8 @@
     <ul>
       {foreach $audios as $audio}
       <li>Titre : <strong>{$audio->getName()|escape}</strong>
-      {if !empty($audio->getGroupe()}<br>Groupe : <a href="{$audio->getGroupe()->getUrl()}">{$audio->getGroupe()->getName()}</a>{/if}
-      {if !empty($audio->getEvent()}<br>Evénement : <a href="{$audio->getEvent()->getUrl()}">{$audio->getEvent()->getName()}</a> ({$audio->getEvent()->getDate()|date_format:'%d/%m/%Y'}){/if}
+      {if !empty($audio->getGroupe())}<br>Groupe : <a href="{$audio->getGroupe()->getUrl()}">{$audio->getGroupe()->getName()}</a>{/if}
+      {if !empty($audio->getEvent())}<br>Evénement : <a href="{$audio->getEvent()->getUrl()}">{$audio->getEvent()->getName()}</a> ({$audio->getEvent()->getDate()|date_format:'%d/%m/%Y'}){/if}
       <br><audio src="{$audio->getDirectMp3Url()}"></audio></li>
       {/foreach}
     </ul>
