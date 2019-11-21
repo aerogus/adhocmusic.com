@@ -16,6 +16,10 @@
           <strong>{$featured->getDescription()|escape}</strong>
         </li>
         <li>
+          <label for="url">Lien</label>
+          <strong>{$featured->getUrl()|escape}</strong>
+        </li>
+        <li>
           <label for="image">Image</label>
           <img src="{$featured->getImage()}" alt="" />
         </li>

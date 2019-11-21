@@ -2,21 +2,40 @@
 
 final class Controller
 {
-    const IMG_WIDTH = 1000;
-    const IMG_HEIGHT = 375;
-
+    /**
+     * @return string
+     */
     static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
-            ->addStep("A l'Affiche");
+            ->addStep("À l'affiche");
 
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('featured_front', Featured::getFeaturedHomepage());
-        $smarty->assign('featured_admin', Featured::getFeaturedAdmin());
+        $smarty->assign(
+            'featured_front', Featured::find(
+                [
+                    'online' => true,
+                    'current' => true,
+                    'order_by' => 'modified_on',
+                    'sort' => 'DESC',
+                    'start' => 0,
+                    'limit' => 6,
+                ]
+            )
+        );
+
+        $smarty->assign(
+            'featured_admin', Featured::find(
+                [
+                    'order_by' => 'id_featured',
+                    'sort' => 'DESC',
+                ]
+            )
+        );
 
         $smarty->enqueue_script('/js/swipe.min.js');
         $smarty->enqueue_script('/js/featured.js');
@@ -24,13 +43,16 @@ final class Controller
         return $smarty->fetch('adm/featured/index.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function create(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
-            ->addStep("A l'Affiche", "/adm/featured")
+            ->addStep("À l'affiche", "/adm/featured")
             ->addStep("Ajouter");
 
         $smarty = new AdHocSmarty();
@@ -45,17 +67,17 @@ final class Controller
         $data = [
             'title'       => '',
             'description' => '',
-            'link'        => '',
+            'url'         => '',
             'datdeb'      => '',
             'datfin'      => '',
-            'online'      => false,
+            'online'      => true,
         ];
 
         if (Tools::isSubmit('form-featured-create')) {
             $data = [
                 'title'       => trim((string) Route::params('title')),
                 'description' => trim((string) Route::params('description')),
-                'link'        => trim((string) Route::params('link')),
+                'url'         => trim((string) Route::params('url')),
                 'datdeb'      => trim((string) Route::params('datdeb') . ' 00:00:00'),
                 'datfin'      => trim((string) Route::params('datfin') . ' 23:59:59'),
                 'online'      => (bool) Route::params('online'),
@@ -67,7 +89,7 @@ final class Controller
                 $f = (new Featured())
                     ->setTitle($data['title'])
                     ->setDescription($data['description'])
-                    ->setLink($data['link'])
+                    ->setUrl($data['url'])
                     ->setDatDeb($data['datdeb'])
                     ->setDatFin($data['datfin'])
                     ->setOnline($data['online']);
@@ -76,8 +98,8 @@ final class Controller
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     (new Image($_FILES['image']['tmp_name']))
                         ->setType(IMAGETYPE_JPEG)
-                        ->setMaxWidth(self::IMG_WIDTH)
-                        ->setMaxHeight(self::IMG_HEIGHT)
+                        ->setMaxWidth(Featured::WIDTH)
+                        ->setMaxHeight(Featured::HEIGHT)
                         ->setDestFile(Featured::getBasePath() . '/' . $f->getId() . '.jpg')
                         ->write();
                 }
@@ -109,13 +131,16 @@ final class Controller
         return $smarty->fetch('adm/featured/create.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function edit(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
-            ->addStep("A l'Affiche", "/adm/featured")
+            ->addStep("À l'affiche", "/adm/featured")
             ->addStep("Modifier");
 
         $smarty = new AdHocSmarty();
@@ -133,7 +158,7 @@ final class Controller
             'id'          => $f->getId(),
             'title'       => $f->getTitle(),
             'description' => $f->getDescription(),
-            'link'        => $f->getLink(),
+            'url'         => $f->getUrl(),
             'image'       => $f->getImage(),
             'datdeb'      => $f->getDatDeb(),
             'datfin'      => $f->getDatFin(),
@@ -145,7 +170,7 @@ final class Controller
                 'id'          => $f->getId(),
                 'title'       => trim((string) Route::params('title')),
                 'description' => trim((string) Route::params('description')),
-                'link'        => trim((string) Route::params('link')),
+                'url'         => trim((string) Route::params('url')),
                 'datdeb'      => trim((string) Route::params('datdeb') . ' 00:00:00'),
                 'datfin'      => trim((string) Route::params('datfin') . ' 23:59:59'),
                 'online'      => (bool) Route::params('online'),
@@ -156,7 +181,7 @@ final class Controller
 
                 $f->setTitle($data['title'])
                     ->setDescription($data['description'])
-                    ->setLink($data['link'])
+                    ->setUrl($data['url'])
                     ->setDatDeb($data['datdeb'])
                     ->setDatFin($data['datfin'])
                     ->setOnline($data['online']);
@@ -166,8 +191,8 @@ final class Controller
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                     (new Image($_FILES['image']['tmp_name']))
                         ->setType(IMAGETYPE_JPEG)
-                        ->setMaxWidth(self::IMG_WIDTH)
-                        ->setMaxHeight(self::IMG_HEIGHT)
+                        ->setMaxWidth(Featured::WIDTH)
+                        ->setMaxHeight(Featured::HEIGHT)
                         ->setDestFile(Featured::getBasePath() . '/' . $f->getId() . '.jpg')
                         ->write();
                 }
@@ -188,6 +213,9 @@ final class Controller
         return $smarty->fetch('adm/featured/edit.tpl');
     }
 
+    /**
+     * @return string
+     */
     static function delete(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -205,7 +233,7 @@ final class Controller
         if (Tools::isSubmit('form-featured-delete')) {
             if ($f->delete()) {
                 Tools::redirect('/adm/featured?delete=1');
-                unlink(ADHOC_ROOT_PATH . '/static/media/featured/' . $f->getId() . '.jpg');
+                unlink(Featured::getBasePath() . '/' . $f->getId() . '.jpg');
             }
         }
 
@@ -229,8 +257,8 @@ final class Controller
         if (empty($data['description'])) {
             $errors['description'] = "Vous devez saisir une description";
         }
-        if (empty($data['link'])) {
-            $errors['link'] = "Vous devez saisir un lien de destination";
+        if (empty($data['url'])) {
+            $errors['url'] = "Vous devez saisir un lien de destination";
         }
         if (empty($data['datdeb'])) {
             $errors['datdeb'] = "Vous devez choisir une date de début de programmation";

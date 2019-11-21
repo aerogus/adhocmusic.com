@@ -64,6 +64,15 @@ if (ENV === 'PROD') {
 
 }
 
+define(
+    'CONTACT_FORM_TO',
+    [
+        'bureau@adhocmusic.com',
+        'site@adhocmusic.com',
+        'contact@adhocmusic.com',
+    ]
+);
+
 define('DEBUG_EMAIL', 'guillaume@seznec.fr');
 
 define('ADHOC_ROOT_PATH',          dirname(__DIR__));

@@ -4,7 +4,7 @@
   <ul class="swipe-wrap">
     {foreach from=$featured key=idx item=f}
     <li data-index="{$idx}">
-      <a href="{$f->getLink()}">
+      <a href="{$f->getUrl()}">
         <h2>{$f->getTitle()}<br><span>{$f->getDescription()}</span></h2>
         <img src="{$f->getImage()}" title="{$f->getDescription()}" alt="">
       </a>
@@ -15,7 +15,7 @@
     <ul class="swipe-pagination">
       {foreach from=$featured key=idx item=f}
       <li data-index="{$idx}">
-        <a href="{$f->getLink()}"></a>
+        <a href="{$f->getUrl()}"></a>
       </li>
       {/foreach}
     </ul>

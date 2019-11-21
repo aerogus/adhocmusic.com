@@ -3,7 +3,11 @@
 
 require_once __DIR__ . '/../bootstrap.php';
 
-//if (PROD) exit;
+die('vraiment désactivé');
+
+if (ENV === 'PROD') {
+    die('désactivé en PROD !!');
+}
 
 // ménage données factices
 

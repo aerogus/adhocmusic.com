@@ -10,6 +10,9 @@
  */
 class Featured extends ObjectModel
 {
+    const WIDTH = 1000;
+    const HEIGHT = 375;
+
     /**
      * Instance de l'objet
      *
@@ -55,27 +58,12 @@ class Featured extends ObjectModel
     /**
      * @var string
      */
-    protected $_link = '';
+    protected $_url = '';
 
     /**
-     * @var int
+     * @var bool
      */
-    protected $_slot = 0;
-
-    /**
-     * @var int
-     */
-    protected $_online = 0;
-
-    /**
-     * @var int
-     */
-    protected static $_width = 1000;
-
-    /**
-     * @var int
-     */
-    protected static $_height = 375;
+    protected $_online = false;
 
     /**
      * Liste des attributs de l'objet
@@ -84,12 +72,11 @@ class Featured extends ObjectModel
      */
     protected static $_all_fields = [
         'id_featured' => 'int', // pk
-        'datdeb'      => 'string',
-        'datfin'      => 'string',
+        'datdeb'      => 'date',
+        'datfin'      => 'date',
         'title'       => 'string',
         'description' => 'string',
-        'link'        => 'string',
-        'slot'        => 'int',
+        'url'         => 'string',
         'online'      => 'bool',
     ];
 
@@ -112,59 +99,19 @@ class Featured extends ObjectModel
     }
 
     /**
-     * @param string $mode mode
-     *
      * @return string
      */
-    function getDatDeb(string $mode = null)
+    function getDatDeb(): string
     {
-        if (!Date::isDateTimeOk($this->_datdeb)) {
-            return false;
-        }
-
-        preg_match("/^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$/", $this->_datdeb, $regs);
-        switch ($mode) {
-            case 'year':
-                return $regs[1];
-            case 'month':
-                return $regs[2];
-            case 'day':
-                return $regs[3];
-            case 'hour':
-                return $regs[4];
-            case 'minute':
-                return $regs[5];
-            default:
-                return $this->_datdeb;
-        }
+        return $this->_datdeb;
     }
 
     /**
-     * @param string $mode mode
-     *
      * @return string
      */
-    function getDatFin(string $mode = null)
+    function getDatFin(): string
     {
-        if (!Date::isDateTimeOk($this->_datfin)) {
-            return false;
-        }
-
-        preg_match("/^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$/", $this->_datfin, $regs);
-        switch ($mode) {
-            case 'year':
-                return $regs[1];
-            case 'month':
-                return $regs[2];
-            case 'day':
-                return $regs[3];
-            case 'hour':
-                return $regs[4];
-            case 'minute':
-                return $regs[5];
-            default:
-                return $this->_datfin;
-        }
+        return $this->_datfin;
     }
 
     /**
@@ -186,9 +133,9 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    function getLink(): string
+    function getUrl(): string
     {
-        return $this->_link;
+        return $this->_url;
     }
 
     /**
@@ -196,17 +143,7 @@ class Featured extends ObjectModel
      */
     function getImage(): string
     {
-        return self::getImageById((int) $this->getId());
-    }
-
-    /**
-     * @param int $id id
-     *
-     * @return string
-     */
-    static function getImageById(int $id): string
-    {
-        return self::getBaseUrl() . '/' . (string) $id . '.jpg';
+        return self::getBaseUrl() . '/' . (string) $this->getId() . '.jpg';
     }
 
     /**
@@ -294,17 +231,17 @@ class Featured extends ObjectModel
     }
 
     /**
-     * @param string $link lien
+     * @param string $url lien
      *
      * @return object
      */
-    function setLink(string $link): object
+    function setUrl(string $url): object
     {
-        $link = trim($link);
+        $url = trim($url);
 
-        if ($this->_link !== $link) {
-            $this->_link = $link;
-            $this->_modified_fields['link'] = true;
+        if ($this->_url !== $url) {
+            $this->_url = $url;
+            $this->_modified_fields['url'] = true;
         }
 
         return $this;
@@ -326,62 +263,6 @@ class Featured extends ObjectModel
     }
 
     /* fin setters */
-
-    /**
-     * @return array
-     */
-    static function getFeaturedHomepage(): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_featured` AS `id`, `title`, `description`, `link` "
-             . "FROM `" . self::getDbTable() . "` "
-             . "WHERE `datdeb` < DATE(NOW()) "
-             . "AND `datfin` > DATE(NOW()) "
-             . "AND `online`";
-
-        $res = $db->queryWithFetch($sql);
-
-        foreach ($res as $cpt => $_res) {
-            $res[$cpt]['image'] = self::getImageById((int) $_res['id']);
-        }
-
-        return $res;
-    }
-
-    /**
-     * Retourne les à l'affiche
-     *
-     * @return array
-     */
-    static function getFeaturedAdmin(): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_featured` AS `id`, `title`, `description`, `link`, `datdeb`, `datfin`, `slot`, `online` "
-             . "FROM `" . self::getDbTable() . "` "
-             . "ORDER BY `online` DESC, `id_featured` DESC";
-
-        $res = $db->queryWithFetch($sql);
-
-        $tab = [];
-        if (is_array($res)) {
-            $now = date('Y-m-d H:i:s');
-            foreach ($res as $cpt => $_res) {
-                $tab[$cpt] = $_res;
-                $tab[$cpt]['image'] = self::getImageById((int) $_res['id']);
-                if (($now > $_res['datdeb']) && ($now < $_res['datfin'])) {
-                    $tab[$cpt]['class'] = 'enligne';
-                } elseif ($now < $_res['datdeb']) {
-                    $tab[$cpt]['class'] = "programme";
-                } elseif ($now > $_res['datfin']) {
-                    $tab[$cpt]['class'] = "archive";
-                }
-            }
-        }
-
-        return $tab;
-    }
 
     /**
      * Efface un featured en db + le fichier .jpg

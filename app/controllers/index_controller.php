@@ -1,14 +1,5 @@
 <?php declare(strict_types=1);
 
-define(
-    'CONTACT_FORM_TO',
-    [
-        'bureau@adhocmusic.com',
-        'site@adhocmusic.com',
-        'contact@adhocmusic.com',
-    ]
-);
-
 final class Controller
 {
     /**
@@ -18,14 +9,16 @@ final class Controller
      */
     static function index(): string
     {
-        $page = (int) Route::params('page');
-
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('title', "♫ AD'HOC : les Musiques Actuelles en Essonne");
-        $smarty->assign('description', "Portail de référence sur les musiques actuelles en Essonne, Agenda culturel géolocalisé, Vidéos de concerts, promotion d'artistes ...");
-        $smarty->assign('og_type', 'website');
-        $smarty->assign('og_image', HOME_URL . '/img/screenshot-homepage.jpg');
+        $smarty->assign(
+            [
+                'title' => "♫ AD'HOC : les Musiques Actuelles en Essonne",
+                'description' => "Portail de référence sur les musiques actuelles en Essonne, Agenda culturel géolocalisé, Vidéos de concerts, promotion d'artistes...",
+                'og_type' => 'website',
+                'og_image' => HOME_URL . '/img/screenshot-homepage.jpg',
+            ]
+        );
 
         $smarty->assign(
             'videos', Video::find(
@@ -38,11 +31,22 @@ final class Controller
             )
         );
 
-        $smarty->assign('featured', Featured::getFeaturedHomepage());
+        $smarty->assign(
+            'featured', Featured::find(
+                [
+                    'online' => true,
+                    'current' => true,
+                    'order_by' => 'modified_on',
+                    'sort' => 'DESC',
+                    'limit' => 6,
+                ]
+            )
+        );
+
         $smarty->enqueue_script('/js/swipe.min.js');
         $smarty->enqueue_script('/js/featured.js');
 
-        $events = Event::find(
+        $_events = Event::find(
             [
                 'datdeb' => date('Y-m-d'),
                 'online' => true,
@@ -53,16 +57,15 @@ final class Controller
         );
 
         // tri par mois
-        $evts = [];
-        foreach ($events as $event) {
+        $events = [];
+        foreach ($_events as $event) {
             $month = substr($event->getDate(), 0, 7) . '-01';
             if (!array_key_exists($month, $evts)) {
-                $evts[$month] = [];
+                $events[$month] = [];
             }
-            $evts[$month][] = $event;
+            $events[$month][] = $event;
         }
-        $smarty->assign('evts', $evts);
-        $smarty->assign('events', $events); // utile ?
+        $smarty->assign('events', $events);
 
         return $smarty->fetch('index.tpl');
     }
