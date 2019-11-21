@@ -23,6 +23,8 @@ $videos = Video::find(
 
 foreach ($videos as $video) {
 
+    echo "Traitement video " . $video->getIdVideo() . "\n";
+
     if (CACHE_ERASE) {
         echo "erase " . $video->getIdVideo() . "\n";
         foreach ([80, 320] as $maxWidth) {
@@ -34,7 +36,7 @@ foreach ($videos as $video) {
     }
 
     if (CACHE_CREATE) {
-        echo "create " . $video->getIdPhoto() . "\n";
+        echo "create " . $video->getIdVideo() . "\n";
         foreach ([80, 320] as $maxWidth) {
             if ($video->genThumb($maxWidth)) {
                 echo "create OK " . $video->getIdVideo() . " - " . $maxWidth . " : " . $video->getThumbUrl($maxWidth) . "\n";
