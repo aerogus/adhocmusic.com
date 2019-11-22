@@ -286,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_lieu` (
 CREATE TABLE IF NOT EXISTS `adhoc_event` (
   `id_event` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `date` datetime DEFAULT NULL,
+  `date` datetime NOT NULL,
   `text` text NOT NULL,
   `price` text NOT NULL,
   `id_lieu` int(10) UNSIGNED NOT NULL,
