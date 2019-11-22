@@ -63,7 +63,7 @@
   <div>
     <ul>
     {foreach from=$audios item=audio}
-      <li><strong>{$audio->getName()|escape}</strong> (<a href="{$audio->getGroupe()->getUrl()}">{$audio->getGroupe()->getName()|escape}</a>)<br><audio controls src="{$audio->getDirectMp3Url()}"></audio></li>
+      <li><strong>{$audio->getName()|escape}</strong>{if !empty($audio->getGroupe())} (<a href="{$audio->getGroupe()->getUrl()}">{$audio->getGroupe()->getName()|escape}</a>){/if}<br><audio controls src="{$audio->getDirectMp3Url()}"></audio></li>
     {/foreach}
     </ul>
   </div>
