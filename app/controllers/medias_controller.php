@@ -18,22 +18,35 @@ final class Controller
         $smarty->enqueue_script('/js/medias.js');
 
         $smarty->assign(
+            'groupes', Groupe::find(
+                [
+                    'online' => true,
+                    'order_by' => 'name',
+                    'sort' => 'ASC',
+                ]
+            )
+        );
+        
+        $smarty->assign(
             'last_videos', Video::find(
                 [
                     'online' => true,
-                    'order_by'   => 'created_on',
-                    'sort'   => 'DESC',
-                    'limit'  => 18,
+                    'order_by' => 'created_on',
+                    'sort' => 'DESC',
+                    'limit' => 18,
                 ]
             )
         );
 
-        // recup events ayant des vidéos
+        // recup events AD'HOC ayant des vidéos
         $smarty->assign(
             'events', Event::find(
                 [
                     'online' => true,
-                    'with_video' => true,
+                    'id_structure' => 1,
+                    'datfin' => date('Y-m-d'),
+                    'order_by' => 'date',
+                    'sort' => 'DESC',
                 ]
             )
         );
