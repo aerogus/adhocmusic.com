@@ -21,7 +21,7 @@
           <select id="event" name="event">
             <option value="0">---</option>
             {foreach from=$events item=event}
-            <option value="{$event->getIdEvent()}">{$event->getDate()|date_format:'%d/%m/%Y'} - {$event->getName()|escape} - {$event->getLieu->getName()}</option>
+            <option value="{$event->getIdEvent()}">{$event->getDate()|date_format:'%d/%m/%Y'} - {$event->getName()|escape} - {$event->getLieu()->getName()}</option>
             {/foreach}
           </select>
         </li>
