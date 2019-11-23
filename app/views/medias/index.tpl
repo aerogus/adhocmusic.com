@@ -10,7 +10,7 @@
         <li>
           <label for="groupe">Groupe</label>
           <select id="groupe" name="groupe">
-            <option value="0">---</option>
+            <option value="">---</option>
             {foreach from=$groupes item=groupe}
             <option value="{$groupe->getIdGroupe()}">{$groupe->getName()|escape}</option>
             {/foreach}
@@ -19,7 +19,7 @@
         <li>
           <label for="event">Evénement</label>
           <select id="event" name="event">
-            <option value="0">---</option>
+            <option value="">---</option>
             {foreach from=$events item=event}
             <option value="{$event->getIdEvent()}">{$event->getDate()|date_format:'%d/%m/%Y'} - {$event->getName()|escape} - {$event->getLieu()->getName()}</option>
             {/foreach}
@@ -27,7 +27,6 @@
         </li>
       </ul>
     </form>
-    <h2>Résultats de la recherche</h2>
     <div id="search-results"></div>
   </div>
 </div>{* .box *}

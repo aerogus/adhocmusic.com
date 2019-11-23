@@ -61,34 +61,22 @@ final class Controller
     {
         $id_groupe = (int) Route::params('groupe');
         $id_event  = (int) Route::params('event');
-        $type      = (string) Route::params('type');
 
-        $search_media = [];
+        $search_params = [
+            'online' => true,
+            'limit' => 18,
+        ];
 
         if ($id_groupe) {
-            $search_media = Media::getMedia(
-                [
-                    'type' => $type,
-                    'groupe' => $id_groupe,
-                    'online' => true,
-                    'limit' => 30,
-                ]
-            );
+            $search_params['id_groupe'] = $id_groupe;
         }
 
         if ($id_event) {
-            $search_media = Media::getMedia(
-                [
-                    'type' => $type,
-                    'event' => $id_event,
-                    'online' => true,
-                    'limit' => 30,
-                ]
-            );
+            $search_params['id_event'] = $id_event;
         }
 
         $smarty = new AdHocSmarty();
-        $smarty->assign('search_media', $search_media);
+        $smarty->assign('search_video', Video::find($search_params));
         return $smarty->fetch('medias/search-results.tpl');
     }
 }
