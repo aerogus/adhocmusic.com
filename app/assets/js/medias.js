@@ -21,7 +21,7 @@ jQuery(document).ready(function ($) {
       event: $(this).val(),
     }, function (data) {
       $('#search-results').html(data);
-    }
+    });
   });
 
 });
