@@ -25,12 +25,12 @@
     <div class="infos" style="width: 300px; padding: 10px;">
       <strong>{$lieu->getName()|escape}</strong><br>
       {$lieu->getAddress()|escape}<br>
-      {$lieu->getCp()|escape} {$lieu->getCity()|escape}<br>
-      {if $lieu->getIdCountry() == 'FR'}
-      {$lieu->getIdDepartement()} / {$lieu->getDepartement()}<br>
+      {$lieu->getCity()->getCp()|escape} {$lieu->getCity()->getName()|escape}<br>
+      {if $lieu->getIdCountry() === 'FR'}
+      {$lieu->getIdDepartement()} / {$lieu->getDepartement()->getName()}<br>
       {/if}
-      {$lieu->getRegion()}<br>
-      <img src="{$lieu->getCountryFlagUrl()}" alt="{$lieu->getIdCountry()}"> {$lieu->getCountry()}
+      {$lieu->getRegion()->getName()}<br>
+      <img src="{$lieu->getCountry()->getFlagUrl()}" alt="{$lieu->getIdCountry()}"> {$lieu->getCountry()->getName()}
     </div>
 
     <div class="infos" style="padding: 10px;">
