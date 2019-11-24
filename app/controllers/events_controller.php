@@ -133,7 +133,7 @@ final class Controller
         $smarty->assign('event', $event);
 
         $smarty->assign('title', "♫ ". $event->getName());
-        $smarty->assign('description', "Date : " . Date::mysql_datetime($event->getDate(), 'd/m/Y') . " | Lieu : " . $event->getLieu()->getName() . " " . $event->getLieu()->getAddress() . " " . $event->getLieu()->getCp() . " " . $event->getLieu()->getCity());
+        $smarty->assign('description', "Date : " . Date::mysql_datetime($event->getDate(), 'd/m/Y') . " | Lieu : " . $event->getLieu()->getName() . " " . $event->getLieu()->getAddress() . " " . $event->getLieu()->getCity()->getCp() . " " . $event->getLieu()->getCity()->getName());
 
         $smarty->assign(
             'photos', Photo::find(

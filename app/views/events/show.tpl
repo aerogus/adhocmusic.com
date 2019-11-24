@@ -23,7 +23,7 @@
       <a href="/lieux/{$event->getLieu()->getIdLieu()}" title="{$event->getLieu()->getName()|escape}">
         <strong>{$event->getLieu()->getName()|escape}</strong><br>
         {$event->getLieu()->getAddress()}<br>
-        {$event->getLieu()->getCp()} - {$event->getLieu()->getCity()|escape}
+        {$event->getLieu()->getCity()->getCp()} - {$event->getLieu()->getCity()->getName()|escape}
       </a>
       <p>Entrée : <strong>{$event->getPrice()|escape}</strong></p>
     </div>
