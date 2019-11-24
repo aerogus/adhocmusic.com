@@ -168,7 +168,7 @@ final class Controller
                 $smarty->assign(
                     'videos', Video::find(
                         [
-                            'id__not_in' => $video->getIdVideo(),
+                            'id__not_in' => [$video->getIdVideo()],
                             'id_event' => $video->getIdEvent(),
                             'online' => true,
                             'order_by' => 'random',
