@@ -53,6 +53,9 @@
        <li><a href="/adm/membres">Membres</a></li>
        <li><a href="/adm/groupes">Groupes</a></li>
        <li><a href="/adm/groupe-de-style">Groupe de Style</a></li>
+       <li><a href="/adm/photos">Photos</a></li>
+       <li><a href="/adm/audios">Audios</a></li>
+       <li><a href="/adm/videos">Vidéos</a></li>
     </ul>
   </div>
 </div>
