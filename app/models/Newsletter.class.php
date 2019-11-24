@@ -95,6 +95,16 @@ class Newsletter extends ObjectModel
     }
 
     /**
+     * Retourne l'identifiant de la newsletter
+     *
+     * @return string
+     */
+    function getIdNewsletter(): int
+    {
+        return $this->_id_newsletter;
+    }
+
+    /**
      * @return string
      */
     function getFileUrl(): string
