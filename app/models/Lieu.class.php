@@ -535,40 +535,6 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * Set le code postal
-     *
-     * @param string $cp code postal
-     *
-     * @return object
-     */
-    function setCp(string $cp): object
-    {
-        if ($this->_cp !== $cp) {
-            $this->_cp = $cp;
-            $this->_modified_fields['cp'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set la ville
-     *
-     * @param string $city city
-     *
-     * @return object
-     */
-    function setCity(string $city): object
-    {
-        if ($this->_city !== $city) {
-            $this->_city = $city;
-            $this->_modified_fields['city'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
      * Set l'id de la ville
      *
      * @param int $id_city id_city

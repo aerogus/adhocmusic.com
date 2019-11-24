@@ -107,7 +107,7 @@ final class Controller
         if (!$lieu->getLat() && !$lieu->getLng()) {
             $smarty->assign('geocode', true);
             $smarty->assign('geocode_id_lieu', $lieu->getId());
-            $smarty->assign('geocode_address', $lieu->getAddress() . ' ' . $lieu->getCp() . ' ' . $lieu->getCity());
+            $smarty->assign('geocode_address', $lieu->getAddress() . ' ' . $lieu->getCity()->getCp() . ' ' . $lieu->getCity()->getName());
         }
 
         $smarty->assign('og_image', $lieu->getMapUrl('160x160', 15, 'roadmap'));

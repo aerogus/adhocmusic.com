@@ -459,9 +459,11 @@ class Alerting extends ObjectModel
     }
 
     /**
+     * @param array $params params
+     *
      * @return array
      */
-    static function find(): array
+    static function find(array $params): array
     {
         return [];
     }
