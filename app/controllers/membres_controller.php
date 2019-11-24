@@ -51,7 +51,6 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        //$smarty->enqueue_script('/js/geopicker.js');
         $smarty->enqueue_script('/js/membre-create.js');
 
         $smarty->assign('title', "Inscription à l'association AD'HOC");
@@ -95,7 +94,7 @@ final class Controller
 
                     if ($membre->save()) {
                         Log::action(Log::ACTION_MEMBER_CREATE, $membre->getId());
-                        if (Email::send($data['email'], "Inscription à l'Association AD'HOC", 'member-create', $data)) {
+                        if (Email::send($data['email'], "Inscription à l'association AD'HOC", 'member-create', $data)) {
                             Tools::redirect('/membres/create?create=1');
                         } else {
                             $smarty->assign('password', $data['password']); // DEBUG ONLY
