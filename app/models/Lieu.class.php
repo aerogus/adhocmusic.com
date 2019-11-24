@@ -892,6 +892,7 @@ class Lieu extends ObjectModel
      *
      * @param array $params [
      *                      'online' => bool,
+     *                      'id_country' => string,
      *                      'order_by' => string,
      *                      'sort' => string,
      *                      'start' => int,
@@ -911,6 +912,10 @@ class Lieu extends ObjectModel
             $sql .= "AND `online` = ";
             $sql .= $params['online'] ? "TRUE" : "FALSE";
             $sql .= " ";
+        }
+
+        if (isset($params['id_country'])) {
+            $sql .= "AND `id_country` = '" . $db->escape($params['id_country']) . "' ";
         }
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
