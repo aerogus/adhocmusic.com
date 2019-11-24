@@ -25,7 +25,7 @@
 <div class="event grid-3-small-1">
   <div class="event_header col-1">
     <div class="event_date">{$event->getDate()|date_format:"%H:%M"}</div>
-    <div class="event_lieu"><a href="/lieux/{$event->getLieu()->getIdLieu()}" title="{$event->getLieu()->getName()|escape}"><strong>{$event->getLieu()->getName()|escape}</strong></a><br>{$event->getLieu()->getIdDepartement()} {$event->getLieu()->getCity()}</div>
+    <div class="event_lieu"><a href="/lieux/{$event->getLieu()->getIdLieu()}" title="{$event->getLieu()->getName()|escape}"><strong>{$event->getLieu()->getName()|escape}</strong></a><br>{$event->getLieu()->getIdDepartement()} {$event->getLieu()->getCity()->getName()}</div>
   </div>
   <div class="event_content col-2">
     <span class="event_title">

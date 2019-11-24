@@ -56,7 +56,7 @@
       <h2>Lieu</h2>
     </header>
     <div>
-      <a href="{$lieu->getUrl()}"><strong>{$lieu->getName()|escape}</strong></a><br>{$lieu->getAddress()}<br>{$lieu->getCp()} {$lieu->getCity()|escape}
+      <a href="{$lieu->getUrl()}"><strong>{$lieu->getName()|escape}</strong></a><br>{$lieu->getAddress()}<br>{$lieu->getCity()->getCp()} {$lieu->getCity()->getName()|escape}
     </div>
   </div>
   {/if}

@@ -45,7 +45,7 @@
         {foreach from=$deps item=dep}
         <optgroup label="{$dep->getId()} - {$dep->getName()|escape}">
           {foreach from=$lieux[$dep->getId()] item=lieu}
-          <option value="{$lieu->getIdLieu()}"{if $video->getIdLieu() === $lieu->getIdLieu()} selected="selected"{/if}>{$lieu->getCp()} {$lieu->getCity()|escape} : {$lieu->getName()|escape}</option>
+          <option value="{$lieu->getIdLieu()}"{if $video->getIdLieu() === $lieu->getIdLieu()} selected="selected"{/if}>{$lieu->getCity()->getCp()} {$lieu->getCity()->getName()|escape} : {$lieu->getName()|escape}</option>
           {/foreach}
         </optgroup>
         {/foreach}

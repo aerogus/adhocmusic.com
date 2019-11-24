@@ -46,7 +46,7 @@
             {foreach from=$dep item=dep_name key=dep_id}
             <optgroup label="{$dep_id} - {$dep_name|escape}">
               {foreach from=$lieux.$dep_id item=lieu}
-              <option value="{$lieu->getIdLieu()}"{if $audio->getIdLieu() === $lieu->getIdLieu()} selected="selected"{/if}>{$lieu->getCp()} {$lieu->getCity()|escape} : {$lieu->getName()|escape}</option>
+              <option value="{$lieu->getIdLieu()}"{if $audio->getIdLieu() === $lieu->getIdLieu()} selected="selected"{/if}>{$lieu->getCity()->getCp()} {$lieu->getCity()->getName()|escape} : {$lieu->getName()|escape}</option>
               {/foreach}
             </optgroup>
             {/foreach}

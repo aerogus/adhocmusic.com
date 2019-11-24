@@ -12,8 +12,8 @@
     {if !empty($lieu)}
     <strong>{$lieu->getName()}</strong><br>
     {$lieu->getAddress()}<br>
-    {$lieu->getCp()} {$lieu->getCity()}<br>
-    {$lieu->getCountry()}
+    {$lieu->getCity()->getCp()} {$lieu->getCity()->getName()}<br>
+    {$lieu->getCountry()->getName()}
     <input type="hidden" id="id_lieu" name="id_lieu" value="{$lieu->getId()|escape}">
     {else}
     <ul>
