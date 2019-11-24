@@ -54,18 +54,19 @@ class Alerting extends ObjectModel
     protected $_active = false;
 
     /**
-     * Type (g: groupe / l:lieu)
-     *
-     * @var string
+     * @var int|null
      */
-    protected $_type = '';
+    protected $_id_lieu = null;
 
     /**
-     * id_groupe ou id_lieu
-     *
-     * @var int
+     * @var int|null
      */
-    protected $_id_content = 0;
+    protected $_id_groupe = null;
+
+    /**
+     * @var int|null
+     */
+    protected $_id_event = null;
 
     /**
      * Liste des attributs de l'objet
@@ -77,8 +78,9 @@ class Alerting extends ObjectModel
         'id_contact'  => 'int',
         'created_on'  => 'date',
         'active'      => 'bool',
-        'type'        => 'string',
-        'id_content'  => 'int',
+        'id_lieu'     => 'int',
+        'id_groupe'   => 'int',
+        'id_event'    => 'int',
     ];
 
     /* début getters */
@@ -130,19 +132,27 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    function getType(): string
+    function getIdLieu(): ?int
     {
-        return $this->_type;
+        return $this->_id_lieu;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    function getIdContent(): int
+    function getIdGroupe(): ?int
     {
-        return $this->_id_content;
+        return $this->_id_groupe;
+    }
+
+    /**
+     * @return int|null
+     */
+    function getIdEvent(): ?int
+    {
+        return $this->_id_event;
     }
 
     /* fin getters */
@@ -195,30 +205,45 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @param string $type type
+     * @param int $id_lieu id_lieu
      *
      * @return object
      */
-    function setType(string $type): object
+    function setIdLieu(int $id_lieu = null): object
     {
-        if ($this->_type !== $type) {
-            $this->_type = $type;
-            $this->_modified_fields['type'] = true;
+        if ($this->_id_lieu !== $id_lieu) {
+            $this->_id_lieu = $id_lieu;
+            $this->_modified_fields['id_lieu'] = true;
         }
 
         return $this;
     }
 
     /**
-     * @param int $id_content id_content
+     * @param int $id_groupe id_groupe
      *
      * @return object
      */
-    function setIdContent(int $id_content): object
+    function setIdGroupe(int $id_groupe = null): object
     {
-        if ($this->_id_content !== $id_content) {
-            $this->_id_content = $id_content;
-            $this->_modified_fields['id_content'] = true;
+        if ($this->_id_groupe !== $id_groupe) {
+            $this->_id_groupe = $id_groupe;
+            $this->_modified_fields['id_groupe'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param int $id_event id_event
+     *
+     * @return object
+     */
+    function setIdEvent(int $id_event = null): object
+    {
+        if ($this->_id_event !== $id_event) {
+            $this->_id_event = $id_event;
+            $this->_modified_fields['id_event'] = true;
         }
 
         return $this;
@@ -431,5 +456,13 @@ class Alerting extends ObjectModel
              . "AND `a`.`type` = 'e'";
 
         return $db->queryWithFetch($sql);
+    }
+
+    /**
+     * @return array
+     */
+    static function find(): array
+    {
+        return [];
     }
 }

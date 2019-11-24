@@ -1,3 +1,4 @@
+
 INSERT INTO `geo_world_region` (`id_country`, `id_region`, `name`) VALUES
 ('AD', '02', 'Canillo'),
 ('AD', '03', 'Encamp'),
@@ -2836,6 +2837,7 @@ INSERT INTO `geo_world_region` (`id_country`, `id_region`, `name`) VALUES
 ('NR', '13', 'Uaboe'),
 ('NR', '14', 'Yaren'),
 ('NZ', '10', 'Chatham Islands'),
+('NZ', '85', 'Waikato'),
 ('NZ', 'E7', 'Auckland'),
 ('NZ', 'E8', 'Bay of Plenty'),
 ('NZ', 'E9', 'Canterbury'),
@@ -2851,7 +2853,6 @@ INSERT INTO `geo_world_region` (`id_country`, `id_region`, `name`) VALUES
 ('NZ', 'G1', 'Waikato'),
 ('NZ', 'G2', 'Wellington'),
 ('NZ', 'G3', 'West Coast'),
-('NZ', '85', 'Waikato'),
 ('OM', '01', 'Ad Dakhiliyah'),
 ('OM', '02', 'Al Batinah'),
 ('OM', '03', 'Al Wusta'),

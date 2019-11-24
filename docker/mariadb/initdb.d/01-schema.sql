@@ -1,19 +1,3 @@
-CREATE TABLE IF NOT EXISTS `geo_fr_city` (
-  `id_city` int(10) UNSIGNED NOT NULL COMMENT 'code insee',
-  `id_departement` char(3) NOT NULL,
-  `cp` char(5) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_city`)
-);
-
-CREATE TABLE IF NOT EXISTS `geo_fr_departement` (
-  `id_departement` char(3) NOT NULL,
-  `id_region` char(2) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_departement`),
-  KEY `id_region` (`id_region`)
-);
-
 CREATE TABLE IF NOT EXISTS `geo_world_country` (
   `id_country` char(2) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -21,10 +5,37 @@ CREATE TABLE IF NOT EXISTS `geo_world_country` (
 );
 
 CREATE TABLE IF NOT EXISTS `geo_world_region` (
-  `id_country` char(2) NOT NULL,
   `id_region` char(2) NOT NULL,
+  `id_country` char(2) NOT NULL,
   `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_country`,`id_region`)
+  PRIMARY KEY (`id_country`,`id_region`),
+  KEY `id_country` (`id_country`),
+  CONSTRAINT `geo_world_region_ibfk_1` FOREIGN KEY (`id_country`) REFERENCES `geo_world_country` (`id_country`)
+);
+
+CREATE TABLE IF NOT EXISTS `geo_fr_departement` (
+  `id_departement` char(2) NOT NULL,
+  `id_region` char(2) NOT NULL,
+  `id_country` char(2) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_departement`),
+  KEY `id_region` (`id_region`),
+  KEY `id_country` (`id_country`),
+  CONSTRAINT `geo_fr_departement_ibfk_1` FOREIGN KEY (`id_country`,`id_region`) REFERENCES `geo_world_region` (`id_country`, `id_region`)
+);
+
+CREATE TABLE IF NOT EXISTS `geo_fr_city` (
+  `id_city` int(10) UNSIGNED NOT NULL COMMENT 'code insee',
+  `id_departement` char(2) NOT NULL,
+  `id_region` char(2) NOT NULL,
+  `id_country` char(2) NOT NULL,
+  `cp` char(5) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_city`),
+  KEY `id_departement` (`id_departement`),
+  KEY `id_region` (`id_region`),
+  KEY `id_country` (`id_country`),
+  CONSTRAINT `geo_fr_city_ibfk_1` FOREIGN KEY (`id_country`,`id_region`,`id_departement`) REFERENCES `geo_fr_departement` (`id_country`, `id_region`, `id_departement`)
 );
 
 CREATE TABLE IF NOT EXISTS `adhoc_lieu_type` (
@@ -212,8 +223,9 @@ CREATE TABLE IF NOT EXISTS `adhoc_alerting` (
   `id_contact` int(10) UNSIGNED NOT NULL,
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `active` tinyint(1) UNSIGNED NOT NULL,
-  `type` char(1) NOT NULL,
-  `id_content` int(10) UNSIGNED NOT NULL,
+  `id_lieu` int(10) UNSIGNED NOT NULL,
+  `id_groupe` int(10) UNSIGNED NOT NULL,
+  `id_event` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id_alerting`),
   KEY `id_contact` (`id_contact`),
   KEY `active` (`active`),

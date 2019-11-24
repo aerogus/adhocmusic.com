@@ -58,16 +58,6 @@ class Lieu extends ObjectModel
     protected $_address = '';
 
     /**
-     * @var string
-     */
-    protected $_cp = '';
-
-    /**
-     * @var string
-     */
-    protected $_city = '';
-
-    /**
      * @var int
      */
     protected $_id_city = '';
@@ -142,8 +132,6 @@ class Lieu extends ObjectModel
         'id_type'        => 'int',
         'name'           => 'string',
         'address'        => 'string',
-        'cp'             => 'string',
-        'city'           => 'string',
         'id_city'        => 'int',
         'id_departement' => 'string',
         'id_region'      => 'string',
@@ -227,46 +215,6 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * Retourne le code postal
-     *
-     * @return string
-     */
-    function getCp(): string
-    {
-        return $this->_cp;
-    }
-
-    /**
-     * Retourne le code postal à partir de l'id_city
-     *
-     * @return string
-     */
-    function getCpNew(): string
-    {
-        return City::getInstance($this->_id_city)->getCp();
-    }
-
-    /**
-     * Retourne la ville
-     *
-     * @return string
-     */
-    function getCity(): string
-    {
-        return $this->_city;
-    }
-
-    /**
-     * Retourne le nom de la ville à partir de l'id_city
-     *
-     * @return string
-     */
-    function getCityNew(): string
-    {
-        return City::getInstance($this->_id_city)->getName();
-    }
-
-    /**
      * Retourne l'id de la ville (country FR only)
      * ça correspond au code insee
      *
@@ -275,6 +223,16 @@ class Lieu extends ObjectModel
     function getIdCity(): int
     {
         return $this->_id_city;
+    }
+
+    /**
+     * Retourne la ville
+     *
+     * @return object
+     */
+    function getCity(): object
+    {
+        return City::getInstance($this->getIdCity());
     }
 
     /**
@@ -288,13 +246,13 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * Retourne le nom du département
+     * Retourne l'objet département
      *
-     * @return string
+     * @return object
      */
-    function getDepartement(): string
+    function getDepartement(): object
     {
-        return Departement::getInstance($this->getIdDepartement())->getName();
+        return Departement::getInstance($this->getIdDepartement());
     }
 
     /**
@@ -308,18 +266,18 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * Retourne le nom de la région (avant unification de 201X)
+     * Retourne l'objet région
      *
-     * @return string
+     * @return object
      */
-    function getRegion(): string
+    function getRegion(): object
     {
         return WorldRegion::getInstance(
             [
                 'id_country' => $this->getIdCountry(),
                 'id_region' => $this->getIdRegion(),
             ]
-        )->getName();
+        );
     }
 
     /**
@@ -333,23 +291,13 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * Retourne le nom du pays
+     * Retourne l'objet country
      *
-     * @return string
+     * @return object
      */
-    function getCountry(): string
+    function getCountry(): object
     {
-        return WorldCountry::getInstance($this->_id_country)->getName();
-    }
-
-    /**
-     * Retourne l'url de l'image du drapeau pays
-     *
-     * @return string
-     */
-    function getCountryFlagUrl(): string
-    {
-        return WorldCountry::getInstance($this->_id_country)->getFlagUrl();
+        return WorldCountry::getInstance($this->getIdCountry());
     }
 
     /**
@@ -893,6 +841,9 @@ class Lieu extends ObjectModel
      * @param array $params [
      *                      'online' => bool,
      *                      'id_country' => string,
+     *                      'id_region' => string,
+     *                      'id_departement' => string,
+     *                      'id_city' => int,
      *                      'order_by' => string,
      *                      'sort' => string,
      *                      'start' => int,
@@ -916,6 +867,18 @@ class Lieu extends ObjectModel
 
         if (isset($params['id_country'])) {
             $sql .= "AND `id_country` = '" . $db->escape($params['id_country']) . "' ";
+        }
+
+        if (isset($params['id_region'])) {
+            $sql .= "AND `id_region` = '" . $db->escape($params['id_region']) . "' ";
+        }
+
+        if (isset($params['id_departement'])) {
+            $sql .= "AND `id_departement` = '" . $db->escape($params['id_departement']) . "' ";
+        }
+
+        if (isset($params['id_city'])) {
+            $sql .= "AND `id_city` = '" . (int) $params['id_city'] . "' ";
         }
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
