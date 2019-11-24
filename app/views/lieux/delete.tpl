@@ -23,9 +23,6 @@
       <li>Ville : {$lieu->getCity()|escape}</li>
       <li>Pays : {$lieu->getIdCountry()}</li>
       <li>Description : {$lieu->getText()|escape}</li>
-      <li>Téléphone : {$lieu->getTel()|escape}</li>
-      <li>Fax : {$lieu->getFax()|escape}</li>
-      <li>Email : {$lieu->getEmail()|escape}</li>
       <li>Site : {$lieu->getSite()|escape}</li>
       <li>Latitude : {$lieu->getLat()|escape}</li>
       <li>Longitude : {$lieu->getLng()|escape}</li>
