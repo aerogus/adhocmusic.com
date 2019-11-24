@@ -8,16 +8,8 @@
 
 {if !empty($create)}
 
-<div class="infobulle success">Votre compte AD’HOC a bien été créé ! Regardez votre boite aux lettres électronique, elle vous confirme votre inscription, et un mot de passe vous a été attribué.<br>
-Vous pourrez le modifier le modifier dans votre "Tableau de bord" / "Mes Infos Persos" / "Modifier le mot de passe"</div>
-
-<h3>Et Maintenant ?</h3>
-
-<p>Vous avez un groupe de musique ? Vous voulez postuler pour nos concerts ? <a href="/groupes/create"> Inscrivez le</a></p>
-<p>Venez découvrir des centaines de <a href="/medias">photos, vidéos et musiques</a> de concerts</p>
-<p><a href="/contact">Contactez nous</a> pour toute question</p>
-
-<p>Et encore bienvenue chez vous !</p>
+<div class="infobulle success">Bienvenue ! Votre compte AD’HOC a bien été créé. Consultez votre boite aux lettres électronique, elle vous confirme votre inscription et un mot de passe vous a été communiqué.<br>
+Cliquez alors sur le cadenas en haut à droite pour vous identifier.</div>
 
 {elseif !empty($error_generic)}
 
@@ -25,7 +17,7 @@ Vous pourrez le modifier le modifier dans votre "Tableau de bord" / "Mes Infos P
 déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="/auth/lost-password">cliquez ici</a> pour le récupérer.</div>
 
   {if !empty($password)}
-    <div class="infobulle info">Password: {$password}</div>
+    <div class="infobulle info">Mot de passe: {$password}</div>
   {/if}
 
 {else}

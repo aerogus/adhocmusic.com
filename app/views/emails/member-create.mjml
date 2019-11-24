@@ -18,7 +18,7 @@
           <p>Pseudo: {$pseudo|escape}</p>
           <p>E-mail: {$email|escape}</p>
           <p>Mot de passe: {$password|escape}</p>
-          <p>Newsletter: {if ($newsletter)}oui{else}non{/if}</p>
+          <p>Newsletter: {if ($mailing)}oui{else}non{/if}</p>
         </mj-text>
       </mj-column>
     </mj-section>
