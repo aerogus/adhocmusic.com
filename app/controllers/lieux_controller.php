@@ -118,8 +118,8 @@ final class Controller
             ->addStep("Lieux", "/lieux")
             ->addStep($lieu->getName());
 
-        $smarty->assign('title', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCp() . " " . $lieu->getCity());
-        $smarty->assign('description', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCp() . " " . $lieu->getCity());
+        $smarty->assign('title', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCity()->getCp() . " " . $lieu->getCity()->getName());
+        $smarty->assign('description', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCity()->getCp() . " " . $lieu->getCity()->getName());
 
         $smarty->assign(
             'events_f', Event::find(
@@ -206,7 +206,6 @@ final class Controller
         $smarty->enqueue_script('/js/lieux-create.js');
 
         if (Tools::isSubmit('form-lieu-create')) {
-            $city = City::getInstance((int) Route::params('id_city'));
 
             $data = [
                 'id_country'     => (string) Route::params('id_country'),
@@ -216,8 +215,6 @@ final class Controller
                 'id_type'        => (int) Route::params('id_type'),
                 'name'           => (string) Route::params('name'),
                 'address'        => (string) Route::params('address'),
-                'cp'             => $city->getCp(),
-                'city'           => $city->getName(),
                 'text'           => (string) Route::params('text'),
                 'site'           => (string) Route::params('site'),
                 'id_contact'     => $_SESSION['membre']->getId(),
@@ -234,8 +231,6 @@ final class Controller
                     ->setIdType($data['id_type'])
                     ->setName($data['name'])
                     ->setAddress($data['address'])
-                    ->setCp($data['cp'])
-                    ->setCity($data['city'])
                     ->setText($data['text'])
                     ->setSite($data['site'])
                     ->setIdContact($data['id_contact']);
@@ -243,7 +238,7 @@ final class Controller
                 $lieu->save();
 
                 // calcul des coordonnées
-                $addr = $lieu->getAddress() . ' ' . $lieu->getCp() . ' ' . $lieu->getCity();
+                $addr = $lieu->getAddress() . ' ' . $lieu->getCity()->getCp() . ' ' . $lieu->getCity()->getName();
                 if ($coords = GoogleMaps::getGeocode($addr)) { // TODO nouvelle clé API Google (ou autre service de Geocoding !)
                     if ($coords['status'] === 'OK') {
                         $lieu->setLat($coords['lat']);
@@ -308,7 +303,6 @@ final class Controller
         }
 
         if (Tools::isSubmit('form-lieu-edit')) {
-            $city = City::getInstance((int) Route::params('id_city'));
 
             $data = [
                 'id'             => (int) Route::params('id'),
@@ -319,8 +313,6 @@ final class Controller
                 'id_type'        => (int) Route::params('id_type'),
                 'name'           => (string) Route::params('name'),
                 'address'        => (string) Route::params('address'),
-                'cp'             => $city->getCp(),
-                'city'           => $city->getName(),
                 'text'           => (string) Route::params('text'),
                 'site'           => (string) Route::params('site'),
                 'id_contact'     => $_SESSION['membre']->getId(),
@@ -339,8 +331,6 @@ final class Controller
                     ->setIdType($data['id_type'])
                     ->setName($data['name'])
                     ->setAddress($data['address'])
-                    ->setCp($data['cp'])
-                    ->setCity($data['city'])
                     ->setText($data['text'])
                     ->setSite($data['site'])
                     ->setLat($data['lat'])
@@ -349,7 +339,7 @@ final class Controller
                 if ($lieu->save()) {
                     /* récupération des coordonnées si non précisées */
 //                    if (!$lieu->getLng() || !$lieu->getLat()) {
-                        $addr = $lieu->getAddress() . ' ' . $lieu->getCp() . ' ' . $lieu->getCity();
+                        $addr = $lieu->getAddress() . ' ' . $lieu->getCity()->getCp() . ' ' . $lieu->getCity()->getName();
                         if ($coords = GoogleMaps::getGeocode($addr)) {
                             $lieu->setLat($coords['lat']);
                             $lieu->setLng($coords['lng']);
