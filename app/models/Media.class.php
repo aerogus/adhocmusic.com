@@ -398,6 +398,8 @@ class Media extends ObjectModel
      * Retourne une collection d'objets "Media" (Audio|Photo|Video) répondant au(x) critère(s) donné(s)
      *
      * @param array $params [
+     *                      'id__in' => array de int,
+     *                      'id__not_in' => array de int,
      *                      'id_contact' => int,
      *                      'id_groupe' => int,
      *                      'id_event' => int,
@@ -418,6 +420,14 @@ class Media extends ObjectModel
         $objs = [];
 
         $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+
+        if (isset($params['id__in'])) {
+            $sql .= "AND `" . static::getDbPk() . "` IN (" . implode(',', $params['id__in']) . ") ";
+        }
+
+        if (isset($params['id__not_in'])) {
+            $sql .= "AND `" . static::getDbPk() . "` NOT IN (" . implode(',', $params['id__not_in']) . ") ";
+        }
 
         if (isset($params['id_contact'])) {
             $sql .= "AND `id_contact` = " . (int) $params['id_contact'] . " ";
