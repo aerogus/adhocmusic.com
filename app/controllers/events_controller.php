@@ -135,17 +135,6 @@ final class Controller
         $smarty->assign('title', "♫ ". $event->getName());
         $smarty->assign('description', "Date : " . Date::mysql_datetime($event->getDate(), 'd/m/Y') . " | Lieu : " . $event->getLieu()->getName() . " " . $event->getLieu()->getAddress() . " " . $event->getLieu()->getCp() . " " . $event->getLieu()->getCity());
 
-        // alerting
-        if (Tools::isAuth()) {
-            if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'e', $event->getId())) {
-                $smarty->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=e&id_content='.$event->getId());
-            } else {
-                $smarty->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=e&id_content='.$event->getId());
-            }
-        } else {
-            $smarty->assign('alerting_auth_url', HOME_URL . '/auth/login');
-        }
-
         $smarty->assign(
             'photos', Photo::find(
                 [

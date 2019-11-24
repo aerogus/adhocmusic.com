@@ -277,21 +277,6 @@ class Alerting extends ObjectModel
      */
     static function addSubscriber(int $id_contact, string $type, int $id_content): bool
     {
-        if (self::getIdByIds($id_contact, $type, $id_content)) {
-            return false;
-        }
-
-        $a = (new Alerting())
-            ->setIdContact($id_contact)
-            ->setCreatedNow()
-            ->setType($type)
-            ->setActive(true)
-            ->setIdContent($id_content);
-
-        if ($a->save()) {
-             return true;
-        }
-
         return false;
     }
 
@@ -304,167 +289,71 @@ class Alerting extends ObjectModel
      */
     static function delSubscriber(int $id_contact, string $type, int $id_content): bool
     {
-        if (!self::getIdByIds($id_contact, $type, $id_content)) {
-            return false;
-        }
-
-        if ($id_alerting = Alerting::getIdByIds($id_contact, $type, $id_content)) {
-            $a = Alerting::getInstance($id_alerting);
-            if ($a->delete()) {
-                return true;
-            }
-        }
-
         return false;
     }
 
     /**
-     * @param int    $id_contact id_contact
-     * @param string $type       type
-     * @param int    $id_content id_content
-     *
-     * @return int
-     */
-    static function getIdByIds(int $id_contact, string $type, int $id_content): int
-    {
-         $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_alerting` "
-             . "FROM `adhoc_alerting` "
-             . "WHERE `id_contact` = " . (int) $id_contact . " "
-             . "AND `type` = '" . $db->escape($type) . "' "
-             . "AND `id_content` = " . (int) $id_content;
-
-        return (int) $db->queryWithFetchFirstField($sql);
-    }
-
-    /**
-     * @param int $id_contact id_contact
-     *
-     * @return array
-     */
-    static function getLieuxAlertingByIdContact(int $id_contact): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_content` "
-             . "FROM `adhoc_alerting` "
-             . "WHERE `id_contact` = " . (int) $id_contact . " "
-             . "AND `type` = 'l'";
-
-        $rows = $db->queryWithFetch($sql);
-        $lieux = [];
-        foreach ($rows as $row) {
-            $lieux[] = Lieu::getInstance((int) $row['id_content']);
-        }
-        return $lieux;
-    }
-
-    /**
-     * @param int $id_lieu id_lieu
-     *
-     * @return array
-     */
-    static function getIdsContactByLieu(int $id_lieu): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `a`.*, `l`.`id_lieu`, `l`.`name` "
-             . "FROM `adhoc_alerting` `a`, `adhoc_lieu` `l` "
-             . "WHERE `a`.`id_content` = " . (int) $id_lieu . " "
-             . "AND `a`.`id_content` = `l`.`id_lieu` "
-             . "AND `a`.`type` = 'l'";
-
-        return $db->queryWithFetch($sql);
-    }
-
-    /**
-     * @param int $id_contact id_contact
-     *
-     * @return array
-     */
-    static function getGroupesAlertingByIdContact(int $id_contact): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_content` "
-             . "FROM `adhoc_alerting` "
-             . "WHERE `id_contact` = " . (int) $id_contact . " "
-             . "AND `type` = 'g'";
-
-        $rows = $db->queryWithFetch($sql);
-        $groupes = [];
-        foreach ($rows as $row) {
-            $groupes[] = Groupe::getInstance((int) $row['id_content']);
-        }
-        return $groupes;
-    }
-
-    /**
-     * @param int $id_groupe id_groupe
-     *
-     * @return array
-     */
-    static function getIdsContactByGroupe(int $id_groupe): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `a`.*, `g`.`id_groupe`, `g`.`name` "
-             . "FROM `adhoc_alerting` `a`, `adhoc_groupe` `g` "
-             . "WHERE `a`.`id_content` = " . (int) $id_groupe . " "
-             . "AND `a`.`id_content` = `g`.`id_groupe` "
-             . "AND `a`.`type` = 'g'";
-
-        return $db->queryWithFetch($sql);
-    }
-
-    /**
-     * @param int $id_contact id_contact
-     *
-     * @return array
-     */
-    static function getEventsAlertingByIdContact(int $id_contact): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_content` "
-             . "FROM `adhoc_alerting` "
-             . "WHERE `id_contact` = " . (int) $id_contact . " "
-             . "AND `type` = 'e'";
-
-        $rows = $db->queryWithFetch($sql);
-        $events = [];
-        foreach ($rows as $row) {
-            $events[] = Event::getInstance((int) $row['id_content']);
-        }
-        return $events;
-    }
-
-    /**
-     * @param int $id_event id_event
-     *
-     * @return array
-     */
-    static function getIdsContactByEvent(int $id_event): array
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `a`.*, `e`.`id_event`, `e`.`name` "
-             . "FROM `adhoc_alerting` `a`, `adhoc_event` `e` "
-             . "WHERE `a`.`id_content` = " . (int) $id_event . " "
-             . "AND `a`.`id_content` = `e`.`id_event` "
-             . "AND `a`.`type` = 'e'";
-
-        return $db->queryWithFetch($sql);
-    }
-
-    /**
-     * @param array $params params
+     * @param array $params [
+     *                      'id_contact' => int,
+     *                      'id_lieu' => int,
+     *                      'id_groupe' => int,
+     *                      'id_event' => int,
+     *                      'order_by' => string,
+     *                      'sort' => string,
+     *                      'start' => int,
+     *                      'limit' => int,
+     *                      ]
      *
      * @return array
      */
     static function find(array $params): array
     {
-        return [];
+        $db = DataBase::getInstance();
+        $objs = [];
+
+        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+
+        if (isset($params['id_contact'])) {
+            $sql .= "AND `id_contact` = " . (int) $params['id_contact'] . " ";
+        }
+
+        if (isset($params['id_lieu'])) {
+            $sql .= "AND `id_lieu` = " . (int) $params['id_lieu'] . " ";
+        }
+
+        if (isset($params['id_groupe'])) {
+            $sql .= "AND `id_groupe` = " . (int) $params['id_groupe'] . " ";
+        }
+
+        if (isset($params['id_event'])) {
+            $sql .= "AND `id_event` = " . (int) $params['id_event'] . " ";
+        }
+
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+            $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+        } else {
+            $sql .= "ORDER BY `" . static::getDbPk() . "` ";
+        }
+
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+            $sql .= $params['sort'] . " ";
+        } else {
+            $sql .= "ASC ";
+        }
+
+        if (!isset($params['start'])) {
+            $params['start'] = 0;
+        }
+
+        if (isset($params['start']) && isset($params['limit'])) {
+            $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
+        }
+
+        $ids = $db->queryWithFetchFirstFields($sql);
+        foreach ($ids as $id) {
+            $objs[] = static::getInstance((int) $id);
+        }
+
+        return $objs;
     }
 }

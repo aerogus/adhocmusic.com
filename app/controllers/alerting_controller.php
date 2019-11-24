@@ -13,10 +13,21 @@ final class Controller
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
             ->addStep('Mes alertes');
 
+        $myAlerting = Alerting::find(['id_contact' => $_SESSION['membre']->getId()]);
+        $myAlertingLieu = $myAlertingGroupe = $myAlertingEvent =  [];
+        foreach ($myAlerting as $ma) {
+            if ($ma->getIdLieu()) {
+                $myAlertingLieu[] = Lieu::getInstance($ma->getIdLieu());
+            } elseif ($ma->getIdGroupe()) {
+                $myAlertingGroupe[] = Groupe::getInstance($ma->getIdGroupe());
+            } elseif ($ma->getIdEvent()) {
+                $myAlertingEvent[] = Event::getInstance($ma->getIdEvent());
+            }
+        }
         $smarty = new AdHocSmarty();
-        $smarty->assign('groupes', Alerting::getGroupesAlertingByIdContact($_SESSION['membre']->getId()));
-        $smarty->assign('lieux', Alerting::getLieuxAlertingByIdContact($_SESSION['membre']->getId()));
-        $smarty->assign('events', Alerting::getEventsAlertingByIdContact($_SESSION['membre']->getId()));
+        $smarty->assign('lieux', $myAlertingLieu);
+        $smarty->assign('groupes', $myAlertingGroupe);
+        $smarty->assign('events', $myAlertingEvent);
         return $smarty->fetch('alerting/my.tpl');
     }
 
@@ -35,8 +46,7 @@ final class Controller
 
         $r = Alerting::addSubscriber($id_contact, $type, $id_content);
 
-        switch ($type)
-        {
+        switch ($type) {
             case 'g':
                 Log::action(Log::ACTION_ALERTING_GROUPE_SUB, $id_content);
                 //Tools::redirect(Groupe::getInstance($id_content)->getUrl());
@@ -72,8 +82,7 @@ final class Controller
 
         $r = Alerting::delSubscriber($id_contact, $type, $id_content);
 
-        switch ($type)
-        {
+        switch ($type) {
             case 'g':
                 Log::action(Log::ACTION_ALERTING_GROUPE_UNSUB, $id_content);
                 //Tools::redirect(Groupe::getInstance($id_content)->getUrl());

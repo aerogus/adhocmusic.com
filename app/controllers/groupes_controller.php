@@ -172,6 +172,7 @@ final class Controller
         );
 
         // alerting
+        /*
         if (Tools::isAuth()) {
             if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'g', $groupe->getId())) {
                 $smarty->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=g&id_content='.$groupe->getId());
@@ -181,6 +182,7 @@ final class Controller
         } else {
             $smarty->assign('alerting_auth_url', HOME_URL . '/auth/login');
         }
+        */
 
         return $smarty->fetch('groupes/show.tpl');
     }

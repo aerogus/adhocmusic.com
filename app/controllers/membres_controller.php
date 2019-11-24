@@ -341,9 +341,21 @@ final class Controller
 
         $smarty->assign('inbox', $db->queryWithFetch($sql));
 
-        $smarty->assign('alerting_groupes', Alerting::getGroupesAlertingByIdContact($_SESSION['membre']->getId()));
-        $smarty->assign('alerting_events', Alerting::getEventsAlertingByIdContact($_SESSION['membre']->getId()));
-        $smarty->assign('alerting_lieux', Alerting::getLieuxAlertingByIdContact($_SESSION['membre']->getId()));
+        $myAlerting = Alerting::find(['id_contact' => $_SESSION['membre']->getId()]);
+        $myAlertingLieu = $myAlertingGroupe = $myAlertingEvent =  [];
+        foreach ($myAlerting as $ma) {
+            if ($ma->getIdLieu()) {
+                $myAlertingLieu[] = Lieu::getInstance($ma->getIdLieu());
+            } elseif ($ma->getIdGroupe()) {
+                $myAlertingGroupe[] = Groupe::getInstance($ma->getIdGroupe());
+            } elseif ($ma->getIdEvent()) {
+                $myAlertingEvent[] = Event::getInstance($ma->getIdEvent());
+            }
+        }
+
+        $smarty->assign('alerting_groupes', $myAlertingGroupe);
+        $smarty->assign('alerting_events', $myAlertingEvent);
+        $smarty->assign('alerting_lieux', $myAlertingLieu);
 
         $smarty->assign(
             'groupes', Groupe::find(

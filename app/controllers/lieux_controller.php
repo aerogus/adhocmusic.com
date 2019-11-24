@@ -180,6 +180,7 @@ final class Controller
         );
 
         // alerting
+        /*
         if (Tools::isAuth()) {
             if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'l', $lieu->getId())) {
                 $smarty->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=l&id_content='.$lieu->getId());
@@ -189,6 +190,7 @@ final class Controller
         } else {
             $smarty->assign('alerting_auth_url', HOME_URL .  '/auth/login');
         }
+        */
 
         return $smarty->fetch('lieux/show.tpl');
     }

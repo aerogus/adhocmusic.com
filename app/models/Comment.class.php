@@ -511,11 +511,13 @@ class Comment extends ObjectModel
                 $url = $lieu->getUrl();
 
                 // -> gens abonnés au lieu
+                /*
                 $ids_contact = Alerting::getIdsContactByLieu($lieu->getId());
                 foreach ($ids_contact as $id_contact) {
                     $membre = Membre::getInstance($id_contact);
                     $emails[] = $membre->getEmail();
                 }
+                */
 
                 // -> email contact du lieu
                 if ($lieu->getEmail()) {
@@ -531,11 +533,13 @@ class Comment extends ObjectModel
 
                 // -> si lien avec événement, gens ayant dans leur agenda perso cette date
                 if ($photo->getIdEvent()) {
+                    /*
                     $subs = Alerting::getIdsContactByEvent($photo->getIdEvent());
                     foreach ($subs as $sub) {
                         $membre = Membre::getInstance($sub['id_contact']);
                         $emails[] = $membre->getEmail();
                     }
+                    */
                 }
 
                 // -> uploadeur de la photo
@@ -559,11 +563,13 @@ class Comment extends ObjectModel
                 $url = $event->getUrl();
 
                 // -> personnes abonnés à l'événement
+                /*
                 $ids_contact = Alerting::getIdsContactByEvent($event->getId());
                 foreach ($ids_contact as $id_contact) {
                     $membre = Membre::getInstance($id_contact);
                     $emails[] = $membre->getEmail();
                 }
+                */
 
                 // -> si lien avec groupes, contacts des groupes
                 $grps = $event->getGroupes();
