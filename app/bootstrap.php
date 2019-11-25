@@ -7,12 +7,6 @@
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 
-setlocale(LC_ALL, 'fr_FR.UTF8');
-ini_set('date.timezone', 'Europe/Paris');
-ini_set('default_charset', 'UTF-8');
-
-define('ENV', (php_uname('n') === 'rbx.aerogus.net') ? 'PROD' : 'DEV');
-
 /**
  * Chargement automatique des classes métiers AD'HOC
  *
@@ -30,12 +24,20 @@ function autoload(string $className)
 }
 spl_autoload_register('autoload');
 
-if (ENV === 'PROD') {
+$conf = Conf::getInstance()::get();
 
-    define('_DB_HOST_',     'localhost');
-    define('_DB_USER_',     'adhocmusic');
-    define('_DB_PASSWORD_', 'kK2972Wd');
-    define('_DB_DATABASE_', 'adhocmusic');
+setlocale(LC_ALL,          $conf['global']['locale']);
+ini_set('date.timezone',   $conf['global']['timezone']);
+ini_set('default_charset', $conf['global']['charset']);
+
+define('_DB_HOST_',     $conf['database']['host']);
+define('_DB_USER_',     $conf['database']['user']);
+define('_DB_PASSWORD_', $conf['database']['pass']);
+define('_DB_DATABASE_', $conf['database']['name']);
+
+define('ENV', (php_uname('n') === 'rbx.aerogus.net') ? 'PROD' : 'DEV');
+
+if (ENV === 'PROD') {
 
     define('HOME_URL',  'https://www.adhocmusic.com');
     define('CACHE_URL', 'https://static.adhocmusic.com/cache');
@@ -47,11 +49,6 @@ if (ENV === 'PROD') {
     define('DEBUG_MODE', false);
 
 } elseif (ENV === 'DEV') {
-
-    define('_DB_HOST_',     'mariadb.adhocmusic.test');
-    define('_DB_USER_',     'adhocmusic');
-    define('_DB_PASSWORD_', 'changeme');
-    define('_DB_DATABASE_', 'adhocmusic');
 
     define('HOME_URL',  'https://www.adhocmusic.test');
     define('CACHE_URL', 'https://static.adhocmusic.test/cache');

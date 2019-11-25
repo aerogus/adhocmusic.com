@@ -2,8 +2,7 @@
 .DS_Store
 
 # la configuration
-/conf
-!/conf/conf.dist.ini
+/app/conf.ini
 
 # données dans le contexte docker
 /volumes
