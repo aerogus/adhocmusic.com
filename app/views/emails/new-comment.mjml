@@ -1,0 +1,49 @@
+<mjml>
+  <mj-head>
+    <mj-title>Nouveau commentaire</mj-title>
+  </mj-head>
+  <mj-body background-color="#fff">
+    <mj-section background-color="#292933" padding-bottom="0px" padding-top="0">
+      <mj-column width="100%">
+      	<mj-text align="center" font-size="24px" color="#fff" font-weight="700" padding-left="20px" padding-right="20px" padding-bottom="10px" padding-top="10px">Association AD’HOC</mj-text>
+        <mj-image src="https://static.adhocmusic.com/media/newsletter/common/adhoc-note.png" width="75px" alt="Logo AD'HOC" align="center" border="none" padding="10px"></mj-image>
+        <mj-image src="https://static.adhocmusic.com/media/newsletter/common/line-alt.png" alt="" align="center" border="none" padding="0px"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fff" padding-bottom="0px" padding-top="0">
+      <mj-column width="100%">
+        <mj-text color="#292933" font-size="20px" font-weight="700">Nouveau commentaire</mj-text>
+        <mj-text font-size="16px" color="#292933">
+          <p>{$subject}</p>
+          <p><strong>{$pseudo}</strong> a écrit le <strong>{$date|date_format:'%d/%m/%Y à %H:%M'}</strong> :</p>
+          <p><em>{$text}</em></p>
+          <p>Pour y répondre, veuillez vous rendre sur la page suivante :</p>
+          <p><a href="{$url}">{$url}</a></p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#292933" padding-bottom="0px" padding-top="0">
+      <mj-column width="100%">
+      	<mj-image src="https://static.adhocmusic.com/media/newsletter/common/line.png" alt="" align="center" border="none" padding="0px"></mj-image>
+        <mj-text align="center" color="#fff" font-size="20px" font-weight="700" padding-left="0px" padding-right="0px" padding-bottom="10px" padding-top="10px">Suivez-nous</mj-text>
+        <mj-social font-size="16px" icon-size="32px" color="#fff" mode="vertical">
+          <mj-social-element  name="web-noshare" href="https://adhocmusic.com">
+            adhocmusic.com
+          </mj-social-element>
+          <mj-social-element name="instagram-noshare" href="https://instagram.com/adhoc.music">
+            @adhoc.music
+          </mj-social-element>
+          <mj-social-element name="facebook-noshare" href="https://facebook.com/adhocmusic">
+            @adhocmusic
+          </mj-social-element>
+          <mj-social-element  name="twitter-noshare" href="https://twitter.com/adhocmusic">
+            @adhocmusic
+          </mj-social-element>
+        </mj-social>
+      </mj-column>
+      <mj-column width="100%">
+        <mj-text align="center" color="#fff" font-size="16px" padding-left="0px" padding-right="0px" padding-bottom="10px" padding-top="10px"><a href="https://www.adhocmusic.com" style="text-decoration: none; color: inherit;"><strong>Association AD’HOC</strong></a><br/>8 rue de l'église<br/>91360 Épinay-sur-Orge</mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
