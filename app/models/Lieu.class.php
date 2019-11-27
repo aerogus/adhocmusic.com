@@ -634,9 +634,6 @@ class Lieu extends ObjectModel
      */
     function setSite(string $site): object
     {
-        if (strpos($site, 'http://') !== 0) {
-            $site = 'http://' . $site;
-        }
         if ($this->_site !== $site) {
             $this->_site = $site;
             $this->_modified_fields['site'] = true;
@@ -888,7 +885,7 @@ class Lieu extends ObjectModel
 
         $sql = "SELECT `id_lieu`, `id_departement` "
              . "FROM `" . Lieu::getDbTable() . "` "
-             . "ORDER BY `id_departement` ASC, `city` ASC, `cp` ASC";
+             . "ORDER BY `id_departement` ASC";
 
         $rows = $db->queryWithFetch($sql);
 
@@ -1095,7 +1092,7 @@ EOT;
 
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `l`.`id_lieu`, `l`.`name`, `l`.`address`, `v`.`cp`, `l`.`cp` AS `old_cp`, `v`.`name` AS `city`, `l`.`city` AS `old_city`, `l`.`lat`, `l`.`lng`, "
+        $sql = "SELECT `l`.`id_lieu`, `l`.`name`, `l`.`address`, `v`.`cp`, `v`.`name` AS `city`, `l`.`lat`, `l`.`lng`, "
              . "FORMAT(get_distance_metres('" . number_format($lat, 8, '.', '') . "', '" . number_format($lng, 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `distance` "
              . "FROM (`adhoc_lieu` `l`) "
              . "LEFT JOIN `" . City::getDbTable() . "` `v` ON (`l`.`id_city` = `v`.`id_city`) "
@@ -1140,7 +1137,7 @@ EOT;
 
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `l`.`id_lieu`, `l`.`name`, `l`.`address`, `v`.`cp`, `l`.`cp` AS `old_cp`, `v`.`name` AS `city`, `l`.`city` AS `old_city`, `l`.`lat`, `l`.`lng`, "
+        $sql = "SELECT `l`.`id_lieu`, `l`.`name`, `l`.`address`, `v`.`cp`, `v`.`name` AS `city`, `l`.`lat`, `l`.`lng`, "
              . "FORMAT(get_distance_metres('" . number_format($lat, 8, '.', '') . "', '" . number_format($lng, 8, '.', '') . "', `l`.`lat`, `l`.`lng`) / 1000, 2) AS `distance` "
              . "FROM (`adhoc_lieu` `l`) "
              . "LEFT JOIN `" . City::getDbTable() . "` `v` ON (`l`.`id_city` = `v`.`id_city`) "
@@ -1178,7 +1175,7 @@ EOT;
 
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `l`.`id_lieu`, `l`.`name`, `l`.`address`, `v`.`cp`, `l`.`cp` AS `old_cp`, `v`.`name` AS `city`, `l`.`city` AS `old_city`, `l`.`lat`, `l`.`lng` "
+        $sql = "SELECT `l`.`id_lieu`, `l`.`name`, `l`.`address`, `v`.`cp`, `v`.`name` AS `city`, `l`.`lat`, `l`.`lng` "
              . "FROM (`adhoc_lieu` `l`) "
              . "LEFT JOIN `" . City::getDbTable() . "` `v` ON (`l`.`id_city` = `v`.`id_city`) "
              . "WHERE 1 "
