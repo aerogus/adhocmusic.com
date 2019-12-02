@@ -3,6 +3,8 @@
 
 # la configuration
 /app/conf.ini
+/app/conf.prod.ini
+/app/conf.docker.ini
 
 # données dans le contexte docker
 /volumes
