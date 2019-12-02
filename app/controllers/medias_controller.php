@@ -31,7 +31,7 @@ final class Controller
             'last_videos', Video::find(
                 [
                     'online' => true,
-                    'order_by' => 'created_on',
+                    'order_by' => 'created_at',
                     'sort' => 'DESC',
                     'limit' => 18,
                 ]

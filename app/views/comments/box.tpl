@@ -11,12 +11,12 @@
   <img src="{$comment.id_contact|avatar_by_id}" alt="" style="width: 50px; height: 50px; padding-top: 5px;">
   </a>
   </div>
-  <span style="float: right;">{$comment.created_on|date_format:'le %d/%m/%Y à %H:%M'}</span>
+  <span style="float: right;">{$comment.created_at|date_format:'le %d/%m/%Y à %H:%M'}</span>
 {else}
   <div style="float: left;">
   <strong>{$comment.pseudo|escape}</strong>
   </div>
-  <span style="float: right;">{$comment.created_on|date_format:'%d/%m/%Y à %H:%M'}</span>
+  <span style="float: right;">{$comment.created_at|date_format:'%d/%m/%Y à %H:%M'}</span>
 {/if}
 <p style="padding-left: 115px;">{$comment.text|escape|@nl2br}</p>
 </div>

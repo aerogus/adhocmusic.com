@@ -46,12 +46,12 @@ class Comment extends ObjectModel
     /**
      * @var string
      */
-    protected $_created_on = null;
+    protected $_created_at = null;
 
     /**
      * @var string
      */
-    protected $_modified_on = null;
+    protected $_modified_at = null;
 
     /**
      * @var bool
@@ -97,8 +97,8 @@ class Comment extends ObjectModel
         'id_comment'  => 'int', // pk
         'type'        => 'string',
         'id_content'  => 'int',
-        'created_on'  => 'date',
-        'modified_on' => 'date',
+        'created_at'  => 'date',
+        'modified_at' => 'date',
         'online'      => 'bool',
         'id_contact'  => 'int',
         'pseudo'      => 'string',
@@ -144,10 +144,10 @@ class Comment extends ObjectModel
     /**
      * @return string|null
      */
-    function getCreatedOn(): ?string
+    function getCreatedAt(): ?string
     {
-        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
-            return $this->_created_on;
+        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
+            return $this->_created_at;
         }
         return null;
     }
@@ -155,10 +155,10 @@ class Comment extends ObjectModel
     /**
      * @return int
      */
-    function getCreatedOnTs(): ?int
+    function getCreatedAtTs(): ?int
     {
-        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
-            return strtotime($this->_created_on);
+        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
+            return strtotime($this->_created_at);
         }
         return null;
     }
@@ -166,10 +166,10 @@ class Comment extends ObjectModel
     /**
      * @return string|null
      */
-    function getModifiedOn(): ?string
+    function getModifiedAt(): ?string
     {
-        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
-            return $this->_modified_on;
+        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
+            return $this->_modified_at;
         }
         return null;
     }
@@ -177,10 +177,10 @@ class Comment extends ObjectModel
     /**
      * @return int
      */
-    function getModifiedOnTs(): ?int
+    function getModifiedAtTs(): ?int
     {
-        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
-            return strtotime($this->_modified_on);
+        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
+            return strtotime($this->_modified_at);
         }
         return null;
     }
@@ -286,15 +286,15 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param string $created_on created_on
+     * @param string $created_at created_at
      *
      * @return object
      */
-    function setCreatedOn(string $created_on): object
+    function setCreatedAt(string $created_at): object
     {
-        if ($this->_created_on !== $created_on) {
-            $this->_created_on = $created_on;
-            $this->_modified_fields['created_on'] = true;
+        if ($this->_created_at !== $created_at) {
+            $this->_created_at = $created_at;
+            $this->_modified_fields['created_at'] = true;
         }
 
         return $this;
@@ -307,24 +307,24 @@ class Comment extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_created_on !== $now) {
-            $this->_created_on = $now;
-            $this->_modified_fields['created_on'] = true;
+        if ($this->_created_at !== $now) {
+            $this->_created_at = $now;
+            $this->_modified_fields['created_at'] = true;
         }
 
         return $this;
     }
 
     /**
-     * @param string $modified_on modified_on
+     * @param string $modified_at modified_at
      *
      * @return object
      */
-    function setModifiedOn(string $modified_on): object
+    function setModifiedAt(string $modified_at): object
     {
-        if ($this->_modified_on !== $modified_on) {
-            $this->_modified_on = $modified_on;
-            $this->_modified_fields['modified_on'] = true;
+        if ($this->_modified_at !== $modified_at) {
+            $this->_modified_at = $modified_at;
+            $this->_modified_fields['modified_at'] = true;
         }
 
         return $this;
@@ -337,9 +337,9 @@ class Comment extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_modified_on !== $now) {
-            $this->_modified_on = $now;
-            $this->_modified_fields['modified_on'] = true;
+        if ($this->_modified_at !== $now) {
+            $this->_modified_at = $now;
+            $this->_modified_fields['modified_at'] = true;
         }
 
         return $this;
@@ -436,7 +436,7 @@ class Comment extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `com`.`type`, `com`.`id_content`, `com`.`created_on`, `com`.`modified_on`, "
+        $sql = "SELECT `com`.`type`, `com`.`id_content`, `com`.`created_at`, `com`.`modified_at`, "
              . "`com`.`online`, `com`.`id_contact`, `com`.`pseudo`, `com`.`text`, `mbr`.`pseudo` AS `pseudo_mbr`, "
              . "`com`.`email`, `cnt`.`email` AS `email_mbr` "
              . "FROM `" . Comment::getDbTable() . "` `com` "
@@ -599,7 +599,7 @@ class Comment extends ObjectModel
             [
                 'type'       => $this->getType(),
                 'id_content' => $this->getIdContent(),
-                'sort'       => 'created_on',
+                'sort'       => 'created_at',
                 'sens'       => 'ASC',
                 'online'     => true,
             ]

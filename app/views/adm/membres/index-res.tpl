@@ -6,9 +6,9 @@
       <td>{$membre.last_name|escape}</td>
       <td>{$membre.first_name|escape}</td>
       <td>{$membre.email|escape}</td>
-      <td>{$membre.created_on|date_format:'%d/%m/%y'}</td>
-      <td>{$membre.modified_on|date_format:'%d/%m/%y'}</td>
-      <td>{$membre.visited_on|date_format:'%d/%m/%y'}</td>
+      <td>{$membre.created_at|date_format:'%d/%m/%y'}</td>
+      <td>{$membre.modified_at|date_format:'%d/%m/%y'}</td>
+      <td>{$membre.visited_at|date_format:'%d/%m/%y'}</td>
       <td>{$membre.lastnl|date_format:'%d/%m/%y'}</td>
     </tr>
   </tbody>

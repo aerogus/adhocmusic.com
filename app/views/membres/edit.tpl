@@ -33,16 +33,16 @@
   {/if}
     <ul>
       <li>
-        <span id="created_on" style="float: right">{$me->getCreatedOn()|date_format:"%d/%m/%Y %H:%M"}</span>
-        <label for="created_on">Date Inscription</label>
+        <span id="created_at" style="float: right">{$me->getCreatedAt()|date_format:"%d/%m/%Y %H:%M"}</span>
+        <label for="created_at">Date Inscription</label>
       </li>
       <li>
-        <span id="modified_on" style="float: right">{$me->getModifiedOn()|date_format:"%d/%m/%Y %H:%M"}</span>
-        <label for="modified_on">Date Modification</label>
+        <span id="modified_at" style="float: right">{$me->getModifiedAt()|date_format:"%d/%m/%Y %H:%M"}</span>
+        <label for="modified_at">Date Modification</label>
       </li>
       <li>
-        <span id="visited_on" style="float: right">{$me->getVisitedOn()|date_format:"%d/%m/%Y %H:%M"}</span>
-        <label for="visited_on">Dernière visite</label>
+        <span id="visited_at" style="float: right">{$me->getVisitedAt()|date_format:"%d/%m/%Y %H:%M"}</span>
+        <label for="visited_at">Dernière visite</label>
       </li>
       <li>
         <strong style="float: right">{$me->getPseudo()|escape}</strong>

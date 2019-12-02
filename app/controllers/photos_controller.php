@@ -175,7 +175,7 @@ final class Controller
                         'id_type' => 'p',
                         'id_content' => $photo->getIdPhoto(),
                         'online' => true,
-                        'order_by' => 'created_on',
+                        'order_by' => 'created_at',
                         'sort' => 'ASC',
                     ]
                 )

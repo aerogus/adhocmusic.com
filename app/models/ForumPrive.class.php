@@ -32,7 +32,7 @@ class ForumPrive extends Forum
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `t`.`id_thread`, `t`.`created_on`, `t`.`modified_on`, "
+        $sql = "SELECT `t`.`id_thread`, `t`.`created_at`, `t`.`modified_at`, "
              . "`t`.`created_by`, `t`.`modified_by`, "
              . "`t`.`nb_messages`, (`t`.`nb_messages` - 1) AS `nb_replies`, `t`.`nb_views`, `t`.`subject`, "
              . "`m`.`text` "
@@ -42,7 +42,7 @@ class ForumPrive extends Forum
              . "AND `f`.`id_forum` = `t`.`id_forum` "
              . "AND `t`.`id_thread` = `m`.`id_thread` "
              . "AND `m`.`id_message` = (SELECT (MIN(`id_message`)) FROM `" . static::$_db_table_forum_message . "` `sm` WHERE `sm`.`id_thread` = `t`.`id_thread`) "
-             . "ORDER BY  `t`.`modified_on` DESC, `m`.`id_thread` DESC , `m`.`id_message` DESC "
+             . "ORDER BY  `t`.`modified_at` DESC, `m`.`id_thread` DESC , `m`.`id_message` DESC "
              . "LIMIT " . ((int) $page * FORUM_NB_THREADS_PER_PAGE) ."," . FORUM_NB_THREADS_PER_PAGE;
 
         $threads = $db->queryWithFetch($sql);
@@ -71,7 +71,7 @@ class ForumPrive extends Forum
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `id_forum`, `id_thread`, `created_on`, `modified_on`, "
+        $sql = "SELECT `id_forum`, `id_thread`, `created_at`, `modified_at`, "
              . "`created_by`, `modified_by`, "
              . "`nb_messages`, (`nb_messages` - 1) AS `nb_replies`, `nb_views`, `subject` "
              . "FROM `" . static::$_db_table_forum_thread . "` "
@@ -82,7 +82,7 @@ class ForumPrive extends Forum
         $thread['created_by_url'] = HOME_URL . '/membres/' . $thread['created_by'];
         $thread['created_by_avatar'] = MEDIA_URL . '/membre/ca/' . $thread['created_by'] . '.jpg';
 
-        $sql = "SELECT `id_message`, `id_thread`, `created_on`, `modified_on`, "
+        $sql = "SELECT `id_message`, `id_thread`, `created_at`, `modified_at`, "
              . "`created_by`, `modified_by`, `text` "
              . "FROM `" . static::$_db_table_forum_message . "` "
              . "WHERE `id_thread` = " . (int) $id_thread . " "
@@ -92,7 +92,7 @@ class ForumPrive extends Forum
 
         foreach ($messages as $idx => $message) {
             $wiki_parsing = false;
-            if ($message['created_on'] > '2011-04-16 00:00:00' && $message['created_on'] < '2011-09-26 10:45:00') {
+            if ($message['created_at'] > '2011-04-16 00:00:00' && $message['created_at'] < '2011-09-26 10:45:00') {
                 $wiki_parsing = true;
             }
             $messages[$idx]['parsed_text'] = self::parseMessage($message['text'], $wiki_parsing);

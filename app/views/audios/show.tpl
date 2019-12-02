@@ -32,7 +32,7 @@ var audio_url = '{$og_audio.url}';
   {if $audio->getIdLieu()}
   <li>Lieu : <a href="{$lieu->getUrl()}"><strong>{$lieu->getName()}</strong></a></li>
   {/if}
-  <li>Mise en ligne : le {$audio->getCreatedOn()|date_format:'%d/%m/%Y'} par <a href="/membres/show/{$audio->getIdContact()}"><strong>{$audio->getIdContact()|pseudo_by_id}</strong></a></li>
+  <li>Mise en ligne : le {$audio->getCreatedAt()|date_format:'%d/%m/%Y'} par <a href="/membres/show/{$audio->getIdContact()}"><strong>{$audio->getIdContact()|pseudo_by_id}</strong></a></li>
 </ul>
 </div>
 

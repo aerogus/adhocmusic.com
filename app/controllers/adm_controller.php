@@ -416,7 +416,7 @@ final class Controller
                         $out .= "<tr><td>table contact : <strong>non</strong></td></tr>";
                     }
 
-                    $sql = "SELECT `pseudo`, `last_name`, `first_name`, `created_on`, `modified_on`, `visited_on` FROM `adhoc_membre` WHERE `id_contact` = " . $id;
+                    $sql = "SELECT `pseudo`, `last_name`, `first_name`, `created_at`, `modified_at`, `visited_at` FROM `adhoc_membre` WHERE `id_contact` = " . $id;
                     $res = $db->query($sql);
                     if (list($pseudo, $nom, $prenom, $crea, $modif, $visite) = $db->fetchRow($res)) {
                         $out .= "<tr><td>table membre : <strong>oui</strong> - pseudo = <strong>" . $pseudo . "</strong> - nom = <strong>" . $nom . "</strong> - prenom = <strong>" . $prenom . "</strong><br />";

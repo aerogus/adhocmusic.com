@@ -46,13 +46,13 @@
         </li>
         {if !empty($membre)}
         <li>
-          <label for="created_on">Envoyé par</label>
-          <span id="created_on"><a href="{$membre->getUrl()}">{$membre->getPseudo()|escape}</a> le {$audio->getCreatedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
+          <label for="created_at">Envoyé par</label>
+          <span id="created_at"><a href="{$membre->getUrl()}">{$membre->getPseudo()|escape}</a> le {$audio->getCreatedAt()|date_format:"%d/%m/%Y à %H:%M"}</span>
         </li>
         {/if}
         <li>
-          <label for="modified_on">Modifié le</label>
-          <span id="modified_on" style="float: right;">{$audio->getModifiedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
+          <label for="modified_at">Modifié le</label>
+          <span id="modified_at" style="float: right;">{$audio->getModifiedAt()|date_format:"%d/%m/%Y à %H:%M"}</span>
         </li>
         <li>
           <label for="mp3">Ecouter</label>

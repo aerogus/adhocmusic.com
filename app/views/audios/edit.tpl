@@ -63,13 +63,13 @@
           <input class="switch" type="checkbox" name="online"{if $audio->getOnline()} checked="checked"{/if}>
         </li>
         <li>
-          <label for="created_on">Envoyé par</label>
-          <span id="created_on"><a href="{$membre->getUrl()}">{$membre->getPseudo()|escape}</a>
-          le {$audio->getCreatedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
+          <label for="created_at">Envoyé par</label>
+          <span id="created_at"><a href="{$membre->getUrl()}">{$membre->getPseudo()|escape}</a>
+          le {$audio->getCreatedAt()|date_format:"%d/%m/%Y à %H:%M"}</span>
         </li>
         <li>
-          <label for="modified_on">Modifié le</label>
-          <span id="modified_on">{$audio->getModifiedOn()|date_format:"%d/%m/%Y à %H:%M"}</span>
+          <label for="modified_at">Modifié le</label>
+          <span id="modified_at">{$audio->getModifiedAt()|date_format:"%d/%m/%Y à %H:%M"}</span>
         </li>
         <li>
           <label for="delete">Supprimer</label>

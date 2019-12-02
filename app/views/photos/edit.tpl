@@ -23,12 +23,12 @@
     </li>
     <li>
       <label for="id_contact">Ajouté par</label>
-      <span><a href="/membre/{$photo->getIdContact()}">{$photo->getPseudo()|escape}</a> le {$photo->getCreatedOn()|date_format:'%d/%m/%Y %H:%M'}</span>
+      <span><a href="/membre/{$photo->getIdContact()}">{$photo->getPseudo()|escape}</a> le {$photo->getCreatedAt()|date_format:'%d/%m/%Y %H:%M'}</span>
     </li>
-    {if $photo->getModifiedOn()}
+    {if $photo->getModifiedAt()}
     <li>
-      <label for="modified_on">Modifié le</label>
-      <span>{$photo->getModifiedOn()|date_format:'%d/%m/%Y %H:%M'}</span>
+      <label for="modified_at">Modifié le</label>
+      <span>{$photo->getModifiedAt()|date_format:'%d/%m/%Y %H:%M'}</span>
     </li>
     {/if}
     <li>

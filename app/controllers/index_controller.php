@@ -36,7 +36,7 @@ final class Controller
                 [
                     'online' => true,
                     'current' => true,
-                    'order_by' => 'modified_on',
+                    'order_by' => 'modified_at',
                     'sort' => 'DESC',
                     'limit' => 6,
                 ]

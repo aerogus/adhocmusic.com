@@ -26,8 +26,8 @@
       <td>{if ($video->getIdGroupe())}<a href="{$video->getGroupe()->getUrl()}">{$video->getGroupe()->getName()|escape}</a>{/if}</td>
       <td>{if ($video->getIdEvent())}<a href="{$video->getEvent()->getUrl()}">{$video->getEvent()->getName()|escape}</a><br/>{$video->getEvent()->getDate()|date_format:'%d/%m/%Y'}{/if}</td>
       <td>{if ($video->getIdLieu())}<a href="{$video->getLieu()->getUrl()}">{$video->getLieu()->getName()|escape}</a><br>{$video->getLieu()->getIdDepartement()} {$video->getLieu()->getCity()->getName()}{/if}</td>
-      <td>{$video->getCreatedOn()|date_format:'%d/%m/%Y'}</td>
-      <td>{$video->getModifiedOn()|date_format:'%d/%m/%Y'}</td>
+      <td>{$video->getCreatedAt()|date_format:'%d/%m/%Y'}</td>
+      <td>{$video->getModifiedAt()|date_format:'%d/%m/%Y'}</td>
     </tr>
   {/foreach}
   </tbody>

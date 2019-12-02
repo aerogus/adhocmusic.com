@@ -46,8 +46,8 @@ class Audio extends Media
         'id_event'     => 'int',
         'id_structure' => 'int',
         'name'         => 'string',
-        'created_on'   => 'date',
-        'modified_on'  => 'date',
+        'created_at'   => 'date',
+        'modified_at'  => 'date',
         'online'       => 'bool',
     ];
 

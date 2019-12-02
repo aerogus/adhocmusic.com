@@ -27,7 +27,7 @@
       <td><input type="checkbox" id="com-del-{$comment->getIdComment()}"></td>
       <td><a href="/comments/show/{$comment->getIdComment()}">{$comment->getIdComment()}</a></td>
       <td><a href="/{$comment.type_full}/{$comment.id_content}">{$comment.type} {$comment.id_content}</a></td>
-      <td>{$comment->getCreatedOn()}</td>
+      <td>{$comment->getCreatedAt()}</td>
       <td>{$comment->getOnline()}</td>
       <td>{$comment->getPseudo()}<br>{$comment->getEmail()}</td>
       <td><a href="/membres/show/{$comment->getIdCcontact()}">{$comment->getPseudo()}</a><br>{$comment->getEmail()}</td>

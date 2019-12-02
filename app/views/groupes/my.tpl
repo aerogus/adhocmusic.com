@@ -20,8 +20,8 @@
   {foreach $groupes as $groupe}
   <tr>
     <td><a href="/groupes/edit/{$groupe->getIdGroupe()}" title="{$groupe->getName()|escape}"><img src="{$groupe->getMiniPhoto()|escape}" alt="{$groupe->getName()|escape}"><br>{$groupe->getName()|escape}</a></td>
-    <td>{$groupe->getCreatedOn()|date_format:'%d/%m/%Y'}</td>
-    <td>{$groupe->getModifiedOn()|date_format:'%d/%m/%Y'}</td>
+    <td>{$groupe->getCreatedAt()|date_format:'%d/%m/%Y'}</td>
+    <td>{$groupe->getModifiedAt()|date_format:'%d/%m/%Y'}</td>
   </tr>
   {/foreach}
 </table>

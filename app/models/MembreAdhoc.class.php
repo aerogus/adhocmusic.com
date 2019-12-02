@@ -224,7 +224,7 @@ class MembreAdhoc extends Membre
 
         $sql = "SELECT `m`.`id_contact` AS `id`, "
              . "`m`.`first_name`, `m`.`last_name`, `m`.`text`, "
-             . "UNIX_TIMESTAMP(`m`.`modified_on`) AS `modified_on_ts`, "
+             . "UNIX_TIMESTAMP(`m`.`modified_at`) AS `modified_at_ts`, "
              . "`ma`.`function`, `ma`.`datdeb`, `ma`.`datfin`, "
              . "(YEAR(CURRENT_DATE) - YEAR(`ma`.`birth_date`)) - (RIGHT(CURRENT_DATE,5) < RIGHT(`ma`.`birth_date`, 5)) AS `age` "
              . "FROM `" . Membre::getDbTable() . "` `m`, `" . MembreAdhoc::getDbTable() . "` `ma` "
@@ -241,7 +241,7 @@ class MembreAdhoc extends Membre
         foreach ($mbrs as $idx => $mbr) {
             $mbrs[$idx]['avatar_interne'] = false;
             if (file_exists(self::getBasePath() . '/' . $mbr['id'] . '.jpg')) {
-                $mbrs[$idx]['avatar_interne'] = self::getBaseUrl() . '/' . $mbr['id'] . '.jpg?ts=' . $mbr['modified_on_ts'];
+                $mbrs[$idx]['avatar_interne'] = self::getBaseUrl() . '/' . $mbr['id'] . '.jpg?ts=' . $mbr['modified_at_ts'];
             }
             $mbrs[$idx]['url'] = HOME_URL . '/membres/' . $mbr['id'];
         }

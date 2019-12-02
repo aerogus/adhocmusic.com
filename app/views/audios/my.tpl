@@ -34,8 +34,8 @@
     <tr>
       <td>{if !empty($audio->getGroupe())}{$audio->getGroupe()->getName()|escape}{/if}</td>
       <td><a href="/audios/edit/{$audio->getIdAudio()|escape}">{$audio->getName()|escape}</a></td>
-      <td>{$audio->getCreatedOn()}</td>
-      <td>{$audio->getModifiedOn()}</td>
+      <td>{$audio->getCreatedAt()}</td>
+      <td>{$audio->getModifiedAt()}</td>
     </tr>
   </tbody>
   {/foreach}

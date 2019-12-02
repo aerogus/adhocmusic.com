@@ -63,8 +63,8 @@ class FAQ extends ObjectModel
         'question'    => 'string',
         'answer'      => 'string',
         'online'      => 'bool',
-        'created_on'  => 'date',
-        'modified_on' => 'date',
+        'created_at'  => 'date',
+        'modified_at' => 'date',
     ];
 
     /* début getters */
@@ -122,10 +122,10 @@ class FAQ extends ObjectModel
      *
      * @return string|null
      */
-    function getCreatedOn(): ?string
+    function getCreatedAt(): ?string
     {
-        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
-            return $this->_created_on;
+        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
+            return $this->_created_at;
         }
         return null;
     }
@@ -135,10 +135,10 @@ class FAQ extends ObjectModel
      *
      * @return int|null
      */
-    function getCreatedOnTs(): ?string
+    function getCreatedAtTs(): ?string
     {
-        if (!is_null($this->created_on) && Date::isDateTimeOk($this->_created_on)) {
-            return (int) strtotime($this->_created_on);
+        if (!is_null($this->created_at) && Date::isDateTimeOk($this->_created_at)) {
+            return (int) strtotime($this->_created_at);
         }
         return null;
     }
@@ -148,10 +148,10 @@ class FAQ extends ObjectModel
      *
      * @return string|null
      */
-    function getModifiedOn(): ?string
+    function getModifiedAt(): ?string
     {
-        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
-            return $this->_modified_on;
+        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
+            return $this->_modified_at;
         }
         return null;
     }
@@ -161,10 +161,10 @@ class FAQ extends ObjectModel
      *
      * @return int|null
      */
-    function getModifiedOnTs(): ?int
+    function getModifiedAtTs(): ?int
     {
-        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
-            return strtotime($this->_modified_on);
+        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
+            return strtotime($this->_modified_at);
         }
         return null;
     }
@@ -236,15 +236,15 @@ class FAQ extends ObjectModel
     }
 
     /**
-     * @param string $created_on date de création format "YYYY-MM-DD HH:II:SS"
+     * @param string $created_at date de création format "YYYY-MM-DD HH:II:SS"
      *
      * @return object
      */
-    function setCreatedOn(string $created_on): object
+    function setCreatedAt(string $created_at): object
     {
-        if ($this->_created_on !== $created_on) {
-            $this->_created_on = $created_on;
-            $this->_modified_fields['created_on'] = true;
+        if ($this->_created_at !== $created_at) {
+            $this->_created_at = $created_at;
+            $this->_modified_fields['created_at'] = true;
         }
 
         return $this;
@@ -257,24 +257,24 @@ class FAQ extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_created_on !== $now) {
-            $this->_created_on = $now;
-            $this->_modified_fields['created_on'] = true;
+        if ($this->_created_at !== $now) {
+            $this->_created_at = $now;
+            $this->_modified_fields['created_at'] = true;
         }
 
         return $this;
     }
 
     /**
-     * @param string $modified_on date de modification format "YYYY-MM-DD HH:II:SS"
+     * @param string $modified_at date de modification format "YYYY-MM-DD HH:II:SS"
      *
      * @return object
      */
-    function setModifiedOn(string $modified_on): object
+    function setModifiedAt(string $modified_at): object
     {
-        if ($this->_modified_on !== $modified_on) {
-            $this->_modified_on = $modified_on;
-            $this->_modified_fields['modified_on'] = true;
+        if ($this->_modified_at !== $modified_at) {
+            $this->_modified_at = $modified_at;
+            $this->_modified_fields['modified_at'] = true;
         }
 
         return $this;
@@ -287,9 +287,9 @@ class FAQ extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_modified_on !== $now) {
-            $this->_modified_on = $now;
-            $this->_modified_fields['modified_on'] = true;
+        if ($this->_modified_at !== $now) {
+            $this->_modified_at = $now;
+            $this->_modified_fields['modified_at'] = true;
         }
 
         return $this;

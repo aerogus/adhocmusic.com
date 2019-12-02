@@ -44,7 +44,7 @@ class Alerting extends ObjectModel
      *
      * @var string
      */
-    protected $_created_on = null;
+    protected $_created_at = null;
 
     /**
      * Actif ?
@@ -76,7 +76,7 @@ class Alerting extends ObjectModel
     protected static $_all_fields = [
         'id_alerting' => 'int', // pk
         'id_contact'  => 'int',
-        'created_on'  => 'date',
+        'created_at'  => 'date',
         'active'      => 'bool',
         'id_lieu'     => 'int',
         'id_groupe'   => 'int',
@@ -104,10 +104,10 @@ class Alerting extends ObjectModel
     /**
      * @return string|null
      */
-    function getCreatedOn(): ?string
+    function getCreatedAt(): ?string
     {
-        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
-            return $this->_created_on;
+        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
+            return $this->_created_at;
         }
         return null;
     }
@@ -115,10 +115,10 @@ class Alerting extends ObjectModel
     /**
      * @return int|null
      */
-    function getCreatedOnTs(): ?int
+    function getCreatedAtTs(): ?int
     {
-        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
-            return strtotime($this->_created_on);
+        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
+            return strtotime($this->_created_at);
         }
         return null;
     }
@@ -175,15 +175,15 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @param string $created_on created_on
+     * @param string $created_at created_at
      *
      * @return object
      */
-    function setCreatedOn(string $created_on): object
+    function setCreatedAt(string $created_at): object
     {
-        if ($this->_created_on !== $created_on) {
-            $this->_created_on = $created_on;
-            $this->_modified_fields['created_on'] = true;
+        if ($this->_created_at !== $created_at) {
+            $this->_created_at = $created_at;
+            $this->_modified_fields['created_at'] = true;
         }
 
         return $this;
@@ -260,9 +260,9 @@ class Alerting extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_created_on !== $now) {
-            $this->_created_on = $now;
-            $this->_modified_fields['created_on'] = true;
+        if ($this->_created_at !== $now) {
+            $this->_created_at = $now;
+            $this->_modified_fields['created_at'] = true;
         }
 
         return $this;

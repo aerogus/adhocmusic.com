@@ -64,9 +64,9 @@
       <th><a href="/adm/membres/?sort=last_name&amp;sens={$sensinv}&amp;page={$page}">Nom</a></th>
       <th><a href="/adm/membres/?sort=first_name&amp;sens={$sensinv}&amp;page={$page}">Prénom</a></th>
       <th><a href="/adm/membres/?sort=email&amp;sens={$sensinv}&amp;page={$page}">Email</a></th>
-      <th><a href="/adm/membres/?sort=created_on&amp;sens={$sensinv}&amp;page={$page}">Créa</a></th>
-      <th><a href="/adm/membres/?sort=modified_on&amp;sens={$sensinv}&amp;page={$page}">Modif</a></th>
-      <th><a href="/adm/membres/?sort=visited_on&amp;sens={$sensinv}&amp;page={$page}">Visite</a></th>
+      <th><a href="/adm/membres/?sort=created_at&amp;sens={$sensinv}&amp;page={$page}">Créa</a></th>
+      <th><a href="/adm/membres/?sort=modified_at&amp;sens={$sensinv}&amp;page={$page}">Modif</a></th>
+      <th><a href="/adm/membres/?sort=visited_at&amp;sens={$sensinv}&amp;page={$page}">Visite</a></th>
       <th><a href="/adm/membres/?sort=lastnl&amp;sens={$sensinv}&amp;page={$page}">LastNl</a></th>
     </tr>
   </thead>

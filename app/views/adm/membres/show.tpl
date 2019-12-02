@@ -37,15 +37,15 @@
     </tr>
     <tr>
       <th>Date Inscription</th>
-      <td>{$membre->getCreatedOn()}</td>
+      <td>{$membre->getCreatedAt()}</td>
     </tr>
     <tr>
       <th>Date Modification</th>
-      <td>{$membre->getModifiedOn()}</td>
+      <td>{$membre->getModifiedAt()}</td>
     </tr>
     <tr>
       <th>Date Visite</th>
-      <td>{$membre->getVisitedOn()}</td>
+      <td>{$membre->getVisitedAt()}</td>
     </tr>
     <tr>
       <th>Adresse</th>

@@ -26,8 +26,8 @@
       <td>{if ($photo->getIdGroupe())}<a href="{$photo->getGroupe()->getUrl()}">{$photo->getGroupe()->getName()|escape}</a>{/if}</td>
       <td>{if ($photo->getIdEvent())}<a href="{$photo->getEvent()->getUrl()}">{$photo->getEvent()->getName()|escape}</a><br/>{$photo->getEvent()->getDate()|date_format:'%d/%m/%Y'}{/if}</td>
       <td>{if ($photo->getIdLieu())}<a href="{$photo->getLieu()->getUrl()}">{$photo->getLieu()->getName()|escape}</a><br>{$photo->getLieu()->getIdDepartement()} {$photo->getLieu()->getCity()->getName()}{/if}</td>
-      <td>{$photo->getCreatedOn()|date_format:'%d/%m/%Y'}</td>
-      <td>{$photo->getModifiedOn()|date_format:'%d/%m/%Y'}</td>
+      <td>{$photo->getCreatedAt()|date_format:'%d/%m/%Y'}</td>
+      <td>{$photo->getModifiedAt()|date_format:'%d/%m/%Y'}</td>
     </tr>
   {/foreach}
   </tbody>

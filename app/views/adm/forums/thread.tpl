@@ -82,7 +82,7 @@ $(function() {
   <div class="message-meta">
     <img src="{$message.created_by_avatar}" alt="">
     <a href="{$message.created_by_url}">{$message.created_by|pseudo_by_id}</a><br>
-    {$message.created_on|date_format:'%a %d %b %Y<br>%H:%M'}
+    {$message.created_at|date_format:'%a %d %b %Y<br>%H:%M'}
   </div>
   <div class="message-body">
     {$message.parsed_text|@nl2br}

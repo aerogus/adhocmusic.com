@@ -26,8 +26,8 @@
       <td>{if ($audio->getIdGroupe())}<a href="{$audio->getGroupe()->getUrl()}">{$audio->getGroupe()->getName()|escape}</a>{/if}</td>
       <td>{if ($audio->getIdEvent())}<a href="{$audio->getEvent()->getUrl()}">{$audio->getEvent()->getName()|escape}</a><br/>{$audio->getEvent()->getDate()|date_format:'%d/%m/%Y'}{/if}</td>
       <td>{if ($audio->getIdLieu())}<a href="{$audio->getLieu()->getUrl()}">{$audio->getLieu()->getName()|escape}</a><br>{$audio->getLieu()->getIdDepartement()} {$audio->getLieu()->getCity()->getName()}{/if}</td>
-      <td>{$audio->getCreatedOn()|date_format:'%d/%m/%Y'}</td>
-      <td>{$audio->getModifiedOn()|date_format:'%d/%m/%Y'}</td>
+      <td>{$audio->getCreatedAt()|date_format:'%d/%m/%Y'}</td>
+      <td>{$audio->getModifiedAt()|date_format:'%d/%m/%Y'}</td>
     </tr>
   {/foreach}
   </tbody>

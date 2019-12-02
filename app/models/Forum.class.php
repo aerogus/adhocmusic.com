@@ -392,7 +392,7 @@ abstract class Forum
 
         $sql = "INSERT INTO `" . static::$_db_table_forum_message . "` "
              . "(`id_thread`, "
-             . "`created_on`, `modified_on`, "
+             . "`created_at`, `modified_at`, "
              . "`created_by`, `modified_by`, "
              . "`text`) "
              . "VALUE (" . (int) $params['id_thread'] . ", "
@@ -420,7 +420,7 @@ abstract class Forum
 
         $sql = "UPDATE `" . static::$_db_table_forum_message . "` "
              . "SET `text` = '" . $db->escape($params['text']) . "', "
-             . "`modified_on` = NOW(), "
+             . "`modified_at` = NOW(), "
              . "`modified_by` = " . (int) $params['id_contact'] . " "
              . "WHERE `id_message` = " . (int) $params['id_message'];
 
@@ -460,7 +460,7 @@ abstract class Forum
         $db = DataBase::getInstance();
 
         $sql = "INSERT INTO `" . static::$_db_table_forum_thread . "` "
-             . "(`created_on`, `modified_on`, "
+             . "(`created_at`, `modified_at`, "
              . "`created_by`, `modified_by`, "
              . "`id_forum`, `nb_messages`, `nb_views`, `subject`) "
              . "VALUES (NOW(), NOW(), "
@@ -492,7 +492,7 @@ abstract class Forum
              $sql .= "`nb_messages` = `nb_messages` - 1, ";
         }
 
-        $sql .= "`modified_on` = NOW(), "
+        $sql .= "`modified_at` = NOW(), "
              .  "`modified_by` = " . (int) $params['id_contact'] . " "
              .  "WHERE `id_thread` = " . (int) $params['id_thread'];
 

@@ -143,17 +143,17 @@ class Membre extends Contact
     /**
      * @var string
      */
-    protected $_created_on = null;
+    protected $_created_at = null;
 
     /**
      * @var string
      */
-    protected $_modified_on = null;
+    protected $_modified_at = null;
 
     /**
      * @var string
      */
-    protected $_visited_on = null;
+    protected $_visited_at = null;
 
     /**
      * @var array
@@ -190,9 +190,9 @@ class Membre extends Contact
         'text'           => 'string',
         'mailing'        => 'bool',
         'level'          => 'int',
-        'created_on'     => 'date',
-        'modified_on'    => 'date',
-        'visited_on'     => 'date',
+        'created_at'     => 'date',
+        'modified_at'    => 'date',
+        'visited_at'     => 'date',
     ];
 
     /**
@@ -393,10 +393,10 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getCreatedOn(): ?string
+    function getCreatedAt(): ?string
     {
-        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
-            return $this->_created_on;
+        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
+            return $this->_created_at;
         }
         return null;
     }
@@ -404,10 +404,10 @@ class Membre extends Contact
     /**
      * @return int|null
      */
-    function getCreatedOnTs(): ?int
+    function getCreatedAtTs(): ?int
     {
-        if (!is_null($this->_created_on) && Date::isDateTimeOk($this->_created_on)) {
-            return strtotime($this->_created_on);
+        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
+            return strtotime($this->_created_at);
         }
         return null;
     }
@@ -415,10 +415,10 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getModifiedOn(): ?string
+    function getModifiedAt(): ?string
     {
-        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
-            return $this->_modified_on;
+        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
+            return $this->_modified_at;
         }
         return null;
     }
@@ -426,10 +426,10 @@ class Membre extends Contact
     /**
      * @return int|null
      */
-    function getModifiedOnTs(): ?int
+    function getModifiedAtTs(): ?int
     {
-        if (!is_null($this->_modified_on) && Date::isDateTimeOk($this->_modified_on)) {
-             return strtotime($this->_modified_on);
+        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
+             return strtotime($this->_modified_at);
         }
         return null;
     }
@@ -437,10 +437,10 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getVisitedOn(): ?string
+    function getVisitedAt(): ?string
     {
-        if (!is_null($this->_visited_on) && Date::isDateTimeOk($this->_visited_on)) {
-            return $this->_visited_on;
+        if (!is_null($this->_visited_at) && Date::isDateTimeOk($this->_visited_at)) {
+            return $this->_visited_at;
         }
         return null;
     }
@@ -448,10 +448,10 @@ class Membre extends Contact
     /**
      * @return int|null
      */
-    function getVisitedOnTs(): ?int
+    function getVisitedAtTs(): ?int
     {
-        if (!is_null($this->_visited_on) && Date::isDateTimeOk($this->_visited_on)) {
-             return strtotime($this->_visited_on);
+        if (!is_null($this->_visited_at) && Date::isDateTimeOk($this->_visited_at)) {
+             return strtotime($this->_visited_at);
         }
         return null;
     }
@@ -495,7 +495,7 @@ class Membre extends Contact
     function getAvatarUrl(): ?string
     {
         if (file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
-            return self::getBaseUrl() . '/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+            return self::getBaseUrl() . '/' . $this->getId() . '.jpg?ts=' . $this->getModifiedAtTs();
         }
         return null;
     }
@@ -509,7 +509,7 @@ class Membre extends Contact
     function getAvatarInterneUrl(): ?string
     {
         if (file_exists(self::getBasePath() . '/ca/' . $this->getId() . '.jpg')) {
-            return self::getBaseUrl() . '/ca/' . $this->getId() . '.jpg?ts=' . $this->getModifiedOnTs();
+            return self::getBaseUrl() . '/ca/' . $this->getId() . '.jpg?ts=' . $this->getModifiedAtTs();
         }
         return null;
     }
@@ -789,15 +789,15 @@ class Membre extends Contact
     }
 
     /**
-     * @param string $created_on date de création "YYYY-MM-DD HH:II:SS"
+     * @param string $created_at date de création "YYYY-MM-DD HH:II:SS"
      *
      * @return object
      */
-    function setCreatedOn(string $created_on): object
+    function setCreatedAt(string $created_at): object
     {
-        if ($this->_created_on !== $created_on) {
-            $this->_created_on = $created_on;
-            $this->_modified_fields['membre']['created_on'] = true;
+        if ($this->_created_at !== $created_at) {
+            $this->_created_at = $created_at;
+            $this->_modified_fields['membre']['created_at'] = true;
         }
 
         return $this;
@@ -810,24 +810,24 @@ class Membre extends Contact
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_created_on !== $now) {
-            $this->_created_on = $now;
-            $this->_modified_fields['membre']['created_on'] = true;
+        if ($this->_created_at !== $now) {
+            $this->_created_at = $now;
+            $this->_modified_fields['membre']['created_at'] = true;
         }
 
         return $this;
     }
 
     /**
-     * @param string|null $modified_on date de modification "YYYY-MM-DD HH:II:SS"
+     * @param string|null $modified_at date de modification "YYYY-MM-DD HH:II:SS"
      *
      * @return object
      */
-    function setModifiedOn(?string $modified_on): object
+    function setModifiedAt(?string $modified_at): object
     {
-        if ($this->_modified_on !== $modified_on) {
-            $this->_modified_on = $modified_on;
-            $this->_modified_fields['membre']['modified_on'] = true;
+        if ($this->_modified_at !== $modified_at) {
+            $this->_modified_at = $modified_at;
+            $this->_modified_fields['membre']['modified_at'] = true;
         }
 
         return $this;
@@ -840,24 +840,24 @@ class Membre extends Contact
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_modified_on !== $now) {
-            $this->_modified_on = $now;
-            $this->_modified_fields['membre']['modified_on'] = true;
+        if ($this->_modified_at !== $now) {
+            $this->_modified_at = $now;
+            $this->_modified_fields['membre']['modified_at'] = true;
         }
 
         return $this;
     }
 
     /**
-     * @param string|null $visited_on date de dernière connexion "YYYY-MM-DD HH:II:SS"
+     * @param string|null $visited_at date de dernière connexion "YYYY-MM-DD HH:II:SS"
      *
      * @return object
      */
-    function setVisitedOn(?string $visited_on): object
+    function setVisitedAt(?string $visited_at): object
     {
-        if ($this->_visited_on !== $visited_on) {
-            $this->_visited_on = $visited_on;
-            $this->_modified_fields['membre']['visited_on'] = true;
+        if ($this->_visited_at !== $visited_at) {
+            $this->_visited_at = $visited_at;
+            $this->_modified_fields['membre']['visited_at'] = true;
         }
 
         return $this;
@@ -870,9 +870,9 @@ class Membre extends Contact
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_visited_on !== $now) {
-            $this->_visited_on = $now;
-            $this->_modified_fields['membre']['visited_on'] = true;
+        if ($this->_visited_at !== $now) {
+            $this->_visited_at = $now;
+            $this->_modified_fields['membre']['visited_at'] = true;
         }
 
         return $this;
@@ -927,8 +927,8 @@ class Membre extends Contact
      *              ['last_name']     => "sez%"
      *              ['first_name']    => "gui%"
      *              ['email']         => "email%"
-     *              ['sort']          => "id_contact|last_name|first_name|random|email|created_on|modified_on"
-     *                                   "visited_on|pseudo|lastnl"
+     *              ['sort']          => "id_contact|last_name|first_name|random|email|created_at|modified_at"
+     *                                   "visited_at|pseudo|lastnl"
      *              ['sens']          => "ASC|DESC"
      *              ['debut']         => 0
      *              ['limit']         => 10
@@ -976,8 +976,8 @@ class Membre extends Contact
         if (isset($params['sort']) && (
             $params['sort'] === 'random' || $params['sort'] === 'id_contact'
          || $params['sort'] === 'last_name' || $params['sort'] === 'first_name'
-         || $params['sort'] === 'email' || $params['sort'] === 'created_on'
-         || $params['sort'] === 'modified_on' || $params['sort'] === 'visited_on'
+         || $params['sort'] === 'email' || $params['sort'] === 'created_at'
+         || $params['sort'] === 'modified_at' || $params['sort'] === 'visited_at'
          || $params['sort'] === 'pseudo' || $params['sort'] === 'lastnl')
         ) {
             $sort = $params['sort'];
@@ -992,7 +992,7 @@ class Membre extends Contact
 
         $sql = "SELECT `m`.`id_contact` AS `id`, `m`.`last_name`, `m`.`first_name`, `m`.`pseudo`, "
              . "`c`.`email`, `c`.`lastnl`, "
-             . "`m`.`created_on`, `m`.`modified_on`, `m`.`visited_on`, "
+             . "`m`.`created_at`, `m`.`modified_at`, `m`.`visited_at`, "
              . "`m`.`text`, `m`.`site`, "
              . "`m`.`city`, `m`.`cp`, "
              . "`m`.`id_city`, `m`.`id_departement`, `m`.`id_region`, `m`.`id_country` "
@@ -1589,11 +1589,11 @@ class Membre extends Contact
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `m`.`id_contact`, `m`.`pseudo`, `c`.`email`, `m`.`visited_on`, `m`.`created_on` "
+        $sql = "SELECT `m`.`id_contact`, `m`.`pseudo`, `c`.`email`, `m`.`visited_at`, `m`.`created_at` "
              . "FROM `adhoc_membre` `m`, `adhoc_contact` `c` "
              . "WHERE `m`.`id_contact` = `c`.`id_contact` "
-             . "AND `m`.`visited_on` < DATE_SUB(CURDATE(), INTERVAL 1 YEAR) "
-             . "ORDER BY `m`.`visited_on` DESC";
+             . "AND `m`.`visited_at` < DATE_SUB(CURDATE(), INTERVAL 1 YEAR) "
+             . "ORDER BY `m`.`visited_at` DESC";
 
         return $db->queryWithFetch($sql);
     }

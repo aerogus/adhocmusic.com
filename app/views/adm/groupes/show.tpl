@@ -54,11 +54,11 @@
   </tr>
   <tr>
     <th>Création</th>
-    <td>{$groupe->getCreatedOn()}</td>
+    <td>{$groupe->getCreatedAt()}</td>
   </tr>
   <tr>
     <th>Modification</th>
-    <td>{$groupe->getModifiedOn()}</td>
+    <td>{$groupe->getModifiedAt()}</td>
   </tr>
   <tr>
     <th>Photo</th>

@@ -27,16 +27,16 @@
           <label for="first_name">Prénom</label>
         </li>
         <li>
-          <span id="created_on" style="float: right">{$me->getCreatedOn()|date_format:"%d/%m/%Y"}</span>
-          <label for="created_on">Inscription</label>
+          <span id="created_at" style="float: right">{$me->getCreatedAt()|date_format:"%d/%m/%Y"}</span>
+          <label for="created_at">Inscription</label>
         </li>
         <li>
-          <span id="modified_on" style="float: right">{$me->getModifiedOn()|date_format:"%d/%m/%Y"}</span>
-          <label for="modified_on">Modification</label>
+          <span id="modified_at" style="float: right">{$me->getModifiedAt()|date_format:"%d/%m/%Y"}</span>
+          <label for="modified_at">Modification</label>
         </li>
         <li>
-          <span id="visited_on" style="float: right">{$me->getVisitedOn()|date_format:"%d/%m/%Y"}</span>
-          <label for="visited_on">Visite</label>
+          <span id="visited_at" style="float: right">{$me->getVisitedAt()|date_format:"%d/%m/%Y"}</span>
+          <label for="visited_at">Visite</label>
         </li>
         <li>
           <span style="float: right">
