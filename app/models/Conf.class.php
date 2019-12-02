@@ -77,7 +77,7 @@ class Conf
      *
      * @return array|null
      */
-    static function get(string $section = null): ?array
+    function get(string $section = null): ?array
     {
         if (is_null($section)) {
             // toute la conf

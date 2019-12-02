@@ -345,9 +345,9 @@ class DataBase
         $conn = $this->connect($conn_name);
 
         // debug
-        if (DEBUG_MODE) {
+        if (LOG_SQL) {
             // log des requêtes
-            file_put_contents(ADHOC_ROOT_PATH . '/sqldebug.log', $sql . "\n", FILE_APPEND);
+            file_put_contents(ini_get('error_log'), $sql . "\n", FILE_APPEND);
         }
 
         $rc = mysqli_query($conn, $sql);

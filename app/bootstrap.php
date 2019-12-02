@@ -7,6 +7,24 @@
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 
+define('ADHOC_ROOT_PATH',          dirname(__DIR__));
+define('ADHOC_LIB_PATH',           ADHOC_ROOT_PATH . '/models');
+define('ADHOC_ROUTES_FILE',        ADHOC_ROOT_PATH . '/app/routes');
+define('ADHOC_LOG_PATH',           ADHOC_ROOT_PATH . '/log');
+define('DEFAULT_CONTROLLERS_PATH', ADHOC_ROOT_PATH . '/app/controllers/');
+define('MEDIA_PATH',               ADHOC_ROOT_PATH . '/static/media');
+
+define('OBJECT_CACHE_PATH',        ADHOC_ROOT_PATH . '/tmpfs/objects');
+if (!is_dir(OBJECT_CACHE_PATH)) {
+    mkdir(OBJECT_CACHE_PATH, 0755, true);
+}
+
+define('SMARTY_TEMPLATE_PATH',   ADHOC_ROOT_PATH . '/app/views');
+define('SMARTY_TEMPLATE_C_PATH', ADHOC_ROOT_PATH . '/tmpfs/smarty');
+if (!is_dir(SMARTY_TEMPLATE_C_PATH)) {
+    mkdir(SMARTY_TEMPLATE_C_PATH, 0755, true);
+}
+
 /**
  * Chargement automatique des classes métiers AD'HOC
  *
@@ -24,93 +42,63 @@ function autoload(string $className)
 }
 spl_autoload_register('autoload');
 
-$conf = Conf::getInstance()::get();
+/**
+ * Chargement automatique des paquets gérés par composer
+ */
+require_once ADHOC_ROOT_PATH . '/vendor/autoload.php'; // prend bien 60ms
 
+$conf = Conf::getInstance()->get();
+
+// global
+define('ENV',              $conf['global']['env']);
 setlocale(LC_ALL,          $conf['global']['locale']);
 ini_set('date.timezone',   $conf['global']['timezone']);
 ini_set('default_charset', $conf['global']['charset']);
 
+// database
 define('_DB_HOST_',     $conf['database']['host']);
 define('_DB_USER_',     $conf['database']['user']);
 define('_DB_PASSWORD_', $conf['database']['pass']);
 define('_DB_DATABASE_', $conf['database']['name']);
 
-define('ENV', (php_uname('n') === 'rbx.aerogus.net') ? 'PROD' : 'DEV');
-
-if (ENV === 'PROD') {
-
-    define('HOME_URL',  'https://www.adhocmusic.com');
-    define('CACHE_URL', 'https://static.adhocmusic.com/cache');
-    define('MEDIA_URL', 'https://static.adhocmusic.com/media');
-
-    ini_set('display_startup_errors', '0');
-    ini_set('display_errors', '0');
-    define('ONERROR_SHOW', false);
-    define('DEBUG_MODE', false);
-
-} elseif (ENV === 'DEV') {
-
-    define('HOME_URL',  'https://www.adhocmusic.test');
-    define('CACHE_URL', 'https://static.adhocmusic.test/cache');
-    define('MEDIA_URL', 'https://static.adhocmusic.test/media');
-
-    ini_set('display_startup_errors', '1');
-    ini_set('display_errors', '1');
-    define('ONERROR_SHOW', true);
-    define('DEBUG_MODE', true);
-
-}
-
-define(
-    'CONTACT_FORM_TO',
-    [
-        'bureau@adhocmusic.com',
-        'site@adhocmusic.com',
-        'contact@adhocmusic.com',
-    ]
-);
-
-define('DEBUG_EMAIL', 'guillaume@seznec.fr');
-
-define('ADHOC_ROOT_PATH',          dirname(__DIR__));
-define('ADHOC_LIB_PATH',           ADHOC_ROOT_PATH . '/models');
-define('ADHOC_ROUTES_FILE',        ADHOC_ROOT_PATH . '/app/routes');
-define('ADHOC_LOG_PATH',           ADHOC_ROOT_PATH . '/log');
-define('DEFAULT_CONTROLLERS_PATH', ADHOC_ROOT_PATH . '/app/controllers/');
-define('MEDIA_PATH',               ADHOC_ROOT_PATH . '/static/media');
-
-define('OBJECT_CACHE_PATH',        ADHOC_ROOT_PATH . '/tmpfs/objects');
-if (!is_dir(OBJECT_CACHE_PATH)) {
-    mkdir(OBJECT_CACHE_PATH, 0755, true);
-}
-
-// chemin local
-define('IMG_CACHE_PATH', ADHOC_ROOT_PATH . '/static/cache');
-
-// chemin http
-define('IMG_CACHE_URL', CACHE_URL);
-
-define('SMARTY_TEMPLATE_PATH',   ADHOC_ROOT_PATH . '/app/views');
-define('SMARTY_TEMPLATE_C_PATH', ADHOC_ROOT_PATH . '/tmpfs/smarty');
-if (!is_dir(SMARTY_TEMPLATE_C_PATH)) {
-    mkdir(SMARTY_TEMPLATE_C_PATH, 0755, true);
-}
-
-define('GOOGLE_MAPS_API_KEY', 'AIzaSyBVsz6lTrtPcGaGy8-pNNLdmhDIg7Cng24');
-
-define('FB_PAGE_ID', '161908907197840');
-define('FB_APP_PAGE_URL', 'https://www.facebook.com/adhocmusic');
-define('FB_APP_DEFAUT_AVATAR_GROUPE', HOME_URL . '/img/note_adhoc_64.png');
+// urls
+define('HOME_URL',  $conf['url']['home']);
+define('CACHE_URL', $conf['url']['cache']);
+define('MEDIA_URL', $conf['url']['media']);
 
 error_reporting(-1); // taquet
-ini_set('log_errors',             '1');
-ini_set('error_log',              ADHOC_LOG_PATH . '/www.adhocmusic.com.err');
+
+if ($conf['debug']['show_errors']) {
+    ini_set('display_startup_errors', '1');
+    ini_set('display_errors',         '1');
+} else {
+    ini_set('display_startup_errors', '0');
+    ini_set('display_errors',         '0');
+}
+
+if ($conf['debug']['log_errors']) {
+    ini_set('log_errors', '1');
+    ini_set('error_log', ADHOC_LOG_PATH . '/' . $conf['debug']['log_file']);
+} else {
+    ini_set('log_errors', '0');
+}
+define('LOG_SQL', $conf['debug']['log_sql']);
+define('DEBUG_EMAIL', $conf['debug']['email']);
+
+define('CONTACT_FORM_TO', $conf['contact_form']['to']);
+
+// chemin local des images en cache
+define('IMG_CACHE_PATH', ADHOC_ROOT_PATH . '/static/cache');
+
+// chemin http des images en cache
+define('IMG_CACHE_URL', CACHE_URL);
+
+define('GOOGLE_MAPS_API_KEY', $conf['google_maps']['api_key']);
+
+define('FB_PAGE_ID',      $conf['facebook']['page_id']);
+define('FB_APP_PAGE_URL', $conf['facebook']['page_url']);
+
 ini_set('arg_separator.output',  '&amp;');
 ini_set('session.use_trans_sid', '0');
-
-/**
- * Chargement automatique des paquets gérés par composer
- */
-require_once ADHOC_ROOT_PATH . '/vendor/autoload.php'; // prend bien 60ms
 
 Tools::sessionInit();
