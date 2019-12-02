@@ -80,12 +80,13 @@
       <li>
         <label for="style">Style(s)</label>
         <ul>
+          {assign var=event_styles value=$event->getStyles()}
           {section name=cpt_style loop=3}
           <li>
             <select id="style" name="style[{$smarty.section.cpt_style.index}]">
               <option value="">-- Choix d'un style --</option>
               {foreach from=$styles item=style}
-              <option value="{$style->getId()|escape}" {if $data.styles[$smarty.section.cpt_style.index] === $style->getId()} selected="selected"{/if}>{$style->getName()|escape}</option>
+              <option value="{$style->getId()|escape}" {if $event_styles[$smarty.section.cpt_style.index] && ($event_styles[$smarty.section.cpt_style.index]->getId() === $style->getId())} selected="selected"{/if}>{$style->getName()|escape}</option>
               {/foreach}
             </select>
           </li>
@@ -95,12 +96,13 @@
       <li>
         <label for="groupe">Artistes</label>
         <ul>
+          {assign var=event_groupes value=$event->getGroupes()}
           {section name=cpt_groupe loop=5}
           <li>
             <select id="groupe" name="groupe[{$smarty.section.cpt_groupe.index}]">
               <option value="">-- Choix d'un groupe --</option>
               {foreach from=$groupes item=groupe}
-              <option value="{$groupe->getId()|escape}"{if $data.groupes[$smarty.section.cpt_groupe.index] === $groupe->getIdGroupe()} selected="selected"{/if}>{$groupe->getName()|escape}</option>
+              <option value="{$groupe->getId()|escape}"{if $event_groupes[$smarty.section.cpt_groupe.index] && ($event_groupes[$smarty.section.cpt_groupe.index]->getId() === $groupe->getIdGroupe())} selected="selected"{/if}>{$groupe->getName()|escape}</option>
               {/foreach}
             </select>
           </li>
@@ -110,12 +112,13 @@
       <li>
         <label for="structure">Organisateur(s)</label>
         <ul>
+          {assign var=event_structures value=$event->getStructures()}
           {section name=cpt_structure loop=3}
           <li>
             <select id="structure" name="structure[{$smarty.section.cpt_structure.index}]">
               <option value="">-- Choix d'une structure --</option>
               {foreach from=$structures item=structure}
-              <option value="{$structure->getId()|escape}"{if $data.structures[$smarty.section.cpt_structure.index] === $structure->getId()} selected="selected"{/if}>{$structure->getName()|escape}</option>
+              <option value="{$structure->getId()|escape}"{if $event_structures[$smarty.section.cpt_structure.index] && ($event_structures[$smarty.section.cpt_structure.index]->getId() === $structure->getId())} selected="selected"{/if}>{$structure->getName()|escape}</option>
               {/foreach}
             </select>
           </li>
@@ -134,7 +137,7 @@
       <li>
         <label for="facebook_event_id">n° Evénement (si déjà existant sur Facebook)</label>
         <span>
-          https://www.facebook.com/events/<input id="facebook_event_id" type="text" name="facebook_event_id" value="{$event->getFacebookEventId()|escape}">
+          https://www.facebook.com/events/<input id="facebook_event_id" type="text" name="facebook_event_id" value="{$data.facebook_event_id|escape}">
         </span>
       </li>
     </ul>
@@ -148,7 +151,7 @@
 
 <script>
 var lieu = {
-    id: {$lieu->getId()},
+    id: {$lieu->getIdLieu()},
     id_country: '{$lieu->getIdCountry()}',
     id_region: '{$lieu->getIdRegion()}',
     id_departement: '{$lieu->getIdDepartement()}',

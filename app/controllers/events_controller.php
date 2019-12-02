@@ -2,8 +2,6 @@
 
 use \Reference\Style;
 
-define('NB_EVENTS_PER_PAGE', 100);
-
 final class Controller
 {
     /**
@@ -235,8 +233,8 @@ final class Controller
 
         // défaut
         $id_country = 'FR';
-        $id_region = 'A8';
-        $id_departement = '91';
+        $id_region = '08'; // Île-de-France
+        $id_departement = '91'; // Essonne
         $id_city = 91216; // "Épinay-sur-Orge
         $id_lieu = 1; // Salle G. Pompidou
 
@@ -246,7 +244,7 @@ final class Controller
             $id_country = $lieu->getIdCountry();
             $id_region  = $lieu->getIdRegion();
             $id_departement = $lieu->getIdDepartement();
-            $id_city = $lieu->getCity();
+            $id_city = $lieu->getIdCity();
             $smarty->assign('lieu', $lieu);
         }
 
@@ -311,7 +309,7 @@ final class Controller
                 'price'      => (string) Route::params('price'),
                 'id_contact' => $_SESSION['membre']->getId(),
                 'online'     => true,
-                'more-event' => (bool) Route::params('more-event'),
+                'more_event' => (bool) Route::params('more_event'),
                 'flyer_url'  => (string) Route::params('flyer_url'),
                 'facebook_event_id' => (string) Route::params('facebook_event_id'),
             ];
@@ -552,6 +550,8 @@ final class Controller
                     }
                 }
 
+                $event->save(); // clear le cache après les liaisons externes
+
                 Log::action(Log::ACTION_EVENT_EDIT, $event->getId());
 
                 Tools::redirect('/events?edit=1&y='.$year.'&m='.$month.'&d='.$day);
@@ -559,6 +559,7 @@ final class Controller
             } else {
 
                 // errors à gérer
+
             }
         }
 

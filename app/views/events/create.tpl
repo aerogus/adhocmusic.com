@@ -152,7 +152,7 @@
     <ul>
       <li>
         <label for="more-event">Ajouter un autre événement pour le même lieu</label>
-        <input type="checkbox" id="more-event" name="more-event"{if !empty($data.more_event)} selected="selected"{/if}>
+        <input type="checkbox" id="more-event" name="more_event"{if !empty($data.more_event)} selected="selected"{/if}>
       </li>
     </ul>
   </fieldset>
@@ -166,7 +166,7 @@
 var lieu = {
     id: 1,
     id_country: 'FR',
-    id_region: 'A8',
+    id_region: '08',
     id_departement: '91',
     id_city: 91216
 };
