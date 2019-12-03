@@ -14,6 +14,10 @@
   <form method="post" action="/videos/delete">
     <ul>
       <li>
+        <label for="player">Visualiser</label>
+        <span id="player">{$video->getPlayer()}</span>
+      </li>
+      <li>
         <label for="name">Nom</label>
         <span id="name">{$video->getName()|escape}</span>
       </li>
@@ -23,7 +27,7 @@
       </li>
       <li>
         <label for="id_host">Hébergeur</label>
-        <span id="id_host">{$video->getIdHost()}</span>
+        <span id="id_host">{$video->getHost()->getName()}</span>
       </li>
       <li>
         <label for="reference">Référence</label>
@@ -50,10 +54,6 @@
       <li>
         <label for="online">Afficher</label>
         <span id="online">{$video->getOnline()}</span>
-      </li>
-      <li>
-        <label for="player">Voir</label>
-        <span id="player">{$video->getPlayer()}</span>
       </li>
     </ul>
     <input id="form-video-delete-submit" name="form-video-delete-submit" class="button" type="submit" value="Confirmer la suppression">

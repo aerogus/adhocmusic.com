@@ -43,7 +43,7 @@ jQuery(document).ready(function ($) {
     } else {
       $('#name').prev('.error').fadeOut();
     }
-    if ($('#code').val().length === 0 && $('#id_host').val() !== '7') {
+    if ($('#code').val().length === 0) {
       $('#code').prev('.error').fadeIn();
       valid = false;
     } else {

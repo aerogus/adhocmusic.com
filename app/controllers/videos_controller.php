@@ -269,6 +269,11 @@ final class Controller
                     $video->storeThumbnail($vignette);
                 }
 
+                foreach ([80, 320] as $maxWidth) {
+                    $video->clearThumb($maxWidth);
+                    $video->genThumb($maxWidth);
+                }
+
                 Log::action(Log::ACTION_VIDEO_CREATE, $video->getId());
 
                 Tools::redirect('/videos/my');
@@ -387,8 +392,10 @@ final class Controller
                 // Permet le reset de la vignette
                 if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
                     $video->storeThumbnail($vignette);
-                    $video->clearThumb(80);
-                    $video->genThumb(80);
+                    foreach ([80, 320] as $maxWidth) {
+                        $video->clearThumb($maxWidth);
+                        $video->genThumb($maxWidth);
+                    }
                 }
 
                 Log::action(Log::ACTION_VIDEO_EDIT, $video->getId());

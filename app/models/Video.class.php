@@ -542,6 +542,7 @@ class Video extends Media
             case self::HOST_YOUTUBE:
                 $maxResUrl = "https://img.youtube.com/vi/{$reference}/maxresdefault.jpg"; // 1280*720 (pas tjrs là)
                 $hqResUrl = "https://img.youtube.com/vi/{$reference}/hqdefault.jpg"; // 480*360
+                return $hqResUrl; // retourne direct l'url hd plutôt que max
                 $headers = get_headers($maxResUrl);
                 if (substr($headers[0], 9, 3) === '200') {
                     return $maxResUrl;
@@ -585,7 +586,6 @@ class Video extends Media
      */
     static function getRemoteTitle(int $id_host, string $reference): ?string
     {
-        //return 'pouettitle';
         switch ($id_host) {
             case self::HOST_VIMEO:
                 $meta_url = 'https://vimeo.com/api/v2/video/' . $reference . '.json';
@@ -599,9 +599,9 @@ class Video extends Media
 
             case self::HOST_YOUTUBE:
                 $meta_url = 'https://www.youtube.com/watch?v=' . $reference;
-                $page_html = file_get_contents($meta_url);
+                $html = file_get_contents($meta_url);
                 $doc = new DOMDocument();
-                $doc->loadHTML($page_html);
+                $doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
                 $title = str_replace(' - YouTube', '', $doc->getElementsByTagName('title')[0]->nodeValue);
                 return $title;
 
