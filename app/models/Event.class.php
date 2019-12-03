@@ -1044,7 +1044,6 @@ class Event extends ObjectModel
                 'id_structure' => 1, // AD'HOC
                 'order_by' => 'date',
                 'sort' => 'ASC',
-                'limit' => 1000,
             ]
         );
 
