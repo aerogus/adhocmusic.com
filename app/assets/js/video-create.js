@@ -12,6 +12,7 @@ jQuery(document).ready(function ($) {
       if (data.status === 'OK') {
         $('#id_host').val(data.data.id_host);
         $('#name').val(data.data.title);
+        $('#thumb').empty();
         $('<img src="' + data.data.thumb + '" alt="" />').appendTo('#thumb');
       }
     });

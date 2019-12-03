@@ -540,7 +540,13 @@ class Video extends Media
     {
         switch ($id_host) {
             case self::HOST_YOUTUBE:
-                return "https://img.youtube.com/vi/{$reference}/0.jpg";
+                $maxResUrl = "https://img.youtube.com/vi/{$reference}/maxresdefault.jpg"; // 1280*720 (pas tjrs là)
+                $hqResUrl = "https://img.youtube.com/vi/{$reference}/hqdefault.jpg"; // 480*360
+                $headers = get_headers($maxResUrl);
+                if (substr($headers[0], 9, 3) === '200') {
+                    return $maxResUrl;
+                }
+                return $hqResUrl;
 
             case self::HOST_DAILYMOTION:
                 $headers = get_headers('https://www.dailymotion.com/thumbnail/video/' . $reference, 1);
@@ -579,6 +585,7 @@ class Video extends Media
      */
     static function getRemoteTitle(int $id_host, string $reference): ?string
     {
+        //return 'pouettitle';
         switch ($id_host) {
             case self::HOST_VIMEO:
                 $meta_url = 'https://vimeo.com/api/v2/video/' . $reference . '.json';
@@ -591,10 +598,20 @@ class Video extends Media
                 return $meta_info->name;
 
             case self::HOST_YOUTUBE:
+                $meta_url = 'https://www.youtube.com/watch?v=' . $reference;
+                $page_html = file_get_contents($meta_url);
+                $doc = new DOMDocument();
+                $doc->loadHTML($page_html);
+                $title = str_replace(' - YouTube', '', $doc->getElementsByTagName('title')[0]->nodeValue);
+                return $title;
+
             case self::HOST_DAILYMOTION:
             case self::HOST_FACEBOOK:
-            default:
+                // @TODO à implémenter
                 return null;
+
+            default:
+                throw new Exception('unknown video_host');
         }
     }
 
