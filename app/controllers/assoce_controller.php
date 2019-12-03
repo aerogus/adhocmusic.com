@@ -11,14 +11,6 @@ final class Controller
 
         Trail::getInstance()->addStep("L'Association");
 
-        $smarty->enqueue_style('/css/baguetteBox.min.css');
-
-        $smarty->enqueue_script('/js/masonry-4.2.2.min.js');
-        $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
-        $smarty->enqueue_script('/js/baguetteBox-1.11.0.min.js');
-
-        $smarty->enqueue_script('/js/assoce-concerts.js');
-
         return $smarty->fetch('assoce/presentation.tpl');
     }
 
@@ -30,6 +22,11 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         Trail::getInstance()->addStep("Concerts");
+
+        $smarty->enqueue_script('/js/masonry-4.2.2.min.js');
+        $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
+
+        $smarty->enqueue_script('/js/assoce-concerts.js');
 
         // tri antéchrono des saisons
         $smarty->assign('events', array_reverse(Event::getAdHocEventsBySeason()));

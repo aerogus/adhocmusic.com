@@ -1,24 +1,27 @@
-/*globals jQuery,Masonry,imagesLoaded,baguetteBox*/
+/*globals jQuery,Masonry,imagesLoaded*/
 
 jQuery(document).ready(function () {
 
   'use strict';
 
-  if (document.getElementsByClassName('gallery').length > 0) {
+  var galleries = document.getElementsByClassName('gallery');
+  var msnry;
 
-    let gallery = new Masonry('.gallery', {
+  if (galleries.length > 0) {
+
+    var options = {
       itemSelector: '.photo',
       fitWidth: true,
       gutter: 20
-    });
+    };
 
-    imagesLoaded('.gallery', function () {
-      gallery.layout();
-    });
-
-    baguetteBox.run('.gallery', {
-      overlayBackgroundColor: '#141416'
-    });
+    for (var i = 0; i < galleries.length; i++) {
+      let gallery_id = '#' + galleries[i].id;
+      imagesLoaded(document.querySelector(gallery_id), function () {
+        msnry = new Masonry(gallery_id, options);
+        msnry.layout();
+      });
+    }
 
   }
 
