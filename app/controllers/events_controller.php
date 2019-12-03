@@ -620,7 +620,7 @@ final class Controller
             return [];
         }
 
-        return Event::find(
+        $events = Event::find(
             [
                 'id_lieu' => $id_lieu,
                 'online' => true,
@@ -628,6 +628,16 @@ final class Controller
                 'sort' => 'ASC',
                 'limit' => 100,
             ]
+        );
+
+        return array_map(
+            function ($event) {
+                return (object) [
+                    'id' => $event->getIdEvent(),
+                    'date' => $event->getDate(),
+                    'name' => $event->getName(),
+                ];
+            }, $events
         );
     }
 

@@ -875,11 +875,11 @@ class Lieu extends ObjectModel
     /**
      * Retourne les lieux d'un département
      *
-     * @param string $dep département
+     * @param string $id_departement département
      *
      * @return array
      */
-    static function getLieuxByDep(string $dep = null)
+    static function getLieuxByDep(string $id_departement = null): array
     {
         $db = DataBase::getInstance();
 
@@ -891,14 +891,15 @@ class Lieu extends ObjectModel
 
         $tab = [];
         foreach (Departement::findAll() as $dep) {
-            $tab[$dep->getId()] = [];
+            $tab[$dep->getIdDepartement()] = [];
         }
+
         foreach ($rows as $row) {
             $tab[(string) $row['id_departement']][] = Lieu::getInstance((int) $row['id_lieu']);
         }
 
-        if (!is_null($dep) && array_key_exists($dep->getId(), $tab)) {
-            return $tab[$dep->getId()];
+        if (!is_null($id_departement) && array_key_exists($id_departement, $tab)) {
+            return $tab[$id_departement];
         }
         return $tab;
     }
