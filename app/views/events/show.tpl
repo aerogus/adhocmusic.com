@@ -2,7 +2,7 @@
 
 {if !empty($unknown_event)}
 
-<p class="infobulle error">Cet événement est introuvable !</p>
+<p class="infobulle error">Cet événement est introuvable</p>
 
 {else}
 
@@ -16,7 +16,14 @@
     <img src="{$event->getThumbUrl(320)}" alt="{$event->getName()|escape}" style="display: block; margin: 0 auto 10px;">
     {/if}
 
-    <p align="justify">{$event->getText()|escape|@nl2br}</p>
+    {if !empty($event->getGroupes())}
+    <p>Avec :</p>
+    <ul class="grid-3">
+    {foreach from=$event->getGroupes() item=groupe}
+      <li><a href="{$groupe->getUrl()}"><img src="{$groupe->getMiniPhoto()}" style="float: left; margin: 2px; border: 1px solid #777" alt=""></a><a href="{$groupe->getUrl()}"><strong>{$groupe->getName()|escape}</strong></a><br>({$groupe->getStyle()|escape})</li>
+    {/foreach}
+    </ul>
+    {/if}
 
     <div id="event-box-info">
       <p><strong>Le {$jour} à {$heure}</strong></p>
@@ -29,19 +36,12 @@
     </div>
 
     {if $event->getFacebookEventId()}
-    <p class="event_facebook">
-      <a href="{$event->getFacebookEventUrl()}">Événement Facebook</a>
+    <p class="event_facebook" align="center">
+      <a style="padding: 1rem; color: #fff; background-color: #3b5998" href="{$event->getFacebookEventUrl()}">Événement Facebook</a>
     </p>
     {/if}
-
-    {if !empty($event->getGroupes())}
-    <p>Avec :</p>
-    <ul class="grid-3">
-    {foreach from=$event->getGroupes() item=groupe}
-      <li><a href="{$groupe->getUrl()}"><img src="{$groupe->getMiniPhoto()}" style="float: left; margin: 2px; border: 1px solid #777" alt=""></a><a href="{$groupe->getUrl()}"><strong>{$groupe->getName()|escape}</strong></a><br>({$groupe->getStyle()|escape})</li>
-    {/foreach}
-    </ul>
-    {/if}
+  
+    <p align="justify">{$event->getText()|escape|@nl2br}</p>
 
     {if !empty($structures)}
     <p>Organisateur :</p>
