@@ -898,6 +898,18 @@ class Lieu extends ObjectModel
             $tab[(string) $row['id_departement']][] = Lieu::getInstance((int) $row['id_lieu']);
         }
 
+        function sortLieuByCityName($a, $b) {
+            if ($a->getCity()->getName() === $b->getCity()->getName()) {
+                return 0;
+            }
+            return ($a->getCity()->getName() < $b->getCity()->getName()) ? -1 : 1;
+        }
+
+        // tri par nom de ville
+        foreach (array_keys($tab) as $dep) {
+            usort($tab[$dep], 'sortLieuByCityName');
+        }
+
         if (!is_null($id_departement) && array_key_exists($id_departement, $tab)) {
             return $tab[$id_departement];
         }
