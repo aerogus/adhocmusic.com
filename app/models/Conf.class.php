@@ -28,6 +28,14 @@ class Conf
     protected static $_required = [
         'global' => ['env', 'locale', 'charset', 'timezone'],
         'database' => ['host', 'user', 'pass', 'name'],
+        'url' => ['home', 'cache', 'media'],
+        'debug' => ['show_errors', 'log_errors', 'log_sql', 'log_file', 'email'],
+        'contact_form' => ['to', 'log_file'],
+        'facebook' => ['page_id', 'page_url'],
+        'google_maps' => ['api_key'],
+        'photo' => ['max_width', 'max_height', 'thumb_width'],
+        'video' => ['max_width', 'max_height', 'thumb_width'],
+        'event' => ['max_width', 'max_height', 'thumb_width'],
     ];
 
     /**
@@ -42,17 +50,21 @@ class Conf
     }
 
     /**
-     *
+     * @throws Exception
      */
     function __construct()
     {
         $confPath = self::getConfPath();
         if (!file_exists($confPath)) {
             throw new Exception('configuration introuvable');
-        } elseif (!(self::$_data = parse_ini_file($confPath, true, INI_SCANNER_TYPED))) {
+        }
+        if (!(self::$_data = parse_ini_file($confPath, true, INI_SCANNER_TYPED))) {
             throw new Exception('configuration illisible');
         }
         foreach (self::$_required as $section => $fields) {
+            if (!array_key_exists($section, self::$_data)) {
+                throw new Exception('section [' . $section . '] manquante');
+            }
             foreach ($fields as $field) {
                 if (!array_key_exists($field, self::$_data[$section])) {
                     throw new Exception('champ ' . $field . ' manquant dans section [' . $section . ']');
@@ -73,6 +85,8 @@ class Conf
     }
 
     /**
+     * Retourne l'ensemble des sections ou une section seulement
+     *
      * @param string $section nom de la section
      *
      * @return array|null
@@ -80,13 +94,11 @@ class Conf
     function get(string $section = null): ?array
     {
         if (is_null($section)) {
-            // toute la conf
-            return self::$_data;
-        } elseif (array_key_exists($section, self::$_data)) {
-            // la conf d'une section uniquement
-            return self::$_data[$section];
-        } else {
-            throw new Exception('section [' . $section . '] introuvable');
+            return self::$_data; // toute la conf
         }
+        if (array_key_exists($section, self::$_data)) {
+            return self::$_data[$section]; // la conf d'une section uniquement
+        }
+        throw new Exception('section [' . $section . '] introuvable');
     }
 }

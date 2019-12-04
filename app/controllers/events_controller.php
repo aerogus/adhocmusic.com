@@ -4,6 +4,10 @@ use \Reference\Style;
 
 final class Controller
 {
+    const FLYER_MAX_WIDTH  = 1000;
+    const FLYER_MAX_HEIGHT = 1000;
+    const FLYER_THUMB_WIDTH = [100, 320, 660];
+
     /**
      * @return string
      */
@@ -329,31 +333,26 @@ final class Controller
 
                 if ($event->save()) {
 
+                    $importFlyer = false;
                     if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
-                        (new Image($_FILES['flyer']['tmp_name']))
-                            ->setType(IMAGETYPE_JPEG)
-                            ->setKeepRatio(true)
-                            ->setMaxWidth(1024)
-                            ->setMaxHeight(768)
-                            ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
-                            ->write();
+                        $importFlyer = true;
+                        $tmpName = $_FILES['flyer']['tmp_name'];
+                    } elseif ($data['flyer_url']) {
+                        if ($tmpContent = file_get_contents($data['flyer_url'])) {
+                            $importFlyer = true;
+                            file_put_contents(tempnam('/tmp', 'import-flyer-event'), $tmpContent);
+                        }
                     }
 
-                    if ($data['flyer_url']) {
-                        $tmpname = tempnam('/tmp', 'import-flyer-event');
-                        $handle = fopen($tmpname, "w");
-                        fwrite($handle, file_get_contents($data['flyer_url']));
-                        fclose($handle);
-
-                        (new Image($tmpname))
+                    if ($importFlyer && file_exists($tmpName)) {
+                        (new Image($tmpName))
                             ->setType(IMAGETYPE_JPEG)
                             ->setKeepRatio(true)
-                            ->setMaxWidth(1024)
-                            ->setMaxHeight(768)
+                            ->setMaxWidth(self::FLYER_MAX_WIDTH)
+                            ->setMaxHeight(self::FLYER_MAX_HEIGHT)
                             ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
                             ->write();
-
-                        unlink($tmpname);
+                        unlink($tmpName);
                     }
 
                     foreach (Route::params('style') as $id_style) {
@@ -493,37 +492,26 @@ final class Controller
 
                 $event->save();
 
+                $importFlyer = false;
                 if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
-                    (new Image($_FILES['flyer']['tmp_name']))
-                        ->setType(IMAGETYPE_JPEG)
-                        ->setKeepRatio(true)
-                        ->setMaxWidth(1024)
-                        ->setMaxHeight(768)
-                        ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
-                        ->write();
-
-                    Event::invalidateFlyerInCache($event->getId(), '100', '100');
-                    Event::invalidateFlyerInCache($event->getId(), '400', '400');
+                    $importFlyer = true;
+                    $tmpName = $_FILES['flyer']['tmp_name'];
+                } elseif ($data['flyer_url']) {
+                    if ($tmpContent = file_get_contents($data['flyer_url'])) {
+                        $importFlyer = true;
+                        file_put_contents(tempnam('/tmp', 'import-flyer-event'), $tmpContent);
+                    }
                 }
 
-                if ($data['flyer_url']) {
-                    $tmpname = tempnam('/tmp', 'import-flyer-event');
-                    $handle = fopen($tmpname, "w");
-                    fwrite($handle, file_get_contents($data['flyer_url']));
-                    fclose($handle);
-
-                    (new Image($tmpname))
+                if ($importFlyer && file_exists($tmpName)) {
+                    (new Image($tmpName))
                         ->setType(IMAGETYPE_JPEG)
                         ->setKeepRatio(true)
-                        ->setMaxWidth(1024)
-                        ->setMaxHeight(768)
+                        ->setMaxWidth(self::FLYER_MAX_WIDTH)
+                        ->setMaxHeight(self::FLYER_MAX_HEIGHT)
                         ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
                         ->write();
-
-                    unlink($tmpname);
-
-                    Event::invalidateFlyerInCache($event->getId(), '100', '100');
-                    Event::invalidateFlyerInCache($event->getId(), '400', '400');
+                    unlink($tmpName);
                 }
 
                 $event->unlinkStyles();
