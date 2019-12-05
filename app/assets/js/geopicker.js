@@ -9,7 +9,7 @@
  * utilisé dans création/modif d'un membre, d'un lieu, d'un événement
  */
 
-/*globals jQuery, lieu*/
+/*globals jQuery,asv*/
 
 jQuery(document).ready(function ($) {
 
@@ -29,10 +29,10 @@ jQuery(document).ready(function ($) {
         text: country_name
       }).appendTo('#id_country');
     });
-    if (lieu.id_country) {
-      $('#id_country option[value="' + lieu.id_country + '"]').prop('selected', true);
+    if (asv.id_country) {
+      $('#id_country option[value="' + asv.id_country + '"]').prop('selected', true);
       $('#id_country').trigger('change');
-      lieu.id_country = false;
+      asv.id_country = false;
     }
   });
 
@@ -49,10 +49,10 @@ jQuery(document).ready(function ($) {
           text: region_name
         }).appendTo('#id_region');
       });
-      if (lieu.id_region) {
-        $('#id_region option[value="' + lieu.id_region + '"]').prop('selected', true);
+      if (asv.id_region) {
+        $('#id_region option[value="' + asv.id_region + '"]').prop('selected', true);
         $('#id_region').trigger('change');
-        lieu.id_region = false;
+        asv.id_region = false;
       }
     });
     if (id_country !== 'FR') {
@@ -79,10 +79,10 @@ jQuery(document).ready(function ($) {
             text: departement_name
           }).appendTo('#id_departement');
         });
-        if (lieu.id_departement) {
-          $('#id_departement option[value="' + lieu.id_departement + '"]').prop('selected', true);
+        if (asv.id_departement) {
+          $('#id_departement option[value="' + asv.id_departement + '"]').prop('selected', true);
           $('#id_departement').trigger('change');
-          lieu.id_departement = false;
+          asv.id_departement = false;
         }
       });
     }
@@ -105,10 +105,10 @@ jQuery(document).ready(function ($) {
             text: city_name
           }).appendTo('#id_city');
         });
-        if (lieu.id_city) {
-          $('#id_city option[value="' + lieu.id_city + '"]').prop('selected', true);
+        if (asv.id_city) {
+          $('#id_city option[value="' + asv.id_city + '"]').prop('selected', true);
           $('#id_city').trigger('change');
-          lieu.id_city = false;
+          asv.id_city = false;
         }
       });
     }
@@ -129,10 +129,10 @@ jQuery(document).ready(function ($) {
           text: lieu_name
         }).appendTo('#id_lieu');
       });
-      if (lieu.id) {
-        $('#id_lieu option[value="' + lieu.id + '"]').prop('selected', true);
+      if (asv.id_lieu) {
+        $('#id_lieu option[value="' + asv.id_lieu + '"]').prop('selected', true);
         $('#id_lieu').trigger('change');
-        lieu.id = false;
+        asv.id_lieu = false;
       }
     });
   });

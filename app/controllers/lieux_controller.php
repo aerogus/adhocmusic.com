@@ -94,8 +94,8 @@ final class Controller
         $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
         $smarty->enqueue_script('/js/baguetteBox-1.11.0.min.js');
 
-        $smarty->enqueue_script_var(
-            'lieu', [
+        $smarty->enqueue_script_vars(
+            [
                 'lat' => number_format($lieu->getLat(), 6, '.', ''),
                 'lng' => number_format($lieu->getLng(), 6, '.', ''),
                 'name' => $lieu->getName()
@@ -273,6 +273,16 @@ final class Controller
 
         $smarty->assign('lieu_types', LieuType::findAll());
 
+        $smarty->enqueue_script_vars(
+            [
+                'id_lieu' => 0,
+                'id_country' => 'FR',
+                'id_region' => '08',
+                'id_departement' => '91',
+                'id_city' => 91216
+            ]
+        );
+
         return $smarty->fetch('lieux/create.tpl');
     }
 
@@ -367,6 +377,16 @@ final class Controller
                 // erreurs
             }
         }
+
+        $smarty->enqueue_script_vars(
+            [
+                'id' => $lieu->getId(),
+                'id_country' => $lieu->getIdCountry(),
+                'id_region' => $lieu->getIdRegion(),
+                'id_departement' => $lieu->getIdDepartement(),
+                'id_city' => $lieu->getIdCity(),
+            ]
+        );
 
         return $smarty->fetch('lieux/edit.tpl');
     }

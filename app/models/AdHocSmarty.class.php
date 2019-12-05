@@ -429,13 +429,29 @@ class AdHocSmarty extends Smarty
     /**
      * Ajoute une variable js utilisable dans les scripts du footer
      * 
-     * @param string $key key
-     * @param mixed $val val
+     * @param string $key   key
+     * @param mixed  $value value
+     *
+     * @return void
      */
-    function enqueue_script_var(string $key, $val)
+    function enqueue_script_var(string $key, $value): void
     {
-        $this->script_vars[$key] = $val;
+        $this->script_vars[$key] = $value;
         $this->assign('script_vars', $this->script_vars);
+    }
+
+    /**
+     * Ajoute plusieurs variables js utilisables dans les scripts du footer
+     *
+     * @param array $vars ['key1' => value1, 'key2' => value2]
+     *
+     * @return void
+     */
+    function enqueue_script_vars(array $vars): void
+    {
+        foreach ($vars as $key => $value) {
+            $this->enqueue_script_var($key, $value);
+        }
     }
 
     /**

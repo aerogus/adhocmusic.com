@@ -240,6 +240,16 @@ final class Controller
             $smarty->assign('forum', ForumPrive::getSubscribedForums($_SESSION['membre']->getId()));
         }
 
+        $smarty->enqueue_script_vars(
+            [
+                'id_lieu' => 0,
+                'id_country' => $membre->getIdCountry(),
+                'id_region' => $membre->getIdRegion(),
+                'id_departement' => $membre->getIdDepartement(),
+                'id_city' => $membre->getIdCity(),
+            ]
+        );
+
         return $smarty->fetch('membres/edit.tpl');
     }
 

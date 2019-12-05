@@ -423,6 +423,16 @@ final class Controller
             )
         );
 
+        $smarty->enqueue_script_vars(
+            [
+                'id_lieu' => $id_lieu,
+                'id_country' => $id_country,
+                'id_region' => $id_region,
+                'id_departement' => $id_departement,
+                'id_city' => $id_city,
+            ]
+        );
+
         return $smarty->fetch('events/create.tpl');
     }
 
@@ -602,6 +612,16 @@ final class Controller
                     'sort' => 'ASC',
                 ]
             )
+        );
+
+        $smarty->enqueue_script_vars(
+            [
+                'id_lieu' => $lieu->getIdLieu(),
+                'id_country' => $lieu->getIdCountry(),
+                'id_region' => $lieu->getIdRregion(),
+                'id_departement' => $lieu->getIdDepartement(),
+                'id_city' => $lieu->getIdCity(),
+            ]
         );
 
         return $smarty->fetch('events/edit.tpl');

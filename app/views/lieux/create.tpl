@@ -77,14 +77,4 @@
   </div>
 </div>
 
-<script>
-var lieu = {
-    id: 0,
-    id_country: 'FR',
-    id_region: 'A8',
-    id_departement: '91',
-    id_city: 91216
-};
-</script>
-
 {include file="common/footer.tpl"}
