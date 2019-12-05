@@ -243,10 +243,10 @@ final class Controller
         $smarty->enqueue_script_vars(
             [
                 'id_lieu' => 0,
-                'id_country' => $membre->getIdCountry(),
-                'id_region' => $membre->getIdRegion(),
-                'id_departement' => $membre->getIdDepartement(),
-                'id_city' => $membre->getIdCity(),
+                'id_country' => $_SESSION['membre']->getIdCountry(),
+                'id_region' => $_SESSION['membre']->getIdRegion(),
+                'id_departement' => $_SESSION['membre']->getIdDepartement(),
+                'id_city' => $_SESSION['membre']->getIdCity(),
             ]
         );
 

@@ -618,7 +618,7 @@ final class Controller
             [
                 'id_lieu' => $lieu->getIdLieu(),
                 'id_country' => $lieu->getIdCountry(),
-                'id_region' => $lieu->getIdRregion(),
+                'id_region' => $lieu->getIdRegion(),
                 'id_departement' => $lieu->getIdDepartement(),
                 'id_city' => $lieu->getIdCity(),
             ]
