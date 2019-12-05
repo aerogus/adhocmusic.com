@@ -397,7 +397,7 @@ final class Controller
         $smarty->assign('data', $data);
 
         $smarty->assign(
-            'styles', Style::findAll(
+            'styles', Style::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
@@ -406,7 +406,7 @@ final class Controller
         );
 
         $smarty->assign(
-            'groupes', Groupe::findAll(
+            'groupes', Groupe::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
@@ -415,7 +415,7 @@ final class Controller
         );
 
         $smarty->assign(
-            'structures', Structure::findAll(
+            'structures', Structure::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
@@ -588,7 +588,7 @@ final class Controller
         $smarty->assign('lieu', $lieu);
 
         $smarty->assign(
-            'styles', Style::findAll(
+            'styles', Style::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
@@ -597,7 +597,7 @@ final class Controller
         );
 
         $smarty->assign(
-            'groupes', Groupe::findAll(
+            'groupes', Groupe::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
@@ -606,7 +606,7 @@ final class Controller
         );
 
         $smarty->assign(
-            'structures', Structure::findAll(
+            'structures', Structure::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
