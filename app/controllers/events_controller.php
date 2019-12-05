@@ -4,10 +4,6 @@ use \Reference\Style;
 
 final class Controller
 {
-    const FLYER_MAX_WIDTH  = 1000;
-    const FLYER_MAX_HEIGHT = 1000;
-    const FLYER_THUMB_WIDTH = [100, 320, 660];
-
     /**
      * @return string
      */
@@ -345,11 +341,12 @@ final class Controller
                     }
 
                     if ($importFlyer && file_exists($tmpName)) {
+                        $confEvent = Conf::getInstance()->get('event');
                         (new Image($tmpName))
                             ->setType(IMAGETYPE_JPEG)
                             ->setKeepRatio(true)
-                            ->setMaxWidth(self::FLYER_MAX_WIDTH)
-                            ->setMaxHeight(self::FLYER_MAX_HEIGHT)
+                            ->setMaxWidth($confEvent['max_width'])
+                            ->setMaxHeight($confEvent['max_height'])
                             ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
                             ->write();
                         unlink($tmpName);
@@ -399,9 +396,32 @@ final class Controller
 
         $smarty->assign('data', $data);
 
-        $smarty->assign('styles', Style::findAll());
-        $smarty->assign('groupes', Groupe::findAll());
-        $smarty->assign('structures', Structure::findAll());
+        $smarty->assign(
+            'styles', Style::findAll(
+                [
+                    'order_by' => 'name',
+                    'sort' => 'ASC',
+                ]
+            )
+        );
+
+        $smarty->assign(
+            'groupes', Groupe::findAll(
+                [
+                    'order_by' => 'name',
+                    'sort' => 'ASC',
+                ]
+            )
+        );
+
+        $smarty->assign(
+            'structures', Structure::findAll(
+                [
+                    'order_by' => 'name',
+                    'sort' => 'ASC',
+                ]
+            )
+        );
 
         return $smarty->fetch('events/create.tpl');
     }
@@ -504,11 +524,12 @@ final class Controller
                 }
 
                 if ($importFlyer && file_exists($tmpName)) {
+                    $confEvent = Conf::getInstance()->get('event');
                     (new Image($tmpName))
                         ->setType(IMAGETYPE_JPEG)
                         ->setKeepRatio(true)
-                        ->setMaxWidth(self::FLYER_MAX_WIDTH)
-                        ->setMaxHeight(self::FLYER_MAX_HEIGHT)
+                        ->setMaxWidth($confEvent['max_width'])
+                        ->setMaxHeight($confEvent['max_height'])
                         ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
                         ->write();
                     unlink($tmpName);
@@ -556,9 +577,32 @@ final class Controller
         $smarty->assign('event', $event);
         $smarty->assign('lieu', $lieu);
 
-        $smarty->assign('styles', Style::findAll());
-        $smarty->assign('groupes', Groupe::findAll());
-        $smarty->assign('structures', Structure::findAll());
+        $smarty->assign(
+            'styles', Style::findAll(
+                [
+                    'order_by' => 'name',
+                    'sort' => 'ASC',
+                ]
+            )
+        );
+
+        $smarty->assign(
+            'groupes', Groupe::findAll(
+                [
+                    'order_by' => 'name',
+                    'sort' => 'ASC',
+                ]
+            )
+        );
+
+        $smarty->assign(
+            'structures', Structure::findAll(
+                [
+                    'order_by' => 'name',
+                    'sort' => 'ASC',
+                ]
+            )
+        );
 
         return $smarty->fetch('events/edit.tpl');
     }
