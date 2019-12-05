@@ -32,7 +32,6 @@ jQuery(document).ready(function ($) {
     if (asv.id_country) {
       $('#id_country option[value="' + asv.id_country + '"]').prop('selected', true);
       $('#id_country').trigger('change');
-      asv.id_country = false;
     }
   });
 
@@ -50,9 +49,9 @@ jQuery(document).ready(function ($) {
         }).appendTo('#id_region');
       });
       if (asv.id_region) {
+        asv.id_region = asv.id_region.toString().padStart(2, '0');
         $('#id_region option[value="' + asv.id_region + '"]').prop('selected', true);
         $('#id_region').trigger('change');
-        asv.id_region = false;
       }
     });
     if (id_country !== 'FR') {
@@ -80,9 +79,9 @@ jQuery(document).ready(function ($) {
           }).appendTo('#id_departement');
         });
         if (asv.id_departement) {
+          asv.id_departement = asv.id_departement.toString().padStart(2, '0');
           $('#id_departement option[value="' + asv.id_departement + '"]').prop('selected', true);
           $('#id_departement').trigger('change');
-          asv.id_departement = false;
         }
       });
     }
@@ -108,7 +107,6 @@ jQuery(document).ready(function ($) {
         if (asv.id_city) {
           $('#id_city option[value="' + asv.id_city + '"]').prop('selected', true);
           $('#id_city').trigger('change');
-          asv.id_city = false;
         }
       });
     }
@@ -132,7 +130,6 @@ jQuery(document).ready(function ($) {
       if (asv.id_lieu) {
         $('#id_lieu option[value="' + asv.id_lieu + '"]').prop('selected', true);
         $('#id_lieu').trigger('change');
-        asv.id_lieu = false;
       }
     });
   });
