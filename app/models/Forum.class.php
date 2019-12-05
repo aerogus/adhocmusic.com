@@ -57,7 +57,7 @@ abstract class Forum
      *
      * @return string
      */
-    static function parseMessage(string $texte, bool $wiki = false)
+    static function parseMessage(string $texte, bool $wiki = false): string
     {
         // 1 - gestion des frimousses
         foreach (self::$smileys as $smiley) {
@@ -108,9 +108,11 @@ abstract class Forum
     /**
      * Retourne les infos d'un forum
      *
+     * @param string $id_forum id_forum
+     *
      * @return array
      */
-    static function getForum($id_forum)
+    static function getForum(string $id_forum): array
     {
         $db = DataBase::getInstance();
 
@@ -129,7 +131,7 @@ abstract class Forum
      *
      * @return array
      */
-    static function getForums()
+    static function getForums(): array
     {
         $db = DataBase::getInstance();
 
@@ -150,7 +152,7 @@ abstract class Forum
      *
      * @return string $id_forum
      */
-    static function getIdForumByIdThread(int $id_thread)
+    static function getIdForumByIdThread(int $id_thread): string
     {
         $db = DataBase::getInstance();
 
@@ -170,7 +172,7 @@ abstract class Forum
      *                      int ['id_thread'] (opt.)
      *                      str ['subject'] (opt.)
      *
-     * @return int $id_message
+     * @return array
      */
     static function addMessage(array $params)
     {
@@ -315,7 +317,7 @@ abstract class Forum
      *
      * @return bool
      */
-    static function addView(int $id_thread)
+    static function addView(int $id_thread): bool
     {
         $db = DataBase::getInstance();
 
@@ -324,14 +326,18 @@ abstract class Forum
              . "WHERE `id_thread` = " . (int) $id_thread;
 
         $db->query($sql);
+
+        return true;
     }
 
     /**
      * Compte le nombre de threads par forum
      *
+     * @param string $id_forum id_forum
+     *
      * @return array ou int
      */
-    static function getThreadsCount($id_forum = null)
+    static function getThreadsCount(string $id_forum = null)
     {
         $db = DataBase::getInstance();
 
@@ -356,9 +362,11 @@ abstract class Forum
     /**
      * Compte le nombre de messages par forum
      *
+     * @param string $id_forum id_forum
+     *
      * @return array ou int
      */
-    static function getMessagesCount($id_forum = null)
+    static function getMessagesCount(string $id_forum = null)
     {
         $db = DataBase::getInstance();
 
@@ -381,12 +389,13 @@ abstract class Forum
     }
 
     /**
-     * @param array int ['id_thread']
-     *              int ['id_contact']
-     *              str ['text']
+     * @param array $params int ['id_thread']
+     *                      int ['id_contact']
+     *                      str ['text']
+     *
      * @return int $id_message
      */
-    protected static function _createMessage($params)
+    protected static function _createMessage(array $params): int
     {
         $db = DataBase::getInstance();
 
@@ -409,12 +418,13 @@ abstract class Forum
      * Met à jour la table message
      * après update d'un message ?
      *
-     * @param array ['id_message']
-     *              ['id_contact']
-     *              ['text']
+     * @param array $params ['id_message']
+     *                      ['id_contact']
+     *                      ['text']
+     *
      * @return bool
      */
-    protected static function _updateMessage($params)
+    protected static function _updateMessage(array $params): bool
     {
         $db = DataBase::getInstance();
 
@@ -426,17 +436,17 @@ abstract class Forum
 
         $db->query($sql);
 
-        return (int) $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
      * Efface un message
      *
-     * @param array ['id_message']
+     * @param array $params ['id_message']
      *
      * @return bool
      */
-    protected static function _deleteMessage(array $params)
+    protected static function _deleteMessage(array $params): bool
     {
         $db = DataBase::getInstance();
 
@@ -445,17 +455,19 @@ abstract class Forum
 
         $db->query($sql);
 
-        return (int) $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
      * Création d'un nouveau thread
      *
-     * @param array ['id_forum']
-     *              ['id_contact']
-     *              ['subject']
+     * @param array $params ['id_forum']
+     *                      ['id_contact']
+     *                      ['subject']
+     *
+     * @return int
      */
-    protected static function _createThread($params)
+    protected static function _createThread(array $params): int
     {
         $db = DataBase::getInstance();
 
@@ -469,19 +481,19 @@ abstract class Forum
 
         $db->query($sql);
 
-        return $db->insertId();
+        return (int) $db->insertId();
     }
 
     /**
      * Met à jour la table thread
      *
-     * @param array ['action'] msgadd|msgedit|msgdel
-     *              ['id_contact']
-     *              ['id_thread']
+     * @param array $params ['action'] msgadd|msgedit|msgdel
+     *                      ['id_contact']
+     *                      ['id_thread']
      *
      * @return bool
      */
-    protected static function _updateThread($params)
+    protected static function _updateThread(array $params): bool
     {
         $db = DataBase::getInstance();
 
@@ -493,12 +505,12 @@ abstract class Forum
         }
 
         $sql .= "`modified_at` = NOW(), "
-             .  "`modified_by` = " . (int) $params['id_contact'] . " "
-             .  "WHERE `id_thread` = " . (int) $params['id_thread'];
+             . "`modified_by` = " . (int) $params['id_contact'] . " "
+             . "WHERE `id_thread` = " . (int) $params['id_thread'];
 
         $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
@@ -508,7 +520,7 @@ abstract class Forum
      *
      * @return bool
      */
-    protected static function _deleteThread($params)
+    protected static function _deleteThread(array $params): bool
     {
         $db = DataBase::getInstance();
 
@@ -517,7 +529,7 @@ abstract class Forum
 
         $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
@@ -531,7 +543,7 @@ abstract class Forum
      *
      * @return bool
      */
-    protected static function _updateForum($params = []): bool
+    protected static function _updateForum(array $params = []): bool
     {
         $db = DataBase::getInstance();
 
@@ -552,5 +564,7 @@ abstract class Forum
         $sql .= "WHERE `id_forum` = '" . $db->escape($params['id_forum']) . "'";
 
         $db->query($sql);
+
+        return (bool) $db->affectedRows();
     }
 }

@@ -344,10 +344,8 @@ class DataBase
     {
         $conn = $this->connect($conn_name);
 
-        // debug
         if (LOG_SQL) {
-            // log des requêtes
-            file_put_contents(ini_get('error_log'), $sql . "\n", FILE_APPEND);
+            file_put_contents(ini_get('error_log'), date('Y-m-d H:i:s') . ' SQL: ' . $sql . "\n", FILE_APPEND);
         }
 
         $rc = mysqli_query($conn, $sql);
