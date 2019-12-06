@@ -447,7 +447,7 @@ final class Controller
         if (Tools::isSubmit('form-lieu-delete')) {
             if ($lieu->delete()) {
                 Log::action(Log::ACTION_LIEU_DELETE, $lieu->getId());
-                Tools::redirect('/lieux/?delete=1');
+                Tools::redirect('/lieux?delete=1');
             }
         }
 
