@@ -106,6 +106,7 @@ final class Controller
         //$id_groupe = (int) Route::params('id_groupe');
         //$id_type_musicien = (int) Route::params('id_type_musicien');
 
+        // @TODO remplacer par Membre::find([...]);
         $membres = Membre::getMembres(
             [
                 /*'id'         => $tab_id,*/
