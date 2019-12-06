@@ -131,7 +131,7 @@ final class Controller
         Tools::auth(Membre::TYPE_STANDARD);
 
         $id = $_SESSION['membre']->getId();
-        
+
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
             ->addStep('Mes Infos Persos');
@@ -148,9 +148,6 @@ final class Controller
                 'last_name' => trim((string) Route::params('last_name')),
                 'first_name' => trim((string) Route::params('first_name')),
                 'address' => trim((string) Route::params('address')),
-                'cp' => trim((string) Route::params('cp')),
-                'city' => trim((string) Route::params('city')),
-                'country' => trim((string) Route::params('country')),
                 'id_city' => (int) Route::params('id_city'),
                 'id_departement' => trim((string) Route::params('id_departement')),
                 'id_region' => trim((string) Route::params('id_region')),
@@ -169,9 +166,6 @@ final class Controller
                 $member->setLastName($data['last_name'])
                     ->setFirstName($data['first_name'])
                     ->setAddress($data['address'])
-                    ->setCp($data['cp'])
-                    ->setCity($data['city'])
-                    ->setCountry($data['country'])
                     ->setIdCity($data['id_city'])
                     ->setIdDepartement($data['id_departement'])
                     ->setIdRegion($data['id_region'])
