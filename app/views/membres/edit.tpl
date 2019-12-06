@@ -138,14 +138,4 @@
   </div>
 </div>
 
-<script>
-var lieu = {
-    id: 0,
-    id_country: '{$me->getIdCountry()}',
-    id_region: '{$me->getIdRegion()}',
-    id_departement: '{$me->getIdDepartement()}',
-    id_city: '{$me->getIdCity()}'
-};
-</script>
-
 {include file="common/footer.tpl"}
