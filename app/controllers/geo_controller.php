@@ -34,8 +34,7 @@ final class Controller
         $id_country = (string) Route::params('id_country');
         $id_country = strtoupper(substr(trim($id_country), 0, 2));
 
-        // todo filtre par pays
-        $regions = WorldRegion::findByCountry($id_country);
+        $regions = WorldRegion::find(['id_country' => $id_country]);
 
         $arr = [];
         foreach ($regions as $region) {

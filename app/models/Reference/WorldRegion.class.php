@@ -80,25 +80,52 @@ class WorldRegion extends \Reference
     /* fin setters */
 
     /**
-     * Retourne une collection d'instances WorldRegion
+     * Retourne une collection d'objets "WorldRegion" répondant au(x) critère(s)
      *
-     * @param string $id_country id_country
+     * @param array $params [
+     *                      'id_country' => string,
+     *                      'order_by' => string,
+     *                      'sort' => string
+     *                      'start' => int,
+     *                      'limit' => int,
+     *                      ]
      *
      * @return array
-     * @throws Exception
      */
-    static function findByCountry(string $id_country): array
+    static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `" . implode('`,`', static::getDbPk()) . "` "
-             . "FROM `" . static::getDbTable() . "` "
-             . "WHERE `id_country` = '" . $id_country . "'";
+        $sql = "SELECT `" . implode('`,`', static::getDbPk()) . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
 
-        $rows = $db->queryWithFetch($sql);
-        foreach ($rows as $row) {
-            $objs[] = static::getInstance($row);
+        if (isset($params['id_country'])) {
+            $sql .= "AND `id_country` = '" . $db->escape($params['id_country']) . "' ";
+        }
+
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+            $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+        } else {
+            $sql .= "ORDER BY `" . static::$_pk . "` ";
+        }
+
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+            $sql .= $params['sort'] . " ";
+        } else {
+            $sql .= "ASC ";
+        }
+
+        if (!isset($params['start'])) {
+            $params['start'] = 0;
+        }
+
+        if (isset($params['start']) && isset($params['limit'])) {
+            $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
+        }
+
+        $ids = $db->queryWithFetch($sql);
+        foreach ($ids as $id) {
+            $objs[] = static::getInstance($id);
         }
 
         return $objs;

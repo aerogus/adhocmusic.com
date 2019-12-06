@@ -69,4 +69,51 @@ class WorldCountry extends \Reference
     /* début setters */
 
     /* fin setters */
+
+    /**
+     * Retourne une collection d'objets "WorldCountry" répondant au(x) critère(s)
+     *
+     * @param array $params [
+     *                      'order_by' => string,
+     *                      'sort' => string
+     *                      'start' => int,
+     *                      'limit' => int,
+     *                      ]
+     *
+     * @return array
+     */
+    static function find(array $params): array
+    {
+        $db = DataBase::getInstance();
+        $objs = [];
+
+        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+            $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+        } else {
+            $sql .= "ORDER BY `" . static::$_pk . "` ";
+        }
+
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+            $sql .= $params['sort'] . " ";
+        } else {
+            $sql .= "ASC ";
+        }
+
+        if (!isset($params['start'])) {
+            $params['start'] = 0;
+        }
+
+        if (isset($params['start']) && isset($params['limit'])) {
+            $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
+        }
+
+        $ids = $db->queryWithFetchFirstFields($sql);
+        foreach ($ids as $id) {
+            $objs[] = static::getInstance((int) $id);
+        }
+
+        return $objs;
+    }
 }

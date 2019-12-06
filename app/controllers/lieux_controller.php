@@ -20,27 +20,56 @@ final class Controller
 
         $smarty->enqueue_script('/js/lieux-index.js');
 
-        $lat = 48.6726957;
-        $lng = 2.3239693;
         Trail::getInstance()
             ->addStep('Lieux', '/lieux');
 
-        $lieux_proches = Lieu::fetchLieuxByRadius(
+        $lieux = [];
+
+        $regions = WorldRegion::find(
             [
-                'lat'      => $lat,
-                'lng'      => $lng,
-                'distance' => 5000,
-                'sort'     => 'rand',
-                'limit'    => 25,
+                'id_country' => 'FR',
+                'order_by' => 'name',
+                'sort' => 'ASC'
             ]
         );
-        $lieux_proches = [];
-        $lieux_proches = array_slice($lieux_proches, 0, 5);
+        $smarty->assign('regions', $regions);
 
-        $smarty->assign('lat', $lat);
-        $smarty->assign('lng', $lng);
-        $smarty->assign('my_geocode', $lat . ', ' . $lng);
-        $smarty->assign('lieux', $lieux_proches);
+        $departements = [];
+        $_departements = Departement::find(
+            [
+                'id_country' => 'FR',
+                'order_by' => 'name',
+                'sort' => 'ASC'
+            ]
+        );
+        foreach ($_departements as $departement) {
+            if (!array_key_exists($departement->getIdRegion(), $lieux)) {
+                $lieux[$departement->getIdRegion()] = [];
+            }
+            if (!array_key_exists($departement->getIdDepartement(), $lieux[$departement->getIdRegion()])) {
+                $lieux[$departement->getIdRegion()][$departement->getIdDepartement()] = [];
+            }
+            if (!array_key_exists($departement->getIdRegion(), $departements)) {
+                $departements[$departement->getIdRegion()] = [];
+            }
+            $departements[$departement->getIdRegion()][] = $departement;
+        }
+
+        $smarty->assign('departements', $departements);
+
+        $_lieux = Lieu::find(
+            [
+                'id_country' => 'FR',
+                'order_by' => 'id_city',
+                'sort' => 'ASC'
+            ]
+        );
+
+        foreach ($_lieux as $lieu) {
+            $lieux[$lieu->getIdRegion()][$lieu->getIdDepartement()][] = $lieu;
+        }
+
+        $smarty->assign('lieux', $lieux);
 
         return $smarty->fetch('lieux/index.tpl');
     }
