@@ -119,7 +119,7 @@ class ForumPrive extends Forum
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `adhoc_forum_prive_subscriber` "
-             . "WHERE `id_contact` = " . (int) $db->escape($id_contact);
+             . "WHERE `id_contact` = " . (int) $id_contact;
 
         $db->query($sql);
 
