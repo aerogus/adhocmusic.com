@@ -336,7 +336,9 @@ final class Controller
 
         $smarty->assign('groupe', $groupe);
         if (($id_type_musicien = $groupe->isMember($_SESSION['membre']->getId())) === false) {
-            $smarty->assign('not_my_groupe', true);
+            if (!$_SESSION['membre']->isAdmin()) {
+                $smarty->assign('not_my_groupe', true);
+            }
         }
 
         $data = [
@@ -369,7 +371,7 @@ final class Controller
 
             if (self::_validateGroupeEditForm($data, $errors)) {
 
-                if ($groupe->isMember($_SESSION['membre']->getId()) === false) {
+                if (!$groupe->isMember($_SESSION['membre']->getId()) && !$_SESSION['membre']->isAdmin()) {
                     return 'edition du groupe non autorisée';
                 }
 
