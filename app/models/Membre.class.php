@@ -76,21 +76,6 @@ class Membre extends Contact
     protected $_address = null;
 
     /**
-     * @var string
-     */
-    protected $_cp = null;
-
-    /**
-     * @var string
-     */
-    protected $_city = null;
-
-    /**
-     * @var string
-     */
-    protected $_country = null;
-
-    /**
      * @var int
      */
     protected $_id_city = null;
@@ -160,10 +145,32 @@ class Membre extends Contact
      */
     protected $_types = [];
 
+    // getters helpers avec mini mise en cache
+
     /**
-     * @var array
+     * @var array|null
      */
-    protected $_groupes = false;
+    protected $_groupes = null;
+
+    /**
+     * @var array|null
+     */
+    protected $_city = null;
+
+    /**
+     * @var array|null
+     */
+    protected $_departement = null;
+
+    /**
+     * @var array|null
+     */
+    protected $_region = null;
+
+    /**
+     * @var array|null
+     */
+    protected $_country = null;
 
     /**
      * Liste des attributs de l'objet
@@ -177,9 +184,6 @@ class Membre extends Contact
         'last_name'      => 'string',
         'first_name'     => 'string',
         'address'        => 'string',
-        'cp'             => 'string',
-        'city'           => 'string',
-        'country'        => 'string',
         'id_city'        => 'int',
         'id_departement' => 'string',
         'id_region'      => 'string',
@@ -287,35 +291,22 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
-     */
-    function getCp(): ?string
-    {
-        return $this->_cp;
-    }
-
-    /**
-     * @return string|null
-     */
-    function getCity(): ?string
-    {
-        return $this->_city;
-    }
-
-    /**
-     * @return string|null
-     */
-    function getCountry(): ?string
-    {
-        return $this->_country;
-    }
-
-    /**
      * @return int|null
      */
     function getIdCity(): ?int
     {
         return $this->_id_city;
+    }
+
+    /**
+     * @return object|null
+     */
+    function getCity(): ?object
+    {
+        if (is_null($this->_city) && !is_null($this->getIdCity())) {
+            $this->_city = City::getInstance($this->getIdCity());
+        }
+        return $this->_city;
     }
 
     /**
@@ -327,6 +318,17 @@ class Membre extends Contact
     }
 
     /**
+     * @return object|null
+     */
+    function getDepartement(): ?object
+    {
+        if (is_null($this->_departement) && !is_null($this->getIdDepartement())) {
+            $this->_departement = Departement::getInstance($this->getIdDepartement());
+        }
+        return $this->_departement;
+    }
+
+    /**
      * @return string|null
      */
     function getIdRegion(): ?string
@@ -335,11 +337,33 @@ class Membre extends Contact
     }
 
     /**
+     * @return object|null
+     */
+    function getRegion(): ?object
+    {
+        if (is_null($this->_region) && !is_null($this->getIdRegion())) {
+            $this->_region = Region::getInstance($this->getIdRegion());
+        }
+        return $this->_region;
+    }
+
+    /**
      * @return string|null
      */
     function getIdCountry(): ?string
     {
         return $this->_id_country;
+    }
+
+    /**
+     * @return object|null
+     */
+    function getCountry(): ?object
+    {
+        if (is_null($this->_country) && !is_null($this->getIdCountry())) {
+            $this->_country = Country::getInstance($this->getIdCountry());
+        }
+        return $this->_country;
     }
 
     /**
@@ -471,8 +495,7 @@ class Membre extends Contact
      */
     function getGroupes(): array
     {
-        if ($this->_groupes === false) {
-
+        if (is_null($this->_groupes)) {
             $this->_groupes = Groupe::find(
                 [
                     'id_contact' => $this->getIdContact(),
@@ -481,7 +504,6 @@ class Membre extends Contact
                     'sort' => 'ASC',
                 ]
             );
-
         }
 
         return $this->_groupes;
@@ -588,51 +610,6 @@ class Membre extends Contact
         if ($this->_address !== $address) {
             $this->_address = $address;
             $this->_modified_fields['membre']['address'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param string|null $cp code postal
-     *
-     * @return object
-     */
-    function setCp(?string $cp): object
-    {
-        if ($this->_cp !== $cp) {
-            $this->_cp = $cp;
-            $this->_modified_fields['membre']['cp'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param string|null $city city
-     *
-     * @return object
-     */
-    function setCity(?string $city): object
-    {
-        if ($this->_city !== $city) {
-            $this->_city = $city;
-            $this->_modified_fields['membre']['city'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param string|null $country country
-     *
-     * @return object
-     */
-    function setCountry(?string $country): object
-    {
-        if ($this->_country !== $country) {
-            $this->_country = $country;
-            $this->_modified_fields['membre']['country'] = true;
         }
 
         return $this;
@@ -881,45 +858,6 @@ class Membre extends Contact
     /* fin setters */
 
     /**
-     * Retourne les id de membres appartenant à au moins un groupe
-     * qu'on peut optionnellement spécifier et/ou un type de musicien
-     *
-     * @param int $id_groupe        id_groupe
-     * @param int $id_type_musicien id_type_musicien
-     *
-     * @return array
-     */
-    static function getIdsMembresByGroupeAndTypeMusicien(int $id_groupe = 0, int $id_type_musicien = 0)
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `m`.`id_contact`, `a`.`id_groupe`, `a`.`id_type_musicien`, `g`.`name` "
-             . "FROM `adhoc_membre` `m`, `adhoc_appartient_a` `a`, `adhoc_groupe` `g` "
-             . "WHERE `m`.`id_contact` = `a`.`id_contact` "
-             . "AND `a`.`id_groupe` = `g`.`id_groupe`";
-
-        if ($id_type_musicien) {
-            $sql .= "AND `a`.`id_type_musicien` = " . (int) $id_type_musicien . " ";
-        }
-
-        if ($id_groupe) {
-            $sql .= "AND `g`.`id_groupe` = " . (int) $id_groupe;
-        }
-
-        $res = $db->queryWithFetch($sql);
-        $tab = [];
-        foreach ($res as $_res) {
-            $tab[$_res['id_contact']][] = [
-                'id_groupe' => $_res['id_groupe'],
-                'id_type_musicien' => $_res['id_type_musicien'],
-                'type_musicien' => TypeMusicien::getInstance((int) $_res['id_type_musicien'])->getName(),
-                'name' => $_res['name'],
-            ];
-        }
-        return $tab;
-    }
-
-    /**
      * Recherche des membres en fonction de critères donnés
      *
      * @param array ['id']            => "3"
@@ -934,6 +872,8 @@ class Membre extends Contact
      *              ['limit']         => 10
      *
      * @return array
+     * @deprecated
+     * @todo remplacer par Membre::find()
      */
     static function getMembres(array $params = [])
     {
@@ -975,10 +915,10 @@ class Membre extends Contact
         $sort = "id_contact";
         if (isset($params['sort']) && (
             $params['sort'] === 'random' || $params['sort'] === 'id_contact'
-         || $params['sort'] === 'last_name' || $params['sort'] === 'first_name'
-         || $params['sort'] === 'email' || $params['sort'] === 'created_at'
-         || $params['sort'] === 'modified_at' || $params['sort'] === 'visited_at'
-         || $params['sort'] === 'pseudo' || $params['sort'] === 'lastnl')
+            || $params['sort'] === 'last_name' || $params['sort'] === 'first_name'
+            || $params['sort'] === 'email' || $params['sort'] === 'created_at'
+            || $params['sort'] === 'modified_at' || $params['sort'] === 'visited_at'
+            || $params['sort'] === 'pseudo' || $params['sort'] === 'lastnl')
         ) {
             $sort = $params['sort'];
         }
@@ -1049,12 +989,6 @@ class Membre extends Contact
      */
     function delete(): int
     {
-        // on vérifie les clés étrangères
-
-        if ($this->hasGroupe()) {
-            // on efface dans appartient_a
-        }
-
         $db = DataBase::getInstance();
 
         $sql  = "DELETE FROM `" . Membre::getDbTable() . "` "
@@ -1581,20 +1515,64 @@ class Membre extends Contact
     }
 
     /**
-     * Retourne les pauvres vieux pas connectés depuis fort jadis
+     * Retourne une collection d'objets "Membre" répondant au(x) critère(s) donné(s)
+     *
+     * @param array $params [
+     *                      'id_groupe' => int,
+     *                      'id_country' => string,
+     *                      'order_by' => string,
+     *                      'sort' => string,
+     *                      'start' => int,
+     *                      'limit' => int,
+     *                      ]
      *
      * @return array
      */
-    static function getOneYearUnactivesMembers(): array
+    static function find(array $params): array
     {
         $db = DataBase::getInstance();
+        $objs = [];
 
-        $sql = "SELECT `m`.`id_contact`, `m`.`pseudo`, `c`.`email`, `m`.`visited_at`, `m`.`created_at` "
-             . "FROM `adhoc_membre` `m`, `adhoc_contact` `c` "
-             . "WHERE `m`.`id_contact` = `c`.`id_contact` "
-             . "AND `m`.`visited_at` < DATE_SUB(CURDATE(), INTERVAL 1 YEAR) "
-             . "ORDER BY `m`.`visited_at` DESC";
+        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
 
-        return $db->queryWithFetch($sql);
+        if (isset($params['id_groupe'])) {
+            $subSql = "SELECT `id_contact` FROM `adhoc_appartient_a` WHERE `id_groupe` = " . (int) $params['id_groupe'] . " ";
+            if ($ids_contact = $db->queryWithFetchFirstFields($subSql)) {
+                $sql .= "AND `id_contact` IN (" . implode(',', (array) $ids_contact) . ") ";
+            } else {
+                return $objs;
+            }
+        }
+
+        if (isset($params['id_country'])) {
+            $sql .= "AND `id_country` = '" . $db->escape($params['id_country']) . "' ";
+        }
+
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+            $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+        } else {
+            $sql .= "ORDER BY `" . static::$_pk . "` ";
+        }
+
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+            $sql .= $params['sort'] . " ";
+        } else {
+            $sql .= "ASC ";
+        }
+
+        if (!isset($params['start'])) {
+            $params['start'] = 0;
+        }
+
+        if (isset($params['start']) && isset($params['limit'])) {
+            $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
+        }
+
+        $ids = $db->queryWithFetchFirstFields($sql);
+        foreach ($ids as $id) {
+            $objs[] = static::getInstance((int) $id);
+        }
+
+        return $objs;
     }
 }
