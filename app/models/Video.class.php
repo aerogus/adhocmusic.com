@@ -564,7 +564,13 @@ class Video extends Media
                 return $meta_info[0]->thumbnail_large;
 
             case self::HOST_FACEBOOK:
-                return null;
+                $headers = get_headers('https://graph.facebook.com/' . $reference . '/picture', 1);
+                if (is_array($headers['Location'])) {
+                    $url = $headers['Location'][0];
+                } else {
+                    $url = $headers['Location'];
+                }
+                return $url;
 
             case self::HOST_ADHOCTUBE:
                 $meta_url = 'https://' . MEDIA_ADHOCTUBE_HOST . '/api/v1/videos/' . $reference;
