@@ -802,6 +802,7 @@ class Lieu extends ObjectModel
      * Retourne une collection d'objets "Lieu" répondant au(x) critère(s) donné(s)
      *
      * @param array $params [
+     *                      'with_events' => bool,
      *                      'online' => bool,
      *                      'id_country' => string,
      *                      'id_region' => string,
@@ -821,6 +822,23 @@ class Lieu extends ObjectModel
         $objs = [];
 
         $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+
+        if (isset($params['with_events'])) {
+            $subSql = "SELECT DISTINCT `id_lieu` FROM `adhoc_event`";
+            if ($ids_lieu = $db->queryWithFetchFirstFields($subSql)) {
+                if ($params['with_events'] === true) {
+                    $sql .= "AND `id_lieu` IN (" . implode(',', (array) $ids_lieu) . ") ";
+                } else {
+                    $sql .= "AND `id_lieu` NOT IN (" . implode(',', (array) $ids_lieu) . ") ";
+                }
+            } else {
+                if ($params['with_events'] === true) {
+                    return $objs; // aucun événement référencé, donc rien
+                } else {
+                    // aucun événements référencés, donc pas + de filtrage ici
+                }
+            }
+        }
 
         if (isset($params['online'])) {
             $sql .= "AND `online` = ";
