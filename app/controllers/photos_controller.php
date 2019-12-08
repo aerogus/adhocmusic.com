@@ -233,6 +233,9 @@ final class Controller
                             if (!is_dir(Photo::getBasePath())) {
                                 mkdir(Photo::getBasePath(), 0755, true);
                             }
+
+                            Photo::fixOrientation($uploaded_photo_path);
+
                             // le resize HD peut-être long
                             (new Image($uploaded_photo_path))
                                 ->setType(IMAGETYPE_JPEG)
@@ -369,6 +372,9 @@ final class Controller
                     if (!is_dir(Photo::getBasePath())) {
                         mkdir(Photo::getBasePath(), 0755, true);
                     }
+
+                    Photo::fixOrientation($_FILES['file']['tmp_name']);
+
                     (new Image($_FILES['file']['tmp_name']))
                         ->setType(IMAGETYPE_JPEG)
                         ->setMaxWidth(2048)
