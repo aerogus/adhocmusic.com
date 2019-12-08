@@ -319,9 +319,7 @@ abstract class ObjectModel
             $this->setId((int) $db->insertId());
             $this->loadObjectId();
 
-            if (self::isCachable()) {
-                ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
-            }
+            // /!\ pas de mise en cache directe car le champ created_at est géré par la bdd
 
             return $this->getId();
 
@@ -376,8 +374,10 @@ abstract class ObjectModel
 
             $db->query($sql);
 
+            // /!\ clear du cache mais pas de mise en cache directe car le champ updated_at est géré par la bdd
+
             if (static::isCachable()) {
-                ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
+                ObjectCache::unset($this->getObjectId());
             }
 
             return true;
