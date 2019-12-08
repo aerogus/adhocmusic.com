@@ -36,11 +36,6 @@ class Photo extends Media
     /**
      * @var string
      */
-    protected $_pseudo = '';
-
-    /**
-     * @var string
-     */
     protected $_credits = '';
 
     /**
@@ -93,7 +88,7 @@ class Photo extends Media
      */
     function getPseudo(): string
     {
-        return $this->_pseudo;
+        return Membre::getInstance($this->getIdContact())->getPseudo();
     }
 
     /**
