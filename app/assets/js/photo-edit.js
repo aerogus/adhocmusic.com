@@ -9,8 +9,8 @@ jQuery(document).ready(function ($) {
   });
 
   $('#id_lieu').change(function() {
-    var id_lieu = $('#id_lieu').val();
-    var photo_id_event = $('#id_photo').val();
+    var id_lieu = +$('#id_lieu').val();
+    var photo_id_event = +$('#photo_id_event').val();
     $('#id_event').empty();
     $('<option value="0">---</option>').appendTo('#id_event');
     $.getJSON('/events/get-events-by-lieu.json', {
@@ -19,7 +19,7 @@ jQuery(document).ready(function ($) {
       var selected = '';
       $.each(data, function (event_id, event) {
         if (photo_id_event === event.id) {
-          selected = ' selected="selected"';
+          selected = ' selected';
         } else {
           selected = '';
         }
