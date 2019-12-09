@@ -28,11 +28,11 @@
         <label for="rotation-0" class="inline">∅ Aucune rotation</label>
       </div>
       <div>
-        <input type="radio" class="radio" name="rotation" id="rotation-90cw" value="90">
+        <input type="radio" class="radio" name="rotation" id="rotation-90cw" value="-90">
         <label for="rotation-90cw" class="inline">⤶ Rotation 90° horaire</label>
       </div>
       <div>
-        <input type="radio" class="radio" name="rotation" id="rotation-90acw" value="-90">
+        <input type="radio" class="radio" name="rotation" id="rotation-90acw" value="90">
         <label for="rotation-90acw" class="inline">⤷ Rotation 90° anti-horaire</label>
       </div>
       <div>
