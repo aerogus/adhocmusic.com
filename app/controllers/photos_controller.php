@@ -98,7 +98,7 @@ final class Controller
                 $lieu = Lieu::getInstance($photo->getIdLieu());
                 $smarty->assign('lieu', $lieu);
                 $meta_title .= " - " . $lieu->getName();
-                $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity() . ")";
+                $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity()->getName() . ")";
             }
             if ($photo->getIdContact()) {
                 try {

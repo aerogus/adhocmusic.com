@@ -53,15 +53,15 @@
     </tr>
     <tr>
       <th>Code Postal</th>
-      <td>{$membre->getCp()}</td>
+      <td>{$membre->getCity()->getCp()}</td>
     </tr>
     <tr>
       <th>Ville</th>
-      <td>{$membre->getCity()}</td>
+      <td>{$membre->getCity()->getName()}</td>
     </tr>
     <tr>
       <th>Pays</th>
-      <td>{$membre->getCountry()}</td>
+      <td>{$membre->getCountry()->getName()}</td>
     </tr>
     <tr>
       <th>Téléphone</th>

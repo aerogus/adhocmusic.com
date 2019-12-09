@@ -137,7 +137,7 @@ final class Controller
 
         if ($audio->getIdLieu()) {
             $lieu = Lieu::getInstance($audio->getIdLieu());
-            $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity() . ")";
+            $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity()->getName() . ")";
             $smarty->assign('lieu', $lieu);
         }
 

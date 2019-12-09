@@ -123,7 +123,7 @@ final class Controller
             if ($video->getIdLieu()) {
                 $lieu = Lieu::getInstance($video->getIdLieu());
                 $smarty->assign('lieu', $lieu);
-                $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity() . ")";
+                $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity()->getName() . ")";
             }
             if ($video->getIdContact()) {
                 $membre = Membre::getInstance($video->getIdContact());
