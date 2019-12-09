@@ -574,8 +574,12 @@ class Video extends Media
 
             case self::HOST_ADHOCTUBE:
                 $meta_url = 'https://' . MEDIA_ADHOCTUBE_HOST . '/api/v1/videos/' . $reference;
-                $meta_info = json_decode(file_get_contents($meta_url));
-                return 'https://' . MEDIA_ADHOCTUBE_HOST . $meta_info->thumbnailPath;
+                if ($json = file_get_contents($meta_url)) {
+                    $meta_info = json_decode($json);
+                    return 'https://' . MEDIA_ADHOCTUBE_HOST . $meta_info->thumbnailPath;
+                } else {
+                    return null;
+                }
 
             default:
                 return null;
