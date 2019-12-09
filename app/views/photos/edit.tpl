@@ -24,20 +24,20 @@
     <li>
       <p>Pivoter la photo</p>
       <div>
-        <input type="radio" name="rotation" id="rotation-0" value="0" checked>
-        <label for="rotation-0">∅ Aucune rotation</label>
+        <input type="radio" class="radio" name="rotation" id="rotation-0" value="0" checked>
+        <label for="rotation-0" class="inline">∅ Aucune rotation</label>
       </div>
       <div>
-        <input type="radio" name="rotation" id="rotation-90cw" value="90">
-        <label for="rotation-90cw">⤶ Rotation 90° vers la gauche</label>
+        <input type="radio" class="radio" name="rotation" id="rotation-90cw" value="90">
+        <label for="rotation-90cw" class="inline">⤶ Rotation 90° vers la gauche</label>
       </div>
       <div>
-        <input type="radio" name="rotation" id="rotation-90acw" value="-90">
-        <label for="rotation-90acw">⤷ Rotation 90° vers la droite</label>
+        <input type="radio" class="radio" name="rotation" id="rotation-90acw" value="-90">
+        <label for="rotation-90acw" class="inline">⤷ Rotation 90° vers la droite</label>
       </div>
       <div>
-        <input type="radio" name="rotation" id="rotation-180" value="180">
-        <label for="rotation-180">↶ Rotation 180°</label>
+        <input type="radio" class="radio" name="rotation" id="rotation-180" value="180">
+        <label for="rotation-180" class="inline">↶ Rotation 180°</label>
       </div>
     </li>
     <li>
