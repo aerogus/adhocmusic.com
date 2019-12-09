@@ -22,6 +22,25 @@
       <p style="text-align: center"><img src="{$photo->getThumbUrl(320)}" alt=""></p>
     </li>
     <li>
+      <p>Pivoter la photo</p>
+      <div>
+        <input type="radio" name="rotation" id="rotation-0" value="0" checked>
+        <label for="rotation-0">∅ Aucune rotation</label>
+      </div>
+      <div>
+        <input type="radio" name="rotation" id="rotation-90cw" value="90">
+        <label for="rotation-90cw">⤶ Rotation 90° vers la gauche</label>
+      </div>
+      <div>
+        <input type="radio" name="rotation" id="rotation-90acw" value="-90">
+        <label for="rotation-90acw">⤷ Rotation 90° vers la droite</label>
+      </div>
+      <div>
+        <input type="radio" name="rotation" id="rotation-180" value="180">
+        <label for="rotation-180">↶ Rotation 180°</label>
+      </div>
+    </li>
+    <li>
       <label for="id_contact">Ajouté par</label>
       <span><a href="/membre/{$photo->getIdContact()}">{$photo->getPseudo()|escape}</a> le {$photo->getCreatedAt()|date_format:'%d/%m/%Y %H:%M'}</span>
     </li>

@@ -234,9 +234,11 @@ final class Controller
                                 mkdir(Photo::getBasePath(), 0755, true);
                             }
 
+                            // extrait l'EXIF source et applique une éventuelle rotation
                             Photo::fixOrientation($uploaded_photo_path);
 
                             // le resize HD peut-être long
+                            // l'EXIF n'est pas conservé
                             (new Image($uploaded_photo_path))
                                 ->setType(IMAGETYPE_JPEG)
                                 ->setMaxWidth(2048)
@@ -246,7 +248,9 @@ final class Controller
                             Log::action(Log::ACTION_PHOTO_CREATE, $photo->getIdPhoto());
 
                             // les générations des thumbs à faire en asynchrone
-                            foreach ([80, 320, 680, 1000] as $maxWidth) {
+                            $conf = Conf::getInstance();
+                            $thumb_widths = $conf->get('photo')['thumb_width'];
+                            foreach ($thumb_widths as $maxWidth) {
                                 $photo->genThumb($maxWidth);
                             }
 
@@ -356,10 +360,14 @@ final class Controller
                 'id_event' => Route::params('id_event') ? (int) Route::params('id_event') : null,
                 'id_contact' => (int) Route::params('id_contact'),
                 'online' => (bool) Route::params('online'),
+                'rotation' => (int) Route::params('rotation')
             ];
             $errors = [];
 
             if (self::_validatePhotoForm($data, $errors)) {
+
+                $conf = Conf::getInstance();
+                $thumb_widths = $conf->get('photo')['thumb_width'];
 
                 $photo->setName($data['name'])
                     ->setCredits($data['credits'])
@@ -369,10 +377,12 @@ final class Controller
                     ->setOnline($data['online']);
 
                 if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+
                     if (!is_dir(Photo::getBasePath())) {
                         mkdir(Photo::getBasePath(), 0755, true);
                     }
 
+                    // extrait l'EXIF source et applique une éventuelle rotation
                     Photo::fixOrientation($_FILES['file']['tmp_name']);
 
                     (new Image($_FILES['file']['tmp_name']))
@@ -382,9 +392,20 @@ final class Controller
                         ->setDestFile(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg')
                         ->write();
 
-                    foreach ([80, 320, 680, 1000] as $maxWidth) {
+                    foreach ($thumb_widths as $maxWidth) {
                         $photo->clearThumb($maxWidth);
                         $photo->genThumb($maxWidth);
+                    }
+
+                } else {
+
+                    // applique une rotation forcée et regénère les miniatures
+                    if ($data['rotation']) {
+                        Photo::rotate(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg', $data['rotate']);
+                        foreach ($thumb_widths as $maxWidth) {
+                            $photo->clearThumb($maxWidth);
+                            $photo->genThumb($maxWidth);
+                        }
                     }
 
                 }

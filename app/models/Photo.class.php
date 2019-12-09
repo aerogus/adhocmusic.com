@@ -231,34 +231,57 @@ class Photo extends Media
     }
 
     /**
-     * Répare l'orientation d'un jpeg
+     * Répare l'orientation d'un jpeg en se basant sur les données EXIF
      *
-     * @param string $filename
+     * @param string $filename image source + destination
+     *
+     * @return bool
      */
     static function fixOrientation(string $filename): bool
     {
-        $quality = 90;
-        $info = getimagesize($filename);
-        if ($info['mime'] === 'image/jpeg') {
-            $exif = exif_read_data($filename);
-            if (!empty($exif['Orientation']) && in_array($exif['Orientation'], [2, 3, 4, 5, 6, 7, 8])) {
-                $image = imagecreatefromjpeg($filename);
-                if (in_array($exif['Orientation'], [3, 4])) {
-                    $image = imagerotate($image, 180, 0);
-                }
-                if (in_array($exif['Orientation'], [5, 6])) {
-                    $image = imagerotate($image, -90, 0);
-                }
-                if (in_array($exif['Orientation'], [7, 8])) {
-                    $image = imagerotate($image, 90, 0);
-                }
-                if (in_array($exif['Orientation'], [2, 5, 7, 4])) {
-                    imageflip($image, IMG_FLIP_HORIZONTAL);
-                }
+        if (getimagesize($filename)['mime'] !== 'image/jpeg') {
+            return false;
+        }
+        $exif = exif_read_data($filename);
+        if (!empty($exif['Orientation']) && in_array($exif['Orientation'], [2, 3, 4, 5, 6, 7, 8])) {
+            $image = imagecreatefromjpeg($filename);
+            if (in_array($exif['Orientation'], [3, 4])) {
+                $image = imagerotate($image, 180, 0);
             }
-            imagejpeg($image, $filename, $quality);
+            if (in_array($exif['Orientation'], [5, 6])) {
+                $image = imagerotate($image, -90, 0);
+            }
+            if (in_array($exif['Orientation'], [7, 8])) {
+                $image = imagerotate($image, 90, 0);
+            }
+            if (in_array($exif['Orientation'], [2, 5, 7, 4])) {
+                imageflip($image, IMG_FLIP_HORIZONTAL);
+            }
+            imagejpeg($image, $filename, 100);
             return true;
         }
         return false;
+    }
+
+    /**
+     * Applique une rotation à un .jpeg
+     *
+     * @param string $filename image source + destination
+     * @param int $angle angle
+     *
+     * @return bool
+     */
+    static function rotate(string $filename, int $angle): bool
+    {
+        if (!in_array($angle, [-90, 90, 180])) {
+            return false;
+        }
+        if (getimagesize($filename)['mime'] !== 'image/jpeg') {
+            return false;
+        }
+        $image = imagecreatefromjpeg($filename);
+        $image = imagerotate($image, $angle, 0);
+        imagejpeg($image, $filename, 100);
+        return true;
     }
 }
