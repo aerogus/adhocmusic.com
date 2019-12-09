@@ -64,6 +64,7 @@
   </ul>
   <input id="form-video-edit-submit" name="form-video-edit-submit" type="submit" class="button" value="Enregistrer">
   <input type="hidden" name="id" value="{$video->getIdVideo()|escape}">
+  <input type="hidden" name="video_id_event" id="video_id_event" value="{$video->getIdEvent()|escape}">
 </form>
 
 <p align="center"><a href="/videos/delete/{$video->getIdVideo()|escape}" class="button">Supprimer</a></p>

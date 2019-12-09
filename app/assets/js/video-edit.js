@@ -1,4 +1,4 @@
-/*global jQuery*/
+/*globals jQuery*/
 
 jQuery(document).ready(function ($) {
 
@@ -10,9 +10,7 @@ jQuery(document).ready(function ($) {
 
   $('#id_lieu').change(function () {
     var id_lieu = $('#id_lieu').val();
-    // doit être initialisé dans le script
-    var video_id_event = null;
-    //var video_id_event = {$video->getIdEvent()};
+    var video_id_event = +$('#video_id_event').val();
     $('#id_event').empty();
     $('<option value="0">---</option>').appendTo('#id_event');
     $.getJSON('/events/get-events-by-lieu.json', {

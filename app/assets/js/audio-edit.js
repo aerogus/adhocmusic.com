@@ -10,8 +10,7 @@ jQuery(document).ready(function ($) {
 
   $('#id_lieu').change(function () {
     var id_lieu = $('#id_lieu').val();
-    //var audio_id_event = {$audio->getIdEvent()};
-    var audio_id_event = 0;
+    var audio_id_event = +$('#audio_id_event').val();
     $('#id_event').empty();
     $('<option value="0">---</option>').appendTo('#id_event');
     $.getJSON('/events/get-events-by-lieu.json', {
