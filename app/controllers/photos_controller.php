@@ -401,7 +401,7 @@ final class Controller
 
                     // applique une rotation forcée et regénère les miniatures
                     if ($data['rotation']) {
-                        Photo::rotate(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg', $data['rotate']);
+                        Photo::rotate(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg', $data['rotation']);
                         foreach ($thumb_widths as $maxWidth) {
                             $photo->clearThumb($maxWidth);
                             $photo->genThumb($maxWidth);
