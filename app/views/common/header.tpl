@@ -29,7 +29,8 @@
 {/if}
 
 {if !empty($og_video)}
-<meta property="og:video" content="{$og_video.url}">
+<meta property="og:video:url" content="{$og_video.url}">
+<meta property="og:video:secure_url" content="{$og_video.secure_url}">
 <meta property="og:video:height" content="{$og_video.height}">
 <meta property="og:video:width" content="{$og_video.width}">
 <meta property="og:video:type" content="{$og_video.type}">
