@@ -270,8 +270,8 @@ final class Controller
                     $video->storeThumbnail($vignette);
                 }
 
-                $conf = Conf::getInstance();
-                foreach ($conf['video']['thumb_width'] as $maxWidth) {
+                $confVideo = Conf::getInstance()->get('video');
+                foreach ($confVideo['thumb_width'] as $maxWidth) {
                     $video->clearThumb($maxWidth);
                     $video->genThumb($maxWidth);
                 }
@@ -394,8 +394,8 @@ final class Controller
                 // Permet le reset de la vignette
                 if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
                     $video->storeThumbnail($vignette);
-                    $conf = Conf::getInstance();
-                    foreach ($conf['video']['thumb_width'] as $maxWidth) {
+                    $confVideo = Conf::getInstance()->get('video');
+                    foreach ($confVideo['thumb_width'] as $maxWidth) {
                         $video->clearThumb($maxWidth);
                         $video->genThumb($maxWidth);
                     }
