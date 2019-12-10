@@ -45,6 +45,7 @@ define('MEDIA_DAILYMOTION_EMBED_PATTERN',
  * 6 - Facebook
  */
 define('MEDIA_FACEBOOK_URL_PATTERN', '~^https://www\.facebook\.com/watch/\?v=([0-9]{1,16})~');
+define('MEDIA_FACEBOOK_URL_PATTERN2', '~^https://www\.facebook\.com/[a-zA-Z0-9]{1,32}/videos/([0-9]{1,16})/?$~');
 define('MEDIA_FACEBOOK_DIRECT_VIDEO_URL_PATTERN', '');
 
 /**
@@ -342,19 +343,41 @@ class Video extends Media
     {
         switch ($this->getIdHost()) {
             case self::HOST_YOUTUBE:
-                return '<iframe src="https://www.youtube.com/embed/' . $this->getReference() . '?rel=0" allowfullscreen></iframe>' . "\n";
-
             case self::HOST_DAILYMOTION:
-                return '<iframe src="https://www.dailymotion.com/embed/video/' . $this->getReference() . '?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&wmode=transparent" allowfullscreen></iframe>' . "\n";
-
             case self::HOST_FACEBOOK:
-                return '<iframe src="https://www.facebook.com/video/embed?video_id=' . $this->getReference() . '" allowfullscreen></iframe>' . "\n";
-
             case self::HOST_VIMEO:
-                return '<iframe src="https://player.vimeo.com/video/' . $this->getReference() . '?title=0&amp;byline=0&amp;portrait=0" allowfullscreen></iframe>' . "\n";
+                return '<iframe src="' . $this->getEmbedUrl() . '" allowfullscreen></iframe>' . "\n";
 
             case self::HOST_ADHOCTUBE:
-                return '<iframe src="https://' . MEDIA_ADHOCTUBE_HOST . '/videos/embed/' . $this->getReference() . '?title=0&amp;warningTitle=0" sandbox="allow-same-origin allow-scripts" allowfullscreen></iframe>' . "\n";
+                return '<iframe src="' . $this->getEmbedUrl() . '" allowfullscreen sandbox="allow-same-origin allow-scripts"></iframe>' . "\n";
+
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Retourne l'url de l'iframe embed
+     *
+     * @return string|null
+     */
+    function getEmbedUrl(): ?string
+    {
+        switch ($this->getIdHost()) {
+            case self::HOST_YOUTUBE:
+                return "https://www.youtube.com/embed/" . $this->getReference() . "?rel=0";
+
+            case self::HOST_DAILYMOTION:
+                return "https://www.dailymotion.com/embed/video/" . $this->getReference() . "?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&wmode=transparent";
+
+            case self::HOST_FACEBOOK:
+                return "https://www.facebook.com/video/embed?video_id=" . $this->getReference();
+
+            case self::HOST_VIMEO:
+                return "https://player.vimeo.com/video/" . $this->getReference() . "?title=0&amp;byline=0&amp;portrait=0";
+
+            case self::HOST_ADHOCTUBE:
+                return "https://" . MEDIA_ADHOCTUBE_HOST . "/videos/embed/" . $this->getReference() . "?title=0&amp;warningTitle=0";
 
             default:
                 return null;
@@ -424,6 +447,13 @@ class Video extends Media
 
         // Facebook
         if (preg_match(MEDIA_FACEBOOK_URL_PATTERN, $str, $matches)) {
+            if (!empty($matches[1])) {
+                return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
+            }
+        }
+
+        // Facebook
+        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN2, $str, $matches)) {
             if (!empty($matches[1])) {
                 return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
             }
