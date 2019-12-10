@@ -4,9 +4,13 @@
 require_once __DIR__ . '/../bootstrap.php';
 
 // vérifie si les vidéos distances sont tjrs valides / publiques
+// Facebook renvoie un 302 vers unsupported browser...
 
 $videos = Video::findAll();
 
 foreach ($videos as $video) {
-    echo "Video " . $video->getId() . ": " . $video->getEmbedUrl() . "\n";
+    $hdrs = get_headers($video->getEmbedUrl());
+    echo "Video " . $video->getId() . ": " . $hdrs[0] . " " . $video->getEmbedUrl() . "\n";
+    usleep(250000);
+}
 }
