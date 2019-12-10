@@ -100,12 +100,13 @@ final class Controller
             $smarty->assign('og_type', 'video.movie');
 
             // @see https://developers.facebook.com/docs/sharing/webmasters?locale=fr_FR
+            // mais la preview live ne marche pas/plus sur FB...
             $og_video = [
                 'url' => $video->getDirectMp4Url(),
                 'secure_url' => $video->getDirectMp4Url(),
                 'type' => 'video/mp4',
-                'width' => $video->getWidth(),
-                'height' => $video->getHeight(),
+                'width' => 1280, // fake
+                'height' => 720, // fake
             ];
             $smarty->assign('og_video', $og_video);
 
@@ -269,7 +270,8 @@ final class Controller
                     $video->storeThumbnail($vignette);
                 }
 
-                foreach ([80, 320] as $maxWidth) {
+                $conf = Conf::getInstance();
+                foreach ($conf['video']['thumb_width'] as $maxWidth) {
                     $video->clearThumb($maxWidth);
                     $video->genThumb($maxWidth);
                 }
@@ -392,7 +394,8 @@ final class Controller
                 // Permet le reset de la vignette
                 if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
                     $video->storeThumbnail($vignette);
-                    foreach ([80, 320] as $maxWidth) {
+                    $conf = Conf::getInstance();
+                    foreach ($conf['video']['thumb_width'] as $maxWidth) {
                         $video->clearThumb($maxWidth);
                         $video->genThumb($maxWidth);
                     }

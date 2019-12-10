@@ -136,7 +136,8 @@ class Photo extends Media
     function delete(): bool
     {
         if (parent::delete()) {
-            foreach ([80, 320, 680, 100] as $maxWidth) {
+            $conf = Conf::getInstance();
+            foreach ($conf['photo']['thumb_width'] as $maxWidth) {
                 $this->clearThumb($maxWidth);
             }
 
@@ -162,11 +163,19 @@ class Photo extends Media
     }
 
     /**
+     * Retourne l'url d'une miniature de photo (sans vérifier l'existence du fichier)
+     *
+     * @param int  $maxWidth     largeur maxi
+     * @param bool $genIfMissing force la génération de la miniature si manquante
+     *
      * @return string|null
      */
-    function getThumbUrl(int $maxWidth = 0): ?string
+    function getThumbUrl(int $maxWidth = 0, bool $genIfMissing = false): ?string
     {
         $sourcePath = self::getBasePath() . '/' . $this->getIdPhoto() . '.jpg';
+        if (!file_exists($sourcePath)) {
+            return null;
+        }
 
         if (!$maxWidth) {
             return self::getBaseUrl() . '/' . $this->getIdPhoto() . '.jpg';
@@ -174,7 +183,11 @@ class Photo extends Media
             $uid = 'photo/' . $this->getIdPhoto() . '/' . $maxWidth;
             $cachePath = Image::getCachePath($uid);
             if (!file_exists($cachePath)) {
-                // @TODO ajouter à une file de calcul
+                if ($genIfMissing) {
+                    $this->genThumb($maxWidth);
+                } else {
+                    // @TODO ajouter à une file de calcul
+                }
             }
             return Image::getCacheUrl($uid);
         }

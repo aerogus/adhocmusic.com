@@ -653,7 +653,8 @@ class Event extends ObjectModel
         }
 
         // delete des caches images
-        foreach ([100, 320, 400] as $maxWidth) {
+        $conf = Conf::getInstance();
+        foreach ($conf['event']['thumb_width'] as $maxWidth) {
             $this->clearThumb($maxWidth);
         }
 
@@ -661,11 +662,19 @@ class Event extends ObjectModel
     }
 
     /**
+     * Retourne l'url d'une miniature d'event (sans vérifier l'existence du fichier)
+     *
+     * @param int  $maxWidth     largeur maxi
+     * @param bool $genIfMissing force la génération de la miniature si manquante
+     *
      * @return string|null
      */
-    function getThumbUrl(int $maxWidth = 0): ?string
+    function getThumbUrl(int $maxWidth = 0, bool $genIfMissing = false): ?string
     {
         $sourcePath = self::getBasePath() . '/' . $this->getIdEvent() . '.jpg';
+        if (!file_exists($sourcePath)) {
+            return null;
+        }
 
         if (!$maxWidth) {
             return self::getBaseUrl() . '/' . $this->getIdEvent() . '.jpg';
@@ -673,7 +682,11 @@ class Event extends ObjectModel
             $uid = 'event/' . $this->getIdEvent() . '/' . $maxWidth;
             $cachePath = Image::getCachePath($uid);
             if (!file_exists($cachePath)) {
-                // @TODO ajouter à une file de calcul
+                if ($genIfMissing) {
+                    $this->genThumb($maxWidth);
+                } else {
+                    // @TODO ajouter à une file de calcul
+                }
             }
             return Image::getCacheUrl($uid);
         }

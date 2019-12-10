@@ -495,8 +495,6 @@ CREATE TABLE IF NOT EXISTS `adhoc_video` (
   `id_structure` int(10) UNSIGNED DEFAULT NULL,
   `name` varchar(250) NOT NULL,
   `text` mediumtext NOT NULL,
-  `width` smallint(5) UNSIGNED NOT NULL DEFAULT '0',
-  `height` smallint(5) UNSIGNED NOT NULL DEFAULT '0',
   `online` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,

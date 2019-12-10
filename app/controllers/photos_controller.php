@@ -239,10 +239,11 @@ final class Controller
 
                             // le resize HD peut-être long
                             // l'EXIF n'est pas conservé
+                            $confPhoto = Conf::getInstance()->get('photo');
                             (new Image($uploaded_photo_path))
                                 ->setType(IMAGETYPE_JPEG)
-                                ->setMaxWidth(2048)
-                                ->setMaxHeight(2048)
+                                ->setMaxWidth($confPhoto['max_width'])
+                                ->setMaxHeight($confPhoto['max_height'])
                                 ->setDestFile(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg')
                                 ->write();
                             Log::action(Log::ACTION_PHOTO_CREATE, $photo->getIdPhoto());
@@ -385,10 +386,11 @@ final class Controller
                     // extrait l'EXIF source et applique une éventuelle rotation
                     Photo::fixOrientation($_FILES['file']['tmp_name']);
 
+                    $confPhoto = Conf::getInstance()->get('photo');
                     (new Image($_FILES['file']['tmp_name']))
                         ->setType(IMAGETYPE_JPEG)
-                        ->setMaxWidth(2048)
-                        ->setMaxHeight(2048)
+                        ->setMaxWidth($confPhoto['max_width'])
+                        ->setMaxHeight($confPhoto['max_height'])
                         ->setDestFile(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg')
                         ->write();
 

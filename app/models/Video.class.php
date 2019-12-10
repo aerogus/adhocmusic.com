@@ -104,12 +104,6 @@ class Video extends Media
     ];
 
     /**
-     * Dimensions du player
-     */
-    const DEFAULT_WIDTH  = 1000;
-    const DEFAULT_HEIGHT = 562;
-
-    /**
      * @var int
      */
     protected $_id_video = 0;
@@ -123,16 +117,6 @@ class Video extends Media
      * @var string
      */
     protected $_reference = '';
-
-    /**
-     * @var int
-     */
-    protected $_width = 0;
-
-    /**
-     * @var int
-     */
-    protected $_height = 0;
 
     /**
      * Liste des attributs de l'objet
@@ -152,8 +136,6 @@ class Video extends Media
         'created_at'   => 'date',
         'modified_at'  => 'date',
         'online'       => 'bool',
-        'width'        => 'int',
-        'height'       => 'int',
     ];
 
     /* début getters */
@@ -209,32 +191,6 @@ class Video extends Media
     }
 
     /**
-     * Retourne la largeur de la vidéo
-     *
-     * @return int
-     */
-    function getWidth(): int
-    {
-        if ($this->_width) {
-            return $this->_width;
-        }
-        return self::DEFAULT_WIDTH;
-    }
-
-    /**
-     * Retourne la hauteur de la vidéo
-     *
-     * @return int
-     */
-    function getHeight(): int
-    {
-        if ($this->_height) {
-            return $this->_height;
-        }
-        return self::DEFAULT_HEIGHT;
-    }
-
-    /**
      * Retourne l'url de la page de la vidéo
      *
      * @return string
@@ -287,13 +243,14 @@ class Video extends Media
     }
 
     /**
-     * Retourne l'url d'une minuature de photo (sans vérifier son existence)
+     * Retourne l'url d'une miniature de vidéo (sans vérifier l'existence du fichier)
      *
-     * @param int $maxWidth maxWidth
+     * @param int  $maxWidth     largeur maxi
+     * @param bool $genIfMissing force la génération de la miniature si manquante
      *
      * @return string|null
      */
-    function getThumbUrl(int $maxWidth = 0): ?string
+    function getThumbUrl(int $maxWidth = 0, bool $genIfMissing = false): ?string
     {
         $sourcePath = self::getBasePath() . '/' . $this->getIdVideo() . '.jpg';
         if (!file_exists($sourcePath)) {
@@ -306,7 +263,11 @@ class Video extends Media
             $uid = 'video/' . $this->getIdVideo() . '/' . $maxWidth;
             $cachePath = Image::getCachePath($uid);
             if (!file_exists($cachePath)) {
-                // @TODO ajouter à une file de calcul
+                if ($genIfMissing) {
+                    $this->genThumb($maxWidth);
+                } else {
+                    // @TODO ajouter à une file de calcul
+                }
             }
             return Image::getCacheUrl($uid);
         }
@@ -348,36 +309,6 @@ class Video extends Media
         return $this;
     }
 
-    /**
-     * @param int $width width
-     * 
-     * @return object
-     */
-    function setWidth(int $width): object
-    {
-        if ($this->_width !== $width) {
-            $this->_width = $width;
-            $this->_modified_fields['width'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param int $height height
-     *
-     * @return object
-     */
-    function setHeight(int $height): object
-    {
-        if ($this->_height !== $height) {
-            $this->_height = $height;
-            $this->_modified_fields['height'] = true;
-        }
-
-        return $this;
-    }
-
     /* fin setters */
 
     /**
@@ -390,7 +321,8 @@ class Video extends Media
     {
         if (parent::delete()) {
             $this->deleteThumbnail();
-            foreach ([80, 320] as $maxWidth) {
+            $conf = Conf::getInstance();
+            foreach ($conf['video']['thumb_width'] as $maxWidth) {
                 $this->clearThumb($maxWidth);
             }
             return true;
@@ -576,7 +508,8 @@ class Video extends Media
                 $meta_url = 'https://' . MEDIA_ADHOCTUBE_HOST . '/api/v1/videos/' . $reference;
                 if ($json = file_get_contents($meta_url)) {
                     $meta_info = json_decode($json);
-                    return 'https://' . MEDIA_ADHOCTUBE_HOST . $meta_info->thumbnailPath;
+                    return 'https://' . MEDIA_ADHOCTUBE_HOST . $meta_info->previewPath; // 560x315
+                    //return 'https://' . MEDIA_ADHOCTUBE_HOST . $meta_info->thumbnailPath; // 200x110
                 } else {
                     return null;
                 }
@@ -616,8 +549,12 @@ class Video extends Media
                 return $title;
 
             case self::HOST_DAILYMOTION:
+                // @TODO à étudier/implémenter
+                return null;
+
             case self::HOST_FACEBOOK:
                 // @TODO à implémenter
+                // difficile car par de balise <title> à parser
                 return null;
 
             default:
@@ -652,10 +589,11 @@ class Video extends Media
         $tmp = self::getBasePath() . '/' . $this->_id_video . '.jpg.tmp';
         $jpg = self::getBasePath() . '/' . $this->_id_video . '.jpg';
 
+        $confVideo = Conf::getInstance()->get('video');
         file_put_contents($tmp, file_get_contents($remote_url));
         (new Image($tmp))
             ->setType(IMAGETYPE_JPEG)
-            ->setMaxWidth(320)
+            ->setMaxWidth($confVideo['max_width'])
             ->setDestFile($jpg)
             ->write();
         unlink($tmp);
@@ -684,7 +622,7 @@ class Video extends Media
     }
 
     /**
-     * Génère la miniature d'une vidéo
+     * Génère la miniature d'une vidéo (écrase la précédente)
      *
      * @param int $maxWidth maxWidth
      *
