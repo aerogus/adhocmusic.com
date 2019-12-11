@@ -50,6 +50,12 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/masonry-4.2.2.min.js');
+        $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
+        $smarty->enqueue_script('/js/baguetteBox-1.11.0.min.js');
+
+        $smarty->enqueue_script('/js/videos/my.js');
+
         // pagination
         $smarty->assign('nb_items', $nb_videos);
         $smarty->assign('nb_items_per_page', NB_VIDEOS_PER_PAGE);
@@ -78,7 +84,7 @@ final class Controller
         $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
         $smarty->enqueue_script('/js/baguetteBox-1.11.0.min.js');
 
-        $smarty->enqueue_script('/js/video-show.js');
+        $smarty->enqueue_script('/js/videos/show.js');
 
         try {
             $video = Video::getInstance($id);
@@ -229,7 +235,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/video-create.js');
+        $smarty->enqueue_script('/js/videos/create.js');
 
         if (Tools::isSubmit('form-video-create')) {
             $data = [
@@ -356,7 +362,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/video-edit.js');
+        $smarty->enqueue_script('/js/videos/edit.js');
 
         try {
             $video = Video::getInstance($id);

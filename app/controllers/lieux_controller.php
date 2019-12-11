@@ -18,7 +18,7 @@ final class Controller
     {
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/lieux-index.js');
+        $smarty->enqueue_script('/js/lieux/index.js');
 
         Trail::getInstance()
             ->addStep('Lieux', '/lieux');
@@ -130,7 +130,7 @@ final class Controller
                 'name' => $lieu->getName()
             ]
         );
-        $smarty->enqueue_script('/js/lieux-show.js');
+        $smarty->enqueue_script('/js/lieux/show.js');
         $smarty->enqueue_script('https://maps.googleapis.com/maps/api/js?key=' . GOOGLE_MAPS_API_KEY . '&callback=adhocLieuInitMap');
 
         if (!$lieu->getLat() && !$lieu->getLng()) {
@@ -234,7 +234,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         $smarty->enqueue_script('/js/geopicker.js');
-        $smarty->enqueue_script('/js/lieux-create.js');
+        $smarty->enqueue_script('/js/lieux/create.js');
 
         if (Tools::isSubmit('form-lieu-create')) {
 
@@ -331,7 +331,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         $smarty->enqueue_script('/js/geopicker.js');
-        $smarty->enqueue_script('/js/lieux-edit.js');
+        $smarty->enqueue_script('/js/lieux/edit.js');
 
         try {
             $lieu = Lieu::getInstance($id);

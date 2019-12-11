@@ -49,6 +49,12 @@ jQuery(document).ready(function ($) {
     } else {
       $('#code').prev('.error').fadeOut();
     }
+    if($('#id_groupe').val() === '0' && $('#id_lieu').val() === '0' && $('#id_event').val() === '0') {
+      $('#id_groupe').parent().find('.error').fadeIn();
+      valid = false;
+    } else {
+      $('#id_groupe').parent().find('.error').fadeOut();
+    }
     return valid;
   });
 

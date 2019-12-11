@@ -11,7 +11,7 @@ final class Controller
     {
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/events.js');
+        $smarty->enqueue_script('/js/events/index.js');
 
         Trail::getInstance()
             ->addStep('Agenda');
@@ -109,7 +109,7 @@ final class Controller
         $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
         $smarty->enqueue_script('/js/baguetteBox-1.11.0.min.js');
 
-        $smarty->enqueue_script('/js/events-show.js');
+        $smarty->enqueue_script('/js/events/show.js');
 
         $trail = Trail::getInstance()
             ->addStep('Agenda', '/events');
@@ -200,7 +200,7 @@ final class Controller
         $smarty->enqueue_script('/js/jquery-ui.min.js');
         $smarty->enqueue_script('/js/jquery-ui-datepicker-fr.js');
         $smarty->enqueue_script('/js/geopicker.js');
-        $smarty->enqueue_script('/js/events-create.js');
+        $smarty->enqueue_script('/js/events/create.js');
 
         Trail::getInstance()
             ->addStep("Agenda", "/events")
@@ -456,7 +456,7 @@ final class Controller
         $smarty->enqueue_script('/js/jquery-ui.min.js');
         $smarty->enqueue_script('/js/jquery-ui-datepicker-fr.js');
         $smarty->enqueue_script('/js/geopicker.js');
-        $smarty->enqueue_script('/js/events-edit.js');
+        $smarty->enqueue_script('/js/events/edit.js');
 
         try {
             $event = Event::getInstance($id);

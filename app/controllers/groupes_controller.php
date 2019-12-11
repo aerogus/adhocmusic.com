@@ -76,7 +76,7 @@ final class Controller
         $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
         $smarty->enqueue_script('/js/baguetteBox-1.11.0.min.js');
 
-        $smarty->enqueue_script('/js/groupe-show.js');
+        $smarty->enqueue_script('/js/groupes/show.js');
 
         try {
             $groupe = Groupe::getInstance($id);
@@ -198,7 +198,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/groupe-create.js');
+        $smarty->enqueue_script('/js/groupes/create.js');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -319,7 +319,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/groupe-edit.js');
+        $smarty->enqueue_script('/js/groupes/edit.js');
 
         try {
             $groupe = Groupe::getInstance($id);

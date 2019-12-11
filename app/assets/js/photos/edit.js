@@ -4,13 +4,13 @@ jQuery(document).ready(function ($) {
 
   'use strict';
 
-  $('#id_lieu').keypress(function () {
+  $('#id_lieu').keypress(function() {
     $('#id_lieu').trigger('change');
   });
 
-  $('#id_lieu').change(function () {
-    var id_lieu = $('#id_lieu').val();
-    var video_id_event = +$('#video_id_event').val();
+  $('#id_lieu').change(function() {
+    var id_lieu = +$('#id_lieu').val();
+    var photo_id_event = +$('#photo_id_event').val();
     $('#id_event').empty();
     $('<option value="0">---</option>').appendTo('#id_event');
     $.getJSON('/events/get-events-by-lieu.json', {
@@ -18,8 +18,8 @@ jQuery(document).ready(function ($) {
     }, function (data) {
       var selected = '';
       $.each(data, function (event_id, event) {
-        if (video_id_event === event.id) {
-          selected = ' selected="selected"';
+        if (photo_id_event === event.id) {
+          selected = ' selected';
         } else {
           selected = '';
         }
@@ -28,13 +28,25 @@ jQuery(document).ready(function ($) {
     });
   });
 
-  $('#form-video-edit').submit(function () {
+  $('#form-photo-edit').submit(function () {
     var valid = true;
-    if ($('#name').val().length === 0) {
+    if($('#name').val().length === 0) {
       $('#name').prev('.error').fadeIn();
       valid = false;
     } else {
       $('#name').prev('.error').fadeOut();
+    }
+    if($('#credits').val().length === 0) {
+      $('#credits').prev('.error').fadeIn();
+      valid = false;
+    } else {
+      $('#credits').prev('.error').fadeOut();
+    }
+    if($('#id_groupe').val() === '0' && $('#id_lieu').val() === '0' && $('#id_event').val() === '0') {
+      $('#id_groupe').parent().find('.error').fadeIn();
+      valid = false;
+    } else {
+      $('#id_groupe').parent().find('.error').fadeOut();
     }
     return valid;
   });
