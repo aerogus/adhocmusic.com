@@ -90,7 +90,7 @@ class Route
     }
 
     /**
-     * @param array $params parmètres
+     * @param array $params paramètres
      */
     static function find_route(array $params)
     {
@@ -100,6 +100,19 @@ class Route
         $matches = [];
         $path = str_replace('?', '', $path);
         $path = str_replace($_SERVER['QUERY_STRING'], '', $path);
+
+        // si le path se termine par "/", retirer le dernier "/", reformer le path complet avec query string
+        // retourner un http 302 direct
+        if ((preg_match('/^(.+)\/$/', $path, $matches)) > 0) {
+            $url = HOME_URL . $matches[1];
+            if (!empty($_SERVER['QUERY_STRING'])) {
+                $url .= '?' . $_SERVER['QUERY_STRING'];
+            }
+            header('HTTP/1.0 302 Found');
+            header('Location: ' . $url);
+            die();
+        }
+
         // recherche extension de fichier dans url
         if ((preg_match('/^(.+)[.]([a-z0-9-]+)$/i', $path, $matches)) > 0) {
             $path = $matches[1];
@@ -263,9 +276,6 @@ class Route
                     return true;
                 case 'html':
                     self::_output('text/html', $ret);
-                    return true;
-                case 'xhtml':
-                    self::_output('application/xhtml+xml', $ret);
                     return true;
                 default:
                     return false;
