@@ -612,7 +612,7 @@ class Video extends Media
                 $meta_url = 'https://www.youtube.com/watch?v=' . $reference;
                 $html = file_get_contents($meta_url);
                 $doc = new DOMDocument();
-                $doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+                @$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
                 $title = str_replace(' - YouTube', '', $doc->getElementsByTagName('title')[0]->nodeValue);
                 return $title;
 
