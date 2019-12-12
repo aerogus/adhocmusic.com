@@ -439,7 +439,6 @@ CREATE TABLE IF NOT EXISTS `adhoc_audio` (
   `id_groupe` int(10) UNSIGNED DEFAULT NULL,
   `id_lieu` int(10) UNSIGNED DEFAULT NULL,
   `id_event` int(10) UNSIGNED DEFAULT NULL,
-  `id_structure` int(10) UNSIGNED DEFAULT NULL,
   `name` varchar(250) NOT NULL,
   `online` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -449,13 +448,11 @@ CREATE TABLE IF NOT EXISTS `adhoc_audio` (
   KEY `id_groupe` (`id_groupe`),
   KEY `id_lieu` (`id_lieu`),
   KEY `id_event` (`id_event`),
-  KEY `id_structure` (`id_structure`),
   KEY `online` (`online`),
   CONSTRAINT `fk_audio_membre` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`),
-  CONSTRAINT `fk_audio_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`),
   CONSTRAINT `fk_audio_groupe` FOREIGN KEY (`id_groupe`) REFERENCES `adhoc_groupe` (`id_groupe`),
   CONSTRAINT `fk_audio_lieu` FOREIGN KEY (`id_lieu`) REFERENCES `adhoc_lieu` (`id_lieu`),
-  CONSTRAINT `fk_audio_structure` FOREIGN KEY (`id_structure`) REFERENCES `adhoc_structure` (`id_structure`)
+  CONSTRAINT `fk_audio_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`)
 );
 
 CREATE TABLE IF NOT EXISTS `adhoc_photo` (
@@ -464,7 +461,6 @@ CREATE TABLE IF NOT EXISTS `adhoc_photo` (
   `id_groupe` int(10) UNSIGNED DEFAULT NULL,
   `id_lieu` int(10) UNSIGNED DEFAULT NULL,
   `id_event` int(10) UNSIGNED DEFAULT NULL,
-  `id_structure` int(10) UNSIGNED DEFAULT NULL,
   `name` varchar(250) NOT NULL,
   `credits` varchar(200) NOT NULL DEFAULT '',
   `online` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
@@ -475,24 +471,22 @@ CREATE TABLE IF NOT EXISTS `adhoc_photo` (
   KEY `id_groupe` (`id_groupe`),
   KEY `id_lieu` (`id_lieu`),
   KEY `id_event` (`id_event`),
-  KEY `id_structure` (`id_structure`),
   KEY `online` (`online`),
   CONSTRAINT `fk_photo_membre` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`),
   CONSTRAINT `fk_photo_groupe` FOREIGN KEY (`id_groupe`) REFERENCES `adhoc_groupe` (`id_groupe`),
   CONSTRAINT `fk_photo_lieu` FOREIGN KEY (`id_lieu`) REFERENCES `adhoc_lieu` (`id_lieu`),
-  CONSTRAINT `fk_photo_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`),
-  CONSTRAINT `fk_photo_structure` FOREIGN KEY (`id_structure`) REFERENCES `adhoc_structure` (`id_structure`)
+  CONSTRAINT `fk_photo_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`)
 );
 
 CREATE TABLE IF NOT EXISTS `adhoc_video` (
   `id_video` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_contact` int(10) UNSIGNED NOT NULL,
   `id_host` tinyint(4) UNSIGNED NOT NULL,
   `reference` varchar(50) NOT NULL,
+  `ratio` float UNSIGNED NOT NULL DEFAULT '1.778',
+  `id_contact` int(10) UNSIGNED NOT NULL,
   `id_groupe` int(10) UNSIGNED DEFAULT NULL,
   `id_lieu` int(10) UNSIGNED DEFAULT NULL,
   `id_event` int(10) UNSIGNED DEFAULT NULL,
-  `id_structure` int(10) UNSIGNED DEFAULT NULL,
   `name` varchar(250) NOT NULL,
   `text` mediumtext NOT NULL,
   `online` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
@@ -503,13 +497,11 @@ CREATE TABLE IF NOT EXISTS `adhoc_video` (
   KEY `id_groupe` (`id_groupe`),
   KEY `id_lieu` (`id_lieu`),
   KEY `id_event` (`id_event`),
-  KEY `id_structure` (`id_structure`),
   KEY `online` (`online`),
   CONSTRAINT `fk_video_membre` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`),
   CONSTRAINT `fk_video_groupe` FOREIGN KEY (`id_groupe`) REFERENCES `adhoc_groupe` (`id_groupe`),
   CONSTRAINT `fk_video_lieu` FOREIGN KEY (`id_lieu`) REFERENCES `adhoc_lieu` (`id_lieu`),
-  CONSTRAINT `fk_video_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`),
-  CONSTRAINT `fk_video_structure` FOREIGN KEY (`id_structure`) REFERENCES `adhoc_structure` (`id_structure`)
+  CONSTRAINT `fk_video_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`)
 );
 
 CREATE TABLE IF NOT EXISTS `adhoc_appartient_a` (

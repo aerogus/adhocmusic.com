@@ -44,7 +44,6 @@ class Audio extends Media
         'id_groupe'    => 'int',
         'id_lieu'      => 'int',
         'id_event'     => 'int',
-        'id_structure' => 'int',
         'name'         => 'string',
         'created_at'   => 'date',
         'modified_at'  => 'date',

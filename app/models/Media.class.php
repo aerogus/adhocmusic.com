@@ -37,11 +37,6 @@ class Media extends ObjectModel
     protected $_id_event = null;
 
     /**
-     * @var int|null
-     */
-    protected $_id_structure = null;
-
-    /**
      * @var string
      */
     protected $_name = '';
@@ -133,29 +128,6 @@ class Media extends ObjectModel
         if (!is_null($this->getIdEvent())) {
             try {
                 return Event::getInstance($this->getIdEvent());
-            } catch (Exception $e) {
-                return null;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * @return int|null
-     */
-    function getIdStructure(): ?int
-    {
-        return $this->_id_structure;
-    }
-
-    /**
-     * @return object|null
-     */
-    function getStructure(): ?object
-    {
-        if (!is_null($this->getIdStructure())) {
-            try {
-                return Structure::getInstance($this->getIdStructure());
             } catch (Exception $e) {
                 return null;
             }
@@ -288,21 +260,6 @@ class Media extends ObjectModel
     }
 
     /**
-     * @param int|null $id_structure id_structure
-     *
-     * @return object
-     */
-    function setIdStructure(?int $id_structure): object
-    {
-        if ($this->_id_structure !== $id_structure) {
-            $this->_id_structure = $id_structure;
-            $this->_modified_fields['id_structure'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
      * @param string $name name
      *
      * @return object
@@ -404,7 +361,6 @@ class Media extends ObjectModel
      *                      'id_groupe' => int,
      *                      'id_event' => int,
      *                      'id_lieu' => int,
-     *                      'id_structure' => int,
      *                      'online' => bool,
      *                      'order_by' => string,
      *                      'sort' => string,
@@ -445,10 +401,6 @@ class Media extends ObjectModel
             $sql .= "AND `id_lieu` = " . (int) $params['id_lieu'] . " ";
         }
 
-        if (isset($params['id_structure'])) {
-            $sql .= "AND `id_structure` = " . (int) $params['id_structure'] . " ";
-        }
-
         if (isset($params['online'])) {
             $sql .= "AND `online` = ";
             $sql .= $params['online'] ? "TRUE" : "FALSE";
@@ -487,7 +439,6 @@ class Media extends ObjectModel
      * Recherche des média en fonction de critères donnés
      *
      * @param array ['groupe']    => "5"
-     *              ['structure'] => "1,3"
      *              ['lieu']      => "1"
      *              ['event']     => "1"
      *              ['type']      => "photo,audio,video"

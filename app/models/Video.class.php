@@ -129,10 +129,10 @@ class Video extends Media
         'id_contact'   => 'int',
         'id_host'      => 'int',
         'reference'    => 'string',
+        'ratio'        => 'float',
         'id_groupe'    => 'int',
         'id_lieu'      => 'int',
         'id_event'     => 'int',
-        'id_structure' => 'int',
         'name'         => 'string',
         'created_at'   => 'date',
         'modified_at'  => 'date',
@@ -189,6 +189,14 @@ class Video extends Media
     function getReference(): string
     {
         return $this->_reference;
+    }
+
+    /**
+     * @return float
+     */
+    function getRatio(): float
+    {
+        return $this->_ratio;
     }
 
     /**
@@ -310,6 +318,21 @@ class Video extends Media
         return $this;
     }
 
+    /**
+     * @param float $ratio ratio
+     *
+     * @return object
+     */
+    function setRatio(float $ratio): object
+    {
+        if ($this->_ratio !== $ratio) {
+            $this->_ratio = $ratio;
+            $this->_modified_fields['ratio'] = true;
+        }
+
+        return $this;
+    }
+
     /* fin setters */
 
     /**
@@ -354,6 +377,21 @@ class Video extends Media
             default:
                 return null;
         }
+    }
+
+    /**
+     * Retourne la classe CSS à appliquer au player fluide
+     *
+     * @return string
+     */
+    function getPlayerRatio(): string
+    {
+        if ($this->getRatio() < 1.5) {
+            // certaines anciennes en 4/3
+            return 'ratio-4-3'; // 1.333
+        }
+        // par défaut 16/9
+        return 'ratio-16-9'; // 1.778
     }
 
     /**

@@ -11,7 +11,7 @@
     <h1>{$video->getName()|escape}</h1>
   </header>
   <div class="reset">
-    <div class="fluid-video-player ratio-16-9">
+    <div class="fluid-video-player {$video->getPlayerRatio()}">
     {$video->getPlayer()}
     </div>
   </div>
