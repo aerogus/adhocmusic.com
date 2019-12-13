@@ -409,6 +409,8 @@ class Media extends ObjectModel
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+        } elseif ((isset($params['order_by']) && $params['order_by'] === 'random')) {
+            $sql .= "ORDER BY RAND() ";
         } else {
             $sql .= "ORDER BY `" . static::getDbPk() . "` ";
         }

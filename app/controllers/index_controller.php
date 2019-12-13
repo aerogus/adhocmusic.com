@@ -26,7 +26,9 @@ final class Controller
                     'id_lieu' => 1,
                     'online' => true,
                     'order_by' => 'random',
-                    'limit' => 6,
+                    'sort' => 'DESC',
+                    'start' => 0,
+                    'limit' => 4,
                 ]
             )
         );

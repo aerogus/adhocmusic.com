@@ -22,7 +22,27 @@
   </div>
 </div>
 
-<div class="grid-2-small-1 has-gutter">
+<div class="grid-3-small-1 has-gutter">
+
+  <div class="col-2">
+
+    <div class="box">
+      <header>
+        <h2>Souvenez vous</h2>
+      </header>
+      <div class="reset grid-2-small-1 has-gutter">
+        {foreach from=$videos item=video}
+        <div class="video">
+          <a href="{$video->getUrl()}">
+            <img src="{$video->getThumbUrl(320)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}">
+            <strong style="display:block">{$video->getName()}</strong>
+          </a>
+        </div>
+        {/foreach}
+      </div>
+    </div>
+
+  </div>
 
   <div class="col-1">
 
@@ -45,24 +65,6 @@
       </ul>
     </div>
   </div>
-
-  </div>
-
-  <div class="col-1">
-
-    <div class="box">
-      <header>
-        <h2>Souvenez vous</h2>
-      </header>
-      <div class="reset">
-        {foreach from=$videos item=video}
-        <div class="thumb-80">
-          <a href="{$video->getUrl()}"><img src="{$video->getThumbUrl(80)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}"></a>
-          <a class="overlay-80 overlay-video-80" href="{$video->getUrl()}" title="Regarder {$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}"></a>
-        </div>
-        {/foreach}
-      </div>
-    </div>
 
   </div>
 
