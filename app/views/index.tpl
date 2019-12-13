@@ -30,7 +30,7 @@
       <header>
         <h2>Souvenez vous</h2>
       </header>
-      <div class="reset grid-2-small-1 has-gutter">
+      <div class="reset grid-3-small-1 has-gutter">
         {foreach from=$videos item=video}
         <div class="video">
           <a href="{$video->getUrl()}">

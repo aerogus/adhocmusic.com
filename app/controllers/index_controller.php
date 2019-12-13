@@ -28,7 +28,7 @@ final class Controller
                     'order_by' => 'random',
                     'sort' => 'DESC',
                     'start' => 0,
-                    'limit' => 4,
+                    'limit' => 6,
                 ]
             )
         );
