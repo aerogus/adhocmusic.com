@@ -33,10 +33,13 @@
       <div class="reset grid-3-small-1 has-gutter">
         {foreach from=$videos item=video}
         <div class="video">
-          <a href="{$video->getUrl()}">
-            <img src="{$video->getThumbUrl(320)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}">
-            <strong style="display:block">{$video->getName()}</strong>
-          </a>
+          <div class="thumb" style="background-image: url($video->getThumbUrl(320))">
+            <a class="playbtn" href="{$video->getUrl()}">
+              |>
+            </a>
+          </div>
+          <p class="title"><a href="{$video->getUrl()}">{$video->getName()|escape}</a></p>
+          <p class="subtitle">{if !empty($video->getGroupe())}({$video->getGroupe()->getName()|escape}){/if}</p>
         </div>
         {/foreach}
       </div>

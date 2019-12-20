@@ -45,7 +45,11 @@ spl_autoload_register('autoload');
 /**
  * Chargement automatique des paquets gérés par composer
  */
-require_once ADHOC_ROOT_PATH . '/vendor/autoload.php'; // prend bien 60ms
+if (file_exists(ADHOC_ROOT_PATH . '/vendor/autoload.php')) {
+    require_once ADHOC_ROOT_PATH . '/vendor/autoload.php'; // prend bien 60ms
+} else {
+    die('dépendances composer non installées, faire "composer install"');
+}
 
 $conf = Conf::getInstance()->get();
 
