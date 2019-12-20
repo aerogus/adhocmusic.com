@@ -68,13 +68,16 @@
   <header>
     <h2>Vidéos du même concert</h2>
   </header>
-  <div class="reset grid-6">
+  <div class="reset grid-6-small-2 has-gutter">
     {foreach $videos as $_video}
     {if $_video->getIdVideo() !== $video->getIdVideo()}
-    <div class="thumb-80">
-      <a href="{$_video->getUrl()}"><img src="{$_video->getThumbUrl(80)}" alt="{$_video->getName()|escape}"><br>{$_video->getName()|truncate:15:"...":true:true|escape}</a>
-      <a class="overlay-80 overlay-video-80" href="{$_video->getUrl()}" title="{$_video->getName()|escape}"></a>
-    </div>
+      <div class="video">
+        <div class="thumb" style="background-image: url({$_video->getThumbUrl(320)})">
+          <a class="playbtn" href="{$_video->getUrl()}">▶</a>
+        </div>
+        <p class="title"><a href="{$_video->getUrl()}">{$_video->getName()|escape}</a></p>
+        <p class="subtitle">{if !empty($_video->getGroupe())}{$_video->getGroupe()->getName()|escape}{/if}</p>
+      </div>
     {/if}
     {/foreach}
   </div>

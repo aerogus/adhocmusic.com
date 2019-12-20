@@ -28,18 +28,16 @@
 
     <div class="box">
       <header>
-        <h2>Souvenez vous</h2>
+        <h2>Ils sont passés par AD'HOC</h2>
       </header>
-      <div class="reset grid-3-small-1 has-gutter">
+      <div class="reset grid-3-small-2 has-gutter">
         {foreach from=$videos item=video}
         <div class="video">
-          <div class="thumb" style="background-image: url($video->getThumbUrl(320))">
-            <a class="playbtn" href="{$video->getUrl()}">
-              |>
-            </a>
+          <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">
+            <a class="playbtn" href="{$video->getUrl()}">▶</a>
           </div>
           <p class="title"><a href="{$video->getUrl()}">{$video->getName()|escape}</a></p>
-          <p class="subtitle">{if !empty($video->getGroupe())}({$video->getGroupe()->getName()|escape}){/if}</p>
+          <p class="subtitle">{if !empty($video->getGroupe())}{$video->getGroupe()->getName()|escape}{/if}</p>
         </div>
         {/foreach}
       </div>

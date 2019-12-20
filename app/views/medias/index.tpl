@@ -36,22 +36,16 @@
     <h2>Dernières vidéos ajoutées</h2>
   </header>
   {if count($last_videos)}
-  <div class="reset">
-    <ul id="search-box-results" class="grid-8">
+  <div class="reset grid-6-small-2 has-gutter">
     {foreach from=$last_videos item=video}
-      <li class="search-box-result">
-        <div class="search-box-result-video">
-          <div class="thumb-100">
-            <a href="{$video->getUrl()}">
-              <img src="{$video->getThumbUrl(80)}" style="width: 100px; height: 100px;" alt="{$video->getName()|escape}">
-              <h3>{$video->getName()|truncate:35:"...":true:true|escape}</h3>
-            </a>
-            <a class="overlay-100 overlay-video-100" href="{$video->getUrl()}" title="{$video->getName()|escape}"></a>
-          </div>
-        </div>
-      </li>
+    <div class="video">
+      <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">
+        <a class="playbtn" href="{$video->getUrl()}">▶</a>
+      </div>
+      <p class="title"><a href="{$video->getUrl()}">{$video->getName()|escape}</a></p>
+      <p class="subtitle">{if !empty($video->getGroupe())}{$video->getGroupe()->getName()|escape}{/if}</p>
+    </div>
     {/foreach}
-    </ul>
   </div>
   {else}
   <div>

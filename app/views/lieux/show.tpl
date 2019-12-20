@@ -121,11 +121,14 @@
   <header>
     <h2>Vidéos</h2>
   </header>
-  <div class="reset grid-3">
+  <div class="reset grid-6-small-2 has-gutter">
     {foreach $videos as $video}
-    <div>
-      <a href="{$video->getUrl()}"><img src="{$video->getThumbUrl(320)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}">{$video->getName()|truncate:15:"...":true:true|escape}</a>
-      <a class="overlay-80 overlay-video-80" href="{$video->getUrl()}" title="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}"></a>
+    <div class="video">
+      <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">
+        <a class="playbtn" href="{$video->getUrl()}">▶</a>
+      </div>
+      <p class="title"><a href="{$video->getUrl()}">{$video->getName()|escape}</a></p>
+      <p class="subtitle">{if !empty($video->getGroupe())}{$video->getGroupe()->getName()|escape}{/if}</p>
     </div>
     {/foreach}
   </div>

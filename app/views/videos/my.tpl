@@ -12,14 +12,16 @@
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-<div class="gallery">
-{foreach $videos as $video}
-  <div class="photo">
-    <a href="/videos/edit/{$video->getIdVideo()}?page={$page}" title="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}">
-      <img src="{$video->getThumbUrl(320)}" alt="{$video->getName()|escape}{if !empty($video->getGroupe())} ({$video->getGroupe()->getName()|escape}){/if}">
-    </a>
+<div class="grid-6-small-2 has-gutter">
+  {foreach $videos as $video}
+  <div class="video">
+    <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">
+      <a class="playbtn" href="{$video->getUrl()}">▶</a>
+    </div>
+    <p class="title"><a href="{$video->getUrl()}">{$video->getName()|escape}</a></p>
+    <p class="subtitle">{if !empty($video->getGroupe())}{$video->getGroupe()->getName()|escape}{/if}</p>
   </div>
-{/foreach}
+  {/foreach}
 </div>
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
