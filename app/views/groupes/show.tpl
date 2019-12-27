@@ -29,15 +29,15 @@
         {/if}
         {if $groupe->getSite() || $groupe->getFacebookPageId() || $groupe->getTwitterId()}
         <p><strong>Liens</strong></p>
-        <ul class="grplinks">
+        <ul class="social-share-box">
           {if $groupe->getSite()}
-          <li><a href="{$groupe->getSite()}" title="Site"><img src="/img/icones/lien.png" alt="">Site</a></li>
+          <li><a href="{$groupe->getSite()}" class="website" title="Site"><span>Site</span></a></li>
           {/if}
           {if $groupe->getFacebookPageId()}
-          <li><a href="{$groupe->getFacebookPageUrl()}" title="Facebook"><img src="/img/social/facebook.svg" alt="">Facebook</a></li>
+          <li><a href="{$groupe->getFacebookPageUrl()}" class="facebook" title="Facebook"><span>Facebook</span></a></li>
           {/if}
           {if $groupe->getTwitterId()}
-          <li><a href="{$groupe->getTwitterUrl()}" title="Twitter"><img src="/img/social/twitter.svg" alt="">Twitter</a></li>
+          <li><a href="{$groupe->getTwitterUrl()}" class="twitter" title="Twitter"><span>Twitter</span></a></li>
           {/if}
         </ul>
         {/if}
