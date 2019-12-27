@@ -81,7 +81,7 @@
 <table>
   <caption>Styles</caption>
   {foreach from=$groupe->getStyles() item=style}
-  <tr><td>{$style.id}</td></tr>
+  <tr><td>{$style->getName()}</td></tr>
   {/foreach}
 </table>
 
@@ -89,9 +89,8 @@
   <caption>Membres</caption>
   {foreach from=$groupe->getMembers() item=member}
   <tr>
-    <th>{$member.nom_type_musicien|escape}</th>
-    <td>{$member.first_name|escape} {$member.last_name|escape} (<a href="/adm/membres/{$member.id}">{$member.pseudo|escape}</a>)</td>
-    <td><a class="button" href="/adm/appartient-a?from=groupe&amp;action=delete&amp;groupe={$groupe->getId()}&amp;membre={$member.id}">Supprimer</a></td>
+    <td>{$member->getFirstName()|escape} {$member->getLastName()|escape} (<a href="/adm/membres/{$member->getIdContact()}">{$member->getPseudo()|escape}</a>)</td>
+    <td><a class="button" href="/adm/appartient-a?from=groupe&amp;action=delete&amp;groupe={$groupe->getId()}&amp;membre={$member->getIdContact()}">Supprimer</a></td>
   </tr>
   {/foreach}
 </table>
