@@ -87,7 +87,9 @@
       </header>
       <div>
         {if $groupe->getPhoto()}
-        <img src="{$groupe->getPhoto()}" alt="{$groupe->getName()|escape}" title="{$groupe->getName()|escape}">
+        <p align="center">
+          <img src="{$groupe->getPhoto()}" alt="{$groupe->getName()|escape}" title="{$groupe->getName()|escape}">
+        </p>
         {/if}
         <p align="justify">{$groupe->getText()|nl2br}</p>
       </div>
