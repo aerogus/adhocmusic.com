@@ -80,18 +80,18 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        if (((string) Route::params('sens') === 'DESC')) {
-            $sens = 'DESC';
-            $sensinv = 'ASC';
+        if (((string) Route::params('sort') === 'DESC')) {
+            $sort = 'DESC';
+            $sortinv = 'ASC';
         } else {
-            $sens = 'ASC';
-            $sensinv = 'DESC';
+            $sort = 'ASC';
+            $sortinv = 'DESC';
         }
 
-        if ((string) Route::params('sort')) {
-            $sort = (string) Route::params('sort');
+        if ((string) Route::params('order_by')) {
+            $order_by = (string) Route::params('order_by');
         } else {
-            $sort = 'id_contact';
+            $order_by = 'id_contact';
         }
 
         $page = (int) Route::params('page');
@@ -101,23 +101,16 @@ final class Controller
         $last_name = trim((string) Route::params('last_name'));
         $first_name = trim((string) Route::params('first_name'));
 
-        $tab_id = [];
-        //$with_groupe = (bool) Route::params('with_groupe');
-        //$id_groupe = (int) Route::params('id_groupe');
-        //$id_type_musicien = (int) Route::params('id_type_musicien');
-
-        // @TODO remplacer par Membre::find([...]);
-        $membres = Membre::getMembres(
+        $membres = Membre::find(
             [
-                /*'id'         => $tab_id,*/
                 'pseudo'     => $pseudo,
                 'email'      => $email,
                 'last_name'  => $last_name,
                 'first_name' => $first_name,
-                'sort'  => $sort,
-                'sens'  => $sens,
-                'debut' => $page * ADM_NB_MEMBERS_PER_PAGE,
-                'limit' => ADM_NB_MEMBERS_PER_PAGE,
+                'order_by'   => $order_by,
+                'sort'       => $sort,
+                'start'      => $page * ADM_NB_MEMBERS_PER_PAGE,
+                'limit'      => ADM_NB_MEMBERS_PER_PAGE,
             ]
         );
 
@@ -127,8 +120,8 @@ final class Controller
 
         $smarty->assign('membres',  $membres);
 
-        $smarty->assign('sens', $sens);
-        $smarty->assign('sensinv', $sensinv);
+        $smarty->assign('sort', $sort);
+        $smarty->assign('sortinv', $sortinv);
         $smarty->assign('page', $page);
 
         // test ajax
@@ -149,16 +142,13 @@ final class Controller
                 'last_name' => $last_name,
                 'first_name' => $first_name,
                 'email' => $email,
-                'with_groupe' => false,
-                'id_groupe' => 0,
-                'id_type_musicien' => 0,
             ]
         );
 
         // pagination
         $smarty->assign('nb_items', $nb_membres);
         $smarty->assign('nb_items_per_page', ADM_NB_MEMBERS_PER_PAGE);
-        $smarty->assign('link_base_params', 'sort='.$sort.'&sens='.$sens);
+        $smarty->assign('link_base_params', 'order_by='.$order_by.'&sort='.$sort);
 
         return $smarty->fetch('adm/membres/index.tpl');
     }
