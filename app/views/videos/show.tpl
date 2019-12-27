@@ -34,7 +34,7 @@
       <h2>Groupe</h2>
     </header>
     <div>
-      <a href="{$groupe->getUrl()}"><img style="float: right;" src="{$groupe->getMiniPhoto()}" alt=""><strong>{$groupe->getName()|escape}</strong></a>
+      <a href="{$groupe->getUrl()}" style="display:block;text-align:center"><img src="{$groupe->getMiniPhoto()}" alt=""><strong>{$groupe->getName()|escape}</strong></a>
     </div>
   </div>
   {/if}
