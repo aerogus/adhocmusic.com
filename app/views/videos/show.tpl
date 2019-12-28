@@ -34,7 +34,7 @@
       <h2>Groupe</h2>
     </header>
     <div>
-      <a href="{$groupe->getUrl()}" style="display:block;text-align:center"><img src="{$groupe->getMiniPhoto()}" alt=""><strong>{$groupe->getName()|escape}</strong></a>
+      <a href="{$groupe->getUrl()}" style="display:block;text-align:center"><img style="display:block;margin:auto" src="{$groupe->getMiniPhoto()}" alt=""><strong>{$groupe->getName()|escape}</strong></a>
     </div>
   </div>
   {/if}
@@ -68,7 +68,7 @@
   <header>
     <h2>Vidéos du même concert</h2>
   </header>
-  <div class="reset grid-6-small-2 has-gutter">
+  <div class="reset grid-3-small-2 has-gutter">
     {foreach $videos as $_video}
     {if $_video->getIdVideo() !== $video->getIdVideo()}
       <div class="video">

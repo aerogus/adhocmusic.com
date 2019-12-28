@@ -75,7 +75,7 @@
   <header>
     <h2>Vidéos</h2>
   </header>
-  <div class="reset grid-6-small-2 has-gutter">
+  <div class="reset grid-3-small-2 has-gutter">
     {foreach from=$videos item=video}
     <div class="video">
       <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">

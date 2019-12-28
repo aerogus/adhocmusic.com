@@ -5,7 +5,7 @@
     <h1>Rechercher une vidéo</h1>
   </header>
   <div>
-    <form id="form-media-search" name="form-media-search" method="get" action="/medias">
+    <form id="form-media-search" name="form-media-search" method="get" action="/medias" style="margin-bottom:2rem">
       <ul>
         <li>
           <label for="groupe">Groupe</label>
@@ -27,7 +27,7 @@
         </li>
       </ul>
     </form>
-    <div id="search-results"></div>
+    <div class="margin-top:2rem" id="search-results"></div>
   </div>
 </div>{* .box *}
 
@@ -36,7 +36,7 @@
     <h2>Dernières vidéos ajoutées</h2>
   </header>
   {if count($last_videos)}
-  <div class="reset grid-6-small-2 has-gutter">
+  <div class="reset grid-3-small-2 has-gutter">
     {foreach from=$last_videos item=video}
     <div class="video">
       <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">

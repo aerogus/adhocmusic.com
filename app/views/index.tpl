@@ -51,7 +51,7 @@
     <header>
       <h2><a href="/events" title="Agenda">Agenda</a></h2>
     </header>
-    <div class="reset">
+    <div class="">
       <ul>
       {foreach from=$events key=month item=month_events}
         <li class="mbs">
