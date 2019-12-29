@@ -56,7 +56,11 @@
             <a class="playbtn" href="{$video->getUrl()}">▶</a>
           </div>
           <p class="title"><a href="{$video->getUrl()}">{$video->getName()|escape}</a></p>
-          <p class="subtitle">{if !empty($video->getEvent())}{$video->getEvent()->getName()|escape}<br/>{$video->getEvent()->getDate()|date_format:"d/m/Y"}{/if}</p>
+          <p class="subtitle">
+            {if !empty($video->getEvent())}{$video->getEvent()->getName()|escape}
+            <br/>
+            {$video->getEvent()->getDate()|date_format:"%a %e %B %Y"}{/if}
+          </p>
         </div>
         {/foreach}
       </div>

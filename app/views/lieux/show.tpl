@@ -121,14 +121,18 @@
   <header>
     <h2>Vidéos</h2>
   </header>
-  <div class="reset grid-6-small-2 has-gutter">
+  <div class="reset grid-3-small-2 has-gutter">
     {foreach $videos as $video}
     <div class="video">
       <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">
         <a class="playbtn" href="{$video->getUrl()}">▶</a>
       </div>
       <p class="title"><a href="{$video->getUrl()}">{$video->getName()|escape}</a></p>
-      <p class="subtitle">{if !empty($video->getGroupe())}{$video->getGroupe()->getName()|escape}{/if}<br/>{if !empty($video->getEvent())}{$video->getEvent()->getDate()|date_format:"d/m/Y"}{/if}</p>
+      <p class="subtitle">
+        {if !empty($video->getGroupe())}{$video->getGroupe()->getName()|escape}{/if}
+        {if !empty($video->getGroupe()) && !empty($video->getEvent())}<br/>{/if}
+        {if !empty($video->getEvent())}{$video->getEvent()->getDate()|date_format:"%a %e %B %Y"}{/if}
+      </p>
     </div>
     {/foreach}
   </div>

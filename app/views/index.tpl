@@ -40,7 +40,7 @@
           <p class="subtitle">
             {if !empty($video->getGroupe())}{$video->getGroupe()->getName()|escape}{/if}
             {if !empty($video->getGroupe()) && !empty($video->getEvent())}<br/>{/if}
-            {if !empty($video->getEvent())}{$video->getEvent()->getDate()|date_format:"d/m/Y"}{/if}
+            {if !empty($video->getEvent())}{$video->getEvent()->getDate()|date_format:"%a %e %B %Y"}{/if}
           </p>
         </div>
         {/foreach}
