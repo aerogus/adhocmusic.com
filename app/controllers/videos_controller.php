@@ -278,7 +278,6 @@ final class Controller
 
                 $confVideo = Conf::getInstance()->get('video');
                 foreach ($confVideo['thumb_width'] as $maxWidth) {
-                    $video->clearThumb($maxWidth);
                     $video->genThumb($maxWidth);
                 }
 

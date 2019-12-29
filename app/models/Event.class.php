@@ -653,8 +653,8 @@ class Event extends ObjectModel
         }
 
         // delete des caches images
-        $conf = Conf::getInstance();
-        foreach ($conf['event']['thumb_width'] as $maxWidth) {
+        $confEvent = Conf::getInstance()->get('event');
+        foreach ($confEvent['thumb_width'] as $maxWidth) {
             $this->clearThumb($maxWidth);
         }
 
@@ -693,6 +693,8 @@ class Event extends ObjectModel
     }
 
     /**
+     * Efface la miniature d'une affiche d'événement
+     *
      * @param int $maxWidth maxWidth
      *
      * @return bool
@@ -711,7 +713,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * Génère la miniature d'une photo
+     * Génère la miniature d'une affiche d'événement
      *
      * @param int $maxWidth maxWidth
      *

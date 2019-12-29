@@ -336,7 +336,8 @@ final class Controller
                     } elseif ($data['flyer_url']) {
                         if ($tmpContent = file_get_contents($data['flyer_url'])) {
                             $importFlyer = true;
-                            file_put_contents(tempnam('/tmp', 'import-flyer-event'), $tmpContent);
+                            $tmpName = tempnam('/tmp', 'import-flyer-event');
+                            file_put_contents($tmpName, $tmpContent);
                         }
                     }
 
@@ -350,6 +351,10 @@ final class Controller
                             ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
                             ->write();
                         unlink($tmpName);
+
+                        foreach ($confEvent['thumb_width'] as $maxWidth) {
+                            $event->genThumb($maxWidth);
+                        }
                     }
 
                     foreach (Route::params('style') as $id_style) {
@@ -529,7 +534,8 @@ final class Controller
                 } elseif ($data['flyer_url']) {
                     if ($tmpContent = file_get_contents($data['flyer_url'])) {
                         $importFlyer = true;
-                        file_put_contents(tempnam('/tmp', 'import-flyer-event'), $tmpContent);
+                        $tmpName = tempnam('/tmp', 'import-flyer-event');
+                        file_put_contents($tmpName, $tmpContent);
                     }
                 }
 
@@ -543,6 +549,11 @@ final class Controller
                         ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
                         ->write();
                     unlink($tmpName);
+
+                    foreach ($confEvent['thumb_width'] as $maxWidth) {
+                        $event->clearThumb($maxWidth);
+                        $event->genThumb($maxWidth);
+                    }
                 }
 
                 $event->unlinkStyles();

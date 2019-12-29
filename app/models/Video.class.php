@@ -337,7 +337,8 @@ class Video extends Media
 
     /**
      * Efface une vidéo de la table vidéo
-     * + purge du fichier miniature
+     * + purge de l'imagette source
+     * + ses déclinaisons de différentes largeurs
      *
      * @return bool
      */
@@ -345,8 +346,8 @@ class Video extends Media
     {
         if (parent::delete()) {
             $this->deleteThumbnail();
-            $confVideo = Conf::getInstance()->get('video');
-            foreach ($confVideo['thumb_width'] as $maxWidth) {
+            $thumbWidth = Conf::getInstance()->get('video')['thumb_width'];
+            foreach ($thumbWidth as $maxWidth) {
                 $this->clearThumb($maxWidth);
             }
             return true;

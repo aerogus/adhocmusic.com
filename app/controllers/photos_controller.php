@@ -249,9 +249,7 @@ final class Controller
                             Log::action(Log::ACTION_PHOTO_CREATE, $photo->getIdPhoto());
 
                             // les générations des thumbs à faire en asynchrone
-                            $conf = Conf::getInstance();
-                            $thumb_widths = $conf->get('photo')['thumb_width'];
-                            foreach ($thumb_widths as $maxWidth) {
+                            foreach ($confPhoto['thumb_width'] as $maxWidth) {
                                 $photo->genThumb($maxWidth);
                             }
 
@@ -367,8 +365,7 @@ final class Controller
 
             if (self::_validatePhotoForm($data, $errors)) {
 
-                $conf = Conf::getInstance();
-                $thumb_widths = $conf->get('photo')['thumb_width'];
+                $confPhoto = Conf::getInstance()->get('photo');
 
                 $photo->setName($data['name'])
                     ->setCredits($data['credits'])
@@ -386,7 +383,6 @@ final class Controller
                     // extrait l'EXIF source et applique une éventuelle rotation
                     Photo::fixOrientation($_FILES['file']['tmp_name']);
 
-                    $confPhoto = Conf::getInstance()->get('photo');
                     (new Image($_FILES['file']['tmp_name']))
                         ->setType(IMAGETYPE_JPEG)
                         ->setMaxWidth($confPhoto['max_width'])
@@ -394,7 +390,7 @@ final class Controller
                         ->setDestFile(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg')
                         ->write();
 
-                    foreach ($thumb_widths as $maxWidth) {
+                    foreach ($confPhoto['thumb_width'] as $maxWidth) {
                         $photo->clearThumb($maxWidth);
                         $photo->genThumb($maxWidth);
                     }
@@ -404,7 +400,7 @@ final class Controller
                     // applique une rotation forcée et regénère les miniatures
                     if ($data['rotation']) {
                         Photo::rotate(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg', $data['rotation']);
-                        foreach ($thumb_widths as $maxWidth) {
+                        foreach ($confPhoto['thumb_width'] as $maxWidth) {
                             $photo->clearThumb($maxWidth);
                             $photo->genThumb($maxWidth);
                         }
@@ -509,7 +505,7 @@ final class Controller
             $errors['name'] = "Vous devez saisir un titre pour la photo.";
         }
         if (empty($data['credits'])) {
-            $errors['credits'] = "Vous devez saisir le nom du photographe";
+            $errors['credits'] = "Vous devez saisir le nom du ou de la photographe";
         }
         if (count($errors)) {
             return false;
