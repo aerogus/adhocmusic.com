@@ -6,11 +6,12 @@ require_once __DIR__ . '/../bootstrap.php';
 // vérifie si les vidéos distances sont tjrs valides / publiques
 // Facebook renvoie un 302 vers unsupported browser...
 
+define('UTEMPO', 250000); // 250ms
+
 $videos = Video::findAll();
 
 foreach ($videos as $video) {
     $hdrs = get_headers($video->getEmbedUrl());
     echo "Video " . $video->getId() . ": " . $hdrs[0] . " " . $video->getEmbedUrl() . "\n";
-    usleep(250000);
-}
+    usleep(UTEMPO);
 }
