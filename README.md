@@ -29,6 +29,9 @@ brunch build
 docker-compose up
 ```
 
+note:
+autoriser les certificats autosignés pour (www.)adhocmusic.test et static.adhocmusic.test
+
 Redémarrage avec reconstruction des containers :
 
 ```
