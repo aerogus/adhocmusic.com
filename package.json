@@ -14,17 +14,17 @@
   "devDependencies": {
     "after-brunch": "0.0.5",
     "auto-reload-brunch": "2.7.1",
-    "autoprefixer": "9.7.2",
+    "autoprefixer": "9.7.3",
     "babel-brunch": "7.0.1",
-    "brunch": "2.10.17",
-    "clean-css-brunch": "2.10.0",
-    "eslint": "6.7.2",
+    "brunch": "3.0.0",
+    "clean-css-brunch": "3.0.0",
+    "eslint": "6.8.0",
     "eslint-config-airbnb-base": "14.0.0",
-    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-import": "2.19.1",
     "json-brunch": "1.5.4",
     "postcss-assets": "5.0.0",
-    "postcss-brunch": "2.10.1",
-    "stylus-brunch": "2.10.1"
+    "postcss-brunch": "3.0.0",
+    "stylus-brunch": "3.0.0"
   },
   "dependencies": {
     "mjml": "4.5.1"
