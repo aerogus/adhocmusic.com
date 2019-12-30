@@ -342,6 +342,11 @@ final class Controller
                     }
 
                     if ($importFlyer && file_exists($tmpName)) {
+                        // création du répertoire de stockage si inexistant
+                        if (!is_dir(Event::getBasePath())) {
+                            mkdir(Event::getBasePath(), 0755, true);
+                        }
+
                         $confEvent = Conf::getInstance()->get('event');
                         (new Image($tmpName))
                             ->setType(IMAGETYPE_JPEG)
