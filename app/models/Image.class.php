@@ -654,17 +654,13 @@ class Image
         $d2 = substr($hash, 1, 1);
         $d3 = substr($hash, 2, 1);
 
-        if (is_dir($d0 . '/' . $d1) === false) {
-            mkdir($d0 . '/' . $d1);
-        }
-        if (is_dir($d0 . '/' . $d1 . '/' . $d2) === false) {
-            mkdir($d0 . '/' . $d1 . '/' . $d2);
-        }
-        if (is_dir($d0 . '/' . $d1 . '/' . $d2 . '/' . $d3) === false) {
-            mkdir($d0 . '/' . $d1 . '/' . $d2 . '/' . $d3);
+        $dir = $d0 . '/' . $d1 . '/' . $d2 . '/' . $d3;
+        // création du répertoire de stockage si inexistant
+        if (is_dir($dir) === false) {
+            mkdir($dir, 0755, true);
         }
 
-        $dest = IMG_CACHE_PATH . '/' . $d1 . '/' . $d2 . '/' . $d3 . '/' . $hash . '.jpg';
+        $dest = $dir . '/' . $hash . '.jpg';
 
         return (bool) file_put_contents($dest, $content);
     }
