@@ -1,10 +1,8 @@
 # spam
 .DS_Store
 
-# la configuration
-/app/conf.ini
-/app/conf.prod.ini
-/app/conf.docker.ini
+# la configuration active
+/conf/conf.ini
 
 # données dans le contexte docker
 /volumes
