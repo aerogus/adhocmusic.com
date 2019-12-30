@@ -1,0 +1,60 @@
+/**
+ * page des concerts
+ */
+
+.saison
+
+  h3
+    border-bottom 1px solid #cecece
+
+  ul
+    display flex
+    flex-wrap wrap
+    align-items center
+
+    li
+      width 20%
+      text-align center
+      margin-bottom 20px
+      font-weight bold
+
+      img
+        border 1px solid
+
+.staff
+  display flex
+  flex-wrap wrap
+
+  li
+    margin 2rem 0
+    width 25%
+    text-align center
+
+    img
+      display block
+      margin 0 auto 1rem
+      width 100px
+      height auto
+      border-radius 15px
+      background-color #f0f0f0
+      box-shadow 2px 2px 8px #666
+
+/* afterworks par saison / épisodes */
+
+ol.episodes
+  counter-reset episode
+
+  li
+    list-style-type none
+    counter-increment episode
+    margin-bottom 1rem
+
+    &:before
+      content '#'counter(episode)
+      margin-right 1rem
+      background #292933
+      color #fff
+      padding 5px
+      border-radius 50%
+      font-weight bold
+

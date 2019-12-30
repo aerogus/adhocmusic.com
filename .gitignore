@@ -1,0 +1,26 @@
+# spam
+.DS_Store
+
+# la configuration active
+/conf/conf.ini
+
+# données dans le contexte docker
+/volumes
+
+# dépendances npm
+/node_modules
+
+# dépendances composer
+/vendor
+
+# tous les contenus utilisateur (audio, video, photo...) ici
+/static
+
+# medias utilisateurs (video, mp3, photos...)
+/media
+
+# export brunch
+/public
+
+# fs en ram
+/tmpfs

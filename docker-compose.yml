@@ -1,0 +1,87 @@
+##
+# Environnement de développement du site adhocmusic.com
+##
+
+version: '3.7'
+
+services:
+
+  # le serveur web nginx, sur les ports 80 et 443
+  nginx:
+    build: ./docker/nginx
+    hostname: www
+    container_name: adhoc_nginx
+    restart: always
+    networks:
+      adhoc:
+        aliases:
+          - adhocmusic.test
+          - www.adhocmusic.test
+          - static.adhocmusic.test
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - .:/var/www/adhocmusic.test
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/ssl:/etc/nginx/ssl
+      - ./volumes/nginx/log:/var/log/nginx
+
+  # le serveur php, port 9000
+  php:
+    build: ./docker/php
+    hostname: php
+    container_name: adhoc_php
+    restart: always
+    networks:
+      adhoc:
+        aliases:
+          - php.adhocmusic.test
+    volumes:
+      - .:/var/www/adhocmusic.test
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./volumes/php/log:/var/log/php
+    #tmpfs:
+    #  - /var/www/adhocmusic.test/tmpfs:noexec,mode=0755,uid=33,gid=33
+
+  # le serveur de base de données, port 3306
+  mariadb:
+    build: ./docker/mariadb
+    hostname: mariadb
+    container_name: adhoc_mariadb
+    restart: always
+    networks:
+      adhoc:
+        aliases:
+          - mariadb.adhocmusic.test
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/mariadb/initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./docker/mariadb/conf.d:/etc/mysql/conf.d
+      - ./volumes/mariadb/log:/var/log/mysql
+      - ./volumes/mariadb/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_DATABASE: adhocmusic
+      MYSQL_USER: adhocmusic
+      MYSQL_PASSWORD: changeme
+      TZ: Europe/Paris
+
+  # administration de la base de données
+  pma:
+    image: phpmyadmin/phpmyadmin
+    hostname: pma
+    container_name: adhoc_pma
+    restart: always
+    networks:
+      adhoc:
+        aliases:
+          - pma.adhocmusic.test
+    ports:
+      - 81:80
+    environment:
+      PMA_HOST: mariadb.adhocmusic.test
+
+networks:
+  adhoc:

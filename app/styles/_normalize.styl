@@ -1,0 +1,44 @@
+/* Ajustement post knacss */
+
+ul
+  list-style none
+  margin 0
+  padding 0
+
+/* propriétés générales */
+
+/* couleurs */
+
+color_red=#ed3438
+color_black=#292933
+
+body
+  background #ececec
+  font-size 1.4rem
+  color #292933
+  -moz-osx-font-smoothing grayscale
+  -webkit-font-smoothing antialiased /* fix bold mac osx */
+
+/* reset iOS */
+
+textarea,
+input
+  border-radius 0
+
+/* Remove inner shadow from inputs on mobile iOS */
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"]
+  -webkit-appearance none
+  box-shadow 0 0 0 1px #69696f inset;
+
+/* pas de stylage particulier des liens ... */
+
+a, a:link, a:visited, a:active, a:hover
+  color inherit
+  text-decoration none
+
+a:hover
+  text-decoration underline dotted

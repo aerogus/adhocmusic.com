@@ -1,0 +1,38 @@
+/* messages box */
+
+.infobulle
+  margin 10px 0
+  padding 10px
+
+  a
+    font-weight bold
+
+  /* bandeau informatif, mise en avant d'une info */
+
+  &.info
+    color #292933
+    background-color #f0be00
+
+  /* confirmation d'une action qui s'est déroulée avec succès */
+
+  &.success
+    color #4f8a10
+    background-color #dff2bf
+
+  /* annonce d'un avertissement suite à une mauvaise saisie */
+
+  &.warning
+    color #9f6000
+    background-color #feefb3
+
+  /* annonce d'une erreur bloquante */
+
+  &.error
+    color #d8000c
+    background-color #ffbaba
+
+  /* demande d'une attention particulière avant confirmation d'un formulaire */
+
+  &.validation
+    color #d63301
+    background-color #ffccba
