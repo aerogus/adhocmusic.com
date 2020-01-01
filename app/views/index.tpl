@@ -38,9 +38,9 @@
           </div>
           <p class="title"><a href="{$video->getUrl()}" title="Lire la vidéo {$video->getName()|escape}">{$video->getName()}</a></p>
           <p class="subtitle">
-            {if !empty($video->getGroupe())}<a href="{$groupe->getUrl()}" title="Aller à la page du groupe {$video->getGroupe()->getName()|escape}">{$video->getGroupe()->getName()}</a>{/if}
+            {if !empty($video->getGroupe())}<a href="{$video->getGroupe()->getUrl()}" title="Aller à la page du groupe {$video->getGroupe()->getName()|escape}">{$video->getGroupe()->getName()}</a>{/if}
             {if !empty($video->getGroupe()) && !empty($video->getEvent())}<br/>{/if}
-            {if !empty($video->getEvent())}<a href="" title="Aller à la page de l'événement {$video->getEvent()->getName()|escape}">{$video->getEvent()->getDate()|date_format:"%a %e %B %Y"}</a>{/if}
+            {if !empty($video->getEvent())}<a href="{$video->getEvent()->getUrl()}" title="Aller à la page de l'événement {$video->getEvent()->getName()|escape}">{$video->getEvent()->getDate()|date_format:"%a %e %B %Y"}</a>{/if}
           </p>
         </div>
         {/foreach}

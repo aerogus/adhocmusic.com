@@ -73,10 +73,10 @@
     {if $_video->getIdVideo() !== $video->getIdVideo()}
       <div class="video">
         <div class="thumb" style="background-image: url({$_video->getThumbUrl(320)})">
-          <a class="playbtn" href="{$_video->getUrl()}">▶</a>
+          <a class="playbtn" href="{$_video->getUrl()}" title="Lire la vidéo {$_video->getName()|escape}">▶</a>
         </div>
-        <p class="title"><a href="{$_video->getUrl()}">{$_video->getName()|escape}</a></p>
-        <p class="subtitle">{if !empty($_video->getGroupe())}{$_video->getGroupe()->getName()|escape}{/if}</p>
+        <p class="title"><a href="{$_video->getUrl()}" title="Lire la vidéo {$_video->getName()|escape}">{$_video->getName()|escape}</a></p>
+        <p class="subtitle">{if !empty($_video->getGroupe())}<a href="{$_video->getGroupe()->getUrl()}" title="Aller à la page du groupe {$_video->getGroupe()->getName()|escape}">{$_video->getGroupe()->getName()|escape}</a>{/if}</p>
       </div>
     {/if}
     {/foreach}
