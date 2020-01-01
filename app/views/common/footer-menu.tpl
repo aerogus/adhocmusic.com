@@ -31,6 +31,7 @@
         <li><a href="/contact">Contactez-nous</a></li>
         <li><a href="/partners">Partenaires</a></li>
         <li><a href="/map">Plan du site</a></li>
+        <li><a href="https://github.com/aerogus/adhocmusic.com">Code source</a></li>
       </ul>
     </li>
   </ul>
