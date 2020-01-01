@@ -81,7 +81,7 @@ class Conf
      */
     static function getConfPath(): string
     {
-        return dirname(__DIR__) . '/conf.ini';
+        return dirname(dirname(__DIR__)) . '/conf/conf.ini';
     }
 
     /**

@@ -268,6 +268,7 @@ final class Controller
 
                 $video->save();
 
+                // création du répertoire de stockage si inexistant
                 if (!is_dir(Video::getBasePath())) {
                     mkdir(Video::getBasePath(), 0755, true);
                 }

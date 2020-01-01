@@ -230,6 +230,7 @@ final class Controller
                             ->setOnline($data['online']);
 
                         if ($photo->save()) {
+                            // création du répertoire de stockage si inexistant
                             if (!is_dir(Photo::getBasePath())) {
                                 mkdir(Photo::getBasePath(), 0755, true);
                             }
