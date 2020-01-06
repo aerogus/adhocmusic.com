@@ -53,13 +53,13 @@
         {foreach $videos as $video}
         <div class="video">
           <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">
-            <a class="playbtn" href="{$video->getUrl()}">▶</a>
+            <a class="playbtn" href="{$video->getUrl()}" title="Lire la vidéo {$video->getName()|escape}">▶</a>
           </div>
-          <p class="title"><a href="{$video->getUrl()}">{$video->getName()|escape}</a></p>
+          <p class="title"><a href="{$video->getUrl()}" title="Lire la vidéo {$video->getName()|escape}">{$video->getName()|escape}</a></p>
           <p class="subtitle">
-            {if !empty($video->getEvent())}{$video->getEvent()->getName()|escape}
+            {if !empty($video->getEvent())}<a href="{$video->getEvent()->getUrl()}" title="Aller à la page de l'événement {$video->getEvent()->getName()|escape}">{$video->getEvent()->getName()|escape}
             <br/>
-            {$video->getEvent()->getDate()|date_format:"%a %e %B %Y"}{/if}
+            {$video->getEvent()->getDate()|date_format:"%a %e %B %Y"}</a>{/if}
           </p>
         </div>
         {/foreach}

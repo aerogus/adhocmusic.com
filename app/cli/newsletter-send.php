@@ -6,7 +6,7 @@
  */
 
 // n° de newslette a traiter
-define('ID_NEWSLETTER', 88);
+define('ID_NEWSLETTER', 90);
 
 require_once __DIR__ . '/../bootstrap.php';
 

@@ -79,10 +79,10 @@
     {foreach from=$videos item=video}
     <div class="video">
       <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">
-        <a class="playbtn" href="{$video->getUrl()}">▶</a>
+        <a class="playbtn" href="{$video->getUrl()}" title="Lire la vidéo {$video->getName()|escape}">▶</a>
       </div>
-      <p class="title"><a href="{$video->getUrl()}">{$video->getName()|escape}</a></p>
-      <p class="subtitle">{if !empty($video->getGroupe())}{$video->getGroupe()->getName()|escape}{/if}</p>
+      <p class="title"><a href="{$video->getUrl()}" title="Lire la vidéo {$video->getName()|escape}">{$video->getName()|escape}</a></p>
+      <p class="subtitle">{if !empty($video->getGroupe())}<a href="{$video->getGroupe()->getUrl()}" title="Aller à la page du groupe {$video->getGroupe()->getName()|escape}">{$video->getGroupe()->getName()|escape}</a>{/if}</p>
     </div>
     {/foreach}
   </div>
