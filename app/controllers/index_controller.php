@@ -266,6 +266,21 @@ final class Controller
     }
 
     /**
+     * Page des crédits
+     *
+     * @return string
+     */
+    static function credits(): string
+    {
+        $smarty = new AdHocSmarty();
+
+        Trail::getInstance()
+            ->addStep("Crédits");
+
+        return $smarty->fetch('credits.tpl');
+    }
+
+    /**
      * Page dynamique issu du CMS
      *
      * @return string

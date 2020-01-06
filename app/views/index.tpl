@@ -55,7 +55,8 @@
     <header>
       <h2><a href="/events" title="Agenda">Agenda</a></h2>
     </header>
-    <div class="">
+    <div>
+      {if $events|@count > 0}
       <ul>
       {foreach from=$events key=month item=month_events}
         <li class="mbs">
@@ -68,6 +69,9 @@
         </li>
       {/foreach}
       </ul>
+      {else}
+      aucun événement annoncé
+      {/if}
     </div>
   </div>
 

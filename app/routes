@@ -131,6 +131,7 @@ index|contact|GET|/contact
 index|contact|POST|/contact
 index|sitemap|GET|/sitemap
 index|map|GET|/map
+index|credits|GET|/credits
 index|mentions_legales|GET|/mentions-legales
 index|cms|GET|/cms/:id
 index|r|GET|/r/:url

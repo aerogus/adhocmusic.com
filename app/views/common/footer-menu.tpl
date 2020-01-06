@@ -6,6 +6,7 @@
         <li><a href="/assoce">L’association</a></li>
         <li><a href="/equipe">L’équipe</a></li>
         <li><a href="/mentions-legales">Mentions légales</a></li>
+        <li><a href="/credits">Crédits</a></li>
       </ul>
     </li>
     <li>
