@@ -75,6 +75,7 @@ audios|edit|POST|/audios/edit
 audios|delete|GET|/audios/delete/:id
 audios|delete|POST|/audios/delete
 audios|show|GET|/audios/:id
+auth|auth|GET|/auth/auth
 auth|login|GET|/auth/login
 auth|login|POST|/auth/login
 auth|logout|GET|/auth/logout

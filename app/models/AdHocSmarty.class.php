@@ -383,12 +383,11 @@ class AdHocSmarty extends Smarty
      *
      * @param bool $val val
      *
-     * @return bool
+     * @return string
      */
     static function modifier_display_on_off_icon(bool $val): string
     {
-        $icon = $val ? 'enabled.png' : 'disabled.png';
-        return '<img src="/img/icones/' . $icon . '" alt="">';
+        return $val ? ✅ : ❌;
     }
 
     /**

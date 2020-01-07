@@ -25,7 +25,7 @@
             <td><a href="/messagerie/write?pseudo={$msg.pseudo|escape}">{$msg.pseudo|escape}</a></td>
             <td>{$msg.date|date_format:'%d/%m/%Y à %H:%M'}</td>
             <td><a href="/messagerie/read/{$msg.id|escape}">{$msg.text|truncate:40|escape}</a></td>
-            <td><img src="/img/icones/delete.png" class="del-msg-to" data-msg-id="{$msg.id|escape}" alt="Effacer ce message"></td>
+            <td><p class="del-msg-to" data-msg-id="{$msg.id|escape}" title="Effacer ce message">❌</p></td>
           </tr>
           {/foreach}
         </table>
@@ -51,7 +51,7 @@
             <td><a href="/messagerie/write?pseudo={$msg.pseudo|escape}">{$msg.pseudo|escape}</a></td>
             <td>{$msg.date|date_format:'%d/%m/%Y à %H:%M'}</td>
             <td><a href="/messagerie/read/{$msg.id|escape}">{$msg.text|truncate:40|escape}</a></td>
-            <td><img src="/img/icones/delete.png" class="del-msg-from" data-msg-id="{$msg.id|escape}" alt="Effacer ce message"></td>
+            <td><p class="del-msg-from" data-msg-id="{$msg.id|escape}" title="Effacer ce message">❌</p></td>
           </tr>
           {/foreach}
         </table>

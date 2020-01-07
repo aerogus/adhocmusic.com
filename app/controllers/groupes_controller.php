@@ -180,7 +180,7 @@ final class Controller
                 $smarty->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=g&id_content='.$groupe->getId());
             }
         } else {
-            $smarty->assign('alerting_auth_url', HOME_URL . '/auth/login');
+            $smarty->assign('alerting_auth_url', HOME_URL . '/auth/auth');
         }
         */
 

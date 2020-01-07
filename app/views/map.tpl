@@ -44,7 +44,7 @@
         <a href="/contact">Contact</a>
       </li>
       <li>
-        <a href="/auth/login">Connexion</a>
+        <a href="/auth/auth">Se connecter ou créer un compte</a>
       </li>
     </ul>
   </div>

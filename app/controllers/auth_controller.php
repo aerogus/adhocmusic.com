@@ -3,6 +3,29 @@
 final class Controller
 {
     /**
+     * Page hybride d'identification + création de compte
+     *
+     * @return string
+     */
+    static function auth(): string
+    {
+        // déjà authentifié
+        if (!empty($_SESSION['membre'])) {
+            Tools::redirect('/membres/tableau-de-bord');
+        }
+
+        $smarty = new AdHocSmarty();
+
+        Trail::getInstance()
+            ->addStep('Se connecter ou créer un compte');
+
+        $smarty->enqueue_script('/js/auth/login.js');
+        $smarty->enqueue_script('/js/membres/create.js');
+
+        return $smarty->fetch('auth/auth.tpl');
+    }
+
+    /**
      * Page d'identification
      *
      * @return string
@@ -46,9 +69,10 @@ final class Controller
                 Log::action(Log::ACTION_LOGIN_FAILED);
 
                 Trail::getInstance()
-                    ->addStep("Identification");
+                    ->addStep("Se connecter");
 
                 $smarty = new AdHocSmarty();
+                $smarty->enqueue_script('/js/auth/login.js');
                 $smarty->assign('auth_failed', true);
                 return $smarty->fetch('auth/login.tpl');
 
@@ -60,6 +84,8 @@ final class Controller
 
         Trail::getInstance()
             ->addStep('Se connecter');
+
+        $smarty->enqueue_script('/js/auth/login.js');
 
         return $smarty->fetch('auth/login.tpl');
     }
@@ -101,7 +127,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/change-password.js');
+        $smarty->enqueue_script('/js/auth/change-password.js');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -152,7 +178,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/js/lost-password.js');
+        $smarty->enqueue_script('/js/auth/lost-password.js');
 
         Trail::getInstance()
             ->addStep("Mot de passe oublié");

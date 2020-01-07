@@ -88,28 +88,4 @@ jQuery(document).ready(function ($) {
     $(this).find('ul').hide();
   });
 
-  // thumbnail photo et video
-  $('.thumb-80').hover(function () {
-    $(this).children('.overlay-80').css('visibility', 'visible');
-  }, function () {
-    $(this).children('.overlay-80').css('visibility', 'hidden');
-  });
-
-  $('#form-login').submit(function () {
-    var valid = true;
-    if (!$('#login-pseudo').val().length) {
-      $('#login-pseudo').prev('.error').fadeIn();
-      valid = false;
-    } else {
-      $('#login-pseudo').prev('.error').fadeOut();
-    }
-    if (!$('#login-password').val().length) {
-      $('#login-password').prev('.error').fadeIn();
-      valid = false;
-    } else {
-      $('#login-password').prev('.error').fadeOut();
-    }
-    return valid;
-  });
-
 });

@@ -44,7 +44,7 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
   </ul>
   <input type="hidden" name="csrf" value="{$data.csrf}">
   <input type="hidden" name="text" value="{$data.text|escape}">
-  <input id="form-membrer-create-submit" name="form-member-create-submit" class="button" style="width:100%" type="submit" value="S'inscrire">
+  <input id="form-membrer-create-submit" name="form-member-create-submit" class="button" style="width:100%" type="submit" value="Je crée mon compte">
 </form>
 
 {/if}

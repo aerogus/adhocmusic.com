@@ -26,7 +26,7 @@
           <input type="password" id="login-password" name="password" placeholder="Mot de passe" style="width:100%">
         </li>
       </ul>
-      <input id="form-login-submit" name="form-login-submit" type="submit" value="Connexion">
+      <input id="form-login-submit" name="form-login-submit" type="submit" value="Je me connecte">
       {if !empty($referer)}<input type="hidden" id="login-referer" name="referer" value="{$referer|escape:'url'}">{/if}
       <ul class="txtright sublinks">
         <li><a href="/auth/lost-password">mot de passe oublié</a></li>

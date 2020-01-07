@@ -236,7 +236,7 @@ class Tools
         // non identifié
         if (empty($_SESSION['membre'])) {
             $_SESSION['redirect_after_auth'] = $_SERVER['REQUEST_URI'];
-            Tools::redirect('/auth/login', true);
+            Tools::redirect('/auth/auth', true);
             exit();
         }
 
@@ -248,7 +248,7 @@ class Tools
 
         // identifié mais pas assez de droits
         $_SESSION['redirect_after_auth'] = $_SERVER['REQUEST_URI'];
-        Tools::redirect('/auth/login');
+        Tools::redirect('/auth/auth');
         exit();
     }
 
