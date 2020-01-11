@@ -1,5 +1,5 @@
 <footer>
-  <ul class="footer clearfix">
+  <ul class="footer">
     <li>
       <ul>
         <li><h4>Qui sommes-nous ?</h4></li>
@@ -36,5 +36,5 @@
       </ul>
     </li>
   </ul>
-  <div class="txtcenter italic mas">Association loi 1901 à but non lucratif œuvrant pour le développement des musiques actuelles à <a href="https://www.ville-epinay-sur-orge.fr">Épinay-sur-Orge</a> depuis 1996</div>
+  <p class="baseline">Association loi 1901 à but non lucratif œuvrant pour le développement des musiques actuelles à <a href="https://www.ville-epinay-sur-orge.fr">Épinay-sur-Orge</a> depuis 1996</p>
 </footer>
