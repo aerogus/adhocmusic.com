@@ -16,6 +16,13 @@
     <img src="{$event->getThumbUrl(320)}" alt="{$event->getName()|escape}" style="display: block; margin: 0 auto 10px;">
     {/if}
 
+
+    {if $event->getFacebookEventId()}
+    <p class="txtcenter">
+      <a class="event_facebook" href="{$event->getFacebookEventUrl()}" title="Aller sur l'événement Facebook">Événement Facebook</a>
+    </p>
+    {/if}
+
     {if !empty($event->getGroupes())}
     <p>Avec :</p>
     <ul class="grid-3">
@@ -34,12 +41,6 @@
       </a>
       <p>Entrée : <strong>{$event->getPrice()|escape}</strong></p>
     </div>
-
-    {if $event->getFacebookEventId()}
-    <p class="event_facebook" align="center">
-      <a style="padding: 1rem; color: #fff; background-color: #3b5998" href="{$event->getFacebookEventUrl()}">Événement Facebook</a>
-    </p>
-    {/if}
   
     <p align="justify">{$event->getText()|escape|@nl2br}</p>
 
