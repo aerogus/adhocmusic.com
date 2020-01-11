@@ -16,7 +16,6 @@
     <img src="{$event->getThumbUrl(320)}" alt="{$event->getName()|escape}" style="display: block; margin: 0 auto 10px;">
     {/if}
 
-
     {if $event->getFacebookEventId()}
     <p class="txtcenter">
       <a class="event_facebook" href="{$event->getFacebookEventUrl()}" title="Aller sur l'événement Facebook">Événement Facebook</a>
@@ -34,7 +33,7 @@
 
     <div id="event-box-info">
       <p><strong>Le {$jour} à {$heure}</strong></p>
-      <a href="/lieux/{$event->getLieu()->getIdLieu()}" title="{$event->getLieu()->getName()|escape}">
+      <a href="{$event->getLieu()->getUrl()}" title="{$event->getLieu()->getName()|escape}">
         <strong>{$event->getLieu()->getName()|escape}</strong><br>
         {$event->getLieu()->getAddress()}<br>
         {$event->getLieu()->getCity()->getCp()} - {$event->getLieu()->getCity()->getName()|escape}

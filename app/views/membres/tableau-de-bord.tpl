@@ -45,8 +45,8 @@
           <label for="avatar">Avatar</label>
         </li>
       </ul>
-      <p><a href="/membres/edit">Éditer mes infos persos</a></p>
-      <p><a href="/auth/logout">Déconnexion</a></p>
+      <p><a class="btn btn--primary" href="/membres/edit">Éditer mes infos persos</a></p>
+      <p><a class="btn btn--primary" href="/auth/logout">Déconnexion</a></p>
     </div>
   </div>
 
@@ -75,7 +75,7 @@
         </tr>
         {/foreach}
       </table>
-      <p><a href="/messagerie">Tous mes messages</a></p>
+      <p><a class="btn btn--primary" href="/messagerie">Tous mes messages</a></p>
     </div>
   </div>
 
@@ -118,7 +118,7 @@
       {else}
       <p class="infobulle validation"">Aucun abonnement lieu</p>
       {/if}
-      <p><a href="/alerting/my">Gérer toutes mes alertes</a></p>
+      <p><a class="btn btn--primary" href="/alerting/my">Gérer toutes mes alertes</a></p>
     </div>
   </div>
 
@@ -136,11 +136,11 @@
         <li><a href="/groupes/edit/{$groupe->getIdGroupe()}" title="{$groupe->getName()|escape}">{$groupe->getName()|escape}</a></li>
         {/foreach}
       </ul>
-      <p><a href="/groupes/my">Tous mes groupes</a></p>
+      <p><a class="btn btn--primary" href="/groupes/my">Tous mes groupes</a></p>
       {else}
       <p>aucun groupe</p>
       {/if}
-      <p><a href="/groupes/create">Inscrire un groupe</a></p>
+      <p><a class="btn btn--primary" href="/groupes/create">Inscrire un groupe</a></p>
     </div>
   </div>
 
@@ -151,11 +151,11 @@
     <div>
       {if $nb_photos > 0}
       <p>Vous avez {$nb_photos} photos</p>
-      <p><a href="/photos/my">Toutes mes photos</a></p>
+      <p><a class="btn btn--primary" href="/photos/my">Toutes mes photos</a></p>
       {else}
       <p>Aucune photo</p>
       {/if}
-      <p><a href="/photos/create">Ajouter une photo</a></p>
+      <p><a class="btn btn--primary" href="/photos/create">Ajouter une photo</a></p>
     </div>
   </div>
 
@@ -166,11 +166,11 @@
     <div>
       {if $nb_videos > 0}
       <p>Vous avez {$nb_videos} vidéos</p>
-      <p><a href="/videos/my">Toutes mes vidéos</a></p>
+      <p><a class="btn btn--primary" href="/videos/my">Toutes mes vidéos</a></p>
       {else}
       <p>Aucune vidéo</p>
       {/if}
-      <p><a href="/videos/create">Ajouter une vidéo</a></p>
+      <p><a class="btn btn--primary" href="/videos/create">Ajouter une vidéo</a></p>
     </div>
   </div>
 
@@ -181,11 +181,29 @@
     <div>
       {if $nb_audios > 0}
       <p>Vous avez {$nb_audios} audios</p>
-      <p><a href="/audios/my">Toutes mes musiques</a></p>
+      <p><a class="btn btn--primary" href="/audios/my">Toutes mes musiques</a></p>
       {else}
       <p>Aucune musique</p>
       {/if}
-      <p><a href="/audios/create">Ajouter une musique</a></p>
+      <p><a class="btn btn--primary" href="/audios/create">Ajouter une musique</a></p>
+    </div>
+  </div>
+
+  <div class="box">
+    <header>
+      <h2>Lieux</h2>
+    </header>
+    <div>
+      <p><a class="btn btn--primary" href="/lieux/create">Ajouter un lieu</a></p>
+    </div>
+  </div>
+
+  <div class="box">
+    <header>
+      <h2>Événements</h2>
+    </header>
+    <div>
+      <p><a class="btn btn--primary" href="/events/create">Ajouter un événement</a></p>
     </div>
   </div>
 
