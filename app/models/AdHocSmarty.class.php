@@ -387,7 +387,7 @@ class AdHocSmarty extends Smarty
      */
     static function modifier_display_on_off_icon(bool $val): string
     {
-        return $val ? ✅ : ❌;
+        return $val ? '✓' : '';
     }
 
     /**
