@@ -358,6 +358,7 @@ class Media extends ObjectModel
      *                      'id__in' => array de int,
      *                      'id__not_in' => array de int,
      *                      'id_contact' => int,
+     *                      'has_groupe' => bool,
      *                      'id_groupe' => int,
      *                      'id_event' => int,
      *                      'id_lieu' => int,
@@ -387,6 +388,10 @@ class Media extends ObjectModel
 
         if (isset($params['id_contact'])) {
             $sql .= "AND `id_contact` = " . (int) $params['id_contact'] . " ";
+        }
+
+        if (!empty($params['has_groupe'])) {
+            $sql .= "AND `id_groupe` IS NOT NULL ";
         }
 
         if (isset($params['id_groupe'])) {

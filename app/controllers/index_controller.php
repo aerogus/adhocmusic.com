@@ -24,6 +24,7 @@ final class Controller
             'videos', Video::find(
                 [
                     'id_lieu' => 1,
+                    'has_groupe' => true,
                     'online' => true,
                     'order_by' => 'random',
                     'sort' => 'DESC',
