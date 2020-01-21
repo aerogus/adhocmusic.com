@@ -76,15 +76,15 @@ class CMS extends ObjectModel
      * @var array
      */
     protected static $_all_fields = [
-        'id_cms'       => 'int', // pk
-        'alias'        => 'string',
-        'title'        => 'string',
-        'created_at'   => 'date',
-        'modified_at'  => 'date',
-        'breadbcrumb'  => 'phpser',
-        'content'      => 'string',
-        'online'       => 'bool',
-        'auth'         => 'int',
+        'id_cms'      => 'int', // pk
+        'alias'       => 'string',
+        'title'       => 'string',
+        'created_at'  => 'date',
+        'modified_at' => 'date',
+        'breadcrumb'  => 'string',
+        'content'     => 'string',
+        'online'      => 'bool',
+        'auth'        => 'int',
     ];
 
     /* début getters */
@@ -286,14 +286,14 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @param array $breadcrumb breadcrumb
+     * @param array $breadcrumb breadcrumb [{title:'', link: '', description: ''},{...}]
      *
      * @return object
      */
     function setBreadcrumb(array $breadcrumb): object
     {
         if ($this->_breadcrumb !== $breadcrumb) {
-            $this->_breadcrumb = $breadcrumb;
+            $this->_breadcrumb = print_r($breadcrumb, true);
             $this->_modified_fields['breadcrumb'] = true;
         }
 

@@ -53,7 +53,7 @@ final class Controller
 
             (new CMS())
                 ->setAlias($data['alias'])
-                ->setBreadcrumb($data['breadcrumb'])
+                ->setBreadcrumb([$data['breadcrumb']])
                 ->setTitle($data['title'])
                 ->setContent($data['content'])
                 ->setOnline($data['online'])
@@ -97,7 +97,7 @@ final class Controller
 
             CMS::getInstance($data['id_cms'])
                 ->setAlias($data['alias'])
-                ->setBreadcrumb($data['breadcrumb'])
+                ->setBreadcrumb([$data['breadcrumb']])
                 ->setTitle($data['title'])
                 ->setContent($data['content'])
                 ->setOnline($data['online'])
