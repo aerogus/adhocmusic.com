@@ -346,8 +346,8 @@ class Video extends Media
     {
         if (parent::delete()) {
             $this->deleteThumbnail();
-            $thumbWidth = Conf::getInstance()->get('video')['thumb_width'];
-            foreach ($thumbWidth as $maxWidth) {
+            $thumbWidths = Conf::getInstance()->get('video')['thumb_width'];
+            foreach ($thumbWidths as $maxWidth) {
                 $this->clearThumb($maxWidth);
             }
             return true;

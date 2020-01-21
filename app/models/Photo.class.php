@@ -135,8 +135,8 @@ class Photo extends Media
     function delete(): bool
     {
         if (parent::delete()) {
-            $conf = Conf::getInstance();
-            foreach ($conf['photo']['thumb_width'] as $maxWidth) {
+            $thumbWidths = Conf::getInstance()->get('photo')['thumb_width'];
+            foreach ($thumbWidths as $maxWidth) {
                 $this->clearThumb($maxWidth);
             }
 
