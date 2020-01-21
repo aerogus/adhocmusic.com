@@ -101,7 +101,7 @@ final class Controller
                                 $smarty->assign('ret', 'UNSUB-OK');
                                 break;
                             case NEWSLETTER_UNSUB_KO_ALREADY_UNSUBSCRIBED_MEMBER:
-                            case NEWSLETTER_UNSUB_KO_UNKNOW_CONTACT:
+                            case NEWSLETTER_UNSUB_KO_UNKNOWN_CONTACT:
                                 $smarty->assign('ret', 'UNSUB-KO');
                                 break;
                         }
