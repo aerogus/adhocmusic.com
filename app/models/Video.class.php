@@ -416,7 +416,7 @@ class Video extends Media
                 return "https://player.vimeo.com/video/" . $this->getReference() . "?title=0&amp;byline=0&amp;portrait=0";
 
             case self::HOST_ADHOCTUBE:
-                return "https://" . MEDIA_ADHOCTUBE_HOST . "/videos/embed/" . $this->getReference() . "?title=0&amp;warningTitle=0";
+                return "https://" . MEDIA_ADHOCTUBE_HOST . "/videos/embed/" . $this->getReference() . "?title=0&amp;warningTitle=0&amp;controls=1";
 
             default:
                 return null;
