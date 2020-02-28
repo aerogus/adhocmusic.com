@@ -16,7 +16,7 @@
       </header>
       <div>
         {if $groupe->getLogo()}
-        <p align="center"><img src="{$groupe->getLogo()}" alt="{$groupe->getName()|escape}"></p>
+        <img src="{$groupe->getLogo()}" alt="{$groupe->getName()|escape}" style="display:block;margin:0 auto">
         {/if}
         {if $groupe->getStyle()}
         <p><strong>Style</strong><br>{$groupe->getStyle()|escape}</p>
@@ -91,11 +91,9 @@
       </header>
       <div>
         {if $groupe->getPhoto()}
-        <p align="center">
-          <img src="{$groupe->getPhoto()}" alt="{$groupe->getName()|escape}" title="{$groupe->getName()|escape}">
-        </p>
+        <img src="{$groupe->getPhoto()}" alt="{$groupe->getName()|escape}" title="{$groupe->getName()|escape}" style="display:block;margin:0 auto">
         {/if}
-        <p align="justify">{$groupe->getText()|nl2br}</p>
+        <p style="text-align:justify">{$groupe->getText()|nl2br}</p>
       </div>
     </div>
 
