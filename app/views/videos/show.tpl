@@ -24,7 +24,7 @@
       <h2>Partager cette vidéo</h2>
     </header>
     <div class="reset">
-      {include file="comments/share.tpl" title="" url=$video->getUrl()}
+      {include file="comments/share.tpl" title="" url=$video->getUrl() text=$video->getName()}
     </div>
   </div>
 

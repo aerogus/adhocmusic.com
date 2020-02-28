@@ -9,7 +9,7 @@
     </a>
   </li>
   <li>
-    <a href="http://twitter.com/home?status={$url|escape}%20via%20@adhocmusic" class="twitter">
+    <a href="https://twitter.com/intent/tweet?text={$text|escape}&url={$url|escape}&via=adhocmusic" class="twitter">
       <span>Twitter</span>
     </a>
   </li>
