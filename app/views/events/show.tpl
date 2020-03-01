@@ -24,7 +24,7 @@
 
     {if !empty($event->getGroupes())}
     <p>Avec :</p>
-    <ul class="grid-3">
+    <ul class="grid-3-small-1">
     {foreach from=$event->getGroupes() item=groupe}
       <li><a href="{$groupe->getUrl()}"><img src="{$groupe->getMiniPhoto()}" style="float: left; margin: 2px; border: 1px solid #777" alt=""></a><a href="{$groupe->getUrl()}"><strong>{$groupe->getName()|escape}</strong></a><br>({$groupe->getStyle()|escape})</li>
     {/foreach}
