@@ -46,13 +46,14 @@ class Ephemeride
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT g.name, e.`date`, YEAR(e.`date`) AS `year`, DATE_FORMAT(e.`date`, '%m-%d') AS `day` "
+        $sql = "SELECT g.id_groupe, g.name, e.`date`, YEAR(e.`date`) AS `year`, DATE_FORMAT(e.`date`, '%m-%d') AS `day` "
              . "FROM adhoc_groupe g, adhoc_participe_a pa, adhoc_event e, adhoc_organise_par o, adhoc_structure s "
              . "WHERE g.id_groupe = pa.id_groupe "
              . "AND pa.id_event = e.id_event "
              . "AND e.id_event = o.id_event "
              . "AND o.id_structure = s.id_structure "
              . "AND s.id_structure = 1 "
+             . "AND e.id_lieu = 1 "
              . "ORDER BY MONTH(e.`date`) ASC, DAY(e.`date`) ASC, e.`date` ASC";
 
         $rows = $db->queryWithFetch($sql);
@@ -65,7 +66,7 @@ class Ephemeride
             if (!array_key_exists($row['year'], $data[$row['day']])) {
                 $data[$row['day']][$row['year']] = [];
             }
-            array_push($data[$row['day']][$row['year']], $row['name']);
+            array_push($data[$row['day']][$row['year']], $row['id_groupe']);
         }
 
         $this->_data = $data;
