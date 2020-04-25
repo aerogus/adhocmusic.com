@@ -281,6 +281,15 @@ final class Controller
         return $smarty->fetch('credits.tpl');
     }
 
+    static function live(): string
+    {
+        $smarty = new AdHocSmarty();
+        Trail::getInstance()
+            ->addStep("Live");
+
+        return $smarty->fetch('live.tpl');
+    }
+
     /**
      * Page dynamique issu du CMS
      *

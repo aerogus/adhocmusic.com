@@ -136,6 +136,7 @@ index|credits|GET|/credits
 index|mentions_legales|GET|/mentions-legales
 index|cms|GET|/cms/:id
 index|r|GET|/r/:url
+index|live|GET|/live
 lieux|index|GET|/lieux
 lieux|my|GET|/lieux/my
 lieux|create|GET|/lieux/create
