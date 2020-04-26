@@ -5,29 +5,13 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "serve": "./node_modules/.bin/brunch watch --server",
-    "build": "./node_modules/.bin/brunch build --production",
-    "start": "./node_modules/.bin/brunch watch --production & docker-compose up",
+    "build-style": "./node_modules/.bin/stylus --compress app/styles/adhoc.styl --out public/css/adhoc.css",
+    "start": "docker-compose up",
     "stop": "docker-compose down",
-    "clean": "rm -Rf node_modules vendor public volumes"
-  },
-  "devDependencies": {
-    "after-brunch": "0.0.5",
-    "auto-reload-brunch": "2.7.1",
-    "autoprefixer": "9.7.6",
-    "babel-brunch": "7.0.1",
-    "brunch": "3.0.0",
-    "clean-css-brunch": "3.0.0",
-    "eslint": "6.8.0",
-    "eslint-config-airbnb-base": "14.1.0",
-    "eslint-plugin-import": "2.20.2",
-    "json-brunch": "1.5.4",
-    "postcss-assets": "5.0.0",
-    "postcss-brunch": "3.0.0",
-    "stylus-brunch": "3.0.0",
-    "terser-brunch": "4.0.0"
+    "clean": "rm -Rf node_modules vendor volumes"
   },
   "dependencies": {
-    "mjml": "4.6.2"
+    "mjml": "4.6.2",
+    "stylus": "0.54.7"
   }
 }

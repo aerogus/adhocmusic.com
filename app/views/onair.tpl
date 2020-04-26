@@ -2,10 +2,9 @@
 
 <div class="box">
   <header>
-    <h1>Live</h1>
+    <h1>ON AIR</h1>
   </header>
   <div>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <video id="video"></video>
     <script>
   var video = document.getElementById('video');

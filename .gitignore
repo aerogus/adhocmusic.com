@@ -19,8 +19,5 @@
 # medias utilisateurs (video, mp3, photos...)
 /media
 
-# export brunch
-/public
-
 # fs en ram
 /tmpfs
