@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "build-style": "./node_modules/.bin/stylus --compress app/styles/adhoc.styl --out public/css/adhoc.css",
+    "stylus": "./node_modules/.bin/stylus --compress app/styles/adhoc.styl --out public/css/adhoc.css",
     "start": "docker-compose up",
     "stop": "docker-compose down",
     "clean": "rm -Rf node_modules vendor volumes"
