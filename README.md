@@ -25,7 +25,7 @@ git clone git@bitbucket.org:adhocmusic/adhocmusic.com.git
 cd adhocmusic.com
 composer install
 npm install
-brunch build
+npm run build-style
 docker-compose up
 ```
 
@@ -46,7 +46,7 @@ Construction pour la prod :
 ```
 composer install --no-dev
 npm install --only=prod
-brunch build --production
+npm run build-style
 ```
 
 
