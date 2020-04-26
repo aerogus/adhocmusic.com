@@ -24,7 +24,8 @@
     "json-brunch": "1.5.4",
     "postcss-assets": "5.0.0",
     "postcss-brunch": "3.0.0",
-    "stylus-brunch": "3.0.0"
+    "stylus-brunch": "3.0.0",
+    "terser-brunch": "4.0.0"
   },
   "dependencies": {
     "mjml": "4.6.2"
