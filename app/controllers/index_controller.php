@@ -281,13 +281,19 @@ final class Controller
         return $smarty->fetch('credits.tpl');
     }
 
-    static function live(): string
+    static function onair(): string
     {
         $smarty = new AdHocSmarty();
-        Trail::getInstance()
-            ->addStep("Live");
 
-        return $smarty->fetch('live.tpl');
+        $smarty->enqueue_script('/js/hls.min.js');
+        $smarty->enqueue_script('/js/onair.js');
+
+        $smarty->enqueue_script_var('videoSrc', 'https://live.adhocmusic.com/hls/onair.m3u8');
+
+        Trail::getInstance()
+            ->addStep("ON AIR");
+
+        return $smarty->fetch('onair.tpl');
     }
 
     /**
