@@ -65,6 +65,8 @@ adm_subscriptions|api_delete|POST|/api/subscriptions/delete/:id
 assoce|assoce|GET|/assoce
 assoce|concerts|GET|/concerts
 assoce|afterworks|GET|/afterworks
+assoce|afterworks_inscription|GET|/afterworks/inscription
+assoce|afterworks_inscription|POST|/afterworks/inscription
 assoce|festival|GET|/festival
 assoce|equipe|GET|/equipe
 audios|my|GET|/audios/my
@@ -137,7 +139,6 @@ index|mentions_legales|GET|/mentions-legales
 index|cms|GET|/cms/:id
 index|r|GET|/r/:url
 index|onair|GET|/onair
-index|onair|GET|/onair/
 lieux|index|GET|/lieux
 lieux|my|GET|/lieux/my
 lieux|create|GET|/lieux/create

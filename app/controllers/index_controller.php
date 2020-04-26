@@ -281,6 +281,9 @@ final class Controller
         return $smarty->fetch('credits.tpl');
     }
 
+    /**
+     * Player vidéo HLS pour les événéments en direct
+     */
     static function onair(): string
     {
         $smarty = new AdHocSmarty();
