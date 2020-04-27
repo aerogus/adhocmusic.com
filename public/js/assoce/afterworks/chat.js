@@ -28,14 +28,14 @@ jQuery(document).ready(function ($) {
   var lastTypingTime;
   var $currentInput = $usernameInput.focus();
 
-  var socket = io('/chat');
+  var socket = io();
 
   const addParticipantsMessage = (data) => {
     var message = '';
     if (data.numUsers === 1) {
-      message += "there's 1 participant";
+      message += "il y a 1 participant";
     } else {
-      message += "there are " + data.numUsers + " participants";
+      message += "il y a " + data.numUsers + " participants";
     }
     log(message);
   }
@@ -74,7 +74,7 @@ jQuery(document).ready(function ($) {
   }
 
   // Log a message
-    const log = (message, options) => {
+  const log = (message, options) => {
     var $el = $('<li>').addClass('log').text(message);
     addMessageElement($el, options);
   }
@@ -234,7 +234,7 @@ jQuery(document).ready(function ($) {
   socket.on('login', (data) => {
     connected = true;
     // Display the welcome message
-    var message = "Welcome to Socket.IO Chat – ";
+    var message = "Bienvenue sur le chat des afterworks AD'HOC";
     log(message, {
       prepend: true
     });
@@ -270,18 +270,18 @@ jQuery(document).ready(function ($) {
   });
 
   socket.on('disconnect', () => {
-    log('you have been disconnected');
+    log('vous avez été déconnecté');
   });
 
   socket.on('reconnect', () => {
-    log('you have been reconnected');
+    log('vous avez été reconnecté');
     if (username) {
       socket.emit('add user', username);
     }
   });
 
   socket.on('reconnect_error', () => {
-    log('attempt to reconnect has failed');
+    log('la tentative de reconnexion a échoué');
   });
 
 });

@@ -2,7 +2,7 @@
 
   <div class="box">
     <header>
-      <h1>Afterworks - Chat 💬</h1>
+      <h1>Chat des Afterworks 💬</h1>
     </header>
     <div>
       <ul class="pages">
@@ -10,11 +10,11 @@
           <div class="chatArea">
             <ul class="messages"></ul>
           </div>
-          <input class="inputMessage" placeholder="Type here..."/>
+          <input class="inputMessage" placeholder="Écrivez ici..."/>
         </li>
         <li class="login page">
           <div class="form">
-            <h3 class="title">What's your nickname?</h3>
+            <h3 class="title">Quel est votre nom de scène ?</h3>
             <input class="usernameInput" type="text" maxlength="14" />
           </div>
         </li>

@@ -67,6 +67,7 @@ assoce|concerts|GET|/concerts
 assoce|afterworks|GET|/afterworks
 assoce|afterworks_inscription|GET|/afterworks/inscription
 assoce|afterworks_inscription|POST|/afterworks/inscription
+assoce|afterworks_chat|GET|/afterworks/chat
 assoce|festival|GET|/festival
 assoce|equipe|GET|/equipe
 audios|my|GET|/audios/my

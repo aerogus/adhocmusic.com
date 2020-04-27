@@ -53,7 +53,7 @@ final class Controller
     {
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_script('/chat/socket.io/socket.io.js'); // servi par l'app node
+        $smarty->enqueue_script('/js/socket.io-2.3.0.min.js');
         $smarty->enqueue_script('/js/assoce/afterworks/chat.js');
 
         Trail::getInstance()

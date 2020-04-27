@@ -1,11 +1,13 @@
 #!/usr/bin/env node
+
 /**
  * Salon de discussion
  */
 
+'use strict';
+
 const express = require('express')
   , app = express()
-  , path = require('path')
   , server = require('http').createServer(app)
   , io = require('socket.io')(server)
   , port = process.env.PORT || 6667;
@@ -13,9 +15,6 @@ const express = require('express')
 server.listen(port, () => {
   console.log('Server listening at port %d', port);
 });
-
-// Routing
-//app.use(express.static(path.join(__dirname, 'public')));
 
 // Chatroom
 
@@ -26,6 +25,7 @@ io.on('connection', (socket) => {
 
   // when the client emits 'new message', this listens and executes
   socket.on('new message', (data) => {
+    console.log('new message');
     // we tell the client to execute 'new message'
     socket.broadcast.emit('new message', {
       username: socket.username,
@@ -35,6 +35,7 @@ io.on('connection', (socket) => {
 
   // when the client emits 'add user', this listens and executes
   socket.on('add user', (username) => {
+    console.log('add user');
     if (addedUser) return;
 
     // we store the username in the socket session for this client
@@ -53,6 +54,7 @@ io.on('connection', (socket) => {
 
   // when the client emits 'typing', we broadcast it to others
   socket.on('typing', () => {
+    console.log('typing');
     socket.broadcast.emit('typing', {
       username: socket.username
     });
@@ -60,6 +62,7 @@ io.on('connection', (socket) => {
 
   // when the client emits 'stop typing', we broadcast it to others
   socket.on('stop typing', () => {
+    console.log('stop typing');
     socket.broadcast.emit('stop typing', {
       username: socket.username
     });
@@ -67,6 +70,7 @@ io.on('connection', (socket) => {
 
   // when the user disconnects.. perform this
   socket.on('disconnect', () => {
+    console.log('disconnect');
     if (addedUser) {
       --numUsers;
 
