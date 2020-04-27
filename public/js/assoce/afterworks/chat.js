@@ -107,7 +107,7 @@ jQuery(document).ready(function ($) {
   // Adds the visual chat typing message
   const addChatTyping = (data) => {
     data.typing = true;
-    data.message = 'is typing';
+    data.message = "est en train d'écrire";
     addChatMessage(data);
   }
 
@@ -248,13 +248,13 @@ jQuery(document).ready(function ($) {
 
   // Whenever the server emits 'user joined', log it in the chat body
   socket.on('user joined', (data) => {
-    log(data.username + ' joined');
+    log(data.username + ' a rejoint le chat');
     addParticipantsMessage(data);
   });
 
   // Whenever the server emits 'user left', log it in the chat body
   socket.on('user left', (data) => {
-    log(data.username + ' left');
+    log(data.username + ' a quitté le chat');
     addParticipantsMessage(data);
     removeChatTyping(data);
   });

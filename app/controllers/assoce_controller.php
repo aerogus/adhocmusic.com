@@ -53,6 +53,7 @@ final class Controller
     {
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_style('/css/chat.css');
         $smarty->enqueue_script('/js/socket.io-2.3.0.min.js');
         $smarty->enqueue_script('/js/assoce/afterworks/chat.js');
 
