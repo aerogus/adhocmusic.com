@@ -10,45 +10,58 @@ const express = require('express')
   , app = express()
   , server = require('http').createServer(app)
   , io = require('socket.io')(server)
-  , port = process.env.PORT || 6667;
+  , port = process.env.PORT || 6667
+  , fs = require('fs')
+  , ini = require('ini')
+  , mysql = require('mysql');
+
+const config = ini.parse(fs.readFileSync('../../conf/conf.ini', 'utf-8'));
+
+const db = mysql.createConnection({
+  host: config.database.host,
+  user: config.database.user,
+  password: config.database.pass,
+  database: config.database.name,
+});
+
+db.connect();
 
 server.listen(port, () => {
   console.log('Server listening at port %d', port);
 });
 
-// Chatroom
-
 let numUsers = 0;
 
+// connexion d'un nouvel user
 io.on('connection', (socket) => {
   let addedUser = false;
 
-  // when the client emits 'new message', this listens and executes
+  // réception d'un nouveau message
   socket.on('new message', (data) => {
     console.log('new message');
-    // we tell the client to execute 'new message'
     socket.broadcast.emit('new message', {
-      username: socket.username,
-      message: data
+      userName: socket.userName,
+      message: data,
     });
   });
 
-  // when the client emits 'add user', this listens and executes
-  socket.on('add user', (username) => {
+  // réception d'un 'add user'
+  socket.on('add user', (userName) => {
     console.log('add user');
-    if (addedUser) return;
+    if (addedUser) {
+      return;
+    }
 
-    // we store the username in the socket session for this client
-    socket.username = username;
+    socket.userName = userName;
     ++numUsers;
     addedUser = true;
     socket.emit('login', {
-      numUsers: numUsers
+      numUsers: numUsers,
     });
     // echo globally (all clients) that a person has connected
     socket.broadcast.emit('user joined', {
-      username: socket.username,
-      numUsers: numUsers
+      userName: socket.userName,
+      numUsers: numUsers,
     });
   });
 
@@ -56,7 +69,7 @@ io.on('connection', (socket) => {
   socket.on('typing', () => {
     console.log('typing');
     socket.broadcast.emit('typing', {
-      username: socket.username
+      userName: socket.userName,
     });
   });
 
@@ -64,7 +77,7 @@ io.on('connection', (socket) => {
   socket.on('stop typing', () => {
     console.log('stop typing');
     socket.broadcast.emit('stop typing', {
-      username: socket.username
+      userName: socket.userName,
     });
   });
 
@@ -76,9 +89,39 @@ io.on('connection', (socket) => {
 
       // echo globally that this client has left
       socket.broadcast.emit('user left', {
-        username: socket.username,
-        numUsers: numUsers
+        userName: socket.userName,
+        numUsers: numUsers,
       });
     }
   });
 });
+
+// fonctions DB
+
+function findLastEvents() {
+  const query = 'SELECT ts, room, user, type, message FROM chat_event ORDER BY ts ASC';
+  db.query(query);
+}
+
+function userJoinRoom (user, room) {
+  const query = 'INSERT INTO chat_room_user (room, user) VALUES(%s,%s)';
+  db.query(query);
+}
+
+function userLeaveRoom (user, room) {
+  const query = 'DELETE FROM chat_room_user WHERE room = %s AND user = %s';
+  db.query(query);
+}
+
+function findUsersByRoom (room) {
+  const query = 'SELECT user FROM chat_room_user WHERE room = %s';
+  db.query(query);
+}
+
+function addEvent (type, name, body) {
+  db.query('INSERT INTO chat_event (room, type, name, body) VALUES()', (error, results, fields) => {
+    if (error) {
+      throw error;
+    };
+  });
+}
