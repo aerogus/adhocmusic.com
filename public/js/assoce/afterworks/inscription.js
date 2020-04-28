@@ -4,9 +4,9 @@ jQuery(document).ready(function ($) {
 
   'use strict';
 
-  $('#check').val($('#form-contact-submit').data('check'));
+  $('#check').val($('#form-afterworks-submit').data('check'));
 
-  $('#form-contact').submit(function () {
+  $('#form-afterworks').submit(function () {
     var valid = true;
     if ($('#name').val().length === 0) {
       $('#error_name').fadeIn();
@@ -20,17 +20,27 @@ jQuery(document).ready(function ($) {
     } else {
       $('#error_email').fadeOut();
     }
-    if ($('#subject').val().length === 0) {
-      $('#error_subject').fadeIn();
+    if ($('#date').val().length === 0) {
+      $('#error_date').fadeIn();
       valid = false;
     } else {
-      $('#error_subject').fadeOut();
+      $('#error_date').fadeOut();
     }
-    if ($('#text').val().length === 0) {
-      $('#error_text').fadeIn();
+    let selectedHours = false;
+    if ($('#h1930-2030').prop('checked')) {
+      selectedHours = true;
+    }
+    if ($('#h2030-2130').prop('checked')) {
+      selectedHours = true;
+    }
+    if ($('#h2130-2230').prop('checked')) {
+      selectedHours = true;
+    }
+    if (!selectedHours) {
+      $('#error_hour').fadeIn();
       valid = false;
     } else {
-      $('#error_text').fadeOut();
+      $('#error_hour').fadeOut();
     }
     return valid;
   });

@@ -77,17 +77,21 @@ final class Controller
             ->addStep("Afterworks")
             ->addStep("Inscription");
 
-        if (!Tools::isSubmit('form-afterworks-inscription')) {
+        if (!Tools::isSubmit('form-afterworks')) {
 
             $smarty->assign('show_form', true);
 
             // valeurs par défaut
             $data = [
-                'name'    => '',
-                'email'   => '',
-                'subject' => '',
-                'text'    => '',
-                'check'   => Tools::getCSRFToken(),
+                'name' => '',
+                'email' => '',
+                'date' => '',
+                'h1930-2030' => '',
+                'h2030-2130' => '',
+                'h2130-2230' => '',
+                'instrument' => '',
+                'text' => '',
+                'check' => Tools::getCSRFToken(),
             ];
 
             // si identifié, préremplissage de certains champs
@@ -105,15 +109,36 @@ final class Controller
             $data = [
                 'name'    => trim((string) Route::params('name')),
                 'email'   => trim((string) Route::params('email')),
-                'subject' => trim((string) Route::params('subject')),
+                'date' => trim((string) Route::params('date')),
+                'h1930-2030' => trim((string) Route::params('h1930-2030')),
+                'h2030-2130' => trim((string) Route::params('h2030-2130')),
+                'h2130-2230' => trim((string) Route::params('h2130-2230')),
+                'instrument' => trim((string) Route::params('instrument')),
                 'text'    => trim((string) Route::params('text')),
                 'check'   => (string) Route::params('check'),
             ];
             $errors = [];
 
-            self::_validateAfterworksInscriptionForm($data, $errors);
+            self::_validateAfterworksForm($data, $errors);
 
             if (empty($errors)) {
+
+                if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
+                    // todo stockage photo
+                }
+
+                // 1. envoi du mail aux destinataires
+                $data['email_reply_to'] = $data['email'];
+                if (Email::send(CONTACT_FORM_TO, "Inscription à l'afterwork", 'form-afterworks-to', $data)) {
+                    $smarty->assign('sent_ok', true);
+                } else {
+                    $smarty->assign('sent_ko', true);
+                }
+
+                // 2. envoi de la copie à l'expéditeur
+                $data['email_reply_to'] = 'site@adhocmusic.com';
+                if (Email::send($data['email'], "[cc] Inscription à l'afterwork", 'form-afterworks-cc', $data)) {
+                }
 
             } else {
 
@@ -129,7 +154,11 @@ final class Controller
 
         $smarty->assign('name', $data['name']);
         $smarty->assign('email', $data['email']);
-        $smarty->assign('subject', $data['subject']);
+        $smarty->assign('date', $data['date']);
+        $smarty->assign('h1930-2030', $data['h1930-2030']);
+        $smarty->assign('h2030-2130', $data['h2030-2130']);
+        $smarty->assign('h2130-2230', $data['h2130-2230']);
+        $smarty->assign('instrument', $data['instrument']);
         $smarty->assign('text', $data['text']);
         $smarty->assign('check', $data['check']);
 
@@ -160,5 +189,37 @@ final class Controller
         $smarty->assign('membres', MembreAdhoc::getStaff(true));
 
         return $smarty->fetch('assoce/equipe.tpl');
+    }
+
+    /**
+     * Routine de validation des données du formulaire
+     *
+     * @param array $data   tableau des données
+     * @param array $errors tableau des erreurs (par référence)
+     *
+     * @return bool
+     */
+    private static function _validateAfterworksForm(array $data, array &$errors): bool
+    {
+        if (empty($data['name'])) {
+            $errors['name'] = "Vous devez renseigner votre nom";
+        }
+        if (empty($data['email'])) {
+            $errors['email'] = "Vous devez préciser votre email";
+        } elseif (!Email::validate($data['email'])) {
+            $errors['email'] = "Votre email semble invalide ...";
+        }
+        if (empty($data['date'])) {
+            $errors['subject'] = "Vous devez saisir une date";
+        }
+        if (empty($data['h1930-2030'])
+          && empty($data['h2030-2130'])
+          && empty($data['h2130-2230'])) {
+            $errors['hour'] = "Vous devez saisir au moins un créneau";
+        }
+        if (!Tools::checkCSRFToken($data['check'])) {
+            $errors['check'] = "Code de vérification invalide";
+        }
+        return true;
     }
 }
