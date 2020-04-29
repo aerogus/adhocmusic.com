@@ -5,24 +5,23 @@
     <h1>ON AIR</h1>
   </header>
   <div>
+    <p>Bientôt ici le flux live des émissions AD'HOC. prochaine émission : <strong>vendredi 1er mai à 19h30</strong></p>
+    <p>Les émissions seront également consultables aux endroits suivants:
+    <ul>
+      <li>sur la <a href="https://www.facebook.com/adhocmusic">page Facebook</a> de l'association</li>
+      <li>à l'url <a href="rtmp://live.adhocmusic.com/show/onair">rtmp://live.adhocmusic.com/show/onair</a> avec le lecteur multimédia de votre choix (VLC, MPD...)</li>
+      <li>à l'url <a href="https://live.adhocmusic.com/hls/onair.m3u8">https://live.adhocmusic.com/hls/onair.m3u8</a> avec le lecteur multimédia de votre choix (VLC, MPD...)</li>
+      <li>sur cette même page, dans le lecteur vidéo ci-dessous (faire clic-droit, Lire)</li>
+    </ul>
+    </p>
     <video id="video"></video>
-    <script>
-  var video = document.getElementById('video');
-  var videoSrc = 'https://live.adhocmusic.com/hls/onair.m3u8';
-  if (Hls.isSupported()) {
-    var hls = new Hls();
-    hls.loadSource(videoSrc);
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED, function() {
-      video.play();
-    });
-  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = videoSrc;
-    video.addEventListener('loadedmetadata', function() {
-      video.play();
-    });
-  }
-</script>
+
+    <p>Vous voulez participer à l'afterwork ?:
+      <ul>
+        <li><a class="btn btn--success" href="https://www.adhocmusic.com/events/6876">Description de l'événement</a></li>
+        <li><a class="btn btn--danger" href="https://www.adhocmusic.com/afterworks/inscription">Inscription à l'afterwork en ligne</a></li>
+      </ul>
+    </p>
   </div>
 </div>
 

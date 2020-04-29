@@ -70,4 +70,6 @@
 
 <div class="site_content clearfix">
 
+<div class="alert alert--danger txtcenter"><a href="/onair">Suivez le live de l'afterwork AD'HOC S5E6 vendredi 1er mai à 19h30</a></div>
+
 {include file="common/breadcrumb.tpl"}

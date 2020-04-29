@@ -41,7 +41,7 @@
       <p>Entrée : <strong>{$event->getPrice()|escape}</strong></p>
     </div>
   
-    <p align="justify">{$event->getText()|escape|@nl2br}</p>
+    <p align="justify">{$event->getText()|@nl2br}</p>
 
     {if !empty($structures)}
     <p>Organisateur :</p>

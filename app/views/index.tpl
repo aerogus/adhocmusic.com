@@ -1,6 +1,6 @@
 {include file="common/header.tpl"}
 
-<div id="swipe" class="swipe clearfix mbs">
+<div id="swipe" class="swipe clearfix mts mbs">
   <ul class="swipe-wrap">
     {foreach from=$featured key=idx item=f}
     <li data-index="{$idx}">
