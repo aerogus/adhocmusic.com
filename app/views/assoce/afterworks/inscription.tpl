@@ -12,15 +12,19 @@
 
       {if !empty($sent_ok)}
       <div class="infobulle success">
-        <strong>Votre message a bien été envoyé, merci !</strong><br>
-        Nous tâcherons d’y répondre dans les plus brefs délais<br>
-        Musicalement,<br>
-        L’Equipe AD’HOC
+          <p>Salut,<br/>Nous avons bien reçu ta demande de participation à l’Afterwork S5E6 on line, merci à toi ! Voici un récapitulatif de ton inscription :</p>
+          <p>Nom de scène: {$data.name|escape}</p>
+          <p>E-mail: {$data.email|escape}</p>
+          <p>Date: {$data.date|escape}</p>
+          <p>Créneau(x) souhaité(s): {$data.creneaux|escape}</p>
+          <p>Photo: <a href="{$photo_url}">{$photo_url}</a></p>
+          <p>Instrument: {$data.instrument|escape|@nl2br}</p>
+          <p>Infos: {$data.text|escape|@nl2br}</p>
       </div>
       {/if}
 
       {if !empty($sent_ko)}
-      <div class="infobulle error">Message non envoyé</div>
+      <div class="infobulle error">Message non envoyé, flûte, contactez-nous directement sur Facebook</div>
       {/if}
 
       {if !empty($show_form)}
