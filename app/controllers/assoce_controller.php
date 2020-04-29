@@ -116,6 +116,7 @@ final class Controller
                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
                     $outputFile = MEDIA_PATH . "/afterworks/" . md5($data['email']) . "-" . time() . ".jpg";
                     $data['photo_url'] = MEDIA_URL . "/afterworks/" . md5($data['email']) . "-" . time() . ".jpg";
+                    $smarty->assign('photo_url', $data['photo_url']);
                     move_uploaded_file($_FILES['photo']['tmp_name'], $outputFile);
                 }
 
