@@ -68,18 +68,6 @@ services:
       MYSQL_PASSWORD: changeme
       TZ: Europe/Paris
 
-  chat:
-    build: ./docker/chat
-    hostname: chat
-    container_name: adhoc_chat
-    restart: always
-    networks:
-      adhoc:
-        aliases:
-          - chat.adhocmusic.test
-    ports:
-      - 6667:6667
-
   # administration de la base de données
   pma:
     image: phpmyadmin/phpmyadmin

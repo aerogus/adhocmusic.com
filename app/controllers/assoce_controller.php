@@ -49,24 +49,6 @@ final class Controller
     /**
      * @return string
      */
-    static function afterworks_chat(): string
-    {
-        $smarty = new AdHocSmarty();
-
-        $smarty->enqueue_style('/css/chat.css');
-        $smarty->enqueue_script('/js/socket.io-2.3.0.min.js');
-        $smarty->enqueue_script('/js/assoce/afterworks/chat.js');
-
-        Trail::getInstance()
-            ->addStep("Afterworks")
-            ->addStep("Chat");
-
-        return $smarty->fetch('assoce/afterworks/chat.tpl');
-    }
-
-    /**
-     * @return string
-     */
     static function afterworks_inscription(): string
     {
         $smarty = new AdHocSmarty();
