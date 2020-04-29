@@ -18,7 +18,7 @@
           <p>Nom de scène: {$name|escape}</p>
           <p>E-mail: {$email|escape}</p>
           <p>Date: {$date|escape}</p>
-          <p>Créneau souhaité: {$crenaux|escape}</p>
+          <p>Créneau(x) souhaité(s): {$creneaux|escape}</p>
           <p>Photo: <a href="{$photo_url}">{$photo_url}</a></p>
           <p>Instrument: {$instrument|escape|@nl2br}</p>
           <p>Infos: {$text|escape|@nl2br}</p>

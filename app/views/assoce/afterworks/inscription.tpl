@@ -13,13 +13,13 @@
       {if !empty($sent_ok)}
       <div class="infobulle success">
           <p>Salut,<br/>Nous avons bien reçu ta demande de participation à l’Afterwork S5E6 on line, merci à toi ! Voici un récapitulatif de ton inscription :</p>
-          <p>Nom de scène: {$data.name|escape}</p>
-          <p>E-mail: {$data.email|escape}</p>
-          <p>Date: {$data.date|escape}</p>
-          <p>Créneau(x) souhaité(s): {$data.creneaux|escape}</p>
+          <p>Nom de scène: {$name|escape}</p>
+          <p>E-mail: {$email|escape}</p>
+          <p>Date: {$date|escape}</p>
+          <p>Créneau(x) souhaité(s): {$creneaux|escape}</p>
           <p>Photo: <a href="{$photo_url}">{$photo_url}</a></p>
-          <p>Instrument: {$data.instrument|escape|@nl2br}</p>
-          <p>Infos: {$data.text|escape|@nl2br}</p>
+          <p>Instrument: {$instrument|escape|@nl2br}</p>
+          <p>Infos: {$text|escape|@nl2br}</p>
       </div>
       {/if}
 

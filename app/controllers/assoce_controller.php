@@ -71,6 +71,7 @@ final class Controller
                 'h1930-2030' => '',
                 'h2030-2130' => '',
                 'h2130-2230' => '',
+                'creneaux' => '',
                 'instrument' => '',
                 'text' => '',
                 'check' => Tools::getCSRFToken(),
@@ -150,6 +151,7 @@ final class Controller
         $smarty->assign('h1930-2030', $data['h1930-2030']);
         $smarty->assign('h2030-2130', $data['h2030-2130']);
         $smarty->assign('h2130-2230', $data['h2130-2230']);
+        $smarty->assign('creneaux', $data['creneaux']);
         $smarty->assign('instrument', $data['instrument']);
         $smarty->assign('text', $data['text']);
         $smarty->assign('check', $data['check']);
