@@ -72,8 +72,8 @@
         <ul class="grid-2-small-1 has-gutter-xl">
           <li>
             <label for="instrument">Instrument</label>
-            <div class="infobulle error" id="error_instrument"{if empty($error_email)} style="display: none"{/if}>Votre instrument est manquant</div>
-            <textarea name="text" id="instrument" placeholder="Votre instrument" style="width:100%;height:160px">{$instrument|escape}</textarea>
+            <div class="infobulle error" id="error_instrument"{if empty($error_instrument)} style="display: none"{/if}>Votre instrument est manquant</div>
+            <textarea name="instrument" id="instrument" placeholder="Votre instrument" style="width:100%;height:160px">{$instrument|escape}</textarea>
            </li>
           <li>
             <label for="text">Infos à savoir</label>
