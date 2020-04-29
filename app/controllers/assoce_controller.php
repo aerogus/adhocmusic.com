@@ -99,27 +99,37 @@ final class Controller
                 'text'    => trim((string) Route::params('text')),
                 'check'   => (string) Route::params('check'),
             ];
+            $data['creneaux'] = [];
+            if ($data['h1930-2030']) $data['creneaux'][] = '19h30-20h30';
+            if ($data['h2030-2130']) $data['creneaux'][] = '20h30-21h30';
+            if ($data['h2130-2230']) $data['creneaux'][] = '21h30-22h30';
+            $data['creneaux'] = implode(', ', $data['creneaux']);
+
             $errors = [];
 
             self::_validateAfterworksForm($data, $errors);
 
             if (empty($errors)) {
 
+                $data['photo_url'] = '';
                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
-                    // todo stockage photo
+                    $outputFile = MEDIA_PATH . "/afterworks/" . md5($data['email']) . "-" . time() . ".jpg";
+                    $data['photo_url'] = MEDIA_URL . "/afterworks/" . md5($data['email']) . "-" . time() . ".jpg";
+                    move_uploaded_file($_FILES['photo']['tmp_name'], $outputFile);
                 }
 
                 // 1. envoi du mail aux destinataires
                 $data['email_reply_to'] = $data['email'];
-                if (Email::send(CONTACT_FORM_TO, "Inscription à l'afterwork", 'form-afterworks-to', $data)) {
+                $data['subject'] = "Inscription Afterwork S5E6 - online";
+                if (Email::send(CONTACT_FORM_TO, $data['subject'], 'form-afterworks-to', $data)) {
                     $smarty->assign('sent_ok', true);
                 } else {
                     $smarty->assign('sent_ko', true);
                 }
 
                 // 2. envoi de la copie à l'expéditeur
-                $data['email_reply_to'] = 'site@adhocmusic.com';
-                if (Email::send($data['email'], "[cc] Inscription à l'afterwork", 'form-afterworks-cc', $data)) {
+                $data['email_reply_to'] = 'contact@adhocmusic.com';
+                if (Email::send($data['email'], "[cc] " . $data['subject'], 'form-afterworks-cc', $data)) {
                 }
 
             } else {

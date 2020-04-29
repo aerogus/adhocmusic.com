@@ -14,12 +14,14 @@
       <mj-column width="100%">
         <mj-text color="#292933" font-size="20px" font-weight="700">Réception d'un message</mj-text>
         <mj-text font-size="16px" color="#292933">
-          <p>Un message a été reçu du formulaire de contact du site AD'HOC:</p>
-          <p>De: {$name|escape}</p>
+          <p>Une nouvelle demande de participation à l’Afterwork S5E6 on line a été reçue, voici le récapitulatif de son inscription :</p>
+          <p>Nom de scène: {$name|escape}</p>
           <p>E-mail: {$email|escape}</p>
-          <p>Sujet: {$subject|escape}</p>
-          <p>Texte: {$text|escape|@nl2br}</p>
-          <p>Newsletter: {if ($mailing)}oui{else}non{/if}</p>
+          <p>Date: {$date|escape}</p>
+          <p>Créneau souhaité: {$hour|escape}</p>
+          <p>Photo: <a href="{$photo_url}">{$photo_url}</a></p>
+          <p>Instrument: {$instrument|escape|@nl2br}</p>
+          <p>Infos: {$text|escape|@nl2br}</p>
         </mj-text>
       </mj-column>
     </mj-section>
