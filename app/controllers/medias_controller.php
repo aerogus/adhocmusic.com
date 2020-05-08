@@ -71,6 +71,7 @@ final class Controller
     {
         $id_groupe = (int) Route::params('groupe');
         $id_event  = (int) Route::params('event');
+        $id_lieu   = (int) Route::params('lieu');
 
         $search_params = [
             'online' => true,
@@ -80,9 +81,11 @@ final class Controller
         if ($id_groupe) {
             $search_params['id_groupe'] = $id_groupe;
         }
-
         if ($id_event) {
             $search_params['id_event'] = $id_event;
+        }
+        if ($id_lieu) {
+            $search_params['id_lieu'] = $id_lieu;
         }
 
         $smarty = new AdHocSmarty();

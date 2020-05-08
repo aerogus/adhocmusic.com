@@ -30,7 +30,7 @@
           <select id="lieu" name="lieu">
             <option value="">---</option>
             {foreach from=$lieux item=lieu}
-            <option value="{$lieu->getIdLieu()}">{$lieu->getCp()} {$lieu->getCity()|escape} - {$lieu->getName()}</option>
+            <option value="{$lieu->getIdLieu()}">{$lieu->getCity()->getCp()} {$lieu->getCity()->getName()|escape} - {$lieu->getName()}</option>
             {/foreach}
           </select>
         </li>
