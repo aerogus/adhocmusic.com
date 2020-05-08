@@ -7,21 +7,28 @@ jQuery(document).ready(function ($) {
   $('#search-results').html('Sélectionnez un groupe ou un événement');
 
   $('#groupe').change(function () {
-    $('#event').val('');
-    $.get('/medias/search-results', {
-      groupe: $(this).val(),
-    }, function (data) {
-      $('#search-results').html(data);
-    });
+    $('#event, #lieu').val('');
+    launchSearch();
   });
 
   $('#event').change(function () {
-    $('#groupe').val('');
+    $('#groupe, #lieu').val('');
+    launchSearch();
+  });
+
+  $('#lieu').change(function () {
+    $('#groupe, #event').val('');
+    launchSearch();
+  });
+
+  function launchSearch() {
     $.get('/medias/search-results', {
-      event: $(this).val(),
+      groupe: $('#groupe').val(),
+      event: $('#event').val(),
+      lieu: $('#lieu').val()
     }, function (data) {
       $('#search-results').html(data);
     });
-  });
+  }
 
 });

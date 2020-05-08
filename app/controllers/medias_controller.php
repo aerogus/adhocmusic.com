@@ -26,19 +26,7 @@ final class Controller
                 ]
             )
         );
-        
-        $smarty->assign(
-            'last_videos', Video::find(
-                [
-                    'online' => true,
-                    'order_by' => 'created_at',
-                    'sort' => 'DESC',
-                    'limit' => 18,
-                ]
-            )
-        );
 
-        // recup events AD'HOC ayant des vidéos
         $smarty->assign(
             'events', Event::find(
                 [
@@ -47,6 +35,28 @@ final class Controller
                     'datfin' => date('Y-m-d'),
                     'order_by' => 'date',
                     'sort' => 'DESC',
+                ]
+            )
+        );
+
+        $smarty->assign(
+            'lieux', Lieu::find(
+                [
+                    'online' => true,
+                    'with_events' => true,
+                    'order_by' => 'id_city',
+                    'sort' => 'ASC',
+                ]
+            )
+        );
+
+        $smarty->assign(
+            'last_videos', Video::find(
+                [
+                    'online' => true,
+                    'order_by' => 'created_at',
+                    'sort' => 'DESC',
+                    'limit' => 18,
                 ]
             )
         );

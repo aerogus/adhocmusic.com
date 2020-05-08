@@ -70,6 +70,8 @@
 
 <div class="site_content clearfix">
 
-<div class="alert alert--danger txtcenter"><a href="/onair">Suivez le live de l'afterwork AD'HOC S5E6 vendredi 1er mai à 19h30</a></div>
+{*
+<div class="alert alert--danger txtcenter"><a href="/onair">Suivez le live du festival Les Pieds dans l'Orge #3 samedi 23 mai à 18h</a></div>
+*}
 
 {include file="common/breadcrumb.tpl"}

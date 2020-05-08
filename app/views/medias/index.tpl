@@ -8,7 +8,7 @@
     <form id="form-media-search" name="form-media-search" method="get" action="/medias" style="margin-bottom:2rem">
       <ul>
         <li>
-          <label for="groupe">Groupe</label>
+          <label for="groupe" style="width:100px">Groupe</label>
           <select id="groupe" name="groupe">
             <option value="">---</option>
             {foreach from=$groupes item=groupe}
@@ -17,11 +17,20 @@
           </select>
         </li>
         <li>
-          <label for="event">Evénement</label>
+          <label for="event" style="width:100px">Evénement</label>
           <select id="event" name="event">
             <option value="">---</option>
             {foreach from=$events item=event}
             <option value="{$event->getIdEvent()}">{$event->getDate()|date_format:'%d/%m/%Y'} - {$event->getName()|escape} - {$event->getLieu()->getName()}</option>
+            {/foreach}
+          </select>
+        </li>
+        <li>
+          <label for="lieu" style="width:100px">Lieu</label>
+          <select id="lieu" name="lieu">
+            <option value="">---</option>
+            {foreach from=$lieux item=lieu}
+            <option value="{$lieu->getIdLieu()}">{$lieu->getCp()} {$lieu->getCity()|escape} - {$lieu->getName()}</option>
             {/foreach}
           </select>
         </li>
