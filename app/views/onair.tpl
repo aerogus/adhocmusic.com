@@ -14,8 +14,7 @@
       <li>sur cette même page, dans le lecteur vidéo ci-dessous (faire clic-droit, Lire)</li>
     </ul>
     </p>
-    <video id="video" style="max-width:100%;display:block;margin:0 auto"></video>
-
+    <video id="video" style="max-width:100%;display:block;margin:0 auto" controls></video>
     <p>Vous voulez participer à l'afterwork ?:
       <ul>
         <li><a class="btn btn--success" href="https://www.adhocmusic.com/events/6876">Description de l'événement</a></li>

@@ -14,3 +14,4 @@ if (Hls.isSupported()) {
     video.play();
   });
 }
+
