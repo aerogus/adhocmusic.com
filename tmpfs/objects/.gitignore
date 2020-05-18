@@ -1,4 +1,0 @@
-# le répertoire doit être présent mais son contenu non versionné
-# cache en ram des objets de la bdd
-*
-!.gitignore
