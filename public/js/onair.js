@@ -9,7 +9,7 @@ if (Hls.isSupported()) {
     video.play();
   });
 } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-  video.src = asc.videoSrc;
+  video.src = asv.videoSrc;
   video.addEventListener('loadedmetadata', function() {
     video.play();
   });
