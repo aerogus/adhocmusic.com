@@ -78,6 +78,8 @@ class Featured extends ObjectModel
         'description' => 'string',
         'url'         => 'string',
         'online'      => 'bool',
+        'created_at'  => 'date',
+        'modified_at' => 'date',
     ];
 
     /* début getters */
