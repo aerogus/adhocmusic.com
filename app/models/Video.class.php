@@ -565,7 +565,9 @@ class Video extends Media
                 return $meta_info[0]->thumbnail_large;
 
             case self::HOST_FACEBOOK:
+                return ''; // a debug
                 $headers = get_headers('https://graph.facebook.com/' . $reference . '/picture', 1);
+                // Location pas toujours défini
                 if (is_array($headers['Location'])) {
                     $url = $headers['Location'][0];
                 } else {
