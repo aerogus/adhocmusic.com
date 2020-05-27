@@ -70,6 +70,8 @@
 
 <div class="site_content clearfix">
 
+<!--
 <div class="alert alert--danger txtcenter"><a href="/onair">Suivez le direct du festival Les Pieds dans l'Orge #3 samedi 23 mai à 17h</a></div>
+-->
 
 {include file="common/breadcrumb.tpl"}
