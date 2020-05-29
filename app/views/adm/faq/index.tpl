@@ -24,7 +24,7 @@
   </tr>
   {/foreach}
   </table>
-  <a class="button" href="/adm/faq/create">Ajouter une question</a>
+  <a class="btn btn--primary" href="/adm/faq/create">Ajouter une question</a>
   </div>
 </div>
 

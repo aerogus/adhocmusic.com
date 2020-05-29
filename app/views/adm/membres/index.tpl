@@ -29,7 +29,7 @@
         <input type="text" id="email" placeholder="Email" name="email" value="{$search.email|escape}" style="width: 100px;" />
       </li>
     </ul>
-    <input type="submit" class="button" value="Rechercher" />
+    <input type="submit" class="btn btn--primary" value="Rechercher" />
   </form>
 </fieldset>
 

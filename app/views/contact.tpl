@@ -1,8 +1,8 @@
 {include file="common/header.tpl"}
 
-<div class="grid-2-small-1 has-gutter">
+<div class="grid-3-small-1 has-gutter">
 
-  <div class="col-1">
+  <div class="col-2">
 
   <div class="box">
     <header>
@@ -26,36 +26,48 @@
       {if !empty($show_form)}
 
       <form id="form-contact" name="form-contact" method="post" action="/contact" enctype="multipart/form-data">
-        <ul>
-          <li>
+        <section class="grid-4">
+          <div class="col-1">
+            <label for="name" class="col-form-label">Nom</label>
+          </div>
+          <div class="col-3">
             <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner votre nom</div>
-            <label for="name">Nom</label>
-            <input name="name" id="name" type="text" maxlength="80" placeholder="Votre nom" value="{$name|escape}" style="width:100%">
-          </li>
-          <li>
+            <input name="name" id="name" type="text" maxlength="80" placeholder="Votre nom" value="{$name|escape}" class="w100">
+          </div>
+          <div class="col-1">
+            <label for="email" class="col-form-label">E-mail</label>
+          </div>
+          <div class="col-3">
             <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Votre email semble incorrect</div>
-            <label for="email">E-mail</label>
             <input name="email" id="email" type="email" maxlength="80" placeholder="Votre e-mail" value="{$email|escape}" style="width:100%">
-          </li>
-          <li>
+          </div>
+          <div class="col-1">
+            <label for="subject" class="col-form-label">Sujet</label>
+          </div>
+          <div class="col-3">
             <div class="infobulle error" id="error_subject"{if empty($error_subject)} style="display: none"{/if}>Vous devez saisir un sujet</div>
-            <label for="subject">Sujet</label>
             <input name="subject" id="subject" type="text" maxlength="80" placeholder="Votre sujet" value="{$subject|escape}" style="width:100%">
-          </li>
-          <li>
+          </div>
+          <div class="col-1">
+            <label for="text" class="col-form-label">Message</label>
+          </div>
+          <div class="col-3">
             <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
-            <label for="text">Message</label>
             <textarea name="text" id="text" placeholder="Votre message" style="width:100%;height:160px">{$text|escape}</textarea>
-          </li>
-          <li>
-            <label for="mailing">Je souhaite recevoir la newsletter</label>
+          </div>
+          <div class="col-1">
+            <label for="mailing" class="col-form-label">Newsletter</label>
+          </div>
+          <div class="col-3">
             <input type="checkbox" class="switch" id="mailing" name="mailing"{if !empty($mailing)} checked="checked"{/if}>
-          </li>
-          <li>
+            Je souhaite recevoir la newsletter
+          </div>
+          <div class="col-1"></div>
+          <div class="col-3">
             <div class="infobulle error" id="error_check"{if empty($error_check)} style="display: none"{/if}>Erreur à la vérification du code de sécurité</div>
             <input id="form-contact-submit" data-check="{$check|escape}" name="form-contact-submit" type="submit" value="Envoyer" class="btn btn--primary"/>
-          </li>
-        </ul>
+          </div>
+        </section>
         <input name="check" id="check" type="hidden" value="">
       </form>
 

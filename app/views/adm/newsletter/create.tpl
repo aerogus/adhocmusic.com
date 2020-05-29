@@ -12,7 +12,7 @@
         <label for="content">Contenu</label>
         <textarea id="content" name="content">{$data.content|escape}</textarea>
       </fieldset>
-      <input id="form-newsletter-create-submit" name="form-newsletter-create-submit" class="button" type="submit" value="Ok">
+      <input id="form-newsletter-create-submit" name="form-newsletter-create-submit" class="btn btn--primary" type="submit" value="Ok">
     </form>
   </div>
 </div>

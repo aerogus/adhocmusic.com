@@ -25,7 +25,7 @@
   <label for="password_new_2">Vérification nouveau mot de passe (*)</label>
   <input id="password_new_2" name="password_new_2" type="password" style="width:100%" maxlength="50">
 
-  <input id="form-password-change-submit" name="form-password-change-submit" type="submit" class="button" value="Modifier">
+  <input id="form-password-change-submit" name="form-password-change-submit" type="submit" class="btn btn--primary" value="Modifier">
 </form>
 {/if}
 

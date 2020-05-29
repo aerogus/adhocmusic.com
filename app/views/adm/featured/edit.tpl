@@ -43,7 +43,7 @@
           <input class="switch" type="checkbox" name="online" id="online"{if $data.online} checked="checked"{/if}>
         </li>
       </ul>
-      <input id="form-featured-edit-submit" name="form-featured-edit-submit" type="submit" class="button" value="Modifier">
+      <input id="form-featured-edit-submit" name="form-featured-edit-submit" type="submit" class="btn btn--primary" value="Modifier">
       <input type="hidden" name="id" value="{$data.id|escape}">
     </form>
   </div>

@@ -98,7 +98,7 @@
   <input name="form-photo-edit-submit" id="form-photo-edit-submit" class="btn btn--primary" type="submit" value="Enregistrer">
   <input type="hidden" name="id" id="id_photo" value="{$photo->getId()|escape}">
   <input type="hidden" name="photo_id_event" id="photo_id_event" value="{$photo->getIdEvent()|escape}">
-  <a class="button" href="/photos/delete/{$photo->getId()}">Supprimer la photo</a>
+  <a class="btn btn--primary" href="/photos/delete/{$photo->getId()}">Supprimer la photo</a>
 </form>
 
 {/if} {* test unknown photo *}

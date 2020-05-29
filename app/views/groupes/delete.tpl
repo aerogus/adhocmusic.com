@@ -28,7 +28,7 @@
 
 <form id="form-groupe-delete" name="form-groupe-delete" action="/groupes/delete" method="post">
   <input type="hidden" name="id" value="{$groupe->getId()}">
-  <input class="button" id="form-groupe-delete-submit" name="form-groupe-delete-submit" type="submit" value="OK">
+  <input class="btn btn--primary" id="form-groupe-delete-submit" name="form-groupe-delete-submit" type="submit" value="OK">
 </form>
 
 {/if}

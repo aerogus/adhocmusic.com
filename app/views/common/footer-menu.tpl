@@ -20,10 +20,11 @@
     <li>
       <ul>
         <li><h4>Suivez nous</h4></li>
+        <li class="email"><a href="/newsletters/subscriptions" title="Abonnement à la newsletter">Newsletter</a></li>
+        <li class="peertube"><a href="https://videos.adhocmusic.com" title="Instance PeerTube AD'HOC Tube">PeerTube</a></li>
         <li class="facebook"><a href="https://facebook.com/adhocmusic" title="@adhocmusic sur Facebook">@adhocmusic</a></li>
         <li class="twitter"><a href="https://twitter.com/adhocmusic" title="@adhocmusic sur Twitter">@adhocmusic</a></li>
         <li class="instagram"><a href="https://instagram.com/adhoc.music" title="@adhoc.music sur Instagram">@adhoc.music</a></li>
-        <li class="email"><a href="/newsletters/subscriptions" title="Abonnement à la newsletter">Newsletter</a></li>
       </ul>
     </li>
     <li>

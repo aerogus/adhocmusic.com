@@ -93,11 +93,11 @@
     {foreach from=$membre->getGroupes() item=groupe}
     <tr>
       <td><a href="/adm/groupes/{$groupe->getIdGroupe()}">{$groupe->getName()|escape}</a></td>
-      <td><a class="button" href="/adm/appartient-a?from=membre&action=delete&membre={$membre->getIdContact()}&groupe={$groupe->getIdGroupe()}">Supprimer</a></td>
+      <td><a class="btn btn--secondary" href="/adm/appartient-a?from=membre&action=delete&membre={$membre->getIdContact()}&groupe={$groupe->getIdGroupe()}">Supprimer</a></td>
     </tr>
     {/foreach}
   </table>
-  <a class="button" href="/adm/appartient-a?from=membre&action=create&membre={$membre->getIdContact()}">Ajout Groupe</a>
+  <a class="btn btn--primary" href="/adm/appartient-a?from=membre&action=create&membre={$membre->getIdContact()}">Ajout Groupe</a>
   </div>
 </div>
 

@@ -13,7 +13,7 @@
         <label for="content">Contenu (<a href="{$newsletter->getUrl()}">Preview Web</a>)</label>
         <textarea id="content" name="content">{$newsletter->getContent()|escape}</textarea>
       </fieldset>
-      <input id="form-newsletter-edit-submit" name="form-newsletter-edit-submit" class="button" type="submit" value="Ok">
+      <input id="form-newsletter-edit-submit" name="form-newsletter-edit-submit" class="btn btn--primary" type="submit" value="Ok">
       <input type="hidden" name="id" value="{$newsletter->getId()|escape}">
     </form>
 

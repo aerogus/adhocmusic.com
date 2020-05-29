@@ -18,15 +18,15 @@
         <li>
           <label for="login-pseudo">Pseudo</label>
           <div class="infobulle error" id="error_login-pseudo"{if empty($error_login_pseudo)} style="display: none"{/if}>Pseudo vide !</div>
-          <input type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo" style="width:100%">
+          <input type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo" class="w100">
         </li>
         <li>
           <label for="login-password">Mot de passe</label>
           <div class="infobulle error" id="error_login-password"{if empty($error_login_password)} style="display: none"{/if}>Mot de passe vide !</div>
-          <input type="password" id="login-password" name="password" placeholder="Mot de passe" style="width:100%">
+          <input type="password" id="login-password" name="password" placeholder="Mot de passe" class="w100">
         </li>
       </ul>
-      <input id="form-login-submit" name="form-login-submit" type="submit" value="Je me connecte">
+      <input id="form-login-submit" name="form-login-submit" class="btn btn--primary w100" type="submit" value="Je me connecte">
       {if !empty($referer)}<input type="hidden" id="login-referer" name="referer" value="{$referer|escape:'url'}">{/if}
       <ul class="txtright sublinks">
         <li><a href="/auth/lost-password">mot de passe oublié</a></li>

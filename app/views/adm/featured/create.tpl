@@ -42,7 +42,7 @@
           <input class="switch" type="checkbox" name="online" id="online"{if $data.online} checked="checked"{/if}>
         </li>
       </ul>
-      <input id="form-featured-create-submit" name="form-featured-create-submit" type="submit" value="Ajouter" class="button">
+      <input id="form-featured-create-submit" name="form-featured-create-submit" type="submit" value="Ajouter" class="btn btn--primary">
     </form>
   </div>
 </div>

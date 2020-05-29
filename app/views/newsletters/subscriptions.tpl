@@ -20,7 +20,7 @@
     <label for="unsub" style="display:inline">Désinscription</label>
   </div>
   <div>
-    <input class="button" type="submit" id="form-newsletter-submit" name="form-newsletter-submit" value="Valider">
+    <input class="btn btn--primary" type="submit" id="form-newsletter-submit" name="form-newsletter-submit" value="Valider">
   </div>
 </form>
 {/if}

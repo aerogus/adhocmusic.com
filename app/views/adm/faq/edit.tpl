@@ -29,7 +29,7 @@
     </li>
   </ul>
   <input type="hidden" name="id_faq" value="{$faq->getId()}">
-  <input class="button" id="form-faq-edit-submit" name="form-faq-edit-submit" type="submit">
+  <input class="btn btn--primary" id="form-faq-edit-submit" name="form-faq-edit-submit" type="submit">
   </form>
   </div>
 </div>

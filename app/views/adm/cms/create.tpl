@@ -78,7 +78,7 @@ $(function() {
       {/foreach}
     </li>
   </ul>
-  <input id="form-cms-create-submit" name="form-cms-create-submit" type="submit" value="OK" class="button">
+  <input id="form-cms-create-submit" name="form-cms-create-submit" type="submit" value="OK" class="btn btn--primary">
 </form>
 
   </div>

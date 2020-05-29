@@ -83,7 +83,7 @@ $(function() {
     </li>
   </ul>
   <input type="hidden" name="id_cms" value="{$cms->getId()|escape}">
-  <input id="form-cms-edit-submit" name="form-cms-edit-submit" type="submit" value="OK" class="button">
+  <input id="form-cms-edit-submit" name="form-cms-edit-submit" type="submit" value="OK" class="btn btn--primary">
 </form>
 
 <a href="/adm/cms/delete/{$cms->getId()|escape}">Effacer la page</a>

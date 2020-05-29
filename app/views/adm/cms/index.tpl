@@ -27,7 +27,7 @@
   {/foreach}
 </table>
 
-<a class="button" href="/adm/cms/create">Ajouter une page</a>
+<a class="btn btn--primary" href="/adm/cms/create">Ajouter une page</a>
 
   </div>
 </div>

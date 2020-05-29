@@ -83,7 +83,7 @@
     </li>
   </ul>
   <input type="hidden" name="id" value="{$groupe->getId()|escape}">
-  <input id="form-groupe-edit-submit" name="form-groupe-edit-submit" class="button" type="submit" value="Modifier">
+  <input id="form-groupe-edit-submit" name="form-groupe-edit-submit" class="btn btn--primary" type="submit" value="Modifier">
 </form>
 
   </div>
@@ -92,10 +92,10 @@
 </div>
 
 <div>
-  <a href="/photos/create?id_groupe={$groupe->getId()|escape}" class="button">Ajouter une photo</a>
-  <a href="/audios/create?id_groupe={$groupe->getId()|escape}" class="button">Ajouter une musique</a>
-  <a href="/videos/create?id_groupe={$groupe->getId()|escape}" class="button">Ajouter une vidéo</a>
-  <a href="{$groupe->getUrl()}" class="button">Voir la fiche</a>
+  <a href="/photos/create?id_groupe={$groupe->getId()|escape}" class="btn btn--primary">Ajouter une photo</a>
+  <a href="/audios/create?id_groupe={$groupe->getId()|escape}" class="btn btn--primary">Ajouter une musique</a>
+  <a href="/videos/create?id_groupe={$groupe->getId()|escape}" class="btn btn--primary">Ajouter une vidéo</a>
+  <a href="{$groupe->getUrl()}" class="btn btn--primary">Voir la fiche</a>
 </div>
 
 {/if}

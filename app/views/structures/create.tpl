@@ -16,7 +16,7 @@
       </li>
     </ul>
   </fieldset>
-  <input id="form-structure-create-submit" name="form-structure-create-submit" class="button" type="submit" value="Enregistrer">
+  <input id="form-structure-create-submit" name="form-structure-create-submit" class="btn btn--primary" type="submit" value="Enregistrer">
 </form>
 
   </div>

@@ -43,7 +43,7 @@
       </li>
     </ol>
   </fieldset>
-  <input id="form-groupe-de-style-submit" name="form-groupe-de-style-submit" type="submit" class="button" value="Ok" />
+  <input id="form-groupe-de-style-submit" name="form-groupe-de-style-submit" type="submit" class="btn btn--primary" value="Ok" />
   <input type="hidden" name="id_groupe" value="{$groupe->getId()|escape}" />
 </form>
 

@@ -80,7 +80,7 @@ Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fic
           </select>
         </li>
       </ul>
-      <input id="form-groupe-create-submit" name="form-groupe-create-submit" class="button" type="submit" value="Ajouter">
+      <input id="form-groupe-create-submit" name="form-groupe-create-submit" class="btn btn--primary" type="submit" value="Ajouter">
     </form>
   </div>
 </div>

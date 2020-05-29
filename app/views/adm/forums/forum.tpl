@@ -12,7 +12,7 @@
 {/foreach}
 </div>
 
-<a class="button" href="/adm/forums/write?id_forum={$forum.id_forum|escape}">Nouveau sujet</a>
+<a class="btn btn--primary" href="/adm/forums/write?id_forum={$forum.id_forum|escape}">Nouveau sujet</a>
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
@@ -37,7 +37,7 @@
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-<a class="button" href="/adm/forums/write?id_forum={$forum.id_forum|escape}">Nouveau sujet</a>
+<a class="btn btn--primary" href="/adm/forums/write?id_forum={$forum.id_forum|escape}">Nouveau sujet</a>
 
   </div>
 </div>

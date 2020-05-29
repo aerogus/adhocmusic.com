@@ -19,7 +19,7 @@
       {if $membre->getSite()}
       <a href="{$membre->getSite()}">{$membre->getSite()}</a>
       {/if}
-      <a class="button" href="/messagerie/write?pseudo={$membre->getPseudo()|escape}">Lui écrire</a>
+      <a class="btn btn--primary" href="/messagerie/write?pseudo={$membre->getPseudo()|escape}">Lui écrire</a>
     </div>
     <div class="col-2">
       {$membre->getText()}

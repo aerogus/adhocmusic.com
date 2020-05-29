@@ -75,7 +75,7 @@ $(function() {
 <br style="clear: both">
 </div>
 
-<a class="button" href="/adm/forums/forum/{$id_forum|escape}">Retour forum</a>
+<a class="btn btn--primary" href="/adm/forums/forum/{$id_forum|escape}">Retour forum</a>
 
 {foreach $messages as $message}
 <div class="clearfix message">
@@ -109,7 +109,7 @@ $(function() {
       <textarea class="tinymce" name="text" id="text" rows="10" cols="80" style="width: 100%;">{$text|escape}</textarea>
     </li>
     <li>
-      <input id="form-forum-write-submit" name="form-forum-write-submit" type="submit" value="Envoyer" class="button" style="padding: 5px 0;">
+      <input id="form-forum-write-submit" name="form-forum-write-submit" type="submit" value="Envoyer" class="btn btn--primary" style="padding: 5px 0;">
     </li>
   </ul>
   <input name="check" id="check" type="hidden" value="{$check|escape}">

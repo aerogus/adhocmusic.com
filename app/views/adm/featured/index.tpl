@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <a href="/adm/featured/create" class="button">Nouveau</a>
+    <a href="/adm/featured/create" class="btn btn--primary">Nouveau</a>
 
     <table>
       <thead>

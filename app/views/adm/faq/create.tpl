@@ -28,7 +28,7 @@
       <input class="switch" type="checkbox" id="online" name="online">
     </li>
   </ul>
-  <input class="button" id="form-faq-create-submit" name="form-faq-create-submit" type="submit">
+  <input class="btn btn--primary" id="form-faq-create-submit" name="form-faq-create-submit" type="submit">
   </form>
   </div>
 </div>

@@ -90,11 +90,11 @@
   {foreach from=$groupe->getMembers() item=member}
   <tr>
     <td>{$member->getFirstName()|escape} {$member->getLastName()|escape} (<a href="/adm/membres/{$member->getIdContact()}">{$member->getPseudo()|escape}</a>)</td>
-    <td><a class="button" href="/adm/appartient-a?from=groupe&amp;action=delete&amp;groupe={$groupe->getId()}&amp;membre={$member->getIdContact()}">Supprimer</a></td>
+    <td><a class="btn btn--secondary" href="/adm/appartient-a?from=groupe&amp;action=delete&amp;groupe={$groupe->getId()}&amp;membre={$member->getIdContact()}">Supprimer</a></td>
   </tr>
   {/foreach}
 </table>
-<a class="button" href="/adm/appartient-a?from=groupe&amp;action=create&amp;groupe={$groupe->getId()}">Ajout Membre</a>
+<a class="btn btn--primary" href="/adm/appartient-a?from=groupe&amp;action=create&amp;groupe={$groupe->getId()}">Ajout Membre</a>
 
   </div>
 </div>

@@ -132,7 +132,7 @@
         <textarea name="text" cols="49" rows="10">{$me->getText()|escape}</textarea>
       </li>
     </ul>
-  <input id="form-member-edit-submit" name="form-member-edit-submit" type="submit" class="button" value="Enregistrer">
+  <input id="form-member-edit-submit" name="form-member-edit-submit" type="submit" class="btn btn--primary" value="Enregistrer">
 </form>
 
   </div>
