@@ -74,7 +74,7 @@
           <input class="switch" type="checkbox" name="online" checked="checked">
         </li>
       </ul>
-      <input id="form-photo-create-submit" name="form-photo-create-submit" class="button" type="submit" value="Enregistrer">
+      <input id="form-photo-create-submit" name="form-photo-create-submit" class="btn btn--primary" type="submit" value="Enregistrer">
     </form>
   </div>
 </div>

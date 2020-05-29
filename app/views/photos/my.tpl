@@ -10,7 +10,7 @@
 {if !empty($edit)}<p class="infobulle success">Photo modifiée</p>{/if}
 {if !empty($delete)}<p class="infobulle success">Photo supprimée</p>{/if}
 
-<a href="/photos/create" class="button">Ajouter une photo</a>
+<a href="/photos/create" class="btn btn--primary">Ajouter une photo</a>
 
 {if $photos|@count == 0}
 
@@ -34,7 +34,7 @@
 
 {/if}
 
-<a href="/photos/create" class="button">Ajouter une photo</a>
+<a href="/photos/create" class="btn primary">Ajouter une photo</a>
 
   </div>
 </div>

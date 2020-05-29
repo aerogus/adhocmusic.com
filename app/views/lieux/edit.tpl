@@ -88,7 +88,7 @@
       <input id="lng" name="lng" type="text" size="50" value="{$lieu->getLng()|escape}">
     </li>
   </ul>
-  <input id="form-lieu-edit-submit" name="form-lieu-edit-submit" class="button" type="submit" value="Modifier">
+  <input id="form-lieu-edit-submit" name="form-lieu-edit-submit" class="btn btn--primary" type="submit" value="Modifier">
   <input type="hidden" name="id" value="{$lieu->getId()|escape}">
 </form>
 

@@ -76,7 +76,7 @@
           <span id="delete"><a href="/audios/delete/{$audio->getId()}">Supprimer</a></span>
         </li>
       </ul>
-      <input id="form-audio-edit-submit" name="form-audio-edit-submit" class="button" type="submit" value="Enregistrer">
+      <input id="form-audio-edit-submit" name="form-audio-edit-submit" class="btn btn--primary" type="submit" value="Enregistrer">
       <input type="hidden" name="id" value="{$audio->getId()}">
       <input type="hidden" name="audio_id_event" id="audio_id_event" value="{$audio->getIdEvent()|escape}">
     </form>

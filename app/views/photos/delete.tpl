@@ -38,7 +38,7 @@
         </li>
         {/if}
       </ul>
-      <input id="form-photo-delete-submit" name="form-photo-delete-submit" type="submit" class="button" value="Supprimer">
+      <input id="form-photo-delete-submit" name="form-photo-delete-submit" type="submit" class="btn btn--primary" value="Supprimer">
       <input type="hidden" name="id" value="{$photo->getId()}">
     </form>
   </div>

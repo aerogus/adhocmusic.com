@@ -24,7 +24,7 @@
       <ul class="txtrght sublinks">
         <li><a href="/auth/lost-password">mot de passe oublié</a></li>
       </ul>
-      <input id="form-login-submit" name="form-login-submit" type="submit" value="Je me connecte">
+      <input id="form-login-submit" name="form-login-submit" type="submit" value="Je me connecte" class="btn btn--primary w100">
     </form>
   </div>
 </div>
@@ -56,7 +56,7 @@
     </ul>
     <input type="hidden" name="csrf" value="{$data.csrf}">
     <input type="hidden" name="text" value="{$data.text|escape}">
-    <input id="form-membrer-create-submit" name="form-member-create-submit" class="button" style="width:100%" type="submit" value="Je crée mon compte">
+    <input id="form-membrer-create-submit" name="form-member-create-submit" class="btn btn--primary w100" type="submit" value="Je crée mon compte">
     </form>
   </div>
 </div>

@@ -210,6 +210,26 @@ class Video extends Media
     }
 
     /**
+     * Retourne l'url de la page d'édition de la vidéo
+     *
+     * @return string
+     */
+    function getEditUrl(): ?string
+    {
+        return HOME_URL . '/videos/edit/' . $this->getIdVideo();
+    }
+
+    /**
+     * Retourne l'url de la page de suppresion de la vidéo
+     *
+     * @return string
+     */
+    function getDeleteUrl(): ?string
+    {
+        return HOME_URL . '/videos/delete/' . $this->getIdVideo();
+    }
+
+    /**
      * Retourne l'url directe d'un média .mp4
      *
      * @return string

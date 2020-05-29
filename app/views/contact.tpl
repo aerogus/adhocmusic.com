@@ -53,7 +53,7 @@
           </li>
           <li>
             <div class="infobulle error" id="error_check"{if empty($error_check)} style="display: none"{/if}>Erreur à la vérification du code de sécurité</div>
-            <input id="form-contact-submit" data-check="{$check|escape}" name="form-contact-submit" type="submit" value="Envoyer" class="button" style="padding: 5px 0;">
+            <input id="form-contact-submit" data-check="{$check|escape}" name="form-contact-submit" type="submit" value="Envoyer" class="btn btn--primary"/>
           </li>
         </ul>
         <input name="check" id="check" type="hidden" value="">

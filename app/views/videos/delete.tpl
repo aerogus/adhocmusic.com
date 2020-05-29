@@ -56,7 +56,7 @@
         <span id="online">{$video->getOnline()}</span>
       </li>
     </ul>
-    <input id="form-video-delete-submit" name="form-video-delete-submit" class="button" type="submit" value="Confirmer la suppression">
+    <input id="form-video-delete-submit" name="form-video-delete-submit" class="btn btn--primary" type="submit" value="Confirmer la suppression">
     <input type="hidden" name="id" value="{$video->getId()|escape}">
   </form>
   </div>

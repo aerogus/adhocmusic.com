@@ -156,7 +156,7 @@
       </li>
     </ul>
   </fieldset>
-  <input id="form-event-create-submit" name="form-event-create-submit" class="button" type="submit" value="Ajouter">
+  <input id="form-event-create-submit" name="form-event-create-submit" class="btn btn--primary" type="submit" value="Ajouter">
 </form>
 
   </div>

@@ -6,22 +6,32 @@
     </header>
     <div>
 
-      <p>Depuis la rentrée 2015, AD’HOC propose un nouveau rendez-vous musical à Épinay-sur-Orge: les <em>Afterworks</em>. Ils se déroulent un vendredi soir par mois dans les salles annexes du parc de la mairie d’Épinay-sur-Orge de 19h30 à 22h30. Des artistes sont invités à se produire pour un set acoustique.</p>
+      <div class="edito">
+        <p>Depuis la rentrée 2015, AD’HOC propose un nouveau rendez-vous musical à Épinay-sur-Orge: les <em>Afterworks</em>. Ils se déroulent un vendredi soir par mois dans les salles annexes du parc de la mairie d’Épinay-sur-Orge de 19h30 à 22h30. Des artistes sont invités à se produire pour un set acoustique.</p>
+      </div>
 
+      <h2>Teaser</h2>
       <div class="fluid-video-player ratio-16-9">
         <iframe sandbox="allow-same-origin allow-scripts" src="https://videos.adhocmusic.com/videos/embed/480852e4-78ba-4ec0-935b-cd55cf069216?title=0&amp;warningTitle=0" frameborder="0" allowfullscreen></iframe>
       </div>
 
+      <div class="edito">
       <p>Si le cœur vous en dit, apportez vos instruments et venez jouer avec eux avant ou après leur set pour une jam session. Non musiciens, vous êtes aussi les bienvenus, ces afterworks sont avant tout un prétexte pour se retrouver régulièrement dans une ambiance cosy et conviviale. Apportez votre paquet de chips, votre bouteille de jus de fruits préféré et vous êtes avec nous pour une soirée détente après une dure semaine de boulot.</p>
 
       <h2>Saison #5 (2019/2020)</h2>
+
+      <h3>Émission du vendredi 1er mai 2020</h3>
+      <div class="fluid-video-player ratio-16-9 mbm">
+        <iframe sandbox="allow-same-origin allow-scripts" src="https://videos.adhocmusic.com/videos/embed/f3ed5408-c590-4a4f-8d40-186e176b4db3?title=0&amp;warningTitle=0" frameborder="0" allowfullscreen></iframe>
+      </div>
+
       <ol class="episodes">
         <li>27 septembre 2019</li>
         <li>18 octobre 2019</li>
         <li>29 novembre 2019</li>
         <li>20 décembre 2019</li>
         <li>28 février 2020</li>
-        <li>24 avril 2020</li>
+        <li>24 avril 2020 (reportée au 1er mai 2020) - version confinée En ligne</li>
       </ol>
 
       <h2>Saison #4 (2018/2019)</h2>
@@ -64,6 +74,7 @@
         <li>15 avril 2016 avec les groupes du Fet’Estival<br>https://www.facebook.com/events/1658795981065217/</li>
         <li>17 juin 2016 avec Special Guest<br>https://www.facebook.com/events/839700286143378/</li>
       </ol>
+      </div>
 
     </div>
 

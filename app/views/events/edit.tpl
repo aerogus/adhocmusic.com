@@ -142,7 +142,7 @@
       </li>
     </ul>
   </fieldset>
-  <input id="form-event-edit-submit" name="form-event-edit-submit" class="button" type="submit" value="Modifier">
+  <input id="form-event-edit-submit" name="form-event-edit-submit" class="btn btn--primary" type="submit" value="Modifier">
   <input type="hidden" name="id" value="{$data.id|escape}">
 </form>
 

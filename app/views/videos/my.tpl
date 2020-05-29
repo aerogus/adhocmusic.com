@@ -6,7 +6,7 @@
   </header>
   <div class="reset">
 
-<a href="/videos/create" class="button">Ajouter une vidéo</a>
+<a href="/videos/create" class="btn btn--primary">Ajouter une vidéo</a>
 
 {if $nb_items > 0}
 
@@ -16,9 +16,9 @@
   {foreach $videos as $video}
   <div class="video">
     <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">
-      <a class="playbtn" href="{$video->getUrl()}">▶</a>
+      <a class="playbtn" href="{$video->getEditUrl()}">▶</a>
     </div>
-    <p class="title"><a href="{$video->getUrl()}">{$video->getName()|escape}</a></p>
+    <p class="title"><a href="{$video->getEditUrl()}">{$video->getName()|escape}</a></p>
     <p class="subtitle">{if !empty($video->getGroupe())}{$video->getGroupe()->getName()|escape}{/if}</p>
   </div>
   {/foreach}
@@ -32,7 +32,7 @@
 
 {/if}
 
-<a href="/videos/create" class="button">Ajouter une vidéo</a>
+<a href="/videos/create" class="btn btn--primary">Ajouter une vidéo</a>
 
   </div>
 </div>

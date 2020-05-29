@@ -444,8 +444,11 @@ final class Controller
 
         if ($video->getIdEvent()) {
             $event = Event::getInstance($video->getIdEvent());
-            $lieu = Lieu::getInstance($video->getIdLieu());
+            $lieu = Lieu::getInstance($event->getIdLieu());
             $smarty->assign('event', $event);
+            $smarty->assign('lieu', $lieu);
+        } elseif ($video->getIdLieu()) {
+            $lieu = Lieu::getInstance($video->getIdLieu());
             $smarty->assign('lieu', $lieu);
         }
 

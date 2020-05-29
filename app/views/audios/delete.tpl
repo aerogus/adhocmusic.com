@@ -59,7 +59,7 @@
           <audio id="mp3" src="{$audio->getDirectMp3Url()}"></audio>
         </li>
       </ul>
-      <input id="form-audio-delete-submit" name="form-audio-delete-submit" class="button" type="submit" value="Supprimer">
+      <input id="form-audio-delete-submit" name="form-audio-delete-submit" class="btn btn--primary" type="submit" value="Supprimer">
       <input type="hidden" name="id" value="{$audio->getId()|escape}">
     </form>
 

@@ -16,7 +16,7 @@
       <li><strong>Tarif :</strong><br>{$event->getPrice()|escape}</li>
     </ul>
   </fieldset>
-  <input id="form-event-delete-submit" name="form-event-delete-submit" class="button" type="submit" value="Supprimer">
+  <input id="form-event-delete-submit" name="form-event-delete-submit" class="btn btn--primary" type="submit" value="Supprimer">
   <input type="hidden" name="id" value="{$event->getId()|escape}">
 </form>
 

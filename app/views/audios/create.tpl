@@ -68,7 +68,7 @@
           <input class="switch" type="checkbox" name="online" checked="checked">
         </li>
       </ul>
-      <input id="form-audio-create-submit" name="form-audio-create-submit" class="button" type="submit" value="Enregistrer">
+      <input id="form-audio-create-submit" name="form-audio-create-submit" class="btn btn--primary" type="submit" value="Enregistrer">
     </form>
   </div>
 </div>

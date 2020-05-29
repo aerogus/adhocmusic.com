@@ -71,7 +71,7 @@
       <input id="site" name="site" type="text" size="50" value="">
     </li>
   </ul>
-  <input id="form-lieu-create-submit" name="form-lieu-create-submit" class="button" type="submit" value="Ajouter">
+  <input id="form-lieu-create-submit" name="form-lieu-create-submit" class="btn btn--primary" type="submit" value="Ajouter">
 </form>
 
   </div>
