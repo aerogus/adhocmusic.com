@@ -5,11 +5,6 @@
       <h1>Présentation de l’association</h1>
     </header>
     <div>
-
-      <div class="fluid-video-player ratio-16-9 mbm">
-        <iframe sandbox="allow-same-origin allow-scripts" src="https://videos.adhocmusic.com/videos/embed/059f295a-4d0d-435e-8c6b-0b2a0823d8d3?title=0&amp;warningTitle=0" frameborder="0" allowfullscreen></iframe>
-      </div>
-
       <div class="edito">
 
       <img src="/img/idf.png" width="250" height="211" alt="Carte de l’Ile de France" class="fr">
@@ -37,6 +32,11 @@
 
       </div>
 
+    </div>
+    <div class="reset">
+      <div class="fluid-video-player ratio-16-9 mbm">
+        <iframe sandbox="allow-same-origin allow-scripts" src="https://videos.adhocmusic.com/videos/embed/059f295a-4d0d-435e-8c6b-0b2a0823d8d3?title=0&amp;warningTitle=0" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
   </div>
 

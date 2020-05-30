@@ -15,6 +15,7 @@
         <li><a href="/concerts">Concerts</a></li>
         <li><a href="/afterworks">Afterworks</a></li>
         <li><a href="/festival">Le Festival</a></li>
+        <li><a href="/onair">On Air</a></li>
       </ul>
     </li>
     <li>

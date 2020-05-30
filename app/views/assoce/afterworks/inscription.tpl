@@ -89,7 +89,7 @@
           </li>
           <li>
             <div class="infobulle error" id="error_check"{if empty($error_check)} style="display: none"{/if}>Erreur à la vérification du code de sécurité</div>
-            <input id="form-afterworks-submit" data-check="{$check|escape}" name="form-afterworks-submit" type="submit" value="Valider mon inscription à l'afterwork" class="btn btn-primary">
+            <input id="form-afterworks-submit" data-check="{$check|escape}" name="form-afterworks-submit" type="submit" value="Valider mon inscription à l'afterwork" class="btn btn--primary">
           </li>
         </ul>
         <input name="check" id="check" type="hidden" value="">
