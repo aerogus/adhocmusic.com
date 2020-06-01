@@ -32,28 +32,28 @@
           </div>
           <div class="col-3">
             <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner votre nom</div>
-            <input name="name" id="name" type="text" maxlength="80" placeholder="Votre nom" value="{$name|escape}" class="w100">
+            <input name="name" id="name" type="text" maxlength="80" required="required" placeholder="Votre nom" value="{$name|escape}" class="w100">
           </div>
           <div class="col-1">
             <label for="email" class="col-form-label">E-mail</label>
           </div>
           <div class="col-3">
             <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Votre email semble incorrect</div>
-            <input name="email" id="email" type="email" maxlength="80" placeholder="Votre e-mail" value="{$email|escape}" style="width:100%">
+            <input name="email" id="email" type="email" maxlength="80" required="required" placeholder="Votre e-mail" value="{$email|escape}" class="w100">
           </div>
           <div class="col-1">
             <label for="subject" class="col-form-label">Sujet</label>
           </div>
           <div class="col-3">
             <div class="infobulle error" id="error_subject"{if empty($error_subject)} style="display: none"{/if}>Vous devez saisir un sujet</div>
-            <input name="subject" id="subject" type="text" maxlength="80" placeholder="Votre sujet" value="{$subject|escape}" style="width:100%">
+            <input name="subject" id="subject" type="text" maxlength="80" required="required" placeholder="Votre sujet" value="{$subject|escape}" class="w100">
           </div>
           <div class="col-1">
             <label for="text" class="col-form-label">Message</label>
           </div>
           <div class="col-3">
             <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
-            <textarea name="text" id="text" placeholder="Votre message" style="width:100%;height:160px">{$text|escape}</textarea>
+            <textarea name="text" id="text" placeholder="Votre message" required="required" class="w100" rows="6">{$text|escape}</textarea>
           </div>
           <div class="col-1">
             <label for="mailing" class="col-form-label">Newsletter</label>

@@ -30,8 +30,8 @@
   Veuillez entrer l'e-mail que vous avez utilisé pour l'inscription, un nouveau mot de passe vous sera envoyé par e-mail.</p>
   <label for="email">E-mail</label>
   <div class="infobulle error" id="error_email"{if empty($error_email)} style="display: none"{/if}>Vous devez renseigner votre e-mail ou e-mail invalide</div>
-  <input name="email" id="email" type="email" placeholder="E-mail" style="width:100%">
-  <input id="form-lost-password-submit" name="form-lost-password-submit" class="btn btn--primary" style="width:100%" type="submit" value="Ok">
+  <input name="email" id="email" type="email" placeholder="E-mail" required="required" class="w100">
+  <input id="form-lost-password-submit" name="form-lost-password-submit" class="btn btn--primary w100" type="submit" value="Ok">
 </form>
 {/if}
 
