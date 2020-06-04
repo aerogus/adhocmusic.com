@@ -19,8 +19,8 @@
     <tr>
       <td>Fonction :</td>
       <td><select name="type">
-      {foreach from=$types key=id_type_musicien item=name_type_musicien}
-      <option value="{$id_type_musicien|escape}">{$name_type_musicien|escape}</option>
+      {foreach from=$types item=type}
+      <option value="{$type->getId()|escape}">{$type->getName()|escape}</option>
       {/foreach}
       </select></td>
     </tr>
