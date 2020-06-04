@@ -41,9 +41,14 @@ final class Controller
                 'content' => trim((string) Route::params('content')),
             ];
 
+            // dépendance à mjml via npm
+            $mjmlBin = ADHOC_ROOT_PATH . '/node_modules/.bin/mjml';
+            $html = shell_exec($mjmlBin . " -i <<EOF\n" . $data['content'] . "\nEOF");
+
             (new Newsletter())
                 ->setTitle($data['title'])
                 ->setContent($data['content'])
+                ->setHtml($html)
                 ->save();
 
             Tools::redirect('/adm/newsletter?create=1');
