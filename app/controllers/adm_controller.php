@@ -40,14 +40,22 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
+        $page = (int) Route::params('page');
+
         $smarty->assign(
             'groupes', Groupe::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
+                    'start' => $page * ADM_NB_MEMBERS_PER_PAGE,
+                    'limit' => ADM_NB_MEMBERS_PER_PAGE,
                 ]
             )
         );
+
+        // pagination
+        $smarty->assign('nb_items', Groupe::count());
+        $smarty->assign('nb_items_per_page', ADM_NB_MEMBERS_PER_PAGE);
 
         return $smarty->fetch('adm/groupes/index.tpl');
     }

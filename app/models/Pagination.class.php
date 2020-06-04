@@ -53,12 +53,12 @@ class Pagination
     /**
      *
      */
-    function __construct(int $nb_items, int $nb_items_per_page, int $selected_page)
+    function __construct(int $nb_items = 0, int $nb_items_per_page = 50, int $selected_page = 0)
     {
-        $this->_nb_items = (int) $nb_items;
-        $this->_nb_items_per_page = (int) $nb_items_per_page;
+        $this->_nb_items = $nb_items;
+        $this->_nb_items_per_page = $nb_items_per_page;
         $this->_nb_pages = intval($this->_nb_items / $this->_nb_items_per_page) + 1;
-        $this->_selected_page = (int) $selected_page;
+        $this->_selected_page = $selected_page;
     }
 
     /**
