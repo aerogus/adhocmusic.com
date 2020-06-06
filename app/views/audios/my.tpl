@@ -20,7 +20,7 @@
 <div class="infobulle success">La suppression du son a été effectuée</div>
 {/if}
 
-<table>
+<table class="table table--zebra">
   <thead>
     <tr>
       <th>Groupe</th>
@@ -29,16 +29,16 @@
       <th>Modifié le</th>
     </tr>
   </thead>
+  <tbody>
   {foreach $audios as $audio}
-  <tbody>    
     <tr>
       <td>{if !empty($audio->getGroupe())}{$audio->getGroupe()->getName()|escape}{/if}</td>
       <td><a href="/audios/edit/{$audio->getIdAudio()|escape}">{$audio->getName()|escape}</a></td>
       <td>{$audio->getCreatedAt()}</td>
       <td>{$audio->getModifiedAt()}</td>
     </tr>
-  </tbody>
   {/foreach}
+  </tbody>
 </table>
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
