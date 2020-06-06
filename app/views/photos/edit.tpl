@@ -13,16 +13,19 @@
 {else}
 
 <form id="form-photo-edit" name="form-photo-edit" method="post" action="/photos/edit" enctype="multipart/form-data">
-  <ul>
-    <li>
-      <label for="file">Photo (.jpg)</label>
-      <input type="file" name="file" id="file" value="">
-    </li>
-    <li>
-      <p style="text-align: center"><img src="{$photo->getThumbUrl(320)}" alt=""></p>
-    </li>
-    <li>
+  <section class="grid-4">
+
+    <div>
+      <label for="photo">Photo</label>
+    </div>
+    <div class="col-3 mbs">
+      <img id="photo" src="{$photo->getThumbUrl(320)}" alt=""/>
+    </div>
+
+    <div>
       <p>Pivoter la photo</p>
+    </div>
+    <div class="col-3 mbs">
       <div>
         <input type="radio" class="radio" name="rotation" id="rotation-0" value="0" checked>
         <label for="rotation-0" class="inline">∅ Aucune rotation</label>
@@ -39,39 +42,57 @@
         <input type="radio" class="radio" name="rotation" id="rotation-180" value="180">
         <label for="rotation-180" class="inline">↶ Rotation 180°</label>
       </div>
-    </li>
-    <li>
+    </div>
+
+    <div>
       <label for="id_contact">Ajouté par</label>
+    </div>
+    <div class="col-3 mbs">
       <span><a href="/membre/{$photo->getIdContact()}">{$photo->getPseudo()|escape}</a> le {$photo->getCreatedAt()|date_format:'%d/%m/%Y %H:%M'}</span>
-    </li>
+    </div>
+
     {if $photo->getModifiedAt()}
-    <li>
+    <div>
       <label for="modified_at">Modifié le</label>
+    </div>
+    <div class="col-3 mbs">
       <span>{$photo->getModifiedAt()|date_format:'%d/%m/%Y %H:%M'}</span>
-    </li>
+    </div>
     {/if}
-    <li>
+
+    <div>
       <label for="name">Titre (*)</label>
+    </div>
+    <div class="col-3 mbs">
       <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la photo</div>
-      <input type="text" id="name" name="name" placeholder="Titre" size="50" value="{$photo->getName()|escape}">
-    </li>
-    <li>
+      <input type="text" id="name" name="name" placeholder="Titre" class="w100" value="{$photo->getName()|escape}">
+    </div>
+
+    <div>
       <label for="credits">Crédits (*)</label>
+    </div>
+    <div class="col-3 mbs">
       <div class="infobulle error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe</div>
-      <input type="text" id="credits" name="credits" placeholder="Nom du photographe" size="50" value="{$photo->getCredits()|escape}">
-    </li>
-    <li>
+      <input type="text" id="credits" name="credits" placeholder="Nom du photographe" class="w100" value="{$photo->getCredits()|escape}">
+    </div>
+
+    <div>
       <label for="id_groupe">Groupe</label>
-      <select name="id_groupe">
+    </div>
+    <div class="col-3 mbs">
+      <select name="id_groupe" class="w100">
         <option value="0">Aucun</option>
         {foreach $groupes as $groupe}
         <option value="{$groupe->getIdGroupe()}"{if $photo->getIdGroupe() == $groupe->getIdGroupe()} selected="selected"{/if}>{$groupe->getName()|escape}</option>
         {/foreach}
       </select>
-    </li>
-    <li>
+    </div>
+
+    <div>
       <label for="id_lieu">Lieu</label>
-      <select id="id_lieu" name="id_lieu">
+    </div>
+    <div class="col-3 mbs">
+      <select id="id_lieu" name="id_lieu" class="w100">
         <optgroup label="Autre">
           <option value="0">aucun / non référencé</option>
         </optgroup>
@@ -83,22 +104,38 @@
         </optgroup>
         {/foreach}
       </select>
-    </li>
-    <li>
+    </div>
+
+    <div>
       <label for="id_event">Evénement</label>
-      <select id="id_event" name="id_event">
+    </div>
+    <div class="col-3 mbs">
+      <select id="id_event" name="id_event" class="w100">
         <option value="0">Aucun</option>
       </select>
-    </li>
-    <li>
-      <label for="online">Afficher publiquement</label>
+    </div>
+
+    <div>
+      <label for="online">Rendre public</label>
+    </div>
+    <div class="col-3 mbs">
       <input class="switch" type="checkbox" name="online"{if $photo->getOnline()} checked="checked"{/if}>
-    </li>
-  </ul>
-  <input name="form-photo-edit-submit" id="form-photo-edit-submit" class="btn btn--primary" type="submit" value="Enregistrer">
-  <input type="hidden" name="id" id="id_photo" value="{$photo->getId()|escape}">
-  <input type="hidden" name="photo_id_event" id="photo_id_event" value="{$photo->getIdEvent()|escape}">
-  <a class="btn btn--primary" href="/photos/delete/{$photo->getId()}">Supprimer la photo</a>
+    </div>
+
+    <div></div>
+    <div class="col-2">
+      <input name="form-photo-edit-submit" id="form-photo-edit-submit" class="btn btn--primary" type="submit" value="Enregistrer">
+      <input type="hidden" name="id" id="id_photo" value="{$photo->getId()|escape}">
+      <input type="hidden" name="photo_id_event" id="photo_id_event" value="{$photo->getIdEvent()|escape}">
+    </div>
+    <div class="txtright">
+      <a class="btn btn--primary" href="/photos/delete/{$photo->getId()}">Supprimer la photo</a>
+    </div>
+
+  </section>
+
+
+
 </form>
 
 {/if} {* test unknown photo *}

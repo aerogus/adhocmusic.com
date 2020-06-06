@@ -375,38 +375,13 @@ final class Controller
                     ->setIdEvent($data['id_event'])
                     ->setOnline($data['online']);
 
-                if (is_uploaded_file($_FILES['file']['tmp_name'])) {
-
-                    if (!is_dir(Photo::getBasePath())) {
-                        mkdir(Photo::getBasePath(), 0755, true);
-                    }
-
-                    // extrait l'EXIF source et applique une éventuelle rotation
-                    Photo::fixOrientation($_FILES['file']['tmp_name']);
-
-                    (new Image($_FILES['file']['tmp_name']))
-                        ->setType(IMAGETYPE_JPEG)
-                        ->setMaxWidth($confPhoto['max_width'])
-                        ->setMaxHeight($confPhoto['max_height'])
-                        ->setDestFile(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg')
-                        ->write();
-
+                // applique une rotation forcée et regénère les miniatures
+                if ($data['rotation']) {
+                    Photo::rotate(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg', $data['rotation']);
                     foreach ($confPhoto['thumb_width'] as $maxWidth) {
                         $photo->clearThumb($maxWidth);
                         $photo->genThumb($maxWidth);
                     }
-
-                } else {
-
-                    // applique une rotation forcée et regénère les miniatures
-                    if ($data['rotation']) {
-                        Photo::rotate(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg', $data['rotation']);
-                        foreach ($confPhoto['thumb_width'] as $maxWidth) {
-                            $photo->clearThumb($maxWidth);
-                            $photo->genThumb($maxWidth);
-                        }
-                    }
-
                 }
 
                 if ($photo->save()) {
@@ -456,6 +431,8 @@ final class Controller
         $id = (int) Route::params('id');
 
         $smarty = new AdHocSmarty();
+
+        $smarty->enqueue_script('/js/photos/delete.js');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
