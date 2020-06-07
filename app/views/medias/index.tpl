@@ -6,37 +6,43 @@
   </header>
   <div>
     <form id="form-media-search" name="form-media-search" method="get" action="/medias" style="margin-bottom:2rem">
-      <ul>
-        <li>
-          <label for="groupe" style="width:100px">Groupe</label>
-          <select id="groupe" name="groupe">
+      <section class="grid-4">
+        <div>
+          <label for="groupe">Groupe</label>
+        </div>
+        <div class="col-3 mbs">
+          <select id="groupe" name="groupe" class="w100">
             <option value="">---</option>
             {foreach from=$groupes item=groupe}
             <option value="{$groupe->getIdGroupe()}">{$groupe->getName()|escape}</option>
             {/foreach}
           </select>
-        </li>
-        <li>
-          <label for="event" style="width:100px">Evénement</label>
-          <select id="event" name="event">
+        </div>
+        <div>
+          <label for="event">Événement</label>
+        </div>
+        <div class="col-3 mbs">
+          <select id="event" name="event" class="w100">
             <option value="">---</option>
             {foreach from=$events item=event}
             <option value="{$event->getIdEvent()}">{$event->getDate()|date_format:'%d/%m/%Y'} - {$event->getName()|escape} - {$event->getLieu()->getName()}</option>
             {/foreach}
           </select>
-        </li>
-        <li>
-          <label for="lieu" style="width:100px">Lieu</label>
-          <select id="lieu" name="lieu">
+        </div>
+        <div>
+          <label for="lieu">Lieu</label>
+        </div>
+        <div class="col-3">
+          <select id="lieu" name="lieu" class="w100">
             <option value="">---</option>
             {foreach from=$lieux item=lieu}
             <option value="{$lieu->getIdLieu()}">{$lieu->getCity()->getCp()} {$lieu->getCity()->getName()|escape} - {$lieu->getName()}</option>
             {/foreach}
           </select>
-        </li>
-      </ul>
+        </div>
+      </section>
     </form>
-    <div class="margin-top:2rem" id="search-results"></div>
+    <div class="mtm" id="search-results"></div>
   </div>
 </div>{* .box *}
 
