@@ -75,7 +75,7 @@
           <input type="hidden" name="id_event" value="{$event->getId()}">
           <span >{$event->getDate()} - {$event->getName()}</span>
           {else}
-          <select id="id_event" name="id_event">
+          <select id="id_event" name="id_event" class="w100">
             <option value="0">Veuillez sélectionner un lieu</option>
           </select>
           {/if}

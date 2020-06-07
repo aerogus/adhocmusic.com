@@ -11,7 +11,7 @@
     <h1>Supprimer une vidéo</h1>
   </header>
   <div>
-  <form method="post" action="/videos/delete">
+  <form id="form-video-delete" name="form-video-delete" method="post" action="/videos/delete">
     <section class="grid-4">
       <div>
         <label for="player">Visualiser</label>
