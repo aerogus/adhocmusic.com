@@ -10,7 +10,7 @@
 
 require_once __DIR__ . '/../bootstrap.php';
 
-// n° de newslette a traiter
+// n° de newsletter a traiter
 if (empty($argv[1])) {
     echo "Usage: ./newsletter-send.php id_newsletter\n";
     exit;
