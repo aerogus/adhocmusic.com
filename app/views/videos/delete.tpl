@@ -12,52 +12,73 @@
   </header>
   <div>
   <form method="post" action="/videos/delete">
-    <ul>
-      <li>
+    <section class="grid-4">
+      <div>
         <label for="player">Visualiser</label>
+      </div>
+      <div class="col-3 mbs">
         <span id="player">{$video->getPlayer()}</span>
-      </li>
-      <li>
+      </div>
+      <div>
         <label for="name">Nom</label>
+      </div>
+      <div class="col-3 mbs">
         <span id="name">{$video->getName()|escape}</span>
-      </li>
-      <li>
+      </div>
+      <div>
         <label for="thumb">Miniature</label>
+      </div>
+      <div class="col-3 mbs">
         <span id="thumb"><img src="{$video->getThumbUrl()}" alt=""></span>
-      </li>
-      <li>
+      </div>
+      <div>
         <label for="id_host">Hébergeur</label>
+      </div>
+      <div class="col-3 mbs">
         <span id="id_host">{$video->getHost()->getName()}</span>
-      </li>
-      <li>
+      </div>
+      <div>
         <label for="reference">Référence</label>
+      </div>
+      <div class="col-3 mbs">
         <span id="reference">{$video->getReference()}</span>
-      </li>
+      </div>
       {if !empty($groupe)}
-      <li>
+      <div>
         <label for="groupe">Groupe</label>
+      </div>
+      <div class="col-3 mbs">
         <span id="groupe">{$groupe->getName()|escape}</span>
-      </li>
+      </div>
       {/if}
       {if !empty($event)}
-      <li>
+      <div>
         <label for="event">Événement</label>
+      </div>
+      <div class="col-3 mbs">
         <span id="event">{$event->getDate()} - {$event->getName()|escape}</span>
-      </li>
+      </div>
       {/if}
       {if !empty($lieu)}
-      <li>
+      <div>
         <label for="lieu">Lieu</label>
+      </div>
+      <div class="col-3 mbs">
         <span id="lieu">{$lieu->getName()|escape}</span>
-      </li>
+      </div>
       {/if}
-      <li>
+      <div>
         <label for="online">Afficher</label>
+      </div>
+      <div class="col-3 mbs">
         <span id="online">{$video->getOnline()}</span>
-      </li>
-    </ul>
-    <input id="form-video-delete-submit" name="form-video-delete-submit" class="btn btn--primary" type="submit" value="Confirmer la suppression">
-    <input type="hidden" name="id" value="{$video->getId()|escape}">
+      </div>
+      <div></div>
+      <div class="col-3">
+        <input id="form-video-delete-submit" name="form-video-delete-submit" class="btn btn--primary" type="submit" value="Confirmer la suppression">
+        <input type="hidden" name="id" value="{$video->getId()|escape}">
+      </div>
+    </section>
   </form>
   </div>
 </div>

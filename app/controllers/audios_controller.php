@@ -391,6 +391,8 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/audios/delete.js');
+
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
             ->addStep('Mes musiques', '/audios/my')

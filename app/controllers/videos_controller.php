@@ -468,6 +468,8 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->enqueue_script('/js/videos/delete.js');
+
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
             ->addStep('Mes vidéos', '/videos/my')
