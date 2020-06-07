@@ -19,7 +19,7 @@
         <div class="infobulle error" id="error_login-pseudo"{if empty($error_login_pseudo)} style="display: none"{/if}>Pseudo vide !</div>
         <input type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo" class="w100">
       </div>
-      <div class="mbs">
+      <div class="mbm">
         <label for="login-password">Mot de passe</label>
         <div class="infobulle error" id="error_login-password"{if empty($error_login_password)} style="display: none"{/if}>Mot de passe vide !</div>
         <input type="password" id="login-password" name="password" placeholder="Mot de passe" class="w100">
