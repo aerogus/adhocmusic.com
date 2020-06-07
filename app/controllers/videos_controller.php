@@ -52,7 +52,7 @@ final class Controller
 
         $smarty->enqueue_script('/js/masonry-4.2.2.min.js');
         $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
-        $smarty->enqueue_script('/js/baguetteBox-1.11.0.min.js');
+        $smarty->enqueue_script('/js/baguetteBox-1.11.1.min.js');
 
         $smarty->enqueue_script('/js/videos/my.js');
 
@@ -78,11 +78,11 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('/css/baguetteBox.min.css');
+        $smarty->enqueue_style('/css/baguetteBox-1.11.1.min.css');
 
         $smarty->enqueue_script('/js/masonry-4.2.2.min.js');
         $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
-        $smarty->enqueue_script('/js/baguetteBox-1.11.0.min.js');
+        $smarty->enqueue_script('/js/baguetteBox-1.11.1.min.js');
 
         $smarty->enqueue_script('/js/videos/show.js');
 
