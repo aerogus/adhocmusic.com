@@ -7,20 +7,20 @@
   <div>
 {if !empty($form)}
 <form id="form-newsletter" name="form-newsletter" action="/newsletters/subscriptions" method="post">
-  <div>
+  <div class="mbs">
     <label for="email">E-mail</label>
-    <input type="email" id="email" name="email" placeholder="E-mail" style="width:100%" value="{$email}">
+    <input type="email" id="email" name="email" placeholder="E-mail" class="w100" value="{$email}" required="required">
   </div>
-  <div style="margin: 10px 0">
+  <div class="mbs">
     <input type="radio" class="radio" name="action" value="sub" {if ($action == 'sub')} checked="checked"{/if}>
-    <label for="sub" style="display:inline">Inscription</label>
+    <label for="sub">Inscription</label>
   </div>
-  <div style="margin: 10px 0">
+  <div class="mbs">
     <input type="radio" class="radio" name="action" value="unsub" {if ($action == 'unsub')} checked="checked"{/if}>
-    <label for="unsub" style="display:inline">Désinscription</label>
+    <label for="unsub">Désinscription</label>
   </div>
   <div>
-    <input class="btn btn--primary" type="submit" id="form-newsletter-submit" name="form-newsletter-submit" value="Valider">
+    <input class="btn btn--primary w100" type="submit" id="form-newsletter-submit" name="form-newsletter-submit" value="Valider">
   </div>
 </form>
 {/if}
