@@ -125,18 +125,18 @@ class Video extends Media
      * @var array
      */
     protected static $_all_fields = [
-        'id_video'     => 'int', // pk
-        'id_contact'   => 'int',
-        'id_host'      => 'int',
-        'reference'    => 'string',
-        'ratio'        => 'float',
-        'id_groupe'    => 'int',
-        'id_lieu'      => 'int',
-        'id_event'     => 'int',
-        'name'         => 'string',
-        'created_at'   => 'date',
-        'modified_at'  => 'date',
-        'online'       => 'bool',
+        'id_video'    => 'int', // pk
+        'id_contact'  => 'int',
+        'id_host'     => 'int',
+        'reference'   => 'string',
+        'ratio'       => 'float',
+        'id_groupe'   => 'int',
+        'id_lieu'     => 'int',
+        'id_event'    => 'int',
+        'name'        => 'string',
+        'created_at'  => 'date',
+        'modified_at' => 'date',
+        'online'      => 'bool',
     ];
 
     /* début getters */

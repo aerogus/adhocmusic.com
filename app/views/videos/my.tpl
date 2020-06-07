@@ -6,7 +6,9 @@
   </header>
   <div class="reset">
 
-<a href="/videos/create" class="btn btn--primary">Ajouter une vidéo</a>
+    <div class="txtcenter mbs">
+      <a href="/videos/create" class="btn btn--primary">Ajouter une vidéo</a>
+    </div>
 
 {if $nb_items > 0}
 
@@ -32,7 +34,9 @@
 
 {/if}
 
-<a href="/videos/create" class="btn btn--primary">Ajouter une vidéo</a>
+  <div class="txtcenter mts">
+    <a href="/videos/create" class="btn btn--primary">Ajouter une vidéo</a>
+  </div>
 
   </div>
 </div>
