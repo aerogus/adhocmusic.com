@@ -128,6 +128,7 @@ groupes|edit|POST|/groupes/edit
 groupes|delete|GET|/groupes/delete/:id
 groupes|delete|POST|/groupes/delete
 groupes|show|GET|/groupes/:id
+groupes|api_groupes|GET|/api/groupes
 index|index|GET|/
 index|partners|GET|/partners
 index|contact|GET|/contact

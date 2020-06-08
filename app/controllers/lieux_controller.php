@@ -357,8 +357,8 @@ final class Controller
                 'text'           => (string) Route::params('text'),
                 'site'           => (string) Route::params('site'),
                 'id_contact'     => $_SESSION['membre']->getId(),
-                'lat'            => (string) Route::params('lat'),
-                'lng'            => (string) Route::params('lng'),
+                'lat'            => (float) Route::params('lat'),
+                'lng'            => (float) Route::params('lng'),
             ];
             $errors = [];
 

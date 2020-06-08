@@ -1093,6 +1093,10 @@ class Groupe extends ObjectModel
             $sql .= "AND `alias` = '" . $db->escape($params['alias']) . "' ";
         }
 
+        if (!empty($params['search_name'])) {
+            $sql .= "AND `name` LIKE '%" . $db->escape($params['search_name']) . "%' ";
+        }
+
         if (isset($params['facebook_page_id'])) {
             $sql .= "AND `facebook_page_id` = " . (int) $params['facebook_page_id'] . " ";
         }

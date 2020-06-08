@@ -482,6 +482,29 @@ final class Controller
     }
 
     /**
+     * Affiche un listing de groupes
+     *
+     * @return array
+     */
+    static function api_groupes()
+    {
+        $groupes = Groupe::find(
+            [
+                'online' => true,
+                'order_by' => 'name',
+                'sort' => 'ASC',
+                'search_name' => (string) Route::params('s'),
+            ]
+        );
+
+        $export = [];
+        foreach ($groupes as $groupe) {
+            $export[$groupe->getId()] = $groupe->getName();
+        }
+        return $export;
+    }
+
+    /**
      * Validation du formulaire de création groupe
      *
      * @param array $data   tableau des données
