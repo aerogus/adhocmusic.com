@@ -13,33 +13,43 @@
     {else}
 
     <form name="form-audio-edit" id="form-audio-edit" method="post" action="/audios/edit" enctype="multipart/form-data">
-      <ul>
-        <li>
+      <section class="grid-4">
+        <div>
           <label for="mp3">Écouter</label>
+        </div>
+        <div class="col-3 mbs">
           <audio controls id="mp3" src="{$audio->getDirectMp3Url()}"></audio>
-        </li>
-        <li>
-          <label for="file">Audio (*) (.mp3 16bits/44Khz/stéréo, &lt; 16 Mo)</label>
-          <input type="file" id="file" name="file" value="">
-        </li>
-        <li>
+        </div>
+        <div>
+          <label for="file">Audio (*)</label>
+        </div>
+        <div class="col-3 mbs">
+          <input type="file" id="file" name="file" value=""> (.mp3 16bits/44Khz/stéréo, &lt; 16 Mo)
+        </div>
+        <div>
           <label for="name">Titre (*) </label>
+        </div>
+        <div class="col-3 mbs">
           <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez renseigner un titre</div>
-          <input type="text" id="name" name="name" size="50" value="{$audio->getName()|escape}">
-        </li>
-        <li>
+          <input type="text" id="name" name="name" class="w100" value="{$audio->getName()|escape}">
+        </div>
+        <div>
           <label for="id_groupe">Groupe</label>
+        </div>
+        <div class="col-3 mbs">
           <div class="infobulle error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez sélectionner un groupe</div>
-          <select id="id_groupe" name="id_groupe">
+          <select id="id_groupe" name="id_groupe" class="w100">
             <option value="0">Sans</option>
             {foreach from=$groupes item=groupe}
             <option value="{$groupe->getId()}"{if $audio->getIdGroupe() === $groupe->getIdGroupe()} selected="selected"{/if}>{$groupe->getName()|escape}</option>
             {/foreach}
           </select>
-        </li>
-        <li>
+        </div>
+        <div>
           <label for="id_lieu">Lieu</label>
-          <select id="id_lieu" name="id_lieu">
+        </div>
+        <div class="col-3 mbs">
+          <select id="id_lieu" name="id_lieu" class="w100">
             <optgroup label="Autre">
               <option value="0">aucun / non référencé</option>
             </optgroup>
@@ -51,34 +61,47 @@
             </optgroup>
             {/foreach}
           </select>
-        </li>
-        <li>
+        </div>
+        <div>
           <label for="id_event">Événement</label>
-          <select id="id_event" name="id_event">
+        </div>
+        <div class="col-3 mbs">
+          <select id="id_event" name="id_event" class="w100">
             <option value="0">Aucun</option>
           </select>
-        </li>
-        <li>
+        </div>
+        <div>
           <label for="online">Afficher publiquement</label>
-          <input class="switch" type="checkbox" name="online"{if $audio->getOnline()} checked="checked"{/if}>
-        </li>
-        <li>
+        </div>
+        <div class="col-3 mbs">
+          <input class="checkbox" type="checkbox" name="online"{if $audio->getOnline()} checked="checked"{/if}>
+        </div>
+        <div>
           <label for="created_at">Envoyé par</label>
+        </div>
+        <div class="col-3 mbs">
           <span id="created_at"><a href="{$membre->getUrl()}">{$membre->getPseudo()|escape}</a>
           le {$audio->getCreatedAt()|date_format:"%d/%m/%Y à %H:%M"}</span>
-        </li>
-        <li>
+        </div>
+        <div>
           <label for="modified_at">Modifié le</label>
+        </div>
+        <div class="col-3 mbs">
           <span id="modified_at">{$audio->getModifiedAt()|date_format:"%d/%m/%Y à %H:%M"}</span>
-        </li>
-        <li>
+        </div>
+        <div>
           <label for="delete">Supprimer</label>
+        </div>
+        <div class="col-3 mbs">
           <span id="delete"><a href="/audios/delete/{$audio->getId()}">Supprimer</a></span>
-        </li>
-      </ul>
-      <input id="form-audio-edit-submit" name="form-audio-edit-submit" class="btn btn--primary" type="submit" value="Enregistrer">
-      <input type="hidden" name="id" value="{$audio->getId()}">
-      <input type="hidden" name="audio_id_event" id="audio_id_event" value="{$audio->getIdEvent()|escape}">
+        </div>
+        <div></div>
+        <div class="col-3">
+          <input id="form-audio-edit-submit" name="form-audio-edit-submit" class="btn btn--primary w100" type="submit" value="Enregistrer">
+          <input type="hidden" name="id" value="{$audio->getId()}">
+          <input type="hidden" name="audio_id_event" id="audio_id_event" value="{$audio->getIdEvent()|escape}">
+        </div>
+      </section>
     </form>
 
 {/if} {* test unknown audio *}

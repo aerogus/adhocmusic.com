@@ -6,7 +6,9 @@
   </header>
   <div>
 
-<a href="/audios/create" class="btn btn--primary">Ajouter une musique</a>
+<div class="mbs txtcenter">
+  <a href="/audios/create" class="btn btn--primary">Ajouter une musique</a>
+</div>
 
 {if $audios|@sizeof == 0}
 
@@ -45,7 +47,9 @@
 
 {/if}
 
-<a href="/audios/create" class="btn btn--primary">Ajouter une musique</a>
+<div class="mts txtcenter">
+  <a href="/audios/create" class="btn btn--primary">Ajouter une musique</a>
+</div>
 
   </div>
 </div>
