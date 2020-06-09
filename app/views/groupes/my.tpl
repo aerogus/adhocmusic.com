@@ -11,7 +11,7 @@
 {/if}
 
 {if $groupes|@count > 0}
-<table>
+<table class="table table--zebra">
   <tr>
     <th>Groupe</th>
     <th>Création</th>

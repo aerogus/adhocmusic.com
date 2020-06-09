@@ -249,6 +249,8 @@ final class Controller
                 'text'           => (string) Route::params('text'),
                 'site'           => (string) Route::params('site'),
                 'id_contact'     => $_SESSION['membre']->getId(),
+                'lat'            => (float) Route::params('lat'),
+                'lng'            => (float) Route::params('lng'),
             ];
             $errors = [];
 
@@ -264,7 +266,9 @@ final class Controller
                     ->setAddress($data['address'])
                     ->setText($data['text'])
                     ->setSite($data['site'])
-                    ->setIdContact($data['id_contact']);
+                    ->setIdContact($data['id_contact'])
+                    ->setLat($data['lat'])
+                    ->setLng($data['lng']);
 
                 $lieu->save();
 

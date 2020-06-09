@@ -326,15 +326,6 @@ final class Controller
                     ->setOnline($data['online']);
 
                 if ($audio->save()) {
-                    $uploaded_audio_path = $_FILES['file']['tmp_name'];
-                    if (is_uploaded_file($uploaded_audio_path)) {
-                        if (!is_dir(Audio::getBasePath())) {
-                            mkdir(Audio::getBasePath(), 0755, true);
-                        }
-                        move_uploaded_file($uploaded_audio_path, Audio::getBasePath() . '/' . $audio->getId() . '.mp3');
-                    } else {
-                        mail(DEBUG_EMAIL, 'bug audio create', 'bug audio create');
-                    }
                     Log::action(Log::ACTION_AUDIO_EDIT, $audio->getId());
                     Tools::redirect('/audios/my');
                 } else {

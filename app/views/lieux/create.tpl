@@ -90,6 +90,20 @@
       <div class="infobulle error" id="error_site"{if empty($error_site)} style="display: none"{/if}>Vous devez saisir le site internet</div>
       <input id="site" name="site" type="text" class="w100" value="">
     </div>
+    <div>
+      <label for="lat">Latitude</label>
+    </div>
+    <div class="col-3 mbs">
+      <div class="infobulle error" id="error_lat"{if empty($error_lat)} style="display: none"{/if}>Vous devez préciser la latitude</div>
+      <input id="lat" name="lat" type="text" class="w100" value="">
+    </div>
+    <div>
+      <label for="lng">Longitude</label>
+    </div>
+    <div class="col-3 mbs">
+      <div class="infobulle error" id="error_lng"{if empty($error_lng)} style="display: none"{/if}>Vous devez préciser la longitude</div>
+      <input id="lng" name="lng" type="text" class="w100" value="">
+    </div>
     <div></div>
     <div class="col-3">
       <input id="form-lieu-create-submit" name="form-lieu-create-submit" class="btn btn--primary w100" type="submit" value="Ajouter">

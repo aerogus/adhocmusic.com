@@ -21,12 +21,6 @@
           <audio controls id="mp3" src="{$audio->getDirectMp3Url()}"></audio>
         </div>
         <div>
-          <label for="file">Audio (*)</label>
-        </div>
-        <div class="col-3 mbs">
-          <input type="file" id="file" name="file" value=""> (.mp3 16bits/44Khz/stéréo, &lt; 16 Mo)
-        </div>
-        <div>
           <label for="name">Titre (*) </label>
         </div>
         <div class="col-3 mbs">
@@ -77,29 +71,27 @@
           <input class="checkbox" type="checkbox" name="online"{if $audio->getOnline()} checked="checked"{/if}>
         </div>
         <div>
-          <label for="created_at">Envoyé par</label>
+          <label for="created_at">Envoyé le</label>
         </div>
         <div class="col-3 mbs">
-          <span id="created_at"><a href="{$membre->getUrl()}">{$membre->getPseudo()|escape}</a>
-          le {$audio->getCreatedAt()|date_format:"%d/%m/%Y à %H:%M"}</span>
+          <span id="created_at">{$audio->getCreatedAt()|date_format:"%d/%m/%Y à %H:%M"} par <a href="{$membre->getUrl()}">{$membre->getPseudo()|escape}</a></span>
         </div>
+        {if $audio->getModifiedAt()}
         <div>
           <label for="modified_at">Modifié le</label>
         </div>
         <div class="col-3 mbs">
           <span id="modified_at">{$audio->getModifiedAt()|date_format:"%d/%m/%Y à %H:%M"}</span>
         </div>
-        <div>
-          <label for="delete">Supprimer</label>
-        </div>
-        <div class="col-3 mbs">
-          <span id="delete"><a href="/audios/delete/{$audio->getId()}">Supprimer</a></span>
-        </div>
+        {/if}
         <div></div>
-        <div class="col-3">
+        <div class="col-2">
           <input id="form-audio-edit-submit" name="form-audio-edit-submit" class="btn btn--primary w100" type="submit" value="Enregistrer">
           <input type="hidden" name="id" value="{$audio->getId()}">
           <input type="hidden" name="audio_id_event" id="audio_id_event" value="{$audio->getIdEvent()|escape}">
+        </div>
+        <div class="txtright">
+          <span id="delete"><a href="/audios/delete/{$audio->getId()}" class="btn btn--primary">Supprimer</a></span>
         </div>
       </section>
     </form>

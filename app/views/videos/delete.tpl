@@ -29,7 +29,7 @@
         <label for="thumb">Miniature</label>
       </div>
       <div class="col-3 mbs">
-        <span id="thumb"><img src="{$video->getThumbUrl()}" alt=""></span>
+        <span id="thumb"><img src="{$video->getThumbUrl(320)}" alt=""></span>
       </div>
       <div>
         <label for="id_host">Hébergeur</label>

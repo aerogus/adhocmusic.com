@@ -45,10 +45,10 @@
     </div>
 
     <div>
-      <label for="id_contact">Ajouté par</label>
+      <label for="id_contact">Ajouté le</label>
     </div>
     <div class="col-3 mbs">
-      <span><a href="/membre/{$photo->getIdContact()}">{$photo->getPseudo()|escape}</a> le {$photo->getCreatedAt()|date_format:'%d/%m/%Y %H:%M'}</span>
+      {$photo->getCreatedAt()|date_format:'%d/%m/%Y %H:%M'} par <a href="/membres/{$photo->getIdContact()}">{$photo->getPseudo()|escape}</a>
     </div>
 
     {if $photo->getModifiedAt()}
@@ -119,7 +119,7 @@
       <label for="online">Rendre public</label>
     </div>
     <div class="col-3 mbs">
-      <input class="switch" type="checkbox" name="online"{if $photo->getOnline()} checked="checked"{/if}>
+      <input class="checkbox" type="checkbox" name="online"{if $photo->getOnline()} checked="checked"{/if}>
     </div>
 
     <div></div>

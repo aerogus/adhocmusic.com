@@ -93,7 +93,7 @@
           <label for="online">Afficher</label>
         </div>
         <div class="col-3 mbs">
-          <input class="switch" type="checkbox" name="online" checked="checked">
+          <input class="checkbox" type="checkbox" name="online" checked="checked">
         </div>
 
         <div></div>

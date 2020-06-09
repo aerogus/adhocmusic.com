@@ -40,6 +40,18 @@
       {$video->getPlayer()}
     </div>
     <div>
+      <label for="thumbnail">Miniature</label>
+    </div>
+    <div class="col-3 mbs">
+      <img src="{$video->getThumbUrl(320)}" alt=""/>
+    </div>
+    <div>
+      <label for="thumbnail_fetch">Réimporter la miniature</label>
+    </div>
+    <div class="col-3 mbs">
+      <input class="checkbox" type="checkbox" id="thumbnail_fetch" name="thumbnail_fetch"/>
+    </div>
+    <div>
       <label for="groupe">Groupe</label>
     </div>
     <div class="col-3 mbs">

@@ -273,6 +273,7 @@ final class Controller
                     mkdir(Video::getBasePath(), 0755, true);
                 }
 
+                // récupération de la vignette distante
                 if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
                     $video->storeThumbnail($vignette);
                 }
@@ -380,6 +381,7 @@ final class Controller
                 'id_lieu' => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
                 'id_event' => Route::params('id_event') ? (int) Route::params('id_event') : null,
                 'online' => (bool) Route::params('online'),
+                'thumbnail_fetch' => (bool) Route::params('thumbnail_fetch'),
             ];
             $errors = [];
 
@@ -398,12 +400,14 @@ final class Controller
                 }
 
                 // Permet le reset de la vignette
-                if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
-                    $video->storeThumbnail($vignette);
-                    $confVideo = Conf::getInstance()->get('video');
-                    foreach ($confVideo['thumb_width'] as $maxWidth) {
-                        $video->clearThumb($maxWidth);
-                        $video->genThumb($maxWidth);
+                if ($data['thumbnail_fetch']) {
+                    if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
+                        $video->storeThumbnail($vignette);
+                        $confVideo = Conf::getInstance()->get('video');
+                        foreach ($confVideo['thumb_width'] as $maxWidth) {
+                            $video->clearThumb($maxWidth);
+                            $video->genThumb($maxWidth);
+                        }
                     }
                 }
 
