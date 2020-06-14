@@ -161,7 +161,7 @@ final class Controller
                 }
 
                 // 2. envoi de la copie à l'expéditeur
-                $data['email_reply_to'] = 'site@adhocmusic.com';
+                $data['email_reply_to'] = 'contact@adhocmusic.com';
                 if (Email::send($data['email'], '[cc] ' . $data['subject'], 'form-contact-cc', $data)) {
                     if ($data['mailing']) {
                         Newsletter::addEmail($data['email']);
