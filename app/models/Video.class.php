@@ -364,6 +364,8 @@ class Video extends Media
      */
     function delete(): bool
     {
+        $this->unlinkGroupes();
+
         if (parent::delete()) {
             $this->deleteThumbnail();
             $thumbWidths = Conf::getInstance()->get('video')['thumb_width'];
@@ -373,6 +375,73 @@ class Video extends Media
             return true;
         }
         return false;
+    }
+
+    /**
+     * Retourne les styles du groupe
+     *
+     * @return array
+     */
+    function getGroupes(): array
+    {
+        return Groupe::find(['id_video' => $this->getIdVideo()]);
+    }
+
+    /**
+     * Retire un groupe d'une vidéo
+     *
+     * @param int $id_groupe id_groupe
+     *
+     * @return bool
+     */
+    function unlinkGroupe(int $id_groupe): bool
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "DELETE FROM `" . self::$_db_table_video_groupe . "` "
+             . "WHERE `id_video` = " . (int) $this->getIdVideo() . " "
+             . "AND `id_groupe` = " . (int) $id_groupe;
+
+        $db->query($sql);
+
+        return (bool) $db->affectedRows();
+    }
+
+    /**
+     * Ajoute un groupe à une vidéo
+     *
+     * @param int $id_groupe id_groupe
+     *
+     * @return bool
+     */
+    function linkGroupe(int $id_groupe): bool
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "INSERT INTO `" . self::$_db_table_video_groupe . "` "
+             . "(`id_video`, `id_groupe`) "
+             . "VALUES(" . (int) $this->getIdVideo() . ", " . (int) $id_groupe . ")";
+
+        $db->query($sql);
+
+        return (bool) $db->affectedRows();
+    }
+
+    /**
+     * Délie tous les groupes de cette vidéo
+     *
+     * @return bool
+     */
+    function unlinkGroupes(): bool
+    {
+        $db = DataBase::getInstance();
+
+        $sql = "DELETE FROM `" . self::$_db_table_video_groupe . "` "
+             . "WHERE `id_video` = " . (int) $this->getIdVideo();
+
+        $db->query($sql);
+
+        return (bool) $db->affectedRows();
     }
 
     /**

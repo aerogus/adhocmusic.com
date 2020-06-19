@@ -528,6 +528,16 @@ CREATE TABLE IF NOT EXISTS `adhoc_groupe_style` (
   CONSTRAINT `fk_groupe_style_style` FOREIGN KEY (`id_style`) REFERENCES `adhoc_style` (`id_style`)
 );
 
+CREATE TABLE IF NOT EXISTS `adhoc_video_groupe` (
+  `id_video` int(10) UNSIGNED NOT NULL,
+  `id_groupe` int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_video`,`id_groupe`),
+  KEY `id_video` (`id_video`),
+  KEY `id_groupe` (`id_groupe`),
+  CONSTRAINT `fk_video_groupe_video` FOREIGN KEY (`id_video`) REFERENCES `adhoc_video` (`id_video`),
+  CONSTRAINT `fk_video_groupe_groupe` FOREIGN KEY (`id_groupe`) REFERENCES `adhoc_groupe` (`id_groupe`)
+);
+
 CREATE TABLE IF NOT EXISTS `adhoc_participe_a` (
   `id_event` int(10) UNSIGNED NOT NULL,
   `id_groupe` int(10) UNSIGNED NOT NULL,

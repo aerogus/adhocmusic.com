@@ -1089,6 +1089,15 @@ class Groupe extends ObjectModel
             }
         }
 
+        if (isset($params['id_video'])) {
+            $subSql = "SELECT `id_groupe` FROM `adhoc_video_groupe` WHERE `id_video` = " . (int) $params['id_video'] . " ";
+            if ($ids_groupe = $db->queryWithFetchFirstFields($subSql)) {
+                $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
+            } else {
+                return $objs;
+            }
+        }
+
         if (isset($params['alias'])) {
             $sql .= "AND `alias` = '" . $db->escape($params['alias']) . "' ";
         }
