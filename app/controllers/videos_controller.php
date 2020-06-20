@@ -116,8 +116,8 @@ final class Controller
             ];
             $smarty->assign('og_video', $og_video);
 
-            if ($video->getIdGroupe()) {
-                $groupe = Groupe::getInstance($video->getIdGroupe());
+            if ($video->getGroupes()) {
+                $groupe = Groupe::getInstance($video->getGroupes()[0]->getId());
                 $smarty->assign('groupe', $groupe);
                 $smarty->assign('title', "♫ " . $video->getName() . " (" . $groupe->getName() . ")");
                 $meta_description .= " | Groupe : " . $groupe->getName();
@@ -138,7 +138,7 @@ final class Controller
             }
 
             // menu et fil d'ariane
-            if ($from === 'groupe' && $video->getIdGroupe()) {
+            if ($from === 'groupe' && $video->getGroupes()) {
                 Trail::getInstance()
                     ->addStep("Groupes", "/groupes")
                     ->addStep($groupe->getName(), $groupe->getUrl());
@@ -514,8 +514,8 @@ final class Controller
 
         $smarty->assign('video', $video);
 
-        if ($video->getIdGroupe()) {
-            $smarty->assign('groupe', Groupe::getInstance($video->getIdGroupe()));
+        if ($video->getGroupes()) {
+            $smarty->assign('groupe', $video->getGroupes()[0]);
         }
         if ($video->getIdEvent()) {
             $smarty->assign('event', Event::getInstance($video->getIdEvent()));
