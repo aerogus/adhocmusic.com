@@ -28,7 +28,7 @@
 
     <div class="box">
       <header>
-        <h2>Ils sont passés par AD'HOC</h2>
+        <h2>Ils sont passés par AD'HOC ces 20 dernières années</h2>
       </header>
       <div class="reset grid-3-small-2 has-gutter">
         {foreach from=$videos item=video}
@@ -36,11 +36,11 @@
           <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">
             <a class="playbtn" href="{$video->getUrl()}" title="Regarder la vidéo {$video->getName()|escape}">▶</a>
           </div>
-          <p class="title"><a href="{$video->getUrl()}" title="Regarder la vidéo {$video->getName()|escape}">{$video->getName()}</a></p>
+          <p class="title"><a href="{$video->getGroupe()->getUrl()}" title="Aller à la page du groupe {$video->getGroupe()->getName()|escape}">{$video->getGroupe()->getName()}</a></p>
           <p class="subtitle">
-            {if !empty($video->getGroupe())}<a href="{$video->getGroupe()->getUrl()}" title="Aller à la page du groupe {$video->getGroupe()->getName()|escape}">{$video->getGroupe()->getName()}</a>{/if}
-            {if !empty($video->getGroupe()) && !empty($video->getEvent())}<br/>{/if}
-            {if !empty($video->getEvent())}<a href="{$video->getEvent()->getUrl()}" title="Aller à la page de l'événement {$video->getEvent()->getName()|escape}">{$video->getEvent()->getDate()|date_format:"%a %e %B %Y"}</a>{/if}
+            <a href="{$video->getUrl()}" title="Regarder la vidéo {$video->getName()|escape}">{$video->getName()}</a>
+            <br/>
+            <a href="{$video->getEvent()->getUrl()}" title="Aller à la page de l'événement {$video->getEvent()->getName()|escape}">{$video->getEvent()->getDate()|date_format:"%a %e %B %Y"}</a>
           </p>
         </div>
         {/foreach}

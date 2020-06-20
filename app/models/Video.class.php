@@ -382,9 +382,13 @@ class Video extends Media
      *
      * @return array
      */
-    function getGroupes(): array
+    function getGroupes(int $idx = null): array
     {
-        return Groupe::find(['id_video' => $this->getIdVideo()]);
+        $groupes = Groupe::find(['id_video' => $this->getIdVideo()]);
+        if (!is_null($idx) && array_key_exists($idx, $groupes)) {
+            return $groupes[$idx];
+        }
+        return $groupes;
     }
 
     /**

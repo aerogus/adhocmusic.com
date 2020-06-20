@@ -79,7 +79,14 @@ class Media extends ObjectModel
      */
     function getGroupe(): ?object
     {
-        if (!is_null($this->getIdGroupe())) {
+        if (get_called_class() === 'Video') {
+            $groupes = $this->getGroupes();
+            if (sizeof($groupes) >= 1) {
+                return array_shift($groupes);
+            } else {
+                return null;
+            }
+        } elseif (!is_null($this->getIdGroupe())) {
             try {
                 return Groupe::getInstance($this->getIdGroupe());
             } catch (Exception $e) {
@@ -391,7 +398,16 @@ class Media extends ObjectModel
         }
 
         if (!empty($params['has_groupe'])) {
-            $sql .= "AND `id_groupe` IS NOT NULL ";
+            if (get_called_class() === 'Video') {
+                $subSql = "SELECT `id_video` FROM `adhoc_video_groupe`";
+                if ($ids_video = $db->queryWithFetchFirstFields($subSql)) {
+                    $sql .= "AND `id_video` IN (" . implode(',', (array) $ids_video) . ") ";
+                } else {
+                    return $objs;
+                }
+            } else {
+                $sql .= "AND `id_groupe` IS NOT NULL ";
+            }
         }
 
         if (isset($params['id_groupe'])) {
