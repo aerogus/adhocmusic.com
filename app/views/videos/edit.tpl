@@ -52,15 +52,18 @@
       <input class="checkbox" type="checkbox" id="thumbnail_fetch" name="thumbnail_fetch"/>
     </div>
     <div>
-      <label for="groupe">Groupe</label>
+      <label for="ids_groupe[0]">Groupe(s)</label>
     </div>
     <div class="col-3 mbs">
-      <select id="id_groupe" name="id_groupe" class="w100">
-        <option value="0">Sans</option>
-        {foreach $groupes as $groupe}
-        <option value="{$groupe->getIdGroupe()}"{if $video->getIdGroupe() == $groupe->getIdGroupe()} selected="selected"{/if}>{$groupe->getName()|escape}</option>
+      {assign var=video_groupes value=$video->getGroupes()}
+      {section name=cpt_groupe loop=5}
+      <select id="ids_groupe[{$smarty.section.cpt_groupe.index}]" name="ids_groupe[{$smarty.section.cpt_groupe.index}]" class="w100 mbs">
+        <option value="">-- Choix d'un groupe --</option>
+        {foreach from=$groupes item=groupe}
+        <option value="{$groupe->getId()|escape}" {if $video_groupes[$smarty.section.cpt_groupe.index] && ($video_groupes[$smarty.section.cpt_groupe.index]->getId() === $groupe->getId())} selected="selected"{/if}>{$groupe->getName()|escape}</option>
         {/foreach}
       </select>
+      {/section}
     </div>
     <div>
       <label for="id_lieu">Lieu</label>
@@ -88,7 +91,7 @@
       </select>
     </div>
     <div>
-      <label for="online">Afficher publiquement</label>
+      <label for="online">Rendre public</label>
     </div>
     <div class="col-3 mbs">
       <input class="checkbox" type="checkbox" name="online"{if $video->getOnline()} checked="checked"{/if}>

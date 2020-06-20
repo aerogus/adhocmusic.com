@@ -395,7 +395,16 @@ class Media extends ObjectModel
         }
 
         if (isset($params['id_groupe'])) {
-            $sql .= "AND `id_groupe` = " . (int) $params['id_groupe'] . " ";
+            if (get_called_class() === 'Video') {
+                $subSql = "SELECT `id_video` FROM `adhoc_video_groupe` WHERE `id_groupe` = " . (int) $params['id_groupe'] . " ";
+                if ($ids_video = $db->queryWithFetchFirstFields($subSql)) {
+                    $sql .= "AND `id_video` IN (" . implode(',', (array) $ids_video) . ") ";
+                } else {
+                    return $objs;
+                }
+            } else {
+                $sql .= "AND `id_groupe` = " . (int) $params['id_groupe'] . " ";
+            }
         }
 
         if (isset($params['id_event'])) {

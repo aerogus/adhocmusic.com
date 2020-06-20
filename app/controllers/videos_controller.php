@@ -248,6 +248,7 @@ final class Controller
                 'code' => (string) Route::params('code'),
                 'reference' => (string) Route::params('reference'),
             ];
+
             $errors = [];
 
             if (self::_validateVideoCreateForm($data, $errors)) {
@@ -258,13 +259,22 @@ final class Controller
 
                 $video = (new Video())
                     ->setName($data['name'])
-                    ->setIdGroupe($data['id_groupe'])
+                    ->setIdGroupe($data['id_groupe']) // deprecated
                     ->setIdLieu($data['id_lieu'])
                     ->setIdEvent($data['id_event'])
                     ->setIdContact($data['id_contact'])
                     ->setOnline($data['online'])
                     ->setIdHost($data['id_host'])
                     ->setReference($data['reference']);
+
+                $video->save();
+
+                foreach (Route::params('ids_groupe') as $id_groupe) {
+                    $id_groupe = (int) $id_groupe;
+                    if ($id_groupe) {
+                        $video->linkGroupe((int) $id_groupe);
+                    }
+                }
 
                 $video->save();
 
@@ -301,21 +311,19 @@ final class Controller
             ->addStep('Mes vidéos', '/videos/my')
             ->addStep('Ajouter une vidéo');
 
+        // préselection d'un groupe
         $id_groupe = (int) Route::params('id_groupe');
-        if ($id_groupe) {
-            $groupe = Groupe::getInstance($id_groupe);
-            $smarty->assign('groupe', $groupe);
-        } else {
-            $smarty->assign(
-                'groupes', Groupe::find(
-                    [
-                        'online' => true,
-                        'order_by' => 'name',
-                        'sort' => 'ASC',
-                    ]
-                )
-            );
-        }
+        $smarty->assign('id_groupe', $id_groupe);
+
+        $smarty->assign(
+            'groupes', Groupe::find(
+                [
+                    'online' => true,
+                    'order_by' => 'name',
+                    'sort' => 'ASC',
+                ]
+            )
+        );
 
         $id_lieu = (int) Route::params('id_lieu');
         if ($id_lieu) {
@@ -390,8 +398,18 @@ final class Controller
                 $video->setName($data['name'])
                     ->setIdLieu($data['id_lieu'])
                     ->setIdEvent($data['id_event'])
-                    ->setIdGroupe($data['id_groupe'])
+                    ->setIdGroupe($data['id_groupe']) // deprecated
                     ->setOnline($data['online']);
+
+                $video->save();
+
+                $video->unlinkGroupes();
+                foreach (Route::params('ids_groupe') as $id_groupe) {
+                    $id_groupe = (int) $id_groupe;
+                    if ($id_groupe) {
+                        $video->linkGroupe((int) $id_groupe);
+                    }
+                }
 
                 $video->save();
 

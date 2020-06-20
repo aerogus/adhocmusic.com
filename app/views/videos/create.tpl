@@ -29,21 +29,18 @@
           <div id="thumb"></div>
         </div>
         <div>
-          <label for="id_groupe">Groupe</label>
+          <label for="ids_groupe[0]">Groupe(s)</label>
         </div>
         <div class="col-3 mbs">
-          {if !empty($groupe)}
-          <input type="hidden" name="id_groupe" value="{$groupe->getId()}">
-          <span>{$groupe->getName()}</span>
-          {else}
           <div class="infobulle error" id="error_id_groupe"{if empty($error_id_groupe)} style="display: none"{/if}>Vous devez lier cette vidéo à soit un groupe, soit un lieu, soit un événement</div>
-          <select id="id_groupe" name="id_groupe" class="w100">
-            <option value="0">Aucun</option>
-            {foreach $groupes as $groupe}
-            <option value="{$groupe->getIdGroupe()}">{$groupe->getName()|escape}</option>
+          {section name=cpt_groupe loop=5}
+          <select id="ids_groupe[{$smarty.section.cpt_groupe.index}]" name="ids_groupe[{$smarty.section.cpt_groupe.index}]" class="w100 mbs">
+            <option value="">-- Choix d'un groupe --</option>
+            {foreach from=$groupes item=groupe}
+            <option value="{$groupe->getId()|escape}"{if ($smarty.section.cpt_groupe.index === 0) && $groupe->getId() === $id_groupe} selected="selected"{/if}>{$groupe->getName()|escape}</option>
             {/foreach}
           </select>
-          {/if}
+          {/section}
         </div>
         <div>
           <label for="id_lieu">Lieu</label>
@@ -81,7 +78,7 @@
           {/if}
         </div>
         <div>
-          <label for="online">Afficher publiquement</label>
+          <label for="online">Rendre public</label>
         </div>
         <div class="col-3 mbs">
           <input class="checkbox" type="checkbox" name="online" checked="checked">

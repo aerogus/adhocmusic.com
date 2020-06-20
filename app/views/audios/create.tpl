@@ -74,7 +74,7 @@
           {/if}
         </div>
         <div>
-          <label for="online">Afficher publiquement</label>
+          <label for="online">Rendre public</label>
         </div>
         <div class="col-3 mbs">
           <input class="checkbox" type="checkbox" name="online" checked="checked">

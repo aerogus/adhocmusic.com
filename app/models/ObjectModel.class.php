@@ -74,6 +74,7 @@ abstract class ObjectModel
     protected static $_db_table_groupe_style   = 'adhoc_groupe_style';
     protected static $_db_table_organise_par   = 'adhoc_organise_par';
     protected static $_db_table_participe_a    = 'adhoc_participe_a';
+    protected static $_db_table_video_groupe   = 'adhoc_video_groupe';
 
     /**
      * @param bool $fusion fusion
@@ -542,7 +543,7 @@ abstract class ObjectModel
     }
 
     /**
-     * Retourne le nombre d'entités référencés
+     * Retourne le nombre d'entités référencées
      *
      * @return int
      */
@@ -558,6 +559,7 @@ abstract class ObjectModel
 
     /**
      * Compte le nombre d'entités liées au user loggué
+     * (ne marche pas pour toutes les tables)
      *
      * @return int
      * @throws Exception

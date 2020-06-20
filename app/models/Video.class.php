@@ -130,7 +130,7 @@ class Video extends Media
         'id_host'     => 'int',
         'reference'   => 'string',
         'ratio'       => 'float',
-        'id_groupe'   => 'int',
+        'id_groupe'   => 'int', // deprecated ?
         'id_lieu'     => 'int',
         'id_event'    => 'int',
         'name'        => 'string',
@@ -378,7 +378,7 @@ class Video extends Media
     }
 
     /**
-     * Retourne les styles du groupe
+     * Retourne un tableau des groupes liés à cette vidéo
      *
      * @return array
      */
