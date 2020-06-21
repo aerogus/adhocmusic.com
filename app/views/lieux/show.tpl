@@ -19,8 +19,7 @@
     <h1>{$lieu->getName()}</h1>
   </header>
   <div>
-    <div id="map_canvas" style="width: 320px; height: 320px; float: right;"></div>
-    {*<img src="{$lieu->getMapUrl()}" alt="carte" align="right">*}
+    <div id="map_canvas" style="width: 50%; height: 320px; float: right; z-index: 1"></div>
 
     <div class="infos" style="width: 300px; padding: 10px;">
       <strong>{$lieu->getName()|escape}</strong><br>
