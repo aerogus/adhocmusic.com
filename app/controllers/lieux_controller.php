@@ -118,10 +118,12 @@ final class Controller
         }
 
         $smarty->enqueue_style('/css/baguetteBox-1.11.1.min.css');
+        $smarty->enqueue_style('/css/leaflet.css');
 
         $smarty->enqueue_script('/js/masonry-4.2.2.min.js');
         $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
         $smarty->enqueue_script('/js/baguetteBox-1.11.1.min.js');
+        $smarty->enqueue_script('/js/leaflet.js');
 
         $smarty->enqueue_script_vars(
             [
@@ -131,15 +133,12 @@ final class Controller
             ]
         );
         $smarty->enqueue_script('/js/lieux/show.js');
-        $smarty->enqueue_script('https://maps.googleapis.com/maps/api/js?key=' . GOOGLE_MAPS_API_KEY . '&callback=adhocLieuInitMap');
 
         if (!$lieu->getLat() && !$lieu->getLng()) {
             $smarty->assign('geocode', true);
             $smarty->assign('geocode_id_lieu', $lieu->getId());
             $smarty->assign('geocode_address', $lieu->getAddress() . ' ' . $lieu->getCity()->getCp() . ' ' . $lieu->getCity()->getName());
         }
-
-        $smarty->assign('og_image', $lieu->getMapUrl('160x160', 15, 'roadmap'));
 
         $smarty->assign('lieu', $lieu);
 
