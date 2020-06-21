@@ -32,7 +32,6 @@ class Conf
         'debug' => ['show_errors', 'log_errors', 'log_sql', 'log_file', 'email'],
         'contact_form' => ['to', 'log_file'],
         'facebook' => ['page_id', 'page_url'],
-        'google_maps' => ['api_key'],
         'photo' => ['max_width', 'max_height', 'thumb_width'],
         'video' => ['max_width', 'max_height', 'thumb_width'],
         'event' => ['max_width', 'max_height', 'thumb_width'],

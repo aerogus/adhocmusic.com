@@ -97,8 +97,6 @@ define('IMG_CACHE_PATH', ADHOC_ROOT_PATH . '/static/cache');
 // chemin http des images en cache
 define('IMG_CACHE_URL', CACHE_URL);
 
-define('GOOGLE_MAPS_API_KEY', $conf['google_maps']['api_key']);
-
 define('FB_PAGE_ID',      $conf['facebook']['page_id']);
 define('FB_APP_PAGE_URL', $conf['facebook']['page_url']);
 
