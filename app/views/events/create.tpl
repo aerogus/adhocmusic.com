@@ -73,23 +73,24 @@
   </fieldset>
 
   <fieldset id="bloc-groupes">
-  <legend>Artistes</legend>
-  <section class="grid-4">
-    <div>
-      <label for="groupe">Groupe(s)</label>
-    </div>
-    <div class="col-3">
-      {section name=cpt_groupe loop=5}
-      <select id="groupe" name="groupe[{$smarty.section.cpt_groupe.index}]" class="w100 mbs">
-        <option value="">-- Choix d'un groupe --</option>
-        {foreach from=$groupes item=groupe}
-        <option value="{$groupe->getId()|escape}"{if $data.groupes.0 === $groupe->getId()} selected="selected"{/if}>{$groupe->getName()|escape}</option>
-        {/foreach}
-      </select>
-      {/section}
-    </div>
-  </section>
+    <legend>Artistes</legend>
+    <section class="grid-4">
+      <div>
+        <label for="groupe">Groupe(s)</label>
+      </div>
+      <div class="col-3">
+        {section name=cpt_groupe loop=5}
+        <select id="groupe" name="groupe[{$smarty.section.cpt_groupe.index}]" class="w100 mbs">
+          <option value="">-- Choix d'un groupe --</option>
+          {foreach from=$groupes item=groupe}
+          <option value="{$groupe->getId()|escape}"{if $data.groupes.0 === $groupe->getId()} selected="selected"{/if}>{$groupe->getName()|escape}</option>
+          {/foreach}
+        </select>
+        {/section}
+      </div>
+    </section>
   </fieldset>
+
   <fieldset id="bloc-event">
     <legend>Événement</legend>
     <section class="grid-4">
@@ -121,7 +122,7 @@
       <div>
         <label for="price">Tarifs (Entrée, Bar, Vestiaire ...) (*)</label>
       </div>
-      <div class="col-3 mbs">
+      <div class="col-3 mbm">
         <div class="infobulle error" id="error_price"{if empty($error_price)} style="display: none"{/if}>Vous devez écrire les tarifs de l'entrée.</div>
         <textarea name="price" id="price" class="w100" rows="2">{$data.price|escape}</textarea>
       </div>
@@ -186,7 +187,9 @@
       <label for="more-event">Ajouter un autre événement pour le même lieu</label>
     </div>
   </fieldset>
+
   <input id="form-event-create-submit" name="form-event-create-submit" class="btn btn--primary" type="submit" value="Ajouter">
+
 </form>
 
   </div>
