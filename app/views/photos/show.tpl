@@ -38,7 +38,7 @@
         <h2>Lieu</h2>
       </header>
       <div>
-        <a href="{$lieu->getUrl()}"><img style="float: right;" src="{$lieu->getMapUrl('64x64')}" alt=""><strong>{$lieu->getName()|escape}</strong></a><br>{$lieu->getAddress()}<br>{$lieu->getCity()->getCp()} {$lieu->getCity()->getName()|escape}
+        <a href="{$lieu->getUrl()}"><strong>{$lieu->getName()|escape}</strong></a><br>{$lieu->getAddress()}<br>{$lieu->getCity()->getCp()} {$lieu->getCity()->getName()|escape}
       </div>
     </div>
     {/if}

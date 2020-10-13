@@ -271,15 +271,18 @@ final class Controller
 
                 $lieu->save();
 
+                // @TODO geocoding via openstreetmap ?
                 // calcul des coordonnées
+                /*
                 $addr = $lieu->getAddress() . ' ' . $lieu->getCity()->getCp() . ' ' . $lieu->getCity()->getName();
-                if ($coords = GoogleMaps::getGeocode($addr)) { // TODO nouvelle clé API Google (ou autre service de Geocoding !)
+                if ($coords = OSM::getGeocode($addr)) { // TODO nouvelle clé API Google (ou autre service de Geocoding !)
                     if ($coords['status'] === 'OK') {
                         $lieu->setLat($coords['lat']);
                         $lieu->setLng($coords['lng']);
                         $lieu->save();
                     }
                 }
+                */
 
                 /* Upload de la photo */
                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {

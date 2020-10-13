@@ -209,7 +209,7 @@ class Log
         $out = false;
         if (is_writable(self::$_log_file)) {
             if ($fp = fopen(self::$_log_file, "a+")) {
-                if (!(fwrite($fp, $line . "\n") === false)) {
+                if (fwrite($fp, $line . "\n") !== false) {
                     $out = true;
                 }
                 fclose($fp);

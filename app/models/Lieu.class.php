@@ -439,27 +439,6 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * Retourne l'image de la carte
-     *
-     * @param string $size    taille
-     * @param int    $zoom    zoom
-     * @param string $maptype type de carte
-     *
-     * @return string
-     */
-    function getMapUrl(string $size = '320x320', int $zoom = 15, string $maptype = 'roadmap')
-    {
-        return GoogleMaps::getStaticMap(
-            [
-                'loc'     => $this->getGeocode(),
-                'size'    => $size,
-                'zoom'    => $zoom,
-                'maptype' => $maptype,
-            ]
-        );
-    }
-
-    /**
      * Retourne la distance (à la position actuelle si renseignée)
      *
      * @return float
