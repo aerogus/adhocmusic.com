@@ -26,7 +26,7 @@ foreach ($res as $day => $data) {
             }
             $_groupes[] = $grp->getName();
         }
-        echo "- " . $year . ": " . implode($_groupes, " + ") . "\n";
+        echo "- " . $year . ": " . implode(' + ', $_groupes) . "\n";
     }
 }
 die;
