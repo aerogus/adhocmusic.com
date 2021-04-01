@@ -497,7 +497,7 @@ class Video extends Media
     {
         switch ($this->getIdHost()) {
             case self::HOST_YOUTUBE:
-                return "https://www.youtube.com/embed/" . $this->getReference() . "?rel=0";
+                return "https://www.youtube-nocookie.com/embed/" . $this->getReference() . "?rel=0";
 
             case self::HOST_DAILYMOTION:
                 return "https://www.dailymotion.com/embed/video/" . $this->getReference() . "?theme=none&foreground=%23FFFFFF&highlight=%23CC0000&background=%23000000&wmode=transparent";
