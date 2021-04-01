@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_type_musicien` (
 
 CREATE TABLE IF NOT EXISTS `adhoc_contact` (
   `id_contact` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `email` varchar(150) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `lastnl` datetime DEFAULT NULL,
   PRIMARY KEY (`id_contact`),
   UNIQUE KEY `email` (`email`)
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_subscription` (
   `amount` float UNSIGNED NOT NULL DEFAULT '0',
   `first_name` varchar(250) DEFAULT NULL,
   `last_name` varchar(250) DEFAULT NULL,
-  `email` varchar(150) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
   `cp` varchar(10) DEFAULT '',
   `id_contact` int(10) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id_subscription`),
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_groupe` (
   `lineup` mediumtext NOT NULL,
   `mini_text` tinytext NOT NULL,
   `text` mediumtext NOT NULL,
-  `_email` varchar(250) NOT NULL DEFAULT '',
+  `_email` varchar(50) NOT NULL DEFAULT '',
   `site` varchar(250) NOT NULL DEFAULT '',
   `myspace` varchar(100) DEFAULT NULL,
   `facebook_page_id` char(20) DEFAULT NULL,
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_structure` (
   `id_departement` char(2) DEFAULT NULL,
   `text` text NOT NULL,
   `site` varchar(250) NOT NULL DEFAULT '',
-  `email` varchar(250) NOT NULL DEFAULT '',
+  `email` varchar(50) NOT NULL DEFAULT '',
   `id_country` char(2) NOT NULL DEFAULT 'FR',
   PRIMARY KEY (`id_structure`),
   KEY `id_departement` (`id_departement`),
@@ -251,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_comment` (
   `id_content` int(10) UNSIGNED NOT NULL,
   `id_contact` int(10) UNSIGNED NOT NULL,
   `pseudo` varchar(50) DEFAULT NULL,
-  `email` varchar(80) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
   `text` mediumtext NOT NULL,
   `online` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -312,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_event` (
 CREATE TABLE IF NOT EXISTS `adhoc_exposant` (
   `id_exposant` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `phone` varchar(100) NOT NULL,
   `site` varchar(100) NOT NULL,
   `type` varchar(100) NOT NULL,
