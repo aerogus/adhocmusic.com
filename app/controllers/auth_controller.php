@@ -19,6 +19,8 @@ final class Controller
         Trail::getInstance()
             ->addStep('Se connecter ou créer un compte');
 
+        $smarty->assign('robots', 'noindex,nofollow');
+
         $smarty->enqueue_script('/js/auth/login.js');
         $smarty->enqueue_script('/js/membres/create.js');
 
@@ -78,6 +80,7 @@ final class Controller
 
                 $smarty = new AdHocSmarty();
                 $smarty->enqueue_script('/js/auth/login.js');
+                $smarty->assign('robots', 'noindex,nofollow');
                 $smarty->assign('auth_failed', true);
                 return $smarty->fetch('auth/login.tpl');
 
@@ -90,6 +93,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
         $smarty->assign('not_auth', true);
+        $smarty->assign('robots', 'noindex,nofollow');
 
         Trail::getInstance()
             ->addStep('Se connecter');
@@ -137,6 +141,8 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         $smarty->enqueue_script('/js/auth/change-password.js');
+
+        $smarty->assign('robots', 'noindex,nofollow');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -186,6 +192,8 @@ final class Controller
         }
 
         $smarty = new AdHocSmarty();
+
+        $smarty->assign('robots', 'noindex,nofollow');
 
         $smarty->enqueue_script('/js/auth/lost-password.js');
 

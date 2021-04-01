@@ -274,6 +274,8 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->assign('robots', 'noindex,nofollow');
+
         $smarty->enqueue_script('/js/photos/create.js');
 
         $id_groupe = (int) Route::params('id_groupe');
@@ -334,6 +336,8 @@ final class Controller
         $id = (int) Route::params('id');
 
         $smarty = new AdHocSmarty();
+
+        $smarty->assign('robots', 'noindex,nofollow');
 
         $smarty->enqueue_script('/js/photos/edit.js');
 
@@ -431,6 +435,8 @@ final class Controller
         $id = (int) Route::params('id');
 
         $smarty = new AdHocSmarty();
+
+        $smarty->assign('robots', 'noindex,nofollow');
 
         $smarty->enqueue_script('/js/photos/delete.js');
 

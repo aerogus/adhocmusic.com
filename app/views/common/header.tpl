@@ -51,7 +51,7 @@
 <meta name="msapplication-TileColor" content="#292933">
 <meta name="theme-color" content="#ffffff">
 
-<meta name="robots" content="index,follow">
+<meta name="robots" content="{$robots|escape}">
 <meta name="description" content="{if empty($description)}Soutien des musiques actuelles en Essonne, agenda culturel, vidéos de concerts...{else}{$description|escape}{/if}">
 
 {foreach $stylesheets as $style_url}

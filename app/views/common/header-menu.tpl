@@ -30,9 +30,9 @@
           </li>
           <li>
           {if empty($is_auth)}
-            <a class="avatar" href="/auth/auth" accesskey="6" title="Identification">🔒</a>
+            <a class="avatar" rel="nofollow" href="/auth/auth" accesskey="6" title="Identification">🔒</a>
           {else}
-            <a class="avatar" href="/membres/tableau-de-bord" accesskey="6" title="Tableau de bord">🔓</a>
+            <a class="avatar" rel="nofollow" href="/membres/tableau-de-bord" accesskey="6" title="Tableau de bord">🔓</a>
           {/if}
           </li>
         </ul>

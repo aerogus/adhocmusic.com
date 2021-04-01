@@ -18,6 +18,8 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->assign('robots', 'noindex,nofollow');
+
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
             ->addStep('Mes musiques');
@@ -172,6 +174,8 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->assign('robots', 'noindex,nofollow');
+
         $smarty->enqueue_script('/js/audios/create.js');
 
         Trail::getInstance()
@@ -286,6 +290,8 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->assign('robots', 'noindex,nofollow');
+
         $smarty->enqueue_script('/js/audios/edit.js');
 
         Trail::getInstance()
@@ -381,6 +387,8 @@ final class Controller
         Tools::auth(Membre::TYPE_STANDARD);
 
         $smarty = new AdHocSmarty();
+
+        $smarty->assign('robots', 'noindex,nofollow');
 
         $smarty->enqueue_script('/js/audios/delete.js');
 

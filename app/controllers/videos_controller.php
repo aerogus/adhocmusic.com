@@ -50,6 +50,8 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->assign('robots', 'noindex,nofollow');
+
         $smarty->enqueue_script('/js/masonry-4.2.2.min.js');
         $smarty->enqueue_script('/js/imagesloaded-4.1.4.min.js');
         $smarty->enqueue_script('/js/baguetteBox-1.11.1.min.js');
@@ -235,6 +237,8 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->assign('robots', 'noindex,nofollow');
+
         $smarty->enqueue_script('/js/videos/create.js');
 
         if (Tools::isSubmit('form-video-create')) {
@@ -369,6 +373,8 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
+        $smarty->assign('robots', 'noindex,nofollow');
+
         $smarty->enqueue_script('/js/videos/edit.js');
 
         try {
@@ -485,6 +491,8 @@ final class Controller
         $id = (int) Route::params('id');
 
         $smarty = new AdHocSmarty();
+
+        $smarty->assign('robots', 'noindex,nofollow');
 
         $smarty->enqueue_script('/js/videos/delete.js');
 

@@ -48,6 +48,7 @@ class AdHocSmarty extends Smarty
         $this->assign('uri', $_SERVER['REQUEST_URI']);
         $this->assign('url', HOME_URL . $_SERVER['REQUEST_URI']);
         $this->assign('fb_page_id', FB_PAGE_ID);
+        $this->assign('robots', 'index,follow');
 
         if (!empty($_SESSION['membre'])) {
             $this->assign('me', $_SESSION['membre']);
