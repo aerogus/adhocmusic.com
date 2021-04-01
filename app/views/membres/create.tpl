@@ -26,15 +26,15 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
   <div class="mbs">
     <label for="pseudo">Pseudo</label>
     <div id="error_pseudo_unavailable" class="infobulle error"{if empty($error_pseudo_unavailable)} style="display: none"{/if}>Ce pseudo est pris, veuillez en choisir un autre</div>
-    <div class="infobulle error" id="error_pseudo"{if empty($error_pseudo)} style="display: none"{/if}>Vous devez saisir un pseudo entre 2 à 16 caractères</div>
-    <input id="pseudo" name="pseudo" type="text" size="35" value="{$data.pseudo|escape}" placeholder="Pseudo">
+    <div class="infobulle error" id="error_pseudo"{if empty($error_pseudo)} style="display: none"{/if}>Vous devez saisir un pseudo entre 1 à 50 caractères</div>
+    <input id="pseudo" name="pseudo" type="text" maxlength="50" value="{$data.pseudo|escape}" placeholder="Pseudo">
   </div>
   <div class="mbs">
     <label for="email">E-mail</label>
     <div id="error_email"{if empty($error_email)} style="display: none"{/if} class="infobulle error">Vous devez saisir votre e-mail</div>
     <div id="error_invalid_email" class="infobulle error"{if empty($error_invalid_email)} style="display: none"{/if}>Cet e-mail semble invalide</div>
     <div id="error_already_member" class="infobulle error"{if empty($error_already_member)} style="display: none"{/if}>Inscription impossible car un compte avec cet e-mail existe déjà. Vous avez <a href="/auth/lost-password">oublié votre mot de passe ?</a></div>
-    <input id="email" name="email" type="email" size="35" value="{$data.email|escape}" placeholder="E-mail">
+    <input id="email" name="email" type="email" maxlength="50" value="{$data.email|escape}" placeholder="E-mail">
   </div>
   <div class="mbs">
     <label for="mailing" class="visually-hidden">Newsletter</label>

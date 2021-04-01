@@ -9,7 +9,7 @@ jQuery(document).ready(function ($) {
     $('#error_email').fadeOut();
     $('#error_invalid_email').fadeOut();
     $('#error_already_member').fadeOut();
-    if ($(this).val().length > 2) {
+    if ($(this).val().length > 3) {
       // check existence email
       var email = $('#email').val();
       $.getJSON('/auth/check-email.json', {
@@ -35,7 +35,7 @@ jQuery(document).ready(function ($) {
     $('#pseudo').removeClass('valid error');
     $('#error_pseudo').fadeOut();
     $('#error_pseudo_unavailable').fadeOut();
-    if ($(this).val().length > 2) {
+    if ($(this).val().length > 1) {
       // check dispo du pseudo
       var pseudo = $('#pseudo').val();
       $.getJSON('/auth/check-pseudo.json', {
@@ -62,7 +62,7 @@ jQuery(document).ready(function ($) {
     } else {
       $('#email').prev('.error').fadeOut();
     }
-    if ($('#pseudo').val().length === 0) {
+    if ($('#pseudo').val().length < 1 || $('#pseudo').val().length > 50) {
       $('#pseudo').prev('.error').fadeIn();
       validate = false;
     } else {

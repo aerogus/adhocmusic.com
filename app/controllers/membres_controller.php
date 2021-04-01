@@ -65,7 +65,7 @@ final class Controller
         $data = [
             'pseudo'  => '',
             'email'   => '',
-            'mailing' => true,
+            'mailing' => false,
             'csrf'    => '',
         ];
 
@@ -104,8 +104,12 @@ final class Controller
                         $errors['generic'] = true;
                     }
 
+                } else {
+                    Log::action(Log::ACTION_MEMBER_CREATE, print_r($data, true));
                 }
 
+            } else {
+                Log::action(Log::ACTION_MEMBER_CREATE, print_r($data, true));
             }
 
             if (!empty($errors)) {
@@ -384,15 +388,24 @@ final class Controller
     {
         if (empty($data['email'])) {
             $errors['email'] = true;
+        } elseif (mb_strlen($data['email']) > 50) {
+            $errors['email'] = true;
         } elseif (!Email::validate($data['email'])) {
             $errors['email'] = true;
         }
 
         if (empty($data['pseudo'])) {
             $errors['pseudo'] = true;
+        } elseif (mb_strlen($data['pseudo']) > 50) {
+            $errors['pseudo'] = true;
         } elseif (!Membre::isPseudoAvailable($data['pseudo'])) {
             $errors['pseudo_unavailable'] = true;
         }
+
+        if (count($errors)) {
+            return false;
+        }
+
         if ($id_contact = Contact::getIdByEmail($data['email'])) {
             // si déjà Contact, pas un problème
             if ($pseudo = Membre::getPseudoById($id_contact)) {
@@ -400,6 +413,7 @@ final class Controller
                 $errors['already_member'] = $pseudo;
             }
         }
+
         if (count($errors)) {
             return false;
         }

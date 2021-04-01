@@ -41,6 +41,11 @@ final class Controller
             $pseudo = trim((string) Route::params('pseudo'));
             $password = trim((string) Route::params('password'));
 
+            if (mb_strlen($pseudo) === 0 || mb_strlen($password) === 0) {
+                Log::action(Log::ACTION_LOGIN_FAILED, print_r($_POST, true));
+                die;
+            }
+
             if ($id_contact = Membre::checkPseudoPassword($pseudo, $password)) {
 
                 // Authentification réussie, on ouvre une session
@@ -66,7 +71,7 @@ final class Controller
 
             } else {
 
-                Log::action(Log::ACTION_LOGIN_FAILED);
+                Log::action(Log::ACTION_LOGIN_FAILED, print_r($_POST, true));
 
                 Trail::getInstance()
                     ->addStep("Se connecter");
@@ -77,6 +82,10 @@ final class Controller
                 return $smarty->fetch('auth/login.tpl');
 
             }
+
+        } else {
+            Log::action(Log::ACTION_LOGIN_FAILED, print_r($_POST, true));
+            die;
         }
 
         $smarty = new AdHocSmarty();
