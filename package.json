@@ -11,7 +11,7 @@
     "clean": "rm -Rf node_modules vendor volumes"
   },
   "dependencies": {
-    "mjml": "4.10.2",
-    "stylus": "0.54.8"
+    "mjml": "4.10.3",
+    "stylus": "0.55.0"
   }
 }
