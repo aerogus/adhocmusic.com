@@ -41,22 +41,22 @@
         <label for="pseudo">Pseudo</label>
         <div id="error_pseudo_unavailable" class="infobulle error"{if empty($error_pseudo_unavailable)} style="display: none"{/if}>Ce pseudo est pris, veuillez en choisir un autre</div>
         <div class="infobulle error" id="error_pseudo"{if empty($error_pseudo)} style="display: none"{/if}>Vous devez saisir un pseudo entre 2 à 16 caractères</div>
-        <input id="pseudo" name="pseudo" type="text" value="{$data.pseudo|escape}" required="required" placeholder="Pseudo" class="w100">
+        <input id="pseudo" name="pseudo" type="text" value="{if isset($data.pseudo)}{$data.pseudo|escape}{/if}" required="required" placeholder="Pseudo" class="w100">
       </div>
       <div class="mbs">
         <label for="email">E-mail</label>
         <div id="error_email"{if empty($error_email)} style="display: none"{/if} class="infobulle error">Vous devez saisir votre e-mail</div>
         <div id="error_invalid_email" class="infobulle error"{if empty($error_invalid_email)} style="display: none"{/if}>Cet e-mail semble invalide</div>
         <div id="error_already_member" class="infobulle error"{if empty($error_already_member)} style="display: none"{/if}>Inscription impossible car un compte avec cet e-mail existe déjà. Vous avez <a href="/auth/lost-password">oublié votre mot de passe ?</a></div>
-        <input id="email" name="email" type="email" value="{$data.email|escape}" required="required" placeholder="E-mail" class="w100">
+        <input id="email" name="email" type="email" value="{if isset($data.email)}{$data.email|escape}{/if}" required="required" placeholder="E-mail" class="w100">
       </div>
       <div class="mbs">
         <label for="mailing" class="visually-hidden">Newsletter</label>
         <input id="mailing" class="checkbox" name="mailing" type="checkbox"{if !empty($data.mailing)} checked="checked"{/if}> Je souhaite recevoir la newsletter
       </div>
       <div>
-        <input type="hidden" name="csrf" value="{$data.csrf}">
-        <input type="hidden" name="text" value="{$data.text|escape}">
+        <input type="hidden" name="csrf" value="{if isset($data.csrf)}{$data.csrf}{/if}">
+        <input type="hidden" name="text" value="{if isset($data.text)}{$data.text|escape}{/if}">
         <input id="form-membrer-create-submit" name="form-member-create-submit" class="btn btn--primary w100" type="submit" value="Je crée mon compte">
       </div>
     </form>

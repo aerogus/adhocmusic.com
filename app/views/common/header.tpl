@@ -4,16 +4,18 @@
 <meta charset="utf-8">
 <title>{$title|escape}</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 {* début open graph *}
 {if !empty($og_type)}
 <meta property="og:type" content="{$og_type|escape}">
-{else}
-<meta property="og:type" content="article">
-{/if}
 {if $og_type !== 'video.movie' && $og_type !== 'website'}
 <meta property="og:language" content="fr">
 <meta property="og:author" content="adhocmusic">
 {/if}
+{else}
+<meta property="og:type" content="article">
+{/if}
+
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="adhocmusic.com">
 <meta property="og:title" content="{$title|escape}">
@@ -54,13 +56,17 @@
 <meta name="robots" content="{$robots|escape}">
 <meta name="description" content="{if empty($description)}Soutien des musiques actuelles en Essonne, agenda culturel, vidéos de concerts...{else}{$description|escape}{/if}">
 
-{foreach $stylesheets as $style_url}
-<link rel="stylesheet" href="{$style_url}">
-{/foreach}
+{if (isset($stylesheets))}
+  {foreach $stylesheets as $style_url}
+  <link rel="stylesheet" href="{$style_url}">
+  {/foreach}
+{/if}
 
-{foreach $header_scripts as $script_url}
-<script src="{$script_url}"></script>
-{/foreach}
+{if isset($header_scripts)}
+  {foreach $header_scripts as $script_url}
+  <script src="{$script_url}"></script>
+  {/foreach}
+{/if}
 
 </head>
 
