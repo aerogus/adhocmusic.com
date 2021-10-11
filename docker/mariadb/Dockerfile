@@ -1,4 +1,4 @@
-FROM mariadb:10.3.27
+FROM mariadb:10.3.31
 LABEL maintainer="guillaume@seznec.fr"
 
 RUN apt-get update && apt-get install -y \
