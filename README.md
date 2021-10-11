@@ -11,21 +11,23 @@ https://www.adhocmusic.com
 
 ## Installation
 
-ajouter la ligne suivante dans `/etc/hosts` :
+ajouter les lignes suivantes dans `/etc/hosts` :
 
 ```
 127.0.0.1 adhocmusic.test www.adhocmusic.test static.adhocmusic.test php.adhocmusic.test mariadb.adhocmusic.test pma.adhocmusic.test
+::1       adhocmusic.test www.adhocmusic.test static.adhocmusic.test php.adhocmusic.test mariadb.adhocmusic.test pma.adhocmusic.test
+
 ```
 
 1er démarrage et développement :
 
 ```
 cd ~/workspace
-git clone git@bitbucket.org:adhocmusic/adhocmusic.com.git
+git clone git@github.com:aerogus/adhocmusic.com.git
 cd adhocmusic.com
 composer install
 npm install
-npm run build-style
+npm run stylus
 docker-compose up
 ```
 
@@ -42,21 +44,19 @@ ou directement npm start
 
 Construction pour la prod :
 
-
 ```
 composer install --no-dev
 npm install --only=prod
-npm run build-style
+npm run stylus
 ```
-
 
 ## Format des images
 
-Les Photo sont redimensionnées en 2048*2048 à leur arrivées
+Les `Photo` sont redimensionnées en 2048*2048 à leur arrivées
 elles sont converties en :
 
 - 1000x0
 - 680x0
 - 320x0
 
-Les Video doivent avoir une miniature 320x180
+Les `Video` doivent avoir une miniature 320x180
