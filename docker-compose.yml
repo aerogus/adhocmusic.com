@@ -2,7 +2,7 @@
 # Environnement de développement du site adhocmusic.com
 ##
 
-version: '3.7'
+version: '3.8'
 
 services:
 
