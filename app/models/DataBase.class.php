@@ -83,7 +83,7 @@ class DataBase
             throw new Exception('Erreur connexion serveur MySQL');
         }
 
-        $select_db = @mysqli_select_db(
+        $select_db = mysqli_select_db(
             $this->_current_conn[$conn_key],
             self::$_connections_params[$conn_name]['db_database']
         );
@@ -103,7 +103,7 @@ class DataBase
         $conn_key = self::generateConnectionKey($conn_name);
 
         if (isset($this->_current_conn[$conn_key])) {
-            @mysqli_close($this->_current_conn[$conn_key]);
+            mysqli_close($this->_current_conn[$conn_key]);
             unset($this->_current_conn[$conn_key]);
         }
         return true;
