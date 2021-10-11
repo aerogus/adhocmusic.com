@@ -86,7 +86,7 @@
       </header>
       <div>
         <strong>Association AD’HOC</strong><br>
-        <address>8, rue de l’église<br>
+        <address>9 impasse des tilleuls<br>
         91360 Épinay-sur-Orge</address>
       </div>
     </div>

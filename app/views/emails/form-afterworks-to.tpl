@@ -333,7 +333,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                   <tr>
                     <td align="center" style="font-size:0px;padding:10px 25px;padding-top:10px;padding-right:0px;padding-bottom:10px;padding-left:0px;word-break:break-word;">
-                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:16px;line-height:1;text-align:center;color:#ffffff;"><a href="https://www.adhocmusic.com" style="text-decoration: none; color: inherit;"><strong>Association AD’HOC</strong></a><br/>8 rue de l'église<br/>91360 Épinay-sur-Orge</div>
+                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:16px;line-height:1;text-align:center;color:#ffffff;"><a href="https://www.adhocmusic.com" style="text-decoration: none; color: inherit;"><strong>Association AD’HOC</strong></a><br/>9 impasse des tilleuls<br/>91360 Épinay-sur-Orge</div>
                     </td>
                   </tr>
                 </table>
