@@ -53,8 +53,6 @@
 
 </table>
 
-<br style="clear: both;" />
-
   </div>
 </div>
 

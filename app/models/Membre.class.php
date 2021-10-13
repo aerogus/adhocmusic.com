@@ -1522,13 +1522,13 @@ class Membre extends Contact
      * Retourne une collection d'objets "Membre" répondant au(x) critère(s) donné(s)
      *
      * @param array $params [
-     *                      'id_groupe' => int,
-     *                      'id_country' => string,
-     *                      'order_by' => string,
-     *                      'sort' => string,
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     *     'id_groupe' => int,
+     *     'id_country' => string,
+     *     'order_by' => string,
+     *     'sort' => string,
+     *     'start' => int,
+     *     'limit' => int,
+     * ]
      *
      * @return array
      */
@@ -1548,7 +1548,26 @@ class Membre extends Contact
             }
         }
 
-        if (isset($params['id_country'])) {
+        if (!empty($params['pseudo'])) {
+            $sql .= "AND `pseudo` LIKE '" . $db->escape($params['pseudo']) . "%' ";
+        }
+
+        if (!empty($params['last_name'])) {
+            $sql .= "AND `last_name` LIKE '" . $db->escape($params['last_name']) . "%' ";
+        }
+
+        if (!empty($params['first_name'])) {
+            $sql .= "AND `first_name` LIKE '" . $db->escape($params['first_name']) . "%' ";
+        }
+
+        /*
+        // TODO jointure avec contact
+        if (!empty($params['email'])) {
+            $sql .= "AND `email` LIKE '" . $db->escape($params['email']) . "%' ";
+        }
+        */
+
+        if (!empty($params['id_country'])) {
             $sql .= "AND `id_country` = '" . $db->escape($params['id_country']) . "' ";
         }
 
