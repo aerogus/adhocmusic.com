@@ -644,25 +644,29 @@ abstract class ObjectModel
         foreach ($data as $k => $v) {
             if (array_key_exists($k, $all_fields)) {
                 $att = '_' . $k;
-                switch ($all_fields[$k]) {
-                    case 'phpser':
-                        $this->$att = unserialize($v);
-                        break;
-                    case 'int':
-                        $this->$att = (int) $v;
-                        break;
-                    case 'float':
-                        $this->$att = (float) $v;
-                        break;
-                    case 'bool':
-                        $this->$att = (bool) $v;
-                        break;
-                    case 'string':
-                    case 'date':
-                        $this->$att = (string) $v;
-                        break;
-                    default:
-                        $this->$att = $v;
+                if (is_null($v)) {
+                    $this->$att = NULL;
+                } else {
+                    switch ($all_fields[$k]) {
+                        case 'phpser':
+                            $this->$att = unserialize($v);
+                            break;
+                        case 'int':
+                            $this->$att = (int) $v;
+                            break;
+                        case 'float':
+                            $this->$att = (float) $v;
+                            break;
+                        case 'bool':
+                            $this->$att = (bool) $v;
+                            break;
+                        case 'string':
+                        case 'date':
+                            $this->$att = (string) $v;
+                            break;
+                        default:
+                            $this->$att = $v;
+                    }
                 }
             }
         }
