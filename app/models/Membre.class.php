@@ -307,9 +307,14 @@ class Membre extends Contact
      */
     function getCity(): ?object
     {
-        if (is_null($this->_city) && !is_null($this->getIdCity())) {
+        if (is_null($this->getIdCity())) {
+            return null;
+        }
+
+        if (is_null($this->_city)) {
             $this->_city = City::getInstance($this->getIdCity());
         }
+
         return $this->_city;
     }
 
@@ -326,9 +331,14 @@ class Membre extends Contact
      */
     function getDepartement(): ?object
     {
-        if (is_null($this->_departement) && !is_null($this->getIdDepartement())) {
+        if (is_null($this->getIdDepartement())) {
+            return null;
+        }
+
+        if (is_null($this->_departement)) {
             $this->_departement = Departement::getInstance($this->getIdDepartement());
         }
+
         return $this->_departement;
     }
 
@@ -345,9 +355,14 @@ class Membre extends Contact
      */
     function getRegion(): ?object
     {
-        if (is_null($this->_region) && !is_null($this->getIdRegion())) {
+        if (is_null($this->getIdRegion())) {
+            return null;
+        }
+
+        if (is_null($this->_region)) {
             $this->_region = Region::getInstance($this->getIdRegion());
         }
+
         return $this->_region;
     }
 
@@ -364,9 +379,14 @@ class Membre extends Contact
      */
     function getCountry(): ?object
     {
-        if (is_null($this->_country) && !is_null($this->getIdCountry())) {
+        if (is_null($this->getIdCountry())) {
+            return null;
+        }
+
+        if (is_null($this->_country)) {
             $this->_country = Country::getInstance($this->getIdCountry());
         }
+
         return $this->_country;
     }
 
