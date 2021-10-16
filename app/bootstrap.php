@@ -35,7 +35,7 @@ if (!is_dir(SMARTY_TEMPLATE_C_PATH)) {
 function autoload(string $className)
 {
     $className = str_replace('\\', '/', $className);
-    $classPath = __DIR__ . '/models/' . $className . '.class.php';
+    $classPath = __DIR__ . '/models/' . $className . '.php';
     if (file_exists($classPath)) {
         include $classPath;
     }
