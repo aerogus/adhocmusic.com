@@ -37,7 +37,7 @@
       {/if}
       {$event->getText()|@nl2br}
       <ul>
-      {foreach from=$event->groupes item=groupe}
+      {foreach from=$event->getGroupes() item=groupe}
         <li><a href="{$groupe->getUrl()|escape}"><strong>{$groupe->getName()|escape}</strong></a> ({$groupe->getStyle()|escape})</li>
       {/foreach}
       </ul>
