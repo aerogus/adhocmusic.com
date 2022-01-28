@@ -71,9 +71,9 @@ class Event extends ObjectModel
     protected $_id_contact = 0;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $_facebook_event_id = '';
+    protected $_facebook_event_id = null;
 
     /**
      * @var string
@@ -263,9 +263,9 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    function getFacebookEventId(): string
+    function getFacebookEventId(): ?string
     {
         return $this->_facebook_event_id;
     }
