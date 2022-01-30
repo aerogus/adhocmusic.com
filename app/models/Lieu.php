@@ -103,14 +103,14 @@ class Lieu extends ObjectModel
     protected $_modified_at = null;
 
     /**
-     * @var float
+     * @var float|null
      */
-    protected $_lat = 0;
+    protected $_lat = null;
 
     /**
-     * @var float
+     * @var float|null
      */
-    protected $_lng = 0;
+    protected $_lng = null;
 
     /**
      * @var bool
@@ -333,9 +333,9 @@ class Lieu extends ObjectModel
     /**
      * Retourne la latitude
      *
-     * @return float xx.xxxxxx
+     * @return float xx.xxxxxx | null
      */
-    function getLat(): float
+    function getLat(): ?float
     {
         return $this->_lat;
     }
@@ -343,9 +343,9 @@ class Lieu extends ObjectModel
     /**
      * Retourne la longitude
      *
-     * @return float xx.xxxxxx
+     * @return float xx.xxxxxx | null
      */
-    function getLng(): float
+    function getLng(): ?float
     {
         return $this->_lng;
     }
