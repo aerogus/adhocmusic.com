@@ -29,14 +29,16 @@
 <div class="infobulle error">Adresse email invalide</div>
 {/if}
 
-{if $ret == 'SUB-OK'}
-<div class="infobulle success">L'email <strong>{$email|escape}</strong> a bien été inscrite à la liste des abonnés de la newsletter AD'HOC. Merci et bienvenue ! :)</div>
-{elseif $ret == 'SUB-KO'}
-<div class="infobulle error">L'email <strong>{$email|escape}</strong> est déjà inscrite à la liste des abonnés de la newsletter AD'HOC.</div>
-{elseif $ret == 'UNSUB-OK'}
-<div class="infobulle success">L'email <strong>{$email|escape}</strong> a bien été désinscrite de la liste des abonnés de la newsletter AD'HOC. Au revoir :(</div>
-{elseif $ret == 'UNSUB-KO'}
-<div class="infobulle error">L'email <strong>{$email|escape}</strong> n'est pas inscrite à la newsletter AD'HOC.</div>
+{if !empty($ret)}
+  {if $ret == 'SUB-OK'}
+  <div class="infobulle success">L'email <strong>{$email|escape}</strong> a bien été inscrite à la liste des abonnés de la newsletter AD'HOC. Merci et bienvenue ! :)</div>
+  {elseif $ret == 'SUB-KO'}
+  <div class="infobulle error">L'email <strong>{$email|escape}</strong> est déjà inscrite à la liste des abonnés de la newsletter AD'HOC.</div>
+  {elseif $ret == 'UNSUB-OK'}
+  <div class="infobulle success">L'email <strong>{$email|escape}</strong> a bien été désinscrite de la liste des abonnés de la newsletter AD'HOC. Au revoir :(</div>
+  {elseif $ret == 'UNSUB-KO'}
+  <div class="infobulle error">L'email <strong>{$email|escape}</strong> n'est pas inscrite à la newsletter AD'HOC.</div>
+  {/if}
 {/if}
 
   </div>
