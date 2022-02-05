@@ -127,8 +127,8 @@ final class Controller
 
         $smarty->enqueue_script_vars(
             [
-                'lat' => number_format($lieu->getLat(), 6, '.', ''),
-                'lng' => number_format($lieu->getLng(), 6, '.', ''),
+                'lat' => number_format((float) $lieu->getLat(), 6, '.', ''),
+                'lng' => number_format((float) $lieu->getLng(), 6, '.', ''),
                 'name' => $lieu->getName()
             ]
         );
