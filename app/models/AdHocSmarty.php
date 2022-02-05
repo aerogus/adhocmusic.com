@@ -24,10 +24,6 @@ class AdHocSmarty extends Smarty
         $this->setCompileDir(SMARTY_TEMPLATE_C_PATH);
         $this->setCacheDir(SMARTY_TEMPLATE_C_PATH);
 
-        // errors
-        $this->error_reporting = E_ALL & ~E_NOTICE;
-        $this->muteExpectedErrors();
-
         // fonctions smarty
         $this->registerPlugin('function', 'pagination', ['AdHocSmarty', 'function_pagination']);
         $this->registerPlugin('function', 'html_input_date_hourminute', ['AdHocSmarty', 'function_html_input_date_hourminute']);
