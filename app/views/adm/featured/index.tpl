@@ -8,7 +8,7 @@
 
     <div id="swipe" class="swipe clearfix mbs">
       <ul class="swipe-wrap">
-        {foreach from=$featured key=idx item=f}
+        {foreach from=$featured_front key=idx item=f}
         <li data-index="{$idx}">
           <a href="{$f->getUrl()}">
             <h2>{$f->getTitle()}<br><span>{$f->getDescription()}</span></h2>
@@ -19,7 +19,7 @@
       </ul>
       <div class="swipe-pagination-wrapper">
         <ul class="swipe-pagination">
-          {foreach from=$featured key=idx item=f}
+          {foreach from=$featured_front key=idx item=f}
           <li data-index="{$idx}">
             <a href="{$f->getUrl()}"></a>
           </li>
