@@ -22,7 +22,7 @@
   <tbody>
   {foreach from=$audios item=audio}
     <tr>
-      <td>{$audio->getId()}<br/><img src="{$audio->getThumbUrl(80)}" alt=""/><br/>{$audio->getName()|escape}</td>
+      <td>{$audio->getId()}<br/>{$audio->getName()|escape}</td>
       <td>{if ($audio->getIdGroupe())}<a href="{$audio->getGroupe()->getUrl()}">{$audio->getGroupe()->getName()|escape}</a>{/if}</td>
       <td>{if ($audio->getIdEvent())}<a href="{$audio->getEvent()->getUrl()}">{$audio->getEvent()->getName()|escape}</a><br/>{$audio->getEvent()->getDate()|date_format:'%d/%m/%Y'}{/if}</td>
       <td>{if ($audio->getIdLieu())}<a href="{$audio->getLieu()->getUrl()}">{$audio->getLieu()->getName()|escape}</a><br>{$audio->getLieu()->getIdDepartement()} {$audio->getLieu()->getCity()->getName()}{/if}</td>
