@@ -27,12 +27,10 @@ final class Controller
                 'limit' => NB_PHOTOS_PER_PAGE,
             ]
         );
-        $nb_photos = count($photos);
-
         $smarty->assign('photos', $photos);
 
         // pagination
-        $smarty->assign('nb_items', $nb_photos);
+        $smarty->assign('nb_items', Photo::count());
         $smarty->assign('nb_items_per_page', NB_PHOTOS_PER_PAGE);
         $smarty->assign('page', $page);
 

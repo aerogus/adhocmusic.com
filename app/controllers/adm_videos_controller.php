@@ -27,12 +27,10 @@ final class Controller
                 'limit' => NB_VIDEOS_PER_PAGE,
             ]
         );
-        $nb_videos = count($videos);
-
         $smarty->assign('videos', $videos);
 
         // pagination
-        $smarty->assign('nb_items', $nb_videos);
+        $smarty->assign('nb_items', Video::count());
         $smarty->assign('nb_items_per_page', NB_VIDEOS_PER_PAGE);
         $smarty->assign('page', $page);
 

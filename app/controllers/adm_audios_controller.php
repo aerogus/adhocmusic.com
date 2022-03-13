@@ -27,12 +27,10 @@ final class Controller
                 'limit' => NB_AUDIOS_PER_PAGE,
             ]
         );
-        $nb_audios = count($audios);
-
         $smarty->assign('audios', $audios);
 
         // pagination
-        $smarty->assign('nb_items', $nb_audios);
+        $smarty->assign('nb_items', Audio::count());
         $smarty->assign('nb_items_per_page', NB_AUDIOS_PER_PAGE);
         $smarty->assign('page', $page);
 
