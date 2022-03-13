@@ -4,10 +4,10 @@ https://www.adhocmusic.com
 
 ## Prérequis
 
-- docker
-- node
-- npm
-- composer
+- [docker](https://www.docker.com/products/docker-desktop)
+- [Node.js](https://nodejs.org/en/)
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [composer](https://getcomposer.org/)
 
 ## Installation
 
