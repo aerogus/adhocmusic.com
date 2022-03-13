@@ -15,9 +15,10 @@ final class Controller
             ->addStep("Privé", "/adm")
             ->addStep("Audios");
 
-        $page = (int) Route::params('page');;
+        $page = (int) Route::params('page');
 
         $smarty = new AdHocSmarty();
+
         $audios = Audio::find(
             [
                 'order_by' => 'id_audio',
