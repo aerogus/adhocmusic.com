@@ -13,6 +13,8 @@ final class Controller
             ->addStep("Privé", "/adm")
             ->addStep("Audios");
 
+        $page = (int) Route::params('page');;
+
         $smarty = new AdHocSmarty();
 
         $smarty->assign(
@@ -23,6 +25,11 @@ final class Controller
                 ]
             )
         );
+
+        // pagination
+        $smarty->assign('nb_items', $nb_audios);
+        $smarty->assign('nb_items_per_page', NB_AUDIOS_PER_PAGE);
+        $smarty->assign('page', $page);
 
         return $smarty->fetch('adm/audios/index.tpl');
     }
