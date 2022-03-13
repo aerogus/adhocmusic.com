@@ -16,15 +16,15 @@ final class Controller
         $page = (int) Route::params('page');;
 
         $smarty = new AdHocSmarty();
-
-        $smarty->assign(
-            'audios', Audio::find(
-                [
-                    'order_by' => 'id_audio',
-                    'sort' => 'ASC',
-                ]
-            )
+        $audios = Audio::find(
+            [
+                'order_by' => 'id_audio',
+                'sort' => 'ASC',
+            ]
         );
+        $nb_audios = count($audios);
+
+        $smarty->assign('audios', $audios);
 
         // pagination
         $smarty->assign('nb_items', $nb_audios);
