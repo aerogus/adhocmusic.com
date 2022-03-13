@@ -56,6 +56,7 @@ final class Controller
         // pagination
         $smarty->assign('nb_items', Groupe::count());
         $smarty->assign('nb_items_per_page', ADM_NB_MEMBERS_PER_PAGE);
+        $smarty->assign('page', $page);
 
         return $smarty->fetch('adm/groupes/index.tpl');
     }
