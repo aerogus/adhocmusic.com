@@ -22,6 +22,8 @@ final class Controller
             [
                 'order_by' => 'id_audio',
                 'sort' => 'ASC',
+                'start' => $page * NB_AUDIOS_PER_PAGE,
+                'limit' => NB_AUDIOS_PER_PAGE,
             ]
         );
         $nb_audios = count($audios);
