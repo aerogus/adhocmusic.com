@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+define('NB_AUDIOS_PER_PAGE', 80);
+
 final class Controller
 {
     /**
