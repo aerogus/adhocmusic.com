@@ -82,7 +82,7 @@ class Email
         $mail           = new PHPMailer();
         $mail->CharSet  = "UTF-8";
         $mail->From     = "contact@adhocmusic.com";
-        $mail->FromName = "Site AD'HOC";
+        $mail->FromName = "AD'HOC";
         if (!empty($data['email_reply_to'])) {
             $mail->AddReplyTo($data['email_reply_to']);
         } else {
