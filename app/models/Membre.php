@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
 use \Reference\City;
-use \Reference\Country;
 use \Reference\Departement;
-use \Reference\Region;
 use \Reference\TypeMusicien;
+use \Reference\WorldCountry;
+use \Reference\WorldRegion;
 
 /**
  * Classe Membre
@@ -360,7 +360,7 @@ class Membre extends Contact
         }
 
         if (is_null($this->_region)) {
-            $this->_region = Region::getInstance($this->getIdRegion());
+            $this->_region = WorldRegion::getInstance($this->getIdRegion());
         }
 
         return $this->_region;
@@ -384,7 +384,7 @@ class Membre extends Contact
         }
 
         if (is_null($this->_country)) {
-            $this->_country = Country::getInstance($this->getIdCountry());
+            $this->_country = WorldCountry::getInstance($this->getIdCountry());
         }
 
         return $this->_country;
