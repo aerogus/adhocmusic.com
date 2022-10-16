@@ -79,21 +79,15 @@ class Media extends ObjectModel
      */
     function getGroupe(): ?object
     {
-        if (get_called_class() === 'Video') {
-            $groupes = $this->getGroupes();
-            if (sizeof($groupes) >= 1) {
-                return array_shift($groupes);
-            } else {
-                return null;
-            }
-        } elseif (!is_null($this->getIdGroupe())) {
-            try {
-                return Groupe::getInstance($this->getIdGroupe());
-            } catch (Exception $e) {
-                return null;
-            }
+        if (is_null($this->getIdGroupe())) {
+            return null;
         }
-        return null;
+
+        try {
+            return Groupe::getInstance($this->getIdGroupe());
+        } catch (Exception $e) {
+            return null;
+        }
     }
 
     /**
@@ -188,7 +182,7 @@ class Media extends ObjectModel
      */
     function getModifiedAtTs(): ?int
     {
-        if (!is_null($this->modified_at) && Date::isDateTimeOk($this->_modified_at)) {
+        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
             return strtotime($this->_modified_at);
         }
         return null;

@@ -23,6 +23,8 @@ final class Controller
      */
     static function show(): string
     {
+        $smarty = new AdHocSmarty();
+
         $id = (int) Route::params('id');
 
         try {
@@ -36,8 +38,6 @@ final class Controller
         Trail::getInstance()
             ->addStep('Structures', '/structures')
             ->addStep($structure->getName());
-
-        $smarty = new AdHocSmarty();
 
         $smarty->assign('structure', $structure);
 

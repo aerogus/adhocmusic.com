@@ -373,7 +373,7 @@ class Groupe extends ObjectModel
      */
     function getCreatedAtTs(): ?string
     {
-        if (!is_null($this->created_at) && Date::isDateTimeOk($this->_created_at)) {
+        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return strtotime($this->_created_at);
         }
         return null;
@@ -662,7 +662,7 @@ class Groupe extends ObjectModel
      */
     function setMyspaceId(?string $myspaceId): object
     {
-        $val = trim($val);
+        $val = trim($myspaceId);
         $val = str_replace('http://', '', $val);
         $val = str_replace('www.myspace.com/', '', $val);
 

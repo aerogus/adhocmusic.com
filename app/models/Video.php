@@ -117,7 +117,12 @@ class Video extends Media
     /**
      * @var string
      */
-    protected $_reference = '';
+    protected $_reference;
+
+    /**
+     * @var float
+     */
+    protected $_ratio;
 
     /**
      * Liste des attributs de l'objet
@@ -389,6 +394,18 @@ class Video extends Media
             return $groupes[$idx];
         }
         return $groupes;
+    }
+
+    /**
+     * @return object|null
+     */
+    function getGroupe(): ?object
+    {
+        $groupes = $this->getGroupes();
+        if (sizeof($groupes) >= 1) {
+            return array_shift($groupes);
+        }
+        return null;
     }
 
     /**

@@ -246,7 +246,7 @@ class Comment extends ObjectModel
      */
     function getUrl(): string
     {
-        return HOME_URL . '/comments/' . $this->getIdComment();
+        return HOME_URL . '/comments/' . $this->getId();
     }
 
     /* fin getters */
@@ -595,7 +595,7 @@ class Comment extends ObjectModel
                 break;
         }
 
-        $comments = Comment::getComments(
+        $comments = Comment::getComments( // TODO: utiliser self::find() ?? l'implémenter ??
             [
                 'type'       => $this->getType(),
                 'id_content' => $this->getIdContent(),

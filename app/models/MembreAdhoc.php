@@ -288,7 +288,7 @@ class MembreAdhoc extends Membre
 
             /* table contact */
 
-            if ($id_contact = Contact::getIdByEmail($email)) {
+            if ($id_contact = Contact::getIdByEmail($email)) {// BUG: D'OU SORT CE $email ???
 
                 $this->setId($id_contact);
 

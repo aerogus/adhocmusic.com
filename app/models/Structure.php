@@ -147,14 +147,6 @@ class Structure extends ObjectModel
     /**
      * @return string
      */
-    function getTel(): string
-    {
-        return $this->_tel;
-    }
-
-    /**
-     * @return string
-     */
     function getIdDepartement(): string
     {
         return $this->_id_departement;
@@ -275,21 +267,6 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $tel téléphone
-     *
-     * @return object
-     */
-    function setTel(string $tel): object
-    {
-        if ($this->_tel !== $tel) {
-            $this->_tel = $tel;
-            $this->_modified_fields['tel'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
      * @param string $id_departement id_departement
      *
      * @return object
@@ -401,7 +378,7 @@ class Structure extends ObjectModel
     {
         return Event::find(
             [
-                'id_structure' => $this->getIdStructure(),
+                'id_structure' => $this->getId(),
             ]
         );
     }

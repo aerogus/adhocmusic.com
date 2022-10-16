@@ -73,7 +73,7 @@ class City extends \Reference
      */
     function getIdDepartement(): ?string
     {
-        return $this->_id_department;
+        return $this->_id_departement;
     }
 
     /**
