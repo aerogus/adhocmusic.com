@@ -231,7 +231,7 @@ class Tools
      *
      * @return void
      */
-    static function auth(int $type)
+    static function auth(int $type): void
     {
         // non identifié
         if (empty($_SESSION['membre'])) {
@@ -242,14 +242,14 @@ class Tools
 
         // vérification des droits
         // "&" pour la comparaison binaire
-        if ($_SESSION['membre']->getLevel() & $type) {
-            return true;
+        if (($_SESSION['membre']->getLevel() & $type) !== true) {
+            // identifié mais pas assez de droits
+            $_SESSION['redirect_after_auth'] = $_SERVER['REQUEST_URI'];
+            Tools::redirect('/auth/auth');
+            exit();
         }
 
-        // identifié mais pas assez de droits
-        $_SESSION['redirect_after_auth'] = $_SERVER['REQUEST_URI'];
-        Tools::redirect('/auth/auth');
-        exit();
+        // identifié, droits ok
     }
 
     /**

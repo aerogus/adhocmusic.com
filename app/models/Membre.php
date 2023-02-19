@@ -179,7 +179,7 @@ class Membre extends Contact
     /**
      * Liste des attributs de l'objet
      *
-     * @var array
+     * @var array<string,string>
      */
     protected static $_all_fields = [
         'id_contact'     => 'int', // pk
@@ -1096,7 +1096,6 @@ class Membre extends Contact
                                     break;
                                 default:
                                     throw new Exception('invalid field type : ' . $type);
-                                    break;
                             }
                         }
                     }
@@ -1164,7 +1163,6 @@ class Membre extends Contact
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $type);
-                                break;
                         }
                     }
                 }
@@ -1221,7 +1219,6 @@ class Membre extends Contact
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $fields['contact'][$field]);
-                                break;
                         }
                     }
                 }
@@ -1272,7 +1269,6 @@ class Membre extends Contact
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $fields['membre'][$field]);
-                                break;
                         }
                     }
                 }
@@ -1607,7 +1603,7 @@ class Membre extends Contact
             $params['start'] = 0;
         }
 
-        if (isset($params['start']) && isset($params['limit'])) {
+        if (isset($params['limit'])) {
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 

@@ -31,37 +31,37 @@ class Subscription extends ObjectModel
     protected $_id_subscription = 0;
 
     /**
-     * @var string
+     * @var ?string
      */
     protected $_created_at = null;
 
     /**
-     * @var string
+     * @var ?string
      */
     protected $_subscribed_at = null;
 
     /**
-     * @var bool
+     * @var ?bool
      */
     protected $_adult = null;
 
     /**
-     * @var float
+     * @var ?float
      */
     protected $_amount = null;
 
     /**
-     * @var string
+     * @var ?string
      */
     protected $_first_name = null;
 
     /**
-     * @var string
+     * @var ?string
      */
     protected $_last_name = null;
 
     /**
-     * @var string
+     * @var ?string
      */
     protected $_email = null;
 
@@ -78,7 +78,7 @@ class Subscription extends ObjectModel
     /**
      * Liste des attributs de l'objet
      *
-     * @var array
+     * @var array<string,string>
      */
     protected static $_all_fields = [
         'id_subscription' => 'int', // pk
@@ -98,7 +98,7 @@ class Subscription extends ObjectModel
     /**
      * Retourne la date de saise de la cotisation format YYYY-MM-DD HH:II:SS
      *
-     * @return string|false
+     * @return ?string
      */
     function getCreatedAt(): ?string
     {
@@ -111,7 +111,7 @@ class Subscription extends ObjectModel
     /**
      * Retourne la date de la cotisation format YYYY-MM-DD HH:II:SS
      *
-     * @return string|false
+     * @return ?string
      */
     function getSubscribedAt(): ?string
     {
@@ -134,7 +134,7 @@ class Subscription extends ObjectModel
     /**
      * Retourne le montant de la cotisation
      *
-     * @return bool
+     * @return float
      */
     function getAmount(): ?float
     {

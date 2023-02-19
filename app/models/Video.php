@@ -96,6 +96,9 @@ class Video extends Media
     const HOST_VIMEO       = 8;
     const HOST_ADHOCTUBE   = 9;
 
+    /**
+     * @var array<int,string>
+     */
     protected static $_tab_hosts = [
         self::HOST_YOUTUBE     => "YouTube",
         self::HOST_DAILYMOTION => "DailyMotion",
@@ -127,7 +130,7 @@ class Video extends Media
     /**
      * Liste des attributs de l'objet
      *
-     * @var array
+     * @var array<string,string>
      */
     protected static $_all_fields = [
         'id_video'    => 'int', // pk
@@ -246,7 +249,6 @@ class Video extends Media
                 $meta_url = 'https://' . MEDIA_ADHOCTUBE_HOST . '/api/v1/videos/' . $this->_reference;
                 $meta_info = json_decode(file_get_contents($meta_url));
                 return $meta_info->files[0]->fileUrl;
-                break;
             case self::HOST_YOUTUBE:
             case self::HOST_DAILYMOTION:
             case self::HOST_FACEBOOK:
@@ -540,9 +542,9 @@ class Video extends Media
      *
      * @param string $code code
      *
-     * @return array ou false
+     * @return array|false
      */
-    static function parseStringForVideoUrl(string $code)
+    static function parseStringForVideoUrl(string $code): array|false
     {
         $str = trim($code);
 
@@ -626,7 +628,7 @@ class Video extends Media
     }
 
     /**
-     * @todo comme Photo et Audio, requete plus complete ?
+     * @todo comme Photo et Audio, requête plus complète ?
      *
      * @return bool
      * @throws Exception
@@ -675,7 +677,8 @@ class Video extends Media
                 return $meta_info[0]->thumbnail_large;
 
             case self::HOST_FACEBOOK:
-                return ''; // a debug
+                return ''; // à debug
+                /*
                 $headers = get_headers('https://graph.facebook.com/' . $reference . '/picture', 1);
                 // Location pas toujours défini
                 if (is_array($headers['Location'])) {
@@ -684,6 +687,7 @@ class Video extends Media
                     $url = $headers['Location'];
                 }
                 return $url;
+                */
 
             case self::HOST_ADHOCTUBE:
                 $meta_url = 'https://' . MEDIA_ADHOCTUBE_HOST . '/api/v1/videos/' . $reference;

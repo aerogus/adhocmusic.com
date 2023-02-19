@@ -78,7 +78,7 @@ class Structure extends ObjectModel
     /**
      * Liste des attributs de l'objet
      *
-     * @var array
+     * @var array<string,string>
      */
     protected static $_all_fields = [
         'id_structure'   => 'int', // pk
@@ -372,7 +372,7 @@ class Structure extends ObjectModel
     /**
      * Retourne les événements rattachés à cette structure
      *
-     * @return array
+     * @return array<Event>
      */
     function getEvents(): array
     {
@@ -386,7 +386,7 @@ class Structure extends ObjectModel
     /**
      * Retourne une collection d'objets "Structure" répondant au(x) critère(s) donné(s)
      *
-     * @param array $params [
+     * @param array<string,mixed> $params [
      *                      'id_event' => int,
      *                      'order_by' => string,
      *                      'sort' => string,
@@ -394,7 +394,7 @@ class Structure extends ObjectModel
      *                      'limit' => int,
      *                      ]
      *
-     * @return array
+     * @return array<Structure>
      */
     static function find(array $params): array
     {
@@ -428,7 +428,7 @@ class Structure extends ObjectModel
             $params['start'] = 0;
         }
 
-        if (isset($params['start']) && isset($params['limit'])) {
+        if (isset($params['limit'])) {
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
