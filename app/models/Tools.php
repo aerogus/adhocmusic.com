@@ -242,7 +242,7 @@ class Tools
 
         // vérification des droits
         // "&" pour la comparaison binaire
-        if (($_SESSION['membre']->getLevel() & $type) !== true) {
+        if (($_SESSION['membre']->getLevel() & $type) === 0) {
             // identifié mais pas assez de droits
             $_SESSION['redirect_after_auth'] = $_SERVER['REQUEST_URI'];
             Tools::redirect('/auth/auth');
