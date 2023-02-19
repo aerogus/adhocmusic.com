@@ -14,7 +14,7 @@
 require_once __DIR__ . '/../bootstrap.php';
 
 if (empty($argv[1])) {
-    die('usage: cleangrp.php alias_groupe');
+    die('usage: clean-grp.php alias_groupe [1]');
 }
 
 $alias = $argv[1];
