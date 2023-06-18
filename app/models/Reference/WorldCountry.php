@@ -84,7 +84,7 @@ class WorldCountry extends \Reference
      */
     static function find(array $params): array
     {
-        $db = DataBase::getInstance();
+        $db = \DataBase::getInstance();
         $objs = [];
 
         $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
