@@ -52,7 +52,7 @@ abstract class ObjectModel
      *
      * Ce tableau doit être redéfini dans les classes filles
      *
-     * @var array
+     * @var array<string,string>
      */
     protected static $_all_fields = [];
 
@@ -422,7 +422,7 @@ abstract class ObjectModel
             $params['start'] = 0;
         }
 
-        if (isset($params['start']) && isset($params['limit'])) {
+        if (isset($params['limit'])) {
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 

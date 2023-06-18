@@ -37,7 +37,7 @@ class WorldCountry extends \Reference
     /**
      * Liste des attributs de l'objet
      *
-     * @var array
+     * @var array<string,string>
      */
     protected static $_all_fields = [
         'id_country' => 'string',
@@ -73,14 +73,14 @@ class WorldCountry extends \Reference
     /**
      * Retourne une collection d'objets "WorldCountry" répondant au(x) critère(s)
      *
-     * @param array $params [
+     * @param array<string,mixed> $params [
      *                      'order_by' => string,
      *                      'sort' => string
      *                      'start' => int,
      *                      'limit' => int,
      *                      ]
      *
-     * @return array
+     * @return array<WorldCountry>
      */
     static function find(array $params): array
     {
@@ -105,7 +105,7 @@ class WorldCountry extends \Reference
             $params['start'] = 0;
         }
 
-        if (isset($params['start']) && isset($params['limit'])) {
+        if (isset($params['limit'])) {
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 

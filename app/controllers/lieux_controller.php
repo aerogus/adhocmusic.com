@@ -386,12 +386,14 @@ final class Controller
                 if ($lieu->save()) {
                     /* récupération des coordonnées si non précisées */
 //                    if (!$lieu->getLng() || !$lieu->getLat()) {
+/*
                         $addr = $lieu->getAddress() . ' ' . $lieu->getCity()->getCp() . ' ' . $lieu->getCity()->getName();
                         if ($coords = GoogleMaps::getGeocode($addr)) {
                             $lieu->setLat($coords['lat']);
                             $lieu->setLng($coords['lng']);
                             $lieu->save();
                         }
+*/
 //                    }
 
                     /* Upload de la photo */
@@ -458,15 +460,6 @@ final class Controller
         }
 
         return $smarty->fetch('lieux/delete.tpl');
-    }
-
-    /**
-     * @return string
-     */
-    static function geocode(): string
-    {
-        $q  = (string) Route::params('q');
-        return GoogleMaps::getGeocode($q);
     }
 
     /**

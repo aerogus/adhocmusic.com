@@ -35,7 +35,7 @@ class TypeMusicien extends \Reference
     /**
      * Liste des attributs de l'objet
      *
-     * @var array
+     * @var array<string,string>
      */
     protected static $_all_fields = [
         'id_type_musicien' => 'int', // pk

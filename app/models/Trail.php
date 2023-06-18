@@ -18,7 +18,7 @@ class Trail
     /**
      * Conteneur des données
      *
-     * @var array
+     * @var array<int,array<string,string>>
      */
     protected $_path = [];
 
@@ -27,10 +27,10 @@ class Trail
      */
     static function getInstance(): object
     {
-        if (is_null(self::$_instance)) {
-            return new Trail();
+        if (self::$_instance instanceof Trail) {
+            return self::$_instance;
         }
-        return self::$_instance;
+        return new Trail();
     }
 
     /**
@@ -49,9 +49,9 @@ class Trail
      * @param string $link        lien (optionnel)
      * @param string $description description (optionnel)
      * 
-     * @return mixed
+     * @return Trail
      */
-    function addStep(string $title, string $link = '', string $description = '')
+    function addStep(string $title, string $link = '', string $description = ''): Trail
     {
         $this->_path[] = [
             'title' => $title,
@@ -64,7 +64,7 @@ class Trail
     /**
      * Retourne le fil d'ariane
      *
-     * @return array
+     * @return array<int,array<string,string>>
      */
     function getPath(): array
     {

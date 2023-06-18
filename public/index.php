@@ -20,6 +20,8 @@ if (!array_key_exists('PATH_INFO', $_SERVER)) {
     $_SERVER['PATH_INFO'] = $_SERVER['REQUEST_URI'];
 }
 
+$_SERVER['PATH_INFO'] = explode('?fbclid', $_SERVER['PATH_INFO'])[0];
+
 // friendly urls pour les groupes et les articles du CMS
 if (preg_match('@^[a-zA-Z0-9-_]{1,50}$@', substr((string) $_SERVER['PATH_INFO'], 1), $matches)) {
     if ($id_groupe = Groupe::getIdByAlias((string) $matches[0])) {

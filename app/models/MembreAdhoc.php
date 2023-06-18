@@ -48,7 +48,7 @@ class MembreAdhoc extends Membre
     /**
      * Liste des attributs de l'objet
      *
-     * @var array
+     * @var array<string,string>
      */
     protected static $_all_fields = [
         'id_contact' => 'int', // pk
@@ -325,7 +325,6 @@ class MembreAdhoc extends Membre
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $type);
-                                break;
                         }
                     }
                     $sql = substr($sql, 0, -1);
@@ -370,7 +369,6 @@ class MembreAdhoc extends Membre
                         break;
                     default:
                         throw new Exception('invalid field type : ' . $type);
-                        break;
                 }
             }
             $sql = substr($sql, 0, -1);
@@ -410,7 +408,6 @@ class MembreAdhoc extends Membre
                         break;
                     default:
                         throw new Exception('invalid field type : ' . $type);
-                        break;
                 }
             }
             $sql = substr($sql, 0, -1);
@@ -457,7 +454,6 @@ class MembreAdhoc extends Membre
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $fields['contact'][$field]);
-                                break;
                         }
                     }
                 }
@@ -501,7 +497,6 @@ class MembreAdhoc extends Membre
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $fields['membre'][$field]);
-                                break;
                         }
                     }
                 }
@@ -545,7 +540,6 @@ class MembreAdhoc extends Membre
                                 break;
                             default:
                                 throw new Exception('invalid field type : ' . $fields['membre_adhoc'][$field]);
-                                break;
                         }
                     }
                 }

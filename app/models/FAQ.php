@@ -55,7 +55,7 @@ class FAQ extends ObjectModel
     /**
      * Liste des attributs de l'objet
      *
-     * @var array
+     * @var array<string,string>
      */
     protected static $_all_fields = [
         'id_faq'      => 'int', // pk
@@ -344,7 +344,7 @@ class FAQ extends ObjectModel
             $params['start'] = 0;
         }
 
-        if (isset($params['start']) && isset($params['limit'])) {
+        if (isset($params['limit'])) {
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 

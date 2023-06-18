@@ -37,7 +37,7 @@ class Style extends \Reference
     /**
      * Liste des attributs de l'objet
      *
-     * @var array
+     * @var array<string,string>
      */
     protected static $_all_fields = [
         'id_style' => 'int', // pk
@@ -55,7 +55,7 @@ class Style extends \Reference
      *                      'limit' => int,
      *                      ]
      *
-     * @return array
+     * @return array<Style>
      */
     static function find(array $params): array
     {
@@ -89,7 +89,7 @@ class Style extends \Reference
             $params['start'] = 0;
         }
 
-        if (isset($params['start']) && isset($params['limit'])) {
+        if (isset($params['limit'])) {
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 

@@ -48,7 +48,7 @@ class Partner extends ObjectModel
     /**
      * Liste des attributs de l'objet
      *
-     * @var array
+     * @var array<string,string>
      */
     protected static $_all_fields = [
         'id_partner'  => 'int', // pk
