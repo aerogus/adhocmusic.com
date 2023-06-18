@@ -242,7 +242,7 @@ abstract class ObjectModel
     function setId($id)
     {
         if (is_array($id)) {
-            foreach ($val as $key => $val) {
+            foreach ($id as $key => $val) {
                 $pk = '_' . $key;
                 $this->$pk = $val;
             }
@@ -305,7 +305,7 @@ abstract class ObjectModel
                                 $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
                                 break;
                             default:
-                                throw new Exception('invalid field type: ' . $type);
+                                throw new Exception('invalid field type: ' . static::$_all_fields[$field]);
                                 break;
                         }
                     }
