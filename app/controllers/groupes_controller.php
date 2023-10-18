@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use \Reference\TypeMusicien;
+use Reference\TypeMusicien;
 
 define('GROUPE_MINI_PHOTO_SIZE', 128);
 

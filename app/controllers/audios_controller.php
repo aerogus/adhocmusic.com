@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use \Reference\Departement;
+use Reference\Departement;
 
 // Note : on retire liens vers events, structures et lieux du formulaire
 // pour plus de lisibilité, temporairement !

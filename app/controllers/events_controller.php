@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use \Reference\Style;
+use Reference\Style;
 
 final class Controller
 {

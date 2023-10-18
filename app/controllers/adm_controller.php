@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-use \Reference\Style;
-use \Reference\TypeMusicien;
+use Reference\Style;
+use Reference\TypeMusicien;
 
 define('ADM_NB_MEMBERS_PER_PAGE', 25);
 

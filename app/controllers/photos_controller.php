@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use \Reference\Departement;
+use Reference\Departement;
 
 define('NB_PHOTOS_PER_PAGE', 48);
 
