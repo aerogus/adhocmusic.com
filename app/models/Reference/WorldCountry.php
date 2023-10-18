@@ -2,6 +2,8 @@
 
 namespace Reference;
 
+use Reference;
+
 /**
  * Classe WorldCountry
  *
@@ -10,7 +12,7 @@ namespace Reference;
  *
  * @see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
  */
-class WorldCountry extends \Reference
+class WorldCountry extends Reference
 {
     /**
      * Instance de l'objet
@@ -22,17 +24,17 @@ class WorldCountry extends \Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_country';
+    protected static string $_pk = 'id_country';
 
     /**
      * @var string
      */
-    protected static $_table = 'geo_world_country';
+    protected static string $_table = 'geo_world_country';
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_id_country = null;
+    protected ?string $_id_country = null;
 
     /**
      * Liste des attributs de l'objet
@@ -49,7 +51,7 @@ class WorldCountry extends \Reference
     /**
      * @return string
      */
-    function getIdCountry(): string
+    public function getIdCountry(): string
     {
         return $this->_id_country;
     }
@@ -59,7 +61,7 @@ class WorldCountry extends \Reference
      *
      * @return string
      */
-    function getFlagUrl(): string
+    public function getFlagUrl(): string
     {
         return MEDIA_URL . '/country/' . strtolower($this->_id_country) . '.png';
     }
@@ -82,7 +84,7 @@ class WorldCountry extends \Reference
      *
      * @return array<WorldCountry>
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = \DataBase::getInstance();
         $objs = [];

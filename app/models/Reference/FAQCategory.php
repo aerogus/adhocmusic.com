@@ -2,13 +2,15 @@
 
 namespace Reference;
 
+use Reference;
+
 /**
  * Classe de gestion des catégories de FAQ
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class FAQCategory extends \Reference
+class FAQCategory extends Reference
 {
     /**
      * Instance de l'objet
@@ -20,17 +22,17 @@ class FAQCategory extends \Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_faq_category';
+    protected static string $_pk = 'id_faq_category';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_faq_category';
+    protected static string $_table = 'adhoc_faq_category';
 
     /**
      * @var int
      */
-    protected $_id_faq_category = 0;
+    protected int $_id_faq_category = 0;
 
     /**
      * Liste des attributs de l'objet

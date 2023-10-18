@@ -2,7 +2,8 @@
 
 namespace Reference;
 
-use \DataBase;
+use DataBase;
+use Reference;
 
 /**
  * Classe City
@@ -12,7 +13,7 @@ use \DataBase;
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class City extends \Reference
+class City extends Reference
 {
     /**
      * Instance de l'objet
@@ -24,27 +25,27 @@ class City extends \Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_city';
+    protected static string $_pk = 'id_city';
 
     /**
      * @var string
      */
-    protected static $_table = 'geo_fr_city';
+    protected static string $_table = 'geo_fr_city';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected $_id_city = null;
+    protected ?int $_id_city = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_id_departement = null;
+    protected ?string $_id_departement = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_cp = null;
+    protected ?string $_cp = null;
 
     /**
      * Liste des attributs de l'objet
@@ -63,7 +64,7 @@ class City extends \Reference
     /**
      * @return string|null
      */
-    function getIdCity(): ?string
+    public function getIdCity(): ?string
     {
         return $this->_id_city;
     }
@@ -71,7 +72,7 @@ class City extends \Reference
     /**
      * @return string|null
      */
-    function getIdDepartement(): ?string
+    public function getIdDepartement(): ?string
     {
         return $this->_id_departement;
     }
@@ -79,7 +80,7 @@ class City extends \Reference
     /**
      * @return string|null
      */
-    function getCp(): ?string
+    public function getCp(): ?string
     {
         return $this->_cp;
     }
@@ -105,7 +106,7 @@ class City extends \Reference
      *
      * @return array<City>
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];

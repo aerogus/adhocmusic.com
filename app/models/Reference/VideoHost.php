@@ -2,13 +2,15 @@
 
 namespace Reference;
 
+use Reference;
+
 /**
  * Classe VideoHost
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class VideoHost extends \Reference
+class VideoHost extends Reference
 {
     /**
      * Instance de l'objet
@@ -20,17 +22,17 @@ class VideoHost extends \Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_video_host';
+    protected static string $_pk = 'id_video_host';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_video_host';
+    protected static string $_table = 'adhoc_video_host';
 
     /**
      * @var int
      */
-    protected $_id_video_host = 0;
+    protected int $_id_video_host = 0;
 
     /**
      * Liste des attributs de l'objet

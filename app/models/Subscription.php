@@ -18,62 +18,62 @@ class Subscription extends ObjectModel
     /**
      * @var string
      */
-    protected static $_pk = 'id_subscription';
+    protected static string $_pk = 'id_subscription';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_subscription';
+    protected static string $_table = 'adhoc_subscription';
 
     /**
      * @var int
      */
-    protected $_id_subscription = 0;
+    protected int $_id_subscription = 0;
 
     /**
      * @var ?string
      */
-    protected $_created_at = null;
+    protected ?string $_created_at = null;
 
     /**
      * @var ?string
      */
-    protected $_subscribed_at = null;
+    protected ?string $_subscribed_at = null;
 
     /**
      * @var ?bool
      */
-    protected $_adult = null;
+    protected ?bool $_adult = null;
 
     /**
      * @var ?float
      */
-    protected $_amount = null;
+    protected ?float $_amount = null;
 
     /**
      * @var ?string
      */
-    protected $_first_name = null;
+    protected ?string $_first_name = null;
 
     /**
      * @var ?string
      */
-    protected $_last_name = null;
+    protected ?string $_last_name = null;
 
     /**
      * @var ?string
      */
-    protected $_email = null;
+    protected ?string $_email = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_cp = null;
+    protected ?string $_cp = null;
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected $_id_contact = null;
+    protected ?int $_id_contact = null;
 
     /**
      * Liste des attributs de l'objet
@@ -100,7 +100,7 @@ class Subscription extends ObjectModel
      *
      * @return ?string
      */
-    function getCreatedAt(): ?string
+    public function getCreatedAt(): ?string
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return $this->_created_at;
@@ -113,7 +113,7 @@ class Subscription extends ObjectModel
      *
      * @return ?string
      */
-    function getSubscribedAt(): ?string
+    public function getSubscribedAt(): ?string
     {
         if (!is_null($this->_subscribed_at) && Date::isDateTimeOk($this->_subscribed_at)) {
             return $this->_subscribed_at;
@@ -126,7 +126,7 @@ class Subscription extends ObjectModel
      *
      * @return bool
      */
-    function getAdult(): ?bool
+    public function getAdult(): ?bool
     {
         return $this->_adult;
     }
@@ -136,7 +136,7 @@ class Subscription extends ObjectModel
      *
      * @return float
      */
-    function getAmount(): ?float
+    public function getAmount(): ?float
     {
         return $this->_amount;
     }
@@ -144,7 +144,7 @@ class Subscription extends ObjectModel
     /**
      * @return string
      */
-    function getFirstName(): ?string
+    public function getFirstName(): ?string
     {
         return $this->_first_name;
     }
@@ -152,7 +152,7 @@ class Subscription extends ObjectModel
     /**
      * @return string
      */
-    function getLastName(): ?string
+    public function getLastName(): ?string
     {
         return $this->_last_name;
     }
@@ -160,7 +160,7 @@ class Subscription extends ObjectModel
     /**
      * @return string
      */
-    function getEmail(): ?string
+    public function getEmail(): ?string
     {
         return $this->_email;
     }
@@ -168,7 +168,7 @@ class Subscription extends ObjectModel
     /**
      * @return string
      */
-    function getCp(): ?string
+    public function getCp(): ?string
     {
         return $this->_cp;
     }
@@ -176,7 +176,7 @@ class Subscription extends ObjectModel
     /**
      * @return int
      */
-    function getIdContact(): ?int
+    public function getIdContact(): ?int
     {
         return $this->_id_contact;
     }
@@ -190,7 +190,7 @@ class Subscription extends ObjectModel
      *
      * @return object
      */
-    function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): object
     {
         if ($this->_created_at !== $created_at) {
             $this->_created_at = $created_at;
@@ -203,7 +203,7 @@ class Subscription extends ObjectModel
     /**
      * @return object
      */
-    function setCreatedNow(): object
+    public function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -220,7 +220,7 @@ class Subscription extends ObjectModel
      *
      * @return object
      */
-    function setSubscribedAt(string $subscribed_at): object
+    public function setSubscribedAt(string $subscribed_at): object
     {
         if ($this->_subscribed_at !== $subscribed_at) {
             $this->_subscribed_at = $subscribed_at;
@@ -235,7 +235,7 @@ class Subscription extends ObjectModel
      *
      * @return object
      */
-    function setAdult(bool $adult): object
+    public function setAdult(bool $adult): object
     {
         if ($this->_adult !== $adult) {
             $this->_adult = $adult;
@@ -249,7 +249,7 @@ class Subscription extends ObjectModel
      *
      * @return object
      */
-    function setAmount(float $amount): object
+    public function setAmount(float $amount): object
     {
         if ($this->_amount !== $amount) {
             $this->_amount = $amount;
@@ -263,7 +263,7 @@ class Subscription extends ObjectModel
      *
      * @return object
      */
-    function setFirstName(string $first_name): object
+    public function setFirstName(string $first_name): object
     {
         if ($this->_first_name !== $first_name) {
             $this->_first_name = $first_name;
@@ -278,7 +278,7 @@ class Subscription extends ObjectModel
      *
      * @return object
      */
-    function setLastName(string $last_name): object
+    public function setLastName(string $last_name): object
     {
         if ($this->_last_name !== $last_name) {
             $this->_last_name = $last_name;
@@ -294,7 +294,7 @@ class Subscription extends ObjectModel
      * @return object
      * @throws Exception
      */
-    function setEmail(string $email): object
+    public function setEmail(string $email): object
     {
         if (!Email::validate($email)) {
             throw new Exception('email ' . $email . ' invalide');
@@ -313,7 +313,7 @@ class Subscription extends ObjectModel
      *
      * @return object
      */
-    function setCp(string $cp): object
+    public function setCp(string $cp): object
     {
         if ($this->_cp !== $cp) {
             $this->_cp = $cp;
@@ -328,7 +328,7 @@ class Subscription extends ObjectModel
      *
      * @return object
      */
-    function setIdContact(int $id_contact): object
+    public function setIdContact(int $id_contact): object
     {
         if ($this->_id_contact !== $id_contact) {
             $this->_id_contact = $id_contact;

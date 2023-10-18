@@ -2,13 +2,15 @@
 
 namespace Reference;
 
+use Reference;
+
 /**
  * Classe de gestion des états de groupes
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class GroupeStatus extends \Reference
+class GroupeStatus extends Reference
 {
     /**
      * Instance de l'objet
@@ -20,17 +22,17 @@ class GroupeStatus extends \Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_groupe_status';
+    protected static string $_pk = 'id_groupe_status';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_groupe_status';
+    protected static string $_table = 'adhoc_groupe_status';
 
     /**
      * @var int
      */
-    protected $_id_groupe_status = 0;
+    protected int $_id_groupe_status = 0;
 
     /**
      * Liste des attributs de l'objet

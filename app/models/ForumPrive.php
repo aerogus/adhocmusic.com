@@ -8,17 +8,17 @@ class ForumPrive extends Forum
     /**
      * @var string
      */
-    protected static $_db_table_forum_info    = 'adhoc_forum_prive_info';
+    protected static string $_db_table_forum_info = 'adhoc_forum_prive_info';
 
     /**
      * @var string
      */
-    protected static $_db_table_forum_thread  = 'adhoc_forum_prive_thread';
+    protected static string $_db_table_forum_thread  = 'adhoc_forum_prive_thread';
 
     /**
      * @var string
      */
-    protected static $_db_table_forum_message = 'adhoc_forum_prive_message';
+    protected static string $_db_table_forum_message = 'adhoc_forum_prive_message';
 
     /**
      * Retourne le listing des threads d'un forum donné avec le contenu du 1er message
@@ -28,7 +28,7 @@ class ForumPrive extends Forum
      *
      * @return array
      */
-    static function getThreads(string $id_forum, int $page = 0): array
+    public static function getThreads(string $id_forum, int $page = 0): array
     {
         $db = DataBase::getInstance();
 
@@ -67,7 +67,7 @@ class ForumPrive extends Forum
      *
      * @return array
      */
-    static function getMessages(int $id_thread, int $page = 0): array
+    public static function getMessages(int $id_thread, int $page = 0): array
     {
         $db = DataBase::getInstance();
 
@@ -114,7 +114,7 @@ class ForumPrive extends Forum
      *
      * @return bool
      */
-    static function delAllSubscriptions(int $id_contact): bool
+    public static function delAllSubscriptions(int $id_contact): bool
     {
         $db = DataBase::getInstance();
 
@@ -134,7 +134,7 @@ class ForumPrive extends Forum
      *
      * @return bool
      */
-    static function delSubscriberToForum(int $id_contact, string $id_forum): bool
+    public static function delSubscriberToForum(int $id_contact, string $id_forum): bool
     {
         $db = DataBase::getInstance();
 
@@ -155,7 +155,7 @@ class ForumPrive extends Forum
      *
      * @return bool
      */
-    static function addSubscriberToForum(int $id_contact, string $id_forum): bool
+    public static function addSubscriberToForum(int $id_contact, string $id_forum): bool
     {
         $db = DataBase::getInstance();
 
@@ -175,7 +175,7 @@ class ForumPrive extends Forum
      *
      * @return array
      */
-    static function getSubscribedForums(int $id_contact): array
+    public static function getSubscribedForums(int $id_contact): array
     {
         $db = DataBase::getInstance();
 
@@ -200,7 +200,7 @@ class ForumPrive extends Forum
      *
      * @see addSubscriberToForum / delSubscriberToForum
      */
-    static function setSubscribedForums(int $id_contact, array $ids_forum)
+    public static function setSubscribedForums(int $id_contact, array $ids_forum)
     {
         $db = DataBase::getInstance();
 
@@ -227,7 +227,7 @@ class ForumPrive extends Forum
      *
      * @return array
      */
-    static function getSubscribers(string $id_forum)
+    public static function getSubscribers(string $id_forum)
     {
         $db = DataBase::getInstance();
 

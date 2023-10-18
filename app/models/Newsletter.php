@@ -29,32 +29,32 @@ class Newsletter extends ObjectModel
     /**
      * @var string
      */
-    protected static $_pk = 'id_newsletter';
+    protected static string $_pk = 'id_newsletter';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_newsletter';
+    protected static string $_table = 'adhoc_newsletter';
 
     /**
      * @var int
      */
-    protected $_id_newsletter = 0;
+    protected int $_id_newsletter = 0;
 
     /**
      * @var string
      */
-    protected $_title = '';
+    protected string $_title = '';
 
     /**
      * @var string
      */
-    protected $_content = '';
+    protected string $_content = '';
 
     /**
      * @var string
      */
-    protected $_html = '';
+    protected string $_html = '';
 
     /**
      * Liste des attributs de l'objet
@@ -71,17 +71,17 @@ class Newsletter extends ObjectModel
     /**
      * @var int
      */
-    protected $_id_contact = 0;
+    protected int $_id_contact = 0;
 
     /**
      * @var array
      */
-    protected $_tpl_vars = [];
+    protected array $_tpl_vars = [];
 
     /**
      * @return string
      */
-    static function getBaseUrl(): string
+    public static function getBaseUrl(): string
     {
         return MEDIA_URL . '/newsletter';
     }
@@ -89,7 +89,7 @@ class Newsletter extends ObjectModel
     /**
      * @return string
      */
-    static function getBasePath(): string
+    public static function getBasePath(): string
     {
         return MEDIA_PATH . '/newsletter';
     }
@@ -99,7 +99,7 @@ class Newsletter extends ObjectModel
      *
      * @return string
      */
-    function getIdNewsletter(): int
+    public function getIdNewsletter(): int
     {
         return $this->_id_newsletter;
     }
@@ -107,7 +107,7 @@ class Newsletter extends ObjectModel
     /**
      * @return string
      */
-    function getFileUrl(): string
+    public function getFileUrl(): string
     {
         return self::getBaseUrl() . '/' . (string) $this->getId();
     }
@@ -115,7 +115,7 @@ class Newsletter extends ObjectModel
     /**
      * @return string
      */
-    function getFilePath(): string
+    public function getFilePath(): string
     {
         return self::getBasePath() . '/' . (string) $this->getId();
     }
@@ -125,7 +125,7 @@ class Newsletter extends ObjectModel
      *
      * @return string
      */
-    function getContent(): string
+    public function getContent(): string
     {
         return $this->_content;
     }
@@ -135,7 +135,7 @@ class Newsletter extends ObjectModel
      *
      * @return string
      */
-    function getHtml(): string
+    public function getHtml(): string
     {
         return $this->_html;
     }
@@ -144,7 +144,7 @@ class Newsletter extends ObjectModel
      * Retourne le contenu après être passé à la moulinette
      * des variables de templates et des liens de tracking
      */
-    function getProcessedHtml()
+    public function getProcessedHtml()
     {
         $html = $this->getHtml();
 
@@ -186,7 +186,7 @@ class Newsletter extends ObjectModel
      *
      * @return int
      */
-    function getIdContact(): int
+    public function getIdContact(): int
     {
         return $this->_id_contact;
     }
@@ -198,7 +198,7 @@ class Newsletter extends ObjectModel
      *
      * @return object
      */
-    function setIdContact(int $id_contact): object
+    public function setIdContact(int $id_contact): object
     {
         $this->_id_contact = $id_contact;
 
@@ -213,7 +213,7 @@ class Newsletter extends ObjectModel
      *
      * @return object
      */
-    function setTplVar($key, $val): object
+    public function setTplVar($key, $val): object
     {
         $this->_tpl_vars[$key] = $val;
 
@@ -227,7 +227,7 @@ class Newsletter extends ObjectModel
      *
      * @return object
      */
-    function setHtml(string $html): object
+    public function setHtml(string $html): object
     {
         if ($this->_html !== $html) {
             $this->_html = $html;
@@ -244,7 +244,7 @@ class Newsletter extends ObjectModel
      *
      * @return object
      */
-    function setContent(string $content): object
+    public function setContent(string $content): object
     {
         if ($this->_content !== $content) {
             $this->_content = $content;
@@ -259,7 +259,7 @@ class Newsletter extends ObjectModel
      *
      * @return string
      */
-    function getUrl(): string
+    public function getUrl(): string
     {
         return HOME_URL . '/newsletters/' . $this->getId();
     }
@@ -269,7 +269,7 @@ class Newsletter extends ObjectModel
      *
      * @return string
      */
-    function getTitle(): string
+    public function getTitle(): string
     {
         return $this->_title;
     }
@@ -281,7 +281,7 @@ class Newsletter extends ObjectModel
      *
      * @return object
      */
-    function setTitle(string $title): object
+    public function setTitle(string $title): object
     {
         if ($this->_title !== $title) {
             $this->_title = $title;
@@ -296,7 +296,7 @@ class Newsletter extends ObjectModel
      *
      * @return int
      */
-    function getId(): int
+    public function getId(): int
     {
         return $this->_id_newsletter;
     }
@@ -321,7 +321,7 @@ class Newsletter extends ObjectModel
      *
      * @return array
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];
@@ -356,7 +356,7 @@ class Newsletter extends ObjectModel
      *
      * @return array
      */
-    static function getSubscribers(int $debut = 0, int $limit = 10000): array
+    public static function getSubscribers(int $debut = 0, int $limit = 10000): array
     {
         $db = DataBase::getInstance();
 
@@ -375,7 +375,7 @@ class Newsletter extends ObjectModel
      *
      * @return int
      */
-    static function getSubscribersCount()
+    public static function getSubscribersCount()
     {
         $db = DataBase::getInstance();
 
@@ -396,7 +396,7 @@ class Newsletter extends ObjectModel
      *
      * @return int
      */
-    static function addEmail(string $email)
+    public static function addEmail(string $email)
     {
         if ($id_contact = Contact::getIdByEmail($email)) {
             // contact ? oui
@@ -435,7 +435,7 @@ class Newsletter extends ObjectModel
      *
      * @return int
      */
-    static function removeEmail(string $email)
+    public static function removeEmail(string $email)
     {
         if ($id_contact = Contact::getIdByEmail($email)) {
             // contact ? oui
@@ -471,7 +471,7 @@ class Newsletter extends ObjectModel
      * @param int    $id_contact    id_contact
      * @param string $url           url
      */
-    static function addHit(int $id_newsletter, int $id_contact, string $url)
+    public static function addHit(int $id_newsletter, int $id_contact, string $url)
     {
         file_put_contents(ADHOC_ROOT_PATH . '/log/newsletters-hits.txt', date('Y-m-d H:i:s') . "\tnl" . $id_newsletter . "\tid" . $id_contact . "\turl" . $url ."\n", FILE_APPEND | LOCK_EX);
 

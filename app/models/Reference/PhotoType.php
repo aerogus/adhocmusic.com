@@ -2,13 +2,15 @@
 
 namespace Reference;
 
+use Reference;
+
 /**
  * Classe de gestion des types de photos
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class PhotoType extends \Reference
+class PhotoType extends Reference
 {
     /**
      * Instance de l'objet
@@ -20,17 +22,17 @@ class PhotoType extends \Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_photo_type';
+    protected static string $_pk = 'id_photo_type';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_photo_type';
+    protected static string $_table = 'adhoc_photo_type';
 
     /**
      * @var int
      */
-    protected $_id_photo_type = 0;
+    protected int $_id_photo_type = 0;
 
     /**
      * Liste des attributs de l'objet

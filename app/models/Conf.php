@@ -40,7 +40,7 @@ class Conf
     /**
      * @return object
      */
-    static function getInstance(): object
+    public static function getInstance(): object
     {
         if (is_null(self::$_instance)) {
             return new Conf();
@@ -51,7 +51,7 @@ class Conf
     /**
      * @throws Exception
      */
-    function __construct()
+    public function __construct()
     {
         $confPath = self::getConfPath();
         if (!file_exists($confPath)) {
@@ -78,7 +78,7 @@ class Conf
      *
      * @return string
      */
-    static function getConfPath(): string
+    public static function getConfPath(): string
     {
         return dirname(dirname(__DIR__)) . '/conf/conf.ini';
     }
@@ -90,7 +90,7 @@ class Conf
      *
      * @return array|null
      */
-    function get(string $section = null): ?array
+    public function get(string $section = null): ?array
     {
         if (is_null($section)) {
             return self::$_data; // toute la conf

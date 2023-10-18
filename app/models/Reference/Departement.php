@@ -2,7 +2,8 @@
 
 namespace Reference;
 
-use \DataBase;
+use DataBase;
+use Reference;
 
 /**
  * Classe Departement
@@ -10,7 +11,7 @@ use \DataBase;
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class Departement extends \Reference
+class Departement extends Reference
 {
     /**
      * Instance de l'objet
@@ -22,22 +23,22 @@ class Departement extends \Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_departement';
+    protected static string $_pk = 'id_departement';
 
     /**
      * @var string
      */
-    protected static $_table = 'geo_fr_departement';
+    protected static string $_table = 'geo_fr_departement';
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_id_departement = null;
+    protected ?string $_id_departement = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_id_region = null;
+    protected ?string $_id_region = null;
 
     /**
      * Liste des attributs de l'objet
@@ -55,7 +56,7 @@ class Departement extends \Reference
     /**
      * @return string|null
      */
-    function getIdDepartement(): ?string
+    public function getIdDepartement(): ?string
     {
         return $this->_id_departement;
     }
@@ -63,7 +64,7 @@ class Departement extends \Reference
     /**
      * @return string|null
      */
-    function getIdRegion(): ?string
+    public function getIdRegion(): ?string
     {
         return $this->_id_region;
     }
@@ -89,7 +90,7 @@ class Departement extends \Reference
      *
      * @return array<Departement>
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];

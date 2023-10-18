@@ -2,7 +2,8 @@
 
 namespace Reference;
 
-use \DataBase;
+use DataBase;
+use Reference;
 
 /**
  * Classe de gestion des styles musicaux
@@ -10,7 +11,7 @@ use \DataBase;
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class Style extends \Reference
+class Style extends Reference
 {
     /**
      * Instance de l'objet
@@ -22,17 +23,17 @@ class Style extends \Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_style';
+    protected static string $_pk = 'id_style';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_style';
+    protected static string $_table = 'adhoc_style';
 
     /**
      * @var int
      */
-    protected $_id_style = 0;
+    protected int $_id_style = 0;
 
     /**
      * Liste des attributs de l'objet
@@ -47,17 +48,17 @@ class Style extends \Reference
     /**
      * Retourne une collection d'objets "Style" répondant au(x) critère(s) donné(s)
      *
-     * @param array $params [
-     *                      'id_event' => int,
-     *                      'order_by' => string,
-     *                      'sort' => string,
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     * @param array<string,mixed> $params [
+     *     'id_event' => int,
+     *     'order_by' => string,
+     *     'sort' => string,
+     *     'start' => int,
+     *     'limit' => int,
+     * ]
      *
      * @return array<Style>
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];

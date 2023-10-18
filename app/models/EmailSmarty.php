@@ -8,7 +8,7 @@ class EmailSmarty extends Smarty
     /**
      *
      */
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -23,7 +23,7 @@ class EmailSmarty extends Smarty
     /**
      *
      */
-    static function modifier_link($url)
+    public static function modifier_link($url)
     {
         // oui je sais pour les global ...
         // @see Controller::email::newsletter
@@ -39,7 +39,7 @@ class EmailSmarty extends Smarty
      *
      * @param array ['type'] ['id'] ['width'] ['height'] ['bgcolor'] ['border'] ['zoom']
      */
-    static function function_image($params)
+    public static function function_image($params)
     {
         $type    = (string) $params['type'];
         $id      = (int) $params['id'];

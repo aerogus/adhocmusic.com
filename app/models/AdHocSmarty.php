@@ -15,7 +15,7 @@ class AdHocSmarty extends Smarty
     /**
      * Constructeur
      */
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -76,7 +76,7 @@ class AdHocSmarty extends Smarty
      *
      * @return string
      */
-    static function function_pagination(array $params): string
+    public static function function_pagination(array $params): string
     {
         $out = '';
 
@@ -166,7 +166,7 @@ class AdHocSmarty extends Smarty
      *                      ['minute']
      *                      ['step']
      */
-    static function function_html_input_date_hourminute(array $params): string
+    public static function function_html_input_date_hourminute(array $params): string
     {
         $hour = 0;
         if (array_key_exists('hour', $params)) {
@@ -205,7 +205,7 @@ class AdHocSmarty extends Smarty
      *                      ['month']
      *                      ['day']
      */
-    static function function_calendar(array $params): string
+    public static function function_calendar(array $params): string
     {
         $now  = time();
         $months = ['', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -316,7 +316,7 @@ class AdHocSmarty extends Smarty
      *
      * @return string
      */
-    static function modifier_format_size(int $size): string
+    public static function modifier_format_size(int $size): string
     {
         $sizes = ["  o", " Ko", " Mo", " Go", " To", " Po", " Eo", " Zo", " Yo"];
         if ($size === 0) {
@@ -334,7 +334,7 @@ class AdHocSmarty extends Smarty
      *
      * @return string
      */
-    static function modifier_pseudo_by_id(int $id_contact): string
+    public static function modifier_pseudo_by_id(int $id_contact): string
     {
         if (array_key_exists($id_contact, self::$pseudos)) {
             return self::$pseudos[$id_contact];
@@ -359,7 +359,7 @@ class AdHocSmarty extends Smarty
      *
      * @return string
      */
-    static function modifier_avatar_by_id(int $id_contact): string
+    public static function modifier_avatar_by_id(int $id_contact): string
     {
         if (array_key_exists($id_contact, self::$avatars)) {
             return self::$avatars[$id_contact];
@@ -382,7 +382,7 @@ class AdHocSmarty extends Smarty
      *
      * @return string
      */
-    static function modifier_display_on_off_icon(bool $val): string
+    public static function modifier_display_on_off_icon(bool $val): string
     {
         return $val ? '✓' : '';
     }
@@ -390,7 +390,7 @@ class AdHocSmarty extends Smarty
     /**
      * @param mixed $val val
      */
-    static function modifier_json_encode_numeric_check($val)
+    public static function modifier_json_encode_numeric_check($val)
     {
         return json_encode($val, JSON_NUMERIC_CHECK);
     }
@@ -402,7 +402,7 @@ class AdHocSmarty extends Smarty
      *
      * @param string $style_name url de la feuille de style
      */
-    function enqueue_style(string $style_name)
+    public function enqueue_style(string $style_name)
     {
         $this->append('stylesheets', $style_name);
     }
@@ -413,7 +413,7 @@ class AdHocSmarty extends Smarty
      * @param string $script_name url du script
      * @param bool $in_footer
      */
-    function enqueue_script(string $script_name, bool $in_footer = true)
+    public function enqueue_script(string $script_name, bool $in_footer = true)
     {
         if ($in_footer) {
             $this->append('footer_scripts', $script_name);
@@ -430,7 +430,7 @@ class AdHocSmarty extends Smarty
      *
      * @return void
      */
-    function enqueue_script_var(string $key, $value): void
+    public function enqueue_script_var(string $key, $value): void
     {
         $this->script_vars[$key] = $value;
         $this->assign('script_vars', $this->script_vars);
@@ -443,7 +443,7 @@ class AdHocSmarty extends Smarty
      *
      * @return void
      */
-    function enqueue_script_vars(array $vars): void
+    public function enqueue_script_vars(array $vars): void
     {
         foreach ($vars as $key => $value) {
             $this->enqueue_script_var($key, $value);
@@ -455,7 +455,7 @@ class AdHocSmarty extends Smarty
      *
      * @param string $script script
      */
-    function print_inline_script(string $script)
+    public function print_inline_script(string $script)
     {
         $this->append('inline_scripts', $script);
     }
@@ -468,7 +468,7 @@ class AdHocSmarty extends Smarty
      * @param mixed  $compile_id compile id to be used with this template
      * @param object $parent next higher level of Smarty variables
      */
-    function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null, $display = false, $merge_tpl_vars = true, $no_output_filter = false)
+    public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null, $display = false, $merge_tpl_vars = true, $no_output_filter = false)
     {
         // fil d'ariane
         $this->assign('trail', Trail::getInstance()->getPath());

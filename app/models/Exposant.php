@@ -18,67 +18,67 @@ class Exposant extends ObjectModel
     /**
      * @var string
      */
-    protected static $_pk = 'id_exposant';
+    protected static string $_pk = 'id_exposant';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_exposant';
+    protected static string $_table = 'adhoc_exposant';
 
     /**
      * @var int
      */
-    protected $_id_exposant = 0;
+    protected int $_id_exposant = 0;
 
     /**
      * @var string
      */
-    protected $_name = '';
+    protected string $_name = '';
 
     /**
      * @var string
      */
-    protected $_email = '';
+    protected string $_email = '';
 
     /**
      * @var string
      */
-    protected $_phone = '';
+    protected string $_phone = '';
 
     /**
      * @var string
      */
-    protected $_site = '';
+    protected string $_site = '';
 
     /**
      * @var string
      */
-    protected $_type = '';
+    protected string $_type = '';
 
     /**
      * @var string
      */
-    protected $_city = '';
+    protected string $_city = '';
 
     /**
      * @var string
      */
-    protected $_description = '';
+    protected string $_description = '';
 
     /**
      * @var string
      */
-    protected $_state = '';
+    protected string $_state = '';
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_created_at = null;
+    protected ?string $_created_at = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_modified_at = null;
+    protected ?string $_modified_at = null;
 
     /**
      * Liste des attributs de l'objet
@@ -104,7 +104,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    function getName(): string
+    public function getName(): string
     {
         return $this->_name;
     }
@@ -112,7 +112,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    function getEmail(): string
+    public function getEmail(): string
     {
         return $this->_email;
     }
@@ -120,7 +120,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    function getPhone(): string
+    public function getPhone(): string
     {
         return $this->_phone;
     }
@@ -128,7 +128,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    function getSite(): string
+    public function getSite(): string
     {
         return $this->_site;
     }
@@ -136,7 +136,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    function getType(): string
+    public function getType(): string
     {
         return $this->_type;
     }
@@ -144,7 +144,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    function getCity(): string
+    public function getCity(): string
     {
         return $this->_city;
     }
@@ -152,7 +152,7 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    function getDescription(): string
+    public function getDescription(): string
     {
         return $this->_description;
     }
@@ -160,15 +160,15 @@ class Exposant extends ObjectModel
     /**
      * @return string
      */
-    function getState(): string
+    public function getState(): string
     {
         return $this->_state;
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
-    function getCreatedAt(): ?string
+    public function getCreatedAt(): ?string
     {
         if (Date::isDateTimeOk($this->_created_at)) {
             return $this->_created_at;
@@ -177,9 +177,9 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
-    function getCreatedAtTs(): ?int
+    public function getCreatedAtTs(): ?int
     {
         if (Date::isDateTimeOk($this->_created_at)) {
             return strtotime($this->_created_at);
@@ -188,9 +188,9 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
-    function getModifiedAt(): ?string
+    public function getModifiedAt(): ?string
     {
         if (Date::isDateTimeOk($this->_modified_at)) {
             return $this->_modified_at;
@@ -199,9 +199,9 @@ class Exposant extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
-    function getModifiedAtTs(): ?int
+    public function getModifiedAtTs(): ?int
     {
         if (Date::isDateTimeOk($this->_modified_at)) {
             return strtotime($this->_modified_at);
@@ -218,7 +218,7 @@ class Exposant extends ObjectModel
      *
      * @return object
      */
-    function setName(string $name): object
+    public function setName(string $name): object
     {
         if ($this->_name !== $name) {
             $this->_name = $name;
@@ -233,7 +233,7 @@ class Exposant extends ObjectModel
      *
      * @return object
      */
-    function setEmail(string $email): object
+    public function setEmail(string $email): object
     {
         if ($this->_email !== $email) {
             $this->_email = $email;
@@ -248,7 +248,7 @@ class Exposant extends ObjectModel
      *
      * @return object
      */
-    function setPhone(string $phone): object
+    public function setPhone(string $phone): object
     {
         if ($this->_phone !== $phone) {
             $this->_phone = $phone;
@@ -263,7 +263,7 @@ class Exposant extends ObjectModel
      *
      * @return object
      */
-    function setSite(string $site): object
+    public function setSite(string $site): object
     {
         if ($this->_site !== $site) {
             $this->_site = $site;
@@ -278,7 +278,7 @@ class Exposant extends ObjectModel
      *
      * @return object
      */
-    function setType(string $type): object
+    public function setType(string $type): object
     {
         if ($this->_type !== $type) {
             $this->_type = $type;
@@ -293,7 +293,7 @@ class Exposant extends ObjectModel
      *
      * @return object
      */
-    function setCity(string $city): object
+    public function setCity(string $city): object
     {
         if ($this->_city !== $city) {
             $this->_city = $city;
@@ -308,7 +308,7 @@ class Exposant extends ObjectModel
      *
      * @return object
      */
-    function setState(string $state): object
+    public function setState(string $state): object
     {
         if ($this->_state !== $state) {
             $this->_state = $state;
@@ -323,7 +323,7 @@ class Exposant extends ObjectModel
      *
      * @return object
      */
-    function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): object
     {
         if ($this->_created_at !== $created_at) {
             $this->_created_at = $created_at;
@@ -336,7 +336,7 @@ class Exposant extends ObjectModel
     /**
      * @return object
      */
-    function setCreatedNow(): object
+    public function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -353,7 +353,7 @@ class Exposant extends ObjectModel
      *
      * @return object
      */
-    function setModifiedAt(string $modified_at): object
+    public function setModifiedAt(string $modified_at): object
     {
         if ($this->_modified_at !== $modified_at) {
             $this->_modified_at = $modified_at;
@@ -366,7 +366,7 @@ class Exposant extends ObjectModel
     /**
      * @return object
      */
-    function setModifiedNow(): object
+    public function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 

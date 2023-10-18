@@ -27,27 +27,27 @@ class Route
     /**
      * @var string
      */
-    protected static $controllers_path = DEFAULT_CONTROLLERS_PATH;
+    protected static string $controllers_path = DEFAULT_CONTROLLERS_PATH;
 
     /**
      * @var string
      */
-    protected static $controller_suffix = DEFAULT_CONTROLLER_SUFFIX;
+    protected static string $controller_suffix = DEFAULT_CONTROLLER_SUFFIX;
 
     /**
      * @var string
      */
-    protected static $http_code = '200';
+    protected static string $http_code = '200';
 
     /**
      * @var string
      */
-    public static $response_format = DEFAULT_CONTROLLERS_FORMAT;
+    public static string $response_format = DEFAULT_CONTROLLERS_FORMAT;
 
     /**
      * @param int $http_code n° de code http
      */
-    static function set_http_code(int $http_code)
+    public static function set_http_code(int $http_code)
     {
         self::$http_code = $http_code;
     }
@@ -55,7 +55,7 @@ class Route
     /**
      * @param array $params params
      */
-    static function map_connect(array $params)
+    public static function map_connect(array $params)
     {
         $extra_params = $params;
         foreach (['path', 'controller', 'action', 'method'] as $key) {
@@ -81,7 +81,7 @@ class Route
      *
      * @return mixed|null
      */
-    static function params(string $key)
+    public static function params(string $key)
     {
         if (isset(self::$action_params[$key])) {
             return self::$action_params[$key];
@@ -92,7 +92,7 @@ class Route
     /**
      * @param array $params paramètres
      */
-    static function find_route(array $params)
+    public static function find_route(array $params)
     {
         $response_format = DEFAULT_CONTROLLERS_FORMAT;
         $method = $params['method'];
@@ -155,7 +155,7 @@ class Route
      *
      * @return bool
      */
-    static function load(string $file): bool
+    public static function load(string $file): bool
     {
         if (file_exists($file) && is_readable($file)) {
             $routes = file($file);
@@ -178,7 +178,7 @@ class Route
     /**
      *
      */
-    static function run()
+    public static function run()
     {
         $method = $_SERVER['REQUEST_METHOD'];
         $path = '';

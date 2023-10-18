@@ -61,8 +61,11 @@ class Log
     const ACTION_NEWSLETTER_SUB        = 47;
     const ACTION_NEWSLETTER_UNSUB      = 48;
 
-    // @todo migrer dans LogAction
-    protected static $_actions = [
+    /**
+     * @var array<int,string>
+     * @todo migrer dans LogAction
+     */
+    protected static array $_actions = [
         self::ACTION_MEMBER_CREATE         => "Création d'un compte membre",
         self::ACTION_MEMBER_EDIT           => "Edition d'un compte membre",
         self::ACTION_MEMBER_DELETE         => "Suppression d'un compte membre",

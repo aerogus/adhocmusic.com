@@ -293,7 +293,7 @@ class Tools
      *
      * @return array
      */
-    static function array_sort($array, $on, int $order = SORT_ASC): array
+    static function array_sort(array $array, $on, int $order = SORT_ASC): array
     {
         $new_array = [];
         $sortable_array = [];

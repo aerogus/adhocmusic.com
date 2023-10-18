@@ -20,53 +20,53 @@ class Alerting extends ObjectModel
     /**
      * @var string
      */
-    protected static $_pk = 'id_alerting';
+    protected static string $_pk = 'id_alerting';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_alerting';
+    protected static string $_table = 'adhoc_alerting';
 
     /**
      * @var int
      */
-    protected $_id_alerting = 0;
+    protected int $_id_alerting = 0;
 
     /**
      * Identifiant membre
      *
      * @var int
      */
-    protected $_id_contact = 0;
+    protected int $_id_contact = 0;
 
     /**
      * Date de création
      *
-     * @var string
+     * @var ?string
      */
-    protected $_created_at = null;
+    protected ?string $_created_at = null;
 
     /**
      * Actif ?
      *
      * @var bool
      */
-    protected $_active = false;
+    protected bool $_active = false;
 
     /**
      * @var int|null
      */
-    protected $_id_lieu = null;
+    protected ?int $_id_lieu = null;
 
     /**
      * @var int|null
      */
-    protected $_id_groupe = null;
+    protected ?int $_id_groupe = null;
 
     /**
      * @var int|null
      */
-    protected $_id_event = null;
+    protected ?int $_id_event = null;
 
     /**
      * Liste des attributs de l'objet
@@ -88,7 +88,7 @@ class Alerting extends ObjectModel
     /**
      * @return int
      */
-    function getIdAlerting(): int
+    public function getIdAlerting(): int
     {
         return $this->_id_alerting;
     }
@@ -96,7 +96,7 @@ class Alerting extends ObjectModel
     /**
      * @return int
      */
-    function getIdContact(): int
+    public function getIdContact(): int
     {
         return $this->_id_contact;
     }
@@ -104,7 +104,7 @@ class Alerting extends ObjectModel
     /**
      * @return string|null
      */
-    function getCreatedAt(): ?string
+    public function getCreatedAt(): ?string
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return $this->_created_at;
@@ -115,7 +115,7 @@ class Alerting extends ObjectModel
     /**
      * @return int|null
      */
-    function getCreatedAtTs(): ?int
+    public function getCreatedAtTs(): ?int
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return strtotime($this->_created_at);
@@ -126,7 +126,7 @@ class Alerting extends ObjectModel
     /**
      * @return bool
      */
-    function getActive(): bool
+    public function getActive(): bool
     {
         return $this->_active;
     }
@@ -134,7 +134,7 @@ class Alerting extends ObjectModel
     /**
      * @return int|null
      */
-    function getIdLieu(): ?int
+    public function getIdLieu(): ?int
     {
         return $this->_id_lieu;
     }
@@ -142,7 +142,7 @@ class Alerting extends ObjectModel
     /**
      * @return int|null
      */
-    function getIdGroupe(): ?int
+    public function getIdGroupe(): ?int
     {
         return $this->_id_groupe;
     }
@@ -150,7 +150,7 @@ class Alerting extends ObjectModel
     /**
      * @return int|null
      */
-    function getIdEvent(): ?int
+    public function getIdEvent(): ?int
     {
         return $this->_id_event;
     }
@@ -164,7 +164,7 @@ class Alerting extends ObjectModel
      *
      * @return object
      */
-    function setIdContact(int $id_contact): object
+    public function setIdContact(int $id_contact): object
     {
         if ($this->_id_contact !== $id_contact) {
             $this->_id_contact = $id_contact;
@@ -179,7 +179,7 @@ class Alerting extends ObjectModel
      *
      * @return object
      */
-    function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): object
     {
         if ($this->_created_at !== $created_at) {
             $this->_created_at = $created_at;
@@ -194,7 +194,7 @@ class Alerting extends ObjectModel
      *
      * @return object
      */
-    function setActive(bool $active): object
+    public function setActive(bool $active): object
     {
         if ($this->_active !== $active) {
             $this->_active = $active;
@@ -209,7 +209,7 @@ class Alerting extends ObjectModel
      *
      * @return object
      */
-    function setIdLieu(int $id_lieu = null): object
+    public function setIdLieu(int $id_lieu = null): object
     {
         if ($this->_id_lieu !== $id_lieu) {
             $this->_id_lieu = $id_lieu;
@@ -224,7 +224,7 @@ class Alerting extends ObjectModel
      *
      * @return object
      */
-    function setIdGroupe(int $id_groupe = null): object
+    public function setIdGroupe(int $id_groupe = null): object
     {
         if ($this->_id_groupe !== $id_groupe) {
             $this->_id_groupe = $id_groupe;
@@ -239,7 +239,7 @@ class Alerting extends ObjectModel
      *
      * @return object
      */
-    function setIdEvent(int $id_event = null): object
+    public function setIdEvent(int $id_event = null): object
     {
         if ($this->_id_event !== $id_event) {
             $this->_id_event = $id_event;
@@ -256,7 +256,7 @@ class Alerting extends ObjectModel
      *
      * @return object
      */
-    function setCreatedNow(): object
+    public function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -275,7 +275,7 @@ class Alerting extends ObjectModel
      *
      * @return bool
      */
-    static function addSubscriber(int $id_contact, string $type, int $id_content): bool
+    public static function addSubscriber(int $id_contact, string $type, int $id_content): bool
     {
         return false;
     }
@@ -287,7 +287,7 @@ class Alerting extends ObjectModel
      *
      * @return bool
      */
-    static function delSubscriber(int $id_contact, string $type, int $id_content): bool
+    public static function delSubscriber(int $id_contact, string $type, int $id_content): bool
     {
         return false;
     }
@@ -306,7 +306,7 @@ class Alerting extends ObjectModel
      *
      * @return array
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];

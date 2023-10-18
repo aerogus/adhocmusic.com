@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use \Reference\Style;
+use Reference\Style;
 
 /**
  * Classe Event
@@ -23,67 +23,67 @@ class Event extends ObjectModel
     /**
      * @var string
      */
-    protected static $_pk = 'id_event';
+    protected static string $_pk = 'id_event';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_event';
+    protected static string $_table = 'adhoc_event';
 
     /**
      * @var int
      */
-    protected $_id_event = 0;
+    protected int $_id_event = 0;
 
     /**
      * @var string
      */
-    protected $_name = '';
+    protected string $_name = '';
+
+    /**
+     * @var ?string
+     */
+    protected ?string $_date = null;
 
     /**
      * @var string
      */
-    protected $_date = null;
+    protected string $_text = '';
 
     /**
      * @var string
      */
-    protected $_text = '';
-
-    /**
-     * @var string
-     */
-    protected $_price = '';
+    protected string $_price = '';
 
     /**
      * @var bool
      */
-    protected $_online = false;
+    protected bool $_online = false;
 
     /**
      * @var int
      */
-    protected $_id_lieu = 0;
+    protected int $_id_lieu = 0;
 
     /**
      * @var int
      */
-    protected $_id_contact = 0;
+    protected int $_id_contact = 0;
 
     /**
-     * @var string|null
+     * @var ?string
      */
-    protected $_facebook_event_id = null;
+    protected ?string $_facebook_event_id = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_created_at = null;
+    protected ?string $_created_at = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_modified_at = null;
+    protected ?string $_modified_at = null;
 
     /**
      * Liste des attributs de l'objet
@@ -109,7 +109,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    static function getBaseUrl(): string
+    public static function getBaseUrl(): string
     {
         return MEDIA_URL . '/event';
     }
@@ -117,7 +117,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    static function getBasePath(): string
+    public static function getBasePath(): string
     {
         return MEDIA_PATH . '/event';
     }
@@ -125,7 +125,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getIdEvent(): int
+    public function getIdEvent(): int
     {
         return $this->_id_event;
     }
@@ -133,7 +133,7 @@ class Event extends ObjectModel
     /**
      * @return string|null
      */
-    function getCreatedAt(): ?string
+    public function getCreatedAt(): ?string
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return $this->_created_at;
@@ -144,7 +144,7 @@ class Event extends ObjectModel
     /**
      * @return int|null
      */
-    function getCreatedAtTs(): ?int
+    public function getCreatedAtTs(): ?int
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return strtotime($this->_created_at);
@@ -155,7 +155,7 @@ class Event extends ObjectModel
     /**
      * @return string|null
      */
-    function getModifiedAt(): ?string
+    public function getModifiedAt(): ?string
     {
         if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
             return $this->_modified_at;
@@ -166,7 +166,7 @@ class Event extends ObjectModel
     /**
      * @return int|null
      */
-    function getModifiedAtTs(): ?int
+    public function getModifiedAtTs(): ?int
     {
         if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
             return strtotime($this->_modified_at);
@@ -177,7 +177,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    function getName(): string
+    public function getName(): string
     {
         return $this->_name;
     }
@@ -185,7 +185,7 @@ class Event extends ObjectModel
     /**
      * @return string yyyy-mm-dd hh:ii:ss
      */
-    function getDate(): string
+    public function getDate(): string
     {
         return $this->_date;
     }
@@ -193,7 +193,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getDay(): int
+    public function getDay(): int
     {
         return (int) date('d', strtotime($this->_date));
     }
@@ -201,7 +201,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getMonth(): int
+    public function getMonth(): int
     {
         return (int) date('m', strtotime($this->_date));
     }
@@ -209,7 +209,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getYear(): int
+    public function getYear(): int
     {
         return (int) date('Y', strtotime($this->_date));
     }
@@ -217,7 +217,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getHour(): int
+    public function getHour(): int
     {
         return (int) date('H', strtotime($this->_date));
     }
@@ -225,7 +225,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getMinute(): int
+    public function getMinute(): int
     {
         return (int) date('i', strtotime($this->_date));
     }
@@ -233,7 +233,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    function getText(): string
+    public function getText(): string
     {
         return $this->_text;
     }
@@ -241,7 +241,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    function getPrice(): string
+    public function getPrice(): string
     {
         return $this->_price;
     }
@@ -249,7 +249,7 @@ class Event extends ObjectModel
     /**
      * @return bool
      */
-    function getOnline(): bool
+    public function getOnline(): bool
     {
         return $this->_online;
     }
@@ -257,7 +257,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getIdContact(): int
+    public function getIdContact(): int
     {
         return $this->_id_contact;
     }
@@ -265,7 +265,7 @@ class Event extends ObjectModel
     /**
      * @return string|null
      */
-    function getFacebookEventId(): ?string
+    public function getFacebookEventId(): ?string
     {
         return $this->_facebook_event_id;
     }
@@ -273,7 +273,7 @@ class Event extends ObjectModel
     /**
      * @return string
      */
-    function getFacebookEventUrl(): string
+    public function getFacebookEventUrl(): string
     {
         return "https://www.facebook.com/events/{$this->_facebook_event_id}";
     }
@@ -281,7 +281,7 @@ class Event extends ObjectModel
     /**
      * @return int
      */
-    function getIdLieu(): int
+    public function getIdLieu(): int
     {
         return $this->_id_lieu;
     }
@@ -289,7 +289,7 @@ class Event extends ObjectModel
     /**
      * @return object|null
      */
-    function getLieu(): ?object
+    public function getLieu(): ?object
     {
         if (!is_null($this->getIdLieu())) {
             return Lieu::getInstance($this->getIdLieu());
@@ -302,7 +302,7 @@ class Event extends ObjectModel
      *
      * @return string
      */
-    function getUrl(): string
+    public function getUrl(): string
     {
         return HOME_URL . '/events/' . $this->getIdEvent();
     }
@@ -310,7 +310,7 @@ class Event extends ObjectModel
     /**
      * @return array
      */
-    function getGroupes(): array
+    public function getGroupes(): array
     {
         return Groupe::find(
             [
@@ -330,7 +330,7 @@ class Event extends ObjectModel
      * 
      * @return object
      */
-    function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): object
     {
         if ($this->_created_at !== $created_at) {
             $this->_created_at = $created_at;
@@ -343,7 +343,7 @@ class Event extends ObjectModel
     /**
      * @return object
      */
-    function setCreatedNow(): object
+    public function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -360,7 +360,7 @@ class Event extends ObjectModel
      *
      * @return object
      */
-    function setModifiedAt(string $modified_at): object
+    public function setModifiedAt(string $modified_at): object
     {
         if ($this->_modified_at !== $modified_at) {
             $this->_modified_at = $modified_at;
@@ -373,7 +373,7 @@ class Event extends ObjectModel
     /**
      * @return object
      */
-    function setModifiedNow(): object
+    public function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -390,7 +390,7 @@ class Event extends ObjectModel
      *
      * @return object
      */
-    function setName(string $name): object
+    public function setName(string $name): object
     {
         if ($this->_name !== $name) {
             $this->_name = $name;
@@ -405,7 +405,7 @@ class Event extends ObjectModel
      *
      * @return object
      */
-    function setFacebookEventId(string $facebook_event_id): object
+    public function setFacebookEventId(string $facebook_event_id): object
     {
         // pour les boulets qui copient/collent toute l'url
         if (preg_match('#^https?://w{0,3}\.facebook.com/events/([0-9]{1,24})/{0,1}$#', $facebook_event_id, $matches)) {
@@ -426,7 +426,7 @@ class Event extends ObjectModel
      *
      * @return object
      */
-    function setDate(string $date): object
+    public function setDate(string $date): object
     {
         if ($this->_date !== $date) {
             $this->_date = $date;
@@ -441,7 +441,7 @@ class Event extends ObjectModel
      * 
      * @return object
      */
-    function setText(string $text): object
+    public function setText(string $text): object
     {
         if ($this->_text !== $text) {
             $this->_text = $text;
@@ -456,7 +456,7 @@ class Event extends ObjectModel
      *
      * @return object
      */
-    function setPrice(string $price): object
+    public function setPrice(string $price): object
     {
         if ($this->_price !== $price) {
             $this->_price = $price;
@@ -471,7 +471,7 @@ class Event extends ObjectModel
      *
      * @return object
      */
-    function setOnline(bool $online): object
+    public function setOnline(bool $online): object
     {
         if ($this->_online !== $online) {
             $this->_online = $online;
@@ -486,7 +486,7 @@ class Event extends ObjectModel
      *
      * @return object
      */
-    function setIdLieu(int $id_lieu): object
+    public function setIdLieu(int $id_lieu): object
     {
         if ($this->_id_lieu !== $id_lieu) {
             $this->_id_lieu = $id_lieu;
@@ -501,7 +501,7 @@ class Event extends ObjectModel
      *
      * @return object
      */
-    function setIdContact(int $id_contact): object
+    public function setIdContact(int $id_contact): object
     {
         if ($this->_id_contact !== $id_contact) {
             $this->_id_contact = $id_contact;
@@ -535,7 +535,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];
@@ -645,7 +645,7 @@ class Event extends ObjectModel
     /**
      * @return bool
      */
-    function deleteFlyer(): bool
+    public function deleteFlyer(): bool
     {
         $p = self::getBasePath() . '/' . $this->getIdEvent() . '.jpg';
         if (file_exists($p)) {
@@ -669,7 +669,7 @@ class Event extends ObjectModel
      *
      * @return string|null
      */
-    function getThumbUrl(int $maxWidth = 0, bool $genIfMissing = false): ?string
+    public function getThumbUrl(int $maxWidth = 0, bool $genIfMissing = false): ?string
     {
         $sourcePath = self::getBasePath() . '/' . $this->getIdEvent() . '.jpg';
         if (!file_exists($sourcePath)) {
@@ -699,7 +699,7 @@ class Event extends ObjectModel
      *
      * @return bool
      */
-    function clearThumb(int $maxWidth = 0): bool
+    public function clearThumb(int $maxWidth = 0): bool
     {
         $uid = 'event/' . $this->getIdEvent() . '/' . $maxWidth;
         $cache = Image::getCachePath($uid);
@@ -719,7 +719,7 @@ class Event extends ObjectModel
      *
      * @return bool
      */
-    function genThumb(int $maxWidth = 0): bool
+    public function genThumb(int $maxWidth = 0): bool
     {
         if (!$maxWidth) {
             return false;
@@ -749,7 +749,7 @@ class Event extends ObjectModel
     /**
      * Suppression d'un événement
      */
-    function delete()
+    public function delete()
     {
         /* délie les tables référentes */
         $this->unlinkStyles();
@@ -769,7 +769,7 @@ class Event extends ObjectModel
      *
      * @return bool
      */
-    function linkStyle(int $id_style): bool
+    public function linkStyle(int $id_style): bool
     {
         $db = DataBase::getInstance();
 
@@ -792,7 +792,7 @@ class Event extends ObjectModel
      *
      * @return bool
      */
-    function unlinkStyle(int $id_style): bool
+    public function unlinkStyle(int $id_style): bool
     {
         $db = DataBase::getInstance();
 
@@ -810,7 +810,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    function getStyles(): array
+    public function getStyles(): array
     {
         return Style::find(
             [
@@ -825,7 +825,7 @@ class Event extends ObjectModel
      *
      * @return bool
      */
-    function unlinkStyles(): bool
+    public function unlinkStyles(): bool
     {
         $db = DataBase::getInstance();
 
@@ -844,7 +844,7 @@ class Event extends ObjectModel
      *
      * @return bool
      */
-    function linkGroupe(int $id_groupe): bool
+    public function linkGroupe(int $id_groupe): bool
     {
         $db = DataBase::getInstance();
 
@@ -867,7 +867,7 @@ class Event extends ObjectModel
      *
      * @return bool
      */
-    function unlinkGroupe(int $id_groupe): bool
+    public function unlinkGroupe(int $id_groupe): bool
     {
         $db = DataBase::getInstance();
 
@@ -885,7 +885,7 @@ class Event extends ObjectModel
      *
      * @return bool
      */
-    function unlinkGroupes(): bool
+    public function unlinkGroupes(): bool
     {
         $db = DataBase::getInstance();
 
@@ -904,7 +904,7 @@ class Event extends ObjectModel
      *
      * @return bool
      */
-    function linkStructure(int $id_structure): bool
+    public function linkStructure(int $id_structure): bool
     {
         $db = DataBase::getInstance();
 
@@ -927,7 +927,7 @@ class Event extends ObjectModel
      *
      * @return bool
      */
-    function unlinkStructure(int $id_structure): bool
+    public function unlinkStructure(int $id_structure): bool
     {
         $db = DataBase::getInstance();
 
@@ -945,7 +945,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    function getStructures(): array
+    public function getStructures(): array
     {
         return Structure::find(
             [
@@ -960,7 +960,7 @@ class Event extends ObjectModel
      *
      * @return bool
      */
-    function unlinkStructures(): bool
+    public function unlinkStructures(): bool
     {
         $db = DataBase::getInstance();
 
@@ -981,7 +981,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    static function getEventsForAMonth(int $year, int $month)
+    public static function getEventsForAMonth(int $year, int $month)
     {
         $db = DataBase::getInstance();
 
@@ -1007,7 +1007,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    function getPhotos(): array
+    public function getPhotos(): array
     {
         return Photo::find(
             [
@@ -1022,7 +1022,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    function getVideos(): array
+    public function getVideos(): array
     {
         return Video::find(
             [
@@ -1037,7 +1037,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    function getAudios(): array
+    public function getAudios(): array
     {
         return Audio::find(
             [
@@ -1052,7 +1052,7 @@ class Event extends ObjectModel
      *
      * @return array
      */
-    static function getAdHocEventsBySeason(): array
+    public static function getAdHocEventsBySeason(): array
     {
         $events = self::find(
             [

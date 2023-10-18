@@ -22,7 +22,7 @@ class Email
      *
      * @return bool true if email is valid
      */
-    static function validate(string $email): bool
+    public static function validate(string $email): bool
     {
         if (preg_match(EMAIL_VALIDATE_REGEXP, $email)) {
             return true;
@@ -41,7 +41,7 @@ class Email
      *
      * @todo autre modes de cryptages
      */
-    static function crypt(string $email, string $mode = '1')
+    public static function crypt(string $email, string $mode = '1')
     {
         $str    = '';
         $length = mb_strlen($email);
@@ -69,7 +69,7 @@ class Email
      *
      * @return bool
      */
-    static function send($to = '', string $subject = 'sans sujet', string $tplName = 'default', array $data = [], string $attachment = null): bool
+    public static function send($to = '', string $subject = 'sans sujet', string $tplName = 'default', array $data = [], string $attachment = null): bool
     {
         $subject = trim($subject);
 

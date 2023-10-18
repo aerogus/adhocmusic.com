@@ -31,21 +31,21 @@ abstract class ObjectModel
      *
      * @var string
      */
-    protected static $_table = '';
+    protected static string $_table = '';
 
     /**
      * L'objet peut-il être mis en cache ?
      *
      * @var bool
      */
-    protected static $_cachable = true;
+    protected static bool $_cachable = true;
 
     /**
      * Identifiant unique d'objet
      *
      * @var string
      */
-    protected $_object_id = '';
+    protected string $_object_id = '';
 
     /**
      * Liste des attributs de l'objet
@@ -68,13 +68,13 @@ abstract class ObjectModel
 
     /* db adhoc */
     /* todo retirer tous ces trucs en dur... */
-    protected static $_db_table_appartient_a   = 'adhoc_appartient_a';
-    protected static $_db_table_event_style    = 'adhoc_event_style';
-    protected static $_db_table_forums         = 'adhoc_forum_public_message';
-    protected static $_db_table_groupe_style   = 'adhoc_groupe_style';
-    protected static $_db_table_organise_par   = 'adhoc_organise_par';
-    protected static $_db_table_participe_a    = 'adhoc_participe_a';
-    protected static $_db_table_video_groupe   = 'adhoc_video_groupe';
+    protected static string $_db_table_appartient_a   = 'adhoc_appartient_a';
+    protected static string $_db_table_event_style    = 'adhoc_event_style';
+    protected static string $_db_table_forums         = 'adhoc_forum_public_message';
+    protected static string $_db_table_groupe_style   = 'adhoc_groupe_style';
+    protected static string $_db_table_organise_par   = 'adhoc_organise_par';
+    protected static string $_db_table_participe_a    = 'adhoc_participe_a';
+    protected static string $_db_table_video_groupe   = 'adhoc_video_groupe';
 
     /**
      * @param bool $fusion fusion
@@ -94,7 +94,7 @@ abstract class ObjectModel
      *
      * @param mixed $id id
      */
-    function __construct($id = null)
+    public function __construct($id = null)
     {
         if (!is_null($id)) {
             if (is_array($id)) {
@@ -131,7 +131,7 @@ abstract class ObjectModel
      *
      * @return string
      */
-    static function getDbTable(): string
+    public static function getDbTable(): string
     {
         return static::$_table;
     }
@@ -141,7 +141,7 @@ abstract class ObjectModel
      *
      * @return string|array
      */
-    static function getDbPk()
+    public static function getDbPk()
     {
         return static::$_pk;
     }
@@ -153,7 +153,7 @@ abstract class ObjectModel
      *
      * @return object
      */
-    static function getInstance($id): object
+    public static function getInstance($id): object
     {
         if (is_null(static::$_instance)) {
             // pas du tout d'instance: on en crée une, le constructeur ira s'enregistrer
@@ -184,7 +184,7 @@ abstract class ObjectModel
     /**
      * @return bool
      */
-    static function deleteInstance(): bool
+    public static function deleteInstance(): bool
     {
         if (isset(static::$_instance)) {
             static::$_instance = null;
@@ -196,7 +196,7 @@ abstract class ObjectModel
     /**
      * @return bool
      */
-    static function isCachable(): bool
+    public static function isCachable(): bool
     {
         return static::$_cachable;
     }
@@ -204,7 +204,7 @@ abstract class ObjectModel
     /**
      * @return string
      */
-    function getObjectId(): string
+    public function getObjectId(): string
     {
         return $this->_object_id;
     }
@@ -216,7 +216,7 @@ abstract class ObjectModel
      *
      * @return int ou string ou array si clé primaire multiple
      */
-    function getId()
+    public function getId()
     {
         if (is_array(static::$_pk)) {
             $pks = [];
@@ -239,7 +239,7 @@ abstract class ObjectModel
      *
      * @return object
      */
-    function setId($id)
+    public function setId($id)
     {
         if (is_array($id)) {
             foreach ($id as $key => $val) {
@@ -257,7 +257,7 @@ abstract class ObjectModel
     /**
      *
      */
-    function save()
+    public function save()
     {
         $db = DataBase::getInstance();
 
@@ -399,7 +399,7 @@ abstract class ObjectModel
      *
      * @return array
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];
@@ -440,7 +440,7 @@ abstract class ObjectModel
      * @return array
      * @throws Exception
      */
-    static function findAll(): array
+    public static function findAll(): array
     {
         // version factorisée
         /*
@@ -483,7 +483,7 @@ abstract class ObjectModel
     /**
      *
      */
-    function loadObjectId()
+    public function loadObjectId()
     {
         if (is_array(static::$_pk)) {
             $this->_object_id = get_called_class() . ':' . implode(':', array_values($this->getId())); // ex: WorldRegion:FR:96
@@ -495,7 +495,7 @@ abstract class ObjectModel
     /**
      *
      */
-    static function resetAutoIncrement()
+    public static function resetAutoIncrement()
     {
         DataBase::getInstance()
             ->query("ALTER TABLE `" . static::getDbTable() . "` AUTO_INCREMENT = 1");
@@ -506,7 +506,7 @@ abstract class ObjectModel
      *
      * @return string
      */
-    function __toString(): string
+    public function __toString(): string
     {
         $out  = '';
         $out .= 'class     : ' . __CLASS__ . "\n";
@@ -524,7 +524,7 @@ abstract class ObjectModel
      *
      * @return bool
      */
-    function delete()
+    public function delete()
     {
         $db = DataBase::getInstance();
 
@@ -547,7 +547,7 @@ abstract class ObjectModel
      *
      * @return int
      */
-    static function count(): int
+    public static function count(): int
     {
         $db = DataBase::getInstance();
 
@@ -564,7 +564,7 @@ abstract class ObjectModel
      * @return int
      * @throws Exception
      */
-    static function countMy(): int
+    public static function countMy(): int
     {
         if (empty($_SESSION['membre'])) {
             throw new Exception('non identifié');

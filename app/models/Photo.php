@@ -21,22 +21,22 @@ class Photo extends Media
     /**
      * @var string
      */
-    protected static $_pk = 'id_photo';
+    protected static string $_pk = 'id_photo';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_photo';
+    protected static string $_table = 'adhoc_photo';
 
     /**
      * @var int
      */
-    protected $_id_photo = 0;
+    protected int $_id_photo = 0;
 
     /**
      * @var string
      */
-    protected $_credits = '';
+    protected string $_credits = '';
 
     /**
      * Liste des attributs de l'objet
@@ -61,7 +61,7 @@ class Photo extends Media
     /**
      * @return string
      */
-    static function getBaseUrl(): string
+    public static function getBaseUrl(): string
     {
         return MEDIA_URL . '/photo';
     }
@@ -69,7 +69,7 @@ class Photo extends Media
     /**
      * @return string
      */
-    static function getBasePath(): string
+    public static function getBasePath(): string
     {
         return MEDIA_PATH . '/photo';
     }
@@ -77,7 +77,7 @@ class Photo extends Media
     /**
      * @return int
      */
-    function getIdPhoto(): int
+    public function getIdPhoto(): int
     {
         return $this->_id_photo;
     }
@@ -85,7 +85,7 @@ class Photo extends Media
     /**
      * @return string
      */
-    function getPseudo(): string
+    public function getPseudo(): string
     {
         return Membre::getInstance($this->getIdContact())->getPseudo();
     }
@@ -93,7 +93,7 @@ class Photo extends Media
     /**
      * @return string
      */
-    function getCredits(): string
+    public function getCredits(): string
     {
         return $this->_credits;
     }
@@ -101,7 +101,7 @@ class Photo extends Media
     /**
      * @return string
      */
-    function getUrl(): string
+    public function getUrl(): string
     {
         return HOME_URL . '/photos/' . $this->getIdPhoto();
     }
@@ -115,7 +115,7 @@ class Photo extends Media
      *
      * @return object
      */
-    function setCredits(string $credits): object
+    public function setCredits(string $credits): object
     {
         if ($this->_credits !== $credits) {
             $this->_credits = $credits;
@@ -132,7 +132,7 @@ class Photo extends Media
      *
      * @return bool
      */
-    function delete(): bool
+    public function delete(): bool
     {
         if (parent::delete()) {
             $thumbWidths = Conf::getInstance()->get('photo')['thumb_width'];
@@ -169,7 +169,7 @@ class Photo extends Media
      *
      * @return string|null
      */
-    function getThumbUrl(int $maxWidth = 0, bool $genIfMissing = false): ?string
+    public function getThumbUrl(int $maxWidth = 0, bool $genIfMissing = false): ?string
     {
         $sourcePath = self::getBasePath() . '/' . $this->getIdPhoto() . '.jpg';
         if (!file_exists($sourcePath)) {
@@ -195,7 +195,7 @@ class Photo extends Media
     /**
      * @return bool
      */
-    function clearThumb(int $maxWidth = 0): bool
+    public function clearThumb(int $maxWidth = 0): bool
     {
         $uid = 'photo/' . $this->getIdPhoto() . '/' . $maxWidth;
         $cache = Image::getCachePath($uid);
@@ -215,7 +215,7 @@ class Photo extends Media
      *
      * @return bool
      */
-    function genThumb(int $maxWidth = 0): bool
+    public function genThumb(int $maxWidth = 0): bool
     {
         if (!$maxWidth) {
             return false;
@@ -249,7 +249,7 @@ class Photo extends Media
      *
      * @return bool
      */
-    static function fixOrientation(string $filename): bool
+    public static function fixOrientation(string $filename): bool
     {
         if (getimagesize($filename)['mime'] !== 'image/jpeg') {
             return false;
@@ -283,7 +283,7 @@ class Photo extends Media
      *
      * @return bool
      */
-    static function rotate(string $filename, int $angle): bool
+    public static function rotate(string $filename, int $angle): bool
     {
         if (!in_array($angle, [-90, 90, 180])) {
             return false;

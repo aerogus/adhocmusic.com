@@ -18,27 +18,27 @@ class Contact extends ObjectModel
     /**
      * @var string
      */
-    protected static $_pk = 'id_contact';
+    protected static string $_pk = 'id_contact';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_contact';
+    protected static string $_table = 'adhoc_contact';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected $_id_contact = null;
+    protected ?int $_id_contact = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_email = null;
+    protected ?string $_email = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_lastnl = null;
+    protected ?string $_lastnl = null;
 
     /**
      * Liste des attributs de l'objet
@@ -83,7 +83,7 @@ class Contact extends ObjectModel
     /**
      * @return int|null
      */
-    function getIdContact(): ?int
+    public function getIdContact(): ?int
     {
         return $this->_id_contact;
     }
@@ -91,7 +91,7 @@ class Contact extends ObjectModel
     /**
      * @return string|null
      */
-    function getEmail(): ?string
+    public function getEmail(): ?string
     {
         return $this->_email;
     }
@@ -103,7 +103,7 @@ class Contact extends ObjectModel
      *
      * @return string|null
      */
-    static function getEmailById(int $id_contact)
+    public static function getEmailById(int $id_contact)
     {
         $db = DataBase::getInstance();
 
@@ -122,7 +122,7 @@ class Contact extends ObjectModel
      *
      * @return string|null
      */
-    function getLastnl(): ?string
+    public function getLastnl(): ?string
     {
         return $this->_lastnl;
     }
@@ -136,7 +136,7 @@ class Contact extends ObjectModel
      * @return int
      * @throws Exception
      */
-    static function getIdByEmail(string $email): int
+    public static function getIdByEmail(string $email): int
     {
         if (!Email::validate($email)) {
             throw new Exception('email syntaxiquement incorrect');
@@ -158,8 +158,8 @@ class Contact extends ObjectModel
      * @return bool
      * @deprecated doublon avec getIdByEmail
      */
-     static function isEmailFound(string $email): bool
-     {
+    public static function isEmailFound(string $email): bool
+    {
          $db = DataBase::getInstance();
 
          $sql = "SELECT `id_contact` "
@@ -180,7 +180,7 @@ class Contact extends ObjectModel
      *
      * @return object
      */
-    function setEmail(string $email): object
+    public function setEmail(string $email): object
     {
         if ($this->_email !== $email) {
             $this->_email = $email;
@@ -195,7 +195,7 @@ class Contact extends ObjectModel
      *
      * @return object
      */
-    function setLastnl(string $lastnl): object
+    public function setLastnl(string $lastnl): object
     {
         if ($this->_lastnl !== $lastnl) {
             $this->_lastnl = $lastnl;
@@ -208,7 +208,7 @@ class Contact extends ObjectModel
     /**
      * @return object
      */
-    function setLastnlNow(): object
+    public function setLastnlNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -249,7 +249,7 @@ class Contact extends ObjectModel
      *
      * @return int
      */
-    function delete(): int
+    public function delete(): int
     {
         $db = DataBase::getInstance();
 
@@ -264,7 +264,7 @@ class Contact extends ObjectModel
     /**
      * Sauve en DB table contact
      */
-    function save()
+    public function save()
     {
         $db = DataBase::getInstance();
 

@@ -18,32 +18,32 @@ class MembreAdhoc extends Membre
     /**
      * @var string
      */
-    protected static $_pk = 'id_contact';
+    protected static string $_pk = 'id_contact';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_membre_adhoc';
+    protected static string $_table = 'adhoc_membre_adhoc';
 
     /**
      * @var string
      */
-    protected $_function = '';
+    protected string $_function = '';
 
     /**
      * @var string
      */
-    protected $_birth_date = '';
+    protected string $_birth_date = '';
 
     /**
      * @var bool
      */
-    protected $_active = false;
+    protected bool $_active = false;
 
     /**
      * @var int
      */
-    protected $_rank = 0;
+    protected int $_rank = 0;
 
     /**
      * Liste des attributs de l'objet
@@ -74,7 +74,7 @@ class MembreAdhoc extends Membre
     /**
      * @return string
      */
-    static function getBaseUrl(): string
+    public static function getBaseUrl(): string
     {
         return MEDIA_URL . '/membre/ca';
     }
@@ -82,7 +82,7 @@ class MembreAdhoc extends Membre
     /**
      * @return string
      */
-    static function getBasePath(): string
+    public static function getBasePath(): string
     {
         return MEDIA_PATH . '/membre/ca';
     }
@@ -116,7 +116,7 @@ class MembreAdhoc extends Membre
     /**
      * @return string
      */
-    function getFunction(): string
+    public function getFunction(): string
     {
         return $this->_function;
     }
@@ -124,7 +124,7 @@ class MembreAdhoc extends Membre
     /**
      * @return string
      */
-    function getBirthDate(): string
+    public function getBirthDate(): string
     {
         return $this->_birth_date;
     }
@@ -132,7 +132,7 @@ class MembreAdhoc extends Membre
     /**
      * @return bool
      */
-    function getActive(): bool
+    public function getActive(): bool
     {
         return $this->_active;
     }
@@ -140,7 +140,7 @@ class MembreAdhoc extends Membre
     /**
      * @return int
      */
-    function getRank(): int
+    public function getRank(): int
     {
         return $this->_rank;
     }
@@ -154,7 +154,7 @@ class MembreAdhoc extends Membre
      *
      * @return object
      */
-    function setFunction(string $function): object
+    public function setFunction(string $function): object
     {
         if ($this->_function !== $function) {
             $this->_function = $function;
@@ -169,7 +169,7 @@ class MembreAdhoc extends Membre
      *
      * @return object
      */
-    function setBirthDate(string $birth_date): object
+    public function setBirthDate(string $birth_date): object
     {
         if ($this->_birth_date !== $birth_date) {
             $this->_birth_date = $birth_date;
@@ -184,7 +184,7 @@ class MembreAdhoc extends Membre
      *
      * @return object
      */
-    function setActive(bool $active): object
+    public function setActive(bool $active): object
     {
         if ($this->_active !== $active) {
             $this->_active = $active;
@@ -199,7 +199,7 @@ class MembreAdhoc extends Membre
      *
      * @return object
      */
-    function setRank(int $rank): object
+    public function setRank(int $rank): object
     {
         if ($this->_rank !== $rank) {
             $this->_rank = $rank;
@@ -218,7 +218,7 @@ class MembreAdhoc extends Membre
      *
      * @return array
      */
-    static function getStaff(bool $active = true): array
+    public static function getStaff(bool $active = true): array
     {
         $db = DataBase::getInstance();
 
@@ -278,7 +278,7 @@ class MembreAdhoc extends Membre
     /**
      * Sauve en DB tables contact, membre et membre_adhoc
      */
-    function save()
+    public function save()
     {
         $db = DataBase::getInstance();
 

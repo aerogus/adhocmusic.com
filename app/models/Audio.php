@@ -21,17 +21,17 @@ class Audio extends Media
     /**
      * @var string
      */
-    protected static $_pk = 'id_audio';
+    protected static string $_pk = 'id_audio';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_audio';
+    protected static string $_table = 'adhoc_audio';
 
     /**
      * @var int
      */
-    protected $_id_audio = 0;
+    protected int $_id_audio = 0;
 
     /**
      * Liste des attributs de l'objet
@@ -55,7 +55,7 @@ class Audio extends Media
     /**
      * @return string
      */
-    static function getBaseUrl(): string
+    public static function getBaseUrl(): string
     {
         return MEDIA_URL . '/audio';
     }
@@ -63,7 +63,7 @@ class Audio extends Media
     /**
      * @return string
      */
-    static function getBasePath(): string
+    public static function getBasePath(): string
     {
         return MEDIA_PATH . '/audio';
     }
@@ -71,7 +71,7 @@ class Audio extends Media
     /**
      * @return int
      */
-    function getIdAudio(): int
+    public function getIdAudio(): int
     {
         return $this->_id_audio;
     }
@@ -79,7 +79,7 @@ class Audio extends Media
     /**
      * @return string
      */
-    function getUrl(): string
+    public function getUrl(): string
     {
         return HOME_URL . '/audios/' . $this->getIdAudio();
     }
@@ -87,7 +87,7 @@ class Audio extends Media
     /**
      * @return string
      */
-    function getDirectMp3Url(): ?string
+    public function getDirectMp3Url(): ?string
     {
         if (file_exists(self::getBasePath() . '/' . $this->getId() . '.mp3')) {
             return self::getBaseUrl() . '/' . $this->getId() . '.mp3';
@@ -98,7 +98,7 @@ class Audio extends Media
     /**
      * @return string|null
      */
-    function getDirectAacUrl(): ?string
+    public function getDirectAacUrl(): ?string
     {
         if (file_exists(self::getBasePath() . '/' . $this->getId() . '.m4a')) {
             return self::getBaseUrl() . '/' . $this->getId() . '.m4a';
@@ -118,7 +118,7 @@ class Audio extends Media
      *
      * @return bool
      */
-    function delete(): bool
+    public function delete(): bool
     {
         if (parent::delete()) {
             $mp3File = self::getBasePath() . '/' . $this->getId() . '.mp3';

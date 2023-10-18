@@ -2,7 +2,8 @@
 
 namespace Reference;
 
-use \DataBase;
+use DataBase;
+use Reference;
 
 /**
  * Classe WorldRegion
@@ -10,7 +11,7 @@ use \DataBase;
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class WorldRegion extends \Reference
+class WorldRegion extends Reference
 {
     /**
      * Instance de l'objet
@@ -20,29 +21,29 @@ class WorldRegion extends \Reference
     protected static $_instance = null;
 
     /**
-     * @var string
+     * @var string|array<string>
      */
-    protected static $_pk = ['id_country', 'id_region'];
+    protected static array|string $_pk = ['id_country', 'id_region'];
 
     /**
      * @var string
      */
-    protected static $_table = 'geo_world_region';
+    protected static string $_table = 'geo_world_region';
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_id_country = null;
+    protected ?string $_id_country = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_id_region = null;
+    protected ?string $_id_region = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_name = null;
+    protected ?string $_name = null;
 
     /**
      * Liste des attributs de l'objet
@@ -60,7 +61,7 @@ class WorldRegion extends \Reference
     /**
      * @return string
      */
-    function getIdCountry(): string
+    public function getIdCountry(): string
     {
         return $this->_id_country;
     }
@@ -68,7 +69,7 @@ class WorldRegion extends \Reference
     /**
      * @return string
      */
-    function getIdRegion(): string
+    public function getIdRegion(): string
     {
         return $this->_id_region;
     }
@@ -92,7 +93,7 @@ class WorldRegion extends \Reference
      *
      * @return array<WorldRegion>
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];

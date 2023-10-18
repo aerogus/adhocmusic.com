@@ -15,8 +15,8 @@ class Image
     /**
      * @var string
      */
-    protected $_file_sou = '';
-    protected $_file_res = '';
+    protected string $_file_sou = '';
+    protected string $_file_res = '';
 
     /**
      * @var mixed
@@ -90,7 +90,7 @@ class Image
      *
      * @param string $file file
      */
-    function __construct(string $file = null)
+    public function __construct(string $file = null)
     {
         if (!is_null($file)) {
             $this->_file_sou = $file;
@@ -119,7 +119,7 @@ class Image
      *
      * @return object
      */
-    function init(int $width = 16, int $height = 16, string $color = null): object
+    public function init(int $width = 16, int $height = 16, string $color = null): object
     {
         $this->_handle = imagecreatetruecolor($width, $height);
 
@@ -148,7 +148,7 @@ class Image
      * @return bool
      * @throws Exception
      */
-    function read(): bool
+    public function read(): bool
     {
         if ($this->_file_sou && file_exists($this->_file_sou) && is_readable($this->_file_sou)) {
             $this->_type = exif_imagetype($this->_file_sou);
@@ -204,7 +204,7 @@ class Image
      *
      * @return object
      */
-    function setZone(int $x1, int $y1, int $x2, int $y2): object
+    public function setZone(int $x1, int $y1, int $x2, int $y2): object
     {
         if (($x1 >= 0) && ($x2 > $x1) && ($this->_width > $x2) &&
             ($y1 >= 0) && ($y2 > $y1) && ($this->_height > $y2)
@@ -227,7 +227,7 @@ class Image
      *
      * @return object
      */
-    function setZoom(bool $zoom = true): object
+    public function setZoom(bool $zoom = true): object
     {
         if ($zoom) {
 
@@ -269,7 +269,7 @@ class Image
     /**
      * Sélection de toute l'image
      */
-    function selectAll()
+    public function selectAll()
     {
         $this->setZone(0, 0, $this->_width - 1, $this->_height - 1);
     }
@@ -281,7 +281,7 @@ class Image
      *
      * @return object
      */
-    function setDestFile(string $file): object
+    public function setDestFile(string $file): object
     {
         $this->_file_res = $file;
 
@@ -299,7 +299,7 @@ class Image
      *
      * @return object
      */
-    function setColor(int $red = 0, int $green = 0, int $blue = 0): object
+    public function setColor(int $red = 0, int $green = 0, int $blue = 0): object
     {
         $this->_color = [
             'r' => $red,
@@ -318,7 +318,7 @@ class Image
      *
      * @return object
      */
-    function setHexColor(string $hexCode): object
+    public function setHexColor(string $hexCode): object
     {
         $red   = hexdec(substr($hexCode, 0, 2));
         $green = hexdec(substr($hexCode, 2, 2));
@@ -339,7 +339,7 @@ class Image
      *
      * @return object
      */
-    function setType(int $type): object
+    public function setType(int $type): object
     {
         $this->_type = $type;
 
@@ -353,7 +353,7 @@ class Image
      *
      * @return object
      */
-    function setMaxWidth(int $maxWidth): object
+    public function setMaxWidth(int $maxWidth): object
     {
         $this->_max_width = $maxWidth;
 
@@ -367,7 +367,7 @@ class Image
      *
      * @return object
      */
-    function setMaxHeight(int $maxHeight): object
+    public function setMaxHeight(int $maxHeight): object
     {
         $this->_max_height = $maxHeight;
 
@@ -378,7 +378,7 @@ class Image
      * Redimensionnement de l'image
      * handle -> handle2
      */
-    function resize()
+    public function resize()
     {
         if ($this->_max_height && $this->_max_width && $this->_border) {
             $width = $this->_max_width;
@@ -410,7 +410,7 @@ class Image
      * calcul aussi l'offset si bordure
      * charge new_l et new_h
      */
-    function calculTaille()
+    public function calculTaille()
     {
         /**
          * Calcul de la nouvelle taille de l'image
@@ -478,7 +478,7 @@ class Image
      *
      * @return object
      */
-    function setKeepRatio(bool $bool): object
+    public function setKeepRatio(bool $bool): object
     {
         $this->_keep_ratio = $bool;
 
@@ -492,7 +492,7 @@ class Image
      *
      * @return object
      */
-    function setBorder(bool $bool): object
+    public function setBorder(bool $bool): object
     {
         $this->_border = $bool;
 
@@ -506,7 +506,7 @@ class Image
     /**
      * Affiche l'image à l'écran
      */
-    function display()
+    public function display()
     {
         $this->calculTaille();
         $this->resize();
@@ -542,7 +542,7 @@ class Image
     /**
      * Écrit la nouvelle image sur disque
      */
-    function write()
+    public function write()
     {
         $this->calculTaille();
         $this->resize();
@@ -554,7 +554,7 @@ class Image
      *
      * @return string
      */
-    function get()
+    public function get()
     {
         $this->calculTaille();
         $this->resize();
@@ -606,7 +606,7 @@ class Image
      *
      * @return string
      */
-    static function getCachePath(string $uid): string
+    public static function getCachePath(string $uid): string
     {
         $hash = md5(trim($uid));
 
@@ -625,7 +625,7 @@ class Image
      *
      * @return string
      */
-    static function getCacheUrl(string $uid): string
+    public static function getCacheUrl(string $uid): string
     {
         $hash = md5(trim($uid));
 
@@ -645,7 +645,7 @@ class Image
      *
      * @return bool
      */
-    static function writeCache(string $uid, string $content): bool
+    public static function writeCache(string $uid, string $content): bool
     {
         $hash = md5(trim($uid));
 

@@ -20,26 +20,26 @@ abstract class Reference extends ObjectModel
      *
      * @var string
      */
-    protected static $_pk = '';
+    protected static string $_pk = '';
 
     /**
      * [à étendre dans l'objet fils]
      *
      * @var string
      */
-    protected static $_table = '';
+    protected static string $_table = '';
 
     /**
      * @var string
      */
-    protected $_name = '';
+    protected string $_name = '';
 
     /* début getters */
 
     /**
      * @return string
      */
-    function getName(): string
+    public function getName(): string
     {
         return $this->_name;
     }
@@ -53,7 +53,7 @@ abstract class Reference extends ObjectModel
      *
      * @return object
      */
-    function setName(string $name): object
+    public function setName(string $name): object
     {
         if ($this->_name !== $name) {
             $this->_name = $name;

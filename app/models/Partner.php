@@ -18,32 +18,32 @@ class Partner extends ObjectModel
     /**
      * @var string
      */
-    protected static $_pk = 'id_partner';
+    protected static string $_pk = 'id_partner';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_partner';
+    protected static string $_table = 'adhoc_partner';
 
     /**
      * @var int
      */
-    protected $_id_partner = 0;
+    protected int $_id_partner = 0;
 
     /**
      * @var string
      */
-    protected $_title = '';
+    protected string $_title = '';
 
     /**
      * @var string
      */
-    protected $_description = '';
+    protected string $_description = '';
 
     /**
      * @var string
      */
-    protected $_url = '';
+    protected string $_url = '';
 
     /**
      * Liste des attributs de l'objet
@@ -62,7 +62,7 @@ class Partner extends ObjectModel
     /**
      * @return string
      */
-    static function getBaseUrl(): string
+    public static function getBaseUrl(): string
     {
         return MEDIA_URL . '/partner';
     }
@@ -70,7 +70,7 @@ class Partner extends ObjectModel
     /**
      * @return string
      */
-    static function getBasePath(): string
+    public static function getBasePath(): string
     {
         return MEDIA_PATH . '/partner';
     }
@@ -78,7 +78,7 @@ class Partner extends ObjectModel
     /**
      * @return string
      */
-    function getTitle(): string
+    public function getTitle(): string
     {
         return $this->_title;
     }
@@ -86,7 +86,7 @@ class Partner extends ObjectModel
     /**
      * @return string
      */
-    function getDescription(): string
+    public function getDescription(): string
     {
         return $this->_description;
     }
@@ -94,7 +94,7 @@ class Partner extends ObjectModel
     /**
      * @return string
      */
-    function getUrl(): string
+    public function getUrl(): string
     {
         return $this->_url;
     }
@@ -102,7 +102,7 @@ class Partner extends ObjectModel
     /**
      * @return string|null
      */
-    function getIconUrl(): ?string
+    public function getIconUrl(): ?string
     {
         if (file_exists(self::getBasePath() . '/' . $this->getId() . '.png')) {
             return self::getBaseUrl() . '/' . $this->getId() . '.png';
@@ -119,7 +119,7 @@ class Partner extends ObjectModel
      *
      * @return object
      */
-    function setTitle(string $title): object
+    public function setTitle(string $title): object
     {
         if ($this->_title !== $title) {
             $this->_title = $title;
@@ -134,7 +134,7 @@ class Partner extends ObjectModel
      *
      * @return object
      */
-    function setDescription(string $description): object
+    public function setDescription(string $description): object
     {
         if ($this->_description !== $description) {
             $this->_description = $description;
@@ -149,7 +149,7 @@ class Partner extends ObjectModel
      *
      * @return object
      */
-    function setUrl(string $url): object
+    public function setUrl(string $url): object
     {
         if ($this->_url !== $url) {
             $this->_url = $url;

@@ -25,7 +25,7 @@ class Trail
     /**
      * @return object
      */
-    static function getInstance(): object
+    public static function getInstance(): object
     {
         if (self::$_instance instanceof Trail) {
             return self::$_instance;
@@ -36,7 +36,7 @@ class Trail
     /**
      *
      */
-    function __construct()
+    public function __construct()
     {
         $this->addStep('Accueil', '/', "Retour à l'accueil");
         self::$_instance = $this;
@@ -51,7 +51,7 @@ class Trail
      * 
      * @return Trail
      */
-    function addStep(string $title, string $link = '', string $description = ''): Trail
+    public function addStep(string $title, string $link = '', string $description = ''): Trail
     {
         $this->_path[] = [
             'title' => $title,
@@ -66,7 +66,7 @@ class Trail
      *
      * @return array<int,array<string,string>>
      */
-    function getPath(): array
+    public function getPath(): array
     {
         return $this->_path;
     }

@@ -18,57 +18,57 @@ class CMS extends ObjectModel
     /**
      * @var string
      */
-    protected static $_pk = 'id_cms';
+    protected static string $_pk = 'id_cms';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_cms';
+    protected static string $_table = 'adhoc_cms';
 
     /**
      * @var int
      */
-    protected $_id_cms = 0;
+    protected int $_id_cms = 0;
 
     /**
      * @var string
      */
-    protected $_alias = '';
+    protected string $_alias = '';
 
     /**
      * @var string
      */
-    protected $_title = '';
+    protected string $_title = '';
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_created_at = null;
+    protected ?string $_created_at = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_modified_at = null;
+    protected ?string $_modified_at = null;
 
     /**
      * @var array
      */
-    protected $_breadcrumb = [];
+    protected array $_breadcrumb = [];
 
     /**
      * @var string
      */
-    protected $_content = '';
+    protected string $_content = '';
 
     /**
      * @var bool
      */
-    protected $_online = false;
+    protected bool $_online = false;
 
     /**
      * @var int
      */
-    protected $_auth = 0;
+    protected int $_auth = 0;
 
     /**
      * Liste des attributs de l'objet
@@ -92,7 +92,7 @@ class CMS extends ObjectModel
     /**
      * @return int
      */
-    function getIdCMS(): int
+    public function getIdCMS(): int
     {
         return $this->_id_cms;
     }
@@ -100,7 +100,7 @@ class CMS extends ObjectModel
     /**
      * @return string
      */
-    function getAlias(): string
+    public function getAlias(): string
     {
         return $this->_alias;
     }
@@ -108,7 +108,7 @@ class CMS extends ObjectModel
     /**
      * @return string
      */
-    function getTitle(): string
+    public function getTitle(): string
     {
         return $this->_title;
     }
@@ -116,7 +116,7 @@ class CMS extends ObjectModel
     /**
      * @return string|null
      */
-    function getCreatedAt(): ?string
+    public function getCreatedAt(): ?string
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return $this->_created_at;
@@ -127,7 +127,7 @@ class CMS extends ObjectModel
     /**
      * @return int|null
      */
-    function getCreatedAtTs(): ?int
+    public function getCreatedAtTs(): ?int
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return strtotime($this->_created_at);
@@ -138,7 +138,7 @@ class CMS extends ObjectModel
     /**
      * @return string|null
      */
-    function getModifiedAt(): ?string
+    public function getModifiedAt(): ?string
     {
         if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
             return $this->_modified_at;
@@ -149,7 +149,7 @@ class CMS extends ObjectModel
     /**
      * @return int|null
      */
-    function getModifiedAtTs(): ?int
+    public function getModifiedAtTs(): ?int
     {
         if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
             return strtotime($this->_modified_at);
@@ -160,7 +160,7 @@ class CMS extends ObjectModel
     /**
      * @return array
      */
-    function getBreadcrumb(): array
+    public function getBreadcrumb(): array
     {
         return $this->_breadcrumb;
     }
@@ -168,7 +168,7 @@ class CMS extends ObjectModel
     /**
      * @return string
      */
-    function getContent(): string
+    public function getContent(): string
     {
         return $this->_content;
     }
@@ -176,7 +176,7 @@ class CMS extends ObjectModel
     /**
      * @return bool
      */
-    function getOnline(): bool
+    public function getOnline(): bool
     {
         return $this->_online;
     }
@@ -184,7 +184,7 @@ class CMS extends ObjectModel
     /**
      * @return int
      */
-    function getAuth(): int
+    public function getAuth(): int
     {
         return $this->_auth;
     }
@@ -198,7 +198,7 @@ class CMS extends ObjectModel
      *
      * @return object
      */
-    function setAlias(string $alias): object
+    public function setAlias(string $alias): object
     {
         $alias = trim($alias);
         if ($this->_alias !== $alias) {
@@ -214,7 +214,7 @@ class CMS extends ObjectModel
      *
      * @return object
      */
-    function setTitle(string $title): object
+    public function setTitle(string $title): object
     {
         $title = trim($title);
         if ($this->_title !== $title) {
@@ -230,7 +230,7 @@ class CMS extends ObjectModel
      *
      * @return object
      */
-    function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): object
     {
         if ($this->_created_at !== $created_at) {
             $this->_created_at = $created_at;
@@ -243,7 +243,7 @@ class CMS extends ObjectModel
     /**
      * @return object
      */
-    function setCreatedNow(): object
+    public function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -260,7 +260,7 @@ class CMS extends ObjectModel
      *
      * @return object
      */
-    function setModifiedAt(string $modified_at): object
+    public function setModifiedAt(string $modified_at): object
     {
         if ($this->_modified_at !== $modified_at) {
             $this->_modified_at = $modified_at;
@@ -273,7 +273,7 @@ class CMS extends ObjectModel
     /**
      * @return object
      */
-    function setModifiedNow(): object
+    public function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -290,7 +290,7 @@ class CMS extends ObjectModel
      *
      * @return object
      */
-    function setBreadcrumb(array $breadcrumb): object
+    public function setBreadcrumb(array $breadcrumb): object
     {
         if ($this->_breadcrumb !== $breadcrumb) {
             $this->_breadcrumb = print_r($breadcrumb, true);
@@ -305,7 +305,7 @@ class CMS extends ObjectModel
      *
      * @return object
      */
-    function setContent(string $content): object
+    public function setContent(string $content): object
     {
         $content = trim($content);
         if ($this->_content !== $content) {
@@ -321,7 +321,7 @@ class CMS extends ObjectModel
      *
      * @return object
      */
-    function setOnline(bool $online): object
+    public function setOnline(bool $online): object
     {
         if ($this->_online !== $online) {
             $this->_online = $online;
@@ -336,7 +336,7 @@ class CMS extends ObjectModel
      *
      * @return object
      */
-    function setAuth(int $auth): object
+    public function setAuth(int $auth): object
     {
         if ($this->_auth !== $auth) {
             $this->_auth = $auth;
@@ -364,7 +364,7 @@ class CMS extends ObjectModel
      *
      * @return array
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];
@@ -416,7 +416,7 @@ class CMS extends ObjectModel
      *
      * @return int|null
      */
-    static function getIdByAlias(string $alias): ?int
+    public static function getIdByAlias(string $alias): ?int
     {
         if ($cmss = self::find(
             [

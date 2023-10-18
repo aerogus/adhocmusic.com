@@ -2,13 +2,15 @@
 
 namespace Reference;
 
+use Reference;
+
 /**
  * Classe MembreType
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class MembreType extends \Reference
+class MembreType extends Reference
 {
     /**
      * Instance de l'objet
@@ -20,17 +22,17 @@ class MembreType extends \Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_membre_type';
+    protected static string $_pk = 'id_membre_type';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_membre_type';
+    protected static string $_table = 'adhoc_membre_type';
 
     /**
      * @var int
      */
-    protected $_id_membre_type = 0;
+    protected int $_id_membre_type = 0;
 
     /**
      * Liste des attributs de l'objet

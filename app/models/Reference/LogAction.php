@@ -2,13 +2,15 @@
 
 namespace Reference;
 
+use Reference;
+
 /**
  * Actions de log
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class LogAction extends \Reference
+class LogAction extends Reference
 {
     /**
      * Instance de l'objet
@@ -20,12 +22,12 @@ class LogAction extends \Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_log_action';
+    protected static string $_pk = 'id_log_action';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_log_action';
+    protected static string $_table = 'adhoc_log_action';
 
     /**
      * @var int

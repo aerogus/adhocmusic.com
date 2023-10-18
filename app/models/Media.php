@@ -19,49 +19,49 @@ class Media extends ObjectModel
     /**
      * @var int
      */
-    protected $_id_contact = 0;
+    protected int $_id_contact = 0;
 
     /**
-     * @var int|null
+     * @var ?int
      */
-    protected $_id_groupe = null;
+    protected ?int $_id_groupe = null;
 
     /**
-     * @var int|null
+     * @var ?int
      */
-    protected $_id_lieu = null;
+    protected ?int $_id_lieu = null;
 
     /**
-     * @var int|null
+     * @var ?int
      */
-    protected $_id_event = null;
-
-    /**
-     * @var string
-     */
-    protected $_name = '';
+    protected ?int $_id_event = null;
 
     /**
      * @var string
      */
-    protected $_created_at = null;
+    protected string $_name = '';
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_modified_at = null;
+    protected ?string $_created_at = null;
+
+    /**
+     * @var ?string
+     */
+    protected ?string $_modified_at = null;
 
     /**
      * @var bool
      */
-    protected $_online = false;
+    protected bool $_online = false;
 
     /* début getters communs */
 
     /**
      * @return int
      */
-    function getIdContact(): int
+    public function getIdContact(): int
     {
         return $this->_id_contact;
     }
@@ -69,7 +69,7 @@ class Media extends ObjectModel
     /**
      * @return int|null
      */
-    function getIdGroupe(): ?int
+    public function getIdGroupe(): ?int
     {
         return $this->_id_groupe;
     }
@@ -77,7 +77,7 @@ class Media extends ObjectModel
     /**
      * @return object|null
      */
-    function getGroupe(): ?object
+    public function getGroupe(): ?object
     {
         if (is_null($this->getIdGroupe())) {
             return null;
@@ -93,7 +93,7 @@ class Media extends ObjectModel
     /**
      * @return int|null
      */
-    function getIdLieu(): ?int
+    public function getIdLieu(): ?int
     {
         return $this->_id_lieu;
     }
@@ -101,7 +101,7 @@ class Media extends ObjectModel
     /**
      * @return object|null
      */
-    function getLieu(): ?object
+    public function getLieu(): ?object
     {
         if (!is_null($this->getIdLieu())) {
             try {
@@ -116,7 +116,7 @@ class Media extends ObjectModel
     /**
      * @return int|null
      */
-    function getIdEvent(): ?int
+    public function getIdEvent(): ?int
     {
         return $this->_id_event;
     }
@@ -124,7 +124,7 @@ class Media extends ObjectModel
     /**
      * @return object|null
      */
-    function getEvent(): ?object
+    public function getEvent(): ?object
     {
         if (!is_null($this->getIdEvent())) {
             try {
@@ -139,7 +139,7 @@ class Media extends ObjectModel
     /**
      * @return string
      */
-    function getName(): string
+    public function getName(): string
     {
         return $this->_name;
     }
@@ -147,7 +147,7 @@ class Media extends ObjectModel
     /**
      * @return string|null
      */
-    function getCreatedAt()
+    public function getCreatedAt()
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return $this->_created_at;
@@ -158,7 +158,7 @@ class Media extends ObjectModel
     /**
      * @return int|null
      */
-    function getCreatedAtTs(): ?int
+    public function getCreatedAtTs(): ?int
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return strtotime($this->_created_at);
@@ -169,7 +169,7 @@ class Media extends ObjectModel
     /**
      * @return string|null
      */
-    function getModifiedAt(): ?string
+    public function getModifiedAt(): ?string
     {
         if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
             return $this->_modified_at;
@@ -180,7 +180,7 @@ class Media extends ObjectModel
     /**
      * @return int|null
      */
-    function getModifiedAtTs(): ?int
+    public function getModifiedAtTs(): ?int
     {
         if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
             return strtotime($this->_modified_at);
@@ -191,7 +191,7 @@ class Media extends ObjectModel
     /**
      * @return bool
      */
-    function getOnline(): bool
+    public function getOnline(): bool
     {
         return $this->_online;
     }
@@ -205,7 +205,7 @@ class Media extends ObjectModel
      *
      * @return object
      */
-    function setIdContact(int $id_contact): object
+    public function setIdContact(int $id_contact): object
     {
         if ($this->_id_contact !== $id_contact) {
             $this->_id_contact = $id_contact;
@@ -220,7 +220,7 @@ class Media extends ObjectModel
      *
      * @return object
      */
-    function setIdGroupe(?int $id_groupe): object
+    public function setIdGroupe(?int $id_groupe): object
     {
         if ($this->_id_groupe !== $id_groupe) {
             $this->_id_groupe = $id_groupe;
@@ -235,7 +235,7 @@ class Media extends ObjectModel
      *
      * @return object
      */
-    function setIdLieu(?int $id_lieu): object
+    public function setIdLieu(?int $id_lieu): object
     {
         if ($this->_id_lieu !== $id_lieu) {
             $this->_id_lieu = $id_lieu;
@@ -250,7 +250,7 @@ class Media extends ObjectModel
      *
      * @return object
      */
-    function setIdEvent(?int $id_event): object
+    public function setIdEvent(?int $id_event): object
     {
         if ($this->_id_event !== $id_event) {
             $this->_id_event = $id_event;
@@ -265,7 +265,7 @@ class Media extends ObjectModel
      *
      * @return object
      */
-    function setName(string $name): object
+    public function setName(string $name): object
     {
         if ($this->_name !== $name) {
             $this->_name = $name;
@@ -280,7 +280,7 @@ class Media extends ObjectModel
      *
      * @return object
      */
-    function setCreatedAt(?string $created_at): object
+    public function setCreatedAt(?string $created_at): object
     {
         if ($this->_created_at !== $created_at) {
             $this->_created_at = $created_at;
@@ -293,7 +293,7 @@ class Media extends ObjectModel
     /**
      * @return object
      */
-    function setCreatedNow(): object
+    public function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -310,7 +310,7 @@ class Media extends ObjectModel
      *
      * @return object
      */
-    function setModifiedAt(?string $modified_at): object
+    public function setModifiedAt(?string $modified_at): object
     {
         if ($this->_modified_at !== $modified_at) {
             $this->_modified_at = $modified_at;
@@ -323,7 +323,7 @@ class Media extends ObjectModel
     /**
      * @return object
      */
-    function setModifiedNow(): object
+    public function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -340,7 +340,7 @@ class Media extends ObjectModel
      *
      * @return object
      */
-    function setOnline(bool $online): object
+    public function setOnline(bool $online): object
     {
         if ($this->_online !== $online) {
             $this->_online = $online;
@@ -372,7 +372,7 @@ class Media extends ObjectModel
      *
      * @return array
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];
@@ -476,7 +476,7 @@ class Media extends ObjectModel
      *
      * @return array
      */
-    static function getMedia(array $params = [])
+    public static function getMedia(array $params = [])
     {
         $tab_type = [];
         if (array_key_exists('type', $params)) {

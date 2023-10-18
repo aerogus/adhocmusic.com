@@ -2,13 +2,15 @@
 
 namespace Reference;
 
+use Reference;
+
 /**
  * Classe de gestion des types de musiciens
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class TypeMusicien extends \Reference
+class TypeMusicien extends Reference
 {
     /**
      * Instance de l'objet
@@ -20,17 +22,17 @@ class TypeMusicien extends \Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_type_musicien';
+    protected static string $_pk = 'id_type_musicien';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_type_musicien';
+    protected static string $_table = 'adhoc_type_musicien';
 
     /**
      * @var int
      */
-    protected $_id_type_musicien = 0;
+    protected int $_id_type_musicien = 0;
 
     /**
      * Liste des attributs de l'objet

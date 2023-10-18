@@ -9,14 +9,14 @@ class Ephemeride
     /**
      * @var array
      */
-    protected $_data;
+    protected array $_data;
 
     /**
      * Retourne toutes les données
      *
      * @return array
      */
-    function getAll(): array
+    public function getAll(): array
     {
         return $this->_data;
     }
@@ -28,7 +28,7 @@ class Ephemeride
      *
      * @return array ou false
      */
-    function getDate(string $date)
+    public function getDate(string $date)
     {
         if (strlen($date) !== 5) {
             return;
@@ -42,7 +42,7 @@ class Ephemeride
     /**
      *
      */
-    function __construct()
+    public function __construct()
     {
         $db = DataBase::getInstance();
 

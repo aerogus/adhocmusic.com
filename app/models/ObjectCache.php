@@ -20,7 +20,7 @@ class ObjectCache
      *
      * @return string
      */
-    static function getBasePath(): string
+    public static function getBasePath(): string
     {
         return OBJECT_CACHE_PATH;
     }
@@ -32,7 +32,7 @@ class ObjectCache
      *
      * @return string|null
      */
-    static function get(string $key): ?string
+    public static function get(string $key): ?string
     {
         if (file_exists(self::getBasePath() . '/' . $key)) {
             return file_get_contents(self::getBasePath() . '/' . $key);
@@ -49,7 +49,7 @@ class ObjectCache
      *
      * @return bool
      */
-    static function set(string $key, string $value): bool
+    public static function set(string $key, string $value): bool
     {
         if (file_put_contents(self::getBasePath() . '/' . $key, $value) !== false) {
             return true;
@@ -64,7 +64,7 @@ class ObjectCache
      *
      * @return bool
      */
-    static function unset(string $key): bool
+    public static function unset(string $key): bool
     {
         if (file_exists(self::getBasePath() . '/' . $key)) {
             if (unlink(self::getBasePath() . '/' . $key)) {

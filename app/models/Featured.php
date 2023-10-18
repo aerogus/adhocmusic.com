@@ -23,47 +23,47 @@ class Featured extends ObjectModel
     /**
      * @var string
      */
-    protected static $_pk = 'id_featured';
+    protected static string $_pk = 'id_featured';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_featured';
+    protected static string $_table = 'adhoc_featured';
 
     /**
      * @var int
      */
-    protected $_id_featured = 0;
+    protected int $_id_featured = 0;
 
     /**
      * @var string
      */
-    protected $_datdeb = '';
+    protected string $_datdeb = '';
 
     /**
      * @var string
      */
-    protected $_datfin = '';
+    protected string $_datfin = '';
 
     /**
      * @var string
      */
-    protected $_title = '';
+    protected string $_title = '';
 
     /**
      * @var string
      */
-    protected $_description = '';
+    protected string $_description = '';
 
     /**
      * @var string
      */
-    protected $_url = '';
+    protected string $_url = '';
 
     /**
      * @var bool
      */
-    protected $_online = false;
+    protected bool $_online = false;
 
     /**
      * Liste des attributs de l'objet
@@ -87,7 +87,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    static function getBaseUrl(): string
+    public static function getBaseUrl(): string
     {
         return MEDIA_URL . '/featured';
     }
@@ -95,7 +95,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    static function getBasePath(): string
+    public static function getBasePath(): string
     {
         return MEDIA_PATH . '/featured';
     }
@@ -103,7 +103,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    function getDatDeb(): string
+    public function getDatDeb(): string
     {
         return $this->_datdeb;
     }
@@ -111,7 +111,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    function getDatFin(): string
+    public function getDatFin(): string
     {
         return $this->_datfin;
     }
@@ -119,7 +119,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    function getTitle(): string
+    public function getTitle(): string
     {
         return $this->_title;
     }
@@ -127,7 +127,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    function getDescription(): string
+    public function getDescription(): string
     {
         return $this->_description;
     }
@@ -135,7 +135,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    function getUrl(): string
+    public function getUrl(): string
     {
         return $this->_url;
     }
@@ -143,7 +143,7 @@ class Featured extends ObjectModel
     /**
      * @return string
      */
-    function getImage(): string
+    public function getImage(): string
     {
         return self::getBaseUrl() . '/' . (string) $this->getId() . '.jpg';
     }
@@ -151,7 +151,7 @@ class Featured extends ObjectModel
     /**
      * @return bool
      */
-    function getOnline(): bool
+    public function getOnline(): bool
     {
         return $this->_online;
     }
@@ -165,7 +165,7 @@ class Featured extends ObjectModel
      *
      * @return object
      */
-    function setDatDeb(string $datdeb): object
+    public function setDatDeb(string $datdeb): object
     {
         if (!Date::isDateTimeOk($datdeb)) {
             throw new Exception('datdeb invalide');
@@ -184,7 +184,7 @@ class Featured extends ObjectModel
      *
      * @return object
      */
-    function setDatFin(string $datfin): object
+    public function setDatFin(string $datfin): object
     {
         if (!Date::isDateTimeOk($datfin)) {
             throw new Exception('datfin invalide');
@@ -203,7 +203,7 @@ class Featured extends ObjectModel
      *
      * @return object
      */
-    function setTitle(string $title): object
+    public function setTitle(string $title): object
     {
         $title = trim($title);
 
@@ -220,7 +220,7 @@ class Featured extends ObjectModel
      *
      * @return object
      */
-    function setDescription(string $description): object
+    public function setDescription(string $description): object
     {
         $description = trim($description);
 
@@ -237,7 +237,7 @@ class Featured extends ObjectModel
      *
      * @return object
      */
-    function setUrl(string $url): object
+    public function setUrl(string $url): object
     {
         $url = trim($url);
 
@@ -254,7 +254,7 @@ class Featured extends ObjectModel
      *
      * @return bool
      */
-    function setOnline(bool $online): object
+    public function setOnline(bool $online): object
     {
         if ($this->_online !== $online) {
             $this->_online = $online;
@@ -271,7 +271,7 @@ class Featured extends ObjectModel
      *
      * @return bool
      */
-    function delete(): bool
+    public function delete(): bool
     {
         if (parent::delete()) {
             $file = self::getBasePath() . '/' . $this->getId() . '.jpg';
@@ -299,7 +299,7 @@ class Featured extends ObjectModel
      *
      * @return array
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];

@@ -16,7 +16,7 @@ abstract class Forum
      *
      * @var string
      */
-    protected static $path_smileys = 'https://www.adhocmusic.com/img/smileys/';
+    protected static string $path_smileys = 'https://www.adhocmusic.com/img/smileys/';
 
     /**
      * Liste des smileys a parser
@@ -57,7 +57,7 @@ abstract class Forum
      *
      * @return string
      */
-    static function parseMessage(string $texte, bool $wiki = false): string
+    public static function parseMessage(string $texte, bool $wiki = false): string
     {
         // 1 - gestion des frimousses
         foreach (self::$smileys as $smiley) {
@@ -112,7 +112,7 @@ abstract class Forum
      *
      * @return array
      */
-    static function getForum(string $id_forum): array
+    public static function getForum(string $id_forum): array
     {
         $db = DataBase::getInstance();
 
@@ -131,7 +131,7 @@ abstract class Forum
      *
      * @return array
      */
-    static function getForums(): array
+    public static function getForums(): array
     {
         $db = DataBase::getInstance();
 
@@ -152,7 +152,7 @@ abstract class Forum
      *
      * @return string $id_forum
      */
-    static function getIdForumByIdThread(int $id_thread): string
+    public static function getIdForumByIdThread(int $id_thread): string
     {
         $db = DataBase::getInstance();
 
@@ -174,7 +174,7 @@ abstract class Forum
      *
      * @return array
      */
-    static function addMessage(array $params)
+    public static function addMessage(array $params)
     {
         $new_thread = true;
         if (array_key_exists('id_thread', $params)) {
@@ -246,7 +246,7 @@ abstract class Forum
      *
      * @return bool
      */
-    static function editMessage(array $params): bool
+    public static function editMessage(array $params): bool
     {
         static::_updateMessage(
             [
@@ -282,7 +282,7 @@ abstract class Forum
      *
      * @return bool
      */
-    static function delMessage(array $params): bool
+    public static function delMessage(array $params): bool
     {
         static::_deleteMessage(
             [
@@ -317,7 +317,7 @@ abstract class Forum
      *
      * @return bool
      */
-    static function addView(int $id_thread): bool
+    public static function addView(int $id_thread): bool
     {
         $db = DataBase::getInstance();
 
@@ -337,7 +337,7 @@ abstract class Forum
      *
      * @return array ou int
      */
-    static function getThreadsCount(string $id_forum = null)
+    public static function getThreadsCount(string $id_forum = null)
     {
         $db = DataBase::getInstance();
 
@@ -366,7 +366,7 @@ abstract class Forum
      *
      * @return array ou int
      */
-    static function getMessagesCount(string $id_forum = null)
+    public static function getMessagesCount(string $id_forum = null)
     {
         $db = DataBase::getInstance();
 

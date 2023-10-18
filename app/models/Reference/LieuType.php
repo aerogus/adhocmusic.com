@@ -2,13 +2,15 @@
 
 namespace Reference;
 
+use Reference;
+
 /**
  * Classe de gestion des types de lieux
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class LieuType extends \Reference
+class LieuType extends Reference
 {
     /**
      * Instance de l'objet
@@ -20,17 +22,17 @@ class LieuType extends \Reference
     /**
      * @var string
      */
-    protected static $_pk = 'id_lieu_type';
+    protected static string $_pk = 'id_lieu_type';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_lieu_type';
+    protected static string $_table = 'adhoc_lieu_type';
 
     /**
      * @var int
      */
-    protected $_id_lieu_type = 0;
+    protected int $_id_lieu_type = 0;
 
     /**
      * Liste des attributs de l'objet

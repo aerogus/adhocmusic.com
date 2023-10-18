@@ -21,72 +21,72 @@ class Comment extends ObjectModel
     /**
      * @var string
      */
-    protected static $_pk = 'id_comment';
+    protected static string $_pk = 'id_comment';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_comment';
+    protected static string $_table = 'adhoc_comment';
 
     /**
      * @var int
      */
-    protected $_id_comment = 0;
+    protected int $_id_comment = 0;
 
     /**
      * @var string
      */
-    protected $_type = '';
+    protected string $_type = '';
 
     /**
      * @var int
      */
-    protected $_id_content = 0;
+    protected int $_id_content = 0;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_created_at = null;
+    protected ?string $_created_at = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected $_modified_at = null;
+    protected ?string $_modified_at = null;
 
     /**
      * @var bool
      */
-    protected $_online = false;
+    protected bool $_online = false;
 
     /**
      * @var int
      */
-    protected $_id_contact = 0;
+    protected int $_id_contact = 0;
 
     /**
      * @var string
      */
-    protected $_text = '';
+    protected string $_text = '';
 
     /**
      * @var string
      */
-    protected $_pseudo = '';
+    protected string $_pseudo = '';
 
     /**
      * @var string
      */
-    protected $_pseudo_mbr = '';
+    protected string $_pseudo_mbr = '';
 
     /**
      * @var string
      */
-    protected $_email = '';
+    protected string $_email = '';
 
     /**
      * @var string
      */
-    protected $_email_mbr = '';
+    protected string $_email_mbr = '';
 
     /**
      * Liste des attributs de l'objet
@@ -120,7 +120,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    function getType(): string
+    public function getType(): string
     {
         return $this->_type;
     }
@@ -128,7 +128,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    function getFullType(): string
+    public function getFullType(): string
     {
         return self::$_types[$this->_type];
     }
@@ -136,7 +136,7 @@ class Comment extends ObjectModel
     /**
      * @return int
      */
-    function getIdContent(): int
+    public function getIdContent(): int
     {
         return $this->_id_content;
     }
@@ -144,7 +144,7 @@ class Comment extends ObjectModel
     /**
      * @return string|null
      */
-    function getCreatedAt(): ?string
+    public function getCreatedAt(): ?string
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return $this->_created_at;
@@ -155,7 +155,7 @@ class Comment extends ObjectModel
     /**
      * @return int
      */
-    function getCreatedAtTs(): ?int
+    public function getCreatedAtTs(): ?int
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return strtotime($this->_created_at);
@@ -166,7 +166,7 @@ class Comment extends ObjectModel
     /**
      * @return string|null
      */
-    function getModifiedAt(): ?string
+    public function getModifiedAt(): ?string
     {
         if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
             return $this->_modified_at;
@@ -177,7 +177,7 @@ class Comment extends ObjectModel
     /**
      * @return int
      */
-    function getModifiedAtTs(): ?int
+    public function getModifiedAtTs(): ?int
     {
         if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
             return strtotime($this->_modified_at);
@@ -188,7 +188,7 @@ class Comment extends ObjectModel
     /**
      * @return bool
      */
-    function getOnline(): bool
+    public function getOnline(): bool
     {
         return $this->_online;
     }
@@ -196,7 +196,7 @@ class Comment extends ObjectModel
     /**
      * @return int
      */
-    function getIdContact(): int
+    public function getIdContact(): int
     {
         return $this->_id_contact;
     }
@@ -204,7 +204,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    function getText(): string
+    public function getText(): string
     {
         return $this->_text;
     }
@@ -212,7 +212,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    function getPseudoMbr(): string
+    public function getPseudoMbr(): string
     {
         return $this->_pseudo_mbr;
     }
@@ -220,7 +220,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    function getPseudo(): string
+    public function getPseudo(): string
     {
         return $this->getPseudoMbr() ? $this->getPseudoMbr() : $this->_pseudo;
     }
@@ -228,7 +228,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    function getEmailMbr(): string
+    public function getEmailMbr(): string
     {
         return $this->_email_mbr;
     }
@@ -236,7 +236,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    function getEmail(): string
+    public function getEmail(): string
     {
         return $this->getEmailMbr() ? $this->getEmailMbr() : $this->_email;
     }
@@ -244,7 +244,7 @@ class Comment extends ObjectModel
     /**
      * @return string
      */
-    function getUrl(): string
+    public function getUrl(): string
     {
         return HOME_URL . '/comments/' . $this->getId();
     }
@@ -258,7 +258,7 @@ class Comment extends ObjectModel
      *
      * @return object
      */
-    function setType(string $type): object
+    public function setType(string $type): object
     {
         $type = trim($type);
 
@@ -275,7 +275,7 @@ class Comment extends ObjectModel
      *
      * @return object
      */
-    function setIdContent(int $id_content): object
+    public function setIdContent(int $id_content): object
     {
         if ($this->_id_content !== $id_content) {
             $this->_id_content = $id_content;
@@ -290,7 +290,7 @@ class Comment extends ObjectModel
      *
      * @return object
      */
-    function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): object
     {
         if ($this->_created_at !== $created_at) {
             $this->_created_at = $created_at;
@@ -303,7 +303,7 @@ class Comment extends ObjectModel
     /**
      * @return object
      */
-    function setCreatedNow(): object
+    public function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -320,7 +320,7 @@ class Comment extends ObjectModel
      *
      * @return object
      */
-    function setModifiedAt(string $modified_at): object
+    public function setModifiedAt(string $modified_at): object
     {
         if ($this->_modified_at !== $modified_at) {
             $this->_modified_at = $modified_at;
@@ -333,7 +333,7 @@ class Comment extends ObjectModel
     /**
      * @return object
      */
-    function setModifiedNow(): object
+    public function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -350,7 +350,7 @@ class Comment extends ObjectModel
      *
      * @return object
      */
-    function setOnline(bool $online): object
+    public function setOnline(bool $online): object
     {
         if ($this->_online !== $online) {
             $this->_online = $online;
@@ -365,7 +365,7 @@ class Comment extends ObjectModel
      *
      * @return object
      */
-    function setIdContact(int $id_contact): object
+    public function setIdContact(int $id_contact): object
     {
         if ($this->_id_contact !== $id_contact) {
             $this->_id_contact = $id_contact;
@@ -380,7 +380,7 @@ class Comment extends ObjectModel
      *
      * @return object
      */
-    function setPseudo(string $pseudo): object
+    public function setPseudo(string $pseudo): object
     {
         $pseudo = trim($pseudo);
 
@@ -397,7 +397,7 @@ class Comment extends ObjectModel
      *
      * @return object
      */
-    function setEmail(string $email): object
+    public function setEmail(string $email): object
     {
         $email = trim($email);
 
@@ -414,7 +414,7 @@ class Comment extends ObjectModel
      *
      * @return object
      */
-    function setText(string $text): object
+    public function setText(string $text): object
     {
         $text = trim($text);
 
@@ -457,7 +457,7 @@ class Comment extends ObjectModel
     /**
      * Envoie les notifications par mail aux personnes liées au contenu commenté
      */
-    function sendNotifs()
+    public function sendNotifs()
     {
         $emails  = [];
         $subject = "Un nouveau commentaire a été posté ";

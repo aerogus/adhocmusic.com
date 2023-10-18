@@ -98,7 +98,7 @@ class DataBase
     /**
      * @param int $conn_name identifiant de connexion
      */
-    function close(int $conn_name = 0)
+    public function close(int $conn_name = 0)
     {
         $conn_key = self::generateConnectionKey($conn_name);
 
@@ -112,7 +112,7 @@ class DataBase
     /**
      *
      */
-    function closeAllConnections()
+    public function closeAllConnections()
     {
         $connection_keys = array_keys($this->_current_conn);
         foreach ($connection_keys as $conn_key) {
@@ -145,7 +145,7 @@ class DataBase
     /**
      * @param int $conn_name identifiant de connexion
      */
-    static function isServerInMaintenance(int $conn_name = 0)
+    public static function isServerInMaintenance(int $conn_name = 0)
     {
         return self::$_connections_params[$conn_name]['hasMaintenance'];
     }
@@ -153,7 +153,7 @@ class DataBase
     /**
      * Constructeur de la classe
      */
-    function __construct()
+    public function __construct()
     {
         $this->connect();
         self::$_instance = $this;
@@ -166,7 +166,7 @@ class DataBase
      *
      * @return object
      */
-    static function getInstance(): object
+    public static function getInstance(): object
     {
         if (is_null(self::$_instance)) {
             return new DataBase();
@@ -185,7 +185,7 @@ class DataBase
      *
      * @return bool
      */
-    static function deleteInstance(): bool
+    public static function deleteInstance(): bool
     {
         if (!is_null(self::$_instance)) {
             self::$_instance = null;
@@ -200,7 +200,7 @@ class DataBase
      *
      * @param int $fetchMode fetchMode
      */
-    function setFetchMode(int $fetchMode = MYSQLI_BOTH)
+    public function setFetchMode(int $fetchMode = MYSQLI_BOTH)
     {
         if (in_array($fetchMode, [MYSQLI_BOTH, MYSQLI_ASSOC, MYSQLI_NUM])) {
             $this->_fetchMode = $fetchMode;
@@ -214,7 +214,7 @@ class DataBase
      * @return array
      * @throws Exception
      */
-    function queryWithFetchAndClose(string $sql, int $conn_name = 0)
+    public function queryWithFetchAndClose(string $sql, int $conn_name = 0)
     {
         try {
             $res = $this->queryWithFetch($sql, $conn_name);
@@ -235,7 +235,7 @@ class DataBase
      *
      * @return array
      */
-    function queryWithFetchFirstRow(string $sql, int $conn_name = 0)
+    public function queryWithFetchFirstRow(string $sql, int $conn_name = 0)
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
@@ -258,7 +258,7 @@ class DataBase
      *
      * @return array
      */
-    function queryWithFetchFirstField(string $sql, int $conn_name = 0)
+    public function queryWithFetchFirstField(string $sql, int $conn_name = 0)
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
@@ -287,7 +287,7 @@ class DataBase
      *
      * @return array
      */
-    function queryWithFetchFirstFields(string $sql, int $conn_name = 0)
+    public function queryWithFetchFirstFields(string $sql, int $conn_name = 0)
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
@@ -314,7 +314,7 @@ class DataBase
      *
      * @return array
      */
-    function queryWithFetch(string $sql, int $conn_name = 0)
+    public function queryWithFetch(string $sql, int $conn_name = 0)
     {
         $rc = $this->query($sql, $conn_name);
         if (true === $rc) {
@@ -340,7 +340,7 @@ class DataBase
      * @return array
      * @throws Exception
      */
-    function query(string $sql, int $conn_name = 0)
+    public function query(string $sql, int $conn_name = 0)
     {
         $conn = $this->connect($conn_name);
 
@@ -359,7 +359,7 @@ class DataBase
     /**
      * OK
      */
-    function freeResult($result)
+    public function freeResult($result)
     {
         return mysqli_free_result($result);
     }
@@ -367,7 +367,7 @@ class DataBase
     /**
      *
      */
-    function numRows($result)
+    public function numRows($result)
     {
         return mysqli_num_rows($result);
     }
@@ -375,7 +375,7 @@ class DataBase
     /**
      *
      */
-    function fetchRow($result)
+    public function fetchRow($result)
     {
         return mysqli_fetch_row($result);
     }
@@ -383,7 +383,7 @@ class DataBase
     /**
      *
      */
-    function fetchFirstField($result)
+    public function fetchFirstField($result)
     {
         $res = mysqli_fetch_array($result, MYSQLI_NUM);
         if (is_array($res)) {
@@ -395,7 +395,7 @@ class DataBase
     /**
      *
      */
-    function fetchObject($result)
+    public function fetchObject($result)
     {
         return mysqli_fetch_object($result);
     }
@@ -408,7 +408,7 @@ class DataBase
      *
      * @return array|bool
      */
-    function fetchAssoc($result)
+    public function fetchAssoc($result)
     {
         return mysqli_fetch_assoc($result);
     }
@@ -427,7 +427,7 @@ class DataBase
      * @return string
      * @throws Exception
      */
-    function getInsertQuery(string $dbAndTableName, array $fieldsAndValues, int $conn_name = 0)
+    public function getInsertQuery(string $dbAndTableName, array $fieldsAndValues, int $conn_name = 0)
     {
         $dbAndTableName = trim((string) $dbAndTableName);
         if (empty($dbAndTableName)) {
@@ -463,7 +463,7 @@ class DataBase
      * @return int
      * @throws Exception
      */
-    function affectedRows(int $conn_name = 0)
+    public function affectedRows(int $conn_name = 0)
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
             throw new Exception('Serveur MySQL en maintenance');
@@ -483,7 +483,7 @@ class DataBase
      * @return int
      * @throws Exception
      */
-    function insertId(int $conn_name = 0): int
+    public function insertId(int $conn_name = 0): int
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
             throw new Exception('Serveur MySQL en maintenance');
@@ -505,7 +505,7 @@ class DataBase
      * @return string
      * @throws Exception
      */
-    function escape(string $string, int $conn_name = 0)
+    public function escape(string $string, int $conn_name = 0)
     {
         if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
             throw new Exception('Serveur MySQL en maintenance');
@@ -528,7 +528,7 @@ class DataBase
      *
      * @param int $conn_name identifiant de connexion
      */
-    function errno(int $conn_name)
+    public function errno(int $conn_name)
     {
         $conn_key = self::generateConnectionKey($conn_name);
         return mysqli_errno($this->_current_conn[$conn_key]);

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use \Reference\VideoHost;
+use Reference\VideoHost;
 
 /**
  * 1 - YouTube
@@ -387,9 +387,9 @@ class Video extends Media
     /**
      * Retourne un tableau des groupes liés à cette vidéo
      *
-     * @return array
+     * @return array<Groupe>|Groupe
      */
-    function getGroupes(int $idx = null): array
+    function getGroupes(int $idx = null): array|Groupe
     {
         $groupes = Groupe::find(['id_video' => $this->getIdVideo()]);
         if (!is_null($idx) && array_key_exists($idx, $groupes)) {
@@ -542,7 +542,7 @@ class Video extends Media
      *
      * @param string $code code
      *
-     * @return array|false
+     * @return array<string,string>|false
      */
     static function parseStringForVideoUrl(string $code): array|false
     {
@@ -663,7 +663,7 @@ class Video extends Media
                 return $hqResUrl;
 
             case self::HOST_DAILYMOTION:
-                $headers = get_headers('https://www.dailymotion.com/thumbnail/video/' . $reference, 1);
+                $headers = get_headers('https://www.dailymotion.com/thumbnail/video/' . $reference, true);
                 if (is_array($headers['Location'])) {
                     $url = $headers['Location'][0];
                 } else {
