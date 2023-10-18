@@ -27,7 +27,7 @@
     "scripts": {
         "http": [
             "Composer\\Config::disableProcessTimeout",
-            "php -S 0.0.0.0:8080 -t www"
+            "php -S 0.0.0.0:8080 -t public"
         ],
         "stan": "./vendor/bin/phpstan analyse --memory-limit 512M"
     }
