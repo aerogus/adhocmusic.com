@@ -1,5 +1,7 @@
 #!/usr/bin/env php
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /**
  * Calcul de l'éphéméride AD'HOC
@@ -22,7 +24,7 @@ foreach ($res as $day => $data) {
             $grp = Groupe::getInstance($groupe);
             $_mbrs = $grp->getMembers();
             foreach ($_mbrs as $mbr) {
-                $mbrs[$mbr->getIdContact()][] = $mbr->getFirstName() . ' ' . $mbr->getLastName() . ' (' . $grp->getName() . ' le ' . $year."-".$day.')';
+                $mbrs[$mbr->getIdContact()][] = $mbr->getFirstName() . ' ' . $mbr->getLastName() . ' (' . $grp->getName() . ' le ' . $year . '-' . $day . ')';
             }
             $_groupes[] = $grp->getName();
         }

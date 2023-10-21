@@ -1,5 +1,7 @@
 #!/usr/bin/env php
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 // récupère les lieux avec/sans événements
 
@@ -23,4 +25,3 @@ echo "lieux sans événements ({$lieuxWithoutEventsCount}):\n";
 foreach ($lieuxWithoutEvents as $lieu) {
     echo $lieu->getUrl() . ' ' . $lieu->getName() . "\n";
 }
-

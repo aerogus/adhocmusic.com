@@ -1,5 +1,7 @@
 #!/usr/bin/env php
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -14,7 +16,7 @@ if ($argc < 2) {
     exit;
 }
 
-for ($idx = 1 ; $idx < $argc ; $idx++) {
+for ($idx = 1; $idx < $argc; $idx++) {
     $email = trim((string) $argv[$idx]);
     if (!Email::validate($email)) {
         echo "[ERR] email " . $email . " invalide\n";
@@ -45,4 +47,3 @@ for ($idx = 1 ; $idx < $argc ; $idx++) {
     }
     echo "\n";
 }
-

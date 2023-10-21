@@ -1,5 +1,7 @@
 #!/usr/bin/env php
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /**
  * Efface un membre
@@ -26,7 +28,7 @@ $membre = Membre::getInstance($id_contact);
 echo "Pseudo: " . $membre->getPseudo() . "\n";
 
 $photos = Photo::find(['id_contact' => $id_contact, 'limit' => 100]);
-echo "Photos: ". count($photos) . "\n";
+echo "Photos: " . count($photos) . "\n";
 
 $audios = Audio::find(['id_contact' => $id_contact]);
 echo "Audios: " . count($audios) . "\n";
@@ -38,7 +40,6 @@ $events = Event::find(['id_contact' => $id_contact, 'limit' => 100]);
 echo "Evenements: " . count($events) . "\n";
 
 if ($do) {
-
     foreach ($photos as $photo) {
         echo "delete photo " . $photo->getName() . "\n";
         $photo->delete();
@@ -62,4 +63,3 @@ if ($do) {
     echo "delete membre " . $membre->getPseudo() . "\n";
     $membre->delete();
 }
-

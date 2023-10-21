@@ -1,5 +1,7 @@
 #!/usr/bin/env php
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /**
  * Cohérence contenus
@@ -77,12 +79,12 @@ $path = MEDIA_PATH . "/groupe/";
 $prefix = ["b", "l", "m", "p"];
 
 foreach ($prefix as $pre) {
-    foreach (glob($path . $pre ."*") as $filename) {
+    foreach (glob($path . $pre . '*') as $filename) {
         $fullpath = $filename;
-        $filename = str_replace($pre, "", basename($filename));
+        $filename = str_replace($pre, '', basename($filename));
         $res = preg_split('/\./', $filename);
         if (!in_array((int) $res[0], $groupes)) {
-            echo "images " . $pre . " groupes obsolètes pour id " . $res[0] . " (".$res[1]." trouvé)\n";
+            echo "images " . $pre . " groupes obsolètes pour id " . $res[0] . " (" . $res[1] . " trouvé)\n";
             //echo "rm " . $fullpath . "\n";
         }
     }
@@ -140,4 +142,3 @@ foreach (glob($path . "*.jpg") as $filename) {
         echo "flyer événement obsolète pour id " . $res[0] . "\n";
     }
 }
-

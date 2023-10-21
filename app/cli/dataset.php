@@ -1,5 +1,7 @@
 #!/usr/bin/env php
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -9,38 +11,37 @@ if (ENV === 'PROD') {
     die('désactivé en PROD !!');
 }
 
-// ménage données factices
 
-foreach (Event::findAll() as $e) $e->delete();
-foreach (Structure::findAll() as $s) $s->delete();
-foreach (Lieu::findAll() as $l) $l->delete();
-foreach (Audio::findAll() as $a) $a->delete();
-foreach (Photo::findAll() as $p) $p->delete();
-foreach (Video::findAll() as $v) $v->delete();
-foreach (Groupe::findAll() as $g) $g->delete();
-foreach (FAQ::findAll() as $f) $f->delete();
+$classes = [
+    'Event',
+    'Structure',
+    'Lieu',
+    'Audio',
+    'Photo',
+    'Video',
+    'Groupe',
+    'FAQ',
+];
 
-// reset auto incrément
-
-Event::resetAutoIncrement();
-Structure::resetAutoIncrement();
-Lieu::resetAutoIncrement();
-Audio::resetAutoIncrement();
-Photo::resetAutoIncrement();
-Video::resetAutoIncrement();
-Groupe::resetAutoIncrement();
-FAQ::resetAutoIncrement();
+foreach ($classes as $class) {
+    // ménage données factices
+    foreach ($class::findAll() as $obj) {
+        $obj->delete();
+    }
+    // reset auto incrément
+    $class::resetAutoIncrement();
+}
 
 // insertion données factices
 
-for ($n = 1 ; $n <= 10 ; $n++) {
+for ($n = 1; $n <= 10; $n++) {
     echo "insertion structure " . $n . "\n";
     (new Structure())
         ->setName("Structure n°" . $n)
         ->save();
 }
 
-for ($n = 1 ; $n <= 10 ; $n++) {
+for ($n = 1; $n <= 10; $n++) {
     echo "insertion lieu " . $n . "\n";
     (new Lieu())
         ->setIdContact(1)
@@ -55,7 +56,7 @@ for ($n = 1 ; $n <= 10 ; $n++) {
         ->save();
 }
 
-for ($n = 1 ; $n <= 10 ; $n++) {
+for ($n = 1; $n <= 10; $n++) {
     echo "insertion groupe " . $n . "\n";
     $groupe = (new Groupe())
         ->setName("Groupe n°" . $n)
@@ -66,7 +67,7 @@ for ($n = 1 ; $n <= 10 ; $n++) {
     $groupe->linkMember(1, 2);
 }
 
-for ($n = 1 ; $n <= 10 ; $n++) {
+for ($n = 1; $n <= 10; $n++) {
     echo "insertion event " . $n . "\n";
     $event = (new Event())
         ->setIdContact(1)
@@ -80,7 +81,7 @@ for ($n = 1 ; $n <= 10 ; $n++) {
     $event->linkStructure($n);
 }
 
-for ($n = 1 ; $n <= 10 ; $n++) {
+for ($n = 1; $n <= 10; $n++) {
     echo "insertion audio " . $n . "\n";
     (new Audio())
         ->setIdContact(1)
@@ -90,7 +91,7 @@ for ($n = 1 ; $n <= 10 ; $n++) {
         ->save();
 }
 
-for ($n = 1 ; $n <= 10 ; $n++) {
+for ($n = 1; $n <= 10; $n++) {
     echo "insertion photo " . $n . "\n";
     (new Photo())
         ->setIdContact(1)
@@ -100,7 +101,7 @@ for ($n = 1 ; $n <= 10 ; $n++) {
         ->save();
 }
 
-for ($n = 1 ; $n <= 10 ; $n++) {
+for ($n = 1; $n <= 10; $n++) {
     echo "insertion video " . $n . "\n";
     (new Video())
         ->setIdContact(1)
@@ -112,7 +113,7 @@ for ($n = 1 ; $n <= 10 ; $n++) {
         ->save();
 }
 
-for ($n = 1 ; $n <= 10 ; $n++) {
+for ($n = 1; $n <= 10; $n++) {
     echo "insertion FAQ " . $n . "\n";
     (new FAQ())
         ->setIdCategory(1)

@@ -1,5 +1,7 @@
 #!/usr/bin/env php
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -60,7 +62,7 @@ if ($scheduler['video']['process']) {
         echo "Vidéo " . $video->getIdVideo() . "\n";
         if ($scheduler['video']['erase']) {
             echo "  Erase\n";
-            foreach ($scheduler['video']['widths']  as $maxWidth) {
+            foreach ($scheduler['video']['widths'] as $maxWidth) {
                 if ($video->clearThumb($maxWidth)) {
                     echo "    OK - " . $maxWidth . "\n";
                 } else {
@@ -70,7 +72,7 @@ if ($scheduler['video']['process']) {
         }
         if ($scheduler['video']['create']) {
             echo "  Create " . $video->getIdVideo() . "\n";
-            foreach ($scheduler['video']['widths']  as $maxWidth) {
+            foreach ($scheduler['video']['widths'] as $maxWidth) {
                 if ($video->genThumb($maxWidth)) {
                     echo "    OK - " . $maxWidth . " : " . $video->getThumbUrl($maxWidth) . "\n";
                 } else {

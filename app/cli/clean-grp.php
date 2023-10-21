@@ -1,5 +1,7 @@
 #!/usr/bin/env php
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /**
  * Efface les groupes
@@ -31,7 +33,7 @@ $groupe = Groupe::getInstance($id_groupe);
 echo "Groupe: " . $groupe->getName() . "\n";
 
 $photos = Photo::find(['id_groupe' => $id_groupe, 'limit' => 100]);
-echo "Photos: ". count($photos) . "\n";
+echo "Photos: " . count($photos) . "\n";
 
 $audios = Audio::find(['id_groupe' => $id_groupe]);
 echo "Audios: " . count($audios) . "\n";
@@ -43,7 +45,6 @@ $events = Event::find(['id_groupe' => $id_groupe, 'limit' => 100]);
 echo "Evenements: " . count($events) . "\n";
 
 if ($do) {
-
     foreach ($photos as $photo) {
         echo "delete photo " . $photo->getName() . "\n";
         $photo->delete();
