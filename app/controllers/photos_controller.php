@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 use Reference\Departement;
 
@@ -12,7 +16,7 @@ final class Controller
     /**
      * @return string
      */
-    static function my(): string
+    public static function my(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -55,7 +59,7 @@ final class Controller
     /**
      * @return string
      */
-    static function show(): string
+    public static function show(): string
     {
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
@@ -74,7 +78,6 @@ final class Controller
         $meta_description = "Titre : " . $photo->getName();
 
         if ($photo->getOnline() || (!$photo->getOnline() && Tools::isAuth() && Tools::auth(Membre::TYPE_INTERNE))) {
-
             $smarty->assign('photo', $photo);
             $smarty->assign('from', $from);
             $smarty->assign('og_image', $photo->getThumbUrl(320));
@@ -91,8 +94,8 @@ final class Controller
             if ($photo->getIdEvent()) {
                 $event = Event::getInstance($photo->getIdEvent());
                 $smarty->assign('event', $event);
-                $meta_title .= " - " . $event->getName() . " (" . Date::mysql_datetime($event->getDate(), "d/m/Y") . ")";
-                $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysql_datetime($event->getDate(), "d/m/Y") . ")";
+                $meta_title .= " - " . $event->getName() . " (" . Date::mysqlDatetime($event->getDate(), "d/m/Y") . ")";
+                $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysqlDatetime($event->getDate(), "d/m/Y") . ")";
             }
             if ($photo->getIdLieu()) {
                 $lieu = Lieu::getInstance($photo->getIdLieu());
@@ -170,7 +173,8 @@ final class Controller
             $smarty->assign('description', $meta_description);
 
             $smarty->assign(
-                'comments', Comment::find(
+                'comments',
+                Comment::find(
                     [
                         'id_type' => 'p',
                         'id_content' => $photo->getIdPhoto(),
@@ -180,12 +184,9 @@ final class Controller
                     ]
                 )
             );
-
         } else {
-
             // pas en ligne, pas les droits
             $smarty->assign('unknown_photo', true);
-
         }
 
         return $smarty->fetch('photos/show.tpl');
@@ -194,7 +195,7 @@ final class Controller
     /**
      * @return string
      */
-    static function create(): string
+    public static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -210,8 +211,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validatePhotoForm($data, $errors)) {
-
+            if (self::validatePhotoForm($data, $errors)) {
                 // cf. max_file_uploads (par défaut 20, les fichiers suivants sont ignorés)
                 ini_set('max_file_uploads', '50');
 
@@ -253,17 +253,12 @@ final class Controller
                             foreach ($confPhoto['thumb_width'] as $maxWidth) {
                                 $photo->genThumb($maxWidth);
                             }
-
                         }
                     }
                 }
-
                 Tools::redirect('/photos/my');
-
             } else {
-
                 $errors['generic'] = true;
-
             }
         }
 
@@ -284,7 +279,8 @@ final class Controller
             $smarty->assign('groupe', $groupe);
         } else {
             $smarty->assign(
-                'groupes', Groupe::find(
+                'groupes',
+                Groupe::find(
                     [
                         'online' => true,
                         'order_by' => 'name',
@@ -299,7 +295,8 @@ final class Controller
             $lieu = Lieu::getInstance($id_lieu);
             $smarty->assign('lieu', $lieu);
             $smarty->assign(
-                'events', Event::find(
+                'events',
+                Event::find(
                     [
                         'online' => true,
                         'datfin' => date('Y-m-d H:i:s'),
@@ -329,7 +326,7 @@ final class Controller
     /**
      * @return string
      */
-    static function edit(): string
+    public static function edit(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -368,8 +365,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validatePhotoForm($data, $errors)) {
-
+            if (self::validatePhotoForm($data, $errors)) {
                 $confPhoto = Conf::getInstance()->get('photo');
 
                 $photo->setName($data['name'])
@@ -392,18 +388,16 @@ final class Controller
                     Log::action(Log::ACTION_PHOTO_EDIT, $photo->getId());
                     Tools::redirect('/photos/my');
                 }
-
             } else {
-
                 $errors['generic'] = true;
-
             }
         }
 
         $smarty->assign('photo', $photo);
 
         $smarty->assign(
-            'groupes', Groupe::find(
+            'groupes',
+            Groupe::find(
                 [
                     'online' => true,
                     'order_by' => 'name',
@@ -428,7 +422,7 @@ final class Controller
     /**
      * @return string
      */
-    static function delete(): string
+    public static function delete(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -483,7 +477,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validatePhotoForm(array $data, array &$errors): bool
+    private static function validatePhotoForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la photo.";

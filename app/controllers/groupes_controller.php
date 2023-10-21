@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 use Reference\TypeMusicien;
 
@@ -11,7 +15,7 @@ final class Controller
      *
      * @return string
      */
-    static function index(): string
+    public static function index(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -22,7 +26,8 @@ final class Controller
             ->addStep("Groupes");
 
         $smarty->assign(
-            'groupes', Groupe::find(
+            'groupes',
+            Groupe::find(
                 [
                     'online' => true,
                     'order_by' => 'name',
@@ -37,7 +42,7 @@ final class Controller
     /**
      * @return string
      */
-    static function my(): string
+    public static function my(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -53,7 +58,8 @@ final class Controller
         $smarty->assign('delete', (bool) Route::params('delete'));
 
         $smarty->assign(
-            'groupes', Groupe::find(
+            'groupes',
+            Groupe::find(
                 ['id_contact' => $_SESSION['membre']->getId()]
             )
         );
@@ -64,7 +70,7 @@ final class Controller
     /**
      * @return string
      */
-    static function show(): string
+    public static function show(): string
     {
         $id = (int) Route::params('id');
 
@@ -96,14 +102,15 @@ final class Controller
             ->addStep("Groupes", "/groupes")
             ->addStep($groupe->getName());
 
-        $smarty->assign('title', "♫ ".$groupe->getName()." (".$groupe->getStyle().")");
+        $smarty->assign('title', '♫ ' . $groupe->getName() . ' (' . $groupe->getStyle() . ')');
         $smarty->assign('description', Tools::tronc($groupe->getMiniText(), 175));
         $smarty->assign('og_type', 'band');
 
         $smarty->assign('is_loggued', !empty($_SESSION['membre']));
 
         $smarty->assign(
-            'videos', Video::find(
+            'videos',
+            Video::find(
                 [
                     'id_groupe' => $groupe->getIdGroupe(),
                     'online' => true,
@@ -113,7 +120,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'audios', Audio::find(
+            'audios',
+            Audio::find(
                 [
                     'id_groupe' => $groupe->getIdGroupe(),
                     'online' => true,
@@ -133,7 +141,8 @@ final class Controller
         }
 
         $smarty->assign(
-            'photos', Photo::find(
+            'photos',
+            Photo::find(
                 [
                     'id_groupe' => $groupe->getIdGroupe(),
                     'online' => true,
@@ -145,7 +154,8 @@ final class Controller
 
         // concerts à venir
         $smarty->assign(
-            'f_events', Event::find(
+            'f_events',
+            Event::find(
                 [
                     'id_groupe' => $groupe->getIdGroupe(),
                     'datdeb' => date('Y-m-d H:i:s'),
@@ -159,7 +169,8 @@ final class Controller
 
         // concerts passés
         $smarty->assign(
-            'p_events', Event::find(
+            'p_events',
+            Event::find(
                 [
                     'id_groupe' => $groupe->getIdGroupe(),
                     'datfin' => date('Y-m-d H:i:s'),
@@ -192,7 +203,7 @@ final class Controller
      *
      * @return string
      */
-    static function create(): string
+    public static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -219,7 +230,6 @@ final class Controller
         ];
 
         if (Tools::isSubmit('form-groupe-create')) {
-
             $data = [
                 'name'             => (string) Route::params('name'),
                 'style'            => (string) Route::params('style'),
@@ -234,8 +244,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateGroupeCreateForm($data, $errors)) {
-
+            if (self::validateGroupeCreateForm($data, $errors)) {
                 $groupe = (new Groupe())
                     ->setName($data['name'])
                     ->setAlias(Tools::genAlias($data['name']))
@@ -251,7 +260,6 @@ final class Controller
                     ->setOnline(true);
 
                 if ($groupe->save()) {
-
                     if (is_uploaded_file($_FILES['lelogo']['tmp_name'])) {
                         (new Image($_FILES['lelogo']['tmp_name']))
                             ->setType(IMAGETYPE_JPEG)
@@ -288,7 +296,6 @@ final class Controller
                     Log::action(Log::ACTION_GROUP_CREATE, $groupe->getAlias());
 
                     Tools::redirect('/groupes/my');
-
                 }
             }
 
@@ -297,7 +304,6 @@ final class Controller
                     $smarty->assign('error_' . $k, $v);
                 }
             }
-
         }
 
         $smarty->assign('data', $data);
@@ -311,7 +317,7 @@ final class Controller
      *
      * @return string
      */
-    static function edit(): string
+    public static function edit(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -369,8 +375,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateGroupeEditForm($data, $errors)) {
-
+            if (self::validateGroupeEditForm($data, $errors)) {
                 if (!$groupe->isMember($_SESSION['membre']->getId()) && !$_SESSION['membre']->isAdmin()) {
                     return 'edition du groupe non autorisée';
                 }
@@ -421,7 +426,6 @@ final class Controller
                 Log::action(Log::ACTION_GROUP_EDIT, $groupe->getId());
 
                 Tools::redirect('/groupes/my');
-
             }
 
             if (!empty($errors)) {
@@ -429,7 +433,6 @@ final class Controller
                     $smarty->assign('error_' . $k, $v);
                 }
             }
-
         }
 
         $smarty->assign('data', $data);
@@ -443,7 +446,7 @@ final class Controller
      *
      * @return string
      */
-    static function delete(): string
+    public static function delete(): string
     {
         $id = (int) Route::params('id');
 
@@ -486,7 +489,7 @@ final class Controller
      *
      * @return array
      */
-    static function api_groupes()
+    public static function apiGroupes()
     {
         $groupes = Groupe::find(
             [
@@ -512,7 +515,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateGroupeCreateForm(array $data, array &$errors): bool
+    private static function validateGroupeCreateForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = true;
@@ -545,7 +548,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateGroupeEditForm(array $data, array &$errors): bool
+    private static function validateGroupeEditForm(array $data, array &$errors): bool
     {
         if (empty($data['style'])) {
             $errors['style'] = true;

@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 final class Controller
 {
@@ -7,7 +11,7 @@ final class Controller
      *
      * @return string
      */
-    static function index(): string
+    public static function index(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -21,7 +25,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'videos', Video::find(
+            'videos',
+            Video::find(
                 [
                     'id_lieu' => 1,
                     'has_groupe' => true,
@@ -35,7 +40,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'featured', Featured::find(
+            'featured',
+            Featured::find(
                 [
                     'online' => true,
                     'current' => true,
@@ -78,7 +84,7 @@ final class Controller
      *
      * @return string
      */
-    static function partners(): string
+    public static function partners(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -98,7 +104,7 @@ final class Controller
      *
      * @return string
      */
-    static function contact(): string
+    public static function contact(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -113,7 +119,6 @@ final class Controller
         $smarty->assign('faq', FAQ::findAll());
 
         if (!Tools::isSubmit('form-contact')) {
-
             $smarty->assign('show_form', true);
 
             // valeurs par défaut
@@ -135,9 +140,7 @@ final class Controller
                 }
                 $data['email'] = $_SESSION['membre']->getEmail();
             }
-
         } else {
-
             $data = [
                 'name'    => trim((string) Route::params('name')),
                 'email'   => trim((string) Route::params('email')),
@@ -148,10 +151,9 @@ final class Controller
             ];
             $errors = [];
 
-            self::_validateContactForm($data, $errors);
+            self::validateContactForm($data, $errors);
 
             if (empty($errors)) {
-
                 // 1. envoi du mail aux destinataires
                 $data['email_reply_to'] = $data['email'];
                 if (Email::send(CONTACT_FORM_TO, $data['subject'], 'form-contact-to', $data)) {
@@ -167,18 +169,14 @@ final class Controller
                         Newsletter::addEmail($data['email']);
                     }
                 }
-
             } else {
-
                 // erreur dans le form
                 $smarty->assign('sent_ko', true);
                 $smarty->assign('show_form', true);
                 foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
-
             }
-
         }
 
         $smarty->assign('name', $data['name']);
@@ -196,12 +194,13 @@ final class Controller
      *
      * @return string
      */
-    static function sitemap(): string
+    public static function sitemap(): string
     {
         $smarty = new AdHocSmarty();
 
         $smarty->assign(
-            'groupes', Groupe::find(
+            'groupes',
+            Groupe::find(
                 [
                     'online' => true,
                     'order_by' => 'name',
@@ -211,7 +210,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'lieux', Lieu::find(
+            'lieux',
+            Lieu::find(
                 [
                     'online' => true,
                     'order_by' => 'id_lieu',
@@ -221,7 +221,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'events', Event::find(
+            'events',
+            Event::find(
                 [
                     'online' => true,
                     'order_by' => 'id_event',
@@ -238,7 +239,7 @@ final class Controller
      *
      * @return string
      */
-    static function map(): string
+    public static function map(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -256,7 +257,7 @@ final class Controller
      *
      * @return string
      */
-    static function mentions_legales(): string
+    public static function mentionsLegales(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -271,7 +272,7 @@ final class Controller
      *
      * @return string
      */
-    static function credits(): string
+    public static function credits(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -284,7 +285,7 @@ final class Controller
     /**
      * Player vidéo HLS pour les événéments en direct
      */
-    static function onair(): string
+    public static function onair(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -304,7 +305,7 @@ final class Controller
      *
      * @return string
      */
-    static function cms(): string
+    public static function cms(): string
     {
         $id = (int) Route::params('id');
         $cms = CMS::getInstance($id);
@@ -323,12 +324,12 @@ final class Controller
 
     /**
      * Redirection après tracking liens newsletter
-     * 
+     *
      * Ex: /r/XXX||YYY
      * avec XXX = url de redirection en base64
      * et   YYY = id_newsletter|id_contact en base64
      */
-    static function r()
+    public static function r()
     {
         $url = urldecode((string) Route::params('url'));
         list($url, $from) = explode('||', $url);
@@ -347,7 +348,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateContactForm(array $data, array &$errors): bool
+    private static function validateContactForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez renseigner votre nom";
@@ -364,7 +365,8 @@ final class Controller
             $errors['text'] = "Vous devez écrire quelque chose !";
         } elseif (strlen($data['text']) < 8) {
             $errors['text'] = "Message un peu court !";
-        } elseif ((strpos($data['text'], '[link=') !== false)
+        } elseif (
+            (strpos($data['text'], '[link=') !== false)
             || (strpos($data['text'], '[url=') !== false)
             || (strpos($data['text'], '<a href=') !== false)
         ) {

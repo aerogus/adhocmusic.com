@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 /**
  *
@@ -8,7 +12,7 @@ final class Controller
     /**
      * @return string
      */
-    static function form_contact_cc(): string
+    public static function formContactCc(): string
     {
         $smarty = new EmailSmarty();
         $smarty->assign(
@@ -26,7 +30,7 @@ final class Controller
     /**
      * @return string
      */
-    static function form_contact_to(): string
+    public static function formContactTo(): string
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('form-contact-to.tpl');
@@ -35,7 +39,7 @@ final class Controller
     /**
      * @return string
      */
-    static function forum_prive_new_message(): string
+    public static function forumPriveNewMessage(): string
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('forum-prive-new-message.tpl');
@@ -44,7 +48,7 @@ final class Controller
     /**
      * @return string
      */
-    static function member_create(): string
+    public static function memberCreate(): string
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('member-create.tpl');
@@ -53,7 +57,7 @@ final class Controller
     /**
      * @return string
      */
-    static function message_received(): string
+    public static function messageReceived(): string
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('message-received.tpl');
@@ -62,7 +66,7 @@ final class Controller
     /**
      * @return string
      */
-    static function password_changed(): string
+    public static function passwordChanged(): string
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('password-changed.tpl');
@@ -71,7 +75,7 @@ final class Controller
     /**
      * @return string
      */
-    static function password_lost(): string
+    public static function passwordLost(): string
     {
         $smarty = new EmailSmarty();
         return $smarty->fetch('password-lost.tpl');
@@ -80,7 +84,7 @@ final class Controller
     /**
      * @return string
      */
-    static function new_comment(): string
+    public static function newComment(): string
     {
         $smarty = new EmailSmarty();
         $smarty->assign(
@@ -99,7 +103,7 @@ final class Controller
     /**
      * @return string
      */
-    static function log_action(): string
+    public static function logAction(): string
     {
         $smarty = new EmailSmarty();
         $smarty->assign(

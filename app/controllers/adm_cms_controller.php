@@ -1,4 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
+
 /**
  *
  */
@@ -7,7 +12,7 @@ final class Controller
     /**
      * @return string
      */
-    static function index(): string
+    public static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
         $smarty = new AdHocSmarty();
@@ -28,7 +33,7 @@ final class Controller
     /**
      * @return string
      */
-    static function create(): string
+    public static function create(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -69,7 +74,7 @@ final class Controller
     /**
      * @return string
      */
-    static function edit(): string
+    public static function edit(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -115,7 +120,7 @@ final class Controller
     /**
      * @return string
      */
-    static function delete(): string
+    public static function delete(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 

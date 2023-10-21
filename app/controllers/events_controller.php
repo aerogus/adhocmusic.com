@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 use Reference\Style;
 
@@ -7,7 +11,7 @@ final class Controller
     /**
      * @return string
      */
-    static function index(): string
+    public static function index(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -72,7 +76,7 @@ final class Controller
      *
      * @return string
      */
-    static function ical(): string
+    public static function ical(): string
     {
         $id = (int) Route::params('id');
 
@@ -97,7 +101,7 @@ final class Controller
     /**
      * @return string
      */
-    static function show(): string
+    public static function show(): string
     {
         $id = (int) Route::params('id');
 
@@ -130,11 +134,12 @@ final class Controller
 
         $smarty->assign('event', $event);
 
-        $smarty->assign('title', "♫ ". $event->getName());
-        $smarty->assign('description', "Date : " . Date::mysql_datetime($event->getDate(), 'd/m/Y') . " | Lieu : " . $event->getLieu()->getName() . " " . $event->getLieu()->getAddress() . " " . $event->getLieu()->getCity()->getCp() . " " . $event->getLieu()->getCity()->getName());
+        $smarty->assign('title', '♫ ' . $event->getName());
+        $smarty->assign('description', "Date : " . Date::mysqlDatetime($event->getDate(), 'd/m/Y') . " | Lieu : " . $event->getLieu()->getName() . " " . $event->getLieu()->getAddress() . " " . $event->getLieu()->getCity()->getCp() . " " . $event->getLieu()->getCity()->getName());
 
         $smarty->assign(
-            'photos', Photo::find(
+            'photos',
+            Photo::find(
                 [
                     'id_event' => $event->getIdEvent(),
                     'online' => true,
@@ -144,7 +149,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'audios', Audio::find(
+            'audios',
+            Audio::find(
                 [
                     'id_event' => $event->getIdEvent(),
                     'online' => true,
@@ -155,7 +161,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'videos', Video::find(
+            'videos',
+            Video::find(
                 [
                     'id_event' => $event->getIdEvent(),
                     'online' => true,
@@ -166,8 +173,8 @@ final class Controller
             )
         );
 
-        $smarty->assign('jour', Date::mysql_datetime($event->getDate(), "d/m/Y"));
-        $smarty->assign('heure', Date::mysql_datetime($event->getDate(), "H:i"));
+        $smarty->assign('jour', Date::mysqlDatetime($event->getDate(), "d/m/Y"));
+        $smarty->assign('heure', Date::mysqlDatetime($event->getDate(), "H:i"));
 
         if ($event->getIdContact()) {
             try {
@@ -189,7 +196,7 @@ final class Controller
     /**
      * @return string
      */
-    static function create(): string
+    public static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -299,7 +306,7 @@ final class Controller
             list($day, $month, $year) = explode('/', (string) Route::params('date'));
             $date       = $year . '-' . $month . '-' . $day;
             $hourminute = (string) Route::params('hourminute');
-            $dt         = $date . ' '. $hourminute . ':00';
+            $dt         = $date . ' ' . $hourminute . ':00';
 
             $data = [
                 'name'       => (string) Route::params('name'),
@@ -315,8 +322,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateEventCreateForm($data, $errors)) {
-
+            if (self::validateEventCreateForm($data, $errors)) {
                 $event = (new Event())
                     ->setName($data['name'])
                     ->setIdLieu($data['id_lieu'])
@@ -328,7 +334,6 @@ final class Controller
                     ->setFacebookEventId($data['facebook_event_id']);
 
                 if ($event->save()) {
-
                     $importFlyer = false;
                     if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
                         $importFlyer = true;
@@ -390,24 +395,19 @@ final class Controller
                     } else {
                         Tools::redirect('/events?create=1&date=' . $date);
                     }
-
                 } else {
-
                     // erreur create
-
                 }
-
             } else {
-
                 // erreur
-
             }
         }
 
         $smarty->assign('data', $data);
 
         $smarty->assign(
-            'styles', Style::find(
+            'styles',
+            Style::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
@@ -416,7 +416,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'groupes', Groupe::find(
+            'groupes',
+            Groupe::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
@@ -425,7 +426,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'structures', Structure::find(
+            'structures',
+            Structure::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
@@ -449,7 +451,7 @@ final class Controller
     /**
      * @return string
      */
-    static function edit(): string
+    public static function edit(): string
     {
         $id = (int) Route::params('id');
 
@@ -519,8 +521,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateEventEditForm($data, $errors)) {
-
+            if (self::validateEventEditForm($data, $errors)) {
                 $event = Event::getInstance($data['id'])
                     ->setName($data['name'])
                     ->setIdLieu($data['id_lieu'])
@@ -589,22 +590,19 @@ final class Controller
 
                 Log::action(Log::ACTION_EVENT_EDIT, $event->getId());
 
-                Tools::redirect('/events?edit=1&y='.$year.'&m='.$month.'&d='.$day);
-
+                Tools::redirect('/events?edit=1&y=' . $year . '&m=' . $month . '&d=' . $day);
             } else {
-
                 // errors à gérer
-
             }
         }
 
         $smarty->assign('data', $data);
-
         $smarty->assign('event', $event);
         $smarty->assign('lieu', $lieu);
 
         $smarty->assign(
-            'styles', Style::find(
+            'styles',
+            Style::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
@@ -613,7 +611,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'groupes', Groupe::find(
+            'groupes',
+            Groupe::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
@@ -622,7 +621,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'structures', Structure::find(
+            'structures',
+            Structure::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
@@ -646,7 +646,7 @@ final class Controller
     /**
      * @return string ou HTTP:Redirect
      */
-    static function delete(): string
+    public static function delete(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -680,7 +680,7 @@ final class Controller
     /**
      * @return array
      */
-    static function get_events_by_lieu(): array
+    public static function getEventsByLieu(): array
     {
         $id_lieu = (int) Route::params('l');
 
@@ -705,7 +705,8 @@ final class Controller
                     'date' => $event->getDate(),
                     'name' => $event->getName(),
                 ];
-            }, $events
+            },
+            $events
         );
     }
 
@@ -717,7 +718,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateEventCreateForm(array $data, array &$errors): bool
+    private static function validateEventCreateForm(array $data, array &$errors): bool
     {
         if (count($errors)) {
             return false;
@@ -733,7 +734,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateEventEditForm(array $data, array &$errors): bool
+    private static function validateEventEditForm(array $data, array &$errors): bool
     {
         if (count($errors)) {
             return false;

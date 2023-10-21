@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 /**
  * Controlleur Membre
@@ -10,7 +14,7 @@ final class Controller
      *
      * @return string
      */
-    static function show(): string
+    public static function show(): string
     {
         $id = (int) Route::params('id');
 
@@ -43,7 +47,7 @@ final class Controller
      *
      * @return string
      */
-    static function create(): string
+    public static function create(): string
     {
         if (Tools::isAuth()) {
             Tools::redirect('/');
@@ -70,7 +74,6 @@ final class Controller
         ];
 
         if (Tools::isSubmit('form-member-create')) {
-
             $data = [
                 'pseudo'  => trim((string) Route::params('pseudo')),
                 'email'   => trim(strtolower((string) Route::params('email'))),
@@ -79,12 +82,10 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateMemberCreateForm($data, $errors)) {
-
+            if (self::validateMemberCreateForm($data, $errors)) {
                 $data['password'] = Tools::generatePassword(12);
 
                 if (empty($errors)) {
-
                     $membre = (new Membre())
                         ->setEmail($data['email'])
                         ->setPseudo($data['pseudo'])
@@ -103,11 +104,9 @@ final class Controller
                     } else {
                         $errors['generic'] = true;
                     }
-
                 } else {
                     Log::action(Log::ACTION_MEMBER_CREATE, print_r($data, true));
                 }
-
             } else {
                 Log::action(Log::ACTION_MEMBER_CREATE, print_r($data, true));
             }
@@ -117,7 +116,6 @@ final class Controller
                     $smarty->assign('error_' . $k, $v);
                 }
             }
-
         }
 
         $smarty->assign('data', $data);
@@ -130,7 +128,7 @@ final class Controller
      *
      * @return string
      */
-    static function edit(): string
+    public static function edit(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -165,8 +163,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateMemberEditForm($data, $errors)) {
-
+            if (self::validateMemberEditForm($data, $errors)) {
                 $member->setLastName($data['last_name'])
                     ->setFirstName($data['first_name'])
                     ->setAddress($data['address'])
@@ -220,15 +217,12 @@ final class Controller
                 Log::action(Log::ACTION_MEMBER_EDIT, $member->getId());
 
                 $smarty->assign('updated_ok', true);
-
             } else {
-
                 if (!empty($errors)) {
                     foreach ($errors as $k => $v) {
                         $smarty->assign('error_' . $k, $v);
                     }
                 }
-
             }
         }
 
@@ -256,7 +250,7 @@ final class Controller
      *
      * @return string
      */
-    static function delete(): string
+    public static function delete(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -282,9 +276,13 @@ final class Controller
                 if (ini_get("session.use_cookies")) {
                     $params = session_get_cookie_params();
                     setcookie(
-                        session_name(), '', time() - 42000,
-                        $params["path"], $params["domain"],
-                        $params["secure"], $params["httponly"]
+                        session_name(),
+                        '',
+                        time() - 42000,
+                        $params["path"],
+                        $params["domain"],
+                        $params["secure"],
+                        $params["httponly"]
                     );
                 }
                 session_destroy();
@@ -303,7 +301,7 @@ final class Controller
      *
      * @return array
      */
-    static function autocompletePseudo(): array
+    public static function autocompletePseudo(): array
     {
         $q = trim((string) Route::params('q'));
 
@@ -327,7 +325,7 @@ final class Controller
      *
      * @return string
      */
-    static function tableauDeBord(): string
+    public static function tableauDeBord(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -365,7 +363,8 @@ final class Controller
         $smarty->assign('alerting_lieux', $myAlertingLieu);
 
         $smarty->assign(
-            'groupes', Groupe::find(
+            'groupes',
+            Groupe::find(
                 ['id_contact' => $_SESSION['membre']->getId()]
             )
         );
@@ -384,7 +383,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateMemberCreateForm(array $data, array &$errors): bool
+    private static function validateMemberCreateForm(array $data, array &$errors): bool
     {
         if (empty($data['email'])) {
             $errors['email'] = true;
@@ -428,7 +427,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateMemberEditForm(array $data, array &$errors): bool
+    private static function validateMemberEditForm(array $data, array &$errors): bool
     {
         if (empty($data['email'])) {
             $errors['email'] = true;

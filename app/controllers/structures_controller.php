@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 /**
  *
@@ -8,7 +12,7 @@ final class Controller
     /**
      * @return string
      */
-    static function index(): string
+    public static function index(): string
     {
         Trail::getInstance()
             ->addStep('Structures');
@@ -21,7 +25,7 @@ final class Controller
     /**
      * @return string
      */
-    static function show(): string
+    public static function show(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -42,7 +46,8 @@ final class Controller
         $smarty->assign('structure', $structure);
 
         $smarty->assign(
-            'events', Event::find(
+            'events',
+            Event::find(
                 [
                     'id_structure' => $structure->getIdStructure(),
                     'online' => true,
@@ -59,7 +64,7 @@ final class Controller
     /**
      * @return string
      */
-    static function create(): string
+    public static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -82,7 +87,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateStructureCreateForm($data, $errors)) {
+            if (self::validateStructureCreateForm($data, $errors)) {
                 (new Structure())
                     ->setName($data['name'])
                     ->save();
@@ -98,7 +103,7 @@ final class Controller
     /**
      * @return string
      */
-    static function edit(): string
+    public static function edit(): string
     {
         $id = (int) Route::params('id');
 
@@ -114,7 +119,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateStructureEditForm($data, $errors)) {
+            if (self::validateStructureEditForm($data, $errors)) {
                 Structure::getInstance((int) Route::params('id'))
                     ->setName($data['name'])
                     ->save();
@@ -132,7 +137,7 @@ final class Controller
     /**
      * @return string
      */
-    static function delete(): string
+    public static function delete(): string
     {
         $id = (int) Route::params('id');
 
@@ -163,7 +168,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateStructureCreateForm(array $data, array &$errors): bool
+    private static function validateStructureCreateForm(array $data, array &$errors): bool
     {
         if (count($errors)) {
             return false;
@@ -179,7 +184,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateStructureEditForm(array $data, array &$errors): bool
+    private static function validateStructureEditForm(array $data, array &$errors): bool
     {
         if (count($errors)) {
             return false;

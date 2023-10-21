@@ -1,10 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 use Reference\Departement;
-
-/**
- * Gestion des Vidéos
- */
 
 define('NB_VIDEOS_PER_PAGE', 48);
 
@@ -15,7 +15,7 @@ final class Controller
      *
      * @return string
      */
-    static function my(): string
+    public static function my(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -73,7 +73,7 @@ final class Controller
      *
      * @return string
      */
-    static function show(): string
+    public static function show(): string
     {
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
@@ -99,7 +99,6 @@ final class Controller
         $meta_description = "Titre : " . $video->getName();
 
         if ($video->getOnline()) {
-
             $smarty->assign('video', $video);
             $smarty->assign('from', $from);
             $smarty->assign('title', "♫ " . $video->getName());
@@ -127,7 +126,7 @@ final class Controller
             if ($video->getIdEvent()) {
                 $event = Event::getInstance($video->getIdEvent());
                 $smarty->assign('event', $event);
-                $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysql_datetime($event->getDate(), "d/m/Y") . ")";
+                $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysqlDatetime($event->getDate(), "d/m/Y") . ")";
             }
             if ($video->getIdLieu()) {
                 $lieu = Lieu::getInstance($video->getIdLieu());
@@ -165,7 +164,8 @@ final class Controller
             // vidéos et photos liées à l'événement/lieu
             if ($video->getIdEvent() && $video->getIdLieu()) {
                 $smarty->assign(
-                    'photos', Photo::find(
+                    'photos',
+                    Photo::find(
                         [
                             'id_event' => $video->getIdEvent(),
                             'online' => true,
@@ -175,7 +175,8 @@ final class Controller
                     )
                 );
                 $smarty->assign(
-                    'videos', Video::find(
+                    'videos',
+                    Video::find(
                         [
                             'id__not_in' => [$video->getIdVideo()],
                             'id_event' => $video->getIdEvent(),
@@ -188,11 +189,8 @@ final class Controller
             }
 
             $smarty->assign('description', $meta_description);
-
         } else {
-
             $smarty->assign('unknown_video', true);
-
         }
 
         return $smarty->fetch('videos/show.tpl');
@@ -203,7 +201,7 @@ final class Controller
      *
      * @return string
      */
-    static function embed(): string
+    public static function embed(): string
     {
         $id = (int) Route::params('id');
 
@@ -231,7 +229,7 @@ final class Controller
      *
      * @return string
      */
-    static function create(): string
+    public static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -255,8 +253,7 @@ final class Controller
 
             $errors = [];
 
-            if (self::_validateVideoCreateForm($data, $errors)) {
-
+            if (self::validateVideoCreateForm($data, $errors)) {
                 $info = Video::parseStringForVideoUrl($data['code']);
                 $data['id_host'] = $info['id_host'];
                 $data['reference'] = $info['reference'];
@@ -298,13 +295,10 @@ final class Controller
                 Log::action(Log::ACTION_VIDEO_CREATE, $video->getId());
 
                 Tools::redirect('/videos/my');
-
             } else {
-
                 foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
-
             }
         }
 
@@ -318,7 +312,8 @@ final class Controller
         $smarty->assign('id_groupe', $id_groupe);
 
         $smarty->assign(
-            'groupes', Groupe::find(
+            'groupes',
+            Groupe::find(
                 [
                     'online' => true,
                     'order_by' => 'name',
@@ -332,7 +327,8 @@ final class Controller
             $lieu = Lieu::getInstance($id_lieu);
             $smarty->assign('lieu', $lieu);
             $smarty->assign(
-                'events', Event::find(
+                'events',
+                Event::find(
                     [
                         'online' => true,
                         'datfin' => date('Y-m-d H:i:s'),
@@ -364,7 +360,7 @@ final class Controller
      *
      * @return string
      */
-    static function edit(): string
+    public static function edit(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -397,14 +393,12 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateVideoEditForm($data, $errors)) {
-
+            if (self::validateVideoEditForm($data, $errors)) {
                 $video->setName($data['name'])
                     ->setIdLieu($data['id_lieu'])
                     ->setIdEvent($data['id_event'])
                     ->setIdGroupe($data['id_groupe']) // deprecated
                     ->setOnline($data['online']);
-
                 $video->save();
 
                 $video->unlinkGroupes();
@@ -434,13 +428,10 @@ final class Controller
                 Log::action(Log::ACTION_VIDEO_EDIT, $video->getId());
 
                 Tools::redirect('/videos/my');
-
             } else {
-
                 foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
-
             }
         }
 
@@ -452,7 +443,8 @@ final class Controller
         $smarty->assign('video', $video);
 
         $smarty->assign(
-            'groupes', Groupe::find(
+            'groupes',
+            Groupe::find(
                 [
                     'online' => true,
                     'order_by' => 'name',
@@ -484,7 +476,7 @@ final class Controller
      *
      * @return string
      */
-    static function delete(): string
+    public static function delete(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -536,7 +528,7 @@ final class Controller
      *
      * @return array
      */
-    static function get_meta(): array
+    public static function getMeta(): array
     {
         $code = (string) Route::params('code');
 
@@ -564,7 +556,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateVideoCreateForm(array $data, array &$errors): bool
+    private static function validateVideoCreateForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
@@ -588,7 +580,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateVideoEditForm(array $data, array &$errors): bool
+    private static function validateVideoEditForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la vidéo.";

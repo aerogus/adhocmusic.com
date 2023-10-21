@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 /**
  *
@@ -8,7 +12,7 @@ final class Controller
     /**
      *
      */
-    static function index(): string
+    public static function index(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -31,7 +35,7 @@ final class Controller
     /**
      * @return string
      */
-    static function show(): string
+    public static function show(): string
     {
         $id = (int) Route::params('id');
         $comment = Comment::getInstance($id);
@@ -44,7 +48,7 @@ final class Controller
     /**
      * @return string
      */
-    static function fetch(): string
+    public static function fetch(): string
     {
         $smarty = new AdHocSmarty();
         return $smarty->fetch('comments/fetch.tpl');
@@ -53,7 +57,7 @@ final class Controller
     /**
      * @return string
      */
-    static function create(): string
+    public static function create(): string
     {
         $fp = fopen(ADHOC_ROOT_PATH . '/log/hack-comment.log', 'a');
         fwrite($fp, print_r($_GET, true) . "\n" . print_r($_POST, true) . "\n" . print_r($_SERVER, true));
@@ -98,7 +102,7 @@ final class Controller
     /**
      * @return string
      */
-    static function ajax_delete(): string
+    public static function ajaxDelete(): string
     {
         $id = (int) Route::params('id');
         Tools::auth(Membre::TYPE_ADMIN);
@@ -113,7 +117,7 @@ final class Controller
     /**
      * @return string
      */
-    static function delete(): string
+    public static function delete(): string
     {
         $id = (int) Route::params('id');
 

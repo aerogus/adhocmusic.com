@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 use Reference\Departement;
 
@@ -12,7 +16,7 @@ final class Controller
     /**
      * @return string
      */
-    static function my(): string
+    public static function my(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -24,7 +28,7 @@ final class Controller
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
             ->addStep('Mes musiques');
 
-        $page = (int) Route::params('page');;
+        $page = (int) Route::params('page');
         $id = (int) Route::params('id');
         $online = (bool) Route::params('online');
 
@@ -71,7 +75,7 @@ final class Controller
     /**
      * @return string
      */
-    static function show(): string
+    public static function show(): string
     {
         $id = (int) Route::params('id');
 
@@ -97,7 +101,8 @@ final class Controller
                 ->addStep($groupe->getName(), $groupe->getUrl());
             $smarty->assign('og_image', $groupe->getMiniPhoto());
             $smarty->assign(
-                'og_audio', [
+                'og_audio',
+                [
                     'url' => $audio->getDirectMp3Url(),
                     'title' => $audio->getName(),
                     'artist' => $groupe->getName(),
@@ -112,9 +117,10 @@ final class Controller
         if ($audio->getIdEvent()) {
             $event = Event::getInstance($audio->getIdEvent());
             $smarty->assign('event', $event);
-            $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysql_datetime($event->getDate(), "d/m/Y") . ")";
+            $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysqlDatetime($event->getDate(), "d/m/Y") . ")";
             $smarty->assign(
-                'photos', Photo::find(
+                'photos',
+                Photo::find(
                     [
                         'id_event' => $event->getIdEvent(),
                         'id_groupe' => $audio->getIdGroupe(),
@@ -125,7 +131,8 @@ final class Controller
                 )
             );
             $smarty->assign(
-                'videos', Video::find(
+                'videos',
+                Video::find(
                     [
                         'id_event' => $event->getIdEvent(),
                         'id_groupe' => $audio->getIdGroupe(),
@@ -151,7 +158,8 @@ final class Controller
         $smarty->assign('audio', $audio);
 
         $smarty->assign(
-            'comments', Comment::find(
+            'comments',
+            Comment::find(
                 [
                     'id_type' => 's',
                     'id_content' => $audio->getIdAudio(),
@@ -168,7 +176,7 @@ final class Controller
     /**
      * @return string
      */
-    static function create(): string
+    public static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -196,7 +204,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateAudioForm($data, $errors)) {
+            if (self::validateAudioForm($data, $errors)) {
                 $audio = (new Audio())
                     ->setName($data['name'])
                     ->setIdGroupe($data['id_groupe'])
@@ -234,7 +242,8 @@ final class Controller
             $smarty->assign('groupe', $groupe);
         } else {
             $smarty->assign(
-                'groupes', Groupe::find(
+                'groupes',
+                Groupe::find(
                     [
                         'online' => true,
                         'order_by' => 'name',
@@ -249,7 +258,8 @@ final class Controller
             $lieu = Lieu::getInstance($id_lieu);
             $smarty->assign('lieu', $lieu);
             $smarty->assign(
-                'events', Event::find(
+                'events',
+                Event::find(
                     [
                         'online' => true,
                         'datfin' => date('Y-m-d H:i:s'),
@@ -281,7 +291,7 @@ final class Controller
     /**
      * @return string
      */
-    static function edit(): string
+    public static function edit(): string
     {
         $id = (int) Route::params('id');
         $page = (int) Route::params('page');
@@ -322,8 +332,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateAudioForm($data, $errors)) {
-
+            if (self::validateAudioForm($data, $errors)) {
                 $audio->setName($data['name'])
                     ->setIdLieu($data['id_lieu'])
                     ->setIdContact($data['id_contact'])
@@ -337,19 +346,16 @@ final class Controller
                 } else {
                     $smarty->assign('error_generic', true);
                 }
-
             } else {
-
                 foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
-
             }
-
         }
 
         $smarty->assign(
-            'groupes', Groupe::find(
+            'groupes',
+            Groupe::find(
                 [
                     'online' => true,
                     'order_by' => 'name',
@@ -380,7 +386,7 @@ final class Controller
     /**
      * @return string
      */
-    static function delete(): string
+    public static function delete(): string
     {
         $id = (int) Route::params('id');
 
@@ -442,7 +448,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateAudioForm($data, &$errors): bool
+    private static function validateAudioForm($data, &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = true;

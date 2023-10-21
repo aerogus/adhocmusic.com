@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 use Reference\City;
 use Reference\Departement;
@@ -14,7 +18,7 @@ final class Controller
     /**
      * @return string
      */
-    static function index(): string
+    public static function index(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -77,7 +81,7 @@ final class Controller
     /**
      * @return string
      */
-    static function my(): string
+    public static function my(): string
     {
         $page = (int) Route::params('page');
 
@@ -94,13 +98,12 @@ final class Controller
         $smarty->assign('page', $page);
 
         return $smarty->fetch('lieux/my.tpl');
-
     }
 
     /**
      * @return string
      */
-    static function show(): string
+    public static function show(): string
     {
         $id = (int) Route::params('id');
 
@@ -150,7 +153,8 @@ final class Controller
         $smarty->assign('description', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCity()->getCp() . " " . $lieu->getCity()->getName());
 
         $smarty->assign(
-            'events_f', Event::find(
+            'events_f',
+            Event::find(
                 [
                     'id_lieu' => $lieu->getIdLieu(),
                     'online' => true,
@@ -163,7 +167,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'events_p', Event::find(
+            'events_p',
+            Event::find(
                 [
                     'id_lieu' => $lieu->getIdLieu(),
                     'online' => true,
@@ -176,7 +181,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'photos', Photo::find(
+            'photos',
+            Photo::find(
                 [
                     'id_lieu' => $lieu->getIdLieu(),
                     'online' => true,
@@ -187,7 +193,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'audios', Audio::find(
+            'audios',
+            Audio::find(
                 [
                     'id_lieu' => $lieu->getIdLieu(),
                     'online' => true,
@@ -197,7 +204,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'videos', Video::find(
+            'videos',
+            Video::find(
                 [
                     'id_lieu' => $lieu->getIdLieu(),
                     'online' => true,
@@ -226,7 +234,7 @@ final class Controller
     /**
      * @return string
      */
-    static function create(): string
+    public static function create(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -236,7 +244,6 @@ final class Controller
         $smarty->enqueue_script('/js/lieux/create.js');
 
         if (Tools::isSubmit('form-lieu-create')) {
-
             $data = [
                 'id_country'     => (string) Route::params('id_country'),
                 'id_region'      => (string) Route::params('id_region'),
@@ -253,8 +260,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateLieuCreateForm($data, $errors)) {
-
+            if (self::validateLieuCreateForm($data, $errors)) {
                 $lieu = (new Lieu())
                     ->setIdCountry($data['id_country'])
                     ->setIdRegion($data['id_region'])
@@ -324,7 +330,7 @@ final class Controller
     /**
      * @return string
      */
-    static function edit(): string
+    public static function edit(): string
     {
         $id = (int) Route::params('id');
 
@@ -350,7 +356,6 @@ final class Controller
         }
 
         if (Tools::isSubmit('form-lieu-edit')) {
-
             $data = [
                 'id'             => (int) Route::params('id'),
                 'id_country'     => (string) Route::params('id_country'),
@@ -368,8 +373,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateLieuEditForm($data, $errors)) {
-
+            if (self::validateLieuEditForm($data, $errors)) {
                 $lieu = Lieu::getInstance($data['id'])
                     ->setIdCountry($data['id_country'])
                     ->setIdRegion($data['id_region'])
@@ -431,7 +435,7 @@ final class Controller
     /**
      * @return string
      */
-    static function delete(): string
+    public static function delete(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -465,7 +469,7 @@ final class Controller
     /**
      * @return string
      */
-    static function fetch(): string
+    public static function fetch(): string
     {
         $mode  = (string) Route::params('mode'); // radius|boundary|admin
         $lat   = (float) Route::params('lat');
@@ -481,8 +485,7 @@ final class Controller
             $limit = 20;
         }
 
-        switch ($mode)
-        {
+        switch ($mode) {
             case 'radius':
                 $distance = (int) Route::params('distance');
                 return Lieu::fetchLieuxByRadius(
@@ -558,7 +561,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateLieuCreateForm(array $data, array &$errors): bool
+    private static function validateLieuCreateForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = true;
@@ -577,7 +580,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateLieuEditForm(array $data, array &$errors): bool
+    private static function validateLieuEditForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = true;

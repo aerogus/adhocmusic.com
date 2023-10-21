@@ -1,7 +1,11 @@
-<?php declare(strict_types=1);
+<?php
 
-use Reference\Style;
-use Reference\TypeMusicien;
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
+
+use Adhoc\Model\Reference\Style;
+use Adhoc\Model\Reference\TypeMusicien;
 
 define('ADM_NB_MEMBERS_PER_PAGE', 25);
 
@@ -10,7 +14,7 @@ final class Controller
     /**
      * @return string
      */
-    static function index(): string
+    public static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -30,7 +34,7 @@ final class Controller
     /**
      * @return string
      */
-    static function groupes_index(): string
+    public static function groupesIndex(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -43,7 +47,8 @@ final class Controller
         $page = (int) Route::params('page');
 
         $smarty->assign(
-            'groupes', Groupe::find(
+            'groupes',
+            Groupe::find(
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
@@ -64,7 +69,7 @@ final class Controller
     /**
      * @return string
      */
-    static function groupes_show(): string
+    public static function groupesShow(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -85,7 +90,7 @@ final class Controller
     /**
      * @return string
      */
-    static function membres_index(): string
+    public static function membresIndex(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -127,7 +132,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->assign('membres',  $membres);
+        $smarty->assign('membres', $membres);
 
         $smarty->assign('sort', $sort);
         $smarty->assign('sortinv', $sortinv);
@@ -146,7 +151,8 @@ final class Controller
         $smarty->assign('types_musicien', TypeMusicien::findAll());
 
         $smarty->assign(
-            'search', [
+            'search',
+            [
                 'pseudo' => $pseudo,
                 'last_name' => $last_name,
                 'first_name' => $first_name,
@@ -157,7 +163,7 @@ final class Controller
         // pagination
         $smarty->assign('nb_items', $nb_membres);
         $smarty->assign('nb_items_per_page', ADM_NB_MEMBERS_PER_PAGE);
-        $smarty->assign('link_base_params', 'order_by='.$order_by.'&sort='.$sort);
+        $smarty->assign('link_base_params', 'order_by=' . $order_by . '&sort=' . $sort);
 
         return $smarty->fetch('adm/membres/index.tpl');
     }
@@ -165,7 +171,7 @@ final class Controller
     /**
      * @return string
      */
-    static function membres_show(): string
+    public static function membresShow(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -186,7 +192,7 @@ final class Controller
     /**
      * @return string
      */
-    static function membres_delete(): string
+    public static function membresDelete(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -215,7 +221,7 @@ final class Controller
     /**
      * @return string
      */
-    static function groupe_de_style(): string
+    public static function groupeDeStyle(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -253,7 +259,7 @@ final class Controller
     /**
      * @return string
      */
-    static function groupe_de_style_id(): string
+    public static function groupeDeStyleId(): string
     {
         if (Tools::isSubmit('form-groupe-de-style')) {
             return self::groupe_de_style_submit();
@@ -289,7 +295,7 @@ final class Controller
 
         // todo: dans le tpl !!
         $form_style = [];
-        for ($cpt_style = 0 ; $cpt_style < 3 ; $cpt_style ++) {
+        for ($cpt_style = 0; $cpt_style < 3; $cpt_style++) {
             $form_style[$cpt_style]  = '';
             $form_style[$cpt_style] .= "<select name=\"style[" . $cpt_style . "]\">";
             $form_style[$cpt_style] .= "<option value=\"0\">---</option>\n";
@@ -312,7 +318,7 @@ final class Controller
     /**
      * @return string
      */
-    static function groupe_de_style_submit(): string
+    public static function groupeDeStyleSubmit(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -334,8 +340,7 @@ final class Controller
                      . "VALUES (" . $id_groupe . ", " . $id_style . ", " . $ordre . ")";
                 try {
                     $res = $db->query($sql);
-                }
-                catch (Exception $e) {
+                } catch (Exception $e) {
                     die($e->getMessage());
                 }
             }
@@ -347,7 +352,7 @@ final class Controller
     /**
      * @return string
      */
-    static function log_action(): string
+    public static function logAction(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -366,7 +371,7 @@ final class Controller
     /**
      * @return string
      */
-    static function delete_account(): string
+    public static function deleteAccount(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -389,11 +394,9 @@ final class Controller
         !empty($_GET['id']) ? $id = (int) $_GET['id'] : $id = '';
         $smarty->assign('id', $id);
 
-        switch ($action)
-        {
+        switch ($action) {
             case 'show':
             default:
-
                 $out .= "<table>";
 
                 if ($email !== '') {
@@ -407,7 +410,6 @@ final class Controller
                 }
 
                 if ($id > 0) {
-
                     $sql = "SELECT `email` FROM `adhoc_contact` WHERE `id_contact` = " . $id;
                     $res = $db->query($sql);
                     if (list($email) = $db->fetchRow($res)) {
@@ -458,18 +460,15 @@ final class Controller
                 }
 
                 $out .= "</table>";
-
                 break;
 
             case 'delete':
-
                 $out .= "<form method=\"post\" action=\"/adm/delete-account-submit\">"
                       . "<p>Confirmer suppression de id_contact = " . $id . "</p>"
                       . "<input type=\"submit\" class=\"button\" value=\"OUI\" />"
                       . "<input type=\"hidden\" name=\"confirm\" value=\"1\" />"
                       . "<input type=\"hidden\" name=\"id\" value=\"" . $_GET['id'] . "\" />"
                       . "</form>";
-
                 break;
         }
 
@@ -481,7 +480,7 @@ final class Controller
     /**
      * @return string
      */
-    static function delete_account_submit(): string
+    public static function deleteAccountSubmit(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
@@ -500,7 +499,7 @@ final class Controller
         $sql  = "DELETE FROM `adhoc_contact` WHERE `id_contact` = " . $id;
         $out .= $sql . "<br />";
         $db->query($sql);
-        $out .= "*** table contact effacée pour id_contact : ". $id . "<br />";
+        $out .= "*** table contact effacée pour id_contact : " . $id . "<br />";
 
         $sql  = "DELETE FROM `adhoc_membre` WHERE `id_contact` = " . $id;
         $out .= $sql . "<br />";
@@ -526,7 +525,7 @@ final class Controller
     /**
      * @return string
      */
-    static function appartient_a(): string
+    public static function appartientA(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -544,8 +543,7 @@ final class Controller
 
         if (Tools::isSubmit('form-appartient-a')) {
             $groupe = Groupe::getInstance($id_groupe);
-            switch ($action)
-            {
+            switch ($action) {
                 case 'create':
                     $groupe->linkMember($id_contact, $id_type_musicien);
                     break;
@@ -558,8 +556,7 @@ final class Controller
                     break;
             }
 
-            switch ($from)
-            {
+            switch ($from) {
                 case "groupe":
                     Tools::redirect('/adm/groupes/' . $id_groupe);
                     break;
@@ -577,8 +574,7 @@ final class Controller
         $smarty->assign('id_contact', $id_contact);
         $smarty->assign('types', TypeMusicien::findAll());
 
-        switch ($action)
-        {
+        switch ($action) {
             case "create":
                 $smarty->assign('action_lib', 'Ajouter');
                 break;

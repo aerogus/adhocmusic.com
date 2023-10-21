@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 final class Controller
 {
@@ -7,7 +11,7 @@ final class Controller
      *
      * @return string
      */
-    static function auth(): string
+    public static function auth(): string
     {
         // déjà authentifié
         if (!empty($_SESSION['membre'])) {
@@ -32,7 +36,7 @@ final class Controller
      *
      * @return string
      */
-    static function login(): string
+    public static function login(): string
     {
         // déjà authentifié
         if (!empty($_SESSION['membre'])) {
@@ -49,7 +53,6 @@ final class Controller
             }
 
             if ($id_contact = Membre::checkPseudoPassword($pseudo, $password)) {
-
                 // Authentification réussie, on ouvre une session
                 $membre = Membre::getInstance($id_contact);
 
@@ -70,9 +73,7 @@ final class Controller
                 Log::action(Log::ACTION_LOGIN);
 
                 Tools::redirect($url);
-
             } else {
-
                 Log::action(Log::ACTION_LOGIN_FAILED, print_r($_POST, true));
 
                 Trail::getInstance()
@@ -83,9 +84,7 @@ final class Controller
                 $smarty->assign('robots', 'noindex,nofollow');
                 $smarty->assign('auth_failed', true);
                 return $smarty->fetch('auth/login.tpl');
-
             }
-
         } else {
             Log::action(Log::ACTION_LOGIN_FAILED, print_r($_POST, true));
             die;
@@ -108,24 +107,26 @@ final class Controller
      *
      * @return ?string
      */
-    static function logout()
+    public static function logout()
     {
         // si bien identifié, destruction de la session
         if (!empty($_SESSION['membre'])) {
-
             $_SESSION = [];
             if (ini_get("session.use_cookies")) {
                 $params = session_get_cookie_params();
                 setcookie(
-                    session_name(), '', time() - 42000,
-                    $params["path"], $params["domain"],
-                    $params["secure"], $params["httponly"]
+                    session_name(),
+                    '',
+                    time() - 42000,
+                    $params["path"],
+                    $params["domain"],
+                    $params["secure"],
+                    $params["httponly"]
                 );
             }
             session_destroy();
 
             Log::action(Log::ACTION_LOGOUT);
-
         }
 
         Tools::redirect('/?logout');
@@ -134,7 +135,7 @@ final class Controller
     /**
      * @return string
      */
-    static function change_password(): string
+    public static function changePassword(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -184,7 +185,7 @@ final class Controller
     /**
      * @return string
      */
-    static function lost_password(): string
+    public static function lostPassword(): string
     {
         // déjà authentifié
         if (!empty($_SESSION['membre'])) {
@@ -204,7 +205,6 @@ final class Controller
             $email = (string) Route::params('email');
             if (Email::validate($email)) {
                 if ($id_contact = Membre::getIdByEmail($email)) {
-
                     $membre = Membre::getInstance($id_contact);
                     $new_password = Tools::generatePassword(12);
                     $membre->setPassword($new_password);
@@ -222,7 +222,6 @@ final class Controller
                         $smarty->assign('sent_ko', true);
                         $smarty->assign('new_password', $new_password); // DEBUG ONLY
                     }
-
                 } else {
                     if ($id_contact = Contact::getIdByEmail($email)) {
                         // pas membre mais contact
@@ -249,7 +248,7 @@ final class Controller
      *
      * @return array
      */
-    static function check_email(): array
+    public static function checkEmail(): array
     {
         $email = (string) Route::params('email');
         $out = ['email' => $email];
@@ -271,7 +270,7 @@ final class Controller
      *
      * @return array
      */
-    static function check_pseudo(): array
+    public static function checkPseudo(): array
     {
         $pseudo = (string) Route::params('pseudo');
         $out = ['pseudo' => $pseudo];

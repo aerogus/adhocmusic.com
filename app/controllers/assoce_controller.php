@@ -1,11 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 final class Controller
 {
     /**
      * @return string
      */
-    static function assoce(): string
+    public static function assoce(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -17,7 +21,7 @@ final class Controller
     /**
      * @return string
      */
-    static function concerts(): string
+    public static function concerts(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -37,7 +41,7 @@ final class Controller
     /**
      * @return string
      */
-    static function afterworks(): string
+    public static function afterworks(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -49,7 +53,7 @@ final class Controller
     /**
      * @return string
      */
-    static function afterworks_inscription(): string
+    public static function afterworksInscription(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -60,7 +64,6 @@ final class Controller
             ->addStep("Inscription");
 
         if (!Tools::isSubmit('form-afterworks')) {
-
             $smarty->assign('show_form', true);
 
             // valeurs par défaut
@@ -86,9 +89,7 @@ final class Controller
                 }
                 $data['email'] = $_SESSION['membre']->getEmail();
             }
-
         } else {
-
             $data = [
                 'name'    => trim((string) Route::params('name')),
                 'email'   => trim((string) Route::params('email')),
@@ -101,17 +102,22 @@ final class Controller
                 'check'   => (string) Route::params('check'),
             ];
             $data['creneaux'] = [];
-            if ($data['h1930-2030']) $data['creneaux'][] = '19h30-20h30';
-            if ($data['h2030-2130']) $data['creneaux'][] = '20h30-21h30';
-            if ($data['h2130-2230']) $data['creneaux'][] = '21h30-22h30';
+            if ($data['h1930-2030']) {
+                $data['creneaux'][] = '19h30-20h30';
+            }
+            if ($data['h2030-2130']) {
+                $data['creneaux'][] = '20h30-21h30';
+            }
+            if ($data['h2130-2230']) {
+                $data['creneaux'][] = '21h30-22h30';
+            }
             $data['creneaux'] = implode(', ', $data['creneaux']);
 
             $errors = [];
 
-            self::_validateAfterworksForm($data, $errors);
+            self::validateAfterworksForm($data, $errors);
 
             if (empty($errors)) {
-
                 $data['photo_url'] = '';
                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
                     $outputFile = MEDIA_PATH . "/afterworks/" . md5($data['email']) . "-" . time() . ".jpg";
@@ -133,16 +139,13 @@ final class Controller
                 $data['email_reply_to'] = 'contact@adhocmusic.com';
                 if (Email::send($data['email'], "[cc] " . $data['subject'], 'form-afterworks-cc', $data)) {
                 }
-
             } else {
-
                 // erreur dans le form
                 $smarty->assign('sent_ko', true);
                 $smarty->assign('show_form', true);
                 foreach ($errors as $k => $v) {
                     $smarty->assign('error_' . $k, $v);
                 }
-
             }
         }
 
@@ -163,7 +166,7 @@ final class Controller
     /**
      * @return string
      */
-    static function festival(): string
+    public static function festival(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -175,7 +178,7 @@ final class Controller
     /**
      * @return string
      */
-    static function equipe(): string
+    public static function equipe(): string
     {
         $smarty = new AdHocSmarty();
 
@@ -194,7 +197,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateAfterworksForm(array $data, array &$errors): bool
+    private static function validateAfterworksForm(array $data, array &$errors): bool
     {
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez renseigner votre nom";
@@ -207,9 +210,11 @@ final class Controller
         if (empty($data['date'])) {
             $errors['subject'] = "Vous devez saisir une date";
         }
-        if (empty($data['h1930-2030'])
-          && empty($data['h2030-2130'])
-          && empty($data['h2130-2230'])) {
+        if (
+               empty($data['h1930-2030'])
+            && empty($data['h2030-2130'])
+            && empty($data['h2130-2230'])
+        ) {
             $errors['hour'] = "Vous devez saisir au moins un créneau";
         }
         if (!Tools::checkCSRFToken($data['check'])) {

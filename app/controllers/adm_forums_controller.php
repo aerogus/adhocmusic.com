@@ -1,8 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 final class Controller
 {
-    static function index(): string
+    public static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -17,7 +21,7 @@ final class Controller
         return $smarty->fetch('adm/forums/index.tpl');
     }
 
-    static function forum(): string
+    public static function forum(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -46,7 +50,7 @@ final class Controller
         return $smarty->fetch('adm/forums/forum.tpl');
     }
 
-    static function thread(): string
+    public static function thread(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -84,7 +88,7 @@ final class Controller
         return $smarty->fetch('adm/forums/thread.tpl');
     }
 
-    static function write(): string
+    public static function write(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -122,9 +126,7 @@ final class Controller
             }
 
             if (count($subs)) {
-
                 foreach ($subs as $sub) {
-
                     $data = [
                         'title' => 'Nouveau message',
                         'pseudo_to' => $sub['pseudo'],
@@ -142,7 +144,6 @@ final class Controller
                         "forum-prive-new-message",
                         $data
                     );
-
                 }
             }
 

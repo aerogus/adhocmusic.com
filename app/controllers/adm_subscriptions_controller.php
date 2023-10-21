@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 /**
  * Controlleur des cotisations
@@ -8,7 +12,7 @@ final class Controller
     /**
      * @return string
      */
-    static function index(): string
+    public static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -26,7 +30,7 @@ final class Controller
     /**
      * @return string
      */
-    static function create(): string
+    public static function create(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -43,7 +47,7 @@ final class Controller
     /**
      * @return string
      */
-    static function edit(): string
+    public static function edit(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -60,7 +64,7 @@ final class Controller
     /**
      * @return string
      */
-    static function delete(): string
+    public static function delete(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -80,7 +84,7 @@ final class Controller
      *
      * @return array
      */
-    static function api_list(): array
+    public static function apiList(): array
     {
         //Tools::auth(Membre::TYPE_INTERNE);
 
@@ -110,7 +114,7 @@ final class Controller
      *
      * @return array
      */
-    static function api_create(): array
+    public static function apiCreate(): array
     {
         //Tools::auth(Membre::TYPE_INTERNE);
 
@@ -156,7 +160,7 @@ final class Controller
      *
      * @return array
      */
-    static function api_edit(): array
+    public static function apiEdit(): array
     {
         //Tools::auth(Membre::TYPE_INTERNE);
 
@@ -207,9 +211,9 @@ final class Controller
      *
      * @return array
      */
-    static function api_delete(): array
+    public static function apiDelete(): array
     {
-        //Tools::auth(Membre::TYPE_INTERNE);
+        // Tools::auth(Membre::TYPE_INTERNE);
 
         try {
             Subscription::getInstance(Route::params('id'))
@@ -217,7 +221,7 @@ final class Controller
             return [
                 'success' => true,
             ];
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return [
                 'success' => false,
                 'message' => $e->getMessage(),

@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 define('NB_AUDIOS_PER_PAGE', 80);
 
@@ -7,7 +11,7 @@ final class Controller
     /**
      * @return string
      */
-    static function index(): string
+    public static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 

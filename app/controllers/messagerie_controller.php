@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 /**
  *
@@ -8,7 +12,7 @@ final class Controller
     /**
      * @return string
      */
-    static function index(): string
+    public static function index(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -48,7 +52,7 @@ final class Controller
     /**
      * @return string
      */
-    static function read(): string
+    public static function read(): string
     {
         $id = (int) Route::params('id');
 
@@ -91,7 +95,7 @@ final class Controller
     /**
      * @return string
      */
-    static function write(): string
+    public static function write(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -147,7 +151,7 @@ final class Controller
     /**
      * @return string
      */
-    static function delete(): string
+    public static function delete(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -156,8 +160,7 @@ final class Controller
         $mode = (string) Route::params('mode');
         $id   = (int) Route::params('id');
 
-        switch ($mode)
-        {
+        switch ($mode) {
             case "from":
                 $champ = "del_from";
                 break;

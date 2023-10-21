@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 use Reference\City;
 use Reference\WorldCountry;
@@ -14,7 +18,7 @@ final class Controller
      *
      * @return array
      */
-    static function countries(): array
+    public static function countries(): array
     {
         $arr = [];
         foreach (WorldCountry::findAll() as $wc) {
@@ -29,7 +33,7 @@ final class Controller
      *
      * @return array
      */
-    static function regions(): array
+    public static function regions(): array
     {
         $id_country = (string) Route::params('id_country');
         $id_country = strtoupper(substr(trim($id_country), 0, 2));
@@ -52,7 +56,7 @@ final class Controller
      *
      * @return array
      */
-    static function departements(): array
+    public static function departements(): array
     {
         $id_region = (string) Route::params('id_region');
         $id_region = strtoupper(substr(trim($id_region), 0, 2));
@@ -82,7 +86,7 @@ final class Controller
      *
      * @return array
      */
-    static function cities(): array
+    public static function cities(): array
     {
         $tab = [];
 
@@ -110,7 +114,7 @@ final class Controller
      *
      * @return array
      */
-    static function lieux(): array
+    public static function lieux(): array
     {
         $tab = [];
 

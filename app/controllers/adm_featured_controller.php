@@ -1,11 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 final class Controller
 {
     /**
      * @return string
      */
-    static function index(): string
+    public static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -16,7 +20,8 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         $smarty->assign(
-            'featured_front', Featured::find(
+            'featured_front',
+            Featured::find(
                 [
                     'online' => true,
                     'current' => true,
@@ -28,7 +33,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'featured_admin', Featured::find(
+            'featured_admin',
+            Featured::find(
                 [
                     'order_by' => 'id_featured',
                     'sort' => 'DESC',
@@ -45,7 +51,7 @@ final class Controller
     /**
      * @return string
      */
-    static function create(): string
+    public static function create(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -83,8 +89,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateForm($data, $errors)) {
-
+            if (self::validateForm($data, $errors)) {
                 $f = (new Featured())
                     ->setTitle($data['title'])
                     ->setDescription($data['description'])
@@ -104,7 +109,6 @@ final class Controller
                 }
 
                 Tools::redirect('/adm/featured?create=1');
-
             }
 
             if (!empty($errors)) {
@@ -116,7 +120,8 @@ final class Controller
 
         $smarty->assign('data', $data);
         $smarty->assign(
-            'events', Event::find(
+            'events',
+            Event::find(
                 [
                     'online' => true,
                     'datdeb' => date('Y-m-d H:i:s'),
@@ -133,7 +138,7 @@ final class Controller
     /**
      * @return string
      */
-    static function edit(): string
+    public static function edit(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -176,8 +181,7 @@ final class Controller
             ];
             $errors = [];
 
-            if (self::_validateForm($data, $errors)) {
-
+            if (self::validateForm($data, $errors)) {
                 $f->setTitle($data['title'])
                     ->setDescription($data['description'])
                     ->setUrl($data['url'])
@@ -197,7 +201,6 @@ final class Controller
                 }
 
                 Tools::redirect('/adm/featured?edit=1');
-
             }
 
             if (!empty($errors)) {
@@ -215,7 +218,7 @@ final class Controller
     /**
      * @return string
      */
-    static function delete(): string
+    public static function delete(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
@@ -248,7 +251,7 @@ final class Controller
      *
      * @return bool
      */
-    private static function _validateForm(array $data, array &$errors): bool
+    private static function validateForm(array $data, array &$errors): bool
     {
         if (empty($data['title'])) {
             $errors['title'] = "Vous devez saisir un titre";

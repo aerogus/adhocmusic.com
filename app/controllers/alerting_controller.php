@@ -1,11 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 final class Controller
 {
     /**
      * @return string
      */
-    static function my(): string
+    public static function my(): string
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
@@ -34,7 +38,7 @@ final class Controller
     /**
      * @return string
      */
-    static function sub(): string
+    public static function sub(): string
     {
         if (Tools::isAuth() === false) {
             return 'not auth';
@@ -70,7 +74,7 @@ final class Controller
     /**
      * @return string
      */
-    static function unsub(): string
+    public static function unsub(): string
     {
         if (Tools::isAuth() === false) {
             return 'not auth';

@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Controller;
 
 /**
  * Controlleur Medias
@@ -8,7 +12,7 @@ final class Controller
     /**
      * @return string
      */
-    static function index(): string
+    public static function index(): string
     {
         Trail::getInstance()
             ->addStep('Média');
@@ -18,7 +22,8 @@ final class Controller
         $smarty->enqueue_script('/js/medias.js');
 
         $smarty->assign(
-            'groupes', Groupe::find(
+            'groupes',
+            Groupe::find(
                 [
                     'online' => true,
                     'order_by' => 'name',
@@ -28,7 +33,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'events', Event::find(
+            'events',
+            Event::find(
                 [
                     'online' => true,
                     'id_structure' => 1,
@@ -40,7 +46,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'lieux', Lieu::find(
+            'lieux',
+            Lieu::find(
                 [
                     'online' => true,
                     'with_events' => true,
@@ -51,7 +58,8 @@ final class Controller
         );
 
         $smarty->assign(
-            'last_videos', Video::find(
+            'last_videos',
+            Video::find(
                 [
                     'online' => true,
                     'order_by' => 'created_at',
@@ -67,7 +75,7 @@ final class Controller
     /**
      * @return string
      */
-    static function search_results(): string
+    public static function searchResults(): string
     {
         $id_groupe = (int) Route::params('groupe');
         $id_event  = (int) Route::params('event');
