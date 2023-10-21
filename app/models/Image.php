@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  * Classe de création et de conversion d'images
@@ -153,8 +157,7 @@ class Image
         if ($this->_file_sou && file_exists($this->_file_sou) && is_readable($this->_file_sou)) {
             $this->_type = exif_imagetype($this->_file_sou);
 
-            switch ($this->_type)
-            {
+            switch ($this->_type) {
                 case IMAGETYPE_GIF:
                     $this->_handle = imagecreatefromgif($this->_file_sou);
                     break;
@@ -179,11 +182,8 @@ class Image
             $this->selectAll();
 
             return true;
-
         } else {
-
             throw new Exception('file_sou introuvable');
-
         }
     }
 
@@ -196,7 +196,7 @@ class Image
      * règle :
      * 0 <= x1 < x2 < $this->_width
      * 0 <= y1 < y2 < $this->_height
-     * 
+     *
      * @param int $x1 x1
      * @param int $y1 y1
      * @param int $x2 x2
@@ -206,7 +206,8 @@ class Image
      */
     public function setZone(int $x1, int $y1, int $x2, int $y2): object
     {
-        if (($x1 >= 0) && ($x2 > $x1) && ($this->_width > $x2) &&
+        if (
+            ($x1 >= 0) && ($x2 > $x1) && ($this->_width > $x2) &&
             ($y1 >= 0) && ($y2 > $y1) && ($this->_height > $y2)
         ) {
             $this->_x1   = $x1;
@@ -230,7 +231,6 @@ class Image
     public function setZoom(bool $zoom = true): object
     {
         if ($zoom) {
-
             // ratio de l'image destination
             $ratio = $this->_max_width / $this->_max_height;
 
@@ -260,7 +260,6 @@ class Image
             $y2 += $offsety - 1;
 
             $this->setZone($x1, $y1, $x2, $y2);
-
         }
 
         return $this;
@@ -292,7 +291,7 @@ class Image
      * Fixe la couleur courante
      *
      * 3 paramàtres de 0 à 255 chacun
-     * 
+     *
      * @param int $red   rouge
      * @param int $green vert
      * @param int $blue  bleu
@@ -395,11 +394,16 @@ class Image
         imagefill($this->_handle2, 0, 0, $bgcolor);
 
         imagecopyresampled(
-            $this->_handle2, $this->_handle,
-            $this->_deltax,  $this->_deltay,
-            $this->_x1,      $this->_y1,
-            $this->_new_l,   $this->_new_h,
-            $this->_wSel,    $this->_hSel
+            $this->_handle2,
+            $this->_handle,
+            $this->_deltax,
+            $this->_deltay,
+            $this->_x1,
+            $this->_y1,
+            $this->_new_l,
+            $this->_new_h,
+            $this->_wSel,
+            $this->_hSel
         );
     }
 
@@ -468,7 +472,6 @@ class Image
             $this->_deltax = 0;
             $this->_deltay = 0;
         }
-
     }
 
     /**
@@ -510,16 +513,15 @@ class Image
     {
         $this->calculTaille();
         $this->resize();
-        $this->_display();
+        $this->display();
     }
 
     /**
      * Affichage de l'image à l'écran
      */
-    private function _display()
+    private function display()
     {
-        switch ($this->_type)
-        {
+        switch ($this->_type) {
             case IMAGETYPE_GIF:
                 header("Content-Type: image/gif");
                 imagetruecolortopalette($this->_handle2, true, $this->_gif_quality);
@@ -546,7 +548,7 @@ class Image
     {
         $this->calculTaille();
         $this->resize();
-        $this->_write(false);
+        $this->write(false);
     }
 
     /**
@@ -558,16 +560,15 @@ class Image
     {
         $this->calculTaille();
         $this->resize();
-        return $this->_write(true);
+        return $this->write(true);
     }
 
     /**
      * écriture des images générées
      */
-    private function _write(bool $get_contents = false)
+    private function write(bool $get_contents = false)
     {
-        switch ($this->_type)
-        {
+        switch ($this->_type) {
             case IMAGETYPE_GIF:
                 $this->_handle3 = imagecreatetruecolor($this->_new_l, $this->_new_h);
                 imagecopy($this->_handle3, $this->_handle2, 0, 0, 0, 0, $this->_new_l, $this->_new_h);

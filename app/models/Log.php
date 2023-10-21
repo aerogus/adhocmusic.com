@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  * Gestion des logs debug/action
@@ -12,54 +16,54 @@ class Log
 {
     // liste des actions utilisateur à logguer
     // @todo migrer dans LogAction
-    const ACTION_MEMBER_CREATE         =  1;
-    const ACTION_MEMBER_EDIT           =  2;
-    const ACTION_MEMBER_DELETE         =  3;
-    const ACTION_GROUP_CREATE          =  4;
-    const ACTION_GROUP_EDIT            =  5;
-    const ACTION_GROUP_DELETE          =  6;
-    const ACTION_EVENT_CREATE          =  7;
-    const ACTION_EVENT_EDIT            =  8;
-    const ACTION_EVENT_DELETE          =  9;
-    const ACTION_LIEU_CREATE           = 10;
-    const ACTION_LIEU_EDIT             = 11;
-    const ACTION_LIEU_DELETE           = 12;
-    const ACTION_PHOTO_CREATE          = 13;
-    const ACTION_PHOTO_EDIT            = 14;
-    const ACTION_PHOTO_DELETE          = 15;
-    const ACTION_AUDIO_CREATE          = 16;
-    const ACTION_AUDIO_EDIT            = 17;
-    const ACTION_AUDIO_DELETE          = 18;
-    const ACTION_VIDEO_CREATE          = 19;
-    const ACTION_VIDEO_EDIT            = 20;
-    const ACTION_VIDEO_DELETE          = 21;
-    const ACTION_ARTICLE_CREATE        = 22;
-    const ACTION_ARTICLE_EDIT          = 23;
-    const ACTION_ARTICLE_DELETE        = 24;
-    const ACTION_FORUM_CREATE          = 25;
-    const ACTION_FORUM_EDIT            = 26;
-    const ACTION_FORUM_DELETE          = 27;
-    const ACTION_LOGIN                 = 28;
-    const ACTION_LOGIN_FACEBOOK        = 29;
-    const ACTION_LOGIN_FAILED          = 30;
-    const ACTION_LOGOUT                = 31;
-    const ACTION_SEARCH                = 32;
-    const ACTION_CONTACT               = 33;
-    const ACTION_MESSAGE               = 34;
-    const ACTION_PASSWORD_CHANGED      = 35;
-    const ACTION_PASSWORD_REQUESTED    = 36;
-    const ACTION_WATCH_BROADCAST       = 37;
-    const ACTION_ALERTING_GROUPE_SUB   = 38;
-    const ACTION_ALERTING_GROUPE_UNSUB = 39;
-    const ACTION_ALERTING_LIEU_SUB     = 40;
-    const ACTION_ALERTING_LIEU_UNSUB   = 41;
-    const ACTION_ALERTING_EVENT_SUB    = 42;
-    const ACTION_ALERTING_EVENT_UNSUB  = 43;
-    const ACTION_COMMENT_CREATE        = 44;
-    const ACTION_COMMENT_EDIT          = 45;
-    const ACTION_COMMENT_DELETE        = 46;
-    const ACTION_NEWSLETTER_SUB        = 47;
-    const ACTION_NEWSLETTER_UNSUB      = 48;
+    public const ACTION_MEMBER_CREATE         =  1;
+    public const ACTION_MEMBER_EDIT           =  2;
+    public const ACTION_MEMBER_DELETE         =  3;
+    public const ACTION_GROUP_CREATE          =  4;
+    public const ACTION_GROUP_EDIT            =  5;
+    public const ACTION_GROUP_DELETE          =  6;
+    public const ACTION_EVENT_CREATE          =  7;
+    public const ACTION_EVENT_EDIT            =  8;
+    public const ACTION_EVENT_DELETE          =  9;
+    public const ACTION_LIEU_CREATE           = 10;
+    public const ACTION_LIEU_EDIT             = 11;
+    public const ACTION_LIEU_DELETE           = 12;
+    public const ACTION_PHOTO_CREATE          = 13;
+    public const ACTION_PHOTO_EDIT            = 14;
+    public const ACTION_PHOTO_DELETE          = 15;
+    public const ACTION_AUDIO_CREATE          = 16;
+    public const ACTION_AUDIO_EDIT            = 17;
+    public const ACTION_AUDIO_DELETE          = 18;
+    public const ACTION_VIDEO_CREATE          = 19;
+    public const ACTION_VIDEO_EDIT            = 20;
+    public const ACTION_VIDEO_DELETE          = 21;
+    public const ACTION_ARTICLE_CREATE        = 22;
+    public const ACTION_ARTICLE_EDIT          = 23;
+    public const ACTION_ARTICLE_DELETE        = 24;
+    public const ACTION_FORUM_CREATE          = 25;
+    public const ACTION_FORUM_EDIT            = 26;
+    public const ACTION_FORUM_DELETE          = 27;
+    public const ACTION_LOGIN                 = 28;
+    public const ACTION_LOGIN_FACEBOOK        = 29;
+    public const ACTION_LOGIN_FAILED          = 30;
+    public const ACTION_LOGOUT                = 31;
+    public const ACTION_SEARCH                = 32;
+    public const ACTION_CONTACT               = 33;
+    public const ACTION_MESSAGE               = 34;
+    public const ACTION_PASSWORD_CHANGED      = 35;
+    public const ACTION_PASSWORD_REQUESTED    = 36;
+    public const ACTION_WATCH_BROADCAST       = 37;
+    public const ACTION_ALERTING_GROUPE_SUB   = 38;
+    public const ACTION_ALERTING_GROUPE_UNSUB = 39;
+    public const ACTION_ALERTING_LIEU_SUB     = 40;
+    public const ACTION_ALERTING_LIEU_UNSUB   = 41;
+    public const ACTION_ALERTING_EVENT_SUB    = 42;
+    public const ACTION_ALERTING_EVENT_UNSUB  = 43;
+    public const ACTION_COMMENT_CREATE        = 44;
+    public const ACTION_COMMENT_EDIT          = 45;
+    public const ACTION_COMMENT_DELETE        = 46;
+    public const ACTION_NEWSLETTER_SUB        = 47;
+    public const ACTION_NEWSLETTER_UNSUB      = 48;
 
     /**
      * @var array<int,string>
@@ -131,15 +135,15 @@ class Log
      * @param string $log  log
      * @param bool   $save save
      */
-    static function write(string $file, string $log, bool $save = false)
+    public static function write(string $file, string $log, bool $save = false)
     {
-        return self::_write($file, $log, $save);
+        return self::doWrite($file, $log, $save);
     }
 
     /**
      *
      */
-    static function action(int $action, $extra = null)
+    public static function action(int $action, $extra = null)
     {
         $db = DataBase::getInstance();
 
@@ -162,7 +166,7 @@ class Log
 
         $extra = (string) $extra;
 
-        self::_write('action', 'membre=' . $pseudo . ' (' . $id_contact . ') - action=' . self::$_actions[$action] . ' -  extra=' . $extra);
+        self::doWrite('action', 'membre=' . $pseudo . ' (' . $id_contact . ') - action=' . self::$_actions[$action] . ' -  extra=' . $extra);
 
         Email::send(
             DEBUG_EMAIL,
@@ -180,7 +184,7 @@ class Log
              . "`id_contact`, `extra`, "
              . "`ip`, `host`) "
              . "VALUES(NOW(), " . (int) $action . ", "
-             . $id_contact . ", '".$db->escape($extra)."', "
+             . $id_contact . ", '" . $db->escape($extra) . "', "
              . "'" . $db->escape($ip) . "', '" . $db->escape($host) . "')";
 
         return $db->query($sql);
@@ -195,7 +199,7 @@ class Log
      *
      * @return bool
      */
-    protected static function _write(string $type, string $text, bool $save = false)
+    protected static function doWrite(string $type, string $text, bool $save = false)
     {
         self::$_log_file = ADHOC_ROOT_PATH . '/log/' . strtolower(substr($type, 0, 12)) . '.log';
 
@@ -228,7 +232,7 @@ class Log
      *
      * @return array
      */
-    static function getLogsAction(int $action)
+    public static function getLogsAction(int $action)
     {
         $db = DataBase::getInstance();
 
@@ -253,7 +257,7 @@ class Log
     /**
      * @return string
      */
-    static function getLog(): string
+    public static function getLog(): string
     {
         return self::$_log;
     }
@@ -261,7 +265,7 @@ class Log
     /**
      * @return array
      */
-    static function getActions(): array
+    public static function getActions(): array
     {
         return self::$_actions;
     }

@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 use Reference\Style;
 
@@ -327,7 +331,7 @@ class Event extends ObjectModel
 
     /**
      * @param string $created_at created_at
-     * 
+     *
      * @return object
      */
     public function setCreatedAt(string $created_at): object
@@ -438,7 +442,7 @@ class Event extends ObjectModel
 
     /**
      * @param string $text text
-     * 
+     *
      * @return object
      */
     public function setText(string $text): object
@@ -633,9 +637,9 @@ class Event extends ObjectModel
      * @return bool
      * @throws Exception
      */
-    protected function _loadFromDb(): bool
+    protected function loadFromDb(): bool
     {
-        if (!parent::_loadFromDb()) {
+        if (!parent::loadFromDb()) {
             throw new Exception('id_event introuvable');
         }
 
@@ -988,7 +992,7 @@ class Event extends ObjectModel
         $sql = "SELECT DATE(`date`) AS `date`, COUNT(`id_event`) AS `nb_events` "
              . "FROM `adhoc_event` "
              . "WHERE YEAR(`date`) = " . (int) $year . " "
-             . "AND MONTH(`date`) = " .(int) $month . " "
+             . "AND MONTH(`date`) = " . (int) $month . " "
              . "GROUP BY DATE(`date`)";
 
         $res = $db->queryWithFetch($sql);

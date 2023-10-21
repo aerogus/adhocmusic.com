@@ -1,6 +1,10 @@
-<?php declare(strict_types=1);
+<?php
 
-define('FORUM_NB_THREADS_PER_PAGE',  100);
+declare(strict_types=1);
+
+namespace Adhoc\Model;
+
+define('FORUM_NB_THREADS_PER_PAGE', 100);
 define('FORUM_NB_MESSAGES_PER_PAGE', 50);
 
 /**
@@ -62,30 +66,48 @@ abstract class Forum
         // 1 - gestion des frimousses
         foreach (self::$smileys as $smiley) {
             // [0] = code / [1] nom du fichier .gif
-            $texte = str_replace($smiley[0], "<img src='".self::$path_smileys.$smiley[1]."' alt='' />", $texte);
+            $texte = str_replace($smiley[0], "<img src='" . self::$path_smileys . $smiley[1] . "' alt='' />", $texte);
         }
 
         // 2 - gestion du texte enrichi
 
         // les gens qui ne respectent pas la casse sont vraiment des tannards !!!
-        $texte = str_replace("[B]" , "<b>" , $texte); $texte = str_replace("[/B]" , "</b>" , $texte);
-        $texte = str_replace("[b]" , "<b>" , $texte); $texte = str_replace("[/b]" , "</b>" , $texte);
-        $texte = str_replace("[I]" , "<i>" , $texte); $texte = str_replace("[/I]" , "</i>" , $texte);
-        $texte = str_replace("[i]" , "<i>" , $texte); $texte = str_replace("[/i]" , "</i>" , $texte);
-        $texte = str_replace("[U]" , "<u>" , $texte); $texte = str_replace("[/U]" , "</u>" , $texte);
-        $texte = str_replace("[u]" , "<u>" , $texte); $texte = str_replace("[/u]" , "</u>" , $texte);
-        $texte = str_replace("[H1]", "<h1>", $texte); $texte = str_replace("[/H1]", "</h1>", $texte);
-        $texte = str_replace("[h1]", "<h1>", $texte); $texte = str_replace("[/h1]", "</h1>", $texte);
-        $texte = str_replace("[H2]", "<h2>", $texte); $texte = str_replace("[/H2]", "</h2>", $texte);
-        $texte = str_replace("[h2]", "<h2>", $texte); $texte = str_replace("[/h2]", "</h2>", $texte);
-        $texte = str_replace("[H3]", "<h3>", $texte); $texte = str_replace("[/H3]", "</h3>", $texte);
-        $texte = str_replace("[h3]", "<h3>", $texte); $texte = str_replace("[/h3]", "</h3>", $texte);
-        $texte = str_replace("[H4]", "<h4>", $texte); $texte = str_replace("[/H4]", "</h4>", $texte);
-        $texte = str_replace("[h4]", "<h4>", $texte); $texte = str_replace("[/h4]", "</h4>", $texte);
-        $texte = str_replace("[H5]", "<h5>", $texte); $texte = str_replace("[/H5]", "</h5>", $texte);
-        $texte = str_replace("[h5]", "<h5>", $texte); $texte = str_replace("[/h5]", "</h5>", $texte);
-        $texte = str_replace("[H6]", "<h6>", $texte); $texte = str_replace("[/H6]", "</h6>", $texte);
-        $texte = str_replace("[h6]", "<h6>", $texte); $texte = str_replace("[/h6]", "</h6>", $texte);
+        $texte = str_replace("[B]", "<b>", $texte);
+        $texte = str_replace("[/B]", "</b>", $texte);
+        $texte = str_replace("[b]", "<b>", $texte);
+        $texte = str_replace("[/b]", "</b>", $texte);
+        $texte = str_replace("[I]", "<i>", $texte);
+        $texte = str_replace("[/I]", "</i>", $texte);
+        $texte = str_replace("[i]", "<i>", $texte);
+        $texte = str_replace("[/i]", "</i>", $texte);
+        $texte = str_replace("[U]", "<u>", $texte);
+        $texte = str_replace("[/U]", "</u>", $texte);
+        $texte = str_replace("[u]", "<u>", $texte);
+        $texte = str_replace("[/u]", "</u>", $texte);
+        $texte = str_replace("[H1]", "<h1>", $texte);
+        $texte = str_replace("[/H1]", "</h1>", $texte);
+        $texte = str_replace("[h1]", "<h1>", $texte);
+        $texte = str_replace("[/h1]", "</h1>", $texte);
+        $texte = str_replace("[H2]", "<h2>", $texte);
+        $texte = str_replace("[/H2]", "</h2>", $texte);
+        $texte = str_replace("[h2]", "<h2>", $texte);
+        $texte = str_replace("[/h2]", "</h2>", $texte);
+        $texte = str_replace("[H3]", "<h3>", $texte);
+        $texte = str_replace("[/H3]", "</h3>", $texte);
+        $texte = str_replace("[h3]", "<h3>", $texte);
+        $texte = str_replace("[/h3]", "</h3>", $texte);
+        $texte = str_replace("[H4]", "<h4>", $texte);
+        $texte = str_replace("[/H4]", "</h4>", $texte);
+        $texte = str_replace("[h4]", "<h4>", $texte);
+        $texte = str_replace("[/h4]", "</h4>", $texte);
+        $texte = str_replace("[H5]", "<h5>", $texte);
+        $texte = str_replace("[/H5]", "</h5>", $texte);
+        $texte = str_replace("[h5]", "<h5>", $texte);
+        $texte = str_replace("[/h5]", "</h5>", $texte);
+        $texte = str_replace("[H6]", "<h6>", $texte);
+        $texte = str_replace("[/H6]", "</h6>", $texte);
+        $texte = str_replace("[h6]", "<h6>", $texte);
+        $texte = str_replace("[/h6]", "</h6>", $texte);
 
         // insertion d image
         $texte = preg_replace('/(\[IMG\])(.*?)(\[\/IMG\])/', "<img src='\\2' />", $texte);
@@ -190,14 +212,14 @@ abstract class Forum
             if (strlen($params['subject']) === 0) {
                 throw new Exception('sujet vide');
             }
-            $params['id_thread'] = static::_createThread(
+            $params['id_thread'] = static::createThread(
                 [
                     'id_forum'   => $params['id_forum'],
                     'subject'    => $params['subject'],
                     'id_contact' => $params['id_contact'],
                 ]
             );
-            static::_updateForum(
+            static::updateForum(
                 [
                     'id_forum'     => $params['id_forum'],
                     'id_contact'   => $params['id_contact'],
@@ -207,7 +229,7 @@ abstract class Forum
             );
         }
 
-        $id_message = static::_createMessage(
+        $id_message = static::createMessage(
             [
                 'id_thread'  => $params['id_thread'],
                 'id_contact' => $params['id_contact'],
@@ -215,7 +237,7 @@ abstract class Forum
             ]
         );
 
-        static::_updateThread(
+        static::updateThread(
             [
                 'id_thread'  => $params['id_thread'],
                 'id_contact' => $params['id_contact'],
@@ -223,7 +245,7 @@ abstract class Forum
             ]
         );
 
-        static::_updateForum(
+        static::updateForum(
             [
                 'id_forum'     => $params['id_forum'],
                 'id_contact'   => $params['id_contact'],
@@ -395,7 +417,7 @@ abstract class Forum
      *
      * @return int $id_message
      */
-    protected static function _createMessage(array $params): int
+    protected static function createMessage(array $params): int
     {
         $db = DataBase::getInstance();
 
@@ -424,7 +446,7 @@ abstract class Forum
      *
      * @return bool
      */
-    protected static function _updateMessage(array $params): bool
+    protected static function updateMessage(array $params): bool
     {
         $db = DataBase::getInstance();
 
@@ -446,7 +468,7 @@ abstract class Forum
      *
      * @return bool
      */
-    protected static function _deleteMessage(array $params): bool
+    protected static function deleteMessage(array $params): bool
     {
         $db = DataBase::getInstance();
 
@@ -467,7 +489,7 @@ abstract class Forum
      *
      * @return int
      */
-    protected static function _createThread(array $params): int
+    protected static function createThread(array $params): int
     {
         $db = DataBase::getInstance();
 
@@ -477,7 +499,7 @@ abstract class Forum
              . "`id_forum`, `nb_messages`, `nb_views`, `subject`) "
              . "VALUES (NOW(), NOW(), "
              . (int) $params['id_contact'] . ", " . (int) $params['id_contact'] . ", "
-             . "'" . $db->escape($params['id_forum']) ."', 0, 0, '" . $db->escape($params['subject']) . "')";
+             . "'" . $db->escape($params['id_forum']) . "', 0, 0, '" . $db->escape($params['subject']) . "')";
 
         $db->query($sql);
 
@@ -493,7 +515,7 @@ abstract class Forum
      *
      * @return bool
      */
-    protected static function _updateThread(array $params): bool
+    protected static function updateThread(array $params): bool
     {
         $db = DataBase::getInstance();
 
@@ -520,7 +542,7 @@ abstract class Forum
      *
      * @return bool
      */
-    protected static function _deleteThread(array $params): bool
+    protected static function deleteThread(array $params): bool
     {
         $db = DataBase::getInstance();
 
@@ -543,7 +565,7 @@ abstract class Forum
      *
      * @return bool
      */
-    protected static function _updateForum(array $params = []): bool
+    protected static function updateForum(array $params = []): bool
     {
         $db = DataBase::getInstance();
 

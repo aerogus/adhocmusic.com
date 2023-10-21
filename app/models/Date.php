@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  * Différentes méthodes et données relatives aux dates
@@ -36,7 +40,7 @@ class Date
      *
      * @return string
      */
-    public static function mysql_datetime(string $datetime, string $format = "d/m/Y à H:i")
+    public static function mysqlDatetime(string $datetime, string $format = "d/m/Y à H:i")
     {
         if (preg_match(self::$regexp_datetime, $datetime, $dt) && checkdate((int) $dt[2], (int) $dt[3], (int) $dt[1])) {
             return date($format, mktime((int) $dt[4], (int) $dt[5], (int) $dt[6], (int) $dt[2], (int) $dt[3], (int) $dt[ 1]));

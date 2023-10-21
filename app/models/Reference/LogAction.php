@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Reference;
 
@@ -41,6 +43,6 @@ class LogAction extends Reference
      */
     protected static $_all_fields = [
         'id_log_action' => 'int', // pk
-        'name'          => 'string',
+        'name' => 'string',
     ];
 }

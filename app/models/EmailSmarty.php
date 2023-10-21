@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  *
@@ -16,14 +20,14 @@ class EmailSmarty extends Smarty
         $this->setCompileDir(SMARTY_TEMPLATE_C_PATH);
         $this->setCacheDir(SMARTY_TEMPLATE_C_PATH);
 
-        $this->registerPlugin('modifier', 'link', ['EmailSmarty', 'modifier_link']);
-        $this->registerPlugin('function', 'image', ['EmailSmarty', 'function_image']);
+        $this->registerPlugin('modifier', 'link', ['EmailSmarty', 'modifierLink']);
+        $this->registerPlugin('function', 'image', ['EmailSmarty', 'functionImage']);
     }
 
     /**
      *
      */
-    public static function modifier_link($url)
+    public static function modifierLink($url)
     {
         // oui je sais pour les global ...
         // @see Controller::email::newsletter
@@ -39,7 +43,7 @@ class EmailSmarty extends Smarty
      *
      * @param array ['type'] ['id'] ['width'] ['height'] ['bgcolor'] ['border'] ['zoom']
      */
-    public static function function_image($params)
+    public static function functionImage($params)
     {
         $type    = (string) $params['type'];
         $id      = (int) $params['id'];
@@ -51,12 +55,19 @@ class EmailSmarty extends Smarty
 
         $uid = $type . '/' . $id . '/' . $width . '/' . $height . '/' . $bgcolor . '/' . $border . '/' . $zoom . '.jpg';
 
-        switch ($type)
-        {
-            case 'photo':  $source = ADHOC_ROOT_PATH . '/media/photo/' . $id . '.jpg'; break;
-            case 'event':  $source = ADHOC_ROOT_PATH . '/media/event/' . $id . '.jpg'; break;
-            case 'video':  $source = ADHOC_ROOT_PATH . '/media/video/' . $id . '.jpg'; break;
-            default:       $source = ''; break;
+        switch ($type) {
+            case 'photo':
+                $source = ADHOC_ROOT_PATH . '/media/photo/' . $id . '.jpg';
+                break;
+            case 'event':
+                $source = ADHOC_ROOT_PATH . '/media/event/' . $id . '.jpg';
+                break;
+            case 'video':
+                $source = ADHOC_ROOT_PATH . '/media/video/' . $id . '.jpg';
+                break;
+            default:
+                $source = '';
+                break;
         }
 
         $cache_local = Image::getCachePath($uid);

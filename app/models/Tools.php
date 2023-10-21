@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  * Méthodes pratiques communes à tout le site AD'HOC
@@ -15,7 +19,7 @@ class Tools
      *
      * @return bool
      */
-    static function isUTF8(string $string): bool
+    public static function isUTF8(string $string): bool
     {
         return (bool) preg_match(
             '%^(?:
@@ -41,7 +45,7 @@ class Tools
      *
      * @todo prendre un array en entrée/sortie
      */
-    static function charSet(string $str, string $mode = 'UTF8'): string
+    public static function charSet(string $str, string $mode = 'UTF8'): string
     {
         switch ($mode)
         {
@@ -69,7 +73,7 @@ class Tools
      *
      * @return string
      */
-    static function removeAccents(string $str): string
+    public static function removeAccents(string $str): string
     {
         $str = self::charSet($str, 'ISO');
         $str = strtr(
@@ -87,7 +91,7 @@ class Tools
      *
      * @return string
      */
-    static function replaceWordEntities(string $string): string
+    public static function replaceWordEntities(string $string): string
     {
         return str_replace(
             ["\r", '&#8216;', '&#8217;', '&#8230;'],
@@ -104,7 +108,7 @@ class Tools
      *
      * @return string
      */
-    static function tronc(string $str, int $maxLength): string
+    public static function tronc(string $str, int $maxLength): string
     {
         $str = trim($str);
         if ((mb_strlen($str) > $maxLength) && ($maxLength > 1)) {
@@ -118,7 +122,7 @@ class Tools
      *
      * @return string
      */
-    static function getCSRFToken(): string
+    public static function getCSRFToken(): string
     {
         $_SESSION['CSRFToken'] = substr(md5((string) time()), 0, 16);
         return $_SESSION['CSRFToken'];
@@ -129,7 +133,7 @@ class Tools
      *
      * @return bool
      */
-    static function checkCSRFToken(string $CSRFToken): bool
+    public static function checkCSRFToken(string $CSRFToken): bool
     {
         return (!empty($_SESSION['CSRFToken']) && ($_SESSION['CSRFToken'] === $CSRFToken));
     }
@@ -142,7 +146,7 @@ class Tools
      *
      * @return bool
      */
-    static function isSubmit(string $formName, string $method = 'POST'): bool
+    public static function isSubmit(string $formName, string $method = 'POST'): bool
     {
         if ($method === 'POST') {
             return (bool) !empty($_POST[$formName . '-submit']);
@@ -158,7 +162,7 @@ class Tools
      *
      * @return string
      */
-    static function base64_url_encode(string $input): string
+    public static function base64_url_encode(string $input): string
     {
         return strtr(base64_encode($input), '+/=', '-_,');
     }
@@ -168,7 +172,7 @@ class Tools
      *
      * @return string
      */
-    static function base64_url_decode(string $input): string
+    public static function base64_url_decode(string $input): string
     {
         return base64_decode(strtr($input, '-_,', '+/='));
     }
@@ -181,7 +185,7 @@ class Tools
      *
      * @return void
      */
-    static function redirect(string $url, bool $forceSsl = false)
+    public static function redirect(string $url, bool $forceSsl = false)
     {
         if ((strpos($url, 'http://') === false) && (strpos($url, 'https://') === false)) {
             $url = HOME_URL . $url;
@@ -211,7 +215,7 @@ class Tools
      *
      * @return bool
      */
-    static function isAuth(): bool
+    public static function isAuth(): bool
     {
         if (empty($_SESSION['membre'])) {
             return false;
@@ -231,7 +235,7 @@ class Tools
      *
      * @return void
      */
-    static function auth(int $type): void
+    public static function auth(int $type): void
     {
         // non identifié
         if (empty($_SESSION['membre'])) {
@@ -257,7 +261,7 @@ class Tools
      *
      * @return void
      */
-    static function sessionInit()
+    public static function sessionInit()
     {
         ini_set('session.gc_maxlifetime', '7200'); // 2 heures
 
@@ -276,7 +280,7 @@ class Tools
      *
      * @return string
      */
-    static function htmlToText(string $str): string
+    public static function htmlToText(string $str): string
     {
         $str = strip_tags($str);
         $str = wordwrap($str, 80, "\n");
@@ -293,7 +297,7 @@ class Tools
      *
      * @return array
      */
-    static function array_sort(array $array, $on, int $order = SORT_ASC): array
+    public static function array_sort(array $array, $on, int $order = SORT_ASC): array
     {
         $new_array = [];
         $sortable_array = [];
@@ -333,7 +337,7 @@ class Tools
      *
      * @return int
      */
-    static function makeSeed(): int
+    public static function makeSeed(): int
     {
         list($usec, $sec) = explode(' ', microtime());
         $number = $sec * 1000000 + ($usec * 1000000);
@@ -347,7 +351,7 @@ class Tools
      *
      * @return string
      */
-    static function generatePassword(int $length = 16): string
+    public static function generatePassword(int $length = 16): string
     {
         $lettres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         mt_srand(self::makeSeed());
@@ -367,7 +371,7 @@ class Tools
      *
      * @return string
      */
-    static function genAlias(string $name): string
+    public static function genAlias(string $name): string
     {
         $alias = trim($name);
         $alias = mb_strtolower($alias);

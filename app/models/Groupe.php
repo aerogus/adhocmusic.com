@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 use Reference\Style;
 use Reference\TypeMusicien;
@@ -377,7 +381,7 @@ class Groupe extends ObjectModel
             return strtotime($this->_created_at);
         }
         return null;
-     }
+    }
 
     /**
      * Retourne la date de modification de la fiche
@@ -582,7 +586,7 @@ class Groupe extends ObjectModel
 
     /**
      * @param string $influences influences
-     * 
+     *
      * @return object
      */
     public function setInfluences(string $influences): object
@@ -916,9 +920,9 @@ class Groupe extends ObjectModel
      * @return bool
      * @throws Exception
      */
-    protected function _loadFromDb(): bool
+    protected function loadFromDb(): bool
     {
-        if (!parent::_loadFromDb()) {
+        if (!parent::loadFromDb()) {
             throw new Exception('id_groupe introuvable');
         }
 
@@ -1205,7 +1209,7 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_db_table_groupe_style  ."` "
+        $sql = "DELETE FROM `" . self::$_db_table_groupe_style . "` "
              . "WHERE `id_groupe` = " . (int) $this->getIdGroupe() . " "
              . "AND `id_style` = " . (int) $id_style;
 

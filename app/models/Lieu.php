@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 use Reference\City;
 use Reference\Departement;
@@ -151,7 +155,7 @@ class Lieu extends ObjectModel
     /**
      * @return string
      */
-    static function getBaseUrl(): string
+    public static function getBaseUrl(): string
     {
         return MEDIA_URL . '/lieu';
     }
@@ -159,7 +163,7 @@ class Lieu extends ObjectModel
     /**
      * @return string
      */
-    static function getBasePath(): string
+    public static function getBasePath(): string
     {
         return MEDIA_PATH . '/lieu';
     }
@@ -169,7 +173,7 @@ class Lieu extends ObjectModel
      *
      * @return int
      */
-    function getIdLieu(): int
+    public function getIdLieu(): int
     {
         return $this->_id_lieu;
     }
@@ -179,7 +183,7 @@ class Lieu extends ObjectModel
      *
      * @return int
      */
-    function getIdType(): int
+    public function getIdType(): int
     {
         return $this->_id_type;
     }
@@ -189,7 +193,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getType(): string
+    public function getType(): string
     {
         return self::getTypeName($this->_id_type);
     }
@@ -199,7 +203,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getName(): string
+    public function getName(): string
     {
         return $this->_name;
     }
@@ -209,7 +213,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getAddress(): string
+    public function getAddress(): string
     {
         return $this->_address;
     }
@@ -220,7 +224,7 @@ class Lieu extends ObjectModel
      *
      * @return int
      */
-    function getIdCity(): int
+    public function getIdCity(): int
     {
         return $this->_id_city;
     }
@@ -230,7 +234,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function getCity(): object
+    public function getCity(): object
     {
         return City::getInstance($this->getIdCity());
     }
@@ -240,7 +244,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getIdDepartement(): string
+    public function getIdDepartement(): string
     {
         return $this->_id_departement;
     }
@@ -250,7 +254,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function getDepartement(): object
+    public function getDepartement(): object
     {
         return Departement::getInstance($this->getIdDepartement());
     }
@@ -260,7 +264,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getIdRegion(): string
+    public function getIdRegion(): string
     {
         return $this->_id_region;
     }
@@ -270,7 +274,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function getRegion(): object
+    public function getRegion(): object
     {
         return WorldRegion::getInstance(
             [
@@ -285,7 +289,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getIdCountry(): string
+    public function getIdCountry(): string
     {
         return $this->_id_country;
     }
@@ -295,7 +299,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function getCountry(): object
+    public function getCountry(): object
     {
         return WorldCountry::getInstance($this->getIdCountry());
     }
@@ -305,7 +309,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getText(): string
+    public function getText(): string
     {
         return $this->_text;
     }
@@ -315,7 +319,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getSite(): string
+    public function getSite(): string
     {
         return $this->_site;
     }
@@ -325,7 +329,7 @@ class Lieu extends ObjectModel
      *
      * @return int
      */
-    function getIdContact(): int
+    public function getIdContact(): int
     {
         return $this->_id_contact;
     }
@@ -335,7 +339,7 @@ class Lieu extends ObjectModel
      *
      * @return float xx.xxxxxx | null
      */
-    function getLat(): ?float
+    public function getLat(): ?float
     {
         return $this->_lat;
     }
@@ -345,7 +349,7 @@ class Lieu extends ObjectModel
      *
      * @return float xx.xxxxxx | null
      */
-    function getLng(): ?float
+    public function getLng(): ?float
     {
         return $this->_lng;
     }
@@ -356,7 +360,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getGeocode(): string
+    public function getGeocode(): string
     {
         if ($this->getLat() && $this->getLng()) {
             return number_format($this->getLat(), 6, '.', '')
@@ -371,7 +375,7 @@ class Lieu extends ObjectModel
      *
      * @return string|null
      */
-    function getCreatedAt(): ?string
+    public function getCreatedAt(): ?string
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return $this->_created_at;
@@ -384,7 +388,7 @@ class Lieu extends ObjectModel
      *
      * @return int
      */
-    function getCreatedAtTs(): ?int
+    public function getCreatedAtTs(): ?int
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return strtotime($this->_created_at);
@@ -397,7 +401,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getModifiedAt(): ?string
+    public function getModifiedAt(): ?string
     {
         if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
             return (string) $this->_modified_at;
@@ -410,7 +414,7 @@ class Lieu extends ObjectModel
      *
      * @return int
      */
-    function getModifiedAtTs(): ?int
+    public function getModifiedAtTs(): ?int
     {
         if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
             return strtotime($this->_modified_at);
@@ -423,7 +427,7 @@ class Lieu extends ObjectModel
      *
      * @return bool
      */
-    function getOnline(): bool
+    public function getOnline(): bool
     {
         return $this->_online;
     }
@@ -433,7 +437,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    function getUrl(): string
+    public function getUrl(): string
     {
         return HOME_URL . '/lieux/' . $this->getIdLieu();
     }
@@ -443,7 +447,7 @@ class Lieu extends ObjectModel
      *
      * @return float
      */
-    function getDistance(): float
+    public function getDistance(): float
     {
         return $this->_distance;
     }
@@ -453,7 +457,7 @@ class Lieu extends ObjectModel
      *
      * @return string|null
      */
-    function getPhotoUrl(): ?string
+    public function getPhotoUrl(): ?string
     {
         return $this->_photo_url;
     }
@@ -469,7 +473,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setIdType(int $id_type): object
+    public function setIdType(int $id_type): object
     {
         if ($this->_id_type !== $id_type) {
             $this->_id_type = $id_type;
@@ -486,7 +490,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setName(string $name): object
+    public function setName(string $name): object
     {
         if ($this->_name !== $name) {
             $this->_name = $name;
@@ -503,7 +507,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setAddress(string $address): object
+    public function setAddress(string $address): object
     {
         if ($this->_address !== $address) {
             $this->_address = $address;
@@ -520,7 +524,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setIdCity(int $id_city): object
+    public function setIdCity(int $id_city): object
     {
         if ($this->_id_city !== $id_city) {
             $this->_id_city = $id_city;
@@ -537,7 +541,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setIdDepartement(string $id_departement): object
+    public function setIdDepartement(string $id_departement): object
     {
         if (is_numeric($id_departement)) {
             $id_departement = str_pad($id_departement, 2, '0', STR_PAD_LEFT);
@@ -560,7 +564,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setIdRegion(string $id_region): object
+    public function setIdRegion(string $id_region): object
     {
         if ($this->_id_region !== $id_region) {
             $this->_id_region = $id_region;
@@ -577,7 +581,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setIdCountry(string $id_country): object
+    public function setIdCountry(string $id_country): object
     {
         if ($this->_id_country !== $id_country) {
             $this->_id_country = $id_country;
@@ -594,7 +598,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setText(string $text): object
+    public function setText(string $text): object
     {
         if ($this->_text !== $text) {
             $this->_text = $text;
@@ -611,7 +615,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setSite(string $site): object
+    public function setSite(string $site): object
     {
         if ($this->_site !== $site) {
             $this->_site = $site;
@@ -628,7 +632,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setIdContact(int $id_contact): object
+    public function setIdContact(int $id_contact): object
     {
         if ($this->_id_contact !== $id_contact) {
             $this->_id_contact = $id_contact;
@@ -642,10 +646,10 @@ class Lieu extends ObjectModel
      * Set la latitude
      *
      * @param float $lat latitude
-     * 
+     *
      * @return object
      */
-    function setLat(float $lat): object
+    public function setLat(float $lat): object
     {
         if ($this->_lat !== $lat) {
             $this->_lat = $lat;
@@ -662,7 +666,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setLng(float $lng): object
+    public function setLng(float $lng): object
     {
         if ($this->_lng !== $lng) {
             $this->_lng = $lng;
@@ -679,7 +683,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): object
     {
         if ($this->_created_at !== $created_at) {
             $this->_created_at = $created_at;
@@ -694,7 +698,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setCreatedNow(): object
+    public function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -713,7 +717,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setModifiedAt(string $modified_at): object
+    public function setModifiedAt(string $modified_at): object
     {
         if ($this->_modified_at !== $modified_at) {
             $this->_modified_at = $modified_at;
@@ -728,7 +732,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setModifiedNow(): object
+    public function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -747,7 +751,7 @@ class Lieu extends ObjectModel
      *
      * @return object
      */
-    function setOnline(bool $online): object
+    public function setOnline(bool $online): object
     {
         if ($this->_online !== $online) {
             $this->_online = $online;
@@ -765,7 +769,7 @@ class Lieu extends ObjectModel
      * @return bool
      * @throws Exception
      */
-    function delete(): bool
+    public function delete(): bool
     {
         if (parent::delete()) {
             $file = self::getBasePath() . '/' . (int) $this->getId() . '.jpg';
@@ -795,7 +799,7 @@ class Lieu extends ObjectModel
      *
      * @return array
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];
@@ -876,7 +880,7 @@ class Lieu extends ObjectModel
      *
      * @return array
      */
-    static function getLieuxByDep(string $id_departement = null): array
+    public static function getLieuxByDep(string $id_departement = null): array
     {
         $db = DataBase::getInstance();
 
@@ -919,9 +923,9 @@ class Lieu extends ObjectModel
      * @return bool
      * @throws Exception
      */
-    protected function _loadFromDb(): bool
+    protected function loadFromDb(): bool
     {
-        if (!parent::_loadFromDb()) {
+        if (!parent::loadFromDb()) {
             throw new Exception('lieu introuvable');
         }
 
@@ -935,7 +939,7 @@ class Lieu extends ObjectModel
     /**
      * @return bool
      */
-    function hasPhotos(): bool
+    public function hasPhotos(): bool
     {
         return (count($this->getPhotos()) > 0);
     }
@@ -945,7 +949,7 @@ class Lieu extends ObjectModel
      *
      * @return array
      */
-    function getPhotos(): array
+    public function getPhotos(): array
     {
         return Photo::find(
             [
@@ -957,7 +961,7 @@ class Lieu extends ObjectModel
     /**
      * @return bool
      */
-    function hasVideos(): bool
+    public function hasVideos(): bool
     {
         return (count($this->getVideos()) > 0);
     }
@@ -967,7 +971,7 @@ class Lieu extends ObjectModel
      *
      * @return array
      */
-    function getVideos(): array
+    public function getVideos(): array
     {
         return Video::find(
             [
@@ -979,7 +983,7 @@ class Lieu extends ObjectModel
     /**
      * @return bool
      */
-    function hasAudios(): bool
+    public function hasAudios(): bool
     {
         return (count($this->getAudios()) > 0);
     }
@@ -989,7 +993,7 @@ class Lieu extends ObjectModel
      *
      * @return array
      */
-    function getAudios(): array
+    public function getAudios(): array
     {
         return Audio::find(
             [
@@ -1001,7 +1005,7 @@ class Lieu extends ObjectModel
     /**
      * @return bool
      */
-    function hasEvents(): bool
+    public function hasEvents(): bool
     {
         return (count($this->getEvents()) > 0);
     }
@@ -1011,7 +1015,7 @@ class Lieu extends ObjectModel
      *
      * @return array
      */
-    function getEvents(): array
+    public function getEvents(): array
     {
         return Event::find(
             [
@@ -1027,7 +1031,7 @@ class Lieu extends ObjectModel
      *
      * @return array
      */
-    static function getTypes(): array
+    public static function getTypes(): array
     {
         return LieuType::findAll();
     }
@@ -1039,7 +1043,7 @@ class Lieu extends ObjectModel
      *
      * @return string
      */
-    static function getTypeName(int $id_lieu_type)
+    public static function getTypeName(int $id_lieu_type)
     {
         return LieuType::getInstance($id_lieu_type)->getName();
     }
@@ -1049,7 +1053,7 @@ class Lieu extends ObjectModel
      *
      * @todo debuguer car ca passe pas
      */
-    static function mysql_init_geo()
+    public static function mysqlInitGeo()
     {
         $db = DataBase::getInstance();
 
@@ -1092,7 +1096,7 @@ EOT;
      *
      * @return array les infos du lieux et sa distance en km par rapport au point
      */
-    static function fetchLieuxByRadius(array $params): array
+    public static function fetchLieuxByRadius(array $params): array
     {
         $lat      = (float) $params['lat'];
         $lng      = (float) $params['lng'];
@@ -1128,7 +1132,7 @@ EOT;
      *              float ['lng_max']
      *              int ['limit']
      */
-    static function fetchLieuxByBoundary(array $params): array
+    public static function fetchLieuxByBoundary(array $params): array
     {
         $lat     = (float) $params['lat'];
         $lng     = (float) $params['lng'];
@@ -1174,7 +1178,7 @@ EOT;
      *
      * @return array
      */
-    static function fetchLieuxByAdmin(array $params): array
+    public static function fetchLieuxByAdmin(array $params): array
     {
         $lat            = (float) $params['lat'];
         $lng            = (float) $params['lng'];

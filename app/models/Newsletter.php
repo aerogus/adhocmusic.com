@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 define('NEWSLETTER_SUB_KO_ALREADY_SUBSCRIBED_MEMBER', 0x11);
 define('NEWSLETTER_SUB_OK_RESUBSCRIBED_MEMBER', 0x12);
@@ -207,7 +211,7 @@ class Newsletter extends ObjectModel
 
     /**
      * Set une variable de template
-     * 
+     *
      * @param string $key clé
      * @param string $val valeur
      *
@@ -305,9 +309,9 @@ class Newsletter extends ObjectModel
      * @return bool
      * @throws Exception
      */
-    protected function _loadFromDb(): bool
+    protected function loadFromDb(): bool
     {
-        if (!parent::_loadFromDb()) {
+        if (!parent::loadFromDb()) {
             throw new Exception('id_newsletter introuvable');
         }
 
@@ -466,14 +470,14 @@ class Newsletter extends ObjectModel
 
     /**
      * Stats vite fait ...
-     * 
+     *
      * @param int    $id_newsletter id_newsletter
      * @param int    $id_contact    id_contact
      * @param string $url           url
      */
     public static function addHit(int $id_newsletter, int $id_contact, string $url)
     {
-        file_put_contents(ADHOC_ROOT_PATH . '/log/newsletters-hits.txt', date('Y-m-d H:i:s') . "\tnl" . $id_newsletter . "\tid" . $id_contact . "\turl" . $url ."\n", FILE_APPEND | LOCK_EX);
+        file_put_contents(ADHOC_ROOT_PATH . '/log/newsletters-hits.txt', date('Y-m-d H:i:s') . "\tnl" . $id_newsletter . "\tid" . $id_contact . "\turl" . $url . "\n", FILE_APPEND | LOCK_EX);
 
         $ip = false;
         if (isset($_SERVER['REMOTE_ADDR'])) {
@@ -485,7 +489,6 @@ class Newsletter extends ObjectModel
         }
 
         try {
-
             $contact = Contact::getInstance($id_contact)
                 ->setLastnlNow()
                 ->save();
@@ -494,9 +497,8 @@ class Newsletter extends ObjectModel
 
             $sql = "INSERT INTO `adhoc_newsletter_hit` "
                  . "(`date`, `id_newsletter`, `id_contact`, `url`, `ip`, `host`, `useragent`) "
-                 . "VALUES(NOW(), " . (int) $id_newsletter . ", " . (int) $id_contact .", '" . $db->escape($url) . "', '" . $db->escape($ip) . "', '" . $db->escape($host) . "', '" . $db->escape($useragent) . "    ')";
+                 . "VALUES(NOW(), " . (int) $id_newsletter . ", " . (int) $id_contact . ", '" . $db->escape($url) . "', '" . $db->escape($ip) . "', '" . $db->escape($host) . "', '" . $db->escape($useragent) . "    ')";
             $res = $db->query($sql);
-
         } catch (Exception $e) {
             // rien
         }

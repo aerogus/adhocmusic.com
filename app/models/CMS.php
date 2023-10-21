@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  * Classe Content Management System
@@ -418,12 +422,13 @@ class CMS extends ObjectModel
      */
     public static function getIdByAlias(string $alias): ?int
     {
-        if ($cmss = self::find(
-            [
-                'alias' => $alias,
-                'online' => true,
-            ]
-        )
+        if (
+            $cmss = self::find(
+                [
+                    'alias' => $alias,
+                    'online' => true,
+                ]
+            )
         ) {
             return $cmss[0]->getIdCMS();
         }

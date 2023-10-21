@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  *
@@ -43,7 +47,7 @@ class ForumPrive extends Forum
              . "AND `t`.`id_thread` = `m`.`id_thread` "
              . "AND `m`.`id_message` = (SELECT (MIN(`id_message`)) FROM `" . static::$_db_table_forum_message . "` `sm` WHERE `sm`.`id_thread` = `t`.`id_thread`) "
              . "ORDER BY  `t`.`modified_at` DESC, `m`.`id_thread` DESC , `m`.`id_message` DESC "
-             . "LIMIT " . ((int) $page * FORUM_NB_THREADS_PER_PAGE) ."," . FORUM_NB_THREADS_PER_PAGE;
+             . "LIMIT " . ((int) $page * FORUM_NB_THREADS_PER_PAGE) . "," . FORUM_NB_THREADS_PER_PAGE;
 
         $threads = $db->queryWithFetch($sql);
 
@@ -87,7 +91,7 @@ class ForumPrive extends Forum
              . "FROM `" . static::$_db_table_forum_message . "` "
              . "WHERE `id_thread` = " . (int) $id_thread . " "
              . "ORDER BY `id_message` ASC "
-             . "LIMIT " . ((int) $page * FORUM_NB_MESSAGES_PER_PAGE) ."," . FORUM_NB_MESSAGES_PER_PAGE;
+             . "LIMIT " . ((int) $page * FORUM_NB_MESSAGES_PER_PAGE) . "," . FORUM_NB_MESSAGES_PER_PAGE;
         $messages = $db->queryWithFetch($sql);
 
         foreach ($messages as $idx => $message) {
@@ -140,7 +144,7 @@ class ForumPrive extends Forum
 
         $sql = "DELETE FROM `adhoc_forum_prive_subscriber` "
              . "WHERE `id_contact` = " . (int) $id_contact . " "
-             . "AND `id_forum` = '". $db->escape($id_forum) . "'";
+             . "AND `id_forum` = '" . $db->escape($id_forum) . "'";
 
         $db->query($sql);
 

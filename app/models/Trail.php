@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  * Gestion du fil d'Ariane / Trail / BreadCrumbs
@@ -48,7 +52,7 @@ class Trail
      * @param string $title       titre
      * @param string $link        lien (optionnel)
      * @param string $description description (optionnel)
-     * 
+     *
      * @return Trail
      */
     public function addStep(string $title, string $link = '', string $description = ''): Trail

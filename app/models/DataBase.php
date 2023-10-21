@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  * Constantes utiles pour la classe DataBase
@@ -431,20 +435,20 @@ class DataBase
     {
         $dbAndTableName = trim((string) $dbAndTableName);
         if (empty($dbAndTableName)) {
-            throw new Exception('Bad $dbAndTableName in '.__FUNCTION__);
+            throw new Exception('Bad $dbAndTableName in ' . __FUNCTION__);
         }
         if ('`' !== $dbAndTableName[0]) {
-            $dbAndTableName = '`'.$dbAndTableName.'`';
+            $dbAndTableName = '`' . $dbAndTableName . '`';
         }
 
         $fields = '';
         $values = '';
         foreach ($fieldsAndValues as $field => $value) {
-            $fields .= ', `'.(string) $field.'`';
+            $fields .= ', `' . (string) $field . '`';
             if ((is_array($value)) && (!empty($value['special']))) {
-                $values .= ', '.$value['special'];
+                $values .= ', ' . $value['special'];
             } else {
-                $values .= ", '".$this->escape((string) $value, $conn_name)."'";
+                $values .= ", '" . $this->escape((string) $value, $conn_name) . "'";
             }
         }
         if ('' === $values) {
@@ -454,7 +458,7 @@ class DataBase
             $fields[0] = ' ';
             $values[0] = ' ';
         }
-        return ('INSERT INTO '.$dbAndTableName.' ('.$fields.') VALUES ('.$values.')');
+        return ('INSERT INTO ' . $dbAndTableName . ' (' . $fields . ') VALUES (' . $values . ')');
     }
 
     /**

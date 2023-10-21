@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 use Reference\City;
 use Reference\Departement;
@@ -218,7 +222,7 @@ class Membre extends Contact
     /**
      * @return string
      */
-    static function getBaseUrl(): string
+    public static function getBaseUrl(): string
     {
         return MEDIA_URL . '/membre';
     }
@@ -226,7 +230,7 @@ class Membre extends Contact
     /**
      * @return string
      */
-    static function getBasePath(): string
+    public static function getBasePath(): string
     {
         return MEDIA_PATH . '/membre';
     }
@@ -236,7 +240,7 @@ class Membre extends Contact
      *
      * @return array
      */
-    protected function _getAllFields(bool $fusion = true): array
+    protected function getAllFields(bool $fusion = true): array
     {
         if ($fusion) {
             return array_merge(
@@ -256,7 +260,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getPseudo(): ?string
+    public function getPseudo(): ?string
     {
         return $this->_pseudo;
     }
@@ -265,7 +269,7 @@ class Membre extends Contact
      * @return string|null
      * /!\ sous forme cryptée mysql
      */
-    function getPassword(): ?string
+    public function getPassword(): ?string
     {
         return $this->_password;
     }
@@ -273,7 +277,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getLastName(): ?string
+    public function getLastName(): ?string
     {
         return $this->_last_name;
     }
@@ -281,7 +285,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getFirstName(): ?string
+    public function getFirstName(): ?string
     {
         return $this->_first_name;
     }
@@ -289,7 +293,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getAddress(): ?string
+    public function getAddress(): ?string
     {
         return $this->_address;
     }
@@ -297,7 +301,7 @@ class Membre extends Contact
     /**
      * @return int|null
      */
-    function getIdCity(): ?int
+    public function getIdCity(): ?int
     {
         return $this->_id_city;
     }
@@ -305,7 +309,7 @@ class Membre extends Contact
     /**
      * @return object|null
      */
-    function getCity(): ?object
+    public function getCity(): ?object
     {
         if (is_null($this->getIdCity())) {
             return null;
@@ -321,7 +325,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getIdDepartement(): ?string
+    public function getIdDepartement(): ?string
     {
         return $this->_id_departement;
     }
@@ -329,7 +333,7 @@ class Membre extends Contact
     /**
      * @return object|null
      */
-    function getDepartement(): ?object
+    public function getDepartement(): ?object
     {
         if (is_null($this->getIdDepartement())) {
             return null;
@@ -345,7 +349,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getIdRegion(): ?string
+    public function getIdRegion(): ?string
     {
         return $this->_id_region;
     }
@@ -353,7 +357,7 @@ class Membre extends Contact
     /**
      * @return object|null
      */
-    function getRegion(): ?object
+    public function getRegion(): ?object
     {
         if (is_null($this->getIdRegion())) {
             return null;
@@ -369,7 +373,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getIdCountry(): ?string
+    public function getIdCountry(): ?string
     {
         return $this->_id_country;
     }
@@ -377,7 +381,7 @@ class Membre extends Contact
     /**
      * @return object|null
      */
-    function getCountry(): ?object
+    public function getCountry(): ?object
     {
         if (is_null($this->getIdCountry())) {
             return null;
@@ -393,7 +397,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getTel(): ?string
+    public function getTel(): ?string
     {
         return $this->_tel;
     }
@@ -401,7 +405,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getPort(): ?string
+    public function getPort(): ?string
     {
         return $this->_port;
     }
@@ -409,7 +413,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getSite(): ?string
+    public function getSite(): ?string
     {
         return $this->_site;
     }
@@ -417,7 +421,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getText(): ?string
+    public function getText(): ?string
     {
         return $this->_text;
     }
@@ -425,7 +429,7 @@ class Membre extends Contact
     /**
      * @return bool
      */
-    function getMailing(): bool
+    public function getMailing(): bool
     {
         return $this->_mailing;
     }
@@ -433,7 +437,7 @@ class Membre extends Contact
     /**
      * @return int
      */
-    function getLevel(): int
+    public function getLevel(): int
     {
         return $this->_level;
     }
@@ -441,7 +445,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getCreatedAt(): ?string
+    public function getCreatedAt(): ?string
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return $this->_created_at;
@@ -452,7 +456,7 @@ class Membre extends Contact
     /**
      * @return int|null
      */
-    function getCreatedAtTs(): ?int
+    public function getCreatedAtTs(): ?int
     {
         if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
             return strtotime($this->_created_at);
@@ -463,7 +467,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getModifiedAt(): ?string
+    public function getModifiedAt(): ?string
     {
         if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
             return $this->_modified_at;
@@ -474,7 +478,7 @@ class Membre extends Contact
     /**
      * @return int|null
      */
-    function getModifiedAtTs(): ?int
+    public function getModifiedAtTs(): ?int
     {
         if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
              return strtotime($this->_modified_at);
@@ -485,7 +489,7 @@ class Membre extends Contact
     /**
      * @return string|null
      */
-    function getVisitedAt(): ?string
+    public function getVisitedAt(): ?string
     {
         if (!is_null($this->_visited_at) && Date::isDateTimeOk($this->_visited_at)) {
             return $this->_visited_at;
@@ -496,7 +500,7 @@ class Membre extends Contact
     /**
      * @return int|null
      */
-    function getVisitedAtTs(): ?int
+    public function getVisitedAtTs(): ?int
     {
         if (!is_null($this->_visited_at) && Date::isDateTimeOk($this->_visited_at)) {
              return strtotime($this->_visited_at);
@@ -509,7 +513,7 @@ class Membre extends Contact
      *
      * @return string
      */
-    function getUrl(): string
+    public function getUrl(): string
     {
         return HOME_URL . '/membres/' . $this->getIdContact();
     }
@@ -517,7 +521,7 @@ class Membre extends Contact
     /**
      * @return array
      */
-    function getGroupes(): array
+    public function getGroupes(): array
     {
         if (is_null($this->_groupes)) {
             $this->_groupes = Groupe::find(
@@ -538,7 +542,7 @@ class Membre extends Contact
      *
      * @return string|null
      */
-    function getAvatarUrl(): ?string
+    public function getAvatarUrl(): ?string
     {
         if (file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/' . $this->getId() . '.jpg?ts=' . $this->getModifiedAtTs();
@@ -552,7 +556,7 @@ class Membre extends Contact
      * @return string|null
      * @todo uniquement dans MembreAdhoc ?
      */
-    function getAvatarInterneUrl(): ?string
+    public function getAvatarInterneUrl(): ?string
     {
         if (file_exists(self::getBasePath() . '/ca/' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/ca/' . $this->getId() . '.jpg?ts=' . $this->getModifiedAtTs();
@@ -569,7 +573,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setPseudo(string $pseudo): object
+    public function setPseudo(string $pseudo): object
     {
         if ($this->_pseudo !== $pseudo) {
             $this->_pseudo = $pseudo;
@@ -584,7 +588,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setPassword(string $password): object
+    public function setPassword(string $password): object
     {
         if ($this->_password !== $password) {
             $this->_password = $password;
@@ -599,7 +603,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setLastName(?string $last_name): object
+    public function setLastName(?string $last_name): object
     {
         if ($this->_last_name !== $last_name) {
             $this->_last_name = $last_name;
@@ -614,7 +618,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setFirstName(?string $first_name): object
+    public function setFirstName(?string $first_name): object
     {
         if ($this->_first_name !== $first_name) {
             $this->_first_name = $first_name;
@@ -629,7 +633,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setAddress(?string $address): object
+    public function setAddress(?string $address): object
     {
         if ($this->_address !== $address) {
             $this->_address = $address;
@@ -644,7 +648,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setIdCity(?int $id_city): object
+    public function setIdCity(?int $id_city): object
     {
         if ($this->_id_city !== $id_city) {
             $this->_id_city = $id_city;
@@ -659,7 +663,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setIdDepartement(?string $id_departement): object
+    public function setIdDepartement(?string $id_departement): object
     {
         if ($this->_id_departement !== $id_departement) {
             $this->_id_departement = $id_departement;
@@ -671,10 +675,10 @@ class Membre extends Contact
 
     /**
      * @param string|null $id_region id_region
-     * 
+     *
      * @return object
      */
-    function setIdRegion(?string $id_region): object
+    public function setIdRegion(?string $id_region): object
     {
         if ($this->_id_region !== $id_region) {
             $this->_id_region = $id_region;
@@ -689,7 +693,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setIdCountry(?string $id_country): object
+    public function setIdCountry(?string $id_country): object
     {
         if ($this->_id_country !== $id_country) {
             $this->_id_country = $id_country;
@@ -704,7 +708,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setTel(?string $tel): object
+    public function setTel(?string $tel): object
     {
         if ($this->_tel !== $tel) {
             $this->_tel = $tel;
@@ -719,7 +723,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setPort(?string $port): object
+    public function setPort(?string $port): object
     {
         if ($this->_port !== $port) {
             $this->_port = $port;
@@ -734,7 +738,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setSite(?string $site): object
+    public function setSite(?string $site): object
     {
         if ($this->_site !== $site) {
             $this->_site = $site;
@@ -749,7 +753,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setText(?string $text): object
+    public function setText(?string $text): object
     {
         if ($this->_text !== $text) {
             $this->_text = $text;
@@ -764,7 +768,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setMailing(bool $mailing): object
+    public function setMailing(bool $mailing): object
     {
         if ($this->_mailing !== $mailing) {
             $this->_mailing = $mailing;
@@ -779,7 +783,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setLevel(int $level): object
+    public function setLevel(int $level): object
     {
         if ($this->_level !== $level) {
             $this->_level = $level;
@@ -794,7 +798,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): object
     {
         if ($this->_created_at !== $created_at) {
             $this->_created_at = $created_at;
@@ -807,7 +811,7 @@ class Membre extends Contact
     /**
      * @return object
      */
-    function setCreatedNow(): object
+    public function setCreatedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -824,7 +828,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setModifiedAt(?string $modified_at): object
+    public function setModifiedAt(?string $modified_at): object
     {
         if ($this->_modified_at !== $modified_at) {
             $this->_modified_at = $modified_at;
@@ -837,7 +841,7 @@ class Membre extends Contact
     /**
      * @return object
      */
-    function setModifiedNow(): object
+    public function setModifiedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -854,7 +858,7 @@ class Membre extends Contact
      *
      * @return object
      */
-    function setVisitedAt(?string $visited_at): object
+    public function setVisitedAt(?string $visited_at): object
     {
         if ($this->_visited_at !== $visited_at) {
             $this->_visited_at = $visited_at;
@@ -867,7 +871,7 @@ class Membre extends Contact
     /**
      * @return object
      */
-    function setVisitedNow(): object
+    public function setVisitedNow(): object
     {
         $now = date('Y-m-d H:i:s');
 
@@ -899,7 +903,7 @@ class Membre extends Contact
      * @deprecated
      * @todo remplacer par Membre::find()
      */
-    static function getMembres(array $params = [])
+    public static function getMembres(array $params = [])
     {
         $pseudo = null;
         if (isset($params['pseudo'])) {
@@ -937,7 +941,8 @@ class Membre extends Contact
         }
 
         $sort = "id_contact";
-        if (isset($params['sort']) && (
+        if (
+            isset($params['sort']) && (
             $params['sort'] === 'random' || $params['sort'] === 'id_contact'
             || $params['sort'] === 'last_name' || $params['sort'] === 'first_name'
             || $params['sort'] === 'email' || $params['sort'] === 'created_at'
@@ -986,7 +991,7 @@ class Membre extends Contact
 
         $sql .= "ORDER BY ";
         if ($sort === "random") {
-            $sql .= "RAND(".time().") ";
+            $sql .= "RAND(" . time() . ") ";
         } else {
             if ($sort === 'email' || $sort === 'lastnl') {
                 $t = 'c';
@@ -1011,7 +1016,7 @@ class Membre extends Contact
      *
      * @return int
      */
-    function delete(): int
+    public function delete(): int
     {
         $db = DataBase::getInstance();
 
@@ -1026,31 +1031,24 @@ class Membre extends Contact
     /**
      * Sauve en db tables contact et membre
      */
-    function save()
+    public function save()
     {
         $db = DataBase::getInstance();
 
         // retourne les champs non fusionnés
-        $fields = self::_getAllFields(false);
+        $fields = self::getAllFields(false);
 
         // si pas d'id ou id mais n'est pas membre, on insert membre
         if (!$this->getId() || ($this->getId() && !Membre::getPseudoById($this->getIdContact()))) { // INSERT
-
             /* table contact */
-
             // id retrouvé à partir de email ?
             if ($this->getEmail() && ($id_contact = Contact::getIdByEmail($this->getEmail()))) {
-
                 // l'id_contact est retrouvé à partir de l'email, c'est donc déjà un Contact
                 // on ne touche pas à la table, on charge juste l'id
-
                 $this->setId($id_contact);
-
             } else {
-
                 // l'id_contact n'a pas été trouvé à partir de l'email
                 // on doit donc d'abord créer un Contact
-
                 $sql = 'INSERT INTO `' . Contact::getDbTable() . '` (';
                 if (count($this->_modified_fields['contact']) > 0) {
                     foreach ($this->_modified_fields['contact'] as $field => $value) {
@@ -1106,18 +1104,14 @@ class Membre extends Contact
                 $db->query($sql);
 
                 $this->setId((int) $db->insertId());
-
             }
-
         }
 
         // à ce stade le contact est créé, on ne sait pas encore si c'est un membre
         // on essaye de récupérer le pseudo à partir de l'id_contact
 
         if (!Membre::getPseudoById($this->getIdContact())) { // INSERT
-
             /* table membre */
-
             $sql = 'INSERT INTO `' . Membre::getDbTable() . '` (';
             $sql .= '`' . Membre::getDbPk() . '`,';
             if (count($this->_modified_fields['membre']) > 0) {
@@ -1175,11 +1169,11 @@ class Membre extends Contact
             // nouveau membre bien créé !
 
             return $this->getId();
-
         } else { // UPDATE
-
-            if ((count($this->_modified_fields['contact']) === 0)
-                && (count($this->_modified_fields['membre']) === 0)
+            if (
+                (count($this->_modified_fields['contact']) === 0)
+                &&
+                (count($this->_modified_fields['membre']) === 0)
             ) {
                 return true; // pas de changement, ni dans Contact ni dans Membre
             }
@@ -1187,7 +1181,6 @@ class Membre extends Contact
             /* UPDATE contact */
 
             if (count($this->_modified_fields['contact']) > 0) {
-
                 $fields_to_save = '';
                 foreach ($this->_modified_fields['contact'] as $field => $value) {
                     if ($value !== true) {
@@ -1231,13 +1224,11 @@ class Membre extends Contact
                 $this->_modified_fields['contact'] = [];
 
                 $db->query($sql);
-
             }
 
             /* UPDATE membre */
 
             if (count($this->_modified_fields['membre']) > 0) {
-
                 $fields_to_save = '';
                 foreach ($this->_modified_fields['membre'] as $field => $value) {
                     if ($value !== true) {
@@ -1281,7 +1272,6 @@ class Membre extends Contact
                 $this->_modified_fields['membre'] = [];
 
                 $db->query($sql);
-
             }
 
             return true;
@@ -1294,12 +1284,12 @@ class Membre extends Contact
      * @return bool
      * @throws Exception
      */
-    protected function _loadFromDb(): bool
+    protected function loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 
         $sql = "SELECT * "
-             . "FROM `" . Membre::getDbTable() . "`, `". Contact::getDbTable() . "` "
+             . "FROM `" . Membre::getDbTable() . "`, `" . Contact::getDbTable() . "` "
              . "WHERE `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = `" . Contact::getDbTable() . "`.`" . Contact::getDbPk() . "` "
              . "AND `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = " . (int) $this->{'_' . Membre::getDbPk()};
 
@@ -1319,7 +1309,7 @@ class Membre extends Contact
      * @return bool
      * @throws Exception
      */
-    function belongsTo(int $id_groupe): bool
+    public function belongsTo(int $id_groupe): bool
     {
         if (!$this->_id_contact) {
             throw new Exception('id_contact manquant');
@@ -1329,7 +1319,7 @@ class Membre extends Contact
 
         $sql  = "SELECT `id_contact` "
               . "FROM `" . self::$_db_table_appartient_a . "` "
-              . "WHERE `id_groupe` = " . (int) $id_groupe." "
+              . "WHERE `id_groupe` = " . (int) $id_groupe . " "
               . "AND `id_contact` = " . (int) $this->_id_contact;
 
         $res  = $db->query($sql);
@@ -1342,7 +1332,7 @@ class Membre extends Contact
      *
      * @return bool
      */
-    function hasGroupe(): bool
+    public function hasGroupe(): bool
     {
         return (count($this->getGroupes()) > 0);
     }
@@ -1352,7 +1342,7 @@ class Membre extends Contact
      *
      * @return bool
      */
-    function isStandard(): bool
+    public function isStandard(): bool
     {
         return (bool) ($this->_level & self::TYPE_STANDARD);
     }
@@ -1362,7 +1352,7 @@ class Membre extends Contact
      *
      * @return bool
      */
-    function isRedacteur(): bool
+    public function isRedacteur(): bool
     {
         return (bool) ($this->_level & self::TYPE_REDACTEUR);
     }
@@ -1372,7 +1362,7 @@ class Membre extends Contact
      *
      * @return bool
      */
-    function isInterne(): bool
+    public function isInterne(): bool
     {
         return (bool) ($this->_level & self::TYPE_INTERNE);
     }
@@ -1382,7 +1372,7 @@ class Membre extends Contact
      *
      * @return bool
      */
-    function isBonus(): bool
+    public function isBonus(): bool
     {
         return (bool) ($this->_level & self::TYPE_BONUS);
     }
@@ -1392,7 +1382,7 @@ class Membre extends Contact
      *
      * @return bool
      */
-    function isAdmin(): bool
+    public function isAdmin(): bool
     {
         return (bool) ($this->_level & self::TYPE_ADMIN);
     }
@@ -1404,7 +1394,7 @@ class Membre extends Contact
      *
      * @return string
      */
-    static function getPseudoById(int $id_contact)
+    public static function getPseudoById(int $id_contact)
     {
         $db = DataBase::getInstance();
 
@@ -1422,7 +1412,7 @@ class Membre extends Contact
      *
      * @return int
      */
-    static function getIdByPseudo($pseudo): int
+    public static function getIdByPseudo($pseudo): int
     {
         $db = DataBase::getInstance();
 
@@ -1440,7 +1430,7 @@ class Membre extends Contact
      *
      * @return int id_contact ou false
      */
-    function checkPassword(string $password)
+    public function checkPassword(string $password)
     {
         return self::checkPseudoPassword($this->_pseudo, $password);
     }
@@ -1452,7 +1442,7 @@ class Membre extends Contact
      *
      * @return bool
      */
-    static function isPseudoAvailable(string $pseudo): bool
+    public static function isPseudoAvailable(string $pseudo): bool
     {
         $db = DataBase::getInstance();
 
@@ -1473,7 +1463,7 @@ class Membre extends Contact
      *
      * @return int id_contact ou false
      */
-    static function checkPseudoPassword(string $pseudo, string $password): int
+    public static function checkPseudoPassword(string $pseudo, string $password): int
     {
         $db = DataBase::getInstance();
 
@@ -1490,7 +1480,7 @@ class Membre extends Contact
      *
      * @return array
      */
-    static function getTypesMembre(): array
+    public static function getTypesMembre(): array
     {
         return self::$_types_membre;
     }
@@ -1502,7 +1492,7 @@ class Membre extends Contact
      *
      * @return string|null
      */
-    static function getTypeMembreName(int $cle): ?string
+    public static function getTypeMembreName(int $cle): ?string
     {
         if (array_key_exists($cle, self::$_types_membre)) {
             return self::$_types_membre[$cle];
@@ -1518,7 +1508,7 @@ class Membre extends Contact
      *
      * @return int
      */
-    static function getIdByEmail(string $email): int
+    public static function getIdByEmail(string $email): int
     {
         if (!Email::validate($email)) {
             throw new Exception('email syntaxiquement incorrect');
@@ -1548,7 +1538,7 @@ class Membre extends Contact
      *
      * @return array
      */
-    static function find(array $params): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
         $objs = [];

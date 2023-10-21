@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  * Classe Contact
@@ -67,7 +71,7 @@ class Contact extends ObjectModel
      *
      * @return array
      */
-    protected function _getAllFields(bool $fusion = true): array
+    protected function getAllFields(bool $fusion = true): array
     {
         if ($fusion) {
             return self::$_all_fields;
@@ -146,7 +150,7 @@ class Contact extends ObjectModel
 
         $sql = "SELECT `id_contact` "
              . "FROM `" . Contact::getDbTable() . "` "
-             ." WHERE `email` = '" . $db->escape($email) . "'";
+             . "WHERE `email` = '" . $db->escape($email) . "'";
 
         return (int) $db->queryWithFetchFirstField($sql);
     }
@@ -228,7 +232,7 @@ class Contact extends ObjectModel
      * @return bool
      * @throws Exception
      */
-    protected function _loadFromDb(): bool
+    protected function loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 
@@ -268,12 +272,10 @@ class Contact extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $fields = self::_getAllFields(false);
+        $fields = self::getAllFields(false);
 
         if (!$this->getId()) { // INSERT
-
             /* table contact */
-
             $sql = "INSERT INTO `" . Contact::getDbTable() . "` (";
 
             if (count($this->_modified_fields['contact']) > 0) {
@@ -282,7 +284,7 @@ class Contact extends ObjectModel
                 }
                 $sql = substr($sql, 0, -1);
             }
-            
+
             $sql .= ") VALUES (";
 
             if (count($this->_modified_fields['contact']) > 0) {
@@ -324,9 +326,7 @@ class Contact extends ObjectModel
             $this->setId((int) $db->insertId());
 
             return $this->getId();
-
         } else { // UPDATE
-
             if (count($this->_modified_fields['contact']) === 0) {
                 return true; // pas de changement
             }

@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  * Classe MembreAdhoc
@@ -92,7 +96,7 @@ class MembreAdhoc extends Membre
      *
      * @return array
      */
-    protected function _getAllFields(bool $fusion = true): array
+    protected function getAllFields(bool $fusion = true): array
     {
         if ($fusion) {
             return array_merge(
@@ -257,12 +261,12 @@ class MembreAdhoc extends Membre
      * @return bool
      * @throws Exception
      */
-    protected function _loadFromDb(): bool
+    protected function loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 
         $sql = "SELECT * "
-             . "FROM `" . MembreAdhoc::getDbTable() . "`, `" . Membre::getDbTable() . "`, `". Contact::getDbTable() . "` "
+             . "FROM `" . MembreAdhoc::getDbTable() . "`, `" . Membre::getDbTable() . "`, `" . Contact::getDbTable() . "` "
              . "WHERE `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` "
              . "AND `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = `" . Contact::getDbTable() . "`.`" . Contact::getDbPk() . "` "
              . "AND `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = " . (int) $this->{'_' . MembreAdhoc::getDbPk()};
@@ -282,18 +286,13 @@ class MembreAdhoc extends Membre
     {
         $db = DataBase::getInstance();
 
-        $fields = self::_getAllFields(false);
+        $fields = self::getAllFields(false);
 
         if (!$this->getId()) { // INSERT
-
             /* table contact */
-
             if ($id_contact = Contact::getIdByEmail($email)) {// BUG: D'OU SORT CE $email ???
-
                 $this->setId($id_contact);
-
             } else {
-
                 $sql = "INSERT INTO `" . Contact::getDbTable() . "` (";
                 if (count($this->_modified_fields['contact']) > 0) {
                     foreach ($fields['contact'] as $field => $type) {
@@ -334,7 +333,6 @@ class MembreAdhoc extends Membre
                 $db->query($sql);
 
                 $this->setId((int) $db->insertId());
-
             }
 
             /* table membre */
@@ -416,10 +414,9 @@ class MembreAdhoc extends Membre
             $db->query($sql);
 
             return $this->getId();
-
         } else { // UPDATE
-
-            if ((count($this->_modified_fields['contact']) === 0)
+            if (
+                (count($this->_modified_fields['contact']) === 0)
                 && (count($this->_modified_fields['membre']) === 0)
                 && (count($this->_modified_fields['membre_adhoc']) === 0)
             ) {
@@ -429,7 +426,6 @@ class MembreAdhoc extends Membre
             /* table contact */
 
             if (count($this->_modified_fields['contact']) > 0) {
-
                 $fields_to_save = '';
                 foreach ($this->_modified_fields['contact'] as $field => $value) {
                     if ($value === true) {
@@ -437,7 +433,7 @@ class MembreAdhoc extends Membre
                         switch ($fields['contact'][$field]) {
                             case 'int':
                             case 'float':
-                                $fields_to_save .= " `" . $field."` = " . $db->escape($this->$att) . ",";
+                                $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
                                 break;
                             case 'string':
                             case 'date':
@@ -466,13 +462,11 @@ class MembreAdhoc extends Membre
                 $this->_modified_fields['contact'] = [];
 
                 $db->query($sql);
-
             }
 
             /* table membre */
 
             if (count($this->_modified_fields['membre']) > 0) {
-
                 $fields_to_save = '';
                 foreach ($this->_modified_fields['membre'] as $field => $value) {
                     if ($value === true) {
@@ -502,20 +496,18 @@ class MembreAdhoc extends Membre
                 }
                 $fields_to_save = substr($fields_to_save, 0, -1);
 
-                $sql = "UPDATE `".Membre::getDbTable()."` "
+                $sql = "UPDATE `" . Membre::getDbTable() . "` "
                      . "SET " . $fields_to_save . " "
                      . "WHERE `id_contact` = " . (int) $this->_id_contact;
 
                 $this->_modified_fields['membre'] = [];
 
                 $db->query($sql);
-
             }
 
             /* table membre_adhoc */
 
             if (count($this->_modified_fields['membre_adhoc']) > 0) {
-
                 $fields_to_save = '';
                 foreach ($this->_modified_fields['membre_adhoc'] as $field => $value) {
                     if ($value === true) {
@@ -552,7 +544,6 @@ class MembreAdhoc extends Membre
                 $this->_modified_fields['membre_adhoc'] = [];
 
                 $db->query($sql);
-
             }
 
             return true;

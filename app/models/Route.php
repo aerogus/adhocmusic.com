@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 if (!defined('DEFAULT_CONTROLLERS_PATH')) {
     define('DEFAULT_CONTROLLERS_PATH', dirname(__DIR__) . '/controllers/');

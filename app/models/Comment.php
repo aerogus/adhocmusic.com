@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  * Classe Comment
@@ -432,7 +436,7 @@ class Comment extends ObjectModel
      * @return bool
      * @throws Exception
      */
-    protected function _loadFromDb(): bool
+    protected function loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 
@@ -464,8 +468,7 @@ class Comment extends ObjectModel
         $title   = '';
         $url     = 'https://www.adhocmusic.com';
 
-        switch ($this->getType())
-        {
+        switch ($this->getType()) {
             case 's': // audio
                 // -> uploadeur de l'audio
                 $audio = Audio::getInstance($this->getIdContent());

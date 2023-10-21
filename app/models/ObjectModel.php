@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  * Classe abstraite à étendre
@@ -81,7 +85,7 @@ abstract class ObjectModel
      *
      * @return array
      */
-    protected function _getAllFields(bool $fusion = true): array
+    protected function getAllFields(bool $fusion = true): array
     {
         return static::$_all_fields;
     }
@@ -111,13 +115,13 @@ abstract class ObjectModel
                 $this->loadObjectId();
             }
 
-            if (static::isCachable() && $this->_loadFromCache()) {
+            if (static::isCachable() && $this->loadFromCache()) {
                 // chargement ok du cache
-            } elseif ($this->_loadFromDb()) {
+            } elseif ($this->loadFromDb()) {
                 // chargement ok de la bdd
                 if (static::isCachable()) {
                     // alimentation du cache
-                    ObjectCache::set($this->getObjectId(), serialize($this->_objectToArray()));
+                    ObjectCache::set($this->getObjectId(), serialize($this->objectToArray()));
                 }
             } else {
                 // erreur au chargement
@@ -262,7 +266,6 @@ abstract class ObjectModel
         $db = DataBase::getInstance();
 
         if (!$this->getId()) { // INSERT
-
             $sql = 'INSERT INTO `' . $this->getDbTable() . '` (';
 
             if (count($this->_modified_fields) > 0) {
@@ -323,9 +326,7 @@ abstract class ObjectModel
             // /!\ pas de mise en cache directe car le champ created_at est géré par la bdd
 
             return $this->getId();
-
         } else { // UPDATE
-
             if (count($this->_modified_fields) === 0) {
                 return true;
             }
@@ -335,7 +336,7 @@ abstract class ObjectModel
                 if ($value !== true) {
                     continue;
                 }
-                $att = '_'.$field;
+                $att = '_' . $field;
                 if (is_null($this->$att)) {
                     $fields_to_save .= " `" . $field . "` = NULL,";
                 } else {
@@ -454,7 +455,6 @@ abstract class ObjectModel
         $objs = [];
 
         if (is_array(static::getDbPk())) {
-
             $sql = 'SELECT `' . implode('`,`', static::getDbPk()) . '` FROM `' . static::getDbTable() . '` ORDER BY';
             foreach (static::getDbPk() as $pk) {
                 $sql .= ' `' . $pk . '` ASC,';
@@ -465,16 +465,13 @@ abstract class ObjectModel
             foreach ($rows as $row) {
                 $objs[] = static::getInstance($row);
             }
-
         } else {
-
             $sql = 'SELECT `' . static::getDbPk() . '` FROM `' . static::getDbTable() . '` ORDER BY `' . static::getDbPk() . '` ASC';
             if ($ids = $db->queryWithFetchFirstFields($sql)) {
                 foreach ($ids as $id) {
                     $objs[] = static::getInstance($id);
                 }
             }
-
         }
 
         return $objs;
@@ -584,10 +581,10 @@ abstract class ObjectModel
      *
      * @return bool
      */
-    protected function _loadFromCache(): bool
+    protected function loadFromCache(): bool
     {
         if (($cachedData = ObjectCache::get($this->getObjectId())) !== null) {
-            $this->_arrayToObject(unserialize($cachedData));
+            $this->arrayToObject(unserialize($cachedData));
             return true;
         }
         return false;
@@ -599,7 +596,7 @@ abstract class ObjectModel
      * @return bool
      * @throws Exception
      */
-    protected function _loadFromDb(): bool
+    protected function loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 
@@ -625,7 +622,7 @@ abstract class ObjectModel
         }
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_arrayToObject($res);
+            $this->arrayToObject($res);
             return true;
         }
         return false;
@@ -638,14 +635,14 @@ abstract class ObjectModel
      *
      * @return bool
      */
-    protected function _arrayToObject(array $data)
+    protected function arrayToObject(array $data)
     {
-        $all_fields = static::_getAllFields(true);
+        $all_fields = static::getAllFields(true);
         foreach ($data as $k => $v) {
             if (array_key_exists($k, $all_fields)) {
                 $att = '_' . $k;
                 if (is_null($v)) {
-                    $this->$att = NULL;
+                    $this->$att = null;
                 } else {
                     switch ($all_fields[$k]) {
                         case 'phpser':
@@ -677,10 +674,10 @@ abstract class ObjectModel
     /**
      * @return array
      */
-    protected function _objectToArray(): array
+    protected function objectToArray(): array
     {
         $arr = [];
-        $all_fields = static::_getAllFields(true);
+        $all_fields = static::getAllFields(true);
 
         foreach ($all_fields as $field => $type) {
             $att = '_' . $field;

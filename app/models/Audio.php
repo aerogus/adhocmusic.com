@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  * Classe Audio
@@ -138,9 +142,9 @@ class Audio extends Media
      * @return bool
      * @throws Exception
      */
-    protected function _loadFromDb(): bool
+    protected function loadFromDb(): bool
     {
-        if (!parent::_loadFromDb()) {
+        if (!parent::loadFromDb()) {
             throw new Exception('Audio introuvable');
         }
 

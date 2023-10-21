@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 /**
  * Fonctions et modifiers custom pour Smarty
@@ -25,17 +29,17 @@ class AdHocSmarty extends Smarty
         $this->setCacheDir(SMARTY_TEMPLATE_C_PATH);
 
         // fonctions smarty
-        $this->registerPlugin('function', 'pagination', ['AdHocSmarty', 'function_pagination']);
-        $this->registerPlugin('function', 'html_input_date_hourminute', ['AdHocSmarty', 'function_html_input_date_hourminute']);
-        $this->registerPlugin('function', 'calendar', ['AdHocSmarty', 'function_calendar']);
-        $this->registerPlugin('function', 'image', ['EmailSmarty', 'function_image']);
+        $this->registerPlugin('function', 'pagination', ['AdHocSmarty', 'functionPagination']);
+        $this->registerPlugin('function', 'html_input_date_hourminute', ['AdHocSmarty', 'functionHtmlInputDateHourminute']);
+        $this->registerPlugin('function', 'calendar', ['AdHocSmarty', 'functionCalendar']);
+        $this->registerPlugin('function', 'image', ['EmailSmarty', 'functionImage']);
 
         // modifiers smarty
-        $this->registerPlugin('modifier', 'format_size', ['AdHocSmarty', 'modifier_format_size']);
-        $this->registerPlugin('modifier', 'pseudo_by_id', ['AdHocSmarty', 'modifier_pseudo_by_id']);
-        $this->registerPlugin('modifier', 'avatar_by_id', ['AdHocSmarty', 'modifier_avatar_by_id']);
-        $this->registerPlugin('modifier', 'display_on_off_icon', ['AdHocSmarty', 'modifier_display_on_off_icon']);
-        $this->registerPlugin('modifier', 'json_encode_numeric_check', ['AdHocSmarty', 'modifier_json_encode_numeric_check']);
+        $this->registerPlugin('modifier', 'format_size', ['AdHocSmarty', 'modifierFormatSize']);
+        $this->registerPlugin('modifier', 'pseudo_by_id', ['AdHocSmarty', 'modifierPseudoById']);
+        $this->registerPlugin('modifier', 'avatar_by_id', ['AdHocSmarty', 'modifierAvatarById']);
+        $this->registerPlugin('modifier', 'display_on_off_icon', ['AdHocSmarty', 'modifierDisplayOnOffIcon']);
+        $this->registerPlugin('modifier', 'json_encode_numeric_check', ['AdHocSmarty', 'modifierJsonEncodeNumericCheck']);
 
         // assignations générales
         $this->assign('title', "♫ AD'HOC : Les Musiques Actuelles");
@@ -112,8 +116,11 @@ class AdHocSmarty extends Smarty
             $link_page = '';
         }
 
-        if (array_key_exists('link_base_params', $params) && $params['link_base_params'] !== '') {
-            $link_base_params = '?'.$params['link_base_params'].'&amp;';
+        if (
+            array_key_exists('link_base_params', $params)
+            && ($params['link_base_params'] !== '')
+        ) {
+            $link_base_params = '?' . $params['link_base_params'] . '&amp;';
         } else {
             $link_base_params = '?';
         }
@@ -124,7 +131,7 @@ class AdHocSmarty extends Smarty
                 // pagination simple 1 2 3 4 5
                 for ($i = $p->getFirstPage(); $i <= $p->getLastPage(); $i++) {
                     $p->setCurrentPage($i);
-                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>';
+                    $out .= '<a href="' . $link_page . $link_base_params . 'page=' . $p->getCurrentPage() . '" class="' . $p->getClass() . '">' . $p->getCurrentPageNum() . '</a>';
                 }
             } else {
                 // pagination étendue
@@ -132,28 +139,28 @@ class AdHocSmarty extends Smarty
                     // type début  : 1 2 3 4 ... 50
                     for ($i = $p->getFirstPage(); $i < $p->getNbLinks() - 1; $i++) {
                         $p->setCurrentPage($i);
-                        $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>';
+                        $out .= '<a href="' . $link_page . $link_base_params . 'page=' . $p->getCurrentPage() . '" class="' . $p->getClass() . '">' . $p->getCurrentPageNum() . '</a>';
                     }
                     $out .= '…';
-                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getLastPage().'">'.$p->getLastPageNum().'</a>';
+                    $out .= '<a href="' . $link_page . $link_base_params . 'page=' . $p->getLastPage() . '">' . $p->getLastPageNum() . '</a>';
                 } elseif ($p->getSelectedPage() > ($p->getNbPages() - $p->getNbLinks() + 1)) {
                     // type fin    : 1 ... 47 48 49 50
-                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getFirstPage().'">'.$p->getFirstPageNum().'</a>';
+                    $out .= '<a href="' . $link_page . $link_base_params . 'page=' . $p->getFirstPage() . '">' . $p->getFirstPageNum() . '</a>';
                     $out .= '…';
-                    for ($i = $p->getLastPage() - $p->getNbLinks() + 2 ; $i <= $p->getLastPage() ; $i++) {
+                    for ($i = $p->getLastPage() - $p->getNbLinks() + 2; $i <= $p->getLastPage(); $i++) {
                         $p->setCurrentPage($i);
-                        $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>';
+                        $out .= '<a href="' . $link_page . $link_base_params . 'page=' . $p->getCurrentPage() . '" class="' . $p->getClass() . '">' . $p->getCurrentPageNum() . '</a>';
                     }
                 } else {
                     // type milieu : 1 ... 24 25 26 ... 50
-                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getFirstPage().'">'.$p->getFirstPageNum().'</a>';
+                    $out .= '<a href="' . $link_page . $link_base_params . 'page=' . $p->getFirstPage() . '">' . $p->getFirstPageNum() . '</a>';
                     $out .= '…';
-                    for ($i = (int) ($p->getSelectedPage() - floor($p->getNbLinks() / 2) + 1) ; $i < (int) ($p->getSelectedPage() + floor($p->getNbLinks() / 2)) ; $i++) {
+                    for ($i = (int) ($p->getSelectedPage() - floor($p->getNbLinks() / 2) + 1); $i < (int) ($p->getSelectedPage() + floor($p->getNbLinks() / 2)); $i++) {
                         $p->setCurrentPage($i);
-                        $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getCurrentPage().'" class="'.$p->getClass().'">'.$p->getCurrentPageNum().'</a>';
+                        $out .= '<a href="' . $link_page . $link_base_params . 'page=' . $p->getCurrentPage() . '" class="' . $p->getClass() . '">' . $p->getCurrentPageNum() . '</a>';
                     }
                     $out .= '…';
-                    $out .= '<a href="'.$link_page.$link_base_params.'page='.$p->getLastPage().'">'.$p->getLastPageNum().'</a>';
+                    $out .= '<a href="' . $link_page . $link_base_params . 'page=' . $p->getLastPage() . '">' . $p->getLastPageNum() . '</a>';
                 }
             }
             $out .= '</div>';
@@ -186,14 +193,14 @@ class AdHocSmarty extends Smarty
         $hourminute = str_pad((string) $hour, 2, '0', STR_PAD_LEFT) . ':' . str_pad((string) $minute, 2, '0', STR_PAD_LEFT);
 
         $out = '';
-        for ($h = 0 ; $h < 24 ; $h++) {
-            for ($m = 0 ; $m < 60 ; $m += $step) {
+        for ($h = 0; $h < 24; $h++) {
+            for ($m = 0; $m < 60; $m += $step) {
                 $hm = str_pad((string) $h, 2, '0', STR_PAD_LEFT) . ':' . str_pad((string) $m, 2, '0', STR_PAD_LEFT);
-                $out .= "<option value=\"".$hm."\"";
+                $out .= "<option value=\"" . $hm . "\"";
                 if ($hm === $hourminute) {
                     $out .= " selected=\"selected\"";
                 }
-                $out .= ">".$hm."</option>\n";
+                $out .= ">" . $hm . "</option>\n";
             }
         }
 
@@ -240,7 +247,7 @@ class AdHocSmarty extends Smarty
         $events = Event::getEventsForAMonth($year, $month);
 
         // blancs de début de mois
-        for ($x = 0 ; $x < $blank_days ; $x++) {
+        for ($x = 0; $x < $blank_days; $x++) {
             $cal[$row][$trow]['num'] = null;
             $cal[$row][$trow]['link'] = null;
             $cal[$row][$trow]['title'] = null;
@@ -248,7 +255,7 @@ class AdHocSmarty extends Smarty
         }
 
         // création tableau
-        for ($x = 1 ; $x <= $nb_days_in_month ; $x++) {
+        for ($x = 1; $x <= $nb_days_in_month; $x++) {
             // nouvelle semaine
             if (($x + $blank_days - 1) % 7 === 0) {
                 $row++;
@@ -260,7 +267,7 @@ class AdHocSmarty extends Smarty
                 $cal[$row][$trow]['selected'] = true;
             }
             if (array_key_exists($date, $events)) {
-                $cal[$row][$trow]['link'] = '?y='.$year.'&m='.$month.'&d='.$x;
+                $cal[$row][$trow]['link'] = '?y=' . $year . '&m=' . $month . '&d=' . $x;
                 $cal[$row][$trow]['title'] = $events[$date] . ' events';
             } else {
                 $cal[$row][$trow]['link'] = null;

@@ -1,4 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+namespace Adhoc\Model;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -47,13 +51,13 @@ class Email
         $length = mb_strlen($email);
         switch ($mode) {
             case '1':
-            for ($cpt = 0 ; $cpt < $length ; $cpt++) {
-                $str .= '&#' . ord($email[$cpt]) . ';';
-            }
-            break;
+                for ($cpt = 0; $cpt < $length; $cpt++) {
+                    $str .= '&#' . ord($email[$cpt]) . ';';
+                }
+                break;
 
             default:
-            break;
+                break;
         }
         return $str;
     }

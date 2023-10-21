@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Reference;
 
@@ -41,6 +43,6 @@ class VideoHost extends Reference
      */
     protected static $_all_fields = [
         'id_video_host' => 'int', // pk
-        'name'          => 'string',
+        'name' => 'string',
     ];
 }
