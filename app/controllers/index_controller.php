@@ -18,7 +18,7 @@ final class Controller
         $smarty->assign(
             [
                 'title' => "♫ AD'HOC : les Musiques Actuelles en Essonne",
-                'description' => "Portail de référence sur les musiques actuelles en Essonne, Agenda culturel géolocalisé, Vidéos de concerts, promotion d'artistes...",
+                'description' => "Portail sur les musiques actuelles, vidéos de concerts, promotion d'artistes...",
                 'og_type' => 'website',
                 'og_image' => HOME_URL . '/img/screenshot-homepage.jpg',
             ]
@@ -114,7 +114,7 @@ final class Controller
             ->addStep("Contact");
 
         $smarty->assign('title', "Contacter l'Association AD'HOC");
-        $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ..");
+        $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
 
         $smarty->assign('faq', FAQ::findAll());
 
@@ -134,7 +134,8 @@ final class Controller
             // si identifié, préremplissage de certains champs
             if (!empty($_SESSION['membre'])) {
                 if ($_SESSION['membre']->getFirstName() || $_SESSION['membre']->getLastName()) {
-                    $data['name'] = $_SESSION['membre']->getFirstName() . ' ' . $_SESSION['membre']->getLastName() . ' (' . $_SESSION['membre']->getPseudo() . ')';
+                    $data['name'] = $_SESSION['membre']->getFirstName() . ' ' . $_SESSION['membre']->getLastName()
+                                  . ' (' . $_SESSION['membre']->getPseudo() . ')';
                 } else {
                     $data['name'] = $_SESSION['membre']->getPseudo();
                 }

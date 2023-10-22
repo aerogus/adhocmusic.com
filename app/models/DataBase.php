@@ -25,7 +25,7 @@ class DataBase
     /**
      * @var array
      */
-    protected static $_connections_params = [
+    protected static $connections_params = [
         0 => [
             'hasMaintenance' => false,
             'db_host'        => _DB_HOST_,
@@ -38,66 +38,66 @@ class DataBase
     /**
      * Conteneur de l'instance courante
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * Tableau des connexions ouvertes
      */
-    protected $_current_conn = [];
+    protected $current_conn = [];
 
     /**
      * Type de fetch
      */
-    protected $_fetchMode = MYSQLI_ASSOC;
+    protected $fetchMode = MYSQLI_ASSOC;
 
     /**
      * Charset à utiliser pour la connexion
      */
-    protected $_charset = 'utf8mb4';
+    protected $charset = 'utf8mb4';
 
     /**
      * @param int $conn_name identifiant de connexion
      *
-     * @throws Exception
+     * @throws \Exception
      */
     protected function connect($conn_name = 0)
     {
-        if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
-            throw new Exception('Serveur MySQL en maintenance');
+        if (true === self::$connections_params[$conn_name]['hasMaintenance']) {
+            throw new \Exception('Serveur MySQL en maintenance');
         }
 
         $conn_key = self::generateConnectionKey($conn_name);
 
-        if (isset($this->_current_conn[$conn_key])) {
-            return $this->_current_conn[$conn_key];
+        if (isset($this->current_conn[$conn_key])) {
+            return $this->current_conn[$conn_key];
         }
 
         $params = [];
 
-        array_unshift($params, self::$_connections_params[$conn_name]['db_pass']);
-        array_unshift($params, self::$_connections_params[$conn_name]['db_login']);
-        array_unshift($params, self::$_connections_params[$conn_name]['db_host']);
+        array_unshift($params, self::$connections_params[$conn_name]['db_pass']);
+        array_unshift($params, self::$connections_params[$conn_name]['db_login']);
+        array_unshift($params, self::$connections_params[$conn_name]['db_host']);
 
         $retries = DB_MYSQL_CONNECT_RETRIES;
-        while (empty($this->_current_conn[$conn_key]) && $retries > 0) {
+        while (empty($this->current_conn[$conn_key]) && $retries > 0) {
             $retries--;
-            $this->_current_conn[$conn_key] = @call_user_func_array('mysqli_connect', $params);
+            $this->current_conn[$conn_key] = @call_user_func_array('mysqli_connect', $params);
         }
 
-        if (!$this->_current_conn[$conn_key]) {
-            throw new Exception('Erreur connexion serveur MySQL');
+        if (!$this->current_conn[$conn_key]) {
+            throw new \Exception('Erreur connexion serveur MySQL');
         }
 
         $select_db = mysqli_select_db(
-            $this->_current_conn[$conn_key],
-            self::$_connections_params[$conn_name]['db_database']
+            $this->current_conn[$conn_key],
+            self::$connections_params[$conn_name]['db_database']
         );
 
         if (!$select_db) {
-            throw new Exception('Erreur connexion base MySQL');
+            throw new \Exception('Erreur connexion base MySQL');
         }
 
-        return $this->_current_conn[$conn_key];
+        return $this->current_conn[$conn_key];
     }
 
     /**
@@ -107,9 +107,9 @@ class DataBase
     {
         $conn_key = self::generateConnectionKey($conn_name);
 
-        if (isset($this->_current_conn[$conn_key])) {
-            mysqli_close($this->_current_conn[$conn_key]);
-            unset($this->_current_conn[$conn_key]);
+        if (isset($this->current_conn[$conn_key])) {
+            mysqli_close($this->current_conn[$conn_key]);
+            unset($this->current_conn[$conn_key]);
         }
         return true;
     }
@@ -119,10 +119,10 @@ class DataBase
      */
     public function closeAllConnections()
     {
-        $connection_keys = array_keys($this->_current_conn);
+        $connection_keys = array_keys($this->current_conn);
         foreach ($connection_keys as $conn_key) {
-            @mysqli_close($this->_current_conn[$conn_key]);
-            unset($this->_current_conn[$conn_key]);
+            @mysqli_close($this->current_conn[$conn_key]);
+            unset($this->current_conn[$conn_key]);
         }
         return true;
     }
@@ -139,11 +139,11 @@ class DataBase
      */
     protected static function generateConnectionKey(int $conn_name): string
     {
-        $conn_key = self::$_connections_params[$conn_name]['db_host'] .
+        $conn_key = self::$connections_params[$conn_name]['db_host'] .
                     DB_DUMMY_SEPARATOR .
-                    self::$_connections_params[$conn_name]['db_login'] .
+                    self::$connections_params[$conn_name]['db_login'] .
                     DB_DUMMY_SEPARATOR .
-                    self::$_connections_params[$conn_name]['db_pass'];
+                    self::$connections_params[$conn_name]['db_pass'];
         return md5($conn_key);
     }
 
@@ -152,7 +152,7 @@ class DataBase
      */
     public static function isServerInMaintenance(int $conn_name = 0)
     {
-        return self::$_connections_params[$conn_name]['hasMaintenance'];
+        return self::$connections_params[$conn_name]['hasMaintenance'];
     }
 
     /**
@@ -161,7 +161,7 @@ class DataBase
     public function __construct()
     {
         $this->connect();
-        self::$_instance = $this;
+        self::$instance = $this;
     }
 
     /**
@@ -173,10 +173,10 @@ class DataBase
      */
     public static function getInstance(): object
     {
-        if (is_null(self::$_instance)) {
+        if (is_null(self::$instance)) {
             return new DataBase();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
     /**
@@ -192,9 +192,9 @@ class DataBase
      */
     public static function deleteInstance(): bool
     {
-        if (!is_null(self::$_instance)) {
-            self::$_instance = null;
-            self::$_connections_params = [];
+        if (!is_null(self::$instance)) {
+            self::$instance = null;
+            self::$connections_params = [];
             return true;
         }
         return false;
@@ -208,7 +208,7 @@ class DataBase
     public function setFetchMode(int $fetchMode = MYSQLI_BOTH)
     {
         if (in_array($fetchMode, [MYSQLI_BOTH, MYSQLI_ASSOC, MYSQLI_NUM])) {
-            $this->_fetchMode = $fetchMode;
+            $this->fetchMode = $fetchMode;
         }
     }
 
@@ -217,13 +217,13 @@ class DataBase
      * @param int    $conn_name identifiant de connexion
      *
      * @return array
-     * @throws Exception
+     * @throws \Exception
      */
     public function queryWithFetchAndClose(string $sql, int $conn_name = 0)
     {
         try {
             $res = $this->queryWithFetch($sql, $conn_name);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $error = $e;
         }
 
@@ -251,8 +251,8 @@ class DataBase
         } elseif (true == $rc) {
             /* La requête s'est bien passée, c'était une requête du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-            $res = mysqli_fetch_array($rc, $this->_fetchMode);
-            $this->_fetchMode = MYSQLI_ASSOC;
+            $res = mysqli_fetch_array($rc, $this->fetchMode);
+            $this->fetchMode = MYSQLI_ASSOC;
         }
         return $res;
     }
@@ -274,8 +274,8 @@ class DataBase
         } elseif (true == $rc) {
             /* La requête s'est bien passée, c'était une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-            $res = mysqli_fetch_array($rc, MYSQLI_NUM); // MYSQLI_NUM : ici on ne peut pas respecter $this->_fetchMode
-            $this->_fetchMode = MYSQLI_ASSOC;
+            $res = mysqli_fetch_array($rc, MYSQLI_NUM); // MYSQLI_NUM : ici on ne peut pas respecter $this->fetchMode
+            $this->fetchMode = MYSQLI_ASSOC;
             if (is_array($res)) {
                 $res = $res[0];
             }
@@ -330,10 +330,10 @@ class DataBase
             /* La requête s'est bien passée, c'était une requete du type
              * SELECT, SHOW, DESCRIBE ou EXPLAIN */
             $res = [];
-            while (($row = mysqli_fetch_array($rc, $this->_fetchMode)) !== null) {
+            while (($row = mysqli_fetch_array($rc, $this->fetchMode)) !== null) {
                 $res[] = $row;
             }
-            $this->_fetchMode = MYSQLI_ASSOC;
+            $this->fetchMode = MYSQLI_ASSOC;
         }
         return $res;
     }
@@ -343,7 +343,7 @@ class DataBase
      * @param int    $conn_name identifiant de connexion
      *
      * @return array
-     * @throws Exception
+     * @throws \Exception
      */
     public function query(string $sql, int $conn_name = 0)
     {
@@ -356,7 +356,7 @@ class DataBase
         $rc = mysqli_query($conn, $sql);
 
         if (false === $rc) {
-            throw new Exception(mysqli_error($conn));
+            throw new \Exception(mysqli_error($conn));
         }
         return $rc;
     }
@@ -430,13 +430,13 @@ class DataBase
      * @param int    $conn_name       identifiant de connexion
      *
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
     public function getInsertQuery(string $dbAndTableName, array $fieldsAndValues, int $conn_name = 0)
     {
         $dbAndTableName = trim((string) $dbAndTableName);
         if (empty($dbAndTableName)) {
-            throw new Exception('Bad $dbAndTableName in ' . __FUNCTION__);
+            throw new \Exception('Bad $dbAndTableName in ' . __FUNCTION__);
         }
         if ('`' !== $dbAndTableName[0]) {
             $dbAndTableName = '`' . $dbAndTableName . '`';
@@ -453,7 +453,7 @@ class DataBase
             }
         }
         if ('' === $values) {
-            throw new Exception('No values to insert');
+            throw new \Exception('No values to insert');
         } else {
             /* On écrase la virgule en trop au début. */
             $fields[0] = ' ';
@@ -466,18 +466,18 @@ class DataBase
      * @param int $conn_name identifiant de connexion
      *
      * @return int
-     * @throws Exception
+     * @throws \Exception
      */
     public function affectedRows(int $conn_name = 0)
     {
-        if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
-            throw new Exception('Serveur MySQL en maintenance');
+        if (true === self::$connections_params[$conn_name]['hasMaintenance']) {
+            throw new \Exception('Serveur MySQL en maintenance');
         }
 
         $conn_key = self::generateConnectionKey($conn_name);
 
-        if (isset($this->_current_conn[$conn_key])) {
-            return mysqli_affected_rows($this->_current_conn[$conn_key]);
+        if (isset($this->current_conn[$conn_key])) {
+            return mysqli_affected_rows($this->current_conn[$conn_key]);
         }
         return -1;
     }
@@ -486,17 +486,17 @@ class DataBase
      * @param int $conn_name identifiant de connexion
      *
      * @return int
-     * @throws Exception
+     * @throws \Exception
      */
     public function insertId(int $conn_name = 0): int
     {
-        if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
-            throw new Exception('Serveur MySQL en maintenance');
+        if (true === self::$connections_params[$conn_name]['hasMaintenance']) {
+            throw new \Exception('Serveur MySQL en maintenance');
         }
 
         $conn_key = self::generateConnectionKey($conn_name);
-        if (isset($this->_current_conn[$conn_key])) {
-            return mysqli_insert_id($this->_current_conn[$conn_key]);
+        if (isset($this->current_conn[$conn_key])) {
+            return mysqli_insert_id($this->current_conn[$conn_key]);
         }
         return -1;
     }
@@ -508,24 +508,24 @@ class DataBase
      * @param int    $conn_name identifiant de connexion
      *
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
     public function escape(string $string, int $conn_name = 0)
     {
-        if (true === self::$_connections_params[$conn_name]['hasMaintenance']) {
-            throw new Exception('Serveur MySQL en maintenance');
+        if (true === self::$connections_params[$conn_name]['hasMaintenance']) {
+            throw new \Exception('Serveur MySQL en maintenance');
         }
 
         $conn_key = self::generateConnectionKey($conn_name);
 
-        if (isset($this->_current_conn[$conn_key])) {
-            return mysqli_real_escape_string($this->_current_conn[$conn_key], (string) $string);
+        if (isset($this->current_conn[$conn_key])) {
+            return mysqli_real_escape_string($this->current_conn[$conn_key], (string) $string);
         } else {
-            // throw Exception plutot
+            // throw \Exception plutot
             mail(DEBUG_EMAIL, 'debug', 'NO LINK ???' . print_r($_SERVER, true));
         }
 
-        return mysqli_escape_string($this->_current_conn[$conn_key], $string);
+        return mysqli_escape_string($this->current_conn[$conn_key], $string);
     }
 
     /**
@@ -536,6 +536,6 @@ class DataBase
     public function errno(int $conn_name)
     {
         $conn_key = self::generateConnectionKey($conn_name);
-        return mysqli_errno($this->_current_conn[$conn_key]);
+        return mysqli_errno($this->current_conn[$conn_key]);
     }
 }

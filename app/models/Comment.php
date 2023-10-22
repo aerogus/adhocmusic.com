@@ -20,84 +20,84 @@ class Comment extends ObjectModel
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_comment';
+    protected static string $pk = 'id_comment';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_comment';
+    protected static string $table = 'adhoc_comment';
 
     /**
      * @var int
      */
-    protected int $_id_comment = 0;
+    protected int $id_comment = 0;
 
     /**
      * @var string
      */
-    protected string $_type = '';
+    protected string $type = '';
 
     /**
      * @var int
      */
-    protected int $_id_content = 0;
+    protected int $id_content = 0;
 
     /**
      * @var ?string
      */
-    protected ?string $_created_at = null;
+    protected ?string $created_at = null;
 
     /**
      * @var ?string
      */
-    protected ?string $_modified_at = null;
+    protected ?string $modified_at = null;
 
     /**
      * @var bool
      */
-    protected bool $_online = false;
+    protected bool $online = false;
 
     /**
      * @var int
      */
-    protected int $_id_contact = 0;
+    protected int $id_contact = 0;
 
     /**
      * @var string
      */
-    protected string $_text = '';
+    protected string $text = '';
 
     /**
      * @var string
      */
-    protected string $_pseudo = '';
+    protected string $pseudo = '';
 
     /**
      * @var string
      */
-    protected string $_pseudo_mbr = '';
+    protected string $pseudo_mbr = '';
 
     /**
      * @var string
      */
-    protected string $_email = '';
+    protected string $email = '';
 
     /**
      * @var string
      */
-    protected string $_email_mbr = '';
+    protected string $email_mbr = '';
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_comment'  => 'int', // pk
         'type'        => 'string',
         'id_content'  => 'int',
@@ -110,7 +110,7 @@ class Comment extends ObjectModel
         'text'        => 'string',
     ];
 
-    protected static $_types = [
+    protected static $types = [
         'l' => 'lieux',
         'p' => 'photos',
         'v' => 'videos',
@@ -126,7 +126,7 @@ class Comment extends ObjectModel
      */
     public function getType(): string
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -134,7 +134,7 @@ class Comment extends ObjectModel
      */
     public function getFullType(): string
     {
-        return self::$_types[$this->_type];
+        return self::$types[$this->type];
     }
 
     /**
@@ -142,7 +142,7 @@ class Comment extends ObjectModel
      */
     public function getIdContent(): int
     {
-        return $this->_id_content;
+        return $this->content;
     }
 
     /**
@@ -150,8 +150,8 @@ class Comment extends ObjectModel
      */
     public function getCreatedAt(): ?string
     {
-        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
-            return $this->_created_at;
+        if (!is_null($this->created_at) && Date::isDateTimeOk($this->created_at)) {
+            return $this->created_at;
         }
         return null;
     }
@@ -161,8 +161,8 @@ class Comment extends ObjectModel
      */
     public function getCreatedAtTs(): ?int
     {
-        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
-            return strtotime($this->_created_at);
+        if (!is_null($this->created_at) && Date::isDateTimeOk($this->created_at)) {
+            return strtotime($this->created_at);
         }
         return null;
     }
@@ -172,8 +172,8 @@ class Comment extends ObjectModel
      */
     public function getModifiedAt(): ?string
     {
-        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
-            return $this->_modified_at;
+        if (!is_null($this->modified_at) && Date::isDateTimeOk($this->modified_at)) {
+            return $this->modified_at;
         }
         return null;
     }
@@ -183,8 +183,8 @@ class Comment extends ObjectModel
      */
     public function getModifiedAtTs(): ?int
     {
-        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
-            return strtotime($this->_modified_at);
+        if (!is_null($this->modified_at) && Date::isDateTimeOk($this->modified_at)) {
+            return strtotime($this->modified_at);
         }
         return null;
     }
@@ -194,7 +194,7 @@ class Comment extends ObjectModel
      */
     public function getOnline(): bool
     {
-        return $this->_online;
+        return $this->online;
     }
 
     /**
@@ -202,7 +202,7 @@ class Comment extends ObjectModel
      */
     public function getIdContact(): int
     {
-        return $this->_id_contact;
+        return $this->contact;
     }
 
     /**
@@ -210,7 +210,7 @@ class Comment extends ObjectModel
      */
     public function getText(): string
     {
-        return $this->_text;
+        return $this->text;
     }
 
     /**
@@ -218,7 +218,7 @@ class Comment extends ObjectModel
      */
     public function getPseudoMbr(): string
     {
-        return $this->_pseudo_mbr;
+        return $this->pseudo_mbr;
     }
 
     /**
@@ -226,7 +226,7 @@ class Comment extends ObjectModel
      */
     public function getPseudo(): string
     {
-        return $this->getPseudoMbr() ? $this->getPseudoMbr() : $this->_pseudo;
+        return $this->getPseudoMbr() ? $this->getPseudoMbr() : $this->pseudo;
     }
 
     /**
@@ -234,7 +234,7 @@ class Comment extends ObjectModel
      */
     public function getEmailMbr(): string
     {
-        return $this->_email_mbr;
+        return $this->email_mbr;
     }
 
     /**
@@ -242,7 +242,7 @@ class Comment extends ObjectModel
      */
     public function getEmail(): string
     {
-        return $this->getEmailMbr() ? $this->getEmailMbr() : $this->_email;
+        return $this->getEmailMbr() ? $this->getEmailMbr() : $this->email;
     }
 
     /**
@@ -266,9 +266,9 @@ class Comment extends ObjectModel
     {
         $type = trim($type);
 
-        if ($this->_type !== $type) {
-            $this->_type = $type;
-            $this->_modified_fields['type'] = true;
+        if ($this->type !== $type) {
+            $this->type = $type;
+            $this->modified_fields['type'] = true;
         }
 
         return $this;
@@ -281,9 +281,9 @@ class Comment extends ObjectModel
      */
     public function setIdContent(int $id_content): object
     {
-        if ($this->_id_content !== $id_content) {
-            $this->_id_content = $id_content;
-            $this->_modified_fields['id_content'] = true;
+        if ($this->content !== $id_content) {
+            $this->content = $id_content;
+            $this->modified_fields['id_content'] = true;
         }
 
         return $this;
@@ -296,9 +296,9 @@ class Comment extends ObjectModel
      */
     public function setCreatedAt(string $created_at): object
     {
-        if ($this->_created_at !== $created_at) {
-            $this->_created_at = $created_at;
-            $this->_modified_fields['created_at'] = true;
+        if ($this->created_at !== $created_at) {
+            $this->created_at = $created_at;
+            $this->modified_fields['created_at'] = true;
         }
 
         return $this;
@@ -311,9 +311,9 @@ class Comment extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_created_at !== $now) {
-            $this->_created_at = $now;
-            $this->_modified_fields['created_at'] = true;
+        if ($this->created_at !== $now) {
+            $this->created_at = $now;
+            $this->modified_fields['created_at'] = true;
         }
 
         return $this;
@@ -326,9 +326,9 @@ class Comment extends ObjectModel
      */
     public function setModifiedAt(string $modified_at): object
     {
-        if ($this->_modified_at !== $modified_at) {
-            $this->_modified_at = $modified_at;
-            $this->_modified_fields['modified_at'] = true;
+        if ($this->modified_at !== $modified_at) {
+            $this->modified_at = $modified_at;
+            $this->modified_fields['modified_at'] = true;
         }
 
         return $this;
@@ -341,9 +341,9 @@ class Comment extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_modified_at !== $now) {
-            $this->_modified_at = $now;
-            $this->_modified_fields['modified_at'] = true;
+        if ($this->modified_at !== $now) {
+            $this->modified_at = $now;
+            $this->modified_fields['modified_at'] = true;
         }
 
         return $this;
@@ -356,9 +356,9 @@ class Comment extends ObjectModel
      */
     public function setOnline(bool $online): object
     {
-        if ($this->_online !== $online) {
-            $this->_online = $online;
-            $this->_modified_fields['online'] = true;
+        if ($this->online !== $online) {
+            $this->online = $online;
+            $this->modified_fields['online'] = true;
         }
 
         return $this;
@@ -371,9 +371,9 @@ class Comment extends ObjectModel
      */
     public function setIdContact(int $id_contact): object
     {
-        if ($this->_id_contact !== $id_contact) {
-            $this->_id_contact = $id_contact;
-            $this->_modified_fields['id_contact'] = true;
+        if ($this->contact !== $id_contact) {
+            $this->contact = $id_contact;
+            $this->modified_fields['id_contact'] = true;
         }
 
         return $this;
@@ -388,9 +388,9 @@ class Comment extends ObjectModel
     {
         $pseudo = trim($pseudo);
 
-        if ($this->_pseudo !== $pseudo) {
-            $this->_pseudo = $pseudo;
-            $this->_modified_fields['pseudo'] = true;
+        if ($this->pseudo !== $pseudo) {
+            $this->pseudo = $pseudo;
+            $this->modified_fields['pseudo'] = true;
         }
 
         return $this;
@@ -405,9 +405,9 @@ class Comment extends ObjectModel
     {
         $email = trim($email);
 
-        if ($this->_email !== $email) {
-            $this->_email = $email;
-            $this->_modified_fields['email'] = true;
+        if ($this->email !== $email) {
+            $this->email = $email;
+            $this->modified_fields['email'] = true;
         }
 
         return $this;
@@ -422,9 +422,9 @@ class Comment extends ObjectModel
     {
         $text = trim($text);
 
-        if ($this->_text !== $text) {
-            $this->_text = $text;
-            $this->_modified_fields['text'] = true;
+        if ($this->text !== $text) {
+            $this->text = $text;
+            $this->modified_fields['text'] = true;
         }
 
         return $this;
@@ -434,7 +434,7 @@ class Comment extends ObjectModel
 
     /**
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     protected function loadFromDb(): bool
     {
@@ -446,16 +446,16 @@ class Comment extends ObjectModel
              . "FROM `" . Comment::getDbTable() . "` `com` "
              . "LEFT JOIN `" . Membre::getDbTable() . "` `mbr` ON (`com`.`id_contact` = `mbr`.`id_contact`) "
              . "LEFT JOIN `" . Contact::getDbTable() . "` `cnt` ON (`mbr`.`id_contact` = `cnt`.`id_contact`) "
-             . "WHERE `" . self::$_pk . "` = " . (int) $this->getId();
+             . "WHERE `" . self::$pk . "` = " . (int) $this->getId();
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_arrayToObject($res);
-            $this->_pseudo_mbr = $res['pseudo_mbr'];
-            $this->_email_mbr  = $res['email_mbr'];
+            $this->arrayToObject($res);
+            $this->pseudo_mbr = $res['pseudo_mbr'];
+            $this->email_mbr  = $res['email_mbr'];
             return true;
         }
 
-        throw new Exception('id_comment introuvable');
+        throw new \Exception('id_comment introuvable');
     }
 
     /**

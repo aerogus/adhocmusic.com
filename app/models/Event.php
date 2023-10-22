@@ -22,79 +22,79 @@ class Event extends ObjectModel
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_event';
+    protected static string $pk = 'id_event';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_event';
+    protected static string $table = 'adhoc_event';
 
     /**
      * @var int
      */
-    protected int $_id_event = 0;
+    protected int $id_event = 0;
 
     /**
      * @var string
      */
-    protected string $_name = '';
+    protected string $name = '';
 
     /**
      * @var ?string
      */
-    protected ?string $_date = null;
+    protected ?string $date = null;
 
     /**
      * @var string
      */
-    protected string $_text = '';
+    protected string $text = '';
 
     /**
      * @var string
      */
-    protected string $_price = '';
+    protected string $price = '';
 
     /**
      * @var bool
      */
-    protected bool $_online = false;
+    protected bool $online = false;
 
     /**
      * @var int
      */
-    protected int $_id_lieu = 0;
+    protected int $id_lieu = 0;
 
     /**
      * @var int
      */
-    protected int $_id_contact = 0;
+    protected int $id_contact = 0;
 
     /**
      * @var ?string
      */
-    protected ?string $_facebook_event_id = null;
+    protected ?string $facebook_event_id = null;
 
     /**
      * @var ?string
      */
-    protected ?string $_created_at = null;
+    protected ?string $created_at = null;
 
     /**
      * @var ?string
      */
-    protected ?string $_modified_at = null;
+    protected ?string $modified_at = null;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_event'      => 'int', // pk
         'created_at'    => 'date',
         'modified_at'   => 'date',
@@ -131,7 +131,7 @@ class Event extends ObjectModel
      */
     public function getIdEvent(): int
     {
-        return $this->_id_event;
+        return $this->event;
     }
 
     /**
@@ -139,8 +139,8 @@ class Event extends ObjectModel
      */
     public function getCreatedAt(): ?string
     {
-        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
-            return $this->_created_at;
+        if (!is_null($this->created_at) && Date::isDateTimeOk($this->created_at)) {
+            return $this->created_at;
         }
         return null;
     }
@@ -150,8 +150,8 @@ class Event extends ObjectModel
      */
     public function getCreatedAtTs(): ?int
     {
-        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
-            return strtotime($this->_created_at);
+        if (!is_null($this->created_at) && Date::isDateTimeOk($this->created_at)) {
+            return strtotime($this->created_at);
         }
         return null;
     }
@@ -161,8 +161,8 @@ class Event extends ObjectModel
      */
     public function getModifiedAt(): ?string
     {
-        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
-            return $this->_modified_at;
+        if (!is_null($this->modified_at) && Date::isDateTimeOk($this->modified_at)) {
+            return $this->modified_at;
         }
         return null;
     }
@@ -172,8 +172,8 @@ class Event extends ObjectModel
      */
     public function getModifiedAtTs(): ?int
     {
-        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
-            return strtotime($this->_modified_at);
+        if (!is_null($this->modified_at) && Date::isDateTimeOk($this->modified_at)) {
+            return strtotime($this->modified_at);
         }
         return null;
     }
@@ -183,7 +183,7 @@ class Event extends ObjectModel
      */
     public function getName(): string
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -191,7 +191,7 @@ class Event extends ObjectModel
      */
     public function getDate(): string
     {
-        return $this->_date;
+        return $this->date;
     }
 
     /**
@@ -199,7 +199,7 @@ class Event extends ObjectModel
      */
     public function getDay(): int
     {
-        return (int) date('d', strtotime($this->_date));
+        return (int) date('d', strtotime($this->date));
     }
 
     /**
@@ -207,7 +207,7 @@ class Event extends ObjectModel
      */
     public function getMonth(): int
     {
-        return (int) date('m', strtotime($this->_date));
+        return (int) date('m', strtotime($this->date));
     }
 
     /**
@@ -215,7 +215,7 @@ class Event extends ObjectModel
      */
     public function getYear(): int
     {
-        return (int) date('Y', strtotime($this->_date));
+        return (int) date('Y', strtotime($this->date));
     }
 
     /**
@@ -223,7 +223,7 @@ class Event extends ObjectModel
      */
     public function getHour(): int
     {
-        return (int) date('H', strtotime($this->_date));
+        return (int) date('H', strtotime($this->date));
     }
 
     /**
@@ -231,7 +231,7 @@ class Event extends ObjectModel
      */
     public function getMinute(): int
     {
-        return (int) date('i', strtotime($this->_date));
+        return (int) date('i', strtotime($this->date));
     }
 
     /**
@@ -239,7 +239,7 @@ class Event extends ObjectModel
      */
     public function getText(): string
     {
-        return $this->_text;
+        return $this->text;
     }
 
     /**
@@ -247,7 +247,7 @@ class Event extends ObjectModel
      */
     public function getPrice(): string
     {
-        return $this->_price;
+        return $this->price;
     }
 
     /**
@@ -255,7 +255,7 @@ class Event extends ObjectModel
      */
     public function getOnline(): bool
     {
-        return $this->_online;
+        return $this->online;
     }
 
     /**
@@ -263,7 +263,7 @@ class Event extends ObjectModel
      */
     public function getIdContact(): int
     {
-        return $this->_id_contact;
+        return $this->contact;
     }
 
     /**
@@ -271,7 +271,7 @@ class Event extends ObjectModel
      */
     public function getFacebookEventId(): ?string
     {
-        return $this->_facebook_event_id;
+        return $this->facebook_event_id;
     }
 
     /**
@@ -279,7 +279,7 @@ class Event extends ObjectModel
      */
     public function getFacebookEventUrl(): string
     {
-        return "https://www.facebook.com/events/{$this->_facebook_event_id}";
+        return "https://www.facebook.com/events/{$this->facebook_event_id}";
     }
 
     /**
@@ -287,7 +287,7 @@ class Event extends ObjectModel
      */
     public function getIdLieu(): int
     {
-        return $this->_id_lieu;
+        return $this->lieu;
     }
 
     /**
@@ -336,9 +336,9 @@ class Event extends ObjectModel
      */
     public function setCreatedAt(string $created_at): object
     {
-        if ($this->_created_at !== $created_at) {
-            $this->_created_at = $created_at;
-            $this->_modified_fields['created_at'] = true;
+        if ($this->created_at !== $created_at) {
+            $this->created_at = $created_at;
+            $this->modified_fields['created_at'] = true;
         }
 
         return $this;
@@ -351,9 +351,9 @@ class Event extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_created_at !== $now) {
-            $this->_created_at = $now;
-            $this->_modified_fields['created_at'] = true;
+        if ($this->created_at !== $now) {
+            $this->created_at = $now;
+            $this->modified_fields['created_at'] = true;
         }
 
         return $this;
@@ -366,9 +366,9 @@ class Event extends ObjectModel
      */
     public function setModifiedAt(string $modified_at): object
     {
-        if ($this->_modified_at !== $modified_at) {
-            $this->_modified_at = $modified_at;
-            $this->_modified_fields['modified_at'] = true;
+        if ($this->modified_at !== $modified_at) {
+            $this->modified_at = $modified_at;
+            $this->modified_fields['modified_at'] = true;
         }
 
         return $this;
@@ -381,9 +381,9 @@ class Event extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_modified_at !== $now) {
-            $this->_modified_at = $now;
-            $this->_modified_fields['modified_at'] = true;
+        if ($this->modified_at !== $now) {
+            $this->modified_at = $now;
+            $this->modified_fields['modified_at'] = true;
         }
 
         return $this;
@@ -396,9 +396,9 @@ class Event extends ObjectModel
      */
     public function setName(string $name): object
     {
-        if ($this->_name !== $name) {
-            $this->_name = $name;
-            $this->_modified_fields['name'] = true;
+        if ($this->name !== $name) {
+            $this->name = $name;
+            $this->modified_fields['name'] = true;
         }
 
         return $this;
@@ -417,9 +417,9 @@ class Event extends ObjectModel
         }
         $facebook_event_id = str_replace('/', '', trim($facebook_event_id));
 
-        if ($this->_facebook_event_id !== $facebook_event_id) {
-            $this->_facebook_event_id = $facebook_event_id;
-            $this->_modified_fields['facebook_event_id'] = true;
+        if ($this->facebook_event_id !== $facebook_event_id) {
+            $this->facebook_event_id = $facebook_event_id;
+            $this->modified_fields['facebook_event_id'] = true;
         }
 
         return $this;
@@ -432,9 +432,9 @@ class Event extends ObjectModel
      */
     public function setDate(string $date): object
     {
-        if ($this->_date !== $date) {
-            $this->_date = $date;
-            $this->_modified_fields['date'] = true;
+        if ($this->date !== $date) {
+            $this->date = $date;
+            $this->modified_fields['date'] = true;
         }
 
         return $this;
@@ -447,9 +447,9 @@ class Event extends ObjectModel
      */
     public function setText(string $text): object
     {
-        if ($this->_text !== $text) {
-            $this->_text = $text;
-            $this->_modified_fields['text'] = true;
+        if ($this->text !== $text) {
+            $this->text = $text;
+            $this->modified_fields['text'] = true;
         }
 
         return $this;
@@ -462,9 +462,9 @@ class Event extends ObjectModel
      */
     public function setPrice(string $price): object
     {
-        if ($this->_price !== $price) {
-            $this->_price = $price;
-            $this->_modified_fields['price'] = true;
+        if ($this->price !== $price) {
+            $this->price = $price;
+            $this->modified_fields['price'] = true;
         }
 
         return $this;
@@ -477,9 +477,9 @@ class Event extends ObjectModel
      */
     public function setOnline(bool $online): object
     {
-        if ($this->_online !== $online) {
-            $this->_online = $online;
-            $this->_modified_fields['online'] = true;
+        if ($this->online !== $online) {
+            $this->online = $online;
+            $this->modified_fields['online'] = true;
         }
 
         return $this;
@@ -492,9 +492,9 @@ class Event extends ObjectModel
      */
     public function setIdLieu(int $id_lieu): object
     {
-        if ($this->_id_lieu !== $id_lieu) {
-            $this->_id_lieu = $id_lieu;
-            $this->_modified_fields['id_lieu'] = true;
+        if ($this->lieu !== $id_lieu) {
+            $this->lieu = $id_lieu;
+            $this->modified_fields['id_lieu'] = true;
         }
 
         return $this;
@@ -507,9 +507,9 @@ class Event extends ObjectModel
      */
     public function setIdContact(int $id_contact): object
     {
-        if ($this->_id_contact !== $id_contact) {
-            $this->_id_contact = $id_contact;
-            $this->_modified_fields['id_contact'] = true;
+        if ($this->contact !== $id_contact) {
+            $this->contact = $id_contact;
+            $this->modified_fields['id_contact'] = true;
         }
 
         return $this;
@@ -595,10 +595,10 @@ class Event extends ObjectModel
             }
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
-            $sql .= "ORDER BY `" . static::$_pk . "` ";
+            $sql .= "ORDER BY `" . static::$pk . "` ";
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
@@ -635,12 +635,12 @@ class Event extends ObjectModel
 
     /**
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     protected function loadFromDb(): bool
     {
         if (!parent::loadFromDb()) {
-            throw new Exception('id_event introuvable');
+            throw new \Exception('id_event introuvable');
         }
 
         return true;
@@ -777,14 +777,14 @@ class Event extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "INSERT INTO `" . self::$_db_table_event_style . "` "
+        $sql = "INSERT INTO `" . self::$db_table_event_style . "` "
              . "(`id_event`, `id_style`) "
              . "VALUES (" . (int) $this->getIdEvent() . ", " . (int) $id_style . ")";
 
         try {
             $db->query($sql);
             return (bool) $db->affectedRows();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
     }
@@ -800,7 +800,7 @@ class Event extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_db_table_event_style . "` "
+        $sql = "DELETE FROM `" . self::$db_table_event_style . "` "
              . "WHERE `id_event` = " . (int) $this->getIdEvent() . " "
              . "AND `id_style` = " . (int) $id_style;
 
@@ -833,7 +833,7 @@ class Event extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_db_table_event_style . "` "
+        $sql = "DELETE FROM `" . self::$db_table_event_style . "` "
              . "WHERE `id_event` = " . (int) $this->getIdEvent();
 
         $db->query($sql);
@@ -852,14 +852,14 @@ class Event extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "INSERT INTO `" . self::$_db_table_participe_a . "` "
+        $sql = "INSERT INTO `" . self::$db_table_participe_a . "` "
              . "(`id_event`, `id_groupe`) "
              . "VALUES (" . (int) $this->getIdEvent() . ", " . (int) $id_groupe . ")";
 
         try {
             $db->query($sql);
             return (bool) $db->affectedRows();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
     }
@@ -875,7 +875,7 @@ class Event extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_db_table_participe_a . "` "
+        $sql = "DELETE FROM `" . self::$db_table_participe_a . "` "
              . "WHERE `id_event` = " . (int) $this->getIdEvent() . " "
              . "AND `id_groupe` = " . (int) $id_groupe;
 
@@ -893,7 +893,7 @@ class Event extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_db_table_participe_a . "` "
+        $sql = "DELETE FROM `" . self::$db_table_participe_a . "` "
              . "WHERE `id_event` = " . (int) $this->getIdEvent();
 
         $db->query($sql);
@@ -912,14 +912,14 @@ class Event extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "INSERT INTO `" . self::$_db_table_organise_par . "` "
+        $sql = "INSERT INTO `" . self::$db_table_organise_par . "` "
              . " (`id_event`, `id_structure`) "
              . "VALUES (" . (int) $this->getIdEvent() . ", " . (int) $id_structure . ")";
 
         try {
             $db->query($sql);
             return (bool) $db->affectedRows();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
     }
@@ -935,7 +935,7 @@ class Event extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_db_table_organise_par . "` "
+        $sql = "DELETE FROM `" . self::$db_table_organise_par . "` "
              . "WHERE `id_event` = " . (int) $this->getIdEvent() . " "
              . "AND `id_structure` = " . (int) $id_structure;
 
@@ -968,7 +968,7 @@ class Event extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_db_table_organise_par . "` "
+        $sql = "DELETE FROM `" . self::$db_table_organise_par . "` "
              . "WHERE `id_event` = " . (int) $this->getIdEvent();
 
         $db->query($sql);

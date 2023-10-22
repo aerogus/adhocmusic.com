@@ -101,17 +101,17 @@ class Video extends Media
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static $_pk = 'id_video';
+    protected static $pk = 'id_video';
 
     /**
      * @var string
      */
-    protected static $_table = 'adhoc_video';
+    protected static string $table = 'adhoc_video';
 
     public const HOST_YOUTUBE     = 1;
     public const HOST_DAILYMOTION = 2;
@@ -122,7 +122,7 @@ class Video extends Media
     /**
      * @var array<int,string>
      */
-    protected static $_tab_hosts = [
+    protected static $tab_hosts = [
         self::HOST_YOUTUBE     => "YouTube",
         self::HOST_DAILYMOTION => "DailyMotion",
         self::HOST_FACEBOOK    => "Facebook",
@@ -133,29 +133,29 @@ class Video extends Media
     /**
      * @var int
      */
-    protected $_id_video = 0;
+    protected $id_video = 0;
 
     /**
      * @var int
      */
-    protected $_id_host = 0;
+    protected $id_host = 0;
 
     /**
      * @var string
      */
-    protected $_reference;
+    protected $reference;
 
     /**
      * @var float
      */
-    protected $_ratio;
+    protected $ratio;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_video'    => 'int', // pk
         'id_contact'  => 'int',
         'id_host'     => 'int',
@@ -193,7 +193,7 @@ class Video extends Media
      */
     public function getIdVideo(): int
     {
-        return $this->_id_video;
+        return $this->id_video;
     }
 
     /**
@@ -201,7 +201,7 @@ class Video extends Media
      */
     public function getIdHost(): int
     {
-        return $this->_id_host;
+        return $this->id_host;
     }
 
     /**
@@ -219,7 +219,7 @@ class Video extends Media
      */
     public function getReference(): string
     {
-        return $this->_reference;
+        return $this->reference;
     }
 
     /**
@@ -227,7 +227,7 @@ class Video extends Media
      */
     public function getRatio(): float
     {
-        return $this->_ratio;
+        return $this->ratio;
     }
 
     /**
@@ -267,9 +267,9 @@ class Video extends Media
      */
     public function getDirectMp4Url(): ?string
     {
-        switch ($this->_id_host) {
+        switch ($this->id_host) {
             case self::HOST_ADHOCTUBE:
-                $meta_url = 'https://' . MEDIA_ADHOCTUBE_HOST . '/api/v1/videos/' . $this->_reference;
+                $meta_url = 'https://' . MEDIA_ADHOCTUBE_HOST . '/api/v1/videos/' . $this->reference;
                 $meta_info = json_decode(file_get_contents($meta_url));
                 return $meta_info->files[0]->fileUrl;
             case self::HOST_YOUTUBE:
@@ -345,9 +345,9 @@ class Video extends Media
      */
     public function setIdHost(int $id_host): object
     {
-        if ($this->_id_host !== $id_host) {
-            $this->_id_host = $id_host;
-            $this->_modified_fields['id_host'] = true;
+        if ($this->id_host !== $id_host) {
+            $this->id_host = $id_host;
+            $this->modified_fields['id_host'] = true;
         }
 
         return $this;
@@ -360,9 +360,9 @@ class Video extends Media
      */
     public function setReference(string $reference): object
     {
-        if ($this->_reference !== $reference) {
-            $this->_reference = $reference;
-            $this->_modified_fields['reference'] = true;
+        if ($this->reference !== $reference) {
+            $this->reference = $reference;
+            $this->modified_fields['reference'] = true;
         }
 
         return $this;
@@ -375,9 +375,9 @@ class Video extends Media
      */
     public function setRatio(float $ratio): object
     {
-        if ($this->_ratio !== $ratio) {
-            $this->_ratio = $ratio;
-            $this->_modified_fields['ratio'] = true;
+        if ($this->ratio !== $ratio) {
+            $this->ratio = $ratio;
+            $this->modified_fields['ratio'] = true;
         }
 
         return $this;
@@ -444,7 +444,7 @@ class Video extends Media
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_db_table_video_groupe . "` "
+        $sql = "DELETE FROM `" . self::$db_table_video_groupe . "` "
              . "WHERE `id_video` = " . (int) $this->getIdVideo() . " "
              . "AND `id_groupe` = " . (int) $id_groupe;
 
@@ -464,7 +464,7 @@ class Video extends Media
     {
         $db = DataBase::getInstance();
 
-        $sql = "INSERT INTO `" . self::$_db_table_video_groupe . "` "
+        $sql = "INSERT INTO `" . self::$db_table_video_groupe . "` "
              . "(`id_video`, `id_groupe`) "
              . "VALUES(" . (int) $this->getIdVideo() . ", " . (int) $id_groupe . ")";
 
@@ -482,7 +482,7 @@ class Video extends Media
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_db_table_video_groupe . "` "
+        $sql = "DELETE FROM `" . self::$db_table_video_groupe . "` "
              . "WHERE `id_video` = " . (int) $this->getIdVideo();
 
         $db->query($sql);
@@ -654,12 +654,12 @@ class Video extends Media
      * @todo comme Photo et Audio, requête plus complète ?
      *
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     protected function loadFromDb(): bool
     {
         if (!parent::loadFromDb()) {
-            throw new Exception('Vidéo introuvable');
+            throw new \Exception('Vidéo introuvable');
         }
         return true;
     }
@@ -768,7 +768,7 @@ class Video extends Media
                 return null;
 
             default:
-                throw new Exception('unknown video_host');
+                throw new \Exception('unknown video_host');
         }
     }
 
@@ -796,8 +796,8 @@ class Video extends Media
      */
     public function storeThumbnail(string $remote_url)
     {
-        $tmp = self::getBasePath() . '/' . $this->_id_video . '.jpg.tmp';
-        $jpg = self::getBasePath() . '/' . $this->_id_video . '.jpg';
+        $tmp = self::getBasePath() . '/' . $this->id_video . '.jpg.tmp';
+        $jpg = self::getBasePath() . '/' . $this->id_video . '.jpg';
 
         $confVideo = Conf::getInstance()->get('video');
         file_put_contents($tmp, file_get_contents($remote_url));

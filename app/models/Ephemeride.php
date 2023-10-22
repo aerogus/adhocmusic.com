@@ -13,7 +13,7 @@ class Ephemeride
     /**
      * @var array
      */
-    protected array $_data;
+    protected array $data;
 
     /**
      * Retourne toutes les données
@@ -22,7 +22,7 @@ class Ephemeride
      */
     public function getAll(): array
     {
-        return $this->_data;
+        return $this->data;
     }
 
     /**
@@ -37,10 +37,10 @@ class Ephemeride
         if (strlen($date) !== 5) {
             return;
         }
-        if (!array_key_exists($date, $this->_data)) {
+        if (!array_key_exists($date, $this->data)) {
             return;
         }
-        return $this->_data[$date];
+        return $this->data[$date];
     }
 
     /**
@@ -73,6 +73,6 @@ class Ephemeride
             array_push($data[$row['day']][$row['year']], $row['id_groupe']);
         }
 
-        $this->_data = $data;
+        $this->data = $data;
     }
 }

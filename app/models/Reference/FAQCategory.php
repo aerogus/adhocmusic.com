@@ -19,29 +19,29 @@ class FAQCategory extends Reference
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_faq_category';
+    protected static string $pk = 'id_faq_category';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_faq_category';
+    protected static string $table = 'adhoc_faq_category';
 
     /**
      * @var int
      */
-    protected int $_id_faq_category = 0;
+    protected int $id_faq_category = 0;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_faq_category' => 'int', // pk
         'name'            => 'string',
     ];

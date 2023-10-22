@@ -17,24 +17,24 @@ class Messagerie extends ObjectModel
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_messagerie';
+    protected static string $pk = 'id_messagerie';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_messagerie';
+    protected static string $table = 'adhoc_messagerie';
 
     /**
      * Clé Contact
      *
      * @var int
      */
-    private int $_id_contact;
+    private int $id_contact;
 
     /**
      * Constructeur de la Classe
@@ -45,8 +45,8 @@ class Messagerie extends ObjectModel
      */
     public function __construct($id_contact)
     {
-        $this->_id_contact = (int) $id_contact;
-        self::$_instance = $this;
+        $this->id_contact = (int) $id_contact;
+        self::$instance = $this;
     }
 
     /**
@@ -54,10 +54,10 @@ class Messagerie extends ObjectModel
      */
     public static function getInstance($id_contact): object
     {
-        if (is_null(self::$_instance)) {
+        if (is_null(self::$instance)) {
             return new Messagerie($id_contact);
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
     /**
@@ -65,8 +65,8 @@ class Messagerie extends ObjectModel
      */
     public static function deleteInstance(): bool
     {
-        if (isset(self::$_instance)) {
-            self::$_instance = null;
+        if (isset(self::$instance)) {
+            self::$instance = null;
             return true;
         }
         return false;
@@ -86,7 +86,7 @@ class Messagerie extends ObjectModel
 
         $sql = "INSERT INTO `" . Messagerie::getDbTable() . "` "
              . "(`id_from`, `id_to`, `text`, `date`) "
-             . "VALUES(" . (int) $this->_id_contact . ", " . (int) $id_to . ", '" . $db->escape($text) . "', NOW())";
+             . "VALUES(" . (int) $this->contact . ", " . (int) $id_to . ", '" . $db->escape($text) . "', NOW())";
 
         $db->query($sql);
 
@@ -124,7 +124,7 @@ class Messagerie extends ObjectModel
 
         $sql = "SELECT COUNT(`id_pm`) "
              . "FROM `" . Messagerie::getDbTable() . "` "
-             . "WHERE `id_to` = " . (int) $this->_id_contact . " "
+             . "WHERE `id_to` = " . (int) $this->contact . " "
              . "AND `read_to` = FALSE";
 
         return (int) $db->queryWithFetchFirstField($sql);
@@ -161,7 +161,7 @@ class Messagerie extends ObjectModel
 
         $sql = "SELECT COUNT(`id_pm`) "
              . "FROM `" . Messagerie::getDbTable() . "` "
-             . "WHERE `id_from` = " . (int) $this->_id_contact . " "
+             . "WHERE `id_from` = " . (int) $this->contact . " "
              . "AND `del_from` = FALSE";
 
         return (int) $db->queryWithFetchFirstField($sql);
@@ -178,7 +178,7 @@ class Messagerie extends ObjectModel
 
         $sql = "SELECT COUNT(`id_pm`) "
              . "FROM `" . Messagerie::getDbTable() . "` "
-             . "WHERE `id_to` = " . (int) $this->_id_contact . " "
+             . "WHERE `id_to` = " . (int) $this->contact . " "
              . "AND `del_to` = FALSE";
 
         return (int) $db->queryWithFetchFirstField($sql);
@@ -225,11 +225,11 @@ class Messagerie extends ObjectModel
                 break;
 
             case 'recus':
-                $sql .= "AND `id_to` = " . (int) $this->_id_contact . " AND `del_to` = FALSE ";
+                $sql .= "AND `id_to` = " . (int) $this->contact . " AND `del_to` = FALSE ";
                 break;
 
             case 'sent':
-                $sql .= "AND `id_from` = " . (int) $this->_id_contact . " AND `del_from` = FALSE ";
+                $sql .= "AND `id_from` = " . (int) $this->contact . " AND `del_from` = FALSE ";
                 break;
 
             default:

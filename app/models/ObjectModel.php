@@ -21,35 +21,35 @@ abstract class ObjectModel
     /**
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * Champ clé primaire (simple ou multiple) de l'objet fils
      *
      * @var string|array
      */
-    protected static $_pk = '';
+    protected static $pk = '';
 
     /**
      * Table de la bdd utilisée par l'objet
      *
      * @var string
      */
-    protected static string $_table = '';
+    protected static string $table = '';
 
     /**
      * L'objet peut-il être mis en cache ?
      *
      * @var bool
      */
-    protected static bool $_cachable = true;
+    protected static bool $cachable = true;
 
     /**
      * Identifiant unique d'objet
      *
      * @var string
      */
-    protected string $_object_id = '';
+    protected string $object_id = '';
 
     /**
      * Liste des attributs de l'objet
@@ -58,7 +58,7 @@ abstract class ObjectModel
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [];
+    protected static array $all_fields = [];
 
     /**
      * Tableau des attributs modifiés depuis la dernière sauvegarde.
@@ -68,17 +68,17 @@ abstract class ObjectModel
      *
      * @var array
      */
-    protected $_modified_fields = [];
+    protected $modified_fields = [];
 
     /* db adhoc */
     /* todo retirer tous ces trucs en dur... */
-    protected static string $_db_table_appartient_a   = 'adhoc_appartient_a';
-    protected static string $_db_table_event_style    = 'adhoc_event_style';
-    protected static string $_db_table_forums         = 'adhoc_forum_public_message';
-    protected static string $_db_table_groupe_style   = 'adhoc_groupe_style';
-    protected static string $_db_table_organise_par   = 'adhoc_organise_par';
-    protected static string $_db_table_participe_a    = 'adhoc_participe_a';
-    protected static string $_db_table_video_groupe   = 'adhoc_video_groupe';
+    protected static string $db_table_appartient_a   = 'adhoc_appartient_a';
+    protected static string $db_table_event_style    = 'adhoc_event_style';
+    protected static string $db_table_forums         = 'adhoc_forum_public_message';
+    protected static string $db_table_groupe_style   = 'adhoc_groupe_style';
+    protected static string $db_table_organise_par   = 'adhoc_organise_par';
+    protected static string $db_table_participe_a    = 'adhoc_participe_a';
+    protected static string $db_table_video_groupe   = 'adhoc_video_groupe';
 
     /**
      * @param bool $fusion fusion
@@ -87,7 +87,7 @@ abstract class ObjectModel
      */
     protected function getAllFields(bool $fusion = true): array
     {
-        return static::$_all_fields;
+        return static::$all_fields;
     }
 
     /**
@@ -103,14 +103,14 @@ abstract class ObjectModel
         if (!is_null($id)) {
             if (is_array($id)) {
                 // clé primaire multiple
-                foreach (static::$_pk as $field) {
-                    $pk = '_' . $field;
+                foreach (static::$pk as $field) {
+                    $pk = $field;
                     $this->$pk = $id[$field];
                 }
                 $this->loadObjectId();
             } else {
                 // clé primaire simple
-                $pk = '_' . static::$_pk;
+                $pk = static::$pk;
                 $this->$pk = $id;
                 $this->loadObjectId();
             }
@@ -126,7 +126,7 @@ abstract class ObjectModel
             } else {
                 // erreur au chargement
             }
-            static::$_instance = $this;
+            static::$instance = $this;
         }
     }
 
@@ -137,7 +137,7 @@ abstract class ObjectModel
      */
     public static function getDbTable(): string
     {
-        return static::$_table;
+        return static::$table;
     }
 
     /**
@@ -147,7 +147,7 @@ abstract class ObjectModel
      */
     public static function getDbPk()
     {
-        return static::$_pk;
+        return static::$pk;
     }
 
     /**
@@ -159,22 +159,22 @@ abstract class ObjectModel
      */
     public static function getInstance($id): object
     {
-        if (is_null(static::$_instance)) {
+        if (is_null(static::$instance)) {
             // pas du tout d'instance: on en crée une, le constructeur ira s'enregistrer
             // dans la variable statique.
             return new static($id);
-        } elseif (is_array(static::$_pk)) {
-            foreach (static::$_pk as $pk) {
-                $propName = '_' . $pk;
-                if (static::$_instance->$propName !== $id[$pk]) {
+        } elseif (is_array(static::$pk)) {
+            foreach (static::$pk as $pk) {
+                $propName = $pk;
+                if (static::$instance->$propName !== $id[$pk]) {
                     // on a deja une instance, mais ce n'est pas le bon id
                     static::deleteInstance();
                     new static($id);
                 }
             }
         } else {
-            $pk = '_' . static::$_pk;
-            if (static::$_instance->$pk !== $id) {
+            $pk = static::$pk;
+            if (static::$instance->$pk !== $id) {
                 // on a deja une instance, mais ce n'est pas le bon id
                 static::deleteInstance();
                 new static($id);
@@ -182,7 +182,7 @@ abstract class ObjectModel
                 // tout est ok
             }
         }
-        return static::$_instance;
+        return static::$instance;
     }
 
     /**
@@ -190,8 +190,8 @@ abstract class ObjectModel
      */
     public static function deleteInstance(): bool
     {
-        if (isset(static::$_instance)) {
-            static::$_instance = null;
+        if (isset(static::$instance)) {
+            static::$instance = null;
             return true;
         }
         return false;
@@ -202,7 +202,7 @@ abstract class ObjectModel
      */
     public static function isCachable(): bool
     {
-        return static::$_cachable;
+        return static::$cachable;
     }
 
     /**
@@ -210,7 +210,7 @@ abstract class ObjectModel
      */
     public function getObjectId(): string
     {
-        return $this->_object_id;
+        return $this->object_id;
     }
 
     /**
@@ -222,15 +222,15 @@ abstract class ObjectModel
      */
     public function getId()
     {
-        if (is_array(static::$_pk)) {
+        if (is_array(static::$pk)) {
             $pks = [];
-            foreach (static::$_pk as $_pk) {
-                $pk = '_' . $_pk;
-                $pks[$_pk] = $this->$pk;
+            foreach (static::$pk as $pk) {
+                $pk = $pk;
+                $pks[$pk] = $this->$pk;
             }
             return $pks;
         } else {
-            $pk = '_' . static::$_pk;
+            $pk = static::$pk;
             return $this->$pk;
         }
     }
@@ -247,11 +247,11 @@ abstract class ObjectModel
     {
         if (is_array($id)) {
             foreach ($id as $key => $val) {
-                $pk = '_' . $key;
+                $pk = $key;
                 $this->$pk = $val;
             }
         } else {
-            $pk = '_' . static::$_pk;
+            $pk = static::$pk;
             $this->$pk = $id;
         }
 
@@ -268,8 +268,8 @@ abstract class ObjectModel
         if (!$this->getId()) { // INSERT
             $sql = 'INSERT INTO `' . $this->getDbTable() . '` (';
 
-            if (count($this->_modified_fields) > 0) {
-                foreach ($this->_modified_fields as $field => $value) {
+            if (count($this->modified_fields) > 0) {
+                foreach ($this->modified_fields as $field => $value) {
                     if ($value === true) {
                         $sql .= '`' . $field . '`,';
                     }
@@ -278,16 +278,16 @@ abstract class ObjectModel
             }
             $sql .= ') VALUES (';
 
-            if (count($this->_modified_fields) > 0) {
-                foreach ($this->_modified_fields as $field => $value) {
+            if (count($this->modified_fields) > 0) {
+                foreach ($this->modified_fields as $field => $value) {
                     if ($value !== true) {
                         continue;
                     }
-                    $att = '_' . $field;
+                    $att = $field;
                     if (is_null($this->$att)) {
                         $sql .= 'NULL,';
                     } else {
-                        switch (static::$_all_fields[$field]) {
+                        switch (static::$all_fields[$field]) {
                             case 'int':
                                 $sql .= (int) $this->$att . ',';
                                 break;
@@ -308,7 +308,7 @@ abstract class ObjectModel
                                 $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
                                 break;
                             default:
-                                throw new Exception('invalid field type: ' . static::$_all_fields[$field]);
+                                throw new \Exception('invalid field type: ' . static::$all_fields[$field]);
                                 break;
                         }
                     }
@@ -327,20 +327,20 @@ abstract class ObjectModel
 
             return $this->getId();
         } else { // UPDATE
-            if (count($this->_modified_fields) === 0) {
+            if (count($this->modified_fields) === 0) {
                 return true;
             }
 
             $fields_to_save = '';
-            foreach ($this->_modified_fields as $field => $value) {
+            foreach ($this->modified_fields as $field => $value) {
                 if ($value !== true) {
                     continue;
                 }
-                $att = '_' . $field;
+                $att = $field;
                 if (is_null($this->$att)) {
                     $fields_to_save .= " `" . $field . "` = NULL,";
                 } else {
-                    switch (static::$_all_fields[$field]) {
+                    switch (static::$all_fields[$field]) {
                         case 'int':
                             $fields_to_save .= " `" . $field . "` = " . (int) $this->$att . ",";
                             break;
@@ -361,7 +361,7 @@ abstract class ObjectModel
                             $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
                             break;
                         default:
-                            throw new Exception('invalid field type');
+                            throw new \Exception('invalid field type');
                             break;
                     }
                 }
@@ -372,7 +372,7 @@ abstract class ObjectModel
                  . 'SET ' . $fields_to_save . ' '
                  . 'WHERE `' . $this->getDbPk() . '` = ' . (int) $this->getId();
 
-            $this->_modified_fields = [];
+            $this->modified_fields = [];
 
             $db->query($sql);
 
@@ -407,7 +407,7 @@ abstract class ObjectModel
 
         $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
             $sql .= "ORDER BY `" . static::getDbPk() . "` ";
@@ -439,7 +439,7 @@ abstract class ObjectModel
      * Retourne une collection d'instances
      *
      * @return array
-     * @throws Exception
+     * @throws \Exception
      */
     public static function findAll(): array
     {
@@ -482,10 +482,10 @@ abstract class ObjectModel
      */
     public function loadObjectId()
     {
-        if (is_array(static::$_pk)) {
-            $this->_object_id = get_called_class() . ':' . implode(':', array_values($this->getId())); // ex: WorldRegion:FR:96
+        if (is_array(static::$pk)) {
+            $this->object_id = get_called_class() . ':' . implode(':', array_values($this->getId())); // ex: WorldRegion:FR:96
         } else {
-            $this->_object_id = get_called_class() . ':' . $this->getId(); // ex: Membre:1234
+            $this->object_id = get_called_class() . ':' . $this->getId(); // ex: Membre:1234
         }
     }
 
@@ -559,12 +559,12 @@ abstract class ObjectModel
      * (ne marche pas pour toutes les tables)
      *
      * @return int
-     * @throws Exception
+     * @throws \Exception
      */
     public static function countMy(): int
     {
         if (empty($_SESSION['membre'])) {
-            throw new Exception('non identifié');
+            throw new \Exception('non identifié');
         }
 
         $db = DataBase::getInstance();
@@ -594,29 +594,29 @@ abstract class ObjectModel
      * Charge toutes les infos d'une entité à partir de la base de données
      *
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     protected function loadFromDb(): bool
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT * FROM `" . static::$_table . "` ";
+        $sql = "SELECT * FROM `" . static::$table . "` ";
 
-        if (!is_array(static::$_pk)) {
+        if (!is_array(static::$pk)) {
             // clé primaire simple
-            if (static::$_all_fields[static::$_pk] === 'int') {
-                $sql .= "WHERE `" . static::$_pk . "` = " . (int) $this->{'_' . static::$_pk};
-            } elseif (static::$_all_fields[static::$_pk] === 'string') {
-                $sql .= "WHERE `" . static::$_pk . "` = '" . $this->{'_' . static::$_pk} . "'";
+            if (static::$all_fields[static::$pk] === 'int') {
+                $sql .= "WHERE `" . static::$pk . "` = " . (int) $this->{static::$pk};
+            } elseif (static::$all_fields[static::$pk] === 'string') {
+                $sql .= "WHERE `" . static::$pk . "` = '" . $this->{static::$pk} . "'";
             }
         } else {
             // clé primaire multiple
             $sql .= "WHERE 1 ";
-            foreach (static::$_pk as $pk) {
-                if (static::$_all_fields[$pk] === 'int') {
-                    $sql .= "AND `" . $pk . "` = " . (int) $this->{'_' . $pk} . " ";
-                } elseif (static::$_all_fields[$pk] === 'string') {
-                    $sql .= "AND `" . $pk . "` = '" . $this->{'_' . $pk} . "' ";
+            foreach (static::$pk as $pk) {
+                if (static::$all_fields[$pk] === 'int') {
+                    $sql .= "AND `" . $pk . "` = " . (int) $this->{$pk} . " ";
+                } elseif (static::$all_fields[$pk] === 'string') {
+                    $sql .= "AND `" . $pk . "` = '" . $this->{$pk} . "' ";
                 }
             }
         }
@@ -640,7 +640,7 @@ abstract class ObjectModel
         $all_fields = static::getAllFields(true);
         foreach ($data as $k => $v) {
             if (array_key_exists($k, $all_fields)) {
-                $att = '_' . $k;
+                $att = $k;
                 if (is_null($v)) {
                     $this->$att = null;
                 } else {
@@ -680,7 +680,7 @@ abstract class ObjectModel
         $all_fields = static::getAllFields(true);
 
         foreach ($all_fields as $field => $type) {
-            $att = '_' . $field;
+            $att = $field;
             if (property_exists($this, $att)) {
                 $arr[$field] = $this->$att;
             }

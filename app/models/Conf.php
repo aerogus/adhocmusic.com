@@ -19,17 +19,17 @@ class Conf
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var array
      */
-    protected static $_data = [];
+    protected static $data = [];
 
     /**
      * @var array
      */
-    protected static $_required = [
+    protected static $required = [
         'global' => ['env', 'locale', 'charset', 'timezone'],
         'database' => ['host', 'user', 'pass', 'name'],
         'url' => ['home', 'cache', 'media'],
@@ -46,35 +46,35 @@ class Conf
      */
     public static function getInstance(): object
     {
-        if (is_null(self::$_instance)) {
+        if (is_null(self::$instance)) {
             return new Conf();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function __construct()
     {
         $confPath = self::getConfPath();
         if (!file_exists($confPath)) {
-            throw new Exception('configuration introuvable');
+            throw new \Exception('configuration introuvable');
         }
-        if (!(self::$_data = parse_ini_file($confPath, true, INI_SCANNER_TYPED))) {
-            throw new Exception('configuration illisible');
+        if (!(self::$data = parse_ini_file($confPath, true, INI_SCANNER_TYPED))) {
+            throw new \Exception('configuration illisible');
         }
-        foreach (self::$_required as $section => $fields) {
-            if (!array_key_exists($section, self::$_data)) {
-                throw new Exception('section [' . $section . '] manquante');
+        foreach (self::$required as $section => $fields) {
+            if (!array_key_exists($section, self::$data)) {
+                throw new \Exception('section [' . $section . '] manquante');
             }
             foreach ($fields as $field) {
-                if (!array_key_exists($field, self::$_data[$section])) {
-                    throw new Exception('champ ' . $field . ' manquant dans section [' . $section . ']');
+                if (!array_key_exists($field, self::$data[$section])) {
+                    throw new \Exception('champ ' . $field . ' manquant dans section [' . $section . ']');
                 }
             }
         }
-        self::$_instance = $this;
+        self::$instance = $this;
     }
 
     /**
@@ -97,11 +97,11 @@ class Conf
     public function get(string $section = null): ?array
     {
         if (is_null($section)) {
-            return self::$_data; // toute la conf
+            return self::$data; // toute la conf
         }
-        if (array_key_exists($section, self::$_data)) {
-            return self::$_data[$section]; // la conf d'une section uniquement
+        if (array_key_exists($section, self::$data)) {
+            return self::$data[$section]; // la conf d'une section uniquement
         }
-        throw new Exception('section [' . $section . '] introuvable');
+        throw new \Exception('section [' . $section . '] introuvable');
     }
 }

@@ -13,6 +13,13 @@
 
 declare(strict_types=1);
 
+// on temporise l'envoi des mails.
+// 2sec = 30 mails/minute = 1800 mails/heure
+define('MAIL_SEND_DELAY', 1);
+
+// pour la gestion de reprise après plantage
+define('MIN_ID_CONTACT', 0);
+
 require_once __DIR__ . '/../bootstrap.php';
 
 // n° de newsletter a traiter
@@ -21,13 +28,6 @@ if (empty($argv[1])) {
     exit;
 }
 $id_newsletter = (int) $argv[1];
-
-// on temporise l'envoi des mails.
-// 2sec = 30 mails/minute = 1800 mails/heure
-define('MAIL_SEND_DELAY', 1);
-
-// pour la gestion de reprise après plantage
-define('MIN_ID_CONTACT', 0);
 
 $newsletter = Newsletter::getInstance($id_newsletter);
 

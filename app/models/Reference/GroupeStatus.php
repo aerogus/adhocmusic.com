@@ -19,29 +19,29 @@ class GroupeStatus extends Reference
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_groupe_status';
+    protected static string $pk = 'id_groupe_status';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_groupe_status';
+    protected static string $table = 'adhoc_groupe_status';
 
     /**
      * @var int
      */
-    protected int $_id_groupe_status = 0;
+    protected int $id_groupe_status = 0;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_groupe_status' => 'int', // pk
         'name'             => 'string',
     ];

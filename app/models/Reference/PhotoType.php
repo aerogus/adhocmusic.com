@@ -19,29 +19,29 @@ class PhotoType extends Reference
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_photo_type';
+    protected static string $pk = 'id_photo_type';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_photo_type';
+    protected static string $table = 'adhoc_photo_type';
 
     /**
      * @var int
      */
-    protected int $_id_photo_type = 0;
+    protected int $id_photo_type = 0;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_photo_type' => 'int', // pk
         'name'          => 'string',
     ];

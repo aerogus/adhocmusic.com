@@ -21,21 +21,21 @@ class Groupe extends ObjectModel
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * États des groupes
      */
-    const ETAT_ACTIF   = 1;
-    const ETAT_NONEWS  = 2;
-    const ETAT_INACTIF = 3;
+    public const ETAT_ACTIF   = 1;
+    public const ETAT_NONEWS  = 2;
+    public const ETAT_INACTIF = 3;
 
     /**
      * Tableau des états groupe
      *
      * @var array
      */
-    protected static $_etats = [
+    protected static $etats = [
         self::ETAT_ACTIF   => "Actif",
         self::ETAT_NONEWS  => "Pas de nouvelles",
         self::ETAT_INACTIF => "Inactif / Séparé",
@@ -44,119 +44,119 @@ class Groupe extends ObjectModel
     /**
      * @var int
      */
-    protected static string $_pk = 'id_groupe';
+    protected static string $pk = 'id_groupe';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_groupe';
+    protected static string $table = 'adhoc_groupe';
 
     /**
      * @var int
      */
-    protected int $_id_groupe = 0;
+    protected int $id_groupe = 0;
 
     /**
      * @var string
      */
-    protected string $_alias = '';
+    protected string $alias = '';
 
     /**
      * @var string
      */
-    protected string $_name = '';
+    protected string $name = '';
 
     /**
      * @var string
      */
-    protected string $_style = '';
+    protected string $style = '';
 
     /**
      * @var string
      */
-    protected string $_influences = '';
+    protected string $influences = '';
 
     /**
      * @var string
      */
-    protected string $_lineup = '';
+    protected string $lineup = '';
 
     /**
      * @var string
      */
-    protected string $_mini_text = '';
+    protected string $mini_text = '';
 
     /**
      * @var string
      */
-    protected string $_text = '';
+    protected string $text = '';
 
     /**
      * @var ?string
      */
-    protected ?string $_site = null;
+    protected ?string $site = null;
 
     /**
      * @var string
      */
-    protected string $_myspace = '';
+    protected string $myspace = '';
 
     /**
      * @var ?string (int 64 en vérité)
      */
-    protected ?string $_facebook_page_id = null;
+    protected ?string $facebook_page_id = null;
 
     /**
      * @var ?string
      */
-    protected ?string $_twitter_id = null;
+    protected ?string $twitter_id = null;
 
     /**
      * @var string
      */
-    protected string $_id_departement = '';
+    protected string $id_departement = '';
 
     /**
      * @var bool
      */
-    protected bool $_online = false;
+    protected bool $online = false;
 
     /**
      * @var ?string
      */
-    protected ?string $_created_at = null;
+    protected ?string $created_at = null;
 
     /**
      * @var ?string
      */
-    protected ?string $_modified_at = null;
+    protected ?string $modified_at = null;
 
     /**
      * @var ?string
      */
-    protected ?string $_datdeb = null;
+    protected ?string $datdeb = null;
 
     /**
      * @var ?string
      */
-    protected ?string $_datfin = null;
+    protected ?string $datfin = null;
 
     /**
      * @var string
      */
-    protected string $_comment = '';
+    protected string $comment = '';
 
     /**
      * @var int
      */
-    protected int $_etat = 0;
+    protected int $etat = 0;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_groupe'        => 'int', // pk
         'alias'            => 'string',
         'name'             => 'string',
@@ -208,7 +208,7 @@ class Groupe extends ObjectModel
      */
     public function getIdGroupe(): int
     {
-        return $this->_id_groupe;
+        return $this->groupe;
     }
 
     /**
@@ -218,7 +218,7 @@ class Groupe extends ObjectModel
      */
     public function getAlias(): string
     {
-        return $this->_alias;
+        return $this->alias;
     }
 
     /**
@@ -228,7 +228,7 @@ class Groupe extends ObjectModel
      */
     public function getName(): string
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -238,7 +238,7 @@ class Groupe extends ObjectModel
      */
     public function getStyle(): string
     {
-        return $this->_style;
+        return $this->style;
     }
 
     /**
@@ -248,7 +248,7 @@ class Groupe extends ObjectModel
      */
     public function getInfluences(): string
     {
-        return $this->_influences;
+        return $this->influences;
     }
 
     /**
@@ -258,7 +258,7 @@ class Groupe extends ObjectModel
      */
     public function getLineup(): string
     {
-        return $this->_lineup;
+        return $this->lineup;
     }
 
     /**
@@ -268,7 +268,7 @@ class Groupe extends ObjectModel
      */
     public function getMiniText(): string
     {
-        return $this->_mini_text;
+        return $this->mini_text;
     }
 
     /**
@@ -278,7 +278,7 @@ class Groupe extends ObjectModel
      */
     public function getText(): string
     {
-        return $this->_text;
+        return $this->text;
     }
 
     /**
@@ -288,7 +288,7 @@ class Groupe extends ObjectModel
      */
     public function getFacebookPageId(): ?string
     {
-        return $this->_facebook_page_id;
+        return $this->facebook_page_id;
     }
 
     /**
@@ -299,7 +299,7 @@ class Groupe extends ObjectModel
     public function getFacebookPageUrl(): ?string
     {
         if ($this->getFacebookPageId()) {
-            return 'https://www.facebook.com/pages/' . $this->_alias . '/' . $this->_facebook_page_id;
+            return 'https://www.facebook.com/pages/' . $this->alias . '/' . $this->facebook_page_id;
         }
         return null;
     }
@@ -311,7 +311,7 @@ class Groupe extends ObjectModel
      */
     public function getTwitterId(): ?string
     {
-        return $this->_twitter_id;
+        return $this->twitter_id;
     }
 
     /**
@@ -322,7 +322,7 @@ class Groupe extends ObjectModel
     public function getTwitterUrl(): ?string
     {
         if ($this->getTwitterId()) {
-            return 'https://www.twitter.com/' . $this->_twitter_id;
+            return 'https://www.twitter.com/' . $this->twitter_id;
         }
         return null;
     }
@@ -334,7 +334,7 @@ class Groupe extends ObjectModel
      */
     public function getSite(): ?string
     {
-        return $this->_site;
+        return $this->site;
     }
 
     /**
@@ -344,7 +344,7 @@ class Groupe extends ObjectModel
      */
     public function getIdDepartement(): string
     {
-        return $this->_id_departement;
+        return $this->departement;
     }
 
     /**
@@ -354,7 +354,7 @@ class Groupe extends ObjectModel
      */
     public function getOnline(): bool
     {
-        return $this->_online;
+        return $this->online;
     }
 
     /**
@@ -364,8 +364,8 @@ class Groupe extends ObjectModel
      */
     public function getCreatedAt(): ?string
     {
-        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
-            return $this->_created_at;
+        if (!is_null($this->created_at) && Date::isDateTimeOk($this->created_at)) {
+            return $this->created_at;
         }
         return null;
     }
@@ -377,8 +377,8 @@ class Groupe extends ObjectModel
      */
     public function getCreatedAtTs(): ?string
     {
-        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
-            return strtotime($this->_created_at);
+        if (!is_null($this->created_at) && Date::isDateTimeOk($this->created_at)) {
+            return strtotime($this->created_at);
         }
         return null;
     }
@@ -390,8 +390,8 @@ class Groupe extends ObjectModel
      */
     public function getModifiedAt(): ?string
     {
-        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
-            return $this->_modified_at;
+        if (!is_null($this->modified_at) && Date::isDateTimeOk($this->modified_at)) {
+            return $this->modified_at;
         }
         return null;
     }
@@ -403,8 +403,8 @@ class Groupe extends ObjectModel
      */
     public function getModifiedAtTs(): ?int
     {
-        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
-            return strtotime($this->_modified_at);
+        if (!is_null($this->modified_at) && Date::isDateTimeOk($this->modified_at)) {
+            return strtotime($this->modified_at);
         }
         return null;
     }
@@ -416,8 +416,8 @@ class Groupe extends ObjectModel
      */
     public function getDatdeb(): ?string
     {
-        if (!is_null($this->_datdeb) && Date::isDateOk($this->_datdeb)) {
-            return $this->_datdeb;
+        if (!is_null($this->datdeb) && Date::isDateOk($this->datdeb)) {
+            return $this->datdeb;
         }
         return null;
     }
@@ -429,8 +429,8 @@ class Groupe extends ObjectModel
      */
     public function getDatfin(): ?string
     {
-        if (!is_null($this->_datfin) && Date::isDateOk($this->_datfin)) {
-            return $this->_datfin;
+        if (!is_null($this->datfin) && Date::isDateOk($this->datfin)) {
+            return $this->datfin;
         }
         return null;
     }
@@ -442,7 +442,7 @@ class Groupe extends ObjectModel
      */
     public function getComment(): string
     {
-        return $this->_comment;
+        return $this->comment;
     }
 
     /**
@@ -452,7 +452,7 @@ class Groupe extends ObjectModel
      */
     public function getEtat(): int
     {
-        return $this->_etat;
+        return $this->etat;
     }
 
     /**
@@ -506,9 +506,9 @@ class Groupe extends ObjectModel
     {
         if (file_exists(self::getBasePath() . '/l' . $this->getId() . '.png')) {
             return self::getBaseUrl() . '/l' . $this->getId() . '.png?ts=' . $this->getModifiedAtTs();
-        } else if (file_exists(self::getBasePath() . '/l' . $this->getId() . '.gif')) {
+        } elseif (file_exists(self::getBasePath() . '/l' . $this->getId() . '.gif')) {
             return self::getBaseUrl() . '/l' . $this->getId() . '.gif?ts=' . $this->getModifiedAtTs();
-        } else if (file_exists(self::getBasePath() . '/l' . $this->getId() . '.jpg')) {
+        } elseif (file_exists(self::getBasePath() . '/l' . $this->getId() . '.jpg')) {
             return self::getBaseUrl() . '/l' . $this->getId() . '.jpg?ts=' . $this->getModifiedAtTs();
         }
         return null;
@@ -545,9 +545,9 @@ class Groupe extends ObjectModel
      */
     public function setAlias(string $alias): object
     {
-        if ($this->_alias !== $alias) {
-            $this->_alias = $alias;
-            $this->_modified_fields['alias'] = true;
+        if ($this->alias !== $alias) {
+            $this->alias = $alias;
+            $this->modified_fields['alias'] = true;
         }
 
         return $this;
@@ -560,9 +560,9 @@ class Groupe extends ObjectModel
      */
     public function setName(string $name): object
     {
-        if ($this->_name !== $name) {
-            $this->_name = $name;
-            $this->_modified_fields['name'] = true;
+        if ($this->name !== $name) {
+            $this->name = $name;
+            $this->modified_fields['name'] = true;
             $this->setAlias(Tools::genAlias($name));
         }
 
@@ -576,9 +576,9 @@ class Groupe extends ObjectModel
      */
     public function setStyle(string $style): object
     {
-        if ($this->_style !== $style) {
-            $this->_style = $style;
-            $this->_modified_fields['style'] = true;
+        if ($this->style !== $style) {
+            $this->style = $style;
+            $this->modified_fields['style'] = true;
         }
 
         return $this;
@@ -591,9 +591,9 @@ class Groupe extends ObjectModel
      */
     public function setInfluences(string $influences): object
     {
-        if ($this->_influences !== $influences) {
-            $this->_influences = $influences;
-            $this->_modified_fields['influences'] = true;
+        if ($this->influences !== $influences) {
+            $this->influences = $influences;
+            $this->modified_fields['influences'] = true;
         }
 
         return $this;
@@ -606,9 +606,9 @@ class Groupe extends ObjectModel
      */
     public function setLineup(string $lineup): object
     {
-        if ($this->_lineup !== $lineup) {
-            $this->_lineup = $lineup;
-            $this->_modified_fields['lineup'] = true;
+        if ($this->lineup !== $lineup) {
+            $this->lineup = $lineup;
+            $this->modified_fields['lineup'] = true;
         }
 
         return $this;
@@ -621,9 +621,9 @@ class Groupe extends ObjectModel
      */
     public function setMiniText(string $mini_text): object
     {
-        if ($this->_mini_text !== $mini_text) {
-            $this->_mini_text = $mini_text;
-            $this->_modified_fields['mini_text'] = true;
+        if ($this->mini_text !== $mini_text) {
+            $this->mini_text = $mini_text;
+            $this->modified_fields['mini_text'] = true;
         }
 
         return $this;
@@ -636,9 +636,9 @@ class Groupe extends ObjectModel
      */
     public function setText(string $text): object
     {
-        if ($this->_text !== $text) {
-            $this->_text = $text;
-            $this->_modified_fields['text'] = true;
+        if ($this->text !== $text) {
+            $this->text = $text;
+            $this->modified_fields['text'] = true;
         }
 
         return $this;
@@ -651,9 +651,9 @@ class Groupe extends ObjectModel
      */
     public function setSite(?string $site): object
     {
-        if ($this->_site !== $site) {
-            $this->_site = $site;
-            $this->_modified_fields['site'] = true;
+        if ($this->site !== $site) {
+            $this->site = $site;
+            $this->modified_fields['site'] = true;
         }
 
         return $this;
@@ -670,9 +670,9 @@ class Groupe extends ObjectModel
         $val = str_replace('http://', '', $val);
         $val = str_replace('www.myspace.com/', '', $val);
 
-        if ($this->_myspace !== $myspaceId) {
-            $this->_myspace = $myspaceId;
-            $this->_modified_fields['myspace'] = true;
+        if ($this->myspace !== $myspaceId) {
+            $this->myspace = $myspaceId;
+            $this->modified_fields['myspace'] = true;
         }
 
         return $this;
@@ -685,9 +685,9 @@ class Groupe extends ObjectModel
      */
     public function setFacebookPageId(?string $facebook_page_id): object
     {
-        if ($this->_facebook_page_id !== $facebook_page_id) {
-            $this->_facebook_page_id = $facebook_page_id;
-            $this->_modified_fields['facebook_page_id'] = true;
+        if ($this->facebook_page_id !== $facebook_page_id) {
+            $this->facebook_page_id = $facebook_page_id;
+            $this->modified_fields['facebook_page_id'] = true;
         }
 
         return $this;
@@ -700,9 +700,9 @@ class Groupe extends ObjectModel
      */
     public function setTwitterId(?string $twitter_id): object
     {
-        if ($this->_twitter_id !== $twitter_id) {
-            $this->_twitter_id = $twitter_id;
-            $this->_modified_fields['twitter_id'] = true;
+        if ($this->twitter_id !== $twitter_id) {
+            $this->twitter_id = $twitter_id;
+            $this->modified_fields['twitter_id'] = true;
         }
 
         return $this;
@@ -715,9 +715,9 @@ class Groupe extends ObjectModel
      */
     public function setIdDepartement(string $id_departement): object
     {
-        if ($this->_id_departement !== $id_departement) {
-            $this->_id_departement = $id_departement;
-            $this->_modified_fields['id_departement'] = true;
+        if ($this->departement !== $id_departement) {
+            $this->departement = $id_departement;
+            $this->modified_fields['id_departement'] = true;
         }
 
         return $this;
@@ -730,9 +730,9 @@ class Groupe extends ObjectModel
      */
     public function setOnline(bool $online): object
     {
-        if ($this->_online !== $online) {
-            $this->_online = $online;
-            $this->_modified_fields['online'] = true;
+        if ($this->online !== $online) {
+            $this->online = $online;
+            $this->modified_fields['online'] = true;
         }
 
         return $this;
@@ -745,9 +745,9 @@ class Groupe extends ObjectModel
      */
     public function setCreatedAt(?string $created_at): object
     {
-        if ($this->_created_at !== $created_at) {
-            $this->_created_at = $created_at;
-            $this->_modified_fields['created_at'] = true;
+        if ($this->created_at !== $created_at) {
+            $this->created_at = $created_at;
+            $this->modified_fields['created_at'] = true;
         }
 
         return $this;
@@ -760,9 +760,9 @@ class Groupe extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_created_at !== $now) {
-            $this->_created_at = $now;
-            $this->_modified_fields['created_at'] = true;
+        if ($this->created_at !== $now) {
+            $this->created_at = $now;
+            $this->modified_fields['created_at'] = true;
         }
 
         return $this;
@@ -773,9 +773,9 @@ class Groupe extends ObjectModel
      */
     public function setModifiedAt(?string $modified_at): object
     {
-        if ($this->_modified_at !== $modified_at) {
-            $this->_modified_at = $modified_at;
-            $this->_modified_fields['modified_at'] = true;
+        if ($this->modified_at !== $modified_at) {
+            $this->modified_at = $modified_at;
+            $this->modified_fields['modified_at'] = true;
         }
 
         return $this;
@@ -788,9 +788,9 @@ class Groupe extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_modified_at !== $now) {
-            $this->_modified_at = $now;
-            $this->_modified_fields['modified_at'] = true;
+        if ($this->modified_at !== $now) {
+            $this->modified_at = $now;
+            $this->modified_fields['modified_at'] = true;
         }
 
         return $this;
@@ -803,9 +803,9 @@ class Groupe extends ObjectModel
      */
     public function setDatdeb(?string $datdeb): object
     {
-        if ($this->_datdeb !== $datdeb) {
-            $this->_datdeb = $datdeb;
-            $this->_modified_fields['datdeb'] = true;
+        if ($this->datdeb !== $datdeb) {
+            $this->datdeb = $datdeb;
+            $this->modified_fields['datdeb'] = true;
         }
 
         return $this;
@@ -818,9 +818,9 @@ class Groupe extends ObjectModel
      */
     public function setDatfin(?string $datfin): object
     {
-        if ($this->_datfin !== $datfin) {
-            $this->_datfin = $datfin;
-            $this->_modified_fields['datfin'] = true;
+        if ($this->datfin !== $datfin) {
+            $this->datfin = $datfin;
+            $this->modified_fields['datfin'] = true;
         }
 
         return $this;
@@ -833,9 +833,9 @@ class Groupe extends ObjectModel
      */
     public function setComment(string $comment): object
     {
-        if ($this->_comment !== $comment) {
-            $this->_comment = $comment;
-            $this->_modified_fields['comment'] = true;
+        if ($this->comment !== $comment) {
+            $this->comment = $comment;
+            $this->modified_fields['comment'] = true;
         }
 
         return $this;
@@ -848,9 +848,9 @@ class Groupe extends ObjectModel
      */
     public function setEtat(int $etat): object
     {
-        if ($this->_etat !== $etat) {
-            $this->_etat = $etat;
-            $this->_modified_fields['etat'] = true;
+        if ($this->etat !== $etat) {
+            $this->etat = $etat;
+            $this->modified_fields['etat'] = true;
         }
 
         return $this;
@@ -866,13 +866,13 @@ class Groupe extends ObjectModel
     public static function countMy(): int
     {
         if (empty($_SESSION['membre'])) {
-            throw new Exception('non identifié');
+            throw new \Exception('non identifié');
         }
 
         $db = DataBase::getInstance();
 
         $sql = 'SELECT COUNT(*) '
-             . 'FROM `' . self::$_db_table_appartient_a . '` '
+             . 'FROM `' . self::$db_table_appartient_a . '` '
              . 'WHERE `id_contact` = ' . (int) $_SESSION['membre']->getId();
 
         return (int) $db->queryWithFetchFirstField($sql);
@@ -918,12 +918,12 @@ class Groupe extends ObjectModel
 
     /**
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     protected function loadFromDb(): bool
     {
         if (!parent::loadFromDb()) {
-            throw new Exception('id_groupe introuvable');
+            throw new \Exception('id_groupe introuvable');
         }
 
         return true;
@@ -941,7 +941,7 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = 'INSERT INTO `' . self::$_db_table_appartient_a . '` '
+        $sql = 'INSERT INTO `' . self::$db_table_appartient_a . '` '
              . '(`' . Groupe::getDbPk() . '`, `' . Membre::getDbPk() . '`, `' . TypeMusicien::getDbPk() . '`) '
              . 'VALUES(' . (int) $this->getIdGroupe() . ', ' . (int) $id_contact . ', ' . (int) $id_type_musicien . ')';
 
@@ -962,7 +962,7 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = 'UPDATE `' . self::$_db_table_appartient_a . '` '
+        $sql = 'UPDATE `' . self::$db_table_appartient_a . '` '
              . 'SET `' . TypeMusicien::getDbPk() . '` = ' . (int) $id_type_musicien . ' '
              . 'WHERE `' . Groupe::getDbPk() . '` = ' . (int) $this->getIdGroupe() . ' '
              . 'AND `' . Membre::getDbPk() . '` = ' . (int) $id_contact;
@@ -983,7 +983,7 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = 'DELETE FROM `' . self::$_db_table_appartient_a . '` '
+        $sql = 'DELETE FROM `' . self::$db_table_appartient_a . '` '
              . 'WHERE `' . Groupe::getDbPk() . '` = ' . (int) $this->getIdGroupe() . ' '
              . 'AND `' . Membre::getDbPk() . '` = ' . (int) $id_contact;
 
@@ -1001,7 +1001,7 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = 'DELETE FROM `' . self::$_db_table_appartient_a . '` '
+        $sql = 'DELETE FROM `' . self::$db_table_appartient_a . '` '
              . 'WHERE `' . $this->getDbPk() . '` = ' . (int) $this->getIdGroupe();
 
         $db->query($sql);
@@ -1120,10 +1120,10 @@ class Groupe extends ObjectModel
             $sql .= " ";
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
-            $sql .= "ORDER BY `" . static::$_pk . "` ";
+            $sql .= "ORDER BY `" . static::$pk . "` ";
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
@@ -1189,7 +1189,7 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "INSERT INTO `" . self::$_db_table_groupe_style . "` "
+        $sql = "INSERT INTO `" . self::$db_table_groupe_style . "` "
              . "(`id_groupe`, `id_style`) "
              . "VALUES(" . (int) $this->getIdGroupe() . ", " . (int) $id_style . ")";
 
@@ -1209,7 +1209,7 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_db_table_groupe_style . "` "
+        $sql = "DELETE FROM `" . self::$db_table_groupe_style . "` "
              . "WHERE `id_groupe` = " . (int) $this->getIdGroupe() . " "
              . "AND `id_style` = " . (int) $id_style;
 
@@ -1227,7 +1227,7 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_db_table_groupe_style . "` "
+        $sql = "DELETE FROM `" . self::$db_table_groupe_style . "` "
              . "WHERE `id_groupe` = " . (int) $this->getIdGroupe();
 
         $db->query($sql);
@@ -1379,7 +1379,7 @@ class Groupe extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . self::$_db_table_participe_a . "` "
+        $sql = "DELETE FROM `" . self::$db_table_participe_a . "` "
              . "WHERE `id_groupe` = " . (int) $this->getIdGroupe();
 
         $db->query($sql);

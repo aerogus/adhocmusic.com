@@ -20,29 +20,29 @@ class Audio extends Media
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_audio';
+    protected static string $pk = 'id_audio';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_audio';
+    protected static string $table = 'adhoc_audio';
 
     /**
      * @var int
      */
-    protected int $_id_audio = 0;
+    protected int $id_audio = 0;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_audio'     => 'int', // pk
         'id_contact'   => 'int',
         'id_groupe'    => 'int',
@@ -77,7 +77,7 @@ class Audio extends Media
      */
     public function getIdAudio(): int
     {
-        return $this->_id_audio;
+        return $this->id_audio;
     }
 
     /**
@@ -140,12 +140,12 @@ class Audio extends Media
 
     /**
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     protected function loadFromDb(): bool
     {
         if (!parent::loadFromDb()) {
-            throw new Exception('Audio introuvable');
+            throw new \Exception('Audio introuvable');
         }
 
         return true;

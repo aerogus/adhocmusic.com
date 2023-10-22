@@ -21,29 +21,29 @@ class WorldCountry extends Reference
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_country';
+    protected static string $pk = 'id_country';
 
     /**
      * @var string
      */
-    protected static string $_table = 'geo_world_country';
+    protected static string $table = 'geo_world_country';
 
     /**
      * @var ?string
      */
-    protected ?string $_id_country = null;
+    protected ?string $id_country = null;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_country' => 'string',
         'name'       => 'string',
     ];
@@ -55,7 +55,7 @@ class WorldCountry extends Reference
      */
     public function getIdCountry(): string
     {
-        return $this->_id_country;
+        return $this->country;
     }
 
     /**
@@ -65,7 +65,7 @@ class WorldCountry extends Reference
      */
     public function getFlagUrl(): string
     {
-        return MEDIA_URL . '/country/' . strtolower($this->_id_country) . '.png';
+        return MEDIA_URL . '/country/' . strtolower($this->country) . '.png';
     }
 
     /* fin getters */
@@ -93,10 +93,10 @@ class WorldCountry extends Reference
 
         $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
-            $sql .= "ORDER BY `" . static::$_pk . "` ";
+            $sql .= "ORDER BY `" . static::$pk . "` ";
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {

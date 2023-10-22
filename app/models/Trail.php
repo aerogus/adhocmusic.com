@@ -17,22 +17,22 @@ class Trail
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * Conteneur des données
      *
      * @var array<int,array<string,string>>
      */
-    protected $_path = [];
+    protected array $path = [];
 
     /**
      * @return object
      */
     public static function getInstance(): object
     {
-        if (self::$_instance instanceof Trail) {
-            return self::$_instance;
+        if (self::$instance instanceof Trail) {
+            return self::$instance;
         }
         return new Trail();
     }
@@ -43,7 +43,7 @@ class Trail
     public function __construct()
     {
         $this->addStep('Accueil', '/', "Retour à l'accueil");
-        self::$_instance = $this;
+        self::$instance = $this;
     }
 
     /**
@@ -57,7 +57,7 @@ class Trail
      */
     public function addStep(string $title, string $link = '', string $description = ''): Trail
     {
-        $this->_path[] = [
+        $this->path[] = [
             'title' => $title,
             'link' => $link,
             'description' => $description,
@@ -72,6 +72,6 @@ class Trail
      */
     public function getPath(): array
     {
-        return $this->_path;
+        return $this->path;
     }
 }

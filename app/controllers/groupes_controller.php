@@ -20,7 +20,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         $smarty->assign('title', "♫ Les groupes de la communauté musicale AD'HOC");
-        $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
+        $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
 
         Trail::getInstance()
             ->addStep("Groupes");
@@ -49,7 +49,7 @@ final class Controller
         $smarty = new AdHocSmarty();
 
         $smarty->assign('title', "AD'HOC Music : Les Musiques actuelles en Essonne");
-        $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
+        $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -186,9 +186,9 @@ final class Controller
         /*
         if (Tools::isAuth()) {
             if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'g', $groupe->getId())) {
-                $smarty->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=g&id_content='.$groupe->getId());
+                $smarty->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=g&id_content=' . $groupe->getId());
             } else {
-                $smarty->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=g&id_content='.$groupe->getId());
+                $smarty->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=g&id_content=' . $groupe->getId());
             }
         } else {
             $smarty->assign('alerting_auth_url', HOME_URL . '/auth/auth');
@@ -463,8 +463,8 @@ final class Controller
         }
 
         $can_delete = true;
-        if ($_SESSION['membre']->isAdmin() === false) { // protection seul un admin peut supprimer un groupe
-            if ($groupe->isMember($_SESSION['membre']->getId()) === false) { // protection seul un membre du groupe peut supprimer son groupe
+        if ($_SESSION['membre']->isAdmin() === false) { // seul un admin peut supprimer un groupe
+            if ($groupe->isMember($_SESSION['membre']->getId()) === false) { // seul un membre du groupe peut supprimer son groupe
                 $smarty->assign('not_my_groupe', true);
                 $can_delete = false;
             }

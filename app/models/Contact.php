@@ -17,39 +17,39 @@ class Contact extends ObjectModel
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_contact';
+    protected static string $pk = 'id_contact';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_contact';
+    protected static string $table = 'adhoc_contact';
 
     /**
      * @var ?int
      */
-    protected ?int $_id_contact = null;
+    protected ?int $id_contact = null;
 
     /**
      * @var ?string
      */
-    protected ?string $_email = null;
+    protected ?string $email = null;
 
     /**
      * @var ?string
      */
-    protected ?string $_lastnl = null;
+    protected ?string $lastnl = null;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_contact' => 'int', // pk
         'email'      => 'string',
         'lastnl'     => 'date',
@@ -62,7 +62,7 @@ class Contact extends ObjectModel
      *
      * @var array
      */
-    protected $_modified_fields = [
+    protected $modified_fields = [
         'contact' => [],
     ];
 
@@ -74,10 +74,10 @@ class Contact extends ObjectModel
     protected function getAllFields(bool $fusion = true): array
     {
         if ($fusion) {
-            return self::$_all_fields;
+            return self::$all_fields;
         } else {
             return [
-                'contact' => self::$_all_fields,
+                'contact' => self::$all_fields,
             ];
         }
     }
@@ -89,7 +89,7 @@ class Contact extends ObjectModel
      */
     public function getIdContact(): ?int
     {
-        return $this->_id_contact;
+        return $this->contact;
     }
 
     /**
@@ -97,7 +97,7 @@ class Contact extends ObjectModel
      */
     public function getEmail(): ?string
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -128,7 +128,7 @@ class Contact extends ObjectModel
      */
     public function getLastnl(): ?string
     {
-        return $this->_lastnl;
+        return $this->lastnl;
     }
 
     /**
@@ -138,12 +138,12 @@ class Contact extends ObjectModel
      * @param string $email email
      *
      * @return int
-     * @throws Exception
+     * @throws \Exception
      */
     public static function getIdByEmail(string $email): int
     {
         if (!Email::validate($email)) {
-            throw new Exception('email syntaxiquement incorrect');
+            throw new \Exception('email syntaxiquement incorrect');
         }
 
         $db = DataBase::getInstance();
@@ -186,9 +186,9 @@ class Contact extends ObjectModel
      */
     public function setEmail(string $email): object
     {
-        if ($this->_email !== $email) {
-            $this->_email = $email;
-            $this->_modified_fields['contact']['email'] = true;
+        if ($this->email !== $email) {
+            $this->email = $email;
+            $this->modified_fields['contact']['email'] = true;
         }
 
         return $this;
@@ -201,9 +201,9 @@ class Contact extends ObjectModel
      */
     public function setLastnl(string $lastnl): object
     {
-        if ($this->_lastnl !== $lastnl) {
-            $this->_lastnl = $lastnl;
-            $this->_modified_fields['contact']['lastnl'] = true;
+        if ($this->lastnl !== $lastnl) {
+            $this->lastnl = $lastnl;
+            $this->modified_fields['contact']['lastnl'] = true;
         }
 
         return $this;
@@ -216,9 +216,9 @@ class Contact extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_lastnl !== $now) {
-            $this->_lastnl = $now;
-            $this->_modified_fields['contact']['lastnl'] = true;
+        if ($this->lastnl !== $now) {
+            $this->lastnl = $now;
+            $this->modified_fields['contact']['lastnl'] = true;
         }
 
         return $this;
@@ -230,7 +230,7 @@ class Contact extends ObjectModel
      * Charge toutes les infos d'une entité
      *
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     protected function loadFromDb(): bool
     {
@@ -241,11 +241,11 @@ class Contact extends ObjectModel
               . "WHERE `" . Contact::getDbPk() . "` = " . (int) $this->{'_' . Contact::getDbPk()};
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_arrayToObject($res);
+            $this->arrayToObject($res);
             return true;
         }
 
-        throw new Exception('Contact introuvable');
+        throw new \Exception('Contact introuvable');
     }
 
     /**
@@ -258,7 +258,7 @@ class Contact extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . Contact::getDbTable() . "` "
-             . "WHERE `id_contact` = " . (int) $this->_id_contact;
+             . "WHERE `id_contact` = " . (int) $this->contact;
 
         $db->query($sql);
 
@@ -278,7 +278,7 @@ class Contact extends ObjectModel
             /* table contact */
             $sql = "INSERT INTO `" . Contact::getDbTable() . "` (";
 
-            if (count($this->_modified_fields['contact']) > 0) {
+            if (count($this->modified_fields['contact']) > 0) {
                 foreach ($fields['contact'] as $field => $type) {
                     $sql .= "`" . $field . "`,";
                 }
@@ -287,7 +287,7 @@ class Contact extends ObjectModel
 
             $sql .= ") VALUES (";
 
-            if (count($this->_modified_fields['contact']) > 0) {
+            if (count($this->modified_fields['contact']) > 0) {
                 foreach ($fields['contact'] as $field => $type) {
                     $att = '_' . $field;
                     if (is_null($this->$att)) {
@@ -312,7 +312,7 @@ class Contact extends ObjectModel
                                 $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
                                 break;
                             default:
-                                throw new Exception('invalid field type : ' . $type);
+                                throw new \Exception('invalid field type : ' . $type);
                                 break;
                         }
                     }
@@ -327,14 +327,14 @@ class Contact extends ObjectModel
 
             return $this->getId();
         } else { // UPDATE
-            if (count($this->_modified_fields['contact']) === 0) {
+            if (count($this->modified_fields['contact']) === 0) {
                 return true; // pas de changement
             }
 
             /* table contact */
 
             $fields_to_save = '';
-            foreach ($this->_modified_fields['contact'] as $field => $value) {
+            foreach ($this->modified_fields['contact'] as $field => $value) {
                 if ($value === true) {
                     $att = '_' . $field;
                     if (is_null($this->$att)) {
@@ -359,7 +359,7 @@ class Contact extends ObjectModel
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
                                 break;
                             default:
-                                throw new Exception('invalid field type : ' . $fields['contact'][$field]);
+                                throw new \Exception('invalid field type : ' . $fields['contact'][$field]);
                                 break;
                         }
                     }
@@ -369,9 +369,9 @@ class Contact extends ObjectModel
 
             $sql = "UPDATE `" . Contact::getDbTable() . "` "
                  . "SET " . $fields_to_save . " "
-                 . "WHERE `id_contact` = " . (int) $this->_id_contact;
+                 . "WHERE `id_contact` = " . (int) $this->contact;
 
-            $this->_modified_fields['contact'] = [];
+            $this->modified_fields['contact'] = [];
 
             $db->query($sql);
 

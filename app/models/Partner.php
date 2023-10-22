@@ -17,44 +17,44 @@ class Partner extends ObjectModel
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_partner';
+    protected static string $pk = 'id_partner';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_partner';
+    protected static string $table = 'adhoc_partner';
 
     /**
      * @var int
      */
-    protected int $_id_partner = 0;
+    protected int $id_partner = 0;
 
     /**
      * @var string
      */
-    protected string $_title = '';
+    protected string $title = '';
 
     /**
      * @var string
      */
-    protected string $_description = '';
+    protected string $description = '';
 
     /**
      * @var string
      */
-    protected string $_url = '';
+    protected string $url = '';
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_partner'  => 'int', // pk
         'title'       => 'string',
         'description' => 'string',
@@ -84,7 +84,7 @@ class Partner extends ObjectModel
      */
     public function getTitle(): string
     {
-        return $this->_title;
+        return $this->title;
     }
 
     /**
@@ -92,7 +92,7 @@ class Partner extends ObjectModel
      */
     public function getDescription(): string
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -100,7 +100,7 @@ class Partner extends ObjectModel
      */
     public function getUrl(): string
     {
-        return $this->_url;
+        return $this->url;
     }
 
     /**
@@ -125,9 +125,9 @@ class Partner extends ObjectModel
      */
     public function setTitle(string $title): object
     {
-        if ($this->_title !== $title) {
-            $this->_title = $title;
-            $this->_modified_fields['title'] = true;
+        if ($this->title !== $title) {
+            $this->title = $title;
+            $this->modified_fields['title'] = true;
         }
 
         return $this;
@@ -140,9 +140,9 @@ class Partner extends ObjectModel
      */
     public function setDescription(string $description): object
     {
-        if ($this->_description !== $description) {
-            $this->_description = $description;
-            $this->_modified_fields['description'] = true;
+        if ($this->description !== $description) {
+            $this->description = $description;
+            $this->modified_fields['description'] = true;
         }
 
         return $this;
@@ -155,9 +155,9 @@ class Partner extends ObjectModel
      */
     public function setUrl(string $url): object
     {
-        if ($this->_url !== $url) {
-            $this->_url = $url;
-            $this->_modified_fields['url'] = true;
+        if ($this->url !== $url) {
+            $this->url = $url;
+            $this->modified_fields['url'] = true;
         }
 
         return $this;

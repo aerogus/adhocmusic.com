@@ -141,7 +141,7 @@ abstract class Forum
         $sql = "SELECT `f`.`id_forum`, `f`.`title`, `f`.`description`, "
              . "`f`.`nb_messages`, `f`.`nb_threads`, "
              . "`f`.`id_contact`, `m`.`pseudo`, `f`.`date` "
-             . "FROM `" . static::$_db_table_forum_info . "` `f`, `" . Membre::getDbTable() . "` `m` "
+             . "FROM `" . static::$db_table_forum_info . "` `f`, `" . Membre::getDbTable() . "` `m` "
              . "WHERE `f`.`id_contact` = `m`.`id_contact` "
              . "AND `f`.`id_forum` = '" . $db->escape($id_forum) . "'";
 
@@ -160,7 +160,7 @@ abstract class Forum
         $sql = "SELECT `f`.`id_forum`, `f`.`title`, `f`.`description`, "
              . "`f`.`nb_messages`, `f`.`nb_threads`, "
              . "`f`.`id_contact`, `m`.`pseudo`, `f`.`date` "
-             . "FROM `" . static::$_db_table_forum_info . "` `f`, `" . Membre::getDbTable() . "` `m` "
+             . "FROM `" . static::$db_table_forum_info . "` `f`, `" . Membre::getDbTable() . "` `m` "
              . "WHERE `f`.`id_contact` = `m`.`id_contact` "
              . "ORDER BY `f`.`id_forum` ASC";
 
@@ -179,7 +179,7 @@ abstract class Forum
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_forum` "
-             . "FROM `" . static::$_db_table_forum_thread . "` "
+             . "FROM `" . static::$db_table_forum_thread . "` "
              . "WHERE `id_thread` = " . (int) $id_thread;
 
         return $db->queryWithFetchFirstField($sql);
@@ -207,10 +207,10 @@ abstract class Forum
 
         if ($new_thread) {
             if (!array_key_exists('subject', $params)) {
-                throw new Exception('sujet manquant');
+                throw new \Exception('sujet manquant');
             }
             if (strlen($params['subject']) === 0) {
-                throw new Exception('sujet vide');
+                throw new \Exception('sujet vide');
             }
             $params['id_thread'] = static::createThread(
                 [
@@ -343,7 +343,7 @@ abstract class Forum
     {
         $db = DataBase::getInstance();
 
-        $sql = "UPDATE `" . static::$_db_table_forum_thread . "` "
+        $sql = "UPDATE `" . static::$db_table_forum_thread . "` "
              . "SET `nb_views` = `nb_views` + 1 "
              . "WHERE `id_thread` = " . (int) $id_thread;
 
@@ -364,8 +364,8 @@ abstract class Forum
         $db = DataBase::getInstance();
 
         $sql = "SELECT `f`.`id_forum` , COUNT( * ) AS `nb_threads` "
-             . "FROM (`" . static::$_db_table_forum_info . "` `f`) "
-             . "LEFT JOIN `" . static::$_db_table_forum_thread . "` `t` ON `f`.`id_forum` = `t`.`id_forum` "
+             . "FROM (`" . static::$db_table_forum_info . "` `f`) "
+             . "LEFT JOIN `" . static::$db_table_forum_thread . "` `t` ON `f`.`id_forum` = `t`.`id_forum` "
              . "GROUP BY `f`.`id_forum` ASC";
 
         $res = $db->queryWithFetch($sql);
@@ -393,7 +393,7 @@ abstract class Forum
         $db = DataBase::getInstance();
 
         $sql = "SELECT `id_forum`, COUNT(*) AS `nb_messages` "
-             . "FROM `" . static::$_db_table_forum_message . "` `m`, `" . static::$_db_table_forum_thread . "` `t` "
+             . "FROM `" . static::$db_table_forum_message . "` `m`, `" . static::$db_table_forum_thread . "` `t` "
              . "WHERE `m`.`id_thread` = `t`.`id_thread` "
              . "GROUP BY `t`.`id_forum` ASC";
 
@@ -421,7 +421,7 @@ abstract class Forum
     {
         $db = DataBase::getInstance();
 
-        $sql = "INSERT INTO `" . static::$_db_table_forum_message . "` "
+        $sql = "INSERT INTO `" . static::$db_table_forum_message . "` "
              . "(`id_thread`, "
              . "`created_at`, `modified_at`, "
              . "`created_by`, `modified_by`, "
@@ -450,7 +450,7 @@ abstract class Forum
     {
         $db = DataBase::getInstance();
 
-        $sql = "UPDATE `" . static::$_db_table_forum_message . "` "
+        $sql = "UPDATE `" . static::$db_table_forum_message . "` "
              . "SET `text` = '" . $db->escape($params['text']) . "', "
              . "`modified_at` = NOW(), "
              . "`modified_by` = " . (int) $params['id_contact'] . " "
@@ -472,7 +472,7 @@ abstract class Forum
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . static::$_db_table_forum_message . "` "
+        $sql = "DELETE FROM `" . static::$db_table_forum_message . "` "
              . "WHERE `id_message` = " . (int) $params['id_message'];
 
         $db->query($sql);
@@ -493,7 +493,7 @@ abstract class Forum
     {
         $db = DataBase::getInstance();
 
-        $sql = "INSERT INTO `" . static::$_db_table_forum_thread . "` "
+        $sql = "INSERT INTO `" . static::$db_table_forum_thread . "` "
              . "(`created_at`, `modified_at`, "
              . "`created_by`, `modified_by`, "
              . "`id_forum`, `nb_messages`, `nb_views`, `subject`) "
@@ -519,7 +519,7 @@ abstract class Forum
     {
         $db = DataBase::getInstance();
 
-        $sql = "UPDATE `" . static::$_db_table_forum_thread . "` SET ";
+        $sql = "UPDATE `" . static::$db_table_forum_thread . "` SET ";
         if ($params['action'] === 'msgadd') {
              $sql .= "`nb_messages` = `nb_messages` + 1, ";
         } elseif ($params['action'] === 'msgdel') {
@@ -546,7 +546,7 @@ abstract class Forum
     {
         $db = DataBase::getInstance();
 
-        $sql = "DELETE FROM `" . static::$_db_table_forum_thread . "` "
+        $sql = "DELETE FROM `" . static::$db_table_forum_thread . "` "
              . "WHERE `id_thread` = " . (int) $params['id_thread'];
 
         $db->query($sql);
@@ -569,7 +569,7 @@ abstract class Forum
     {
         $db = DataBase::getInstance();
 
-        $sql = "UPDATE `" . static::$_db_table_forum_info . "` SET ";
+        $sql = "UPDATE `" . static::$db_table_forum_info . "` SET ";
         if ($params['msgaction'] === 'msgadd') {
             $sql .= "`nb_messages` = `nb_messages` + 1, ";
         } elseif ($params['msgaction'] === 'msgdel') {

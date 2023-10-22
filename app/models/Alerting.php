@@ -19,65 +19,65 @@ class Alerting extends ObjectModel
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_alerting';
+    protected static string $pk = 'id_alerting';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_alerting';
+    protected static string $table = 'adhoc_alerting';
 
     /**
      * @var int
      */
-    protected int $_id_alerting = 0;
+    protected int $id_alerting = 0;
 
     /**
      * Identifiant membre
      *
      * @var int
      */
-    protected int $_id_contact = 0;
+    protected int $id_contact = 0;
 
     /**
      * Date de création
      *
      * @var ?string
      */
-    protected ?string $_created_at = null;
+    protected ?string $created_at = null;
 
     /**
      * Actif ?
      *
      * @var bool
      */
-    protected bool $_active = false;
+    protected bool $active = false;
 
     /**
      * @var int|null
      */
-    protected ?int $_id_lieu = null;
+    protected ?int $id_lieu = null;
 
     /**
      * @var int|null
      */
-    protected ?int $_id_groupe = null;
+    protected ?int $id_groupe = null;
 
     /**
      * @var int|null
      */
-    protected ?int $_id_event = null;
+    protected ?int $id_event = null;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static $all_fields = [
         'id_alerting' => 'int', // pk
         'id_contact'  => 'int',
         'created_at'  => 'date',
@@ -94,7 +94,7 @@ class Alerting extends ObjectModel
      */
     public function getIdAlerting(): int
     {
-        return $this->_id_alerting;
+        return $this->id_alerting;
     }
 
     /**
@@ -102,7 +102,7 @@ class Alerting extends ObjectModel
      */
     public function getIdContact(): int
     {
-        return $this->_id_contact;
+        return $this->id_contact;
     }
 
     /**
@@ -110,8 +110,8 @@ class Alerting extends ObjectModel
      */
     public function getCreatedAt(): ?string
     {
-        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
-            return $this->_created_at;
+        if (!is_null($this->created_at) && Date::isDateTimeOk($this->created_at)) {
+            return $this->created_at;
         }
         return null;
     }
@@ -121,8 +121,8 @@ class Alerting extends ObjectModel
      */
     public function getCreatedAtTs(): ?int
     {
-        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
-            return strtotime($this->_created_at);
+        if (!is_null($this->created_at) && Date::isDateTimeOk($this->created_at)) {
+            return strtotime($this->created_at);
         }
         return null;
     }
@@ -132,7 +132,7 @@ class Alerting extends ObjectModel
      */
     public function getActive(): bool
     {
-        return $this->_active;
+        return $this->active;
     }
 
     /**
@@ -140,7 +140,7 @@ class Alerting extends ObjectModel
      */
     public function getIdLieu(): ?int
     {
-        return $this->_id_lieu;
+        return $this->id_lieu;
     }
 
     /**
@@ -148,7 +148,7 @@ class Alerting extends ObjectModel
      */
     public function getIdGroupe(): ?int
     {
-        return $this->_id_groupe;
+        return $this->id_groupe;
     }
 
     /**
@@ -156,7 +156,7 @@ class Alerting extends ObjectModel
      */
     public function getIdEvent(): ?int
     {
-        return $this->_id_event;
+        return $this->id_event;
     }
 
     /* fin getters */
@@ -170,9 +170,9 @@ class Alerting extends ObjectModel
      */
     public function setIdContact(int $id_contact): object
     {
-        if ($this->_id_contact !== $id_contact) {
-            $this->_id_contact = $id_contact;
-            $this->_modified_fields['id_contact'] = true;
+        if ($this->id_contact !== $id_contact) {
+            $this->id_contact = $id_contact;
+            $this->modified_fields['id_contact'] = true;
         }
 
         return $this;
@@ -185,9 +185,9 @@ class Alerting extends ObjectModel
      */
     public function setCreatedAt(string $created_at): object
     {
-        if ($this->_created_at !== $created_at) {
-            $this->_created_at = $created_at;
-            $this->_modified_fields['created_at'] = true;
+        if ($this->created_at !== $created_at) {
+            $this->created_at = $created_at;
+            $this->modified_fields['created_at'] = true;
         }
 
         return $this;
@@ -200,9 +200,9 @@ class Alerting extends ObjectModel
      */
     public function setActive(bool $active): object
     {
-        if ($this->_active !== $active) {
-            $this->_active = $active;
-            $this->_modified_fields['active'] = true;
+        if ($this->active !== $active) {
+            $this->active = $active;
+            $this->modified_fields['active'] = true;
         }
 
         return $this;
@@ -215,9 +215,9 @@ class Alerting extends ObjectModel
      */
     public function setIdLieu(int $id_lieu = null): object
     {
-        if ($this->_id_lieu !== $id_lieu) {
-            $this->_id_lieu = $id_lieu;
-            $this->_modified_fields['id_lieu'] = true;
+        if ($this->id_lieu !== $id_lieu) {
+            $this->id_lieu = $id_lieu;
+            $this->modified_fields['id_lieu'] = true;
         }
 
         return $this;
@@ -230,9 +230,9 @@ class Alerting extends ObjectModel
      */
     public function setIdGroupe(int $id_groupe = null): object
     {
-        if ($this->_id_groupe !== $id_groupe) {
-            $this->_id_groupe = $id_groupe;
-            $this->_modified_fields['id_groupe'] = true;
+        if ($this->id_groupe !== $id_groupe) {
+            $this->id_groupe = $id_groupe;
+            $this->modified_fields['id_groupe'] = true;
         }
 
         return $this;
@@ -245,9 +245,9 @@ class Alerting extends ObjectModel
      */
     public function setIdEvent(int $id_event = null): object
     {
-        if ($this->_id_event !== $id_event) {
-            $this->_id_event = $id_event;
-            $this->_modified_fields['id_event'] = true;
+        if ($this->id_event !== $id_event) {
+            $this->id_event = $id_event;
+            $this->modified_fields['id_event'] = true;
         }
 
         return $this;
@@ -264,9 +264,9 @@ class Alerting extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_created_at !== $now) {
-            $this->_created_at = $now;
-            $this->_modified_fields['created_at'] = true;
+        if ($this->created_at !== $now) {
+            $this->created_at = $now;
+            $this->modified_fields['created_at'] = true;
         }
 
         return $this;
@@ -333,7 +333,7 @@ class Alerting extends ObjectModel
             $sql .= "AND `id_event` = " . (int) $params['id_event'] . " ";
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
             $sql .= "ORDER BY `" . static::getDbPk() . "` ";

@@ -20,29 +20,29 @@ class Style extends Reference
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_style';
+    protected static string $pk = 'id_style';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_style';
+    protected static string $table = 'adhoc_style';
 
     /**
      * @var int
      */
-    protected int $_id_style = 0;
+    protected int $id_style = 0;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_style' => 'int', // pk
         'name'     => 'string',
     ];
@@ -76,7 +76,7 @@ class Style extends Reference
             }
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
             $sql .= "ORDER BY `" . static::getDbPk() . "` ";

@@ -17,44 +17,44 @@ class MembreAdhoc extends Membre
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_contact';
+    protected static string $pk = 'id_contact';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_membre_adhoc';
+    protected static string $table = 'adhoc_membre_adhoc';
 
     /**
      * @var string
      */
-    protected string $_function = '';
+    protected string $function = '';
 
     /**
      * @var string
      */
-    protected string $_birth_date = '';
+    protected string $birth_date = '';
 
     /**
      * @var bool
      */
-    protected bool $_active = false;
+    protected bool $active = false;
 
     /**
      * @var int
      */
-    protected int $_rank = 0;
+    protected int $rank = 0;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_contact' => 'int', // pk
         'function'   => 'string',
         'birth_date' => 'date',
@@ -69,7 +69,7 @@ class MembreAdhoc extends Membre
      *
      * @var array
      */
-    protected $_modified_fields = [
+    protected $modified_fields = [
         'contact' => [],
         'membre' => [],
         'membre_adhoc' => [],
@@ -100,16 +100,16 @@ class MembreAdhoc extends Membre
     {
         if ($fusion) {
             return array_merge(
-                Contact::$_all_fields,
-                Membre::$_all_fields,
-                MembreAdhoc::$_all_fields
+                Contact::$all_fields,
+                Membre::$all_fields,
+                MembreAdhoc::$all_fields
             );
         } else {
             return array_merge(
                 [
-                    'contact' => Contact::$_all_fields,
-                    'membre' => Membre::$_all_fields,
-                    'membre_adhoc' => MembreAdhoc::$_all_fields,
+                    'contact' => Contact::$all_fields,
+                    'membre' => Membre::$all_fields,
+                    'membre_adhoc' => MembreAdhoc::$all_fields,
                 ]
             );
         }
@@ -122,7 +122,7 @@ class MembreAdhoc extends Membre
      */
     public function getFunction(): string
     {
-        return $this->_function;
+        return $this->function;
     }
 
     /**
@@ -130,7 +130,7 @@ class MembreAdhoc extends Membre
      */
     public function getBirthDate(): string
     {
-        return $this->_birth_date;
+        return $this->birth_date;
     }
 
     /**
@@ -138,7 +138,7 @@ class MembreAdhoc extends Membre
      */
     public function getActive(): bool
     {
-        return $this->_active;
+        return $this->active;
     }
 
     /**
@@ -146,7 +146,7 @@ class MembreAdhoc extends Membre
      */
     public function getRank(): int
     {
-        return $this->_rank;
+        return $this->rank;
     }
 
     /* fin getters */
@@ -160,9 +160,9 @@ class MembreAdhoc extends Membre
      */
     public function setFunction(string $function): object
     {
-        if ($this->_function !== $function) {
-            $this->_function = $function;
-            $this->_modified_fields['membre_adhoc']['function'] = true;
+        if ($this->function !== $function) {
+            $this->function = $function;
+            $this->modified_fields['membre_adhoc']['function'] = true;
         }
 
         return $this;
@@ -175,9 +175,9 @@ class MembreAdhoc extends Membre
      */
     public function setBirthDate(string $birth_date): object
     {
-        if ($this->_birth_date !== $birth_date) {
-            $this->_birth_date = $birth_date;
-            $this->_modified_fields['membre_adhoc']['function'] = true;
+        if ($this->birth_date !== $birth_date) {
+            $this->birth_date = $birth_date;
+            $this->modified_fields['membre_adhoc']['function'] = true;
         }
 
         return $this;
@@ -190,9 +190,9 @@ class MembreAdhoc extends Membre
      */
     public function setActive(bool $active): object
     {
-        if ($this->_active !== $active) {
-            $this->_active = $active;
-            $this->_modified_fields['membre_adhoc']['active'] = true;
+        if ($this->active !== $active) {
+            $this->active = $active;
+            $this->modified_fields['membre_adhoc']['active'] = true;
         }
 
         return $this;
@@ -205,9 +205,9 @@ class MembreAdhoc extends Membre
      */
     public function setRank(int $rank): object
     {
-        if ($this->_rank !== $rank) {
-            $this->_rank = $rank;
-            $this->_modified_fields['membre_adhoc']['rank'] = true;
+        if ($this->rank !== $rank) {
+            $this->rank = $rank;
+            $this->modified_fields['membre_adhoc']['rank'] = true;
         }
 
         return $this;
@@ -259,7 +259,7 @@ class MembreAdhoc extends Membre
      * @todo récup champs spécifiques à membre_adhoc !
      *
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     protected function loadFromDb(): bool
     {
@@ -272,11 +272,11 @@ class MembreAdhoc extends Membre
              . "AND `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = " . (int) $this->{'_' . MembreAdhoc::getDbPk()};
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->_arrayToObject($res);
+            $this->arrayToObject($res);
             return true;
         }
 
-        throw new Exception('Membre Adhoc introuvable');
+        throw new \Exception('Membre Adhoc introuvable');
     }
 
     /**
@@ -294,7 +294,7 @@ class MembreAdhoc extends Membre
                 $this->setId($id_contact);
             } else {
                 $sql = "INSERT INTO `" . Contact::getDbTable() . "` (";
-                if (count($this->_modified_fields['contact']) > 0) {
+                if (count($this->modified_fields['contact']) > 0) {
                     foreach ($fields['contact'] as $field => $type) {
                         $sql .= "`" . $field . "`,";
                     }
@@ -302,7 +302,7 @@ class MembreAdhoc extends Membre
                 }
                 $sql .= ") VALUES (";
 
-                if (count($this->_modified_fields['contact']) > 0) {
+                if (count($this->modified_fields['contact']) > 0) {
                     foreach ($fields['contact'] as $field => $type) {
                         $att = '_' . $field;
                         switch ($type) {
@@ -323,7 +323,7 @@ class MembreAdhoc extends Membre
                                 $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
                                 break;
                             default:
-                                throw new Exception('invalid field type : ' . $type);
+                                throw new \Exception('invalid field type : ' . $type);
                         }
                     }
                     $sql = substr($sql, 0, -1);
@@ -366,7 +366,7 @@ class MembreAdhoc extends Membre
                         $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
                         break;
                     default:
-                        throw new Exception('invalid field type : ' . $type);
+                        throw new \Exception('invalid field type : ' . $type);
                 }
             }
             $sql = substr($sql, 0, -1);
@@ -405,7 +405,7 @@ class MembreAdhoc extends Membre
                         $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
                         break;
                     default:
-                        throw new Exception('invalid field type : ' . $type);
+                        throw new \Exception('invalid field type : ' . $type);
                 }
             }
             $sql = substr($sql, 0, -1);
@@ -416,18 +416,18 @@ class MembreAdhoc extends Membre
             return $this->getId();
         } else { // UPDATE
             if (
-                (count($this->_modified_fields['contact']) === 0)
-                && (count($this->_modified_fields['membre']) === 0)
-                && (count($this->_modified_fields['membre_adhoc']) === 0)
+                (count($this->modified_fields['contact']) === 0)
+                && (count($this->modified_fields['membre']) === 0)
+                && (count($this->modified_fields['membre_adhoc']) === 0)
             ) {
                 return true; // pas de changement
             }
 
             /* table contact */
 
-            if (count($this->_modified_fields['contact']) > 0) {
+            if (count($this->modified_fields['contact']) > 0) {
                 $fields_to_save = '';
-                foreach ($this->_modified_fields['contact'] as $field => $value) {
+                foreach ($this->modified_fields['contact'] as $field => $value) {
                     if ($value === true) {
                         $att = '_' . $field;
                         switch ($fields['contact'][$field]) {
@@ -449,7 +449,7 @@ class MembreAdhoc extends Membre
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
                                 break;
                             default:
-                                throw new Exception('invalid field type : ' . $fields['contact'][$field]);
+                                throw new \Exception('invalid field type : ' . $fields['contact'][$field]);
                         }
                     }
                 }
@@ -457,18 +457,18 @@ class MembreAdhoc extends Membre
 
                 $sql = "UPDATE `" . Contact::getDbTable() . "` "
                      . "SET " . $fields_to_save . " "
-                     . "WHERE `id_contact` = " . (int) $this->_id_contact;
+                     . "WHERE `id_contact` = " . (int) $this->contact;
 
-                $this->_modified_fields['contact'] = [];
+                $this->modified_fields['contact'] = [];
 
                 $db->query($sql);
             }
 
             /* table membre */
 
-            if (count($this->_modified_fields['membre']) > 0) {
+            if (count($this->modified_fields['membre']) > 0) {
                 $fields_to_save = '';
-                foreach ($this->_modified_fields['membre'] as $field => $value) {
+                foreach ($this->modified_fields['membre'] as $field => $value) {
                     if ($value === true) {
                         $att = '_' . $field;
                         switch ($fields['membre'][$field]) {
@@ -490,7 +490,7 @@ class MembreAdhoc extends Membre
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
                                 break;
                             default:
-                                throw new Exception('invalid field type : ' . $fields['membre'][$field]);
+                                throw new \Exception('invalid field type : ' . $fields['membre'][$field]);
                         }
                     }
                 }
@@ -498,18 +498,18 @@ class MembreAdhoc extends Membre
 
                 $sql = "UPDATE `" . Membre::getDbTable() . "` "
                      . "SET " . $fields_to_save . " "
-                     . "WHERE `id_contact` = " . (int) $this->_id_contact;
+                     . "WHERE `id_contact` = " . (int) $this->contact;
 
-                $this->_modified_fields['membre'] = [];
+                $this->modified_fields['membre'] = [];
 
                 $db->query($sql);
             }
 
             /* table membre_adhoc */
 
-            if (count($this->_modified_fields['membre_adhoc']) > 0) {
+            if (count($this->modified_fields['membre_adhoc']) > 0) {
                 $fields_to_save = '';
-                foreach ($this->_modified_fields['membre_adhoc'] as $field => $value) {
+                foreach ($this->modified_fields['membre_adhoc'] as $field => $value) {
                     if ($value === true) {
                         $att = '_' . $field;
                         switch ($fields['membre_adhoc'][$field]) {
@@ -531,7 +531,7 @@ class MembreAdhoc extends Membre
                                 $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
                                 break;
                             default:
-                                throw new Exception('invalid field type : ' . $fields['membre_adhoc'][$field]);
+                                throw new \Exception('invalid field type : ' . $fields['membre_adhoc'][$field]);
                         }
                     }
                 }
@@ -539,9 +539,9 @@ class MembreAdhoc extends Membre
 
                 $sql = "UPDATE `" . MembreAdhoc::getDbTable() . "` "
                      . "SET " . $fields_to_save . " "
-                     . "WHERE `id_contact` = " . (int) $this->_id_contact;
+                     . "WHERE `id_contact` = " . (int) $this->contact;
 
-                $this->_modified_fields['membre_adhoc'] = [];
+                $this->modified_fields['membre_adhoc'] = [];
 
                 $db->query($sql);
             }

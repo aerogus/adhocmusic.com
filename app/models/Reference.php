@@ -17,26 +17,26 @@ abstract class Reference extends ObjectModel
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * [à étendre dans l'objet fils]
      *
      * @var string
      */
-    protected static string $_pk = '';
+    protected static string $pk = '';
 
     /**
      * [à étendre dans l'objet fils]
      *
      * @var string
      */
-    protected static string $_table = '';
+    protected static string $table = '';
 
     /**
      * @var string
      */
-    protected string $_name = '';
+    protected string $name = '';
 
     /* début getters */
 
@@ -45,7 +45,7 @@ abstract class Reference extends ObjectModel
      */
     public function getName(): string
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /* fin getters */
@@ -59,9 +59,9 @@ abstract class Reference extends ObjectModel
      */
     public function setName(string $name): object
     {
-        if ($this->_name !== $name) {
-            $this->_name = $name;
-            $this->_modified_fields['name'] = true;
+        if ($this->name !== $name) {
+            $this->name = $name;
+            $this->modified_fields['name'] = true;
         }
 
         return $this;
@@ -73,12 +73,12 @@ abstract class Reference extends ObjectModel
      * Charge la table de référence
      *
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     protected function loadFromDb(): bool
     {
         if (!parent::loadFromDb()) {
-            throw new Exception('Référence ' . print_r($this->getId(), true) . ' introuvable dans ' . get_called_class());
+            throw new \Exception('Référence ' . print_r($this->getId(), true) . ' introuvable dans ' . get_called_class());
         }
 
         return true;

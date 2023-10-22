@@ -20,34 +20,34 @@ class Photo extends Media
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_photo';
+    protected static string $pk = 'id_photo';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_photo';
+    protected static string $table = 'adhoc_photo';
 
     /**
      * @var int
      */
-    protected int $_id_photo = 0;
+    protected int $id_photo = 0;
 
     /**
      * @var string
      */
-    protected string $_credits = '';
+    protected string $credits = '';
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_photo'     => 'int', // pk
         'id_contact'   => 'int',
         'id_groupe'    => 'int',
@@ -83,7 +83,7 @@ class Photo extends Media
      */
     public function getIdPhoto(): int
     {
-        return $this->_id_photo;
+        return $this->id_photo;
     }
 
     /**
@@ -99,7 +99,7 @@ class Photo extends Media
      */
     public function getCredits(): string
     {
-        return $this->_credits;
+        return $this->credits;
     }
 
     /**
@@ -121,9 +121,9 @@ class Photo extends Media
      */
     public function setCredits(string $credits): object
     {
-        if ($this->_credits !== $credits) {
-            $this->_credits = $credits;
-            $this->_modified_fields['credits'] = true;
+        if ($this->credits !== $credits) {
+            $this->credits = $credits;
+            $this->modified_fields['credits'] = true;
         }
 
         return $this;
@@ -155,12 +155,12 @@ class Photo extends Media
 
     /**
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     protected function loadFromDb(): bool
     {
         if (!parent::loadFromDb()) {
-            throw new Exception('Photo introuvable');
+            throw new \Exception('Photo introuvable');
         }
         return true;
     }

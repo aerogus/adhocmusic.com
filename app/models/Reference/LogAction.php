@@ -19,29 +19,29 @@ class LogAction extends Reference
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_log_action';
+    protected static string $pk = 'id_log_action';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_log_action';
+    protected static string $table = 'adhoc_log_action';
 
     /**
      * @var int
      */
-    protected $_id_log_action = 0;
+    protected $id_log_action = 0;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_log_action' => 'int', // pk
         'name' => 'string',
     ];

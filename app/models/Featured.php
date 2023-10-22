@@ -14,67 +14,67 @@ namespace Adhoc\Model;
  */
 class Featured extends ObjectModel
 {
-    const WIDTH = 1000;
-    const HEIGHT = 375;
+    public const WIDTH = 1000;
+    public const HEIGHT = 375;
 
     /**
      * Instance de l'objet
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_featured';
+    protected static string $pk = 'id_featured';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_featured';
+    protected static string $table = 'adhoc_featured';
 
     /**
      * @var int
      */
-    protected int $_id_featured = 0;
+    protected int $id_featured = 0;
 
     /**
      * @var string
      */
-    protected string $_datdeb = '';
+    protected string $datdeb = '';
 
     /**
      * @var string
      */
-    protected string $_datfin = '';
+    protected string $datfin = '';
 
     /**
      * @var string
      */
-    protected string $_title = '';
+    protected string $title = '';
 
     /**
      * @var string
      */
-    protected string $_description = '';
+    protected string $description = '';
 
     /**
      * @var string
      */
-    protected string $_url = '';
+    protected string $url = '';
 
     /**
      * @var bool
      */
-    protected bool $_online = false;
+    protected bool $online = false;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_featured' => 'int', // pk
         'datdeb'      => 'date',
         'datfin'      => 'date',
@@ -109,7 +109,7 @@ class Featured extends ObjectModel
      */
     public function getDatDeb(): string
     {
-        return $this->_datdeb;
+        return $this->datdeb;
     }
 
     /**
@@ -117,7 +117,7 @@ class Featured extends ObjectModel
      */
     public function getDatFin(): string
     {
-        return $this->_datfin;
+        return $this->datfin;
     }
 
     /**
@@ -125,7 +125,7 @@ class Featured extends ObjectModel
      */
     public function getTitle(): string
     {
-        return $this->_title;
+        return $this->title;
     }
 
     /**
@@ -133,7 +133,7 @@ class Featured extends ObjectModel
      */
     public function getDescription(): string
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -141,7 +141,7 @@ class Featured extends ObjectModel
      */
     public function getUrl(): string
     {
-        return $this->_url;
+        return $this->url;
     }
 
     /**
@@ -157,7 +157,7 @@ class Featured extends ObjectModel
      */
     public function getOnline(): bool
     {
-        return $this->_online;
+        return $this->online;
     }
 
     /* fin getters */
@@ -172,12 +172,12 @@ class Featured extends ObjectModel
     public function setDatDeb(string $datdeb): object
     {
         if (!Date::isDateTimeOk($datdeb)) {
-            throw new Exception('datdeb invalide');
+            throw new \Exception('datdeb invalide');
         }
 
-        if ($this->_datdeb !== $datdeb) {
-            $this->_datdeb = $datdeb;
-            $this->_modified_fields['datdeb'] = true;
+        if ($this->datdeb !== $datdeb) {
+            $this->datdeb = $datdeb;
+            $this->modified_fields['datdeb'] = true;
         }
 
         return $this;
@@ -191,12 +191,12 @@ class Featured extends ObjectModel
     public function setDatFin(string $datfin): object
     {
         if (!Date::isDateTimeOk($datfin)) {
-            throw new Exception('datfin invalide');
+            throw new \Exception('datfin invalide');
         }
 
-        if ($this->_datfin !== $datfin) {
-            $this->_datfin = $datfin;
-            $this->_modified_fields['datfin'] = true;
+        if ($this->datfin !== $datfin) {
+            $this->datfin = $datfin;
+            $this->modified_fields['datfin'] = true;
         }
 
         return $this;
@@ -211,9 +211,9 @@ class Featured extends ObjectModel
     {
         $title = trim($title);
 
-        if ($this->_title !== $title) {
-            $this->_title = $title;
-            $this->_modified_fields['title'] = true;
+        if ($this->title !== $title) {
+            $this->title = $title;
+            $this->modified_fields['title'] = true;
         }
 
         return $this;
@@ -228,9 +228,9 @@ class Featured extends ObjectModel
     {
         $description = trim($description);
 
-        if ($this->_description !== $description) {
-            $this->_description = $description;
-            $this->_modified_fields['description'] = true;
+        if ($this->description !== $description) {
+            $this->description = $description;
+            $this->modified_fields['description'] = true;
         }
 
         return $this;
@@ -245,9 +245,9 @@ class Featured extends ObjectModel
     {
         $url = trim($url);
 
-        if ($this->_url !== $url) {
-            $this->_url = $url;
-            $this->_modified_fields['url'] = true;
+        if ($this->url !== $url) {
+            $this->url = $url;
+            $this->modified_fields['url'] = true;
         }
 
         return $this;
@@ -260,9 +260,9 @@ class Featured extends ObjectModel
      */
     public function setOnline(bool $online): object
     {
-        if ($this->_online !== $online) {
-            $this->_online = $online;
-            $this->_modified_fields['online'] = true;
+        if ($this->online !== $online) {
+            $this->online = $online;
+            $this->modified_fields['online'] = true;
         }
 
         return $this;
@@ -320,7 +320,7 @@ class Featured extends ObjectModel
             $sql .= "AND `datdeb` <= CURRENT_DATE AND `datfin` >= CURRENT_DATE ";
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
             $sql .= "ORDER BY `" . static::getDbPk() . "` ";

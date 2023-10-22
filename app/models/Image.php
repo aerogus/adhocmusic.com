@@ -19,73 +19,73 @@ class Image
     /**
      * @var string
      */
-    protected string $_file_sou = '';
-    protected string $_file_res = '';
+    protected string $file_sou = '';
+    protected string $file_res = '';
 
     /**
      * @var mixed
      */
-    protected $_handle  = null; // handle source
-    protected $_handle2 = null; // handle resizé
-    protected $_handle3 = null; // handle final + palette
+    protected $handle  = null; // handle source
+    protected $handle2 = null; // handle resizé
+    protected $handle3 = null; // handle final + palette
 
     /**
      * @var int
      */
-    protected $_width  = 0;
-    protected $_height = 0;
+    protected int $width  = 0;
+    protected int $height = 0;
 
     /**
      * @var mixed
      */
-    protected $_type  = IMAGETYPE_JPEG; //
-    protected $_ratio = null;           //
-    protected $_color = null;           // couleur courante en Hexa
+    protected $type  = IMAGETYPE_JPEG; //
+    protected $ratio = null;           //
+    protected $color = null;           // couleur courante en Hexa
 
     /**
      * Zone de sélection (nouveau cadrage)
      */
-    protected $_x1 = 0;   // point supérieur gauche
-    protected $_x2 = 0;   //
-    protected $_y1 = 0;   // point inférieur droit
-    protected $_y2 = 0;   //
-    protected $_wSel = 0; // largeur et hauteur selectionnées
-    protected $_hSel = 0; //
+    protected int $x1 = 0;   // point supérieur gauche
+    protected int $x2 = 0;   //
+    protected int $y1 = 0;   // point inférieur droit
+    protected int $y2 = 0;   //
+    protected int $wSel = 0; // largeur et hauteur selectionnées
+    protected int $hSel = 0; //
 
     /**
      * dimensions de la nouvelle image
      */
-    protected $_new_l = 0;
-    protected $_new_h = 0;
+    protected int $new_l = 0;
+    protected int $new_h = 0;
 
     /**
      * décalage à l'origine, pour les images générées avec bordure
      */
-    protected $_deltax = 0;
-    protected $_deltay = 0;
+    protected int $deltax = 0;
+    protected int $deltay = 0;
 
     /**
      * contraintes de conversion
      */
-    protected $_max_width  = 0; // px
-    protected $_max_height = 0; // px
+    protected int $max_width  = 0; // px
+    protected int $max_height = 0; // px
 
     /**
      * @var int Qualité / Taux de compression
      */
-    protected $_jpeg_quality; // pas d'unité (0:dégradé/léger -> 100:beau/lourd)
-    protected $_png_quality;  // quantisation de la palette en bits : 24/16/8/4/2/1
-    protected $_gif_quality;  // nbre de couleurs de la palette : 1 à 256
+    protected $jpeg_quality; // pas d'unité (0:dégradé/léger -> 100:beau/lourd)
+    protected $png_quality;  // quantisation de la palette en bits : 24/16/8/4/2/1
+    protected $gif_quality;  // nbre de couleurs de la palette : 1 à 256
 
     /**
      * @var bool Ajout d'une bordure en cas de resize
      */
-    protected $_border = true;
+    protected bool $border = true;
 
     /**
      * @var bool Garde les proportions en cas de resize
      */
-    protected $_keep_ratio = true;
+    protected bool $keep_ratio = true;
 
     /**
      * Constructeur
@@ -97,21 +97,21 @@ class Image
     public function __construct(string $file = null)
     {
         if (!is_null($file)) {
-            $this->_file_sou = $file;
+            $this->file_sou = $file;
             $this->read();
         }
 
         // valeurs par défaut
-        $this->_border       = false;
-        $this->_keep_ratio   = true;
-        $this->_jpeg_quality = 90;
-        $this->_gif_quality  = 256;
-        $this->_png_quality  = 16777216;
-        $this->_color        = ['r' => 0, 'g' => 0, 'b' => 0]; // indépendant du handle
-        $this->_deltax       = 0;
-        $this->_deltay       = 0;
+        $this->border       = false;
+        $this->keep_ratio   = true;
+        $this->jpeg_quality = 90;
+        $this->gif_quality  = 256;
+        $this->png_quality  = 16777216;
+        $this->color        = ['r' => 0, 'g' => 0, 'b' => 0]; // indépendant du handle
+        $this->deltax       = 0;
+        $this->deltay       = 0;
 
-        $this->_file_res     = '/tmp/adhocmusic-img-' . md5(time() . rand());
+        $this->file_res     = '/tmp/adhocmusic-img-' . md5(time() . rand());
     }
 
     /**
@@ -125,20 +125,20 @@ class Image
      */
     public function init(int $width = 16, int $height = 16, string $color = null): object
     {
-        $this->_handle = imagecreatetruecolor($width, $height);
+        $this->handle = imagecreatetruecolor($width, $height);
 
         if ($color) {
             $color = str_replace('#', '', $color);
             $red   = hexdec(substr($color, 0, 2));
             $green = hexdec(substr($color, 2, 2));
             $blue  = hexdec(substr($color, 4, 2));
-            $color = imagecolorallocate($this->_handle, $red, $green, $blue);
-            imagefill($this->_handle, 0, 0, $color);
+            $color = imagecolorallocate($this->handle, $red, $green, $blue);
+            imagefill($this->handle, 0, 0, $color);
         }
 
-        $this->_width  = (int) $width;
-        $this->_height = (int) $height;
-        $this->_ratio  = $this->_width / $this->_height;
+        $this->width  = (int) $width;
+        $this->height = (int) $height;
+        $this->ratio  = $this->width / $this->height;
 
         $this->selectAll();
 
@@ -146,44 +146,44 @@ class Image
     }
 
     /**
-     * Charge un fichier dans l'attribut $this->_handle
+     * Charge un fichier dans l'attribut $this->handle
      * retourn false en cas d'erreur
      *
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     public function read(): bool
     {
-        if ($this->_file_sou && file_exists($this->_file_sou) && is_readable($this->_file_sou)) {
-            $this->_type = exif_imagetype($this->_file_sou);
+        if ($this->file_sou && file_exists($this->file_sou) && is_readable($this->file_sou)) {
+            $this->type = exif_imagetype($this->file_sou);
 
-            switch ($this->_type) {
+            switch ($this->type) {
                 case IMAGETYPE_GIF:
-                    $this->_handle = imagecreatefromgif($this->_file_sou);
+                    $this->handle = imagecreatefromgif($this->file_sou);
                     break;
 
                 case IMAGETYPE_JPEG:
-                    $this->_handle = imagecreatefromjpeg($this->_file_sou);
+                    $this->handle = imagecreatefromjpeg($this->file_sou);
                     break;
 
                 case IMAGETYPE_PNG:
-                    $this->_handle = imagecreatefrompng($this->_file_sou);
+                    $this->handle = imagecreatefrompng($this->file_sou);
                     break;
 
                 default:
                     return false;
             }
 
-            $this->_width  = imagesx($this->_handle);
-            $this->_height = imagesy($this->_handle);
-            $this->_ratio  = $this->_width / $this->_height;
+            $this->width  = imagesx($this->handle);
+            $this->height = imagesy($this->handle);
+            $this->ratio  = $this->width / $this->height;
 
             // on select tout par défaut
             $this->selectAll();
 
             return true;
         } else {
-            throw new Exception('file_sou introuvable');
+            throw new \Exception('file_sou introuvable');
         }
     }
 
@@ -194,8 +194,8 @@ class Image
     /**
      * Défini une zone valide dans l'image source
      * règle :
-     * 0 <= x1 < x2 < $this->_width
-     * 0 <= y1 < y2 < $this->_height
+     * 0 <= x1 < x2 < $this->width
+     * 0 <= y1 < y2 < $this->height
      *
      * @param int $x1 x1
      * @param int $y1 y1
@@ -207,15 +207,15 @@ class Image
     public function setZone(int $x1, int $y1, int $x2, int $y2): object
     {
         if (
-            ($x1 >= 0) && ($x2 > $x1) && ($this->_width > $x2) &&
-            ($y1 >= 0) && ($y2 > $y1) && ($this->_height > $y2)
+            ($x1 >= 0) && ($x2 > $x1) && ($this->width > $x2) &&
+            ($y1 >= 0) && ($y2 > $y1) && ($this->height > $y2)
         ) {
-            $this->_x1   = $x1;
-            $this->_y1   = $y1;
-            $this->_x2   = $x2;
-            $this->_y2   = $y2;
-            $this->_wSel = $this->_x2 - $this->_x1 + 1;
-            $this->_hSel = $this->_y2 - $this->_y1 + 1;
+            $this->x1   = $x1;
+            $this->y1   = $y1;
+            $this->x2   = $x2;
+            $this->y2   = $y2;
+            $this->wSel = $this->x2 - $this->x1 + 1;
+            $this->hSel = $this->y2 - $this->y1 + 1;
         }
 
         return $this;
@@ -232,7 +232,7 @@ class Image
     {
         if ($zoom) {
             // ratio de l'image destination
-            $ratio = $this->_max_width / $this->_max_height;
+            $ratio = $this->max_width / $this->max_height;
 
             // coordonnées de la sélection avant calcul
             $x1 = 0;
@@ -241,7 +241,7 @@ class Image
             $y2 = 0;
 
             // cadrage
-            while (($x2 < $this->_width) && ($y2 < $this->_height)) {
+            while (($x2 < $this->width) && ($y2 < $this->height)) {
                 $x2 += $ratio;
                 $y2 += $ratio;
             }
@@ -251,8 +251,8 @@ class Image
             $y2 = intval($y2);
 
             // centrage de la sélection
-            $offsetx = intval(($this->_width - $x2) / 2);
-            $offsety = intval(($this->_height - $y2) / 2);
+            $offsetx = intval(($this->width - $x2) / 2);
+            $offsety = intval(($this->height - $y2) / 2);
 
             $x1 += $offsetx;
             $y1 += $offsety;
@@ -270,7 +270,7 @@ class Image
      */
     public function selectAll()
     {
-        $this->setZone(0, 0, $this->_width - 1, $this->_height - 1);
+        $this->setZone(0, 0, $this->width - 1, $this->height - 1);
     }
 
     /**
@@ -282,7 +282,7 @@ class Image
      */
     public function setDestFile(string $file): object
     {
-        $this->_file_res = $file;
+        $this->file_res = $file;
 
         return $this;
     }
@@ -300,7 +300,7 @@ class Image
      */
     public function setColor(int $red = 0, int $green = 0, int $blue = 0): object
     {
-        $this->_color = [
+        $this->color = [
             'r' => $red,
             'g' => $green,
             'b' => $blue,
@@ -340,7 +340,7 @@ class Image
      */
     public function setType(int $type): object
     {
-        $this->_type = $type;
+        $this->type = $type;
 
         return $this;
     }
@@ -354,7 +354,7 @@ class Image
      */
     public function setMaxWidth(int $maxWidth): object
     {
-        $this->_max_width = $maxWidth;
+        $this->max_width = $maxWidth;
 
         return $this;
     }
@@ -368,7 +368,7 @@ class Image
      */
     public function setMaxHeight(int $maxHeight): object
     {
-        $this->_max_height = $maxHeight;
+        $this->max_height = $maxHeight;
 
         return $this;
     }
@@ -379,31 +379,31 @@ class Image
      */
     public function resize()
     {
-        if ($this->_max_height && $this->_max_width && $this->_border) {
-            $width = $this->_max_width;
-            $height = $this->_max_height;
+        if ($this->max_height && $this->max_width && $this->border) {
+            $width = $this->max_width;
+            $height = $this->max_height;
         } else {
-            $width = $this->_new_l;
-            $height = $this->_new_h;
+            $width = $this->new_l;
+            $height = $this->new_h;
         }
 
-        $this->_handle2 = imagecreatetruecolor((int) $width, (int) $height);
+        $this->handle2 = imagecreatetruecolor((int) $width, (int) $height);
 
         // rempli le fond avec la couleur courante
-        $bgcolor = imagecolorallocate($this->_handle2, $this->_color['r'], $this->_color['g'], $this->_color['b']);
-        imagefill($this->_handle2, 0, 0, $bgcolor);
+        $bgcolor = imagecolorallocate($this->handle2, $this->color['r'], $this->color['g'], $this->color['b']);
+        imagefill($this->handle2, 0, 0, $bgcolor);
 
         imagecopyresampled(
-            $this->_handle2,
-            $this->_handle,
-            $this->_deltax,
-            $this->_deltay,
-            $this->_x1,
-            $this->_y1,
-            $this->_new_l,
-            $this->_new_h,
-            $this->_wSel,
-            $this->_hSel
+            $this->handle2,
+            $this->handle,
+            $this->deltax,
+            $this->deltay,
+            $this->x1,
+            $this->y1,
+            $this->new_l,
+            $this->new_h,
+            $this->wSel,
+            $this->hSel
         );
     }
 
@@ -419,45 +419,45 @@ class Image
         /**
          * Calcul de la nouvelle taille de l'image
          */
-        if ($this->_keep_ratio) {
-            if ($this->_max_height) {
-                $tmp_h = min($this->_hSel, $this->_max_height);
-                $rh1   = $tmp_h / $this->_hSel;
-                $tmp_l = round($this->_wSel * $rh1);
-                if ($this->_max_width && $tmp_l) { // a debugguer
-                    $this->_new_l = (int) min($this->_max_width, $tmp_l);
-                    $rh2          = $this->_new_l / ($this->_wSel * $rh1);
-                    $this->_new_h = (int) round($this->_hSel * $rh1 * $rh2);
+        if ($this->keep_ratio) {
+            if ($this->max_height) {
+                $tmp_h = min($this->hSel, $this->max_height);
+                $rh1   = $tmp_h / $this->hSel;
+                $tmp_l = round($this->wSel * $rh1);
+                if ($this->max_width && $tmp_l) { // a debugguer
+                    $this->new_l = (int) min($this->max_width, $tmp_l);
+                    $rh2          = $this->new_l / ($this->wSel * $rh1);
+                    $this->new_h = (int) round($this->hSel * $rh1 * $rh2);
                 } else {
-                    $this->_new_l = (int) $tmp_l;
-                    $this->_new_h = (int) $tmp_h;
+                    $this->new_l = (int) $tmp_l;
+                    $this->new_h = (int) $tmp_h;
                 }
             } else {
-                if ($this->_max_width) {
-                    $this->_new_l = (int) min($this->_wSel, $this->_max_width);
-                    $rh           = $this->_new_l / $this->_wSel;
-                    $this->_new_h = (int) round($this->_hSel * $rh);
+                if ($this->max_width) {
+                    $this->new_l = (int) min($this->wSel, $this->max_width);
+                    $rh           = $this->new_l / $this->wSel;
+                    $this->new_h = (int) round($this->hSel * $rh);
                 } else {
-                    $this->_new_l = (int) $this->_wSel;
-                    $this->_new_h = (int) $this->_hSel;
+                    $this->new_l = (int) $this->wSel;
+                    $this->new_h = (int) $this->hSel;
                 }
             }
         } else {
-            if ($this->_max_height) {
-                if ($this->_max_width) {
-                    $this->_new_l = (int) min($this->_wSel, $this->_max_width);
-                    $this->_new_h = (int) min($this->_hSel, $this->_max_height);
+            if ($this->max_height) {
+                if ($this->max_width) {
+                    $this->new_l = (int) min($this->wSel, $this->max_width);
+                    $this->new_h = (int) min($this->hSel, $this->max_height);
                 } else {
-                    $this->_new_l = $this->_wSel;
-                    $this->_new_h = (int) min($this->_hSel, $this->_max_height);
+                    $this->new_l = $this->wSel;
+                    $this->new_h = (int) min($this->hSel, $this->max_height);
                 }
             } else {
-                if ($this->_max_width) {
-                    $this->_new_l = (int) min($this->_wSel, $this->_max_width);
-                    $this->_new_h = (int) $this->_hSel;
+                if ($this->max_width) {
+                    $this->new_l = (int) min($this->wSel, $this->max_width);
+                    $this->new_h = (int) $this->hSel;
                 } else {
-                    $this->_new_l = (int) $this->_wSel;
-                    $this->_new_h = (int) $this->_hSel;
+                    $this->new_l = (int) $this->wSel;
+                    $this->new_h = (int) $this->hSel;
                 }
             }
         }
@@ -465,12 +465,12 @@ class Image
         /**
          * Calcul de l'offset en cas de bordure
          */
-        if ($this->_max_height && $this->_max_width && $this->_border) {
-            $this->_deltax = round(($this->_max_width - $this->_new_l) / 2);
-            $this->_deltay = round(($this->_max_height - $this->_new_h) / 2);
+        if ($this->max_height && $this->max_width && $this->border) {
+            $this->deltax = round(($this->max_width - $this->new_l) / 2);
+            $this->deltay = round(($this->max_height - $this->new_h) / 2);
         } else {
-            $this->_deltax = 0;
-            $this->_deltay = 0;
+            $this->deltax = 0;
+            $this->deltay = 0;
         }
     }
 
@@ -483,7 +483,7 @@ class Image
      */
     public function setKeepRatio(bool $bool): object
     {
-        $this->_keep_ratio = $bool;
+        $this->keep_ratio = $bool;
 
         return $this;
     }
@@ -497,7 +497,7 @@ class Image
      */
     public function setBorder(bool $bool): object
     {
-        $this->_border = $bool;
+        $this->border = $bool;
 
         return $this;
     }
@@ -521,22 +521,22 @@ class Image
      */
     private function display()
     {
-        switch ($this->_type) {
+        switch ($this->type) {
             case IMAGETYPE_GIF:
                 header("Content-Type: image/gif");
-                imagetruecolortopalette($this->_handle2, true, $this->_gif_quality);
-                imagegif($this->_handle2);
+                imagetruecolortopalette($this->handle2, true, $this->gif_quality);
+                imagegif($this->handle2);
                 break;
 
             case IMAGETYPE_JPEG:
                 header("Content-Type: image/jpeg");
-                imagejpeg($this->_handle2, null, $this->_jpeg_quality);
+                imagejpeg($this->handle2, null, $this->jpeg_quality);
                 break;
 
             case IMAGETYPE_PNG:
                 header("Content-Type: image/png");
-                imagetruecolortopalette($this->_handle2, true, $this->_png_quality);
-                imagepng($this->_handle2);
+                imagetruecolortopalette($this->handle2, true, $this->png_quality);
+                imagepng($this->handle2);
                 break;
         }
     }
@@ -568,32 +568,32 @@ class Image
      */
     private function write(bool $get_contents = false)
     {
-        switch ($this->_type) {
+        switch ($this->type) {
             case IMAGETYPE_GIF:
-                $this->_handle3 = imagecreatetruecolor($this->_new_l, $this->_new_h);
-                imagecopy($this->_handle3, $this->_handle2, 0, 0, 0, 0, $this->_new_l, $this->_new_h);
-                imagetruecolortopalette($this->_handle3, true, $this->_gif_quality);
-                imagegif($this->_handle3, $this->_file_res);
+                $this->handle3 = imagecreatetruecolor($this->new_l, $this->new_h);
+                imagecopy($this->handle3, $this->handle2, 0, 0, 0, 0, $this->new_l, $this->new_h);
+                imagetruecolortopalette($this->handle3, true, $this->gif_quality);
+                imagegif($this->handle3, $this->file_res);
                 break;
 
             case IMAGETYPE_JPEG:
-                $this->_handle3 = imagecreatetruecolor($this->_new_l, $this->_new_h);
-                imagecopy($this->_handle3, $this->_handle2, 0, 0, 0, 0, $this->_new_l, $this->_new_h);
-                imagejpeg($this->_handle3, $this->_file_res, $this->_jpeg_quality);
+                $this->handle3 = imagecreatetruecolor($this->new_l, $this->new_h);
+                imagecopy($this->handle3, $this->handle2, 0, 0, 0, 0, $this->new_l, $this->new_h);
+                imagejpeg($this->handle3, $this->file_res, $this->jpeg_quality);
                 break;
 
             case IMAGETYPE_PNG:
-                $this->_handle3 = imagecreatetruecolor($this->_new_l, $this->_new_h);
-                imagecopy($this->_handle3, $this->_handle2, 0, 0, 0, 0, $this->_new_l, $this->_new_h);
-                imagetruecolortopalette($this->_handle3, true, $this->_png_quality);
-                imagepng($this->_handle3, $this->_file_res);
+                $this->handle3 = imagecreatetruecolor($this->new_l, $this->new_h);
+                imagecopy($this->handle3, $this->handle2, 0, 0, 0, 0, $this->new_l, $this->new_h);
+                imagetruecolortopalette($this->handle3, true, $this->png_quality);
+                imagepng($this->handle3, $this->file_res);
                 break;
         }
 
         if ($get_contents) {
-            if (file_exists($this->_file_res)) {
-                $img = file_get_contents($this->_file_res);
-                unlink($this->_file_res);
+            if (file_exists($this->file_res)) {
+                $img = file_get_contents($this->file_res);
+                unlink($this->file_res);
                 return $img;
             }
             return false;

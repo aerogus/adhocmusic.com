@@ -25,113 +25,113 @@ class Lieu extends ObjectModel
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * Nom de la clé primaire
      *
      * @var string
      */
-    protected static $_pk = 'id_lieu';
+    protected static $pk = 'id_lieu';
 
     /**
      * Nom de la table
      *
      * @var string
      */
-    protected static $_table = 'adhoc_lieu';
+    protected static $table = 'adhoc_lieu';
 
     /**
      * @var int
      */
-    protected $_id_lieu = 0;
+    protected $id_lieu = 0;
 
     /**
      * @var int
      */
-    protected $_id_type = 0;
+    protected $id_type = 0;
 
     /**
      * @var string
      */
-    protected $_name = '';
+    protected $name = '';
 
     /**
      * @var string
      */
-    protected $_address = '';
+    protected $address = '';
 
     /**
      * @var int
      */
-    protected $_id_city = '';
+    protected $id_city = '';
 
     /**
      * @var string
      */
-    protected $_id_departement = '';
+    protected $id_departement = '';
 
     /**
      * @var string
      */
-    protected $_id_region = '';
+    protected $id_region = '';
 
     /**
      * @var string
      */
-    protected $_id_country = '';
+    protected $id_country = '';
 
     /**
      * @var string
      */
-    protected $_text = '';
+    protected $text = '';
 
     /**
      * @var string
      */
-    protected $_site = '';
+    protected $site = '';
 
     /**
      * @var int
      */
-    protected $_id_contact = 0;
+    protected $id_contact = 0;
 
     /**
      * @var string
      */
-    protected $_created_at = null;
+    protected $created_at = null;
 
     /**
      * @var string
      */
-    protected $_modified_at = null;
+    protected $modified_at = null;
 
     /**
      * @var float|null
      */
-    protected $_lat = null;
+    protected $lat = null;
 
     /**
      * @var float|null
      */
-    protected $_lng = null;
+    protected $lng = null;
 
     /**
      * @var bool
      */
-    protected $_online = false;
+    protected $online = false;
 
     /**
      * @var string
      */
-    protected $_photo_url = null;
+    protected $photo_url = null;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_lieu'        => 'int', // pk
         'id_type'        => 'int',
         'name'           => 'string',
@@ -175,7 +175,7 @@ class Lieu extends ObjectModel
      */
     public function getIdLieu(): int
     {
-        return $this->_id_lieu;
+        return $this->lieu;
     }
 
     /**
@@ -185,7 +185,7 @@ class Lieu extends ObjectModel
      */
     public function getIdType(): int
     {
-        return $this->_id_type;
+        return $this->type;
     }
 
     /**
@@ -195,7 +195,7 @@ class Lieu extends ObjectModel
      */
     public function getType(): string
     {
-        return self::getTypeName($this->_id_type);
+        return self::getTypeName($this->type);
     }
 
     /**
@@ -205,7 +205,7 @@ class Lieu extends ObjectModel
      */
     public function getName(): string
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -215,7 +215,7 @@ class Lieu extends ObjectModel
      */
     public function getAddress(): string
     {
-        return $this->_address;
+        return $this->address;
     }
 
     /**
@@ -226,7 +226,7 @@ class Lieu extends ObjectModel
      */
     public function getIdCity(): int
     {
-        return $this->_id_city;
+        return $this->city;
     }
 
     /**
@@ -246,7 +246,7 @@ class Lieu extends ObjectModel
      */
     public function getIdDepartement(): string
     {
-        return $this->_id_departement;
+        return $this->departement;
     }
 
     /**
@@ -266,7 +266,7 @@ class Lieu extends ObjectModel
      */
     public function getIdRegion(): string
     {
-        return $this->_id_region;
+        return $this->region;
     }
 
     /**
@@ -291,7 +291,7 @@ class Lieu extends ObjectModel
      */
     public function getIdCountry(): string
     {
-        return $this->_id_country;
+        return $this->country;
     }
 
     /**
@@ -311,7 +311,7 @@ class Lieu extends ObjectModel
      */
     public function getText(): string
     {
-        return $this->_text;
+        return $this->text;
     }
 
     /**
@@ -321,7 +321,7 @@ class Lieu extends ObjectModel
      */
     public function getSite(): string
     {
-        return $this->_site;
+        return $this->site;
     }
 
     /**
@@ -331,7 +331,7 @@ class Lieu extends ObjectModel
      */
     public function getIdContact(): int
     {
-        return $this->_id_contact;
+        return $this->contact;
     }
 
     /**
@@ -341,7 +341,7 @@ class Lieu extends ObjectModel
      */
     public function getLat(): ?float
     {
-        return $this->_lat;
+        return $this->lat;
     }
 
     /**
@@ -351,7 +351,7 @@ class Lieu extends ObjectModel
      */
     public function getLng(): ?float
     {
-        return $this->_lng;
+        return $this->lng;
     }
 
     /**
@@ -377,8 +377,8 @@ class Lieu extends ObjectModel
      */
     public function getCreatedAt(): ?string
     {
-        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
-            return $this->_created_at;
+        if (!is_null($this->created_at) && Date::isDateTimeOk($this->created_at)) {
+            return $this->created_at;
         }
         return null;
     }
@@ -390,8 +390,8 @@ class Lieu extends ObjectModel
      */
     public function getCreatedAtTs(): ?int
     {
-        if (!is_null($this->_created_at) && Date::isDateTimeOk($this->_created_at)) {
-            return strtotime($this->_created_at);
+        if (!is_null($this->created_at) && Date::isDateTimeOk($this->created_at)) {
+            return strtotime($this->created_at);
         }
         return null;
     }
@@ -403,8 +403,8 @@ class Lieu extends ObjectModel
      */
     public function getModifiedAt(): ?string
     {
-        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
-            return (string) $this->_modified_at;
+        if (!is_null($this->modified_at) && Date::isDateTimeOk($this->modified_at)) {
+            return (string) $this->modified_at;
         }
         return null;
     }
@@ -416,8 +416,8 @@ class Lieu extends ObjectModel
      */
     public function getModifiedAtTs(): ?int
     {
-        if (!is_null($this->_modified_at) && Date::isDateTimeOk($this->_modified_at)) {
-            return strtotime($this->_modified_at);
+        if (!is_null($this->modified_at) && Date::isDateTimeOk($this->modified_at)) {
+            return strtotime($this->modified_at);
         }
         return null;
     }
@@ -429,7 +429,7 @@ class Lieu extends ObjectModel
      */
     public function getOnline(): bool
     {
-        return $this->_online;
+        return $this->online;
     }
 
     /**
@@ -449,7 +449,7 @@ class Lieu extends ObjectModel
      */
     public function getDistance(): float
     {
-        return $this->_distance;
+        return $this->distance;
     }
 
     /**
@@ -459,7 +459,7 @@ class Lieu extends ObjectModel
      */
     public function getPhotoUrl(): ?string
     {
-        return $this->_photo_url;
+        return $this->photo_url;
     }
 
     /* fin getters */
@@ -475,9 +475,9 @@ class Lieu extends ObjectModel
      */
     public function setIdType(int $id_type): object
     {
-        if ($this->_id_type !== $id_type) {
-            $this->_id_type = $id_type;
-            $this->_modified_fields['id_type'] = true;
+        if ($this->type !== $id_type) {
+            $this->type = $id_type;
+            $this->modified_fields['id_type'] = true;
         }
 
         return $this;
@@ -492,9 +492,9 @@ class Lieu extends ObjectModel
      */
     public function setName(string $name): object
     {
-        if ($this->_name !== $name) {
-            $this->_name = $name;
-            $this->_modified_fields['name'] = true;
+        if ($this->name !== $name) {
+            $this->name = $name;
+            $this->modified_fields['name'] = true;
         }
 
         return $this;
@@ -509,9 +509,9 @@ class Lieu extends ObjectModel
      */
     public function setAddress(string $address): object
     {
-        if ($this->_address !== $address) {
-            $this->_address = $address;
-            $this->_modified_fields['address'] = true;
+        if ($this->address !== $address) {
+            $this->address = $address;
+            $this->modified_fields['address'] = true;
         }
 
         return $this;
@@ -526,9 +526,9 @@ class Lieu extends ObjectModel
      */
     public function setIdCity(int $id_city): object
     {
-        if ($this->_id_city !== $id_city) {
-            $this->_id_city = $id_city;
-            $this->_modified_fields['id_city'] = true;
+        if ($this->city !== $id_city) {
+            $this->city = $id_city;
+            $this->modified_fields['id_city'] = true;
         }
 
         return $this;
@@ -549,9 +549,9 @@ class Lieu extends ObjectModel
             $id_departement = 'ext';
         }
 
-        if ($this->_id_departement !== $id_departement) {
-            $this->_id_departement = $id_departement;
-            $this->_modified_fields['id_departement'] = true;
+        if ($this->departement !== $id_departement) {
+            $this->departement = $id_departement;
+            $this->modified_fields['id_departement'] = true;
         }
 
         return $this;
@@ -566,9 +566,9 @@ class Lieu extends ObjectModel
      */
     public function setIdRegion(string $id_region): object
     {
-        if ($this->_id_region !== $id_region) {
-            $this->_id_region = $id_region;
-            $this->_modified_fields['id_region'] = true;
+        if ($this->region !== $id_region) {
+            $this->region = $id_region;
+            $this->modified_fields['id_region'] = true;
         }
 
         return $this;
@@ -583,9 +583,9 @@ class Lieu extends ObjectModel
      */
     public function setIdCountry(string $id_country): object
     {
-        if ($this->_id_country !== $id_country) {
-            $this->_id_country = $id_country;
-            $this->_modified_fields['id_country'] = true;
+        if ($this->country !== $id_country) {
+            $this->country = $id_country;
+            $this->modified_fields['id_country'] = true;
         }
 
         return $this;
@@ -600,9 +600,9 @@ class Lieu extends ObjectModel
      */
     public function setText(string $text): object
     {
-        if ($this->_text !== $text) {
-            $this->_text = $text;
-            $this->_modified_fields['text'] = true;
+        if ($this->text !== $text) {
+            $this->text = $text;
+            $this->modified_fields['text'] = true;
         }
 
         return $this;
@@ -617,9 +617,9 @@ class Lieu extends ObjectModel
      */
     public function setSite(string $site): object
     {
-        if ($this->_site !== $site) {
-            $this->_site = $site;
-            $this->_modified_fields['site'] = true;
+        if ($this->site !== $site) {
+            $this->site = $site;
+            $this->modified_fields['site'] = true;
         }
 
         return $this;
@@ -634,9 +634,9 @@ class Lieu extends ObjectModel
      */
     public function setIdContact(int $id_contact): object
     {
-        if ($this->_id_contact !== $id_contact) {
-            $this->_id_contact = $id_contact;
-            $this->_modified_fields['id_contact'] = true;
+        if ($this->contact !== $id_contact) {
+            $this->contact = $id_contact;
+            $this->modified_fields['id_contact'] = true;
         }
 
         return $this;
@@ -651,9 +651,9 @@ class Lieu extends ObjectModel
      */
     public function setLat(float $lat): object
     {
-        if ($this->_lat !== $lat) {
-            $this->_lat = $lat;
-            $this->_modified_fields['lat'] = true;
+        if ($this->lat !== $lat) {
+            $this->lat = $lat;
+            $this->modified_fields['lat'] = true;
         }
 
         return $this;
@@ -668,9 +668,9 @@ class Lieu extends ObjectModel
      */
     public function setLng(float $lng): object
     {
-        if ($this->_lng !== $lng) {
-            $this->_lng = $lng;
-            $this->_modified_fields['lng'] = true;
+        if ($this->lng !== $lng) {
+            $this->lng = $lng;
+            $this->modified_fields['lng'] = true;
         }
 
         return $this;
@@ -685,9 +685,9 @@ class Lieu extends ObjectModel
      */
     public function setCreatedAt(string $created_at): object
     {
-        if ($this->_created_at !== $created_at) {
-            $this->_created_at = $created_at;
-            $this->_modified_fields['created_at'] = true;
+        if ($this->created_at !== $created_at) {
+            $this->created_at = $created_at;
+            $this->modified_fields['created_at'] = true;
         }
 
         return $this;
@@ -702,9 +702,9 @@ class Lieu extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_created_at !== $now) {
-            $this->_created_at = $now;
-            $this->_modified_fields['created_at'] = true;
+        if ($this->created_at !== $now) {
+            $this->created_at = $now;
+            $this->modified_fields['created_at'] = true;
         }
 
         return $this;
@@ -719,9 +719,9 @@ class Lieu extends ObjectModel
      */
     public function setModifiedAt(string $modified_at): object
     {
-        if ($this->_modified_at !== $modified_at) {
-            $this->_modified_at = $modified_at;
-            $this->_modified_fields['modified_at'] = true;
+        if ($this->modified_at !== $modified_at) {
+            $this->modified_at = $modified_at;
+            $this->modified_fields['modified_at'] = true;
         }
 
         return $this;
@@ -736,9 +736,9 @@ class Lieu extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->_modified_at != $now) {
-            $this->_modified_at = $now;
-            $this->_modified_fields['modified_at'] = true;
+        if ($this->modified_at != $now) {
+            $this->modified_at = $now;
+            $this->modified_fields['modified_at'] = true;
         }
 
         return $this;
@@ -753,9 +753,9 @@ class Lieu extends ObjectModel
      */
     public function setOnline(bool $online): object
     {
-        if ($this->_online !== $online) {
-            $this->_online = $online;
-            $this->_modified_fields['online'] = true;
+        if ($this->online !== $online) {
+            $this->online = $online;
+            $this->modified_fields['online'] = true;
         }
 
         return $this;
@@ -767,7 +767,7 @@ class Lieu extends ObjectModel
      * Suppression d'un lieu
      *
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     public function delete(): bool
     {
@@ -845,7 +845,7 @@ class Lieu extends ObjectModel
             $sql .= "AND `id_city` = '" . (int) $params['id_city'] . "' ";
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
             $sql .= "ORDER BY `" . static::getDbPk() . "` ";
@@ -922,16 +922,16 @@ class Lieu extends ObjectModel
      * Retourne les infos sur un lieu
      *
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     protected function loadFromDb(): bool
     {
         if (!parent::loadFromDb()) {
-            throw new Exception('lieu introuvable');
+            throw new \Exception('lieu introuvable');
         }
 
         if (file_exists(self::getBasePath() . '/' . (string) $this->getIdLieu() . '.jpg')) {
-            $this->_photo_url = self::getBaseUrl() . '/' . (string) $this->getIdLieu() . '.jpg';
+            $this->photo_url = self::getBaseUrl() . '/' . (string) $this->getIdLieu() . '.jpg';
         }
 
         return true;

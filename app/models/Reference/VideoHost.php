@@ -19,29 +19,29 @@ class VideoHost extends Reference
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_video_host';
+    protected static string $pk = 'id_video_host';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_video_host';
+    protected static string $table = 'adhoc_video_host';
 
     /**
      * @var int
      */
-    protected int $_id_video_host = 0;
+    protected int $id_video_host = 0;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_video_host' => 'int', // pk
         'name' => 'string',
     ];

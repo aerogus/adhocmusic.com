@@ -19,29 +19,29 @@ class TypeMusicien extends Reference
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_type_musicien';
+    protected static string $pk = 'id_type_musicien';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_type_musicien';
+    protected static string $table = 'adhoc_type_musicien';
 
     /**
      * @var int
      */
-    protected int $_id_type_musicien = 0;
+    protected int $id_type_musicien = 0;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_type_musicien' => 'int', // pk
         'name'             => 'string',
     ];

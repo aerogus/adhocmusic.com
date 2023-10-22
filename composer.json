@@ -30,6 +30,6 @@
             "php -S 0.0.0.0:8080 -t public"
         ],
         "stan": "./vendor/bin/phpstan analyse --memory-limit 512M",
-        "cs": "./vendor/bin/phpcs --standard=PSR12 --colors -n ./app"
+        "cs": "./vendor/bin/phpcs --standard=PSR12 --colors ./app"
     }
 }

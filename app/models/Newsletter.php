@@ -28,44 +28,44 @@ class Newsletter extends ObjectModel
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_newsletter';
+    protected static string $pk = 'id_newsletter';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_newsletter';
+    protected static string $table = 'adhoc_newsletter';
 
     /**
      * @var int
      */
-    protected int $_id_newsletter = 0;
+    protected int $id_newsletter = 0;
 
     /**
      * @var string
      */
-    protected string $_title = '';
+    protected string $title = '';
 
     /**
      * @var string
      */
-    protected string $_content = '';
+    protected string $content = '';
 
     /**
      * @var string
      */
-    protected string $_html = '';
+    protected string $html = '';
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_newsletter' => 'int', // pk
         'title'         => 'string',
         'content'       => 'string',
@@ -75,12 +75,12 @@ class Newsletter extends ObjectModel
     /**
      * @var int
      */
-    protected int $_id_contact = 0;
+    protected int $id_contact = 0;
 
     /**
      * @var array
      */
-    protected array $_tpl_vars = [];
+    protected array $tpl_vars = [];
 
     /**
      * @return string
@@ -105,7 +105,7 @@ class Newsletter extends ObjectModel
      */
     public function getIdNewsletter(): int
     {
-        return $this->_id_newsletter;
+        return $this->newsletter;
     }
 
     /**
@@ -131,7 +131,7 @@ class Newsletter extends ObjectModel
      */
     public function getContent(): string
     {
-        return $this->_content;
+        return $this->content;
     }
 
     /**
@@ -141,7 +141,7 @@ class Newsletter extends ObjectModel
      */
     public function getHtml(): string
     {
-        return $this->_html;
+        return $this->html;
     }
 
     /**
@@ -154,8 +154,8 @@ class Newsletter extends ObjectModel
 
         // set des variables de templates
         $html = str_replace(
-            array_keys($this->_tpl_vars),
-            array_values($this->_tpl_vars),
+            array_keys($this->tpl_vars),
+            array_values($this->tpl_vars),
             $html
         );
 
@@ -192,7 +192,7 @@ class Newsletter extends ObjectModel
      */
     public function getIdContact(): int
     {
-        return $this->_id_contact;
+        return $this->contact;
     }
 
     /**
@@ -204,7 +204,7 @@ class Newsletter extends ObjectModel
      */
     public function setIdContact(int $id_contact): object
     {
-        $this->_id_contact = $id_contact;
+        $this->contact = $id_contact;
 
         return $this;
     }
@@ -219,7 +219,7 @@ class Newsletter extends ObjectModel
      */
     public function setTplVar($key, $val): object
     {
-        $this->_tpl_vars[$key] = $val;
+        $this->tpl_vars[$key] = $val;
 
         return $this;
     }
@@ -233,9 +233,9 @@ class Newsletter extends ObjectModel
      */
     public function setHtml(string $html): object
     {
-        if ($this->_html !== $html) {
-            $this->_html = $html;
-            $this->_modified_fields['html'] = true;
+        if ($this->html !== $html) {
+            $this->html = $html;
+            $this->modified_fields['html'] = true;
         }
 
         return $this;
@@ -250,9 +250,9 @@ class Newsletter extends ObjectModel
      */
     public function setContent(string $content): object
     {
-        if ($this->_content !== $content) {
-            $this->_content = $content;
-            $this->_modified_fields['content'] = true;
+        if ($this->content !== $content) {
+            $this->content = $content;
+            $this->modified_fields['content'] = true;
         }
 
         return $this;
@@ -275,7 +275,7 @@ class Newsletter extends ObjectModel
      */
     public function getTitle(): string
     {
-        return $this->_title;
+        return $this->title;
     }
 
     /**
@@ -287,9 +287,9 @@ class Newsletter extends ObjectModel
      */
     public function setTitle(string $title): object
     {
-        if ($this->_title !== $title) {
-            $this->_title = $title;
-            $this->_modified_fields['title'] = true;
+        if ($this->title !== $title) {
+            $this->title = $title;
+            $this->modified_fields['title'] = true;
         }
 
         return $this;
@@ -302,17 +302,17 @@ class Newsletter extends ObjectModel
      */
     public function getId(): int
     {
-        return $this->_id_newsletter;
+        return $this->newsletter;
     }
 
     /**
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     protected function loadFromDb(): bool
     {
         if (!parent::loadFromDb()) {
-            throw new Exception('id_newsletter introuvable');
+            throw new \Exception('id_newsletter introuvable');
         }
 
         return true;
@@ -332,10 +332,10 @@ class Newsletter extends ObjectModel
 
         $sql = "SELECT `id_newsletter` FROM `" . Newsletter::getDbTable() . "` WHERE 1 ";
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
-            $sql .= "ORDER BY `" . static::$_pk . "` ";
+            $sql .= "ORDER BY `" . static::$pk . "` ";
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
@@ -499,7 +499,7 @@ class Newsletter extends ObjectModel
                  . "(`date`, `id_newsletter`, `id_contact`, `url`, `ip`, `host`, `useragent`) "
                  . "VALUES(NOW(), " . (int) $id_newsletter . ", " . (int) $id_contact . ", '" . $db->escape($url) . "', '" . $db->escape($ip) . "', '" . $db->escape($host) . "', '" . $db->escape($useragent) . "    ')";
             $res = $db->query($sql);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // rien
         }
     }

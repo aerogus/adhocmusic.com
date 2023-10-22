@@ -20,39 +20,39 @@ class WorldRegion extends Reference
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string|array<string>
      */
-    protected static array|string $_pk = ['id_country', 'id_region'];
+    protected static array|string $pk = ['id_country', 'id_region'];
 
     /**
      * @var string
      */
-    protected static string $_table = 'geo_world_region';
+    protected static string $table = 'geo_world_region';
 
     /**
      * @var ?string
      */
-    protected ?string $_id_country = null;
+    protected ?string $id_country = null;
 
     /**
      * @var ?string
      */
-    protected ?string $_id_region = null;
+    protected ?string $id_region = null;
 
     /**
      * @var ?string
      */
-    protected ?string $_name = null;
+    protected ?string $name = null;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_country' => 'string', // pk
         'id_region'  => 'string', // pk
         'name'       => 'string',
@@ -65,7 +65,7 @@ class WorldRegion extends Reference
      */
     public function getIdCountry(): string
     {
-        return $this->_id_country;
+        return $this->country;
     }
 
     /**
@@ -73,7 +73,7 @@ class WorldRegion extends Reference
      */
     public function getIdRegion(): string
     {
-        return $this->_id_region;
+        return $this->region;
     }
 
     /* fin getters */
@@ -106,10 +106,10 @@ class WorldRegion extends Reference
             $sql .= "AND `id_country` = '" . $db->escape($params['id_country']) . "' ";
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
-            $sql .= "ORDER BY `" . static::$_pk[1] . "` "; // tri par région
+            $sql .= "ORDER BY `" . static::$pk[1] . "` "; // tri par région
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {

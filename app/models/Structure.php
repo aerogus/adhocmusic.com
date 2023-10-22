@@ -17,74 +17,74 @@ class Structure extends ObjectModel
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_structure';
+    protected static string $pk = 'id_structure';
 
     /**
      * @var string
      */
-    protected static string $_table = 'adhoc_structure';
+    protected static string $table = 'adhoc_structure';
 
     /**
      * @var int
      */
-    protected int $_id_structure = 0;
+    protected int $id_structure = 0;
 
     /**
      * @var string
      */
-    protected string $_name = '';
+    protected string $name = '';
 
     /**
      * @var string
      */
-    protected string $_address = '';
+    protected string $address = '';
 
     /**
      * @var ?string
      */
-    protected ?string $_cp = null;
+    protected ?string $cp = null;
 
     /**
      * @var ?string
      */
-    protected ?string $_city = null;
+    protected ?string $city = null;
 
     /**
      * @var string
      */
-    protected string $_id_country = '';
+    protected string $id_country = '';
 
     /**
      * @var string
      */
-    protected string $_id_departement = '';
+    protected string $id_departement = '';
 
     /**
      * @var string
      */
-    protected string $_text = '';
+    protected string $text = '';
 
     /**
      * @var string
      */
-    protected string $_site = '';
+    protected string $site = '';
 
     /**
      * @var string
      */
-    protected string $_email = '';
+    protected string $email = '';
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_structure'   => 'int', // pk
         'name'           => 'string',
         'address'        => 'string',
@@ -121,7 +121,7 @@ class Structure extends ObjectModel
      */
     public function getName(): string
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -129,7 +129,7 @@ class Structure extends ObjectModel
      */
     public function getAddress(): string
     {
-        return $this->_address;
+        return $this->address;
     }
 
     /**
@@ -137,7 +137,7 @@ class Structure extends ObjectModel
      */
     public function getCp(): string
     {
-        return $this->_cp;
+        return $this->cp;
     }
 
     /**
@@ -145,7 +145,7 @@ class Structure extends ObjectModel
      */
     public function getCity(): string
     {
-        return $this->_city;
+        return $this->city;
     }
 
     /**
@@ -153,7 +153,7 @@ class Structure extends ObjectModel
      */
     public function getIdDepartement(): string
     {
-        return $this->_id_departement;
+        return $this->id_departement;
     }
 
     /**
@@ -161,7 +161,7 @@ class Structure extends ObjectModel
      */
     public function getText(): string
     {
-        return $this->_text;
+        return $this->text;
     }
 
     /**
@@ -169,7 +169,7 @@ class Structure extends ObjectModel
      */
     public function getSite(): string
     {
-        return $this->_site;
+        return $this->site;
     }
 
     /**
@@ -177,7 +177,7 @@ class Structure extends ObjectModel
      */
     public function getEmail(): string
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -185,7 +185,7 @@ class Structure extends ObjectModel
      */
     public function getIdCountry(): string
     {
-        return $this->_id_country;
+        return $this->id_country;
     }
 
     /**
@@ -217,9 +217,9 @@ class Structure extends ObjectModel
      */
     public function setName(string $name): object
     {
-        if ($this->_name !== $name) {
-            $this->_name = $name;
-            $this->_modified_fields['name'] = true;
+        if ($this->name !== $name) {
+            $this->name = $name;
+            $this->modified_fields['name'] = true;
         }
 
         return $this;
@@ -232,9 +232,9 @@ class Structure extends ObjectModel
      */
     public function setAddress(string $address): object
     {
-        if ($this->_address !== $address) {
-            $this->_address = $address;
-            $this->_modified_fields['address'] = true;
+        if ($this->address !== $address) {
+            $this->address = $address;
+            $this->modified_fields['address'] = true;
         }
 
         return $this;
@@ -247,9 +247,9 @@ class Structure extends ObjectModel
      */
     public function setCp(string $cp): object
     {
-        if ($this->_cp !== $cp) {
-            $this->_cp = $cp;
-            $this->_modified_fields['cp'] = true;
+        if ($this->cp !== $cp) {
+            $this->cp = $cp;
+            $this->modified_fields['cp'] = true;
         }
 
         return $this;
@@ -262,9 +262,9 @@ class Structure extends ObjectModel
      */
     public function setCity(string $city): object
     {
-        if ($this->_city !== $city) {
-            $this->_city = $city;
-            $this->_modified_fields['city'] = true;
+        if ($this->city !== $city) {
+            $this->city = $city;
+            $this->modified_fields['city'] = true;
         }
 
         return $this;
@@ -277,9 +277,9 @@ class Structure extends ObjectModel
      */
     public function setIdDepartement(string $id_departement): object
     {
-        if ($this->_id_departement !== $id_departement) {
-            $this->_id_departement = $id_departement;
-            $this->_modified_fields['id_departement'] = true;
+        if ($this->id_departement !== $id_departement) {
+            $this->id_departement = $id_departement;
+            $this->modified_fields['id_departement'] = true;
         }
 
         return $this;
@@ -292,9 +292,9 @@ class Structure extends ObjectModel
      */
     public function setText(string $text): object
     {
-        if ($this->_text !== $text) {
-            $this->_text = $text;
-            $this->_modified_fields['text'] = true;
+        if ($this->text !== $text) {
+            $this->text = $text;
+            $this->modified_fields['text'] = true;
         }
 
         return $this;
@@ -307,9 +307,9 @@ class Structure extends ObjectModel
      */
     public function setSite(string $site): object
     {
-        if ($this->_site !== $site) {
-            $this->_site = $site;
-            $this->_modified_fields['site'] = true;
+        if ($this->site !== $site) {
+            $this->site = $site;
+            $this->modified_fields['site'] = true;
         }
 
         return $this;
@@ -322,9 +322,9 @@ class Structure extends ObjectModel
      */
     public function setEmail(string $email): object
     {
-        if ($this->_email !== $email) {
-            $this->_email = $email;
-            $this->_modified_fields['email'] = true;
+        if ($this->email !== $email) {
+            $this->email = $email;
+            $this->modified_fields['email'] = true;
         }
 
         return $this;
@@ -337,9 +337,9 @@ class Structure extends ObjectModel
      */
     public function setIdCountry(string $id_country): object
     {
-        if ($this->_id_country !== $id_country) {
-            $this->_id_country = $id_country;
-            $this->_modified_fields['id_country'] = true;
+        if ($this->id_country !== $id_country) {
+            $this->id_country = $id_country;
+            $this->modified_fields['id_country'] = true;
         }
 
         return $this;
@@ -351,12 +351,12 @@ class Structure extends ObjectModel
      * Suppression d'une structure
      *
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     public function delete()
     {
         if (parent::delete()) {
-            $pngFile = self::getBasePath() . '/' . $this->_id_structure . '.png';
+            $pngFile = self::getBasePath() . '/' . $this->id_structure . '.png';
             if (file_exists($pngFile)) {
                 unlink($pngFile);
             }
@@ -416,7 +416,7 @@ class Structure extends ObjectModel
             }
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
             $sql .= "ORDER BY `" . static::getDbPk() . "` ";

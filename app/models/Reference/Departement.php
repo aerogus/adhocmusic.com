@@ -20,34 +20,34 @@ class Departement extends Reference
      *
      * @var object
      */
-    protected static $_instance = null;
+    protected static $instance = null;
 
     /**
      * @var string
      */
-    protected static string $_pk = 'id_departement';
+    protected static string $pk = 'id_departement';
 
     /**
      * @var string
      */
-    protected static string $_table = 'geo_fr_departement';
+    protected static string $table = 'geo_fr_departement';
 
     /**
      * @var ?string
      */
-    protected ?string $_id_departement = null;
+    protected ?string $id_departement = null;
 
     /**
      * @var ?string
      */
-    protected ?string $_id_region = null;
+    protected ?string $id_region = null;
 
     /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
      */
-    protected static $_all_fields = [
+    protected static array $all_fields = [
         'id_departement' => 'string', // pk
         'id_region'      => 'string',
         'name'           => 'string',
@@ -60,7 +60,7 @@ class Departement extends Reference
      */
     public function getIdDepartement(): ?string
     {
-        return $this->_id_departement;
+        return $this->departement;
     }
 
     /**
@@ -68,7 +68,7 @@ class Departement extends Reference
      */
     public function getIdRegion(): ?string
     {
-        return $this->_id_region;
+        return $this->region;
     }
 
     /* fin getters */
@@ -103,10 +103,10 @@ class Departement extends Reference
             $sql .= "AND `id_region` = '" . $db->escape($params['id_region']) . "' ";
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$_all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
-            $sql .= "ORDER BY `" . static::$_pk . "` ";
+            $sql .= "ORDER BY `" . static::$pk . "` ";
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {

@@ -69,7 +69,7 @@ class Log
      * @var array<int,string>
      * @todo migrer dans LogAction
      */
-    protected static array $_actions = [
+    protected static array $actions = [
         self::ACTION_MEMBER_CREATE         => "Création d'un compte membre",
         self::ACTION_MEMBER_EDIT           => "Edition d'un compte membre",
         self::ACTION_MEMBER_DELETE         => "Suppression d'un compte membre",
@@ -123,12 +123,12 @@ class Log
     /**
      * @var string
      */
-    protected static $_log_file = null;
+    protected static $log_file = null;
 
     /**
      * @var string
      */
-    protected static $_log = '';
+    protected static $log = '';
 
     /**
      * @param string $file file
@@ -166,15 +166,15 @@ class Log
 
         $extra = (string) $extra;
 
-        self::doWrite('action', 'membre=' . $pseudo . ' (' . $id_contact . ') - action=' . self::$_actions[$action] . ' -  extra=' . $extra);
+        self::doWrite('action', 'membre=' . $pseudo . ' (' . $id_contact . ') - action=' . self::$actions[$action] . ' -  extra=' . $extra);
 
         Email::send(
             DEBUG_EMAIL,
-            '[log-action] ' . $pseudo . ' ' . self::$_actions[$action],
+            '[log-action] ' . $pseudo . ' ' . self::$actions[$action],
             'log-action',
             [
                 'pseudo' => $pseudo,
-                'action' => self::$_actions[$action],
+                'action' => self::$actions[$action],
                 'extra'  => $extra,
             ]
         );
@@ -201,21 +201,21 @@ class Log
      */
     protected static function doWrite(string $type, string $text, bool $save = false)
     {
-        self::$_log_file = ADHOC_ROOT_PATH . '/log/' . strtolower(substr($type, 0, 12)) . '.log';
+        self::$log_file = ADHOC_ROOT_PATH . '/log/' . strtolower(substr($type, 0, 12)) . '.log';
 
-        if (!file_exists(self::$_log_file)) {
-            touch(self::$_log_file);
+        if (!file_exists(self::$log_file)) {
+            touch(self::$log_file);
         }
 
         $line = date('Y-m-d H:i:s') . ' - ' . $text;
 
         if ($save) {
-            self::$_log .= $line . "\n";
+            self::$log .= $line . "\n";
         }
 
         $out = false;
-        if (is_writable(self::$_log_file)) {
-            if ($fp = fopen(self::$_log_file, "a+")) {
+        if (is_writable(self::$log_file)) {
+            if ($fp = fopen(self::$log_file, "a+")) {
                 if (fwrite($fp, $line . "\n") !== false) {
                     $out = true;
                 }
@@ -248,7 +248,7 @@ class Log
         $logs = $db->queryWithFetch($sql);
 
         foreach ($logs as $key => $log) {
-            $logs[$key]['actionlib'] = self::$_actions[$log['action']];
+            $logs[$key]['actionlib'] = self::$actions[$log['action']];
         }
 
         return $logs;
@@ -259,7 +259,7 @@ class Log
      */
     public static function getLog(): string
     {
-        return self::$_log;
+        return self::$log;
     }
 
     /**
@@ -267,6 +267,6 @@ class Log
      */
     public static function getActions(): array
     {
-        return self::$_actions;
+        return self::$actions;
     }
 }
