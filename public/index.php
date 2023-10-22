@@ -7,6 +7,10 @@
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 
+use Adhoc\Model\CMS;
+use Adhoc\Model\Groupe;
+use Adhoc\Model\Route;
+
 if (file_exists(__DIR__ . '/../../app/bootstrap.php')) {
     include __DIR__ . '/../../app/bootstrap.php'; // ./tmpfs/www -> ./app : "../.."
 } elseif (file_exists(__DIR__ . '/../app/bootstrap.php')) {

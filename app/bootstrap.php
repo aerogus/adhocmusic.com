@@ -10,12 +10,13 @@
 declare(strict_types=1);
 
 use Adhoc\Model\Conf;
+use Adhoc\Model\Tools;
 
 define('ADHOC_ROOT_PATH', dirname(__DIR__));
 define('ADHOC_LIB_PATH', ADHOC_ROOT_PATH . '/models');
 define('ADHOC_ROUTES_FILE', ADHOC_ROOT_PATH . '/app/routes');
 define('ADHOC_LOG_PATH', ADHOC_ROOT_PATH . '/log');
-define('DEFAULT_CONTROLLERS_PATH', ADHOC_ROOT_PATH . '/app/controllers/');
+define('DEFAULT_CONTROLLERS_PATH', ADHOC_ROOT_PATH . '/app/src/Adhoc/Controller/');
 define('MEDIA_PATH', ADHOC_ROOT_PATH . '/static/media');
 
 define('OBJECT_CACHE_PATH', ADHOC_ROOT_PATH . '/tmpfs/objects');
@@ -39,7 +40,7 @@ if (!is_dir(SMARTY_TEMPLATE_C_PATH)) {
 function autoload(string $className)
 {
     $className = str_replace('\\', '/', $className);
-    $classPath = __DIR__ . '/models/' . $className . '.php';
+    $classPath = __DIR__ . '/src/' . $className . '.php';
     if (file_exists($classPath)) {
         include $classPath;
     }
