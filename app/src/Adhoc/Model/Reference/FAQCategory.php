@@ -1,0 +1,48 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Reference;
+
+use Reference;
+
+/**
+ * Classe de gestion des catégories de FAQ
+ *
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
+ */
+class FAQCategory extends Reference
+{
+    /**
+     * Instance de l'objet
+     *
+     * @var object
+     */
+    protected static $instance = null;
+
+    /**
+     * @var string|array<string>
+     */
+    protected static string|array $pk = 'id_faq_category';
+
+    /**
+     * @var string
+     */
+    protected static string $table = 'adhoc_faq_category';
+
+    /**
+     * @var int
+     */
+    protected int $id_faq_category = 0;
+
+    /**
+     * Liste des attributs de l'objet
+     *
+     * @var array<string,string>
+     */
+    protected static array $all_fields = [
+        'id_faq_category' => 'int', // pk
+        'name'            => 'string',
+    ];
+}
