@@ -13,6 +13,10 @@
 
 declare(strict_types=1);
 
+use Adhoc\Model\Newsletter;
+use Adhoc\Model\Log;
+use Adhoc\Model\Email;
+
 // on temporise l'envoi des mails.
 // 2sec = 30 mails/minute = 1800 mails/heure
 define('MAIL_SEND_DELAY', 1);

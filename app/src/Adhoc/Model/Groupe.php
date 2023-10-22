@@ -33,7 +33,7 @@ class Groupe extends ObjectModel
     /**
      * Tableau des états groupe
      *
-     * @var array
+     * @var array<int,string>
      */
     protected static $etats = [
         self::ETAT_ACTIF   => "Actif",
@@ -204,11 +204,11 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'id_groupe
      *
-     * @return string
+     * @return int
      */
     public function getIdGroupe(): int
     {
-        return $this->groupe;
+        return $this->id_groupe;
     }
 
     /**
@@ -344,7 +344,7 @@ class Groupe extends ObjectModel
      */
     public function getIdDepartement(): string
     {
-        return $this->departement;
+        return $this->id_departement;
     }
 
     /**
@@ -715,8 +715,8 @@ class Groupe extends ObjectModel
      */
     public function setIdDepartement(string $id_departement): object
     {
-        if ($this->departement !== $id_departement) {
-            $this->departement = $id_departement;
+        if ($this->id_departement !== $id_departement) {
+            $this->id_departement = $id_departement;
             $this->modified_fields['id_departement'] = true;
         }
 

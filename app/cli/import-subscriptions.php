@@ -10,6 +10,8 @@
 
 declare(strict_types=1);
 
+use Adhoc\Model\Subscription;
+
 require_once __DIR__ . '/../bootstrap.php';
 
 define('IMPORT_FILE', __DIR__ . '/subscriptions.csv');

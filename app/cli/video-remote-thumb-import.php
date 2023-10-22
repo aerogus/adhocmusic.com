@@ -10,6 +10,8 @@
 
 declare(strict_types=1);
 
+use Adhoc\Model\Video;
+
 require_once __DIR__ . '/../bootstrap.php';
 
 $videos = Video::find(

@@ -108,7 +108,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('/css/baguetteBox-1.11.1.min.css');
+        $smarty->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
 
         $smarty->enqueueScript('/js/masonry-4.2.2.min.js');
         $smarty->enqueueScript('/js/imagesloaded-4.1.4.min.js');
@@ -203,7 +203,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('/css/jquery-ui.min.css');
+        $smarty->enqueueStyle('/css/jquery-ui.min.css');
 
         $smarty->enqueueScript('/js/jquery-ui.min.js');
         $smarty->enqueueScript('/js/jquery-ui-datepicker-fr.js');
@@ -464,7 +464,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('/css/jquery-ui.min.css');
+        $smarty->enqueueStyle('/css/jquery-ui.min.css');
 
         $smarty->enqueueScript('/js/jquery-ui.min.js');
         $smarty->enqueueScript('/js/jquery-ui-datepicker-fr.js');

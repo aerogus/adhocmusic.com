@@ -175,7 +175,7 @@ class Lieu extends ObjectModel
      */
     public function getIdLieu(): int
     {
-        return $this->lieu;
+        return $this->id_lieu;
     }
 
     /**
@@ -185,7 +185,7 @@ class Lieu extends ObjectModel
      */
     public function getIdType(): int
     {
-        return $this->type;
+        return $this->id_type;
     }
 
     /**
@@ -195,7 +195,7 @@ class Lieu extends ObjectModel
      */
     public function getType(): string
     {
-        return self::getTypeName($this->type);
+        return self::getTypeName($this->id_type);
     }
 
     /**
@@ -226,7 +226,7 @@ class Lieu extends ObjectModel
      */
     public function getIdCity(): int
     {
-        return $this->city;
+        return $this->id_city;
     }
 
     /**
@@ -246,7 +246,7 @@ class Lieu extends ObjectModel
      */
     public function getIdDepartement(): string
     {
-        return $this->departement;
+        return $this->id_departement;
     }
 
     /**
@@ -266,7 +266,7 @@ class Lieu extends ObjectModel
      */
     public function getIdRegion(): string
     {
-        return $this->region;
+        return $this->id_region;
     }
 
     /**
@@ -291,7 +291,7 @@ class Lieu extends ObjectModel
      */
     public function getIdCountry(): string
     {
-        return $this->country;
+        return $this->id_country;
     }
 
     /**
@@ -331,7 +331,7 @@ class Lieu extends ObjectModel
      */
     public function getIdContact(): int
     {
-        return $this->contact;
+        return $this->id_contact;
     }
 
     /**
@@ -475,8 +475,8 @@ class Lieu extends ObjectModel
      */
     public function setIdType(int $id_type): object
     {
-        if ($this->type !== $id_type) {
-            $this->type = $id_type;
+        if ($this->id_type !== $id_type) {
+            $this->id_type = $id_type;
             $this->modified_fields['id_type'] = true;
         }
 
@@ -526,8 +526,8 @@ class Lieu extends ObjectModel
      */
     public function setIdCity(int $id_city): object
     {
-        if ($this->city !== $id_city) {
-            $this->city = $id_city;
+        if ($this->id_city !== $id_city) {
+            $this->id_city = $id_city;
             $this->modified_fields['id_city'] = true;
         }
 
@@ -549,8 +549,8 @@ class Lieu extends ObjectModel
             $id_departement = 'ext';
         }
 
-        if ($this->departement !== $id_departement) {
-            $this->departement = $id_departement;
+        if ($this->id_departement !== $id_departement) {
+            $this->id_departement = $id_departement;
             $this->modified_fields['id_departement'] = true;
         }
 
@@ -566,8 +566,8 @@ class Lieu extends ObjectModel
      */
     public function setIdRegion(string $id_region): object
     {
-        if ($this->region !== $id_region) {
-            $this->region = $id_region;
+        if ($this->id_region !== $id_region) {
+            $this->id_region = $id_region;
             $this->modified_fields['id_region'] = true;
         }
 
@@ -583,8 +583,8 @@ class Lieu extends ObjectModel
      */
     public function setIdCountry(string $id_country): object
     {
-        if ($this->country !== $id_country) {
-            $this->country = $id_country;
+        if ($this->id_country !== $id_country) {
+            $this->id_country = $id_country;
             $this->modified_fields['id_country'] = true;
         }
 
@@ -634,8 +634,8 @@ class Lieu extends ObjectModel
      */
     public function setIdContact(int $id_contact): object
     {
-        if ($this->contact !== $id_contact) {
-            $this->contact = $id_contact;
+        if ($this->id_contact !== $id_contact) {
+            $this->id_contact = $id_contact;
             $this->modified_fields['id_contact'] = true;
         }
 

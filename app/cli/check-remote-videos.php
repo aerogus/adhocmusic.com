@@ -3,6 +3,8 @@
 
 declare(strict_types=1);
 
+use Adhoc\Model\Video;
+
 require_once __DIR__ . '/../bootstrap.php';
 
 // vérifie si les vidéos distances sont tjrs valides / publiques

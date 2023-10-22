@@ -513,13 +513,13 @@ class Image
     {
         $this->calculTaille();
         $this->resize();
-        $this->display();
+        $this->doDisplay();
     }
 
     /**
      * Affichage de l'image à l'écran
      */
-    private function display()
+    private function doDisplay()
     {
         switch ($this->type) {
             case IMAGETYPE_GIF:
@@ -548,7 +548,7 @@ class Image
     {
         $this->calculTaille();
         $this->resize();
-        $this->write(false);
+        $this->doWrite(false);
     }
 
     /**
@@ -560,13 +560,13 @@ class Image
     {
         $this->calculTaille();
         $this->resize();
-        return $this->write(true);
+        return $this->doWrite(true);
     }
 
     /**
      * écriture des images générées
      */
-    private function write(bool $get_contents = false)
+    private function doWrite(bool $get_contents = false)
     {
         switch ($this->type) {
             case IMAGETYPE_GIF:

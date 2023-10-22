@@ -10,6 +10,8 @@
 
 declare(strict_types=1);
 
+use Adhoc\Model\Conf;
+
 require_once __DIR__ . '/../bootstrap.php';
 
 define('FB_OBJECT_ID', 211031683481100);

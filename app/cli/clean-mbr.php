@@ -15,6 +15,12 @@
 
 declare(strict_types=1);
 
+use Adhoc\Model\Membre;
+use Adhoc\Model\Photo;
+use Adhoc\Model\Audio;
+use Adhoc\Model\Video;
+use Adhoc\Model\Event;
+
 require_once __DIR__ . '/../bootstrap.php';
 
 if (empty($argv[1])) {

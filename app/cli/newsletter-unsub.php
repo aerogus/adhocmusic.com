@@ -3,6 +3,10 @@
 
 declare(strict_types=1);
 
+use Adhoc\Model\Email;
+use Adhoc\Model\Contact;
+use Adhoc\Model\Membre;
+
 require_once __DIR__ . '/../bootstrap.php';
 
 /**

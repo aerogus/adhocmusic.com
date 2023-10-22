@@ -5,6 +5,13 @@ declare(strict_types=1);
 namespace Adhoc\Controller;
 
 use Adhoc\Model\AdHocSmarty;
+use Adhoc\Model\Event;
+use Adhoc\Model\Featured;
+use Adhoc\Model\Image;
+use Adhoc\Model\Membre;
+use Adhoc\Model\Route;
+use Adhoc\Model\Tools;
+use Adhoc\Model\Trail;
 
 final class Controller
 {
@@ -64,7 +71,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('/css/jquery-ui.min.css');
+        $smarty->enqueueStyle('/css/jquery-ui.min.css');
 
         $smarty->enqueueScript('/js/jquery-ui.min.js');
         $smarty->enqueueScript('/js/jquery-ui-datepicker-fr.js');
@@ -151,7 +158,7 @@ final class Controller
 
         $smarty = new AdHocSmarty();
 
-        $smarty->enqueue_style('/css/jquery-ui.min.css');
+        $smarty->enqueueStyle('/css/jquery-ui.min.css');
 
         $smarty->enqueueScript('/js/jquery-ui.min.js');
         $smarty->enqueueScript('/js/jquery-ui-datepicker-fr.js');

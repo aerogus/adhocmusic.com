@@ -67,7 +67,7 @@ class MembreAdhoc extends Membre
      *
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      *
-     * @var array
+     * @var array<string<array<string,string>
      */
     protected $modified_fields = [
         'contact' => [],
@@ -290,7 +290,7 @@ class MembreAdhoc extends Membre
 
         if (!$this->getId()) { // INSERT
             /* table contact */
-            if ($id_contact = Contact::getIdByEmail($email)) {// BUG: D'OU SORT CE $email ???
+            if ($id_contact = Contact::getIdByEmail($email)) { // BUG: D'OU SORT CE $email ???
                 $this->setId($id_contact);
             } else {
                 $sql = "INSERT INTO `" . Contact::getDbTable() . "` (";
@@ -304,7 +304,7 @@ class MembreAdhoc extends Membre
 
                 if (count($this->modified_fields['contact']) > 0) {
                     foreach ($fields['contact'] as $field => $type) {
-                        $att = '_' . $field;
+                        $att = $field;
                         switch ($type) {
                             case 'int':
                             case 'float':

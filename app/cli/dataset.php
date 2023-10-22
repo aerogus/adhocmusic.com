@@ -5,12 +5,9 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../bootstrap.php';
 
-die('vraiment désactivé');
-
 if (ENV === 'PROD') {
     die('désactivé en PROD !!');
 }
-
 
 $classes = [
     'Event',

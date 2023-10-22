@@ -3,6 +3,8 @@
 
 declare(strict_types=1);
 
+use Adhoc\Model\Lieu;
+
 // récupère les lieux avec/sans événements
 
 require_once __DIR__ . '/../bootstrap.php';
@@ -14,7 +16,7 @@ $lieuxCount = Lieu::count();
 $lieuxWithEventsCount = count($lieuxWithEvents);
 $lieuxWithoutEventsCount = count($lieuxWithoutEvents);
 
-echo "nombre de lieux: {$lieuCount}\n";
+echo "nombre de lieux: {$lieuxCount}\n";
 
 echo "lieux avec événements ({$lieuxWithEventsCount}):\n";
 foreach ($lieuxWithEvents as $lieu) {

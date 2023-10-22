@@ -3,6 +3,10 @@
 
 declare(strict_types=1);
 
+use Adhoc\Model\Photo;
+use Adhoc\Model\Audio;
+use Adhoc\Model\Video;
+
 require_once __DIR__ . '/../bootstrap.php';
 
 // vérifie que les photos + vidéos + audios ont bien leur id_lieu et id_event synchro

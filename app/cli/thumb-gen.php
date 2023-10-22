@@ -3,6 +3,9 @@
 
 declare(strict_types=1);
 
+use Adhoc\Model\Conf;
+use Adhoc\Model\Photo;
+
 require_once __DIR__ . '/../bootstrap.php';
 
 /**

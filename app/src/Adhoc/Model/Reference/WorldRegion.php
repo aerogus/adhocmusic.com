@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Reference;
+namespace Adhoc\Model\Reference;
 
-use DataBase;
-use Reference;
+use Adhoc\Model\DataBase;
+use Adhoc\Model\Reference;
 
 /**
  * Classe WorldRegion
@@ -61,17 +61,17 @@ class WorldRegion extends Reference
     /* début getters */
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getIdCountry(): string
+    public function getIdCountry(): ?string
     {
         return $this->country;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getIdRegion(): string
+    public function getIdRegion(): ?string
     {
         return $this->region;
     }

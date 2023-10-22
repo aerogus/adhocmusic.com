@@ -12,6 +12,8 @@
 
 declare(strict_types=1);
 
+use Adhoc\Model\DataBase;
+
 require_once __DIR__ . '/../bootstrap.php';
 
 $db = DataBase::getInstance();

@@ -3,6 +3,8 @@
 
 declare(strict_types=1);
 
+use Adhoc\Model\Video;
+
 // migration champ video.id_groupe vers table video_groupe
 
 require_once __DIR__ . '/../bootstrap.php';

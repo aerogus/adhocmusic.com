@@ -122,8 +122,8 @@ final class Controller
             return $smarty->fetch('lieux/show.tpl');
         }
 
-        $smarty->enqueue_style('/css/baguetteBox-1.11.1.min.css');
-        $smarty->enqueue_style('/css/leaflet.css');
+        $smarty->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
+        $smarty->enqueueStyle('/css/leaflet.css');
 
         $smarty->enqueueScript('/js/masonry-4.2.2.min.js');
         $smarty->enqueueScript('/js/imagesloaded-4.1.4.min.js');

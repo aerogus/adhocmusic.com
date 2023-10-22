@@ -89,7 +89,7 @@ class Contact extends ObjectModel
      */
     public function getIdContact(): ?int
     {
-        return $this->contact;
+        return $this->id_contact;
     }
 
     /**
@@ -258,7 +258,7 @@ class Contact extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . Contact::getDbTable() . "` "
-             . "WHERE `id_contact` = " . (int) $this->contact;
+             . "WHERE `id_contact` = " . (int) $this->id_contact;
 
         $db->query($sql);
 
@@ -289,7 +289,7 @@ class Contact extends ObjectModel
 
             if (count($this->modified_fields['contact']) > 0) {
                 foreach ($fields['contact'] as $field => $type) {
-                    $att = '_' . $field;
+                    $att = $field;
                     if (is_null($this->$att)) {
                         $sql .= 'NULL,';
                     } else {
@@ -369,7 +369,7 @@ class Contact extends ObjectModel
 
             $sql = "UPDATE `" . Contact::getDbTable() . "` "
                  . "SET " . $fields_to_save . " "
-                 . "WHERE `id_contact` = " . (int) $this->contact;
+                 . "WHERE `id_contact` = " . (int) $this->id_contact;
 
             $this->modified_fields['contact'] = [];
 
