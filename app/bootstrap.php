@@ -1,13 +1,13 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Configuration générale
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
+
+declare(strict_types=1);
 
 define('ADHOC_ROOT_PATH', dirname(__DIR__));
 define('ADHOC_LIB_PATH', ADHOC_ROOT_PATH . '/models');

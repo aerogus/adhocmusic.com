@@ -1,13 +1,16 @@
 #!/usr/bin/env php
 <?php
 
-declare(strict_types=1);
-
 /**
  * Cohérence contenus
  *
  * Vérifie si un content du file system pas obsolète (ressource bdd effacée)
+ *
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
+
+declare(strict_types=1);
 
 require_once __DIR__ . '/../bootstrap.php';
 

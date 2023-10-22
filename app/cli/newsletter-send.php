@@ -1,14 +1,17 @@
 #!/usr/bin/env php
 <?php
 
-declare(strict_types=1);
-
 /**
  * Envoi d'une newsletter à l'ensemble des membres inscrits
  *
  * @param int    $argv[1] id_newsletter
  * @param string $argv[2] email (à implémenter)
+ *
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
+
+declare(strict_types=1);
 
 require_once __DIR__ . '/../bootstrap.php';
 
