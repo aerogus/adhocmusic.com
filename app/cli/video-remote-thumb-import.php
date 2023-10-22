@@ -1,14 +1,14 @@
 #!/usr/bin/env php
 <?php
 
-declare(strict_types=1);
-
 /**
  * Script pour récupérer / remplacer les imagettes vidéos
  *
  * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
+
+declare(strict_types=1);
 
 require_once __DIR__ . '/../bootstrap.php';
 

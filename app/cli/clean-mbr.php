@@ -1,8 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-declare(strict_types=1);
-
 /**
  * Efface un membre
  * + toutes ses photos
@@ -10,7 +8,12 @@ declare(strict_types=1);
  * + toutes ses vidéos
  * + tous ses sons
  * + liaison compte/groupe
+ *
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
+
+declare(strict_types=1);
 
 require_once __DIR__ . '/../bootstrap.php';
 

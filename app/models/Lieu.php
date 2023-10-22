@@ -899,7 +899,8 @@ class Lieu extends ObjectModel
             $tab[(string) $row['id_departement']][] = Lieu::getInstance((int) $row['id_lieu']);
         }
 
-        function sortLieuByCityName($a, $b) {
+        function sortLieuByCityName($a, $b)
+        {
             if ($a->getCity()->getName() === $b->getCity()->getName()) {
                 return 0;
             }

@@ -1,8 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-declare(strict_types=1);
-
 /**
  * Efface les groupes
  * + toutes leurs photos
@@ -11,7 +9,12 @@ declare(strict_types=1);
  * + tous leurs sons
  * + liaison compte/groupe
  * + liaison groupe/evenement
+ *
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
+
+declare(strict_types=1);
 
 require_once __DIR__ . '/../bootstrap.php';
 

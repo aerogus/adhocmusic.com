@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Classe de gestion des vidéos
+ *
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
+ */
+
 declare(strict_types=1);
 
 namespace Adhoc\Model;
@@ -87,12 +94,6 @@ define(
 define('MEDIA_ADHOCTUBE_HOST', 'videos.adhocmusic.com');
 define('MEDIA_ADHOCTUBE_URL_PATTERN', '~^https://' . MEDIA_ADHOCTUBE_HOST . '/videos/watch/([a-f0-9-]{36})~');
 
-/**
- * Classe de gestion des vidéos
- *
- * @package AdHoc
- * @author  Guillaume Seznec <guillaume@seznec.fr>
- */
 class Video extends Media
 {
     /**
@@ -678,11 +679,13 @@ class Video extends Media
                 $maxResUrl = "https://img.youtube.com/vi/{$reference}/maxresdefault.jpg"; // 1280*720 (pas tjrs là)
                 $hqResUrl = "https://img.youtube.com/vi/{$reference}/hqdefault.jpg"; // 480*360
                 return $hqResUrl; // retourne direct l'url hd plutôt que max
+                /*
                 $headers = get_headers($maxResUrl);
                 if (substr($headers[0], 9, 3) === '200') {
                     return $maxResUrl;
                 }
                 return $hqResUrl;
+                */
 
             case self::HOST_DAILYMOTION:
                 $headers = get_headers('https://www.dailymotion.com/thumbnail/video/' . $reference, true);

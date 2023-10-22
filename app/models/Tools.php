@@ -31,7 +31,8 @@ class Tools
             | \xF0[\x90-\xBF][\x80-\xBF]{2}
             | [\xF1-\xF3][\x80-\xBF]{3}
             | \xF4[\x80-\x8F][\x80-\xBF]{2}
-            )*$%xs', $string
+            )*$%xs',
+            $string
         );
     }
 
@@ -47,8 +48,7 @@ class Tools
      */
     public static function charSet(string $str, string $mode = 'UTF8'): string
     {
-        switch ($mode)
-        {
+        switch ($mode) {
             case 'ISO':
                 if (self::isUTF8($str)) {
                     $str = utf8_decode($str);
@@ -162,7 +162,7 @@ class Tools
      *
      * @return string
      */
-    public static function base64_url_encode(string $input): string
+    public static function base64UrlEncode(string $input): string
     {
         return strtr(base64_encode($input), '+/=', '-_,');
     }
@@ -172,7 +172,7 @@ class Tools
      *
      * @return string
      */
-    public static function base64_url_decode(string $input): string
+    public static function base64UrlDecode(string $input): string
     {
         return base64_decode(strtr($input, '-_,', '+/='));
     }
@@ -297,7 +297,7 @@ class Tools
      *
      * @return array
      */
-    public static function array_sort(array $array, $on, int $order = SORT_ASC): array
+    public static function arraySort(array $array, $on, int $order = SORT_ASC): array
     {
         $new_array = [];
         $sortable_array = [];

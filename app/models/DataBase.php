@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Gestion de la base MySQL
+ *
+ * @package AdHoc
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
+ */
+
 declare(strict_types=1);
 
 namespace Adhoc\Model;
@@ -13,12 +20,6 @@ define('DB_DUMMY_SEPARATOR', "\O"); /* à garder entre double quotes. */
 
 ini_set('mysql.connect_timeout', '2');
 
-/**
- * Gestion de la base MySQL
- *
- * @package AdHoc
- * @author  Guillaume Seznec <guillaume@seznec.fr>
- */
 class DataBase
 {
     /**

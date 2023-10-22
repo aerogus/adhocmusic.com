@@ -51,7 +51,7 @@ class Route
     /**
      * @param int $http_code n° de code http
      */
-    public static function set_http_code(int $http_code)
+    public static function setHttpCode(int $http_code)
     {
         self::$http_code = $http_code;
     }
@@ -59,7 +59,7 @@ class Route
     /**
      * @param array $params params
      */
-    public static function map_connect(array $params)
+    public static function mapConnect(array $params)
     {
         $extra_params = $params;
         foreach (['path', 'controller', 'action', 'method'] as $key) {
@@ -69,7 +69,8 @@ class Route
             $params['method'] = 'GET';
         }
         array_push(
-            self::$routes, [
+            self::$routes,
+            [
                 'controller' => $params['controller'],
                 'path' => $params['path'],
                 'splitted_path' => explode('/', $params['path']),
@@ -96,7 +97,7 @@ class Route
     /**
      * @param array $params paramètres
      */
-    public static function find_route(array $params)
+    public static function findRoute(array $params)
     {
         $response_format = DEFAULT_CONTROLLERS_FORMAT;
         $method = $params['method'];
@@ -131,7 +132,7 @@ class Route
             if (strcasecmp($route['method'], $method) !== 0) {
                 continue;
             }
-            $ret = self::_examine_splitted_paths(
+            $ret = self::examineSplittedPaths(
                 [
                     'route' => $route,
                     'splitted_path' => $splitted_path,
@@ -189,18 +190,18 @@ class Route
         if (isset($_SERVER['PATH_INFO'])) {
             $path = $_SERVER['PATH_INFO'];
         }
-        $ret = self::find_route(
+        $ret = self::findRoute(
             [
                 'method' => $method,
                 'path' => $path,
             ]
         );
         if ($ret === false) {
-            self::_route_log('-', '-', 'Route non trouvée : ' . $method . ' - ' . $path);
+            self::routeLog('-', '-', 'Route non trouvée : ' . $method . ' - ' . $path);
             header('HTTP/1.0 404 Not Found');
             die("HTTP 404 Not Found<script>window.location='" . HOME_URL . "/map?from=404'</script>");
         }
-        self::_init_params();
+        self::initParams();
         self::$action_params = array_merge(
             self::$action_params,
             $ret['extra_params']
@@ -211,13 +212,13 @@ class Route
         $controller = $route['controller'];
         $controller_file = self::$controllers_path . preg_replace('/[^a-z0-9-]/i', '_', $controller) . self::$controller_suffix;
         if (file_exists($controller_file) === false) {
-            self::_route_log($controller, $action, 'Contrôleur inaccessible');
+            self::routeLog($controller, $action, 'Contrôleur inaccessible');
             header('HTTP/1.0 503 Service Unavailable');
             die('HTTP 503 Service Unavailable');
         }
         include_once $controller_file;
         if (is_callable(['Controller', $action]) === false) {
-            self::_route_log($controller, $action, 'Action non implémentée dans le contrôleur');
+            self::routeLog($controller, $action, 'Action non implémentée dans le contrôleur');
             header('HTTP/1.0 501 Not implemented');
             die('HTTP 501 Not implemented');
         }
@@ -243,7 +244,7 @@ class Route
         }
 
         if ($ret === false) {
-            self::_route_log($controller, $action, 'Erreur generique');
+            self::routeLog($controller, $action, 'Erreur generique');
             header('HTTP/1.0 500 Internal Server Error');
             die('500 Internal Server Error');
         }
@@ -252,34 +253,34 @@ class Route
             switch (strtolower($response_format)) {
                 case 'jpeg':
                 case 'jpg':
-                    self::_output('image/jpeg', $ret);
+                    self::output('image/jpeg', $ret);
                     return true;
                 case 'gif':
-                    self::_output('image/gif', $ret);
+                    self::output('image/gif', $ret);
                     return true;
                 case 'png':
-                    self::_output('image/png', $ret);
+                    self::output('image/png', $ret);
                     return true;
                 case 'css':
-                    self::_output('text/css', $ret);
+                    self::output('text/css', $ret);
                     return true;
                 case 'js':
-                    self::_output('application/javascript', $ret);
+                    self::output('application/javascript', $ret);
                     return true;
                 case 'txt':
-                    self::_output('text/plain', Tools::htmlToText($ret));
+                    self::output('text/plain', Tools::htmlToText($ret));
                     return true;
                 case 'rss':
-                    self::_output('application/rss+xml', $ret);
+                    self::output('application/rss+xml', $ret);
                     return true;
                 case 'xml':
-                    self::_output('text/xml', $ret);
+                    self::output('text/xml', $ret);
                     return true;
                 case 'ics':
-                    self::_output('text/calendar', $ret);
+                    self::output('text/calendar', $ret);
                     return true;
                 case 'html':
-                    self::_output('text/html', $ret);
+                    self::output('text/html', $ret);
                     return true;
                 default:
                     return false;
@@ -287,13 +288,13 @@ class Route
         }
 
         if (!is_array($ret)) {
-            self::_route_log($controller, $action, 'Le retour n\'est pas un tableau');
+            self::routeLog($controller, $action, 'Le retour n\'est pas un tableau');
             header('HTTP/1.0 500 Internal Server Error');
             die('500 Internal Server Error');
         }
 
         if (isset($ret['return_code']) && $ret['return_code'] <= 0) {
-            self::_route_log(
+            self::routeLog(
                 $controller,
                 $action,
                 'Code de retour : [' . $ret['return_code'] . '] Erreur : [' . $ret['error_message'] . ']'
@@ -305,14 +306,14 @@ class Route
 
         switch (strtolower($response_format)) {
             case 'json':
-                self::_output('application/json', json_encode($ret));
+                self::output('application/json', json_encode($ret));
                 return true;
             case 'phpser':
-                //self::_output('application/php-serialized', serialize($ret));
-                self::_output('text/plain', serialize($ret));
+                //self::output('application/php-serialized', serialize($ret));
+                self::output('text/plain', serialize($ret));
                 return true;
             case 'txt':
-                self::_output('text/plain', print_r($ret, true));
+                self::output('text/plain', print_r($ret, true));
                 return true;
         }
 
@@ -323,7 +324,7 @@ class Route
     /**
      *
      */
-    protected static function _init_params()
+    protected static function initParams()
     {
         self::$action_params = array_merge(self::$action_params, $_GET);
         self::$action_params = array_merge(self::$action_params, $_POST);
@@ -332,7 +333,7 @@ class Route
     /**
      * @param array $params paramètres
      */
-    protected static function _examine_splitted_paths(array $params)
+    protected static function examineSplittedPaths(array $params)
     {
         $action = false;
         $extra_params = [];
@@ -347,13 +348,14 @@ class Route
         foreach ($route_splitted_path as $scanned_component) {
             $component = $splitted_path[$i];
             $i++;
-            if (($ret = self::_examine_splitted_path_component(
-                [
-                    'scanned_component' => $scanned_component,
-                    'component' => $component,
-                    'route' => $route
-                ]
-            )) === false
+            if (
+                ($ret = self::examineSplittedPathComponent(
+                    [
+                        'scanned_component' => $scanned_component,
+                        'component' => $component,
+                        'route' => $route
+                    ]
+                )) === false
             ) {
                 return false;
             }
@@ -379,7 +381,7 @@ class Route
     /**
      * @param array $params paramètres
      */
-    protected static function _examine_splitted_path_component(array $params)
+    protected static function examineSplittedPathComponent(array $params)
     {
         $found_action = false;
         $found_params = [];
@@ -435,7 +437,7 @@ class Route
      * @param string $content_type type de contenu
      * @param string $content      contenu
      */
-    protected static function _output(string $content_type, string $content)
+    protected static function output(string $content_type, string $content)
     {
         if ($content_type === 'application/xhtml+xml') {
             if (!(isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/xhtml+xml') !== false)) {
@@ -468,7 +470,7 @@ class Route
      * @param string $action     action
      * @param string $log        log
      */
-    protected static function _route_log(string $controller, string $action, string $log)
+    protected static function routeLog(string $controller, string $action, string $log)
     {
         $log_message = '[' . addcslashes($controller, "\r\n|[]") . '] ' .
                        '[' . addcslashes($action, "\r\n|[]") . '] ' .

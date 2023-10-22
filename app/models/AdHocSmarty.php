@@ -80,7 +80,7 @@ class AdHocSmarty extends Smarty
      *
      * @return string
      */
-    public static function function_pagination(array $params): string
+    public static function functionPagination(array $params): string
     {
         $out = '';
 
@@ -173,7 +173,7 @@ class AdHocSmarty extends Smarty
      *                      ['minute']
      *                      ['step']
      */
-    public static function function_html_input_date_hourminute(array $params): string
+    public static function functionHtmlInputDateHourminute(array $params): string
     {
         $hour = 0;
         if (array_key_exists('hour', $params)) {
@@ -212,7 +212,7 @@ class AdHocSmarty extends Smarty
      *                      ['month']
      *                      ['day']
      */
-    public static function function_calendar(array $params): string
+    public static function functionCalendar(array $params): string
     {
         $now  = time();
         $months = ['', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -277,7 +277,7 @@ class AdHocSmarty extends Smarty
         }
 
         // blancs de fin de mois
-        while ((($nb_days_in_month + $blank_days) % 7) !== 0 ) {
+        while ((($nb_days_in_month + $blank_days) % 7) !== 0) {
             $cal[$row][$trow]['num'] = null;
             $cal[$row][$trow]['link'] = null;
             $cal[$row][$trow]['title'] = null;
@@ -323,13 +323,13 @@ class AdHocSmarty extends Smarty
      *
      * @return string
      */
-    public static function modifier_format_size(int $size): string
+    public static function modifierFormatSize(int $size): string
     {
         $sizes = ["  o", " Ko", " Mo", " Go", " To", " Po", " Eo", " Zo", " Yo"];
         if ($size === 0) {
-            return('0  o');
+            return '0  o';
         } else {
-            return (round($size/pow(1024, ($i = floor(log($size, 1024)))), 2) . $sizes[$i]);
+            return (round($size / pow(1024, ($i = floor(log($size, 1024)))), 2) . $sizes[$i]);
         }
     }
 
@@ -341,7 +341,7 @@ class AdHocSmarty extends Smarty
      *
      * @return string
      */
-    public static function modifier_pseudo_by_id(int $id_contact): string
+    public static function modifierPseudoById(int $id_contact): string
     {
         if (array_key_exists($id_contact, self::$pseudos)) {
             return self::$pseudos[$id_contact];
@@ -366,7 +366,7 @@ class AdHocSmarty extends Smarty
      *
      * @return string
      */
-    public static function modifier_avatar_by_id(int $id_contact): string
+    public static function modifierAvatarById(int $id_contact): string
     {
         if (array_key_exists($id_contact, self::$avatars)) {
             return self::$avatars[$id_contact];
@@ -389,7 +389,7 @@ class AdHocSmarty extends Smarty
      *
      * @return string
      */
-    public static function modifier_display_on_off_icon(bool $val): string
+    public static function modifierDisplayOnOffIcon(bool $val): string
     {
         return $val ? '✓' : '';
     }
@@ -397,7 +397,7 @@ class AdHocSmarty extends Smarty
     /**
      * @param mixed $val val
      */
-    public static function modifier_json_encode_numeric_check($val)
+    public static function modifierJsonEncodeNumericCheck($val)
     {
         return json_encode($val, JSON_NUMERIC_CHECK);
     }
@@ -409,7 +409,7 @@ class AdHocSmarty extends Smarty
      *
      * @param string $style_name url de la feuille de style
      */
-    public function enqueue_style(string $style_name)
+    public function enqueueStyle(string $style_name)
     {
         $this->append('stylesheets', $style_name);
     }
@@ -420,7 +420,7 @@ class AdHocSmarty extends Smarty
      * @param string $script_name url du script
      * @param bool $in_footer
      */
-    public function enqueue_script(string $script_name, bool $in_footer = true)
+    public function enqueueScript(string $script_name, bool $in_footer = true)
     {
         if ($in_footer) {
             $this->append('footer_scripts', $script_name);
@@ -431,13 +431,13 @@ class AdHocSmarty extends Smarty
 
     /**
      * Ajoute une variable js utilisable dans les scripts du footer
-     * 
+     *
      * @param string $key   key
      * @param mixed  $value value
      *
      * @return void
      */
-    public function enqueue_script_var(string $key, $value): void
+    public function enqueueScriptVar(string $key, $value): void
     {
         $this->script_vars[$key] = $value;
         $this->assign('script_vars', $this->script_vars);
@@ -450,7 +450,7 @@ class AdHocSmarty extends Smarty
      *
      * @return void
      */
-    public function enqueue_script_vars(array $vars): void
+    public function enqueueScriptVars(array $vars): void
     {
         foreach ($vars as $key => $value) {
             $this->enqueue_script_var($key, $value);
@@ -462,7 +462,7 @@ class AdHocSmarty extends Smarty
      *
      * @param string $script script
      */
-    public function print_inline_script(string $script)
+    public function printInlineScript(string $script)
     {
         $this->append('inline_scripts', $script);
     }
