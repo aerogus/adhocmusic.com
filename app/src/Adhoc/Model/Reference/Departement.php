@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Reference;
+namespace Adhoc\Model\Reference;
 
-use DataBase;
-use Reference;
+use Adhoc\Model\DataBase;
+use Adhoc\Model\Reference;
 
 /**
  * Classe Departement
@@ -60,7 +60,7 @@ class Departement extends Reference
      */
     public function getIdDepartement(): ?string
     {
-        return $this->departement;
+        return $this->id_departement;
     }
 
     /**
@@ -68,7 +68,7 @@ class Departement extends Reference
      */
     public function getIdRegion(): ?string
     {
-        return $this->region;
+        return $this->id_region;
     }
 
     /* fin getters */

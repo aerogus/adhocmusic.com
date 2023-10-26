@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Reference;
+namespace Adhoc\Model\Reference;
 
-use Reference;
+use Adhoc\Model\Reference;
 
 /**
  * Classe de gestion des types de musiciens

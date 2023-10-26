@@ -76,7 +76,7 @@ class Pagination
     /**
      * @param int $nb nb
      */
-    public function setNbItems(int $nb)
+    public function setNbItems(int $nb): void
     {
         $this->nb_items = $nb;
     }
@@ -92,7 +92,7 @@ class Pagination
     /**
      * @param int $nb nb
      */
-    public function setNbItemsPerPage(int $nb)
+    public function setNbItemsPerPage(int $nb): void
     {
         $this->nb_items_per_page = $nb;
     }
@@ -115,8 +115,10 @@ class Pagination
 
     /**
      * @param int $nb nb
+     *
+     * @return void
      */
-    public function setSelectedPage(int $nb)
+    public function setSelectedPage(int $nb): void
     {
         if (($nb >= $this->getFirstPage()) && ($nb <= $this->getLastPage())) {
             $this->selected_page = $nb;
@@ -133,8 +135,10 @@ class Pagination
 
     /**
      * @param int $nb nb
+     *
+     * @return void
      */
-    public function setNbLinks(int $nb)
+    public function setNbLinks(int $nb): void
     {
         $this->nb_links = $nb;
     }
@@ -157,8 +161,10 @@ class Pagination
 
     /**
      * @param int $pageNumber pageNumber
+     *
+     * @return void
      */
-    public function setCurrentPage(int $pageNumber)
+    public function setCurrentPage(int $pageNumber): void
     {
         if (($pageNumber >= $this->getFirstPage()) && ($pageNumber <= $this->getLastPage())) {
             $this->current_page = $pageNumber;

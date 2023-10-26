@@ -67,7 +67,7 @@ class Media extends ObjectModel
      */
     public function getIdContact(): int
     {
-        return $this->contact;
+        return $this->id_contact;
     }
 
     /**
@@ -75,7 +75,7 @@ class Media extends ObjectModel
      */
     public function getIdGroupe(): ?int
     {
-        return $this->groupe;
+        return $this->id_groupe;
     }
 
     /**
@@ -99,7 +99,7 @@ class Media extends ObjectModel
      */
     public function getIdLieu(): ?int
     {
-        return $this->lieu;
+        return $this->id_lieu;
     }
 
     /**
@@ -122,7 +122,7 @@ class Media extends ObjectModel
      */
     public function getIdEvent(): ?int
     {
-        return $this->event;
+        return $this->id_event;
     }
 
     /**
@@ -211,8 +211,8 @@ class Media extends ObjectModel
      */
     public function setIdContact(int $id_contact): object
     {
-        if ($this->contact !== $id_contact) {
-            $this->contact = $id_contact;
+        if ($this->id_contact !== $id_contact) {
+            $this->id_contact = $id_contact;
             $this->modified_fields['id_contact'] = true;
         }
 
@@ -226,8 +226,8 @@ class Media extends ObjectModel
      */
     public function setIdGroupe(?int $id_groupe): object
     {
-        if ($this->groupe !== $id_groupe) {
-            $this->groupe = $id_groupe;
+        if ($this->id_groupe !== $id_groupe) {
+            $this->id_groupe = $id_groupe;
             $this->modified_fields['id_groupe'] = true;
         }
 
@@ -241,8 +241,8 @@ class Media extends ObjectModel
      */
     public function setIdLieu(?int $id_lieu): object
     {
-        if ($this->lieu !== $id_lieu) {
-            $this->lieu = $id_lieu;
+        if ($this->id_lieu !== $id_lieu) {
+            $this->id_lieu = $id_lieu;
             $this->modified_fields['id_lieu'] = true;
         }
 
@@ -256,8 +256,8 @@ class Media extends ObjectModel
      */
     public function setIdEvent(?int $id_event): object
     {
-        if ($this->event !== $id_event) {
-            $this->event = $id_event;
+        if ($this->id_event !== $id_event) {
+            $this->id_event = $id_event;
             $this->modified_fields['id_event'] = true;
         }
 

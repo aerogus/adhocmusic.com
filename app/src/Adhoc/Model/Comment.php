@@ -639,4 +639,9 @@ class Comment extends ObjectModel
             }
         }
     }
+
+    public static function getComments()
+    {
+        // non implémenté
+    }
 }

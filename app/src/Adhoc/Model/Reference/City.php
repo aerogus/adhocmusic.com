@@ -68,7 +68,7 @@ class City extends Reference
      */
     public function getIdCity(): ?string
     {
-        return $this->city;
+        return $this->id_city;
     }
 
     /**
@@ -76,7 +76,7 @@ class City extends Reference
      */
     public function getIdDepartement(): ?string
     {
-        return $this->departement;
+        return $this->id_departement;
     }
 
     /**

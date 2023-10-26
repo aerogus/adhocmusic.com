@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Reference;
+namespace Adhoc\Model\Reference;
 
-use DataBase;
-use Reference;
+use Adhoc\Model\DataBase;
+use Adhoc\Model\Reference;
 
 /**
  * Classe de gestion des styles musicaux

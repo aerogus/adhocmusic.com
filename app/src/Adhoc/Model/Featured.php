@@ -256,7 +256,7 @@ class Featured extends ObjectModel
     /**
      * @param bool $online online
      *
-     * @return bool
+     * @return object
      */
     public function setOnline(bool $online): object
     {
@@ -301,7 +301,7 @@ class Featured extends ObjectModel
      *                      'limit' => int,
      *                      ]
      *
-     * @return array
+     * @return array<object>
      */
     public static function find(array $params): array
     {

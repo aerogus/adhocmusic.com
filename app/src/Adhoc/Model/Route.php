@@ -19,7 +19,7 @@ define('DEFAULT_CONTROLLERS_FORMAT', 'html');
 class Route
 {
     /**
-     * @var array
+     * @var array<string,mixed>
      */
     protected static $routes = [];
 

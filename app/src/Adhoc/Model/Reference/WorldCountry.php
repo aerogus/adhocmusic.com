@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Reference;
+namespace Adhoc\Model\Reference;
 
-use Reference;
+use Adhoc\Model\DataBase;
+use Adhoc\Model\Reference;
 
 /**
  * Classe WorldCountry
@@ -55,7 +56,7 @@ class WorldCountry extends Reference
      */
     public function getIdCountry(): string
     {
-        return $this->country;
+        return $this->id_country;
     }
 
     /**
@@ -65,7 +66,7 @@ class WorldCountry extends Reference
      */
     public function getFlagUrl(): string
     {
-        return MEDIA_URL . '/country/' . strtolower($this->country) . '.png';
+        return MEDIA_URL . '/country/' . strtolower($this->id_country) . '.png';
     }
 
     /* fin getters */
@@ -88,7 +89,7 @@ class WorldCountry extends Reference
      */
     public static function find(array $params): array
     {
-        $db = \DataBase::getInstance();
+        $db = DataBase::getInstance();
         $objs = [];
 
         $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";

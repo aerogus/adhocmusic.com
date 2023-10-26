@@ -255,8 +255,8 @@ final class Controller
     /**
      * Validation du formulaire featured
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array<string,mixed> $data   tableau des données
+     * @param array<string,mixed> $errors tableau des erreurs (par référence)
      *
      * @return bool
      */

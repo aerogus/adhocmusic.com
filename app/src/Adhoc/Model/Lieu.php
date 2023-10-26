@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
-use Reference\City;
-use Reference\Departement;
-use Reference\LieuType;
-use Reference\WorldCountry;
-use Reference\WorldRegion;
+use Adhoc\Model\Reference\City;
+use Adhoc\Model\Reference\Departement;
+use Adhoc\Model\Reference\LieuType;
+use Adhoc\Model\Reference\WorldCountry;
+use Adhoc\Model\Reference\WorldRegion;
 
 /**
  * Classe Lieu

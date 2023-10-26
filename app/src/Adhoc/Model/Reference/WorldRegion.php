@@ -43,11 +43,6 @@ class WorldRegion extends Reference
     protected ?string $id_region = null;
 
     /**
-     * @var ?string
-     */
-    protected ?string $name = null;
-
-    /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
@@ -65,7 +60,7 @@ class WorldRegion extends Reference
      */
     public function getIdCountry(): ?string
     {
-        return $this->country;
+        return $this->id_country;
     }
 
     /**
@@ -73,7 +68,7 @@ class WorldRegion extends Reference
      */
     public function getIdRegion(): ?string
     {
-        return $this->region;
+        return $this->id_region;
     }
 
     /* fin getters */

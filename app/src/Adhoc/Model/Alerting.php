@@ -77,7 +77,7 @@ class Alerting extends ObjectModel
      *
      * @var array<string,string>
      */
-    protected static $all_fields = [
+    protected static array $all_fields = [
         'id_alerting' => 'int', // pk
         'id_contact'  => 'int',
         'created_at'  => 'date',
