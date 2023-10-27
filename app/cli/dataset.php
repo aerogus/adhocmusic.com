@@ -3,6 +3,15 @@
 
 declare(strict_types=1);
 
+use Adhoc\Model\Audio;
+use Adhoc\Model\Event;
+use Adhoc\Model\FAQ;
+use Adhoc\Model\Photo;
+use Adhoc\Model\Groupe;
+use Adhoc\Model\Lieu;
+use Adhoc\Model\Structure;
+use Adhoc\Model\Video;
+
 require_once __DIR__ . '/../bootstrap.php';
 
 if (ENV === 'PROD') {

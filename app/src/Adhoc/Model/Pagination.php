@@ -180,7 +180,7 @@ class Pagination
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getNextPage(): ?int
     {
@@ -191,7 +191,7 @@ class Pagination
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getPrevPage(): ?int
     {

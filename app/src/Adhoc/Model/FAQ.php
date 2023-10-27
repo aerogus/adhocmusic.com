@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
-use Reference\FAQCategory;
+use Adhoc\Model\Reference\FAQCategory;
 
 /**
  * Foire aux questions
@@ -57,6 +57,16 @@ class FAQ extends ObjectModel
     protected bool $online = false;
 
     /**
+     * @var ?string
+     */
+    protected ?string $created_at = null;
+
+    /**
+     * @var ?string
+     */
+    protected ?string $modified_at = null;
+
+    /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
@@ -78,7 +88,7 @@ class FAQ extends ObjectModel
      */
     public function getIdFAQ(): int
     {
-        return $this->faq;
+        return $this->id_faq;
     }
 
     /**
@@ -86,7 +96,7 @@ class FAQ extends ObjectModel
      */
     public function getIdCategory(): int
     {
-        return $this->category;
+        return $this->id_category;
     }
 
     /**
@@ -184,8 +194,8 @@ class FAQ extends ObjectModel
      */
     public function setIdCategory(int $id_category): object
     {
-        if ($this->category !== $id_category) {
-            $this->category = $id_category;
+        if ($this->id_category !== $id_category) {
+            $this->id_category = $id_category;
             $this->modified_fields['id_category'] = true;
         }
 

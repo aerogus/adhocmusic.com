@@ -64,15 +64,15 @@ class City extends Reference
     /* début getter */
 
     /**
-     * @return string|null
+     * @return ?int
      */
-    public function getIdCity(): ?string
+    public function getIdCity(): ?int
     {
         return $this->id_city;
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getIdDepartement(): ?string
     {
@@ -80,7 +80,7 @@ class City extends Reference
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getCp(): ?string
     {
@@ -98,13 +98,13 @@ class City extends Reference
     /**
      * Retourne une collection d'objets "City" répondant au(x) critère(s)
      *
-     * @param array $params [
-     *                      'id_departement' => string,
-     *                      'order_by' => string,
-     *                      'sort' => string
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     * @param array<string,mixed> $params [
+     *                                'id_departement' => string,
+     *                                'order_by' => string,
+     *                                'sort' => string
+     *                                'start' => int,
+     *                                'limit' => int,
+     *                            ]
      *
      * @return array<City>
      */

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
-use Reference\Style;
+use Adhoc\Model\Reference\Style;
 
 /**
  * Classe Event
@@ -135,7 +135,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getCreatedAt(): ?string
     {
@@ -146,7 +146,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getCreatedAtTs(): ?int
     {
@@ -157,7 +157,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getModifiedAt(): ?string
     {
@@ -168,7 +168,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getModifiedAtTs(): ?int
     {
@@ -267,7 +267,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getFacebookEventId(): ?string
     {
@@ -492,8 +492,8 @@ class Event extends ObjectModel
      */
     public function setIdLieu(int $id_lieu): object
     {
-        if ($this->lieu !== $id_lieu) {
-            $this->lieu = $id_lieu;
+        if ($this->id_lieu !== $id_lieu) {
+            $this->id_lieu = $id_lieu;
             $this->modified_fields['id_lieu'] = true;
         }
 
@@ -507,8 +507,8 @@ class Event extends ObjectModel
      */
     public function setIdContact(int $id_contact): object
     {
-        if ($this->contact !== $id_contact) {
-            $this->contact = $id_contact;
+        if ($this->id_contact !== $id_contact) {
+            $this->id_contact = $id_contact;
             $this->modified_fields['id_contact'] = true;
         }
 
@@ -671,7 +671,7 @@ class Event extends ObjectModel
      * @param int  $maxWidth     largeur maxi
      * @param bool $genIfMissing force la génération de la miniature si manquante
      *
-     * @return string|null
+     * @return ?string
      */
     public function getThumbUrl(int $maxWidth = 0, bool $genIfMissing = false): ?string
     {

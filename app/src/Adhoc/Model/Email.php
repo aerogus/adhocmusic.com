@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Adhoc\Model;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\\Exception;
+use PHPMailer\PHPMailer\Exception;
 
 define('EMAIL_VALIDATE_REGEXP', '/^.+\@.+\..+$/i');
 

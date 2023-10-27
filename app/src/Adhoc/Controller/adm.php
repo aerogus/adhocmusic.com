@@ -5,6 +5,14 @@ declare(strict_types=1);
 namespace Adhoc\Controller;
 
 use Adhoc\Model\AdHocSmarty;
+use Adhoc\Model\DataBase;
+use Adhoc\Model\ForumPrive;
+use Adhoc\Model\Groupe;
+use Adhoc\Model\Log;
+use Adhoc\Model\Membre;
+use Adhoc\Model\Route;
+use Adhoc\Model\Tools;
+use Adhoc\Model\Trail;
 use Adhoc\Model\Reference\Style;
 use Adhoc\Model\Reference\TypeMusicien;
 
@@ -263,7 +271,7 @@ final class Controller
     public static function groupeDeStyleId(): string
     {
         if (Tools::isSubmit('form-groupe-de-style')) {
-            return self::groupe_de_style_submit();
+            return self::groupeDeStyleSubmit();
         }
 
         Tools::auth(Membre::TYPE_INTERNE);
@@ -317,9 +325,9 @@ final class Controller
     }
 
     /**
-     * @return string
+     * @return void
      */
-    public static function groupeDeStyleSubmit(): string
+    public static function groupeDeStyleSubmit(): void
     {
         Tools::auth(Membre::TYPE_INTERNE);
 

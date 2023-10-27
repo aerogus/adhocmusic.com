@@ -146,7 +146,7 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getCreatedAt(): ?string
     {
@@ -168,7 +168,7 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getModifiedAt(): ?string
     {
@@ -281,8 +281,8 @@ class Comment extends ObjectModel
      */
     public function setIdContent(int $id_content): object
     {
-        if ($this->content !== $id_content) {
-            $this->content = $id_content;
+        if ($this->id_content !== $id_content) {
+            $this->id_content = $id_content;
             $this->modified_fields['id_content'] = true;
         }
 
@@ -371,8 +371,8 @@ class Comment extends ObjectModel
      */
     public function setIdContact(int $id_contact): object
     {
-        if ($this->contact !== $id_contact) {
-            $this->contact = $id_contact;
+        if ($this->id_contact !== $id_contact) {
+            $this->id_contact = $id_contact;
             $this->modified_fields['id_contact'] = true;
         }
 

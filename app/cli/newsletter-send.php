@@ -44,14 +44,14 @@ $subs = [
 //$subs = Newsletter::getSubscribers();
 
 echo "Trouvé : " . count($subs) . " emails\n";
-die;
+
 // boucle des emails - expédition effective
 
 $n = 1;
 
 foreach ($subs as $sub) {
     // suite après plantage
-    if ($sub['id_contact'] < MIN_ID_CONTACT) {
+    if ((int) $sub['id_contact'] < MIN_ID_CONTACT) {
         continue;
     }
 

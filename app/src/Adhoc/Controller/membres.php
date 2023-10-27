@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Adhoc\Controller;
 
 use Adhoc\Model\AdHocSmarty;
+use Adhoc\Model\Email;
+use Adhoc\Model\ForumPrive;
+use Adhoc\Model\Log;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Route;
 use Adhoc\Model\Tools;

@@ -291,13 +291,13 @@ class Tools
     /**
      * Tri de tableau
      *
-     * @param array $array array
-     * @param       $on    ?
-     * @param int   $order order
+     * @param array<mixed> $array array
+     * @param mixed        $on    ?
+     * @param int          $order order
      *
-     * @return array
+     * @return array<mixed>
      */
-    public static function arraySort(array $array, $on, int $order = SORT_ASC): array
+    public static function arraySort(array $array, mixed $on, int $order = SORT_ASC): array
     {
         $new_array = [];
         $sortable_array = [];
@@ -340,7 +340,7 @@ class Tools
     public static function makeSeed(): int
     {
         list($usec, $sec) = explode(' ', microtime());
-        $number = $sec * 1000000 + ($usec * 1000000);
+        $number =(int) $sec * 1000000 + ((int) $usec * 1000000);
         return (int) $number;
     }
 

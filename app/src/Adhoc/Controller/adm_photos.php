@@ -5,6 +5,11 @@ declare(strict_types=1);
 namespace Adhoc\Controller;
 
 use Adhoc\Model\AdHocSmarty;
+use Adhoc\Model\Email;
+use Adhoc\Model\Membre;
+use Adhoc\Model\Photos;
+use Adhoc\Model\Route;
+use Adhoc\Model\Trail;
 
 define('NB_PHOTOS_PER_PAGE', 80);
 

@@ -80,13 +80,13 @@ class WorldRegion extends Reference
     /**
      * Retourne une collection d'objets "WorldRegion" répondant au(x) critère(s)
      *
-     * @param array $params [
-     *                      'id_country' => string,
-     *                      'order_by' => string,
-     *                      'sort' => string
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     * @param array<string,mixed> $params [
+     *                                'id_country' => string,
+     *                                'order_by' => string,
+     *                                'sort' => string
+     *                                'start' => int,
+     *                                'limit' => int,
+     *                            ]
      *
      * @return array<WorldRegion>
      */

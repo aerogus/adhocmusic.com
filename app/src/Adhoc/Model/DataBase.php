@@ -23,9 +23,9 @@ ini_set('mysql.connect_timeout', '2');
 class DataBase
 {
     /**
-     * @var array
+     * @var array<int,<array<string,mixed>>>
      */
-    protected static $connections_params = [
+    protected static array $connections_params = [
         0 => [
             'hasMaintenance' => false,
             'db_host'        => _DB_HOST_,

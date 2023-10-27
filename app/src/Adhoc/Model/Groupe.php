@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
-use Reference\Style;
-use Reference\TypeMusicien;
-use Reference\GroupeStatus;
+use Adhoc\Model\Reference\Style;
+use Adhoc\Model\Reference\TypeMusicien;
+use Adhoc\Model\Reference\GroupeStatus;
 
 /**
  * Classe Groupe
@@ -284,7 +284,7 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'identificant de la page fan Facebook
      *
-     * @return string|null (int 64bits réellement)
+     * @return ?string (int 64bits réellement)
      */
     public function getFacebookPageId(): ?string
     {
@@ -294,7 +294,7 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'url de la page "fans" Facebook
      *
-     * @return string|null
+     * @return ?string
      */
     public function getFacebookPageUrl(): ?string
     {
@@ -307,7 +307,7 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'identifiant twitter
      *
-     * @return string|null
+     * @return ?string
      */
     public function getTwitterId(): ?string
     {
@@ -317,7 +317,7 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'url du fil twitter
      *
-     * @return string|null
+     * @return ?string
      */
     public function getTwitterUrl(): ?string
     {
@@ -330,7 +330,7 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'url du site officiel
      *
-     * @return string|null
+     * @return ?string
      */
     public function getSite(): ?string
     {
@@ -360,7 +360,7 @@ class Groupe extends ObjectModel
     /**
      * Retourne la date d'inscription format YYYY-MM-DD HH:II:SS
      *
-     * @return string|null
+     * @return ?string
      */
     public function getCreatedAt(): ?string
     {
@@ -373,9 +373,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne la date d'inscription sous forme de timestamp
      *
-     * @return int|null
+     * @return ?int
      */
-    public function getCreatedAtTs(): ?string
+    public function getCreatedAtTs(): ?int
     {
         if (!is_null($this->created_at) && Date::isDateTimeOk($this->created_at)) {
             return strtotime($this->created_at);
@@ -386,7 +386,7 @@ class Groupe extends ObjectModel
     /**
      * Retourne la date de modification de la fiche
      *
-     * @return string|null
+     * @return ?string
      */
     public function getModifiedAt(): ?string
     {
@@ -399,7 +399,7 @@ class Groupe extends ObjectModel
     /**
      * Retourne la date de modification de la fiche sous forme de timestamp
      *
-     * @return int|null
+     * @return ?int
      */
     public function getModifiedAtTs(): ?int
     {
@@ -412,7 +412,7 @@ class Groupe extends ObjectModel
     /**
      * Retourne la date de début d'activité
      *
-     * @return string|null
+     * @return ?string
      */
     public function getDatdeb(): ?string
     {
@@ -425,7 +425,7 @@ class Groupe extends ObjectModel
     /**
      * Retourne la date de fin d'activité
      *
-     * @return string|null
+     * @return ?string
      */
     public function getDatfin(): ?string
     {
@@ -470,7 +470,7 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'url de la photo principale
      *
-     * @return string|null
+     * @return ?string
      */
     public function getPhoto(): ?string
     {
@@ -500,7 +500,7 @@ class Groupe extends ObjectModel
      * Retourne l'url du logo
      * priorité png > gif > jpg
      *
-     * @return string|null
+     * @return ?string
      */
     public function getLogo(): ?string
     {
@@ -1153,7 +1153,7 @@ class Groupe extends ObjectModel
      *
      * @param string $alias alias
      *
-     * @return int|null
+     * @return ?int
      */
     public static function getIdByAlias(string $alias): ?int
     {
@@ -1168,7 +1168,7 @@ class Groupe extends ObjectModel
      *
      * @param int $facebook_page_id facebook_page_id
      *
-     * @return int|null
+     * @return ?int
      */
     public static function getIdByFacebookPageId(int $facebook_page_id): ?int
     {

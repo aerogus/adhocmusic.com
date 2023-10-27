@@ -58,17 +58,17 @@ class Alerting extends ObjectModel
     protected bool $active = false;
 
     /**
-     * @var int|null
+     * @var ?int
      */
     protected ?int $id_lieu = null;
 
     /**
-     * @var int|null
+     * @var ?int
      */
     protected ?int $id_groupe = null;
 
     /**
-     * @var int|null
+     * @var ?int
      */
     protected ?int $id_event = null;
 
@@ -106,7 +106,7 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getCreatedAt(): ?string
     {
@@ -117,7 +117,7 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getCreatedAtTs(): ?int
     {
@@ -136,7 +136,7 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getIdLieu(): ?int
     {
@@ -144,7 +144,7 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getIdGroupe(): ?int
     {
@@ -152,7 +152,7 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getIdEvent(): ?int
     {
@@ -308,7 +308,7 @@ class Alerting extends ObjectModel
      *                      'limit' => int,
      *                      ]
      *
-     * @return array
+     * @return array<mixed>
      */
     public static function find(array $params): array
     {

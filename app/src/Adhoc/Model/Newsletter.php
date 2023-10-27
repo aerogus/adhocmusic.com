@@ -204,7 +204,7 @@ class Newsletter extends ObjectModel
      */
     public function setIdContact(int $id_contact): object
     {
-        $this->contact = $id_contact;
+        $this->id_contact = $id_contact;
 
         return $this;
     }

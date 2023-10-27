@@ -118,7 +118,7 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getCreatedAt(): ?string
     {
@@ -129,7 +129,7 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getCreatedAtTs(): ?int
     {
@@ -140,7 +140,7 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getModifiedAt(): ?string
     {
@@ -151,7 +151,7 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getModifiedAtTs(): ?int
     {
@@ -418,7 +418,7 @@ class CMS extends ObjectModel
      *
      * @param string $alias alias
      *
-     * @return int|null
+     * @return ?int
      */
     public static function getIdByAlias(string $alias): ?int
     {

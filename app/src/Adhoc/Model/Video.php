@@ -307,7 +307,7 @@ class Video extends Media
      * @param int  $maxWidth     largeur maxi
      * @param bool $genIfMissing force la génération de la miniature si manquante
      *
-     * @return string|null
+     * @return ?string
      */
     public function getThumbUrl(int $maxWidth = 0, bool $genIfMissing = false): ?string
     {
@@ -493,7 +493,7 @@ class Video extends Media
     /**
      * Retourne le code du player vidéo embarqué
      *
-     * @return string|null
+     * @return ?string
      *
      * @see http://www.alsacreations.fr/dewtube
      * @see http://www.clubic.com/telecharger-fiche21739-riva-flv-encoder.html
@@ -533,7 +533,7 @@ class Video extends Media
     /**
      * Retourne l'url de l'iframe embed
      *
-     * @return string|null
+     * @return ?string
      */
     public function getEmbedUrl(): ?string
     {
@@ -670,7 +670,7 @@ class Video extends Media
      * @param int    $id_host   id_host
      * @param string $reference reference
      *
-     * @return string|null
+     * @return ?string
      */
     public static function getRemoteThumbnail(int $id_host, string $reference): ?string
     {

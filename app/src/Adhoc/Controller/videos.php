@@ -5,8 +5,15 @@ declare(strict_types=1);
 namespace Adhoc\Controller;
 
 use Adhoc\Model\AdHocSmarty;
+use Adhoc\Model\Date;
+use Adhoc\Model\Groupe;
+use Adhoc\Model\Event;
+use Adhoc\Model\Lieu;
+use Adhoc\Model\Membre;
+use Adhoc\Model\Route;
 use Adhoc\Model\Tools;
 use Adhoc\Model\Trail;
+use Adhoc\Model\Video;
 use Adhoc\Model\Reference\Departement;
 
 define('NB_VIDEOS_PER_PAGE', 48);

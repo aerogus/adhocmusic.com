@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
-use Reference\City;
-use Reference\Departement;
-use Reference\TypeMusicien;
-use Reference\WorldCountry;
-use Reference\WorldRegion;
+use Adhoc\Model\Reference\City;
+use Adhoc\Model\Reference\Departement;
+use Adhoc\Model\Reference\TypeMusicien;
+use Adhoc\Model\Reference\WorldCountry;
+use Adhoc\Model\Reference\WorldRegion;
 
 /**
  * Classe Membre
@@ -258,7 +258,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getPseudo(): ?string
     {
@@ -266,7 +266,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      * /!\ sous forme cryptée mysql
      */
     public function getPassword(): ?string
@@ -275,7 +275,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getLastName(): ?string
     {
@@ -283,7 +283,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getFirstName(): ?string
     {
@@ -291,7 +291,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getAddress(): ?string
     {
@@ -299,7 +299,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getIdCity(): ?int
     {
@@ -323,7 +323,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getIdDepartement(): ?string
     {
@@ -347,7 +347,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getIdRegion(): ?string
     {
@@ -371,7 +371,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getIdCountry(): ?string
     {
@@ -395,7 +395,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getTel(): ?string
     {
@@ -403,7 +403,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getPort(): ?string
     {
@@ -411,7 +411,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getSite(): ?string
     {
@@ -419,7 +419,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getText(): ?string
     {
@@ -443,7 +443,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getCreatedAt(): ?string
     {
@@ -454,7 +454,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getCreatedAtTs(): ?int
     {
@@ -465,7 +465,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getModifiedAt(): ?string
     {
@@ -476,7 +476,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getModifiedAtTs(): ?int
     {
@@ -487,7 +487,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getVisitedAt(): ?string
     {
@@ -498,7 +498,7 @@ class Membre extends Contact
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getVisitedAtTs(): ?int
     {
@@ -540,7 +540,7 @@ class Membre extends Contact
     /**
      * Retourne l'url de la photo du membre
      *
-     * @return string|null
+     * @return ?string
      */
     public function getAvatarUrl(): ?string
     {
@@ -553,7 +553,7 @@ class Membre extends Contact
     /**
      * Retourne l'url de la photo du membre AD'HOC
      *
-     * @return string|null
+     * @return ?string
      * @todo uniquement dans MembreAdhoc ?
      */
     public function getAvatarInterneUrl(): ?string
@@ -1490,7 +1490,7 @@ class Membre extends Contact
      *
      * @param int $cle clé
      *
-     * @return string|null
+     * @return ?string
      */
     public static function getTypeMembreName(int $cle): ?string
     {

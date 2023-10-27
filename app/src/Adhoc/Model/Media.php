@@ -71,7 +71,7 @@ class Media extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getIdGroupe(): ?int
     {
@@ -95,7 +95,7 @@ class Media extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getIdLieu(): ?int
     {
@@ -118,7 +118,7 @@ class Media extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getIdEvent(): ?int
     {
@@ -149,7 +149,7 @@ class Media extends ObjectModel
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getCreatedAt()
     {
@@ -160,7 +160,7 @@ class Media extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getCreatedAtTs(): ?int
     {
@@ -171,7 +171,7 @@ class Media extends ObjectModel
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getModifiedAt(): ?string
     {
@@ -182,7 +182,7 @@ class Media extends ObjectModel
     }
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getModifiedAtTs(): ?int
     {

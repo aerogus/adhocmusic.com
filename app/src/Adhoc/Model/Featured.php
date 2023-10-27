@@ -292,14 +292,14 @@ class Featured extends ObjectModel
      *
      * À surcharger dans les classes filles
      *
-     * @param array $params [
-     *                      'online' => bool,
-     *                      'current' => bool,
-     *                      'order_by' => string,
-     *                      'sort' => string,
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     * @param array<string,mixed> $params [
+     *                                        'online' => bool,
+     *                                        'current' => bool,
+     *                                        'order_by' => string,
+     *                                        'sort' => string,
+     *                                        'start' => int,
+     *                                        'limit' => int,
+     *                                    ]
      *
      * @return array<object>
      */

@@ -85,7 +85,7 @@ class Contact extends ObjectModel
     /* début getters */
 
     /**
-     * @return int|null
+     * @return ?int
      */
     public function getIdContact(): ?int
     {
@@ -93,7 +93,7 @@ class Contact extends ObjectModel
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getEmail(): ?string
     {
@@ -105,7 +105,7 @@ class Contact extends ObjectModel
      *
      * @param int $id_contact id_contact
      *
-     * @return string|null
+     * @return ?string
      */
     public static function getEmailById(int $id_contact)
     {
@@ -124,7 +124,7 @@ class Contact extends ObjectModel
      * Retourne la date de la dernière consultation d'une newsletter
      * (si tracker activé)
      *
-     * @return string|null
+     * @return ?string
      */
     public function getLastnl(): ?string
     {

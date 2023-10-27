@@ -25,9 +25,9 @@ abstract class Forum
     /**
      * Liste des smileys a parser
      *
-     * @var array
+     * @var array<array<string>>
      */
-    protected static $smileys = [
+    protected static array $smileys = [
         [":afro:",   "afro.gif"],
         [":angry:",  "angry.gif"],
         [":beer:",   "beer.gif"],
@@ -132,7 +132,7 @@ abstract class Forum
      *
      * @param string $id_forum id_forum
      *
-     * @return array
+     * @return array<string,string>
      */
     public static function getForum(string $id_forum): array
     {

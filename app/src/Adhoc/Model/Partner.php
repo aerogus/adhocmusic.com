@@ -104,7 +104,7 @@ class Partner extends ObjectModel
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getIconUrl(): ?string
     {

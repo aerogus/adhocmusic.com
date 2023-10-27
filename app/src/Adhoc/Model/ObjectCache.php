@@ -34,7 +34,7 @@ class ObjectCache
      *
      * @param string $key clé
      *
-     * @return string|null
+     * @return ?string
      */
     public static function get(string $key): ?string
     {

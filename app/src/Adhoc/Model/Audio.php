@@ -100,7 +100,7 @@ class Audio extends Media
     }
 
     /**
-     * @return string|null
+     * @return ?string
      */
     public function getDirectAacUrl(): ?string
     {

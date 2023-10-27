@@ -373,7 +373,7 @@ class Lieu extends ObjectModel
     /**
      * Retourne la date de création
      *
-     * @return string|null
+     * @return ?string
      */
     public function getCreatedAt(): ?string
     {
@@ -455,7 +455,7 @@ class Lieu extends ObjectModel
     /**
      * Retourne l'url de la photo du lieu
      *
-     * @return string|null
+     * @return ?string
      */
     public function getPhotoUrl(): ?string
     {

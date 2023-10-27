@@ -171,7 +171,7 @@ class Photo extends Media
      * @param int  $maxWidth     largeur maxi
      * @param bool $genIfMissing force la génération de la miniature si manquante
      *
-     * @return string|null
+     * @return ?string
      */
     public function getThumbUrl(int $maxWidth = 0, bool $genIfMissing = false): ?string
     {

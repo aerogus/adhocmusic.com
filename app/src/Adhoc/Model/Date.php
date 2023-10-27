@@ -36,9 +36,21 @@ class Date
 
     // expressions regulières perl
     // [0-9] = \d
-    public static $regexp_date = "/^(\d{4})-(\d{2})-(\d{2})$/";
-    public static $regexp_time = "/^(\d{2}):(\d{2}):(\d{2})$/";
-    public static $regexp_datetime = "/^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2}):(\d{2})$/";
+
+    /**
+     * @var string
+     */
+    public static string $regexp_date = "/^(\d{4})-(\d{2})-(\d{2})$/";
+
+    /**
+     * @var string
+     */
+    public static string $regexp_time = "/^(\d{2}):(\d{2}):(\d{2})$/";
+
+    /**
+     * @var string
+     */
+    public static string $regexp_datetime = "/^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2}):(\d{2})$/";
 
     /**
      * Fonction modulable de formatage de date MySQL
@@ -46,9 +58,9 @@ class Date
      * @param string $datetime datetime
      * @param string $format   format
      *
-     * @return string
+     * @return string|false
      */
-    public static function mysqlDatetime(string $datetime, string $format = "d/m/Y à H:i")
+    public static function mysqlDatetime(string $datetime, string $format = "d/m/Y à H:i"): string|false
     {
         if (preg_match(self::$regexp_datetime, $datetime, $dt) && checkdate((int) $dt[2], (int) $dt[3], (int) $dt[1])) {
             return date($format, mktime((int) $dt[4], (int) $dt[5], (int) $dt[6], (int) $dt[2], (int) $dt[3], (int) $dt[ 1]));
