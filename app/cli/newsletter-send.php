@@ -51,7 +51,7 @@ $n = 1;
 
 foreach ($subs as $sub) {
     // suite après plantage
-    if ((int) $sub['id_contact'] < MIN_ID_CONTACT) {
+    if (intval($sub['id_contact']) < MIN_ID_CONTACT) {
         continue;
     }
 

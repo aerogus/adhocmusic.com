@@ -9,7 +9,9 @@ use Adhoc\Model\Alerting;
 use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
 use Adhoc\Model\Lieu;
+use Adhoc\Model\Log;
 use Adhoc\Model\Membre;
+use Adhoc\Model\Route;
 use Adhoc\Model\Tools;
 use Adhoc\Model\Trail;
 

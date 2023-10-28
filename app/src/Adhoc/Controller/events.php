@@ -5,6 +5,18 @@ declare(strict_types=1);
 namespace Adhoc\Controller;
 
 use Adhoc\Model\AdHocSmarty;
+use Adhoc\Model\Audio;
+use Adhoc\Model\Conf;
+use Adhoc\Model\Date;
+use Adhoc\Model\Event;
+use Adhoc\Model\Lieu;
+use Adhoc\Model\Log;
+use Adhoc\Model\Membre;
+use Adhoc\Model\Photo;
+use Adhoc\Model\Route;
+use Adhoc\Model\Tools;
+use Adhoc\Model\Trail;
+use Adhoc\Model\Video;
 use Adhoc\Model\Reference\Style;
 
 final class Controller
