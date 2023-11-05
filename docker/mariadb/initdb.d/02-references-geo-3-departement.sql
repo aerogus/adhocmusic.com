@@ -1,4 +1,3 @@
-
 INSERT INTO `geo_fr_departement` (`id_departement`, `id_region`, `id_country`, `name`) VALUES
 ('01', '01', 'FR', 'Ain'),
 ('02', '07', 'FR', 'Aisne'),

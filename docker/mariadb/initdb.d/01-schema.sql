@@ -1,10 +1,10 @@
-CREATE TABLE IF NOT EXISTS `geo_world_country` (
+CREATE TABLE `geo_world_country` (
   `id_country` char(2) NOT NULL,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id_country`)
 );
 
-CREATE TABLE IF NOT EXISTS `geo_world_region` (
+CREATE TABLE `geo_world_region` (
   `id_region` char(2) NOT NULL,
   `id_country` char(2) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `geo_world_region` (
   CONSTRAINT `geo_world_region_ibfk_1` FOREIGN KEY (`id_country`) REFERENCES `geo_world_country` (`id_country`)
 );
 
-CREATE TABLE IF NOT EXISTS `geo_fr_departement` (
+CREATE TABLE `geo_fr_departement` (
   `id_departement` char(2) NOT NULL,
   `id_region` char(2) NOT NULL,
   `id_country` char(2) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `geo_fr_departement` (
   CONSTRAINT `geo_fr_departement_ibfk_1` FOREIGN KEY (`id_country`,`id_region`) REFERENCES `geo_world_region` (`id_country`, `id_region`)
 );
 
-CREATE TABLE IF NOT EXISTS `geo_fr_city` (
+CREATE TABLE `geo_fr_city` (
   `id_city` int(10) UNSIGNED NOT NULL COMMENT 'code insee',
   `id_departement` char(2) NOT NULL,
   `id_region` char(2) NOT NULL,
@@ -38,37 +38,37 @@ CREATE TABLE IF NOT EXISTS `geo_fr_city` (
   CONSTRAINT `geo_fr_city_ibfk_1` FOREIGN KEY (`id_country`,`id_region`,`id_departement`) REFERENCES `geo_fr_departement` (`id_country`, `id_region`, `id_departement`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_lieu_type` (
+CREATE TABLE `adhoc_lieu_type` (
   `id_lieu_type` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
   PRIMARY KEY (`id_lieu_type`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_style` (
+CREATE TABLE `adhoc_style` (
   `id_style` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
   PRIMARY KEY (`id_style`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_video_host` (
+CREATE TABLE `adhoc_video_host` (
   `id_video_host` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id_video_host`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_faq_category` (
+CREATE TABLE `adhoc_faq_category` (
   `id_faq_category` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id_faq_category`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_type_musicien` (
+CREATE TABLE `adhoc_type_musicien` (
   `id_type_musicien` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
   PRIMARY KEY (`id_type_musicien`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_contact` (
+CREATE TABLE `adhoc_contact` (
   `id_contact` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
   `lastnl` datetime DEFAULT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_contact` (
   UNIQUE KEY `email` (`email`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_membre` (
+CREATE TABLE `adhoc_membre` (
   `id_contact` int(10) UNSIGNED NOT NULL,
   `pseudo` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_membre` (
   CONSTRAINT `fk_membre_contact` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_contact` (`id_contact`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_membre_adhoc` (
+CREATE TABLE `adhoc_membre_adhoc` (
   `id_contact` int(10) UNSIGNED NOT NULL,
   `function` varchar(50) NOT NULL,
   `birth_date` date DEFAULT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_membre_adhoc` (
   CONSTRAINT `fk_membre_adhoc_membre` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_log_action` (
+CREATE TABLE `adhoc_log_action` (
   `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `action` int(10) UNSIGNED NOT NULL,
   `id_contact` int(10) UNSIGNED DEFAULT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_log_action` (
   CONSTRAINT `fk_log_action_contact` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_contact` (`id_contact`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_subscription` (
+CREATE TABLE `adhoc_subscription` (
   `id_subscription` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `subscribed_at` date NOT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_subscription` (
   KEY `id_contact` (`id_contact`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_newsletter` (
+CREATE TABLE `adhoc_newsletter` (
   `id_newsletter` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `content` mediumtext NOT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_newsletter` (
   PRIMARY KEY (`id_newsletter`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_newsletter_hit` (
+CREATE TABLE `adhoc_newsletter_hit` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_newsletter` smallint(5) UNSIGNED NOT NULL,
   `id_contact` int(10) UNSIGNED NOT NULL,
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_newsletter_hit` (
   CONSTRAINT `fk_newsletter_hit_contact` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_contact` (`id_contact`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_groupe` (
+CREATE TABLE `adhoc_groupe` (
   `id_groupe` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `alias` varchar(50) NOT NULL,
   `name` varchar(250) NOT NULL,
@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_groupe` (
   KEY `online` (`online`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_structure` (
+CREATE TABLE `adhoc_structure` (
   `id_structure` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
   `address` tinytext NOT NULL,
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_structure` (
   KEY `id_pays` (`id_country`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_partner` (
+CREATE TABLE `adhoc_partner` (
   `id_partner` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(250) NOT NULL,
   `description` varchar(250) NOT NULL,
@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_partner` (
   PRIMARY KEY (`id_partner`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_alerting` (
+CREATE TABLE `adhoc_alerting` (
   `id_alerting` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_contact` int(10) UNSIGNED NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -229,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_alerting` (
   CONSTRAINT `fk_alerting_contact` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_cms` (
+CREATE TABLE `adhoc_cms` (
   `id_cms` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `alias` varchar(64) NOT NULL,
   `menuselected` varchar(16) NOT NULL,
@@ -245,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_cms` (
   KEY `online` (`online`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_comment` (
+CREATE TABLE `adhoc_comment` (
   `id_comment` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `type` char(1) NOT NULL,
   `id_content` int(10) UNSIGNED NOT NULL,
@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_comment` (
   CONSTRAINT `fk_comment_membre` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_lieu` (
+CREATE TABLE `adhoc_lieu` (
   `id_lieu` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_type` int(10) UNSIGNED DEFAULT NULL,
   `name` varchar(250) NOT NULL,
@@ -289,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_lieu` (
   CONSTRAINT `fk_lieu_lieu_type` FOREIGN KEY (`id_type`) REFERENCES `adhoc_lieu_type` (`id_lieu_type`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_event` (
+CREATE TABLE `adhoc_event` (
   `id_event` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `date` datetime NOT NULL,
@@ -309,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_event` (
   CONSTRAINT `fk_event_lieu` FOREIGN KEY (`id_lieu`) REFERENCES `adhoc_lieu` (`id_lieu`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_exposant` (
+CREATE TABLE `adhoc_exposant` (
   `id_exposant` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -326,7 +326,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_exposant` (
   KEY `online` (`online`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_faq` (
+CREATE TABLE `adhoc_faq` (
   `id_faq` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_category` int(10) UNSIGNED NOT NULL,
   `question` varchar(255) NOT NULL,
@@ -340,7 +340,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_faq` (
   CONSTRAINT `fk_faq_faq_category` FOREIGN KEY (`id_category`) REFERENCES `adhoc_faq_category` (`id_faq_category`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_featured` (
+CREATE TABLE `adhoc_featured` (
   `id_featured` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `description` varchar(100) NOT NULL,
@@ -354,7 +354,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_featured` (
   KEY `online` (`online`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_info` (
+CREATE TABLE `adhoc_forum_prive_info` (
   `id_forum` char(1) NOT NULL,
   `title` varchar(50) NOT NULL,
   `description` tinytext NOT NULL,
@@ -367,7 +367,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_info` (
   CONSTRAINT `fk_forum_membre` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_thread` (
+CREATE TABLE `adhoc_forum_prive_thread` (
   `id_thread` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_forum` char(1) NOT NULL,
   `nb_messages` int(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -390,7 +390,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_thread` (
 ALTER TABLE `adhoc_forum_prive_info`
   ADD CONSTRAINT `fk_forum_thread` FOREIGN KEY (`id_thread`) REFERENCES `adhoc_forum_prive_thread` (`id_thread`);
 
-CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_message` (
+CREATE TABLE `adhoc_forum_prive_message` (
   `id_message` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_thread` int(10) UNSIGNED NOT NULL,
   `text` text NOT NULL,
@@ -405,7 +405,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_message` (
   CONSTRAINT `fk_forum_message_modified_by` FOREIGN KEY (`modified_by`) REFERENCES `adhoc_membre` (`id_contact`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_subscriber` (
+CREATE TABLE `adhoc_forum_prive_subscriber` (
   `id_forum` char(1) NOT NULL,
   `id_contact` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id_forum`,`id_contact`),
@@ -415,7 +415,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_forum_prive_subscriber` (
   CONSTRAINT `fk_forum_subscriber_membre` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_messagerie` (
+CREATE TABLE `adhoc_messagerie` (
   `id_pm` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_from` int(10) UNSIGNED NOT NULL,
   `id_to` int(10) UNSIGNED NOT NULL,
@@ -433,7 +433,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_messagerie` (
   CONSTRAINT `fk_messagerie_to` FOREIGN KEY (`id_to`) REFERENCES `adhoc_membre` (`id_contact`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_audio` (
+CREATE TABLE `adhoc_audio` (
   `id_audio` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_contact` int(10) UNSIGNED NOT NULL,
   `id_groupe` int(10) UNSIGNED DEFAULT NULL,
@@ -455,7 +455,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_audio` (
   CONSTRAINT `fk_audio_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_photo` (
+CREATE TABLE `adhoc_photo` (
   `id_photo` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_contact` int(10) UNSIGNED NOT NULL,
   `id_groupe` int(10) UNSIGNED DEFAULT NULL,
@@ -478,7 +478,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_photo` (
   CONSTRAINT `fk_photo_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_video` (
+CREATE TABLE `adhoc_video` (
   `id_video` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_host` tinyint(4) UNSIGNED NOT NULL,
   `reference` varchar(50) NOT NULL,
@@ -504,7 +504,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_video` (
   CONSTRAINT `fk_video_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_appartient_a` (
+CREATE TABLE `adhoc_appartient_a` (
   `id_contact` int(10) UNSIGNED NOT NULL,
   `id_groupe` int(10) UNSIGNED NOT NULL,
   `id_type_musicien` int(10) UNSIGNED NOT NULL,
@@ -518,7 +518,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_appartient_a` (
   CONSTRAINT `fk_appartient_a_type_musicien` FOREIGN KEY (`id_type_musicien`) REFERENCES `adhoc_type_musicien` (`id_type_musicien`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_groupe_style` (
+CREATE TABLE `adhoc_groupe_style` (
   `id_groupe` int(10) UNSIGNED NOT NULL,
   `id_style` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id_groupe`,`id_style`),
@@ -528,7 +528,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_groupe_style` (
   CONSTRAINT `fk_groupe_style_style` FOREIGN KEY (`id_style`) REFERENCES `adhoc_style` (`id_style`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_video_groupe` (
+CREATE TABLE `adhoc_video_groupe` (
   `id_video` int(10) UNSIGNED NOT NULL,
   `id_groupe` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id_video`,`id_groupe`),
@@ -538,7 +538,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_video_groupe` (
   CONSTRAINT `fk_video_groupe_groupe` FOREIGN KEY (`id_groupe`) REFERENCES `adhoc_groupe` (`id_groupe`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_participe_a` (
+CREATE TABLE `adhoc_participe_a` (
   `id_event` int(10) UNSIGNED NOT NULL,
   `id_groupe` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id_event`,`id_groupe`),
@@ -548,7 +548,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_participe_a` (
   CONSTRAINT `fk_participe_a_groupe` FOREIGN KEY (`id_groupe`) REFERENCES `adhoc_groupe` (`id_groupe`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_event_style` (
+CREATE TABLE `adhoc_event_style` (
   `id_event` int(10) UNSIGNED NOT NULL,
   `id_style` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id_event`,`id_style`),
@@ -558,7 +558,7 @@ CREATE TABLE IF NOT EXISTS `adhoc_event_style` (
   CONSTRAINT `fk_event_style_style` FOREIGN KEY (`id_style`) REFERENCES `adhoc_style` (`id_style`)
 );
 
-CREATE TABLE IF NOT EXISTS `adhoc_organise_par` (
+CREATE TABLE `adhoc_organise_par` (
   `id_event` int(10) UNSIGNED NOT NULL,
   `id_structure` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id_event`,`id_structure`),

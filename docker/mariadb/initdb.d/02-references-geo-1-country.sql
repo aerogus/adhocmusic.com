@@ -1,4 +1,3 @@
-
 INSERT INTO `geo_world_country` (`id_country`, `name`) VALUES
 ('AD', 'Andorre'),
 ('AE', 'Émirats Arabes Unis'),

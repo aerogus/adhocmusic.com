@@ -1,4 +1,3 @@
-
 INSERT INTO `geo_world_region` (`id_country`, `id_region`, `name`) VALUES
 ('AD', '02', 'Canillo'),
 ('AD', '03', 'Encamp'),

@@ -1,0 +1,44 @@
+-- effacer dans l'ordre inverse de création
+-- pour respecter les contraintes d'intégrité
+
+DROP TABLE IF EXISTS `adhoc_organise_par`;
+DROP TABLE IF EXISTS `adhoc_event_style`;
+DROP TABLE IF EXISTS `adhoc_participe_a`;
+DROP TABLE IF EXISTS `adhoc_video_groupe`;
+DROP TABLE IF EXISTS `adhoc_groupe_style`;
+DROP TABLE IF EXISTS `adhoc_appartient_a`;
+DROP TABLE IF EXISTS `adhoc_video`;
+DROP TABLE IF EXISTS `adhoc_photo`;
+DROP TABLE IF EXISTS `adhoc_audio`;
+DROP TABLE IF EXISTS `adhoc_messagerie`;
+DROP TABLE IF EXISTS `adhoc_forum_prive_subscriber`;
+DROP TABLE IF EXISTS `adhoc_forum_prive_message`;
+DROP TABLE IF EXISTS `adhoc_forum_prive_thread`;
+DROP TABLE IF EXISTS `adhoc_forum_prive_info`;
+DROP TABLE IF EXISTS `adhoc_featured`;
+DROP TABLE IF EXISTS `adhoc_faq`;
+DROP TABLE IF EXISTS `adhoc_exposant`;
+DROP TABLE IF EXISTS `adhoc_event`;
+DROP TABLE IF EXISTS `adhoc_lieu`;
+DROP TABLE IF EXISTS `adhoc_comment`;
+DROP TABLE IF EXISTS `adhoc_cms`;
+DROP TABLE IF EXISTS `adhoc_alerting`;
+DROP TABLE IF EXISTS `adhoc_partner`;
+DROP TABLE IF EXISTS `adhoc_structure`;
+DROP TABLE IF EXISTS `adhoc_groupe`;
+DROP TABLE IF EXISTS `adhoc_newsletter_hit`;
+DROP TABLE IF EXISTS `adhoc_newsletter`;
+DROP TABLE IF EXISTS `adhoc_subscription`;
+DROP TABLE IF EXISTS `adhoc_log_action`;
+DROP TABLE IF EXISTS `adhoc_membre_adhoc`;
+DROP TABLE IF EXISTS `adhoc_membre`;
+DROP TABLE IF EXISTS `adhoc_contact`;
+DROP TABLE IF EXISTS `adhoc_type_musicien`;
+DROP TABLE IF EXISTS `adhoc_faq_category`;
+DROP TABLE IF EXISTS `adhoc_video_host`;
+DROP TABLE IF EXISTS `adhoc_style`;
+DROP TABLE IF EXISTS `adhoc_lieu_type`;
+DROP TABLE IF EXISTS `geo_fr_city`;
+DROP TABLE IF EXISTS `geo_fr_departement`;
+DROP TABLE IF EXISTS `geo_world_region`;
+DROP TABLE IF EXISTS `geo_world_country`;
