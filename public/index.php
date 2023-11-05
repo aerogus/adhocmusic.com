@@ -3,7 +3,6 @@
 /**
  * Point d'entrée
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 
