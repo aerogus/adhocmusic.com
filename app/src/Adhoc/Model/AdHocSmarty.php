@@ -7,14 +7,13 @@ namespace Adhoc\Model;
 /**
  * Fonctions et modifiers custom pour Smarty
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class AdHocSmarty extends \Smarty
 {
-    protected static $pseudos = [];
-    protected static $avatars = [];
-    protected $script_vars = [];
+    protected static array $pseudos = [];
+    protected static array $avatars = [];
+    protected array $script_vars = [];
 
     /**
      * Constructeur
@@ -29,17 +28,17 @@ class AdHocSmarty extends \Smarty
         $this->setCacheDir(SMARTY_TEMPLATE_C_PATH);
 
         // fonctions smarty
-        $this->registerPlugin('function', 'pagination', ['AdHocSmarty', 'functionPagination']);
-        $this->registerPlugin('function', 'html_input_date_hourminute', ['AdHocSmarty', 'functionHtmlInputDateHourminute']);
-        $this->registerPlugin('function', 'calendar', ['AdHocSmarty', 'functionCalendar']);
-        $this->registerPlugin('function', 'image', ['EmailSmarty', 'functionImage']);
+        $this->registerPlugin('function', 'pagination', ['Adhoc\Model\AdHocSmarty', 'functionPagination']);
+        $this->registerPlugin('function', 'html_input_date_hourminute', ['Adhoc\Model\AdHocSmarty', 'functionHtmlInputDateHourminute']);
+        $this->registerPlugin('function', 'calendar', ['Adhoc\Model\AdHocSmarty', 'functionCalendar']);
+        $this->registerPlugin('function', 'image', ['Adhoc\Model\EmailSmarty', 'functionImage']);
 
         // modifiers smarty
-        $this->registerPlugin('modifier', 'format_size', ['AdHocSmarty', 'modifierFormatSize']);
-        $this->registerPlugin('modifier', 'pseudo_by_id', ['AdHocSmarty', 'modifierPseudoById']);
-        $this->registerPlugin('modifier', 'avatar_by_id', ['AdHocSmarty', 'modifierAvatarById']);
-        $this->registerPlugin('modifier', 'display_on_off_icon', ['AdHocSmarty', 'modifierDisplayOnOffIcon']);
-        $this->registerPlugin('modifier', 'json_encode_numeric_check', ['AdHocSmarty', 'modifierJsonEncodeNumericCheck']);
+        $this->registerPlugin('modifier', 'format_size', ['Adhoc\Model\AdHocSmarty', 'modifierFormatSize']);
+        $this->registerPlugin('modifier', 'pseudo_by_id', ['Adhoc\Model\AdHocSmarty', 'modifierPseudoById']);
+        $this->registerPlugin('modifier', 'avatar_by_id', ['Adhoc\Model\AdHocSmarty', 'modifierAvatarById']);
+        $this->registerPlugin('modifier', 'display_on_off_icon', ['Adhoc\Model\AdHocSmarty', 'modifierDisplayOnOffIcon']);
+        $this->registerPlugin('modifier', 'json_encode_numeric_check', ['Adhoc\Model\AdHocSmarty', 'modifierJsonEncodeNumericCheck']);
 
         // assignations générales
         $this->assign('title', "♫ AD'HOC : Les Musiques Actuelles");

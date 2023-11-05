@@ -9,7 +9,6 @@ use Adhoc\Model\Reference;
 /**
  * Classe de gestion des types de photos
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class PhotoType extends Reference

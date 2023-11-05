@@ -12,7 +12,6 @@ define('EMAIL_VALIDATE_REGEXP', '/^.+\@.+\..+$/i');
 /**
  * Outils pour travailler avec les emails
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  *
  * @see PEAR::HTML_QuickForm/Rules/email.php

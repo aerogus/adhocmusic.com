@@ -7,7 +7,6 @@ namespace Adhoc\Model;
 /**
  * Classe de gestion de l'appli messages privés
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Messagerie extends ObjectModel

@@ -12,7 +12,6 @@ use Adhoc\Model\Reference\Style;
  * Gestion des événements et des liaisons directes (avec groupe, structure et lieu)
  * gestion de l'intégrité référentielle
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Event extends ObjectModel

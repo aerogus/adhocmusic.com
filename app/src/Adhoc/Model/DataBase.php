@@ -3,7 +3,6 @@
 /**
  * Gestion de la base MySQL
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 

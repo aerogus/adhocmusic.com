@@ -9,7 +9,6 @@ use Adhoc\Model\Reference;
 /**
  * Classe de gestion des catégories de FAQ
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class FAQCategory extends Reference

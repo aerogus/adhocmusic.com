@@ -7,7 +7,6 @@ namespace Adhoc\Model;
 /**
  * Classe Content Management System
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class CMS extends ObjectModel

@@ -3,7 +3,6 @@
 /**
  * Classe de gestion des vidéos
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 

@@ -10,7 +10,6 @@ namespace Adhoc\Model;
  * Classe de gestion des photos du site
  * Upload, Appel conversion etc ...
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Photo extends Media

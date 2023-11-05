@@ -7,7 +7,6 @@ namespace Adhoc\Model;
 /**
  * Gestion des Cotisations
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Subscription extends ObjectModel

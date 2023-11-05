@@ -7,7 +7,6 @@ namespace Adhoc\Model;
 /**
  * Méthodes pratiques communes à tout le site AD'HOC
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Tools

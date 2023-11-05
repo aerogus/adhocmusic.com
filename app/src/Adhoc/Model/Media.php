@@ -8,7 +8,6 @@ namespace Adhoc\Model;
  * Classe Media
  * parente de Audio, Video et Photo
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Media extends ObjectModel

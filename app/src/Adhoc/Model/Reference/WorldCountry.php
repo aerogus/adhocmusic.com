@@ -10,7 +10,6 @@ use Adhoc\Model\Reference;
 /**
  * Classe WorldCountry
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  *
  * @see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2

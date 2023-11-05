@@ -10,7 +10,6 @@ use Adhoc\Model\Reference;
 /**
  * Classe WorldRegion
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class WorldRegion extends Reference

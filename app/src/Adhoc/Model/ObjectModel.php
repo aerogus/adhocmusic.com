@@ -13,7 +13,6 @@ namespace Adhoc\Model;
  *
  * @abstract
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class ObjectModel

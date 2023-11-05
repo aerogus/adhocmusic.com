@@ -4,7 +4,6 @@
 /**
  * Import en masse de cotisations
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 

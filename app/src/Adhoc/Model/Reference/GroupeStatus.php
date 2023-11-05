@@ -9,7 +9,6 @@ use Adhoc\Model\Reference;
 /**
  * Classe de gestion des états de groupes
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class GroupeStatus extends Reference

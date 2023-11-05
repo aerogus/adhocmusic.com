@@ -10,7 +10,6 @@
  * + liaison compte/groupe
  * + liaison groupe/evenement
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 

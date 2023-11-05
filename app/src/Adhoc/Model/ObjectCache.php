@@ -14,7 +14,6 @@ namespace Adhoc\Model;
  *
  * le nom de la clé est de la forme "ClassName:pkValue" ou "ClassName:pk1Value:pk2Value"
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class ObjectCache

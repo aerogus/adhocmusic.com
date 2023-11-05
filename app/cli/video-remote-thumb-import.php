@@ -4,7 +4,6 @@
 /**
  * Script pour récupérer / remplacer les imagettes vidéos
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 

@@ -9,7 +9,6 @@ use Adhoc\Model\Reference;
 /**
  * Classe de gestion des types de lieux
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class LieuType extends Reference

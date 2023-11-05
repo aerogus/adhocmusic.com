@@ -10,7 +10,6 @@ use Adhoc\Model\Reference;
 /**
  * Classe Departement
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Departement extends Reference

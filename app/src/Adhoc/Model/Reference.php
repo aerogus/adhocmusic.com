@@ -7,7 +7,6 @@ namespace Adhoc\Model;
 /**
  * Classe de gestion des tables de référence
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class Reference extends ObjectModel

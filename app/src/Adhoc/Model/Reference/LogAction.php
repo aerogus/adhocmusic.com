@@ -9,7 +9,6 @@ use Adhoc\Model\Reference;
 /**
  * Actions de log
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class LogAction extends Reference

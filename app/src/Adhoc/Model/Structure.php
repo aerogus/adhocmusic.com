@@ -7,7 +7,6 @@ namespace Adhoc\Model;
 /**
  * Gestion des Structures / associations
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Structure extends ObjectModel

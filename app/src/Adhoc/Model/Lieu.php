@@ -15,7 +15,6 @@ use Adhoc\Model\Reference\WorldRegion;
  *
  * Gestion des Lieux de diffusions
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Lieu extends ObjectModel

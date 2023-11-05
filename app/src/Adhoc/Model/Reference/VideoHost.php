@@ -9,7 +9,6 @@ use Adhoc\Model\Reference;
 /**
  * Classe VideoHost
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class VideoHost extends Reference

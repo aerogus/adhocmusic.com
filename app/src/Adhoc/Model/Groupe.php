@@ -11,7 +11,6 @@ use Adhoc\Model\Reference\GroupeStatus;
 /**
  * Classe Groupe
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Groupe extends ObjectModel

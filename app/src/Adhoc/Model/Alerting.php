@@ -9,7 +9,6 @@ namespace Adhoc\Model;
  *
  * Classe des alertes mails groupes/lieux
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Alerting extends ObjectModel

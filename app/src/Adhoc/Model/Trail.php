@@ -7,7 +7,6 @@ namespace Adhoc\Model;
 /**
  * Gestion du fil d'Ariane / Trail / BreadCrumbs
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Trail

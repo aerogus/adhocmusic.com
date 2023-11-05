@@ -6,7 +6,6 @@
  *
  * Vérifie si un content du file system pas obsolète (ressource bdd effacée)
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 

@@ -9,7 +9,6 @@
  * + tous ses sons
  * + liaison compte/groupe
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 

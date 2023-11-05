@@ -10,7 +10,6 @@ namespace Adhoc\Model;
  * Permet de générer un commentaire générique sur n'importe quelle entité
  * Video, Audio, Photo, Lieu, Event, Groupe, Membre
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Comment extends ObjectModel

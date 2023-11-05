@@ -13,7 +13,6 @@ use Adhoc\Model\Reference\WorldRegion;
 /**
  * Classe Membre
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Membre extends Contact

@@ -7,7 +7,6 @@ namespace Adhoc\Model;
 /**
  * Différentes méthodes et données relatives aux dates
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  *
  * @deprecated bientôt. ah ?

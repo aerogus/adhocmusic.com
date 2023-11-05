@@ -9,7 +9,6 @@ use Adhoc\Model\Reference;
 /**
  * Classe MembreType
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class MembreType extends Reference

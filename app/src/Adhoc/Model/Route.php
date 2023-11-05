@@ -13,7 +13,6 @@ define('DEFAULT_CONTROLLERS_FORMAT', 'html');
 /**
  * Gestion des routes
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Route
@@ -21,12 +20,12 @@ class Route
     /**
      * @var array<string,mixed>
      */
-    protected static $routes = [];
+    protected static array $routes = [];
 
     /**
-     * @var array
+     * @var array<string,mixed>
      */
-    protected static $action_params = [];
+    protected static array $action_params = [];
 
     /**
      * @var string
@@ -39,9 +38,9 @@ class Route
     protected static string $controller_suffix = DEFAULT_CONTROLLER_SUFFIX;
 
     /**
-     * @var string
+     * @var int
      */
-    protected static string $http_code = '200';
+    protected static int $http_code = 200;
 
     /**
      * @var string
@@ -50,8 +49,10 @@ class Route
 
     /**
      * @param int $http_code n° de code http
+     *
+     * @return void
      */
-    public static function setHttpCode(int $http_code)
+    public static function setHttpCode(int $http_code): void
     {
         self::$http_code = $http_code;
     }
@@ -438,8 +439,10 @@ class Route
     /**
      * @param string $content_type type de contenu
      * @param string $content      contenu
+     *
+     * @return void
      */
-    protected static function output(string $content_type, string $content)
+    protected static function output(string $content_type, string $content): void
     {
         if ($content_type === 'application/xhtml+xml') {
             if (!(isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/xhtml+xml') !== false)) {
@@ -471,8 +474,10 @@ class Route
      * @param string $controller controlleur
      * @param string $action     action
      * @param string $log        log
+     *
+     * @return void
      */
-    protected static function routeLog(string $controller, string $action, string $log)
+    protected static function routeLog(string $controller, string $action, string $log): void
     {
         $log_message = '[' . addcslashes($controller, "\r\n|[]") . '] ' .
                        '[' . addcslashes($action, "\r\n|[]") . '] ' .

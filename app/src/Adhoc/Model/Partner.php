@@ -7,7 +7,6 @@ namespace Adhoc\Model;
 /**
  * Gestion des partenaires
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Partner extends ObjectModel

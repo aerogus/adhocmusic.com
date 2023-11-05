@@ -7,7 +7,6 @@
  * @param int    $argv[1] id_newsletter
  * @param string $argv[2] email (à implémenter)
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 

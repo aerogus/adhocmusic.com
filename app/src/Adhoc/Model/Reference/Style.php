@@ -10,7 +10,6 @@ use Adhoc\Model\Reference;
 /**
  * Classe de gestion des styles musicaux
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Style extends Reference

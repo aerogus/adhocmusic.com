@@ -12,7 +12,6 @@ use Adhoc\Model\Reference;
  * (villes de France uniquement)
  * pk = code insee
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class City extends Reference

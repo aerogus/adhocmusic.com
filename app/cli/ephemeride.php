@@ -4,7 +4,6 @@
 /**
  * Calcul de l'éphéméride AD'HOC
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 

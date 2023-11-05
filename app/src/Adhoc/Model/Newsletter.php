@@ -18,7 +18,6 @@ define('NEWSLETTER_TEMPLATE_PATH', ADHOC_ROOT_PATH . '/app/views/emails');
 /**
  * Classe de gestion de la newsletter AD'HOC
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Newsletter extends ObjectModel

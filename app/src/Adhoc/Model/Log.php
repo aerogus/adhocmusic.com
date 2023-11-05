@@ -9,7 +9,6 @@ namespace Adhoc\Model;
  *
  * @todo extends ObjectModel
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Log
@@ -134,8 +133,10 @@ class Log
      * @param string $file file
      * @param string $log  log
      * @param bool   $save save
+     *
+     * @return bool
      */
-    public static function write(string $file, string $log, bool $save = false)
+    public static function write(string $file, string $log, bool $save = false): bool
     {
         return self::doWrite($file, $log, $save);
     }
@@ -199,7 +200,7 @@ class Log
      *
      * @return bool
      */
-    protected static function doWrite(string $type, string $text, bool $save = false)
+    protected static function doWrite(string $type, string $text, bool $save = false): bool
     {
         self::$log_file = ADHOC_ROOT_PATH . '/log/' . strtolower(substr($type, 0, 12)) . '.log';
 

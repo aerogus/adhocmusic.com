@@ -3,7 +3,6 @@
 /**
  * Configuration générale
  *
- * @package AdHoc
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 
