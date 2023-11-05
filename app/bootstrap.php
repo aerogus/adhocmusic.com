@@ -36,7 +36,7 @@ if (!is_dir(SMARTY_TEMPLATE_C_PATH)) {
  *
  * @return void
  */
-function autoload(string $className)
+function autoload(string $className): void
 {
     $className = str_replace('\\', '/', $className);
     $classPath = __DIR__ . '/src/' . $className . '.php';
