@@ -339,7 +339,7 @@ class Tools
     public static function makeSeed(): int
     {
         list($usec, $sec) = explode(' ', microtime());
-        $number =(int) $sec * 1000000 + ((int) $usec * 1000000);
+        $number = (int) $sec * 1000000 + ((int) $usec * 1000000);
         return (int) $number;
     }
 
