@@ -56,9 +56,9 @@ class AdHocSmarty extends \Smarty
             $this->assign('is_auth', false);
         }
 
-        $this->enqueue_style('/css/adhoc.css');
+        $this->enqueueStyle('/css/adhoc.css');
 
-        $this->enqueueScript('/lib/jquery@3.6.3/jquery.min.js');
+        $this->enqueueScript('/lib/jquery@3.7.1/jquery.min.js');
         $this->enqueueScript('/js/adhoc.js');
 
         return $this;
@@ -171,6 +171,8 @@ class AdHocSmarty extends \Smarty
      * @param array $params ['hour']
      *                      ['minute']
      *                      ['step']
+     *
+     * @return string
      */
     public static function functionHtmlInputDateHourminute(array $params): string
     {
@@ -210,6 +212,8 @@ class AdHocSmarty extends \Smarty
      * @param array $params ['year']
      *                      ['month']
      *                      ['day']
+     *
+     * @return string
      */
     public static function functionCalendar(array $params): string
     {
@@ -395,8 +399,10 @@ class AdHocSmarty extends \Smarty
 
     /**
      * @param mixed $val val
+     *
+     * @return string
      */
-    public static function modifierJsonEncodeNumericCheck($val)
+    public static function modifierJsonEncodeNumericCheck($val): string
     {
         return json_encode($val, JSON_NUMERIC_CHECK);
     }
