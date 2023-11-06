@@ -141,9 +141,9 @@ class Groupe extends ObjectModel
     protected ?string $datfin = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $comment = '';
+    protected ?string $comment = null;
 
     /**
      * @var int
