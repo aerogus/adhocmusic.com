@@ -469,6 +469,7 @@ abstract class ObjectModel
 
             $rows = $db->queryWithFetch($sql);
             foreach ($rows as $row) {
+                // todo transtypage éventuel
                 $objs[] = static::getInstance($row);
             }
         } else {
@@ -477,7 +478,15 @@ abstract class ObjectModel
             $sql .= 'ORDER BY `' . static::getDbPk() . '` ASC';
             if ($ids = $db->queryWithFetchFirstFields($sql)) {
                 foreach ($ids as $id) {
-                    $objs[] = static::getInstance((int) $id); // transtypage brutal ...
+                    switch (static::$all_fields[static::getDbPk()]) {
+                        case 'string':
+                            $id = (string) $id;
+                            break;
+                        case 'int':
+                            $id = (int) $id;
+                            break;
+                    }
+                    $objs[] = static::getInstance($id);
                 }
             }
         }

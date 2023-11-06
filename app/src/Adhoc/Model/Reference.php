@@ -33,16 +33,16 @@ abstract class Reference extends ObjectModel
     protected static string $table = '';
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $name = '';
+    protected ?string $name = null;
 
     /* début getters */
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -52,12 +52,14 @@ abstract class Reference extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $name nom
+     * @param ?string $name nom
      *
      * @return object
      */
-    public function setName(string $name): object
+    public function setName(?string $name): object
     {
+        $name = is_string($name) ? trim($name) : $name;
+
         if ($this->name !== $name) {
             $this->name = $name;
             $this->modified_fields['name'] = true;
