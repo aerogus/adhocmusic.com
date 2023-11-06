@@ -17,9 +17,9 @@ class Comment extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var object
+     * @var ?object
      */
-    protected static $instance = null;
+    protected static ?object $instance = null;
 
     /**
      * @var string|array<string>

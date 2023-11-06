@@ -18,9 +18,9 @@ namespace Adhoc\Model;
 abstract class ObjectModel
 {
     /**
-     * @var object
+     * @var ?object
      */
-    protected static $instance = null;
+    protected static ?object $instance = null;
 
     /**
      * Champ clé primaire (simple ou multiple) de l'objet fils
@@ -238,11 +238,11 @@ abstract class ObjectModel
      * Set la valeur de la clé primaire
      * Todo gérer si pk simple ou multiple, le typage, si nom du champ est bien une pk
      *
-     * @var mixed $id id
+     * @param int|string|array<string,int>|array<string,string> $id id
      *
      * @return object
      */
-    public function setId($id)
+    public function setId(mixed $id)
     {
         if (is_array($id)) {
             foreach ($id as $key => $val) {

@@ -14,9 +14,9 @@ abstract class Reference extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var object
+     * @var ?object
      */
-    protected static $instance = null;
+    protected static ?object $instance = null;
 
     /**
      * [à étendre dans l'objet fils]

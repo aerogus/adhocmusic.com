@@ -22,9 +22,9 @@ class Lieu extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var object
+     * @var ?object
      */
-    protected static $instance = null;
+    protected static ?object $instance = null;
 
     /**
      * Nom de la clé primaire

@@ -22,7 +22,7 @@ ini_set('mysql.connect_timeout', '2');
 class DataBase
 {
     /**
-     * @var array<int,<array<string,mixed>>>
+     * @var array<int,array<string,mixed>>
      */
     protected static array $connections_params = [
         0 => [
@@ -36,8 +36,10 @@ class DataBase
 
     /**
      * Conteneur de l'instance courante
+     *
+     * @var ?object
      */
-    protected static $instance = null;
+    protected static ?object $instance = null;
 
     /**
      * Tableau des connexions ouvertes
@@ -51,15 +53,17 @@ class DataBase
 
     /**
      * Charset à utiliser pour la connexion
+     *
+     * @var string
      */
-    protected $charset = 'utf8mb4';
+    protected string $charset = 'utf8mb4';
 
     /**
      * @param int $conn_name identifiant de connexion
      *
      * @throws \Exception
      */
-    protected function connect($conn_name = 0)
+    protected function connect(int $conn_name = 0)
     {
         if (true === self::$connections_params[$conn_name]['hasMaintenance']) {
             throw new \Exception('Serveur MySQL en maintenance');
@@ -114,9 +118,9 @@ class DataBase
     }
 
     /**
-     *
+     * @return true
      */
-    public function closeAllConnections()
+    public function closeAllConnections(): true
     {
         $connection_keys = array_keys($this->current_conn);
         foreach ($connection_keys as $conn_key) {
@@ -148,8 +152,10 @@ class DataBase
 
     /**
      * @param int $conn_name identifiant de connexion
+     *
+     * @return bool
      */
-    public static function isServerInMaintenance(int $conn_name = 0)
+    public static function isServerInMaintenance(int $conn_name = 0): bool
     {
         return self::$connections_params[$conn_name]['hasMaintenance'];
     }
