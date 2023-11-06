@@ -34,14 +34,14 @@ class CMS extends ObjectModel
     protected int $id_cms = 0;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $alias = '';
+    protected ?string $alias = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $title = '';
+    protected ?string $title = null;
 
     /**
      * @var ?string
@@ -54,24 +54,24 @@ class CMS extends ObjectModel
     protected ?string $modified_at = null;
 
     /**
-     * @var array
+     * @var ?string
      */
-    protected array $breadcrumb = [];
+    protected ?string $breadcrumb = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $content = '';
+    protected ?string $content = null;
 
     /**
-     * @var bool
+     * @var ?bool
      */
-    protected bool $online = false;
+    protected ?bool $online = null;
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $auth = 0;
+    protected ?int $auth = null;
 
     /**
      * Liste des attributs de l'objet
@@ -93,25 +93,25 @@ class CMS extends ObjectModel
     /* début getters */
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdCMS(): int
+    public function getIdCms(): ?int
     {
         return $this->id_cms;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getAlias(): string
+    public function getAlias(): ?string
     {
         return $this->alias;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -161,33 +161,33 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @return array
+     * @return ?string
      */
-    public function getBreadcrumb(): array
+    public function getBreadcrumb(): ?string
     {
         return $this->breadcrumb;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
     /**
-     * @return bool
+     * @return ?bool
      */
-    public function getOnline(): bool
+    public function getOnline(): ?bool
     {
         return $this->online;
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getAuth(): int
+    public function getAuth(): ?int
     {
         return $this->auth;
     }
@@ -197,13 +197,14 @@ class CMS extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $alias alias
+     * @param ?string $alias alias
      *
      * @return object
      */
-    public function setAlias(string $alias): object
+    public function setAlias(?string $alias): object
     {
-        $alias = trim($alias);
+        $alias = is_string($alias) ? trim($alias) : $alias;
+
         if ($this->alias !== $alias) {
             $this->alias = $alias;
             $this->modified_fields['alias'] = true;
@@ -213,13 +214,14 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @param string $title title
+     * @param ?string $title title
      *
      * @return object
      */
-    public function setTitle(string $title): object
+    public function setTitle(?string $title): object
     {
-        $title = trim($title);
+        $title = is_string($title) ? trim($title) : $title;
+
         if ($this->title !== $title) {
             $this->title = $title;
             $this->modified_fields['title'] = true;
@@ -295,6 +297,7 @@ class CMS extends ObjectModel
      */
     public function setBreadcrumb(array $breadcrumb): object
     {
+        // TODO: à convertir en chaine
         if ($this->breadcrumb !== $breadcrumb) {
             $this->breadcrumb = print_r($breadcrumb, true);
             $this->modified_fields['breadcrumb'] = true;
@@ -310,7 +313,8 @@ class CMS extends ObjectModel
      */
     public function setContent(string $content): object
     {
-        $content = trim($content);
+        $content = is_string($content) ? trim($content) : $content;
+
         if ($this->content !== $content) {
             $this->content = $content;
             $this->modified_fields['content'] = true;
@@ -320,11 +324,11 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @param bool $online online
+     * @param ?bool $online online
      *
      * @return object
      */
-    public function setOnline(bool $online): object
+    public function setOnline(?bool $online): object
     {
         if ($this->online !== $online) {
             $this->online = $online;
@@ -335,11 +339,11 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @param int $auth auth
+     * @param ?int $auth auth
      *
      * @return object
      */
-    public function setAuth(int $auth): object
+    public function setAuth(?int $auth): object
     {
         if ($this->auth !== $auth) {
             $this->auth = $auth;
@@ -429,7 +433,7 @@ class CMS extends ObjectModel
                 ]
             )
         ) {
-            return $cmss[0]->getIdCMS();
+            return $cmss[0]->getIdCms();
         }
         return null;
     }

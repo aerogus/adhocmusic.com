@@ -22,8 +22,8 @@
   <tbody>
     {foreach from=$cmss item=cms}
     <tr>
-      <td>{$cms->getIdCMS()|escape}</td>
-      <td><a href="/adm/cms/edit/{$cms->getIdCMS()|escape}">{$cms->getAlias()|escape}</a></td>
+      <td>{$cms->getIdCms()|escape}</td>
+      <td><a href="/adm/cms/edit/{$cms->getIdCms()|escape}">{$cms->getAlias()|escape}</a></td>
       <td>{$cms->getTitle()|escape}</td>
       <td>{$cms->getOnline()|display_on_off_icon}</td>
     </tr>
