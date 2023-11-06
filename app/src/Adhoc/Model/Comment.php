@@ -62,9 +62,9 @@ class Comment extends ObjectModel
     protected bool $online = false;
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_contact = 0;
+    protected ?int $id_contact = null;
 
     /**
      * @var string
@@ -197,9 +197,9 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdContact(): int
+    public function getIdContact(): ?int
     {
         return $this->id_contact;
     }
@@ -364,11 +364,11 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param int $id_contact id_contact
+     * @param ?int $id_contact id_contact
      *
      * @return object
      */
-    public function setIdContact(int $id_contact): object
+    public function setIdContact(?int $id_contact): object
     {
         if ($this->id_contact !== $id_contact) {
             $this->id_contact = $id_contact;
@@ -402,7 +402,7 @@ class Comment extends ObjectModel
      */
     public function setEmail(?string $email): object
     {
-        $email = is_string($email) ? trim($email) : $email;
+        $email = !is_string($email) ? trim($email) : $email;
 
         if ($this->email !== $email) {
             $this->email = $email;
