@@ -200,8 +200,8 @@ final class Controller
     /**
      * Routine de validation des données du formulaire
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array<string,mixed>  $data   tableau des données
+     * @param array<string,string> $errors tableau des erreurs (par référence)
      *
      * @return bool
      */

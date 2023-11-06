@@ -11,14 +11,14 @@ namespace Adhoc\Model;
 class Ephemeride
 {
     /**
-     * @var array
+     * @var array<string,array<mixed>>
      */
     protected array $data;
 
     /**
      * Retourne toutes les données
      *
-     * @return array
+     * @return array<string,array<mixed>>
      */
     public function getAll(): array
     {

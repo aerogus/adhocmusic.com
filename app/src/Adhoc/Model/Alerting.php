@@ -296,16 +296,16 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @param array $params [
-     *                      'id_contact' => int,
-     *                      'id_lieu' => int,
-     *                      'id_groupe' => int,
-     *                      'id_event' => int,
-     *                      'order_by' => string,
-     *                      'sort' => string,
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     * @param array<string,mixed> $params [
+     *                                'id_contact' => int,
+     *                                'id_lieu' => int,
+     *                                'id_groupe' => int,
+     *                                'id_event' => int,
+     *                                'order_by' => string,
+     *                                'sort' => string,
+     *                                'start' => int,
+     *                                'limit' => int,
+     *                            ]
      *
      * @return array<mixed>
      */

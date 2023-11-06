@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\Debug;
+
 if (!defined('DEFAULT_CONTROLLERS_PATH')) {
     define('DEFAULT_CONTROLLERS_PATH', __DIR__ . '/../../../../src/Adhoc/Controller/');
 }
@@ -58,9 +60,11 @@ class Route
     }
 
     /**
-     * @param array $params params
+     * @param array<string,string> $params params
+     *
+     * @return void
      */
-    public static function mapConnect(array $params)
+    public static function mapConnect(array $params): void
     {
         $extra_params = $params;
         foreach (['path', 'controller', 'action', 'method'] as $key) {
@@ -96,9 +100,11 @@ class Route
     }
 
     /**
-     * @param array $params paramètres
+     * @param array<string,string> $params paramètres
+     *
+     * @return array<string,mixed>|false
      */
-    public static function findRoute(array $params)
+    public static function findRoute(array $params): array|false
     {
         $response_format = DEFAULT_CONTROLLERS_FORMAT;
         $method = $params['method'];
@@ -131,6 +137,7 @@ class Route
         $sizeof_splitted_path = count($splitted_path);
 
         $ret = false;
+        $route = '';
         foreach (self::$routes as $route) {
             if (strcasecmp($route['method'], $method) !== 0) {
                 continue;
@@ -184,9 +191,9 @@ class Route
     }
 
     /**
-     *
+     * @return bool
      */
-    public static function run()
+    public static function run(): bool
     {
         $method = $_SERVER['REQUEST_METHOD'];
         $path = '';
@@ -212,7 +219,7 @@ class Route
         $route = $ret['route'];
         $action = $ret['action'];
         $response_format = $ret['response_format'];
-        $controller = $route['controller'];
+        $controller = $route['controller']; // ??
         $controller_file = self::$controllers_path . preg_replace('/[^a-z0-9-]/i', '_', $controller) . self::$controller_suffix;
         if (file_exists($controller_file) === false) {
             self::routeLog($controller, $action, 'Contrôleur inaccessible');
@@ -325,18 +332,20 @@ class Route
     }
 
     /**
-     *
+     * @return void
      */
-    protected static function initParams()
+    protected static function initParams(): void
     {
         self::$action_params = array_merge(self::$action_params, $_GET);
         self::$action_params = array_merge(self::$action_params, $_POST);
     }
 
     /**
-     * @param array $params paramètres
+     * @param array<string,mixed> $params paramètres
+     *
+     * @return array<string,mixed>|false
      */
-    protected static function examineSplittedPaths(array $params)
+    protected static function examineSplittedPaths(array $params): array|false
     {
         $action = false;
         $extra_params = [];
@@ -382,7 +391,9 @@ class Route
     }
 
     /**
-     * @param array $params paramètres
+     * @param array<string,mixed> $params paramètres
+     *
+     * @return array<string,mixed>|false
      */
     protected static function examineSplittedPathComponent(array $params)
     {
@@ -414,9 +425,6 @@ class Route
                     return false;
                 }
                 $component_action = $component_splitted_action[1];
-                if (empty($scanned_component_splitted_action[1])) {
-                    return false;
-                }
                 $scanned_component_action = $scanned_component_splitted_action[1];
                 if ($scanned_component_action !== $component_action) {
                     return false;

@@ -350,8 +350,8 @@ final class Controller
     {
         $url = urldecode((string) Route::params('url'));
         list($url, $from) = explode('||', $url);
-        $url = Tools::base64_url_decode($url);
-        $from = Tools::base64_url_decode($from);
+        $url = Tools::base64UrlDecode($url);
+        $from = Tools::base64UrlDecode($from);
         list($id_newsletter, $id_contact) = explode('|', $from);
         Newsletter::addHit((int) $id_newsletter, (int) $id_contact, $url);
         Tools::redirect($url);

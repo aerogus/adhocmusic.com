@@ -25,9 +25,11 @@ class EmailSmarty extends \Smarty
     }
 
     /**
+     * @param string $url
      *
+     * @return string
      */
-    public static function modifierLink($url)
+    public static function modifierLink(string $url): string
     {
         // oui je sais pour les global ...
         // @see Controller::email::newsletter
@@ -35,15 +37,25 @@ class EmailSmarty extends \Smarty
         global $newsletter_id_contact;
         $orig = $newsletter_id_newsletter . '|' . $newsletter_id_contact;
         //return $url; // en attendant que ça remarche
-        return 'https://www.adhocmusic.com/r/' . Tools::base64_url_encode($url) . '||' . Tools::base64_url_encode($orig);
+        return 'https://www.adhocmusic.com/r/' . Tools::base64UrlEncode($url) . '||' . Tools::base64UrlEncode($orig);
     }
 
     /**
      * Récupère l'url d'une image cachée (la cache si nécessaire)
      *
-     * @param array ['type'] ['id'] ['width'] ['height'] ['bgcolor'] ['border'] ['zoom']
+     * @param array<string,mixed> $params [
+     *                                'type'
+     *                                'id'
+     *                                'width'
+     *                                'height'
+     *                                'bgcolor'
+     *                                'border'
+     *                                'zoom'
+     *                            ]
+     *
+     * @return string
      */
-    public static function functionImage($params)
+    public static function functionImage($params): string
     {
         $type    = (string) $params['type'];
         $id      = (int) $params['id'];

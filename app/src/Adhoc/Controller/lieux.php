@@ -7,6 +7,7 @@ namespace Adhoc\Controller;
 use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Audio;
 use Adhoc\Model\Event;
+use Adhoc\Model\Image;
 use Adhoc\Model\Lieu;
 use Adhoc\Model\Log;
 use Adhoc\Model\Membre;
@@ -19,6 +20,7 @@ use Adhoc\Model\Reference\LieuType;
 use Adhoc\Model\Reference\WorldCountry;
 use Adhoc\Model\Reference\WorldRegion;
 use Adhoc\Model\Trail;
+use Adhoc\Model\Video;
 
 /**
  *

@@ -142,9 +142,12 @@ class Log
     }
 
     /**
+     * @param int $action
+     * @param string $extra
      *
+     * @return \mysqli_result|bool
      */
-    public static function action(int $action, $extra = null)
+    public static function action(int $action, string $extra = null): \mysqli_result|bool
     {
         $db = DataBase::getInstance();
 
@@ -164,8 +167,6 @@ class Log
         if (!empty($_SESSION['host'])) {
             $host = $_SESSION['host'];
         }
-
-        $extra = (string) $extra;
 
         self::doWrite('action', 'membre=' . $pseudo . ' (' . $id_contact . ') - action=' . self::$actions[$action] . ' -  extra=' . $extra);
 
@@ -231,9 +232,9 @@ class Log
      *
      * @param int $action filtrer un type d'événement
      *
-     * @return array
+     * @return array<mixed>
      */
-    public static function getLogsAction(int $action)
+    public static function getLogsAction(int $action): array
     {
         $db = DataBase::getInstance();
 
@@ -264,7 +265,7 @@ class Log
     }
 
     /**
-     * @return array
+     * @return array<int,string>
      */
     public static function getActions(): array
     {

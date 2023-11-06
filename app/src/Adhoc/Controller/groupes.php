@@ -8,6 +8,7 @@ use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Audio;
 use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
+use Adhoc\Model\Image;
 use Adhoc\Model\Log;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
@@ -97,7 +98,7 @@ final class Controller
         try {
             $groupe = Groupe::getInstance($id);
             if (!$groupe->getOnline()) {
-                throw new Exception('groupe offline');
+                throw new \Exception('groupe offline');
             }
         } catch (\Exception $e) {
             Route::setHttpCode(404);

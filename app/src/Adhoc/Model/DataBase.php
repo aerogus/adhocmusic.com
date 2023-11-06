@@ -341,10 +341,10 @@ class DataBase
      * @param string $sql       requête SQL
      * @param int    $conn_name identifiant de connexion
      *
-     * @return array
+     * @return \mysqli_result|bool
      * @throws \Exception
      */
-    public function query(string $sql, int $conn_name = 0)
+    public function query(string $sql, int $conn_name = 0): \mysqli_result|bool
     {
         $conn = $this->connect($conn_name);
 

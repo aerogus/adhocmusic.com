@@ -6,6 +6,8 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\DataBase;
+use Adhoc\Model\Email;
+use Adhoc\Model\Log;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Route;
 use Adhoc\Model\Tools;
