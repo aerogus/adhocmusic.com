@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
 
 /**
  * Point d'entrée
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
+
+declare(strict_types=1);
 
 use Adhoc\Model\CMS;
 use Adhoc\Model\Groupe;
