@@ -87,9 +87,9 @@ class Comment extends ObjectModel
     protected ?string $email = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $email_mbr = '';
+    protected ?string $email_mbr = null;
 
     /**
      * Liste des attributs de l'objet
@@ -229,9 +229,9 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getEmailMbr(): string
+    public function getEmailMbr(): ?string
     {
         return $this->email_mbr;
     }
