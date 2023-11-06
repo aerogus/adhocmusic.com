@@ -97,7 +97,7 @@ abstract class ObjectModel
      *
      * @param mixed $id id
      */
-    public function __construct($id = null)
+    public function __construct(mixed $id = null)
     {
         if (!is_null($id)) {
             if (is_array($id)) {
@@ -156,7 +156,7 @@ abstract class ObjectModel
      *
      * @return object
      */
-    public static function getInstance($id): object
+    public static function getInstance(mixed $id): object
     {
         if (is_null(static::$instance)) {
             // pas du tout d'instance: on en crée une, le constructeur ira s'enregistrer
@@ -470,7 +470,7 @@ abstract class ObjectModel
             $sql .= 'ORDER BY `' . static::getDbPk() . '` ASC';
             if ($ids = $db->queryWithFetchFirstFields($sql)) {
                 foreach ($ids as $id) {
-                    $objs[] = static::getInstance($id);
+                    $objs[] = static::getInstance((int) $id); // transtypage brutal ...
                 }
             }
         }
