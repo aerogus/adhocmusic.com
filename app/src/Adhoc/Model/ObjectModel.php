@@ -27,7 +27,7 @@ abstract class ObjectModel
      *
      * @var string|array<string>
      */
-    protected static string|int|array $pk = '';
+    protected static string|array $pk = '';
 
     /**
      * Table de la bdd utilisée par l'objet
