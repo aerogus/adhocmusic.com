@@ -110,7 +110,14 @@ abstract class ObjectModel
             } else {
                 // clé primaire simple
                 $pk = static::$pk;
-                $this->$pk = $id;
+                switch (static::$all_fields[$pk]) {
+                    case 'string':
+                        $this->$pk = (string) $id;
+                        break;
+                    case 'int':
+                        $this->$pk = (int) $id;
+                        break;
+                }
                 $this->loadObjectId();
             }
 
