@@ -69,6 +69,16 @@ class Featured extends ObjectModel
     protected bool $online = false;
 
     /**
+     * @var ?string
+     */
+    protected ?string $created_at = null;
+
+    /**
+     * @var ?string
+     */
+    protected ?string $modified_at = null;
+
+    /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
@@ -157,6 +167,50 @@ class Featured extends ObjectModel
     public function getOnline(): bool
     {
         return $this->online;
+    }
+
+    /**
+     * @return ?string
+     */
+    public function getCreatedAt(): ?string
+    {
+        if (Date::isDateTimeOk($this->created_at)) {
+            return $this->created_at;
+        }
+        return null;
+    }
+
+    /**
+     * @return ?int
+     */
+    public function getCreatedAtTs(): ?int
+    {
+        if (Date::isDateTimeOk($this->created_at)) {
+            return strtotime($this->created_at);
+        }
+        return null;
+    }
+
+    /**
+     * @return ?string
+     */
+    public function getModifiedAt(): ?string
+    {
+        if (Date::isDateTimeOk($this->modified_at)) {
+            return $this->modified_at;
+        }
+        return null;
+    }
+
+    /**
+     * @return ?int
+     */
+    public function getModifiedAtTs(): ?int
+    {
+        if (Date::isDateTimeOk($this->modified_at)) {
+            return strtotime($this->modified_at);
+        }
+        return null;
     }
 
     /* fin getters */
@@ -262,6 +316,65 @@ class Featured extends ObjectModel
         if ($this->online !== $online) {
             $this->online = $online;
             $this->modified_fields['online'] = true;
+        }
+
+        return $this;
+    }
+    /**
+     * @param string $created_at created_at
+     *
+     * @return object
+     */
+    public function setCreatedAt(string $created_at): object
+    {
+        if ($this->created_at !== $created_at) {
+            $this->created_at = $created_at;
+            $this->modified_fields['created_at'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return object
+     */
+    public function setCreatedNow(): object
+    {
+        $now = date('Y-m-d H:i:s');
+
+        if ($this->created_at !== $now) {
+            $this->created_at = $now;
+            $this->modified_fields['created_at'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $modified_at modified_at
+     *
+     * @return object
+     */
+    public function setModifiedAt(string $modified_at): object
+    {
+        if ($this->modified_at !== $modified_at) {
+            $this->modified_at = $modified_at;
+            $this->modified_fields['modified_at'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return object
+     */
+    public function setModifiedNow(): object
+    {
+        $now = date('Y-m-d H:i:s');
+
+        if ($this->modified_at !== $now) {
+            $this->modified_at = $now;
+            $this->modified_fields['modified_at'] = true;
         }
 
         return $this;
