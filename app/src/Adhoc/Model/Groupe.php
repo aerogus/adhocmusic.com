@@ -1237,11 +1237,13 @@ class Groupe extends ObjectModel
     /**
      * Retourne les styles du groupe
      *
-     * @return array
+     * @return array<Style>
      */
     public function getStyles(): array
     {
-        return Style::find(['id_groupe' => $this->getIdGroupe()]);
+        return Style::find([
+            'id_groupe' => $this->getIdGroupe(),
+        ]);
     }
 
     /**
@@ -1257,11 +1259,13 @@ class Groupe extends ObjectModel
     /**
      * Retourne les photos associées à ce groupe
      *
-     * @return array ou false
+     * @return array<Photo> ou false
      */
     public function getPhotos(): array
     {
-        return Photo::find(['id_groupe' => $this->getIdGroupe()]);
+        return Photo::find([
+            'id_groupe' => $this->getIdGroupe(),
+        ]);
     }
 
     /**
@@ -1292,11 +1296,13 @@ class Groupe extends ObjectModel
     /**
      * Retourne les audios associés à ce groupe
      *
-     * @return array
+     * @return array<Audio>
      */
     public function getAudios(): array
     {
-        return Audio::find(['id_groupe' => $this->getIdGroupe()]);
+        return Audio::find([
+            'id_groupe' => $this->getIdGroupe(),
+        ]);
     }
 
     /**
@@ -1327,11 +1333,13 @@ class Groupe extends ObjectModel
     /**
      * Retourne les vidéos associées à ce groupe
      *
-     * @return array
+     * @return array<Video>
      */
     public function getVideos(): array
     {
-        return Video::find(['id_groupe' => $this->getIdGroupe()]);
+        return Video::find([
+            'id_groupe' => $this->getIdGroupe(),
+        ]);
     }
 
     /**
@@ -1362,11 +1370,13 @@ class Groupe extends ObjectModel
     /**
      * Retourne les events associées à ce groupe
      *
-     * @return array
+     * @return array<Event>
      */
     public function getEvents(): array
     {
-        return Event::find(['id_groupe' => $this->getIdGroupe()]);
+        return Event::find([
+            'id_groupe' => $this->getIdGroupe(),
+        ]);
     }
 
     /**
