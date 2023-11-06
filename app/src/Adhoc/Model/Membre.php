@@ -1130,7 +1130,7 @@ class Membre extends Contact
                         continue;
                     }
                     $type = $fields['membre'][$field];
-                    $att = '_' . $field;
+                    $att = $field;
                     if (is_null($this->$att)) {
                         $sql .= 'NULL,';
                     } else {
@@ -1233,7 +1233,7 @@ class Membre extends Contact
                     if ($value !== true) {
                         continue;
                     }
-                    $att = '_' . $field;
+                    $att = $field;
                     if (is_null($this->$att)) {
                         $fields_to_save .= " `" . $field . "` = NULL,";
                     } else {

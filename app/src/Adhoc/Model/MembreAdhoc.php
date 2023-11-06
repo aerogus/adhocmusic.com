@@ -346,7 +346,7 @@ class MembreAdhoc extends Membre
             $sql .= (int) $this->getId() . ",";
 
             foreach ($fields['membre'] as $field => $type) {
-                $att = '_' . $field;
+                $att = $field;
                 switch ($type) {
                     case 'int':
                     case 'float':
@@ -385,7 +385,7 @@ class MembreAdhoc extends Membre
             $sql .= (int) $this->getId() . ",";
 
             foreach ($fields['membre_adhoc'] as $field => $type) {
-                $att = '_' . $field;
+                $att = $field;
                 switch ($type) {
                     case 'int':
                     case 'float':
@@ -428,7 +428,7 @@ class MembreAdhoc extends Membre
                 $fields_to_save = '';
                 foreach ($this->modified_fields['contact'] as $field => $value) {
                     if ($value === true) {
-                        $att = '_' . $field;
+                        $att = $field;
                         switch ($fields['contact'][$field]) {
                             case 'int':
                             case 'float':
@@ -469,7 +469,7 @@ class MembreAdhoc extends Membre
                 $fields_to_save = '';
                 foreach ($this->modified_fields['membre'] as $field => $value) {
                     if ($value === true) {
-                        $att = '_' . $field;
+                        $att = $field;
                         switch ($fields['membre'][$field]) {
                             case 'int':
                             case 'float':
@@ -510,7 +510,7 @@ class MembreAdhoc extends Membre
                 $fields_to_save = '';
                 foreach ($this->modified_fields['membre_adhoc'] as $field => $value) {
                     if ($value === true) {
-                        $att = '_' . $field;
+                        $att = $field;
                         switch ($fields['membre_adhoc'][$field]) {
                             case 'int':
                             case 'float':

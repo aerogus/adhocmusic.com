@@ -335,7 +335,7 @@ class Contact extends ObjectModel
             $fields_to_save = '';
             foreach ($this->modified_fields['contact'] as $field => $value) {
                 if ($value === true) {
-                    $att = '_' . $field;
+                    $att = $field;
                     if (is_null($this->$att)) {
                         $sql .= " `" . $field . "` = NULL,";
                     } else {
