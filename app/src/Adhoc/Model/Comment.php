@@ -82,9 +82,9 @@ class Comment extends ObjectModel
     protected string $pseudo_mbr = '';
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $email = '';
+    protected ?string $email = null;
 
     /**
      * @var string
@@ -237,9 +237,9 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->getEmailMbr() ? $this->getEmailMbr() : $this->email;
     }
@@ -396,13 +396,13 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param string $email email
+     * @param ?string $email email
      *
      * @return object
      */
-    public function setEmail(string $email): object
+    public function setEmail(?string $email): object
     {
-        $email = trim($email);
+        $email = is_string($email) ? trim($email) : $email;
 
         if ($this->email !== $email) {
             $this->email = $email;
