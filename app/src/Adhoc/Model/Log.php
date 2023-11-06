@@ -147,7 +147,7 @@ class Log
      *
      * @return \mysqli_result|bool
      */
-    public static function action(int $action, string $extra = null): \mysqli_result|bool
+    public static function action(int $action, string $extra = ''): \mysqli_result|bool
     {
         $db = DataBase::getInstance();
 
