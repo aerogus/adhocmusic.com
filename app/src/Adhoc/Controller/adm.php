@@ -240,26 +240,7 @@ final class Controller
             ->addStep("Privé", "/adm")
             ->addStep("Groupe de Style");
 
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_groupe` AS `id`, `name`, `style`, `text`, `mini_text`, `influences` "
-             . "FROM `adhoc_groupe` "
-             . "ORDER BY `name` ASC";
-
-        $groupes = $db->queryWithFetch($sql);
-
-        foreach ($groupes as $key => $groupe) {
-            $sql = "SELECT `id_style` "
-                 . "FROM `adhoc_groupe_style` "
-                 . "WHERE `id_groupe` = " . (int) $groupe['id'];
-            $ids_style = $db->queryWithFetchFirstFields($sql);
-
-            $groupes[$key]['styles'] = [];
-            foreach ($ids_style as $id_style) {
-                $groupes[$key]['styles'][] = Style::getInstance((int) $id_style);
-            }
-        }
-
+        $groupes = Groupe::findAll();
         $smarty->assign('groupes', $groupes);
 
         return $smarty->fetch('adm/groupe-de-style.tpl');
