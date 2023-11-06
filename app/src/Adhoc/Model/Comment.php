@@ -77,9 +77,9 @@ class Comment extends ObjectModel
     protected string $pseudo = '';
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $pseudo_mbr = '';
+    protected ?string $pseudo_mbr = null;
 
     /**
      * @var ?string
@@ -213,9 +213,9 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getPseudoMbr(): string
+    public function getPseudoMbr(): ?string
     {
         return $this->pseudo_mbr;
     }
