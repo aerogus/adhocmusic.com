@@ -111,9 +111,9 @@ class Groupe extends ObjectModel
     protected ?string $twitter_id = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $id_departement = '';
+    protected ?string $id_departement = null;
 
     /**
      * @var bool
