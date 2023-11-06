@@ -16,6 +16,7 @@ use Adhoc\Model\Route;
 use Adhoc\Model\Tools;
 use Adhoc\Model\Trail;
 use Adhoc\Model\Reference\TypeMusicien;
+use Adhoc\Model\Video;
 
 define('GROUPE_MINI_PHOTO_SIZE', 128);
 
