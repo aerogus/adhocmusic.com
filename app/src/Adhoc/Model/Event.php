@@ -262,7 +262,7 @@ class Event extends ObjectModel
      */
     public function getIdContact(): int
     {
-        return $this->contact;
+        return $this->id_contact;
     }
 
     /**
@@ -286,7 +286,7 @@ class Event extends ObjectModel
      */
     public function getIdLieu(): int
     {
-        return $this->lieu;
+        return $this->id_lieu;
     }
 
     /**

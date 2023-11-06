@@ -141,7 +141,7 @@ class Comment extends ObjectModel
      */
     public function getIdContent(): int
     {
-        return $this->content;
+        return $this->id_content;
     }
 
     /**
@@ -201,7 +201,7 @@ class Comment extends ObjectModel
      */
     public function getIdContact(): int
     {
-        return $this->contact;
+        return $this->id_contact;
     }
 
     /**

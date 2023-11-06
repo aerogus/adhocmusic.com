@@ -104,7 +104,7 @@ class Newsletter extends ObjectModel
      */
     public function getIdNewsletter(): int
     {
-        return $this->newsletter;
+        return $this->id_newsletter;
     }
 
     /**
@@ -191,7 +191,7 @@ class Newsletter extends ObjectModel
      */
     public function getIdContact(): int
     {
-        return $this->contact;
+        return $this->id_contact;
     }
 
     /**
@@ -301,7 +301,7 @@ class Newsletter extends ObjectModel
      */
     public function getId(): int
     {
-        return $this->newsletter;
+        return $this->id_newsletter;
     }
 
     /**
