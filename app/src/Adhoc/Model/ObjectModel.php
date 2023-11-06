@@ -25,7 +25,7 @@ abstract class ObjectModel
     /**
      * Champ clé primaire (simple ou multiple) de l'objet fils
      *
-     * @var string|int|array<string>|array<int>
+     * @var string|array<string>
      */
     protected static string|int|array $pk = '';
 
