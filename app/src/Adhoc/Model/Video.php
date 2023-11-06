@@ -261,23 +261,14 @@ class Video extends Media
 
     /**
      * Retourne l'url directe d'un média .mp4
+     * Utilisé pour og_video
      *
+     * @deprecated
      * @return string
      */
     public function getDirectMp4Url(): ?string
     {
-        switch ($this->id_host) {
-            case self::HOST_ADHOCTUBE:
-                $meta_url = 'https://' . MEDIA_ADHOCTUBE_HOST . '/api/v1/videos/' . $this->reference;
-                $meta_info = json_decode(file_get_contents($meta_url));
-                return $meta_info->files[0]->fileUrl;
-            case self::HOST_YOUTUBE:
-            case self::HOST_DAILYMOTION:
-            case self::HOST_FACEBOOK:
-            case self::HOST_VIMEO:
-            default:
-                return null;
-        }
+        return null;
     }
 
     /**
