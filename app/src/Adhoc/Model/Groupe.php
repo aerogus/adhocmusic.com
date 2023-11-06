@@ -96,9 +96,9 @@ class Groupe extends ObjectModel
     protected ?string $site = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $myspace = '';
+    protected ?string $myspace = null;
 
     /**
      * @var ?string (int 64 en vérité)
