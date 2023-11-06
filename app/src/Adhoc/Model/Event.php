@@ -130,7 +130,7 @@ class Event extends ObjectModel
      */
     public function getIdEvent(): int
     {
-        return $this->event;
+        return $this->id_event;
     }
 
     /**
