@@ -25,9 +25,9 @@ abstract class ObjectModel
     /**
      * Champ clé primaire (simple ou multiple) de l'objet fils
      *
-     * @var string|array<string>
+     * @var string|int|array<string>|array<int>
      */
-    protected static string|array $pk = '';
+    protected static string|int|array $pk = '';
 
     /**
      * Table de la bdd utilisée par l'objet
@@ -465,7 +465,9 @@ abstract class ObjectModel
                 $objs[] = static::getInstance($row);
             }
         } else {
-            $sql = 'SELECT `' . static::getDbPk() . '` FROM `' . static::getDbTable() . '` ORDER BY `' . static::getDbPk() . '` ASC';
+            $sql  = 'SELECT `' . static::getDbPk() . '` ';
+            $sql .= 'FROM `' . static::getDbTable() . '` ';
+            $sql .= 'ORDER BY `' . static::getDbPk() . '` ASC';
             if ($ids = $db->queryWithFetchFirstFields($sql)) {
                 foreach ($ids as $id) {
                     $objs[] = static::getInstance($id);

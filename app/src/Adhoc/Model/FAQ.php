@@ -329,7 +329,9 @@ class FAQ extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+        $sql  = 'SELECT `' . static::getDbPk() . '` ';
+        $sql .= 'FROM `' . static::getDbTable() . '` ';
+        $sql .= 'WHERE 1 ';
 
         if (isset($params['id_category'])) {
             $sql .= "AND `id_category` = " . (int) $params['id_category'] . " ";
