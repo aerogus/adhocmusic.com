@@ -268,7 +268,7 @@ class MembreAdhoc extends Membre
              . "FROM `" . MembreAdhoc::getDbTable() . "`, `" . Membre::getDbTable() . "`, `" . Contact::getDbTable() . "` "
              . "WHERE `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` "
              . "AND `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = `" . Contact::getDbTable() . "`.`" . Contact::getDbPk() . "` "
-             . "AND `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = " . (int) $this->{'_' . MembreAdhoc::getDbPk()};
+             . "AND `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = " . (int) $this->$pk;
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->arrayToObject($res);
