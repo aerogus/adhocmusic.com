@@ -237,7 +237,7 @@ class Contact extends ObjectModel
 
         $sql  = "SELECT * "
               . "FROM `" . Contact::getDbTable() . "` "
-              . "WHERE `" . Contact::getDbPk() . "` = " . (int) $this->$pk;
+              . "WHERE `" . Contact::getDbPk() . "` = " . (int) $this->getId();
 
         if ($res = $db->queryWithFetchFirstRow($sql)) {
             $this->arrayToObject($res);
