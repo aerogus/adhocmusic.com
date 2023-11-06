@@ -643,6 +643,7 @@ abstract class ObjectModel
             if (array_key_exists($k, $all_fields)) {
                 $att = $k;
                 if (is_null($v)) {
+                    // TODO: si champ vide et propriété string, faire chaîne vide ou valeur null ?
                     $this->$att = null;
                 } else {
                     switch ($all_fields[$k]) {

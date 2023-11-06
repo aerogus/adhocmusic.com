@@ -54,6 +54,11 @@ class Structure extends ObjectModel
     protected ?string $city = null;
 
     /**
+     * @var ?string
+     */
+    protected ?string $tel = null;
+
+    /**
      * @var string
      */
     protected string $id_country = '';
@@ -145,6 +150,14 @@ class Structure extends ObjectModel
     public function getCity(): string
     {
         return $this->city;
+    }
+
+    /**
+     * @return ?string
+     */
+    public function getTel(): ?string
+    {
+        return $this->tel;
     }
 
     /**
@@ -264,6 +277,21 @@ class Structure extends ObjectModel
         if ($this->city !== $city) {
             $this->city = $city;
             $this->modified_fields['city'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $tel téléphone
+     *
+     * @return object
+     */
+    public function setTel(string $tel): object
+    {
+        if ($this->tel !== $tel) {
+            $this->tel = $tel;
+            $this->modified_fields['tel'] = true;
         }
 
         return $this;
