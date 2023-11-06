@@ -256,7 +256,7 @@ final class Controller
 
             $groupes[$key]['styles'] = [];
             foreach ($ids_style as $id_style) {
-                $groupes[$key]['styles'][] = Style::getInstance($id_style);
+                $groupes[$key]['styles'][] = Style::getInstance((int) $id_style);
             }
         }
 
