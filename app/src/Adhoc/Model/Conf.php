@@ -22,12 +22,12 @@ class Conf
     protected static $instance = null;
 
     /**
-     * @var array
+     * @var array<mixed>
      */
     protected static array $data = [];
 
     /**
-     * @var array
+     * @var array<string,string>
      */
     protected static array $required = [
         'global' => ['env', 'locale', 'charset', 'timezone'],

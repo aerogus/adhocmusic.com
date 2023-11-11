@@ -30,15 +30,15 @@ class Ephemeride
      *
      * @param string $date date format MM-DD
      *
-     * @return array ou false
+     * @return array<string,mixed>|false
      */
-    public function getDate(string $date)
+    public function getDate(string $date): array|false
     {
         if (strlen($date) !== 5) {
-            return;
+            return false;
         }
         if (!array_key_exists($date, $this->data)) {
-            return;
+            return false;
         }
         return $this->data[$date];
     }

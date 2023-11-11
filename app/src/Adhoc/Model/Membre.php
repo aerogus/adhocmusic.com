@@ -211,9 +211,9 @@ class Membre extends Contact
      *
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      *
-     * @var array
+     * @var array<mixed>
      */
-    protected $modified_fields = [
+    protected array $modified_fields = [
         'contact' => [],
         'membre'  => [],
     ];

@@ -65,9 +65,9 @@ abstract class ObjectModel
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      * (ou un tableau de tableau avec le nom de la db_table comme clé du 1er tableau)
      *
-     * @var array
+     * @var array<mixed>
      */
-    protected $modified_fields = [];
+    protected array $modified_fields = [];
 
     /* db adhoc */
     /* todo retirer tous ces trucs en dur... */

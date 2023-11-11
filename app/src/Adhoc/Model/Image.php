@@ -19,70 +19,158 @@ class Image
      * @var string
      */
     protected string $file_sou = '';
+
+    /**
+     * @var string
+     */
     protected string $file_res = '';
 
     /**
-     * @var mixed
+     * @var ?\GdImage|false
      */
     protected $handle  = null; // handle source
+
+    /**
+     * @var ?\GdImage|false
+     */
     protected $handle2 = null; // handle resizé
+
+    /**
+     * @var ?\GdImage|false
+     */
     protected $handle3 = null; // handle final + palette
 
     /**
      * @var int
      */
-    protected int $width  = 0;
+    protected int $width = 0;
+
+    /**
+     * @var int
+     */
     protected int $height = 0;
 
     /**
      * @var mixed
      */
     protected $type  = IMAGETYPE_JPEG; //
+
+    /**
+     * @var mixed
+     */
     protected $ratio = null;           //
+
+    /**
+     * @var mixed
+     */
     protected $color = null;           // couleur courante en Hexa
 
     /**
      * Zone de sélection (nouveau cadrage)
      */
+
+    /**
+     * @var int
+     */
     protected int $x1 = 0;   // point supérieur gauche
+
+    /**
+     * @var int
+     */
     protected int $x2 = 0;   //
+
+    /**
+     * @var int
+     */
     protected int $y1 = 0;   // point inférieur droit
+
+    /**
+     * @var int
+     */
     protected int $y2 = 0;   //
+
+    /**
+     * @var int
+     */
     protected int $wSel = 0; // largeur et hauteur selectionnées
+
+    /**
+     * @var int
+     */
     protected int $hSel = 0; //
 
     /**
      * dimensions de la nouvelle image
      */
+
+    /**
+     * @var int
+     */
     protected int $new_l = 0;
+
+    /**
+     * @var int
+     */
     protected int $new_h = 0;
 
     /**
      * décalage à l'origine, pour les images générées avec bordure
      */
+
+    /**
+     * @var int
+     */
     protected int $deltax = 0;
+
+    /**
+     * @var int
+     */
     protected int $deltay = 0;
 
     /**
      * contraintes de conversion
      */
+
+    /**
+     * @var int
+     */
     protected int $max_width  = 0; // px
+
+    /**
+     * @var int
+     */
     protected int $max_height = 0; // px
 
     /**
-     * @var int Qualité / Taux de compression
+     * Qualité / Taux de compression
      */
-    protected $jpeg_quality; // pas d'unité (0:dégradé/léger -> 100:beau/lourd)
-    protected $png_quality;  // quantisation de la palette en bits : 24/16/8/4/2/1
-    protected $gif_quality;  // nbre de couleurs de la palette : 1 à 256
 
     /**
-     * @var bool Ajout d'une bordure en cas de resize
+     * @var int
+     */
+    protected int $jpeg_quality; // pas d'unité (0:dégradé/léger -> 100:beau/lourd)
+
+    /**
+     * @var int
+     */
+    protected int $png_quality;  // quantisation de la palette en bits : 24/16/8/4/2/1
+
+    /**
+     * @var int
+     */
+    protected int $gif_quality;  // nbre de couleurs de la palette : 1 à 256
+
+    /**
+     * Ajout d'une bordure en cas de resize
+     *
+     * @var bool
      */
     protected bool $border = true;
 
     /**
-     * @var bool Garde les proportions en cas de resize
+     * Garde les proportions en cas de resize
+     *
+     * @var bool
      */
     protected bool $keep_ratio = true;
 

@@ -67,7 +67,9 @@ class Style extends Reference
         $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
 
         if (isset($params['id_event'])) {
-            $subSql = "SELECT `id_style` FROM `adhoc_event_style` WHERE `id_event` = " . (int) $params['id_event'] . " ";
+            $subSql  = "SELECT `id_style` ";
+            $subSql .= "FROM `adhoc_event_style` ";
+            $subSql .= "WHERE `id_event` = " . (int) $params['id_event'] . " ";
             if ($ids_style = $db->queryWithFetchFirstFields($subSql)) {
                 $sql .= "AND `id_style` IN (" . implode(',', (array) $ids_style) . ") ";
             } else {
