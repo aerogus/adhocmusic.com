@@ -82,7 +82,7 @@ abstract class ObjectModel
     /**
      * @param bool $fusion fusion
      *
-     * @return array
+     * @return array<string,string>
      */
     protected function getAllFields(bool $fusion = true): array
     {
@@ -97,7 +97,7 @@ abstract class ObjectModel
      *
      * @param mixed $id id
      */
-    public function __construct(mixed $id = null)
+    final public function __construct(mixed $id = null)
     {
         if (!is_null($id)) {
             if (is_array($id)) {

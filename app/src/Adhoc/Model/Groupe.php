@@ -459,7 +459,7 @@ class Groupe extends ObjectModel
      *
      * @param int $id_groupe id_groupe
      *
-     * @return string|false
+     * @return string
      */
     public static function getNameById(int $id_groupe): string
     {
@@ -1029,7 +1029,7 @@ class Groupe extends ObjectModel
     /**
      * Retourne un tableau des membres liés à ce groupe
      *
-     * @return array
+     * @return array<Membre>
      */
     public function getMembers(): array
     {
@@ -1065,7 +1065,7 @@ class Groupe extends ObjectModel
      *                      'limit' => int,
      *                      ]
      *
-     * @return array
+     * @return array<Groupe>
      */
     public static function find(array $params): array
     {
@@ -1399,7 +1399,7 @@ class Groupe extends ObjectModel
     /**
      * Récupère les groupes ayant au moins un média (photo,audio,vidéo)
      *
-     * @return array
+     * @return array<mixed>
      */
     public static function getGroupesWithMedia(): array
     {

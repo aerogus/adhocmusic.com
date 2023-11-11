@@ -19,7 +19,7 @@ class Conf
      *
      * @var object
      */
-    protected static $instance = null;
+    protected static ?object $instance = null;
 
     /**
      * @var array<mixed>
@@ -27,7 +27,7 @@ class Conf
     protected static array $data = [];
 
     /**
-     * @var array<string,string>
+     * @var array<string,array<string>>
      */
     protected static array $required = [
         'global' => ['env', 'locale', 'charset', 'timezone'],
@@ -92,9 +92,9 @@ class Conf
      *
      * @param string $section nom de la section
      *
-     * @return array|null
+     * @return ?array<mixed>
      */
-    public function get(string $section = null): ?array
+    public function get(?string $section = null): ?array
     {
         if (is_null($section)) {
             return self::$data; // toute la conf

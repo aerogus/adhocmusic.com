@@ -129,7 +129,7 @@ final class Controller
 
             $db->query($sql);
 
-            $dest = Membre::getInstance($to);
+            $dest = Membre::getInstance((int) $to);
 
             $data = [
                 'pseudo_from' => $_SESSION['membre']->getPseudo(),
@@ -138,7 +138,7 @@ final class Controller
             ];
 
             if (Email::send($dest->getEmail(), "Vous avez reçu un message privé", 'message-received', $data)) {
-                Log::action(Log::ACTION_MESSAGE, $to);
+                Log::action(Log::ACTION_MESSAGE, (string) $to);
                 Tools::redirect('/messagerie/?sent=1');
             } else {
                 $smarty->assign('error', "erreur envoi email");
@@ -158,9 +158,9 @@ final class Controller
     }
 
     /**
-     * @return string
+     * @return array<string,string>
      */
-    public static function delete(): string
+    public static function delete(): array
     {
         Tools::auth(Membre::TYPE_STANDARD);
 

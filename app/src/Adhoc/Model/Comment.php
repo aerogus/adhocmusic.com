@@ -109,7 +109,10 @@ class Comment extends ObjectModel
         'text'        => 'string',
     ];
 
-    protected static $types = [
+    /**
+     * @var array<string,string>
+     */
+    protected static array $types = [
         'l' => 'lieux',
         'p' => 'photos',
         'v' => 'videos',
@@ -402,7 +405,7 @@ class Comment extends ObjectModel
      */
     public function setEmail(?string $email): object
     {
-        $email = !is_string($email) ? trim($email) : $email;
+        $email = is_string($email) ? trim($email) : $email;
 
         if ($this->email !== $email) {
             $this->email = $email;
@@ -459,8 +462,10 @@ class Comment extends ObjectModel
 
     /**
      * Envoie les notifications par mail aux personnes liées au contenu commenté
+     *
+     * @return void
      */
-    public function sendNotifs()
+    public function sendNotifs(): void
     {
         $emails  = [];
         $subject = "Un nouveau commentaire a été posté ";
@@ -597,15 +602,13 @@ class Comment extends ObjectModel
                 break;
         }
 
-        $comments = Comment::getComments( // TODO: utiliser self::find() ?? l'implémenter ??
-            [
-                'type'       => $this->getType(),
-                'id_content' => $this->getIdContent(),
-                'sort'       => 'created_at',
-                'sens'       => 'ASC',
-                'online'     => true,
-            ]
-        );
+        $comments = Comment::find([
+            'type'       => $this->getType(),
+            'id_content' => $this->getIdContent(),
+            'sort'       => 'created_at',
+            'sens'       => 'ASC',
+            'online'     => true,
+        ]);
 
         // -> gens ayant déjà posté sur ce contenu
         foreach ($comments as $comment) {

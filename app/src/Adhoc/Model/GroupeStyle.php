@@ -36,7 +36,7 @@ class GroupeStyle extends ObjectModel
      *
      * @var ?int
      */
-    protected ?string $id_groupe = null;
+    protected ?int $id_groupe = null;
 
     /**
      * Identifiant style
@@ -56,9 +56,9 @@ class GroupeStyle extends ObjectModel
     ];
 
     /**
-     * @return ?string
+     * @return ?int
      */
-    public function getIdGroupe(): ?string
+    public function getIdGroupe(): ?int
     {
         return $this->id_groupe;
     }

@@ -36,19 +36,6 @@ class Messagerie extends ObjectModel
     private int $id_contact;
 
     /**
-     * Constructeur de la Classe
-     *
-     * @param int $id_contact id_contact
-     *
-     * @return void
-     */
-    public function __construct($id_contact)
-    {
-        $this->id_contact = (int) $id_contact;
-        self::$instance = $this;
-    }
-
-    /**
      * @return object
      */
     public static function getInstance($id_contact): object
