@@ -9,9 +9,14 @@ use Adhoc\Model\Reference\Departement;
 use Adhoc\Model\Reference\TypeMusicien;
 use Adhoc\Model\Reference\WorldCountry;
 use Adhoc\Model\Reference\WorldRegion;
+use Adhoc\Utils\DataBase;
+use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe Membre
+ *
+ * @template TObjectModel as Membre
+ * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -20,9 +25,9 @@ class Membre extends Contact
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * Gestion des droits utilisateurs

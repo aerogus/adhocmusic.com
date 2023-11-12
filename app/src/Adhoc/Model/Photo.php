@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace Adhoc\Model;
 
 use Adhoc\Utils\Image;
+use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe Photo
  *
  * Classe de gestion des photos du site
  * Upload, Appel conversion etc ...
+ *
+ * @template TObjectModel as Photo
+ * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -19,9 +23,9 @@ class Photo extends Media
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>

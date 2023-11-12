@@ -5,9 +5,15 @@ declare(strict_types=1);
 namespace Adhoc\Model;
 
 use Adhoc\Model\Reference\FAQCategory;
+use Adhoc\Utils\DataBase;
+use Adhoc\Utils\Date;
+use Adhoc\Utils\ObjectModel;
 
 /**
  * Foire aux questions
+ *
+ * @template TObjectModel as FAQ
+ * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -16,9 +22,9 @@ class FAQ extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>
@@ -322,7 +328,7 @@ class FAQ extends ObjectModel
      *                                'limit' => int,
      *                            ]
      *
-     * @return array<FAQ>
+     * @return array<TObjectModel>
      */
     public static function find(array $params): array
     {

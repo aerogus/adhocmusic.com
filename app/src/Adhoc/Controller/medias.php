@@ -8,9 +8,9 @@ use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
 use Adhoc\Model\Lieu;
-use Adhoc\Model\Route;
-use Adhoc\Model\Trail;
 use Adhoc\Model\Video;
+use Adhoc\Utils\Route;
+use Adhoc\Utils\Trail;
 
 /**
  * Controlleur Medias

@@ -6,9 +6,13 @@ namespace Adhoc\Model\Reference;
 
 use Adhoc\Model\DataBase;
 use Adhoc\Model\Reference;
+use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe WorldRegion
+ *
+ * @template TObjectModel as WorldRegion
+ * @extends Reference<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -17,9 +21,9 @@ class WorldRegion extends Reference
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>

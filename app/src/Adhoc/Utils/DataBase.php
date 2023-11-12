@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Adhoc\Model;
+namespace Adhoc\Utils;
 
 /**
  * Constantes utiles pour la classe DataBase

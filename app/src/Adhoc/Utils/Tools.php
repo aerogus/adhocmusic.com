@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adhoc\Model;
+namespace Adhoc\Utils;
 
 /**
  * Méthodes pratiques communes à tout le site AD'HOC

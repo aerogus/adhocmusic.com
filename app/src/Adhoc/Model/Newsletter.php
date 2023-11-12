@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\ObjectModel;
+
 define('NEWSLETTER_SUB_KO_ALREADY_SUBSCRIBED_MEMBER', 0x11);
 define('NEWSLETTER_SUB_OK_RESUBSCRIBED_MEMBER', 0x12);
 define('NEWSLETTER_SUB_KO_ALREADY_CONTACT', 0x13);
@@ -18,6 +20,9 @@ define('NEWSLETTER_TEMPLATE_PATH', ADHOC_ROOT_PATH . '/app/views/emails');
 /**
  * Classe de gestion de la newsletter AD'HOC
  *
+ * @template TObjectModel as Newsletter
+ * @extends ObjectModel<TObjectModel>
+ *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 class Newsletter extends ObjectModel
@@ -25,9 +30,9 @@ class Newsletter extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>

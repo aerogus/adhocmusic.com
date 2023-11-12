@@ -178,7 +178,6 @@ final class Controller
                 break;
             default:
                 return ['status' => 'KO'];
-                break;
         }
 
         $sql = "UPDATE `adhoc_messagerie` "

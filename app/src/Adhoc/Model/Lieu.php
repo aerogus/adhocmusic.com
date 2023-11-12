@@ -9,11 +9,16 @@ use Adhoc\Model\Reference\Departement;
 use Adhoc\Model\Reference\LieuType;
 use Adhoc\Model\Reference\WorldCountry;
 use Adhoc\Model\Reference\WorldRegion;
+use Adhoc\Utils\DataBase;
+use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe Lieu
  *
  * Gestion des Lieux de diffusions
+ *
+ * @template TObjectModel as Lieu
+ * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -22,9 +27,9 @@ class Lieu extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * Nom de la clé primaire

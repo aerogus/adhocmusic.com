@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\Date;
+use Adhoc\Utils\ObjectModel;
+
 /**
  * Classe Comment
  *
  * Permet de générer un commentaire générique sur n'importe quelle entité
  * Video, Audio, Photo, Lieu, Event, Groupe, Membre
+ *
+ * @template TObjectModel as Comment
+ * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -17,9 +23,9 @@ class Comment extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>

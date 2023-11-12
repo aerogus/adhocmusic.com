@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\DataBase;
+use Adhoc\Utils\Email;
+use Adhoc\Utils\ObjectModel;
+
 /**
  * Classe Contact
+ *
+ * @template TObjectModel as Contact
+ * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -14,9 +21,9 @@ class Contact extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>

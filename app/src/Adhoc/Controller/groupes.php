@@ -8,15 +8,15 @@ use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Audio;
 use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
-use Adhoc\Model\Log;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
-use Adhoc\Model\Route;
-use Adhoc\Model\Tools;
-use Adhoc\Model\Trail;
 use Adhoc\Model\Reference\TypeMusicien;
 use Adhoc\Model\Video;
 use Adhoc\Utils\Image;
+use Adhoc\Utils\Log;
+use Adhoc\Utils\Route;
+use Adhoc\Utils\Tools;
+use Adhoc\Utils\Trail;
 
 define('GROUPE_MINI_PHOTO_SIZE', 128);
 

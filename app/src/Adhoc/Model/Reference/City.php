@@ -6,11 +6,15 @@ namespace Adhoc\Model\Reference;
 
 use Adhoc\Model\DataBase;
 use Adhoc\Model\Reference;
+use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe City
  * (villes de France uniquement)
  * pk = code insee
+ *
+ * @template TObjectModel as City
+ * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -19,9 +23,9 @@ class City extends Reference
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>

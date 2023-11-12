@@ -6,19 +6,19 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Comment;
-use Adhoc\Model\Conf;
-use Adhoc\Model\Date;
 use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
 use Adhoc\Model\Lieu;
-use Adhoc\Model\Log;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Reference\Departement;
-use Adhoc\Model\Route;
-use Adhoc\Model\Tools;
-use Adhoc\Model\Trail;
+use Adhoc\Utils\Conf;
+use Adhoc\Utils\Date;
 use Adhoc\Utils\Image;
+use Adhoc\Utils\Log;
+use Adhoc\Utils\Route;
+use Adhoc\Utils\Tools;
+use Adhoc\Utils\Trail;
 
 define('NB_PHOTOS_PER_PAGE', 48);
 

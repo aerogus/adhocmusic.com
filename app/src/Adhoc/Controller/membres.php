@@ -9,19 +9,19 @@ use Adhoc\Model\Alerting;
 use Adhoc\Model\Audio;
 use Adhoc\Model\Contact;
 use Adhoc\Model\DataBase;
-use Adhoc\Model\Email;
 use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
 use Adhoc\Model\ForumPrive;
 use Adhoc\Model\Lieu;
-use Adhoc\Model\Log;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
-use Adhoc\Model\Route;
-use Adhoc\Model\Tools;
-use Adhoc\Model\Trail;
 use Adhoc\Model\Video;
+use Adhoc\Utils\Email;
 use Adhoc\Utils\Image;
+use Adhoc\Utils\Log;
+use Adhoc\Utils\Route;
+use Adhoc\Utils\Tools;
+use Adhoc\Utils\Trail;
 
 /**
  * Controlleur Membre

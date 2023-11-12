@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adhoc\Model;
+namespace Adhoc\Utils;
 
 /**
  * Classe abstraite à étendre
@@ -12,15 +12,16 @@ namespace Adhoc\Model;
  * - des méthodes d'accès/écriture des données
  *
  * @abstract
+ * @template TObjectModel as ObjectModel
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class ObjectModel
 {
     /**
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * Champ clé primaire (simple ou multiple) de l'objet fils

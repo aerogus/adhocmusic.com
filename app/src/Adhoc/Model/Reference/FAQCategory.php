@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace Adhoc\Model\Reference;
 
 use Adhoc\Model\Reference;
+use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe de gestion des catégories de FAQ
+ *
+ * @template TObjectModel as FAQCategory
+ * @extends Reference<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -16,9 +20,9 @@ class FAQCategory extends Reference
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>

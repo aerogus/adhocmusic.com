@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\ObjectModel;
+
 /**
  * Classe Featured
  *
  * Classe de gestion du module sélection du mois
+ *
+ * @template TObjectModel as Featured
+ * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -19,9 +24,9 @@ class Featured extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>

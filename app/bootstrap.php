@@ -8,8 +8,8 @@
 
 declare(strict_types=1);
 
-use Adhoc\Model\Conf;
-use Adhoc\Model\Tools;
+use Adhoc\Utils\Conf;
+use Adhoc\Utils\Tools;
 
 define('ADHOC_ROOT_PATH', dirname(__DIR__));
 define('ADHOC_LIB_PATH', ADHOC_ROOT_PATH . '/models');

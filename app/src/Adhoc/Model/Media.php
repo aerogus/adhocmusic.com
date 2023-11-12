@@ -4,9 +4,16 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\DataBase;
+use Adhoc\Utils\Date;
+use Adhoc\Utils\ObjectModel;
+
 /**
  * Classe Media
  * parente de Audio, Video et Photo
+ *
+ * @template TObjectModel as Media
+ * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -15,9 +22,9 @@ class Media extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var int
@@ -206,7 +213,7 @@ class Media extends ObjectModel
     /**
      * @param int $id_contact id_contact
      *
-     * @return object
+     * @return TObjectModel
      */
     public function setIdContact(int $id_contact): object
     {
@@ -221,7 +228,7 @@ class Media extends ObjectModel
     /**
      * @param int|null $id_groupe id_groupe
      *
-     * @return object
+     * @return TObjectModel
      */
     public function setIdGroupe(?int $id_groupe): object
     {
@@ -236,7 +243,7 @@ class Media extends ObjectModel
     /**
      * @param int|null $id_lieu id_lieu
      *
-     * @return object
+     * @return TObjectModel
      */
     public function setIdLieu(?int $id_lieu): object
     {
@@ -251,7 +258,7 @@ class Media extends ObjectModel
     /**
      * @param int|null $id_event id_event
      *
-     * @return object
+     * @return TObjectModel
      */
     public function setIdEvent(?int $id_event): object
     {
@@ -266,7 +273,7 @@ class Media extends ObjectModel
     /**
      * @param string $name name
      *
-     * @return object
+     * @return TObjectModel
      */
     public function setName(string $name): object
     {
@@ -281,7 +288,7 @@ class Media extends ObjectModel
     /**
      * @param string|null $created_at created_at
      *
-     * @return object
+     * @return TObjectModel
      */
     public function setCreatedAt(?string $created_at): object
     {
@@ -294,7 +301,7 @@ class Media extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return TObjectModel
      */
     public function setCreatedNow(): object
     {
@@ -311,7 +318,7 @@ class Media extends ObjectModel
     /**
      * @param string|null $modified_at modified_at
      *
-     * @return object
+     * @return TObjectModel
      */
     public function setModifiedAt(?string $modified_at): object
     {
@@ -324,7 +331,7 @@ class Media extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return TObjectModel
      */
     public function setModifiedNow(): object
     {
@@ -341,7 +348,7 @@ class Media extends ObjectModel
     /**
      * @param bool $online online
      *
-     * @return object
+     * @return TObjectModel
      */
     public function setOnline(bool $online): object
     {
@@ -373,7 +380,7 @@ class Media extends ObjectModel
      *                      'limit' => int,
      *                      ]
      *
-     * @return array
+     * @return array<TObjectModel>
      */
     public static function find(array $params): array
     {
@@ -480,7 +487,7 @@ class Media extends ObjectModel
      *              ['limit']     => 10
      *              ['split']     => false
      *
-     * @return array
+     * @return array<mixed>
      */
     public static function getMedia(array $params = [])
     {

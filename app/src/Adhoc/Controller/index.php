@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\CMS;
-use Adhoc\Model\Email;
 use Adhoc\Model\Event;
 use Adhoc\Model\FAQ;
 use Adhoc\Model\Featured;
@@ -15,10 +14,11 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Newsletter;
 use Adhoc\Model\Partner;
-use Adhoc\Model\Route;
-use Adhoc\Model\Tools;
-use Adhoc\Model\Trail;
 use Adhoc\Model\Video;
+use Adhoc\Utils\Email;
+use Adhoc\Utils\Route;
+use Adhoc\Utils\Tools;
+use Adhoc\Utils\Trail;
 
 final class Controller
 {

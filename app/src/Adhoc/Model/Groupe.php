@@ -7,9 +7,14 @@ namespace Adhoc\Model;
 use Adhoc\Model\Reference\Style;
 use Adhoc\Model\Reference\TypeMusicien;
 use Adhoc\Model\Reference\GroupeStatus;
+use Adhoc\Utils\DataBase;
+use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe Groupe
+ *
+ * @template TObjectModel as Groupe
+ * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -18,9 +23,9 @@ class Groupe extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * États des groupes

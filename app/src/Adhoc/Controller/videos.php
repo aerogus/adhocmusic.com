@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace Adhoc\Controller;
 
 use Adhoc\Model\AdHocSmarty;
-use Adhoc\Model\Conf;
-use Adhoc\Model\Date;
 use Adhoc\Model\Groupe;
 use Adhoc\Model\Event;
 use Adhoc\Model\Lieu;
-use Adhoc\Model\Log;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
-use Adhoc\Model\Route;
-use Adhoc\Model\Tools;
-use Adhoc\Model\Trail;
 use Adhoc\Model\Video;
+use Adhoc\Utils\Conf;
+use Adhoc\Utils\Date;
+use Adhoc\Utils\Log;
+use Adhoc\Utils\Route;
+use Adhoc\Utils\Tools;
+use Adhoc\Utils\Trail;
+
 use Adhoc\Model\Reference\Departement;
 
 define('NB_VIDEOS_PER_PAGE', 48);

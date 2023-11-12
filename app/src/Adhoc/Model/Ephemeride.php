@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\DataBase;
+
 /**
  * L'éphéméride extrait les groupes qui ont jour à Épinay durant toute
  * l'histoire de l'association

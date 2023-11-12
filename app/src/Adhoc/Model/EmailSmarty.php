@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\Image;
+use Adhoc\Utils\Tools;
+
 /**
  *
  */

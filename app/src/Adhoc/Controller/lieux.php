@@ -8,18 +8,18 @@ use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Audio;
 use Adhoc\Model\Event;
 use Adhoc\Model\Lieu;
-use Adhoc\Model\Log;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
-use Adhoc\Model\Route;
-use Adhoc\Model\Tools;
 use Adhoc\Model\Reference\City;
 use Adhoc\Model\Reference\Departement;
 use Adhoc\Model\Reference\LieuType;
 use Adhoc\Model\Reference\WorldCountry;
 use Adhoc\Model\Reference\WorldRegion;
-use Adhoc\Model\Trail;
 use Adhoc\Model\Video;
+use Adhoc\Utils\Log;
+use Adhoc\Utils\Route;
+use Adhoc\Utils\Tools;
+use Adhoc\Utils\Trail;
 use Adhoc\Utils\Image;
 
 /**

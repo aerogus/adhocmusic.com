@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\ObjectModel;
+
 /**
  * Classe Audio
  *
  * Classe de gestion des audios du site
  * Appel des conversions etc ...
+ *
+ * @template TObjectModel as Audio
+ * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -17,9 +22,9 @@ class Audio extends Media
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>

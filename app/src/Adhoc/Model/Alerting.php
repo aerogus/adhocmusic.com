@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\Date;
+use Adhoc\Utils\ObjectModel;
+
 /**
  * Classe Alerting
  *
  * Classe des alertes mails groupes/lieux
+ *
+ * @template TObjectModel as Alerting
+ * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -16,9 +22,9 @@ class Alerting extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>

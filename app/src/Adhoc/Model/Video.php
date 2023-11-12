@@ -3,6 +3,9 @@
 /**
  * Classe de gestion des vidéos
  *
+ * @template TObjectModel as Video
+ * @extends ObjectModel<TObjectModel>
+ *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 
@@ -11,7 +14,9 @@ declare(strict_types=1);
 namespace Adhoc\Model;
 
 use Adhoc\Model\Reference\VideoHost;
+use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Image;
+use Adhoc\Utils\ObjectModel;
 
 /**
  * 1 - YouTube
@@ -99,9 +104,9 @@ class Video extends Media
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>

@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adhoc\Model;
-
-use Adhoc\Utils\Debug;
+namespace Adhoc\Utils;
 
 if (!defined('DEFAULT_CONTROLLERS_PATH')) {
     define('DEFAULT_CONTROLLERS_PATH', __DIR__ . '/../../../../src/Adhoc/Controller/');

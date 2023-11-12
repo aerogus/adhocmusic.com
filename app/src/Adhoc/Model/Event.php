@@ -5,12 +5,18 @@ declare(strict_types=1);
 namespace Adhoc\Model;
 
 use Adhoc\Model\Reference\Style;
+use Adhoc\Utils\DataBase;
+use Adhoc\Utils\Image;
+use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe Event
  *
  * Gestion des événements et des liaisons directes (avec groupe, structure et lieu)
  * gestion de l'intégrité référentielle
+ *
+ * @template TObjectModel as Event
+ * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -19,9 +25,9 @@ class Event extends ObjectModel
     /**
      * Instance de l'objet
      *
-     * @var ?object
+     * @var ?TObjectModel
      */
-    protected static ?object $instance = null;
+    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>
