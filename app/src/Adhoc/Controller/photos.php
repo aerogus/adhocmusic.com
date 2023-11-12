@@ -10,7 +10,6 @@ use Adhoc\Model\Conf;
 use Adhoc\Model\Date;
 use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
-use Adhoc\Model\Image;
 use Adhoc\Model\Lieu;
 use Adhoc\Model\Log;
 use Adhoc\Model\Membre;
@@ -19,6 +18,7 @@ use Adhoc\Model\Reference\Departement;
 use Adhoc\Model\Route;
 use Adhoc\Model\Tools;
 use Adhoc\Model\Trail;
+use Adhoc\Utils\Image;
 
 define('NB_PHOTOS_PER_PAGE', 48);
 

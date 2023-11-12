@@ -7,11 +7,11 @@ namespace Adhoc\Controller;
 use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Event;
 use Adhoc\Model\Featured;
-use Adhoc\Model\Image;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Route;
 use Adhoc\Model\Tools;
 use Adhoc\Model\Trail;
+use Adhoc\Utils\Image;
 
 final class Controller
 {

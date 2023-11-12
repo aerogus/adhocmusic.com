@@ -280,8 +280,10 @@ class MembreAdhoc extends Membre
 
     /**
      * Sauve en DB tables contact, membre et membre_adhoc
+     *
+     * @return int|bool
      */
-    public function save()
+    public function save(): int|bool
     {
         $db = DataBase::getInstance();
 

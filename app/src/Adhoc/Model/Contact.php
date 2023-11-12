@@ -266,8 +266,10 @@ class Contact extends ObjectModel
 
     /**
      * Sauve en DB table contact
+     *
+     * @return int|bool
      */
-    public function save()
+    public function save(): int|bool
     {
         $db = DataBase::getInstance();
 

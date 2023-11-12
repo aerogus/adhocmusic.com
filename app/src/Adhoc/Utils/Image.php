@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adhoc\Model;
+namespace Adhoc\Utils;
 
 /**
  * Classe de création et de conversion d'images
@@ -10,8 +10,6 @@ namespace Adhoc\Model;
  * Format d'import/export : GIF/JPEG/PNG
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
- *
- * @see http://classes.scriptsphp.net:81/doc.image
  */
 class Image
 {
@@ -26,26 +24,36 @@ class Image
     protected string $file_res = '';
 
     /**
-     * @var ?\GdImage|false
+     * handle source
+     *
+     * @var \GdImage|false
      */
-    protected $handle  = null; // handle source
+    protected $handle = null;
 
     /**
-     * @var ?\GdImage|false
+     * handle resizé
+     *
+     * @var \GdImage|false
      */
-    protected $handle2 = null; // handle resizé
+    protected $handle2 = null;
 
     /**
-     * @var ?\GdImage|false
+     * handle final + palette
+     *
+     * @var \GdImage|false
      */
-    protected $handle3 = null; // handle final + palette
+    protected $handle3 = null;
 
     /**
+     * Largeur de l'image
+     *
      * @var int
      */
     protected int $width = 0;
 
     /**
+     * Hauteur de l'image
+     *
      * @var int
      */
     protected int $height = 0;
@@ -53,17 +61,19 @@ class Image
     /**
      * @var mixed
      */
-    protected $type  = IMAGETYPE_JPEG; //
+    protected $type = IMAGETYPE_JPEG;
 
     /**
      * @var mixed
      */
-    protected $ratio = null;           //
+    protected $ratio = null;
 
     /**
+     * couleur courante en Hexa
+     *
      * @var mixed
      */
-    protected $color = null;           // couleur courante en Hexa
+    protected $color = null;
 
     /**
      * Zone de sélection (nouveau cadrage)
@@ -354,8 +364,10 @@ class Image
 
     /**
      * Sélection de toute l'image
+     *
+     * @return void
      */
-    public function selectAll()
+    public function selectAll(): void
     {
         $this->setZone(0, 0, $this->width - 1, $this->height - 1);
     }
@@ -365,9 +377,9 @@ class Image
      *
      * @param string $file file
      *
-     * @return object
+     * @return self
      */
-    public function setDestFile(string $file): object
+    public function setDestFile(string $file): self
     {
         $this->file_res = $file;
 
@@ -451,9 +463,9 @@ class Image
      *
      * @param int $maxHeight hauteur maxi
      *
-     * @return object
+     * @return self
      */
-    public function setMaxHeight(int $maxHeight): object
+    public function setMaxHeight(int $maxHeight): self
     {
         $this->max_height = $maxHeight;
 
@@ -463,8 +475,10 @@ class Image
     /**
      * Redimensionnement de l'image
      * handle -> handle2
+     *
+     * @return void
      */
-    public function resize()
+    public function resize(): void
     {
         if ($this->max_height && $this->max_width && $this->border) {
             $width = $this->max_width;
@@ -500,8 +514,10 @@ class Image
      * (max_width, max_height et keep_ratio)
      * calcul aussi l'offset si bordure
      * charge new_l et new_h
+     *
+     * @return void
      */
-    public function calculTaille()
+    public function calculTaille(): void
     {
         /**
          * Calcul de la nouvelle taille de l'image
@@ -553,8 +569,8 @@ class Image
          * Calcul de l'offset en cas de bordure
          */
         if ($this->max_height && $this->max_width && $this->border) {
-            $this->deltax = round(($this->max_width - $this->new_l) / 2);
-            $this->deltay = round(($this->max_height - $this->new_h) / 2);
+            $this->deltax = (int) round(($this->max_width - $this->new_l) / 2);
+            $this->deltay = (int) round(($this->max_height - $this->new_h) / 2);
         } else {
             $this->deltax = 0;
             $this->deltay = 0;
@@ -595,19 +611,14 @@ class Image
 
     /**
      * Affiche l'image à l'écran
+     *
+     * @return void
      */
-    public function display()
+    public function display(): void
     {
         $this->calculTaille();
         $this->resize();
-        $this->doDisplay();
-    }
 
-    /**
-     * Affichage de l'image à l'écran
-     */
-    private function doDisplay()
-    {
         switch ($this->type) {
             case IMAGETYPE_GIF:
                 header("Content-Type: image/gif");
@@ -630,8 +641,10 @@ class Image
 
     /**
      * Écrit la nouvelle image sur disque
+     *
+     * @return void
      */
-    public function write()
+    public function write(): void
     {
         $this->calculTaille();
         $this->resize();
@@ -643,7 +656,7 @@ class Image
      *
      * @return string
      */
-    public function get()
+    public function get(): string
     {
         $this->calculTaille();
         $this->resize();
@@ -652,28 +665,34 @@ class Image
 
     /**
      * écriture des images générées
+     *
+     * @param bool $get_contents
+     *
+     * @return mixed
      */
-    private function doWrite(bool $get_contents = false)
+    private function doWrite(bool $get_contents = false): mixed
     {
+        $res = false;
+
         switch ($this->type) {
             case IMAGETYPE_GIF:
                 $this->handle3 = imagecreatetruecolor($this->new_l, $this->new_h);
                 imagecopy($this->handle3, $this->handle2, 0, 0, 0, 0, $this->new_l, $this->new_h);
                 imagetruecolortopalette($this->handle3, true, $this->gif_quality);
-                imagegif($this->handle3, $this->file_res);
+                $res = imagegif($this->handle3, $this->file_res);
                 break;
 
             case IMAGETYPE_JPEG:
                 $this->handle3 = imagecreatetruecolor($this->new_l, $this->new_h);
                 imagecopy($this->handle3, $this->handle2, 0, 0, 0, 0, $this->new_l, $this->new_h);
-                imagejpeg($this->handle3, $this->file_res, $this->jpeg_quality);
+                $res = imagejpeg($this->handle3, $this->file_res, $this->jpeg_quality);
                 break;
 
             case IMAGETYPE_PNG:
                 $this->handle3 = imagecreatetruecolor($this->new_l, $this->new_h);
                 imagecopy($this->handle3, $this->handle2, 0, 0, 0, 0, $this->new_l, $this->new_h);
                 imagetruecolortopalette($this->handle3, true, $this->png_quality);
-                imagepng($this->handle3, $this->file_res);
+                $res = imagepng($this->handle3, $this->file_res);
                 break;
         }
 
@@ -684,6 +703,8 @@ class Image
                 return $img;
             }
             return false;
+        } else {
+            return $res;
         }
     }
 

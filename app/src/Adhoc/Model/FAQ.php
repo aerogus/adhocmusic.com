@@ -148,7 +148,7 @@ class FAQ extends ObjectModel
      *
      * @return ?int
      */
-    public function getCreatedAtTs(): ?string
+    public function getCreatedAtTs(): ?int
     {
         if (!is_null($this->created_at) && Date::isDateTimeOk($this->created_at)) {
             return (int) strtotime($this->created_at);
@@ -313,16 +313,16 @@ class FAQ extends ObjectModel
     /**
      * Retourne une collection d'objets "FAQ" répondant au(x) critère(s) donné(s)
      *
-     * @param array $params [
-     *                      'id_category' => int,
-     *                      'online' => bool,
-     *                      'order_by' => string,
-     *                      'sort' => string,
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     * @param array<string,mixed> $params [
+     *                                'id_category' => int,
+     *                                'online' => bool,
+     *                                'order_by' => string,
+     *                                'sort' => string,
+     *                                'start' => int,
+     *                                'limit' => int,
+     *                            ]
      *
-     * @return array
+     * @return array<FAQ>
      */
     public static function find(array $params): array
     {

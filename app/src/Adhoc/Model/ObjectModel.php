@@ -149,9 +149,9 @@ abstract class ObjectModel
     /**
      * Retourne le nom du/des champ(s) de la clé primaire
      *
-     * @return string|array
+     * @return string|array<string>
      */
-    public static function getDbPk()
+    public static function getDbPk(): string|array
     {
         return static::$pk;
     }
@@ -224,9 +224,9 @@ abstract class ObjectModel
      * - Soit la valeur si clé primaire simple
      * - Soit un tableau ['pkName1' => pkValue1, 'pkName2' => pkValue2] si clé primaire multiple
      *
-     * @return int ou string ou array si clé primaire multiple
+     * @return int|string|array<mixed>
      */
-    public function getId()
+    public function getId(): int|string|array
     {
         if (is_array(static::$pk)) {
             $pks = [];
@@ -245,7 +245,7 @@ abstract class ObjectModel
      * Set la valeur de la clé primaire
      * Todo gérer si pk simple ou multiple, le typage, si nom du champ est bien une pk
      *
-     * @param int|string|array<string,int>|array<string,string> $id id
+     * @param int|string|array<string,mixed> $id id
      *
      * @return object
      */
@@ -265,9 +265,9 @@ abstract class ObjectModel
     }
 
     /**
-     *
+     * @return int|bool
      */
-    public function save()
+    public function save(): int|bool
     {
         $db = DataBase::getInstance();
 
@@ -315,7 +315,6 @@ abstract class ObjectModel
                                 break;
                             default:
                                 throw new \Exception('invalid field type: ' . static::$all_fields[$field]);
-                                break;
                         }
                     }
                 }
@@ -368,7 +367,6 @@ abstract class ObjectModel
                             break;
                         default:
                             throw new \Exception('invalid field type');
-                            break;
                     }
                 }
             }
@@ -397,14 +395,14 @@ abstract class ObjectModel
      *
      * À surcharger dans les classes filles
      *
-     * @param array $params [
-     *                      'order_by' => string,
-     *                      'sort' => string,
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     * @param array<string,mixed> $params [
+     *                                'order_by' => string,
+     *                                'sort' => string,
+     *                                'start' => int,
+     *                                'limit' => int,
+     *                            ]
      *
-     * @return array
+     * @return array<ObjectModel>
      */
     public static function find(array $params): array
     {
@@ -444,7 +442,7 @@ abstract class ObjectModel
     /**
      * Retourne une collection d'instances
      *
-     * @return array
+     * @return array<ObjectModel>
      * @throws \Exception
      */
     public static function findAll(): array
@@ -495,11 +493,11 @@ abstract class ObjectModel
     }
 
     /**
-     *
+     * @return void
      */
-    public function loadObjectId()
+    public function loadObjectId(): void
     {
-        if (is_array(static::$pk)) {
+        if (is_array($this->getId())) {
             $this->object_id = get_called_class() . ':' . implode(':', array_values($this->getId())); // ex: WorldRegion:FR:96
         } else {
             $this->object_id = get_called_class() . ':' . $this->getId(); // ex: Membre:1234
@@ -507,9 +505,9 @@ abstract class ObjectModel
     }
 
     /**
-     *
+     * @return void
      */
-    public static function resetAutoIncrement()
+    public static function resetAutoIncrement(): void
     {
         DataBase::getInstance()
             ->query("ALTER TABLE `" . static::getDbTable() . "` AUTO_INCREMENT = 1");
@@ -648,11 +646,11 @@ abstract class ObjectModel
     /**
      * Conversion des champs issus de la db en propriétés typées de l'objet
      *
-     * @param array $data data
+     * @param array<string,mixed> $data data
      *
      * @return bool
      */
-    protected function arrayToObject(array $data)
+    protected function arrayToObject(array $data): bool
     {
         $all_fields = static::getAllFields(true);
         foreach ($data as $k => $v) {
@@ -690,7 +688,7 @@ abstract class ObjectModel
     }
 
     /**
-     * @return array
+     * @return array<string,mixed>
      */
     protected function objectToArray(): array
     {

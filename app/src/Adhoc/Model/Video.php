@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Adhoc\Model;
 
 use Adhoc\Model\Reference\VideoHost;
+use Adhoc\Utils\Image;
 
 /**
  * 1 - YouTube

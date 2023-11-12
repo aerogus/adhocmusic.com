@@ -77,7 +77,7 @@ class Newsletter extends ObjectModel
     protected int $id_contact = 0;
 
     /**
-     * @var array
+     * @var array<string,mixed>
      */
     protected array $tpl_vars = [];
 
@@ -100,7 +100,7 @@ class Newsletter extends ObjectModel
     /**
      * Retourne l'identifiant de la newsletter
      *
-     * @return string
+     * @return int
      */
     public function getIdNewsletter(): int
     {
@@ -146,8 +146,10 @@ class Newsletter extends ObjectModel
     /**
      * Retourne le contenu après être passé à la moulinette
      * des variables de templates et des liens de tracking
+     *
+     * @return string
      */
-    public function getProcessedHtml()
+    public function getProcessedHtml(): string
     {
         $html = $this->getHtml();
 
@@ -320,9 +322,9 @@ class Newsletter extends ObjectModel
     /**
      * Retourne une collection d'objets "Newsletter" répondant au(x) critère(s)
      *
-     * @param array $params params ['order_by' => string, 'sort => string]
+     * @param array<string,mixed> $params ['order_by' => string, 'sort' => string]
      *
-     * @return array
+     * @return array<Newsletter>
      */
     public static function find(array $params): array
     {
@@ -357,7 +359,7 @@ class Newsletter extends ObjectModel
      * @param int $debut début
      * @param int $limit limite
      *
-     * @return array
+     * @return array<mixed>
      */
     public static function getSubscribers(int $debut = 0, int $limit = 10000): array
     {
@@ -473,8 +475,10 @@ class Newsletter extends ObjectModel
      * @param int    $id_newsletter id_newsletter
      * @param int    $id_contact    id_contact
      * @param string $url           url
+     *
+     * @return void
      */
-    public static function addHit(int $id_newsletter, int $id_contact, string $url)
+    public static function addHit(int $id_newsletter, int $id_contact, string $url): void
     {
         file_put_contents(ADHOC_ROOT_PATH . '/log/newsletters-hits.txt', date('Y-m-d H:i:s') . "\tnl" . $id_newsletter . "\tid" . $id_contact . "\turl" . $url . "\n", FILE_APPEND | LOCK_EX);
 
@@ -483,6 +487,7 @@ class Newsletter extends ObjectModel
             $ip = $_SERVER['REMOTE_ADDR'];
         }
         $host = gethostbyaddr($ip);
+        $useragent = '';
         if (isset($_SERVER['HTTP_USER_AGENT'])) {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
         }
@@ -496,7 +501,7 @@ class Newsletter extends ObjectModel
 
             $sql = "INSERT INTO `adhoc_newsletter_hit` "
                  . "(`date`, `id_newsletter`, `id_contact`, `url`, `ip`, `host`, `useragent`) "
-                 . "VALUES(NOW(), " . (int) $id_newsletter . ", " . (int) $id_contact . ", '" . $db->escape($url) . "', '" . $db->escape($ip) . "', '" . $db->escape($host) . "', '" . $db->escape($useragent) . "    ')";
+                 . "VALUES(NOW(), " . (int) $id_newsletter . ", " . (int) $id_contact . ", '" . $db->escape($url) . "', '" . $db->escape($ip) . "', '" . $db->escape($host) . "', '" . $db->escape($useragent) . "')";
             $res = $db->query($sql);
         } catch (\Exception $e) {
             // rien

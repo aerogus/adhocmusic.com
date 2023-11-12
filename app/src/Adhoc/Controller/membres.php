@@ -12,7 +12,6 @@ use Adhoc\Model\DataBase;
 use Adhoc\Model\Email;
 use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
-use Adhoc\Model\Image;
 use Adhoc\Model\ForumPrive;
 use Adhoc\Model\Lieu;
 use Adhoc\Model\Log;
@@ -22,6 +21,7 @@ use Adhoc\Model\Route;
 use Adhoc\Model\Tools;
 use Adhoc\Model\Trail;
 use Adhoc\Model\Video;
+use Adhoc\Utils\Image;
 
 /**
  * Controlleur Membre

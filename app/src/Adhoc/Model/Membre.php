@@ -1029,8 +1029,10 @@ class Membre extends Contact
 
     /**
      * Sauve en db tables contact et membre
+     *
+     * @return int|bool
      */
-    public function save()
+    public function save(): int|bool
     {
         $db = DataBase::getInstance();
 

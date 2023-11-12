@@ -10,7 +10,6 @@ use Adhoc\Model\Conf;
 use Adhoc\Model\Date;
 use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
-use Adhoc\Model\Image;
 use Adhoc\Model\Lieu;
 use Adhoc\Model\Log;
 use Adhoc\Model\Membre;
@@ -21,6 +20,7 @@ use Adhoc\Model\Tools;
 use Adhoc\Model\Trail;
 use Adhoc\Model\Video;
 use Adhoc\Model\Reference\Style;
+use Adhoc\Utils\Image;
 
 final class Controller
 {

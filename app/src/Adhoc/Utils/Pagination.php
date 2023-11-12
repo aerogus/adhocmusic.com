@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adhoc\Model;
+namespace Adhoc\Utils;
 
 /**
  * Gestion d'une pagination
@@ -270,7 +270,7 @@ class Pagination
     }
 
     /**
-     * Classe css a utiliser
+     * Classe css à utiliser
      *
      * @return string
      */
