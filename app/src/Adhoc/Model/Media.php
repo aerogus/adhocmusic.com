@@ -395,8 +395,9 @@ class Media extends ObjectModel
         }
 
         if (!empty($params['has_groupe'])) {
-            if (get_called_class() === 'Video') {
-                $subSql = "SELECT `id_video` FROM `adhoc_video_groupe`";
+            if (get_called_class() === 'Adhoc\\Model\\Video') {
+                $subSql  = "SELECT `id_video` ";
+                $subSql .= "FROM `adhoc_video_groupe`";
                 if ($ids_video = $db->queryWithFetchFirstFields($subSql)) {
                     $sql .= "AND `id_video` IN (" . implode(',', (array) $ids_video) . ") ";
                 } else {
@@ -408,8 +409,10 @@ class Media extends ObjectModel
         }
 
         if (isset($params['id_groupe'])) {
-            if (get_called_class() === 'Video') {
-                $subSql = "SELECT `id_video` FROM `adhoc_video_groupe` WHERE `id_groupe` = " . (int) $params['id_groupe'] . " ";
+            if (get_called_class() === 'Adhoc\\Model\\Video') {
+                $subSql  = "SELECT `id_video` ";
+                $subSql .= "FROM `adhoc_video_groupe` ";
+                $subSql .= "WHERE `id_groupe` = " . (int) $params['id_groupe'] . " ";
                 if ($ids_video = $db->queryWithFetchFirstFields($subSql)) {
                     $sql .= "AND `id_video` IN (" . implode(',', (array) $ids_video) . ") ";
                 } else {
