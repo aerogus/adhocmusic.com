@@ -403,7 +403,7 @@ abstract class ObjectModel
      *                                'limit' => int,
      *                            ]
      *
-     * @return array<ObjectModel>
+     * @return array<TObjectModel>
      */
     public static function find(array $params): array
     {
@@ -443,7 +443,7 @@ abstract class ObjectModel
     /**
      * Retourne une collection d'instances
      *
-     * @return array<ObjectModel>
+     * @return array<TObjectModel>
      * @throws \Exception
      */
     public static function findAll(): array

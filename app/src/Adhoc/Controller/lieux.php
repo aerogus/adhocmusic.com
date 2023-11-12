@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Audio;
 use Adhoc\Model\Event;
 use Adhoc\Model\Lieu;
@@ -16,6 +15,7 @@ use Adhoc\Model\Reference\LieuType;
 use Adhoc\Model\Reference\WorldCountry;
 use Adhoc\Model\Reference\WorldRegion;
 use Adhoc\Model\Video;
+use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;

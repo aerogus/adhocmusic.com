@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Audio;
 use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
@@ -12,6 +11,7 @@ use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Reference\TypeMusicien;
 use Adhoc\Model\Video;
+use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;

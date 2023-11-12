@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Model\AdHocSmarty;
-
 use Adhoc\Model\ForumPrive;
 use Adhoc\Model\Groupe;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Reference\Style;
 use Adhoc\Model\Reference\TypeMusicien;
+use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;

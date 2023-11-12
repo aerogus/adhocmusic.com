@@ -365,20 +365,20 @@ class Media extends ObjectModel
     /**
      * Retourne une collection d'objets "Media" (Audio|Photo|Video) répondant au(x) critère(s) donné(s)
      *
-     * @param array $params [
-     *                      'id__in' => array de int,
-     *                      'id__not_in' => array de int,
-     *                      'id_contact' => int,
-     *                      'has_groupe' => bool,
-     *                      'id_groupe' => int,
-     *                      'id_event' => int,
-     *                      'id_lieu' => int,
-     *                      'online' => bool,
-     *                      'order_by' => string,
-     *                      'sort' => string,
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     * @param array<string,mixed> $params [
+     *                                'id__in' => array de int,
+     *                                'id__not_in' => array de int,
+     *                                'id_contact' => int,
+     *                                'has_groupe' => bool,
+     *                                'id_groupe' => int,
+     *                                'id_event' => int,
+     *                                'id_lieu' => int,
+     *                                'online' => bool,
+     *                                'order_by' => string,
+     *                                'sort' => string,
+     *                                'start' => int,
+     *                                'limit' => int,
+     *                            ]
      *
      * @return array<TObjectModel>
      */

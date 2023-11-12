@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Adhoc\Model\Reference;
 
-use Adhoc\Model\DataBase;
 use Adhoc\Model\Reference;
+use Adhoc\Utils\DataBase;
 use Adhoc\Utils\ObjectModel;
 
 /**
@@ -61,7 +61,7 @@ class Style extends Reference
      *     'limit' => int,
      * ]
      *
-     * @return array<Style>
+     * @return array<TObjectModel>
      */
     public static function find(array $params): array
     {

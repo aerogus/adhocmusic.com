@@ -4,7 +4,7 @@
  * Classe de gestion des vidéos
  *
  * @template TObjectModel as Video
- * @extends ObjectModel<TObjectModel>
+ * @extends Media<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Model\Media;
 use Adhoc\Model\Reference\VideoHost;
+use Adhoc\Utils\Conf;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\ObjectModel;

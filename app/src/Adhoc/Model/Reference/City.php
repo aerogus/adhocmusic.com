@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Adhoc\Model\Reference;
 
-use Adhoc\Model\DataBase;
 use Adhoc\Model\Reference;
+use Adhoc\Utils\DataBase;
 use Adhoc\Utils\ObjectModel;
 
 /**
@@ -14,7 +14,7 @@ use Adhoc\Utils\ObjectModel;
  * pk = code insee
  *
  * @template TObjectModel as City
- * @extends ObjectModel<TObjectModel>
+ * @extends Reference<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
@@ -109,7 +109,7 @@ class City extends Reference
      *                                'limit' => int,
      *                            ]
      *
-     * @return array<City>
+     * @return array<TObjectModel>
      */
     public static function find(array $params): array
     {

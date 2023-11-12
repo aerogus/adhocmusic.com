@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Alerting;
 use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
 use Adhoc\Model\Lieu;
-use Adhoc\Model\Log;
 use Adhoc\Model\Membre;
-use Adhoc\Model\Route;
-use Adhoc\Model\Tools;
-use Adhoc\Model\Trail;
+use Adhoc\Utils\AdHocSmarty;
+use Adhoc\Utils\Log;
+use Adhoc\Utils\Route;
+use Adhoc\Utils\Tools;
+use Adhoc\Utils\Trail;
 
 final class Controller
 {

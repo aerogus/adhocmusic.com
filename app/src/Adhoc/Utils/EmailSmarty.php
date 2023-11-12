@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adhoc\Model;
+namespace Adhoc\Utils;
 
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Tools;
@@ -23,8 +23,8 @@ class EmailSmarty extends \Smarty
         $this->setCompileDir(SMARTY_TEMPLATE_C_PATH);
         $this->setCacheDir(SMARTY_TEMPLATE_C_PATH);
 
-        $this->registerPlugin('modifier', 'link', ['Adhoc\Model\EmailSmarty', 'modifierLink']);
-        $this->registerPlugin('function', 'image', ['Adhoc\Model\EmailSmarty', 'functionImage']);
+        $this->registerPlugin('modifier', 'link', ['Adhoc\Utils\EmailSmarty', 'modifierLink']);
+        $this->registerPlugin('function', 'image', ['Adhoc\Utils\EmailSmarty', 'functionImage']);
     }
 
     /**

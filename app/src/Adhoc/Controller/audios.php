@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Audio;
 use Adhoc\Model\Comment;
 use Adhoc\Model\Event;
@@ -13,6 +12,7 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Reference\Departement;
+use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;

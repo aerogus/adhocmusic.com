@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\DataBase;
 use Adhoc\Utils\ObjectModel;
 
 /**
@@ -120,7 +121,7 @@ class GroupeStyle extends ObjectModel
      *                      'limit' => int,
      *                      ]
      *
-     * @return array<GroupeStyle>
+     * @return array<TObjectModel>
      */
     public static function find(array $params): array
     {

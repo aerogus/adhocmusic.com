@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adhoc\Model;
+namespace Adhoc\Utils;
 
 use Adhoc\Utils\Pagination;
 
@@ -13,8 +13,19 @@ use Adhoc\Utils\Pagination;
  */
 class AdHocSmarty extends \Smarty
 {
+    /**
+     * @var array
+     */
     protected static array $pseudos = [];
+
+    /**
+     * @var array
+     */
     protected static array $avatars = [];
+
+    /**
+     * @var array
+     */
     protected array $script_vars = [];
 
     /**
@@ -71,13 +82,15 @@ class AdHocSmarty extends \Smarty
     /**
      * Méthode de pagination
      *
-     * @param array $params ['nb_items']
-     *                      ['nb_items_per_page']
-     *                      ['page']
-     *                      ['link_page']
-     *                      ['link_base_params']
-     *                      ['nb_links']
-     *                      ['separator']
+     * @param array<string,mixed> $params [
+     *                                'nb_items' => int,
+     *                                'nb_items_per_page' => int,
+     *                                'page' => int
+     *                                'link_page' => string,
+     *                                'link_base_params' => string,
+     *                                'nb_links' => int
+     *                                'separator' => string
+     *                            ]
      *
      * @return string
      */

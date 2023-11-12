@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\DataBase;
 use Adhoc\Utils\ObjectModel;
 
 define('NEWSLETTER_SUB_KO_ALREADY_SUBSCRIBED_MEMBER', 0x11);
@@ -329,7 +330,7 @@ class Newsletter extends ObjectModel
      *
      * @param array<string,mixed> $params ['order_by' => string, 'sort' => string]
      *
-     * @return array<Newsletter>
+     * @return array<TObjectModel>
      */
     public static function find(array $params): array
     {

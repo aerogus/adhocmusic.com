@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Alerting;
 use Adhoc\Model\Audio;
 use Adhoc\Model\Contact;
@@ -16,6 +15,7 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Video;
+use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Log;

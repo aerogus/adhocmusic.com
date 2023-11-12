@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Adhoc\Model;
 
 use Adhoc\Utils\ObjectModel;
+use Adhoc\Utils\Date;
 use Adhoc\Utils\Email;
 
 /**

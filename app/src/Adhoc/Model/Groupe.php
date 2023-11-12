@@ -7,8 +7,10 @@ namespace Adhoc\Model;
 use Adhoc\Model\Reference\Style;
 use Adhoc\Model\Reference\TypeMusicien;
 use Adhoc\Model\Reference\GroupeStatus;
+use Adhoc\Utils\Date;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\ObjectModel;
+use Adhoc\Utils\Tools;
 
 /**
  * Classe Groupe

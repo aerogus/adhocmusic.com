@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\DataBase;
 use Adhoc\Utils\ObjectModel;
 
 /**
@@ -69,9 +70,9 @@ class Messagerie extends ObjectModel
      * @param int    $id_to id_contact du destinataire
      * @param string $text  message
      *
-     * @return false ou int
+     * @return int|false
      */
-    public function sendMessage(int $id_to, string $text): int
+    public function sendMessage(int $id_to, string $text): int|false
     {
         $db = DataBase::getInstance();
 

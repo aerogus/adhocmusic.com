@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Audio;
 use Adhoc\Model\Membre;
+use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
 use Adhoc\Utils\Trail;

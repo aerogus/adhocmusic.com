@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Adhoc\Model;
 
 use Adhoc\Model\Reference\Style;
+use Adhoc\Utils\Date;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\ObjectModel;

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\FAQ;
 use Adhoc\Model\Membre;
+use Adhoc\Model\Reference\FAQCategory;
+use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
 use Adhoc\Utils\Trail;
-use Adhoc\Model\Reference\FAQCategory;
 
 final class Controller
 {

@@ -64,15 +64,15 @@ class Email
     /**
      * Envoi générique d'email à partir du site, via un template smarty
      *
-     * @param string ou array $to
-     * @param string $subject
-     * @param string $tplName
-     * @param array  $data
-     * @param string $attachment
+     * @param string|array<string> $to
+     * @param string               $subject
+     * @param string               $tplName
+     * @param array<string,mixed>  $data
+     * @param string               $attachment
      *
      * @return bool
      */
-    public static function send($to = '', string $subject = 'sans sujet', string $tplName = 'default', array $data = [], string $attachment = null): bool
+    public static function send(string|array $to = '', string $subject = 'sans sujet', string $tplName = 'default', array $data = [], string $attachment = null): bool
     {
         $subject = trim($subject);
 
@@ -100,23 +100,19 @@ class Email
         $mail->AltBody  = strip_tags($body);
         $mail->WordWrap = 78;
 
-        if (is_array($to)) {
-            $cpt = 0;
-            foreach ($to as $_to) {
-                if (Email::validate($_to)) {
-                    $mail->AddAddress($_to);
-                    $cpt++;
-                }
+        if (!is_array($to)) {
+            $to = [$to];
+        }
+
+        $cpt = 0;
+        foreach ($to as $_to) {
+            if (Email::validate($_to)) {
+                $mail->AddAddress($_to);
+                $cpt++;
             }
-            if ($cpt === 0) {
-                return false;
-            }
-        } else {
-            if (Email::validate($to)) {
-                $mail->AddAddress($to);
-            } else {
-                return false;
-            }
+        }
+        if ($cpt === 0) {
+            return false;
         }
 
         if (!is_null($attachment)) {

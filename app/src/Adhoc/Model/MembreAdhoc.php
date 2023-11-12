@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\DataBase;
 use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe MembreAdhoc
  *
  * @template TObjectModel as MembreAdhoc
- * @extends ObjectModel<TObjectModel>
+ * @extends Membre<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */

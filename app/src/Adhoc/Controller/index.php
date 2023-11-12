@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\CMS;
 use Adhoc\Model\Event;
 use Adhoc\Model\FAQ;
@@ -15,6 +14,7 @@ use Adhoc\Model\Membre;
 use Adhoc\Model\Newsletter;
 use Adhoc\Model\Partner;
 use Adhoc\Model\Video;
+use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;

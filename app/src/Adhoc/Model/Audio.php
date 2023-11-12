@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Adhoc\Model;
 
 use Adhoc\Utils\ObjectModel;
+use Adhoc\Model\Media;
 
 /**
  * Classe Audio
@@ -13,7 +14,7 @@ use Adhoc\Utils\ObjectModel;
  * Appel des conversions etc ...
  *
  * @template TObjectModel as Audio
- * @extends ObjectModel<TObjectModel>
+ * @extends Media<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */

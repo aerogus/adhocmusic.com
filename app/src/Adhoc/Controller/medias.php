@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
 use Adhoc\Model\Lieu;
 use Adhoc\Model\Video;
+use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Trail;
 

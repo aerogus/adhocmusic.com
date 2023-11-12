@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Model\Media;
+use Adhoc\Utils\Conf;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\ObjectModel;
 
@@ -14,7 +16,7 @@ use Adhoc\Utils\ObjectModel;
  * Upload, Appel conversion etc ...
  *
  * @template TObjectModel as Photo
- * @extends ObjectModel<TObjectModel>
+ * @extends Media<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */

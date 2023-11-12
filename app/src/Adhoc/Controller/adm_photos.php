@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Model\AdHocSmarty;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
+use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;

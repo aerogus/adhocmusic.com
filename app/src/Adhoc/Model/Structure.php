@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\DataBase;
 use Adhoc\Utils\ObjectModel;
 
 /**
  * Gestion des Structures / associations
  *
+ * @template TObjectEvent as Event
  * @template TObjectModel as Structure
  * @extends ObjectModel<TObjectModel>
  *
@@ -408,7 +410,7 @@ class Structure extends ObjectModel
     /**
      * Retourne les événements rattachés à cette structure
      *
-     * @return array<Event>
+     * @return array<TObjectEvent>
      */
     public function getEvents(): array
     {
@@ -430,7 +432,7 @@ class Structure extends ObjectModel
      *                      'limit' => int,
      *                      ]
      *
-     * @return array<Structure>
+     * @return array<TObjectModel>
      */
     public static function find(array $params): array
     {

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
+use Adhoc\Utils\DataBase;
+
 define('FORUM_NB_THREADS_PER_PAGE', 100);
 define('FORUM_NB_MESSAGES_PER_PAGE', 50);
 

@@ -37,19 +37,23 @@ class DataBase
     /**
      * Conteneur de l'instance courante
      *
-     * @var ?object
+     * @var ?self
      */
-    protected static ?object $instance = null;
+    protected static ?self $instance = null;
 
     /**
      * Tableau des connexions ouvertes
+     *
+     * @var array<\mysqli>
      */
-    protected $current_conn = [];
+    protected array $current_conn = [];
 
     /**
      * Type de fetch
+     *
+     * @var int
      */
-    protected $fetchMode = MYSQLI_ASSOC;
+    protected int $fetchMode = MYSQLI_ASSOC;
 
     /**
      * Charset à utiliser pour la connexion
@@ -61,9 +65,10 @@ class DataBase
     /**
      * @param int $conn_name identifiant de connexion
      *
+     * @return \mysqli|false
      * @throws \Exception
      */
-    protected function connect(int $conn_name = 0)
+    protected function connect(int $conn_name = 0): \mysqli|false
     {
         if (true === self::$connections_params[$conn_name]['hasMaintenance']) {
             throw new \Exception('Serveur MySQL en maintenance');
@@ -87,7 +92,7 @@ class DataBase
             $this->current_conn[$conn_key] = @call_user_func_array('mysqli_connect', $params);
         }
 
-        if (!$this->current_conn[$conn_key]) {
+        if (!is_a($this->current_conn[$conn_key], 'mysqli')) {
             throw new \Exception('Erreur connexion serveur MySQL');
         }
 
@@ -105,16 +110,19 @@ class DataBase
 
     /**
      * @param int $conn_name identifiant de connexion
+     *
+     * @return bool
      */
-    public function close(int $conn_name = 0)
+    public function close(int $conn_name = 0): bool
     {
         $conn_key = self::generateConnectionKey($conn_name);
 
         if (isset($this->current_conn[$conn_key])) {
             mysqli_close($this->current_conn[$conn_key]);
             unset($this->current_conn[$conn_key]);
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -209,12 +217,17 @@ class DataBase
      * Modifie le fetchMode uniquement pour la prochaine requête
      *
      * @param int $fetchMode fetchMode
+     *
+     * @return bool
      */
-    public function setFetchMode(int $fetchMode = MYSQLI_BOTH)
+    public function setFetchMode(int $fetchMode = MYSQLI_BOTH): bool
     {
-        if (in_array($fetchMode, [MYSQLI_BOTH, MYSQLI_ASSOC, MYSQLI_NUM])) {
-            $this->fetchMode = $fetchMode;
+        if (!in_array($fetchMode, [MYSQLI_BOTH, MYSQLI_ASSOC, MYSQLI_NUM])) {
+            return false;
         }
+
+        $this->fetchMode = $fetchMode;
+        return true;
     }
 
     /**
@@ -243,9 +256,9 @@ class DataBase
      * @param string $sql       requête SQL
      * @param int    $conn_name identifiant de connexion
      *
-     * @return array
+     * @return array<mixed>|bool
      */
-    public function queryWithFetchFirstRow(string $sql, int $conn_name = 0)
+    public function queryWithFetchFirstRow(string $sql, int $conn_name = 0): array|bool
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
@@ -266,9 +279,9 @@ class DataBase
      * @param string $sql       requête SQL
      * @param int    $conn_name identifiant de connexion
      *
-     * @return array
+     * @return array<mixed>|bool
      */
-    public function queryWithFetchFirstField(string $sql, int $conn_name = 0)
+    public function queryWithFetchFirstField(string $sql, int $conn_name = 0): array|bool
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
@@ -295,9 +308,9 @@ class DataBase
      * @param string $sql       requête SQL
      * @param int    $conn_name identifiant de connexion
      *
-     * @return array
+     * @return array<string>|bool
      */
-    public function queryWithFetchFirstFields(string $sql, int $conn_name = 0)
+    public function queryWithFetchFirstFields(string $sql, int $conn_name = 0): array|bool
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
@@ -322,9 +335,9 @@ class DataBase
      * @param string $sql       sql
      * @param int    $conn_name identifiant de connexion
      *
-     * @return array
+     * @return array<mixed>|bool
      */
-    public function queryWithFetch(string $sql, int $conn_name = 0)
+    public function queryWithFetch(string $sql, int $conn_name = 0): array|bool
     {
         $rc = $this->query($sql, $conn_name);
         if (true === $rc) {
