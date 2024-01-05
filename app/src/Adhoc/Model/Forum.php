@@ -271,14 +271,14 @@ abstract class Forum
      */
     public static function editMessage(array $params): bool
     {
-        static::_updateMessage(
+        static::updateMessage(
             [
                 'id_message' => $params['id_message'],
                 'text'       => $params['text'],
             ]
         );
 
-        static::_updateThread(
+        static::updateThread(
             [
                 'id_thread'  => $params['id_thread'],
                 'id_contact' => $params['id_contact'],
@@ -286,7 +286,7 @@ abstract class Forum
             ]
         );
 
-        static::_updateForum(
+        static::updateForum(
             [
                 'id_forum'     => $params['id_forum'],
                 'id_contact'   => null,
@@ -307,13 +307,13 @@ abstract class Forum
      */
     public static function delMessage(array $params): bool
     {
-        static::_deleteMessage(
+        static::deleteMessage(
             [
                 'id_message' => $params['id_message'],
             ]
         );
 
-        static::_updateThread(
+        static::updateThread(
             [
                 'id_thread'  => $params['id_thread'],
                 'id_contact' => $params['id_contact'],
@@ -321,7 +321,7 @@ abstract class Forum
             ]
         );
 
-        static::_updateForum(
+        static::updateForum(
             [
                 'id_forum'     => $params['id_forum'],
                 'id_contact'   => null,

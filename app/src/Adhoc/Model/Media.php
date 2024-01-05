@@ -535,4 +535,12 @@ class Media extends ObjectModel
 
         return $tab;
     }
+
+    /**
+     * @return ?string
+     */
+    public function getEmbedUrl(): ?string
+    {
+        return '';
+    }
 }

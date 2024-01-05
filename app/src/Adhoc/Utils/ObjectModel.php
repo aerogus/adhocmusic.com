@@ -537,7 +537,7 @@ abstract class ObjectModel
      *
      * @return bool
      */
-    public function delete()
+    public function delete(): bool
     {
         $db = DataBase::getInstance();
 

@@ -257,9 +257,9 @@ class Contact extends ObjectModel
     /**
      * Suppression d'un contact
      *
-     * @return int
+     * @return bool
      */
-    public function delete(): int
+    public function delete(): bool
     {
         $db = DataBase::getInstance();
 
@@ -268,7 +268,7 @@ class Contact extends ObjectModel
 
         $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**
@@ -321,7 +321,6 @@ class Contact extends ObjectModel
                                 break;
                             default:
                                 throw new \Exception('invalid field type : ' . $type);
-                                break;
                         }
                     }
                 }
@@ -368,7 +367,6 @@ class Contact extends ObjectModel
                                 break;
                             default:
                                 throw new \Exception('invalid field type : ' . $fields['contact'][$field]);
-                                break;
                         }
                     }
                 }

@@ -3,10 +3,10 @@
 
 declare(strict_types=1);
 
-use Adhoc\Model\Conf;
 use Adhoc\Model\Event;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Video;
+use Adhoc\Utils\Conf;
 
 require_once __DIR__ . '/../bootstrap.php';
 
