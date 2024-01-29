@@ -12,12 +12,13 @@ use Adhoc\Utils\ObjectModel;
  * Classe Media
  * parente de Audio, Video et Photo
  *
+ * @abstract
  * @template TObjectModel as Media
  * @extends ObjectModel<TObjectModel>
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class Media extends ObjectModel
+abstract class Media extends ObjectModel
 {
     /**
      * Instance de l'objet

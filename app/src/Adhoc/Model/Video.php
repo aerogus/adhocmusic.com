@@ -3,6 +3,7 @@
 /**
  * Classe de gestion des vidéos
  *
+ * @template TGroupe as Groupe
  * @template TObjectModel as Video
  * @extends Media<TObjectModel>
  *
@@ -339,9 +340,9 @@ class Video extends Media
      *
      * @param int $id_host identifiant hébergeur
      *
-     * @return object
+     * @return TObjectModel
      */
-    public function setIdHost(int $id_host): object
+    public function setIdHost(int $id_host): self
     {
         if ($this->id_host !== $id_host) {
             $this->id_host = $id_host;
@@ -354,9 +355,9 @@ class Video extends Media
     /**
      * @param string $reference reference
      *
-     * @return object
+     * @return TObjectModel
      */
-    public function setReference(string $reference): object
+    public function setReference(string $reference): self
     {
         if ($this->reference !== $reference) {
             $this->reference = $reference;
@@ -369,9 +370,9 @@ class Video extends Media
     /**
      * @param float $ratio ratio
      *
-     * @return object
+     * @return TObjectModel
      */
-    public function setRatio(float $ratio): object
+    public function setRatio(float $ratio): self
     {
         if ($this->ratio !== $ratio) {
             $this->ratio = $ratio;
@@ -408,9 +409,11 @@ class Video extends Media
     /**
      * Retourne un tableau des groupes liés à cette vidéo
      *
-     * @return array<Groupe>|Groupe
+     * @param ?int $idx
+     *
+     * @return array<TGroupe>|TGroupe
      */
-    public function getGroupes(int $idx = null): array|Groupe
+    public function getGroupes(?int $idx = null): array|Groupe
     {
         $groupes = Groupe::find(['id_video' => $this->getIdVideo()]);
         if (!is_null($idx) && array_key_exists($idx, $groupes)) {

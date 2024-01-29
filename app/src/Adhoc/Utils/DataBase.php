@@ -239,6 +239,7 @@ class DataBase
      */
     public function queryWithFetchAndClose(string $sql, int $conn_name = 0)
     {
+        $res = false;
         try {
             $res = $this->queryWithFetch($sql, $conn_name);
         } catch (\Exception $e) {
@@ -339,6 +340,7 @@ class DataBase
      */
     public function queryWithFetch(string $sql, int $conn_name = 0): array|bool
     {
+        $res = false;
         $rc = $this->query($sql, $conn_name);
         if (true === $rc) {
             /* La requête s'est bien passée, ce n'était pas une requete du type
@@ -380,33 +382,31 @@ class DataBase
     }
 
     /**
-     * OK
-     */
-    public function freeResult($result)
-    {
-        return mysqli_free_result($result);
-    }
-
-    /**
+     * @param \mysqli_result $result
      *
+     * @return int
      */
-    public function numRows($result)
+    public function numRows(\mysqli_result $result): int
     {
         return mysqli_num_rows($result);
     }
 
     /**
+     * @param \mysqli_result $result
      *
+     * @return array<mixed>|null|false
      */
-    public function fetchRow($result)
+    public function fetchRow(\mysqli_result $result): array|null|false
     {
         return mysqli_fetch_row($result);
     }
 
     /**
+     * @param \mysqli_result $result
      *
+     * @return string|false
      */
-    public function fetchFirstField($result)
+    public function fetchFirstField(\mysqli_result $result): string|false
     {
         $res = mysqli_fetch_array($result, MYSQLI_NUM);
         if (is_array($res)) {
@@ -416,9 +416,11 @@ class DataBase
     }
 
     /**
+     * @param \mysqli_result $result
      *
+     * @return object|null|false
      */
-    public function fetchObject($result)
+    public function fetchObject(\mysqli_result $result): object|null|false
     {
         return mysqli_fetch_object($result);
     }
@@ -427,11 +429,11 @@ class DataBase
      * Execute mysqli_fetch_assoc sur un resultset, ne touche pas à la valeur de
      * {@see self::$fetchMode}.
      *
-     * @param resource $result
+     * @param \mysqli_result $result
      *
-     * @return array|bool
+     * @return array<string,mixed>|null|false
      */
-    public function fetchAssoc($result)
+    public function fetchAssoc(\mysqli_result $result): array|null|false
     {
         return mysqli_fetch_assoc($result);
     }
@@ -443,9 +445,9 @@ class DataBase
      * $fieldsAndValues est un tableau ('fieldname' => $value), $value peut être
      * un tableau pour certaines fonction spéciales (NOW(), ...).
      *
-     * @param string $dbAndTableName  dbAndTableName
-     * @param array  $fieldsAndValues fieldsAndValues
-     * @param int    $conn_name       identifiant de connexion
+     * @param string              $dbAndTableName  dbAndTableName
+     * @param array<string,mixed> $fieldsAndValues fieldsAndValues
+     * @param int                 $conn_name       identifiant de connexion
      *
      * @return string
      * @throws \Exception
@@ -550,8 +552,10 @@ class DataBase
      * Retourne le n° de l'erreur sql
      *
      * @param int $conn_name identifiant de connexion
+     *
+     * @return int
      */
-    public function errno(int $conn_name)
+    public function errno(int $conn_name): int
     {
         $conn_key = self::generateConnectionKey($conn_name);
         return mysqli_errno($this->current_conn[$conn_key]);

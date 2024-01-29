@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Adhoc\Utils;
 
-use Adhoc\Utils\Pagination;
+use Adhoc\Model\Event;
 
 /**
  * Fonctions et modifiers custom pour Smarty
