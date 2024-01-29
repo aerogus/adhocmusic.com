@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 use Adhoc\Model\CMS;
 use Adhoc\Model\Groupe;
-use Adhoc\Model\Route;
+use Adhoc\Utils\Route;
 
 if (file_exists(__DIR__ . '/../../app/bootstrap.php')) {
     include __DIR__ . '/../../app/bootstrap.php'; // ./tmpfs/www -> ./app : "../.."
