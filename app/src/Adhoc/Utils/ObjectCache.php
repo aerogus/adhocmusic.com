@@ -37,8 +37,6 @@ class ObjectCache
      */
     public static function get(string $key): ?string
     {
-        Log::info('get ' . $key);
-
         if (file_exists(self::getBasePath() . '/' . $key)) {
             return file_get_contents(self::getBasePath() . '/' . $key);
         }
@@ -56,8 +54,6 @@ class ObjectCache
      */
     public static function set(string $key, string $value): bool
     {
-        Log::info('set ' . $key);
-
         if (file_put_contents(self::getBasePath() . '/' . $key, $value) !== false) {
             return true;
         }
@@ -73,8 +69,6 @@ class ObjectCache
      */
     public static function unset(string $key): bool
     {
-        Log::info('unset ' . $key);
-
         if (file_exists(self::getBasePath() . '/' . $key)) {
             if (unlink(self::getBasePath() . '/' . $key)) {
                 return true;

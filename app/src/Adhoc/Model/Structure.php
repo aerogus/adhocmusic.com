@@ -387,7 +387,7 @@ class Structure extends ObjectModel
      * @return bool
      * @throws \Exception
      */
-    public function delete()
+    public function delete(): bool
     {
         if (parent::delete()) {
             $pngFile = self::getBasePath() . '/' . $this->id_structure . '.png';

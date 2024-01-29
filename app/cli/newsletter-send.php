@@ -13,8 +13,8 @@
 declare(strict_types=1);
 
 use Adhoc\Model\Newsletter;
-use Adhoc\Model\Log;
-use Adhoc\Model\Email;
+use Adhoc\Utils\Log;
+use Adhoc\Utils\Email;
 
 // on temporise l'envoi des mails.
 // 2sec = 30 mails/minute = 1800 mails/heure

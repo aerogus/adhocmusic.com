@@ -1019,9 +1019,9 @@ class Membre extends Contact
     /**
      * Suppression d'un contact apres vérification des liaisons avec les tables
      *
-     * @return int
+     * @return bool
      */
-    public function delete(): int
+    public function delete(): bool
     {
         $db = DataBase::getInstance();
 
@@ -1030,7 +1030,7 @@ class Membre extends Contact
 
         $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 
     /**

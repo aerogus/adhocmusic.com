@@ -234,7 +234,7 @@ class DataBase
      * @param string $sql       requête SQL
      * @param int    $conn_name identifiant de connexion
      *
-     * @return array
+     * @return array<mixed>|bool
      * @throws \Exception
      */
     public function queryWithFetchAndClose(string $sql, int $conn_name = 0)

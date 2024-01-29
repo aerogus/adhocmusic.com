@@ -758,8 +758,10 @@ class Event extends ObjectModel
 
     /**
      * Suppression d'un événement
+     *
+     * @return bool
      */
-    public function delete()
+    public function delete(): bool
     {
         /* délie les tables référentes */
         $this->unlinkStyles();
@@ -767,9 +769,10 @@ class Event extends ObjectModel
         $this->unlinkGroupes();
         $this->deleteFlyer();
 
-        parent::delete();
-
-        return true;
+        if (parent::delete()) {
+            return true;
+        }
+        return false;
     }
 
     /**

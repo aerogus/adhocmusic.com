@@ -35,13 +35,6 @@ class Messagerie extends ObjectModel
     protected static string $table = 'adhoc_messagerie';
 
     /**
-     * Clé Contact
-     *
-     * @var int
-     */
-    private int $id_contact;
-
-    /**
      * @return object
      */
     public static function getInstance($id_contact): object

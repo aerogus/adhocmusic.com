@@ -32,7 +32,7 @@ class ForumPrive extends Forum
      * @param string $id_forum id_forum
      * @param int    $page     page
      *
-     * @return array
+     * @return array<mixed>
      */
     public static function getThreads(string $id_forum, int $page = 0): array
     {
