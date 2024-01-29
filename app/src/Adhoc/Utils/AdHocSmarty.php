@@ -41,17 +41,17 @@ class AdHocSmarty extends \Smarty
         $this->setCacheDir(SMARTY_TEMPLATE_C_PATH);
 
         // fonctions smarty
-        $this->registerPlugin('function', 'pagination', ['Adhoc\Model\AdHocSmarty', 'functionPagination']);
-        $this->registerPlugin('function', 'html_input_date_hourminute', ['Adhoc\Model\AdHocSmarty', 'functionHtmlInputDateHourminute']);
-        $this->registerPlugin('function', 'calendar', ['Adhoc\Model\AdHocSmarty', 'functionCalendar']);
-        $this->registerPlugin('function', 'image', ['Adhoc\Model\EmailSmarty', 'functionImage']);
+        $this->registerPlugin('function', 'pagination', [__NAMESPACE__ . '\AdHocSmarty', 'functionPagination']);
+        $this->registerPlugin('function', 'html_input_date_hourminute', [__NAMESPACE__ . '\AdHocSmarty', 'functionHtmlInputDateHourminute']);
+        $this->registerPlugin('function', 'calendar', [__NAMESPACE__ . '\AdHocSmarty', 'functionCalendar']);
+        $this->registerPlugin('function', 'image', [__NAMESPACE__ . '\EmailSmarty', 'functionImage']);
 
         // modifiers smarty
-        $this->registerPlugin('modifier', 'format_size', ['Adhoc\Model\AdHocSmarty', 'modifierFormatSize']);
-        $this->registerPlugin('modifier', 'pseudo_by_id', ['Adhoc\Model\AdHocSmarty', 'modifierPseudoById']);
-        $this->registerPlugin('modifier', 'avatar_by_id', ['Adhoc\Model\AdHocSmarty', 'modifierAvatarById']);
-        $this->registerPlugin('modifier', 'display_on_off_icon', ['Adhoc\Model\AdHocSmarty', 'modifierDisplayOnOffIcon']);
-        $this->registerPlugin('modifier', 'json_encode_numeric_check', ['Adhoc\Model\AdHocSmarty', 'modifierJsonEncodeNumericCheck']);
+        $this->registerPlugin('modifier', 'format_size', [__NAMESPACE__ . '\AdHocSmarty', 'modifierFormatSize']);
+        $this->registerPlugin('modifier', 'pseudo_by_id', [__NAMESPACE__ . '\AdHocSmarty', 'modifierPseudoById']);
+        $this->registerPlugin('modifier', 'avatar_by_id', [__NAMESPACE__ . '\AdHocSmarty', 'modifierAvatarById']);
+        $this->registerPlugin('modifier', 'display_on_off_icon', [__NAMESPACE__ . '\AdHocSmarty', 'modifierDisplayOnOffIcon']);
+        $this->registerPlugin('modifier', 'json_encode_numeric_check', [__NAMESPACE__ . '\AdHocSmarty', 'modifierJsonEncodeNumericCheck']);
 
         // assignations générales
         $this->assign('title', "♫ AD'HOC : Les Musiques Actuelles");
