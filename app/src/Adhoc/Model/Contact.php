@@ -75,7 +75,7 @@ class Contact extends ObjectModel
     /**
      * @param bool $fusion fusion
      *
-     * @return array
+     * @return array<string,string>|array<string,array<string,string>>
      */
     protected function getAllFields(bool $fusion = true): array
     {
@@ -345,7 +345,7 @@ class Contact extends ObjectModel
                 if ($value === true) {
                     $att = $field;
                     if (is_null($this->$att)) {
-                        $sql .= " `" . $field . "` = NULL,";
+                        $fields_to_save .= " `" . $field . "` = NULL,";
                     } else {
                         switch ($fields['contact'][$field]) {
                             case 'int':

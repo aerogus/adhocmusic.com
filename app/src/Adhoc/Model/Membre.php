@@ -11,6 +11,7 @@ use Adhoc\Model\Reference\WorldCountry;
 use Adhoc\Model\Reference\WorldRegion;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\DataBase;
+use Adhoc\Utils\Email;
 use Adhoc\Utils\ObjectModel;
 
 /**
@@ -243,7 +244,7 @@ class Membre extends Contact
     /**
      * @param bool $fusion fusion
      *
-     * @return array
+     * @return array<string,string>|array<string,array<string,string>>
      */
     protected function getAllFields(bool $fusion = true): array
     {

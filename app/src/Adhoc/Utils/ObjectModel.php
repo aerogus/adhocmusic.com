@@ -83,7 +83,7 @@ abstract class ObjectModel
     /**
      * @param bool $fusion fusion
      *
-     * @return array<string,string>
+     * @return array<string,string>|array<string,array<string,string>>
      */
     protected function getAllFields(bool $fusion = true): array
     {

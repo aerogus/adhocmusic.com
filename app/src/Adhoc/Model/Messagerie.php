@@ -208,18 +208,14 @@ class Messagerie extends ObjectModel
             case 'admin':
                 $sql .= "AND 1 ";
                 break;
-
             case 'recus':
                 $sql .= "AND `id_to` = " . (int) $this->contact . " AND `del_to` = FALSE ";
                 break;
-
             case 'sent':
                 $sql .= "AND `id_from` = " . (int) $this->contact . " AND `del_from` = FALSE ";
                 break;
-
             default:
                 return false;
-                break;
         }
 
         $sql .= "ORDER BY `id_pm` = DESC";
@@ -252,8 +248,10 @@ class Messagerie extends ObjectModel
      *
      * @param int    $id_pm id_pm
      * @param string $who   from|to
+     *
+     * @return bool
      */
-    public function setDeleted(int $id_pm, string $who)
+    public function setDeleted(int $id_pm, string $who): bool
     {
         $db = DataBase::getInstance();
 
@@ -267,12 +265,11 @@ class Messagerie extends ObjectModel
                 break;
             default:
                 return false;
-                break;
         }
         $sql .= "WHERE `id_pm` = " . (int) $id_pm;
 
-        $db->query(sql);
+        $db->query($sql);
 
-        return $db->affectedRows();
+        return (bool) $db->affectedRows();
     }
 }

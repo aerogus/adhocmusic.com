@@ -99,7 +99,7 @@ class MembreAdhoc extends Membre
     /**
      * @param bool $fusion fusion
      *
-     * @return array
+     * @return array<string,string>|array<string,array<string,string>>
      */
     protected function getAllFields(bool $fusion = true): array
     {

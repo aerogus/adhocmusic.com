@@ -650,7 +650,7 @@ class Comment extends ObjectModel
         }
     }
 
-    public static function getComments()
+    public static function getComments(): void
     {
         // non implémenté
     }

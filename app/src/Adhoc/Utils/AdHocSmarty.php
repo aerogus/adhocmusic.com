@@ -14,17 +14,17 @@ use Adhoc\Model\Event;
 class AdHocSmarty extends \Smarty
 {
     /**
-     * @var array
+     * @var array<int,string>
      */
     protected static array $pseudos = [];
 
     /**
-     * @var array
+     * @var array<int,string>
      */
     protected static array $avatars = [];
 
     /**
-     * @var array
+     * @var array<string,mixed>
      */
     protected array $script_vars = [];
 
@@ -73,8 +73,6 @@ class AdHocSmarty extends \Smarty
 
         $this->enqueueScript('/lib/jquery@3.7.1/jquery.min.js');
         $this->enqueueScript('/js/adhoc.js');
-
-        return $this;
     }
 
     /* début fonctions */
@@ -183,9 +181,9 @@ class AdHocSmarty extends \Smarty
     }
 
     /**
-     * @param array $params ['hour']
-     *                      ['minute']
-     *                      ['step']
+     * @param array<string,int> $params ['hour']
+     *                                  ['minute']
+     *                                  ['step']
      *
      * @return string
      */
@@ -224,9 +222,9 @@ class AdHocSmarty extends \Smarty
     }
 
     /**
-     * @param array $params ['year']
-     *                      ['month']
-     *                      ['day']
+     * @param array<string,int> $params ['year']
+     *                                  ['month']
+     *                                  ['day']
      *
      * @return string
      */
@@ -369,7 +367,7 @@ class AdHocSmarty extends \Smarty
 
         $sql = "SELECT `pseudo` "
              . "FROM `adhoc_membre` "
-             . "WHERE `id_contact` = " . (int) $id_contact;
+             . "WHERE `id_contact` = " . $id_contact;
 
         self::$pseudos[$id_contact] = $db->queryWithFetchFirstField($sql);
 
@@ -391,8 +389,8 @@ class AdHocSmarty extends \Smarty
         }
 
         $url = '';
-        if (file_exists(MEDIA_PATH . '/membre/' . $id_contact . '.jpg')) {
-            $url = MEDIA_URL . '/membre/' . $id_contact . '.jpg';
+        if (file_exists(MEDIA_PATH . '/membre/' . (string) $id_contact . '.jpg')) {
+            $url = MEDIA_URL . '/membre/' . (string) $id_contact . '.jpg';
         }
 
         self::$avatars[$id_contact] = $url;
@@ -428,8 +426,10 @@ class AdHocSmarty extends \Smarty
      * Ajoute d'une feuille de style
      *
      * @param string $style_name url de la feuille de style
+     *
+     * @return void
      */
-    public function enqueueStyle(string $style_name)
+    public function enqueueStyle(string $style_name): void
     {
         $this->append('stylesheets', $style_name);
     }
@@ -439,8 +439,10 @@ class AdHocSmarty extends \Smarty
      *
      * @param string $script_name url du script
      * @param bool $in_footer
+     *
+     * @return void
      */
-    public function enqueueScript(string $script_name, bool $in_footer = true)
+    public function enqueueScript(string $script_name, bool $in_footer = true): void
     {
         if ($in_footer) {
             $this->append('footer_scripts', $script_name);
@@ -466,7 +468,7 @@ class AdHocSmarty extends \Smarty
     /**
      * Ajoute plusieurs variables js utilisables dans les scripts du footer
      *
-     * @param array $vars ['key1' => value1, 'key2' => value2]
+     * @param array<string,mixed> $vars ['key1' => value1, 'key2' => value2]
      *
      * @return void
      */
@@ -481,8 +483,10 @@ class AdHocSmarty extends \Smarty
      * Imprime un javascript en ligne dans le footer
      *
      * @param string $script script
+     *
+     * @return void
      */
-    public function printInlineScript(string $script)
+    public function printInlineScript(string $script): void
     {
         $this->append('inline_scripts', $script);
     }
@@ -490,12 +494,17 @@ class AdHocSmarty extends \Smarty
     /**
      * On hérite de Smarty::fetch
      *
-     * @param string $ |object $template the resource handle of the template file  or template object
+     * @param string $template the resource handle of the template file or template object
      * @param mixed  $cache_id cache id to be used with this template
      * @param mixed  $compile_id compile id to be used with this template
      * @param object $parent next higher level of Smarty variables
+     * @param bool   $display
+     * @param bool   $merge_tpl_vars
+     * @param bool   $no_output_filter
+     *
+     * @return string
      */
-    public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null, $display = false, $merge_tpl_vars = true, $no_output_filter = false)
+    public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null, $display = false, $merge_tpl_vars = true, $no_output_filter = false): string
     {
         // fil d'ariane
         $this->assign('trail', Trail::getInstance()->getPath());
