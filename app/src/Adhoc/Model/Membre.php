@@ -167,24 +167,24 @@ class Membre extends Contact
     protected ?array $groupes = null;
 
     /**
-     * @var ?array
+     * @var ?City
      */
-    protected ?array $city = null;
+    protected ?City $city = null;
 
     /**
-     * @var ?array
+     * @var ?Departement
      */
-    protected ?array $departement = null;
+    protected ?Departement $departement = null;
 
     /**
-     * @var ?array
+     * @var ?WorldRegion
      */
-    protected ?array $region = null;
+    protected ?WorldRegion $region = null;
 
     /**
-     * @var ?array
+     * @var ?WorldCountry
      */
-    protected ?array $country = null;
+    protected ?WorldCountry $country = null;
 
     /**
      * Liste des attributs de l'objet
