@@ -313,9 +313,9 @@ class Membre extends Contact
     }
 
     /**
-     * @return object|null
+     * @return ?City
      */
-    public function getCity(): ?object
+    public function getCity(): ?City
     {
         if (is_null($this->getIdCity())) {
             return null;
@@ -337,9 +337,9 @@ class Membre extends Contact
     }
 
     /**
-     * @return object|null
+     * @return ?Departement
      */
-    public function getDepartement(): ?object
+    public function getDepartement(): ?Departement
     {
         if (is_null($this->getIdDepartement())) {
             return null;
@@ -361,9 +361,9 @@ class Membre extends Contact
     }
 
     /**
-     * @return object|null
+     * @return ?WorldRegion
      */
-    public function getRegion(): ?object
+    public function getRegion(): ?WorldRegion
     {
         if (is_null($this->getIdRegion())) {
             return null;
@@ -385,9 +385,9 @@ class Membre extends Contact
     }
 
     /**
-     * @return object|null
+     * @return ?WorldCountry
      */
-    public function getCountry(): ?object
+    public function getCountry(): ?WorldCountry
     {
         if (is_null($this->getIdCountry())) {
             return null;
