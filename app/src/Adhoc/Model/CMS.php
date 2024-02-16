@@ -11,20 +11,10 @@ use Adhoc\Utils\ObjectModel;
 /**
  * Classe Content Management System
  *
- * @template TObjectModel as CMS
- * @extends ObjectModel<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class CMS extends ObjectModel
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */
@@ -395,13 +385,13 @@ class CMS extends ObjectModel
             $sql .= " ";
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
             $sql .= "ORDER BY `" . static::getDbPk() . "` ";
         }
 
-        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
             $sql .= $params['sort'] . " ";
         } else {
             $sql .= "ASC ";

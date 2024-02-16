@@ -15,20 +15,10 @@ use Adhoc\Utils\ObjectModel;
  * Permet de générer un commentaire générique sur n'importe quelle entité
  * Video, Audio, Photo, Lieu, Event, Groupe, Membre
  *
- * @template TObjectModel as Comment
- * @extends ObjectModel<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Comment extends ObjectModel
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */

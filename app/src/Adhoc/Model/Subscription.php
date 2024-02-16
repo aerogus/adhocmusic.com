@@ -11,20 +11,10 @@ use Adhoc\Utils\Email;
 /**
  * Gestion des Cotisations
  *
- * @template TObjectModel as Subscription
- * @extends ObjectModel<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Subscription extends ObjectModel
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */

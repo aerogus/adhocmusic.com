@@ -13,20 +13,10 @@ use Adhoc\Model\Media;
  * Classe de gestion des audios du site
  * Appel des conversions etc ...
  *
- * @template TObjectModel as Audio
- * @extends Media<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Audio extends Media
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */

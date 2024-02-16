@@ -222,7 +222,7 @@ class DataBase
      */
     public function setFetchMode(int $fetchMode = MYSQLI_BOTH): bool
     {
-        if (!in_array($fetchMode, [MYSQLI_BOTH, MYSQLI_ASSOC, MYSQLI_NUM])) {
+        if (!in_array($fetchMode, [MYSQLI_BOTH, MYSQLI_ASSOC, MYSQLI_NUM], true)) {
             return false;
         }
 
@@ -280,7 +280,7 @@ class DataBase
      * @param string $sql       requête SQL
      * @param int    $conn_name identifiant de connexion
      *
-     * @return array<mixed>|bool
+     * @return string|null|false
      */
     public function queryWithFetchFirstField(string $sql, int $conn_name = 0): string|null|false
     {

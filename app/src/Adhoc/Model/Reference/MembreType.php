@@ -10,20 +10,10 @@ use Adhoc\Utils\ObjectModel;
 /**
  * Classe MembreType
  *
- * @template TObjectModel as MembreType
- * @extends Reference<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class MembreType extends Reference
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */

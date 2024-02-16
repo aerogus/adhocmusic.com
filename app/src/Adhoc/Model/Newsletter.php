@@ -21,20 +21,10 @@ define('NEWSLETTER_TEMPLATE_PATH', ADHOC_ROOT_PATH . '/app/views/emails');
 /**
  * Classe de gestion de la newsletter AD'HOC
  *
- * @template TObjectModel as Newsletter
- * @extends ObjectModel<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Newsletter extends ObjectModel
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */
@@ -330,7 +320,7 @@ class Newsletter extends ObjectModel
      *
      * @param array<string,mixed> $params ['order_by' => string, 'sort' => string]
      *
-     * @return array<TObjectModel>
+     * @return array<static>
      */
     public static function find(array $params): array
     {
@@ -339,13 +329,13 @@ class Newsletter extends ObjectModel
 
         $sql = "SELECT `id_newsletter` FROM `" . Newsletter::getDbTable() . "` WHERE 1 ";
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
             $sql .= "ORDER BY `" . static::$pk . "` ";
         }
 
-        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
             $sql .= $params['sort'];
         } else {
             $sql .= "ASC";

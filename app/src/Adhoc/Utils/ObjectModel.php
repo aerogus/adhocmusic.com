@@ -12,16 +12,15 @@ namespace Adhoc\Utils;
  * - des méthodes d'accès/écriture des données
  *
  * @abstract
- * @template TObjectModel as ObjectModel
  *
  * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class ObjectModel
 {
     /**
-     * @var ?TObjectModel
+     * @var ?static
      */
-    protected static ?ObjectModel $instance = null;
+    protected static ?self $instance = null;
 
     /**
      * Champ clé primaire (simple ou multiple) de l'objet fils
@@ -403,7 +402,7 @@ abstract class ObjectModel
      *                                'limit' => int,
      *                            ]
      *
-     * @return array<TObjectModel>
+     * @return array<static>
      */
     public static function find(array $params): array
     {
@@ -412,13 +411,13 @@ abstract class ObjectModel
 
         $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
             $sql .= "ORDER BY `" . static::getDbPk() . "` ";
         }
 
-        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
             $sql .= $params['sort'] . " ";
         } else {
             $sql .= "ASC ";
@@ -443,7 +442,7 @@ abstract class ObjectModel
     /**
      * Retourne une collection d'instances
      *
-     * @return array<TObjectModel>
+     * @return array<static>
      * @throws \Exception
      */
     public static function findAll(): array

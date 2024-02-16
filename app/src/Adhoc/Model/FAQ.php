@@ -12,20 +12,10 @@ use Adhoc\Utils\ObjectModel;
 /**
  * Foire aux questions
  *
- * @template TObjectModel as FAQ
- * @extends ObjectModel<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class FAQ extends ObjectModel
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */
@@ -328,7 +318,7 @@ class FAQ extends ObjectModel
      *                                'limit' => int,
      *                            ]
      *
-     * @return array<TObjectModel>
+     * @return array<static>
      */
     public static function find(array $params): array
     {
@@ -349,13 +339,13 @@ class FAQ extends ObjectModel
             $sql .= " ";
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
             $sql .= "ORDER BY `" . static::getDbPk() . "` ";
         }
 
-        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
             $sql .= $params['sort'] . " ";
         } else {
             $sql .= "ASC ";

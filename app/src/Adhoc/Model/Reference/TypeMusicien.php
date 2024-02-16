@@ -10,20 +10,10 @@ use Adhoc\Utils\ObjectModel;
 /**
  * Classe de gestion des types de musiciens
  *
- * @template TObjectModel as TypeMusicien
- * @extends Reference<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class TypeMusicien extends Reference
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */

@@ -10,20 +10,10 @@ use Adhoc\Utils\ObjectModel;
 /**
  * Classe de gestion des catégories de FAQ
  *
- * @template TObjectModel as FAQCategory
- * @extends Reference<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class FAQCategory extends Reference
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */

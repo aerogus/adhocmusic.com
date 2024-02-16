@@ -3,11 +3,7 @@
 /**
  * Classe de gestion des vidéos
  *
- * @template TGroupe as Groupe
- * @template TObjectModel as Video
- * @extends Media<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 
 declare(strict_types=1);
@@ -104,13 +100,6 @@ define('MEDIA_ADHOCTUBE_URL_PATTERN', '~^https://' . MEDIA_ADHOCTUBE_HOST . '/vi
 
 class Video extends Media
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */
@@ -340,9 +329,9 @@ class Video extends Media
      *
      * @param int $id_host identifiant hébergeur
      *
-     * @return TObjectModel
+     * @return static
      */
-    public function setIdHost(int $id_host): self
+    public function setIdHost(int $id_host): static
     {
         if ($this->id_host !== $id_host) {
             $this->id_host = $id_host;
@@ -355,9 +344,9 @@ class Video extends Media
     /**
      * @param string $reference reference
      *
-     * @return TObjectModel
+     * @return static
      */
-    public function setReference(string $reference): self
+    public function setReference(string $reference): static
     {
         if ($this->reference !== $reference) {
             $this->reference = $reference;
@@ -370,9 +359,9 @@ class Video extends Media
     /**
      * @param float $ratio ratio
      *
-     * @return TObjectModel
+     * @return static
      */
-    public function setRatio(float $ratio): self
+    public function setRatio(float $ratio): static
     {
         if ($this->ratio !== $ratio) {
             $this->ratio = $ratio;
@@ -411,7 +400,7 @@ class Video extends Media
      *
      * @param ?int $idx
      *
-     * @return array<TGroupe>|TGroupe
+     * @return array<Groupe>|Groupe
      */
     public function getGroupes(?int $idx = null): array|Groupe
     {
@@ -423,9 +412,9 @@ class Video extends Media
     }
 
     /**
-     * @return object|null
+     * @return ?Groupe
      */
-    public function getGroupe(): ?object
+    public function getGroupe(): ?Groupe
     {
         $groupes = $this->getGroupes();
         if (sizeof($groupes) >= 1) {

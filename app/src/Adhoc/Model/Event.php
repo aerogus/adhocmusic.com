@@ -16,20 +16,10 @@ use Adhoc\Utils\ObjectModel;
  * Gestion des événements et des liaisons directes (avec groupe, structure et lieu)
  * gestion de l'intégrité référentielle
  *
- * @template TObjectModel as Event
- * @extends ObjectModel<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Event extends ObjectModel
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */
@@ -601,13 +591,13 @@ class Event extends ObjectModel
             }
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
             $sql .= "ORDER BY `" . static::$pk . "` ";
         }
 
-        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
             $sql .= $params['sort'] . " ";
         } else {
             $sql .= "ASC ";

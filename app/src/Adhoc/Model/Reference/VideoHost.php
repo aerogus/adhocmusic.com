@@ -10,20 +10,10 @@ use Adhoc\Utils\ObjectModel;
 /**
  * Classe VideoHost
  *
- * @template TObjectModel as VideoHost
- * @extends Reference<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class VideoHost extends Reference
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */

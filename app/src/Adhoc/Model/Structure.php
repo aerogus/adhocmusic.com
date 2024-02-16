@@ -10,21 +10,10 @@ use Adhoc\Utils\ObjectModel;
 /**
  * Gestion des Structures / associations
  *
- * @template TObjectEvent as Event
- * @template TObjectModel as Structure
- * @extends ObjectModel<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Structure extends ObjectModel
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */
@@ -410,7 +399,7 @@ class Structure extends ObjectModel
     /**
      * Retourne les événements rattachés à cette structure
      *
-     * @return array<TObjectEvent>
+     * @return array<Event>
      */
     public function getEvents(): array
     {
@@ -432,7 +421,7 @@ class Structure extends ObjectModel
      *                      'limit' => int,
      *                      ]
      *
-     * @return array<TObjectModel>
+     * @return array<static>
      */
     public static function find(array $params): array
     {
@@ -450,13 +439,13 @@ class Structure extends ObjectModel
             }
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
             $sql .= "ORDER BY `" . static::getDbPk() . "` ";
         }
 
-        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
             $sql .= $params['sort'];
         } else {
             $sql .= "ASC";

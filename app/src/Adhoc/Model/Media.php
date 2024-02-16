@@ -13,20 +13,11 @@ use Adhoc\Utils\ObjectModel;
  * parente de Audio, Video et Photo
  *
  * @abstract
- * @template TObjectModel as Media
- * @extends ObjectModel<TObjectModel>
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class Media extends ObjectModel
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var int
      */
@@ -214,9 +205,9 @@ abstract class Media extends ObjectModel
     /**
      * @param int $id_contact id_contact
      *
-     * @return TObjectModel
+     * @return static
      */
-    public function setIdContact(int $id_contact): object
+    public function setIdContact(int $id_contact): static
     {
         if ($this->id_contact !== $id_contact) {
             $this->id_contact = $id_contact;
@@ -229,9 +220,9 @@ abstract class Media extends ObjectModel
     /**
      * @param int|null $id_groupe id_groupe
      *
-     * @return TObjectModel
+     * @return static
      */
-    public function setIdGroupe(?int $id_groupe): object
+    public function setIdGroupe(?int $id_groupe): static
     {
         if ($this->id_groupe !== $id_groupe) {
             $this->id_groupe = $id_groupe;
@@ -244,9 +235,9 @@ abstract class Media extends ObjectModel
     /**
      * @param int|null $id_lieu id_lieu
      *
-     * @return TObjectModel
+     * @return static
      */
-    public function setIdLieu(?int $id_lieu): object
+    public function setIdLieu(?int $id_lieu): static
     {
         if ($this->id_lieu !== $id_lieu) {
             $this->id_lieu = $id_lieu;
@@ -259,9 +250,9 @@ abstract class Media extends ObjectModel
     /**
      * @param int|null $id_event id_event
      *
-     * @return TObjectModel
+     * @return static
      */
-    public function setIdEvent(?int $id_event): object
+    public function setIdEvent(?int $id_event): static
     {
         if ($this->id_event !== $id_event) {
             $this->id_event = $id_event;
@@ -274,9 +265,9 @@ abstract class Media extends ObjectModel
     /**
      * @param string $name name
      *
-     * @return TObjectModel
+     * @return static
      */
-    public function setName(string $name): object
+    public function setName(string $name): static
     {
         if ($this->name !== $name) {
             $this->name = $name;
@@ -289,9 +280,9 @@ abstract class Media extends ObjectModel
     /**
      * @param string|null $created_at created_at
      *
-     * @return TObjectModel
+     * @return static
      */
-    public function setCreatedAt(?string $created_at): object
+    public function setCreatedAt(?string $created_at): static
     {
         if ($this->created_at !== $created_at) {
             $this->created_at = $created_at;
@@ -302,9 +293,9 @@ abstract class Media extends ObjectModel
     }
 
     /**
-     * @return TObjectModel
+     * @return static
      */
-    public function setCreatedNow(): object
+    public function setCreatedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -319,9 +310,9 @@ abstract class Media extends ObjectModel
     /**
      * @param string|null $modified_at modified_at
      *
-     * @return TObjectModel
+     * @return static
      */
-    public function setModifiedAt(?string $modified_at): object
+    public function setModifiedAt(?string $modified_at): static
     {
         if ($this->modified_at !== $modified_at) {
             $this->modified_at = $modified_at;
@@ -332,9 +323,9 @@ abstract class Media extends ObjectModel
     }
 
     /**
-     * @return TObjectModel
+     * @return static
      */
-    public function setModifiedNow(): object
+    public function setModifiedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -349,9 +340,9 @@ abstract class Media extends ObjectModel
     /**
      * @param bool $online online
      *
-     * @return TObjectModel
+     * @return static
      */
-    public function setOnline(bool $online): object
+    public function setOnline(bool $online): static
     {
         if ($this->online !== $online) {
             $this->online = $online;
@@ -381,7 +372,7 @@ abstract class Media extends ObjectModel
      *                                'limit' => int,
      *                            ]
      *
-     * @return array<TObjectModel>
+     * @return array<static>
      */
     public static function find(array $params): array
     {
@@ -445,7 +436,7 @@ abstract class Media extends ObjectModel
             $sql .= " ";
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } elseif ((isset($params['order_by']) && $params['order_by'] === 'random')) {
             $sql .= "ORDER BY RAND() ";
@@ -453,7 +444,7 @@ abstract class Media extends ObjectModel
             $sql .= "ORDER BY `" . static::getDbPk() . "` ";
         }
 
-        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
             $sql .= $params['sort'] . " ";
         } else {
             $sql .= "ASC ";

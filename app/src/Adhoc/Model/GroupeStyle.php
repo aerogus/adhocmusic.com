@@ -10,20 +10,10 @@ use Adhoc\Utils\ObjectModel;
 /**
  * Requêtes d'interaction avec les styles de groupes
  *
- * @template TObjectModel as GroupeStyle
- * @extends ObjectModel<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class GroupeStyle extends ObjectModel
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */
@@ -121,7 +111,7 @@ class GroupeStyle extends ObjectModel
      *                      'limit' => int,
      *                      ]
      *
-     * @return array<TObjectModel>
+     * @return array<static>
      */
     public static function find(array $params): array
     {

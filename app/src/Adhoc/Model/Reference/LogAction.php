@@ -10,20 +10,10 @@ use Adhoc\Utils\ObjectModel;
 /**
  * Actions de log
  *
- * @template TObjectModel as LogAction
- * @extends Reference<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class LogAction extends Reference
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */

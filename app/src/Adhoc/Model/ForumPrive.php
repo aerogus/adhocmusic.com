@@ -192,11 +192,11 @@ class ForumPrive extends Forum
         $forums = $db->queryWithFetchFirstFields($sql);
 
         return [
-            'a' => (bool) in_array('a', $forums),
-            'b' => (bool) in_array('b', $forums),
-            'e' => (bool) in_array('e', $forums),
-            's' => (bool) in_array('s', $forums),
-            't' => (bool) in_array('t', $forums),
+            'a' => (bool) in_array('a', $forums, true),
+            'b' => (bool) in_array('b', $forums, true),
+            'e' => (bool) in_array('e', $forums, true),
+            's' => (bool) in_array('s', $forums, true),
+            't' => (bool) in_array('t', $forums, true),
         ];
     }
 

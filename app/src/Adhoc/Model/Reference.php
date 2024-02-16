@@ -9,20 +9,10 @@ use Adhoc\Utils\ObjectModel;
 /**
  * Classe de gestion des tables de référence
  *
- * @template TObjectModel as Reference
- * @extends ObjectModel<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class Reference extends ObjectModel
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * [à étendre dans l'objet fils]
      *

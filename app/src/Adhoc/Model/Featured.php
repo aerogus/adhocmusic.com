@@ -13,22 +13,12 @@ use Adhoc\Utils\ObjectModel;
  *
  * Classe de gestion du module sélection du mois
  *
- * @template TObjectModel as Featured
- * @extends ObjectModel<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Featured extends ObjectModel
 {
     public const WIDTH = 1000;
     public const HEIGHT = 375;
-
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
 
     /**
      * @var string|array<string>
@@ -439,13 +429,13 @@ class Featured extends ObjectModel
             $sql .= "AND `datdeb` <= CURRENT_DATE AND `datfin` >= CURRENT_DATE ";
         }
 
-        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields))))) {
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
             $sql .= "ORDER BY `" . static::getDbPk() . "` ";
         }
 
-        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'])))) {
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
             $sql .= $params['sort'] . " ";
         } else {
             $sql .= "ASC ";

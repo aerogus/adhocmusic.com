@@ -15,20 +15,10 @@ use Adhoc\Utils\ObjectModel;
  * Classe de gestion des photos du site
  * Upload, Appel conversion etc ...
  *
- * @template TObjectModel as Photo
- * @extends Media<TObjectModel>
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Photo extends Media
 {
-    /**
-     * Instance de l'objet
-     *
-     * @var ?TObjectModel
-     */
-    protected static ?ObjectModel $instance = null;
-
     /**
      * @var string|array<string>
      */
@@ -266,18 +256,18 @@ class Photo extends Media
             return false;
         }
         $exif = exif_read_data($filename);
-        if (!empty($exif['Orientation']) && in_array($exif['Orientation'], [2, 3, 4, 5, 6, 7, 8])) {
+        if (!empty($exif['Orientation']) && in_array($exif['Orientation'], [2, 3, 4, 5, 6, 7, 8], true)) {
             $image = imagecreatefromjpeg($filename);
-            if (in_array($exif['Orientation'], [3, 4])) {
+            if (in_array($exif['Orientation'], [3, 4], true)) {
                 $image = imagerotate($image, 180, 0);
             }
-            if (in_array($exif['Orientation'], [5, 6])) {
+            if (in_array($exif['Orientation'], [5, 6], true)) {
                 $image = imagerotate($image, -90, 0);
             }
-            if (in_array($exif['Orientation'], [7, 8])) {
+            if (in_array($exif['Orientation'], [7, 8], true)) {
                 $image = imagerotate($image, 90, 0);
             }
-            if (in_array($exif['Orientation'], [2, 5, 7, 4])) {
+            if (in_array($exif['Orientation'], [2, 5, 7, 4], true)) {
                 imageflip($image, IMG_FLIP_HORIZONTAL);
             }
             imagejpeg($image, $filename, 100);
@@ -296,7 +286,7 @@ class Photo extends Media
      */
     public static function rotate(string $filename, int $angle): bool
     {
-        if (!in_array($angle, [-90, 90, 180])) {
+        if (!in_array($angle, [-90, 90, 180], true)) {
             return false;
         }
         if (getimagesize($filename)['mime'] !== 'image/jpeg') {
