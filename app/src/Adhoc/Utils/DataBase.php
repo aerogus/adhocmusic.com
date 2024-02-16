@@ -282,7 +282,7 @@ class DataBase
      *
      * @return array<mixed>|bool
      */
-    public function queryWithFetchFirstField(string $sql, int $conn_name = 0): array|bool
+    public function queryWithFetchFirstField(string $sql, int $conn_name = 0): string|null|false
     {
         $res = false;
         $rc = $this->query($sql, $conn_name);
