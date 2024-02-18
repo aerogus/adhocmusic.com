@@ -336,9 +336,9 @@ final class Controller
                 'flyer_url'  => (string) Route::params('flyer_url'),
                 'facebook_event_id' => (string) Route::params('facebook_event_id'),
             ];
-            $errors = [];
 
-            if (self::validateEventCreateForm($data, $errors)) {
+            $errors = self::validateEventCreateForm($data);
+            if (count($errors) === 0) {
                 $event = (new Event())
                     ->setName($data['name'])
                     ->setIdLieu($data['id_lieu'])
@@ -535,9 +535,9 @@ final class Controller
                 'facebook_event_id' => (string) Route::params('facebook_event_id'),
                 'online' => (bool) Route::params('online'),
             ];
-            $errors = [];
 
-            if (self::validateEventEditForm($data, $errors)) {
+            $errors = self::validateEventEditForm($data);
+            if (count($errors) === 0) {
                 $event = Event::getInstance($data['id'])
                     ->setName($data['name'])
                     ->setIdLieu($data['id_lieu'])
@@ -729,32 +729,32 @@ final class Controller
     /**
      * Validation du formulaire de création event
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateEventCreateForm(array $data, array &$errors): bool
+    private static function validateEventCreateForm(array $data): array
     {
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+        $errors = [];
+
+        // checker certains champs ?
+
+        return $errors;
     }
 
     /**
      * Validation du formulaire de modification event
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateEventEditForm(array $data, array &$errors): bool
+    private static function validateEventEditForm(array $data): array
     {
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+        $errors = [];
+
+        // checker certains champs ?
+
+        return $errors;
     }
 }

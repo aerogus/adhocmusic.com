@@ -166,11 +166,9 @@ final class Controller
                 'mailing' => (bool) Route::params('mailing'),
                 'check'   => (string) Route::params('check'),
             ];
-            $errors = [];
 
-            self::validateContactForm($data, $errors);
-
-            if (empty($errors)) {
+            $errors = self::validateContactForm($data);
+            if (count($errors) === 0) {
                 // 1. envoi du mail aux destinataires
                 $data['email_reply_to'] = $data['email'];
                 if (Email::send(CONTACT_FORM_TO, $data['subject'], 'form-contact-to', $data)) {
@@ -360,13 +358,14 @@ final class Controller
     /**
      * Routine de validation des données du formulaire
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateContactForm(array $data, array &$errors): bool
+    private static function validateContactForm(array $data): array
     {
+        $errors = [];
+
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez renseigner votre nom";
         }
@@ -392,6 +391,7 @@ final class Controller
         if (!Tools::checkCSRFToken($data['check'])) {
             $errors['check'] = "Code de vérification invalide";
         }
-        return true;
+
+        return $errors;
     }
 }

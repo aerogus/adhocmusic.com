@@ -99,9 +99,9 @@ final class Controller
                 'mailing' => (bool) Route::params('mailing'),
                 'csrf'    => '',
             ];
-            $errors = [];
 
-            if (self::validateMemberCreateForm($data, $errors)) {
+            $errors = self::validateMemberCreateForm($data);
+            if (count($errors) === 0) {
                 $data['password'] = Tools::generatePassword(12);
 
                 if (empty($errors)) {
@@ -180,9 +180,9 @@ final class Controller
                 'site' => trim((string) Route::params('site')),
                 'mailing' => (bool) Route::params('mailing'),
             ];
-            $errors = [];
 
-            if (self::validateMemberEditForm($data, $errors)) {
+            $errors = self::validateMemberEditForm($data);
+            if (count($errors) === 0) {
                 $member->setLastName($data['last_name'])
                     ->setFirstName($data['first_name'])
                     ->setAddress($data['address'])
@@ -397,13 +397,14 @@ final class Controller
     /**
      * Validation du formulaire de création membre
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateMemberCreateForm(array $data, array &$errors): bool
+    private static function validateMemberCreateForm(array $data): array
     {
+        $errors = [];
+
         if (empty($data['email'])) {
             $errors['email'] = true;
         } elseif (mb_strlen($data['email']) > 50) {
@@ -420,8 +421,8 @@ final class Controller
             $errors['pseudo_unavailable'] = true;
         }
 
-        if (count($errors)) {
-            return false;
+        if (count($errors) > 0) {
+            return $errors;
         }
 
         if ($id_contact = Contact::getIdByEmail($data['email'])) {
@@ -432,22 +433,20 @@ final class Controller
             }
         }
 
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+        return $errors;
     }
 
     /**
      * Validation du formulaire de modification membre
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateMemberEditForm(array $data, array &$errors): bool
+    private static function validateMemberEditForm(array $data): array
     {
+        $errors = [];
+
         if (empty($data['email'])) {
             $errors['email'] = true;
         } elseif (!Email::validate($data['email'])) {
@@ -456,9 +455,7 @@ final class Controller
         if (empty($data['id_country'])) {
             $errors['id_country'] = true;
         }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+
+        return $errors;
     }
 }

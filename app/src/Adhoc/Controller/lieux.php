@@ -270,9 +270,9 @@ final class Controller
                 'lat'            => (float) Route::params('lat'),
                 'lng'            => (float) Route::params('lng'),
             ];
-            $errors = [];
 
-            if (self::validateLieuCreateForm($data, $errors)) {
+            $errors = self::validateLieuCreateForm($data);
+            if (count($errors) === 0) {
                 $lieu = (new Lieu())
                     ->setIdCountry($data['id_country'])
                     ->setIdRegion($data['id_region'])
@@ -383,9 +383,9 @@ final class Controller
                 'lat'            => (float) Route::params('lat'),
                 'lng'            => (float) Route::params('lng'),
             ];
-            $errors = [];
 
-            if (self::validateLieuEditForm($data, $errors)) {
+            $errors = self::validateLieuEditForm($data);
+            if (count($errors) === 0) {
                 $lieu = Lieu::getInstance($data['id'])
                     ->setIdCountry($data['id_country'])
                     ->setIdRegion($data['id_region'])
@@ -568,38 +568,36 @@ final class Controller
     /**
      * Validation du formulaire de création lieu
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs
+     * @param array $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateLieuCreateForm(array $data, array &$errors): bool
+    private static function validateLieuCreateForm(array $data): array
     {
+        $errors = [];
+
         if (empty($data['name'])) {
             $errors['name'] = true;
         }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+
+        return $errors;
     }
 
     /**
      * Validation du formulaire de modification membre
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateLieuEditForm(array $data, array &$errors): bool
+    private static function validateLieuEditForm(array $data): array
     {
+        $errors = [];
+
         if (empty($data['name'])) {
             $errors['name'] = true;
         }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+
+        return $errors;
     }
 }

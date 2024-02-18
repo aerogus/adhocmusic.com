@@ -988,19 +988,26 @@ class Event extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT DATE(`date`) AS `date`, COUNT(`id_event`) AS `nb_events` "
-             . "FROM `adhoc_event` "
-             . "WHERE YEAR(`date`) = " . (int) $year . " "
-             . "AND MONTH(`date`) = " . (int) $month . " "
-             . "GROUP BY DATE(`date`)";
+        $sql = 'SELECT DATE(`date`) AS `date`, COUNT(`id_event`) AS `nb_events` '
+             . 'FROM `adhoc_event` '
+             . 'WHERE 1 '
+             . 'AND YEAR(`date`) = :year '
+             . 'AND MONTH(`date`) = :month '
+             . 'GROUP BY DATE(`date`)';
 
-        $res = $db->queryWithFetch($sql);
+        $data = [
+            'year' => $year,
+            'month' => $month,
+        ];
+
+        $stm = $db->pdo->prepare($sql);
+        $stm->execute($data);
+        $rows = $stm->fetchAll();
 
         $tab = [];
-        foreach ($res as $_res) {
-            $tab[$_res['date']] = $_res['nb_events'];
+        foreach ($rows as $row) {
+            $tab[$row['date']] = $row['nb_events'];
         }
-        unset($res);
 
         return $tab;
     }

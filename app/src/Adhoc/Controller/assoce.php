@@ -121,11 +121,8 @@ final class Controller
             }
             $data['creneaux'] = implode(', ', $data['creneaux']);
 
-            $errors = [];
-
-            self::validateAfterworksForm($data, $errors);
-
-            if (empty($errors)) {
+            $errors = self::validateAfterworksForm($data);
+            if (count($errors) === 0) {
                 $data['photo_url'] = '';
                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
                     $outputFile = MEDIA_PATH . "/afterworks/" . md5($data['email']) . "-" . time() . ".jpg";
@@ -200,13 +197,14 @@ final class Controller
     /**
      * Routine de validation des données du formulaire
      *
-     * @param array<string,mixed>  $data   tableau des données
-     * @param array<string,string> $errors tableau des erreurs (par référence)
+     * @param array<string,mixed> $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateAfterworksForm(array $data, array &$errors): bool
+    private static function validateAfterworksForm(array $data): array
     {
+        $errors = [];
+
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez renseigner votre nom";
         }
@@ -228,6 +226,7 @@ final class Controller
         if (!Tools::checkCSRFToken($data['check'])) {
             $errors['check'] = "Code de vérification invalide";
         }
-        return true;
+
+        return $errors;
     }
 }

@@ -254,9 +254,9 @@ final class Controller
                 'twitter_id'       => Route::params('twitter_id') ? (string) Route::params('twitter_id') : null,
                 'id_type_musicien' => (int) Route::params('id_type_musicien'),
             ];
-            $errors = [];
 
-            if (self::validateGroupeCreateForm($data, $errors)) {
+            $errors = self::validateGroupeCreateForm($data);
+            if (count($errors) === 0) {
                 $groupe = (new Groupe())
                     ->setName($data['name'])
                     ->setAlias(Tools::genAlias($data['name']))
@@ -385,9 +385,9 @@ final class Controller
                 'twitter_id'       => Route::params('twitter_id') ? (string) Route::params('twitter_id') : null,
                 'id_type_musicien' => (int) Route::params('id_type_musicien'),
             ];
-            $errors = [];
 
-            if (self::validateGroupeEditForm($data, $errors)) {
+            $errors = self::validateGroupeEditForm($data);
+            if (count($errors) === 0) {
                 if (!$groupe->isMember($_SESSION['membre']->getId()) && !$_SESSION['membre']->isAdmin()) {
                     return 'edition du groupe non autorisée';
                 }
@@ -522,13 +522,14 @@ final class Controller
     /**
      * Validation du formulaire de création groupe
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateGroupeCreateForm(array $data, array &$errors): bool
+    private static function validateGroupeCreateForm(array $data): array
     {
+        $errors = [];
+
         if (empty($data['name'])) {
             $errors['name'] = true;
         }
@@ -546,22 +547,21 @@ final class Controller
         if (empty($data['text'])) {
             $errors['text'] = true;
         }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+
+        return $errors;
     }
 
     /**
      * Validation du formulaire de modification groupe
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateGroupeEditForm(array $data, array &$errors): bool
+    private static function validateGroupeEditForm(array $data): array
     {
+        $errors = [];
+
         if (empty($data['style'])) {
             $errors['style'] = true;
         }
@@ -576,9 +576,7 @@ final class Controller
         if (empty($data['text'])) {
             $errors['text'] = true;
         }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+
+        return $errors;
     }
 }

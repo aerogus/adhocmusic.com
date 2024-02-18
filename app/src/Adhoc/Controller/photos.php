@@ -223,9 +223,9 @@ final class Controller
                 'id_contact' => (int) $_SESSION['membre']->getId(),
                 'online' => (bool) Route::params('online'),
             ];
-            $errors = [];
 
-            if (self::validatePhotoForm($data, $errors)) {
+            $errors = self::validatePhotoForm($data);
+            if (count($errors) === 0) {
                 // cf. max_file_uploads (par défaut 20, les fichiers suivants sont ignorés)
                 ini_set('max_file_uploads', '50');
 
@@ -377,9 +377,9 @@ final class Controller
                 'online' => (bool) Route::params('online'),
                 'rotation' => (int) Route::params('rotation')
             ];
-            $errors = [];
 
-            if (self::validatePhotoForm($data, $errors)) {
+            $errors = self::validatePhotoForm($data);
+            if (count($errors) === 0) {
                 $confPhoto = Conf::getInstance()->get('photo');
 
                 $photo->setName($data['name'])
@@ -486,22 +486,21 @@ final class Controller
     /**
      * Validation du formulaire de création photo
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validatePhotoForm(array $data, array &$errors): bool
+    private static function validatePhotoForm(array $data): array
     {
+        $errors = [];
+
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la photo.";
         }
         if (empty($data['credits'])) {
             $errors['credits'] = "Vous devez saisir le nom du ou de la photographe";
         }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+
+        return $errors;
     }
 }

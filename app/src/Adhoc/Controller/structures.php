@@ -93,9 +93,9 @@ final class Controller
                 'site' => '',
                 'email' => '',
             ];
-            $errors = [];
 
-            if (self::validateStructureCreateForm($data, $errors)) {
+            $errors = self::validateStructureCreateForm($data);
+            if (count($errors) === 0) {
                 (new Structure())
                     ->setName($data['name'])
                     ->save();
@@ -125,9 +125,9 @@ final class Controller
             $data = [
                 'name' => (string) Route::params('name'),
             ];
-            $errors = [];
 
-            if (self::validateStructureEditForm($data, $errors)) {
+            $errors = self::validateStructureEditForm($data);
+            if (count($errors) === 0) {
                 Structure::getInstance((int) Route::params('id'))
                     ->setName($data['name'])
                     ->save();
@@ -171,32 +171,28 @@ final class Controller
     /**
      * Validation du formulaire de création structure
      *
-     * @param array<string,mixed> $data   tableau des données
-     * @param array<string,string> $errors tableau des erreurs (par référence)
+     * @param array<string,mixed> $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateStructureCreateForm(array $data, array &$errors): bool
+    private static function validateStructureCreateForm(array $data): array
     {
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+        $errors = [];
+
+        return $errors;
     }
 
     /**
      * Validation du formulaire de modification structure
      *
-     * @param array<string,mixed> $data   tableau des données
-     * @param array<string,string> $errors tableau des erreurs (par référence)
+     * @param array<string,mixed> $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateStructureEditForm(array $data, array &$errors): bool
+    private static function validateStructureEditForm(array $data): array
     {
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+        $errors = [];
+
+        return $errors;
     }
 }

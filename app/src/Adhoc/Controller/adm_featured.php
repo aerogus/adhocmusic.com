@@ -96,9 +96,9 @@ final class Controller
                 'datfin'      => trim((string) Route::params('datfin') . ' 23:59:59'),
                 'online'      => (bool) Route::params('online'),
             ];
-            $errors = [];
 
-            if (self::validateForm($data, $errors)) {
+            $errors = self::validateForm($data);
+            if (count($errors) === 0) {
                 $f = (new Featured())
                     ->setTitle($data['title'])
                     ->setDescription($data['description'])
@@ -188,9 +188,9 @@ final class Controller
                 'datfin'      => trim((string) Route::params('datfin') . ' 23:59:59'),
                 'online'      => (bool) Route::params('online'),
             ];
-            $errors = [];
 
-            if (self::validateForm($data, $errors)) {
+            $errors = self::validateForm($data);
+            if (count($errors) === 0) {
                 $f->setTitle($data['title'])
                     ->setDescription($data['description'])
                     ->setUrl($data['url'])
@@ -255,13 +255,14 @@ final class Controller
     /**
      * Validation du formulaire featured
      *
-     * @param array<string,mixed> $data   tableau des données
-     * @param array<string,mixed> $errors tableau des erreurs (par référence)
+     * @param array<string,mixed> $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateForm(array $data, array &$errors): bool
+    private static function validateForm(array $data): array
     {
+        $errors = [];
+
         if (empty($data['title'])) {
             $errors['title'] = "Vous devez saisir un titre";
         }
@@ -277,9 +278,7 @@ final class Controller
         if (empty($data['datfin'])) {
             $errors['datfin'] = "Vous devez saisir une date de fin de programmation";
         }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+
+        return $errors;
     }
 }
