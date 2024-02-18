@@ -12,7 +12,7 @@ use Adhoc\Utils\ObjectModel;
  *
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
-class MembreAdhoc extends Membre
+class MembreAdhoc extends ObjectModel
 {
     /**
      * @var string|array<string>
@@ -58,19 +58,6 @@ class MembreAdhoc extends Membre
     ];
 
     /**
-     * Tableau des attributs modifiés depuis la dernière sauvegarde.
-     *
-     * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
-     *
-     * @var array<mixed>
-     */
-    protected array $modified_fields = [
-        'contact' => [],
-        'membre' => [],
-        'membre_adhoc' => [],
-    ];
-
-    /**
      * @return string
      */
     public static function getBaseUrl(): string
@@ -84,30 +71,6 @@ class MembreAdhoc extends Membre
     public static function getBasePath(): string
     {
         return MEDIA_PATH . '/membre/ca';
-    }
-
-    /**
-     * @param bool $fusion fusion
-     *
-     * @return array<string,string>|array<string,array<string,string>>
-     */
-    protected function getAllFields(bool $fusion = true): array
-    {
-        if ($fusion) {
-            return array_merge(
-                Contact::$all_fields,
-                Membre::$all_fields,
-                MembreAdhoc::$all_fields
-            );
-        } else {
-            return array_merge(
-                [
-                    'contact' => Contact::$all_fields,
-                    'membre' => Membre::$all_fields,
-                    'membre_adhoc' => MembreAdhoc::$all_fields,
-                ]
-            );
-        }
     }
 
     /* début getters */
@@ -249,301 +212,15 @@ class MembreAdhoc extends Membre
     }
 
     /**
-     * Charge toutes les infos d'un membre adhoc/interne
-     *
-     * @todo récup champs spécifiques à membre_adhoc !
-     *
      * @return bool
      * @throws \Exception
      */
     protected function loadFromDb(): bool
     {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT * "
-             . "FROM `" . MembreAdhoc::getDbTable() . "`, `" . Membre::getDbTable() . "`, `" . Contact::getDbTable() . "` "
-             . "WHERE `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` "
-             . "AND `" . Membre::getDbTable() . "`.`" . Membre::getDbPk() . "` = `" . Contact::getDbTable() . "`.`" . Contact::getDbPk() . "` "
-             . "AND `" . MembreAdhoc::getDbTable() . "`.`" . MembreAdhoc::getDbPk() . "` = " . (int) $this->getId();
-
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->arrayToObject($res);
-            return true;
+        if (!parent::loadFromDb()) {
+            throw new NotFoundException('membre_adhoc inconnu');
         }
 
-        throw new \Exception('Membre Adhoc introuvable');
-    }
-
-    /**
-     * Sauve en DB tables contact, membre et membre_adhoc
-     *
-     * @return int|bool
-     */
-    public function save(): int|bool
-    {
-        $db = DataBase::getInstance();
-
-        $fields = self::getAllFields(false);
-
-        if (!$this->getId()) { // INSERT
-            /* table contact */
-            if ($id_contact = Contact::getIdByEmail($email)) { // BUG: D'OU SORT CE $email ???
-                $this->setId($id_contact);
-            } else {
-                $sql = "INSERT INTO `" . Contact::getDbTable() . "` (";
-                if (count($this->modified_fields['contact']) > 0) {
-                    foreach ($fields['contact'] as $field => $type) {
-                        $sql .= "`" . $field . "`,";
-                    }
-                    $sql = substr($sql, 0, -1);
-                }
-                $sql .= ") VALUES (";
-
-                if (count($this->modified_fields['contact']) > 0) {
-                    foreach ($fields['contact'] as $field => $type) {
-                        $att = $field;
-                        switch ($type) {
-                            case 'int':
-                            case 'float':
-                                $sql .= $db->escape($this->$att) . ",";
-                                break;
-                            case 'string':
-                                $sql .= "'" . $db->escape($this->$att) . "',";
-                                break;
-                            case 'bool':
-                                $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
-                                break;
-                            case 'password':
-                                $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
-                                break;
-                            case 'phpser':
-                                $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            default:
-                                throw new \Exception('invalid field type : ' . $type);
-                        }
-                    }
-                    $sql = substr($sql, 0, -1);
-                }
-                $sql .= ")";
-
-                $db->query($sql);
-
-                $this->setId((int) $db->insertId());
-            }
-
-            /* table membre */
-
-            $sql = "INSERT INTO `" . Membre::getDbTable() . "` (";
-            $sql .= "`id_contact`,";
-            foreach ($fields['membre'] as $field => $type) {
-                $sql .= "`" . $field . "`,";
-            }
-            $sql = substr($sql, 0, -1);
-            $sql .= ") VALUES (";
-            $sql .= (int) $this->getId() . ",";
-
-            foreach ($fields['membre'] as $field => $type) {
-                $att = $field;
-                switch ($type) {
-                    case 'int':
-                    case 'float':
-                        $sql .= $db->escape($this->$att) . ",";
-                        break;
-                    case 'string':
-                        $sql .= "'" . $db->escape($this->$att) . "',";
-                        break;
-                    case 'bool':
-                        $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
-                        break;
-                    case 'password':
-                        $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
-                        break;
-                    case 'phpser':
-                        $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
-                        break;
-                    default:
-                        throw new \Exception('invalid field type : ' . $type);
-                }
-            }
-            $sql = substr($sql, 0, -1);
-            $sql .= ")";
-
-            $db->query($sql);
-
-            /* table membre_adhoc */
-
-            $sql = "INSERT INTO `" . MembreAdhoc::getDbTable() . "` (";
-            $sql .= "`id_contact`,";
-            foreach ($fields['membre_adhoc'] as $field => $type) {
-                $sql .= "`" . $field . "`,";
-            }
-            $sql = substr($sql, 0, -1);
-            $sql .= ") VALUES (";
-            $sql .= (int) $this->getId() . ",";
-
-            foreach ($fields['membre_adhoc'] as $field => $type) {
-                $att = $field;
-                switch ($type) {
-                    case 'int':
-                    case 'float':
-                        $sql .= $db->escape($this->$att) . ",";
-                        break;
-                    case 'string':
-                        $sql .= "'" . $db->escape($this->$att) . "',";
-                        break;
-                    case 'bool':
-                        $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
-                        break;
-                    case 'password':
-                        $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
-                        break;
-                    case 'phpser':
-                        $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
-                        break;
-                    default:
-                        throw new \Exception('invalid field type : ' . $type);
-                }
-            }
-            $sql = substr($sql, 0, -1);
-            $sql .= ")";
-
-            $db->query($sql);
-
-            return $this->getId();
-        } else { // UPDATE
-            if (
-                (count($this->modified_fields['contact']) === 0)
-                && (count($this->modified_fields['membre']) === 0)
-                && (count($this->modified_fields['membre_adhoc']) === 0)
-            ) {
-                return true; // pas de changement
-            }
-
-            /* table contact */
-
-            if (count($this->modified_fields['contact']) > 0) {
-                $fields_to_save = '';
-                foreach ($this->modified_fields['contact'] as $field => $value) {
-                    if ($value === true) {
-                        $att = $field;
-                        switch ($fields['contact'][$field]) {
-                            case 'int':
-                            case 'float':
-                                $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
-                                break;
-                            case 'string':
-                            case 'date':
-                                $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
-                                break;
-                            case 'bool':
-                                $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
-                                break;
-                            case 'password':
-                                $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
-                                break;
-                            case 'phpser':
-                                $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            default:
-                                throw new \Exception('invalid field type : ' . $fields['contact'][$field]);
-                        }
-                    }
-                }
-                $fields_to_save = substr($fields_to_save, 0, -1);
-
-                $sql = "UPDATE `" . Contact::getDbTable() . "` "
-                     . "SET " . $fields_to_save . " "
-                     . "WHERE `id_contact` = " . (int) $this->contact;
-
-                $this->modified_fields['contact'] = [];
-
-                $db->query($sql);
-            }
-
-            /* table membre */
-
-            if (count($this->modified_fields['membre']) > 0) {
-                $fields_to_save = '';
-                foreach ($this->modified_fields['membre'] as $field => $value) {
-                    if ($value === true) {
-                        $att = $field;
-                        switch ($fields['membre'][$field]) {
-                            case 'int':
-                            case 'float':
-                                $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
-                                break;
-                            case 'string':
-                            case 'date':
-                                $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
-                                break;
-                            case 'bool':
-                                $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
-                                break;
-                            case 'password':
-                                $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
-                                break;
-                            case 'phpser':
-                                $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            default:
-                                throw new \Exception('invalid field type : ' . $fields['membre'][$field]);
-                        }
-                    }
-                }
-                $fields_to_save = substr($fields_to_save, 0, -1);
-
-                $sql = "UPDATE `" . Membre::getDbTable() . "` "
-                     . "SET " . $fields_to_save . " "
-                     . "WHERE `id_contact` = " . (int) $this->contact;
-
-                $this->modified_fields['membre'] = [];
-
-                $db->query($sql);
-            }
-
-            /* table membre_adhoc */
-
-            if (count($this->modified_fields['membre_adhoc']) > 0) {
-                $fields_to_save = '';
-                foreach ($this->modified_fields['membre_adhoc'] as $field => $value) {
-                    if ($value === true) {
-                        $att = $field;
-                        switch ($fields['membre_adhoc'][$field]) {
-                            case 'int':
-                            case 'float':
-                                $fields_to_save .= " `" . $field . "` = " . $db->escape($this->$att) . ",";
-                                break;
-                            case 'string':
-                            case 'date':
-                                $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
-                                break;
-                            case 'bool':
-                                $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
-                                break;
-                            case 'password':
-                                $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
-                                break;
-                            case 'phpser':
-                                $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
-                                break;
-                            default:
-                                throw new \Exception('invalid field type : ' . $fields['membre_adhoc'][$field]);
-                        }
-                    }
-                }
-                $fields_to_save = substr($fields_to_save, 0, -1);
-
-                $sql = "UPDATE `" . MembreAdhoc::getDbTable() . "` "
-                     . "SET " . $fields_to_save . " "
-                     . "WHERE `id_contact` = " . (int) $this->contact;
-
-                $this->modified_fields['membre_adhoc'] = [];
-
-                $db->query($sql);
-            }
-
-            return true;
-        }
+        return true;
     }
 }

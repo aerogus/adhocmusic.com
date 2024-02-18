@@ -1050,17 +1050,17 @@ class Groupe extends ObjectModel
     /**
      * Retourne une collection d'objets "Groupe" répondant au(x) critère(s) donné(s)
      *
-     * @param array $params [
-     *                      'id_contact' => int,
-     *                      'id_event' => int,
-     *                      'alias' => string,
-     *                      'facebook_page_id' => string,
-     *                      'online' => bool,
-     *                      'order_by' => string,
-     *                      'sort' => string,
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     * @param array<string,mixed> $params [
+     *                                'id_contact' => int,
+     *                                'id_event' => int,
+     *                                'alias' => string,
+     *                                'facebook_page_id' => string,
+     *                                'online' => bool,
+     *                                'order_by' => string,
+     *                                'sort' => string,
+     *                                'start' => int,
+     *                                'limit' => int,
+     *                            ]
      *
      * @return array<Groupe>
      */
@@ -1099,11 +1099,11 @@ class Groupe extends ObjectModel
         }
 
         if (isset($params['alias'])) {
-            $sql .= "AND `alias` = '" . $db->escape($params['alias']) . "' ";
+            $sql .= "AND `alias` = '" . $params['alias'] . "' ";
         }
 
         if (!empty($params['search_name'])) {
-            $sql .= "AND `name` LIKE '%" . $db->escape($params['search_name']) . "%' ";
+            $sql .= "AND `name` LIKE '%" . $params['search_name'] . "%' ";
         }
 
         if (isset($params['facebook_page_id'])) {

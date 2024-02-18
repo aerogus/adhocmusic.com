@@ -6,7 +6,6 @@ namespace Adhoc\Model\Reference;
 
 use Adhoc\Model\Reference;
 use Adhoc\Utils\DataBase;
-use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe Departement
@@ -93,7 +92,7 @@ class Departement extends Reference
         $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
 
         if (isset($params['id_region'])) {
-            $sql .= "AND `id_region` = '" . $db->escape($params['id_region']) . "' ";
+            $sql .= "AND `id_region` = '" . $params['id_region'] . "' ";
         }
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {

@@ -825,15 +825,15 @@ class Lieu extends ObjectModel
         }
 
         if (isset($params['id_country'])) {
-            $sql .= "AND `id_country` = '" . $db->escape($params['id_country']) . "' ";
+            $sql .= "AND `id_country` = '" . $params['id_country'] . "' ";
         }
 
         if (isset($params['id_region'])) {
-            $sql .= "AND `id_region` = '" . $db->escape($params['id_region']) . "' ";
+            $sql .= "AND `id_region` = '" . $params['id_region'] . "' ";
         }
 
         if (isset($params['id_departement'])) {
-            $sql .= "AND `id_departement` = '" . $db->escape($params['id_departement']) . "' ";
+            $sql .= "AND `id_departement` = '" . $params['id_departement'] . "' ";
         }
 
         if (isset($params['id_city'])) {
@@ -1197,9 +1197,9 @@ EOT;
              . "FROM (`adhoc_lieu` `l`) "
              . "LEFT JOIN `" . City::getDbTable() . "` `v` ON (`l`.`id_city` = `v`.`id_city`) "
              . "WHERE 1 "
-             . "AND `l`.`id_country` = '" . $db->escape($id_country) . "' "
-             . "AND `l`.`id_region` = '" . $db->escape($id_region) . "' "
-             . "AND `l`.`id_departement` = '" . $db->escape($id_departement) . "' "
+             . "AND `l`.`id_country` = '" . $id_country . "' "
+             . "AND `l`.`id_region` = '" . $id_region . "' "
+             . "AND `l`.`id_departement` = '" . $id_departement . "' "
              . "ORDER BY `l`.`id_country` ASC, `l`.`id_region` ASC, `l`.`id_departement` ASC "
              . "LIMIT 0, " . $limit;
 

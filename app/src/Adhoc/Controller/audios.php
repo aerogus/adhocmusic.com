@@ -216,9 +216,9 @@ final class Controller
                 'id_contact' => (int) $_SESSION['membre']->getId(),
                 'online'     => (bool) Route::params('online'),
             ];
-            $errors = [];
 
-            if (self::validateAudioForm($data, $errors)) {
+            $errors = self::validateAudioForm($data);
+            if (count($errors) === 0) {
                 $audio = (new Audio())
                     ->setName($data['name'])
                     ->setIdGroupe($data['id_groupe'])
@@ -344,9 +344,9 @@ final class Controller
                 'id_contact' => (int) $_SESSION['membre']->getId(),
                 'online' => (bool) Route::params('online'),
             ];
-            $errors = [];
 
-            if (self::validateAudioForm($data, $errors)) {
+            $errors = self::validateAudioForm($data);
+            if (count($errors) === 0) {
                 $audio->setName($data['name'])
                     ->setIdLieu($data['id_lieu'])
                     ->setIdContact($data['id_contact'])
@@ -457,13 +457,14 @@ final class Controller
     /**
      * Validation du formulaire création/édition audio
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateAudioForm($data, &$errors): bool
+    private static function validateAudioForm($data): array
     {
+        $errors = [];
+
         if (empty($data['name'])) {
             $errors['name'] = true;
         }
@@ -472,9 +473,7 @@ final class Controller
             $errors['id_event'] = true;
             $errors['id_lieu'] = true;
         }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+
+        return $errors;
     }
 }

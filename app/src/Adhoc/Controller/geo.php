@@ -69,7 +69,7 @@ final class Controller
         $db = DataBase::getInstance();
         $sql = "SELECT `id_departement`, `name` FROM `geo_fr_departement` ";
         if (!empty($id_region)) {
-            $sql .= "WHERE `id_region` = '" . $db->escape($id_region) . "' ";
+            $sql .= "WHERE `id_region` = '" . $id_region . "' ";
         }
         $sql .= "ORDER BY `name` ASC";
         $res = $db->queryWithFetch($sql);
@@ -98,7 +98,7 @@ final class Controller
             $db = DataBase::getInstance();
             $sql = "SELECT `id_city`, `name`, `cp` "
                  . "FROM `" . City::getDbTable() . "` "
-                 . "WHERE `id_departement` = '" . $db->escape($d) . "' "
+                 . "WHERE `id_departement` = '" . $d . "' "
                  . "ORDER BY `name` ASC";
             $res = $db->queryWithFetch($sql);
             foreach ($res as $_res) {

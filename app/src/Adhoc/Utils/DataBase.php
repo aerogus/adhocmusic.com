@@ -1,39 +1,16 @@
 <?php
 
-/**
- * Gestion de la base MySQL
- *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
- */
-
 declare(strict_types=1);
 
 namespace Adhoc\Utils;
 
 /**
- * Constantes utiles pour la classe DataBase
+ * Classe d'accès à la base de données
+ *
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
-
-define('DB_MYSQL_CONNECT_RETRIES', 2);
-define('DB_DUMMY_SEPARATOR', "\O"); /* à garder entre double quotes. */
-
-ini_set('mysql.connect_timeout', '2');
-
 class DataBase
 {
-    /**
-     * @var array<int,array<string,mixed>>
-     */
-    protected static array $connections_params = [
-        0 => [
-            'hasMaintenance' => false,
-            'db_host'        => _DB_HOST_,
-            'db_login'       => _DB_USER_,
-            'db_pass'        => _DB_PASSWORD_,
-            'db_database'    => _DB_DATABASE_,
-        ],
-    ];
-
     /**
      * Conteneur de l'instance courante
      *
@@ -42,138 +19,26 @@ class DataBase
     protected static ?self $instance = null;
 
     /**
-     * Tableau des connexions ouvertes
+     * Objet PDO
      *
-     * @var array<\mysqli>
+     * @var ?\PDO
      */
-    protected array $current_conn = [];
+    public ?\PDO $pdo = null;
 
     /**
-     * Type de fetch
+     * Nom de la bdd
      *
-     * @var int
+     * @var ?string
      */
-    protected int $fetchMode = MYSQLI_ASSOC;
-
-    /**
-     * Charset à utiliser pour la connexion
-     *
-     * @var string
-     */
-    protected string $charset = 'utf8mb4';
-
-    /**
-     * @param int $conn_name identifiant de connexion
-     *
-     * @return \mysqli|false
-     * @throws \Exception
-     */
-    protected function connect(int $conn_name = 0): \mysqli|false
-    {
-        if (true === self::$connections_params[$conn_name]['hasMaintenance']) {
-            throw new \Exception('Serveur MySQL en maintenance');
-        }
-
-        $conn_key = self::generateConnectionKey($conn_name);
-
-        if (isset($this->current_conn[$conn_key])) {
-            return $this->current_conn[$conn_key];
-        }
-
-        $params = [];
-
-        array_unshift($params, self::$connections_params[$conn_name]['db_pass']);
-        array_unshift($params, self::$connections_params[$conn_name]['db_login']);
-        array_unshift($params, self::$connections_params[$conn_name]['db_host']);
-
-        $retries = DB_MYSQL_CONNECT_RETRIES;
-        while (empty($this->current_conn[$conn_key]) && $retries > 0) {
-            $retries--;
-            $this->current_conn[$conn_key] = @call_user_func_array('mysqli_connect', $params);
-        }
-
-        if (!is_a($this->current_conn[$conn_key], 'mysqli')) {
-            throw new \Exception('Erreur connexion serveur MySQL');
-        }
-
-        $select_db = mysqli_select_db(
-            $this->current_conn[$conn_key],
-            self::$connections_params[$conn_name]['db_database']
-        );
-
-        if (!$select_db) {
-            throw new \Exception('Erreur connexion base MySQL');
-        }
-
-        return $this->current_conn[$conn_key];
-    }
-
-    /**
-     * @param int $conn_name identifiant de connexion
-     *
-     * @return bool
-     */
-    public function close(int $conn_name = 0): bool
-    {
-        $conn_key = self::generateConnectionKey($conn_name);
-
-        if (isset($this->current_conn[$conn_key])) {
-            mysqli_close($this->current_conn[$conn_key]);
-            unset($this->current_conn[$conn_key]);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * @return true
-     */
-    public function closeAllConnections(): true
-    {
-        $connection_keys = array_keys($this->current_conn);
-        foreach ($connection_keys as $conn_key) {
-            @mysqli_close($this->current_conn[$conn_key]);
-            unset($this->current_conn[$conn_key]);
-        }
-        return true;
-    }
-
-    /**
-     * Génère la clé qui servira à retrouver le lien vers le serveur qu'on veut
-     * dans le tableau de connections. Il est nécessaire d'inclure l'utilisateur
-     * et le password pour être cohérent avec les infos dont php se sert pour la
-     * re-utilisation d'un lien existant lors d'un mysqli_connect.
-     *
-     * @param int $conn_name identifiant de connexion
-     *
-     * @return string
-     */
-    protected static function generateConnectionKey(int $conn_name): string
-    {
-        $conn_key = self::$connections_params[$conn_name]['db_host'] .
-                    DB_DUMMY_SEPARATOR .
-                    self::$connections_params[$conn_name]['db_login'] .
-                    DB_DUMMY_SEPARATOR .
-                    self::$connections_params[$conn_name]['db_pass'];
-        return md5($conn_key);
-    }
-
-    /**
-     * @param int $conn_name identifiant de connexion
-     *
-     * @return bool
-     */
-    public static function isServerInMaintenance(int $conn_name = 0): bool
-    {
-        return self::$connections_params[$conn_name]['hasMaintenance'];
-    }
+    public ?string $name = null;
 
     /**
      * Constructeur de la classe
      */
     public function __construct()
     {
-        $this->connect();
+        $this->open();
+
         self::$instance = $this;
     }
 
@@ -193,371 +58,113 @@ class DataBase
     }
 
     /**
-     * Détruit une instance d'un objet. Attention: appeller unset()
-     * soit meme sur une instance obtenue avec new ou la methode
-     * getInstance n'est pas suffisant, car ca ne fait que detruire
-     * la reference. Il faut appeller cette methode *et* faire
-     * un unset sur chacune des references.
-     * Ce n'est necessaire que si vous voulez faire le menage avant
-     * la fin du script, bien sur.
+     * Ouvre explicitement la connexion PDO
      *
      * @return bool
      */
-    public static function deleteInstance(): bool
+    public function open(): bool
     {
-        if (!is_null(self::$instance)) {
-            self::$instance = null;
-            self::$connections_params = [];
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Modifie le fetchMode uniquement pour la prochaine requête
-     *
-     * @param int $fetchMode fetchMode
-     *
-     * @return bool
-     */
-    public function setFetchMode(int $fetchMode = MYSQLI_BOTH): bool
-    {
-        if (!in_array($fetchMode, [MYSQLI_BOTH, MYSQLI_ASSOC, MYSQLI_NUM], true)) {
+        if (is_a($this->pdo, 'PDO')) {
             return false;
         }
 
-        $this->fetchMode = $fetchMode;
+        $dsn = sprintf('mysql:host=%s;port=%d;dbname=%s', $_ENV['DB_HOST'], $_ENV['DB_PORT'], $_ENV['DB_NAME']);
+        $this->pdo = new \PDO($dsn, $_ENV['DB_USER'], $_ENV['DB_PASS']);
+        $this->pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+        $this->name = $_ENV['DB_NAME'];
+
+        // optionnel si déjà indiqué dans le my.cnf
+        $this->pdo->query('SET NAMES utf8mb4');
+
         return true;
     }
 
     /**
-     * @param string $sql       requête SQL
-     * @param int    $conn_name identifiant de connexion
+     * Ferme explicitement la connexion PDO
      *
-     * @return array<mixed>|bool
-     * @throws \Exception
+     * @return bool
      */
-    public function queryWithFetchAndClose(string $sql, int $conn_name = 0)
+    public function close(): bool
     {
-        $res = false;
-        try {
-            $res = $this->queryWithFetch($sql, $conn_name);
-        } catch (\Exception $e) {
-            $error = $e;
+        if (is_a($this->pdo, 'PDO')) {
+            $this->pdo = null;
+            $this->name = null;
+            return true;
         }
 
-        $this->close($conn_name);
-        if (isset($error)) {
-            throw $error;
-        }
-        return $res;
+        return false;
     }
 
     /**
-     * @param string $sql       requête SQL
-     * @param int    $conn_name identifiant de connexion
+     * Initialisation de la base de données MariaDB si elle n'existe pas
+     * (structure + données initiales)
      *
-     * @return array<mixed>|bool
+     * @return bool
      */
-    public function queryWithFetchFirstRow(string $sql, int $conn_name = 0): array|bool
+    public static function init(): bool
     {
-        $res = false;
-        $rc = $this->query($sql, $conn_name);
-        if (true === $rc) {
-            /* La requête s'est bien passée, ce n'était pas une requête du type
-             * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-            $res = true;
-        } elseif (true == $rc) {
-            /* La requête s'est bien passée, c'était une requête du type
-             * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-            $res = mysqli_fetch_array($rc, $this->fetchMode);
-            $this->fetchMode = MYSQLI_ASSOC;
-        }
-        return $res;
-    }
+        $db = self::getInstance();
 
-    /**
-     * @param string $sql       requête SQL
-     * @param int    $conn_name identifiant de connexion
-     *
-     * @return string|null|false
-     */
-    public function queryWithFetchFirstField(string $sql, int $conn_name = 0): string|null|false
-    {
-        $res = false;
-        $rc = $this->query($sql, $conn_name);
-        if (true === $rc) {
-            /* La requête s'est bien passée, ce n'était pas une requete du type
-             * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-            $res = true;
-        } elseif (true == $rc) {
-            /* La requête s'est bien passée, c'était une requete du type
-             * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-            $res = mysqli_fetch_array($rc, MYSQLI_NUM); // MYSQLI_NUM : ici on ne peut pas respecter $this->fetchMode
-            $this->fetchMode = MYSQLI_ASSOC;
-            if (is_array($res)) {
-                $res = $res[0];
+        $sql_scripts = [];
+        // on suppose que la base et le user existent déjà
+        $sql_scripts[] = dirname(__DIR__) . '/db/01-schema.sql';
+        if ($_ENV['ENV'] === 'dev') {
+            $sql_scripts[] = dirname(__DIR__) . '/db/02-ref-dev.sql';
+        } elseif ($_ENV['ENV'] === 'prod') {
+            $sql_scripts[] = dirname(__DIR__) . '/db/02-ref-prod.sql';
+        }
+
+        foreach ($sql_scripts as $sql_script) {
+            if (is_file($sql_script)) {
+                $cmd = 'mysql -u ' . $_ENV['DB_USER'] . ' -p' . $_ENV['DB_PASS'] . ' ' . $_ENV['DB_NAME'] . ' < ' . $sql_script;
+                LogNG::debug($cmd);
+                exec($cmd, $output, $return_var);
             }
         }
-        return $res;
+
+        return true;
+    }
+
+    /**
+     * Retourne une chaîne de caractère avec la requête préparée
+     * Utilisation juste pour les logs, ne pas injecter directement en base !
+     *
+     * @param string $sql
+     * @param array<string,mixed> $data
+     *
+     * @return string
+     */
+    public static function preparedQuery(string $sql, array $data): string
+    {
+        // on trie les clés par longueur décroissante pour éviter un bug un une clé est un sous-motif d'une autre clé
+        $keys = array_map('strlen', array_keys($data));
+        array_multisort($keys, SORT_DESC, $data);
+
+        foreach ($data as $key => $val) {
+            $sql = str_replace(':' . $key, '"' . $val . '"', $sql);
+        }
+
+        return $sql;
     }
 
     /**
      * Retourne dans un tableau à une dimension le premier champ
      * des lignes retournées
      *
-     * @param string $sql       requête SQL
-     * @param int    $conn_name identifiant de connexion
+     * @param string              $sql  requête SQL (avec placeholders)
+     * @param array<string,mixed> $data valeurs
      *
      * @return array<string>|bool
      */
-    public function queryWithFetchFirstFields(string $sql, int $conn_name = 0): array|bool
+    public function queryWithFetchFirstFields(string $sql, array $data = []): array|bool
     {
-        $res = false;
-        $rc = $this->query($sql, $conn_name);
-        if (true === $rc) {
-            /* La requête s'est bien passée, ce n'était pas une requete du type
-             * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-            $res = true;
-        } elseif (true == $rc) {
-            /* La requête s'est bien passée, c'était une requete du type
-             * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-            $res = [];
-            while ($row = mysqli_fetch_array($rc, MYSQLI_NUM)) {
-                if (is_array($row)) {
-                    array_push($res, $row[0]);
-                }
-            }
+        $stm = $this->pdo->prepare($sql);
+        try {
+            $stm->execute($data);
+            return $stm->fetchAll(\PDO::FETCH_COLUMN, 0);
+        } catch (\Exception $e) {
+            LogNG::error($e->getMessage());
+            return [];
         }
-        return $res;
-    }
-
-    /**
-     * @param string $sql       sql
-     * @param int    $conn_name identifiant de connexion
-     *
-     * @return array<mixed>|bool
-     */
-    public function queryWithFetch(string $sql, int $conn_name = 0): array|bool
-    {
-        $res = false;
-        $rc = $this->query($sql, $conn_name);
-        if (true === $rc) {
-            /* La requête s'est bien passée, ce n'était pas une requete du type
-             * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-            $res = true;
-        } elseif (true == $rc) {
-            /* La requête s'est bien passée, c'était une requete du type
-             * SELECT, SHOW, DESCRIBE ou EXPLAIN */
-            $res = [];
-            while (($row = mysqli_fetch_array($rc, $this->fetchMode)) !== null) {
-                $res[] = $row;
-            }
-            $this->fetchMode = MYSQLI_ASSOC;
-        }
-        return $res;
-    }
-
-    /**
-     * @param string $sql       requête SQL
-     * @param int    $conn_name identifiant de connexion
-     *
-     * @return \mysqli_result|bool
-     * @throws \Exception
-     */
-    public function query(string $sql, int $conn_name = 0): \mysqli_result|bool
-    {
-        $conn = $this->connect($conn_name);
-
-        if (LOG_SQL) {
-            file_put_contents(ini_get('error_log'), date('Y-m-d H:i:s') . ' SQL: ' . $sql . "\n", FILE_APPEND);
-        }
-
-        $rc = mysqli_query($conn, $sql);
-
-        if (false === $rc) {
-            throw new \Exception(mysqli_error($conn));
-        }
-        return $rc;
-    }
-
-    /**
-     * @param \mysqli_result $result
-     *
-     * @return int
-     */
-    public function numRows(\mysqli_result $result): int
-    {
-        return mysqli_num_rows($result);
-    }
-
-    /**
-     * @param \mysqli_result $result
-     *
-     * @return array<mixed>|null|false
-     */
-    public function fetchRow(\mysqli_result $result): array|null|false
-    {
-        return mysqli_fetch_row($result);
-    }
-
-    /**
-     * @param \mysqli_result $result
-     *
-     * @return string|false
-     */
-    public function fetchFirstField(\mysqli_result $result): string|false
-    {
-        $res = mysqli_fetch_array($result, MYSQLI_NUM);
-        if (is_array($res)) {
-            return $res[0];
-        }
-        return false;
-    }
-
-    /**
-     * @param \mysqli_result $result
-     *
-     * @return object|null|false
-     */
-    public function fetchObject(\mysqli_result $result): object|null|false
-    {
-        return mysqli_fetch_object($result);
-    }
-
-    /**
-     * Execute mysqli_fetch_assoc sur un resultset, ne touche pas à la valeur de
-     * {@see self::$fetchMode}.
-     *
-     * @param \mysqli_result $result
-     *
-     * @return array<string,mixed>|null|false
-     */
-    public function fetchAssoc(\mysqli_result $result): array|null|false
-    {
-        return mysqli_fetch_assoc($result);
-    }
-
-    /**
-     * Fabrique une requete INSERT.
-     *
-     * $dbAndTable devrait être entre `...` sinon ça pourrait faire des trucs étranges.
-     * $fieldsAndValues est un tableau ('fieldname' => $value), $value peut être
-     * un tableau pour certaines fonction spéciales (NOW(), ...).
-     *
-     * @param string              $dbAndTableName  dbAndTableName
-     * @param array<string,mixed> $fieldsAndValues fieldsAndValues
-     * @param int                 $conn_name       identifiant de connexion
-     *
-     * @return string
-     * @throws \Exception
-     */
-    public function getInsertQuery(string $dbAndTableName, array $fieldsAndValues, int $conn_name = 0)
-    {
-        $dbAndTableName = trim((string) $dbAndTableName);
-        if (empty($dbAndTableName)) {
-            throw new \Exception('Bad $dbAndTableName in ' . __FUNCTION__);
-        }
-        if ('`' !== $dbAndTableName[0]) {
-            $dbAndTableName = '`' . $dbAndTableName . '`';
-        }
-
-        $fields = '';
-        $values = '';
-        foreach ($fieldsAndValues as $field => $value) {
-            $fields .= ', `' . (string) $field . '`';
-            if ((is_array($value)) && (!empty($value['special']))) {
-                $values .= ', ' . $value['special'];
-            } else {
-                $values .= ", '" . $this->escape((string) $value, $conn_name) . "'";
-            }
-        }
-        if ('' === $values) {
-            throw new \Exception('No values to insert');
-        } else {
-            /* On écrase la virgule en trop au début. */
-            $fields[0] = ' ';
-            $values[0] = ' ';
-        }
-        return ('INSERT INTO ' . $dbAndTableName . ' (' . $fields . ') VALUES (' . $values . ')');
-    }
-
-    /**
-     * @param int $conn_name identifiant de connexion
-     *
-     * @return int
-     * @throws \Exception
-     */
-    public function affectedRows(int $conn_name = 0)
-    {
-        if (true === self::$connections_params[$conn_name]['hasMaintenance']) {
-            throw new \Exception('Serveur MySQL en maintenance');
-        }
-
-        $conn_key = self::generateConnectionKey($conn_name);
-
-        if (isset($this->current_conn[$conn_key])) {
-            return mysqli_affected_rows($this->current_conn[$conn_key]);
-        }
-        return -1;
-    }
-
-    /**
-     * @param int $conn_name identifiant de connexion
-     *
-     * @return int
-     * @throws \Exception
-     */
-    public function insertId(int $conn_name = 0): int
-    {
-        if (true === self::$connections_params[$conn_name]['hasMaintenance']) {
-            throw new \Exception('Serveur MySQL en maintenance');
-        }
-
-        $conn_key = self::generateConnectionKey($conn_name);
-        if (isset($this->current_conn[$conn_key])) {
-            return mysqli_insert_id($this->current_conn[$conn_key]);
-        }
-        return -1;
-    }
-
-    /**
-     * Échappe proprement les chaines
-     *
-     * @param string $string    string
-     * @param int    $conn_name identifiant de connexion
-     *
-     * @return string
-     * @throws \Exception
-     */
-    public function escape(string $string, int $conn_name = 0)
-    {
-        if (true === self::$connections_params[$conn_name]['hasMaintenance']) {
-            throw new \Exception('Serveur MySQL en maintenance');
-        }
-
-        $conn_key = self::generateConnectionKey($conn_name);
-
-        if (isset($this->current_conn[$conn_key])) {
-            return mysqli_real_escape_string($this->current_conn[$conn_key], (string) $string);
-        } else {
-            // throw \Exception plutot
-            mail(DEBUG_EMAIL, 'debug', 'NO LINK ???' . print_r($_SERVER, true));
-        }
-
-        return mysqli_escape_string($this->current_conn[$conn_key], $string);
-    }
-
-    /**
-     * Retourne le n° de l'erreur sql
-     *
-     * @param int $conn_name identifiant de connexion
-     *
-     * @return int
-     */
-    public function errno(int $conn_name): int
-    {
-        $conn_key = self::generateConnectionKey($conn_name);
-        return mysqli_errno($this->current_conn[$conn_key]);
     }
 }

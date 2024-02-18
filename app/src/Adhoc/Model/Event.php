@@ -569,11 +569,11 @@ class Event extends ObjectModel
         }
 
         if (isset($params['datdeb'])) {
-            $sql .= "AND `date` >= '" . $db->escape($params['datdeb']) . "' ";
+            $sql .= "AND `date` >= '" . $params['datdeb'] . "' "; // à échapper
         }
 
         if (isset($params['datfin'])) {
-            $sql .= "AND `date` <= '" . $db->escape($params['datfin']) . "' ";
+            $sql .= "AND `date` <= '" . $params['datfin'] . "' "; // à échapper
         }
 
         if (isset($params['online'])) {

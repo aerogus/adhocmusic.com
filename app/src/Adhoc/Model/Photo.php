@@ -7,7 +7,6 @@ namespace Adhoc\Model;
 use Adhoc\Model\Media;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Image;
-use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe Photo

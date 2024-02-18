@@ -44,7 +44,7 @@ class ForumPrive extends Forum
              . "`m`.`text` "
              . "FROM `" . static::$db_table_forum_info . "` `f`, `" . static::$db_table_forum_thread . "` `t`, `" . static::$db_table_forum_message . "` `m` "
              . "WHERE 1 "
-             . "AND `f`.`id_forum` = '" . $db->escape($id_forum) . "' "
+             . "AND `f`.`id_forum` = '" . $id_forum . "' "
              . "AND `f`.`id_forum` = `t`.`id_forum` "
              . "AND `t`.`id_thread` = `m`.`id_thread` "
              . "AND `m`.`id_message` = (SELECT (MIN(`id_message`)) FROM `" . static::$db_table_forum_message . "` `sm` WHERE `sm`.`id_thread` = `t`.`id_thread`) "
@@ -145,8 +145,8 @@ class ForumPrive extends Forum
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `adhoc_forum_prive_subscriber` "
-             . "WHERE `id_contact` = " . (int) $id_contact . " "
-             . "AND `id_forum` = '" . $db->escape($id_forum) . "'";
+             . "WHERE `id_contact` = " . $id_contact . " "
+             . "AND `id_forum` = '" . $id_forum . "'";
 
         $db->query($sql);
 
@@ -167,7 +167,7 @@ class ForumPrive extends Forum
 
         $sql = "INSERT INTO `adhoc_forum_prive_subscriber` "
              . "(`id_contact`, `id_forum`) "
-             . "VALUES(" . (int) $id_contact . ", '" . $db->escape($id_forum) . "')";
+             . "VALUES(" . $id_contact . ", '" . $id_forum . "')";
 
         $db->query($sql);
 
@@ -211,14 +211,14 @@ class ForumPrive extends Forum
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `adhoc_forum_prive_subscriber` "
-             . "WHERE `id_contact` = " . (int) $db->escape($id_contact);
+             . "WHERE `id_contact` = " . $id_contact;
 
         $db->query($sql);
 
         foreach ($ids_forum as $id_forum) {
             $sql = "INSERT INTO `adhoc_forum_prive_subscriber` "
                  . "(`id_contact`, `id_forum`) "
-                 . "VALUES(" . (int) $id_contact . ", '" . $db->escape($id_forum) . "')";
+                 . "VALUES(" . $id_contact . ", '" . $id_forum . "')";
 
             $db->query($sql);
         }
@@ -241,7 +241,7 @@ class ForumPrive extends Forum
              . "FROM `adhoc_contact` `c`, `adhoc_membre` `m`, `adhoc_forum_prive_subscriber` `s` "
              . "WHERE `c`.`id_contact` = `m`.`id_contact` "
              . "AND `m`.`id_contact` = `s`.`id_contact` "
-             . "AND `s`.`id_forum` = '" . $db->escape($id_forum) . "'";
+             . "AND `s`.`id_forum` = '" . $id_forum . "'";
 
         $subs = $db->queryWithFetch($sql);
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Adhoc\Model\Reference;
 
 use Adhoc\Model\Reference;
-use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe de gestion des types de musiciens

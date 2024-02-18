@@ -332,7 +332,7 @@ final class Controller
 
         $sql = "SELECT `id_contact`, `pseudo` "
              . "FROM `adhoc_membre` "
-             . "WHERE `pseudo` LIKE '" . $db->escape($q) . "%' "
+             . "WHERE `pseudo` LIKE '" . $q . "%' "
              . "ORDER BY `pseudo` ASC "
              . "LIMIT 0, 10";
 

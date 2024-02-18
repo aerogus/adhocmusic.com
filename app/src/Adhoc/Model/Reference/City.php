@@ -6,7 +6,6 @@ namespace Adhoc\Model\Reference;
 
 use Adhoc\Model\Reference;
 use Adhoc\Utils\DataBase;
-use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe City
@@ -101,15 +100,19 @@ class City extends Reference
      *
      * @return array<static>
      */
-    public static function find(array $params): array
+    public static function find(array $params = []): array
     {
         $db = DataBase::getInstance();
+        $data = [];
         $objs = [];
 
-        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+        $sql  = "SELECT `" . static::getDbPk() . "` ";
+        $sql .= "FROM `" . static::getDbTable() . "` ";
+        $sql .= "WHERE 1 ";
 
         if (isset($params['id_departement'])) {
-            $sql .= "AND `id_departement` = '" . $db->escape($params['id_departement']) . "' ";
+            $sql .= "AND `id_departement` = :id_departement ";
+            $data['id_departement'] = $params['id_departement'];
         }
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
@@ -132,7 +135,7 @@ class City extends Reference
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
-        $ids = $db->queryWithFetchFirstFields($sql);
+        $ids = $db->queryWithFetchFirstFields($sql, $data);
         foreach ($ids as $id) {
             $objs[] = static::getInstance((int) $id);
         }

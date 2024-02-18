@@ -15,7 +15,6 @@ use Adhoc\Model\Reference\VideoHost;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Image;
-use Adhoc\Utils\ObjectModel;
 
 /**
  * 1 - YouTube

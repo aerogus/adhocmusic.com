@@ -376,7 +376,7 @@ class CMS extends ObjectModel
         $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
 
         if (isset($params['alias'])) {
-            $sql .= "AND `alias` = '" . $db->escape($params['alias']) . "' ";
+            $sql .= "AND `alias` = '" . $params['alias'] . "' ";
         }
 
         if (isset($params['online'])) {

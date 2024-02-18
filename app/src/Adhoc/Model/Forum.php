@@ -144,7 +144,7 @@ abstract class Forum
              . "`f`.`id_contact`, `m`.`pseudo`, `f`.`date` "
              . "FROM `" . static::$db_table_forum_info . "` `f`, `" . Membre::getDbTable() . "` `m` "
              . "WHERE `f`.`id_contact` = `m`.`id_contact` "
-             . "AND `f`.`id_forum` = '" . $db->escape($id_forum) . "'";
+             . "AND `f`.`id_forum` = '" . $id_forum . "'";
 
         return $db->queryWithFetchFirstRow($sql);
     }
@@ -430,7 +430,7 @@ abstract class Forum
              . "VALUE (" . (int) $params['id_thread'] . ", "
              . "NOW(), NOW(), "
              . (int) $params['id_contact'] . ", " . (int) $params['id_contact'] . ", "
-             . "'" . $db->escape($params['text']) . "')";
+             . "'" . $params['text'] . "')";
 
          $db->query($sql);
 
@@ -452,7 +452,7 @@ abstract class Forum
         $db = DataBase::getInstance();
 
         $sql = "UPDATE `" . static::$db_table_forum_message . "` "
-             . "SET `text` = '" . $db->escape($params['text']) . "', "
+             . "SET `text` = '" . $params['text'] . "', "
              . "`modified_at` = NOW(), "
              . "`modified_by` = " . (int) $params['id_contact'] . " "
              . "WHERE `id_message` = " . (int) $params['id_message'];
@@ -500,7 +500,7 @@ abstract class Forum
              . "`id_forum`, `nb_messages`, `nb_views`, `subject`) "
              . "VALUES (NOW(), NOW(), "
              . (int) $params['id_contact'] . ", " . (int) $params['id_contact'] . ", "
-             . "'" . $db->escape($params['id_forum']) . "', 0, 0, '" . $db->escape($params['subject']) . "')";
+             . "'" . $params['id_forum'] . "', 0, 0, '" . $params['subject'] . "')";
 
         $db->query($sql);
 
@@ -584,7 +584,7 @@ abstract class Forum
         if ($params['id_contact']) {
             $sql .= "`id_contact` = " . (int) $params['id_contact'] . ", `date` = NOW() ";
         }
-        $sql .= "WHERE `id_forum` = '" . $db->escape($params['id_forum']) . "'";
+        $sql .= "WHERE `id_forum` = '" . $params['id_forum'] . "'";
 
         $db->query($sql);
 

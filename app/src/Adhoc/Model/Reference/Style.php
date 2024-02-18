@@ -6,7 +6,6 @@ namespace Adhoc\Model\Reference;
 
 use Adhoc\Model\Reference;
 use Adhoc\Utils\DataBase;
-use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe de gestion des styles musicaux

@@ -390,7 +390,7 @@ final class Controller
                 $out .= "<table>";
 
                 if ($email !== '') {
-                    $sql = "SELECT `id_contact`, `email` FROM `adhoc_contact` WHERE `email` = '" . $db->escape($email) . "'";
+                    $sql = "SELECT `id_contact`, `email` FROM `adhoc_contact` WHERE `email` = '" . $email . "'";
                     $res = $db->query($sql);
                     if (list($id) = $db->fetchRow($res)) {
                         $out .= "<tr><td>Email <strong>" . $email . "</strong> trouvé - id_contact : <strong>" . $id . "</strong></td></tr>";

@@ -125,7 +125,7 @@ final class Controller
 
             $sql = "INSERT INTO `adhoc_messagerie` "
                  . "(`id_from`, `id_to`, `text`, `date`) "
-                 . "VALUES (" . (int) $_SESSION['membre']->getId() . ", " . (int) $to . ", '" . $db->escape($text) . "', NOW())";
+                 . "VALUES (" . (int) $_SESSION['membre']->getId() . ", " . (int) $to . ", '" . $text . "', NOW())";
 
             $db->query($sql);
 

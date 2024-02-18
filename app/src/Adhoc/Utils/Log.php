@@ -186,8 +186,8 @@ class Log
              . "`id_contact`, `extra`, "
              . "`ip`, `host`) "
              . "VALUES(NOW(), " . (int) $action . ", "
-             . $id_contact . ", '" . $db->escape($extra) . "', "
-             . "'" . $db->escape($ip) . "', '" . $db->escape($host) . "')";
+             . $id_contact . ", '" . $extra . "', "
+             . "'" . $ip . "', '" . $host . "')";
 
         return $db->query($sql);
     }

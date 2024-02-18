@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
-use Adhoc\Utils\ObjectModel;
 use Adhoc\Model\Media;
 
 /**

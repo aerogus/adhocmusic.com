@@ -25,19 +25,19 @@ class Structure extends ObjectModel
     protected static string $table = 'adhoc_structure';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_structure = 0;
+    protected ?int $id_structure = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $name = '';
+    protected ?string $name = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $address = '';
+    protected ?string $address = null;
 
     /**
      * @var ?string
@@ -55,29 +55,29 @@ class Structure extends ObjectModel
     protected ?string $tel = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $id_country = '';
+    protected ?string $id_country = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $id_departement = '';
+    protected ?string $id_departement = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $text = '';
+    protected ?string $text = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $site = '';
+    protected ?string $site = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $email = '';
+    protected ?string $email = null;
 
     /**
      * Liste des attributs de l'objet
@@ -114,6 +114,14 @@ class Structure extends ObjectModel
     public static function getBasePath(): string
     {
         return MEDIA_PATH . '/structure';
+    }
+
+    /**
+     * @return ?int
+     */
+    public function getIdStructure(): ?int
+    {
+        return $this->id_structure;
     }
 
     /**
@@ -221,9 +229,9 @@ class Structure extends ObjectModel
     /**
      * @param string $name name
      *
-     * @return object
+     * @return static
      */
-    public function setName(string $name): object
+    public function setName(string $name): static
     {
         if ($this->name !== $name) {
             $this->name = $name;
@@ -236,9 +244,9 @@ class Structure extends ObjectModel
     /**
      * @param string $address adresse
      *
-     * @return object
+     * @return static
      */
-    public function setAddress(string $address): object
+    public function setAddress(string $address): static
     {
         if ($this->address !== $address) {
             $this->address = $address;
@@ -251,9 +259,9 @@ class Structure extends ObjectModel
     /**
      * @param string $cp code postal
      *
-     * @return object
+     * @return static
      */
-    public function setCp(string $cp): object
+    public function setCp(string $cp): static
     {
         if ($this->cp !== $cp) {
             $this->cp = $cp;
@@ -266,9 +274,9 @@ class Structure extends ObjectModel
     /**
      * @param string $city city
      *
-     * @return object
+     * @return static
      */
-    public function setCity(string $city): object
+    public function setCity(string $city): static
     {
         if ($this->city !== $city) {
             $this->city = $city;
@@ -281,9 +289,9 @@ class Structure extends ObjectModel
     /**
      * @param string $tel téléphone
      *
-     * @return object
+     * @return static
      */
-    public function setTel(string $tel): object
+    public function setTel(string $tel): static
     {
         if ($this->tel !== $tel) {
             $this->tel = $tel;
@@ -296,9 +304,9 @@ class Structure extends ObjectModel
     /**
      * @param string $id_departement id_departement
      *
-     * @return object
+     * @return static
      */
-    public function setIdDepartement(string $id_departement): object
+    public function setIdDepartement(string $id_departement): static
     {
         if ($this->id_departement !== $id_departement) {
             $this->id_departement = $id_departement;
@@ -311,9 +319,9 @@ class Structure extends ObjectModel
     /**
      * @param string $text texte
      *
-     * @return object
+     * @return static
      */
-    public function setText(string $text): object
+    public function setText(string $text): static
     {
         if ($this->text !== $text) {
             $this->text = $text;
@@ -326,9 +334,9 @@ class Structure extends ObjectModel
     /**
      * @param string $site site
      *
-     * @return object
+     * @return static
      */
-    public function setSite(string $site): object
+    public function setSite(string $site): static
     {
         if ($this->site !== $site) {
             $this->site = $site;
@@ -341,9 +349,9 @@ class Structure extends ObjectModel
     /**
      * @param string $email email
      *
-     * @return object
+     * @return static
      */
-    public function setEmail(string $email): object
+    public function setEmail(string $email): static
     {
         if ($this->email !== $email) {
             $this->email = $email;
@@ -356,9 +364,9 @@ class Structure extends ObjectModel
     /**
      * @param string $id_country id_country
      *
-     * @return object
+     * @return static
      */
-    public function setIdCountry(string $id_country): object
+    public function setIdCountry(string $id_country): static
     {
         if ($this->id_country !== $id_country) {
             $this->id_country = $id_country;
@@ -414,12 +422,12 @@ class Structure extends ObjectModel
      * Retourne une collection d'objets "Structure" répondant au(x) critère(s) donné(s)
      *
      * @param array<string,mixed> $params [
-     *                      'id_event' => int,
-     *                      'order_by' => string,
-     *                      'sort' => string,
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     *                                'id_event' => int,
+     *                                'order_by' => string,
+     *                                'sort' => string,
+     *                                'start' => int,
+     *                                'limit' => int,
+     *                            ]
      *
      * @return array<static>
      */

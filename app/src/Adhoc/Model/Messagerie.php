@@ -61,7 +61,7 @@ class Messagerie extends ObjectModel
 
         $sql = "INSERT INTO `" . Messagerie::getDbTable() . "` "
              . "(`id_from`, `id_to`, `text`, `date`) "
-             . "VALUES(" . (int) $this->contact . ", " . (int) $id_to . ", '" . $db->escape($text) . "', NOW())";
+             . "VALUES(" . (int) $this->contact . ", " . (int) $id_to . ", '" . $text . "', NOW())";
 
         $db->query($sql);
 

@@ -6,7 +6,6 @@ namespace Adhoc\Model\Reference;
 
 use Adhoc\Model\Reference;
 use Adhoc\Utils\DataBase;
-use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe WorldRegion
@@ -91,7 +90,7 @@ class WorldRegion extends Reference
         $sql = "SELECT `" . implode('`,`', static::getDbPk()) . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
 
         if (isset($params['id_country'])) {
-            $sql .= "AND `id_country` = '" . $db->escape($params['id_country']) . "' ";
+            $sql .= "AND `id_country` = '" . $params['id_country'] . "' ";
         }
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {

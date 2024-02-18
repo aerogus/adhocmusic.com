@@ -13,14 +13,14 @@ namespace Adhoc\Utils;
  *
  * @abstract
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class ObjectModel
 {
     /**
-     * @var ?static
+     * @var ?array<static>
      */
-    protected static ?self $instance = null;
+    protected static ?array $instances = null;
 
     /**
      * Champ clé primaire (simple ou multiple) de l'objet fils
@@ -41,7 +41,7 @@ abstract class ObjectModel
      *
      * @var bool
      */
-    protected static bool $cachable = true;
+    protected static bool $cachable = false;
 
     /**
      * Identifiant unique d'objet
@@ -65,9 +65,17 @@ abstract class ObjectModel
      * Pour chaque attribut modifié, on a un élément de la forme 'attribut => true'.
      * (ou un tableau de tableau avec le nom de la db_table comme clé du 1er tableau)
      *
-     * @var array<mixed>
+     * @var array<string,bool>
      */
     protected array $modified_fields = [];
+
+    /**
+     * L'instance a-t-elle été trouvée en base et bien chargé ?
+     * ou bien a-t-elle été bien sauvée en base une première fois
+     *
+     * @var bool
+     */
+    protected bool $loaded = false;
 
     /* db adhoc */
     /* todo retirer tous ces trucs en dur... */
@@ -80,11 +88,11 @@ abstract class ObjectModel
     protected static string $db_table_video_groupe   = 'adhoc_video_groupe';
 
     /**
-     * @param bool $fusion fusion
+     * Retourne le tableau de tous les champs
      *
-     * @return array<string,string>|array<string,array<string,string>>
+     * @return array<string,string>
      */
-    protected function getAllFields(bool $fusion = true): array
+    protected function getAllFields(): array
     {
         return static::$all_fields;
     }
@@ -93,11 +101,13 @@ abstract class ObjectModel
      * Construction de l'objet
      *
      * La clé primaire $id peut être soit simple (et on donne directement sa valeur),
-     * soit mutiple et on donne un tableau ['pkName1' => pkValue1, 'pkName2' => pkValue2 ]
+     * soit multiple et on donne un tableau ['pkName1' => pkValue1, 'pkName2' => pkValue2 ]
+     *
+     * "final" pour éviter un warning avec le new static()
      *
      * @param mixed $id id
      */
-    final public function __construct(mixed $id = null)
+    final public function __construct($id = null)
     {
         if (!is_null($id)) {
             if (is_array($id)) {
@@ -106,24 +116,19 @@ abstract class ObjectModel
                     $pk = $field;
                     $this->$pk = $id[$field];
                 }
-                $this->loadObjectId();
             } else {
                 // clé primaire simple
                 $pk = static::$pk;
-                switch (static::$all_fields[$pk]) {
-                    case 'string':
-                        $this->$pk = (string) $id;
-                        break;
-                    case 'int':
-                        $this->$pk = (int) $id;
-                        break;
-                }
-                $this->loadObjectId();
+                $this->$pk = $id;
             }
 
-            if (static::isCachable() && $this->loadFromCache()) {
+            $this->loadObjectId();
+
+            if (static::isCachable() && ($this->loaded = $this->loadFromCache())) {
                 // chargement ok du cache
-            } elseif ($this->loadFromDb()) {
+                LogNG::success('loadFromCache OK');
+            } elseif ($this->loaded = $this->loadFromDb()) {
+                LogNG::success('loadFromDb OK');
                 // chargement ok de la bdd
                 if (static::isCachable()) {
                     // alimentation du cache
@@ -132,7 +137,15 @@ abstract class ObjectModel
             } else {
                 // erreur au chargement
             }
-            static::$instance = $this;
+
+            $key = get_called_class() . '__';
+            if (is_array($id)) {
+                $key .= implode(':', array_values($id));
+            } else {
+                $key .= $id;
+            }
+
+            static::$instances[$key] = $this;
         }
     }
 
@@ -157,50 +170,35 @@ abstract class ObjectModel
     }
 
     /**
-     * @param mixed $id int|string|array
+     * @param mixed $id int|string|array<mixed>
      *
-     * @todo à optimiser le chargement et la gestion du cache
-     *
-     * @return object
+     * @return static
      */
-    public static function getInstance(mixed $id): object
+    public static function getInstance($id): self
     {
-        if (is_null(static::$instance)) {
-            // pas du tout d'instance: on en crée une, le constructeur ira s'enregistrer
-            // dans la variable statique.
+        if (is_null(static::$instances)) {
+            // pas du tout d'instances: on en crée une, le constructeur ira s'enregistrer
+            // dans le tableau statique $instances.
             return new static($id);
         } elseif (is_array(static::$pk)) {
+            $arr_pk = [];
             foreach (static::$pk as $pk) {
-                $propName = $pk;
-                if (static::$instance->$propName !== $id[$pk]) {
-                    // on a deja une instance, mais ce n'est pas le bon id
-                    static::deleteInstance();
-                    new static($id);
-                }
+                $arr_pk[] = $id[$pk];
+            }
+            $key = get_called_class() . '__' . implode(':', $arr_pk);
+            if (!array_key_exists($key, static::$instances)) {
+                // l'instance n'est pas chargée
+                new static($id);
             }
         } else {
-            $pk = static::$pk;
-            if (static::$instance->$pk !== $id) {
-                // on a deja une instance, mais ce n'est pas le bon id
-                static::deleteInstance();
+            $key = get_called_class() . '__' . $id;
+            if (!array_key_exists($key, static::$instances)) {
+                // l'instance n'est pas chargée
                 new static($id);
-            } else {
-                // tout est ok
             }
         }
-        return static::$instance;
-    }
 
-    /**
-     * @return bool
-     */
-    public static function deleteInstance(): bool
-    {
-        if (isset(static::$instance)) {
-            static::$instance = null;
-            return true;
-        }
-        return false;
+        return static::$instances[$key];
     }
 
     /**
@@ -221,17 +219,18 @@ abstract class ObjectModel
 
     /**
      * Retourne la valeur de la clé primaire
-     * - Soit la valeur si clé primaire simple
-     * - Soit un tableau ['pkName1' => pkValue1, 'pkName2' => pkValue2] si clé primaire multiple
      *
-     * @return int|string|array<mixed>
+     * - Soit directement la valeur si la clé primaire est simple
+     * - Soit un tableau ['pkName1' => pkValue1, 'pkName2' => pkValue2]
+     *   si la clé primaire est multiple
+     *
+     * @return mixed|array<mixed>
      */
-    public function getId(): int|string|array
+    public function getId(): mixed
     {
         if (is_array(static::$pk)) {
             $pks = [];
             foreach (static::$pk as $pk) {
-                $pk = $pk;
                 $pks[$pk] = $this->$pk;
             }
             return $pks;
@@ -245,29 +244,258 @@ abstract class ObjectModel
      * Set la valeur de la clé primaire
      * Todo gérer si pk simple ou multiple, le typage, si nom du champ est bien une pk
      *
-     * @param int|string|array<string,mixed> $id id
+     * @param mixed $id id
      *
-     * @return object
+     * @return static
      */
-    public function setId(mixed $id)
+    public function setId($id): static
     {
+        if ($this->isLoaded()) {
+            throw new \Exception('can not override pk');
+        }
+
         if (is_array($id)) {
-            foreach ($id as $key => $val) {
-                $pk = $key;
-                $this->$pk = $val;
+            foreach ($id as $pk => $val) {
+                if ($this->$pk !== $val) {
+                    $this->$pk = $val;
+                    $this->modified_fields[$pk] = true;
+                }
             }
         } else {
-            $pk = static::$pk;
-            $this->$pk = $id;
+            if ($this->{static::getDbPk()} !== $id) {
+                $this->{static::getDbPk()} = $id;
+                $this->modified_fields[static::getDbPk()] = true;
+            }
         }
 
         return $this;
     }
 
     /**
+     * @return bool
+     */
+    public function isLoaded(): bool
+    {
+        return $this->loaded;
+    }
+
+    /**
+     * @param array<string,string>|array<string,int>|string|int $pk
+     *
+     * @return bool
+     */
+    public static function isFound(array|string|int $pk): bool
+    {
+        if (is_array(static::getDbPk()) && !is_array($pk)) {
+            throw new \Exception('pk composée, le paramètre doit être un tableau');
+        }
+
+        $db = DataBase::getInstance();
+        $data = [];
+
+        $sql  = 'SELECT ';
+        if (is_array(static::getDbPk())) {
+            $pks = array_map(
+                function ($item) {
+                    return '`' . $item . '`';
+                },
+                static::getDbPk()
+            );
+            $sql .= implode(', ', $pks) . ' ';
+        } else {
+            $sql .= '`' . static::getDbPk() . '` ';
+        }
+        $sql .= 'FROM `' . static::getDbTable() . '` ';
+        $sql .= 'WHERE 1 ';
+
+        if (is_array(static::getDbPk())) {
+            foreach (static::getDbPk() as $idx => $_pk) {
+                $sql .= 'AND `' . $_pk . '` = :' . $_pk . ' ';
+                $data[$_pk] = $pk[$_pk];
+            }
+        } else {
+            $sql .= 'AND `' . static::getDbPk() . '` = :' . static::getDbPk();
+            $data[static::getDbPk()] = $pk;
+        }
+
+        $stm = $db->pdo->prepare($sql);
+        try {
+            $res = $stm->execute($data);
+            return (bool) $stm->rowCount();
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Sauve l'objet en base
+     *
+     * @return bool|int true si la sauvegarde est ok, false sinon, int si autoincrement
+     */
+    public function save(): bool
+    {
+        $db = DataBase::getInstance();
+        $data = [];
+
+        $reqUpdate = $this->isLoaded();
+
+        if ($reqUpdate === false) { // INSERT
+            $sql = 'INSERT INTO `' . static::getDbTable() . '` (';
+
+            if (count($this->modified_fields) > 0) {
+                foreach ($this->modified_fields as $field => $value) {
+                    if ($value === true) {
+                        $sql .= '`' . $field . '`,';
+                    }
+                }
+                $sql = substr($sql, 0, -1);
+            }
+
+            $sql .= ') VALUES (';
+
+            if (count($this->modified_fields) > 0) {
+                foreach ($this->modified_fields as $field => $value) {
+                    if ($value !== true) {
+                        continue;
+                    }
+                    $sql .= ':' . $field . ',';
+                    $att = $field;
+                    if (is_null($this->$att)) {
+                        $data[$field] = null;
+                    } else {
+                        switch (static::$all_fields[$field]) {
+                            case 'int':
+                                $data[$field] = (int) $this->$att;
+                                break;
+                            case 'float':
+                                $data[$field] = (float) $this->$att;
+                                break;
+                            case 'string':
+                            case 'date':
+                                $data[$field] = $this->$att;
+                                break;
+                            case 'bool':
+                                // pas de vrai type BOOL avec MariaDB, c'est un INTEGER
+                                $data[$field] = (int) (bool) $this->$att;
+                                break;
+                            default:
+                                throw new \Exception('invalid field type: ' . static::$all_fields[$field]);
+                        }
+                    }
+                }
+                $sql = substr($sql, 0, -1);
+            }
+
+            $sql .= ')';
+
+            $this->modified_fields = [];
+
+            $stm = $db->pdo->prepare($sql);
+            try {
+                $res = $stm->execute($data);
+                if (!$res) {
+                    LogNG::error(DataBase::preparedQuery($sql, $data));
+                    return false;
+                } else {
+                    //LogNG::success(DataBase::preparedQuery($sql, $data));
+                    if (is_string(static::getDbPk()) && (static::$all_fields[static::getDbPk()] === 'int')) {
+                        // cas d'une clé primaire simple avec autoincrément
+                        $this->setId((int) $db->pdo->lastInsertId());
+                        $this->modified_fields = [];
+                    }
+                    $this->loaded = true; // le prochain save() fera un UPDATE
+
+                    $this->loadObjectId();
+                    // /!\ pas de mise en cache directe car le champ created_at est géré par la bdd
+
+                    return (bool) $stm->rowCount();
+                }
+            } catch (\PDOException $e) {
+                LogNG::error(DataBase::preparedQuery($sql, $data));
+                LogNG::error($e->getMessage());
+                return false;
+            }
+        } else { // UPDATE
+            if (count($this->modified_fields) === 0) {
+                return true;
+            }
+
+            $fields_to_save = '';
+            foreach ($this->modified_fields as $field => $value) {
+                if ($value !== true) {
+                    continue;
+                }
+                $att = $field;
+                $fields_to_save .= '`' . $field . '` = :' . $field . ',';
+                if (is_null($this->$att)) {
+                    $data[$field] = null;
+                } else {
+                    switch (static::$all_fields[$field]) {
+                        case 'int':
+                            $data[$field] = (int) $this->$att;
+                            break;
+                        case 'float':
+                            $data[$field] = (float) $this->$att;
+                            break;
+                        case 'string':
+                        case 'date':
+                            $data[$field] = $this->$att;
+                            break;
+                        case 'bool':
+                            // pas de vrai type BOOL avec MariaDB, c'est un INTEGER
+                            $data[$field] = (int) (bool) $this->$att;
+                            break;
+                        default:
+                            throw new \Exception('invalid field type');
+                    }
+                }
+            }
+            $fields_to_save = substr($fields_to_save, 0, -1);
+
+            $sql = 'UPDATE `' . static::getDbTable() . '` '
+                 . 'SET ' . $fields_to_save . ' ';
+
+            if (!is_array(static::getDbPk())) {
+                $sql .= 'WHERE `' . static::getDbPk() . '` = :' . static::getDbPk();
+                $data[static::getDbPk()] = $this->getId();
+            } else {
+                $sql .= 'WHERE 1 ';
+                foreach (static::getDbPk() as $pk) {
+                    $sql .= 'AND `' . $pk . '` = :' . $pk . ' ';
+                    $data[$pk] = $this->$pk;
+                }
+            }
+
+            $this->modified_fields = [];
+
+            $stm = $db->pdo->prepare($sql);
+            try {
+                $res = $stm->execute($data);
+                if (!$res) {
+                    LogNG::error(DataBase::preparedQuery($sql, $data));
+                    return false;
+                } else {
+                    LogNG::success(DataBase::preparedQuery($sql, $data));
+
+                    // /!\ clear du cache mais pas de mise en cache directe car le champ updated_at est géré par la bdd
+                    if (static::isCachable()) {
+                        ObjectCache::unset($this->getObjectId());
+                    }
+
+                    return (bool) $stm->rowCount();
+                }
+            } catch (\PDOException $e) {
+                LogNG::error(DataBase::preparedQuery($sql, $data));
+                LogNG::error($e->getMessage());
+                return false;
+            }
+        }
+    }
+
+    /**
      * @return int|bool
      */
-    public function save(): int|bool
+    public function saveOld(): int|bool
     {
         $db = DataBase::getInstance();
 
@@ -302,16 +530,16 @@ abstract class ObjectModel
                                 break;
                             case 'string':
                             case 'date':
-                                $sql .= "'" . $db->escape($this->$att) . "',";
+                                $sql .= "'" . $this->$att . "',";
                                 break;
                             case 'bool':
                                 $sql .= ((bool) $this->$att ? 'TRUE' : 'FALSE') . ",";
                                 break;
                             case 'password':
-                                $sql .= "PASSWORD('" . $db->escape($this->$att) . "'),";
+                                $sql .= "PASSWORD('" . $this->$att . "'),";
                                 break;
                             case 'phpser':
-                                $sql .= "'" . $db->escape(serialize($this->$att)) . "',";
+                                $sql .= "'" . serialize($this->$att) . "',";
                                 break;
                             default:
                                 throw new \Exception('invalid field type: ' . static::$all_fields[$field]);
@@ -354,16 +582,16 @@ abstract class ObjectModel
                             break;
                         case 'string':
                         case 'date':
-                            $fields_to_save .= " `" . $field . "` = '" . $db->escape($this->$att) . "',";
+                            $fields_to_save .= " `" . $field . "` = '" . $this->$att . "',";
                             break;
                         case 'bool':
                             $fields_to_save .= " `" . $field . "` = " . (((bool) $this->$att) ? 'TRUE' : 'FALSE') . ",";
                             break;
                         case 'password':
-                            $fields_to_save .= " `" . $field . "` = PASSWORD('" . $db->escape($this->$att) . "'),";
+                            $fields_to_save .= " `" . $field . "` = PASSWORD('" . $this->$att . "'),";
                             break;
                         case 'phpser':
-                            $fields_to_save .= " `" . $field . "` = '" . $db->escape(serialize($this->$att)) . "',";
+                            $fields_to_save .= " `" . $field . "` = '" . serialize($this->$att) . "',";
                             break;
                         default:
                             throw new \Exception('invalid field type');
@@ -409,18 +637,42 @@ abstract class ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+        $sql = 'SELECT ';
+        if (is_array(static::getDbPk())) {
+            $pks = array_map(
+                function ($item) {
+                    return '`' . $item . '`';
+                },
+                static::getDbPk()
+            );
+            $sql .= implode(', ', $pks) . ' ';
+        } else {
+            $sql .= '`' . static::getDbPk() . '` ';
+        }
+        $sql .= 'FROM `' . static::getDbTable() . '` ';
+        $sql .= 'WHERE 1 ';
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
-            $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+            $sql .= 'ORDER BY `' . $params['order_by'] . '` ';
         } else {
-            $sql .= "ORDER BY `" . static::getDbPk() . "` ";
+            if (is_array(static::getDbPk())) {
+                $pks = array_map(
+                    function ($item) {
+                        return '`' . $item . '`';
+                    },
+                    static::getDbPk()
+                );
+                $sql .= 'ORDER BY ' . implode(', ', $pks) . ' ';
+            } else {
+                $sql .= 'ORDER BY `' . static::getDbPk() . '` ';
+            }
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
-            $sql .= $params['sort'] . " ";
+            $sql .= $params['sort'] . ' ';
         } else {
-            $sql .= "ASC ";
+            // /!\ en cas de pk multiple, le sort n'est que sur la dernière key
+            $sql .= 'ASC ';
         }
 
         if (!isset($params['start'])) {
@@ -428,12 +680,22 @@ abstract class ObjectModel
         }
 
         if (isset($params['limit'])) {
-            $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
+            $sql .= 'LIMIT ' . (int) $params['start'] . ', ' . (int) $params['limit'];
         }
 
-        $ids = $db->queryWithFetchFirstFields($sql);
-        foreach ($ids as $id) {
-            $objs[] = static::getInstance((int) $id);
+        $stm = $db->pdo->query($sql);
+        $stm->execute();
+        $rows = $stm->fetchAll();
+        foreach ($rows as $row) {
+            if (is_array(static::getDbPk())) {
+                $pks = [];
+                foreach (static::getDbPk() as $pk) {
+                    $pks[$pk] = $row[$pk];
+                }
+                $objs[] = static::getInstance($pks);
+            } else {
+                $objs[] = static::getInstance($row[static::getDbPk()]);
+            }
         }
 
         return $objs;
@@ -443,53 +705,33 @@ abstract class ObjectModel
      * Retourne une collection d'instances
      *
      * @return array<static>
-     * @throws \Exception
      */
     public static function findAll(): array
     {
-        // version factorisée
-        /*
         return static::find([
             'order_by' => static::getDbPk(),
             'sort' => 'ASC',
         ]);
-        */
+    }
 
-        $db = DataBase::getInstance();
-        $objs = [];
-
-        if (is_array(static::getDbPk())) {
-            $sql = 'SELECT `' . implode('`,`', static::getDbPk()) . '` FROM `' . static::getDbTable() . '` ORDER BY';
-            foreach (static::getDbPk() as $pk) {
-                $sql .= ' `' . $pk . '` ASC,';
+    /**
+     * Retourne une instance de l'objet si trouvé, false sinon
+     *
+     * @param mixed|array<string,mixed> $pk
+     *
+     * @return static|false
+     */
+    public static function findOne(mixed $pk): static|false
+    {
+        try {
+            $obj = static::getInstance($pk);
+            if ($obj->isLoaded()) {
+                return $obj;
             }
-            $sql = substr($sql, 0, -1); // retrait de la dernière virgule
-
-            $rows = $db->queryWithFetch($sql);
-            foreach ($rows as $row) {
-                // todo transtypage éventuel
-                $objs[] = static::getInstance($row);
-            }
-        } else {
-            $sql  = 'SELECT `' . static::getDbPk() . '` ';
-            $sql .= 'FROM `' . static::getDbTable() . '` ';
-            $sql .= 'ORDER BY `' . static::getDbPk() . '` ASC';
-            if ($ids = $db->queryWithFetchFirstFields($sql)) {
-                foreach ($ids as $id) {
-                    switch (static::$all_fields[static::getDbPk()]) {
-                        case 'string':
-                            $id = (string) $id;
-                            break;
-                        case 'int':
-                            $id = (int) $id;
-                            break;
-                    }
-                    $objs[] = static::getInstance($id);
-                }
-            }
+        } catch (NotFoundException $e) {
         }
 
-        return $objs;
+        return false;
     }
 
     /**
@@ -498,9 +740,9 @@ abstract class ObjectModel
     public function loadObjectId(): void
     {
         if (is_array($this->getId())) {
-            $this->object_id = get_called_class() . ':' . implode(':', array_values($this->getId())); // ex: WorldRegion:FR:96
+            $this->object_id = get_called_class() . '__' . implode(':', array_values($this->getId()));
         } else {
-            $this->object_id = get_called_class() . ':' . $this->getId(); // ex: Membre:1234
+            $this->object_id = get_called_class() . '__' . $this->getId();
         }
     }
 
@@ -525,33 +767,71 @@ abstract class ObjectModel
         $out .= 'className : ' . static::class . "\n";
         $out .= 'object_id : ' . $this->getObjectId() . "\n";
         $out .= 'id        : ' . print_r($this->getId(), true) . "\n";
-        $out .= 'table     : ' . $this->getDbTable() . "\n";
-        $out .= 'pk        : ' . print_r($this->getDbPk(), true) . "\n";
+        $out .= 'table     : ' . static::getDbTable() . "\n";
+        $out .= 'pk        : ' . print_r(static::getDbPk(), true) . "\n";
 
         return $out;
     }
 
     /**
-     * Efface l'enregistrement dans la table relative à l'objet
+     * Efface l’enregistrement dans la table relative à l'objet
      *
      * @return bool
      */
-    public function delete(): bool
+    public function delete()
     {
-        $db = DataBase::getInstance();
+        // on n'efface rien si la pk n'est pas (complétement) settée !
+        if (is_array(static::getDbPk())) {
+            foreach (static::getDbPk() as $pk) {
+                if (is_null($this->$pk)) {
+                    LogNG::error("pk $pk not set, unable to delete");
+                    return false;
+                }
+            }
+        } else {
+            if (is_null($this->{static::getDbPk()})) {
+                LogNG::error("pk " . static::getDbPk() . " not set, unable to delete");
+                return false;
+            }
+        }
 
         if (static::isCachable()) {
             ObjectCache::unset($this->getObjectId());
         }
 
-        // @todo cas pk array, pk non int
-        $sql = sprintf('DELETE FROM `%s` WHERE `%s` = %d', $this->getDbTable(), $this->getDbPk(), $this->getId());
-        $db->query($sql);
+        $db = DataBase::getInstance();
+        $data = [];
 
-        if ($db->affectedRows()) {
-            return true;
+        $sql  = 'DELETE FROM `' . static::getDbTable() . '` ';
+
+        if (!is_array(static::getDbPk())) {
+            // clé primaire simple
+            $sql .= 'WHERE `' . static::getDbPk() . '` = :' . static::getDbPk();
+            $data[static::getDbPk()] = $this->{static::getDbPk()};
+        } else {
+            // clé primaire multiple
+            $sql .= 'WHERE 1 ';
+            foreach (static::getDbPk() as $pk) {
+                $sql .= 'AND `' . $pk . '` = :' . $pk . ' ';
+                $data[$pk] = $this->$pk;
+            }
         }
-        return false;
+
+        $stm = $db->pdo->prepare($sql);
+        try {
+            $res = $stm->execute($data);
+            if (!$res) {
+                LogNG::error(DataBase::preparedQuery($sql, $data));
+                return false;
+            } else {
+                //LogNG::success(DataBase::preparedQuery($sql, $data));
+                return (bool) $stm->rowCount();
+            }
+        } catch (\PDOException $e) {
+            LogNG::error(DataBase::preparedQuery($sql, $data));
+            LogNG::error($e->getMessage());
+            return false;
+        }
     }
 
     /**
@@ -561,12 +841,7 @@ abstract class ObjectModel
      */
     public static function count(): int
     {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT COUNT(*) "
-             . "FROM `" . static::getDbTable() . "`";
-
-        return (int) $db->queryWithFetchFirstField($sql);
+        return count(static::findAll());
     }
 
     /**
@@ -614,33 +889,42 @@ abstract class ObjectModel
     protected function loadFromDb(): bool
     {
         $db = DataBase::getInstance();
+        $data = [];
 
-        $sql = "SELECT * FROM `" . static::$table . "` ";
+        $sql  = 'SELECT * ';
+        $sql .= 'FROM `' . static::getDbTable() . '` ';
 
-        if (!is_array(static::$pk)) {
+        if (!is_array(static::getDbPk())) {
             // clé primaire simple
-            if (static::$all_fields[static::$pk] === 'int') {
-                $sql .= "WHERE `" . static::$pk . "` = " . (int) $this->{static::$pk};
-            } elseif (static::$all_fields[static::$pk] === 'string') {
-                $sql .= "WHERE `" . static::$pk . "` = '" . $this->{static::$pk} . "'";
-            }
+            $sql .= 'WHERE `' . static::getDbPk() . '` = :' . static::getDbPk();
+            $data[static::getDbPk()] = $this->{static::getDbPk()};
         } else {
             // clé primaire multiple
-            $sql .= "WHERE 1 ";
-            foreach (static::$pk as $pk) {
-                if (static::$all_fields[$pk] === 'int') {
-                    $sql .= "AND `" . $pk . "` = " . (int) $this->{$pk} . " ";
-                } elseif (static::$all_fields[$pk] === 'string') {
-                    $sql .= "AND `" . $pk . "` = '" . $this->{$pk} . "' ";
-                }
+            $sql .= 'WHERE 1 ';
+            foreach (static::getDbPk() as $pk) {
+                $sql .= 'AND `' . $pk . '` = :' . $pk . ' ';
+                $data[$pk] = $this->$pk;
             }
         }
 
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
-            $this->arrayToObject($res);
-            return true;
+        $stm = $db->pdo->prepare($sql);
+        try {
+            $res = $stm->execute($data);
+            if (!$res) {
+                LogNG::error(DataBase::preparedQuery($sql, $data));
+                return false;
+            } elseif (($row = $stm->fetch()) !== false) {
+                //LogNG::success(DataBase::preparedQuery($sql, $data));
+                $this->arrayToObject($row);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\PDOException $e) {
+            LogNG::error(DataBase::preparedQuery($sql, $data));
+            LogNG::error($e->getMessage());
+            return false;
         }
-        return false;
     }
 
     /**
@@ -652,7 +936,7 @@ abstract class ObjectModel
      */
     protected function arrayToObject(array $data): bool
     {
-        $all_fields = static::getAllFields(true);
+        $all_fields = static::getAllFields();
         foreach ($data as $k => $v) {
             if (array_key_exists($k, $all_fields)) {
                 $att = $k;
@@ -688,12 +972,14 @@ abstract class ObjectModel
     }
 
     /**
+     * Retourne les propriétés de l'objet sous forme de tableau
+     *
      * @return array<string,mixed>
      */
     protected function objectToArray(): array
     {
         $arr = [];
-        $all_fields = static::getAllFields(true);
+        $all_fields = static::getAllFields();
 
         foreach ($all_fields as $field => $type) {
             $att = $field;

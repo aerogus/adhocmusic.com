@@ -64,10 +64,11 @@ ini_set('date.timezone', $conf['global']['timezone']);
 ini_set('default_charset', $conf['global']['charset']);
 
 // database
-define('_DB_HOST_', $conf['database']['host']);
-define('_DB_USER_', $conf['database']['user']);
-define('_DB_PASSWORD_', $conf['database']['pass']);
-define('_DB_DATABASE_', $conf['database']['name']);
+$_ENV['DB_HOST'] = $conf['database']['host'];
+$_ENV['DB_PORT'] = 3306;
+$_ENV['DB_USER'] = $conf['database']['user'];
+$_ENV['DB_PASS'] = $conf['database']['pass'];
+$_ENV['DB_NAME'] = $conf['database']['name'];
 
 // urls
 define('HOME_URL', $conf['url']['home']);

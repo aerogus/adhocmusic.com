@@ -264,9 +264,8 @@ final class Controller
                 'reference' => (string) Route::params('reference'),
             ];
 
-            $errors = [];
-
-            if (self::validateVideoCreateForm($data, $errors)) {
+            $errors = self::validateVideoCreateForm($data);
+            if (count($errors) === 0) {
                 $info = Video::parseStringForVideoUrl($data['code']);
                 $data['id_host'] = $info['id_host'];
                 $data['reference'] = $info['reference'];
@@ -404,9 +403,9 @@ final class Controller
                 'online' => (bool) Route::params('online'),
                 'thumbnail_fetch' => (bool) Route::params('thumbnail_fetch'),
             ];
-            $errors = [];
 
-            if (self::validateVideoEditForm($data, $errors)) {
+            $errors = self::validateVideoEditForm($data);
+            if (count($errors) === 0) {
                 $video->setName($data['name'])
                     ->setIdLieu($data['id_lieu'])
                     ->setIdEvent($data['id_event'])
@@ -564,13 +563,14 @@ final class Controller
     /**
      * Validation du formulaire de modification vidéo
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateVideoCreateForm(array $data, array &$errors): bool
+    private static function validateVideoCreateForm(array $data): array
     {
+        $errors = [];
+
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
         }
@@ -579,28 +579,25 @@ final class Controller
         } elseif (Video::parseStringForVideoUrl($data['code']) === false) {
             $errors['unknown_host'] = "Url de la vidéo non reconnue";
         }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+
+        return $errors;
     }
 
     /**
      * Validation du formulaire de modification vidéo
      *
-     * @param array $data   tableau des données
-     * @param array $errors tableau des erreurs (par référence)
+     * @param array $data tableau des données
      *
-     * @return bool
+     * @return array<string,true>
      */
-    private static function validateVideoEditForm(array $data, array &$errors): bool
+    private static function validateVideoEditForm(array $data): array
     {
+        $errors = [];
+
         if (empty($data['name'])) {
             $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
         }
-        if (count($errors)) {
-            return false;
-        }
-        return true;
+
+        return $errors;
     }
 }
