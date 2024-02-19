@@ -157,15 +157,15 @@ class Contact extends ObjectModel
     /**
      * @param string $email
      *
-     * @return int
+     * @return int|false
      */
-    public static function getIdByEmail(string $email): int
+    public static function getIdByEmail(string $email): int|false
     {
         $cs = Contact::find([
             'email' => $email,
         ]);
         if (count($cs) === 0) {
-            return 0; // contact introuvable
+            return false; // contact introuvable
         }
 
         return $cs[0]->getIdContact();

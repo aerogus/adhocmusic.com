@@ -31,14 +31,14 @@ class Event extends ObjectModel
     protected static string $table = 'adhoc_event';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_event = 0;
+    protected ?int $id_event = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $name = '';
+    protected ?string $name = null;
 
     /**
      * @var ?string
@@ -46,29 +46,29 @@ class Event extends ObjectModel
     protected ?string $date = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $text = '';
+    protected ?string $text = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $price = '';
+    protected ?string $price = null;
 
     /**
-     * @var bool
+     * @var ?bool
      */
-    protected bool $online = false;
+    protected ?bool $online = null;
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_lieu = 0;
+    protected ?int $id_lieu = null;
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_contact = 0;
+    protected ?int $id_contact = null;
 
     /**
      * @var ?string
@@ -123,9 +123,9 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdEvent(): int
+    public function getIdEvent(): ?int
     {
         return $this->id_event;
     }
@@ -175,17 +175,17 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @return string yyyy-mm-dd hh:ii:ss
+     * @return ?string yyyy-mm-dd hh:ii:ss
      */
-    public function getDate(): string
+    public function getDate(): ?string
     {
         return $this->date;
     }
@@ -231,33 +231,33 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getText(): string
+    public function getText(): ?string
     {
         return $this->text;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getPrice(): string
+    public function getPrice(): ?string
     {
         return $this->price;
     }
 
     /**
-     * @return bool
+     * @return ?bool
      */
-    public function getOnline(): bool
+    public function getOnline(): ?bool
     {
         return $this->online;
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdContact(): int
+    public function getIdContact(): ?int
     {
         return $this->id_contact;
     }
@@ -279,17 +279,17 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdLieu(): int
+    public function getIdLieu(): ?int
     {
         return $this->id_lieu;
     }
 
     /**
-     * @return object|null
+     * @return ?Lieu
      */
-    public function getLieu(): ?object
+    public function getLieu(): ?Lieu
     {
         if (!is_null($this->getIdLieu())) {
             return Lieu::getInstance($this->getIdLieu());
@@ -308,7 +308,7 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return array
+     * @return array<Groupe>
      */
     public function getGroupes(): array
     {
@@ -328,9 +328,9 @@ class Event extends ObjectModel
     /**
      * @param string $created_at created_at
      *
-     * @return object
+     * @return static
      */
-    public function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): static
     {
         if ($this->created_at !== $created_at) {
             $this->created_at = $created_at;
@@ -341,9 +341,9 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setCreatedNow(): object
+    public function setCreatedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -358,9 +358,9 @@ class Event extends ObjectModel
     /**
      * @param string $modified_at modified_at
      *
-     * @return object
+     * @return static
      */
-    public function setModifiedAt(string $modified_at): object
+    public function setModifiedAt(string $modified_at): static
     {
         if ($this->modified_at !== $modified_at) {
             $this->modified_at = $modified_at;
@@ -371,9 +371,9 @@ class Event extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setModifiedNow(): object
+    public function setModifiedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -388,9 +388,9 @@ class Event extends ObjectModel
     /**
      * @param string $name name
      *
-     * @return object
+     * @return static
      */
-    public function setName(string $name): object
+    public function setName(string $name): static
     {
         if ($this->name !== $name) {
             $this->name = $name;
@@ -403,9 +403,9 @@ class Event extends ObjectModel
     /**
      * @param string $facebook_event_id facebook_event_id
      *
-     * @return object
+     * @return static
      */
-    public function setFacebookEventId(string $facebook_event_id): object
+    public function setFacebookEventId(string $facebook_event_id): static
     {
         // pour les boulets qui copient/collent toute l'url
         if (preg_match('#^https?://w{0,3}\.facebook.com/events/([0-9]{1,24})/{0,1}$#', $facebook_event_id, $matches)) {
@@ -424,9 +424,9 @@ class Event extends ObjectModel
     /**
      * @param string $date date
      *
-     * @return object
+     * @return static
      */
-    public function setDate(string $date): object
+    public function setDate(string $date): static
     {
         if ($this->date !== $date) {
             $this->date = $date;
@@ -439,9 +439,9 @@ class Event extends ObjectModel
     /**
      * @param string $text text
      *
-     * @return object
+     * @return static
      */
-    public function setText(string $text): object
+    public function setText(string $text): static
     {
         if ($this->text !== $text) {
             $this->text = $text;
@@ -454,9 +454,9 @@ class Event extends ObjectModel
     /**
      * @param string $price price
      *
-     * @return object
+     * @return static
      */
-    public function setPrice(string $price): object
+    public function setPrice(string $price): static
     {
         if ($this->price !== $price) {
             $this->price = $price;
@@ -469,9 +469,9 @@ class Event extends ObjectModel
     /**
      * @param bool $online online
      *
-     * @return object
+     * @return static
      */
-    public function setOnline(bool $online): object
+    public function setOnline(bool $online): static
     {
         if ($this->online !== $online) {
             $this->online = $online;
@@ -484,9 +484,9 @@ class Event extends ObjectModel
     /**
      * @param int $id_lieu id_lieu
      *
-     * @return object
+     * @return static
      */
-    public function setIdLieu(int $id_lieu): object
+    public function setIdLieu(int $id_lieu): static
     {
         if ($this->id_lieu !== $id_lieu) {
             $this->id_lieu = $id_lieu;
@@ -499,9 +499,9 @@ class Event extends ObjectModel
     /**
      * @param int $id_contact id_contact
      *
-     * @return object
+     * @return static
      */
-    public function setIdContact(int $id_contact): object
+    public function setIdContact(int $id_contact): static
     {
         if ($this->id_contact !== $id_contact) {
             $this->id_contact = $id_contact;
@@ -516,24 +516,24 @@ class Event extends ObjectModel
     /**
      * Retourne une collection d'objets "Event" répondant au(x) critère(s) donné(s)
      *
-     * @param array $params [
-     *                      'id_contact' => int,
-     *                      'id_groupe' => int,
-     *                      'id_lieu' => int,
-     *                      'id_structure' => int,
-     *                      'datdeb' => string,
-     *                      'datfin' => string,
-     *                      'online' => bool,
-     *                      'with_audio' => bool,
-     *                      'with_photo' => bool,
-     *                      'with_video' => bool,
-     *                      'order_by' => string,
-     *                      'sort' => string,
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     * @param array<string,mixed> $params [
+     *                                'id_contact' => int,
+     *                                'id_groupe' => int,
+     *                                'id_lieu' => int,
+     *                                'id_structure' => int,
+     *                                'datdeb' => string,
+     *                                'datfin' => string,
+     *                                'online' => bool,
+     *                                'with_audio' => bool,
+     *                                'with_photo' => bool,
+     *                                'with_video' => bool,
+     *                                'order_by' => string,
+     *                                'sort' => string,
+     *                                'start' => int,
+     *                                'limit' => int,
+     *                            ]
      *
-     * @return array
+     * @return array<static>
      */
     public static function find(array $params): array
     {

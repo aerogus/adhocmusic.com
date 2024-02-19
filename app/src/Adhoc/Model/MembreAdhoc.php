@@ -180,7 +180,7 @@ class MembreAdhoc extends ObjectModel
      * @param bool $active membre actif ?
      *
      * @return array<string,mixed>
-     * 
+     *
      * @deprecated implémenter une méthode find() + standard
      */
     public static function getStaff(bool $active = true): array

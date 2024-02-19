@@ -157,7 +157,7 @@ final class Controller
                 );
 
                 // calcul photo suivante/précente
-                $idx = 0;
+                $idx_photo = $next = $prev = 0;
                 $count = count($playlist);
                 foreach ($playlist as $_idx => $_playlist) {
                     if ($_playlist->getIdPhoto() === $photo->getIdPhoto()) {
@@ -488,7 +488,7 @@ final class Controller
      *
      * @param array $data tableau des données
      *
-     * @return array<string,true>
+     * @return array<string,string>
      */
     private static function validatePhotoForm(array $data): array
     {

@@ -104,27 +104,30 @@ final class Controller
             if (count($errors) === 0) {
                 $data['password'] = Tools::generatePassword(12);
 
-                if (empty($errors)) {
-                    $membre = (new Membre())
-                        ->setEmail($data['email'])
-                        ->setPseudo($data['pseudo'])
-                        ->setPassword($data['password'])
-                        ->setMailing($data['mailing'])
-                        ->setLevel(Membre::TYPE_STANDARD);
+                $id_contact = Contact::getIdByEmail($data['email']);
+                if ($id_contact === false) {
+                    $contact = new Contact();
+                    $contact->setEmail($data['email']);
+                    $contact->save();
+                    $id_contact = $contact->getIdContact();
+                }
+                $membre = (new Membre())
+                    ->setIdContact($id_contact)
+                    ->setPseudo($data['pseudo'])
+                    ->setPassword($data['password'])
+                    ->setMailing($data['mailing'])
+                    ->setLevel(Membre::TYPE_STANDARD);
 
-                    if ($membre->save()) {
-                        Log::action(Log::ACTION_MEMBER_CREATE, $membre->getId());
-                        if (Email::send($data['email'], "Inscription à l'association AD'HOC", 'member-create', $data)) {
-                            Tools::redirect('/membres/create?create=1');
-                        } else {
-                            $smarty->assign('password', $data['password']); // DEBUG ONLY
-                            $errors['generic'] = true;
-                        }
+                if ($membre->save()) {
+                    Log::action(Log::ACTION_MEMBER_CREATE, $membre->getId());
+                    if (Email::send($data['email'], "Inscription à l'association AD'HOC", 'member-create', $data)) {
+                        Tools::redirect('/membres/create?create=1');
                     } else {
+                        $smarty->assign('password', $data['password']); // DEBUG ONLY
                         $errors['generic'] = true;
                     }
                 } else {
-                    Log::action(Log::ACTION_MEMBER_CREATE, print_r($data, true));
+                    $errors['generic'] = true;
                 }
             } else {
                 Log::action(Log::ACTION_MEMBER_CREATE, print_r($data, true));
@@ -193,11 +196,13 @@ final class Controller
                     ->setTel($data['tel'])
                     ->setPort($data['port'])
                     ->setText($data['text'])
-                    ->setEmail($data['email'])
                     ->setSite($data['site'])
-                    ->setMailing($data['mailing']);
+                    ->setMailing($data['mailing'])
+                    ->save();
 
-                $member->save();
+                $member->getContact()
+                    ->setEmail($data['email'])
+                    ->save();
 
                 if ($member->isInterne()) {
                     $forum = Route::params('forum');
@@ -289,6 +294,8 @@ final class Controller
             // effacement du membre
             if ($membre->delete()) {
                 Log::action(Log::ACTION_MEMBER_DELETE, $id);
+
+                $membre->getContact()->delete();
 
                 // destruction de la session
                 $_SESSION = [];

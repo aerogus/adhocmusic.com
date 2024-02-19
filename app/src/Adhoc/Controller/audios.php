@@ -457,7 +457,7 @@ final class Controller
     /**
      * Validation du formulaire création/édition audio
      *
-     * @param array $data tableau des données
+     * @param array<string,mixed> $data tableau des données
      *
      * @return array<string,true>
      */

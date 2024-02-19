@@ -565,7 +565,7 @@ final class Controller
      *
      * @param array $data tableau des données
      *
-     * @return array<string,true>
+     * @return array<string,string>
      */
     private static function validateVideoCreateForm(array $data): array
     {
@@ -588,7 +588,7 @@ final class Controller
      *
      * @param array $data tableau des données
      *
-     * @return array<string,true>
+     * @return array<string,string>
      */
     private static function validateVideoEditForm(array $data): array
     {

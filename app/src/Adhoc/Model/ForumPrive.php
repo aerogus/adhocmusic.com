@@ -19,7 +19,7 @@ class ForumPrive extends Forum
     /**
      * @var string
      */
-    protected static string $db_table_forum_thread  = 'adhoc_forum_prive_thread';
+    protected static string $db_table_forum_thread = 'adhoc_forum_prive_thread';
 
     /**
      * @var string
@@ -71,7 +71,7 @@ class ForumPrive extends Forum
      * @param int $id_thread id_thread
      * @param int $page      page
      *
-     * @return array
+     * @return array<string,mixed>
      */
     public static function getMessages(int $id_thread, int $page = 0): array
     {
@@ -84,9 +84,11 @@ class ForumPrive extends Forum
              . "WHERE `id_thread` = " . (int) $id_thread;
         $thread = $db->queryWithFetchFirstRow($sql);
 
-        $thread['url'] = HOME_URL . '/adm/forums/thread/' . $thread['id_thread'];
-        $thread['created_by_url'] = HOME_URL . '/membres/' . $thread['created_by'];
-        $thread['created_by_avatar'] = MEDIA_URL . '/membre/ca/' . $thread['created_by'] . '.jpg';
+        if (array_key_exists('id_thread', $thread) and array_key_exists('created_by', $thread)) {
+            $thread['url'] = HOME_URL . '/adm/forums/thread/' . $thread['id_thread'];
+            $thread['created_by_url'] = HOME_URL . '/membres/' . $thread['created_by'];
+            $thread['created_by_avatar'] = MEDIA_URL . '/membre/ca/' . $thread['created_by'] . '.jpg';
+        }
 
         $sql = "SELECT `id_message`, `id_thread`, `created_at`, `modified_at`, "
              . "`created_by`, `modified_by`, `text` "
@@ -179,7 +181,7 @@ class ForumPrive extends Forum
      *
      * @param int $id_contact id_contact
      *
-     * @return array
+     * @return array<string,bool>
      */
     public static function getSubscribedForums(int $id_contact): array
     {
@@ -201,12 +203,13 @@ class ForumPrive extends Forum
     }
 
     /**
-     * @param int   $id_contact id_contact
-     * @param array $ids_forum  ids_forum
+     * @param int           $id_contact id_contact
+     * @param array<string> $ids_forum  ids_forum
      *
      * @see addSubscriberToForum / delSubscriberToForum
+     * @return true
      */
-    public static function setSubscribedForums(int $id_contact, array $ids_forum)
+    public static function setSubscribedForums(int $id_contact, array $ids_forum): true
     {
         $db = DataBase::getInstance();
 
@@ -231,9 +234,9 @@ class ForumPrive extends Forum
      *
      * @param string $id_forum id_forum
      *
-     * @return array
+     * @return array<array<string,string>>
      */
-    public static function getSubscribers(string $id_forum)
+    public static function getSubscribers(string $id_forum): array
     {
         $db = DataBase::getInstance();
 

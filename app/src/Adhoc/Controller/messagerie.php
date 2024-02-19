@@ -41,7 +41,7 @@ final class Controller
         $inbox = Message::find([
             'id_to' => (int) $_SESSION['membre']->getId(),
             'del_to' => false,
-            'order_by'=> 'date',
+            'order_by' => 'date',
             'sort' => 'DESC',
         ]);
         $smarty->assign('inbox', $inbox);
@@ -49,7 +49,7 @@ final class Controller
         $outbox = Message::find([
             'id_from' => (int) $_SESSION['membre']->getId(),
             'del_from' => false,
-            'order_by'=> 'date',
+            'order_by' => 'date',
             'sort' => 'DESC',
         ]);
         $smarty->assign('outbox', $outbox);
@@ -85,7 +85,7 @@ final class Controller
         }
         $smarty->assign('msg', $msg);
 
-        $smarty->assign('pseudo_to', $msg->getMembre()->getPseudo());
+        $smarty->assign('pseudo_to', Membre::getInstance($msg->getIdTo())->getPseudo());
         $smarty->assign('id_to', $msg->getIdFrom());
         $smarty->assign('id_from', $_SESSION['membre']->getId());
 
@@ -165,17 +165,14 @@ final class Controller
 
         $msg = Message::getInstance((int) $id);
         if (($msg->getIdFrom() !== (int) $_SESSION['membre']->getId()) && ($msg->getIdTo() !== (int) $_SESSION['membre']->getId())) {
-            // sécu
-            throw new \Exception('message introuvable');
-            return ['status' => 'KO'];
+            return ['status' => 'KO']; // pas le droit d'effacer les messages des autres
         } else {
             if ($mode === 'from') {
                 $msg->setDelFrom(true);
             } elseif ($mode === 'to') {
                 $msg->setDelTo(true);
             } else {
-                throw new \Exception('unknown mode');
-                return ['status' => 'KO'];
+                return ['status' => 'KO']; // mode inconnu
             }
             $msg->save();
             return ['status' => 'OK'];

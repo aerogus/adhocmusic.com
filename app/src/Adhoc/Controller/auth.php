@@ -114,9 +114,9 @@ final class Controller
     /**
      * Page de déconnexion
      *
-     * @return ?string
+     * @return void
      */
-    public static function logout()
+    public static function logout(): void
     {
         // si bien identifié, destruction de la session
         if (!empty($_SESSION['membre'])) {
@@ -175,7 +175,7 @@ final class Controller
                         $membre->save();
                         $smarty->assign('new_password', $password_new_1); // DEBUG ONLY
                         Log::action(Log::ACTION_PASSWORD_CHANGED, $password_new_1);
-                        Email::send($membre->getEmail(), 'Mot de passe modifié', 'password-changed', ['pseudo' => $membre->getPseudo()]);
+                        Email::send($membre->getContact()->getEmail(), 'Mot de passe modifié', 'password-changed', ['pseudo' => $membre->getPseudo()]);
                         $smarty->assign('change_ok', true);
                     }
                 } else {
@@ -224,7 +224,7 @@ final class Controller
                         'new_password' => $new_password,
                     ];
 
-                    if (Email::send($membre->getEmail(), 'Perte du mot de passe', 'password-lost', $data)) {
+                    if (Email::send($membre->getContact()->getEmail(), 'Perte du mot de passe', 'password-lost', $data)) {
                         Log::action(Log::ACTION_PASSWORD_REQUESTED);
                         $smarty->assign('sent_ok', true);
                     } else {

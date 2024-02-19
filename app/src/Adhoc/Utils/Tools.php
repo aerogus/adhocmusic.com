@@ -232,9 +232,9 @@ class Tools
      *
      * @param int $type type
      *
-     * @return void
+     * @return true
      */
-    public static function auth(int $type): void
+    public static function auth(int $type): true
     {
         // non identifié
         if (empty($_SESSION['membre'])) {
@@ -253,6 +253,7 @@ class Tools
         }
 
         // identifié, droits ok
+        return true;
     }
 
     /**

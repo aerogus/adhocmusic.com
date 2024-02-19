@@ -257,7 +257,7 @@ final class Controller
      *
      * @param array<string,mixed> $data tableau des données
      *
-     * @return array<string,true>
+     * @return array<string,string>
      */
     private static function validateForm(array $data): array
     {

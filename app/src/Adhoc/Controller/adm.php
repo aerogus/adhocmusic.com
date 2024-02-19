@@ -576,7 +576,6 @@ final class Controller
                 break;
             default:
                 die();
-                break;
         }
 
         return $smarty->fetch('adm/appartient-a.tpl');

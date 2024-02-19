@@ -696,7 +696,7 @@ final class Controller
     }
 
     /**
-     * @return array
+     * @return array<\stdClass>
      */
     public static function getEventsByLieu(): array
     {
