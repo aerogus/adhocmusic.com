@@ -343,8 +343,10 @@ final class Controller
      * Ex: /r/XXX||YYY
      * avec XXX = url de redirection en base64
      * et   YYY = id_newsletter|id_contact en base64
+     *
+     * @return void
      */
-    public static function r()
+    public static function r(): void
     {
         $url = urldecode((string) Route::params('url'));
         list($url, $from) = explode('||', $url);
@@ -358,9 +360,9 @@ final class Controller
     /**
      * Routine de validation des données du formulaire
      *
-     * @param array $data tableau des données
+     * @param array<string,mixed> $data tableau des données
      *
-     * @return array<string,true>
+     * @return array<string,string>
      */
     private static function validateContactForm(array $data): array
     {

@@ -498,17 +498,14 @@ class AdHocSmarty extends \Smarty
      * @param mixed  $cache_id cache id to be used with this template
      * @param mixed  $compile_id compile id to be used with this template
      * @param object $parent next higher level of Smarty variables
-     * @param bool   $display
-     * @param bool   $merge_tpl_vars
-     * @param bool   $no_output_filter
      *
      * @return string
      */
-    public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null, $display = false, $merge_tpl_vars = true, $no_output_filter = false): string
+    public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null): string
     {
         // fil d'ariane
         $this->assign('trail', Trail::getInstance()->getPath());
 
-        return parent::fetch($template, $cache_id, $compile_id, $parent, $display, $merge_tpl_vars, $no_output_filter);
+        return parent::fetch($template, $cache_id, $compile_id, $parent);
     }
 }

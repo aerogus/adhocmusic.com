@@ -196,9 +196,9 @@ class CMS extends ObjectModel
     /**
      * @param ?string $alias alias
      *
-     * @return object
+     * @return static
      */
-    public function setAlias(?string $alias): object
+    public function setAlias(?string $alias): static
     {
         $alias = is_string($alias) ? trim($alias) : $alias;
 
@@ -213,9 +213,9 @@ class CMS extends ObjectModel
     /**
      * @param ?string $title title
      *
-     * @return object
+     * @return static
      */
-    public function setTitle(?string $title): object
+    public function setTitle(?string $title): static
     {
         $title = is_string($title) ? trim($title) : $title;
 
@@ -230,9 +230,9 @@ class CMS extends ObjectModel
     /**
      * @param string $created_at created_at
      *
-     * @return object
+     * @return static
      */
-    public function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): static
     {
         if ($this->created_at !== $created_at) {
             $this->created_at = $created_at;
@@ -243,9 +243,9 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setCreatedNow(): object
+    public function setCreatedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -260,9 +260,9 @@ class CMS extends ObjectModel
     /**
      * @param string $modified_at modified_at
      *
-     * @return object
+     * @return static
      */
-    public function setModifiedAt(string $modified_at): object
+    public function setModifiedAt(string $modified_at): static
     {
         if ($this->modified_at !== $modified_at) {
             $this->modified_at = $modified_at;
@@ -273,9 +273,9 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setModifiedNow(): object
+    public function setModifiedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -288,11 +288,11 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @param array $breadcrumb breadcrumb [{title:'', link: '', description: ''},{...}]
+     * @param array<\stdClass> $breadcrumb breadcrumb [{title:'', link: '', description: ''},{...}]
      *
-     * @return object
+     * @return static
      */
-    public function setBreadcrumb(array $breadcrumb): object
+    public function setBreadcrumb(array $breadcrumb): static
     {
         // TODO: à convertir en chaine
         if ($this->breadcrumb !== $breadcrumb) {
@@ -306,12 +306,10 @@ class CMS extends ObjectModel
     /**
      * @param string $content content
      *
-     * @return object
+     * @return static
      */
-    public function setContent(string $content): object
+    public function setContent(string $content): static
     {
-        $content = is_string($content) ? trim($content) : $content;
-
         if ($this->content !== $content) {
             $this->content = $content;
             $this->modified_fields['content'] = true;
@@ -323,9 +321,9 @@ class CMS extends ObjectModel
     /**
      * @param ?bool $online online
      *
-     * @return object
+     * @return static
      */
-    public function setOnline(?bool $online): object
+    public function setOnline(?bool $online): static
     {
         if ($this->online !== $online) {
             $this->online = $online;
@@ -338,9 +336,9 @@ class CMS extends ObjectModel
     /**
      * @param ?int $auth auth
      *
-     * @return object
+     * @return static
      */
-    public function setAuth(?int $auth): object
+    public function setAuth(?int $auth): static
     {
         if ($this->auth !== $auth) {
             $this->auth = $auth;
@@ -357,16 +355,16 @@ class CMS extends ObjectModel
      *
      * À surcharger dans les classes filles
      *
-     * @param array $params [
-     *                      'alias' => string,
-     *                      'online' => bool,
-     *                      'order_by' => string,
-     *                      'sort' => string,
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     * @param array<string,mixed> $params [
+     *                                'alias' => string,
+     *                                'online' => bool,
+     *                                'order_by' => string,
+     *                                'sort' => string,
+     *                                'start' => int,
+     *                                'limit' => int,
+     *                            ]
      *
-     * @return array
+     * @return array<static>
      */
     public static function find(array $params): array
     {
@@ -423,12 +421,10 @@ class CMS extends ObjectModel
     public static function getIdByAlias(string $alias): ?int
     {
         if (
-            $cmss = self::find(
-                [
-                    'alias' => $alias,
-                    'online' => true,
-                ]
-            )
+            $cmss = self::find([
+                'alias' => $alias,
+                'online' => true,
+            ])
         ) {
             return $cmss[0]->getIdCms();
         }

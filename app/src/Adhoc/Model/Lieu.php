@@ -47,24 +47,24 @@ class Lieu extends ObjectModel
     protected int $id_type = 0;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $name = '';
+    protected ?string $name = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $address = '';
+    protected ?string $address = null;
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_city = 0;
+    protected ?int $id_city = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $id_departement = '';
+    protected ?string $id_departement = null;
 
     /**
      * @var string
@@ -438,16 +438,6 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * Retourne la distance (à la position actuelle si renseignée)
-     *
-     * @return float
-     */
-    public function getDistance(): float
-    {
-        return $this->distance;
-    }
-
-    /**
      * Retourne l'url de la photo du lieu
      *
      * @return ?string
@@ -779,20 +769,20 @@ class Lieu extends ObjectModel
     /**
      * Retourne une collection d'objets "Lieu" répondant au(x) critère(s) donné(s)
      *
-     * @param array $params [
-     *                      'with_events' => bool,
-     *                      'online' => bool,
-     *                      'id_country' => string,
-     *                      'id_region' => string,
-     *                      'id_departement' => string,
-     *                      'id_city' => int,
-     *                      'order_by' => string,
-     *                      'sort' => string,
-     *                      'start' => int,
-     *                      'limit' => int,
-     *                      ]
+     * @param array<string,mixed> $params [
+     *                                'with_events' => bool,
+     *                                'online' => bool,
+     *                                'id_country' => string,
+     *                                'id_region' => string,
+     *                                'id_departement' => string,
+     *                                'id_city' => int,
+     *                                'order_by' => string,
+     *                                'sort' => string,
+     *                                'start' => int,
+     *                                'limit' => int,
+     *                            ]
      *
-     * @return array
+     * @return array<static>
      */
     public static function find(array $params): array
     {
@@ -873,7 +863,7 @@ class Lieu extends ObjectModel
      *
      * @param string $id_departement département
      *
-     * @return array
+     * @return array<string,array<static>>|array<static>
      */
     public static function getLieuxByDep(string $id_departement = null): array
     {
@@ -896,7 +886,7 @@ class Lieu extends ObjectModel
 
         // tri par nom de ville
         foreach (array_keys($tab) as $dep) {
-            usort($tab[$dep], ['Adhoc\Model\Lieu','sortLieuByCityName']);
+            usort($tab[$dep], ['Adhoc\Model\Lieu', 'sortLieuByCityName']);
         }
 
         if (!is_null($id_departement) && array_key_exists($id_departement, $tab)) {
@@ -951,15 +941,13 @@ class Lieu extends ObjectModel
     /**
      * Retourne les photos associées à ce lieu
      *
-     * @return array
+     * @return array<Photo>
      */
     public function getPhotos(): array
     {
-        return Photo::find(
-            [
-                'id_lieu' => $this->getIdLieu(),
-            ]
-        );
+        return Photo::find([
+            'id_lieu' => $this->getIdLieu(),
+        ]);
     }
 
     /**
@@ -973,15 +961,13 @@ class Lieu extends ObjectModel
     /**
      * Retourne les vidéos associées à ce lieu
      *
-     * @return array
+     * @return array<Video>
      */
     public function getVideos(): array
     {
-        return Video::find(
-            [
-                'id_lieu' => $this->getIdLieu(),
-            ]
-        );
+        return Video::find([
+            'id_lieu' => $this->getIdLieu(),
+        ]);
     }
 
     /**
@@ -995,15 +981,13 @@ class Lieu extends ObjectModel
     /**
      * Retourne les audios associés à ce lieu
      *
-     * @return array
+     * @return array<Audio>
      */
     public function getAudios(): array
     {
-        return Audio::find(
-            [
-                'id_lieu' => $this->getIdLieu(),
-            ]
-        );
+        return Audio::find([
+            'id_lieu' => $this->getIdLieu(),
+        ]);
     }
 
     /**
@@ -1017,23 +1001,21 @@ class Lieu extends ObjectModel
     /**
      * Retourne les événements rattachés au lieu
      *
-     * @return array
+     * @return array<Event>
      */
     public function getEvents(): array
     {
-        return Event::find(
-            [
-                'id_lieu' => $this->getIdLieu(),
-                'order_by' => 'date',
-                'sort' => 'DESC',
-            ]
-        );
+        return Event::find([
+            'id_lieu' => $this->getIdLieu(),
+            'order_by' => 'date',
+            'sort' => 'DESC',
+        ]);
     }
 
     /**
      * Retourne les types de lieux
      *
-     * @return array
+     * @return array<LieuType>
      */
     public static function getTypes(): array
     {
@@ -1056,8 +1038,9 @@ class Lieu extends ObjectModel
      * Procédure stockée MySQL pour le calcul de distances
      *
      * @todo debuguer car ca passe pas
+     * @return void
      */
-    public static function mysqlInitGeo()
+    public static function mysqlInitGeo(): void
     {
         $db = DataBase::getInstance();
 
@@ -1086,19 +1069,21 @@ END|
 DELIMITER ;
 EOT;
 
-        $sql = $db->query($sql);
+        $db->pdo->query($sql);
     }
 
     /**
      * Récupère les lieux autour d'un point et d'un rayon
      *
-     * @param array float ['lat']
-     *              float ['lng']
-     *              int ['distance'] (en mètres)
-     *              int ['limit']
-     *              string ['sort']
+     * @param array<string,mixed> $params[
+     *                                'lat' => float,
+     *                                'lng' => float,
+     *                                'distance' => int (en mètres),
+     *                                'limit' => int,
+     *                                'sort' => string,
+     *                            ]
      *
-     * @return array les infos du lieux et sa distance en km par rapport au point
+     * @return array<string,mixed> les infos du lieu et sa distance en km par rapport au point
      */
     public static function fetchLieuxByRadius(array $params): array
     {
@@ -1128,13 +1113,17 @@ EOT;
     /**
      * Récupère les lieux dans une zone rectangulaire (point NW et point SE)
      *
-     * @param array float ['lat']
-     *              float ['lng']
-     *              float ['lat_min']
-     *              float ['lat_max']
-     *              float ['lng_min']
-     *              float ['lng_max']
-     *              int ['limit']
+     * @param array<string,mixed> $params[
+     *                                'lat' => float,
+     *                                'lng' => float,
+     *                                'lat_min' => float,
+     *                                'lat_max' => float,
+     *                                'lng_min' => float,
+     *                                'lng_max' => float,
+     *                                'limit' => int,
+     *                            ]
+     *
+     * @return array<array<string,mixed>>
      */
     public static function fetchLieuxByBoundary(array $params): array
     {
@@ -1173,14 +1162,16 @@ EOT;
     /**
      * Récupère les lieux à partir de leur zone géographique administrative
      *
-     * @param array float ['lat']
-     *              float ['lng']
-     *              string ['id_country']
-     *              string ['id_region']
-     *              string ['id_departement']
-     *              int ['limit']
+     * @param array<string,mixed> $params[
+     *                                'lat' => float,
+     *                                'lng' => float,
+     *                                'id_country' => string,
+     *                                'id_region' => string,
+     *                                'id_departement'] => string,
+     *                                'limit' => int,
+     *                            ]
      *
-     * @return array
+     * @return array<array<string,mixed>>
      */
     public static function fetchLieuxByAdmin(array $params): array
     {

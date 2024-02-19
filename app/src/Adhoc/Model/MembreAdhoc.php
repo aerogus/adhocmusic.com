@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Adhoc\Model;
 
 use Adhoc\Utils\DataBase;
+use Adhoc\Utils\NotFoundException;
 use Adhoc\Utils\ObjectModel;
 
 /**
@@ -25,14 +26,14 @@ class MembreAdhoc extends ObjectModel
     protected static string $table = 'adhoc_membre_adhoc';
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $function = '';
+    protected ?string $function = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $birth_date = '';
+    protected ?string $birth_date = null;
 
     /**
      * @var bool
@@ -76,17 +77,17 @@ class MembreAdhoc extends ObjectModel
     /* début getters */
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getFunction(): string
+    public function getFunction(): ?string
     {
         return $this->function;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getBirthDate(): string
+    public function getBirthDate(): ?string
     {
         return $this->birth_date;
     }
@@ -114,13 +115,13 @@ class MembreAdhoc extends ObjectModel
     /**
      * @param string $function function
      *
-     * @return object
+     * @return static
      */
-    public function setFunction(string $function): object
+    public function setFunction(string $function): static
     {
         if ($this->function !== $function) {
             $this->function = $function;
-            $this->modified_fields['membre_adhoc']['function'] = true;
+            $this->modified_fields['function'] = true;
         }
 
         return $this;
@@ -129,13 +130,13 @@ class MembreAdhoc extends ObjectModel
     /**
      * @param string $birth_date birth_date
      *
-     * @return object
+     * @return static
      */
-    public function setBirthDate(string $birth_date): object
+    public function setBirthDate(string $birth_date): static
     {
         if ($this->birth_date !== $birth_date) {
             $this->birth_date = $birth_date;
-            $this->modified_fields['membre_adhoc']['function'] = true;
+            $this->modified_fields['function'] = true;
         }
 
         return $this;
@@ -144,13 +145,13 @@ class MembreAdhoc extends ObjectModel
     /**
      * @param bool $active active
      *
-     * @return object
+     * @return static
      */
-    public function setActive(bool $active): object
+    public function setActive(bool $active): static
     {
         if ($this->active !== $active) {
             $this->active = $active;
-            $this->modified_fields['membre_adhoc']['active'] = true;
+            $this->modified_fields['active'] = true;
         }
 
         return $this;
@@ -159,13 +160,13 @@ class MembreAdhoc extends ObjectModel
     /**
      * @param int $rank rang
      *
-     * @return object
+     * @return static
      */
-    public function setRank(int $rank): object
+    public function setRank(int $rank): static
     {
         if ($this->rank !== $rank) {
             $this->rank = $rank;
-            $this->modified_fields['membre_adhoc']['rank'] = true;
+            $this->modified_fields['rank'] = true;
         }
 
         return $this;
@@ -178,7 +179,9 @@ class MembreAdhoc extends ObjectModel
      *
      * @param bool $active membre actif ?
      *
-     * @return array
+     * @return array<string,mixed>
+     * 
+     * @deprecated implémenter une méthode find() + standard
      */
     public static function getStaff(bool $active = true): array
     {

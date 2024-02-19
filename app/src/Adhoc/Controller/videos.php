@@ -267,7 +267,7 @@ final class Controller
             $errors = self::validateVideoCreateForm($data);
             if (count($errors) === 0) {
                 $info = Video::parseStringForVideoUrl($data['code']);
-                $data['id_host'] = $info['id_host'];
+                $data['id_host'] = (int) $info['id_host'];
                 $data['reference'] = $info['reference'];
 
                 $video = (new Video())
@@ -538,7 +538,7 @@ final class Controller
     /**
      * Récupère des infos sur une vidéo
      *
-     * @return array
+     * @return array<string,mixed>
      */
     public static function getMeta(): array
     {

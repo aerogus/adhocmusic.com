@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Adhoc\Model;
 
 use Adhoc\Utils\DataBase;
+use Adhoc\Utils\NotFoundException;
 use Adhoc\Utils\ObjectModel;
 
 /**

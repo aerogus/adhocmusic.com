@@ -469,15 +469,17 @@ abstract class Media extends ObjectModel
     /**
      * Recherche des média en fonction de critères donnés
      *
-     * @param array ['groupe']    => "5"
-     *              ['lieu']      => "1"
-     *              ['event']     => "1"
-     *              ['type']      => "photo,audio,video"
-     *              ['sort']      => "date|random"
-     *              ['sens']      => "ASC"
-     *              ['debut']     => 0
-     *              ['limit']     => 10
-     *              ['split']     => false
+     * @param array<string,mixed> $params[
+     *                                'groupe' => "5"
+     *                                'lieu' => "1"
+     *                                'event' => "1"
+     *                                'type' => "photo,audio,video"
+     *                                'sort' => "date|random"
+     *                                'sens' => "ASC"
+     *                                'debut' => 0
+     *                                'limit' => 10
+     *                                'split' => false
+     *                            ]
      *
      * @return array<mixed>
      */

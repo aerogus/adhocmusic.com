@@ -29,10 +29,10 @@ final class Controller
         Trail::getInstance()
             ->addStep("Commentaires", '/comments');
 
-        $comments = Comment::getComments(
+        $comments = Comment::find(
             [
-                'sort' => 'id',
-                'sens' => 'DESC',
+                'order_by' => 'id',
+                'sort' => 'DESC',
             ]
         );
         $smarty->assign('comments', $comments);
@@ -67,10 +67,10 @@ final class Controller
      */
     public static function create(): string
     {
+        // log des trucs douteux
         $fp = fopen(ADHOC_ROOT_PATH . '/log/hack-comment.log', 'a');
         fwrite($fp, print_r($_GET, true) . "\n" . print_r($_POST, true) . "\n" . print_r($_SERVER, true));
         fclose($fp);
-        die('hi');
 
         $data = [
             'type'       => (string) Route::params('type'),

@@ -236,7 +236,7 @@ final class Controller
         if (isset($_GET['date'])) {
             $date = $_GET['date'];
         }
-        if (!(preg_match("/^(\d{4})-(\d{2})-(\d{2})$/", $date, $regs) && checkdate($regs[2], $regs[3], $regs[1]))) {
+        if (!(preg_match("/^(\d{4})-(\d{2})-(\d{2})$/", $date, $regs) && checkdate((int) $regs[2], (int) $regs[3], (int) $regs[1]))) {
             $year  = date('Y');
             $month = date('m');
             $day   = date('d');
@@ -351,6 +351,7 @@ final class Controller
 
                 if ($event->save()) {
                     $importFlyer = false;
+                    $tmpName = '';
                     if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
                         $importFlyer = true;
                         $tmpName = $_FILES['flyer']['tmp_name'];
@@ -550,6 +551,7 @@ final class Controller
                 $event->save();
 
                 $importFlyer = false;
+                $tmpName = '';
                 if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
                     $importFlyer = true;
                     $tmpName = $_FILES['flyer']['tmp_name'];

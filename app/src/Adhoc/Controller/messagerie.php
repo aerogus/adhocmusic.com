@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Adhoc\Controller;
 
 use Adhoc\Model\Membre;
+use Adhoc\Model\Message;
 use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Email;
@@ -37,23 +38,21 @@ final class Controller
 
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `p`.`id_pm` AS `id`, `m`.`pseudo`, `p`.`id_from`, `p`.`date`, `p`.`read_to`, `p`.`text` "
-             . "FROM `adhoc_messagerie` `p`, `adhoc_membre` `m` "
-             . "WHERE `p`.`id_from` = `m`.`id_contact` "
-             . "AND `p`.`id_to` = " . (int) $_SESSION['membre']->getId() . " "
-             . "AND `p`.`del_to` = FALSE "
-             . "ORDER BY `p`.`date` DESC";
+        $inbox = Message::find([
+            'id_to' => (int) $_SESSION['membre']->getId(),
+            'del_to' => false,
+            'order_by'=> 'date',
+            'sort' => 'DESC',
+        ]);
+        $smarty->assign('inbox', $inbox);
 
-        $smarty->assign('inbox', $db->queryWithFetch($sql));
-
-        $sql = "SELECT `p`.`id_pm` AS `id`, `m`.`pseudo`, `p`.`id_to`, `p`.`date`, `p`.`read_to`, `p`.`text` "
-             . "FROM `adhoc_messagerie` `p`, `adhoc_membre` `m` "
-             . "WHERE `p`.`id_to` = `m`.`id_contact` "
-             . "AND `p`.`id_from` = " . (int) $_SESSION['membre']->getId() . " "
-             . "AND `p`.`del_from` = FALSE "
-             . "ORDER BY `p`.`date` DESC";
-
-        $smarty->assign('outbox', $db->queryWithFetch($sql));
+        $outbox = Message::find([
+            'id_from' => (int) $_SESSION['membre']->getId(),
+            'del_from' => false,
+            'order_by'=> 'date',
+            'sort' => 'DESC',
+        ]);
+        $smarty->assign('outbox', $outbox);
 
         return $smarty->fetch('messagerie/index.tpl');
     }
@@ -78,25 +77,20 @@ final class Controller
 
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `m`.`pseudo`, `p`.`id_from`, `p`.`id_to`, `p`.`date`, `p`.`read_to`, `p`.`text` "
-             . "FROM `adhoc_messagerie` `p`, `adhoc_membre` `m` "
-             . "WHERE `p`.`id_from` = `m`.`id_contact` "
-             . "AND `p`.`id_pm` = " . (int) $id . " "
-             . "AND `p`.`del_to` = FALSE "
-             . "AND (`p`.`id_from` = " . (int) $_SESSION['membre']->getId() . " OR `p`.`id_to` = " . (int) $_SESSION['membre']->getId() . ")";
-
-        $msg = $db->queryWithFetchFirstRow($sql);
+        $msg = Message::getInstance($id);
+        if ($msg->getDelTo() === true) {
+            throw new \Exception('message effacé');
+        } elseif (($msg->getIdFrom() !== (int) $_SESSION['membre']->getId()) && ($msg->getIdTo() !== (int) $_SESSION['membre']->getId())) {
+            throw new \Exception('message introuvable');
+        }
         $smarty->assign('msg', $msg);
 
-        $smarty->assign('pseudo_to', $msg['pseudo']);
-        $smarty->assign('id_to', $msg['id_from']);
+        $smarty->assign('pseudo_to', $msg->getMembre()->getPseudo());
+        $smarty->assign('id_to', $msg->getIdFrom());
         $smarty->assign('id_from', $_SESSION['membre']->getId());
 
-        $sql = "UPDATE `adhoc_messagerie` "
-             . "SET `read_to` = 1 "
-             . "WHERE `id_pm` = " . (int) $id;
-
-        $db->query($sql);
+        $msg->setReadTo(true);
+        $msg->save();
 
         return $smarty->fetch('messagerie/read.tpl');
     }
@@ -123,11 +117,11 @@ final class Controller
 
             $db = DataBase::getInstance();
 
-            $sql = "INSERT INTO `adhoc_messagerie` "
-                 . "(`id_from`, `id_to`, `text`, `date`) "
-                 . "VALUES (" . (int) $_SESSION['membre']->getId() . ", " . (int) $to . ", '" . $text . "', NOW())";
-
-            $db->query($sql);
+            $msg = new Message();
+            $msg->setIdFrom((int) $_SESSION['membre']->getId());
+            $msg->setIdTo((int) $to);
+            $msg->setText($text);
+            $msg->save();
 
             $dest = Membre::getInstance((int) $to);
 
@@ -137,7 +131,7 @@ final class Controller
                 'text' => $text,
             ];
 
-            if (Email::send($dest->getEmail(), "Vous avez reçu un message privé", 'message-received', $data)) {
+            if (Email::send($dest->getContact()->getEmail(), "Vous avez reçu un message privé", 'message-received', $data)) {
                 Log::action(Log::ACTION_MESSAGE, (string) $to);
                 Tools::redirect('/messagerie/?sent=1');
             } else {
@@ -169,25 +163,22 @@ final class Controller
         $mode = (string) Route::params('mode');
         $id   = (int) Route::params('id');
 
-        switch ($mode) {
-            case "from":
-                $champ = "del_from";
-                break;
-            case "to":
-                $champ = "del_to";
-                break;
-            default:
+        $msg = Message::getInstance((int) $id);
+        if (($msg->getIdFrom() !== (int) $_SESSION['membre']->getId()) && ($msg->getIdTo() !== (int) $_SESSION['membre']->getId())) {
+            // sécu
+            throw new \Exception('message introuvable');
+            return ['status' => 'KO'];
+        } else {
+            if ($mode === 'from') {
+                $msg->setDelFrom(true);
+            } elseif ($mode === 'to') {
+                $msg->setDelTo(true);
+            } else {
+                throw new \Exception('unknown mode');
                 return ['status' => 'KO'];
+            }
+            $msg->save();
+            return ['status' => 'OK'];
         }
-
-        $sql = "UPDATE `adhoc_messagerie` "
-             . "SET `" . $champ . "` = TRUE "
-             . "WHERE `id_pm` = " . (int) $id . " "
-             . "AND (`id_from` = " . (int) $_SESSION['membre']->getId() . " "
-             . "OR `id_to` = " . (int) $_SESSION['membre']->getId() . ")";
-
-        $db->query($sql);
-
-        return ['status' => 'OK'];
     }
 }

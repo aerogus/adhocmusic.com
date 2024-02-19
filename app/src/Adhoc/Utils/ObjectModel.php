@@ -330,7 +330,7 @@ abstract class ObjectModel
     /**
      * Sauve l'objet en base
      *
-     * @return bool|int true si la sauvegarde est ok, false sinon, int si autoincrement
+     * @return bool true si la sauvegarde est ok, false sinon
      */
     public function save(): bool
     {
@@ -490,6 +490,18 @@ abstract class ObjectModel
                 return false;
             }
         }
+    }
+
+    /**
+     * @return int|false
+     */
+    public function getLastInsertId(): int|false
+    {
+        if (is_string(static::getDbPk()) && (static::$all_fields[static::getDbPk()] === 'int')) {
+            $db = DataBase::getInstance();
+            return (int) $db->pdo->lastInsertId();
+        }
+        return false;
     }
 
     /**

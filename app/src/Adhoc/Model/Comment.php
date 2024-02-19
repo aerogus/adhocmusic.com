@@ -30,19 +30,19 @@ class Comment extends ObjectModel
     protected static string $table = 'adhoc_comment';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_comment = 0;
+    protected ?int $id_comment = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $type = '';
+    protected ?string $type = null;
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_content = 0;
+    protected ?int $id_content = null;
 
     /**
      * @var ?string
@@ -55,9 +55,9 @@ class Comment extends ObjectModel
     protected ?string $modified_at = null;
 
     /**
-     * @var bool
+     * @var ?bool
      */
-    protected bool $online = false;
+    protected ?bool $online = null;
 
     /**
      * @var ?int
@@ -65,14 +65,14 @@ class Comment extends ObjectModel
     protected ?int $id_contact = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $text = '';
+    protected ?string $text = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $pseudo = '';
+    protected ?string $pseudo = null;
 
     /**
      * @var ?string
@@ -478,7 +478,7 @@ class Comment extends ObjectModel
                 $title = $audio->getName();
                 $url = $audio->getUrl();
                 $membre = Membre::getInstance($audio->getIdContact());
-                $emails[] = $membre->getEmail();
+                $emails[] = $membre->getContact()->getEmail();
 
                 // -> si lien avec groupe, contacts des groupes
                 if ($audio->getIdGroupe()) {
@@ -497,7 +497,7 @@ class Comment extends ObjectModel
                 $title = $video->getName();
                 $url = $video->getUrl();
                 $membre = Membre::getInstance($video->getIdContact());
-                $emails[] = $membre->getEmail();
+                $emails[] = $membre->getContact()->getEmail();
 
                 // -> si lien avec groupe, contacts des groupes
                 if ($video->getIdGroupe()) {
@@ -520,14 +520,9 @@ class Comment extends ObjectModel
                 $ids_contact = Alerting::getIdsContactByLieu($lieu->getId());
                 foreach ($ids_contact as $id_contact) {
                     $membre = Membre::getInstance($id_contact);
-                    $emails[] = $membre->getEmail();
+                    $emails[] = $membre->getContact()->getEmail();
                 }
                 */
-
-                // -> email contact du lieu
-                if ($lieu->getEmail()) {
-                    $emails[] = $lieu->getEmail();
-                }
                 break;
 
             case 'p': // photo
@@ -542,14 +537,14 @@ class Comment extends ObjectModel
                     $subs = Alerting::getIdsContactByEvent($photo->getIdEvent());
                     foreach ($subs as $sub) {
                         $membre = Membre::getInstance($sub['id_contact']);
-                        $emails[] = $membre->getEmail();
+                        $emails[] = $membre->getContact()->getEmail();
                     }
                     */
                 }
 
                 // -> uploadeur de la photo
                 $membre = Membre::getInstance($photo->getIdContact());
-                $emails[] = $membre->getEmail();
+                $emails[] = $membre->getContact()->getEmail();
 
                 // -> si lien avec groupe, contacts des groupes
                 if ($photo->getIdGroupe()) {
@@ -572,7 +567,7 @@ class Comment extends ObjectModel
                 $ids_contact = Alerting::getIdsContactByEvent($event->getId());
                 foreach ($ids_contact as $id_contact) {
                     $membre = Membre::getInstance($id_contact);
-                    $emails[] = $membre->getEmail();
+                    $emails[] = $membre->getContact()->getEmail();
                 }
                 */
 
@@ -590,22 +585,16 @@ class Comment extends ObjectModel
 
                 // -> créateur de l'événement
                 $membre = Membre::getInstance($event->getIdContact());
-                $emails[] = $membre->getEmail();
-
-                // -> email contact du lieu
-                $lieu = Lieu::getInstance($event->getIdLieu());
-                if ($lieu->getEmail()) {
-                    $emails[] = $lieu->getEmail();
-                }
+                $emails[] = $membre->getContact()->getEmail();
                 break;
         }
 
         $comments = Comment::find([
             'type'       => $this->getType(),
             'id_content' => $this->getIdContent(),
-            'sort'       => 'created_at',
-            'sens'       => 'ASC',
             'online'     => true,
+            'order_by'   => 'created_at',
+            'sort'       => 'ASC',
         ]);
 
         // -> gens ayant déjà posté sur ce contenu
@@ -638,10 +627,5 @@ class Comment extends ObjectModel
                 }
             }
         }
-    }
-
-    public static function getComments(): void
-    {
-        // non implémenté
     }
 }

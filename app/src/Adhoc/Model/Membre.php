@@ -12,6 +12,7 @@ use Adhoc\Model\Reference\WorldRegion;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Email;
+use Adhoc\Utils\NotFoundException;
 use Adhoc\Utils\ObjectModel;
 
 /**
@@ -34,7 +35,7 @@ class Membre extends ObjectModel
     /**
      * Tableau des types de membre
      *
-     * @var array
+     * @var array<int,string>
      */
     protected static $types_membre = [
         self::TYPE_STANDARD  => "Standard",
@@ -149,15 +150,10 @@ class Membre extends ObjectModel
      */
     protected ?string $visited_at = null;
 
-    /**
-     * @var array
-     */
-    protected array $types = [];
-
     // getters helpers avec mini mise en cache
 
     /**
-     * @var ?array
+     * @var ?array<Groupe>
      */
     protected ?array $groupes = null;
 
@@ -499,7 +495,18 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @return array
+     * @return ?Contact
+     */
+    public function getContact(): ?Contact
+    {
+        if (is_null($this->contact)) {
+            $this->contact = Contact::getInstance($this->getIdContact());
+        }
+        return $this->contact;
+    }
+
+    /**
+     * @return array<Groupe>
      */
     public function getGroupes(): array
     {
@@ -883,22 +890,23 @@ class Membre extends ObjectModel
     /**
      * Recherche des membres en fonction de critères donnés
      *
-     * @param array ['id']            => "3"
-     *              ['pseudo']        => "aerog%"
-     *              ['last_name']     => "sez%"
-     *              ['first_name']    => "gui%"
-     *              ['email']         => "email%"
-     *              ['sort']          => "id_contact|last_name|first_name|random|email|created_at|modified_at"
-     *                                   "visited_at|pseudo|lastnl"
-     *              ['sens']          => "ASC|DESC"
-     *              ['debut']         => 0
-     *              ['limit']         => 10
+     * @param array<string,mixed> $params[
+     *                                'id' => "3",
+     *                                'pseudo' => "aerog%",
+     *                                'last_name' => "sez%",
+     *                                'first_name' => "gui%",
+     *                                'email' => "email%",
+     *                                'sort' => "id_contact|last_name|first_name|random|email|created_at|modified_at|visited_at|pseudo|lastnl",
+     *                                'sens' => "ASC|DESC",
+     *                                'debut' => 0,
+     *                                'limit' => 10,
+     *                            ]
      *
-     * @return array
+     * @return array<string,mixed>|array<array<string,mixed>>
      * @deprecated
      * @todo remplacer par Membre::find()
      */
-    public static function getMembres(array $params = [])
+    public static function getMembres(array $params = []): array
     {
         $pseudo = null;
         if (isset($params['pseudo'])) {
@@ -1190,7 +1198,7 @@ class Membre extends ObjectModel
     /**
      * Retourne les types de membres
      *
-     * @return array
+     * @return array<int,string>
      */
     public static function getTypesMembre(): array
     {
@@ -1240,16 +1248,16 @@ class Membre extends ObjectModel
     /**
      * Retourne une collection d'objets "Membre" répondant au(x) critère(s) donné(s)
      *
-     * @param array $params [
-     *     'id_groupe' => int,
-     *     'id_country' => string,
-     *     'order_by' => string,
-     *     'sort' => string,
-     *     'start' => int,
-     *     'limit' => int,
-     * ]
+     * @param array<string,mixed> $params [
+     *                                'id_groupe' => int,
+     *                                'id_country' => string,
+     *                                'order_by' => string,
+     *                                'sort' => string,
+     *                                'start' => int,
+     *                                'limit' => int,
+     *                            ]
      *
-     * @return array
+     * @return array<static>
      */
     public static function find(array $params): array
     {
