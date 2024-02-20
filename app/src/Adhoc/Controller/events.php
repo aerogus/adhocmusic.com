@@ -731,7 +731,7 @@ final class Controller
     /**
      * Validation du formulaire de création event
      *
-     * @param array $data tableau des données
+     * @param array<string,mixed> $data tableau des données
      *
      * @return array<string,true>
      */
@@ -747,7 +747,7 @@ final class Controller
     /**
      * Validation du formulaire de modification event
      *
-     * @param array $data tableau des données
+     * @param array<string,mixed> $data tableau des données
      *
      * @return array<string,true>
      */

@@ -255,7 +255,7 @@ final class Controller
     /**
      * Retourne si un email est déjà présente en base
      *
-     * @return array
+     * @return array<string,string>
      */
     public static function checkEmail(): array
     {
@@ -277,7 +277,7 @@ final class Controller
     /**
      * Retourne la disponibilité d'un pseudo
      *
-     * @return array
+     * @return array<string,string>
      */
     public static function checkPseudo(): array
     {

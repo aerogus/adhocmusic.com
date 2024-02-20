@@ -242,10 +242,8 @@ final class Controller
 
                 $smarty->assign('updated_ok', true);
             } else {
-                if (!empty($errors)) {
-                    foreach ($errors as $k => $v) {
-                        $smarty->assign('error_' . $k, $v);
-                    }
+                foreach ($errors as $k => $v) {
+                    $smarty->assign('error_' . $k, $v);
                 }
             }
         }
@@ -325,7 +323,7 @@ final class Controller
     /**
      * Retourne un tableau de pseudos vérifiant un pattern
      *
-     * @return array
+     * @return array<array<string,mixed>>
      */
     public static function autocompletePseudo(): array
     {
@@ -404,9 +402,9 @@ final class Controller
     /**
      * Validation du formulaire de création membre
      *
-     * @param array $data tableau des données
+     * @param array<string,mixed> $data tableau des données
      *
-     * @return array<string,true>
+     * @return array<string,mixed>
      */
     private static function validateMemberCreateForm(array $data): array
     {
@@ -446,7 +444,7 @@ final class Controller
     /**
      * Validation du formulaire de modification membre
      *
-     * @param array $data tableau des données
+     * @param array<string,mixed> $data tableau des données
      *
      * @return array<string,true>
      */

@@ -309,7 +309,7 @@ class Newsletter extends ObjectModel
     protected function loadFromDb(): bool
     {
         if (!parent::loadFromDb()) {
-            throw new \Exception('id_newsletter introuvable');
+            throw new \Exception('newsletter introuvable');
         }
 
         return true;

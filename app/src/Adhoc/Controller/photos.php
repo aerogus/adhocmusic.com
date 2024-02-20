@@ -486,7 +486,7 @@ final class Controller
     /**
      * Validation du formulaire de création photo
      *
-     * @param array $data tableau des données
+     * @param array<string,mixed> $data tableau des données
      *
      * @return array<string,string>
      */

@@ -549,8 +549,8 @@ final class Controller
                 'status' => 'OK',
                 'data' => $info,
             ];
-            $out['data']['thumb'] = Video::getRemoteThumbnail($out['data']['id_host'], $out['data']['reference']);
-            $out['data']['title'] = Video::getRemoteTitle($out['data']['id_host'], $out['data']['reference']);
+            $out['data']['thumb'] = Video::getRemoteThumbnail((int) $out['data']['id_host'], $out['data']['reference']);
+            $out['data']['title'] = Video::getRemoteTitle((int) $out['data']['id_host'], $out['data']['reference']);
         } else {
             $out = [
                 'status' => 'KO',
@@ -563,7 +563,7 @@ final class Controller
     /**
      * Validation du formulaire de modification vidéo
      *
-     * @param array $data tableau des données
+     * @param array<string,mixed> $data tableau des données
      *
      * @return array<string,string>
      */
@@ -586,7 +586,7 @@ final class Controller
     /**
      * Validation du formulaire de modification vidéo
      *
-     * @param array $data tableau des données
+     * @param array<string,mixed> $data tableau des données
      *
      * @return array<string,string>
      */

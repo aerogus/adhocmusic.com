@@ -509,7 +509,6 @@ final class Controller
                         'limit'    => $limit,
                     ]
                 );
-                break;
 
             case 'boundary':
                 $lat_min = (float) Route::params('lat_min');
@@ -541,7 +540,6 @@ final class Controller
                         'limit'   => $limit,
                     ]
                 );
-                break;
 
             case 'admin':
                 $id_country     = (string) Route::params('id_country');
@@ -557,18 +555,16 @@ final class Controller
                         'limit'          => $limit,
                     ]
                 );
-                break;
 
             default:
                 return [];
-                break;
         }
     }
 
     /**
      * Validation du formulaire de création lieu
      *
-     * @param array $data tableau des données
+     * @param array<string,mixed> $data tableau des données
      *
      * @return array<string,true>
      */
@@ -586,7 +582,7 @@ final class Controller
     /**
      * Validation du formulaire de modification membre
      *
-     * @param array $data tableau des données
+     * @param array<string,mixed> $data tableau des données
      *
      * @return array<string,true>
      */

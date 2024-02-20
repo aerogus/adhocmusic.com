@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Adhoc\Model;
 
 use Adhoc\Model\Reference\Style;
+use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Image;
@@ -582,15 +583,6 @@ class Event extends ObjectModel
             $sql .= " ";
         }
 
-        if (isset($params['with_audio'])) {
-            $subSql = "SELECT COUNT(*) FROM `adhoc_audio` WHERE `id_event` = " . (int) $this->getIdEvent() . " ";
-            if ($ids_groupe = $db->queryWithFetchFirstFields($subSql)) {
-                $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
-            } else {
-                return $objs;
-            }
-        }
-
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
@@ -811,16 +803,14 @@ class Event extends ObjectModel
     /**
      * Retourne le tableau des styles pour un événement
      *
-     * @return array
+     * @return array<Style>
      */
     public function getStyles(): array
     {
-        return Style::find(
-            [
-                'id_event' => $this->getIdEvent(),
-                'sort' => 'name',
-            ]
-        );
+        return Style::find([
+            'id_event' => $this->getIdEvent(),
+            'sort' => 'name',
+        ]);
     }
 
     /**
@@ -946,16 +936,14 @@ class Event extends ObjectModel
     /**
      * Retourne le tableau des structures pour un événement
      *
-     * @return array
+     * @return array<Structure>
      */
     public function getStructures(): array
     {
-        return Structure::find(
-            [
-                'id_event' => $this->getIdEvent(),
-                'order_by' => 'name',
-            ]
-        );
+        return Structure::find([
+            'id_event' => $this->getIdEvent(),
+            'order_by' => 'name',
+        ]);
     }
 
     /**
@@ -982,7 +970,7 @@ class Event extends ObjectModel
      * @param int $year  année
      * @param int $month mois
      *
-     * @return array
+     * @return array<string,int>
      */
     public static function getEventsForAMonth(int $year, int $month)
     {
@@ -1006,7 +994,7 @@ class Event extends ObjectModel
 
         $tab = [];
         foreach ($rows as $row) {
-            $tab[$row['date']] = $row['nb_events'];
+            $tab[$row['date']] = (int) $row['nb_events'];
         }
 
         return $tab;
@@ -1015,7 +1003,7 @@ class Event extends ObjectModel
     /**
      * Retourne les photos associées à cet événement
      *
-     * @return array
+     * @return array<Photo>
      */
     public function getPhotos(): array
     {
@@ -1030,7 +1018,7 @@ class Event extends ObjectModel
     /**
      * Retourne les vidéos associées à cet événement
      *
-     * @return array
+     * @return array<Video>
      */
     public function getVideos(): array
     {
@@ -1045,7 +1033,7 @@ class Event extends ObjectModel
     /**
      * Retourne les audios associés à cet événement
      *
-     * @return array
+     * @return array<Audio>
      */
     public function getAudios(): array
     {
@@ -1060,7 +1048,7 @@ class Event extends ObjectModel
     /**
      * Retourne les concerts ad'hoc par saison (juillet Y -> aout Y+1)
      *
-     * @return array
+     * @return array<string,array<Event>>
      */
     public static function getAdHocEventsBySeason(): array
     {

@@ -17,6 +17,21 @@ define('FORUM_NB_MESSAGES_PER_PAGE', 50);
 abstract class Forum
 {
     /**
+     * @var string
+     */
+    protected static string $db_table_forum_info = 'adhoc_forum_info';
+
+    /**
+     * @var string
+     */
+    protected static string $db_table_forum_thread = 'adhoc_forum_thread';
+
+    /**
+     * @var string
+     */
+    protected static string $db_table_forum_message = 'adhoc_forum_message';
+
+    /**
      * Chemin des smileys
      *
      * @var string
@@ -152,7 +167,7 @@ abstract class Forum
     /**
      * Retourne le listing des forums
      *
-     * @return array
+     * @return array<array<string,string>>
      */
     public static function getForums(): array
     {
@@ -181,7 +196,7 @@ abstract class Forum
 
         $sql = "SELECT `id_forum` "
              . "FROM `" . static::$db_table_forum_thread . "` "
-             . "WHERE `id_thread` = " . (int) $id_thread;
+             . "WHERE `id_thread` = " . $id_thread;
 
         return $db->queryWithFetchFirstField($sql);
     }
@@ -189,13 +204,15 @@ abstract class Forum
     /**
      * Ajoute un message
      *
-     * @param array $params int ['id_contact']
-     *                      str ['text']
-     *                      str ['id_forum']
-     *                      int ['id_thread'] (opt.)
-     *                      str ['subject'] (opt.)
+     * @param array<string,mixed> $params[
+     *                                'id_contact' => int,
+     *                                'text' => string,
+     *                                'id_forum' => string,
+     *                                'id_thread' => int, (opt.)
+     *                                'subject' => string, (opt.)
+     *                            ]
      *
-     * @return array
+     * @return array<string,int>
      */
     public static function addMessage(array $params)
     {
@@ -265,7 +282,13 @@ abstract class Forum
     /**
      * Édite un message
      *
-     * @param array $params params
+     * @param array<string,mixed> $params[
+     *                                'id_message' => int,
+     *                                'id_thread' => int,
+     *                                'id_contact' => int,
+     *                                'text' => string,
+     *                                'id_forum' => string,
+     *                            ]
      *
      * @return bool
      */
@@ -301,7 +324,12 @@ abstract class Forum
     /**
      * Efface un message
      *
-     * @param array $params params
+     * @param array<string,mixed> $params[
+     *                                'id_message' => int,
+     *                                'id_thread' => int,
+     *                                'id_contact' => int,
+     *                                'id_forum' => string,
+     *                            ]
      *
      * @return bool
      */
@@ -346,7 +374,7 @@ abstract class Forum
 
         $sql = "UPDATE `" . static::$db_table_forum_thread . "` "
              . "SET `nb_views` = `nb_views` + 1 "
-             . "WHERE `id_thread` = " . (int) $id_thread;
+             . "WHERE `id_thread` = " . $id_thread;
 
         $db->query($sql);
 
@@ -358,9 +386,9 @@ abstract class Forum
      *
      * @param string $id_forum id_forum
      *
-     * @return array ou int
+     * @return array<string,int>|int
      */
-    public static function getThreadsCount(string $id_forum = null)
+    public static function getThreadsCount(string $id_forum = null): array|int
     {
         $db = DataBase::getInstance();
 
@@ -373,11 +401,11 @@ abstract class Forum
 
         $tab = [];
         foreach ($res as $_res) {
-            $tab[$_res['id_forum']] = $_res['nb_threads'];
+            $tab[$_res['id_forum']] = (int) $_res['nb_threads'];
         }
 
         if (!is_null($id_forum) && !empty($id_forum)) {
-            return (int) $tab[$id_forum];
+            return $tab[$id_forum];
         }
         return $tab;
     }
@@ -387,9 +415,9 @@ abstract class Forum
      *
      * @param string $id_forum id_forum
      *
-     * @return array ou int
+     * @return array<string,int>|int
      */
-    public static function getMessagesCount(string $id_forum = null)
+    public static function getMessagesCount(string $id_forum = null): array|int
     {
         $db = DataBase::getInstance();
 
@@ -402,19 +430,21 @@ abstract class Forum
 
         $tab = [];
         foreach ($res as $_res) {
-            $tab[$_res['id_forum']] = $_res['nb_messages'];
+            $tab[$_res['id_forum']] = (int) $_res['nb_messages'];
         }
 
         if (!is_null($id_forum)) {
-            return (int) $tab[$id_forum];
+            return $tab[$id_forum];
         }
         return $tab;
     }
 
     /**
-     * @param array $params int ['id_thread']
-     *                      int ['id_contact']
-     *                      str ['text']
+     * @param array<string,mixed> $params[
+     *                                'id_thread' => int,
+     *                                'id_contact' => int,
+     *                                'text' => string,
+     *                            ]
      *
      * @return int $id_message
      */
@@ -441,9 +471,11 @@ abstract class Forum
      * Met à jour la table message
      * après update d'un message ?
      *
-     * @param array $params ['id_message']
-     *                      ['id_contact']
-     *                      ['text']
+     * @param array<string,mixed> $params[
+     *                                'id_message' => int,
+     *                                'id_contact' => int,
+     *                                'text' => string,
+     *                            ]
      *
      * @return bool
      */
@@ -465,7 +497,9 @@ abstract class Forum
     /**
      * Efface un message
      *
-     * @param array $params ['id_message']
+     * @param array<string,int> $params[
+     *                              'id_message' => int,
+     *                          ]
      *
      * @return bool
      */
@@ -484,9 +518,11 @@ abstract class Forum
     /**
      * Création d'un nouveau thread
      *
-     * @param array $params ['id_forum']
-     *                      ['id_contact']
-     *                      ['subject']
+     * @param array<string,mixed> $params[
+     *                                'id_forum' => string,
+     *                                'id_contact' => int,
+     *                                'subject' => string,
+     *                            ]
      *
      * @return int
      */
@@ -510,9 +546,11 @@ abstract class Forum
     /**
      * Met à jour la table thread
      *
-     * @param array $params ['action'] msgadd|msgedit|msgdel
-     *                      ['id_contact']
-     *                      ['id_thread']
+     * @param array<string,mixed> $params[
+     *                                'action' => string, (msgadd|msgedit|msgdel)
+     *                                'id_contact' => int,
+     *                                'id_thread' => int,
+     *                            ]
      *
      * @return bool
      */
@@ -539,7 +577,9 @@ abstract class Forum
     /**
      * Efface un thread
      *
-     * @param array $params params
+     * @param array<string,int> $params[
+     *                                'id_thread' => int,
+     *                          ]
      *
      * @return bool
      */
@@ -559,10 +599,12 @@ abstract class Forum
      * Met à jour la table forum
      * après insertion d'un message
      *
-     * @param array ['msgaction'] msgadd|msgedit|msgdel
-     *              ['threadaction'] threadadd|threadedit|threaddel
-     *              ['id_contact']
-     *              ['id_forum']
+     * @param array<string,mixed> $params[
+     *                                'msgaction' => string, (msgadd|msgedit|msgdel)
+     *                                'threadaction' => string, (threadadd|threadedit|threaddel)
+     *                                'id_contact' => int,
+     *                                'id_forum' => string,
+     *                            ]
      *
      * @return bool
      */
