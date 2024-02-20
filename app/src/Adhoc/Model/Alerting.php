@@ -28,16 +28,16 @@ class Alerting extends ObjectModel
     protected static string $table = 'adhoc_alerting';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_alerting = 0;
+    protected ?int $id_alerting = null;
 
     /**
      * Identifiant membre
      *
-     * @var int
+     * @var ?int
      */
-    protected int $id_contact = 0;
+    protected ?int $id_contact = null;
 
     /**
      * Date de création
@@ -49,9 +49,9 @@ class Alerting extends ObjectModel
     /**
      * Actif ?
      *
-     * @var bool
+     * @var ?bool
      */
-    protected bool $active = false;
+    protected ?bool $active = null;
 
     /**
      * @var ?int
@@ -86,17 +86,17 @@ class Alerting extends ObjectModel
     /* début getters */
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdAlerting(): int
+    public function getIdAlerting(): ?int
     {
         return $this->id_alerting;
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdContact(): int
+    public function getIdContact(): ?int
     {
         return $this->id_contact;
     }
@@ -124,9 +124,9 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @return bool
+     * @return ?bool
      */
-    public function getActive(): bool
+    public function getActive(): ?bool
     {
         return $this->active;
     }
@@ -162,9 +162,9 @@ class Alerting extends ObjectModel
     /**
      * @param int $id_contact id_contact
      *
-     * @return object
+     * @return static
      */
-    public function setIdContact(int $id_contact): object
+    public function setIdContact(int $id_contact): static
     {
         if ($this->id_contact !== $id_contact) {
             $this->id_contact = $id_contact;
@@ -177,9 +177,9 @@ class Alerting extends ObjectModel
     /**
      * @param string $created_at created_at
      *
-     * @return object
+     * @return static
      */
-    public function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): static
     {
         if ($this->created_at !== $created_at) {
             $this->created_at = $created_at;
@@ -192,9 +192,9 @@ class Alerting extends ObjectModel
     /**
      * @param bool $active active
      *
-     * @return object
+     * @return static
      */
-    public function setActive(bool $active): object
+    public function setActive(bool $active): static
     {
         if ($this->active !== $active) {
             $this->active = $active;
@@ -207,9 +207,9 @@ class Alerting extends ObjectModel
     /**
      * @param int $id_lieu id_lieu
      *
-     * @return object
+     * @return static
      */
-    public function setIdLieu(int $id_lieu = null): object
+    public function setIdLieu(int $id_lieu = null): static
     {
         if ($this->id_lieu !== $id_lieu) {
             $this->id_lieu = $id_lieu;
@@ -222,9 +222,9 @@ class Alerting extends ObjectModel
     /**
      * @param int $id_groupe id_groupe
      *
-     * @return object
+     * @return static
      */
-    public function setIdGroupe(int $id_groupe = null): object
+    public function setIdGroupe(int $id_groupe = null): static
     {
         if ($this->id_groupe !== $id_groupe) {
             $this->id_groupe = $id_groupe;
@@ -237,9 +237,9 @@ class Alerting extends ObjectModel
     /**
      * @param int $id_event id_event
      *
-     * @return object
+     * @return static
      */
-    public function setIdEvent(int $id_event = null): object
+    public function setIdEvent(int $id_event = null): static
     {
         if ($this->id_event !== $id_event) {
             $this->id_event = $id_event;
@@ -254,9 +254,9 @@ class Alerting extends ObjectModel
     /**
      * Défini la date de modification
      *
-     * @return object
+     * @return static
      */
-    public function setCreatedNow(): object
+    public function setCreatedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 

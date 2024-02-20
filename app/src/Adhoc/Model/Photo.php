@@ -113,9 +113,9 @@ class Photo extends Media
     /**
      * @param string $credits credits
      *
-     * @return object
+     * @return static
      */
-    public function setCredits(string $credits): object
+    public function setCredits(string $credits): static
     {
         if ($this->credits !== $credits) {
             $this->credits = $credits;

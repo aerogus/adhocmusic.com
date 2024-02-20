@@ -197,9 +197,9 @@ class Newsletter extends ObjectModel
      *
      * @param int $id_contact id_contact
      *
-     * @return object
+     * @return static
      */
-    public function setIdContact(int $id_contact): object
+    public function setIdContact(int $id_contact): static
     {
         $this->id_contact = $id_contact;
 
@@ -212,9 +212,9 @@ class Newsletter extends ObjectModel
      * @param string $key clé
      * @param string $val valeur
      *
-     * @return object
+     * @return static
      */
-    public function setTplVar($key, $val): object
+    public function setTplVar($key, $val): static
     {
         $this->tpl_vars[$key] = $val;
 
@@ -226,9 +226,9 @@ class Newsletter extends ObjectModel
      *
      * @param string $html HTML
      *
-     * @return object
+     * @return static
      */
-    public function setHtml(string $html): object
+    public function setHtml(string $html): static
     {
         if ($this->html !== $html) {
             $this->html = $html;
@@ -243,9 +243,9 @@ class Newsletter extends ObjectModel
      *
      * @param string $content contenu source MJML
      *
-     * @return object
+     * @return static
      */
-    public function setContent(string $content): object
+    public function setContent(string $content): static
     {
         if ($this->content !== $content) {
             $this->content = $content;
@@ -280,9 +280,9 @@ class Newsletter extends ObjectModel
      *
      * @param string $title title
      *
-     * @return object
+     * @return static
      */
-    public function setTitle(string $title): object
+    public function setTitle(string $title): static
     {
         if ($this->title !== $title) {
             $this->title = $title;

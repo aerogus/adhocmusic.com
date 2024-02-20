@@ -70,9 +70,9 @@ class GroupeStyle extends ObjectModel
     /**
      * @param int $id_groupe
      *
-     * @return object
+     * @return static
      */
-    public function setIdGroupe(int $id_groupe): object
+    public function setIdGroupe(int $id_groupe): static
     {
         if ($this->id_groupe !== $id_groupe) {
             $this->id_groupe = $id_groupe;
@@ -85,9 +85,9 @@ class GroupeStyle extends ObjectModel
     /**
      * @param int $id_style
      *
-     * @return object
+     * @return static
      */
-    public function setIdStyle(int $id_style): object
+    public function setIdStyle(int $id_style): static
     {
         if ($this->id_style !== $id_style) {
             $this->id_style = $id_style;

@@ -48,44 +48,44 @@ class Groupe extends ObjectModel
     protected static string $table = 'adhoc_groupe';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_groupe = 0;
+    protected ?int $id_groupe = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $alias = '';
+    protected ?string $alias = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $name = '';
+    protected ?string $name = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $style = '';
+    protected ?string $style = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $influences = '';
+    protected ?string $influences = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $lineup = '';
+    protected ?string $lineup = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $mini_text = '';
+    protected ?string $mini_text = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $text = '';
+    protected ?string $text = null;
 
     /**
      * @var ?string
@@ -113,9 +113,9 @@ class Groupe extends ObjectModel
     protected ?string $id_departement = null;
 
     /**
-     * @var bool
+     * @var ?bool
      */
-    protected bool $online = false;
+    protected ?bool $online = null;
 
     /**
      * @var ?string
@@ -143,9 +143,9 @@ class Groupe extends ObjectModel
     protected ?string $comment = null;
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $etat = 0;
+    protected ?int $etat = null;
 
     /**
      * Liste des attributs de l'objet
@@ -200,9 +200,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'id_groupe
      *
-     * @return int
+     * @return ?int
      */
-    public function getIdGroupe(): int
+    public function getIdGroupe(): ?int
     {
         return $this->id_groupe;
     }
@@ -210,9 +210,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'alias
      *
-     * @return string
+     * @return ?string
      */
-    public function getAlias(): string
+    public function getAlias(): ?string
     {
         return $this->alias;
     }
@@ -220,9 +220,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne le nom du groupe
      *
-     * @return string
+     * @return ?string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -230,9 +230,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne le style du groupe (champ libre)
      *
-     * @return string
+     * @return ?string
      */
-    public function getStyle(): string
+    public function getStyle(): ?string
     {
         return $this->style;
     }
@@ -240,9 +240,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne les influences du groupe
      *
-     * @return string
+     * @return ?string
      */
-    public function getInfluences(): string
+    public function getInfluences(): ?string
     {
         return $this->influences;
     }
@@ -250,9 +250,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne le lineup du groupe
      *
-     * @return string
+     * @return ?string
      */
-    public function getLineup(): string
+    public function getLineup(): ?string
     {
         return $this->lineup;
     }
@@ -260,9 +260,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne le mini texte de présentation
      *
-     * @return string
+     * @return ?string
      */
-    public function getMiniText(): string
+    public function getMiniText(): ?string
     {
         return $this->mini_text;
     }
@@ -270,9 +270,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne le texte de présentation
      *
-     * @return string
+     * @return ?string
      */
-    public function getText(): string
+    public function getText(): ?string
     {
         return $this->text;
     }
@@ -336,9 +336,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne le département
      *
-     * @return string
+     * @return ?string
      */
-    public function getIdDepartement(): string
+    public function getIdDepartement(): ?string
     {
         return $this->id_departement;
     }
@@ -346,9 +346,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne si un groupe doit être affiché
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getOnline(): bool
+    public function getOnline(): ?bool
     {
         return $this->online;
     }
@@ -434,9 +434,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne le "mot AD'HOC"
      *
-     * @return string
+     * @return ?string
      */
-    public function getComment(): string
+    public function getComment(): ?string
     {
         return $this->comment;
     }
@@ -444,9 +444,9 @@ class Groupe extends ObjectModel
     /**
      * Retourne l'état du groupe
      *
-     * @return int
+     * @return ?int
      */
-    public function getEtat(): int
+    public function getEtat(): ?int
     {
         return $this->etat;
     }
@@ -537,9 +537,9 @@ class Groupe extends ObjectModel
     /**
      * @param string $alias alias
      *
-     * @return object
+     * @return static
      */
-    public function setAlias(string $alias): object
+    public function setAlias(string $alias): static
     {
         if ($this->alias !== $alias) {
             $this->alias = $alias;
@@ -552,9 +552,9 @@ class Groupe extends ObjectModel
     /**
      * @param string $name nom
      *
-     * @return object
+     * @return static
      */
-    public function setName(string $name): object
+    public function setName(string $name): static
     {
         if ($this->name !== $name) {
             $this->name = $name;
@@ -568,9 +568,9 @@ class Groupe extends ObjectModel
     /**
      * @param string $style style libre
      *
-     * @return object
+     * @return static
      */
-    public function setStyle(string $style): object
+    public function setStyle(string $style): static
     {
         if ($this->style !== $style) {
             $this->style = $style;
@@ -583,9 +583,9 @@ class Groupe extends ObjectModel
     /**
      * @param string $influences influences
      *
-     * @return object
+     * @return static
      */
-    public function setInfluences(string $influences): object
+    public function setInfluences(string $influences): static
     {
         if ($this->influences !== $influences) {
             $this->influences = $influences;
@@ -598,9 +598,9 @@ class Groupe extends ObjectModel
     /**
      * @param string $lineup lineup (formation)
      *
-     * @return object
+     * @return static
      */
-    public function setLineup(string $lineup): object
+    public function setLineup(string $lineup): static
     {
         if ($this->lineup !== $lineup) {
             $this->lineup = $lineup;
@@ -613,9 +613,9 @@ class Groupe extends ObjectModel
     /**
      * @param string $mini_text mini texte
      *
-     * @return object
+     * @return static
      */
-    public function setMiniText(string $mini_text): object
+    public function setMiniText(string $mini_text): static
     {
         if ($this->mini_text !== $mini_text) {
             $this->mini_text = $mini_text;
@@ -628,9 +628,9 @@ class Groupe extends ObjectModel
     /**
      * @param string $text texte
      *
-     * @return object
+     * @return static
      */
-    public function setText(string $text): object
+    public function setText(string $text): static
     {
         if ($this->text !== $text) {
             $this->text = $text;
@@ -641,11 +641,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $site url du site
+     * @param ?string $site url du site
      *
-     * @return object
+     * @return static
      */
-    public function setSite(?string $site): object
+    public function setSite(?string $site): static
     {
         if ($this->site !== $site) {
             $this->site = $site;
@@ -656,11 +656,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $myspaceId myspaceId
+     * @param ?string $myspaceId myspaceId
      *
-     * @return object
+     * @return static
      */
-    public function setMyspaceId(?string $myspaceId): object
+    public function setMyspaceId(?string $myspaceId): static
     {
         $val = trim($myspaceId);
         $val = str_replace('http://', '', $val);
@@ -675,11 +675,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $facebook_page_id page facebook (int 64bits en fait)
+     * @param ?string $facebook_page_id page facebook (int 64bits en fait)
      *
-     * @return object
+     * @return static
      */
-    public function setFacebookPageId(?string $facebook_page_id): object
+    public function setFacebookPageId(?string $facebook_page_id): static
     {
         if ($this->facebook_page_id !== $facebook_page_id) {
             $this->facebook_page_id = $facebook_page_id;
@@ -690,11 +690,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $twitter_id twitter_id
+     * @param ?string $twitter_id twitter_id
      *
-     * @return object
+     * @return static
      */
-    public function setTwitterId(?string $twitter_id): object
+    public function setTwitterId(?string $twitter_id): static
     {
         if ($this->twitter_id !== $twitter_id) {
             $this->twitter_id = $twitter_id;
@@ -705,11 +705,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string $id_departement id_departement
+     * @param ?string $id_departement id_departement
      *
-     * @return object
+     * @return static
      */
-    public function setIdDepartement(string $id_departement): object
+    public function setIdDepartement(?string $id_departement): static
     {
         if ($this->id_departement !== $id_departement) {
             $this->id_departement = $id_departement;
@@ -722,9 +722,9 @@ class Groupe extends ObjectModel
     /**
      * @param bool $online online
      *
-     * @return object
+     * @return static
      */
-    public function setOnline(bool $online): object
+    public function setOnline(bool $online): static
     {
         if ($this->online !== $online) {
             $this->online = $online;
@@ -735,11 +735,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $created_at created_at
+     * @param ?string $created_at created_at
      *
-     * @return object
+     * @return static
      */
-    public function setCreatedAt(?string $created_at): object
+    public function setCreatedAt(?string $created_at): static
     {
         if ($this->created_at !== $created_at) {
             $this->created_at = $created_at;
@@ -750,9 +750,9 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setCreatedNow(): object
+    public function setCreatedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -765,9 +765,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $modified_at modified_at
+     * @param ?string $modified_at modified_at
+     *
+     * @return static
      */
-    public function setModifiedAt(?string $modified_at): object
+    public function setModifiedAt(?string $modified_at): static
     {
         if ($this->modified_at !== $modified_at) {
             $this->modified_at = $modified_at;
@@ -778,9 +780,9 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setModifiedNow(): object
+    public function setModifiedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -793,11 +795,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $datdeb date début
+     * @param ?string $datdeb date début
      *
-     * @return object
+     * @return static
      */
-    public function setDatdeb(?string $datdeb): object
+    public function setDatdeb(?string $datdeb): static
     {
         if ($this->datdeb !== $datdeb) {
             $this->datdeb = $datdeb;
@@ -808,11 +810,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string|null $datfin date fin
+     * @param ?string $datfin date fin
      *
-     * @return object
+     * @return static
      */
-    public function setDatfin(?string $datfin): object
+    public function setDatfin(?string $datfin): static
     {
         if ($this->datfin !== $datfin) {
             $this->datfin = $datfin;
@@ -825,9 +827,9 @@ class Groupe extends ObjectModel
     /**
      * @param string $comment comment
      *
-     * @return object
+     * @return static
      */
-    public function setComment(string $comment): object
+    public function setComment(string $comment): static
     {
         if ($this->comment !== $comment) {
             $this->comment = $comment;
@@ -840,9 +842,9 @@ class Groupe extends ObjectModel
     /**
      * @param int $etat etat
      *
-     * @return object
+     * @return static
      */
-    public function setEtat(int $etat): object
+    public function setEtat(int $etat): static
     {
         if ($this->etat !== $etat) {
             $this->etat = $etat;

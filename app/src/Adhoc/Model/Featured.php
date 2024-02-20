@@ -31,39 +31,39 @@ class Featured extends ObjectModel
     protected static string $table = 'adhoc_featured';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_featured = 0;
+    protected ?int $id_featured = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $datdeb = '';
+    protected ?string $datdeb = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $datfin = '';
+    protected ?string $datfin = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $title = '';
+    protected ?string $title = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $description = '';
+    protected ?string $description = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $url = '';
+    protected ?string $url = null;
 
     /**
-     * @var bool
+     * @var ?bool
      */
-    protected bool $online = false;
+    protected ?bool $online = false;
 
     /**
      * @var ?string
@@ -111,57 +111,57 @@ class Featured extends ObjectModel
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getDatDeb(): string
+    public function getDatDeb(): ?string
     {
         return $this->datdeb;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getDatFin(): string
+    public function getDatFin(): ?string
     {
         return $this->datfin;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->url;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getImage(): string
+    public function getImage(): ?string
     {
         return self::getBaseUrl() . '/' . (string) $this->getId() . '.jpg';
     }
 
     /**
-     * @return bool
+     * @return ?bool
      */
-    public function getOnline(): bool
+    public function getOnline(): ?bool
     {
         return $this->online;
     }
@@ -217,9 +217,9 @@ class Featured extends ObjectModel
     /**
      * @param string $datdeb date format YYYY-MM-DD HH:II:SS
      *
-     * @return object
+     * @return static
      */
-    public function setDatDeb(string $datdeb): object
+    public function setDatDeb(string $datdeb): static
     {
         if (!Date::isDateTimeOk($datdeb)) {
             throw new \Exception('datdeb invalide');
@@ -236,9 +236,9 @@ class Featured extends ObjectModel
     /**
      * @param string $datfin YYYY-MM-DD HH:II:SS
      *
-     * @return object
+     * @return static
      */
-    public function setDatFin(string $datfin): object
+    public function setDatFin(string $datfin): static
     {
         if (!Date::isDateTimeOk($datfin)) {
             throw new \Exception('datfin invalide');
@@ -255,9 +255,9 @@ class Featured extends ObjectModel
     /**
      * @param string $title titre
      *
-     * @return object
+     * @return static
      */
-    public function setTitle(string $title): object
+    public function setTitle(string $title): static
     {
         $title = trim($title);
 
@@ -272,9 +272,9 @@ class Featured extends ObjectModel
     /**
      * @param string $description description
      *
-     * @return object
+     * @return static
      */
-    public function setDescription(string $description): object
+    public function setDescription(string $description): static
     {
         $description = trim($description);
 
@@ -289,9 +289,9 @@ class Featured extends ObjectModel
     /**
      * @param string $url lien
      *
-     * @return object
+     * @return static
      */
-    public function setUrl(string $url): object
+    public function setUrl(string $url): static
     {
         $url = trim($url);
 
@@ -306,9 +306,9 @@ class Featured extends ObjectModel
     /**
      * @param bool $online online
      *
-     * @return object
+     * @return static
      */
-    public function setOnline(bool $online): object
+    public function setOnline(bool $online): static
     {
         if ($this->online !== $online) {
             $this->online = $online;
@@ -320,9 +320,9 @@ class Featured extends ObjectModel
     /**
      * @param string $created_at created_at
      *
-     * @return object
+     * @return static
      */
-    public function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): static
     {
         if ($this->created_at !== $created_at) {
             $this->created_at = $created_at;
@@ -333,9 +333,9 @@ class Featured extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setCreatedNow(): object
+    public function setCreatedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -350,9 +350,9 @@ class Featured extends ObjectModel
     /**
      * @param string $modified_at modified_at
      *
-     * @return object
+     * @return static
      */
-    public function setModifiedAt(string $modified_at): object
+    public function setModifiedAt(string $modified_at): static
     {
         if ($this->modified_at !== $modified_at) {
             $this->modified_at = $modified_at;
@@ -363,9 +363,9 @@ class Featured extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setModifiedNow(): object
+    public function setModifiedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 

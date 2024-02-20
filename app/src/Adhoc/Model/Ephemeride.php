@@ -62,7 +62,8 @@ class Ephemeride
              . "AND e.id_lieu = 1 "
              . "ORDER BY MONTH(e.`date`) ASC, DAY(e.`date`) ASC, e.`date` ASC";
 
-        $rows = $db->queryWithFetch($sql);
+        $stmt = $db->pdo->query($sql);
+        $rows = $stmt->fetchAll();
 
         $data = [];
         foreach ($rows as $row) {

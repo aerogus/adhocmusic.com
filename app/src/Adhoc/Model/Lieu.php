@@ -227,9 +227,9 @@ class Lieu extends ObjectModel
     /**
      * Retourne la ville
      *
-     * @return object
+     * @return City
      */
-    public function getCity(): object
+    public function getCity(): City
     {
         return City::getInstance($this->getIdCity());
     }
@@ -247,9 +247,9 @@ class Lieu extends ObjectModel
     /**
      * Retourne l'objet département
      *
-     * @return object
+     * @return Departement
      */
-    public function getDepartement(): object
+    public function getDepartement(): Departement
     {
         return Departement::getInstance($this->getIdDepartement());
     }
@@ -267,9 +267,9 @@ class Lieu extends ObjectModel
     /**
      * Retourne l'objet région
      *
-     * @return object
+     * @return WorldRegion
      */
-    public function getRegion(): object
+    public function getRegion(): WorldRegion
     {
         return WorldRegion::getInstance(
             [
@@ -292,9 +292,9 @@ class Lieu extends ObjectModel
     /**
      * Retourne l'objet country
      *
-     * @return object
+     * @return WorldCountry
      */
-    public function getCountry(): object
+    public function getCountry(): WorldCountry
     {
         return WorldCountry::getInstance($this->getIdCountry());
     }
@@ -456,9 +456,9 @@ class Lieu extends ObjectModel
      *
      * @param int $id_type id_type
      *
-     * @return object
+     * @return static
      */
-    public function setIdType(int $id_type): object
+    public function setIdType(int $id_type): static
     {
         if ($this->id_type !== $id_type) {
             $this->id_type = $id_type;
@@ -473,9 +473,9 @@ class Lieu extends ObjectModel
      *
      * @param string $name name
      *
-     * @return object
+     * @return static
      */
-    public function setName(string $name): object
+    public function setName(string $name): static
     {
         if ($this->name !== $name) {
             $this->name = $name;
@@ -490,9 +490,9 @@ class Lieu extends ObjectModel
      *
      * @param string $address adresse
      *
-     * @return object
+     * @return static
      */
-    public function setAddress(string $address): object
+    public function setAddress(string $address): static
     {
         if ($this->address !== $address) {
             $this->address = $address;
@@ -507,9 +507,9 @@ class Lieu extends ObjectModel
      *
      * @param int $id_city id_city
      *
-     * @return object
+     * @return static
      */
-    public function setIdCity(int $id_city): object
+    public function setIdCity(int $id_city): static
     {
         if ($this->id_city !== $id_city) {
             $this->id_city = $id_city;
@@ -524,9 +524,9 @@ class Lieu extends ObjectModel
      *
      * @param string $id_departement id_departement
      *
-     * @return object
+     * @return static
      */
-    public function setIdDepartement(string $id_departement): object
+    public function setIdDepartement(string $id_departement): static
     {
         if (is_numeric($id_departement)) {
             $id_departement = str_pad($id_departement, 2, '0', STR_PAD_LEFT);
@@ -547,9 +547,9 @@ class Lieu extends ObjectModel
      *
      * @param string $id_region id_region
      *
-     * @return object
+     * @return static
      */
-    public function setIdRegion(string $id_region): object
+    public function setIdRegion(string $id_region): static
     {
         if ($this->id_region !== $id_region) {
             $this->id_region = $id_region;
@@ -564,9 +564,9 @@ class Lieu extends ObjectModel
      *
      * @param string $id_country id_country
      *
-     * @return object
+     * @return static
      */
-    public function setIdCountry(string $id_country): object
+    public function setIdCountry(string $id_country): static
     {
         if ($this->id_country !== $id_country) {
             $this->id_country = $id_country;
@@ -581,9 +581,9 @@ class Lieu extends ObjectModel
      *
      * @param string $text texte
      *
-     * @return object
+     * @return static
      */
-    public function setText(string $text): object
+    public function setText(string $text): static
     {
         if ($this->text !== $text) {
             $this->text = $text;
@@ -598,9 +598,9 @@ class Lieu extends ObjectModel
      *
      * @param string $site site
      *
-     * @return object
+     * @return static
      */
-    public function setSite(string $site): object
+    public function setSite(string $site): static
     {
         if ($this->site !== $site) {
             $this->site = $site;
@@ -615,9 +615,9 @@ class Lieu extends ObjectModel
      *
      * @param int $id_contact id_contact
      *
-     * @return object
+     * @return static
      */
-    public function setIdContact(int $id_contact): object
+    public function setIdContact(int $id_contact): static
     {
         if ($this->id_contact !== $id_contact) {
             $this->id_contact = $id_contact;
@@ -632,9 +632,9 @@ class Lieu extends ObjectModel
      *
      * @param float $lat latitude
      *
-     * @return object
+     * @return static
      */
-    public function setLat(float $lat): object
+    public function setLat(float $lat): static
     {
         if ($this->lat !== $lat) {
             $this->lat = $lat;
@@ -649,9 +649,9 @@ class Lieu extends ObjectModel
      *
      * @param float $lng longitude
      *
-     * @return object
+     * @return static
      */
-    public function setLng(float $lng): object
+    public function setLng(float $lng): static
     {
         if ($this->lng !== $lng) {
             $this->lng = $lng;
@@ -666,9 +666,9 @@ class Lieu extends ObjectModel
      *
      * @param string $created_at created_at
      *
-     * @return object
+     * @return static
      */
-    public function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): static
     {
         if ($this->created_at !== $created_at) {
             $this->created_at = $created_at;
@@ -681,9 +681,9 @@ class Lieu extends ObjectModel
     /**
      * Set la date de création à now
      *
-     * @return object
+     * @return static
      */
-    public function setCreatedNow(): object
+    public function setCreatedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -700,9 +700,9 @@ class Lieu extends ObjectModel
      *
      * @param string $modified_at modified_at
      *
-     * @return object
+     * @return static
      */
-    public function setModifiedAt(string $modified_at): object
+    public function setModifiedAt(string $modified_at): static
     {
         if ($this->modified_at !== $modified_at) {
             $this->modified_at = $modified_at;
@@ -715,9 +715,9 @@ class Lieu extends ObjectModel
     /**
      * Set la date de modification à now
      *
-     * @return object
+     * @return static
      */
-    public function setModifiedNow(): object
+    public function setModifiedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -734,9 +734,9 @@ class Lieu extends ObjectModel
      *
      * @param bool $online online
      *
-     * @return object
+     * @return static
      */
-    public function setOnline(bool $online): object
+    public function setOnline(bool $online): static
     {
         if ($this->online !== $online) {
             $this->online = $online;

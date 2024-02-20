@@ -26,9 +26,9 @@ class CMS extends ObjectModel
     protected static string $table = 'adhoc_cms';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_cms = 0;
+    protected ?int $id_cms = null;
 
     /**
      * @var ?string

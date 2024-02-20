@@ -261,7 +261,7 @@ final class Controller
                                 ->setMaxHeight($confPhoto['max_height'])
                                 ->setDestFile(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg')
                                 ->write();
-                            Log::action(Log::ACTION_PHOTO_CREATE, $photo->getIdPhoto());
+                            Log::action(Log::ACTION_PHOTO_CREATE, (string) $photo->getIdPhoto());
 
                             // les générations des thumbs à faire en asynchrone
                             foreach ($confPhoto['thumb_width'] as $maxWidth) {

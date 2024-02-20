@@ -122,25 +122,30 @@ class Comment extends ObjectModel
     /* début getters */
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getFullType(): string
+    public function getFullType(): ?string
     {
+        if (is_null($this->getType())) {
+            return null;
+        } elseif(!array_key_exists($this->getType(), self::$types)) {
+            return null;
+        }
         return self::$types[$this->type];
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdContent(): int
+    public function getIdContent(): ?int
     {
         return $this->id_content;
     }
@@ -157,7 +162,7 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @return int
+     * @return ?int
      */
     public function getCreatedAtTs(): ?int
     {
@@ -179,7 +184,7 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @return int
+     * @return ?int
      */
     public function getModifiedAtTs(): ?int
     {
@@ -190,9 +195,9 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @return bool
+     * @return ?bool
      */
-    public function getOnline(): bool
+    public function getOnline(): ?bool
     {
         return $this->online;
     }
@@ -206,9 +211,9 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getText(): string
+    public function getText(): ?string
     {
         return $this->text;
     }
@@ -260,12 +265,10 @@ class Comment extends ObjectModel
     /**
      * @param string $type type
      *
-     * @return object
+     * @return static
      */
-    public function setType(string $type): object
+    public function setType(string $type): static
     {
-        $type = trim($type);
-
         if ($this->type !== $type) {
             $this->type = $type;
             $this->modified_fields['type'] = true;
@@ -277,9 +280,9 @@ class Comment extends ObjectModel
     /**
      * @param int $id_content id_content
      *
-     * @return object
+     * @return static
      */
-    public function setIdContent(int $id_content): object
+    public function setIdContent(int $id_content): static
     {
         if ($this->id_content !== $id_content) {
             $this->id_content = $id_content;
@@ -292,9 +295,9 @@ class Comment extends ObjectModel
     /**
      * @param string $created_at created_at
      *
-     * @return object
+     * @return static
      */
-    public function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): static
     {
         if ($this->created_at !== $created_at) {
             $this->created_at = $created_at;
@@ -305,9 +308,9 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setCreatedNow(): object
+    public function setCreatedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -322,9 +325,9 @@ class Comment extends ObjectModel
     /**
      * @param string $modified_at modified_at
      *
-     * @return object
+     * @return static
      */
-    public function setModifiedAt(string $modified_at): object
+    public function setModifiedAt(string $modified_at): static
     {
         if ($this->modified_at !== $modified_at) {
             $this->modified_at = $modified_at;
@@ -335,9 +338,9 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setModifiedNow(): object
+    public function setModifiedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -352,9 +355,9 @@ class Comment extends ObjectModel
     /**
      * @param bool $online online
      *
-     * @return object
+     * @return static
      */
-    public function setOnline(bool $online): object
+    public function setOnline(bool $online): static
     {
         if ($this->online !== $online) {
             $this->online = $online;
@@ -367,9 +370,9 @@ class Comment extends ObjectModel
     /**
      * @param ?int $id_contact id_contact
      *
-     * @return object
+     * @return static
      */
-    public function setIdContact(?int $id_contact): object
+    public function setIdContact(?int $id_contact): static
     {
         if ($this->id_contact !== $id_contact) {
             $this->id_contact = $id_contact;
@@ -382,9 +385,9 @@ class Comment extends ObjectModel
     /**
      * @param string $pseudo pseudo
      *
-     * @return object
+     * @return static
      */
-    public function setPseudo(string $pseudo): object
+    public function setPseudo(string $pseudo): static
     {
         $pseudo = trim($pseudo);
 
@@ -399,9 +402,9 @@ class Comment extends ObjectModel
     /**
      * @param ?string $email email
      *
-     * @return object
+     * @return static
      */
-    public function setEmail(?string $email): object
+    public function setEmail(?string $email): static
     {
         $email = is_string($email) ? trim($email) : $email;
 
@@ -416,9 +419,9 @@ class Comment extends ObjectModel
     /**
      * @param string $text text
      *
-     * @return object
+     * @return static
      */
-    public function setText(string $text): object
+    public function setText(string $text): static
     {
         $text = trim($text);
 

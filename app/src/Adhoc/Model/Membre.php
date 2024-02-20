@@ -573,9 +573,9 @@ class Membre extends ObjectModel
     /**
      * @param string $pseudo pseudo
      *
-     * @return object
+     * @return static
      */
-    public function setPseudo(string $pseudo): object
+    public function setPseudo(string $pseudo): static
     {
         if ($this->pseudo !== $pseudo) {
             $this->pseudo = $pseudo;
@@ -588,9 +588,9 @@ class Membre extends ObjectModel
     /**
      * @param string $password password
      *
-     * @return object
+     * @return static
      */
-    public function setPassword(string $password): object
+    public function setPassword(string $password): static
     {
         if ($this->password !== $password) {
             $this->password = $password;
@@ -601,11 +601,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param string|null $last_name last_name
+     * @param ?string $last_name last_name
      *
-     * @return object
+     * @return static
      */
-    public function setLastName(?string $last_name): object
+    public function setLastName(?string $last_name): static
     {
         if ($this->last_name !== $last_name) {
             $this->last_name = $last_name;
@@ -616,11 +616,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param string|null $first_name first_name
+     * @param ?string $first_name first_name
      *
-     * @return object
+     * @return static
      */
-    public function setFirstName(?string $first_name): object
+    public function setFirstName(?string $first_name): static
     {
         if ($this->first_name !== $first_name) {
             $this->first_name = $first_name;
@@ -631,11 +631,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param string|null $address adresse
+     * @param ?string $address adresse
      *
-     * @return object
+     * @return static
      */
-    public function setAddress(?string $address): object
+    public function setAddress(?string $address): static
     {
         if ($this->address !== $address) {
             $this->address = $address;
@@ -646,11 +646,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param int|null $id_city id_city
+     * @param ?int $id_city id_city
      *
-     * @return object
+     * @return static
      */
-    public function setIdCity(?int $id_city): object
+    public function setIdCity(?int $id_city): static
     {
         if ($this->id_city !== $id_city) {
             $this->id_city = $id_city;
@@ -661,11 +661,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param string|null $id_departement id_departement
+     * @param ?string $id_departement id_departement
      *
-     * @return object
+     * @return static
      */
-    public function setIdDepartement(?string $id_departement): object
+    public function setIdDepartement(?string $id_departement): static
     {
         if ($this->id_departement !== $id_departement) {
             $this->id_departement = $id_departement;
@@ -676,11 +676,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param string|null $id_region id_region
+     * @param ?string $id_region id_region
      *
-     * @return object
+     * @return static
      */
-    public function setIdRegion(?string $id_region): object
+    public function setIdRegion(?string $id_region): static
     {
         if ($this->id_region !== $id_region) {
             $this->id_region = $id_region;
@@ -691,11 +691,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param string|null $id_country id_country
+     * @param ?string $id_country id_country
      *
-     * @return object
+     * @return static
      */
-    public function setIdCountry(?string $id_country): object
+    public function setIdCountry(?string $id_country): static
     {
         if ($this->id_country !== $id_country) {
             $this->id_country = $id_country;
@@ -706,11 +706,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param string|null $tel téléphone
+     * @param ?string $tel téléphone
      *
-     * @return object
+     * @return static
      */
-    public function setTel(?string $tel): object
+    public function setTel(?string $tel): static
     {
         if ($this->tel !== $tel) {
             $this->tel = $tel;
@@ -721,11 +721,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param string|null $port port
+     * @param ?string $port port
      *
-     * @return object
+     * @return static
      */
-    public function setPort(?string $port): object
+    public function setPort(?string $port): static
     {
         if ($this->port !== $port) {
             $this->port = $port;
@@ -736,11 +736,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param string|null $site site
+     * @param ?string $site site
      *
-     * @return object
+     * @return static
      */
-    public function setSite(?string $site): object
+    public function setSite(?string $site): static
     {
         if ($this->site !== $site) {
             $this->site = $site;
@@ -751,11 +751,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param string|null $text texte
+     * @param ?string $text texte
      *
-     * @return object
+     * @return static
      */
-    public function setText(?string $text): object
+    public function setText(?string $text): static
     {
         if ($this->text !== $text) {
             $this->text = $text;
@@ -766,11 +766,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param bool $mailing mailing
+     * @param ?bool $mailing mailing
      *
-     * @return object
+     * @return static
      */
-    public function setMailing(bool $mailing): object
+    public function setMailing(?bool $mailing): static
     {
         if ($this->mailing !== $mailing) {
             $this->mailing = $mailing;
@@ -781,11 +781,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param int $level level
+     * @param ?int $level level
      *
-     * @return object
+     * @return static
      */
-    public function setLevel(int $level): object
+    public function setLevel(?int $level): static
     {
         if ($this->level !== $level) {
             $this->level = $level;
@@ -798,9 +798,9 @@ class Membre extends ObjectModel
     /**
      * @param string $created_at date de création "YYYY-MM-DD HH:II:SS"
      *
-     * @return object
+     * @return static
      */
-    public function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): static
     {
         if ($this->created_at !== $created_at) {
             $this->created_at = $created_at;
@@ -811,9 +811,9 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setCreatedNow(): object
+    public function setCreatedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -826,11 +826,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param string|null $modified_at date de modification "YYYY-MM-DD HH:II:SS"
+     * @param ?string $modified_at date de modification "YYYY-MM-DD HH:II:SS"
      *
-     * @return object
+     * @return static
      */
-    public function setModifiedAt(?string $modified_at): object
+    public function setModifiedAt(?string $modified_at): static
     {
         if ($this->modified_at !== $modified_at) {
             $this->modified_at = $modified_at;
@@ -841,9 +841,9 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setModifiedNow(): object
+    public function setModifiedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -856,11 +856,11 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param string|null $visited_at date de dernière connexion "YYYY-MM-DD HH:II:SS"
+     * @param ?string $visited_at date de dernière connexion "YYYY-MM-DD HH:II:SS"
      *
-     * @return object
+     * @return static
      */
-    public function setVisitedAt(?string $visited_at): object
+    public function setVisitedAt(?string $visited_at): static
     {
         if ($this->visited_at !== $visited_at) {
             $this->visited_at = $visited_at;
@@ -871,9 +871,9 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setVisitedNow(): object
+    public function setVisitedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -1021,7 +1021,7 @@ class Membre extends ObjectModel
     protected function loadFromDb(): bool
     {
         if (!parent::loadFromDb()) {
-            throw new NotFoundException('membre inconnue');
+            throw new NotFoundException('membre inconnu');
         }
 
         return true;

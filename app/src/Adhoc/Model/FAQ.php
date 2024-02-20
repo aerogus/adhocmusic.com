@@ -32,24 +32,24 @@ class FAQ extends ObjectModel
     protected ?int $id_faq = null;
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_category = 0;
+    protected ?int $id_category = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $question = '';
+    protected ?string $question = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $answer = '';
+    protected ?string $answer = null;
 
     /**
-     * @var bool
+     * @var ?bool
      */
-    protected bool $online = false;
+    protected ?bool $online = null;
 
     /**
      * @var ?string
@@ -79,49 +79,49 @@ class FAQ extends ObjectModel
     /* début getters */
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdFAQ(): int
+    public function getIdFAQ(): ?int
     {
         return $this->id_faq;
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdCategory(): int
+    public function getIdCategory(): ?int
     {
         return $this->id_category;
     }
 
     /**
-     * @return object
+     * @return FAQCategory
      */
-    public function getCategory(): object
+    public function getCategory(): FAQCategory
     {
         return FAQCategory::getInstance($this->getIdCategory());
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getQuestion(): string
+    public function getQuestion(): ?string
     {
         return $this->question;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getAnswer(): string
+    public function getAnswer(): ?string
     {
         return $this->answer;
     }
 
     /**
-     * @return bool
+     * @return ?bool
      */
-    public function getOnline(): bool
+    public function getOnline(): ?bool
     {
         return $this->online;
     }
@@ -185,9 +185,9 @@ class FAQ extends ObjectModel
     /**
      * @param int $id_category id_category
      *
-     * @return object
+     * @return static
      */
-    public function setIdCategory(int $id_category): object
+    public function setIdCategory(int $id_category): static
     {
         if ($this->id_category !== $id_category) {
             $this->id_category = $id_category;
@@ -200,11 +200,12 @@ class FAQ extends ObjectModel
     /**
      * @param string $question question
      *
-     * @return object
+     * @return static
      */
-    public function setQuestion(string $question): object
+    public function setQuestion(string $question): static
     {
         $question = trim($question);
+
         if ($this->question !== $question) {
             $this->question = $question;
             $this->modified_fields['question'] = true;
@@ -216,11 +217,12 @@ class FAQ extends ObjectModel
     /**
      * @param string $answer réponse
      *
-     * @return object
+     * @return static
      */
-    public function setAnswer(string $answer): object
+    public function setAnswer(string $answer): static
     {
         $answer = trim($answer);
+
         if ($this->answer !== $answer) {
             $this->answer = $answer;
             $this->modified_fields['answer'] = true;
@@ -232,9 +234,9 @@ class FAQ extends ObjectModel
     /**
      * @param bool $online online
      *
-     * @return object
+     * @return static
      */
-    public function setOnline(bool $online): object
+    public function setOnline(bool $online): static
     {
         if ($this->online !== $online) {
             $this->online = $online;
@@ -247,9 +249,9 @@ class FAQ extends ObjectModel
     /**
      * @param string $created_at date de création format "YYYY-MM-DD HH:II:SS"
      *
-     * @return object
+     * @return static
      */
-    public function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): static
     {
         if ($this->created_at !== $created_at) {
             $this->created_at = $created_at;
@@ -260,9 +262,9 @@ class FAQ extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setCreatedNow(): object
+    public function setCreatedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -277,9 +279,9 @@ class FAQ extends ObjectModel
     /**
      * @param string $modified_at date de modification format "YYYY-MM-DD HH:II:SS"
      *
-     * @return object
+     * @return static
      */
-    public function setModifiedAt(string $modified_at): object
+    public function setModifiedAt(string $modified_at): static
     {
         if ($this->modified_at !== $modified_at) {
             $this->modified_at = $modified_at;
@@ -290,9 +292,9 @@ class FAQ extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setModifiedNow(): object
+    public function setModifiedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 

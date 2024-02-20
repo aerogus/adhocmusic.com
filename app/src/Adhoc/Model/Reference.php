@@ -49,9 +49,9 @@ abstract class Reference extends ObjectModel
     /**
      * @param ?string $name nom
      *
-     * @return object
+     * @return static
      */
-    public function setName(?string $name): object
+    public function setName(?string $name): static
     {
         $name = is_string($name) ? trim($name) : $name;
 

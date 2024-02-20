@@ -27,9 +27,9 @@ class Audio extends Media
     protected static string $table = 'adhoc_audio';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_audio = 0;
+    protected ?int $id_audio = null;
 
     /**
      * Liste des attributs de l'objet
@@ -67,9 +67,9 @@ class Audio extends Media
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdAudio(): int
+    public function getIdAudio(): ?int
     {
         return $this->id_audio;
     }

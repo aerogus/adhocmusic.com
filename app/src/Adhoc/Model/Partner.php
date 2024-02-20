@@ -115,9 +115,9 @@ class Partner extends ObjectModel
     /**
      * @param string $title titre
      *
-     * @return object
+     * @return static
      */
-    public function setTitle(string $title): object
+    public function setTitle(string $title): static
     {
         if ($this->title !== $title) {
             $this->title = $title;
@@ -130,9 +130,9 @@ class Partner extends ObjectModel
     /**
      * @param string $description description
      *
-     * @return object
+     * @return static
      */
-    public function setDescription(string $description): object
+    public function setDescription(string $description): static
     {
         if ($this->description !== $description) {
             $this->description = $description;
@@ -145,9 +145,9 @@ class Partner extends ObjectModel
     /**
      * @param string $url url
      *
-     * @return object
+     * @return static
      */
-    public function setUrl(string $url): object
+    public function setUrl(string $url): static
     {
         if ($this->url !== $url) {
             $this->url = $url;

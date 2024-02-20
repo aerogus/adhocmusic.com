@@ -77,9 +77,9 @@ abstract class Media extends ObjectModel
     }
 
     /**
-     * @return object|null
+     * @return ?Groupe
      */
-    public function getGroupe(): ?object
+    public function getGroupe(): ?Groupe
     {
         if (is_null($this->getIdGroupe())) {
             return null;
@@ -101,9 +101,9 @@ abstract class Media extends ObjectModel
     }
 
     /**
-     * @return object|null
+     * @return ?Lieu
      */
-    public function getLieu(): ?object
+    public function getLieu(): ?Lieu
     {
         if (!is_null($this->getIdLieu())) {
             try {
@@ -124,9 +124,9 @@ abstract class Media extends ObjectModel
     }
 
     /**
-     * @return object|null
+     * @return ?Event
      */
-    public function getEvent(): ?object
+    public function getEvent(): ?Event
     {
         if (!is_null($this->getIdEvent())) {
             try {
@@ -218,7 +218,7 @@ abstract class Media extends ObjectModel
     }
 
     /**
-     * @param int|null $id_groupe id_groupe
+     * @param ?int $id_groupe id_groupe
      *
      * @return static
      */
@@ -233,7 +233,7 @@ abstract class Media extends ObjectModel
     }
 
     /**
-     * @param int|null $id_lieu id_lieu
+     * @param ?int $id_lieu id_lieu
      *
      * @return static
      */
@@ -248,7 +248,7 @@ abstract class Media extends ObjectModel
     }
 
     /**
-     * @param int|null $id_event id_event
+     * @param ?int $id_event id_event
      *
      * @return static
      */
@@ -263,11 +263,11 @@ abstract class Media extends ObjectModel
     }
 
     /**
-     * @param string $name name
+     * @param ?string $name name
      *
      * @return static
      */
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         if ($this->name !== $name) {
             $this->name = $name;
@@ -278,7 +278,7 @@ abstract class Media extends ObjectModel
     }
 
     /**
-     * @param string|null $created_at created_at
+     * @param ?string $created_at created_at
      *
      * @return static
      */
@@ -308,7 +308,7 @@ abstract class Media extends ObjectModel
     }
 
     /**
-     * @param string|null $modified_at modified_at
+     * @param ?string $modified_at modified_at
      *
      * @return static
      */
@@ -338,11 +338,11 @@ abstract class Media extends ObjectModel
     }
 
     /**
-     * @param bool $online online
+     * @param ?bool $online online
      *
      * @return static
      */
-    public function setOnline(bool $online): static
+    public function setOnline(?bool $online): static
     {
         if ($this->online !== $online) {
             $this->online = $online;

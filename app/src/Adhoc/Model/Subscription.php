@@ -188,9 +188,9 @@ class Subscription extends ObjectModel
     /**
      * @param string $created_at created_at
      *
-     * @return object
+     * @return static
      */
-    public function setCreatedAt(string $created_at): object
+    public function setCreatedAt(string $created_at): static
     {
         if ($this->created_at !== $created_at) {
             $this->created_at = $created_at;
@@ -201,9 +201,9 @@ class Subscription extends ObjectModel
     }
 
     /**
-     * @return object
+     * @return static
      */
-    public function setCreatedNow(): object
+    public function setCreatedNow(): static
     {
         $now = date('Y-m-d H:i:s');
 
@@ -218,9 +218,9 @@ class Subscription extends ObjectModel
     /**
      * @param string $subscribed_at subscribed_at
      *
-     * @return object
+     * @return static
      */
-    public function setSubscribedAt(string $subscribed_at): object
+    public function setSubscribedAt(string $subscribed_at): static
     {
         if ($this->subscribed_at !== $subscribed_at) {
             $this->subscribed_at = $subscribed_at;
@@ -233,9 +233,9 @@ class Subscription extends ObjectModel
     /**
      * @param bool $adult adult
      *
-     * @return object
+     * @return static
      */
-    public function setAdult(bool $adult): object
+    public function setAdult(bool $adult): static
     {
         if ($this->adult !== $adult) {
             $this->adult = $adult;
@@ -247,9 +247,9 @@ class Subscription extends ObjectModel
     /**
      * @param float $amount amount
      *
-     * @return object
+     * @return static
      */
-    public function setAmount(float $amount): object
+    public function setAmount(float $amount): static
     {
         if ($this->amount !== $amount) {
             $this->amount = $amount;
@@ -261,9 +261,9 @@ class Subscription extends ObjectModel
     /**
      * @param string $first_name first_name
      *
-     * @return object
+     * @return static
      */
-    public function setFirstName(string $first_name): object
+    public function setFirstName(string $first_name): static
     {
         if ($this->first_name !== $first_name) {
             $this->first_name = $first_name;
@@ -276,9 +276,9 @@ class Subscription extends ObjectModel
     /**
      * @param string $last_name last_name
      *
-     * @return object
+     * @return static
      */
-    public function setLastName(string $last_name): object
+    public function setLastName(string $last_name): static
     {
         if ($this->last_name !== $last_name) {
             $this->last_name = $last_name;
@@ -291,10 +291,10 @@ class Subscription extends ObjectModel
     /**
      * @param string $email email
      *
-     * @return object
+     * @return static
      * @throws \Exception
      */
-    public function setEmail(string $email): object
+    public function setEmail(string $email): static
     {
         if (!Email::validate($email)) {
             throw new \Exception('email ' . $email . ' invalide');
@@ -311,9 +311,9 @@ class Subscription extends ObjectModel
     /**
      * @param string $cp cp
      *
-     * @return object
+     * @return static
      */
-    public function setCp(string $cp): object
+    public function setCp(string $cp): static
     {
         if ($this->cp !== $cp) {
             $this->cp = $cp;
@@ -326,9 +326,9 @@ class Subscription extends ObjectModel
     /**
      * @param int $id_contact id_contact
      *
-     * @return object
+     * @return static
      */
-    public function setIdContact(int $id_contact): object
+    public function setIdContact(int $id_contact): static
     {
         if ($this->id_contact !== $id_contact) {
             $this->id_contact = $id_contact;

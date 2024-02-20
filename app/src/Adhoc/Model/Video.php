@@ -203,9 +203,9 @@ class Video extends Media
     /**
      * Retourne l'objet VideoHost
      *
-     * @return object
+     * @return VideoHost
      */
-    public function getHost(): object
+    public function getHost(): VideoHost
     {
         return VideoHost::getInstance($this->getIdHost());
     }
