@@ -451,7 +451,8 @@ class Comment extends ObjectModel
              . "LEFT JOIN `" . Contact::getDbTable() . "` `cnt` ON (`mbr`.`id_contact` = `cnt`.`id_contact`) "
              . "WHERE `" . self::$pk . "` = " . (int) $this->getId();
 
-        if ($res = $db->queryWithFetchFirstRow($sql)) {
+        $stmt = $db->pdo->query($sql);
+        if ($res = $stmt->fetchAll()) {
             $this->arrayToObject($res);
             $this->pseudo_mbr = $res['pseudo_mbr'];
             $this->email_mbr  = $res['email_mbr'];

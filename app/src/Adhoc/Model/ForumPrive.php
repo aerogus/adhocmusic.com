@@ -82,9 +82,10 @@ class ForumPrive extends Forum
              . "`nb_messages`, (`nb_messages` - 1) AS `nb_replies`, `nb_views`, `subject` "
              . "FROM `" . static::$db_table_forum_thread . "` "
              . "WHERE `id_thread` = " . (int) $id_thread;
-        $thread = $db->queryWithFetchFirstRow($sql);
+        $stmt = $db->pdo($sql);
+        $thread = $stmt->fetch();
 
-        if (array_key_exists('id_thread', $thread) and array_key_exists('created_by', $thread)) {
+        if (array_key_exists('id_thread', $thread) && array_key_exists('created_by', $thread)) {
             $thread['url'] = HOME_URL . '/adm/forums/thread/' . $thread['id_thread'];
             $thread['created_by_url'] = HOME_URL . '/membres/' . $thread['created_by'];
             $thread['created_by_avatar'] = MEDIA_URL . '/membre/ca/' . $thread['created_by'] . '.jpg';
@@ -96,7 +97,8 @@ class ForumPrive extends Forum
              . "WHERE `id_thread` = " . (int) $id_thread . " "
              . "ORDER BY `id_message` ASC "
              . "LIMIT " . ((int) $page * FORUM_NB_MESSAGES_PER_PAGE) . "," . FORUM_NB_MESSAGES_PER_PAGE;
-        $messages = $db->queryWithFetch($sql);
+        $stmt = $db->pdo($sql);
+        $messages = $stmt->fetchAll();
 
         foreach ($messages as $idx => $message) {
             $wiki_parsing = false;

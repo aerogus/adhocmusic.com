@@ -1005,10 +1005,11 @@ class Membre extends ObjectModel
         }
         $sql .= "LIMIT " . $debut . ", " . $limit;
 
+        $stmt = $db->pdo->query($sql);
         if ($limit === 1) {
-            $res = $db->queryWithFetchFirstRow($sql);
+            $res = $stmt->fetch();
         } else {
-            $res = $db->queryWithFetch($sql);
+            $res = $stmt->fetchAll();
         }
 
         return $res;

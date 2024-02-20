@@ -161,7 +161,9 @@ abstract class Forum
              . "WHERE `f`.`id_contact` = `m`.`id_contact` "
              . "AND `f`.`id_forum` = '" . $id_forum . "'";
 
-        return $db->queryWithFetchFirstRow($sql);
+        $stmt = $db->pdo->query($sql);
+
+        return $stmt->fetch();
     }
 
     /**
