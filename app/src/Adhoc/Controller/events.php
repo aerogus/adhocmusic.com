@@ -103,15 +103,21 @@ final class Controller
             return 'not found';
         }
 
-        $vCalendar = new \Eluceo\iCal\Component\Calendar('adhocmusic.com');
-        $vEvent = new \Eluceo\iCal\Component\Event();
-        $vEvent
-            ->setDtStart(new \DateTime($event->getDate()))
-            ->setDtEnd(new \DateTime($event->getDate()))
-            ->setNoTime(true)
-            ->setSummary($event->getName());
-        $vCalendar->addComponent($vEvent);
-        return $vCalendar->render();
+        $vEvent = (new \Eluceo\iCal\Domain\Entity\Event())
+            ->setSummary($event->getName())
+            ->setDescription($event->getText())
+            ->setOccurrence(
+                new \Eluceo\iCal\Domain\ValueObject\SingleDay(
+                    new \Eluceo\iCal\Domain\ValueObject\Date(
+                        \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $event->getDate())
+                    )
+                )
+            );
+
+        $vCalendar = new \Eluceo\iCal\Domain\Entity\Calendar([$vEvent]);
+        $vComponentFactory = new \Eluceo\iCal\Presentation\Factory\CalendarFactory();
+
+        return (string) $vComponentFactory->createCalendar($vCalendar);
     }
 
     /**
