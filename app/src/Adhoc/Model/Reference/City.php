@@ -135,7 +135,10 @@ class City extends Reference
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
-        $ids = $db->queryWithFetchFirstFields($sql, $data);
+        $stmt = $db->pdo->prepare($sql);
+        $stmt->execute($data);
+        $ids = $stmt->fetchAll(\PDO::FETCH_COLUMN);
+
         foreach ($ids as $id) {
             $objs[] = static::getInstance((int) $id);
         }

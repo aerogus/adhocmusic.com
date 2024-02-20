@@ -793,11 +793,11 @@ class Lieu extends ObjectModel
 
         if (isset($params['with_events'])) {
             $subSql = "SELECT DISTINCT `id_lieu` FROM `adhoc_event`";
-            if ($ids_lieu = $db->queryWithFetchFirstFields($subSql)) {
+            if ($ids_lieu = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
                 if ($params['with_events'] === true) {
-                    $sql .= "AND `id_lieu` IN (" . implode(',', (array) $ids_lieu) . ") ";
+                    $sql .= "AND `id_lieu` IN (" . implode(',', $ids_lieu) . ") ";
                 } else {
-                    $sql .= "AND `id_lieu` NOT IN (" . implode(',', (array) $ids_lieu) . ") ";
+                    $sql .= "AND `id_lieu` NOT IN (" . implode(',', $ids_lieu) . ") ";
                 }
             } else {
                 if ($params['with_events'] === true) {
@@ -850,7 +850,7 @@ class Lieu extends ObjectModel
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
-        $ids = $db->queryWithFetchFirstFields($sql);
+        $ids = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
         foreach ($ids as $id) {
             $objs[] = static::getInstance((int) $id);
         }

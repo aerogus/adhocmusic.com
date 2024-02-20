@@ -549,7 +549,7 @@ class Event extends ObjectModel
 
         if (isset($params['id_groupe'])) {
             $subSql = "SELECT `id_event` FROM `adhoc_participe_a` WHERE `id_groupe` = " . (int) $params['id_groupe'] . " ";
-            if ($ids_event = $db->queryWithFetchFirstFields($subSql)) {
+            if ($ids_event = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
                 $sql .= "AND `id_event` IN (" . implode(',', (array) $ids_event) . ") ";
             } else {
                 return $objs;
@@ -558,7 +558,7 @@ class Event extends ObjectModel
 
         if (isset($params['id_structure'])) {
             $subSql = "SELECT `id_event` FROM `adhoc_organise_par` WHERE `id_structure` = " . (int) $params['id_structure'] . " ";
-            if ($ids_event = $db->queryWithFetchFirstFields($subSql)) {
+            if ($ids_event = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
                 $sql .= "AND `id_event` IN (" . implode(',', (array) $ids_event) . ") ";
             } else {
                 return $objs;
@@ -603,7 +603,7 @@ class Event extends ObjectModel
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
-        $ids = $db->queryWithFetchFirstFields($sql);
+        $ids = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
         foreach ($ids as $id) {
             $obj = static::getInstance((int) $id);
             if (!empty($params['with_audio']) && !$obj->getAudios()) {

@@ -873,7 +873,7 @@ class Groupe extends ObjectModel
              . 'FROM `' . self::$db_table_appartient_a . '` '
              . 'WHERE `id_contact` = ' . (int) $_SESSION['membre']->getId();
 
-        return (int) $db->queryWithFetchFirstField($sql);
+        return (int) $db->pdo->query($sql)->fetchColumn();
     }
 
     /**
@@ -1075,7 +1075,7 @@ class Groupe extends ObjectModel
 
         if (isset($params['id_contact'])) {
             $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'] . " ";
-            if ($ids_groupe = $db->queryWithFetchFirstFields($subSql)) {
+            if ($ids_groupe = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
                 $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
             } else {
                 return $objs;
@@ -1084,7 +1084,7 @@ class Groupe extends ObjectModel
 
         if (isset($params['id_event'])) {
             $subSql = "SELECT `id_groupe` FROM `adhoc_participe_a` WHERE `id_event` = " . (int) $params['id_event'] . " ";
-            if ($ids_groupe = $db->queryWithFetchFirstFields($subSql)) {
+            if ($ids_groupe = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
                 $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
             } else {
                 return $objs;
@@ -1093,7 +1093,7 @@ class Groupe extends ObjectModel
 
         if (isset($params['id_video'])) {
             $subSql = "SELECT `id_groupe` FROM `adhoc_video_groupe` WHERE `id_video` = " . (int) $params['id_video'] . " ";
-            if ($ids_groupe = $db->queryWithFetchFirstFields($subSql)) {
+            if ($ids_groupe = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
                 $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
             } else {
                 return $objs;
@@ -1138,7 +1138,7 @@ class Groupe extends ObjectModel
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
-        $ids = $db->queryWithFetchFirstFields($sql);
+        $ids= $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
         foreach ($ids as $id) {
             $objs[] = static::getInstance((int) $id);
         }

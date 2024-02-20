@@ -875,7 +875,7 @@ abstract class ObjectModel
              . "FROM `" . static::getDbTable() . "` "
              . "WHERE `id_contact` = " . (int) $_SESSION['membre']->getId();
 
-        return (int) $db->queryWithFetchFirstField($sql);
+        return (int) $db->pdo->query($sql)->fetchColumn();
     }
 
     /**

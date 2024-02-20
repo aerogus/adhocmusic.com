@@ -452,7 +452,7 @@ class Comment extends ObjectModel
              . "WHERE `" . self::$pk . "` = " . (int) $this->getId();
 
         $stmt = $db->pdo->query($sql);
-        if ($res = $stmt->fetchAll()) {
+        if ($res = $stmt->fetch()) {
             $this->arrayToObject($res);
             $this->pseudo_mbr = $res['pseudo_mbr'];
             $this->email_mbr  = $res['email_mbr'];

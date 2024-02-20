@@ -63,8 +63,8 @@ class Style extends Reference
             $subSql  = "SELECT `id_style` ";
             $subSql .= "FROM `adhoc_event_style` ";
             $subSql .= "WHERE `id_event` = " . (int) $params['id_event'] . " ";
-            if ($ids_style = $db->queryWithFetchFirstFields($subSql)) {
-                $sql .= "AND `id_style` IN (" . implode(',', (array) $ids_style) . ") ";
+            if ($ids_style = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
+                $sql .= "AND `id_style` IN (" . implode(',', $ids_style) . ") ";
             } else {
                 return $objs;
             }
@@ -90,7 +90,7 @@ class Style extends Reference
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
-        $ids = $db->queryWithFetchFirstFields($sql);
+        $ids = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
         foreach ($ids as $id) {
             $objs[] = static::getInstance((int) $id);
         }

@@ -341,7 +341,7 @@ class Newsletter extends ObjectModel
             $sql .= "ASC";
         }
 
-        $ids_newsletter = $db->queryWithFetchFirstFields($sql);
+        $ids_newsletter = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
         foreach ($ids_newsletter as $id_newsletter) {
             $objs[] = static::getInstance((int) $id_newsletter);
         }
@@ -385,7 +385,7 @@ class Newsletter extends ObjectModel
              . "LEFT JOIN `" . Membre::getDbTable() . "` `m` ON (`m`.`id_contact` = `c`.`id_contact`) "
              . "WHERE (`m`.`mailing` IS NULL) OR (`m`.`mailing` = 1) ";
 
-        return $db->queryWithFetchFirstField($sql);
+        return (int) $db->pdo->query($sql)->fetchColumn();
     }
 
     /**

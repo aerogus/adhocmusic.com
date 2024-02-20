@@ -193,7 +193,7 @@ class ForumPrive extends Forum
              . "FROM `adhoc_forum_prive_subscriber` "
              . "WHERE `id_contact` = " . (int) $id_contact;
 
-        $forums = $db->queryWithFetchFirstFields($sql);
+        $forums = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
 
         return [
             'a' => (bool) in_array('a', $forums, true),

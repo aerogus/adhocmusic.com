@@ -397,7 +397,7 @@ abstract class Media extends ObjectModel
             if (get_called_class() === 'Adhoc\\Model\\Video') {
                 $subSql  = "SELECT `id_video` ";
                 $subSql .= "FROM `adhoc_video_groupe`";
-                if ($ids_video = $db->queryWithFetchFirstFields($subSql)) {
+                if ($ids_video = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
                     $sql .= "AND `id_video` IN (" . implode(',', (array) $ids_video) . ") ";
                 } else {
                     return $objs;
@@ -412,7 +412,7 @@ abstract class Media extends ObjectModel
                 $subSql  = "SELECT `id_video` ";
                 $subSql .= "FROM `adhoc_video_groupe` ";
                 $subSql .= "WHERE `id_groupe` = " . (int) $params['id_groupe'] . " ";
-                if ($ids_video = $db->queryWithFetchFirstFields($subSql)) {
+                if ($ids_video = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
                     $sql .= "AND `id_video` IN (" . implode(',', (array) $ids_video) . ") ";
                 } else {
                     return $objs;
@@ -458,7 +458,7 @@ abstract class Media extends ObjectModel
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
-        $ids = $db->queryWithFetchFirstFields($sql);
+        $ids = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
         foreach ($ids as $id) {
             $objs[] = static::getInstance((int) $id);
         }

@@ -1182,9 +1182,9 @@ class Membre extends ObjectModel
      * @param string $pseudo   pseudo
      * @param string $password password
      *
-     * @return int id_contact ou false
+     * @return int|false id_contact ou false
      */
-    public static function checkPseudoPassword(string $pseudo, string $password): int
+    public static function checkPseudoPassword(string $pseudo, string $password): int|false
     {
         $db = DataBase::getInstance();
 
@@ -1193,7 +1193,11 @@ class Membre extends ObjectModel
              . "WHERE `pseudo` = '" . $pseudo . "' "
              . "AND `password` = PASSWORD('" . $password . "')";
 
-        return (int) $db->queryWithFetchFirstField($sql);
+        $id_contact = $db->pdo->query($sql)->fetchColumn();
+        if ($id_contact !== false) {
+            return (int) $id_contact;
+        }
+        return $id_contact;
     }
 
     /**
@@ -1265,12 +1269,14 @@ class Membre extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+        $sql  = "SELECT `" . static::getDbPk() . "` ";
+        $sql .= "FROM `" . static::getDbTable() . "` ";
+        $sql .= "WHERE 1 ";
 
         if (isset($params['id_groupe'])) {
             $subSql = "SELECT `id_contact` FROM `adhoc_appartient_a` WHERE `id_groupe` = " . (int) $params['id_groupe'] . " ";
-            if ($ids_contact = $db->queryWithFetchFirstFields($subSql)) {
-                $sql .= "AND `id_contact` IN (" . implode(',', (array) $ids_contact) . ") ";
+            if ($ids_contact = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
+                $sql .= "AND `id_contact` IN (" . implode(',', $ids_contact) . ") ";
             } else {
                 return $objs;
             }
@@ -1319,7 +1325,7 @@ class Membre extends ObjectModel
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
-        $ids = $db->queryWithFetchFirstFields($sql);
+        $ids = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
         foreach ($ids as $id) {
             $objs[] = static::getInstance((int) $id);
         }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Adhoc\Utils;
 
 use Adhoc\Model\Event;
+use Adhoc\Model\Membre;
 
 /**
  * Fonctions et modifiers custom pour Smarty
@@ -363,13 +364,7 @@ class AdHocSmarty extends \Smarty
             return self::$pseudos[$id_contact];
         }
 
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `pseudo` "
-             . "FROM `adhoc_membre` "
-             . "WHERE `id_contact` = " . $id_contact;
-
-        self::$pseudos[$id_contact] = $db->queryWithFetchFirstField($sql);
+        self::$pseudos[$id_contact] = Membre::getInstance($id_contact)->getPseudo();
 
         return self::$pseudos[$id_contact];
     }

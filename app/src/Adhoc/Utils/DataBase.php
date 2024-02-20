@@ -146,25 +146,4 @@ class DataBase
 
         return $sql;
     }
-
-    /**
-     * Retourne dans un tableau à une dimension le premier champ
-     * des lignes retournées
-     *
-     * @param string              $sql  requête SQL (avec placeholders)
-     * @param array<string,mixed> $data valeurs
-     *
-     * @return array<string>|bool
-     */
-    public function queryWithFetchFirstFields(string $sql, array $data = []): array|bool
-    {
-        $stm = $this->pdo->prepare($sql);
-        try {
-            $stm->execute($data);
-            return $stm->fetchAll(\PDO::FETCH_COLUMN, 0);
-        } catch (\Exception $e) {
-            LogNG::error($e->getMessage());
-            return [];
-        }
-    }
 }

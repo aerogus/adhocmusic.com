@@ -200,7 +200,7 @@ abstract class Forum
              . "FROM `" . static::$db_table_forum_thread . "` "
              . "WHERE `id_thread` = " . $id_thread;
 
-        return $db->queryWithFetchFirstField($sql);
+        return (string) $db->pdo->query($sql)->fetchColumn();
     }
 
     /**

@@ -21,12 +21,12 @@ echo "1 - Cohérence Avatars Membre\n";
 
 // liste des contacts
 $sql = "SELECT `id_contact` FROM `adhoc_contact` ORDER BY `id_contact` ASC";
-$contacts = $db->queryWithFetchFirstFields($sql);
+$contacts = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
 $nb_contacts = count($contacts);
 
 // liste des membres
 $sql = "SELECT `id_contact` FROM `adhoc_membre` ORDER BY `id_contact` ASC";
-$membres = $db->queryWithFetchFirstFields($sql);
+$membres = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
 $nb_membres = count($membres);
 
 // on parcourt le répertoire des images à la recherche des obsolètes
@@ -51,7 +51,7 @@ echo "2 - Cohérence Avatars Membres internes\n";
 
 // liste des membres
 $sql = "SELECT `id_contact` FROM `adhoc_membre_adhoc` ORDER BY `id_contact` ASC";
-$membres = $db->queryWithFetchFirstFields($sql);
+$membres = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
 $nb_membres = count($membres);
 
 // on parcourt le répertoire des images à la recherche des obsolètes
@@ -75,7 +75,7 @@ echo "3 - Cohérence images groupes\n";
 
 // liste des groupes
 $sql = "SELECT `id_groupe` FROM `adhoc_groupe` ORDER BY `id_groupe` ASC";
-$groupes = $db->queryWithFetchFirstFields($sql);
+$groupes = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
 
 // on parcourt le répertoire des images à la recherche des obsolètes
 $path = MEDIA_PATH . "/groupe/";
@@ -98,7 +98,7 @@ echo "4 - Cohérence audios / mp3\n";
 
 // liste des audios
 $sql = "SELECT `id_audio` FROM `adhoc_audio` ORDER BY `id_audio` ASC";
-$audios = $db->queryWithFetchFirstFields($sql);
+$audios = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
 
 // on parcourt le répertoire des mp3 à la recherche des obsolètes
 $path = MEDIA_PATH . "/audio/";
@@ -117,7 +117,7 @@ echo "5 - Cohérence vignette videos\n";
 
 // liste des vidéos
 $sql = "SELECT `id_video` FROM `adhoc_video` ORDER BY `id_video` ASC";
-$videos = $db->queryWithFetchFirstFields($sql);
+$videos = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
 
 // on parcourt le répertoire des vignettes videos à la recherche des obsolètes
 $path = MEDIA_PATH . "/video/";
@@ -134,7 +134,7 @@ echo "6 - Cohérence flyer événements\n";
 
 // liste des événements
 $sql = "SELECT `id_event` FROM `adhoc_event` ORDER BY `id_event` ASC";
-$events = $db->queryWithFetchFirstFields($sql);
+$events = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
 
 // on parcourt le répertoire des flyers événements à la recherche des obsolètes
 $path = MEDIA_PATH . "/event/";
