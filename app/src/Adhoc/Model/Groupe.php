@@ -943,9 +943,9 @@ class Groupe extends ObjectModel
              . '(`' . Groupe::getDbPk() . '`, `' . Membre::getDbPk() . '`, `' . TypeMusicien::getDbPk() . '`) '
              . 'VALUES(' . (int) $this->getIdGroupe() . ', ' . (int) $id_contact . ', ' . (int) $id_type_musicien . ')';
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -965,9 +965,9 @@ class Groupe extends ObjectModel
              . 'WHERE `' . Groupe::getDbPk() . '` = ' . (int) $this->getIdGroupe() . ' '
              . 'AND `' . Membre::getDbPk() . '` = ' . (int) $id_contact;
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -985,9 +985,9 @@ class Groupe extends ObjectModel
              . 'WHERE `' . Groupe::getDbPk() . '` = ' . (int) $this->getIdGroupe() . ' '
              . 'AND `' . Membre::getDbPk() . '` = ' . (int) $id_contact;
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -1002,9 +1002,9 @@ class Groupe extends ObjectModel
         $sql = 'DELETE FROM `' . self::$db_table_appartient_a . '` '
              . 'WHERE `' . $this->getDbPk() . '` = ' . (int) $this->getIdGroupe();
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return $db->affectedRows();
+        return $stmt->rowCount();
     }
 
     /**
@@ -1191,9 +1191,9 @@ class Groupe extends ObjectModel
              . "(`id_groupe`, `id_style`) "
              . "VALUES(" . (int) $this->getIdGroupe() . ", " . (int) $id_style . ")";
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -1211,9 +1211,9 @@ class Groupe extends ObjectModel
              . "WHERE `id_groupe` = " . (int) $this->getIdGroupe() . " "
              . "AND `id_style` = " . (int) $id_style;
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -1228,9 +1228,9 @@ class Groupe extends ObjectModel
         $sql = "DELETE FROM `" . self::$db_table_groupe_style . "` "
              . "WHERE `id_groupe` = " . (int) $this->getIdGroupe();
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->affectedRows();
     }
 
     /**
@@ -1390,9 +1390,9 @@ class Groupe extends ObjectModel
         $sql = "DELETE FROM `" . self::$db_table_participe_a . "` "
              . "WHERE `id_groupe` = " . (int) $this->getIdGroupe();
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return $db->affectedRows();
+        return $stmt->rowCount();
     }
 
     /**

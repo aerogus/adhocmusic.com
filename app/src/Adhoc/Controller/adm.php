@@ -276,10 +276,10 @@ final class Controller
              . "WHERE `id_groupe` = " . $groupe->getId() . " "
              . "ORDER BY `ordre` ASC "
              . "LIMIT 0, 3";
-        $res = $db->query($sql);
+        $stmt = $db->pdo->query($sql);
         $sty = [0, 0, 0];
         $cpt = 0;
-        while (list($id_style) = $db->fetchRow($res)) {
+        while (list($id_style) = $stmt->fetch()) {
             $sty[$cpt] = $id_style;
             $cpt++;
         }
@@ -321,7 +321,7 @@ final class Controller
         // todo: dans un objet !!
         $sql = "DELETE FROM `adhoc_groupe_style` "
              . "WHERE `id_groupe` = " . (int) $id_groupe;
-        $res = $db->query($sql);
+        $res = $db->pso->query($sql);
 
         foreach ($style as $ordre => $id_style) {
             $ordre += 1;
@@ -330,7 +330,7 @@ final class Controller
                      . "(`id_groupe`, `id_style`, `ordre`) "
                      . "VALUES (" . $id_groupe . ", " . $id_style . ", " . $ordre . ")";
                 try {
-                    $res = $db->query($sql);
+                    $res = $db->pdo->query($sql);
                 } catch (\Exception $e) {
                     die($e->getMessage());
                 }
@@ -392,8 +392,8 @@ final class Controller
 
                 if ($email !== '') {
                     $sql = "SELECT `id_contact`, `email` FROM `adhoc_contact` WHERE `email` = '" . $email . "'";
-                    $res = $db->query($sql);
-                    if (list($id) = $db->fetchRow($res)) {
+                    $stmt = $db->pdo->query($sql);
+                    if (list($id) = $stmt->fetch()) {
                         $out .= "<tr><td>Email <strong>" . $email . "</strong> trouvé - id_contact : <strong>" . $id . "</strong></td></tr>";
                     } else {
                         $out .= "<tr><td>Email <strong>" . $email . "</strong> non trouvé</td></tr>";
@@ -402,16 +402,16 @@ final class Controller
 
                 if ($id > 0) {
                     $sql = "SELECT `email` FROM `adhoc_contact` WHERE `id_contact` = " . $id;
-                    $res = $db->query($sql);
-                    if (list($email) = $db->fetchRow($res)) {
+                    $stmt = $db->pdo->query($sql);
+                    if (list($email) = $stmt->fetch()) {
                         $out .= "<tr><td>table contact : <strong>oui</strong> - email = <strong>" . $email . "</strong> - <a href='/adm/delete-account?action=delete&id=" . $id . "'>EFFACER TOUT LE COMPTE</a></td></tr>";
                     } else {
                         $out .= "<tr><td>table contact : <strong>non</strong></td></tr>";
                     }
 
                     $sql = "SELECT `pseudo`, `last_name`, `first_name`, `created_at`, `modified_at`, `visited_at` FROM `adhoc_membre` WHERE `id_contact` = " . $id;
-                    $res = $db->query($sql);
-                    if (list($pseudo, $nom, $prenom, $crea, $modif, $visite) = $db->fetchRow($res)) {
+                    $stmt = $db->pdo->query($sql);
+                    if (list($pseudo, $nom, $prenom, $crea, $modif, $visite) = $stmt->fetch()) {
                         $out .= "<tr><td>table membre : <strong>oui</strong> - pseudo = <strong>" . $pseudo . "</strong> - nom = <strong>" . $nom . "</strong> - prenom = <strong>" . $prenom . "</strong><br />";
                         $out .= "crea : " . $crea . " - modif : " . $modif . " - visite : " . $visite . "</td></tr>";
                     } else {
@@ -419,33 +419,33 @@ final class Controller
                     }
 
                     $sql  = "SELECT `id_contact` FROM `adhoc_appartient_a` WHERE `id_contact` = " . $id;
-                    $res  = $db->query($sql);
-                    $nb   = $db->numRows($res);
+                    $res  = $db->pdo->query($sql);
+                    $nb   = count($stmt->fetchAll(\PDO::FETCH_COLUMN));
                     $out .= "<tr><td>table appartient_a <strong>" . $nb . " groupe(s)</strong></td></tr>";
 
                     $sql  = "SELECT `id_contact` FROM `adhoc_video` WHERE `id_contact` = " . $id;
-                    $res  = $db->query($sql);
-                    $nb   = $db->numRows($res);
+                    $res  = $db->pdo->query($sql);
+                    $nb   = count($stmt->fetchAll(\PDO::FETCH_COLUMN));
                     $out .= "<tr><td>table video : <strong>" . $nb . " video(s)</strong></td></tr>";
 
                     $sql  = "SELECT `id_contact` FROM `adhoc_audio` WHERE `id_contact` = " . $id;
-                    $res  = $db->query($sql);
-                    $nb   = $db->numRows($res);
+                    $res  = $db->pdo->query($sql);
+                    $nb   = count($stmt->fetchAll(\PDO::FETCH_COLUMN));
                     $out .= "<tr><td>table audio : <strong>" . $nb . " audio(s)</strong></td></tr>";
 
                     $sql  = "SELECT `id_contact` FROM `adhoc_photo` WHERE `id_contact` = " . $id;
-                    $res  = $db->query($sql);
-                    $nb   = $db->numRows($res);
+                    $res  = $db->pdo->query($sql);
+                    $nb   = count($stmt->fetchAll(\PDO::FETCH_COLUMN));
                     $out .= "<tr><td>table photo : <strong>" . $nb . " photo(s)</strong></td></tr>";
                     /*
                     $sql  = "SELECT `id_contact` FROM `adhoc_forums` WHERE `id_contact` = " . $id;
-                    $res  = $db->query($sql);
-                    $nb   = $db->numRows($res);
+                    $res  = $db->pdo->query($sql);
+                    $nb   = count($stmt->fetchAll(\PDO::FETCH_COLUMN));
                     $out .= "<tr><td>table forums : <strong>" . $nb . " message(s)</strong></td></tr>";
 
                     $sql  = "SELECT `id_contact` FROM `adhoc_suivi_thread` WHERE `id_contact` = " . $id;
-                    $res  = $db->query($sql);
-                    $nb   = $db->numRows($res);
+                    $stmt = $db->pdo->query($sql);
+                    $nb   = count($stmt->fetchAll(\PDO::FETCH_COLUMN));
                     $out .= "<tr><td>table suivi_thread : <strong>" . $nb . " suivi(s)</strong></td></tr>";
                     */
                 }
@@ -489,18 +489,18 @@ final class Controller
         // du compte mais l'email répond bien
         $sql  = "DELETE FROM `adhoc_contact` WHERE `id_contact` = " . $id;
         $out .= $sql . "<br />";
-        $db->query($sql);
+        $db->pdo->query($sql);
         $out .= "*** table contact effacée pour id_contact : " . $id . "<br />";
 
         $sql  = "DELETE FROM `adhoc_membre` WHERE `id_contact` = " . $id;
         $out .= $sql . "<br />";
-        $db->query($sql);
+        $db->pdo->query($sql);
         $out .= "*** table membre effacée pour id_contact : " . $id . "<br />";
 
         /*
         $sql  = "DELETE FROM `adhoc_suivi_thread` WHERE `id_contact` = " . $id;
         $out .= $sql . "<br />";
-        $db->query($sql);
+        $db->pdo->query($sql);
         $out .= "*** table suivi_thread effacée pour id_contact : " . $id . "<br />";
         */
 

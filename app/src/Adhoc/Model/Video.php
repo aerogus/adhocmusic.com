@@ -437,9 +437,9 @@ class Video extends Media
              . "WHERE `id_video` = " . (int) $this->getIdVideo() . " "
              . "AND `id_groupe` = " . (int) $id_groupe;
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -457,9 +457,9 @@ class Video extends Media
              . "(`id_video`, `id_groupe`) "
              . "VALUES(" . (int) $this->getIdVideo() . ", " . (int) $id_groupe . ")";
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -474,9 +474,9 @@ class Video extends Media
         $sql = "DELETE FROM `" . self::$db_table_video_groupe . "` "
              . "WHERE `id_video` = " . (int) $this->getIdVideo();
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**

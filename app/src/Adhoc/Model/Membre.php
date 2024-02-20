@@ -1046,12 +1046,12 @@ class Membre extends ObjectModel
 
         $sql  = "SELECT `id_contact` "
               . "FROM `" . self::$db_table_appartient_a . "` "
-              . "WHERE `id_groupe` = " . (int) $id_groupe . " "
-              . "AND `id_contact` = " . (int) $this->id_contact;
+              . "WHERE `id_groupe` = " . $id_groupe . " "
+              . "AND `id_contact` = " . $this->id_contact;
 
-        $res  = $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->numRows($res);
+        return (bool) $stmt->fetchColumn();
     }
 
     /**

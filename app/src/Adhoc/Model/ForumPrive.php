@@ -131,7 +131,7 @@ class ForumPrive extends Forum
         $sql = "DELETE FROM `adhoc_forum_prive_subscriber` "
              . "WHERE `id_contact` = " . (int) $id_contact;
 
-        $db->query($sql);
+        $db->pdo->query($sql);
 
         return true;
     }
@@ -152,7 +152,7 @@ class ForumPrive extends Forum
              . "WHERE `id_contact` = " . $id_contact . " "
              . "AND `id_forum` = '" . $id_forum . "'";
 
-        $db->query($sql);
+        $db->pdo->query($sql);
 
         return true;
     }
@@ -173,7 +173,7 @@ class ForumPrive extends Forum
              . "(`id_contact`, `id_forum`) "
              . "VALUES(" . $id_contact . ", '" . $id_forum . "')";
 
-        $db->query($sql);
+        $db->pdo->query($sql);
 
         return true;
     }
@@ -218,14 +218,14 @@ class ForumPrive extends Forum
         $sql = "DELETE FROM `adhoc_forum_prive_subscriber` "
              . "WHERE `id_contact` = " . $id_contact;
 
-        $db->query($sql);
+        $db->pdo->query($sql);
 
         foreach ($ids_forum as $id_forum) {
             $sql = "INSERT INTO `adhoc_forum_prive_subscriber` "
                  . "(`id_contact`, `id_forum`) "
                  . "VALUES(" . $id_contact . ", '" . $id_forum . "')";
 
-            $db->query($sql);
+            $db->pdo->query($sql);
         }
 
         return true;

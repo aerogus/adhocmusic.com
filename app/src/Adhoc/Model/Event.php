@@ -773,8 +773,8 @@ class Event extends ObjectModel
              . "VALUES (" . (int) $this->getIdEvent() . ", " . (int) $id_style . ")";
 
         try {
-            $db->query($sql);
-            return (bool) $db->affectedRows();
+            $stmt = $db->pdo->query($sql);
+            return (bool) $stmt->rowCount();
         } catch (\Exception $e) {
             return false;
         }
@@ -795,9 +795,9 @@ class Event extends ObjectModel
              . "WHERE `id_event` = " . (int) $this->getIdEvent() . " "
              . "AND `id_style` = " . (int) $id_style;
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -825,9 +825,9 @@ class Event extends ObjectModel
         $sql = "DELETE FROM `" . self::$db_table_event_style . "` "
              . "WHERE `id_event` = " . (int) $this->getIdEvent();
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -846,8 +846,8 @@ class Event extends ObjectModel
              . "VALUES (" . (int) $this->getIdEvent() . ", " . (int) $id_groupe . ")";
 
         try {
-            $db->query($sql);
-            return (bool) $db->affectedRows();
+            $stmt = $db->pdo->query($sql);
+            return (bool) $stmt->rowCount();
         } catch (\Exception $e) {
             return false;
         }
@@ -868,9 +868,9 @@ class Event extends ObjectModel
              . "WHERE `id_event` = " . (int) $this->getIdEvent() . " "
              . "AND `id_groupe` = " . (int) $id_groupe;
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -885,9 +885,9 @@ class Event extends ObjectModel
         $sql = "DELETE FROM `" . self::$db_table_participe_a . "` "
              . "WHERE `id_event` = " . (int) $this->getIdEvent();
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -906,8 +906,8 @@ class Event extends ObjectModel
              . "VALUES (" . (int) $this->getIdEvent() . ", " . (int) $id_structure . ")";
 
         try {
-            $db->query($sql);
-            return (bool) $db->affectedRows();
+            $stmt = $db->pdo->query($sql);
+            return (bool) $stmt->rowCount();
         } catch (\Exception $e) {
             return false;
         }
@@ -928,9 +928,9 @@ class Event extends ObjectModel
              . "WHERE `id_event` = " . (int) $this->getIdEvent() . " "
              . "AND `id_structure` = " . (int) $id_structure;
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -958,9 +958,9 @@ class Event extends ObjectModel
         $sql = "DELETE FROM `" . self::$db_table_organise_par . "` "
              . "WHERE `id_event` = " . (int) $this->getIdEvent();
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**

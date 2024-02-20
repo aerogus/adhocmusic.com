@@ -378,7 +378,7 @@ abstract class Forum
              . "SET `nb_views` = `nb_views` + 1 "
              . "WHERE `id_thread` = " . $id_thread;
 
-        $db->query($sql);
+        $db->pdo->query($sql);
 
         return true;
     }
@@ -464,7 +464,7 @@ abstract class Forum
              . (int) $params['id_contact'] . ", " . (int) $params['id_contact'] . ", "
              . "'" . $params['text'] . "')";
 
-         $db->query($sql);
+         $db->pdo->query($sql);
 
          return (int) $db->insertId();
     }
@@ -491,7 +491,7 @@ abstract class Forum
              . "`modified_by` = " . (int) $params['id_contact'] . " "
              . "WHERE `id_message` = " . (int) $params['id_message'];
 
-        $db->query($sql);
+        $db->pdo->query($sql);
 
         return (bool) $db->affectedRows();
     }
@@ -512,9 +512,9 @@ abstract class Forum
         $sql = "DELETE FROM `" . static::$db_table_forum_message . "` "
              . "WHERE `id_message` = " . (int) $params['id_message'];
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -540,9 +540,9 @@ abstract class Forum
              . (int) $params['id_contact'] . ", " . (int) $params['id_contact'] . ", "
              . "'" . $params['id_forum'] . "', 0, 0, '" . $params['subject'] . "')";
 
-        $db->query($sql);
+        $db->pdo->query($sql);
 
-        return (int) $db->insertId();
+        return (int) $db->pdo->lastInsertId();
     }
 
     /**
@@ -571,9 +571,9 @@ abstract class Forum
              . "`modified_by` = " . (int) $params['id_contact'] . " "
              . "WHERE `id_thread` = " . (int) $params['id_thread'];
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -592,9 +592,9 @@ abstract class Forum
         $sql = "DELETE FROM `" . static::$db_table_forum_thread . "` "
              . "WHERE `id_thread` = " . (int) $params['id_thread'];
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 
     /**
@@ -630,8 +630,8 @@ abstract class Forum
         }
         $sql .= "WHERE `id_forum` = '" . $params['id_forum'] . "'";
 
-        $db->query($sql);
+        $stmt = $db->pdo->query($sql);
 
-        return (bool) $db->affectedRows();
+        return (bool) $stmt->rowCount();
     }
 }

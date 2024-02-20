@@ -498,7 +498,7 @@ class Newsletter extends ObjectModel
             $sql = "INSERT INTO `adhoc_newsletter_hit` "
                  . "(`date`, `id_newsletter`, `id_contact`, `url`, `ip`, `host`, `useragent`) "
                  . "VALUES(NOW(), " . (int) $id_newsletter . ", " . (int) $id_contact . ", '" . $url . "', '" . $ip . "', '" . $host . "', '" . $useragent . "')";
-            $res = $db->query($sql);
+            $res = $db->pdo->query($sql);
         } catch (\Exception $e) {
             // rien
         }

@@ -189,7 +189,7 @@ class Log
              . $id_contact . ", '" . $extra . "', "
              . "'" . $ip . "', '" . $host . "')";
 
-        return $db->query($sql);
+        return $db->pdo->query($sql);
     }
 
     /**
