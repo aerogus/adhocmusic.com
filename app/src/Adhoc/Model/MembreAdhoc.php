@@ -201,7 +201,8 @@ class MembreAdhoc extends ObjectModel
         }
         $sql .= "ORDER BY `ma`.`rank` ASC, `ma`.`datfin` DESC";
 
-        $mbrs = $db->queryWithFetch($sql);
+        $stm = $db->pdo->query($sql);
+        $mbrs = $stm->fetchAll();
 
         foreach ($mbrs as $idx => $mbr) {
             $mbrs[$idx]['avatar_interne'] = false;
