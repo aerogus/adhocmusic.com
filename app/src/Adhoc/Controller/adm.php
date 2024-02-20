@@ -247,12 +247,13 @@ final class Controller
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public static function groupeDeStyleId(): string
+    public static function groupeDeStyleId(): ?string
     {
         if (Tools::isSubmit('form-groupe-de-style')) {
-            return self::groupeDeStyleSubmit();
+            self::groupeDeStyleSubmit();
+            return null;
         }
 
         Tools::auth(Membre::TYPE_INTERNE);

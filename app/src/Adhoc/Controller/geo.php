@@ -19,7 +19,7 @@ final class Controller
     /**
      * Retourne la liste des pays du monde [id_country => name, ...]
      *
-     * @return array
+     * @return array<string,string>
      */
     public static function countries(): array
     {
@@ -34,14 +34,16 @@ final class Controller
      * Retourne le tableau code region / nom region
      * pour un pays donné
      *
-     * @return array
+     * @return array<string,string>
      */
     public static function regions(): array
     {
         $id_country = (string) Route::params('id_country');
         $id_country = strtoupper(substr(trim($id_country), 0, 2));
 
-        $regions = WorldRegion::find(['id_country' => $id_country]);
+        $regions = WorldRegion::find([
+            'id_country' => $id_country,
+        ]);
 
         $arr = [];
         foreach ($regions as $region) {
@@ -57,7 +59,7 @@ final class Controller
      * pour une région donnée
      * (France uniquement)
      *
-     * @return array
+     * @return array<string,string>
      */
     public static function departements(): array
     {
@@ -85,9 +87,7 @@ final class Controller
      * pour un departement donné
      * (France uniquement)
      *
-     * @param string $_GET['d']
-     *
-     * @return array
+     * @return array<int,string>
      */
     public static function cities(): array
     {
@@ -102,7 +102,7 @@ final class Controller
                  . "ORDER BY `name` ASC";
             $res = $db->queryWithFetch($sql);
             foreach ($res as $_res) {
-                $tab[$_res['id_city']] = $_res['cp'] . " - " . ucwords(strtolower($_res['name']));
+                $tab[(int) $_res['id_city']] = $_res['cp'] . " - " . ucwords(strtolower($_res['name']));
             }
         }
 
@@ -113,9 +113,7 @@ final class Controller
      * Retourne le tableau des lieux pour une ville donnée
      * (France uniquement)
      *
-     * @param string $_GET['v']
-     *
-     * @return array
+     * @return array<int,string>
      */
     public static function lieux(): array
     {
@@ -130,7 +128,7 @@ final class Controller
                  . "ORDER BY `name` ASC";
             $res = $db->queryWithFetch($sql);
             foreach ($res as $_res) {
-                $tab[$_res['id_lieu']] = ucwords(strtolower($_res['name']));
+                $tab[(int) $_res['id_lieu']] = ucwords(strtolower($_res['name']));
             }
         }
 

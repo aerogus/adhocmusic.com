@@ -212,7 +212,7 @@ abstract class Forum
      *                                'subject' => string, (opt.)
      *                            ]
      *
-     * @return array<string,int>
+     * @return array<string,mixed>
      */
     public static function addMessage(array $params)
     {

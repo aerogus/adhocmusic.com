@@ -288,7 +288,7 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @param array<\stdClass> $breadcrumb breadcrumb [{title:'', link: '', description: ''},{...}]
+     * @param array<string> $breadcrumb breadcrumb [{title:'', link: '', description: ''},{...}]
      *
      * @return static
      */

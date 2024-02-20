@@ -89,7 +89,7 @@ final class Controller
      * Test api:
      * http -v --verify=no GET https://www.adhocmusic.test/api/subscriptions/list.json
      *
-     * @return array
+     * @return array<\stdClass>
      */
     public static function apiList(): array
     {
@@ -119,7 +119,7 @@ final class Controller
      * Test API avec httpie:
      * http -v -f --verify=no POST https://www.adhocmusic.test/api/subscriptions/create.json first_name=Guillaume
      *
-     * @return array
+     * @return array<string,mixed>
      */
     public static function apiCreate(): array
     {
@@ -165,7 +165,7 @@ final class Controller
      * Test API avec httpie:
      * http -v -f --verify=no POST https://www.adhocmusic.test/api/subscriptions/edit/15.json first_name=Guillaume
      *
-     * @return array
+     * @return array<string,mixed>
      */
     public static function apiEdit(): array
     {
@@ -216,7 +216,7 @@ final class Controller
      * Test API avec httpie:
      * http -v -f --verify=no POST https://www.adhocmusic.test/api/subscriptions/delete/15.json
      *
-     * @return array
+     * @return array<string,mixed>
      */
     public static function apiDelete(): array
     {

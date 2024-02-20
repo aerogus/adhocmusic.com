@@ -479,9 +479,9 @@ final class Controller
     }
 
     /**
-     * @return string
+     * @return array<mixed>
      */
-    public static function fetch(): string
+    public static function fetch(): array
     {
         $mode  = (string) Route::params('mode'); // radius|boundary|admin
         $lat   = (float) Route::params('lat');

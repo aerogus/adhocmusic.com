@@ -91,7 +91,7 @@ final class Controller
         $meta_title = '';
         $meta_description = "Titre : " . $photo->getName();
 
-        if ($photo->getOnline() || (!$photo->getOnline() && Tools::isAuth() && Tools::auth(Membre::TYPE_INTERNE))) {
+        if ($photo->getOnline()) {
             $smarty->assign('photo', $photo);
             $smarty->assign('from', $from);
             $smarty->assign('og_image', $photo->getThumbUrl(320));

@@ -166,8 +166,6 @@ final class Controller
             $smarty->assign('error_params', true);
         } elseif (!empty($id_thread)) {
             $id_forum = ForumPrive::getIdForumByIdThread($id_thread);
-        } elseif (!is_null($id_forum)) {
-            // rien
         }
 
         $forum = ForumPrive::getForum($id_forum);
