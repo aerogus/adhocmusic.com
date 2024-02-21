@@ -506,6 +506,14 @@ class Membre extends ObjectModel
     }
 
     /**
+     * @return ?string
+     */
+    public function getEmail(): ?string
+    {
+        return $this->getContact()->getEmail();
+    }
+
+    /**
      * @return array<Groupe>
      */
     public function getGroupes(): array
