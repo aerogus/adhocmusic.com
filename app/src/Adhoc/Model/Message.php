@@ -65,6 +65,16 @@ class Message extends ObjectModel
     protected ?bool $del_to = null;
 
     /**
+     * @var ?Membre
+     */
+    protected ?Membre $membre_from = null;
+
+    /**
+     * @var ?Membre
+     */
+    protected ?Membre $membre_to = null;
+
+    /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
@@ -97,11 +107,43 @@ class Message extends ObjectModel
     }
 
     /**
+     * @return ?Membre
+     */
+    public function getMembreFrom(): ?Membre
+    {
+        if (is_null($this->getIdFrom())) {
+            return null;
+        }
+
+        if (is_null($this->membre_from)) {
+            $this->membre_from = Membre::getInstance($this->getIdFrom());
+        }
+
+        return $this->membre_from;
+    }
+
+    /**
      * @return ?int
      */
     public function getIdTo(): ?int
     {
         return $this->id_to;
+    }
+
+    /**
+     * @return ?Membre
+     */
+    public function getMembreTo(): ?Membre
+    {
+        if (is_null($this->getIdTo())) {
+            return null;
+        }
+
+        if (is_null($this->membre_to)) {
+            $this->membre_to = Membre::getInstance($this->getIdTo());
+        }
+
+        return $this->membre_to;
     }
 
     /**

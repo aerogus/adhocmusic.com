@@ -22,7 +22,7 @@
           {foreach from=$inbox key=cpt item=msg}
           <tr>
             <td><img src="/img/icones/{if !empty($msg->getReadTo())}email_open.png{else}email.png{/if}" alt=""></td>
-            <td><a href="/messagerie/write?pseudo={$msg->getPseudo()|escape}">{$msg->getPseudo()|escape}</a></td>
+            <td><a href="/messagerie/write?pseudo={$msg->getMembreFrom()->getPseudo()|escape}">{$msg->getMembreFrom()->getPseudo()|escape}</a></td>
             <td>{$msg->getDate()|date_format:'%d/%m/%Y à %H:%M'}</td>
             <td><a href="/messagerie/read/{$msg->getId()|escape}">{$msg->getText()|truncate:40|escape}</a></td>
             <td><p class="del-msg-to" data-msg-id="{$msg->getId()|escape}" title="Effacer ce message">❌</p></td>
@@ -48,7 +48,7 @@
           {foreach from=$outbox key=cpt item=msg}
           <tr>
             <td><img src="/img/icones/{if !empty($msg->getReadTo())}email_open.png{else}email.png{/if}" alt=""></td>
-            <td><a href="/messagerie/write?pseudo={$msg->getPseudo()|escape}">{$msg->getPseudo()|escape}</a></td>
+            <td><a href="/messagerie/write?pseudo={$msg->getMembreTo()->getPseudo()|escape}">{$msg->getMembreTo()->getPseudo()|escape}</a></td>
             <td>{$msg->getDate()|date_format:'%d/%m/%Y à %H:%M'}</td>
             <td><a href="/messagerie/read/{$msg->getId()|escape}">{$msg->getText()|truncate:40|escape}</a></td>
             <td><p class="del-msg-from" data-msg-id="{$msg->getId()|escape}" title="Effacer ce message">❌</p></td>
