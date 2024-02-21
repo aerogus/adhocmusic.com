@@ -489,7 +489,7 @@ class Route
         $log_message = '[' . addcslashes($controller, "\r\n|[]") . '] ' .
                        '[' . addcslashes($action, "\r\n|[]") . '] ' .
                        '[' . addcslashes($log, "\r\n|[]") . '] ';
-        if (($fp = fopen(ADHOC_LOG_PATH . '/route-errors.log', 'a')) !== false) {
+        if (($fp = fopen(LOG_PATH . '/route-errors.log', 'a')) !== false) {
             fputs($fp, $log_message . "\n");
             fclose($fp);
         }

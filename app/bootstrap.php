@@ -14,7 +14,7 @@ use Adhoc\Utils\Tools;
 define('ADHOC_ROOT_PATH', dirname(__DIR__));
 define('ADHOC_LIB_PATH', ADHOC_ROOT_PATH . '/models');
 define('ADHOC_ROUTES_FILE', ADHOC_ROOT_PATH . '/app/routes');
-define('ADHOC_LOG_PATH', ADHOC_ROOT_PATH . '/log');
+define('LOG_PATH', ADHOC_ROOT_PATH . '/log');
 define('DEFAULT_CONTROLLERS_PATH', ADHOC_ROOT_PATH . '/app/src/Adhoc/Controller/');
 define('MEDIA_PATH', ADHOC_ROOT_PATH . '/static/media');
 
@@ -87,7 +87,7 @@ if ($conf['debug']['show_errors']) {
 
 if ($conf['debug']['log_errors']) {
     ini_set('log_errors', '1');
-    ini_set('error_log', ADHOC_LOG_PATH . '/' . $conf['debug']['log_file']);
+    ini_set('error_log', LOG_PATH . '/' . $conf['debug']['log_file']);
 } else {
     ini_set('log_errors', '0');
 }
