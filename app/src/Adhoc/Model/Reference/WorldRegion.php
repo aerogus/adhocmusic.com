@@ -17,7 +17,10 @@ class WorldRegion extends Reference
     /**
      * @var string|array<string>
      */
-    protected static string|array $pk = ['id_country', 'id_region'];
+    protected static string|array $pk = [
+        'id_country',
+        'id_region',
+    ];
 
     /**
      * @var string
@@ -117,7 +120,7 @@ class WorldRegion extends Reference
 
         $ids = $db->pdo->query($sql)->fetchAll();
         foreach ($ids as $id) {
-            $objs[] = static::getInstance((string) $id);
+            $objs[] = static::getInstance((array) $id);
         }
 
         return $objs;
