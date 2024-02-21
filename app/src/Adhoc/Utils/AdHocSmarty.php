@@ -72,7 +72,7 @@ class AdHocSmarty extends \Smarty
 
         $this->enqueueStyle('/css/adhoc.css');
 
-        $this->enqueueScript('/lib/jquery@3.7.1/jquery.min.js');
+        $this->enqueueScript('/static/library/jquery@3.7.1/jquery.min.js');
         $this->enqueueScript('/js/adhoc.js');
     }
 
