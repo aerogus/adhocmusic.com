@@ -145,9 +145,9 @@ class Log
      * @param int $action
      * @param string $extra
      *
-     * @return \mysqli_result|bool
+     * @return bool
      */
-    public static function action(int $action, string $extra = ''): \mysqli_result|bool
+    public static function action(int $action, string $extra = ''): bool
     {
         $db = DataBase::getInstance();
 
@@ -189,7 +189,9 @@ class Log
              . $id_contact . ", '" . $extra . "', "
              . "'" . $ip . "', '" . $host . "')";
 
-        return $db->pdo->query($sql);
+        $db->pdo->query($sql);
+
+        return true;
     }
 
     /**
