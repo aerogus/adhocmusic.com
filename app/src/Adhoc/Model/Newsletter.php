@@ -368,7 +368,7 @@ class Newsletter extends ObjectModel
              . "ORDER BY `c`.`id_contact` ASC "
              . "LIMIT " . (int) $debut . ", " . (int) $limit;
 
-        return $db->queryWithFetch($sql);
+        return $db->pdo->query($sql)->fetchAll();
     }
 
     /**

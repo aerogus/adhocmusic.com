@@ -247,7 +247,7 @@ class Log
         }
         $sql .= "ORDER BY `l`.`datetime` DESC";
 
-        $logs = $db->queryWithFetch($sql);
+        $logs = $db->pdo->query($sql)->fetchAll();
 
         foreach ($logs as $key => $log) {
             $logs[$key]['actionlib'] = self::$actions[$log['action']];

@@ -873,7 +873,7 @@ class Lieu extends ObjectModel
              . "FROM `" . Lieu::getDbTable() . "` "
              . "ORDER BY `id_departement` ASC";
 
-        $rows = $db->queryWithFetch($sql);
+        $rows = $db->pdo->query($sql)->fetchAll();
 
         $tab = [];
         foreach (Departement::findAll() as $dep) {
@@ -1107,7 +1107,7 @@ EOT;
         }
         $sql .= "LIMIT 0, " . $limit;
 
-        return $db->queryWithFetch($sql);
+        return $db->pdo->query($sql)->fetchAll();
     }
 
     /**
@@ -1156,7 +1156,7 @@ EOT;
              . "ORDER BY RAND() "
              . "LIMIT 0, " . $limit;
 
-        return $db->queryWithFetch($sql);
+        return $db->pdo->query($sql)->fetchAll();
     }
 
     /**
@@ -1194,6 +1194,6 @@ EOT;
              . "ORDER BY `l`.`id_country` ASC, `l`.`id_region` ASC, `l`.`id_departement` ASC "
              . "LIMIT 0, " . $limit;
 
-        return $db->queryWithFetch($sql);
+        return $db->pdo->query($sql)->fetchAll();
     }
 }

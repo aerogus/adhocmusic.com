@@ -51,7 +51,7 @@ class ForumPrive extends Forum
              . "ORDER BY  `t`.`modified_at` DESC, `m`.`id_thread` DESC , `m`.`id_message` DESC "
              . "LIMIT " . ((int) $page * FORUM_NB_THREADS_PER_PAGE) . "," . FORUM_NB_THREADS_PER_PAGE;
 
-        $threads = $db->queryWithFetch($sql);
+        $threads = $db->pdo->query($sql)->fetchAll();
 
         if (is_array($threads)) {
             foreach ($threads as $idx => $thread) {
@@ -248,7 +248,7 @@ class ForumPrive extends Forum
              . "AND `m`.`id_contact` = `s`.`id_contact` "
              . "AND `s`.`id_forum` = '" . $id_forum . "'";
 
-        $subs = $db->queryWithFetch($sql);
+        $subs = $db->pdo->query($sql)->fetchAll();
 
         if (is_array($subs)) {
             foreach ($subs as $idx => $sub) {

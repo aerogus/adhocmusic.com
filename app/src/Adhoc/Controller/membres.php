@@ -341,7 +341,7 @@ final class Controller
              . "ORDER BY `pseudo` ASC "
              . "LIMIT 0, 10";
 
-        return $db->queryWithFetch($sql);
+        return $db->pdo->query($sql)->fetchAll();
     }
 
     /**
@@ -368,7 +368,8 @@ final class Controller
              . "ORDER BY `p`.`date` DESC "
              . "LIMIT 0, 5";
 
-        $smarty->assign('inbox', $db->queryWithFetch($sql));
+        $inbox = $db->pdo->query($sql)->fetchAll();
+        $smarty->assign('inbox', $inbox);
 
         $myAlerting = Alerting::find(['id_contact' => $_SESSION['membre']->getId()]);
         $myAlertingLieu = $myAlertingGroupe = $myAlertingEvent =  [];

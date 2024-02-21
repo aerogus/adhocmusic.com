@@ -69,12 +69,14 @@ final class Controller
         $tab = [];
 
         $db = DataBase::getInstance();
-        $sql = "SELECT `id_departement`, `name` FROM `geo_fr_departement` ";
+        $sql  = "SELECT `id_departement`, `name` ";
+        $sql .= "FROM `geo_fr_departement` ";
+        $sql .= "WHERE 1 ";
         if (!empty($id_region)) {
-            $sql .= "WHERE `id_region` = '" . $id_region . "' ";
+            $sql .= "AND `id_region` = '" . $id_region . "' ";
         }
         $sql .= "ORDER BY `name` ASC";
-        $res = $db->queryWithFetch($sql);
+        $res = $db->pdo->query($sql)->fetchAll();
         foreach ($res as $_res) {
             $tab[$_res['id_departement']] = $_res['name'];
         }
@@ -100,7 +102,7 @@ final class Controller
                  . "FROM `" . City::getDbTable() . "` "
                  . "WHERE `id_departement` = '" . $d . "' "
                  . "ORDER BY `name` ASC";
-            $res = $db->queryWithFetch($sql);
+            $res = $db->pdo->query($sql)->fetchAll();
             foreach ($res as $_res) {
                 $tab[(int) $_res['id_city']] = $_res['cp'] . " - " . ucwords(strtolower($_res['name']));
             }
@@ -126,7 +128,7 @@ final class Controller
                  . "FROM `adhoc_lieu` "
                  . "WHERE `id_city` = " . (int) $id_city . " "
                  . "ORDER BY `name` ASC";
-            $res = $db->queryWithFetch($sql);
+            $res = $db->pdo->query($sql)->fetchAll();
             foreach ($res as $_res) {
                 $tab[(int) $_res['id_lieu']] = ucwords(strtolower($_res['name']));
             }

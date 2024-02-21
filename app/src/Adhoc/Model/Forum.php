@@ -182,7 +182,7 @@ abstract class Forum
              . "WHERE `f`.`id_contact` = `m`.`id_contact` "
              . "ORDER BY `f`.`id_forum` ASC";
 
-        return $db->queryWithFetch($sql);
+        return $db->pdo->query($sql)->fetchAll();
     }
 
     /**
@@ -399,7 +399,7 @@ abstract class Forum
              . "LEFT JOIN `" . static::$db_table_forum_thread . "` `t` ON `f`.`id_forum` = `t`.`id_forum` "
              . "GROUP BY `f`.`id_forum` ASC";
 
-        $res = $db->queryWithFetch($sql);
+        $res = $db->pdo->query($sql)->fetchAll();
 
         $tab = [];
         foreach ($res as $_res) {
@@ -428,7 +428,7 @@ abstract class Forum
              . "WHERE `m`.`id_thread` = `t`.`id_thread` "
              . "GROUP BY `t`.`id_forum` ASC";
 
-        $res = $db->queryWithFetch($sql);
+        $res = $db->pdo->query($sql)->fetchAll();
 
         $tab = [];
         foreach ($res as $_res) {

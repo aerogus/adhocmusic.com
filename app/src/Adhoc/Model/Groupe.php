@@ -1420,6 +1420,6 @@ class Groupe extends ObjectModel
              . "AND `g`.`online` AND `p`.`online`)"
              . " ORDER BY `name` ASC";
 
-        return $db->queryWithFetch($sql);
+        return $db->pdo->query($sql)->fetchAll();
     }
 }

@@ -113,7 +113,9 @@ class WorldRegion extends Reference
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
-        $ids = $db->queryWithFetch($sql);
+        $res = $db->pdo->query($sql)->fetchAll();
+
+        $ids = $db->pdo->query($sql)->fetchAll();
         foreach ($ids as $id) {
             $objs[] = static::getInstance($id);
         }
