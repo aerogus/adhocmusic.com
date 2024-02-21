@@ -416,7 +416,7 @@ CREATE TABLE `adhoc_forum_prive_subscriber` (
 );
 
 CREATE TABLE `adhoc_messagerie` (
-  `id_pm` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_message` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_from` int(10) UNSIGNED NOT NULL,
   `id_to` int(10) UNSIGNED NOT NULL,
   `text` text NOT NULL,
@@ -424,7 +424,7 @@ CREATE TABLE `adhoc_messagerie` (
   `read_to` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `del_from` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `del_to` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_pm`),
+  PRIMARY KEY (`id_message`),
   KEY `id_from` (`id_from`),
   KEY `id_to` (`id_to`),
   KEY `del_from` (`del_from`),

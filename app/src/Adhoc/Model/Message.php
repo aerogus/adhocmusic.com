@@ -17,7 +17,7 @@ class Message extends ObjectModel
     /**
      * @var string|array<string>
      */
-    protected static string|array $pk = 'id_message'; // ex id_pm
+    protected static string|array $pk = 'id_message';
 
     /**
      * @var string
@@ -70,7 +70,7 @@ class Message extends ObjectModel
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_message' => 'int', // pk (ex id_pm)
+        'id_message' => 'int', // pk
         'id_from'    => 'int',
         'id_to'      => 'int',
         'text'       => 'string',
@@ -85,7 +85,7 @@ class Message extends ObjectModel
      */
     public function getIdMessage(): ?int
     {
-        return $this->id_message; // ex id_pm
+        return $this->id_message;
     }
 
     /**
