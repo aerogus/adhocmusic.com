@@ -44,9 +44,9 @@ class WorldCountry extends Reference
     /* début getters */
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getIdCountry(): string
+    public function getIdCountry(): ?string
     {
         return $this->id_country;
     }
@@ -58,7 +58,7 @@ class WorldCountry extends Reference
      */
     public function getFlagUrl(): string
     {
-        return MEDIA_URL . '/country/' . strtolower($this->id_country) . '.png';
+        return MEDIA_URL . '/country/' . strtolower($this->getIdCountry()) . '.png';
     }
 
     /* fin getters */
@@ -84,7 +84,9 @@ class WorldCountry extends Reference
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+        $sql  = "SELECT `" . static::getDbPk() . "` ";
+        $sql .= "FROM `" . static::getDbTable() . "` ";
+        $sql .= "WHERE 1 ";
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
@@ -108,7 +110,7 @@ class WorldCountry extends Reference
 
         $ids = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
         foreach ($ids as $id) {
-            $objs[] = static::getInstance((int) $id);
+            $objs[] = static::getInstance((string) $id);
         }
 
         return $objs;

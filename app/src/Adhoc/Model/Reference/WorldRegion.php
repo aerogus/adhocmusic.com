@@ -87,7 +87,9 @@ class WorldRegion extends Reference
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `" . implode('`,`', static::getDbPk()) . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+        $sql  = "SELECT `" . implode('`,`', static::getDbPk()) . "` ";
+        $sql .= "FROM `" . static::getDbTable() . "` ";
+        $sql .= "WHERE 1 ";
 
         if (isset($params['id_country'])) {
             $sql .= "AND `id_country` = '" . $params['id_country'] . "' ";
@@ -113,11 +115,9 @@ class WorldRegion extends Reference
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
-        $res = $db->pdo->query($sql)->fetchAll();
-
         $ids = $db->pdo->query($sql)->fetchAll();
         foreach ($ids as $id) {
-            $objs[] = static::getInstance($id);
+            $objs[] = static::getInstance((string) $id);
         }
 
         return $objs;
