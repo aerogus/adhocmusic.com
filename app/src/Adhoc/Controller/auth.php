@@ -55,6 +55,7 @@ final class Controller
         if (Tools::isSubmit('form-login')) {
             $pseudo = trim((string) Route::params('pseudo'));
             $password = trim((string) Route::params('password'));
+            $_POST['password'] = '********'; // sécu
 
             if (mb_strlen($pseudo) === 0 || mb_strlen($password) === 0) {
                 Log::action(Log::ACTION_LOGIN_FAILED, print_r($_POST, true));
