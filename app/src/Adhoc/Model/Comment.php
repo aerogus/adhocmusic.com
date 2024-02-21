@@ -122,6 +122,14 @@ class Comment extends ObjectModel
     /* début getters */
 
     /**
+     * @return ?int
+     */
+    public function getIdComment(): ?int
+    {
+        return $this->id_comment;
+    }
+
+    /**
      * @return ?string
      */
     public function getType(): ?string
@@ -261,6 +269,21 @@ class Comment extends ObjectModel
     /* fin getters */
 
     /* début setters */
+
+    /**
+     * @param int $id_comment id_comment
+     *
+     * @return static
+     */
+    public function setIdComment(int $id_comment): static
+    {
+        if ($this->id_comment !== $id_comment) {
+            $this->id_comment = $id_comment;
+            $this->modified_fields['id_comment'] = true;
+        }
+
+        return $this;
+    }
 
     /**
      * @param string $type type
