@@ -321,6 +321,7 @@ class Route
                 self::output('text/plain', serialize($ret));
                 return true;
             case 'txt':
+            default:
                 self::output('text/plain', print_r($ret, true));
                 return true;
         }
