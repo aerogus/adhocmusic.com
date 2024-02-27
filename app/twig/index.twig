@@ -28,7 +28,7 @@
 
     <div class="box">
       <header>
-        <h2>Ils sont passés par AD'HOC ces 20 dernières années</h2>
+        <h2>Ils sont passés par AD'HOC</h2>
       </header>
       <div class="reset grid-3-small-2 has-gutter">
         {% for video in videos %}
@@ -60,7 +60,7 @@
       <ul>
       {% for month, month_events in events %}
         <li class="mbs">
-          <strong>{{ month|date("%B %Y")|capitalize }}</strong>
+          <strong>{{ month|format_datetime(pattern='LLLL yyyy')|capitalize }}</strong>
           <ul>
           {% for month, event in month_events %}
             <li><span style="font-weight: bold; color: #cc0000;" title="{{ event.date|date("%A %e %B à %H:%M") }}">{{ event.date|date("%d") }}</span> <a href="{{ event.url }}" title="{{ event.name }}">{{ event.name|slice(0, 40) }}</a></li>

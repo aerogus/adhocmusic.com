@@ -7,6 +7,7 @@ namespace Adhoc\Utils;
 use Adhoc\Utils\Trail;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use Twig\Extra\Intl\IntlExtension;
 
 /**
  * Fonctions et modifiers custom pour Twig
@@ -48,6 +49,8 @@ class AdHocTwig
             'cache' => TWIG_TEMPLATES_C_PATH,
             'auto_reload' => true, // true pour dev uniquement
         ]);
+
+        $this->env->addExtension(new IntlExtension());
 
         $this->assign('title', "♫ AD'HOC : les Musiques Actuelles en Essonne");
         $this->assign('description', "Portail sur les musiques actuelles, vidéos de concerts, promotion d'artistes...");
