@@ -196,42 +196,36 @@ final class Controller
      */
     public static function sitemap(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign(
+        $twig->assign(
             'groupes',
-            Groupe::find(
-                [
-                    'online' => true,
-                    'order_by' => 'name',
-                    'sort' => 'ASC',
-                ]
-            )
+            Groupe::find([
+                'online' => true,
+                'order_by' => 'name',
+                'sort' => 'ASC',
+            ])
         );
 
-        $smarty->assign(
+        $twig->assign(
             'lieux',
-            Lieu::find(
-                [
-                    'online' => true,
-                    'order_by' => 'id_lieu',
-                    'sort' => 'ASC',
-                ]
-            )
+            Lieu::find([
+                'online' => true,
+                'order_by' => 'id_lieu',
+                'sort' => 'ASC',
+            ])
         );
 
-        $smarty->assign(
+        $twig->assign(
             'events',
-            Event::find(
-                [
-                    'online' => true,
-                    'order_by' => 'id_event',
-                    'sort' => 'ASC',
-                ]
-            )
+            Event::find([
+                'online' => true,
+                'order_by' => 'id_event',
+                'sort' => 'ASC',
+            ])
         );
 
-        return $smarty->fetch('sitemap.tpl');
+        return $twig->render('sitemap.twig');
     }
 
     /**
@@ -241,15 +235,15 @@ final class Controller
      */
     public static function map(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         $from = trim((string) Route::params('from'));
-        $smarty->assign('from', $from);
+        $twig->assign('referer', $from);
 
         Trail::getInstance()
             ->addStep("Plan du Site");
 
-        return $smarty->fetch('map.tpl');
+        return $twig->render('map.twig');
     }
 
     /**
@@ -259,12 +253,12 @@ final class Controller
      */
     public static function mentionsLegales(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Mentions Légales");
 
-        return $smarty->fetch('mentions-legales.tpl');
+        return $twig->render('mentions-legales.tpl');
     }
 
     /**
@@ -274,30 +268,32 @@ final class Controller
      */
     public static function credits(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Crédits");
 
-        return $smarty->fetch('credits.tpl');
+        return $twig->render('credits.twig');
     }
 
     /**
      * Player vidéo HLS pour les événéments en direct
+     *
+     * @return string
      */
     public static function onair(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/hls.min.js');
-        $smarty->enqueueScript('/js/onair.js');
+        $twig->enqueueScript('/js/hls.min.js');
+        $twig->enqueueScript('/js/onair.js');
 
-        $smarty->enqueueScriptVar('videoSrc', 'https://live.adhocmusic.com/hls/onair.m3u8');
+        $twig->enqueueScriptVar('videoSrc', 'https://live.adhocmusic.com/hls/onair.m3u8');
 
         Trail::getInstance()
             ->addStep("ON AIR");
 
-        return $smarty->fetch('onair.tpl');
+        return $twig->render('onair.twig');
     }
 
     /**
