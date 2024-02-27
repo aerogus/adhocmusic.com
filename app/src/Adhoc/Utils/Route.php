@@ -325,9 +325,6 @@ class Route
                 self::output('text/plain', print_r($ret, true));
                 return true;
         }
-
-        header('HTTP/1.0 500 Internal Server Error');
-        die('500 Internal Server Error');
     }
 
     /**

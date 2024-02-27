@@ -15,6 +15,7 @@ use Adhoc\Model\Newsletter;
 use Adhoc\Model\Partner;
 use Adhoc\Model\Video;
 use Adhoc\Utils\AdHocSmarty;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
@@ -22,6 +23,7 @@ use Adhoc\Utils\Trail;
 
 final class Controller
 {
+
     /**
      * Homepage
      *
@@ -29,47 +31,30 @@ final class Controller
      */
     public static function index(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign(
-            [
-                'title' => "♫ AD'HOC : les Musiques Actuelles en Essonne",
-                'description' => "Portail sur les musiques actuelles, vidéos de concerts, promotion d'artistes...",
-                'og_type' => 'website',
-                'og_image' => HOME_URL . '/img/screenshot-homepage.jpg',
-            ]
-        );
+        $videos = Video::find([
+            'id_lieu' => 1,
+            'has_groupe' => true,
+            'online' => true,
+            'order_by' => 'random',
+            'sort' => 'DESC',
+            'start' => 0,
+            'limit' => 6,
+        ]);
+        $twig->assign('videos', $videos);
 
-        $smarty->assign(
-            'videos',
-            Video::find(
-                [
-                    'id_lieu' => 1,
-                    'has_groupe' => true,
-                    'online' => true,
-                    'order_by' => 'random',
-                    'sort' => 'DESC',
-                    'start' => 0,
-                    'limit' => 6,
-                ]
-            )
-        );
+        $featured = Featured::find([
+            'online' => true,
+            'current' => true,
+            'order_by' => 'modified_at',
+            'sort' => 'DESC',
+            'limit' => 6,
+        ]);
+        $twig->assign('featured', $featured);
 
-        $smarty->assign(
-            'featured',
-            Featured::find(
-                [
-                    'online' => true,
-                    'current' => true,
-                    'order_by' => 'modified_at',
-                    'sort' => 'DESC',
-                    'limit' => 6,
-                ]
-            )
-        );
-
-        $smarty->enqueueScript('/js/swipe.min.js');
-        $smarty->enqueueScript('/js/featured.js');
+        $twig->enqueueScript('/js/swipe.min.js');
+        $twig->enqueueScript('/js/featured.js');
 
         $_events = Event::find(
             [
@@ -90,9 +75,9 @@ final class Controller
             }
             $events[$month][] = $event;
         }
-        $smarty->assign('events', $events);
+        $twig->assign('events', $events);
 
-        return $smarty->fetch('index.tpl');
+        return $twig->render('index.twig');
     }
 
     /**
@@ -102,17 +87,17 @@ final class Controller
      */
     public static function partners(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('title', "♫ Les Partenaires de l'association AD'HOC");
-        $smarty->assign('description', "Les Partenaires de l'Association AD'HOC");
+        $twig->assign('title', "♫ Les Partenaires de l'association AD'HOC");
+        $twig->assign('description', "Les Partenaires de l'Association AD'HOC");
 
         Trail::getInstance()
             ->addStep("Partenaires");
 
-        $smarty->assign('partners', Partner::findAll());
+        $twig->assign('partners', Partner::findAll());
 
-        return $smarty->fetch('partners.tpl');
+        return $twig->render('partners.twig');
     }
 
     /**

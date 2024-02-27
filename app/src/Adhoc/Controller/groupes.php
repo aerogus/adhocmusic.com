@@ -12,6 +12,7 @@ use Adhoc\Model\Photo;
 use Adhoc\Model\Reference\TypeMusicien;
 use Adhoc\Model\Video;
 use Adhoc\Utils\AdHocSmarty;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;

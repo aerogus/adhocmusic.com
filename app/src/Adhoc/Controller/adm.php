@@ -10,6 +10,7 @@ use Adhoc\Model\Membre;
 use Adhoc\Model\Reference\Style;
 use Adhoc\Model\Reference\TypeMusicien;
 use Adhoc\Utils\AdHocSmarty;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;

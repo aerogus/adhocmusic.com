@@ -13,6 +13,7 @@ use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Reference\Departement;
 use Adhoc\Utils\AdHocSmarty;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;

@@ -8,6 +8,7 @@ use Adhoc\Model\Event;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Structure;
 use Adhoc\Utils\AdHocSmarty;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
 use Adhoc\Utils\Trail;

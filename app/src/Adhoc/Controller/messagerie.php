@@ -7,6 +7,7 @@ namespace Adhoc\Controller;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Message;
 use Adhoc\Utils\AdHocSmarty;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Log;

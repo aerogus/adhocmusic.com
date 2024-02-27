@@ -7,6 +7,7 @@ namespace Adhoc\Controller;
 use Adhoc\Model\Contact;
 use Adhoc\Model\Membre;
 use Adhoc\Utils\AdHocSmarty;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
@@ -27,17 +28,17 @@ final class Controller
             Tools::redirect('/membres/tableau-de-bord');
         }
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep('Se connecter ou créer un compte');
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
-        $smarty->enqueueScript('/js/auth/login.js');
-        $smarty->enqueueScript('/js/membres/create.js');
+        $twig->enqueueScript('/js/auth/login.js');
+        $twig->enqueueScript('/js/membres/create.js');
 
-        return $smarty->fetch('auth/auth.tpl');
+        return $twig->render('auth/auth.tpl');
     }
 
     /**

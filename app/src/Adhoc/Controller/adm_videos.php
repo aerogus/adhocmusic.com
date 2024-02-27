@@ -7,6 +7,7 @@ namespace Adhoc\Controller;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Video;
 use Adhoc\Utils\AdHocSmarty;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
 use Adhoc\Utils\Trail;

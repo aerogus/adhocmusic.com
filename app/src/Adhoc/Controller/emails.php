@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Adhoc\Controller;
 
 use Adhoc\Utils\AdHocSmarty;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\EmailSmarty;
 
 /**

@@ -7,6 +7,7 @@ namespace Adhoc\Controller;
 use Adhoc\Model\ForumPrive;
 use Adhoc\Model\Membre;
 use Adhoc\Utils\AdHocSmarty;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
