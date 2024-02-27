@@ -258,7 +258,7 @@ final class Controller
         Trail::getInstance()
             ->addStep("Mentions Légales");
 
-        return $twig->render('mentions-legales.tpl');
+        return $twig->render('mentions-legales.twig');
     }
 
     /**
