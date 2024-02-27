@@ -38,7 +38,7 @@ final class Controller
         $twig->enqueueScript('/js/auth/login.js');
         $twig->enqueueScript('/js/membres/create.js');
 
-        return $twig->render('auth/auth.tpl');
+        return $twig->render('auth/auth.twig');
     }
 
     /**

@@ -29,6 +29,9 @@ if (!is_dir(SMARTY_TEMPLATE_C_PATH)) {
     mkdir(SMARTY_TEMPLATE_C_PATH, 0755, true);
 }
 
+define('TWIG_TEMPLATES_PATH', __DIR__ . '/twig');
+define('TWIG_TEMPLATES_C_PATH', __DIR__ . '/twig_c');
+
 /**
  * Chargement automatique des classes métiers AD'HOC
  *

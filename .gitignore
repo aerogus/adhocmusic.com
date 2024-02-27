@@ -21,3 +21,6 @@ node_modules
 
 # fs en ram
 /tmpfs
+
+# cache templates twig
+twig_c

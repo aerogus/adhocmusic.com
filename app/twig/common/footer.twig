@@ -1,0 +1,29 @@
+
+</div>{# .site-content #}
+
+{% include 'common/footer-menu.twig' %}
+
+<button type="button" id="up" name="retour en haut de la page">↑</button>
+
+{% if script_vars %}
+<script>
+var asv = {{ script_vars }}
+</script>
+{% endif %}
+
+{% if footer_scripts %}
+{% for script_url in footer_scripts %}
+<script src="{{ script_url }}"></script>
+{% endfor %}
+{% endif %}
+
+{% if inline_scripts %}
+{% for inline_script in inline_scripts %}
+<script>
+{{ inline_script }}
+</script>
+{% endfor %}
+{% endif %}
+
+</body>
+</html>
