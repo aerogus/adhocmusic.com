@@ -6,3 +6,5 @@ parameters:
     - app/bootstrap.php
   paths:
     - app
+  excludePaths:
+    - app/twig_c/??/*.php
