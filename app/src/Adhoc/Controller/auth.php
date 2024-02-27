@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Contact;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Log;
@@ -90,27 +89,27 @@ final class Controller
                 Trail::getInstance()
                     ->addStep("Se connecter");
 
-                $smarty = new AdHocSmarty();
-                $smarty->enqueueScript('/js/auth/login.js');
-                $smarty->assign('robots', 'noindex,nofollow');
-                $smarty->assign('auth_failed', true);
-                return $smarty->fetch('auth/login.tpl');
+                $twig = new AdHocTwig();
+                $twig->enqueueScript('/js/auth/login.js');
+                $twig->assign('robots', 'noindex,nofollow');
+                $twig->assign('auth_failed', true);
+                return $twig->render('auth/login.twig');
             }
         } else {
             Log::action(Log::ACTION_LOGIN_FAILED, print_r($_POST, true));
             die;
         }
 
-        $smarty = new AdHocSmarty();
-        $smarty->assign('not_auth', true);
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig = new AdHocTwig();
+        $twig->assign('not_auth', true);
+        $twig->assign('robots', 'noindex,nofollow');
 
         Trail::getInstance()
             ->addStep('Se connecter');
 
-        $smarty->enqueueScript('/js/auth/login.js');
+        $twig->enqueueScript('/js/auth/login.js');
 
-        return $smarty->fetch('auth/login.tpl');
+        return $twig->render('auth/login.twig');
     }
 
     /**
@@ -150,11 +149,11 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/auth/change-password.js');
+        $twig->enqueueScript('/js/auth/change-password.js');
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -171,26 +170,26 @@ final class Controller
             if (($password_old !== '') && ($password_new_1 !== '') && ($password_new_1 === $password_new_2)) {
                 if ($membre->checkPassword($password_old)) {
                     if ($password_new_1 === $password_old) {
-                        $smarty->assign('change_ok', true);
+                        $twig->assign('change_ok', true);
                     } else {
                         $membre->setPassword($password_new_1);
                         $membre->save();
-                        $smarty->assign('new_password', $password_new_1); // DEBUG ONLY
+                        $twig->assign('new_password', $password_new_1); // DEBUG ONLY
                         Log::action(Log::ACTION_PASSWORD_CHANGED, $password_new_1);
                         Email::send($membre->getContact()->getEmail(), 'Mot de passe modifié', 'password-changed', ['pseudo' => $membre->getPseudo()]);
-                        $smarty->assign('change_ok', true);
+                        $twig->assign('change_ok', true);
                     }
                 } else {
-                    $smarty->assign('change_ko', true);
+                    $twig->assign('change_ko', true);
                 }
             } else {
-                $smarty->assign('change_ko', true);
+                $twig->assign('change_ko', true);
             }
         } else {
-            $smarty->assign('form', true);
+            $twig->assign('form', true);
         }
 
-        return $smarty->fetch('auth/change-password.tpl');
+        return $twig->render('auth/change-password.twig');
     }
 
     /**
@@ -203,11 +202,11 @@ final class Controller
             Tools::redirect('/membres/tableau-de-bord');
         }
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
-        $smarty->enqueueScript('/js/auth/lost-password.js');
+        $twig->enqueueScript('/js/auth/lost-password.js');
 
         Trail::getInstance()
             ->addStep("Mot de passe oublié");
@@ -228,30 +227,30 @@ final class Controller
 
                     if (Email::send($membre->getContact()->getEmail(), 'Perte du mot de passe', 'password-lost', $data)) {
                         Log::action(Log::ACTION_PASSWORD_REQUESTED);
-                        $smarty->assign('sent_ok', true);
+                        $twig->assign('sent_ok', true);
                     } else {
-                        $smarty->assign('sent_ko', true);
-                        $smarty->assign('new_password', $new_password); // DEBUG ONLY
+                        $twig->assign('sent_ko', true);
+                        $twig->assign('new_password', $new_password); // DEBUG ONLY
                     }
                 } else {
                     if ($id_contact = Contact::getIdByEmail($email)) {
                         // pas membre mais contact
-                        $smarty->assign('err_email_unknown', true);
+                        $twig->assign('err_email_unknown', true);
                     } else {
                         // pas contact du tout
-                        $smarty->assign('err_email_unknown', true);
+                        $twig->assign('err_email_unknown', true);
                     }
                 }
             } else {
-                $smarty->assign('err_email_invalid', true);
+                $twig->assign('err_email_invalid', true);
             }
 
-            return $smarty->fetch('auth/lost-password.tpl');
+            return $twig->render('auth/lost-password.twig');
         }
 
-        $smarty->assign('form', true);
+        $twig->assign('form', true);
 
-        return $smarty->fetch('auth/lost-password.tpl');
+        return $twig->render('auth/lost-password.twig');
     }
 
     /**
