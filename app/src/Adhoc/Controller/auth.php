@@ -96,20 +96,8 @@ final class Controller
                 return $twig->render('auth/login.twig');
             }
         } else {
-            Log::action(Log::ACTION_LOGIN_FAILED, print_r($_POST, true));
-            die;
+            Tools::redirect('/auth/auth');
         }
-
-        $twig = new AdHocTwig();
-        $twig->assign('not_auth', true);
-        $twig->assign('robots', 'noindex,nofollow');
-
-        Trail::getInstance()
-            ->addStep('Se connecter');
-
-        $twig->enqueueScript('/js/auth/login.js');
-
-        return $twig->render('auth/login.twig');
     }
 
     /**
