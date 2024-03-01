@@ -1130,7 +1130,7 @@ class Groupe extends ObjectModel
 
         if (isset($params['online'])) {
             $sql .= "AND `online` = ";
-            $sql .= $params['online'] ? "TRUE" : "FALSE";
+            $sql .= boolval($params['online']) ? "TRUE" : "FALSE";
             $sql .= " ";
         }
 
@@ -1205,7 +1205,7 @@ class Groupe extends ObjectModel
 
         $sql = "INSERT INTO `" . self::$db_table_groupe_style . "` "
              . "(`id_groupe`, `id_style`) "
-             . "VALUES(" . (int) $this->getIdGroupe() . ", " . (int) $id_style . ")";
+             . "VALUES(" . $this->getIdGroupe() . ", " . $id_style . ")";
 
         $stmt = $db->pdo->query($sql);
 

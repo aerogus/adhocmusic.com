@@ -16,8 +16,8 @@ $medias = Photo::findAll();
 //$medias = Video::findAll();
 
 foreach ($medias as $media) {
-    if ($media->getIdEvent()) {
-        if (!$media->getIdLieu()) {
+    if (!is_null($media->getIdEvent())) {
+        if (is_null($media->getIdLieu())) {
             echo "[" . get_class($media) . " " . $media->getId() . "] event " . $media->getIdEvent() . " mais 0 lieu, zarb\n";
    //         $media->setIdLieu($media->getEvent()->getIdLieu())->save();
         } else {

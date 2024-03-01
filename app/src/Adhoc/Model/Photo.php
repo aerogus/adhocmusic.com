@@ -217,7 +217,7 @@ class Photo extends Media
      */
     public function genThumb(int $maxWidth = 0): bool
     {
-        if (!$maxWidth) {
+        if ($maxWidth === 0) {
             return false;
         }
 

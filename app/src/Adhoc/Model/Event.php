@@ -579,7 +579,7 @@ class Event extends ObjectModel
 
         if (isset($params['online'])) {
             $sql .= "AND `online` = ";
-            $sql .= $params['online'] ? "TRUE" : "FALSE";
+            $sql .= boolval($params['online']) ? "TRUE" : "FALSE";
             $sql .= " ";
         }
 

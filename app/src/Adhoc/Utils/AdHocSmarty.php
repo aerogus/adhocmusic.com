@@ -192,17 +192,17 @@ class AdHocSmarty extends \Smarty
     {
         $hour = 0;
         if (array_key_exists('hour', $params)) {
-            $hour = (int) $params['hour'];
+            $hour = intval($params['hour']);
         }
 
         $minute = 0;
         if (array_key_exists('minute', $params)) {
-            $minute = (int) $params['minute'];
+            $minute = intval($params['minute']);
         }
 
         $step = 30;
         if (array_key_exists('step', $params)) {
-            $step = (int) $params['step'];
+            $step = intval($params['step']);
         }
 
         $hourminute = str_pad((string) $hour, 2, '0', STR_PAD_LEFT) . ':' . str_pad((string) $minute, 2, '0', STR_PAD_LEFT);
@@ -237,17 +237,17 @@ class AdHocSmarty extends \Smarty
 
         $year = date('Y', $now);
         if (array_key_exists('year', $params)) {
-             $year = (int) $params['year'];
+             $year = intval($params['year']);
         }
 
         $month = date('m', $now);
         if (array_key_exists('month', $params)) {
-            $month = (int) $params['month'];
+            $month = intval($params['month']);
         }
 
         $day = date('d', $now);
         if (array_key_exists('day', $params)) {
-            $day = (int) $params['day'];
+            $day = intval($params['day']);
         }
 
         $start_day = mktime(0, 0, 0, $month, 1, $year); // ts du 1er du mois

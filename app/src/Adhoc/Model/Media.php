@@ -434,7 +434,7 @@ abstract class Media extends ObjectModel
 
         if (isset($params['online'])) {
             $sql .= "AND `online` = ";
-            $sql .= $params['online'] ? "TRUE" : "FALSE";
+            $sql .= boolval($params['online']) ? "TRUE" : "FALSE";
             $sql .= " ";
         }
 
@@ -517,7 +517,7 @@ abstract class Media extends ObjectModel
             }
         }
 
-        if ($params['split']) {
+        if (boolval($params['split'])) {
             return $split;
         }
 

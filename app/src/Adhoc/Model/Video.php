@@ -434,8 +434,8 @@ class Video extends Media
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$db_table_video_groupe . "` "
-             . "WHERE `id_video` = " . (int) $this->getIdVideo() . " "
-             . "AND `id_groupe` = " . (int) $id_groupe;
+             . "WHERE `id_video` = " . $this->getIdVideo() . " "
+             . "AND `id_groupe` = " . $id_groupe;
 
         $stmt = $db->pdo->query($sql);
 
@@ -455,7 +455,7 @@ class Video extends Media
 
         $sql = "INSERT INTO `" . self::$db_table_video_groupe . "` "
              . "(`id_video`, `id_groupe`) "
-             . "VALUES(" . (int) $this->getIdVideo() . ", " . (int) $id_groupe . ")";
+             . "VALUES(" . $this->getIdVideo() . ", " . $id_groupe . ")";
 
         $stmt = $db->pdo->query($sql);
 
@@ -472,7 +472,7 @@ class Video extends Media
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$db_table_video_groupe . "` "
-             . "WHERE `id_video` = " . (int) $this->getIdVideo();
+             . "WHERE `id_video` = " . $this->getIdVideo();
 
         $stmt = $db->pdo->query($sql);
 
@@ -829,7 +829,7 @@ class Video extends Media
      */
     public function genThumb(int $maxWidth = 0): bool
     {
-        if (!$maxWidth) {
+        if ($maxWidth === 0) {
             return false;
         }
 

@@ -153,9 +153,9 @@ class Log
 
         $id_contact = 'NULL';
         $pseudo = '';
-        if (!empty($_SESSION['membre'])) {
-            $id_contact = (int) $_SESSION['membre']->getId();
-            $pseudo = (string) $_SESSION['membre']->getPseudo();
+        if (isset($_SESSION['membre']) && !is_null($_SESSION['membre'])) {
+            $id_contact = $_SESSION['membre']->getId();
+            $pseudo = $_SESSION['membre']->getPseudo();
         }
 
         $ip = '';
@@ -185,7 +185,7 @@ class Log
              . "(`datetime`, `action`, "
              . "`id_contact`, `extra`, "
              . "`ip`, `host`) "
-             . "VALUES(NOW(), " . (int) $action . ", "
+             . "VALUES(NOW(), " . $action . ", "
              . $id_contact . ", '" . $extra . "', "
              . "'" . $ip . "', '" . $host . "')";
 
@@ -245,7 +245,7 @@ class Log
              . "FROM (`adhoc_log_action` `l`) "
              . "LEFT JOIN `adhoc_membre` `m` ON (`m`.`id_contact` = `l`.`id_contact`) ";
         if ($action > 0) {
-            $sql .= "WHERE `l`.`action` = " . (int) $action . " ";
+            $sql .= "WHERE `l`.`action` = " . $action . " ";
         }
         $sql .= "ORDER BY `l`.`datetime` DESC";
 

@@ -68,7 +68,7 @@ class Route
         foreach (['path', 'controller', 'action', 'method'] as $key) {
             unset($extra_params[$key]);
         }
-        if (empty($params['method'])) {
+        if (!isset($params['method'])) {
             $params['method'] = 'GET';
         }
         array_push(
@@ -109,7 +109,7 @@ class Route
         $path = $params['path'];
         $matches = [];
         $path = str_replace('?', '', $path);
-        if (!empty($_SERVER['QUERY_STRING'])) {
+        if (isset($_SERVER['QUERY_STRING'])) {
             $path = str_replace($_SERVER['QUERY_STRING'], '', $path);
         }
 
@@ -416,8 +416,8 @@ class Route
             }
             $scanned_component_splitted_action = explode(';', $scanned_component);
             $component_splitted_action = explode(';', $component);
-            if (!empty($scanned_component_splitted_action[1])) {
-                if (empty($component_splitted_action[1])) {
+            if (isset($scanned_component_splitted_action[1])) {
+                if (!isset($component_splitted_action[1])) {
                     return false;
                 }
                 $component_action = $component_splitted_action[1];
@@ -426,12 +426,12 @@ class Route
                     return false;
                 }
                 $found_action = $route['action'];
-            } elseif (!empty($component_splitted_action[1])) {
+            } elseif (isset($component_splitted_action[1])) {
                 return false;
             }
             $found_params[$matches[1]] = $component_splitted_action[0];
         }
-        if (!empty($found_params['action'])) {
+        if (isset($found_params['action'])) {
             $found_action = $found_params['action'];
         }
         return [

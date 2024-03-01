@@ -357,7 +357,7 @@ class Lieu extends ObjectModel
      */
     public function getGeocode(): string
     {
-        if ($this->getLat() && $this->getLng()) {
+        if (!is_null($this->getLat()) && !is_null($this->getLng())) {
             return number_format($this->getLat(), 6, '.', '')
                  . ','
                  . number_format($this->getLng(), 6, '.', '');
@@ -399,7 +399,7 @@ class Lieu extends ObjectModel
     public function getModifiedAt(): ?string
     {
         if (!is_null($this->modified_at) && Date::isDateTimeOk($this->modified_at)) {
-            return (string) $this->modified_at;
+            return $this->modified_at;
         }
         return null;
     }
@@ -810,7 +810,7 @@ class Lieu extends ObjectModel
 
         if (isset($params['online'])) {
             $sql .= "AND `online` = ";
-            $sql .= $params['online'] ? "TRUE" : "FALSE";
+            $sql .= boolval($params['online']) ? "TRUE" : "FALSE";
             $sql .= " ";
         }
 
