@@ -144,7 +144,7 @@ class Comment extends ObjectModel
     {
         if (is_null($this->getType())) {
             return null;
-        } elseif(!array_key_exists($this->getType(), self::$types)) {
+        } elseif (!array_key_exists($this->getType(), self::$types)) {
             return null;
         }
         return self::$types[$this->type];

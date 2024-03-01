@@ -176,10 +176,10 @@ class Route
                 $r = explode('|', trim($route));
                 self::mapConnect(
                     [
-                        'controller' => (string) $r[0],
-                        'action' => (string) $r[1],
-                        'method' => (string) $r[2],
-                        'path' => (string) $r[3]
+                        'controller' => $r[0],
+                        'action' => $r[1],
+                        'method' => $r[2],
+                        'path' => $r[3],
                     ]
                 );
             }

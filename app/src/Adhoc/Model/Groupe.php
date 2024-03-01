@@ -937,11 +937,15 @@ class Groupe extends ObjectModel
      */
     public function linkMember(int $id_contact, int $id_type_musicien): bool
     {
+        if (is_null($this->getIdGroupe())) {
+            return false;
+        }
+
         $db = DataBase::getInstance();
 
         $sql = 'INSERT INTO `' . self::$db_table_appartient_a . '` '
              . '(`' . Groupe::getDbPk() . '`, `' . Membre::getDbPk() . '`, `' . TypeMusicien::getDbPk() . '`) '
-             . 'VALUES(' . (int) $this->getIdGroupe() . ', ' . (int) $id_contact . ', ' . (int) $id_type_musicien . ')';
+             . 'VALUES(' . $this->getIdGroupe() . ', ' . $id_contact . ', ' . $id_type_musicien . ')';
 
         $stmt = $db->pdo->query($sql);
 
@@ -958,12 +962,16 @@ class Groupe extends ObjectModel
      */
     public function updateMember(int $id_contact, int $id_type_musicien): bool
     {
+        if (is_null($this->getIdGroupe())) {
+            return false;
+        }
+
         $db = DataBase::getInstance();
 
         $sql = 'UPDATE `' . self::$db_table_appartient_a . '` '
-             . 'SET `' . TypeMusicien::getDbPk() . '` = ' . (int) $id_type_musicien . ' '
-             . 'WHERE `' . Groupe::getDbPk() . '` = ' . (int) $this->getIdGroupe() . ' '
-             . 'AND `' . Membre::getDbPk() . '` = ' . (int) $id_contact;
+             . 'SET `' . TypeMusicien::getDbPk() . '` = ' . $id_type_musicien . ' '
+             . 'WHERE `' . Groupe::getDbPk() . '` = ' . $this->getIdGroupe() . ' '
+             . 'AND `' . Membre::getDbPk() . '` = ' . $id_contact;
 
         $stmt = $db->pdo->query($sql);
 
@@ -979,11 +987,15 @@ class Groupe extends ObjectModel
      */
     public function unlinkMember(int $id_contact): bool
     {
+        if (is_null($this->getIdGroupe())) {
+            return false;
+        }
+
         $db = DataBase::getInstance();
 
         $sql = 'DELETE FROM `' . self::$db_table_appartient_a . '` '
-             . 'WHERE `' . Groupe::getDbPk() . '` = ' . (int) $this->getIdGroupe() . ' '
-             . 'AND `' . Membre::getDbPk() . '` = ' . (int) $id_contact;
+             . 'WHERE `' . Groupe::getDbPk() . '` = ' . $this->getIdGroupe() . ' '
+             . 'AND `' . Membre::getDbPk() . '` = ' . $id_contact;
 
         $stmt = $db->pdo->query($sql);
 
@@ -997,10 +1009,14 @@ class Groupe extends ObjectModel
      */
     public function unlinkMembers(): int
     {
+        if (is_null($this->getIdGroupe())) {
+            return false;
+        }
+
         $db = DataBase::getInstance();
 
         $sql = 'DELETE FROM `' . self::$db_table_appartient_a . '` '
-             . 'WHERE `' . $this->getDbPk() . '` = ' . (int) $this->getIdGroupe();
+             . 'WHERE `' . $this->getDbPk() . '` = ' . $this->getIdGroupe();
 
         $stmt = $db->pdo->query($sql);
 
@@ -1032,11 +1048,9 @@ class Groupe extends ObjectModel
      */
     public function getMembers(): array
     {
-        return Membre::find(
-            [
-                'id_groupe' => $this->getIdGroupe()
-            ]
-        );
+        return Membre::find([
+            'id_groupe' => $this->getIdGroupe()
+        ]);
     }
 
     /**
@@ -1071,7 +1085,9 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+        $sql  = "SELECT `" . static::getDbPk() . "` ";
+        $sql .= "FROM `" . static::getDbTable() . "` ";
+        $sql .= "WHERE 1 ";
 
         if (isset($params['id_contact'])) {
             $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'] . " ";
@@ -1138,7 +1154,7 @@ class Groupe extends ObjectModel
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
-        $ids= $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
+        $ids = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
         foreach ($ids as $id) {
             $objs[] = static::getInstance((int) $id);
         }

@@ -393,17 +393,19 @@ abstract class Media extends ObjectModel
             $sql .= "AND `id_contact` = " . (int) $params['id_contact'] . " ";
         }
 
-        if (!empty($params['has_groupe'])) {
-            if (get_called_class() === 'Adhoc\\Model\\Video') {
-                $subSql  = "SELECT `id_video` ";
-                $subSql .= "FROM `adhoc_video_groupe`";
-                if ($ids_video = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
-                    $sql .= "AND `id_video` IN (" . implode(',', (array) $ids_video) . ") ";
+        if (isset($params['has_groupe'])) {
+            if ($params['has_groupe'] === true) {
+                if (get_called_class() === 'Adhoc\\Model\\Video') {
+                    $subSql  = "SELECT `id_video` ";
+                    $subSql .= "FROM `adhoc_video_groupe`";
+                    if ($ids_video = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
+                        $sql .= "AND `id_video` IN (" . implode(',', (array) $ids_video) . ") ";
+                    } else {
+                        return $objs;
+                    }
                 } else {
-                    return $objs;
+                    $sql .= "AND `id_groupe` IS NOT NULL ";
                 }
-            } else {
-                $sql .= "AND `id_groupe` IS NOT NULL ";
             }
         }
 

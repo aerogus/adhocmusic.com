@@ -23,7 +23,6 @@ use Adhoc\Utils\Trail;
 
 final class Controller
 {
-
     /**
      * Homepage
      *

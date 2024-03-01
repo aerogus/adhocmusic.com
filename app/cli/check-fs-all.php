@@ -36,7 +36,7 @@ foreach (glob($path . "*.jpg") as $filename) {
     $cpt_files++;
     $filename = str_replace($path, "", $filename);
     $id = (int) str_replace(".jpg", "", $filename);
-    if (!in_array($id, $contacts)) {
+    if (!in_array($id, $contacts, true)) {
         echo "Avatar inutile (compte effacé) : " . $id . "\n";
         // purge ?
         //unlink($path . $id . ".jpg");
@@ -61,7 +61,7 @@ foreach (glob($path . "*.jpg") as $filename) {
     $cpt_files++;
     $filename = str_replace($path, "", $filename);
     $id = (int) str_replace(".jpg", "", $filename);
-    if (!in_array($id, $membres)) {
+    if (!in_array($id, $membres, true)) {
         echo "Avatar interne inutile (compte effacé) : " . $id . "\n";
         // purge ?
         //unlink($path . $id . ".jpg");
@@ -87,7 +87,7 @@ foreach ($prefix as $pre) {
         $fullpath = $filename;
         $filename = str_replace($pre, '', basename($filename));
         $res = preg_split('/\./', $filename);
-        if (!in_array((int) $res[0], $groupes)) {
+        if (!in_array((int) $res[0], $groupes, true)) {
             echo "images " . $pre . " groupes obsolètes pour id " . $res[0] . " (" . $res[1] . " trouvé)\n";
             //echo "rm " . $fullpath . "\n";
         }
@@ -107,7 +107,7 @@ foreach (glob($path . "*") as $filename) {
     $fullpath = $filename;
     $filename = basename($filename);
     $res = preg_split('/\./', $filename);
-    if (!in_array((int) $res[0], $audios)) {
+    if (!in_array((int) $res[0], $audios, true)) {
         echo "mp3 obsolète pour id " . $res[0] . "\n";
         //echo "rm " . $fullpath . "\n";
     }
@@ -125,7 +125,7 @@ $path = MEDIA_PATH . "/video/";
 foreach (glob($path . "*.jpg") as $filename) {
     $filename = basename($filename);
     $res = preg_split('/\./', $filename);
-    if (!in_array((int) $res[0], $videos)) {
+    if (!in_array((int) $res[0], $videos, true)) {
         echo "vignette vidéo obsolète pour id " . $res[0] . "\n";
     }
 }
@@ -142,7 +142,7 @@ $path = MEDIA_PATH . "/event/";
 foreach (glob($path . "*.jpg") as $filename) {
     $filename = basename($filename);
     $res = preg_split('/\./', $filename);
-    if (!in_array((int) $res[0], $events)) {
+    if (!in_array((int) $res[0], $events, true)) {
         echo "flyer événement obsolète pour id " . $res[0] . "\n";
     }
 }

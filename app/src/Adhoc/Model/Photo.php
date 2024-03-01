@@ -176,7 +176,7 @@ class Photo extends Media
             return null;
         }
 
-        if (!$maxWidth) {
+        if ($maxWidth === 0) {
             return self::getBaseUrl() . '/' . $this->getIdPhoto() . '.jpg';
         } else {
             $uid = 'photo/' . $this->getIdPhoto() . '/' . $maxWidth;

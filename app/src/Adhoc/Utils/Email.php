@@ -86,10 +86,10 @@ class Email
         $mail->CharSet  = "UTF-8";
         $mail->From     = "contact@adhocmusic.com";
         $mail->FromName = "AD'HOC";
-        if (!empty($data['email_reply_to'])) {
-            $mail->AddReplyTo($data['email_reply_to']);
+        if (isset($data['email_reply_to'])) {
+            $mail->addReplyTo($data['email_reply_to']);
         } else {
-            $mail->AddReplyTo('contact@adhocmusic.com');
+            $mail->addReplyTo('contact@adhocmusic.com');
         }
 
         // Bloque l'acheminement de certains mails, à commenter !!
@@ -107,7 +107,7 @@ class Email
         $cpt = 0;
         foreach ($to as $_to) {
             if (Email::validate($_to)) {
-                $mail->AddAddress($_to);
+                $mail->addAddress($_to);
                 $cpt++;
             }
         }
@@ -116,10 +116,10 @@ class Email
         }
 
         if (!is_null($attachment)) {
-            $mail->AddStringAttachment($attachment, $_FILES[$attachment]['name'], 'base64', $_FILES[$attachment]['type']);
+            $mail->addStringAttachment($attachment, $_FILES[$attachment]['name'], 'base64', $_FILES[$attachment]['type']);
         }
 
-        if ($mail->Send()) {
+        if ($mail->send()) {
             return true;
         }
         return false;

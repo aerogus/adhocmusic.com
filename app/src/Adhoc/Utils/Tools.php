@@ -134,7 +134,7 @@ class Tools
      */
     public static function checkCSRFToken(string $CSRFToken): bool
     {
-        return (!empty($_SESSION['CSRFToken']) && ($_SESSION['CSRFToken'] === $CSRFToken));
+        return (isset($_SESSION['CSRFToken']) && ($_SESSION['CSRFToken'] === $CSRFToken));
     }
 
     /**
@@ -148,9 +148,9 @@ class Tools
     public static function isSubmit(string $formName, string $method = 'POST'): bool
     {
         if ($method === 'POST') {
-            return (bool) !empty($_POST[$formName . '-submit']);
+            return isset($_POST[$formName . '-submit']);
         } elseif ($method === 'GET') {
-            return (bool) !empty($_GET[$formName . '-submit']);
+            return isset($_GET[$formName . '-submit']);
         } else {
             return (bool) Route::params($formName . '-submit');
         }
@@ -173,7 +173,7 @@ class Tools
      */
     public static function base64UrlDecode(string $input): string
     {
-        return base64_decode(strtr($input, '-_,', '+/='));
+        return base64_decode(strtr($input, '-_,', '+/='), true);
     }
 
     /**
@@ -216,7 +216,7 @@ class Tools
      */
     public static function isAuth(): bool
     {
-        if (empty($_SESSION['membre'])) {
+        if (!isset($_SESSION['membre'])) {
             return false;
         }
         if ((int) $_SESSION['membre']->getId() > 0) {
@@ -237,7 +237,7 @@ class Tools
     public static function auth(int $type): true
     {
         // non identifié
-        if (empty($_SESSION['membre'])) {
+        if (!isset($_SESSION['membre'])) {
             $_SESSION['redirect_after_auth'] = $_SERVER['REQUEST_URI'];
             Tools::redirect('/auth/auth', true);
             exit();
@@ -268,7 +268,7 @@ class Tools
         session_name('ADHOCMUSIC');
         session_start();
 
-        if (!empty($_SERVER['REMOTE_ADDR'])) {
+        if (isset($_SERVER['REMOTE_ADDR'])) {
             $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
         }
     }
@@ -341,7 +341,7 @@ class Tools
     {
         list($usec, $sec) = explode(' ', microtime());
         $number = (int) $sec * 1000000 + ((int) $usec * 1000000);
-        return (int) $number;
+        return $number;
     }
 
     /**

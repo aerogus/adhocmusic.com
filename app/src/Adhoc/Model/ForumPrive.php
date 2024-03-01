@@ -49,7 +49,7 @@ class ForumPrive extends Forum
              . "AND `t`.`id_thread` = `m`.`id_thread` "
              . "AND `m`.`id_message` = (SELECT (MIN(`id_message`)) FROM `" . static::$db_table_forum_message . "` `sm` WHERE `sm`.`id_thread` = `t`.`id_thread`) "
              . "ORDER BY  `t`.`modified_at` DESC, `m`.`id_thread` DESC , `m`.`id_message` DESC "
-             . "LIMIT " . ((int) $page * FORUM_NB_THREADS_PER_PAGE) . "," . FORUM_NB_THREADS_PER_PAGE;
+             . "LIMIT " . ($page * FORUM_NB_THREADS_PER_PAGE) . "," . FORUM_NB_THREADS_PER_PAGE;
 
         $threads = $db->pdo->query($sql)->fetchAll();
 
@@ -81,7 +81,7 @@ class ForumPrive extends Forum
              . "`created_by`, `modified_by`, "
              . "`nb_messages`, (`nb_messages` - 1) AS `nb_replies`, `nb_views`, `subject` "
              . "FROM `" . static::$db_table_forum_thread . "` "
-             . "WHERE `id_thread` = " . (int) $id_thread;
+             . "WHERE `id_thread` = " . $id_thread;
         $stmt = $db->pdo($sql);
         $thread = $stmt->fetch();
 
@@ -94,9 +94,9 @@ class ForumPrive extends Forum
         $sql = "SELECT `id_message`, `id_thread`, `created_at`, `modified_at`, "
              . "`created_by`, `modified_by`, `text` "
              . "FROM `" . static::$db_table_forum_message . "` "
-             . "WHERE `id_thread` = " . (int) $id_thread . " "
+             . "WHERE `id_thread` = " . $id_thread . " "
              . "ORDER BY `id_message` ASC "
-             . "LIMIT " . ((int) $page * FORUM_NB_MESSAGES_PER_PAGE) . "," . FORUM_NB_MESSAGES_PER_PAGE;
+             . "LIMIT " . ($page * FORUM_NB_MESSAGES_PER_PAGE) . "," . FORUM_NB_MESSAGES_PER_PAGE;
         $stmt = $db->pdo($sql);
         $messages = $stmt->fetchAll();
 
@@ -129,7 +129,7 @@ class ForumPrive extends Forum
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `adhoc_forum_prive_subscriber` "
-             . "WHERE `id_contact` = " . (int) $id_contact;
+             . "WHERE `id_contact` = " . $id_contact;
 
         $db->pdo->query($sql);
 
@@ -191,16 +191,16 @@ class ForumPrive extends Forum
 
         $sql = "SELECT `id_forum` "
              . "FROM `adhoc_forum_prive_subscriber` "
-             . "WHERE `id_contact` = " . (int) $id_contact;
+             . "WHERE `id_contact` = " . $id_contact;
 
         $forums = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
 
         return [
-            'a' => (bool) in_array('a', $forums, true),
-            'b' => (bool) in_array('b', $forums, true),
-            'e' => (bool) in_array('e', $forums, true),
-            's' => (bool) in_array('s', $forums, true),
-            't' => (bool) in_array('t', $forums, true),
+            'a' => in_array('a', $forums, true),
+            'b' => in_array('b', $forums, true),
+            'e' => in_array('e', $forums, true),
+            's' => in_array('s', $forums, true),
+            't' => in_array('t', $forums, true),
         ];
     }
 
