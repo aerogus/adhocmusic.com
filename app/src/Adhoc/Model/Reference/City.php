@@ -42,6 +42,11 @@ class City extends Reference
     protected ?string $cp = null;
 
     /**
+     * @var ?Departement
+     */
+    protected ?Departement $departement = null;
+
+    /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
@@ -69,6 +74,22 @@ class City extends Reference
     public function getIdDepartement(): ?string
     {
         return $this->id_departement;
+    }
+
+    /**
+     * @return ?Departement
+     */
+    public function getDepartement(): ?Departement
+    {
+        if (is_null($this->getIdDepartement())) {
+            return null;
+        }
+
+        if (is_null($this->departement)) {
+            $this->departement = Departement::getInstance($this->getIdDepartement());
+        }
+
+        return $this->departement;
     }
 
     /**

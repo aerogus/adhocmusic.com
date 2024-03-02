@@ -126,9 +126,9 @@ abstract class ObjectModel
 
             if (static::isCachable() && ($this->loaded = $this->loadFromCache())) {
                 // chargement ok du cache
-                LogNG::success('loadFromCache OK');
+                LogNG::debug('loadFromCache OK');
             } elseif ($this->loaded = $this->loadFromDb()) {
-                LogNG::success('loadFromDb OK');
+                LogNG::debug('loadFromDb OK');
                 // chargement ok de la bdd
                 if (static::isCachable()) {
                     // alimentation du cache

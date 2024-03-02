@@ -9,10 +9,26 @@ use Adhoc\Utils\LogNG;
 require_once __DIR__ . '/../app/bootstrap.php';
 
 $cs = City::find([
-    'id_departement' => 91
+    'id_departement' => 91,
 ]);
 
+$tbl = new \Console_Table();
+$tbl->setHeaders(
+    ['id_city', 'cp', 'name', 'id_departement', 'name', 'id_region', 'name', 'id_country', 'name']
+);
+
 foreach ($cs as $c) {
-    LogNG::info($c->getName());
+    $row = [];
+    $row[] = $c->getIdCity();
+    $row[] = $c->getCp();
+    $row[] = $c->getName();
+    $row[] = $c->getDepartement()->getIdDepartement();
+    $row[] = $c->getDepartement()->getName();
+    $row[] = $c->getDepartement()->getRegion()->getIdRegion();
+    $row[] = $c->getDepartement()->getRegion()->getName();
+    $row[] = $c->getDepartement()->getRegion()->getCountry()->getIdCountry();
+    $row[] = $c->getDepartement()->getRegion()->getCountry()->getName();
+    $tbl->addRow($row);
 }
 
+echo $tbl->getTable();

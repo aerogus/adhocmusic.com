@@ -1224,8 +1224,8 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$db_table_groupe_style . "` "
-             . "WHERE `id_groupe` = " . (int) $this->getIdGroupe() . " "
-             . "AND `id_style` = " . (int) $id_style;
+             . "WHERE `id_groupe` = " . $this->getIdGroupe() . " "
+             . "AND `id_style` = " . $id_style;
 
         $stmt = $db->pdo->query($sql);
 
@@ -1242,7 +1242,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$db_table_groupe_style . "` "
-             . "WHERE `id_groupe` = " . (int) $this->getIdGroupe();
+             . "WHERE `id_groupe` = " . $this->getIdGroupe();
 
         $stmt = $db->pdo->query($sql);
 

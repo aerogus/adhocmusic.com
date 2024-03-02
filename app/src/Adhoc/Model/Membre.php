@@ -1127,15 +1127,15 @@ class Membre extends ObjectModel
      *
      * @param int $id_contact id_contact
      *
-     * @return string
+     * @return string|false
      */
-    public static function getPseudoById(int $id_contact)
+    public static function getPseudoById(int $id_contact): string|false
     {
         try {
             $m = Membre::getInstance($id_contact);
             return $m->getPseudo();
         } catch (\Exception $e) {
-            return '';
+            return false;
         }
     }
 

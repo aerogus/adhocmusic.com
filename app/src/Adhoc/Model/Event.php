@@ -770,7 +770,7 @@ class Event extends ObjectModel
 
         $sql = "INSERT INTO `" . self::$db_table_event_style . "` "
              . "(`id_event`, `id_style`) "
-             . "VALUES (" . (int) $this->getIdEvent() . ", " . (int) $id_style . ")";
+             . "VALUES (" . $this->getIdEvent() . ", " . $id_style . ")";
 
         try {
             $stmt = $db->pdo->query($sql);
@@ -792,8 +792,8 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$db_table_event_style . "` "
-             . "WHERE `id_event` = " . (int) $this->getIdEvent() . " "
-             . "AND `id_style` = " . (int) $id_style;
+             . "WHERE `id_event` = " . $this->getIdEvent() . " "
+             . "AND `id_style` = " . $id_style;
 
         $stmt = $db->pdo->query($sql);
 
@@ -823,7 +823,7 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$db_table_event_style . "` "
-             . "WHERE `id_event` = " . (int) $this->getIdEvent();
+             . "WHERE `id_event` = " . $this->getIdEvent();
 
         $stmt = $db->pdo->query($sql);
 
@@ -843,7 +843,7 @@ class Event extends ObjectModel
 
         $sql = "INSERT INTO `" . self::$db_table_participe_a . "` "
              . "(`id_event`, `id_groupe`) "
-             . "VALUES (" . (int) $this->getIdEvent() . ", " . (int) $id_groupe . ")";
+             . "VALUES (" . $this->getIdEvent() . ", " . $id_groupe . ")";
 
         try {
             $stmt = $db->pdo->query($sql);
@@ -865,8 +865,8 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$db_table_participe_a . "` "
-             . "WHERE `id_event` = " . (int) $this->getIdEvent() . " "
-             . "AND `id_groupe` = " . (int) $id_groupe;
+             . "WHERE `id_event` = " . $this->getIdEvent() . " "
+             . "AND `id_groupe` = " . $id_groupe;
 
         $stmt = $db->pdo->query($sql);
 
@@ -883,7 +883,7 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$db_table_participe_a . "` "
-             . "WHERE `id_event` = " . (int) $this->getIdEvent();
+             . "WHERE `id_event` = " . $this->getIdEvent();
 
         $stmt = $db->pdo->query($sql);
 
@@ -903,7 +903,7 @@ class Event extends ObjectModel
 
         $sql = "INSERT INTO `" . self::$db_table_organise_par . "` "
              . " (`id_event`, `id_structure`) "
-             . "VALUES (" . (int) $this->getIdEvent() . ", " . (int) $id_structure . ")";
+             . "VALUES (" . $this->getIdEvent() . ", " . $id_structure . ")";
 
         try {
             $stmt = $db->pdo->query($sql);
@@ -925,8 +925,8 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$db_table_organise_par . "` "
-             . "WHERE `id_event` = " . (int) $this->getIdEvent() . " "
-             . "AND `id_structure` = " . (int) $id_structure;
+             . "WHERE `id_event` = " . $this->getIdEvent() . " "
+             . "AND `id_structure` = " . $id_structure;
 
         $stmt = $db->pdo->query($sql);
 
@@ -956,7 +956,7 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . self::$db_table_organise_par . "` "
-             . "WHERE `id_event` = " . (int) $this->getIdEvent();
+             . "WHERE `id_event` = " . $this->getIdEvent();
 
         $stmt = $db->pdo->query($sql);
 

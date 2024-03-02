@@ -366,7 +366,7 @@ class Newsletter extends ObjectModel
              . "LEFT JOIN `" . Membre::getDbTable() . "` `m` ON (`m`.`id_contact` = `c`.`id_contact`) "
              . "WHERE ((`m`.`mailing` IS NULL) OR (`m`.`mailing` = 1)) "
              . "ORDER BY `c`.`id_contact` ASC "
-             . "LIMIT " . (int) $debut . ", " . (int) $limit;
+             . "LIMIT " . $debut . ", " . $limit;
 
         return $db->pdo->query($sql)->fetchAll();
     }
@@ -399,9 +399,9 @@ class Newsletter extends ObjectModel
      */
     public static function addEmail(string $email)
     {
-        if ($id_contact = Contact::getIdByEmail($email)) {
+        if (($id_contact = Contact::getIdByEmail($email)) !== false) {
             // contact ? oui
-            if ($pseudo = Membre::getPseudoById($id_contact)) {
+            if (($pseudo = Membre::getPseudoById($id_contact)) !== false) {
                 // "membre ? oui
                 $membre = Membre::getInstance($id_contact);
                 if ($membre->getMailing()) {
@@ -438,9 +438,9 @@ class Newsletter extends ObjectModel
      */
     public static function removeEmail(string $email)
     {
-        if ($id_contact = Contact::getIdByEmail($email)) {
+        if (($id_contact = Contact::getIdByEmail($email)) !== false) {
             // contact ? oui
-            if ($pseudo = Membre::getPseudoById($id_contact)) {
+            if (($pseudo = Membre::getPseudoById($id_contact)) !== false) {
                 // membre ? oui
                 $membre = Membre::getInstance($id_contact);
                 if ($membre->getMailing()) {

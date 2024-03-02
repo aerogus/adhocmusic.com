@@ -135,32 +135,26 @@ class Route
         $sizeof_splitted_path = count($splitted_path);
 
         $ret = false;
-        $route = '';
         foreach (self::$routes as $route) {
             if (strcasecmp($route['method'], $method) !== 0) {
                 continue;
             }
-            $ret = self::examineSplittedPaths(
-                [
-                    'route' => $route,
-                    'splitted_path' => $splitted_path,
-                    'route_splitted_path' => $route['splitted_path'],
-                ]
-            );
+            $ret = self::examineSplittedPaths([
+                'route' => $route,
+                'splitted_path' => $splitted_path,
+                'route_splitted_path' => $route['splitted_path'],
+            ]);
             if ($ret === false) {
                 continue;
             }
-            break;
+            return [
+                'route' => $route,
+                'action' => $ret['action'],
+                'response_format' => $response_format,
+                'extra_params' => $ret['extra_params'],
+            ];
         }
-        if ($ret === false) {
-            return false;
-        }
-        return [
-            'route' => $route,
-            'action' => $ret['action'],
-            'response_format' => $response_format,
-            'extra_params' => $ret['extra_params'],
-        ];
+        return false;
     }
 
     /**
@@ -174,14 +168,12 @@ class Route
             $routes = file($file);
             foreach ($routes as $route) {
                 $r = explode('|', trim($route));
-                self::mapConnect(
-                    [
-                        'controller' => $r[0],
-                        'action' => $r[1],
-                        'method' => $r[2],
-                        'path' => $r[3],
-                    ]
-                );
+                self::mapConnect([
+                    'controller' => $r[0],
+                    'action' => $r[1],
+                    'method' => $r[2],
+                    'path' => $r[3],
+                ]);
             }
             return true;
         }

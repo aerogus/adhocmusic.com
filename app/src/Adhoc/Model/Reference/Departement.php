@@ -35,6 +35,11 @@ class Departement extends Reference
     protected ?string $id_region = null;
 
     /**
+     * @var ?WorldRegion
+     */
+    protected ?WorldRegion $region = null;
+
+    /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
@@ -61,6 +66,25 @@ class Departement extends Reference
     public function getIdRegion(): ?string
     {
         return $this->id_region;
+    }
+
+    /**
+     * @return ?WorldRegion
+     */
+    public function getRegion(): ?WorldRegion
+    {
+        if (is_null($this->getIdRegion())) {
+            return null;
+        }
+
+        if (is_null($this->region)) {
+            $this->region = WorldRegion::getInstance([
+                'id_country' => 'FR',
+                'id_region' => $this->getIdRegion(),
+            ]);
+        }
+
+        return $this->region;
     }
 
     /* fin getters */
