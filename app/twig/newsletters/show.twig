@@ -1,6 +1,5 @@
-{if !empty($unknown_newsletter)}
+{% if unknown_newsletter %}
 newsletter introuvable
-{else}
-{$newsletter->getHtml()}
-{/if}
-
+{% else %}
+{{ newsletter.html }}
+{% endif %}

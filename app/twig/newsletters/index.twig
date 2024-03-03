@@ -12,11 +12,11 @@
         </tr>
       </thead>
       <tbody>
-      {foreach $newsletters as $newsletter}
+      {% for newsletter in newsletters %}
         <tr>
-          <td><a href="/newsletters/{$newsletter->getIdNewsletter()}">{$newsletter->getTitle()|escape}</a></td>
+          <td><a href="/newsletters/{{ newsletter.id }}">{{ newsletter.title }}</a></td>
         </tr>
-      {/foreach}
+      {% endfor %}
       </tbody>
     </table>
   </div>

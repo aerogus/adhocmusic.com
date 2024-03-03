@@ -29,12 +29,10 @@ final class Controller
 
         $twig->assign(
             'newsletters',
-            Newsletter::find(
-                [
-                    'order_by' => 'id_newsletter',
-                    'sort' => 'DESC',
-                ]
-            )
+            Newsletter::find([
+                'order_by' => 'id_newsletter',
+                'sort' => 'DESC',
+            ])
         );
 
         return $twig->render('newsletters/index.twig');

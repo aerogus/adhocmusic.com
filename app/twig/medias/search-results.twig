@@ -1,19 +1,19 @@
-{if !$search_video|@count}
+{% if search_video.length == 0 %}
 <p class="infobulle error">Aucun résultat</p>
-{else}
+{% else %}
 <div class="grid-3-small-2 has-gutter">
-{foreach from=$search_video item=video}
+{% for video in search_video %}
   <div class="video">
-    <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">
-      <a class="playbtn" href="{$video->getUrl()}" title="Regarder la vidéo {$video->getName()|escape}">▶</a>
+    <div class="thumb" style="background-image: url({{ video.thumbUrl }})">
+      <a class="playbtn" href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">▶</a>
     </div>
-    <p class="title"><a href="{$video->getUrl()}" title="Regarder la vidéo {$video->getName()|escape}">{$video->getName()|escape}</a></p>
+    <p class="title"><a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
     <p class="subtitle">
-      {if !empty($video->getGroupe())}<a href="{$video->getGroupe()->getUrl()}" title="Aller à la page du groupe {$video->getGroupe()->getName()|escape}">{$video->getGroupe()->getName()|escape}</a>{/if}
-      {if !empty($video->getGroupe()) && !empty($video->getEvent())}<br/>{/if}
-      {if !empty($video->getEvent())}<a href="{$video->getEvent()->getUrl()}" title="Aller à la page de l'événement {$video->getEvent()->getName()|escape}">{$video->getEvent()->getDate()|date_format:"d/m/Y"}</a>{/if}
+      {% if video.groupe %}<a href="{{ video.groupe.url }}" title="Aller à la page du groupe {{ video.groupe.name }}">{{ video.groupe.name }}</a>{% endif %}
+      {% if video.groupe && video.event %}<br/>{% endif %}
+      {% if video.event %}<a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.date }}</a>{% endif %}
     </p>
   </div>
-{/foreach}
+{% endfor %}
 </div>
-{/if}
+{% endif %}
