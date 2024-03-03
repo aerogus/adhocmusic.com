@@ -9,7 +9,7 @@
     <h2>{{ region.name }}</h2>
     {% for from=$departements[$region.idRegion()] item=departement}
     <h3>{{ departement.idDepartement }} - {{ departement.name }}</h3>
-    {% if $lieux[$region.idRegion()][$departement.idDepartement()].length > 0}
+    {% if $lieux[$region.idRegion()][$departement.idDepartement()]|length > 0}
     <table class="table table--zebra">
       <thead>
         <tr>

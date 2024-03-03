@@ -11,7 +11,7 @@
       <h1>Agenda</h1>
     </header>
 
-    {% if events.length == 0 %}
+    {% if events|length == 0 %}
     <div>
       <p>Aucune date annoncée pour cette période. <a href="/events/create">Inscrire un évènement</a></p>
     </div>

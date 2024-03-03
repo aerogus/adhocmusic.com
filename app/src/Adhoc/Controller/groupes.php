@@ -39,13 +39,11 @@ final class Controller
 
         $twig->assign(
             'groupes',
-            Groupe::find(
-                [
-                    'online' => true,
-                    'order_by' => 'name',
-                    'sort' => 'ASC',
-                ]
-            )
+            Groupe::find([
+                'online' => true,
+                'order_by' => 'name',
+                'sort' => 'ASC',
+            ])
         );
 
         return $twig->render('groupes/index.twig');

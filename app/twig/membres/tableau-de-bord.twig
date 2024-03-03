@@ -129,7 +129,7 @@
       <h2>Mes Groupes</h2>
     </header>
     <div>
-      {% if $groupes.length > 0}
+      {% if $groupes|length > 0}
       <p>Vous administrez le(s) groupe(s) suivant(s) :</p>
       <ul>
         {% for $groupes as $groupe}

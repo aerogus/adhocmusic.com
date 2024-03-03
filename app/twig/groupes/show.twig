@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    {% if videos.length > 0 %}
+    {% if videos|length > 0 %}
     <div class="box">
       <header>
         <h2>Vidéos</h2>
@@ -67,7 +67,7 @@
     </div>
     {% endif %}
 
-    {% if audios.length > 0 %}
+    {% if audios|length > 0 %}
     <div class="box">
       <header>
         <h2>En Écoute</h2>
@@ -97,7 +97,7 @@
       </div>
     </div>
 
-    {% if f_events.length > 0 %}
+    {% if f_events|length > 0 %}
     <div class="box">
       <header>
         <h2>Évènements à venir</h2>
@@ -112,7 +112,7 @@
     </div>
     {% endif %}
 
-    {% if p_events.length > 0 %}
+    {% if p_events|length > 0 %}
     <div class="box">
       <header>
         <h2>Évènements passés</h2>

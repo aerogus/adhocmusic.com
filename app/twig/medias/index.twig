@@ -50,7 +50,7 @@
   <header>
     <h2>Dernières vidéos ajoutées</h2>
   </header>
-  {% if last_videos.length > 0 %}
+  {% if last_videos|length > 0 %}
   <div class="reset grid-3-small-2 has-gutter">
     {% for video in last_videos %}
     <div class="video">
