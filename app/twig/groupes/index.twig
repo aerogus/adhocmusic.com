@@ -5,22 +5,22 @@
       <h1>Groupes</h1>
     </header>
 
-    {if !count($groupes)}
+    {% if groupes.length == 0 %}
     <div>
       <p>Aucun groupe référencé.</p>
     </div>
-    {else}
+    {% else %}
     <div class="reset grid-7-small-4 has-gutter">
-      {foreach from=$groupes item=groupe}
+      {% for groupe in groupes %}
       <div class="grpitem">
-        <a href="{$groupe->getUrl()}">
-          <img src="{$groupe->getMiniPhoto()}" alt="" />
-          <p>{$groupe->getName()}</p>
+        <a href="{{ groupe.url }}">
+          <img src="{{ groupe.miniPhoto }}" alt="" />
+          <p>{{ groupe.name }}</p>
         </a>
       </div>
-      {/foreach}
+      {% endfor %}
     </div>
-    {/if}
+    {% endif %}
   </div>
 
 {% include 'common/footer.twig' %}

@@ -7,13 +7,13 @@
       <div>
         <p>Voici les forces actives de l’association pour la saison 2019/2020</p>
         <ul class="staff">
-          {foreach from=$membres item=membre}
+          {% for membre in membres %}
           <li>
-            <img src="{$membre.avatar_interne|escape}" alt="">
-            <strong>{$membre.first_name|escape} {$membre.last_name|escape}</strong><br>
-            <em>{$membre.function|escape}</em>
+            <img src="{{ membre.avatar_interne }}" alt="">
+            <strong>{{ membre.firstName }} {{ membre.lastName }}</strong><br>
+            <em>{{ membre.function }}</em>
           </li>
-          {/foreach}
+          {% endfor %}
         </ul>
       </div>
     </div>

@@ -15,21 +15,21 @@
     </tr>
   </thead>
   <tbody>
-    {foreach from=$groupes item=groupe}
+    {% for groupe in groupes %}
     <tr>
-      <td><a href="/adm/groupe-de-style/{$groupe->getIdGroupe()|escape}">{$groupe->getName()|escape}</a></td>
-      <td>{$groupe->getStyle()|escape}</td>
+      <td><a href="/adm/groupe-de-style/{{ groupe.id }}">{{ groupe.name }}</a></td>
+      <td>{{ groupe.style }}</td>
       <td>
-      {if !empty($groupe->getStyles())}
+      {% if groupe.styles %}
       <ul>
-      {foreach from=$groupe->getStyles() item=style}
-      <li>{$style->getName()|escape}</li>
-      {/foreach}
+      {% for style in groupe.styles %}
+      <li>{{ style.name }}</li>
+      {% endfor %}
       </ul>
-      {/if}
+      {% endif %}
       </td>
     </tr>
-    {/foreach}
+    {% endfor %}
   </tbody>
 </table>
 

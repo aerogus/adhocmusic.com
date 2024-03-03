@@ -10,20 +10,20 @@
     </div>
     <div class="reset">
 
-      {foreach from=$events key=season item=events_of_the_year}
+      {% for season,events_of_the_year in events %}
       <div class="saison">
-        <h3>Saison {$season}</h3>
-        <div class="gallery" id="saison-{$season|truncate:4:''}">
-          {foreach from=$events_of_the_year item=event}
+        <h3>Saison {{ season }}</h3>
+        <div class="gallery" id="saison-{{ season }}">
+          {% for event in events_of_the_year %}
           <div class="photo">
-            <a href="{$event->getUrl()}" title="{$event->getName()|escape}">
-              <img src="{$event->getThumbUrl(320)}" alt="Flyer {$event->getName()|escape}">
+            <a href="{{ event.url }}" title="{{ event.name }}">
+              <img src="{{ event.thumbUrl }}" alt="Flyer {{ event.name }}">
             </a>
           </div>
-          {/foreach}
+          {% endfor %}
         </div>
       </div>
-      {/foreach}
+      {% endfor %}
       <div class="saison">
         <h3>Saisons 1994 à 1997</h3>
         <div class="edito">
