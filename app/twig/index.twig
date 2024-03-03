@@ -62,7 +62,7 @@
         <li class="mbs">
           <strong>{{ month|format_datetime(pattern='LLLL yyyy')|capitalize }}</strong>
           <ul>
-          {% for month, event in month_events %}
+          {% for event in month_events %}
             <li><span style="font-weight: bold; color: #cc0000;" title="{{ event.date|format_datetime('full') }}">{{ event.date|format_datetime(pattern='dd') }}</span> <a href="{{ event.url }}" title="{{ event.name }}">{{ event.name|slice(0, 40) }}</a></li>
           {% endfor %}
           </ul>

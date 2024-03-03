@@ -19,9 +19,9 @@
             <th>Message</th>
             <th>&nbsp;</th>
           </tr>
-          {% for cpt,msg in inbox %}
+          {% for msg in inbox %}
           <tr>
-            <td><img src="/img/icones/{% if msg.ReadTo()}}email_open.png{% else %}email.png{% endif %}" alt=""></td>
+            <td><img src="/img/icones/{% if msg.readTo %}email_open.png{% else %}email.png{% endif %}" alt=""></td>
             <td><a href="/messagerie/write?pseudo={{ msg.MembreFrom().Pseudo }}">{{ msg.membreFrom.pseudo }}</a></td>
             <td>{{ msg.date }}</td>
             <td><a href="/messagerie/read/{{ msg.id }}">{{ msg.text }}</a></td>
@@ -45,7 +45,7 @@
             <th>Message</th>
             <th>&nbsp;</th>
           </tr>
-          {% for cpt,msg in outbox %}
+          {% for msg in outbox %}
           <tr>
             <td><img src="/img/icones/{% if msg.readTo %}email_open.png{% else %}email.png{% endif %}" alt=""></td>
             <td><a href="/messagerie/write?pseudo={{ msg.membreTo.pseudo }}">{{ msg.MembreTo.pseudo }}</a></td>

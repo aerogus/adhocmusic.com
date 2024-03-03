@@ -93,7 +93,7 @@
   {% for photo in photos %}
     <div class="photo">
       <a href="{{ photo.thumbUrl }}" data-at-1000="{{ photo.ThumbUrl }}" title="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
-        <img src="{{ photo.thumbUrl }}" alt="{{ photo.name }}{% if photo.groupe %} ({ photo.groupe.name }}){% endif %}">
+        <img src="{{ photo.thumbUrl }}" alt="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
       </a>
     </div>
   {% endfor %}
