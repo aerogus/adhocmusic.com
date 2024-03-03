@@ -117,7 +117,7 @@ class Route
         // retourner un http 302 direct
         if ((preg_match('/^(.+)\/$/', $path, $matches)) > 0) {
             $url = HOME_URL . $matches[1];
-            if (!empty($_SERVER['QUERY_STRING'])) {
+            if (isset($_SERVER['QUERY_STRING'])) {
                 $url .= '?' . $_SERVER['QUERY_STRING'];
             }
             header('HTTP/1.0 302 Found');
@@ -359,10 +359,10 @@ class Route
             ) {
                 return false;
             }
-            if (!empty($ret['found_action'])) {
+            if (isset($ret['found_action'])) {
                 $action = $ret['found_action'];
             }
-            if (!empty($ret['found_params'])) {
+            if (isset($ret['found_params'])) {
                 $extra_params = array_merge(
                     $extra_params,
                     $ret['found_params']

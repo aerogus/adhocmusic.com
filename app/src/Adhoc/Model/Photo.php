@@ -255,7 +255,7 @@ class Photo extends Media
             return false;
         }
         $exif = exif_read_data($filename);
-        if (!empty($exif['Orientation']) && in_array($exif['Orientation'], [2, 3, 4, 5, 6, 7, 8], true)) {
+        if (isset($exif['Orientation']) && in_array($exif['Orientation'], [2, 3, 4, 5, 6, 7, 8], true)) {
             $image = imagecreatefromjpeg($filename);
             if (in_array($exif['Orientation'], [3, 4], true)) {
                 $image = imagerotate($image, 180, 0);

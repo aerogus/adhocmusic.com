@@ -14,14 +14,14 @@ namespace Adhoc\Utils;
 class Image
 {
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $file_sou = '';
+    protected ?string $file_sou = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $file_res = '';
+    protected ?string $file_res = null;
 
     /**
      * handle source
@@ -224,7 +224,7 @@ class Image
     {
         $this->handle = imagecreatetruecolor($width, $height);
 
-        if ($color) {
+        if (!is_null($color)) {
             $color = str_replace('#', '', $color);
             $red   = hexdec(substr($color, 0, 2));
             $green = hexdec(substr($color, 2, 2));
@@ -233,8 +233,8 @@ class Image
             imagefill($this->handle, 0, 0, $color);
         }
 
-        $this->width  = (int) $width;
-        $this->height = (int) $height;
+        $this->width  = $width;
+        $this->height = $height;
         $this->ratio  = $this->width / $this->height;
 
         $this->selectAll();
@@ -251,7 +251,7 @@ class Image
      */
     public function read(): bool
     {
-        if ($this->file_sou && file_exists($this->file_sou) && is_readable($this->file_sou)) {
+        if (!is_null($this->file_sou) && file_exists($this->file_sou) && is_readable($this->file_sou)) {
             $this->type = exif_imagetype($this->file_sou);
 
             switch ($this->type) {
@@ -480,7 +480,7 @@ class Image
      */
     public function resize(): void
     {
-        if ($this->max_height && $this->max_width && $this->border) {
+        if (($this->max_height > 0) && ($this->max_width > 0) && $this->border) {
             $width = $this->max_width;
             $height = $this->max_height;
         } else {
@@ -488,7 +488,7 @@ class Image
             $height = $this->new_h;
         }
 
-        $this->handle2 = imagecreatetruecolor((int) $width, (int) $height);
+        $this->handle2 = imagecreatetruecolor($width, $height);
 
         // rempli le fond avec la couleur courante
         $bgcolor = imagecolorallocate($this->handle2, $this->color['r'], $this->color['g'], $this->color['b']);
@@ -523,11 +523,11 @@ class Image
          * Calcul de la nouvelle taille de l'image
          */
         if ($this->keep_ratio) {
-            if ($this->max_height) {
+            if ($this->max_height > 0) {
                 $tmp_h = min($this->hSel, $this->max_height);
                 $rh1   = $tmp_h / $this->hSel;
                 $tmp_l = round($this->wSel * $rh1);
-                if ($this->max_width && $tmp_l) { // a debugguer
+                if (($this->max_width > 0) && $tmp_l) { // a debugguer
                     $this->new_l = (int) min($this->max_width, $tmp_l);
                     $rh2          = $this->new_l / ($this->wSel * $rh1);
                     $this->new_h = (int) round($this->hSel * $rh1 * $rh2);
@@ -536,7 +536,7 @@ class Image
                     $this->new_h = (int) $tmp_h;
                 }
             } else {
-                if ($this->max_width) {
+                if ($this->max_width > 0) {
                     $this->new_l = (int) min($this->wSel, $this->max_width);
                     $rh           = $this->new_l / $this->wSel;
                     $this->new_h = (int) round($this->hSel * $rh);
@@ -546,8 +546,8 @@ class Image
                 }
             }
         } else {
-            if ($this->max_height) {
-                if ($this->max_width) {
+            if ($this->max_height > 0) {
+                if ($this->max_width > 0) {
                     $this->new_l = (int) min($this->wSel, $this->max_width);
                     $this->new_h = (int) min($this->hSel, $this->max_height);
                 } else {
@@ -555,7 +555,7 @@ class Image
                     $this->new_h = (int) min($this->hSel, $this->max_height);
                 }
             } else {
-                if ($this->max_width) {
+                if ($this->max_width > 0) {
                     $this->new_l = (int) min($this->wSel, $this->max_width);
                     $this->new_h = (int) $this->hSel;
                 } else {
