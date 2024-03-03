@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\EmailSmarty;
 
@@ -19,7 +18,7 @@ final class Controller
     public static function formContactCc(): string
     {
         $smarty = new EmailSmarty();
-        $smarty->assign(
+        $twig->assign(
             [
                 'name' => 'Mon nom',
                 'email' => 'email@email.com',
@@ -28,7 +27,7 @@ final class Controller
                 'text' => 'Mon texte',
             ]
         );
-        return $smarty->fetch('form-contact-cc.tpl');
+        return $twig->render('form-contact-cc.twig');
     }
 
     /**
@@ -37,7 +36,7 @@ final class Controller
     public static function formContactTo(): string
     {
         $smarty = new EmailSmarty();
-        return $smarty->fetch('form-contact-to.tpl');
+        return $twig->render('form-contact-to.twig');
     }
 
     /**
@@ -46,7 +45,7 @@ final class Controller
     public static function forumPriveNewMessage(): string
     {
         $smarty = new EmailSmarty();
-        return $smarty->fetch('forum-prive-new-message.tpl');
+        return $twig->render('forum-prive-new-message.twig');
     }
 
     /**
@@ -55,7 +54,7 @@ final class Controller
     public static function memberCreate(): string
     {
         $smarty = new EmailSmarty();
-        return $smarty->fetch('member-create.tpl');
+        return $twig->render('member-create.twig');
     }
 
     /**
@@ -64,7 +63,7 @@ final class Controller
     public static function messageReceived(): string
     {
         $smarty = new EmailSmarty();
-        return $smarty->fetch('message-received.tpl');
+        return $twig->render('message-received.twig');
     }
 
     /**
@@ -73,7 +72,7 @@ final class Controller
     public static function passwordChanged(): string
     {
         $smarty = new EmailSmarty();
-        return $smarty->fetch('password-changed.tpl');
+        return $twig->render('password-changed.twig');
     }
 
     /**
@@ -82,7 +81,7 @@ final class Controller
     public static function passwordLost(): string
     {
         $smarty = new EmailSmarty();
-        return $smarty->fetch('password-lost.tpl');
+        return $twig->render('password-lost.twig');
     }
 
     /**
@@ -91,7 +90,7 @@ final class Controller
     public static function newComment(): string
     {
         $smarty = new EmailSmarty();
-        $smarty->assign(
+        $twig->assign(
             [
                 'subject' => "Un nouveau commentaire a été posté sur la vidéo machin",
                 'pseudo' => 'pseudo',
@@ -101,7 +100,7 @@ final class Controller
                 'text' => 'Contenu du commentaire',
             ]
         );
-        return $smarty->fetch('new-comment.tpl');
+        return $twig->render('new-comment.twig');
     }
 
     /**
@@ -110,7 +109,7 @@ final class Controller
     public static function logAction(): string
     {
         $smarty = new EmailSmarty();
-        $smarty->assign(
+        $twig->assign(
             [
                 'subject' => "gus a ajouté un nouveau lieu",
                 'pseudo' => 'gus',
@@ -118,6 +117,6 @@ final class Controller
                 'extra' => '1',
             ]
         );
-        return $smarty->fetch('log-action.tpl');
+        return $twig->render('log-action.twig');
     }
 }

@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Audio;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
@@ -29,7 +28,7 @@ final class Controller
 
         $page = (int) Route::params('page');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         $audios = Audio::find(
             [
@@ -39,13 +38,13 @@ final class Controller
                 'limit' => NB_AUDIOS_PER_PAGE,
             ]
         );
-        $smarty->assign('audios', $audios);
+        $twig->assign('audios', $audios);
 
         // pagination
-        $smarty->assign('nb_items', Audio::count());
-        $smarty->assign('nb_items_per_page', NB_AUDIOS_PER_PAGE);
-        $smarty->assign('page', $page);
+        $twig->assign('nb_items', Audio::count());
+        $twig->assign('nb_items_per_page', NB_AUDIOS_PER_PAGE);
+        $twig->assign('page', $page);
 
-        return $smarty->fetch('adm/audios/index.tpl');
+        return $twig->render('adm/audios/index.twig');
     }
 }

@@ -9,7 +9,6 @@ use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
 use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
@@ -29,7 +28,9 @@ final class Controller
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
             ->addStep('Mes alertes');
 
-        $myAlerting = Alerting::find(['id_contact' => $_SESSION['membre']->getId()]);
+        $myAlerting = Alerting::find([
+            'id_contact' => $_SESSION['membre']->getId(),
+        ]);
         $myAlertingLieu = $myAlertingGroupe = $myAlertingEvent =  [];
         foreach ($myAlerting as $ma) {
             if ($ma->getIdLieu()) {
@@ -40,11 +41,11 @@ final class Controller
                 $myAlertingEvent[] = Event::getInstance($ma->getIdEvent());
             }
         }
-        $smarty = new AdHocSmarty();
-        $smarty->assign('lieux', $myAlertingLieu);
-        $smarty->assign('groupes', $myAlertingGroupe);
-        $smarty->assign('events', $myAlertingEvent);
-        return $smarty->fetch('alerting/my.tpl');
+        $twig = new AdHocTwig();
+        $twig->assign('lieux', $myAlertingLieu);
+        $twig->assign('groupes', $myAlertingGroupe);
+        $twig->assign('events', $myAlertingEvent);
+        return $twig->render('alerting/my.twig');
     }
 
     /**

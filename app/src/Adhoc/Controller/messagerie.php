@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Membre;
 use Adhoc\Model\Message;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Email;
@@ -27,11 +26,11 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/messagerie.js');
+        $twig->enqueueScript('/js/messagerie.js');
 
-        $smarty->assign('sent', (bool) Route::params('sent'));
+        $twig->assign('sent', (bool) Route::params('sent'));
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -45,7 +44,7 @@ final class Controller
             'order_by' => 'date',
             'sort' => 'DESC',
         ]);
-        $smarty->assign('inbox', $inbox);
+        $twig->assign('inbox', $inbox);
 
         $outbox = Message::find([
             'id_from' => (int) $_SESSION['membre']->getId(),
@@ -53,9 +52,9 @@ final class Controller
             'order_by' => 'date',
             'sort' => 'DESC',
         ]);
-        $smarty->assign('outbox', $outbox);
+        $twig->assign('outbox', $outbox);
 
-        return $smarty->fetch('messagerie/index.tpl');
+        return $twig->render('messagerie/index.twig');
     }
 
     /**
@@ -67,9 +66,9 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/messagerie.js');
+        $twig->enqueueScript('/js/messagerie.js');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -84,16 +83,16 @@ final class Controller
         } elseif (($msg->getIdFrom() !== (int) $_SESSION['membre']->getId()) && ($msg->getIdTo() !== (int) $_SESSION['membre']->getId())) {
             throw new \Exception('message introuvable');
         }
-        $smarty->assign('msg', $msg);
+        $twig->assign('msg', $msg);
 
-        $smarty->assign('pseudo_to', Membre::getInstance($msg->getIdTo())->getPseudo());
-        $smarty->assign('id_to', $msg->getIdFrom());
-        $smarty->assign('id_from', $_SESSION['membre']->getId());
+        $twig->assign('pseudo_to', Membre::getInstance($msg->getIdTo())->getPseudo());
+        $twig->assign('id_to', $msg->getIdFrom());
+        $twig->assign('id_from', $_SESSION['membre']->getId());
 
         $msg->setReadTo(true);
         $msg->save();
 
-        return $smarty->fetch('messagerie/read.tpl');
+        return $twig->render('messagerie/read.twig');
     }
 
     /**
@@ -103,9 +102,9 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/messagerie.js');
+        $twig->enqueueScript('/js/messagerie.js');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -136,8 +135,8 @@ final class Controller
                 Log::action(Log::ACTION_MESSAGE, (string) $to);
                 Tools::redirect('/messagerie/?sent=1');
             } else {
-                $smarty->assign('error', "erreur envoi email");
-                return $smarty->fetch('messagerie/write.tpl');
+                $twig->assign('error', "erreur envoi email");
+                return $twig->render('messagerie/write.twig');
             }
         }
 
@@ -146,10 +145,10 @@ final class Controller
             die('KO');
         }
 
-        $smarty->assign('pseudo_to', $pseudo);
-        $smarty->assign('id_to', $id);
+        $twig->assign('pseudo_to', $pseudo);
+        $twig->assign('id_to', $id);
 
-        return $smarty->fetch('messagerie/write.tpl');
+        return $twig->render('messagerie/write.twig');
     }
 
     /**

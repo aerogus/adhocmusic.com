@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Event;
 use Adhoc\Model\MembreAdhoc;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
@@ -20,11 +19,11 @@ final class Controller
      */
     public static function assoce(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()->addStep("L'Association");
 
-        return $smarty->fetch('assoce/presentation.tpl');
+        return $twig->render('assoce/presentation.twig');
     }
 
     /**
@@ -32,19 +31,19 @@ final class Controller
      */
     public static function concerts(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()->addStep("Concerts");
 
-        $smarty->enqueueScript('/js/masonry-4.2.2.min.js');
-        $smarty->enqueueScript('/js/imagesloaded-4.1.4.min.js');
+        $twig->enqueueScript('/js/masonry-4.2.2.min.js');
+        $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
 
-        $smarty->enqueueScript('/js/assoce-concerts.js');
+        $twig->enqueueScript('/js/assoce-concerts.js');
 
         // tri antéchrono des saisons
-        $smarty->assign('events', array_reverse(Event::getAdHocEventsBySeason()));
+        $twig->assign('events', array_reverse(Event::getAdHocEventsBySeason()));
 
-        return $smarty->fetch('assoce/concerts.tpl');
+        return $twig->render('assoce/concerts.twig');
     }
 
     /**
@@ -52,11 +51,11 @@ final class Controller
      */
     public static function afterworks(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()->addStep("Afterworks");
 
-        return $smarty->fetch('assoce/afterworks.tpl');
+        return $twig->render('assoce/afterworks.twig');
     }
 
     /**
@@ -64,16 +63,16 @@ final class Controller
      */
     public static function afterworksInscription(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/assoce/afterworks/inscription.js');
+        $twig->enqueueScript('/js/assoce/afterworks/inscription.js');
 
         Trail::getInstance()
             ->addStep("Afterworks")
             ->addStep("Inscription");
 
         if (!Tools::isSubmit('form-afterworks')) {
-            $smarty->assign('show_form', true);
+            $twig->assign('show_form', true);
 
             // valeurs par défaut
             $data = [
@@ -128,7 +127,7 @@ final class Controller
                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
                     $outputFile = MEDIA_PATH . "/afterworks/" . md5($data['email']) . "-" . time() . ".jpg";
                     $data['photo_url'] = MEDIA_URL . "/afterworks/" . md5($data['email']) . "-" . time() . ".jpg";
-                    $smarty->assign('photo_url', $data['photo_url']);
+                    $twig->assign('photo_url', $data['photo_url']);
                     move_uploaded_file($_FILES['photo']['tmp_name'], $outputFile);
                 }
 
@@ -136,9 +135,9 @@ final class Controller
                 $data['email_reply_to'] = $data['email'];
                 $data['subject'] = "Inscription Afterwork S5E6 - online";
                 if (Email::send(CONTACT_FORM_TO, $data['subject'], 'form-afterworks-to', $data)) {
-                    $smarty->assign('sent_ok', true);
+                    $twig->assign('sent_ok', true);
                 } else {
-                    $smarty->assign('sent_ko', true);
+                    $twig->assign('sent_ko', true);
                 }
 
                 // 2. envoi de la copie à l'expéditeur
@@ -147,26 +146,26 @@ final class Controller
                 }
             } else {
                 // erreur dans le form
-                $smarty->assign('sent_ko', true);
-                $smarty->assign('show_form', true);
+                $twig->assign('sent_ko', true);
+                $twig->assign('show_form', true);
                 foreach ($errors as $k => $v) {
-                    $smarty->assign('error_' . $k, $v);
+                    $twig->assign('error_' . $k, $v);
                 }
             }
         }
 
-        $smarty->assign('name', $data['name']);
-        $smarty->assign('email', $data['email']);
-        $smarty->assign('date', $data['date']);
-        $smarty->assign('h1930-2030', $data['h1930-2030']);
-        $smarty->assign('h2030-2130', $data['h2030-2130']);
-        $smarty->assign('h2130-2230', $data['h2130-2230']);
-        $smarty->assign('creneaux', $data['creneaux']);
-        $smarty->assign('instrument', $data['instrument']);
-        $smarty->assign('text', $data['text']);
-        $smarty->assign('check', $data['check']);
+        $twig->assign('name', $data['name']);
+        $twig->assign('email', $data['email']);
+        $twig->assign('date', $data['date']);
+        $twig->assign('h1930-2030', $data['h1930-2030']);
+        $twig->assign('h2030-2130', $data['h2030-2130']);
+        $twig->assign('h2130-2230', $data['h2130-2230']);
+        $twig->assign('creneaux', $data['creneaux']);
+        $twig->assign('instrument', $data['instrument']);
+        $twig->assign('text', $data['text']);
+        $twig->assign('check', $data['check']);
 
-        return $smarty->fetch('assoce/afterworks/inscription.tpl');
+        return $twig->render('assoce/afterworks/inscription.twig');
     }
 
     /**
@@ -174,11 +173,11 @@ final class Controller
      */
     public static function festival(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()->addStep("Festival");
 
-        return $smarty->fetch('assoce/festival.tpl');
+        return $twig->render('assoce/festival.twig');
     }
 
     /**
@@ -186,13 +185,13 @@ final class Controller
      */
     public static function equipe(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()->addStep("Équipe");
 
-        $smarty->assign('membres', MembreAdhoc::getStaff(true));
+        $twig->assign('membres', MembreAdhoc::getStaff(true));
 
-        return $smarty->fetch('assoce/equipe.tpl');
+        return $twig->render('assoce/equipe.twig');
     }
 
     /**

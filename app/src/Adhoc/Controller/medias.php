@@ -8,7 +8,6 @@ use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
 use Adhoc\Model\Lieu;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Trail;
@@ -26,11 +25,11 @@ final class Controller
         Trail::getInstance()
             ->addStep('Média');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/medias.js');
+        $twig->enqueueScript('/js/medias.js');
 
-        $smarty->assign(
+        $twig->assign(
             'groupes',
             Groupe::find(
                 [
@@ -41,7 +40,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'events',
             Event::find(
                 [
@@ -54,7 +53,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'lieux',
             Lieu::find(
                 [
@@ -66,7 +65,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'last_videos',
             Video::find(
                 [
@@ -78,7 +77,7 @@ final class Controller
             )
         );
 
-        return $smarty->fetch('medias/index.tpl');
+        return $twig->render('medias/index.twig');
     }
 
     /**
@@ -105,8 +104,8 @@ final class Controller
             $search_params['id_lieu'] = $id_lieu;
         }
 
-        $smarty = new AdHocSmarty();
-        $smarty->assign('search_video', Video::find($search_params));
-        return $smarty->fetch('medias/search-results.tpl');
+        $twig = new AdHocTwig();
+        $twig->assign('search_video', Video::find($search_params));
+        return $twig->render('medias/search-results.twig');
     }
 }

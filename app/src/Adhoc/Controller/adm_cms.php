@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\CMS;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
@@ -23,19 +22,19 @@ final class Controller
     public static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
             ->addStep("Pages Statiques");
 
-        $smarty->assign('create', (bool) Route::params('create'));
-        $smarty->assign('edit', (bool) Route::params('edit'));
-        $smarty->assign('delete', (bool) Route::params('delete'));
+        $twig->assign('create', (bool) Route::params('create'));
+        $twig->assign('edit', (bool) Route::params('edit'));
+        $twig->assign('delete', (bool) Route::params('delete'));
 
-        $smarty->assign('cmss', CMS::findAll());
+        $twig->assign('cmss', CMS::findAll());
 
-        return $smarty->fetch('adm/cms/index.tpl');
+        return $twig->render('adm/cms/index.twig');
     }
 
     /**
@@ -45,14 +44,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
             ->addStep("Pages Statiques", "/adm/cms")
             ->addStep("Création");
 
-        $smarty->assign('auth', Membre::getTypesMembre());
+        $twig->assign('auth', Membre::getTypesMembre());
 
         if (Tools::isSubmit('form-cms-create')) {
             $data = [
@@ -76,7 +75,7 @@ final class Controller
             Tools::redirect('/adm/cms?create=1');
         }
 
-        return $smarty->fetch('adm/cms/create.tpl');
+        return $twig->render('adm/cms/create.twig');
     }
 
     /**
@@ -88,14 +87,14 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
             ->addStep("Pages Statiques", "/adm/cms")
             ->addStep("Edition");
 
-        $smarty->assign('auth', Membre::getTypesMembre());
+        $twig->assign('auth', Membre::getTypesMembre());
 
         if (Tools::isSubmit('form-cms-edit')) {
             $data = [
@@ -120,9 +119,9 @@ final class Controller
             Tools::redirect('/adm/cms?edit=1');
         }
 
-        $smarty->assign('cms', CMS::getInstance($id));
+        $twig->assign('cms', CMS::getInstance($id));
 
-        return $smarty->fetch('adm/cms/edit.tpl');
+        return $twig->render('adm/cms/edit.twig');
     }
 
     /**
@@ -134,7 +133,7 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
@@ -146,8 +145,8 @@ final class Controller
             Tools::redirect('/adm/cms?delete=1');
         }
 
-        $smarty->assign('cms', CMS::getInstance($id));
+        $twig->assign('cms', CMS::getInstance($id));
 
-        return $smarty->fetch('adm/cms/delete.tpl');
+        return $twig->render('adm/cms/delete.twig');
     }
 }

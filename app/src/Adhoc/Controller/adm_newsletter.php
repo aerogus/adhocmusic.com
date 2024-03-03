@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Membre;
 use Adhoc\Model\Newsletter;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
@@ -21,13 +20,13 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep('Privé', '/adm')
             ->addStep('Newsletter');
 
-        $smarty->assign(
+        $twig->assign(
             'newsletters',
             Newsletter::find(
                 [
@@ -36,9 +35,9 @@ final class Controller
                 ]
             )
         );
-        $smarty->assign('nb_sub', Newsletter::getSubscribersCount());
+        $twig->assign('nb_sub', Newsletter::getSubscribersCount());
 
-        return $smarty->fetch('adm/newsletter/index.tpl');
+        return $twig->render('adm/newsletter/index.twig');
     }
 
     /**
@@ -67,12 +66,12 @@ final class Controller
             Tools::redirect('/adm/newsletter?create=1');
         }
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueStyle('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css');
-        $smarty->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.js');
-        $smarty->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/xml/xml.min.js');
-        $smarty->enqueueScript('/js/adm/newsletter.js');
+        $twig->enqueueStyle('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css');
+        $twig->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.js');
+        $twig->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/xml/xml.min.js');
+        $twig->enqueueScript('/js/adm/newsletter.js');
 
         Trail::getInstance()
             ->addStep('Privé', '/adm')
@@ -84,9 +83,9 @@ final class Controller
             'content' => '',
         ];
 
-        $smarty->assign('data', $data);
+        $twig->assign('data', $data);
 
-        return $smarty->fetch('adm/newsletter/create.tpl');
+        return $twig->render('adm/newsletter/create.twig');
     }
 
     /**
@@ -118,21 +117,21 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueStyle('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css');
-        $smarty->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.js');
-        $smarty->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/xml/xml.min.js');
-        $smarty->enqueueScript('/js/adm/newsletter.js');
+        $twig->enqueueStyle('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css');
+        $twig->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.js');
+        $twig->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/xml/xml.min.js');
+        $twig->enqueueScript('/js/adm/newsletter.js');
 
         Trail::getInstance()
             ->addStep('Privé', '/adm')
             ->addStep('Newsletter', '/adm/newsletter')
             ->addStep('Édition');
 
-        $smarty->assign('newsletter', Newsletter::getInstance($id));
+        $twig->assign('newsletter', Newsletter::getInstance($id));
 
-        return $smarty->fetch('adm/newsletter/edit.tpl');
+        return $twig->render('adm/newsletter/edit.twig');
     }
 
     /**

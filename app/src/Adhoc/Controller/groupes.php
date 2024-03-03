@@ -11,7 +11,6 @@ use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Reference\TypeMusicien;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Log;
@@ -30,15 +29,15 @@ final class Controller
      */
     public static function index(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('title', "♫ Les groupes de la communauté musicale AD'HOC");
-        $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
+        $twig->assign('title', "♫ Les groupes de la communauté musicale AD'HOC");
+        $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
 
         Trail::getInstance()
             ->addStep("Groupes");
 
-        $smarty->assign(
+        $twig->assign(
             'groupes',
             Groupe::find(
                 [
@@ -49,7 +48,7 @@ final class Controller
             )
         );
 
-        return $smarty->fetch('groupes/index.tpl');
+        return $twig->render('groupes/index.twig');
     }
 
     /**
@@ -59,25 +58,25 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('title', "AD'HOC Music : Les Musiques actuelles en Essonne");
-        $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
+        $twig->assign('title', "AD'HOC Music : Les Musiques actuelles en Essonne");
+        $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
             ->addStep('Mes groupes');
 
-        $smarty->assign('delete', (bool) Route::params('delete'));
+        $twig->assign('delete', (bool) Route::params('delete'));
 
-        $smarty->assign(
+        $twig->assign(
             'groupes',
             Groupe::find(
                 ['id_contact' => $_SESSION['membre']->getId()]
             )
         );
 
-        return $smarty->fetch('groupes/my.tpl');
+        return $twig->render('groupes/my.twig');
     }
 
     /**
@@ -87,15 +86,15 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
+        $twig->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
 
-        $smarty->enqueueScript('/js/masonry-4.2.2.min.js');
-        $smarty->enqueueScript('/js/imagesloaded-4.1.4.min.js');
-        $smarty->enqueueScript('/js/baguetteBox-1.11.1.min.js');
+        $twig->enqueueScript('/js/masonry-4.2.2.min.js');
+        $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
+        $twig->enqueueScript('/js/baguetteBox-1.11.1.min.js');
 
-        $smarty->enqueueScript('/js/groupes/show.js');
+        $twig->enqueueScript('/js/groupes/show.js');
 
         try {
             $groupe = Groupe::getInstance($id);
@@ -104,24 +103,24 @@ final class Controller
             }
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_group', true);
-            return $smarty->fetch('groupes/show.tpl');
+            $twig->assign('unknown_group', true);
+            return $twig->render('groupes/show.twig');
         }
 
-        $smarty->assign('groupe', $groupe);
-        $smarty->assign('membres', $groupe->getMembers());
+        $twig->assign('groupe', $groupe);
+        $twig->assign('membres', $groupe->getMembers());
 
         Trail::getInstance()
             ->addStep("Groupes", "/groupes")
             ->addStep($groupe->getName());
 
-        $smarty->assign('title', '♫ ' . $groupe->getName() . ' (' . $groupe->getStyle() . ')');
-        $smarty->assign('description', Tools::tronc($groupe->getMiniText(), 175));
-        $smarty->assign('og_type', 'band');
+        $twig->assign('title', '♫ ' . $groupe->getName() . ' (' . $groupe->getStyle() . ')');
+        $twig->assign('description', Tools::tronc($groupe->getMiniText(), 175));
+        $twig->assign('og_type', 'band');
 
-        $smarty->assign('is_loggued', !empty($_SESSION['membre']));
+        $twig->assign('is_loggued', !empty($_SESSION['membre']));
 
-        $smarty->assign(
+        $twig->assign(
             'videos',
             Video::find(
                 [
@@ -132,7 +131,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'audios',
             Audio::find(
                 [
@@ -145,15 +144,15 @@ final class Controller
             )
         );
 
-        $smarty->assign('og_image', $groupe->getMiniPhoto());
+        $twig->assign('og_image', $groupe->getMiniPhoto());
 
         if (!empty($_SESSION['membre'])) {
             if ($_SESSION['membre']->isInterne()) {
-                $smarty->assign('show_mot_adhoc', true);
+                $twig->assign('show_mot_adhoc', true);
             }
         }
 
-        $smarty->assign(
+        $twig->assign(
             'photos',
             Photo::find(
                 [
@@ -166,7 +165,7 @@ final class Controller
         );
 
         // concerts à venir
-        $smarty->assign(
+        $twig->assign(
             'f_events',
             Event::find(
                 [
@@ -181,7 +180,7 @@ final class Controller
         );
 
         // concerts passés
-        $smarty->assign(
+        $twig->assign(
             'p_events',
             Event::find(
                 [
@@ -199,16 +198,16 @@ final class Controller
         /*
         if (Tools::isAuth()) {
             if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'g', $groupe->getId())) {
-                $smarty->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=g&id_content=' . $groupe->getId());
+                $twig->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=g&id_content=' . $groupe->getId());
             } else {
-                $smarty->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=g&id_content=' . $groupe->getId());
+                $twig->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=g&id_content=' . $groupe->getId());
             }
         } else {
-            $smarty->assign('alerting_auth_url', HOME_URL . '/auth/auth');
+            $twig->assign('alerting_auth_url', HOME_URL . '/auth/auth');
         }
         */
 
-        return $smarty->fetch('groupes/show.tpl');
+        return $twig->render('groupes/show.twig');
     }
 
     /**
@@ -220,9 +219,9 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/groupes/create.js');
+        $twig->enqueueScript('/js/groupes/create.js');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -314,15 +313,15 @@ final class Controller
 
             if (!empty($errors)) {
                 foreach ($errors as $k => $v) {
-                    $smarty->assign('error_' . $k, $v);
+                    $twig->assign('error_' . $k, $v);
                 }
             }
         }
 
-        $smarty->assign('data', $data);
-        $smarty->assign('types_musicien', TypeMusicien::findAll());
+        $twig->assign('data', $data);
+        $twig->assign('types_musicien', TypeMusicien::findAll());
 
-        return $smarty->fetch('groupes/create.tpl');
+        return $twig->render('groupes/create.twig');
     }
 
     /**
@@ -336,16 +335,16 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/groupes/edit.js');
+        $twig->enqueueScript('/js/groupes/edit.js');
 
         try {
             $groupe = Groupe::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_groupe', true);
-            return $smarty->fetch('groupes/edit.tpl');
+            $twig->assign('unknown_groupe', true);
+            return $twig->render('groupes/edit.twig');
         }
 
         Trail::getInstance()
@@ -353,10 +352,10 @@ final class Controller
             ->addStep('Mes groupes', '/groupes/my')
             ->addStep($groupe->getName());
 
-        $smarty->assign('groupe', $groupe);
+        $twig->assign('groupe', $groupe);
         if (($id_type_musicien = $groupe->isMember($_SESSION['membre']->getId())) === false) {
             if (!$_SESSION['membre']->isAdmin()) {
-                $smarty->assign('not_my_groupe', true);
+                $twig->assign('not_my_groupe', true);
             }
         }
 
@@ -443,15 +442,15 @@ final class Controller
 
             if (!empty($errors)) {
                 foreach ($errors as $k => $v) {
-                    $smarty->assign('error_' . $k, $v);
+                    $twig->assign('error_' . $k, $v);
                 }
             }
         }
 
-        $smarty->assign('data', $data);
-        $smarty->assign('types_musicien', TypeMusicien::findAll());
+        $twig->assign('data', $data);
+        $twig->assign('types_musicien', TypeMusicien::findAll());
 
-        return $smarty->fetch('groupes/edit.tpl');
+        return $twig->render('groupes/edit.twig');
     }
 
     /**
@@ -465,20 +464,20 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         try {
             $groupe = Groupe::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_groupe', true);
-            return $smarty->fetch('groupes/delete.tpl');
+            $twig->assign('unknown_groupe', true);
+            return $twig->render('groupes/delete.twig');
         }
 
         $can_delete = true;
         if ($_SESSION['membre']->isAdmin() === false) { // seul un admin peut supprimer un groupe
             if ($groupe->isMember($_SESSION['membre']->getId()) === false) { // seul un membre du groupe peut supprimer son groupe
-                $smarty->assign('not_my_groupe', true);
+                $twig->assign('not_my_groupe', true);
                 $can_delete = false;
             }
         }
@@ -492,9 +491,9 @@ final class Controller
             }
         }
 
-        $smarty->assign('groupe', $groupe);
+        $twig->assign('groupe', $groupe);
 
-        return $smarty->fetch('groupes/delete.tpl');
+        return $twig->render('groupes/delete.twig');
     }
 
     /**

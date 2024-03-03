@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Membre;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
@@ -29,7 +28,7 @@ final class Controller
 
         $page = (int) Route::params('page');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         $videos = Video::find(
             [
@@ -39,13 +38,13 @@ final class Controller
                 'limit' => NB_VIDEOS_PER_PAGE,
             ]
         );
-        $smarty->assign('videos', $videos);
+        $twig->assign('videos', $videos);
 
         // pagination
-        $smarty->assign('nb_items', Video::count());
-        $smarty->assign('nb_items_per_page', NB_VIDEOS_PER_PAGE);
-        $smarty->assign('page', $page);
+        $twig->assign('nb_items', Video::count());
+        $twig->assign('nb_items_per_page', NB_VIDEOS_PER_PAGE);
+        $twig->assign('page', $page);
 
-        return $smarty->fetch('adm/videos/index.tpl');
+        return $twig->render('adm/videos/index.twig');
     }
 }

@@ -11,7 +11,6 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Reference\Departement;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;
@@ -39,17 +38,17 @@ final class Controller
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
             ->addStep('Mes photos');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/masonry-4.2.2.min.js');
-        $smarty->enqueueScript('/js/imagesloaded-4.1.4.min.js');
-        $smarty->enqueueScript('/js/photos/my.js');
+        $twig->enqueueScript('/js/masonry-4.2.2.min.js');
+        $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
+        $twig->enqueueScript('/js/photos/my.js');
 
         $page = (int) Route::params('page');
 
-        $smarty->assign('create', (bool) Route::params('create'));
-        $smarty->assign('edit', (bool) Route::params('edit'));
-        $smarty->assign('delete', (bool) Route::params('delete'));
+        $twig->assign('create', (bool) Route::params('create'));
+        $twig->assign('edit', (bool) Route::params('edit'));
+        $twig->assign('delete', (bool) Route::params('delete'));
 
         $photos = Photo::find(
             [
@@ -62,13 +61,13 @@ final class Controller
         );
         $nb_photos = Photo::countMy();
 
-        $smarty->assign('photos', $photos);
+        $twig->assign('photos', $photos);
 
-        $smarty->assign('nb_items', $nb_photos);
-        $smarty->assign('nb_items_per_page', NB_PHOTOS_PER_PAGE);
-        $smarty->assign('page', $page);
+        $twig->assign('nb_items', $nb_photos);
+        $twig->assign('nb_items_per_page', NB_PHOTOS_PER_PAGE);
+        $twig->assign('page', $page);
 
-        return $smarty->fetch('photos/my.tpl');
+        return $twig->render('photos/my.twig');
     }
 
     /**
@@ -79,49 +78,49 @@ final class Controller
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         try {
             $photo = Photo::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_photo', true);
-            return $smarty->fetch('photos/show.tpl');
+            $twig->assign('unknown_photo', true);
+            return $twig->render('photos/show.twig');
         }
 
         $meta_title = '';
         $meta_description = "Titre : " . $photo->getName();
 
         if ($photo->getOnline()) {
-            $smarty->assign('photo', $photo);
-            $smarty->assign('from', $from);
-            $smarty->assign('og_image', $photo->getThumbUrl(320));
-            $smarty->assign('has_credits', (bool) $photo->getCredits());
+            $twig->assign('photo', $photo);
+            $twig->assign('from', $from);
+            $twig->assign('og_image', $photo->getThumbUrl(320));
+            $twig->assign('has_credits', (bool) $photo->getCredits());
 
             $meta_title .= $photo->getName();
 
             if ($photo->getIdGroupe()) {
                 $groupe = Groupe::getInstance($photo->getIdGroupe());
-                $smarty->assign('groupe', $groupe);
+                $twig->assign('groupe', $groupe);
                 $meta_title .= " - " . $groupe->getName();
                 $meta_description .= " | Groupe : " . $groupe->getName();
             }
             if ($photo->getIdEvent()) {
                 $event = Event::getInstance($photo->getIdEvent());
-                $smarty->assign('event', $event);
+                $twig->assign('event', $event);
                 $meta_title .= " - " . $event->getName() . " (" . Date::mysqlDatetime($event->getDate(), "d/m/Y") . ")";
                 $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysqlDatetime($event->getDate(), "d/m/Y") . ")";
             }
             if ($photo->getIdLieu()) {
                 $lieu = Lieu::getInstance($photo->getIdLieu());
-                $smarty->assign('lieu', $lieu);
+                $twig->assign('lieu', $lieu);
                 $meta_title .= " - " . $lieu->getName();
                 $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity()->getName() . ")";
             }
             if ($photo->getIdContact()) {
                 try {
                     $membre = Membre::getInstance($photo->getIdContact());
-                    $smarty->assign('membre', $membre);
+                    $twig->assign('membre', $membre);
                 } catch (\Exception $e) {
                     mail(DEBUG_EMAIL, "[AD'HOC] Bug : photo avec membre introuvable", print_r($e, true));
                 }
@@ -175,19 +174,19 @@ final class Controller
                         }
                     }
                 }
-                $smarty->assign('next', $playlist[$next]->getUrl());
-                $smarty->assign('prev', $playlist[$prev]->getUrl());
+                $twig->assign('next', $playlist[$next]->getUrl());
+                $twig->assign('prev', $playlist[$prev]->getUrl());
 
-                $smarty->assign('idx_photo', $idx_photo + 1);
-                $smarty->assign('nb_photos', $count);
+                $twig->assign('idx_photo', $idx_photo + 1);
+                $twig->assign('nb_photos', $count);
                 $meta_title .= ' - ' . ($idx_photo + 1) . '/' . $count;
-                $smarty->assign('playlist', $playlist);
+                $twig->assign('playlist', $playlist);
             }
 
-            $smarty->assign('title', $meta_title);
-            $smarty->assign('description', $meta_description);
+            $twig->assign('title', $meta_title);
+            $twig->assign('description', $meta_description);
 
-            $smarty->assign(
+            $twig->assign(
                 'comments',
                 Comment::find(
                     [
@@ -201,10 +200,10 @@ final class Controller
             );
         } else {
             // pas en ligne, pas les droits
-            $smarty->assign('unknown_photo', true);
+            $twig->assign('unknown_photo', true);
         }
 
-        return $smarty->fetch('photos/show.tpl');
+        return $twig->render('photos/show.twig');
     }
 
     /**
@@ -282,18 +281,18 @@ final class Controller
             ->addStep('Mes photos', '/photos/my')
             ->addStep('Ajouter une photo');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
-        $smarty->enqueueScript('/js/photos/create.js');
+        $twig->enqueueScript('/js/photos/create.js');
 
         $id_groupe = (int) Route::params('id_groupe');
         if ($id_groupe) {
             $groupe = Groupe::getInstance($id_groupe);
-            $smarty->assign('groupe', $groupe);
+            $twig->assign('groupe', $groupe);
         } else {
-            $smarty->assign(
+            $twig->assign(
                 'groupes',
                 Groupe::find(
                     [
@@ -308,8 +307,8 @@ final class Controller
         $id_lieu = (int) Route::params('id_lieu');
         if ($id_lieu) {
             $lieu = Lieu::getInstance($id_lieu);
-            $smarty->assign('lieu', $lieu);
-            $smarty->assign(
+            $twig->assign('lieu', $lieu);
+            $twig->assign(
                 'events',
                 Event::find(
                     [
@@ -323,19 +322,19 @@ final class Controller
                 )
             );
         } else {
-            $smarty->assign('deps', Departement::findAll());
-            $smarty->assign('lieux', Lieu::getLieuxByDep());
+            $twig->assign('deps', Departement::findAll());
+            $twig->assign('lieux', Lieu::getLieuxByDep());
         }
 
         $id_event = (int) Route::params('id_event');
         if ($id_event) {
             $event = Event::getInstance($id_event);
-            $smarty->assign('event', $event);
+            $twig->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
-            $smarty->assign('lieu', $lieu);
+            $twig->assign('lieu', $lieu);
         }
 
-        return $smarty->fetch('photos/create.tpl');
+        return $twig->render('photos/create.twig');
     }
 
     /**
@@ -347,11 +346,11 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
-        $smarty->enqueueScript('/js/photos/edit.js');
+        $twig->enqueueScript('/js/photos/edit.js');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -362,8 +361,8 @@ final class Controller
             $photo = Photo::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_photo', true);
-            return $smarty->fetch('photos/edit.tpl');
+            $twig->assign('unknown_photo', true);
+            return $twig->render('photos/edit.twig');
         }
 
         if (Tools::isSubmit('form-photo-edit')) {
@@ -408,9 +407,9 @@ final class Controller
             }
         }
 
-        $smarty->assign('photo', $photo);
+        $twig->assign('photo', $photo);
 
-        $smarty->assign(
+        $twig->assign(
             'groupes',
             Groupe::find(
                 [
@@ -421,17 +420,17 @@ final class Controller
             )
         );
 
-        $smarty->assign('deps', Departement::findAll());
-        $smarty->assign('lieux', Lieu::getLieuxByDep());
+        $twig->assign('deps', Departement::findAll());
+        $twig->assign('lieux', Lieu::getLieuxByDep());
 
         if ($photo->getIdEvent()) {
             $event = Event::getInstance($photo->getIdEvent());
-            $smarty->assign('event', $event);
+            $twig->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
-            $smarty->assign('lieu', $lieu);
+            $twig->assign('lieu', $lieu);
         }
 
-        return $smarty->fetch('photos/edit.tpl');
+        return $twig->render('photos/edit.twig');
     }
 
     /**
@@ -443,11 +442,11 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
-        $smarty->enqueueScript('/js/photos/delete.js');
+        $twig->enqueueScript('/js/photos/delete.js');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -458,8 +457,8 @@ final class Controller
             $photo = Photo::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_photo', true);
-            return $smarty->fetch('photos/delete.tpl');
+            $twig->assign('unknown_photo', true);
+            return $twig->render('photos/delete.twig');
         }
 
         if (Tools::isSubmit('form-photo-delete')) {
@@ -469,19 +468,19 @@ final class Controller
             }
         }
 
-        $smarty->assign('photo', $photo);
+        $twig->assign('photo', $photo);
 
         if ($photo->getIdGroupe()) {
-            $smarty->assign('groupe', Groupe::getInstance($photo->getIdGroupe()));
+            $twig->assign('groupe', Groupe::getInstance($photo->getIdGroupe()));
         }
         if ($photo->getIdEvent()) {
-            $smarty->assign('event', Event::getInstance($photo->getIdEvent()));
+            $twig->assign('event', Event::getInstance($photo->getIdEvent()));
         }
         if ($photo->getIdLieu()) {
-            $smarty->assign('lieu', Lieu::getInstance($photo->getIdLieu()));
+            $twig->assign('lieu', Lieu::getInstance($photo->getIdLieu()));
         }
 
-        return $smarty->fetch('photos/delete.tpl');
+        return $twig->render('photos/delete.twig');
     }
 
     /**

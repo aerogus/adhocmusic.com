@@ -7,7 +7,6 @@ namespace Adhoc\Controller;
 use Adhoc\Model\FAQ;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Reference\FAQCategory;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
@@ -19,18 +18,18 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep('Privé', '/adm')
             ->addStep('Foire aux questions');
 
-        $smarty->assign('create', (bool) Route::params('create'));
-        $smarty->assign('edit', (bool) Route::params('edit'));
-        $smarty->assign('delete', (bool) Route::params('delete'));
-        $smarty->assign('faq', FAQ::findAll());
+        $twig->assign('create', (bool) Route::params('create'));
+        $twig->assign('edit', (bool) Route::params('edit'));
+        $twig->assign('delete', (bool) Route::params('delete'));
+        $twig->assign('faq', FAQ::findAll());
 
-        return $smarty->fetch('adm/faq/index.tpl');
+        return $twig->render('adm/faq/index.twig');
     }
 
     /**
@@ -40,7 +39,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep('Privé', '/adm')
@@ -65,9 +64,9 @@ final class Controller
             Tools::redirect('/adm/faq?create=1');
         }
 
-        $smarty->assign('categories', FAQCategory::findAll());
+        $twig->assign('categories', FAQCategory::findAll());
 
-        return $smarty->fetch('adm/faq/create.tpl');
+        return $twig->render('adm/faq/create.twig');
     }
 
     /**
@@ -79,7 +78,7 @@ final class Controller
 
         $id_faq = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep('Privé', '/adm')
@@ -105,10 +104,10 @@ final class Controller
             Tools::redirect('/adm/faq?edit=1');
         }
 
-        $smarty->assign('categories', FAQCategory::findAll());
-        $smarty->assign('faq', FAQ::getInstance($id_faq));
+        $twig->assign('categories', FAQCategory::findAll());
+        $twig->assign('faq', FAQ::getInstance($id_faq));
 
-        return $smarty->fetch('adm/faq/edit.tpl');
+        return $twig->render('adm/faq/edit.twig');
     }
 
     /**
@@ -120,7 +119,7 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep('Privé', '/adm')
@@ -132,8 +131,8 @@ final class Controller
             Tools::redirect('/adm/faq?delete=1');
         }
 
-        $smarty->assign('faq', FAQ::getInstance($id));
+        $twig->assign('faq', FAQ::getInstance($id));
 
-        return $smarty->fetch('adm/faq/delete.tpl');
+        return $twig->render('adm/faq/delete.twig');
     }
 }

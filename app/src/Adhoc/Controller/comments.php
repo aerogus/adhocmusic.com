@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Comment;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
@@ -25,7 +24,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Commentaires", '/comments');
@@ -36,9 +35,9 @@ final class Controller
                 'sort' => 'DESC',
             ]
         );
-        $smarty->assign('comments', $comments);
+        $twig->assign('comments', $comments);
 
-        return $smarty->fetch('comments/index.tpl');
+        return $twig->render('comments/index.twig');
     }
 
     /**
@@ -49,9 +48,9 @@ final class Controller
         $id = (int) Route::params('id');
         $comment = Comment::getInstance($id);
 
-        $smarty = new AdHocSmarty();
-        $smarty->assign('comment', $comment);
-        return $smarty->fetch('comments/show.tpl');
+        $twig = new AdHocTwig();
+        $twig->assign('comment', $comment);
+        return $twig->render('comments/show.twig');
     }
 
     /**
@@ -59,8 +58,8 @@ final class Controller
      */
     public static function fetch(): string
     {
-        $smarty = new AdHocSmarty();
-        return $smarty->fetch('comments/fetch.tpl');
+        $twig = new AdHocTwig();
+        return $twig->render('comments/fetch.twig');
     }
 
     /**
@@ -134,7 +133,7 @@ final class Controller
 
         $comment = Comment::getInstance($id);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         if (Tools::isSubmit('form-comment-delete')) {
             if ($comment->delete()) {
@@ -143,8 +142,8 @@ final class Controller
             }
         }
 
-        $smarty->assign('comment', $comment);
+        $twig->assign('comment', $comment);
 
-        return $smarty->fetch('comments/delete.tpl');
+        return $twig->render('comments/delete.twig');
     }
 }

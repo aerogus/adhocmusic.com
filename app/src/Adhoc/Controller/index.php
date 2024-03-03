@@ -14,7 +14,6 @@ use Adhoc\Model\Membre;
 use Adhoc\Model\Newsletter;
 use Adhoc\Model\Partner;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
@@ -106,20 +105,20 @@ final class Controller
      */
     public static function contact(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/contact.js');
+        $twig->enqueueScript('/js/contact.js');
 
         Trail::getInstance()
             ->addStep("Contact");
 
-        $smarty->assign('title', "Contacter l'Association AD'HOC");
-        $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
+        $twig->assign('title', "Contacter l'Association AD'HOC");
+        $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
 
-        $smarty->assign('faq', FAQ::findAll());
+        $twig->assign('faq', FAQ::findAll());
 
         if (!Tools::isSubmit('form-contact')) {
-            $smarty->assign('show_form', true);
+            $twig->assign('show_form', true);
 
             // valeurs par défaut
             $data = [
@@ -156,9 +155,9 @@ final class Controller
                 // 1. envoi du mail aux destinataires
                 $data['email_reply_to'] = $data['email'];
                 if (Email::send(CONTACT_FORM_TO, $data['subject'], 'form-contact-to', $data)) {
-                    $smarty->assign('sent_ok', true);
+                    $twig->assign('sent_ok', true);
                 } else {
-                    $smarty->assign('sent_ko', true);
+                    $twig->assign('sent_ko', true);
                 }
 
                 // 2. envoi de la copie à l'expéditeur
@@ -170,22 +169,22 @@ final class Controller
                 }
             } else {
                 // erreur dans le form
-                $smarty->assign('sent_ko', true);
-                $smarty->assign('show_form', true);
+                $twig->assign('sent_ko', true);
+                $twig->assign('show_form', true);
                 foreach ($errors as $k => $v) {
-                    $smarty->assign('error_' . $k, $v);
+                    $twig->assign('error_' . $k, $v);
                 }
             }
         }
 
-        $smarty->assign('name', $data['name']);
-        $smarty->assign('email', $data['email']);
-        $smarty->assign('subject', $data['subject']);
-        $smarty->assign('text', $data['text']);
-        $smarty->assign('mailing', $data['mailing']);
-        $smarty->assign('check', $data['check']);
+        $twig->assign('name', $data['name']);
+        $twig->assign('email', $data['email']);
+        $twig->assign('subject', $data['subject']);
+        $twig->assign('text', $data['text']);
+        $twig->assign('mailing', $data['mailing']);
+        $twig->assign('check', $data['check']);
 
-        return $smarty->fetch('contact.tpl');
+        return $twig->render('contact.twig');
     }
 
     /**
@@ -309,12 +308,12 @@ final class Controller
             Tools::auth(Membre::TYPE_INTERNE);
         }
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         return
-            $smarty->fetch('common/header.tpl')
+            $twig->render('common/header.twig')
           . $cms->getContent()
-          . $smarty->fetch('common/footer.tpl');
+          . $twig->render('common/footer.twig');
     }
 
     /**

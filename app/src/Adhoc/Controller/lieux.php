@@ -15,7 +15,6 @@ use Adhoc\Model\Reference\LieuType;
 use Adhoc\Model\Reference\WorldCountry;
 use Adhoc\Model\Reference\WorldRegion;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
@@ -33,9 +32,9 @@ final class Controller
      */
     public static function index(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/lieux/index.js');
+        $twig->enqueueScript('/js/lieux/index.js');
 
         Trail::getInstance()
             ->addStep('Lieux', '/lieux');
@@ -49,7 +48,7 @@ final class Controller
                 'sort' => 'ASC'
             ]
         );
-        $smarty->assign('regions', $regions);
+        $twig->assign('regions', $regions);
 
         $departements = [];
         $_departements = Departement::find(
@@ -72,7 +71,7 @@ final class Controller
             $departements[$departement->getIdRegion()][] = $departement;
         }
 
-        $smarty->assign('departements', $departements);
+        $twig->assign('departements', $departements);
 
         $_lieux = Lieu::find(
             [
@@ -86,9 +85,9 @@ final class Controller
             $lieux[$lieu->getIdRegion()][$lieu->getIdDepartement()][] = $lieu;
         }
 
-        $smarty->assign('lieux', $lieux);
+        $twig->assign('lieux', $lieux);
 
-        return $smarty->fetch('lieux/index.tpl');
+        return $twig->render('lieux/index.twig');
     }
 
     /**
@@ -98,19 +97,19 @@ final class Controller
     {
         $page = (int) Route::params('page');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Lieux", "/lieux")
             ->addStep("Mes lieux");
 
-        $smarty->assign('lieux', Lieu::findAll());
+        $twig->assign('lieux', Lieu::findAll());
 
-        $smarty->assign('nb_items', Lieu::count());
-        $smarty->assign('nb_items_per_page', 200);
-        $smarty->assign('page', $page);
+        $twig->assign('nb_items', Lieu::count());
+        $twig->assign('nb_items_per_page', 200);
+        $twig->assign('page', $page);
 
-        return $smarty->fetch('lieux/my.tpl');
+        return $twig->render('lieux/my.twig');
     }
 
     /**
@@ -120,52 +119,52 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('create', (bool) Route::params('create'));
-        $smarty->assign('edit', (bool) Route::params('edit'));
+        $twig->assign('create', (bool) Route::params('create'));
+        $twig->assign('edit', (bool) Route::params('edit'));
 
         try {
             $lieu = Lieu::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_lieu', true);
-            return $smarty->fetch('lieux/show.tpl');
+            $twig->assign('unknown_lieu', true);
+            return $twig->render('lieux/show.twig');
         }
 
-        $smarty->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
-        $smarty->enqueueStyle('/css/leaflet.css');
+        $twig->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
+        $twig->enqueueStyle('/css/leaflet.css');
 
-        $smarty->enqueueScript('/js/masonry-4.2.2.min.js');
-        $smarty->enqueueScript('/js/imagesloaded-4.1.4.min.js');
-        $smarty->enqueueScript('/js/baguetteBox-1.11.1.min.js');
-        $smarty->enqueueScript('/js/leaflet.js');
+        $twig->enqueueScript('/js/masonry-4.2.2.min.js');
+        $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
+        $twig->enqueueScript('/js/baguetteBox-1.11.1.min.js');
+        $twig->enqueueScript('/js/leaflet.js');
 
-        $smarty->enqueueScriptVars(
+        $twig->enqueueScriptVars(
             [
                 'lat' => number_format((float) $lieu->getLat(), 6, '.', ''),
                 'lng' => number_format((float) $lieu->getLng(), 6, '.', ''),
                 'name' => $lieu->getName()
             ]
         );
-        $smarty->enqueueScript('/js/lieux/show.js');
+        $twig->enqueueScript('/js/lieux/show.js');
 
         if (!$lieu->getLat() && !$lieu->getLng()) {
-            $smarty->assign('geocode', true);
-            $smarty->assign('geocode_id_lieu', $lieu->getId());
-            $smarty->assign('geocode_address', $lieu->getAddress() . ' ' . $lieu->getCity()->getCp() . ' ' . $lieu->getCity()->getName());
+            $twig->assign('geocode', true);
+            $twig->assign('geocode_id_lieu', $lieu->getId());
+            $twig->assign('geocode_address', $lieu->getAddress() . ' ' . $lieu->getCity()->getCp() . ' ' . $lieu->getCity()->getName());
         }
 
-        $smarty->assign('lieu', $lieu);
+        $twig->assign('lieu', $lieu);
 
         $trail = Trail::getInstance()
             ->addStep("Lieux", "/lieux")
             ->addStep($lieu->getName());
 
-        $smarty->assign('title', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCity()->getCp() . " " . $lieu->getCity()->getName());
-        $smarty->assign('description', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCity()->getCp() . " " . $lieu->getCity()->getName());
+        $twig->assign('title', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCity()->getCp() . " " . $lieu->getCity()->getName());
+        $twig->assign('description', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCity()->getCp() . " " . $lieu->getCity()->getName());
 
-        $smarty->assign(
+        $twig->assign(
             'events_f',
             Event::find(
                 [
@@ -179,7 +178,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'events_p',
             Event::find(
                 [
@@ -193,7 +192,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'photos',
             Photo::find(
                 [
@@ -205,7 +204,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'audios',
             Audio::find(
                 [
@@ -216,7 +215,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'videos',
             Video::find(
                 [
@@ -232,16 +231,16 @@ final class Controller
         /*
         if (Tools::isAuth()) {
             if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'l', $lieu->getId())) {
-                $smarty->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=l&id_content='.$lieu->getId());
+                $twig->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=l&id_content='.$lieu->getId());
             } else {
-                $smarty->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=l&id_content='.$lieu->getId());
+                $twig->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=l&id_content='.$lieu->getId());
             }
         } else {
-            $smarty->assign('alerting_auth_url', HOME_URL .  '/auth/auth');
+            $twig->assign('alerting_auth_url', HOME_URL .  '/auth/auth');
         }
         */
 
-        return $smarty->fetch('lieux/show.tpl');
+        return $twig->render('lieux/show.twig');
     }
 
     /**
@@ -251,10 +250,10 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/geopicker.js');
-        $smarty->enqueueScript('/js/lieux/create.js');
+        $twig->enqueueScript('/js/geopicker.js');
+        $twig->enqueueScript('/js/lieux/create.js');
 
         if (Tools::isSubmit('form-lieu-create')) {
             $data = [
@@ -325,9 +324,9 @@ final class Controller
             ->addStep("Lieux", "/lieux")
             ->addStep("Ajouter");
 
-        $smarty->assign('lieu_types', LieuType::findAll());
+        $twig->assign('lieu_types', LieuType::findAll());
 
-        $smarty->enqueueScriptVars(
+        $twig->enqueueScriptVars(
             [
                 'id_lieu' => 0,
                 'id_country' => 'FR',
@@ -337,7 +336,7 @@ final class Controller
             ]
         );
 
-        return $smarty->fetch('lieux/create.tpl');
+        return $twig->render('lieux/create.twig');
     }
 
     /**
@@ -353,19 +352,19 @@ final class Controller
             ->addStep("Lieux", "/lieux")
             ->addStep("Modifier");
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/geopicker.js');
-        $smarty->enqueueScript('/js/lieux/edit.js');
+        $twig->enqueueScript('/js/geopicker.js');
+        $twig->enqueueScript('/js/lieux/edit.js');
 
         try {
             $lieu = Lieu::getInstance($id);
-            $smarty->assign('lieu', $lieu);
-            $smarty->assign('lieu_types', LieuType::findAll());
+            $twig->assign('lieu', $lieu);
+            $twig->assign('lieu_types', LieuType::findAll());
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_lieu', true);
-            return $smarty->fetch('lieux/edit.tpl');
+            $twig->assign('unknown_lieu', true);
+            return $twig->render('lieux/edit.twig');
         }
 
         if (Tools::isSubmit('form-lieu-edit')) {
@@ -432,7 +431,7 @@ final class Controller
             }
         }
 
-        $smarty->enqueueScriptVars(
+        $twig->enqueueScriptVars(
             [
                 'id' => $lieu->getId(),
                 'id_country' => $lieu->getIdCountry(),
@@ -442,7 +441,7 @@ final class Controller
             ]
         );
 
-        return $smarty->fetch('lieux/edit.tpl');
+        return $twig->render('lieux/edit.twig');
     }
 
     /**
@@ -458,15 +457,15 @@ final class Controller
             ->addStep("Lieux", "/lieux")
             ->addStep("Supprimer");
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         try {
             $lieu = Lieu::getInstance($id);
-            $smarty->assign('lieu', $lieu);
+            $twig->assign('lieu', $lieu);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_lieu', true);
-            return $smarty->fetch('lieux/delete.tpl');
+            $twig->assign('unknown_lieu', true);
+            return $twig->render('lieux/delete.twig');
         }
 
         if (Tools::isSubmit('form-lieu-delete')) {
@@ -476,7 +475,7 @@ final class Controller
             }
         }
 
-        return $smarty->fetch('lieux/delete.tpl');
+        return $twig->render('lieux/delete.twig');
     }
 
     /**

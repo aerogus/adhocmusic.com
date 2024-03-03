@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Membre;
 use Adhoc\Model\Subscription;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
@@ -24,15 +23,15 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
             ->addStep("Cotisations");
 
-        $smarty->assign('subscriptions', Subscription::findAll());
+        $twig->assign('subscriptions', Subscription::findAll());
 
-        return $smarty->fetch('adm/subscriptions/index.tpl');
+        return $twig->render('adm/subscriptions/index.twig');
     }
 
     /**
@@ -42,14 +41,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
             ->addStep("Cotisations", "/adm/subscriptions")
             ->addStep("Nouvelle cotisation");
 
-        return $smarty->fetch('adm/subscriptions/create.tpl');
+        return $twig->render('adm/subscriptions/create.twig');
     }
 
     /**
@@ -59,14 +58,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
             ->addStep("Cotisations", "/adm/subscriptions")
             ->addStep("Édition");
 
-        return $smarty->fetch('adm/subscriptions/edit.tpl');
+        return $twig->render('adm/subscriptions/edit.twig');
     }
 
     /**
@@ -76,14 +75,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
             ->addStep("Cotisations", "/adm/subscriptions")
             ->addStep("Suppression");
 
-        return $smarty->fetch('adm/subscriptions/delete.tpl');
+        return $twig->render('adm/subscriptions/delete.twig');
     }
 
     /**

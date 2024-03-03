@@ -10,7 +10,6 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;
@@ -62,24 +61,24 @@ final class Controller
             $nb_videos = Video::countMy();
         }
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
-        $smarty->enqueueScript('/js/masonry-4.2.2.min.js');
-        $smarty->enqueueScript('/js/imagesloaded-4.1.4.min.js');
-        $smarty->enqueueScript('/js/baguetteBox-1.11.1.min.js');
+        $twig->enqueueScript('/js/masonry-4.2.2.min.js');
+        $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
+        $twig->enqueueScript('/js/baguetteBox-1.11.1.min.js');
 
-        $smarty->enqueueScript('/js/videos/my.js');
+        $twig->enqueueScript('/js/videos/my.js');
 
         // pagination
-        $smarty->assign('nb_items', $nb_videos);
-        $smarty->assign('nb_items_per_page', NB_VIDEOS_PER_PAGE);
-        $smarty->assign('page', $page);
+        $twig->assign('nb_items', $nb_videos);
+        $twig->assign('nb_items_per_page', NB_VIDEOS_PER_PAGE);
+        $twig->assign('page', $page);
 
-        $smarty->assign('videos', $videos);
+        $twig->assign('videos', $videos);
 
-        return $smarty->fetch('videos/my.tpl');
+        return $twig->render('videos/my.twig');
     }
 
     /**
@@ -92,33 +91,33 @@ final class Controller
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
+        $twig->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
 
-        $smarty->enqueueScript('/js/masonry-4.2.2.min.js');
-        $smarty->enqueueScript('/js/imagesloaded-4.1.4.min.js');
-        $smarty->enqueueScript('/js/baguetteBox-1.11.1.min.js');
+        $twig->enqueueScript('/js/masonry-4.2.2.min.js');
+        $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
+        $twig->enqueueScript('/js/baguetteBox-1.11.1.min.js');
 
-        $smarty->enqueueScript('/js/videos/show.js');
+        $twig->enqueueScript('/js/videos/show.js');
 
         try {
             $video = Video::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_video', true);
-            return $smarty->fetch('videos/show.tpl');
+            $twig->assign('unknown_video', true);
+            return $twig->render('videos/show.twig');
         }
 
         $meta_description = "Titre : " . $video->getName();
 
         if ($video->getOnline()) {
-            $smarty->assign('video', $video);
-            $smarty->assign('from', $from);
-            $smarty->assign('title', "♫ " . $video->getName());
-            $smarty->assign('description', $video->getName());
-            $smarty->assign('og_image', MEDIA_URL . '/video/' . $video->getId() . '.jpg');
-            $smarty->assign('og_type', 'video.movie');
+            $twig->assign('video', $video);
+            $twig->assign('from', $from);
+            $twig->assign('title', "♫ " . $video->getName());
+            $twig->assign('description', $video->getName());
+            $twig->assign('og_image', MEDIA_URL . '/video/' . $video->getId() . '.jpg');
+            $twig->assign('og_type', 'video.movie');
 
             // @see https://developers.facebook.com/docs/sharing/webmasters?locale=fr_FR
             // mais la preview live ne marche pas/plus sur FB...
@@ -129,27 +128,27 @@ final class Controller
                 'width' => 1280, // fake
                 'height' => 720, // fake
             ];
-            $smarty->assign('og_video', $og_video);
+            $twig->assign('og_video', $og_video);
 
             if ($video->getGroupes()) {
                 $groupe = Groupe::getInstance($video->getGroupes()[0]->getId());
-                $smarty->assign('groupe', $groupe);
-                $smarty->assign('title', "♫ " . $video->getName() . " (" . $groupe->getName() . ")");
+                $twig->assign('groupe', $groupe);
+                $twig->assign('title', "♫ " . $video->getName() . " (" . $groupe->getName() . ")");
                 $meta_description .= " | Groupe : " . $groupe->getName();
             }
             if ($video->getIdEvent()) {
                 $event = Event::getInstance($video->getIdEvent());
-                $smarty->assign('event', $event);
+                $twig->assign('event', $event);
                 $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysqlDatetime($event->getDate(), "d/m/Y") . ")";
             }
             if ($video->getIdLieu()) {
                 $lieu = Lieu::getInstance($video->getIdLieu());
-                $smarty->assign('lieu', $lieu);
+                $twig->assign('lieu', $lieu);
                 $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity()->getName() . ")";
             }
             if ($video->getIdContact()) {
                 $membre = Membre::getInstance($video->getIdContact());
-                $smarty->assign('membre', $membre);
+                $twig->assign('membre', $membre);
             }
 
             // menu et fil d'ariane
@@ -177,7 +176,7 @@ final class Controller
 
             // vidéos et photos liées à l'événement/lieu
             if ($video->getIdEvent() && $video->getIdLieu()) {
-                $smarty->assign(
+                $twig->assign(
                     'photos',
                     Photo::find(
                         [
@@ -188,7 +187,7 @@ final class Controller
                         ]
                     )
                 );
-                $smarty->assign(
+                $twig->assign(
                     'videos',
                     Video::find(
                         [
@@ -202,12 +201,12 @@ final class Controller
                 );
             }
 
-            $smarty->assign('description', $meta_description);
+            $twig->assign('description', $meta_description);
         } else {
-            $smarty->assign('unknown_video', true);
+            $twig->assign('unknown_video', true);
         }
 
-        return $smarty->fetch('videos/show.tpl');
+        return $twig->render('videos/show.twig');
     }
 
     /**
@@ -219,23 +218,23 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         try {
             $video = Video::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_video', true);
-            return $smarty->fetch('videos/embed.tpl');
+            $twig->assign('unknown_video', true);
+            return $twig->render('videos/embed.twig');
         }
 
         if ($video->getOnline()) {
-            $smarty->assign('video', $video);
+            $twig->assign('video', $video);
         } else {
-            $smarty->assign('unknown_video', true);
+            $twig->assign('unknown_video', true);
         }
 
-        return $smarty->fetch('videos/embed.tpl');
+        return $twig->render('videos/embed.twig');
     }
 
     /**
@@ -247,11 +246,11 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
-        $smarty->enqueueScript('/js/videos/create.js');
+        $twig->enqueueScript('/js/videos/create.js');
 
         if (Tools::isSubmit('form-video-create')) {
             $data = [
@@ -310,7 +309,7 @@ final class Controller
                 Tools::redirect('/videos/my');
             } else {
                 foreach ($errors as $k => $v) {
-                    $smarty->assign('error_' . $k, $v);
+                    $twig->assign('error_' . $k, $v);
                 }
             }
         }
@@ -322,9 +321,9 @@ final class Controller
 
         // préselection d'un groupe
         $id_groupe = (int) Route::params('id_groupe');
-        $smarty->assign('id_groupe', $id_groupe);
+        $twig->assign('id_groupe', $id_groupe);
 
-        $smarty->assign(
+        $twig->assign(
             'groupes',
             Groupe::find(
                 [
@@ -338,8 +337,8 @@ final class Controller
         $id_lieu = (int) Route::params('id_lieu');
         if ($id_lieu) {
             $lieu = Lieu::getInstance($id_lieu);
-            $smarty->assign('lieu', $lieu);
-            $smarty->assign(
+            $twig->assign('lieu', $lieu);
+            $twig->assign(
                 'events',
                 Event::find(
                     [
@@ -353,19 +352,19 @@ final class Controller
                 )
             );
         } else {
-            $smarty->assign('deps', Departement::findAll());
-            $smarty->assign('lieux', Lieu::getLieuxByDep());
+            $twig->assign('deps', Departement::findAll());
+            $twig->assign('lieux', Lieu::getLieuxByDep());
         }
 
         $id_event  = (int) Route::params('id_event');
         if ($id_event) {
             $event = Event::getInstance($id_event);
             $lieu = Lieu::getInstance($event->getIdLieu());
-            $smarty->assign('event', $event);
-            $smarty->assign('lieu', $lieu);
+            $twig->assign('event', $event);
+            $twig->assign('lieu', $lieu);
         }
 
-        return $smarty->fetch('videos/create.tpl');
+        return $twig->render('videos/create.twig');
     }
 
     /**
@@ -380,18 +379,18 @@ final class Controller
         $id = (int) Route::params('id');
         $page = (int) Route::params('page');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
-        $smarty->enqueueScript('/js/videos/edit.js');
+        $twig->enqueueScript('/js/videos/edit.js');
 
         try {
             $video = Video::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_video', true);
-            return $smarty->fetch('videos/edit.tpl');
+            $twig->assign('unknown_video', true);
+            return $twig->render('videos/edit.twig');
         }
 
         if (Tools::isSubmit('form-video-edit')) {
@@ -443,7 +442,7 @@ final class Controller
                 Tools::redirect('/videos/my');
             } else {
                 foreach ($errors as $k => $v) {
-                    $smarty->assign('error_' . $k, $v);
+                    $twig->assign('error_' . $k, $v);
                 }
             }
         }
@@ -453,9 +452,9 @@ final class Controller
             ->addStep('Mes vidéos', '/videos/my')
             ->addStep('Éditer une vidéo');
 
-        $smarty->assign('video', $video);
+        $twig->assign('video', $video);
 
-        $smarty->assign(
+        $twig->assign(
             'groupes',
             Groupe::find(
                 [
@@ -466,22 +465,22 @@ final class Controller
             )
         );
 
-        $smarty->assign('deps', Departement::findAll());
-        $smarty->assign('lieux', Lieu::getLieuxByDep());
+        $twig->assign('deps', Departement::findAll());
+        $twig->assign('lieux', Lieu::getLieuxByDep());
 
-        $smarty->assign('page', $page);
+        $twig->assign('page', $page);
 
         if ($video->getIdEvent()) {
             $event = Event::getInstance($video->getIdEvent());
             $lieu = Lieu::getInstance($event->getIdLieu());
-            $smarty->assign('event', $event);
-            $smarty->assign('lieu', $lieu);
+            $twig->assign('event', $event);
+            $twig->assign('lieu', $lieu);
         } elseif ($video->getIdLieu()) {
             $lieu = Lieu::getInstance($video->getIdLieu());
-            $smarty->assign('lieu', $lieu);
+            $twig->assign('lieu', $lieu);
         }
 
-        return $smarty->fetch('videos/edit.tpl');
+        return $twig->render('videos/edit.twig');
     }
 
     /**
@@ -495,11 +494,11 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
-        $smarty->enqueueScript('/js/videos/delete.js');
+        $twig->enqueueScript('/js/videos/delete.js');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -510,8 +509,8 @@ final class Controller
             $video = Video::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_video', true);
-            return $smarty->fetch('videos/delete.tpl');
+            $twig->assign('unknown_video', true);
+            return $twig->render('videos/delete.twig');
         }
 
         if (Tools::isSubmit('form-video-delete')) {
@@ -521,19 +520,19 @@ final class Controller
             }
         }
 
-        $smarty->assign('video', $video);
+        $twig->assign('video', $video);
 
         if ($video->getGroupes()) {
-            $smarty->assign('groupe', $video->getGroupes()[0]);
+            $twig->assign('groupe', $video->getGroupes()[0]);
         }
         if ($video->getIdEvent()) {
-            $smarty->assign('event', Event::getInstance($video->getIdEvent()));
+            $twig->assign('event', Event::getInstance($video->getIdEvent()));
         }
         if ($video->getIdLieu()) {
-            $smarty->assign('lieu', Lieu::getInstance($video->getIdLieu()));
+            $twig->assign('lieu', Lieu::getInstance($video->getIdLieu()));
         }
 
-        return $smarty->fetch('videos/delete.tpl');
+        return $twig->render('videos/delete.twig');
     }
 
     /**

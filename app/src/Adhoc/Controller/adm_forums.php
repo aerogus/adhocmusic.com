@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\ForumPrive;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
@@ -19,15 +18,15 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
             ->addStep("Forums");
 
-        $smarty->assign('forums', ForumPrive::getForums());
+        $twig->assign('forums', ForumPrive::getForums());
 
-        return $smarty->fetch('adm/forums/index.tpl');
+        return $twig->render('adm/forums/index.twig');
     }
 
     public static function forum(): string
@@ -39,24 +38,24 @@ final class Controller
 
         $forum = ForumPrive::getForum($id_forum);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
             ->addStep("Forums", "/adm/forums")
             ->addStep($forum['title']);
 
-        $smarty->enqueueScript('/js/adm/forums.js');
+        $twig->enqueueScript('/js/adm/forums.js');
 
-        $smarty->assign('subs', ForumPrive::getSubscribers($id_forum));
-        $smarty->assign('forum', $forum);
-        $smarty->assign('threads', ForumPrive::getThreads($id_forum, $page));
+        $twig->assign('subs', ForumPrive::getSubscribers($id_forum));
+        $twig->assign('forum', $forum);
+        $twig->assign('threads', ForumPrive::getThreads($id_forum, $page));
 
-        $smarty->assign('nb_items', ForumPrive::getThreadsCount($id_forum));
-        $smarty->assign('nb_items_per_page', FORUM_NB_THREADS_PER_PAGE);
-        $smarty->assign('page', $page);
+        $twig->assign('nb_items', ForumPrive::getThreadsCount($id_forum));
+        $twig->assign('nb_items_per_page', FORUM_NB_THREADS_PER_PAGE);
+        $twig->assign('page', $page);
 
-        return $smarty->fetch('adm/forums/forum.tpl');
+        return $twig->render('adm/forums/forum.twig');
     }
 
     public static function thread(): string
@@ -66,7 +65,7 @@ final class Controller
         $id_thread = (int) Route::params('id_thread');
         $page = (int) Route::params('page');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         $data = ForumPrive::getMessages($id_thread, $page);
         $forum = ForumPrive::getForum($data['thread']['id_forum']);
@@ -77,24 +76,24 @@ final class Controller
             ->addStep($forum['title'], "/adm/forums/forum/" . $forum['id_forum'])
             ->addStep($data['thread']['subject']);
 
-        $smarty->assign('id_forum', $forum['id_forum']);
-        $smarty->assign('id_thread', $id_thread);
+        $twig->assign('id_forum', $forum['id_forum']);
+        $twig->assign('id_thread', $id_thread);
 
-        $smarty->assign('subs', ForumPrive::getSubscribers($forum['id_forum']));
-        $smarty->assign('thread', $data['thread']);
-        $smarty->assign('messages', $data['messages']);
+        $twig->assign('subs', ForumPrive::getSubscribers($forum['id_forum']));
+        $twig->assign('thread', $data['thread']);
+        $twig->assign('messages', $data['messages']);
 
-        $smarty->assign('nb_items', $data['thread']['nb_messages']);
-        $smarty->assign('nb_items_per_page', FORUM_NB_MESSAGES_PER_PAGE);
-        $smarty->assign('page', $page);
+        $twig->assign('nb_items', $data['thread']['nb_messages']);
+        $twig->assign('nb_items_per_page', FORUM_NB_MESSAGES_PER_PAGE);
+        $twig->assign('page', $page);
 
         ForumPrive::addView($id_thread);
 
         // box écrire
-        $smarty->assign('text', '');
-        $smarty->assign('check', Tools::getCSRFToken());
+        $twig->assign('text', '');
+        $twig->assign('check', Tools::getCSRFToken());
 
-        return $smarty->fetch('adm/forums/thread.tpl');
+        return $twig->render('adm/forums/thread.twig');
     }
 
     public static function write(): string
@@ -161,10 +160,10 @@ final class Controller
             Tools::redirect('/adm/forums/forum/' . $msg['id_forum']);
         }
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         if (is_null($id_forum) && empty($id_thread)) {
-            $smarty->assign('error_params', true);
+            $twig->assign('error_params', true);
         } elseif (!empty($id_thread)) {
             $id_forum = ForumPrive::getIdForumByIdThread($id_thread);
         }
@@ -178,12 +177,12 @@ final class Controller
             ->addStep("Ecrire un message");
 
         // box écrire
-        $smarty->assign('subject', '');
-        $smarty->assign('text', '');
-        $smarty->assign('check', Tools::getCSRFToken());
-        $smarty->assign('id_forum', $id_forum);
-        $smarty->assign('id_thread', $id_thread);
+        $twig->assign('subject', '');
+        $twig->assign('text', '');
+        $twig->assign('check', Tools::getCSRFToken());
+        $twig->assign('id_forum', $id_forum);
+        $twig->assign('id_thread', $id_thread);
 
-        return $smarty->fetch('adm/forums/write.tpl');
+        return $twig->render('adm/forums/write.twig');
     }
 }

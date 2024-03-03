@@ -7,7 +7,6 @@ namespace Adhoc\Controller;
 use Adhoc\Model\Event;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Structure;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
@@ -26,9 +25,9 @@ final class Controller
         Trail::getInstance()
             ->addStep('Structures');
 
-        $smarty = new AdHocSmarty();
-        $smarty->assign('structures', Structure::findAll());
-        return $smarty->fetch('structures/index.tpl');
+        $twig = new AdHocTwig();
+        $twig->assign('structures', Structure::findAll());
+        return $twig->render('structures/index.twig');
     }
 
     /**
@@ -36,7 +35,7 @@ final class Controller
      */
     public static function show(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         $id = (int) Route::params('id');
 
@@ -44,17 +43,17 @@ final class Controller
             $structure = Structure::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_structure', true);
-            return $smarty->fetch('structures/show.tpl');
+            $twig->assign('unknown_structure', true);
+            return $twig->render('structures/show.twig');
         }
 
         Trail::getInstance()
             ->addStep('Structures', '/structures')
             ->addStep($structure->getName());
 
-        $smarty->assign('structure', $structure);
+        $twig->assign('structure', $structure);
 
-        $smarty->assign(
+        $twig->assign(
             'events',
             Event::find(
                 [
@@ -67,7 +66,7 @@ final class Controller
             )
         );
 
-        return $smarty->fetch('structures/show.tpl');
+        return $twig->render('structures/show.twig');
     }
 
     /**
@@ -77,9 +76,9 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/structures/create.js');
+        $twig->enqueueScript('/js/structures/create.js');
 
         if (Tools::isSubmit('form-structure-create')) {
             $data = [
@@ -106,7 +105,7 @@ final class Controller
             }
         }
 
-        return $smarty->fetch('structures/create.tpl');
+        return $twig->render('structures/create.twig');
     }
 
     /**
@@ -118,9 +117,9 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/structures/edit.js');
+        $twig->enqueueScript('/js/structures/edit.js');
 
         if (Tools::isSubmit('form-structure-edit')) {
             $data = [
@@ -138,9 +137,9 @@ final class Controller
             }
         }
 
-        $smarty->assign('structure', Structure::getInstance($id));
+        $twig->assign('structure', Structure::getInstance($id));
 
-        return $smarty->fetch('structures/edit.tpl');
+        return $twig->render('structures/edit.twig');
     }
 
     /**
@@ -154,9 +153,9 @@ final class Controller
 
         $structure = Structure::getInstance($id);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/structures/delete.js');
+        $twig->enqueueScript('/js/structures/delete.js');
 
         if (Tools::isSubmit('form-structure-delete')) {
             if ($structure->delete()) {
@@ -164,9 +163,9 @@ final class Controller
             }
         }
 
-        $smarty->assign('structure', $structure);
+        $twig->assign('structure', $structure);
 
-        return $smarty->fetch('structures/delete.tpl');
+        return $twig->render('structures/delete.twig');
     }
 
     /**

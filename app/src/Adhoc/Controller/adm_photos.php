@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
@@ -30,7 +29,7 @@ final class Controller
 
         $page = (int) Route::params('page');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         $photos = Photo::find(
             [
@@ -40,13 +39,13 @@ final class Controller
                 'limit' => NB_PHOTOS_PER_PAGE,
             ]
         );
-        $smarty->assign('photos', $photos);
+        $twig->assign('photos', $photos);
 
         // pagination
-        $smarty->assign('nb_items', Photo::count());
-        $smarty->assign('nb_items_per_page', NB_PHOTOS_PER_PAGE);
-        $smarty->assign('page', $page);
+        $twig->assign('nb_items', Photo::count());
+        $twig->assign('nb_items_per_page', NB_PHOTOS_PER_PAGE);
+        $twig->assign('page', $page);
 
-        return $smarty->fetch('adm/photos/index.tpl');
+        return $twig->render('adm/photos/index.twig');
     }
 }

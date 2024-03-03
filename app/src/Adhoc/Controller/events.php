@@ -13,7 +13,6 @@ use Adhoc\Model\Photo;
 use Adhoc\Model\Structure;
 use Adhoc\Model\Video;
 use Adhoc\Model\Reference\Style;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;
@@ -30,16 +29,16 @@ final class Controller
      */
     public static function index(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/events/index.js');
+        $twig->enqueueScript('/js/events/index.js');
 
         Trail::getInstance()
             ->addStep('Agenda');
 
-        $smarty->assign('create', (bool) Route::params('create'));
-        $smarty->assign('edit', (bool) Route::params('edit'));
-        $smarty->assign('delete', (bool) Route::params('delete'));
+        $twig->assign('create', (bool) Route::params('create'));
+        $twig->assign('edit', (bool) Route::params('edit'));
+        $twig->assign('delete', (bool) Route::params('delete'));
 
         $year  = (int) Route::params('y');
         $month = (int) Route::params('m');
@@ -75,16 +74,16 @@ final class Controller
             $events[$_day][] = Event::getInstance($event->getIdEvent());
         }
 
-        $smarty->assign('title', "Agenda Concerts");
-        $smarty->assign('description', "Agenda Concert");
+        $twig->assign('title', "Agenda Concerts");
+        $twig->assign('description', "Agenda Concert");
 
-        $smarty->assign('events', $events);
+        $twig->assign('events', $events);
 
-        $smarty->assign('year', ($year ? $year : date('Y')));
-        $smarty->assign('month', ($month ? $month : date('m')));
-        $smarty->assign('day', ($day ? $day : date('d')));
+        $twig->assign('year', ($year ? $year : date('Y')));
+        $twig->assign('month', ($month ? $month : date('m')));
+        $twig->assign('day', ($day ? $day : date('d')));
 
-        return $smarty->fetch('events/index.tpl');
+        return $twig->render('events/index.twig');
     }
 
     /**
@@ -128,15 +127,15 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
+        $twig->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
 
-        $smarty->enqueueScript('/js/masonry-4.2.2.min.js');
-        $smarty->enqueueScript('/js/imagesloaded-4.1.4.min.js');
-        $smarty->enqueueScript('/js/baguetteBox-1.11.1.min.js');
+        $twig->enqueueScript('/js/masonry-4.2.2.min.js');
+        $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
+        $twig->enqueueScript('/js/baguetteBox-1.11.1.min.js');
 
-        $smarty->enqueueScript('/js/events/show.js');
+        $twig->enqueueScript('/js/events/show.js');
 
         $trail = Trail::getInstance()
             ->addStep('Agenda', '/events');
@@ -147,20 +146,20 @@ final class Controller
         } catch (\Exception $e) {
             Route::setHttpCode(404);
             $trail->addStep("Évènement introuvable");
-            $smarty->assign('unknown_event', true);
-            return $smarty->fetch('events/show.tpl');
+            $twig->assign('unknown_event', true);
+            return $twig->render('events/show.twig');
         }
 
-        $smarty->assign('year', $event->getYear());
-        $smarty->assign('month', $event->getMonth());
-        $smarty->assign('day', $event->getDay());
+        $twig->assign('year', $event->getYear());
+        $twig->assign('month', $event->getMonth());
+        $twig->assign('day', $event->getDay());
 
-        $smarty->assign('event', $event);
+        $twig->assign('event', $event);
 
-        $smarty->assign('title', '♫ ' . $event->getName());
-        $smarty->assign('description', "Date : " . Date::mysqlDatetime($event->getDate(), 'd/m/Y') . " | Lieu : " . $event->getLieu()->getName() . " " . $event->getLieu()->getAddress() . " " . $event->getLieu()->getCity()->getCp() . " " . $event->getLieu()->getCity()->getName());
+        $twig->assign('title', '♫ ' . $event->getName());
+        $twig->assign('description', "Date : " . Date::mysqlDatetime($event->getDate(), 'd/m/Y') . " | Lieu : " . $event->getLieu()->getName() . " " . $event->getLieu()->getAddress() . " " . $event->getLieu()->getCity()->getCp() . " " . $event->getLieu()->getCity()->getName());
 
-        $smarty->assign(
+        $twig->assign(
             'photos',
             Photo::find(
                 [
@@ -171,7 +170,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'audios',
             Audio::find(
                 [
@@ -183,7 +182,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'videos',
             Video::find(
                 [
@@ -196,24 +195,24 @@ final class Controller
             )
         );
 
-        $smarty->assign('jour', Date::mysqlDatetime($event->getDate(), "d/m/Y"));
-        $smarty->assign('heure', Date::mysqlDatetime($event->getDate(), "H:i"));
+        $twig->assign('jour', Date::mysqlDatetime($event->getDate(), "d/m/Y"));
+        $twig->assign('heure', Date::mysqlDatetime($event->getDate(), "H:i"));
 
         if ($event->getIdContact()) {
             try {
                 // le membre peut avoir été supprimé ...
                 $membre = Membre::getInstance($event->getIdContact());
-                $smarty->assign('membre', $membre);
+                $twig->assign('membre', $membre);
             } catch (\Exception $e) {
                 mail(DEBUG_EMAIL, "[AD'HOC] Bug : evenement " . $event->getId() . " avec membre " . $event->getIdContact() . " introuvable", print_r($e, true));
             }
         }
 
         if (file_exists(Event::getBasePath() . '/' . $event->getIdEvent() . '.jpg')) {
-            $smarty->assign('og_image', $event->getThumbUrl());
+            $twig->assign('og_image', $event->getThumbUrl());
         }
 
-        return $smarty->fetch('events/show.tpl');
+        return $twig->render('events/show.twig');
     }
 
     /**
@@ -223,14 +222,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueStyle('/css/jquery-ui.min.css');
+        $twig->enqueueStyle('/css/jquery-ui.min.css');
 
-        $smarty->enqueueScript('/js/jquery-ui.min.js');
-        $smarty->enqueueScript('/js/jquery-ui-datepicker-fr.js');
-        $smarty->enqueueScript('/js/geopicker.js');
-        $smarty->enqueueScript('/js/events/create.js');
+        $twig->enqueueScript('/js/jquery-ui.min.js');
+        $twig->enqueueScript('/js/jquery-ui-datepicker-fr.js');
+        $twig->enqueueScript('/js/geopicker.js');
+        $twig->enqueueScript('/js/events/create.js');
 
         Trail::getInstance()
             ->addStep("Agenda", "/events")
@@ -275,7 +274,7 @@ final class Controller
             $id_region  = $lieu->getIdRegion();
             $id_departement = $lieu->getIdDepartement();
             $id_city = $lieu->getIdCity();
-            $smarty->assign('lieu', $lieu);
+            $twig->assign('lieu', $lieu);
         }
 
         $id_structure = 0;
@@ -427,9 +426,9 @@ final class Controller
             }
         }
 
-        $smarty->assign('data', $data);
+        $twig->assign('data', $data);
 
-        $smarty->assign(
+        $twig->assign(
             'styles',
             Style::find(
                 [
@@ -439,7 +438,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'groupes',
             Groupe::find(
                 [
@@ -449,7 +448,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'structures',
             Structure::find(
                 [
@@ -459,7 +458,7 @@ final class Controller
             )
         );
 
-        $smarty->enqueueScriptVars(
+        $twig->enqueueScriptVars(
             [
                 'id_lieu' => $id_lieu,
                 'id_country' => $id_country,
@@ -469,7 +468,7 @@ final class Controller
             ]
         );
 
-        return $smarty->fetch('events/create.tpl');
+        return $twig->render('events/create.twig');
     }
 
     /**
@@ -485,14 +484,14 @@ final class Controller
             ->addStep("Agenda", "/events")
             ->addStep("Modifier une date");
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueStyle('/css/jquery-ui.min.css');
+        $twig->enqueueStyle('/css/jquery-ui.min.css');
 
-        $smarty->enqueueScript('/js/jquery-ui.min.js');
-        $smarty->enqueueScript('/js/jquery-ui-datepicker-fr.js');
-        $smarty->enqueueScript('/js/geopicker.js');
-        $smarty->enqueueScript('/js/events/edit.js');
+        $twig->enqueueScript('/js/jquery-ui.min.js');
+        $twig->enqueueScript('/js/jquery-ui-datepicker-fr.js');
+        $twig->enqueueScript('/js/geopicker.js');
+        $twig->enqueueScript('/js/events/edit.js');
 
         try {
             $event = Event::getInstance($id);
@@ -621,11 +620,11 @@ final class Controller
             }
         }
 
-        $smarty->assign('data', $data);
-        $smarty->assign('event', $event);
-        $smarty->assign('lieu', $lieu);
+        $twig->assign('data', $data);
+        $twig->assign('event', $event);
+        $twig->assign('lieu', $lieu);
 
-        $smarty->assign(
+        $twig->assign(
             'styles',
             Style::find(
                 [
@@ -635,7 +634,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'groupes',
             Groupe::find(
                 [
@@ -645,7 +644,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'structures',
             Structure::find(
                 [
@@ -655,7 +654,7 @@ final class Controller
             )
         );
 
-        $smarty->enqueueScriptVars(
+        $twig->enqueueScriptVars(
             [
                 'id_lieu' => $lieu->getIdLieu(),
                 'id_country' => $lieu->getIdCountry(),
@@ -665,7 +664,7 @@ final class Controller
             ]
         );
 
-        return $smarty->fetch('events/edit.tpl');
+        return $twig->render('events/edit.twig');
     }
 
     /**
@@ -675,7 +674,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Agenda", "/events")
@@ -685,8 +684,8 @@ final class Controller
             $event = Event::getInstance((int) Route::params('id'));
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_event', true);
-            return $smarty->fetch('events/show.tpl');
+            $twig->assign('unknown_event', true);
+            return $twig->render('events/show.twig');
         }
 
         if (Tools::isSubmit('form-event-delete')) {
@@ -696,10 +695,10 @@ final class Controller
             }
         }
 
-        $smarty->assign('event', $event);
-        $smarty->assign('lieu', Lieu::getInstance($event->getIdLieu()));
+        $twig->assign('event', $event);
+        $twig->assign('lieu', Lieu::getInstance($event->getIdLieu()));
 
-        return $smarty->fetch('events/delete.tpl');
+        return $twig->render('events/delete.twig');
     }
 
     /**

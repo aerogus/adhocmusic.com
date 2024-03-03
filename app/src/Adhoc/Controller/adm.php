@@ -9,7 +9,6 @@ use Adhoc\Model\Groupe;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Reference\Style;
 use Adhoc\Model\Reference\TypeMusicien;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Log;
@@ -28,17 +27,17 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('title', "AD'HOC : Administration du site");
-        $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
+        $twig->assign('title', "AD'HOC : Administration du site");
+        $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
         Trail::getInstance()
             ->addStep("Privé");
 
-        $smarty->assign('forums', ForumPrive::getForums());
+        $twig->assign('forums', ForumPrive::getForums());
 
-        return $smarty->fetch('adm/index.tpl');
+        return $twig->render('adm/index.twig');
     }
 
     /**
@@ -52,11 +51,11 @@ final class Controller
             ->addStep("Privé", "/adm")
             ->addStep("Groupes");
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         $page = (int) Route::params('page');
 
-        $smarty->assign(
+        $twig->assign(
             'groupes',
             Groupe::find(
                 [
@@ -69,11 +68,11 @@ final class Controller
         );
 
         // pagination
-        $smarty->assign('nb_items', Groupe::count());
-        $smarty->assign('nb_items_per_page', ADM_NB_MEMBERS_PER_PAGE);
-        $smarty->assign('page', $page);
+        $twig->assign('nb_items', Groupe::count());
+        $twig->assign('nb_items_per_page', ADM_NB_MEMBERS_PER_PAGE);
+        $twig->assign('page', $page);
 
-        return $smarty->fetch('adm/groupes/index.tpl');
+        return $twig->render('adm/groupes/index.twig');
     }
 
     /**
@@ -92,9 +91,9 @@ final class Controller
             ->addStep("Groupes", "/adm/groupes")
             ->addStep($groupe->getName());
 
-        $smarty = new AdHocSmarty();
-        $smarty->assign('groupe', $groupe);
-        return $smarty->fetch('adm/groupes/show.tpl');
+        $twig = new AdHocTwig();
+        $twig->assign('groupe', $groupe);
+        return $twig->render('adm/groupes/show.twig');
     }
 
     /**
@@ -140,27 +139,27 @@ final class Controller
 
         $nb_membres = Membre::count();
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('membres', $membres);
+        $twig->assign('membres', $membres);
 
-        $smarty->assign('sort', $sort);
-        $smarty->assign('sortinv', $sortinv);
-        $smarty->assign('page', $page);
+        $twig->assign('sort', $sort);
+        $twig->assign('sortinv', $sortinv);
+        $twig->assign('page', $page);
 
         // test ajax
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
-            return $smarty->fetch('adm/membres/index-res.tpl');
+            return $twig->render('adm/membres/index-res.twig');
         }
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
             ->addStep("Membres", "/adm/membres");
 
-        $smarty->assign('types_membre', Membre::getTypesMembre());
-        $smarty->assign('types_musicien', TypeMusicien::findAll());
+        $twig->assign('types_membre', Membre::getTypesMembre());
+        $twig->assign('types_musicien', TypeMusicien::findAll());
 
-        $smarty->assign(
+        $twig->assign(
             'search',
             [
                 'pseudo' => $pseudo,
@@ -171,11 +170,11 @@ final class Controller
         );
 
         // pagination
-        $smarty->assign('nb_items', $nb_membres);
-        $smarty->assign('nb_items_per_page', ADM_NB_MEMBERS_PER_PAGE);
-        $smarty->assign('link_base_params', 'order_by=' . $order_by . '&sort=' . $sort);
+        $twig->assign('nb_items', $nb_membres);
+        $twig->assign('nb_items_per_page', ADM_NB_MEMBERS_PER_PAGE);
+        $twig->assign('link_base_params', 'order_by=' . $order_by . '&sort=' . $sort);
 
-        return $smarty->fetch('adm/membres/index.tpl');
+        return $twig->render('adm/membres/index.twig');
     }
 
     /**
@@ -194,9 +193,9 @@ final class Controller
             ->addStep("Membres", "/adm/membres")
             ->addStep($membre->getPseudo());
 
-        $smarty = new AdHocSmarty();
-        $smarty->assign('membre', $membre);
-        return $smarty->fetch('adm/membres/show.tpl');
+        $twig = new AdHocTwig();
+        $twig->assign('membre', $membre);
+        return $twig->render('adm/membres/show.twig');
     }
 
     /**
@@ -223,9 +222,9 @@ final class Controller
 
         // ***
 
-        $smarty = new AdHocSmarty();
-        $smarty->assign('membre', $membre);
-        return $smarty->fetch('adm/membres/delete.tpl');
+        $twig = new AdHocTwig();
+        $twig->assign('membre', $membre);
+        return $twig->render('adm/membres/delete.twig');
     }
 
     /**
@@ -235,16 +234,16 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
             ->addStep("Groupe de Style");
 
         $groupes = Groupe::findAll();
-        $smarty->assign('groupes', $groupes);
+        $twig->assign('groupes', $groupes);
 
-        return $smarty->fetch('adm/groupe-de-style.tpl');
+        return $twig->render('adm/groupe-de-style.twig');
     }
 
     /**
@@ -262,7 +261,7 @@ final class Controller
         $id = (int) Route::params('id');
 
         $db = DataBase::getInstance();
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         $groupe = Groupe::getInstance($id);
 
@@ -301,10 +300,10 @@ final class Controller
             $form_style[$cpt_style] .= "</select>";
         }
 
-        $smarty->assign('groupe', $groupe);
-        $smarty->assign('form_style', $form_style);
+        $twig->assign('groupe', $groupe);
+        $twig->assign('form_style', $form_style);
 
-        return $smarty->fetch('adm/groupe-de-style-id.tpl');
+        return $twig->render('adm/groupe-de-style-id.twig');
     }
 
     /**
@@ -354,10 +353,10 @@ final class Controller
             ->addStep("Privé", "/adm")
             ->addStep("Log Action");
 
-        $smarty = new AdHocSmarty();
-        $smarty->assign('actions', Log::getActions());
-        $smarty->assign('logs', Log::getLogsAction($action));
-        return $smarty->fetch('adm/log-action.tpl');
+        $twig = new AdHocTwig();
+        $twig->assign('actions', Log::getActions());
+        $twig->assign('logs', Log::getLogsAction($action));
+        return $twig->render('adm/log-action.twig');
     }
 
     /**
@@ -371,20 +370,20 @@ final class Controller
 
         $out = '';
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
             ->addStep("Suppression Compte");
 
         !empty($_GET['action']) ? $action = (string) $_GET['action'] : $action = 'show';
-        $smarty->assign('action', $action);
+        $twig->assign('action', $action);
 
         !empty($_GET['email']) ? $email = (string) trim($_GET['email']) : $email = '';
-        $smarty->assign('email', $email);
+        $twig->assign('email', $email);
 
         !empty($_GET['id']) ? $id = (int) $_GET['id'] : $id = '';
-        $smarty->assign('id', $id);
+        $twig->assign('id', $id);
 
         switch ($action) {
             case 'show':
@@ -464,9 +463,9 @@ final class Controller
                 break;
         }
 
-        $smarty->assign('content', $out);
+        $twig->assign('content', $out);
 
-        return $smarty->fetch('adm/delete-account.tpl');
+        return $twig->render('adm/delete-account.twig');
     }
 
     /**
@@ -507,11 +506,11 @@ final class Controller
 
         $out .= "<a href=\"/adm/delete-account\" class=\"button\">retour</a>";
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('content', $out);
+        $twig->assign('content', $out);
 
-        return $smarty->fetch('adm/delete-account.tpl');
+        return $twig->render('adm/delete-account.twig');
     }
 
     /**
@@ -527,7 +526,7 @@ final class Controller
         $id_contact = (int) Route::params('membre');
         $id_type_musicien = (int) Route::params('type');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
@@ -560,26 +559,26 @@ final class Controller
             return 'KO';
         }
 
-        $smarty->assign('action', $action);
-        $smarty->assign('from', $from);
-        $smarty->assign('id_groupe', $id_groupe);
-        $smarty->assign('id_contact', $id_contact);
-        $smarty->assign('types', TypeMusicien::findAll());
+        $twig->assign('action', $action);
+        $twig->assign('from', $from);
+        $twig->assign('id_groupe', $id_groupe);
+        $twig->assign('id_contact', $id_contact);
+        $twig->assign('types', TypeMusicien::findAll());
 
         switch ($action) {
             case "create":
-                $smarty->assign('action_lib', 'Ajouter');
+                $twig->assign('action_lib', 'Ajouter');
                 break;
             case "edit":
-                $smarty->assign('action_lib', 'Editer');
+                $twig->assign('action_lib', 'Editer');
                 break;
             case "delete":
-                $smarty->assign('action_lib', 'Supprimer');
+                $twig->assign('action_lib', 'Supprimer');
                 break;
             default:
                 die();
         }
 
-        return $smarty->fetch('adm/appartient-a.tpl');
+        return $twig->render('adm/appartient-a.twig');
     }
 }

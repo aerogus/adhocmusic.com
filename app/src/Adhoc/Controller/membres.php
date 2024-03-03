@@ -14,7 +14,6 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Email;
@@ -38,7 +37,7 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         $trail = Trail::getInstance()
             ->addStep('Membres', '/membres');
@@ -47,19 +46,19 @@ final class Controller
             $membre = Membre::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_member', true);
-            return $smarty->fetch('membres/show.tpl');
+            $twig->assign('unknown_member', true);
+            return $twig->render('membres/show.twig');
         }
 
-        $smarty->assign('membre', $membre);
+        $twig->assign('membre', $membre);
         $trail->addStep($membre->getPseudo());
 
-        $smarty->assign('title', "♫ Profil de " . $membre->getPseudo());
-        $smarty->assign('description', "♫ Profil de " . $membre->getPseudo());
+        $twig->assign('title', "♫ Profil de " . $membre->getPseudo());
+        $twig->assign('description', "♫ Profil de " . $membre->getPseudo());
 
-        $smarty->assign('groupes', $membre->getGroupes());
+        $twig->assign('groupes', $membre->getGroupes());
 
-        return $smarty->fetch('membres/show.tpl');
+        return $twig->render('membres/show.twig');
     }
 
     /**
@@ -73,17 +72,17 @@ final class Controller
             Tools::redirect('/');
         }
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/membres/create.js');
+        $twig->enqueueScript('/js/membres/create.js');
 
-        $smarty->assign('title', "Inscription à l'association AD'HOC");
-        $smarty->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
+        $twig->assign('title', "Inscription à l'association AD'HOC");
+        $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
         Trail::getInstance()
             ->addStep('Créer un compte');
 
-        $smarty->assign('create', (bool) Route::params('create'));
+        $twig->assign('create', (bool) Route::params('create'));
 
         // valeurs par défaut
         $data = [
@@ -124,7 +123,7 @@ final class Controller
                     if (Email::send($data['email'], "Inscription à l'association AD'HOC", 'member-create', $data)) {
                         Tools::redirect('/membres/create?create=1');
                     } else {
-                        $smarty->assign('password', $data['password']); // DEBUG ONLY
+                        $twig->assign('password', $data['password']); // DEBUG ONLY
                         $errors['generic'] = true;
                     }
                 } else {
@@ -136,14 +135,14 @@ final class Controller
 
             if (!empty($errors)) {
                 foreach ($errors as $k => $v) {
-                    $smarty->assign('error_' . $k, $v);
+                    $twig->assign('error_' . $k, $v);
                 }
             }
         }
 
-        $smarty->assign('data', $data);
+        $twig->assign('data', $data);
 
-        return $smarty->fetch('membres/create.tpl');
+        return $twig->render('membres/create.twig');
     }
 
     /**
@@ -161,10 +160,10 @@ final class Controller
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
             ->addStep('Mes Infos Persos');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueScript('/js/geopicker.js');
-        $smarty->enqueueScript('/js/membres/edit.js');
+        $twig->enqueueScript('/js/geopicker.js');
+        $twig->enqueueScript('/js/membres/edit.js');
 
         if (Tools::isSubmit('form-member-edit')) {
             $member = $_SESSION['membre'];
@@ -241,21 +240,21 @@ final class Controller
 
                 Log::action(Log::ACTION_MEMBER_EDIT, $member->getId());
 
-                $smarty->assign('updated_ok', true);
+                $twig->assign('updated_ok', true);
             } else {
                 foreach ($errors as $k => $v) {
-                    $smarty->assign('error_' . $k, $v);
+                    $twig->assign('error_' . $k, $v);
                 }
             }
         }
 
-        $smarty->assign('membre', $_SESSION['membre']);
+        $twig->assign('membre', $_SESSION['membre']);
 
         if ($_SESSION['membre']->isInterne()) {
-            $smarty->assign('forum', ForumPrive::getSubscribedForums($_SESSION['membre']->getId()));
+            $twig->assign('forum', ForumPrive::getSubscribedForums($_SESSION['membre']->getId()));
         }
 
-        $smarty->enqueueScriptVars(
+        $twig->enqueueScriptVars(
             [
                 'id_lieu' => 0,
                 'id_country' => $_SESSION['membre']->getIdCountry(),
@@ -265,7 +264,7 @@ final class Controller
             ]
         );
 
-        return $smarty->fetch('membres/edit.tpl');
+        return $twig->render('membres/edit.twig');
     }
 
     /**
@@ -279,14 +278,14 @@ final class Controller
 
         $id = $_SESSION['membre']->getId();
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         try {
             $membre = Membre::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_member', true);
-            return $smarty->fetch('membres/delete.tpl');
+            $twig->assign('unknown_member', true);
+            return $twig->render('membres/delete.twig');
         }
 
         if (Tools::isSubmit('form-member-delete')) {
@@ -316,9 +315,9 @@ final class Controller
             }
         }
 
-        $smarty->assign('membre', $membre);
+        $twig->assign('membre', $membre);
 
-        return $smarty->fetch('membres/delete.tpl');
+        return $twig->render('membres/delete.twig');
     }
 
     /**
@@ -357,7 +356,7 @@ final class Controller
         Trail::getInstance()
             ->addStep('Tableau de bord');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         $db = DataBase::getInstance();
 
@@ -370,7 +369,7 @@ final class Controller
              . "LIMIT 0, 5";
 
         $inbox = $db->pdo->query($sql)->fetchAll();
-        $smarty->assign('inbox', $inbox);
+        $twig->assign('inbox', $inbox);
 
         $myAlerting = Alerting::find(['id_contact' => $_SESSION['membre']->getId()]);
         $myAlertingLieu = $myAlertingGroupe = $myAlertingEvent =  [];
@@ -384,21 +383,21 @@ final class Controller
             }
         }
 
-        $smarty->assign('alerting_groupes', $myAlertingGroupe);
-        $smarty->assign('alerting_events', $myAlertingEvent);
-        $smarty->assign('alerting_lieux', $myAlertingLieu);
+        $twig->assign('alerting_groupes', $myAlertingGroupe);
+        $twig->assign('alerting_events', $myAlertingEvent);
+        $twig->assign('alerting_lieux', $myAlertingLieu);
 
-        $smarty->assign(
+        $twig->assign(
             'groupes',
             Groupe::find(
                 ['id_contact' => $_SESSION['membre']->getId()]
             )
         );
-        $smarty->assign('nb_photos', Photo::countMy());
-        $smarty->assign('nb_videos', Video::countMy());
-        $smarty->assign('nb_audios', Audio::countMy());
+        $twig->assign('nb_photos', Photo::countMy());
+        $twig->assign('nb_videos', Video::countMy());
+        $twig->assign('nb_audios', Audio::countMy());
 
-        return $smarty->fetch('membres/tableau-de-bord.tpl');
+        return $twig->render('membres/tableau-de-bord.twig');
     }
 
     /**

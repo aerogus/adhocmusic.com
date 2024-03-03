@@ -7,7 +7,6 @@ namespace Adhoc\Controller;
 use Adhoc\Model\Event;
 use Adhoc\Model\Featured;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Route;
@@ -27,9 +26,9 @@ final class Controller
             ->addStep("Privé", "/adm")
             ->addStep("À l'affiche");
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign(
+        $twig->assign(
             'featured_front',
             Featured::find(
                 [
@@ -42,7 +41,7 @@ final class Controller
             )
         );
 
-        $smarty->assign(
+        $twig->assign(
             'featured_admin',
             Featured::find(
                 [
@@ -52,10 +51,10 @@ final class Controller
             )
         );
 
-        $smarty->enqueueScript('/js/swipe.min.js');
-        $smarty->enqueueScript('/js/featured.js');
+        $twig->enqueueScript('/js/swipe.min.js');
+        $twig->enqueueScript('/js/featured.js');
 
-        return $smarty->fetch('adm/featured/index.tpl');
+        return $twig->render('adm/featured/index.twig');
     }
 
     /**
@@ -70,13 +69,13 @@ final class Controller
             ->addStep("À l'affiche", "/adm/featured")
             ->addStep("Ajouter");
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueStyle('/css/jquery-ui.min.css');
+        $twig->enqueueStyle('/css/jquery-ui.min.css');
 
-        $smarty->enqueueScript('/js/jquery-ui.min.js');
-        $smarty->enqueueScript('/js/jquery-ui-datepicker-fr.js');
-        $smarty->enqueueScript('/js/adm/featured.js');
+        $twig->enqueueScript('/js/jquery-ui.min.js');
+        $twig->enqueueScript('/js/jquery-ui-datepicker-fr.js');
+        $twig->enqueueScript('/js/adm/featured.js');
 
         // valeurs par défaut
         $data = [
@@ -123,13 +122,13 @@ final class Controller
 
             if (!empty($errors)) {
                 foreach ($errors as $k => $v) {
-                    $smarty->assign('error_' . $k, $v);
+                    $twig->assign('error_' . $k, $v);
                 }
             }
         }
 
-        $smarty->assign('data', $data);
-        $smarty->assign(
+        $twig->assign('data', $data);
+        $twig->assign(
             'events',
             Event::find(
                 [
@@ -142,7 +141,7 @@ final class Controller
             )
         );
 
-        return $smarty->fetch('adm/featured/create.tpl');
+        return $twig->render('adm/featured/create.twig');
     }
 
     /**
@@ -157,13 +156,13 @@ final class Controller
             ->addStep("À l'affiche", "/adm/featured")
             ->addStep("Modifier");
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->enqueueStyle('/css/jquery-ui.min.css');
+        $twig->enqueueStyle('/css/jquery-ui.min.css');
 
-        $smarty->enqueueScript('/js/jquery-ui.min.js');
-        $smarty->enqueueScript('/js/jquery-ui-datepicker-fr.js');
-        $smarty->enqueueScript('/js/adm/featured.js');
+        $twig->enqueueScript('/js/jquery-ui.min.js');
+        $twig->enqueueScript('/js/jquery-ui-datepicker-fr.js');
+        $twig->enqueueScript('/js/adm/featured.js');
 
         $id = (int) Route::params('id');
         $f = Featured::getInstance($id);
@@ -215,14 +214,14 @@ final class Controller
 
             if (!empty($errors)) {
                 foreach ($errors as $k => $v) {
-                    $smarty->assign('error_' . $k, $v);
+                    $twig->assign('error_' . $k, $v);
                 }
             }
         }
 
-        $smarty->assign('data', $data);
+        $twig->assign('data', $data);
 
-        return $smarty->fetch('adm/featured/edit.tpl');
+        return $twig->render('adm/featured/edit.twig');
     }
 
     /**
@@ -237,7 +236,7 @@ final class Controller
             ->addStep("A l'Affiche", "/adm/featured")
             ->addStep("Supprimer");
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         $id = (int) Route::params('id');
         $f = Featured::getInstance($id);
@@ -249,8 +248,8 @@ final class Controller
             }
         }
 
-        $smarty->assign('featured', $f);
-        return $smarty->fetch('adm/featured/delete.tpl');
+        $twig->assign('featured', $f);
+        return $twig->render('adm/featured/delete.twig');
     }
 
     /**

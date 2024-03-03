@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Adhoc\Controller;
 
 use Adhoc\Model\Newsletter;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Log;
@@ -23,12 +22,12 @@ final class Controller
      */
     public static function index(): string
     {
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Newsletters");
 
-        $smarty->assign(
+        $twig->assign(
             'newsletters',
             Newsletter::find(
                 [
@@ -38,7 +37,7 @@ final class Controller
             )
         );
 
-        return $smarty->fetch('newsletters/index.tpl');
+        return $twig->render('newsletters/index.twig');
     }
 
     /**
@@ -48,16 +47,16 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         try {
             $newsletter = Newsletter::getInstance($id);
-            $smarty->assign('newsletter', $newsletter);
-            return $smarty->fetch('newsletters/show.tpl');
+            $twig->assign('newsletter', $newsletter);
+            return $twig->render('newsletters/show.twig');
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_newsletter', true);
-            return $smarty->fetch('newsletters/show.tpl');
+            $twig->assign('unknown_newsletter', true);
+            return $twig->render('newsletters/show.twig');
         }
     }
 
@@ -69,20 +68,20 @@ final class Controller
         $email = (string) Route::params('email');
         $action = (string) Route::params('action');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Newsletters", "/newsletters")
             ->addStep("Gestion de l'abonnement");
 
-        $smarty->assign('email', $email);
-        $smarty->assign('action', $action);
+        $twig->assign('email', $email);
+        $twig->assign('action', $action);
 
         if (Tools::isSubmit('form-newsletter')) {
             if (!Email::validate($email)) {
-                $smarty->assign('error_email', true);
+                $twig->assign('error_email', true);
             } else {
-                $smarty->assign('email', $email);
+                $twig->assign('email', $email);
 
                 switch ($action) {
                     case 'sub':
@@ -91,11 +90,11 @@ final class Controller
                             case NEWSLETTER_SUB_OK_CONTACT_CREATED:
                             case NEWSLETTER_SUB_OK_RESUBSCRIBED_MEMBER:
                                 Log::action(Log::ACTION_NEWSLETTER_SUB, $email);
-                                $smarty->assign('ret', 'SUB-OK');
+                                $twig->assign('ret', 'SUB-OK');
                                 break;
                             case NEWSLETTER_SUB_KO_ALREADY_SUBSCRIBED_MEMBER:
                             case NEWSLETTER_SUB_KO_ALREADY_CONTACT:
-                                $smarty->assign('ret', 'SUB-KO');
+                                $twig->assign('ret', 'SUB-KO');
                                 break;
                         }
                         break;
@@ -106,20 +105,20 @@ final class Controller
                             case NEWSLETTER_UNSUB_OK_UNSUBSCRIBED_MEMBER:
                             case NEWSLETTER_UNSUB_OK_CONTACT_DELETED:
                                 Log::action(Log::ACTION_NEWSLETTER_UNSUB, $email);
-                                $smarty->assign('ret', 'UNSUB-OK');
+                                $twig->assign('ret', 'UNSUB-OK');
                                 break;
                             case NEWSLETTER_UNSUB_KO_ALREADY_UNSUBSCRIBED_MEMBER:
                             case NEWSLETTER_UNSUB_KO_UNKNOWN_CONTACT:
-                                $smarty->assign('ret', 'UNSUB-KO');
+                                $twig->assign('ret', 'UNSUB-KO');
                                 break;
                         }
                         break;
                 }
             }
         } else { // isSubmit
-            $smarty->assign('form', true);
+            $twig->assign('form', true);
         }
 
-        return $smarty->fetch('newsletters/subscriptions.tpl');
+        return $twig->render('newsletters/subscriptions.twig');
     }
 }

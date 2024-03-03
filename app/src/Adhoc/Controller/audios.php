@@ -12,7 +12,6 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Reference\Departement;
-use Adhoc\Utils\AdHocSmarty;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\Log;
@@ -35,9 +34,9 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -75,16 +74,16 @@ final class Controller
             );
             $nb_audios = Audio::countMy();
         }
-        $smarty->assign('audios', $audios);
+        $twig->assign('audios', $audios);
 
-        $smarty->assign('del', Route::params('del'));
+        $twig->assign('del', Route::params('del'));
 
         // pagination
-        $smarty->assign('nb_items', $nb_audios);
-        $smarty->assign('nb_items_per_page', NB_AUDIOS_PER_PAGE);
-        $smarty->assign('page', $page);
+        $twig->assign('nb_items', $nb_audios);
+        $twig->assign('nb_items_per_page', NB_AUDIOS_PER_PAGE);
+        $twig->assign('page', $page);
 
-        return $smarty->fetch('audios/my.tpl');
+        return $twig->render('audios/my.twig');
     }
 
     /**
@@ -94,28 +93,28 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
         try {
             $audio = Audio::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_audio', true);
-            return $smarty->fetch('audios/show.tpl');
+            $twig->assign('unknown_audio', true);
+            return $twig->render('audios/show.twig');
         }
 
         $meta_description = "Titre : " . $audio->getName();
 
         if ($audio->getIdGroupe()) {
             $groupe = Groupe::getInstance($audio->getIdGroupe());
-            $smarty->assign('groupe', $groupe);
-            $smarty->assign('title', $audio->getName() . ' - ' . $groupe->getName());
+            $twig->assign('groupe', $groupe);
+            $twig->assign('title', $audio->getName() . ' - ' . $groupe->getName());
             $meta_description .= " | Groupe : " . $groupe->getName();
             Trail::getInstance()
                 ->addStep("Groupes", "/groupes")
                 ->addStep($groupe->getName(), $groupe->getUrl());
-            $smarty->assign('og_image', $groupe->getMiniPhoto());
-            $smarty->assign(
+            $twig->assign('og_image', $groupe->getMiniPhoto());
+            $twig->assign(
                 'og_audio',
                 [
                     'url' => $audio->getDirectMp3Url(),
@@ -131,9 +130,9 @@ final class Controller
 
         if ($audio->getIdEvent()) {
             $event = Event::getInstance($audio->getIdEvent());
-            $smarty->assign('event', $event);
+            $twig->assign('event', $event);
             $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysqlDatetime($event->getDate(), "d/m/Y") . ")";
-            $smarty->assign(
+            $twig->assign(
                 'photos',
                 Photo::find(
                     [
@@ -145,7 +144,7 @@ final class Controller
                     ]
                 )
             );
-            $smarty->assign(
+            $twig->assign(
                 'videos',
                 Video::find(
                     [
@@ -162,17 +161,17 @@ final class Controller
         if ($audio->getIdLieu()) {
             $lieu = Lieu::getInstance($audio->getIdLieu());
             $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity()->getName() . ")";
-            $smarty->assign('lieu', $lieu);
+            $twig->assign('lieu', $lieu);
         }
 
         Trail::getInstance()
             ->addStep($audio->getName());
 
-        $smarty->assign('description', $meta_description);
+        $twig->assign('description', $meta_description);
 
-        $smarty->assign('audio', $audio);
+        $twig->assign('audio', $audio);
 
-        $smarty->assign(
+        $twig->assign(
             'comments',
             Comment::find(
                 [
@@ -185,7 +184,7 @@ final class Controller
             )
         );
 
-        return $smarty->fetch('audios/show.tpl');
+        return $twig->render('audios/show.twig');
     }
 
     /**
@@ -195,11 +194,11 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
-        $smarty->enqueueScript('/js/audios/create.js');
+        $twig->enqueueScript('/js/audios/create.js');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -241,22 +240,22 @@ final class Controller
                     Log::action(Log::ACTION_AUDIO_CREATE, $audio->getId());
                     Tools::redirect('/audios/my');
                 } else {
-                    $smarty->assign('error_generic', true);
+                    $twig->assign('error_generic', true);
                 }
             } else {
                 foreach ($errors as $k => $v) {
-                    $smarty->assign('error_' . $k, $v);
+                    $twig->assign('error_' . $k, $v);
                 }
-                $smarty->assign('data', $data);
+                $twig->assign('data', $data);
             }
         }
 
         $id_groupe = (int) Route::params('id_groupe');
         if ($id_groupe) {
             $groupe = Groupe::getInstance($id_groupe);
-            $smarty->assign('groupe', $groupe);
+            $twig->assign('groupe', $groupe);
         } else {
-            $smarty->assign(
+            $twig->assign(
                 'groupes',
                 Groupe::find(
                     [
@@ -271,8 +270,8 @@ final class Controller
         $id_lieu = (int) Route::params('id_lieu');
         if ($id_lieu) {
             $lieu = Lieu::getInstance($id_lieu);
-            $smarty->assign('lieu', $lieu);
-            $smarty->assign(
+            $twig->assign('lieu', $lieu);
+            $twig->assign(
                 'events',
                 Event::find(
                     [
@@ -286,21 +285,21 @@ final class Controller
                 )
             );
         } else {
-            $smarty->assign('deps', Departement::findAll());
-            $smarty->assign('lieux', Lieu::getLieuxByDep());
+            $twig->assign('deps', Departement::findAll());
+            $twig->assign('lieux', Lieu::getLieuxByDep());
         }
 
         $id_event = (int) Route::params('id_event');
         if ($id_event) {
             $event = Event::getInstance($id_event);
-            $smarty->assign('event', $event);
+            $twig->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
-            $smarty->assign('lieu', $lieu);
+            $twig->assign('lieu', $lieu);
         }
 
-        $smarty->assign('id_lieu', $id_lieu);
+        $twig->assign('id_lieu', $id_lieu);
 
-        return $smarty->fetch('audios/create.tpl');
+        return $twig->render('audios/create.twig');
     }
 
     /**
@@ -313,11 +312,11 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
-        $smarty->enqueueScript('/js/audios/edit.js');
+        $twig->enqueueScript('/js/audios/edit.js');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -328,11 +327,11 @@ final class Controller
             $audio = Audio::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_audio', true);
-            return $smarty->fetch('audios/edit.tpl');
+            $twig->assign('unknown_audio', true);
+            return $twig->render('audios/edit.twig');
         }
 
-        $smarty->assign('audio', $audio);
+        $twig->assign('audio', $audio);
 
         if (Tools::isSubmit('form-audio-edit')) {
             set_time_limit(0); // l'upload peut prendre du temps !
@@ -359,16 +358,16 @@ final class Controller
                     Log::action(Log::ACTION_AUDIO_EDIT, $audio->getId());
                     Tools::redirect('/audios/my');
                 } else {
-                    $smarty->assign('error_generic', true);
+                    $twig->assign('error_generic', true);
                 }
             } else {
                 foreach ($errors as $k => $v) {
-                    $smarty->assign('error_' . $k, $v);
+                    $twig->assign('error_' . $k, $v);
                 }
             }
         }
 
-        $smarty->assign(
+        $twig->assign(
             'groupes',
             Groupe::find(
                 [
@@ -379,23 +378,23 @@ final class Controller
             )
         );
 
-        $smarty->assign('deps', Departement::findAll());
-        $smarty->assign('lieux', Lieu::getLieuxByDep());
+        $twig->assign('deps', Departement::findAll());
+        $twig->assign('lieux', Lieu::getLieuxByDep());
 
-        $smarty->assign('page', $page);
+        $twig->assign('page', $page);
 
         if ($audio->getIdEvent()) {
             $event = Event::getInstance($audio->getIdEvent());
-            $smarty->assign('event', $event);
+            $twig->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
-            $smarty->assign('lieu', $lieu);
+            $twig->assign('lieu', $lieu);
         }
 
         if ($audio->getIdContact()) {
-            $smarty->assign('membre', Membre::getInstance($audio->getIdContact()));
+            $twig->assign('membre', Membre::getInstance($audio->getIdContact()));
         }
 
-        return $smarty->fetch('audios/edit.tpl');
+        return $twig->render('audios/edit.twig');
     }
 
     /**
@@ -407,11 +406,11 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $smarty = new AdHocSmarty();
+        $twig = new AdHocTwig();
 
-        $smarty->assign('robots', 'noindex,nofollow');
+        $twig->assign('robots', 'noindex,nofollow');
 
-        $smarty->enqueueScript('/js/audios/delete.js');
+        $twig->enqueueScript('/js/audios/delete.js');
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -422,8 +421,8 @@ final class Controller
             $audio = Audio::getInstance($id);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $smarty->assign('unknown_audio', true);
-            return $smarty->fetch('audios/delete.tpl');
+            $twig->assign('unknown_audio', true);
+            return $twig->render('audios/delete.twig');
         }
 
         if (Tools::isSubmit('form-audio-delete')) {
@@ -435,24 +434,24 @@ final class Controller
             }
         }
 
-        $smarty->assign('audio', $audio);
+        $twig->assign('audio', $audio);
         if ($audio->getIdGroupe()) {
             try {
-                $smarty->assign('groupe', Groupe::getInstance($audio->getIdGroupe()));
+                $twig->assign('groupe', Groupe::getInstance($audio->getIdGroupe()));
             } catch (\Exception $e) {
             }
         }
         if ($audio->getIdEvent()) {
-            $smarty->assign('event', Event::getInstance($audio->getIdEvent()));
+            $twig->assign('event', Event::getInstance($audio->getIdEvent()));
         }
         if ($audio->getIdLieu()) {
-            $smarty->assign('lieu', Lieu::getInstance($audio->getIdLieu()));
+            $twig->assign('lieu', Lieu::getInstance($audio->getIdLieu()));
         }
         if ($audio->getIdContact()) {
-            $smarty->assign('membre', Membre::getInstance($audio->getIdContact()));
+            $twig->assign('membre', Membre::getInstance($audio->getIdContact()));
         }
 
-        return $smarty->fetch('audios/delete.tpl');
+        return $twig->render('audios/delete.twig');
     }
 
     /**
