@@ -6,8 +6,8 @@
   </header>
   <div>
     <ul>
-    {% for $structures as $structure}
-      <li><img src="{{ structure.Picto }}" alt=""> <a href="{{ structure.Url }}">{{ structure.name }}</a></li>
+    {% for structure in structures %}
+      <li><img src="{{ structure.picto }}" alt=""> <a href="{{ structure.url }}">{{ structure.name }}</a></li>
     {% endfor %}
     </ul>
   </div>

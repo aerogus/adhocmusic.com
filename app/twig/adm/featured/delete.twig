@@ -9,31 +9,31 @@
       <ul>
        <li>
           <label for="title">Titre</label>
-          <strong>{{ featured.Title }}</strong>
+          <strong>{{ featured.title }}</strong>
         </li>
         <li>
           <label for="description">Description</label>
-          <strong>{{ featured.Description }}</strong>
+          <strong>{{ featured.description }}</strong>
         </li>
         <li>
           <label for="url">Lien</label>
-          <strong>{{ featured.Url }}</strong>
+          <strong>{{ featured.url }}</strong>
         </li>
         <li>
           <label for="image">Image</label>
-          <img src="{{ featured.Image }}" alt="" />
+          <img src="{{ featured.image }}" alt="" />
         </li>
         <li>
           <label for="datdeb">Début</label>
-          <strong>{{ featured.DatDeb }}</strong>
+          <strong>{{ featured.datDeb }}</strong>
         </li>
         <li>
           <label for="datfin">Fin</label>
-          <strong>{{ featured.DatFin }}</strong>
+          <strong>{{ featured.datFin }}</strong>
         </li>
         <li>
           <label for="online">En ligne</label>
-          <strong>{{ featured.Online()|display_on_off_icon}</strong>
+          <strong>{{ featured.online|display_on_off_icon }}</strong>
         </li>
       </ol>
       <input id="form-featured-delete-submit" name="form-featured-delete-submit" type="submit" value="Confirmer la suppression">

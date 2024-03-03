@@ -51,7 +51,7 @@ $(function() {
     <li>
       <label for="alias">URI</label>
       <span></span>
-      <input id="alias" name="alias" value="{{ cms.Alias }}">
+      <input id="alias" name="alias" value="{{ cms.alias }}">
     </li>
     <li>
       <label for="menuselected">Menu</label>
@@ -67,18 +67,18 @@ $(function() {
     <li>
       <label for="content">Contenu</label>
       <span></span>
-      <textarea class="tinymce" id="content" name="content">{{ cms.Content }}</textarea>
+      <textarea class="tinymce" id="content" name="content">{{ cms.content }}</textarea>
     </li>
     <li>
       <label for="online">En Ligne</label>
-      <input type="checkbox"{% if $cms.Online }} checked="checked"{% endif %} id="online" name="online">
+      <input type="checkbox"{% if cms.online %} checked="checked"{% endif %} id="online" name="online">
     </li>
     <li>
       <label for="auth">Droits d'identification</label>
       <select id="auth" name="auth">
       <option value="0">Non</option>
-      {% for from=$auth key=auth_id item=auth_name}
-      <option value="{{ auth_id}"{% if ($cms.Auth() == $auth_id}} selected="selected"{% endif %}>{{ auth_name}</select>
+      {% for auth_id, auth_name in auth %}
+      <option value="{{ auth_id }}"{% if cms.auth == auth_id %} selected="selected"{% endif %}>{{ auth_name }}</select>
       {% endfor %}
     </li>
   </ul>

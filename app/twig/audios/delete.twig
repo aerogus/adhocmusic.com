@@ -6,7 +6,7 @@
   </header>
   <div>
 
-    {% if unknown_audio}}
+    {% if unknown_audio %}
 
     <p class="infobulle error">Cet audio est introuvable !</p>
 
@@ -18,7 +18,7 @@
           <label for="mp3">Écouter</label>
         </div>
         <div class="col-3">
-          <audio controls id="mp3" src="{{ audio.DirectMp3Url }}"></audio>
+          <audio controls id="mp3" src="{{ audio.directMp3Url }}"></audio>
         </div>
         <div>
           <label for="name">Nom</label>
@@ -26,7 +26,7 @@
         <div class="col-3">
           <span id="name">{{ audio.name }}</span>
         </div>
-        {% if groupe}}
+        {% if groupe %}
         <div>
           <label for="groupe">Groupe</label>
         </div>
@@ -34,15 +34,15 @@
           <span id="groupe">{{ groupe.name }}</span>
         </div>
         {% endif %}
-        {% if event}}
+        {% if event %}
         <div>
           <label for="event">Événement</label>
         </div>
         <div class="col-3">
-          <span id="event">{{ event.Date()|date_format:"%d/%m/%Y %h:%i"} - {{ event.name }}</span>
+          <span id="event">{{ event.date()|date_format:"%d/%m/%Y %h:%i" }} - {{ event.name }}</span>
         </div>
         {% endif %}
-        {% if lieu}}
+        {% if lieu %}
         <div>
           <label for="lieu">Lieu</label>
         </div>
@@ -54,29 +54,29 @@
           <label for="online">Afficher</label>
         </div>
         <div class="col-3">
-          <span id="online">{{ audio.Online }}</span>
+          <span id="online">{{ audio.online }}</span>
         </div>
-        {% if membre}}
+        {% if membre %}
         <div>
           <label for="created_at">Envoyé le</label>
         </div>
         <div class="col-3">
-          <span id="created_at">{{ audio.CreatedAt()|date_format:"%d/%m/%Y à %H:%M"} par <a href="{{ membre.Url }}">{{ membre.Pseudo }}</a></span>
+          <span id="created_at">{{ audio.createdAt()|date_format:"%d/%m/%Y à %H:%M" }} par <a href="{{ membre.url }}">{{ membre.pseudo }}</a></span>
         </div>
         {% endif %}
-        {% if $audio.ModifiedAt }}
+        {% if audio.modifiedAt %}
         <div>
           <label for="modified_at">Modifié le</label>
         </div>
         <div class="col-3">
-          <span id="modified_at">{{ audio.ModifiedAt()|date_format:"%d/%m/%Y à %H:%M"}</span>
+          <span id="modified_at">{{ audio.modifiedAt|date_format:"%d/%m/%Y à %H:%M" }}</span>
         </div>
         {% endif %}
         <div>
           <label for="mp3">Ecouter</label>
         </div>
         <div class="col-3">
-          <audio id="mp3" src="{{ audio.DirectMp3Url }}"></audio>
+          <audio id="mp3" src="{{ audio.directMp3Url }}"></audio>
         </div>
         <div></div>
         <div class="col-3">

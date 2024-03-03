@@ -17,7 +17,7 @@
         <label for="player">Visualiser</label>
       </div>
       <div class="col-3 mbs">
-        <span id="player">{{ video.Player }}</span>
+        <span id="player">{{ video.player|raw }}</span>
       </div>
       <div>
         <label for="name">Nom</label>
@@ -29,21 +29,21 @@
         <label for="thumb">Miniature</label>
       </div>
       <div class="col-3 mbs">
-        <span id="thumb"><img src="{{ video.ThumbUrl(320}}" alt=""></span>
+        <span id="thumb"><img src="{{ video.thumbUrl(320) }}" alt=""></span>
       </div>
       <div>
         <label for="id_host">Hébergeur</label>
       </div>
       <div class="col-3 mbs">
-        <span id="id_host">{{ video.Host().name }}</span>
+        <span id="id_host">{{ video.host.name }}</span>
       </div>
       <div>
         <label for="reference">Référence</label>
       </div>
       <div class="col-3 mbs">
-        <span id="reference">{{ video.Reference }}</span>
+        <span id="reference">{{ video.reference }}</span>
       </div>
-      {% if groupe}}
+      {% if groupe %}
       <div>
         <label for="groupe">Groupe</label>
       </div>
@@ -51,15 +51,15 @@
         <span id="groupe">{{ groupe.name }}</span>
       </div>
       {% endif %}
-      {% if event}}
+      {% if event %}
       <div>
         <label for="event">Événement</label>
       </div>
       <div class="col-3 mbs">
-        <span id="event">{{ event.Date }} - {{ event.name }}</span>
+        <span id="event">{{ event.date }} - {{ event.name }}</span>
       </div>
       {% endif %}
-      {% if lieu}}
+      {% if lieu %}
       <div>
         <label for="lieu">Lieu</label>
       </div>
@@ -71,7 +71,7 @@
         <label for="online">Afficher</label>
       </div>
       <div class="col-3 mbs">
-        <span id="online">{{ video.Online }}</span>
+        <span id="online">{{ video.online }}</span>
       </div>
       <div></div>
       <div class="col-3">

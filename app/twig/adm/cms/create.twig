@@ -73,7 +73,7 @@ $(function() {
       <label for="auth">Droits d'identification</label>
       <select id="auth" name="auth">
       <option value="0">Non</option>
-      {% for from=$auth key=auth_id item=auth_name}
+      {% for auth_id, auth_name in auth %}
       <option value="{{ auth_id }}">{{ auth_name }}</select>
       {% endfor %}
     </li>

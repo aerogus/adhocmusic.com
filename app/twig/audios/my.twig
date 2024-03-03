@@ -18,7 +18,7 @@
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-{% if delete}}
+{% if delete %}
 <div class="infobulle success">La suppression du son a été effectuée</div>
 {% endif %}
 
@@ -32,12 +32,12 @@
     </tr>
   </thead>
   <tbody>
-  {% for $audios as $audio}
+  {% for audio in audios %}
     <tr>
-      <td>{% if audio.Groupe()}}{{ audio.Groupe().name }}{% endif %}</td>
-      <td><a href="/audios/edit/{{ audio.idAudio }}">{{ audio.name }}</a></td>
-      <td>{{ audio.CreatedAt }}</td>
-      <td>{{ audio.ModifiedAt }}</td>
+      <td>{% if audio.groupe %}{{ audio.groupe.name }}{% endif %}</td>
+      <td><a href="/audios/edit/{{ audio.id }}">{{ audio.name }}</a></td>
+      <td>{{ audio.createdAt }}</td>
+      <td>{{ audio.modifiedAt }}</td>
     </tr>
   {% endfor %}
   </tbody>

@@ -1,6 +1,6 @@
 {% include 'common/header.twig' %}
 
-{% if unknown_audio}}
+{% if unknown_audio %}
 
 <p class="infobulle error">Cet audio est introuvable !</p>
 
@@ -16,27 +16,27 @@ var audio_url = '{{ og_audio.url}';
   </header>
   <div>
 
-{% if $audio.idGroupe }}
-<a href="{{ groupe.Url }}"><img style="float: left; margin: 5px;" src="{{ groupe.MiniPhoto }}" alt="{{ groupe.name }}"></a>
+{% if audio.idGroupe %}
+<a href="{{ groupe.url }}"><img style="float: left; margin: 5px;" src="{{ groupe.miniPhoto }}" alt="{{ groupe.name }}"></a>
 {% endif %}
 
 <div class="audiometa">
 <ul>
   <li>Titre : <strong>{{ audio.name }}</strong></li>
-  {% if $audio.idGroupe }}
-  <li>Groupe : <a href="{{ groupe.Url }}"><strong>{{ groupe.name }}</strong></a></li>
+  {% if audio.idGroupe %}
+  <li>Groupe : <a href="{{ groupe.url }}"><strong>{{ groupe.name }}</strong></a></li>
   {% endif %}
-  {% if $audio.idEvent }}
-  <li>Evénement : <a href="{{ event.Url }}"><strong>{{ event.name }}</strong></a> ({{ event.Date()|date_format:'%d/%m/%Y'})</li>
+  {% if audio.idEvent %}
+  <li>Evénement : <a href="{{ event.url }}"><strong>{{ event.name }}</strong></a> ({{ event.date()|date_format:'%d/%m/%Y' }})</li>
   {% endif %}
-  {% if $audio.idLieu }}
-  <li>Lieu : <a href="{{ lieu.Url }}"><strong>{{ lieu.name }}</strong></a></li>
+  {% if audio.idLieu %}
+  <li>Lieu : <a href="{{ lieu.url }}"><strong>{{ lieu.name }}</strong></a></li>
   {% endif %}
-  <li>Mise en ligne : le {{ audio.CreatedAt()|date_format:'%d/%m/%Y'} par <a href="/membres/show/{{ audio.idContact }}"><strong>{{ audio.idContact()|pseudo_by_id}</strong></a></li>
+  <li>Mise en ligne : le {{ audio.createdAt|date_format:'%d/%m/%Y' }} par <a href="/membres/show/{{ audio.idContact }}"><strong>{{ audio.idContact|pseudo_by_id }}</strong></a></li>
 </ul>
 </div>
 
-<audio controls="controls" src="{{ audio.DirectMp3Url }}" style="background-color:#000"></audio>
+<audio controls="controls" src="{{ audio.directMp3Url }}" style="background-color:#000"></audio>
 
   </div>
 </div>

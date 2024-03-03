@@ -1,15 +1,15 @@
-  {% for from=$membres key=cpt item=membre}
+  {% for cpt, membre in membres %}
   <tbody>
     <tr>
       <td>{{ membre.idContact }}</td>
-      <td><a href="/adm/membres/{{ membre.idContact }}">{{ membre.Pseudo }}</a></td>
-      <td>{{ membre.LastName }}</td>
-      <td>{{ membre.FirstName }}</td>
-      <td>{{ membre.Email }}</td>
-      <td>{{ membre.CreatedAt()|date_format:'%d/%m/%y'}</td>
-      <td>{{ membre.ModifiedAt()|date_format:'%d/%m/%y'}</td>
-      <td>{{ membre.VisitedAt()|date_format:'%d/%m/%y'}</td>
-      <td>{{ membre.LastNl()|date_format:'%d/%m/%y'}</td>
+      <td><a href="/adm/membres/{{ membre.idContact }}">{{ membre.pseudo }}</a></td>
+      <td>{{ membre.lastName }}</td>
+      <td>{{ membre.firstName }}</td>
+      <td>{{ membre.email }}</td>
+      <td>{{ membre.createdAt()|date_format:'%d/%m/%y' }}</td>
+      <td>{{ membre.modifiedAt()|date_format:'%d/%m/%y' }}</td>
+      <td>{{ membre.bisitedAt()|date_format:'%d/%m/%y' }}</td>
+      <td>{{ membre.lastNl()|date_format:'%d/%m/%y' }}</td>
     </tr>
   </tbody>
   {% endfor %}

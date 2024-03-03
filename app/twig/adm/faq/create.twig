@@ -10,7 +10,7 @@
     <li>
       <label for="id_category">Catégorie</label>
       <select name="id_category">
-      {% for from=$categories item=cat}
+      {% for cat in categories %}
         <option value="{{ cat.id }}">{{ cat.name }}</option>
       {% endfor %}
       </select>

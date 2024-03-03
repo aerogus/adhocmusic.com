@@ -3,20 +3,20 @@
 {% if comments %}
 <h4>Commentaires</h4>
 {% for key, comment in comments %}
-<div class="comment {% if $cpt is odd}odd{% else %}even{% endif %}" style="position: relative; min-height: 70px;">
-{% if comment.id_contact %}
+<div class="comment {% if cpt is odd %}odd{% else %}even{% endif %}" style="position: relative; min-height: 70px;">
+{% if comment.idContact %}
   <div style="position: absolute;">
-  <a href="/membres/{{ comment.id_contact }}">
-  <strong>{{ comment.pseudo_mbr }}</strong><br>
+  <a href="/membres/{{ comment.idContact }}">
+  <strong>{{ comment.pseudoMbr }}</strong><br>
   <img src="{{ comment.id_contact|avatar_by_id }}" alt="" style="width: 50px; height: 50px; padding-top: 5px;">
   </a>
   </div>
-  <span style="float: right;">{{ comment.created_at|date_format:'le %d/%m/%Y à %H:%M' }}</span>
+  <span style="float: right;">{{ comment.createdAt|date_format:'le %d/%m/%Y à %H:%M' }}</span>
 {% else %}
   <div style="float: left;">
   <strong>{{ comment.pseudo }}</strong>
   </div>
-  <span style="float: right;">{{ comment.created_at|date_format:'%d/%m/%Y à %H:%M' }}</span>
+  <span style="float: right;">{{ comment.createdAt|date_format:'%d/%m/%Y à %H:%M' }}</span>
 {% endif %}
 <p style="padding-left: 115px;">{{ comment.text|@nl2br }}</p>
 </div>
@@ -31,14 +31,14 @@
     {% if is_auth %}
     <li style="min-height: 50px;">
       <label for="form-comment-box-pseudo">Pseudo</label>
-      <img src="{{ me.AvatarUrl }}" alt="" style="padding-right: 5px; float: left; width: 50px; height: 50px;"> <strong>{{ me.Pseudo }}</strong><br>({{ me.FirstName }} {{ me.LastName }})
+      <img src="{{ me.avatarUrl }}" alt="" style="padding-right: 5px; float: left; width: 50px; height: 50px;"> <strong>{{ me.pseudo }}</strong><br>({{ me.firstName }} {{ me.lastName }})
     </li>
     {% else %}
     <li>
       <p><a href="/auth/login">Identifiez-vous</a> pour poster un commentaire. <a href="/membres/create">Pas encore de compte ?</a></p>
     </li>
     <li>
-      <div class="infobulle error" id="error_pseudo"{% if not error_pseudo}} style="display: none"{% endif %}>Vous devez écrire votre pseudonyme.</div>
+      <div class="infobulle error" id="error_pseudo"{% if not error_pseudo %} style="display: none"{% endif %}>Vous devez écrire votre pseudonyme.</div>
       <label for="form-comment-box-pseudo">Pseudo</label>
       <input type="text" id="form-comment-box-pseudo" name="pseudo" placeholder="Pseudo">
     </li>

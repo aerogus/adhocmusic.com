@@ -6,7 +6,7 @@
   </header>
   <div>
 
-    {% if unknown_audio}}
+    {% if unknown_audio %}
 
     <p class="infobulle error">Cet audio est introuvable !</p>
 
@@ -18,24 +18,24 @@
           <label for="mp3">Écouter</label>
         </div>
         <div class="col-3 mbs">
-          <audio controls id="mp3" src="{{ audio.DirectMp3Url }}"></audio>
+          <audio controls id="mp3" src="{{ audio.directMp3Url }}"></audio>
         </div>
         <div>
           <label for="name">Titre (*) </label>
         </div>
         <div class="col-3 mbs">
-          <div class="infobulle error" id="error_name"{% if not error_name}} style="display: none"{% endif %}>Vous devez renseigner un titre</div>
+          <div class="infobulle error" id="error_name"{% if not error_name %} style="display: none"{% endif %}>Vous devez renseigner un titre</div>
           <input type="text" id="name" name="name" class="w100" value="{{ audio.name }}">
         </div>
         <div>
           <label for="id_groupe">Groupe</label>
         </div>
         <div class="col-3 mbs">
-          <div class="infobulle error" id="error_id_groupe"{% if not error_id_groupe}} style="display: none"{% endif %}>Vous devez sélectionner un groupe</div>
+          <div class="infobulle error" id="error_id_groupe"{% if not error_id_groupe %} style="display: none"{% endif %}>Vous devez sélectionner un groupe</div>
           <select id="id_groupe" name="id_groupe" class="w100">
             <option value="0">Sans</option>
-            {% for from=$groupes item=groupe}
-            <option value="{{ groupe.id }}"{% if $audio.idGroupe() === $groupe.idGroupe }} selected="selected"{% endif %}>{{ groupe.name }}</option>
+            {% for groupe in groupes %}
+            <option value="{{ groupe.id }}"{% if daudio.idGroupe == groupe.id %} selected="selected"{% endif %}>{{ groupe.name }}</option>
             {% endfor %}
           </select>
         </div>

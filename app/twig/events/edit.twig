@@ -15,7 +15,7 @@
         <label for="id_country">Pays (*)</label>
       </div>
       <div class="col-3 mbs">
-        <div class="infobulle error" id="error_id_lieu"{% if not error_id_lieu}} style="display: none"{% endif %}>Vous devez indiquer un lieu pour l'événement ou le saisir s'il n'est pas encore référencé.</div>
+        <div class="infobulle error" id="error_id_lieu"{% if not error_id_lieu %} style="display: none"{% endif %}>Vous devez indiquer un lieu pour l'événement ou le saisir s'il n'est pas encore référencé.</div>
         <select id="id_country" name="id_country" class="w100">
           <option value="">---</option>
         </select>
@@ -87,7 +87,7 @@
         <label for="name">Titre (*)</label>
       </div>
       <div class="col-3 mbm">
-        <div class="infobulle error" id="error_name"{% if not error_name}} style="display: none"{% endif %}>Vous devez indiquer un titre pour l'événement.</div>
+        <div class="infobulle error" id="error_name"{% if not error_name %} style="display: none"{% endif %}>Vous devez indiquer un titre pour l'événement.</div>
         <input type="text" id="name" name="name" value="{{ event.name }}" class="w100">
       </div>
 
@@ -95,7 +95,7 @@
         <label for="date">Date</label>
       </div>
       <div class="col-3 mbm">
-        <input type="text" id="date" name="date" value="{{ event.Date()|date_format:'%d/%m/%Y'}">
+        <input type="text" id="date" name="date" value="{{ event.date|date('%d/%m/%Y') }}">
         <select id="hourminute" name="hourminute">{html_input_date_hourminute hour=$event.Hour() minute=$event.Minute }}</select>
       </div>
 
@@ -119,9 +119,9 @@
         <label for="flyer">Flyer (.jpg)</label>
       </div>
       <div class="col-3 mbs">
-        <input type="file" id="flyer" name="flyer" value="{{ data.file}">
+        <input type="file" id="flyer" name="flyer" value="{{ data.file }}">
         {% if $event.ThumbUrl }}
-        <br><img src="{{ event.ThumbUrl(320}}" alt="">
+        <br><img src="{{ event.thumbUrl(320) }}" alt="">
         {% endif %}
       </div>
 
@@ -129,7 +129,7 @@
         <label for="flyer_url">ou Flyer (url)</label>
       </div>
       <div class="col-3 mbm">
-        <input type="text" id="flyer_url" class="w100" name="flyer_url" value="{{ data.flyer_url}">
+        <input type="text" id="flyer_url" class="w100" name="flyer_url" value="{{ data.flyer_url }}">
       </div>
 
       <div>
@@ -178,12 +178,12 @@
       <label for="facebook_event_id">n° Evénement (si déjà existant sur Facebook)</label>
     </div>
     <div>
-      https://www.facebook.com/events/<input id="facebook_event_id" type="text" name="facebook_event_id" value="{{ data.facebook_event_id}">
+      https://www.facebook.com/events/<input id="facebook_event_id" type="text" name="facebook_event_id" value="{{ data.facebook_event_id }}">
     </div>
   </fieldset>
 
   <input id="form-event-edit-submit" name="form-event-edit-submit" class="btn btn--primary" type="submit" value="Modifier">
-  <input type="hidden" name="id" value="{{ data.id}">
+  <input type="hidden" name="id" value="{{ data.id }}">
 
 </form>
 

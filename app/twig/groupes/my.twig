@@ -6,22 +6,22 @@
   </header>
   <div>
 
-{% if delete}}
+{% if delete %}
 <div class="infobulle success">Groupe supprimé</div>
 {% endif %}
 
-{% if $groupes|length > 0}
+{% if groupes|length > 0 %}
 <table class="table table--zebra">
   <tr>
     <th>Groupe</th>
     <th>Création</th>
     <th>Modification</th>
   </tr>
-  {% for $groupes as $groupe}
+  {% for groupe in groupes %}
   <tr>
-    <td><a href="/groupes/edit/{{ groupe.idGroupe }}" title="{{ groupe.name }}"><img src="{{ groupe.MiniPhoto }}" alt="{{ groupe.name }}"><br>{{ groupe.name }}</a></td>
-    <td>{{ groupe.CreatedAt()|date_format:'%d/%m/%Y'}</td>
-    <td>{{ groupe.ModifiedAt()|date_format:'%d/%m/%Y'}</td>
+    <td><a href="/groupes/edit/{{ groupe.id }}" title="{{ groupe.name }}"><img src="{{ groupe.miniPhoto }}" alt="{{ groupe.name }}"><br>{{ groupe.name }}</a></td>
+    <td>{{ groupe.createdAt|date('%d/%m/%Y') }}</td>
+    <td>{{ groupe.modifiedAt|date('%d/%m/%Y') }}</td>
   </tr>
   {% endfor %}
 </table>

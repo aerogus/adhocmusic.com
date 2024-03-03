@@ -5,7 +5,7 @@
     <h1>Newsletters</h1>
   </header>
   <div>
-    <p>nombre d'abonnés : {{ nb_sub}</p>
+    <p>nombre d'abonnés : {{ nb_sub }}</p>
     <p><a href="/adm/newsletter/create" class="btn btn--primary">Écrire une lettre</a></p>
     <table class="table table--zebra">
       <thead>
@@ -16,11 +16,11 @@
         </tr>
       </thead>
       <tbody>
-        {% for from=$newsletters item=newsletter}
+        {% for newsletter in newsletters %}
         <tr>
-          <td>{{ newsletter.idNewsletter }}</td>
-          <td><a href="/newsletters/{{ newsletter.idNewsletter }}" target="_blank">[voir]</a></td>
-          <td><a href="/adm/newsletter/edit/{{ newsletter.idNewsletter }}">{{ newsletter.Title }}</a></td>
+          <td>{{ newsletter.id }}</td>
+          <td><a href="/newsletters/{{ newsletter.id }}" target="_blank">[voir]</a></td>
+          <td><a href="/adm/newsletter/edit/{{ newsletter.id }}">{{ newsletter.title }}</a></td>
         </tr>
         {% endfor %}
       </tbody>

@@ -1,6 +1,6 @@
 {% include 'common/header.twig' %}
 
-{% if unknown_structure}}
+{% if unknown_structure %}
 
 <p class="infobulle error">Cette structure est introuvable !</p>
 
@@ -15,7 +15,7 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>{{ structure.idStructure }}</td>
+    <td>{{ structure.id }}</td>
   </tr>
   <tr>
     <th>Nom</th>
@@ -23,14 +23,14 @@
   </tr>
   <tr>
     <th>Imagette</th>
-    <td><img src="{{ structure.Picto }}" alt=""></td>
+    <td><img src="{{ structure.picto }}" alt=""></td>
   </tr>
   <tr>
     <th>Evénements</th>
     <td>
       <ul>
-      {% for $events as $event}
-        <li><a href="{{ event.Url }}">{{ event.Date }} : {{ event.name }}</a></li>
+      {% for event in events %}
+        <li><a href="{{ event.url }}">{{ event.date }} : {{ event.name }}</a></li>
       {% endfor %}
       </ul>
     </td>

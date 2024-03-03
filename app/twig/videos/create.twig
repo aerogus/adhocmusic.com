@@ -11,15 +11,15 @@
           <label for="code">Url de la vidéo (*)</label>
         </div>
         <div class="col-3 mbs">
-          <div class="infobulle error" id="error_code"{% if not error_code}} style="display: none"{% endif %}>Vous devez copier/coller un code de vidéo</div>
-          <div class="infobulle error" id="error_unknown_host"{% if not error_unknow_host}} style="display: none"{% endif %}>Code de la vidéo non reconnu ou hébergeur incompatible</div>
+          <div class="infobulle error" id="error_code"{% if not error_code %} style="display: none"{% endif %}>Vous devez copier/coller un code de vidéo</div>
+          <div class="infobulle error" id="error_unknown_host"{% if not error_unknow_host %} style="display: none"{% endif %}>Code de la vidéo non reconnu ou hébergeur incompatible</div>
           <input type="text" id="code" name="code" class="w100" value="">
         </div>
         <div>
           <label for="name">Titre (*)</label>
         </div>
         <div class="col-3 mbs">
-          <div class="infobulle error" id="error_name"{% if not error_name}} style="display: none"{% endif %}>Vous devez saisir un titre pour la vidéo</div>
+          <div class="infobulle error" id="error_name"{% if not error_name %} style="display: none"{% endif %}>Vous devez saisir un titre pour la vidéo</div>
           <input type="text" id="name" name="name" class="w100" value="">
         </div>
         <div>
@@ -32,7 +32,7 @@
           <label for="ids_groupe[0]">Groupe(s)</label>
         </div>
         <div class="col-3 mbs">
-          <div class="infobulle error" id="error_id_groupe"{% if not error_id_groupe}} style="display: none"{% endif %}>Vous devez lier cette vidéo à soit un groupe, soit un lieu, soit un événement</div>
+          <div class="infobulle error" id="error_id_groupe"{% if not error_id_groupe %} style="display: none"{% endif %}>Vous devez lier cette vidéo à soit un groupe, soit un lieu, soit un événement</div>
           {section name=cpt_groupe loop=5}
           <select id="ids_groupe[{{ smarty.section.cpt_groupe.index}]" name="ids_groupe[{{ smarty.section.cpt_groupe.index}]" class="w100 mbs">
             <option value="">-- Choix d'un groupe --</option>

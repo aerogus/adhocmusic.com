@@ -6,9 +6,9 @@
   </header>
   <div>
 
-{% if create}}<p class="infobulle success">Page ajoutée</p>{% endif %}
-{% if edit}}<p class="infobulle success">Page modifiée</p>{% endif %}
-{% if delete}}<p class="infobulle success">Page supprimée</p>{% endif %}
+{% if create %}<p class="infobulle success">Page ajoutée</p>{% endif %}
+{% if edit %}<p class="infobulle success">Page modifiée</p>{% endif %}
+{% if delete %}<p class="infobulle success">Page supprimée</p>{% endif %}
 
 <table class="table table--zebra">
   <thead>
@@ -20,12 +20,12 @@
     </tr>
   </thead>
   <tbody>
-    {% for from=$cmss item=cms}
+    {% for cmd in cmss %}
     <tr>
-      <td>{{ cms.idCms }}</td>
-      <td><a href="/adm/cms/edit/{{ cms.idCms }}">{{ cms.Alias }}</a></td>
-      <td>{{ cms.Title }}</td>
-      <td>{{ cms.Online()|display_on_off_icon}</td>
+      <td>{{ cms.id }}</td>
+      <td><a href="/adm/cms/edit/{{ cms.id }}">{{ cms.alias }}</a></td>
+      <td>{{ cms.title }}</td>
+      <td>{{ cms.online|display_on_off_icon }}</td>
     </tr>
     {% endfor %}
   </tbody>

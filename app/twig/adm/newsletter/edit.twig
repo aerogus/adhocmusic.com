@@ -9,9 +9,9 @@
     <form id="form-newsletter-edit" name="form-newsletter-edit" method="post" action="/adm/newsletter/edit">
       <fieldset>
         <label for="title">Titre</label>
-        <input type="text" id="title" name="title" size="50" value="{{ newsletter.Title }}">
-        <label for="content">Contenu (<a href="{{ newsletter.Url }}">Preview Web</a>)</label>
-        <textarea id="content" name="content">{{ newsletter.Content }}</textarea>
+        <input type="text" id="title" name="title" size="50" value="{{ newsletter.title }}">
+        <label for="content">Contenu (<a href="{{ newsletter.url }}">Preview Web</a>)</label>
+        <textarea id="content" name="content">{{ newsletter.content }}</textarea>
       </fieldset>
       <input id="form-newsletter-edit-submit" name="form-newsletter-edit-submit" class="btn btn--primary" type="submit" value="Ok">
       <input type="hidden" name="id" value="{{ newsletter.id }}">

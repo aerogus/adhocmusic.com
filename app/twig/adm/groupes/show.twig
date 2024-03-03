@@ -14,7 +14,7 @@
   </tr>
   <tr>
     <th>Etat</th>
-    <td>{{ groupe.Etat }}</td>
+    <td>{{ groupe.etat }}</td>
   </tr>
   <tr>
     <th>Nom</th>
@@ -22,74 +22,74 @@
   </tr>
   <tr>
     <th>Alias</th>
-    <td>{{ groupe.Alias }}</td>
+    <td>{{ groupe.alias }}</td>
   </tr>
   <tr>
     <th>Style</th>
-    <td>{{ groupe.Style }}</td>
+    <td>{{ groupe.style }}</td>
   </tr>
   <tr>
     <th>Influences</th>
-    <td>{{ groupe.Influences }}</td>
+    <td>{{ groupe.influences }}</td>
   </tr>
   <tr>
     <th>Line-up</th>
-    <td>{{ groupe.Lineup }}</td>
+    <td>{{ groupe.lineup }}</td>
   </tr>
   <tr>
     <th>Mini-texte</th>
-    <td>{{ groupe.MiniText()|@nl2br}</td>
+    <td>{{ groupe.miniText }}</td>
   </tr>
   <tr>
     <th>Texte</th>
-    <td>{{ groupe.Text }}</td>
+    <td>{{ groupe.text }}</td>
   </tr>
   <tr>
     <th>Site</th>
-    <td>{{ groupe.Site }}</td>
+    <td>{{ groupe.site }}</td>
   </tr>
   <tr>
     <th>Facebook Page Id</th>
-    <td><a href="{{ groupe.FacebookPageUrl }}">{{ groupe.FacebookPageId }}</a></td>
+    <td><a href="{{ groupe.facebookPageUrl }}">{{ groupe.facebookPageId }}</a></td>
   </tr>
   <tr>
     <th>Création</th>
-    <td>{{ groupe.CreatedAt }}</td>
+    <td>{{ groupe.createdAt }}</td>
   </tr>
   <tr>
     <th>Modification</th>
-    <td>{{ groupe.ModifiedAt }}</td>
+    <td>{{ groupe.modifiedAt }}</td>
   </tr>
   <tr>
     <th>Photo</th>
-    <td>{% if $groupe.Photo }}<img src="{{ groupe.Photo }}" alt="">{% endif %}</td>
+    <td>{% if groupe.photo %}<img src="{{ groupe.photo }}" alt="">{% endif %}</td>
   </tr>
   <tr>
     <th>Logo</th>
-    <td>{% if $groupe.Logo }}<img src="{{ groupe.Logo }}" alt="">{% endif %}</td>
+    <td>{% if groupe.logo %}<img src="{{ groupe.logo }}" alt="">{% endif %}</td>
   </tr>
   <tr>
     <th>Mini Photo</th>
-    <td><img src="{{ groupe.MiniPhoto }}" alt=""></td>
+    <td><img src="{{ groupe.miniPhoto }}" alt=""></td>
   </tr>
   <tr>
     <th>Le Mot AD'HOC</th>
-    <td>{{ groupe.Comment }}</td>
+    <td>{{ groupe.comment }}</td>
   </tr>
 </table>
 
 <table>
   <caption>Styles</caption>
-  {% for from=$groupe.Styles() item=style}
+  {% for style in groupe.styles %}
   <tr><td>{{ style.name }}</td></tr>
   {% endfor %}
 </table>
 
 <table>
   <caption>Membres</caption>
-  {% for from=$groupe.Members() item=member}
+  {% for member in groupe.Members %}
   <tr>
-    <td>{{ member.FirstName }} {{ member.LastName }} (<a href="/adm/membres/{{ member.idContact }}">{{ member.Pseudo }}</a>)</td>
+    <td>{{ member.firstName }} {{ member.lastName }} (<a href="/adm/membres/{{ member.idContact }}">{{ member.pseudo }}</a>)</td>
     <td><a class="btn btn--secondary" href="/adm/appartient-a?from=groupe&amp;action=delete&amp;groupe={{ groupe.id }}&amp;membre={{ member.idContact }}">Supprimer</a></td>
   </tr>
   {% endfor %}

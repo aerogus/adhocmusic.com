@@ -10,27 +10,27 @@
   <table align="center">
     <tr>
       <td>n° du membre :</td>
-      <td><input type="text" name="membre" size="10" value="{{ id_contact}"></td>
+      <td><input type="text" name="membre" size="10" value="{{ id_contact }}"></td>
     </tr>
     <tr>
       <td>n° du groupe :</td>
-      <td><input type="text" name="groupe" size="10" value="{{ id_groupe}"></td>
+      <td><input type="text" name="groupe" size="10" value="{{ id_groupe }}"></td>
     </tr>
     <tr>
       <td>Fonction :</td>
       <td><select name="type">
-      {% for from=$types item=type}
+      {% for type in types %}
       <option value="{{ type.id }}">{{ type.name }}</option>
       {% endfor %}
       </select></td>
     </tr>
     <tr>
       <td><input type="hidden" name="confirm" value="1"></td>
-      <td><input id="form-appartient-a-submit" name="form-appartient-a-submit" type="submit" value="{{ action_lib}"></td>
+      <td><input id="form-appartient-a-submit" name="form-appartient-a-submit" type="submit" value="{{ action_lib }}"></td>
     </tr>
   </table>
-  <input type="hidden" name="action" value="{{ action}">
-  <input type="hidden" name="from" value="{{ from}">
+  <input type="hidden" name="action" value="{{ action }}">
+  <input type="hidden" name="from" value="{{ from }}">
 </form>
 
   </div>

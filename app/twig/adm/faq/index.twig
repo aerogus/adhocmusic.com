@@ -5,9 +5,9 @@
     <h1>Foire aux questions</h1>
   </header>
   <div>
-  {% if create}}<p class="infobulle success">Question ajoutée</p>{% endif %}
-  {% if edit}}<p class="infobulle success">Question modifiée</p>{% endif %}
-  {% if delete}}<p class="infobulle success">Question supprimée</p>{% endif %}
+  {% if create %}<p class="infobulle success">Question ajoutée</p>{% endif %}
+  {% if edit %}<p class="infobulle success">Question modifiée</p>{% endif %}
+  {% if delete %}<p class="infobulle success">Question supprimée</p>{% endif %}
   <table class="table table--zebra">
     <thead>
       <tr>
@@ -18,12 +18,12 @@
       </tr>
     </thead>
     <tbody>
-      {% for from=$faq item=f}
+      {% for f in faq %}
       <tr>
         <td>{{ f.id }}</td>
-        <td>{{ f.Category().name }}</td>
-        <td><a href="/adm/faq/edit/{{ f.id }}">{{ f.Question }}</a></td>
-        <td>{{ f.Online }}</td>
+        <td>{{ f.category.name }}</td>
+        <td><a href="/adm/faq/edit/{{ f.id }}">{{ f.question }}</a></td>
+        <td>{{ f.online }}</td>
       </tr>
       {% endfor %}
     </tbody>

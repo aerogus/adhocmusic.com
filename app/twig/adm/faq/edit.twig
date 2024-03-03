@@ -10,22 +10,22 @@
     <li>
       <label for="id_category">Catégorie</label>
       <select name="id_category">
-      {% for from=$categories item=cat}
-        <option value="{{ cat.id }}"{% if $faq.idCategory() === $cat.id }} selected="selected"{% endif %}>{{ cat.name }}</option>
+      {% for cat in categories %}
+        <option value="{{ cat.id }}"{% if faq.idCategory == cat.id %} selected="selected"{% endif %}>{{ cat.name }}</option>
       {% endfor %}
       </select>
     </li>
     <li>
       <label for="question">Question</label>
-      <textarea id="question" name="question">{{ faq.Question }}</textarea>
+      <textarea id="question" name="question">{{ faq.question }}</textarea>
     </li>
     <li>
       <label for="answer">Réponse</label>
-      <textarea id="answer" name="answer">{{ faq.Answer }}</textarea>
+      <textarea id="answer" name="answer">{{ faq.answer }}</textarea>
     </li>
     <li>
       <label for="online">Afficher</label>
-      <input class="switch" type="checkbox" id="online" name="online"{% if $faq.Online }} checked="checked"{% endif %}>
+      <input class="switch" type="checkbox" id="online" name="online"{% if faq.online %} checked="checked"{% endif %}>
     </li>
   </ul>
   <input type="hidden" name="id_faq" value="{{ faq.id }}">

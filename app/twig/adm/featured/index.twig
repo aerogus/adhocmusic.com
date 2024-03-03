@@ -8,20 +8,20 @@
 
     <div id="swipe" class="swipe clearfix mbs">
       <ul class="swipe-wrap">
-        {% for from=$featured_front key=idx item=f}
-        <li data-index="{{ idx}">
-          <a href="{{ f.Url }}">
-            <h2>{{ f.Title }}<br><span>{{ f.Description }}</span></h2>
-            <img src="{{ f.Image }}" title="{{ f.Description }}" alt="">
+        {% for idx, f in featured_front %}
+        <li data-index="{{ idx }}">
+          <a href="{{ f.url }}">
+            <h2>{{ f.title }}<br><span>{{ f.description }}</span></h2>
+            <img src="{{ f.image }}" title="{{ f.description }}" alt="">
           </a>
         </li>
         {% endfor %}
       </ul>
       <div class="swipe-pagination-wrapper">
         <ul class="swipe-pagination">
-          {% for from=$featured_front key=idx item=f}
-          <li data-index="{{ idx}">
-            <a href="{{ f.Url }}"></a>
+          {% for idx, f in featured_front %}
+          <li data-index="{{ idx }}">
+            <a href="{{ f.url }}"></a>
           </li>
           {% endfor %}
         </ul>
@@ -41,13 +41,13 @@
         </tr>
       </thead>
       <tbody>
-      {% for $featured_admin as $f}
+      {% for f in featured_admin %}
         <tr>
-          <td><a href="/adm/featured/edit/{{ f.id }}">{{ f.Title }}<br>{{ f.Description }}</a></td>
-          <td><img src="{{ f.Image }}" width="108" height="60" alt="" style="display: block" /></td>
-          <td>{{ f.DatDeb()|date_format:'%d/%m/%Y'}</td>
-          <td>{{ f.DatFin()|date_format:'%d/%m/%Y'}</td>
-          <td>{{ f.Online()|display_on_off_icon}</td>
+          <td><a href="/adm/featured/edit/{{ f.id }}">{{ f.title }}<br>{{ f.description }}</a></td>
+          <td><img src="{{ f.image }}" width="108" height="60" alt="" style="display: block" /></td>
+          <td>{{ f.datDeb|date_format('%d/%m/%Y') }}</td>
+          <td>{{ f.datFin|date_format('%d/%m/%Y') }}</td>
+          <td>{{ f.online|display_on_off_icon }}</td>
         </tr>
       {% endfor %}
       </tbody>
