@@ -14,11 +14,11 @@
       <mj-column width="100%">
         <mj-text color="#292933" font-size="20px" font-weight="700">Nouveau commentaire</mj-text>
         <mj-text font-size="16px" color="#292933">
-          <p>{$subject}</p>
-          <p><strong>{$pseudo}</strong> a écrit le <strong>{$date|date_format:'%d/%m/%Y à %H:%M'}</strong> :</p>
-          <p><em>{$text}</em></p>
+          <p>{{ subject}</p>
+          <p><strong>{{ pseudo}</strong> a écrit le <strong>{{ date|date_format:'%d/%m/%Y à %H:%M'}</strong> :</p>
+          <p><em>{{ text}</em></p>
           <p>Pour y répondre, veuillez vous rendre sur la page suivante :</p>
-          <p><a href="{$url}">{$url}</a></p>
+          <p><a href="{{ url}">{{ url}</a></p>
         </mj-text>
       </mj-column>
     </mj-section>

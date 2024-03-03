@@ -9,35 +9,35 @@
       <ul>
        <li>
           <label for="title">Titre</label>
-          <strong>{$featured->getTitle()|escape}</strong>
+          <strong>{{ featured.Title }}</strong>
         </li>
         <li>
           <label for="description">Description</label>
-          <strong>{$featured->getDescription()|escape}</strong>
+          <strong>{{ featured.Description }}</strong>
         </li>
         <li>
           <label for="url">Lien</label>
-          <strong>{$featured->getUrl()|escape}</strong>
+          <strong>{{ featured.Url }}</strong>
         </li>
         <li>
           <label for="image">Image</label>
-          <img src="{$featured->getImage()}" alt="" />
+          <img src="{{ featured.Image }}" alt="" />
         </li>
         <li>
           <label for="datdeb">Début</label>
-          <strong>{$featured->getDatDeb()|escape}</strong>
+          <strong>{{ featured.DatDeb }}</strong>
         </li>
         <li>
           <label for="datfin">Fin</label>
-          <strong>{$featured->getDatFin()|escape}</strong>
+          <strong>{{ featured.DatFin }}</strong>
         </li>
         <li>
           <label for="online">En ligne</label>
-          <strong>{$featured->getOnline()|display_on_off_icon}</strong>
+          <strong>{{ featured.Online()|display_on_off_icon}</strong>
         </li>
       </ol>
       <input id="form-featured-delete-submit" name="form-featured-delete-submit" type="submit" value="Confirmer la suppression">
-      <input type="hidden" name="id" value="{$featured->getId()}">
+      <input type="hidden" name="id" value="{{ featured.Id }}">
     </form>
   </div>
 </div>

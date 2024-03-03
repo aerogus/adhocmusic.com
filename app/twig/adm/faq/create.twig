@@ -10,9 +10,9 @@
     <li>
       <label for="id_category">Catégorie</label>
       <select name="id_category">
-      {foreach from=$categories item=cat}
-        <option value="{$cat->getId()}">{$cat->getName()}</option>
-      {/foreach}
+      {% for from=$categories item=cat}
+        <option value="{{ cat.Id }}">{{ cat.Name }}</option>
+      {% endfor %}
       </select>
     </li>
     <li>

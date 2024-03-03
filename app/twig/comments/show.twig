@@ -1,10 +1,10 @@
 {% include 'common/header.twig' %}
 
-{if !empty($unknown_comment)}
+{% if unknown_comment}}
 
 <p class="infobulle error">Ce commentaire est introuvable !</p>
 
-{else}
+{% else %}
 
 <div class="box">
   <header>
@@ -15,17 +15,17 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>{$comment->getIdComment()}</td>
+    <td>{{ comment.IdComment }}</td>
   </tr>
   <tr>
     <th>Texte</th>
-    <td>{$comment->getText()|@nl2br}</td>
+    <td>{{ comment.Text()|@nl2br}</td>
   </tr>
 </table>
 
   </div>
 </div>
 
-{/if} {* test unknown comment *}
+{% endif %} {# test unknown comment #}
 
 {% include 'common/footer.twig' %}

@@ -6,11 +6,11 @@
   </header>
   <div>
 
-{if !empty($unknown_video)}
+{% if unknown_video}}
 
 <p class="infobulle error">Cette vidéo est introuvable !</p>
 
-{else}
+{% else %}
 
 <form id="form-video-edit" name="form-video-edit" method="post" action="/videos/edit">
   <section class="grid-4">
@@ -18,32 +18,32 @@
       <label for="name">Titre (*)</label>
     </div>
     <div class="col-3 mbs">
-      <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la vidéo</div>
-      <input type="text" id="name" name="name" class="w100" value="{$video->getName()|escape}">
+      <div class="infobulle error" id="error_name"{% if not error_name}} style="display: none"{% endif %}>Vous devez saisir un titre pour la vidéo</div>
+      <input type="text" id="name" name="name" class="w100" value="{{ video.Name }}">
     </div>
     <div>
       <label for="host">Hébergeur</label>
     </div>
     <div class="col-3 mbs">
-      <span id="host">{$video->getHost()->getName()|escape}</span>
+      <span id="host">{{ video.Host().Name }}</span>
     </div>
     <div>
       <label for="reference">Référence</label>
     </div>
     <div class="col-3 mbs">
-      <span id="reference">{$video->getReference()|escape}</span>
+      <span id="reference">{{ video.Reference }}</span>
     </div>
     <div>
       <label for="player">Visualiser</label>
     </div>
     <div class="col-3 mbs">
-      {$video->getPlayer()}
+      {{ video.Player }}
     </div>
     <div>
       <label for="thumbnail">Miniature</label>
     </div>
     <div class="col-3 mbs">
-      <img src="{$video->getThumbUrl(320)}" alt=""/>
+      <img src="{{ video.ThumbUrl(320}}" alt=""/>
     </div>
     <div>
       <label for="thumbnail_fetch">Réimporter la miniature</label>
@@ -55,13 +55,13 @@
       <label for="ids_groupe[0]">Groupe(s)</label>
     </div>
     <div class="col-3 mbs">
-      {assign var=video_groupes value=$video->getGroupes()}
+      {assign var=video_groupes value=$video.Groupes }}
       {section name=cpt_groupe loop=5}
-      <select id="ids_groupe[{$smarty.section.cpt_groupe.index}]" name="ids_groupe[{$smarty.section.cpt_groupe.index}]" class="w100 mbs">
+      <select id="ids_groupe[{{ smarty.section.cpt_groupe.index}]" name="ids_groupe[{{ smarty.section.cpt_groupe.index}]" class="w100 mbs">
         <option value="">-- Choix d'un groupe --</option>
-        {foreach from=$groupes item=groupe}
-        <option value="{$groupe->getId()|escape}" {if $video_groupes[$smarty.section.cpt_groupe.index] && ($video_groupes[$smarty.section.cpt_groupe.index]->getId() === $groupe->getId())} selected="selected"{/if}>{$groupe->getName()|escape}</option>
-        {/foreach}
+        {% for from=$groupes item=groupe}
+        <option value="{{ groupe.Id }}" {% if $video_groupes[$smarty.section.cpt_groupe.index] && ($video_groupes[$smarty.section.cpt_groupe.index].Id() === $groupe.Id()}} selected="selected"{% endif %}>{{ groupe.Name }}</option>
+        {% endfor %}
       </select>
       {/section}
     </div>
@@ -73,13 +73,13 @@
         <optgroup label="Autre">
           <option value="0">aucun / non référencé</option>
         </optgroup>
-        {foreach from=$deps item=dep}
-        <optgroup label="{$dep->getId()} - {$dep->getName()|escape}">
-          {foreach from=$lieux[$dep->getId()] item=lieu}
-          <option value="{$lieu->getIdLieu()}"{if $video->getIdLieu() === $lieu->getIdLieu()} selected="selected"{/if}>{$lieu->getCity()->getCp()} {$lieu->getCity()->getName()|escape} : {$lieu->getName()|escape}</option>
-          {/foreach}
+        {% for from=$deps item=dep}
+        <optgroup label="{{ dep.Id }} - {{ dep.Name }}">
+          {% for from=$lieux[$dep.Id()] item=lieu}
+          <option value="{{ lieu.IdLieu }}"{% if $video.IdLieu() === $lieu.IdLieu }} selected="selected"{% endif %}>{{ lieu.City().Cp }} {{ lieu.City().Name }} : {{ lieu.Name }}</option>
+          {% endfor %}
         </optgroup>
-        {/foreach}
+        {% endfor %}
       </select>
     </div>
     <div>
@@ -94,22 +94,22 @@
       <label for="online">Rendre public</label>
     </div>
     <div class="col-3 mbs">
-      <input class="checkbox" type="checkbox" name="online"{if $video->getOnline()} checked="checked"{/if}>
+      <input class="checkbox" type="checkbox" name="online"{% if $video.Online }} checked="checked"{% endif %}>
     </div>
     <div></div>
     <div class="col-2">
       <input id="form-video-edit-submit" name="form-video-edit-submit" type="submit" class="btn btn--primary" value="Enregistrer">
-      <input type="hidden" name="id" value="{$video->getIdVideo()|escape}">
-      <input type="hidden" name="video_id_event" id="video_id_event" value="{$video->getIdEvent()|escape}">
+      <input type="hidden" name="id" value="{{ video.IdVideo }}">
+      <input type="hidden" name="video_id_event" id="video_id_event" value="{{ video.IdEvent }}">
     </div>
     <div class="txtright">
-      <a href="/videos/delete/{$video->getIdVideo()|escape}" class="btn btn--primary">Supprimer</a>
+      <a href="/videos/delete/{{ video.IdVideo }}" class="btn btn--primary">Supprimer</a>
     </div>
   </section>
 </form>
 
 
-{/if} {* test unknown video *}
+{% endif %} {# test unknown video #}
 
   </div>
 </div>

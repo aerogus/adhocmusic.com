@@ -1,68 +1,68 @@
 {% include 'common/header.twig' %}
 
-{if !empty($unknown_audio)}
+{% if unknown_audio}}
 
 <p class="infobulle error">Cet audio est introuvable !</p>
 
-{else}
+{% else %}
 
 <script>
-var audio_url = '{$og_audio.url}';
+var audio_url = '{{ og_audio.url}';
 </script>
 
 <div class="box">
   <header>
-    <h1>{$audio->getName()|escape}</h1>
+    <h1>{{ audio.Name }}</h1>
   </header>
   <div>
 
-{if $audio->getIdGroupe()}
-<a href="{$groupe->getUrl()}"><img style="float: left; margin: 5px;" src="{$groupe->getMiniPhoto()}" alt="{$groupe->getName()|escape}"></a>
-{/if}
+{% if $audio.IdGroupe }}
+<a href="{{ groupe.Url }}"><img style="float: left; margin: 5px;" src="{{ groupe.MiniPhoto }}" alt="{{ groupe.Name }}"></a>
+{% endif %}
 
 <div class="audiometa">
 <ul>
-  <li>Titre : <strong>{$audio->getName()}</strong></li>
-  {if $audio->getIdGroupe()}
-  <li>Groupe : <a href="{$groupe->getUrl()}"><strong>{$groupe->getName()}</strong></a></li>
-  {/if}
-  {if $audio->getIdEvent()}
-  <li>Evénement : <a href="{$event->getUrl()}"><strong>{$event->getName()}</strong></a> ({$event->getDate()|date_format:'%d/%m/%Y'})</li>
-  {/if}
-  {if $audio->getIdLieu()}
-  <li>Lieu : <a href="{$lieu->getUrl()}"><strong>{$lieu->getName()}</strong></a></li>
-  {/if}
-  <li>Mise en ligne : le {$audio->getCreatedAt()|date_format:'%d/%m/%Y'} par <a href="/membres/show/{$audio->getIdContact()}"><strong>{$audio->getIdContact()|pseudo_by_id}</strong></a></li>
+  <li>Titre : <strong>{{ audio.Name }}</strong></li>
+  {% if $audio.IdGroupe }}
+  <li>Groupe : <a href="{{ groupe.Url }}"><strong>{{ groupe.Name }}</strong></a></li>
+  {% endif %}
+  {% if $audio.IdEvent }}
+  <li>Evénement : <a href="{{ event.Url }}"><strong>{{ event.Name }}</strong></a> ({{ event.Date()|date_format:'%d/%m/%Y'})</li>
+  {% endif %}
+  {% if $audio.IdLieu }}
+  <li>Lieu : <a href="{{ lieu.Url }}"><strong>{{ lieu.Name }}</strong></a></li>
+  {% endif %}
+  <li>Mise en ligne : le {{ audio.CreatedAt()|date_format:'%d/%m/%Y'} par <a href="/membres/show/{{ audio.IdContact }}"><strong>{{ audio.IdContact()|pseudo_by_id}</strong></a></li>
 </ul>
 </div>
 
-<audio controls="controls" src="{$audio->getDirectMp3Url()}" style="background-color:#000"></audio>
+<audio controls="controls" src="{{ audio.DirectMp3Url }}" style="background-color:#000"></audio>
 
   </div>
 </div>
 
-{if !empty($photos) || !empty($videos)}
+{% if photos) || videos}}
 <div class="box">
   <header>
     <h2>Photos et vidéos de ce concert</h2>
   </header>
   <div>
-{foreach $photos as $photo}
+{% for $photos as $photo}
 <div class="thumb-80 thumb-photo-80">
-  <a href="{$photo->getUrl()}"><img src="{$photo->getThumbUrl(80)}" alt="{$photo->getName()|escape}"><br>{$photo->getName()|truncate:15:"...":true:true|escape}</a>
-  <a class="overlay-80 overlay-photo-80" href="{$photo->getUrl()}" title="{$photo->getName()|escape}"></a>
+  <a href="{{ photo.Url }}"><img src="{{ photo.ThumbUrl(80}}" alt="{{ photo.Name }}"><br>{{ photo.Name()|truncate:15:"...":true:true}</a>
+  <a class="overlay-80 overlay-photo-80" href="{{ photo.Url }}" title="{{ photo.Name }}"></a>
 </div>
-{/foreach}
-{foreach $videos as $video}
+{% endfor %}
+{% for $videos as $video}
 <div class="thumb-80 thumb-video-80">
-  <a href="{$video->getUrl()}"><img src="{$video->getThumbUrl(80)}" alt="{$video->getName()|escape}"><br>{$video->getName()|truncate:15:"...":true:true|escape}</a>
-  <a class="overlay-80 overlay-video-80" href="{$video->getUrl()}" title="{$video->getName()|escape}"></a>
+  <a href="{{ video.Url }}"><img src="{{ video.ThumbUrl(80}}" alt="{{ video.Name }}"><br>{{ video.Name()|truncate:15:"...":true:true}</a>
+  <a class="overlay-80 overlay-video-80" href="{{ video.Url }}" title="{{ video.Name }}"></a>
 </div>
-{/foreach}
+{% endfor %}
   </div>
 </div>
-{/if}
+{% endif %}
 
-{/if} {* test unknown audio *}
+{% endif %} {# test unknown audio #}
 
 {% include 'common/footer.twig' %}

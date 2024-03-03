@@ -14,9 +14,9 @@
       <mj-column width="100%">
         <mj-text color="#292933" font-size="20px" font-weight="700">Vous avez reçu un message</mj-text>
         <mj-text font-size="16px" color="#292933">
-          <p>Bonjour <strong>{$pseudo_to|escape}</strong></p>
-          <p><strong>{$pseudo_from}</strong> vous a envoyé un message privé :</p>
-          <p>{$text|@nl2br}</p>
+          <p>Bonjour <strong>{{ pseudo_to}</strong></p>
+          <p><strong>{{ pseudo_from}</strong> vous a envoyé un message privé :</p>
+          <p>{{ text|@nl2br}</p>
           <p>Pour y répondre, veuillez vous connecter vous sur le <a href="https://www.adhocmusic.com">site AD'HOC</a></p>
           <p>L'équipe AD'HOC</p>
         </mj-text>

@@ -1,10 +1,10 @@
 {% include 'common/header.twig' %}
 
-{if !empty($unknown_photo)}
+{% if unknown_photo %}
 
 <p class="infobulle error">Cette photo est introuvable !</p>
 
-{else}
+{% else %}
 
 <div class="box">
   <header>
@@ -18,34 +18,34 @@
           <label for="photo">Photo</label>
         </div>
         <div class="col-3 mbs">
-          <img src="{$photo->getThumbUrl(320)}" alt="">
+          <img src="{{ photo.thumbUrl }}" alt="">
         </div>
 
         <div>Titre</div>
-        <div class="col-3 mbs">{$photo->getName()|escape}</div>
+        <div class="col-3 mbs">{{ photo.name }}</div>
 
         <div>Photographe</div>
-        <div class="col-3 mbs">{$photo->getCredits()|escape}</div>
+        <div class="col-3 mbs">{{ photo.credits }}</div>
 
-        {if !empty($groupe)}
+        {% if groupe %}
         <div>Groupe</div>
-        <div class="col-3 mbs">{$groupe->getName()|escape}</div>
-        {/if}
+        <div class="col-3 mbs">{{ groupe.name }}</div>
+        {% endif %}
 
-        {if !empty($event)}
+        {% if event %}
         <div>Événement</div>
-        <div class="col-3 mbs">{$event->getDate()} - {$event->getName()|escape}</div>
-        {/if}
+        <div class="col-3 mbs">{{ event.date }} - {{ event.name }}</div>
+        {% endif %}
 
-        {if !empty($lieu)}
+        {% if lieu %}
         <div>Lieu :</div>
-        <div class="col-3 mbs">{$lieu->getIdDepartement()} - {$lieu->getName()|escape}</div>
-        {/if}
+        <div class="col-3 mbs">{{ lieu.idDepartement }} - {{ lieu.name }}</div>
+        {% endif %}
 
         <div></div>
         <div class="col-3">
           <input id="form-photo-delete-submit" name="form-photo-delete-submit" type="submit" class="btn btn--primary" value="Supprimer">
-          <input type="hidden" name="id" value="{$photo->getId()}">
+          <input type="hidden" name="id" value="{{ photo.id }}">
         </div>
 
       </section>
@@ -54,6 +54,6 @@
   </div>
 </div>
 
-{/if}
+{% endif %}
 
 {% include 'common/footer.twig' %}

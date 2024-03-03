@@ -6,28 +6,28 @@
   </header>
   <div>
 
-{if !empty($delete)}
+{% if delete}}
 <div class="infobulle success">Groupe supprimé</div>
-{/if}
+{% endif %}
 
-{if $groupes|@count > 0}
+{% if $groupes.length > 0}
 <table class="table table--zebra">
   <tr>
     <th>Groupe</th>
     <th>Création</th>
     <th>Modification</th>
   </tr>
-  {foreach $groupes as $groupe}
+  {% for $groupes as $groupe}
   <tr>
-    <td><a href="/groupes/edit/{$groupe->getIdGroupe()}" title="{$groupe->getName()|escape}"><img src="{$groupe->getMiniPhoto()|escape}" alt="{$groupe->getName()|escape}"><br>{$groupe->getName()|escape}</a></td>
-    <td>{$groupe->getCreatedAt()|date_format:'%d/%m/%Y'}</td>
-    <td>{$groupe->getModifiedAt()|date_format:'%d/%m/%Y'}</td>
+    <td><a href="/groupes/edit/{{ groupe.IdGroupe }}" title="{{ groupe.Name }}"><img src="{{ groupe.MiniPhoto }}" alt="{{ groupe.Name }}"><br>{{ groupe.Name }}</a></td>
+    <td>{{ groupe.CreatedAt()|date_format:'%d/%m/%Y'}</td>
+    <td>{{ groupe.ModifiedAt()|date_format:'%d/%m/%Y'}</td>
   </tr>
-  {/foreach}
+  {% endfor %}
 </table>
-{else}
+{% else %}
 <p>Vous n'administrez aucun groupe</p>
-{/if}
+{% endif %}
 
 <a href="/groupes/create" class='btn btn--primary'>Inscrire un groupe</a>
 

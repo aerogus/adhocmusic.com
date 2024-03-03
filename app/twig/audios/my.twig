@@ -10,17 +10,17 @@
   <a href="/audios/create" class="btn btn--primary">Ajouter une musique</a>
 </div>
 
-{if $audios|@sizeof == 0}
+{% if $audios|@sizeof == 0}
 
 <p>Aucune musique</p>
 
-{else}
+{% else %}
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-{if !empty($delete)}
+{% if delete}}
 <div class="infobulle success">La suppression du son a été effectuée</div>
-{/if}
+{% endif %}
 
 <table class="table table--zebra">
   <thead>
@@ -32,20 +32,20 @@
     </tr>
   </thead>
   <tbody>
-  {foreach $audios as $audio}
+  {% for $audios as $audio}
     <tr>
-      <td>{if !empty($audio->getGroupe())}{$audio->getGroupe()->getName()|escape}{/if}</td>
-      <td><a href="/audios/edit/{$audio->getIdAudio()|escape}">{$audio->getName()|escape}</a></td>
-      <td>{$audio->getCreatedAt()}</td>
-      <td>{$audio->getModifiedAt()}</td>
+      <td>{% if audio.Groupe()}}{{ audio.Groupe().Name }}{% endif %}</td>
+      <td><a href="/audios/edit/{{ audio.IdAudio }}">{{ audio.Name }}</a></td>
+      <td>{{ audio.CreatedAt }}</td>
+      <td>{{ audio.ModifiedAt }}</td>
     </tr>
-  {/foreach}
+  {% endfor %}
   </tbody>
 </table>
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-{/if}
+{% endif %}
 
 <div class="mts txtcenter">
   <a href="/audios/create" class="btn btn--primary">Ajouter une musique</a>

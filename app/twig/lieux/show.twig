@@ -1,46 +1,46 @@
 {% include 'common/header.twig' %}
 
-{if !empty($unknown_lieu)}
+{% if unknown_lieu}}
 
 <p class="infobulle error">Ce lieu est introuvable !</p>
 
-{else}
+{% else %}
 
-{if !empty($create)}
+{% if create}}
 <div class="infobulle success">Le lieu a bien été ajouté</div>
-{/if}
+{% endif %}
 
-{if !empty($edit)}
+{% if edit}}
 <div class="infobulle success">Le lieu a bien été modifié</div>
-{/if}
+{% endif %}
 
 <div class="box">
   <header>
-    <h1>{$lieu->getName()}</h1>
+    <h1>{{ lieu.Name }}</h1>
   </header>
   <div>
     <div id="map_canvas" style="width: 50%; height: 320px; float: right; z-index: 1"></div>
 
     <div class="infos" style="width: 300px; padding: 10px;">
-      <strong>{$lieu->getName()|escape}</strong><br>
-      {$lieu->getAddress()|escape}<br>
-      {$lieu->getCity()->getCp()|escape} {$lieu->getCity()->getName()|escape}<br>
-      {if $lieu->getIdCountry() === 'FR'}
-      {$lieu->getIdDepartement()} / {$lieu->getDepartement()->getName()}<br>
-      {/if}
-      {$lieu->getRegion()->getName()}<br>
-      <img src="{$lieu->getCountry()->getFlagUrl()}" alt="{$lieu->getIdCountry()}"> {$lieu->getCountry()->getName()}
+      <strong>{{ lieu.Name }}</strong><br>
+      {{ lieu.Address }}<br>
+      {{ lieu.City().Cp }} {{ lieu.City().Name }}<br>
+      {% if $lieu.IdCountry() === 'FR'}
+      {{ lieu.IdDepartement }} / {{ lieu.Departement().Name }}<br>
+      {% endif %}
+      {{ lieu.Region().Name }}<br>
+      <img src="{{ lieu.Country().FlagUrl }}" alt="{{ lieu.IdCountry }}"> {{ lieu.Country().Name }}
     </div>
 
     <div class="infos" style="padding: 10px;">
-      {$lieu->getType()}<br>
-      {if $lieu->getSite()}
-      <a href="{$lieu->getSite()}">{$lieu->getSite()}</a><br>
-      {/if}
+      {{ lieu.Type }}<br>
+      {% if $lieu.Site }}
+      <a href="{{ lieu.Site }}">{{ lieu.Site }}</a><br>
+      {% endif %}
     </div>
 
     <div class="infos" style="padding: 10px;">
-    {$lieu->getText()|escape|nl2br}
+    {{ lieu.Text()|nl2br}
     </div>
 
     <br style="clear: both;">
@@ -48,96 +48,96 @@
   </div>
 </div>
 
-{if !empty($events_f)}
+{% if events_f}}
 <div class="box">
   <header>
     <h2>Agenda</h2>
   </header>
   <div>
     <ul>
-      {foreach $events_f as $event}
-      {assign var=structures value=$event->getStructures()}
-      <li>{if $structures}<img src="{$structures[0]->getPicto()}" alt="" title="Organisé par {$structures[0]->getName()|escape}">{/if}<a href="{$event->getUrl()}">Le {$event->getDate()|date_format:"%d/%m/%Y %H:%M"} - {$event->getName()|escape}</a></li>
-      {/foreach}
+      {% for $events_f as $event}
+      {assign var=structures value=$event.Structures }}
+      <li>{% if $structures}<img src="{{ structures[0].Picto }}" alt="" title="Organisé par {{ structures[0].Name }}">{% endif %}<a href="{{ event.Url }}">Le {{ event.Date()|date_format:"%d/%m/%Y %H:%M"} - {{ event.Name }}</a></li>
+      {% endfor %}
     </ul>
   </div>
 </div>
-{/if}
+{% endif %}
 
-{if !empty($events_p)}
+{% if events_p}}
 <div class="box">
   <header>
     <h2>Evénements passés</h2>
   </header>
   <div>
     <ul>
-      {foreach from=$events_p item=event}
-      {assign var=structures value=$event->getStructures()}
-      <li>{if $structures}<img src="{$structures[0]->getPicto()}" alt="" title="Organisé par {$structures[0]->getName()|escape}">{/if}<a href="{$event->getUrl()}">Le {$event->getDate()|date_format:"%d/%m/%Y %H:%M"} - {$event->getName()|escape}</a></li>
-      {/foreach}
+      {% for from=$events_p item=event}
+      {assign var=structures value=$event.Structures }}
+      <li>{% if $structures}<img src="{{ structures[0].Picto }}" alt="" title="Organisé par {{ structures[0].Name }}">{% endif %}<a href="{{ event.Url }}">Le {{ event.Date()|date_format:"%d/%m/%Y %H:%M"} - {{ event.Name }}</a></li>
+      {% endfor %}
     </ul>
   </div>
 </div>
-{/if}
+{% endif %}
 
-{if !empty($photos)}
+{% if photos}}
 <div class="box">
   <header>
     <h2>Photos</h2>
   </header>
   <div class="reset gallery">
-  {foreach from=$photos item=photo}
+  {% for from=$photos item=photo}
     <div class="photo">
-      <a href="{$photo->getThumbUrl(1000)}" data-id="{$photo->getIdPhoto()}" data-at-1000="{$photo->getThumbUrl(1000)}" title="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if} 📷 {$photo->getCredits()}">
-        <img data-id="{$photo->getIdPhoto()}" src="{$photo->getThumbUrl(320)}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
+      <a href="{{ photo.ThumbUrl(1000}}" data-id="{{ photo.IdPhoto }}" data-at-1000="{{ photo.ThumbUrl(1000}}" title="{{ photo.Name }}{% if photo.Groupe()}} ({{ photo.Groupe().Name }}){% endif %} 📷 {{ photo.Credits }}">
+        <img data-id="{{ photo.IdPhoto }}" src="{{ photo.ThumbUrl(320}}" alt="{{ photo.Name }}{% if photo.Groupe()}} ({{ photo.Groupe().Name }}){% endif %}">
       </a>
     </div>
-  {/foreach}
+  {% endfor %}
   </div>
 </div>
-{/if}
+{% endif %}
 
-{if !empty($audios)}
+{% if audios}}
 <div class="box">
   <header>
     <h2>Sons</h2>
   </header>
   <div>
     <ul>
-      {foreach $audios as $audio}
-      <li>Titre : <strong>{$audio->getName()|escape}</strong>
-      {if !empty($audio->getGroupe())}<br>Groupe : <a href="{$audio->getGroupe()->getUrl()}">{$audio->getGroupe()->getName()}</a>{/if}
-      {if !empty($audio->getEvent())}<br>Evénement : <a href="{$audio->getEvent()->getUrl()}">{$audio->getEvent()->getName()}</a> ({$audio->getEvent()->getDate()|date_format:'%d/%m/%Y'}){/if}
-      <br><audio src="{$audio->getDirectMp3Url()}"></audio></li>
-      {/foreach}
+      {% for $audios as $audio}
+      <li>Titre : <strong>{{ audio.Name }}</strong>
+      {% if audio.Groupe()}}<br>Groupe : <a href="{{ audio.Groupe().Url }}">{{ audio.Groupe().Name }}</a>{% endif %}
+      {% if audio.Event()}}<br>Evénement : <a href="{{ audio.Event().Url }}">{{ audio.Event().Name }}</a> ({{ audio.Event().Date()|date_format:'%d/%m/%Y'}){% endif %}
+      <br><audio src="{{ audio.DirectMp3Url }}"></audio></li>
+      {% endfor %}
     </ul>
   </div>
 </div>
-{/if}
+{% endif %}
 
-{if !empty($videos)}
+{% if videos}}
 <div class="box">
   <header>
     <h2>Vidéos</h2>
   </header>
   <div class="reset grid-3-small-2 has-gutter">
-    {foreach $videos as $video}
+    {% for $videos as $video}
     <div class="video">
-      <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">
-        <a class="playbtn" href="{$video->getUrl()}" title="Regarder la vidéo {$video->getName()|escape}">▶</a>
+      <div class="thumb" style="background-image: url({{ video.ThumbUrl(320}})">
+        <a class="playbtn" href="{{ video.Url }}" title="Regarder la vidéo {{ video.Name }}">▶</a>
       </div>
-      <p class="title"><a href="{$video->getUrl()}" title="Regarder la vidéo {$video->getName()|escape}">{$video->getName()}</a></p>
+      <p class="title"><a href="{{ video.Url }}" title="Regarder la vidéo {{ video.Name }}">{{ video.Name }}</a></p>
       <p class="subtitle">
-        {if !empty($video->getGroupe())}<a href="{$video->getGroupe()->getUrl()}" title="Aller à la page du groupe {$video->getGroupe()->getName()|escape}">{$video->getGroupe()->getName()}</a>{/if}
-        {if !empty($video->getGroupe()) && !empty($video->getEvent())}<br/>{/if}
-        {if !empty($video->getEvent())}<a href="{$video->getEvent()->getUrl()}" title="Aller à la page de l'événement {$video->getEvent()->getName()|escape}">{$video->getEvent()->getDate()|date_format:"%a %e %B %Y"}</a>{/if}
+        {% if video.Groupe()}}<a href="{{ video.Groupe().Url }}" title="Aller à la page du groupe {{ video.Groupe().Name }}">{{ video.Groupe().Name }}</a>{% endif %}
+        {% if video.Groupe()) && video.Event()}}<br/>{% endif %}
+        {% if video.Event()}}<a href="{{ video.Event().Url }}" title="Aller à la page de l'événement {{ video.Event().Name }}">{{ video.Event().Date()|date_format:"%a %e %B %Y"}</a>{% endif %}
       </p>
     </div>
-    {/foreach}
+    {% endfor %}
   </div>
 </div>
-{/if}
+{% endif %}
 
-{/if} {* test unknown lieu *}
+{% endif %} {# test unknown lieu #}
 
 {% include 'common/footer.twig' %}

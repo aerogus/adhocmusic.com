@@ -1,4 +1,4 @@
-{include file="common/header.tpl" js_jquery_tinymce=true}
+{% include 'common/header.twig' %}
 
 <script>
 $(function() {
@@ -51,7 +51,7 @@ $(function() {
     <li>
       <label for="alias">URI</label>
       <span></span>
-      <input id="alias" name="alias" value="{$cms->getAlias()|escape}">
+      <input id="alias" name="alias" value="{{ cms.Alias }}">
     </li>
     <li>
       <label for="menuselected">Menu</label>
@@ -67,26 +67,26 @@ $(function() {
     <li>
       <label for="content">Contenu</label>
       <span></span>
-      <textarea class="tinymce" id="content" name="content">{$cms->getContent()|escape}</textarea>
+      <textarea class="tinymce" id="content" name="content">{{ cms.Content }}</textarea>
     </li>
     <li>
       <label for="online">En Ligne</label>
-      <input type="checkbox"{if $cms->getOnline()} checked="checked"{/if} id="online" name="online">
+      <input type="checkbox"{% if $cms.Online }} checked="checked"{% endif %} id="online" name="online">
     </li>
     <li>
       <label for="auth">Droits d'identification</label>
       <select id="auth" name="auth">
       <option value="0">Non</option>
-      {foreach from=$auth key=auth_id item=auth_name}
-      <option value="{$auth_id}"{if ($cms->getAuth() == $auth_id)} selected="selected"{/if}>{$auth_name|escape}</select>
-      {/foreach}
+      {% for from=$auth key=auth_id item=auth_name}
+      <option value="{{ auth_id}"{% if ($cms.Auth() == $auth_id}} selected="selected"{% endif %}>{{ auth_name}</select>
+      {% endfor %}
     </li>
   </ul>
-  <input type="hidden" name="id_cms" value="{$cms->getId()|escape}">
+  <input type="hidden" name="id_cms" value="{{ cms.Id }}">
   <input id="form-cms-edit-submit" name="form-cms-edit-submit" type="submit" value="OK" class="btn btn--primary">
 </form>
 
-<a href="/adm/cms/delete/{$cms->getId()|escape}">Effacer la page</a>
+<a href="/adm/cms/delete/{{ cms.Id }}">Effacer la page</a>
 
   </div>
 </div>

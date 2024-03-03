@@ -6,11 +6,11 @@
   </header>
   <div>
 
-{if !empty($unknown_photo)}
+{% if unknown_photo %}
 
 <p class="infobulle error">Cette photo est introuvable !</p>
 
-{else}
+{% else %}
 
 <form id="form-photo-edit" name="form-photo-edit" method="post" action="/photos/edit" enctype="multipart/form-data">
   <section class="grid-4">
@@ -19,7 +19,7 @@
       <label for="photo">Photo</label>
     </div>
     <div class="col-3 mbs">
-      <img id="photo" src="{$photo->getThumbUrl(320)}" alt=""/>
+      <img id="photo" src="{{ photo.thumbUrl }}" alt=""/>
     </div>
 
     <div>
@@ -48,32 +48,32 @@
       <label for="id_contact">Ajouté le</label>
     </div>
     <div class="col-3 mbs">
-      {$photo->getCreatedAt()|date_format:'%d/%m/%Y %H:%M'} par <a href="/membres/{$photo->getIdContact()}">{$photo->getPseudo()|escape}</a>
+      {{ photo.createdAt }} par <a href="/membres/{{ photo.idContact }}">{{ photo.pseudo }}</a>
     </div>
 
-    {if $photo->getModifiedAt()}
+    {% if photo.modifiedAt %}
     <div>
       <label for="modified_at">Modifié le</label>
     </div>
     <div class="col-3 mbs">
-      <span>{$photo->getModifiedAt()|date_format:'%d/%m/%Y %H:%M'}</span>
+      <span>{{ photo.modifiedAt }}</span>
     </div>
-    {/if}
+    {% endif %}
 
     <div>
       <label for="name">Titre (*)</label>
     </div>
     <div class="col-3 mbs">
-      <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez saisir un titre pour la photo</div>
-      <input type="text" id="name" name="name" placeholder="Titre" class="w100" value="{$photo->getName()|escape}">
+      <div class="infobulle error" id="error_name"{% if not error_name %} style="display: none"{% endif %}>Vous devez saisir un titre pour la photo</div>
+      <input type="text" id="name" name="name" placeholder="Titre" class="w100" value="{{ photo.name }}">
     </div>
 
     <div>
       <label for="credits">Crédits (*)</label>
     </div>
     <div class="col-3 mbs">
-      <div class="infobulle error" id="error_credits"{if empty($error_credits)} style="display: none"{/if}>Vous devez saisir le nom du photographe</div>
-      <input type="text" id="credits" name="credits" placeholder="Nom du photographe" class="w100" value="{$photo->getCredits()|escape}">
+      <div class="infobulle error" id="error_credits"{% if not error_credits %} style="display: none"{% endif %}>Vous devez saisir le nom du photographe</div>
+      <input type="text" id="credits" name="credits" placeholder="Nom du photographe" class="w100" value="{{ photo.credits }}">
     </div>
 
     <div>
@@ -82,9 +82,9 @@
     <div class="col-3 mbs">
       <select name="id_groupe" class="w100">
         <option value="0">Aucun</option>
-        {foreach $groupes as $groupe}
-        <option value="{$groupe->getIdGroupe()}"{if $photo->getIdGroupe() == $groupe->getIdGroupe()} selected="selected"{/if}>{$groupe->getName()|escape}</option>
-        {/foreach}
+        {% for groupe in groupes %}
+        <option value="{{ groupe.id }}"{% if photo.idGroupe == groupe.id %} selected="selected"{% endif %}>{{ groupe.name }}</option>
+        {% endfor %}
       </select>
     </div>
 
@@ -96,13 +96,13 @@
         <optgroup label="Autre">
           <option value="0">aucun / non référencé</option>
         </optgroup>
-        {foreach from=$deps item=dep}
-        <optgroup label="{$dep->getId()} - {$dep->getName()|escape}">
-          {foreach from=$lieux[$dep->getId()] item=lieu}
-          <option value="{$lieu->getIdLieu()}"{if $photo->getIdLieu() === $lieu->getIdLieu()} selected="selected"{/if}>{$lieu->getCity()->getCp()} {$lieu->getCity()->getName()|escape} : {$lieu->getName()|escape}</option>
-          {/foreach}
+        {% for dep in deps %}
+        <optgroup label="{{ dep.Id }} - {{ dep.Name }}">
+          {% for lieu in lieux[dep.id] %}
+          <option value="{{ lieu.id }}"{% if photo.idLieu == lieu.id %} selected="selected"{% endif %}>{{ lieu.city.cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
+          {% endfor %}
         </optgroup>
-        {/foreach}
+        {% endfor %}
       </select>
     </div>
 
@@ -119,17 +119,17 @@
       <label for="online">Rendre public</label>
     </div>
     <div class="col-3 mbs">
-      <input class="checkbox" type="checkbox" name="online"{if $photo->getOnline()} checked="checked"{/if}>
+      <input class="checkbox" type="checkbox" name="online"{% if photo.online %} checked="checked"{% endif %}>
     </div>
 
     <div></div>
     <div class="col-2">
       <input name="form-photo-edit-submit" id="form-photo-edit-submit" class="btn btn--primary" type="submit" value="Enregistrer">
-      <input type="hidden" name="id" id="id_photo" value="{$photo->getId()|escape}">
-      <input type="hidden" name="photo_id_event" id="photo_id_event" value="{$photo->getIdEvent()|escape}">
+      <input type="hidden" name="id" id="id_photo" value="{{ photo.id }}">
+      <input type="hidden" name="photo_id_event" id="photo_id_event" value="{{ photo.idEvent }}">
     </div>
     <div class="txtright">
-      <a class="btn btn--primary" href="/photos/delete/{$photo->getId()}">Supprimer la photo</a>
+      <a class="btn btn--primary" href="/photos/delete/{{ photo.id }}">Supprimer la photo</a>
     </div>
 
   </section>
@@ -138,7 +138,7 @@
 
 </form>
 
-{/if} {* test unknown photo *}
+{% endif %} {# test unknown photo #}
 
   </div>
 </div>

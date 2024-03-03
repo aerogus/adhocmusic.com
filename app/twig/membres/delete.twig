@@ -6,19 +6,19 @@
   </header>
   <div>
 
-{if !empty($unknown_member)}
+{% if unknown_member}}
 
 <p class="infobulle error">Ce membre est introuvable !</p>
 
-{else}
+{% else %}
 
 <form id="form-member-delete" name="form-member-delete" action="/membres/delete" method="POST">
-  <p>Confirmer la suppression du membre {$membre->getPseudo()|escape} ?</p>
+  <p>Confirmer la suppression du membre {{ membre.Pseudo }} ?</p>
   <input class="btn btn--secondary" type="submit" id="form-member-delete-submit" name="form-member-delete-submit" value="Supprimer">
-  <input type="hidden" name="id" value="{$membre->getId()|escape}">
+  <input type="hidden" name="id" value="{{ membre.Id }}">
 </form>
 
-{/if}
+{% endif %}
 
   </div>
 </div>

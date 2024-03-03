@@ -1,4 +1,4 @@
-{include file="common/header.tpl" js_jquery_tinymce=true}
+{% include 'common/header.twig' %}
 
 <script>
 $(function() {
@@ -73,9 +73,9 @@ $(function() {
       <label for="auth">Droits d'identification</label>
       <select id="auth" name="auth">
       <option value="0">Non</option>
-      {foreach from=$auth key=auth_id item=auth_name}
-      <option value="{$auth_id}">{$auth_name|escape}</select>
-      {/foreach}
+      {% for from=$auth key=auth_id item=auth_name}
+      <option value="{{ auth_id }}">{{ auth_name }}</select>
+      {% endfor %}
     </li>
   </ul>
   <input id="form-cms-create-submit" name="form-cms-create-submit" type="submit" value="OK" class="btn btn--primary">

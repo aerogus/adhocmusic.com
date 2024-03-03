@@ -6,9 +6,9 @@
   </header>
   <div>
     <ul>
-    {foreach $structures as $structure}
-      <li><img src="{$structure->getPicto()}" alt=""> <a href="{$structure->getUrl()}">{$structure->getName()|escape}</a></li>
-    {/foreach}
+    {% for $structures as $structure}
+      <li><img src="{{ structure.Picto }}" alt=""> <a href="{{ structure.Url }}">{{ structure.Name }}</a></li>
+    {% endfor %}
     </ul>
   </div>
 </div>

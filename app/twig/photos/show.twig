@@ -1,60 +1,60 @@
-{include file="common/header.tpl" title=$title}
+{% include 'common/header.twig' %}
 
-{if !empty($unknown_photo)}
+{% if unknown_photo %}
 
 <p class="infobulle error">Cette photo est introuvable</p>
 
-{else}
+{% else %}
 
 <div class="grid-3-small-1 has-gutter">
 
   <div class="col-1">
 
-    {if !empty($groupe)}
+    {% if groupe %}
     <div class="box">
       <header>
         <h2>Groupe</h2>
       </header>
       <div>
-        <a href="{$groupe->getUrl()}"><img style="float: right;" src="{$groupe->getMiniPhoto()}" alt=""><strong>{$groupe->getName()|escape}</strong></a>
+        <a href="{{ groupe.url }}"><img style="float: right;" src="{{ groupe.miniPhoto }}" alt=""><strong>{{ groupe.name }}</strong></a>
       </div>
     </div>
-    {/if}
+    {% endif %}
 
-    {if !empty($event)}
+    {% if event %}
     <div class="box">
       <header>
         <h2>Événement</h2>
       </header>
       <div>
-        <a href="{$event->getUrl()}"><img style="float: right;" src="{$event->getThumbUrl(100)}" alt=""><strong>{$event->getName()|escape}</strong></a><br>{$event->getDate()|date_format:'%d/%m/%Y'}
+        <a href="{{ event.url }}"><img style="float: right;" src="{{ event.thumbUrl }}" alt=""><strong>{{ event.name }}</strong></a><br>{{ event.date }}
       </div>
     </div>
-    {/if}
+    {% endif %}
 
-    {if !empty($lieu)}
+    {% if lieu %}
     <div class="box">
       <header>
         <h2>Lieu</h2>
       </header>
       <div>
-        <a href="{$lieu->getUrl()}"><strong>{$lieu->getName()|escape}</strong></a><br>{$lieu->getAddress()}<br>{$lieu->getCity()->getCp()} {$lieu->getCity()->getName()|escape}
+        <a href="{{ lieu.Url }}"><strong>{{ lieu.Name }}</strong></a><br>{{ lieu.Address }}<br>{{ lieu.City().Cp }} {{ lieu.City().Name }}
       </div>
     </div>
-    {/if}
+    {% endif %}
 
-    {if !empty($next) && !empty($prev)}
+    {% if next and prev %}
     <div class="box">
       <header>
         <h2>Album</h2>
       </header>
       <div>
-        <p align="center"><a href="{$prev}#p">←</a> photo {$idx_photo}/{$nb_photos} <a href="{$next}#p">→</a></p>
+        <p align="center"><a href="{{ prev }}#p">←</a> photo {{ idx_photo }}/{{ nb_photos }} <a href="{{ next }}#p">→</a></p>
       </div>
     </div>
-    {/if}
+    {% endif %}
 
-  </div>{* .col-1 *}
+  </div>{# .col-1 #}
 
   <div class="col-2-small-1">
 
@@ -62,28 +62,28 @@
 
     <div class="box">
       <header>
-        <h1>{$photo->getName()}</h1>
+        <h1>{{ photo.name }}</h1>
       </header>
       <div>
 
     <p align="center" id="photofull" class="photofull">
-    {if !empty($next)}<a href="{$next}">{/if}
-    <img src="{$photo->getThumbUrl(680)}" alt="{$photo->getName()|escape}">
-    {if !empty($next)}</a>{/if}
+    {% if next %}<a href="{{ next }}">{% endif %}
+    <img src="{{ photo.thumbUrl }}" alt="{{ photo.name }}">
+    {% if next %}</a>{% endif %}
     </p>
 
     <p align="center" style="margin: 10px 0px;">
-      <span id="pname">{$photo->getName()|escape}</span>
-      <span id="pcredits">{if !empty($has_credits)}(<i>crédits: {$photo->getCredits()|escape}</i>){/if}</span>
+      <span id="pname">{{ photo.Name }}</span>
+      <span id="pcredits">{% if has_credits %}(<i>crédits: {{ photo.credits }}</i>){% endif %}</span>
     </p>
 
       </div>
     </div>
 
-  </div>{* .col-2-small-1 *}
+  </div>{# .col-2-small-1 #}
 
-</div>{* .grid-3-small-1 *}
+</div>{# .grid-3-small-1 #}
 
-{/if} {* test unknown photo *}
+{% endif %} {# test unknown photo #}
 
 {% include 'common/footer.twig' %}

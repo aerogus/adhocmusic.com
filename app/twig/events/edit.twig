@@ -15,7 +15,7 @@
         <label for="id_country">Pays (*)</label>
       </div>
       <div class="col-3 mbs">
-        <div class="infobulle error" id="error_id_lieu"{if empty($error_id_lieu)} style="display: none"{/if}>Vous devez indiquer un lieu pour l'événement ou le saisir s'il n'est pas encore référencé.</div>
+        <div class="infobulle error" id="error_id_lieu"{% if not error_id_lieu}} style="display: none"{% endif %}>Vous devez indiquer un lieu pour l'événement ou le saisir s'il n'est pas encore référencé.</div>
         <select id="id_country" name="id_country" class="w100">
           <option value="">---</option>
         </select>
@@ -66,13 +66,13 @@
         <label for="groupe">Groupe(s)</label>
       </div>
       <div class="col-3">
-        {assign var=event_groupes value=$event->getGroupes()}
+        {assign var=event_groupes value=$event.Groupes }}
         {section name=cpt_groupe loop=5}
-        <select id="groupe" name="groupe[{$smarty.section.cpt_groupe.index}]" class="w100 mbs">
+        <select id="groupe" name="groupe[{{ smarty.section.cpt_groupe.index}]" class="w100 mbs">
           <option value="">-- Choix d'un groupe --</option>
-          {foreach from=$groupes item=groupe}
-          <option value="{$groupe->getId()|escape}"{if $event_groupes[$smarty.section.cpt_groupe.index] && ($event_groupes[$smarty.section.cpt_groupe.index]->getId() === $groupe->getIdGroupe())} selected="selected"{/if}>{$groupe->getName()|escape}</option>
-          {/foreach}
+          {% for from=$groupes item=groupe}
+          <option value="{{ groupe.Id }}"{% if $event_groupes[$smarty.section.cpt_groupe.index] && ($event_groupes[$smarty.section.cpt_groupe.index].Id() === $groupe.IdGroupe()}} selected="selected"{% endif %}>{{ groupe.Name }}</option>
+          {% endfor %}
         </select>
         {/section}
       </div>
@@ -87,62 +87,62 @@
         <label for="name">Titre (*)</label>
       </div>
       <div class="col-3 mbm">
-        <div class="infobulle error" id="error_name"{if empty($error_name)} style="display: none"{/if}>Vous devez indiquer un titre pour l'événement.</div>
-        <input type="text" id="name" name="name" value="{$event->getName()|escape}" class="w100">
+        <div class="infobulle error" id="error_name"{% if not error_name}} style="display: none"{% endif %}>Vous devez indiquer un titre pour l'événement.</div>
+        <input type="text" id="name" name="name" value="{{ event.Name }}" class="w100">
       </div>
 
       <div>
         <label for="date">Date</label>
       </div>
       <div class="col-3 mbm">
-        <input type="text" id="date" name="date" value="{$event->getDate()|date_format:'%d/%m/%Y'}">
-        <select id="hourminute" name="hourminute">{html_input_date_hourminute hour=$event->getHour() minute=$event->getMinute()}</select>
+        <input type="text" id="date" name="date" value="{{ event.Date()|date_format:'%d/%m/%Y'}">
+        <select id="hourminute" name="hourminute">{html_input_date_hourminute hour=$event.Hour() minute=$event.Minute }}</select>
       </div>
 
       <div>
         <label for="text">Description</label>
       </div>
       <div class="col-3 mbm">
-        <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez mettre une description pour cet événement.</div>
-        <textarea id="text" name="text" class="w100" rows="10">{$event->getText()|escape}</textarea>
+        <div class="infobulle error" id="error_text"{% if not error_text}} style="display: none"{% endif %}>Vous devez mettre une description pour cet événement.</div>
+        <textarea id="text" name="text" class="w100" rows="10">{{ event.Text }}</textarea>
       </div>
 
       <div>
         <label for="price">Tarifs (Entrée, Bar, Vestiaire...)</label>
       </div>
       <div class="col-3 mbm">
-        <div class="infobulle error" id="error_price"{if empty($error_price)} style="display: none"{/if}>Vous devez écrire les tarifs de l'entrée.</div>
-        <textarea id="price" name="price" class="w100" rows="2">{$event->getPrice()|escape}</textarea>
+        <div class="infobulle error" id="error_price"{% if not error_price}} style="display: none"{% endif %}>Vous devez écrire les tarifs de l'entrée.</div>
+        <textarea id="price" name="price" class="w100" rows="2">{{ event.Price }}</textarea>
       </div>
 
       <div>
         <label for="flyer">Flyer (.jpg)</label>
       </div>
       <div class="col-3 mbs">
-        <input type="file" id="flyer" name="flyer" value="{$data.file|escape}">
-        {if $event->getThumbUrl()}
-        <br><img src="{$event->getThumbUrl(320)}" alt="">
-        {/if}
+        <input type="file" id="flyer" name="flyer" value="{{ data.file}">
+        {% if $event.ThumbUrl }}
+        <br><img src="{{ event.ThumbUrl(320}}" alt="">
+        {% endif %}
       </div>
 
       <div>
         <label for="flyer_url">ou Flyer (url)</label>
       </div>
       <div class="col-3 mbm">
-        <input type="text" id="flyer_url" class="w100" name="flyer_url" value="{$data.flyer_url|escape}">
+        <input type="text" id="flyer_url" class="w100" name="flyer_url" value="{{ data.flyer_url}">
       </div>
 
       <div>
         <label for="style">Style(s)</label>
       </div>
       <div class="col-3 mbm">
-        {assign var=event_styles value=$event->getStyles()}
+        {assign var=event_styles value=$event.Styles }}
         {section name=cpt_style loop=3}
-        <select id="style" name="style[{$smarty.section.cpt_style.index}]" class="w100 mbs">
+        <select id="style" name="style[{{ smarty.section.cpt_style.index}]" class="w100 mbs">
           <option value="">-- Choix d'un style --</option>
-          {foreach from=$styles item=style}
-          <option value="{$style->getId()|escape}" {if $event_styles[$smarty.section.cpt_style.index] && ($event_styles[$smarty.section.cpt_style.index]->getId() === $style->getId())} selected="selected"{/if}>{$style->getName()|escape}</option>
-          {/foreach}
+          {% for from=$styles item=style}
+          <option value="{{ style.Id }}" {% if $event_styles[$smarty.section.cpt_style.index] && ($event_styles[$smarty.section.cpt_style.index].Id() === $style.Id()}} selected="selected"{% endif %}>{{ style.Name }}</option>
+          {% endfor %}
         </select>
         {/section}
       </div>
@@ -151,13 +151,13 @@
         <label for="structure">Organisateur(s)</label>
       </div>
       <div class="col-3">
-        {assign var=event_structures value=$event->getStructures()}
+        {assign var=event_structures value=$event.Structures }}
         {section name=cpt_structure loop=3}
-        <select id="structure" name="structure[{$smarty.section.cpt_structure.index}]" class="w100 mbs">
+        <select id="structure" name="structure[{{ smarty.section.cpt_structure.index}]" class="w100 mbs">
           <option value="">-- Choix d'une structure --</option>
-          {foreach from=$structures item=structure}
-          <option value="{$structure->getId()|escape}"{if $event_structures[$smarty.section.cpt_structure.index] && ($event_structures[$smarty.section.cpt_structure.index]->getId() === $structure->getId())} selected="selected"{/if}>{$structure->getName()|escape}</option>
-          {/foreach}
+          {% for from=$structures item=structure}
+          <option value="{{ structure.Id }}"{% if $event_structures[$smarty.section.cpt_structure.index] && ($event_structures[$smarty.section.cpt_structure.index].Id() === $structure.Id()}} selected="selected"{% endif %}>{{ structure.Name }}</option>
+          {% endfor %}
         </select>
         {/section}
       </div>
@@ -166,7 +166,7 @@
         <label for="online">Afficher</label>
       </div>
       <div class="col-3">
-        <input type="checkbox" class="checkbox" id="online" name="online" {if $event->getOnline()}checked="checked"{/if}>
+        <input type="checkbox" class="checkbox" id="online" name="online" {% if $event.Online }}checked="checked"{% endif %}>
       </div>
 
     </section>
@@ -178,12 +178,12 @@
       <label for="facebook_event_id">n° Evénement (si déjà existant sur Facebook)</label>
     </div>
     <div>
-      https://www.facebook.com/events/<input id="facebook_event_id" type="text" name="facebook_event_id" value="{$data.facebook_event_id|escape}">
+      https://www.facebook.com/events/<input id="facebook_event_id" type="text" name="facebook_event_id" value="{{ data.facebook_event_id}">
     </div>
   </fieldset>
 
   <input id="form-event-edit-submit" name="form-event-edit-submit" class="btn btn--primary" type="submit" value="Modifier">
-  <input type="hidden" name="id" value="{$data.id|escape}">
+  <input type="hidden" name="id" value="{{ data.id}">
 
 </form>
 

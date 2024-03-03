@@ -14,9 +14,9 @@
       <mj-column width="100%">
         <mj-text color="#292933" font-size="20px" font-weight="700">Log action</mj-text>
         <mj-text font-size="16px" color="#292933">
-          <p>Membre : <strong>{$pseudo}</strong></p>
-          <p>Action : <strong>{$action}</strong></p>
-          <p>Extra : <strong>{$extra}</strong></p>
+          <p>Membre : <strong>{{ pseudo}</strong></p>
+          <p>Action : <strong>{{ action}</strong></p>
+          <p>Extra : <strong>{{ extra}</strong></p>
         </mj-text>
       </mj-column>
     </mj-section>

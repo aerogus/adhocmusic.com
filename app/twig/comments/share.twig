@@ -1,15 +1,15 @@
-{if !empty($title)}
-<h4>Partager {$title|escape}</h4>
-{/if}
+{% if title}}
+<h4>Partager {{ title}</h4>
+{% endif %}
 
 <ul class="social-share-box">
   <li>
-    <a href="https://www.facebook.com/sharer/sharer.php?u={$url|escape}" class="facebook">
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ url}" class="facebook">
       <span>Facebook</span>
     </a>
   </li>
   <li>
-    <a href="https://twitter.com/intent/tweet?text={$text|escape}&url={$url|escape}&via=adhocmusic" class="twitter">
+    <a href="https://twitter.com/intent/tweet?text={{ text}&url={{ url}&via=adhocmusic" class="twitter">
       <span>Twitter</span>
     </a>
   </li>

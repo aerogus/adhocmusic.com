@@ -20,16 +20,16 @@
     </tr>
   </thead>
   <tbody>
-  {foreach from=$photos item=photo}
+  {% for photo in photos %}
     <tr>
-      <td>{$photo->getId()}<br/><img src="{$photo->getThumbUrl(80)}" alt=""/><br/>{$photo->getName()|escape}</td>
-      <td>{if ($photo->getIdGroupe())}<a href="{$photo->getGroupe()->getUrl()}">{$photo->getGroupe()->getName()|escape}</a>{/if}</td>
-      <td>{if ($photo->getIdEvent())}<a href="{$photo->getEvent()->getUrl()}">{$photo->getEvent()->getName()|escape}</a><br/>{$photo->getEvent()->getDate()|date_format:'%d/%m/%Y'}{/if}</td>
-      <td>{if ($photo->getIdLieu())}<a href="{$photo->getLieu()->getUrl()}">{$photo->getLieu()->getName()|escape}</a><br>{$photo->getLieu()->getIdDepartement()} {$photo->getLieu()->getCity()->getName()}{/if}</td>
-      <td>{$photo->getCreatedAt()|date_format:'%d/%m/%Y'}</td>
-      <td>{$photo->getModifiedAt()|date_format:'%d/%m/%Y'}</td>
+      <td>{{ photo.Id }}<br/><img src="{{ photo.ThumbUrl }}" alt=""/><br/>{{ photo.name }}</td>
+      <td>{% if photo.idGroupe %}<a href="{{ photo.groupe.url }}">{{ photo.groupe.name }}</a>{% endif %}</td>
+      <td>{% if photo.idEvent %}<a href="{{ photo.event.url }}">{{ photo.event.name }}</a><br/>{{ photo.event.date }}{% endif %}</td>
+      <td>{% if photo.idLieu %}<a href="{{ photo.lieu.url }}">{{ photo.lieu.name }}</a><br>{{ photo.lieu.idDepartement }} {{ photo.lieu.city.name }}{% endif %}</td>
+      <td>{{ photo.createdAt }}</td>
+      <td>{{ photo.modifiedAt }}</td>
     </tr>
-  {/foreach}
+  {% endfor %}
   </tbody>
 </table>
 

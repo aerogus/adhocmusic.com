@@ -22,18 +22,18 @@
     </tr>
   </thead>
   <tbody>
-  {foreach $comments as $comment}
-    <tr id="row-{$comment->getIdComment()}">
-      <td><input type="checkbox" id="com-del-{$comment->getIdComment()}"></td>
-      <td><a href="/comments/show/{$comment->getIdComment()}">{$comment->getIdComment()}</a></td>
-      <td><a href="/{$comment.type_full}/{$comment.id_content}">{$comment.type} {$comment.id_content}</a></td>
-      <td>{$comment->getCreatedAt()}</td>
-      <td>{$comment->getOnline()}</td>
-      <td>{$comment->getPseudo()}<br>{$comment->getEmail()}</td>
-      <td><a href="/membres/show/{$comment->getIdCcontact()}">{$comment->getPseudo()}</a><br>{$comment->getEmail()}</td>
-      <td>{$comment->getText()|@nl2br}</td>
+  {% for $comments as $comment}
+    <tr id="row-{{ comment.IdComment }}">
+      <td><input type="checkbox" id="com-del-{{ comment.IdComment }}"></td>
+      <td><a href="/comments/show/{{ comment.IdComment }}">{{ comment.IdComment }}</a></td>
+      <td><a href="/{{ comment.type_full}/{{ comment.id_content}">{{ comment.type} {{ comment.id_content}</a></td>
+      <td>{{ comment.CreatedAt }}</td>
+      <td>{{ comment.Online }}</td>
+      <td>{{ comment.Pseudo }}<br>{{ comment.Email }}</td>
+      <td><a href="/membres/show/{{ comment.IdCcontact }}">{{ comment.Pseudo }}</a><br>{{ comment.Email }}</td>
+      <td>{{ comment.Text()|@nl2br}</td>
     </tr>
-  {/foreach}
+  {% endfor %}
   </tbody>
 </table>
 

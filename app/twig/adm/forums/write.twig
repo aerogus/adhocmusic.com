@@ -68,22 +68,22 @@ $(function() {
     <ol>
       <li>
         <label for="subject">Sujet</label>
-        <div class="infobulle error" id="error_subject"{if empty($error_subject)} style="display: none"{/if}>Vous devez saisir un sujet</div>
-        <input name="subject" id="subject" type="text" maxlength="80" value="{$subject|escape}" style="width: 360px;">
+        <div class="infobulle error" id="error_subject"{% if not error_subject}} style="display: none"{% endif %}>Vous devez saisir un sujet</div>
+        <input name="subject" id="subject" type="text" maxlength="80" value="{{ subject}" style="width: 360px;">
       </li>
       <li>
         <label for="text">Message</label>
-        <div class="infobulle error" id="error_text"{if empty($error_text)} style="display: none"{/if}>Vous devez écrire quelque chose !</div>
-        <textarea class="tinymce" name="text" id="text" rows="10" cols="80" style="width: 100%;">{$text|escape}</textarea>
+        <div class="infobulle error" id="error_text"{% if not error_text}} style="display: none"{% endif %}>Vous devez écrire quelque chose !</div>
+        <textarea class="tinymce" name="text" id="text" rows="10" cols="80" style="width: 100%;">{{ text}</textarea>
       </li>
       <li>
         <input id="form-forum-write-submit" name="form-forum-write-submit" type="submit" value="Envoyer" class="btn btn--primary" style="padding: 5px 0;">
       </li>
     </ol>
   </fieldset>
-  <input name="check" id="check" type="hidden" value="{$check|escape}">
-  <input name="id_forum" id="id_forum" type="hidden" value="{$id_forum|escape}">
-  <input name="id_thread" id="id_thread" type="hidden" value="{$id_thread|escape}">
+  <input name="check" id="check" type="hidden" value="{{ check}">
+  <input name="id_forum" id="id_forum" type="hidden" value="{{ id_forum}">
+  <input name="id_thread" id="id_thread" type="hidden" value="{{ id_thread}">
 </form>
 
   </div>

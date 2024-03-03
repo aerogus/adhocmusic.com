@@ -2,7 +2,7 @@
 
 <div class="box">
   <header>
-    <h1>{$groupe->getName()}</h1>
+    <h1>{{ groupe.Name }}</h1>
   </header>
   <div>
 
@@ -10,91 +10,91 @@
   <caption>Infos générales</caption>
   <tr>
     <th>Id</th>
-    <td>{$groupe->getId()}</td>
+    <td>{{ groupe.Id }}</td>
   </tr>
   <tr>
     <th>Etat</th>
-    <td>{$groupe->getEtat()}</td>
+    <td>{{ groupe.Etat }}</td>
   </tr>
   <tr>
     <th>Nom</th>
-    <td>{$groupe->getName()}</td>
+    <td>{{ groupe.Name }}</td>
   </tr>
   <tr>
     <th>Alias</th>
-    <td>{$groupe->getAlias()}</td>
+    <td>{{ groupe.Alias }}</td>
   </tr>
   <tr>
     <th>Style</th>
-    <td>{$groupe->getStyle()}</td>
+    <td>{{ groupe.Style }}</td>
   </tr>
   <tr>
     <th>Influences</th>
-    <td>{$groupe->getInfluences()}</td>
+    <td>{{ groupe.Influences }}</td>
   </tr>
   <tr>
     <th>Line-up</th>
-    <td>{$groupe->getLineup()}</td>
+    <td>{{ groupe.Lineup }}</td>
   </tr>
   <tr>
     <th>Mini-texte</th>
-    <td>{$groupe->getMiniText()|@nl2br}</td>
+    <td>{{ groupe.MiniText()|@nl2br}</td>
   </tr>
   <tr>
     <th>Texte</th>
-    <td>{$groupe->getText()}</td>
+    <td>{{ groupe.Text }}</td>
   </tr>
   <tr>
     <th>Site</th>
-    <td>{$groupe->getSite()}</td>
+    <td>{{ groupe.Site }}</td>
   </tr>
   <tr>
     <th>Facebook Page Id</th>
-    <td><a href="{$groupe->getFacebookPageUrl()}">{$groupe->getFacebookPageId()}</a></td>
+    <td><a href="{{ groupe.FacebookPageUrl }}">{{ groupe.FacebookPageId }}</a></td>
   </tr>
   <tr>
     <th>Création</th>
-    <td>{$groupe->getCreatedAt()}</td>
+    <td>{{ groupe.CreatedAt }}</td>
   </tr>
   <tr>
     <th>Modification</th>
-    <td>{$groupe->getModifiedAt()}</td>
+    <td>{{ groupe.ModifiedAt }}</td>
   </tr>
   <tr>
     <th>Photo</th>
-    <td>{if $groupe->getPhoto()}<img src="{$groupe->getPhoto()}" alt="">{/if}</td>
+    <td>{% if $groupe.Photo }}<img src="{{ groupe.Photo }}" alt="">{% endif %}</td>
   </tr>
   <tr>
     <th>Logo</th>
-    <td>{if $groupe->getLogo()}<img src="{$groupe->getLogo()}" alt="">{/if}</td>
+    <td>{% if $groupe.Logo }}<img src="{{ groupe.Logo }}" alt="">{% endif %}</td>
   </tr>
   <tr>
     <th>Mini Photo</th>
-    <td><img src="{$groupe->getMiniPhoto()}" alt=""></td>
+    <td><img src="{{ groupe.MiniPhoto }}" alt=""></td>
   </tr>
   <tr>
     <th>Le Mot AD'HOC</th>
-    <td>{$groupe->getComment()}</td>
+    <td>{{ groupe.Comment }}</td>
   </tr>
 </table>
 
 <table>
   <caption>Styles</caption>
-  {foreach from=$groupe->getStyles() item=style}
-  <tr><td>{$style->getName()}</td></tr>
-  {/foreach}
+  {% for from=$groupe.Styles() item=style}
+  <tr><td>{{ style.Name }}</td></tr>
+  {% endfor %}
 </table>
 
 <table>
   <caption>Membres</caption>
-  {foreach from=$groupe->getMembers() item=member}
+  {% for from=$groupe.Members() item=member}
   <tr>
-    <td>{$member->getFirstName()|escape} {$member->getLastName()|escape} (<a href="/adm/membres/{$member->getIdContact()}">{$member->getPseudo()|escape}</a>)</td>
-    <td><a class="btn btn--secondary" href="/adm/appartient-a?from=groupe&amp;action=delete&amp;groupe={$groupe->getId()}&amp;membre={$member->getIdContact()}">Supprimer</a></td>
+    <td>{{ member.FirstName }} {{ member.LastName }} (<a href="/adm/membres/{{ member.IdContact }}">{{ member.Pseudo }}</a>)</td>
+    <td><a class="btn btn--secondary" href="/adm/appartient-a?from=groupe&amp;action=delete&amp;groupe={{ groupe.Id }}&amp;membre={{ member.IdContact }}">Supprimer</a></td>
   </tr>
-  {/foreach}
+  {% endfor %}
 </table>
-<a class="btn btn--primary" href="/adm/appartient-a?from=groupe&amp;action=create&amp;groupe={$groupe->getId()}">Ajout Membre</a>
+<a class="btn btn--primary" href="/adm/appartient-a?from=groupe&amp;action=create&amp;groupe={{ groupe.Id }}">Ajout Membre</a>
 
   </div>
 </div>

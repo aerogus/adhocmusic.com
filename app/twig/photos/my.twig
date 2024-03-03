@@ -6,35 +6,35 @@
   </header>
   <div class="reset">
 
-{if !empty($create)}<p class="infobulle success">Photo ajoutée</p>{/if}
-{if !empty($edit)}<p class="infobulle success">Photo modifiée</p>{/if}
-{if !empty($delete)}<p class="infobulle success">Photo supprimée</p>{/if}
+{% if create %}<p class="infobulle success">Photo ajoutée</p>{% endif %}
+{% if edit %}<p class="infobulle success">Photo modifiée</p>{% endif %}
+{% if delete %}<p class="infobulle success">Photo supprimée</p>{% endif %}
 
 <div class="txtcenter mbs">
 <a href="/photos/create" class="btn btn--primary">Ajouter une photo</a>
 </div>
 
-{if $photos|@count == 0}
+{% if photos.length == 0 %}
 
 <p>Aucune photo</p>
 
-{else}
+{% else %}
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
 <div class="gallery">
-{foreach from=$photos item=photo}
+{% for photo in photos %}
   <div class="photo">
-    <a href="/photos/edit/{$photo->getIdPhoto()}?page={$page}" title="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
-      <img src="{$photo->getThumbUrl(320)}" alt="{$photo->getName()|escape}{if !empty($photo->getGroupe())} ({$photo->getGroupe()->getName()|escape}){/if}">
+    <a href="/photos/edit/{{ photo.id }}?page={{ page }}" title="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
+      <img src="{{ photo.ThumbUrl }}" alt="{{ photo.name }}{% if photo.groupe %} ({{ photo.Groupe.name }}){% endif %}">
     </a>
   </div>
-{/foreach}
+{% endfor %}
 </div>
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-{/if}
+{% endif %}
 
 <div class="txtcenter mbs">
   <a href="/photos/create" class="btn btn--primary">Ajouter une photo</a>

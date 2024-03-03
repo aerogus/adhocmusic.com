@@ -20,16 +20,16 @@
     </tr>
   </thead>
   <tbody>
-  {foreach from=$videos item=video}
+  {% for from=$videos item=video}
     <tr>
-      <td>{$video->getId()}<br/><img src="{$video->getThumbUrl(80)}" alt=""/><br/>{$video->getName()|escape}</td>
-      <td>{if ($video->getIdGroupe())}<a href="{$video->getGroupe()->getUrl()}">{$video->getGroupe()->getName()|escape}</a>{/if}</td>
-      <td>{if ($video->getIdEvent())}<a href="{$video->getEvent()->getUrl()}">{$video->getEvent()->getName()|escape}</a><br/>{$video->getEvent()->getDate()|date_format:'%d/%m/%Y'}{/if}</td>
-      <td>{if ($video->getIdLieu())}<a href="{$video->getLieu()->getUrl()}">{$video->getLieu()->getName()|escape}</a><br>{$video->getLieu()->getIdDepartement()} {$video->getLieu()->getCity()->getName()}{/if}</td>
-      <td>{$video->getCreatedAt()|date_format:'%d/%m/%Y'}</td>
-      <td>{$video->getModifiedAt()|date_format:'%d/%m/%Y'}</td>
+      <td>{{ video.Id }}<br/><img src="{{ video.ThumbUrl(80}}" alt=""/><br/>{{ video.Name }}</td>
+      <td>{% if ($video.IdGroupe()}}<a href="{{ video.Groupe().Url }}">{{ video.Groupe().Name }}</a>{% endif %}</td>
+      <td>{% if ($video.IdEvent()}}<a href="{{ video.Event().Url }}">{{ video.Event().Name }}</a><br/>{{ video.Event().Date()|date_format:'%d/%m/%Y'}{% endif %}</td>
+      <td>{% if ($video.IdLieu()}}<a href="{{ video.Lieu().Url }}">{{ video.Lieu().Name }}</a><br>{{ video.Lieu().IdDepartement }} {{ video.Lieu().City().Name }}{% endif %}</td>
+      <td>{{ video.CreatedAt()|date_format:'%d/%m/%Y'}</td>
+      <td>{{ video.ModifiedAt()|date_format:'%d/%m/%Y'}</td>
     </tr>
-  {/foreach}
+  {% endfor %}
   </tbody>
 </table>
 

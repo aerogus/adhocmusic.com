@@ -10,25 +10,25 @@
     <li>
       <label for="id_category">Catégorie</label>
       <select name="id_category">
-      {foreach from=$categories item=cat}
-        <option value="{$cat->getId()}"{if $faq->getIdCategory() === $cat->getId()} selected="selected"{/if}>{$cat->getName()}</option>
-      {/foreach}
+      {% for from=$categories item=cat}
+        <option value="{{ cat.Id }}"{% if $faq.IdCategory() === $cat.Id }} selected="selected"{% endif %}>{{ cat.Name }}</option>
+      {% endfor %}
       </select>
     </li>
     <li>
       <label for="question">Question</label>
-      <textarea id="question" name="question">{$faq->getQuestion()|escape}</textarea>
+      <textarea id="question" name="question">{{ faq.Question }}</textarea>
     </li>
     <li>
       <label for="answer">Réponse</label>
-      <textarea id="answer" name="answer">{$faq->getAnswer()|escape}</textarea>
+      <textarea id="answer" name="answer">{{ faq.Answer }}</textarea>
     </li>
     <li>
       <label for="online">Afficher</label>
-      <input class="switch" type="checkbox" id="online" name="online"{if $faq->getOnline()} checked="checked"{/if}>
+      <input class="switch" type="checkbox" id="online" name="online"{% if $faq.Online }} checked="checked"{% endif %}>
     </li>
   </ul>
-  <input type="hidden" name="id_faq" value="{$faq->getId()}">
+  <input type="hidden" name="id_faq" value="{{ faq.Id }}">
   <input class="btn btn--primary" id="form-faq-edit-submit" name="form-faq-edit-submit" type="submit">
   </form>
   </div>

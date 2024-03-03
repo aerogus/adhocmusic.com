@@ -10,29 +10,29 @@
       <a href="/videos/create" class="btn btn--primary">Ajouter une vidéo</a>
     </div>
 
-{if $nb_items > 0}
+{% if $nb_items > 0}
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
 <div class="grid-6-small-2 has-gutter">
-  {foreach $videos as $video}
+  {% for $videos as $video}
   <div class="video">
-    <div class="thumb" style="background-image: url({$video->getThumbUrl(320)})">
-      <a class="playbtn" href="{$video->getEditUrl()}">▶</a>
+    <div class="thumb" style="background-image: url({{ video.ThumbUrl(320}})">
+      <a class="playbtn" href="{{ video.EditUrl }}">▶</a>
     </div>
-    <p class="title"><a href="{$video->getEditUrl()}">{$video->getName()|escape}</a></p>
-    <p class="subtitle">{if !empty($video->getGroupe())}{$video->getGroupe()->getName()|escape}{/if}</p>
+    <p class="title"><a href="{{ video.EditUrl }}">{{ video.Name }}</a></p>
+    <p class="subtitle">{% if video.Groupe()}}{{ video.Groupe().Name }}{% endif %}</p>
   </div>
-  {/foreach}
+  {% endfor %}
 </div>
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
-{else}
+{% else %}
 
 <p>Aucune vidéo</p>
 
-{/if}
+{% endif %}
 
   <div class="txtcenter mts">
     <a href="/videos/create" class="btn btn--primary">Ajouter une vidéo</a>

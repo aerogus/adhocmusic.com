@@ -6,11 +6,11 @@
   </header>
   <div>
 
-    {if !empty($unknown_audio)}
+    {% if unknown_audio}}
 
     <p class="infobulle error">Cet audio est introuvable !</p>
 
-    {else}
+    {% else %}
 
     <form id="form-audio-delete" name="form-audio-delete" method="post" action="/audios/delete">
       <section class="grid-4">
@@ -18,75 +18,75 @@
           <label for="mp3">Écouter</label>
         </div>
         <div class="col-3">
-          <audio controls id="mp3" src="{$audio->getDirectMp3Url()}"></audio>
+          <audio controls id="mp3" src="{{ audio.DirectMp3Url }}"></audio>
         </div>
         <div>
           <label for="name">Nom</label>
         </div>
         <div class="col-3">
-          <span id="name">{$audio->getName()|escape}</span>
+          <span id="name">{{ audio.Name }}</span>
         </div>
-        {if !empty($groupe)}
+        {% if groupe}}
         <div>
           <label for="groupe">Groupe</label>
         </div>
         <div class="col-3">
-          <span id="groupe">{$groupe->getName()|escape}</span>
+          <span id="groupe">{{ groupe.Name }}</span>
         </div>
-        {/if}
-        {if !empty($event)}
+        {% endif %}
+        {% if event}}
         <div>
           <label for="event">Événement</label>
         </div>
         <div class="col-3">
-          <span id="event">{$event->getDate()|date_format:"%d/%m/%Y %h:%i"} - {$event->getName()|escape}</span>
+          <span id="event">{{ event.Date()|date_format:"%d/%m/%Y %h:%i"} - {{ event.Name }}</span>
         </div>
-        {/if}
-        {if !empty($lieu)}
+        {% endif %}
+        {% if lieu}}
         <div>
           <label for="lieu">Lieu</label>
         </div>
         <div class="col-3">
-          <span id="lieu">{$lieu->getIdDepartement()} - {$lieu->getName()|escape}</span>
+          <span id="lieu">{{ lieu.IdDepartement }} - {{ lieu.Name }}</span>
         </div>
-        {/if}
+        {% endif %}
         <div>
           <label for="online">Afficher</label>
         </div>
         <div class="col-3">
-          <span id="online">{$audio->getOnline()}</span>
+          <span id="online">{{ audio.Online }}</span>
         </div>
-        {if !empty($membre)}
+        {% if membre}}
         <div>
           <label for="created_at">Envoyé le</label>
         </div>
         <div class="col-3">
-          <span id="created_at">{$audio->getCreatedAt()|date_format:"%d/%m/%Y à %H:%M"} par <a href="{$membre->getUrl()}">{$membre->getPseudo()|escape}</a></span>
+          <span id="created_at">{{ audio.CreatedAt()|date_format:"%d/%m/%Y à %H:%M"} par <a href="{{ membre.Url }}">{{ membre.Pseudo }}</a></span>
         </div>
-        {/if}
-        {if $audio->getModifiedAt()}
+        {% endif %}
+        {% if $audio.ModifiedAt }}
         <div>
           <label for="modified_at">Modifié le</label>
         </div>
         <div class="col-3">
-          <span id="modified_at">{$audio->getModifiedAt()|date_format:"%d/%m/%Y à %H:%M"}</span>
+          <span id="modified_at">{{ audio.ModifiedAt()|date_format:"%d/%m/%Y à %H:%M"}</span>
         </div>
-        {/if}
+        {% endif %}
         <div>
           <label for="mp3">Ecouter</label>
         </div>
         <div class="col-3">
-          <audio id="mp3" src="{$audio->getDirectMp3Url()}"></audio>
+          <audio id="mp3" src="{{ audio.DirectMp3Url }}"></audio>
         </div>
         <div></div>
         <div class="col-3">
           <input id="form-audio-delete-submit" name="form-audio-delete-submit" class="btn btn--primary w100" type="submit" value="Supprimer">
-          <input type="hidden" name="id" value="{$audio->getId()|escape}">
+          <input type="hidden" name="id" value="{{ audio.Id }}">
         </div>
       </section>
     </form>
 
-    {/if}
+    {% endif %}
 
   </div>
 </div>

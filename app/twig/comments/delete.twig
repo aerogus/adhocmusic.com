@@ -11,12 +11,12 @@
   <ol>
     <li>
       <label for="name">Nom</label>
-      <textarea id="text" name="text" readonly="readonly">{$comment->getText()|escape}</textarea>
+      <textarea id="text" name="text" readonly="readonly">{{ comment.Text }}</textarea>
     </li>
   </ol>
   </fieldset>
   <input id="form-comment-delete-submit" name="form-comment-delete-submit" type="submit" value="Supprimer">
-  <input type="hidden" name="id" value="{$comment->getId()}">
+  <input type="hidden" name="id" value="{{ comment.Id }}">
 </form>
 
   </div>

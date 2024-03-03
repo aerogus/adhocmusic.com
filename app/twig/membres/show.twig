@@ -1,56 +1,56 @@
 {% include 'common/header.twig' %}
 
-{if !empty($unknown_member)}
+{% if unknown_member}}
 
 <p class="infobulle error">Ce membre est introuvable</p>
 
-{else}
+{% else %}
 
 <div class="box">
   <header>
-    <h1>Profil de {$membre->getPseudo()}</h1>
+    <h1>Profil de {{ membre.Pseudo }}</h1>
   </header>
   <div class="grid-3">
     <div class="col-1 profile">
-      {if $membre->getAvatarUrl()}
-      <img src="{$membre->getAvatarUrl()}" alt="{$membre->getPseudo()|escape}">
-      {/if}
-      <strong>{$membre->getPseudo()|escape}</strong>
-      {if $membre->getSite()}
-      <a href="{$membre->getSite()}">{$membre->getSite()}</a>
-      {/if}
-      <a class="btn btn--primary" href="/messagerie/write?pseudo={$membre->getPseudo()|escape}">Lui écrire</a>
+      {% if $membre.AvatarUrl }}
+      <img src="{{ membre.AvatarUrl }}" alt="{{ membre.Pseudo }}">
+      {% endif %}
+      <strong>{{ membre.Pseudo }}</strong>
+      {% if $membre.Site }}
+      <a href="{{ membre.Site }}">{{ membre.Site }}</a>
+      {% endif %}
+      <a class="btn btn--primary" href="/messagerie/write?pseudo={{ membre.Pseudo }}">Lui écrire</a>
     </div>
     <div class="col-2">
-      {$membre->getText()}
+      {{ membre.Text }}
     </div>
   </div>
 </div>
 
-{if $groupes|@count > 0}
+{% if $groupes.length > 0}
 <div class="box">
   <header>
     <h2>Ses groupes</h2>
   </header>
-  {if !count($groupes)}
+  {% if !count($groupes}}
   <div>
-    <p>{$membre->getPseudo()} ne fait partie d'aucun groupe.</p>
+    <p>{{ membre.Pseudo }} ne fait partie d'aucun groupe.</p>
   </div>
-  {else}
+  {% else %}
   <div class="reset grid-8-small-4 has-gutter">
-    {foreach from=$groupes item=groupe}
+    {% for from=$groupes item=groupe}
     <div class="grpitem">
-      <a href="{$groupe->getUrl()}">
-        <img src="{$groupe->getMiniPhoto()}" alt="" />
-        <p>{$groupe->getName()}</p>
+      <a href="{{ groupe.Url }}">
+        <img src="{{ groupe.MiniPhoto }}" alt="" />
+        <p>{{ groupe.Name }}</p>
       </a>
     </div>
-    {/foreach}
+    {% endfor %}
   </div>
-  {/if}
+  {% endif %}
 </div>
-{/if}
+{% endif %}
 
-{/if} {* test unknown membre *}
+{% endif %} {# test unknown membre #}
 
 {% include 'common/footer.twig' %}

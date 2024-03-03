@@ -1,15 +1,15 @@
-  {foreach from=$membres key=cpt item=membre}
+  {% for from=$membres key=cpt item=membre}
   <tbody>
     <tr>
-      <td>{$membre->getIdContact()|escape}</td>
-      <td><a href="/adm/membres/{$membre->getIdContact()}">{$membre->getPseudo()|escape}</a></td>
-      <td>{$membre->getLastName()|escape}</td>
-      <td>{$membre->getFirstName()|escape}</td>
-      <td>{$membre->getEmail()|escape}</td>
-      <td>{$membre->getCreatedAt()|date_format:'%d/%m/%y'}</td>
-      <td>{$membre->getModifiedAt()|date_format:'%d/%m/%y'}</td>
-      <td>{$membre->getVisitedAt()|date_format:'%d/%m/%y'}</td>
-      <td>{$membre->getLastNl()|date_format:'%d/%m/%y'}</td>
+      <td>{{ membre.IdContact }}</td>
+      <td><a href="/adm/membres/{{ membre.IdContact }}">{{ membre.Pseudo }}</a></td>
+      <td>{{ membre.LastName }}</td>
+      <td>{{ membre.FirstName }}</td>
+      <td>{{ membre.Email }}</td>
+      <td>{{ membre.CreatedAt()|date_format:'%d/%m/%y'}</td>
+      <td>{{ membre.ModifiedAt()|date_format:'%d/%m/%y'}</td>
+      <td>{{ membre.VisitedAt()|date_format:'%d/%m/%y'}</td>
+      <td>{{ membre.LastNl()|date_format:'%d/%m/%y'}</td>
     </tr>
   </tbody>
-  {/foreach}
+  {% endfor %}

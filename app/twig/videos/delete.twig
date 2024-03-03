@@ -1,10 +1,10 @@
 {% include 'common/header.twig' %}
 
-{if !empty($unknown_video)}
+{% if unknown_video}}
 
 <p class="infobulle error">Cette vidéo est introuvable !</p>
 
-{else}
+{% else %}
 
 <div class="box">
   <header>
@@ -17,73 +17,73 @@
         <label for="player">Visualiser</label>
       </div>
       <div class="col-3 mbs">
-        <span id="player">{$video->getPlayer()}</span>
+        <span id="player">{{ video.Player }}</span>
       </div>
       <div>
         <label for="name">Nom</label>
       </div>
       <div class="col-3 mbs">
-        <span id="name">{$video->getName()|escape}</span>
+        <span id="name">{{ video.Name }}</span>
       </div>
       <div>
         <label for="thumb">Miniature</label>
       </div>
       <div class="col-3 mbs">
-        <span id="thumb"><img src="{$video->getThumbUrl(320)}" alt=""></span>
+        <span id="thumb"><img src="{{ video.ThumbUrl(320}}" alt=""></span>
       </div>
       <div>
         <label for="id_host">Hébergeur</label>
       </div>
       <div class="col-3 mbs">
-        <span id="id_host">{$video->getHost()->getName()}</span>
+        <span id="id_host">{{ video.Host().Name }}</span>
       </div>
       <div>
         <label for="reference">Référence</label>
       </div>
       <div class="col-3 mbs">
-        <span id="reference">{$video->getReference()}</span>
+        <span id="reference">{{ video.Reference }}</span>
       </div>
-      {if !empty($groupe)}
+      {% if groupe}}
       <div>
         <label for="groupe">Groupe</label>
       </div>
       <div class="col-3 mbs">
-        <span id="groupe">{$groupe->getName()|escape}</span>
+        <span id="groupe">{{ groupe.Name }}</span>
       </div>
-      {/if}
-      {if !empty($event)}
+      {% endif %}
+      {% if event}}
       <div>
         <label for="event">Événement</label>
       </div>
       <div class="col-3 mbs">
-        <span id="event">{$event->getDate()} - {$event->getName()|escape}</span>
+        <span id="event">{{ event.Date }} - {{ event.Name }}</span>
       </div>
-      {/if}
-      {if !empty($lieu)}
+      {% endif %}
+      {% if lieu}}
       <div>
         <label for="lieu">Lieu</label>
       </div>
       <div class="col-3 mbs">
-        <span id="lieu">{$lieu->getName()|escape}</span>
+        <span id="lieu">{{ lieu.Name }}</span>
       </div>
-      {/if}
+      {% endif %}
       <div>
         <label for="online">Afficher</label>
       </div>
       <div class="col-3 mbs">
-        <span id="online">{$video->getOnline()}</span>
+        <span id="online">{{ video.Online }}</span>
       </div>
       <div></div>
       <div class="col-3">
         <input id="form-video-delete-submit" name="form-video-delete-submit" class="btn btn--primary" type="submit" value="Confirmer la suppression">
-        <input type="hidden" name="id" value="{$video->getId()|escape}">
+        <input type="hidden" name="id" value="{{ video.Id }}">
       </div>
     </section>
   </form>
   </div>
 </div>
 
-{/if}
+{% endif %}
 
 {% include 'common/footer.twig' %}
 

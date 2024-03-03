@@ -18,14 +18,14 @@
     </tr>
   </thead>
   <tbody>
-    {foreach from=$subscriptions item=subscription}
+    {% for from=$subscriptions item=subscription}
     <tr>
-      <td>{$subscription->getSubscribedAt()}</td>
-      <td>{$subscription->getCreatedAt()}</td>
-      <td>{$subscription->getFirstName()}</td>
-      <td>{$subscription->getLastName()}</td>
+      <td>{{ subscription.SubscribedAt }}</td>
+      <td>{{ subscription.CreatedAt }}</td>
+      <td>{{ subscription.FirstName }}</td>
+      <td>{{ subscription.LastName }}</td>
     </tr>
-    {/foreach}
+    {% endfor %}
   </tbody>
 </table>
 

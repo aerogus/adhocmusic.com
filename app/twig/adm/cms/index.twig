@@ -6,9 +6,9 @@
   </header>
   <div>
 
-{if !empty($create)}<p class="infobulle success">Page ajoutée</p>{/if}
-{if !empty($edit)}<p class="infobulle success">Page modifiée</p>{/if}
-{if !empty($delete)}<p class="infobulle success">Page supprimée</p>{/if}
+{% if create}}<p class="infobulle success">Page ajoutée</p>{% endif %}
+{% if edit}}<p class="infobulle success">Page modifiée</p>{% endif %}
+{% if delete}}<p class="infobulle success">Page supprimée</p>{% endif %}
 
 <table class="table table--zebra">
   <thead>
@@ -20,14 +20,14 @@
     </tr>
   </thead>
   <tbody>
-    {foreach from=$cmss item=cms}
+    {% for from=$cmss item=cms}
     <tr>
-      <td>{$cms->getIdCms()|escape}</td>
-      <td><a href="/adm/cms/edit/{$cms->getIdCms()|escape}">{$cms->getAlias()|escape}</a></td>
-      <td>{$cms->getTitle()|escape}</td>
-      <td>{$cms->getOnline()|display_on_off_icon}</td>
+      <td>{{ cms.IdCms }}</td>
+      <td><a href="/adm/cms/edit/{{ cms.IdCms }}">{{ cms.Alias }}</a></td>
+      <td>{{ cms.Title }}</td>
+      <td>{{ cms.Online()|display_on_off_icon}</td>
     </tr>
-    {/foreach}
+    {% endfor %}
   </tbody>
 </table>
 

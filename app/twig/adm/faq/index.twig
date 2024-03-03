@@ -5,9 +5,9 @@
     <h1>Foire aux questions</h1>
   </header>
   <div>
-  {if !empty($create)}<p class="infobulle success">Question ajoutée</p>{/if}
-  {if !empty($edit)}<p class="infobulle success">Question modifiée</p>{/if}
-  {if !empty($delete)}<p class="infobulle success">Question supprimée</p>{/if}
+  {% if create}}<p class="infobulle success">Question ajoutée</p>{% endif %}
+  {% if edit}}<p class="infobulle success">Question modifiée</p>{% endif %}
+  {% if delete}}<p class="infobulle success">Question supprimée</p>{% endif %}
   <table class="table table--zebra">
     <thead>
       <tr>
@@ -18,14 +18,14 @@
       </tr>
     </thead>
     <tbody>
-      {foreach from=$faq item=f}
+      {% for from=$faq item=f}
       <tr>
-        <td>{$f->getId()}</td>
-        <td>{$f->getCategory()->getName()}</td>
-        <td><a href="/adm/faq/edit/{$f->getId()|escape}">{$f->getQuestion()|escape}</a></td>
-        <td>{$f->getOnline()}</td>
+        <td>{{ f.Id }}</td>
+        <td>{{ f.Category().Name }}</td>
+        <td><a href="/adm/faq/edit/{{ f.Id }}">{{ f.Question }}</a></td>
+        <td>{{ f.Online }}</td>
       </tr>
-      {/foreach}
+      {% endfor %}
     </tbody>
   </table>
   <a class="btn btn--primary" href="/adm/faq/create">Ajouter une question</a>

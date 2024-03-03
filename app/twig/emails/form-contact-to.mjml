@@ -1,6 +1,6 @@
 <mjml>
   <mj-head>
-    <mj-title>{$subject|escape}</mj-title>
+    <mj-title>{{ subject}</mj-title>
   </mj-head>
   <mj-body background-color="#fff">
     <mj-section background-color="#292933" padding-bottom="0px" padding-top="0">
@@ -15,11 +15,11 @@
         <mj-text color="#292933" font-size="20px" font-weight="700">Réception d'un message</mj-text>
         <mj-text font-size="16px" color="#292933">
           <p>Un message a été reçu du formulaire de contact du site AD'HOC:</p>
-          <p>De: {$name|escape}</p>
-          <p>E-mail: {$email|escape}</p>
-          <p>Sujet: {$subject|escape}</p>
-          <p>Texte: {$text|escape|@nl2br}</p>
-          <p>Newsletter: {if ($mailing)}oui{else}non{/if}</p>
+          <p>De: {{ name}</p>
+          <p>E-mail: {{ email}</p>
+          <p>Sujet: {{ subject}</p>
+          <p>Texte: {{ text|@nl2br}</p>
+          <p>Newsletter: {% if ($mailing}}oui{% else %}non{% endif %}</p>
         </mj-text>
       </mj-column>
     </mj-section>

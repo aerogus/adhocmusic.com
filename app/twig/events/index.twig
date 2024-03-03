@@ -18,13 +18,13 @@
     {% else %}
     <div>
 
-{% for day,events_of_the_day in events %}
+{% for day, events_of_the_day in events %}
 <div id="day-{{ day }}" class="events_of_the_day">
 <h3>{{ day }}</h3>
 {% for event in events_of_the_day %}
 <div class="event grid-3-small-1">
   <div class="event_header col-1">
-    <div class="event_date">{{ event.date }}</div>
+    <div class="event_date">{{ event.date }}</div>
     <div class="event_lieu"><a href="/lieux/{{ event.lieu.id }}" title="{{ event.lieu.name }}"><strong>{{ event.lieu.name }}</strong></a><br>{{ event.lieu.idDepartement }} {{ event.lieu.city.name }}</div>
   </div>
   <div class="event_content col-2">

@@ -5,11 +5,11 @@
     <h1>Lieux</h1>
   </header>
   <div>
-  {foreach from=$regions item=region}
-    <h2>{$region->getName()}</h2>
-    {foreach from=$departements[$region->getIdRegion()] item=departement}
-    <h3>{$departement->getIdDepartement()} - {$departement->getName()}</h3>
-    {if $lieux[$region->getIdRegion()][$departement->getIdDepartement()]|@count > 0}
+  {% for from=$regions item=region}
+    <h2>{{ region.Name }}</h2>
+    {% for from=$departements[$region.IdRegion()] item=departement}
+    <h3>{{ departement.IdDepartement }} - {{ departement.Name }}</h3>
+    {% if $lieux[$region.IdRegion()][$departement.IdDepartement()].length > 0}
     <table class="table table--zebra">
       <thead>
         <tr>
@@ -20,21 +20,21 @@
         </tr>
       </thead>
       <tbody>
-        {foreach from=$lieux[$region->getIdRegion()][$departement->getIdDepartement()] item=lieu}
+        {% for from=$lieux[$region.IdRegion()][$departement.IdDepartement()] item=lieu}
         <tr>
-          <td><a href="{$lieu->getUrl()}">{$lieu->getName()}</a></td>
-          <td>{$lieu->getCity()->getCp()}</td>
-          <td>{$lieu->getCity()->getName()}</td>
-          <td>{$lieu->getAddress()}</td>
+          <td><a href="{{ lieu.Url }}">{{ lieu.Name }}</a></td>
+          <td>{{ lieu.City().Cp }}</td>
+          <td>{{ lieu.City().Name }}</td>
+          <td>{{ lieu.Address }}</td>
         </tr>
-        {/foreach}
+        {% endfor %}
       </tbody>
     </table>
-    {else}
+    {% else %}
     <p>Pas de lieu référencé dans ce département</p>
-    {/if}
-    {/foreach}
-  {/foreach}
+    {% endif %}
+    {% endfor %}
+  {% endfor %}
   </div>
 </div>
 
