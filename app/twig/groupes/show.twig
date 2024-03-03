@@ -21,22 +21,22 @@
         {% if groupe.style %}
         <p><strong>Style</strong><br>{{ groupe.style }}</p>
         {% endif %}
-        {% if $groupe.Influences }}
-        <p><strong>Influences</strong><br>{{ groupe.Influences }}</p>
+        {% if groupe.influences %}
+        <p><strong>Influences</strong><br>{{ groupe.influences }}</p>
         {% endif %}
-        {% if $groupe.Lineup }}
-        <p><strong>Membres</strong><br>{{ groupe.Lineup()|@nl2br}</p>
+        {% if groupe.lineup %}
+        <p><strong>Membres</strong><br>{{ groupe.lineup }}</p>
         {% endif %}
-        {% if $groupe.Site() || $groupe.FacebookPageId() || $groupe.TwitterId }}
+        {% if groupe.site or groupe.facebookPageId or groupe.twitterId %}
         <p><strong>Liens</strong></p>
         <ul class="social-share-box">
-          {% if $groupe.Site }}
-          <li><a href="{{ groupe.Site }}" class="website" title="Site"><span>Site</span></a></li>
+          {% if groupe.site %}
+          <li><a href="{{ groupe.site }}" class="website" title="Site"><span>Site</span></a></li>
           {% endif %}
-          {% if $groupe.FacebookPageId }}
-          <li><a href="{{ groupe.FacebookPageUrl }}" class="facebook" title="Facebook"><span>Facebook</span></a></li>
+          {% if groupe.facebookPageId %}
+          <li><a href="{{ groupe.facebookPageUrl }}" class="facebook" title="Facebook"><span>Facebook</span></a></li>
           {% endif %}
-          {% if $groupe.TwitterId }}
+          {% if groupe.TwitterId %}
           <li><a href="{{ groupe.TwitterUrl }}" class="twitter" title="Twitter"><span>Twitter</span></a></li>
           {% endif %}
         </ul>
@@ -44,22 +44,22 @@
       </div>
     </div>
 
-    {% if $videos.length > 0}
+    {% if videos.length > 0 %}
     <div class="box">
       <header>
         <h2>Vidéos</h2>
       </header>
       <div class="reset grid-2 has-gutter">
-        {% for $videos as $video}
+        {% for video in videos %}
         <div class="video">
-          <div class="thumb" style="background-image: url({{ video.ThumbUrl(320}})">
-            <a class="playbtn" href="{{ video.Url }}" title="Regarder la vidéo {{ video.Name }}">▶</a>
+          <div class="thumb" style="background-image: url({{ video.thumbUrl })">
+            <a class="playbtn" href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">▶</a>
           </div>
-          <p class="title"><a href="{{ video.Url }}" title="Regarder la vidéo {{ video.Name }}">{{ video.Name }}</a></p>
+          <p class="title"><a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
           <p class="subtitle">
-            {% if video.Event()}}<a href="{{ video.Event().Url }}" title="Aller à la page de l'événement {{ video.Event().Name }}">{{ video.Event().Name }}
+            {% if video.event %}<a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.name }}
             <br/>
-            {{ video.Event().Date()|date_format:"%a %e %B %Y"}</a>{% endif %}
+            {{ video.event.date }}</a>{% endif %}
           </p>
         </div>
         {% endfor %}
@@ -67,15 +67,15 @@
     </div>
     {% endif %}
 
-    {% if $audios.length > 0}
+    {% if audios.length > 0 %}
     <div class="box">
       <header>
         <h2>En Écoute</h2>
       </header>
       <div>  
       <ul>
-        {% for $audios as $audio}
-        <li><a href="{{ audio.Url }}">{{ audio.Name }}</a><br><audio controls="controls" src="{{ audio.DirectMp3Url }}" style="background-color:#000"></audio></li>
+        {% for audio in audios %}
+        <li><a href="{{ audio.url }}">{{ audio.name }}</a><br><audio controls="controls" src="{{ audio.directMp3Url }}" style="background-color:#000"></audio></li>
         {% endfor %}
       </ul>
       </div>
@@ -90,14 +90,14 @@
         <h2>Présentation</h2>
       </header>
       <div>
-        {% if $groupe.Photo }}
-        <img src="{{ groupe.Photo }}" alt="{{ groupe.Name }}" title="{{ groupe.Name }}" style="display:block;margin:0 auto">
+        {% if groupe.photo %}
+        <img src="{{ groupe.photo }}" alt="{{ groupe.name }}" title="{{ groupe.name }}" style="display:block;margin:0 auto">
         {% endif %}
-        <p style="text-align:justify">{{ groupe.Text()|nl2br}</p>
+        <p style="text-align:justify">{{ groupe.text }}</p>
       </div>
     </div>
 
-    {% if $f_events.length > 0}
+    {% if f_events.length > 0 %}
     <div class="box">
       <header>
         <h2>Évènements à venir</h2>
@@ -105,14 +105,14 @@
       <div>
         <ul>
           {% for $f_events as $event}
-          <li><a href="{{ event.Url }}">{{ event.Date()|date_format:'%d/%m/%Y %H:%M'} - {{ event.Lieu().Name }}</a></li>
+          <li><a href="{{ event.url }}">{{ event.date }} - {{ event.lieu.name }}</a></li>
           {% endfor %}
         </ul>
       </div>
     </div>
     {% endif %}
 
-    {% if $p_events.length > 0}
+    {% if p_events.length > 0 %}
     <div class="box">
       <header>
         <h2>Évènements passés</h2>
@@ -120,7 +120,7 @@
       <div>
         <ul>
           {% for $p_events as $event}
-          <li><a href="{{ event.Url }}">{{ event.Date()|date_format:'%d/%m/%Y %H:%M'} - {{ event.Lieu().Name }}</a></li>
+          <li><a href="{{ event.url }}">{{ event.date }} - {{ event.lieu.name }}</a></li>
           {% endfor %}
         </ul>
       </div>
@@ -131,16 +131,16 @@
 
 </div>
 
-{% if photos}}
+{% if photos %}
 <div class="box">
   <header>
     <h2>Photos</h2>
   </header>
   <div class="reset gallery">
-  {% for from=$photos item=photo}
+  {% for photo in photos %}
     <div class="photo">
-      <a href="{{ photo.ThumbUrl(1000}}" data-at-1000="{{ photo.ThumbUrl(1000}}" title="{{ photo.Name }}{% if photo.Groupe()}} ({{ photo.Groupe().Name }}){% endif %} 📷 {{ photo.Credits }}">
-        <img data-id-photo="{{ photo.IdPhoto }}" src="{{ photo.ThumbUrl(320}}" alt="{{ photo.Name }}{% if photo.Groupe()}} ({{ photo.Groupe().Name }}){% endif %}">
+      <a href="{{ photo.thumbUrl }}" data-at-1000="{{ photo.thumbUrl }}" title="{{ photo.name }}{% if photo.groupe }} ({{ photo.groupe.name }}){% endif %} 📷 {{ photo.credits }}">
+        <img data-id-photo="{{ photo.id }}" src="{{ photo.thumbUrl }}" alt="{{ photo.name }}{% if photo.groupe }} ({{ photo.groupe.name }}){% endif %}">
       </a>
     </div>
   {% endfor %}
