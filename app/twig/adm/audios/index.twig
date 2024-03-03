@@ -22,10 +22,10 @@
   <tbody>
   {% for from=$audios item=audio}
     <tr>
-      <td>{{ audio.Id }}<br/>{{ audio.Name }}</td>
-      <td>{% if ($audio.IdGroupe()}}<a href="{{ audio.Groupe().Url }}">{{ audio.Groupe().Name }}</a>{% endif %}</td>
-      <td>{% if ($audio.IdEvent()}}<a href="{{ audio.Event().Url }}">{{ audio.Event().Name }}</a><br/>{{ audio.Event().Date()|date_format:'%d/%m/%Y'}{% endif %}</td>
-      <td>{% if ($audio.IdLieu()}}<a href="{{ audio.Lieu().Url }}">{{ audio.Lieu().Name }}</a><br>{{ audio.Lieu().IdDepartement }} {{ audio.Lieu().City().Name }}{% endif %}</td>
+      <td>{{ audio.id }}<br/>{{ audio.name }}</td>
+      <td>{% if ($audio.idGroupe()}}<a href="{{ audio.Groupe().Url }}">{{ audio.Groupe().name }}</a>{% endif %}</td>
+      <td>{% if ($audio.idEvent()}}<a href="{{ audio.Event().Url }}">{{ audio.Event().name }}</a><br/>{{ audio.Event().Date()|date_format:'%d/%m/%Y'}{% endif %}</td>
+      <td>{% if ($audio.idLieu()}}<a href="{{ audio.Lieu().Url }}">{{ audio.Lieu().name }}</a><br>{{ audio.Lieu().idDepartement }} {{ audio.Lieu().city.name }}{% endif %}</td>
       <td>{{ audio.CreatedAt()|date_format:'%d/%m/%Y'}</td>
       <td>{{ audio.ModifiedAt()|date_format:'%d/%m/%Y'}</td>
     </tr>

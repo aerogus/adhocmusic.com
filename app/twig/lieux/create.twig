@@ -23,7 +23,7 @@
       <select id="id_type" name="id_type" class="w100">
         <option value="0">--------</option>
         {% for from=$lieu_types item=lieu_type}
-        <option value="{{ lieu_type.Id }}">{{ lieu_type.Name }}</option>
+        <option value="{{ lieu_type.id }}">{{ lieu_type.name }}</option>
         {% endfor %}
       </select>
     </div>

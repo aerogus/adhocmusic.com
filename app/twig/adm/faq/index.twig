@@ -20,9 +20,9 @@
     <tbody>
       {% for from=$faq item=f}
       <tr>
-        <td>{{ f.Id }}</td>
-        <td>{{ f.Category().Name }}</td>
-        <td><a href="/adm/faq/edit/{{ f.Id }}">{{ f.Question }}</a></td>
+        <td>{{ f.id }}</td>
+        <td>{{ f.Category().name }}</td>
+        <td><a href="/adm/faq/edit/{{ f.id }}">{{ f.Question }}</a></td>
         <td>{{ f.Online }}</td>
       </tr>
       {% endfor %}

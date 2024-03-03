@@ -18,9 +18,9 @@
       <tbody>
         {% for from=$newsletters item=newsletter}
         <tr>
-          <td>{{ newsletter.IdNewsletter }}</td>
-          <td><a href="/newsletters/{{ newsletter.IdNewsletter }}" target="_blank">[voir]</a></td>
-          <td><a href="/adm/newsletter/edit/{{ newsletter.IdNewsletter }}">{{ newsletter.Title }}</a></td>
+          <td>{{ newsletter.idNewsletter }}</td>
+          <td><a href="/newsletters/{{ newsletter.idNewsletter }}" target="_blank">[voir]</a></td>
+          <td><a href="/adm/newsletter/edit/{{ newsletter.idNewsletter }}">{{ newsletter.Title }}</a></td>
         </tr>
         {% endfor %}
       </tbody>

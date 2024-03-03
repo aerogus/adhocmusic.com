@@ -8,18 +8,18 @@
 
 <div class="box">
   <header>
-    <h1>{{ structure.Name }}</h1>
+    <h1>{{ structure.name }}</h1>
   </header>
   <div>
 
 <table>
   <tr>
     <th>Id</th>
-    <td>{{ structure.IdStructure }}</td>
+    <td>{{ structure.idStructure }}</td>
   </tr>
   <tr>
     <th>Nom</th>
-    <td>{{ structure.Name }}</td>
+    <td>{{ structure.name }}</td>
   </tr>
   <tr>
     <th>Imagette</th>
@@ -30,7 +30,7 @@
     <td>
       <ul>
       {% for $events as $event}
-        <li><a href="{{ event.Url }}">{{ event.Date }} : {{ event.Name }}</a></li>
+        <li><a href="{{ event.Url }}">{{ event.Date }} : {{ event.name }}</a></li>
       {% endfor %}
       </ul>
     </td>

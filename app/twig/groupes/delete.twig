@@ -16,7 +16,7 @@
 
 {% else %}
 
-<p>Confirmer la suppression du groupe {{ groupe.Name }} ?</p>
+<p>Confirmer la suppression du groupe {{ groupe.name }} ?</p>
 
 <ul>
   <li>ceci effacera définitivement un groupe de la base + la photo, mini photo, logo</li>
@@ -27,7 +27,7 @@
 </ul>
 
 <form id="form-groupe-delete" name="form-groupe-delete" action="/groupes/delete" method="post">
-  <input type="hidden" name="id" value="{{ groupe.Id }}">
+  <input type="hidden" name="id" value="{{ groupe.id }}">
   <input class="btn btn--primary" id="form-groupe-delete-submit" name="form-groupe-delete-submit" type="submit" value="OK">
 </form>
 

@@ -19,7 +19,7 @@
     </div>
     <div class="col-3 mbs">
       <div class="infobulle error" id="error_name"{% if not error_name}} style="display: none"{% endif %}>Vous devez saisir le nom du lieu</div>
-      <input id="name" name="name" type="text" class="w100" value="{{ lieu.Name }}">
+      <input id="name" name="name" type="text" class="w100" value="{{ lieu.name }}">
     </div>
     <div>
       <label for="id_type">Type (*)</label>
@@ -29,7 +29,7 @@
       <select id="id_type" name="id_type">
         <option value="0">--------</option>
         {% for from=$lieu_types item=lieu_type}
-        <option value="{{ lieu_type.Id }}"{% if $lieu_type.Id() == $lieu.IdType }} selected="selected"{% endif %}>{{ lieu_type.Name }}</option>
+        <option value="{{ lieu_type.id }}"{% if $lieu_type.id() == $lieu.idType }} selected="selected"{% endif %}>{{ lieu_type.name }}</option>
         {% endfor %}
       </select>
     </div>
@@ -114,7 +114,7 @@
     <div></div>
     <div class="col-3">
       <input id="form-lieu-edit-submit" name="form-lieu-edit-submit" class="btn btn--primary w100" type="submit" value="Modifier">
-      <input type="hidden" name="id" value="{{ lieu.Id }}">
+      <input type="hidden" name="id" value="{{ lieu.id }}">
     </div>
   </section>
 </form>

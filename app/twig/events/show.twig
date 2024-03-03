@@ -8,12 +8,12 @@
 
 <div class="box">
   <header>
-    <h1>{{ event.Name }}</h1>
+    <h1>{{ event.name }}</h1>
   </header>
   <div>
 
     {% if event.ThumbUrl %}
-    <img src="{{ event.ThumbUrl }}" alt="{{ event.Name }}" style="display: block; margin: 0 auto 10px;">
+    <img src="{{ event.ThumbUrl }}" alt="{{ event.name }}" style="display: block; margin: 0 auto 10px;">
     {% endif %}
 
     {% if event.facebookEventId %}

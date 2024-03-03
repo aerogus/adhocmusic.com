@@ -23,7 +23,7 @@
         <label for="name">Nom</label>
       </div>
       <div class="col-3 mbs">
-        <span id="name">{{ video.Name }}</span>
+        <span id="name">{{ video.name }}</span>
       </div>
       <div>
         <label for="thumb">Miniature</label>
@@ -35,7 +35,7 @@
         <label for="id_host">Hébergeur</label>
       </div>
       <div class="col-3 mbs">
-        <span id="id_host">{{ video.Host().Name }}</span>
+        <span id="id_host">{{ video.Host().name }}</span>
       </div>
       <div>
         <label for="reference">Référence</label>
@@ -48,7 +48,7 @@
         <label for="groupe">Groupe</label>
       </div>
       <div class="col-3 mbs">
-        <span id="groupe">{{ groupe.Name }}</span>
+        <span id="groupe">{{ groupe.name }}</span>
       </div>
       {% endif %}
       {% if event}}
@@ -56,7 +56,7 @@
         <label for="event">Événement</label>
       </div>
       <div class="col-3 mbs">
-        <span id="event">{{ event.Date }} - {{ event.Name }}</span>
+        <span id="event">{{ event.Date }} - {{ event.name }}</span>
       </div>
       {% endif %}
       {% if lieu}}
@@ -64,7 +64,7 @@
         <label for="lieu">Lieu</label>
       </div>
       <div class="col-3 mbs">
-        <span id="lieu">{{ lieu.Name }}</span>
+        <span id="lieu">{{ lieu.name }}</span>
       </div>
       {% endif %}
       <div>
@@ -76,7 +76,7 @@
       <div></div>
       <div class="col-3">
         <input id="form-video-delete-submit" name="form-video-delete-submit" class="btn btn--primary" type="submit" value="Confirmer la suppression">
-        <input type="hidden" name="id" value="{{ video.Id }}">
+        <input type="hidden" name="id" value="{{ video.id }}">
       </div>
     </section>
   </form>

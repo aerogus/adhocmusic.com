@@ -19,7 +19,7 @@
   </tr>
   {% for $groupes as $groupe}
   <tr>
-    <td><a href="/groupes/edit/{{ groupe.IdGroupe }}" title="{{ groupe.Name }}"><img src="{{ groupe.MiniPhoto }}" alt="{{ groupe.Name }}"><br>{{ groupe.Name }}</a></td>
+    <td><a href="/groupes/edit/{{ groupe.idGroupe }}" title="{{ groupe.name }}"><img src="{{ groupe.MiniPhoto }}" alt="{{ groupe.name }}"><br>{{ groupe.name }}</a></td>
     <td>{{ groupe.CreatedAt()|date_format:'%d/%m/%Y'}</td>
     <td>{{ groupe.ModifiedAt()|date_format:'%d/%m/%Y'}</td>
   </tr>

@@ -15,13 +15,13 @@
 <form id="form-lieu-delete" name="form-lieu-delete" action="/lieux/delete" method="post">
   <fieldset>
     <ol>
-      <li>Nom : {{ lieu.Name }}</li>
+      <li>Nom : {{ lieu.name }}</li>
       <li>Type : {{ lieu.Type }}</li>
       <li>Adresse : {{ lieu.Address }}</li>
-      <li>Code Postal : {{ lieu.City().Cp }}</li>
-      <li>Département : {{ lieu.IdDepartement }}</li>
-      <li>Ville : {{ lieu.City().Name }}</li>
-      <li>Pays : {{ lieu.Country().Name }}</li>
+      <li>Code Postal : {{ lieu.city.Cp }}</li>
+      <li>Département : {{ lieu.idDepartement }}</li>
+      <li>Ville : {{ lieu.city.name }}</li>
+      <li>Pays : {{ lieu.Country().name }}</li>
       <li>Description : {{ lieu.Text }}</li>
       <li>Site : {{ lieu.Site }}</li>
       <li>Latitude : {{ lieu.Lat }}</li>
@@ -29,7 +29,7 @@
     </ol>
   </fieldset>
   <input id="form-lieu-delete-submit" name="form-lieu-delete-submit" type="submit" class="btn btn--primary" value="Supprimer">
-  <input type="hidden" name="id" value="{{ lieu.Id }}">
+  <input type="hidden" name="id" value="{{ lieu.id }}">
 </form>
 
 {% endif %}

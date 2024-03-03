@@ -38,7 +38,7 @@
         <h2>Lieu</h2>
       </header>
       <div>
-        <a href="{{ lieu.Url }}"><strong>{{ lieu.Name }}</strong></a><br>{{ lieu.Address }}<br>{{ lieu.City().Cp }} {{ lieu.City().Name }}
+        <a href="{{ lieu.Url }}"><strong>{{ lieu.name }}</strong></a><br>{{ lieu.Address }}<br>{{ lieu.city.Cp }} {{ lieu.city.name }}
       </div>
     </div>
     {% endif %}
@@ -73,7 +73,7 @@
     </p>
 
     <p align="center" style="margin: 10px 0px;">
-      <span id="pname">{{ photo.Name }}</span>
+      <span id="pname">{{ photo.name }}</span>
       <span id="pcredits">{% if has_credits %}(<i>crédits: {{ photo.credits }}</i>){% endif %}</span>
     </p>
 

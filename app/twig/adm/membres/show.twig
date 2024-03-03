@@ -9,7 +9,7 @@
     <caption>Infos générales</caption>
     <tr>
       <th>Id</th>
-      <td>{{ membre.Id }}</td>
+      <td>{{ membre.id }}</td>
     </tr>
     <tr>
       <th>Email</th>
@@ -53,15 +53,15 @@
     </tr>
     <tr>
       <th>Code Postal</th>
-      <td>{% if $membre.City }}{{ membre.City().Cp }}{% endif %}</td>
+      <td>{% if $membre.City }}{{ membre.city.Cp }}{% endif %}</td>
     </tr>
     <tr>
       <th>Ville</th>
-      <td>{% if $membre.City }}{{ membre.City().Name }}{% endif %}</td>
+      <td>{% if $membre.City }}{{ membre.city.name }}{% endif %}</td>
     </tr>
     <tr>
       <th>Pays</th>
-      <td>{% if $membre.Country }}{{ membre.Country().Name }}{% endif %}</td>
+      <td>{% if $membre.Country }}{{ membre.Country().name }}{% endif %}</td>
     </tr>
     <tr>
       <th>Téléphone</th>
@@ -92,12 +92,12 @@
     </tr>
     {% for from=$membre.Groupes() item=groupe}
     <tr>
-      <td><a href="/adm/groupes/{{ groupe.IdGroupe }}">{{ groupe.Name }}</a></td>
-      <td><a class="btn btn--secondary" href="/adm/appartient-a?from=membre&action=delete&membre={{ membre.IdContact }}&groupe={{ groupe.IdGroupe }}">Supprimer</a></td>
+      <td><a href="/adm/groupes/{{ groupe.idGroupe }}">{{ groupe.name }}</a></td>
+      <td><a class="btn btn--secondary" href="/adm/appartient-a?from=membre&action=delete&membre={{ membre.idContact }}&groupe={{ groupe.idGroupe }}">Supprimer</a></td>
     </tr>
     {% endfor %}
   </table>
-  <a class="btn btn--primary" href="/adm/appartient-a?from=membre&action=create&membre={{ membre.IdContact }}">Ajout Groupe</a>
+  <a class="btn btn--primary" href="/adm/appartient-a?from=membre&action=create&membre={{ membre.idContact }}">Ajout Groupe</a>
   </div>
 </div>
 

@@ -37,7 +37,7 @@
           <select id="ids_groupe[{{ smarty.section.cpt_groupe.index}]" name="ids_groupe[{{ smarty.section.cpt_groupe.index}]" class="w100 mbs">
             <option value="">-- Choix d'un groupe --</option>
             {% for from=$groupes item=groupe}
-            <option value="{{ groupe.Id }}"{% if ($smarty.section.cpt_groupe.index === 0) && $groupe.Id() === $id_groupe} selected="selected"{% endif %}>{{ groupe.Name }}</option>
+            <option value="{{ groupe.id }}"{% if ($smarty.section.cpt_groupe.index === 0) && $groupe.id() === $id_groupe} selected="selected"{% endif %}>{{ groupe.name }}</option>
             {% endfor %}
           </select>
           {/section}
@@ -47,17 +47,17 @@
         </div>
         <div class="col-3 mbs">
           {% if lieu}}
-          <input type="hidden" name="id_lieu" value="{{ lieu.Id }}">
-          <span>{{ lieu.Name }}</span>
+          <input type="hidden" name="id_lieu" value="{{ lieu.id }}">
+          <span>{{ lieu.name }}</span>
           {% else %}
           <select id="id_lieu" name="id_lieu" class="w100">
             <optgroup label="Autre">
               <option value="0">aucun / non référencé</option>
             </optgroup>
             {% for from=$deps item=dep}
-            <optgroup label="{{ dep.Id }} - {{ dep.Name }}">
-              {% for from=$lieux[$dep.Id()] item=lieu}
-              <option value="{{ lieu.IdLieu }}">{{ lieu.City().Cp }} {{ lieu.City().Name }} : {{ lieu.Name }}</option>
+            <optgroup label="{{ dep.id }} - {{ dep.name }}">
+              {% for from=$lieux[$dep.id()] item=lieu}
+              <option value="{{ lieu.idLieu }}">{{ lieu.city.Cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
               {% endfor %}
             </optgroup>
             {% endfor %}
@@ -69,8 +69,8 @@
         </div>
         <div class="col-3 mbs">
           {% if event}}
-          <input type="hidden" name="id_event" value="{{ event.Id }}">
-          <span >{{ event.Date }} - {{ event.Name }}</span>
+          <input type="hidden" name="id_event" value="{{ event.id }}">
+          <span >{{ event.Date }} - {{ event.name }}</span>
           {% else %}
           <select id="id_event" name="id_event" class="w100">
             <option value="0">Veuillez sélectionner un lieu</option>

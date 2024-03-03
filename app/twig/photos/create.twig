@@ -58,14 +58,14 @@
         <div class="col-3 mbs">
         {% if lieu %}
           <input type="hidden" name="id_lieu" value="{{ lieu.id }}">
-          <span>{{ lieu.Name }}</span>
+          <span>{{ lieu.name }}</span>
         {% else %}
           <select id="id_lieu" name="id_lieu" class="w100">
             <optgroup label="Autre">
               <option value="0">aucun / non référencé</option>
             </optgroup>
             {% for dep in deps %}
-            <optgroup label="{{ dep.Id }} - {{ dep.Name }}">
+            <optgroup label="{{ dep.id }} - {{ dep.name }}">
               {% for lieu in lieux[dep.id] %}
               <option value="{{ lieu.id }}">{{ lieu.city.cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
               {% endfor %}

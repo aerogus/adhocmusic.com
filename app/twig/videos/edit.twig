@@ -19,13 +19,13 @@
     </div>
     <div class="col-3 mbs">
       <div class="infobulle error" id="error_name"{% if not error_name}} style="display: none"{% endif %}>Vous devez saisir un titre pour la vidéo</div>
-      <input type="text" id="name" name="name" class="w100" value="{{ video.Name }}">
+      <input type="text" id="name" name="name" class="w100" value="{{ video.name }}">
     </div>
     <div>
       <label for="host">Hébergeur</label>
     </div>
     <div class="col-3 mbs">
-      <span id="host">{{ video.Host().Name }}</span>
+      <span id="host">{{ video.Host().name }}</span>
     </div>
     <div>
       <label for="reference">Référence</label>
@@ -60,7 +60,7 @@
       <select id="ids_groupe[{{ smarty.section.cpt_groupe.index}]" name="ids_groupe[{{ smarty.section.cpt_groupe.index}]" class="w100 mbs">
         <option value="">-- Choix d'un groupe --</option>
         {% for from=$groupes item=groupe}
-        <option value="{{ groupe.Id }}" {% if $video_groupes[$smarty.section.cpt_groupe.index] && ($video_groupes[$smarty.section.cpt_groupe.index].Id() === $groupe.Id()}} selected="selected"{% endif %}>{{ groupe.Name }}</option>
+        <option value="{{ groupe.id }}" {% if $video_groupes[$smarty.section.cpt_groupe.index] && ($video_groupes[$smarty.section.cpt_groupe.index].id() === $groupe.id()}} selected="selected"{% endif %}>{{ groupe.name }}</option>
         {% endfor %}
       </select>
       {/section}
@@ -74,9 +74,9 @@
           <option value="0">aucun / non référencé</option>
         </optgroup>
         {% for from=$deps item=dep}
-        <optgroup label="{{ dep.Id }} - {{ dep.Name }}">
-          {% for from=$lieux[$dep.Id()] item=lieu}
-          <option value="{{ lieu.IdLieu }}"{% if $video.IdLieu() === $lieu.IdLieu }} selected="selected"{% endif %}>{{ lieu.City().Cp }} {{ lieu.City().Name }} : {{ lieu.Name }}</option>
+        <optgroup label="{{ dep.id }} - {{ dep.name }}">
+          {% for from=$lieux[$dep.id()] item=lieu}
+          <option value="{{ lieu.idLieu }}"{% if $video.idLieu() === $lieu.idLieu }} selected="selected"{% endif %}>{{ lieu.city.Cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
           {% endfor %}
         </optgroup>
         {% endfor %}
@@ -99,11 +99,11 @@
     <div></div>
     <div class="col-2">
       <input id="form-video-edit-submit" name="form-video-edit-submit" type="submit" class="btn btn--primary" value="Enregistrer">
-      <input type="hidden" name="id" value="{{ video.IdVideo }}">
-      <input type="hidden" name="video_id_event" id="video_id_event" value="{{ video.IdEvent }}">
+      <input type="hidden" name="id" value="{{ video.idVideo }}">
+      <input type="hidden" name="video_id_event" id="video_id_event" value="{{ video.idEvent }}">
     </div>
     <div class="txtright">
-      <a href="/videos/delete/{{ video.IdVideo }}" class="btn btn--primary">Supprimer</a>
+      <a href="/videos/delete/{{ video.idVideo }}" class="btn btn--primary">Supprimer</a>
     </div>
   </section>
 </form>

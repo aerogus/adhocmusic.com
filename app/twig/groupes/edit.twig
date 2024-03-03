@@ -14,7 +14,7 @@
 
 <div class="box">
   <header>
-    <h2>{{ groupe.Name }}</h2>
+    <h2>{{ groupe.name }}</h2>
   </header>
   <div>
     <form id="form-groupe-edit" name="form-groupe-edit" method="post" action="/groupes/edit" enctype="multipart/form-data">
@@ -23,7 +23,7 @@
           <label for="name">Nom</label>
         </div>
         <div class="col-3 mbs">
-          <span id="name">{{ groupe.Name }}</span>
+          <span id="name">{{ groupe.name }}</span>
         </div>
         <div>
           <label for="lelogo">Logo (.jpg)</label>
@@ -102,13 +102,13 @@
         <div class="col-3 mbs">
           <select id="id_type_musicien" name="id_type_musicien" class="w100">
             {% for from=$types_musicien item=type_musicien}
-            <option value="{{ type_musicien.Id }}"{% if $data.id_type_musicien === $type_musicien.Id }} selected="selected"{% endif %}>{{ type_musicien.Name }}</option>
+            <option value="{{ type_musicien.id }}"{% if $data.id_type_musicien === $type_musicien.id }} selected="selected"{% endif %}>{{ type_musicien.name }}</option>
             {% endfor %}
           </select>
         </div>
         <div></div>
         <div class="col-3">
-          <input type="hidden" name="id" value="{{ groupe.Id }}">
+          <input type="hidden" name="id" value="{{ groupe.id }}">
           <input id="form-groupe-edit-submit" name="form-groupe-edit-submit" class="btn btn--primary w100" type="submit" value="Modifier">
         </div>
       </section>
@@ -120,9 +120,9 @@
 </div>
 
 <div>
-  <a href="/photos/create?id_groupe={{ groupe.Id }}" class="btn btn--primary">Ajouter une photo</a>
-  <a href="/audios/create?id_groupe={{ groupe.Id }}" class="btn btn--primary">Ajouter une musique</a>
-  <a href="/videos/create?id_groupe={{ groupe.Id }}" class="btn btn--primary">Ajouter une vidéo</a>
+  <a href="/photos/create?id_groupe={{ groupe.id }}" class="btn btn--primary">Ajouter une photo</a>
+  <a href="/audios/create?id_groupe={{ groupe.id }}" class="btn btn--primary">Ajouter une musique</a>
+  <a href="/videos/create?id_groupe={{ groupe.id }}" class="btn btn--primary">Ajouter une vidéo</a>
   <a href="{{ groupe.Url }}" class="btn btn--primary">Voir la fiche</a>
 </div>
 

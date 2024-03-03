@@ -2,7 +2,7 @@
 
 <div class="box">
   <header>
-    <h1>{{ groupe.Name }}</h1>
+    <h1>{{ groupe.name }}</h1>
   </header>
   <div>
 
@@ -10,7 +10,7 @@
   <caption>Infos générales</caption>
   <tr>
     <th>Id</th>
-    <td>{{ groupe.Id }}</td>
+    <td>{{ groupe.id }}</td>
   </tr>
   <tr>
     <th>Etat</th>
@@ -18,7 +18,7 @@
   </tr>
   <tr>
     <th>Nom</th>
-    <td>{{ groupe.Name }}</td>
+    <td>{{ groupe.name }}</td>
   </tr>
   <tr>
     <th>Alias</th>
@@ -81,7 +81,7 @@
 <table>
   <caption>Styles</caption>
   {% for from=$groupe.Styles() item=style}
-  <tr><td>{{ style.Name }}</td></tr>
+  <tr><td>{{ style.name }}</td></tr>
   {% endfor %}
 </table>
 
@@ -89,12 +89,12 @@
   <caption>Membres</caption>
   {% for from=$groupe.Members() item=member}
   <tr>
-    <td>{{ member.FirstName }} {{ member.LastName }} (<a href="/adm/membres/{{ member.IdContact }}">{{ member.Pseudo }}</a>)</td>
-    <td><a class="btn btn--secondary" href="/adm/appartient-a?from=groupe&amp;action=delete&amp;groupe={{ groupe.Id }}&amp;membre={{ member.IdContact }}">Supprimer</a></td>
+    <td>{{ member.FirstName }} {{ member.LastName }} (<a href="/adm/membres/{{ member.idContact }}">{{ member.Pseudo }}</a>)</td>
+    <td><a class="btn btn--secondary" href="/adm/appartient-a?from=groupe&amp;action=delete&amp;groupe={{ groupe.id }}&amp;membre={{ member.idContact }}">Supprimer</a></td>
   </tr>
   {% endfor %}
 </table>
-<a class="btn btn--primary" href="/adm/appartient-a?from=groupe&amp;action=create&amp;groupe={{ groupe.Id }}">Ajout Membre</a>
+<a class="btn btn--primary" href="/adm/appartient-a?from=groupe&amp;action=create&amp;groupe={{ groupe.id }}">Ajout Membre</a>
 
   </div>
 </div>

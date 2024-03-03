@@ -11,7 +11,7 @@
       <label for="id_category">Catégorie</label>
       <select name="id_category">
       {% for from=$categories item=cat}
-        <option value="{{ cat.Id }}"{% if $faq.IdCategory() === $cat.Id }} selected="selected"{% endif %}>{{ cat.Name }}</option>
+        <option value="{{ cat.id }}"{% if $faq.idCategory() === $cat.id }} selected="selected"{% endif %}>{{ cat.name }}</option>
       {% endfor %}
       </select>
     </li>
@@ -28,7 +28,7 @@
       <input class="switch" type="checkbox" id="online" name="online"{% if $faq.Online }} checked="checked"{% endif %}>
     </li>
   </ul>
-  <input type="hidden" name="id_faq" value="{{ faq.Id }}">
+  <input type="hidden" name="id_faq" value="{{ faq.id }}">
   <input class="btn btn--primary" id="form-faq-edit-submit" name="form-faq-edit-submit" type="submit">
   </form>
   </div>

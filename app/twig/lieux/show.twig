@@ -16,20 +16,20 @@
 
 <div class="box">
   <header>
-    <h1>{{ lieu.Name }}</h1>
+    <h1>{{ lieu.name }}</h1>
   </header>
   <div>
     <div id="map_canvas" style="width: 50%; height: 320px; float: right; z-index: 1"></div>
 
     <div class="infos" style="width: 300px; padding: 10px;">
-      <strong>{{ lieu.Name }}</strong><br>
+      <strong>{{ lieu.name }}</strong><br>
       {{ lieu.Address }}<br>
-      {{ lieu.City().Cp }} {{ lieu.City().Name }}<br>
-      {% if $lieu.IdCountry() === 'FR'}
-      {{ lieu.IdDepartement }} / {{ lieu.Departement().Name }}<br>
+      {{ lieu.city.Cp }} {{ lieu.city.name }}<br>
+      {% if $lieu.idCountry() === 'FR'}
+      {{ lieu.idDepartement }} / {{ lieu.Departement().name }}<br>
       {% endif %}
-      {{ lieu.Region().Name }}<br>
-      <img src="{{ lieu.Country().FlagUrl }}" alt="{{ lieu.IdCountry }}"> {{ lieu.Country().Name }}
+      {{ lieu.Region().name }}<br>
+      <img src="{{ lieu.Country().FlagUrl }}" alt="{{ lieu.idCountry }}"> {{ lieu.Country().name }}
     </div>
 
     <div class="infos" style="padding: 10px;">
@@ -57,7 +57,7 @@
     <ul>
       {% for $events_f as $event}
       {assign var=structures value=$event.Structures }}
-      <li>{% if $structures}<img src="{{ structures[0].Picto }}" alt="" title="Organisé par {{ structures[0].Name }}">{% endif %}<a href="{{ event.Url }}">Le {{ event.Date()|date_format:"%d/%m/%Y %H:%M"} - {{ event.Name }}</a></li>
+      <li>{% if $structures}<img src="{{ structures[0].Picto }}" alt="" title="Organisé par {{ structures[0].name }}">{% endif %}<a href="{{ event.Url }}">Le {{ event.Date()|date_format:"%d/%m/%Y %H:%M"} - {{ event.name }}</a></li>
       {% endfor %}
     </ul>
   </div>
@@ -73,7 +73,7 @@
     <ul>
       {% for from=$events_p item=event}
       {assign var=structures value=$event.Structures }}
-      <li>{% if $structures}<img src="{{ structures[0].Picto }}" alt="" title="Organisé par {{ structures[0].Name }}">{% endif %}<a href="{{ event.Url }}">Le {{ event.Date()|date_format:"%d/%m/%Y %H:%M"} - {{ event.Name }}</a></li>
+      <li>{% if $structures}<img src="{{ structures[0].Picto }}" alt="" title="Organisé par {{ structures[0].name }}">{% endif %}<a href="{{ event.Url }}">Le {{ event.Date()|date_format:"%d/%m/%Y %H:%M"} - {{ event.name }}</a></li>
       {% endfor %}
     </ul>
   </div>
@@ -88,8 +88,8 @@
   <div class="reset gallery">
   {% for from=$photos item=photo}
     <div class="photo">
-      <a href="{{ photo.ThumbUrl(1000}}" data-id="{{ photo.IdPhoto }}" data-at-1000="{{ photo.ThumbUrl(1000}}" title="{{ photo.Name }}{% if photo.Groupe()}} ({{ photo.Groupe().Name }}){% endif %} 📷 {{ photo.Credits }}">
-        <img data-id="{{ photo.IdPhoto }}" src="{{ photo.ThumbUrl(320}}" alt="{{ photo.Name }}{% if photo.Groupe()}} ({{ photo.Groupe().Name }}){% endif %}">
+      <a href="{{ photo.ThumbUrl(1000}}" data-id="{{ photo.idPhoto }}" data-at-1000="{{ photo.ThumbUrl(1000}}" title="{{ photo.name }}{% if photo.Groupe()}} ({{ photo.Groupe().name }}){% endif %} 📷 {{ photo.Credits }}">
+        <img data-id="{{ photo.idPhoto }}" src="{{ photo.ThumbUrl(320}}" alt="{{ photo.name }}{% if photo.Groupe()}} ({{ photo.Groupe().name }}){% endif %}">
       </a>
     </div>
   {% endfor %}
@@ -105,9 +105,9 @@
   <div>
     <ul>
       {% for $audios as $audio}
-      <li>Titre : <strong>{{ audio.Name }}</strong>
-      {% if audio.Groupe()}}<br>Groupe : <a href="{{ audio.Groupe().Url }}">{{ audio.Groupe().Name }}</a>{% endif %}
-      {% if audio.Event()}}<br>Evénement : <a href="{{ audio.Event().Url }}">{{ audio.Event().Name }}</a> ({{ audio.Event().Date()|date_format:'%d/%m/%Y'}){% endif %}
+      <li>Titre : <strong>{{ audio.name }}</strong>
+      {% if audio.Groupe()}}<br>Groupe : <a href="{{ audio.Groupe().Url }}">{{ audio.Groupe().name }}</a>{% endif %}
+      {% if audio.Event()}}<br>Evénement : <a href="{{ audio.Event().Url }}">{{ audio.Event().name }}</a> ({{ audio.Event().Date()|date_format:'%d/%m/%Y'}){% endif %}
       <br><audio src="{{ audio.DirectMp3Url }}"></audio></li>
       {% endfor %}
     </ul>
@@ -124,13 +124,13 @@
     {% for $videos as $video}
     <div class="video">
       <div class="thumb" style="background-image: url({{ video.ThumbUrl(320}})">
-        <a class="playbtn" href="{{ video.Url }}" title="Regarder la vidéo {{ video.Name }}">▶</a>
+        <a class="playbtn" href="{{ video.Url }}" title="Regarder la vidéo {{ video.name }}">▶</a>
       </div>
-      <p class="title"><a href="{{ video.Url }}" title="Regarder la vidéo {{ video.Name }}">{{ video.Name }}</a></p>
+      <p class="title"><a href="{{ video.Url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
       <p class="subtitle">
-        {% if video.Groupe()}}<a href="{{ video.Groupe().Url }}" title="Aller à la page du groupe {{ video.Groupe().Name }}">{{ video.Groupe().Name }}</a>{% endif %}
+        {% if video.Groupe()}}<a href="{{ video.Groupe().Url }}" title="Aller à la page du groupe {{ video.Groupe().name }}">{{ video.Groupe().name }}</a>{% endif %}
         {% if video.Groupe()) && video.Event()}}<br/>{% endif %}
-        {% if video.Event()}}<a href="{{ video.Event().Url }}" title="Aller à la page de l'événement {{ video.Event().Name }}">{{ video.Event().Date()|date_format:"%a %e %B %Y"}</a>{% endif %}
+        {% if video.Event()}}<a href="{{ video.Event().Url }}" title="Aller à la page de l'événement {{ video.Event().name }}">{{ video.Event().Date()|date_format:"%a %e %B %Y"}</a>{% endif %}
       </p>
     </div>
     {% endfor %}

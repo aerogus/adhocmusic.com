@@ -6,16 +6,16 @@
   </header>
   <div>
 
-{% if unknown_member}}
+{% if unknown_member %}
 
 <p class="infobulle error">Ce membre est introuvable !</p>
 
 {% else %}
 
 <form id="form-member-delete" name="form-member-delete" action="/membres/delete" method="POST">
-  <p>Confirmer la suppression du membre {{ membre.Pseudo }} ?</p>
+  <p>Confirmer la suppression du membre {{ membre.pseudo }} ?</p>
   <input class="btn btn--secondary" type="submit" id="form-member-delete-submit" name="form-member-delete-submit" value="Supprimer">
-  <input type="hidden" name="id" value="{{ membre.Id }}">
+  <input type="hidden" name="id" value="{{ membre.id }}">
 </form>
 
 {% endif %}

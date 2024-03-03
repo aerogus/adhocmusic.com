@@ -22,7 +22,7 @@
   <tbody>
   {% for photo in photos %}
     <tr>
-      <td>{{ photo.Id }}<br/><img src="{{ photo.ThumbUrl }}" alt=""/><br/>{{ photo.name }}</td>
+      <td>{{ photo.id }}<br/><img src="{{ photo.ThumbUrl }}" alt=""/><br/>{{ photo.name }}</td>
       <td>{% if photo.idGroupe %}<a href="{{ photo.groupe.url }}">{{ photo.groupe.name }}</a>{% endif %}</td>
       <td>{% if photo.idEvent %}<a href="{{ photo.event.url }}">{{ photo.event.name }}</a><br/>{{ photo.event.date }}{% endif %}</td>
       <td>{% if photo.idLieu %}<a href="{{ photo.lieu.url }}">{{ photo.lieu.name }}</a><br>{{ photo.lieu.idDepartement }} {{ photo.lieu.city.name }}{% endif %}</td>

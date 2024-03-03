@@ -83,7 +83,7 @@
         <select id="groupe" name="groupe[{{ smarty.section.cpt_groupe.index}]" class="w100 mbs">
           <option value="">-- Choix d'un groupe --</option>
           {% for from=$groupes item=groupe}
-          <option value="{{ groupe.Id }}"{% if $data.groupes.0 === $groupe.Id }} selected="selected"{% endif %}>{{ groupe.Name }}</option>
+          <option value="{{ groupe.id }}"{% if $data.groupes.0 === $groupe.id }} selected="selected"{% endif %}>{{ groupe.name }}</option>
           {% endfor %}
         </select>
         {/section}
@@ -149,7 +149,7 @@
         <select id="style" name="style[{{ smarty.section.cpt_style.index}]" class="w100 mbs">
           <option value="">-- Choix d'un style --</option>
           {% for from=$styles item=style}
-          <option value="{{ style.Id }}"{% if $data.styles.0 === $style.Id }} selected="selected"{% endif %}>{{ style.Name }}</option>
+          <option value="{{ style.id }}"{% if $data.styles.0 === $style.id }} selected="selected"{% endif %}>{{ style.name }}</option>
           {% endfor %}
         </select>
         {/section}
@@ -163,7 +163,7 @@
         <select id="structure" name="structure[{{ smarty.section.cpt_structure.index}]" class="w100 mbs">
           <option value="">-- Choix d'une structure --</option>
           {% for from=$structures item=structure}
-          <option value="{{ structure.Id }}"{% if $data.structures.0 == $structure.Id }} selected="selected"{% endif %}>{{ structure.Name }}</option>
+          <option value="{{ structure.id }}"{% if $data.structures.0 == $structure.id }} selected="selected"{% endif %}>{{ structure.name }}</option>
           {% endfor %}
         </select>
         {/section}

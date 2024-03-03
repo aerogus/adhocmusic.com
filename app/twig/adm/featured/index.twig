@@ -43,7 +43,7 @@
       <tbody>
       {% for $featured_admin as $f}
         <tr>
-          <td><a href="/adm/featured/edit/{{ f.Id }}">{{ f.Title }}<br>{{ f.Description }}</a></td>
+          <td><a href="/adm/featured/edit/{{ f.id }}">{{ f.Title }}<br>{{ f.Description }}</a></td>
           <td><img src="{{ f.Image }}" width="108" height="60" alt="" style="display: block" /></td>
           <td>{{ f.DatDeb()|date_format:'%d/%m/%Y'}</td>
           <td>{{ f.DatFin()|date_format:'%d/%m/%Y'}</td>

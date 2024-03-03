@@ -92,7 +92,7 @@
       {% if alerting_groupes}}
       <ul>
         {% for $alerting_groupes as $groupe}
-        <li><a href="{{ groupe.Url }}">{{ groupe.Name }}</a></li>
+        <li><a href="{{ groupe.Url }}">{{ groupe.name }}</a></li>
         {% endfor %}
       </ul>
       {% else %}
@@ -102,7 +102,7 @@
       {% if alerting_events}}
       <ul>
       {% for $alerting_events as $event}
-        <li><a href="{{ event.Url }}">{{ event.Name }}</a></li>
+        <li><a href="{{ event.Url }}">{{ event.name }}</a></li>
       {% endfor %}
       </ul>
       {% else %}
@@ -112,7 +112,7 @@
       {% if alerting_lieux}}
       <ul>
       {% for $alerting_lieux as $lieu}
-        <li><a href="{{ lieu.Url }}">{{ lieu.Name }}</a></li>
+        <li><a href="{{ lieu.Url }}">{{ lieu.name }}</a></li>
       {% endfor %}
       </ul>
       {% else %}
@@ -133,7 +133,7 @@
       <p>Vous administrez le(s) groupe(s) suivant(s) :</p>
       <ul>
         {% for $groupes as $groupe}
-        <li><a href="/groupes/edit/{{ groupe.IdGroupe }}" title="{{ groupe.Name }}">{{ groupe.Name }}</a></li>
+        <li><a href="/groupes/edit/{{ groupe.idGroupe }}" title="{{ groupe.name }}">{{ groupe.name }}</a></li>
         {% endfor %}
       </ul>
       <p><a class="btn btn--primary" href="/groupes/my">Tous mes groupes</a></p>

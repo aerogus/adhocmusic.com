@@ -22,10 +22,10 @@
   <tbody>
   {% for from=$videos item=video}
     <tr>
-      <td>{{ video.Id }}<br/><img src="{{ video.ThumbUrl(80}}" alt=""/><br/>{{ video.Name }}</td>
-      <td>{% if ($video.IdGroupe()}}<a href="{{ video.Groupe().Url }}">{{ video.Groupe().Name }}</a>{% endif %}</td>
-      <td>{% if ($video.IdEvent()}}<a href="{{ video.Event().Url }}">{{ video.Event().Name }}</a><br/>{{ video.Event().Date()|date_format:'%d/%m/%Y'}{% endif %}</td>
-      <td>{% if ($video.IdLieu()}}<a href="{{ video.Lieu().Url }}">{{ video.Lieu().Name }}</a><br>{{ video.Lieu().IdDepartement }} {{ video.Lieu().City().Name }}{% endif %}</td>
+      <td>{{ video.id }}<br/><img src="{{ video.ThumbUrl(80}}" alt=""/><br/>{{ video.name }}</td>
+      <td>{% if ($video.idGroupe()}}<a href="{{ video.Groupe().Url }}">{{ video.Groupe().name }}</a>{% endif %}</td>
+      <td>{% if ($video.idEvent()}}<a href="{{ video.Event().Url }}">{{ video.Event().name }}</a><br/>{{ video.Event().Date()|date_format:'%d/%m/%Y'}{% endif %}</td>
+      <td>{% if ($video.idLieu()}}<a href="{{ video.Lieu().Url }}">{{ video.Lieu().name }}</a><br>{{ video.Lieu().idDepartement }} {{ video.Lieu().city.name }}{% endif %}</td>
       <td>{{ video.CreatedAt()|date_format:'%d/%m/%Y'}</td>
       <td>{{ video.ModifiedAt()|date_format:'%d/%m/%Y'}</td>
     </tr>

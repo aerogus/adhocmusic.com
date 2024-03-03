@@ -34,8 +34,8 @@
   <tbody>
   {% for $audios as $audio}
     <tr>
-      <td>{% if audio.Groupe()}}{{ audio.Groupe().Name }}{% endif %}</td>
-      <td><a href="/audios/edit/{{ audio.IdAudio }}">{{ audio.Name }}</a></td>
+      <td>{% if audio.Groupe()}}{{ audio.Groupe().name }}{% endif %}</td>
+      <td><a href="/audios/edit/{{ audio.idAudio }}">{{ audio.name }}</a></td>
       <td>{{ audio.CreatedAt }}</td>
       <td>{{ audio.ModifiedAt }}</td>
     </tr>

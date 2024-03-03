@@ -22,8 +22,8 @@
   <tbody>
     {% for from=$cmss item=cms}
     <tr>
-      <td>{{ cms.IdCms }}</td>
-      <td><a href="/adm/cms/edit/{{ cms.IdCms }}">{{ cms.Alias }}</a></td>
+      <td>{{ cms.idCms }}</td>
+      <td><a href="/adm/cms/edit/{{ cms.idCms }}">{{ cms.Alias }}</a></td>
       <td>{{ cms.Title }}</td>
       <td>{{ cms.Online()|display_on_off_icon}</td>
     </tr>

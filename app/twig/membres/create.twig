@@ -6,17 +6,17 @@
   </header>
   <div>
 
-{% if create}}
+{% if create %}
 
 <div class="infobulle success">Bienvenue ! Votre compte AD’HOC a bien été créé. Consultez votre boite aux lettres électronique, elle vous confirme votre inscription et un mot de passe vous a été communiqué.<br>
 Cliquez alors sur le cadenas en haut à droite pour vous identifier.</div>
 
-{elseif error_generic}}
+{% elseif error_generic %}
 
 <div class="infobulle error">Erreur à l’inscription. Votre email est déjà présente, vous avez
 déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="/auth/lost-password">cliquez ici</a> pour le récupérer.</div>
 
-  {% if password}}
+  {% if password %}
     <div class="infobulle info">Mot de passe: {{ password}</div>
   {% endif %}
 
@@ -26,19 +26,19 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
   <div class="mbs">
     <label for="pseudo">Pseudo</label>
     <div id="error_pseudo_unavailable" class="infobulle error"{% if not error_pseudo_unavailable}} style="display: none"{% endif %}>Ce pseudo est pris, veuillez en choisir un autre</div>
-    <div class="infobulle error" id="error_pseudo"{% if not error_pseudo}} style="display: none"{% endif %}>Vous devez saisir un pseudo entre 1 à 50 caractères</div>
-    <input id="pseudo" name="pseudo" type="text" maxlength="50" value="{{ data.pseudo}" placeholder="Pseudo">
+    <div class="infobulle error" id="error_pseudo"{% if not error_pseudo %} style="display: none"{% endif %}>Vous devez saisir un pseudo entre 1 à 50 caractères</div>
+    <input id="pseudo" name="pseudo" type="text" maxlength="50" value="{{ data.pseudo }}" placeholder="Pseudo">
   </div>
   <div class="mbs">
     <label for="email">E-mail</label>
-    <div id="error_email"{% if not error_email}} style="display: none"{% endif %} class="infobulle error">Vous devez saisir votre e-mail</div>
-    <div id="error_invalid_email" class="infobulle error"{% if not error_invalid_email}} style="display: none"{% endif %}>Cet e-mail semble invalide</div>
-    <div id="error_already_member" class="infobulle error"{% if not error_already_member}} style="display: none"{% endif %}>Inscription impossible car un compte avec cet e-mail existe déjà. Vous avez <a href="/auth/lost-password">oublié votre mot de passe ?</a></div>
-    <input id="email" name="email" type="email" maxlength="50" value="{{ data.email}" placeholder="E-mail">
+    <div id="error_email"{% if not error_email %} style="display: none"{% endif %} class="infobulle error">Vous devez saisir votre e-mail</div>
+    <div id="error_invalid_email" class="infobulle error"{% if not error_invalid_email %} style="display: none"{% endif %}>Cet e-mail semble invalide</div>
+    <div id="error_already_member" class="infobulle error"{% if not error_already_member %} style="display: none"{% endif %}>Inscription impossible car un compte avec cet e-mail existe déjà. Vous avez <a href="/auth/lost-password">oublié votre mot de passe ?</a></div>
+    <input id="email" name="email" type="email" maxlength="50" value="{{ data.email }}" placeholder="E-mail">
   </div>
   <div class="mbs">
     <label for="mailing" class="visually-hidden">Newsletter</label>
-    <span><input id="mailing" class="checkbox" name="mailing" type="checkbox"{% if data.mailing}} checked="checked"{% endif %}> Je souhaite recevoir la newsletter</span>
+    <span><input id="mailing" class="checkbox" name="mailing" type="checkbox"{% if data.mailing %} checked="checked"{% endif %}> Je souhaite recevoir la newsletter</span>
   </div>
   <div>
     <input type="hidden" name="csrf" value="{{ data.csrf}">

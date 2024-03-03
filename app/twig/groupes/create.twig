@@ -101,7 +101,7 @@ Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fic
         <div class="col-3 mbs">
           <select id="id_type_musicien" name="id_type_musicien" class="w100">
             {% for from=$types_musicien item=type_musicien}
-            <option value="{{ type_musicien.Id }}">{{ type_musicien.Name }}</option>
+            <option value="{{ type_musicien.id }}">{{ type_musicien.name }}</option>
             {% endfor %}
           </select>
         </div>

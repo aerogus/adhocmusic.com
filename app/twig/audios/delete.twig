@@ -24,14 +24,14 @@
           <label for="name">Nom</label>
         </div>
         <div class="col-3">
-          <span id="name">{{ audio.Name }}</span>
+          <span id="name">{{ audio.name }}</span>
         </div>
         {% if groupe}}
         <div>
           <label for="groupe">Groupe</label>
         </div>
         <div class="col-3">
-          <span id="groupe">{{ groupe.Name }}</span>
+          <span id="groupe">{{ groupe.name }}</span>
         </div>
         {% endif %}
         {% if event}}
@@ -39,7 +39,7 @@
           <label for="event">Événement</label>
         </div>
         <div class="col-3">
-          <span id="event">{{ event.Date()|date_format:"%d/%m/%Y %h:%i"} - {{ event.Name }}</span>
+          <span id="event">{{ event.Date()|date_format:"%d/%m/%Y %h:%i"} - {{ event.name }}</span>
         </div>
         {% endif %}
         {% if lieu}}
@@ -47,7 +47,7 @@
           <label for="lieu">Lieu</label>
         </div>
         <div class="col-3">
-          <span id="lieu">{{ lieu.IdDepartement }} - {{ lieu.Name }}</span>
+          <span id="lieu">{{ lieu.idDepartement }} - {{ lieu.name }}</span>
         </div>
         {% endif %}
         <div>
@@ -81,7 +81,7 @@
         <div></div>
         <div class="col-3">
           <input id="form-audio-delete-submit" name="form-audio-delete-submit" class="btn btn--primary w100" type="submit" value="Supprimer">
-          <input type="hidden" name="id" value="{{ audio.Id }}">
+          <input type="hidden" name="id" value="{{ audio.id }}">
         </div>
       </section>
     </form>

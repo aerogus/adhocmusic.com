@@ -25,7 +25,7 @@
         </div>
         <div class="col-3 mbs">
           <div class="infobulle error" id="error_name"{% if not error_name}} style="display: none"{% endif %}>Vous devez renseigner un titre</div>
-          <input type="text" id="name" name="name" class="w100" value="{{ audio.Name }}">
+          <input type="text" id="name" name="name" class="w100" value="{{ audio.name }}">
         </div>
         <div>
           <label for="id_groupe">Groupe</label>
@@ -35,7 +35,7 @@
           <select id="id_groupe" name="id_groupe" class="w100">
             <option value="0">Sans</option>
             {% for from=$groupes item=groupe}
-            <option value="{{ groupe.Id }}"{% if $audio.IdGroupe() === $groupe.IdGroupe }} selected="selected"{% endif %}>{{ groupe.Name }}</option>
+            <option value="{{ groupe.id }}"{% if $audio.idGroupe() === $groupe.idGroupe }} selected="selected"{% endif %}>{{ groupe.name }}</option>
             {% endfor %}
           </select>
         </div>
@@ -50,7 +50,7 @@
             {% for from=$dep item=dep_name key=dep_id}
             <optgroup label="{{ dep_id} - {{ dep_name}">
               {% for from=$lieux.$dep_id item=lieu}
-              <option value="{{ lieu.IdLieu }}"{% if $audio.IdLieu() === $lieu.IdLieu }} selected="selected"{% endif %}>{{ lieu.City().Cp }} {{ lieu.City().Name }} : {{ lieu.Name }}</option>
+              <option value="{{ lieu.idLieu }}"{% if $audio.idLieu() === $lieu.idLieu }} selected="selected"{% endif %}>{{ lieu.city.Cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
               {% endfor %}
             </optgroup>
             {% endfor %}
@@ -87,11 +87,11 @@
         <div></div>
         <div class="col-2">
           <input id="form-audio-edit-submit" name="form-audio-edit-submit" class="btn btn--primary w100" type="submit" value="Enregistrer">
-          <input type="hidden" name="id" value="{{ audio.Id }}">
-          <input type="hidden" name="audio_id_event" id="audio_id_event" value="{{ audio.IdEvent }}">
+          <input type="hidden" name="id" value="{{ audio.id }}">
+          <input type="hidden" name="audio_id_event" id="audio_id_event" value="{{ audio.idEvent }}">
         </div>
         <div class="txtright">
-          <span id="delete"><a href="/audios/delete/{{ audio.Id }}" class="btn btn--primary">Supprimer</a></span>
+          <span id="delete"><a href="/audios/delete/{{ audio.id }}" class="btn btn--primary">Supprimer</a></span>
         </div>
       </section>
     </form>

@@ -12,27 +12,27 @@ var audio_url = '{{ og_audio.url}';
 
 <div class="box">
   <header>
-    <h1>{{ audio.Name }}</h1>
+    <h1>{{ audio.name }}</h1>
   </header>
   <div>
 
-{% if $audio.IdGroupe }}
-<a href="{{ groupe.Url }}"><img style="float: left; margin: 5px;" src="{{ groupe.MiniPhoto }}" alt="{{ groupe.Name }}"></a>
+{% if $audio.idGroupe }}
+<a href="{{ groupe.Url }}"><img style="float: left; margin: 5px;" src="{{ groupe.MiniPhoto }}" alt="{{ groupe.name }}"></a>
 {% endif %}
 
 <div class="audiometa">
 <ul>
-  <li>Titre : <strong>{{ audio.Name }}</strong></li>
-  {% if $audio.IdGroupe }}
-  <li>Groupe : <a href="{{ groupe.Url }}"><strong>{{ groupe.Name }}</strong></a></li>
+  <li>Titre : <strong>{{ audio.name }}</strong></li>
+  {% if $audio.idGroupe }}
+  <li>Groupe : <a href="{{ groupe.Url }}"><strong>{{ groupe.name }}</strong></a></li>
   {% endif %}
-  {% if $audio.IdEvent }}
-  <li>Evénement : <a href="{{ event.Url }}"><strong>{{ event.Name }}</strong></a> ({{ event.Date()|date_format:'%d/%m/%Y'})</li>
+  {% if $audio.idEvent }}
+  <li>Evénement : <a href="{{ event.Url }}"><strong>{{ event.name }}</strong></a> ({{ event.Date()|date_format:'%d/%m/%Y'})</li>
   {% endif %}
-  {% if $audio.IdLieu }}
-  <li>Lieu : <a href="{{ lieu.Url }}"><strong>{{ lieu.Name }}</strong></a></li>
+  {% if $audio.idLieu }}
+  <li>Lieu : <a href="{{ lieu.Url }}"><strong>{{ lieu.name }}</strong></a></li>
   {% endif %}
-  <li>Mise en ligne : le {{ audio.CreatedAt()|date_format:'%d/%m/%Y'} par <a href="/membres/show/{{ audio.IdContact }}"><strong>{{ audio.IdContact()|pseudo_by_id}</strong></a></li>
+  <li>Mise en ligne : le {{ audio.CreatedAt()|date_format:'%d/%m/%Y'} par <a href="/membres/show/{{ audio.idContact }}"><strong>{{ audio.idContact()|pseudo_by_id}</strong></a></li>
 </ul>
 </div>
 
@@ -49,14 +49,14 @@ var audio_url = '{{ og_audio.url}';
   <div>
 {% for $photos as $photo}
 <div class="thumb-80 thumb-photo-80">
-  <a href="{{ photo.Url }}"><img src="{{ photo.ThumbUrl(80}}" alt="{{ photo.Name }}"><br>{{ photo.Name()|truncate:15:"...":true:true}</a>
-  <a class="overlay-80 overlay-photo-80" href="{{ photo.Url }}" title="{{ photo.Name }}"></a>
+  <a href="{{ photo.Url }}"><img src="{{ photo.ThumbUrl(80}}" alt="{{ photo.name }}"><br>{{ photo.name()|truncate:15:"...":true:true}</a>
+  <a class="overlay-80 overlay-photo-80" href="{{ photo.Url }}" title="{{ photo.name }}"></a>
 </div>
 {% endfor %}
 {% for $videos as $video}
 <div class="thumb-80 thumb-video-80">
-  <a href="{{ video.Url }}"><img src="{{ video.ThumbUrl(80}}" alt="{{ video.Name }}"><br>{{ video.Name()|truncate:15:"...":true:true}</a>
-  <a class="overlay-80 overlay-video-80" href="{{ video.Url }}" title="{{ video.Name }}"></a>
+  <a href="{{ video.Url }}"><img src="{{ video.ThumbUrl(80}}" alt="{{ video.name }}"><br>{{ video.name()|truncate:15:"...":true:true}</a>
+  <a class="overlay-80 overlay-video-80" href="{{ video.Url }}" title="{{ video.name }}"></a>
 </div>
 {% endfor %}
   </div>

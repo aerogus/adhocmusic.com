@@ -26,14 +26,14 @@
         </div>
         <div class="col-3 mbs">
           {% if groupe}}
-            <input type="hidden" name="id_groupe" value="{{ groupe.Id }}">
-            <span>{{ groupe.Name }}</span>
+            <input type="hidden" name="id_groupe" value="{{ groupe.id }}">
+            <span>{{ groupe.name }}</span>
           {% else %}
             <div class="infobulle error" id="error_id_groupe"{% if not error_id_groupe}} style="display: none"{% endif %}>Vous devez lier cette musique à un groupe, un lieu ou un événement</div>
             <select id="id_groupe" name="id_groupe" class="w100">
               <option value="0">Aucun</option>
               {% for $groupes as $groupe}
-              <option value="{{ groupe.IdGroupe }}">{{ groupe.Name }}</option>
+              <option value="{{ groupe.idGroupe }}">{{ groupe.name }}</option>
               {% endfor %}
             </select>
           {% endif %}
@@ -43,17 +43,17 @@
         </div>
         <div class="col-3 mbs">
           {% if lieu}}
-            <input type="hidden" name="id_lieu" value="{{ lieu.Id }}">
-            <span>{{ lieu.Name }}</span>
+            <input type="hidden" name="id_lieu" value="{{ lieu.id }}">
+            <span>{{ lieu.name }}</span>
           {% else %}
             <select id="id_lieu" name="id_lieu" class="w100">
               <optgroup label="Autre">
                 <option value="0">aucun / non référencé</option>
               </optgroup>
               {% for from=$deps item=dep}
-              <optgroup label="{{ dep.Id }} - {{ dep.Name }}">
-                {% for from=$lieux[$dep.Id()] item=lieu}
-                <option value="{{ lieu.IdLieu }}">{{ lieu.City().Cp }} {{ lieu.City().Name }} : {{ lieu.Name }}</option>
+              <optgroup label="{{ dep.id }} - {{ dep.name }}">
+                {% for from=$lieux[$dep.id()] item=lieu}
+                <option value="{{ lieu.idLieu }}">{{ lieu.city.Cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
                 {% endfor %}
               </optgroup>
               {% endfor %}
@@ -65,8 +65,8 @@
         </div>
         <div class="col-3 mbs">
           {% if event}}
-            <input type="hidden" name="id_event" value="{{ event.Id }}">
-            <span style="float: right;">{{ event.Date }} - {{ event.Name }}</span>
+            <input type="hidden" name="id_event" value="{{ event.id }}">
+            <span style="float: right;">{{ event.Date }} - {{ event.name }}</span>
           {% else %}
             <select id="id_event" name="id_event" class="w100">
               <option value="0">Aucun</option>
