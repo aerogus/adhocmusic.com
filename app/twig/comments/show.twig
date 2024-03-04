@@ -1,6 +1,6 @@
 {% include 'common/header.twig' %}
 
-{% if unknown_comment}}
+{% if unknown_comment %}
 
 <p class="infobulle error">Ce commentaire est introuvable !</p>
 
@@ -15,11 +15,11 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>{{ comment.idComment }}</td>
+    <td>{{ comment.id }}</td>
   </tr>
   <tr>
     <th>Texte</th>
-    <td>{{ comment.Text()|@nl2br}</td>
+    <td>{{ comment.text|nl2br }}</td>
   </tr>
 </table>
 

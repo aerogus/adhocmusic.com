@@ -18,12 +18,12 @@
     </tr>
   </thead>
   <tbody>
-    {% for from=$subscriptions item=subscription}
+    {% for subscription in subscriptions %}
     <tr>
-      <td>{{ subscription.SubscribedAt }}</td>
-      <td>{{ subscription.CreatedAt }}</td>
-      <td>{{ subscription.FirstName }}</td>
-      <td>{{ subscription.LastName }}</td>
+      <td>{{ subscription.subscribedAt }}</td>
+      <td>{{ subscription.createdAt }}</td>
+      <td>{{ subscription.firstName }}</td>
+      <td>{{ subscription.lastName }}</td>
     </tr>
     {% endfor %}
   </tbody>

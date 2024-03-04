@@ -22,16 +22,16 @@
     </tr>
   </thead>
   <tbody>
-    {% for $lieux as $lieu}
+    {% for lieu in lieux %}
     <tr>
-      <td><a href="#" title="{{ lieu.country}">{{ lieu.id_country}</a></td>
-      <td><a href="#" title="{{ lieu.region}">{{ lieu.id_region}</a></td>
-      <td><a href="#" title="{{ lieu.departement}">{{ lieu.id_departement}</a></td>
-      <td>{{ lieu.id_city} ({{ lieu.cp2} - {{ lieu.city2})</td>
-      <td>{{ lieu.cp}</td>
-      <td>{{ lieu.city}</td>
-      <td><a href="/lieux/{{ lieu.id}">{{ lieu.name}</a></td>
-      <td>{{ lieu.nb_events}</td>
+      <td><a href="#" title="{{ lieu.country }}">{{ lieu.id_country }}</a></td>
+      <td><a href="#" title="{{ lieu.region }}">{{ lieu.id_region }}</a></td>
+      <td><a href="#" title="{{ lieu.departement }}">{{ lieu.id_departement }}</a></td>
+      <td>{{ lieu.id_city }} ({{ lieu.cp2 }} - {{ lieu.city2 }})</td>
+      <td>{{ lieu.cp }}</td>
+      <td>{{ lieu.city }}</td>
+      <td><a href="/lieux/{{ lieu.id }}">{{ lieu.name }}</a></td>
+      <td>{{ lieu.nb_events }}</td>
     </tr>
     {% endfor %}
   </tbody>

@@ -1,6 +1,6 @@
 <mjml>
   <mj-head>
-    <mj-title>{{ subject}</mj-title>
+    <mj-title>{{ subject }}</mj-title>
   </mj-head>
   <mj-body background-color="#fff">
     <mj-section background-color="#292933" padding-bottom="0px" padding-top="0">
@@ -15,13 +15,13 @@
         <mj-text color="#292933" font-size="20px" font-weight="700">Réception d'un message</mj-text>
         <mj-text font-size="16px" color="#292933">
           <p>Une nouvelle demande de participation à l’Afterwork S5E6 on line a été reçue, voici le récapitulatif de son inscription :</p>
-          <p>Nom de scène: {{ name}</p>
-          <p>E-mail: {{ email}</p>
-          <p>Date: {{ date}</p>
-          <p>Créneau(x) souhaité(s): {{ creneaux}</p>
-          <p>Photo: <a href="{{ photo_url}">{{ photo_url}</a></p>
-          <p>Instrument: {{ instrument|@nl2br}</p>
-          <p>Infos: {{ text|@nl2br}</p>
+          <p>Nom de scène: {{ name }}</p>
+          <p>E-mail: {{ email }}</p>
+          <p>Date: {{ date }}</p>
+          <p>Créneau(x) souhaité(s): {{ creneaux }}</p>
+          <p>Photo: <a href="{{ photo_url }}">{{ photo_url }}</a></p>
+          <p>Instrument: {{ instrument|nl2br }}</p>
+          <p>Infos: {{ text|nl2br }}</p>
         </mj-text>
       </mj-column>
     </mj-section>

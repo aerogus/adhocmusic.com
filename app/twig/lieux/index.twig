@@ -5,11 +5,11 @@
     <h1>Lieux</h1>
   </header>
   <div>
-  {% for from=$regions item=region}
+  {% for region in regions %}
     <h2>{{ region.name }}</h2>
-    {% for from=$departements[$region.idRegion()] item=departement}
-    <h3>{{ departement.idDepartement }} - {{ departement.name }}</h3>
-    {% if $lieux[$region.idRegion()][$departement.idDepartement()]|length > 0}
+    {% for departement in departements[region.id] %}
+    <h3>{{ departement.id }} - {{ departement.name }}</h3>
+    {% if lieux[region.id][departement.id]|length > 0 %}
     <table class="table table--zebra">
       <thead>
         <tr>
@@ -20,12 +20,12 @@
         </tr>
       </thead>
       <tbody>
-        {% for from=$lieux[$region.idRegion()][$departement.idDepartement()] item=lieu}
+        {% for lieu in lieux[region.id][departement.id] %}
         <tr>
-          <td><a href="{{ lieu.Url }}">{{ lieu.name }}</a></td>
-          <td>{{ lieu.city.Cp }}</td>
+          <td><a href="{{ lieu.url }}">{{ lieu.name }}</a></td>
+          <td>{{ lieu.city.cp }}</td>
           <td>{{ lieu.city.name }}</td>
-          <td>{{ lieu.Address }}</td>
+          <td>{{ lieu.address }}</td>
         </tr>
         {% endfor %}
       </tbody>

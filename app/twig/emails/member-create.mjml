@@ -15,10 +15,10 @@
         <mj-text color="#292933" font-size="20px" font-weight="700">Confirmation d'inscription</mj-text>
         <mj-text font-size="16px" color="#292933">
           <p>Cet e-mail confirme votre inscription au site de l'association AD'HOC. Voici les informations vous concernant qui ont été enregistrées dans notre base:</p>
-          <p>Pseudo: {{ pseudo}</p>
-          <p>E-mail: {{ email}</p>
-          <p>Mot de passe: {{ password}</p>
-          <p>Newsletter: {% if ($mailing}}oui{% else %}non{% endif %}</p>
+          <p>Pseudo: {{ pseudo }}</p>
+          <p>E-mail: {{ email }}</p>
+          <p>Mot de passe: {{ password }}</p>
+          <p>Newsletter: {% if mailing %}oui{% else %}non{% endif %}</p>
         </mj-text>
       </mj-column>
     </mj-section>

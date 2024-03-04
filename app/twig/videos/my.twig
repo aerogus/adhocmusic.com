@@ -10,18 +10,18 @@
       <a href="/videos/create" class="btn btn--primary">Ajouter une vidéo</a>
     </div>
 
-{% if $nb_items > 0}
+{% if nb_items > 0 %}
 
 {pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
 <div class="grid-6-small-2 has-gutter">
-  {% for $videos as $video}
+  {% for video in videos %}
   <div class="video">
-    <div class="thumb" style="background-image: url({{ video.ThumbUrl(320}})">
-      <a class="playbtn" href="{{ video.EditUrl }}">▶</a>
+    <div class="thumb" style="background-image: url({{ video.ThumbUrl(320) }})">
+      <a class="playbtn" href="{{ video.editUrl }}">▶</a>
     </div>
-    <p class="title"><a href="{{ video.EditUrl }}">{{ video.name }}</a></p>
-    <p class="subtitle">{% if video.Groupe()}}{{ video.Groupe().name }}{% endif %}</p>
+    <p class="title"><a href="{{ video.editUrl }}">{{ video.name }}</a></p>
+    <p class="subtitle">{% if video.groupe %}{{ video.groupe.name }}{% endif %}</p>
   </div>
   {% endfor %}
 </div>

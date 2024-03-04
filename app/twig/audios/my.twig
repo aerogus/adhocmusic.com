@@ -10,7 +10,7 @@
   <a href="/audios/create" class="btn btn--primary">Ajouter une musique</a>
 </div>
 
-{% if $audios|@sizeof == 0}
+{% if audios|length == 0 %}
 
 <p>Aucune musique</p>
 

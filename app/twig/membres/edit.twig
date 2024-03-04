@@ -6,30 +6,30 @@
   </header>
   <div>
 
-{% if updated_ok}}
+{% if updated_ok %}
 <p class="infobulle success">Enregistrement effectué</p>
 {% endif %}
 
 <form id="form-member-edit" name="form-member-edit" method="post" action="/membres/edit" enctype="multipart/form-data">
   <section class="grid-4">
-  {% if $me->isInterne }}
+  {% if me.interne %}
   <div>Notifications</div>
   <div class="col-3 mbs">
     <ul>
       <li>
-        <input type="checkbox" class="switch" name="forum[a]" id="forum[a]"{% if forum['a']}} checked="checked"{% endif %}> Général
+        <input type="checkbox" class="switch" name="forum[a]" id="forum[a]"{% if forum['a'] %} checked="checked"{% endif %}> Général
       </li>
       <li>
-        <input type="checkbox" class="switch" name="forum[b]" id="forum[b]"{% if forum['b']}} checked="checked"{% endif %}> Bureau
+        <input type="checkbox" class="switch" name="forum[b]" id="forum[b]"{% if forum['b'] %} checked="checked"{% endif %}> Bureau
       </li>
       <li>
-        <input type="checkbox" class="switch" name="forum[e]" id="forum[e]"{% if forum['e']}} checked="checked"{% endif %}> Exposition
+        <input type="checkbox" class="switch" name="forum[e]" id="forum[e]"{% if forum['e'] %} checked="checked"{% endif %}> Exposition
       </li>
       <li>
-        <input type="checkbox" class="switch" name="forum[s]" id="forum[s]"{% if forum['s']}} checked="checked"{% endif %}> Site
+        <input type="checkbox" class="switch" name="forum[s]" id="forum[s]"{% if forum['s'] %} checked="checked"{% endif %}> Site
       </li>
       <li>
-        <input type="checkbox" class="switch" name="forum[t]" id="forum[t]"{% if forum['t']}} checked="checked"{% endif %}> Technique
+        <input type="checkbox" class="switch" name="forum[t]" id="forum[t]"{% if forum['t'] %} checked="checked"{% endif %}> Technique
       </li>
     </ul>
   </div>
@@ -38,25 +38,25 @@
     <label for="created_at">Date Inscription</label>
   </div>
   <div class="col-3 mbs">
-    <span id="created_at">{{ me.CreatedAt()|date_format:"%d/%m/%Y %H:%M"}</span>
+    <span id="created_at">{{ me.createdAt|date_format:"%d/%m/%Y %H:%M" }}</span>
   </div>
   <div>
     <label for="modified_at">Date Modification</label>
   </div>
   <div class="col-3 mbs">
-    <span id="modified_at">{{ me.ModifiedAt()|date_format:"%d/%m/%Y %H:%M"}</span>
+    <span id="modified_at">{{ me.modifiedAt|date_format:"%d/%m/%Y %H:%M" }}</span>
   </div>
   <div>
     <label for="visited_at">Dernière visite</label>
   </div>
   <div class="col-3 mbs">
-    <span id="visited_at">{{ me.VisitedAt()|date_format:"%d/%m/%Y %H:%M"}</span>
+    <span id="visited_at">{{ me.visitedAt|date_format:"%d/%m/%Y %H:%M" }}</span>
   </div>
   <div>
     <label for="pseudo">Pseudo</label>
   </div>
   <div class="col-3 mbs">
-    <strong>{{ me.Pseudo }}</strong>
+    <strong>{{ me.pseudo }}</strong>
   </div>
   <div>
     <label for="password">Mot de passe</label>
@@ -64,12 +64,12 @@
   <div class="col-3 mbs">
     <a href="/auth/change-password" class="btn btn--primary">Modifier le mot de passe</a>
   </div>
-  {% if $me->isInterne }}
+  {% if me.interne %}
   <div>
     <label for="photo">Photo "corporate" (.jpg 100x100)</label>
   </div>
   <div class="col-3 mbs">
-    <img src="{{ me.AvatarInterneUrl }}" alt=""><br>
+    <img src="{{ me.avatarInterneUrl }}" alt=""><br>
     <input type="file" name="photo">
   </div>
   {% endif %}
@@ -77,34 +77,34 @@
     <label for="avatar">Avatar public (.jpg 100x---)</label>
   </div>
   <div class="col-3 mbs">
-    <img src="{{ me.AvatarUrl }}" alt=""><br>
+    <img src="{{ me.avatarUrl }}" alt=""><br>
     <input type="file" name="avatar">
   </div>
   <div>
     <label for="last_name">Nom</label>
   </div>
   <div class="col-3 mbs">
-    <div class="infobulle error" id="error_last_name"{% if not error_last_name}} style="display: none"{% endif %}>Vous devez renseigner votre nom</div>
-    <input id="last_name" name="last_name" type="text" class="w100" maxlength="50" value="{{ me.LastName }}">
+    <div class="infobulle error" id="error_last_name"{% if not error_last_name %} style="display: none"{% endif %}>Vous devez renseigner votre nom</div>
+    <input id="last_name" name="last_name" type="text" class="w100" maxlength="50" value="{{ me.lastName }}">
   </div>
   <div>
     <label for="first_name">Prénom</label>
   </div>
   <div class="col-3 mbs">
-    <div class="infobulle error" id="error_first_name"{% if not error_first_name}} style="display: none"{% endif %}>Vous devez préciser votre prénom</div>
-    <input id="first_name" name="first_name" type="text" class="w100" maxlength="50" value="{{ me.FirstName }}">
+    <div class="infobulle error" id="error_first_name"{% if not error_first_name %} style="display: none"{% endif %}>Vous devez préciser votre prénom</div>
+    <input id="first_name" name="first_name" type="text" class="w100" maxlength="50" value="{{ me.firstName }}">
   </div>
   <div>
     <label for="address">Adresse</label>
   </div>
   <div class="col-3 mbs">
-    <input id="address" name="address" type="text" class="w100" maxlength="50" value="{{ me.Address }}">
+    <input id="address" name="address" type="text" class="w100" maxlength="50" value="{{ me.address }}">
   </div>
   <div>
     <label for="id_country">Pays (*)</label>
   </div>
   <div class="col-3 mbs">
-    <div class="infobulle error" id="error_id_country"{% if not error_id_country}} style="display: none"{% endif %}>Vous devez choisir un pays</div>
+    <div class="infobulle error" id="error_id_country"{% if not error_id_country %} style="display: none"{% endif %}>Vous devez choisir un pays</div>
     <select id="id_country" name="id_country" class="w100">
       <option value="0">---</option>
     </select>
@@ -113,7 +113,7 @@
     <label for="id_region">Région (*)</label>
   </div>
   <div class="col-3 mbs">
-    <div class="infobulle error" id="error_id_region"{% if not error_id_region}} style="display: none"{% endif %}>Vous devez choisir une région</div>
+    <div class="infobulle error" id="error_id_region"{% if not error_id_region %} style="display: none"{% endif %}>Vous devez choisir une région</div>
     <select id="id_region" name="id_region" class="w100">
       <option value="0">---</option>
     </select>
@@ -122,7 +122,7 @@
     <label for="id_departement">Département (*)</label>
   </div>
   <div class="col-3 mbs">
-    <div class="infobulle error" id="error_id_departement"{% if not error_id_departement}} style="display: none"{% endif %}>Vous devez choisir un département</div>
+    <div class="infobulle error" id="error_id_departement"{% if not error_id_departement %} style="display: none"{% endif %}>Vous devez choisir un département</div>
     <select id="id_departement" name="id_departement" class="w100">
       <option value="0">---</option>
     </select>
@@ -131,7 +131,7 @@
     <label for="id_city">Ville (*)</label>
   </div>
   <div class="col-3 mbs">
-    <div class="infobulle error" id="error_id_city"{% if not error_id_city}} style="display: none"{% endif %}>Vous devez choisir une ville</div>
+    <div class="infobulle error" id="error_id_city"{% if not error_id_city %} style="display: none"{% endif %}>Vous devez choisir une ville</div>
     <select id="id_city" name="id_city" class="w100">
       <option value="0">---</option>
     </select>
@@ -140,38 +140,38 @@
     <label for="tel">Téléphone</label>
   </div>
   <div class="col-3 mbs">
-    <input id="tel" name="tel" type="text" class="w100" maxlength="50" value="{{ me.Tel }}" placeholder="+33 1 ..">
+    <input id="tel" name="tel" type="text" class="w100" maxlength="50" value="{{ me.tel }}" placeholder="+33 1 ..">
   </div>
   <div>
     <label for="port">Portable</label>
   </div>
   <div class="col-3 mbs">
-    <input id="port" name="port" type="text" class="w100" maxlength="50" value="{{ me.Port }}" placeholder="+33 6 ..">
+    <input id="port" name="port" type="text" class="w100" maxlength="50" value="{{ me.port }}" placeholder="+33 6 ..">
   </div>
   <div>
     <label for="email">Email</label>
   </div>
   <div class="col-3 mbs">
-    <div class="infobulle error" id="error_email"{% if not error_email}} style="display: none"{% endif %}>Vous devez renseigner votre email</div>
-    <input id="email" name="email" type="email" class="w100" maxlength="50" value="{{ me.Email }}">
+    <div class="infobulle error" id="error_email"{% if not error_email %} style="display: none"{% endif %}>Vous devez renseigner votre email</div>
+    <input id="email" name="email" type="email" class="w100" maxlength="50" value="{{ me.email }}">
   </div>
   <div>
     <label for="mailing">Newsletter</label>
   </div>
   <div class="col-3 mbs">
-    <span><input id="mailing" class="checkbox" name="mailing" type="checkbox"{% if $me.Mailing }} checked="checked"{% endif %}> oui, je veux recevoir la newsletter mensuelle</span>
+    <span><input id="mailing" class="checkbox" name="mailing" type="checkbox"{% if me.mailing %} checked="checked"{% endif %}> oui, je veux recevoir la newsletter mensuelle</span>
   </div>
   <div>
     <label for="site">Site Internet</label>
   </div>
   <div class="col-3 mbs">
-    <input id="site" name="site" type="text" class="w100" maxlength="50" value="{{ me.Site }}" placeholder="https://...">
+    <input id="site" name="site" type="text" class="w100" maxlength="50" value="{{ me.site }}" placeholder="https://...">
   </div>
   <div>
     <label for="text">Présentation</label>
   </div>
   <div class="col-3 mbs">
-    <textarea name="text" class="w100" rows="10">{{ me.Text }}</textarea>
+    <textarea name="text" class="w100" rows="10">{{ me.text }}</textarea>
   </div>
   <div></div>
   <div class="col-3">

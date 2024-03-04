@@ -25,12 +25,12 @@
     </tr>
   </thead>
   <tbody>
-  {% for cpt, thred in threads %}
+  {% for thread in threads %}
     <tr>
-      <td><img src="{{ thread.created_by_avatar }}" style="padding-right: 5px" class="thread-avatar" alt="" /><a class="toggle" id="toggle_{{ thread.id_thread }}" href="{{ thread.url}"><strong>{{ thread.subject}</strong></a> <em>({{ thread.nb_replies})</em><br />Par <a href="{{ thread.created_by_url}">{{ thread.created_by|pseudo_by_id}</a> le {{ thread.created_at|date_format:'%d/%m/%Y à %H:%M'}
-      <p style="display: none" class="msg" id="msg_{{ thread.id_thread}">{{ thread.text|@strip_tags|@nl2br}</p></td>
-      <td>Par <a href="/membres/{{ thread.modified_by }}">{{ thread.modified_by|pseudo_by_id }}</a><br />le {{ thread.modified_at|date_format:'%d/%m/%Y à %H:%M'}</td>
-      <td>{{ thread.nb_views}</td>
+      <td><img src="{{ thread.created_by_avatar }}" style="padding-right: 5px" class="thread-avatar" alt="" /><a class="toggle" id="toggle_{{ thread.id_thread }}" href="{{ thread.url }}"><strong>{{ thread.subject }}</strong></a> <em>({{ thread.nb_replies }})</em><br />Par <a href="{{ thread.createdByUrl }}">{{ thread.createdBy|pseudo_by_id }}</a> le {{ thread.createdAt|date_format:'%d/%m/%Y à %H:%M' }}
+      <p style="display: none" class="msg" id="msg_{{ thread.id_thread }}">{{ thread.text|strip_tags|nl2br }}</p></td>
+      <td>Par <a href="/membres/{{ thread.modified_by }}">{{ thread.modified_by|pseudo_by_id }}</a><br />le {{ thread.modifiedAt|date_format:'%d/%m/%Y à %H:%M' }}</td>
+      <td>{{ thread.nb_views }}</td>
   {% endfor %}
   </tbody>
 </table>

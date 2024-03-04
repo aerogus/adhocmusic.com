@@ -1,6 +1,6 @@
 {% include 'common/header.twig' %}
 
-{% if $me->isInterne }}
+{% if me.interne %}
 <div class="infobulle info"><a href="/adm">🔗 <strong>Accès zone privée</strong></a></div>
 {% endif %}
 
@@ -13,34 +13,34 @@
       <h2>Mes Infos Persos</h2>
     </header>
     <div>
-      <ul>  
+      <ul>
         <li>
-          <strong style="float: right">{{ me.Pseudo }}</strong>
+          <strong style="float: right">{{ me.pseudo }}</strong>
           <label for="pseudo">Pseudo</label>
         </li>
         <li>
-          <span id="last_name" style="float: right;">{{ me.LastName }}</span>
+          <span id="last_name" style="float: right;">{{ me.lastName }}</span>
           <label for="last_name">Nom</label>
         </li>
         <li>
-          <span id="first_name" style="float: right;">{{ me.FirstName }}</span>
+          <span id="first_name" style="float: right;">{{ me.firstName }}</span>
           <label for="first_name">Prénom</label>
         </li>
         <li>
-          <span id="created_at" style="float: right">{{ me.CreatedAt()|date_format:"%d/%m/%Y"}</span>
+          <span id="created_at" style="float: right">{{ me.createdAt|date_format:"%d/%m/%Y" }}</span>
           <label for="created_at">Inscription</label>
         </li>
         <li>
-          <span id="modified_at" style="float: right">{{ me.ModifiedAt()|date_format:"%d/%m/%Y"}</span>
+          <span id="modified_at" style="float: right">{{ me.modifiedAt|date_format:"%d/%m/%Y" }}</span>
           <label for="modified_at">Modification</label>
         </li>
         <li>
-          <span id="visited_at" style="float: right">{{ me.VisitedAt()|date_format:"%d/%m/%Y"}</span>
+          <span id="visited_at" style="float: right">{{ me.visitedAt|date_format:"%d/%m/%Y" }}</span>
           <label for="visited_at">Visite</label>
         </li>
         <li>
           <span style="float: right">
-          <img src="{{ me.AvatarUrl }}" alt=""><br>
+          <img src="{{ me.avatarUrl }}" alt=""><br>
           </span>
           <label for="avatar">Avatar</label>
         </li>
@@ -66,12 +66,12 @@
           <th>Date</th>
           <th>Message</th>
         </tr>
-        {% for from=$inbox key=cpt item=msg}
-        <tr class="{% if $cpt is odd}odd{% else %}even{% endif %}">
-          <td><img src="/img/icones/{% if msg.read_to}}email_open.png{% else %}email.png{% endif %}" alt=""></td>
-          <td><a href="/messagerie/write?pseudo={{ msg.pseudo}">{{ msg.pseudo}</a></td>
-          <td>{{ msg.date|date_format:'%d/%m/%Y à %H:%M'}</td>
-          <td><a href="/messagerie/read/{{ msg.id}">{{ msg.text|truncate:40}</a></td>
+        {% for cpt, msg in inbox %}
+        <tr class="{% if cpt is odd %}odd{% else %}even{% endif %}">
+          <td><img src="/img/icones/{% if msg.read_to %}email_open.png{% else %}email.png{% endif %}" alt=""></td>
+          <td><a href="/messagerie/write?pseudo={{ msg.pseudo }}">{{ msg.pseudo }}</a></td>
+          <td>{{ msg.date|date_format:'%d/%m/%Y à %H:%M' }}</td>
+          <td><a href="/messagerie/read/{{ msg.id }}">{{ msg.text|truncate:40 }}</a></td>
         </tr>
         {% endfor %}
       </table>
@@ -89,34 +89,34 @@
     </header>
     <div>
       <h5>Groupes</h5>
-      {% if alerting_groupes}}
+      {% if alerting_groupes %}
       <ul>
-        {% for $alerting_groupes as $groupe}
-        <li><a href="{{ groupe.Url }}">{{ groupe.name }}</a></li>
+        {% for groupe in alerting_groupes %}
+        <li><a href="{{ groupe.url }}">{{ groupe.name }}</a></li>
         {% endfor %}
       </ul>
       {% else %}
-      <p class="infobulle validation"">Aucun abonnement groupe</p>
+      <p class="infobulle validation">Aucun abonnement groupe</p>
       {% endif %}
       <h5>Évènements</h5>
-      {% if alerting_events}}
+      {% if alerting_events %}
       <ul>
-      {% for $alerting_events as $event}
-        <li><a href="{{ event.Url }}">{{ event.name }}</a></li>
+      {% for event in alerting_events %}
+        <li><a href="{{ event.url }}">{{ event.name }}</a></li>
       {% endfor %}
       </ul>
       {% else %}
-      <p class="infobulle validation"">Aucun abonnement évènement</p>
+      <p class="infobulle validation">Aucun abonnement évènement</p>
       {% endif %}
       <h5>Lieux</h5>
-      {% if alerting_lieux}}
+      {% if alerting_lieux %}
       <ul>
-      {% for $alerting_lieux as $lieu}
-        <li><a href="{{ lieu.Url }}">{{ lieu.name }}</a></li>
+      {% for lieu in alerting_lieux %}
+        <li><a href="{{ lieu.url }}">{{ lieu.name }}</a></li>
       {% endfor %}
       </ul>
       {% else %}
-      <p class="infobulle validation"">Aucun abonnement lieu</p>
+      <p class="infobulle validation">Aucun abonnement lieu</p>
       {% endif %}
       <p><a class="btn btn--primary" href="/alerting/my">Gérer toutes mes alertes</a></p>
     </div>
@@ -129,11 +129,11 @@
       <h2>Mes Groupes</h2>
     </header>
     <div>
-      {% if $groupes|length > 0}
+      {% if groupes|length > 0 %}
       <p>Vous administrez le(s) groupe(s) suivant(s) :</p>
       <ul>
-        {% for $groupes as $groupe}
-        <li><a href="/groupes/edit/{{ groupe.idGroupe }}" title="{{ groupe.name }}">{{ groupe.name }}</a></li>
+        {% for groupe in groupes %}
+        <li><a href="/groupes/edit/{{ groupe.id }}" title="{{ groupe.name }}">{{ groupe.name }}</a></li>
         {% endfor %}
       </ul>
       <p><a class="btn btn--primary" href="/groupes/my">Tous mes groupes</a></p>
@@ -149,8 +149,8 @@
       <h2>Mes photos</h2>
     </header>
     <div>
-      {% if $nb_photos > 0}
-      <p>Vous avez {{ nb_photos} photos</p>
+      {% if nb_photos > 0 %}
+      <p>Vous avez {{ nb_photos }} photos</p>
       <p><a class="btn btn--primary" href="/photos/my">Toutes mes photos</a></p>
       {% else %}
       <p>Aucune photo</p>
@@ -164,8 +164,8 @@
       <h2>Mes vidéos</h2>
     </header>
     <div>
-      {% if $nb_videos > 0}
-      <p>Vous avez {{ nb_videos} vidéos</p>
+      {% if nb_videos > 0 %}
+      <p>Vous avez {{ nb_videos }} vidéos</p>
       <p><a class="btn btn--primary" href="/videos/my">Toutes mes vidéos</a></p>
       {% else %}
       <p>Aucune vidéo</p>
@@ -179,8 +179,8 @@
       <h2>Mes musiques</h2>
     </header>
     <div>
-      {% if $nb_audios > 0}
-      <p>Vous avez {{ nb_audios} audios</p>
+      {% if nb_audios > 0 %}
+      <p>Vous avez {{ nb_audios }} audios</p>
       <p><a class="btn btn--primary" href="/audios/my">Toutes mes musiques</a></p>
       {% else %}
       <p>Aucune musique</p>

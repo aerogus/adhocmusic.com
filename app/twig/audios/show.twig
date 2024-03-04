@@ -7,7 +7,7 @@
 {% else %}
 
 <script>
-var audio_url = '{{ og_audio.url}';
+var audio_url = '{{ og_audio.url }}';
 </script>
 
 <div class="box">
@@ -27,7 +27,7 @@ var audio_url = '{{ og_audio.url}';
   <li>Groupe : <a href="{{ groupe.url }}"><strong>{{ groupe.name }}</strong></a></li>
   {% endif %}
   {% if audio.idEvent %}
-  <li>Evénement : <a href="{{ event.url }}"><strong>{{ event.name }}</strong></a> ({{ event.date()|date_format:'%d/%m/%Y' }})</li>
+  <li>Evénement : <a href="{{ event.url }}"><strong>{{ event.name }}</strong></a> ({{ event.date|date_format:'%d/%m/%Y' }})</li>
   {% endif %}
   {% if audio.idLieu %}
   <li>Lieu : <a href="{{ lieu.url }}"><strong>{{ lieu.name }}</strong></a></li>
@@ -41,22 +41,22 @@ var audio_url = '{{ og_audio.url}';
   </div>
 </div>
 
-{% if photos) || videos}}
+{% if photos or videos %}
 <div class="box">
   <header>
     <h2>Photos et vidéos de ce concert</h2>
   </header>
   <div>
-{% for $photos as $photo}
+{% for photo in photos %}
 <div class="thumb-80 thumb-photo-80">
-  <a href="{{ photo.Url }}"><img src="{{ photo.ThumbUrl(80}}" alt="{{ photo.name }}"><br>{{ photo.name()|truncate:15:"...":true:true}</a>
-  <a class="overlay-80 overlay-photo-80" href="{{ photo.Url }}" title="{{ photo.name }}"></a>
+  <a href="{{ photo.url }}"><img src="{{ photo.thumbUrl(80) }}" alt="{{ photo.name }}"><br>{{ photo.name|truncate:15:"...":true:true }}</a>
+  <a class="overlay-80 overlay-photo-80" href="{{ photo.url }}" title="{{ photo.name }}"></a>
 </div>
 {% endfor %}
-{% for $videos as $video}
+{% for video in videos %}
 <div class="thumb-80 thumb-video-80">
-  <a href="{{ video.Url }}"><img src="{{ video.ThumbUrl(80}}" alt="{{ video.name }}"><br>{{ video.name()|truncate:15:"...":true:true}</a>
-  <a class="overlay-80 overlay-video-80" href="{{ video.Url }}" title="{{ video.name }}"></a>
+  <a href="{{ video.url }}"><img src="{{ video.thumbUrl(80) }}" alt="{{ video.name }}"><br>{{ video.name|truncate:15:"...":true:true }}</a>
+  <a class="overlay-80 overlay-video-80" href="{{ video.url }}" title="{{ video.name }}"></a>
 </div>
 {% endfor %}
   </div>

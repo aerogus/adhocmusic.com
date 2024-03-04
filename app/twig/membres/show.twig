@@ -1,6 +1,6 @@
 {% include 'common/header.twig' %}
 
-{% if unknown_member}}
+{% if unknown_member %}
 
 <p class="infobulle error">Ce membre est introuvable</p>
 
@@ -12,36 +12,31 @@
   </header>
   <div class="grid-3">
     <div class="col-1 profile">
-      {% if $membre.AvatarUrl }}
-      <img src="{{ membre.AvatarUrl }}" alt="{{ membre.Pseudo }}">
+      {% if membre.avatarUrl %}
+      <img src="{{ membre.avatarUrl }}" alt="{{ membre.pseudo }}">
       {% endif %}
       <strong>{{ membre.Pseudo }}</strong>
-      {% if $membre.Site }}
-      <a href="{{ membre.Site }}">{{ membre.Site }}</a>
+      {% if membre.site %}
+      <a href="{{ membre.site }}">{{ membre.site }}</a>
       {% endif %}
-      <a class="btn btn--primary" href="/messagerie/write?pseudo={{ membre.Pseudo }}">Lui écrire</a>
+      <a class="btn btn--primary" href="/messagerie/write?pseudo={{ membre.pseudo }}">Lui écrire</a>
     </div>
     <div class="col-2">
-      {{ membre.Text }}
+      {{ membre.text }}
     </div>
   </div>
 </div>
 
-{% if $groupes|length > 0}
+{% if groupes|length > 0 %}
 <div class="box">
   <header>
     <h2>Ses groupes</h2>
   </header>
-  {% if !count($groupes}}
-  <div>
-    <p>{{ membre.Pseudo }} ne fait partie d'aucun groupe.</p>
-  </div>
-  {% else %}
   <div class="reset grid-8-small-4 has-gutter">
-    {% for from=$groupes item=groupe}
+    {% for groupe in groupes %}
     <div class="grpitem">
-      <a href="{{ groupe.Url }}">
-        <img src="{{ groupe.MiniPhoto }}" alt="" />
+      <a href="{{ groupe.url }}">
+        <img src="{{ groupe.miniPhoto }}" alt="" />
         <p>{{ groupe.name }}</p>
       </a>
     </div>

@@ -6,7 +6,7 @@
   </header>
   <div>
 
-{% if unknown_video}}
+{% if unknown_video %}
 
 <p class="infobulle error">Cette vidéo est introuvable !</p>
 
@@ -18,32 +18,32 @@
       <label for="name">Titre (*)</label>
     </div>
     <div class="col-3 mbs">
-      <div class="infobulle error" id="error_name"{% if not error_name}} style="display: none"{% endif %}>Vous devez saisir un titre pour la vidéo</div>
+      <div class="infobulle error" id="error_name"{% if not error_name %} style="display: none"{% endif %}>Vous devez saisir un titre pour la vidéo</div>
       <input type="text" id="name" name="name" class="w100" value="{{ video.name }}">
     </div>
     <div>
       <label for="host">Hébergeur</label>
     </div>
     <div class="col-3 mbs">
-      <span id="host">{{ video.Host().name }}</span>
+      <span id="host">{{ video.host.name }}</span>
     </div>
     <div>
       <label for="reference">Référence</label>
     </div>
     <div class="col-3 mbs">
-      <span id="reference">{{ video.Reference }}</span>
+      <span id="reference">{{ video.reference }}</span>
     </div>
     <div>
       <label for="player">Visualiser</label>
     </div>
     <div class="col-3 mbs">
-      {{ video.Player }}
+      {{ video.player|raw }}
     </div>
     <div>
       <label for="thumbnail">Miniature</label>
     </div>
     <div class="col-3 mbs">
-      <img src="{{ video.ThumbUrl(320}}" alt=""/>
+      <img src="{{ video.thumbUrl(320) }}" alt=""/>
     </div>
     <div>
       <label for="thumbnail_fetch">Réimporter la miniature</label>
@@ -59,7 +59,7 @@
       {section name=cpt_groupe loop=5}
       <select id="ids_groupe[{{ smarty.section.cpt_groupe.index}]" name="ids_groupe[{{ smarty.section.cpt_groupe.index}]" class="w100 mbs">
         <option value="">-- Choix d'un groupe --</option>
-        {% for from=$groupes item=groupe}
+        {% for groupe in groupes %}
         <option value="{{ groupe.id }}" {% if $video_groupes[$smarty.section.cpt_groupe.index] && ($video_groupes[$smarty.section.cpt_groupe.index].id() === $groupe.id()}} selected="selected"{% endif %}>{{ groupe.name }}</option>
         {% endfor %}
       </select>
@@ -73,10 +73,10 @@
         <optgroup label="Autre">
           <option value="0">aucun / non référencé</option>
         </optgroup>
-        {% for from=$deps item=dep}
+        {% for dep in deps %}
         <optgroup label="{{ dep.id }} - {{ dep.name }}">
           {% for from=$lieux[$dep.id()] item=lieu}
-          <option value="{{ lieu.idLieu }}"{% if $video.idLieu() === $lieu.idLieu }} selected="selected"{% endif %}>{{ lieu.city.Cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
+          <option value="{{ lieu.id }}"{% if video.idLieu == lieu.id %} selected="selected"{% endif %}>{{ lieu.city.cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
           {% endfor %}
         </optgroup>
         {% endfor %}
@@ -94,16 +94,16 @@
       <label for="online">Rendre public</label>
     </div>
     <div class="col-3 mbs">
-      <input class="checkbox" type="checkbox" name="online"{% if $video.Online }} checked="checked"{% endif %}>
+      <input class="checkbox" type="checkbox" name="online"{% if video.online %} checked="checked"{% endif %}>
     </div>
     <div></div>
     <div class="col-2">
       <input id="form-video-edit-submit" name="form-video-edit-submit" type="submit" class="btn btn--primary" value="Enregistrer">
-      <input type="hidden" name="id" value="{{ video.idVideo }}">
+      <input type="hidden" name="id" value="{{ video.id }}">
       <input type="hidden" name="video_id_event" id="video_id_event" value="{{ video.idEvent }}">
     </div>
     <div class="txtright">
-      <a href="/videos/delete/{{ video.idVideo }}" class="btn btn--primary">Supprimer</a>
+      <a href="/videos/delete/{{ video.id }}" class="btn btn--primary">Supprimer</a>
     </div>
   </section>
 </form>

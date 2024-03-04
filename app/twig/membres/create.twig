@@ -17,7 +17,7 @@ Cliquez alors sur le cadenas en haut à droite pour vous identifier.</div>
 déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="/auth/lost-password">cliquez ici</a> pour le récupérer.</div>
 
   {% if password %}
-    <div class="infobulle info">Mot de passe: {{ password}</div>
+    <div class="infobulle info">Mot de passe: {{ password }}</div>
   {% endif %}
 
 {% else %}
@@ -25,7 +25,7 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
 <form id="form-member-create" name="form-member-create" method="post" action="/membres/create">
   <div class="mbs">
     <label for="pseudo">Pseudo</label>
-    <div id="error_pseudo_unavailable" class="infobulle error"{% if not error_pseudo_unavailable}} style="display: none"{% endif %}>Ce pseudo est pris, veuillez en choisir un autre</div>
+    <div id="error_pseudo_unavailable" class="infobulle error"{% if not error_pseudo_unavailable %} style="display: none"{% endif %}>Ce pseudo est pris, veuillez en choisir un autre</div>
     <div class="infobulle error" id="error_pseudo"{% if not error_pseudo %} style="display: none"{% endif %}>Vous devez saisir un pseudo entre 1 à 50 caractères</div>
     <input id="pseudo" name="pseudo" type="text" maxlength="50" value="{{ data.pseudo }}" placeholder="Pseudo">
   </div>
@@ -41,8 +41,8 @@ déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="
     <span><input id="mailing" class="checkbox" name="mailing" type="checkbox"{% if data.mailing %} checked="checked"{% endif %}> Je souhaite recevoir la newsletter</span>
   </div>
   <div>
-    <input type="hidden" name="csrf" value="{{ data.csrf}">
-    <input type="hidden" name="text" value="{{ data.text}">
+    <input type="hidden" name="csrf" value="{{ data.csrf }}">
+    <input type="hidden" name="text" value="{{ data.text }}">
     <input id="form-membrer-create-submit" name="form-member-create-submit" class="btn btn--primary" style="width:100%" type="submit" value="Je crée mon compte">
   </div>
 </form>

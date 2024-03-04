@@ -36,7 +36,7 @@
           {section name=cpt_groupe loop=5}
           <select id="ids_groupe[{{ smarty.section.cpt_groupe.index}]" name="ids_groupe[{{ smarty.section.cpt_groupe.index}]" class="w100 mbs">
             <option value="">-- Choix d'un groupe --</option>
-            {% for from=$groupes item=groupe}
+            {% for groupe in groupes %}
             <option value="{{ groupe.id }}"{% if ($smarty.section.cpt_groupe.index === 0) && $groupe.id() === $id_groupe} selected="selected"{% endif %}>{{ groupe.name }}</option>
             {% endfor %}
           </select>
@@ -54,10 +54,10 @@
             <optgroup label="Autre">
               <option value="0">aucun / non référencé</option>
             </optgroup>
-            {% for from=$deps item=dep}
+            {% for dep in deps %}
             <optgroup label="{{ dep.id }} - {{ dep.name }}">
               {% for from=$lieux[$dep.id()] item=lieu}
-              <option value="{{ lieu.idLieu }}">{{ lieu.city.Cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
+              <option value="{{ lieu.id }}">{{ lieu.city.cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
               {% endfor %}
             </optgroup>
             {% endfor %}
@@ -68,9 +68,9 @@
           <label for="id_event">Evénement</label>
         </div>
         <div class="col-3 mbs">
-          {% if event}}
+          {% if event %}
           <input type="hidden" name="id_event" value="{{ event.id }}">
-          <span >{{ event.Date }} - {{ event.name }}</span>
+          <span >{{ event.date }} - {{ event.name }}</span>
           {% else %}
           <select id="id_event" name="id_event" class="w100">
             <option value="0">Veuillez sélectionner un lieu</option>

@@ -2,7 +2,7 @@
 
 {% if comments %}
 <h4>Commentaires</h4>
-{% for key, comment in comments %}
+{% for comment in comments %}
 <div class="comment {% if cpt is odd %}odd{% else %}even{% endif %}" style="position: relative; min-height: 70px;">
 {% if comment.idContact %}
   <div style="position: absolute;">
@@ -18,7 +18,7 @@
   </div>
   <span style="float: right;">{{ comment.createdAt|date_format:'%d/%m/%Y à %H:%M' }}</span>
 {% endif %}
-<p style="padding-left: 115px;">{{ comment.text|@nl2br }}</p>
+<p style="padding-left: 115px;">{{ comment.text|nl2br }}</p>
 </div>
 {% endfor %}
 {% endif %}

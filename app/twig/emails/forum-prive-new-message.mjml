@@ -14,13 +14,13 @@
       <mj-column width="100%">
         <mj-text color="#292933" font-size="20px" font-weight="700">Nouveau message d'un forum privé</mj-text>
         <mj-text font-size="16px" color="#292933">
-          <img align="left" src="{{ avatar}" alt="" style="float: left; width: 50px; height: 50px; padding-right: 10px; padding-bottom: 10px;">
-          <p><strong>{{ pseudo_from}</strong> a écrit dans le forum <strong>{{ forum_name}</strong> :</p>
-          {% if subject}}
-          <p><strong>{{ subject}</strong></p>
+          <img align="left" src="{{ avatar }}" alt="" style="float: left; width: 50px; height: 50px; padding-right: 10px; padding-bottom: 10px;">
+          <p><strong>{{ pseudo_from }}</strong> a écrit dans le forum <strong>{{ forum_name }}</strong> :</p>
+          {% if subject %}
+          <p><strong>{{ subject }}</strong></p>
           {% endif %}
-          {{ text|@nl2br}
-          <p>Pour y répondre, <a href="https://www.adhocmusic.com/adm/forums/thread/{{ id_thread}">clique ici</a>.</p>
+          {{ text|nl2br }}
+          <p>Pour y répondre, <a href="https://www.adhocmusic.com/adm/forums/thread/{{ id_thread }}">clique ici</a>.</p>
         </mj-text>
       </mj-column>
     </mj-section>

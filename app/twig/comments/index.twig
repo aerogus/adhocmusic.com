@@ -22,16 +22,16 @@
     </tr>
   </thead>
   <tbody>
-  {% for $comments as $comment}
-    <tr id="row-{{ comment.idComment }}">
-      <td><input type="checkbox" id="com-del-{{ comment.idComment }}"></td>
-      <td><a href="/comments/show/{{ comment.idComment }}">{{ comment.idComment }}</a></td>
-      <td><a href="/{{ comment.type_full}/{{ comment.id_content}">{{ comment.type} {{ comment.id_content}</a></td>
-      <td>{{ comment.CreatedAt }}</td>
-      <td>{{ comment.Online }}</td>
-      <td>{{ comment.Pseudo }}<br>{{ comment.Email }}</td>
-      <td><a href="/membres/show/{{ comment.idCcontact }}">{{ comment.Pseudo }}</a><br>{{ comment.Email }}</td>
-      <td>{{ comment.Text()|@nl2br}</td>
+  {% for comment in comments %}
+    <tr id="row-{{ comment.id }}">
+      <td><input type="checkbox" id="com-del-{{ comment.id }}"></td>
+      <td><a href="/comments/show/{{ comment.id }}">{{ comment.id }}</a></td>
+      <td><a href="/{{ comment.type_full }}/{{ comment.id_content }}">{{ comment.type }} {{ comment.id_content }}</a></td>
+      <td>{{ comment.createdAt }}</td>
+      <td>{{ comment.online }}</td>
+      <td>{{ comment.pseudo }}<br>{{ comment.email }}</td>
+      <td><a href="/membres/show/{{ comment.idContact }}">{{ comment.pseudo }}</a><br>{{ comment.email }}</td>
+      <td>{{ comment.text|nl2br }}</td>
     </tr>
   {% endfor %}
   </tbody>

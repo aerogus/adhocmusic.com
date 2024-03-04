@@ -15,10 +15,10 @@
         <mj-text color="#292933" font-size="20px" font-weight="700">Confirmation d'envoi d'un message</mj-text>
         <mj-text font-size="16px" color="#292933">
           <p>Vous avez envoyé un message via le formulaire de contact du site AD'HOC, en voici une copie</p>
-          <p>De: {{ name}</p>
-          <p>E-mail: {{ email}</p>
-          <p>Sujet: {{ subject}</p>
-          <p>Texte: {{ text|@nl2br}</p>
+          <p>De: {{ name }}</p>
+          <p>E-mail: {{ email }}</p>
+          <p>Sujet: {{ subject }}</p>
+          <p>Texte: {{ text|nl2br }}</p>
         </mj-text>
       </mj-column>
     </mj-section>

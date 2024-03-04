@@ -47,10 +47,10 @@
             <optgroup label="Autre">
               <option value="0">aucun / non référencé</option>
             </optgroup>
-            {% for from=$dep item=dep_name key=dep_id}
-            <optgroup label="{{ dep_id} - {{ dep_name}">
-              {% for from=$lieux.$dep_id item=lieu}
-              <option value="{{ lieu.idLieu }}"{% if $audio.idLieu() === $lieu.idLieu }} selected="selected"{% endif %}>{{ lieu.city.Cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
+            {% for dep_id, dep_name in dep %}
+            <optgroup label="{{ dep_id }} - {{ dep_name }}">
+              {% for lieu in lieux[dep_id] %}
+              <option value="{{ lieu.id }}"{% if audio.idLieu == lieu.id %} selected="selected"{% endif %}>{{ lieu.city.cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
               {% endfor %}
             </optgroup>
             {% endfor %}
@@ -68,20 +68,20 @@
           <label for="online">Rendre public</label>
         </div>
         <div class="col-3 mbs">
-          <input class="checkbox" type="checkbox" name="online"{% if $audio.Online }} checked="checked"{% endif %}>
+          <input class="checkbox" type="checkbox" name="online"{% if audio.online %} checked="checked"{% endif %}>
         </div>
         <div>
           <label for="created_at">Envoyé le</label>
         </div>
         <div class="col-3 mbs">
-          <span id="created_at">{{ audio.CreatedAt()|date_format:"%d/%m/%Y à %H:%M"} par <a href="{{ membre.Url }}">{{ membre.Pseudo }}</a></span>
+          <span id="created_at">{{ audio.createdAt|date_format:"%d/%m/%Y à %H:%M" }} par <a href="{{ membre.url }}">{{ membre.pseudo }}</a></span>
         </div>
-        {% if $audio.ModifiedAt }}
+        {% if audio.modifiedAt %}
         <div>
           <label for="modified_at">Modifié le</label>
         </div>
         <div class="col-3 mbs">
-          <span id="modified_at">{{ audio.ModifiedAt()|date_format:"%d/%m/%Y à %H:%M"}</span>
+          <span id="modified_at">{{ audio.modifiedAt|date_format:"%d/%m/%Y à %H:%M" }}</span>
         </div>
         {% endif %}
         <div></div>

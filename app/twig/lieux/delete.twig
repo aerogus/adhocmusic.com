@@ -6,7 +6,7 @@
   </header>
   <div>
 
-{% if unknown_lieu}}
+{% if unknown_lieu %}
 
 <p class="infobulle error">Ce lieu est introuvable !</p>
 
@@ -16,16 +16,16 @@
   <fieldset>
     <ol>
       <li>Nom : {{ lieu.name }}</li>
-      <li>Type : {{ lieu.Type }}</li>
-      <li>Adresse : {{ lieu.Address }}</li>
-      <li>Code Postal : {{ lieu.city.Cp }}</li>
+      <li>Type : {{ lieu.type }}</li>
+      <li>Adresse : {{ lieu.address }}</li>
+      <li>Code Postal : {{ lieu.city.cp }}</li>
       <li>Département : {{ lieu.idDepartement }}</li>
       <li>Ville : {{ lieu.city.name }}</li>
-      <li>Pays : {{ lieu.Country().name }}</li>
-      <li>Description : {{ lieu.Text }}</li>
-      <li>Site : {{ lieu.Site }}</li>
-      <li>Latitude : {{ lieu.Lat }}</li>
-      <li>Longitude : {{ lieu.Lng }}</li>
+      <li>Pays : {{ lieu.country.name }}</li>
+      <li>Description : {{ lieu.text }}</li>
+      <li>Site : {{ lieu.site }}</li>
+      <li>Latitude : {{ lieu.lat }}</li>
+      <li>Longitude : {{ lieu.lng }}</li>
     </ol>
   </fieldset>
   <input id="form-lieu-delete-submit" name="form-lieu-delete-submit" type="submit" class="btn btn--primary" value="Supprimer">
