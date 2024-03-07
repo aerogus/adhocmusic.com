@@ -45,7 +45,7 @@
       <h2>Événement</h2>
     </header>
     <div>
-      <a href="{{ event.url }}"><img style="float:right" src="{{ event.thumbUrl }}" alt=""><strong>{{ event.name }}</strong></a><br>{{ event.date }}
+      <a href="{{ event.url }}"><img style="float:right" src="{{ event.thumbUrl }}" alt=""><strong>{{ event.name }}</strong></a><br>{{ event.date|format_datetime(pattern='dd LLLL yyyy') }}
     </div>
   </div>
   {% endif %}

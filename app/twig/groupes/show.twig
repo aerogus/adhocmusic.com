@@ -59,7 +59,7 @@
           <p class="subtitle">
             {% if video.event %}<a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.name }}
             <br/>
-            {{ video.event.date }}</a>{% endif %}
+            {{ video.event.date|format_datetime(pattern='dd LLLL yyyy') }}</a>{% endif %}
           </p>
         </div>
         {% endfor %}
