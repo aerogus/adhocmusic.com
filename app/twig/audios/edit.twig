@@ -74,14 +74,14 @@
           <label for="created_at">Envoyé le</label>
         </div>
         <div class="col-3 mbs">
-          <span id="created_at">{{ audio.createdAt|date_format:"%d/%m/%Y à %H:%M" }} par <a href="{{ membre.url }}">{{ membre.pseudo }}</a></span>
+          <span id="created_at">{{ audio.createdAt|date("d/m/Y \\à H\\:M") }} par <a href="{{ membre.url }}">{{ membre.pseudo }}</a></span>
         </div>
         {% if audio.modifiedAt %}
         <div>
           <label for="modified_at">Modifié le</label>
         </div>
         <div class="col-3 mbs">
-          <span id="modified_at">{{ audio.modifiedAt|date_format:"%d/%m/%Y à %H:%M" }}</span>
+          <span id="modified_at">{{ audio.modifiedAt|date("d/m/Y \\à H\\:M") }}</span>
         </div>
         {% endif %}
         <div></div>

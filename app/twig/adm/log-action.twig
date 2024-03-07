@@ -26,7 +26,7 @@
   </tr>
   {% for log in logs %}
   <tr>
-    <td>{{ log.datetime|date_format:'%d/%m/%y %H:%M:%S' }}</td>
+    <td>{{ log.datetime|date("d/m/y H\\:M\\:S") }}</td>
     <td><a href="/membres/show/{{ log.id_contact }}">{{ log.pseudo }}</a></td>
     <td><strong>{{ log.actionlib }}</strong>{% if log.extra %} ({{ log.extra }}){% endif %}</td>
     <td>{{ log.host }}</td>

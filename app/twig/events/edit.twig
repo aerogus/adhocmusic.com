@@ -95,7 +95,7 @@
         <label for="date">Date</label>
       </div>
       <div class="col-3 mbm">
-        <input type="text" id="date" name="date" value="{{ event.date|date('%d/%m/%Y') }}">
+        <input type="text" id="date" name="date" value="{{ event.date|date("d/m/Y") }}">
         <select id="hourminute" name="hourminute">{html_input_date_hourminute hour=$event.Hour() minute=$event.Minute }}</select>
       </div>
 

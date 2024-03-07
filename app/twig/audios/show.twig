@@ -27,12 +27,12 @@ var audio_url = '{{ og_audio.url }}';
   <li>Groupe : <a href="{{ groupe.url }}"><strong>{{ groupe.name }}</strong></a></li>
   {% endif %}
   {% if audio.idEvent %}
-  <li>Evénement : <a href="{{ event.url }}"><strong>{{ event.name }}</strong></a> ({{ event.date|date_format:'%d/%m/%Y' }})</li>
+  <li>Evénement : <a href="{{ event.url }}"><strong>{{ event.name }}</strong></a> ({{ event.date|date("d/m/Y") }})</li>
   {% endif %}
   {% if audio.idLieu %}
   <li>Lieu : <a href="{{ lieu.url }}"><strong>{{ lieu.name }}</strong></a></li>
   {% endif %}
-  <li>Mise en ligne : le {{ audio.createdAt|date_format:'%d/%m/%Y' }} par <a href="/membres/show/{{ audio.idContact }}"><strong>{{ audio.idContact|pseudo_by_id }}</strong></a></li>
+  <li>Mise en ligne : le {{ audio.createdAt|date("d/m/Y") }} par <a href="/membres/show/{{ audio.idContact }}"><strong>{{ audio.idContact|pseudo_by_id }}</strong></a></li>
 </ul>
 </div>
 

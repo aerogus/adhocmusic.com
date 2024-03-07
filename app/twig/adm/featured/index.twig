@@ -45,8 +45,8 @@
         <tr>
           <td><a href="/adm/featured/edit/{{ f.id }}">{{ f.title }}<br>{{ f.description }}</a></td>
           <td><img src="{{ f.image }}" width="108" height="60" alt="" style="display: block" /></td>
-          <td>{{ f.datDeb|date_format('%d/%m/%Y') }}</td>
-          <td>{{ f.datFin|date_format('%d/%m/%Y') }}</td>
+          <td>{{ f.datDeb|date("d/m/Y") }}</td>
+          <td>{{ f.datFin|date("d/m/Y") }}</td>
           <td>{{ f.online|display_on_off_icon }}</td>
         </tr>
       {% endfor %}

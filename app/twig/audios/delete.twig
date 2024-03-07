@@ -39,7 +39,7 @@
           <label for="event">Événement</label>
         </div>
         <div class="col-3">
-          <span id="event">{{ event.date()|date_format:"%d/%m/%Y %h:%i" }} - {{ event.name }}</span>
+          <span id="event">{{ event.date|date("d/m/Y h\\:i") }} - {{ event.name }}</span>
         </div>
         {% endif %}
         {% if lieu %}
@@ -61,7 +61,7 @@
           <label for="created_at">Envoyé le</label>
         </div>
         <div class="col-3">
-          <span id="created_at">{{ audio.createdAt()|date_format:"%d/%m/%Y à %H:%M" }} par <a href="{{ membre.url }}">{{ membre.pseudo }}</a></span>
+          <span id="created_at">{{ audio.createdAt|date("d/m/Y \\à H\\:M") }} par <a href="{{ membre.url }}">{{ membre.pseudo }}</a></span>
         </div>
         {% endif %}
         {% if audio.modifiedAt %}
@@ -69,7 +69,7 @@
           <label for="modified_at">Modifié le</label>
         </div>
         <div class="col-3">
-          <span id="modified_at">{{ audio.modifiedAt|date_format:"%d/%m/%Y à %H:%M" }}</span>
+          <span id="modified_at">{{ audio.modifiedAt|date("d/m/Y \\à H\\:M") }}</span>
         </div>
         {% endif %}
         <div>

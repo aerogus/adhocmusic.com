@@ -6,10 +6,10 @@
       <td>{{ membre.lastName }}</td>
       <td>{{ membre.firstName }}</td>
       <td>{{ membre.contact.email }}</td>
-      <td>{{ membre.createdAt|date_format:'%d/%m/%y' }}</td>
-      <td>{{ membre.modifiedAt|date_format:'%d/%m/%y' }}</td>
-      <td>{{ membre.visitedAt|date_format:'%d/%m/%y' }}</td>
-      <td>{{ membre.contact.lastnl|date_format:'%d/%m/%y' }}</td>
+      <td>{{ membre.createdAt|date("d/m/y") }}</td>
+      <td>{{ membre.modifiedAt|date("d/m/y") }}</td>
+      <td>{{ membre.visitedAt|date("d/m/y") }}</td>
+      <td>{{ membre.contact.lastnl|date("d/m/y") }}</td>
     </tr>
   </tbody>
   {% endfor %}

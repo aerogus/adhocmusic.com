@@ -38,19 +38,19 @@
     <label for="created_at">Date Inscription</label>
   </div>
   <div class="col-3 mbs">
-    <span id="created_at">{{ me.createdAt|date_format:"%d/%m/%Y %H:%M" }}</span>
+    <span id="created_at">{{ me.createdAt|date("d/m/Y H\\:M") }}</span>
   </div>
   <div>
     <label for="modified_at">Date Modification</label>
   </div>
   <div class="col-3 mbs">
-    <span id="modified_at">{{ me.modifiedAt|date_format:"%d/%m/%Y %H:%M" }}</span>
+    <span id="modified_at">{{ me.modifiedAt|date("d/m/Y H\\:M") }}</span>
   </div>
   <div>
     <label for="visited_at">Dernière visite</label>
   </div>
   <div class="col-3 mbs">
-    <span id="visited_at">{{ me.visitedAt|date_format:"%d/%m/%Y %H:%M" }}</span>
+    <span id="visited_at">{{ me.visitedAt|date("d/m/Y H\\:M") }}</span>
   </div>
   <div>
     <label for="pseudo">Pseudo</label>

@@ -27,15 +27,15 @@
           <label for="first_name">Prénom</label>
         </li>
         <li>
-          <span id="created_at" style="float: right">{{ me.createdAt|date_format:"%d/%m/%Y" }}</span>
+          <span id="created_at" style="float: right">{{ me.createdAt|date("d/m/Y") }}</span>
           <label for="created_at">Inscription</label>
         </li>
         <li>
-          <span id="modified_at" style="float: right">{{ me.modifiedAt|date_format:"%d/%m/%Y" }}</span>
+          <span id="modified_at" style="float: right">{{ me.modifiedAt|date("d/m/Y") }}</span>
           <label for="modified_at">Modification</label>
         </li>
         <li>
-          <span id="visited_at" style="float: right">{{ me.visitedAt|date_format:"%d/%m/%Y" }}</span>
+          <span id="visited_at" style="float: right">{{ me.visitedAt|date("d/m/Y") }}</span>
           <label for="visited_at">Visite</label>
         </li>
         <li>
@@ -70,7 +70,7 @@
         <tr class="{% if cpt is odd %}odd{% else %}even{% endif %}">
           <td><img src="/img/icones/{% if msg.read_to %}email_open.png{% else %}email.png{% endif %}" alt=""></td>
           <td><a href="/messagerie/write?pseudo={{ msg.pseudo }}">{{ msg.pseudo }}</a></td>
-          <td>{{ msg.date|date_format:'%d/%m/%Y à %H:%M' }}</td>
+          <td>{{ msg.date|date("d/m/Y \\à H\\:M") }}</td>
           <td><a href="/messagerie/read/{{ msg.id }}">{{ msg.text|truncate:40 }}</a></td>
         </tr>
         {% endfor %}
