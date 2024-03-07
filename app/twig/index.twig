@@ -40,7 +40,7 @@
           <p class="subtitle">
             <a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a>
             <br/>
-            <a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.date }}</a>
+            <a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.date|format_datetime(pattern='dd LLLL yyyy') }}</a>
           </p>
         </div>
         {% endfor %}
