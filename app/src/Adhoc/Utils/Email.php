@@ -80,7 +80,7 @@ class Email
         foreach ($data as $key => $value) {
             $tpl->assign($key, $value);
         }
-        $body = $tpl->fetch($tplName . '.tpl');
+        $body = $tpl->fetch($tplName . '.twig');
 
         $mail           = new PHPMailer();
         $mail->CharSet  = "UTF-8";
