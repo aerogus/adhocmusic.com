@@ -76,13 +76,13 @@ class Email
     {
         $subject = trim($subject);
 
-        $tpl = new EmailSmarty();
+        $tpl = new EmailTwig();
         foreach ($data as $key => $value) {
             $tpl->assign($key, $value);
         }
-        $body = $tpl->fetch($tplName . '.twig');
+        $body = $tpl->render('emails/' . $tplName . '.twig');
 
-        $mail           = new PHPMailer();
+        $mail           = new PHPMailer(true);
         $mail->CharSet  = "UTF-8";
         $mail->From     = "contact@adhocmusic.com";
         $mail->FromName = "AD'HOC";
@@ -119,9 +119,6 @@ class Email
             $mail->addStringAttachment($attachment, $_FILES[$attachment]['name'], 'base64', $_FILES[$attachment]['type']);
         }
 
-        if ($mail->send()) {
-            return true;
-        }
-        return false;
+        return $mail->send();
     }
 }
