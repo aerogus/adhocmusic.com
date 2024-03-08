@@ -349,13 +349,11 @@ class Route
             $component = $splitted_path[$i];
             $i++;
             if (
-                ($ret = self::examineSplittedPathComponent(
-                    [
-                        'scanned_component' => $scanned_component,
-                        'component' => $component,
-                        'route' => $route
-                    ]
-                )) === false
+                ($ret = self::examineSplittedPathComponent([
+                    'scanned_component' => $scanned_component,
+                    'component' => $component,
+                    'route' => $route
+                ])) === false
             ) {
                 return false;
             }
@@ -369,7 +367,7 @@ class Route
                 );
             }
         }
-        if (empty($action)) {
+        if ($action === false) {
             $action = $route['action'];
         }
         return [

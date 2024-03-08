@@ -119,11 +119,11 @@ final class Controller
 
             $msg = new Message();
             $msg->setIdFrom((int) $_SESSION['membre']->getId());
-            $msg->setIdTo((int) $to);
+            $msg->setIdTo($to);
             $msg->setText($text);
             $msg->save();
 
-            $dest = Membre::getInstance((int) $to);
+            $dest = Membre::getInstance($to);
 
             $data = [
                 'pseudo_from' => $_SESSION['membre']->getPseudo(),
@@ -141,7 +141,7 @@ final class Controller
         }
 
         $pseudo = (string) Route::params('pseudo');
-        if (!($id = Membre::getIdByPseudo($pseudo))) {
+        if (($id = Membre::getIdByPseudo($pseudo) === false)) {
             die('KO');
         }
 
@@ -163,7 +163,7 @@ final class Controller
         $mode = (string) Route::params('mode');
         $id   = (int) Route::params('id');
 
-        $msg = Message::getInstance((int) $id);
+        $msg = Message::getInstance($id);
         if (($msg->getIdFrom() !== (int) $_SESSION['membre']->getId()) && ($msg->getIdTo() !== (int) $_SESSION['membre']->getId())) {
             return ['status' => 'KO']; // pas le droit d'effacer les messages des autres
         } else {

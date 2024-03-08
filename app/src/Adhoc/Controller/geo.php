@@ -126,7 +126,7 @@ final class Controller
             $db = DataBase::getInstance();
             $sql = "SELECT `id_lieu`, `name` "
                  . "FROM `adhoc_lieu` "
-                 . "WHERE `id_city` = " . (int) $id_city . " "
+                 . "WHERE `id_city` = " . $id_city . " "
                  . "ORDER BY `name` ASC";
             $res = $db->pdo->query($sql)->fetchAll();
             foreach ($res as $_res) {

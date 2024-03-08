@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Utils\AdHocTwig;
-use Adhoc\Utils\EmailSmarty;
+use Adhoc\Utils\EmailTwig;
 
 /**
  *
@@ -17,7 +16,7 @@ final class Controller
      */
     public static function formContactCc(): string
     {
-        $smarty = new EmailSmarty();
+        $twig = new EmailTwig();
         $twig->assign(
             [
                 'name' => 'Mon nom',
@@ -35,7 +34,7 @@ final class Controller
      */
     public static function formContactTo(): string
     {
-        $smarty = new EmailSmarty();
+        $twig = new EmailTwig();
         return $twig->render('form-contact-to.twig');
     }
 
@@ -44,7 +43,7 @@ final class Controller
      */
     public static function forumPriveNewMessage(): string
     {
-        $smarty = new EmailSmarty();
+        $twig = new EmailTwig();
         return $twig->render('forum-prive-new-message.twig');
     }
 
@@ -53,7 +52,7 @@ final class Controller
      */
     public static function memberCreate(): string
     {
-        $smarty = new EmailSmarty();
+        $twig = new EmailTwig();
         return $twig->render('member-create.twig');
     }
 
@@ -62,7 +61,7 @@ final class Controller
      */
     public static function messageReceived(): string
     {
-        $smarty = new EmailSmarty();
+        $twig = new EmailTwig();
         return $twig->render('message-received.twig');
     }
 
@@ -71,7 +70,7 @@ final class Controller
      */
     public static function passwordChanged(): string
     {
-        $smarty = new EmailSmarty();
+        $twig = new EmailTwig();
         return $twig->render('password-changed.twig');
     }
 
@@ -80,7 +79,7 @@ final class Controller
      */
     public static function passwordLost(): string
     {
-        $smarty = new EmailSmarty();
+        $twig = new EmailTwig();
         return $twig->render('password-lost.twig');
     }
 
@@ -89,7 +88,7 @@ final class Controller
      */
     public static function newComment(): string
     {
-        $smarty = new EmailSmarty();
+        $twig = new EmailTwig();
         $twig->assign(
             [
                 'subject' => "Un nouveau commentaire a été posté sur la vidéo machin",
@@ -108,7 +107,7 @@ final class Controller
      */
     public static function logAction(): string
     {
-        $smarty = new EmailSmarty();
+        $twig = new EmailTwig();
         $twig->assign(
             [
                 'subject' => "gus a ajouté un nouveau lieu",

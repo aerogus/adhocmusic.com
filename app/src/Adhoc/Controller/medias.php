@@ -94,13 +94,13 @@ final class Controller
             'limit' => 18,
         ];
 
-        if ($id_groupe) {
+        if ($id_groupe > 0) {
             $search_params['id_groupe'] = $id_groupe;
         }
-        if ($id_event) {
+        if ($id_event > 0) {
             $search_params['id_event'] = $id_event;
         }
-        if ($id_lieu) {
+        if ($id_lieu > 0) {
             $search_params['id_lieu'] = $id_lieu;
         }
 
