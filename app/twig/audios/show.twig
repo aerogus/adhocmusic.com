@@ -49,13 +49,13 @@ let audio_url = '{{ og_audio.url }}';
   <div>
 {% for photo in photos %}
 <div class="thumb-80 thumb-photo-80">
-  <a href="{{ photo.url }}"><img src="{{ photo.thumbUrl(80) }}" alt="{{ photo.name }}"><br>{{ photo.name|truncate:15:"...":true:true }}</a>
+  <a href="{{ photo.url }}"><img src="{{ photo.thumbUrl(80) }}" alt="{{ photo.name }}"><br>{{ photo.name|slice(0, 15) }}</a>
   <a class="overlay-80 overlay-photo-80" href="{{ photo.url }}" title="{{ photo.name }}"></a>
 </div>
 {% endfor %}
 {% for video in videos %}
 <div class="thumb-80 thumb-video-80">
-  <a href="{{ video.url }}"><img src="{{ video.thumbUrl(80) }}" alt="{{ video.name }}"><br>{{ video.name|truncate:15:"...":true:true }}</a>
+  <a href="{{ video.url }}"><img src="{{ video.thumbUrl(80) }}" alt="{{ video.name }}"><br>{{ video.name|slice(0, 15) }}</a>
   <a class="overlay-80 overlay-video-80" href="{{ video.url }}" title="{{ video.name }}"></a>
 </div>
 {% endfor %}
