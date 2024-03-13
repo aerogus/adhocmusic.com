@@ -71,7 +71,7 @@
           <td><img src="/img/icones/{% if msg.read_to %}email_open.png{% else %}email.png{% endif %}" alt=""></td>
           <td><a href="/messagerie/write?pseudo={{ msg.pseudo }}">{{ msg.pseudo }}</a></td>
           <td>{{ msg.date|date("d/m/Y \\à H\\:M") }}</td>
-          <td><a href="/messagerie/read/{{ msg.id }}">{{ msg.text|truncate:40 }}</a></td>
+          <td><a href="/messagerie/read/{{ msg.id }}">{{ msg.text|slice(0, 40) }}</a></td>
         </tr>
         {% endfor %}
       </table>
