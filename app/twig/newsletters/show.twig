@@ -1,5 +1,5 @@
 {% if unknown_newsletter %}
 newsletter introuvable
 {% else %}
-{{ newsletter.html }}
+{{ newsletter.html|raw }}
 {% endif %}
