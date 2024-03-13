@@ -41,7 +41,7 @@
       <p>Entrée : <strong>{{ event.price }}</strong></p>
     </div>
 
-    <p align="justify">{{ event.text }}</p>
+    <p align="justify">{{ event.text|nl2br }}</p>
 
     {% if structures %}
     <p>Organisateur :</p>

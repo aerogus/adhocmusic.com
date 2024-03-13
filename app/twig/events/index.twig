@@ -35,7 +35,7 @@
       {% if event.thumbUrl %}
       <a href="{{ event.url }}"><img src="{{ event.thumbUrl }}" style="float: right; margin: 0 0 5px 5px" alt="{{ event.name }}"></a>
       {% endif %}
-      {{ event.text }}
+      {{ event.text|nl2br }}
       <ul>
       {% for groupe in event.groupes %}
         <li><a href="{{ groupe.url }}"><strong>{{ groupe.name }}</strong></a> ({{ groupe.style }})</li>
