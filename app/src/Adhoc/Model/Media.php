@@ -19,9 +19,9 @@ use Adhoc\Utils\ObjectModel;
 abstract class Media extends ObjectModel
 {
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_contact = 0;
+    protected ?int $id_contact = null;
 
     /**
      * @var ?int
@@ -61,11 +61,43 @@ abstract class Media extends ObjectModel
     /* début getters communs */
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdContact(): int
+    public function getIdContact(): ?int
     {
         return $this->id_contact;
+    }
+
+    /**
+     * @return ?Contact
+     */
+    public function getContact(): ?Contact
+    {
+        if (is_null($this->getIdContact())) {
+            return null;
+        }
+
+        try {
+            return Contact::getInstance($this->getIdContact());
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    /**
+     * @return ?Membre
+     */
+    public function getMembre(): ?Membre
+    {
+        if (is_null($this->getIdContact())) {
+            return null;
+        }
+
+        try {
+            return Membre::getInstance($this->getIdContact());
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     /**

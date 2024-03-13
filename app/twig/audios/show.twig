@@ -7,7 +7,7 @@
 {% else %}
 
 <script>
-var audio_url = '{{ og_audio.url }}';
+let audio_url = '{{ og_audio.url }}';
 </script>
 
 <div class="box">
@@ -16,23 +16,23 @@ var audio_url = '{{ og_audio.url }}';
   </header>
   <div>
 
-{% if audio.idGroupe %}
-<a href="{{ groupe.url }}"><img style="float: left; margin: 5px;" src="{{ groupe.miniPhoto }}" alt="{{ groupe.name }}"></a>
+{% if audio.groupe %}
+<a href="{{ audio.groupe.url }}"><img style="float: left; margin: 5px;" src="{{ audio.groupe.miniPhoto }}" alt="{{ audio.groupe.name }}"></a>
 {% endif %}
 
 <div class="audiometa">
 <ul>
   <li>Titre : <strong>{{ audio.name }}</strong></li>
-  {% if audio.idGroupe %}
-  <li>Groupe : <a href="{{ groupe.url }}"><strong>{{ groupe.name }}</strong></a></li>
+  {% if audio.groupe %}
+  <li>Groupe : <a href="{{ audio.groupe.url }}"><strong>{{ audio.groupe.name }}</strong></a></li>
   {% endif %}
-  {% if audio.idEvent %}
-  <li>Evénement : <a href="{{ event.url }}"><strong>{{ event.name }}</strong></a> ({{ event.date|date("d/m/Y") }})</li>
+  {% if audio.event %}
+  <li>Evénement : <a href="{{ audio.event.url }}"><strong>{{ audio.event.name }}</strong></a> ({{ audio.event.date|date("d/m/Y") }})</li>
   {% endif %}
-  {% if audio.idLieu %}
-  <li>Lieu : <a href="{{ lieu.url }}"><strong>{{ lieu.name }}</strong></a></li>
+  {% if audio.lieu %}
+  <li>Lieu : <a href="{{ audio.lieu.url }}"><strong>{{ audio.lieu.name }}</strong></a></li>
   {% endif %}
-  <li>Mise en ligne : le {{ audio.createdAt|date("d/m/Y") }} par <a href="/membres/show/{{ audio.idContact }}"><strong>{{ audio.idContact|pseudo_by_id }}</strong></a></li>
+  <li>Mise en ligne : le {{ audio.createdAt|date("d/m/Y") }} par <a href="/membres/show/{{ audio.membre.id }}"><strong>{{ audio.membre.pseudo }}</strong></a></li>
 </ul>
 </div>
 

@@ -106,20 +106,18 @@ final class Controller
         $meta_description = "Titre : " . $audio->getName();
 
         if ($audio->getIdGroupe()) {
-            $groupe = Groupe::getInstance($audio->getIdGroupe());
-            $twig->assign('groupe', $groupe);
-            $twig->assign('title', $audio->getName() . ' - ' . $groupe->getName());
-            $meta_description .= " | Groupe : " . $groupe->getName();
+            $twig->assign('title', $audio->getName() . ' - ' . $audio->getGroupe()->getName());
+            $meta_description .= " | Groupe : " . $audio->getGroupe()->getName();
             Trail::getInstance()
                 ->addStep("Groupes", "/groupes")
-                ->addStep($groupe->getName(), $groupe->getUrl());
-            $twig->assign('og_image', $groupe->getMiniPhoto());
+                ->addStep($audio->getGroupe()->getName(), $audio->getGroupe()->getUrl());
+            $twig->assign('og_image', $audio->getGroupe()->getMiniPhoto());
             $twig->assign(
                 'og_audio',
                 [
                     'url' => $audio->getDirectMp3Url(),
                     'title' => $audio->getName(),
-                    'artist' => $groupe->getName(),
+                    'artist' => $audio->getGroupe()->getName(),
                     'type' => "application/mp3",
                 ]
             );
@@ -129,9 +127,7 @@ final class Controller
         }
 
         if ($audio->getIdEvent()) {
-            $event = Event::getInstance($audio->getIdEvent());
-            $twig->assign('event', $event);
-            $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysqlDatetime($event->getDate(), "d/m/Y") . ")";
+            $meta_description .= " | Evénement : " . $audio->getEvent()->getName() . " (" . Date::mysqlDatetime($audio->getEvent()->getDate(), "d/m/Y") . ")";
             $twig->assign(
                 'photos',
                 Photo::find(
@@ -159,9 +155,7 @@ final class Controller
         }
 
         if ($audio->getIdLieu()) {
-            $lieu = Lieu::getInstance($audio->getIdLieu());
-            $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity()->getName() . ")";
-            $twig->assign('lieu', $lieu);
+            $meta_description .= " | Lieu : " . $audio->getLieu()->getName() . " (" . $audio->getLieu()->getIdDepartement() . " - " . $audio->getLieu()->getCity()->getName() . ")";
         }
 
         Trail::getInstance()
