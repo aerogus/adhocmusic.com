@@ -105,7 +105,7 @@
       <div>
         <ul>
           {% for event in f_events %}
-          <li><a href="{{ event.url }}">{{ event.date }} - {{ event.lieu.name }}</a></li>
+          <li><a href="{{ event.url }}">{{ event.date|date("d/m/y H:i") }} - {{ event.lieu.name }}</a></li>
           {% endfor %}
         </ul>
       </div>
@@ -120,7 +120,7 @@
       <div>
         <ul>
           {% for event in p_events %}
-          <li><a href="{{ event.url }}">{{ event.date }} - {{ event.lieu.name }}</a></li>
+          <li><a href="{{ event.url }}">{{ event.date|date("d/m/y H:i") }} - {{ event.lieu.name }}</a></li>
           {% endfor %}
         </ul>
       </div>
