@@ -25,7 +25,7 @@
       <td>{{ cms.id }}</td>
       <td><a href="/adm/cms/edit/{{ cms.id }}">{{ cms.alias }}</a></td>
       <td>{{ cms.title }}</td>
-      <td>{{ cms.online|display_on_off_icon }}</td>
+      <td>{% if cms.online %}✓{% endif %}</td>
     </tr>
     {% endfor %}
   </tbody>

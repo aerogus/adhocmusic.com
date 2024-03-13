@@ -47,7 +47,7 @@
           <td><img src="{{ f.image }}" width="108" height="60" alt="" style="display: block" /></td>
           <td>{{ f.datDeb|date("d/m/Y") }}</td>
           <td>{{ f.datFin|date("d/m/Y") }}</td>
-          <td>{{ f.online|display_on_off_icon }}</td>
+          <td>{% if f.online %}✓{% endif %}</td>
         </tr>
       {% endfor %}
       </tbody>

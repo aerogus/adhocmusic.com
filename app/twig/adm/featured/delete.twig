@@ -33,7 +33,7 @@
         </li>
         <li>
           <label for="online">En ligne</label>
-          <strong>{{ featured.online|display_on_off_icon }}</strong>
+          <strong>{% if featured.online %}✓{% endif %}</strong>
         </li>
       </ol>
       <input id="form-featured-delete-submit" name="form-featured-delete-submit" type="submit" value="Confirmer la suppression">
