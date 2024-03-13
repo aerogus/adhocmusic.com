@@ -52,10 +52,24 @@ class AdHocTwig
 
         $this->env->addExtension(new IntlExtension());
 
+        // assignations générales
         $this->assign('title', "♫ AD'HOC : les Musiques Actuelles en Essonne");
         $this->assign('description', "Portail sur les musiques actuelles, vidéos de concerts, promotion d'artistes...");
         $this->assign('og_type', 'website');
         $this->assign('og_image', HOME_URL . '/img/screenshot-homepage.jpg');
+        $this->assign('sessid', session_id());
+        $this->assign('HOME_URL', HOME_URL);
+        $this->assign('uri', $_SERVER['REQUEST_URI']);
+        $this->assign('url', HOME_URL . $_SERVER['REQUEST_URI']);
+        $this->assign('fb_page_id', FB_PAGE_ID);
+        $this->assign('robots', 'index,follow');
+
+        if (!empty($_SESSION['membre'])) {
+            $this->assign('me', $_SESSION['membre']);
+            $this->assign('is_auth', true);
+        } else {
+            $this->assign('is_auth', false);
+        }
 
         $this->enqueueStyle('/css/adhoc.css');
 
