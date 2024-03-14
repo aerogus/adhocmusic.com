@@ -1264,6 +1264,7 @@ class Membre extends ObjectModel
      * @param array<string,mixed> $params [
      *                                'id_groupe' => int,
      *                                'id_country' => string,
+     *                                'mailing' => bool,
      *                                'order_by' => string,
      *                                'sort' => string,
      *                                'start' => int,
@@ -1311,6 +1312,10 @@ class Membre extends ObjectModel
 
         if (!empty($params['id_country'])) {
             $sql .= "AND `id_country` = '" . $params['id_country'] . "' ";
+        }
+
+        if (isset($params['mailing'])) {
+            $sql .= "AND `mailing` = " . (int) $params['mailing'] . " ";
         }
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
