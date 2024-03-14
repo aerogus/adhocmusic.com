@@ -132,7 +132,7 @@ final class Controller
                 'photos',
                 Photo::find(
                     [
-                        'id_event' => $event->getIdEvent(),
+                        'id_event' => $audio->getIdEvent(),
                         'id_groupe' => $audio->getIdGroupe(),
                         'online' => true,
                         'order_by' => 'random',
@@ -144,7 +144,7 @@ final class Controller
                 'videos',
                 Video::find(
                     [
-                        'id_event' => $event->getIdEvent(),
+                        'id_event' => $audio->getIdEvent(),
                         'id_groupe' => $audio->getIdGroupe(),
                         'online' => true,
                         'order_by' => 'random',
