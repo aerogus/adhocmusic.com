@@ -41,6 +41,16 @@ class Contact extends ObjectModel
     protected ?string $lastnl = null;
 
     /**
+     * @var ?Membre
+     */
+    protected ?Membre $membre = null;
+
+    /**
+     * @var ?bool
+     */
+    protected ?bool $is_membre = null;
+
+    /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
@@ -85,12 +95,28 @@ class Contact extends ObjectModel
      */
     public function getMembre(): ?Membre
     {
-        try {
-            $membre = Membre::getInstance($this->getIdContact());
-            return $membre;
-        } catch (NotFoundException $e) {
+        if (is_null($this->is_membre)) {
+            try {
+                $this->membre = Membre::getInstance($this->getIdContact());
+                $this->is_membre = true;
+                return $this->membre;
+            } catch (NotFoundException $e) {
+                $this->is_membre = false;
+                return null;
+            }
+        } elseif ($this->is_membre === false) {
             return null;
+        } else {
+            return $this->membre;
         }
+    }
+
+    /**
+     * @return ?bool
+     */
+    public function isMembre(): ?bool
+    {
+        return $this->is_membre;
     }
 
     /* fin getters */
