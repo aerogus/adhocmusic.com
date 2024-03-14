@@ -8,13 +8,11 @@ use Adhoc\Utils\LogNG;
 
 require_once __DIR__ . '/../app/bootstrap.php';
 
-$ms = Membre::find([
-    'mailing' => true,
-]);
+$ms = Membre::findAll();
 
 $tbl = new \Console_Table();
 $tbl->setHeaders(
-    ['id_contact', 'pseudo', 'email', 'first_name', 'last_name', 'mailing',]
+    ['id_contact', 'pseudo', 'email', 'first_name', 'last_name', 'mailing']
 );
 
 foreach ($ms as $m) {
