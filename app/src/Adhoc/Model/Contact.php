@@ -80,6 +80,19 @@ class Contact extends ObjectModel
         return $this->lastnl;
     }
 
+    /**
+     * @return ?Membre
+     */
+    public function getMembre(): ?Membre
+    {
+        try {
+            $membre = Membre::getInstance($this->getIdContact());
+            return $membre;
+        } catch (NotFoundException $e) {
+            return null;
+        }
+    }
+
     /* fin getters */
 
     /* début setters*/
