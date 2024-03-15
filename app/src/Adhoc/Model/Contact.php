@@ -209,4 +209,58 @@ class Contact extends ObjectModel
 
         return $cs[0]->getIdContact();
     }
+
+    /**
+     * Retourne une collection d'objets "Contact" répondant au(x) critère(s) donné(s)
+     *
+     * @param array<string,mixed> $params [
+     *                                'email' => string,
+     *                                'order_by' => string,
+     *                                'sort' => string,
+     *                                'start' => int,
+     *                                'limit' => int,
+     *                            ]
+     *
+     * @return array<static>
+     */
+    public static function find(array $params): array
+    {
+        $db = DataBase::getInstance();
+        $objs = [];
+
+        $sql  = "SELECT `" . static::getDbPk() . "` ";
+        $sql .= "FROM `" . static::getDbTable() . "` ";
+        $sql .= "WHERE 1 ";
+
+        if (!empty($params['email'])) {
+            $sql .= "AND `email` = '" . $params['email'] . "' ";
+        }
+
+        if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
+            $sql .= "ORDER BY `" . $params['order_by'] . "` ";
+        } else {
+            $sql .= "ORDER BY `" . static::$pk . "` ";
+        }
+
+        if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
+            $sql .= $params['sort'] . " ";
+        } else {
+            $sql .= "ASC ";
+        }
+
+        if (!isset($params['start'])) {
+            $params['start'] = 0;
+        }
+
+        if (isset($params['limit'])) {
+            $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
+        }
+
+        $ids = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
+        foreach ($ids as $id) {
+            $objs[] = static::getInstance((int) $id);
+        }
+
+        return $objs;
+    }
 }
