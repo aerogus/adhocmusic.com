@@ -81,7 +81,7 @@ $(function() {
 <div class="clearfix message">
   <div class="message-meta">
     <img src="{{ message.created_by_avatar }}" alt="">
-    <a href="{{ message.created_by_url }}">{{ message.createdBy|pseudo_by_id }}</a><br>
+    <a href="{{ message.created_by_url }}">{{ message.createdBy }}</a><br>
     {{ message.createdAt|date("a d b Y\\<\\b\\r\\>H\\:M") }}
   </div>
   <div class="message-body">
