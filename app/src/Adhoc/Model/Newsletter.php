@@ -361,7 +361,7 @@ class Newsletter extends ObjectModel
     {
         $db = DataBase::getInstance();
 
-        $sql = "SELECT `c`.`id_contact`, `c`.`email`, `c`.`lastnl`, `m`.`mailing`, `m`.`pseudo` "
+        $sql = "SELECT `c`.`id_contact`, `c`.`email`, `m`.`mailing`, `m`.`pseudo` "
              . "FROM (`" . Contact::getDbTable() . "` `c`) "
              . "LEFT JOIN `" . Membre::getDbTable() . "` `m` ON (`m`.`id_contact` = `c`.`id_contact`) "
              . "WHERE ((`m`.`mailing` IS NULL) OR (`m`.`mailing` = 1)) "
@@ -462,45 +462,6 @@ class Newsletter extends ObjectModel
         } else {
             // contact ? non - donc pas inscrit
             return NEWSLETTER_UNSUB_KO_UNKNOWN_CONTACT;
-        }
-    }
-
-    /**
-     * Stats vite fait ...
-     *
-     * @param int    $id_newsletter id_newsletter
-     * @param int    $id_contact    id_contact
-     * @param string $url           url
-     *
-     * @return void
-     */
-    public static function addHit(int $id_newsletter, int $id_contact, string $url): void
-    {
-        file_put_contents(ADHOC_ROOT_PATH . '/log/newsletters-hits.txt', date('Y-m-d H:i:s') . "\tnl" . $id_newsletter . "\tid" . $id_contact . "\turl" . $url . "\n", FILE_APPEND | LOCK_EX);
-
-        $ip = false;
-        if (isset($_SERVER['REMOTE_ADDR'])) {
-            $ip = $_SERVER['REMOTE_ADDR'];
-        }
-        $host = gethostbyaddr($ip);
-        $useragent = '';
-        if (isset($_SERVER['HTTP_USER_AGENT'])) {
-            $useragent = $_SERVER['HTTP_USER_AGENT'];
-        }
-
-        try {
-            $contact = Contact::getInstance($id_contact)
-                ->setLastnlNow()
-                ->save();
-
-            $db = DataBase::getInstance();
-
-            $sql = "INSERT INTO `adhoc_newsletter_hit` "
-                 . "(`date`, `id_newsletter`, `id_contact`, `url`, `ip`, `host`, `useragent`) "
-                 . "VALUES(NOW(), " . $id_newsletter . ", " . $id_contact . ", '" . $url . "', '" . $ip . "', '" . $host . "', '" . $useragent . "')";
-            $res = $db->pdo->query($sql);
-        } catch (\Exception $e) {
-            // rien
         }
     }
 }

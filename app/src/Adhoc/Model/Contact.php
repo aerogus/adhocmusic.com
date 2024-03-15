@@ -36,11 +36,6 @@ class Contact extends ObjectModel
     protected ?string $email = null;
 
     /**
-     * @var ?string
-     */
-    protected ?string $lastnl = null;
-
-    /**
      * @var ?Membre
      */
     protected ?Membre $membre = null;
@@ -58,7 +53,6 @@ class Contact extends ObjectModel
     protected static array $all_fields = [
         'id_contact' => 'int', // pk
         'email'      => 'string',
-        'lastnl'     => 'date',
     ];
 
     /* début getters */
@@ -77,17 +71,6 @@ class Contact extends ObjectModel
     public function getEmail(): ?string
     {
         return $this->email;
-    }
-
-    /**
-     * Retourne la date de la dernière consultation d'une newsletter
-     * (si tracker activé)
-     *
-     * @return ?string
-     */
-    public function getLastnl(): ?string
-    {
-        return $this->lastnl;
     }
 
     /**
@@ -151,31 +134,6 @@ class Contact extends ObjectModel
         }
 
         return $this;
-    }
-
-    /**
-     * @param string $lastnl lastnl
-     *
-     * @return static
-     */
-    public function setLastnl(string $lastnl): static
-    {
-        if ($this->lastnl !== $lastnl) {
-            $this->lastnl = $lastnl;
-            $this->modified_fields['lastnl'] = true;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return static
-     */
-    public function setLastnlNow(): static
-    {
-        $now = date('Y-m-d H:i:s');
-
-        return $this->setLastnl($now);
     }
 
     /* fin setters */

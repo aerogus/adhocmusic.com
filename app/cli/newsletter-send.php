@@ -34,7 +34,7 @@ $min_id_contact = isset($argv[2]) ? (int) $argv[2] : 0;
 
 // base de test
 $subs = [
-    ['id_contact' => 1, 'email' => 'guillaume@seznec.fr', 'pseudo' => 'gus', 'lastnl' => ''],
+    ['id_contact' => 1, 'email' => 'guillaume@seznec.fr', 'pseudo' => 'gus'],
 ];
 
 // base de prod
@@ -60,7 +60,7 @@ foreach ($subs as $sub) {
         continue;
     }
 
-    LogNG::info($id_newsletter . "\t" . $n . "\t" . $sub['id_contact'] . " \t\t" . $sub['lastnl'] . "\t\t" . $sub['email'] . "\t\t" . $sub['pseudo']);
+    LogNG::info($id_newsletter . "\t" . $n . "\t" . $sub['id_contact'] . " \t\t" . $sub['email'] . "\t\t" . $sub['pseudo']);
 
     $newsletter_id_newsletter = $id_newsletter;
     $newsletter_id_contact = (int) $sub['id_contact'];

@@ -332,7 +332,6 @@ final class Controller
         $url = Tools::base64UrlDecode($url);
         $from = Tools::base64UrlDecode($from);
         list($id_newsletter, $id_contact) = explode('|', $from);
-        Newsletter::addHit((int) $id_newsletter, (int) $id_contact, $url);
         Tools::redirect($url);
     }
 

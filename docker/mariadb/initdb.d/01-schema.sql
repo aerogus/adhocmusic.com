@@ -71,7 +71,6 @@ CREATE TABLE `adhoc_type_musicien` (
 CREATE TABLE `adhoc_contact` (
   `id_contact` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
-  `lastnl` datetime DEFAULT NULL,
   PRIMARY KEY (`id_contact`),
   UNIQUE KEY `email` (`email`)
 );
