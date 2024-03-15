@@ -375,7 +375,7 @@ abstract class ObjectModel
                                 $data[$field] = $this->$att;
                                 break;
                             case 'password':
-                                $data[$field] = "PASSWORD('" . $this->$att . "')";
+                                $data[$field] = md5(md5($this->$att));
                                 break;
                             case 'bool':
                                 // pas de vrai type BOOL avec MariaDB, c'est un INTEGER
@@ -445,7 +445,7 @@ abstract class ObjectModel
                             $data[$field] = $this->$att;
                             break;
                         case 'password':
-                            $data[$field] = "PASSWORD('" . $this->$att . "')";
+                            $data[$field] = md5(md5($this->$att));
                             break;
                         case 'bool':
                             // pas de vrai type BOOL avec MariaDB, c'est un INTEGER

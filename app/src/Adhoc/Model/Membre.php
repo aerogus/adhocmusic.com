@@ -1071,7 +1071,7 @@ class Membre extends ObjectModel
         $sql = "SELECT `id_contact` "
              . "FROM `" . Membre::getDbTable() . "` "
              . "WHERE `pseudo` = '" . $pseudo . "' "
-             . "AND `password` = PASSWORD('" . $password . "')";
+             . "AND `password` = '" . md5(md5($password)) . "'";
 
         $id_contact = $db->pdo->query($sql)->fetchColumn();
         if ($id_contact !== false) {
