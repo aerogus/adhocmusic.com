@@ -374,6 +374,9 @@ abstract class ObjectModel
                             case 'date':
                                 $data[$field] = $this->$att;
                                 break;
+                            case 'password':
+                                $data[$field] = "PASSWORD('" . $this->$att . "')";
+                                break;
                             case 'bool':
                                 // pas de vrai type BOOL avec MariaDB, c'est un INTEGER
                                 $data[$field] = (int) (bool) $this->$att;
@@ -440,6 +443,9 @@ abstract class ObjectModel
                         case 'string':
                         case 'date':
                             $data[$field] = $this->$att;
+                            break;
+                        case 'password':
+                            $data[$field] = "PASSWORD('" . $this->$att . "')";
                             break;
                         case 'bool':
                             // pas de vrai type BOOL avec MariaDB, c'est un INTEGER
@@ -845,6 +851,7 @@ abstract class ObjectModel
                             break;
                         case 'string':
                         case 'date':
+                        case 'password':
                             $this->$att = (string) $v;
                             break;
                         default:
