@@ -8,14 +8,14 @@
 
 <div class="box">
   <header>
-    <h1>Profil de {{ membre.Pseudo }}</h1>
+    <h1>Profil de {{ membre.pseudo }}</h1>
   </header>
   <div class="grid-3">
     <div class="col-1 profile">
       {% if membre.avatarUrl %}
       <img src="{{ membre.avatarUrl }}" alt="{{ membre.pseudo }}">
       {% endif %}
-      <strong>{{ membre.Pseudo }}</strong>
+      <strong>{{ membre.pseudo }}</strong>
       {% if membre.site %}
       <a href="{{ membre.site }}">{{ membre.site }}</a>
       {% endif %}
@@ -42,7 +42,6 @@
     </div>
     {% endfor %}
   </div>
-  {% endif %}
 </div>
 {% endif %}
 
