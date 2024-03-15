@@ -82,7 +82,7 @@ class ForumPrive extends Forum
              . "`nb_messages`, (`nb_messages` - 1) AS `nb_replies`, `nb_views`, `subject` "
              . "FROM `" . static::$db_table_forum_thread . "` "
              . "WHERE `id_thread` = " . $id_thread;
-        $stmt = $db->pdo($sql);
+        $stmt = $db->pdo->query($sql);
         $thread = $stmt->fetch();
 
         if (array_key_exists('id_thread', $thread) && array_key_exists('created_by', $thread)) {
@@ -97,7 +97,7 @@ class ForumPrive extends Forum
              . "WHERE `id_thread` = " . $id_thread . " "
              . "ORDER BY `id_message` ASC "
              . "LIMIT " . ($page * FORUM_NB_MESSAGES_PER_PAGE) . "," . FORUM_NB_MESSAGES_PER_PAGE;
-        $stmt = $db->pdo($sql);
+        $stmt = $db->pdo->query($sql);
         $messages = $stmt->fetchAll();
 
         foreach ($messages as $idx => $message) {
