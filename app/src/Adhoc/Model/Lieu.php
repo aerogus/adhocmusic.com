@@ -127,22 +127,22 @@ class Lieu extends ObjectModel
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_lieu'        => 'int', // pk
-        'id_type'        => 'int',
-        'name'           => 'string',
-        'address'        => 'string',
-        'id_city'        => 'int',
+        'id_lieu' => 'int', // pk
+        'id_type' => 'int',
+        'name' => 'string',
+        'address' => 'string',
+        'id_city' => 'int',
         'id_departement' => 'string',
-        'id_region'      => 'string',
-        'id_country'     => 'string',
-        'text'           => 'string',
-        'site'           => 'string',
-        'id_contact'     => 'int',
-        'created_at'     => 'date',
-        'modified_at'    => 'date',
-        'lat'            => 'float',
-        'lng'            => 'float',
-        'online'         => 'bool',
+        'id_region' => 'string',
+        'id_country' => 'string',
+        'text' => 'string',
+        'site' => 'string',
+        'id_contact' => 'int',
+        'created_at' => 'date',
+        'modified_at' => 'date',
+        'lat' => 'float',
+        'lng' => 'float',
+        'online' => 'bool',
     ];
 
     /* début getters */

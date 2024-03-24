@@ -52,10 +52,10 @@ class City extends Reference
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_city'        => 'int', // pk
+        'id_city' => 'int', // pk
         'id_departement' => 'string',
-        'cp'             => 'string',
-        'name'           => 'string',
+        'cp' => 'string',
+        'name' => 'string',
     ];
 
     /* début getter */

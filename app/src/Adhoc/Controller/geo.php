@@ -72,7 +72,7 @@ final class Controller
         $sql  = "SELECT `id_departement`, `name` ";
         $sql .= "FROM `geo_fr_departement` ";
         $sql .= "WHERE 1 ";
-        if (!empty($id_region)) {
+        if (strlen($id_region) > 0) {
             $sql .= "AND `id_region` = '" . $id_region . "' ";
         }
         $sql .= "ORDER BY `name` ASC";
@@ -95,7 +95,7 @@ final class Controller
     {
         $tab = [];
 
-        if (!empty($_GET['d'])) {
+        if (isset($_GET['d'])) {
             $d = substr($_GET['d'], 0, 3);
             $db = DataBase::getInstance();
             $sql = "SELECT `id_city`, `name`, `cp` "
@@ -121,7 +121,7 @@ final class Controller
     {
         $tab = [];
 
-        if (!empty($_GET['v'])) {
+        if (isset($_GET['v'])) {
             $id_city = (int) $_GET['v'];
             $db = DataBase::getInstance();
             $sql = "SELECT `id_lieu`, `name` "

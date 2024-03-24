@@ -52,10 +52,10 @@ class MembreAdhoc extends ObjectModel
      */
     protected static array $all_fields = [
         'id_contact' => 'int', // pk
-        'function'   => 'string',
+        'function' => 'string',
         'birth_date' => 'date',
-        'active'     => 'bool',
-        'rank'       => 'int',
+        'active' => 'bool',
+        'rank' => 'int',
     ];
 
     /**

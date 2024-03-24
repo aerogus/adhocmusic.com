@@ -109,21 +109,21 @@ class Video extends Media
      */
     protected static string $table = 'adhoc_video';
 
-    public const HOST_YOUTUBE     = 1;
+    public const HOST_YOUTUBE = 1;
     public const HOST_DAILYMOTION = 2;
-    public const HOST_FACEBOOK    = 6;
-    public const HOST_VIMEO       = 8;
-    public const HOST_ADHOCTUBE   = 9;
+    public const HOST_FACEBOOK = 6;
+    public const HOST_VIMEO = 8;
+    public const HOST_ADHOCTUBE = 9;
 
     /**
      * @var array<int,string>
      */
     protected static $tab_hosts = [
-        self::HOST_YOUTUBE     => "YouTube",
+        self::HOST_YOUTUBE => "YouTube",
         self::HOST_DAILYMOTION => "DailyMotion",
-        self::HOST_FACEBOOK    => "Facebook",
-        self::HOST_VIMEO       => "Vimeo",
-        self::HOST_ADHOCTUBE   => "AD'HOC Tube",
+        self::HOST_FACEBOOK => "Facebook",
+        self::HOST_VIMEO => "Vimeo",
+        self::HOST_ADHOCTUBE => "AD'HOC Tube",
     ];
 
     /**
@@ -152,18 +152,18 @@ class Video extends Media
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_video'    => 'int', // pk
-        'id_contact'  => 'int',
-        'id_host'     => 'int',
-        'reference'   => 'string',
-        'ratio'       => 'float',
-        'id_groupe'   => 'int', // deprecated ?
-        'id_lieu'     => 'int',
-        'id_event'    => 'int',
-        'name'        => 'string',
-        'created_at'  => 'date',
+        'id_video' => 'int', // pk
+        'id_contact' => 'int',
+        'id_host' => 'int',
+        'reference' => 'string',
+        'ratio' => 'float',
+        'id_groupe' => 'int', // deprecated ?
+        'id_lieu' => 'int',
+        'id_event' => 'int',
+        'name' => 'string',
+        'created_at' => 'date',
         'modified_at' => 'date',
-        'online'      => 'bool',
+        'online' => 'bool',
     ];
 
     /* début getters */
@@ -303,7 +303,7 @@ class Video extends Media
             $sourcePath = self::getDefaultThumbPath();
         }
 
-        if (!$maxWidth) {
+        if ($maxWidth === 0) {
             return self::getBaseUrl() . '/' . $this->getIdVideo() . '.jpg';
         } else {
             $uid = 'video/' . $this->getIdVideo() . '/' . $maxWidth;
@@ -567,14 +567,14 @@ class Video extends Media
 
         // YouTube
         if (preg_match(MEDIA_YOUTUBE_EMBED_PATTERN, $str, $matches)) {
-            if (!empty($matches[2])) {
+            if (strlen($matches[2]) > 0) {
                 return ['id_host' => self::HOST_YOUTUBE, 'reference' => $matches[2]];
             }
         }
 
         // DailyMotion
         if (preg_match(MEDIA_DAILYMOTION_EMBED_PATTERN, $str, $matches)) {
-            if (!empty($matches[3])) {
+            if (strlen($matches[3]) > 0) {
                 return ['id_host' => self::HOST_DAILYMOTION, 'reference' => $matches[3]];
             }
         }

@@ -95,16 +95,16 @@ class Comment extends ObjectModel
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_comment'  => 'int', // pk
-        'type'        => 'string',
-        'id_content'  => 'int',
-        'created_at'  => 'date',
+        'id_comment' => 'int', // pk
+        'type' => 'string',
+        'id_content' => 'int',
+        'created_at' => 'date',
         'modified_at' => 'date',
-        'online'      => 'bool',
-        'id_contact'  => 'int',
-        'pseudo'      => 'string',
-        'email'       => 'string',
-        'text'        => 'string',
+        'online' => 'bool',
+        'id_contact' => 'int',
+        'pseudo' => 'string',
+        'email' => 'string',
+        'text' => 'string',
     ];
 
     /**

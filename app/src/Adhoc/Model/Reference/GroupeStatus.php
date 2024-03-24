@@ -35,6 +35,6 @@ class GroupeStatus extends Reference
      */
     protected static array $all_fields = [
         'id_groupe_status' => 'int', // pk
-        'name'             => 'string',
+        'name' => 'string',
     ];
 }

@@ -75,12 +75,12 @@ class Alerting extends ObjectModel
      */
     protected static array $all_fields = [
         'id_alerting' => 'int', // pk
-        'id_contact'  => 'int',
-        'created_at'  => 'date',
-        'active'      => 'bool',
-        'id_lieu'     => 'int',
-        'id_groupe'   => 'int',
-        'id_event'    => 'int',
+        'id_contact' => 'int',
+        'created_at' => 'date',
+        'active' => 'bool',
+        'id_lieu' => 'int',
+        'id_groupe' => 'int',
+        'id_event' => 'int',
     ];
 
     /* début getters */

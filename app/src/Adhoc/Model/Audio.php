@@ -37,15 +37,15 @@ class Audio extends Media
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_audio'     => 'int', // pk
-        'id_contact'   => 'int',
-        'id_groupe'    => 'int',
-        'id_lieu'      => 'int',
-        'id_event'     => 'int',
-        'name'         => 'string',
-        'created_at'   => 'date',
-        'modified_at'  => 'date',
-        'online'       => 'bool',
+        'id_audio' => 'int', // pk
+        'id_contact' => 'int',
+        'id_groupe'  => 'int',
+        'id_lieu' => 'int',
+        'id_event' => 'int',
+        'name' => 'string',
+        'created_at' => 'date',
+        'modified_at' => 'date',
+        'online' => 'bool',
     ];
 
     /* début getters */

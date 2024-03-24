@@ -49,8 +49,8 @@ class WorldRegion extends Reference
      */
     protected static array $all_fields = [
         'id_country' => 'string', // pk
-        'id_region'  => 'string', // pk
-        'name'       => 'string',
+        'id_region' => 'string', // pk
+        'name' => 'string',
     ];
 
     /* début getters */

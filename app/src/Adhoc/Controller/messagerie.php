@@ -141,7 +141,7 @@ final class Controller
         }
 
         $pseudo = (string) Route::params('pseudo');
-        if (($id = Membre::getIdByPseudo($pseudo) === false)) {
+        if (($id = Membre::getIdByPseudo($pseudo)) === false) {
             die('KO');
         }
 

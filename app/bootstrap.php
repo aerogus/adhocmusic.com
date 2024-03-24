@@ -23,12 +23,6 @@ if (!is_dir(OBJECT_CACHE_PATH)) {
     mkdir(OBJECT_CACHE_PATH, 0755, true);
 }
 
-define('SMARTY_TEMPLATE_PATH', ADHOC_ROOT_PATH . '/app/views');
-define('SMARTY_TEMPLATE_C_PATH', ADHOC_ROOT_PATH . '/tmpfs/smarty');
-if (!is_dir(SMARTY_TEMPLATE_C_PATH)) {
-    mkdir(SMARTY_TEMPLATE_C_PATH, 0755, true);
-}
-
 define('TWIG_TEMPLATES_PATH', __DIR__ . '/twig');
 define('TWIG_TEMPLATES_C_PATH', __DIR__ . '/twig_c');
 

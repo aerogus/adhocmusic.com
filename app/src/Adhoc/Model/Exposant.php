@@ -86,15 +86,15 @@ class Exposant extends ObjectModel
      */
     protected static array $all_fields = [
         'id_exposant' => 'int', // pk
-        'name'        => 'string',
-        'email'       => 'string',
-        'phone'       => 'string',
-        'site'        => 'string',
-        'type'        => 'string',
-        'city'        => 'string',
+        'name' => 'string',
+        'email' => 'string',
+        'phone' => 'string',
+        'site' => 'string',
+        'type' => 'string',
+        'city' => 'string',
         'description' => 'string',
-        'state'       => 'string',
-        'created_at'  => 'date',
+        'state' => 'string',
+        'created_at' => 'date',
         'modified_at' => 'date',
     ];
 

@@ -35,6 +35,6 @@ class FAQCategory extends Reference
      */
     protected static array $all_fields = [
         'id_faq_category' => 'int', // pk
-        'name'            => 'string',
+        'name' => 'string',
     ];
 }

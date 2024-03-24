@@ -92,16 +92,16 @@ class Event extends ObjectModel
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_event'      => 'int', // pk
-        'created_at'    => 'date',
-        'modified_at'   => 'date',
-        'name'          => 'string',
-        'date'          => 'date',
-        'text'          => 'string',
-        'price'         => 'string',
-        'online'        => 'bool',
-        'id_lieu'       => 'int',
-        'id_contact'    => 'int',
+        'id_event' => 'int', // pk
+        'created_at' => 'date',
+        'modified_at' => 'date',
+        'name' => 'string',
+        'date' => 'date',
+        'text' => 'string',
+        'price' => 'string',
+        'online' => 'bool',
+        'id_lieu' => 'int',
+        'id_contact' => 'int',
         'facebook_event_id' => 'string',
     ];
 

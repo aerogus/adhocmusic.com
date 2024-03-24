@@ -81,13 +81,13 @@ class Message extends ObjectModel
      */
     protected static array $all_fields = [
         'id_message' => 'int', // pk
-        'id_from'    => 'int',
-        'id_to'      => 'int',
-        'text'       => 'string',
-        'date'       => 'date',
-        'read_to'    => 'bool',
-        'del_from'   => 'bool',
-        'del_to'     => 'bool',
+        'id_from' => 'int',
+        'id_to' => 'int',
+        'text' => 'string',
+        'date' => 'date',
+        'read_to' => 'bool',
+        'del_from' => 'bool',
+        'del_to' => 'bool',
     ];
 
     /**

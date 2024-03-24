@@ -49,10 +49,10 @@ class Partner extends ObjectModel
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_partner'  => 'int', // pk
-        'title'       => 'string',
+        'id_partner' => 'int', // pk
+        'title' => 'string',
         'description' => 'string',
-        'url'         => 'string',
+        'url' => 'string',
     ];
 
     /* début getters */

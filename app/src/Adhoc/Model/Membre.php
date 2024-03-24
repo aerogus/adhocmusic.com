@@ -26,11 +26,11 @@ class Membre extends ObjectModel
      * Gestion des droits utilisateurs
      * par masque binaire
      */
-    public const TYPE_STANDARD  = 0x01; // 00001
+    public const TYPE_STANDARD = 0x01; // 00001
     public const TYPE_REDACTEUR = 0x02; // 00010
-    public const TYPE_INTERNE   = 0x04; // 00100
-    public const TYPE_BONUS     = 0x08; // 01000
-    public const TYPE_ADMIN     = 0x10; // 10000
+    public const TYPE_INTERNE = 0x04; // 00100
+    public const TYPE_BONUS = 0x08; // 01000
+    public const TYPE_ADMIN = 0x10; // 10000
 
     /**
      * Tableau des types de membre
@@ -38,11 +38,11 @@ class Membre extends ObjectModel
      * @var array<int,string>
      */
     protected static $types_membre = [
-        self::TYPE_STANDARD  => "Standard",
+        self::TYPE_STANDARD => "Standard",
         self::TYPE_REDACTEUR => "Rédacteur",
-        self::TYPE_INTERNE   => "Interne",
-        self::TYPE_BONUS     => "Bonus",
-        self::TYPE_ADMIN     => "Administrateur",
+        self::TYPE_INTERNE => "Interne",
+        self::TYPE_BONUS => "Bonus",
+        self::TYPE_ADMIN => "Administrateur",
     ];
 
     /**
@@ -188,25 +188,25 @@ class Membre extends ObjectModel
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_contact'     => 'int', // pk
-        'pseudo'         => 'string',
-        'password'       => 'password',
-        'last_name'      => 'string',
-        'first_name'     => 'string',
-        'address'        => 'string',
-        'id_city'        => 'int',
+        'id_contact' => 'int', // pk
+        'pseudo' => 'string',
+        'password' => 'password',
+        'last_name' => 'string',
+        'first_name' => 'string',
+        'address' => 'string',
+        'id_city' => 'int',
         'id_departement' => 'string',
-        'id_region'      => 'string',
-        'id_country'     => 'string',
-        'tel'            => 'string',
-        'port'           => 'string',
-        'site'           => 'string',
-        'text'           => 'string',
-        'mailing'        => 'bool',
-        'level'          => 'int',
-        'created_at'     => 'date',
-        'modified_at'    => 'date',
-        'visited_at'     => 'date',
+        'id_region' => 'string',
+        'id_country' => 'string',
+        'tel' => 'string',
+        'port' => 'string',
+        'site' => 'string',
+        'text' => 'string',
+        'mailing' => 'bool',
+        'level' => 'int',
+        'created_at' => 'date',
+        'modified_at' => 'date',
+        'visited_at' => 'date',
     ];
 
     /**

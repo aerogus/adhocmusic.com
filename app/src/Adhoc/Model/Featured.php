@@ -82,13 +82,13 @@ class Featured extends ObjectModel
      */
     protected static array $all_fields = [
         'id_featured' => 'int', // pk
-        'datdeb'      => 'date',
-        'datfin'      => 'date',
-        'title'       => 'string',
+        'datdeb' => 'date',
+        'datfin' => 'date',
+        'title' => 'string',
         'description' => 'string',
-        'url'         => 'string',
-        'online'      => 'bool',
-        'created_at'  => 'date',
+        'url' => 'string',
+        'online' => 'bool',
+        'created_at' => 'date',
         'modified_at' => 'date',
     ];
 

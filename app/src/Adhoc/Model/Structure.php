@@ -85,17 +85,17 @@ class Structure extends ObjectModel
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_structure'   => 'int', // pk
-        'name'           => 'string',
-        'address'        => 'string',
-        'cp'             => 'string',
-        'city'           => 'string',
-        'tel'            => 'string',
+        'id_structure' => 'int', // pk
+        'name' => 'string',
+        'address' => 'string',
+        'cp' => 'string',
+        'city' => 'string',
+        'tel' => 'string',
         'id_departement' => 'string',
-        'text'           => 'string',
-        'site'           => 'string',
-        'email'          => 'string',
-        'id_country'     => 'string',
+        'text' => 'string',
+        'site' => 'string',
+        'email' => 'string',
+        'id_country' => 'string',
     ];
 
     /* début getters */

@@ -52,7 +52,7 @@ class Contact extends ObjectModel
      */
     protected static array $all_fields = [
         'id_contact' => 'int', // pk
-        'email'      => 'string',
+        'email' => 'string',
     ];
 
     /* début getters */

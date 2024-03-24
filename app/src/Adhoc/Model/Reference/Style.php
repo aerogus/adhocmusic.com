@@ -36,7 +36,7 @@ class Style extends Reference
      */
     protected static array $all_fields = [
         'id_style' => 'int', // pk
-        'name'     => 'string',
+        'name' => 'string',
     ];
 
     /**

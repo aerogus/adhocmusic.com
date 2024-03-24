@@ -35,6 +35,6 @@ class TypeMusicien extends Reference
      */
     protected static array $all_fields = [
         'id_type_musicien' => 'int', // pk
-        'name'             => 'string',
+        'name' => 'string',
     ];
 }

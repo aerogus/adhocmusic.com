@@ -76,15 +76,15 @@ class CMS extends ObjectModel
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_cms'      => 'int', // pk
-        'alias'       => 'string',
-        'title'       => 'string',
-        'created_at'  => 'date',
+        'id_cms' => 'int', // pk
+        'alias' => 'string',
+        'title' => 'string',
+        'created_at' => 'date',
         'modified_at' => 'date',
-        'breadcrumb'  => 'string',
-        'content'     => 'string',
-        'online'      => 'bool',
-        'auth'        => 'int',
+        'breadcrumb' => 'string',
+        'content' => 'string',
+        'online' => 'bool',
+        'auth' => 'int',
     ];
 
     /* début getters */

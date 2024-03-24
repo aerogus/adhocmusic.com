@@ -46,8 +46,8 @@ class Departement extends Reference
      */
     protected static array $all_fields = [
         'id_departement' => 'string', // pk
-        'id_region'      => 'string',
-        'name'           => 'string',
+        'id_region' => 'string',
+        'name' => 'string',
     ];
 
     /* début getters */

@@ -67,12 +67,12 @@ class FAQ extends ObjectModel
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_faq'      => 'int', // pk
+        'id_faq' => 'int', // pk
         'id_category' => 'int',
-        'question'    => 'string',
-        'answer'      => 'string',
-        'online'      => 'bool',
-        'created_at'  => 'date',
+        'question' => 'string',
+        'answer' => 'string',
+        'online' => 'bool',
+        'created_at' => 'date',
         'modified_at' => 'date',
     ];
 

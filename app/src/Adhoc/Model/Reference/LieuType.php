@@ -35,6 +35,6 @@ class LieuType extends Reference
      */
     protected static array $all_fields = [
         'id_lieu_type' => 'int', // pk
-        'name'         => 'string',
+        'name' => 'string',
     ];
 }

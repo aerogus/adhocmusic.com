@@ -388,8 +388,8 @@ class Route
         $route = $params['route'];
         $scanned_component = $params['scanned_component'];
         $component = $params['component'];
-        if (empty($scanned_component)) {
-            if (empty($component)) {
+        if (strlen($scanned_component) === 0) {
+            if (strlen($component) === 0) {
                 return [];
             }
             return false;
@@ -401,7 +401,7 @@ class Route
         } else {
             $matches = [];
             preg_match('/^:([a-z0-9_-]+)/i', $scanned_component, $matches);
-            if (empty($matches[1])) {
+            if (strlen($matches[1]) === 0) {
                 return false;
             }
             $scanned_component_splitted_action = explode(';', $scanned_component);

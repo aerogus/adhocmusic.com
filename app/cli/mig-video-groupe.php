@@ -12,7 +12,7 @@ require_once __DIR__ . '/../bootstrap.php';
 $videos = Video::findAll();
 foreach ($videos as $video) {
     echo $video->getId() . ' ' . $video->getName() . "\n";
-    if ($video->getIdGroupe()) {
+    if (!is_null($video->getIdGroupe())) {
         echo "link grp " . $video->getIdGroupe() . "\n";
         $video->linkGroupe($video->getIdGroupe());
         $video->setIdGroupe(null);

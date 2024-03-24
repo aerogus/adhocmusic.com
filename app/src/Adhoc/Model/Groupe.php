@@ -22,8 +22,8 @@ class Groupe extends ObjectModel
     /**
      * États des groupes
      */
-    public const ETAT_ACTIF   = 1;
-    public const ETAT_NONEWS  = 2;
+    public const ETAT_ACTIF = 1;
+    public const ETAT_NONEWS = 2;
     public const ETAT_INACTIF = 3;
 
     /**
@@ -32,8 +32,8 @@ class Groupe extends ObjectModel
      * @var array<int,string>
      */
     protected static $etats = [
-        self::ETAT_ACTIF   => "Actif",
-        self::ETAT_NONEWS  => "Pas de nouvelles",
+        self::ETAT_ACTIF => "Actif",
+        self::ETAT_NONEWS => "Pas de nouvelles",
         self::ETAT_INACTIF => "Inactif / Séparé",
     ];
 
@@ -153,26 +153,26 @@ class Groupe extends ObjectModel
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_groupe'        => 'int', // pk
-        'alias'            => 'string',
-        'name'             => 'string',
-        'style'            => 'string',
-        'influences'       => 'string',
-        'lineup'           => 'string',
-        'mini_text'        => 'string',
-        'text'             => 'string',
-        'site'             => 'string',
-        'myspace'          => 'string',
+        'id_groupe' => 'int', // pk
+        'alias' => 'string',
+        'name' => 'string',
+        'style' => 'string',
+        'influences' => 'string',
+        'lineup' => 'string',
+        'mini_text' => 'string',
+        'text' => 'string',
+        'site' => 'string',
+        'myspace' => 'string',
         'facebook_page_id' => 'string',
-        'twitter_id'       => 'string',
-        'id_departement'   => 'string',
-        'online'           => 'bool',
-        'created_at'       => 'date',
-        'modified_at'      => 'date',
-        'datdeb'           => 'date',
-        'datfin'           => 'date',
-        'comment'          => 'string',
-        'etat'             => 'int',
+        'twitter_id' => 'string',
+        'id_departement' => 'string',
+        'online' => 'bool',
+        'created_at' => 'date',
+        'modified_at' => 'date',
+        'datdeb' => 'date',
+        'datfin' => 'date',
+        'comment' => 'string',
+        'etat' => 'int',
     ];
 
     /* début getters */

@@ -35,6 +35,6 @@ class MembreType extends Reference
      */
     protected static array $all_fields = [
         'id_membre_type' => 'int', // pk
-        'name'           => 'string',
+        'name' => 'string',
     ];
 }

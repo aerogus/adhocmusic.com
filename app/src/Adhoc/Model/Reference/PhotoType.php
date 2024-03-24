@@ -35,6 +35,6 @@ class PhotoType extends Reference
      */
     protected static array $all_fields = [
         'id_photo_type' => 'int', // pk
-        'name'          => 'string',
+        'name' => 'string',
     ];
 }
