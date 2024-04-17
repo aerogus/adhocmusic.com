@@ -23,7 +23,7 @@ define('MAIL_SEND_DELAY', 1);
 require_once __DIR__ . '/../bootstrap.php';
 
 // n° de newsletter a traiter
-if (empty($argv[1])) {
+if (!isset($argv[1])) {
     echo "Usage: ./newsletter-send.php id_newsletter\n";
     exit;
 }
@@ -63,9 +63,9 @@ foreach ($subs as $sub) {
     LogNG::info($id_newsletter . "\t" . $n . "\t" . $sub['id_contact'] . " \t\t" . $sub['email'] . "\t\t" . $sub['pseudo']);
 
     $newsletter_id_newsletter = $id_newsletter;
-    $newsletter_id_contact = (int) $sub['id_contact'];
+    $newsletter_id_contact = $sub['id_contact'];
 
-    $newsletter->setIdContact((int) $sub['id_contact'])
+    $newsletter->setIdContact($sub['id_contact'])
         ->setTplVar('%%email%%', $sub['email'])
         ->setTplVar('%%pseudo%%', $sub['pseudo'])
         ->setTplVar('%%url%%', $newsletter->getUrl());

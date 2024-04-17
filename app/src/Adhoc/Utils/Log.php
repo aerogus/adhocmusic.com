@@ -153,20 +153,13 @@ class Log
 
         $id_contact = 'NULL';
         $pseudo = '';
-        if (isset($_SESSION['membre']) && !is_null($_SESSION['membre'])) {
+        if (isset($_SESSION['membre'])) {
             $id_contact = $_SESSION['membre']->getId();
             $pseudo = $_SESSION['membre']->getPseudo();
         }
 
-        $ip = '';
-        if (!empty($_SESSION['ip'])) {
-            $ip = $_SESSION['ip'];
-        }
-
-        $host = '';
-        if (!empty($_SESSION['host'])) {
-            $host = $_SESSION['host'];
-        }
+        $ip = isset($_SESSION['ip']) ? $_SESSION['ip'] : '';
+        $host = isset($_SESSION['host']) ? $_SESSION['host'] : '';
 
         self::doWrite('action', 'membre=' . $pseudo . ' (' . $id_contact . ') - action=' . self::$actions[$action] . ' -  extra=' . $extra);
 

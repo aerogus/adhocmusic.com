@@ -111,8 +111,8 @@ final class Controller
             $sortinv = 'DESC';
         }
 
-        if ((string) Route::params('order_by')) {
-            $order_by = (string) Route::params('order_by');
+        if (strlen(Route::params('order_by')) > 0) {
+            $order_by = Route::params('order_by');
         } else {
             $order_by = 'id_contact';
         }
@@ -320,7 +320,7 @@ final class Controller
 
         // todo: dans un objet !!
         $sql = "DELETE FROM `adhoc_groupe_style` "
-             . "WHERE `id_groupe` = " . (int) $id_groupe;
+             . "WHERE `id_groupe` = " . $id_groupe;
         $res = $db->pso->query($sql);
 
         foreach ($style as $ordre => $id_style) {
@@ -376,13 +376,13 @@ final class Controller
             ->addStep("Privé", "/adm")
             ->addStep("Suppression Compte");
 
-        !empty($_GET['action']) ? $action = (string) $_GET['action'] : $action = 'show';
+        isset($_GET['action']) ? $action = $_GET['action'] : $action = 'show';
         $twig->assign('action', $action);
 
-        !empty($_GET['email']) ? $email = (string) trim($_GET['email']) : $email = '';
+        isset($_GET['email']) ? $email = trim($_GET['email']) : $email = '';
         $twig->assign('email', $email);
 
-        !empty($_GET['id']) ? $id = (int) $_GET['id'] : $id = '';
+        isset($_GET['id']) ? $id = (int) $_GET['id'] : $id = '';
         $twig->assign('id', $id);
 
         switch ($action) {
@@ -481,7 +481,7 @@ final class Controller
 
         $out = '';
 
-        if (!$id) {
+        if ($id === 0) {
             return 'id invalide';
         }
 

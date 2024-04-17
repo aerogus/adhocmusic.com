@@ -23,17 +23,17 @@ use Adhoc\Model\Event;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-if (empty($argv[1])) {
+if (!isset($argv[1])) {
     die('usage: clean-grp.php alias_groupe [1]');
 }
 
 $alias = $argv[1];
 $do = false;
-if (!empty($argv[2])) {
+if (isset($argv[2])) {
     $do = (bool) $argv[2];
 }
 
-if (!($id_groupe = Groupe::getIdByAlias($alias))) {
+if (is_null($id_groupe = Groupe::getIdByAlias($alias))) {
     die('groupe ' . $alias . ' introuvable');
 }
 

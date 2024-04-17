@@ -589,14 +589,14 @@ class Video extends Media
 
         // YouTube
         if (preg_match(MEDIA_YOUTUBE_URL_PATTERN, $str, $matches)) {
-            if (!empty($matches[2])) {
+            if (isset($matches[2])) {
                 return ['id_host' => self::HOST_YOUTUBE, 'reference' => $matches[2]];
             }
         }
 
         // YouTube
         if (preg_match(MEDIA_YOUTUBE_DIRECT_VIDEO_URL_PATTERN, $str, $matches)) {
-            if (!empty($matches[2])) {
+            if (isset($matches[2])) {
                 return ['id_host' => self::HOST_YOUTUBE, 'reference' => $matches[2]];
             }
         }
@@ -610,28 +610,28 @@ class Video extends Media
 
         // Facebook
         if (preg_match(MEDIA_FACEBOOK_URL_PATTERN, $str, $matches)) {
-            if (!empty($matches[1])) {
+            if (isset($matches[1])) {
                 return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
             }
         }
 
         // Facebook
         if (preg_match(MEDIA_FACEBOOK_URL_PATTERN2, $str, $matches)) {
-            if (!empty($matches[1])) {
+            if (isset($matches[1])) {
                 return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
             }
         }
 
         // Vimeo
         if (preg_match(MEDIA_VIMEO_URL_PATTERN, $str, $matches)) {
-            if (!empty($matches[1])) {
+            if (isset($matches[1])) {
                 return ['id_host' => self::HOST_VIMEO, 'reference' => $matches[1]];
             }
         }
 
         // AD'HOC Tube
         if (preg_match(MEDIA_ADHOCTUBE_URL_PATTERN, $str, $matches)) {
-            if (!empty($matches[1])) {
+            if (isset($matches[1])) {
                 return ['id_host' => self::HOST_ADHOCTUBE, 'reference' => $matches[1]];
             }
         }

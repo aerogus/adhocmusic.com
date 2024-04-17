@@ -22,13 +22,13 @@ use Adhoc\Model\Event;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-if (empty($argv[1])) {
+if (!isset($argv[1])) {
     die('usage: clean-mbr.php id_contact' . "\n");
 }
 $id_contact = (int) $argv[1];
 
 $do = false;
-if (!empty($argv[2])) {
+if (isset($argv[2])) {
     $do = (bool) $argv[2];
 }
 

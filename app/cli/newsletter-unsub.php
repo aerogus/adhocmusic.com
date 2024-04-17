@@ -21,7 +21,7 @@ if ($argc < 2) {
 }
 
 for ($idx = 1; $idx < $argc; $idx++) {
-    $email = trim((string) $argv[$idx]);
+    $email = trim($argv[$idx]);
     if (!Email::validate($email)) {
         echo "[ERR] email " . $email . " invalide\n";
         continue;

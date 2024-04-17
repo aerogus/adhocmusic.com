@@ -288,13 +288,12 @@ class CMS extends ObjectModel
     }
 
     /**
-     * @param array<string> $breadcrumb breadcrumb [{title:'', link: '', description: ''},{...}]
+     * @param strin> $breadcrumb breadcrumb [{title:'', link: '', description: ''},{...}]
      *
      * @return static
      */
-    public function setBreadcrumb(array $breadcrumb): static
+    public function setBreadcrumb(string $breadcrumb): static
     {
-        // TODO: à convertir en chaine
         if ($this->breadcrumb !== $breadcrumb) {
             $this->breadcrumb = print_r($breadcrumb, true);
             $this->modified_fields['breadcrumb'] = true;
