@@ -123,7 +123,6 @@ final class Controller
                     if (Email::send($data['email'], "Inscription à l'association AD'HOC", 'member-create', $data)) {
                         Tools::redirect('/membres/create?create=1');
                     } else {
-                        $twig->assign('password', $data['password']); // DEBUG ONLY
                         $errors['generic'] = true;
                     }
                 } else {
