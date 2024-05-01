@@ -111,7 +111,7 @@ final class Controller
             $sortinv = 'DESC';
         }
 
-        if (strlen(Route::params('order_by')) > 0) {
+        if (!is_null(Route::params('order_by'))) {
             $order_by = Route::params('order_by');
         } else {
             $order_by = 'id_contact';
