@@ -64,7 +64,7 @@ class AdHocTwig
         $this->assign('fb_page_id', FB_PAGE_ID);
         $this->assign('robots', 'index,follow');
 
-        if (array_key_exists('membre', $_SESSION['membre'])) {
+        if (array_key_exists('membre', $_SESSION)) {
             $this->assign('me', $_SESSION['membre']);
             $this->assign('is_auth', true);
         } else {
