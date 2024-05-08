@@ -603,7 +603,7 @@ class Video extends Media
 
         // DailyMotion
         if (preg_match(MEDIA_DAILYMOTION_DIRECT_VIDEO_URL_PATTERN, $str, $matches)) {
-            if (!empty($matches[3])) {
+            if (isset($matches[3])) {
                 return ['id_host' => self::HOST_DAILYMOTION, 'reference' => $matches[3]];
             }
         }

@@ -294,8 +294,8 @@ class Groupe extends ObjectModel
      */
     public function getFacebookPageUrl(): ?string
     {
-        if ($this->getFacebookPageId()) {
-            return 'https://www.facebook.com/pages/' . $this->alias . '/' . $this->facebook_page_id;
+        if (!is_null($this->getFacebookPageId()) && !is_null($this->getAlias())) {
+            return 'https://www.facebook.com/pages/' . $this->getAlias() . '/' . $this->getFacebookPageId();
         }
         return null;
     }

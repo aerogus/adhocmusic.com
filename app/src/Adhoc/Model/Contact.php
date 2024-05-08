@@ -190,7 +190,7 @@ class Contact extends ObjectModel
         $sql .= "FROM `" . static::getDbTable() . "` ";
         $sql .= "WHERE 1 ";
 
-        if (!empty($params['email'])) {
+        if (isset($params['email'])) {
             $sql .= "AND `email` = '" . $params['email'] . "' ";
         }
 

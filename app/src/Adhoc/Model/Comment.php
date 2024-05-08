@@ -239,7 +239,7 @@ class Comment extends ObjectModel
      */
     public function getPseudo(): string
     {
-        return $this->getPseudoMbr() ? $this->getPseudoMbr() : $this->pseudo;
+        return !is_null($this->getPseudoMbr()) ? $this->getPseudoMbr() : $this->pseudo;
     }
 
     /**
@@ -255,7 +255,7 @@ class Comment extends ObjectModel
      */
     public function getEmail(): ?string
     {
-        return $this->getEmailMbr() ? $this->getEmailMbr() : $this->email;
+        return !is_null($this->getEmailMbr()) ? $this->getEmailMbr() : $this->email;
     }
 
     /**
