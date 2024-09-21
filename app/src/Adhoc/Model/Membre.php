@@ -160,7 +160,7 @@ class Membre extends ObjectModel
     /**
      * @var ?Contact
      */
-    protected $contact = null;
+    protected ?Contact $contact = null;
 
     /**
      * @var ?City
@@ -918,7 +918,7 @@ class Membre extends ObjectModel
      */
     public function belongsTo(int $id_groupe): bool
     {
-        if (!$this->contact) {
+        if (is_null($this->contact)) {
             throw new \Exception('id_contact manquant');
         }
 
@@ -927,7 +927,7 @@ class Membre extends ObjectModel
         $sql  = "SELECT `id_contact` "
               . "FROM `" . self::$db_table_appartient_a . "` "
               . "WHERE `id_groupe` = " . $id_groupe . " "
-              . "AND `id_contact` = " . $this->id_contact;
+              . "AND `id_contact` = " . $this->getIdContact();
 
         $stmt = $db->pdo->query($sql);
 
@@ -1012,13 +1012,13 @@ class Membre extends ObjectModel
     }
 
     /**
-     * Retourne l'id du compte, méthode statique
+     * Retourne l'id du compte, false ni non trouvé
      *
      * @param string $pseudo pseudo
      *
-     * @return int
+     * @return int|false
      */
-    public static function getIdByPseudo($pseudo): int
+    public static function getIdByPseudo($pseudo): int|false
     {
         $ms = Membre::find([
             'pseudo' => $pseudo,
@@ -1026,7 +1026,7 @@ class Membre extends ObjectModel
         if (count($ms) === 1) {
             return $ms[0]->getIdContact();
         }
-        return 0;
+        return false;
     }
 
     /**
@@ -1162,16 +1162,13 @@ class Membre extends ObjectModel
                 return $objs;
             }
         }
-
-        if (!empty($params['pseudo'])) {
+        if (isset($params['pseudo']) && (strlen($params['pseudo']) > 0)) {
             $sql .= "AND `pseudo` LIKE '" . $params['pseudo'] . "%' ";
         }
-
-        if (!empty($params['last_name'])) {
+        if (isset($params['last_name']) && (strlen($params['last_name']) > 0)) {
             $sql .= "AND `last_name` LIKE '" . $params['last_name'] . "%' ";
         }
-
-        if (!empty($params['first_name'])) {
+        if (isset($params['first_name']) && (strlen($params['first_name']) > 0)) {
             $sql .= "AND `first_name` LIKE '" . $params['first_name'] . "%' ";
         }
 

@@ -273,7 +273,7 @@ final class Controller
         $pseudo = (string) Route::params('pseudo');
         $out = ['pseudo' => $pseudo];
 
-        if ($id_contact = Membre::getIdByPseudo($pseudo)) {
+        if (($id_contact = Membre::getIdByPseudo($pseudo)) !== false) {
             $out['status'] = 'KO_PSEUDO_UNAVAILABLE';
         } else {
             $out['status'] = 'OK';
