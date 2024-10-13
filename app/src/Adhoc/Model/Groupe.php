@@ -1016,7 +1016,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = 'DELETE FROM `' . self::$db_table_appartient_a . '` '
-             . 'WHERE `' . $this->getDbPk() . '` = ' . $this->getIdGroupe();
+             . 'WHERE `' . static::getDbPk() . '` = ' . $this->getIdGroupe();
 
         $stmt = $db->pdo->query($sql);
 
@@ -1078,7 +1078,7 @@ class Groupe extends ObjectModel
      *                                'limit' => int,
      *                            ]
      *
-     * @return array<Groupe>
+     * @return array<static>
      */
     public static function find(array $params): array
     {
@@ -1120,7 +1120,7 @@ class Groupe extends ObjectModel
             $sql .= "AND `alias` = '" . $params['alias'] . "' ";
         }
 
-        if (!empty($params['search_name'])) {
+        if (isset($params['search_name'])) {
             $sql .= "AND `name` LIKE '%" . $params['search_name'] . "%' ";
         }
 
@@ -1171,7 +1171,11 @@ class Groupe extends ObjectModel
      */
     public static function getIdByAlias(string $alias): ?int
     {
-        if ($groupes = self::find(['alias' => $alias])) {
+        $groupes = self::find([
+            'alias' => $alias,
+        ]);
+
+        if (count($groupes) > 0) {
             return $groupes[0]->getIdGroupe();
         }
         return null;
@@ -1186,7 +1190,11 @@ class Groupe extends ObjectModel
      */
     public static function getIdByFacebookPageId(int $facebook_page_id): ?int
     {
-        if ($groupes = self::find(['facebook_page_id' => $facebook_page_id])) {
+        $groupes = self::find([
+            'facebook_page_id' => $facebook_page_id,
+        ]);
+
+        if (count($groupes) > 0) {
             return $groupes[0]->getIdGroupe();
         }
         return null;

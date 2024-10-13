@@ -406,7 +406,7 @@ abstract class Forum
             $tab[$_res['id_forum']] = (int) $_res['nb_threads'];
         }
 
-        if (!is_null($id_forum) && !empty($id_forum)) {
+        if (!is_null($id_forum)) {
             return $tab[$id_forum];
         }
         return $tab;

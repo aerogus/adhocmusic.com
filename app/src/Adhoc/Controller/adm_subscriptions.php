@@ -143,7 +143,7 @@ final class Controller
             $s->setAdult((bool) Route::params('adult'));
         }
         if (!is_null(Route::params('email'))) {
-            $s->setemail((string) Route::params('email'));
+            $s->setEmail((string) Route::params('email'));
         }
         if (!is_null(Route::params('cp'))) {
             $s->setCp((string) Route::params('cp'));

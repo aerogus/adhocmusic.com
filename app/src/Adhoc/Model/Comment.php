@@ -508,11 +508,11 @@ class Comment extends ObjectModel
                 $emails[] = $membre->getContact()->getEmail();
 
                 // -> si lien avec groupe, contacts des groupes
-                if ($audio->getIdGroupe()) {
+                if (!is_null($audio->getIdGroupe())) {
                     $groupe = Groupe::getInstance($audio->getIdGroupe());
-                    $membres = $groupe->getMembers();
-                    foreach ($membres as $membre) {
-                        $emails[] = $membre['email'];
+                    $ms = $groupe->getMembers();
+                    foreach ($ms as $m) {
+                        $emails[] = $m['email'];
                     }
                 }
                 break;
@@ -527,11 +527,11 @@ class Comment extends ObjectModel
                 $emails[] = $membre->getContact()->getEmail();
 
                 // -> si lien avec groupe, contacts des groupes
-                if ($video->getIdGroupe()) {
+                if (!is_null($video->getIdGroupe())) {
                     $groupe = Groupe::getInstance($video->getIdGroupe());
-                    $membres = $groupe->getMembers();
-                    foreach ($membres as $membre) {
-                        $emails[] = $membre['email'];
+                    $ms = $groupe->getMembers();
+                    foreach ($ms as $m) {
+                        $emails[] = $m['email'];
                     }
                 }
                 break;
@@ -546,8 +546,8 @@ class Comment extends ObjectModel
                 /*
                 $ids_contact = Alerting::getIdsContactByLieu($lieu->getId());
                 foreach ($ids_contact as $id_contact) {
-                    $membre = Membre::getInstance($id_contact);
-                    $emails[] = $membre->getContact()->getEmail();
+                    $m = Membre::getInstance($id_contact);
+                    $emails[] = $m->getContact()->getEmail();
                 }
                 */
                 break;
@@ -559,12 +559,12 @@ class Comment extends ObjectModel
                 $url = $photo->getUrl();
 
                 // -> si lien avec événement, gens ayant dans leur agenda perso cette date
-                if ($photo->getIdEvent()) {
+                if (!is_null($photo->getIdEvent())) {
                     /*
                     $subs = Alerting::getIdsContactByEvent($photo->getIdEvent());
                     foreach ($subs as $sub) {
-                        $membre = Membre::getInstance($sub['id_contact']);
-                        $emails[] = $membre->getContact()->getEmail();
+                        $m = Membre::getInstance($sub['id_contact']);
+                        $emails[] = $m->getContact()->getEmail();
                     }
                     */
                 }
@@ -574,11 +574,11 @@ class Comment extends ObjectModel
                 $emails[] = $membre->getContact()->getEmail();
 
                 // -> si lien avec groupe, contacts des groupes
-                if ($photo->getIdGroupe()) {
+                if (!is_null($photo->getIdGroupe())) {
                     $groupe = Groupe::getInstance($photo->getIdGroupe());
-                    $membres = $groupe->getMembers();
-                    foreach ($membres as $membre) {
-                        $emails[] = $membre['email'];
+                    $ms = $groupe->getMembers();
+                    foreach ($ms as $m) {
+                        $emails[] = $m['email'];
                     }
                 }
                 break;
@@ -593,20 +593,18 @@ class Comment extends ObjectModel
                 /*
                 $ids_contact = Alerting::getIdsContactByEvent($event->getId());
                 foreach ($ids_contact as $id_contact) {
-                    $membre = Membre::getInstance($id_contact);
-                    $emails[] = $membre->getContact()->getEmail();
+                    $m = Membre::getInstance($id_contact);
+                    $emails[] = $m->getContact()->getEmail();
                 }
                 */
 
                 // -> si lien avec groupes, contacts des groupes
                 $grps = $event->getGroupes();
-                if (is_array($grps)) {
-                    foreach ($grps as $grp) {
-                        $groupe = Groupe::getInstance($grp['id']);
-                        $membres = $groupe->getMembers();
-                        foreach ($membres as $membre) {
-                            $emails[] = $membre['email'];
-                        }
+                foreach ($grps as $grp) {
+                    $groupe = Groupe::getInstance($grp['id']);
+                    $membres = $groupe->getMembers();
+                    foreach ($membres as $membre) {
+                        $emails[] = $membre['email'];
                     }
                 }
 

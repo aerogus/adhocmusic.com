@@ -658,7 +658,7 @@ class Event extends ObjectModel
             return null;
         }
 
-        if (!$maxWidth) {
+        if ($maxWidth === 0) {
             return self::getBaseUrl() . '/' . $this->getIdEvent() . '.jpg';
         } else {
             $uid = 'event/' . $this->getIdEvent() . '/' . $maxWidth;
@@ -703,7 +703,7 @@ class Event extends ObjectModel
      */
     public function genThumb(int $maxWidth = 0): bool
     {
-        if (!$maxWidth) {
+        if ($maxWidth === 0) {
             return false;
         }
 

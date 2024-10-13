@@ -304,7 +304,7 @@ class Alerting extends ObjectModel
      *                                'limit' => int,
      *                            ]
      *
-     * @return array<mixed>
+     * @return array<static>
      */
     public static function find(array $params): array
     {
