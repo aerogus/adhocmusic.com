@@ -1179,7 +1179,7 @@ class Membre extends ObjectModel
         }
         */
 
-        if (!empty($params['id_country'])) {
+        if (isset($params['id_country']) && (strlen($params['id_country']) == 2)) {
             $sql .= "AND `id_country` = '" . $params['id_country'] . "' ";
         }
 

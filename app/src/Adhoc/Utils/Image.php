@@ -527,40 +527,40 @@ class Image
                 $tmp_h = min($this->hSel, $this->max_height);
                 $rh1   = $tmp_h / $this->hSel;
                 $tmp_l = round($this->wSel * $rh1);
-                if (($this->max_width > 0) && $tmp_l) { // a debugguer
+                if (($this->max_width > 0) && ($tmp_l > 0)) { // à debugguer
                     $this->new_l = (int) min($this->max_width, $tmp_l);
                     $rh2          = $this->new_l / ($this->wSel * $rh1);
                     $this->new_h = (int) round($this->hSel * $rh1 * $rh2);
                 } else {
                     $this->new_l = (int) $tmp_l;
-                    $this->new_h = (int) $tmp_h;
+                    $this->new_h = $tmp_h;
                 }
             } else {
                 if ($this->max_width > 0) {
-                    $this->new_l = (int) min($this->wSel, $this->max_width);
+                    $this->new_l = min($this->wSel, $this->max_width);
                     $rh           = $this->new_l / $this->wSel;
                     $this->new_h = (int) round($this->hSel * $rh);
                 } else {
-                    $this->new_l = (int) $this->wSel;
-                    $this->new_h = (int) $this->hSel;
+                    $this->new_l = $this->wSel;
+                    $this->new_h = $this->hSel;
                 }
             }
         } else {
             if ($this->max_height > 0) {
                 if ($this->max_width > 0) {
-                    $this->new_l = (int) min($this->wSel, $this->max_width);
-                    $this->new_h = (int) min($this->hSel, $this->max_height);
+                    $this->new_l = min($this->wSel, $this->max_width);
+                    $this->new_h = min($this->hSel, $this->max_height);
                 } else {
                     $this->new_l = $this->wSel;
-                    $this->new_h = (int) min($this->hSel, $this->max_height);
+                    $this->new_h = min($this->hSel, $this->max_height);
                 }
             } else {
                 if ($this->max_width > 0) {
-                    $this->new_l = (int) min($this->wSel, $this->max_width);
-                    $this->new_h = (int) $this->hSel;
+                    $this->new_l = min($this->wSel, $this->max_width);
+                    $this->new_h = $this->hSel;
                 } else {
-                    $this->new_l = (int) $this->wSel;
-                    $this->new_h = (int) $this->hSel;
+                    $this->new_l = $this->wSel;
+                    $this->new_h = $this->hSel;
                 }
             }
         }
@@ -568,7 +568,7 @@ class Image
         /**
          * Calcul de l'offset en cas de bordure
          */
-        if ($this->max_height && $this->max_width && $this->border) {
+        if (($this->max_height > 0) && ($this->max_width > 0) && $this->border) {
             $this->deltax = (int) round(($this->max_width - $this->new_l) / 2);
             $this->deltay = (int) round(($this->max_height - $this->new_h) / 2);
         } else {

@@ -745,7 +745,7 @@ abstract class ObjectModel
      */
     public static function countMy(): int
     {
-        if (empty($_SESSION['membre'])) {
+        if (!isset($_SESSION['membre'])) {
             throw new \Exception('non identifié');
         }
 

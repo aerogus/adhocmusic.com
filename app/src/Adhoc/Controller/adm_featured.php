@@ -120,7 +120,7 @@ final class Controller
                 Tools::redirect('/adm/featured?create=1');
             }
 
-            if (!empty($errors)) {
+            if (count($errors) > 0) {
                 foreach ($errors as $k => $v) {
                     $twig->assign('error_' . $k, $v);
                 }
@@ -212,7 +212,7 @@ final class Controller
                 Tools::redirect('/adm/featured?edit=1');
             }
 
-            if (!empty($errors)) {
+            if (count($errors) > 0) {
                 foreach ($errors as $k => $v) {
                     $twig->assign('error_' . $k, $v);
                 }
@@ -263,19 +263,19 @@ final class Controller
     {
         $errors = [];
 
-        if (empty($data['title'])) {
+        if (!(isset($data['title']) && (strlen($data['title']) > 0))) {
             $errors['title'] = "Vous devez saisir un titre";
         }
-        if (empty($data['description'])) {
+        if (!(isset($data['description']) && (strlen($data['description']) > 0))) {
             $errors['description'] = "Vous devez saisir une description";
         }
-        if (empty($data['url'])) {
+        if (!(isset($data['url']) && (strlen($data['url']) > 0))) {
             $errors['url'] = "Vous devez saisir un lien de destination";
         }
-        if (empty($data['datdeb'])) {
+        if (!(isset($data['datdeb']) && (strlen($data['datdeb']) > 0))) {
             $errors['datdeb'] = "Vous devez choisir une date de début de programmation";
         }
-        if (empty($data['datfin'])) {
+        if (!(isset($data['datfin']) && (strlen($data['datfin']) > 0))) {
             $errors['datfin'] = "Vous devez saisir une date de fin de programmation";
         }
 

@@ -400,8 +400,7 @@ class Route
             }
         } else {
             $matches = [];
-            preg_match('/^:([a-z0-9_-]+)/i', $scanned_component, $matches);
-            if (strlen($matches[1]) === 0) {
+            if (preg_match('/^:([a-z0-9_-]+)/i', $scanned_component, $matches) !== 1) {
                 return false;
             }
             $scanned_component_splitted_action = explode(';', $scanned_component);

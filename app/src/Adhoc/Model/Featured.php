@@ -399,8 +399,6 @@ class Featured extends ObjectModel
     /**
      * Retourne une collection d'objets "Featured" répondant au(x) critère(s) donné(s)
      *
-     * À surcharger dans les classes filles
-     *
      * @param array<string,mixed> $params [
      *                                        'online' => bool,
      *                                        'current' => bool,
@@ -410,7 +408,7 @@ class Featured extends ObjectModel
      *                                        'limit' => int,
      *                                    ]
      *
-     * @return array<object>
+     * @return array<static>
      */
     public static function find(array $params): array
     {

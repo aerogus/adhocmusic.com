@@ -525,7 +525,7 @@ class Event extends ObjectModel
      *                                'datdeb' => string,
      *                                'datfin' => string,
      *                                'online' => bool,
-     *                                'with_audio' => bool,
+     *                                '' => bool,
      *                                'with_photo' => bool,
      *                                'with_video' => bool,
      *                                'order_by' => string,
@@ -605,17 +605,7 @@ class Event extends ObjectModel
 
         $ids = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
         foreach ($ids as $id) {
-            $obj = static::getInstance((int) $id);
-            if (!empty($params['with_audio']) && (count($obj->getAudios()) > 0)) {
-                continue;
-            }
-            if (!empty($params['with_photo']) && !$obj->getPhotos()) {
-                continue;
-            }
-            if (!empty($params['with_video']) && !$obj->getVideos()) {
-                continue;
-            }
-            $objs[] = $obj;
+            $objs[] = static::getInstance((int) $id);
         }
 
         return $objs;

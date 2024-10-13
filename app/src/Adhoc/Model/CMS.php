@@ -419,12 +419,12 @@ class CMS extends ObjectModel
      */
     public static function getIdByAlias(string $alias): ?int
     {
-        if (
-            $cmss = self::find([
-                'alias' => $alias,
-                'online' => true,
-            ])
-        ) {
+        $cmss = self::find([
+            'alias' => $alias,
+            'online' => true,
+        ]);
+
+        if (count($cmss) > 0) {
             return $cmss[0]->getIdCms();
         }
         return null;

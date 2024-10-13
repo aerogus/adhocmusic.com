@@ -881,7 +881,7 @@ class Lieu extends ObjectModel
         }
 
         foreach ($rows as $row) {
-            $tab[(string) $row['id_departement']][] = Lieu::getInstance((int) $row['id_lieu']);
+            $tab[(string) $row['id_departement']][] = static::getInstance((int) $row['id_lieu']);
         }
 
         // tri par nom de ville

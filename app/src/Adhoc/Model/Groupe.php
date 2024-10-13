@@ -317,8 +317,8 @@ class Groupe extends ObjectModel
      */
     public function getTwitterUrl(): ?string
     {
-        if ($this->getTwitterId()) {
-            return 'https://www.twitter.com/' . $this->twitter_id;
+        if (!is_null($this->getTwitterId())) {
+            return 'https://www.twitter.com/' . $this->getTwitterId();
         }
         return null;
     }
@@ -863,7 +863,7 @@ class Groupe extends ObjectModel
      */
     public static function countMy(): int
     {
-        if (empty($_SESSION['membre'])) {
+        if (!isset($_SESSION['membre'])) {
             throw new \Exception('non identifié');
         }
 
@@ -1005,9 +1005,9 @@ class Groupe extends ObjectModel
     /**
      * Délie tous les membres d'un groupe
      *
-     * @return int
+     * @return int|false
      */
-    public function unlinkMembers(): int
+    public function unlinkMembers(): int|false
     {
         if (is_null($this->getIdGroupe())) {
             return false;
