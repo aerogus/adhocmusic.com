@@ -8,3 +8,5 @@ parameters:
     - app
   excludePaths:
     - app/twig_c/??/*.php
+  strictRules:
+    noVariableVariables: false
