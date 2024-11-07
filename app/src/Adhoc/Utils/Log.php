@@ -7,8 +7,7 @@ namespace Adhoc\Utils;
 /**
  * Gestion des logs
  *
- * @author    Guillaume Seznec <gseznec@ina.fr>
- * @copyright 2024 Institut national de l’audiovisuel
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Log
 {
