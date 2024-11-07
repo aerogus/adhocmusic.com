@@ -12,6 +12,6 @@
   },
   "dependencies": {
     "mjml": "4.15.3",
-    "stylus": "0.63.0"
+    "stylus": "0.64.0"
   }
 }
