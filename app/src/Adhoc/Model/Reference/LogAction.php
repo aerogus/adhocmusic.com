@@ -14,9 +14,11 @@ use Adhoc\Model\Reference;
 class LogAction extends Reference
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_log_action';
+    protected static array $pk = [
+        'id_log_action',
+    ];
 
     /**
      * @var string

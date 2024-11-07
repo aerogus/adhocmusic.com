@@ -52,7 +52,7 @@ final class Controller
             $audio->save();
         }
 
-        if ($_SESSION['membre']->getId() === 1) {
+        if ($_SESSION['membre']->getIdContact() === 1) {
             $audios = Audio::find(
                 [
                     'order_by' => 'id_audio',
@@ -65,7 +65,7 @@ final class Controller
         } else {
             $audios = Audio::find(
                 [
-                    'id_contact' => $_SESSION['membre']->getId(),
+                    'id_contact' => $_SESSION['membre']->getIdContact(),
                     'order_by' => 'id_audio',
                     'sort' => 'ASC',
                     'start' => $page * NB_AUDIOS_PER_PAGE,
@@ -207,7 +207,7 @@ final class Controller
                 'id_groupe'  => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
                 'id_lieu'    => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
                 'id_event'   => Route::params('id_event') ? (int) Route::params('id_event') : null,
-                'id_contact' => (int) $_SESSION['membre']->getId(),
+                'id_contact' => (int) $_SESSION['membre']->getIdContact(),
                 'online'     => (bool) Route::params('online'),
             ];
 
@@ -227,11 +227,11 @@ final class Controller
                         if (!is_dir(Audio::getBasePath())) {
                             mkdir(Audio::getBasePath(), 0755, true);
                         }
-                        move_uploaded_file($uploaded_audio_path, Audio::getBasePath() . '/' . $audio->getId() . '.mp3');
+                        move_uploaded_file($uploaded_audio_path, Audio::getBasePath() . '/' . $audio->getIdAudio() . '.mp3');
                     } else {
                         mail(DEBUG_EMAIL, 'bug audio create', 'bug audio create');
                     }
-                    Log::action(Log::ACTION_AUDIO_CREATE, $audio->getId());
+                    Log::action(Log::ACTION_AUDIO_CREATE, $audio->getIdAudio());
                     Tools::redirect('/audios/my');
                 } else {
                     $twig->assign('error_generic', true);
@@ -335,7 +335,7 @@ final class Controller
                 'id_groupe'  => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
                 'id_lieu'    => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
                 'id_event'   => Route::params('id_event') ? (int) Route::params('id_event') : null,
-                'id_contact' => (int) $_SESSION['membre']->getId(),
+                'id_contact' => (int) $_SESSION['membre']->getIdContact(),
                 'online' => (bool) Route::params('online'),
             ];
 
@@ -349,7 +349,7 @@ final class Controller
                     ->setOnline($data['online']);
 
                 if ($audio->save()) {
-                    Log::action(Log::ACTION_AUDIO_EDIT, $audio->getId());
+                    Log::action(Log::ACTION_AUDIO_EDIT, $audio->getIdAudio());
                     Tools::redirect('/audios/my');
                 } else {
                     $twig->assign('error_generic', true);
@@ -421,7 +421,7 @@ final class Controller
 
         if (Tools::isSubmit('form-audio-delete')) {
             if ($audio->delete()) {
-                Log::action(Log::ACTION_AUDIO_DELETE, $audio->getId());
+                Log::action(Log::ACTION_AUDIO_DELETE, $audio->getIdAudio());
                 Tools::redirect('/audios/my');
             } else {
                 $errors['generic'] = true;

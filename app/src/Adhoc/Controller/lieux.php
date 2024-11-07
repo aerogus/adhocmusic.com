@@ -151,7 +151,7 @@ final class Controller
 
         if (!$lieu->getLat() && !$lieu->getLng()) {
             $twig->assign('geocode', true);
-            $twig->assign('geocode_id_lieu', $lieu->getId());
+            $twig->assign('geocode_id_lieu', $lieu->getIdLieu());
             $twig->assign('geocode_address', $lieu->getAddress() . ' ' . $lieu->getCity()->getCp() . ' ' . $lieu->getCity()->getName());
         }
 
@@ -230,10 +230,10 @@ final class Controller
         // alerting
         /*
         if (Tools::isAuth()) {
-            if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'l', $lieu->getId())) {
-                $twig->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=l&id_content='.$lieu->getId());
+            if (!Alerting::getIdByIds($_SESSION['membre']->getIdContact(), 'l', $lieu->getIdLieu())) {
+                $twig->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=l&id_content='.$lieu->getIdLieu());
             } else {
-                $twig->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=l&id_content='.$lieu->getId());
+                $twig->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=l&id_content='.$lieu->getIdLieu());
             }
         } else {
             $twig->assign('alerting_auth_url', HOME_URL .  '/auth/auth');
@@ -266,7 +266,7 @@ final class Controller
                 'address'        => (string) Route::params('address'),
                 'text'           => (string) Route::params('text'),
                 'site'           => (string) Route::params('site'),
-                'id_contact'     => $_SESSION['membre']->getId(),
+                'id_contact'     => $_SESSION['membre']->getIdContact(),
                 'lat'            => (float) Route::params('lat'),
                 'lng'            => (float) Route::params('lng'),
             ];
@@ -308,13 +308,13 @@ final class Controller
                         ->setType(IMAGETYPE_JPEG)
                         ->setMaxWidth(400)
                         ->setMaxHeight(400)
-                        ->setDestFile(Lieu::getBasePath() . '/' . $lieu->getId() . '.jpg')
+                        ->setDestFile(Lieu::getBasePath() . '/' . $lieu->getIdLieu() . '.jpg')
                         ->write();
                 }
 
-                Log::action(Log::ACTION_LIEU_CREATE, $lieu->getId());
+                Log::action(Log::ACTION_LIEU_CREATE, $lieu->getIdLieu());
 
-                Tools::redirect('/lieux/' . $lieu->getId() . '?create=1');
+                Tools::redirect('/lieux/' . $lieu->getIdLieu() . '?create=1');
             } else {
                 // erreurs
             }
@@ -379,7 +379,7 @@ final class Controller
                 'address'        => (string) Route::params('address'),
                 'text'           => (string) Route::params('text'),
                 'site'           => (string) Route::params('site'),
-                'id_contact'     => $_SESSION['membre']->getId(),
+                'id_contact'     => $_SESSION['membre']->getIdContact(),
                 'lat'            => (float) Route::params('lat'),
                 'lng'            => (float) Route::params('lng'),
             ];
@@ -418,13 +418,13 @@ final class Controller
                             ->setType(IMAGETYPE_JPEG)
                             ->setMaxWidth(400)
                             ->setMaxHeight(400)
-                            ->setDestFile(Lieu::getBasePath() . '/' . $lieu->getId() . '.jpg')
+                            ->setDestFile(Lieu::getBasePath() . '/' . $lieu->getIdLieu() . '.jpg')
                             ->write();
                     }
 
-                    Log::action(Log::ACTION_LIEU_EDIT, $lieu->getId());
+                    Log::action(Log::ACTION_LIEU_EDIT, $lieu->getIdLieu());
 
-                    Tools::redirect('/lieux/' . $lieu->getId() . '?edit=1');
+                    Tools::redirect('/lieux/' . $lieu->getIdLieu() . '?edit=1');
                 }
             } else {
                 // erreurs
@@ -433,7 +433,7 @@ final class Controller
 
         $twig->enqueueScriptVars(
             [
-                'id' => $lieu->getId(),
+                'id' => $lieu->getIdLieu(),
                 'id_country' => $lieu->getIdCountry(),
                 'id_region' => $lieu->getIdRegion(),
                 'id_departement' => $lieu->getIdDepartement(),
@@ -470,7 +470,7 @@ final class Controller
 
         if (Tools::isSubmit('form-lieu-delete')) {
             if ($lieu->delete()) {
-                Log::action(Log::ACTION_LIEU_DELETE, $lieu->getId());
+                Log::action(Log::ACTION_LIEU_DELETE, $lieu->getIdLieu());
                 Tools::redirect('/lieux?delete=1');
             }
         }

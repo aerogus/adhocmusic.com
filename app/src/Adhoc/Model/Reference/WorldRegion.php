@@ -15,9 +15,9 @@ use Adhoc\Utils\DataBase;
 class WorldRegion extends Reference
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = [
+    protected static array $pk = [
         'id_country',
         'id_region',
     ];
@@ -111,9 +111,18 @@ class WorldRegion extends Reference
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql  = "SELECT `" . implode('`,`', static::getDbPk()) . "` ";
-        $sql .= "FROM `" . static::getDbTable() . "` ";
-        $sql .= "WHERE 1 ";
+        $sql = 'SELECT ';
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
+        $sql .= 'FROM `' . static::getDbTable() . '` ';
+        $sql .= 'WHERE 1 ';
 
         if (isset($params['id_country'])) {
             $sql .= "AND `id_country` = '" . $params['id_country'] . "' ";
@@ -122,7 +131,7 @@ class WorldRegion extends Reference
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
-            $sql .= "ORDER BY `" . static::$pk[1] . "` "; // tri par région
+            $sql .= "ORDER BY `" . static::getDbPk()[1] . "` "; // tri par région
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {

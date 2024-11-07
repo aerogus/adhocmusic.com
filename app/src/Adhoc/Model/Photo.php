@@ -19,9 +19,11 @@ use Adhoc\Utils\Image;
 class Photo extends Media
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_photo';
+    protected static array $pk = [
+        'id_photo',
+    ];
 
     /**
      * @var string

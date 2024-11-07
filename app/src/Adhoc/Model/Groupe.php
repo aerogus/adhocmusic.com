@@ -38,9 +38,11 @@ class Groupe extends ObjectModel
     ];
 
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_groupe';
+    protected static array $pk = [
+        'id_groupe',
+    ];
 
     /**
      * @var string
@@ -484,8 +486,8 @@ class Groupe extends ObjectModel
      */
     public function getMiniPhoto(): string
     {
-        if (file_exists(self::getBasePath() . '/m' . $this->getId() . '.jpg')) {
-            return self::getBaseUrl() . '/m' . $this->getId() . '.jpg?ts=' . $this->getModifiedAtTs();
+        if (file_exists(self::getBasePath() . '/m' . $this->getIdGroupe() . '.jpg')) {
+            return self::getBaseUrl() . '/m' . $this->getIdGroupe() . '.jpg?ts=' . $this->getModifiedAtTs();
         } else {
             // todo mini photo par défaut, dans une méthode statique
             return HOME_URL . '/img/note_adhoc_64.png';
@@ -500,12 +502,12 @@ class Groupe extends ObjectModel
      */
     public function getLogo(): ?string
     {
-        if (file_exists(self::getBasePath() . '/l' . $this->getId() . '.png')) {
-            return self::getBaseUrl() . '/l' . $this->getId() . '.png?ts=' . $this->getModifiedAtTs();
-        } elseif (file_exists(self::getBasePath() . '/l' . $this->getId() . '.gif')) {
-            return self::getBaseUrl() . '/l' . $this->getId() . '.gif?ts=' . $this->getModifiedAtTs();
-        } elseif (file_exists(self::getBasePath() . '/l' . $this->getId() . '.jpg')) {
-            return self::getBaseUrl() . '/l' . $this->getId() . '.jpg?ts=' . $this->getModifiedAtTs();
+        if (file_exists(self::getBasePath() . '/l' . $this->getIdGroupe() . '.png')) {
+            return self::getBaseUrl() . '/l' . $this->getIdGroupe() . '.png?ts=' . $this->getModifiedAtTs();
+        } elseif (file_exists(self::getBasePath() . '/l' . $this->getIdGroupe() . '.gif')) {
+            return self::getBaseUrl() . '/l' . $this->getIdGroupe() . '.gif?ts=' . $this->getModifiedAtTs();
+        } elseif (file_exists(self::getBasePath() . '/l' . $this->getIdGroupe() . '.jpg')) {
+            return self::getBaseUrl() . '/l' . $this->getIdGroupe() . '.jpg?ts=' . $this->getModifiedAtTs();
         }
         return null;
     }
@@ -535,11 +537,11 @@ class Groupe extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $alias alias
+     * @param ?string $alias alias
      *
      * @return static
      */
-    public function setAlias(string $alias): static
+    public function setAlias(?string $alias): static
     {
         if ($this->alias !== $alias) {
             $this->alias = $alias;
@@ -550,11 +552,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string $name nom
+     * @param ?string $name nom
      *
      * @return static
      */
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         if ($this->name !== $name) {
             $this->name = $name;
@@ -566,11 +568,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string $style style libre
+     * @param ?string $style style libre
      *
      * @return static
      */
-    public function setStyle(string $style): static
+    public function setStyle(?string $style): static
     {
         if ($this->style !== $style) {
             $this->style = $style;
@@ -581,11 +583,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string $influences influences
+     * @param ?string $influences influences
      *
      * @return static
      */
-    public function setInfluences(string $influences): static
+    public function setInfluences(?string $influences): static
     {
         if ($this->influences !== $influences) {
             $this->influences = $influences;
@@ -596,11 +598,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string $lineup lineup (formation)
+     * @param ?string $lineup lineup (formation)
      *
      * @return static
      */
-    public function setLineup(string $lineup): static
+    public function setLineup(?string $lineup): static
     {
         if ($this->lineup !== $lineup) {
             $this->lineup = $lineup;
@@ -611,11 +613,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string $mini_text mini texte
+     * @param ?string $mini_text mini texte
      *
      * @return static
      */
-    public function setMiniText(string $mini_text): static
+    public function setMiniText(?string $mini_text): static
     {
         if ($this->mini_text !== $mini_text) {
             $this->mini_text = $mini_text;
@@ -626,11 +628,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string $text texte
+     * @param ?string $text texte
      *
      * @return static
      */
-    public function setText(string $text): static
+    public function setText(?string $text): static
     {
         if ($this->text !== $text) {
             $this->text = $text;
@@ -720,11 +722,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param bool $online online
+     * @param ?bool $online online
      *
      * @return static
      */
-    public function setOnline(bool $online): static
+    public function setOnline(?bool $online): static
     {
         if ($this->online !== $online) {
             $this->online = $online;
@@ -825,11 +827,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param string $comment comment
+     * @param ?string $comment comment
      *
      * @return static
      */
-    public function setComment(string $comment): static
+    public function setComment(?string $comment): static
     {
         if ($this->comment !== $comment) {
             $this->comment = $comment;
@@ -840,11 +842,11 @@ class Groupe extends ObjectModel
     }
 
     /**
-     * @param int $etat etat
+     * @param ?int $etat etat
      *
      * @return static
      */
-    public function setEtat(int $etat): static
+    public function setEtat(?int $etat): static
     {
         if ($this->etat !== $etat) {
             $this->etat = $etat;
@@ -871,7 +873,7 @@ class Groupe extends ObjectModel
 
         $sql = 'SELECT COUNT(*) '
              . 'FROM `' . self::$db_table_appartient_a . '` '
-             . 'WHERE `id_contact` = ' . (int) $_SESSION['membre']->getId();
+             . 'WHERE `id_contact` = ' . (int) $_SESSION['membre']->getIdContact();
 
         return (int) $db->pdo->query($sql)->fetchColumn();
     }
@@ -896,17 +898,17 @@ class Groupe extends ObjectModel
 
         parent::delete();
 
-        $p = self::getBasePath() . '/p' . $this->getId() . '.jpg';
+        $p = self::getBasePath() . '/p' . $this->getIdGroupe() . '.jpg';
         if (file_exists($p)) {
             unlink($p);
         }
 
-        $m = self::getBasePath() . '/m' . $this->getId() . '.jpg';
+        $m = self::getBasePath() . '/m' . $this->getIdGroupe() . '.jpg';
         if (file_exists($m)) {
             unlink($m);
         }
 
-        $l = self::getBasePath() . '/l' . $this->getId() . '.jpg';
+        $l = self::getBasePath() . '/l' . $this->getIdGroupe() . '.jpg';
         if (file_exists($l)) {
             unlink($l);
         }
@@ -944,7 +946,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = 'INSERT INTO `' . self::$db_table_appartient_a . '` '
-             . '(`' . Groupe::getDbPk() . '`, `' . Membre::getDbPk() . '`, `' . TypeMusicien::getDbPk() . '`) '
+             . '(`' . Groupe::getDbPk()[0] . '`, `' . Membre::getDbPk()[0] . '`, `' . TypeMusicien::getDbPk()[0] . '`) '
              . 'VALUES(' . $this->getIdGroupe() . ', ' . $id_contact . ', ' . $id_type_musicien . ')';
 
         $stmt = $db->pdo->query($sql);
@@ -969,9 +971,9 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = 'UPDATE `' . self::$db_table_appartient_a . '` '
-             . 'SET `' . TypeMusicien::getDbPk() . '` = ' . $id_type_musicien . ' '
-             . 'WHERE `' . Groupe::getDbPk() . '` = ' . $this->getIdGroupe() . ' '
-             . 'AND `' . Membre::getDbPk() . '` = ' . $id_contact;
+             . 'SET `' . TypeMusicien::getDbPk()[0] . '` = ' . $id_type_musicien . ' '
+             . 'WHERE `' . Groupe::getDbPk()[0] . '` = ' . $this->getIdGroupe() . ' '
+             . 'AND `' . Membre::getDbPk()[0] . '` = ' . $id_contact;
 
         $stmt = $db->pdo->query($sql);
 
@@ -994,8 +996,8 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = 'DELETE FROM `' . self::$db_table_appartient_a . '` '
-             . 'WHERE `' . Groupe::getDbPk() . '` = ' . $this->getIdGroupe() . ' '
-             . 'AND `' . Membre::getDbPk() . '` = ' . $id_contact;
+             . 'WHERE `' . Groupe::getDbPk()[0] . '` = ' . $this->getIdGroupe() . ' '
+             . 'AND `' . Membre::getDbPk()[0] . '` = ' . $id_contact;
 
         $stmt = $db->pdo->query($sql);
 
@@ -1016,7 +1018,7 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
 
         $sql = 'DELETE FROM `' . self::$db_table_appartient_a . '` '
-             . 'WHERE `' . static::getDbPk() . '` = ' . $this->getIdGroupe();
+             . 'WHERE `' . static::getDbPk()[0] . '` = ' . $this->getIdGroupe();
 
         $stmt = $db->pdo->query($sql);
 
@@ -1049,7 +1051,7 @@ class Groupe extends ObjectModel
     public function getMembers(): array
     {
         return Membre::find([
-            'id_groupe' => $this->getIdGroupe()
+            'id_groupe' => $this->getIdGroupe(),
         ]);
     }
 
@@ -1085,9 +1087,18 @@ class Groupe extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql  = "SELECT `" . static::getDbPk() . "` ";
-        $sql .= "FROM `" . static::getDbTable() . "` ";
-        $sql .= "WHERE 1 ";
+        $sql = 'SELECT ';
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
+        $sql .= 'FROM `' . static::getDbTable() . '` ';
+        $sql .= 'WHERE 1 ';
 
         if (isset($params['id_contact'])) {
             $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'] . " ";
@@ -1137,7 +1148,7 @@ class Groupe extends ObjectModel
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
-            $sql .= "ORDER BY `" . static::$pk . "` ";
+            $sql .= "ORDER BY `" . static::getDbPk()[0] . "` ";
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
@@ -1313,7 +1324,7 @@ class Groupe extends ObjectModel
      */
     public function hasAudios(): bool
     {
-        return (bool) $this->getAudios();
+        return count($this->getAudios()) > 0;
     }
 
     /**
@@ -1350,7 +1361,7 @@ class Groupe extends ObjectModel
      */
     public function hasVideos(): bool
     {
-        return (bool) $this->getVideos();
+        return count($this->getVideos()) > 0;
     }
 
     /**
@@ -1387,7 +1398,7 @@ class Groupe extends ObjectModel
      */
     public function hasEvents(): bool
     {
-        return (bool) $this->getEvents();
+        return count($this->getEvents()) > 0;
     }
 
     /**

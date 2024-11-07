@@ -15,9 +15,11 @@ use Adhoc\Utils\ObjectModel;
 class Structure extends ObjectModel
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_structure';
+    protected static array $pk = [
+        'id_structure',
+    ];
 
     /**
      * @var string
@@ -125,33 +127,33 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getAddress(): string
+    public function getAddress(): ?string
     {
         return $this->address;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getCp(): string
+    public function getCp(): ?string
     {
         return $this->cp;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -165,41 +167,41 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getIdDepartement(): string
+    public function getIdDepartement(): ?string
     {
         return $this->id_departement;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getText(): string
+    public function getText(): ?string
     {
         return $this->text;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getSite(): string
+    public function getSite(): ?string
     {
         return $this->site;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getIdCountry(): string
+    public function getIdCountry(): ?string
     {
         return $this->id_country;
     }
@@ -209,17 +211,17 @@ class Structure extends ObjectModel
      */
     public function getPicto(): string
     {
-        return self::getPictoById((int) $this->getId());
+        return self::getPictoById($this->getIdStructure());
     }
 
     /**
-     * @param int $id id
+     * @param ?int $id id
      *
      * @return string
      */
-    public static function getPictoById(int $id): string
+    public static function getPictoById(?int $id): string
     {
-        return self::getBaseUrl() . '/' . (string) $id . '.png';
+        return self::getBaseUrl() . '/' . $id . '.png';
     }
 
     /* fin getters */
@@ -227,11 +229,11 @@ class Structure extends ObjectModel
     /* début setters */
 
     /**
-     * @param string $name name
+     * @param ?string $name name
      *
      * @return static
      */
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         if ($this->name !== $name) {
             $this->name = $name;
@@ -242,11 +244,11 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $address adresse
+     * @param ?string $address adresse
      *
      * @return static
      */
-    public function setAddress(string $address): static
+    public function setAddress(?string $address): static
     {
         if ($this->address !== $address) {
             $this->address = $address;
@@ -257,11 +259,11 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $cp code postal
+     * @param ?string $cp code postal
      *
      * @return static
      */
-    public function setCp(string $cp): static
+    public function setCp(?string $cp): static
     {
         if ($this->cp !== $cp) {
             $this->cp = $cp;
@@ -272,11 +274,11 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $city city
+     * @param ?string $city city
      *
      * @return static
      */
-    public function setCity(string $city): static
+    public function setCity(?string $city): static
     {
         if ($this->city !== $city) {
             $this->city = $city;
@@ -287,11 +289,11 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $tel téléphone
+     * @param ?string $tel téléphone
      *
      * @return static
      */
-    public function setTel(string $tel): static
+    public function setTel(?string $tel): static
     {
         if ($this->tel !== $tel) {
             $this->tel = $tel;
@@ -302,11 +304,11 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $id_departement id_departement
+     * @param ?string $id_departement id_departement
      *
      * @return static
      */
-    public function setIdDepartement(string $id_departement): static
+    public function setIdDepartement(?string $id_departement): static
     {
         if ($this->id_departement !== $id_departement) {
             $this->id_departement = $id_departement;
@@ -317,11 +319,11 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $text texte
+     * @param ?string $text texte
      *
      * @return static
      */
-    public function setText(string $text): static
+    public function setText(?string $text): static
     {
         if ($this->text !== $text) {
             $this->text = $text;
@@ -332,11 +334,11 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $site site
+     * @param ?string $site site
      *
      * @return static
      */
-    public function setSite(string $site): static
+    public function setSite(?string $site): static
     {
         if ($this->site !== $site) {
             $this->site = $site;
@@ -347,11 +349,11 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $email email
+     * @param ?string $email email
      *
      * @return static
      */
-    public function setEmail(string $email): static
+    public function setEmail(?string $email): static
     {
         if ($this->email !== $email) {
             $this->email = $email;
@@ -362,11 +364,11 @@ class Structure extends ObjectModel
     }
 
     /**
-     * @param string $id_country id_country
+     * @param ?string $id_country id_country
      *
      * @return static
      */
-    public function setIdCountry(string $id_country): static
+    public function setIdCountry(?string $id_country): static
     {
         if ($this->id_country !== $id_country) {
             $this->id_country = $id_country;
@@ -387,7 +389,7 @@ class Structure extends ObjectModel
     public function delete(): bool
     {
         if (parent::delete()) {
-            $pngFile = self::getBasePath() . '/' . $this->id_structure . '.png';
+            $pngFile = self::getBasePath() . '/' . $this->getIdStructure() . '.png';
             if (file_exists($pngFile)) {
                 unlink($pngFile);
             }
@@ -401,7 +403,7 @@ class Structure extends ObjectModel
      */
     public function hasEvents(): bool
     {
-        return (bool) $this->getEvents();
+        return count($this->getEvents()) > 0;
     }
 
     /**
@@ -413,7 +415,7 @@ class Structure extends ObjectModel
     {
         return Event::find(
             [
-                'id_structure' => $this->getId(),
+                'id_structure' => $this->getIdStructure(),
             ]
         );
     }
@@ -436,7 +438,16 @@ class Structure extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql  = "SELECT `" . static::getDbPk() . "` ";
+        $sql  = "SELECT ";
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
         $sql .= "FROM `" . static::getDbTable() . "` ";
         $sql .= "WHERE 1 ";
 

@@ -15,9 +15,9 @@ use Adhoc\Utils\ObjectModel;
 class GroupeStyle extends ObjectModel
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = [
+    protected static array $pk = [
         'id_groupe',
         'id_style',
     ];
@@ -119,17 +119,15 @@ class GroupeStyle extends ObjectModel
         $objs = [];
 
         $sql = 'SELECT ';
-        if (is_array(static::getDbPk())) {
-            $pks = array_map(
-                function ($item) {
-                    return '`' . $item . '`';
-                },
-                static::getDbPk()
-            );
-            $sql .= implode(', ', $pks) . ' ';
-        } else {
-            $sql .= '`' . static::getDbPk() . '` ';
-        }
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
         $sql .= 'FROM `' . static::getDbTable() . '` ';
         $sql .= 'WHERE 1 ';
 
@@ -144,14 +142,10 @@ class GroupeStyle extends ObjectModel
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= 'ORDER BY `' . $params['order_by'] . '` ';
         } else {
-            if (is_array(static::getDbPk())) {
-                $pks = array_map(function ($item) {
-                    return '`' . $item . '`';
-                }, static::getDbPk());
-                $sql .= 'ORDER BY ' . implode(', ', $pks) . ' ';
-            } else {
-                $sql .= 'ORDER BY `' . static::getDbPk() . '` ';
-            }
+            $pks = array_map(function ($item) {
+                return '`' . $item . '`';
+            }, static::getDbPk());
+            $sql .= 'ORDER BY ' . implode(', ', $pks) . ' ';
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
@@ -173,15 +167,11 @@ class GroupeStyle extends ObjectModel
         $stm->execute();
         $rows = $stm->fetchAll();
         foreach ($rows as $row) {
-            if (is_array(static::getDbPk())) {
-                $pks = [];
-                foreach (static::getDbPk() as $pk) {
-                    $pks[$pk] = $row[$pk];
-                }
-                $objs[] = static::getInstance($pks);
-            } else {
-                $objs[] = static::getInstance($row[static::getDbPk()]);
+            $pks = [];
+            foreach (static::getDbPk() as $pk) {
+                $pks[$pk] = $row[$pk];
             }
+            $objs[] = static::getInstance($pks);
         }
 
         return $objs;

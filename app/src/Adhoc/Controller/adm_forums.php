@@ -116,7 +116,7 @@ final class Controller
 
             $msg = ForumPrive::addMessage(
                 [
-                    'id_contact' => $_SESSION['membre']->getId(),
+                    'id_contact' => $_SESSION['membre']->getIdContact(),
                     'id_forum'   => $id_forum,
                     'id_thread'  => $id_thread,
                     'subject'    => $subject,

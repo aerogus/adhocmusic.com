@@ -16,9 +16,11 @@ use Adhoc\Utils\ObjectModel;
 class MembreAdhoc extends ObjectModel
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_contact';
+    protected static array $pk = [
+        'id_contact',
+    ];
 
     /**
      * @var string

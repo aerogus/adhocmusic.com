@@ -273,7 +273,7 @@ final class Controller
         // styles du groupe sélectionné
         $sql = "SELECT `id_style` "
              . "FROM `adhoc_groupe_style` "
-             . "WHERE `id_groupe` = " . $groupe->getId() . " "
+             . "WHERE `id_groupe` = " . $groupe->getIdGroupe() . " "
              . "ORDER BY `ordre` ASC "
              . "LIMIT 0, 3";
         $stmt = $db->pdo->query($sql);
@@ -291,8 +291,8 @@ final class Controller
             $form_style[$cpt_style] .= "<select name=\"style[" . $cpt_style . "]\">";
             $form_style[$cpt_style] .= "<option value=\"0\">---</option>\n";
             foreach (Style::findAll() as $style) {
-                $form_style[$cpt_style] .= "<option value=\"" . $style->getId() . "\"";
-                if ($style->getId() === $sty[$cpt_style]) {
+                $form_style[$cpt_style] .= "<option value=\"" . $style->getIdStyle() . "\"";
+                if ($style->getIdStyle() === $sty[$cpt_style]) {
                     $form_style[$cpt_style] .= " selected=\"selected\"";
                 }
                 $form_style[$cpt_style] .= ">" . $style->getName() . "</option>\n";

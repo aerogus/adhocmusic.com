@@ -14,9 +14,11 @@ use Adhoc\Model\Reference;
 class LieuType extends Reference
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_lieu_type';
+    protected static array $pk = [
+        'id_lieu_type',
+    ];
 
     /**
      * @var string

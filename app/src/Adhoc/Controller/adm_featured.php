@@ -113,7 +113,7 @@ final class Controller
                         ->setType(IMAGETYPE_JPEG)
                         ->setMaxWidth(Featured::WIDTH)
                         ->setMaxHeight(Featured::HEIGHT)
-                        ->setDestFile(Featured::getBasePath() . '/' . $f->getId() . '.jpg')
+                        ->setDestFile(Featured::getBasePath() . '/' . $f->getIdFeatured() . '.jpg')
                         ->write();
                 }
 
@@ -168,7 +168,7 @@ final class Controller
         $f = Featured::getInstance($id);
 
         $data = [
-            'id'          => $f->getId(),
+            'id'          => $f->getIdFeatured(),
             'title'       => $f->getTitle(),
             'description' => $f->getDescription(),
             'url'         => $f->getUrl(),
@@ -180,7 +180,7 @@ final class Controller
 
         if (Tools::isSubmit('form-featured-edit')) {
             $data = [
-                'id'          => $f->getId(),
+                'id'          => $f->getIdFeatured(),
                 'title'       => trim((string) Route::params('title')),
                 'description' => trim((string) Route::params('description')),
                 'url'         => trim((string) Route::params('url')),
@@ -205,7 +205,7 @@ final class Controller
                         ->setType(IMAGETYPE_JPEG)
                         ->setMaxWidth(Featured::WIDTH)
                         ->setMaxHeight(Featured::HEIGHT)
-                        ->setDestFile(Featured::getBasePath() . '/' . $f->getId() . '.jpg')
+                        ->setDestFile(Featured::getBasePath() . '/' . $f->getIdFeatured() . '.jpg')
                         ->write();
                 }
 
@@ -244,7 +244,7 @@ final class Controller
         if (Tools::isSubmit('form-featured-delete')) {
             if ($f->delete()) {
                 Tools::redirect('/adm/featured?delete=1');
-                unlink(Featured::getBasePath() . '/' . $f->getId() . '.jpg');
+                unlink(Featured::getBasePath() . '/' . $f->getIdFeatured() . '.jpg');
             }
         }
 

@@ -23,7 +23,9 @@ class Featured extends ObjectModel
     /**
      * @var string|array<string>
      */
-    protected static string|array $pk = 'id_featured';
+    protected static array $pk = [
+        'id_featured',
+    ];
 
     /**
      * @var string
@@ -155,7 +157,7 @@ class Featured extends ObjectModel
      */
     public function getImage(): ?string
     {
-        return self::getBaseUrl() . '/' . (string) $this->getId() . '.jpg';
+        return self::getBaseUrl() . '/' . (string) $this->getIdFeatured() . '.jpg';
     }
 
     /**
@@ -387,7 +389,7 @@ class Featured extends ObjectModel
     public function delete(): bool
     {
         if (parent::delete()) {
-            $file = self::getBasePath() . '/' . $this->getId() . '.jpg';
+            $file = self::getBasePath() . '/' . $this->getIdFeatured() . '.jpg';
             if (file_exists($file)) {
                 unlink($file);
             }

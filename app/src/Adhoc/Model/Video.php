@@ -100,9 +100,11 @@ define('MEDIA_ADHOCTUBE_URL_PATTERN', '~^https://' . MEDIA_ADHOCTUBE_HOST . '/vi
 class Video extends Media
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_video';
+    protected static array $pk = [
+        'id_video',
+    ];
 
     /**
      * @var string

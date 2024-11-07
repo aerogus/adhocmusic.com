@@ -17,9 +17,11 @@ use Adhoc\Utils\DataBase;
 class WorldCountry extends Reference
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_country';
+    protected static array $pk = [
+        'id_country',
+    ];
 
     /**
      * @var string
@@ -84,9 +86,18 @@ class WorldCountry extends Reference
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql  = "SELECT `" . static::getDbPk() . "` ";
-        $sql .= "FROM `" . static::getDbTable() . "` ";
-        $sql .= "WHERE 1 ";
+        $sql = 'SELECT ';
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
+        $sql .= 'FROM `' . static::getDbTable() . '` ';
+        $sql .= 'WHERE 1 ';
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";

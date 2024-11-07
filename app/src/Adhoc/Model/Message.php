@@ -15,9 +15,11 @@ use Adhoc\Utils\ObjectModel;
 class Message extends ObjectModel
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_message';
+    protected static array $pk = [
+        'id_message',
+    ];
 
     /**
      * @var string

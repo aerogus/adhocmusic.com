@@ -148,7 +148,7 @@ final class Controller
             ->addStep('Mes infos persos', '/membres/edit')
             ->addStep('Changer le mot de passe');
 
-        $membre = Membre::getInstance($_SESSION['membre']->getId());
+        $membre = Membre::getInstance($_SESSION['membre']->getIdContact());
 
         if (Tools::isSubmit('form-password-change')) {
             $password_old   = trim((string) Route::params('password_old'));

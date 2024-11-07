@@ -14,9 +14,11 @@ use Adhoc\Model\Reference;
 class VideoHost extends Reference
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_video_host';
+    protected static array $pk = [
+        'id_video_host',
+    ];
 
     /**
      * @var string

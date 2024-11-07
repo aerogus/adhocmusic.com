@@ -46,9 +46,11 @@ class Membre extends ObjectModel
     ];
 
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_contact';
+    protected static array $pk = [
+        'id_contact',
+    ];
 
     /**
      * @var string
@@ -539,8 +541,8 @@ class Membre extends ObjectModel
      */
     public function getAvatarUrl(): ?string
     {
-        if (file_exists(self::getBasePath() . '/' . $this->getId() . '.jpg')) {
-            return self::getBaseUrl() . '/' . $this->getId() . '.jpg?ts=' . $this->getModifiedAtTs();
+        if (file_exists(self::getBasePath() . '/' . $this->getIdContact() . '.jpg')) {
+            return self::getBaseUrl() . '/' . $this->getIdContact() . '.jpg?ts=' . $this->getModifiedAtTs();
         }
         return null;
     }
@@ -553,8 +555,8 @@ class Membre extends ObjectModel
      */
     public function getAvatarInterneUrl(): ?string
     {
-        if (file_exists(self::getBasePath() . '/ca/' . $this->getId() . '.jpg')) {
-            return self::getBaseUrl() . '/ca/' . $this->getId() . '.jpg?ts=' . $this->getModifiedAtTs();
+        if (file_exists(self::getBasePath() . '/ca/' . $this->getIdContact() . '.jpg')) {
+            return self::getBaseUrl() . '/ca/' . $this->getIdContact() . '.jpg?ts=' . $this->getModifiedAtTs();
         }
         return null;
     }
@@ -1150,7 +1152,16 @@ class Membre extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql  = "SELECT `" . static::getDbPk() . "` ";
+        $sql  = "SELECT ";
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
         $sql .= "FROM `" . static::getDbTable() . "` ";
         $sql .= "WHERE 1 ";
 

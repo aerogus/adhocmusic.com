@@ -119,7 +119,7 @@ final class Controller
                     ->setLevel(Membre::TYPE_STANDARD);
 
                 if ($membre->save()) {
-                    Log::action(Log::ACTION_MEMBER_CREATE, $membre->getId());
+                    Log::action(Log::ACTION_MEMBER_CREATE, $membre->getIdContact());
                     if (Email::send($data['email'], "Inscription à l'association AD'HOC", 'member-create', $data)) {
                         Tools::redirect('/membres/create?create=1');
                     } else {
@@ -153,7 +153,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $id = $_SESSION['membre']->getId();
+        $id = $_SESSION['membre']->getIdContact();
 
         Trail::getInstance()
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
@@ -205,11 +205,11 @@ final class Controller
 
                 if ($member->isInterne()) {
                     $forum = Route::params('forum');
-                    ForumPrive::delAllSubscriptions($member->getId());
+                    ForumPrive::delAllSubscriptions($member->getIdContact());
                     if (is_array($forum)) {
                         foreach ($forum as $f => $val) {
                             if ($val === 'on') {
-                                ForumPrive::addSubscriberToForum($member->getId(), $f);
+                                ForumPrive::addSubscriberToForum($member->getIdContact(), $f);
                             }
                         }
                     }
@@ -222,7 +222,7 @@ final class Controller
                             ->setType(IMAGETYPE_JPEG)
                             ->setMaxWidth(112)
                             ->setMaxHeight(174)
-                            ->setDestFile(Membre::getBasePath() . '/ca/' . $_SESSION['membre']->getId() . '.jpg')
+                            ->setDestFile(Membre::getBasePath() . '/ca/' . $_SESSION['membre']->getIdContact() . '.jpg')
                             ->write();
                     }
                 }
@@ -233,11 +233,11 @@ final class Controller
                         ->setType(IMAGETYPE_JPEG)
                         ->setMaxWidth(112)
                         ->setMaxHeight(250)
-                        ->setDestFile(Membre::getBasePath() . '/' . $_SESSION['membre']->getId() . '.jpg')
+                        ->setDestFile(Membre::getBasePath() . '/' . $_SESSION['membre']->getIdContact() . '.jpg')
                         ->write();
                 }
 
-                Log::action(Log::ACTION_MEMBER_EDIT, $member->getId());
+                Log::action(Log::ACTION_MEMBER_EDIT, $member->getIdContact());
 
                 $twig->assign('updated_ok', true);
             } else {
@@ -250,7 +250,7 @@ final class Controller
         $twig->assign('membre', $_SESSION['membre']);
 
         if ($_SESSION['membre']->isInterne()) {
-            $twig->assign('forum', ForumPrive::getSubscribedForums($_SESSION['membre']->getId()));
+            $twig->assign('forum', ForumPrive::getSubscribedForums($_SESSION['membre']->getIdContact()));
         }
 
         $twig->enqueueScriptVars(
@@ -275,7 +275,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $id = $_SESSION['membre']->getId();
+        $id = $_SESSION['membre']->getIdContact();
 
         $twig = new AdHocTwig();
 
@@ -362,7 +362,7 @@ final class Controller
         $sql = "SELECT `p`.`id_message` AS `id`, `m`.`pseudo`, `p`.`id_from`, `p`.`date`, `p`.`read_to`, `p`.`text` "
              . "FROM `adhoc_messagerie` `p`, `adhoc_membre` `m` "
              . "WHERE `p`.`id_from` = `m`.`id_contact` "
-             . "AND `p`.`id_to` = " . (int) $_SESSION['membre']->getId() . " "
+             . "AND `p`.`id_to` = " . (int) $_SESSION['membre']->getIdContact() . " "
              . "AND `p`.`del_to` = FALSE "
              . "ORDER BY `p`.`date` DESC "
              . "LIMIT 0, 5";
@@ -370,7 +370,7 @@ final class Controller
         $inbox = $db->pdo->query($sql)->fetchAll();
         $twig->assign('inbox', $inbox);
 
-        $myAlerting = Alerting::find(['id_contact' => $_SESSION['membre']->getId()]);
+        $myAlerting = Alerting::find(['id_contact' => $_SESSION['membre']->getIdContact()]);
         $myAlertingLieu = $myAlertingGroupe = $myAlertingEvent =  [];
         foreach ($myAlerting as $ma) {
             if ($ma->getIdLieu()) {
@@ -389,7 +389,7 @@ final class Controller
         $twig->assign(
             'groupes',
             Groupe::find(
-                ['id_contact' => $_SESSION['membre']->getId()]
+                ['id_contact' => $_SESSION['membre']->getIdContact()]
             )
         );
         $twig->assign('nb_photos', Photo::countMy());

@@ -16,9 +16,11 @@ use Adhoc\Utils\ObjectModel;
 class CMS extends ObjectModel
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_cms';
+    protected static array $pk = [
+        'id_cms',
+    ];
 
     /**
      * @var string
@@ -370,7 +372,18 @@ class CMS extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+        $sql  = "SELECT ";
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
+        $sql .= "FROM `" . static::getDbTable() . "` ";
+        $sql .= "WHERE 1 ";
 
         if (isset($params['alias'])) {
             $sql .= "AND `alias` = '" . $params['alias'] . "' ";

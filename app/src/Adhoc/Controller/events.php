@@ -204,7 +204,7 @@ final class Controller
                 $membre = Membre::getInstance($event->getIdContact());
                 $twig->assign('membre', $membre);
             } catch (\Exception $e) {
-                mail(DEBUG_EMAIL, "[AD'HOC] Bug : evenement " . $event->getId() . " avec membre " . $event->getIdContact() . " introuvable", print_r($e, true));
+                mail(DEBUG_EMAIL, "[AD'HOC] Bug : evenement " . $event->getIdEvent() . " avec membre " . $event->getIdContact() . " introuvable", print_r($e, true));
             }
         }
 
@@ -336,7 +336,7 @@ final class Controller
                 'date'       => $dt,
                 'text'       => (string) Route::params('text'),
                 'price'      => (string) Route::params('price'),
-                'id_contact' => $_SESSION['membre']->getId(),
+                'id_contact' => $_SESSION['membre']->getIdContact(),
                 'online'     => true,
                 'more_event' => (bool) Route::params('more_event'),
                 'flyer_url'  => (string) Route::params('flyer_url'),
@@ -381,7 +381,7 @@ final class Controller
                             ->setKeepRatio(true)
                             ->setMaxWidth($confEvent['max_width'])
                             ->setMaxHeight($confEvent['max_height'])
-                            ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
+                            ->setDestFile(Event::getBasePath() . '/' . $event->getIdEvent() . '.jpg')
                             ->write();
                         unlink($tmpName);
 
@@ -411,7 +411,7 @@ final class Controller
                         }
                     }
 
-                    Log::action(Log::ACTION_EVENT_CREATE, $event->getId());
+                    Log::action(Log::ACTION_EVENT_CREATE, $event->getIdEvent());
 
                     if ((bool) Route::params('more-event')) {
                         Tools::redirect('/events/create?lieu=' . $event->getIdLieu());
@@ -503,7 +503,7 @@ final class Controller
         $lieu = Lieu::getInstance($event->getIdLieu());
 
         $data = [
-            'id' => $event->getId(),
+            'id' => $event->getIdEvent(),
             'name' => $event->getName(),
             'date' => [
                 'year' => $event->getYear(),
@@ -576,7 +576,7 @@ final class Controller
                         ->setKeepRatio(true)
                         ->setMaxWidth($confEvent['max_width'])
                         ->setMaxHeight($confEvent['max_height'])
-                        ->setDestFile(Event::getBasePath() . '/' . $event->getId() . '.jpg')
+                        ->setDestFile(Event::getBasePath() . '/' . $event->getIdEvent() . '.jpg')
                         ->write();
                     unlink($tmpName);
 
@@ -612,7 +612,7 @@ final class Controller
 
                 $event->save(); // clear le cache après les liaisons externes
 
-                Log::action(Log::ACTION_EVENT_EDIT, $event->getId());
+                Log::action(Log::ACTION_EVENT_EDIT, $event->getIdEvent());
 
                 Tools::redirect('/events?edit=1&y=' . $year . '&m=' . $month . '&d=' . $day);
             } else {
@@ -690,7 +690,7 @@ final class Controller
 
         if (Tools::isSubmit('form-event-delete')) {
             if ($event->delete()) {
-                Log::action(Log::ACTION_EVENT_DELETE, $event->getId());
+                Log::action(Log::ACTION_EVENT_DELETE, $event->getIdEvent());
                 Tools::redirect('/events?delete=1');
             }
         }

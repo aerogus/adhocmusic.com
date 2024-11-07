@@ -17,9 +17,11 @@ use Adhoc\Model\Media;
 class Audio extends Media
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_audio';
+    protected static array $pk = [
+        'id_audio',
+    ];
 
     /**
      * @var string
@@ -87,8 +89,8 @@ class Audio extends Media
      */
     public function getDirectMp3Url(): ?string
     {
-        if (file_exists(self::getBasePath() . '/' . $this->getId() . '.mp3')) {
-            return self::getBaseUrl() . '/' . $this->getId() . '.mp3';
+        if (file_exists(self::getBasePath() . '/' . $this->getIdAudio() . '.mp3')) {
+            return self::getBaseUrl() . '/' . $this->getIdAudio() . '.mp3';
         }
         return null;
     }
@@ -98,8 +100,8 @@ class Audio extends Media
      */
     public function getDirectAacUrl(): ?string
     {
-        if (file_exists(self::getBasePath() . '/' . $this->getId() . '.m4a')) {
-            return self::getBaseUrl() . '/' . $this->getId() . '.m4a';
+        if (file_exists(self::getBasePath() . '/' . $this->getIdAudio() . '.m4a')) {
+            return self::getBaseUrl() . '/' . $this->getIdAudio() . '.m4a';
         }
         return null;
     }
@@ -119,11 +121,11 @@ class Audio extends Media
     public function delete(): bool
     {
         if (parent::delete()) {
-            $mp3File = self::getBasePath() . '/' . $this->getId() . '.mp3';
+            $mp3File = self::getBasePath() . '/' . $this->getIdAudio() . '.mp3';
             if (file_exists($mp3File)) {
                 unlink($mp3File);
             }
-            $aacFile = self::getBasePath() . '/' . $this->getId() . '.m4a';
+            $aacFile = self::getBasePath() . '/' . $this->getIdAudio() . '.m4a';
             if (file_exists($aacFile)) {
                 unlink($aacFile);
             }

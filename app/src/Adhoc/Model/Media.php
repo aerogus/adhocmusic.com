@@ -411,14 +411,25 @@ abstract class Media extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+        $sql = 'SELECT ';
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
+        $sql .= 'FROM `' . static::getDbTable() . '` ';
+        $sql .= 'WHERE 1 ';
 
         if (isset($params['id__in'])) {
-            $sql .= "AND `" . static::getDbPk() . "` IN (" . implode(',', $params['id__in']) . ") ";
+            $sql .= "AND `" . static::getDbPk()[0] . "` IN (" . implode(',', $params['id__in']) . ") ";
         }
 
         if (isset($params['id__not_in'])) {
-            $sql .= "AND `" . static::getDbPk() . "` NOT IN (" . implode(',', $params['id__not_in']) . ") ";
+            $sql .= "AND `" . static::getDbPk()[0] . "` NOT IN (" . implode(',', $params['id__not_in']) . ") ";
         }
 
         if (isset($params['id_contact'])) {
@@ -475,7 +486,7 @@ abstract class Media extends ObjectModel
         } elseif ((isset($params['order_by']) && $params['order_by'] === 'random')) {
             $sql .= "ORDER BY RAND() ";
         } else {
-            $sql .= "ORDER BY `" . static::getDbPk() . "` ";
+            $sql .= "ORDER BY `" . static::getDbPk()[0] . "` ";
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {

@@ -15,9 +15,11 @@ use Adhoc\Utils\ObjectModel;
 class Exposant extends ObjectModel
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_exposant';
+    protected static array $pk = [
+        'id_exposant',
+    ];
 
     /**
      * @var string

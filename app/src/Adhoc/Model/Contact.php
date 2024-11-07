@@ -16,9 +16,11 @@ use Adhoc\Utils\ObjectModel;
 class Contact extends ObjectModel
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_contact';
+    protected static array $pk = [
+        'id_contact',
+    ];
 
     /**
      * @var string
@@ -186,7 +188,16 @@ class Contact extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql  = "SELECT `" . static::getDbPk() . "` ";
+        $sql  = "SELECT ";
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
         $sql .= "FROM `" . static::getDbTable() . "` ";
         $sql .= "WHERE 1 ";
 

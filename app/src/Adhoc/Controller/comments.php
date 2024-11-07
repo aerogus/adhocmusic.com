@@ -90,7 +90,7 @@ final class Controller
             ->setText($data['text']);
 
         if (Tools::isAuth()) {
-            $comment->setIdContact($_SESSION['membre']->getId())
+            $comment->setIdContact($_SESSION['membre']->getIdContact())
                 ->setPseudo($_SESSION['membre']->getPseudo())
                 ->setEmail($_SESSION['membre']->getEmail());
         } else {
@@ -116,7 +116,7 @@ final class Controller
         Tools::auth(Membre::TYPE_ADMIN);
         $comment = Comment::getInstance($id);
         if ($comment->delete()) {
-            Log::action(Log::ACTION_COMMENT_DELETE, $comment->getId());
+            Log::action(Log::ACTION_COMMENT_DELETE, $comment->getIdComment());
             return 'OK';
         }
         return 'KO';
@@ -137,7 +137,7 @@ final class Controller
 
         if (Tools::isSubmit('form-comment-delete')) {
             if ($comment->delete()) {
-                Log::action(Log::ACTION_COMMENT_DELETE, $comment->getId());
+                Log::action(Log::ACTION_COMMENT_DELETE, $comment->getIdComment());
                 Tools::redirect('/comments/?delete=1');
             }
         }

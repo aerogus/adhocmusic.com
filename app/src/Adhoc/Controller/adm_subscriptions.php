@@ -99,7 +99,7 @@ final class Controller
         $subs = Subscription::findAll();
         foreach ($subs as $sub) {
             $_sub = (object) [
-                'id' => (int) $sub->getId(),
+                'id' => (int) $sub->getIdSubscription(),
                 'created_at' => $sub->getCreatedAt(),
                 'subscribed_at' => $sub->getSubscribedAt(),
                 'amount' => $sub->getAmount(),
@@ -199,7 +199,7 @@ final class Controller
                 'success' => true,
                 'message' => "Cotisation ajoutée",
                 'results' => [
-                    'id' => $s->getId(),
+                    'id' => $s->getIdSubscription(),
                 ],
             ];
         } else {

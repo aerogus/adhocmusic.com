@@ -38,7 +38,7 @@ final class Controller
 
         $page = (int) Route::params('page');
 
-        if ($_SESSION['membre']->getId() === 1) {
+        if ($_SESSION['membre']->getIdContact() === 1) {
             $videos = Video::find(
                 [
                     'order_by' => 'id_video',
@@ -51,7 +51,7 @@ final class Controller
         } else {
             $videos = Video::find(
                 [
-                    'id_contact' => $_SESSION['membre']->getId(),
+                    'id_contact' => $_SESSION['membre']->getIdContact(),
                     'order_by' => 'id_video',
                     'sort' => 'ASC',
                     'start' => $page * NB_VIDEOS_PER_PAGE,
@@ -116,7 +116,7 @@ final class Controller
             $twig->assign('from', $from);
             $twig->assign('title', "♫ " . $video->getName());
             $twig->assign('description', $video->getName());
-            $twig->assign('og_image', MEDIA_URL . '/video/' . $video->getId() . '.jpg');
+            $twig->assign('og_image', MEDIA_URL . '/video/' . $video->getIdVideo() . '.jpg');
             $twig->assign('og_type', 'video.movie');
 
             // @see https://developers.facebook.com/docs/sharing/webmasters?locale=fr_FR
@@ -131,7 +131,7 @@ final class Controller
             $twig->assign('og_video', $og_video);
 
             if ($video->getGroupes()) {
-                $groupe = Groupe::getInstance($video->getGroupes()[0]->getId());
+                $groupe = Groupe::getInstance($video->getGroupes()[0]->getIdGroupe());
                 $twig->assign('groupe', $groupe);
                 $twig->assign('title', "♫ " . $video->getName() . " (" . $groupe->getName() . ")");
                 $meta_description .= " | Groupe : " . $groupe->getName();
@@ -162,11 +162,11 @@ final class Controller
             } elseif ($from === 'event' && $video->getIdEvent()) {
                 Trail::getInstance()
                     ->addStep("Agenda", "/events")
-                    ->addStep($event->getName(), "/events/" . $event->getId());
+                    ->addStep($event->getName(), "/events/" . $event->getIdEvent());
             } elseif ($from === 'lieu' && $video->getIdLieu()) {
                 Trail::getInstance()
                     ->addStep("Lieux", "/lieux")
-                    ->addStep($lieu->getName(), "/lieux/" . $lieu->getId());
+                    ->addStep($lieu->getName(), "/lieux/" . $lieu->getIdLieu());
             } else {
                 Trail::getInstance()
                     ->addStep("Média", "/medias");
@@ -258,7 +258,7 @@ final class Controller
                 'id_groupe' => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
                 'id_lieu' => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
                 'id_event' => Route::params('id_event') ? (int) Route::params('id_event') : null,
-                'id_contact' => $_SESSION['membre']->getId(),
+                'id_contact' => $_SESSION['membre']->getIdContact(),
                 'online' => (bool) Route::params('online'),
                 'code' => (string) Route::params('code'),
                 'reference' => (string) Route::params('reference'),
@@ -304,7 +304,7 @@ final class Controller
                     $video->genThumb($maxWidth);
                 }
 
-                Log::action(Log::ACTION_VIDEO_CREATE, $video->getId());
+                Log::action(Log::ACTION_VIDEO_CREATE, $video->getIdVideo());
 
                 Tools::redirect('/videos/my');
             } else {
@@ -437,7 +437,7 @@ final class Controller
                     }
                 }
 
-                Log::action(Log::ACTION_VIDEO_EDIT, $video->getId());
+                Log::action(Log::ACTION_VIDEO_EDIT, $video->getIdVideo());
 
                 Tools::redirect('/videos/my');
             } else {
@@ -515,7 +515,7 @@ final class Controller
 
         if (Tools::isSubmit('form-video-delete')) {
             if ($video->delete()) {
-                Log::action(Log::ACTION_VIDEO_DELETE, $video->getId());
+                Log::action(Log::ACTION_VIDEO_DELETE, $video->getIdVideo());
                 Tools::redirect('/videos/my');
             }
         }

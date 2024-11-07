@@ -14,9 +14,11 @@ use Adhoc\Utils\ObjectModel;
 class Partner extends ObjectModel
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_partner';
+    protected static array $pk = [
+        'id_partner',
+    ];
 
     /**
      * @var string
@@ -74,6 +76,16 @@ class Partner extends ObjectModel
     }
 
     /**
+     * Retourne l'identifiant du partenaire
+     *
+     * @return ?int
+     */
+    public function getIdPartner(): ?int
+    {
+        return $this->id_partner;
+    }
+
+    /**
      * @return string
      */
     public function getTitle(): string
@@ -102,8 +114,8 @@ class Partner extends ObjectModel
      */
     public function getIconUrl(): ?string
     {
-        if (file_exists(self::getBasePath() . '/' . $this->getId() . '.png')) {
-            return self::getBaseUrl() . '/' . $this->getId() . '.png';
+        if (file_exists(self::getBasePath() . '/' . $this->getIdPartner() . '.png')) {
+            return self::getBaseUrl() . '/' . $this->getIdPartner() . '.png';
         }
         return null;
     }
@@ -111,6 +123,21 @@ class Partner extends ObjectModel
     /* fin getters */
 
     /* début setters */
+
+    /**
+     * @param int $id_partner identifiant partenaire
+     *
+     * @return static
+     */
+    public function setIdPartner(?int $id_partner): static
+    {
+        if ($this->id_partner !== $id_partner) {
+            $this->id_partner = $id_partner;
+            $this->modified_fields['id_partner'] = true;
+        }
+
+        return $this;
+    }
 
     /**
      * @param string $title titre

@@ -39,7 +39,7 @@ final class Controller
         $db = DataBase::getInstance();
 
         $inbox = Message::find([
-            'id_to' => (int) $_SESSION['membre']->getId(),
+            'id_to' => (int) $_SESSION['membre']->getIdContact(),
             'del_to' => false,
             'order_by' => 'date',
             'sort' => 'DESC',
@@ -47,7 +47,7 @@ final class Controller
         $twig->assign('inbox', $inbox);
 
         $outbox = Message::find([
-            'id_from' => (int) $_SESSION['membre']->getId(),
+            'id_from' => (int) $_SESSION['membre']->getIdContact(),
             'del_from' => false,
             'order_by' => 'date',
             'sort' => 'DESC',
@@ -80,14 +80,14 @@ final class Controller
         $msg = Message::getInstance($id);
         if ($msg->getDelTo() === true) {
             throw new \Exception('message effacé');
-        } elseif (($msg->getIdFrom() !== (int) $_SESSION['membre']->getId()) && ($msg->getIdTo() !== (int) $_SESSION['membre']->getId())) {
+        } elseif (($msg->getIdFrom() !== (int) $_SESSION['membre']->getIdContact()) && ($msg->getIdTo() !== (int) $_SESSION['membre']->getIdContact())) {
             throw new \Exception('message introuvable');
         }
         $twig->assign('msg', $msg);
 
         $twig->assign('pseudo_to', Membre::getInstance($msg->getIdTo())->getPseudo());
         $twig->assign('id_to', $msg->getIdFrom());
-        $twig->assign('id_from', $_SESSION['membre']->getId());
+        $twig->assign('id_from', $_SESSION['membre']->getIdContact());
 
         $msg->setReadTo(true);
         $msg->save();
@@ -118,7 +118,7 @@ final class Controller
             $db = DataBase::getInstance();
 
             $msg = new Message();
-            $msg->setIdFrom((int) $_SESSION['membre']->getId());
+            $msg->setIdFrom((int) $_SESSION['membre']->getIdContact());
             $msg->setIdTo($to);
             $msg->setText($text);
             $msg->save();
@@ -164,7 +164,7 @@ final class Controller
         $id   = (int) Route::params('id');
 
         $msg = Message::getInstance($id);
-        if (($msg->getIdFrom() !== (int) $_SESSION['membre']->getId()) && ($msg->getIdTo() !== (int) $_SESSION['membre']->getId())) {
+        if (($msg->getIdFrom() !== (int) $_SESSION['membre']->getIdContact()) && ($msg->getIdTo() !== (int) $_SESSION['membre']->getIdContact())) {
             return ['status' => 'KO']; // pas le droit d'effacer les messages des autres
         } else {
             if ($mode === 'from') {

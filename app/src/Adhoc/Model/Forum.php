@@ -510,7 +510,7 @@ abstract class Forum
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . static::$db_table_forum_message . "` "
-             . "WHERE `id_message` = " . (int) $params['id_message'];
+             . "WHERE `id_message` = " . intval($params['id_message']);
 
         $stmt = $db->pdo->query($sql);
 

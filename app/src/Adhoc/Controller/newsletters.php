@@ -87,7 +87,7 @@ final class Controller
                         switch ($ret) {
                             case NEWSLETTER_SUB_OK_CONTACT_CREATED:
                             case NEWSLETTER_SUB_OK_RESUBSCRIBED_MEMBER:
-                                Log::action(Log::ACTION_NEWSLETTER_SUB, $email);
+                                Log::info("Inscription à la newsletter: " . $email);
                                 $twig->assign('ret', 'SUB-OK');
                                 break;
                             case NEWSLETTER_SUB_KO_ALREADY_SUBSCRIBED_MEMBER:
@@ -102,7 +102,7 @@ final class Controller
                         switch ($ret) {
                             case NEWSLETTER_UNSUB_OK_UNSUBSCRIBED_MEMBER:
                             case NEWSLETTER_UNSUB_OK_CONTACT_DELETED:
-                                Log::action(Log::ACTION_NEWSLETTER_UNSUB, $email);
+                                Log::info("Désinscription à la newsletter: " . $email);
                                 $twig->assign('ret', 'UNSUB-OK');
                                 break;
                             case NEWSLETTER_UNSUB_KO_ALREADY_UNSUBSCRIBED_MEMBER:

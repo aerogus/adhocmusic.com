@@ -15,9 +15,11 @@ use Adhoc\Utils\DataBase;
 class Style extends Reference
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_style';
+    protected static array $pk = [
+        'id_style',
+    ];
 
     /**
      * @var string
@@ -57,7 +59,18 @@ class Style extends Reference
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+        $sql  = "SELECT ";
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
+        $sql .= "FROM `" . static::getDbTable() . "` ";
+        $sql .= "WHERE 1 ";
 
         if (isset($params['id_event'])) {
             $subSql  = "SELECT `id_style` ";
@@ -73,7 +86,7 @@ class Style extends Reference
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
-            $sql .= "ORDER BY `" . static::getDbPk() . "` ";
+            $sql .= "ORDER BY `" . static::getDbPk()[0] . "` ";
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {

@@ -14,9 +14,11 @@ use Adhoc\Model\Reference;
 class MembreType extends Reference
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_membre_type';
+    protected static array $pk = [
+        'id_membre_type',
+    ];
 
     /**
      * @var string

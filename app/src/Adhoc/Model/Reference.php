@@ -16,9 +16,9 @@ abstract class Reference extends ObjectModel
     /**
      * [à étendre dans l'objet fils]
      *
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = '';
+    protected static array $pk = [];
 
     /**
      * [à étendre dans l'objet fils]

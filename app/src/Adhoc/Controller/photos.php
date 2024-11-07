@@ -220,7 +220,7 @@ final class Controller
                 'id_groupe' => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
                 'id_lieu' => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
                 'id_event' => Route::params('id_event') ? (int) Route::params('id_event') : null,
-                'id_contact' => (int) $_SESSION['membre']->getId(),
+                'id_contact' => (int) $_SESSION['membre']->getIdContact(),
                 'online' => (bool) Route::params('online'),
             ];
 
@@ -367,7 +367,7 @@ final class Controller
 
         if (Tools::isSubmit('form-photo-edit')) {
             $data = [
-                'id' => (int) $photo->getId(),
+                'id' => (int) $photo->getIdPhoto(),
                 'name' => (string) Route::params('name'),
                 'credits' => (string) Route::params('credits'),
                 'id_groupe' => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
@@ -399,7 +399,7 @@ final class Controller
                 }
 
                 if ($photo->save()) {
-                    Log::action(Log::ACTION_PHOTO_EDIT, $photo->getId());
+                    Log::action(Log::ACTION_PHOTO_EDIT, $photo->getIdPhoto());
                     Tools::redirect('/photos/my');
                 }
             } else {
@@ -463,7 +463,7 @@ final class Controller
 
         if (Tools::isSubmit('form-photo-delete')) {
             if ($photo->delete()) {
-                Log::action(Log::ACTION_PHOTO_DELETE, $photo->getId());
+                Log::action(Log::ACTION_PHOTO_DELETE, $photo->getIdPhoto());
                 Tools::redirect('/photos/my');
             }
         }

@@ -29,7 +29,7 @@ final class Controller
             ->addStep('Mes alertes');
 
         $myAlerting = Alerting::find([
-            'id_contact' => $_SESSION['membre']->getId(),
+            'id_contact' => $_SESSION['membre']->getIdContact(),
         ]);
         $myAlertingLieu = $myAlertingGroupe = $myAlertingEvent =  [];
         foreach ($myAlerting as $ma) {
@@ -57,7 +57,7 @@ final class Controller
             return 'not auth';
         }
 
-        $id_contact = (int) $_SESSION['membre']->getId();
+        $id_contact = (int) $_SESSION['membre']->getIdContact();
         $type = (string) Route::params('type');
         $id_content = (int) Route::params('id_content');
 
@@ -93,7 +93,7 @@ final class Controller
             return 'not auth';
         }
 
-        $id_contact = (int) $_SESSION['membre']->getId();
+        $id_contact = (int) $_SESSION['membre']->getIdContact();
         $type = (string) Route::params('type');
         $id_content = (int) Route::params('id_content');
 

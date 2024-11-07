@@ -25,9 +25,11 @@ class Lieu extends ObjectModel
     /**
      * Nom de la clé primaire
      *
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_lieu';
+    protected static array $pk = [
+        'id_lieu',
+    ];
 
     /**
      * Nom de la table
@@ -757,7 +759,7 @@ class Lieu extends ObjectModel
     public function delete(): bool
     {
         if (parent::delete()) {
-            $file = self::getBasePath() . '/' . (int) $this->getId() . '.jpg';
+            $file = self::getBasePath() . '/' . (int) $this->getIdLieu() . '.jpg';
             if (file_exists($file)) {
                 unlink($file);
             }
@@ -789,7 +791,18 @@ class Lieu extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+        $sql = "SELECT ";
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
+        $sql .= "FROM `" . static::getDbTable() . "` ";
+        $sql .= "WHERE 1 ";
 
         if (isset($params['with_events'])) {
             $subSql = "SELECT DISTINCT `id_lieu` FROM `adhoc_event`";

@@ -26,9 +26,11 @@ define('NEWSLETTER_TEMPLATE_PATH', ADHOC_ROOT_PATH . '/app/views/emails');
 class Newsletter extends ObjectModel
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_newsletter';
+    protected static array $pk = [
+        'id_newsletter',
+    ];
 
     /**
      * @var string
@@ -36,24 +38,24 @@ class Newsletter extends ObjectModel
     protected static string $table = 'adhoc_newsletter';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_newsletter = 0;
+    protected ?int $id_newsletter;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $title = '';
+    protected ?string $title;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $content = '';
+    protected ?string $content;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $html = '';
+    protected ?string $html;
 
     /**
      * Liste des attributs de l'objet
@@ -96,9 +98,9 @@ class Newsletter extends ObjectModel
     /**
      * Retourne l'identifiant de la newsletter
      *
-     * @return int
+     * @return ?int
      */
-    public function getIdNewsletter(): int
+    public function getIdNewsletter(): ?int
     {
         return $this->id_newsletter;
     }
@@ -108,7 +110,7 @@ class Newsletter extends ObjectModel
      */
     public function getFileUrl(): string
     {
-        return self::getBaseUrl() . '/' . (string) $this->getId();
+        return self::getBaseUrl() . '/' . (string) $this->getIdNewsletter();
     }
 
     /**
@@ -116,15 +118,15 @@ class Newsletter extends ObjectModel
      */
     public function getFilePath(): string
     {
-        return self::getBasePath() . '/' . (string) $this->getId();
+        return self::getBasePath() . '/' . (string) $this->getIdNewsletter();
     }
 
     /**
      * Retourne le contenu source MJML
      *
-     * @return string
+     * @return ?string
      */
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
@@ -134,7 +136,7 @@ class Newsletter extends ObjectModel
      *
      * @return string
      */
-    public function getHtml(): string
+    public function getHtml(): ?string
     {
         return $this->html;
     }
@@ -168,7 +170,7 @@ class Newsletter extends ObjectModel
             $link  = 'https://www.adhocmusic.com/r/';
             $link .= Tools::base64_url_encode($url);
             $link .= '||';
-            $link .= Tools::base64_url_encode($this->getId() . '|' . $this->getIdContact());
+            $link .= Tools::base64_url_encode($this->getIdNewsletter() . '|' . $this->getIdContact());
             $tracking_links[$url] = $link;
         }
 
@@ -262,7 +264,7 @@ class Newsletter extends ObjectModel
      */
     public function getUrl(): string
     {
-        return HOME_URL . '/newsletters/' . $this->getId();
+        return HOME_URL . '/newsletters/' . $this->getIdNewsletter();
     }
 
     /**
@@ -293,16 +295,6 @@ class Newsletter extends ObjectModel
     }
 
     /**
-     * Retourne l'identifiant de la lettre
-     *
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id_newsletter;
-    }
-
-    /**
      * @return bool
      * @throws \Exception
      */
@@ -327,7 +319,18 @@ class Newsletter extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `id_newsletter` FROM `" . Newsletter::getDbTable() . "` WHERE 1 ";
+        $sql  = "SELECT ";
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
+        $sql .= "FROM `" . Newsletter::getDbTable() . "` ";
+        $sql .= "WHERE 1 ";
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";

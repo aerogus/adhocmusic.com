@@ -14,9 +14,11 @@ use Adhoc\Model\Reference;
 class FAQCategory extends Reference
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_faq_category';
+    protected static array $pk = [
+        'id_faq_category',
+    ];
 
     /**
      * @var string

@@ -70,7 +70,7 @@ final class Controller
         $twig->assign(
             'groupes',
             Groupe::find(
-                ['id_contact' => $_SESSION['membre']->getId()]
+                ['id_contact' => $_SESSION['membre']->getIdContact()]
             )
         );
 
@@ -195,10 +195,10 @@ final class Controller
         // alerting
         /*
         if (Tools::isAuth()) {
-            if (!Alerting::getIdByIds($_SESSION['membre']->getId(), 'g', $groupe->getId())) {
-                $twig->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=g&id_content=' . $groupe->getId());
+            if (!Alerting::getIdByIds($_SESSION['membre']->getIdContact(), 'g', $groupe->getIdGroupe())) {
+                $twig->assign('alerting_sub_url', HOME_URL . '/alerting/sub?type=g&id_content=' . $groupe->getIdGroupe());
             } else {
-                $twig->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=g&id_content=' . $groupe->getId());
+                $twig->assign('alerting_unsub_url', HOME_URL . '/alerting/unsub?type=g&id_content=' . $groupe->getIdGroupe());
             }
         } else {
             $twig->assign('alerting_auth_url', HOME_URL . '/auth/auth');
@@ -276,7 +276,7 @@ final class Controller
                             ->setKeepRatio(true)
                             ->setMaxWidth(400)
                             ->setMaxHeight(400)
-                            ->setDestFile(Groupe::getBasePath() . '/l' . $groupe->getId() . '.jpg')
+                            ->setDestFile(Groupe::getBasePath() . '/l' . $groupe->getIdGroupe() . '.jpg')
                             ->write();
                     }
 
@@ -286,7 +286,7 @@ final class Controller
                             ->setKeepRatio(true)
                             ->setMaxWidth(400)
                             ->setMaxHeight(400)
-                            ->setDestFile(Groupe::getBasePath() . '/p' . $groupe->getId() . '.jpg')
+                            ->setDestFile(Groupe::getBasePath() . '/p' . $groupe->getIdGroupe() . '.jpg')
                             ->write();
                     }
 
@@ -296,11 +296,11 @@ final class Controller
                             ->setKeepRatio(false)
                             ->setMaxWidth(GROUPE_MINI_PHOTO_SIZE)
                             ->setMaxHeight(GROUPE_MINI_PHOTO_SIZE)
-                            ->setDestFile(Groupe::getBasePath() . '/m' . $groupe->getId() . '.jpg')
+                            ->setDestFile(Groupe::getBasePath() . '/m' . $groupe->getIdGroupe() . '.jpg')
                             ->write();
                     }
 
-                    $groupe->linkMember($_SESSION['membre']->getId(), $data['id_type_musicien']);
+                    $groupe->linkMember($_SESSION['membre']->getIdContact(), $data['id_type_musicien']);
                     $groupe->save();
 
                     Log::action(Log::ACTION_GROUP_CREATE, $groupe->getAlias());
@@ -351,14 +351,14 @@ final class Controller
             ->addStep($groupe->getName());
 
         $twig->assign('groupe', $groupe);
-        if (($id_type_musicien = $groupe->isMember($_SESSION['membre']->getId())) === false) {
+        if (($id_type_musicien = $groupe->isMember($_SESSION['membre']->getIdContact())) === false) {
             if (!$_SESSION['membre']->isAdmin()) {
                 $twig->assign('not_my_groupe', true);
             }
         }
 
         $data = [
-            'id_groupe'        => $groupe->getId(),
+            'id_groupe'        => $groupe->getIdGroupe(),
             'style'            => $groupe->getStyle(),
             'influences'       => $groupe->getInfluences(),
             'lineup'           => $groupe->getLineup(),
@@ -372,7 +372,7 @@ final class Controller
 
         if (Tools::isSubmit('form-groupe-edit')) {
             $data = [
-                'id_groupe'        => $groupe->getId(),
+                'id_groupe'        => $groupe->getIdGroupe(),
                 'style'            => (string) Route::params('style'),
                 'influences'       => (string) Route::params('influences'),
                 'lineup'           => (string) Route::params('lineup'),
@@ -386,7 +386,7 @@ final class Controller
 
             $errors = self::validateGroupeEditForm($data);
             if (count($errors) === 0) {
-                if (!$groupe->isMember($_SESSION['membre']->getId()) && !$_SESSION['membre']->isAdmin()) {
+                if (!$groupe->isMember($_SESSION['membre']->getIdContact()) && !$_SESSION['membre']->isAdmin()) {
                     return 'edition du groupe non autorisée';
                 }
 
@@ -401,7 +401,7 @@ final class Controller
 
                 $groupe->save();
 
-                $groupe->updateMember($_SESSION['membre']->getId(), $data['id_type_musicien']);
+                $groupe->updateMember($_SESSION['membre']->getIdContact(), $data['id_type_musicien']);
 
                 if (is_uploaded_file($_FILES['lelogo']['tmp_name'])) {
                     (new Image($_FILES['lelogo']['tmp_name']))
@@ -409,7 +409,7 @@ final class Controller
                         ->setKeepRatio(true)
                         ->setMaxWidth(400)
                         ->setMaxHeight(400)
-                        ->setDestFile(Groupe::getBasePath() . '/l' . $groupe->getId() . '.jpg')
+                        ->setDestFile(Groupe::getBasePath() . '/l' . $groupe->getIdGroupe() . '.jpg')
                         ->write();
                 }
 
@@ -419,7 +419,7 @@ final class Controller
                         ->setKeepRatio(true)
                         ->setMaxWidth(400)
                         ->setMaxHeight(400)
-                        ->setDestFile(Groupe::getBasePath() . '/p' . $groupe->getId() . '.jpg')
+                        ->setDestFile(Groupe::getBasePath() . '/p' . $groupe->getIdGroupe() . '.jpg')
                         ->write();
                 }
 
@@ -429,11 +429,11 @@ final class Controller
                         ->setKeepRatio(false)
                         ->setMaxWidth(128)
                         ->setMaxHeight(128)
-                        ->setDestFile(Groupe::getBasePath() . '/m' . $groupe->getId() . '.jpg')
+                        ->setDestFile(Groupe::getBasePath() . '/m' . $groupe->getIdGroupe() . '.jpg')
                         ->write();
                 }
 
-                Log::action(Log::ACTION_GROUP_EDIT, $groupe->getId());
+                Log::action(Log::ACTION_GROUP_EDIT, $groupe->getIdGroupe());
 
                 Tools::redirect('/groupes/my');
             }
@@ -474,7 +474,7 @@ final class Controller
 
         $can_delete = true;
         if ($_SESSION['membre']->isAdmin() === false) { // seul un admin peut supprimer un groupe
-            if ($groupe->isMember($_SESSION['membre']->getId()) === false) { // seul un membre du groupe peut supprimer son groupe
+            if ($groupe->isMember($_SESSION['membre']->getIdContact()) === false) { // seul un membre du groupe peut supprimer son groupe
                 $twig->assign('not_my_groupe', true);
                 $can_delete = false;
             }
@@ -483,7 +483,7 @@ final class Controller
         if (Tools::isSubmit('form-groupe-delete')) {
             if ($can_delete) {
                 if ($groupe->delete()) {
-                    Log::action(Log::ACTION_GROUP_DELETE, $groupe->getId());
+                    Log::action(Log::ACTION_GROUP_DELETE, $groupe->getIdGroupe());
                 }
                 Tools::redirect('/groupes/my?delete=1');
             }
@@ -510,7 +510,7 @@ final class Controller
 
         $export = [];
         foreach ($groupes as $groupe) {
-            $export[$groupe->getId()] = $groupe->getName();
+            $export[$groupe->getIdGroupe()] = $groupe->getName();
         }
         return $export;
     }

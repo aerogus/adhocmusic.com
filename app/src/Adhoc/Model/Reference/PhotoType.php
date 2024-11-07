@@ -14,9 +14,11 @@ use Adhoc\Model\Reference;
 class PhotoType extends Reference
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_photo_type';
+    protected static array $pk = [
+        'id_photo_type',
+    ];
 
     /**
      * @var string

@@ -14,9 +14,11 @@ use Adhoc\Model\Reference;
 class GroupeStatus extends Reference
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_groupe_status';
+    protected static array $pk = [
+        'id_groupe_status',
+    ];
 
     /**
      * @var string

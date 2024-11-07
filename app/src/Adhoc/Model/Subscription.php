@@ -16,9 +16,11 @@ use Adhoc\Utils\Email;
 class Subscription extends ObjectModel
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_subscription';
+    protected static array $pk = [
+        'id_subscription',
+    ];
 
     /**
      * @var string

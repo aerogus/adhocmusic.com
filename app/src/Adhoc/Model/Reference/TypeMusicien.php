@@ -14,9 +14,11 @@ use Adhoc\Model\Reference;
 class TypeMusicien extends Reference
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_type_musicien';
+    protected static array $pk = [
+        'id_type_musicien',
+    ];
 
     /**
      * @var string

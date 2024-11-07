@@ -22,9 +22,11 @@ use Adhoc\Utils\ObjectModel;
 class Event extends ObjectModel
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_event';
+    protected static array $pk = [
+        'id_event',
+    ];
 
     /**
      * @var string
@@ -541,7 +543,18 @@ class Event extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+        $sql  = "SELECT ";
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
+        $sql .= "FROM `" . static::getDbTable() . "` ";
+        $sql .= "WHERE 1 ";
 
         if (isset($params['id_contact'])) {
             $sql .= "AND `id_contact` = " . (int) $params['id_contact'] . " ";

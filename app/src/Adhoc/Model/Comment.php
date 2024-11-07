@@ -20,9 +20,11 @@ use Adhoc\Utils\ObjectModel;
 class Comment extends ObjectModel
 {
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
-    protected static string|array $pk = 'id_comment';
+    protected static array $pk = [
+        'id_comment',
+    ];
 
     /**
      * @var string
@@ -263,7 +265,7 @@ class Comment extends ObjectModel
      */
     public function getUrl(): string
     {
-        return HOME_URL . '/comments/' . $this->getId();
+        return HOME_URL . '/comments/' . $this->getIdComment();
     }
 
     /* fin getters */
@@ -472,7 +474,7 @@ class Comment extends ObjectModel
              . "FROM `" . Comment::getDbTable() . "` `com` "
              . "LEFT JOIN `" . Membre::getDbTable() . "` `mbr` ON (`com`.`id_contact` = `mbr`.`id_contact`) "
              . "LEFT JOIN `" . Contact::getDbTable() . "` `cnt` ON (`mbr`.`id_contact` = `cnt`.`id_contact`) "
-             . "WHERE `" . self::$pk . "` = " . (int) $this->getId();
+             . "WHERE `" . self::$pk . "` = " . (int) $this->getIdComment();
 
         $stmt = $db->pdo->query($sql);
         if ($res = $stmt->fetch()) {
@@ -544,7 +546,7 @@ class Comment extends ObjectModel
 
                 // -> gens abonnés au lieu
                 /*
-                $ids_contact = Alerting::getIdsContactByLieu($lieu->getId());
+                $ids_contact = Alerting::getIdsContactByLieu($lieu->getIdLieu());
                 foreach ($ids_contact as $id_contact) {
                     $m = Membre::getInstance($id_contact);
                     $emails[] = $m->getContact()->getEmail();
@@ -591,7 +593,7 @@ class Comment extends ObjectModel
 
                 // -> personnes abonnés à l'événement
                 /*
-                $ids_contact = Alerting::getIdsContactByEvent($event->getId());
+                $ids_contact = Alerting::getIdsContactByEvent($event->getIdLieu());
                 foreach ($ids_contact as $id_contact) {
                     $m = Membre::getInstance($id_contact);
                     $emails[] = $m->getContact()->getEmail();
