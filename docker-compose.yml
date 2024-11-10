@@ -2,8 +2,6 @@
 # Environnement de développement du site adhocmusic.com
 ##
 
-version: '3.8'
-
 services:
 
   # le serveur web nginx, sur les ports 80 et 443
@@ -15,14 +13,14 @@ services:
     networks:
       adhoc:
         aliases:
-          - adhocmusic.test
-          - www.adhocmusic.test
-          - static.adhocmusic.test
+          - docker.adhocmusic.com
+          - www.docker.adhocmusic.com
+          - static.docker.adhocmusic.com
     ports:
       - 80:80
       - 443:443
     volumes:
-      - .:/var/www/adhocmusic.test
+      - .:/var/www/docker.adhocmusic.com
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./docker/nginx/ssl:/etc/nginx/ssl
       - ./volumes/nginx/log:/var/log/nginx
@@ -36,13 +34,13 @@ services:
     networks:
       adhoc:
         aliases:
-          - php.adhocmusic.test
+          - php.docker.adhocmusic.com
     volumes:
-      - .:/var/www/adhocmusic.test
+      - .:/var/www/docker.adhocmusic.com
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
       - ./volumes/php/log:/var/log/php
     #tmpfs:
-    #  - /var/www/adhocmusic.test/tmpfs:noexec,mode=0755,uid=33,gid=33
+    #  - /var/www/adhocmusic.com/tmpfs:noexec,mode=0755,uid=33,gid=33
 
   # le serveur de base de données, port 3306
   mariadb:
@@ -53,9 +51,9 @@ services:
     networks:
       adhoc:
         aliases:
-          - mariadb.adhocmusic.test
-    ports:
-      - 3306:3306
+          - mariadb.docker.adhocmusic.com
+    #ports:
+    #  - 3306:3306
     volumes:
       - ./docker/mariadb/initdb.d:/docker-entrypoint-initdb.d:ro
       - ./docker/mariadb/conf.d:/etc/mysql/conf.d
@@ -77,11 +75,11 @@ services:
     networks:
       adhoc:
         aliases:
-          - pma.adhocmusic.test
+          - pma.docker.adhocmusic.com
     ports:
       - 81:80
     environment:
-      PMA_HOST: mariadb.adhocmusic.test
+      PMA_HOST: mariadb.docker.adhocmusic.com
 
 networks:
   adhoc:

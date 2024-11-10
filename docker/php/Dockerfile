@@ -1,4 +1,4 @@
-FROM php:8.0.11-fpm
+FROM php:8.3.13-fpm
 LABEL maintainer="guillaume@seznec.fr"
 
 # maj complète et install des paquets utiles
@@ -8,10 +8,13 @@ RUN apt-get update && apt-get install -y \
   locales \
   libpng-dev \
   libjpeg62-turbo-dev \
+  libicu-dev \
   && docker-php-ext-configure gd --with-jpeg \
   && docker-php-ext-install -j$(nproc) gd \
   && docker-php-ext-install -j$(nproc) exif \
-  && docker-php-ext-install -j$(nproc) mysqli
+  && docker-php-ext-install -j$(nproc) pdo_mysql \
+  && docker-php-ext-configure intl \
+  && docker-php-ext-install -j$(nproc) intl
 
 RUN sed -i 's/# fr_FR.UTF-8 UTF-8/fr_FR.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 

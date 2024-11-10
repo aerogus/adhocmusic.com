@@ -14,9 +14,8 @@ https://www.adhocmusic.com
 ajouter les lignes suivantes dans `/etc/hosts` :
 
 ```
-127.0.0.1 adhocmusic.test www.adhocmusic.test static.adhocmusic.test php.adhocmusic.test mariadb.adhocmusic.test pma.adhocmusic.test
-::1       adhocmusic.test www.adhocmusic.test static.adhocmusic.test php.adhocmusic.test mariadb.adhocmusic.test pma.adhocmusic.test
-
+127.0.0.1 docker.adhocmusic.com www.docker.adhocmusic.com static.docker.adhocmusic.com php.docker.adhocmusic.com mariadb.docker.adhocmusic.com pma.docker.adhocmusic.com
+::1       docker.adhocmusic.com www.docker.adhocmusic.com static.docker.adhocmusic.com php.docker.adhocmusic.com mariadb.docker.adhocmusic.com pma.docker.adhocmusic.com
 ```
 
 1er démarrage et développement :
@@ -28,11 +27,11 @@ cd adhocmusic.com
 composer install
 npm install
 npm run stylus
-docker-compose up
+docker-compose up [--build]
 ```
 
 note:
-autoriser les certificats autosignés pour (www.)adhocmusic.test et static.adhocmusic.test
+autoriser les certificats autosignés pour docker.adhocmusic.com et *.docker.adhocmusic.com
 
 Redémarrage avec reconstruction des containers :
 
