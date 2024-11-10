@@ -1148,7 +1148,10 @@ class Groupe extends ObjectModel
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
-            $sql .= "ORDER BY `" . static::getDbPk()[0] . "` ";
+            $pks = array_map(function ($item) {
+                return '`' . $item . '`';
+            }, static::getDbPk());
+            $sql .= 'ORDER BY ' . implode(', ', $pks) . ' ';
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {

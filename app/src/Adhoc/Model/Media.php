@@ -486,7 +486,10 @@ abstract class Media extends ObjectModel
         } elseif ((isset($params['order_by']) && $params['order_by'] === 'random')) {
             $sql .= "ORDER BY RAND() ";
         } else {
-            $sql .= "ORDER BY `" . static::getDbPk()[0] . "` ";
+            $pks = array_map(function ($item) {
+                return '`' . $item . '`';
+            }, static::getDbPk());
+            $sql .= 'ORDER BY ' . implode(', ', $pks) . ' ';
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {

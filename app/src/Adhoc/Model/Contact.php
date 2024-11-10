@@ -208,7 +208,7 @@ class Contact extends ObjectModel
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
-            $sql .= "ORDER BY `" . static::$pk . "` ";
+            $sql .= "ORDER BY `" . static::getDbPk()[0] . "` ";
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {

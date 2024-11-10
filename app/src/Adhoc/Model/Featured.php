@@ -417,7 +417,18 @@ class Featured extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql = "SELECT `" . static::getDbPk() . "` FROM `" . static::getDbTable() . "` WHERE 1 ";
+        $sql  = "SELECT ";
+
+        $pks = array_map(
+            function ($item) {
+                return '`' . $item . '`';
+            },
+            static::getDbPk()
+        );
+        $sql .= implode(', ', $pks) . ' ';
+
+        $sql .= "FROM `" . static::getDbTable() . "` ";
+        $sql .= "WHERE 1 ";
 
         if (isset($params['online'])) {
             $sql .= "AND `online` = ";
@@ -432,7 +443,10 @@ class Featured extends ObjectModel
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
         } else {
-            $sql .= "ORDER BY `" . static::getDbPk() . "` ";
+            $pks = array_map(function ($item) {
+                return '`' . $item . '`';
+            }, static::getDbPk());
+            $sql .= 'ORDER BY ' . implode(', ', $pks) . ' ';
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
