@@ -68,7 +68,7 @@ services:
 
   # administration de la base de données
   pma:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin:5.2.1-apache
     hostname: pma
     container_name: adhoc_pma
     restart: always
