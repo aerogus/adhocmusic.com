@@ -1,6 +1,10 @@
 # spam
 .DS_Store
 
+# les certificats ssl de dev
+docker/nginx/ssl/*.crt
+docker/nginx/ssl/*.key
+
 # la configuration active
 /conf/conf.ini
 

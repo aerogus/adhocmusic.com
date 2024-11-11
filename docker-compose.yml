@@ -55,8 +55,8 @@ services:
     #ports:
     #  - 3306:3306
     volumes:
-      - ./docker/mariadb/initdb.d:/docker-entrypoint-initdb.d:ro
       - ./docker/mariadb/conf.d:/etc/mysql/conf.d
+      - ./docker/mariadb/initdb.d:/docker-entrypoint-initdb.d:ro
       - ./volumes/mariadb/log:/var/log/mysql
       - ./volumes/mariadb/data:/var/lib/mysql
     environment:
