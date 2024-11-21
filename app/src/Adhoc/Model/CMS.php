@@ -89,8 +89,6 @@ class CMS extends ObjectModel
         'auth' => 'int',
     ];
 
-    /* début getters */
-
     /**
      * @return ?int
      */
@@ -190,10 +188,6 @@ class CMS extends ObjectModel
     {
         return $this->auth;
     }
-
-    /* fin getters */
-
-    /* début setters */
 
     /**
      * @param ?string $alias alias
@@ -348,8 +342,6 @@ class CMS extends ObjectModel
 
         return $this;
     }
-
-    /* fin setters */
 
     /**
      * Retourne une collection d'objets "ObjectModel" répondant au(x) critère(s) donné(s)

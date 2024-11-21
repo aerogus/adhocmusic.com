@@ -100,8 +100,6 @@ class Exposant extends ObjectModel
         'modified_at' => 'date',
     ];
 
-    /* début getters */
-
     /**
      * @return ?string
      */
@@ -209,10 +207,6 @@ class Exposant extends ObjectModel
         }
         return null;
     }
-
-    /* fin getters */
-
-    /* début setters */
 
     /**
      * @param string $name nom
@@ -378,6 +372,4 @@ class Exposant extends ObjectModel
 
         return $this;
     }
-
-    /* fin setters */
 }

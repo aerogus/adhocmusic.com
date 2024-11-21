@@ -10,7 +10,7 @@ use Adhoc\Model\Groupe;
 use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
-use Adhoc\Model\Reference\Departement;
+use Adhoc\Model\Departement;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;

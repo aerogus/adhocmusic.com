@@ -31,14 +31,14 @@ class Photo extends Media
     protected static string $table = 'adhoc_photo';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_photo = 0;
+    protected ?int $id_photo = null;
 
     /**
-     * @var string
+     * @var ?string
      */
-    protected string $credits = '';
+    protected ?string $credits = null;
 
     /**
      * Liste des attributs de l'objet
@@ -58,8 +58,6 @@ class Photo extends Media
         'credits' => 'string',
     ];
 
-    /* debut getters */
-
     /**
      * @return string
      */
@@ -77,9 +75,9 @@ class Photo extends Media
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdPhoto(): int
+    public function getIdPhoto(): ?int
     {
         return $this->id_photo;
     }
@@ -108,16 +106,12 @@ class Photo extends Media
         return HOME_URL . '/photos/' . $this->getIdPhoto();
     }
 
-    /* fin getters */
-
-    /* debut setters */
-
     /**
-     * @param string $credits credits
+     * @param ?string $credits credits
      *
      * @return static
      */
-    public function setCredits(string $credits): static
+    public function setCredits(?string $credits): static
     {
         if ($this->credits !== $credits) {
             $this->credits = $credits;
@@ -126,8 +120,6 @@ class Photo extends Media
 
         return $this;
     }
-
-    /* fin setters */
 
     /**
      * Efface une photo de la table photo + le fichier .jpg
@@ -149,18 +141,6 @@ class Photo extends Media
             return true;
         }
         return false;
-    }
-
-    /**
-     * @return bool
-     * @throws \Exception
-     */
-    protected function loadFromDb(): bool
-    {
-        if (!parent::loadFromDb()) {
-            throw new \Exception('Photo introuvable');
-        }
-        return true;
     }
 
     /**

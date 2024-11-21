@@ -590,7 +590,7 @@ abstract class Forum
         $db = DataBase::getInstance();
 
         $sql = "DELETE FROM `" . static::$db_table_forum_thread . "` "
-             . "WHERE `id_thread` = " . (int) $params['id_thread'];
+             . "WHERE `id_thread` = " . intval($params['id_thread']);
 
         $stmt = $db->pdo->query($sql);
 
@@ -625,7 +625,7 @@ abstract class Forum
         } elseif ($params['threadaction'] === 'threaddel') {
             $sql .= "`nb_threads` = `nb_threads` - 1, ";
         }
-        if ($params['id_contact']) {
+        if (intval($params['id_contact']) > 0) {
             $sql .= "`id_contact` = " . (int) $params['id_contact'] . ", `date` = NOW() ";
         }
         $sql .= "WHERE `id_forum` = '" . $params['id_forum'] . "'";

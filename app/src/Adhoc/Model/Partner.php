@@ -57,8 +57,6 @@ class Partner extends ObjectModel
         'url' => 'string',
     ];
 
-    /* début getters */
-
     /**
      * @return string
      */
@@ -120,10 +118,6 @@ class Partner extends ObjectModel
         return null;
     }
 
-    /* fin getters */
-
-    /* début setters */
-
     /**
      * @param int $id_partner identifiant partenaire
      *
@@ -183,6 +177,4 @@ class Partner extends ObjectModel
 
         return $this;
     }
-
-    /* fin setters */
 }

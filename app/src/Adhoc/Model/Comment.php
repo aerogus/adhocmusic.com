@@ -121,8 +121,6 @@ class Comment extends ObjectModel
         'g' => 'groupes',
     ];
 
-    /* début getters */
-
     /**
      * @return ?int
      */
@@ -268,16 +266,12 @@ class Comment extends ObjectModel
         return HOME_URL . '/comments/' . $this->getIdComment();
     }
 
-    /* fin getters */
-
-    /* début setters */
-
     /**
-     * @param int $id_comment id_comment
+     * @param ?int $id_comment id_comment
      *
      * @return static
      */
-    public function setIdComment(int $id_comment): static
+    public function setIdComment(?int $id_comment): static
     {
         if ($this->id_comment !== $id_comment) {
             $this->id_comment = $id_comment;
@@ -288,11 +282,11 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param string $type type
+     * @param ?string $type type
      *
      * @return static
      */
-    public function setType(string $type): static
+    public function setType(?string $type): static
     {
         if ($this->type !== $type) {
             $this->type = $type;
@@ -303,11 +297,11 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param int $id_content id_content
+     * @param ?int $id_content id_content
      *
      * @return static
      */
-    public function setIdContent(int $id_content): static
+    public function setIdContent(?int $id_content): static
     {
         if ($this->id_content !== $id_content) {
             $this->id_content = $id_content;
@@ -318,11 +312,11 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param string $created_at created_at
+     * @param ?string $created_at created_at
      *
      * @return static
      */
-    public function setCreatedAt(string $created_at): static
+    public function setCreatedAt(?string $created_at): static
     {
         if ($this->created_at !== $created_at) {
             $this->created_at = $created_at;
@@ -348,11 +342,11 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param string $modified_at modified_at
+     * @param ?string $modified_at modified_at
      *
      * @return static
      */
-    public function setModifiedAt(string $modified_at): static
+    public function setModifiedAt(?string $modified_at): static
     {
         if ($this->modified_at !== $modified_at) {
             $this->modified_at = $modified_at;
@@ -378,11 +372,11 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param bool $online online
+     * @param ?bool $online online
      *
      * @return static
      */
-    public function setOnline(bool $online): static
+    public function setOnline(?bool $online): static
     {
         if ($this->online !== $online) {
             $this->online = $online;
@@ -408,14 +402,12 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param string $pseudo pseudo
+     * @param ?string $pseudo pseudo
      *
      * @return static
      */
-    public function setPseudo(string $pseudo): static
+    public function setPseudo(?string $pseudo): static
     {
-        $pseudo = trim($pseudo);
-
         if ($this->pseudo !== $pseudo) {
             $this->pseudo = $pseudo;
             $this->modified_fields['pseudo'] = true;
@@ -431,8 +423,6 @@ class Comment extends ObjectModel
      */
     public function setEmail(?string $email): static
     {
-        $email = is_string($email) ? trim($email) : $email;
-
         if ($this->email !== $email) {
             $this->email = $email;
             $this->modified_fields['email'] = true;
@@ -442,14 +432,12 @@ class Comment extends ObjectModel
     }
 
     /**
-     * @param string $text text
+     * @param ?string $text text
      *
      * @return static
      */
-    public function setText(string $text): static
+    public function setText(?string $text): static
     {
-        $text = trim($text);
-
         if ($this->text !== $text) {
             $this->text = $text;
             $this->modified_fields['text'] = true;
@@ -457,8 +445,6 @@ class Comment extends ObjectModel
 
         return $this;
     }
-
-    /* fin setters */
 
     /**
      * @return bool
@@ -474,7 +460,7 @@ class Comment extends ObjectModel
              . "FROM `" . Comment::getDbTable() . "` `com` "
              . "LEFT JOIN `" . Membre::getDbTable() . "` `mbr` ON (`com`.`id_contact` = `mbr`.`id_contact`) "
              . "LEFT JOIN `" . Contact::getDbTable() . "` `cnt` ON (`mbr`.`id_contact` = `cnt`.`id_contact`) "
-             . "WHERE `" . self::$pk . "` = " . (int) $this->getIdComment();
+             . "WHERE `" . self::getDbPk()[0] . "` = " . (int) $this->getIdComment();
 
         $stmt = $db->pdo->query($sql);
         if ($res = $stmt->fetch()) {

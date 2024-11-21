@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Adhoc\Controller;
 
-use Adhoc\Model\Reference\City;
-use Adhoc\Model\Reference\WorldCountry;
-use Adhoc\Model\Reference\WorldRegion;
+use Adhoc\Model\City;
+use Adhoc\Model\WorldCountry;
+use Adhoc\Model\WorldRegion;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Route;

@@ -57,8 +57,6 @@ class Contact extends ObjectModel
         'email' => 'string',
     ];
 
-    /* début getters */
-
     /**
      * @return ?int
      */
@@ -104,10 +102,6 @@ class Contact extends ObjectModel
         return $this->is_membre;
     }
 
-    /* fin getters */
-
-    /* début setters*/
-
     /**
      * @param int $id_contact id_contact
      *
@@ -136,21 +130,6 @@ class Contact extends ObjectModel
         }
 
         return $this;
-    }
-
-    /* fin setters */
-
-    /**
-     * @return bool
-     * @throws \Exception
-     */
-    protected function loadFromDb(): bool
-    {
-        if (!parent::loadFromDb()) {
-            throw new NotFoundException('contact inconnu');
-        }
-
-        return true;
     }
 
     /**

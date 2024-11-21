@@ -94,8 +94,6 @@ class Featured extends ObjectModel
         'modified_at' => 'date',
     ];
 
-    /* début getters */
-
     /**
      * @return string
      */
@@ -211,10 +209,6 @@ class Featured extends ObjectModel
         }
         return null;
     }
-
-    /* fin getters */
-
-    /* début setters */
 
     /**
      * @param string $datdeb date format YYYY-MM-DD HH:II:SS
@@ -378,8 +372,6 @@ class Featured extends ObjectModel
 
         return $this;
     }
-
-    /* fin setters */
 
     /**
      * Efface un featured en db + le fichier .jpg

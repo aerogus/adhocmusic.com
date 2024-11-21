@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Adhoc\Model;
 
 use Adhoc\Model\Media;
-use Adhoc\Model\Reference\VideoHost;
+use Adhoc\Model\VideoHost;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Image;
@@ -168,8 +168,6 @@ class Video extends Media
         'online' => 'bool',
     ];
 
-    /* début getters */
-
     /**
      * @return string
      */
@@ -321,10 +319,6 @@ class Video extends Media
         }
     }
 
-    /* fin getters */
-
-    /* début setters */
-
     /**
      * Set l'id_host
      *
@@ -372,8 +366,6 @@ class Video extends Media
         return $this;
     }
 
-    /* fin setters */
-
     /**
      * Efface une vidéo de la table vidéo
      * + purge de l'imagette source
@@ -405,7 +397,9 @@ class Video extends Media
      */
     public function getGroupes(?int $idx = null): array|Groupe
     {
-        $groupes = Groupe::find(['id_video' => $this->getIdVideo()]);
+        $groupes = Groupe::find([
+            'id_video' => $this->getIdVideo(),
+        ]);
         if (!is_null($idx) && array_key_exists($idx, $groupes)) {
             return $groupes[$idx];
         }
@@ -418,7 +412,7 @@ class Video extends Media
     public function getGroupe(): ?Groupe
     {
         $groupes = $this->getGroupes();
-        if (sizeof($groupes) >= 1) {
+        if (count($groupes) >= 1) {
             return array_shift($groupes);
         }
         return null;
@@ -433,15 +427,10 @@ class Video extends Media
      */
     public function unlinkGroupe(int $id_groupe): bool
     {
-        $db = DataBase::getInstance();
-
-        $sql = "DELETE FROM `" . self::$db_table_video_groupe . "` "
-             . "WHERE `id_video` = " . $this->getIdVideo() . " "
-             . "AND `id_groupe` = " . $id_groupe;
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
+        return VideoGroupe::getInstance([
+            'id_video' => $this->getIdVideo(),
+            'id_groupe' => $id_groupe,
+        ])->delete();
     }
 
     /**
@@ -453,15 +442,10 @@ class Video extends Media
      */
     public function linkGroupe(int $id_groupe): bool
     {
-        $db = DataBase::getInstance();
-
-        $sql = "INSERT INTO `" . self::$db_table_video_groupe . "` "
-             . "(`id_video`, `id_groupe`) "
-             . "VALUES(" . $this->getIdVideo() . ", " . $id_groupe . ")";
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
+        return VideoGroupe::init()
+            ->setIdVideo($this->getIdVideo())
+            ->setIdGroupe($id_groupe)
+            ->save();
     }
 
     /**
@@ -471,14 +455,10 @@ class Video extends Media
      */
     public function unlinkGroupes(): bool
     {
-        $db = DataBase::getInstance();
-
-        $sql = "DELETE FROM `" . self::$db_table_video_groupe . "` "
-             . "WHERE `id_video` = " . $this->getIdVideo();
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
+        foreach ($this->getGroupes as $groupe) {
+            $this->unlinkGroupe($groupe->getIdGroupe);
+        }
+        return true;
     }
 
     /**
@@ -639,20 +619,6 @@ class Video extends Media
         }
 
         return false;
-    }
-
-    /**
-     * @todo comme Photo et Audio, requête plus complète ?
-     *
-     * @return bool
-     * @throws \Exception
-     */
-    protected function loadFromDb(): bool
-    {
-        if (!parent::loadFromDb()) {
-            throw new \Exception('Vidéo introuvable');
-        }
-        return true;
     }
 
     /**

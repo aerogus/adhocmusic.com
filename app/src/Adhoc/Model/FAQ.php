@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
-use Adhoc\Model\Reference\FAQCategory;
+use Adhoc\Model\FAQCategory;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\ObjectModel;
@@ -77,8 +77,6 @@ class FAQ extends ObjectModel
         'created_at' => 'date',
         'modified_at' => 'date',
     ];
-
-    /* début getters */
 
     /**
      * @return ?int
@@ -179,10 +177,6 @@ class FAQ extends ObjectModel
         }
         return null;
     }
-
-    /* fin getters */
-
-    /* début setters */
 
     /**
      * @param int $id_category id_category
@@ -307,8 +301,6 @@ class FAQ extends ObjectModel
 
         return $this;
     }
-
-    /* fin setters */
 
     /**
      * Retourne une collection d'objets "FAQ" répondant au(x) critère(s) donné(s)

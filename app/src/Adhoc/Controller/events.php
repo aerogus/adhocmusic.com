@@ -12,7 +12,7 @@ use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Structure;
 use Adhoc\Model\Video;
-use Adhoc\Model\Reference\Style;
+use Adhoc\Model\Style;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;

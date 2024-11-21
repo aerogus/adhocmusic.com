@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
-use Adhoc\Model\Reference\City;
-use Adhoc\Model\Reference\Departement;
-use Adhoc\Model\Reference\TypeMusicien;
-use Adhoc\Model\Reference\WorldCountry;
-use Adhoc\Model\Reference\WorldRegion;
+use Adhoc\Model\City;
+use Adhoc\Model\Departement;
+use Adhoc\Model\TypeMusicien;
+use Adhoc\Model\WorldCountry;
+use Adhoc\Model\WorldRegion;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Email;
@@ -561,10 +561,6 @@ class Membre extends ObjectModel
         return null;
     }
 
-    /* fin getters */
-
-    /* début setters */
-
     /**
      * @param int $id_contact id_contact
      *
@@ -895,47 +891,6 @@ class Membre extends ObjectModel
         return $this;
     }
 
-    /* fin setters */
-
-    /**
-     * @return bool
-     * @throws \Exception
-     */
-    protected function loadFromDb(): bool
-    {
-        if (!parent::loadFromDb()) {
-            throw new NotFoundException('membre inconnu');
-        }
-
-        return true;
-    }
-
-    /**
-     * Vérifie l'appartenance d'une personne à un groupe
-     *
-     * @param int $id_groupe id_groupe
-     *
-     * @return bool
-     * @throws \Exception
-     */
-    public function belongsTo(int $id_groupe): bool
-    {
-        if (is_null($this->contact)) {
-            throw new \Exception('id_contact manquant');
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql  = "SELECT `id_contact` "
-              . "FROM `" . self::$db_table_appartient_a . "` "
-              . "WHERE `id_groupe` = " . $id_groupe . " "
-              . "AND `id_contact` = " . $this->getIdContact();
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->fetchColumn();
-    }
-
     /**
      * Retourne si un membre est rattaché à au moins un groupe
      *
@@ -953,7 +908,7 @@ class Membre extends ObjectModel
      */
     public function isStandard(): bool
     {
-        return (bool) ($this->level & self::TYPE_STANDARD);
+        return (bool) ($this->getLevel() & self::TYPE_STANDARD);
     }
 
     /**
@@ -963,7 +918,7 @@ class Membre extends ObjectModel
      */
     public function isRedacteur(): bool
     {
-        return (bool) ($this->level & self::TYPE_REDACTEUR);
+        return (bool) ($this->getLevel() & self::TYPE_REDACTEUR);
     }
 
     /**
@@ -973,7 +928,7 @@ class Membre extends ObjectModel
      */
     public function isInterne(): bool
     {
-        return (bool) ($this->level & self::TYPE_INTERNE);
+        return (bool) ($this->getLevel() & self::TYPE_INTERNE);
     }
 
     /**
@@ -983,7 +938,7 @@ class Membre extends ObjectModel
      */
     public function isBonus(): bool
     {
-        return (bool) ($this->level & self::TYPE_BONUS);
+        return (bool) ($this->getLevel() & self::TYPE_BONUS);
     }
 
     /**
@@ -993,7 +948,7 @@ class Membre extends ObjectModel
      */
     public function isAdmin(): bool
     {
-        return (bool) ($this->level & self::TYPE_ADMIN);
+        return (bool) ($this->getLevel() & self::TYPE_ADMIN);
     }
 
     /**
@@ -1190,7 +1145,7 @@ class Membre extends ObjectModel
         }
         */
 
-        if (isset($params['id_country']) && (strlen($params['id_country']) == 2)) {
+        if (isset($params['id_country']) && (strlen($params['id_country']) === 2)) {
             $sql .= "AND `id_country` = '" . $params['id_country'] . "' ";
         }
 

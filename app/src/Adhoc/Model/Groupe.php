@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
-use Adhoc\Model\Reference\Style;
-use Adhoc\Model\Reference\TypeMusicien;
-use Adhoc\Model\Reference\GroupeStatus;
+use Adhoc\Model\Style;
+use Adhoc\Model\TypeMusicien;
+use Adhoc\Model\GroupeStatus;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\ObjectModel;
@@ -176,8 +176,6 @@ class Groupe extends ObjectModel
         'comment' => 'string',
         'etat' => 'int',
     ];
-
-    /* début getters */
 
     /**
      * Retourne l'url de base des medias relatifs au groupe
@@ -532,10 +530,6 @@ class Groupe extends ObjectModel
         return 'https://www.facebook.com/sharer.php?u=' . urlencode($this->getUrl());
     }
 
-    /* fin getters */
-
-    /* début setters */
-
     /**
      * @param ?string $alias alias
      *
@@ -856,8 +850,6 @@ class Groupe extends ObjectModel
         return $this;
     }
 
-    /* fin setters */
-
     /**
      * Retourne le nombre de mes groupes
      *
@@ -869,13 +861,9 @@ class Groupe extends ObjectModel
             throw new \Exception('non identifié');
         }
 
-        $db = DataBase::getInstance();
-
-        $sql = 'SELECT COUNT(*) '
-             . 'FROM `' . self::$db_table_appartient_a . '` '
-             . 'WHERE `id_contact` = ' . (int) $_SESSION['membre']->getIdContact();
-
-        return (int) $db->pdo->query($sql)->fetchColumn();
+        return count(self::find([
+            'id_contact' => $_SESSION['membre']->getIdContact(),
+        ]));
     }
 
     /**
@@ -911,19 +899,6 @@ class Groupe extends ObjectModel
         $l = self::getBasePath() . '/l' . $this->getIdGroupe() . '.jpg';
         if (file_exists($l)) {
             unlink($l);
-        }
-
-        return true;
-    }
-
-    /**
-     * @return bool
-     * @throws \Exception
-     */
-    protected function loadFromDb(): bool
-    {
-        if (!parent::loadFromDb()) {
-            throw new \Exception('id_groupe introuvable');
         }
 
         return true;
@@ -1261,14 +1236,16 @@ class Groupe extends ObjectModel
      */
     public function unlinkStyles(): bool
     {
-        $db = DataBase::getInstance();
+        $gss = GroupeStyle::find([
+            'id_groupe' => $this->getIdGroupe(),
+        ]);
 
-        $sql = "DELETE FROM `" . self::$db_table_groupe_style . "` "
-             . "WHERE `id_groupe` = " . $this->getIdGroupe();
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->affectedRows();
+        $nb = 0;
+        foreach ($gss as $gs) {
+            $gs->delete();
+            $nb++;
+        }
+        return (bool) $nb;
     }
 
     /**
@@ -1290,7 +1267,7 @@ class Groupe extends ObjectModel
      */
     public function hasPhotos(): bool
     {
-        return (bool) $this->getPhotos();
+        return count($this->getPhotos()) > 0;
     }
 
     /**
@@ -1423,14 +1400,16 @@ class Groupe extends ObjectModel
      */
     public function unlinkEvents(): int
     {
-        $db = DataBase::getInstance();
+        $egs = EventGroupe::find([
+            'id_groupe' => $this->getIdGroupe(),
+        ]);
 
-        $sql = "DELETE FROM `" . self::$db_table_participe_a . "` "
-             . "WHERE `id_groupe` = " . (int) $this->getIdGroupe();
-
-        $stmt = $db->pdo->query($sql);
-
-        return $stmt->rowCount();
+        $nb = 0;
+        foreach ($egs as $eg) {
+            $eg->delete();
+            $nb++;
+        }
+        return $nb;
     }
 
     /**

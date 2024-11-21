@@ -85,8 +85,6 @@ class Alerting extends ObjectModel
         'id_event' => 'int',
     ];
 
-    /* début getters */
-
     /**
      * @return ?int
      */
@@ -157,16 +155,12 @@ class Alerting extends ObjectModel
         return $this->id_event;
     }
 
-    /* fin getters */
-
-    /* début setters */
-
     /**
-     * @param int $id_contact id_contact
+     * @param ?int $id_contact id_contact
      *
      * @return static
      */
-    public function setIdContact(int $id_contact): static
+    public function setIdContact(?int $id_contact): static
     {
         if ($this->id_contact !== $id_contact) {
             $this->id_contact = $id_contact;
@@ -177,11 +171,11 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @param string $created_at created_at
+     * @param ?string $created_at created_at
      *
      * @return static
      */
-    public function setCreatedAt(string $created_at): static
+    public function setCreatedAt(?string $created_at): static
     {
         if ($this->created_at !== $created_at) {
             $this->created_at = $created_at;
@@ -192,11 +186,11 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @param bool $active active
+     * @param ?bool $active active
      *
      * @return static
      */
-    public function setActive(bool $active): static
+    public function setActive(?bool $active): static
     {
         if ($this->active !== $active) {
             $this->active = $active;
@@ -207,11 +201,11 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @param int $id_lieu id_lieu
+     * @param ?int $id_lieu id_lieu
      *
      * @return static
      */
-    public function setIdLieu(int $id_lieu = null): static
+    public function setIdLieu(?int $id_lieu = null): static
     {
         if ($this->id_lieu !== $id_lieu) {
             $this->id_lieu = $id_lieu;
@@ -222,11 +216,11 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @param int $id_groupe id_groupe
+     * @param ?int $id_groupe id_groupe
      *
      * @return static
      */
-    public function setIdGroupe(int $id_groupe = null): static
+    public function setIdGroupe(?int $id_groupe = null): static
     {
         if ($this->id_groupe !== $id_groupe) {
             $this->id_groupe = $id_groupe;
@@ -237,11 +231,11 @@ class Alerting extends ObjectModel
     }
 
     /**
-     * @param int $id_event id_event
+     * @param ?int $id_event id_event
      *
      * @return static
      */
-    public function setIdEvent(int $id_event = null): static
+    public function setIdEvent(?int $id_event = null): static
     {
         if ($this->id_event !== $id_event) {
             $this->id_event = $id_event;
@@ -250,8 +244,6 @@ class Alerting extends ObjectModel
 
         return $this;
     }
-
-    /* fin setters */
 
     /**
      * Défini la date de modification

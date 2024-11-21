@@ -76,8 +76,6 @@ class MembreAdhoc extends ObjectModel
         return MEDIA_PATH . '/membre/ca';
     }
 
-    /* début getters */
-
     /**
      * @return ?string
      */
@@ -109,10 +107,6 @@ class MembreAdhoc extends ObjectModel
     {
         return $this->rank;
     }
-
-    /* fin getters */
-
-    /* début setters */
 
     /**
      * @param string $function function
@@ -174,8 +168,6 @@ class MembreAdhoc extends ObjectModel
         return $this;
     }
 
-    /* fin setters */
-
     /**
      * Retourne les données des membres internes
      *
@@ -215,18 +207,5 @@ class MembreAdhoc extends ObjectModel
         }
 
         return $mbrs;
-    }
-
-    /**
-     * @return bool
-     * @throws \Exception
-     */
-    protected function loadFromDb(): bool
-    {
-        if (!parent::loadFromDb()) {
-            throw new NotFoundException('membre_adhoc inconnu');
-        }
-
-        return true;
     }
 }

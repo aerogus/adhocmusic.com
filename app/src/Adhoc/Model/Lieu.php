@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
-use Adhoc\Model\Reference\City;
-use Adhoc\Model\Reference\Departement;
-use Adhoc\Model\Reference\LieuType;
-use Adhoc\Model\Reference\WorldCountry;
-use Adhoc\Model\Reference\WorldRegion;
+use Adhoc\Model\City;
+use Adhoc\Model\Departement;
+use Adhoc\Model\LieuType;
+use Adhoc\Model\WorldCountry;
+use Adhoc\Model\WorldRegion;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\ObjectModel;
@@ -146,8 +146,6 @@ class Lieu extends ObjectModel
         'lng' => 'float',
         'online' => 'bool',
     ];
-
-    /* début getters */
 
     /**
      * @return string
@@ -449,10 +447,6 @@ class Lieu extends ObjectModel
         return $this->photo_url;
     }
 
-    /* fin getters */
-
-    /* début setters */
-
     /**
      * Set le type du lieu
      *
@@ -723,7 +717,7 @@ class Lieu extends ObjectModel
     {
         $now = date('Y-m-d H:i:s');
 
-        if ($this->modified_at != $now) {
+        if ($this->modified_at !== $now) {
             $this->modified_at = $now;
             $this->modified_fields['modified_at'] = true;
         }
@@ -748,8 +742,6 @@ class Lieu extends ObjectModel
         return $this;
     }
 
-    /* fin setters */
-
     /**
      * Suppression d'un lieu
      *
@@ -759,7 +751,7 @@ class Lieu extends ObjectModel
     public function delete(): bool
     {
         if (parent::delete()) {
-            $file = self::getBasePath() . '/' . (int) $this->getIdLieu() . '.jpg';
+            $file = self::getBasePath() . '/' . strval($this->getIdLieu()) . '.jpg';
             if (file_exists($file)) {
                 unlink($file);
             }
@@ -935,9 +927,7 @@ class Lieu extends ObjectModel
      */
     protected function loadFromDb(): bool
     {
-        if (!parent::loadFromDb()) {
-            throw new \Exception('lieu introuvable');
-        }
+        parent::loadFromDb();
 
         if (file_exists(self::getBasePath() . '/' . (string) $this->getIdLieu() . '.jpg')) {
             $this->photo_url = self::getBaseUrl() . '/' . (string) $this->getIdLieu() . '.jpg';

@@ -50,8 +50,6 @@ class Audio extends Media
         'online' => 'bool',
     ];
 
-    /* début getters */
-
     /**
      * @return string
      */
@@ -106,12 +104,6 @@ class Audio extends Media
         return null;
     }
 
-    /* fin getters */
-
-    /* début setters */
-
-    /* fin setters */
-
     /**
      * Efface un enregistrement de la table audio
      * + gestion de l'effacement du/des fichier(s)
@@ -132,18 +124,5 @@ class Audio extends Media
             return true;
         }
         return false;
-    }
-
-    /**
-     * @return bool
-     * @throws \Exception
-     */
-    protected function loadFromDb(): bool
-    {
-        if (!parent::loadFromDb()) {
-            throw new \Exception('Audio introuvable');
-        }
-
-        return true;
     }
 }

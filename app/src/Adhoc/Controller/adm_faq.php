@@ -6,7 +6,7 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\FAQ;
 use Adhoc\Model\Membre;
-use Adhoc\Model\Reference\FAQCategory;
+use Adhoc\Model\FAQCategory;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;

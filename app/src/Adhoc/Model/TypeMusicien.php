@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Adhoc\Model\Reference;
+namespace Adhoc\Model;
 
-use Adhoc\Model\Reference;
+use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe de gestion des types de musiciens
  *
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
-class TypeMusicien extends Reference
+class TypeMusicien extends ObjectModel
 {
     /**
      * @var array<string>
@@ -31,6 +31,11 @@ class TypeMusicien extends Reference
     protected int $id_type_musicien = 0;
 
     /**
+     * @var ?string
+     */
+    protected ?string $name = null;
+
+    /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
@@ -39,4 +44,27 @@ class TypeMusicien extends Reference
         'id_type_musicien' => 'int', // pk
         'name' => 'string',
     ];
+
+    /**
+     * @return ?string
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param ?string $name nom
+     *
+     * @return static
+     */
+    public function setName(?string $name): static
+    {
+        if ($this->name !== $name) {
+            $this->name = $name;
+            $this->modified_fields['name'] = true;
+        }
+
+        return $this;
+    }
 }

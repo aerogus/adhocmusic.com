@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Adhoc\Model\Reference;
+namespace Adhoc\Model;
 
-use Adhoc\Model\Reference;
 use Adhoc\Utils\DataBase;
+use Adhoc\Utils\ObjectModel;
 
 /**
  * Classe Departement
  *
  * @author Guillaume Seznec <guillaume@seznec.fr>
  */
-class Departement extends Reference
+class Departement extends ObjectModel
 {
     /**
      * @var array<string>
@@ -42,6 +42,11 @@ class Departement extends Reference
     protected ?WorldRegion $region = null;
 
     /**
+     * @var ?string
+     */
+    protected ?string $name = null;
+
+    /**
      * Liste des attributs de l'objet
      *
      * @var array<string,string>
@@ -51,8 +56,6 @@ class Departement extends Reference
         'id_region' => 'string',
         'name' => 'string',
     ];
-
-    /* début getters */
 
     /**
      * @return ?string
@@ -89,13 +92,28 @@ class Departement extends Reference
         return $this->region;
     }
 
-    /* fin getters */
+    /**
+     * @return ?string
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
 
-    /* début setters */
+    /**
+     * @param ?string $name nom
+     *
+     * @return static
+     */
+    public function setName(?string $name): static
+    {
+        if ($this->name !== $name) {
+            $this->name = $name;
+            $this->modified_fields['name'] = true;
+        }
 
-    // à implémenter
-
-    /* fin setters */
+        return $this;
+    }
 
     /**
      * Retourne une collection d'objets "Departement" répondant au(x) critère(s)

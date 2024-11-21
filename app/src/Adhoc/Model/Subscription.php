@@ -95,8 +95,6 @@ class Subscription extends ObjectModel
         'id_contact' => 'int',
     ];
 
-    /* début getters */
-
     /**
      * Retourne la date de saise de la cotisation format YYYY-MM-DD HH:II:SS
      *
@@ -182,10 +180,6 @@ class Subscription extends ObjectModel
     {
         return $this->id_contact;
     }
-
-    /* fin getters */
-
-    /* début setters */
 
     /**
      * @param string $created_at created_at
@@ -339,6 +333,4 @@ class Subscription extends ObjectModel
 
         return $this;
     }
-
-    /* fin setters */
 }

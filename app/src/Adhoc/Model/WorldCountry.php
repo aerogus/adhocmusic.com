@@ -2,34 +2,41 @@
 
 declare(strict_types=1);
 
-namespace Adhoc\Model\Reference;
+namespace Adhoc\Model;
 
-use Adhoc\Model\Reference;
 use Adhoc\Utils\DataBase;
+use Adhoc\Utils\ObjectModel;
 
 /**
- * Classe de gestion des styles musicaux
+ * Classe WorldCountry
  *
  * @author Guillaume Seznec <guillaume@seznec.fr>
+ *
+ * @see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
  */
-class Style extends Reference
+class WorldCountry extends ObjectModel
 {
     /**
      * @var array<string>
      */
     protected static array $pk = [
-        'id_style',
+        'id_country',
     ];
 
     /**
      * @var string
      */
-    protected static string $table = 'adhoc_style';
+    protected static string $table = 'geo_world_country';
 
     /**
-     * @var int
+     * @var ?string
      */
-    protected int $id_style = 0;
+    protected ?string $id_country = null;
+
+    /**
+     * @var ?string
+     */
+    protected ?string $name = null;
 
     /**
      * Liste des attributs de l'objet
@@ -37,20 +44,60 @@ class Style extends Reference
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_style' => 'int', // pk
+        'id_country' => 'string',
         'name' => 'string',
     ];
 
     /**
-     * Retourne une collection d'objets "Style" répondant au(x) critère(s) donné(s)
+     * @return ?string
+     */
+    public function getIdCountry(): ?string
+    {
+        return $this->id_country;
+    }
+
+    /**
+     * @return ?string
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * Retourne l'url de l'image du drapeau pays
+     *
+     * @return string
+     */
+    public function getFlagUrl(): string
+    {
+        return MEDIA_URL . '/country/' . strtolower($this->getIdCountry()) . '.png';
+    }
+
+    /**
+     * @param ?string $name nom
+     *
+     * @return static
+     */
+    public function setName(?string $name): static
+    {
+        if ($this->name !== $name) {
+            $this->name = $name;
+            $this->modified_fields['name'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Retourne une collection d'objets "WorldCountry" répondant au(x) critère(s)
      *
      * @param array<string,mixed> $params [
-     *     'id_event' => int,
-     *     'order_by' => string,
-     *     'sort' => string,
-     *     'start' => int,
-     *     'limit' => int,
-     * ]
+     *                      'order_by' => string,
+     *                      'sort' => string
+     *                      'start' => int,
+     *                      'limit' => int,
+     *                      ]
      *
      * @return array<static>
      */
@@ -59,7 +106,7 @@ class Style extends Reference
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql  = "SELECT ";
+        $sql = 'SELECT ';
 
         $pks = array_map(
             function ($item) {
@@ -69,19 +116,8 @@ class Style extends Reference
         );
         $sql .= implode(', ', $pks) . ' ';
 
-        $sql .= "FROM `" . static::getDbTable() . "` ";
-        $sql .= "WHERE 1 ";
-
-        if (isset($params['id_event'])) {
-            $subSql  = "SELECT `id_style` ";
-            $subSql .= "FROM `adhoc_event_style` ";
-            $subSql .= "WHERE `id_event` = " . (int) $params['id_event'] . " ";
-            if ($ids_style = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
-                $sql .= "AND `id_style` IN (" . implode(',', $ids_style) . ") ";
-            } else {
-                return $objs;
-            }
-        }
+        $sql .= 'FROM `' . static::getDbTable() . '` ';
+        $sql .= 'WHERE 1 ';
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
             $sql .= "ORDER BY `" . $params['order_by'] . "` ";
@@ -93,9 +129,9 @@ class Style extends Reference
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
-            $sql .= $params['sort'];
+            $sql .= $params['sort'] . " ";
         } else {
-            $sql .= "ASC";
+            $sql .= "ASC ";
         }
 
         if (!isset($params['start'])) {
@@ -108,7 +144,7 @@ class Style extends Reference
 
         $ids = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
         foreach ($ids as $id) {
-            $objs[] = static::getInstance((int) $id);
+            $objs[] = static::getInstance((string) $id);
         }
 
         return $objs;

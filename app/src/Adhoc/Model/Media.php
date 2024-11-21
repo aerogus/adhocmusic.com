@@ -58,8 +58,6 @@ abstract class Media extends ObjectModel
      */
     protected bool $online = false;
 
-    /* début getters communs */
-
     /**
      * @return ?int
      */
@@ -230,10 +228,6 @@ abstract class Media extends ObjectModel
         return $this->online;
     }
 
-    /* fin getters communs */
-
-    /* début setters communs */
-
     /**
      * @param int $id_contact id_contact
      *
@@ -383,8 +377,6 @@ abstract class Media extends ObjectModel
 
         return $this;
     }
-
-    /* fin setters communs */
 
     /**
      * Retourne une collection d'objets "Media" (Audio|Photo|Video) répondant au(x) critère(s) donné(s)

@@ -9,7 +9,7 @@ use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
-use Adhoc\Model\Reference\TypeMusicien;
+use Adhoc\Model\TypeMusicien;
 use Adhoc\Model\Video;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Image;

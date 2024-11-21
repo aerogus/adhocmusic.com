@@ -295,19 +295,6 @@ class Newsletter extends ObjectModel
     }
 
     /**
-     * @return bool
-     * @throws \Exception
-     */
-    protected function loadFromDb(): bool
-    {
-        if (!parent::loadFromDb()) {
-            throw new \Exception('newsletter introuvable');
-        }
-
-        return true;
-    }
-
-    /**
      * Retourne une collection d'objets "Newsletter" répondant au(x) critère(s)
      *
      * @param array<string,mixed> $params ['order_by' => string, 'sort' => string]

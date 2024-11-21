@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Adhoc\Model;
 
-use Adhoc\Model\Reference\Style;
+use Adhoc\Model\Style;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\DataBase;
@@ -106,8 +106,6 @@ class Event extends ObjectModel
         'id_contact' => 'int',
         'facebook_event_id' => 'string',
     ];
-
-    /* début getters */
 
     /**
      * @return string
@@ -324,9 +322,20 @@ class Event extends ObjectModel
         );
     }
 
-    /* fin getters */
+    /**
+     * @param int $id_event
+     *
+     * @return static
+     */
+    public function setIdEvent(int $id_event): static
+    {
+        if ($this->id_event !== $id_event) {
+            $this->id_event = $id_event;
+            $this->modified_fields['id_event'] = true;
+        }
 
-    /* début setters */
+        return $this;
+    }
 
     /**
      * @param string $created_at created_at
@@ -514,8 +523,6 @@ class Event extends ObjectModel
         return $this;
     }
 
-    /* fin setters */
-
     /**
      * Retourne une collection d'objets "Event" répondant au(x) critère(s) donné(s)
      *
@@ -625,19 +632,6 @@ class Event extends ObjectModel
         }
 
         return $objs;
-    }
-
-    /**
-     * @return bool
-     * @throws \Exception
-     */
-    protected function loadFromDb(): bool
-    {
-        if (!parent::loadFromDb()) {
-            throw new \Exception('id_event introuvable');
-        }
-
-        return true;
     }
 
     /**
@@ -772,15 +766,11 @@ class Event extends ObjectModel
      */
     public function linkStyle(int $id_style): bool
     {
-        $db = DataBase::getInstance();
-
-        $sql = "INSERT INTO `" . self::$db_table_event_style . "` "
-             . "(`id_event`, `id_style`) "
-             . "VALUES (" . $this->getIdEvent() . ", " . $id_style . ")";
-
         try {
-            $stmt = $db->pdo->query($sql);
-            return (bool) $stmt->rowCount();
+            return EventStyle::init()
+                ->setIdEvent($this->getIdEvent())
+                ->setIdStyle($id_style)
+                ->save();
         } catch (\Exception $e) {
             return false;
         }
@@ -795,15 +785,14 @@ class Event extends ObjectModel
      */
     public function unlinkStyle(int $id_style): bool
     {
-        $db = DataBase::getInstance();
-
-        $sql = "DELETE FROM `" . self::$db_table_event_style . "` "
-             . "WHERE `id_event` = " . $this->getIdEvent() . " "
-             . "AND `id_style` = " . $id_style;
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
+        try {
+            return EventStyle::getInstance([
+                'id_event' => $this->getIdEvent(),
+                'id_style' => $id_style,
+            ])->delete();
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     /**

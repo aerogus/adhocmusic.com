@@ -2,51 +2,50 @@
 
 declare(strict_types=1);
 
-namespace Adhoc\Model\Reference;
+namespace Adhoc\Model;
 
-use Adhoc\Model\Reference;
 use Adhoc\Utils\DataBase;
+use Adhoc\Utils\ObjectModel;
 
 /**
- * Classe City
- * (villes de France uniquement)
- * pk = code insee
+ * Classe WorldRegion
  *
- * @author Guillaume Seznec <guillaume@seznec.fr>
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
  */
-class City extends Reference
+class WorldRegion extends ObjectModel
 {
     /**
      * @var array<string>
      */
     protected static array $pk = [
-        'id_city',
+        'id_country',
+        'id_region',
     ];
 
     /**
      * @var string
      */
-    protected static string $table = 'geo_fr_city';
-
-    /**
-     * @var ?int
-     */
-    protected ?int $id_city = null;
+    protected static string $table = 'geo_world_region';
 
     /**
      * @var ?string
      */
-    protected ?string $id_departement = null;
+    protected ?string $id_country = null;
 
     /**
      * @var ?string
      */
-    protected ?string $cp = null;
+    protected ?string $id_region = null;
 
     /**
-     * @var ?Departement
+     * @var ?string
      */
-    protected ?Departement $departement = null;
+    protected ?string $name = null;
+
+    /**
+     * @var ?WorldCountry
+     */
+    protected ?WorldCountry $country = null;
 
     /**
      * Liste des attributs de l'objet
@@ -54,67 +53,71 @@ class City extends Reference
      * @var array<string,string>
      */
     protected static array $all_fields = [
-        'id_city' => 'int', // pk
-        'id_departement' => 'string',
-        'cp' => 'string',
+        'id_country' => 'string', // pk
+        'id_region' => 'string', // pk
         'name' => 'string',
     ];
 
-    /* début getter */
-
     /**
-     * @return ?int
+     * @return ?string
      */
-    public function getIdCity(): ?int
+    public function getIdCountry(): ?string
     {
-        return $this->id_city;
+        return $this->id_country;
     }
 
     /**
      * @return ?string
      */
-    public function getIdDepartement(): ?string
+    public function getIdRegion(): ?string
     {
-        return $this->id_departement;
+        return $this->id_region;
     }
 
     /**
-     * @return ?Departement
+     * @return ?WorldCountry
      */
-    public function getDepartement(): ?Departement
+    public function getCountry(): ?WorldCountry
     {
-        if (is_null($this->getIdDepartement())) {
+        if (is_null($this->getIdCountry())) {
             return null;
         }
 
-        if (is_null($this->departement)) {
-            $this->departement = Departement::getInstance($this->getIdDepartement());
+        if (is_null($this->country)) {
+            $this->country = WorldCountry::getInstance($this->getIdCountry());
         }
 
-        return $this->departement;
+        return $this->country;
     }
 
     /**
      * @return ?string
      */
-    public function getCp(): ?string
+    public function getName(): ?string
     {
-        return $this->cp;
+        return $this->name;
     }
 
-    /* fin getters */
+    /**
+     * @param ?string $name nom
+     *
+     * @return static
+     */
+    public function setName(?string $name): static
+    {
+        if ($this->name !== $name) {
+            $this->name = $name;
+            $this->modified_fields['name'] = true;
+        }
 
-    /* début setters */
-
-    // à implémenter
-
-    /* fin setters */
+        return $this;
+    }
 
     /**
-     * Retourne une collection d'objets "City" répondant au(x) critère(s)
+     * Retourne une collection d'objets "WorldRegion" répondant au(x) critère(s)
      *
      * @param array<string,mixed> $params [
-     *                                'id_departement' => string,
+     *                                'id_country' => string,
      *                                'order_by' => string,
      *                                'sort' => string
      *                                'start' => int,
@@ -123,10 +126,9 @@ class City extends Reference
      *
      * @return array<static>
      */
-    public static function find(array $params = []): array
+    public static function find(array $params): array
     {
         $db = DataBase::getInstance();
-        $data = [];
         $objs = [];
 
         $sql = 'SELECT ';
@@ -142,9 +144,8 @@ class City extends Reference
         $sql .= 'FROM `' . static::getDbTable() . '` ';
         $sql .= 'WHERE 1 ';
 
-        if (isset($params['id_departement'])) {
-            $sql .= "AND `id_departement` = :id_departement ";
-            $data['id_departement'] = $params['id_departement'];
+        if (isset($params['id_country'])) {
+            $sql .= "AND `id_country` = '" . $params['id_country'] . "' ";
         }
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
@@ -153,7 +154,7 @@ class City extends Reference
             $pks = array_map(function ($item) {
                 return '`' . $item . '`';
             }, static::getDbPk());
-            $sql .= 'ORDER BY ' . implode(', ', $pks) . ' ';
+            $sql .= 'ORDER BY ' . implode(', ', $pks) . ' '; // tri par région
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
@@ -170,12 +171,9 @@ class City extends Reference
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
-        $stmt = $db->pdo->prepare($sql);
-        $stmt->execute($data);
-        $ids = $stmt->fetchAll(\PDO::FETCH_COLUMN);
-
+        $ids = $db->pdo->query($sql)->fetchAll();
         foreach ($ids as $id) {
-            $objs[] = static::getInstance((int) $id);
+            $objs[] = static::getInstance((array) $id);
         }
 
         return $objs;

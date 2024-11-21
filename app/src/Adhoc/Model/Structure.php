@@ -100,8 +100,6 @@ class Structure extends ObjectModel
         'id_country' => 'string',
     ];
 
-    /* début getters */
-
     /**
      * @return string
      */
@@ -223,10 +221,6 @@ class Structure extends ObjectModel
     {
         return self::getBaseUrl() . '/' . $id . '.png';
     }
-
-    /* fin getters */
-
-    /* début setters */
 
     /**
      * @param ?string $name name
@@ -377,8 +371,6 @@ class Structure extends ObjectModel
 
         return $this;
     }
-
-    /* fin setters */
 
     /**
      * Suppression d'une structure

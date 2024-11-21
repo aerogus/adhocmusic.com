@@ -17,7 +17,7 @@ use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
 use Adhoc\Utils\Trail;
-use Adhoc\Model\Reference\Departement;
+use Adhoc\Model\Departement;
 
 define('NB_VIDEOS_PER_PAGE', 48);
 
