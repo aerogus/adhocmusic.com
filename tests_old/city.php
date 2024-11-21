@@ -3,7 +3,7 @@
 
 declare(strict_types=1);
 
-use Adhoc\Model\Reference\City;
+use Adhoc\Model\City;
 use Adhoc\Utils\LogNG;
 
 require_once __DIR__ . '/../app/bootstrap.php';

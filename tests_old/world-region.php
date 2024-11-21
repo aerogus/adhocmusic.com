@@ -3,7 +3,7 @@
 
 declare(strict_types=1);
 
-use Adhoc\Model\Reference\WorldRegion;
+use Adhoc\Model\WorldRegion;
 use Adhoc\Utils\LogNG;
 
 require_once __DIR__ . '/../app/bootstrap.php';
