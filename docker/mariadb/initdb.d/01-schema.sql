@@ -503,7 +503,7 @@ CREATE TABLE `adhoc_video` (
   CONSTRAINT `fk_video_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`)
 );
 
-CREATE TABLE `adhoc_appartient_a` (
+CREATE TABLE `adhoc_groupe_membre` ( /* ex adhoc_appartient_a */
   `id_contact` int(10) UNSIGNED NOT NULL,
   `id_groupe` int(10) UNSIGNED NOT NULL,
   `id_type_musicien` int(10) UNSIGNED NOT NULL,
@@ -512,9 +512,9 @@ CREATE TABLE `adhoc_appartient_a` (
   KEY `id_contact` (`id_contact`),
   KEY `id_groupe` (`id_groupe`),
   KEY `id_type_musicien` (`id_type_musicien`),
-  CONSTRAINT `fk_appartient_a_membre` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`),
-  CONSTRAINT `fk_appartient_a_groupe` FOREIGN KEY (`id_groupe`) REFERENCES `adhoc_groupe` (`id_groupe`),
-  CONSTRAINT `fk_appartient_a_type_musicien` FOREIGN KEY (`id_type_musicien`) REFERENCES `adhoc_type_musicien` (`id_type_musicien`)
+  CONSTRAINT `fk_groupe_membre_membre` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`),
+  CONSTRAINT `fk_groupe_membre_groupe` FOREIGN KEY (`id_groupe`) REFERENCES `adhoc_groupe` (`id_groupe`),
+  CONSTRAINT `fk_groupe_membre_type_musicien` FOREIGN KEY (`id_type_musicien`) REFERENCES `adhoc_type_musicien` (`id_type_musicien`)
 );
 
 CREATE TABLE `adhoc_groupe_style` (
@@ -537,14 +537,14 @@ CREATE TABLE `adhoc_video_groupe` (
   CONSTRAINT `fk_video_groupe_groupe` FOREIGN KEY (`id_groupe`) REFERENCES `adhoc_groupe` (`id_groupe`)
 );
 
-CREATE TABLE `adhoc_participe_a` (
+CREATE TABLE `adhoc_event_groupe` ( /* ex adhoc_participe_a */
   `id_event` int(10) UNSIGNED NOT NULL,
   `id_groupe` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id_event`,`id_groupe`),
   KEY `id_event` (`id_event`),
   KEY `id_groupe` (`id_groupe`),
-  CONSTRAINT `fk_participe_a_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`),
-  CONSTRAINT `fk_participe_a_groupe` FOREIGN KEY (`id_groupe`) REFERENCES `adhoc_groupe` (`id_groupe`)
+  CONSTRAINT `fk_event_groupe_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`),
+  CONSTRAINT `fk_event_groupe_groupe` FOREIGN KEY (`id_groupe`) REFERENCES `adhoc_groupe` (`id_groupe`)
 );
 
 CREATE TABLE `adhoc_event_style` (
@@ -557,7 +557,7 @@ CREATE TABLE `adhoc_event_style` (
   CONSTRAINT `fk_event_style_style` FOREIGN KEY (`id_style`) REFERENCES `adhoc_style` (`id_style`)
 );
 
-CREATE TABLE `adhoc_organise_par` (
+CREATE TABLE `adhoc_event_structure` ( /* ex adhoc_organise_par */
   `id_event` int(10) UNSIGNED NOT NULL,
   `id_structure` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id_event`,`id_structure`),
