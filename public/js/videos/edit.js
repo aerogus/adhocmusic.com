@@ -1,4 +1,4 @@
-/*globals jQuery*/
+/* globals document, jQuery */
 
 jQuery(document).ready(function ($) {
 
