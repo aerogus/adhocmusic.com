@@ -1,4 +1,4 @@
-/*global jQuery, window, alert */
+/* global $, document, jQuery, window, alert */
 
 var adhoc = {
 

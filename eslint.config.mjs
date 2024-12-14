@@ -4,7 +4,7 @@ export default [
     js.configs.recommended,
     {
         ignores: [
-            "www/public/static/library/*",
+            "public/static/library/*",
             "vendor/*"
         ]
     },

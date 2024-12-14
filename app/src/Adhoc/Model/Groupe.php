@@ -918,41 +918,12 @@ class Groupe extends ObjectModel
             return false;
         }
 
-        $db = DataBase::getInstance();
+        $gm = GroupeMembre::init();
+        $gm->setIdContact($id_contact);
+        $gm->setIdGroupe($this->getIdGroupe());
+        $gm->setIdTypeMusicien($id_type_musicien);
 
-        $sql = 'INSERT INTO `' . self::$db_table_appartient_a . '` '
-             . '(`' . Groupe::getDbPk()[0] . '`, `' . Membre::getDbPk()[0] . '`, `' . TypeMusicien::getDbPk()[0] . '`) '
-             . 'VALUES(' . $this->getIdGroupe() . ', ' . $id_contact . ', ' . $id_type_musicien . ')';
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
-    }
-
-    /**
-     * Met à jour la table de relation  membre/type_musicien/groupe
-     *
-     * @param int $id_contact       id_contact
-     * @param int $id_type_musicien id_type_musicien
-     *
-     * @return bool
-     */
-    public function updateMember(int $id_contact, int $id_type_musicien): bool
-    {
-        if (is_null($this->getIdGroupe())) {
-            return false;
-        }
-
-        $db = DataBase::getInstance();
-
-        $sql = 'UPDATE `' . self::$db_table_appartient_a . '` '
-             . 'SET `' . TypeMusicien::getDbPk()[0] . '` = ' . $id_type_musicien . ' '
-             . 'WHERE `' . Groupe::getDbPk()[0] . '` = ' . $this->getIdGroupe() . ' '
-             . 'AND `' . Membre::getDbPk()[0] . '` = ' . $id_contact;
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
+        return $gm->save();
     }
 
     /**
@@ -968,36 +939,36 @@ class Groupe extends ObjectModel
             return false;
         }
 
-        $db = DataBase::getInstance();
+        $gms = GroupeMembre::find([
+            'id_groupe' => $this->getIdGroupe(),
+            'id_contact' => $id_contact,
+        ]);
+        foreach ($gms as $gm) {
+            $gm->delete();
+        }
 
-        $sql = 'DELETE FROM `' . self::$db_table_appartient_a . '` '
-             . 'WHERE `' . Groupe::getDbPk()[0] . '` = ' . $this->getIdGroupe() . ' '
-             . 'AND `' . Membre::getDbPk()[0] . '` = ' . $id_contact;
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
+        return true;
     }
 
     /**
      * Délie tous les membres d'un groupe
      *
-     * @return int|false
+     * @return bool
      */
-    public function unlinkMembers(): int|false
+    public function unlinkMembers(): bool
     {
         if (is_null($this->getIdGroupe())) {
             return false;
         }
 
-        $db = DataBase::getInstance();
+        $gms = GroupeMembre::find([
+            'id_groupe' => $this->getIdGroupe(),
+        ]);
+        foreach ($gms as $gm) {
+            $gm->delete();
+        }
 
-        $sql = 'DELETE FROM `' . self::$db_table_appartient_a . '` '
-             . 'WHERE `' . static::getDbPk()[0] . '` = ' . $this->getIdGroupe();
-
-        $stmt = $db->pdo->query($sql);
-
-        return $stmt->rowCount();
+        return true;
     }
 
     /**
@@ -1198,15 +1169,12 @@ class Groupe extends ObjectModel
      */
     public function linkStyle(int $id_style): bool
     {
-        $db = DataBase::getInstance();
+        $gs = GroupeStyle::init();
 
-        $sql = "INSERT INTO `" . self::$db_table_groupe_style . "` "
-             . "(`id_groupe`, `id_style`) "
-             . "VALUES(" . $this->getIdGroupe() . ", " . $id_style . ")";
+        $gs->setIdGroupe($this->getIdGroupe());
+        $gs->setIdStyle($id_style);
 
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
+        return $gs->save();
     }
 
     /**
@@ -1218,15 +1186,12 @@ class Groupe extends ObjectModel
      */
     public function unlinkStyle(int $id_style): bool
     {
-        $db = DataBase::getInstance();
+        $gs = GroupeStyle::getInstance([
+            'id_groupe' => $this->getIdGroupe(),
+            'id_style' => $id_style,
+        ]);
 
-        $sql = "DELETE FROM `" . self::$db_table_groupe_style . "` "
-             . "WHERE `id_groupe` = " . $this->getIdGroupe() . " "
-             . "AND `id_style` = " . $id_style;
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
+        return $gs->delete();
     }
 
     /**
@@ -1240,12 +1205,11 @@ class Groupe extends ObjectModel
             'id_groupe' => $this->getIdGroupe(),
         ]);
 
-        $nb = 0;
         foreach ($gss as $gs) {
             $gs->delete();
-            $nb++;
         }
-        return (bool) $nb;
+
+        return true;
     }
 
     /**

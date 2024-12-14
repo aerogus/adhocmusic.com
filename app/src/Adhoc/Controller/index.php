@@ -75,7 +75,7 @@ final class Controller
         }
         $twig->assign('events', $events);
 
-        return $twig->render('bs/index.twig');
+        return $twig->render('index.twig');
     }
 
     /**
