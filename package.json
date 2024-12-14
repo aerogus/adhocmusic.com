@@ -13,5 +13,9 @@
   "dependencies": {
     "mjml": "4.15.3",
     "stylus": "0.64.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.17.0",
+    "eslint": "9.17.0"
   }
 }
