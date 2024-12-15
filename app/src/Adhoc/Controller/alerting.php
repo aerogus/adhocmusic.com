@@ -33,11 +33,11 @@ final class Controller
         ]);
         $myAlertingLieu = $myAlertingGroupe = $myAlertingEvent =  [];
         foreach ($myAlerting as $ma) {
-            if ($ma->getIdLieu()) {
+            if (!is_null($ma->getIdLieu())) {
                 $myAlertingLieu[] = Lieu::getInstance($ma->getIdLieu());
-            } elseif ($ma->getIdGroupe()) {
+            } elseif (!is_null($ma->getIdGroupe())) {
                 $myAlertingGroupe[] = Groupe::getInstance($ma->getIdGroupe());
-            } elseif ($ma->getIdEvent()) {
+            } elseif (!is_null($ma->getIdEvent())) {
                 $myAlertingEvent[] = Event::getInstance($ma->getIdEvent());
             }
         }

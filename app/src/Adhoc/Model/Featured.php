@@ -21,7 +21,7 @@ class Featured extends ObjectModel
     public const HEIGHT = 375;
 
     /**
-     * @var string|array<string>
+     * @var array<string>
      */
     protected static array $pk = [
         'id_featured',
@@ -93,6 +93,14 @@ class Featured extends ObjectModel
         'created_at' => 'date',
         'modified_at' => 'date',
     ];
+
+    /**
+     * @return ?int
+     */
+    public function getIdFeatured(): ?int
+    {
+        return $this->id_featured;
+    }
 
     /**
      * @return string

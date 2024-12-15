@@ -99,25 +99,25 @@ final class Controller
 
             $meta_title .= $photo->getName();
 
-            if ($photo->getIdGroupe()) {
+            if (!is_null($photo->getIdGroupe())) {
                 $groupe = Groupe::getInstance($photo->getIdGroupe());
                 $twig->assign('groupe', $groupe);
                 $meta_title .= " - " . $groupe->getName();
                 $meta_description .= " | Groupe : " . $groupe->getName();
             }
-            if ($photo->getIdEvent()) {
+            if (!is_null($photo->getIdEvent())) {
                 $event = Event::getInstance($photo->getIdEvent());
                 $twig->assign('event', $event);
                 $meta_title .= " - " . $event->getName() . " (" . Date::mysqlDatetime($event->getDate(), "d/m/Y") . ")";
                 $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysqlDatetime($event->getDate(), "d/m/Y") . ")";
             }
-            if ($photo->getIdLieu()) {
+            if (!is_null($photo->getIdLieu())) {
                 $lieu = Lieu::getInstance($photo->getIdLieu());
                 $twig->assign('lieu', $lieu);
                 $meta_title .= " - " . $lieu->getName();
                 $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity()->getName() . ")";
             }
-            if ($photo->getIdContact()) {
+            if (!is_null($photo->getIdContact())) {
                 try {
                     $membre = Membre::getInstance($photo->getIdContact());
                     $twig->assign('membre', $membre);
@@ -127,15 +127,15 @@ final class Controller
             }
 
             $trail = Trail::getInstance();
-            if ($from === 'groupe' && $photo->getIdGroupe()) {
+            if ($from === 'groupe' && !is_null($photo->getIdGroupe())) {
                 $trail->addStep("Groupes", "/groupes")
                     ->addStep($groupe->getName(), $groupe->getUrl());
-            } elseif ($from === 'profil' && $photo->getIdContact()) {
+            } elseif ($from === 'profil' && !is_null($photo->getIdContact())) {
                 $trail->addStep("Zone Membre", "/membres");
-            } elseif ($from === 'event' && $photo->getIdEvent()) {
+            } elseif ($from === 'event' && !is_null($photo->getIdEvent())) {
                 $trail->addStep("Agenda", "/events")
                     ->addStep($event->getName(), $event->getUrl());
-            } elseif ($from === 'lieu' && $photo->getIdLieu()) {
+            } elseif ($from === 'lieu' && !is_null($photo->getIdLieu())) {
                 $trail->addStep("Lieux", "/lieux")
                     ->addStep($lieu->getName(), $lieu->getUrl());
             } else {
@@ -144,7 +144,7 @@ final class Controller
             $trail->addStep($photo->getName());
 
             // photo issu d'un album live ?
-            if ($photo->getIdEvent() && $photo->getIdLieu()) {
+            if (!is_null($photo->getIdEvent()) && !is_null($photo->getIdLieu())) {
                 $playlist = Photo::find(
                     [
                         'online' => true,

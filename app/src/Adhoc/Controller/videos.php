@@ -130,23 +130,23 @@ final class Controller
             ];
             $twig->assign('og_video', $og_video);
 
-            if ($video->getGroupes()) {
+            if (count($video->getGroupes()) > 0) {
                 $groupe = Groupe::getInstance($video->getGroupes()[0]->getIdGroupe());
                 $twig->assign('groupe', $groupe);
                 $twig->assign('title', "♫ " . $video->getName() . " (" . $groupe->getName() . ")");
                 $meta_description .= " | Groupe : " . $groupe->getName();
             }
-            if ($video->getIdEvent()) {
+            if (!is_null($video->getIdEvent())) {
                 $event = Event::getInstance($video->getIdEvent());
                 $twig->assign('event', $event);
                 $meta_description .= " | Evénement : " . $event->getName() . " (" . Date::mysqlDatetime($event->getDate(), "d/m/Y") . ")";
             }
-            if ($video->getIdLieu()) {
+            if (!is_null($video->getIdLieu())) {
                 $lieu = Lieu::getInstance($video->getIdLieu());
                 $twig->assign('lieu', $lieu);
                 $meta_description .= " | Lieu : " . $lieu->getName() . " (" . $lieu->getIdDepartement() . " - " . $lieu->getCity()->getName() . ")";
             }
-            if ($video->getIdContact()) {
+            if (!is_null($video->getIdContact())) {
                 $membre = Membre::getInstance($video->getIdContact());
                 $twig->assign('membre', $membre);
             }
@@ -255,9 +255,9 @@ final class Controller
         if (Tools::isSubmit('form-video-create')) {
             $data = [
                 'name' => (string) Route::params('name'),
-                'id_groupe' => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
-                'id_lieu' => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
-                'id_event' => Route::params('id_event') ? (int) Route::params('id_event') : null,
+                'id_groupe' => boolval(Route::params('id_groupe')) ? (int) Route::params('id_groupe') : null,
+                'id_lieu' => boolval(Route::params('id_lieu')) ? (int) Route::params('id_lieu') : null,
+                'id_event' => boolval(Route::params('id_event')) ? (int) Route::params('id_event') : null,
                 'id_contact' => $_SESSION['membre']->getIdContact(),
                 'online' => (bool) Route::params('online'),
                 'code' => (string) Route::params('code'),

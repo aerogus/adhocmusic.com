@@ -577,4 +577,20 @@ abstract class Media extends ObjectModel
     {
         return '';
     }
+
+    /**
+     * Retourne le nombre de mes groupes
+     *
+     * @return int
+     */
+    public static function countMy(): int
+    {
+        if (!isset($_SESSION['membre'])) {
+            throw new \Exception('non identifié');
+        }
+
+        return count(static::find([
+            'id_contact' => $_SESSION['membre']->getIdContact(),
+        ]));
+    }
 }

@@ -44,10 +44,10 @@ final class Controller
         $month = (int) Route::params('m');
         $day   = (int) Route::params('d');
 
-        if ($year && $month && $day) { // filtrage d'un jour donné
+        if ($year > 0 && $month > 0 && $day > 0) { // filtrage d'un jour donné
             $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, $month, $day, $year)); // début de la journée
             $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, $month, $day, $year)); // fin de la journée
-        } elseif ($year && $month) { // filtrage au mois
+        } elseif ($year > 0 && $month > 0) { // filtrage au mois
             $datdeb = date('Y-m-d H:i:s', mktime(0, 0, 0, $month, 1, $year)); // 1er du mois
             $datfin = date('Y-m-d H:i:s', mktime(23, 59, 59, $month, 31, $year)); // dernier du mois
         } else { // par défaut filtrage des 3 prochains mois
@@ -79,9 +79,9 @@ final class Controller
 
         $twig->assign('events', $events);
 
-        $twig->assign('year', ($year ? $year : date('Y')));
-        $twig->assign('month', ($month ? $month : date('m')));
-        $twig->assign('day', ($day ? $day : date('d')));
+        $twig->assign('year', ($year > 0 ? $year : date('Y')));
+        $twig->assign('month', ($month > 0 ? $month : date('m')));
+        $twig->assign('day', ($day > 0 ? $day : date('d')));
 
         return $twig->render('events/index.twig');
     }

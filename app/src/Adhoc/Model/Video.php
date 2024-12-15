@@ -463,8 +463,8 @@ class Video extends Media
      */
     public function unlinkGroupes(): bool
     {
-        foreach ($this->getGroupes as $groupe) {
-            $this->unlinkGroupe($groupe->getIdGroupe);
+        foreach ($this->getGroupes() as $groupe) {
+            $this->unlinkGroupe($groupe->getIdGroupe());
         }
         return true;
     }
@@ -544,7 +544,7 @@ class Video extends Media
      *
      * @param string $code code
      *
-     * @return array<string,string>|false
+     * @return array<string,mixed>|false
      */
     public static function parseStringForVideoUrl(string $code): array|false
     {

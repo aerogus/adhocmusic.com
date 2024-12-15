@@ -191,7 +191,6 @@ class Contact extends ObjectModel
                 return '`' . $item . '`';
             }, static::getDbPk());
             $sql .= 'ORDER BY ' . implode(', ', $pks) . ' ';
-
         }
 
         if ((isset($params['sort']) && (in_array($params['sort'], ['ASC', 'DESC'], true)))) {
