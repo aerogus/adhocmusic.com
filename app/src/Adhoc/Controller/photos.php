@@ -261,8 +261,7 @@ final class Controller
                                 ->setMaxHeight($confPhoto['max_height'])
                                 ->setDestFile(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg')
                                 ->write();
-                            Log::action(Log::ACTION_PHOTO_CREATE, (string) $photo->getIdPhoto());
-
+                            Log::info("Photo create " . $photo->getIdPhoto());
                             // les générations des thumbs à faire en asynchrone
                             foreach ($confPhoto['thumb_width'] as $maxWidth) {
                                 $photo->genThumb($maxWidth);
@@ -399,7 +398,7 @@ final class Controller
                 }
 
                 if ($photo->save()) {
-                    Log::action(Log::ACTION_PHOTO_EDIT, $photo->getIdPhoto());
+                    Log::info("Photo edit " . $photo->getIdPhoto());
                     Tools::redirect('/photos/my');
                 }
             } else {
@@ -463,7 +462,7 @@ final class Controller
 
         if (Tools::isSubmit('form-photo-delete')) {
             if ($photo->delete()) {
-                Log::action(Log::ACTION_PHOTO_DELETE, $photo->getIdPhoto());
+                Log::info("Photo delete " . $photo->getIdPhoto());
                 Tools::redirect('/photos/my');
             }
         }

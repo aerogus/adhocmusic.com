@@ -83,6 +83,14 @@ class Photo extends Media
     }
 
     /**
+     * @return int
+     */
+    public function getIdMedia(): int
+    {
+        return $this->getIdPhoto();
+    }
+
+    /**
      * @return string
      */
     public function getPseudo(): string

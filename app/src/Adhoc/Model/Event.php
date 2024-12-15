@@ -815,14 +815,14 @@ class Event extends ObjectModel
      */
     public function unlinkStyles(): bool
     {
-        $db = DataBase::getInstance();
+        $ess = EventStyle::find([
+            'id_event' => $this->getIdEvent(),
+        ]);
+        foreach ($ess as $es) {
+            $es->delete();
+        }
 
-        $sql = "DELETE FROM `" . self::$db_table_event_style . "` "
-             . "WHERE `id_event` = " . $this->getIdEvent();
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
+        return true;
     }
 
     /**
@@ -834,18 +834,12 @@ class Event extends ObjectModel
      */
     public function linkGroupe(int $id_groupe): bool
     {
-        $db = DataBase::getInstance();
+        $eg = EventGroupe::init();
+        $eg->setIdEvent($this->getIdEvent());
+        $eg->setIdGroupe($id_groupe);
+        $eg->save();
 
-        $sql = "INSERT INTO `" . self::$db_table_participe_a . "` "
-             . "(`id_event`, `id_groupe`) "
-             . "VALUES (" . $this->getIdEvent() . ", " . $id_groupe . ")";
-
-        try {
-            $stmt = $db->pdo->query($sql);
-            return (bool) $stmt->rowCount();
-        } catch (\Exception $e) {
-            return false;
-        }
+        return true;
     }
 
     /**
@@ -857,15 +851,13 @@ class Event extends ObjectModel
      */
     public function unlinkGroupe(int $id_groupe): bool
     {
-        $db = DataBase::getInstance();
+        $eg = EventGroupe::getInstance([
+            'id_event' => $this->getIdEvent(),
+            'id_groupe' => $id_groupe,
+        ]);
+        $eg->delete();
 
-        $sql = "DELETE FROM `" . self::$db_table_participe_a . "` "
-             . "WHERE `id_event` = " . $this->getIdEvent() . " "
-             . "AND `id_groupe` = " . $id_groupe;
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
+        return true;
     }
 
     /**
@@ -875,14 +867,14 @@ class Event extends ObjectModel
      */
     public function unlinkGroupes(): bool
     {
-        $db = DataBase::getInstance();
+        $egs = EventGroupe::find([
+            'id_event' => $this->getIdEvent(),
+        ]);
+        foreach ($egs as $eg) {
+            $eg->delete();
+        }
 
-        $sql = "DELETE FROM `" . self::$db_table_participe_a . "` "
-             . "WHERE `id_event` = " . $this->getIdEvent();
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
+        return true;
     }
 
     /**
@@ -894,18 +886,12 @@ class Event extends ObjectModel
      */
     public function linkStructure(int $id_structure): bool
     {
-        $db = DataBase::getInstance();
+        $es = EventStructure::init();
+        $es->setIdEvent($this->getIdEvent());
+        $es->setIdStructure($id_structure);
+        $es->save();
 
-        $sql = "INSERT INTO `" . self::$db_table_organise_par . "` "
-             . " (`id_event`, `id_structure`) "
-             . "VALUES (" . $this->getIdEvent() . ", " . $id_structure . ")";
-
-        try {
-            $stmt = $db->pdo->query($sql);
-            return (bool) $stmt->rowCount();
-        } catch (\Exception $e) {
-            return false;
-        }
+        return true;
     }
 
     /**
@@ -917,15 +903,13 @@ class Event extends ObjectModel
      */
     public function unlinkStructure(int $id_structure): bool
     {
-        $db = DataBase::getInstance();
+        $es = EventStructure::getInstance([
+            'id_event' => $this->getIdEvent(),
+            'id_structure' => $id_structure,
+        ]);
+        $es->delete();
 
-        $sql = "DELETE FROM `" . self::$db_table_organise_par . "` "
-             . "WHERE `id_event` = " . $this->getIdEvent() . " "
-             . "AND `id_structure` = " . $id_structure;
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
+        return true;
     }
 
     /**
@@ -948,14 +932,14 @@ class Event extends ObjectModel
      */
     public function unlinkStructures(): bool
     {
-        $db = DataBase::getInstance();
+        $ess = EventStructure::find([
+            'id_event' => $this->getIdEvent(),
+        ]);
+        foreach ($ess as $es) {
+            $es->delete();
+        }
 
-        $sql = "DELETE FROM `" . self::$db_table_organise_par . "` "
-             . "WHERE `id_event` = " . $this->getIdEvent();
-
-        $stmt = $db->pdo->query($sql);
-
-        return (bool) $stmt->rowCount();
+        return true;
     }
 
     /**

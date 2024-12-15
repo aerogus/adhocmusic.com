@@ -65,17 +65,17 @@ final class Controller
 
         switch ($type) {
             case 'g':
-                Log::action(Log::ACTION_ALERTING_GROUPE_SUB, (string) $id_content);
+                Log::info("Alerting sub groupe " . $id_content);
                 //Tools::redirect(Groupe::getInstance($id_content)->getUrl());
                 Tools::redirect($_SERVER['HTTP_REFERER']);
                 break;
             case 'l':
-                Log::action(Log::ACTION_ALERTING_LIEU_SUB, (string) $id_content);
+                Log::info("Alerting sub lieu " . $id_content);
                 //Tools::redirect(Lieu::getInstance($id_content)->getUrl());
                 Tools::redirect($_SERVER['HTTP_REFERER']);
                 break;
             case 'e':
-                Log::action(Log::ACTION_ALERTING_EVENT_SUB, (string) $id_content);
+                Log::info("Alerting sub event " . $id_content);
                 //Tools::redirect(Event::getInstance($id_content)->getUrl());
                 Tools::redirect($_SERVER['HTTP_REFERER']);
                 break;
@@ -101,17 +101,17 @@ final class Controller
 
         switch ($type) {
             case 'g':
-                Log::action(Log::ACTION_ALERTING_GROUPE_UNSUB, (string) $id_content);
+                Log::info("Alerting unsub groupe " . $id_content);
                 //Tools::redirect(Groupe::getInstance($id_content)->getUrl());
                 Tools::redirect($_SERVER['HTTP_REFERER']);
                 break;
             case 'l':
-                Log::action(Log::ACTION_ALERTING_LIEU_UNSUB, (string) $id_content);
+                Log::info("Alerting unsub lieu " . $id_content);
                 //Tools::redirect(Lieu::getInstance($id_content)->getUrl());
                 Tools::redirect($_SERVER['HTTP_REFERER']);
                 break;
             case 'e':
-                Log::action(Log::ACTION_ALERTING_EVENT_UNSUB, (string) $id_content);
+                Log::info("Alerting unsub event " . $id_content);
                 //Tools::redirect(Event::getInstance($id_content)->getUrl());
                 Tools::redirect($_SERVER['HTTP_REFERER']);
                 break;

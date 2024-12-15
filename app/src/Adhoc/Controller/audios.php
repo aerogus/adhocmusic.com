@@ -231,7 +231,7 @@ final class Controller
                     } else {
                         mail(DEBUG_EMAIL, 'bug audio create', 'bug audio create');
                     }
-                    Log::action(Log::ACTION_AUDIO_CREATE, $audio->getIdAudio());
+                    Log::info("Audio create " . $audio->getIdAudio());
                     Tools::redirect('/audios/my');
                 } else {
                     $twig->assign('error_generic', true);
@@ -349,7 +349,7 @@ final class Controller
                     ->setOnline($data['online']);
 
                 if ($audio->save()) {
-                    Log::action(Log::ACTION_AUDIO_EDIT, $audio->getIdAudio());
+                    Log::info("Audio edit " . $audio->getIdAudio());
                     Tools::redirect('/audios/my');
                 } else {
                     $twig->assign('error_generic', true);
@@ -421,7 +421,7 @@ final class Controller
 
         if (Tools::isSubmit('form-audio-delete')) {
             if ($audio->delete()) {
-                Log::action(Log::ACTION_AUDIO_DELETE, $audio->getIdAudio());
+                Log::info("Audio delete " . $audio->getIdAudio());
                 Tools::redirect('/audios/my');
             } else {
                 $errors['generic'] = true;

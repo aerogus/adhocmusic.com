@@ -99,7 +99,7 @@ final class Controller
         }
 
         if ($id_comment = $comment->save()) {
-            Log::action(Log::ACTION_COMMENT_CREATE, $comment->getText());
+            Log::info("Comment create " . $comment->getText());
             $comment->sendNotifs();
             Tools::redirect($_SERVER['HTTP_REFERER']);
             return 'OK : ' . $id_comment;
@@ -116,7 +116,7 @@ final class Controller
         Tools::auth(Membre::TYPE_ADMIN);
         $comment = Comment::getInstance($id);
         if ($comment->delete()) {
-            Log::action(Log::ACTION_COMMENT_DELETE, $comment->getIdComment());
+            Log::info("Commennt delete " . $comment->getIdComment());
             return 'OK';
         }
         return 'KO';
@@ -137,7 +137,7 @@ final class Controller
 
         if (Tools::isSubmit('form-comment-delete')) {
             if ($comment->delete()) {
-                Log::action(Log::ACTION_COMMENT_DELETE, $comment->getIdComment());
+                Log::info("Comment delete " . $comment->getIdComment());
                 Tools::redirect('/comments/?delete=1');
             }
         }

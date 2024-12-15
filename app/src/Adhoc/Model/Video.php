@@ -195,6 +195,14 @@ class Video extends Media
     /**
      * @return int
      */
+    public function getIdMedia(): int
+    {
+        return $this->getIdVideo();
+    }
+
+    /**
+     * @return int
+     */
     public function getIdHost(): int
     {
         return $this->id_host;

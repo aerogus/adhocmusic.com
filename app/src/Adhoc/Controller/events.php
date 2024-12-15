@@ -411,7 +411,7 @@ final class Controller
                         }
                     }
 
-                    Log::action(Log::ACTION_EVENT_CREATE, $event->getIdEvent());
+                    Log::info("Event create " . $event->getIdEvent());
 
                     if ((bool) Route::params('more-event')) {
                         Tools::redirect('/events/create?lieu=' . $event->getIdLieu());
@@ -612,7 +612,7 @@ final class Controller
 
                 $event->save(); // clear le cache après les liaisons externes
 
-                Log::action(Log::ACTION_EVENT_EDIT, $event->getIdEvent());
+                Log::info("Event edit " . $event->getIdEvent());
 
                 Tools::redirect('/events?edit=1&y=' . $year . '&m=' . $month . '&d=' . $day);
             } else {
@@ -690,7 +690,7 @@ final class Controller
 
         if (Tools::isSubmit('form-event-delete')) {
             if ($event->delete()) {
-                Log::action(Log::ACTION_EVENT_DELETE, $event->getIdEvent());
+                Log::info("Event delete " . $event->getIdEvent());
                 Tools::redirect('/events?delete=1');
             }
         }

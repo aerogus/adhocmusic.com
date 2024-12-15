@@ -303,7 +303,7 @@ final class Controller
                     $groupe->linkMember($_SESSION['membre']->getIdContact(), $data['id_type_musicien']);
                     $groupe->save();
 
-                    Log::action(Log::ACTION_GROUP_CREATE, $groupe->getAlias());
+                    Log::info("Groupe create " . $groupe->getAlias());
 
                     Tools::redirect('/groupes/my');
                 }
@@ -433,7 +433,7 @@ final class Controller
                         ->write();
                 }
 
-                Log::action(Log::ACTION_GROUP_EDIT, $groupe->getIdGroupe());
+                Log::info("Groupe edit " . $groupe->getIdGroupe());
 
                 Tools::redirect('/groupes/my');
             }
@@ -483,7 +483,7 @@ final class Controller
         if (Tools::isSubmit('form-groupe-delete')) {
             if ($can_delete) {
                 if ($groupe->delete()) {
-                    Log::action(Log::ACTION_GROUP_DELETE, $groupe->getIdGroupe());
+                    Log::info("Groupe delete " . $groupe->getIdGroupe());
                 }
                 Tools::redirect('/groupes/my?delete=1');
             }

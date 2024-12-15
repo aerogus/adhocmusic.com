@@ -312,7 +312,7 @@ final class Controller
                         ->write();
                 }
 
-                Log::action(Log::ACTION_LIEU_CREATE, $lieu->getIdLieu());
+                Log::info("Lieu create " . $lieu->getIdLieu());
 
                 Tools::redirect('/lieux/' . $lieu->getIdLieu() . '?create=1');
             } else {
@@ -422,7 +422,7 @@ final class Controller
                             ->write();
                     }
 
-                    Log::action(Log::ACTION_LIEU_EDIT, $lieu->getIdLieu());
+                    Log::info("Lieu edit " . $lieu->getIdLieu());
 
                     Tools::redirect('/lieux/' . $lieu->getIdLieu() . '?edit=1');
                 }
@@ -470,7 +470,7 @@ final class Controller
 
         if (Tools::isSubmit('form-lieu-delete')) {
             if ($lieu->delete()) {
-                Log::action(Log::ACTION_LIEU_DELETE, $lieu->getIdLieu());
+                Log::info("Lieu delete " . $lieu->getIdLieu());
                 Tools::redirect('/lieux?delete=1');
             }
         }

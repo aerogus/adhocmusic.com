@@ -75,6 +75,14 @@ class Audio extends Media
     }
 
     /**
+     * @return int
+     */
+    public function getIdMedia(): int
+    {
+        return $this->getIdAudio();
+    }
+
+    /**
      * @return string
      */
     public function getUrl(): string

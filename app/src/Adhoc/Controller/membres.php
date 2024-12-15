@@ -119,7 +119,7 @@ final class Controller
                     ->setLevel(Membre::TYPE_STANDARD);
 
                 if ($membre->save()) {
-                    Log::action(Log::ACTION_MEMBER_CREATE, $membre->getIdContact());
+                    Log::info("Création d'un compte membre: " . $membre->getIdContact());
                     if (Email::send($data['email'], "Inscription à l'association AD'HOC", 'member-create', $data)) {
                         Tools::redirect('/membres/create?create=1');
                     } else {
@@ -129,7 +129,7 @@ final class Controller
                     $errors['generic'] = true;
                 }
             } else {
-                Log::action(Log::ACTION_MEMBER_CREATE, print_r($data, true));
+                Log::error("Création d'un compte membre. " . print_r($data, true));
             }
 
             if (!empty($errors)) {
@@ -237,7 +237,7 @@ final class Controller
                         ->write();
                 }
 
-                Log::action(Log::ACTION_MEMBER_EDIT, $member->getIdContact());
+                Log::info("Édition d'un compte membre: " . $member->getIdContact());
 
                 $twig->assign('updated_ok', true);
             } else {
@@ -290,7 +290,7 @@ final class Controller
         if (Tools::isSubmit('form-member-delete')) {
             // effacement du membre
             if ($membre->delete()) {
-                Log::action(Log::ACTION_MEMBER_DELETE, $id);
+                Log::info("Suppression d'un membre: " . $id);
 
                 $membre->getContact()->delete();
 
@@ -370,7 +370,9 @@ final class Controller
         $inbox = $db->pdo->query($sql)->fetchAll();
         $twig->assign('inbox', $inbox);
 
-        $myAlerting = Alerting::find(['id_contact' => $_SESSION['membre']->getIdContact()]);
+        $myAlerting = Alerting::find([
+            'id_contact' => $_SESSION['membre']->getIdContact(),
+        ]);
         $myAlertingLieu = $myAlertingGroupe = $myAlertingEvent =  [];
         foreach ($myAlerting as $ma) {
             if ($ma->getIdLieu()) {

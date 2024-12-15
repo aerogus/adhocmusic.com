@@ -131,7 +131,7 @@ final class Controller
             ];
 
             // si identifié, préremplissage de certains champs
-            if (!empty($_SESSION['membre'])) {
+            if (!is_null($_SESSION['membre'])) {
                 if ($_SESSION['membre']->getFirstName() || $_SESSION['membre']->getLastName()) {
                     $data['name'] = $_SESSION['membre']->getFirstName() . ' ' . $_SESSION['membre']->getLastName()
                                   . ' (' . $_SESSION['membre']->getPseudo() . ')';
@@ -304,7 +304,7 @@ final class Controller
         $id = (int) Route::params('id');
         $cms = CMS::getInstance($id);
 
-        if ($cms->getAuth()) {
+        if (!is_null($cms->getAuth()) && ($cms->getAuth() > 0)) {
             Tools::auth(Membre::TYPE_INTERNE);
         }
 
@@ -346,18 +346,18 @@ final class Controller
     {
         $errors = [];
 
-        if (empty($data['name'])) {
+        if (strlen($data['name']) === 0) {
             $errors['name'] = "Vous devez renseigner votre nom";
         }
-        if (empty($data['email'])) {
+        if (strlen($data['email']) === 0) {
             $errors['email'] = "Vous devez préciser votre email";
         } elseif (!Email::validate($data['email'])) {
             $errors['email'] = "Votre email semble invalide ...";
         }
-        if (empty($data['subject'])) {
+        if (strlen($data['subject']) === 0) {
             $errors['subject'] = "Vous devez saisir un sujet";
         }
-        if (empty($data['text'])) {
+        if (strlen($data['text']) === 0) {
             $errors['text'] = "Vous devez écrire quelque chose !";
         } elseif (strlen($data['text']) < 8) {
             $errors['text'] = "Message un peu court !";

@@ -18,11 +18,11 @@ $medias = Photo::findAll();
 foreach ($medias as $media) {
     if (!is_null($media->getIdEvent())) {
         if (is_null($media->getIdLieu())) {
-            echo "[" . get_class($media) . " " . $media->getId() . "] event " . $media->getIdEvent() . " mais 0 lieu, zarb\n";
+            echo "[" . get_class($media) . " " . $media->getIdMedia() . "] event " . $media->getIdEvent() . " mais 0 lieu, zarb\n";
    //         $media->setIdLieu($media->getEvent()->getIdLieu())->save();
         } else {
             if ($media->getEvent()->getIdLieu() !== $media->getIdLieu()) {
-                echo "[" . get_class($media) . " " . $media->getId() . "] id_lieu = " . $media->getIdLieu() . " mais event::id_lieu = " . $media->getEvent()->getIdLieu() . ", zarb\n";
+                echo "[" . get_class($media) . " " . $media->getIdMedia() . "] id_lieu = " . $media->getIdLieu() . " mais event::id_lieu = " . $media->getEvent()->getIdLieu() . ", zarb\n";
      //           $media->setIdLieu($media->getEvent()->getIdLieu())->save();
             }
         }

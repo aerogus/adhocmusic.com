@@ -58,7 +58,7 @@ final class Controller
             $_POST['password'] = '********'; // sécu
 
             if (mb_strlen($pseudo) === 0 || mb_strlen($password) === 0) {
-                Log::action(Log::ACTION_LOGIN_FAILED, print_r($_POST, true));
+                Log::error('Login failed ' . print_r($_POST, true));
                 die;
             }
 
@@ -80,11 +80,11 @@ final class Controller
                     $url = '/membres/tableau-de-bord';
                 }
 
-                Log::action(Log::ACTION_LOGIN);
+                Log::info("Login OK");
 
                 Tools::redirect($url);
             } else {
-                Log::action(Log::ACTION_LOGIN_FAILED, print_r($_POST, true));
+                Log::error("Login KO");
 
                 Trail::getInstance()
                     ->addStep("Se connecter");
@@ -124,7 +124,7 @@ final class Controller
             }
             session_destroy();
 
-            Log::action(Log::ACTION_LOGOUT);
+            Log::info('Logout');
         }
 
         Tools::redirect('/?logout');
@@ -163,7 +163,7 @@ final class Controller
                         $membre->setPassword($password_new_1);
                         $membre->save();
                         $twig->assign('new_password', $password_new_1); // DEBUG ONLY
-                        Log::action(Log::ACTION_PASSWORD_CHANGED, $password_new_1);
+                        Log::success('Changement de mot de passe');
                         Email::send($membre->getContact()->getEmail(), 'Mot de passe modifié', 'password-changed', ['pseudo' => $membre->getPseudo()]);
                         $twig->assign('change_ok', true);
                     }
@@ -214,7 +214,7 @@ final class Controller
                     ];
 
                     if (Email::send($membre->getContact()->getEmail(), 'Perte du mot de passe', 'password-lost', $data)) {
-                        Log::action(Log::ACTION_PASSWORD_REQUESTED);
+                        Log::info('Password demandé');
                         $twig->assign('sent_ok', true);
                     } else {
                         $twig->assign('sent_ko', true);

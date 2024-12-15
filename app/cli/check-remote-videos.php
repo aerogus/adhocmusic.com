@@ -16,6 +16,6 @@ $videos = Video::findAll();
 
 foreach ($videos as $video) {
     $hdrs = get_headers($video->getEmbedUrl());
-    echo "Video " . $video->getId() . ": " . $hdrs[0] . " " . $video->getEmbedUrl() . "\n";
+    echo "Video " . $video->getIdVideo() . ": " . $hdrs[0] . " " . $video->getEmbedUrl() . "\n";
     usleep(UTEMPO);
 }

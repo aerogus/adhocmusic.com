@@ -132,7 +132,7 @@ final class Controller
             ];
 
             if (Email::send($dest->getContact()->getEmail(), "Vous avez reçu un message privé", 'message-received', $data)) {
-                Log::action(Log::ACTION_MESSAGE, (string) $to);
+                Log::info("Message privé envoyé à " . $to);
                 Tools::redirect('/messagerie/?sent=1');
             } else {
                 $twig->assign('error', "erreur envoi email");

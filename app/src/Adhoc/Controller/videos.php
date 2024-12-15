@@ -304,7 +304,7 @@ final class Controller
                     $video->genThumb($maxWidth);
                 }
 
-                Log::action(Log::ACTION_VIDEO_CREATE, $video->getIdVideo());
+                Log::info("Video create " . $video->getIdVideo());
 
                 Tools::redirect('/videos/my');
             } else {
@@ -437,7 +437,7 @@ final class Controller
                     }
                 }
 
-                Log::action(Log::ACTION_VIDEO_EDIT, $video->getIdVideo());
+                Log::info("Video edit " . $video->getIdVideo());
 
                 Tools::redirect('/videos/my');
             } else {
@@ -515,7 +515,7 @@ final class Controller
 
         if (Tools::isSubmit('form-video-delete')) {
             if ($video->delete()) {
-                Log::action(Log::ACTION_VIDEO_DELETE, $video->getIdVideo());
+                Log::info("Video delete " . $video->getIdVideo());
                 Tools::redirect('/videos/my');
             }
         }
