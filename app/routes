@@ -138,7 +138,6 @@ index|credits|GET|/credits
 index|mentionsLegales|GET|/mentions-legales
 index|cms|GET|/cms/:id
 index|r|GET|/r/:url
-index|onair|GET|/onair
 lieux|index|GET|/lieux
 lieux|my|GET|/lieux/my
 lieux|create|GET|/lieux/create

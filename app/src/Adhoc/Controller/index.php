@@ -275,26 +275,6 @@ final class Controller
     }
 
     /**
-     * Player vidéo HLS pour les événéments en direct
-     *
-     * @return string
-     */
-    public static function onair(): string
-    {
-        $twig = new AdHocTwig();
-
-        $twig->enqueueScript('/static/library/hls.js@1.5.18/hls.min.js');
-        $twig->enqueueScript('/js/onair.js');
-
-        $twig->enqueueScriptVar('videoSrc', 'https://live.adhocmusic.com/hls/onair.m3u8');
-
-        Trail::getInstance()
-            ->addStep("ON AIR");
-
-        return $twig->render('onair.twig');
-    }
-
-    /**
      * Page dynamique issu du CMS
      *
      * @return string
