@@ -23,7 +23,7 @@ final class Controller
     public static function auth(): string
     {
         // déjà authentifié
-        if (!empty($_SESSION['membre'])) {
+        if (isset($_SESSION['membre'])) {
             Tools::redirect('/membres/tableau-de-bord');
         }
 
@@ -48,7 +48,7 @@ final class Controller
     public static function login(): string
     {
         // déjà authentifié
-        if (!empty($_SESSION['membre'])) {
+        if (isset($_SESSION['membre'])) {
             Tools::redirect('/membres/tableau-de-bord');
         }
 
@@ -108,7 +108,7 @@ final class Controller
     public static function logout(): void
     {
         // si bien identifié, destruction de la session
-        if (!empty($_SESSION['membre'])) {
+        if (isset($_SESSION['membre'])) {
             $_SESSION = [];
             if (ini_get("session.use_cookies")) {
                 $params = session_get_cookie_params();

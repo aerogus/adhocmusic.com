@@ -28,9 +28,9 @@ class Subscription extends ObjectModel
     protected static string $table = 'adhoc_subscription';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_subscription = 0;
+    protected ?int $id_subscription = null;
 
     /**
      * @var ?string
@@ -94,6 +94,14 @@ class Subscription extends ObjectModel
         'cp' => 'string',
         'id_contact' => 'int',
     ];
+
+    /**
+     * @return ?int
+     */
+    public function getIdSubscription(): ?int
+    {
+        return $this->id_subscription;
+    }
 
     /**
      * Retourne la date de saise de la cotisation format YYYY-MM-DD HH:II:SS

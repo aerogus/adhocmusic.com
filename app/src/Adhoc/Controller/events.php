@@ -94,10 +94,10 @@ final class Controller
      */
     public static function ical(): string
     {
-        $id = (int) Route::params('id');
+        $id_event = (int) Route::params('id');
 
         try {
-            $event = Event::getInstance((int) $id);
+            $event = Event::getInstance($id_event);
         } catch (\Exception $e) {
             Route::setHttpCode(404);
             return 'not found';
@@ -125,13 +125,13 @@ final class Controller
      */
     public static function show(): string
     {
-        $id = (int) Route::params('id');
+        $id_event = (int) Route::params('id');
 
         $twig = new AdHocTwig();
 
         $twig->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
 
-        $twig->enqueueScript('/js/masonry-4.2.2.min.js');
+        $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
         $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
         $twig->enqueueScript('/js/baguetteBox-1.11.1.min.js');
 
@@ -141,7 +141,7 @@ final class Controller
             ->addStep('Agenda', '/events');
 
         try {
-            $event = Event::getInstance((int) $id);
+            $event = Event::getInstance($id_event);
             $trail->addStep($event->getName());
         } catch (\Exception $e) {
             Route::setHttpCode(404);
@@ -198,7 +198,7 @@ final class Controller
         $twig->assign('jour', Date::mysqlDatetime($event->getDate(), "d/m/Y"));
         $twig->assign('heure', Date::mysqlDatetime($event->getDate(), "H:i"));
 
-        if ($event->getIdContact()) {
+        if (!is_null($event->getIdContact())) {
             try {
                 // le membre peut avoir été supprimé ...
                 $membre = Membre::getInstance($event->getIdContact());
@@ -361,7 +361,7 @@ final class Controller
                     if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
                         $importFlyer = true;
                         $tmpName = $_FILES['flyer']['tmp_name'];
-                    } elseif ($data['flyer_url']) {
+                    } elseif (strlen($data['flyer_url']) > 0) {
                         if ($tmpContent = file_get_contents($data['flyer_url'])) {
                             $importFlyer = true;
                             $tmpName = tempnam('/tmp', 'import-flyer-event');
@@ -397,17 +397,15 @@ final class Controller
                         }
                     }
 
-                    foreach (Route::params('structure') as $id_structure) {
-                        $id_structure = (int) $id_structure;
-                        if ($id_structure !== 0) {
-                            $event->linkStructure($id_structure);
+                    foreach (Route::params('structure') as $_id_structure) {
+                        if (intval($_id_structure) !== 0) {
+                            $event->linkStructure(intval($_id_structure));
                         }
                     }
 
-                    foreach (Route::params('groupe') as $id_groupe) {
-                        $id_groupe = (int) $id_groupe;
-                        if ($id_groupe !== 0) {
-                            $event->linkGroupe($id_groupe);
+                    foreach (Route::params('groupe') as $_id_groupe) {
+                        if (intval($id_groupe) !== 0) {
+                            $event->linkGroupe(intval($id_groupe));
                         }
                     }
 
@@ -561,7 +559,7 @@ final class Controller
                 if (is_uploaded_file($_FILES['flyer']['tmp_name'])) {
                     $importFlyer = true;
                     $tmpName = $_FILES['flyer']['tmp_name'];
-                } elseif ($data['flyer_url']) {
+                } elseif (strlen($data['flyer_url']) > 0) {
                     if ($tmpContent = file_get_contents($data['flyer_url'])) {
                         $importFlyer = true;
                         $tmpName = tempnam('/tmp', 'import-flyer-event');
@@ -708,7 +706,7 @@ final class Controller
     {
         $id_lieu = (int) Route::params('l');
 
-        if (!$id_lieu) {
+        if ($id_lieu === 0) {
             return [];
         }
 

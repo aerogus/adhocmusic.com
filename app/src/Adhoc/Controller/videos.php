@@ -65,7 +65,7 @@ final class Controller
 
         $twig->assign('robots', 'noindex,nofollow');
 
-        $twig->enqueueScript('/js/masonry-4.2.2.min.js');
+        $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
         $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
         $twig->enqueueScript('/js/baguetteBox-1.11.1.min.js');
 
@@ -95,7 +95,7 @@ final class Controller
 
         $twig->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
 
-        $twig->enqueueScript('/js/masonry-4.2.2.min.js');
+        $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
         $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
         $twig->enqueueScript('/js/baguetteBox-1.11.1.min.js');
 

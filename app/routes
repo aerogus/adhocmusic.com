@@ -13,7 +13,6 @@ adm|membresDelete|POST|/adm/membres/delete
 adm|groupeDeStyle|GET|/adm/groupe-de-style
 adm|groupeDeStyle_id|GET|/adm/groupe-de-style/:id
 adm|groupeDeStyle|POST|/adm/groupe-de-style
-adm|logAction|GET|/adm/log-action
 adm|appartientA|GET|/adm/appartient-a
 adm|appartientA|POST|/adm/appartient-a
 adm_newsletter|index|GET|/adm/newsletter

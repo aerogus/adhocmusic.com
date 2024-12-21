@@ -51,7 +51,7 @@ final class Controller
         ]);
         $twig->assign('featured', $featured);
 
-        $twig->enqueueScript('/js/swipe.min.js');
+        $twig->enqueueScript('/static/library/swipe@2.0.0/swipe.min.js');
         $twig->enqueueScript('/js/featured.js');
 
         $_events = Event::find(
@@ -283,7 +283,7 @@ final class Controller
     {
         $twig = new AdHocTwig();
 
-        $twig->enqueueScript('/js/hls.min.js');
+        $twig->enqueueScript('/static/library/hls.js@1.5.18/hls.min.js');
         $twig->enqueueScript('/js/onair.js');
 
         $twig->enqueueScriptVar('videoSrc', 'https://live.adhocmusic.com/hls/onair.m3u8');

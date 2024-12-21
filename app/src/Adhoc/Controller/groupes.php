@@ -88,7 +88,7 @@ final class Controller
 
         $twig->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
 
-        $twig->enqueueScript('/js/masonry-4.2.2.min.js');
+        $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
         $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
         $twig->enqueueScript('/js/baguetteBox-1.11.1.min.js');
 
@@ -116,7 +116,7 @@ final class Controller
         $twig->assign('description', Tools::tronc($groupe->getMiniText(), 175));
         $twig->assign('og_type', 'band');
 
-        $twig->assign('is_loggued', !empty($_SESSION['membre']));
+        $twig->assign('is_loggued', !is_null($_SESSION['membre']));
 
         $twig->assign(
             'videos',
@@ -144,7 +144,7 @@ final class Controller
 
         $twig->assign('og_image', $groupe->getMiniPhoto());
 
-        if (!empty($_SESSION['membre'])) {
+        if (isset($_SESSION['membre'])) {
             if ($_SESSION['membre']->isInterne()) {
                 $twig->assign('show_mot_adhoc', true);
             }
@@ -247,9 +247,9 @@ final class Controller
                 'lineup'           => (string) Route::params('lineup'),
                 'mini_text'        => (string) Route::params('mini_text'),
                 'text'             => (string) Route::params('text'),
-                'site'             => Route::params('site') ? (string) Route::params('site') : null,
-                'facebook_page_id' => Route::params('facebook_page_id') ? (string) Route::params('facebook_page_id') : null,
-                'twitter_id'       => Route::params('twitter_id') ? (string) Route::params('twitter_id') : null,
+                'site'             => (bool) Route::params('site') ? (string) Route::params('site') : null,
+                'facebook_page_id' => (bool) Route::params('facebook_page_id') ? (string) Route::params('facebook_page_id') : null,
+                'twitter_id'       => (bool) Route::params('twitter_id') ? (string) Route::params('twitter_id') : null,
                 'id_type_musicien' => (int) Route::params('id_type_musicien'),
             ];
 
@@ -378,9 +378,9 @@ final class Controller
                 'lineup'           => (string) Route::params('lineup'),
                 'mini_text'        => (string) Route::params('mini_text'),
                 'text'             => (string) Route::params('text'),
-                'site'             => Route::params('site') ? (string) Route::params('site') : null,
-                'facebook_page_id' => Route::params('facebook_page_id') ? (string) Route::params('facebook_page_id') : null,
-                'twitter_id'       => Route::params('twitter_id') ? (string) Route::params('twitter_id') : null,
+                'site'             => (bool) Route::params('site') ? (string) Route::params('site') : null,
+                'facebook_page_id' => (bool) Route::params('facebook_page_id') ? (string) Route::params('facebook_page_id') : null,
+                'twitter_id'       => (bool) Route::params('twitter_id') ? (string) Route::params('twitter_id') : null,
                 'id_type_musicien' => (int) Route::params('id_type_musicien'),
             ];
 
@@ -401,7 +401,7 @@ final class Controller
 
                 $groupe->save();
 
-                $groupe->updateMember($_SESSION['membre']->getIdContact(), $data['id_type_musicien']);
+                // TODO refacto $groupe->updateMember($_SESSION['membre']->getIdContact(), $data['id_type_musicien']);
 
                 if (is_uploaded_file($_FILES['lelogo']['tmp_name'])) {
                     (new Image($_FILES['lelogo']['tmp_name']))
@@ -526,21 +526,33 @@ final class Controller
     {
         $errors = [];
 
-        if (empty($data['name'])) {
+        if (!isset($data['name'])) {
+            $errors['name'] = true;
+        } elseif (strlen($data['name']) === 0) {
             $errors['name'] = true;
         }
-        if (empty($data['style'])) {
+
+        if (!isset($data['style'])) {
+            $errors['style'] = true;
+        } elseif (strlen($data['style']) === 0) {
             $errors['style'] = true;
         }
-        if (empty($data['lineup'])) {
+
+        if (!isset($data['lineup'])) {
+            $errors['lineup'] = true;
+        } elseif (strlen($data['lineup']) === 0) {
             $errors['lineup'] = true;
         }
-        if (empty($data['mini_text'])) {
+
+        if (!isset($data['mini_text'])) {
             $errors['mini_text'] = true;
         } elseif (mb_strlen($data['mini_text']) > 255) {
             $errors['mini_text'] = true;
         }
-        if (empty($data['text'])) {
+
+        if (!isset($data['text'])) {
+            $errors['text'] = true;
+        } elseif (strlen($data['text']) === 0) {
             $errors['text'] = true;
         }
 
@@ -558,18 +570,27 @@ final class Controller
     {
         $errors = [];
 
-        if (empty($data['style'])) {
+        if (!isset($data['style'])) {
+            $errors['style'] = true;
+        } elseif (strlen($data['style']) === 0) {
             $errors['style'] = true;
         }
-        if (empty($data['lineup'])) {
+
+        if (!isset($data['lineup'])) {
+            $errors['lineup'] = true;
+        } elseif (strlen($data['lineup']) === 0) {
             $errors['lineup'] = true;
         }
-        if (empty($data['mini_text'])) {
+
+        if (!isset($data['mini_text'])) {
             $errors['mini_text'] = true;
         } elseif (mb_strlen($data['mini_text']) > 255) {
             $errors['mini_text'] = true;
         }
-        if (empty($data['text'])) {
+
+        if (!isset($data['text'])) {
+            $errors['text'] = true;
+        } elseif (strlen($data['text']) === 0) {
             $errors['text'] = true;
         }
 

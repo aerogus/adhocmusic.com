@@ -18,21 +18,21 @@ $conf = Conf::getInstance();
 
 $scheduler = [
     'photo' => [
-        'process' => isset($_ENV['photo_process']) ? $_ENV['photo_process'] : false,
-        'erase' => isset($_ENV['photo_erase']) ? $_ENV['photo_erase'] : false,
-        'create' => isset($_ENV['photo_create']) ? $_ENV['photo_create'] : false,
+        'process' => boolval($_ENV['photo_process'] ?? false),
+        'erase' => boolval($_ENV['photo_erase'] ?? false),
+        'create' => boolval($_ENV['photo_create'] ?? false),
         'widths' => $conf->get('photo')['thumb_width']
     ],
     'video' => [
-        'process' => isset($_ENV['video_process']) ? $_ENV['video_process'] : false,
-        'erase' => isset($_ENV['video_erase']) ? $_ENV['video_erase'] : false,
-        'create' => isset($_ENV['video_create']) ? $_ENV['video_create'] : false,
+        'process' => boolval($_ENV['video_process'] ?? false),
+        'erase' => boolval($_ENV['video_erase'] ?? false),
+        'create' => boolval($_ENV['video_create'] ?? false),
         'widths' => $conf->get('video')['thumb_width'],
     ],
     'event' => [
-        'process' => isset($_ENV['event_process']) ? $_ENV['event_process'] : false,
-        'erase' => isset($_ENV['event_erase']) ? $_ENV['event_erase'] : false,
-        'create' => isset($_ENV['event_create']) ? $_ENV['event_create'] : false,
+        'process' => boolval($_ENV['event_process'] ?? false),
+        'erase' => boolval($_ENV['event_erase'] ?? false),
+        'create' => boolval($_ENV['event_create'] ?? false),
         'widths' => $conf->get('event')['thumb_width'],
     ],
 ];

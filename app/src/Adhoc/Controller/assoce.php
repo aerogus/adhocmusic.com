@@ -35,7 +35,7 @@ final class Controller
 
         Trail::getInstance()->addStep("Concerts");
 
-        $twig->enqueueScript('/js/masonry-4.2.2.min.js');
+        $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
         $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
 
         $twig->enqueueScript('/js/assoce-concerts.js');
@@ -89,7 +89,7 @@ final class Controller
             ];
 
             // si identifié, préremplissage de certains champs
-            if (!empty($_SESSION['membre'])) {
+            if (isset($_SESSION['membre'])) {
                 if ($_SESSION['membre']->getFirstName() || $_SESSION['membre']->getLastName()) {
                     $data['name'] = $_SESSION['membre']->getFirstName() . ' ' . $_SESSION['membre']->getLastName() . ' (' . $_SESSION['membre']->getPseudo() . ')';
                 } else {

@@ -51,7 +51,7 @@ final class Controller
             )
         );
 
-        $twig->enqueueScript('/js/swipe.min.js');
+        $twig->enqueueScript('/static/library/swipe@2.0.0/swipe.min.js');
         $twig->enqueueScript('/js/featured.js');
 
         return $twig->render('adm/featured/index.twig');

@@ -343,25 +343,6 @@ final class Controller
     /**
      * @return string
      */
-    public static function logAction(): string
-    {
-        Tools::auth(Membre::TYPE_INTERNE);
-
-        $action = (int) Route::params('action');
-
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Log Action");
-
-        $twig = new AdHocTwig();
-        $twig->assign('actions', Log::getActions());
-        $twig->assign('logs', Log::getLogsAction($action));
-        return $twig->render('adm/log-action.twig');
-    }
-
-    /**
-     * @return string
-     */
     public static function deleteAccount(): string
     {
         Tools::auth(Membre::TYPE_ADMIN);

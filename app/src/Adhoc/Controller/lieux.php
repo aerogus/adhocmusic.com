@@ -135,7 +135,7 @@ final class Controller
         $twig->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
         $twig->enqueueStyle('/static/library/leaflet@1.9.4/leaflet.min.css');
 
-        $twig->enqueueScript('/js/masonry-4.2.2.min.js');
+        $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
         $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
         $twig->enqueueScript('/js/baguetteBox-1.11.1.min.js');
         $twig->enqueueScript('/static/library/leaflet@1.9.4/leaflet.min.js');
@@ -484,26 +484,17 @@ final class Controller
     public static function fetch(): array
     {
         $mode  = (string) Route::params('mode'); // radius|boundary|admin
-        $lat   = (float) Route::params('lat');
-        $lng   = (float) Route::params('lng');
-        if (!$lat) {
-            $lat = $_SESSION['lat'];
-        }
-        if ($lng) {
-            $lng = $_SESSION['lng'];
-        }
-        $limit = (int) Route::params('limit');
-        if (!$limit) {
-            $limit = 20;
-        }
+        $lat   = Route::params('lat') ?? $_SESSION['lat'] ?? null;
+        $lng   = Route::params('lng') ?? $_SESSION['lng'] ?? null;
+        $limit = (bool) Route::params('limit') ? intval(Route::params('limit')) : 20;
 
         switch ($mode) {
             case 'radius':
                 $distance = (int) Route::params('distance');
                 return Lieu::fetchLieuxByRadius(
                     [
-                        'lat'      => $lat,
-                        'lng'      => $lng,
+                        'lat'      => floatval($lat),
+                        'lng'      => floatval($lng),
                         'distance' => $distance,
                         'order'    => 'distance',
                         'limit'    => $limit,
@@ -516,7 +507,7 @@ final class Controller
                 $lng_min = (float) Route::params('lng_min');
                 $lng_max = (float) Route::params('lng_max');
                 $points  = (string) Route::params('points');
-                if ($points) {
+                if (strlen($points) > 0) {
                     list($lat_min, $lng_min, $lat_max, $lng_max) = explode(',', $points);
                     if ($lat_min > $lat_max) {
                         $lat_tmp = $lat_max;
@@ -572,7 +563,9 @@ final class Controller
     {
         $errors = [];
 
-        if (empty($data['name'])) {
+        if (!isset($data['name'])) {
+            $errors['name'] = true;
+        } elseif (strlen($data['name']) === 0) {
             $errors['name'] = true;
         }
 
