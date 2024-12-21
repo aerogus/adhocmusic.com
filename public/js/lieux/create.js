@@ -1,11 +1,11 @@
-/*globals jQuery*/
+/* global document, jQuery */
 
 jQuery(document).ready(function ($) {
 
   'use strict';
 
   $('#form-lieu-create').submit(function () {
-    var valid = true;
+    let valid = true;
     if ($('#name').val() === '') {
       $('#name').prev('.error').fadeIn();
       valid = false;

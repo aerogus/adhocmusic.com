@@ -1,11 +1,11 @@
-/* globals document, jQuery */
+/* global document, jQuery */
 
 jQuery(document).ready(function ($) {
 
   'use strict';
 
   $('#code').blur(function () {
-    var code = $('#code').val();
+    let code = $('#code').val();
     $.getJSON('/videos/get-meta.json', {
       code: code
     }, function (data) {
@@ -23,7 +23,7 @@ jQuery(document).ready(function ($) {
   });
 
   $('#id_lieu').change(function () {
-    var id_lieu = $('#id_lieu').val();
+    let id_lieu = $('#id_lieu').val();
     $('#id_event').empty();
     $('<option value="0">---</option>').appendTo('#id_event');
     $.getJSON('/events/get-events-by-lieu.json', {
@@ -36,7 +36,7 @@ jQuery(document).ready(function ($) {
   });
 
   $('#form-video-create').submit(function () {
-    var valid = true;
+    let valid = true;
     if ($('#name').val().length === 0) {
       $('#name').prev('.error').fadeIn();
       valid = false;

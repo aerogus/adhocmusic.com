@@ -1,11 +1,11 @@
-/*global jQuery*/
+/* global document, jQuery */
 
 jQuery(document).ready(function ($) {
 
   'use strict';
 
   $('#form-groupe-create').submit(function () {
-    var valid = true;
+    let valid = true;
     if ($('#name').val().length === 0) {
       $('#error_name').fadeIn();
       valid = false;

@@ -1,4 +1,4 @@
-/*global jQuery*/
+/* global document, jQuery */
 
 jQuery(document).ready(function ($) {
 
@@ -8,10 +8,10 @@ jQuery(document).ready(function ($) {
 
     $('#sablier').show();
     event.preventDefault();
-    var checked = $(this).find('input:checked');
-    var ids = checked.map(function() {
-      var id = this.id.replace('com-del-', '');
-      $.post('/comments/ajax-delete', { id: id }, function (data) {
+    let checked = $(this).find('input:checked');
+    checked.map(function() {
+      let id = this.id.replace('com-del-', '');
+      $.post('/comments/ajax-delete', { id: id }, function () {
         $('#row-' + id).hide();
       });
     });

@@ -1,4 +1,4 @@
-/*globals jQuery, validateEmail */
+/* global document, jQuery, validateEmail */
 
 jQuery(document).ready(function ($) {
 
@@ -11,7 +11,7 @@ jQuery(document).ready(function ($) {
     $('#error_already_member').fadeOut();
     if ($(this).val().length > 3) {
       // check existence email
-      var email = $('#email').val();
+      let email = $('#email').val();
       $.getJSON('/auth/check-email.json', {
         email: email
       }, function (data) {
@@ -37,7 +37,7 @@ jQuery(document).ready(function ($) {
     $('#error_pseudo_unavailable').fadeOut();
     if ($(this).val().length > 1) {
       // check dispo du pseudo
-      var pseudo = $('#pseudo').val();
+      let pseudo = $('#pseudo').val();
       $.getJSON('/auth/check-pseudo.json', {
         pseudo: pseudo
       }, function (data) {
@@ -55,7 +55,7 @@ jQuery(document).ready(function ($) {
   });
 
   $('#form-member-create').submit(function () {
-    var validate = true;
+    let validate = true;
     if ($('#email').val().length === 0 || validateEmail($('#email').val()) === 0) {
       $('#email').prev('.error').fadeIn();
       validate = false;

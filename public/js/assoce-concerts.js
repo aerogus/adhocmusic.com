@@ -1,21 +1,21 @@
-/*globals jQuery,Masonry,imagesLoaded*/
+/* global document, jQuery, Masonry, imagesLoaded */
 
 jQuery(document).ready(function () {
 
   'use strict';
 
-  var galleries = document.getElementsByClassName('gallery');
-  var msnry;
+  let galleries = document.getElementsByClassName('gallery');
+  let msnry;
 
   if (galleries.length > 0) {
 
-    var options = {
+    let options = {
       itemSelector: '.photo',
       fitWidth: true,
       gutter: 20
     };
 
-    for (var i = 0; i < galleries.length; i++) {
+    for (let i = 0; i < galleries.length; i++) {
       let gallery_id = '#' + galleries[i].id;
       imagesLoaded(document.querySelector(gallery_id), function () {
         msnry = new Masonry(gallery_id, options);

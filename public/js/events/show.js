@@ -1,4 +1,4 @@
-/*globals jQuery,Masonry,imagesLoaded,baguetteBox*/
+/* global document, jQuery, Masonry, imagesLoaded, baguetteBox */
 
 jQuery(document).ready(function () {
 

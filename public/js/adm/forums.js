@@ -1,11 +1,11 @@
-/*globals jQuery*/
+/* global document, jQuery */
 
 jQuery(document).ready(function ($) {
 
   'use strict';
 
   $('.toggle').hover(function () {
-    var toggle_id = $(this).attr('id').replace('toggle_', '');
+    let toggle_id = $(this).attr('id').replace('toggle_', '');
     $('#msg_' + toggle_id).toggle();
   });
   $('.thread-avatar').hover(function () {

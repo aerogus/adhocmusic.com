@@ -1,11 +1,11 @@
-/*globals jQuery, validateEmail*/
+/* global document, jQuery, validateEmail */
 
 jQuery(document).ready(function ($) {
 
   'use strict';
 
   $('#form-member-edit').submit(function () {
-    var valid = true;
+    let valid = true;
     if ($('#id_city').val().length === 0) {
       $('#id_city').prev('.error').fadeIn();
       valid = false;

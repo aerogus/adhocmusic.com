@@ -1,11 +1,11 @@
-/*global jQuery*/
+/* global document jQuery */
 
 jQuery(document).ready(function ($) {
 
   'use strict';
 
   $('#form-password-change').submit(function () {
-    var valid = true;
+    let valid = true;
     if ($('#password_old').val().length === 0) {
       $('#error_password_old').fadeIn();
       valid = false;

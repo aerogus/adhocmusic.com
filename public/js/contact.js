@@ -1,4 +1,4 @@
-/*global jQuery,validateEmail*/
+/* global document, jQuery, validateEmail */
 
 jQuery(document).ready(function ($) {
 
@@ -7,7 +7,7 @@ jQuery(document).ready(function ($) {
   $('#check').val($('#form-contact-submit').data('check'));
 
   $('#form-contact').submit(function () {
-    var valid = true;
+    let valid = true;
     if ($('#name').val().length === 0) {
       $('#error_name').fadeIn();
       valid = false;
@@ -37,7 +37,6 @@ jQuery(document).ready(function ($) {
 
   $('.faq p').hide();
   $('.faq h3').click((event) => {
-    console.log('click');
     let arrow = $(event.currentTarget).find('i');
     let answer = $(event.currentTarget).parent().find('p');
     if (arrow.hasClass('icon-arrow--right')) {

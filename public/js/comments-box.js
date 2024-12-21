@@ -1,4 +1,4 @@
-/*globals jQuery, adhoc*/
+/* global document, jQuery, adhoc */
 
 jQuery(document).ready(function ($) {
 
@@ -6,7 +6,7 @@ jQuery(document).ready(function ($) {
 
   $('#form-comment-box-write').submit(function () {
 
-    var valid = true;
+    let valid = true;
 
     if (!adhoc.is_auth) {
       if ($('#form-comment-box-pseudo').val().length === 0) {

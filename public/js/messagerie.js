@@ -1,12 +1,12 @@
-/*global jQuery*/
+/* global document, jQuery, location, XMLHttpRequest */
 
 jQuery(document).ready(function ($) {
 
   'use strict';
 
   function deleteMessage(id, mode) {
-    var params = 'mode=' + mode + '&id=' + id;
-    var xhr = new XMLHttpRequest();
+    let params = 'mode=' + mode + '&id=' + id;
+    let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 0)) {
         location.reload(true);
@@ -29,7 +29,7 @@ jQuery(document).ready(function ($) {
   });
 
   $('#form-message-write').submit(function () {
-    var valid = true;
+    let valid = true;
     if ($('#text').val().length === 0) {
       $('#text').prev('.error').fadeIn();
       valid = false;

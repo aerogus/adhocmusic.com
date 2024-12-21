@@ -1,3 +1,5 @@
+/* global document, jQuery */
+
 $(function() {
 
   $("#photofull").noContext();

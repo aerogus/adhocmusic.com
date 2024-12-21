@@ -8,7 +8,7 @@ var adhoc = {
   },
 
   menu: function () {
-    var menuSelected = false;
+    let menuSelected = false;
     $('#btn-burger').click(function() {
       if (!menuSelected) {
         $(this).addClass('selected');
@@ -23,7 +23,7 @@ var adhoc = {
   },
 
   scrollToTop: function () {
-    var toUp = $('#up');
+    let toUp = $('#up');
 
     toUp.click(function () {
       adhoc.autoScroll();
@@ -52,17 +52,8 @@ var adhoc = {
 };
 
 function validateEmail(email) {
-  var re = /\S+@\S+\.\S+/;
+  let re = /\S+@\S+\.\S+/;
   return re.test(email);
-}
-
-function toggleDiv(id) {
-  var div = document.getElementById(id);
-  if (div.style.display === 'none') {
-    div.style.display = 'block';
-  } else {
-    div.style.display = 'none';
-  }
 }
 
 jQuery(document).ready(function ($) {

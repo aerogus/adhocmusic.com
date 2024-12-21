@@ -1,4 +1,4 @@
-/*global jQuery,validateEmail*/
+/* global document, jQuery, validateEmail */
 
 jQuery(document).ready(function ($) {
 
@@ -7,7 +7,7 @@ jQuery(document).ready(function ($) {
   $('#check').val($('#form-afterworks-submit').data('check'));
 
   $('#form-afterworks').submit(function () {
-    var valid = true;
+    let valid = true;
     if ($('#name').val().length === 0) {
       $('#error_name').fadeIn();
       valid = false;

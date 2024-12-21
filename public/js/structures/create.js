@@ -1,11 +1,11 @@
-/*globals jQuery*/
+/* global document, jQuery */
 
 jQuery(document).ready(function ($) {
 
   'use strict';
 
   $('#form-structure-create').submit(function () {
-    var valid = true;
+    let valid = true;
     if ($('#name').val().length === 0) {
       $('#name').prev('.error').fadeIn();
       valid = false;

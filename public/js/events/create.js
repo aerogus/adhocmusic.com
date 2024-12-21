@@ -1,4 +1,4 @@
-/*globals jQuery*/
+/* global document, jQuery */
 
 jQuery(document).ready(function ($) {
 
@@ -10,7 +10,7 @@ jQuery(document).ready(function ($) {
   });
 
   $('#form-event-create').submit(function () {
-    var valid = true;
+    let valid = true;
     if ($('#name').val().length === 0) {
       $('#error_name').fadeIn();
       valid = false;

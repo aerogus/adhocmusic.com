@@ -1,4 +1,4 @@
-/*global jQuery*/
+/* global document, jQuery, Swipe */
 
 jQuery(document).ready(function ($) {
 
@@ -6,14 +6,14 @@ jQuery(document).ready(function ($) {
 
   $('.swipe-pagination li:first-child').addClass('on');
 
-  var swipe = Swipe(document.getElementById('swipe'), {
+  let swipe = Swipe(document.getElementById('swipe'), {
     startSlide: 0,
     speed: 100,
     auto: 3000,
     continuous: true,
     disableScroll: false,
     stopPropagation: false,
-    callback: function (idx, elem) {
+    callback: function (idx) {
       $('.swipe-pagination li')
         .removeClass('on')
         .filter('[data-index="' + idx + '"]')

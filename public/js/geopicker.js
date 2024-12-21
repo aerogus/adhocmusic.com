@@ -9,7 +9,7 @@
  * utilisé dans création/modif d'un membre, d'un lieu, d'un événement
  */
 
-/*globals jQuery,asv*/
+/* global document, jQuery, asv */
 
 jQuery(document).ready(function ($) {
 
@@ -39,7 +39,7 @@ jQuery(document).ready(function ($) {
    * la sélection du pays charge la liste des régions
    */
   $('#id_country').change(function () {
-    var id_country = $(this).find('option:selected').val();
+    let id_country = $(this).find('option:selected').val();
     $.getJSON('/geo/regions/' + id_country + '.json', function (data) {
       $('#id_region, #id_departement, #id_city, #id_lieu').empty();
       $.each(data, function (region_id, region_name) {
@@ -65,8 +65,8 @@ jQuery(document).ready(function ($) {
    * la sélection de la région charge la liste des départements
    */
   $('#id_region').change(function () {
-    var id_country = $('#id_country').find('option:selected').val();
-    var id_region = $(this).find('option:selected').val();
+    let id_country = $('#id_country').find('option:selected').val();
+    let id_region = $(this).find('option:selected').val();
     if (id_country === 'FR') {
       $.getJSON('/geo/departements.json', {
         r: id_region
@@ -91,8 +91,8 @@ jQuery(document).ready(function ($) {
    * la sélection du département charge la liste des villes
    */
   $('#id_departement').change(function () {
-    var id_country = $('#id_country').find('option:selected').val();
-    var id_departement = $(this).find('option:selected').val();
+    let id_country = $('#id_country').find('option:selected').val();
+    let id_departement = $(this).find('option:selected').val();
     if (id_country === 'FR') {
       $.getJSON('/geo/cities.json', {
         d: id_departement
@@ -116,7 +116,7 @@ jQuery(document).ready(function ($) {
    * la sélection de la ville charge la liste des lieux de la ville
    */
   $('#id_city').change(function () {
-    var id_city = $(this).find('option:selected').val();
+    let id_city = $(this).find('option:selected').val();
     $.getJSON('/geo/lieux.json', {
       v: id_city
     }, function (data) {

@@ -1,4 +1,4 @@
-/*globals jQuery*/
+/* global document, jQuery */
 
 jQuery(document).ready(function ($) {
 
@@ -9,7 +9,7 @@ jQuery(document).ready(function ($) {
   });
 
   $('#id_lieu').change(function () {
-    var id_lieu = $('#id_lieu').val();
+    let id_lieu = $('#id_lieu').val();
     $('#id_event').empty();
     $('<option value="0">---</option>').appendTo('#id_event');
     $.getJSON('/events/get-events-by-lieu.json', {
@@ -22,7 +22,7 @@ jQuery(document).ready(function ($) {
   });
 
   $('#form-audio-create').submit(function () {
-    var valid = true;
+    let valid = true;
     if($('#file').val().length === 0) {
       $('#file').parent().find('.error').fadeIn();
       valid = false;

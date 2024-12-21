@@ -1,4 +1,4 @@
-/*globals jQuery, CodeMirror*/
+/* global console, document, jQuery, CodeMirror, FormData */
 
 jQuery(document).ready(function ($) {
 
@@ -10,14 +10,14 @@ jQuery(document).ready(function ($) {
   });
 
   $('#form-newsletter-edit-upload').submit(function () {
-    var formData = new FormData(document.getElementById('form-newsletter-edit-upload'));
+    let formData = new FormData(document.getElementById('form-newsletter-edit-upload'));
     $.ajax({
       type: 'POST',
       url: '/adm/newsletter/upload',
       data: formData,
       processData: false,
       contentType: false,
-      success: function(data) {
+      success: function (data) {
         console.log('success ' + data);
       }
     });

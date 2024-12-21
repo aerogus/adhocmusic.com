@@ -1,4 +1,4 @@
-/* globals document jQuery */
+/* global document jQuery */
 
 jQuery(document).ready(function ($) {
 
@@ -10,7 +10,7 @@ jQuery(document).ready(function ($) {
   });
 
   $('#form-featured-create, #form-featured-edit').submit(function () {
-    var valid = true;
+    let valid = true;
     if ($('#title').val().length === 0) {
       $('#error_title').fadeIn();
       valid = false;

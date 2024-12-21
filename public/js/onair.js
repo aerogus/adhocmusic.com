@@ -1,8 +1,8 @@
-/*global asv*/
+/* global asv, document, Hls */
 
-var video = document.getElementById('video');
+let video = document.getElementById('video');
 if (Hls.isSupported()) {
-  var hls = new Hls();
+  let hls = new Hls();
   hls.loadSource(asv.videoSrc);
   hls.attachMedia(video);
   hls.on(Hls.Events.MANIFEST_PARSED, function() {

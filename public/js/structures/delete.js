@@ -1,11 +1,11 @@
-/*globals jQuery*/
+/* global document, jQuery */
 
 jQuery(document).ready(function ($) {
 
   'use strict';
 
   $('#form-structure-delete').submit(function () {
-    var valid = true;
+    let valid = true;
     return valid;
   });
 

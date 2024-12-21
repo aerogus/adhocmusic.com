@@ -1,11 +1,11 @@
-/*global jQuery*/
+/* global document, jQuery */
 
 jQuery(document).ready(function ($) {
 
   'use strict';
 
   $('#form-login').submit(function () {
-    var valid = true;
+    let valid = true;
     if (!$('#login-pseudo').val().length) {
       $('#login-pseudo').prev('.error').fadeIn();
       valid = false;
