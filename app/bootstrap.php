@@ -8,13 +8,13 @@
 
 declare(strict_types=1);
 
+use Adhoc\Utils\Log;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Tools;
 
 define('ADHOC_ROOT_PATH', dirname(__DIR__));
 define('ADHOC_LIB_PATH', ADHOC_ROOT_PATH . '/models');
 define('ADHOC_ROUTES_FILE', ADHOC_ROOT_PATH . '/app/routes');
-define('LOG_PATH', ADHOC_ROOT_PATH . '/log');
 define('DEFAULT_CONTROLLERS_PATH', ADHOC_ROOT_PATH . '/app/src/Adhoc/Controller/');
 define('MEDIA_PATH', ADHOC_ROOT_PATH . '/static/media');
 
@@ -42,6 +42,9 @@ function autoload(string $className): void
     }
 }
 spl_autoload_register('autoload');
+
+define('LOG_PATH', ADHOC_ROOT_PATH . '/log');
+Log::$PATH = LOG_PATH;
 
 /**
  * Chargement automatique des paquets gérés par composer
