@@ -309,7 +309,7 @@ final class Controller
                 }
             }
 
-            if (!empty($errors)) {
+            if (count($errors) > 0) {
                 foreach ($errors as $k => $v) {
                     $twig->assign('error_' . $k, $v);
                 }
@@ -438,7 +438,7 @@ final class Controller
                 Tools::redirect('/groupes/my');
             }
 
-            if (!empty($errors)) {
+            if (count($errors) > 0) {
                 foreach ($errors as $k => $v) {
                     $twig->assign('error_' . $k, $v);
                 }

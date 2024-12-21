@@ -399,18 +399,13 @@ class Video extends Media
     /**
      * Retourne un tableau des groupes liés à cette vidéo
      *
-     * @param ?int $idx
-     *
-     * @return array<Groupe>|Groupe
+     * @return array<Groupe>
      */
-    public function getGroupes(?int $idx = null): array|Groupe
+    public function getGroupes(): array
     {
         $groupes = Groupe::find([
             'id_video' => $this->getIdVideo(),
         ]);
-        if (!is_null($idx) && array_key_exists($idx, $groupes)) {
-            return $groupes[$idx];
-        }
         return $groupes;
     }
 
@@ -556,21 +551,23 @@ class Video extends Media
         // 1 - on essaye d'abord toutes les formes d'embed qu'on connait
 
         // YouTube
-        if (preg_match(MEDIA_YOUTUBE_EMBED_PATTERN, $str, $matches)) {
-            if (strlen($matches[2]) > 0) {
-                return ['id_host' => self::HOST_YOUTUBE, 'reference' => $matches[2]];
-            }
+        if (preg_match(MEDIA_YOUTUBE_EMBED_PATTERN, $str, $matches) === 1) {
+            return [
+                'id_host' => self::HOST_YOUTUBE,
+                'reference' => $matches[2],
+            ];
         }
 
         // DailyMotion
-        if (preg_match(MEDIA_DAILYMOTION_EMBED_PATTERN, $str, $matches)) {
-            if (strlen($matches[3]) > 0) {
-                return ['id_host' => self::HOST_DAILYMOTION, 'reference' => $matches[3]];
-            }
+        if (preg_match(MEDIA_DAILYMOTION_EMBED_PATTERN, $str, $matches) === 1) {
+            return [
+                'id_host' => self::HOST_DAILYMOTION,
+                'reference' => $matches[3],
+            ];
         }
 
         // avant de commencer les urls, si jamais ya pas de http:// devant, on le rajoute
-        if (strpos($str, 'http://') === false && strpos($str, 'https://') === false) {
+        if ((strpos($str, 'http://') === false) && (strpos($str, 'https://') === false)) {
             $str = 'https://' . $str;
         }
 
@@ -578,52 +575,59 @@ class Video extends Media
         // celles des videos elles memes.
 
         // YouTube
-        if (preg_match(MEDIA_YOUTUBE_URL_PATTERN, $str, $matches)) {
-            if (isset($matches[2])) {
-                return ['id_host' => self::HOST_YOUTUBE, 'reference' => $matches[2]];
-            }
+        if (preg_match(MEDIA_YOUTUBE_URL_PATTERN, $str, $matches) === 1) {
+            return [
+                'id_host' => self::HOST_YOUTUBE,
+                'reference' => $matches[2],
+            ];
         }
 
         // YouTube
-        if (preg_match(MEDIA_YOUTUBE_DIRECT_VIDEO_URL_PATTERN, $str, $matches)) {
-            if (isset($matches[2])) {
-                return ['id_host' => self::HOST_YOUTUBE, 'reference' => $matches[2]];
-            }
+        if (preg_match(MEDIA_YOUTUBE_DIRECT_VIDEO_URL_PATTERN, $str, $matches) === 1) {
+            return [
+                'id_host' => self::HOST_YOUTUBE,
+                'reference' => $matches[2],
+            ];
         }
 
         // DailyMotion
-        if (preg_match(MEDIA_DAILYMOTION_DIRECT_VIDEO_URL_PATTERN, $str, $matches)) {
-            if (isset($matches[3])) {
-                return ['id_host' => self::HOST_DAILYMOTION, 'reference' => $matches[3]];
-            }
+        if (preg_match(MEDIA_DAILYMOTION_DIRECT_VIDEO_URL_PATTERN, $str, $matches) === 1) {
+            return [
+                'id_host' => self::HOST_DAILYMOTION,
+                'reference' => $matches[3],
+            ];
         }
 
         // Facebook
-        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN, $str, $matches)) {
-            if (isset($matches[1])) {
-                return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
-            }
+        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN, $str, $matches) === 1) {
+            return [
+                'id_host' => self::HOST_FACEBOOK,
+                'reference' => $matches[1],
+            ];
         }
 
         // Facebook
-        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN2, $str, $matches)) {
-            if (isset($matches[1])) {
-                return ['id_host' => self::HOST_FACEBOOK, 'reference' => $matches[1]];
-            }
+        if (preg_match(MEDIA_FACEBOOK_URL_PATTERN2, $str, $matches) === 1) {
+            return [
+                'id_host' => self::HOST_FACEBOOK,
+                'reference' => $matches[1],
+            ];
         }
 
         // Vimeo
-        if (preg_match(MEDIA_VIMEO_URL_PATTERN, $str, $matches)) {
-            if (isset($matches[1])) {
-                return ['id_host' => self::HOST_VIMEO, 'reference' => $matches[1]];
-            }
+        if (preg_match(MEDIA_VIMEO_URL_PATTERN, $str, $matches) === 1) {
+            return [
+                'id_host' => self::HOST_VIMEO,
+                'reference' => $matches[1],
+            ];
         }
 
         // AD'HOC Tube
-        if (preg_match(MEDIA_ADHOCTUBE_URL_PATTERN, $str, $matches)) {
-            if (isset($matches[1])) {
-                return ['id_host' => self::HOST_ADHOCTUBE, 'reference' => $matches[1]];
-            }
+        if (preg_match(MEDIA_ADHOCTUBE_URL_PATTERN, $str, $matches) === 1) {
+            return [
+                'id_host' => self::HOST_ADHOCTUBE,
+                'reference' => $matches[1],
+            ];
         }
 
         return false;
@@ -635,9 +639,9 @@ class Video extends Media
      * @param int    $id_host   id_host
      * @param string $reference reference
      *
-     * @return ?string
+     * @return string|false
      */
-    public static function getRemoteThumbnail(int $id_host, string $reference): ?string
+    public static function getRemoteThumbnail(int $id_host, string $reference): string|false
     {
         switch ($id_host) {
             case self::HOST_YOUTUBE:
@@ -686,11 +690,11 @@ class Video extends Media
                     return 'https://' . MEDIA_ADHOCTUBE_HOST . $meta_info->previewPath; // 560x315
                     //return 'https://' . MEDIA_ADHOCTUBE_HOST . $meta_info->thumbnailPath; // 200x110
                 } else {
-                    return null;
+                    return false;
                 }
 
             default:
-                return null;
+                return false;
         }
     }
 

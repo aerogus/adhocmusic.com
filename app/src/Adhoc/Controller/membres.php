@@ -132,7 +132,7 @@ final class Controller
                 Log::error("Création d'un compte membre. " . print_r($data, true));
             }
 
-            if (!empty($errors)) {
+            if (count($errors) > 0) {
                 foreach ($errors as $k => $v) {
                     $twig->assign('error_' . $k, $v);
                 }
@@ -375,11 +375,11 @@ final class Controller
         ]);
         $myAlertingLieu = $myAlertingGroupe = $myAlertingEvent =  [];
         foreach ($myAlerting as $ma) {
-            if ($ma->getIdLieu()) {
+            if (!is_null($ma->getIdLieu())) {
                 $myAlertingLieu[] = Lieu::getInstance($ma->getIdLieu());
-            } elseif ($ma->getIdGroupe()) {
+            } elseif (!is_null($ma->getIdGroupe())) {
                 $myAlertingGroupe[] = Groupe::getInstance($ma->getIdGroupe());
-            } elseif ($ma->getIdEvent()) {
+            } elseif (!is_null($ma->getIdEvent())) {
                 $myAlertingEvent[] = Event::getInstance($ma->getIdEvent());
             }
         }
@@ -412,7 +412,9 @@ final class Controller
     {
         $errors = [];
 
-        if (empty($data['email'])) {
+        if (!isset($data['email'])) {
+            $errors['email'] = true;
+        } elseif (mb_strlen($data['email']) < 3) {
             $errors['email'] = true;
         } elseif (mb_strlen($data['email']) > 50) {
             $errors['email'] = true;
@@ -420,7 +422,9 @@ final class Controller
             $errors['email'] = true;
         }
 
-        if (empty($data['pseudo'])) {
+        if (!isset($data['pseudo'])) {
+            $errors['pseudo'] = true;
+        } elseif (mb_strlen($data['pseudo']) === 0) {
             $errors['pseudo'] = true;
         } elseif (mb_strlen($data['pseudo']) > 50) {
             $errors['pseudo'] = true;
@@ -454,12 +458,17 @@ final class Controller
     {
         $errors = [];
 
-        if (empty($data['email'])) {
+        if (!isset($data['email'])) {
+            $errors['email'] = true;
+        } elseif (strlen($data['email']) === 0) {
             $errors['email'] = true;
         } elseif (!Email::validate($data['email'])) {
             $errors['email'] = true;
         }
-        if (empty($data['id_country'])) {
+
+        if (!isset($data['id_country'])) {
+            $errors['id_country'] = true;
+        } elseif (strlen($data['id_country']) === 0) {
             $errors['id_country'] = true;
         }
 

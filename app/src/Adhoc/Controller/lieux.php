@@ -149,7 +149,7 @@ final class Controller
         );
         $twig->enqueueScript('/js/lieux/show.js');
 
-        if (!$lieu->getLat() && !$lieu->getLng()) {
+        if (is_null($lieu->getLat()) && is_null($lieu->getLng())) {
             $twig->assign('geocode', true);
             $twig->assign('geocode_id_lieu', $lieu->getIdLieu());
             $twig->assign('geocode_address', $lieu->getAddress() . ' ' . $lieu->getCity()->getCp() . ' ' . $lieu->getCity()->getName());
@@ -590,7 +590,9 @@ final class Controller
     {
         $errors = [];
 
-        if (empty($data['name'])) {
+        if (!isset($data['name'])) {
+            $errors['name'] = true;
+        } elseif (strlen($data['name']) === 0) {
             $errors['name'] = true;
         }
 

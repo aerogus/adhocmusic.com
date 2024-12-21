@@ -13,7 +13,7 @@
 declare(strict_types=1);
 
 use Adhoc\Model\Newsletter;
-use Adhoc\Utils\LogNG;
+use Adhoc\Utils\Log;
 use Adhoc\Utils\Email;
 
 // on temporise l'envoi des mails.
@@ -40,13 +40,13 @@ $subs = [
 // base de prod
 //$subs = Newsletter::getSubscribers();
 
-LogNG::info("Trouvé : " . count($subs) . " email(s)");
+Log::info("Trouvé : " . count($subs) . " email(s)");
 
 try {
-    LogNG::info('id_newsletter: ' . $id_newsletter);
+    Log::info('id_newsletter: ' . $id_newsletter);
     $newsletter = Newsletter::getInstance($id_newsletter);
 } catch (\Exception $e) {
-    LogNG::error($e->getMessage());
+    Log::error($e->getMessage());
     die;
 }
 
@@ -60,7 +60,7 @@ foreach ($subs as $sub) {
         continue;
     }
 
-    LogNG::info($id_newsletter . "\t" . $n . "\t" . $sub['id_contact'] . " \t\t" . $sub['email'] . "\t\t" . $sub['pseudo']);
+    Log::info($id_newsletter . "\t" . $n . "\t" . $sub['id_contact'] . " \t\t" . $sub['email'] . "\t\t" . $sub['pseudo']);
 
     $newsletter_id_newsletter = $id_newsletter;
     $newsletter_id_contact = $sub['id_contact'];

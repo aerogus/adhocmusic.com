@@ -152,18 +152,18 @@ final class Controller
             }
 
             // menu et fil d'ariane
-            if ($from === 'groupe' && $video->getGroupes()) {
+            if ($from === 'groupe' && count($video->getGroupes()) > 0) {
                 Trail::getInstance()
                     ->addStep("Groupes", "/groupes")
                     ->addStep($groupe->getName(), $groupe->getUrl());
-            } elseif ($from === 'profil' && $video->getIdContact()) {
+            } elseif ($from === 'profil' && !is_null($video->getIdContact())) {
                 Trail::getInstance()
                     ->addStep("Zone Membre", "/membres");
-            } elseif ($from === 'event' && $video->getIdEvent()) {
+            } elseif ($from === 'event' && isset($event)) {
                 Trail::getInstance()
                     ->addStep("Agenda", "/events")
                     ->addStep($event->getName(), "/events/" . $event->getIdEvent());
-            } elseif ($from === 'lieu' && $video->getIdLieu()) {
+            } elseif ($from === 'lieu' && !is_null($video->getIdLieu())) {
                 Trail::getInstance()
                     ->addStep("Lieux", "/lieux")
                     ->addStep($lieu->getName(), "/lieux/" . $lieu->getIdLieu());
@@ -175,7 +175,7 @@ final class Controller
                 ->addStep($video->getName());
 
             // vidéos et photos liées à l'événement/lieu
-            if ($video->getIdEvent() && $video->getIdLieu()) {
+            if (!is_null($video->getIdEvent()) && !is_null($video->getIdLieu())) {
                 $twig->assign(
                     'photos',
                     Photo::find(
@@ -283,9 +283,8 @@ final class Controller
                 $video->save();
 
                 foreach (Route::params('ids_groupe') as $id_groupe) {
-                    $id_groupe = (int) $id_groupe;
-                    if ($id_groupe) {
-                        $video->linkGroupe((int) $id_groupe);
+                    if (intval($id_groupe) > 0) {
+                        $video->linkGroupe(intval($id_groupe));
                     }
                 }
 
@@ -334,9 +333,8 @@ final class Controller
             )
         );
 
-        $id_lieu = (int) Route::params('id_lieu');
-        if ($id_lieu) {
-            $lieu = Lieu::getInstance($id_lieu);
+        if (intval(Route::params('id_lieu')) > 0) {
+            $lieu = Lieu::getInstance(intval(Route::params('id_lieu')));
             $twig->assign('lieu', $lieu);
             $twig->assign(
                 'events',
@@ -356,8 +354,8 @@ final class Controller
             $twig->assign('lieux', Lieu::getLieuxByDep());
         }
 
-        $id_event  = (int) Route::params('id_event');
-        if ($id_event) {
+        $id_event  = (bool) Route::params('id_event') ? (int) Route::params('id_event') : null;
+        if (!is_null($id_event)) {
             $event = Event::getInstance($id_event);
             $lieu = Lieu::getInstance($event->getIdLieu());
             $twig->assign('event', $event);
@@ -397,9 +395,9 @@ final class Controller
             $data = [
                 'id' => (int) Route::params('id'),
                 'name' => (string) Route::params('name'),
-                'id_groupe' => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
-                'id_lieu' => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
-                'id_event' => Route::params('id_event') ? (int) Route::params('id_event') : null,
+                'id_groupe' => (bool) Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
+                'id_lieu' => (bool) Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
+                'id_event' => (bool) Route::params('id_event') ? (int) Route::params('id_event') : null,
                 'online' => (bool) Route::params('online'),
                 'thumbnail_fetch' => (bool) Route::params('thumbnail_fetch'),
             ];
@@ -415,9 +413,8 @@ final class Controller
 
                 $video->unlinkGroupes();
                 foreach (Route::params('ids_groupe') as $id_groupe) {
-                    $id_groupe = (int) $id_groupe;
-                    if ($id_groupe) {
-                        $video->linkGroupe((int) $id_groupe);
+                    if (intval($id_groupe) > 0) {
+                        $video->linkGroupe(intval($id_groupe));
                     }
                 }
 
@@ -427,7 +424,7 @@ final class Controller
 
                 // Permet le reset de la vignette
                 if ($data['thumbnail_fetch']) {
-                    if ($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) {
+                    if (($vignette = Video::getRemoteThumbnail($video->getIdHost(), $video->getReference())) !== false) {
                         $video->storeThumbnail($vignette);
                         $confVideo = Conf::getInstance()->get('video');
                         foreach ($confVideo['thumb_width'] as $maxWidth) {
@@ -470,12 +467,12 @@ final class Controller
 
         $twig->assign('page', $page);
 
-        if ($video->getIdEvent()) {
+        if (!is_null($video->getIdEvent())) {
             $event = Event::getInstance($video->getIdEvent());
             $lieu = Lieu::getInstance($event->getIdLieu());
             $twig->assign('event', $event);
             $twig->assign('lieu', $lieu);
-        } elseif ($video->getIdLieu()) {
+        } elseif (!is_null($video->getIdLieu())) {
             $lieu = Lieu::getInstance($video->getIdLieu());
             $twig->assign('lieu', $lieu);
         }
@@ -522,13 +519,13 @@ final class Controller
 
         $twig->assign('video', $video);
 
-        if ($video->getGroupes()) {
+        if (count($video->getGroupes()) > 0) {
             $twig->assign('groupe', $video->getGroupes()[0]);
         }
-        if ($video->getIdEvent()) {
+        if (!is_null($video->getIdEvent())) {
             $twig->assign('event', Event::getInstance($video->getIdEvent()));
         }
-        if ($video->getIdLieu()) {
+        if (!is_null($video->getIdLieu())) {
             $twig->assign('lieu', Lieu::getInstance($video->getIdLieu()));
         }
 
@@ -571,10 +568,15 @@ final class Controller
     {
         $errors = [];
 
-        if (empty($data['name'])) {
+        if (!isset($data['name'])) {
+            $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
+        } elseif (strlen($data['name']) === 0) {
             $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
         }
-        if (empty($data['code'])) {
+
+        if (!isset($data['code'])) {
+            $errors['code'] = "Vous devez copier/coller l'url de la vidéo";
+        } elseif (strlen($data['code']) === 0) {
             $errors['code'] = "Vous devez copier/coller l'url de la vidéo";
         } elseif (Video::parseStringForVideoUrl($data['code']) === false) {
             $errors['unknown_host'] = "Url de la vidéo non reconnue";
@@ -594,7 +596,9 @@ final class Controller
     {
         $errors = [];
 
-        if (empty($data['name'])) {
+        if (!isset($data['name'])) {
+            $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
+        } elseif (strlen($data['name']) === 0) {
             $errors['name'] = "Vous devez saisir un titre pour la vidéo.";
         }
 

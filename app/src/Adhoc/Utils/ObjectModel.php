@@ -7,11 +7,14 @@ namespace Adhoc\Utils;
 /**
  * @abstract
  *
- * @author Guillaume Seznec <guillaume@seznec.frr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class ObjectModel
 {
     /**
+     * Tableau des instances des objets d'une même classe
+     * Doit être redéfini dans chaque sous-classe
+     *
      * @var array<mixed>
      */
     protected static array $instances = [];
@@ -50,14 +53,14 @@ abstract class ObjectModel
     protected static array $has_table = [];
 
     /**
-     * L'objet peut-il être mis en cache ?
+     * Les objets de cette classe peuvent-ils être mis en cache ?
      *
      * @var bool
      */
     protected static bool $cachable = false;
 
     /**
-     * Identifiant unique d'objet
+     * Identifiant unique d'objet de la forme "ClassName__pk1Value:pk2Value:pk3Value"
      *
      * @var string
      */
@@ -109,7 +112,7 @@ abstract class ObjectModel
      *
      * @param mixed $id id
      */
-    final public function __construct($id = null)
+    final public function __construct(mixed $id = null)
     {
         if (!is_null($id)) {
             if (!is_array($id)) {
@@ -137,17 +140,18 @@ abstract class ObjectModel
             $this->setObjectId(static::calcObjectId($this->getId()));
 
             if (static::isCachable() && ($this->loaded = $this->loadFromCache())) {
-                // chargement ok du cache
-                //Log::debug('loadFromCache OK');
+                // chargement ok à partir du cache
+                Log::debug('loadFromCache OK: ' . $this->getObjectId());
             } elseif ($this->loaded = $this->loadFromDb()) {
-                //Log::debug('loadFromDb OK: ' . $this->getObjectId());
-                // chargement ok de la bdd
+                // chargement ok à partir de la bdd
+                Log::debug('loadFromDb OK: ' . $this->getObjectId());
                 if (static::isCachable()) {
                     // alimentation du cache
                     ObjectCacheMC::set($this->getObjectId(), serialize($this->objectToArray()));
                 }
             } else {
                 // erreur au chargement
+                Log::error('load error: ' . $this->getObjectId());
             }
 
             static::$instances[$this->getObjectId()] = $this;
@@ -165,7 +169,7 @@ abstract class ObjectModel
     /**
      * Retourne le nom de la table associée à cette classe
      *
-     * @param string $db_table_suffix
+     * @param string $db_table_suffix chaine vide ou [a-z0-9_]{3}_[0-9]{4} (déjà cleané)
      *
      * @return string
      */
@@ -189,6 +193,7 @@ abstract class ObjectModel
     {
         if (static::$sharded) {
             // le suffixe doit se baser sur un sous ensemble de la clé primaire
+            // et respecter les recommandations de nommage MariaDB
             return ''; // ex: CCC_YYYY
         }
 
@@ -196,7 +201,31 @@ abstract class ObjectModel
     }
 
     /**
+     * Nettoie le nom de la table en base suivant les recommandations MariaDB
+     * @see https://mariadb.com/kb/en/columnstore-naming-conventions/
+     *
+     * @param string $db_table_name
+     *
+     * @return string
+     */
+    public static function getSanitizedTableName(string $db_table_name = ''): string
+    {
+        // tout en minuscules
+        $db_table_name = strtolower($db_table_name);
+
+        // pas de caractères spéciaux
+        $db_table_name = str_replace(
+            ['+'],
+            ['_'],
+            $db_table_name
+        );
+
+        return $db_table_name;
+    }
+
+    /**
      * Vérifie si la table dynamique existe
+     * attention à la sensibilité (ou pas) à la casse !
      *
      * @param string $db_table_suffix
      *
@@ -212,7 +241,6 @@ abstract class ObjectModel
         }
 
         $sql = 'SHOW TABLES WHERE Tables_in_' . $db->name . ' = "' . $table . '"';
-        Log::debug($sql);
         $stm = $db->pdo->query($sql);
         $bool = boolval($stm->fetch());
         static::$has_table[$table] = $bool;
@@ -275,6 +303,43 @@ abstract class ObjectModel
             }
 
             return static::$instances[$object_id];
+        }
+    }
+
+    /**
+     * @param mixed $id int|string|array<mixed>
+     *
+     * @return bool
+     */
+    public static function deleteInstance($id): bool
+    {
+        if (count(static::$instances) === 0) {
+            // aucune instance trouvée
+            return false;
+        } else {
+            if (!is_array($id)) {
+                if (count(static::getDbPk()) === 1) {
+                    $formated_id = [
+                        static::getDbPk()[0] => $id,
+                    ];
+                } else {
+                    throw new \Exception('multi pk object and scalar value provided');
+                }
+            } elseif (($expected = count(static::getDbPk())) !== ($provided = count(array_keys($id)))) {
+                throw new \Exception('multi pk not fully provided (provided ' . $provided . ' !== expected ' . $expected . ')');
+            } else {
+                $formated_id = $id;
+            }
+
+            $object_id = static::calcObjectId($formated_id);
+            if (array_key_exists($object_id, static::$instances)) {
+                // instance trouvée, on la retire
+                unset(static::$instances[$object_id]);
+                return true;
+            }
+
+            // d'autres instances ont été trouvées mais pas celle là
+            return false;
         }
     }
 
@@ -580,7 +645,7 @@ abstract class ObjectModel
     }
 
     /**
-     * Retourne une collection d'objets "ObjectModel" répondant au(x) critère(s) donné(s)
+     * Retourne une collection d'objets hérités d'"ObjectModel" répondant au(x) critère(s) donné(s)
      *
      * À surcharger dans les classes filles
      *
@@ -642,7 +707,7 @@ abstract class ObjectModel
             $sql .= 'LIMIT ' . (int) $params['start'] . ', ' . (int) $params['limit'];
         }
 
-        $stm = $db->pdo->query($sql);
+        $stm = $db->pdo->prepare($sql);
         $stm->execute();
         $rows = $stm->fetchAll();
 
@@ -669,9 +734,15 @@ abstract class ObjectModel
      * Retourne une collection d'instances
      *
      * @return array<static>
+     *
+     * @throws \Exception
      */
     public static function findAll(): array
     {
+        if (static::$sharded) {
+            throw new \Exception('findAll() is disabled when sharded is enabled');
+        }
+
         return static::find([]);
     }
 
@@ -798,9 +869,14 @@ abstract class ObjectModel
      * Note: privilégier getFoundRows() si utilisé juste après un find()
      *
      * @return int
+     * @throws \Exception
      */
     public static function count(): int
     {
+        if (static::$sharded) {
+            throw new \Exception('count() not available when sharding is enabled');
+        }
+
         $db = DataBase::getInstance();
 
         $sql  = 'SELECT COUNT(*) FROM `' . static::getDbTable() . '`';
@@ -947,5 +1023,48 @@ abstract class ObjectModel
         // à implémenter dans les classes filles dont on veut une table shardée
         // mettre à jour éventuellement static::$has_table[$table]
         return false;
+    }
+
+    /**
+     * Set tous les champs comme étant modifiés
+     *
+     * @return void
+     */
+    public function setAllFieldsModified()
+    {
+        foreach ($this->getAllFields() as $field => $type) {
+            $this->modified_fields[$field] = true;
+        }
+    }
+
+    /**
+     * Cloner un objet
+     *
+     * @param mixed $id nouvelle pk
+     * @param bool $overwrite
+     *
+     * @return static
+     * @throws \Exception
+     */
+    public function clone(mixed $id, bool $overwrite = false)
+    {
+        $clone = clone $this;
+
+        $clone->loaded = false; // permet de redéfinir la pk
+        $clone->setId($id);
+        $clone->setObjectId(static::calcObjectId($clone->getId()));
+        $clone->setAllFieldsModified();
+
+        if (static::isFound($id)) {
+            Log::warning("clone d'un objet déjà existant");
+            if ($overwrite) {
+                Log::info('overwrite activé, forcera un UPDATE');
+                $clone->loaded = true; // /!\ forcera un UPDATE d'un objet déjà existant
+            } else {
+                Log::warning('overwrite désactivé, le INSERT va planter');
+            }
+        }
+
+        return $clone;
     }
 }

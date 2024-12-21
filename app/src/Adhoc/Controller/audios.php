@@ -459,9 +459,12 @@ final class Controller
     {
         $errors = [];
 
-        if (empty($data['name'])) {
+        if (!isset($data['name'])) {
+            $errors['name'] = true;
+        } elseif (strlen($data['name']) === 0) {
             $errors['name'] = true;
         }
+
         if (($data['id_groupe'] === 0) && ($data['id_event'] === 0) && ($data['id_lieu'] === 0)) {
             $errors['id_groupe'] = true;
             $errors['id_event'] = true;

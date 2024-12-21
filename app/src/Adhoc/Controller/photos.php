@@ -217,9 +217,9 @@ final class Controller
             $data = [
                 'name' => trim((string) Route::params('name')),
                 'credits' => trim((string) Route::params('credits')),
-                'id_groupe' => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
-                'id_lieu' => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
-                'id_event' => Route::params('id_event') ? (int) Route::params('id_event') : null,
+                'id_groupe' => (bool) Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
+                'id_lieu' => (bool) Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
+                'id_event' => (bool) Route::params('id_event') ? (int) Route::params('id_event') : null,
                 'id_contact' => (int) $_SESSION['membre']->getIdContact(),
                 'online' => (bool) Route::params('online'),
             ];
@@ -286,9 +286,8 @@ final class Controller
 
         $twig->enqueueScript('/js/photos/create.js');
 
-        $id_groupe = (int) Route::params('id_groupe');
-        if ($id_groupe) {
-            $groupe = Groupe::getInstance($id_groupe);
+        if (intval(Route::params('id_groupe')) > 0) {
+            $groupe = Groupe::getInstance(intval(Route::params('id_groupe')));
             $twig->assign('groupe', $groupe);
         } else {
             $twig->assign(
@@ -303,9 +302,8 @@ final class Controller
             );
         }
 
-        $id_lieu = (int) Route::params('id_lieu');
-        if ($id_lieu) {
-            $lieu = Lieu::getInstance($id_lieu);
+        if (intval(Route::params('id_lieu')) > 0) {
+            $lieu = Lieu::getInstance(intval(Route::params('id_groupe')));
             $twig->assign('lieu', $lieu);
             $twig->assign(
                 'events',
@@ -325,9 +323,8 @@ final class Controller
             $twig->assign('lieux', Lieu::getLieuxByDep());
         }
 
-        $id_event = (int) Route::params('id_event');
-        if ($id_event) {
-            $event = Event::getInstance($id_event);
+        if (intval(Route::params('id_event')) > 0) {
+            $event = Event::getInstance(intval(Route::params('id_event')));
             $twig->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
             $twig->assign('lieu', $lieu);
@@ -369,12 +366,12 @@ final class Controller
                 'id' => (int) $photo->getIdPhoto(),
                 'name' => (string) Route::params('name'),
                 'credits' => (string) Route::params('credits'),
-                'id_groupe' => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
-                'id_lieu' => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
-                'id_event' => Route::params('id_event') ? (int) Route::params('id_event') : null,
+                'id_groupe' => (bool) Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
+                'id_lieu' => (bool) Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
+                'id_event' => (bool) Route::params('id_event') ? (int) Route::params('id_event') : null,
                 'id_contact' => (int) Route::params('id_contact'),
                 'online' => (bool) Route::params('online'),
-                'rotation' => (int) Route::params('rotation')
+                'rotation' => (int) Route::params('rotation'),
             ];
 
             $errors = self::validatePhotoForm($data);
@@ -389,7 +386,7 @@ final class Controller
                     ->setOnline($data['online']);
 
                 // applique une rotation forcée et regénère les miniatures
-                if ($data['rotation']) {
+                if ($data['rotation'] !== 0) {
                     Photo::rotate(Photo::getBasePath() . '/' . $photo->getIdPhoto() . '.jpg', $data['rotation']);
                     foreach ($confPhoto['thumb_width'] as $maxWidth) {
                         $photo->clearThumb($maxWidth);
@@ -422,7 +419,7 @@ final class Controller
         $twig->assign('deps', Departement::findAll());
         $twig->assign('lieux', Lieu::getLieuxByDep());
 
-        if ($photo->getIdEvent()) {
+        if (!is_null($photo->getIdEvent())) {
             $event = Event::getInstance($photo->getIdEvent());
             $twig->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
@@ -469,13 +466,13 @@ final class Controller
 
         $twig->assign('photo', $photo);
 
-        if ($photo->getIdGroupe()) {
+        if (!is_null($photo->getIdGroupe())) {
             $twig->assign('groupe', Groupe::getInstance($photo->getIdGroupe()));
         }
-        if ($photo->getIdEvent()) {
+        if (!is_null($photo->getIdEvent())) {
             $twig->assign('event', Event::getInstance($photo->getIdEvent()));
         }
-        if ($photo->getIdLieu()) {
+        if (!is_null($photo->getIdLieu())) {
             $twig->assign('lieu', Lieu::getInstance($photo->getIdLieu()));
         }
 
@@ -493,10 +490,15 @@ final class Controller
     {
         $errors = [];
 
-        if (empty($data['name'])) {
+        if (!isset($data['name'])) {
+            $errors['name'] = "Vous devez saisir un titre pour la photo.";
+        } elseif (strlen($data['name']) === 0) {
             $errors['name'] = "Vous devez saisir un titre pour la photo.";
         }
-        if (empty($data['credits'])) {
+
+        if (!isset($data['credits'])) {
+            $errors['credits'] = "Vous devez saisir le nom du ou de la photographe";
+        } elseif (strlen($data['credits']) === 0) {
             $errors['credits'] = "Vous devez saisir le nom du ou de la photographe";
         }
 
