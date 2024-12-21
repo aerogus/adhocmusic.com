@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "51748032e1ea4cfa9e94ed88d522ae90",
+    "content-hash": "2553fb540e37bb6fb1925c80668f5712",
     "packages": [
         {
             "name": "eluceo/ical",
@@ -1037,16 +1037,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "46b4d3529b12178112d9008337beda0cc2a1a6b4"
+                "reference": "50d276fc3bf1430ec315f2f109bbde2769821524"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/46b4d3529b12178112d9008337beda0cc2a1a6b4",
-                "reference": "46b4d3529b12178112d9008337beda0cc2a1a6b4",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/50d276fc3bf1430ec315f2f109bbde2769821524",
+                "reference": "50d276fc3bf1430ec315f2f109bbde2769821524",
                 "shasum": ""
             },
             "require": {
@@ -1091,25 +1091,25 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-28T22:19:37+00:00"
+            "time": "2024-12-17T17:14:01+00:00"
         },
         {
             "name": "phpstan/phpstan-strict-rules",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-strict-rules.git",
-                "reference": "a4a6a08bd4a461e516b9c3b8fdbf0f1883b34158"
+                "reference": "ed6fea0ad4ad9c7e25f3ad2e7c4d420cf1e67fe3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/a4a6a08bd4a461e516b9c3b8fdbf0f1883b34158",
-                "reference": "a4a6a08bd4a461e516b9c3b8fdbf0f1883b34158",
+                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/ed6fea0ad4ad9c7e25f3ad2e7c4d420cf1e67fe3",
+                "reference": "ed6fea0ad4ad9c7e25f3ad2e7c4d420cf1e67fe3",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2.0"
+                "phpstan/phpstan": "^2.0.4"
             },
             "require-dev": {
                 "php-parallel-lint/php-parallel-lint": "^1.2",
@@ -1137,9 +1137,9 @@
             "description": "Extra strict and opinionated rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-strict-rules/issues",
-                "source": "https://github.com/phpstan/phpstan-strict-rules/tree/2.0.0"
+                "source": "https://github.com/phpstan/phpstan-strict-rules/tree/2.0.1"
             },
-            "time": "2024-10-26T16:04:33+00:00"
+            "time": "2024-12-12T20:21:10+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -1466,16 +1466,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.5.1",
+            "version": "11.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2b94d4f2450b9869fa64a46fd8a6a41997aef56a"
+                "reference": "153d0531b9f7e883c5053160cad6dd5ac28140b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2b94d4f2450b9869fa64a46fd8a6a41997aef56a",
-                "reference": "2b94d4f2450b9869fa64a46fd8a6a41997aef56a",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/153d0531b9f7e883c5053160cad6dd5ac28140b3",
+                "reference": "153d0531b9f7e883c5053160cad6dd5ac28140b3",
                 "shasum": ""
             },
             "require": {
@@ -1489,13 +1489,13 @@
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.2",
-                "phpunit/php-code-coverage": "^11.0.7",
+                "phpunit/php-code-coverage": "^11.0.8",
                 "phpunit/php-file-iterator": "^5.1.0",
                 "phpunit/php-invoker": "^5.0.1",
                 "phpunit/php-text-template": "^4.0.1",
                 "phpunit/php-timer": "^7.0.1",
                 "sebastian/cli-parser": "^3.0.2",
-                "sebastian/code-unit": "^3.0.1",
+                "sebastian/code-unit": "^3.0.2",
                 "sebastian/comparator": "^6.2.1",
                 "sebastian/diff": "^6.0.2",
                 "sebastian/environment": "^7.2.0",
@@ -1547,7 +1547,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.1"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.2"
             },
             "funding": [
                 {
@@ -1563,7 +1563,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-11T10:52:48+00:00"
+            "time": "2024-12-21T05:51:08+00:00"
         },
         {
             "name": "psr/container",
