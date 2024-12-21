@@ -133,12 +133,12 @@ final class Controller
         }
 
         $twig->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
-        $twig->enqueueStyle('/css/leaflet.css');
+        $twig->enqueueStyle('/static/library/leaflet@1.9.4/leaflet.min.css');
 
         $twig->enqueueScript('/js/masonry-4.2.2.min.js');
         $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
         $twig->enqueueScript('/js/baguetteBox-1.11.1.min.js');
-        $twig->enqueueScript('/js/leaflet.js');
+        $twig->enqueueScript('/static/library/leaflet@1.9.4/leaflet.min.js');
 
         $twig->enqueueScriptVars(
             [
