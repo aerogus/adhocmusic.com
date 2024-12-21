@@ -1,10 +1,15 @@
 #!/usr/bin/env php
 <?php
 
+/**
+ * Liste des pays du monde
+ *
+ * @author  Guillaume Seznec <guillaume@seznec.fr>
+ */
+
 declare(strict_types=1);
 
 use Adhoc\Model\WorldCountry;
-use Adhoc\Utils\LogNG;
 
 require_once __DIR__ . '/../app/bootstrap.php';
 
