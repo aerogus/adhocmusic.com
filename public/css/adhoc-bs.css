@@ -1,0 +1,30 @@
+/* version bootstrap de la feuille de style 2024 */
+
+@font-face {
+  font-family: 'TradeGothic';
+  src: url('../fonts/trade-gothic-bold.woff2') format('woff2'),
+      url('../fonts/trade-gothic-bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+body {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    background-color: #ececec;
+}
+
+#brand {
+  font-family: TradeGothic;
+  background: url("../img/logos/note.svg") no-repeat 0 0/2rem;
+  padding: 0 2.5rem;
+  font-size: 1.5rem;
+}
+
+footer {
+    background: #292933 url("/img/tri/top-left-ececec.svg") no-repeat;
+    background-size: 100% 4vw;
+    padding-top: 6vw;
+    padding-bottom: 20px;
+    color: #a7a7a7;
+}
