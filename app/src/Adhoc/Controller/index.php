@@ -15,6 +15,7 @@ use Adhoc\Model\Newsletter;
 use Adhoc\Model\Partner;
 use Adhoc\Model\Video;
 use Adhoc\Utils\AdHocTwig;
+use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
