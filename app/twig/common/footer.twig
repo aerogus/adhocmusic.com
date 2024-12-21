@@ -7,7 +7,7 @@
 
 {% if script_vars %}
 <script>
-var asv = {{ script_vars|json_encode }}
+var asv = {{ script_vars|json_encode|raw }}
 </script>
 {% endif %}
 
