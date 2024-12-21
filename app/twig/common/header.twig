@@ -56,17 +56,13 @@
 <meta name="robots" content="{{ robots }}">
 <meta name="description" content="{% if not description %}Soutien des musiques actuelles en Essonne, agenda culturel, vidéos de concerts...{% else %}{{ description }}{% endif %}">
 
-{% if stylesheets %}
-  {% for style_url in stylesheets %}
-  <link rel="stylesheet" href="{{ style_url }}">
-  {% endfor %}
-{% endif %}
+{% for style_url in stylesheets %}
+<link rel="stylesheet" href="{{ style_url }}">
+{% endfor %}
 
-{% if header_scripts %}
-  {% for script_url in header_scripts %}
-  <script src="{{ script_url }}"></script>
-  {% endfor %}
-{% endif %}
+{% for script_url in header_scripts %}
+<script src="{{ script_url }}"></script>
+{% endfor %}
 
 </head>
 

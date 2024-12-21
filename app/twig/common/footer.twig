@@ -11,19 +11,15 @@ var asv = {{ script_vars }}
 </script>
 {% endif %}
 
-{% if footer_scripts %}
 {% for script_url in footer_scripts %}
-<script src="{{ script_url }}"></script>
+<script src="{{ script_url }}"{% if script_url ends with '.mjs' %} type="module"{% endif %}></script>
 {% endfor %}
-{% endif %}
 
-{% if inline_scripts %}
 {% for inline_script in inline_scripts %}
 <script>
 {{ inline_script }}
 </script>
 {% endfor %}
-{% endif %}
 
 </body>
 </html>
