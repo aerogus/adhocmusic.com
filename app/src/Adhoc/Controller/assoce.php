@@ -36,7 +36,7 @@ final class Controller
         Trail::getInstance()->addStep("Concerts");
 
         $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
-        $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
+        $twig->enqueueScript('/static/library/imagesloaded@4.1.4/imagesloaded.min.js');
 
         $twig->enqueueScript('/js/assoce-concerts.js');
 

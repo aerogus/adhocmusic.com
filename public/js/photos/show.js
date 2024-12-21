@@ -1,10 +1,11 @@
-/* global document, jQuery */
+/* global document, jQuery, window */
 
-$(function() {
+jQuery(document).ready(function ($) {
+
+  'use strict';
 
   $("#photofull").noContext();
 
-  {if !empty($prev) && !empty($next) && true}
   $(document).keydown(function(e) {
     if (e.keyCode == 37) {
        window.location = '{$prev}#p';
@@ -15,6 +16,5 @@ $(function() {
        e.preventDefault();
     }
   });
-  {/if}
 
 });

@@ -132,12 +132,12 @@ final class Controller
             return $twig->render('lieux/show.twig');
         }
 
-        $twig->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
+        $twig->enqueueStyle('/static/library/baguetteBox@1.11.1/baguetteBox.min.css');
         $twig->enqueueStyle('/static/library/leaflet@1.9.4/leaflet.min.css');
 
         $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
-        $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
-        $twig->enqueueScript('/js/baguetteBox-1.11.1.min.js');
+        $twig->enqueueScript('/static/library/imagesloaded@4.1.4/imagesloaded.min.js');
+        $twig->enqueueScript('/static/library/baguetteBox@1.11.1/baguetteBox.min.js');
         $twig->enqueueScript('/static/library/leaflet@1.9.4/leaflet.min.js');
 
         $twig->enqueueScriptVars(

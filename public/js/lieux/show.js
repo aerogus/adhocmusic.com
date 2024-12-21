@@ -16,7 +16,7 @@ jQuery(document).ready(function () {
     iconAnchor: [25, 50],
     popupAnchor: [-3, -76],
   });
-  //let marker = L.marker([asv.lat, asv.lng], { icon: pin }).addTo(map);
+  L.marker([asv.lat, asv.lng], { icon: pin }).addTo(map);
 
   if (document.getElementsByClassName('gallery').length > 0) {
 

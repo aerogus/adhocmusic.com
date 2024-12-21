@@ -41,7 +41,7 @@ final class Controller
         $twig = new AdHocTwig();
 
         $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
-        $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
+        $twig->enqueueScript('/static/library/imagesloaded@4.1.4/imagesloaded.min.js');
         $twig->enqueueScript('/js/photos/my.js');
 
         $page = (int) Route::params('page');

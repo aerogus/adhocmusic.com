@@ -71,10 +71,10 @@ final class Controller
 
         $twig = new AdHocTwig();
 
-        $twig->enqueueStyle('/css/jquery-ui.min.css');
+        $twig->enqueueStyle('/static/library/jquery-ui@1.11.4/jquery-ui.min.css');
 
-        $twig->enqueueScript('/js/jquery-ui.min.js');
-        $twig->enqueueScript('/js/jquery-ui-datepicker-fr.js');
+        $twig->enqueueScript('/static/library/jquery-ui@1.11.4/jquery-ui.min.js');
+        $twig->enqueueScript('/static/library/jquery-ui@1.11.4/jquery-ui-datepicker-fr.js');
         $twig->enqueueScript('/js/adm/featured.js');
 
         // valeurs par défaut
@@ -158,10 +158,10 @@ final class Controller
 
         $twig = new AdHocTwig();
 
-        $twig->enqueueStyle('/css/jquery-ui.min.css');
+        $twig->enqueueStyle('/static/library/jquery-ui@1.11.4/jquery-ui.min.css');
 
-        $twig->enqueueScript('/js/jquery-ui.min.js');
-        $twig->enqueueScript('/js/jquery-ui-datepicker-fr.js');
+        $twig->enqueueScript('/static/library/jquery-ui@1.11.4/jquery-ui.min.js');
+        $twig->enqueueScript('/static/library/jquery-ui@1.11.4/jquery-ui-datepicker-fr.js');
         $twig->enqueueScript('/js/adm/featured.js');
 
         $id = (int) Route::params('id');

@@ -129,11 +129,11 @@ final class Controller
 
         $twig = new AdHocTwig();
 
-        $twig->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
+        $twig->enqueueStyle('/static/library/baguetteBox@1.11.1/baguetteBox.min.css');
 
         $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
-        $twig->enqueueScript('/js/imagesloaded-4.1.4.min.js');
-        $twig->enqueueScript('/js/baguetteBox-1.11.1.min.js');
+        $twig->enqueueScript('/static/library/imagesloaded@4.1.4/imagesloaded.min.js');
+        $twig->enqueueScript('/static/library/baguetteBox@1.11.1/baguetteBox.min.js');
 
         $twig->enqueueScript('/js/events/show.js');
 
@@ -224,10 +224,10 @@ final class Controller
 
         $twig = new AdHocTwig();
 
-        $twig->enqueueStyle('/css/jquery-ui.min.css');
+        $twig->enqueueStyle('/static/library/jquery-ui@1.11.4/jquery-ui.min.css');
 
-        $twig->enqueueScript('/js/jquery-ui.min.js');
-        $twig->enqueueScript('/js/jquery-ui-datepicker-fr.js');
+        $twig->enqueueScript('/static/library/jquery-ui@1.11.4/jquery-ui.min.js');
+        $twig->enqueueScript('/static/library/jquery-ui@1.11.4/jquery-ui-datepicker-fr.js');
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/events/create.js');
 
@@ -484,10 +484,10 @@ final class Controller
 
         $twig = new AdHocTwig();
 
-        $twig->enqueueStyle('/css/jquery-ui.min.css');
+        $twig->enqueueStyle('/static/library/jquery-ui@1.11.4/jquery-ui.min.css');
 
-        $twig->enqueueScript('/js/jquery-ui.min.js');
-        $twig->enqueueScript('/js/jquery-ui-datepicker-fr.js');
+        $twig->enqueueScript('/static/library/jquery-ui@1.11.4/jquery-ui.min.js');
+        $twig->enqueueScript('/static/library/jquery-ui@1.11.4/jquery-ui-datepicker-fr.js');
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/events/edit.js');
 
