@@ -993,7 +993,7 @@ class Membre extends ObjectModel
      *
      * @return int id_contact ou false
      */
-    public function checkPassword(string $password)
+    public function checkPassword(string $password): int|false
     {
         return self::checkPseudoPassword($this->pseudo, $password);
     }
@@ -1034,7 +1034,7 @@ class Membre extends ObjectModel
         if ($id_contact !== false) {
             return (int) $id_contact;
         }
-        return $id_contact;
+        return false;
     }
 
     /**
@@ -1068,22 +1068,22 @@ class Membre extends ObjectModel
      *
      * @param string $email email
      *
-     * @return int
+     * @return ?int
      */
-    public static function getIdByEmail(string $email): int
+    public static function getIdByEmail(string $email): ?int
     {
         $cs = Contact::find([
             'email' => $email,
         ]);
         if (count($cs) === 0) {
-            return 0; // contact introuvable
+            return null; // contact introuvable
         }
 
         try {
             $m = Membre::getInstance($cs[0]->getIdContact());
             return $m->getIdContact();
         } catch (\Exception $e) {
-            return 0; // membre introuvable
+            return null; // membre introuvable
         }
     }
 

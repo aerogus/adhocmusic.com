@@ -43,13 +43,14 @@ final class Controller
     /**
      * Page d'identification
      *
-     * @return string
+     * @return ?string
      */
-    public static function login(): string
+    public static function login(): ?string
     {
         // déjà authentifié
         if (isset($_SESSION['membre'])) {
             Tools::redirect('/membres/tableau-de-bord');
+            return null;
         }
 
         if (Tools::isSubmit('form-login')) {
@@ -73,7 +74,7 @@ final class Controller
 
                 $_SESSION['membre'] = $membre;
 
-                if (!empty($_SESSION['redirect_after_auth'])) {
+                if (isset($_SESSION['redirect_after_auth'])) {
                     $url = $_SESSION['redirect_after_auth'];
                     unset($_SESSION['redirect_after_auth']);
                 } else {
@@ -83,6 +84,7 @@ final class Controller
                 Log::info("Login OK");
 
                 Tools::redirect($url);
+                return null;
             } else {
                 Log::error("Login KO");
 
@@ -97,6 +99,7 @@ final class Controller
             }
         } else {
             Tools::redirect('/auth/auth');
+            return null;
         }
     }
 
@@ -186,7 +189,7 @@ final class Controller
     public static function lostPassword(): string
     {
         // déjà authentifié
-        if (!empty($_SESSION['membre'])) {
+        if (isset($_SESSION['membre'])) {
             Tools::redirect('/membres/tableau-de-bord');
         }
 
@@ -202,7 +205,7 @@ final class Controller
         if (Tools::isSubmit('form-lost-password')) {
             $email = (string) Route::params('email');
             if (Email::validate($email)) {
-                if ($id_contact = Membre::getIdByEmail($email)) {
+                if (!is_null($id_contact = Membre::getIdByEmail($email))) {
                     $membre = Membre::getInstance($id_contact);
                     $new_password = Tools::generatePassword(12);
                     $membre->setPassword($new_password);
@@ -252,7 +255,7 @@ final class Controller
         $out = ['email' => $email];
 
         if (Email::validate($email)) {
-            if ($id_contact = Membre::getIdByEmail($email)) {
+            if (!is_null(Membre::getIdByEmail($email))) {
                 $out['status'] = 'KO_ALREADY_MEMBER';
             } else {
                 $out['status'] = 'OK';

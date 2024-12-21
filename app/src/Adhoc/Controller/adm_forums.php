@@ -128,12 +128,12 @@ final class Controller
 
             $subs = ForumPrive::getSubscribers($msg['id_forum']);
             $forum = ForumPrive::getForum($msg['id_forum']);
-            if (!$subject) {
+            if (strlen($subject) > 0) {
                 $msgs = ForumPrive::getMessages($msg['id_thread']);
                 $subject = $msgs['thread']['subject'];
             }
 
-            if (count($subs)) {
+            if (count($subs) > 0) {
                 foreach ($subs as $sub) {
                     $data = [
                         'title' => 'Nouveau message',
@@ -162,9 +162,9 @@ final class Controller
 
         $twig = new AdHocTwig();
 
-        if (is_null($id_forum) && empty($id_thread)) {
+        if (is_null($id_forum) && ($id_thread === 0)) {
             $twig->assign('error_params', true);
-        } elseif (!empty($id_thread)) {
+        } elseif ($id_thread !== 0) {
             $id_forum = ForumPrive::getIdForumByIdThread($id_thread);
         }
 

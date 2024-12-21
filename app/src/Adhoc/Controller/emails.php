@@ -17,15 +17,13 @@ final class Controller
     public static function formContactCc(): string
     {
         $twig = new EmailTwig();
-        $twig->assign(
-            [
-                'name' => 'Mon nom',
-                'email' => 'email@email.com',
-                'date' => '2011-12-25 00:00:00',
-                'subject' => 'Mon sujet',
-                'text' => 'Mon texte',
-            ]
-        );
+
+        $twig->assign('name', 'Mon nom');
+        $twig->assign('email', 'email@email.com');
+        $twig->assign('date', '2011-12-25 00:00:00');
+        $twig->assign('subject', 'Mon sujet');
+        $twig->assign('text', 'Mon texte');
+
         return $twig->render('form-contact-cc.twig');
     }
 
@@ -89,16 +87,14 @@ final class Controller
     public static function newComment(): string
     {
         $twig = new EmailTwig();
-        $twig->assign(
-            [
-                'subject' => "Un nouveau commentaire a été posté sur la vidéo machin",
-                'pseudo' => 'pseudo',
-                'date' => '2011-12-25 06:00:00',
-                'title' => 'Titre du contenu',
-                'url' => HOME_URL,
-                'text' => 'Contenu du commentaire',
-            ]
-        );
+
+        $twig->assign('subject', "Un nouveau commentaire a été posté sur la vidéo machin");
+        $twig->assign('pseudo', 'pseudo');
+        $twig->assign('date', '2011-12-25 06:00:00');
+        $twig->assign('title', 'Titre du contenu');
+        $twig->assign('url', HOME_URL);
+        $twig->assign('text', 'Contenu du commentaire');
+
         return $twig->render('new-comment.twig');
     }
 
@@ -108,14 +104,12 @@ final class Controller
     public static function logAction(): string
     {
         $twig = new EmailTwig();
-        $twig->assign(
-            [
-                'subject' => "gus a ajouté un nouveau lieu",
-                'pseudo' => 'gus',
-                'action' => 'a ajouté un nouveau lieu',
-                'extra' => '1',
-            ]
-        );
+
+        $twig->assign('subject', "gus a ajouté un nouveau lieu");
+        $twig->assign('pseudo', 'gus');
+        $twig->assign('action', 'a ajouté un nouveau lieu');
+        $twig->assign('extra', '1');
+
         return $twig->render('log-action.twig');
     }
 }

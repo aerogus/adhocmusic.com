@@ -110,13 +110,13 @@ final class Controller
                 'check'   => (string) Route::params('check'),
             ];
             $data['creneaux'] = [];
-            if ($data['h1930-2030']) {
+            if (strlen($data['h1930-2030']) > 0) {
                 $data['creneaux'][] = '19h30-20h30';
             }
-            if ($data['h2030-2130']) {
+            if (strlen($data['h2030-2130']) > 0) {
                 $data['creneaux'][] = '20h30-21h30';
             }
-            if ($data['h2130-2230']) {
+            if (strlen($data['h2130-2230']) > 0) {
                 $data['creneaux'][] = '21h30-22h30';
             }
             $data['creneaux'] = implode(', ', $data['creneaux']);
@@ -205,21 +205,30 @@ final class Controller
     {
         $errors = [];
 
-        if (empty($data['name'])) {
+        if (!isset($data['name'])) {
+            $errors['name'] = "Vous devez renseigner votre nom";
+        } elseif (strlen($data['name']) === 0) {
             $errors['name'] = "Vous devez renseigner votre nom";
         }
-        if (empty($data['email'])) {
+
+        if (!isset($data['email'])) {
+            $errors['email'] = "Vous devez préciser votre email";
+        } elseif (strlen($data['email']) === 0) {
             $errors['email'] = "Vous devez préciser votre email";
         } elseif (!Email::validate($data['email'])) {
             $errors['email'] = "Votre email semble invalide ...";
         }
-        if (empty($data['date'])) {
+
+        if (!isset($data['date'])) {
+            $errors['subject'] = "Vous devez saisir une date";
+        } elseif (strlen($data['date']) === 0) {
             $errors['subject'] = "Vous devez saisir une date";
         }
+
         if (
-               empty($data['h1930-2030'])
-            && empty($data['h2030-2130'])
-            && empty($data['h2130-2230'])
+               !isset($data['h1930-2030'])
+            && !isset($data['h2030-2130'])
+            && !isset($data['h2130-2230'])
         ) {
             $errors['hour'] = "Vous devez saisir au moins un créneau";
         }

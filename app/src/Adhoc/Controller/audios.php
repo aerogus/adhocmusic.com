@@ -46,7 +46,7 @@ final class Controller
         $id = (int) Route::params('id');
         $online = (bool) Route::params('online');
 
-        if ($id) {
+        if ($id > 0) {
             $audio = Audio::getInstance($id);
             $audio->setOnline($online);
             $audio->save();
@@ -105,7 +105,7 @@ final class Controller
 
         $meta_description = "Titre : " . $audio->getName();
 
-        if ($audio->getIdGroupe()) {
+        if (!is_null($audio->getIdGroupe())) {
             $twig->assign('title', $audio->getName() . ' - ' . $audio->getGroupe()->getName());
             $meta_description .= " | Groupe : " . $audio->getGroupe()->getName();
             Trail::getInstance()
@@ -126,7 +126,7 @@ final class Controller
                 ->addStep("Média", "/medias");
         }
 
-        if ($audio->getIdEvent()) {
+        if (!is_null($audio->getIdEvent())) {
             $meta_description .= " | Evénement : " . $audio->getEvent()->getName() . " (" . Date::mysqlDatetime($audio->getEvent()->getDate(), "d/m/Y") . ")";
             $twig->assign(
                 'photos',
@@ -154,7 +154,7 @@ final class Controller
             );
         }
 
-        if ($audio->getIdLieu()) {
+        if (!is_null($audio->getIdLieu())) {
             $meta_description .= " | Lieu : " . $audio->getLieu()->getName() . " (" . $audio->getLieu()->getIdDepartement() . " - " . $audio->getLieu()->getCity()->getName() . ")";
         }
 
@@ -203,12 +203,12 @@ final class Controller
             set_time_limit(0); // l'upload peut prendre du temps !
 
             $data = [
-                'name'       => trim((string) Route::params('name')),
-                'id_groupe'  => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
-                'id_lieu'    => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
-                'id_event'   => Route::params('id_event') ? (int) Route::params('id_event') : null,
+                'name' => trim((string) Route::params('name')),
+                'id_groupe' => (bool) Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
+                'id_lieu' => (bool) Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
+                'id_event' => (bool) Route::params('id_event') ? (int) Route::params('id_event') : null,
                 'id_contact' => (int) $_SESSION['membre']->getIdContact(),
-                'online'     => (bool) Route::params('online'),
+                'online' => (bool) Route::params('online'),
             ];
 
             $errors = self::validateAudioForm($data);
@@ -245,7 +245,7 @@ final class Controller
         }
 
         $id_groupe = (int) Route::params('id_groupe');
-        if ($id_groupe) {
+        if ($id_groupe > 0) {
             $groupe = Groupe::getInstance($id_groupe);
             $twig->assign('groupe', $groupe);
         } else {
@@ -262,7 +262,7 @@ final class Controller
         }
 
         $id_lieu = (int) Route::params('id_lieu');
-        if ($id_lieu) {
+        if ($id_lieu > 0) {
             $lieu = Lieu::getInstance($id_lieu);
             $twig->assign('lieu', $lieu);
             $twig->assign(
@@ -284,7 +284,7 @@ final class Controller
         }
 
         $id_event = (int) Route::params('id_event');
-        if ($id_event) {
+        if ($id_event > 0) {
             $event = Event::getInstance($id_event);
             $twig->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
@@ -332,9 +332,9 @@ final class Controller
 
             $data = [
                 'name' => (string) Route::params('name'),
-                'id_groupe'  => Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
-                'id_lieu'    => Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
-                'id_event'   => Route::params('id_event') ? (int) Route::params('id_event') : null,
+                'id_groupe' => (bool) Route::params('id_groupe') ? (int) Route::params('id_groupe') : null,
+                'id_lieu' => (bool) Route::params('id_lieu') ? (int) Route::params('id_lieu') : null,
+                'id_event' => (bool) Route::params('id_event') ? (int) Route::params('id_event') : null,
                 'id_contact' => (int) $_SESSION['membre']->getIdContact(),
                 'online' => (bool) Route::params('online'),
             ];
@@ -377,14 +377,14 @@ final class Controller
 
         $twig->assign('page', $page);
 
-        if ($audio->getIdEvent()) {
+        if (!is_null($audio->getIdEvent())) {
             $event = Event::getInstance($audio->getIdEvent());
             $twig->assign('event', $event);
             $lieu = Lieu::getInstance($event->getIdLieu());
             $twig->assign('lieu', $lieu);
         }
 
-        if ($audio->getIdContact()) {
+        if (!is_null($audio->getIdContact())) {
             $twig->assign('membre', Membre::getInstance($audio->getIdContact()));
         }
 
@@ -423,25 +423,23 @@ final class Controller
             if ($audio->delete()) {
                 Log::info("Audio delete " . $audio->getIdAudio());
                 Tools::redirect('/audios/my');
-            } else {
-                $errors['generic'] = true;
             }
         }
 
         $twig->assign('audio', $audio);
-        if ($audio->getIdGroupe()) {
+        if (!is_null($audio->getIdGroupe())) {
             try {
                 $twig->assign('groupe', Groupe::getInstance($audio->getIdGroupe()));
             } catch (\Exception $e) {
             }
         }
-        if ($audio->getIdEvent()) {
+        if (!is_null($audio->getIdEvent())) {
             $twig->assign('event', Event::getInstance($audio->getIdEvent()));
         }
-        if ($audio->getIdLieu()) {
+        if (!is_null($audio->getIdLieu())) {
             $twig->assign('lieu', Lieu::getInstance($audio->getIdLieu()));
         }
-        if ($audio->getIdContact()) {
+        if (!is_null($audio->getIdContact())) {
             $twig->assign('membre', Membre::getInstance($audio->getIdContact()));
         }
 
