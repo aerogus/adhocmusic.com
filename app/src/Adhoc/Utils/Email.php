@@ -68,11 +68,11 @@ class Email
      * @param string               $subject
      * @param string               $tplName
      * @param array<string,mixed>  $data
-     * @param string               $attachment
+     * @param ?string              $attachment
      *
      * @return bool
      */
-    public static function send(string|array $to = '', string $subject = 'sans sujet', string $tplName = 'default', array $data = [], string $attachment = null): bool
+    public static function send(string|array $to = '', string $subject = 'sans sujet', string $tplName = 'default', array $data = [], ?string $attachment = null): bool
     {
         $subject = trim($subject);
 

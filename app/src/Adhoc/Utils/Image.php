@@ -189,9 +189,9 @@ class Image
      * charge le handle d'un fichier si passé en paramètre
      * sinon crée une nouvelle image aux dimensions données
      *
-     * @param string $file file
+     * @param ?string $file file
      */
-    public function __construct(string $file = null)
+    public function __construct(?string $file = null)
     {
         if (!is_null($file)) {
             $this->file_sou = $file;
@@ -214,13 +214,13 @@ class Image
     /**
      * Créé une image à partir de ... rien
      *
-     * @param int    $width  > 1
-     * @param int    $height > 1
-     * @param string $color  (ex: #ffffff)
+     * @param int     $width  > 1
+     * @param int     $height > 1
+     * @param ?string $color  (ex: #ffffff)
      *
      * @return object
      */
-    public function init(int $width = 16, int $height = 16, string $color = null): object
+    public function init(int $width = 16, int $height = 16, ?string $color = null): object
     {
         $this->handle = imagecreatetruecolor($width, $height);
 

@@ -386,11 +386,11 @@ abstract class Forum
     /**
      * Compte le nombre de threads par forum
      *
-     * @param string $id_forum id_forum
+     * @param ?string $id_forum id_forum
      *
      * @return array<string,int>|int
      */
-    public static function getThreadsCount(string $id_forum = null): array|int
+    public static function getThreadsCount(?string $id_forum = null): array|int
     {
         $db = DataBase::getInstance();
 
@@ -415,11 +415,11 @@ abstract class Forum
     /**
      * Compte le nombre de messages par forum
      *
-     * @param string $id_forum id_forum
+     * @param ?string $id_forum id_forum
      *
      * @return array<string,int>|int
      */
-    public static function getMessagesCount(string $id_forum = null): array|int
+    public static function getMessagesCount(?string $id_forum = null): array|int
     {
         $db = DataBase::getInstance();
 
