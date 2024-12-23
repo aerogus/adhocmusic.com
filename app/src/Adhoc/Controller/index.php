@@ -233,6 +233,7 @@ final class Controller
     public static function map(): string
     {
         $twig = new AdHocTwigBootstrap();
+        $twig->enqueueStyle('/css/map.css');
 
         $from = trim((string) Route::params('from'));
         $twig->assign('referer', $from);

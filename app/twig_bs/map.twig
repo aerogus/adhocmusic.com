@@ -1,14 +1,12 @@
 {% include 'common/header.twig' %}
 
-{% if referer %}
-<div class="infobulle error">
-  <p>La page que vous demandez n'existe pas</p>
-  <p>Voici le plan du site ainsi que les principaux liens.</p>
-</div>
-{% endif %}
-
 <div class="container">
   <h1>Plan du site</h1>
+
+  {% if referer %}
+  <div class="alert alert-danger">La page que vous demandez n'existe pas, voici le plan du site ainsi que les principaux liens:</div>
+  {% endif %}
+
   <div>
     <div class="tree_top"><a href="/">adhocmusic.com</a></div>
     <ul class="tree">
