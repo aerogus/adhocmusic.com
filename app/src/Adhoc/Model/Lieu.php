@@ -869,11 +869,11 @@ class Lieu extends ObjectModel
     /**
      * Retourne les lieux d'un département
      *
-     * @param string $id_departement département
+     * @param ?string $id_departement département
      *
      * @return array<string,array<static>>|array<static>
      */
-    public static function getLieuxByDep(string $id_departement = null): array
+    public static function getLieuxByDep(?string $id_departement = null): array
     {
         $db = DataBase::getInstance();
 

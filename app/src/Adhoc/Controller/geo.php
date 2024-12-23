@@ -7,7 +7,6 @@ namespace Adhoc\Controller;
 use Adhoc\Model\City;
 use Adhoc\Model\WorldCountry;
 use Adhoc\Model\WorldRegion;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Route;
 

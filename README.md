@@ -73,3 +73,7 @@ elles sont converties en :
 - 320x0
 
 Les `Video` doivent avoir une miniature 320x180
+
+## Dépendances front
+
+https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js

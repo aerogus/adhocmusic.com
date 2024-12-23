@@ -1,0 +1,21 @@
+{% include 'common/header.twig' %}
+
+<div class="container">
+  <h1>Partenaires</h1>
+    {% if partners %}
+    <ul class="partners">
+    {% for partner in partners %}
+      <li>
+        <a href="{{ partner.url }}">
+          <img src="{{ partner.iconUrl }}" alt="">
+          <strong>{{ partner.title }}</strong><br>{{ partner.description }}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    Pas de partenaires référencés
+    {% endif %}
+</div>
+
+{% include 'common/footer.twig' %}

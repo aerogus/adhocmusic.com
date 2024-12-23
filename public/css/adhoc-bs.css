@@ -1,17 +1,15 @@
 /* version bootstrap de la feuille de style 2024 */
 
-@font-face {
-  font-family: 'TradeGothic';
-  src: url('../fonts/trade-gothic-bold.woff2') format('woff2'),
-      url('../fonts/trade-gothic-bold.woff') format('woff');
-  font-weight: bold;
-  font-style: normal;
-}
+@import "adhoc-bs-font.css";
 
 body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     background-color: #ececec;
+}
+
+a {
+  color: inherit;
 }
 
 #brand {
@@ -21,10 +19,26 @@ body {
   font-size: 1.5rem;
 }
 
+header {
+  background: #292933 url("/img/tri/bottom-right-ececec.svg") no-repeat bottom;
+  background-size: 100% 0vw;
+  padding-bottom: 0vw;
+  color: #a7a7a7;
+}
+
 footer {
     background: #292933 url("/img/tri/top-left-ececec.svg") no-repeat;
-    background-size: 100% 4vw;
-    padding-top: 6vw;
+    background-size: 100% 2vw;
+    padding-top: 4vw;
     padding-bottom: 20px;
     color: #a7a7a7;
+}
+footer h4 {
+  font-family: TradeGothic;
+  text-transform: uppercase;
+  color: white;
+  font-size: 1.25rem;
+}
+footer a:not(:hover) {
+  text-decoration: none;
 }

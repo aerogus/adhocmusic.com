@@ -64,8 +64,6 @@ adm_subscriptions|apiDelete|POST|/api/subscriptions/delete/:id
 assoce|assoce|GET|/assoce
 assoce|concerts|GET|/concerts
 assoce|afterworks|GET|/afterworks
-assoce|afterworksInscription|GET|/afterworks/inscription
-assoce|afterworksInscription|POST|/afterworks/inscription
 assoce|festival|GET|/festival
 assoce|equipe|GET|/equipe
 audios|my|GET|/audios/my

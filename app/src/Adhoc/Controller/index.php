@@ -86,13 +86,12 @@ final class Controller
      */
     public static function partners(): string
     {
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->assign('title', "♫ Les Partenaires de l'association AD'HOC");
         $twig->assign('description', "Les Partenaires de l'Association AD'HOC");
 
-        Trail::getInstance()
-            ->addStep("Partenaires");
+        $twig->assign('breadcrumb', ['🏠', 'Partenaires']);
 
         $twig->assign('partners', Partner::findAll());
 
@@ -106,12 +105,11 @@ final class Controller
      */
     public static function contact(): string
     {
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->enqueueScript('/js/contact.js');
 
-        Trail::getInstance()
-            ->addStep("Contact");
+        $twig->assign('breadcrumb', ['🏠', 'Contact']);
 
         $twig->assign('title', "Contacter l'Association AD'HOC");
         $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
@@ -132,7 +130,7 @@ final class Controller
             ];
 
             // si identifié, préremplissage de certains champs
-            if (!is_null($_SESSION['membre'])) {
+            if (isset($_SESSION['membre'])) {
                 if ($_SESSION['membre']->getFirstName() || $_SESSION['membre']->getLastName()) {
                     $data['name'] = $_SESSION['membre']->getFirstName() . ' ' . $_SESSION['membre']->getLastName()
                                   . ' (' . $_SESSION['membre']->getPseudo() . ')';
@@ -195,7 +193,7 @@ final class Controller
      */
     public static function sitemap(): string
     {
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->assign(
             'groupes',
@@ -234,13 +232,12 @@ final class Controller
      */
     public static function map(): string
     {
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $from = trim((string) Route::params('from'));
         $twig->assign('referer', $from);
 
-        Trail::getInstance()
-            ->addStep("Plan du Site");
+        $twig->assign('breadcrumb', ['🏠', 'Plan du site']);
 
         return $twig->render('map.twig');
     }
@@ -252,10 +249,9 @@ final class Controller
      */
     public static function mentionsLegales(): string
     {
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
-        Trail::getInstance()
-            ->addStep("Mentions Légales");
+        $twig->assign('breadcrumb', ['🏠', 'Mentions légales']);
 
         return $twig->render('mentions-legales.twig');
     }
@@ -267,10 +263,12 @@ final class Controller
      */
     public static function credits(): string
     {
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Crédits");
+
+        $twig->assign('breadcrumb', ['🏠', 'Crédits']);
 
         return $twig->render('credits.twig');
     }

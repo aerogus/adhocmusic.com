@@ -1,19 +1,22 @@
-{# fil d'ariane #}
-{% if trail|length > 1 %}
-<div class="breadcrumb">
-  <ul>
-    {% for key, item in trail %}
-    <li>
-    {% if item.link %}
-      <a {% if key == 0 %} class="home"{% endif %} href="{{ item.link }}" title="{{ item.description }}">
-        {% if key == 0 %}<span class="mobile">🏠</span>{% endif %}
-        <span>{{ item.title }}</span>
-      </a>
-    {% else %}
-    <span>{{ item.title }}</span>
-    {% endif %}
-    </li>
-    {% endfor %}
-  </ul>
+{% if breadcrumb|length > 1 %}
+<div class="container">
+  <nav class="my-3" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      {% for item in breadcrumb %}
+      <li class="breadcrumb-item {% if loop.last %}active{% endif %}" {% if loop.last %}aria-current="page"{% endif %}>{% if loop.last %}<span>{% endif %}
+      {% if item is iterable %}
+        {% if item.link %}
+        <a href="{{ item.link }}" title="{{ item.title }}">{{ item.title }}</a>
+        {% else %}
+        {{ item.title }}
+        {% endif %}
+      {% else %}
+        {{ item }}
+      {% endif %}
+      {% if loop.last %}</span>{% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+  </nav>
 </div>
 {% endif %}

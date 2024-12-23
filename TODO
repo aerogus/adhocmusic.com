@@ -1,0 +1,7 @@
+# TODO 2024
+
+- finir les corrections twig (composer tcs) -> 0 error (4)
+- finir les corrections eslint (composer eslint) -> 0 error (648)
+- refacto Contact -> Membre -> MembreAdhoc ?
+- écrire + de tests unitaires
+- passage à bootstrap car knacss plus supporté
