@@ -1,7 +1,3 @@
-alerting|my|GET|/alerting/my
-alerting|my|POST|/alerting/my
-alerting|sub|GET|/alerting/sub
-alerting|unsub|GET|/alerting/unsub
 adm|index|GET|/adm
 adm|groupesIndex|GET|/adm/groupes
 adm|groupesShow|GET|/adm/groupes/:id
@@ -61,6 +57,11 @@ adm_subscriptions|apiList|GET|/api/subscriptions/list
 adm_subscriptions|apiCreate|POST|/api/subscriptions/create
 adm_subscriptions|apiEdit|POST|/api/subscriptions/edit/:id
 adm_subscriptions|apiDelete|POST|/api/subscriptions/delete/:id
+alerting|my|GET|/alerting/my
+alerting|my|POST|/alerting/my
+alerting|sub|GET|/alerting/sub
+alerting|unsub|GET|/alerting/unsub
+api|membres|GET|/api/membres
 assoce|assoce|GET|/assoce
 assoce|concerts|GET|/concerts
 assoce|afterworks|GET|/afterworks

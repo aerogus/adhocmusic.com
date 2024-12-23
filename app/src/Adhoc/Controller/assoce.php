@@ -22,7 +22,7 @@ final class Controller
     {
         $twig = new AdHocTwigBootstrap();
 
-        $twig->assign('breadcrumb', ['🏠', "L'Association"]);
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], "L'Association"]);
 
         return $twig->render('assoce/presentation.twig');
     }
@@ -34,7 +34,7 @@ final class Controller
     {
         $twig = new AdHocTwigBootstrap();
 
-        $twig->assign('breadcrumb', ['🏠', "Concerts"]);
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], "Concerts"]);
 
         $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
         $twig->enqueueScript('/static/library/imagesloaded@4.1.4/imagesloaded.min.js');
@@ -54,7 +54,7 @@ final class Controller
     {
         $twig = new AdHocTwigBootstrap();
 
-        $twig->assign('breadcrumb', ['🏠', "Afterworks"]);
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], "Afterworks"]);
 
         return $twig->render('assoce/afterworks.twig');
     }
@@ -66,7 +66,7 @@ final class Controller
     {
         $twig = new AdHocTwigBootstrap();
 
-        $twig->assign('breadcrumb', ['🏠', "Festival"]);
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], "Festival"]);
 
         return $twig->render('assoce/festival.twig');
     }
@@ -78,7 +78,7 @@ final class Controller
     {
         $twig = new AdHocTwigBootstrap();
 
-        $twig->assign('breadcrumb', ['🏠', "Équipe"]);
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], "Équipe"]);
 
         $twig->assign('membres', MembreAdhoc::getStaff(true));
 

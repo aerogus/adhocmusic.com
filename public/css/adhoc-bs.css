@@ -1,11 +1,12 @@
 /* version bootstrap de la feuille de style 2024 */
 
 @import "adhoc-bs-font.css";
+@import "adhoc-bs-video-player.css";
 
 body {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    background-color: #ececec;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background-color: #ececec;
 }
 
 a {
@@ -27,18 +28,58 @@ header {
 }
 
 footer {
-    background: #292933 url("/img/tri/top-left-ececec.svg") no-repeat;
-    background-size: 100% 2vw;
-    padding-top: 4vw;
-    padding-bottom: 20px;
-    color: #a7a7a7;
-}
-footer h4 {
-  font-family: TradeGothic;
-  text-transform: uppercase;
-  color: white;
-  font-size: 1.25rem;
-}
-footer a:not(:hover) {
-  text-decoration: none;
+  background: #292933 url("/img/tri/top-left-ececec.svg") no-repeat;
+  background-size: 100% 2vw;
+  padding-top: 4vw;
+  padding-bottom: 20px;
+  color: #a7a7a7;
+
+  h4 {
+    font-family: TradeGothic;
+    text-transform: uppercase;
+    color: white;
+    font-size: 1.25rem;
+  }
+
+  a:not(:hover) {
+    text-decoration: none;
+  }
+
+  li {
+    background-repeat: no-repeat;
+    padding-left: 24px;
+
+    &.email {
+      background-image: url("/img/social/email.svg");
+    }
+
+    &.peertube {
+      background-image: url("/img/social/peertube.svg");
+      background-size: 16px;
+      background-position: 4px center;
+      filter: grayscale(100%);
+    }
+
+    &.facebook {
+      background-image: url("/img/social/facebook.svg");
+      background-size: 22px;
+      background-position: 0 center;
+    }
+
+    &.twitter {
+      background-image: url("/img/social/twitter.svg");
+    }
+
+    &.x {
+      background-image: url("/img/social/x.svg");
+      background-size: 20px;
+      background-position: 2px center;
+    }
+
+    &.instagram {
+      background-image: url("/img/social/instagram.svg");
+      background-size: 22px;
+      background-position: 0 center;
+    }
+  }
 }

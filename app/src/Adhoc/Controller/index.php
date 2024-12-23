@@ -91,7 +91,7 @@ final class Controller
         $twig->assign('title', "♫ Les Partenaires de l'association AD'HOC");
         $twig->assign('description', "Les Partenaires de l'Association AD'HOC");
 
-        $twig->assign('breadcrumb', ['🏠', 'Partenaires']);
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], 'Partenaires']);
 
         $twig->assign('partners', Partner::findAll());
 
@@ -109,7 +109,7 @@ final class Controller
 
         $twig->enqueueScript('/js/contact.js');
 
-        $twig->assign('breadcrumb', ['🏠', 'Contact']);
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], 'Contact']);
 
         $twig->assign('title', "Contacter l'Association AD'HOC");
         $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
@@ -237,7 +237,7 @@ final class Controller
         $from = trim((string) Route::params('from'));
         $twig->assign('referer', $from);
 
-        $twig->assign('breadcrumb', ['🏠', 'Plan du site']);
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], 'Plan du site']);
 
         return $twig->render('map.twig');
     }
@@ -251,7 +251,7 @@ final class Controller
     {
         $twig = new AdHocTwigBootstrap();
 
-        $twig->assign('breadcrumb', ['🏠', 'Mentions légales']);
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], 'Mentions légales']);
 
         return $twig->render('mentions-legales.twig');
     }
@@ -268,7 +268,7 @@ final class Controller
         Trail::getInstance()
             ->addStep("Crédits");
 
-        $twig->assign('breadcrumb', ['🏠', 'Crédits']);
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], 'Crédits']);
 
         return $twig->render('credits.twig');
     }
