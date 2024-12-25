@@ -23,13 +23,13 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
+        $twig = new AdHocTwigBootstrap();
+
         $twig->assign('breadcrumb', [
             ['title' => '🏠', 'link' => '/'],
             ['title' => "Privé", "link" => '/adm'],
             "À l'affiche",
         ]);
-
-        $twig = new AdHocTwigBootstrap();
 
         $twig->assign(
             'featured_front',
