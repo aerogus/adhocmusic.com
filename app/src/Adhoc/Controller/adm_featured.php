@@ -7,7 +7,6 @@ namespace Adhoc\Controller;
 use Adhoc\Model\Event;
 use Adhoc\Model\Featured;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Route;
@@ -67,12 +66,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("À l'affiche", "/adm/featured")
-            ->addStep("Ajouter");
+        $twig = new AdHocTwigBootstrap();
 
-        $twig = new AdHocTwig();
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => "Privé", "link" => '/adm'],
+            ['title' => "À l'affiche", "link" => '/adm/featured'],
+            'Ajouter',
+        ]);
 
         $twig->enqueueStyle('/static/library/jquery-ui@1.11.4/jquery-ui.min.css');
 
@@ -154,12 +155,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("À l'affiche", "/adm/featured")
-            ->addStep("Modifier");
+        $twig = new AdHocTwigBootstrap();
 
-        $twig = new AdHocTwig();
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => "Privé", "link" => '/adm'],
+            ['title' => "À l'affiche", "link" => '/adm/featured'],
+            'Modifier',
+        ]);
 
         $twig->enqueueStyle('/static/library/jquery-ui@1.11.4/jquery-ui.min.css');
 
@@ -234,12 +237,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("A l'Affiche", "/adm/featured")
-            ->addStep("Supprimer");
+        $twig = new AdHocTwigBootstrap();
 
-        $twig = new AdHocTwig();
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => "Privé", "link" => '/adm'],
+            ['title' => "À l'affiche", "link" => '/adm/featured'],
+            'Supprimer',
+        ]);
 
         $id = (int) Route::params('id');
         $f = Featured::getInstance($id);
