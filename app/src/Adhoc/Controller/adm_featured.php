@@ -8,6 +8,7 @@ use Adhoc\Model\Event;
 use Adhoc\Model\Featured;
 use Adhoc\Model\Membre;
 use Adhoc\Utils\AdHocTwig;
+use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
@@ -22,11 +23,13 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("À l'affiche");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => "Privé", "link" => '/adm'],
+            "À l'affiche",
+        ]);
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->assign(
             'featured_front',
