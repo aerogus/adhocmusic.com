@@ -1106,7 +1106,7 @@ class Membre extends ObjectModel
         $sql .= "WHERE 1 ";
 
         if (isset($params['id_groupe'])) {
-            $subSql = "SELECT `id_contact` FROM `adhoc_appartient_a` WHERE `id_groupe` = " . (int) $params['id_groupe'] . " ";
+            $subSql = "SELECT `id_contact` FROM `adhoc_groupe_membre` WHERE `id_groupe` = " . (int) $params['id_groupe'] . " ";
             if ($ids_contact = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
                 $sql .= "AND `id_contact` IN (" . implode(',', $ids_contact) . ") ";
             } else {
