@@ -1,0 +1,21 @@
+{% include 'common/header.twig' %}
+
+<div class="container">
+  <h1>Newsletters</h1>
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Sujet</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for newsletter in newsletters %}
+      <tr>
+        <td><a href="/newsletters/{{ newsletter.id }}">{{ newsletter.title }}</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% include 'common/footer.twig' %}

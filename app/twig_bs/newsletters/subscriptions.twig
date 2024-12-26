@@ -1,0 +1,41 @@
+{% include 'common/header.twig' %}
+
+<div class="container">
+  <h1>Newsletter</h1>
+{% if form %}
+<form id="form-newsletter" name="form-newsletter" action="/newsletters/subscriptions" method="post">
+  <div class="mb-3">
+    <label class="form-label" for="email">E-mail</label>
+    <input type="email" id="email" name="email" placeholder="E-mail" class="form-control" value="{{ email }}" required="required">
+  </div>
+  <div class="mb-3">
+    <input type="radio" class="form-control" name="action" value="sub" {% if action == 'sub' %} checked="checked"{% endif %}>
+    <label class="form-label"  for="sub">Inscription</label>
+  </div>
+  <div class="mb-3">
+    <input type="radio" class="form-control" name="action" value="unsub" {% if action == 'unsub' %} checked="checked"{% endif %}>
+    <label class="form-label" for="unsub">Désinscription</label>
+  </div>
+  <input class="btn btn-primary" type="submit" id="form-newsletter-submit" name="form-newsletter-submit" value="Valider">
+</form>
+{% endif %}
+
+{% if error_email %}
+<div class="alert alert-danger">Adresse email invalide</div>
+{% endif %}
+
+{% if ret %}
+  {% if ret == 'SUB-OK' %}
+  <div class="alert alert-success">L'email <strong>{{ email }}</strong> a bien été inscrite à la liste des abonnés de la newsletter AD'HOC. Merci et bienvenue ! :)</div>
+  {% elseif ret == 'SUB-KO' %}
+  <div class="alert alert-danger">L'email <strong>{{ email }}</strong> est déjà inscrite à la liste des abonnés de la newsletter AD'HOC.</div>
+  {% elseif ret == 'UNSUB-OK' %}
+  <div class="alert alert-success">L'email <strong>{{ email }}</strong> a bien été désinscrite de la liste des abonnés de la newsletter AD'HOC. Au revoir :(</div>
+  {% elseif ret == 'UNSUB-KO' %}
+  <div class="alert alert-danger">L'email <strong>{{ email }}</strong> n'est pas inscrite à la newsletter AD'HOC.</div>
+  {% endif %}
+{% endif %}
+
+</div>
+
+{% include 'common/footer.twig' %}
