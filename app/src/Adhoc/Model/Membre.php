@@ -192,7 +192,7 @@ class Membre extends ObjectModel
     protected static array $all_fields = [
         'id_contact' => 'int', // pk
         'pseudo' => 'string',
-        'password' => 'password',
+        'password' => 'string', // hashé
         'last_name' => 'string',
         'first_name' => 'string',
         'address' => 'string',
@@ -244,8 +244,9 @@ class Membre extends ObjectModel
     }
 
     /**
+     * Retourne le password (version hashée)
+     *
      * @return ?string
-     * /!\ sous forme cryptée mysql
      */
     public function getPassword(): ?string
     {
