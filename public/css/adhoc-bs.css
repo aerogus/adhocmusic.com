@@ -14,6 +14,18 @@ a {
   color: inherit;
 }
 
+/* listing groupes */
+.card {
+  width: 140px;
+}
+.card-img-top {
+  padding: 1rem;
+}
+.card-title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 #brand {
   font-family: TradeGothic;
   background: url("../img/logos/note.svg") no-repeat 0 0/2rem;
