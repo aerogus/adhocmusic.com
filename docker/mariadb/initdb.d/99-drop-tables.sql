@@ -1,7 +1,7 @@
 -- effacer dans l'ordre inverse de création
 -- pour respecter les contraintes d'intégrité
 
---DROP TABLE IF EXISTS `adhoc_organise_par`;
+--DROP TABLE IF EXISTS `adhoc_event_structure`;
 --DROP TABLE IF EXISTS `adhoc_event_style`;
 --DROP TABLE IF EXISTS `adhoc_participe_a`;
 --DROP TABLE IF EXISTS `adhoc_video_groupe`;

@@ -577,7 +577,7 @@ class Event extends ObjectModel
         }
 
         if (isset($params['id_structure'])) {
-            $subSql = "SELECT `id_event` FROM `adhoc_organise_par` WHERE `id_structure` = " . (int) $params['id_structure'] . " ";
+            $subSql = "SELECT `id_event` FROM `adhoc_event_structure` WHERE `id_structure` = " . (int) $params['id_structure'] . " ";
             if ($ids_event = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
                 $sql .= "AND `id_event` IN (" . implode(',', (array) $ids_event) . ") ";
             } else {

@@ -563,6 +563,6 @@ CREATE TABLE `adhoc_event_structure` ( /* ex adhoc_organise_par */
   PRIMARY KEY (`id_event`,`id_structure`),
   KEY `id_event` (`id_event`),
   KEY `id_structure` (`id_structure`),
-  CONSTRAINT `fk_organise_par_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`),
-  CONSTRAINT `fk_organise_par_structure` FOREIGN KEY (`id_structure`) REFERENCES `adhoc_structure` (`id_structure`)
+  CONSTRAINT `fk_event_structure_event` FOREIGN KEY (`id_event`) REFERENCES `adhoc_event` (`id_event`),
+  CONSTRAINT `fk_event_structure_structure` FOREIGN KEY (`id_structure`) REFERENCES `adhoc_structure` (`id_structure`)
 );
