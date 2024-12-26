@@ -30,13 +30,12 @@ final class Controller
      */
     public static function index(): string
     {
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->assign('title', "♫ Les groupes de la communauté musicale AD'HOC");
         $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
 
-        Trail::getInstance()
-            ->addStep("Groupes");
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], 'Groupes']);
 
         $twig->assign(
             'groupes',

@@ -1,0 +1,22 @@
+{% include 'common/header.twig' %}
+
+  <div class="container">
+    <h1>Groupes</h1>
+
+    {% if groupes|length == 0 %}
+    <p>Aucun groupe référencé.</p>
+    {% else %}
+      {% for groupe in groupes %}
+      <div class="card text-center">
+        <img src="{{ groupe.miniPhoto }}" class="card-img-top" alt="" />
+        <div class="card-body">
+          <h5 class="card-title">{{ groupe.name }}</h5>
+          <a class="btn btn-secondary" href="{{ groupe.url }}">Voir</a>
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
+
+  </div>
+
+{% include 'common/footer.twig' %}
