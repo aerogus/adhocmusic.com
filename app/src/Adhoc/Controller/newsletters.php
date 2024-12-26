@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Adhoc\Controller;
 
 use Adhoc\Model\Newsletter;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Log;
@@ -23,10 +22,12 @@ final class Controller
      */
     public static function index(): string
     {
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
-        Trail::getInstance()
-            ->addStep("Newsletters");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            'Newsletters',
+        ]);
 
         $twig->assign(
             'newsletters',
@@ -46,7 +47,7 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         try {
             $newsletter = Newsletter::getInstance($id);
@@ -67,11 +68,13 @@ final class Controller
         $email = (string) Route::params('email');
         $action = (string) Route::params('action');
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
-        Trail::getInstance()
-            ->addStep("Newsletters", "/newsletters")
-            ->addStep("Gestion de l'abonnement");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Newsletters', 'link' => '/newsletters'],
+            "Gestion de l'abonnement",
+        ]);
 
         $twig->assign('email', $email);
         $twig->assign('action', $action);
