@@ -7,6 +7,7 @@ namespace Adhoc\Controller;
 use Adhoc\Model\CMS;
 use Adhoc\Model\Membre;
 use Adhoc\Utils\AdHocTwig;
+use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
 use Adhoc\Utils\Trail;

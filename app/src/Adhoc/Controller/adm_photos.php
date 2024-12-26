@@ -7,6 +7,7 @@ namespace Adhoc\Controller;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Utils\AdHocTwig;
+use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;

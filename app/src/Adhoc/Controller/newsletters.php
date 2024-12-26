@@ -6,6 +6,7 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Newsletter;
 use Adhoc\Utils\AdHocTwig;
+use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;

@@ -11,6 +11,7 @@ use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Video;
 use Adhoc\Utils\AdHocTwig;
+use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\Log;

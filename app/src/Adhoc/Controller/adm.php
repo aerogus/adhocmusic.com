@@ -10,6 +10,7 @@ use Adhoc\Model\Membre;
 use Adhoc\Model\Style;
 use Adhoc\Model\TypeMusicien;
 use Adhoc\Utils\AdHocTwig;
+use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;

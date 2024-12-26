@@ -15,6 +15,7 @@ use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Video;
 use Adhoc\Utils\AdHocTwig;
+use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Image;
@@ -72,15 +73,14 @@ final class Controller
             Tools::redirect('/');
         }
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->enqueueScript('/js/membres/create.js');
 
         $twig->assign('title', "Inscription à l'association AD'HOC");
         $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
-        Trail::getInstance()
-            ->addStep('Créer un compte');
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], 'Créer un compte']);
 
         $twig->assign('create', (bool) Route::params('create'));
 

@@ -7,6 +7,7 @@ namespace Adhoc\Controller;
 use Adhoc\Model\Comment;
 use Adhoc\Model\Membre;
 use Adhoc\Utils\AdHocTwig;
+use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;

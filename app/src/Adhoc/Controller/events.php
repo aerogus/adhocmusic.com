@@ -14,6 +14,7 @@ use Adhoc\Model\Structure;
 use Adhoc\Model\Video;
 use Adhoc\Model\Style;
 use Adhoc\Utils\AdHocTwig;
+use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\Log;

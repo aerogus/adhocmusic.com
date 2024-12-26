@@ -16,6 +16,7 @@ use Adhoc\Model\WorldCountry;
 use Adhoc\Model\WorldRegion;
 use Adhoc\Model\Video;
 use Adhoc\Utils\AdHocTwig;
+use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;

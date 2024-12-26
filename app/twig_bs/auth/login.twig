@@ -1,7 +1,7 @@
 {% include 'common/header.twig' %}
 
 {% if auth_failed %}
-<div class="infobulle error">Authentification échouée</div>
+<div class="alert alert-danger">Authentification échouée</div>
 {% endif %}
 
 {% if auth_required %}
@@ -16,12 +16,12 @@
     <form id="form-login" name="form-login" method="post" action="/auth/login">
       <div class="mbs">
         <label for="login-pseudo">Pseudo</label>
-        <div class="infobulle error" id="error_login-pseudo"{% if not error_login_pseudo %} style="display: none"{% endif %}>Pseudo vide !</div>
+        <div class="alert alert-danger" id="error_login-pseudo"{% if not error_login_pseudo %} style="display: none"{% endif %}>Pseudo vide !</div>
         <input type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo" class="w100">
       </div>
       <div class="mbm">
         <label for="login-password">Mot de passe</label>
-        <div class="infobulle error" id="error_login-password"{% if not error_login_password %} style="display: none"{% endif %}>Mot de passe vide !</div>
+        <div class="alert alert-danger" id="error_login-password"{% if not error_login_password %} style="display: none"{% endif %}>Mot de passe vide !</div>
         <input type="password" id="login-password" name="password" placeholder="Mot de passe" class="w100">
       </div>
       <div class="mbs">

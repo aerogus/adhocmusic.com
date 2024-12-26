@@ -1,0 +1,47 @@
+{% include 'common/header.twig' %}
+
+<div class="container">
+  <h1>Créer un compte</h1>
+
+{% if create %}
+
+<div class="alert alert-info">Bienvenue ! Votre compte AD’HOC a bien été créé. Consultez votre boite aux lettres électronique, elle vous confirme votre inscription et un mot de passe vous a été communiqué.<br>
+Cliquez alors sur le cadenas en haut à droite pour vous identifier.</div>
+
+{% elseif error_generic %}
+
+<div class="alert alert-danger">Erreur à l’inscription. Votre email est déjà présente, vous avez
+déjà un compte. Si vous ne vous souvenez plus de votre mot de passe, <a href="/auth/lost-password">cliquez ici</a> pour le récupérer.</div>
+
+{% else %}
+
+<form id="form-member-create" name="form-member-create" method="post" action="/membres/create">
+  <div class="mb-3">
+    <label for="pseudo" class="form-label">Pseudo</label>
+    <div id="error_pseudo_unavailable" class="alert alert-danger"{% if not error_pseudo_unavailable %} style="display: none"{% endif %}>Ce pseudo est pris, veuillez en choisir un autre</div>
+    <div class="alert alert-danger" id="error_pseudo"{% if not error_pseudo %} style="display: none"{% endif %}>Vous devez saisir un pseudo entre 1 à 50 caractères</div>
+    <input id="pseudo" class="form-control" name="pseudo" type="text" maxlength="50" value="{{ data.pseudo }}" placeholder="Pseudo" required>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">E-mail</label>
+    <div id="error_email"{% if not error_email %} style="display: none"{% endif %} class="alert alert-danger">Vous devez saisir votre e-mail</div>
+    <div id="error_invalid_email" class="alert alert-danger"{% if not error_invalid_email %} style="display: none"{% endif %}>Cet e-mail semble invalide</div>
+    <div id="error_already_member" class="alert alert-danger"{% if not error_already_member %} style="display: none"{% endif %}>Inscription impossible car un compte avec cet e-mail existe déjà. Vous avez <a href="/auth/lost-password">oublié votre mot de passe ?</a></div>
+    <input id="email" class="form-control" name="email" type="email" maxlength="50" value="{{ data.email }}" placeholder="E-mail" required>
+  </div>
+  <div class="mb-3 form-check">
+    <input id="mailing" class="form-check-input" name="mailing" type="checkbox"{% if data.mailing %} checked="checked"{% endif %}>
+    <label for="mailing" class="form-check-label">Je souhaite recevoir la newsletter</label>
+  </div>
+  <div>
+    <input type="hidden" name="csrf" value="{{ data.csrf }}">
+    <input type="hidden" name="text" value="{{ data.text }}">
+    <input id="form-membrer-create-submit" name="form-member-create-submit" class="btn btn-primary" type="submit" value="Je crée mon compte">
+  </div>
+</form>
+
+{% endif %}
+
+</div>{# .container #}
+
+{% include 'common/footer.twig' %}

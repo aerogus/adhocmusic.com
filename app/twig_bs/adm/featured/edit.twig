@@ -5,33 +5,33 @@
   <form id="form-featured-edit" name="form-featured-edit" action="/adm/featured/edit" method="post" enctype="multipart/form-data">
     <ul>
       <li>
-        <div class="infobulle error" id="error_title"{% if not error_title %} style="display:none"{% endif %}>Vous devez saisir un titre</div>
+        <div class="alert alert-danger" id="error_title"{% if not error_title %} style="display:none"{% endif %}>Vous devez saisir un titre</div>
         <label for="title">Titre</label>
         <input style="width:400px" maxlength="35" type="text" name="title" id="title" value="{{ data.title }}">
       </li>
       <li>
-        <div class="infobulle error" id="error_description"{% if not error_description %} style="display:none"{% endif %}>Vous devez saisir une description</div>
+        <div class="alert alert-danger" id="error_description"{% if not error_description %} style="display:none"{% endif %}>Vous devez saisir une description</div>
         <label for="description">Description</label>
         <input style="width:680px" maxlength="85" type="text" name="description" id="description" value="{{ data.description }}">
       </li>
       <li>
-        <div class="infobulle error" id="error_url"{% if not error_url %} style="display:none"{% endif %}>Vous devez saisir un lien</div>
+        <div class="alert alert-danger" id="error_url"{% if not error_url %} style="display:none"{% endif %}>Vous devez saisir un lien</div>
         <label for="url">Lien</label>
         <input style="width:680px" type="text" name="url" id="url" value="{{ data.url }}">
       </li>
       <li>
-        <div class="infobulle error" id="error_image"{% if not error_image %} style="display:none"{% endif %}>Vous devez choisir une image</div>
+        <div class="alert alert-danger" id="error_image"{% if not error_image %} style="display:none"{% endif %}>Vous devez choisir une image</div>
         <label for="image">Image (.jpg|.png|.gif 1000x375)</label>
         <input type="file" name="image" id="image">
         <img src="{{ data.image }}" alt="">
       </li>
       <li>
-        <div class="infobulle error" id="error_datdeb"{% if not error_datdeb %} style="display:none"{% endif %}>Vous devez saisir une date de début</div>
+        <div class="alert alert-danger" id="error_datdeb"{% if not error_datdeb %} style="display:none"{% endif %}>Vous devez saisir une date de début</div>
         <label for="datdeb">Début</label>
         <input type="text" name="datdeb" id="datdeb" value="{{ data.datdeb|date("Y-m-d") }}">
       </li>
       <li>
-        <div class="infobulle error" id="error_datfin"{% if not error_datfin %} style="display:none"{% endif %}>Vous devez saisir une date de fin</div>
+        <div class="alert alert-danger" id="error_datfin"{% if not error_datfin %} style="display:none"{% endif %}>Vous devez saisir une date de fin</div>
         <label for="datfin">Fin</label>
         <input type="text" name="datfin" id="datfin" value="{{ data.datFin|date("Y-m-d") }}">
       </li>

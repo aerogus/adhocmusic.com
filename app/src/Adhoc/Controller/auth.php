@@ -7,11 +7,11 @@ namespace Adhoc\Controller;
 use Adhoc\Model\Contact;
 use Adhoc\Model\Membre;
 use Adhoc\Utils\AdHocTwig;
+use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 final class Controller
 {
@@ -27,10 +27,9 @@ final class Controller
             Tools::redirect('/membres/tableau-de-bord');
         }
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
-        Trail::getInstance()
-            ->addStep('Se connecter ou créer un compte');
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], 'Se connecter ou créer un compte']);
 
         $twig->assign('robots', 'noindex,nofollow');
 
@@ -90,10 +89,8 @@ final class Controller
 
             Log::error("Login KO");
 
-            Trail::getInstance()
-                ->addStep("Se connecter");
-
-            $twig = new AdHocTwig();
+            $twig = new AdHocTwigBootstrap();
+            $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], 'Se connecter']);
             $twig->enqueueScript('/js/auth/login.js');
             $twig->assign('robots', 'noindex,nofollow');
             $twig->assign('auth_failed', true);
@@ -141,16 +138,18 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->enqueueScript('/js/auth/change-password.js');
 
         $twig->assign('robots', 'noindex,nofollow');
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes infos persos', '/membres/edit')
-            ->addStep('Changer le mot de passe');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Mes infos persos', 'link' => '/membres/edit'],
+            'Changer le mot de passe',
+        ]);
 
         $membre = Membre::getInstance($_SESSION['membre']->getIdContact());
 
@@ -194,14 +193,13 @@ final class Controller
             Tools::redirect('/membres/tableau-de-bord');
         }
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->assign('robots', 'noindex,nofollow');
 
         $twig->enqueueScript('/js/auth/lost-password.js');
 
-        Trail::getInstance()
-            ->addStep("Mot de passe oublié");
+        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], 'Mot de passe oublié']);
 
         if (Tools::isSubmit('form-lost-password')) {
             $email = (string) Route::params('email');
