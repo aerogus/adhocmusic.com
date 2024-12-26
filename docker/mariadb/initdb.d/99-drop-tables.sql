@@ -6,7 +6,7 @@
 --DROP TABLE IF EXISTS `adhoc_participe_a`;
 --DROP TABLE IF EXISTS `adhoc_video_groupe`;
 --DROP TABLE IF EXISTS `adhoc_groupe_style`;
---DROP TABLE IF EXISTS `adhoc_appartient_a`;
+--DROP TABLE IF EXISTS `adhoc_groupe_membre`;
 --DROP TABLE IF EXISTS `adhoc_video`;
 --DROP TABLE IF EXISTS `adhoc_photo`;
 --DROP TABLE IF EXISTS `adhoc_audio`;

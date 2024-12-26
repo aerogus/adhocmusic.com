@@ -400,10 +400,10 @@ final class Controller
                         $out .= "<tr><td>table membre : <strong>non</strong></td></tr>";
                     }
 
-                    $sql  = "SELECT `id_contact` FROM `adhoc_appartient_a` WHERE `id_contact` = " . $id;
+                    $sql  = "SELECT `id_contact` FROM `adhoc_groupe_membre` WHERE `id_contact` = " . $id;
                     $res  = $db->pdo->query($sql);
                     $nb   = count($stmt->fetchAll(\PDO::FETCH_COLUMN));
-                    $out .= "<tr><td>table appartient_a <strong>" . $nb . " groupe(s)</strong></td></tr>";
+                    $out .= "<tr><td>table groupe_membre <strong>" . $nb . " groupe(s)</strong></td></tr>";
 
                     $sql  = "SELECT `id_contact` FROM `adhoc_video` WHERE `id_contact` = " . $id;
                     $res  = $db->pdo->query($sql);

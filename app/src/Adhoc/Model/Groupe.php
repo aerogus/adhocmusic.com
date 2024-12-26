@@ -1047,7 +1047,7 @@ class Groupe extends ObjectModel
         $sql .= 'WHERE 1 ';
 
         if (isset($params['id_contact'])) {
-            $subSql = "SELECT `id_groupe` FROM `adhoc_appartient_a` WHERE `id_contact` = " . (int) $params['id_contact'] . " ";
+            $subSql = "SELECT `id_groupe` FROM `adhoc_groupe_membre` WHERE `id_contact` = " . (int) $params['id_contact'] . " ";
             if ($ids_groupe = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
                 $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
             } else {
