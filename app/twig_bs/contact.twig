@@ -21,33 +21,45 @@
 
     {% if show_form %}
     <form id="form-contact" name="form-contact" method="post" action="/contact" enctype="multipart/form-data">
-      <div class="mb-3">
-        <label for="name" class="form-label">Nom</label>
-        <div class="alert alert-danger" id="error_name"{% if not error_name %} style="display: none"{% endif %}>Vous devez renseigner votre nom</div>
-        <input name="name" id="name" type="text" maxlength="80" required="required" placeholder="Votre nom" value="{{ name }}" class="form-control">
+      <div class="row mb-3">
+        <label for="name" class="form-label col-2">Nom</label>
+        <div class="col-8">
+          <div class="alert alert-danger" id="error_name"{% if not error_name %} style="display: none"{% endif %}>Vous devez renseigner votre nom</div>
+          <input name="name" id="name" type="text" maxlength="80" required="required" placeholder="Votre nom" value="{{ name }}" class="form-control">
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">E-mail</label>
-        <div class="alert alert-danger" id="error_email"{% if not error_email %} style="display: none"{% endif %}>Votre email semble incorrect</div>
-        <input name="email" id="email" type="email" maxlength="80" required="required" placeholder="Votre e-mail" value="{{ email }}" class="form-control">
+      <div class="row mb-3">
+        <label for="email" class="form-label col-2">E-mail</label>
+        <div class="col-8">
+          <div class="alert alert-danger" id="error_email"{% if not error_email %} style="display: none"{% endif %}>Votre email semble incorrect</div>
+          <input name="email" id="email" type="email" maxlength="80" required="required" placeholder="Votre e-mail" value="{{ email }}" class="form-control">
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="subject" class="form-label">Sujet</label>
-        <div class="alert alert-danger" id="error_subject"{% if not error_subject %} style="display: none"{% endif %}>Vous devez saisir un sujet</div>
-        <input name="subject" id="subject" type="text" maxlength="80" required="required" placeholder="Votre sujet" value="{{ subject }}" class="form-control">
+      <div class="row mb-3">
+        <label for="subject" class="form-label col-2">Sujet</label>
+        <div class="col-8">
+          <div class="alert alert-danger" id="error_subject"{% if not error_subject %} style="display: none"{% endif %}>Vous devez saisir un sujet</div>
+          <input name="subject" id="subject" type="text" maxlength="80" required="required" placeholder="Votre sujet" value="{{ subject }}" class="form-control">
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="text" class="form-label">Message</label>
-        <div class="alert alert-danger" id="error_text"{% if not error_text %} style="display: none"{% endif %}>Vous devez écrire quelque chose !</div>
-        <textarea name="text" id="text" placeholder="Votre message" required="required" class="form-control" rows="6">{{ text }}</textarea>
+      <div class="row mb-3">
+        <label for="text" class="form-label col-2">Message</label>
+        <div class="col-8">
+          <div class="alert alert-danger" id="error_text"{% if not error_text %} style="display: none"{% endif %}>Vous devez écrire quelque chose !</div>
+          <textarea name="text" id="text" placeholder="Votre message" required="required" class="form-control" rows="6">{{ text }}</textarea>
+        </div>
       </div>
-      <div class="mb-3">
-        <input type="checkbox" class="form-check-input" id="mailing" name="mailing"{% if mailing %} checked="checked"{% endif %}>
-        <label for="mailing" class="form-check-label">Je souhaite recevoir la newsletter</label>
+      <div class="row mb-3">
+        <div class="offset-2">
+          <input type="checkbox" class="form-check-input" id="mailing" name="mailing"{% if mailing %} checked="checked"{% endif %}>
+          <label for="mailing" class="form-check-label">Je souhaite recevoir la newsletter</label>
+        </div>
       </div>
-      <div class="mb-3">
-        <div class="alert alert-danger" id="error_check"{% if not error_check %} style="display: none"{% endif %}>Erreur à la vérification du code de sécurité</div>
-        <input id="form-contact-submit" data-check="{{ check }}" name="form-contact-submit" type="submit" value="Envoyer le message" class="btn btn-primary"/>
+      <div class="row mb-3">
+        <div class="offset-2">
+          <div class="alert alert-danger" id="error_check"{% if not error_check %} style="display: none"{% endif %}>Erreur à la vérification du code de sécurité</div>
+          <input id="form-contact-submit" data-check="{{ check }}" name="form-contact-submit" type="submit" value="Envoyer le message" class="btn btn-primary"/>
+        </div>
       </div>
       <input name="check" id="check" type="hidden" value="">
     </form>
