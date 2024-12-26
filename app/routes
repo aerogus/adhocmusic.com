@@ -61,7 +61,13 @@ alerting|my|GET|/alerting/my
 alerting|my|POST|/alerting/my
 alerting|sub|GET|/alerting/sub
 alerting|unsub|GET|/alerting/unsub
+api|cities|GET|/api/cities
+api|countries|GET|/api/countries
+api|departements|GET|/api/departements
+api|departements|GET|/api/departements/:id_region
+api|lieux|GET|/api/lieux
 api|membres|GET|/api/membres
+api|regions|GET|/api/regions/:id_country
 assoce|assoce|GET|/assoce
 assoce|concerts|GET|/concerts
 assoce|afterworks|GET|/afterworks
@@ -111,12 +117,6 @@ events|delete|POST|/events/delete
 events|getEventsByLieu|GET|/events/get-events-by-lieu
 events|ical|GET|/events/ical/:id
 events|show|GET|/events/:id
-geo|countries|GET|/geo/countries
-geo|regions|GET|/geo/regions/:id_country
-geo|departements|GET|/geo/departements
-geo|departements|GET|/geo/departements/:id_region
-geo|cities|GET|/geo/cities
-geo|lieux|GET|/geo/lieux
 groupes|index|GET|/groupes
 groupes|my|GET|/groupes/my
 groupes|create|GET|/groupes/create

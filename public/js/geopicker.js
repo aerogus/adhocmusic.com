@@ -22,7 +22,7 @@ jQuery(document).ready(function ($) {
   /**
    * chargement des pays
    */
-  $.getJSON('/geo/countries.json', function (data) {
+  $.getJSON('/api/countries.json', function (data) {
     $.each(data, function (country_id, country_name) {
       $('<option/>', {
         value: country_id,
@@ -40,7 +40,7 @@ jQuery(document).ready(function ($) {
    */
   $('#id_country').change(function () {
     let id_country = $(this).find('option:selected').val();
-    $.getJSON('/geo/regions/' + id_country + '.json', function (data) {
+    $.getJSON('/api/regions/' + id_country + '.json', function (data) {
       $('#id_region, #id_departement, #id_city, #id_lieu').empty();
       $.each(data, function (region_id, region_name) {
         $('<option/>', {
@@ -68,7 +68,7 @@ jQuery(document).ready(function ($) {
     let id_country = $('#id_country').find('option:selected').val();
     let id_region = $(this).find('option:selected').val();
     if (id_country === 'FR') {
-      $.getJSON('/geo/departements.json', {
+      $.getJSON('/api/departements.json', {
         r: id_region
       }, function (data) {
         $('#id_departement, #id_city, #id_lieu').empty();
@@ -94,7 +94,7 @@ jQuery(document).ready(function ($) {
     let id_country = $('#id_country').find('option:selected').val();
     let id_departement = $(this).find('option:selected').val();
     if (id_country === 'FR') {
-      $.getJSON('/geo/cities.json', {
+      $.getJSON('/api/cities.json', {
         d: id_departement
       }, function (data) {
         $('#id_city, #id_lieu').empty();
@@ -117,7 +117,7 @@ jQuery(document).ready(function ($) {
    */
   $('#id_city').change(function () {
     let id_city = $(this).find('option:selected').val();
-    $.getJSON('/geo/lieux.json', {
+    $.getJSON('/api/lieux.json', {
       v: id_city
     }, function (data) {
       $('#id_lieu').empty();
