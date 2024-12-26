@@ -6,15 +6,19 @@
     {% if groupes|length == 0 %}
     <p>Aucun groupe référencé.</p>
     {% else %}
+      <div class="row row-cols-2 row-cols-md-6">
       {% for groupe in groupes %}
-      <div class="card text-center">
-        <img src="{{ groupe.miniPhoto }}" class="card-img-top" alt="" />
-        <div class="card-body">
-          <h5 class="card-title">{{ groupe.name }}</h5>
-          <a class="btn btn-secondary" href="{{ groupe.url }}">Voir</a>
+      <div class="col mb-2">
+        <div class="card text-center">
+          <img src="{{ groupe.miniPhoto }}" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">{{ groupe.name }}</h5>
+            <a class="btn btn-secondary" href="{{ groupe.url }}">Voir</a>
+          </div>
         </div>
       </div>
       {% endfor %}
+      </div>
     {% endif %}
 
   </div>
