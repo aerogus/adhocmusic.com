@@ -63,40 +63,41 @@ final class Controller
                 die;
             }
 
-            if ($id_contact = Membre::checkPseudoPassword($pseudo, $password)) {
-                // Authentification réussie, on ouvre une session
+            if ($id_contact = Membre::getIdByPseudo($pseudo)) {
                 $membre = Membre::getInstance($id_contact);
+                if ($membre->checkPassword($password)) {
+                    // Authentification réussie, on ouvre une session
 
-                // update date derniere visite
-                $membre->setVisitedNow();
+                    // update date derniere visite
+                    $membre->setVisitedNow();
+                    $membre->save();
 
-                $membre->save();
+                    $_SESSION['membre'] = $membre;
 
-                $_SESSION['membre'] = $membre;
+                    if (isset($_SESSION['redirect_after_auth'])) {
+                        $url = $_SESSION['redirect_after_auth'];
+                        unset($_SESSION['redirect_after_auth']);
+                    } else {
+                        $url = '/membres/tableau-de-bord';
+                    }
 
-                if (isset($_SESSION['redirect_after_auth'])) {
-                    $url = $_SESSION['redirect_after_auth'];
-                    unset($_SESSION['redirect_after_auth']);
-                } else {
-                    $url = '/membres/tableau-de-bord';
+                    Log::success("Login OK");
+
+                    Tools::redirect($url);
+                    return null;
                 }
-
-                Log::info("Login OK");
-
-                Tools::redirect($url);
-                return null;
-            } else {
-                Log::error("Login KO");
-
-                Trail::getInstance()
-                    ->addStep("Se connecter");
-
-                $twig = new AdHocTwig();
-                $twig->enqueueScript('/js/auth/login.js');
-                $twig->assign('robots', 'noindex,nofollow');
-                $twig->assign('auth_failed', true);
-                return $twig->render('auth/login.twig');
             }
+
+            Log::error("Login KO");
+
+            Trail::getInstance()
+                ->addStep("Se connecter");
+
+            $twig = new AdHocTwig();
+            $twig->enqueueScript('/js/auth/login.js');
+            $twig->assign('robots', 'noindex,nofollow');
+            $twig->assign('auth_failed', true);
+            return $twig->render('auth/login.twig');
         } else {
             Tools::redirect('/auth/auth');
             return null;

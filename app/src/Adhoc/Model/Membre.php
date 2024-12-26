@@ -592,12 +592,16 @@ class Membre extends ObjectModel
     }
 
     /**
-     * @param string $password password
+     * modifie le mot de passe de l'utilisateur
+     *
+     * @param string $password (en clair)
      *
      * @return static
      */
     public function setPassword(string $password): static
     {
+        $password = password_hash($password, PASSWORD_BCRYPT);
+
         if ($this->password !== $password) {
             $this->password = $password;
             $this->modified_fields['password'] = true;
@@ -987,15 +991,19 @@ class Membre extends ObjectModel
     }
 
     /**
-     * Vérifie le password d'un membre
+     * Retourne si le password est correct
      *
-     * @param string $password password
+     * @param string $password (en clair)
      *
-     * @return int id_contact ou false
+     * @return bool
      */
-    public function checkPassword(string $password): int|false
+    public function checkPassword(string $password): bool
     {
-        return self::checkPseudoPassword($this->pseudo, $password);
+        if (is_null($this->getPassword())) {
+            return false;
+        }
+
+        return password_verify($password, $this->getPassword());
     }
 
     /**
@@ -1011,30 +1019,6 @@ class Membre extends ObjectModel
             'pseudo' => $pseudo,
         ]);
         return (count($ms) === 0);
-    }
-
-    /**
-     * Vérifie le couple pseudo/password et retourne l'id_contact
-     *
-     * @param string $pseudo   pseudo
-     * @param string $password password
-     *
-     * @return int|false id_contact ou false
-     */
-    public static function checkPseudoPassword(string $pseudo, string $password): int|false
-    {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_contact` "
-             . "FROM `" . Membre::getDbTable() . "` "
-             . "WHERE `pseudo` = '" . $pseudo . "' "
-             . "AND `password` = '" . md5(md5($password)) . "'";
-
-        $id_contact = $db->pdo->query($sql)->fetchColumn();
-        if ($id_contact !== false) {
-            return (int) $id_contact;
-        }
-        return false;
     }
 
     /**

@@ -78,7 +78,7 @@ CREATE TABLE `adhoc_contact` (
 CREATE TABLE `adhoc_membre` (
   `id_contact` int(10) UNSIGNED NOT NULL,
   `pseudo` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `last_name` varchar(250) DEFAULT NULL,
   `first_name` varchar(250) DEFAULT NULL,
   `address` varchar(250) DEFAULT NULL,
