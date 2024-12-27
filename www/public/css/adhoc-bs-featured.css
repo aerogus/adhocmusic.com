@@ -1,0 +1,82 @@
+.swipe {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  max-height: 375px;
+}
+
+.swipe-wrap {
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+
+  > li {
+    float: left;
+    width: 100%;
+    position: relative;
+  }
+
+  h2 {
+    position: absolute;
+    left: 0;
+    background-color: rgba(0,0,0,.75);
+    font-family: TradeGothic;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 2rem;
+    padding: 1rem;
+
+    span {
+      font-size: .75em;
+    }
+  }
+
+  img {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    max-height: 375px;
+    display: block;
+  }
+}
+
+.swipe-pagination-wrapper {
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1000px;
+  padding: 10px;
+}
+
+.swipe-pagination {
+  position: relative;
+  float: left;
+  left: 50%;
+
+  li {
+    position: relative;
+    right: 50%;
+    float: left;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #fff;
+    margin: 5px;
+    box-shadow: 0 0 5px #000;
+
+    a {
+      text-decoration: none;
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  li:hover, li.on, li.on:hover {
+    background: #000;
+    transition-duration: 0.1s;
+  }
+}
