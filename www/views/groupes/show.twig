@@ -1,18 +1,19 @@
 {% include 'common/header.twig' %}
 
+<div class="container">
+
 {% if unknown_group %}
 
-<p class="alert alert-danger">Ce groupe est introuvable</p>
+  <div class="alert alert-danger">Ce groupe est introuvable</div>
 
 {% else %}
 
-<div class="grid-2-small-1 has-gutter">
+  <div class="row">
 
-  <div class="col-1">
+    <div class="col-md-6">
 
-    <div class="box">
-      <h1>{{ groupe.name }}</h1>
-      <div>
+      <h1 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">{{ groupe.name }}</h1>
+      <div class="border rounded-bottom bg-white p-3">
         {% if groupe.logo %}
         <img src="{{ groupe.logo }}" alt="{{ groupe.name }}" style="display:block;margin:0 auto">
         {% endif %}
@@ -40,12 +41,10 @@
         </ul>
         {% endif %}
       </div>
-    </div>
 
-    {% if videos|length > 0 %}
-    <div class="box">
-      <h2>Vidéos</h2>
-      <div class="reset grid-2 has-gutter">
+      {% if videos|length > 0 %}
+      <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Vidéos</h2>
+      <div class="border rounded-bottom bg-white p-3">
         {% for video in videos %}
         <div class="video">
           <div class="thumb" style="background-image: url({{ video.thumbUrl }})">
@@ -60,26 +59,22 @@
         </div>
         {% endfor %}
       </div>
-    </div>
-    {% endif %}
+      {% endif %}
 
-    {% if audios|length > 0 %}
-    <div class="box">
+      {% if audios|length > 0 %}
       <h2>En Écoute</h2>
       <div>
-      <ul>
-        {% for audio in audios %}
-        <li><a href="{{ audio.url }}">{{ audio.name }}</a><br><audio controls="controls" src="{{ audio.directMp3Url }}" style="background-color:#000"></audio></li>
-        {% endfor %}
-      </ul>
+        <ul>
+          {% for audio in audios %}
+          <li><a href="{{ audio.url }}">{{ audio.name }}</a><br><audio controls="controls" src="{{ audio.directMp3Url }}" style="background-color:#000"></audio></li>
+          {% endfor %}
+        </ul>
       </div>
+      {% endif %}
+
     </div>
-    {% endif %}
+    <div class="col-md-6">{# colonne 2 #}
 
-  </div>
-  <div class="col-1">{# colonne 2 #}
-
-    <div class="box">
       <h2>Présentation</h2>
       <div>
         {% if groupe.photo %}
@@ -87,10 +82,8 @@
         {% endif %}
         <p style="text-align:justify">{{ groupe.text }}</p>
       </div>
-    </div>
 
-    {% if f_events|length > 0 %}
-    <div class="box">
+      {% if f_events|length > 0 %}
       <h2>Évènements à venir</h2>
       <div>
         <ul>
@@ -99,11 +92,9 @@
           {% endfor %}
         </ul>
       </div>
-    </div>
-    {% endif %}
+      {% endif %}
 
-    {% if p_events|length > 0 %}
-    <div class="box">
+      {% if p_events|length > 0 %}
       <h2>Évènements passés</h2>
       <div>
         <ul>
@@ -112,28 +103,26 @@
           {% endfor %}
         </ul>
       </div>
+      {% endif %}
+
+      {% if photos %}
+      <h2>Photos</h2>
+      <div class="reset gallery">
+      {% for photo in photos %}
+        <div class="photo">
+          <a href="{{ photo.thumbUrl }}" data-at-1000="{{ photo.thumbUrl }}" title="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %} 📷 {{ photo.credits }}">
+            <img data-id-photo="{{ photo.id }}" src="{{ photo.thumbUrl }}" alt="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
+          </a>
+        </div>
+      {% endfor %}
+      </div>
+      {% endif %}
+
     </div>
-    {% endif %}
-
   </div>
-
-</div>
-
-{% if photos %}
-<div class="box">
-  <h2>Photos</h2>
-  <div class="reset gallery">
-  {% for photo in photos %}
-    <div class="photo">
-      <a href="{{ photo.thumbUrl }}" data-at-1000="{{ photo.thumbUrl }}" title="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %} 📷 {{ photo.credits }}">
-        <img data-id-photo="{{ photo.id }}" src="{{ photo.thumbUrl }}" alt="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
-      </a>
-    </div>
-  {% endfor %}
-  </div>
-</div>
-{% endif %}
 
 {% endif %} {# test unknown group #}
+
+</div>{# .container #}
 
 {% include 'common/footer.twig' %}
