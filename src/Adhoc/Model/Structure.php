@@ -223,6 +223,16 @@ class Structure extends ObjectModel
     }
 
     /**
+     * Retourne l'url de la page de la structure
+     *
+     * @return string
+     */
+    public function getUrl(): ?string
+    {
+        return HOME_URL . '/structures/' . $this->getIdStructure();
+    }
+
+    /**
      * @param ?string $name name
      *
      * @return static
