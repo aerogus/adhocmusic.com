@@ -65,7 +65,7 @@ class __TwigTemplate_3c7ba6e97aae30ed61feb97236e68f6c extends Template
           <li class=\"email\"><a href=\"/newsletters/subscriptions\" title=\"Abonnement à la newsletter\">Newsletter</a></li>
           <li class=\"peertube\"><a href=\"https://videos.adhocmusic.com\" title=\"Instance PeerTube AD'HOC Tube\">PeerTube</a></li>
           <li class=\"facebook\"><a href=\"https://facebook.com/adhocmusic\" title=\"@adhocmusic sur Facebook\">@adhocmusic</a></li>
-          <li class=\"instagram\"><a href=\"https://instagram.com/adhoc.music\" title=\"@adhoc.music sur Instagram\">@adhoc.music</a></li>          
+          <li class=\"instagram\"><a href=\"https://instagram.com/adhoc.music\" title=\"@adhoc.music sur Instagram\">@adhoc.music</a></li>
           <li class=\"x\"><a href=\"https://x.com/adhocmusic\" title=\"@adhocmusic sur X\">@adhocmusic</a></li>
         </ul>
       </div>

@@ -1,49 +1,54 @@
 {% include 'common/header.twig' %}
 
 <div class="container">
-  <h1>Plan du site</h1>
 
-  {% if referer %}
-  <div class="alert alert-danger">La page que vous demandez n'existe pas, voici le plan du site ainsi que les principaux liens:</div>
-  {% endif %}
+  <h1 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Plan du site</h1>
+  <div class="border rounded-bottom bg-white p-3">
 
-  <div>
-    <div class="tree_top"><a href="/">adhocmusic.com</a></div>
-    <ul class="tree">
-      <li>
-        <a href="/">Accueil</a>
-        <ul>
-          <li><a href="/map">Plan du site</a></li>
-          <li><a href="/partners">Partenaires</a></li>
-          <li><a href="/mentions-legales">Mentions légales</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="/assoce">L'Assoce</a>
-        <ul>
-          <li><a href="/concerts">Concerts</a></li>
-          <li><a href="/afterworks">Afterworks</a></li>
-          <li><a href="/festival">Le Festival</a></li>
-          <li><a href="/equipe">Équipe</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="/groupes">Groupes</a>
-      </li>
-      <li>
-        <a href="/events">Agenda</a>
-      </li>
-      <li>
-        <a href="/medias">Média</a>
-      </li>
-      <li>
-        <a href="/contact">Contact</a>
-      </li>
-      <li>
-        <a href="/auth/auth">Se connecter ou créer un compte</a>
-      </li>
-    </ul>
+    {% if referer %}
+    <div class="alert alert-danger">La page que vous demandez n'existe pas, voici le plan du site ainsi que les principaux liens:</div>
+    {% endif %}
+
+    <div>
+      <div class="tree_top"><a href="/">adhocmusic.com</a></div>
+      <ul class="tree">
+        <li>
+          <a href="/">Accueil</a>
+          <ul>
+            <li><a href="/map">Plan du site</a></li>
+            <li><a href="/partners">Partenaires</a></li>
+            <li><a href="/mentions-legales">Mentions légales</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/assoce">L'Assoce</a>
+          <ul>
+            <li><a href="/concerts">Concerts</a></li>
+            <li><a href="/afterworks">Afterworks</a></li>
+            <li><a href="/festival">Le Festival</a></li>
+            <li><a href="/equipe">Équipe</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/groupes">Groupes</a>
+        </li>
+        <li>
+          <a href="/events">Agenda</a>
+        </li>
+        <li>
+          <a href="/medias">Média</a>
+        </li>
+        <li>
+          <a href="/contact">Contact</a>
+        </li>
+        <li>
+          <a href="/auth/auth">Se connecter ou créer un compte</a>
+        </li>
+      </ul>
+    </div>
+
   </div>
+
 </div>
 
 {% include 'common/footer.twig' %}

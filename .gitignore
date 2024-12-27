@@ -27,4 +27,4 @@ node_modules
 /tmpfs
 
 # cache templates twig
-twig_c
+www/templates_c
