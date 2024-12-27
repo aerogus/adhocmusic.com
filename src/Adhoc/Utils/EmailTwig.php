@@ -36,7 +36,7 @@ class EmailTwig
      */
     public function __construct()
     {
-        $this->loader = new FilesystemLoader(TWIG_TEMPLATES_PATH);
+        $this->loader = new FilesystemLoader(TWIG_TEMPLATES_PATH . '_bs');
         $this->env = new Environment($this->loader, [
             'cache' => TWIG_TEMPLATES_C_PATH,
             'auto_reload' => true, // true pour dev uniquement
