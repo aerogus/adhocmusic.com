@@ -98,7 +98,7 @@ final class Controller
             ['title' => '🏠', 'link' => '/'],
         ];
 
-        $twig->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
+        $twig->enqueueStyle('/static/library/baguetteBox@1.11.1/baguetteBox.min.css');
 
         $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
         $twig->enqueueScript('/static/library/imagesloaded@4.1.4/imagesloaded.min.js');
