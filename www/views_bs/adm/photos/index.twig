@@ -1,0 +1,37 @@
+{% include 'common/header.twig' %}
+
+<div class="box">
+  <h1>Photos</h1>
+  <div class="reset">
+
+{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
+
+<table class="table table-striped" id="tab-groupes">
+  <thead>
+    <tr>
+      <th>Photo</th>
+      <th>Groupe</th>
+      <th>Évènement</th>
+      <th>Lieu</th>
+      <th>Créa</th>
+      <th>Modif</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for photo in photos %}
+    <tr>
+      <td>{{ photo.id }}<br/><img src="{{ photo.ThumbUrl }}" alt=""/><br/>{{ photo.name }}</td>
+      <td>{% if photo.idGroupe %}<a href="{{ photo.groupe.url }}">{{ photo.groupe.name }}</a>{% endif %}</td>
+      <td>{% if photo.idEvent %}<a href="{{ photo.event.url }}">{{ photo.event.name }}</a><br/>{{ photo.event.date }}{% endif %}</td>
+      <td>{% if photo.idLieu %}<a href="{{ photo.lieu.url }}">{{ photo.lieu.name }}</a><br>{{ photo.lieu.idDepartement }} {{ photo.lieu.city.name }}{% endif %}</td>
+      <td>{{ photo.createdAt }}</td>
+      <td>{{ photo.modifiedAt }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+  </div>
+</div>
+
+{% include 'common/footer.twig' %}

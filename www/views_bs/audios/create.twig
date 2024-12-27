@@ -1,0 +1,89 @@
+{% include 'common/header.twig' %}
+
+<div class="box">
+  <h1>Ajouter une musique</h1>
+  <div>
+    <form name="form-audio-create" id="form-audio-create" method="post" action="/audios/create" enctype="multipart/form-data">
+      <section class="grid-4">
+        <div>
+          <label for="file">Audio (*)</label>
+        </div>
+        <div class="col-3 mbs">
+          <div class="alert alert-danger" id="error_file"{% if not error_file %} style="display: none"{% endif %}>Vous devez choisir un fichier .mp3 à uploader</div>
+          <input type="file" id="file" name="file" value=""> (.mp3 16bits/44KHz/stéréo, &lt; 16 Mo)
+        </div>
+        <div>
+          <label for="name">Titre (*)</label>
+        </div>
+        <div class="col-3 mbs">
+          <div class="alert alert-danger" id="error_name"{% if not error_name %} style="display: none"{% endif %}>Vous devez renseigner un titre</div>
+          <input type="text" id="name" name="name" class="w100" value="">
+        </div>
+        <div>
+          <label for="groupe">Groupe</label>
+        </div>
+        <div class="col-3 mbs">
+          {% if groupe %}
+            <input type="hidden" name="id_groupe" value="{{ groupe.id }}">
+            <span>{{ groupe.name }}</span>
+          {% else %}
+            <div class="alert alert-danger" id="error_id_groupe"{% if not error_id_groupe %} style="display: none"{% endif %}>Vous devez lier cette musique à un groupe, un lieu ou un événement</div>
+            <select id="id_groupe" name="id_groupe" class="w100">
+              <option value="0">Aucun</option>
+              {% for groupe in groupes %}
+              <option value="{{ groupe.id }}">{{ groupe.name }}</option>
+              {% endfor %}
+            </select>
+          {% endif %}
+        </div>
+        <div>
+          <label for="id_lieu">Lieu</label>
+        </div>
+        <div class="col-3 mbs">
+          {% if lieu %}
+            <input type="hidden" name="id_lieu" value="{{ lieu.id }}">
+            <span>{{ lieu.name }}</span>
+          {% else %}
+            <select id="id_lieu" name="id_lieu" class="w100">
+              <optgroup label="Autre">
+                <option value="0">aucun / non référencé</option>
+              </optgroup>
+              {% for dep in deps %}
+              <optgroup label="{{ dep.id }} - {{ dep.name }}">
+                {% for lieu in lieux[dep.id] %}
+                <option value="{{ lieu.id }}">{{ lieu.city.cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
+                {% endfor %}
+              </optgroup>
+              {% endfor %}
+            </select>
+          {% endif %}
+        </div>
+        <div>
+          <label for="id_event">Évènement</label>
+        </div>
+        <div class="col-3 mbs">
+          {% if event %}
+            <input type="hidden" name="id_event" value="{{ event.id }}">
+            <span style="float: right;">{{ event.date }} - {{ event.name }}</span>
+          {% else %}
+            <select id="id_event" name="id_event" class="w100">
+              <option value="0">Aucun</option>
+            </select>
+          {% endif %}
+        </div>
+        <div>
+          <label for="online">Rendre public</label>
+        </div>
+        <div class="col-3 mbs">
+          <input class="checkbox" type="checkbox" name="online" checked="checked">
+        </div>
+        <div></div>
+        <div class="col-3">
+          <input id="form-audio-create-submit" name="form-audio-create-submit" class="btn btn-primary w100" type="submit" value="Enregistrer">
+        </div>
+      </section>
+    </form>
+  </div>
+</div>
+
+{% include 'common/footer.twig' %}

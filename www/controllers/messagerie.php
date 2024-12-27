@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Membre;
 use Adhoc\Model\Message;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Email;
@@ -27,7 +26,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueScript('/js/messagerie.js');
 
@@ -67,7 +66,7 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueScript('/js/messagerie.js');
 
@@ -103,7 +102,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueScript('/js/messagerie.js');
 

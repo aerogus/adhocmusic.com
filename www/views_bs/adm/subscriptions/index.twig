@@ -1,0 +1,33 @@
+{% include 'common/header.twig' %}
+
+<div class="box">
+  <h1>Cotisations</h1>
+  <div>
+
+<a href="/adm/subscriptions/create">Saisir une cotisation</a>
+
+<table id="tab-subscriptions">
+  <thead>
+    <tr>
+      <th>Date Cotisation</th>
+      <th>Date Saisie</th>
+      <th>Nom</th>
+      <th>Prénom</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for subscription in subscriptions %}
+    <tr>
+      <td>{{ subscription.subscribedAt }}</td>
+      <td>{{ subscription.createdAt }}</td>
+      <td>{{ subscription.firstName }}</td>
+      <td>{{ subscription.lastName }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+  </div>
+</div>
+
+{% include 'common/footer.twig' %}

@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Membre;
 use Adhoc\Model\Subscription;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
@@ -24,7 +23,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
@@ -42,7 +41,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
@@ -59,7 +58,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
@@ -76,7 +75,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")

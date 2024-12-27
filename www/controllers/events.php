@@ -13,7 +13,6 @@ use Adhoc\Model\Photo;
 use Adhoc\Model\Structure;
 use Adhoc\Model\Video;
 use Adhoc\Model\Style;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;
@@ -30,7 +29,7 @@ final class Controller
      */
     public static function index(): string
     {
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueScript('/js/events/index.js');
 
@@ -128,7 +127,7 @@ final class Controller
     {
         $id_event = (int) Route::params('id');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueStyle('/static/library/baguetteBox@1.11.1/baguetteBox.min.css');
         $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
@@ -221,7 +220,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/events/create.js');
@@ -477,7 +476,7 @@ final class Controller
             ->addStep("Agenda", "/events")
             ->addStep("Modifier une date");
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/events/edit.js');
@@ -663,7 +662,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Agenda", "/events")

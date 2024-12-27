@@ -1,0 +1,27 @@
+{% include 'common/header.twig' %}
+
+{% if unknown_comment %}
+
+<p class="alert alert-danger">Ce commentaire est introuvable !</p>
+
+{% else %}
+
+<div class="box">
+  <h1>Commentaire</h1>
+  <div>
+    <table>
+      <tr>
+        <th>Id</th>
+        <td>{{ comment.id }}</td>
+      </tr>
+      <tr>
+        <th>Texte</th>
+        <td>{{ comment.text|nl2br }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+{% endif %} {# test unknown comment #}
+
+{% include 'common/footer.twig' %}

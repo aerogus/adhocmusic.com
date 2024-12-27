@@ -1,0 +1,57 @@
+{% include 'common/header.twig' %}
+
+{% if unknown_photo %}
+
+<p class="alert alert-danger">Cette photo est introuvable !</p>
+
+{% else %}
+
+<div class="container">
+  <h1>Supprimer une photo</h1>
+  <div>
+    <form id="form-photo-delete" name="form-photo-delete" method="post" action="/photos/delete">
+      <section class="grid-4">
+
+        <div>
+          <label for="photo">Photo</label>
+        </div>
+        <div class="col-3 mbs">
+          <img src="{{ photo.thumbUrl }}" alt="">
+        </div>
+
+        <div>Titre</div>
+        <div class="col-3 mbs">{{ photo.name }}</div>
+
+        <div>Photographe</div>
+        <div class="col-3 mbs">{{ photo.credits }}</div>
+
+        {% if groupe %}
+        <div>Groupe</div>
+        <div class="col-3 mbs">{{ groupe.name }}</div>
+        {% endif %}
+
+        {% if event %}
+        <div>Événement</div>
+        <div class="col-3 mbs">{{ event.date }} - {{ event.name }}</div>
+        {% endif %}
+
+        {% if lieu %}
+        <div>Lieu :</div>
+        <div class="col-3 mbs">{{ lieu.idDepartement }} - {{ lieu.name }}</div>
+        {% endif %}
+
+        <div></div>
+        <div class="col-3">
+          <input id="form-photo-delete-submit" name="form-photo-delete-submit" type="submit" class="btn btn-primary" value="Supprimer">
+          <input type="hidden" name="id" value="{{ photo.id }}">
+        </div>
+
+      </section>
+
+    </form>
+  </div>
+</div>
+
+{% endif %}
+
+{% include 'common/footer.twig' %}

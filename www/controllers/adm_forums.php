@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\ForumPrive;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
@@ -19,7 +18,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
@@ -39,7 +38,7 @@ final class Controller
 
         $forum = ForumPrive::getForum($id_forum);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
@@ -66,7 +65,7 @@ final class Controller
         $id_thread = (int) Route::params('id_thread');
         $page = (int) Route::params('page');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $data = ForumPrive::getMessages($id_thread, $page);
         $forum = ForumPrive::getForum($data['thread']['id_forum']);
@@ -161,7 +160,7 @@ final class Controller
             Tools::redirect('/adm/forums/forum/' . $msg['id_forum']);
         }
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         if (is_null($id_forum) && ($id_thread === 0)) {
             $twig->assign('error_params', true);

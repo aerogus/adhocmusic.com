@@ -16,7 +16,7 @@
       <label for="name">Titre (*)</label>
     </div>
     <div class="col-3 mbs">
-      <div class="infobulle error" id="error_name"{% if not error_name %} style="display: none"{% endif %}>Vous devez saisir un titre pour la vidéo</div>
+      <div class="alert alert-danger" id="error_name"{% if not error_name %} style="display: none"{% endif %}>Vous devez saisir un titre pour la vidéo</div>
       <input type="text" id="name" name="name" class="w100" value="{{ video.name }}">
     </div>
     <div>
@@ -96,12 +96,12 @@
     </div>
     <div></div>
     <div class="col-2">
-      <input id="form-video-edit-submit" name="form-video-edit-submit" type="submit" class="btn btn--primary" value="Enregistrer">
+      <input id="form-video-edit-submit" name="form-video-edit-submit" type="submit" class="btn btn-primary" value="Enregistrer">
       <input type="hidden" name="id" value="{{ video.id }}">
       <input type="hidden" name="video_id_event" id="video_id_event" value="{{ video.idEvent }}">
     </div>
     <div class="txtright">
-      <a href="/videos/delete/{{ video.id }}" class="btn btn--primary">Supprimer</a>
+      <a href="/videos/delete/{{ video.id }}" class="btn btn-primary">Supprimer</a>
     </div>
   </section>
 </form>

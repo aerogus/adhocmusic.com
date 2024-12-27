@@ -11,7 +11,6 @@ use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\TypeMusicien;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Log;
@@ -56,7 +55,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->assign('title', "AD'HOC Music : Les Musiques actuelles en Essonne");
         $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
@@ -84,7 +83,7 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueStyle('/static/library/baguetteBox@1.11.1/baguetteBox.min.css');
 
@@ -217,7 +216,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueScript('/js/groupes/create.js');
 
@@ -333,7 +332,7 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueScript('/js/groupes/edit.js');
 
@@ -462,7 +461,7 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         try {
             $groupe = Groupe::getInstance($id);

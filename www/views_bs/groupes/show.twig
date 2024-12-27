@@ -1,0 +1,139 @@
+{% include 'common/header.twig' %}
+
+{% if unknown_group %}
+
+<p class="alert alert-danger">Ce groupe est introuvable</p>
+
+{% else %}
+
+<div class="grid-2-small-1 has-gutter">
+
+  <div class="col-1">
+
+    <div class="box">
+      <h1>{{ groupe.name }}</h1>
+      <div>
+        {% if groupe.logo %}
+        <img src="{{ groupe.logo }}" alt="{{ groupe.name }}" style="display:block;margin:0 auto">
+        {% endif %}
+        {% if groupe.style %}
+        <p><strong>Style</strong><br>{{ groupe.style }}</p>
+        {% endif %}
+        {% if groupe.influences %}
+        <p><strong>Influences</strong><br>{{ groupe.influences }}</p>
+        {% endif %}
+        {% if groupe.lineup %}
+        <p><strong>Membres</strong><br>{{ groupe.lineup }}</p>
+        {% endif %}
+        {% if groupe.site or groupe.facebookPageId or groupe.twitterId %}
+        <p><strong>Liens</strong></p>
+        <ul class="social-share-box">
+          {% if groupe.site %}
+          <li><a href="{{ groupe.site }}" class="website" title="Site"><span>Site</span></a></li>
+          {% endif %}
+          {% if groupe.facebookPageId %}
+          <li><a href="{{ groupe.facebookPageUrl }}" class="facebook" title="Facebook"><span>Facebook</span></a></li>
+          {% endif %}
+          {% if groupe.TwitterId %}
+          <li><a href="{{ groupe.TwitterUrl }}" class="twitter" title="Twitter"><span>Twitter</span></a></li>
+          {% endif %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if videos|length > 0 %}
+    <div class="box">
+      <h2>Vidéos</h2>
+      <div class="reset grid-2 has-gutter">
+        {% for video in videos %}
+        <div class="video">
+          <div class="thumb" style="background-image: url({{ video.thumbUrl }})">
+            <a class="playbtn" href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">▶</a>
+          </div>
+          <p class="title"><a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
+          <p class="subtitle">
+            {% if video.event %}<a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.name }}
+            <br/>
+            {{ video.event.date|format_datetime(pattern='dd LLLL yyyy') }}</a>{% endif %}
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if audios|length > 0 %}
+    <div class="box">
+      <h2>En Écoute</h2>
+      <div>
+      <ul>
+        {% for audio in audios %}
+        <li><a href="{{ audio.url }}">{{ audio.name }}</a><br><audio controls="controls" src="{{ audio.directMp3Url }}" style="background-color:#000"></audio></li>
+        {% endfor %}
+      </ul>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+  <div class="col-1">{# colonne 2 #}
+
+    <div class="box">
+      <h2>Présentation</h2>
+      <div>
+        {% if groupe.photo %}
+        <img src="{{ groupe.photo }}" alt="{{ groupe.name }}" title="{{ groupe.name }}" style="display:block;margin:0 auto">
+        {% endif %}
+        <p style="text-align:justify">{{ groupe.text }}</p>
+      </div>
+    </div>
+
+    {% if f_events|length > 0 %}
+    <div class="box">
+      <h2>Évènements à venir</h2>
+      <div>
+        <ul>
+          {% for event in f_events %}
+          <li><a href="{{ event.url }}">{{ event.date|date("d/m/y H:i") }} - {{ event.lieu.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if p_events|length > 0 %}
+    <div class="box">
+      <h2>Évènements passés</h2>
+      <div>
+        <ul>
+          {% for event in p_events %}
+          <li><a href="{{ event.url }}">{{ event.date|date("d/m/y H:i") }} - {{ event.lieu.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+
+</div>
+
+{% if photos %}
+<div class="box">
+  <h2>Photos</h2>
+  <div class="reset gallery">
+  {% for photo in photos %}
+    <div class="photo">
+      <a href="{{ photo.thumbUrl }}" data-at-1000="{{ photo.thumbUrl }}" title="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %} 📷 {{ photo.credits }}">
+        <img data-id-photo="{{ photo.id }}" src="{{ photo.thumbUrl }}" alt="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
+      </a>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% endif %} {# test unknown group #}
+
+{% include 'common/footer.twig' %}

@@ -1,0 +1,14 @@
+{% include 'common/header.twig' %}
+
+<div class="container">
+  <h1>Suppression d'une question fréquente</h1>
+  <div>
+  <form id="form-faq-delete" name="form-faq-delete" action="/adm/faq/delete" method="post">
+    <p>Confirmer la suppression de cette question ?</p>
+    <input class="btn btn-primary" id="form-faq-delete-submit" name="form-faq-delete-submit" type="submit" value="Supprimer">
+    <input type="hidden" name="id" value="{{ faq.id }}">
+  </form>
+  </div>
+</div>
+
+{% include 'common/footer.twig' %}

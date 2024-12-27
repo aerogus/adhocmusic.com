@@ -1,0 +1,79 @@
+{% include 'common/header.twig' %}
+
+{% if unknown_photo %}
+
+<p class="alert alert-danger">Cette photo est introuvable</p>
+
+{% else %}
+
+<div class="grid-3-small-1 has-gutter">
+
+  <div class="col-1">
+
+    {% if groupe %}
+    <div>
+      <h2>Groupe</h2>
+      <div>
+        <a href="{{ groupe.url }}"><img style="float: right;" src="{{ groupe.miniPhoto }}" alt=""><strong>{{ groupe.name }}</strong></a>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if event %}
+    <div>
+      <h2>Événement</h2>
+      <div>
+        <a href="{{ event.url }}"><img style="float: right;" src="{{ event.thumbUrl }}" alt=""><strong>{{ event.name }}</strong></a><br>{{ event.date }}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if lieu %}
+    <div>
+      <h2>Lieu</h2>
+      <div>
+        <a href="{{ lieu.url }}"><strong>{{ lieu.name }}</strong></a><br>{{ lieu.address }}<br>{{ lieu.city.cp }} {{ lieu.city.name }}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if next and prev %}
+    <div>
+      <h2>Album</h2>
+      <div>
+        <p align="center"><a href="{{ prev }}#p">←</a> photo {{ idx_photo }}/{{ nb_photos }} <a href="{{ next }}#p">→</a></p>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>{# .col-1 #}
+
+  <div class="col-2-small-1">
+
+    <a name="p"></a>
+
+    <div>
+      <h1>{{ photo.name }}</h1>
+    <div>
+
+    <p align="center" id="photofull" class="photofull">
+    {% if next %}<a href="{{ next }}">{% endif %}
+    <img src="{{ photo.thumbUrl }}" alt="{{ photo.name }}">
+    {% if next %}</a>{% endif %}
+    </p>
+
+    <p align="center" style="margin: 10px 0px;">
+      <span id="pname">{{ photo.name }}</span>
+      <span id="pcredits">{% if has_credits %}(<i>crédits: {{ photo.credits }}</i>){% endif %}</span>
+    </p>
+
+      </div>
+    </div>
+
+  </div>{# .col-2-small-1 #}
+
+</div>{# .grid-3-small-1 #}
+
+{% endif %} {# test unknown photo #}
+
+{% include 'common/footer.twig' %}

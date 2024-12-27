@@ -1,0 +1,18 @@
+{% include 'common/header.twig' %}
+
+<div class="box">
+  <h1>Ajout Newsletter</h1>
+  <div>
+    <form id="form-newsletter-create" name="form-newsletter-create" method="post" action="/adm/newsletter/create">
+      <fieldset>
+        <label for="title">Titre</label>
+        <input type="text" id="title" name="title" size="50" value="{{ data.title }}">
+        <label for="content">Contenu</label>
+        <textarea id="content" name="content">{{ data.content }}</textarea>
+      </fieldset>
+      <input id="form-newsletter-create-submit" name="form-newsletter-create-submit" class="btn btn-primary" type="submit" value="Ok">
+    </form>
+  </div>
+</div>
+
+{% include 'common/footer.twig' %}

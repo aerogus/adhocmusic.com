@@ -1,0 +1,37 @@
+{% include 'common/header.twig' %}
+
+<div class="box">
+  <h1>Vidéos</h1>
+  <div class="reset">
+
+{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
+
+<table class="table table-striped" id="tab-groupes">
+  <thead>
+    <tr>
+      <th>Vidéo</th>
+      <th>Groupe</th>
+      <th>Évènement</th>
+      <th>Lieu</th>
+      <th>Créa</th>
+      <th>Modif</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for video in videos %}
+    <tr>
+      <td>{{ video.id }}<br/><img src="{{ video.ThumbUrl(80) }}" alt=""/><br/>{{ video.name }}</td>
+      <td>{% if video.idGroupe %}<a href="{{ video.Groupe.url }}">{{ video.groupe.name }}</a>{% endif %}</td>
+      <td>{% if video.idEvent %}<a href="{{ video.Event.url }}">{{ video.event.name }}</a><br/>{{ video.event.date|date("d/m/Y") }}{% endif %}</td>
+      <td>{% if video.idLieu %}<a href="{{ video.lieu.url }}">{{ video.lieu.name }}</a><br>{{ video.Lieu.idDepartement }} {{ video.lieu.city.name }}{% endif %}</td>
+      <td>{{ video.createdAt|date("d/m/Y") }}</td>
+      <td>{{ video.modifiedAt|date("d/m/Y") }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+  </div>
+</div>
+
+{% include 'common/footer.twig' %}

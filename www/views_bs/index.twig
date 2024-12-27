@@ -1,5 +1,78 @@
 {% include 'common/header.twig' %}
 
-index version bootstrap
+<div id="swipe" class="swipe clearfix mts mbs">
+  <ul class="swipe-wrap">
+    {% for idx, f in featured %}
+    <li data-index="{{ idx }}">
+      <a href="{{ f.url }}">
+        <h2>{{ f.title }}<br><span>{{ f.description }}</span></h2>
+        <img src="{{ f.image }}" title="{{ f.description }}" alt="">
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  <div class="swipe-pagination-wrapper">
+    <ul class="swipe-pagination">
+      {% for idx, f in featured %}
+      <li data-index="{{ idx }}">
+        <a href="{{ f.url }}"></a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div class="grid-3-small-1 has-gutter">
+
+  <div class="col-2">
+
+    <div class="container">
+      <h2>Ils sont passés par AD'HOC</h2>
+      <div class="reset grid-3-small-2 has-gutter">
+        {% for video in videos %}
+        <div class="video">
+          <div class="thumb" style="background-image: url({{ video.thumbUrl }})">
+            <a class="playbtn" href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">▶</a>
+          </div>
+          <p class="title"><a href="{{ video.groupe.url }}" title="Aller à la page du groupe {{ video.groupe.name }}">{{ video.groupe.name }}</a></p>
+          <p class="subtitle">
+            <a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a>
+            <br/>
+            <a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.date|format_datetime(pattern='dd LLLL yyyy') }}</a>
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-1">
+
+  <div class="box">
+    <h2><a href="/events" title="Agenda">Agenda</a></h2>
+    <div>
+      {% if events %}
+      <ul>
+      {% for month, month_events in events %}
+        <li class="mbs">
+          <strong>{{ month|format_datetime(pattern='LLLL yyyy')|capitalize }}</strong>
+          <ul>
+          {% for event in month_events %}
+            <li><span style="font-weight: bold; color: #cc0000;" title="{{ event.date|format_datetime('full') }}">{{ event.date|format_datetime(pattern='dd') }}</span> <a href="{{ event.url }}" title="{{ event.name }}">{{ event.name|slice(0, 40) }}</a></li>
+          {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+      </ul>
+      {% else %}
+      aucun événement annoncé
+      {% endif %}
+    </div>
+  </div>
+
+  </div>
+
+</div>
 
 {% include 'common/footer.twig' %}

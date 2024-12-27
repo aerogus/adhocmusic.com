@@ -14,7 +14,6 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Email;
@@ -38,7 +37,7 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $trail = Trail::getInstance()
             ->addStep('Membres', '/membres');
@@ -159,7 +158,7 @@ final class Controller
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
             ->addStep('Mes Infos Persos');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/membres/edit.js');
@@ -277,7 +276,7 @@ final class Controller
 
         $id = $_SESSION['membre']->getIdContact();
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         try {
             $membre = Membre::getInstance($id);
@@ -355,7 +354,7 @@ final class Controller
         Trail::getInstance()
             ->addStep('Tableau de bord');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $db = DataBase::getInstance();
 

@@ -11,7 +11,6 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Departement;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;
@@ -39,7 +38,7 @@ final class Controller
             ->addStep('Tableau de bord', '/membres/tableau-de-bord')
             ->addStep('Mes photos');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
         $twig->enqueueScript('/static/library/imagesloaded@4.1.4/imagesloaded.min.js');
@@ -79,7 +78,7 @@ final class Controller
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         try {
             $photo = Photo::getInstance($id);
@@ -281,7 +280,7 @@ final class Controller
             ->addStep('Mes photos', '/photos/my')
             ->addStep('Ajouter une photo');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->assign('robots', 'noindex,nofollow');
 
@@ -343,7 +342,7 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->assign('robots', 'noindex,nofollow');
 
@@ -439,7 +438,7 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->assign('robots', 'noindex,nofollow');
 

@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\CMS;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
@@ -23,7 +22,7 @@ final class Controller
     public static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
@@ -45,7 +44,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
@@ -88,7 +87,7 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
@@ -134,7 +133,7 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")

@@ -14,7 +14,6 @@ use Adhoc\Model\Membre;
 use Adhoc\Model\Newsletter;
 use Adhoc\Model\Partner;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
@@ -30,7 +29,7 @@ final class Controller
      */
     public static function index(): string
     {
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $videos = Video::find([
             'id_lieu' => 1,
@@ -288,7 +287,7 @@ final class Controller
             Tools::auth(Membre::TYPE_INTERNE);
         }
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         return
             $twig->render('common/header.twig')

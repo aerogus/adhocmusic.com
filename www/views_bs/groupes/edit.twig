@@ -1,0 +1,126 @@
+{% include 'common/header.twig' %}
+
+<div class="container">
+
+{% if unknown_groupe %}
+
+  <div class="alert alert-danger">Groupe introuvable</div>
+
+{% elseif not_my_groupe %}
+
+  <div class="alert alert-danger">Vous ne pouvez pas éditer ce groupe.</div>
+
+{% else %}
+
+  <h2>{{ groupe.name }}</h2>
+  <div>
+    <form id="form-groupe-edit" name="form-groupe-edit" method="post" action="/groupes/edit" enctype="multipart/form-data">
+      <section class="grid-4">
+        <div>
+          <label for="name">Nom</label>
+        </div>
+        <div class="col-3 mbs">
+          <span id="name">{{ groupe.name }}</span>
+        </div>
+        <div>
+          <label for="lelogo">Logo (.jpg)</label>
+        </div>
+        <div class="col-3 mbs">
+          <img src="{{ groupe.Logo }}" alt=""><br><input type="file" id="lelogo" name="lelogo">
+        </div>
+        <div>
+          <label for="photo">Photo (.jpg)</label>
+        </div>
+        <div class="col-3 mbs">
+          <img src="{{ groupe.Photo }}" alt=""><br><input type="file" id="photo" name="photo">
+        </div>
+        <div>
+          <label for="mini_photo">Mini Photo carrée</label>
+        </div>
+        <div class="col-3 mbs">
+          <img src="{{ groupe.MiniPhoto }}" alt=""><br><input type="file" id="mini_photo" name="mini_photo">
+        </div>
+        <div>
+          <label for="style">Style (*)</label>
+        </div>
+        <div class="col-3 mbs">
+          <div class="alert alert-danger" id="error_style"{% if not error_style %} style="display: none"{% endif %}>Vous devez préciser le style musical</div>
+          <input type="text" id="style" name="style" class="w100" value="{{ data.style }}">
+        </div>
+        <div>
+          <label for="influences">Influences</label>
+        </div>
+        <div class="col-3 mbs">
+          <div class="alert alert-danger" id="error_influences"{% if not error_influences %} style="display: none"{% endif %}>Vous devez préciser vos influences</div>
+          <input type="text" id="influences" class="w100" name="influences" value="{{ data.influences }}">
+        </div>
+        <div>
+          <label for="site">Site</label>
+        </div>
+        <div class="col-3 mbs">
+          <input type="text" id="site" name="site" class="w100" value="{{ data.site }}">
+        </div>
+        <div>
+          <label for="facebook_page_id">Id Page Facebook</label>
+        </div>
+        <div class="col-3 mbs">
+          http://www.facebook.com/pages/{{ groupe.Alias }}/<input type="text" id="facebook_page_id" name="facebook_page_id" value="{{ data.facebook_page_id }}">
+        </div>
+        <div>
+          <label for="twitter_id">Identifiant Twitter</label>
+        </div>
+        <div class="col-3 mbs">
+          http://www.twitter.com/<input type="text" id="twitter_id" name="twitter_id" value="{{ data.twitter_id }}">
+        </div>
+        <div>
+          <label for="lineup">Lineup (*)</label>
+        </div>
+        <div class="col-3 mbs">
+          <div class="alert alert-danger" id="error_lineup"{% if not error_lineup %} style="display: none"{% endif %}>Vous devez préciser votre formation</div>
+          <textarea id="lineup" name="lineup" class="w100" rows="5">{{ data.lineup }}</textarea>
+        </div>
+        <div>
+          <label for="mini_text">Mini Présentation (*)</label>
+        </div>
+        <div class="col-3 mbs">
+          <div class="alert alert-danger" id="error_mini_text"{% if not error_mini_text %} style="display: none"{% endif %}>Vous devez écrire une mini présentation de moins de 250 caractères</div>
+          <textarea id="mini_text" name="mini_text" class="w100" rows="5">{{ data.mini_text }}</textarea>
+        </div>
+        <div>
+          <label for="text">Présentation (*)</label>
+        </div>
+        <div class="col-3 mbs">
+          <div class="alert alert-danger" id="error_text"{% if not error_text %} style="display: none"{% endif %}>Vous devez préciser le champ présentation</div>
+          <textarea id="text" name="text" class="w100" rows="20">{{ data.text }}</textarea>
+        </div>
+        <div>
+          <label for="id_type_musicien">Ma fonction</label>
+        </div>
+        <div class="col-3 mbs">
+          <select id="id_type_musicien" name="id_type_musicien" class="w100">
+            {% for type_musicien in types_musicien %}
+            <option value="{{ type_musicien.id }}"{% if data.id_type_musicien == type_musicien.id %} selected="selected"{% endif %}>{{ type_musicien.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div></div>
+        <div class="col-3">
+          <input type="hidden" name="id" value="{{ groupe.id }}">
+          <input id="form-groupe-edit-submit" name="form-groupe-edit-submit" class="btn btn-primary w100" type="submit" value="Modifier">
+        </div>
+      </section>
+    </form>
+  </div>
+
+  <div>
+    <a href="/photos/create?id_groupe={{ groupe.id }}" class="btn btn-primary">Ajouter une photo</a>
+    <a href="/audios/create?id_groupe={{ groupe.id }}" class="btn btn-primary">Ajouter une musique</a>
+    <a href="/videos/create?id_groupe={{ groupe.id }}" class="btn btn-primary">Ajouter une vidéo</a>
+    <a href="{{ groupe.Url }}" class="btn btn-primary">Voir la fiche</a>
+  </div>
+
+{% endif %}
+
+</div>{# .container #}
+
+{% include 'common/footer.twig' %}

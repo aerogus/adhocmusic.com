@@ -1,0 +1,22 @@
+{% include 'common/header.twig' %}
+
+<div class="container">
+  <h1>Supprimer une date</h1>
+  <div>
+    <form name="form-event-delete" id="form-event-delete" action="/events/delete" method="post">
+      <fieldset>
+        <ul>
+          <li><strong>Lieu :</strong><br>{{ lieu.name }}</li>
+          <li><strong>Titre :</strong><br>{{ event.name }}</li>
+          <li><strong>Date :</strong><br>{{ event.date }}</li>
+          <li><strong>Description :</strong><br>{{ event.text }}</li>
+          <li><strong>Tarif :</strong><br>{{ event.price }}</li>
+        </ul>
+      </fieldset>
+      <input id="form-event-delete-submit" name="form-event-delete-submit" class="btn btn-primary" type="submit" value="Supprimer">
+      <input type="hidden" name="id" value="{{ event.id }}">
+    </form>
+  </div>
+</div>
+
+{% include 'common/footer.twig' %}

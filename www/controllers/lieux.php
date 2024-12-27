@@ -15,7 +15,6 @@ use Adhoc\Model\LieuType;
 use Adhoc\Model\WorldCountry;
 use Adhoc\Model\WorldRegion;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
@@ -33,7 +32,7 @@ final class Controller
      */
     public static function index(): string
     {
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueScript('/js/lieux/index.js');
 
@@ -98,7 +97,7 @@ final class Controller
     {
         $page = (int) Route::params('page');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Lieux", "/lieux")
@@ -120,7 +119,7 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->assign('create', (bool) Route::params('create'));
         $twig->assign('edit', (bool) Route::params('edit'));
@@ -251,7 +250,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/lieux/create.js');
@@ -353,7 +352,7 @@ final class Controller
             ->addStep("Lieux", "/lieux")
             ->addStep("Modifier");
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/lieux/edit.js');
@@ -458,7 +457,7 @@ final class Controller
             ->addStep("Lieux", "/lieux")
             ->addStep("Supprimer");
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         try {
             $lieu = Lieu::getInstance($id);

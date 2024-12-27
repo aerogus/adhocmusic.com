@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Audio;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
@@ -29,7 +28,7 @@ final class Controller
 
         $page = (int) Route::params('page');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $audios = Audio::find(
             [

@@ -6,7 +6,6 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Comment;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
@@ -25,7 +24,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Commentaires", '/comments');
@@ -49,7 +48,7 @@ final class Controller
         $id = (int) Route::params('id');
         $comment = Comment::getInstance($id);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
         $twig->assign('comment', $comment);
         return $twig->render('comments/show.twig');
     }
@@ -59,7 +58,7 @@ final class Controller
      */
     public static function fetch(): string
     {
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
         return $twig->render('comments/fetch.twig');
     }
 
@@ -134,7 +133,7 @@ final class Controller
 
         $comment = Comment::getInstance($id);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         if (Tools::isSubmit('form-comment-delete')) {
             if ($comment->delete()) {

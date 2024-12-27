@@ -1,0 +1,13 @@
+<form id="form-message-write" name="form-message-write" action="/messagerie/write" method="post">
+  <ul>
+    <li>
+      <div class="alert alert-danger" id="error_text"{% if not error_tex %} style="display: none"{% endif %}>Vous devez écrire quelque chose !</div>
+      <label for="text">Ecrire à <a href="/membres/{{ id_to }}">{{ pseudo_to }}</a></label>
+      <textarea id="text" name="text" cols="50" rows="10"></textarea>
+    </li>
+    <li>
+      <input type="hidden" id="to" name="to" value="{{ id_to }}">
+      <input id="form-message-write-submit" name="form-message-write-submit" type="submit" value="Envoyer">
+    </li>
+  </ul>
+</form>

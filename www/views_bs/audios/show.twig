@@ -1,0 +1,64 @@
+{% include 'common/header.twig' %}
+
+{% if unknown_audio %}
+
+<p class="alert alert-danger">Cet audio est introuvable !</p>
+
+{% else %}
+
+<script>
+let audio_url = '{{ og_audio.url }}';
+</script>
+
+<div class="box">
+  <h1>{{ audio.name }}</h1>
+  <div>
+
+{% if audio.groupe %}
+<a href="{{ audio.groupe.url }}"><img style="float: left; margin: 5px;" src="{{ audio.groupe.miniPhoto }}" alt="{{ audio.groupe.name }}"></a>
+{% endif %}
+
+<div class="audiometa">
+<ul>
+  <li>Titre : <strong>{{ audio.name }}</strong></li>
+  {% if audio.groupe %}
+  <li>Groupe : <a href="{{ audio.groupe.url }}"><strong>{{ audio.groupe.name }}</strong></a></li>
+  {% endif %}
+  {% if audio.event %}
+  <li>Evénement : <a href="{{ audio.event.url }}"><strong>{{ audio.event.name }}</strong></a> ({{ audio.event.date|date("d/m/Y") }})</li>
+  {% endif %}
+  {% if audio.lieu %}
+  <li>Lieu : <a href="{{ audio.lieu.url }}"><strong>{{ audio.lieu.name }}</strong></a></li>
+  {% endif %}
+  <li>Mise en ligne : le {{ audio.createdAt|date("d/m/Y") }} par <a href="/membres/show/{{ audio.membre.id }}"><strong>{{ audio.membre.pseudo }}</strong></a></li>
+</ul>
+</div>
+
+<audio controls="controls" src="{{ audio.directMp3Url }}" style="background-color:#000"></audio>
+
+  </div>
+</div>
+
+{% if photos or videos %}
+<div class="box">
+  <h2>Photos et vidéos de ce concert</h2>
+  <div>
+{% for photo in photos %}
+<div class="thumb-80 thumb-photo-80">
+  <a href="{{ photo.url }}"><img src="{{ photo.thumbUrl(80) }}" alt="{{ photo.name }}"><br>{{ photo.name|slice(0, 15) }}</a>
+  <a class="overlay-80 overlay-photo-80" href="{{ photo.url }}" title="{{ photo.name }}"></a>
+</div>
+{% endfor %}
+{% for video in videos %}
+<div class="thumb-80 thumb-video-80">
+  <a href="{{ video.url }}"><img src="{{ video.thumbUrl(80) }}" alt="{{ video.name }}"><br>{{ video.name|slice(0, 15) }}</a>
+  <a class="overlay-80 overlay-video-80" href="{{ video.url }}" title="{{ video.name }}"></a>
+</div>
+{% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% endif %} {# test unknown audio #}
+
+{% include 'common/footer.twig' %}

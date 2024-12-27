@@ -1,0 +1,129 @@
+{% include 'common/header.twig' %}
+
+{% if unknown_lieu %}
+
+<p class="alert alert-danger">Ce lieu est introuvable !</p>
+
+{% else %}
+
+{% if create %}
+<div class="alert alert-success">Le lieu a bien été ajouté</div>
+{% endif %}
+
+{% if edit %}
+<div class="alert alert-success">Le lieu a bien été modifié</div>
+{% endif %}
+
+<div class="container">
+  <h1>{{ lieu.name }}</h1>
+  <div>
+    <div id="map_canvas" style="width: 50%; height: 320px; float: right; z-index: 1"></div>
+
+    <div class="infos" style="width: 300px; padding: 10px;">
+      <strong>{{ lieu.name }}</strong><br>
+      {{ lieu.address }}<br>
+      {{ lieu.city.cp }} {{ lieu.city.name }}<br>
+      {% if lieu.idCountry == 'FR' %}
+      {{ lieu.idDepartement }} / {{ lieu.departement.name }}<br>
+      {% endif %}
+      {{ lieu.region.name }}<br>
+      <img src="{{ lieu.country.flagUrl }}" alt="{{ lieu.idCountry }}"> {{ lieu.country.name }}
+    </div>
+
+    <div class="infos" style="padding: 10px;">
+      {{ lieu.type }}<br>
+      {% if lieu.site %}
+      <a href="{{ lieu.site }}">{{ lieu.site }}</a><br>
+      {% endif %}
+    </div>
+
+    <div class="infos" style="padding: 10px;">
+    {{ lieu.text }}
+    </div>
+
+    <br style="clear: both">
+
+  </div>
+</div>
+
+{% if events_f %}
+<div class="container">
+  <h2>Agenda</h2>
+  <div>
+    <ul>
+      {% for event in events_f %}
+      <li>{% if event.structures %}<img src="{{ event.structures[0].picto }}" alt="" title="Organisé par {{ event.structures[0].name }}">{% endif %}<a href="{{ event.url }}">Le {{ event.date }} - {{ event.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+{% if events_p %}
+<div class="container">
+  <h2>Evénements passés</h2>
+  <div>
+    <ul>
+      {% for event in events_p %}
+      <li>{% if event.structures %}<img src="{{ event.structures[0].picto }}" alt="" title="Organisé par {{ event.structures[0].name }}">{% endif %}<a href="{{ event.url }}">Le {{ event.date }} - {{ event.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+{% if photos %}
+<div class="container">
+  <h2>Photos</h2>
+  <div class="reset gallery">
+  {% for photo in photos %}
+    <div class="photo">
+      <a href="{{ photo.thumbUrl }}" data-id="{{ photo.id }}" data-at-1000="{{ photo.thumbUrl }}" title="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %} 📷 {{ photo.credits }}">
+        <img data-id="{{ photo.id }}" src="{{ photo.thumbUrl }}" alt="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
+      </a>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% if audios %}
+<div class="container">
+  <h2>Sons</h2>
+  <div>
+    <ul>
+      {% for audio in audios %}
+      <li>Titre : <strong>{{ audio.name }}</strong>
+      {% if audio.groupe %}<br>Groupe : <a href="{{ audio.groupe.url }}">{{ audio.groupe.name }}</a>{% endif %}
+      {% if audio.event %}<br>Evénement : <a href="{{ audio.event.url }}">{{ audio.event.name }}</a> ({{ audio.event.date }}){% endif %}
+      <br><audio src="{{ audio.directMp3Url }}"></audio></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+{% if videos %}
+<div class="container">
+  <h2>Vidéos</h2>
+  <div class="reset grid-3-small-2 has-gutter">
+    {% for video in videos %}
+    <div class="video">
+      <div class="thumb" style="background-image: url({{ video.thumbUrl }})">
+        <a class="playbtn" href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">▶</a>
+      </div>
+      <p class="title"><a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
+      <p class="subtitle">
+        {% if video.groupe %}<a href="{{ video.groupe.url }}" title="Aller à la page du groupe {{ video.groupe.name }}">{{ video.groupe.name }}</a>{% endif %}
+        {% if video.groupe and video.event %}<br/>{% endif %}
+        {% if video.event %}<a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.date }}</a>{% endif %}
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% endif %} {# test unknown lieu #}
+
+{% include 'common/footer.twig' %}

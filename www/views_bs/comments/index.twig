@@ -1,0 +1,45 @@
+{% include 'common/header.twig' %}
+
+<div class="box">
+  <h1>Commentaires</h1>
+  <div>
+
+<form id="form-comments-delete" id="form-comments-delete">
+
+<table>
+  <thead>
+    <tr>
+      <th>X</th>
+      <th>Id</th>
+      <th>Contenu</th>
+      <th>Créé</th>
+      <th>Online</th>
+      <th>Anonyme</th>
+      <th>Membre</th>
+      <th>Texte</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for comment in comments %}
+    <tr id="row-{{ comment.id }}">
+      <td><input type="checkbox" id="com-del-{{ comment.id }}"></td>
+      <td><a href="/comments/show/{{ comment.id }}">{{ comment.id }}</a></td>
+      <td><a href="/{{ comment.type_full }}/{{ comment.id_content }}">{{ comment.type }} {{ comment.id_content }}</a></td>
+      <td>{{ comment.createdAt }}</td>
+      <td>{{ comment.online }}</td>
+      <td>{{ comment.pseudo }}<br>{{ comment.email }}</td>
+      <td><a href="/membres/show/{{ comment.idContact }}">{{ comment.pseudo }}</a><br>{{ comment.email }}</td>
+      <td>{{ comment.text|nl2br }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<input name="form-comments-delete-submit" id="form-comments-delete-submit" type="submit" value="Effacer sélectionnés">
+
+</form>
+
+  </div>
+</div>
+
+{% include 'common/footer.twig' %}

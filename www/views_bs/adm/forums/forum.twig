@@ -1,0 +1,43 @@
+{% include 'common/header.twig' %}
+
+<div class="container">
+  <h2>{{ forum.title }}</h2>
+  <div>
+
+<div class="subscribers round-corners-all">
+{% for sub in subs %}
+<a href="{{ sub.url }}" title="{{ sub.pseudo }} - {{ sub.port }} - {{ sub.email }}"><img src="{{ sub.avatar }}" class="thread-avatar" alt="{{ sub.pseudo }} - {{ sub.port }} - {{ sub.email }}" /></a>
+{% endfor %}
+</div>
+
+<a class="btn btn-primary" href="/adm/forums/write?id_forum={{ forum.id_forum }}">Nouveau sujet</a>
+
+{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Sujet <em>(Réponses)</em></th>
+      <th>Dernier Message</th>
+      <th>Vues</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for thread in threads %}
+    <tr>
+      <td><img src="{{ thread.created_by_avatar }}" style="padding-right: 5px" class="thread-avatar" alt="" /><a class="toggle" id="toggle_{{ thread.id_thread }}" href="{{ thread.url }}"><strong>{{ thread.subject }}</strong></a> <em>({{ thread.nb_replies }})</em><br />Par <a href="{{ thread.createdByUrl }}">{{ thread.createdBy }}</a> le {{ thread.createdAt|date("d/m/Y \\à H\\:M") }}
+      <p style="display: none" class="msg" id="msg_{{ thread.id_thread }}">{{ thread.text|nl2br }}</p></td>
+      <td>Par <a href="/membres/{{ thread.modified_by }}">{{ thread.modified_by }}</a><br />le {{ thread.modifiedAt|date("d/m/Y \\à H\\:M") }}</td>
+      <td>{{ thread.nb_views }}</td>
+  {% endfor %}
+  </tbody>
+</table>
+
+{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
+
+<a class="btn btn-primary" href="/adm/forums/write?id_forum={{ forum.id_forum }}">Nouveau sujet</a>
+
+  </div>
+</div>
+
+{% include 'common/footer.twig' %}

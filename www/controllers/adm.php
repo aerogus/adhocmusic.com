@@ -9,7 +9,6 @@ use Adhoc\Model\Groupe;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Style;
 use Adhoc\Model\TypeMusicien;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Log;
@@ -28,7 +27,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->assign('title', "AD'HOC : Administration du site");
         $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
@@ -52,7 +51,7 @@ final class Controller
             ->addStep("Privé", "/adm")
             ->addStep("Groupes");
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $page = (int) Route::params('page');
 
@@ -92,7 +91,7 @@ final class Controller
             ->addStep("Groupes", "/adm/groupes")
             ->addStep($groupe->getName());
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
         $twig->assign('groupe', $groupe);
         return $twig->render('adm/groupes/show.twig');
     }
@@ -140,7 +139,7 @@ final class Controller
 
         $nb_membres = Membre::count();
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->assign('membres', $membres);
 
@@ -194,7 +193,7 @@ final class Controller
             ->addStep("Membres", "/adm/membres")
             ->addStep($membre->getPseudo());
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
         $twig->assign('membre', $membre);
         return $twig->render('adm/membres/show.twig');
     }
@@ -223,7 +222,7 @@ final class Controller
 
         // ***
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
         $twig->assign('membre', $membre);
         return $twig->render('adm/membres/delete.twig');
     }
@@ -235,7 +234,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
@@ -262,7 +261,7 @@ final class Controller
         $id = (int) Route::params('id');
 
         $db = DataBase::getInstance();
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $groupe = Groupe::getInstance($id);
 
@@ -352,7 +351,7 @@ final class Controller
 
         $out = '';
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
@@ -488,7 +487,7 @@ final class Controller
 
         $out .= "<a href=\"/adm/delete-account\" class=\"button\">retour</a>";
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         $twig->assign('content', $out);
 
@@ -508,7 +507,7 @@ final class Controller
         $id_contact = (int) Route::params('membre');
         $id_type_musicien = (int) Route::params('type');
 
-        $twig = new AdHocTwig();
+        $twig = new AdhocTwigBootstrap();
 
         Trail::getInstance()
             ->addStep("Privé", "/adm")
