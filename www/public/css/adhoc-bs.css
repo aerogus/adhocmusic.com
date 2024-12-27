@@ -40,6 +40,10 @@ header {
   color: #a7a7a7;
 }
 
+.btn-primary {
+  --bs-btn-bg: red;
+}
+
 footer {
   background: #292933 url("/img/tri/top-left-ececec.svg") no-repeat;
   background-size: 100% 2vw;

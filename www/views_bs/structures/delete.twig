@@ -1,0 +1,19 @@
+{% include 'common/header.twig' %}
+
+<div class="container">
+  <h1 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Effacer une structure</h1>
+  <div class="border rounded-bottom bg-white p-3">
+    <form id="form-structure-delete" name="form-structure-delete" method="post" action="/structures/delete">
+      <ul>
+        <li>
+          <label for="name">Nom</label>
+          <input type="text" id="name" name="name" value="{{ structure.name }}" readonly="readonly">
+        </li>
+      </ul>
+      <input id="form-structure-delete-submit" name="form-structure-delete-submit" type="submit" value="Supprimer">
+      <input type="hidden" name="id" value="{{ structure.id }}">
+    </form>
+  </div>
+</div>
+
+{% include 'common/footer.twig' %}

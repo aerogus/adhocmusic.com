@@ -225,10 +225,6 @@ final class Controller
 
         $twig = new AdHocTwig();
 
-        $twig->enqueueStyle('/static/library/jquery-ui@1.11.4/jquery-ui.min.css');
-
-        $twig->enqueueScript('/static/library/jquery-ui@1.11.4/jquery-ui.min.js');
-        $twig->enqueueScript('/static/library/jquery-ui@1.11.4/jquery-ui-datepicker-fr.js');
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/events/create.js');
 
@@ -485,10 +481,6 @@ final class Controller
 
         $twig = new AdHocTwig();
 
-        $twig->enqueueStyle('/static/library/jquery-ui@1.11.4/jquery-ui.min.css');
-
-        $twig->enqueueScript('/static/library/jquery-ui@1.11.4/jquery-ui.min.js');
-        $twig->enqueueScript('/static/library/jquery-ui@1.11.4/jquery-ui-datepicker-fr.js');
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/events/edit.js');
 

@@ -1,10 +1,8 @@
 {% include 'common/header.twig' %}
 
-<div class="box">
-  <header>
-    <h1>Liste des structures</h1>
-  </header>
-  <div>
+<div class="container">
+  <h1 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Liste des structures</h1>
+  <div class="border rounded-bottom bg-white p-3">
     <ul>
     {% for structure in structures %}
       <li><img src="{{ structure.picto }}" alt=""> <a href="{{ structure.url }}">{{ structure.name }}</a></li>

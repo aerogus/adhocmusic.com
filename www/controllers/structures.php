@@ -7,7 +7,6 @@ namespace Adhoc\Controller;
 use Adhoc\Model\Event;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Structure;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
@@ -23,10 +22,13 @@ final class Controller
      */
     public static function index(): string
     {
-        Trail::getInstance()
-            ->addStep('Structures');
+        $twig = new AdHocTwigBootstrap();
 
-        $twig = new AdHocTwig();
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            'Structures',
+        ]);
+
         $twig->assign('structures', Structure::findAll());
         return $twig->render('structures/index.twig');
     }
@@ -36,7 +38,7 @@ final class Controller
      */
     public static function show(): string
     {
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $id = (int) Route::params('id');
 
@@ -48,9 +50,11 @@ final class Controller
             return $twig->render('structures/show.twig');
         }
 
-        Trail::getInstance()
-            ->addStep('Structures', '/structures')
-            ->addStep($structure->getName());
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Structures', 'link' => '/structures'],
+            $structure->getName(),
+        ]);
 
         $twig->assign('structure', $structure);
 
@@ -77,7 +81,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->enqueueScript('/js/structures/create.js');
 
@@ -118,7 +122,7 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->enqueueScript('/js/structures/edit.js');
 
@@ -154,7 +158,7 @@ final class Controller
 
         $structure = Structure::getInstance($id);
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->enqueueScript('/js/structures/delete.js');
 
