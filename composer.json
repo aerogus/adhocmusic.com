@@ -33,7 +33,7 @@
         ],
         "stan": "./vendor/bin/phpstan analyse --memory-limit 512M",
         "pcs": "./vendor/bin/phpcs --standard=PSR12 --colors ./src --ignore=www/templates_c/*",
-        "tcs": "./vendor/bin/twigcs ./www/views ./www/views_bs",
+        "tcs": "./vendor/bin/twigcs ./www/views ./www/views",
         "unit": "./vendor/bin/phpunit",
         "eslint": "eslint"
     }
