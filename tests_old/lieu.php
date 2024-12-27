@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 use Adhoc\Model\Lieu;
 
-require_once __DIR__ . '/../app/bootstrap.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 $id_lieu = $argv[1] ?? null;
 

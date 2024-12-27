@@ -4,7 +4,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": ">=8.3",
+        "php": ">=8.4",
         "phpmailer/phpmailer": "6.9.3",
         "pear/console_table": "1.3.1",
         "eluceo/ical": "2.14.0",
@@ -29,11 +29,11 @@
     "scripts": {
         "http": [
             "Composer\\Config::disableProcessTimeout",
-            "php -S 0.0.0.0:8080 -t public"
+            "php -S 0.0.0.0:8080 -t www/public"
         ],
         "stan": "./vendor/bin/phpstan analyse --memory-limit 512M",
         "pcs": "./vendor/bin/phpcs --standard=PSR12 --colors ./app --ignore=app/twig_c/*",
-        "tcs": "./vendor/bin/twigcs ./app/twig",
+        "tcs": "./vendor/bin/twigcs ./www/views ./www/views_bs",
         "unit": "./vendor/bin/phpunit",
         "eslint": "eslint"
     }

@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 use Adhoc\Model\WorldCountry;
 
-require_once __DIR__ . '/../app/bootstrap.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 $wcs = WorldCountry::findAll();
 
