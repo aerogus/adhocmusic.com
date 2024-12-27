@@ -10,14 +10,12 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 use Adhoc\Model\Departement;
 
 define('NB_VIDEOS_PER_PAGE', 48);
@@ -33,9 +31,13 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes vidéos');
+        $twig = new AdHocTwigBootstrap();
+
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            'Mes vidéos',
+        ]);
 
         $page = (int) Route::params('page');
 
@@ -61,8 +63,6 @@ final class Controller
             );
             $nb_videos = Video::countMy();
         }
-
-        $twig = new AdHocTwig();
 
         $twig->assign('robots', 'noindex,nofollow');
 
@@ -92,7 +92,11 @@ final class Controller
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
+
+        $breadcrumb = [
+            ['title' => '🏠', 'link' => '/'],
+        ];
 
         $twig->enqueueStyle('/css/baguetteBox-1.11.1.min.css');
 
@@ -154,26 +158,20 @@ final class Controller
 
             // menu et fil d'ariane
             if ($from === 'groupe' && count($video->getGroupes()) > 0) {
-                Trail::getInstance()
-                    ->addStep("Groupes", "/groupes")
-                    ->addStep($groupe->getName(), $groupe->getUrl());
+                $breadcrumb[] = ['title' => 'Groupes', 'link' => '/groupes'];
+                $breadcrumb[] = ['title' => $groupe->getName(), 'link' => $groupe->getUrl()];
             } elseif ($from === 'profil' && !is_null($video->getIdContact())) {
-                Trail::getInstance()
-                    ->addStep("Zone Membre", "/membres");
+                $breadcrumb[] = ['title' => 'Zone membre', 'link' => '/membres'];
             } elseif ($from === 'event' && isset($event)) {
-                Trail::getInstance()
-                    ->addStep("Agenda", "/events")
-                    ->addStep($event->getName(), "/events/" . $event->getIdEvent());
+                $breadcrumb[] = ['title' => 'Agenda', 'link' => '/events'];
+                $breadcrumb[] = ['title' => $event->getName(), 'link' => "/events/" . $event->getIdEvent()];
             } elseif ($from === 'lieu' && !is_null($video->getIdLieu())) {
-                Trail::getInstance()
-                    ->addStep("Lieux", "/lieux")
-                    ->addStep($lieu->getName(), "/lieux/" . $lieu->getIdLieu());
+                $breadcrumb[] = ['title' => 'Lieux', 'link' => '/lieux'];
+                $breadcrumb[] = ['title' => $lieu->getName(), 'link' => "/lieux/" . $lieu->getIdLieu()];
             } else {
-                Trail::getInstance()
-                    ->addStep("Média", "/medias");
+                $breadcrumb[] = ['title' => 'Média', 'link' => '/medias'];
             }
-            Trail::getInstance()
-                ->addStep($video->getName());
+            $breadcrumb[] = [$video->getName()];
 
             // vidéos et photos liées à l'événement/lieu
             if (!is_null($video->getIdEvent()) && !is_null($video->getIdLieu())) {
@@ -207,6 +205,8 @@ final class Controller
             $twig->assign('unknown_video', true);
         }
 
+        $twig->assign('breadcrumb', $breadcrumb);
+
         return $twig->render('videos/show.twig');
     }
 
@@ -219,7 +219,7 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         try {
             $video = Video::getInstance($id);
@@ -247,7 +247,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->assign('robots', 'noindex,nofollow');
 
@@ -314,10 +314,12 @@ final class Controller
             }
         }
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes vidéos', '/videos/my')
-            ->addStep('Ajouter une vidéo');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Mes vidéos', 'link' => '/videos/my'],
+            ['Ajouter une vidéo'],
+        ]);
 
         // préselection d'un groupe
         $id_groupe = (int) Route::params('id_groupe');
@@ -378,7 +380,7 @@ final class Controller
         $id = (int) Route::params('id');
         $page = (int) Route::params('page');
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->assign('robots', 'noindex,nofollow');
 
@@ -445,10 +447,12 @@ final class Controller
             }
         }
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes vidéos', '/videos/my')
-            ->addStep('Éditer une vidéo');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Mes vidéos', 'link' => '/videos/my'],
+            ['Éditer une vidéo'],
+        ]);
 
         $twig->assign('video', $video);
 
@@ -492,16 +496,18 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdHocTwig();
+        $twig = new AdHocTwigBootstrap();
 
         $twig->assign('robots', 'noindex,nofollow');
 
         $twig->enqueueScript('/js/videos/delete.js');
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes vidéos', '/videos/my')
-            ->addStep('Supprimer une vidéo');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Mes vidéos', 'link' => '/videos/my'],
+            ['Supprimer une vidéo'],
+        ]);
 
         try {
             $video = Video::getInstance($id);

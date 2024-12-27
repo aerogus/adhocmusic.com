@@ -9,7 +9,6 @@ use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
 use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\AdHocTwigBootstrap;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
@@ -25,9 +24,13 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes alertes');
+        $twig = new AdHocTwigBootstrap();
+
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            'Mes alertes',
+        ]);
 
         $myAlerting = Alerting::find([
             'id_contact' => $_SESSION['membre']->getIdContact(),
@@ -42,7 +45,7 @@ final class Controller
                 $myAlertingEvent[] = Event::getInstance($ma->getIdEvent());
             }
         }
-        $twig = new AdHocTwig();
+
         $twig->assign('lieux', $myAlertingLieu);
         $twig->assign('groupes', $myAlertingGroupe);
         $twig->assign('events', $myAlertingEvent);

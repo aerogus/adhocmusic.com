@@ -2,14 +2,12 @@
 
 {% if unknown_video %}
 
-<p class="infobulle error">Cette vidéo est introuvable !</p>
+<p class="alert alert-danger">Cette vidéo est introuvable !</p>
 
 {% else %}
 
-<div class="box">
-  <header>
-    <h1>{{ video.name }}</h1>
-  </header>
+<div class="container">
+  <h1>{{ video.name }}</h1>
   <div class="reset">
     <div class="fluid-video-player {{ video.playerRatio }}">
     {{ video.player|raw }}

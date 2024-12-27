@@ -1,11 +1,11 @@
 {% include 'common/header.twig' %}
 
-<div class="grid-3-small-2-tiny-1 has-gutter">
+<div class="container">
 
-  <div class="box">
-    <header>
-      <h1>Mes abonnements groupes</h1>
-    </header>
+<div class="row">
+
+  <div class="col-md-4">
+    <h1>Mes abonnements groupes</h1>
     <div>
       {% if groupes %}
       <ul>
@@ -21,10 +21,8 @@
     </div>
   </div>
 
-  <div class="box">
-    <header>
-      <h2>Mon agenda</h2>
-    </header>
+  <div class="col-md-4">
+    <h2>Mon agenda</h2>
     <div>
       {% if events %}
       <ul>
@@ -40,10 +38,8 @@
     </div>
   </div>
 
-  <div class="box">
-    <header>
-      <h1>Mes abonnements lieux</h1>
-    </header>
+  <div class="col-md-4">
+    <h1>Mes abonnements lieux</h1>
     <div>
       {% if lieux %}
       <ul>
@@ -59,6 +55,7 @@
     </div>
   </div>
 
-</div>
+</div>{# .row #}
+</div>{# .container #}
 
 {% include 'common/footer.twig' %}
