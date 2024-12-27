@@ -3,10 +3,10 @@ includes:
 parameters:
   level: 6
   bootstrapFiles:
-    - app/bootstrap.php
+    - bootstrap.php
   paths:
-    - app
+    - src
   excludePaths:
-    - app/twig_c/??/*.php
+    - www/templates_c/??/*.php
   strictRules:
     noVariableVariables: false
