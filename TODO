@@ -3,10 +3,6 @@
 - finir les corrections twig (composer tcs) -> 0 error (4)
 - refacto Contact -> Membre -> MembreAdhoc ?
 - écrire + de tests unitaires
-- passage à bootstrap car knacss plus supporté
-
-- POST /membres/create
-
-Fatal error: Uncaught Exception: invalid field type: password in /var/www/docker.adhocmusic.com/app/src/Adhoc/Utils/ObjectModel.php:535 Stack trace: #0 /var/www/docker.adhocmusic.com/app/src/Adhoc/Controller/membres.php(121): Adhoc\Utils\ObjectModel->save() #1 [internal function]: Adhoc\Controller\Controller::create() #2 /var/www/docker.adhocmusic.com/app/src/Adhoc/Utils/Route.php(229): call_user_func(Array) #3 /var/www/docker.adhocmusic.com/public/index.php(43): Adhoc\Utils\Route::run() #4 {main} thrown in /var/www/docker.adhocmusic.com/app/src/Adhoc/Utils/ObjectModel.php on line 535
-
--> dans ObjectModel, ne pas créer de type de propriété password mais implémenter le setter setPassword qui encode le pass (cf. ackwamann / migramann)
+- faire un menu du haut responsive
+- faire le menu du bas responsive
+- retirer toute dépendance non nécessaire à jQuery
