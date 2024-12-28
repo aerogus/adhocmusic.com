@@ -42,11 +42,12 @@ header {
   color: #a7a7a7;
 }
 
-/*
 .btn-primary {
-  --bs-btn-bg: red;
+  --bs-btn-bg: #cd1a1e;
+  --bs-btn-border-color: #cd1a1e;
+  --bs-btn-hover-bg:#843133;
+  --bs-btn-hover-border-color: #843133;
 }
-*/
 
 footer {
   background: #292933 url("/img/tri/top-left-ececec.svg") no-repeat;
