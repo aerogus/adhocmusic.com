@@ -5,14 +5,12 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "stylus": "./node_modules/.bin/stylus --compress www/stylus/adhoc.styl --out www/public/css/adhoc.css",
     "start": "docker-compose up",
     "stop": "docker-compose down",
     "clean": "rm -Rf node_modules vendor volumes"
   },
   "dependencies": {
-    "mjml": "4.15.3",
-    "stylus": "0.64.0"
+    "mjml": "4.15.3"
   },
   "devDependencies": {
     "@eslint/js": "9.17.0",

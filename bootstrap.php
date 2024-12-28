@@ -23,7 +23,7 @@ if (!is_dir(OBJECT_CACHE_PATH)) {
 }
 
 define('TWIG_TEMPLATES_PATH', __DIR__ . '/www/views');
-define('TWIG_TEMPLATES_C_PATH', __DIR__ . '/www/templates_c');
+define('TWIG_TEMPLATES_C_PATH', __DIR__ . '/tmpfs/templates_c');
 
 /**
  * Chargement automatique des classes métiers AD'HOC

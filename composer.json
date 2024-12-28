@@ -32,7 +32,7 @@
             "php -S 0.0.0.0:8080 -t www/public"
         ],
         "stan": "./vendor/bin/phpstan analyse --memory-limit 512M",
-        "pcs": "./vendor/bin/phpcs --standard=PSR12 --colors ./src --ignore=www/templates_c/*",
+        "pcs": "./vendor/bin/phpcs --standard=PSR12 --colors ./src ./www",
         "tcs": "./vendor/bin/twigcs ./www/views ./www/views",
         "unit": "./vendor/bin/phpunit",
         "eslint": "eslint"
