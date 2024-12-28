@@ -42,7 +42,7 @@ final class Controller
             ['title' => '🏠', 'link' => '/'],
             ['title' => 'Membres', 'link' => '/membres'],
         ];
-    
+
         try {
             $membre = Membre::getInstance($id);
         } catch (\Exception $e) {
