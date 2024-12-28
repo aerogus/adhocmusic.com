@@ -16,9 +16,9 @@ https://www.adhocmusic.com
 Récupérer le dépôt
 
 ```bash
-cd ~/workspace
 git clone git@github.com:aerogus/adhocmusic.com.git
 cd adhocmusic.com
+cp conf/conf.dist.ini conf/conf.ini
 ```
 
 Générer un certificat TLS/SSL autosigné (prérequis = openssl)
@@ -32,10 +32,9 @@ Installer les dépendances
 ```bash
 composer install
 npm install
-npm run stylus
 ````
 
-Créer les images docker et instancer les conteneurs
+Créer les images docker et instancier les conteneurs
 
 ```bash
 docker-compose up [--build]
@@ -49,18 +48,26 @@ note: la navigateur émet un warning car on a généré des certificats autosign
 
 Redémarrage avec reconstruction des containers :
 
-```
+```bash
 docker-compose down && docker-compose up --build
 ```
 
-ou directement npm start
+ou directement `npm start`
 
 Construction pour la prod :
 
-```
+```bash
 composer install --no-dev
 npm install --only=prod
-npm run stylus
+```
+
+## Analyse statique du code
+
+```bash
+composer stan # PHPStan
+composer pcs # PHP Code Sniffer
+composer tcs # Twig Code Sniffer
+composer eslint # eslint
 ```
 
 ## Format des images
