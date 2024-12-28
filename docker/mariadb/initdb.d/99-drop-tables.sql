@@ -29,7 +29,6 @@
 --DROP TABLE IF EXISTS `adhoc_newsletter_hit`;
 --DROP TABLE IF EXISTS `adhoc_newsletter`;
 --DROP TABLE IF EXISTS `adhoc_subscription`;
---DROP TABLE IF EXISTS `adhoc_log_action`;
 --DROP TABLE IF EXISTS `adhoc_membre_adhoc`;
 --DROP TABLE IF EXISTS `adhoc_membre`;
 --DROP TABLE IF EXISTS `adhoc_contact`;

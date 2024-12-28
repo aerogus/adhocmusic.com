@@ -112,17 +112,6 @@ CREATE TABLE `adhoc_membre_adhoc` (
   CONSTRAINT `fk_membre_adhoc_membre` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_membre` (`id_contact`)
 );
 
-CREATE TABLE `adhoc_log_action` (
-  `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `action` int(10) UNSIGNED NOT NULL,
-  `id_contact` int(10) UNSIGNED DEFAULT NULL,
-  `ip` varchar(40) NOT NULL,
-  `host` varchar(100) NOT NULL,
-  `extra` mediumtext DEFAULT NULL,
-  KEY `id_contact` (`id_contact`),
-  CONSTRAINT `fk_log_action_contact` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_contact` (`id_contact`)
-);
-
 CREATE TABLE `adhoc_subscription` (
   `id_subscription` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,

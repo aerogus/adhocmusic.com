@@ -81,24 +81,27 @@ final class Controller
         $twig->assign('title', "Inscription à l'association AD'HOC");
         $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
-        $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], 'Créer un compte']);
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            'Créer un compte',
+        ]);
 
         $twig->assign('create', (bool) Route::params('create'));
 
         // valeurs par défaut
         $data = [
-            'pseudo'  => '',
-            'email'   => '',
+            'pseudo' => '',
+            'email' => '',
             'mailing' => false,
-            'csrf'    => '',
+            'csrf' => '',
         ];
 
         if (Tools::isSubmit('form-member-create')) {
             $data = [
-                'pseudo'  => trim((string) Route::params('pseudo')),
-                'email'   => trim(strtolower((string) Route::params('email'))),
+                'pseudo' => trim((string) Route::params('pseudo')),
+                'email' => trim(strtolower((string) Route::params('email'))),
                 'mailing' => (bool) Route::params('mailing'),
-                'csrf'    => '',
+                'csrf' => '',
             ];
 
             $errors = self::validateMemberCreateForm($data);
@@ -120,14 +123,21 @@ final class Controller
                     ->setLevel(Membre::TYPE_STANDARD);
 
                 if ($membre->save()) {
-                    Log::info("Création d'un compte membre: " . $membre->getIdContact());
-                    if (Email::send($data['email'], "Inscription à l'association AD'HOC", 'member-create', $data)) {
-                        Tools::redirect('/membres/create?create=1');
-                    } else {
+                    try {
+                        if (Email::send($data['email'], "Inscription à l'association AD'HOC", 'member-create', $data)) {
+                            Log::success("Création d'un compte membre: " . $membre->getIdContact());
+                            Tools::redirect('/membres/create?create=1');
+                        } else {
+                            $errors['generic'] = true;
+                            Log::error('membre create error 1');
+                        }
+                    } catch (\Exception $e) {
                         $errors['generic'] = true;
+                        Log::error($e->getMessage());
                     }
                 } else {
                     $errors['generic'] = true;
+                    Log::error('membre create error 2');
                 }
             } else {
                 Log::error("Création d'un compte membre. " . print_r($data, true));

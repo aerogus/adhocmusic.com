@@ -71,6 +71,7 @@ class Email
      * @param ?string              $attachment
      *
      * @return bool
+     * @throws \Exception
      */
     public static function send(string|array $to = '', string $subject = 'sans sujet', string $tplName = 'default', array $data = [], ?string $attachment = null): bool
     {

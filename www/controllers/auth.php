@@ -214,12 +214,17 @@ final class Controller
                         'new_password' => $new_password,
                     ];
 
-                    if (Email::send($membre->getContact()->getEmail(), 'Perte du mot de passe', 'password-lost', $data)) {
-                        Log::info('Password demandé');
-                        $twig->assign('sent_ok', true);
-                    } else {
+                    try {
+                        if (Email::send($membre->getContact()->getEmail(), 'Perte du mot de passe', 'password-lost', $data)) {
+                            Log::info('Password demandé');
+                            $twig->assign('sent_ok', true);
+                        } else {
+                            $twig->assign('sent_ko', true);
+                            $twig->assign('new_password', $new_password); // DEBUG ONLY
+                        }
+                    } catch (\Exception $e) {
+                        Log::error($e->getMessage());
                         $twig->assign('sent_ko', true);
-                        $twig->assign('new_password', $new_password); // DEBUG ONLY
                     }
                 } else {
                     if ($id_contact = Contact::getIdByEmail($email)) {
