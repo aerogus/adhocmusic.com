@@ -6,7 +6,8 @@ parameters:
     - bootstrap.php
   paths:
     - src
+    - www
   excludePaths:
-    - www/templates_c/??/*.php
+    - tmpfs/templates_c/??/*.php
   strictRules:
     noVariableVariables: false
