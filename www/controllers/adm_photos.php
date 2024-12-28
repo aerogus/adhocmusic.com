@@ -6,11 +6,10 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 define('NB_PHOTOS_PER_PAGE', 80);
 
@@ -23,13 +22,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Photos");
-
         $page = (int) Route::params('page');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
+
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            'Photos',
+        ]);
 
         $photos = Photo::find(
             [

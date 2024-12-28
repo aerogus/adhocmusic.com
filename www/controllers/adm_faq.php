@@ -7,10 +7,9 @@ namespace Adhoc\Controller;
 use Adhoc\Model\FAQ;
 use Adhoc\Model\Membre;
 use Adhoc\Model\FAQCategory;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 final class Controller
 {
@@ -18,11 +17,13 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep('Privé', '/adm')
-            ->addStep('Foire aux questions');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            'Foire aux questions',
+        ]);
 
         $twig->assign('create', (bool) Route::params('create'));
         $twig->assign('edit', (bool) Route::params('edit'));
@@ -39,12 +40,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep('Privé', '/adm')
-            ->addStep('Foire aux questions', '/adm/faq')
-            ->addStep('Création');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Foire aux questions', 'link' => '/adm/faq'],
+            'Création',
+        ]);
 
         if (Tools::isSubmit('form-faq-create')) {
             $data = [
@@ -78,12 +81,14 @@ final class Controller
 
         $id_faq = (int) Route::params('id');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep('Privé', '/adm')
-            ->addStep('Foire aux questions', '/adm/faq')
-            ->addStep('Édition');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Foire aux questions', 'link' => '/adm/faq'],
+            'Édition',
+        ]);
 
         if (Tools::isSubmit('form-faq-edit')) {
             $data = [
@@ -119,12 +124,14 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep('Privé', '/adm')
-            ->addStep('Foire aux questions', '/adm/faq')
-            ->addStep('Suppression');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Foire aux questions', 'link' => '/adm/faq'],
+            'Suppression',
+        ]);
 
         if (Tools::isSubmit('form-faq-delete')) {
             FAQ::getInstance($id)->delete();

@@ -8,9 +8,8 @@ use Adhoc\Model\Event;
 use Adhoc\Model\Groupe;
 use Adhoc\Model\Lieu;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
-use Adhoc\Utils\Trail;
 
 /**
  * Controlleur Medias
@@ -22,10 +21,12 @@ final class Controller
      */
     public static function index(): string
     {
-        Trail::getInstance()
-            ->addStep('Média');
+        $twig = new AdHocTwig();
 
-        $twig = new AdhocTwigBootstrap();
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            'Média',
+        ]);
 
         $twig->enqueueScript('/js/medias.js');
 
@@ -104,7 +105,7 @@ final class Controller
             $search_params['id_lieu'] = $id_lieu;
         }
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
         $twig->assign('search_video', Video::find($search_params));
         return $twig->render('medias/search-results.twig');
     }

@@ -6,10 +6,9 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Membre;
 use Adhoc\Model\Subscription;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 /**
  * Controlleur des cotisations
@@ -23,11 +22,13 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Cotisations");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            'Cotisations',
+        ]);
 
         $twig->assign('subscriptions', Subscription::findAll());
 
@@ -41,12 +42,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Cotisations", "/adm/subscriptions")
-            ->addStep("Nouvelle cotisation");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Cotisations', 'link' => '/adm/subscriptions'],
+            'Nouvelle cotisation',
+        ]);
 
         return $twig->render('adm/subscriptions/create.twig');
     }
@@ -58,12 +61,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Cotisations", "/adm/subscriptions")
-            ->addStep("Édition");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Cotisations', 'link' => '/adm/subscriptions'],
+            'Édition',
+        ]);
 
         return $twig->render('adm/subscriptions/edit.twig');
     }
@@ -75,12 +80,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Cotisations", "/adm/subscriptions")
-            ->addStep("Suppression");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Cotisations', 'link' => '/adm/subscriptions'],
+            'Suppression',
+        ]);
 
         return $twig->render('adm/subscriptions/delete.twig');
     }

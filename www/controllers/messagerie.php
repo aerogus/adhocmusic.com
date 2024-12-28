@@ -6,13 +6,12 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Membre;
 use Adhoc\Model\Message;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 /**
  *
@@ -26,15 +25,17 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/messagerie.js');
 
         $twig->assign('sent', (bool) Route::params('sent'));
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Messagerie');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            'Messagerie',
+        ]);
 
         $db = DataBase::getInstance();
 
@@ -66,14 +67,16 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/messagerie.js');
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Messagerie', '/messagerie')
-            ->addStep('Lire un message');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Messagerie', 'link' => '/messagerie'],
+            'Lire un message',
+        ]);
 
         $db = DataBase::getInstance();
 
@@ -102,14 +105,16 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/messagerie.js');
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Messagerie', '/messagerie')
-            ->addStep('Écrire un message');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Messagerie', 'link' => '/messagerie'],
+            'Écrire un message',
+        ]);
 
         if (Tools::isSubmit('form-message-write')) {
             $text = (string) Route::params('text');

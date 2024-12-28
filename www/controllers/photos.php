@@ -11,14 +11,13 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Departement;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 define('NB_PHOTOS_PER_PAGE', 48);
 
@@ -34,11 +33,13 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes photos');
+        $twig = new AdHocTwig();
 
-        $twig = new AdhocTwigBootstrap();
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            'Mes photos',
+        ]);
 
         $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
         $twig->enqueueScript('/static/library/imagesloaded@4.1.4/imagesloaded.min.js');
@@ -78,7 +79,7 @@ final class Controller
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         try {
             $photo = Photo::getInstance($id);
@@ -275,12 +276,14 @@ final class Controller
             }
         }
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes photos', '/photos/my')
-            ->addStep('Ajouter une photo');
+        $twig = new AdHocTwig();
 
-        $twig = new AdhocTwigBootstrap();
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Mes photos', 'link' => '/photos/my'],
+            'Ajouter une photo',
+        ]);
 
         $twig->assign('robots', 'noindex,nofollow');
 
@@ -342,16 +345,18 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('robots', 'noindex,nofollow');
 
         $twig->enqueueScript('/js/photos/edit.js');
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes photos', '/photos/my')
-            ->addStep('Éditer une photo');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Mes photos', 'link' => '/photos/my'],
+            'Éditer une photo',
+        ]);
 
         try {
             $photo = Photo::getInstance($id);
@@ -438,16 +443,18 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('robots', 'noindex,nofollow');
 
         $twig->enqueueScript('/js/photos/delete.js');
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes photos', '/photos/my')
-            ->addStep('Supprimer une photo');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Mes photos', 'link' => '/photos/my'],
+            'Supprimer une photo',
+        ]);
 
         try {
             $photo = Photo::getInstance($id);

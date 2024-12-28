@@ -6,10 +6,9 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\CMS;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 /**
  *
@@ -22,11 +21,13 @@ final class Controller
     public static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Pages Statiques");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            'Pages Statiques',
+        ]);
 
         $twig->assign('create', (bool) Route::params('create'));
         $twig->assign('edit', (bool) Route::params('edit'));
@@ -44,12 +45,14 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Pages Statiques", "/adm/cms")
-            ->addStep("Création");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Pages Statiques', 'link' => '/adm/cms'],
+            'Création',
+        ]);
 
         $twig->assign('auth', Membre::getTypesMembre());
 
@@ -87,12 +90,14 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Pages Statiques", "/adm/cms")
-            ->addStep("Edition");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Pages Statiques', 'link' => '/adm/cms'],
+            'Édition',
+        ]);
 
         $twig->assign('auth', Membre::getTypesMembre());
 
@@ -133,12 +138,14 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Pages Statiques", "/adm/cms")
-            ->addStep("Suppression");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Pages Statiques', 'link' => '/adm/cms'],
+            'Suppression',
+        ]);
 
         if (Tools::isSubmit('form-cms-delete')) {
             CMS::getInstance($id)->delete();

@@ -14,14 +14,13 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\DataBase;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 /**
  * Controlleur Membre
@@ -37,11 +36,13 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        $trail = Trail::getInstance()
-            ->addStep('Membres', '/membres');
-
+        $breadcrumb = [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Membres', 'link' => '/membres'],
+        ];
+    
         try {
             $membre = Membre::getInstance($id);
         } catch (\Exception $e) {
@@ -51,8 +52,9 @@ final class Controller
         }
 
         $twig->assign('membre', $membre);
-        $trail->addStep($membre->getPseudo());
+        $breadcrumb[] = $membre->getPseudo();
 
+        $twig->assign('breadcrumb', $breadcrumb);
         $twig->assign('title', "♫ Profil de " . $membre->getPseudo());
         $twig->assign('description', "♫ Profil de " . $membre->getPseudo());
 
@@ -72,7 +74,7 @@ final class Controller
             Tools::redirect('/');
         }
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/membres/create.js');
 
@@ -154,11 +156,13 @@ final class Controller
 
         $id = $_SESSION['membre']->getIdContact();
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes Infos Persos');
+        $twig = new AdHocTwig();
 
-        $twig = new AdhocTwigBootstrap();
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            'Mes Infos Persos',
+        ]);
 
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/membres/edit.js');
@@ -276,7 +280,7 @@ final class Controller
 
         $id = $_SESSION['membre']->getIdContact();
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         try {
             $membre = Membre::getInstance($id);
@@ -351,10 +355,12 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord');
+        $twig = new AdHocTwig();
 
-        $twig = new AdhocTwigBootstrap();
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            'Tableau de bord',
+        ]);
 
         $db = DataBase::getInstance();
 

@@ -7,11 +7,10 @@ namespace Adhoc\Controller;
 use Adhoc\Model\Event;
 use Adhoc\Model\Featured;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 final class Controller
 {
@@ -22,7 +21,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('breadcrumb', [
             ['title' => '🏠', 'link' => '/'],
@@ -66,7 +65,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('breadcrumb', [
             ['title' => '🏠', 'link' => '/'],
@@ -151,7 +150,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('breadcrumb', [
             ['title' => '🏠', 'link' => '/'],
@@ -229,7 +228,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('breadcrumb', [
             ['title' => '🏠', 'link' => '/'],

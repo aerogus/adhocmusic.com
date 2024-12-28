@@ -6,10 +6,9 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Membre;
 use Adhoc\Model\Newsletter;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 final class Controller
 {
@@ -20,11 +19,13 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep('Privé', '/adm')
-            ->addStep('Newsletter');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            'Newsletter',
+        ]);
 
         $twig->assign(
             'newsletters',
@@ -66,17 +67,19 @@ final class Controller
             Tools::redirect('/adm/newsletter?create=1');
         }
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueStyle('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css');
         $twig->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.js');
         $twig->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/xml/xml.min.js');
         $twig->enqueueScript('/js/adm/newsletter.js');
 
-        Trail::getInstance()
-            ->addStep('Privé', '/adm')
-            ->addStep('Newsletter', '/adm/newsletter')
-            ->addStep('Ajout');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Newsletter', 'link' => '/adm/newsletter'],
+            'Ajout',
+        ]);
 
         $data = [
             'title' => '',
@@ -117,17 +120,19 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueStyle('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css');
         $twig->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.js');
         $twig->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/xml/xml.min.js');
         $twig->enqueueScript('/js/adm/newsletter.js');
 
-        Trail::getInstance()
-            ->addStep('Privé', '/adm')
-            ->addStep('Newsletter', '/adm/newsletter')
-            ->addStep('Édition');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Newsletter', 'link' => '/adm/newsletter'],
+            'Édition',
+        ]);
 
         $twig->assign('newsletter', Newsletter::getInstance($id));
 

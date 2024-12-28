@@ -6,11 +6,10 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Comment;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 /**
  *
@@ -24,10 +23,12 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Commentaires", '/comments');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            'Commentaires',
+        ]);
 
         $comments = Comment::find(
             [
@@ -48,7 +49,7 @@ final class Controller
         $id = (int) Route::params('id');
         $comment = Comment::getInstance($id);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
         $twig->assign('comment', $comment);
         return $twig->render('comments/show.twig');
     }
@@ -58,7 +59,7 @@ final class Controller
      */
     public static function fetch(): string
     {
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
         return $twig->render('comments/fetch.twig');
     }
 
@@ -133,7 +134,7 @@ final class Controller
 
         $comment = Comment::getInstance($id);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         if (Tools::isSubmit('form-comment-delete')) {
             if ($comment->delete()) {

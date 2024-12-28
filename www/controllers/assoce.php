@@ -6,11 +6,10 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Event;
 use Adhoc\Model\MembreAdhoc;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 final class Controller
 {
@@ -19,7 +18,7 @@ final class Controller
      */
     public static function assoce(): string
     {
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], "L'Association"]);
 
@@ -31,7 +30,7 @@ final class Controller
      */
     public static function concerts(): string
     {
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], "Concerts"]);
 
@@ -51,7 +50,7 @@ final class Controller
      */
     public static function afterworks(): string
     {
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], "Afterworks"]);
 
@@ -63,7 +62,7 @@ final class Controller
      */
     public static function festival(): string
     {
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], "Festival"]);
 
@@ -75,7 +74,7 @@ final class Controller
      */
     public static function equipe(): string
     {
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], "Équipe"]);
 

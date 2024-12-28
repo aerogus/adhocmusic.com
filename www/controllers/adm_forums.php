@@ -6,11 +6,10 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\ForumPrive;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 final class Controller
 {
@@ -18,11 +17,13 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Forums");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            'Forums',
+        ]);
 
         $twig->assign('forums', ForumPrive::getForums());
 
@@ -38,12 +39,14 @@ final class Controller
 
         $forum = ForumPrive::getForum($id_forum);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Forums", "/adm/forums")
-            ->addStep($forum['title']);
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Forums', 'link' => '/adm/forums'],
+            $forum['title'],
+        ]);
 
         $twig->enqueueScript('/js/adm/forums.js');
 
@@ -65,16 +68,18 @@ final class Controller
         $id_thread = (int) Route::params('id_thread');
         $page = (int) Route::params('page');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $data = ForumPrive::getMessages($id_thread, $page);
         $forum = ForumPrive::getForum($data['thread']['id_forum']);
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Forums", "/adm/forums")
-            ->addStep($forum['title'], "/adm/forums/forum/" . $forum['id_forum'])
-            ->addStep($data['thread']['subject']);
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Forums', 'link' => '/adm/forums'],
+            ['title' => $forum['title'], 'link' => "/adm/forums/forum/" . $forum['id_forum']],
+            $data['thread']['subject'],
+        ]);
 
         $twig->assign('id_forum', $forum['id_forum']);
         $twig->assign('id_thread', $id_thread);
@@ -160,7 +165,7 @@ final class Controller
             Tools::redirect('/adm/forums/forum/' . $msg['id_forum']);
         }
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         if (is_null($id_forum) && ($id_thread === 0)) {
             $twig->assign('error_params', true);
@@ -170,11 +175,13 @@ final class Controller
 
         $forum = ForumPrive::getForum($id_forum);
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Forums", "/adm/forums")
-            ->addStep($forum['title'], "/adm/forums/forum/" . $forum['id_forum'])
-            ->addStep("Ecrire un message");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Forums', 'link' => '/adm/forums'],
+            ['title' => $forum['title'], 'link' => "/adm/forums/forum/" . $forum['id_forum']],
+            'Écrire un message',
+        ]);
 
         // box écrire
         $twig->assign('subject', '');

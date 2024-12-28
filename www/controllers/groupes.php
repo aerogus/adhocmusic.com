@@ -11,12 +11,11 @@ use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\TypeMusicien;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 define('GROUPE_MINI_PHOTO_SIZE', 128);
 
@@ -29,7 +28,7 @@ final class Controller
      */
     public static function index(): string
     {
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('title', "♫ Les groupes de la communauté musicale AD'HOC");
         $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
@@ -55,14 +54,16 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('title', "AD'HOC Music : Les Musiques actuelles en Essonne");
         $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne");
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes groupes');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            'Mes groupes',
+        ]);
 
         $twig->assign('delete', (bool) Route::params('delete'));
 
@@ -83,7 +84,7 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueStyle('/static/library/baguetteBox@1.11.1/baguetteBox.min.css');
 
@@ -107,9 +108,11 @@ final class Controller
         $twig->assign('groupe', $groupe);
         $twig->assign('membres', $groupe->getMembers());
 
-        Trail::getInstance()
-            ->addStep("Groupes", "/groupes")
-            ->addStep($groupe->getName());
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Groupes', 'link' => '/groupes'],
+            $groupe->getName(),
+        ]);
 
         $twig->assign('title', '♫ ' . $groupe->getName() . ' (' . $groupe->getStyle() . ')');
         $twig->assign('description', Tools::tronc($groupe->getMiniText(), 175));
@@ -216,14 +219,16 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/groupes/create.js');
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes groupes', '/groupes/my')
-            ->addStep('Inscription');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Mes groupes', 'link' => '/groupes/my'],
+            'Inscription',
+        ]);
 
         // valeurs par défaut
         $data = [
@@ -332,7 +337,7 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/groupes/edit.js');
 
@@ -344,10 +349,12 @@ final class Controller
             return $twig->render('groupes/edit.twig');
         }
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes groupes', '/groupes/my')
-            ->addStep($groupe->getName());
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Mes groupes', 'link' => '/groupes/my'],
+            $groupe->getName()
+        ]);
 
         $twig->assign('groupe', $groupe);
         if (($id_type_musicien = $groupe->isMember($_SESSION['membre']->getIdContact())) === false) {
@@ -461,7 +468,7 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         try {
             $groupe = Groupe::getInstance($id);

@@ -12,11 +12,10 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Departement;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
-use Adhoc\Utils\Trail;
 use Adhoc\Utils\Tools;
 use Adhoc\Model\Video;
 
@@ -34,7 +33,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('robots', 'noindex,nofollow');
 
@@ -93,7 +92,7 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         try {
             $audio = Audio::getInstance($id);
@@ -188,7 +187,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('robots', 'noindex,nofollow');
 
@@ -306,7 +305,7 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('robots', 'noindex,nofollow');
 
@@ -400,7 +399,7 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('robots', 'noindex,nofollow');
 

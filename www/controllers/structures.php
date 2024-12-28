@@ -7,10 +7,9 @@ namespace Adhoc\Controller;
 use Adhoc\Model\Event;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Structure;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 /**
  *
@@ -22,7 +21,7 @@ final class Controller
      */
     public static function index(): string
     {
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('breadcrumb', [
             ['title' => '🏠', 'link' => '/'],
@@ -38,7 +37,7 @@ final class Controller
      */
     public static function show(): string
     {
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $id = (int) Route::params('id');
 
@@ -81,7 +80,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/structures/create.js');
 
@@ -122,7 +121,7 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/structures/edit.js');
 
@@ -158,7 +157,7 @@ final class Controller
 
         $structure = Structure::getInstance($id);
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/structures/delete.js');
 

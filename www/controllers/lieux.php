@@ -15,11 +15,10 @@ use Adhoc\Model\LieuType;
 use Adhoc\Model\WorldCountry;
 use Adhoc\Model\WorldRegion;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 use Adhoc\Utils\Image;
 
 /**
@@ -32,12 +31,14 @@ final class Controller
      */
     public static function index(): string
     {
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/lieux/index.js');
 
-        Trail::getInstance()
-            ->addStep('Lieux', '/lieux');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            'Lieux',
+        ]);
 
         $lieux = [];
 
@@ -97,11 +98,13 @@ final class Controller
     {
         $page = (int) Route::params('page');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Lieux", "/lieux")
-            ->addStep("Mes lieux");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Lieux', 'link' => '/lieux'],
+            'Mes lieux',
+        ]);
 
         $twig->assign('lieux', Lieu::findAll());
 
@@ -119,7 +122,7 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('create', (bool) Route::params('create'));
         $twig->assign('edit', (bool) Route::params('edit'));
@@ -157,9 +160,11 @@ final class Controller
 
         $twig->assign('lieu', $lieu);
 
-        $trail = Trail::getInstance()
-            ->addStep("Lieux", "/lieux")
-            ->addStep($lieu->getName());
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Lieux', 'link' => '/lieux'],
+            $lieu->getName(),
+        ]);
 
         $twig->assign('title', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCity()->getCp() . " " . $lieu->getCity()->getName());
         $twig->assign('description', $lieu->getName() . " - " . $lieu->getAddress() . " - " . $lieu->getCity()->getCp() . " " . $lieu->getCity()->getName());
@@ -250,7 +255,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/lieux/create.js');
@@ -320,9 +325,11 @@ final class Controller
             }
         }
 
-        Trail::getInstance()
-            ->addStep("Lieux", "/lieux")
-            ->addStep("Ajouter");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Lieux', 'link' => '/lieux'],
+            'Ajouter',
+        ]);
 
         $twig->assign('lieu_types', LieuType::findAll());
 
@@ -348,11 +355,13 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        Trail::getInstance()
-            ->addStep("Lieux", "/lieux")
-            ->addStep("Modifier");
+        $twig = new AdHocTwig();
 
-        $twig = new AdhocTwigBootstrap();
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Lieux', 'link' => '/lieux'],
+            'Modifier',
+        ]);
 
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/lieux/edit.js');
@@ -453,11 +462,13 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        Trail::getInstance()
-            ->addStep("Lieux", "/lieux")
-            ->addStep("Supprimer");
+        $twig = new AdHocTwig();
 
-        $twig = new AdhocTwigBootstrap();
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Lieux', 'link' => '/lieux'],
+            'Supprimer',
+        ]);
 
         try {
             $lieu = Lieu::getInstance($id);

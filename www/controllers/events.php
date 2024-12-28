@@ -13,14 +13,13 @@ use Adhoc\Model\Photo;
 use Adhoc\Model\Structure;
 use Adhoc\Model\Video;
 use Adhoc\Model\Style;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Image;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 final class Controller
 {
@@ -29,12 +28,14 @@ final class Controller
      */
     public static function index(): string
     {
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/events/index.js');
 
-        Trail::getInstance()
-            ->addStep('Agenda');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            'Agenda',
+        ]);
 
         $twig->assign('create', (bool) Route::params('create'));
         $twig->assign('edit', (bool) Route::params('edit'));
@@ -127,7 +128,7 @@ final class Controller
     {
         $id_event = (int) Route::params('id');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueStyle('/static/library/baguetteBox@1.11.1/baguetteBox.min.css');
         $twig->enqueueScript('/static/library/masonry@4.2.2/masonry.min.js');
@@ -220,7 +221,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/events/create.js');
@@ -476,7 +477,7 @@ final class Controller
             ->addStep("Agenda", "/events")
             ->addStep("Modifier une date");
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/events/edit.js');
@@ -662,7 +663,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_ADMIN);
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         Trail::getInstance()
             ->addStep("Agenda", "/events")

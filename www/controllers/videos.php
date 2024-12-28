@@ -10,7 +10,7 @@ use Adhoc\Model\Lieu;
 use Adhoc\Model\Membre;
 use Adhoc\Model\Photo;
 use Adhoc\Model\Video;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Conf;
 use Adhoc\Utils\Date;
 use Adhoc\Utils\Log;
@@ -31,7 +31,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('breadcrumb', [
             ['title' => '🏠', 'link' => '/'],
@@ -92,7 +92,7 @@ final class Controller
         $id = (int) Route::params('id');
         $from = (string) Route::params('from');
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $breadcrumb = [
             ['title' => '🏠', 'link' => '/'],
@@ -171,7 +171,7 @@ final class Controller
             } else {
                 $breadcrumb[] = ['title' => 'Média', 'link' => '/medias'];
             }
-            $breadcrumb[] = [$video->getName()];
+            $breadcrumb[] = $video->getName();
 
             // vidéos et photos liées à l'événement/lieu
             if (!is_null($video->getIdEvent()) && !is_null($video->getIdLieu())) {
@@ -219,7 +219,7 @@ final class Controller
     {
         $id = (int) Route::params('id');
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         try {
             $video = Video::getInstance($id);
@@ -247,7 +247,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('robots', 'noindex,nofollow');
 
@@ -380,7 +380,7 @@ final class Controller
         $id = (int) Route::params('id');
         $page = (int) Route::params('page');
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('robots', 'noindex,nofollow');
 
@@ -496,7 +496,7 @@ final class Controller
 
         $id = (int) Route::params('id');
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('robots', 'noindex,nofollow');
 

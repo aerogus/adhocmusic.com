@@ -6,10 +6,9 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Audio;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
-use Adhoc\Utils\Trail;
 
 define('NB_AUDIOS_PER_PAGE', 80);
 
@@ -22,13 +21,15 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Audios");
-
         $page = (int) Route::params('page');
 
-        $twig = new AdhocTwigBootstrap();
+        $twig = new AdHocTwig();
+
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            'Audios',
+        ]);
 
         $audios = Audio::find(
             [

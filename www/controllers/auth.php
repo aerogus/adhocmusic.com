@@ -6,7 +6,7 @@ namespace Adhoc\Controller;
 
 use Adhoc\Model\Contact;
 use Adhoc\Model\Membre;
-use Adhoc\Utils\AdHocTwigBootstrap;
+use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
 use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
@@ -26,7 +26,7 @@ final class Controller
             Tools::redirect('/membres/tableau-de-bord');
         }
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], 'Se connecter ou créer un compte']);
 
@@ -88,7 +88,7 @@ final class Controller
 
             Log::error("Login KO");
 
-            $twig = new AdHocTwigBootstrap();
+            $twig = new AdHocTwig();
             $twig->assign('breadcrumb', [['title' => '🏠', 'link' => '/'], 'Se connecter']);
             $twig->enqueueScript('/js/auth/login.js');
             $twig->assign('robots', 'noindex,nofollow');
@@ -137,7 +137,7 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_STANDARD);
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->enqueueScript('/js/auth/change-password.js');
 
@@ -192,7 +192,7 @@ final class Controller
             Tools::redirect('/membres/tableau-de-bord');
         }
 
-        $twig = new AdHocTwigBootstrap();
+        $twig = new AdHocTwig();
 
         $twig->assign('robots', 'noindex,nofollow');
 
