@@ -2,8 +2,6 @@
 
 <div class="container">
 
-<h1>Se connecter</h1>
-
 {% if auth_failed %}
 <div class="alert alert-danger">Authentification échouée</div>
 {% endif %}
@@ -12,27 +10,32 @@
 <div class="alert alert-warning">Vous devez posséder un compte AD'HOC pour accéder à cette page ou vous n'avez pas les droits suffisants</div>
 {% endif %}
 
-  <form id="form-login" name="form-login" method="post" action="/auth/login">
-    <div class="mb-3">
-      <label class="form-label" for="login-pseudo">Pseudo</label>
-      <div class="alert alert-danger" id="error_login-pseudo"{% if not error_login_pseudo %} style="display: none"{% endif %}>Pseudo vide !</div>
-      <input type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label class="form-label" for="login-password">Mot de passe</label>
-      <div class="alert alert-danger" id="error_login-password"{% if not error_login_password %} style="display: none"{% endif %}>Mot de passe vide !</div>
-      <input type="password" id="login-password" name="password" placeholder="Mot de passe" class="form-control">
-    </div>
-    <div class="mb-3">
-      <input id="form-login-submit" name="form-login-submit" class="btn btn-primary" type="submit" value="Je me connecte">
-    </div>
-    {% if referer %}<input type="hidden" id="login-referer" name="referer" value="{{ referer|url_encode }}">{% endif %}
-    <ul class="list-unstyled">
-      <li><a href="/auth/lost-password">mot de passe oublié</a></li>
-      <li><a href="/membres/create">créer un compte</a></li>
-    </ul>
-  </form>
-
+  <h3 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Se connecter</h3>
+  <div class="border rounded-bottom bg-white p-3">
+    <form id="form-login" name="form-login" method="post" action="/auth/login">
+      <div class="row mb-3">
+        <label class="form-label col-3" for="login-pseudo">Pseudo</label>
+        <div class="col-9">
+          <div class="alert alert-danger" id="error_login-pseudo"{% if not error_login_pseudo %} style="display: none"{% endif %}>Pseudo vide !</div>
+          <input type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo" class="form-control">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="form-label col-3" for="login-password">Mot de passe</label>
+        <div class="col-9">
+          <div class="alert alert-danger" id="error_login-password"{% if not error_login_password %} style="display: none"{% endif %}>Mot de passe vide !</div>
+          <input type="password" id="login-password" name="password" placeholder="Mot de passe" class="form-control">
+        </div>
+      </div>
+      <div class="mb-3">
+        <input id="form-login-submit" name="form-login-submit" class="btn btn-primary" type="submit" value="Je me connecte">
+      </div>
+      {% if referer %}<input type="hidden" id="login-referer" name="referer" value="{{ referer|url_encode }}">{% endif %}
+      <a class="btn btn-secondary" href="/auth/lost-password">😢 mot de passe oublié</a>
+      <a class="btn btn-secondary" href="/membres/create">👤 créer un compte</a>
+      </ul>
+    </form>
+  </div>
 </div>{# .container #}
 
 {% include 'common/footer.twig' %}
