@@ -37,9 +37,11 @@ final class Controller
 
         $twig->assign('robots', 'noindex,nofollow');
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes musiques');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            'Mes musiques',
+        ]);
 
         $page = (int) Route::params('page');
         $id = (int) Route::params('id');
@@ -102,14 +104,19 @@ final class Controller
             return $twig->render('audios/show.twig');
         }
 
+        $breadcrumb = [
+            ['title' => '🏠', 'link' => '/'],
+        ];
+
         $meta_description = "Titre : " . $audio->getName();
 
         if (!is_null($audio->getIdGroupe())) {
             $twig->assign('title', $audio->getName() . ' - ' . $audio->getGroupe()->getName());
             $meta_description .= " | Groupe : " . $audio->getGroupe()->getName();
-            Trail::getInstance()
-                ->addStep("Groupes", "/groupes")
-                ->addStep($audio->getGroupe()->getName(), $audio->getGroupe()->getUrl());
+
+            $breadcrumb[] = ['title' => 'Groupes', 'link' => '/groupes'];
+            $breadcrumb[] = ['title' => $audio->getGroupe()->getName(), 'link' => $audio->getGroupe()->getUrl()];
+
             $twig->assign('og_image', $audio->getGroupe()->getMiniPhoto());
             $twig->assign(
                 'og_audio',
@@ -121,8 +128,7 @@ final class Controller
                 ]
             );
         } else {
-            Trail::getInstance()
-                ->addStep("Média", "/medias");
+            $breadcrumb[] = ['title' => "Média", 'link' => '/medias'];
         }
 
         if (!is_null($audio->getIdEvent())) {
@@ -157,8 +163,7 @@ final class Controller
             $meta_description .= " | Lieu : " . $audio->getLieu()->getName() . " (" . $audio->getLieu()->getIdDepartement() . " - " . $audio->getLieu()->getCity()->getName() . ")";
         }
 
-        Trail::getInstance()
-            ->addStep($audio->getName());
+        $breadcrumb[] = $audio->getName();
 
         $twig->assign('description', $meta_description);
 
@@ -177,6 +182,7 @@ final class Controller
             )
         );
 
+        $twig->assign('breadcrumb', $breadcrumb);
         return $twig->render('audios/show.twig');
     }
 
@@ -193,10 +199,12 @@ final class Controller
 
         $twig->enqueueScript('/js/audios/create.js');
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes musiques', '/audios/my')
-            ->addStep('Ajouter une musique');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Mes musiques', 'link' => '/audios/my'],
+            'Ajouter une musique',
+        ]);
 
         if (Tools::isSubmit('form-audio-create')) {
             set_time_limit(0); // l'upload peut prendre du temps !
@@ -311,10 +319,12 @@ final class Controller
 
         $twig->enqueueScript('/js/audios/edit.js');
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes musiques', '/audios/my')
-            ->addStep('Éditer une musique');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Mes musiques', 'link' => '/audios/my'],
+            'Éditer une musique',
+        ]);
 
         try {
             $audio = Audio::getInstance($id);
@@ -405,10 +415,12 @@ final class Controller
 
         $twig->enqueueScript('/js/audios/delete.js');
 
-        Trail::getInstance()
-            ->addStep('Tableau de bord', '/membres/tableau-de-bord')
-            ->addStep('Mes musiques', '/audios/my')
-            ->addStep('Supprimer une musique');
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
+            ['title' => 'Mes musiques', 'link' => '/audios/my'],
+            'Supprimer une musique',
+        ]);
 
         try {
             $audio = Audio::getInstance($id);

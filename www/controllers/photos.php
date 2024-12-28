@@ -81,6 +81,10 @@ final class Controller
 
         $twig = new AdHocTwig();
 
+        $breadcrumb = [
+            ['title' => '🏠', 'link' => '/'],
+        ];
+
         try {
             $photo = Photo::getInstance($id);
         } catch (\Exception $e) {
@@ -127,22 +131,21 @@ final class Controller
                 }
             }
 
-            $trail = Trail::getInstance();
             if ($from === 'groupe' && !is_null($photo->getIdGroupe())) {
-                $trail->addStep("Groupes", "/groupes")
-                    ->addStep($groupe->getName(), $groupe->getUrl());
+                $breadcrumb[] = ['title' => 'Groupes', 'link' => '/groupes'];
+                $breadcrumb[] = ['title' => $groupe->getName(), 'link' => $groupe->getUrl()];
             } elseif ($from === 'profil' && !is_null($photo->getIdContact())) {
-                $trail->addStep("Zone Membre", "/membres");
+                $breadcrumb[] = ['title' => 'Zone Membre', 'link' => '/membres'];
             } elseif ($from === 'event' && !is_null($photo->getIdEvent())) {
-                $trail->addStep("Agenda", "/events")
-                    ->addStep($event->getName(), $event->getUrl());
+                $breadcrumb[] = ['title' => 'Agenda', 'link' => '/events'];
+                $breadcrumb[] = ['title' => $event->getName(), 'link' => $event->getUrl()];
             } elseif ($from === 'lieu' && !is_null($photo->getIdLieu())) {
-                $trail->addStep("Lieux", "/lieux")
-                    ->addStep($lieu->getName(), $lieu->getUrl());
+                $breadcrumb[] = ['title' => 'Lieux', 'link' => '/lieux'];
+                $breadcrumb[] = ['title' => $lieu->getName(), 'link' => $lieu->getUrl()];
             } else {
-                $trail->addStep("Média", "/medias");
+                $breadcrumb[] = ['title' => 'Média', 'link' => '/medias'];
             }
-            $trail->addStep($photo->getName());
+            $breadcrumb[] = $photo->getName();
 
             // photo issu d'un album live ?
             if (!is_null($photo->getIdEvent()) && !is_null($photo->getIdLieu())) {
@@ -204,6 +207,7 @@ final class Controller
             $twig->assign('unknown_photo', true);
         }
 
+        $twig->assign('breadcrumb', $breadcrumb);
         return $twig->render('photos/show.twig');
     }
 

@@ -28,10 +28,10 @@ if (!array_key_exists('PATH_INFO', $_SERVER)) {
 $_SERVER['PATH_INFO'] = explode('?fbclid', $_SERVER['PATH_INFO'])[0];
 
 // friendly urls pour les groupes et les articles du CMS
-if (preg_match('@^[a-zA-Z0-9-_]{1,50}$@', substr((string) $_SERVER['PATH_INFO'], 1), $matches)) {
-    if ($id_groupe = Groupe::getIdByAlias((string) $matches[0])) {
+if (preg_match('@^[a-zA-Z0-9-_]{1,50}$@', substr($_SERVER['PATH_INFO'], 1), $matches)) {
+    if (!is_null($id_groupe = Groupe::getIdByAlias($matches[0]))) {
         $_SERVER['PATH_INFO'] = '/groupes/' . (string) $id_groupe;
-    } elseif ($id_cms = CMS::getIdByAlias('/' . (string) $matches[0])) {
+    } elseif (!is_null($id_cms = CMS::getIdByAlias('/' . $matches[0]))) {
         $_SERVER['PATH_INFO'] = '/cms/' . (string) $id_cms;
     }
 }

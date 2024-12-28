@@ -31,8 +31,10 @@ final class Controller
         $twig->assign('title', "AD'HOC : Administration du site");
         $twig->assign('description', "Association oeuvrant pour le développement de la vie musicale en Essonne depuis 1996. Promotion d'artistes, Pédagogie musicale, Agenda concerts, Communauté de musiciens ...");
 
-        Trail::getInstance()
-            ->addStep("Privé");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            'Privé',
+        ]);
 
         $twig->assign('forums', ForumPrive::getForums());
 
@@ -46,11 +48,13 @@ final class Controller
     {
         Tools::auth(Membre::TYPE_INTERNE);
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Groupes");
-
         $twig = new AdHocTwig();
+
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            'Groupes',
+        ]);
 
         $page = (int) Route::params('page');
 
@@ -85,12 +89,15 @@ final class Controller
 
         $groupe = Groupe::getInstance($id_groupe);
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Groupes", "/adm/groupes")
-            ->addStep($groupe->getName());
-
         $twig = new AdHocTwig();
+
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Groupes', 'link' => '/adm/groupes'],
+            $groupe->getName(),
+        ]);
+
         $twig->assign('groupe', $groupe);
         return $twig->render('adm/groupes/show.twig');
     }
@@ -151,9 +158,11 @@ final class Controller
             return $twig->render('adm/membres/index-res.twig');
         }
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Membres", "/adm/membres");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            'Membres',
+        ]);
 
         $twig->assign('types_membre', Membre::getTypesMembre());
         $twig->assign('types_musicien', TypeMusicien::findAll());
@@ -187,12 +196,15 @@ final class Controller
 
         $membre = Membre::getInstance($id);
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Membres", "/adm/membres")
-            ->addStep($membre->getPseudo());
-
         $twig = new AdHocTwig();
+
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Membres', 'link' => '/adm/membres'],
+            $membre->getPseudo(),
+        ]);
+
         $twig->assign('membre', $membre);
         return $twig->render('adm/membres/show.twig');
     }
@@ -208,11 +220,6 @@ final class Controller
 
         $membre = Membre::getInstance($id);
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Membres", "/adm/membres")
-            ->addStep("Suppresion de " . $membre->getPseudo());
-
         // ***
 
         //$membre->delete();
@@ -222,6 +229,14 @@ final class Controller
         // ***
 
         $twig = new AdHocTwig();
+
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Membres', 'link' => '/adm/membres'],
+            "Suppression de " . $membre->getPseudo(),
+        ]);
+
         $twig->assign('membre', $membre);
         return $twig->render('adm/membres/delete.twig');
     }
@@ -235,9 +250,11 @@ final class Controller
 
         $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Groupe de Style");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            "Groupe de Style",
+        ]);
 
         $groupes = Groupe::findAll();
         $twig->assign('groupes', $groupes);
@@ -264,10 +281,12 @@ final class Controller
 
         $groupe = Groupe::getInstance($id);
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Groupe de Style", "/adm/groupe-de-style")
-            ->addStep($groupe->getName());
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            ['title' => 'Groupe de Style', 'link' => "/adm/groupe-de-style"],
+            $groupe->getName(),
+        ]);
 
         // styles du groupe sélectionné
         $sql = "SELECT `id_style` "
@@ -352,9 +371,10 @@ final class Controller
 
         $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Suppression Compte");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            'Suppression Compte',
+        ]);
 
         isset($_GET['action']) ? $action = $_GET['action'] : $action = 'show';
         $twig->assign('action', $action);
@@ -508,9 +528,11 @@ final class Controller
 
         $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Privé", "/adm")
-            ->addStep("Liaison Membre / Groupe");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
+            'Liaison Membre / Groupe',
+        ]);
 
         if (Tools::isSubmit('form-appartient-a')) {
             $groupe = Groupe::getInstance($id_groupe);

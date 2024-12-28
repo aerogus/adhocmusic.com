@@ -136,15 +136,18 @@ final class Controller
         $twig->enqueueScript('/static/library/baguetteBox@1.11.1/baguetteBox.min.js');
         $twig->enqueueScript('/js/events/show.js');
 
-        $trail = Trail::getInstance()
-            ->addStep('Agenda', '/events');
+        $breadcrumb = [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Agenda', 'link' => '/events'],
+        ];
 
         try {
             $event = Event::getInstance($id_event);
-            $trail->addStep($event->getName());
+            $breadcrumb[] = $event->getName();
         } catch (\Exception $e) {
             Route::setHttpCode(404);
-            $trail->addStep("Évènement introuvable");
+            $breadcrumb[] = "Évènement introuvable";
+            $twig->assign('breadcrumb', $breadcrumb);
             $twig->assign('unknown_event', true);
             return $twig->render('events/show.twig');
         }
@@ -211,6 +214,7 @@ final class Controller
             $twig->assign('og_image', $event->getThumbUrl());
         }
 
+        $twig->assign('breadcrumb', $breadcrumb);
         return $twig->render('events/show.twig');
     }
 
@@ -225,10 +229,12 @@ final class Controller
 
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/events/create.js');
-
-        Trail::getInstance()
-            ->addStep("Agenda", "/events")
-            ->addStep("Ajouter une date");
+        
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Agenda', 'link' => '/events'],
+            'Ajouter une date',
+        ]);
 
         // filtrage de la date
         // $date = (string) $_GET['date'];
@@ -473,11 +479,13 @@ final class Controller
 
         Tools::auth(Membre::TYPE_STANDARD);
 
-        Trail::getInstance()
-            ->addStep("Agenda", "/events")
-            ->addStep("Modifier une date");
-
         $twig = new AdHocTwig();
+
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Agenda', 'link' => '/events'],
+            'Modifier une date',
+        ]);
 
         $twig->enqueueScript('/js/geopicker.js');
         $twig->enqueueScript('/js/events/edit.js');
@@ -665,9 +673,11 @@ final class Controller
 
         $twig = new AdHocTwig();
 
-        Trail::getInstance()
-            ->addStep("Agenda", "/events")
-            ->addStep("Supprimer une date");
+        $twig->assign('breadcrumb', [
+            ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Agenda', 'link' => '/events'],
+            'Supprimer une date',
+        ]);
 
         try {
             $event = Event::getInstance((int) Route::params('id'));
