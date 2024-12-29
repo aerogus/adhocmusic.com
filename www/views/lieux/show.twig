@@ -16,34 +16,35 @@
 <div class="alert alert-success">Le lieu a bien été modifié</div>
 {% endif %}
 
-  <h1>{{ lieu.name }}</h1>
-  <div>
-    <div id="map_canvas" style="width: 50%; height: 320px; float: right; z-index: 1"></div>
-
-    <div class="infos" style="width: 300px; padding: 10px;">
-      <strong>{{ lieu.name }}</strong><br>
-      {{ lieu.address }}<br>
-      {{ lieu.city.cp }} {{ lieu.city.name }}<br>
-      {% if lieu.idCountry == 'FR' %}
-      {{ lieu.idDepartement }} / {{ lieu.departement.name }}<br>
-      {% endif %}
-      {{ lieu.region.name }}<br>
-      <img src="{{ lieu.country.flagUrl }}" alt="{{ lieu.idCountry }}"> {{ lieu.country.name }}
+  <h1 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">{{ lieu.name }}</h1>
+  <div class="border rounded-bottom bg-white p-3">
+    <div class="row">
+      <div class="col-md-6">
+        <div>
+          <strong>{{ lieu.name }}</strong><br>
+          {{ lieu.address }}<br>
+          {{ lieu.city.cp }} {{ lieu.city.name }}<br>
+          {% if lieu.idCountry == 'FR' %}
+          {{ lieu.idDepartement }} / {{ lieu.departement.name }}<br>
+          {% endif %}
+          {{ lieu.region.name }}<br>
+          <img src="{{ lieu.country.flagUrl }}" alt="{{ lieu.idCountry }}"> {{ lieu.country.name }}
+        </div>
+        <div>
+          {{ lieu.type }}<br>
+          {% if lieu.site %}
+          <a href="{{ lieu.site }}">{{ lieu.site }}</a><br>
+          {% endif %}
+        </div>
+        <div>
+        {{ lieu.text }}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div id="map_canvas"></div>
+      </div>
     </div>
-
-    <div class="infos" style="padding: 10px;">
-      {{ lieu.type }}<br>
-      {% if lieu.site %}
-      <a href="{{ lieu.site }}">{{ lieu.site }}</a><br>
-      {% endif %}
-    </div>
-
-    <div class="infos" style="padding: 10px;">
-    {{ lieu.text }}
-    </div>
-
   </div>
-</div>
 
   {% if events_f %}
   <h2>Agenda</h2>
