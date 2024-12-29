@@ -1,5 +1,7 @@
 {% include 'common/header.twig' %}
 
+<div class="container">
+
 {% if unknown_lieu %}
 
 <p class="alert alert-danger">Ce lieu est introuvable !</p>
@@ -14,7 +16,6 @@
 <div class="alert alert-success">Le lieu a bien été modifié</div>
 {% endif %}
 
-<div class="container">
   <h1>{{ lieu.name }}</h1>
   <div>
     <div id="map_canvas" style="width: 50%; height: 320px; float: right; z-index: 1"></div>
@@ -41,13 +42,10 @@
     {{ lieu.text }}
     </div>
 
-    <br style="clear: both">
-
   </div>
 </div>
 
-{% if events_f %}
-<div class="container">
+  {% if events_f %}
   <h2>Agenda</h2>
   <div>
     <ul>
@@ -56,11 +54,9 @@
       {% endfor %}
     </ul>
   </div>
-</div>
-{% endif %}
+  {% endif %}
 
-{% if events_p %}
-<div class="container">
+  {% if events_p %}
   <h2>Evénements passés</h2>
   <div>
     <ul>
@@ -69,11 +65,9 @@
       {% endfor %}
     </ul>
   </div>
-</div>
-{% endif %}
+  {% endif %}
 
-{% if photos %}
-<div class="container">
+  {% if photos %}
   <h2>Photos</h2>
   <div class="reset gallery">
   {% for photo in photos %}
@@ -84,11 +78,9 @@
     </div>
   {% endfor %}
   </div>
-</div>
-{% endif %}
+  {% endif %}
 
-{% if audios %}
-<div class="container">
+  {% if audios %}
   <h2>Sons</h2>
   <div>
     <ul>
@@ -100,11 +92,9 @@
       {% endfor %}
     </ul>
   </div>
-</div>
-{% endif %}
+  {% endif %}
 
-{% if videos %}
-<div class="container">
+  {% if videos %}
   <h2>Vidéos</h2>
   <div class="reset grid-3-small-2 has-gutter">
     {% for video in videos %}
@@ -121,9 +111,10 @@
     </div>
     {% endfor %}
   </div>
-</div>
-{% endif %}
+  {% endif %}
 
 {% endif %} {# test unknown lieu #}
+
+</div> {# .container #}
 
 {% include 'common/footer.twig' %}
