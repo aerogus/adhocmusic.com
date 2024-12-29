@@ -1,8 +1,8 @@
 {% include 'common/header.twig' %}
 
-<div>
-  <h1>Message à {{ pseudo_to }}</h1>
-  <div>
+<div class="container">
+  <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Message à {{ pseudo_to }}</h2>
+  <div class="border rounded-bottom bg-white p-3">
     {% include 'messagerie/_write.twig' %}
   </div>
 </div>

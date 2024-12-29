@@ -1,6 +1,7 @@
 {% include 'common/header.twig' %}
 
 <div class="container">
+  <div class="col-6 mx-auto">
 
 {% if auth_failed %}
 <div class="alert alert-danger">Authentification échouée</div>
@@ -36,6 +37,8 @@
       </ul>
     </form>
   </div>
+
+  </div>{# .col-6 #}
 </div>{# .container #}
 
 {% include 'common/footer.twig' %}

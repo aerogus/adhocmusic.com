@@ -1,75 +1,73 @@
 {% include 'common/header.twig' %}
 
-{% if sent %}<p class="alert alert-success">Votre message a bien été envoyé</p>{% endif %}
+<div class="container">
 
-<div class="grid-2-small-1-tiny-1 has-gutter">
+{% if sent %}
+<p class="alert alert-success">Votre message a bien été envoyé</p>
+{% endif %}
 
-  <div class="col-1">
+<div class="row">
 
-    <div class="box">
-      <h1>Messages reçus</h1>
-      <div>
-        <table>
-          <tr>
-            <th>Lu</th>
-            <th>De</th>
-            <th>Date</th>
-            <th>Message</th>
-            <th>&nbsp;</th>
-          </tr>
-          {% for msg in inbox %}
-          <tr>
-            <td><img src="/img/icones/{% if msg.readTo %}email_open.png{% else %}email.png{% endif %}" alt=""></td>
-            <td><a href="/messagerie/write?pseudo={{ msg.MembreFrom().Pseudo }}">{{ msg.membreFrom.pseudo }}</a></td>
-            <td>{{ msg.date }}</td>
-            <td><a href="/messagerie/read/{{ msg.id }}">{{ msg.text }}</a></td>
-            <td><p class="del-msg-to" data-msg-id="{{ msg.id }}" title="Effacer ce message">❌</p></td>
-          </tr>
-          {% endfor %}
-        </table>
-      </div>
+  <div class="col-md-4">
+    <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Messages reçus</h2>
+    <div class="border rounded-bottom bg-white p-3">
+      <table class="table">
+        <tr>
+          <th>Lu</th>
+          <th>De</th>
+          <th>Date</th>
+          <th>Message</th>
+          <th>&nbsp;</th>
+        </tr>
+        {% for msg in inbox %}
+        <tr>
+          <td><img src="/img/icones/{% if msg.readTo %}email_open.png{% else %}email.png{% endif %}" alt=""></td>
+          <td><a href="/messagerie/write?pseudo={{ msg.MembreFrom().Pseudo }}">{{ msg.membreFrom.pseudo }}</a></td>
+          <td>{{ msg.date }}</td>
+          <td><a href="/messagerie/read/{{ msg.id }}">{{ msg.text }}</a></td>
+          <td><p class="del-msg-to" data-msg-id="{{ msg.id }}" title="Effacer ce message">❌</p></td>
+        </tr>
+        {% endfor %}
+      </table>
     </div>
-
-    <div class="box">
-      <h1>Messages envoyés</h1>
-      <div>
-        <table>
-          <tr>
-            <th>Lu</th>
-            <th>De</th>
-            <th>Date</th>
-            <th>Message</th>
-            <th>&nbsp;</th>
-          </tr>
-          {% for msg in outbox %}
-          <tr>
-            <td><img src="/img/icones/{% if msg.readTo %}email_open.png{% else %}email.png{% endif %}" alt=""></td>
-            <td><a href="/messagerie/write?pseudo={{ msg.membreTo.pseudo }}">{{ msg.MembreTo.pseudo }}</a></td>
-            <td>{{ msg.date }}</td>
-            <td><a href="/messagerie/read/{{ msg.id }}">{{ msg.text }}</a></td>
-            <td><p class="del-msg-from" data-msg-id="{{ msg.id }}" title="Effacer ce message">❌</p></td>
-          </tr>
-          {% endfor %}
-        </table>
-      </div>
-    </div>
-
   </div>
 
-  <div class="col-1">
-
-    <div class="box">
-      <h1>Écrire à :</h1>
-      <div>
-        <form action="/messagerie/write" method="get">
-          <input type="text" id="pseudo" name="pseudo" value="" autocomplete="off">
-          <div id="suggests" style="padding-left:15px"></div>
-        </form>
-      </div>
+  <div class="col-md-4">
+    <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Messages envoyés</h2>
+    <div class="border rounded-bottom bg-white p-3">
+      <table class="table">
+        <tr>
+          <th>Lu</th>
+          <th>De</th>
+          <th>Date</th>
+          <th>Message</th>
+          <th>&nbsp;</th>
+        </tr>
+        {% for msg in outbox %}
+        <tr>
+          <td><img src="/img/icones/{% if msg.readTo %}email_open.png{% else %}email.png{% endif %}" alt=""></td>
+          <td><a href="/messagerie/write?pseudo={{ msg.membreTo.pseudo }}">{{ msg.MembreTo.pseudo }}</a></td>
+          <td>{{ msg.date }}</td>
+          <td><a href="/messagerie/read/{{ msg.id }}">{{ msg.text }}</a></td>
+          <td><p class="del-msg-from" data-msg-id="{{ msg.id }}" title="Effacer ce message">❌</p></td>
+        </tr>
+        {% endfor %}
+      </table>
     </div>
-
   </div>
 
-</div>
+  <div class="col-md-4">
+    <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Écrire à :</h2>
+    <div class="border rounded-bottom bg-white p-3">
+      <form action="/messagerie/write" method="get">
+        <input type="text" id="pseudo" name="pseudo" value="" autocomplete="off">
+        <div id="suggests" style="padding-left:15px"></div>
+      </form>
+    </div>
+  </div>
+
+</div>{# .row #}
+
+</div>{# .container #}
 
 {% include 'common/footer.twig' %}

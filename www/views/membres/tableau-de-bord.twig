@@ -1,61 +1,57 @@
 {% include 'common/header.twig' %}
 
+<div class="container">
+
 {% if me.interne %}
-<div class="infobulle info"><a href="/adm">🔗 <strong>Accès zone privée</strong></a></div>
+<div class="alert alert-warning"><a href="/adm">🔗 <strong>Accès zone privée</strong></a></div>
 {% endif %}
 
-<div class="grid-4-small-2-tiny-1 has-gutter">
+<div class="row">
 
-  <div class="col-1">
-
-  <div class="box">
-    <h2>Mes Infos Persos</h2>
-    <div>
-      <ul>
-        <li>
+  <div class="col-md-4 mb-3">
+    <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Mes Infos Persos</h2>
+    <div class="border rounded-bottom bg-white p-3">
+      <ul class="list-group mb-3">
+        <li class="list-group-item">
           <strong style="float: right">{{ me.pseudo }}</strong>
           <label for="pseudo">Pseudo</label>
         </li>
-        <li>
+        <li class="list-group-item">
           <span id="last_name" style="float: right;">{{ me.lastName }}</span>
           <label for="last_name">Nom</label>
         </li>
-        <li>
+        <li class="list-group-item">
           <span id="first_name" style="float: right;">{{ me.firstName }}</span>
           <label for="first_name">Prénom</label>
         </li>
-        <li>
+        <li class="list-group-item">
           <span id="created_at" style="float: right">{{ me.createdAt|date("d/m/Y") }}</span>
           <label for="created_at">Inscription</label>
         </li>
-        <li>
+        <li class="list-group-item">
           <span id="modified_at" style="float: right">{{ me.modifiedAt|date("d/m/Y") }}</span>
           <label for="modified_at">Modification</label>
         </li>
-        <li>
+        <li class="list-group-item">
           <span id="visited_at" style="float: right">{{ me.visitedAt|date("d/m/Y") }}</span>
           <label for="visited_at">Visite</label>
         </li>
-        <li>
+        <li class="list-group-item">
           <span style="float: right">
           <img src="{{ me.avatarUrl }}" alt=""><br>
           </span>
           <label for="avatar">Avatar</label>
         </li>
       </ul>
-      <p><a class="btn btn-primary" href="/membres/edit">Éditer mes infos persos</a></p>
-      <p><a class="btn btn-primary" href="/auth/logout">Déconnexion</a></p>
+      <p><a class="btn btn-primary" href="/membres/edit">👤 Éditer mes infos persos</a></p>
+      <p><a class="btn btn-primary" href="/auth/logout">🔓 Déconnexion</a></p>
     </div>
   </div>
 
-  </div>
-
-  <div class="col-2">
-
-  <div class="box">
-    <h2>Messages reçus</h2>
-    <div>
-      <table>
+  <div class="col-md-4 mb-3">
+    <h3 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Messages reçus</h3>
+    <div class="border rounded-bottom bg-white p-3">
+      <table class="table">
         <tr>
           <th>Lu</th>
           <th>De</th>
@@ -75,13 +71,9 @@
     </div>
   </div>
 
-  </div>
-
-  <div class="col-1">
-
-  <div class="box">
-    <h2>Mes alertes</h2>
-    <div>
+  <div class="col-md-4 mb-3">
+    <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Mes alertes</h2>
+    <div class="border rounded-bottom bg-white p-3">
       <h5>Groupes</h5>
       {% if alerting_groupes %}
       <ul>
@@ -116,11 +108,9 @@
     </div>
   </div>
 
-  </div>
-
-  <div class="box">
-    <h2>Mes Groupes</h2>
-    <div>
+  <div class="col-md-4 mb-3">
+    <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Mes groupes</h2>
+    <div class="border rounded-bottom bg-white p-3">
       {% if groupes|length > 0 %}
       <p>Vous administrez le(s) groupe(s) suivant(s) :</p>
       <ul>
@@ -136,9 +126,9 @@
     </div>
   </div>
 
-  <div class="box">
-    <h2>Mes photos</h2>
-    <div>
+  <div class="col-md-4 mb-3">
+    <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Mes photos</h2>
+    <div class="border rounded-bottom bg-white p-3">
       {% if nb_photos > 0 %}
       <p>Vous avez {{ nb_photos }} photos</p>
       <p><a class="btn btn-primary" href="/photos/my">Toutes mes photos</a></p>
@@ -149,9 +139,9 @@
     </div>
   </div>
 
-  <div class="box">
-    <h2>Mes vidéos</h2>
-    <div>
+  <div class="col-md-4 mb-3">
+    <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Mes vidéos</h2>
+    <div class="border rounded-bottom bg-white p-3">
       {% if nb_videos > 0 %}
       <p>Vous avez {{ nb_videos }} vidéos</p>
       <p><a class="btn btn-primary" href="/videos/my">Toutes mes vidéos</a></p>
@@ -162,9 +152,9 @@
     </div>
   </div>
 
-  <div class="box">
-    <h2>Mes musiques</h2>
-    <div>
+  <div class="col-md-4 mb-3">
+    <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Mes musiques</h2>
+    <div class="border rounded-bottom bg-white p-3">
       {% if nb_audios > 0 %}
       <p>Vous avez {{ nb_audios }} audios</p>
       <p><a class="btn btn-primary" href="/audios/my">Toutes mes musiques</a></p>
@@ -175,20 +165,22 @@
     </div>
   </div>
 
-  <div class="box">
-    <h2>Lieux</h2>
-    <div>
+  <div class="col-md-4 mb-3">
+    <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Mes lieux</h2>
+    <div class="border rounded-bottom bg-white p-3">
       <p><a class="btn btn-primary" href="/lieux/create">Ajouter un lieu</a></p>
     </div>
   </div>
 
-  <div class="box">
-    <h2>Événements</h2>
-    <div>
+  <div class="col-md-4 mb-3">
+    <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Événements</h2>
+    <div class="border rounded-bottom bg-white p-3">
       <p><a class="btn btn-primary" href="/events/create">Ajouter un événement</a></p>
     </div>
   </div>
 
-</div>
+</div>{# .row #}
+
+</div>{# .container #}
 
 {% include 'common/footer.twig' %}
