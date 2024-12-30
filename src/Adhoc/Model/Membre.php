@@ -982,11 +982,11 @@ class Membre extends ObjectModel
      */
     public static function getIdByPseudo($pseudo): int|false
     {
-        $ms = Membre::find([
+        $membres = Membre::find([
             'pseudo' => $pseudo,
         ]);
-        if (count($ms) === 1) {
-            return $ms[0]->getIdContact();
+        if (count($membres) === 1) {
+            return $membres[0]->getIdContact();
         }
         return false;
     }
@@ -1077,6 +1077,9 @@ class Membre extends ObjectModel
      *
      * @param array<string,mixed> $params [
      *                                'id_groupe' => int,
+     *                                'pseudo' => string,
+     *                                'last_name' => string,
+     *                                'first_name' => string,
      *                                'id_country' => string,
      *                                'mailing' => bool,
      *                                'order_by' => string,
@@ -1114,7 +1117,7 @@ class Membre extends ObjectModel
             }
         }
         if (isset($params['pseudo']) && (strlen($params['pseudo']) > 0)) {
-            $sql .= "AND `pseudo` LIKE '" . $params['pseudo'] . "%' ";
+            $sql .= "AND `pseudo` = '" . $params['pseudo'] . "' ";
         }
         if (isset($params['last_name']) && (strlen($params['last_name']) > 0)) {
             $sql .= "AND `last_name` LIKE '" . $params['last_name'] . "%' ";
