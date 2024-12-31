@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f505ce612e7cef55819c0923828d8a4d",
+    "content-hash": "8944eac9caa7f73443dedcdd9f676e32",
     "packages": [
         {
             "name": "eluceo/ical",
@@ -861,16 +861,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.3.1",
+            "version": "v5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "8eea230464783aa9671db8eea6f8c6ac5285794b"
+                "reference": "447a020a1f875a434d62f2a401f53b82a396e494"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/8eea230464783aa9671db8eea6f8c6ac5285794b",
-                "reference": "8eea230464783aa9671db8eea6f8c6ac5285794b",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/447a020a1f875a434d62f2a401f53b82a396e494",
+                "reference": "447a020a1f875a434d62f2a401f53b82a396e494",
                 "shasum": ""
             },
             "require": {
@@ -913,9 +913,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.3.1"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.4.0"
             },
-            "time": "2024-10-08T18:51:32+00:00"
+            "time": "2024-12-30T11:07:19+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -1037,16 +1037,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.0.4",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "50d276fc3bf1430ec315f2f109bbde2769821524"
+                "reference": "2392d360fdf54ea253aa6c68cad1d4ba2e54e927"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/50d276fc3bf1430ec315f2f109bbde2769821524",
-                "reference": "50d276fc3bf1430ec315f2f109bbde2769821524",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/2392d360fdf54ea253aa6c68cad1d4ba2e54e927",
+                "reference": "2392d360fdf54ea253aa6c68cad1d4ba2e54e927",
                 "shasum": ""
             },
             "require": {
@@ -1091,7 +1091,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-17T17:14:01+00:00"
+            "time": "2024-12-31T07:30:03+00:00"
         },
         {
             "name": "phpstan/phpstan-strict-rules",
