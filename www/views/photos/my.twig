@@ -1,24 +1,21 @@
 {% include 'common/header.twig' %}
 
 <div class="container">
-  <h1>Mes photos</h1>
-  <div class="reset">
 
-{% if create %}<p class="alert alert-success">Photo ajoutée</p>{% endif %}
-{% if edit %}<p class="alert alert-success">Photo modifiée</p>{% endif %}
-{% if delete %}<p class="alert alert-success">Photo supprimée</p>{% endif %}
+  {% if create %}<p class="alert alert-success">Photo ajoutée</p>{% endif %}
+  {% if edit %}<p class="alert alert-success">Photo modifiée</p>{% endif %}
+  {% if delete %}<p class="alert alert-success">Photo supprimée</p>{% endif %}
 
-<div class="txtcenter mbs">
-<a href="/photos/create" class="btn btn-primary">Ajouter une photo</a>
-</div>
+  <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Mes photos</h2>
+  <div class="border rounded-bottom bg-white p-3">
+
+  <a href="/photos/create" class="btn btn-primary">➕ Ajouter une photo</a>
 
 {% if photos|length == 0 %}
 
 <p>Aucune photo</p>
 
 {% else %}
-
-{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
 
 <div class="gallery">
 {% for photo in photos %}
@@ -30,13 +27,9 @@
 {% endfor %}
 </div>
 
-{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
-
 {% endif %}
 
-<div class="txtcenter mbs">
-  <a href="/photos/create" class="btn btn-primary">Ajouter une photo</a>
-</div>
+  <a href="/photos/create" class="btn btn-primary">➕ Ajouter une photo</a>
 
   </div>
 </div>

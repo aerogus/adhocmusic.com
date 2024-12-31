@@ -1,55 +1,57 @@
 {% include 'common/header.twig' %}
 
 <div class="container">
-  <h1>Rechercher une vidéo</h1>
-  <div>
-    <form id="form-media-search" name="form-media-search" method="get" action="/medias" style="margin-bottom:2rem">
-      <section class="grid-4">
-        <div>
-          <label for="groupe">Groupe</label>
-        </div>
-        <div class="col-3 mbs">
-          <select id="groupe" name="groupe" class="w100">
+
+  <h1 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Rechercher une vidéo</h1>
+  <div class="border rounded-bottom bg-white p-3 mb-3">
+    <form id="form-media-search" name="form-media-search" method="get" action="/medias">
+      <div class="row mb-3">
+        <label class="form-label col-3" for="groupe">Groupe</label>
+        <div class="col-9">
+          <select id="groupe" name="groupe" class="form-control">
             <option value="">---</option>
             {% for groupe in groupes %}
             <option value="{{ groupe.id }}">{{ groupe.name }}</option>
             {% endfor %}
           </select>
         </div>
-        <div>
-          <label for="event">Événement</label>
-        </div>
-        <div class="col-3 mbs">
-          <select id="event" name="event" class="w100">
+      </div>
+
+      <div class="row mb-3">
+        <label class="form-label col-3" for="event">Événement</label>
+        <div class="col-9">
+          <select id="event" name="event" class="form-control">
             <option value="">---</option>
             {% for event in events %}
             <option value="{{ event.id }}">{{ event.date }} - {{ event.name }} - {{ event.lieu.name }}</option>
             {% endfor %}
           </select>
         </div>
-        <div>
-          <label for="lieu">Lieu</label>
-        </div>
-        <div class="col-3">
-          <select id="lieu" name="lieu" class="w100">
+      </div>
+
+      <div class="row mb-3">
+        <label class="form-label col-3" for="lieu">Lieu</label>
+        <div class="col-9">
+          <select id="lieu" name="lieu" class="form-control">
             <option value="">---</option>
             {% for lieu in lieux %}
             <option value="{{ lieu.id }}">{{ lieu.city.cp }} {{ lieu.city.name }} - {{ lieu.name }}</option>
             {% endfor %}
           </select>
         </div>
-      </section>
-    </form>
-    <div class="mtm" id="search-results"></div>
-  </div>
-</div>{# .container #}
+      </div>
 
-<div class="container">
-  <h2>Dernières vidéos ajoutées</h2>
+    </form>
+    <div id="search-results"></div>
+  </div>
+
+  <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Dernières vidéos ajoutées</h1>
+  <div class="border rounded-bottom bg-white p-3 mb-3">
+
   {% if last_videos|length > 0 %}
-  <div class="reset grid-3-small-2 has-gutter">
+  <div class="row">
     {% for video in last_videos %}
-    <div class="video">
+    <div class="video col-md-4">
       <div class="thumb" style="background-image: url({{ video.thumbUrl }})">
         <a class="playbtn" href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">▶</a>
       </div>
@@ -63,6 +65,7 @@
     <p>Aucune vidéo ajoutée</p>
   </div>
   {% endif %}
+
 </div>{# .container #}
 
 {% include 'common/footer.twig' %}

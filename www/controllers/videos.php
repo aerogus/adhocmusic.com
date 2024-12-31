@@ -318,7 +318,7 @@ final class Controller
             ['title' => '🏠', 'link' => '/'],
             ['title' => 'Tableau de bord', 'link' => '/membres/tableau-de-bord'],
             ['title' => 'Mes vidéos', 'link' => '/videos/my'],
-            ['Ajouter une vidéo'],
+            'Ajouter une vidéo',
         ]);
 
         // préselection d'un groupe

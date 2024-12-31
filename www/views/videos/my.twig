@@ -1,20 +1,19 @@
 {% include 'common/header.twig' %}
 
 <div class="container">
-  <h1>Mes vidéos</h1>
-  <div class="reset">
 
-    <div class="txtcenter mbs">
-      <a href="/videos/create" class="btn btn-primary">Ajouter une vidéo</a>
-    </div>
+  <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Mes vidéos</h2>
+  <div class="border rounded-bottom bg-white p-3">
+
+  <h1>Mes vidéos</h1>
+
+    <a href="/videos/create" class="btn btn-primary">➕ Ajouter une vidéo</a>
 
 {% if nb_items > 0 %}
 
-{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
-
-<div class="grid-6-small-2 has-gutter">
+<div class="row">
   {% for video in videos %}
-  <div class="video">
+  <div class="video col-md-4">
     <div class="thumb" style="background-image: url({{ video.ThumbUrl(320) }})">
       <a class="playbtn" href="{{ video.editUrl }}">▶</a>
     </div>
@@ -24,17 +23,13 @@
   {% endfor %}
 </div>
 
-{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
-
 {% else %}
 
 <p>Aucune vidéo</p>
 
 {% endif %}
 
-  <div class="txtcenter mts">
-    <a href="/videos/create" class="btn btn-primary">Ajouter une vidéo</a>
-  </div>
+  <a href="/videos/create" class="btn btn-primary">➕ Ajouter une vidéo</a>
 
   </div>
 </div>
