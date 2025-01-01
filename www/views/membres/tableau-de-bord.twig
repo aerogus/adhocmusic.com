@@ -82,7 +82,7 @@
         {% endfor %}
       </ul>
       {% else %}
-      <p class="infobulle validation">Aucun abonnement groupe</p>
+      <div class="alert alert-info">Aucun abonnement groupe</div>
       {% endif %}
       <h5>Évènements</h5>
       {% if alerting_events %}
@@ -92,7 +92,7 @@
       {% endfor %}
       </ul>
       {% else %}
-      <p class="infobulle validation">Aucun abonnement évènement</p>
+      <div class="alert alert-info">Aucun abonnement évènement</div>
       {% endif %}
       <h5>Lieux</h5>
       {% if alerting_lieux %}
@@ -102,7 +102,7 @@
       {% endfor %}
       </ul>
       {% else %}
-      <p class="infobulle validation">Aucun abonnement lieu</p>
+      <div class="alert alert-info">Aucun abonnement lieu</div>
       {% endif %}
       <p><a class="btn btn-primary" href="/alerting/my">🛎️ Gérer toutes mes alertes</a></p>
     </div>
@@ -113,9 +113,9 @@
     <div class="border rounded-bottom bg-white p-3">
       {% if groupes|length > 0 %}
       <p>Vous administrez le(s) groupe(s) suivant(s) :</p>
-      <ul>
+      <ul class="list-group">
         {% for groupe in groupes %}
-        <li><a href="/groupes/edit/{{ groupe.id }}" title="{{ groupe.name }}">{{ groupe.name }}</a></li>
+        <li class="list-group-item"><a href="/groupes/edit/{{ groupe.idGroupe }}" title="{{ groupe.name }}">{{ groupe.name }}</a></li>
         {% endfor %}
       </ul>
       <p><a class="btn btn-primary" href="/groupes/my">Tous mes groupes</a></p>
@@ -131,7 +131,7 @@
     <div class="border rounded-bottom bg-white p-3">
       {% if nb_photos > 0 %}
       <p>Vous avez {{ nb_photos }} photos</p>
-      <p><a class="btn btn-primary" href="/photos/my">Toutes mes photos</a></p>
+      <p><a class="btn btn-primary" href="/photos/my">📷 Toutes mes photos</a></p>
       {% else %}
       <p>Aucune photo</p>
       {% endif %}
@@ -144,7 +144,7 @@
     <div class="border rounded-bottom bg-white p-3">
       {% if nb_videos > 0 %}
       <p>Vous avez {{ nb_videos }} vidéos</p>
-      <p><a class="btn btn-primary" href="/videos/my">Toutes mes vidéos</a></p>
+      <p><a class="btn btn-primary" href="/videos/my">🎥 Toutes mes vidéos</a></p>
       {% else %}
       <p>Aucune vidéo</p>
       {% endif %}
@@ -157,7 +157,7 @@
     <div class="border rounded-bottom bg-white p-3">
       {% if nb_audios > 0 %}
       <p>Vous avez {{ nb_audios }} audios</p>
-      <p><a class="btn btn-primary" href="/audios/my">Toutes mes musiques</a></p>
+      <p><a class="btn btn-primary" href="/audios/my">🎧 Toutes mes musiques</a></p>
       {% else %}
       <p>Aucune musique</p>
       {% endif %}

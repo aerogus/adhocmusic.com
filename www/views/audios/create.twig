@@ -13,7 +13,7 @@
         <label class="col-3 form-label" for="file">Audio (*)</label>
         <div class="col-9">
           <div class="alert alert-danger" id="error_file"{% if not error_file %} style="display: none"{% endif %}>Vous devez choisir un fichier .mp3 à uploader</div>
-          <input type="file" id="file" class="form-control" name="file" value=""> (.mp3 16bits/44KHz/stéréo, &lt; 16 Mo)
+          <input type="file" id="file" class="form-control" name="file" value=""> (.mp3 16bits/44.1KHz/stéréo, &lt; 16 Mo)
         </div>
       </div>
 
@@ -33,7 +33,7 @@
             <span>{{ groupe.name }}</span>
           {% else %}
             <div class="alert alert-danger" id="error_id_groupe"{% if not error_id_groupe %} style="display: none"{% endif %}>Vous devez lier cette musique à un groupe, un lieu ou un événement</div>
-            <select id="id_groupe" name="id_groupe" class="w100">
+            <select id="id_groupe" name="id_groupe" class="form-control">
               <option value="0">Aucun</option>
               {% for groupe in groupes %}
               <option value="{{ groupe.id }}">{{ groupe.name }}</option>
@@ -50,7 +50,7 @@
             <input type="hidden" name="id_lieu" value="{{ lieu.id }}">
             <span>{{ lieu.name }}</span>
           {% else %}
-            <select id="id_lieu" name="id_lieu" class="w100">
+            <select id="id_lieu" name="id_lieu" class="form-control">
               <optgroup label="Autre">
                 <option value="0">aucun / non référencé</option>
               </optgroup>
@@ -73,7 +73,7 @@
             <input type="hidden" name="id_event" value="{{ event.id }}">
             <span style="float: right;">{{ event.date }} - {{ event.name }}</span>
           {% else %}
-            <select id="id_event" name="id_event" class="w100">
+            <select id="id_event" name="id_event" class="form-control">
               <option value="0">Aucun</option>
             </select>
           {% endif %}
