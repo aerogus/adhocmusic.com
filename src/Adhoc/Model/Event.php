@@ -568,7 +568,7 @@ class Event extends ObjectModel
         }
 
         if (isset($params['id_groupe'])) {
-            $subSql = "SELECT `id_event` FROM `adhoc_participe_a` WHERE `id_groupe` = " . (int) $params['id_groupe'] . " ";
+            $subSql = "SELECT `id_event` FROM `adhoc_event_groupe` WHERE `id_groupe` = " . (int) $params['id_groupe'] . " ";
             if ($ids_event = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
                 $sql .= "AND `id_event` IN (" . implode(',', (array) $ids_event) . ") ";
             } else {

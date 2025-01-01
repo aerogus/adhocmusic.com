@@ -162,7 +162,7 @@ CREATE TABLE `adhoc_groupe` (
   `site` varchar(250) NOT NULL DEFAULT '',
   `myspace` varchar(100) DEFAULT NULL,
   `facebook_page_id` char(20) DEFAULT NULL,
-  `twitter_id` varchar(50) NOT NULL,
+  `twitter_id` varchar(50) DEFAULT NULL,
   `id_departement` char(2) DEFAULT NULL,
   `datdeb` date DEFAULT NULL,
   `datfin` date DEFAULT NULL,
@@ -497,7 +497,6 @@ CREATE TABLE `adhoc_groupe_membre` ( /* ex adhoc_appartient_a */
   `id_groupe` int(10) UNSIGNED NOT NULL,
   `id_type_musicien` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id_contact`,`id_groupe`,`id_type_musicien`),
-  KEY `contact_groupe` (`id_contact`,`id_groupe`) USING BTREE,
   KEY `id_contact` (`id_contact`),
   KEY `id_groupe` (`id_groupe`),
   KEY `id_type_musicien` (`id_type_musicien`),
@@ -526,7 +525,7 @@ CREATE TABLE `adhoc_video_groupe` (
   CONSTRAINT `fk_video_groupe_groupe` FOREIGN KEY (`id_groupe`) REFERENCES `adhoc_groupe` (`id_groupe`)
 );
 
-CREATE TABLE `adhoc_event_groupe` ( /* ex adhoc_participe_a */
+CREATE TABLE `adhoc_event_groupe` (
   `id_event` int(10) UNSIGNED NOT NULL,
   `id_groupe` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id_event`,`id_groupe`),

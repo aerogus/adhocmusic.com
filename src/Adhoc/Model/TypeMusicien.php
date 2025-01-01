@@ -26,9 +26,9 @@ class TypeMusicien extends ObjectModel
     protected static string $table = 'adhoc_type_musicien';
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_type_musicien = 0;
+    protected ?int $id_type_musicien = null;
 
     /**
      * @var ?string
@@ -46,11 +46,36 @@ class TypeMusicien extends ObjectModel
     ];
 
     /**
+     * Retourne l'id_type_musicien
+     *
+     * @return ?int
+     */
+    public function getIdTypeMusicien(): ?int
+    {
+        return $this->id_type_musicien;
+    }
+
+    /**
      * @return ?string
      */
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    /**
+     * @param ?int $id_type_musicien
+     *
+     * @return static
+     */
+    public function setIdTypeMusicien(?int $id_type_musicien): static
+    {
+        if ($this->id_type_musicien !== $id_type_musicien) {
+            $this->id_type_musicien = $id_type_musicien;
+            $this->modified_fields['id_type_musicien'] = true;
+        }
+
+        return $this;
     }
 
     /**

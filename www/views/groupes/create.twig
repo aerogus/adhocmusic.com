@@ -1,113 +1,138 @@
 {% include 'common/header.twig' %}
 
 {% if inscrip_ok %}
-<p class="alert alert-danger">Un groupe nommé <strong>{{ groupe_name }}</strong> est déjà présent dans la base AD'HOC, sa création est donc impossible.<br>
-Vous pouvez contacter le <a href="/membres/show/1">webmaster</a> pour plus d'infos.</p>
+<div class="alert alert-danger">Un groupe nommé <strong>{{ groupe_name }}</strong> est déjà présent dans la base AD'HOC, sa création est donc impossible.<br>
+Vous pouvez contacter le <a href="/membres/show/1">webmaster</a> pour plus d'infos.</div>
 {% endif %}
 
 {% if inscrip_ok %}
-<p class="alert alert-success">Le groupe <strong>{{ groupe_name }}</strong> a bien été enregistré dans la base AD'HOC.<br>
-Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fiche groupe et dès à présent annoncer les concerts de votre groupe.</p>
+<div class="alert alert-success">Le groupe <strong>{{ groupe_name }}</strong> a bien été enregistré dans la base AD'HOC.<br>
+Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fiche groupe et dès à présent annoncer les concerts de votre groupe.</div>
 {% endif %}
 
 <div class="container">
-  <h1>Ajouter un groupe</h1>
-  <div>
+  <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Ajouter un groupe</h2>
+  <div class="border rounded-bottom bg-white p-3">
     <form id="form-groupe-create" name="form-groupe-create" method="post" action="/groupes/create" enctype="multipart/form-data">
-      <section class="grid-4">
-        <div>
-          <label for="name">Nom (*)</label>
-        </div>
-        <div class="col-3 mbs">
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="name">Nom (*)</label>
+        <div class="col-9">
           <div class="alert alert-danger" id="error_name"{% if not error_nam %} style="display: none"{% endif %}>Vous devez renseigner le nom de votre groupe</div>
-          <input type="text" id="name" name="name" value="{{ data.name }}" class="w100">
+          <input type="text" id="name" name="name" value="{{ data.name }}" class="form-control">
         </div>
-        <div>
-          <label for="logo">Logo (.jpg)</label>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="logo">Logo (.jpg)</label>
+        <div class="col-9">
+          <input type="file" id="lelogo" class="form-control" name="lelogo">
         </div>
-        <div class="col-3 mbs">
-          <input type="file" id="lelogo" name="lelogo">
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="photo">Photo (.jpg)</label>
+        <div class="col-9">
+          <input type="file" class="form-control" id="photo" name="photo">
         </div>
-        <div>
-          <label for="photo">Photo (.jpg)</label>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="mini_photo">Mini Photo carrée</label>
+        <div class="col-9">
+          <input type="file" class="form-control" id="mini_photo" name="mini_photo">
         </div>
-        <div class="col-3 mbs">
-          <input type="file" id="photo" name="photo">
-        </div>
-        <div>
-          <label for="mini_photo">Mini Photo carrée</label>
-        </div>
-        <div class="col-3 mbs">
-          <input type="file" id="mini_photo" name="mini_photo">
-        </div>
-        <div>
-          <label for="style">Style (*)</label>
-        </div>
-        <div class="col-3 mbs">
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="style">Style (*)</label>
+        <div class="col-9">
           <div class="alert alert-danger" id="error_style"{% if not error_style %} style="display: none"{% endif %}>Vous devez préciser le style musical</div>
-          <input type="text" id="style" name="style" class="w100" value="{{ data.style }}">
+          <input type="text" id="style" name="style" class="form-control" value="{{ data.style }}">
         </div>
-        <div>
-          <label for="influences">Influences</label>
-        </div>
-        <div class="col-3 mbs">
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="influences">Influences</label>
+        <div class="col-9">
           <div class="alert alert-danger" id="error_influences"{% if not error_influences %} style="display: none"{% endif %}>Vous devez préciser vos influences</div>
-          <input type="text" id="influences" name="influences" class="w100" value="{{ data.influences }}">
+          <input type="text" id="influences" name="influences" class="form-control" value="{{ data.influences }}">
         </div>
-        <div>
-          <label for="site">Site Web</label>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="site">Site Web</label>
+        <div class="col-9">
+          <input type="text" id="site" name="site" class="form-control" value="{{ data.site }}">
         </div>
-        <div class="col-3 mbs">
-          <input type="text" id="site" name="site" class="w100" value="{{ data.site }}">
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="facebook_page_id">Identifiant Page Facebook</label>
+        <div class="col-9">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="facebook_page_id_prepend" >https://www.facebook.com/pages/nomdugroupe/</span>
+            </div>
+            <input type="text" id="facebook_page_id" class="form-control" name="facebook_page_id" value="{{ data.facebook_page_id }}" aria-describedby="facebook_page_id_prepend">
+          </div>
         </div>
-        <div>
-          <label for="facebook_page_id">Identifiant Page Fan Facebook</label>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="twitter_id">Identifiant Twitter</label>
+        <div class="col-9">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="twitte_id_prepend" >http://www.twitter.com/</span>
+            </div>
+            <input type="text" id="twitter_id" class="form-control" name="twitter_id" value="{{ data.twitter_id }}" aria-describedby="twitter_id_prepend">
+          </div>
         </div>
-        <div class="col-3 mbs">
-          http://www.facebook.com/pages/nomdugroupe/<input type="text" id="facebook_page_id" name="facebook_page_id" value="{{ data.facebook_page_id }}">
-        </div>
-        <div>
-          <label for="twitter_id">Identifiant Twitter</label>
-        </div>
-        <div class="col-3 mbs">
-          http://www.twitter.com/<input type="text" id="twitter_id" name="twitter_id" value="{{ data.twitter_id }}">
-        </div>
-        <div>
-          <label for="lineup">Lineup (*)</label>
-        </div>
-        <div class="col-3 mbs">
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="lineup">Lineup (*)</label>
+        <div class="col-9">
           <div class="alert alert-danger" id="error_lineup"{% if not error_lineup %} style="display: none"{% endif %}>Vous devez préciser votre formation</div>
-          <textarea id="lineup" name="lineup" class="w100" rows="5">{{ data.lineup }}</textarea>
+          <textarea id="lineup" name="lineup" class="form-control" rows="5">{{ data.lineup }}</textarea>
         </div>
-        <div>
-          <label for="mini_text">Mini Présentation (*)</label>
-        </div>
-        <div class="col-3 mbs">
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="mini_text">Mini Présentation (*)</label>
+        <div class="col-9">
           <div class="alert alert-danger" id="error_mini_text"{% if not error_mini_text %} style="display: none"{% endif %}>Vous devez écrire une mini présentation de moins de 250 caractères</div>
-          <textarea id="mini_text" name="mini_text" class="w100" rows="5">{{ data.mini_text }}</textarea>
+          <textarea id="mini_text" name="mini_text" class="form-control" rows="5">{{ data.mini_text }}</textarea>
         </div>
-        <div>
-          <label for="text">Présentation (*)</label>
-        </div>
-        <div class="col-3 mbs">
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="text">Présentation (*)</label>
+        <div class="col-9">
           <div class="alert alert-danger" id="error_text"{% if not error_text %} style="display: none"{% endif %}>Vous devez préciser le champ présentation</div>
-          <textarea id="text" name="text" class="w100" rows="20">{{ data.text }}</textarea>
+          <textarea id="text" name="text" class="form-control" rows="20">{{ data.text }}</textarea>
         </div>
-        <div>
-          <label for="id_type_musicien">Ma fonction</label>
-        </div>
-        <div class="col-3 mbs">
-          <select id="id_type_musicien" name="id_type_musicien" class="w100">
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="id_type_musicien">Ma fonction</label>
+        <div class="col-9">
+          <div class="alert alert-danger" id="error_id_type_musicien"{% if not error_id_type_musicien %} style="display: none"{% endif %}>Vous devez préciser votre fonction</div>
+          <select id="id_type_musicien" name="id_type_musicien" class="form-control">
             {% for type_musicien in types_musicien %}
-            <option value="{{ type_musicien.id }}">{{ type_musicien.name }}</option>
+            <option value="{{ type_musicien.idTypeMusicien }}">{{ type_musicien.name }}</option>
             {% endfor %}
           </select>
         </div>
-        <div></div>
-        <div class="col-3 mbs">
-          <input id="form-groupe-create-submit" name="form-groupe-create-submit" class="btn btn-primary w100" type="submit" value="Ajouter">
+      </div>
+
+      <div class="row mb-3">
+        <div class="offset-3">
+          <input id="form-groupe-create-submit" name="form-groupe-create-submit" class="btn btn-primary" type="submit" value="Ajouter">
         </div>
-      </section>
+      </div>
+
     </form>
   </div>
 </div>

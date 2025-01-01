@@ -36,6 +36,12 @@ jQuery(document).ready(function ($) {
     } else {
       $('#error_text').fadeOut();
     }
+    if ($('#id_type_musicien').val() === '1') {
+      $('#error_id_type_musicien').fadeIn();
+      valid = false;
+    } else {
+      $('#error_id_type_musicien').fadeOut();
+    }
     return valid;
   });
 });

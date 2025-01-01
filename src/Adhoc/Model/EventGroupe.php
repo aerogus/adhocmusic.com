@@ -24,7 +24,7 @@ class EventGroupe extends ObjectModel
     /**
      * @var string
      */
-    protected static string $table = 'adhoc_event_groupe'; // ex adhoc_participe_a
+    protected static string $table = 'adhoc_event_groupe';
 
     /**
      * @var ?int
@@ -35,6 +35,16 @@ class EventGroupe extends ObjectModel
      * @var ?int
      */
     protected ?int $id_groupe = null;
+
+    /**
+     * Liste des attributs de l'objet
+     *
+     * @var array<string,string>
+     */
+    protected static array $all_fields = [
+        'id_event' => 'int', // pk
+        'id_groupe' => 'int', // pk
+    ];
 
     /**
      * @return ?int

@@ -3,7 +3,7 @@
 
 --DROP TABLE IF EXISTS `adhoc_event_structure`;
 --DROP TABLE IF EXISTS `adhoc_event_style`;
---DROP TABLE IF EXISTS `adhoc_participe_a`;
+--DROP TABLE IF EXISTS `adhoc_event_groupe`;
 --DROP TABLE IF EXISTS `adhoc_video_groupe`;
 --DROP TABLE IF EXISTS `adhoc_groupe_style`;
 --DROP TABLE IF EXISTS `adhoc_groupe_membre`;

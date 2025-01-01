@@ -323,18 +323,21 @@ final class Controller
 
         // préselection d'un groupe
         $id_groupe = (int) Route::params('id_groupe');
-        $twig->assign('id_groupe', $id_groupe);
-
-        $twig->assign(
-            'groupes',
-            Groupe::find(
-                [
-                    'online' => true,
-                    'order_by' => 'name',
-                    'sort' => 'ASC',
-                ]
-            )
-        );
+        if ($id_groupe > 0) {
+            $groupe = Groupe::getInstance($id_groupe);
+            $twig->assign('groupe', $groupe);
+        } else {
+            $twig->assign(
+                'groupes',
+                Groupe::find(
+                    [
+                        'online' => true,
+                        'order_by' => 'name',
+                        'sort' => 'ASC',
+                    ]
+                )
+            );
+        }
 
         if (intval(Route::params('id_lieu')) > 0) {
             $lieu = Lieu::getInstance(intval(Route::params('id_lieu')));

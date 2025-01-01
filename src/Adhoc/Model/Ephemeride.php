@@ -53,9 +53,9 @@ class Ephemeride
         $db = DataBase::getInstance();
 
         $sql = "SELECT g.id_groupe, g.name, e.`date`, YEAR(e.`date`) AS `year`, DATE_FORMAT(e.`date`, '%m-%d') AS `day` "
-             . "FROM adhoc_groupe g, adhoc_participe_a pa, adhoc_event e, adhoc_event_structure o, adhoc_structure s "
-             . "WHERE g.id_groupe = pa.id_groupe "
-             . "AND pa.id_event = e.id_event "
+             . "FROM adhoc_groupe g, adhoc_event_groupe eg, adhoc_event e, adhoc_event_structure o, adhoc_structure s "
+             . "WHERE g.id_groupe = eg.id_groupe "
+             . "AND eg.id_event = e.id_event "
              . "AND e.id_event = o.id_event "
              . "AND o.id_structure = s.id_structure "
              . "AND s.id_structure = 1 "

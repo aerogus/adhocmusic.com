@@ -25,12 +25,7 @@ class GroupeMembre extends ObjectModel
     /**
      * @var string
      */
-    protected static string $table = 'adhoc_groupe_membre'; // ex adhoc_appartient_a
-
-    /**
-     * @var ?int
-     */
-    protected ?int $id_groupe = null;
+    protected static string $table = 'adhoc_groupe_membre';
 
     /**
      * @var ?int
@@ -40,17 +35,23 @@ class GroupeMembre extends ObjectModel
     /**
      * @var ?int
      */
+    protected ?int $id_groupe = null;
+
+    /**
+     * @var ?int
+     */
     protected ?int $id_type_musicien = null;
 
     /**
-     * Retourne l'id_groupe
+     * Liste des attributs de l'objet
      *
-     * @return ?int
+     * @var array<string,string>
      */
-    public function getIdGroupe(): ?int
-    {
-        return $this->id_groupe;
-    }
+    protected static array $all_fields = [
+        'id_contact' => 'int', // pk
+        'id_groupe' => 'int', // pk
+        'id_type_musicien' => 'int', // pk
+    ];
 
     /**
      * Retourne l'id_contact
@@ -67,24 +68,19 @@ class GroupeMembre extends ObjectModel
      *
      * @return ?int
      */
-    public function getIdTypeMusicien(): ?int
+    public function getIdGroupe(): ?int
     {
-        return $this->id_type_musicien;
+        return $this->id_groupe;
     }
 
     /**
-     * @param ?int $id_groupe
+     * Retourne l'id_groupe
      *
-     * @return static
+     * @return ?int
      */
-    public function setIdGroupe(?int $id_groupe): static
+    public function getIdTypeMusicien(): ?int
     {
-        if ($this->id_groupe !== $id_groupe) {
-            $this->id_groupe = $id_groupe;
-            $this->modified_fields['id_groupe'] = true;
-        }
-
-        return $this;
+        return $this->id_type_musicien;
     }
 
     /**
@@ -97,6 +93,21 @@ class GroupeMembre extends ObjectModel
         if ($this->id_contact !== $id_contact) {
             $this->id_contact = $id_contact;
             $this->modified_fields['id_contact'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ?int $id_groupe
+     *
+     * @return static
+     */
+    public function setIdGroupe(?int $id_groupe): static
+    {
+        if ($this->id_groupe !== $id_groupe) {
+            $this->id_groupe = $id_groupe;
+            $this->modified_fields['id_groupe'] = true;
         }
 
         return $this;

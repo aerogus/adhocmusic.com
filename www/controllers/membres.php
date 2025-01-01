@@ -107,7 +107,7 @@ final class Controller
             $errors = self::validateMemberCreateForm($data);
             if (count($errors) === 0) {
                 $data['password'] = Tools::generatePassword(12);
-                $data['password'] = 'changeme';
+                $data['password'] = 'changeme'; // debug !
 
                 $id_contact = Contact::getIdByEmail($data['email']);
                 if ($id_contact === false) {

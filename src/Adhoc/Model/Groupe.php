@@ -531,6 +531,21 @@ class Groupe extends ObjectModel
     }
 
     /**
+     * @param int $id_groupe
+     *
+     * @return static
+     */
+    public function setIdGroupe(int $id_groupe): static
+    {
+        if ($this->id_groupe !== $id_groupe) {
+            $this->id_groupe = $id_groupe;
+            $this->modified_fields['id_groupe'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
      * @param ?string $alias alias
      *
      * @return static
@@ -1056,7 +1071,7 @@ class Groupe extends ObjectModel
         }
 
         if (isset($params['id_event'])) {
-            $subSql = "SELECT `id_groupe` FROM `adhoc_participe_a` WHERE `id_event` = " . (int) $params['id_event'] . " ";
+            $subSql = "SELECT `id_groupe` FROM `adhoc_event_groupe` WHERE `id_event` = " . (int) $params['id_event'] . " ";
             if ($ids_groupe = $db->pdo->query($subSql)->fetchAll(\PDO::FETCH_COLUMN)) {
                 $sql .= "AND `id_groupe` IN (" . implode(',', (array) $ids_groupe) . ") ";
             } else {

@@ -65,27 +65,6 @@ class Tools
     }
 
     /**
-     * Retire les accents
-     * /!\ ne fonctionne pas en utf8 donc bidouille
-     *
-     * @param string $str chaîne
-     *
-     * @return string
-     */
-    public static function removeAccents(string $str): string
-    {
-        $str = self::charSet($str, 'ISO');
-        $str = strtr(
-            $str,
-            utf8_decode("ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ"),
-            utf8_decode("aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn")
-        );
-        $str = self::charSet($str, 'UTF8');
-
-        return $str;
-    }
-
-    /**
      * @param string $string chaîne
      *
      * @return string
@@ -375,12 +354,17 @@ class Tools
     {
         $alias = trim($name);
         $alias = mb_strtolower($alias);
-        $alias = Tools::removeAccents($alias);
-
-        return str_replace(
+        $alias = str_replace(
+            str_split("ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ"),
+            str_split("aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn"),
+            $alias
+        );
+        $alias = str_replace(
             ['/', '+', '|', '.', ' ', "'", '"',  '&', '(', ')', '!', '°'],
             [ '',  '',  '',  '',  '',  '',  '', 'et',  '',  '',  '',  ''],
             $alias
         );
+
+        return $alias;
     }
 }

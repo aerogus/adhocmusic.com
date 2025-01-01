@@ -36,13 +36,18 @@
         <div class="row mb-3">
           <label class="form-label col-3" for="ids_groupe[0]">Groupe(s)</label>
           <div class="col-9">
-            <div class="alert alert-danger" id="error_id_groupe"{% if not error_id_groupe %} style="display: none"{% endif %}>Vous devez lier cette vidéo à soit un groupe, soit un lieu, soit un événement</div>
-            <select id="ids_groupe[{{ smarty.section.cpt_groupe.index }}]" name="ids_groupe[{{ smarty.section.cpt_groupe.index }}]" class="form-control">
-              <option value="">-- Choix d'un groupe --</option>
-              {% for groupe in groupes %}
-              <option value="{{ groupe.id }}"{% if (index == 0) and groupe.id == id_groupe %} selected="selected"{% endif %}>{{ groupe.name }}</option>
-              {% endfor %}
-            </select>
+            {% if groupe %}
+              <input type="hidden" name="id_groupe" value="{{ groupe.id }}">
+              <span>{{ groupe.name }}</span>
+            {% else %}
+              <div class="alert alert-danger" id="error_id_groupe"{% if not error_id_groupe %} style="display: none"{% endif %}>Vous devez lier cette vidéo à soit un groupe, soit un lieu, soit un événement</div>
+              <select id="ids_groupe[{{ smarty.section.cpt_groupe.index }}]" name="ids_groupe[{{ smarty.section.cpt_groupe.index }}]" class="form-control">
+                <option value="">-- Choix d'un groupe --</option>
+                {% for groupe in groupes %}
+                <option value="{{ groupe.id }}"{% if (index == 0) and groupe.id == id_groupe %} selected="selected"{% endif %}>{{ groupe.name }}</option>
+                {% endfor %}
+              </select>
+            {% endif %}
           </div>
         </div>
 
