@@ -1,10 +1,15 @@
 {% include 'common/header.twig' %}
 
 <div class="container">
-  <h2>Communication Interne</h2>
-  <div class="reset">
+
+  <div class="row">
+
+  <div class="col-md-6">
+
+  <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Communication Interne</h2>
+  <div class="border rounded-bottom bg-white p-3 mb-3">
     <table class="table table-striped">
-      <thead>
+      <thead class="table-dark">
         <tr>
           <th>Forum</th>
           <th>Dernier Message</th>
@@ -24,12 +29,13 @@
       </tbody>
     </table>
   </div>
-</div>
 
-<div class="container">
-  <h2>Editorial du site</h2>
-  <div class="reset">
-    <ul class="admlinks">
+  </div>
+  <div class="col-md-3">
+
+  <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Éditorial du site</h2>
+  <div class="border rounded-bottom bg-white p-3 mb-3">
+    <ul>
       <li><a href="/adm/featured">À la une</a></li>
       <li><a href="/adm/newsletter">Newsletter</a></li>
       <li><a href="/adm/faq">Foire aux questions</a></li>
@@ -37,12 +43,13 @@
       <li><a href="/comments">Commentaires</a></li>
     </ul>
   </div>
-</div>
 
-<div class="container">
-  <h2>Base de données</h2>
-  <div class="reset">
-    <ul class="admlinks">
+  </div>
+  <div class="col-md-3">
+
+  <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Base de données</h2>
+  <div class="border rounded-bottom bg-white p-3 mb-3">
+    <ul>
        <li><a href="/adm/membres">Membres</a></li>
        <li><a href="/adm/groupes">Groupes</a></li>
        <li><a href="/adm/groupe-de-style">Groupe de Style</a></li>
@@ -51,6 +58,10 @@
        <li><a href="/adm/videos">Vidéos</a></li>
     </ul>
   </div>
-</div>
+
+  </div>
+
+</div>{# .row #}
+</div>{# .container #}
 
 {% include 'common/footer.twig' %}
