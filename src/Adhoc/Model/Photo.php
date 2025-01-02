@@ -115,6 +115,21 @@ class Photo extends Media
     }
 
     /**
+     * @param int $id_photo
+     *
+     * @return static
+     */
+    public function setIdPhoto(int $id_photo): static
+    {
+        if ($this->id_photo !== $id_photo) {
+            $this->id_photo = $id_photo;
+            $this->modified_fields['id_photo'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
      * @param ?string $credits credits
      *
      * @return static

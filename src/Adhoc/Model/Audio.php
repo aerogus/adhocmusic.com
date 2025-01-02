@@ -113,6 +113,21 @@ class Audio extends Media
     }
 
     /**
+     * @param int $id_audio
+     *
+     * @return static
+     */
+    public function setIdAudio(int $id_audio): static
+    {
+        if ($this->id_audio !== $id_audio) {
+            $this->id_audio = $id_audio;
+            $this->modified_fields['id_audio'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
      * Efface un enregistrement de la table audio
      * + gestion de l'effacement du/des fichier(s)
      *

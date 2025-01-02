@@ -24,22 +24,22 @@ jQuery(document).ready(function ($) {
   $('#form-audio-create').submit(function () {
     let valid = true;
     if($('#file').val().length === 0) {
-      $('#file').parent().find('.error').fadeIn();
+      $('#file').parent().find('.alert-danger').fadeIn();
       valid = false;
     } else {
-      $('#file').parent().find('.error').fadeOut();
+      $('#file').parent().find('.alert-danger').fadeOut();
     }
     if($('#name').val().length === 0) {
-      $('#name').parent().find('.error').fadeIn();
+      $('#name').parent().find('.alert-danger').fadeIn();
       valid = false;
     } else {
-      $('#name').parent().find('.error').fadeOut();
+      $('#name').parent().find('.alert-danger').fadeOut();
     }
     if($('#id_groupe').val() === '0' && $('#id_lieu').val() === '0' && $('#id_event').val() === '0') {
-      $('#id_groupe').parent().find('.error').fadeIn();
-      valid = false;
+      $('#id_groupe').parent().find('.alert-danger').fadeIn();
+      //valid = false;
     } else {
-      $('#id_groupe').parent().find('.error').fadeOut();
+      $('#id_groupe').parent().find('.alert-danger').fadeOut();
     }
     return valid;
   });

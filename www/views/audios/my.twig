@@ -1,24 +1,21 @@
 {% include 'common/header.twig' %}
 
-<div class="box">
-  <h2>Mes musiques</h2>
-  <div>
+<div class="container">
 
-<div class="mbs txtcenter">
-  <a href="/audios/create" class="btn btn-primary">➕ Ajouter une musique</a>
-</div>
+  {% if delete %}
+  <div class="alert alert-success">La suppression du son a été effectuée</div>
+  {% endif %}
+
+  <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Mes musiques</h2>
+  <div class="border rounded-bottom bg-white p-3">
+
+    <a href="/audios/create" class="btn btn-primary">➕ Ajouter une musique</a>
 
 {% if audios|length == 0 %}
 
 <p>Aucune musique</p>
 
 {% else %}
-
-{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
-
-{% if delete %}
-<div class="alert alert-success">La suppression du son a été effectuée</div>
-{% endif %}
 
 <table class="table table-striped">
   <thead>
@@ -33,7 +30,7 @@
   {% for audio in audios %}
     <tr>
       <td>{% if audio.groupe %}{{ audio.groupe.name }}{% endif %}</td>
-      <td><a href="/audios/edit/{{ audio.id }}">{{ audio.name }}</a></td>
+      <td><a href="/audios/edit/{{ audio.idAudio }}">{{ audio.name }}</a></td>
       <td>{{ audio.createdAt }}</td>
       <td>{{ audio.modifiedAt }}</td>
     </tr>
@@ -41,13 +38,9 @@
   </tbody>
 </table>
 
-{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
-
 {% endif %}
 
-<div class="mts txtcenter">
-  <a href="/audios/create" class="btn btn-primary">➕ Ajouter une musique</a>
-</div>
+<a href="/audios/create" class="btn btn-primary">➕ Ajouter une musique</a>
 
   </div>
 </div>

@@ -1,8 +1,12 @@
 {% include 'common/header.twig' %}
 
-<div class="box">
-  <h1>Supprimer un son</h1>
-  <div>
+<div class="container">
+
+  <div class="row">
+  <div class="col-md-8 mx-auto">
+
+    <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Supprimer une musique</h2>
+    <div class="border rounded-bottom bg-white p-3">
 
     {% if unknown_audio %}
 
@@ -11,82 +15,76 @@
     {% else %}
 
     <form id="form-audio-delete" name="form-audio-delete" method="post" action="/audios/delete">
-      <section class="grid-4">
-        <div>
-          <label for="mp3">Écouter</label>
-        </div>
-        <div class="col-3">
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="mp3">Écouter</label>
+        <div class="col-9">
           <audio controls id="mp3" src="{{ audio.directMp3Url }}"></audio>
         </div>
-        <div>
-          <label for="name">Nom</label>
-        </div>
-        <div class="col-3">
+      </div>
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="name">Nom</label>
+        <div class="col-9">
           <span id="name">{{ audio.name }}</span>
         </div>
-        {% if groupe %}
-        <div>
-          <label for="groupe">Groupe</label>
-        </div>
-        <div class="col-3">
+      </div>
+      {% if groupe %}
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="groupe">Groupe</label>
+        <div class="col-9">
           <span id="groupe">{{ groupe.name }}</span>
         </div>
-        {% endif %}
-        {% if event %}
-        <div>
-          <label for="event">Événement</label>
-        </div>
-        <div class="col-3">
+      </div>
+      {% endif %}
+      {% if event %}
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="event">Événement</label>
+        <div class="col-9">
           <span id="event">{{ event.date|date("d/m/Y h\\:i") }} - {{ event.name }}</span>
         </div>
-        {% endif %}
-        {% if lieu %}
-        <div>
-          <label for="lieu">Lieu</label>
-        </div>
-        <div class="col-3">
+      </div>
+      {% endif %}
+      {% if lieu %}
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="lieu">Lieu</label>
+        <div class="col-9">
           <span id="lieu">{{ lieu.idDepartement }} - {{ lieu.name }}</span>
         </div>
-        {% endif %}
-        <div>
-          <label for="online">Afficher</label>
-        </div>
-        <div class="col-3">
+      </div>
+      {% endif %}
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="online">Afficher</label>
+        <div class="col-9">
           <span id="online">{{ audio.online }}</span>
         </div>
-        {% if membre %}
-        <div>
-          <label for="created_at">Envoyé le</label>
-        </div>
-        <div class="col-3">
+      </div>
+      {% if membre %}
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="created_at">Envoyé le</label>
+        <div class="col-9">
           <span id="created_at">{{ audio.createdAt|date("d/m/Y \\à H\\:M") }} par <a href="{{ membre.url }}">{{ membre.pseudo }}</a></span>
         </div>
-        {% endif %}
-        {% if audio.modifiedAt %}
-        <div>
-          <label for="modified_at">Modifié le</label>
-        </div>
-        <div class="col-3">
+      </div>
+      {% endif %}
+      {% if audio.modifiedAt %}
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="modified_at">Modifié le</label>
+        <div class="col-9">
           <span id="modified_at">{{ audio.modifiedAt|date("d/m/Y \\à H\\:M") }}</span>
         </div>
-        {% endif %}
-        <div>
-          <label for="mp3">Ecouter</label>
+      </div>
+      {% endif %}
+      <div class="row mb-3">
+        <div class="offset-3">
+          <input id="form-audio-delete-submit" name="form-audio-delete-submit" class="btn btn-primary" type="submit" value="Supprimer">
+          <input type="hidden" name="id" value="{{ audio.idAudio }}">
         </div>
-        <div class="col-3">
-          <audio id="mp3" src="{{ audio.directMp3Url }}"></audio>
-        </div>
-        <div></div>
-        <div class="col-3">
-          <input id="form-audio-delete-submit" name="form-audio-delete-submit" class="btn btn-primary w100" type="submit" value="Supprimer">
-          <input type="hidden" name="id" value="{{ audio.id }}">
-        </div>
-      </section>
+      </div>
     </form>
 
     {% endif %}
 
-  </div>
-</div>
+  </div>{# .col-md-8 #}
+  </div>{# .row #}
+</div>{# .container #}
 
 {% include 'common/footer.twig' %}

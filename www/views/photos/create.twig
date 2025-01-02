@@ -65,9 +65,9 @@
               <option value="0">aucun / non référencé</option>
             </optgroup>
             {% for dep in deps %}
-            <optgroup label="{{ dep.id }} - {{ dep.name }}">
-              {% for lieu in lieux %}
-              <option value="{{ lieu.id }}">{{ lieu.city.cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
+            <optgroup label="{{ dep.idDepartement }} - {{ dep.name }}">
+              {% for lieu in lieux[dep.idDepartement] %}
+              <option value="{{ lieu.idLieu }}">{{ lieu.city.cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
               {% endfor %}
             </optgroup>
             {% endfor %}

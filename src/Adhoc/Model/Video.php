@@ -328,6 +328,21 @@ class Video extends Media
     }
 
     /**
+     * @param int $id_video
+     *
+     * @return static
+     */
+    public function setIdVideo(int $id_video): static
+    {
+        if ($this->id_video !== $id_video) {
+            $this->id_video = $id_video;
+            $this->modified_fields['id_video'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
      * Set l'id_host
      *
      * @param int $id_host identifiant hébergeur

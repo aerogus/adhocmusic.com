@@ -867,7 +867,7 @@ class Lieu extends ObjectModel
     }
 
     /**
-     * Retourne les lieux d'un département
+     * Retourne les lieux trié par département
      *
      * @param ?string $id_departement département
      *
@@ -875,21 +875,15 @@ class Lieu extends ObjectModel
      */
     public static function getLieuxByDep(?string $id_departement = null): array
     {
-        $db = DataBase::getInstance();
-
-        $sql = "SELECT `id_lieu`, `id_departement` "
-             . "FROM `" . Lieu::getDbTable() . "` "
-             . "ORDER BY `id_departement` ASC";
-
-        $rows = $db->pdo->query($sql)->fetchAll();
+        $lieux = static::findAll();
 
         $tab = [];
         foreach (Departement::findAll() as $dep) {
             $tab[$dep->getIdDepartement()] = [];
         }
 
-        foreach ($rows as $row) {
-            $tab[(string) $row['id_departement']][] = static::getInstance((int) $row['id_lieu']);
+        foreach ($lieux as $lieu) {
+            $tab[$lieu->getIdDepartement()][] = static::getInstance($lieu->getIdLieu());
         }
 
         // tri par nom de ville
