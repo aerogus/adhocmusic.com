@@ -49,14 +49,18 @@
   <div class="border rounded-bottom bg-white p-3 mb-3">
 
   {% if last_videos|length > 0 %}
-  <div class="row">
+  <div class="row row-cols-md-3 g-3">
     {% for video in last_videos %}
-    <div class="video col-md-4">
-      <div class="thumb" style="background-image: url({{ video.thumbUrl }})">
-        <a class="playbtn" href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">▶</a>
+    <div class="col">
+      <div class="card">
+        <div class="thumb" style="background-image: url({{ video.thumbUrl }})">
+          <a class="playbtn" href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">▶</a>
+        </div>
+        <div class="card-body">
+          <p class="card-text"><a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
+          <p class="card-text">{% if video.groupe %}<a href="{{ video.groupe.url }}" title="Aller à la page du groupe {{ video.groupe.name }}">{{ video.groupe.name }}</a>{% endif %}</p>
+        </div>
       </div>
-      <p class="title"><a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
-      <p class="subtitle">{% if video.groupe %}<a href="{{ video.groupe.url }}" title="Aller à la page du groupe {{ video.groupe.name }}">{{ video.groupe.name }}</a>{% endif %}</p>
     </div>
     {% endfor %}
   </div>
