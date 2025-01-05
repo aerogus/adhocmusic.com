@@ -2,23 +2,24 @@
 
 <div class="container">
 
-  <h1 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Partenaires</h1>
-  <div class="border rounded-bottom bg-white p-3">
-    {% if partners %}
-    <ul class="partners">
-    {% for partner in partners %}
-      <li>
+  <h1 class="px-2 py-1 mb-3 bg-dark text-white rounded-top">Partenaires</h1>
+  {% if partners %}
+  <div class="row row-cols-md-3 g-3">
+  {% for partner in partners %}
+    <div class="col">
+      <div class="card w-100 p-3">
         <a href="{{ partner.url }}">
-          <img src="{{ partner.iconUrl }}" alt="">
-          <strong>{{ partner.title }}</strong><br>{{ partner.description }}
+          <img src="{{ partner.iconUrl }}" alt="" class="pe-3">
+          <strong>{{ partner.title }}</strong>
         </a>
-      </li>
-    {% endfor %}
-    </ul>
-    {% else %}
-    Pas de partenaires référencés
-    {% endif %}
+        <div class="card-text"><small>{{ partner.description }}</small></div>
+      </div>
+    </div>
+  {% endfor %}
   </div>
+  {% else %}
+  <div class="alert alert-info">Aucun partenaire référencé</div>
+  {% endif %}
 
 </div>
 
