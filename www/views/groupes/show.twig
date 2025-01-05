@@ -15,7 +15,7 @@
       <h1 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">{{ groupe.name }}</h1>
       <div class="border rounded-bottom bg-white p-3 mb-3">
         {% if groupe.logo %}
-        <img src="{{ groupe.logo }}" alt="{{ groupe.name }}" style="display:block;margin:0 auto">
+        <img src="{{ groupe.logo }}" alt="{{ groupe.name }}" class="img-fluid">
         {% endif %}
         {% if groupe.style %}
         <p><strong>Style</strong><br>{{ groupe.style }}</p>
@@ -78,7 +78,7 @@
       <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Présentation</h2>
       <div class="border rounded-bottom bg-white p-3">
         {% if groupe.photo %}
-        <img src="{{ groupe.photo }}" alt="{{ groupe.name }}" title="{{ groupe.name }}" style="display:block;margin:0 auto">
+        <img src="{{ groupe.photo }}" alt="{{ groupe.name }}" title="{{ groupe.name }}" class="img-fluid">
         {% endif %}
         <p style="text-align:justify">{{ groupe.text }}</p>
       </div>
