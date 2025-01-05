@@ -43,23 +43,20 @@
       </div>
 
       {% if videos|length > 0 %}
-      <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Vidéos</h2>
-      <div class="border rounded-bottom bg-white p-3 mb-3">
-        {% for video in videos %}
-        <div class="video">
-          <div class="thumb" style="background-image: url({{ video.thumbUrl }})">
-            <a class="playbtn" href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">▶</a>
+      <h2 class="px-2 py-1 mb-3 bg-dark text-white rounded-top">Vidéos</h2>
+      <div class="row row-cols-md-6 g-3">
+      {% for video in videos %}
+      <div class="col">
+        <div class="card w-100 shadow-sm">
+          <a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}"><img src="{{ video.thumbUrl }}" class="img-fluid" alt=""></a>
+          <div class="card-body">
+            <p class="card-text"><a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
+            {% if video.event %}<p class="card-text"><a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.name }}<br/>
+            {{ video.event.date|format_datetime(pattern='dd LLLL yyyy') }}</a></p>{% endif %}
           </div>
-          <p class="title"><a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
-          <p class="subtitle">
-            {% if video.event %}<a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.name }}
-            <br/>
-            {{ video.event.date|format_datetime(pattern='dd LLLL yyyy') }}</a>{% endif %}
-          </p>
         </div>
-        {% endfor %}
       </div>
-      {% endif %}
+      {% endfor %}
 
       {% if audios|length > 0 %}
       <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">En Écoute</h2>
