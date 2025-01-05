@@ -1,7 +1,7 @@
 {% include 'common/header.twig' %}
 
 <div class="container">
-  <div class="col-6 mx-auto">
+  <div class="col-md-8 mx-auto">
 
     <h3 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Newsletter</h3>
 
@@ -9,25 +9,29 @@
 <div class="border rounded-bottom bg-white p-3">
 <form id="form-newsletter" name="form-newsletter" action="/newsletters/subscriptions" method="post">
   <div class="row mb-3">
-    <label class="col-2 form-label" for="email">E-mail</label>
-    <div class="col-10">
+    <label class="col-3 form-label" for="email">E-mail</label>
+    <div class="col-9">
       <input type="email" id="email" name="email" placeholder="E-mail" class="form-control" value="{{ email }}" required="required">
     </div>
   </div>
-  <div class="row mb-3">
-    <div class="offset-2">
-    <div class="form-check form-check-inline">
-      <input type="radio" class="form-check-input" name="action" value="sub" {% if action == 'sub' %} checked="checked"{% endif %}>
-      <label class="form-check-label"  for="sub">Inscription</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input type="radio" class="form-check-input" name="action" value="unsub" {% if action == 'unsub' %} checked="checked"{% endif %}>
-      <label class="form-check-label" for="unsub">Désinscription</label>
-    </div>
+  <div class="row mb-0">
+    <div class="offset-3">
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="action" value="sub" {% if action == 'sub' %} checked="checked"{% endif %}>
+        <label class="form-check-label"  for="sub">Inscription</label>
+      </div>
     </div>
   </div>
   <div class="row mb-3">
-    <div class="offset-2">
+    <div class="offset-3">
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="action" value="unsub" {% if action == 'unsub' %} checked="checked"{% endif %}>
+        <label class="form-check-label" for="unsub">Désinscription</label>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="offset-3">
       <input class="btn btn-primary" type="submit" id="form-newsletter-submit" name="form-newsletter-submit" value="Valider">
     </div>
   </div>
