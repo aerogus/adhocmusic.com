@@ -37,7 +37,7 @@ jQuery(document).ready(function ($) {
     }
     if($('#id_groupe').val() === '0' && $('#id_lieu').val() === '0' && $('#id_event').val() === '0') {
       $('#id_groupe').parent().find('.alert-danger').fadeIn();
-      //valid = false;
+      //valid = false; // pas obligé temporairement
     } else {
       $('#id_groupe').parent().find('.alert-danger').fadeOut();
     }

@@ -234,7 +234,11 @@ final class Controller
                         if (!is_dir(Audio::getBasePath())) {
                             mkdir(Audio::getBasePath(), 0755, true);
                         }
-                        move_uploaded_file($uploaded_audio_path, Audio::getBasePath() . '/' . $audio->getIdAudio() . '.mp3');
+                        if (move_uploaded_file($uploaded_audio_path, Audio::getBasePath() . '/' . $audio->getIdAudio() . '.mp3')) {
+                            Log::success('storage audio');
+                        } else {
+                            Log::error('storage audio');
+                        }
                     } else {
                         mail(DEBUG_EMAIL, 'bug audio create', 'bug audio create');
                     }
