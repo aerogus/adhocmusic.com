@@ -45,20 +45,17 @@
     <div id="search-results"></div>
   </div>
 
-  <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Dernières vidéos ajoutées</h1>
-  <div class="border rounded-bottom bg-white p-3 mb-3">
+  <h2 class="px-2 py-1 mb-3 bg-dark text-white rounded-top">Dernières vidéos ajoutées</h1>
 
   {% if last_videos|length > 0 %}
-  <div class="row row-cols-md-3 g-3">
+  <div class="row row-cols-md-4 g-3">
     {% for video in last_videos %}
     <div class="col">
-      <div class="card">
-        <div class="thumb" style="background-image: url({{ video.thumbUrl }})">
-          <a class="playbtn" href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">▶</a>
-        </div>
+      <div class="card w-100 shadow-sm">
+        <a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}"><img src="{{ video.thumbUrl }}" class="img-fluid" alt=""></a>
         <div class="card-body">
           <p class="card-text"><a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
-          <p class="card-text">{% if video.groupe %}<a href="{{ video.groupe.url }}" title="Aller à la page du groupe {{ video.groupe.name }}">{{ video.groupe.name }}</a>{% endif %}</p>
+          {% if video.groupe %}<a href="{{ video.groupe.url }}" title="Aller à la page du groupe {{ video.groupe.name }}">{{ video.groupe.name }}</a>{% endif %}
         </div>
       </div>
     </div>
