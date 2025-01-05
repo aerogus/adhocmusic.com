@@ -1,19 +1,15 @@
 {% if search_video|length == 0 %}
-<p class="alert alert-danger">Aucun résultat</p>
+  <p class="alert alert-danger">Aucun résultat</p>
 {% else %}
-<div class="row">
-{% for video in search_video %}
-  <div class="video col-md-4">
-    <div class="thumb" style="background-image: url({{ video.thumbUrl }})">
-      <a class="playbtn" href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">▶</a>
+  {% for video in search_video %}
+  <div class="col">
+    <div class="card w-100 shadow-sm">
+      <a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}"><img src="{{ video.thumbUrl }}" class="img-fluid" alt=""></a>
+      <div class="card-body">
+        <p class="card-text"><a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
+        {% if video.groupe %}<a href="{{ video.groupe.url }}" title="Aller à la page du groupe {{ video.groupe.name }}">{{ video.groupe.name }}</a>{% endif %}
+      </div>
     </div>
-    <p class="title"><a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
-    <p class="subtitle">
-      {% if video.groupe %}<a href="{{ video.groupe.url }}" title="Aller à la page du groupe {{ video.groupe.name }}">{{ video.groupe.name }}</a>{% endif %}
-      {% if video.groupe and video.event %}<br/>{% endif %}
-      {% if video.event %}<a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.date }}</a>{% endif %}
-    </p>
   </div>
-{% endfor %}
-</div>
+  {% endfor %}
 {% endif %}
