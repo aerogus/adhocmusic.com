@@ -12,7 +12,7 @@ var asv = {{ script_vars|json_encode|raw }}
 {% endif %}
 
 {% for script_url in footer_scripts %}
-<script src="{{ script_url }}"></script>
+<script src="{{ script_url }}"{% if script_url ends with '.mjs' %} type="module"{% endif %}></script>
 {% endfor %}
 
 {% for inline_script in inline_scripts %}

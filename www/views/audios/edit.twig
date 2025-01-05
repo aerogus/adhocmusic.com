@@ -18,7 +18,13 @@
       <div class="row mb-3">
         <label class="col-3 form-label" for="mp3">Écouter</label>
         <div class="col-9">
-          <audio controls id="mp3" src="{{ audio.directMp3Url }}"></audio>
+          <div class="waveform" data-media-url="{{ audio.directMp3Url }}"></div>
+          <p>
+            <button class="btn btn-primary playButton">▶️</button>
+            <span class="currentTime">00:00:00</span>
+            <span>/</span>
+            <span class="totalTime">00:00:00</span>
+          </p>
         </div>
       <div class="row mb-3">
         <label class="col-3 form-label" for="name">Titre (*) </label>

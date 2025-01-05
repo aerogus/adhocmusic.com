@@ -321,7 +321,7 @@ final class Controller
 
         $twig->assign('robots', 'noindex,nofollow');
 
-        $twig->enqueueScript('/js/audios/edit.js');
+        $twig->enqueueScript('/js/audios/edit.mjs');
 
         $twig->assign('breadcrumb', [
             ['title' => '🏠', 'link' => '/'],
