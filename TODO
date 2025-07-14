@@ -6,3 +6,4 @@
 - faire un menu du haut responsive
 - faire le menu du bas responsive
 - retirer toute dépendance non nécessaire à jQuery
+- style /events/:id
