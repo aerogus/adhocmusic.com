@@ -7,3 +7,4 @@
 - faire le menu du bas responsive
 - retirer toute dépendance non nécessaire à jQuery
 - style /events/:id
+- style adm/featured/create + adm/featured/edit
