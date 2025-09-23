@@ -21,8 +21,8 @@
     ],
     "require-dev": {
         "squizlabs/php_codesniffer": "4.0.0",
-        "phpunit/phpunit": "12.3.11",
-        "phpstan/phpstan": "2.1.27",
+        "phpunit/phpunit": "12.3.13",
+        "phpstan/phpstan": "2.1.28",
         "phpstan/phpstan-strict-rules": "2.0.6",
         "friendsoftwig/twigcs": "6.5.0"
     },
