@@ -70,10 +70,10 @@ class AdHocTwig
             $this->assign('is_auth', false);
         }
 
-        $this->enqueueStyle('/static/library/bootstrap@5.3.3/bootstrap.min.css');
+        $this->enqueueStyle('/static/library/bootstrap@5.3.8/bootstrap.min.css');
         $this->enqueueStyle('/css/adhoc-bs.css');
 
-        $this->enqueueScript('/static/library/bootstrap@5.3.3/bootstrap.bundle.min.js');
+        $this->enqueueScript('/static/library/bootstrap@5.3.8/bootstrap.bundle.min.js');
         $this->enqueueScript('/static/library/jquery@3.7.1/jquery.min.js');
         $this->enqueueScript('/js/adhoc-bs.js');
     }
