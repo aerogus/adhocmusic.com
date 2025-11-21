@@ -18,13 +18,13 @@ Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fic
       <div class="row mb-3">
         <label class="col-3 form-label" for="name">Nom (*)</label>
         <div class="col-9">
-          <div class="alert alert-danger" id="error_name"{% if not error_nam %} style="display: none"{% endif %}>Vous devez renseigner le nom de votre groupe</div>
+          <div class="alert alert-danger" id="error_name"{% if not error_name %} style="display: none"{% endif %}>Vous devez renseigner le nom de votre groupe</div>
           <input type="text" id="name" name="name" value="{{ data.name }}" class="form-control">
         </div>
       </div>
 
       <div class="row mb-3">
-        <label class="col-3 form-label" for="logo">Logo (.jpg)</label>
+        <label class="col-3 form-label" for="lelogo">Logo (.jpg)</label>
         <div class="col-9">
           <input type="file" id="lelogo" class="form-control" name="lelogo">
         </div>

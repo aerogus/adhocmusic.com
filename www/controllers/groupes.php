@@ -251,7 +251,7 @@ final class Controller
                 'lineup'           => (string) Route::params('lineup'),
                 'mini_text'        => (string) Route::params('mini_text'),
                 'text'             => (string) Route::params('text'),
-                'site'             => (bool) Route::params('site') ? (string) Route::params('site') : null,
+                'site'             => (string) Route::params('site'),
                 'facebook_page_id' => (bool) Route::params('facebook_page_id') ? (string) Route::params('facebook_page_id') : null,
                 'twitter_id'       => (bool) Route::params('twitter_id') ? (string) Route::params('twitter_id') : null,
                 'id_type_musicien' => (int) Route::params('id_type_musicien'),
@@ -365,6 +365,10 @@ final class Controller
 
         $data = [
             'id_groupe'        => $groupe->getIdGroupe(),
+            'name'             => $groupe->getName(),
+            'logo'             => $groupe->getLogo(),
+            'photo'            => $groupe->getPhoto(),
+            'mini_photo'       => $groupe->getMiniPhoto(),
             'style'            => $groupe->getStyle(),
             'influences'       => $groupe->getInfluences(),
             'lineup'           => $groupe->getLineup(),
@@ -379,12 +383,13 @@ final class Controller
         if (Tools::isSubmit('form-groupe-edit')) {
             $data = [
                 'id_groupe'        => $groupe->getIdGroupe(),
+                'name'             => (string) Route::params('name'),
                 'style'            => (string) Route::params('style'),
                 'influences'       => (string) Route::params('influences'),
                 'lineup'           => (string) Route::params('lineup'),
                 'mini_text'        => (string) Route::params('mini_text'),
                 'text'             => (string) Route::params('text'),
-                'site'             => (bool) Route::params('site') ? (string) Route::params('site') : null,
+                'site'             => (string) Route::params('site'),
                 'facebook_page_id' => (bool) Route::params('facebook_page_id') ? (string) Route::params('facebook_page_id') : null,
                 'twitter_id'       => (bool) Route::params('twitter_id') ? (string) Route::params('twitter_id') : null,
                 'id_type_musicien' => (int) Route::params('id_type_musicien'),
@@ -397,6 +402,7 @@ final class Controller
                 }
 
                 $groupe->setStyle($data['style'])
+                    ->setName($data['name'])
                     ->setInfluences($data['influences'])
                     ->setLineup($data['lineup'])
                     ->setMiniText($data['mini_text'])
