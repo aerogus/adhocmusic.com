@@ -7,77 +7,93 @@
 {% else %}
 
 <div class="container">
-  <h1>Supprimer une vidéo</h1>
-  <div>
+
+  <div class="row">
+  <div class="col-md-8 mx-auto">
+
+  <h1 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Supprimer une vidéo</h1>
+  <div class="border rounded-bottom bg-white p-3">
   <form id="form-video-delete" name="form-video-delete" method="post" action="/videos/delete">
-    <section class="grid-4">
-      <div>
-        <label for="player">Visualiser</label>
-      </div>
-      <div class="col-3 mbs">
-        <span id="player">{{ video.player|raw }}</span>
-      </div>
-      <div>
-        <label for="name">Nom</label>
-      </div>
-      <div class="col-3 mbs">
+
+    <div class="row mb-3">
+      <label class="form-label col-3" for="name">Titre</label>
+      <div class="col-9">
         <span id="name">{{ video.name }}</span>
       </div>
-      <div>
-        <label for="thumb">Miniature</label>
+    </div>
+
+    <div class="row mb-3">
+      <label class="form-label col-3" for="player">Visualiser</label>
+      <div class="col-9">
+        {{ video.player|raw }}
       </div>
-      <div class="col-3 mbs">
-        <span id="thumb"><img src="{{ video.thumbUrl(320) }}" alt=""></span>
+    </div>
+
+    <div class="row mb-3">
+      <label class="form-label col-3" for="thumbnail">Miniature</label>
+      <div class="col-9">
+        <img src="{{ video.thumbUrl(320) }}" alt=""/>
       </div>
-      <div>
-        <label for="id_host">Hébergeur</label>
-      </div>
-      <div class="col-3 mbs">
+    </div>
+
+    <div class="row mb-3">
+      <label class="form-label col-3" for="id_host">Hébergeur</label>
+      <div class="col-9">
         <span id="id_host">{{ video.host.name }}</span>
       </div>
-      <div>
-        <label for="reference">Référence</label>
-      </div>
-      <div class="col-3 mbs">
+    </div>
+
+    <div class="row mb-3">
+      <label class="form-label col-3" for="reference">Référence</label>
+      <div class="col-9">
         <span id="reference">{{ video.reference }}</span>
       </div>
-      {% if groupe %}
-      <div>
-        <label for="groupe">Groupe</label>
-      </div>
-      <div class="col-3 mbs">
+    </div>
+
+    {% if groupe %}
+    <div class="row mb-3">
+      <label class="form-label col-3" for="groupe">Groupe</label>
+      <div class="col-9">
         <span id="groupe">{{ groupe.name }}</span>
       </div>
-      {% endif %}
-      {% if event %}
-      <div>
-        <label for="event">Événement</label>
-      </div>
-      <div class="col-3 mbs">
+    </div>
+    {% endif %}
+
+    {% if event %}
+    <div class="row mb-3">
+      <label class="form-label col-3" for="event">Événement</label>
+      <div class="col-9">
         <span id="event">{{ event.date }} - {{ event.name }}</span>
       </div>
-      {% endif %}
-      {% if lieu %}
-      <div>
-        <label for="lieu">Lieu</label>
-      </div>
-      <div class="col-3 mbs">
+    </div>
+    {% endif %}
+
+    {% if lieu %}
+    <div class="row mb-3">
+      <label class="form-label col-3" for="lieu">Lieu</label>
+      <div class="col-9">
         <span id="lieu">{{ lieu.name }}</span>
       </div>
-      {% endif %}
-      <div>
-        <label for="online">Afficher</label>
-      </div>
-      <div class="col-3 mbs">
+    </div>
+    {% endif %}
+
+    <div class="row mb-3">
+      <label class="form-label col-3" for="online">Afficher</label>
+      <div class="col-9">
         <span id="online">{{ video.online }}</span>
       </div>
-      <div></div>
-      <div class="col-3">
+    </div>
+
+    <div class="row mb-3">
+      <div class="offset-3">
         <input id="form-video-delete-submit" name="form-video-delete-submit" class="btn btn-primary" type="submit" value="Confirmer la suppression">
         <input type="hidden" name="id" value="{{ video.id }}">
       </div>
-    </section>
+    </div>
+
   </form>
+  </div>
+  </div>
   </div>
 </div>
 
