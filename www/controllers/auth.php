@@ -164,7 +164,9 @@ final class Controller
                     } else {
                         $membre->setPassword($password_new_1);
                         $membre->save();
-                        $twig->assign('new_password', $password_new_1); // DEBUG ONLY
+                        if (ENV !== 'prod') {
+                            $twig->assign('new_password', $password_new_1); // /!\ DEBUG ONLY /!\
+                        }
                         Log::success('Changement de mot de passe');
                         Email::send($membre->getContact()->getEmail(), 'Mot de passe modifié', 'password-changed', ['pseudo' => $membre->getPseudo()]);
                         $twig->assign('change_ok', true);
@@ -220,12 +222,16 @@ final class Controller
                             $twig->assign('sent_ok', true);
                         } else {
                             $twig->assign('sent_ko', true);
-                            //$twig->assign('new_password', $new_password); // DEBUG ONLY
+                            if (ENV !== 'prod') {
+                                $twig->assign('new_password', $new_password); // /!\ DEBUG ONLY /!\
+                            }
                         }
                     } catch (\Exception $e) {
                         Log::error($e->getMessage());
                         $twig->assign('sent_ko', true);
-                        //$twig->assign('new_password', $new_password); // DEBUG ONLY
+                        if (ENV !== 'prod') {
+                            $twig->assign('new_password', $new_password); // /!\ DEBUG ONLY /!\
+                        }
                     }
                 } else {
                     if ($id_contact = Contact::getIdByEmail($email)) {
