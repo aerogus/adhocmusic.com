@@ -1,4 +1,4 @@
-FROM nginx:1.29.1
+FROM nginx:1.29.3
 
 LABEL maintainer="guillaume@seznec.fr"
 
