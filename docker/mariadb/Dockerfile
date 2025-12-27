@@ -1,4 +1,4 @@
-FROM mariadb:11.4.9
+FROM mariadb:11.8.3
 LABEL maintainer="guillaume@seznec.fr"
 
 RUN apt-get update && apt-get install -y \
