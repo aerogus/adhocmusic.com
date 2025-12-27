@@ -40,7 +40,7 @@
           <select id="id_groupe" name="id_groupe" class="form-control">
             <option value="0">Sans</option>
             {% for groupe in groupes %}
-            <option value="{{ groupe.id }}"{% if audio.idGroupe == groupe.id %} selected="selected"{% endif %}>{{ groupe.name }}</option>
+            <option value="{{ groupe.idGroupe }}"{% if audio.idGroupe == groupe.id %} selected="selected"{% endif %}>{{ groupe.name }}</option>
             {% endfor %}
           </select>
         </div>

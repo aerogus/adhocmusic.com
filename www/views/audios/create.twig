@@ -36,7 +36,7 @@
             <select id="id_groupe" name="id_groupe" class="form-control">
               <option value="0">Aucun</option>
               {% for groupe in groupes %}
-              <option value="{{ groupe.id }}">{{ groupe.name }}</option>
+              <option value="{{ groupe.idGroupe }}">{{ groupe.name }}</option>
               {% endfor %}
             </select>
           {% endif %}
