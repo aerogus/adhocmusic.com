@@ -1,4 +1,4 @@
-{% include 'common/header.twig' %}
+{{ include('common/header.twig') }}
 
 <div class="container">
   <h1>Message reçu</h1>
@@ -8,8 +8,8 @@
       <li>Envoyé le : {{ msg.date|date("d/m/Y H\\:M") }}</li>
     </ul>
     <div class="msgread" style="margin: 10px; padding: 10px; border: 1px solid #666;">{{ msg.text }}</div>
-    {% include 'messagerie/_write.twig' %}
+    {{ include('messagerie/_write.twig') }}
   </div>
 </div>
 
-{% include 'common/footer.twig' %}
+{{ include('common/footer.twig') }}

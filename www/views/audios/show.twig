@@ -1,4 +1,4 @@
-{% include 'common/header.twig' %}
+{{ include('common/header.twig') }}
 
 {% if unknown_audio %}
 
@@ -61,4 +61,4 @@ let audio_url = '{{ og_audio.url }}';
 
 {% endif %} {# test unknown audio #}
 
-{% include 'common/footer.twig' %}
+{{ include('common/footer.twig') }}

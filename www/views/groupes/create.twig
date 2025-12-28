@@ -1,4 +1,4 @@
-{% include 'common/header.twig' %}
+{{ include('common/header.twig') }}
 
 {% if inscrip_ok %}
 <div class="alert alert-danger">Un groupe nommé <strong>{{ groupe_name }}</strong> est déjà présent dans la base AD'HOC, sa création est donc impossible.<br>
@@ -137,4 +137,4 @@ Merci pour votre inscription. Vous pouvez si vous le souhaiter éditer votre fic
   </div>
 </div>
 
-{% include 'common/footer.twig' %}
+{{ include('common/footer.twig') }}

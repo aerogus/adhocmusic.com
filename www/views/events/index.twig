@@ -1,4 +1,4 @@
-{% include 'common/header.twig' %}
+{{ include('common/header.twig') }}
 
 {% if create %}<p class="alert alert-success">Evénement ajouté</p>{% endif %}
 {% if edit %}<p class="alert alert-success">Evénement modifié</p>{% endif %}
@@ -59,4 +59,4 @@
 
 </div>{# .grid-3-small-1 #}
 
-{% include 'common/footer.twig' %}
+{{ include('common/footer.twig') }}

@@ -1,4 +1,4 @@
-{% include 'common/header.twig' %}
+{{ include('common/header.twig') }}
 
 <div class="container">
 
@@ -18,7 +18,7 @@
     <div class="col-md-3 mb-3">
       <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Partager cette vidéo</h2>
       <div class="border rounded-bottom bg-white p-3">
-        {% include 'comments/share.twig' with {'title': '', 'url': video.url, 'text': video.name} %}
+        {{ include('comments/share.twig', {'title': '', 'url': video.url, 'text': video.name}) }}
       </div>
     </div>
 
@@ -90,4 +90,4 @@
 
 </div> {# .container #}
 
-{% include 'common/footer.twig' %}
+{{ include('common/footer.twig') }}
