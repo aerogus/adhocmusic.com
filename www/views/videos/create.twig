@@ -44,7 +44,7 @@
               <select id="ids_groupe[{{ smarty.section.cpt_groupe.index }}]" name="ids_groupe[{{ smarty.section.cpt_groupe.index }}]" class="form-control">
                 <option value="">-- Choix d'un groupe --</option>
                 {% for groupe in groupes %}
-                <option value="{{ groupe.id }}"{% if (index == 0) and groupe.id == id_groupe %} selected="selected"{% endif %}>{{ groupe.name }}</option>
+                <option value="{{ groupe.idGroupe }}"{% if (index == 0) and groupe.idGroupe == id_groupe %} selected="selected"{% endif %}>{{ groupe.name }}</option>
                 {% endfor %}
               </select>
             {% endif %}

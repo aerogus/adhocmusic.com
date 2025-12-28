@@ -81,7 +81,7 @@
       <select name="id_groupe" class="w100">
         <option value="0">Aucun</option>
         {% for groupe in groupes %}
-        <option value="{{ groupe.id }}"{% if photo.idGroupe == groupe.id %} selected="selected"{% endif %}>{{ groupe.name }}</option>
+        <option value="{{ groupe.idGroupe }}"{% if photo.idGroupe == groupe.id %} selected="selected"{% endif %}>{{ groupe.name }}</option>
         {% endfor %}
       </select>
     </div>
@@ -94,9 +94,9 @@
         <optgroup label="Autre">
           <option value="0">aucun / non référencé</option>
         </optgroup>
-        {% for dep in deps %}
-        <optgroup label="{{ dep.id }} - {{ dep.name }}">
-          {% for lieu in lieux[dep.id] %}
+        {% for dep_id, dep_name in dep %}
+        <optgroup label="{{ dep_id }} - {{ dep_name }}">
+          {% for lieu in lieux[dep_id] %}
           <option value="{{ lieu.id }}"{% if photo.idLieu == lieu.id %} selected="selected"{% endif %}>{{ lieu.city.cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
           {% endfor %}
         </optgroup>
@@ -122,12 +122,12 @@
 
     <div></div>
     <div class="col-2">
-      <input name="form-photo-edit-submit" id="form-photo-edit-submit" class="btn btn-primary" type="submit" value="Enregistrer">
+      <input name="form-photo-edit-submit" id="form-photo-edit-submit" class="btn btn-primary" type="submit" value="💾 Enregistrer">
       <input type="hidden" name="id" id="id_photo" value="{{ photo.id }}">
       <input type="hidden" name="photo_id_event" id="photo_id_event" value="{{ photo.idEvent }}">
     </div>
     <div class="txtright">
-      <a class="btn btn-primary" href="/photos/delete/{{ photo.id }}">Supprimer la photo</a>
+      <a class="btn btn-primary" href="/photos/delete/{{ photo.id }}">❌ Supprimer</a>
     </div>
 
   </section>

@@ -9,7 +9,7 @@
   <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Mes photos</h2>
   <div class="border rounded-bottom bg-white p-3">
 
-  <a href="/photos/create" class="btn btn-primary">➕ Ajouter une photo</a>
+  <a href="/photos/create" class="btn btn-primary mb-3">➕ Ajouter une photo</a>
 
 {% if photos|length == 0 %}
 
@@ -19,9 +19,9 @@
 
 <div class="gallery">
 {% for photo in photos %}
-  <div class="photo">
-    <a href="/photos/edit/{{ photo.id }}?page={{ page }}" title="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
-      <img src="{{ photo.ThumbUrl }}" alt="{{ photo.name }}{% if photo.groupe %} ({{ photo.Groupe.name }}){% endif %}">
+  <div class="photo mb-3">
+    <a href="/photos/edit/{{ photo.idPhoto }}?page={{ page }}" title="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
+      <img src="{{ photo.ThumbUrl(80) }}" alt="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
     </a>
   </div>
 {% endfor %}
