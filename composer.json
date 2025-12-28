@@ -24,7 +24,7 @@
         "phpunit/phpunit": "12.5.4",
         "phpstan/phpstan": "2.1.33",
         "phpstan/phpstan-strict-rules": "2.0.7",
-        "friendsoftwig/twigcs": "6.6.0"
+        "vincentlanglet/twig-cs-fixer": "3.11.0"
     },
     "scripts": {
         "http": [
@@ -34,7 +34,7 @@
         "stan": "./vendor/bin/phpstan analyse --memory-limit 512M",
         "pcs": "./vendor/bin/phpcs",
         "pcse": "./vendor/bin/phpcs -n",
-        "tcs": "./vendor/bin/twigcs ./www/views ./www/views",
+        "tcsf": "./vendor/bin/twig-cs-fixer lint www/views",
         "unit": "./vendor/bin/phpunit",
         "eslint": "./node_modules/.bin/eslint"
     }
