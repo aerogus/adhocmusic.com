@@ -1,7 +1,7 @@
 /* global document, jQuery */
 
-import WaveSurfer from '/static/library/wavesurfer@7.8.14/wavesurfer.esm.js';
-import Hover from '/static/library/wavesurfer@7.8.14/plugins/hover.esm.js';
+import WaveSurfer from '/static/library/wavesurfer@7.12.1/wavesurfer.esm.js';
+import Hover from '/static/library/wavesurfer@7.12.1/plugins/hover.esm.js';
 
 // Passage d'un temps en secondes à mm:ss:ss
 function formatTimecode(time)
