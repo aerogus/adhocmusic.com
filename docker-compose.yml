@@ -1,5 +1,5 @@
 ##
-# Environnement de développement du site adhocmusic.com
+# Environnement de développement pour le site adhocmusic.com
 ##
 
 services:
@@ -13,6 +13,7 @@ services:
     networks:
       adhoc:
         aliases:
+          # ces noms de domaines doivent pointer sur 127.0.0.1
           - docker.adhocmusic.com
           - www.docker.adhocmusic.com
           - static.docker.adhocmusic.com
@@ -68,7 +69,7 @@ services:
 
   # administration de la base de données
   pma:
-    image: phpmyadmin:5.2.2
+    image: phpmyadmin:5.2.3
     hostname: pma
     container_name: adhoc_pma
     restart: always
