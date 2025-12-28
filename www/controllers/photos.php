@@ -254,7 +254,7 @@ final class Controller
                                 mkdir(Photo::getBasePath(), 0755, true);
                             }
 
-                            // extrait l'EXIF source et applique une éventuelle rotation
+                            // extrait l'EXIF source et applique une éventuelle rotation sur l'image
                             Photo::fixOrientation($uploaded_photo_path);
 
                             // le resize HD peut-être long
