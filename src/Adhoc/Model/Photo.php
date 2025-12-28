@@ -248,11 +248,23 @@ class Photo extends Media
     }
 
     /**
-     * Répare l'orientation d'un jpeg en se basant sur les données EXIF
+     * Pour un JPEG, extrait la donnée EXIF d'orientation et si différent de 1, applique une rotation
+     * à l'image la re-sauvegardant sous le même nom (écrasement + transcodage)
+     *
+     * Valeurs exif possibles :
+     *
+     * 1 => Pas de rotation (0°)
+     * 2 => Pas de rotation (0°) + symétrie horizontale
+     * 3 => Rotation 180°
+     * 4 => Rotation 180° + symétrie horizontale
+     * 5 => Rotation 270° + symétrie horizontale
+     * 6 => Rotation 270°
+     * 7 => Rotation 90° + symétrie horizontale
+     * 8 => Rotation 90°
      *
      * @param string $filename image source + destination
      *
-     * @return bool
+     * @return bool (true s'il y a eu traitement, false sinon)
      */
     public static function fixOrientation(string $filename): bool
     {
@@ -271,7 +283,7 @@ class Photo extends Media
             if (in_array($exif['Orientation'], [7, 8], true)) {
                 $image = imagerotate($image, 90, 0);
             }
-            if (in_array($exif['Orientation'], [2, 5, 7, 4], true)) {
+            if (in_array($exif['Orientation'], [2, 4, 5, 7], true)) {
                 imageflip($image, IMG_FLIP_HORIZONTAL);
             }
             imagejpeg($image, $filename, 100);
