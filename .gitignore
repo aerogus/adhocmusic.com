@@ -28,3 +28,5 @@ node_modules
 
 # cache templates twig
 www/templates_c/*
+
+.twig-cs-fixer.cache
