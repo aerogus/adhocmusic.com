@@ -3,7 +3,7 @@
 /**
  * Point d'entrée
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 
 declare(strict_types=1);
@@ -13,9 +13,7 @@ use Adhoc\Model\Groupe;
 use Adhoc\Utils\Route;
 
 if (file_exists(__DIR__ . '/../../bootstrap.php')) {
-    include __DIR__ . '/../../bootstrap.php'; // ./tmpfs/www -> ./app : "../.."
-} elseif (file_exists(__DIR__ . '/../bootstrap.php')) {
-    include __DIR__ . '/../bootstrap.php'; // ./public    -> ./app : "../"
+    include __DIR__ . '/../../bootstrap.php';
 } else {
     die('bootstrap inrouvable');
 }
