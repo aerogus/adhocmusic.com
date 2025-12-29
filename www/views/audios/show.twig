@@ -25,12 +25,12 @@ let audio_url = '{{ og_audio.url }}';
   <li>Groupe : <a href="{{ audio.groupe.url }}"><strong>{{ audio.groupe.name }}</strong></a></li>
   {% endif %}
   {% if audio.event %}
-  <li>Evénement : <a href="{{ audio.event.url }}"><strong>{{ audio.event.name }}</strong></a> ({{ audio.event.date|date("d/m/Y") }})</li>
+  <li>Evénement : <a href="{{ audio.event.url }}"><strong>{{ audio.event.name }}</strong></a> ({{ audio.event.date|date('d/m/Y') }})</li>
   {% endif %}
   {% if audio.lieu %}
   <li>Lieu : <a href="{{ audio.lieu.url }}"><strong>{{ audio.lieu.name }}</strong></a></li>
   {% endif %}
-  <li>Mise en ligne : le {{ audio.createdAt|date("d/m/Y") }} par <a href="/membres/show/{{ audio.membre.id }}"><strong>{{ audio.membre.pseudo }}</strong></a></li>
+  <li>Mise en ligne : le {{ audio.createdAt|date('d/m/Y') }} par <a href="/membres/show/{{ audio.membre.id }}"><strong>{{ audio.membre.pseudo }}</strong></a></li>
 </ul>
 </div>
 

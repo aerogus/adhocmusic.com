@@ -18,7 +18,7 @@
     <div class="col-md-3 mb-3">
       <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Partager cette vidéo</h2>
       <div class="border rounded-bottom bg-white p-3">
-        {{ include('comments/share.twig', {'title': '', 'url': video.url, 'text': video.name}) }}
+        {{ include('comments/share.twig', {title: '', url: video.url, text: video.name}) }}
       </div>
     </div>
 
@@ -35,7 +35,7 @@
   <div class="col-md-3 mb-3">
     <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Événement</h2>
     <div class="border rounded-bottom bg-white p-3">
-      <a href="{{ event.url }}"><img class="img-fluid" src="{{ event.thumbUrl }}" alt=""><strong>{{ event.name }}</strong></a><br>{{ event.date|format_datetime(pattern='dd LLLL yyyy') }}
+      <a href="{{ event.url }}"><img class="img-fluid" src="{{ event.thumbUrl }}" alt=""><strong>{{ event.name }}</strong></a><br>{{ event.date|format_datetime(pattern: 'dd LLLL yyyy') }}
     </div>
   </div>
   {% endif %}
@@ -50,7 +50,6 @@
   {% endif %}
 
   </div>{# .row #}
-
 
   {% if videos|length > 1 %}
   <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Vidéos du même concert</h2>

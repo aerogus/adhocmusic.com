@@ -79,13 +79,13 @@
       <div class="row mb-3">
         <label class="col-3 form-label" for="created_at">Envoyé le</label>
         <div class="col-9">
-          <span id="created_at">{{ audio.createdAt|date("d/m/Y \\à H\\:M") }} par <a href="{{ membre.url }}">{{ membre.pseudo }}</a></span>
+          <span id="created_at">{{ audio.createdAt|date('d/m/Y \\à H\\:M') }} par <a href="{{ membre.url }}">{{ membre.pseudo }}</a></span>
         </div>
       {% if audio.modifiedAt %}
       <div class="row mb-3">
         <label class="col-3 form-label" for="modified_at">Modifié le</label>
         <div class="col-9">
-          <span id="modified_at">{{ audio.modifiedAt|date("d/m/Y \\à H\\:M") }}</span>
+          <span id="modified_at">{{ audio.modifiedAt|date('d/m/Y \\à H\\:M') }}</span>
         </div>
       </div>
       {% endif %}

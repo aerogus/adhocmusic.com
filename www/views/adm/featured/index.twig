@@ -42,8 +42,8 @@
       <tr>
         <td><a href="/adm/featured/edit/{{ f.idFeatured }}">{{ f.title }}<br>{{ f.description }}</a></td>
         <td><img src="{{ f.image }}" width="108" height="60" alt="" style="display: block" /></td>
-        <td>{{ f.datDeb|date("d/m/Y") }}</td>
-        <td>{{ f.datFin|date("d/m/Y") }}</td>
+        <td>{{ f.datDeb|date('d/m/Y') }}</td>
+        <td>{{ f.datFin|date('d/m/Y') }}</td>
         <td>{% if f.online %}✓{% endif %}</td>
       </tr>
     {% endfor %}

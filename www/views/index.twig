@@ -37,7 +37,7 @@
           <div class="card-body">
             <p class="card-text"><a href="{{ video.groupe.url }}" title="Aller à la page du groupe {{ video.groupe.name }}">{{ video.groupe.name }}</a></p>
             <p class="card-text"><a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
-            <p class="card-text"><a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.date|format_datetime(pattern='dd LLLL yyyy') }}</a>
+            <p class="card-text"><a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.date|format_datetime(pattern: 'dd LLLL yyyy') }}</a>
           </div>
         </div>
       </div>
@@ -54,10 +54,10 @@
       <ul>
       {% for month, month_events in events %}
         <li class="mbs">
-          <strong>{{ month|format_datetime(pattern='LLLL yyyy')|capitalize }}</strong>
+          <strong>{{ month|format_datetime(pattern: 'LLLL yyyy')|capitalize }}</strong>
           <ul>
           {% for event in month_events %}
-            <li><span style="font-weight: bold; color: #cc0000;" title="{{ event.date|format_datetime('full') }}">{{ event.date|format_datetime(pattern='dd') }}</span> <a href="{{ event.url }}" title="{{ event.name }}">{{ event.name|slice(0, 40) }}</a></li>
+            <li><span style="font-weight: bold; color: #cc0000;" title="{{ event.date|format_datetime('full') }}">{{ event.date|format_datetime(pattern: 'dd') }}</span> <a href="{{ event.url }}" title="{{ event.name }}">{{ event.name|slice(0, 40) }}</a></li>
           {% endfor %}
           </ul>
         </li>

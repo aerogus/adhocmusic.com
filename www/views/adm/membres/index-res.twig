@@ -6,9 +6,9 @@
       <td>{{ membre.lastName }}</td>
       <td>{{ membre.firstName }}</td>
       <td>{{ membre.contact.email }}</td>
-      <td>{{ membre.createdAt|date("d/m/y") }}</td>
-      <td>{{ membre.modifiedAt|date("d/m/y") }}</td>
-      <td>{{ membre.visitedAt|date("d/m/y") }}</td>
+      <td>{{ membre.createdAt|date('d/m/Y') }}</td>
+      <td>{{ membre.modifiedAt|date('d/m/Y') }}</td>
+      <td>{{ membre.visitedAt|date('d/m/Y') }}</td>
     </tr>
   </tbody>
   {% endfor %}

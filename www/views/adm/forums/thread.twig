@@ -46,7 +46,7 @@ $(function() {
   <div class="message-meta">
     <img src="{{ message.created_by_avatar }}" alt="">
     <a href="{{ message.created_by_url }}">{{ message.createdBy }}</a><br>
-    {{ message.createdAt|date("a d b Y\\<\\b\\r\\>H\\:M") }}
+    {{ message.createdAt|date('a d b Y\\<\\b\\r\\>H\\:M') }}
   </div>
   <div class="message-body">
     {{ message.parsed_text|nl2br }}

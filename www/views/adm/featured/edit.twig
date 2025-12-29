@@ -28,12 +28,12 @@
       <li>
         <div class="alert alert-danger" id="error_datdeb"{% if not error_datdeb %} style="display:none"{% endif %}>Vous devez saisir une date de début</div>
         <label for="datdeb">Début</label>
-        <input type="text" name="datdeb" id="datdeb" value="{{ data.datdeb|date("Y-m-d") }}">
+        <input type="text" name="datdeb" id="datdeb" value="{{ data.datdeb|date('Y-m-d') }}">
       </li>
       <li>
         <div class="alert alert-danger" id="error_datfin"{% if not error_datfin %} style="display:none"{% endif %}>Vous devez saisir une date de fin</div>
         <label for="datfin">Fin</label>
-        <input type="text" name="datfin" id="datfin" value="{{ data.datFin|date("Y-m-d") }}">
+        <input type="text" name="datfin" id="datfin" value="{{ data.datFin|date('Y-m-d') }}">
       </li>
       <li>
         <label for="online">En ligne</label>

@@ -52,7 +52,7 @@
           <div class="card-body">
             <p class="card-text"><a href="{{ video.url }}" title="Regarder la vidéo {{ video.name }}">{{ video.name }}</a></p>
             {% if video.event %}<p class="card-text"><a href="{{ video.event.url }}" title="Aller à la page de l'événement {{ video.event.name }}">{{ video.event.name }}<br/>
-            {{ video.event.date|format_datetime(pattern='dd LLLL yyyy') }}</a></p>{% endif %}
+            {{ video.event.date|format_datetime(pattern: 'dd LLLL yyyy') }}</a></p>{% endif %}
           </div>
         </div>
       </div>
@@ -87,7 +87,7 @@
       <div class="border rounded-bottom bg-white p-3">
         <ul>
           {% for event in f_events %}
-          <li><a href="{{ event.url }}">{{ event.date|date("d/m/y H:i") }} - {{ event.lieu.name }}</a></li>
+          <li><a href="{{ event.url }}">{{ event.date|date('d/m/y H:i') }} - {{ event.lieu.name }}</a></li>
           {% endfor %}
         </ul>
       </div>
@@ -98,7 +98,7 @@
       <div class="border rounded-bottom bg-white p-3">
         <ul>
           {% for event in p_events %}
-          <li><a href="{{ event.url }}">{{ event.date|date("d/m/y H:i") }} - {{ event.lieu.name }}</a></li>
+          <li><a href="{{ event.url }}">{{ event.date|date('d/m/y H:i') }} - {{ event.lieu.name }}</a></li>
           {% endfor %}
         </ul>
       </div>

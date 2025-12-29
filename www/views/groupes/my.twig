@@ -19,8 +19,8 @@
   {% for groupe in groupes %}
   <tr>
     <td><a href="/groupes/edit/{{ groupe.idGroupe }}" title="{{ groupe.name }}"><img src="{{ groupe.miniPhoto }}" alt="{{ groupe.name }}"><br>{{ groupe.name }}</a></td>
-    <td>{{ groupe.createdAt|date("d/m/Y") }}</td>
-    <td>{{ groupe.modifiedAt|date("d/m/Y") }}</td>
+    <td>{{ groupe.createdAt|date('d/m/Y') }}</td>
+    <td>{{ groupe.modifiedAt|date('d/m/Y') }}</td>
   </tr>
   {% endfor %}
 </table>
