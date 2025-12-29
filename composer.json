@@ -34,7 +34,7 @@
         "stan": "./vendor/bin/phpstan analyse --memory-limit 512M",
         "pcs": "./vendor/bin/phpcs",
         "pcse": "./vendor/bin/phpcs -n",
-        "tcsf": "./vendor/bin/twig-cs-fixer lint www/views",
+        "tcs": "./vendor/bin/twig-cs-fixer lint www/views",
         "unit": "./vendor/bin/phpunit",
         "eslint": "./node_modules/.bin/eslint"
     }
