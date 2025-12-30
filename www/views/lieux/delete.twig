@@ -14,7 +14,7 @@
   <fieldset>
     <ol>
       <li>Nom : {{ lieu.name }}</li>
-      <li>Type : {{ lieu.type }}</li>
+      <li>Type : {{ lieu.type.name }}</li>
       <li>Adresse : {{ lieu.address }}</li>
       <li>Code Postal : {{ lieu.city.cp }}</li>
       <li>Département : {{ lieu.idDepartement }}</li>
@@ -27,7 +27,7 @@
     </ol>
   </fieldset>
   <input id="form-lieu-delete-submit" name="form-lieu-delete-submit" type="submit" class="btn btn-primary" value="Supprimer">
-  <input type="hidden" name="id" value="{{ lieu.id }}">
+  <input type="hidden" name="id" value="{{ lieu.idLieu }}">
 </form>
 
 {% endif %}
