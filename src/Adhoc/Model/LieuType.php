@@ -46,11 +46,34 @@ class LieuType extends ObjectModel
     ];
 
     /**
+     * @return ?int
+     */
+    public function getIdLieuType(): ?int
+    {
+        return $this->id_lieu_type;
+    }
+
+    /**
      * @return ?string
      */
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    /**
+     * @param int $id_lieu_type
+     *
+     * @return static
+     */
+    public function setIdLieuType(int $id_lieu_type): static
+    {
+        if ($this->id_lieu_type !== $id_lieu_type) {
+            $this->id_lieu_type = $id_lieu_type;
+            $this->modified_fields['id_lieu_type'] = true;
+        }
+
+        return $this;
     }
 
     /**

@@ -44,29 +44,29 @@ class Lieu extends ObjectModel
     protected int $id_lieu = 0;
 
     /**
-     * @var int
+     * @var ?int
      */
-    protected int $id_type = 0;
+    protected ?int $id_type;
 
     /**
      * @var ?string
      */
-    protected ?string $name = null;
+    protected ?string $name;
 
     /**
      * @var ?string
      */
-    protected ?string $address = null;
+    protected ?string $address;
 
     /**
      * @var ?int
      */
-    protected ?int $id_city = null;
+    protected ?int $id_city;
 
     /**
      * @var ?string
      */
-    protected ?string $id_departement = null;
+    protected ?string $id_departement;
 
     /**
      * @var string
@@ -176,9 +176,9 @@ class Lieu extends ObjectModel
     /**
      * Retourne l'id type du lieu
      *
-     * @return int
+     * @return ?int
      */
-    public function getIdType(): int
+    public function getIdType(): ?int
     {
         return $this->id_type;
     }
@@ -445,6 +445,21 @@ class Lieu extends ObjectModel
     public function getPhotoUrl(): ?string
     {
         return $this->photo_url;
+    }
+
+    /**
+     * @param int $id_lieu
+     *
+     * @return static
+     */
+    public function setIdLieu(int $id_lieu): static
+    {
+        if ($this->id_lieu !== $id_lieu) {
+            $this->id_lieu = $id_lieu;
+            $this->modified_fields['id_lieu'] = true;
+        }
+
+        return $this;
     }
 
     /**
