@@ -91,7 +91,6 @@ final class Controller
         $sql = "SELECT `id_style` "
              . "FROM `adhoc_groupe_style` "
              . "WHERE `id_groupe` = " . $groupe->getIdGroupe() . " "
-             . "ORDER BY `ordre` ASC "
              . "LIMIT 0, 3";
         $stmt = $db->pdo->query($sql);
         $sty = [0, 0, 0];

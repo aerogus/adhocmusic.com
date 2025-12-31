@@ -12,6 +12,8 @@ use Adhoc\Utils\Tools;
 
 final class Controller
 {
+    const GROUPES_PER_PAGE = 100;
+
     /**
      * @return string
      */
@@ -35,15 +37,15 @@ final class Controller
                 [
                     'order_by' => 'name',
                     'sort' => 'ASC',
-                    'start' => $page * ADM_NB_MEMBERS_PER_PAGE,
-                    'limit' => ADM_NB_MEMBERS_PER_PAGE,
+                    'start' => $page * self::GROUPES_PER_PAGE,
+                    'limit' => self::GROUPES_PER_PAGE,
                 ]
             )
         );
 
         // pagination
         $twig->assign('nb_items', Groupe::count());
-        $twig->assign('nb_items_per_page', ADM_NB_MEMBERS_PER_PAGE);
+        $twig->assign('nb_items_per_page', self::GROUPES_PER_PAGE);
         $twig->assign('page', $page);
 
         return $twig->render('adm/groupes/index.twig');

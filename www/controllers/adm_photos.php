@@ -28,6 +28,7 @@ final class Controller
 
         $twig->assign('breadcrumb', [
             ['title' => '🏠', 'link' => '/'],
+            ['title' => 'Privé', 'link' => '/adm'],
             'Photos',
         ]);
 

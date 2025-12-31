@@ -12,6 +12,8 @@ use Adhoc\Utils\Tools;
 
 final class Controller
 {
+    const MEMBERS_PER_PAGE = 100;
+
     public static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);
@@ -45,8 +47,8 @@ final class Controller
                 'first_name' => $first_name,
                 'order_by'   => $order_by,
                 'sort'       => $sort,
-                'start'      => $page * ADM_NB_MEMBERS_PER_PAGE,
-                'limit'      => ADM_NB_MEMBERS_PER_PAGE,
+                'start'      => $page * self::MEMBERS_PER_PAGE,
+                'limit'      => self::MEMBERS_PER_PAGE,
             ]
         );
 
@@ -86,7 +88,7 @@ final class Controller
 
         // pagination
         $twig->assign('nb_items', $nb_membres);
-        $twig->assign('nb_items_per_page', ADM_NB_MEMBERS_PER_PAGE);
+        $twig->assign('nb_items_per_page', self::MEMBERS_PER_PAGE);
         $twig->assign('link_base_params', 'order_by=' . $order_by . '&sort=' . $sort);
 
         return $twig->render('adm/membres/index.twig');
