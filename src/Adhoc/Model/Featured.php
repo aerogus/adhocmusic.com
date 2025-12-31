@@ -219,6 +219,21 @@ class Featured extends ObjectModel
     }
 
     /**
+     * @param int $id_featured
+     *
+     * @return static
+     */
+    public function setIdFeatured(int $id_featured): static
+    {
+        if ($this->id_featured !== $id_featured) {
+            $this->id_featured = $id_featured;
+            $this->modified_fields['id_featured'] = true;
+        }
+
+        return $this;
+    }
+
+    /**
      * @param string $datdeb date format YYYY-MM-DD HH:II:SS
      *
      * @return static
