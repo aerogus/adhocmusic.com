@@ -3,7 +3,7 @@
 <div class="container">
 
   <div class="row">
-  <div class="col-md-8 mx-auto">
+  <div class="col-md-10 mx-auto">
 
   <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Ajouter à l'affiche</h2>
   <div class="border rounded-bottom bg-white p-3">
@@ -11,7 +11,7 @@
     <form id="form-featured-create" name="form-featured-create" action="/adm/featured/create" method="post" enctype="multipart/form-data">
 
       <div class="row mb-3">
-        <label class="col-3 form-label" for="title">Titre (35 car.)</label>
+        <label class="col-3 form-label" for="title">Titre</label>
         <div class="col-9">
           <div class="alert alert-danger" id="error_title"{% if not error_title %} style="display: none"{% endif %}>Vous devez saisir un titre</div>
           <input id="title" name="title" type="text" maxlength="35" class="form-control" value="{{ data.title }}">
@@ -19,7 +19,7 @@
       </div>
 
       <div class="row mb-3">
-        <label class="col-3 form-label" for="description">Description (85 car.)</label>
+        <label class="col-3 form-label" for="description">Description</label>
         <div class="col-9">
           <div class="alert alert-danger" id="error_description"{% if not error_description %} style="display: none"{% endif %}>Vous devez saisir une description</div>
           <input id="description" name="description" type="text" maxlength="85" class="form-control" value="{{ data.description }}">

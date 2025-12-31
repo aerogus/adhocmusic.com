@@ -1,41 +1,77 @@
 {{ include('common/header.twig') }}
 
 <div class="container">
-  <h1>Suppression à l'affiche</h1>
-  <form id="form-featured-delete" name="form-featured-delete" action="/adm/featured/delete" method="post">
-    <ul>
-      <li>
-        <label for="title">Titre</label>
-        <strong>{{ featured.title }}</strong>
-      </li>
-      <li>
-        <label for="description">Description</label>
-        <strong>{{ featured.description }}</strong>
-      </li>
-      <li>
-        <label for="url">Lien</label>
-        <strong>{{ featured.url }}</strong>
-      </li>
-      <li>
-        <label for="image">Image</label>
-        <img src="{{ featured.image }}" alt="" />
-      </li>
-      <li>
-        <label for="datdeb">Début</label>
-        <strong>{{ featured.datDeb }}</strong>
-      </li>
-      <li>
-        <label for="datfin">Fin</label>
-        <strong>{{ featured.datFin }}</strong>
-      </li>
-      <li>
-        <label for="online">En ligne</label>
-        <strong>{% if featured.online %}✓{% endif %}</strong>
-      </li>
-    </ol>
-    <input id="form-featured-delete-submit" name="form-featured-delete-submit" type="submit" value="Confirmer la suppression">
-    <input type="hidden" name="id" value="{{ featured.id }}">
-  </form>
-</div>
+
+  <div class="row">
+  <div class="col-md-10 mx-auto">
+
+  <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Suppression à l'affiche</h2>
+  <div class="border rounded-bottom bg-white p-3">
+
+    <form id="form-featured-delete" name="form-featured-delete" action="/adm/featured/delete" method="post">
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="title">Titre</label>
+        <div class="col-9">
+          <input readonly disabled id="title" name="title" type="text" maxlength="35" class="form-control" value="{{ featured.title }}">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="description">Description</label>
+        <div class="col-9">
+          <input readonly disabled id="description" name="description" type="text" maxlength="85" class="form-control" value="{{ featured.description }}">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="url">Lien</label>
+        <div class="col-9">
+          <input readonly disabled id="url" name="url" type="text" class="form-control" value="{{ featured.url }}">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="image">Image</label>
+        <div class="col-9">
+        </div>
+      </div>
+      <img src="{{ featured.image }}" alt="" />
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="datdeb">Début</label>
+        <div class="col-9">
+          <input readonly disabled id="datdeb" name="datdeb" type="text" class="form-control" value="{{ featured.datdeb|date('Y-m-d') }}">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="datfin">Fin</label>
+        <div class="col-9">
+          <input readonly disabled id="datfin" name="datfin" type="text" class="form-control" value="{{ featured.datfin|date('Y-m-d') }}">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-check-label" for="online">En ligne</label>
+        <div class="col-9">
+          <input readonly disabled class="form-check-input" type="checkbox" name="online" id="online"{% if featured.online %} checked="checked"{% endif %}>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="offset-3">
+          <input id="form-featured-delete-submit" name="form-featured-delete-submit" class="btn btn-primary" type="submit" value="❌ Confirmer la suppression">
+          <input type="hidden" name="id" value="{{ featured.idFeatured }}">
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>{# .col-md-8 #}
+</div>{# .row #}
+</div>{# .container #}
 
 {{ include('common/footer.twig') }}
