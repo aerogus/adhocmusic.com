@@ -1,48 +1,84 @@
 {{ include('common/header.twig') }}
 
 <div class="container">
-  <h1>Edition à l'affiche</h1>
-  <form id="form-featured-edit" name="form-featured-edit" action="/adm/featured/edit" method="post" enctype="multipart/form-data">
-    <ul>
-      <li>
-        <div class="alert alert-danger" id="error_title"{% if not error_title %} style="display:none"{% endif %}>Vous devez saisir un titre</div>
-        <label for="title">Titre</label>
-        <input style="width:400px" maxlength="35" type="text" name="title" id="title" value="{{ data.title }}">
-      </li>
-      <li>
-        <div class="alert alert-danger" id="error_description"{% if not error_description %} style="display:none"{% endif %}>Vous devez saisir une description</div>
-        <label for="description">Description</label>
-        <input style="width:680px" maxlength="85" type="text" name="description" id="description" value="{{ data.description }}">
-      </li>
-      <li>
-        <div class="alert alert-danger" id="error_url"{% if not error_url %} style="display:none"{% endif %}>Vous devez saisir un lien</div>
-        <label for="url">Lien</label>
-        <input style="width:680px" type="text" name="url" id="url" value="{{ data.url }}">
-      </li>
-      <li>
-        <div class="alert alert-danger" id="error_image"{% if not error_image %} style="display:none"{% endif %}>Vous devez choisir une image</div>
-        <label for="image">Image (.jpg|.png|.gif 1000x375)</label>
-        <input type="file" name="image" id="image">
-        <img src="{{ data.image }}" alt="">
-      </li>
-      <li>
-        <div class="alert alert-danger" id="error_datdeb"{% if not error_datdeb %} style="display:none"{% endif %}>Vous devez saisir une date de début</div>
-        <label for="datdeb">Début</label>
-        <input type="text" name="datdeb" id="datdeb" value="{{ data.datdeb|date('Y-m-d') }}">
-      </li>
-      <li>
-        <div class="alert alert-danger" id="error_datfin"{% if not error_datfin %} style="display:none"{% endif %}>Vous devez saisir une date de fin</div>
-        <label for="datfin">Fin</label>
-        <input type="text" name="datfin" id="datfin" value="{{ data.datFin|date('Y-m-d') }}">
-      </li>
-      <li>
-        <label for="online">En ligne</label>
-        <input class="switch" type="checkbox" name="online" id="online"{% if data.online %} checked="checked"{% endif %}>
-      </li>
-    </ul>
-    <input id="form-featured-edit-submit" name="form-featured-edit-submit" type="submit" class="btn btn-primary" value="Modifier">
-    <input type="hidden" name="id" value="{{ data.id }}">
-  </form>
-</div>
+
+  <div class="row">
+  <div class="col-md-8 mx-auto">
+
+  <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Édition à l'affiche</h2>
+  <div class="border rounded-bottom bg-white p-3">
+
+    <form id="form-featured-edit" name="form-featured-edit" action="/adm/featured/edit" method="post" enctype="multipart/form-data">
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="title">Titre (35 car.)</label>
+        <div class="col-9">
+          <div class="alert alert-danger" id="error_title"{% if not error_title %} style="display: none"{% endif %}>Vous devez saisir un titre</div>
+          <input id="title" name="title" type="text" maxlength="35" class="form-control" value="{{ data.title }}">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="description">Description (85 car.)</label>
+        <div class="col-9">
+          <div class="alert alert-danger" id="error_description"{% if not error_description %} style="display: none"{% endif %}>Vous devez saisir une description</div>
+          <input id="description" name="description" type="text" maxlength="85" class="form-control" value="{{ data.description }}">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="url">Lien</label>
+        <div class="col-9">
+          <div class="alert alert-danger" id="error_url"{% if not error_url %} style="display: none"{% endif %}>Vous devez saisir un lien</div>
+          <input id="url" name="url" type="text" class="form-control" value="{{ data.url }}">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="image">Image (.jpg 1000x375)</label>
+        <div class="col-9">
+          <div class="alert alert-danger" id="error_image"{% if not error_image %} style="display: none"{% endif %}>Vous devez choisir une image</div>
+          <input id="image" name="image" type="file" class="form-control" value="{{ data.image }}">
+          <img src="{{ data.image }}" alt="">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="datdeb">Début</label>
+        <div class="col-9">
+          <div class="alert alert-danger" id="error_datdeb"{% if not error_datdeb %} style="display: none"{% endif %}>Vous devez saisir une date de début</div>
+          <input id="datdeb" name="datdeb" type="text" class="form-control" value="{{ data.datdeb|date('Y-m-d') }}">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-label" for="datfin">Fin</label>
+        <div class="col-9">
+          <div class="alert alert-danger" id="error_datfin"{% if not error_datfin %} style="display: none"{% endif %}>Vous devez saisir une date de fin</div>
+          <input id="datfin" name="datfin" type="text" class="form-control" value="{{ data.datfin|date('Y-m-d') }}">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-3 form-check-label" for="online">En ligne</label>
+        <div class="col-9">
+          <input class="form-check-input" type="checkbox" name="online" id="online"{% if data.online %} checked="checked"{% endif %}>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="offset-3">
+          <input id="form-featured-edit-submit" name="form-featured-edit-submit" class="btn btn-primary" type="submit" value="💾 Enregistrer">
+          <input type="hidden" name="id" value="{{ data.id }}">
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>{# .col-md-8 #}
+</div>{# .row #}
+</div>{# .container #}
 
 {{ include('common/footer.twig') }}

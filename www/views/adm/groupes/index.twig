@@ -3,32 +3,28 @@
 <div class="container">
   <h1>Groupes</h1>
   <div>
-
-{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
-
-<table class="table table-striped" id="tab-groupes">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Nom</th>
-      <th>Style</th>
-      <th>Créa</th>
-      <th>Modif</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for groupe in groupes %}
-    <tr>
-      <td>{{ groupe.id }}</td>
-      <td><a href="/adm/groupes/{{ groupe.id }}">{{ groupe.name }}</a></td>
-      <td>{{ groupe.style }}</td>
-      <td>{{ groupe.createdAt }}</td>
-      <td>{{ groupe.modifiedAt }}</td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-
+    <table class="table table-striped" id="tab-groupes">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nom</th>
+          <th>Style</th>
+          <th>Créa</th>
+          <th>Modif</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for groupe in groupes %}
+        <tr>
+          <td>{{ groupe.idGroupe }}</td>
+          <td><a href="/adm/groupes/{{ groupe.id }}">{{ groupe.name }}</a></td>
+          <td>{{ groupe.style }}</td>
+          <td>{{ groupe.createdAt }}</td>
+          <td>{{ groupe.modifiedAt }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 

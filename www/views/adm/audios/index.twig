@@ -2,35 +2,33 @@
 
 <div class="box">
   <h1>Audios</h1>
-  <div class="reset">
-
-{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
-
-<table class="table table-striped" id="tab-groupes">
-  <thead>
-    <tr>
-      <th>Audio</th>
-      <th>Groupe</th>
-      <th>Évènement</th>
-      <th>Lieu</th>
-      <th>Créa</th>
-      <th>Modif</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for audio in audios %}
-    <tr>
-      <td>{{ audio.id }}<br/>{{ audio.name }}</td>
-      <td>{% if audio.idGroupe %}<a href="{{ audio.groupe.url }}">{{ audio.groupe.name }}</a>{% endif %}</td>
-      <td>{% if audio.idEvent %}<a href="{{ audio.event.url }}">{{ audio.event.name }}</a><br/>{{ audio.event.date|date('d/m/Y') }}{% endif %}</td>
-      <td>{% if audio.idLieu %}<a href="{{ audio.lieu.url }}">{{ audio.lieu.name }}</a><br>{{ audio.lieu.idDepartement }} {{ audio.lieu.city.name }}{% endif %}</td>
-      <td>{{ audio.createdAt|date('d/m/Y') }}</td>
-      <td>{{ audio.modifiedAt|date('d/m/Y') }}</td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-
+  <div>
+    <table class="table table-striped" id="tab-groupes">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nom</th>
+          <th>Groupe</th>
+          <th>Évènement</th>
+          <th>Lieu</th>
+          <th>Créa</th>
+          <th>Modif</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for audio in audios %}
+        <tr>
+          <td>{{ audio.idAudio }}</td>
+          <td>{{ audio.name }}</td>
+          <td>{% if audio.idGroupe %}<a href="{{ audio.groupe.url }}">{{ audio.groupe.name }}</a>{% endif %}</td>
+          <td>{% if audio.idEvent %}<a href="{{ audio.event.url }}">{{ audio.event.name }}</a><br/>{{ audio.event.date|date('d/m/Y') }}{% endif %}</td>
+          <td>{% if audio.idLieu %}<a href="{{ audio.lieu.url }}">{{ audio.lieu.name }}</a><br>{{ audio.lieu.idDepartement }} {{ audio.lieu.city.name }}{% endif %}</td>
+          <td>{{ audio.createdAt|date('d/m/Y') }}</td>
+          <td>{{ audio.modifiedAt|date('d/m/Y') }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 
