@@ -39,9 +39,12 @@
         <div class="col-9">
           <div class="alert alert-danger" id="error_image"{% if not error_image %} style="display: none"{% endif %}>Vous devez choisir une image</div>
           <input id="image" name="image" type="file" class="form-control" value="{{ data.image }}">
-          <img src="{{ data.image }}" alt="">
         </div>
       </div>
+
+      {% if data.image %}
+      <img src="{{ data.image }}" alt="" style="display:block;margin:auto">
+      {% endif %}
 
       <div class="row mb-3">
         <label class="col-3 form-label" for="datdeb">Début</label>
@@ -70,6 +73,7 @@
         <div class="offset-3">
           <input id="form-featured-edit-submit" name="form-featured-edit-submit" class="btn btn-primary" type="submit" value="💾 Enregistrer">
           <input type="hidden" name="id" value="{{ data.id }}">
+          <a class="btn btn-secondary" href="/adm/featured/delete/{{ data.id }}">❌ Supprimer</a>
         </div>
       </div>
 
