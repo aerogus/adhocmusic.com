@@ -46,27 +46,27 @@ class Lieu extends ObjectModel
     /**
      * @var ?int
      */
-    protected ?int $id_type;
+    protected ?int $id_type = null;
 
     /**
      * @var ?string
      */
-    protected ?string $name;
+    protected ?string $name = null;
 
     /**
      * @var ?string
      */
-    protected ?string $address;
+    protected ?string $address = null;
 
     /**
      * @var ?int
      */
-    protected ?int $id_city;
+    protected ?int $id_city = null;
 
     /**
      * @var ?string
      */
-    protected ?string $id_departement;
+    protected ?string $id_departement = null;
 
     /**
      * @var string
@@ -785,6 +785,7 @@ class Lieu extends ObjectModel
      *                                'id_region' => string,
      *                                'id_departement' => string,
      *                                'id_city' => int,
+     *                                'id_contact' => int,
      *                                'order_by' => string,
      *                                'sort' => string,
      *                                'start' => int,
@@ -848,6 +849,10 @@ class Lieu extends ObjectModel
 
         if (isset($params['id_city'])) {
             $sql .= "AND `id_city` = '" . (int) $params['id_city'] . "' ";
+        }
+
+        if (isset($params['id_contact'])) {
+            $sql .= "AND `id_contact` = " . (int) $params['id_contact'] . " ";
         }
 
         if ((isset($params['order_by']) && (in_array($params['order_by'], array_keys(static::$all_fields), true)))) {
@@ -1210,5 +1215,21 @@ EOT;
              . "LIMIT 0, " . $limit;
 
         return $db->pdo->query($sql)->fetchAll();
+    }
+
+    /**
+     * Retourne le nombre de mes lieux
+     *
+     * @return int
+     */
+    public static function countMy(): int
+    {
+        if (!isset($_SESSION['membre'])) {
+            throw new \Exception('non identifié');
+        }
+
+        return count(static::find([
+            'id_contact' => $_SESSION['membre']->getIdContact(),
+        ]));
     }
 }

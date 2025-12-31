@@ -413,6 +413,7 @@ final class Controller
         $twig->assign('nb_photos', Photo::countMy());
         $twig->assign('nb_videos', Video::countMy());
         $twig->assign('nb_audios', Audio::countMy());
+        $twig->assign('nb_lieux', Lieu::countMy());
 
         return $twig->render('membres/tableau-de-bord.twig');
     }

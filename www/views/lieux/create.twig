@@ -14,7 +14,7 @@
         <label class="col-3 form-label" for="name">Nom (*)</label>
         <div class="col-9">
           <div class="alert alert-danger" id="error_name"{% if not error_name %} style="display: none"{% endif %}>Vous devez saisir le nom du lieu</div>
-          <input id="name" name="name" type="text" class="form-control" value="">
+          <input id="name" name="name" type="text" class="form-control" value="" required>
         </div>
       </div>
 
@@ -22,7 +22,7 @@
         <label class="col-3 form-label" for="id_type">Type (*)</label>
         <div class="col-9">
           <div class="alert alert-danger" id="error_id_type"{% if not error_id_type %} style="display: none"{% endif %}>Vous devez préciser le type de lieu</div>
-          <select id="id_type" name="id_type" class="form-control">
+          <select id="id_type" name="id_type" class="form-control" required>
             <option value="0">--------</option>
             {% for lieu_type in lieu_types %}
             <option value="{{ lieu_type.idLieuType }}">{{ lieu_type.name }}</option>

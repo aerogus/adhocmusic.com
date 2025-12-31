@@ -168,6 +168,13 @@
   <div class="col-md-4 mb-3">
     <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Mes lieux</h2>
     <div class="border rounded-bottom bg-white p-3">
+      {% if nb_lieux > 0 %}
+      <p>Vous avez {{ nb_lieux }} lieux</p>
+      <p><a class="btn btn-primary" href="/lieux/my">📍 Tous mes lieux</a></p>
+      {% else %}
+      <p>Aucun lieu</p>
+      {% endif %}
+
       <a class="btn btn-primary" href="/lieux/create">➕ Ajouter un lieu</a>
     </div>
   </div>

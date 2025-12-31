@@ -2,41 +2,33 @@
 
 <div class="container">
   <h1>Mes lieux</h1>
-<div>
-
-{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
-
-<table>
-  <thead>
-    <tr>
-      <th>Pays</th>
-      <th>Région</th>
-      <th>Département</th>
-      <th>Id Ville (cp - nom)</th>
-      <th>Old CP</th>
-      <th>Old City</th>
-      <th>Nom</th>
-      <th>E</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for lieu in lieux %}
-    <tr>
-      <td><a href="#" title="{{ lieu.country }}">{{ lieu.id_country }}</a></td>
-      <td><a href="#" title="{{ lieu.region }}">{{ lieu.id_region }}</a></td>
-      <td><a href="#" title="{{ lieu.departement }}">{{ lieu.id_departement }}</a></td>
-      <td>{{ lieu.id_city }} ({{ lieu.cp2 }} - {{ lieu.city2 }})</td>
-      <td>{{ lieu.cp }}</td>
-      <td>{{ lieu.city }}</td>
-      <td><a href="/lieux/{{ lieu.id }}">{{ lieu.name }}</a></td>
-      <td>{{ lieu.nb_events }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-{pagination nb_items=$nb_items nb_items_per_page=$nb_items_per_page page=$page}
-
+  <div>
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Nom</th>
+          <th>Adresse</th>
+          <th>CP</th>
+          <th>Ville</th>
+          <th>Département</th>
+          <th>Région</th>
+          <th>Pays</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for lieu in lieux %}
+        <tr>
+          <td><a href="/lieux/{{ lieu.idLieu }}">{{ lieu.name }}</a></td>
+          <td>{{ lieu.address }}</td>
+          <td>{{ lieu.city.cp }}</td>
+          <td>{{ lieu.city.name }}</td>
+          <td>{{ lieu.idDepartement }}</td>
+          <td>{{ lieu.idRegion }}</td>
+          <td>{{ lieu.idCountry }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 
