@@ -1,6 +1,12 @@
 #!/usr/bin/env php
 <?php
 
+/**
+ * Vide et regénère le cache de l'ensemble des miniature des photos + vidéos + events
+ *
+ * @author Guillaume Seznec <guillaume@seznec.fr>
+ */
+
 declare(strict_types=1);
 
 use Adhoc\Model\Event;
@@ -9,10 +15,6 @@ use Adhoc\Model\Video;
 use Adhoc\Utils\Conf;
 
 require_once __DIR__ . '/../bootstrap.php';
-
-/**
- * Vide et regénère le cache de l'ensemble des miniature des photos + vidéos + events
- */
 
 $conf = Conf::getInstance();
 

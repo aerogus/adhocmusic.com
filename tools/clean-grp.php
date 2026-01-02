@@ -10,7 +10,7 @@
  * + liaison compte/groupe
  * + liaison groupe/evenement
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 
 declare(strict_types=1);

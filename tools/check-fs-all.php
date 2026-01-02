@@ -6,7 +6,7 @@
  *
  * Vérifie si un content du file system pas obsolète (ressource bdd effacée)
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 
 declare(strict_types=1);
