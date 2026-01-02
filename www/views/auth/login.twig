@@ -15,15 +15,15 @@
   <div class="border rounded-bottom bg-white p-3">
     <form id="form-login" name="form-login" method="post" action="/auth/login">
       <div class="row mb-3">
-        <label class="form-label col-3" for="login-pseudo">Pseudo</label>
-        <div class="col-9">
+        <label class="form-label col-4" for="login-pseudo">Pseudo</label>
+        <div class="col-8">
           <div class="alert alert-danger" id="error_login-pseudo"{% if not error_login_pseudo %} style="display: none"{% endif %}>Pseudo vide !</div>
           <input type="text" id="login-pseudo" name="pseudo" placeholder="Pseudo" class="form-control">
         </div>
       </div>
       <div class="row mb-3">
-        <label class="form-label col-3" for="login-password">Mot de passe</label>
-        <div class="col-9">
+        <label class="form-label col-4" for="login-password">Mot de passe</label>
+        <div class="col-8">
           <div class="alert alert-danger" id="error_login-password"{% if not error_login_password %} style="display: none"{% endif %}>Mot de passe vide !</div>
           <input type="password" id="login-password" name="password" placeholder="Mot de passe" class="form-control">
         </div>

@@ -17,18 +17,22 @@
 {% else %}
 
   <form id="form-member-create" name="form-member-create" method="post" action="/membres/create">
-    <div class="mb-3">
-      <label for="pseudo" class="form-label">Pseudo</label>
-      <div id="error_pseudo_unavailable" class="alert alert-danger"{% if not error_pseudo_unavailable %} style="display: none"{% endif %}>Ce pseudo est déjà pris, veuillez en choisir un autre</div>
-      <div class="alert alert-danger" id="error_pseudo"{% if not error_pseudo %} style="display: none"{% endif %}>Vous devez saisir un pseudo entre 1 à 50 caractères</div>
-      <input id="pseudo" class="form-control" name="pseudo" type="text" maxlength="50" value="{{ data.pseudo }}" placeholder="Pseudo" required>
+    <div class="row mb-3">
+      <label class="form-label col-4" for="pseudo">Pseudo</label>
+      <div class="col-8">
+        <div id="error_pseudo_unavailable" class="alert alert-danger"{% if not error_pseudo_unavailable %} style="display: none"{% endif %}>Ce pseudo est déjà pris, veuillez en choisir un autre</div>
+        <div class="alert alert-danger" id="error_pseudo"{% if not error_pseudo %} style="display: none"{% endif %}>Vous devez saisir un pseudo entre 1 à 50 caractères</div>
+        <input id="pseudo" class="form-control" name="pseudo" type="text" maxlength="50" value="{{ data.pseudo }}" placeholder="Pseudo" required>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">E-mail</label>
-      <div id="error_email"{% if not error_email %} style="display: none"{% endif %} class="alert alert-danger">Vous devez saisir votre e-mail</div>
-      <div id="error_invalid_email" class="alert alert-danger"{% if not error_invalid_email %} style="display: none"{% endif %}>Cet e-mail semble invalide</div>
-      <div id="error_already_member" class="alert alert-danger"{% if not error_already_member %} style="display: none"{% endif %}>Inscription impossible car un compte avec cet e-mail existe déjà. Vous avez <a href="/auth/lost-password">oublié votre mot de passe ?</a></div>
-      <input id="email" class="form-control" name="email" type="email" maxlength="50" value="{{ data.email }}" placeholder="E-mail" required>
+    <div class="row mb-3">
+      <label class="form-label col-4" for="email">E-mail</label>
+      <div class="col-8">
+        <div id="error_email"{% if not error_email %} style="display: none"{% endif %} class="alert alert-danger">Vous devez saisir votre e-mail</div>
+        <div id="error_invalid_email" class="alert alert-danger"{% if not error_invalid_email %} style="display: none"{% endif %}>Cet e-mail semble invalide</div>
+        <div id="error_already_member" class="alert alert-danger"{% if not error_already_member %} style="display: none"{% endif %}>Inscription impossible car un compte avec cet e-mail existe déjà. Vous avez <a href="/auth/lost-password">oublié votre mot de passe ?</a></div>
+        <input id="email" class="form-control" name="email" type="email" maxlength="50" value="{{ data.email }}" placeholder="E-mail" required>
+      </div>
     </div>
     <div class="mb-3 form-check">
       <input id="mailing" class="form-check-input" name="mailing" type="checkbox"{% if data.mailing %} checked="checked"{% endif %}>
@@ -37,7 +41,7 @@
     <div>
       <input type="hidden" name="csrf" value="{{ data.csrf }}">
       <input type="hidden" name="text" value="{{ data.text }}">
-      <input id="form-membrer-create-submit" name="form-member-create-submit" class="btn btn-primary" type="submit" value="Je crée mon compte">
+      <input id="form-membrer-create-submit" name="form-member-create-submit" class="btn btn-primary" type="submit" value="🚀 Je crée mon compte">
     </div>
   </form>
 

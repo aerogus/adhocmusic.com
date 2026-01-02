@@ -75,7 +75,7 @@
     <div class="col-md-6">{# colonne 2 #}
 
       <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Présentation</h2>
-      <div class="border rounded-bottom bg-white p-3">
+      <div class="border rounded-bottom bg-white p-3 mb-3">
         {% if groupe.photo %}
         <img src="{{ groupe.photo }}" alt="{{ groupe.name }}" title="{{ groupe.name }}" class="d-flex mx-auto img-fluid">
         {% endif %}
@@ -84,7 +84,7 @@
 
       {% if f_events|length > 0 %}
       <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Évènements à venir</h2>
-      <div class="border rounded-bottom bg-white p-3">
+      <div class="border rounded-bottom bg-white p-3 mb-3">
         <ul>
           {% for event in f_events %}
           <li><a href="{{ event.url }}">{{ event.date|date('d/m/y H:i') }} - {{ event.lieu.name }}</a></li>
@@ -95,7 +95,7 @@
 
       {% if p_events|length > 0 %}
       <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Évènements passés</h2>
-      <div class="border rounded-bottom bg-white p-3">
+      <div class="border rounded-bottom bg-white p-3 mb-3">
         <ul>
           {% for event in p_events %}
           <li><a href="{{ event.url }}">{{ event.date|date('d/m/y H:i') }} - {{ event.lieu.name }}</a></li>
@@ -104,13 +104,13 @@
       </div>
       {% endif %}
 
-      {% if photos %}
-      <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Photos</h2>
-      <div class="border rounded-bottom bg-white gallery">
+      {% if photos|length > 0 %}
+      <h2 class="px-2 py-1 mb-3 bg-dark text-white rounded-top">Photos</h2>
+      <div class="border rounded-bottom bg-white gallery mb-3">
         {% for photo in photos %}
         <div class="photo">
           <a href="{{ photo.thumbUrl }}" data-at-1000="{{ photo.thumbUrl }}" title="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %} 📷 {{ photo.credits }}">
-            <img data-id-photo="{{ photo.id }}" src="{{ photo.thumbUrl }}" alt="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
+            <img data-id-photo="{{ photo.idPhoto }}" src="{{ photo.thumbUrl(80) }}" alt="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
           </a>
         </div>
         {% endfor %}
