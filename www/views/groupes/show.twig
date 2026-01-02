@@ -106,7 +106,7 @@
 
       {% if photos|length > 0 %}
       <h2 class="px-2 py-1 mb-3 bg-dark text-white rounded-top">Photos</h2>
-      <div class="border rounded-bottom bg-white gallery mb-3">
+      <div class="gallery mb-3">
         {% for photo in photos %}
         <div class="photo">
           <a href="{{ photo.thumbUrl }}" data-at-1000="{{ photo.thumbUrl }}" title="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %} 📷 {{ photo.credits }}">
