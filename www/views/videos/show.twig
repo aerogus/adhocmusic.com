@@ -52,19 +52,21 @@
   </div>{# .row #}
 
   {% if videos|length > 0 %}
-  <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">Vidéos du même concert</h2>
-  <div class="border rounded-bottom bg-white p-3">
-    <div class="reset grid-3-small-2 has-gutter">
-      {% for _video in videos %}
-        <div class="video">
-          <div class="thumb" style="background-image: url({{ _video.thumbUrl(320) }})">
-            <a class="playbtn" href="{{ _video.url }}" title="Regarder la vidéo {{ _video.name }}">▶</a>
-          </div>
-          <p class="title"><a href="{{ _video.url }}" title="Regarder la vidéo {{ _video.name }}">{{ _video.name }}</a></p>
-          <p class="subtitle">{% if _video.groupe %}<a href="{{ _video.groupe.url }}" title="Aller à la page du groupe {{ _video.groupe.name }}">{{ _video.groupe.name }}</a>{% endif %}</p>
-        </div>
-      {% endfor %}
+  <h2 class="px-2 py-1 mb-3 bg-dark text-white rounded-top">Vidéos du même événement</h2>
+  <div class="row row-cols-md-4 g-3">
+  {% for _video in videos %}
+  <div class="col">
+    <div class="card w-100 shadow-sm">
+      <a href="{{ _video.url }}" title="Regarder la vidéo {{ _video.name }}"><img src="{{ _video.thumbUrl }}" class="img-fluid" alt=""></a>
+      <div class="card-body">
+        <p class="card-text"><a href="{{ _video.url }}" title="Regarder la vidéo {{ _video.name }}">{{ _video.name }}</a></p>
+        {% if _video.groupe %}
+        <p class="card-text"><a href="{{ _video.groupe.url }}" title="Aller à la page du groupe {{ _video.groupe.name }}">{{ _video.groupe.name }}</a>{% endif %}</p>
+        {% endif %}
+      </div>
     </div>
+  </div>
+  {% endfor %}
   </div>
   {% endif %}
 
