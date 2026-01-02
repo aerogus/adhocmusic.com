@@ -63,7 +63,7 @@
     <label class="form-label col-3" for="ids_groupe[0]">Groupe(s)</label>
     <div class="col-9">
       {% if groupe %}
-        <input type="hidden" name="id_groupe" value="{{ groupe.id }}">
+        <input type="hidden" name="id_groupe" value="{{ groupe.idGroupe }}">
         <span>{{ groupe.name }}</span>
       {% else %}
         <div class="alert alert-danger" id="error_id_groupe"{% if not error_id_groupe %} style="display: none"{% endif %}>Vous devez lier cette vidéo à soit un groupe, soit un lieu, soit un événement</div>
@@ -81,7 +81,7 @@
     <label class="form-label col-3" for="id_lieu">Lieu</label>
     <div class="col-9">
       {% if lieu %}
-      <input type="hidden" name="id_lieu" value="{{ lieu.id }}">
+      <input type="hidden" name="id_lieu" value="{{ lieu.idLieu }}">
       <span>{{ lieu.name }}</span>
       {% else %}
       <select id="id_lieu" name="id_lieu" class="form-control">
@@ -104,7 +104,7 @@
     <label class="col-3 form-label" for="id_event">Evénement</label>
     <div class="col-9">
       {% if event %}
-      <input type="hidden" name="id_event" value="{{ event.id }}">
+      <input type="hidden" name="id_event" value="{{ event.idEvent }}">
       <span >{{ event.date }} - {{ event.name }}</span>
       {% else %}
       <select id="id_event" name="id_event" class="form-control">
@@ -124,14 +124,14 @@
   <div class="row mb-3">
     <div class="offset-3">
       <input id="form-video-edit-submit" name="form-video-edit-submit" class="btn btn-primary" type="submit" value="💾 Enregistrer">
-      <input type="hidden" name="id" value="{{ video.id }}">
+      <input type="hidden" name="id" value="{{ video.idVideo }}">
       <input type="hidden" name="video_id_event" id="video_id_event" value="{{ video.idEvent }}">
     </div>
   </div>
 
   <div class="row mb-3">
     <div class="offset-3">
-      <a href="/videos/delete/{{ video.id }}" class="btn btn-primary">❌ Supprimer</a>
+      <a href="/videos/delete/{{ video.idVideo }}" class="btn btn-primary">❌ Supprimer</a>
     </div>
   </div>
 

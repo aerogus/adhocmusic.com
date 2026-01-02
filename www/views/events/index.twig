@@ -23,7 +23,7 @@
 <div class="event grid-3-small-1">
   <div class="event_header col-1">
     <div class="event_date">{{ event.date|format_datetime(pattern: 'dd LLLL yyyy') }}</div>
-    <div class="event_lieu"><a href="/lieux/{{ event.lieu.id }}" title="{{ event.lieu.name }}"><strong>{{ event.lieu.name }}</strong></a><br>{{ event.lieu.idDepartement }} {{ event.lieu.city.name }}</div>
+    <div class="event_lieu"><a href="/lieux/{{ event.lieu.idLieu }}" title="{{ event.lieu.name }}"><strong>{{ event.lieu.name }}</strong></a><br>{{ event.lieu.idDepartement }} {{ event.lieu.city.name }}</div>
   </div>
   <div class="event_content col-2">
     <span class="event_title">
@@ -40,7 +40,7 @@
       {% endfor %}
       </ul>
       <p class="event_price">{{ event.price }}</p>
-      <a style="margin: 10px 0; padding: 5px; border: 1px solid #999" href="/events/ical/{{ event.id }}.ics"><img src="/img/icones/cal.svg" width="16" height="16">Ajout au calendrier</a>
+      <a style="margin: 10px 0; padding: 5px; border: 1px solid #999" href="/events/ical/{{ event.idEvent }}.ics"><img src="/img/icones/cal.svg" width="16" height="16">Ajout au calendrier</a>
       <br class="clear" style="clear:both">
     </div>
   </div>

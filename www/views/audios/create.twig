@@ -29,7 +29,7 @@
         <label class="col-3 form-label" for="groupe">Groupe</label>
         <div class="col-9">
           {% if groupe %}
-            <input type="hidden" name="id_groupe" value="{{ groupe.id }}">
+            <input type="hidden" name="id_groupe" value="{{ groupe.idGroupe }}">
             <span>{{ groupe.name }}</span>
           {% else %}
             <div class="alert alert-danger" id="error_id_groupe"{% if not error_id_groupe %} style="display: none"{% endif %}>Vous devez lier cette musique à un groupe, un lieu ou un événement</div>
@@ -47,7 +47,7 @@
         <label class="col-3 form-label" for="id_lieu">Lieu</label>
         <div class="col-9">
           {% if lieu %}
-            <input type="hidden" name="id_lieu" value="{{ lieu.id }}">
+            <input type="hidden" name="id_lieu" value="{{ lieu.idLieu }}">
             <span>{{ lieu.name }}</span>
           {% else %}
             <select id="id_lieu" name="id_lieu" class="form-control">
@@ -70,7 +70,7 @@
         <label class="col-3 form-label" for="id_event">Évènement</label>
         <div class="col-9">
           {% if event %}
-            <input type="hidden" name="id_event" value="{{ event.id }}">
+            <input type="hidden" name="id_event" value="{{ event.idEvent }}">
             <span style="float: right;">{{ event.date }} - {{ event.name }}</span>
           {% else %}
             <select id="id_event" name="id_event" class="form-control">

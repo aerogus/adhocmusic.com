@@ -73,8 +73,8 @@
   <div class="border rounded-bottom bg-white p-3 mb-3">
   {% for photo in photos %}
     <div class="photo">
-      <a href="{{ photo.thumbUrl }}" data-id="{{ photo.id }}" data-at-1000="{{ photo.thumbUrl }}" title="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %} 📷 {{ photo.credits }}">
-        <img data-id="{{ photo.id }}" src="{{ photo.thumbUrl }}" alt="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
+      <a href="{{ photo.thumbUrl }}" data-id="{{ photo.idPhoto }}" data-at-1000="{{ photo.thumbUrl }}" title="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %} 📷 {{ photo.credits }}">
+        <img data-id="{{ photo.idPhoto }}" src="{{ photo.thumbUrl }}" alt="{{ photo.name }}{% if photo.groupe %} ({{ photo.groupe.name }}){% endif %}">
       </a>
     </div>
   {% endfor %}

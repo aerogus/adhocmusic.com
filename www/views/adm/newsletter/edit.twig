@@ -11,15 +11,15 @@
         <textarea id="content" name="content">{{ newsletter.content }}</textarea>
       </fieldset>
       <input id="form-newsletter-edit-submit" name="form-newsletter-edit-submit" class="btn btn-primary" type="submit" value="Ok">
-      <input type="hidden" name="id" value="{{ newsletter.id }}">
+      <input type="hidden" name="id" value="{{ newsletter.idNewsletter }}">
     </form>
     <p>Uploader un fichier pour cette newsletter</p>
     <form id="form-newsletter-edit-upload" name="form-newsletter-edit-upload" method="post" action="/adm/newsletter/upload" enctype="multipart/form-data">
       <input type="file" name="file">
       <input type="submit" id="form-newsletter-edit-upload-submit" value="Envoyer">
-      <input type="hidden" name="id" value="{{ newsletter.id }}">
+      <input type="hidden" name="id" value="{{ newsletter.idNewsletter }}">
     </form>
-    <p><a href="/newsletters/{{ newsletter.id }}" target="_blank">Prévisualiser</a></p>
+    <p><a href="/newsletters/{{ newsletter.idNewsletter }}" target="_blank">Prévisualiser</a></p>
   </div>
 </div>
 

@@ -10,7 +10,7 @@
       {% if groupes %}
       <ul>
       {% for groupe in groupes %}
-        <li><a title="Se désabonner de ce groupe" href="/alerting/unsub?type=g&amp;id_content={{ groupe.id }}">❌</a> <a href="{{ groupe.url }}">{{ groupe.name }}</a></li>
+        <li><a title="Se désabonner de ce groupe" href="/alerting/unsub?type=g&amp;id_content={{ groupe.idGroupe }}">❌</a> <a href="{{ groupe.url }}">{{ groupe.name }}</a></li>
       {% endfor %}
       </ul>
       {% else %}
@@ -27,7 +27,7 @@
       {% if events %}
       <ul>
       {% for event in events %}
-        <li><a title="Retirer de mon agenda" href="/alerting/unsub?type=e&amp;id_content={{ event.id }}">❌</a> <a href="{{ event.url }}">{{ event.name }}</a></li>
+        <li><a title="Retirer de mon agenda" href="/alerting/unsub?type=e&amp;id_content={{ event.idEvent }}">❌</a> <a href="{{ event.url }}">{{ event.name }}</a></li>
       {% endfor %}
       </ul>
       {% else %}
@@ -44,7 +44,7 @@
       {% if lieux %}
       <ul>
       {% for lieu in lieux %}
-        <li><a title="Se désabonner de ce lieu" href="/alerting/unsub?type=l&amp;id_content={{ lieu.id }}">❌</a> <a href="{{ lieu.url }}">{{ lieu.name }}</a></li>
+        <li><a title="Se désabonner de ce lieu" href="/alerting/unsub?type=l&amp;id_content={{ lieu.idLieu }}">❌</a> <a href="{{ lieu.url }}">{{ lieu.name }}</a></li>
       {% endfor %}
       </ul>
       {% else %}

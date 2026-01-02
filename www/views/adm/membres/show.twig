@@ -85,8 +85,8 @@
     </tr>
     {% for groupe in membre.groupes %}
     <tr>
-      <td><a href="/adm/groupes/{{ groupe.id }}">{{ groupe.name }}</a></td>
-      <td><a class="btn btn-secondary" href="/adm/appartient-a?from=membre&amp;action=delete&amp;membre={{ membre.idContact }}&amp;groupe={{ groupe.id }}">Supprimer</a></td>
+      <td><a href="/adm/groupes/{{ groupe.idGroupe }}">{{ groupe.name }}</a></td>
+      <td><a class="btn btn-secondary" href="/adm/appartient-a?from=membre&amp;action=delete&amp;membre={{ membre.idContact }}&amp;groupe={{ groupe.idGroupe }}">Supprimer</a></td>
     </tr>
     {% endfor %}
   </table>

@@ -69,7 +69,7 @@
         <select id="groupe" name="groupe[{{ smarty.section.cpt_groupe.index}]" class="w100 mbs">
           <option value="">-- Choix d'un groupe --</option>
           {% for from=$groupes item=groupe}
-          <option value="{{ groupe.id }}"{% if $event_groupes[$smarty.section.cpt_groupe.index] && ($event_groupes[$smarty.section.cpt_groupe.index].id() === $groupe.idGroupe()}} selected="selected"{% endif %}>{{ groupe.name }}</option>
+          <option value="{{ groupe.idGroupe }}"{% if $event_groupes[$smarty.section.cpt_groupe.index] && ($event_groupes[$smarty.section.cpt_groupe.index].id() === $groupe.idGroupe()}} selected="selected"{% endif %}>{{ groupe.name }}</option>
           {% endfor %}
         </select>
         {/section}

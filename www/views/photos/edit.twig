@@ -81,7 +81,7 @@
       <select name="id_groupe" class="w100">
         <option value="0">Aucun</option>
         {% for groupe in groupes %}
-        <option value="{{ groupe.idGroupe }}"{% if photo.idGroupe == groupe.id %} selected="selected"{% endif %}>{{ groupe.name }}</option>
+        <option value="{{ groupe.idGroupe }}"{% if photo.idGroupe == groupe.idGroupe %} selected="selected"{% endif %}>{{ groupe.name }}</option>
         {% endfor %}
       </select>
     </div>
@@ -97,7 +97,7 @@
         {% for dep_id, dep_name in dep %}
         <optgroup label="{{ dep_id }} - {{ dep_name }}">
           {% for lieu in lieux[dep_id] %}
-          <option value="{{ lieu.id }}"{% if photo.idLieu == lieu.id %} selected="selected"{% endif %}>{{ lieu.city.cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
+          <option value="{{ lieu.idLieu }}"{% if photo.idLieu == lieu.idLieu %} selected="selected"{% endif %}>{{ lieu.city.cp }} {{ lieu.city.name }} : {{ lieu.name }}</option>
           {% endfor %}
         </optgroup>
         {% endfor %}

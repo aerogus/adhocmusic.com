@@ -16,9 +16,9 @@
       <tbody>
         {% for newsletter in newsletters %}
         <tr>
-          <td>{{ newsletter.id }}</td>
-          <td><a href="/newsletters/{{ newsletter.id }}" target="_blank">[voir]</a></td>
-          <td><a href="/adm/newsletter/edit/{{ newsletter.id }}">{{ newsletter.title }}</a></td>
+          <td>{{ newsletter.idNewsletter }}</td>
+          <td><a href="/newsletters/{{ newsletter.idNewsletter }}" target="_blank">[voir]</a></td>
+          <td><a href="/adm/newsletter/edit/{{ newsletter.idNewsletter }}">{{ newsletter.title }}</a></td>
         </tr>
         {% endfor %}
       </tbody>

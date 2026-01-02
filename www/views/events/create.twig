@@ -12,7 +12,7 @@
     {{ lieu.address }}<br>
     {{ lieu.city.cp }} {{ lieu.city.name }}<br>
     {{ lieu.country.name }}
-    <input type="hidden" id="id_lieu" name="id_lieu" value="{{ lieu.id }}">
+    <input type="hidden" id="id_lieu" name="id_lieu" value="{{ lieu.idLieu }}">
     {% else %}
     <section class="grid-4">
 
@@ -81,7 +81,7 @@
         <select id="groupe" name="groupe[{{ smarty.section.cpt_groupe.index}]" class="w100 mbs">
           <option value="">-- Choix d'un groupe --</option>
           {% for from=$groupes item=groupe}
-          <option value="{{ groupe.id }}"{% if $data.groupes.0 === $groupe.id }} selected="selected"{% endif %}>{{ groupe.name }}</option>
+          <option value="{{ groupe.idGroupe }}"{% if $data.groupes.0 === $groupe.id }} selected="selected"{% endif %}>{{ groupe.name }}</option>
           {% endfor %}
         </select>
         {/section}
