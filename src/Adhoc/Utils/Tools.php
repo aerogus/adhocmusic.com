@@ -7,7 +7,7 @@ namespace Adhoc\Utils;
 /**
  * Méthodes pratiques communes à tout le site AD'HOC
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Tools
 {

@@ -10,7 +10,7 @@ use Adhoc\Utils\ObjectModel;
 /**
  * Classe WorldRegion
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class WorldRegion extends ObjectModel
 {

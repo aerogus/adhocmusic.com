@@ -13,7 +13,7 @@ define('DEFAULT_CONTROLLERS_FORMAT', 'html');
 /**
  * Gestion des routes
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Route
 {

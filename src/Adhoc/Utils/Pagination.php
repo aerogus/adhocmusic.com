@@ -7,7 +7,7 @@ namespace Adhoc\Utils;
 /**
  * Gestion d'une pagination
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Pagination
 {

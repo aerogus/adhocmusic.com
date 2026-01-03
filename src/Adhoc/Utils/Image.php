@@ -9,7 +9,7 @@ namespace Adhoc\Utils;
  *
  * Format d'import/export : GIF/JPEG/PNG
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 class Image
 {

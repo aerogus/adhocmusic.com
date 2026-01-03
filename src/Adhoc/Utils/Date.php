@@ -7,7 +7,7 @@ namespace Adhoc\Utils;
 /**
  * Différentes méthodes et données relatives aux dates
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  *
  * @deprecated bientôt. ah ?
  */

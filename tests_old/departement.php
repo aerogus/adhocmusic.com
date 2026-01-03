@@ -4,7 +4,7 @@
 /**
  * Liste des départements
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 
 declare(strict_types=1);

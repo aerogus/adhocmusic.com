@@ -12,7 +12,7 @@ define('EMAIL_VALIDATE_REGEXP', '/^.+\@.+\..+$/i');
 /**
  * Outils pour travailler avec les emails
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  *
  * @see PEAR::HTML_QuickForm/Rules/email.php
  */

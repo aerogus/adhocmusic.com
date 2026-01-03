@@ -12,7 +12,7 @@ define('FORUM_NB_MESSAGES_PER_PAGE', 50);
 /**
  * Classe de gestion des forums
  *
- * @author  Guillaume Seznec <guillaume@seznec.fr>
+ * @author Guillaume Seznec <guillaume@seznec.fr>
  */
 abstract class Forum
 {
