@@ -74,6 +74,8 @@ final class Controller
             'Ajouter',
         ]);
 
+        $twig->assign('form_title', "Ajouter à l'affiche");
+
         $twig->enqueueScript('/js/adm/featured.js');
 
         // valeurs par défaut
@@ -83,10 +85,10 @@ final class Controller
             'url'         => '',
             'datdeb'      => '',
             'datfin'      => '',
-            'online'      => true,
+            'online'      => false,
         ];
 
-        if (Tools::isSubmit('form-featured-create')) {
+        if (Tools::isSubmit('form-featured')) {
             $data = [
                 'title'       => trim((string) Route::params('title')),
                 'description' => trim((string) Route::params('description')),
@@ -127,20 +129,10 @@ final class Controller
         }
 
         $twig->assign('data', $data);
-        $twig->assign(
-            'events',
-            Event::find(
-                [
-                    'online' => true,
-                    'datdeb' => date('Y-m-d H:i:s'),
-                    'order_by' => 'date',
-                    'sort' => 'ASC',
-                    'limit' => 500,
-                ]
-            )
-        );
+        $twig->assign('form_action', '/adm/featured/create');
+        $twig->assign('form_readonly', false);
 
-        return $twig->render('adm/featured/create.twig');
+        return $twig->render('adm/featured/form.twig');
     }
 
     /**
@@ -159,6 +151,8 @@ final class Controller
             'Modifier',
         ]);
 
+        $twig->assign('form_title', "Édition à l'affiche");
+
         $twig->enqueueScript('/js/adm/featured.js');
 
         $id = (int) Route::params('id');
@@ -175,7 +169,7 @@ final class Controller
             'online'      => $f->getOnline(),
         ];
 
-        if (Tools::isSubmit('form-featured-edit')) {
+        if (Tools::isSubmit('form-featured')) {
             $data = [
                 'id'          => $f->getIdFeatured(),
                 'title'       => trim((string) Route::params('title')),
@@ -217,8 +211,10 @@ final class Controller
         }
 
         $twig->assign('data', $data);
+        $twig->assign('form_action', '/adm/featured/edit');
+        $twig->assign('form_readonly', false);
 
-        return $twig->render('adm/featured/edit.twig');
+        return $twig->render('adm/featured/form.twig');
     }
 
     /**
@@ -237,18 +233,34 @@ final class Controller
             'Supprimer',
         ]);
 
+        $twig->assign('form_title', "Suppression à l'affiche");
+
         $id = (int) Route::params('id');
         $f = Featured::getInstance($id);
 
-        if (Tools::isSubmit('form-featured-delete')) {
+        if (Tools::isSubmit('form-featured')) {
             if ($f->delete()) {
                 Tools::redirect('/adm/featured?delete=1');
                 unlink(Featured::getBasePath() . '/' . $f->getIdFeatured() . '.jpg');
             }
         }
 
-        $twig->assign('featured', $f);
-        return $twig->render('adm/featured/delete.twig');
+        $data = [
+            'id'          => $f->getIdFeatured(),
+            'title'       => $f->getTitle(),
+            'description' => $f->getDescription(),
+            'url'         => $f->getUrl(),
+            'image'       => $f->getImage(),
+            'datdeb'      => $f->getDatDeb(),
+            'datfin'      => $f->getDatFin(),
+            'online'      => $f->getOnline(),
+        ];
+
+        $twig->assign('data', $data);
+        $twig->assign('form_action', '/adm/featured/delete');
+        $twig->assign('form_readonly', true);
+
+        return $twig->render('adm/featured/form.twig');
     }
 
     /**
