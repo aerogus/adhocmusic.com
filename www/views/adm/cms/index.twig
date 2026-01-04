@@ -20,8 +20,8 @@
   <tbody>
     {% for cms in cmss %}
     <tr>
-      <td>{{ cms.id }}</td>
-      <td><a href="/adm/cms/edit/{{ cms.id }}">{{ cms.alias }}</a></td>
+      <td>{{ cms.idCms }}</td>
+      <td><a href="/adm/cms/edit/{{ cms.idCms }}">{{ cms.alias }}</a></td>
       <td>{{ cms.title }}</td>
       <td>{% if cms.online %}✓{% endif %}</td>
     </tr>

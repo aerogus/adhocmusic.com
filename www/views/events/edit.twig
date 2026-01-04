@@ -139,7 +139,7 @@
         <select id="style" name="style[{{ smarty.section.cpt_style.index}]" class="w100 mbs">
           <option value="">-- Choix d'un style --</option>
           {% for from=$styles item=style}
-          <option value="{{ style.id }}" {% if $event_styles[$smarty.section.cpt_style.index] && ($event_styles[$smarty.section.cpt_style.index].id() === $style.id()}} selected="selected"{% endif %}>{{ style.name }}</option>
+          <option value="{{ style.idStyle }}" {% if $event_styles[$smarty.section.cpt_style.index] && ($event_styles[$smarty.section.cpt_style.index].id() === $style.id()}} selected="selected"{% endif %}>{{ style.name }}</option>
           {% endfor %}
         </select>
         {/section}
@@ -154,7 +154,7 @@
         <select id="structure" name="structure[{{ smarty.section.cpt_structure.index}]" class="w100 mbs">
           <option value="">-- Choix d'une structure --</option>
           {% for from=$structures item=structure}
-          <option value="{{ structure.id }}"{% if $event_structures[$smarty.section.cpt_structure.index] && ($event_structures[$smarty.section.cpt_structure.index].id() === $structure.id()}} selected="selected"{% endif %}>{{ structure.name }}</option>
+          <option value="{{ structure.idStructure }}"{% if $event_structures[$smarty.section.cpt_structure.index] && ($event_structures[$smarty.section.cpt_structure.index].id() === $structure.id()}} selected="selected"{% endif %}>{{ structure.name }}</option>
           {% endfor %}
         </select>
         {/section}

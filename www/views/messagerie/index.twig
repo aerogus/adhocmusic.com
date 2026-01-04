@@ -24,8 +24,8 @@
           <td><img src="/img/icones/{% if msg.readTo %}email_open.png{% else %}email.png{% endif %}" alt=""></td>
           <td><a href="/messagerie/write?pseudo={{ msg.MembreFrom().Pseudo }}">{{ msg.membreFrom.pseudo }}</a></td>
           <td>{{ msg.date }}</td>
-          <td><a href="/messagerie/read/{{ msg.id }}">{{ msg.text }}</a></td>
-          <td><p class="del-msg-to" data-msg-id="{{ msg.id }}" title="Effacer ce message">❌</p></td>
+          <td><a href="/messagerie/read/{{ msg.idMessage }}">{{ msg.text }}</a></td>
+          <td><p class="del-msg-to" data-msg-id="{{ msg.idMessage }}" title="Effacer ce message">❌</p></td>
         </tr>
         {% endfor %}
       </table>
@@ -48,8 +48,8 @@
           <td><img src="/img/icones/{% if msg.readTo %}email_open.png{% else %}email.png{% endif %}" alt=""></td>
           <td><a href="/messagerie/write?pseudo={{ msg.membreTo.pseudo }}">{{ msg.MembreTo.pseudo }}</a></td>
           <td>{{ msg.date }}</td>
-          <td><a href="/messagerie/read/{{ msg.id }}">{{ msg.text }}</a></td>
-          <td><p class="del-msg-from" data-msg-id="{{ msg.id }}" title="Effacer ce message">❌</p></td>
+          <td><a href="/messagerie/read/{{ msg.idMessage }}">{{ msg.text }}</a></td>
+          <td><p class="del-msg-from" data-msg-id="{{ msg.idMessage }}" title="Effacer ce message">❌</p></td>
         </tr>
         {% endfor %}
       </table>

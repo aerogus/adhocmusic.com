@@ -21,9 +21,9 @@
   </thead>
   <tbody>
   {% for comment in comments %}
-    <tr id="row-{{ comment.id }}">
-      <td><input type="checkbox" id="com-del-{{ comment.id }}"></td>
-      <td><a href="/comments/show/{{ comment.id }}">{{ comment.id }}</a></td>
+    <tr id="row-{{ comment.idComment }}">
+      <td><input type="checkbox" id="com-del-{{ comment.idComment }}"></td>
+      <td><a href="/comments/show/{{ comment.idComment }}">{{ comment.idComment }}</a></td>
       <td><a href="/{{ comment.type_full }}/{{ comment.id_content }}">{{ comment.type }} {{ comment.id_content }}</a></td>
       <td>{{ comment.createdAt }}</td>
       <td>{{ comment.online }}</td>
