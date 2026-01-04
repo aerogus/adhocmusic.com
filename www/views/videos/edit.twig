@@ -55,7 +55,7 @@
   <div class="row mb-3">
     <label class="form-label col-3" for="thumbnail_fetch">Réimporter la miniature</label>
     <div class="col-9">
-      <input class="checkbox" type="checkbox" id="thumbnail_fetch" name="thumbnail_fetch"/>
+      <input class="form-check-input" type="checkbox" id="thumbnail_fetch" name="thumbnail_fetch">
     </div>
   </div>
 
@@ -126,12 +126,7 @@
       <input id="form-video-edit-submit" name="form-video-edit-submit" class="btn btn-primary" type="submit" value="💾 Enregistrer">
       <input type="hidden" name="id" value="{{ video.idVideo }}">
       <input type="hidden" name="video_id_event" id="video_id_event" value="{{ video.idEvent }}">
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <div class="offset-3">
-      <a href="/videos/delete/{{ video.idVideo }}" class="btn btn-primary">❌ Supprimer</a>
+      <a href="/videos/delete/{{ video.idVideo }}" class="btn btn-secondary">❌ Supprimer</a>
     </div>
   </div>
 

@@ -12,6 +12,9 @@
 
 {% else %}
 
+  <div class="row">
+  <div class="col-md-8 mx-auto">
+
   <h2 class="px-2 py-1 mb-0 bg-dark text-white rounded-top">{{ data.name }}</h2>
   <div class="border rounded-bottom bg-white p-3">
     <form id="form-groupe-edit" name="form-groupe-edit" method="post" action="/groupes/edit" enctype="multipart/form-data">
@@ -131,16 +134,26 @@
         </div>
       </div>
 
-      <input type="hidden" name="id" value="{{ data.id_groupe }}">
-      <input id="form-groupe-edit-submit" name="form-groupe-edit-submit" class="btn btn-primary w100" type="submit" value="💾 Enregistrer">
+      <div class="row mb-3">
+        <div class="offset-3">
+          <input id="form-groupe-edit-submit" name="form-groupe-edit-submit" class="btn btn-primary w100" type="submit" value="💾 Enregistrer">
+          <input type="hidden" name="id" value="{{ data.id_groupe }}">
+          <a href="{{ groupe.Url }}" class="btn btn-secondary">Voir la fiche</a>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="offset-3">
+          <a href="/photos/create?id_groupe={{ groupe.idGroupe }}" class="btn btn-secondary">➕ Ajouter une photo</a>
+          <a href="/audios/create?id_groupe={{ groupe.idGroupe }}" class="btn btn-secondary">➕ Ajouter une musique</a>
+          <a href="/videos/create?id_groupe={{ groupe.idGroupe }}" class="btn btn-secondary">➕ Ajouter une vidéo</a>
+        </div>
+      </div>
+
     </form>
   </div>
 
-  <div>
-    <a href="/photos/create?id_groupe={{ groupe.idGroupe }}" class="btn btn-primary">➕ Ajouter une photo</a>
-    <a href="/audios/create?id_groupe={{ groupe.idGroupe }}" class="btn btn-primary">➕ Ajouter une musique</a>
-    <a href="/videos/create?id_groupe={{ groupe.idGroupe }}" class="btn btn-primary">➕ Ajouter une vidéo</a>
-    <a href="{{ groupe.Url }}" class="btn btn-primary">Voir la fiche</a>
+  </div>
   </div>
 
 {% endif %}
