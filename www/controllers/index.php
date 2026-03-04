@@ -181,7 +181,6 @@ die;
                 // erreur dans le form
                 $twig->assign('sent_ko', true);
                 $twig->assign('show_form', true);
-                var_dump($errors);
                 foreach ($errors as $k => $v) {
                     $twig->assign('error_' . $k, $v);
                 }
