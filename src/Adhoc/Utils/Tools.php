@@ -103,10 +103,23 @@ class Tools
      *
      * @return string
      */
-    public static function getCSRFToken(string $CSRFTokenName = 'default', int $length = 16): string
+    public static function genCSRFToken(string $CSRFTokenName = 'default', int $length = 16): string
     {
         $varName = 'CSRFToken_' . $CSRFTokenName;
         $_SESSION[$varName] = substr(md5(microtime()), 0, $length);
+        return $_SESSION[$varName];
+    }
+
+    /**
+     * Lit en session le jeton de sécurité nommé
+     *
+     * @param string $CSRFTokenName
+     *
+     * @return string
+     */
+    public static function getCSRFToken(string $CSRFTokenName = 'default'): string
+    {
+        $varName = 'CSRFToken_' . $CSRFTokenName;
         return $_SESSION[$varName];
     }
 
