@@ -13,7 +13,7 @@
 <form id="form-member-delete" name="form-member-delete" action="/membres/delete" method="POST">
   <p>Confirmer la suppression du membre {{ membre.pseudo }} ?</p>
   <input class="btn btn-secondary" type="submit" id="form-member-delete-submit" name="form-member-delete-submit" value="Supprimer">
-  <input type="hidden" name="id" value="{{ membre.id }}">
+  <input type="hidden" name="id" value="{{ membre.idContact }}">
 </form>
 
 {% endif %}

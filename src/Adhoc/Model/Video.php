@@ -737,8 +737,10 @@ class Video extends Media
             case self::HOST_YOUTUBE:
                 $meta_url = 'https://www.youtube.com/watch?v=' . $reference;
                 $html = file_get_contents($meta_url);
-                $doc = new \DOMDocument();
-                $doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+                $doc = new \DOMDocument('1.0', 'UTF-8');
+                $internalErrors = libxml_use_internal_errors(true);
+                $doc->loadHTML($html);
+                libxml_use_internal_errors($internalErrors);
                 $title = str_replace(' - YouTube', '', $doc->getElementsByTagName('title')[0]->nodeValue);
                 return $title;
 

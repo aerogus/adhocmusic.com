@@ -273,7 +273,6 @@ final class Controller
 
                 $video = (new Video())
                     ->setName($data['name'])
-                    ->setIdGroupe($data['id_groupe']) // deprecated
                     ->setIdLieu($data['id_lieu'])
                     ->setIdEvent($data['id_event'])
                     ->setIdContact($data['id_contact'])
@@ -299,6 +298,7 @@ final class Controller
                     $video->storeThumbnail($vignette);
                 }
 
+                // Génération des miniatures
                 $confVideo = Conf::getInstance()->get('video');
                 foreach ($confVideo['thumb_width'] as $maxWidth) {
                     $video->genThumb($maxWidth);
@@ -413,7 +413,6 @@ final class Controller
                 $video->setName($data['name'])
                     ->setIdLieu($data['id_lieu'])
                     ->setIdEvent($data['id_event'])
-                    ->setIdGroupe($data['id_groupe']) // deprecated
                     ->setOnline($data['online']);
                 $video->save();
 

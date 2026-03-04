@@ -17,34 +17,42 @@ Récupérer le dépôt
 
 ```bash
 git clone git@github.com:aerogus/adhocmusic.com.git
+```
+
+Aller dans le répertoire local
+
+```bash
 cd adhocmusic.com
+```
+
+Importer une configuration prête pour un développment sous Docker
+
+```bash
 cp conf/conf.dist.ini conf/conf.ini
 ```
 
-Générer un certificat TLS/SSL autosigné (prérequis = openssl)
+Générer un certificat TLS/SSL autosigné (prérequis = `openssl`)
 
 ```bash
 openssl req -newkey rsa:2048 -nodes -keyout ./docker/nginx/ssl/docker.adhocmusic.com.key -x509 -days 365 -out ./docker/nginx/ssl/docker.adhocmusic.com.crt -subj "/C=FR/ST=Ile-de-France/L=Paris/O=AD'HOC/OU=IT/CN=docker.adhocmusic.com" -addext "subjectAltName=DNS:docker.adhocmusic.com,DNS:*.docker.adhocmusic.com"
 ```
 
-Installer les dépendances
+Installer les dépendances PHP et JavaScript
 
 ```bash
 composer install
 npm install
 ````
 
-Créer les images docker et instancier les conteneurs
+Après avoir installé et démarré le service `Docker` (sous `MacOS` avec `homebrew`: `brew install docker-desktop`), créer les images docker et instancier les conteneurs
 
 ```bash
 docker-compose up [--build]
 ```
 
-Aller sur https://docker.adhocmusic.com
+Au niveau `DNS`, les domaines `docker.adhocmusic.com` et `*.docker.adhocmusic.com` sont configurés publiquement pour pointer sur la boucle locale (`127.0.0.1`).
 
-Au niveau DNS, `docker.adhocmusic.com` et `*.docker.adhocmusic.com` sont configurés publiquement pour pointer sur la boucle locale (`127.0.0.1`).
-
-note: la navigateur émet un warning car on a généré des certificats autosignés
+Avec votre navigateur, allez sur https://docker.adhocmusic.com et https://static.docker.adhocmusic.com et acceptez les avertissements de sécurité causés par l'autosignature des certificats `TLS` plus haut.
 
 Redémarrage avec reconstruction des containers :
 
@@ -72,7 +80,7 @@ composer eslint # eslint
 
 ## Format des images
 
-Les `Photo` sont redimensionnées en 2048*2048 à leur arrivées
+Les `Photo` sont redimensionnées en 2048*2048 à leur arrivée
 elles sont converties en :
 
 - 1000x0

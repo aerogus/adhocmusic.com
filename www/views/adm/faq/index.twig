@@ -18,9 +18,9 @@
     <tbody>
       {% for f in faq %}
       <tr>
-        <td>{{ f.id }}</td>
+        <td>{{ f.idFaq }}</td>
         <td>{{ f.category.name }}</td>
-        <td><a href="/adm/faq/edit/{{ f.id }}">{{ f.question }}</a></td>
+        <td><a href="/adm/faq/edit/{{ f.idFaq }}">{{ f.question }}</a></td>
         <td>{{ f.online }}</td>
       </tr>
       {% endfor %}

@@ -30,7 +30,7 @@ let audio_url = '{{ og_audio.url }}';
   {% if audio.lieu %}
   <li>Lieu : <a href="{{ audio.lieu.url }}"><strong>{{ audio.lieu.name }}</strong></a></li>
   {% endif %}
-  <li>Mise en ligne : le {{ audio.createdAt|date('d/m/Y') }} par <a href="/membres/show/{{ audio.membre.id }}"><strong>{{ audio.membre.pseudo }}</strong></a></li>
+  <li>Mise en ligne : le {{ audio.createdAt|date('d/m/Y') }} par <a href="/membres/show/{{ audio.membre.idContact }}"><strong>{{ audio.membre.pseudo }}</strong></a></li>
 </ul>
 </div>
 
