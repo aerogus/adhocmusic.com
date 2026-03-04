@@ -192,8 +192,8 @@ final class Controller
         $twig->assign('subject', $data['subject']);
         $twig->assign('text', $data['text']);
         $twig->assign('mailing', $data['mailing']);
-        $twig->assign('antispam', implode(' ', str_split(Tools::genCSRFToken('antispam'))));
-        $twig->assign('check', Tools::genCSRFToken('check'));
+        $twig->assign('antispam', implode(' ', str_split(Tools::getCSRFToken('antispam'))));
+        $twig->assign('check', Tools::getCSRFToken('check'));
 
         return $twig->render('contact.twig');
     }
