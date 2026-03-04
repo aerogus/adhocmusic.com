@@ -16,6 +16,7 @@ use Adhoc\Model\Partner;
 use Adhoc\Model\Video;
 use Adhoc\Utils\AdHocTwig;
 use Adhoc\Utils\Email;
+use Adhoc\Utils\Log;
 use Adhoc\Utils\Route;
 use Adhoc\Utils\Tools;
 
@@ -120,6 +121,10 @@ final class Controller
         if (!Tools::isSubmit('form-contact')) {
             $twig->assign('show_form', true);
 
+            // génère un nouveau code à 16 caractères
+            $antispam = Tools::getCSRFToken('antispam', 8);
+            $check = Tools::getCSRFToken('check', 32);
+
             // valeurs par défaut
             $data = [
                 'name'    => '',
@@ -127,7 +132,8 @@ final class Controller
                 'subject' => '',
                 'text'    => '',
                 'mailing' => false,
-                'check'   => Tools::getCSRFToken(),
+                'antispam' => $antispam,
+                'check'   => $check,
             ];
 
             // si identifié, préremplissage de certains champs
@@ -142,16 +148,20 @@ final class Controller
             }
         } else {
             $data = [
-                'name'    => trim((string) Route::params('name')),
-                'email'   => trim((string) Route::params('email')),
-                'subject' => trim((string) Route::params('subject')),
-                'text'    => trim((string) Route::params('text')),
-                'mailing' => (bool) Route::params('mailing'),
-                'check'   => (string) Route::params('check'),
+                'name'     => trim((string) Route::params('name')),
+                'email'    => trim((string) Route::params('email')),
+                'subject'  => trim((string) Route::params('subject')),
+                'text'     => trim((string) Route::params('text')),
+                'mailing'  => (bool) Route::params('mailing'),
+                'antispam' => (string) Route::params('antispam'),
+                'check'    => (string) Route::params('check'),
             ];
 
             $errors = self::validateContactForm($data);
             if (count($errors) === 0) {
+
+                Log::info(print_r($data, true));
+die;
                 // 1. envoi du mail aux destinataires
                 $data['email_reply_to'] = $data['email'];
                 if (Email::send(CONTACT_FORM_TO, $data['subject'], 'form-contact-to', $data)) {
@@ -171,6 +181,7 @@ final class Controller
                 // erreur dans le form
                 $twig->assign('sent_ko', true);
                 $twig->assign('show_form', true);
+                var_dump($errors);
                 foreach ($errors as $k => $v) {
                     $twig->assign('error_' . $k, $v);
                 }
@@ -182,6 +193,7 @@ final class Controller
         $twig->assign('subject', $data['subject']);
         $twig->assign('text', $data['text']);
         $twig->assign('mailing', $data['mailing']);
+        $twig->assign('antispam', implode(' ', str_split($data['antispam'])));
         $twig->assign('check', $data['check']);
 
         return $twig->render('contact.twig');
@@ -355,7 +367,10 @@ final class Controller
         ) {
             $errors['text'] = "Message un peu douteux...";
         }
-        if (!Tools::checkCSRFToken($data['check'])) {
+        if (!Tools::checkCSRFToken($data['antispam'], 'antispam')) {
+            $errors['antispam'] = "Code de de sécurité antispam invalide";
+        }
+        if (!Tools::checkCSRFToken($data['check'], 'check')) {
             $errors['check'] = "Code de vérification invalide";
         }
 

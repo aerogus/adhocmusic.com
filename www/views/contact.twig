@@ -57,8 +57,16 @@
           </div>
         </div>
         <div class="row mb-3">
-          <div class="offset-2">
+          <label for="spam" class="form-label col-2">Sécurité</label>
+          <div class="col-8">
+            <div class="alert alert-danger" id="error_antispam"{% if not error_antispam %} style="display: none"{% endif %}>Erreur à la vérification du code antispam</div>
+            <input name="antispam" id="antispam" type="text" maxlength="8" required="required" placeholder="" value="" class="form-control">
+            <small class="form-text text-muted">Merci de recopier le code suivant sans les espaces:<br> {{ antispam }}</small>
             <div class="alert alert-danger" id="error_check"{% if not error_check %} style="display: none"{% endif %}>Erreur à la vérification du code de sécurité</div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="offset-2">
             <input id="form-contact-submit" data-check="{{ check }}" name="form-contact-submit" type="submit" value="✉️ Envoyer le message" class="btn btn-primary"/>
           </div>
         </div>

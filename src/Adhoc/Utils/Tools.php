@@ -96,24 +96,32 @@ class Tools
     }
 
     /**
-     * Set en session un jeton à usage unique
+     * Génère en session un jeton de sécurité nommé
+     *
+     * @param string $CSRFTokenName
+     * @param int $length
      *
      * @return string
      */
-    public static function getCSRFToken(): string
+    public static function getCSRFToken(string $CSRFTokenName = 'default', int $length = 16): string
     {
-        $_SESSION['CSRFToken'] = substr(md5((string) time()), 0, 16);
-        return $_SESSION['CSRFToken'];
+        $varName = 'CSRFToken_' . $CSRFTokenName;
+        $_SESSION[$varName] = substr(md5(microtime()), 0, $length);
+        return $_SESSION[$varName];
     }
 
     /**
-     * @param string $CSRFToken CSRFToken
+     * Vérifie le jeton de sécurité nommé
+     *
+     * @param string $CSRFTokenValue valeur du CSRFToken
+     * @param string $CSRFTokenName
      *
      * @return bool
      */
-    public static function checkCSRFToken(string $CSRFToken): bool
+    public static function checkCSRFToken(string $CSRFTokenValue, string $CSRFTokenName): bool
     {
-        return (isset($_SESSION['CSRFToken']) && ($_SESSION['CSRFToken'] === $CSRFToken));
+        $varName = 'CSRFToken_' . $CSRFTokenName;
+        return (isset($_SESSION[$varName]) && ($_SESSION[$varName] === $CSRFTokenValue));
     }
 
     /**
