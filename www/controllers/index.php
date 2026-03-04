@@ -122,8 +122,8 @@ final class Controller
             $twig->assign('show_form', true);
 
             // génère un nouveau code à 16 caractères
-            $antispam = Tools::getCSRFToken('antispam', 8);
-            $check = Tools::getCSRFToken('check', 32);
+            $antispam = Tools::genCSRFToken('antispam', 8);
+            $check = Tools::genCSRFToken('check', 32);
 
             // valeurs par défaut
             $data = [
@@ -161,7 +161,7 @@ final class Controller
             if (count($errors) === 0) {
 
                 Log::info(print_r($data, true));
-die;
+
                 // 1. envoi du mail aux destinataires
                 $data['email_reply_to'] = $data['email'];
                 if (Email::send(CONTACT_FORM_TO, $data['subject'], 'form-contact-to', $data)) {
@@ -192,8 +192,8 @@ die;
         $twig->assign('subject', $data['subject']);
         $twig->assign('text', $data['text']);
         $twig->assign('mailing', $data['mailing']);
-        $twig->assign('antispam', implode(' ', str_split($data['antispam'])));
-        $twig->assign('check', $data['check']);
+        $twig->assign('antispam', implode(' ', str_split(Tools::genCSRFToken('antispam'))));
+        $twig->assign('check', Tools::genCSRFToken('check'));
 
         return $twig->render('contact.twig');
     }
