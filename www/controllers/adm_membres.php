@@ -56,6 +56,10 @@ final class Controller
 
         $twig = new AdHocTwig();
 
+        $twig->enqueueScript('/js/adm/membres/index.js');
+        $twig->enqueueScript('/static/library/dataTables@2.3.6/dataTables.min.js');
+        $twig->enqueueStyle('/static/library/dataTables@2.3.6/dataTables.min.css');
+
         $twig->assign('membres', $membres);
 
         $twig->assign('sort', $sort);
@@ -148,5 +152,13 @@ final class Controller
 
         $twig->assign('membre', $membre);
         return $twig->render('adm/membres/delete.twig');
+    }
+
+    /**
+     * @return string
+     */
+    public static function dt_find(): string
+    {
+        Tools::auth(Membre::TYPE_ADMIN);
     }
 }
