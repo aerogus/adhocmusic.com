@@ -12,8 +12,6 @@ use Adhoc\Utils\Tools;
 
 final class Controller
 {
-    const MEMBERS_PER_PAGE = 100;
-
     public static function index(): string
     {
         Tools::auth(Membre::TYPE_INTERNE);

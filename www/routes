@@ -44,8 +44,11 @@ adm_cms|edit|GET|/adm/cms/edit/:id
 adm_cms|edit|POST|/adm/cms/edit
 adm_cms|delete|GET|/adm/cms/delete/:id
 adm_cms|delete|POST|/adm/cms/delete
+adm_audios|dt|GET|/adm/audios/dt
 adm_audios|index|GET|/adm/audios
+adm_photos|dt|GET|/adm/photos/dt
 adm_photos|index|GET|/adm/photos
+adm_videos|dt|GET|/adm/videos/dt
 adm_videos|index|GET|/adm/videos
 adm_subscriptions|index|GET|/adm/subscriptions
 adm_subscriptions|create|GET|/adm/subscriptions/create

@@ -1,22 +1,23 @@
 {{ include('common/header.twig') }}
 
-<div class="box">
+<div class="container">
   <h1>Photos</h1>
   <div>
-    <table class="table table-striped" id="tab-groupes">
-      <thead>
+    <table id="table" class="table table-bordered table-striped table-hover">
+      <thead class="table-dark">
         <tr>
-          <th>Id</th>
-          <th>Photo</th>
-          <th>Nom</th>
-          <th>Groupe</th>
-          <th>Évènement</th>
-          <th>Lieu</th>
-          <th>Créa</th>
-          <th>Modif</th>
+          <th scope="col" class="minw">Id</th>
+          <th scope="col">Photo</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Groupe</th>
+          <th scope="col">Évènement</th>
+          <th scope="col">Lieu</th>
+          <th scope="col">Créa</th>
+          <th scope="col">Modif</th>
         </tr>
       </thead>
       <tbody>
+      {#
       {% for photo in photos %}
         <tr>
           <td>{{ photo.idPhoto }}</td>
@@ -29,6 +30,7 @@
           <td>{{ photo.modifiedAt }}</td>
         </tr>
       {% endfor %}
+      #}
       </tbody>
     </table>
   </div>
