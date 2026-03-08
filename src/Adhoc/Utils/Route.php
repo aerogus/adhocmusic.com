@@ -287,13 +287,13 @@ class Route
             }
         }
 
-        if (!is_array($ret)) {
-            self::routeLog($controller, $action, 'Le retour n\'est pas un tableau');
+        if (!is_array($ret) && !is_object($ret)) {
+            self::routeLog($controller, $action, 'Le retour n\'est pas un tableau ou un objet');
             header('HTTP/1.0 500 Internal Server Error');
             die('500 Internal Server Error');
         }
 
-        if (isset($ret['return_code']) && $ret['return_code'] <= 0) {
+        if (is_array($ret) && isset($ret['return_code']) && $ret['return_code'] <= 0) {
             self::routeLog(
                 $controller,
                 $action,

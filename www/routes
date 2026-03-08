@@ -2,11 +2,11 @@ adm|index|GET|/adm
 adm_groupes|index|GET|/adm/groupes
 adm_groupes|show|GET|/adm/groupes/:id
 adm_membres|index|GET|/adm/membres
+adm_membres|dt|GET|/adm/membres/dt
 adm_membres|index|GET|/adm/membres/ajax-search
 adm_membres|show|GET|/adm/membres/:id
 adm_membres|delete|GET|/adm/membres/delete/:id
 adm_membres|delete|POST|/adm/membres/delete
-adm_membres|dt_find|GET|/adm/membres/dt-find
 adm|groupeDeStyle|GET|/adm/groupe-de-style
 adm|groupeDeStyleId|GET|/adm/groupe-de-style/:id
 adm|groupeDeStyle|POST|/adm/groupe-de-style

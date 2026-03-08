@@ -155,10 +155,80 @@ final class Controller
     }
 
     /**
-     * @return string
+     * json de réponse pour dataTables
+     *
+     * @return \stdClass
      */
-    public static function dt_find(): string
+    public static function dt(): mixed
     {
         Tools::auth(Membre::TYPE_ADMIN);
+
+        $output = new \stdClass();
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            $output->status = 'KO';
+            $output->msg = 'api compatible seulement avec la méthode GET';
+            Api::stdout($output, 400);
+            exit;
+        }
+
+        $draw = intval($_GET['draw'] ?? 1);
+        $pseudo = $_GET['pseudo'] ?? null;
+        $last_name = $_GET['last_name'] ?? null;
+        $first_name = $_GET['first_name'] ?? null;
+        $email = $_GET['email'] ?? null;
+        $start = intval($_GET['start'] ?? 0);
+        $length = min(intval($_GET['length'] ?? 100), 500);
+        $order = $_GET['order'] ?? [];
+
+        $col2prop = [
+            0 => 'id_contact',
+            1 => 'pseudo',
+            2 => 'last_name',
+            3 => 'first_name',
+            4 => 'email',
+            5 => 'created_at',
+            6 => 'updated_at',
+            7 => 'visited_at',
+        ];
+
+        if (count($order) > 0) {
+            $order_by = $col2prop[$order[0]['column']];
+            $sort = $order[0]['dir'];
+        } else {
+            $order_by = 'id_contact';
+            $sort = 'ASC';
+        }
+
+        $membres = Membre::find([
+            'pseudo' => $pseudo,
+            'last_name' => $last_name,
+            'first_name' => $first_name,
+            'email' => $email,
+            'order_by' => $order_by,
+            'sort' => $sort,
+            'start' => $start,
+            'limit' => $length,
+            'found_rows' => true,
+        ]);
+
+        $output->draw = $draw;
+        $output->recordsTotal = intval(Membre::getFoundRows());
+        $output->recordsFiltered = intval(Membre::getFoundRows());
+        $output->data = [];
+        foreach ($membres as $membre) {
+            $output->data[] = [
+                'id_contact' => $membre->getIdContact(),
+                'pseudo' => $membre->getPseudo(),
+                'last_name' => $membre->getLastName(),
+                'first_name' => $membre->getFirstName(),
+                'email' => $membre->getEmail(),
+                'created_at' => $membre->getCreatedAt(),
+                'updated_at' => $membre->getModifiedAt(),
+                'visited_at' => $membre->getVisitedAt(),
+            ];
+        }
+
+        return $output;
     }
 }

@@ -1086,6 +1086,7 @@ class Membre extends ObjectModel
      *                                'sort' => string,
      *                                'start' => int,
      *                                'limit' => int,
+     *                                'found_rows' => bool,
      *                            ]
      *
      * @return array<static>
@@ -1095,7 +1096,10 @@ class Membre extends ObjectModel
         $db = DataBase::getInstance();
         $objs = [];
 
-        $sql  = "SELECT ";
+        $sql = 'SELECT ';
+        if (isset($params['found_rows']) && boolval($params['found_rows'])) {
+            $sql .= 'SQL_CALC_FOUND_ROWS ';
+        }
 
         $pks = array_map(
             function ($item) {
@@ -1164,9 +1168,24 @@ class Membre extends ObjectModel
             $sql .= "LIMIT " . (int) $params['start'] . ", " . (int) $params['limit'];
         }
 
-        $ids = $db->pdo->query($sql)->fetchAll(\PDO::FETCH_COLUMN);
-        foreach ($ids as $id) {
-            $objs[] = static::getInstance((int) $id);
+        $stm = $db->pdo->prepare($sql);
+        $stm->execute();
+        $rows = $stm->fetchAll();
+
+        if (isset($params['found_rows']) && boolval($params['found_rows'])) {
+            $fr_sql = 'SELECT FOUND_ROWS()';
+            $fr_stm = $db->pdo->query($fr_sql);
+            static::$found_rows = intval($fr_stm->fetchColumn());
+        } else {
+            static::$found_rows = null;
+        }
+
+        foreach ($rows as $row) {
+            $pks = [];
+            foreach (static::getDbPk() as $pk) {
+                $pks[$pk] = $row[$pk];
+            }
+            $objs[] = static::getInstance($pks);
         }
 
         return $objs;
