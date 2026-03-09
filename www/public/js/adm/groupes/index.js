@@ -5,7 +5,7 @@ jQuery(document).ready(function ($) {
   'use strict';
 
    $('#table').DataTable({
-      bLengthChange: false, /* pas le choix du nombre d'éléments par page */
+      lengthChange: false, /* pas le choix du nombre d'éléments par page */
       searching: false, /* pas de bloc de recherche */
       pageLength: 250,
       order: [], // pas de tri initial côté client
