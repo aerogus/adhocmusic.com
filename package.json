@@ -10,10 +10,10 @@
     "clean": "rm -Rf node_modules vendor volumes"
   },
   "dependencies": {
-    "mjml": "4.18.0"
+    "mjml": "5.1.0"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
-    "eslint": "10.2.0"
+    "eslint": "10.3.0"
   }
 }
