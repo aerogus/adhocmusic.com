@@ -1,29 +1,32 @@
 {{ include('common/header.twig') }}
 
-<div class="box">
+<div class="container">
   <h1>Newsletters</h1>
+
   <div>
     <p>nombre d'abonnés : {{ nb_sub }}</p>
     <p><a href="/adm/newsletter/create" class="btn btn-primary">Écrire une lettre</a></p>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col" class="w10">#</th>
-          <th scope="col" class="w10">Voir</th>
-          <th scope="col">Sujet</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for newsletter in newsletters %}
-        <tr>
-          <td>{{ newsletter.idNewsletter }}</td>
-          <td><a href="/newsletters/{{ newsletter.idNewsletter }}" target="_blank">[voir]</a></td>
-          <td><a href="/adm/newsletter/edit/{{ newsletter.idNewsletter }}">{{ newsletter.title }}</a></td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
   </div>
+
+  <table id="table" class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="minw">#</th>
+        <th scope="col">Voir</th>
+        <th scope="col">Sujet</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for newsletter in newsletters %}
+      <tr>
+        <td>{{ newsletter.idNewsletter }}</td>
+        <td><a href="/newsletters/{{ newsletter.idNewsletter }}" target="_blank">[voir]</a></td>
+        <td><a href="/adm/newsletter/edit/{{ newsletter.idNewsletter }}">{{ newsletter.title }}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
 </div>
 
 {{ include('common/footer.twig') }}
