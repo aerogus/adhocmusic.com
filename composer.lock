@@ -4,68 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "588331e8be923263c4e08c3b54d6f2d5",
+    "content-hash": "31ea2d27b690e24eba7fb70103c408df",
     "packages": [
-        {
-            "name": "pear/console_table",
-            "version": "v1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pear/Console_Table.git",
-                "reference": "1930c11897ca61fd24b95f2f785e99e0f36dcdea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pear/Console_Table/zipball/1930c11897ca61fd24b95f2f785e99e0f36dcdea",
-                "reference": "1930c11897ca61fd24b95f2f785e99e0f36dcdea",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.0"
-            },
-            "suggest": {
-                "pear/Console_Color2": ">=0.1.2"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "Table.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Jan Schneider",
-                    "homepage": "http://pear.php.net/user/yunosh"
-                },
-                {
-                    "name": "Tal Peer",
-                    "homepage": "http://pear.php.net/user/tal"
-                },
-                {
-                    "name": "Xavier Noguer",
-                    "homepage": "http://pear.php.net/user/xnoguer"
-                },
-                {
-                    "name": "Richard Heyes",
-                    "homepage": "http://pear.php.net/user/richard"
-                }
-            ],
-            "description": "Library that makes it easy to build console style tables.",
-            "homepage": "http://pear.php.net/package/Console_Table/",
-            "keywords": [
-                "console"
-            ],
-            "support": {
-                "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Console_Table",
-                "source": "https://github.com/pear/Console_Table"
-            },
-            "abandoned": true,
-            "time": "2018-01-25T20:47:17+00:00"
-        },
         {
             "name": "phpmailer/phpmailer",
             "version": "v7.0.2",
@@ -619,6 +559,69 @@
                 }
             ],
             "time": "2026-03-17T21:31:11+00:00"
+        },
+        {
+            "name": "wp-cli/php-cli-tools",
+            "version": "v0.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wp-cli/php-cli-tools.git",
+                "reference": "4a04ffbe322b031b4c54e176edf1dfd299c7fe55"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/4a04ffbe322b031b4c54e176edf1dfd299c7fe55",
+                "reference": "4a04ffbe322b031b4c54e176edf1dfd299c7fe55",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 7.2.24"
+            },
+            "require-dev": {
+                "roave/security-advisories": "dev-latest",
+                "wp-cli/wp-cli-tests": "^5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.12.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "lib/cli/cli.php"
+                ],
+                "psr-0": {
+                    "cli": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Bachhuber",
+                    "email": "daniel@handbuilt.co",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "James Logsdon",
+                    "email": "jlogsdon@php.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Console utilities for PHP",
+            "homepage": "http://github.com/wp-cli/php-cli-tools",
+            "keywords": [
+                "cli",
+                "console"
+            ],
+            "support": {
+                "issues": "https://github.com/wp-cli/php-cli-tools/issues",
+                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.13.0"
+            },
+            "time": "2026-04-08T12:28:41+00:00"
         }
     ],
     "packages-dev": [
@@ -964,16 +967,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "14.1.7",
+            "version": "14.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "da6e6b64940901650abcea62430c8c24926b7a71"
+                "reference": "031856c28c060e1c1d1fc94d256e3ffbe4230c91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/da6e6b64940901650abcea62430c8c24926b7a71",
-                "reference": "da6e6b64940901650abcea62430c8c24926b7a71",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/031856c28c060e1c1d1fc94d256e3ffbe4230c91",
+                "reference": "031856c28c060e1c1d1fc94d256e3ffbe4230c91",
                 "shasum": ""
             },
             "require": {
@@ -1030,7 +1033,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/14.1.7"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/14.1.8"
             },
             "funding": [
                 {
@@ -1050,7 +1053,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-04T15:51:53+00:00"
+            "time": "2026-05-09T12:06:52+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
