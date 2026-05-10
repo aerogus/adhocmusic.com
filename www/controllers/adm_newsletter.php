@@ -21,6 +21,10 @@ final class Controller
 
         $twig = new AdHocTwig();
 
+        $twig->enqueueScript('/js/adm/newsletter/index.js');
+        $twig->enqueueScript('/static/library/dataTables@2.3.7/dataTables.min.js');
+        $twig->enqueueStyle('/static/library/dataTables@2.3.7/dataTables.min.css');
+
         $twig->assign('breadcrumb', [
             ['title' => '🏠', 'link' => '/'],
             ['title' => 'Privé', 'link' => '/adm'],

@@ -13,7 +13,8 @@ jQuery(document).ready(function ($) {
           url: '/static/library/dataTables@2.3.7/fr_FR.json'
       },
       columnDefs: [
-        { orderable: true, targets: '_all' }
+        { orderable: true, targets: [0] },
+        { orderable: false, targets: '_all' }
       ]
   });
 

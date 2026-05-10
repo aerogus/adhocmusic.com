@@ -32,7 +32,7 @@ jQuery(document).ready(function ($) {
       ],
       order: [], // pas de tri initial côté client
       language: {
-          url: '/static/library/dataTables@2.3.6/fr_FR.json'
+          url: '/static/library/dataTables@2.3.7/fr_FR.json'
       },
       columnDefs: [
         { orderable: true, targets: '_all' }
