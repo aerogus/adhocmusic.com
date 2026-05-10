@@ -10,25 +10,34 @@
 declare(strict_types=1);
 
 use Adhoc\Model\Membre;
+use cli\Table;
 
 require_once __DIR__ . '/../bootstrap.php';
 
 $ms = Membre::findAll();
 
-$tbl = new \Console_Table();
-$tbl->setHeaders(
-    ['id_contact', 'pseudo', 'email', 'first_name', 'last_name', 'mailing']
-);
+$headers = [
+    'id_contact',
+    'pseudo',
+    'email',
+    'first_name',
+    'last_name',
+    'mailing',
+];
 
+$data = [];
 foreach ($ms as $m) {
-    $row = [];
-    $row[] = $m->getIdContact();
-    $row[] = $m->getPseudo();
-    $row[] = $m->getContact()->getEmail();
-    $row[] = $m->getFirstName();
-    $row[] = $m->getLastName();
-    $row[] = $m->getMailing();
-    $tbl->addRow($row);
+    $data[] = [
+        $m->getIdContact(),
+        $m->getPseudo(),
+        $m->getContact()->getEmail(),
+        $m->getFirstName(),
+        $m->getLastName(),
+        $m->getMailing(),
+    ];
 }
 
-echo $tbl->getTable();
+$table = new Table();
+$table->setHeaders($headers);
+$table->setRows($data);
+$table->display();

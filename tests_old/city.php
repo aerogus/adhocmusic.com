@@ -10,6 +10,7 @@
 declare(strict_types=1);
 
 use Adhoc\Model\City;
+use cli\Table;
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -17,23 +18,38 @@ $cs = City::find([
     'id_departement' => 91,
 ]);
 
-$tbl = new \Console_Table();
-$tbl->setHeaders(
-    ['id_city', 'cp', 'name', 'id_departement', 'name', 'id_region', 'name', 'id_country', 'name']
-);
+
+$headers = [
+    'id_city',
+    'cp',
+    'name',
+    'id_departement',
+    'name',
+    'id_region',
+    'name',
+    'id_country',
+    'name',
+];
+
+
+
+$data = [];
 
 foreach ($cs as $c) {
-    $row = [];
-    $row[] = $c->getIdCity();
-    $row[] = $c->getCp();
-    $row[] = $c->getName();
-    $row[] = $c->getDepartement()->getIdDepartement();
-    $row[] = $c->getDepartement()->getName();
-    $row[] = $c->getDepartement()->getRegion()->getIdRegion();
-    $row[] = $c->getDepartement()->getRegion()->getName();
-    $row[] = $c->getDepartement()->getRegion()->getCountry()->getIdCountry();
-    $row[] = $c->getDepartement()->getRegion()->getCountry()->getName();
-    $tbl->addRow($row);
+    $data[] = [
+        $c->getIdCity(),
+        $c->getCp(),
+        $c->getName(),
+        $c->getDepartement()->getIdDepartement(),
+        $c->getDepartement()->getName(),
+        $c->getDepartement()->getRegion()->getIdRegion(),
+        $c->getDepartement()->getRegion()->getName(),
+        $c->getDepartement()->getRegion()->getCountry()->getIdCountry(),
+        $c->getDepartement()->getRegion()->getCountry()->getName(),
+    ];
 }
 
-echo $tbl->getTable();
+$table = new Table();
+$table->setHeaders($headers);
+$table->setRows($data);
+$table->display();

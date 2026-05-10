@@ -10,6 +10,7 @@
 declare(strict_types=1);
 
 use Adhoc\Model\Departement;
+use cli\Table;
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -18,16 +19,20 @@ $ds = Departement::find([
     'sort' => 'ASC',
 ]);
 
-$tbl = new \Console_Table();
-$tbl->setHeaders(
-    ['id_departement', 'name']
-);
+$headers = [
+    'id_departement',
+    'name',
+];
 
+$data = [];
 foreach ($ds as $d) {
-    $row = [];
-    $row[] = $d->getIdDepartement();
-    $row[] = $d->getName();
-    $tbl->addRow($row);
+    $data[] = [
+        $d->getIdDepartement(),
+        $d->getName(),
+    ];
 }
 
-echo $tbl->getTable();
+$table = new Table();
+$table->setHeaders($headers);
+$table->setRows($data);
+$table->display();

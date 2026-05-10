@@ -10,28 +10,30 @@
 declare(strict_types=1);
 
 use Adhoc\Model\Contact;
+use cli\Table;
 
 require_once __DIR__ . '/../bootstrap.php';
 
 $cs = Contact::findAll();
 
-$tbl = new \Console_Table();
-$tbl->setHeaders(
-    ['id_contact', 'email', 'is_membre', 'mailing']
-);
+$headers = [
+    'id_contact',
+    'email',
+    'is_membre',
+    'mailing',
+];
 
+$data = [];
 foreach ($cs as $c) {
-    $row = [];
-    $row[] = $c->getIdContact();
-    $row[] = $c->getEmail();
-    if ($c->getMembre()) {
-        $row[] = $c->isMembre();
-        $row[] = $c->getMembre()->getMailing();
-    } else {
-        $row[] = $c->isMembre();
-        $row[] = true;
-    }
-    $tbl->addRow($row);
+    $data[] = [
+        $c->getIdContact(),
+        $c->getEmail(),
+        $c->isMembre(),
+        $c->getMembre() ? $c->getMembre()->getMailing() : true,
+    ];
 }
 
-echo $tbl->getTable();
+$table = new Table();
+$table->setHeaders($headers);
+$table->setRows($data);
+$table->display();

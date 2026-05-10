@@ -10,21 +10,26 @@
 declare(strict_types=1);
 
 use Adhoc\Model\WorldCountry;
+use cli\Table;
 
 require_once __DIR__ . '/../bootstrap.php';
 
 $wcs = WorldCountry::findAll();
 
-$tbl = new \Console_Table();
-$tbl->setHeaders(
-    ['id_country', 'name']
-);
+$headers = [
+    'id_country',
+    'name',
+];
 
+$data = [];
 foreach ($wcs as $wc) {
-    $row = [];
-    $row[] = $wc->getIdCountry();
-    $row[] = $wc->getName();
-    $tbl->addRow($row);
+    $data[] = [
+        $wc->getIdCountry(),
+        $wc->getName(),
+    ];
 }
 
-echo $tbl->getTable();
+$table = new Table();
+$table->setHeaders($headers);
+$table->setRows($data);
+$table->display();
