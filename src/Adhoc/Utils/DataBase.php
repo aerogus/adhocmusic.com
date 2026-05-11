@@ -116,7 +116,7 @@ class DataBase
 
         foreach ($sql_scripts as $sql_script) {
             if (is_file($sql_script)) {
-                $cmd = 'mysql -u ' . $_ENV['DB_USER'] . ' -p' . $_ENV['DB_PASS'] . ' ' . $_ENV['DB_NAME'] . ' < ' . $sql_script;
+                $cmd = 'mariadb -u ' . $_ENV['DB_USER'] . ' -p' . $_ENV['DB_PASS'] . ' ' . $_ENV['DB_NAME'] . ' < ' . $sql_script;
                 Log::debug($cmd);
                 exec($cmd, $output, $return_var);
             }
