@@ -40,22 +40,22 @@ class Newsletter extends ObjectModel
     /**
      * @var ?int
      */
-    protected ?int $id_newsletter;
+    protected ?int $id_newsletter = null;
 
     /**
      * @var ?string
      */
-    protected ?string $title;
+    protected ?string $title = null;
 
     /**
      * @var ?string
      */
-    protected ?string $content;
+    protected ?string $content = null;
 
     /**
      * @var ?string
      */
-    protected ?string $html;
+    protected ?string $html = null;
 
     /**
      * Liste des attributs de l'objet
