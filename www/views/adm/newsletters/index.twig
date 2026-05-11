@@ -5,7 +5,7 @@
 
   <div>
     <p>nombre d'abonnés : {{ nb_sub }}</p>
-    <p><a href="/adm/newsletter/create" class="btn btn-primary">Écrire une lettre</a></p>
+    <p><a href="/adm/newsletters/create" class="btn btn-primary">Écrire une lettre</a></p>
   </div>
 
   <table id="table" class="table table-bordered table-striped table-hover">
@@ -19,9 +19,9 @@
     <tbody>
       {% for newsletter in newsletters %}
       <tr>
-        <td>{{ newsletter.idNewsletter }}</td>
+        <td><a href="/adm/newsletters/edit/{{ newsletter.idNewsletter }}">{{ newsletter.idNewsletter }}</a></td>
         <td><a href="/newsletters/{{ newsletter.idNewsletter }}" target="_blank">[voir]</a></td>
-        <td><a href="/adm/newsletters/edit/{{ newsletter.idNewsletter }}">{{ newsletter.title }}</a></td>
+        <td>{{ newsletter.title }}</td>
       </tr>
       {% endfor %}
     </tbody>
