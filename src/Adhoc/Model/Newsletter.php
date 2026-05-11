@@ -70,11 +70,6 @@ class Newsletter extends ObjectModel
     ];
 
     /**
-     * @var int
-     */
-    protected int $id_contact = 0;
-
-    /**
      * @var array<string,mixed>
      */
     protected array $tpl_vars = [];
@@ -106,22 +101,6 @@ class Newsletter extends ObjectModel
     }
 
     /**
-     * @return string
-     */
-    public function getFileUrl(): string
-    {
-        return self::getBaseUrl() . '/' . (string) $this->getIdNewsletter();
-    }
-
-    /**
-     * @return string
-     */
-    public function getFilePath(): string
-    {
-        return self::getBasePath() . '/' . (string) $this->getIdNewsletter();
-    }
-
-    /**
      * Retourne le contenu source MJML
      *
      * @return ?string
@@ -139,6 +118,22 @@ class Newsletter extends ObjectModel
     public function getHtml(): ?string
     {
         return $this->html;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUrl(): string
+    {
+        return self::getBaseUrl() . '/' . (string) $this->getIdNewsletter();
+    }
+
+    /**
+     * @return string
+     */
+    public function getFilePath(): string
+    {
+        return self::getBasePath() . '/' . (string) $this->getIdNewsletter();
     }
 
     /**
@@ -185,25 +180,16 @@ class Newsletter extends ObjectModel
     }
 
     /**
-     * Retourne l'id_contact courant
-     *
-     * @return int
-     */
-    public function getIdContact(): int
-    {
-        return $this->id_contact;
-    }
-
-    /**
-     * Set l'id_contact courant
-     *
-     * @param int $id_contact id_contact
+     * @param int $id_newsletter
      *
      * @return static
      */
-    public function setIdContact(int $id_contact): static
+    public function setIdNewsletter(int $id_newsletter): static
     {
-        $this->id_contact = $id_contact;
+        if ($this->id_newsletter !== $id_newsletter) {
+            $this->id_newsletter = $id_newsletter;
+            $this->modified_fields['id_newsletter'] = true;
+        }
 
         return $this;
     }
