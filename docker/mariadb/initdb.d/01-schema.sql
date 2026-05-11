@@ -135,20 +135,6 @@ CREATE TABLE `adhoc_newsletter` (
   PRIMARY KEY (`id_newsletter`)
 );
 
-CREATE TABLE `adhoc_newsletter_hit` (
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `id_newsletter` smallint(5) UNSIGNED NOT NULL,
-  `id_contact` int(10) UNSIGNED NOT NULL,
-  `url` varchar(150) NOT NULL,
-  `ip` varchar(50) NOT NULL,
-  `host` varchar(100) NOT NULL,
-  `useragent` varchar(100) NOT NULL,
-  KEY `id_newsletter` (`id_newsletter`),
-  KEY `id_contact` (`id_contact`),
-  CONSTRAINT `fk_newsletter_hit_newsletter` FOREIGN KEY (`id_newsletter`) REFERENCES `adhoc_newsletter` (`id_newsletter`),
-  CONSTRAINT `fk_newsletter_hit_contact` FOREIGN KEY (`id_contact`) REFERENCES `adhoc_contact` (`id_contact`)
-);
-
 CREATE TABLE `adhoc_groupe` (
   `id_groupe` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `alias` varchar(50) NOT NULL,
