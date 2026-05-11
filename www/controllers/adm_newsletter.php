@@ -59,10 +59,11 @@ final class Controller
             ];
 
             // dépendance à mjml via npm
+            // nécessite l'environnement node !
             $mjmlBin = ADHOC_ROOT_PATH . '/node_modules/.bin/mjml';
             $html = shell_exec($mjmlBin . " -i <<EOF\n" . $data['content'] . "\nEOF");
 
-            (new Newsletter())
+            Newsletter::init()
                 ->setTitle($data['title'])
                 ->setContent($data['content'])
                 ->setHtml($html)
