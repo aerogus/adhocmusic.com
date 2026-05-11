@@ -9,7 +9,7 @@
   </div>
 
   <table id="table" class="table table-bordered table-striped table-hover">
-    <thead>
+    <thead class="table-dark">
       <tr>
         <th scope="col" class="minw">#</th>
         <th scope="col">Voir</th>
@@ -21,7 +21,7 @@
       <tr>
         <td>{{ newsletter.idNewsletter }}</td>
         <td><a href="/newsletters/{{ newsletter.idNewsletter }}" target="_blank">[voir]</a></td>
-        <td><a href="/adm/newsletter/edit/{{ newsletter.idNewsletter }}">{{ newsletter.title }}</a></td>
+        <td><a href="/adm/newsletters/edit/{{ newsletter.idNewsletter }}">{{ newsletter.title }}</a></td>
       </tr>
       {% endfor %}
     </tbody>

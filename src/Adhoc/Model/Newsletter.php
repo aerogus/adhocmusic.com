@@ -244,13 +244,23 @@ class Newsletter extends ObjectModel
     }
 
     /**
-     * Retourne l'url de visualisation de la newsletter courante
+     * Retourne l'url de visualisation de la newsletter
      *
      * @return string
      */
     public function getUrl(): string
     {
         return HOME_URL . '/newsletters/' . $this->getIdNewsletter();
+    }
+
+    /**
+     * Retourne l'url d'édition de la newsletter
+     *
+     * @return string
+     */
+    public function getEditUrl(): string
+    {
+        return HOME_URL . '/adm/newsletters/edit/' . $this->getIdNewsletter();
     }
 
     /**

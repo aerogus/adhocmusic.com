@@ -13,7 +13,7 @@ jQuery(document).ready(function ($) {
     let formData = new FormData(document.getElementById('form-newsletter-edit-upload'));
     $.ajax({
       type: 'POST',
-      url: '/adm/newsletter/upload',
+      url: '/adm/newsletters/upload',
       data: formData,
       processData: false,
       contentType: false,

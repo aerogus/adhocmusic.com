@@ -2,7 +2,7 @@
 
 <div class="container">
   <h1>Édition Newsletter</h1>
-  <form id="form-newsletter-edit" name="form-newsletter-edit" method="post" action="/adm/newsletter/edit">
+  <form id="form-newsletter-edit" name="form-newsletter-edit" method="post" action="/adm/newsletters/edit">
     <fieldset>
       <label for="title">Titre</label>
       <input type="text" id="title" name="title" size="50" value="{{ newsletter.title }}">
@@ -13,7 +13,7 @@
     <input type="hidden" name="id" value="{{ newsletter.idNewsletter }}">
   </form>
   <p>Uploader un fichier pour cette newsletter</p>
-  <form id="form-newsletter-edit-upload" name="form-newsletter-edit-upload" method="post" action="/adm/newsletter/upload" enctype="multipart/form-data">
+  <form id="form-newsletter-edit-upload" name="form-newsletter-edit-upload" method="post" action="/adm/newsletters/upload" enctype="multipart/form-data">
     <input type="file" name="file">
     <input type="submit" id="form-newsletter-edit-upload-submit" value="Envoyer">
     <input type="hidden" name="id" value="{{ newsletter.idNewsletter }}">

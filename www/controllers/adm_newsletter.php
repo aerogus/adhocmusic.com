@@ -21,14 +21,14 @@ final class Controller
 
         $twig = new AdHocTwig();
 
-        $twig->enqueueScript('/js/adm/newsletter/index.js');
+        $twig->enqueueScript('/js/adm/newsletters/index.js');
         $twig->enqueueScript('/static/library/dataTables@2.3.7/dataTables.min.js');
         $twig->enqueueStyle('/static/library/dataTables@2.3.7/dataTables.min.css');
 
         $twig->assign('breadcrumb', [
             ['title' => '🏠', 'link' => '/'],
             ['title' => 'Privé', 'link' => '/adm'],
-            'Newsletter',
+            'Newsletters',
         ]);
 
         $twig->assign(
@@ -42,7 +42,7 @@ final class Controller
         );
         $twig->assign('nb_sub', Newsletter::getSubscribersCount());
 
-        return $twig->render('adm/newsletter/index.twig');
+        return $twig->render('adm/newsletters/index.twig');
     }
 
     /**
@@ -69,20 +69,20 @@ final class Controller
                 ->setHtml($html)
                 ->save();
 
-            Tools::redirect('/adm/newsletter?create=1');
+            Tools::redirect('/adm/newsletters?create=1');
         }
 
         $twig = new AdHocTwig();
 
-        $twig->enqueueStyle('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css');
-        $twig->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.js');
-        $twig->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/xml/xml.min.js');
-        $twig->enqueueScript('/js/adm/newsletter.js');
+        $twig->enqueueStyle('/static/library/codemirror@6.65.7/codemirror.min.css');
+        $twig->enqueueScript('/static/library/codemirror@6.65.7/codemirror.min.js');
+        $twig->enqueueScript('/static/library/codemirror@6.65.7/mode/xml/xml.min.js');
+        $twig->enqueueScript('/js/adm/newsletters/create-edit.js');
 
         $twig->assign('breadcrumb', [
             ['title' => '🏠', 'link' => '/'],
             ['title' => 'Privé', 'link' => '/adm'],
-            ['title' => 'Newsletter', 'link' => '/adm/newsletter'],
+            ['title' => 'Newsletters', 'link' => '/adm/newsletters'],
             'Ajout',
         ]);
 
@@ -93,7 +93,7 @@ final class Controller
 
         $twig->assign('data', $data);
 
-        return $twig->render('adm/newsletter/create.twig');
+        return $twig->render('adm/newsletters/create.twig');
     }
 
     /**
@@ -120,28 +120,28 @@ final class Controller
                 ->setHtml($html)
                 ->save();
 
-            Tools::redirect('/adm/newsletter/edit/' . (int) Route::params('id') . '?edit=1');
+            Tools::redirect('/adm/newsletters/edit/' . (int) Route::params('id') . '?edit=1');
         }
 
         $id = (int) Route::params('id');
 
         $twig = new AdHocTwig();
 
-        $twig->enqueueStyle('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css');
-        $twig->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.js');
-        $twig->enqueueScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/xml/xml.min.js');
-        $twig->enqueueScript('/js/adm/newsletter.js');
+        $twig->enqueueStyle('/static/library/codemirror@6.65.7/codemirror.min.css');
+        $twig->enqueueScript('/static/library/codemirror@6.65.7/codemirror.min.js');
+        $twig->enqueueScript('/static/library/codemirror@6.65.7/mode/xml/xml.min.js');
+        $twig->enqueueScript('/js/adm/newsletters/create-edit.js');
 
         $twig->assign('breadcrumb', [
             ['title' => '🏠', 'link' => '/'],
             ['title' => 'Privé', 'link' => '/adm'],
-            ['title' => 'Newsletter', 'link' => '/adm/newsletter'],
+            ['title' => 'Newsletters', 'link' => '/adm/newsletters'],
             'Édition',
         ]);
 
         $twig->assign('newsletter', Newsletter::getInstance($id));
 
-        return $twig->render('adm/newsletter/edit.twig');
+        return $twig->render('adm/newsletters/edit.twig');
     }
 
     /**
