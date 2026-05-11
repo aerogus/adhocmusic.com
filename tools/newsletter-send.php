@@ -62,10 +62,8 @@ foreach ($subs as $sub) {
 
     Log::info($id_newsletter . "\t" . $n . "\t" . $sub['id_contact'] . " \t\t" . $sub['email'] . "\t\t" . $sub['pseudo']);
 
-    $newsletter_id_newsletter = $id_newsletter;
-    $newsletter_id_contact = $sub['id_contact'];
-
-    $newsletter->setIdContact($sub['id_contact'])
+    $newsletter
+        ->setTplVar('%%id_contact%%', $sub['id_contact'])
         ->setTplVar('%%email%%', $sub['email'])
         ->setTplVar('%%pseudo%%', $sub['pseudo'])
         ->setTplVar('%%url%%', $newsletter->getUrl());
