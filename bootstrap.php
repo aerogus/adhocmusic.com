@@ -58,6 +58,7 @@ $conf = Conf::getInstance()->get();
 
 // global
 define('ENV', $conf['global']['env']);
+$_ENV['ENV'] = $conf['global']['env'];
 setlocale(LC_ALL, $conf['global']['locale']);
 ini_set('date.timezone', $conf['global']['timezone']);
 ini_set('default_charset', $conf['global']['charset']);
