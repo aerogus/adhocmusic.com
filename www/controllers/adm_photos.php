@@ -68,8 +68,7 @@ final class Controller
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             $output->status = 'KO';
             $output->msg = 'api compatible seulement avec la méthode GET';
-            Api::stdout($output, 400);
-            exit;
+            return $output;
         }
 
         $draw = intval($_GET['draw'] ?? 1);
@@ -103,6 +102,7 @@ final class Controller
             'found_rows' => true,
         ]);
 
+        $output->status = 'OK';
         $output->draw = $draw;
         $output->recordsTotal = intval(Photo::getFoundRows());
         $output->recordsFiltered = intval(Photo::getFoundRows());
