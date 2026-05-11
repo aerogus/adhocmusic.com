@@ -4,11 +4,13 @@ LABEL maintainer="guillaume@seznec.fr"
 # maj complète et install des paquets utiles
 # cette image contient déjà l'extension php mbstring
 # ajout du module GD compilé avec support gif/png/jpeg
+# et nodejs (pour mjml)
 RUN apt-get update && apt-get install -y \
   locales \
   libpng-dev \
   libjpeg62-turbo-dev \
   libicu-dev \
+  nodejs \
   && docker-php-ext-configure gd --with-jpeg \
   && docker-php-ext-install -j$(nproc) gd \
   && docker-php-ext-install -j$(nproc) exif \
