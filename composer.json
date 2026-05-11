@@ -9,7 +9,8 @@
         "phpmailer/phpmailer": "7.0.2",
         "wp-cli/php-cli-tools": "0.13.0",
         "twig/twig": "3.24.0",
-        "twig/intl-extra": "3.24.0"
+        "twig/intl-extra": "3.24.0",
+        "eluceo/ical": "2.16.0"
     },
     "authors": [
         {
