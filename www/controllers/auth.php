@@ -164,7 +164,7 @@ final class Controller
                     } else {
                         $membre->setPassword($password_new_1);
                         $membre->save();
-                        if (ENV !== 'prod') {
+                        if ($_ENV['ENV'] !== 'prod') {
                             $twig->assign('new_password', $password_new_1); // /!\ DEBUG ONLY /!\
                         }
                         Log::success('Changement de mot de passe');
@@ -222,14 +222,14 @@ final class Controller
                             $twig->assign('sent_ok', true);
                         } else {
                             $twig->assign('sent_ko', true);
-                            if (ENV !== 'prod') {
+                            if ($_ENV['ENV'] !== 'prod') {
                                 $twig->assign('new_password', $new_password); // /!\ DEBUG ONLY /!\
                             }
                         }
                     } catch (\Exception $e) {
                         Log::error($e->getMessage());
                         $twig->assign('sent_ko', true);
-                        if (ENV !== 'prod') {
+                        if ($_ENV['ENV'] !== 'prod') {
                             $twig->assign('new_password', $new_password); // /!\ DEBUG ONLY /!\
                         }
                     }
