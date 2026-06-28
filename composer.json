@@ -6,10 +6,10 @@
     "eluceo/ical": "2.15.0",
     "require": {
         "php": ">=8.4",
-        "phpmailer/phpmailer": "7.0.2",
+        "phpmailer/phpmailer": "7.1.1",
         "wp-cli/php-cli-tools": "0.13.0",
-        "twig/twig": "3.24.0",
-        "twig/intl-extra": "3.24.0",
+        "twig/twig": "3.27.1",
+        "twig/intl-extra": "3.26.0",
         "eluceo/ical": "2.16.0"
     },
     "authors": [
@@ -22,10 +22,10 @@
     ],
     "require-dev": {
         "squizlabs/php_codesniffer": "4.0.1",
-        "phpunit/phpunit": "13.1.8",
-        "phpstan/phpstan": "2.1.54",
+        "phpunit/phpunit": "13.2.1",
+        "phpstan/phpstan": "2.2.2",
         "phpstan/phpstan-strict-rules": "2.0.11",
-        "vincentlanglet/twig-cs-fixer": "3.14.0"
+        "vincentlanglet/twig-cs-fixer": "4.0.1"
     },
     "scripts": {
         "http": [
