@@ -6,7 +6,7 @@
     "eluceo/ical": "2.15.0",
     "require": {
         "php": ">=8.4",
-        "phpmailer/phpmailer": "7.1.1",
+        "phpmailer/phpmailer": "7.2.0",
         "wp-cli/php-cli-tools": "0.13.2",
         "twig/twig": "3.30.0",
         "twig/intl-extra": "3.30.0",
@@ -22,9 +22,9 @@
     ],
     "require-dev": {
         "squizlabs/php_codesniffer": "4.0.4",
-        "phpunit/phpunit": "13.4.3",
-        "phpstan/phpstan": "2.3.2",
-        "phpstan/phpstan-strict-rules": "2.1.0",
+        "phpunit/phpunit": "13.4.6",
+        "phpstan/phpstan": "2.3.5",
+        "phpstan/phpstan-strict-rules": "2.1.1",
         "vincentlanglet/twig-cs-fixer": "4.1.1"
     },
     "scripts": {
