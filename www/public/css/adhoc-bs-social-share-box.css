@@ -5,6 +5,8 @@
 .social-share-box {
 
   display: flex;
+  list-style-type: none;
+  padding-left: 0;
 
   li {
     margin-left: 1rem;
